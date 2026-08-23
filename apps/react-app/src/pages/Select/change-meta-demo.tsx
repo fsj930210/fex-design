@@ -28,7 +28,7 @@ export function ChangeMetaDemo() {
       title="Change metadata"
       description="onChange returns value plus the complete selected option for backend fields."
     >
-      <div className="space-y-space-md">
+      <div className="space-y-2">
         <SelectRoot options={backendOptions} onChange={handleChange}>
           <SelectTrigger placeholder="请选择用户" />
           <SelectContent>

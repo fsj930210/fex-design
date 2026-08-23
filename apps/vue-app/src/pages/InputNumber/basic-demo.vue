@@ -8,9 +8,9 @@ const value = ref<number>()
   <Card
     title="Basic"
     description="Controlled and uncontrolled numeric values use the default icon actions."
-    ><div class="grid gap-space-lg md:grid-cols-2">
+    ><div class="grid gap-3 md:grid-cols-2">
       <InputNumber :default-value="3" aria-label="Uncontrolled number" />
-      <div class="space-y-space-sm">
+      <div class="space-y-1.5">
         <InputNumber
           :value="value"
           aria-label="Controlled number"

@@ -8,9 +8,9 @@ const items = [
 ]
 </script>
 <template>
-  <main class="grid gap-space-xl p-page-padding">
+  <main class="grid gap-4 p-2 md:p-6">
     <Card title="Basic" description="Separate related sections with a semantic horizontal rule."
-      ><div class="grid max-w-xl gap-space-md">
+      ><div class="grid max-w-xl gap-2">
         <div>
           <div class="font-medium">Fex Design</div>
           <div class="text-sm text-muted-foreground">
@@ -21,12 +21,12 @@ const items = [
         <div class="text-sm">React · Vue · Solid · Svelte · Angular</div>
       </div></Card
     ><Card title="Vertical" description="Use vertical separators between compact inline items."
-      ><div class="flex h-5 items-center gap-space-md">
+      ><div class="flex h-5 items-center gap-2">
         <span>Blog</span><Separator orientation="vertical" /><span>Docs</span
         ><Separator orientation="vertical" /><span>Source</span>
       </div></Card
     ><Card title="Menu" description="Divide groups without splitting related menu items."
-      ><div class="grid max-w-sm gap-space-sm">
+      ><div class="grid max-w-sm gap-1.5">
         <div>
           <div class="font-medium">Settings</div>
           <div class="text-sm text-muted-foreground">Manage preferences</div>
@@ -44,7 +44,7 @@ const items = [
     ><Card title="List" description="Place separators between rows, not after the final item."
       ><div class="grid max-w-lg">
         <div v-for="([label, value], index) in items" :key="label">
-          <div class="flex justify-between py-space-md">
+          <div class="flex justify-between py-2">
             <span>{{ label }}</span
             ><span class="text-muted-foreground">{{ value }}</span>
           </div>
@@ -53,11 +53,11 @@ const items = [
     ><Card
       title="With Text"
       description="Compose a label between two separators and control its placement."
-      ><div class="grid max-w-xl gap-space-xl">
+      ><div class="grid max-w-xl gap-4">
         <div
           v-for="placement in ['Start', 'Center', 'End']"
           :key="placement"
-          class="flex items-center gap-space-md"
+          class="flex items-center gap-2"
         >
           <Separator :class="placement === 'Start' ? 'w-12' : 'flex-1'" /><span
             class="shrink-0 text-sm text-muted-foreground"
@@ -65,13 +65,13 @@ const items = [
           ><Separator :class="placement === 'End' ? 'w-12' : 'flex-1'" />
         </div></div></Card
     ><Card title="Variants" description="Use class composition for solid, dashed and dotted rules."
-      ><div class="grid max-w-xl gap-space-lg">
-        <div class="grid gap-space-sm"><span class="text-sm">Solid</span><Separator /></div>
-        <div class="grid gap-space-sm">
+      ><div class="grid max-w-xl gap-3">
+        <div class="grid gap-1.5"><span class="text-sm">Solid</span><Separator /></div>
+        <div class="grid gap-1.5">
           <span class="text-sm">Dashed</span
           ><Separator class="h-0 border-t border-dashed bg-transparent" />
         </div>
-        <div class="grid gap-space-sm">
+        <div class="grid gap-1.5">
           <span class="text-sm">Dotted</span
           ><Separator class="h-0 border-t border-dotted bg-transparent" />
         </div></div

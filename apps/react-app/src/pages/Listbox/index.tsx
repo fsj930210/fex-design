@@ -49,22 +49,22 @@ export function ListboxPage() {
   ])
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Listbox</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Selection list primitives with controlled, uncontrolled, single, multiple, vertical,
               horizontal and grouped layouts.
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card
             title="Primitive"
             description="Headless root and item parts without default item layout."

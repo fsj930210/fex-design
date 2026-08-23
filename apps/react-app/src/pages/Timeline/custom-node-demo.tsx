@@ -11,9 +11,9 @@ export function CustomNodeDemo() {
         <TimelineItem status="completed" className="[--timeline-indicator-size:2rem]">
           <TimelineOpposite className="flex items-center justify-end">Aug 2</TimelineOpposite>
           <TimelineIndicator className="!self-center shadow-sm"><CheckIcon /></TimelineIndicator>
-          <TimelineContent className="rounded-md border border-border bg-background p-space-md shadow-sm">
-            <div className="flex items-center gap-space-sm"><strong>Version 2.4 released</strong><Badge>Stable</Badge></div>
-            <p className="mt-space-sm text-muted-foreground">Timeline primitives are now available.</p>
+          <TimelineContent className="rounded-md border border-border bg-background p-2 shadow-sm">
+            <div className="flex items-center gap-1.5"><strong>Version 2.4 released</strong><Badge>Stable</Badge></div>
+            <p className="mt-1.5 text-muted-foreground">Timeline primitives are now available.</p>
           </TimelineContent>
         </TimelineItem>
         <TimelineItem status="reviewing" className="[--timeline-indicator-size:2.5rem]">
@@ -21,17 +21,17 @@ export function CustomNodeDemo() {
           <TimelineIndicator className="!self-center border-violet-600 bg-violet-100 text-violet-700 shadow-sm">
             <ClockIcon />
           </TimelineIndicator>
-          <TimelineContent className="rounded-md border border-violet-200 bg-violet-50 p-space-md">
-            <div className="flex items-center gap-space-sm"><strong>Design review</strong><Badge>Reviewing</Badge></div>
-            <p className="mt-space-sm text-muted-foreground">The team is reviewing the horizontal layout.</p>
+          <TimelineContent className="rounded-md border border-violet-200 bg-violet-50 p-2">
+            <div className="flex items-center gap-1.5"><strong>Design review</strong><Badge>Reviewing</Badge></div>
+            <p className="mt-1.5 text-muted-foreground">The team is reviewing the horizontal layout.</p>
           </TimelineContent>
         </TimelineItem>
         <TimelineItem status="pending" className="[--timeline-indicator-size:2rem]">
           <TimelineOpposite className="flex items-center justify-end">Next</TimelineOpposite>
           <TimelineIndicator className="!self-center border-dashed text-[10px] font-semibold">QA</TimelineIndicator>
-          <TimelineContent className="rounded-md border border-dashed border-border p-space-md">
+          <TimelineContent className="rounded-md border border-dashed border-border p-2">
             <strong>Quality verification</strong>
-            <p className="mt-space-sm text-muted-foreground">A fully custom text node marks the next milestone.</p>
+            <p className="mt-1.5 text-muted-foreground">A fully custom text node marks the next milestone.</p>
           </TimelineContent>
         </TimelineItem>
       </Timeline>

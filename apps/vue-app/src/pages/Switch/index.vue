@@ -6,27 +6,27 @@ const checked = ref(true)
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Switch</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             Boolean toggle UI with controlled and uncontrolled usage.
           </p>
         </div>
       </header>
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card title="Basic" description="Uncontrolled switch uses defaultChecked."
           ><SwitchRoot default-checked aria-label="Enable notifications"
             ><template #default="{ checked: currentChecked }"
               ><SwitchThumb :checked="currentChecked" /></template></SwitchRoot
         ></Card>
         <Card title="Controlled" description="Controlled switch uses checked and checked-change."
-          ><div class="grid gap-space-md">
+          ><div class="grid gap-2">
             <SwitchRoot
               :checked="checked"
               aria-label="Controlled switch"
@@ -38,7 +38,7 @@ const checked = ref(true)
           </div></Card
         >
         <Card title="Sizes" description="Switch supports sm, default, and lg sizes."
-          ><div class="flex items-center gap-space-md">
+          ><div class="flex items-center gap-2">
             <SwitchRoot size="sm" default-checked aria-label="Small switch"
               ><template #default="{ checked: currentChecked }"
                 ><SwitchThumb size="sm" :checked="currentChecked" /></template></SwitchRoot
@@ -51,7 +51,7 @@ const checked = ref(true)
             ></SwitchRoot></div
         ></Card>
         <Card title="Disabled" description="Disabled state blocks interaction."
-          ><div class="flex items-center gap-space-md">
+          ><div class="flex items-center gap-2">
             <SwitchRoot disabled aria-label="Disabled switch"
               ><template #default="{ checked: currentChecked }"
                 ><SwitchThumb :checked="currentChecked" /></template></SwitchRoot

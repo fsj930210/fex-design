@@ -198,7 +198,7 @@ export function ResizableHandle({
       aria-orientation={context.direction === 'horizontal' ? 'vertical' : 'horizontal'}
       aria-disabled={disabled || undefined}
       className={cn(
-        'relative flex shrink-0 touch-none select-none items-center justify-center outline-none transition-colors after:absolute after:bg-border focus-visible:after:bg-ring',
+        'relative flex shrink-0 touch-none select-none items-center justify-center outline-none transition-colors after:absolute after:bg-border focus-visible:after:bg-focus',
         context.direction === 'horizontal'
           ? 'h-full w-3 cursor-col-resize after:h-full after:w-px'
           : 'h-3 w-full cursor-row-resize after:h-px after:w-full',

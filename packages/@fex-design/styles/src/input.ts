@@ -1,6 +1,7 @@
 export const inputRootClassName = [
-  'group/input-root flex h-8 w-full min-w-0 items-stretch overflow-hidden rounded-md border border-border bg-background text-foreground',
-  'transition-colors focus-within:border-focus focus-within:ring-3 focus-within:ring-focus/50',
+  'group/input-root flex h-(--input-height) w-full min-w-0 items-stretch overflow-hidden rounded-md border border-border bg-background text-foreground [--input-height:var(--input-height-default,var(--height-default))] [--input-icon-size:var(--input-icon-size-default,var(--icon-size-default))]',
+  'transition-colors',
+  'focus-within:border-focus focus-within:ring-3 focus-within:ring-focus/50',
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-disabled-background data-[disabled=true]:text-disabled-foreground data-[disabled=true]:opacity-70',
   'data-[invalid=true]:border-danger data-[invalid=true]:ring-3 data-[invalid=true]:ring-danger/20',
   'data-[status=error]:border-danger data-[status=error]:ring-3 data-[status=error]:ring-danger/20',
@@ -13,9 +14,9 @@ export const inputControlClassName = [
 ].join(' ')
 
 export const inputPrefixClassName =
-  'flex shrink-0 items-center pl-2.5 text-muted-foreground [&_svg]:size-4'
+  'flex shrink-0 items-center pl-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
 export const inputSuffixClassName =
-  'flex shrink-0 items-center pr-2.5 text-muted-foreground [&_svg]:size-4'
+  'flex shrink-0 items-center pr-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
 
 const inputAddonClassName =
   'flex shrink-0 items-center bg-muted-background px-2.5 text-sm text-muted-foreground'
@@ -25,7 +26,7 @@ export const inputAddonAfterClassName = `${inputAddonClassName} border-l border-
 
 export const inputClearClassName = [
   'flex shrink-0 items-center justify-center px-2 text-muted-foreground outline-none transition-colors hover:text-foreground',
-  'focus-visible:bg-muted-background focus-visible:text-foreground disabled:pointer-events-none disabled:opacity-0 [&_svg]:size-4',
+  'focus-visible:bg-muted-background focus-visible:text-foreground disabled:pointer-events-none disabled:opacity-0 [&_svg]:size-(--input-icon-size)',
 ].join(' ')
 
 export const inputGroupClassName = [
@@ -40,6 +41,6 @@ export const inputGroupClassName = [
 ].join(' ')
 
 export const inputGroupAddonClassName = [
-  'inline-flex h-8 shrink-0 items-center border border-border bg-muted-background px-2.5 text-sm text-muted-foreground',
+  'inline-flex h-(--input-height) shrink-0 items-center border border-border bg-muted-background px-2.5 text-sm text-muted-foreground [--input-height:var(--input-height-default,var(--height-default))]',
   'first:rounded-s-md last:rounded-e-md',
 ].join(' ')

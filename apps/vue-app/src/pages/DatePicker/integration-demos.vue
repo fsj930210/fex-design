@@ -80,7 +80,7 @@ function formatTime(value: TimeValue) {
           <PresetRangePanel @select="setPreset" />
         </RangePickerContent>
       </RangePickerRoot>
-      <p class="mt-space-sm w-full text-xs text-muted-foreground">
+      <p class="mt-1.5 w-full text-xs text-muted-foreground">
         当前范围：{{ rangeText(presetRange) }}
       </p>
     </div>
@@ -100,10 +100,10 @@ function formatTime(value: TimeValue) {
           </DatePickerFooter>
         </RangePickerContent>
       </RangePickerRoot>
-      <p class="mt-space-sm w-full text-xs text-muted-foreground">
+      <p class="mt-1.5 w-full text-xs text-muted-foreground">
         当前范围：{{ rangeText(submitted) }}
       </p>
-      <p class="mt-space-sm text-xs text-muted-foreground">已提交 {{ submitCount }} 次</p>
+      <p class="mt-1.5 text-xs text-muted-foreground">已提交 {{ submitCount }} 次</p>
     </div>
   </Card>
 

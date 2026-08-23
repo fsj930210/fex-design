@@ -73,7 +73,7 @@ type Province = keyof typeof locations
         ><FieldLabel>Responsive</FieldLabel
         ><InputRoot value=""
           ><InputControl placeholder="窄屏纵向，变宽后横向" /></InputRoot></FieldRoot></FieldGroup
-    ><FieldGroup orientation="inline" class="mt-space-lg"
+    ><FieldGroup orientation="inline" class="mt-3"
       ><FieldRoot orientation="inline"
         ><FieldLabel>关键字</FieldLabel
         ><InputRoot value=""

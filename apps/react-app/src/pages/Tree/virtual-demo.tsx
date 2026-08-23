@@ -15,7 +15,7 @@ export function VirtualTreeDemo() {
       title="Virtualization and locate"
       description="Only viewport rows mount. scrollToKey resolves a visible index before asking TanStack Virtual to scroll."
     >
-      <div className="mb-space-md flex gap-space-sm">
+      <div className="mb-2 flex gap-1.5">
         <Button
           size="sm"
           variant="outline"
@@ -34,7 +34,7 @@ export function VirtualTreeDemo() {
         virtual
         height={320}
         virtualViewportRef={viewportRef}
-        className="rounded-md border border-border bg-background p-space-sm"
+        className="rounded-md border border-border bg-background p-1.5"
       />
     </TreeDemoSection>
   )

@@ -21,7 +21,7 @@ import { splitProps, type JSX } from 'solid-js'
 export function Section(props: { title: string; description: string; children: JSX.Element }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div class="flex min-w-0 flex-wrap items-start gap-space-md">{props.children}</div>
+      <div class="flex min-w-0 flex-wrap items-start gap-2">{props.children}</div>
     </Card>
   )
 }
@@ -77,7 +77,7 @@ export function ValuePreview(props: { value: CalendarValue | readonly CalendarVa
       : formatDatePickerValue(value as CalendarValue | null, { picker: 'date' })
   }
   return (
-    <p class="mt-space-sm w-full text-xs text-muted-foreground">当前值：{text() || '未选择'}</p>
+    <p class="mt-1.5 w-full text-xs text-muted-foreground">当前值：{text() || '未选择'}</p>
   )
 }
 
@@ -85,7 +85,7 @@ export function RangePreview(props: { value: CalendarRange<CalendarValue> }) {
   const start = () => formatDatePickerValue(props.value.start, { picker: 'date' })
   const end = () => formatDatePickerValue(props.value.end, { picker: 'date' })
   return (
-    <p class="mt-space-sm w-full text-xs text-muted-foreground">
+    <p class="mt-1.5 w-full text-xs text-muted-foreground">
       当前范围：{start() || '空'} ~ {end() || '空'}
     </p>
   )

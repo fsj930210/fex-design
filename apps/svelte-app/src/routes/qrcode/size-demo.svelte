@@ -6,7 +6,7 @@
 </script>
 
 <Card title="自定义尺寸" description="通过 Root 的 size 控制二维码输出尺寸。">
-  <div class="flex flex-wrap items-end gap-space-lg">
+  <div class="flex flex-wrap items-end gap-3">
     {#each sizes as size (size)}
       <QrCodeRoot value={'https://fex.design/qrcode/size/' + size} {size}>
         <QrCodeSvg><QrCodeBackground /><QrCodeModules /></QrCodeSvg>

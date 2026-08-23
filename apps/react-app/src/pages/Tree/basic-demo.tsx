@@ -14,7 +14,7 @@ export function BasicTreeDemo() {
         fieldNames={departmentFieldNames}
         isLeaf={(node) => node.childCount === 0}
         features={[expansionFeature({ defaultExpandedKeys: ['company'] })]}
-        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        className="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </TreeDemoSection>
   )

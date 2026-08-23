@@ -1,22 +1,22 @@
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Interactions</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Dropzone, movable, and 8-direction resize hooks for existing components.
         </p>
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <fex-card
         title="Drag And Drop"
         description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops."
       >
-        <div class="grid gap-space-md md:grid-cols-[280px_1fr]">
-          <div class="space-y-space-sm rounded-md border border-border bg-background p-space-md">
+        <div class="grid gap-2 md:grid-cols-[280px_1fr]">
+          <div class="space-y-1.5 rounded-md border border-border bg-background p-2">
             <p class="text-sm font-medium text-muted-foreground">Draggable items</p>
             @for (itemId of dropDemoItems.source; track itemId) {
               @let item = itemById(itemId);
@@ -27,7 +27,7 @@
                 [draggableData]="{ label: item.label }"
                 (draggingChange)="$event ? null : clearDragOverlay()"
                 (overlayStyleChange)="setDragOverlay(item.label, $event)"
-                class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
+                class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
               >
                 <span>{{ item.label }}</span>
                 <span class="text-muted-foreground">::</span>
@@ -35,13 +35,13 @@
             }
             @if (dropDemoItems.source.length === 0) {
               <p
-                class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground"
+                class="rounded-md border border-dashed border-border px-2 py-1.5 text-sm text-muted-foreground"
               >
                 All items have been dropped.
               </p>
             }
           </div>
-          <div class="grid gap-space-md md:grid-cols-2">
+          <div class="grid gap-2 md:grid-cols-2">
             <div
               fexDroppable
               droppableId="card-zone"
@@ -50,12 +50,12 @@
               (dragEntered)="dropResult = $event.source.id + ' is over Cards only.'"
               (dragLeft)="dropResult = 'Drop a draggable item into a zone.'"
               (dropped)="reportDrop('card-zone', 'Cards only', $event)"
-              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background"
+              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-2 text-sm transition-colors data-[can-drop=true]:border-focus data-[over=true]:bg-selected-background"
             >
               <div>
                 <p class="font-medium text-foreground">Cards only</p>
-                <p class="mt-space-sm text-muted-foreground">Drop target</p>
-                <div class="mt-space-md space-y-space-sm">
+                <p class="mt-1.5 text-muted-foreground">Drop target</p>
+                <div class="mt-2 space-y-1.5">
                   @for (itemId of dropDemoItems['card-zone']; track itemId) {
                     @let item = itemById(itemId);
                     <div
@@ -65,7 +65,7 @@
                       [draggableData]="{ label: item.label }"
                       (draggingChange)="$event ? null : clearDragOverlay()"
                       (overlayStyleChange)="setDragOverlay(item.label, $event)"
-                      class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm"
+                      class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm"
                     >
                       <span>{{ item.label }}</span
                       ><span class="text-muted-foreground">::</span>
@@ -82,12 +82,12 @@
               (dragEntered)="dropResult = $event.source.id + ' is over Any item.'"
               (dragLeft)="dropResult = 'Drop a draggable item into a zone.'"
               (dropped)="reportDrop('any-zone', 'Any item', $event)"
-              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background"
+              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-2 text-sm transition-colors data-[can-drop=true]:border-focus data-[over=true]:bg-selected-background"
             >
               <div>
                 <p class="font-medium text-foreground">Any item</p>
-                <p class="mt-space-sm text-muted-foreground">Drop target</p>
-                <div class="mt-space-md space-y-space-sm">
+                <p class="mt-1.5 text-muted-foreground">Drop target</p>
+                <div class="mt-2 space-y-1.5">
                   @for (itemId of dropDemoItems['any-zone']; track itemId) {
                     @let item = itemById(itemId);
                     <div
@@ -97,7 +97,7 @@
                       [draggableData]="{ label: item.label }"
                       (draggingChange)="$event ? null : clearDragOverlay()"
                       (overlayStyleChange)="setDragOverlay(item.label, $event)"
-                      class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm"
+                      class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm"
                     >
                       <span>{{ item.label }}</span
                       ><span class="text-muted-foreground">::</span>
@@ -110,13 +110,13 @@
           </div>
         </div>
         <p
-          class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground"
+          class="mt-2 rounded-md bg-muted-background px-2 py-1.5 text-sm text-muted-foreground"
         >
           {{ dropResult }}
         </p>
         @if (dragOverlay) {
           <div
-            class="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            class="flex min-h-11 items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
             [ngStyle]="dragOverlay.style"
           >
             <span>{{ dragOverlay.label }}</span>
@@ -135,7 +135,7 @@
           [multiple]="true"
           [input]="fileInput"
           (dropFiles)="onDropFiles($event)"
-          class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-accent-background"
+          class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-focus data-[dragging=true]:bg-selected-background"
         >
           <input #fileInput type="file" hidden accept="image/*,.txt" multiple />
           <span>{{ files.length > 0 ? files.join(', ') : 'Drop images or text files here' }}</span>
@@ -149,15 +149,15 @@
             [position]="{ x: 24, y: 24 }"
             bounds="parent"
             [moveHandle]="moveHandle"
-            class="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg"
+            class="absolute w-72 overflow-hidden rounded-md border border-border bg-elevated-background shadow-lg"
           >
             <div
               #moveHandle
-              class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing"
+              class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-2 text-sm font-medium active:cursor-grabbing"
             >
               <span>Drag this title bar</span><span class="text-muted-foreground">::</span>
             </div>
-            <p class="p-space-md text-sm text-muted-foreground">
+            <p class="p-2 text-sm text-muted-foreground">
               The card is constrained to its parent. The title bar is the move handle.
             </p>
           </div>
@@ -176,10 +176,10 @@
             edges="all"
             [minWidth]="220"
             [minHeight]="120"
-            class="absolute rounded-md border border-border bg-card p-space-md shadow-lg"
+            class="absolute rounded-md border border-border bg-elevated-background p-2 shadow-lg"
           >
             <p class="text-sm font-medium">Resizable surface</p>
-            <p class="mt-space-sm text-sm text-muted-foreground">
+            <p class="mt-1.5 text-sm text-muted-foreground">
               Drag any edge or corner. Handles are intentionally visible for this demo.
             </p>
             <div

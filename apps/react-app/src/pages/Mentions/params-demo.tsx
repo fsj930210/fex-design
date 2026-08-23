@@ -14,7 +14,7 @@ function DocItems() {
     <MentionsList>
       {filterByText(mentionDocs, mentions.text, (doc) => doc.title).map((doc) => (
         <MentionsItem key={doc.id} itemKey={doc.id} value={doc.title} data={doc}>
-          <span className="flex items-center gap-space-sm">
+          <span className="flex items-center gap-1.5">
             <span className="font-medium">{doc.title}</span>
             <span className="text-xs text-muted-foreground">{doc.type}</span>
           </span>
@@ -40,7 +40,7 @@ export function ParamsDemo() {
           <DocItems />
         </MentionsContent>
       </MentionsRoot>
-      <div className="mt-space-sm flex flex-wrap gap-space-xs text-xs text-muted-foreground">
+      <div className="mt-1.5 flex flex-wrap gap-1 text-xs text-muted-foreground">
         {params.length ? params.map((param) => <span key={param}>#{param}</span>) : 'No params yet'}
       </div>
     </Card>

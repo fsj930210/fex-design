@@ -51,7 +51,7 @@ function parts(title: string) {
     title="Search data and custom title rendering"
     description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
   >
-    <InputRoot :value="keyword" class="mb-space-md max-w-sm"
+    <InputRoot :value="keyword" class="mb-2 max-w-sm"
       ><InputControl placeholder="Search departments" @input="handleInput"
     /></InputRoot>
     <div v-show="!showingSearchTree">
@@ -62,7 +62,7 @@ function parts(title: string) {
         :field-names="departmentFieldNames"
         :is-leaf="(node) => node.childCount === 0"
         :features="treeFeatures"
-        class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        class="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </div>
     <!-- @vue-generic {DepartmentNode} -->
@@ -73,7 +73,7 @@ function parts(title: string) {
       :is-leaf="(node) => node.childCount === 0"
       :features="treeFeatures"
       :search-keyword="keyword"
-      class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
     >
       <template #title="{ item }">
         {{ parts(String(item.node.name)).before

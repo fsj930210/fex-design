@@ -7,7 +7,7 @@ const value = ref<TimeValue | null>({ hour: 10, minute: 20, second: 30 })
 </script>
 <template>
   <Card title="受控与非受控" description="外部值与 primitive 自身默认值。"
-    ><div class="flex gap-space-lg">
+    ><div class="flex gap-3">
       <DemoTimePicker :value="value" @change="value = $event" /><DemoTimePicker
         :default-value="{ hour: 8, minute: 15, second: 0 }"
       /></div

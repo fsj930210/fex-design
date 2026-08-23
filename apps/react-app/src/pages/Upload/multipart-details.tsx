@@ -19,13 +19,13 @@ export function MultipartDetails({ id }: { id: string }) {
   const completed = parts.filter((part) => part.status === 'success').length
 
   return (
-    <div className="mt-space-sm space-y-space-sm text-xs">
+    <div className="mt-1.5 space-y-1.5 text-xs">
       <div>
         <div className="mb-1 flex justify-between text-muted-foreground">
           <span>总进度（MD5 10% + 上传 90%）</span>
           <span>{progress.percent.toFixed(0)}%</span>
         </div>
-        <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+        <div className="h-1.5 overflow-hidden rounded-full bg-muted-background">
           <div
             className="h-full bg-primary transition-[width]"
             style={{ width: `${progress.percent}%` }}

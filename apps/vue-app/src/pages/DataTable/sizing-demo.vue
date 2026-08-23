@@ -36,12 +36,12 @@ const end = useDataTable({
   <DemoSection
     title="Column sizing and resizing"
     description="Sizing and resizing remain separate v9 features. Drag a header separator; double-click resets the column. Status demonstrates per-column resize disablement."
-    ><div class="grid gap-space-lg xl:grid-cols-2">
-      <section class="space-y-space-sm">
+    ><div class="grid gap-3 xl:grid-cols-2">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Resize on change</h3>
         <DataTable :table="change" />
       </section>
-      <section class="space-y-space-sm">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Resize on end + bordered table</h3>
         <DataTable :table="end" border />
       </section></div

@@ -1,11 +1,11 @@
 packages:
   - apps/*
-  - '!apps/docs'
   - packages/@fex-design/*
   - packages/styles
   - packages/utils
   - packages/mock
   - configs/*
+  - server
 
 allowBuilds:
   '@parcel/watcher': true
@@ -13,7 +13,7 @@ allowBuilds:
   lmdb: true
   msgpackr-extract: true
   msw: true
-  nx: true
+  unrs-resolver: true
   vue-demi: false
 
 catalog:
@@ -24,21 +24,5 @@ catalog:
   vite: 8.2.0
 
 minimumReleaseAgeExclude:
-  - '@nx/devkit@23.0.1'
-  - '@nx/js@23.0.1'
-  - '@nx/nx-darwin-arm64@23.0.1'
-  - '@nx/nx-darwin-x64@23.0.1'
-  - '@nx/nx-freebsd-x64@23.0.1'
-  - '@nx/nx-linux-arm-gnueabihf@23.0.1'
-  - '@nx/nx-linux-arm64-gnu@23.0.1'
-  - '@nx/nx-linux-arm64-musl@23.0.1'
-  - '@nx/nx-linux-x64-gnu@23.0.1'
-  - '@nx/nx-linux-x64-musl@23.0.1'
-  - '@nx/nx-win32-arm64-msvc@23.0.1'
-  - '@nx/nx-win32-x64-msvc@23.0.1'
-  - '@nx/vite@23.0.1'
-  - '@nx/vitest@23.0.1'
-  - '@nx/workspace@23.0.1'
-  - nx@23.0.1
   - svelte@5.56.4
   - vite@8.1.0

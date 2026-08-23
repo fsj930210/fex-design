@@ -11,13 +11,13 @@ export function MultipartDetails(props: { id: string }) {
   const progress = createUploadProgress(() => props.id, { md5Weight: 0.1 })
   const completed = () => parts().filter((part) => part.status === 'success').length
   return (
-    <div class="mt-space-sm space-y-space-sm text-xs">
+    <div class="mt-1.5 space-y-1.5 text-xs">
       <div>
         <div class="mb-1 flex justify-between text-muted-foreground">
           <span>总进度（MD5 10% + 上传 90%）</span>
           <span>{progress().percent.toFixed(0)}%</span>
         </div>
-        <div class="h-1.5 overflow-hidden rounded-full bg-muted">
+        <div class="h-1.5 overflow-hidden rounded-full bg-muted-background">
           <div
             class="h-full bg-primary transition-[width]"
             style={{ width: `${progress().percent}%` }}

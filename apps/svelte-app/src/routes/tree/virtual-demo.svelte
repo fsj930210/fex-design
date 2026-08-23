@@ -13,7 +13,7 @@
 </script>
 
 <Card title="Virtualization and locate" description="Only viewport rows mount. scrollToKey resolves a visible index before asking TanStack Virtual to scroll.">
-  <div class="mb-space-md flex gap-space-sm">
+  <div class="mb-2 flex gap-1.5">
     <Button size="sm" variant="outline" onclick={() => viewport?.scrollToKey('large-3200', { reveal: true, align: 'start' })}>
       Locate row 3201
     </Button>
@@ -26,6 +26,6 @@
     features={[expansionFeature({ defaultExpandedKeys: ['large-root'] })]}
     virtual
     height={320}
-    class="rounded-md border border-border bg-background p-space-sm"
+    class="rounded-md border border-border bg-background p-1.5"
   />
 </Card>

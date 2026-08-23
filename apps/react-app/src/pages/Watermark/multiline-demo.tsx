@@ -8,7 +8,7 @@ export function MultilineDemo() {
         content={['FEX Admin', 'Confidential']}
         className="h-56 rounded-md border border-border bg-background"
       >
-        <div className="grid h-full place-items-center p-space-xl text-center text-sm text-muted-foreground">
+        <div className="grid h-full place-items-center p-4 text-center text-sm text-muted-foreground">
           Multiple lines stay centered inside every repeated tile.
         </div>
       </Watermark>

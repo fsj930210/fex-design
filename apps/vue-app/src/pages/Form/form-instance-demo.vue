@@ -61,7 +61,7 @@ type Province = keyof typeof locations
   <Card
     title="Form instance and defaultValue"
     description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"
-    ><FormHost :form="instanceForm" class="grid max-w-xl gap-space-lg"
+    ><FormHost :form="instanceForm" class="grid max-w-xl gap-3"
       ><Field name="source" v-slot="{ field, state }"
         ><FieldRoot has-description
           ><FieldLabel>Form 初始值</FieldLabel
@@ -79,7 +79,7 @@ type Province = keyof typeof locations
           ><FieldDescription>使用 TanStack 原生 defaultValue。</FieldDescription></FieldRoot
         ></Field
       >
-      <div class="flex flex-wrap gap-space-sm">
+      <div class="flex flex-wrap gap-1.5">
         <Button
           type="button"
           @click="instanceForm.setFieldValue('nickname', '通过 setFieldValue 设置')"
@@ -91,7 +91,7 @@ type Province = keyof typeof locations
           >读取昵称</Button
         ><Button type="button" variant="outline" @click="instanceForm.reset()">重置</Button>
       </div>
-      <p class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground" aria-live="polite">
+      <p class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground" aria-live="polite">
         {{ instanceResult }}
       </p></FormHost
     ></Card

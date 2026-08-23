@@ -3,7 +3,7 @@ import { Card } from '@fex-design/solid/ui/card'
 import { For, Show } from 'solid-js'
 export const BasicDemo = () => (
   <Card title="Basic" description="Separate related sections with a semantic horizontal rule.">
-    <div class="grid max-w-xl gap-space-md">
+    <div class="grid max-w-xl gap-2">
       <div>
         <div class="font-medium">Fex Design</div>
         <div class="text-sm text-muted-foreground">Composable components for five frameworks.</div>
@@ -15,7 +15,7 @@ export const BasicDemo = () => (
 )
 export const VerticalDemo = () => (
   <Card title="Vertical" description="Use vertical separators between compact inline items.">
-    <div class="flex h-5 items-center gap-space-md">
+    <div class="flex h-5 items-center gap-2">
       <span>Blog</span>
       <Separator orientation="vertical" />
       <span>Docs</span>
@@ -26,7 +26,7 @@ export const VerticalDemo = () => (
 )
 export const MenuDemo = () => (
   <Card title="Menu" description="Divide groups without splitting related menu items.">
-    <div class="grid max-w-sm gap-space-sm">
+    <div class="grid max-w-sm gap-1.5">
       <div>
         <div class="font-medium">Settings</div>
         <div class="text-sm text-muted-foreground">Manage preferences</div>
@@ -54,7 +54,7 @@ export const ListDemo = () => (
       <For each={items}>
         {([label, value], index) => (
           <div>
-            <div class="flex justify-between py-space-md">
+            <div class="flex justify-between py-2">
               <span>{label}</span>
               <span class="text-muted-foreground">{value}</span>
             </div>
@@ -68,7 +68,7 @@ export const ListDemo = () => (
   </Card>
 )
 const Labeled = (props: { label: string; placement: 'start' | 'center' | 'end' }) => (
-  <div class="flex items-center gap-space-md">
+  <div class="flex items-center gap-2">
     <Separator class={props.placement === 'start' ? 'w-12' : 'flex-1'} />
     <span class="shrink-0 text-sm text-muted-foreground">{props.label}</span>
     <Separator class={props.placement === 'end' ? 'w-12' : 'flex-1'} />
@@ -79,7 +79,7 @@ export const TextDemo = () => (
     title="With Text"
     description="Compose a label between two separators and control its placement."
   >
-    <div class="grid max-w-xl gap-space-xl">
+    <div class="grid max-w-xl gap-4">
       <Labeled label="Start" placement="start" />
       <Labeled label="Center" placement="center" />
       <Labeled label="End" placement="end" />
@@ -88,16 +88,16 @@ export const TextDemo = () => (
 )
 export const VariantsDemo = () => (
   <Card title="Variants" description="Use class composition for solid, dashed and dotted rules.">
-    <div class="grid max-w-xl gap-space-lg">
-      <div class="grid gap-space-sm">
+    <div class="grid max-w-xl gap-3">
+      <div class="grid gap-1.5">
         <span class="text-sm">Solid</span>
         <Separator />
       </div>
-      <div class="grid gap-space-sm">
+      <div class="grid gap-1.5">
         <span class="text-sm">Dashed</span>
         <Separator class="h-0 border-t border-dashed bg-transparent" />
       </div>
-      <div class="grid gap-space-sm">
+      <div class="grid gap-1.5">
         <span class="text-sm">Dotted</span>
         <Separator class="h-0 border-t border-dotted bg-transparent" />
       </div>

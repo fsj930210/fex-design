@@ -1,5 +1,5 @@
 export const transferRootClassName = [
-  'space-y-space-xs',
+  'space-y-1',
   'data-[invalid=true]:[&_[data-slot=transfer-panel]]:border-danger',
   'data-[invalid=true]:[&_[data-slot=transfer-panel]]:ring-3',
   'data-[invalid=true]:[&_[data-slot=transfer-panel]]:ring-danger/20',

@@ -1,0 +1,26 @@
+:root {
+  /* Shared control and icon sizes that Tailwind does not name semantically. */
+  --height-xs: 24px;
+  --height-sm: 28px;
+  --height-default: 32px;
+  --height-lg: 36px;
+  --height-xl: 40px;
+  --icon-size-xs: 12px;
+  --icon-size-sm: 14px;
+  --icon-size-default: 16px;
+  --icon-size-lg: 18px;
+  --icon-size-xl: 20px;
+
+  /* Shared spacing */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 6px;
+  --space-md: 8px;
+  --space-lg: 12px;
+  --space-xl: 16px;
+  --space-2xl: 24px;
+  --space-3xl: 36px;
+
+  /* Browser UI */
+  --scrollbar-size: 6px;
+}

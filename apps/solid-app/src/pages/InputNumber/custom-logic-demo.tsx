@@ -10,7 +10,7 @@ export function CustomLogicDemo() {
     setValue(stepInputNumber(value(), direction, { min: 0, max: 10 }))
   return (
     <Card title="Custom primitive logic" description="Core rules drive custom DOM.">
-      <div class="inline-flex items-center gap-space-md">
+      <div class="inline-flex items-center gap-2">
         <Button aria-label="Decrease value" onClick={() => step('decrement')}>
           <MinusIcon />
         </Button>

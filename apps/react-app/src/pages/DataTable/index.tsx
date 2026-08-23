@@ -20,9 +20,9 @@ import { VirtualDataTableDemo } from './virtual-demo'
 
 export function DataTablePage() {
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-[1600px] space-y-space-xl">
-        <header className="space-y-space-sm">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-[1600px] space-y-4">
+        <header className="space-y-1.5">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
@@ -35,7 +35,7 @@ export function DataTablePage() {
             </p>
           </div>
         </header>
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <BasicDataTableDemo />
           <HeaderGroupingDataTableDemo />
           <SortingDataTableDemo />

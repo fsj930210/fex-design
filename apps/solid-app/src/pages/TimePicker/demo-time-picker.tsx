@@ -70,9 +70,9 @@ export function DemoTimePicker(props: DemoTimePickerProps) {
           </For>
         </TimePickerPanel>
         <Show when={props.panelExtra}>
-          <div class="border-t border-border p-space-sm text-sm">{props.panelExtra}</div>
+          <div class="border-t border-border p-1.5 text-sm">{props.panelExtra}</div>
         </Show>
-        <div class="flex justify-end border-t border-border p-space-sm">
+        <div class="flex justify-end border-t border-border p-1.5">
           <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>
             确定
           </Button>

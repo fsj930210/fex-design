@@ -2,6 +2,10 @@
   "name": "@fex-design/react",
   "private": true,
   "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
+  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.tsx",
@@ -138,7 +142,8 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.0.0",

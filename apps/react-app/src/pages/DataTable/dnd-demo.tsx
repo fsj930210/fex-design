@@ -140,7 +140,7 @@ function ColumnDndGrid({ constrained }: { constrained: boolean }) {
       : undefined
 
   return (
-    <div className="space-y-space-sm">
+    <div className="space-y-1.5">
       <DataTable
         {...containerNativeProps}
         {...(containerClassName ? { className: { root: containerClassName } } : {})}
@@ -217,7 +217,7 @@ function RowDndGrid() {
   const { className: containerClassName, ...containerNativeProps } = containerProps
 
   return (
-    <div className="space-y-space-sm">
+    <div className="space-y-1.5">
       <DataTable
         {...containerNativeProps}
         {...(containerClassName ? { className: { root: containerClassName } } : {})}
@@ -255,7 +255,7 @@ export function DndDataTableDemo() {
       title="Column and row DnD with project Sortable"
       description="Both axes reuse the existing useSortable controller, overlay and motion registry. DataTable only exposes native part props so callers can attach the project interaction without binding a policy into the table primitive."
     >
-      <div className="space-y-space-lg">
+      <div className="space-y-3">
         <DemoBranch title="Column reorder">
           <ColumnDndGrid constrained={false} />
         </DemoBranch>

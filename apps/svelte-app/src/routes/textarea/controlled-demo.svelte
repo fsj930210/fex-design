@@ -11,8 +11,8 @@
   title="Controlled and uncontrolled"
   description="Root owns the value protocol; callers can provide value or only defaultValue."
 >
-  <div class="grid gap-space-lg md:grid-cols-2">
-    <div class="space-y-space-sm">
+  <div class="grid gap-3 md:grid-cols-2">
+    <div class="space-y-1.5">
       <TextareaRoot value={value} onChange={(next) => (value = next)} autoSize={{ minRows: 2, maxRows: 5 }}>
         <TextareaInput aria-label="Controlled textarea" placeholder="Controlled" />
         <TextareaClear aria-label="Clear controlled textarea" />

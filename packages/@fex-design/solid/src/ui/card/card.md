@@ -27,7 +27,7 @@ export function Example() {
         <CardTitle>Variants</CardTitle>
         <CardDescription>按钮的基础视觉语义。</CardDescription>
       </CardHeader>
-      <CardContent class="flex flex-wrap items-center gap-space-md">Content</CardContent>
+      <CardContent class="flex flex-wrap items-center gap-2">Content</CardContent>
     </Card>
   )
 }

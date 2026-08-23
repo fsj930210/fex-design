@@ -169,7 +169,7 @@ function DefaultTrigger({ text = false }: { text?: boolean }) {
           {...props}
           disabled={snapshot.disabled}
           data-disabled={snapshot.disabled || undefined}
-          className="inline-flex h-9 w-fit max-w-full self-start items-center gap-2 rounded-md border border-border bg-background px-2 transition-colors data-disabled:cursor-not-allowed data-disabled:border-input-border data-disabled:bg-muted-background data-disabled:opacity-50"
+          className="inline-flex h-9 w-fit max-w-full self-start items-center gap-2 rounded-md border border-border bg-background px-2 transition-colors data-disabled:cursor-not-allowed data-disabled:border-disabled-border data-disabled:bg-muted-background data-disabled:opacity-50"
         >
           <ColorPickerSwatch />
           {text ? (

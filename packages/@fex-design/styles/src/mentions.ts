@@ -2,7 +2,7 @@ export const mentionsRootClassName = 'relative block w-full'
 
 export const mentionsContentClassName = [
   'z-[var(--floating-z-index,50)] w-full overflow-hidden rounded-md border border-border',
-  'bg-popover-background text-popover-foreground shadow-lg',
+  'bg-elevated-background text-elevated-foreground shadow-lg',
   'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--mentions-content-max-height,320px))]',
 ].join(' ')
 

@@ -3,7 +3,7 @@ import { Card } from '@fex-design/solid/ui/card'
 export function SizeDemo() {
   return (
     <Card title="Size" description="Avatar provides small, medium and large sizes.">
-      <div class="flex items-center gap-space-lg">
+      <div class="flex items-center gap-3">
         <Avatar size="sm">
           <AvatarFallback>SM</AvatarFallback>
         </Avatar>

@@ -42,20 +42,20 @@
   ] as const
 </script>
 
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" href="/">杩斿洖棣栭〉</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           鍩轰簬 core floating overlay 鐨?Svelte 閫傞厤锛岃鐩栬Е鍙戞柟寮忋€佷綅缃€佸彈鎺х姸鎬佸拰鑷畾涔夋寕杞藉鍣ㄣ€?        </p>
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <Card title="Primitive" description="Demo.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Popover side="bottom" align="start" sideOffset={8} arrow>
             <PopoverTrigger>
               {#snippet children(slot)}
@@ -76,7 +76,7 @@
       </Card>
 
       <Card title="Ui" description="Demo.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Popover placement="bottomLeft" sideOffset={8} arrow>
             <PopoverTrigger>
               {#snippet children(slot)}
@@ -97,7 +97,7 @@
       </Card>
 
       <Card title="Triggers" description="Demo.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Popover trigger={['hover', 'focus']} hoverCloseDelay={120} arrow>
             <PopoverTrigger>
               {#snippet children(slot)}
@@ -134,9 +134,9 @@
       </Card>
 
       <Card title="Placement" description="Demo.">
-        <div class="flex w-full flex-col items-center gap-space-md py-space-lg">
+        <div class="flex w-full flex-col items-center gap-2 py-3">
           {#each placementGroups as group, rowIndex}
-            <div class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-space-lg gap-y-space-md">
+            <div class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-3 gap-y-2">
               {#if rowIndex > 0 && rowIndex < 4}
                 <div class="justify-self-start">
                   <Popover placement={group[0].placement} sideOffset={10} arrow>
@@ -203,7 +203,7 @@
       </Card>
 
       <Card title="Offsets" description="Tune main-axis sideOffset and cross-axis alignOffset.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Popover placement="bottomLeft" sideOffset={18} arrow>
             <PopoverTrigger>
               {#snippet children(slot)}
@@ -241,7 +241,7 @@
       </Card>
 
       <Card title="Controlled" description="Demo.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Popover {open} onOpenChange={(nextOpen) => (open = nextOpen)} placement="bottomLeft" arrow>
             <PopoverTrigger>
               {#snippet children(slot)}
@@ -264,7 +264,7 @@
       </Card>
 
       <Card title="getPopupContainer" description="Demo.">
-        <div bind:this={container} class="relative min-h-40 rounded-md border border-dashed p-space-lg">
+        <div bind:this={container} class="relative min-h-40 rounded-md border border-dashed p-3">
           <Popover getPopupContainer={() => container ?? document.body} placement="bottomLeft">
             <PopoverTrigger>
               {#snippet children(slot)}

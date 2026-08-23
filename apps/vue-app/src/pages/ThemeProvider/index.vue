@@ -15,15 +15,15 @@ function toggleInheritedTheme() {
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">
           Back home
         </RouterLink>
         <div>
           <h1 class="text-2xl font-semibold text-foreground">ThemeProvider</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             ThemeProvider supports local scopes, inherited scopes, custom local themes, multiple
             themes on the same page, and a forcedTheme override with the highest priority.
           </p>
@@ -34,7 +34,7 @@ function toggleInheritedTheme() {
         <ThemeProvider
           scope="local"
           storage-key="fex-theme-provider-local-demo"
-          class="rounded-md bg-background p-space-lg text-foreground"
+          class="rounded-md bg-background p-3 text-foreground"
         >
           <ThemeStatusCard title="Interactive local theme" />
         </ThemeProvider>
@@ -44,18 +44,18 @@ function toggleInheritedTheme() {
         title="Multiple Themes"
         description="Independent local scopes can render light and dark together."
       >
-        <div class="grid gap-space-lg md:grid-cols-2">
+        <div class="grid gap-3 md:grid-cols-2">
           <ThemeProvider
             scope="local"
             forced-theme="light"
-            class="rounded-md bg-background p-space-lg text-foreground"
+            class="rounded-md bg-background p-3 text-foreground"
           >
             <ThemeStatusCard title="Forced light scope" />
           </ThemeProvider>
           <ThemeProvider
             scope="local"
             forced-theme="dark"
-            class="rounded-md bg-background p-space-lg text-foreground"
+            class="rounded-md bg-background p-3 text-foreground"
           >
             <ThemeStatusCard title="Forced dark scope" />
           </ThemeProvider>
@@ -69,27 +69,27 @@ function toggleInheritedTheme() {
         <ThemeProvider
           scope="local"
           :forced-theme="inheritedTheme"
-          class="rounded-md bg-background p-space-lg text-foreground"
+          class="rounded-md bg-background p-3 text-foreground"
         >
           <button
-            class="mb-space-lg rounded-md border border-border bg-card-background px-space-lg py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background"
+            class="mb-3 rounded-md border border-border bg-elevated-background px-3 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background"
             type="button"
             @click="toggleInheritedTheme"
           >
             Switch parent to {{ inheritedTheme === 'dark' ? 'light' : 'dark' }}
           </button>
-          <div class="grid gap-space-lg lg:grid-cols-3">
+          <div class="grid gap-3 lg:grid-cols-3">
             <ThemeStatusCard :title="`Parent local ${inheritedTheme} scope`" />
             <ThemeProvider scope="inherit">
-              <div class="space-y-space-lg rounded-md border border-border bg-background p-space-lg">
+              <div class="space-y-3 rounded-md border border-border bg-background p-3">
                 <ThemeStatusCard title="Inherited middle scope" />
                 <ThemeProvider
                   scope="local"
                   :forced-theme="innerTheme"
-                  class="rounded-md bg-background p-space-lg text-foreground"
+                  class="rounded-md bg-background p-3 text-foreground"
                 >
                   <button
-                    class="mb-space-lg rounded-md border border-border bg-card-background px-space-lg py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background"
+                    class="mb-3 rounded-md border border-border bg-elevated-background px-3 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background"
                     type="button"
                     @click="innerTheme = innerTheme === 'dark' ? 'light' : 'dark'"
                   >
@@ -114,13 +114,13 @@ function toggleInheritedTheme() {
           default-theme="admin-blue"
           :forced-theme="customTheme"
           :color-scheme-map="{ 'admin-blue': 'light' }"
-          class="rounded-md border border-border bg-background p-space-lg text-foreground data-[theme=admin-blue]:[--background:oklch(0.97_0.04_245)] data-[theme=admin-blue]:[--card-background:oklch(0.99_0.025_245)] data-[theme=admin-blue]:[--card-foreground:oklch(0.25_0.08_250)] data-[theme=admin-blue]:[--foreground:oklch(0.22_0.08_250)] data-[theme=admin-blue]:[--muted-foreground:oklch(0.45_0.06_250)] data-[theme=admin-blue]:[--border:oklch(0.82_0.07_245)]"
+          class="rounded-md border border-border bg-background p-3 text-foreground data-[theme=admin-blue]:[--background:oklch(0.97_0.04_245)] data-[theme=admin-blue]:[--card-background:oklch(0.99_0.025_245)] data-[theme=admin-blue]:[--card-foreground:oklch(0.25_0.08_250)] data-[theme=admin-blue]:[--foreground:oklch(0.22_0.08_250)] data-[theme=admin-blue]:[--muted-foreground:oklch(0.45_0.06_250)] data-[theme=admin-blue]:[--border:oklch(0.82_0.07_245)]"
         >
-          <div class="mb-space-lg flex flex-wrap gap-space-sm">
+          <div class="mb-3 flex flex-wrap gap-1.5">
             <button
               v-for="theme in customThemeOptions"
               :key="theme"
-              class="rounded-md border border-border bg-card-background px-space-md py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
+              class="rounded-md border border-border bg-elevated-background px-2 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
               :disabled="customTheme === theme"
               type="button"
               @click="customTheme = theme"
@@ -140,7 +140,7 @@ function toggleInheritedTheme() {
           scope="local"
           default-theme="light"
           forced-theme="dark"
-          class="rounded-md bg-background p-space-lg text-foreground"
+          class="rounded-md bg-background p-3 text-foreground"
         >
           <ThemeStatusCard title="Locked dark theme" />
         </ThemeProvider>

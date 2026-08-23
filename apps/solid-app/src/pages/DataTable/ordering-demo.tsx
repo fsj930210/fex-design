@@ -36,8 +36,8 @@ export function OrderingDataTableDemo() {
       description="The feature only owns columnOrder and actions. These buttons are one possible UI; DnD is demonstrated separately as caller-owned behavior."
     >
       <DemoBranch title="Programmatic reorder">
-        <div class="space-y-space-sm">
-          <div class="flex flex-wrap gap-space-sm">
+        <div class="space-y-1.5">
+          <div class="flex flex-wrap gap-1.5">
             <Button
               size="sm"
               variant="outline"

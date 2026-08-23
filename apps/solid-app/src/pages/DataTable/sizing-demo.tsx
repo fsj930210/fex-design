@@ -37,7 +37,7 @@ export function SizingDataTableDemo() {
       title="Column sizing and resizing"
       description="Sizing and resizing remain separate v9 features. Drag a header separator; double-click resets the column. Status demonstrates per-column resize disablement."
     >
-      <div class="grid gap-space-lg xl:grid-cols-2">
+      <div class="grid gap-3 xl:grid-cols-2">
         <DemoBranch title="Resize on change">
           <SizingGrid direction="onChange" />
         </DemoBranch>

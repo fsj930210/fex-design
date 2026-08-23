@@ -14,7 +14,7 @@
 </script>
 
 <Card title="自定义单元格" description="DatePickerPanel 透传 Calendar，可以直接自定义 CalendarGrid / CalendarCell。">
-  <div class="flex min-w-0 flex-wrap items-start gap-space-md">
+  <div class="flex min-w-0 flex-wrap items-start gap-2">
     <DatePickerRoot>
       <DatePickerTrigger class="w-56" placeholder="YYYY-MM-DD" />
       <DatePickerContent class="overflow-hidden p-0">
@@ -35,7 +35,7 @@
 </Card>
 
 <Card title="自定义 Footer" description="Footer 通过 context 获取 close / confirm / cancel / clear。">
-  <div class="flex min-w-0 flex-wrap items-start gap-space-md">
+  <div class="flex min-w-0 flex-wrap items-start gap-2">
     <DatePickerRoot needConfirm>
       <DatePickerTrigger class="w-56" placeholder="YYYY-MM-DD" />
       <DatePickerContent class="overflow-hidden p-0">
@@ -51,7 +51,7 @@
 </Card>
 
 <Card title="自定义面板" description="自定义面板可以调用 primitive 暴露的 close，并按业务自由组合内容。">
-  <div class="flex min-w-0 flex-wrap items-start gap-space-md">
+  <div class="flex min-w-0 flex-wrap items-start gap-2">
     <DatePickerRoot>
       <DatePickerTrigger class="w-56" placeholder="YYYY-MM-DD" />
       <DatePickerContent class="overflow-hidden p-0">

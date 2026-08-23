@@ -34,21 +34,21 @@ function addRuntimeBundle() {
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
     <div class="mx-auto w-full max-w-5xl">
-      <header class="mb-space-xl space-y-space-md">
+      <header class="mb-4 space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <h1 class="text-2xl font-semibold text-foreground">I18n</h1>
       </header>
 
-      <div class="grid gap-space-xl">
+      <div class="grid gap-4">
         <Card
           title="Core translation API"
           description="Use t with interpolation, plural values, and namespaces."
         >
-          <div class="flex flex-wrap items-center gap-space-md">
+          <div class="flex flex-wrap items-center gap-2">
             <span>{{ t('demo.greeting', { name: 'Fex' }) }}</span>
             <span>{{ t('order:count', { count: 1 }) }}</span>
             <span>{{ t('order:count', { count: 5 }) }}</span>
@@ -60,7 +60,7 @@ function addRuntimeBundle() {
           title="Local bundle and namespaces"
           description="The initial Chinese resources are available before any network request."
         >
-          <div class="grid gap-space-sm text-sm text-muted-foreground sm:grid-cols-2">
+          <div class="grid gap-1.5 text-sm text-muted-foreground sm:grid-cols-2">
             <span>common: {{ t('demo.title') }}</span>
             <span>admin: {{ t('admin:filter.placeholder') }}</span>
             <span>order: {{ t('order:title') }}</span>
@@ -72,23 +72,23 @@ function addRuntimeBundle() {
           title="Language switching"
           description="Switching waits for the requested namespaces before changing the active locale."
         >
-          <div class="flex flex-wrap items-center gap-space-md">
+          <div class="flex flex-wrap items-center gap-2">
             <button
-              class="rounded-md border border-border px-space-md py-space-sm"
+              class="rounded-md border border-border px-2 py-1.5"
               type="button"
               @click="change('zh-CN', 'normal')"
             >
               中文
             </button>
             <button
-              class="rounded-md border border-border px-space-md py-space-sm"
+              class="rounded-md border border-border px-2 py-1.5"
               type="button"
               @click="change('en-US', 'normal')"
             >
               English
             </button>
             <button
-              class="rounded-md border border-border px-space-md py-space-sm"
+              class="rounded-md border border-border px-2 py-1.5"
               type="button"
               @click="change('fr-FR', 'normal')"
             >
@@ -104,9 +104,9 @@ function addRuntimeBundle() {
           title="Remote bundle"
           description="The current text stays visible until the delayed resource is ready."
         >
-          <div class="flex flex-wrap items-center gap-space-md">
+          <div class="flex flex-wrap items-center gap-2">
             <button
-              class="rounded-md border border-border px-space-md py-space-sm"
+              class="rounded-md border border-border px-2 py-1.5"
               :disabled="snapshot.status === 'loading'"
               type="button"
               @click="change('en-US', 'delayed')"
@@ -122,11 +122,11 @@ function addRuntimeBundle() {
           title="Fallback, missing key, and failure"
           description="Missing English keys fall back to Chinese; unknown keys are visible; failed loads preserve the active locale."
         >
-          <div class="flex flex-wrap items-center gap-space-md">
+          <div class="flex flex-wrap items-center gap-2">
             <span>{{ t('order:owner') }}</span>
             <span>{{ t('missing:unknown') }}</span>
             <button
-              class="rounded-md border border-border px-space-md py-space-sm"
+              class="rounded-md border border-border px-2 py-1.5"
               type="button"
               @click="change('fr-FR', 'failure')"
             >
@@ -140,9 +140,9 @@ function addRuntimeBundle() {
           title="Runtime resource editing"
           description="The host can add a newly published namespace without rebuilding the application."
         >
-          <div class="flex flex-wrap items-center gap-space-md">
+          <div class="flex flex-wrap items-center gap-2">
             <button
-              class="rounded-md border border-border px-space-md py-space-sm"
+              class="rounded-md border border-border px-2 py-1.5"
               :disabled="runtimeReady"
               type="button"
               @click="addRuntimeBundle"

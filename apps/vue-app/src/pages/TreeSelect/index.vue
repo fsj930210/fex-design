@@ -47,27 +47,27 @@ async function searchTree(value: string) { treeKeyword.value = value; treeReques
 const loadChildren = async (item: { key: TreeKey }, context: { signal: AbortSignal }) => convert(await getDemoTreeChildren(item.key, context.signal))
 </script>
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl"><div class="mx-auto grid w-full max-w-5xl gap-space-xl">
-    <header class="space-y-space-sm"><RouterLink class="text-sm text-muted-foreground" to="/">返回首页</RouterLink><h1 class="text-2xl font-semibold">TreeSelect 树选择</h1><p class="text-sm text-muted-foreground">由输入框、弹出层和树组合而成，搜索请求与结果渲染由使用方控制。</p></header>
-    <div class="grid gap-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4"><div class="mx-auto grid w-full max-w-5xl gap-4">
+    <header class="space-y-1.5"><RouterLink class="text-sm text-muted-foreground" to="/">返回首页</RouterLink><h1 class="text-2xl font-semibold">TreeSelect 树选择</h1><p class="text-sm text-muted-foreground">由输入框、弹出层和树组合而成，搜索请求与结果渲染由使用方控制。</p></header>
+    <div class="grid gap-4">
       <Card title="非受控" description="只读输入框打开树，并回填选中节点的标签。"><DemoTreeSelect :tree-data="departmentTreeData" default-value="frontend" /></Card>
-      <Card title="受控与回显" description="选中值由应用管理。"><DemoTreeSelect :tree-data="departmentTreeData" :value="controlled" @change="controlled = $event as TreeSelectValue" /><p class="mt-space-sm text-sm">当前值：{{ controlled }}</p></Card>
+      <Card title="受控与回显" description="选中值由应用管理。"><DemoTreeSelect :tree-data="departmentTreeData" :value="controlled" @change="controlled = $event as TreeSelectValue" /><p class="mt-1.5 text-sm">当前值：{{ controlled }}</p></Card>
       <Card title="多选" description="建议使用复选框提供选中反馈，同时支持自定义选中状态的展示。"><DemoTreeSelect :tree-data="departmentTreeData" multiple :default-value="['frontend', 'research']" /></Card>
       <Card title="同步搜索" description="在面板内复用 Tree 的 searchFeature。"><DemoTreeSelect :tree-data="syncData" searchable :search-value="keyword" @search="keyword = $event" /></Card>
       <Card title="异步单选搜索与路径树回显" description="真实服务端返回带路径的结果；选择后加载祖先路径树并回填标签。">
         <DemoTreeSelect :tree-data="convert(located.length ? located : roots)" searchable :value="selected" :search-value="asyncKeyword" :content-active="asyncMode === 'search' || asyncMode === 'locating'" :expanded-keys="asyncExpandedKeys" :async-loader="loadChildren" :on-tree-data-change="(nodes) => located.length ? located = toDemo(nodes) : roots = toDemo(nodes)" @expanded-keys-change="asyncExpandedKeys = $event" @search="search" @change="selected = $event as TreeSelectValue" @clear="clearAsync">
           <ListboxRoot v-if="asyncMode === 'search'" :items="results" :get-item-value="(item: unknown) => (item as DemoTreeSearchResult).node.id">
             <TreeSelectOption v-for="result in results" :key="result.node.id" :item="{ value: result.node.id, label: result.node.name, node: result.node, path: result.path, disabled: result.node.disabled }" v-slot="option">
-              <ListboxItem :value="result.node.id" :disabled="result.node.disabled" class="cursor-pointer rounded-md px-space-sm py-space-xs data-[selected=true]:bg-accent data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50" @select="choose(result, option.select)"><span class="block text-sm font-medium">{{ result.node.name }}</span><span class="block text-xs text-muted-foreground">{{ result.path.map(part => part.label).join(' / ') }}</span></ListboxItem>
+              <ListboxItem :value="result.node.id" :disabled="result.node.disabled" class="cursor-pointer rounded-md px-1.5 py-1 data-[selected=true]:bg-selected-background data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50" @select="choose(result, option.select)"><span class="block text-sm font-medium">{{ result.node.name }}</span><span class="block text-xs text-muted-foreground">{{ result.path.map(part => part.label).join(' / ') }}</span></ListboxItem>
             </TreeSelectOption>
           </ListboxRoot>
-          <p v-else class="px-space-sm py-space-xs text-sm text-muted-foreground">正在加载路径树…</p>
+          <p v-else class="px-1.5 py-1 text-sm text-muted-foreground">正在加载路径树…</p>
         </DemoTreeSelect>
       </Card>
       <Card title="异步多选搜索" description="选中项会跨搜索词保留，复选框用于展示已有选择。">
         <DemoTreeSelect :tree-data="convert(roots)" multiple :value="multiValues" searchable :search-value="multiKeyword" :content-active="multiShowResults" :expanded-keys="multiExpandedKeys" :async-loader="loadChildren" :on-tree-data-change="(nodes) => roots = toDemo(nodes)" @expanded-keys-change="multiExpandedKeys = $event" @search="searchMultiple" @change="multiValues = ($event as TreeSelectValue[]) ?? []" @clear="clearMultiple">
           <ListboxRoot v-if="multiShowResults" multiple :items="multiResults" :value="multiValues" :get-item-value="(item: unknown) => (item as DemoTreeSearchResult).node.id">
-            <TreeSelectOption v-for="result in multiResults" :key="result.node.id" toggle :clear-search-on-select="false" :item="{ value: result.node.id, label: result.node.name, node: result.node, path: result.path, disabled: result.node.disabled }" v-slot="option"><ListboxItem :value="result.node.id" :disabled="result.node.disabled" class="flex cursor-pointer items-center gap-space-sm rounded-md px-space-sm py-space-xs data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50" @select="option.select"><Checkbox :checked="option.selected" :disabled="result.node.disabled" /><span><span class="block text-sm font-medium">{{ result.node.name }}</span><span class="block text-xs text-muted-foreground">{{ result.path.map(part => part.label).join(' / ') }}</span></span></ListboxItem></TreeSelectOption>
+            <TreeSelectOption v-for="result in multiResults" :key="result.node.id" toggle :clear-search-on-select="false" :item="{ value: result.node.id, label: result.node.name, node: result.node, path: result.path, disabled: result.node.disabled }" v-slot="option"><ListboxItem :value="result.node.id" :disabled="result.node.disabled" class="flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50" @select="option.select"><Checkbox :checked="option.selected" :disabled="result.node.disabled" /><span><span class="block text-sm font-medium">{{ result.node.name }}</span><span class="block text-xs text-muted-foreground">{{ result.path.map(part => part.label).join(' / ') }}</span></span></ListboxItem></TreeSelectOption>
           </ListboxRoot>
         </DemoTreeSelect>
       </Card>

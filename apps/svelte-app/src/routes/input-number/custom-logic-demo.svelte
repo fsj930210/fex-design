@@ -15,7 +15,7 @@
   >
     <MinusIcon />
   </Button>
-  <output class="mx-space-md">{value}</output>
+  <output class="mx-2">{value}</output>
   <Button
     aria-label="Increase value"
     onclick={() => (value = stepInputNumber(value, 'increment', { min: 0, max: 10 }))}

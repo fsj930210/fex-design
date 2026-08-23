@@ -13,7 +13,7 @@ export function ChangeMetaDemo() {
       title="Change metadata"
       description="onChange returns value plus the complete selected option for backend fields."
     >
-      <div class="space-y-space-md">
+      <div class="space-y-2">
         <SelectRoot
           options={options}
           onChange={(value, meta) =>

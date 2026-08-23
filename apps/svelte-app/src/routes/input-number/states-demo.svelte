@@ -4,7 +4,7 @@
 </script>
 
 <Card title="States" description="Input state styling is reused.">
-  <div class="grid gap-space-md md:grid-cols-2">
+  <div class="grid gap-2 md:grid-cols-2">
     <InputNumber disabled defaultValue={10} />
     <InputNumber readonly defaultValue={10} />
     <InputNumber invalid defaultValue={10} />

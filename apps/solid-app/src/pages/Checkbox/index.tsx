@@ -18,7 +18,7 @@ type PermissionValue = (typeof options)[number]['value']
 function DemoSection(props: { title: string; description: string; children: JSX.Element }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div class="grid min-w-0 gap-space-md">{props.children}</div>
+      <div class="grid min-w-0 gap-2">{props.children}</div>
     </Card>
   )
 }
@@ -44,21 +44,21 @@ export function CheckboxPage() {
   const partialChecked = createMemo(() => partialValue().length > 0 && !allChecked())
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Checkbox</h1>
-            <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Boolean checks, grouped layouts, indeterminate state, disabled state, and aria-invalid
               styling.
             </p>
           </div>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <DemoSection
             title="Primitive"
             description="Self-owned checkbox primitive exported as low-level parts."

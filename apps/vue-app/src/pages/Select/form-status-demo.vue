@@ -20,7 +20,7 @@ const required = {
   <Demo
     title="Form validation status"
     description="A real Form and Field drive Select error presentation."
-    ><Form :form="form" class="space-y-space-md"
+    ><Form :form="form" class="space-y-2"
       ><Field name="framework" :validators="required" v-slot="{ field, state }"
         ><FieldRoot
           :invalid="state.meta.errors.length > 0"

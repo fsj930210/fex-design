@@ -20,21 +20,21 @@ import { VirtualDemo } from './virtual-demo'
 
 export function SelectPage() {
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Select</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Single, multiple and tags selection with local or remote search, grouping and optional
               virtualization.
             </p>
           </div>
         </header>
-        <div className="grid gap-space-xl">
+        <div className="grid gap-4">
           <SingleDemo />
           <MultipleDemo />
           <TagsDemo />

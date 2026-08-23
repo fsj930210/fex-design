@@ -15,7 +15,7 @@ export function CustomCollapseDemo() {
             <CollapseItem value={item.value}>
               {({ state, actions }) => (
                 <>
-                  <div class="flex items-center gap-space-sm px-space-sm py-space-sm">
+                  <div class="flex items-center gap-1.5 px-1.5 py-1.5">
                     <Button variant="ghost" size="icon-sm" aria-expanded={state.expanded} aria-label="Toggle panel" onClick={actions.toggle}>
                       <ChevronRightIcon class={cn('size-4 transition-transform', state.expanded && '-rotate-90')} />
                     </Button>

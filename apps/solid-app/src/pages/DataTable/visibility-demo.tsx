@@ -39,7 +39,7 @@ export function VisibilityDataTableDemo() {
       description="Visibility state stays in TanStack. The toggle is a separate primitive and respects per-column enableHiding; Name cannot be hidden and Visits starts hidden."
     >
       <DemoBranch title="Toggle visible leaf columns">
-        <div class="space-y-space-sm">
+        <div class="space-y-1.5">
           <DataTableColumnVisibility table={table} />
           <DataTable table={table} />
         </div>

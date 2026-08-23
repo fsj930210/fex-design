@@ -86,7 +86,7 @@ export function RowEditingDataTableDemo() {
             </Button>
           }
         >
-          <span class="inline-flex gap-space-sm">
+          <span class="inline-flex gap-1.5">
             <Button size="sm" onClick={save}>
               Save
             </Button>

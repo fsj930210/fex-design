@@ -28,7 +28,7 @@ import { Card } from '@fex-design/solid/ui/card'
 export function ModalDrawerDemo() {
   return (
     <Card title="Modal and Drawer" description="Watermark can wrap modal and drawer content.">
-      <div class="flex flex-wrap gap-space-md">
+      <div class="flex flex-wrap gap-2">
         <Dialog>
           <DialogTrigger>
             {(slot) => (

@@ -26,7 +26,7 @@ export function MultipleUploadDemo() {
       description="一次选择多个文件，可逐个上传，也可以手动启动整个文件队列。"
     >
       <UploadRoot controller={upload}>
-        <div className="flex gap-space-sm">
+        <div className="flex gap-1.5">
           <UploadTrigger>{({ props }) => <Button {...props}>选择多个文件</Button>}</UploadTrigger>
           <Button
             variant="outline"

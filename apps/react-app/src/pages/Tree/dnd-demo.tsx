@@ -66,7 +66,7 @@ export function TreeDndDemo() {
       <TreeRoot
         controller={controller}
         indent={24}
-        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        className="max-w-xl rounded-md border border-border bg-background p-1.5"
       >
         <TreeViewport>
           {(item) => <DraggableTreeRow key={item.key} controller={controller} itemKey={item.key} />}

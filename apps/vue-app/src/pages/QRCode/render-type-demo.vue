@@ -5,7 +5,7 @@ import Card from '@fex-design/vue/ui/card'
 
 <template>
   <Card title="自定义渲染类型" description="同一个 Root 模型可以选择 SVG 或 Canvas 渲染面。">
-    <div class="flex flex-wrap gap-space-lg">
+    <div class="flex flex-wrap gap-3">
       <QrCodeRoot value="https://fex.design/qrcode/svg" :size="160">
         <QrCodeSvg aria-label="SVG QR code"><QrCodeBackground /><QrCodeModules /></QrCodeSvg>
       </QrCodeRoot>

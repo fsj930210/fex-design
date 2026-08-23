@@ -68,7 +68,7 @@ export class CalendarComponent {
 
   protected getCellClassName(cell: CalendarCell) {
     return [
-      'flex min-h-14 items-center justify-center rounded-md p-space-xs text-center text-sm',
+      'flex min-h-14 items-center justify-center rounded-md p-1 text-center text-sm',
       cell.state.disabled ? 'cursor-not-allowed opacity-40' : '',
       cell.state.outside && !cell.state.selected ? 'text-muted-foreground' : 'text-foreground',
     ].join(' ')
@@ -76,7 +76,7 @@ export class CalendarComponent {
 
   protected getContentClassName(cell: CalendarCell) {
     return [
-      'inline-flex h-16 w-20 flex-col items-center justify-center rounded-md border px-space-sm py-space-xs transition-colors',
+      'inline-flex h-16 w-20 flex-col items-center justify-center rounded-md border px-1.5 py-1 transition-colors',
       cell.state.selected ? 'bg-foreground text-background shadow-sm' : '',
       cell.state.today && !cell.state.selected ? 'border-primary' : 'border-transparent',
       !cell.state.disabled && !cell.state.selected ? 'hover:bg-muted-background' : '',

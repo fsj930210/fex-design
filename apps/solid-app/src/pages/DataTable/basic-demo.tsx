@@ -31,7 +31,7 @@ export function BasicDataTableDemo() {
       title="Core rendering and stable inline columns"
       description="The caller passes a TanStack v9 table definition. DataTable stabilizes the structural column tree, so this inline columns array does not require useMemo; getRowId remains mandatory."
     >
-      <div class="space-y-space-lg">
+      <div class="space-y-3">
         <DemoBranch title="Default density">
           <DataTable table={table} />
         </DemoBranch>

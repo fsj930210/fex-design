@@ -61,8 +61,8 @@ type Province = keyof typeof locations
   <Card
     title="Dynamic validation and cascading updates"
     description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"
-    ><div class="grid gap-space-xl lg:grid-cols-2">
-      <FormHost :form="dynamicRuleForm" class="grid gap-space-lg"
+    ><div class="grid gap-4 lg:grid-cols-2">
+      <FormHost :form="dynamicRuleForm" class="grid gap-3"
         ><Field name="nicknameRequired" v-slot="{ field, state }"
           ><FieldRoot orientation="horizontal"
             ><FieldControl v-slot="{ props }"
@@ -92,7 +92,7 @@ type Province = keyof typeof locations
                   v-bind="props"
                   @blur="field.handleBlur" /></InputRoot></FieldControl></FieldRoot></Field
         ><Button class="w-fit" type="submit">检查规则</Button></FormHost
-      ><FormHost :form="cascadeForm" class="grid gap-space-lg"
+      ><FormHost :form="cascadeForm" class="grid gap-3"
         ><Field name="province" v-slot="{ field, state }"
           ><FieldRoot
             ><FieldLabel>省份</FieldLabel

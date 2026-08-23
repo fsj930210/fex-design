@@ -12,16 +12,16 @@ import StatusDemo from './status-demo.vue'
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-md">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">Back home</RouterLink>
         <h1 class="text-2xl font-semibold text-foreground">QRCode</h1>
         <p class="max-w-2xl text-sm leading-6 text-muted-foreground">
           使用 primitive 部件组合二维码结构、渲染面、中心内容和自定义状态。
         </p>
       </header>
-      <div class="grid gap-space-xl">
+      <div class="grid gap-4">
         <BasicDemo />
         <IconDemo />
         <StatusDemo />

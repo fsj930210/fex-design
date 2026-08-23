@@ -33,7 +33,7 @@ function errors(items: unknown[]) {
     title="Form validation"
     description="Submit the real Form empty to show Field error text and Textarea error styling."
   >
-    <FormHost :form="form" class="grid max-w-xl gap-space-md">
+    <FormHost :form="form" class="grid max-w-xl gap-2">
       <Field name="message" :validators="validators" v-slot="{ field, state }">
         <FieldRoot required :invalid="invalid(state)" :has-error="invalid(state)">
           <FieldLabel>Message <FieldRequiredIndicator /></FieldLabel>

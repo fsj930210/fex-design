@@ -24,7 +24,7 @@ export function TreeBatchActionsDemo() {
       title="Controller batch actions"
       description="All batch operations are explicit controller actions. selectAll only acts when multiple selection is enabled."
     >
-      <div className="mb-space-md flex flex-wrap gap-space-sm">
+      <div className="mb-2 flex flex-wrap gap-1.5">
         <Button
           size="sm"
           variant="outline"
@@ -74,7 +74,7 @@ export function TreeBatchActionsDemo() {
         fieldNames={departmentFieldNames}
         isLeaf={(node) => node.childCount === 0}
         checkable
-        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        className="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </TreeDemoSection>
   )

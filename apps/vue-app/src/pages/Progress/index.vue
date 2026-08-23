@@ -60,18 +60,18 @@ const lines = {
 }
 </script>
 <template>
-  <main class="grid gap-space-xl p-page-padding">
+  <main class="grid gap-4 p-2 md:p-6">
     <Card
       title="Basic"
       description="A determinate line progress bar with an external label and value."
-      ><div class="grid max-w-xl gap-space-sm">
+      ><div class="grid max-w-xl gap-1.5">
         <div class="flex justify-between text-sm">
           <span>Upload progress</span><span class="text-muted-foreground">35%</span>
         </div>
         <Progress :value="35" /></div></Card
     ><Card title="Status" description="Info, warning, success and error use system semantic tokens."
-      ><div class="grid max-w-xl gap-space-lg">
-        <div v-for="[label, value, status] in lines.status" :key="label" class="grid gap-space-sm">
+      ><div class="grid max-w-xl gap-3">
+        <div v-for="[label, value, status] in lines.status" :key="label" class="grid gap-1.5">
           <div class="flex justify-between text-sm">
             <span>{{ label }}</span
             ><span class="text-muted-foreground">{{ value }}%</span>
@@ -79,22 +79,22 @@ const lines = {
           <Progress :value="value as number" :status="status as any" />
         </div></div></Card
     ><Card title="Color" description="Use arbitrary CSS colors, track colors and gradients."
-      ><div class="grid max-w-xl gap-space-lg">
+      ><div class="grid max-w-xl gap-3">
         <Progress :value="68" color="#7c3aed" /><Progress
           :value="52"
           color="#0891b2"
           track-color="#cffafe"
         /><Progress :value="88" :color="gradient" /></div></Card
     ><Card title="Segmented" description="Use hard color stops to show staged progress."
-      ><div class="grid max-w-xl gap-space-xl">
-        <div class="grid gap-space-sm">
+      ><div class="grid max-w-xl gap-4">
+        <div class="grid gap-1.5">
           <div class="flex justify-between text-sm">
             <span>Segmented line</span><span class="text-muted-foreground">60%</span>
           </div>
           <Progress :value="60" :color="segmentGradient" show-value />
         </div>
-        <div class="flex flex-wrap gap-space-xl">
-          <div class="grid justify-items-center gap-space-sm">
+        <div class="flex flex-wrap gap-4">
+          <div class="grid justify-items-center gap-1.5">
             <Progress
               variant="circle"
               :value="60"
@@ -105,7 +105,7 @@ const lines = {
             />
             <span class="text-sm">Circle</span>
           </div>
-          <div class="grid justify-items-center gap-space-sm">
+          <div class="grid justify-items-center gap-1.5">
             <Progress
               variant="dashboard"
               :value="60"
@@ -120,8 +120,8 @@ const lines = {
         </div>
       </div></Card
     ><Card title="Step Line" description="Show progress as fixed linear steps."
-      ><div class="grid gap-space-lg">
-        <div v-for="demo in stepLineDemos" :key="demo.value" class="flex items-center gap-space-sm">
+      ><div class="grid gap-3">
+        <div v-for="demo in stepLineDemos" :key="demo.value" class="flex items-center gap-1.5">
           <div class="flex gap-1">
             <span
               v-for="index in demo.steps"
@@ -144,11 +144,11 @@ const lines = {
         </div>
       </div></Card
     ><Card title="Step Circle" description="Show progress as fixed circular steps with custom count and gap."
-      ><div class="flex flex-wrap gap-space-xl">
+      ><div class="flex flex-wrap gap-4">
         <div
           v-for="demo in circleStepDemos"
           :key="demo.label"
-          class="grid justify-items-center gap-space-sm"
+          class="grid justify-items-center gap-1.5"
         >
           <div class="relative inline-flex size-32 items-center justify-center">
             <svg aria-hidden="true" class="size-32" viewBox="0 0 128 128">
@@ -181,21 +181,21 @@ const lines = {
         </div>
       </div></Card
     ><Card title="Size" description="Configure line thickness."
-      ><div class="grid max-w-xl gap-space-lg">
+      ><div class="grid max-w-xl gap-3">
         <div
           v-for="[label, value, thickness] in lines.sizes"
           :key="label"
-          class="grid gap-space-sm"
+          class="grid gap-1.5"
         >
           <span class="text-sm">{{ label }}</span
           ><Progress :value="value as number" :thickness="thickness as number" />
         </div></div></Card
     ><Card title="Linecap" description="Round line / round track, butt and square endings with the same value."
-      ><div class="grid max-w-xl gap-space-lg">
+      ><div class="grid max-w-xl gap-3">
         <div
           v-for="[label, linecap, trackLinecap] in lines.linecaps"
           :key="label"
-          class="grid gap-space-sm"
+          class="grid gap-1.5"
         >
           <span class="text-sm">{{ label }}</span
           ><Progress
@@ -206,7 +206,7 @@ const lines = {
           />
         </div></div></Card
     ><Card title="Circle" description="Circular progress supports status and gradients."
-      ><div class="flex flex-wrap gap-space-xl">
+      ><div class="flex flex-wrap gap-4">
         <Progress
           variant="circle"
           :value="72"
@@ -230,7 +230,7 @@ const lines = {
           show-value
         /></div></Card
     ><Card title="Dashboard" description="Configure the gap degree and placement."
-      ><div class="flex flex-wrap gap-space-xl">
+      ><div class="flex flex-wrap gap-4">
         <Progress
           variant="dashboard"
           :value="64"
@@ -248,17 +248,17 @@ const lines = {
           show-value
         /></div></Card
     ><Card title="Dynamic" description="Control the same progress value from external actions."
-      ><div class="grid max-w-xl gap-space-lg">
-        <div class="grid gap-space-sm">
+      ><div class="grid max-w-xl gap-3">
+        <div class="grid gap-1.5">
           <div class="flex justify-between text-sm">
             <span>Controlled line</span
             ><span class="text-muted-foreground">{{ dynamicValue }}%</span>
           </div>
           <Progress :value="dynamicValue" />
         </div>
-        <div class="flex flex-wrap items-center gap-space-xl">
+        <div class="flex flex-wrap items-center gap-4">
           <Progress variant="circle" :value="dynamicValue" :size="96" :thickness="8" show-value />
-          <div class="flex gap-space-sm">
+          <div class="flex gap-1.5">
             <Button variant="outline" size="icon-sm" :disabled="dynamicValue <= 0" @click="decrease"
               ><MinusIcon /></Button
             ><Button
@@ -271,9 +271,9 @@ const lines = {
           </div>
         </div></div></Card
     ><Card title="Indeterminate" description="Use a moving indicator when the value is unknown."
-      ><div class="grid max-w-xl gap-space-xl">
+      ><div class="grid max-w-xl gap-4">
         <div><span>Processing</span><Progress :value="null" /></div>
-        <div class="grid w-fit justify-items-center gap-space-sm">
+        <div class="grid w-fit justify-items-center gap-1.5">
           <Progress variant="circle" :value="null" :size="72" :thickness="6" color="#1677ff" />
           <span class="text-sm">Processing</span>
         </div>

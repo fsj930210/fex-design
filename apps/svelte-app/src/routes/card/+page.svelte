@@ -28,21 +28,21 @@
   )
 </script>
 
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Card</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           用于承载相关内容、示例分组和管理后台中的紧凑信息块。
         </p>
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <Card title="Primitive" description="卡片底层结构与 slot 语义。">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <PrimitiveCard class="w-full">
             <CardHeader class="border-b border-border">
               <CardTitle>Primitive card</CardTitle>
@@ -54,7 +54,7 @@
       </Card>
 
       <Card title="Ui" description="面向业务的默认卡片封装。">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Card title="Basic" description="包含标题、描述和内容区域。">
             <p class="text-sm leading-6 text-foreground">
               Card 默认使用系统边框、背景、圆角和 spacing token。
@@ -70,11 +70,11 @@
       </Card>
 
       <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           {#each spacingOptions as option}
             <button
               class={[
-                'rounded-md border px-space-lg py-space-xs text-sm transition-colors',
+                'rounded-md border px-3 py-1 text-sm transition-colors',
                 spacing === option.value
                   ? 'border-focus bg-muted-background text-foreground'
                   : 'border-border bg-background text-muted-foreground hover:bg-muted-background hover:text-foreground',
@@ -86,7 +86,7 @@
             </button>
           {/each}
         </div>
-        <div class="mt-space-xl flex justify-center">
+        <div class="mt-4 flex justify-center">
           <Card
             size={selectedSpacing.size}
             title="Login to your account"
@@ -94,15 +94,15 @@
             class={{ root: 'w-full max-w-md' }}
             {...(selectedSpacing.rootStyle ? { style: { root: selectedSpacing.rootStyle } } : {})}
           >
-            <div class="grid gap-space-lg">
-              <div class="grid gap-space-sm">
+            <div class="grid gap-3">
+              <div class="grid gap-1.5">
                 <div class="text-sm font-medium text-foreground">Email</div>
-                <div class="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground">
+                <div class="h-9 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground">
                   m@example.com
                 </div>
               </div>
-              <div class="grid gap-space-sm">
-                <div class="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
+              <div class="grid gap-1.5">
+                <div class="flex items-center justify-between gap-2 text-sm font-medium text-foreground">
                   <span>Password</span>
                   <span class="font-normal text-muted-foreground">Forgot your password?</span>
                 </div>
@@ -110,11 +110,11 @@
               </div>
             </div>
             {#snippet footer()}
-              <div class="grid w-full gap-space-md">
-                <div class="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background">
+              <div class="grid w-full gap-2">
+                <div class="rounded-md bg-foreground px-3 py-1.5 text-center text-sm font-medium text-background">
                   Login
                 </div>
-                <div class="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground">
+                <div class="rounded-md border border-border bg-background px-3 py-1.5 text-center text-sm font-medium text-foreground">
                   Login with Google
                 </div>
               </div>

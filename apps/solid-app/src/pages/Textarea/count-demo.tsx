@@ -9,7 +9,7 @@ export function CountDemo() {
 
   return (
     <Card title="Count" description="Character count is derived by the caller and rendered wherever needed.">
-      <div class="max-w-xl space-y-space-sm">
+      <div class="max-w-xl space-y-1.5">
         <TextareaRoot value={value()} onChange={setValue} autoSize={{ minRows: 3, maxRows: 6 }}>
           <TextareaInput aria-label="Textarea with count" maxLength={maxLength} />
         </TextareaRoot>

@@ -30,7 +30,7 @@ export function LayoutDemo() {
           </InputRoot>
         </FieldRoot>
       </FieldGroup>
-      <FieldGroup orientation="inline" className="mt-space-lg">
+      <FieldGroup orientation="inline" className="mt-3">
         <FieldRoot orientation="inline">
           <FieldLabel>关键字</FieldLabel>
           <InputRoot value="">

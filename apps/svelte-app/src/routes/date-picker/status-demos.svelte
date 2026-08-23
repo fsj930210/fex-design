@@ -15,7 +15,7 @@
   } from '@fex-design/svelte/primitive/date-picker'
   import Card from '@fex-design/svelte/ui/card'
 
-  const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-space-md'
+  const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-2'
 </script>
 
 <Card title="表单状态" description="DatePicker 和 RangePicker 接收外部表单状态，仅负责展示 error / warning 样式。" class={{ content: demoContentClass }}>

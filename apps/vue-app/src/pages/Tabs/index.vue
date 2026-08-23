@@ -6,9 +6,9 @@ import SortableDemo from './sortable-demo.vue'
 import CustomDemo from './custom-demo.vue'
 </script>
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-sm">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-1.5">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
@@ -19,7 +19,7 @@ import CustomDemo from './custom-demo.vue'
           </p>
         </div>
       </header>
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <BasicDemo /><VariantDemo /><DynamicDemo /><SortableDemo /><CustomDemo />
       </div>
     </div>

@@ -2,6 +2,10 @@
   "name": "@fex-design/svelte",
   "private": true,
   "type": "module",
+  "scripts": {
+    "typecheck": "svelte-check --tsconfig tsconfig.json",
+    "lint": "oxlint src"
+  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.svelte",
@@ -304,7 +308,9 @@
     "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
-    "svelte": "5.56.8"
+    "svelte": "5.56.8",
+    "svelte-check": "latest",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"

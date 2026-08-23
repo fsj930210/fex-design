@@ -32,22 +32,22 @@ function setMultipleValue(next: number[]) {
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Slider</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             Primitive slider with shared core value logic.
           </p>
         </div>
       </header>
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card title="Basic" description="Uncontrolled slider uses defaultValue.">
-          <div class="grid gap-space-sm">
+          <div class="grid gap-1.5">
             <SliderRoot :default-value="[32]" aria-label="Volume" @value-change="setBasicValue">
               <SliderTrack><SliderRange /></SliderTrack>
               <SliderThumb aria-label="Volume" />
@@ -56,7 +56,7 @@ function setMultipleValue(next: number[]) {
           </div>
         </Card>
         <Card title="Controlled" description="Controlled slider uses value and valueChange.">
-          <div class="grid gap-space-sm">
+          <div class="grid gap-1.5">
             <SliderRoot
               :value="controlledValue"
               aria-label="Controlled slider"
@@ -71,7 +71,7 @@ function setMultipleValue(next: number[]) {
           </div>
         </Card>
         <Card title="Range" description="Use an array with two values for a range slider.">
-          <div class="grid gap-space-sm">
+          <div class="grid gap-1.5">
             <SliderRoot
               :default-value="[20, 80]"
               :min-steps-between-thumbs="4"
@@ -89,7 +89,7 @@ function setMultipleValue(next: number[]) {
           title="Multiple Thumbs"
           description="Use more than two values to create multiple thumbs."
         >
-          <div class="grid gap-space-sm">
+          <div class="grid gap-1.5">
             <SliderRoot
               :default-value="[15, 45, 75]"
               :min-steps-between-thumbs="4"
@@ -110,7 +110,7 @@ function setMultipleValue(next: number[]) {
           title="Orientation"
           description="Slider supports horizontal and vertical orientation."
         >
-          <div class="flex items-center gap-space-xl">
+          <div class="flex items-center gap-4">
             <div class="w-full max-w-md">
               <SliderRoot :default-value="[45]" aria-label="Horizontal slider"
                 ><SliderTrack><SliderRange /></SliderTrack
@@ -123,7 +123,7 @@ function setMultipleValue(next: number[]) {
           </div>
         </Card>
         <Card title="Sizes" description="Slider supports sm, default, and lg sizes.">
-          <div class="grid gap-space-md">
+          <div class="grid gap-2">
             <SliderRoot size="sm" :default-value="[25]" aria-label="Small slider"
               ><SliderTrack><SliderRange /></SliderTrack><SliderThumb aria-label="Small slider"
             /></SliderRoot>
@@ -136,7 +136,7 @@ function setMultipleValue(next: number[]) {
           </div>
         </Card>
         <Card title="Disabled" description="Disabled state blocks input.">
-          <div class="grid gap-space-sm">
+          <div class="grid gap-1.5">
             <SliderRoot disabled :default-value="[60]" aria-label="Disabled slider">
               <SliderTrack><SliderRange /></SliderTrack>
               <SliderThumb aria-label="Disabled slider" />

@@ -64,10 +64,10 @@ const columns = computed(() => analyzeTimeFormat(resolvedFormat.value, props.use
             v-else-if="column.unit === 'second'"
             :step="step?.second" /><TimePickerPeriodColumn v-else /></template
       ></TimePickerPanel>
-      <div v-if="$slots.panelExtra" class="border-t border-border p-space-sm text-sm">
+      <div v-if="$slots.panelExtra" class="border-t border-border p-1.5 text-sm">
         <slot name="panelExtra" />
       </div>
-      <div class="flex justify-end border-t border-border p-space-sm">
+      <div class="flex justify-end border-t border-border p-1.5">
         <Button size="sm" variant="ghost" @click="open = false">确定</Button>
       </div>
     </TimePickerContent>

@@ -8,7 +8,7 @@ import { Link } from 'react-router'
 function DemoSection(props: { title: string; description: string; children: ReactNode }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div className="flex min-w-0 flex-wrap items-center gap-space-md">{props.children}</div>
+      <div className="flex min-w-0 flex-wrap items-center gap-2">{props.children}</div>
     </Card>
   )
 }
@@ -55,21 +55,21 @@ export function DialogPage() {
   const [open, setOpen] = useState(false)
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Dialog</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Primitive modal composition backed by the shared core overlay controller.
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <DemoSection
             title="Primitive"
             description="Trigger exposes render props and content owns ARIA labels."

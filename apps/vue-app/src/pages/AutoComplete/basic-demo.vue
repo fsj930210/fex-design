@@ -22,6 +22,6 @@ const selected = ref('No suggestion accepted')
       <AutoCompleteTrigger placeholder="Try A or Bella" clearable />
       <AutoCompleteContent />
     </AutoCompleteRoot>
-    <p class="mt-space-sm text-xs text-muted-foreground">{{ selected }}</p>
+    <p class="mt-1.5 text-xs text-muted-foreground">{{ selected }}</p>
   </Card>
 </template>

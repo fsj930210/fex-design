@@ -2,7 +2,7 @@
   title="Form validation states"
   description="Submit the real Form empty to see the error state; selecting exactly one member shows the warning style."
 >
-  <form [fexForm]="form" class="space-y-space-lg">
+  <form [fexForm]="form" class="space-y-3">
     <ng-container [fexField]="form" name="members" [validators]="validators" #memberField="field">
       <fex-field-root [invalid]="invalid(memberField.api)" [hasError]="invalid(memberField.api)">
         <label fexFieldLabel>Project members</label>

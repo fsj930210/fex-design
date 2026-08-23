@@ -3,7 +3,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function CardDemo() {
   return (
     <Card title="Card" description="Preserve a media card layout while loading.">
-      <div className="grid max-w-sm gap-space-md">
+      <div className="grid max-w-sm gap-2">
         <Skeleton className="aspect-video w-full" />
         <Skeleton className="h-5 w-3/5" />
         <Skeleton className="h-4 w-full" />

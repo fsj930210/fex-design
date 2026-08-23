@@ -28,7 +28,7 @@
   {...rest}
   use:item
   class={cn(
-    'flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg',
+    'flex min-h-12 cursor-grab touch-none select-none items-center gap-1.5 rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg',
     className,
   )}
   style={itemStyle}

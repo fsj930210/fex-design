@@ -130,7 +130,7 @@ export function SortableOverlay({ className, children, style, ...props }: Sortab
       data-sortable-overlay=""
       className={cn(
         sortableItemClassName,
-        'bg-card text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
+        'bg-elevated-background text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
         className,
       )}
       style={overlayStyle}

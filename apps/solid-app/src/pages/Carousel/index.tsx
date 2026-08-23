@@ -91,8 +91,8 @@ function Slides() {
 
 export function CarouselPage() {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
         <A href="/" class="text-sm text-muted-foreground">
           返回首页
         </A>

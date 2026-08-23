@@ -9,8 +9,8 @@
 
 ## 仓库定位
 
-- 本仓库是 `pnpm + nx + monorepo` 项目，包管理器以根目录 `package.json` 中的 `pnpm@11.4.0` 为准。
-- 根目录只放 workspace、Nx、TypeScript、格式化、lint 等跨项目配置；业务代码和组件代码放到对应 `apps/*`、`packages/*` 下。
+- 本仓库是 `pnpm workspace + Turbo + monorepo` 项目，包管理器以根目录 `package.json` 中的 `pnpm@11.19.0` 为准。
+- 根目录只放 workspace、Turbo、TypeScript、格式化、lint 等跨项目配置；业务代码和组件代码放到对应 `apps/*`、`packages/*` 下。
 - 优先遵循已有目录结构、命名方式和局部实现风格；新增抽象前先确认它能服务多个真实场景，而不是只为当前文件“显得高级”。
 
 ## 目录约定
@@ -20,7 +20,7 @@
 - `apps/solid-app`：Solid 管理端应用。
 - `apps/svelte-app`：Svelte 管理端应用。
 - `apps/angular-app`：Angular 管理端应用。
-- `apps/docs`：项目文档站。
+- `docs`：项目设计文档，以及后续 Solid 官网与五框架 Preview 的根目录。
 - `packages/@fex-design/core`：跨框架组件内核、类型、纯逻辑能力。
 - `packages/@fex-design/react`：React 组件库，对外导入前缀使用 `@fex-design/react/*`。
 - `packages/@fex-design/vue`：Vue 组件库。
@@ -242,17 +242,17 @@
 
 ## 配置与脚本
 
-- Nx target 以各 package/app 的 `project.json` 为准。
+- 各 package/app 的真实命令统一放在自己的 `package.json` scripts 中，Turbo 只在根目录 `turbo.json` 编排任务关系、并发和缓存。
 - 通用 lint/format/tsconfig 配置优先从 `configs/*` 复用，不在单个项目里复制一份。
 - 常用脚本：
-  - `pnpm dev`：并行启动所有 dev target。
+  - `pnpm dev`：通过 Turbo 并行启动五个管理端应用。
   - `pnpm dev:react`、`pnpm dev:vue`、`pnpm dev:solid`、`pnpm dev:svelte`、`pnpm dev:angular`：启动单个管理端。
-  - `pnpm dev:docs`：启动文档站。
+  - 文档站尚未创建可运行 package，因此当前不提供 `pnpm dev:docs`；后续在根目录 `docs` 建立官网后再补充。
   - `pnpm typecheck`、`pnpm lint`、`pnpm build`、`pnpm check`：只在用户要求时运行。
 
 ## 文档与注释
 
-- 公共能力、新组件、新约定需要补充必要文档，优先放在 `apps/docs/content` 或相关 package 附近的现有文档位置。
+- 公共能力、新组件、新约定需要补充必要文档，优先放在根目录 `docs` 或相关 package 附近的现有文档位置。
 - 注释只解释“不明显的原因”和“约束”，不要复述代码做了什么。
 - 临时方案、兼容逻辑、非直觉依赖必须说明原因，避免后续维护者误删或误改。
 
@@ -268,7 +268,7 @@
 
 ## 开发阶段验证
 
-- 开发阶段默认不要运行 `build`。除非用户明确要求构建、发布前验证、排查仅生产构建出现的问题，或者用户直接要求运行对应命令，否则不要主动执行 `pnpm build`、`nx build` 或各 app/package 的 build target。
+- 开发阶段默认不要运行 `build`。除非用户明确要求构建、发布前验证、排查仅生产构建出现的问题，或者用户直接要求运行对应命令，否则不要主动执行 `pnpm build`、`turbo run build` 或各 app/package 的 build script。
 - 修改组件、样式和示例页后的优先验证方式是使用固定本地端口打开真实页面，直接在浏览器里检查 DOM、computed style、动画和交互表现。
 - 新增或修改组件 demo、示例路由、导航入口后，必须在对应固定端口用浏览器实际打开页面验证，不能只依赖 typecheck 或凭代码判断。验证至少包括：页面能打开且无运行时红屏/控制台错误；示例入口能点击；弹窗、浮层、菜单等交互组件必须实际触发一次打开和关闭；React/Vue/Solid/Svelte/Angular 多框架同步 demo 时，必须抽查各框架页面的关键样式规格是否一致，例如按钮尺寸、间距、弹层位置、footer 布局和遮罩效果。发现任一框架打不开或视觉明显不一致，必须先修复并重新浏览器验证后再交付。
 - Demo 页面布局验证必须读取真实 DOM 的 bounding box：至少计算前两个相邻 `Card` 的 `second.top - first.bottom`，确认结果等于当前 `gap-space-xl` 的实际像素值且大于 `0`。只检查源码里存在 `gap`/`space-y` class、只看截图大概有空隙、或只验证组件交互，均不能证明 Demo Card 间距合格。多框架同步时五个框架必须分别测量。

@@ -2,6 +2,12 @@
   "name": "@fex-design/react-app",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4001 --strictPort",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src vite.config.ts"
+  },
   "dependencies": {
     "@fex-design/core": "workspace:*",
     "@fex-design/react": "workspace:*",

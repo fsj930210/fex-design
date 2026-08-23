@@ -72,7 +72,7 @@ export class FormComponent {
   protected readonly locations = locations
   protected readonly provinceNames = Object.keys(locations) as Province[]
   protected readonly selectClass =
-    'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/20'
+    'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-focus focus-visible:ring-2 focus-visible:ring-focus/20'
   protected readonly result = signal('尚未提交')
   protected readonly instanceResult = signal('点击按钮读取或设置字段值')
   protected readonly loginForm = injectForm({

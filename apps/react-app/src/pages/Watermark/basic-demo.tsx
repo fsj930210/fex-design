@@ -5,7 +5,7 @@ export function BasicDemo() {
   return (
     <Card title="Basic" description="Text content is rendered as a repeated canvas watermark.">
       <Watermark content="FEX Admin" className="h-56 rounded-md border border-border bg-background">
-        <div className="grid h-full place-items-center p-space-xl text-center text-sm text-muted-foreground">
+        <div className="grid h-full place-items-center p-4 text-center text-sm text-muted-foreground">
           Watermark protects this content area without blocking pointer events.
         </div>
       </Watermark>

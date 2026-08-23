@@ -23,7 +23,7 @@ const startAll = () => upload.getFeature<UploadFeatureApi>('upload')?.startAll()
     title="多文件手动上传"
     description="一次选择多个文件，可逐个上传，也可以手动启动整个文件队列。"
     ><UploadRoot :controller="upload"
-      ><div class="flex gap-space-sm">
+      ><div class="flex gap-1.5">
         <UploadTrigger v-slot="{ props }"
           ><Button v-bind="props">选择多个文件</Button></UploadTrigger
         ><Button variant="outline" @click="startAll">全部上传</Button>

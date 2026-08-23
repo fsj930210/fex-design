@@ -8,7 +8,7 @@ import {
 import Card from '@fex-design/vue/ui/card'
 import DemoDatePicker from './demo-date-picker.vue'
 
-const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-space-md'
+const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-2'
 </script>
 
 <template>

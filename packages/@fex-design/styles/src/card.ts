@@ -2,7 +2,7 @@ export const cardClassName = [
   'group/card flex flex-col gap-[var(--card-spacing)] overflow-visible',
   '[--card-spacing:16px]',
   'data-[size=sm]:[--card-spacing:12px] data-[size=md]:[--card-spacing:16px] data-[size=lg]:[--card-spacing:24px]',
-  'rounded-md bg-card-background py-[var(--card-spacing)] text-sm text-card-foreground ring-1 ring-foreground/10',
+  'rounded-md bg-[var(--card-background,var(--elevated-background))] py-[var(--card-spacing)] text-sm text-[var(--card-foreground,var(--elevated-foreground))] ring-1 ring-foreground/10',
   'has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0',
   '*:[img:first-child]:rounded-t-md *:[img:last-child]:rounded-b-md',
 ].join(' ')

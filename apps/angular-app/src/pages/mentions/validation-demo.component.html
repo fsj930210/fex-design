@@ -1,5 +1,5 @@
 <fex-card title="Form validation" description="Invalid state drives the default Textarea styling.">
-  <form [fexForm]="form" class="grid max-w-xl gap-space-md">
+  <form [fexForm]="form" class="grid max-w-xl gap-2">
     <ng-container [fexField]="form" name="prompt" [validators]="validators" #promptField="field">
       <fex-field-root [required]="true" [invalid]="invalid(promptField.api)" [hasError]="invalid(promptField.api)">
         <label fexFieldLabel>Prompt <span fexFieldRequiredIndicator>*</span></label>

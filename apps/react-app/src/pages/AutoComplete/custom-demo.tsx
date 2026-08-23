@@ -9,7 +9,7 @@ import { fieldNames, userSuggestions, type UserSuggestion } from './data'
 
 export function CustomDemo() {
   return (
-    <div className="grid gap-space-xl md:grid-cols-2">
+    <div className="grid gap-4 md:grid-cols-2">
       <Card
         title="Custom items and disabled suggestion"
         description="Original backend items drive richer rows; Alex is disabled."
@@ -53,7 +53,7 @@ export function CustomDemo() {
           />
           <AutoCompleteContent />
         </AutoCompleteRoot>
-        <p id="reviewer-error" className="mt-space-sm text-xs text-danger">
+        <p id="reviewer-error" className="mt-1.5 text-xs text-danger">
           Choose a reviewer or enter a new name.
         </p>
       </Card>

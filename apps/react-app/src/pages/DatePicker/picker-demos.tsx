@@ -68,8 +68,8 @@ export function PickerDemos() {
         title="切换日期和面板"
         description="受控 open 展示 Popover；Header 的单箭头切月、双箭头切年，年/月标签可切换面板。"
       >
-        <div className="space-y-space-sm">
-          <div className="flex gap-space-sm">
+        <div className="space-y-1.5">
+          <div className="flex gap-1.5">
             <Button size="sm" variant="outline" onClick={() => setOpen(true)}>
               打开面板
             </Button>

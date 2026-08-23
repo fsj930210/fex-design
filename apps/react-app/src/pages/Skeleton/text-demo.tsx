@@ -3,7 +3,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function TextDemo() {
   return (
     <Card title="Text" description="Use varied widths to suggest paragraph rhythm.">
-      <div className="grid max-w-xl gap-space-sm">
+      <div className="grid max-w-xl gap-1.5">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-2/3" />

@@ -1,6 +1,6 @@
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-md">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-2">
       <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">返回首页</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Form and Field primitives</h1>
@@ -16,7 +16,7 @@
       title="Basic form"
       description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
     >
-      <form [fexForm]="loginForm" class="grid max-w-xl gap-space-lg">
+      <form [fexForm]="loginForm" class="grid max-w-xl gap-3">
         <ng-container
           [fexField]="loginForm"
           name="account"
@@ -101,7 +101,7 @@
             </div>
           </fex-field-root>
         </ng-container>
-        <div class="flex gap-space-sm">
+        <div class="flex gap-1.5">
           <button
             fexButton
             type="submit"
@@ -120,7 +120,7 @@
       title="Validation timing, async validation and dependencies"
       description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
     >
-      <form [fexForm]="validationForm" class="grid max-w-xl gap-space-lg">
+      <form [fexForm]="validationForm" class="grid max-w-xl gap-3">
         <ng-container
           [fexField]="validationForm"
           name="username"
@@ -227,8 +227,8 @@
       title="Dynamic validation and cascading updates"
       description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"
     >
-      <div class="grid gap-space-xl lg:grid-cols-2">
-        <form [fexForm]="dynamicForm" class="grid gap-space-lg">
+      <div class="grid gap-4 lg:grid-cols-2">
+        <form [fexForm]="dynamicForm" class="grid gap-3">
           <ng-container [fexField]="dynamicForm" name="nicknameRequired" #required="field">
             <fex-field-root orientation="horizontal">
               <button
@@ -266,7 +266,7 @@
           </ng-container>
           <button fexButton class="w-fit" type="submit">检查规则</button>
         </form>
-        <form [fexForm]="cascadeForm" class="grid gap-space-lg">
+        <form [fexForm]="cascadeForm" class="grid gap-3">
           <ng-container [fexField]="cascadeForm" name="province" #province="field">
             <fex-field-root>
               <label fexFieldLabel>省份</label>
@@ -324,7 +324,7 @@
             ><input fexInputControl placeholder="窄屏纵向，变宽后横向" /></fex-input-root
         ></fex-field-root>
       </div>
-      <div fexFieldGroup orientation="inline" class="mt-space-lg">
+      <div fexFieldGroup orientation="inline" class="mt-3">
         <fex-field-root orientation="inline"
           ><label fexFieldLabel>关键字</label
           ><fex-input-root value=""
@@ -345,7 +345,7 @@
       title="Form instance and defaultValue"
       description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"
     >
-      <form [fexForm]="instanceForm" class="grid max-w-xl gap-space-lg">
+      <form [fexForm]="instanceForm" class="grid max-w-xl gap-3">
         <ng-container [fexField]="instanceForm" name="source" #source="field">
           <fex-field-root [hasDescription]="true"
             ><label fexFieldLabel>Form 初始值</label
@@ -373,7 +373,7 @@
             <p fexFieldDescription>使用 TanStack 原生 defaultValue。</p></fex-field-root
           >
         </ng-container>
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <button fexButton type="button" (click)="setNickname()">设置昵称</button
           ><button fexButton type="button" variant="outline" (click)="getNickname()">
             读取昵称</button
@@ -381,7 +381,7 @@
             重置
           </button>
         </div>
-        <p class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground" aria-live="polite">
+        <p class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground" aria-live="polite">
           {{ instanceResult() }}
         </p>
       </form>
@@ -391,7 +391,7 @@
       title="Dynamic nested fields"
       description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 Angular track。"
     >
-      <form [fexForm]="contactsForm" class="grid gap-space-lg">
+      <form [fexForm]="contactsForm" class="grid gap-3">
         <ng-container
           [fexField]="contactsForm"
           name="contacts"
@@ -407,7 +407,7 @@
               @for (contact of contacts.api.state.value; track contact.id; let index = $index) {
                 <div class="rounded-md border border-border p-4">
                   <div fexFieldTitle>联系人 {{ index + 1 }}</div>
-                  <div fexFieldGroup class="mt-space-md">
+                  <div fexFieldGroup class="mt-2">
                     <ng-container
                       [fexField]="contactsForm"
                       [name]="'contacts[' + index + '].name'"
@@ -486,7 +486,7 @@
                       >
                     </ng-container>
                   </div>
-                  <div class="mt-space-md flex gap-space-sm">
+                  <div class="mt-2 flex gap-1.5">
                     <button
                       fexButton
                       type="button"
@@ -526,8 +526,8 @@
       title="Path prefix and multiple forms"
       description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"
     >
-      <div class="grid gap-space-xl lg:grid-cols-2">
-        <form [fexForm]="prefixedForm" class="grid gap-space-lg">
+      <div class="grid gap-4 lg:grid-cols-2">
+        <form [fexForm]="prefixedForm" class="grid gap-3">
           <fieldset fexFieldSet>
             <legend fexFieldLegend>profile</legend>
             <div fexFieldGroup>
@@ -588,10 +588,10 @@
           </fieldset>
           <button fexButton class="w-fit" type="submit">提交 profile</button>
         </form>
-        <div class="grid gap-space-md">
+        <div class="grid gap-2">
           <form
             [fexForm]="profileForm"
-            class="grid gap-space-md rounded-md border border-border p-4"
+            class="grid gap-2 rounded-md border border-border p-4"
           >
             <div fexFieldTitle>资料表单</div>
             <ng-container [fexField]="profileForm" name="name" #profileName="field"
@@ -638,7 +638,7 @@
           </form>
           <form
             [fexForm]="securityForm"
-            class="grid gap-space-md rounded-md border border-border p-4"
+            class="grid gap-2 rounded-md border border-border p-4"
           >
             <div fexFieldTitle>安全表单</div>
             <ng-container
@@ -681,7 +681,7 @@
                 ><label fexFieldLabel>开启双因素认证</label></fex-field-root
               ></ng-container
             >
-            <div class="flex gap-space-sm">
+            <div class="flex gap-1.5">
               <button fexButton type="button" variant="outline" (click)="useProfileEmail()">
                 使用资料邮箱</button
               ><button fexButton type="submit">保存安全设置</button>
@@ -695,8 +695,8 @@
       title="Scroll to a specific field"
       description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"
     >
-      <form [fexForm]="scrollForm" class="grid max-w-xl gap-space-lg">
-        <div class="flex flex-wrap gap-space-sm">
+      <form [fexForm]="scrollForm" class="grid max-w-xl gap-3">
+        <div class="flex flex-wrap gap-1.5">
           <button fexButton type="button" variant="outline" (click)="scrollToAddress()">
             定位收货地址</button
           ><button fexButton type="submit">提交并定位首个错误</button>
@@ -750,7 +750,7 @@
     </fex-card>
 
     <fex-card title="Latest result">
-      <pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">{{
+      <pre class="overflow-auto rounded-md bg-muted-background p-3 text-sm text-muted-foreground">{{
         result()
       }}</pre>
     </fex-card>

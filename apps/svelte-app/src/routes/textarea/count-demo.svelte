@@ -8,7 +8,7 @@
 </script>
 
 <Card title="Count" description="Character count is derived by the caller and rendered wherever needed.">
-  <div class="max-w-xl space-y-space-sm">
+  <div class="max-w-xl space-y-1.5">
     <TextareaRoot value={value} onChange={(next) => (value = next)} autoSize={{ minRows: 3, maxRows: 6 }}>
       <TextareaInput aria-label="Textarea with count" maxlength={maxLength} />
     </TextareaRoot>

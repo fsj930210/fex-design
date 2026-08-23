@@ -70,24 +70,24 @@ export const dataTableEmptyClassName = 'h-32 text-center text-sm text-muted-fore
 export const dataTableLoadingClassName =
   'absolute inset-0 z-30 grid place-items-center bg-background/70 text-sm text-muted-foreground backdrop-blur-[1px]'
 export const dataTableToolbarClassName =
-  'flex flex-wrap items-center justify-between gap-space-sm border-b border-border p-space-sm'
-export const dataTableControlsClassName = 'flex flex-wrap items-center gap-space-sm'
+  'flex flex-wrap items-center justify-between gap-1.5 border-b border-border p-1.5'
+export const dataTableControlsClassName = 'flex flex-wrap items-center gap-1.5'
 export const dataTableButtonClassName =
   'inline-flex h-8 items-center justify-center gap-1 rounded-md border border-border bg-background px-2 text-sm hover:bg-muted-background disabled:pointer-events-none disabled:opacity-50'
 export const dataTableIconButtonClassName = `${dataTableButtonClassName} w-8 px-0`
 export const dataTableInputClassName =
-  'h-8 w-auto min-w-0 flex-1 rounded-md border border-border bg-background px-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring'
+  'h-8 w-auto min-w-0 flex-1 rounded-md border border-border bg-background px-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-focus'
 export const dataTableInputRootClassName = 'h-8 w-auto min-w-0 flex-1 text-sm'
 export const dataTableSelectClassName = dataTableInputClassName
 export const dataTablePaginationClassName =
-  'flex flex-wrap items-center justify-between gap-space-sm border-t border-border p-space-sm text-sm'
+  'flex flex-wrap items-center justify-between gap-1.5 border-t border-border p-1.5 text-sm'
 export const dataTablePaginationSummaryClassName = 'text-muted-foreground'
 export const dataTableResizeHandleClassName =
   'absolute inset-y-0 end-0 z-40 w-2 appearance-none border-0 bg-transparent p-0 cursor-col-resize touch-none select-none before:absolute before:inset-y-2 before:end-0 before:w-px before:bg-border hover:before:bg-primary data-[resizing=true]:before:bg-primary'
 export const dataTableSortButtonClassName =
   'inline-flex w-full items-center justify-between gap-2 text-left font-semibold outline-none'
 export const dataTableVisibilityPanelClassName =
-  'flex flex-wrap items-center gap-space-sm rounded-md border border-border p-space-sm'
+  'flex flex-wrap items-center gap-1.5 rounded-md border border-border p-1.5'
 export const dataTablePinnedCellClassName = 'sticky z-20 overflow-visible bg-background'
 export const dataTablePinnedHeaderCellClassName = ''
 export const dataTablePinnedStartClassName = ''

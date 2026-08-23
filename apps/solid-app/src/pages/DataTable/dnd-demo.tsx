@@ -146,7 +146,7 @@ function ColumnDndGrid(props: { constrained: boolean }) {
       ? table.getFlatHeaders().find((header) => header.column.id === sortable.snapshot().activeId)
       : undefined
   return (
-    <div class="space-y-space-sm">
+    <div class="space-y-1.5">
       <DataTable
         table={table}
         ref={sortable.setContainer()}
@@ -251,7 +251,7 @@ function RowDndGrid() {
       ? table.getRowModel().rows.find((row) => row.id === sortable.snapshot().activeId)
       : undefined
   return (
-    <div class="space-y-space-sm">
+    <div class="space-y-1.5">
       <DataTable
         table={table}
         ref={sortable.setContainer()}
@@ -288,7 +288,7 @@ export function DndDataTableDemo() {
       title="Column and row DnD with project Sortable"
       description="Both axes reuse the existing useSortable controller, overlay and motion registry. DataTable only exposes native part props so callers can attach the project interaction without binding a policy into the table primitive."
     >
-      <div class="space-y-space-lg">
+      <div class="space-y-3">
         <DemoBranch title="Column reorder">
           <ColumnDndGrid constrained={false} />
         </DemoBranch>

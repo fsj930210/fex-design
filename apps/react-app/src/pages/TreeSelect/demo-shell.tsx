@@ -118,7 +118,7 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
                 {...itemProps}
                 data-selected={!multiple && selected ? true : undefined}
                 data-disabled={item.disabled || undefined}
-                className={cn(itemProps.className, 'cursor-pointer data-[selected]:bg-accent data-[disabled]:cursor-not-allowed')}
+                className={cn(itemProps.className, 'cursor-pointer data-[selected]:bg-selected-background data-[disabled]:cursor-not-allowed')}
                 onClick={(event) => {
                   event.stopPropagation()
                   itemProps.onClick?.(event)
@@ -181,7 +181,7 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
           </InputRoot>
         )}
       </TreeSelectTrigger>
-      <TreeSelectContent className="w-80 p-space-sm">
+      <TreeSelectContent className="w-80 p-1.5">
         <TreeSelectPanelState>
           {(selectedKeys, setCheckedKeys) => (
             <>

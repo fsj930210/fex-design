@@ -20,9 +20,9 @@ export function InputPage() {
   const focusRef = useRef<HTMLInputElement>(null)
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             返回首页
           </Link>
@@ -32,7 +32,7 @@ export function InputPage() {
           </p>
         </header>
 
-        <div className="grid gap-space-xl">
+        <div className="grid gap-4">
           <Card
             title="Basic"
             description="InputRoot 管理输入协议，InputControl 保留原生 input 语义。"
@@ -54,8 +54,8 @@ export function InputPage() {
             title="Controlled and uncontrolled"
             description="受控值由调用方维护；非受控值只声明初始值。"
           >
-            <div className="grid gap-space-lg md:grid-cols-2">
-              <div className="space-y-space-sm">
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="space-y-1.5">
                 <InputRoot value={controlledValue} onValueChange={setControlledValue}>
                   <InputControl aria-label="受控输入" placeholder="受控输入" />
                 </InputRoot>
@@ -105,11 +105,11 @@ export function InputPage() {
             title="Manual focus and clear"
             description="调用方可以通过原生 ref 聚焦或移除焦点，并通过受控值手动清空。"
           >
-            <div className="max-w-md space-y-space-md">
+            <div className="max-w-md space-y-2">
               <InputRoot value={manualValue} onValueChange={setManualValue}>
                 <InputControl ref={focusRef} aria-label="手动控制输入" placeholder="手动控制输入" />
               </InputRoot>
-              <div className="flex flex-wrap gap-space-sm">
+              <div className="flex flex-wrap gap-1.5">
                 <Button size="sm" onClick={() => focusRef.current?.focus()}>
                   聚焦
                 </Button>
@@ -124,7 +124,7 @@ export function InputPage() {
           </Card>
 
           <Card title="States" description="禁用、只读和校验失败状态由 Root 统一下发。">
-            <div className="grid gap-space-lg md:grid-cols-3">
+            <div className="grid gap-3 md:grid-cols-3">
               <InputRoot disabled defaultValue="禁用内容">
                 <InputControl aria-label="禁用示例" />
               </InputRoot>

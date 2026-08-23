@@ -33,7 +33,7 @@ interface Contact {
   notifications: boolean
 }
 const selectClass =
-  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-ring/20'
+  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-focus focus-visible:ring-focus/20'
 const errors = (items: readonly unknown[]) => [...new Set(items.map(String))] as JSX.Element[]
 const emailValidator = ({ value }: { value: unknown }) =>
   /^\S+@\S+\.\S+$/.test(String(value)) ? undefined : '请输入有效邮箱'
@@ -197,9 +197,9 @@ export function FormPage() {
   }
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-md">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-2">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             返回首页
           </A>
@@ -216,7 +216,7 @@ export function FormPage() {
           title="Basic form"
           description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
         >
-          <Form form={loginForm} class="grid max-w-xl gap-space-lg">
+          <Form form={loginForm} class="grid max-w-xl gap-3">
             <TextField
               name="account"
               label="账号"
@@ -253,7 +253,7 @@ export function FormPage() {
                 </FieldRoot>
               )}
             </Field>
-            <div class="flex gap-space-sm">
+            <div class="flex gap-1.5">
               <loginForm.Subscribe
                 selector={(state) => [state.canSubmit, state.isSubmitting] as const}
               >
@@ -273,7 +273,7 @@ export function FormPage() {
           title="Validation timing, async validation and dependencies"
           description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
         >
-          <Form form={validationForm} class="grid max-w-xl gap-space-lg">
+          <Form form={validationForm} class="grid max-w-xl gap-3">
             <TextField
               name="username"
               label="用户名"
@@ -305,8 +305,8 @@ export function FormPage() {
           title="Dynamic validation and cascading updates"
           description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"
         >
-          <div class="grid gap-space-xl lg:grid-cols-2">
-            <Form form={dynamicRuleForm} class="grid gap-space-lg">
+          <div class="grid gap-4 lg:grid-cols-2">
+            <Form form={dynamicRuleForm} class="grid gap-3">
               <Field name="nicknameRequired">
                 {(field) => (
                   <FieldRoot orientation="horizontal">
@@ -338,7 +338,7 @@ export function FormPage() {
                 检查规则
               </Button>
             </Form>
-            <Form form={cascadeForm} class="grid gap-space-lg">
+            <Form form={cascadeForm} class="grid gap-3">
               <Field name="province">
                 {(field) => (
                   <FieldRoot>
@@ -420,7 +420,7 @@ export function FormPage() {
               </InputRoot>
             </FieldRoot>
           </FieldGroup>
-          <FieldGroup orientation="inline" class="mt-space-lg">
+          <FieldGroup orientation="inline" class="mt-3">
             <FieldRoot orientation="inline">
               <FieldLabel>关键字</FieldLabel>
               <InputRoot value="">
@@ -443,7 +443,7 @@ export function FormPage() {
           title="Form instance and defaultValue"
           description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"
         >
-          <Form form={instanceForm} class="grid max-w-xl gap-space-lg">
+          <Form form={instanceForm} class="grid max-w-xl gap-3">
             <Field name="source">
               {(field) => (
                 <FieldRoot hasDescription>
@@ -480,7 +480,7 @@ export function FormPage() {
                 </FieldRoot>
               )}
             </Field>
-            <div class="flex flex-wrap gap-space-sm">
+            <div class="flex flex-wrap gap-1.5">
               <Button
                 type="button"
                 onClick={() => instanceForm.setFieldValue('nickname', '通过 setFieldValue 设置')}
@@ -499,7 +499,7 @@ export function FormPage() {
               </Button>
             </div>
             <p
-              class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground"
+              class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground"
               aria-live="polite"
             >
               {instanceResult()}
@@ -510,7 +510,7 @@ export function FormPage() {
           title="Dynamic nested fields"
           description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 React key。"
         >
-          <Form form={contactsForm} class="grid gap-space-lg">
+          <Form form={contactsForm} class="grid gap-3">
             <Field
               name="contacts"
               validators={{
@@ -530,7 +530,7 @@ export function FormPage() {
                         {(contact, index) => (
                           <div class="rounded-md border border-border p-4">
                             <FieldTitle>联系人 {index() + 1}</FieldTitle>
-                            <FieldGroup class="mt-space-md">
+                            <FieldGroup class="mt-2">
                               <TextField
                                 name={`contacts[${index()}].name`}
                                 label="姓名"
@@ -566,7 +566,7 @@ export function FormPage() {
                                 )}
                               </Field>
                             </FieldGroup>
-                            <div class="mt-space-md flex gap-space-sm">
+                            <div class="mt-2 flex gap-1.5">
                               <Button
                                 type="button"
                                 variant="outline"
@@ -610,8 +610,8 @@ export function FormPage() {
           title="Path prefix and multiple forms"
           description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"
         >
-          <div class="grid gap-space-xl lg:grid-cols-2">
-            <Form form={prefixedForm} class="grid gap-space-lg">
+          <div class="grid gap-4 lg:grid-cols-2">
+            <Form form={prefixedForm} class="grid gap-3">
               <FieldSet>
                 <FieldLegend>profile</FieldLegend>
                 <FieldGroup>
@@ -635,10 +635,10 @@ export function FormPage() {
                 提交 profile
               </Button>
             </Form>
-            <div class="grid gap-space-md">
+            <div class="grid gap-2">
               <Form
                 form={profileForm}
-                class="grid gap-space-md rounded-md border border-border p-4"
+                class="grid gap-2 rounded-md border border-border p-4"
               >
                 <FieldTitle>资料表单</FieldTitle>
                 <TextField name="name" label="姓名" />
@@ -655,7 +655,7 @@ export function FormPage() {
               </Form>
               <Form
                 form={securityForm}
-                class="grid gap-space-md rounded-md border border-border p-4"
+                class="grid gap-2 rounded-md border border-border p-4"
               >
                 <FieldTitle>安全表单</FieldTitle>
                 <TextField
@@ -681,7 +681,7 @@ export function FormPage() {
                     </FieldRoot>
                   )}
                 </Field>
-                <div class="flex gap-space-sm">
+                <div class="flex gap-1.5">
                   <Button
                     type="button"
                     variant="outline"
@@ -704,8 +704,8 @@ export function FormPage() {
           title="Scroll to a specific field"
           description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"
         >
-          <Form form={scrollForm} class="grid max-w-xl gap-space-lg">
-            <div class="flex flex-wrap gap-space-sm">
+          <Form form={scrollForm} class="grid max-w-xl gap-3">
+            <div class="flex flex-wrap gap-1.5">
               <Button
                 type="button"
                 variant="outline"
@@ -735,7 +735,7 @@ export function FormPage() {
           </Form>
         </Card>
         <Card title="Latest result">
-          <pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">
+          <pre class="overflow-auto rounded-md bg-muted-background p-3 text-sm text-muted-foreground">
             {result()}
           </pre>
         </Card>

@@ -108,20 +108,20 @@ export function ResizablePage() {
   const [nestedVerticalLayout, setNestedVerticalLayout] = createSignal([55, 45])
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Resizable</h1>
-            <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Split panel layout component for sidebars and workspace surfaces.
             </p>
           </div>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <Card
             title="Horizontal"
             description="Pointer and keyboard resizing with min and max constraints."
@@ -130,9 +130,9 @@ export function ResizablePage() {
               class="grid h-72 overflow-hidden rounded-md border border-border bg-background"
               style={gridStyle('horizontal', horizontalLayout())}
             >
-              <div data-resizable-panel="sidebar" class="p-space-md">
+              <div data-resizable-panel="sidebar" class="p-2">
                 <h2 class="text-sm font-medium">Sidebar</h2>
-                <p class="mt-space-sm text-sm text-muted-foreground">Resize from the handle.</p>
+                <p class="mt-1.5 text-sm text-muted-foreground">Resize from the handle.</p>
               </div>
               <button
                 data-resizable-handle
@@ -155,9 +155,9 @@ export function ResizablePage() {
                   })
                 }
               />
-              <div data-resizable-panel="content" class="p-space-md">
+              <div data-resizable-panel="content" class="p-2">
                 <h2 class="text-sm font-medium">Content</h2>
-                <p class="mt-space-sm text-sm text-muted-foreground">
+                <p class="mt-1.5 text-sm text-muted-foreground">
                   Use arrow keys while the handle is focused.
                 </p>
               </div>
@@ -168,9 +168,9 @@ export function ResizablePage() {
               class="grid h-80 overflow-hidden rounded-md border border-border bg-background"
               style={gridStyle('vertical', verticalLayout())}
             >
-              <div data-resizable-panel="header" class="p-space-md">
+              <div data-resizable-panel="header" class="p-2">
                 <h2 class="text-sm font-medium">Header</h2>
-                <p class="mt-space-sm text-sm text-muted-foreground">Resize vertically.</p>
+                <p class="mt-1.5 text-sm text-muted-foreground">Resize vertically.</p>
               </div>
               <button
                 data-resizable-handle
@@ -193,7 +193,7 @@ export function ResizablePage() {
                   })
                 }
               />
-              <div data-resizable-panel="main" class="p-space-md">
+              <div data-resizable-panel="main" class="p-2">
                 <h2 class="text-sm font-medium">Content</h2>
               </div>
             </div>
@@ -206,7 +206,7 @@ export function ResizablePage() {
               class="grid h-96 overflow-hidden rounded-md border border-border bg-background"
               style={gridStyle('horizontal', nestedLayout())}
             >
-              <div data-resizable-panel="nested-sidebar" class="p-space-md">
+              <div data-resizable-panel="nested-sidebar" class="p-2">
                 Sidebar
               </div>
               <button
@@ -235,7 +235,7 @@ export function ResizablePage() {
                 class="grid"
                 style={gridStyle('vertical', nestedVerticalLayout())}
               >
-                <div data-resizable-panel="nested-editor" class="p-space-md">
+                <div data-resizable-panel="nested-editor" class="p-2">
                   Editor
                 </div>
                 <button
@@ -259,7 +259,7 @@ export function ResizablePage() {
                     })
                   }
                 />
-                <div data-resizable-panel="nested-console" class="p-space-md">
+                <div data-resizable-panel="nested-console" class="p-2">
                   Console
                 </div>
               </div>
@@ -267,14 +267,14 @@ export function ResizablePage() {
           </Card>
           <Card title="Disabled Handle" description="A disabled handle keeps the layout fixed.">
             <div class="grid h-48 grid-cols-[35%_12px_1fr] overflow-hidden rounded-md border border-border bg-background">
-              <div class="p-space-md">Locked</div>
+              <div class="p-2">Locked</div>
               <button
                 data-resizable-handle
                 type="button"
                 disabled
                 class="relative cursor-not-allowed opacity-50 after:block after:h-full after:w-px after:bg-border"
               />
-              <div class="p-space-md">Fixed layout</div>
+              <div class="p-2">Fixed layout</div>
             </div>
           </Card>
         </div>

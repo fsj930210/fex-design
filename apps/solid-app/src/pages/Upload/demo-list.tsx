@@ -52,7 +52,7 @@ export function DemoUploadList(props: { showMultipart?: boolean }) {
                         </div>
                       </Show>
                     </div>
-                    <div class="flex gap-space-xs">
+                    <div class="flex gap-1">
                       <Show when={state.item()?.status === 'pending'}>
                         <Button size="xs" variant="ghost" onClick={() => void state.start()}>
                           上传
@@ -91,7 +91,7 @@ export function DemoUploadList(props: { showMultipart?: boolean }) {
       </UploadList>
       <Show when={count()}>
         <Button
-          class="mt-space-sm w-full"
+          class="mt-1.5 w-full"
           size="xs"
           variant="ghost"
           onClick={() => void upload.clear()}

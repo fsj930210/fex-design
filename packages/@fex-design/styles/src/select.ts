@@ -4,7 +4,7 @@ import { tagClassName, tagCloseClassName } from './tag'
 
 export const selectTriggerClassName = cva(
   [
-    'flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-input-border bg-input-background py-1 pl-3 text-sm text-foreground outline-none',
+    'flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-border bg-background py-1 pl-3 text-sm text-foreground outline-none',
     'focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20',
     'data-[status=error]:border-danger data-[status=error]:ring-2 data-[status=error]:ring-danger/20',
     'data-[status=warning]:border-warning data-[status=warning]:ring-2 data-[status=warning]:ring-warning/20',
@@ -44,7 +44,7 @@ export const selectIndicatorClassName =
   'inline-flex size-4 items-center justify-center transition-transform data-[state=open]:rotate-180'
 export const selectClearClassName = 'size-4 px-0 py-0'
 export const selectContentClassName = [
-  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-popover-background text-popover-foreground shadow-lg [--popover-content-padding:0px]',
+  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-content-padding:0px]',
   'min-w-[var(--select-content-min-width,0px)]',
   'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--select-content-max-height,320px))]',
 ].join(' ')

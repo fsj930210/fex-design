@@ -20,7 +20,7 @@ export function InstanceDemo() {
       title="Form instance and defaultValue"
       description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"
     >
-      <Form form={form} className="grid max-w-xl gap-space-lg">
+      <Form form={form} className="grid max-w-xl gap-3">
         <Field name="source">
           {(field) => (
             <FieldRoot hasDescription>
@@ -51,7 +51,7 @@ export function InstanceDemo() {
             </FieldRoot>
           )}
         </Field>
-        <div className="flex flex-wrap gap-space-sm">
+        <div className="flex flex-wrap gap-1.5">
           <Button
             type="button"
             onClick={() => form.setFieldValue('nickname', '通过 setFieldValue 设置')}
@@ -70,7 +70,7 @@ export function InstanceDemo() {
           </Button>
         </div>
         <p
-          className="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground"
+          className="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground"
           aria-live="polite"
         >
           {result}

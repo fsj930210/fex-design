@@ -1,0 +1,61 @@
+/*
+ * Recommended centralized entry for overriding component-level tokens.
+ *
+ * Component tokens should normally remain undefined and be consumed with a fallback
+ * inside each component. Defining one here overrides every instance of that component;
+ * scoped CSS and inline style remain valid alternatives for regional or single-instance
+ * overrides, so this file is a recommendation rather than the only override entry.
+ *
+ * The defaults below are retained temporarily to preserve the current component visuals.
+ * Remove each group after that component has been refactored to provide its default at
+ * the consumption site. Shared surfaces and states must stay in the system theme files.
+ */
+
+:root,
+.light,
+[data-theme='light'] {
+  /* Progress */
+  --progress-remaining: oklch(0.86 0 0);
+
+  /* Skeleton */
+  --skeleton-gradient-from: oklch(0.97 0 0);
+  --skeleton-gradient-to: oklch(0.89 0 0);
+
+  /* Tag */
+  --tag-color-neutral: var(--muted-foreground);
+  --tag-color-primary: var(--primary);
+  --tag-color-success: var(--success);
+  --tag-color-warning: var(--warning);
+  --tag-color-danger: var(--danger);
+  --tag-solid-foreground: white;
+
+  /* Button gradient effect */
+  --gradient-lime: oklch(0.78 0.2 145);
+  --gradient-ocean: oklch(0.66 0.18 245);
+  --gradient-wine: oklch(0.56 0.23 335);
+  --gradient-rust: oklch(0.68 0.21 42);
+}
+
+.dark,
+[data-theme='dark'] {
+  /* Progress */
+  --progress-remaining: oklch(0.42 0 0);
+
+  /* Skeleton */
+  --skeleton-gradient-from: oklch(0.269 0 0);
+  --skeleton-gradient-to: oklch(0.38 0 0);
+
+  /* Tag */
+  --tag-color-neutral: var(--muted-foreground);
+  --tag-color-primary: var(--primary);
+  --tag-color-success: var(--success);
+  --tag-color-warning: var(--warning);
+  --tag-color-danger: var(--danger);
+  --tag-solid-foreground: oklch(0.985 0 0);
+
+  /* Button gradient effect */
+  --gradient-lime: oklch(0.74 0.2 145);
+  --gradient-ocean: oklch(0.7 0.16 245);
+  --gradient-wine: oklch(0.65 0.2 335);
+  --gradient-rust: oklch(0.72 0.19 42);
+}

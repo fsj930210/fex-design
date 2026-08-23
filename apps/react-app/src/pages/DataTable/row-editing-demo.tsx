@@ -81,7 +81,7 @@ export function RowEditingDataTableDemo() {
       size: 180,
       cell: ({ row }) =>
         draft?.id === row.id ? (
-          <span className="inline-flex gap-space-sm">
+          <span className="inline-flex gap-1.5">
             <Button
               size="sm"
               onClick={() => {

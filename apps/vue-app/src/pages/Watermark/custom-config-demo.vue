@@ -34,21 +34,21 @@ function setNumber(target: Ref<number>, value: string) {
     title="Custom Config"
     description="Adjust content, font, layering, rotation, gap, and offset."
   >
-    <div class="grid gap-space-xl lg:grid-cols-[280px_minmax(0,1fr)]">
-      <div class="grid gap-space-lg">
-        <label class="grid gap-space-sm text-sm text-foreground">
+    <div class="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <div class="grid gap-3">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Content</span>
           <InputRoot :value="content" @value-change="content = $event">
             <InputControl aria-label="Watermark content" />
           </InputRoot>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Color</span>
           <InputRoot :value="color" @value-change="color = $event">
             <InputControl aria-label="Watermark color" />
           </InputRoot>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>FontSize: {{ fontSize }}</span>
           <SliderRoot
             :value="[fontSize]"
@@ -61,7 +61,7 @@ function setNumber(target: Ref<number>, value: string) {
             <SliderThumb aria-label="FontSize" />
           </SliderRoot>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>ZIndex: {{ zIndex }}</span>
           <SliderRoot
             :value="[zIndex]"
@@ -74,7 +74,7 @@ function setNumber(target: Ref<number>, value: string) {
             <SliderThumb aria-label="ZIndex" />
           </SliderRoot>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Rotate: {{ rotate }}</span>
           <SliderRoot
             :value="[rotate]"
@@ -87,26 +87,26 @@ function setNumber(target: Ref<number>, value: string) {
             <SliderThumb aria-label="Rotate" />
           </SliderRoot>
         </label>
-        <div class="grid grid-cols-2 gap-space-sm">
-          <label class="grid gap-space-sm text-sm text-foreground">
+        <div class="grid grid-cols-2 gap-1.5">
+          <label class="grid gap-1.5 text-sm text-foreground">
             <span>Gap X</span>
             <InputRoot :value="String(gapX)" @value-change="setNumber(gapX, $event)">
               <InputControl inputmode="numeric" aria-label="Gap X" />
             </InputRoot>
           </label>
-          <label class="grid gap-space-sm text-sm text-foreground">
+          <label class="grid gap-1.5 text-sm text-foreground">
             <span>Gap Y</span>
             <InputRoot :value="String(gapY)" @value-change="setNumber(gapY, $event)">
               <InputControl inputmode="numeric" aria-label="Gap Y" />
             </InputRoot>
           </label>
-          <label class="grid gap-space-sm text-sm text-foreground">
+          <label class="grid gap-1.5 text-sm text-foreground">
             <span>Offset X</span>
             <InputRoot :value="String(offsetX)" @value-change="setNumber(offsetX, $event)">
               <InputControl inputmode="numeric" aria-label="Offset X" />
             </InputRoot>
           </label>
-          <label class="grid gap-space-sm text-sm text-foreground">
+          <label class="grid gap-1.5 text-sm text-foreground">
             <span>Offset Y</span>
             <InputRoot :value="String(offsetY)" @value-change="setNumber(offsetY, $event)">
               <InputControl inputmode="numeric" aria-label="Offset Y" />
@@ -123,7 +123,7 @@ function setNumber(target: Ref<number>, value: string) {
         :offset="offset"
         class="min-h-96 rounded-md border border-border bg-background"
       >
-        <div class="grid min-h-96 place-items-center p-space-xl text-center text-sm text-muted-foreground">
+        <div class="grid min-h-96 place-items-center p-4 text-center text-sm text-muted-foreground">
           Config changes update the generated canvas tile.
         </div>
       </Watermark>

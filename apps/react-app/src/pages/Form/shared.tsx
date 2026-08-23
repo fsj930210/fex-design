@@ -19,7 +19,7 @@ export const locations = {
 } as const
 
 export const selectClassName =
-  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/20'
+  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-focus focus-visible:ring-2 focus-visible:ring-focus/20'
 
 export type SetDemoResult = (result: string) => void
 

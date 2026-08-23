@@ -1,7 +1,7 @@
 <fex-card
   title="Controller batch actions"
   description="All batch operations are explicit controller actions. selectAll only acts when multiple selection is enabled."
-  ><div class="mb-space-md flex flex-wrap gap-space-sm">
+  ><div class="mb-2 flex flex-wrap gap-1.5">
     <button fexButton size="sm" variant="outline" (click)="expansion()?.expandAll()">
       Expand all</button
     ><button fexButton size="sm" variant="outline" (click)="expansion()?.collapseAll()">
@@ -17,5 +17,5 @@
     [controller]="controller"
     [options]="options"
     [checkable]="true"
-    class="block max-w-xl rounded-md border border-border bg-background p-space-sm"
+    class="block max-w-xl rounded-md border border-border bg-background p-1.5"
 /></fex-card>

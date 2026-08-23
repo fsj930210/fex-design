@@ -2,6 +2,10 @@
   "name": "@fex/styles",
   "private": true,
   "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src/index.d.ts"
+  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -17,6 +21,7 @@
   "devDependencies": {
     "@fex/config-oxc": "workspace:*",
     "@fex/config-tsconfig": "workspace:*",
-    "tailwindcss": "catalog:"
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
   }
 }

@@ -4,7 +4,7 @@ import Card from '@fex-design/vue/ui/card'
 </script>
 <template>
   <Card title="States" description="InputNumber reuses Input state styling."
-    ><div class="grid gap-space-md md:grid-cols-2">
+    ><div class="grid gap-2 md:grid-cols-2">
       <InputNumber disabled :default-value="10" aria-label="Disabled number" /><InputNumber
         read-only
         :default-value="10"

@@ -5,7 +5,7 @@ export function BasicDemo() {
   const [value, setValue] = createSignal<number>()
   return (
     <Card title="Basic" description="Controlled and uncontrolled numeric values use icon actions.">
-      <div class="grid gap-space-lg md:grid-cols-2">
+      <div class="grid gap-3 md:grid-cols-2">
         <InputNumber defaultValue={3} aria-label="Uncontrolled number" />
         <div>
           <InputNumber

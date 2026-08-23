@@ -73,7 +73,7 @@ function SortingGrid({
       )?.meta?.sortFn,
   )
   return (
-    <div className="space-y-space-sm">
+    <div className="space-y-1.5">
       <DataTable table={table} />
       <p className="text-xs text-muted-foreground">
         Remote request sorting: {remote.length ? JSON.stringify(remote) : 'none'}
@@ -88,7 +88,7 @@ export function SortingDataTableDemo() {
       title="Column sorting"
       description="Multi-sort is supported for local columns as well: each click adds or changes a priority and the superscript shows that priority. Columns without meta.sortFn remain remote terms in the same sorting state, while their pass-through comparator leaves local row order unchanged."
     >
-      <div className="grid gap-space-lg xl:grid-cols-2">
+      <div className="grid gap-3 xl:grid-cols-2">
         <DemoBranch title="All local multi-sort">
           <SortingGrid
             kind="local"

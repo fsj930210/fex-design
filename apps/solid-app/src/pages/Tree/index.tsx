@@ -11,9 +11,9 @@ import { SearchDemo } from './search-demo'
 import { VirtualDemo } from './virtual-demo'
 export function TreePage() {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-sm">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-1.5">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
@@ -25,7 +25,7 @@ export function TreePage() {
             </p>
           </div>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <BasicDemo />
           <ControlledDemo />
           <BatchActionsDemo />

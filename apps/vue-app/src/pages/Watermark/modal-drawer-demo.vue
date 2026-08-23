@@ -31,7 +31,7 @@ const drawerOpen = ref(false)
 
 <template>
   <Card title="Modal and Drawer" description="Watermark can wrap modal and drawer content.">
-    <div class="flex flex-wrap gap-space-md">
+    <div class="flex flex-wrap gap-2">
       <DialogRoot :open="modalOpen" @open-change="modalOpen = $event">
         <Button @click="modalOpen = true">Open modal</Button>
         <DialogPortal>

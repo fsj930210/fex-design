@@ -2,6 +2,13 @@
   "name": "@fex/utils",
   "private": true,
   "type": "module",
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
+  },
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",

@@ -27,7 +27,7 @@ const controller = createTreeController<DepartmentNode>({
     ><TreeRoot
       :controller="controller"
       :indent="24"
-      class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
       ><TreeViewport v-slot="{ item }"
         ><DndTreeRow
           :key="item.key"

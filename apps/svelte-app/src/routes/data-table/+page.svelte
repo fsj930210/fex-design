@@ -20,9 +20,9 @@
 </script>
 
 <svelte:head><title>DataTable · Svelte Admin</title></svelte:head>
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-[1600px] space-y-space-xl">
-    <header class="space-y-space-sm"><a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a><h1 class="text-2xl font-semibold text-foreground">Data Table primitive</h1><p class="max-w-4xl text-sm leading-6 text-muted-foreground">Svelte adapter for TanStack Table v9 beta. Every capability is registered independently; the primitive renders the resulting table instance and leaves requests, DnD policy and business UI to callers.</p></header>
-    <div class="space-y-space-xl"><BasicDemo /><HeaderGroupingDemo /><SortingDemo /><FilteringDemo /><PaginationDemo /><SelectionDemo /><ExpansionDemo /><VisibilityDemo /><OrderingDemo /><DndDemo /><ColumnPinningDemo /><RowPinningDemo /><SizingDemo /><GroupingDemo /><VirtualDemo /><CellEditingDemo /><RowEditingDemo /><PresentationDemo /></div>
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-[1600px] space-y-4">
+    <header class="space-y-1.5"><a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a><h1 class="text-2xl font-semibold text-foreground">Data Table primitive</h1><p class="max-w-4xl text-sm leading-6 text-muted-foreground">Svelte adapter for TanStack Table v9 beta. Every capability is registered independently; the primitive renders the resulting table instance and leaves requests, DnD policy and business UI to callers.</p></header>
+    <div class="space-y-4"><BasicDemo /><HeaderGroupingDemo /><SortingDemo /><FilteringDemo /><PaginationDemo /><SelectionDemo /><ExpansionDemo /><VisibilityDemo /><OrderingDemo /><DndDemo /><ColumnPinningDemo /><RowPinningDemo /><SizingDemo /><GroupingDemo /><VirtualDemo /><CellEditingDemo /><RowEditingDemo /><PresentationDemo /></div>
   </div>
 </main>

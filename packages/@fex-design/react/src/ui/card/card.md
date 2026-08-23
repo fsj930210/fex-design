@@ -56,7 +56,7 @@ function DemoCard() {
     <Card
       title="Sizes"
       description="文本按钮和 icon-only 按钮尺寸。"
-      className={{ content: 'flex flex-wrap items-center gap-space-md' }}
+      className={{ content: 'flex flex-wrap items-center gap-2' }}
     >
       <button>default</button>
     </Card>

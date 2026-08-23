@@ -11,8 +11,8 @@ const strictKeys = ref<readonly (string | number)[]>([])
   <Card
     title="Check modes"
     description="Cascade links parent and children; strict keeps every node independent."
-    ><div class="grid gap-space-lg lg:grid-cols-2">
-      <div class="space-y-space-sm">
+    ><div class="grid gap-3 lg:grid-cols-2">
+      <div class="space-y-1.5">
         <p class="text-sm font-medium">Cascade</p>
         <DemoTree
           :tree-data="departmentTreeData"
@@ -25,10 +25,10 @@ const strictKeys = ref<readonly (string | number)[]>([])
           checkable
           :checked-keys="cascadeKeys"
           :on-checked-keys-change="(keys) => (cascadeKeys = keys)"
-          class="rounded-md border border-border bg-background p-space-sm"
+          class="rounded-md border border-border bg-background p-1.5"
         />
       </div>
-      <div class="space-y-space-sm">
+      <div class="space-y-1.5">
         <p class="text-sm font-medium">Strict</p>
         <DemoTree
           :tree-data="departmentTreeData"
@@ -41,7 +41,7 @@ const strictKeys = ref<readonly (string | number)[]>([])
           checkable
           :checked-keys="strictKeys"
           :on-checked-keys-change="(keys) => (strictKeys = keys)"
-          class="rounded-md border border-border bg-background p-space-sm"
+          class="rounded-md border border-border bg-background p-1.5"
         />
       </div></div
   ></Card>

@@ -34,21 +34,21 @@ export function I18nPage() {
   }
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
       <div class="mx-auto w-full max-w-5xl">
-        <header class="mb-space-xl space-y-space-md">
+        <header class="mb-4 space-y-2">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
           <h1 class="text-2xl font-semibold text-foreground">I18n</h1>
         </header>
 
-        <div class="grid gap-space-xl">
+        <div class="grid gap-4">
           <Card
             title="Core translation API"
             description="Use t with interpolation, plural values, and namespaces."
           >
-            <div class="flex flex-wrap items-center gap-space-md">
+            <div class="flex flex-wrap items-center gap-2">
               <span>{t('demo.greeting', { name: 'Fex' })}</span>
               <span>{t('order:count', { count: 1 })}</span>
               <span>{t('order:count', { count: 5 })}</span>
@@ -59,7 +59,7 @@ export function I18nPage() {
             title="Local bundle and namespaces"
             description="The initial Chinese resources are available before any network request."
           >
-            <div class="grid gap-space-sm text-sm text-muted-foreground sm:grid-cols-2">
+            <div class="grid gap-1.5 text-sm text-muted-foreground sm:grid-cols-2">
               <span>common: {t('demo.title')}</span>
               <span>admin: {t('admin:filter.placeholder')}</span>
               <span>order: {t('order:title')}</span>
@@ -70,23 +70,23 @@ export function I18nPage() {
             title="Language switching"
             description="Switching waits for the requested namespaces before changing the active locale."
           >
-            <div class="flex flex-wrap items-center gap-space-md">
+            <div class="flex flex-wrap items-center gap-2">
               <button
-                class="rounded-md border border-border px-space-md py-space-sm"
+                class="rounded-md border border-border px-2 py-1.5"
                 type="button"
                 onClick={() => change('zh-CN', 'normal')}
               >
                 中文
               </button>
               <button
-                class="rounded-md border border-border px-space-md py-space-sm"
+                class="rounded-md border border-border px-2 py-1.5"
                 type="button"
                 onClick={() => change('en-US', 'normal')}
               >
                 English
               </button>
               <button
-                class="rounded-md border border-border px-space-md py-space-sm"
+                class="rounded-md border border-border px-2 py-1.5"
                 type="button"
                 onClick={() => change('fr-FR', 'normal')}
               >
@@ -101,9 +101,9 @@ export function I18nPage() {
             title="Remote bundle"
             description="The current text stays visible until the delayed resource is ready."
           >
-            <div class="flex flex-wrap items-center gap-space-md">
+            <div class="flex flex-wrap items-center gap-2">
               <button
-                class="rounded-md border border-border px-space-md py-space-sm"
+                class="rounded-md border border-border px-2 py-1.5"
                 disabled={snapshot().status === 'loading'}
                 type="button"
                 onClick={() => change('en-US', 'delayed')}
@@ -118,11 +118,11 @@ export function I18nPage() {
             title="Fallback, missing key, and failure"
             description="Missing English keys fall back to Chinese; unknown keys are visible; failed loads preserve the active locale."
           >
-            <div class="flex flex-wrap items-center gap-space-md">
+            <div class="flex flex-wrap items-center gap-2">
               <span>{t('order:owner')}</span>
               <span>{t('missing:unknown')}</span>
               <button
-                class="rounded-md border border-border px-space-md py-space-sm"
+                class="rounded-md border border-border px-2 py-1.5"
                 type="button"
                 onClick={() => change('fr-FR', 'failure')}
               >
@@ -135,9 +135,9 @@ export function I18nPage() {
             title="Runtime resource editing"
             description="The host can add a newly published namespace without rebuilding the application."
           >
-            <div class="flex flex-wrap items-center gap-space-md">
+            <div class="flex flex-wrap items-center gap-2">
               <button
-                class="rounded-md border border-border px-space-md py-space-sm"
+                class="rounded-md border border-border px-2 py-1.5"
                 disabled={runtimeReady()}
                 type="button"
                 onClick={addRuntimeBundle}

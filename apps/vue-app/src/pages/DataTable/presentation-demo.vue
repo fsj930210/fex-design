@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
 import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/vue/primitive/data-table'
 import { useDataTable } from '@fex-design/vue/composables/use-data-table'
@@ -31,16 +31,16 @@ const emptyTable = useDataTable({
     title="Loading, empty and customization states"
     description="Presentation states are primitive props and structured part classes; they do not change table state or start requests."
   >
-    <div class="grid gap-space-lg xl:grid-cols-3">
-      <section class="space-y-space-sm">
+    <div class="grid gap-3 xl:grid-cols-3">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Loading overlay</h3>
         <DataTable :table="dataTable" loading loading-content="Refreshing rows…" />
       </section>
-      <section class="space-y-space-sm">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Custom empty</h3>
         <DataTable :table="emptyTable" empty-content="No matching members" />
       </section>
-      <section class="space-y-space-sm">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Part class customization</h3>
         <DataTable
           :table="dataTable"

@@ -38,7 +38,7 @@ export function DynamicNestedDemo({ setResult }: { setResult: SetDemoResult }) {
       title="Dynamic nested fields"
       description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 React key。"
     >
-      <Form form={contactsForm} className="grid gap-space-lg">
+      <Form form={contactsForm} className="grid gap-3">
         <Field
           name="contacts"
           validators={{
@@ -57,7 +57,7 @@ export function DynamicNestedDemo({ setResult }: { setResult: SetDemoResult }) {
                   {(contactsField.state.value as Contact[]).map((contact, index) => (
                     <div key={contact.id} className="rounded-md border border-border p-4">
                       <FieldTitle>联系人 {index + 1}</FieldTitle>
-                      <FieldGroup className="mt-space-md">
+                      <FieldGroup className="mt-2">
                         <TextField
                           name={`contacts[${index}].name`}
                           label="姓名"
@@ -99,7 +99,7 @@ export function DynamicNestedDemo({ setResult }: { setResult: SetDemoResult }) {
                           )}
                         </Field>
                       </FieldGroup>
-                      <div className="mt-space-md flex gap-space-sm">
+                      <div className="mt-2 flex gap-1.5">
                         <Button
                           type="button"
                           variant="outline"

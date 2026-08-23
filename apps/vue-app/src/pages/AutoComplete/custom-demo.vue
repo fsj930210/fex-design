@@ -9,7 +9,7 @@ import Card from '@fex-design/vue/ui/card'
 import { fieldNames, users } from './data'
 </script>
 <template>
-  <div class="grid gap-space-xl md:grid-cols-2">
+  <div class="grid gap-4 md:grid-cols-2">
     <Card
       title="Custom items and disabled suggestion"
       description="Original backend items drive richer rows; Alex is disabled."
@@ -49,7 +49,7 @@ import { fieldNames, users } from './data'
         />
         <AutoCompleteContent />
       </AutoCompleteRoot>
-      <p id="reviewer-error-vue" class="mt-space-sm text-xs text-danger">
+      <p id="reviewer-error-vue" class="mt-1.5 text-xs text-danger">
         Choose a reviewer or enter a new name.
       </p>
     </Card>

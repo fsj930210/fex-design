@@ -79,9 +79,9 @@ export function DemoTimePicker({
           })}
         </TimePickerPanel>
         {panelExtra ? (
-          <div className="border-t border-border p-space-sm text-sm">{panelExtra}</div>
+          <div className="border-t border-border p-1.5 text-sm">{panelExtra}</div>
         ) : null}
-        <div className="flex justify-end border-t border-border p-space-sm">
+        <div className="flex justify-end border-t border-border p-1.5">
           <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>
             确定
           </Button>

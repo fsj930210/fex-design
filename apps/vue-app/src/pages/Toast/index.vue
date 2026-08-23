@@ -104,9 +104,9 @@ function toggleStack() {
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-6xl space-y-space-lg">
-      <header class="space-y-space-md">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-6xl space-y-3">
+      <header class="space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
@@ -121,7 +121,7 @@ function toggleStack() {
         title="Types"
         description="Built-in variants only provide default semantics. Content and icon can still be customized."
       >
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <Button variant="outline" @click="toast.show('Hello, Fex Design!')">Default</Button>
           <Button variant="outline" @click="toast.success('This is a success message')"
             >Success</Button
@@ -143,7 +143,7 @@ function toggleStack() {
         title="Position"
         description="The viewport controls placement. Service calls do not need to know where the toast appears."
       >
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <Button
             v-for="item in placements"
             :key="item"
@@ -159,7 +159,7 @@ function toggleStack() {
         title="Custom Content"
         description="Primitive parts let callers replace icon, add description, and render an action without changing the manager."
       >
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <Button variant="outline" @click="showRichContent">Rich content</Button>
           <Button variant="outline" @click="showAction">With action</Button>
         </div>
@@ -169,7 +169,7 @@ function toggleStack() {
         title="Update And Destroy"
         description="A stable id updates one toast. Returned ids can be dismissed manually."
       >
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <Button
             variant="outline"
             @click="toast.loading({ id: 'save-user', title: 'Saving user', duration: -1 })"
@@ -202,7 +202,7 @@ function toggleStack() {
         title="Multiple And Stacked"
         description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible."
       >
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <Button variant="outline" @click="showManyMessages">Show many</Button>
           <Button :variant="stack ? 'default' : 'outline'" @click="toggleStack">{{
             stack ? 'Stack on' : 'Stack off'

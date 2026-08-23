@@ -7,20 +7,20 @@ export function SwitchPage() {
   const [checked, setChecked] = useState(true)
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Switch</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Boolean toggle UI with controlled and uncontrolled usage.
             </p>
           </div>
         </header>
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card title="Basic" description="Uncontrolled switch uses defaultChecked.">
             <SwitchRoot defaultChecked aria-label="Enable notifications">
               <SwitchThumb />
@@ -30,7 +30,7 @@ export function SwitchPage() {
             title="Controlled"
             description="Controlled switch uses checked and onCheckedChange."
           >
-            <div className="grid gap-space-md">
+            <div className="grid gap-2">
               <SwitchRoot
                 checked={checked}
                 onCheckedChange={setChecked}
@@ -42,7 +42,7 @@ export function SwitchPage() {
             </div>
           </Card>
           <Card title="Sizes" description="Switch supports sm, default, and lg sizes.">
-            <div className="flex items-center gap-space-md">
+            <div className="flex items-center gap-2">
               <SwitchRoot size="sm" defaultChecked aria-label="Small switch">
                 <SwitchThumb />
               </SwitchRoot>
@@ -55,7 +55,7 @@ export function SwitchPage() {
             </div>
           </Card>
           <Card title="Disabled" description="Disabled state blocks interaction.">
-            <div className="flex items-center gap-space-md">
+            <div className="flex items-center gap-2">
               <SwitchRoot disabled aria-label="Disabled switch">
                 <SwitchThumb />
               </SwitchRoot>

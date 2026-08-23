@@ -2,8 +2,8 @@
   title="Pagination"
   description="Pagination is a core feature with two mutually exclusive registrations: client includes the paginated row model; server only owns pagination state/APIs and receives already-paged data."
 >
-  <div class="grid gap-space-lg xl:grid-cols-2">
-    <section class="space-y-space-sm">
+  <div class="grid gap-3 xl:grid-cols-2">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Client pagination</h3>
       <div>
         <fex-data-table [table]="client" />
@@ -50,7 +50,7 @@
         </div>
       </div>
     </section>
-    <section class="space-y-space-sm">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Server pagination</h3>
       <div>
         <fex-data-table [table]="server" />
@@ -95,7 +95,7 @@
             </button>
           </div>
         </div>
-        <p class="px-space-sm pb-space-sm text-xs text-muted-foreground">
+        <p class="px-1.5 pb-1.5 text-xs text-muted-foreground">
           Request: page={{ server.store.get().pagination.pageIndex + 1 }}&amp;pageSize={{
             server.store.get().pagination.pageSize
           }}

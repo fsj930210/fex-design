@@ -7,7 +7,7 @@
 </script>
 
 <Card title="Overlay" description="Overlay 不参与二维码生成，可组合加载、失效和自定义操作状态。">
-  <div class="flex flex-wrap items-center gap-space-md">
+  <div class="flex flex-wrap items-center gap-2">
     <QrCodeRoot value="https://fex.design/overlay" size={176}>
       <QrCodeSvg>
         <QrCodeBackground />

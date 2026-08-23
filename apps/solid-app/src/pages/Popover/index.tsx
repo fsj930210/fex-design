@@ -16,7 +16,7 @@ import { A } from '@solidjs/router'
 function DemoSection(props: { title: string; description: string; children: JSX.Element }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div class="flex min-w-0 flex-wrap items-center gap-space-md">{props.children}</div>
+      <div class="flex min-w-0 flex-wrap items-center gap-2">{props.children}</div>
     </Card>
   )
 }
@@ -85,22 +85,22 @@ export function PopoverPage(): JSX.Element {
   let container: HTMLDivElement | undefined
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
-            <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               鍩轰簬 core floating overlay 鐨?Solid
               閫傞厤锛岃鐩栬Е鍙戞柟寮忋€佷綅缃€佸彈鎺х姸鎬佸拰鑷畾涔夋寕杞藉鍣ㄣ€?{' '}
             </p>
           </div>
         </header>
 
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <DemoSection title="Primitive" description="Demo.">
             <Popover side="bottom" align="start" sideOffset={8} arrow>
               <PopoverTrigger>
@@ -181,10 +181,10 @@ export function PopoverPage(): JSX.Element {
           </DemoSection>
 
           <DemoSection title="Placement" description="Demo.">
-            <div class="flex w-full flex-col items-center gap-space-md py-space-lg">
+            <div class="flex w-full flex-col items-center gap-2 py-3">
               <For each={placementGroups}>
                 {(group, rowIndex) => (
-                  <div class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-space-lg gap-y-space-md">
+                  <div class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-3 gap-y-2">
                     {rowIndex() > 0 && rowIndex() < 4 ? (
                       <>
                         <div class="justify-self-start">
@@ -279,7 +279,7 @@ export function PopoverPage(): JSX.Element {
               ref={(element) => {
                 container = element
               }}
-              class="relative min-h-40 rounded-md border border-dashed p-space-lg"
+              class="relative min-h-40 rounded-md border border-dashed p-3"
             >
               <Popover getPopupContainer={() => container ?? document.body} placement="bottomLeft">
                 <PopoverTrigger>

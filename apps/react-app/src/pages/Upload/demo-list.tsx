@@ -30,7 +30,7 @@ export function DemoUploadList({ showMultipart = false }: { showMultipart?: bool
   const items = useSyncExternalStore(upload.subscribeItems, upload.getItems, upload.getItems)
   return (
     <>
-      <UploadList className="mt-space-md">
+      <UploadList className="mt-2">
         {(listItems) =>
           listItems.map((item) => (
             <UploadItem key={item.id} id={item.id}>
@@ -59,7 +59,7 @@ export function DemoUploadList({ showMultipart = false }: { showMultipart?: bool
                       </div>
                     )}
                   </div>
-                  <div className="flex gap-space-xs">
+                  <div className="flex gap-1">
                     {state.item?.status === 'pending' && (
                       <Button size="xs" variant="ghost" onClick={() => void state.start()}>
                         上传
@@ -93,7 +93,7 @@ export function DemoUploadList({ showMultipart = false }: { showMultipart?: bool
       </UploadList>
       {items.length > 0 && (
         <Button
-          className="mt-space-sm w-full"
+          className="mt-1.5 w-full"
           size="xs"
           variant="ghost"
           onClick={() => void upload.clear()}

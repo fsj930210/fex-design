@@ -24,11 +24,11 @@ const droppable = useDroppable({
   <div
     :ref="(element) => droppable.setTarget(element as HTMLElement | null)"
     v-bind="droppable.dataAttributes.value"
-    class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background"
+    class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-2 text-sm transition-colors data-[can-drop=true]:border-focus data-[over=true]:bg-selected-background"
   >
     <div>
       <p class="font-medium text-foreground">{{ props.title }}</p>
-      <p class="mt-space-sm text-muted-foreground">
+      <p class="mt-1.5 text-muted-foreground">
         {{
           droppable.over.value
             ? droppable.canDrop.value
@@ -37,7 +37,7 @@ const droppable = useDroppable({
             : 'Drop target'
         }}
       </p>
-      <div class="mt-space-md space-y-space-sm">
+      <div class="mt-2 space-y-1.5">
         <DraggableToken v-for="item in props.items" :key="item.id" v-bind="item" />
       </div>
     </div>

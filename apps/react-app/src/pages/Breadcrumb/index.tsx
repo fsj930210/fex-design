@@ -8,9 +8,9 @@ import { DropdownBreadcrumb } from './dropdown-breadcrumb'
 
 export function BreadcrumbPage() {
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
@@ -20,7 +20,7 @@ export function BreadcrumbPage() {
             triggers.
           </p>
         </header>
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card title="Classic" description="Links and the current page use different semantics.">
             <ClassicBreadcrumb />
           </Card>

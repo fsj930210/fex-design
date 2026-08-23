@@ -24,7 +24,7 @@
 </script>
 
 <Card title="Modal and Drawer" description="Watermark can wrap modal and drawer content.">
-  <div class="flex flex-wrap gap-space-md">
+  <div class="flex flex-wrap gap-2">
     <Dialog>
       <DialogTrigger>
         {#snippet children(slot)}

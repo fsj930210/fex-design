@@ -17,7 +17,7 @@ export function ControlledDemo() {
   const [selected, setSelected] = createSignal<readonly (string | number)[]>([])
   return (
     <Card title="Controlled state" description="Expansion and selection can be owned outside Tree.">
-      <div class="mb-space-md flex flex-wrap gap-space-sm">
+      <div class="mb-2 flex flex-wrap gap-1.5">
         <Button
           size="sm"
           variant="outline"
@@ -45,7 +45,7 @@ export function ControlledDemo() {
         selectedKeys={selected()}
         onSelectedKeysChange={setSelected}
         features={[expansionFeature(), selectionFeature(), focusFeature(), keyboardFeature()]}
-        class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        class="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </Card>
   )

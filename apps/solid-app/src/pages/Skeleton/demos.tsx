@@ -8,9 +8,9 @@ export const BasicDemo = () => (
 )
 export const AvatarDemo = () => (
   <Card title="Avatar" description="Compose circular and text placeholders.">
-    <div class="flex max-w-md items-center gap-space-lg">
+    <div class="flex max-w-md items-center gap-3">
       <Skeleton class="size-12 rounded-full" />
-      <div class="grid flex-1 gap-space-sm">
+      <div class="grid flex-1 gap-1.5">
         <Skeleton class="h-4 w-2/5" />
         <Skeleton class="h-4 w-4/5" />
       </div>
@@ -19,7 +19,7 @@ export const AvatarDemo = () => (
 )
 export const CardDemo = () => (
   <Card title="Card" description="Preserve a media card layout while loading.">
-    <div class="grid max-w-sm gap-space-md">
+    <div class="grid max-w-sm gap-2">
       <Skeleton class="aspect-video w-full" />
       <Skeleton class="h-5 w-3/5" />
       <Skeleton class="h-4 w-full" />
@@ -29,7 +29,7 @@ export const CardDemo = () => (
 )
 export const TextDemo = () => (
   <Card title="Text" description="Use varied widths to suggest paragraph rhythm.">
-    <div class="grid max-w-xl gap-space-sm">
+    <div class="grid max-w-xl gap-1.5">
       <Skeleton class="h-4 w-full" />
       <Skeleton class="h-4 w-full" />
       <Skeleton class="h-4 w-2/3" />
@@ -38,12 +38,12 @@ export const TextDemo = () => (
 )
 export const FormDemo = () => (
   <Card title="Form" description="Match labels, controls and actions.">
-    <div class="grid max-w-md gap-space-lg">
-      <div class="grid gap-space-sm">
+    <div class="grid max-w-md gap-3">
+      <div class="grid gap-1.5">
         <Skeleton class="h-4 w-24" />
         <Skeleton class="h-9 w-full" />
       </div>
-      <div class="grid gap-space-sm">
+      <div class="grid gap-1.5">
         <Skeleton class="h-4 w-32" />
         <Skeleton class="h-9 w-full" />
       </div>
@@ -53,15 +53,15 @@ export const FormDemo = () => (
 )
 export const TableDemo = () => (
   <Card title="Table" description="Repeat stable row shapes for data loading.">
-    <div class="grid max-w-2xl gap-space-md">
-      <div class="grid grid-cols-3 gap-space-lg border-b pb-space-md">
+    <div class="grid max-w-2xl gap-2">
+      <div class="grid grid-cols-3 gap-3 border-b pb-2">
         <Skeleton class="h-4 w-24" />
         <Skeleton class="h-4 w-20" />
         <Skeleton class="h-4 w-16" />
       </div>
       {['w-2/5', 'w-3/5', 'w-1/2'].map((width) => (
-        <div class="grid grid-cols-3 gap-space-lg">
-          <div class="flex items-center gap-space-sm">
+        <div class="grid grid-cols-3 gap-3">
+          <div class="flex items-center gap-1.5">
             <Skeleton class="size-8 rounded-full" />
             <Skeleton class={`h-4 ${width}`} />
           </div>
@@ -77,7 +77,7 @@ export const AnimationDemo = () => (
     title="Animation"
     description="Apply the built-in animation class when loading should be emphasized."
   >
-    <div class="grid max-w-sm gap-space-md">
+    <div class="grid max-w-sm gap-2">
       <Skeleton class={`h-5 w-full ${skeletonAnimationClassName}`} />
       <Skeleton class={`h-5 w-11/12 ${skeletonAnimationClassName}`} />
       <Skeleton class={`h-5 w-4/5 ${skeletonAnimationClassName}`} />

@@ -31,7 +31,7 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
         title="Basic form"
         description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
       >
-        <Form form={loginForm} className="grid max-w-xl gap-space-lg">
+        <Form form={loginForm} className="grid max-w-xl gap-3">
           <TextField
             name="account"
             label="账号"
@@ -74,7 +74,7 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
           </Field>
           <loginForm.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting] as const}>
             {([canSubmit, isSubmitting]) => (
-              <div className="flex gap-space-sm">
+              <div className="flex gap-1.5">
                 <Button type="submit" disabled={!canSubmit || isSubmitting}>
                   {isSubmitting ? '提交中…' : '登录'}
                 </Button>
@@ -91,7 +91,7 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
         title="Validation timing, async validation and dependencies"
         description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
       >
-        <Form form={validationForm} className="grid max-w-xl gap-space-lg">
+        <Form form={validationForm} className="grid max-w-xl gap-3">
           <TextField
             name="username"
             label="用户名"

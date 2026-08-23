@@ -1,13 +1,12 @@
 @import 'tailwindcss';
+@import './tokens.css';
 @import './theme.css';
 @import './themes/light.css';
 @import './themes/dark.css';
-@import './density.css';
-@import './responsive.css';
+@import './components-token.css';
 @import './globals.css';
 @import './animations.css';
 @import './utilities.css';
 
 @source "../../../apps";
 @source "../../@fex-design";
-@source inline("data-[selected=true]:bg-primary/15 data-[selected=true]:text-foreground data-[selected=true]:ring-1 data-[selected=true]:ring-primary/30");

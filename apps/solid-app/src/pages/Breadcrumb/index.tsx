@@ -17,19 +17,19 @@ import { ParallelogramBreadcrumb } from './parallelogram-breadcrumb'
 
 export function BreadcrumbPage(): JSX.Element {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
         <header>
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
-          <h1 class="mt-space-md text-2xl font-semibold text-foreground">Breadcrumb</h1>
-          <p class="mt-space-md text-sm text-muted-foreground">
+          <h1 class="mt-2 text-2xl font-semibold text-foreground">Breadcrumb</h1>
+          <p class="mt-2 text-sm text-muted-foreground">
             Composable navigation trails with links, current pages, custom separators and menu
             triggers.
           </p>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <Card title="Classic" description="Links and the current page use different semantics.">
             <ClassicBreadcrumb />
           </Card>

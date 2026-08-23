@@ -9,8 +9,8 @@ export function BasicDemo() {
       title="Basic, controlled and uncontrolled"
       description="The first Transfer owns its target keys; the second exposes target keys and complete moved items through onChange meta."
     >
-      <div class="grid gap-space-lg xl:grid-cols-2">
-        <section class="space-y-space-sm">
+      <div class="grid gap-3 xl:grid-cols-2">
+        <section class="space-y-1.5">
           <h3 class="text-sm font-medium">Uncontrolled</h3>
           <Transfer
             items={members}
@@ -19,7 +19,7 @@ export function BasicDemo() {
             title={{ source: 'Available', target: 'Assigned' }}
           />
         </section>
-        <section class="space-y-space-sm">
+        <section class="space-y-1.5">
           <h3 class="text-sm font-medium">Controlled</h3>
           <Transfer
             items={members}

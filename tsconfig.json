@@ -2,7 +2,6 @@
   "extends": "@fex/config-tsconfig/base.json",
   "files": [],
   "references": [
-    { "path": "./apps/docs" },
     { "path": "./apps/react-app" },
     { "path": "./apps/vue-app" },
     { "path": "./apps/solid-app" },

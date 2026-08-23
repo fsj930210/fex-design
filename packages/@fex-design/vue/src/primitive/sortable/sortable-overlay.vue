@@ -17,7 +17,7 @@ const { sortable } = useSortableContext()
       :class="
         cn(
           sortableItemClassName,
-          'bg-card text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
+          'bg-elevated-background text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
           props.class,
         )
       "

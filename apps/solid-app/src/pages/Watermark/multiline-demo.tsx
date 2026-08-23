@@ -8,7 +8,7 @@ export function MultilineDemo() {
         content={['FEX Admin', 'Confidential']}
         class="h-56 rounded-md border border-border bg-background"
       >
-        <div class="grid h-full place-items-center p-space-xl text-center text-sm text-muted-foreground">
+        <div class="grid h-full place-items-center p-4 text-center text-sm text-muted-foreground">
           Multiline text is drawn into the same repeated canvas tile.
         </div>
       </Watermark>

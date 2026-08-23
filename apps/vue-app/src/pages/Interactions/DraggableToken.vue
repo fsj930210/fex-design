@@ -11,7 +11,7 @@ const overlayStyle = computed<CSSProperties>(() => draggable.overlayStyle.value 
 <template>
   <div
     :ref="setTarget"
-    class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
+    class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
     :data-dragging="draggable.dragging.value || undefined"
   >
     <span>{{ props.label }}</span
@@ -20,7 +20,7 @@ const overlayStyle = computed<CSSProperties>(() => draggable.overlayStyle.value 
   <Teleport to="body"
     ><div
       v-if="draggable.dragging.value"
-      class="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+      class="flex min-h-11 items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
       :style="overlayStyle"
     >
       <span>{{ props.label }}</span

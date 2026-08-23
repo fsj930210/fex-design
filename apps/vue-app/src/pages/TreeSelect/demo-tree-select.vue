@@ -86,7 +86,7 @@ function highlightParts(label: string) {
         </InputRoot>
       </div>
     </TreeSelectTrigger>
-    <TreeSelectContent class="w-80 p-space-sm">
+    <TreeSelectContent class="w-80 p-1.5">
       <slot v-if="hasCustomContent" />
       <div :class="hasCustomContent ? 'hidden' : undefined">
         <DemoTree
@@ -110,7 +110,7 @@ function highlightParts(label: string) {
                 type="button"
                 :data-selected="!props.multiple && option.selected || undefined"
                 :disabled="item.disabled"
-                class="rounded-sm px-space-xs text-left data-[selected=true]:bg-accent disabled:cursor-not-allowed"
+                class="rounded-sm px-1 text-left data-[selected=true]:bg-selected-background disabled:cursor-not-allowed"
                 @click.stop="option.select"
               >
                 <span v-for="(part, index) in highlightParts(String(item.node.name))" :key="index" :class="part.match ? 'bg-warning/30' : undefined">{{ part.text }}</span>

@@ -10,6 +10,51 @@
   justify-content: center;
 }
 
+@utility h-xs {
+  height: var(--height-xs);
+}
+
+@utility h-sm {
+  height: var(--height-sm);
+}
+
+@utility h-default {
+  height: var(--height-default);
+}
+
+@utility h-lg {
+  height: var(--height-lg);
+}
+
+@utility h-xl {
+  height: var(--height-xl);
+}
+
+@utility icon-size-xs {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+
+@utility icon-size-sm {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+@utility icon-size-default {
+  width: var(--icon-size-default);
+  height: var(--icon-size-default);
+}
+
+@utility icon-size-lg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+@utility icon-size-xl {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+}
+
 @utility absolute-center {
   position: absolute;
   inset: 50% auto auto 50%;

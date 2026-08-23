@@ -60,7 +60,7 @@ function DetailRowsGrid() {
     <DataTable
       table={table}
       renderSubComponent={(row) => (
-        <div className="bg-muted-background p-space-md text-sm">
+        <div className="bg-muted-background p-2 text-sm">
           {row.original.name}: {row.original.visits} visits, {row.original.progress}% progress.
         </div>
       )}
@@ -74,7 +74,7 @@ export function ExpansionDataTableDemo() {
       title="Row expansion"
       description="The same expansion state supports hierarchical subRows and arbitrary detail panels. The expand control is an optional column factory, not a special DataTable mode."
     >
-      <div className="grid gap-space-lg xl:grid-cols-2">
+      <div className="grid gap-3 xl:grid-cols-2">
         <DemoBranch title="Hierarchical rows">
           <TreeRowsGrid />
         </DemoBranch>

@@ -61,8 +61,8 @@ type Province = keyof typeof locations
   <Card
     title="Path prefix and multiple forms"
     description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"
-    ><div class="grid gap-space-xl lg:grid-cols-2">
-      <FormHost :form="prefixedForm" class="grid gap-space-lg"
+    ><div class="grid gap-4 lg:grid-cols-2">
+      <FormHost :form="prefixedForm" class="grid gap-3"
         ><FieldSet
           ><FieldLegend>profile</FieldLegend
           ><FieldGroup
@@ -103,8 +103,8 @@ type Province = keyof typeof locations
                   :errors="errors(state.meta.errors)" /></FieldRoot></Field></FieldGroup></FieldSet
         ><Button class="w-fit" type="submit">提交 profile</Button></FormHost
       >
-      <div class="grid gap-space-md">
-        <FormHost :form="profileForm" class="grid gap-space-md rounded-md border border-border p-4"
+      <div class="grid gap-2">
+        <FormHost :form="profileForm" class="grid gap-2 rounded-md border border-border p-4"
           ><FieldTitle>资料表单</FieldTitle
           ><Field name="name" v-slot="{ field, state }"
             ><FieldRoot
@@ -132,7 +132,7 @@ type Province = keyof typeof locations
           ><Button class="w-fit" type="submit">保存资料</Button></FormHost
         ><FormHost
           :form="securityForm"
-          class="grid gap-space-md rounded-md border border-border p-4"
+          class="grid gap-2 rounded-md border border-border p-4"
           ><FieldTitle>安全表单</FieldTitle
           ><Field
             name="notificationEmail"
@@ -162,7 +162,7 @@ type Province = keyof typeof locations
               ><FieldLabel>开启双因素认证</FieldLabel></FieldRoot
             ></Field
           >
-          <div class="flex gap-space-sm">
+          <div class="flex gap-1.5">
             <Button
               type="button"
               variant="outline"

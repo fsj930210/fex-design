@@ -124,7 +124,7 @@ function DeferredRangeDemo() {
         }
       />
       <RangePreview value={submittedValue} />
-      <p className="mt-space-sm text-xs text-muted-foreground">已提交 {submitCount} 次</p>
+      <p className="mt-1.5 text-xs text-muted-foreground">已提交 {submitCount} 次</p>
     </div>
   )
 }

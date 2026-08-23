@@ -36,8 +36,8 @@ export function CoordinationDemo({ setResult }: { setResult: SetDemoResult }) {
       title="Path prefix and multiple forms"
       description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"
     >
-      <div className="grid gap-space-xl lg:grid-cols-2">
-        <Form form={prefixedForm} className="grid gap-space-lg">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Form form={prefixedForm} className="grid gap-3">
           <FieldSet>
             <FieldLegend>profile</FieldLegend>
             <FieldGroup>
@@ -62,10 +62,10 @@ export function CoordinationDemo({ setResult }: { setResult: SetDemoResult }) {
           </Button>
         </Form>
 
-        <div className="grid gap-space-md">
+        <div className="grid gap-2">
           <Form
             form={profileForm}
-            className="grid gap-space-md rounded-md border border-border p-4"
+            className="grid gap-2 rounded-md border border-border p-4"
           >
             <FieldTitle>资料表单</FieldTitle>
             <TextField name="name" label="姓名" />
@@ -82,7 +82,7 @@ export function CoordinationDemo({ setResult }: { setResult: SetDemoResult }) {
           </Form>
           <Form
             form={securityForm}
-            className="grid gap-space-md rounded-md border border-border p-4"
+            className="grid gap-2 rounded-md border border-border p-4"
           >
             <FieldTitle>安全表单</FieldTitle>
             <TextField
@@ -108,7 +108,7 @@ export function CoordinationDemo({ setResult }: { setResult: SetDemoResult }) {
                 </FieldRoot>
               )}
             </Field>
-            <div className="flex gap-space-sm">
+            <div className="flex gap-1.5">
               <Button
                 type="button"
                 variant="outline"

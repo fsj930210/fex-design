@@ -29,7 +29,7 @@ export function PresentationDataTableDemo() {
       title="Loading, empty and customization states"
       description="Presentation states are primitive props and structured part classes; they do not change table state or start requests."
     >
-      <div class="grid gap-space-lg xl:grid-cols-3">
+      <div class="grid gap-3 xl:grid-cols-3">
         <DemoBranch title="Loading overlay">
           <DataTable table={dataTable} loading loadingContent="Refreshing rows…" />
         </DemoBranch>

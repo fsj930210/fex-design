@@ -6,7 +6,7 @@
   import Card from '@fex-design/svelte/ui/card'
   import { fieldNames, users } from './data'
 </script>
-<div class="grid gap-space-xl md:grid-cols-2">
+<div class="grid gap-4 md:grid-cols-2">
   <Card title="Custom items and disabled suggestion" description="Original backend items drive richer rows; Alex is disabled.">
     <AutoCompleteRoot items={users} {fieldNames}>
       <AutoCompleteTrigger placeholder="Custom suggestion rows" clearable status="warning" />
@@ -25,6 +25,6 @@
       <AutoCompleteTrigger name="reviewer" required aria-describedby="reviewer-error-svelte" placeholder="Required reviewer" clearable invalid status="error" />
       <AutoCompleteContent />
     </AutoCompleteRoot>
-    <p id="reviewer-error-svelte" class="mt-space-sm text-xs text-danger">Choose a reviewer or enter a new name.</p>
+    <p id="reviewer-error-svelte" class="mt-1.5 text-xs text-danger">Choose a reviewer or enter a new name.</p>
   </Card>
 </div>

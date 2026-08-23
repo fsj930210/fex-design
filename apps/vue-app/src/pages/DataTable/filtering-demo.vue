@@ -60,10 +60,10 @@ const grids = [
   <DemoSection
     title="Column filtering"
     description="meta.filterFn opts a column into local filtering. Missing filterFn means remote, while onColumnFiltersChange still receives the complete filter list."
-    ><div class="grid gap-space-lg xl:grid-cols-3">
-      <section v-for="item in grids" :key="item.title" class="space-y-space-sm">
+    ><div class="grid gap-3 xl:grid-cols-3">
+      <section v-for="item in grids" :key="item.title" class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">{{ item.title }}</h3>
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           <DataTableFilterInput
             v-for="column in item.table.getAllLeafColumns()"
             :key="column.id"

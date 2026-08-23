@@ -4,7 +4,7 @@ import DemoTimePicker from './demo-time-picker.vue'
 </script>
 <template>
   <Card title="禁用与校验样式"
-    ><div class="flex gap-space-lg">
+    ><div class="flex gap-3">
       <DemoTimePicker disabled :default-value="{ hour: 8, minute: 0, second: 0 }" /><DemoTimePicker
         invalid
       /></div

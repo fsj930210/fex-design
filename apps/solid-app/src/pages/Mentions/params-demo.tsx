@@ -32,7 +32,7 @@ export function ParamsDemo() {
         <MentionsTrigger placeholder="Type # to attach knowledge context" />
         <MentionsContent><Docs /></MentionsContent>
       </MentionsRoot>
-      <div class="mt-space-sm flex flex-wrap gap-space-xs text-xs text-muted-foreground">
+      <div class="mt-1.5 flex flex-wrap gap-1 text-xs text-muted-foreground">
         <For each={params()} fallback="No params yet">{(param) => <span>#{param}</span>}</For>
       </div>
     </Card>

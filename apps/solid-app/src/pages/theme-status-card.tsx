@@ -9,15 +9,15 @@ export function ThemeStatusCard(props: { title: string }) {
   const nextTheme = createMemo(() => (snapshot().resolvedTheme === 'dark' ? 'light' : 'dark'))
 
   return (
-    <div class="rounded-md border border-border bg-card-background p-space-lg text-card-foreground shadow-card">
-      <div class="space-y-space-sm">
+    <div class="rounded-md border border-border bg-elevated-background p-3 text-elevated-foreground shadow-elevated">
+      <div class="space-y-1.5">
         <p class="text-base font-medium">{props.title}</p>
         <p class="text-sm text-muted-foreground">theme: {snapshot().theme}</p>
         <p class="text-sm text-muted-foreground">resolvedTheme: {snapshot().resolvedTheme}</p>
         <p class="text-sm text-muted-foreground">forcedTheme: {snapshot().forcedTheme ?? 'none'}</p>
       </div>
       <button
-        class="mt-space-lg rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-foreground transition-colors hover:bg-hover-background disabled:cursor-not-allowed disabled:text-disabled-foreground"
+        class="mt-3 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-hover-background disabled:cursor-not-allowed disabled:text-disabled-foreground"
         disabled={!canSwitchTheme()}
         type="button"
         onClick={() => controller.setTheme(nextTheme())}

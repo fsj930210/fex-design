@@ -1,7 +1,9 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
-const workspaceRoot = process.cwd()
+const scriptDirectory = path.dirname(fileURLToPath(import.meta.url))
+const workspaceRoot = path.resolve(scriptDirectory, '../../../..')
 const angularPackagePath = path.join(workspaceRoot, 'packages/@fex-design/angular/package.json')
 const corePackagePath = path.join(workspaceRoot, 'packages/@fex-design/core/package.json')
 const outputPath = path.join(workspaceRoot, 'tsconfig.angular-workspace.json')

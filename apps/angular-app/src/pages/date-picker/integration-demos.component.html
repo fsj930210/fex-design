@@ -1,4 +1,4 @@
-<div class="space-y-space-xl">
+<div class="space-y-4">
   <fex-card
     title="预设范围"
     description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。"
@@ -10,7 +10,7 @@
           <demo-preset-range-panel (selectRange)="presetRange.set($event)" />
         </fex-range-picker-content>
       </fex-range-picker-root>
-      <p class="mt-space-sm w-full text-xs text-muted-foreground">
+      <p class="mt-1.5 w-full text-xs text-muted-foreground">
         当前范围：{{ rangeText(presetRange()) }}
       </p>
     </div>
@@ -32,10 +32,10 @@
           </fex-date-picker-footer>
         </fex-range-picker-content>
       </fex-range-picker-root>
-      <p class="mt-space-sm w-full text-xs text-muted-foreground">
+      <p class="mt-1.5 w-full text-xs text-muted-foreground">
         当前范围：{{ rangeText(submitted()) }}
       </p>
-      <p class="mt-space-sm text-xs text-muted-foreground">已提交 {{ submitCount() }} 次</p>
+      <p class="mt-1.5 text-xs text-muted-foreground">已提交 {{ submitCount() }} 次</p>
     </div>
   </fex-card>
 

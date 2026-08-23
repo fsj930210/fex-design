@@ -57,8 +57,8 @@ function FilteringGrid({ kind }: { kind: 'local' | 'server' | 'mixed' }) {
       )?.meta?.filterFn,
   )
   return (
-    <div className="space-y-space-sm">
-      <div className="flex flex-wrap gap-space-sm">
+    <div className="space-y-1.5">
+      <div className="flex flex-wrap gap-1.5">
         {table.getAllLeafColumns().map((column) => (
           <DataTableFilterInput
             key={column.id}
@@ -81,7 +81,7 @@ export function FilteringDataTableDemo() {
       title="Column filtering"
       description="meta.filterFn opts a column into local filtering. Missing filterFn means remote, while onColumnFiltersChange still receives the complete filter list."
     >
-      <div className="grid gap-space-lg xl:grid-cols-3">
+      <div className="grid gap-3 xl:grid-cols-3">
         <DemoBranch title="All local">
           <FilteringGrid kind="local" />
         </DemoBranch>

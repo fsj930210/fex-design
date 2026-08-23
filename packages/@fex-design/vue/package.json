@@ -2,6 +2,10 @@
   "name": "@fex-design/vue",
   "private": true,
   "type": "module",
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
+  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
@@ -121,7 +125,9 @@
     "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
-    "vue": "3.5.40"
+    "typescript": "catalog:",
+    "vue": "3.5.40",
+    "vue-tsc": "latest"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

@@ -7,7 +7,7 @@ const Labeled = ({
   label: string
   placement: 'start' | 'center' | 'end'
 }) => (
-  <div className="flex items-center gap-space-md">
+  <div className="flex items-center gap-2">
     <Separator
       className={placement === 'start' ? 'w-12' : placement === 'end' ? 'flex-1' : 'flex-1'}
     />
@@ -20,7 +20,7 @@ export const TextDemo = () => (
     title="With Text"
     description="Compose a label between two separators and control its placement."
   >
-    <div className="grid max-w-xl gap-space-xl">
+    <div className="grid max-w-xl gap-4">
       <Labeled label="Start" placement="start" />
       <Labeled label="Center" placement="center" />
       <Labeled label="End" placement="end" />

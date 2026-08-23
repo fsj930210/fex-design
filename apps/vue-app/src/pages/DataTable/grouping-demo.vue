@@ -61,10 +61,10 @@ const grids = [
   <DemoSection
     title="Row grouping and aggregation"
     description="Each group is a full-width summary row above its members. Department is the outer level; Status is nested inside it. The chevron expands only that group, and the right side displays the aggregated visits."
-    ><div class="grid gap-space-lg xl:grid-cols-2">
-      <section v-for="item in grids" :key="item.title" class="space-y-space-sm">
+    ><div class="grid gap-3 xl:grid-cols-2">
+      <section v-for="item in grids" :key="item.title" class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">{{ item.title }}</h3>
-        <div class="flex gap-space-sm">
+        <div class="flex gap-1.5">
           <Button
             v-for="id in ['department', 'status']"
             :key="id"
@@ -77,7 +77,7 @@ const grids = [
         <DataTable :table="item.table"
           ><template #groupRow="{ row }"
             ><div
-              class="flex min-h-11 items-center gap-space-sm px-space-md"
+              class="flex min-h-11 items-center gap-1.5 px-2"
               :style="{ paddingInlineStart: `${row.depth * 20 + 12}px` }"
             >
               <Button size="icon-xs" variant="ghost" @click="row.toggleExpanded()">

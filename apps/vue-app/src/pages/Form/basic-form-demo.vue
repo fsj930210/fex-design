@@ -61,7 +61,7 @@ type Province = keyof typeof locations
   <Card
     title="Basic form"
     description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
-    ><FormHost :form="loginForm" class="grid max-w-xl gap-space-lg"
+    ><FormHost :form="loginForm" class="grid max-w-xl gap-3"
       ><Field name="account" :validators="accountValidators" v-slot="{ field, state }"
         ><FieldRoot required :invalid="invalid(state)" has-description :has-error="invalid(state)"
           ><FieldLabel>账号 <FieldRequiredIndicator /></FieldLabel
@@ -108,7 +108,7 @@ type Province = keyof typeof locations
           ></FieldRoot
         ></Field
       >
-      <div class="flex gap-space-sm">
+      <div class="flex gap-1.5">
         <component
           :is="loginForm.Subscribe"
           :selector="(state: any) => [state.canSubmit, state.isSubmitting]"

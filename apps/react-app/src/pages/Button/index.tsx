@@ -36,36 +36,36 @@ function DemoSection({
 }) {
   return (
     <Card title={title} description={description}>
-      <div className="flex min-w-0 flex-wrap items-center gap-space-md">{children}</div>
+      <div className="flex min-w-0 flex-wrap items-center gap-2">{children}</div>
     </Card>
   )
 }
 
 export function ButtonPage() {
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             返回首页
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Button</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               用于触发页面操作、表单提交和工具栏命令。示例覆盖样式、尺寸、加载、图标、效果、组合和禁用状态。
             </p>
           </div>
         </header>
 
-        <div className="grid gap-space-xl">
+        <div className="grid gap-4">
           <Card title="Primitive" description="按钮底层骨架与最小行为。">
-            <div className="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
               <PrimitiveButton>Primitive button</PrimitiveButton>
             </div>
           </Card>
 
           <Card title="Button group" description="Groups related actions without owning their value.">
-            <div className="flex flex-wrap items-start gap-space-lg">
+            <div className="flex flex-wrap items-start gap-3">
               <ButtonGroup><Button variant="outline">Previous</Button><Button variant="outline">Current</Button><Button variant="outline">Next</Button></ButtonGroup>
               <ButtonGroup spacing={8}><Button>Save</Button><Button>Publish</Button></ButtonGroup>
               <ButtonGroup orientation="vertical"><Button variant="outline">Move up</Button><Button variant="outline">Move down</Button></ButtonGroup>
@@ -73,7 +73,7 @@ export function ButtonPage() {
           </Card>
 
           <Card title="Ui" description="面向业务的默认按钮封装。">
-            <div className="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
               {variants.map((variant) => (
                 <Button key={variant} variant={variant}>
                   {variant}

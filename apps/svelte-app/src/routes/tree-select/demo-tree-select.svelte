@@ -55,7 +55,7 @@
         </div>
       {/snippet}
     </TreeSelectTrigger>
-    <TreeSelectContent class="w-80 p-space-sm">
+    <TreeSelectContent class="w-80 p-1.5">
       {#if contentActive && content}
         {@render content()}
       {:else}
@@ -76,7 +76,7 @@
         >
           {#snippet title({ item })}
             <TreeSelectOption item={{ value: item.key, label: item.node.name, node: item.node, disabled: item.disabled }}>
-              {#snippet children(option)}<button type="button" disabled={item.disabled} data-selected={!multiple && option.selected || undefined} class="rounded-sm px-space-xs text-left data-[selected]:bg-accent disabled:cursor-not-allowed" onclick={(event) => { event.stopPropagation(); option.select() }}>{item.node.name}</button>{/snippet}
+              {#snippet children(option)}<button type="button" disabled={item.disabled} data-selected={!multiple && option.selected || undefined} class="rounded-sm px-1 text-left data-[selected]:bg-selected-background disabled:cursor-not-allowed" onclick={(event) => { event.stopPropagation(); option.select() }}>{item.node.name}</button>{/snippet}
             </TreeSelectOption>
           {/snippet}
         </DemoTree>

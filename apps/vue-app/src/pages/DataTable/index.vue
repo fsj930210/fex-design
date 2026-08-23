@@ -19,9 +19,9 @@ import RowEditingDemo from './row-editing-demo.vue'
 import PresentationDemo from './presentation-demo.vue'
 </script>
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-[1600px] space-y-space-xl">
-      <header class="space-y-space-sm">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-[1600px] space-y-4">
+      <header class="space-y-1.5">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
@@ -32,7 +32,7 @@ import PresentationDemo from './presentation-demo.vue'
           </p>
         </div>
       </header>
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <BasicDemo /><HeaderGroupingDemo /><SortingDemo /><FilteringDemo /><PaginationDemo /><SelectionDemo /><ExpansionDemo /><VisibilityDemo /><OrderingDemo /><DndDemo /><ColumnPinningDemo /><RowPinningDemo /><SizingDemo /><GroupingDemo /><VirtualDemo /><CellEditingDemo /><RowEditingDemo /><PresentationDemo />
       </div>
     </div>

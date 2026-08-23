@@ -38,7 +38,7 @@ export function ValidationDemo() {
   const form = useForm({ defaultValues: { prompt: '' }, onSubmit: async () => undefined })
   return (
     <Card title="Form validation" description="Invalid state drives the default system Textarea styling.">
-      <Form form={form} className="grid max-w-xl gap-space-md">
+      <Form form={form} className="grid max-w-xl gap-2">
         <Field
           name="prompt"
           validators={{ onSubmit: ({ value }) => (String(value).trim() ? undefined : 'Prompt is required.') }}

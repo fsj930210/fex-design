@@ -26,7 +26,7 @@
               <div class="mt-1 text-xs text-danger">{{ message(state.item()?.error) }}</div>
             }
           </div>
-          <div class="flex gap-space-xs">
+          <div class="flex gap-1">
             @if (state.item()?.status === 'pending') {
               <button fexButton size="xs" variant="ghost" (click)="state.start()">上传</button>
             }
@@ -49,7 +49,7 @@
 @if (context.items().length) {
   <button
     fexButton
-    class="mt-space-sm w-full"
+    class="mt-1.5 w-full"
     size="xs"
     variant="ghost"
     (click)="context.upload()?.clear()"

@@ -28,7 +28,7 @@
   title="Form validation"
   description="Submit the real Form empty to show Field error text and Textarea error styling."
 >
-  <Form {form} class="grid max-w-xl gap-space-md">
+  <Form {form} class="grid max-w-xl gap-2">
     <Field name="message" {validators}>
       {#snippet children(field)}
         {@const hasError = invalid(field)}

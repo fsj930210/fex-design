@@ -29,7 +29,7 @@ const params = ref<string[]>([])
         </MentionsList>
       </MentionsContent>
     </MentionsRoot>
-    <div class="mt-space-sm flex flex-wrap gap-space-xs text-xs text-muted-foreground">
+    <div class="mt-1.5 flex flex-wrap gap-1 text-xs text-muted-foreground">
       <span v-if="!params.length">No params yet</span>
       <span v-for="param in params" v-else :key="param">#{{ param }}</span>
     </div>

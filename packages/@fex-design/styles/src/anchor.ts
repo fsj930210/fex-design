@@ -22,7 +22,7 @@ export const anchorListClassName = cva('m-0 list-none p-0', {
 })
 
 export const anchorLinkClassName = cva(
-  'inline-flex max-w-full cursor-pointer items-center rounded-md px-2 py-1 text-left text-sm leading-5 whitespace-nowrap text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+  'inline-flex max-w-full cursor-pointer items-center rounded-md px-2 py-1 text-left text-sm leading-5 whitespace-nowrap text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-focus disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       orientation: { vertical: 'w-full justify-start', horizontal: 'justify-center' },

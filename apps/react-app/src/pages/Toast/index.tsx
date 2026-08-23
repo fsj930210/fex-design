@@ -62,9 +62,9 @@ export function ToastPage() {
   }
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-6xl space-y-space-lg">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-6xl space-y-3">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
@@ -79,7 +79,7 @@ export function ToastPage() {
           title="Types"
           description="Built-in variants only provide default semantics. Content and icon can still be customized."
         >
-          <div className="flex flex-wrap gap-space-sm">
+          <div className="flex flex-wrap gap-1.5">
             <Button variant="outline" onClick={() => toast.show('Hello, Fex Design!')}>
               Default
             </Button>
@@ -108,7 +108,7 @@ export function ToastPage() {
           title="Position"
           description="The viewport controls placement. Service calls do not need to know where the toast appears."
         >
-          <div className="flex flex-wrap gap-space-sm">
+          <div className="flex flex-wrap gap-1.5">
             {placements.map((item) => (
               <Button
                 key={item}
@@ -125,7 +125,7 @@ export function ToastPage() {
           title="Custom Content"
           description="Primitive parts let callers replace icon, add description, and render an action without changing the manager."
         >
-          <div className="flex flex-wrap gap-space-sm">
+          <div className="flex flex-wrap gap-1.5">
             <Button
               variant="outline"
               onClick={() =>
@@ -158,7 +158,7 @@ export function ToastPage() {
           title="Update And Destroy"
           description="A stable id updates one toast. Returned ids can be dismissed manually."
         >
-          <div className="flex flex-wrap gap-space-sm">
+          <div className="flex flex-wrap gap-1.5">
             <Button
               variant="outline"
               onClick={() => toast.loading({ id: 'save-user', title: 'Saving user', duration: -1 })}
@@ -198,7 +198,7 @@ export function ToastPage() {
           title="Multiple And Stacked"
           description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible."
         >
-          <div className="flex flex-wrap gap-space-sm">
+          <div className="flex flex-wrap gap-1.5">
             <Button variant="outline" onClick={showManyMessages}>
               Show many
             </Button>

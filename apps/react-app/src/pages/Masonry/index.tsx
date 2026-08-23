@@ -10,7 +10,7 @@ import { VirtualMasonryDemo } from './virtual-demo'
 
 export function MasonryPage() {
   return (
-    <main className="grid gap-space-xl p-page-padding">
+    <main className="grid gap-4 p-2 md:p-6">
       <Card title="基础瀑布流" description="固定三列，展示输入序号、稳定 key 和最终列；默认按当前最短列分配。"><BasicMasonryDemo /></Card>
       <Card title="图片加载与失败" description="不同宽高比图片使用 aspect-ratio 占位；加载成功或失败都会触发真实尺寸重测。"><ImageMasonryDemo /></Card>
       <Card title="动态内容高度" description="展开、追加内容和连续更新后重新测量，不把动态内容逻辑绑定到 Masonry。"><DynamicMasonryDemo /></Card>

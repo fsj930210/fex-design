@@ -25,7 +25,7 @@ export const toastViewportClassName = cva(
 export const toastRootClassName = cva(
   [
     'pointer-events-auto grid min-h-10 w-fit min-w-0 max-w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1 rounded-md border px-3 py-2 text-sm',
-    'border-border/80 bg-popover-background text-popover-foreground shadow-[0_6px_16px_0_rgba(0,0,0,0.08),0_3px_6px_-4px_rgba(0,0,0,0.12),0_9px_28px_8px_rgba(0,0,0,0.05)]',
+    'border-border/80 bg-elevated-background text-elevated-foreground shadow-[0_6px_16px_0_rgba(0,0,0,0.08),0_3px_6px_-4px_rgba(0,0,0,0.12),0_9px_28px_8px_rgba(0,0,0,0.05)]',
     'transition-[opacity,transform] duration-150 ease-out',
     'has-[[data-slot=toast-icon]]:grid-cols-[auto_minmax(0,1fr)_auto]',
     '[&_[data-slot=toast-icon]]:text-info',
@@ -55,7 +55,7 @@ export const toastActionClassName = 'col-start-2 mt-1'
 export const toastCloseClassName =
   'row-span-2 -mr-1 grid size-5 place-items-center self-center rounded-md text-muted-foreground hover:text-foreground'
 export const toastStackLayerClassName =
-  'pointer-events-none absolute left-1/2 z-0 h-10 w-[calc(100%-16px)] -translate-x-1/2 rounded-md border border-border/60 bg-popover-background shadow-sm'
+  'pointer-events-none absolute left-1/2 z-0 h-10 w-[calc(100%-16px)] -translate-x-1/2 rounded-md border border-border/60 bg-elevated-background shadow-sm'
 
 export const toastStackContainerClassName = cva('relative flex w-full flex-col gap-2', {
   variants: {

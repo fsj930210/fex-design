@@ -84,7 +84,7 @@ export function CustomDemos() {
 function CustomPanel() {
   const picker = useDatePickerContext('CustomPanel')
   return (
-    <div className="grid gap-space-sm p-space-md">
+    <div className="grid gap-1.5 p-2">
       <p className="text-sm text-muted-foreground">
         这是完全自定义面板，仍可访问 DatePicker primitive 暴露的关闭方法。
       </p>

@@ -14,7 +14,7 @@
     {#each collapseItems as item (item.value)}
       <CollapseItem value={item.value}>
         {#snippet render(value)}
-          <div class="flex items-center gap-space-sm px-space-sm py-space-sm">
+          <div class="flex items-center gap-1.5 px-1.5 py-1.5">
             <Button variant="ghost" size="icon-sm" aria-expanded={value.state.expanded} aria-label="Toggle panel" onclick={value.actions.toggle}>
               <ChevronRightIcon class={cn('size-4 transition-transform', value.state.expanded && '-rotate-90')} />
             </Button>

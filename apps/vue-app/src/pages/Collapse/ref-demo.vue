@@ -10,7 +10,7 @@ const collapseRef = useTemplateRef<InstanceType<typeof Collapse>>('collapseRef')
 
 <template>
   <Card title="Instance methods" description="Template refs expose methods for this Collapse instance.">
-    <div class="mb-space-md flex flex-wrap gap-space-sm">
+    <div class="mb-2 flex flex-wrap gap-1.5">
       <Button variant="outline" size="sm" @click="collapseRef?.expand('security')">Open security</Button>
       <Button variant="outline" size="sm" @click="collapseRef?.toggle('billing')">Toggle billing</Button>
       <Button variant="ghost" size="sm" @click="collapseRef?.clear()">Clear</Button>

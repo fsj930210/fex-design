@@ -6,9 +6,9 @@ import { RemoteDemo } from './remote-demo'
 
 export function AutoCompletePage() {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-md">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-2">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
@@ -18,7 +18,7 @@ export function AutoCompletePage() {
             complete backend records.
           </p>
         </header>
-        <div class="grid gap-space-xl">
+        <div class="grid gap-4">
           <BasicDemo />
           <ControlledDemo />
           <RemoteDemo />

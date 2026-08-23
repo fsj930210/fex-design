@@ -4,7 +4,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function ShapeDemo() {
   return (
     <Card title="Shape" description="Avatar supports circle and square shapes.">
-      <div className="flex items-center gap-space-lg">
+      <div className="flex items-center gap-3">
         <Avatar shape="circle">
           <AvatarFallback>CI</AvatarFallback>
         </Avatar>

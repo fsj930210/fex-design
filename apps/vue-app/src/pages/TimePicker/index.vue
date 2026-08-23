@@ -11,13 +11,13 @@ import PanelExtraDemo from './panel-extra-demo.vue'
 import DisabledDemo from './disabled-demo.vue'
 </script>
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
       <header>
         <RouterLink to="/">Back home</RouterLink>
         <h1 class="text-2xl font-semibold">TimePicker Primitive</h1>
       </header>
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <ControlledDemo /><TwelveHourDemo /><StepDemo /><FormatDemo /><InputDemo /><RangeDemo /><DisabledTimeDemo /><DecorationDemo /><PanelExtraDemo /><DisabledDemo />
       </div>
     </div>

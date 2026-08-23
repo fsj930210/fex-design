@@ -6,7 +6,7 @@ export function VariantTabsDemo() {
       title="Variants"
       description="The segmented default and line variant share one behavior contract."
     >
-      <div class="grid gap-space-xl">
+      <div class="grid gap-4">
         <TabsRoot defaultValue="one">
           <TabsList>
             <TabsItem value="one">One</TabsItem>

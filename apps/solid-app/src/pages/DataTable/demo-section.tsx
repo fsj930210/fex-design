@@ -11,7 +11,7 @@ export function DataTableDemoSection(props: ParentProps<{ title: string; descrip
 
 export function DemoBranch(props: ParentProps<{ title: string }>) {
   return (
-    <section class="space-y-space-sm">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">{props.title}</h3>
       {props.children}
     </section>

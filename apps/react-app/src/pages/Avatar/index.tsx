@@ -5,7 +5,7 @@ import { GroupDemo } from './group-demo'
 
 export function AvatarPage() {
   return (
-    <main className="grid gap-space-xl p-page-padding">
+    <main className="grid gap-4 p-2 md:p-6">
       <SizeDemo />
       <ShapeDemo />
       <ContentDemo />

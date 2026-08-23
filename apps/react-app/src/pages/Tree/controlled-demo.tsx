@@ -22,7 +22,7 @@ export function ControlledTreeDemo() {
       title="Controlled state"
       description="Expansion and selection can be owned outside Tree."
     >
-      <div className="mb-space-md flex flex-wrap gap-space-sm">
+      <div className="mb-2 flex flex-wrap gap-1.5">
         <Button
           size="sm"
           variant="outline"
@@ -50,7 +50,7 @@ export function ControlledTreeDemo() {
         selectedKeys={selectedKeys}
         onSelectedKeysChange={setSelectedKeys}
         features={[expansionFeature(), selectionFeature(), focusFeature(), keyboardFeature()]}
-        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        className="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </TreeDemoSection>
   )

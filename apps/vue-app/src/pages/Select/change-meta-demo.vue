@@ -13,7 +13,7 @@ const result = ref('请选择用户')
   <Demo
     title="Change metadata"
     description="change returns value plus the complete selected option for backend fields."
-    ><div class="space-y-space-md">
+    ><div class="space-y-2">
       <SelectRoot
         :options="options"
         @change="

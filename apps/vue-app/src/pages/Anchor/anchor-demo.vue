@@ -15,16 +15,16 @@ const items: AnchorItem<string>[] = [
 
 <template>
   <Card title="Current and progress" description="Progress mode keeps all anchors passed so far active.">
-    <div class="grid gap-space-lg lg:grid-cols-[10rem_10rem_1fr]">
-      <div><p class="mb-space-sm text-xs font-medium text-muted-foreground">Current</p><Anchor :items="items" :active-keys="currentKeys" :active-offset="80" :container="() => container ?? window" @change="currentKeys = $event" /></div>
-      <div><p class="mb-space-sm text-xs font-medium text-muted-foreground">Progress</p><Anchor :items="items" active-mode="progress" :active-keys="activeKeys" :active-offset="80" :container="() => container ?? window" @change="activeKeys = $event" /></div>
-      <div ref="container" class="h-72 overflow-y-auto rounded-md border border-border p-space-lg">
+    <div class="grid gap-3 lg:grid-cols-[10rem_10rem_1fr]">
+      <div><p class="mb-1.5 text-xs font-medium text-muted-foreground">Current</p><Anchor :items="items" :active-keys="currentKeys" :active-offset="80" :container="() => container ?? window" @change="currentKeys = $event" /></div>
+      <div><p class="mb-1.5 text-xs font-medium text-muted-foreground">Progress</p><Anchor :items="items" active-mode="progress" :active-keys="activeKeys" :active-offset="80" :container="() => container ?? window" @change="activeKeys = $event" /></div>
+      <div ref="container" class="h-72 overflow-y-auto rounded-md border border-border p-3">
         <section id="anchor-overview" class="min-h-48"><h3 class="font-medium">Overview</h3><p class="mt-2 text-sm text-muted-foreground">Anchor tracks content inside any scroll container.</p></section>
         <section id="anchor-api" class="min-h-48"><h3 class="font-medium">API</h3><p class="mt-2 text-sm text-muted-foreground">Progress mode keeps previously passed anchors active.</p></section>
         <section id="anchor-props" class="min-h-48"><h3 class="font-medium">Props</h3><p class="mt-2 text-sm text-muted-foreground">Nested headings preserve their real hierarchy.</p></section>
         <section id="anchor-examples" class="min-h-48"><h3 class="font-medium">Examples</h3><p class="mt-2 text-sm text-muted-foreground">Click an item or scroll this panel.</p></section>
       </div>
     </div>
-    <p class="mt-space-md text-xs text-muted-foreground">current: {{ currentKeys.join(', ') || 'none' }} · progress: {{ activeKeys.join(', ') || 'none' }}</p>
+    <p class="mt-2 text-xs text-muted-foreground">current: {{ currentKeys.join(', ') || 'none' }} · progress: {{ activeKeys.join(', ') || 'none' }}</p>
   </Card>
 </template>

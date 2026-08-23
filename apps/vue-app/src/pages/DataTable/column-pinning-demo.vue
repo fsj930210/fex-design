@@ -49,7 +49,7 @@ const table = useDataTable({
   <DemoSection
     title="Column pinning"
     description="TanStack v9 uses logical start/end regions. DataTable only renders their sticky layout; callers can provide any pin controls and can keep DnD restrictions outside the component."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Start, center and end regions</h3>
       <DataTable :table="table" /></section
   ></DemoSection>

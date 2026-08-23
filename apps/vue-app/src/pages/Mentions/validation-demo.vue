@@ -31,7 +31,7 @@ function errors(items: unknown[]) {
 
 <template>
   <Card title="Form validation" description="Field invalid state drives the default Textarea styling.">
-    <FormHost :form="form" class="grid max-w-xl gap-space-md">
+    <FormHost :form="form" class="grid max-w-xl gap-2">
       <Field name="prompt" :validators="validators" v-slot="{ field, state }">
         <FieldRoot required :invalid="invalid(state)" :has-error="invalid(state)">
           <FieldLabel>Prompt <FieldRequiredIndicator /></FieldLabel>

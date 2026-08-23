@@ -24,7 +24,7 @@ const isInstant = (response: unknown) =>
   response.instant === true
 </script>
 <template>
-  <UploadList class="mt-space-md" v-slot="{ items }">
+  <UploadList class="mt-2" v-slot="{ items }">
     <UploadItem v-for="item in items" :key="item.id" :id="item.id" v-slot="state">
       <UploadItemPreview />
       <div class="min-w-0 flex-1">
@@ -49,7 +49,7 @@ const isInstant = (response: unknown) =>
           {{ message(state.item.error) }}
         </div>
       </div>
-      <div class="flex gap-space-xs">
+      <div class="flex gap-1">
         <Button
           v-if="state.item.status === 'pending'"
           size="xs"
@@ -80,7 +80,7 @@ const isInstant = (response: unknown) =>
   </UploadList>
   <Button
     v-if="allItems.length"
-    class="mt-space-sm w-full"
+    class="mt-1.5 w-full"
     size="xs"
     variant="ghost"
     @click="() => upload.clear()"

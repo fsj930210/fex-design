@@ -21,7 +21,7 @@
     {...rest}
     data-sortable-overlay
     class={cn(
-      'rounded-md border border-border bg-card text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
+      'rounded-md border border-border bg-elevated-background text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
       className,
     )}
     style={overlayStyle}

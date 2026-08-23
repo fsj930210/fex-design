@@ -24,7 +24,7 @@ export function BasicDemo() {
         <AutoCompleteTrigger placeholder="Try A or Bella" clearable />
         <AutoCompleteContent />
       </AutoCompleteRoot>
-      <p className="mt-space-sm text-xs text-muted-foreground">{selected}</p>
+      <p className="mt-1.5 text-xs text-muted-foreground">{selected}</p>
     </Card>
   )
 }

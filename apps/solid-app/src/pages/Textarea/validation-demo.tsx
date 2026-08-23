@@ -26,7 +26,7 @@ export function ValidationDemo() {
       title="Form validation"
       description="Submit with an empty value to see Field invalid state drive TextareaRoot styling."
     >
-      <Form form={form} class="grid max-w-xl gap-space-md">
+      <Form form={form} class="grid max-w-xl gap-2">
         <Field
           name="message"
           validators={{

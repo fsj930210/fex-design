@@ -9,7 +9,7 @@ export function PrefixSuffixDemo() {
       title="Prefix and suffix"
       description="prefix decorates the input; suffix replaces only the default chevron."
     >
-      <div class="space-y-space-md">
+      <div class="space-y-2">
         <SelectRoot options={frameworkOptions}>
           <SelectTrigger prefix={<InfoIcon class="size-4" />} placeholder="带前缀" />
           <SelectContent />

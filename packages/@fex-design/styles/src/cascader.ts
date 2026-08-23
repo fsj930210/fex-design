@@ -3,7 +3,7 @@ import { tagClassName, tagCloseClassName } from './tag'
 
 export const cascaderTriggerClassName = cva(
   [
-    'flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-input-border bg-input-background py-1 pl-3 text-sm text-foreground outline-none',
+    'flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-border bg-background py-1 pl-3 text-sm text-foreground outline-none',
     'focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20',
     'data-[status=error]:border-danger data-[status=error]:ring-2 data-[status=error]:ring-danger/20',
     'data-[status=warning]:border-warning data-[status=warning]:ring-2 data-[status=warning]:ring-warning/20',
@@ -28,7 +28,7 @@ export const cascaderSuffixClassName = 'ml-auto inline-flex h-5 shrink-0 items-c
 export const cascaderIndicatorClassName = 'inline-flex size-4 items-center justify-center transition-transform data-[state=open]:rotate-180'
 export const cascaderClearClassName = 'size-4 px-0 py-0'
 export const cascaderContentClassName = [
-  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-popover-background text-popover-foreground shadow-lg [--popover-content-padding:0px]',
+  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-content-padding:0px]',
   'w-max min-w-[var(--cascader-content-min-width,var(--floating-reference-width))] [--popover-content-max-width:var(--cascader-content-max-width,var(--floating-available-width))]',
   'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--cascader-content-max-height,320px))]',
 ].join(' ')

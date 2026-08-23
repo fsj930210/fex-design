@@ -1,5 +1,5 @@
 export const inputOTPRootClassName =
-  'inline-flex items-center gap-space-sm data-[disabled=true]:opacity-70'
+  'inline-flex items-center gap-1.5 data-[disabled=true]:opacity-70'
 
 export const inputOTPGroupClassName =
   'inline-flex items-center [&_[data-slot=input-otp-input]:not(:first-child)]:-ml-px [&_[data-slot=input-otp-input]:not(:first-child)]:rounded-l-none [&_[data-slot=input-otp-input]:not(:last-child)]:rounded-r-none'

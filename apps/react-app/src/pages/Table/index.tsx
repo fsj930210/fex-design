@@ -1,4 +1,4 @@
-﻿import { Badge } from '@fex-design/react/primitive/badge'
+import { Badge } from '@fex-design/react/primitive/badge'
 import { Card } from '@fex-design/react/ui/card'
 import {
   Table,
@@ -19,9 +19,9 @@ const invoices = [
 
 export function TablePage() {
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>

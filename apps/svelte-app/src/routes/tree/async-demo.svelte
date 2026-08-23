@@ -11,5 +11,5 @@
   onMount(() => { void getDemoTreeRoots().then(nodes => data = convert(nodes)) })
 </script>
 <Card title="Async children" description="A real local Nest service supplies roots and child nodes.">
-  <DemoTree treeData={data} fieldNames={departmentFieldNames} isLeaf={node => node.childCount === 0} features={[expansionFeature(), asyncLoadFeature<DepartmentNode>({ loadChildren })]} class="max-w-xl rounded-md border border-border bg-background p-space-sm" />
+  <DemoTree treeData={data} fieldNames={departmentFieldNames} isLeaf={node => node.childCount === 0} features={[expansionFeature(), asyncLoadFeature<DepartmentNode>({ loadChildren })]} class="max-w-xl rounded-md border border-border bg-background p-1.5" />
 </Card>

@@ -61,7 +61,7 @@ type Province = keyof typeof locations
   <Card
     title="Validation timing, async validation and dependencies"
     description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
-    ><FormHost :form="validationForm" class="grid max-w-xl gap-space-lg"
+    ><FormHost :form="validationForm" class="grid max-w-xl gap-3"
       ><Field name="username" :validators="usernameValidators" v-slot="{ field, state }"
         ><FieldRoot required :invalid="invalid(state)" has-description :has-error="invalid(state)"
           ><FieldLabel>用户名 <FieldRequiredIndicator /></FieldLabel

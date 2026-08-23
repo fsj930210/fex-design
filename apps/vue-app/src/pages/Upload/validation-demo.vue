@@ -36,10 +36,10 @@ const upload = useUpload({
           ><Button v-bind="props" variant="outline">选择必填文件</Button></UploadTrigger
         ><DemoList
       /></UploadRoot>
-      <p v-if="invalid" class="mt-space-xs text-sm text-danger" role="alert">
+      <p v-if="invalid" class="mt-1 text-sm text-danger" role="alert">
         请至少选择一个文件。
       </p>
-      <Button class="mt-space-md" type="submit">校验表单</Button>
+      <Button class="mt-2" type="submit">校验表单</Button>
     </form></DemoSection
   >
 </template>

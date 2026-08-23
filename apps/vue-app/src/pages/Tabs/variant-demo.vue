@@ -6,7 +6,7 @@ import Card from '@fex-design/vue/ui/card'
   <Card
     title="Variants"
     description="The segmented default and line variant share one behavior contract."
-    ><div class="grid gap-space-xl">
+    ><div class="grid gap-4">
       <TabsRoot default-value="one"
         ><TabsList
           ><TabsItem value="one">One</TabsItem><TabsItem value="two">Two</TabsItem></TabsList

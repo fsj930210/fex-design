@@ -26,7 +26,7 @@ export function TreeMutationDemo() {
       title="External controller and node mutation"
       description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange."
     >
-      <div className="mb-space-md flex flex-wrap gap-space-sm">
+      <div className="mb-2 flex flex-wrap gap-1.5">
         <Button
           size="sm"
           variant="outline"
@@ -65,7 +65,7 @@ export function TreeMutationDemo() {
         fieldNames={departmentFieldNames}
         isLeaf={(node) => node.childCount === 0}
         onTreeDataChange={(nextTreeData) => setTreeData(nextTreeData)}
-        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        className="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </TreeDemoSection>
   )

@@ -12,7 +12,7 @@
 </script>
 
 <Card title="Controlled" description="expandedKeys and onchange let external state own the panels.">
-  <div class="mb-space-md flex flex-wrap gap-space-sm">
+  <div class="mb-2 flex flex-wrap gap-1.5">
     <Button variant="outline" size="sm" onclick={() => (expandedKeys = ['profile'])}>Open profile</Button>
     <Button variant="outline" size="sm" onclick={() => (expandedKeys = ['billing', 'security'])}>Open billing and security</Button>
     <Button variant="ghost" size="sm" onclick={() => (expandedKeys = [])}>Clear</Button>

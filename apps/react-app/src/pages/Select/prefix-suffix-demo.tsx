@@ -15,7 +15,7 @@ export function PrefixSuffixDemo() {
       title="Prefix and suffix"
       description="prefix decorates the input; suffix replaces only the default dropdown chevron."
     >
-      <div className="space-y-space-md">
+      <div className="space-y-2">
         <SelectRoot options={frameworkOptions}>
           <SelectTrigger
             prefix={<InfoIcon className="size-4 text-muted-foreground" />}

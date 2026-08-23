@@ -50,27 +50,27 @@ const placementGroups = [
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             Vue adapter for the shared core floating overlay, covering triggers, placement,
             controlled state and custom popup containers.
           </p>
         </div>
       </header>
 
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card
           title="Primitive"
           description="Low-level composition API. Trigger exposes slot props."
         >
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <PopoverRoot side="bottom" align="start" :side-offset="8" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
                 <button
@@ -101,7 +101,7 @@ const placementGroups = [
           title="Ui"
           description="Business UI can compose Button without an extra wrapper protocol."
         >
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <PopoverRoot placement="bottomLeft" :side-offset="8" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
                 <button v-bind="props" :ref="ref" :class="outlineButtonClass">Click</button>
@@ -123,7 +123,7 @@ const placementGroups = [
         </Card>
 
         <Card title="Triggers" description="Supports click, hover, focus and context-menu.">
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <PopoverRoot :trigger="['hover', 'focus']" :hover-close-delay="120" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
                 <button v-bind="props" :ref="ref" :class="secondaryButtonClass">
@@ -164,11 +164,11 @@ const placementGroups = [
         </Card>
 
         <Card title="Placement" description="Supports antd placement and Radix side/align options.">
-          <div class="flex w-full flex-col items-center gap-space-md py-space-lg">
+          <div class="flex w-full flex-col items-center gap-2 py-3">
             <div
               v-for="(group, rowIndex) in placementGroups"
               :key="rowIndex"
-              class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-space-lg gap-y-space-md"
+              class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-3 gap-y-2"
             >
               <template v-if="rowIndex > 0 && rowIndex < 4">
                 <div class="justify-self-start">
@@ -243,7 +243,7 @@ const placementGroups = [
         </Card>
 
         <Card title="Offsets" description="Tune main-axis sideOffset and cross-axis alignOffset.">
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <PopoverRoot placement="bottomLeft" :side-offset="18" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
                 <button v-bind="props" :ref="ref" :class="outlineButtonClass">sideOffset 18</button>
@@ -284,7 +284,7 @@ const placementGroups = [
         </Card>
 
         <Card title="Controlled" description="Controlled mode only requests outside updates.">
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <PopoverRoot :open="open" @open-change="open = $event" placement="bottomLeft" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
                 <button
@@ -312,7 +312,7 @@ const placementGroups = [
         </Card>
 
         <Card title="getPopupContainer" description="Portal can mount into a custom container.">
-          <div ref="container" class="relative min-h-40 rounded-md border border-dashed p-space-lg">
+          <div ref="container" class="relative min-h-40 rounded-md border border-dashed p-3">
             <PopoverRoot :get-popup-container="getPopupContainer" placement="bottomLeft">
               <PopoverTrigger v-slot="{ props, ref }">
                 <button v-bind="props" :ref="ref" :class="outlineButtonClass">

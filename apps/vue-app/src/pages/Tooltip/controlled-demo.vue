@@ -4,4 +4,4 @@ import { TooltipArrow, TooltipContent, TooltipPortal, TooltipRoot, TooltipTrigge
 import Button from '@fex-design/vue/ui/button'
 const open = ref(false)
 </script>
-<template><div class="flex gap-space-md"><Button variant="secondary" @click="open = !open">{{ open ? 'Close externally' : 'Open externally' }}</Button><TooltipRoot :open="open" @open-change="open = $event"><TooltipTrigger v-slot="slot"><Button v-bind="slot.props" :ref="slot.ref" variant="outline">Controlled trigger</Button></TooltipTrigger><TooltipPortal><TooltipContent>Controlled state remains external<TooltipArrow /></TooltipContent></TooltipPortal></TooltipRoot></div></template>
+<template><div class="flex gap-2"><Button variant="secondary" @click="open = !open">{{ open ? 'Close externally' : 'Open externally' }}</Button><TooltipRoot :open="open" @open-change="open = $event"><TooltipTrigger v-slot="slot"><Button v-bind="slot.props" :ref="slot.ref" variant="outline">Controlled trigger</Button></TooltipTrigger><TooltipPortal><TooltipContent>Controlled state remains external<TooltipArrow /></TooltipContent></TooltipPortal></TooltipRoot></div></template>

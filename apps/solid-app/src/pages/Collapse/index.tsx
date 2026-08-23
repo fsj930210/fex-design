@@ -9,9 +9,9 @@ import { VariantCollapseDemo } from './variant-demo'
 
 export function CollapsePage() {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-sm">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-1.5">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Collapse</h1>
@@ -21,7 +21,7 @@ export function CollapsePage() {
             </p>
           </div>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <BasicCollapseDemo />
           <AccordionCollapseDemo />
           <ControlledCollapseDemo />

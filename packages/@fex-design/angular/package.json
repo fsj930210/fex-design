@@ -2,6 +2,11 @@
   "name": "@fex-design/angular",
   "private": true,
   "type": "module",
+  "scripts": {
+    "sync-paths": "node scripts/sync-tsconfig-paths.mjs",
+    "typecheck": "ngc -p tsconfig.json --noEmit",
+    "lint": "oxlint src"
+  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
@@ -120,8 +125,11 @@
     "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
+    "@angular/compiler": "22.1.0",
+    "@angular/compiler-cli": "22.1.0",
     "@angular/common": "22.1.0",
-    "@angular/core": "22.1.0"
+    "@angular/core": "22.1.0",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@angular/common": "^22.0.0",

@@ -61,8 +61,8 @@ type Province = keyof typeof locations
   <Card
     title="Scroll to a specific field"
     description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"
-    ><FormHost :form="scrollForm" class="grid max-w-xl gap-space-lg" @submit="queueScrollToAddress"
-      ><div class="flex flex-wrap gap-space-sm">
+    ><FormHost :form="scrollForm" class="grid max-w-xl gap-3" @submit="queueScrollToAddress"
+      ><div class="flex flex-wrap gap-1.5">
         <Button type="button" variant="outline" @click="scrollToAddress()">定位收货地址</Button
         ><Button type="submit">提交并定位首个错误</Button>
       </div>

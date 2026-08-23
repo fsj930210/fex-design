@@ -11,13 +11,13 @@ import { PanelExtraDemo } from './panel-extra-demo'
 import { DisabledDemo } from './disabled-demo'
 export function TimePickerPage() {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
         <header>
           <A href="/">Back home</A>
           <h1 class="text-2xl font-semibold">TimePicker Primitive</h1>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <ControlledDemo />
           <TwelveHourDemo />
           <StepDemo />

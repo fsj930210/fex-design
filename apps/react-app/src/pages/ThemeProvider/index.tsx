@@ -10,15 +10,15 @@ function ThemeStatusCard({ title }: { title: string }) {
   const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
 
   return (
-    <div className="rounded-md border border-border bg-card-background p-space-lg text-card-foreground shadow-card">
-      <div className="space-y-space-sm">
+    <div className="rounded-md border border-border bg-elevated-background p-3 text-elevated-foreground shadow-elevated">
+      <div className="space-y-1.5">
         <p className="text-base font-medium">{title}</p>
         <p className="text-sm text-muted-foreground">theme: {theme}</p>
         <p className="text-sm text-muted-foreground">resolvedTheme: {resolvedTheme}</p>
         <p className="text-sm text-muted-foreground">forcedTheme: {forcedTheme ?? 'none'}</p>
       </div>
       <button
-        className="mt-space-lg rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-foreground transition-colors hover:bg-hover-background disabled:cursor-not-allowed disabled:text-disabled-foreground"
+        className="mt-3 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-hover-background disabled:cursor-not-allowed disabled:text-disabled-foreground"
         disabled={!canSwitchTheme}
         type="button"
         onClick={() => setTheme(nextTheme)}
@@ -35,45 +35,45 @@ export function ThemeProviderPage() {
   const [customTheme, setCustomTheme] = useState<'light' | 'dark' | 'admin-blue'>('admin-blue')
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">ThemeProvider</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               ThemeProvider supports local scopes, inherited scopes, custom local themes, multiple
               themes on the same page, and a forcedTheme override with the highest priority.
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card title="Local Scope" description="A local provider applies theme variables to its own wrapper.">
             <ThemeProvider
               scope="local"
               storageKey="fex-theme-provider-local-demo"
-              className="rounded-md bg-background p-space-lg text-foreground"
+              className="rounded-md bg-background p-3 text-foreground"
             >
               <ThemeStatusCard title="Interactive local theme" />
             </ThemeProvider>
           </Card>
 
           <Card title="Multiple Themes" description="Independent local scopes can render light and dark together.">
-            <div className="grid gap-space-lg md:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2">
               <ThemeProvider
                 scope="local"
                 forcedTheme="light"
-                className="rounded-md bg-background p-space-lg text-foreground"
+                className="rounded-md bg-background p-3 text-foreground"
               >
                 <ThemeStatusCard title="Forced light scope" />
               </ThemeProvider>
               <ThemeProvider
                 scope="local"
                 forcedTheme="dark"
-                className="rounded-md bg-background p-space-lg text-foreground"
+                className="rounded-md bg-background p-3 text-foreground"
               >
                 <ThemeStatusCard title="Forced dark scope" />
               </ThemeProvider>
@@ -87,27 +87,27 @@ export function ThemeProviderPage() {
             <ThemeProvider
               scope="local"
               forcedTheme={inheritedTheme}
-              className="rounded-md bg-background p-space-lg text-foreground"
+              className="rounded-md bg-background p-3 text-foreground"
             >
               <button
-                className="mb-space-lg rounded-md border border-border bg-card-background px-space-lg py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background"
+                className="mb-3 rounded-md border border-border bg-elevated-background px-3 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background"
                 type="button"
                 onClick={() => setInheritedTheme((theme) => (theme === 'dark' ? 'light' : 'dark'))}
               >
                 Switch parent to {inheritedTheme === 'dark' ? 'light' : 'dark'}
               </button>
-              <div className="grid gap-space-lg lg:grid-cols-3">
+              <div className="grid gap-3 lg:grid-cols-3">
                 <ThemeStatusCard title={'Parent local ' + inheritedTheme + ' scope'} />
                 <ThemeProvider scope="inherit">
-                  <div className="space-y-space-lg rounded-md border border-border bg-background p-space-lg">
+                  <div className="space-y-3 rounded-md border border-border bg-background p-3">
                     <ThemeStatusCard title="Inherited middle scope" />
                     <ThemeProvider
                       scope="local"
                       forcedTheme={innerTheme}
-                      className="rounded-md bg-background p-space-lg text-foreground"
+                      className="rounded-md bg-background p-3 text-foreground"
                     >
                       <button
-                        className="mb-space-lg rounded-md border border-border bg-card-background px-space-lg py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background"
+                        className="mb-3 rounded-md border border-border bg-elevated-background px-3 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background"
                         type="button"
                         onClick={() => setInnerTheme((theme) => (theme === 'dark' ? 'light' : 'dark'))}
                       >
@@ -132,13 +132,13 @@ export function ThemeProviderPage() {
               defaultTheme="admin-blue"
               forcedTheme={customTheme}
               colorSchemeMap={{ 'admin-blue': 'light' }}
-              className="rounded-md border border-border bg-background p-space-lg text-foreground data-[theme=admin-blue]:[--background:oklch(0.97_0.04_245)] data-[theme=admin-blue]:[--card-background:oklch(0.99_0.025_245)] data-[theme=admin-blue]:[--card-foreground:oklch(0.25_0.08_250)] data-[theme=admin-blue]:[--foreground:oklch(0.22_0.08_250)] data-[theme=admin-blue]:[--muted-foreground:oklch(0.45_0.06_250)] data-[theme=admin-blue]:[--border:oklch(0.82_0.07_245)]"
+              className="rounded-md border border-border bg-background p-3 text-foreground data-[theme=admin-blue]:[--background:oklch(0.97_0.04_245)] data-[theme=admin-blue]:[--card-background:oklch(0.99_0.025_245)] data-[theme=admin-blue]:[--card-foreground:oklch(0.25_0.08_250)] data-[theme=admin-blue]:[--foreground:oklch(0.22_0.08_250)] data-[theme=admin-blue]:[--muted-foreground:oklch(0.45_0.06_250)] data-[theme=admin-blue]:[--border:oklch(0.82_0.07_245)]"
             >
-              <div className="mb-space-lg flex flex-wrap gap-space-sm">
+              <div className="mb-3 flex flex-wrap gap-1.5">
                 {(['admin-blue', 'light', 'dark'] as const).map((theme) => (
                   <button
                     key={theme}
-                    className="rounded-md border border-border bg-card-background px-space-md py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
+                    className="rounded-md border border-border bg-elevated-background px-2 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
                     disabled={customTheme === theme}
                     type="button"
                     onClick={() => setCustomTheme(theme)}
@@ -159,7 +159,7 @@ export function ThemeProviderPage() {
               scope="local"
               defaultTheme="light"
               forcedTheme="dark"
-              className="rounded-md bg-background p-space-lg text-foreground"
+              className="rounded-md bg-background p-3 text-foreground"
             >
               <ThemeStatusCard title="Locked dark theme" />
             </ThemeProvider>

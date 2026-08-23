@@ -4,7 +4,7 @@ import { Card } from '@fex-design/solid/ui/card'
 export function ColorDemo() {
   return (
     <Card title="自定义颜色" description="color 和 bgColor 进入 core 模型，再由渲染部件消费。">
-      <div class="flex flex-wrap gap-space-lg">
+      <div class="flex flex-wrap gap-3">
         <QrCode.Root value="https://fex.design/qrcode/blue" size={160} color="#075985" bgColor="#f0f9ff">
           <QrCode.Svg><QrCode.Background /><QrCode.Modules /></QrCode.Svg>
         </QrCode.Root>

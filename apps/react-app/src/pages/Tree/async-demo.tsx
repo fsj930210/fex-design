@@ -35,7 +35,7 @@ export function AsyncTreeDemo() {
           expansionFeature<DepartmentNode>(),
           asyncLoadFeature<DepartmentNode>({ loadChildren }),
         ]}
-        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        className="max-w-xl rounded-md border border-border bg-background p-1.5"
       />
     </TreeDemoSection>
   )

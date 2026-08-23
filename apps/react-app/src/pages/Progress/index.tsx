@@ -16,7 +16,7 @@ const segmentGradient = {
   direction: 'to right',
 } as const
 const Line = ({ label, ...props }: { label: string } & ComponentProps<typeof Progress>) => (
-  <div className="grid gap-space-sm">
+  <div className="grid gap-1.5">
     <div className="flex justify-between text-sm">
       <span>{label}</span>
       {props.value != null && <span className="text-muted-foreground">{props.value}%</span>}
@@ -37,7 +37,7 @@ function StepLine({
 }) {
   const activeSteps = Math.round((value / 100) * steps)
   return (
-    <div className="flex items-center gap-space-sm">
+    <div className="flex items-center gap-1.5">
       <div className="flex gap-1">
         {Array.from({ length: steps }).map((_, index) => (
           <span
@@ -113,11 +113,11 @@ function DynamicProgressDemo() {
   const decrease = () => setValue((current) => Math.max(0, current - 10))
   const increase = () => setValue((current) => Math.min(100, current + 10))
   return (
-    <div className="grid max-w-xl gap-space-lg">
+    <div className="grid max-w-xl gap-3">
       <Line label="Controlled line" value={value} />
-      <div className="flex flex-wrap items-center gap-space-xl">
+      <div className="flex flex-wrap items-center gap-4">
         <Progress variant="circle" value={value} size={96} thickness={8} showValue />
-        <div className="flex gap-space-sm">
+        <div className="flex gap-1.5">
           <Button variant="outline" size="icon-sm" onClick={decrease} disabled={value <= 0}>
             <MinusIcon />
           </Button>
@@ -131,7 +131,7 @@ function DynamicProgressDemo() {
 }
 export function ProgressPage() {
   return (
-    <main className="grid gap-space-xl p-page-padding">
+    <main className="grid gap-4 p-2 md:p-6">
       <Card
         title="Basic"
         description="A determinate line progress bar with an external label and value."
@@ -141,7 +141,7 @@ export function ProgressPage() {
         </div>
       </Card>
       <Card title="Status" description="Info, warning, success and error use system semantic tokens.">
-        <div className="grid max-w-xl gap-space-lg">
+        <div className="grid max-w-xl gap-3">
           <Line label="Normal" value={35} />
           <Line label="Info" value={68} status="info" />
           <Line label="Warning" value={82} status="warning" />
@@ -150,17 +150,17 @@ export function ProgressPage() {
         </div>
       </Card>
       <Card title="Color" description="Use arbitrary CSS colors, track colors and gradients.">
-        <div className="grid max-w-xl gap-space-lg">
+        <div className="grid max-w-xl gap-3">
           <Line label="Custom color" value={68} color="#7c3aed" />
           <Line label="Custom track" value={52} color="#0891b2" trackColor="#cffafe" />
           <Line label="Gradient" value={88} color={gradient} />
         </div>
       </Card>
       <Card title="Segmented" description="Use hard color stops to show staged progress.">
-        <div className="grid max-w-xl gap-space-xl">
+        <div className="grid max-w-xl gap-4">
           <Line label="Segmented line" value={60} color={segmentGradient} showValue />
-          <div className="flex flex-wrap gap-space-xl">
-            <div className="grid justify-items-center gap-space-sm">
+          <div className="flex flex-wrap gap-4">
+            <div className="grid justify-items-center gap-1.5">
               <Progress
                 variant="circle"
                 value={60}
@@ -171,7 +171,7 @@ export function ProgressPage() {
               />
               <span className="text-sm">Circle</span>
             </div>
-            <div className="grid justify-items-center gap-space-sm">
+            <div className="grid justify-items-center gap-1.5">
               <Progress
                 variant="dashboard"
                 value={60}
@@ -187,7 +187,7 @@ export function ProgressPage() {
         </div>
       </Card>
       <Card title="Step Line" description="Show progress as fixed linear steps.">
-        <div className="grid gap-space-lg">
+        <div className="grid gap-3">
           <StepLine value={50} steps={5} />
           <StepLine value={30} steps={5} />
           <StepLine value={100} steps={5} color="var(--success)" success />
@@ -195,26 +195,26 @@ export function ProgressPage() {
         </div>
       </Card>
       <Card title="Step Circle" description="Show progress as fixed circular steps with custom count and gap.">
-        <div className="flex flex-wrap gap-space-xl">
-          <div className="grid justify-items-center gap-space-sm">
+        <div className="flex flex-wrap gap-4">
+          <div className="grid justify-items-center gap-1.5">
             <CircleSteps value={50} steps={12} gap={2} />
             <span className="text-sm">Custom count</span>
           </div>
-          <div className="grid justify-items-center gap-space-sm">
+          <div className="grid justify-items-center gap-1.5">
             <CircleSteps value={100} steps={8} gap={5} color="var(--success)" success />
             <span className="text-sm">Custom gap</span>
           </div>
         </div>
       </Card>
       <Card title="Size" description="Configure line thickness.">
-        <div className="grid max-w-xl gap-space-lg">
+        <div className="grid max-w-xl gap-3">
           <Line label="Thin · 4px" value={30} thickness={4} />
           <Line label="Medium · 8px" value={55} thickness={8} />
           <Line label="Large · 12px" value={80} thickness={12} />
         </div>
       </Card>
       <Card title="Linecap" description="Round line / round track, butt and square endings with the same value.">
-        <div className="grid max-w-xl gap-space-lg">
+        <div className="grid max-w-xl gap-3">
           <Line label="Round line / round track" value={36} thickness={12} linecap="round" />
           <Line
             label="Butt · round track"
@@ -230,13 +230,13 @@ export function ProgressPage() {
         title="Circle"
         description="Circular progress supports size, thickness, status and gradients."
       >
-        <div className="flex flex-wrap gap-space-xl">
+        <div className="flex flex-wrap gap-4">
           {[
             ['Gradient', 72, 'normal'],
             ['Success', 100, 'success'],
             ['Error', 42, 'error'],
           ].map(([label, value, status]) => (
-            <div key={label} className="grid justify-items-center gap-space-sm">
+            <div key={label} className="grid justify-items-center gap-1.5">
               <Progress
                 variant="circle"
                 value={value as number}
@@ -252,8 +252,8 @@ export function ProgressPage() {
         </div>
       </Card>
       <Card title="Dashboard" description="Configure the gap degree and its placement.">
-        <div className="flex flex-wrap gap-space-xl">
-          <div className="grid justify-items-center gap-space-sm">
+        <div className="flex flex-wrap gap-4">
+          <div className="grid justify-items-center gap-1.5">
             <Progress
               variant="dashboard"
               value={64}
@@ -264,7 +264,7 @@ export function ProgressPage() {
             />
             <span className="text-sm">Bottom gap</span>
           </div>
-          <div className="grid justify-items-center gap-space-sm">
+          <div className="grid justify-items-center gap-1.5">
             <Progress
               variant="dashboard"
               value={64}
@@ -285,9 +285,9 @@ export function ProgressPage() {
         title="Indeterminate"
         description="Use a moving indicator when the completion value is unknown."
       >
-        <div className="grid max-w-xl gap-space-xl">
+        <div className="grid max-w-xl gap-4">
           <Line label="Processing" value={null} />
-          <div className="grid w-fit justify-items-center gap-space-sm">
+          <div className="grid w-fit justify-items-center gap-1.5">
             <Progress variant="circle" value={null} size={72} thickness={6} color="#1677ff" />
             <span className="text-sm">Processing</span>
           </div>

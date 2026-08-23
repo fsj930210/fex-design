@@ -26,7 +26,7 @@ export function ControlledDemo() {
         <AutoCompleteTrigger placeholder="Controlled input" clearable />
         <AutoCompleteContent />
       </AutoCompleteRoot>
-      <p class="mt-space-sm text-xs text-muted-foreground">
+      <p class="mt-1.5 text-xs text-muted-foreground">
         value: {value() || '(empty)'} · open: {String(open())}
       </p>
     </Card>

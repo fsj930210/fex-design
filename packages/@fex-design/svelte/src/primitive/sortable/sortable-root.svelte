@@ -18,7 +18,7 @@
     items,
     axis,
     containerId = 'default',
-    class: className = 'flex flex-col gap-space-sm',
+    class: className = 'flex flex-col gap-1.5',
     children,
     onChange,
   }: SortableRootProps = $props()

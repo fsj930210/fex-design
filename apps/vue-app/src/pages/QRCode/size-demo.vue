@@ -7,7 +7,7 @@ const sizes = [96, 128, 176]
 
 <template>
   <Card title="自定义尺寸" description="通过 Root 的 size 控制二维码输出尺寸。">
-    <div class="flex flex-wrap items-end gap-space-lg">
+    <div class="flex flex-wrap items-end gap-3">
       <QrCodeRoot v-for="size in sizes" :key="size" :value="'https://fex.design/qrcode/size/' + size" :size="size">
         <QrCodeSvg><QrCodeBackground /><QrCodeModules /></QrCodeSvg>
       </QrCodeRoot>

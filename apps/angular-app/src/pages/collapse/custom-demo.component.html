@@ -2,7 +2,7 @@
   <div fexCollapse variant="ghost" [defaultExpandedKeys]="['profile']">
     @for (item of items; track item.value) {
       <div [fexCollapseItem]="item.value" #panel="fexCollapseItem">
-        <div class="flex items-center gap-space-sm px-space-sm py-space-sm">
+        <div class="flex items-center gap-1.5 px-1.5 py-1.5">
           <button fexButton variant="ghost" size="icon-sm" [attr.aria-expanded]="panel.expanded()" aria-label="Toggle panel" (click)="panel.toggle()">
             <fex-chevron-right-icon class="size-4 transition-transform" [class.-rotate-90]="panel.expanded()" />
           </button>

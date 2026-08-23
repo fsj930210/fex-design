@@ -6,7 +6,7 @@ export function ControlledDemo() {
   const [value, setValue] = createSignal<TimeValue | null>({ hour: 10, minute: 20, second: 30 })
   return (
     <Card title="受控与非受控">
-      <div class="flex gap-space-lg">
+      <div class="flex gap-3">
         <DemoTimePicker value={value()} onChange={setValue} />
         <DemoTimePicker defaultValue={{ hour: 8, minute: 15, second: 0 }} />
       </div>

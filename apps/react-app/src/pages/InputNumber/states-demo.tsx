@@ -7,7 +7,7 @@ export function StatesDemo() {
       title="States"
       description="InputNumber reuses Input disabled, read-only, invalid and status styling."
     >
-      <div className="grid gap-space-md md:grid-cols-2">
+      <div className="grid gap-2 md:grid-cols-2">
         <InputNumber disabled defaultValue={10} aria-label="Disabled number" />
         <InputNumber readOnly defaultValue={10} aria-label="Read only number" />
         <InputNumber invalid defaultValue={10} aria-label="Invalid number" />

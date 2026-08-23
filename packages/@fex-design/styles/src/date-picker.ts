@@ -29,7 +29,7 @@ export const datePickerTagOverflowClassName = tagClassName({ size: 'sm' })
 
 export const datePickerMultipleInputClassName = 'w-6 min-w-6 flex-none px-0 caret-foreground'
 
-export const datePickerPanelClassName = 'block min-w-72 bg-popover text-popover-foreground'
+export const datePickerPanelClassName = 'block min-w-72 bg-elevated-background text-elevated-foreground'
 
 export const datePickerDateTimePanelClassName = [
   '[&_[data-slot=calendar-week-header]]:!h-8',

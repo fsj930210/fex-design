@@ -73,25 +73,25 @@ export function DialogPage() {
   const [open, setOpen] = createSignal(false)
   const sizes = ['sm', 'md', 'lg'] as const
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Dialog</h1>
-            <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Primitive modal composition backed by the shared core overlay controller.
             </p>
           </div>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <Card
             title="Primitive"
             description="Trigger exposes render props and content owns ARIA labels."
           >
-            <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
               <Dialog>
                 <DialogTrigger>
                   {(slot) => <TriggerButton slot={slot}>Open dialog</TriggerButton>}
@@ -107,7 +107,7 @@ export function DialogPage() {
             title="Controlled"
             description="Controlled mode requests updates through onOpenChange."
           >
-            <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
               <Dialog open={open()} onOpenChange={setOpen}>
                 <DialogTrigger>
                   {(slot) => (
@@ -123,7 +123,7 @@ export function DialogPage() {
             </div>
           </Card>
           <Card title="Sizes" description="Content size is a primitive style variant.">
-            <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
               <For each={sizes}>
                 {(size) => (
                   <Dialog>
@@ -147,7 +147,7 @@ export function DialogPage() {
             </div>
           </Card>
           <Card title="Dismiss" description="Overlay pointer dismissal can be disabled.">
-            <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
               <Dialog closeOnOverlayPointer={false}>
                 <DialogTrigger>
                   {(slot) => (

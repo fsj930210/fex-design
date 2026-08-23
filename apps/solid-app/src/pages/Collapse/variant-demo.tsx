@@ -8,7 +8,7 @@ const variants = ['outlined', 'filled', 'ghost'] as const
 export function VariantCollapseDemo() {
   return (
     <Card title="Variants" description="Outlined, filled and ghost cover bordered and borderless panel styles.">
-      <div class="grid gap-space-lg lg:grid-cols-3">
+      <div class="grid gap-3 lg:grid-cols-3">
         <For each={variants}>
           {(variant) => (
             <Collapse variant={variant} defaultExpandedKeys={['one']}>

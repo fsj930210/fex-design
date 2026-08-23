@@ -27,7 +27,7 @@ export function FormStatusDemo() {
       title="Form validation"
       description="Submit the real form without a value to produce Select error state and field feedback."
     >
-      <Form form={form} className="space-y-space-md">
+      <Form form={form} className="space-y-2">
         <Field
           name="framework"
           validators={{ onSubmit: ({ value }) => (value ? undefined : '请选择框架') }}

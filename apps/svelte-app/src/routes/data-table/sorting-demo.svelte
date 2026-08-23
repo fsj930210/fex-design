@@ -43,7 +43,7 @@
 {/snippet}
 
 <DemoSection title="Column sorting" description="Multi-sort is supported for local columns as well: each click adds or changes a priority and the superscript shows that priority. Columns without meta.sortFn remain remote terms in the same sorting state, while their pass-through comparator leaves local row order unchanged.">
-  <div class="grid gap-space-lg xl:grid-cols-2">
-    {#each grids as item (item.title)}<section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">{item.title}</h3><DataTable table={item.table} {header} /><ReactiveTableText snapshot={item.table.dataTableSnapshot} text={revision => remoteText(item, revision)} /></section>{/each}
+  <div class="grid gap-3 xl:grid-cols-2">
+    {#each grids as item (item.title)}<section class="space-y-1.5"><h3 class="text-sm font-medium text-foreground">{item.title}</h3><DataTable table={item.table} {header} /><ReactiveTableText snapshot={item.table.dataTableSnapshot} text={revision => remoteText(item, revision)} /></section>{/each}
   </div>
 </DemoSection>

@@ -9,9 +9,9 @@ export function BasicDemo() {
       title="Basic"
       description="Controlled and uncontrolled numeric values share the default icon actions."
     >
-      <div className="grid gap-space-lg md:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2">
         <InputNumber defaultValue={3} aria-label="Uncontrolled number" />
-        <div className="space-y-space-sm">
+        <div className="space-y-1.5">
           <InputNumber
             value={value}
             onChange={(_, next) => setValue(next)}

@@ -4,7 +4,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function SizeDemo() {
   return (
     <Card title="Size" description="Avatar provides small, medium and large sizes.">
-      <div className="flex items-center gap-space-lg">
+      <div className="flex items-center gap-3">
         <Avatar size="sm">
           <AvatarFallback>SM</AvatarFallback>
         </Avatar>

@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "oxc.oxc-vscode",
-    "nrwl.angular-console",
     "bradlc.vscode-tailwindcss",
     "unifiedjs.vscode-mdx",
     "vue.volar",

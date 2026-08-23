@@ -10,7 +10,7 @@ import { collapseItems } from './demo-data'
   <Card title="Custom trigger" description="Use item slot actions when the toggle target is fully custom.">
     <Collapse variant="ghost" :default-expanded-keys="['profile']">
       <CollapseItem v-for="item in collapseItems" :key="item.value" :value="item.value" v-slot="{ state, actions }">
-        <div class="flex items-center gap-space-sm px-space-sm py-space-sm">
+        <div class="flex items-center gap-1.5 px-1.5 py-1.5">
           <Button variant="ghost" size="icon-sm" :aria-expanded="state.expanded" aria-label="Toggle panel" @click="actions.toggle">
             <ChevronRightIcon :class="['size-4 transition-transform', state.expanded && '-rotate-90']" />
           </Button>

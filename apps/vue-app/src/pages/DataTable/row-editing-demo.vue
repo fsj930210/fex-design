@@ -50,7 +50,7 @@ const columns: ColumnDef<F, Person>[] = [
     size: 180,
     cell: ({ row }) =>
       draft.value?.id === row.id
-        ? h('span', { class: 'inline-flex gap-space-sm' }, [
+        ? h('span', { class: 'inline-flex gap-1.5' }, [
             h(B, { size: 'sm', onClick: save }, () => 'Save'),
             h(
               B,
@@ -77,7 +77,7 @@ function save() {
   <DemoSection
     title="Row editing"
     description="Edit row creates one application-owned draft. Save replaces that row in the caller data; Cancel discards the draft without touching the table data."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Draft, save and cancel</h3>
       <DataTable :table="table" /></section
   ></DemoSection>

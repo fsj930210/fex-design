@@ -33,7 +33,7 @@ export const tabsItemClassName = cva(
 )
 
 export const tabsContentClassName = cva(
-  'mt-space-md rounded-md border border-border bg-card p-space-lg text-sm text-foreground',
+  'mt-2 rounded-md border border-border bg-elevated-background p-3 text-sm text-foreground',
   {
     variants: { variant: { default: '', line: 'border-0 bg-transparent p-0' } },
     defaultVariants: { variant: 'default' },

@@ -16,17 +16,17 @@
   )
 </script>
 
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-md">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-2">
       <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Scrollbar</h1>
-        <p class="mt-space-sm text-sm text-muted-foreground">Primitive overlay scrollbar with native scrolling.</p>
+        <p class="mt-1.5 text-sm text-muted-foreground">Primitive overlay scrollbar with native scrolling.</p>
       </div>
     </header>
 
-    <div class="grid gap-space-xl lg:grid-cols-2">
+    <div class="grid gap-4 lg:grid-cols-2">
       <Card title="Vertical" description="Single vertical Bar.">
         <ScrollbarRoot class="h-72 rounded-md border">
           <ScrollbarViewport overflowX="hidden">

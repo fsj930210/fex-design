@@ -33,7 +33,7 @@ function SelectionGrid({ mode, disabled }: { mode: 'multiple' | 'single'; disabl
     enableRowSelection: disabled ? (row) => row.original.status !== 'paused' : true,
   })
   return (
-    <div className="space-y-space-sm">
+    <div className="space-y-1.5">
       <DataTable table={table} />
       <p className="text-xs text-muted-foreground">
         Selected: {Object.keys(table.state.rowSelection).join(', ') || 'none'}
@@ -48,7 +48,7 @@ export function SelectionDataTableDemo() {
       title="Row selection"
       description="The selection feature is headless; the reusable selection-column factory only supplies the conventional control column. Stable getRowId keeps selection independent from sorting and pagination."
     >
-      <div className="grid gap-space-lg xl:grid-cols-3">
+      <div className="grid gap-3 xl:grid-cols-3">
         <DemoBranch title="Multiple + select all">
           <SelectionGrid mode="multiple" />
         </DemoBranch>

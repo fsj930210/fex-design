@@ -16,7 +16,7 @@
 </script>
 
 <Card title="下载二维码" description="下载不是 QRCode 内置能力，这里演示业务侧基于 Canvas 组合导出 PNG。">
-  <div bind:this={container} class="flex flex-wrap items-center gap-space-md">
+  <div bind:this={container} class="flex flex-wrap items-center gap-2">
     <QrCodeRoot value="https://fex.design/qrcode/download" size={176}>
       <QrCodeCanvas aria-label="Downloadable QR code" />
     </QrCodeRoot>

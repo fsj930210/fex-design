@@ -71,25 +71,25 @@ const componentLinks = [
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-sm">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-1.5">
         <h1 class="text-2xl font-semibold text-foreground">Vue Admin</h1>
         <p class="text-sm leading-6 text-muted-foreground">
           临时导航入口，后续后台功能完整后再调整首页结构。
         </p>
       </header>
 
-      <section class="space-y-space-md">
+      <section class="space-y-2">
         <h2 class="text-base font-medium text-foreground">Components</h2>
         <nav
-          class="grid grid-cols-1 gap-space-sm sm:grid-cols-2 lg:grid-cols-3"
+          class="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3"
           aria-label="组件示例"
         >
           <RouterLink
             v-for="link in componentLinks"
             :key="link.to"
-            class="rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-foreground transition-colors hover:bg-muted-background"
+            class="rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-muted-background"
             :to="link.to"
           >
             {{ link.label }}

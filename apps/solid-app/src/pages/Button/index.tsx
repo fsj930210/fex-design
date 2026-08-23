@@ -28,35 +28,35 @@ const effects = [
 function DemoSection(props: ParentProps<{ title: string; description: string }>) {
   return (
     <Card title={props.title} description={props.description}>
-      <div class="flex min-w-0 flex-wrap items-center gap-space-md">{props.children}</div>
+      <div class="flex min-w-0 flex-wrap items-center gap-2">{props.children}</div>
     </Card>
   )
 }
 
 export function ButtonPage(): JSX.Element {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             返回首页
           </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Button</h1>
-            <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               用于触发页面操作、表单提交和工具栏命令。示例覆盖样式、尺寸、加载、图标、效果、组合和禁用状态。
             </p>
           </div>
         </header>
 
-        <div class="grid gap-space-xl">
+        <div class="grid gap-4">
           <Card title="Primitive" description="按钮底层骨架与最小行为。">
-            <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
               <PrimitiveButton>Primitive button</PrimitiveButton>
             </div>
           </Card>
           <Card title="Button group" description="Groups related actions without owning their value.">
-            <div class="flex flex-wrap items-start gap-space-lg">
+            <div class="flex flex-wrap items-start gap-3">
               <ButtonGroup><Button variant="outline">Previous</Button><Button variant="outline">Current</Button><Button variant="outline">Next</Button></ButtonGroup>
               <ButtonGroup spacing={8}><Button>Save</Button><Button>Publish</Button></ButtonGroup>
               <ButtonGroup orientation="vertical"><Button variant="outline">Move up</Button><Button variant="outline">Move down</Button></ButtonGroup>
@@ -64,7 +64,7 @@ export function ButtonPage(): JSX.Element {
           </Card>
 
           <Card title="Ui" description="面向业务的默认按钮封装。">
-            <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
               <For each={variants}>{(variant) => <Button variant={variant}>{variant}</Button>}</For>
             </div>
           </Card>

@@ -13,9 +13,9 @@ const variants = ['default', 'success', 'warning', 'destructive'] as const
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-md">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
@@ -25,7 +25,7 @@ const variants = ['default', 'success', 'warning', 'destructive'] as const
         </p>
       </header>
       <Card title="Primitive" description="Structure with icon, title, description, and action."
-        ><div class="grid gap-space-md">
+        ><div class="grid gap-2">
           <Alert v-for="variant in variants" :key="variant" :variant="variant"
             ><InfoIcon /><AlertTitle>{{ variant }}</AlertTitle
             ><AlertDescription

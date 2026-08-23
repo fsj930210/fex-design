@@ -4,7 +4,7 @@ import Card from '@fex-design/vue/ui/card'
 </script>
 <template>
   <Card title="Content" description="Use an image with fallback content and an optional badge.">
-    <div class="flex items-center gap-space-lg">
+    <div class="flex items-center gap-3">
       <Avatar size="lg"
         ><AvatarImage src="/avatar-demo.svg" alt="Example avatar" /><AvatarFallback
           >IM</AvatarFallback

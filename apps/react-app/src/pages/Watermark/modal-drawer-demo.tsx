@@ -16,7 +16,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function ModalDrawerDemo() {
   return (
     <Card title="Modal and Drawer" description="Watermark can wrap modal and drawer content.">
-      <div className="flex flex-wrap gap-space-md">
+      <div className="flex flex-wrap gap-2">
         <Dialog.DialogRoot>
           <Dialog.DialogTrigger>
             {(props) => <Button {...props}>Open modal</Button>}

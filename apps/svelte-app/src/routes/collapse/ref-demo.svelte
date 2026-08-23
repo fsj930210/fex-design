@@ -16,7 +16,7 @@
 </script>
 
 <Card title="Instance methods" description="bind:this exposes methods for this Collapse instance.">
-  <div class="mb-space-md flex flex-wrap gap-space-sm">
+  <div class="mb-2 flex flex-wrap gap-1.5">
     <Button variant="outline" size="sm" onclick={() => collapseRef?.expand('security')}>Open security</Button>
     <Button variant="outline" size="sm" onclick={() => collapseRef?.toggle('billing')}>Toggle billing</Button>
     <Button variant="ghost" size="sm" onclick={() => collapseRef?.clear()}>Clear</Button>

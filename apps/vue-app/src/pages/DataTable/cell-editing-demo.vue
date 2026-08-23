@@ -59,7 +59,7 @@ function update(id: string, field: Field, value: string) {
   <DemoSection
     title="Cell editing"
     description="Editing belongs to application data, not a hidden table copy. Click a value, then press Enter or blur to commit; Escape cancels the current cell."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Editable name, status and visits</h3>
       <DataTable :table="table" /></section
   ></DemoSection>

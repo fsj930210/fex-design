@@ -31,9 +31,9 @@ const table = useDataTable({
   <DemoSection
     title="Column ordering"
     description="The feature only owns columnOrder and actions. These buttons are one possible UI; DnD is demonstrated separately as caller-owned behavior."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Programmatic reorder</h3>
-      <div class="flex gap-space-sm">
+      <div class="flex gap-1.5">
         <Button
           size="sm"
           variant="outline"

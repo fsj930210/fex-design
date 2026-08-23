@@ -43,7 +43,7 @@ export function SearchDemo() {
       title="Search data and custom title rendering"
       description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
     >
-      <InputRoot value={keyword()} class="mb-space-md max-w-sm">
+      <InputRoot value={keyword()} class="mb-2 max-w-sm">
         <InputControl
           onInput={(e) => setKeyword(e.currentTarget.value)}
           placeholder="Search departments"
@@ -58,7 +58,7 @@ export function SearchDemo() {
           features={[
             expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
           ]}
-          class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+          class="max-w-xl rounded-md border border-border bg-background p-1.5"
         />
       </div>
       <Show when={Boolean(keyword().trim())}>
@@ -71,7 +71,7 @@ export function SearchDemo() {
           ]}
           searchKeyword={keyword()}
           titleRender={({ item }) => highlight(String(item.node.name))}
-          class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+          class="max-w-xl rounded-md border border-border bg-background p-1.5"
         />
       </Show>
     </Card>

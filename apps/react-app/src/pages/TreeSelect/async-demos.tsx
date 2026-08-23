@@ -43,7 +43,7 @@ function ResultList({ results, multiple, selectedValues = [], onSelectResult }: 
             <ListboxItem
               value={result.node.id}
               disabled={result.node.disabled}
-              className="flex cursor-pointer items-center gap-space-sm rounded-md px-space-sm py-space-xs data-[selected=true]:bg-accent data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
+              className="flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 data-[selected=true]:bg-selected-background data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
               onClick={(event) => event.stopPropagation()}
               onSelect={() => { select(); onSelectResult?.(result) }}
             >
@@ -139,9 +139,9 @@ export function AsyncDemos() {
           locatedExpandedKeys={mode === 'located' ? locatedExpandedKeys : undefined}
         >
           {mode === 'search' ? (
-            keyword ? <ResultList results={results} onSelectResult={locate} /> : <p className="px-space-sm py-space-xs text-sm text-muted-foreground">请输入关键字搜索</p>
+            keyword ? <ResultList results={results} onSelectResult={locate} /> : <p className="px-1.5 py-1 text-sm text-muted-foreground">请输入关键字搜索</p>
           ) : mode === 'locating' ? (
-            <p className="px-space-sm py-space-xs text-sm text-muted-foreground">正在加载路径树…</p>
+            <p className="px-1.5 py-1 text-sm text-muted-foreground">正在加载路径树…</p>
           ) : undefined}
         </DemoTreeSelect>
       </Card>

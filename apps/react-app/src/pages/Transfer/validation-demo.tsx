@@ -15,7 +15,7 @@ export function ValidationTransferDemo() {
       title="Form validation states"
       description="Submit the real Form empty to see the error state; selecting exactly one member shows the warning style."
     >
-      <Form form={form} className="space-y-space-lg">
+      <Form form={form} className="space-y-3">
         <Field
           name="members"
           validators={{

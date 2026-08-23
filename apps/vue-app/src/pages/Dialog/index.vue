@@ -22,26 +22,26 @@ const iconCloseClassName =
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Dialog</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             Primitive modal composition backed by the shared core overlay controller.
           </p>
         </div>
       </header>
 
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card
           title="Primitive"
           description="Trigger exposes slot props and content owns ARIA labels."
         >
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <DialogRoot>
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref">Open dialog</Button>
@@ -80,7 +80,7 @@ const iconCloseClassName =
           title="Controlled"
           description="Controlled mode requests updates through open-change."
         >
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <DialogRoot :open="open" @open-change="open = $event">
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref" variant="outline">{{
@@ -115,7 +115,7 @@ const iconCloseClassName =
         </Card>
 
         <Card title="Sizes" description="Content size is a primitive style variant.">
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <DialogRoot v-for="size in ['sm', 'md', 'lg']" :key="size">
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref" variant="outline">{{ size }}</Button>
@@ -147,7 +147,7 @@ const iconCloseClassName =
         </Card>
 
         <Card title="Dismiss" description="Overlay pointer dismissal can be disabled.">
-          <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <div class="flex min-w-0 flex-wrap items-center gap-2">
             <DialogRoot :close-on-overlay-pointer="false">
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref" variant="outline">No overlay close</Button>

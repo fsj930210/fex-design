@@ -11,7 +11,7 @@ const step = (direction: 'increment' | 'decrement') =>
 </script>
 <template>
   <Card title="Custom primitive logic" description="Shared core rules can drive custom DOM."
-    ><div class="inline-flex items-center gap-space-md">
+    ><div class="inline-flex items-center gap-2">
       <Button aria-label="Decrease value" :disabled="value <= 0" @click="step('decrement')"
         ><MinusIcon /></Button
       ><output>{{ value }}</output

@@ -30,7 +30,7 @@ function handleOpenChange(open: boolean, info: unknown) {
         :ref="ref"
         v-bind="props"
         tabindex="0"
-        class="rounded-md border border-dashed border-border bg-background p-space-xl text-sm text-muted-foreground outline-none focus:ring-2 focus:ring-ring"
+        class="rounded-md border border-dashed border-border bg-background p-4 text-sm text-muted-foreground outline-none focus:ring-2 focus:ring-focus"
       >
         {{ last }}
       </div>

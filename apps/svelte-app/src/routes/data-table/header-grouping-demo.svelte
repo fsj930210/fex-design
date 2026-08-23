@@ -14,6 +14,6 @@
   const table = createDataTable({ features, data: people6, columns, getRowId: row => row.id })
 </script>
 <DemoSection title="Column header grouping" description="Nested column definitions render TanStack's headerGroups as a real multi-row thead. The group headers use colSpan automatically; leaf headers remain the columns that sort, resize and pin.">
-  <section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">Identity and Work metrics</h3><DataTable {table} /></section>
-  <section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">Bordered table (border)</h3><DataTable {table} border /></section>
+  <section class="space-y-1.5"><h3 class="text-sm font-medium text-foreground">Identity and Work metrics</h3><DataTable {table} /></section>
+  <section class="space-y-1.5"><h3 class="text-sm font-medium text-foreground">Bordered table (border)</h3><DataTable {table} border /></section>
 </DemoSection>

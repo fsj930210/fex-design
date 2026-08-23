@@ -13,6 +13,6 @@ import { departmentFieldNames, departmentTreeData } from './data'
       :field-names="departmentFieldNames"
       :is-leaf="(node) => node.childCount === 0"
       :features="[expansionFeature({ defaultExpandedKeys: ['company'] })]"
-      class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
   /></Card>
 </template>

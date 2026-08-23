@@ -1,4 +1,4 @@
-﻿import { Badge } from '@fex-design/react/primitive/badge'
+import { Badge } from '@fex-design/react/primitive/badge'
 import { Card } from '@fex-design/react/ui/card'
 import { BadgeOverflow } from '@fex-design/react/primitive/badge'
 import { Link } from 'react-router'
@@ -7,9 +7,9 @@ const variants = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'li
 
 export function BadgePage() {
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-md">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-2">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
@@ -18,9 +18,9 @@ export function BadgePage() {
             Use badges for compact status, category, and count labels.
           </p>
         </header>
-        <div className="grid gap-space-xl">
+        <div className="grid gap-4">
           <Card title="Variants" description="Badge visual styles.">
-            <div className="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
               {variants.map((variant) => <Badge key={variant} variant={variant}>{variant}</Badge>)}
             </div>
           </Card>

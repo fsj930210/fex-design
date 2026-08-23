@@ -44,7 +44,7 @@ export function OneWayTransferDemo() {
       title="One-way composition"
       description="A custom action area only moves records to the target; target rows remove themselves through the same Transfer controller."
     >
-      <div className="space-y-space-md">
+      <div className="space-y-2">
         <Transfer
           data-testid="one-way-transfer"
           items={transferMembers}

@@ -25,7 +25,7 @@
 </script>
 
 <Card title="Form validation" description="Invalid state drives the default Textarea styling.">
-  <Form {form} class="grid max-w-xl gap-space-md">
+  <Form {form} class="grid max-w-xl gap-2">
     <Field name="prompt" {validators}>
       {#snippet children(field)}
         {@const hasError = invalid(field)}

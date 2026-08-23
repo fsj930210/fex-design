@@ -7,7 +7,7 @@ import { TableDemo } from './table-demo'
 import { TextDemo } from './text-demo'
 export function SkeletonPage() {
   return (
-    <main className="grid gap-space-xl p-page-padding">
+    <main className="grid gap-4 p-2 md:p-6">
       <BasicDemo />
       <AvatarDemo />
       <CardDemo />

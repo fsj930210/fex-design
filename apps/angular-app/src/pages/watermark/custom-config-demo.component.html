@@ -2,21 +2,21 @@
   title="Custom Config"
   description="Adjust content, font, layering, rotation, gap, and offset."
 >
-  <div class="grid gap-space-xl lg:grid-cols-[280px_minmax(0,1fr)]">
-    <div class="grid gap-space-lg">
-      <label class="grid gap-space-sm text-sm text-foreground">
+  <div class="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+    <div class="grid gap-3">
+      <label class="grid gap-1.5 text-sm text-foreground">
         <span>Content</span>
         <fex-input-root [value]="content()" (valueChange)="content.set($event)">
           <input fexInputControl aria-label="Watermark content" />
         </fex-input-root>
       </label>
-      <label class="grid gap-space-sm text-sm text-foreground">
+      <label class="grid gap-1.5 text-sm text-foreground">
         <span>Color</span>
         <fex-input-root [value]="color()" (valueChange)="color.set($event)">
           <input fexInputControl aria-label="Watermark color" />
         </fex-input-root>
       </label>
-      <label class="grid gap-space-sm text-sm text-foreground">
+      <label class="grid gap-1.5 text-sm text-foreground">
         <span>FontSize: {{ fontSize() }}</span>
         <div
           fexSliderPrimitive
@@ -30,7 +30,7 @@
           <span fexSliderThumb aria-label="FontSize"></span>
         </div>
       </label>
-      <label class="grid gap-space-sm text-sm text-foreground">
+      <label class="grid gap-1.5 text-sm text-foreground">
         <span>ZIndex: {{ zIndex() }}</span>
         <div
           fexSliderPrimitive
@@ -44,7 +44,7 @@
           <span fexSliderThumb aria-label="ZIndex"></span>
         </div>
       </label>
-      <label class="grid gap-space-sm text-sm text-foreground">
+      <label class="grid gap-1.5 text-sm text-foreground">
         <span>Rotate: {{ rotate() }}</span>
         <div
           fexSliderPrimitive
@@ -58,26 +58,26 @@
           <span fexSliderThumb aria-label="Rotate"></span>
         </div>
       </label>
-      <div class="grid grid-cols-2 gap-space-sm">
-        <label class="grid gap-space-sm text-sm text-foreground">
+      <div class="grid grid-cols-2 gap-1.5">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Gap X</span>
           <fex-input-root [value]="gapX().toString()" (valueChange)="setNumber(gapX, $event)">
             <input fexInputControl inputmode="numeric" aria-label="Gap X" />
           </fex-input-root>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Gap Y</span>
           <fex-input-root [value]="gapY().toString()" (valueChange)="setNumber(gapY, $event)">
             <input fexInputControl inputmode="numeric" aria-label="Gap Y" />
           </fex-input-root>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Offset X</span>
           <fex-input-root [value]="offsetX().toString()" (valueChange)="setNumber(offsetX, $event)">
             <input fexInputControl inputmode="numeric" aria-label="Offset X" />
           </fex-input-root>
         </label>
-        <label class="grid gap-space-sm text-sm text-foreground">
+        <label class="grid gap-1.5 text-sm text-foreground">
           <span>Offset Y</span>
           <fex-input-root [value]="offsetY().toString()" (valueChange)="setNumber(offsetY, $event)">
             <input fexInputControl inputmode="numeric" aria-label="Offset Y" />
@@ -94,7 +94,7 @@
       [offset]="offset()"
       class="min-h-96 rounded-md border border-border bg-background"
     >
-      <div class="grid min-h-96 place-items-center p-space-xl text-center text-sm text-muted-foreground">
+      <div class="grid min-h-96 place-items-center p-4 text-center text-sm text-muted-foreground">
         Config changes update the generated canvas tile.
       </div>
     </fex-watermark>

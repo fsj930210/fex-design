@@ -1,7 +1,7 @@
 <fex-card
   title="Search data and custom title rendering"
   description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
-  ><fex-input-root [value]="keyword()" class="mb-space-md max-w-sm"
+  ><fex-input-root [value]="keyword()" class="mb-2 max-w-sm"
     ><input
       fexInputControl
       (input)="keyword.set($any($event.target).value)"
@@ -11,14 +11,14 @@
     <fex-demo-tree
       [controller]="controller"
       [options]="baseOptions"
-      class="block max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="block max-w-xl rounded-md border border-border bg-background p-1.5"
     />
   </div>
   @if (showing()) {
     <fex-demo-tree
       [options]="searchOptions()"
       [searchKeyword]="keyword()"
-      class="block max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="block max-w-xl rounded-md border border-border bg-background p-1.5"
     />
   }
 </fex-card>

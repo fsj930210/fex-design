@@ -3,7 +3,7 @@ import { DemoTimePicker } from './demo-time-picker'
 export function RangeDemo() {
   return (
     <Card title="范围选择">
-      <div class="flex items-center gap-space-sm">
+      <div class="flex items-center gap-1.5">
         <DemoTimePicker format="HH:mm" />
         <span>至</span>
         <DemoTimePicker format="HH:mm" />

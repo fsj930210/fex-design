@@ -5,7 +5,7 @@ import { cn } from '@fex/utils'
 
 const itemClassName =
   'justify-start data-[state=active]:bg-primary data-[state=active]:text-primary-foreground'
-const contentClassName = 'mt-space-md border-l-2 border-primary pl-space-md'
+const contentClassName = 'mt-2 border-l-2 border-primary pl-2'
 const mergeClass = (value: unknown, extra: string) =>
   cn(typeof value === 'string' ? value : undefined, extra)
 const omitClass = ({ class: _class, ...props }: Record<string, unknown>) => props

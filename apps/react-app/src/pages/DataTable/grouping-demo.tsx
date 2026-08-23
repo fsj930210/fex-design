@@ -53,8 +53,8 @@ function GroupingGrid({ mode }: { mode: 'reorder' | 'remove' }) {
   })
 
   return (
-    <div className="space-y-space-sm">
-      <div className="flex flex-wrap gap-space-sm">
+    <div className="space-y-1.5">
+      <div className="flex flex-wrap gap-1.5">
         {(['department', 'status'] as const).map((columnId) => {
           const column = table.getColumn(columnId)
           if (!column) return null
@@ -81,7 +81,7 @@ function GroupingGrid({ mode }: { mode: 'reorder' | 'remove' }) {
               : groupingColumnId
           return (
             <div
-              className="flex min-h-11 items-center gap-space-sm px-space-md"
+              className="flex min-h-11 items-center gap-1.5 px-2"
               style={{ paddingInlineStart: `${row.depth * 20 + 12}px` }}
             >
               <Button
@@ -120,7 +120,7 @@ export function GroupingDataTableDemo() {
       title="Row grouping and aggregation"
       description="Each group is a full-width summary row above its members. Department is the outer level; Status is nested inside it. The chevron expands only that group, and the right side displays the aggregated visits."
     >
-      <div className="grid gap-space-lg xl:grid-cols-2">
+      <div className="grid gap-3 xl:grid-cols-2">
         <DemoBranch title="Keep Department and Status columns">
           <GroupingGrid mode="reorder" />
         </DemoBranch>

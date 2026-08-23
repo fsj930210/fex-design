@@ -62,9 +62,9 @@ export function ToastPage() {
   }
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-6xl space-y-space-lg">
-        <header class="space-y-space-md">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-6xl space-y-3">
+        <header class="space-y-2">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
@@ -243,7 +243,7 @@ function choosePlacement(
 function DemoSection(props: { title: string; description: string; children: JSX.Element }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div class="flex flex-wrap gap-space-sm">{props.children}</div>
+      <div class="flex flex-wrap gap-1.5">{props.children}</div>
     </Card>
   )
 }

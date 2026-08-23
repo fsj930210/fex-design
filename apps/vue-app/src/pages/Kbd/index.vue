@@ -1,12 +1,12 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { Kbd, KbdGroup } from '@fex-design/vue/ui/kbd'
 import Card from '@fex-design/vue/ui/card'
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-md">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
@@ -16,7 +16,7 @@ import Card from '@fex-design/vue/ui/card'
         </p>
       </header>
       <Card title="Shortcuts" description="Single keys and key combinations."
-        ><div class="flex min-w-0 flex-wrap items-center gap-space-lg">
+        ><div class="flex min-w-0 flex-wrap items-center gap-3">
           <Kbd>Esc</Kbd><KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup
           ><KbdGroup><Kbd>Cmd</Kbd><Kbd>Enter</Kbd></KbdGroup>
         </div></Card

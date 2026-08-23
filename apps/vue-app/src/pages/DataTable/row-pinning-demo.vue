@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { rowPinningFeature } from '@fex-design/core/data-table/features/row-pinning'
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
 import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/vue/primitive/data-table'
@@ -55,7 +55,7 @@ const table = useDataTable({
   <DemoSection
     title="Row pinning"
     description="Pinned rows are opaque layers above the scrollable center region. Their edge shadow appears only at the boundary, and the controls can add more rows to either region."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Top, scrollable center and bottom</h3>
       <DataTable :table="table" :part-class="{ viewport: 'max-h-56' }" /></section
   ></DemoSection>

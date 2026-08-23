@@ -2,11 +2,11 @@
   title="Row grouping and aggregation"
   description="Each group is a full-width summary row above its members. Department is the outer level; Status is nested inside it. The chevron expands only that group, and the right side displays the aggregated visits."
 >
-  <div class="grid gap-space-lg xl:grid-cols-2">
+  <div class="grid gap-3 xl:grid-cols-2">
     @for (grid of grids; track grid.title) {
-      <section class="space-y-space-sm">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">{{ grid.title }}</h3>
-        <div class="flex flex-wrap gap-space-sm">
+        <div class="flex flex-wrap gap-1.5">
           @for (id of groupingColumns; track id) {
             <button
               fexButton
@@ -21,7 +21,7 @@
         <fex-data-table [table]="grid.table">
           <ng-template fexDataTableGroupRow let-row>
             <div
-              class="flex min-h-11 items-center gap-space-sm px-space-md"
+              class="flex min-h-11 items-center gap-1.5 px-2"
               [style.padding-inline-start.px]="row.depth * 20 + 12"
             >
               <button

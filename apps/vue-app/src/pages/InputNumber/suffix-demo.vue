@@ -6,7 +6,7 @@ import Card from '@fex-design/vue/ui/card'
   <Card
     title="Suffix and clear"
     description="Suffix replaces the full action area while clear remains independent."
-    ><div class="grid gap-space-md md:grid-cols-3">
+    ><div class="grid gap-2 md:grid-cols-3">
       <InputNumber clearable :default-value="20" aria-label="Clearable number" /><InputNumber
         :default-value="20"
         aria-label="Weight"

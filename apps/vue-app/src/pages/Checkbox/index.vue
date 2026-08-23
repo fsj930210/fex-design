@@ -34,22 +34,22 @@ function nextValues(
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Checkbox</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             Boolean checks, grouped layouts, indeterminate state, disabled state, and aria-invalid
             styling.
           </p>
         </div>
       </header>
 
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card
           title="Primitive"
           description="Self-owned checkbox primitive exported as low-level parts."
@@ -58,7 +58,7 @@ function nextValues(
         </Card>
 
         <Card title="Basic" description="Default UI wrapper with native data and aria attributes.">
-          <div class="grid min-w-0 gap-space-md">
+          <div class="grid min-w-0 gap-2">
             <div class="inline-flex items-center gap-2 text-sm">
               <Checkbox default-checked /><span>Enable notifications</span>
             </div>
@@ -69,7 +69,7 @@ function nextValues(
         </Card>
 
         <Card title="Controlled" description="Controlled state uses checked and checked-change.">
-          <div class="grid min-w-0 gap-space-md">
+          <div class="grid min-w-0 gap-2">
             <div class="inline-flex items-center gap-2 text-sm">
               <Checkbox
                 :checked="controlled"
@@ -82,7 +82,7 @@ function nextValues(
         </Card>
 
         <Card title="Indeterminate" description="Compose check-all behavior from normal events.">
-          <div class="grid min-w-0 gap-space-md">
+          <div class="grid min-w-0 gap-2">
             <div class="inline-flex items-center gap-2 text-sm">
               <Checkbox
                 :checked="checkAllState"
@@ -112,7 +112,7 @@ function nextValues(
           title="Group"
           description="CheckboxGroup is a layout wrapper; value arrays stay in the caller."
         >
-          <div class="grid min-w-0 gap-space-md">
+          <div class="grid min-w-0 gap-2">
             <CheckboxGroup orientation="horizontal">
               <div
                 v-for="option in options"

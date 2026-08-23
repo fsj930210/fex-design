@@ -58,27 +58,27 @@ export function InteractionsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Interactions</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Dropzone, movable, and 8-direction resize hooks for existing components.
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card
             title="Drag And Drop"
             description="useDraggable and useDroppable wrap Pragmatic for cross-component drops."
           >
-            <div className="grid gap-space-md md:grid-cols-[280px_1fr]">
-              <div className="space-y-space-sm rounded-md border border-border bg-background p-space-md">
+            <div className="grid gap-2 md:grid-cols-[280px_1fr]">
+              <div className="space-y-1.5 rounded-md border border-border bg-background p-2">
                 <p className="text-sm font-medium text-muted-foreground">Draggable items</p>
                 {dropDemoItems.source.map((itemId) => (
                   <DraggableToken
@@ -87,12 +87,12 @@ export function InteractionsPage() {
                   />
                 ))}
                 {dropDemoItems.source.length === 0 && (
-                  <p className="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground">
+                  <p className="rounded-md border border-dashed border-border px-2 py-1.5 text-sm text-muted-foreground">
                     All items have been dropped.
                   </p>
                 )}
               </div>
-              <div className="grid gap-space-md md:grid-cols-2">
+              <div className="grid gap-2 md:grid-cols-2">
                 <DroppableZone
                   id="card-zone"
                   title="Cards only"
@@ -110,7 +110,7 @@ export function InteractionsPage() {
                 />
               </div>
             </div>
-            <p className="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground">
+            <p className="mt-2 rounded-md bg-muted-background px-2 py-1.5 text-sm text-muted-foreground">
               {dropResult}
             </p>
           </Card>
@@ -121,7 +121,7 @@ export function InteractionsPage() {
           >
             <div
               {...dropzone.getRootProps()}
-              className="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-accent-background"
+              className="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-focus data-[dragging=true]:bg-selected-background"
             >
               <input {...dropzone.getInputProps()} />
               <span>{files.length > 0 ? files.join(', ') : 'Drop images or text files here'}</span>
@@ -132,16 +132,16 @@ export function InteractionsPage() {
             <div className="relative h-64 overflow-hidden rounded-md border border-border bg-background">
               <div
                 {...move.getTargetProps()}
-                className="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg"
+                className="absolute w-72 overflow-hidden rounded-md border border-border bg-elevated-background shadow-lg"
               >
                 <div
                   {...move.getHandleProps()}
-                  className="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing"
+                  className="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-2 text-sm font-medium active:cursor-grabbing"
                 >
                   <span>Drag this title bar</span>
                   <span className="text-muted-foreground">::</span>
                 </div>
-                <p className="p-space-md text-sm text-muted-foreground">
+                <p className="p-2 text-sm text-muted-foreground">
                   The card is constrained to its parent. The title bar is the move handle.
                 </p>
               </div>
@@ -155,10 +155,10 @@ export function InteractionsPage() {
             <div className="relative h-80 overflow-hidden rounded-md border border-border bg-background">
               <div
                 {...resize.getTargetProps()}
-                className="absolute rounded-md border border-border bg-card p-space-md shadow-lg"
+                className="absolute rounded-md border border-border bg-elevated-background p-2 shadow-lg"
               >
                 <p className="text-sm font-medium">Resizable surface</p>
-                <p className="mt-space-sm text-sm text-muted-foreground">
+                <p className="mt-1.5 text-sm text-muted-foreground">
                   Drag any edge or corner. Handles are intentionally visible for this demo.
                 </p>
                 <div
@@ -209,7 +209,7 @@ function DraggableToken({ id, label, type }: { id: string; label: string; type: 
     <>
       <div
         {...draggable.getDragProps()}
-        className="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
+        className="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
       >
         <span>{label}</span>
         <span className="text-muted-foreground">::</span>
@@ -217,7 +217,7 @@ function DraggableToken({ id, label, type }: { id: string; label: string; type: 
       {draggable.dragging &&
         createPortal(
           <div
-            className="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            className="flex min-h-11 items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
             style={draggable.getOverlayStyle()}
           >
             <span>{label}</span>
@@ -256,18 +256,18 @@ function DroppableZone({
   return (
     <div
       {...droppable.getDropProps()}
-      className="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background"
+      className="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-2 text-sm transition-colors data-[can-drop=true]:border-focus data-[over=true]:bg-selected-background"
     >
       <div>
         <p className="font-medium text-foreground">{title}</p>
-        <p className="mt-space-sm text-muted-foreground">
+        <p className="mt-1.5 text-muted-foreground">
           {droppable.over
             ? droppable.canDrop
               ? 'Release to drop.'
               : 'This item is not accepted.'
             : 'Drop target'}
         </p>
-        <div className="mt-space-md space-y-space-sm">
+        <div className="mt-2 space-y-1.5">
           {items.map((itemId) => {
             const item = draggableItems[itemId as keyof typeof draggableItems]
 

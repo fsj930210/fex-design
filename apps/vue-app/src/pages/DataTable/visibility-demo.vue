@@ -31,7 +31,7 @@ const table = useDataTable({
   <DemoSection
     title="Column visibility"
     description="Visibility state stays in TanStack. The toggle is a separate primitive and respects per-column enableHiding; Name cannot be hidden and Visits starts hidden."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Toggle visible leaf columns</h3>
       <DataTableColumnVisibility :table="table" /><DataTable :table="table" /></section
   ></DemoSection>

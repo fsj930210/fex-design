@@ -1,6 +1,6 @@
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-md">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-2">
       <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">返回首页</a>
       <h1 class="text-2xl font-semibold text-foreground">Input primitives</h1>
       <p class="max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -8,7 +8,7 @@
       </p>
     </header>
 
-    <div class="grid gap-space-xl">
+    <div class="grid gap-4">
       <fex-card title="Input group" description="Connects related inputs, addons, and actions while each control keeps its own value.">
         <fex-input-group class="max-w-xl"><span fexInputGroupAddon>https://</span><fex-input-root><input fexInputControl aria-label="Domain" placeholder="example.com" /></fex-input-root><button fexButton>Open</button></fex-input-group>
       </fex-card>
@@ -25,8 +25,8 @@
       <fex-card
         title="Controlled and uncontrolled"
         description="受控值由调用方维护；非受控值只声明初始值。"
-        ><div class="grid gap-space-lg md:grid-cols-2">
-          <div class="space-y-space-sm">
+        ><div class="grid gap-3 md:grid-cols-2">
+          <div class="space-y-1.5">
             <fex-input-root [value]="controlledValue" (valueChange)="controlledValue = $event"
               ><input fexInputControl aria-label="受控输入" placeholder="受控输入"
             /></fex-input-root>
@@ -69,7 +69,7 @@
       <fex-card
         title="Manual focus and clear"
         description="调用方可以通过原生 ref 聚焦或移除焦点，并通过受控值手动清空。"
-        ><div class="max-w-md space-y-space-md">
+        ><div class="max-w-md space-y-2">
           <fex-input-root [value]="manualValue" (valueChange)="manualValue = $event"
             ><input
               #focusControl
@@ -77,7 +77,7 @@
               aria-label="手动控制输入"
               placeholder="手动控制输入"
           /></fex-input-root>
-          <div class="flex flex-wrap gap-space-sm">
+          <div class="flex flex-wrap gap-1.5">
             <button fexButton size="sm" (click)="focusControl.focus()">聚焦</button
             ><button fexButton size="sm" variant="outline" (click)="focusControl.blur()">
               移除焦点</button
@@ -88,7 +88,7 @@
         </div></fex-card
       >
       <fex-card title="States" description="禁用、只读和校验失败状态由 Root 统一下发。"
-        ><div class="grid gap-space-lg md:grid-cols-3">
+        ><div class="grid gap-3 md:grid-cols-3">
           <fex-input-root [disabled]="true" defaultValue="禁用内容"
             ><input fexInputControl aria-label="禁用示例" /></fex-input-root
           ><fex-input-root [readOnly]="true" defaultValue="只读内容"

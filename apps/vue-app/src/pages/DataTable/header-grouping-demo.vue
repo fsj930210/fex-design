@@ -39,11 +39,11 @@ const table = useDataTable({ features, data: people6, columns, getRowId: (row) =
   <DemoSection
     title="Column header grouping"
     description="Nested column definitions render TanStack's headerGroups as a real multi-row thead. The group headers use colSpan automatically; leaf headers remain the columns that sort, resize and pin."
-    ><section class="space-y-space-sm">
+    ><section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Identity and Work metrics</h3>
       <DataTable :table="table" />
     </section>
-    <section class="space-y-space-sm">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Bordered table (border)</h3>
       <DataTable :table="table" border /></section
   ></DemoSection>

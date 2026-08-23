@@ -15,9 +15,9 @@
       {{ cell.getValue() }}
     }
   </ng-template>
-  <div class="space-y-space-lg">
+  <div class="space-y-3">
     @for (grid of grids; track grid.title) {
-      <section class="space-y-space-sm">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">{{ grid.title }}</h3>
         <fex-sortable
           #sortable="fexSortable"
@@ -57,7 +57,7 @@
         <p class="text-xs text-muted-foreground">{{ grid.message }}</p>
       </section>
     }
-    <section class="space-y-space-sm">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Row reorder</h3>
       <fex-sortable
         #rowSort="fexSortable"

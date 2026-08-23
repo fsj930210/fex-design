@@ -68,27 +68,27 @@ export default { name: 'InteractionsPage' }
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >Back home</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Interactions</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             Dropzone, movable, and 8-direction resize hooks for existing components.
           </p>
         </div>
       </header>
 
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card
           title="Drag And Drop"
           description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops."
         >
-          <div class="grid gap-space-md md:grid-cols-[280px_1fr]">
-            <div class="space-y-space-sm rounded-md border border-border bg-background p-space-md">
+          <div class="grid gap-2 md:grid-cols-[280px_1fr]">
+            <div class="space-y-1.5 rounded-md border border-border bg-background p-2">
               <p class="text-sm font-medium text-muted-foreground">Draggable items</p>
               <DraggableToken
                 v-for="itemId in dropDemoItems.source"
@@ -97,12 +97,12 @@ export default { name: 'InteractionsPage' }
               />
               <p
                 v-if="dropDemoItems.source.length === 0"
-                class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground"
+                class="rounded-md border border-dashed border-border px-2 py-1.5 text-sm text-muted-foreground"
               >
                 All items have been dropped.
               </p>
             </div>
-            <div class="grid gap-space-md md:grid-cols-2">
+            <div class="grid gap-2 md:grid-cols-2">
               <DroppableZone
                 id="card-zone"
                 title="Cards only"
@@ -121,7 +121,7 @@ export default { name: 'InteractionsPage' }
             </div>
           </div>
           <p
-            class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground"
+            class="mt-2 rounded-md bg-muted-background px-2 py-1.5 text-sm text-muted-foreground"
           >
             {{ dropResult }}
           </p>
@@ -134,7 +134,7 @@ export default { name: 'InteractionsPage' }
           <div
             :ref="(element) => dropzone.setRoot(element as HTMLElement | null)"
             v-bind="dropzone.rootDataAttributes.value"
-            class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-accent-background"
+            class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-focus data-[dragging=true]:bg-selected-background"
             @click="dropzone.open"
             @dragenter="dropzone.onDragEnter"
             @dragover="dropzone.onDragOver"
@@ -158,17 +158,17 @@ export default { name: 'InteractionsPage' }
           <div class="relative h-64 overflow-hidden rounded-md border border-border bg-background">
             <div
               :ref="(element) => move.setTarget(element as HTMLElement | null)"
-              class="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg"
+              class="absolute w-72 overflow-hidden rounded-md border border-border bg-elevated-background shadow-lg"
               :style="move.style.value"
             >
               <div
                 :ref="(element) => move.setHandle(element as HTMLElement | null)"
-                class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing"
+                class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-2 text-sm font-medium active:cursor-grabbing"
                 @pointerdown="move.onPointerDown"
               >
                 <span>Drag this title bar</span><span class="text-muted-foreground">::</span>
               </div>
-              <p class="p-space-md text-sm text-muted-foreground">
+              <p class="p-2 text-sm text-muted-foreground">
                 The card is constrained to its parent. The title bar is the move handle.
               </p>
             </div>
@@ -182,11 +182,11 @@ export default { name: 'InteractionsPage' }
           <div class="relative h-80 overflow-hidden rounded-md border border-border bg-background">
             <div
               :ref="(element) => resize.setTarget(element as HTMLElement | null)"
-              class="absolute rounded-md border border-border bg-card p-space-md shadow-lg"
+              class="absolute rounded-md border border-border bg-elevated-background p-2 shadow-lg"
               :style="resize.style.value"
             >
               <p class="text-sm font-medium">Resizable surface</p>
-              <p class="mt-space-sm text-sm text-muted-foreground">
+              <p class="mt-1.5 text-sm text-muted-foreground">
                 Drag any edge or corner. Handles are intentionally visible for this demo.
               </p>
               <div

@@ -8,7 +8,7 @@ export function RefCollapseDemo() {
   const collapseRef = useRef<CollapseRef>(null)
   return (
     <Card title="Instance methods" description="Use ref methods for imperative actions tied to this Collapse instance.">
-      <div className="mb-space-md flex flex-wrap gap-space-sm">
+      <div className="mb-2 flex flex-wrap gap-1.5">
         <Button variant="outline" size="sm" onClick={() => collapseRef.current?.expand('security')}>
           Open security
         </Button>

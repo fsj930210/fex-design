@@ -63,7 +63,7 @@
         dragOverlay = style.display === 'none' ? null : { label: item.label, style: style as Record<string, string> }
       },
     }}
-    class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
+    class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
   >
     <span>{item.label}</span>
     <span class="text-muted-foreground">::</span>
@@ -72,7 +72,7 @@
 
 {#if dragOverlay}
   <div
-    class="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+    class="flex min-h-11 items-center justify-between rounded-md border border-border bg-elevated-background px-2 text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
     style={styleToString(dragOverlay.style)}
   >
     <span>{dragOverlay.label}</span>
@@ -80,31 +80,31 @@
   </div>
 {/if}
 
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Interactions</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Dropzone, movable, and 8-direction resize hooks for existing components.
         </p>
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <Card title="Drag And Drop" description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops.">
-        <div class="grid gap-space-md md:grid-cols-[280px_1fr]">
-          <div class="space-y-space-sm rounded-md border border-border bg-background p-space-md">
+        <div class="grid gap-2 md:grid-cols-[280px_1fr]">
+          <div class="space-y-1.5 rounded-md border border-border bg-background p-2">
             <p class="text-sm font-medium text-muted-foreground">Draggable items</p>
             {#each dropDemoItems.source as itemId (itemId)}
               {@render draggableToken(itemById(itemId))}
             {/each}
             {#if dropDemoItems.source.length === 0}
-              <p class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground">All items have been dropped.</p>
+              <p class="rounded-md border border-dashed border-border px-2 py-1.5 text-sm text-muted-foreground">All items have been dropped.</p>
             {/if}
           </div>
-          <div class="grid gap-space-md md:grid-cols-2">
+          <div class="grid gap-2 md:grid-cols-2">
             <div
               use:droppableAction={{
                 id: 'card-zone',
@@ -114,12 +114,12 @@
                 onDragLeave: () => (dropResult = 'Drop a draggable item into a zone.'),
                 onDrop: ({ source, edge }) => reportDrop('card-zone', 'Cards only', source, edge),
               }}
-              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background"
+              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-2 text-sm transition-colors data-[can-drop=true]:border-focus data-[over=true]:bg-selected-background"
             >
               <div>
                 <p class="font-medium text-foreground">Cards only</p>
-                <p class="mt-space-sm text-muted-foreground">Drop target</p>
-                <div class="mt-space-md space-y-space-sm">
+                <p class="mt-1.5 text-muted-foreground">Drop target</p>
+                <div class="mt-2 space-y-1.5">
                   {#each dropDemoItems['card-zone'] as itemId (itemId)}{@render draggableToken(itemById(itemId))}{/each}
                 </div>
               </div>
@@ -133,12 +133,12 @@
                 onDragLeave: () => (dropResult = 'Drop a draggable item into a zone.'),
                 onDrop: ({ source, edge }) => reportDrop('any-zone', 'Any item', source, edge),
               }}
-              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background"
+              class="flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-2 text-sm transition-colors data-[can-drop=true]:border-focus data-[over=true]:bg-selected-background"
             >
               <div>
                 <p class="font-medium text-foreground">Any item</p>
-                <p class="mt-space-sm text-muted-foreground">Drop target</p>
-                <div class="mt-space-md space-y-space-sm">
+                <p class="mt-1.5 text-muted-foreground">Drop target</p>
+                <div class="mt-2 space-y-1.5">
                   {#each dropDemoItems['any-zone'] as itemId (itemId)}{@render draggableToken(itemById(itemId))}{/each}
                 </div>
               </div>
@@ -146,13 +146,13 @@
             </div>
           </div>
         </div>
-        <p class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground">{dropResult}</p>
+        <p class="mt-2 rounded-md bg-muted-background px-2 py-1.5 text-sm text-muted-foreground">{dropResult}</p>
       </Card>
 
       <Card title="Dropzone" description="The action handles drag state, validation, and hidden input selection.">
         <div
           use:dropzoneAction={{ accept: ['image/*', '.txt'], multiple: true, input, onDropFiles: (nextFiles) => (files = nextFiles.map((file) => file.name)) }}
-          class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-accent-background"
+          class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-focus data-[dragging=true]:bg-selected-background"
         >
           <input bind:this={input} type="file" hidden accept="image/*,.txt" multiple onchange={onInputChange} />
           <span>{files.length > 0 ? files.join(', ') : 'Drop images or text files here'}</span>
@@ -163,12 +163,12 @@
         <div class="relative h-64 overflow-hidden rounded-md border border-border bg-background">
           <div
             use:moveAction={{ position: { x: 24, y: 24 }, bounds: 'parent' }}
-            class="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg"
+            class="absolute w-72 overflow-hidden rounded-md border border-border bg-elevated-background shadow-lg"
           >
-            <div class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing">
+            <div class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-2 text-sm font-medium active:cursor-grabbing">
               <span>Drag this title bar</span><span class="text-muted-foreground">::</span>
             </div>
-            <p class="p-space-md text-sm text-muted-foreground">The card is constrained to its parent. The title bar is the move handle.</p>
+            <p class="p-2 text-sm text-muted-foreground">The card is constrained to its parent. The title bar is the move handle.</p>
           </div>
         </div>
       </Card>
@@ -177,10 +177,10 @@
         <div class="relative h-80 overflow-hidden rounded-md border border-border bg-background">
           <div
             use:resizeAction={{ rect: { x: 24, y: 24, width: 320, height: 180 }, edges: 'all', minWidth: 220, minHeight: 120 }}
-            class="absolute rounded-md border border-border bg-card p-space-md shadow-lg"
+            class="absolute rounded-md border border-border bg-elevated-background p-2 shadow-lg"
           >
             <p class="text-sm font-medium">Resizable surface</p>
-            <p class="mt-space-sm text-sm text-muted-foreground">Drag any edge or corner. Handles are intentionally visible for this demo.</p>
+            <p class="mt-1.5 text-sm text-muted-foreground">Drag any edge or corner. Handles are intentionally visible for this demo.</p>
             <div data-resize-edge="top" class="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary"></div>
             <div data-resize-edge="right" class="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary"></div>
             <div data-resize-edge="bottom" class="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary"></div>

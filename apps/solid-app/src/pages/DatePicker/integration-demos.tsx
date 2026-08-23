@@ -67,7 +67,7 @@ export function IntegrationDemos() {
               </DatePickerFooter>
             }
           />
-          <p class="mt-space-sm text-xs text-muted-foreground">已提交 {submitCount()} 次</p>
+          <p class="mt-1.5 text-xs text-muted-foreground">已提交 {submitCount()} 次</p>
         </div>
       </Section>
 

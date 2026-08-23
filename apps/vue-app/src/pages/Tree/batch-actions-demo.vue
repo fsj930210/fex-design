@@ -19,7 +19,7 @@ const controller = createTreeController<DepartmentNode>({
   <Card
     title="Controller batch actions"
     description="All batch operations are explicit controller actions. selectAll only acts when multiple selection is enabled."
-    ><div class="mb-space-md flex flex-wrap gap-space-sm">
+    ><div class="mb-2 flex flex-wrap gap-1.5">
       <Button
         size="sm"
         variant="outline"
@@ -58,6 +58,6 @@ const controller = createTreeController<DepartmentNode>({
       :field-names="departmentFieldNames"
       :is-leaf="(node) => node.childCount === 0"
       checkable
-      class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
   /></Card>
 </template>

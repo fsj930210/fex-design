@@ -29,7 +29,7 @@ export function DynamicTabsDemo() {
         onChange={(next) => setValue(next ?? '')}
         onClose={(item) => remove(item.value)}
       >
-        <div className="flex min-w-0 items-center gap-space-sm">
+        <div className="flex min-w-0 items-center gap-1.5">
           <span className="text-xs text-muted-foreground">Workspace</span>
           <TabsList className="min-w-0 flex-1">
             {items.map((item) => (

@@ -24,7 +24,7 @@ function DemoSlider({
   const currentValue = value ?? internalValue
 
   return (
-    <div className="grid gap-space-sm">
+    <div className="grid gap-1.5">
       <SliderRoot
         {...props}
         value={value}
@@ -54,20 +54,20 @@ export function SliderPage() {
   const [multipleValue, setMultipleValue] = useState([15, 45, 75])
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Slider</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Primitive slider with shared core value logic.
             </p>
           </div>
         </header>
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card title="Basic" description="Uncontrolled slider uses defaultValue.">
             <DemoSlider defaultValue={[32]} aria-label="Volume" showValue />
           </Card>
@@ -80,7 +80,7 @@ export function SliderPage() {
             />
           </Card>
           <Card title="Range" description="Use an array with two values for a range slider.">
-            <div className="grid gap-space-sm">
+            <div className="grid gap-1.5">
               <SliderRoot
                 defaultValue={[20, 80]}
                 minStepsBetweenThumbs={4}
@@ -102,7 +102,7 @@ export function SliderPage() {
             title="Multiple Thumbs"
             description="Use more than two values to create multiple thumbs."
           >
-            <div className="grid gap-space-sm">
+            <div className="grid gap-1.5">
               <SliderRoot
                 defaultValue={[15, 45, 75]}
                 minStepsBetweenThumbs={4}
@@ -125,7 +125,7 @@ export function SliderPage() {
             title="Orientation"
             description="Slider supports horizontal and vertical orientation."
           >
-            <div className="flex items-center gap-space-xl">
+            <div className="flex items-center gap-4">
               <div className="w-full max-w-md">
                 <DemoSlider defaultValue={[45]} aria-label="Horizontal slider" />
               </div>
@@ -133,7 +133,7 @@ export function SliderPage() {
             </div>
           </Card>
           <Card title="Sizes" description="Slider supports sm, default, and lg sizes.">
-            <div className="grid gap-space-md">
+            <div className="grid gap-2">
               <DemoSlider size="sm" defaultValue={[25]} aria-label="Small slider" />
               <DemoSlider defaultValue={[50]} aria-label="Default slider" />
               <DemoSlider size="lg" defaultValue={[75]} aria-label="Large slider" />

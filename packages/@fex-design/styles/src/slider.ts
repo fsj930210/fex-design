@@ -21,9 +21,9 @@ export const sliderRootClassName = cva('relative touch-none select-none', {
 export const sliderInputClassName = [
   'h-[var(--slider-thumb-size)] w-full min-w-0 cursor-pointer appearance-none bg-transparent outline-none',
   'disabled:cursor-not-allowed disabled:opacity-50',
-  '[&::-webkit-slider-runnable-track]:h-[var(--slider-track-height)] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-input',
+  '[&::-webkit-slider-runnable-track]:h-[var(--slider-track-height)] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-border',
   '[&::-webkit-slider-thumb]:mt-[calc((var(--slider-track-height)-var(--slider-thumb-size))/2)] [&::-webkit-slider-thumb]:size-[var(--slider-thumb-size)] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:shadow-sm',
-  '[&::-moz-range-track]:h-[var(--slider-track-height)] [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-input',
+  '[&::-moz-range-track]:h-[var(--slider-track-height)] [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-border',
   '[&::-moz-range-progress]:h-[var(--slider-track-height)] [&::-moz-range-progress]:rounded-full [&::-moz-range-progress]:bg-primary',
   '[&::-moz-range-thumb]:size-[var(--slider-thumb-size)] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:shadow-sm',
   'focus-visible:[&::-webkit-slider-thumb]:ring-3 focus-visible:[&::-webkit-slider-thumb]:ring-focus/50',

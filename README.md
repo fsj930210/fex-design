@@ -4,6 +4,6 @@ Framework-agnostic admin foundations and native React, Vue, Solid, Svelte and An
 
 ```bash
 pnpm install
-pnpm nx run-many -t lint,typecheck,build
+pnpm check
 pnpm dev:react
 ```

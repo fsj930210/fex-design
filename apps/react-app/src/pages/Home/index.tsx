@@ -72,25 +72,25 @@ export function HomePage() {
   ].sort((left, right) => left.label.localeCompare(right.label))
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-sm">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-1.5">
           <h1 className="text-2xl font-semibold text-foreground">React Admin</h1>
           <p className="text-sm leading-6 text-muted-foreground">
             临时导航入口，后续后台功能完整后再调整首页结构。
           </p>
         </header>
 
-        <section className="space-y-space-md">
+        <section className="space-y-2">
           <h2 className="text-base font-medium text-foreground">Components</h2>
           <nav
-            className="grid grid-cols-1 gap-space-sm sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3"
             aria-label="组件示例"
           >
             {componentLinks.map((link) => (
               <Link
                 key={link.to}
-                className="rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-foreground transition-colors hover:bg-muted-background"
+                className="rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-muted-background"
                 to={link.to}
               >
                 {link.label}

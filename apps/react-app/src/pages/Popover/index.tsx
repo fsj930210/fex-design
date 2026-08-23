@@ -7,7 +7,7 @@ import { Link } from 'react-router'
 function DemoSection(props: { title: string; description: string; children: ReactNode }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div className="flex min-w-0 flex-wrap items-center gap-space-md">{props.children}</div>
+      <div className="flex min-w-0 flex-wrap items-center gap-2">{props.children}</div>
     </Card>
   )
 }
@@ -53,22 +53,22 @@ export function PopoverPage() {
   const [container, setContainer] = useState<HTMLDivElement | null>(null)
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Popover</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               React adapter for the shared core floating overlay, covering triggers, placement,
               controlled state and custom popup containers.
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <DemoSection
             title="Primitive"
             description="Low-level composition API. Trigger exposes render props."
@@ -165,11 +165,11 @@ export function PopoverPage() {
             title="Placement"
             description="Supports antd placement and Radix side/align options."
           >
-            <div className="flex w-full flex-col items-center gap-space-md py-space-lg">
+            <div className="flex w-full flex-col items-center gap-2 py-3">
               {placementGroups.map((group, rowIndex) => (
                 <div
                   key={rowIndex}
-                  className="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-space-lg gap-y-space-md"
+                  className="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-3 gap-y-2"
                 >
                   {rowIndex > 0 && rowIndex < 4 ? (
                     <>
@@ -270,7 +270,7 @@ export function PopoverPage() {
           <Card title="getPopupContainer" description="Portal can mount into a custom container.">
             <div
               ref={setContainer}
-              className="relative min-h-40 rounded-md border border-dashed p-space-lg"
+              className="relative min-h-40 rounded-md border border-dashed p-3"
             >
               <PrimitivePopover.PopoverRoot
                 getPopupContainer={() => container ?? document.body}

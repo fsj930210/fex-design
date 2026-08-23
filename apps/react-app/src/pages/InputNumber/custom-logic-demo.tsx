@@ -11,7 +11,7 @@ export function CustomLogicDemo() {
       title="Custom primitive logic"
       description="The public hook can drive custom DOM without the default InputNumber presentation."
     >
-      <div className="inline-flex items-center gap-space-md">
+      <div className="inline-flex items-center gap-2">
         <Button
           aria-label="Decrease value"
           disabled={!number.canDecrement}

@@ -61,17 +61,17 @@
   title="Pagination"
   description="Pagination is a core feature with two mutually exclusive registrations: client includes the paginated row model; server only owns pagination state/APIs and receives already-paged data."
 >
-  <div class="grid gap-space-lg xl:grid-cols-2">
-    <section class="space-y-space-sm">
+  <div class="grid gap-3 xl:grid-cols-2">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Client pagination</h3>
       <div><DataTable table={client} /><DataTablePagination table={client} pageSizeOptions={[3, 5, 10]} /></div>
     </section>
-    <section class="space-y-space-sm">
+    <section class="space-y-1.5">
       <h3 class="text-sm font-medium text-foreground">Server pagination</h3>
       <div>
         <DataTable table={server} />
         <DataTablePagination table={server} pageSizeOptions={[3, 5, 10]} />
-        <p class="px-space-sm pb-space-sm text-xs text-muted-foreground">Request: page={serverPagination.pageIndex + 1}&amp;pageSize={serverPagination.pageSize}</p>
+        <p class="px-1.5 pb-1.5 text-xs text-muted-foreground">Request: page={serverPagination.pageIndex + 1}&amp;pageSize={serverPagination.pageSize}</p>
       </div>
     </section>
   </div>

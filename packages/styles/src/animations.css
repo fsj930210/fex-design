@@ -163,19 +163,19 @@
 }
 
 @utility animate-fade-in {
-  animation: fade-in var(--duration) var(--easing);
+  animation: fade-in 200ms ease-out;
 }
 
 @utility animate-fade-out {
-  animation: fade-out var(--duration) var(--easing);
+  animation: fade-out 200ms ease-out;
 }
 
 @utility animate-scale-in {
-  animation: scale-in var(--duration) var(--easing);
+  animation: scale-in 200ms ease-out;
 }
 
 @utility animate-scale-out {
-  animation: scale-out var(--duration) var(--easing);
+  animation: scale-out 200ms ease-out;
 }
 
 @utility animate-shine {

@@ -40,7 +40,7 @@ export const timelineItemClassName = [
   'group-data-[orientation=vertical]/timeline:after:absolute group-data-[orientation=vertical]/timeline:after:left-1/2 group-data-[orientation=vertical]/timeline:after:top-[var(--timeline-indicator-size)] group-data-[orientation=vertical]/timeline:after:h-[calc(100%-var(--timeline-indicator-size))] group-data-[orientation=vertical]/timeline:after:w-[var(--timeline-line-size)] group-data-[orientation=vertical]/timeline:after:-translate-x-1/2 group-data-[orientation=vertical]/timeline:after:bg-border',
   'group-data-[orientation=horizontal]/timeline:after:absolute group-data-[orientation=horizontal]/timeline:after:left-[calc(50%+var(--timeline-indicator-size)/2)] group-data-[orientation=horizontal]/timeline:after:top-[calc(50%-var(--timeline-line-size)/2)] group-data-[orientation=horizontal]/timeline:after:h-[var(--timeline-line-size)] group-data-[orientation=horizontal]/timeline:after:w-[calc(100%-var(--timeline-indicator-size))] group-data-[orientation=horizontal]/timeline:after:bg-border',
   'last:after:hidden group-data-[reverse=true]/timeline:first:after:!hidden group-data-[reverse=true]/timeline:last:after:!block',
-  'data-[connector-status=completed]:after:bg-success data-[connector-status=current]:after:bg-primary data-[connector-status=error]:after:bg-destructive',
+  'data-[connector-status=completed]:after:bg-success data-[connector-status=current]:after:bg-primary data-[connector-status=error]:after:bg-danger',
 ].join(' ')
 
 export const timelineIndicatorClassName = [
@@ -49,8 +49,8 @@ export const timelineIndicatorClassName = [
   'group-data-[status=completed]/item:border-success group-data-[status=completed]/item:bg-success group-data-[status=completed]/item:text-primary-foreground',
   'group-data-[status=current]/item:border-primary group-data-[status=current]/item:bg-primary group-data-[status=current]/item:text-primary-foreground',
   'group-data-[status=pending]/item:border-muted-foreground group-data-[status=pending]/item:text-muted-foreground',
-  'group-data-[status=error]/item:border-destructive group-data-[status=error]/item:bg-destructive group-data-[status=error]/item:text-destructive-foreground',
-  'group-data-[status=disabled]/item:border-muted group-data-[status=disabled]/item:bg-muted group-data-[status=disabled]/item:text-muted-foreground',
+  'group-data-[status=error]/item:border-danger group-data-[status=error]/item:bg-danger group-data-[status=error]/item:text-danger-foreground',
+  'group-data-[status=disabled]/item:border-disabled-border group-data-[status=disabled]/item:bg-disabled-background group-data-[status=disabled]/item:text-muted-foreground',
   '[&_svg]:size-3 [&_svg]:shrink-0',
 ].join(' ')
 

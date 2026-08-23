@@ -5,7 +5,7 @@
   const picker = useDatePickerContext('CustomPanel')
 </script>
 
-<div class="grid gap-space-sm p-space-md">
+<div class="grid gap-1.5 p-2">
   <p class="text-sm text-muted-foreground">这是完全自定义面板，仍可访问 DatePicker primitive 暴露的关闭方法。</p>
   <Button size="sm" onclick={picker.close}>关闭面板</Button>
 </div>

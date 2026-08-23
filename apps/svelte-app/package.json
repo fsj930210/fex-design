@@ -2,6 +2,12 @@
   "name": "@fex-design/svelte-app",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4003 --strictPort",
+    "build": "vite build",
+    "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "lint": "oxlint src vite.config.ts"
+  },
   "dependencies": {
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",

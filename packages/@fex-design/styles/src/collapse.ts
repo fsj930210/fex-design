@@ -3,8 +3,8 @@ import { cva, type VariantProps } from 'class-variance-authority'
 export const collapseRootClassName = cva('w-full text-sm text-foreground', {
   variants: {
     variant: {
-      outlined: 'overflow-hidden rounded-md border border-border bg-card-background',
-      filled: 'space-y-space-sm',
+      outlined: 'overflow-hidden rounded-md border border-border bg-elevated-background',
+      filled: 'space-y-1.5',
       ghost: 'divide-y divide-border/70',
     },
     size: {
@@ -29,7 +29,7 @@ export const collapseItemClassName = cva('group/collapse-item', {
 
 export const collapseTriggerClassName = cva(
   [
-    'group/collapse-trigger flex min-h-10 w-full items-center justify-between gap-space-sm',
+    'group/collapse-trigger flex min-h-10 w-full items-center justify-between gap-1.5',
     'rounded-none px-[var(--collapse-trigger-padding)] py-3 text-left font-normal',
     'data-[state=open]:text-foreground data-[state=closed]:text-foreground',
     'disabled:opacity-50',
@@ -59,7 +59,7 @@ export const collapseContentInnerClassName = cva('min-h-0 overflow-hidden', {
   variants: {
     variant: {
       outlined:
-        'bg-card-background px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
+        'bg-elevated-background px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
       filled:
         'px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
       ghost:

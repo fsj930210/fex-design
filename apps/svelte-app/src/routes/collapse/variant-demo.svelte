@@ -10,7 +10,7 @@
 </script>
 
 <Card title="Variants" description="Outlined, filled and ghost cover bordered and borderless panel styles.">
-  <div class="grid gap-space-lg lg:grid-cols-3">
+  <div class="grid gap-3 lg:grid-cols-3">
     {#each variants as variant}
       <Collapse {variant} defaultExpandedKeys={['one']}>
         <CollapseItem value="one">

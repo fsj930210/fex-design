@@ -61,7 +61,7 @@ type Province = keyof typeof locations
   <Card
     title="Dynamic nested fields"
     description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 React key。"
-    ><FormHost :form="contactsForm" class="grid gap-space-lg"
+    ><FormHost :form="contactsForm" class="grid gap-3"
       ><Field name="contacts" :validators="contactsValidators" v-slot="{ field, state }"
         ><FieldSet
           ><FieldLegend>联系人</FieldLegend>
@@ -75,7 +75,7 @@ type Province = keyof typeof locations
               class="rounded-md border border-border p-4"
             >
               <FieldTitle>联系人 {{ Number(index) + 1 }}</FieldTitle
-              ><FieldGroup class="mt-space-md"
+              ><FieldGroup class="mt-2"
                 ><Field
                   :name="`contacts[${index}].name`"
                   :validators="contactNameValidators"
@@ -130,7 +130,7 @@ type Province = keyof typeof locations
                   ></Field
                 ></FieldGroup
               >
-              <div class="mt-space-md flex gap-space-sm">
+              <div class="mt-2 flex gap-1.5">
                 <Button
                   type="button"
                   variant="outline"

@@ -11,7 +11,7 @@ const expandedKeys = ref<ExpansionKey[]>(['billing'])
 
 <template>
   <Card title="Controlled" description="expandedKeys and change let external state own the panels.">
-    <div class="mb-space-md flex flex-wrap gap-space-sm">
+    <div class="mb-2 flex flex-wrap gap-1.5">
       <Button variant="outline" size="sm" @click="expandedKeys = ['profile']">Open profile</Button>
       <Button variant="outline" size="sm" @click="expandedKeys = ['billing', 'security']">
         Open billing and security

@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import {
   Field,
   FieldContent,
@@ -42,7 +42,7 @@ interface Contact {
   notifications: boolean
 }
 const selectClassName =
-  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/20'
+  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-focus focus-visible:ring-2 focus-visible:ring-focus/20'
 const result = ref('尚未提交')
 const instanceResult = ref('点击按钮读取或设置字段值')
 const emailValidator = ({ value }: { value: unknown }) =>
@@ -225,9 +225,9 @@ provideFormDemoContext({
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-md">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >返回首页</RouterLink
         >
@@ -249,7 +249,7 @@ provideFormDemoContext({
       <CoordinationDemo />
       <ScrollDemo />
       <Card title="Latest result">
-        <pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">{{
+        <pre class="overflow-auto rounded-md bg-muted-background p-3 text-sm text-muted-foreground">{{
           result
         }}</pre>
       </Card>

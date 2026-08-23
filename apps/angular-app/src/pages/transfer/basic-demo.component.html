@@ -2,9 +2,9 @@
   title="Basic, controlled and uncontrolled"
   description="The first Transfer owns its target keys; the second exposes target keys and complete moved items through onChange meta."
 >
-  <div class="grid gap-space-lg xl:grid-cols-2">
+  <div class="grid gap-3 xl:grid-cols-2">
     <section>
-      <h3 class="mb-space-sm text-sm font-medium">Uncontrolled</h3>
+      <h3 class="mb-1.5 text-sm font-medium">Uncontrolled</h3>
       <fex-transfer
         [items]="members"
         [fieldNames]="fieldNames"
@@ -13,7 +13,7 @@
       />
     </section>
     <section>
-      <h3 class="mb-space-sm text-sm font-medium">Controlled</h3>
+      <h3 class="mb-1.5 text-sm font-medium">Controlled</h3>
       <fex-transfer
         [items]="members"
         [fieldNames]="fieldNames"
@@ -21,7 +21,7 @@
         [title]="{ source: 'Team directory', target: 'Project team' }"
         (targetKeysChange)="targetKeys.set($event)"
       />
-      <p class="mt-space-xs text-xs text-muted-foreground">
+      <p class="mt-1 text-xs text-muted-foreground">
         Target keys: {{ targetKeys().join(', ') }}
       </p>
     </section>

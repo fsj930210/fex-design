@@ -8,7 +8,7 @@
   import type { HTMLAttributes } from 'svelte/elements'
 
   const itemClassName = 'justify-start data-[state=active]:bg-primary data-[state=active]:text-primary-foreground'
-  const contentClassName = 'mt-space-md border-l-2 border-primary pl-space-md'
+  const contentClassName = 'mt-2 border-l-2 border-primary pl-2'
   const asUlProps = (props: HTMLAttributes<HTMLDivElement>) => props as unknown as HTMLAttributes<HTMLUListElement>
   const asLiProps = (props: HTMLAttributes<HTMLDivElement>) => props as unknown as HTMLAttributes<HTMLLIElement>
   const asSectionProps = (props: HTMLAttributes<HTMLDivElement>) => props as unknown as HTMLAttributes<HTMLElement>

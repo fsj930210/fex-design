@@ -38,22 +38,22 @@ export function SortablePage() {
   const previewColumns = tableSortable.previewItems as string[]
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             Back home
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Sortable</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Quick sortable components for common lists, plus useSortable for table columns and
               other custom layouts.
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card
             title="Sortable Component"
             description="Use the primitive component for common one-container lists."
@@ -65,7 +65,7 @@ export function SortablePage() {
                     <Sortable.SortableItem
                       key={task}
                       id={task}
-                      className="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
+                      className="flex min-h-12 cursor-grab touch-none select-none items-center gap-1.5 rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
                     >
                       <Sortable.SortableHandle className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
                         ::
@@ -75,7 +75,7 @@ export function SortablePage() {
                   ))}
                   <Sortable.SortableOverlay>
                     {({ activeId }) => (
-                      <div className="flex min-h-12 items-center gap-space-sm">
+                      <div className="flex min-h-12 items-center gap-1.5">
                         <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
                           ::
                         </span>
@@ -92,14 +92,14 @@ export function SortablePage() {
             title="Multiple Containers"
             description="The same sortable hook supports transfer panels."
           >
-            <div className="grid gap-space-md md:grid-cols-2">
+            <div className="grid gap-2 md:grid-cols-2">
               {Object.entries(previewPanels).map(([containerId, items]) => (
                 <div
                   key={containerId}
                   {...panelSortable.getContainerProps(containerId)}
-                  className="min-h-56 rounded-md border border-border bg-background p-space-md"
+                  className="min-h-56 rounded-md border border-border bg-background p-2"
                 >
-                  <h2 className="mb-space-md text-sm font-medium capitalize text-muted-foreground">
+                  <h2 className="mb-2 text-sm font-medium capitalize text-muted-foreground">
                     {containerId}
                   </h2>
                   {items.map((item) => (
@@ -107,7 +107,7 @@ export function SortablePage() {
                       key={item}
                       {...panelSortable.getItemProps(item, containerId)}
                       className={cn(
-                        'mb-space-sm flex min-h-11 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing',
+                        'mb-1.5 flex min-h-11 cursor-grab touch-none select-none items-center gap-1.5 rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing',
                         panelSortable.activeId === item && 'shadow-lg',
                       )}
                     >
@@ -124,7 +124,7 @@ export function SortablePage() {
               createPortal(
                 <div
                   data-sortable-overlay=""
-                  className="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+                  className="flex min-h-11 items-center gap-1.5 rounded-md border border-border bg-elevated-background px-2 text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
                   style={panelSortable.getOverlayStyle()}
                 >
                   <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
@@ -152,11 +152,11 @@ export function SortablePage() {
                         key={column}
                         {...tableSortable.getItemProps(column)}
                         className={cn(
-                          'cursor-grab touch-none select-none border-b border-border bg-card px-space-md py-space-md text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing',
+                          'cursor-grab touch-none select-none border-b border-border bg-elevated-background px-2 py-2 text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing',
                           tableSortable.activeId === column && 'shadow-lg',
                         )}
                       >
-                        <span className="inline-flex items-center gap-space-sm">
+                        <span className="inline-flex items-center gap-1.5">
                           <span className="text-muted-foreground">::</span>
                           {columnLabels[column]}
                         </span>
@@ -170,7 +170,7 @@ export function SortablePage() {
                       {previewColumns.map((column) => (
                         <td
                           key={column}
-                          className="px-space-md py-space-sm"
+                          className="px-2 py-1.5"
                           style={{
                             ...tableSortable.getMotionStyle(column),
                             visibility: tableSortable.activeId === column ? 'hidden' : undefined,
@@ -189,20 +189,20 @@ export function SortablePage() {
               createPortal(
                 <div
                   data-sortable-overlay=""
-                  className="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+                  className="overflow-hidden rounded-md border border-border bg-elevated-background text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
                   style={{
                     ...tableSortable.getOverlayStyle(),
                     height: 'auto',
                   }}
                 >
-                  <div className="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground">
+                  <div className="flex min-h-12 items-center gap-1.5 border-b border-border px-2 font-medium text-muted-foreground">
                     <span>::</span>
                     {columnLabels[tableSortable.activeId]}
                   </div>
                   {rows.map((row) => (
                     <div
                       key={row.email}
-                      className="border-b border-border px-space-md py-space-sm last:border-0"
+                      className="border-b border-border px-2 py-1.5 last:border-0"
                     >
                       {row[tableSortable.activeId as keyof typeof row]}
                     </div>

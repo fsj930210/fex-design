@@ -17,7 +17,7 @@ export function DownloadDemo() {
 
   return (
     <Card title="下载二维码" description="下载不是 QRCode 内置能力，这里演示业务侧基于 Canvas 组合导出 PNG。">
-      <div className="flex flex-wrap items-center gap-space-md">
+      <div className="flex flex-wrap items-center gap-2">
         <QrCode.Root value="https://fex.design/qrcode/download" size={176}>
           <QrCode.Canvas ref={canvasRef} aria-label="Downloadable QR code" />
         </QrCode.Root>

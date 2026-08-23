@@ -9,7 +9,7 @@ import Demo from './demo-section.vue'
   <Demo
     title="Prefix and suffix"
     description="prefix decorates the input; suffix replaces only the default dropdown chevron."
-    ><div class="space-y-space-md">
+    ><div class="space-y-2">
       <SelectRoot :options="frameworkOptions"
         ><SelectTrigger placeholder="带前缀"
           ><template #prefix

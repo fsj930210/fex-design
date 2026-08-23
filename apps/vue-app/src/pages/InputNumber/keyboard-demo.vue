@@ -8,7 +8,7 @@ const message = ref('Use ArrowUp, ArrowDown or the icon buttons.')
   <Card
     title="Keyboard and events"
     description="The native event stays first and the numeric value is appended."
-    ><div class="max-w-sm space-y-space-sm">
+    ><div class="max-w-sm space-y-1.5">
       <InputNumber
         clearable
         :default-value="5"

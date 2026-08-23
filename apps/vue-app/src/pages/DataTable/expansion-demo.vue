@@ -52,16 +52,16 @@ const detail = useDataTable({
   <DemoSection
     title="Row expansion"
     description="The same expansion state supports hierarchical subRows and arbitrary detail panels. The expand control is an optional column factory, not a special DataTable mode."
-    ><div class="grid gap-space-lg xl:grid-cols-2">
-      <section class="space-y-space-sm">
+    ><div class="grid gap-3 xl:grid-cols-2">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Hierarchical rows</h3>
         <DataTable :table="tree" />
       </section>
-      <section class="space-y-space-sm">
+      <section class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">Detail panel</h3>
         <DataTable :table="detail"
           ><template #subComponent="{ row }"
-            ><div class="bg-muted-background p-space-md text-sm">
+            ><div class="bg-muted-background p-2 text-sm">
               {{ row.original.name }}: {{ row.original.visits }} visits,
               {{ row.original.progress }}% progress.
             </div></template

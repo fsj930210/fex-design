@@ -6,4 +6,4 @@ import Card from '@fex-design/vue/ui/card'
 import StepList from './step-list.vue'
 const current = ref<StepValue>('account')
 </script>
-<template><Card title="Controlled" description="Business completion updates current; navigation requests the same value through onChange."><Steps navigation :current="current" @change="value => current = value"><StepList/></Steps><Button class="mt-space-md" @click="current = current === 'account' ? 'profile' : 'review'">Complete current task</Button></Card></template>
+<template><Card title="Controlled" description="Business completion updates current; navigation requests the same value through onChange."><Steps navigation :current="current" @change="value => current = value"><StepList/></Steps><Button class="mt-2" @click="current = current === 'account' ? 'profile' : 'review'">Complete current task</Button></Card></template>

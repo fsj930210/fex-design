@@ -18,6 +18,6 @@
 </script>
 
 <DemoSection title="Core rendering and stable inline columns" description="The caller passes a TanStack v9 table definition. DataTable stabilizes the structural column tree, so this inline columns array does not require useMemo; getRowId remains mandatory.">
-  <section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">Default density</h3><DataTable table={defaultTable} /></section>
-  <section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">Compact + striped</h3><DataTable table={compactTable} density="compact" striped /></section>
+  <section class="space-y-1.5"><h3 class="text-sm font-medium text-foreground">Default density</h3><DataTable table={defaultTable} /></section>
+  <section class="space-y-1.5"><h3 class="text-sm font-medium text-foreground">Compact + striped</h3><DataTable table={compactTable} density="compact" striped /></section>
 </DemoSection>

@@ -1,6 +1,6 @@
 export const autoCompleteContentClassName = [
   'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border',
-  'bg-popover-background text-popover-foreground shadow-lg [--popover-content-padding:0px]',
+  'bg-elevated-background text-elevated-foreground shadow-lg [--popover-content-padding:0px]',
   'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--auto-complete-content-max-height,320px))]',
 ].join(' ')
 

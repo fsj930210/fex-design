@@ -2,14 +2,14 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 export const buttonPrimitiveClassName = [
   'group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap',
-  'rounded-md border border-transparent bg-clip-padding text-sm font-medium',
+  'h-(--button-height) rounded-md border border-transparent bg-clip-padding text-sm font-medium',
   'cursor-pointer select-none outline-none transition-all',
   'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50',
   'active:not-aria-[haspopup]:translate-y-px',
   'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   'data-[loading=true]:pointer-events-none data-[loading=true]:cursor-wait data-[loading=true]:opacity-75',
   'aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20',
-  '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4',
+  '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-(--button-icon-size)',
 ].join(' ')
 
 export const buttonClassName = cva(buttonPrimitiveClassName, {
@@ -48,16 +48,20 @@ export const buttonClassName = cva(buttonPrimitiveClassName, {
     },
     size: {
       default:
-        'h-8 gap-1.5 px-2.5 [--button-underline-inset:10px] has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-      xs: 'h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs [--button-underline-inset:8px] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*=size-])]:size-3',
-      sm: 'h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*=size-])]:size-3.5',
-      lg: 'h-9 gap-1.5 px-2.5 [--button-underline-inset:10px] has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-      icon: 'size-8',
+        '[--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))] gap-1.5 px-2.5 [--button-underline-inset:10px] has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+      xs: '[--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))] gap-1 px-2 text-xs [--button-underline-inset:8px] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',
+      sm: '[--button-height:var(--button-height-sm,var(--height-sm))] [--button-icon-size:var(--button-icon-size-sm,var(--icon-size-sm))] gap-1 px-2.5 text-[0.8rem] [--button-underline-inset:8px] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',
+      lg: '[--button-height:var(--button-height-lg,var(--height-lg))] [--button-icon-size:var(--button-icon-size-lg,var(--icon-size-lg))] gap-1.5 px-3 [--button-underline-inset:10px] has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5',
+      xl: '[--button-height:var(--button-height-xl,var(--height-xl))] [--button-icon-size:var(--button-icon-size-xl,var(--icon-size-xl))] gap-2 px-4 text-base [--button-underline-inset:12px] has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3',
+      icon: 'w-(--button-height) px-0 [--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))]',
       'icon-xs':
-        'size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*=size-])]:size-3',
+        'w-(--button-height) px-0 text-xs [--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))]',
       'icon-sm':
-        'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
-      'icon-lg': 'size-9',
+        'w-(--button-height) px-0 text-[0.8rem] [--button-height:var(--button-height-sm,var(--height-sm))] [--button-icon-size:var(--button-icon-size-sm,var(--icon-size-sm))]',
+      'icon-lg':
+        'w-(--button-height) px-0 [--button-height:var(--button-height-lg,var(--height-lg))] [--button-icon-size:var(--button-icon-size-lg,var(--icon-size-lg))]',
+      'icon-xl':
+        'w-(--button-height) px-0 text-base [--button-height:var(--button-height-xl,var(--height-xl))] [--button-icon-size:var(--button-icon-size-xl,var(--icon-size-xl))]',
     },
   },
   defaultVariants: {

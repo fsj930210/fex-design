@@ -9,7 +9,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function ContentDemo() {
   return (
     <Card title="Content" description="Use an image with fallback content and an optional badge.">
-      <div className="flex items-center gap-space-lg">
+      <div className="flex items-center gap-3">
         <Avatar size="lg">
           <AvatarImage src="/avatar-demo.svg" alt="Example avatar" />
           <AvatarFallback>IM</AvatarFallback>

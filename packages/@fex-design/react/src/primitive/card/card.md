@@ -27,7 +27,7 @@ export function Example() {
         <CardTitle>Variants</CardTitle>
         <CardDescription>按钮的基础视觉语义。</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-wrap items-center gap-space-md">Content</CardContent>
+      <CardContent className="flex flex-wrap items-center gap-2">Content</CardContent>
     </Card>
   )
 }
@@ -66,7 +66,7 @@ function DemoCard() {
         <CardTitle>Sizes</CardTitle>
         <CardDescription>文本按钮和 icon-only 按钮尺寸。</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-wrap items-center gap-space-md">
+      <CardContent className="flex flex-wrap items-center gap-2">
         <button>default</button>
       </CardContent>
     </Card>

@@ -2,7 +2,7 @@
   title="Form validation"
   description="Submit the real Form empty to show Field error text and Textarea error styling."
 >
-  <form [fexForm]="form" class="grid max-w-xl gap-space-md">
+  <form [fexForm]="form" class="grid max-w-xl gap-2">
     <ng-container [fexField]="form" name="message" [validators]="validators" #messageField="field">
       <fex-field-root
         [required]="true"

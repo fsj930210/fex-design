@@ -82,7 +82,7 @@ function ServerPaginationGrid() {
     <div>
       <DataTable table={table} />
       <DataTablePagination table={table} pageSizeOptions={[3, 5, 10]} />
-      <p class="px-space-sm pb-space-sm text-xs text-muted-foreground">
+      <p class="px-1.5 pb-1.5 text-xs text-muted-foreground">
         Request: page={pagination().pageIndex + 1}&amp;pageSize={pagination().pageSize}
       </p>
     </div>
@@ -95,7 +95,7 @@ export function PaginationDataTableDemo() {
       title="Pagination"
       description="Pagination is a core feature with two mutually exclusive registrations: client includes the paginated row model; server only owns pagination state/APIs and receives already-paged data."
     >
-      <div class="grid gap-space-lg xl:grid-cols-2">
+      <div class="grid gap-3 xl:grid-cols-2">
         <DemoBranch title="Client pagination">
           <ClientPaginationGrid />
         </DemoBranch>

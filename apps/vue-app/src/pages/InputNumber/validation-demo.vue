@@ -30,7 +30,7 @@ function invalid(state: AnyFieldApi['state']) {
     title="Form validation"
     description="Field owns validation text and ARIA relationships; InputNumber only renders invalid state."
   >
-    <FormHost :form="form" class="grid max-w-xl gap-space-md">
+    <FormHost :form="form" class="grid max-w-xl gap-2">
       <Field name="quantity" :validators="validators" v-slot="{ field, state }">
         <FieldRoot required :invalid="invalid(state)" :has-error="invalid(state)">
           <FieldLabel>Quantity <FieldRequiredIndicator /></FieldLabel>

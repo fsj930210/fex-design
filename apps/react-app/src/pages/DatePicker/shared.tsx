@@ -32,7 +32,7 @@ export function DemoSection({
 }) {
   return (
     <Card title={title} description={description}>
-      <div className="flex min-w-0 flex-wrap items-start gap-space-md">{children}</div>
+      <div className="flex min-w-0 flex-wrap items-start gap-2">{children}</div>
     </Card>
   )
 }
@@ -98,7 +98,7 @@ export function ValuePreview({
     ? value.map((item) => formatDatePickerValue(item, { picker: 'date' })).join(', ')
     : formatDatePickerValue(value, { picker: 'date' })
   return (
-    <p className="mt-space-sm w-full text-xs text-muted-foreground">当前值：{text || '未选择'}</p>
+    <p className="mt-1.5 w-full text-xs text-muted-foreground">当前值：{text || '未选择'}</p>
   )
 }
 
@@ -110,7 +110,7 @@ export function RangePreview({ value }: { value: CalendarRange }) {
   const start = formatDatePickerValue(value.start, { picker: 'date' })
   const end = formatDatePickerValue(value.end, { picker: 'date' })
   return (
-    <p className="mt-space-sm w-full text-xs text-muted-foreground">
+    <p className="mt-1.5 w-full text-xs text-muted-foreground">
       当前范围：{start || '空'} ~ {end || '空'}
     </p>
   )

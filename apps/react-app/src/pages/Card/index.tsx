@@ -36,23 +36,23 @@ export function CardPage() {
     spacingOptions.find((option) => option.value === spacing) ?? defaultSpacingOption
 
   return (
-    <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div className="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header className="space-y-space-xl">
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto w-full max-w-5xl space-y-4">
+        <header className="space-y-4">
           <Link className="text-sm text-muted-foreground hover:text-foreground" to="/">
             返回首页
           </Link>
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Card</h1>
-            <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               用于承载相关内容、示例分组和管理后台中的紧凑信息块。
             </p>
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="space-y-4">
           <Card title="Primitive" description="卡片底层结构与 slot 语义。">
-            <div className="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
               <PrimitiveCard className="w-full">
                 <CardHeader className="border-b border-border">
                   <CardTitle>Primitive card</CardTitle>
@@ -64,7 +64,7 @@ export function CardPage() {
           </Card>
 
           <Card title="Ui" description="面向业务的默认卡片封装。">
-            <div className="flex min-w-0 flex-wrap items-center gap-space-md">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
               <Card title="Basic" description="包含标题、描述和内容区域。">
                 <p className="text-sm leading-6 text-foreground">
                   Card 默认使用系统边框、背景、圆角和 spacing token。
@@ -83,12 +83,12 @@ export function CardPage() {
             title="Spacing"
             description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。"
           >
-            <div className="flex flex-wrap gap-space-sm">
+            <div className="flex flex-wrap gap-1.5">
               {spacingOptions.map((option) => (
                 <button
                   key={option.value}
                   className={[
-                    'rounded-md border px-space-lg py-space-xs text-sm transition-colors',
+                    'rounded-md border px-3 py-1 text-sm transition-colors',
                     spacing === option.value
                       ? 'border-focus bg-muted-background text-foreground'
                       : 'border-border bg-background text-muted-foreground hover:bg-muted-background hover:text-foreground',
@@ -100,17 +100,17 @@ export function CardPage() {
                 </button>
               ))}
             </div>
-            <div className="mt-space-xl flex justify-center">
+            <div className="mt-4 flex justify-center">
               <Card
                 size={selectedSpacing.size}
                 title="Login to your account"
                 description="Enter your email below to login to your account"
                 footer={
-                  <div className="grid w-full gap-space-md">
-                    <div className="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background">
+                  <div className="grid w-full gap-2">
+                    <div className="rounded-md bg-foreground px-3 py-1.5 text-center text-sm font-medium text-background">
                       Login
                     </div>
-                    <div className="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground">
+                    <div className="rounded-md border border-border bg-background px-3 py-1.5 text-center text-sm font-medium text-foreground">
                       Login with Google
                     </div>
                   </div>
@@ -122,15 +122,15 @@ export function CardPage() {
                   ? { style: { root: selectedSpacing.rootStyle } }
                   : {})}
               >
-                <div className="grid gap-space-lg">
-                  <div className="grid gap-space-sm">
+                <div className="grid gap-3">
+                  <div className="grid gap-1.5">
                     <div className="text-sm font-medium text-foreground">Email</div>
-                    <div className="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground">
+                    <div className="h-9 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground">
                       m@example.com
                     </div>
                   </div>
-                  <div className="grid gap-space-sm">
-                    <div className="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
+                  <div className="grid gap-1.5">
+                    <div className="flex items-center justify-between gap-2 text-sm font-medium text-foreground">
                       <span>Password</span>
                       <span className="font-normal text-muted-foreground">
                         Forgot your password?

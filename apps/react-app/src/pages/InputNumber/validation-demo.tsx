@@ -21,7 +21,7 @@ export function ValidationDemo() {
       title="Form validation"
       description="Field owns validation text and ARIA relationships; InputNumber only renders invalid state."
     >
-      <Form form={form} className="grid max-w-xl gap-space-md">
+      <Form form={form} className="grid max-w-xl gap-2">
         <Field
           name="quantity"
           validators={{

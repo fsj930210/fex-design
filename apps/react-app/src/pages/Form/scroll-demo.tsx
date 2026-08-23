@@ -14,8 +14,8 @@ export function ScrollDemo({ setResult }: { setResult: SetDemoResult }) {
       title="Scroll to a specific field"
       description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"
     >
-      <Form form={scrollForm} className="grid max-w-xl gap-space-lg">
-        <div className="flex flex-wrap gap-space-sm">
+      <Form form={scrollForm} className="grid max-w-xl gap-3">
+        <div className="flex flex-wrap gap-1.5">
           <Button
             type="button"
             variant="outline"

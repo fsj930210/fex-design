@@ -2,7 +2,14 @@
   "name": "@fex-design/styles",
   "private": true,
   "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
+  },
   "sideEffects": false,
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
   "exports": {
     "./masonry": "./src/masonry.ts",
     "./auto-complete": "./src/auto-complete.ts",

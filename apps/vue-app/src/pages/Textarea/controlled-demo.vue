@@ -11,8 +11,8 @@ const value = ref('Controlled textarea value')
     title="Controlled and uncontrolled"
     description="Root owns the value protocol; callers can provide value or only defaultValue."
   >
-    <div class="grid gap-space-lg md:grid-cols-2">
-      <div class="space-y-space-sm">
+    <div class="grid gap-3 md:grid-cols-2">
+      <div class="space-y-1.5">
         <TextareaRoot
           :value="value"
           :auto-size="{ minRows: 2, maxRows: 5 }"

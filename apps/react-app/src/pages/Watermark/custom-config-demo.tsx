@@ -11,7 +11,7 @@ import { useState, type ReactNode } from 'react'
 
 function Control(props: { label: string; children: ReactNode }) {
   return (
-    <label className="grid gap-space-sm text-sm text-foreground">
+    <label className="grid gap-1.5 text-sm text-foreground">
       <span>{props.label}</span>
       {props.children}
     </label>
@@ -59,8 +59,8 @@ export function CustomConfigDemo() {
       title="Custom Config"
       description="Adjust content, font, layering, rotation, gap, and offset."
     >
-      <div className="grid gap-space-xl lg:grid-cols-[280px_minmax(0,1fr)]">
-        <div className="grid gap-space-lg">
+      <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="grid gap-3">
           <Control label="Content">
             <InputRoot value={content} onValueChange={setContent}>
               <InputControl aria-label="Watermark content" />
@@ -74,7 +74,7 @@ export function CustomConfigDemo() {
           <NumberSlider label="FontSize" value={fontSize} min={12} max={42} onChange={setFontSize} />
           <NumberSlider label="ZIndex" value={zIndex} min={1} max={20} onChange={setZIndex} />
           <NumberSlider label="Rotate" value={rotate} min={-45} max={45} onChange={setRotate} />
-          <div className="grid grid-cols-2 gap-space-sm">
+          <div className="grid grid-cols-2 gap-1.5">
             <Control label="Gap X">
               <InputRoot value={String(gapX)} onValueChange={(value) => setGapX(Number(value) || 0)}>
                 <InputControl inputMode="numeric" aria-label="Gap X" />
@@ -106,7 +106,7 @@ export function CustomConfigDemo() {
           offset={[offsetX, offsetY]}
           className="min-h-96 rounded-md border border-border bg-background"
         >
-          <div className="grid min-h-96 place-items-center p-space-xl text-center text-sm text-muted-foreground">
+          <div className="grid min-h-96 place-items-center p-4 text-center text-sm text-muted-foreground">
             Config changes update the generated canvas tile.
           </div>
         </Watermark>

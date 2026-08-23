@@ -9,7 +9,7 @@ export function RestoreDemo() {
 
   return (
     <Card title="Restore" description="Removing the generated watermark layer appends it back.">
-      <div class="space-y-space-md">
+      <div class="space-y-2">
         <Button variant="outline" onClick={removeWatermark}>
           Remove generated layer
         </Button>
@@ -18,7 +18,7 @@ export function RestoreDemo() {
           data-demo="solid-watermark-restore"
           class="h-56 rounded-md border border-border bg-background"
         >
-          <div class="grid h-full place-items-center p-space-xl text-center text-sm text-muted-foreground">
+          <div class="grid h-full place-items-center p-4 text-center text-sm text-muted-foreground">
             The controller observes direct child removal on this root and restores the layer.
           </div>
         </Watermark>

@@ -57,7 +57,7 @@
         <PresetRangePanel onSelect={(next) => presetRange = next as CalendarRange<CalendarValue>} />
       </RangePickerContent>
     </RangePickerRoot>
-    <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{rangeText(presetRange)}</p>
+    <p class="mt-1.5 w-full text-xs text-muted-foreground">当前范围：{rangeText(presetRange)}</p>
   </div>
 </Card>
 
@@ -72,8 +72,8 @@
         </DatePickerFooter>
       </RangePickerContent>
     </RangePickerRoot>
-    <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{rangeText(submitted)}</p>
-    <p class="mt-space-sm text-xs text-muted-foreground">已提交 {submitCount} 次</p>
+    <p class="mt-1.5 w-full text-xs text-muted-foreground">当前范围：{rangeText(submitted)}</p>
+    <p class="mt-1.5 text-xs text-muted-foreground">已提交 {submitCount} 次</p>
   </div>
 </Card>
 

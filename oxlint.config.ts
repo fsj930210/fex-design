@@ -4,7 +4,7 @@ export default {
   ...base,
   ignorePatterns: [
     '**/dist/**',
-    '**/.nx/**',
+    '**/.turbo/**',
     '**/node_modules/**',
     'apps/*/public/mockServiceWorker.js',
   ],

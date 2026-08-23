@@ -13,7 +13,7 @@ export function CustomCollapseDemo() {
           <CollapseItem key={item.value} value={item.value}>
             {({ state, actions }) => (
               <>
-                <div className="flex items-center gap-space-sm px-space-sm py-space-sm">
+                <div className="flex items-center gap-1.5 px-1.5 py-1.5">
                   <Button
                     variant="ghost"
                     size="icon-sm"

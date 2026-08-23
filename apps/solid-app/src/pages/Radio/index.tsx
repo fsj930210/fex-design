@@ -17,7 +17,7 @@ const options = [
 function DemoSection(props: { title: string; description: string; children: JSX.Element }) {
   return (
     <Card title={props.title} description={props.description}>
-      <div class="grid min-w-0 gap-space-md">{props.children}</div>
+      <div class="grid min-w-0 gap-2">{props.children}</div>
     </Card>
   )
 }
@@ -37,21 +37,21 @@ export function RadioPage() {
   const [buttonValue, setButtonValue] = createSignal<RadioValue>('apple')
 
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-xl">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Radio</h1>
-            <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Single-value radio group with native aria state and button-style radio options.
             </p>
           </div>
         </header>
 
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <DemoSection title="Basic" description="RadioGroup owns one selected value.">
             <RadioGroup defaultValue="apple" orientation="horizontal">
               <For each={options}>

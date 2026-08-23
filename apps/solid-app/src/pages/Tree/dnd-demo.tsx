@@ -53,7 +53,7 @@ export function DndDemo() {
       <TreeRoot<DepartmentNode>
         controller={controller}
         indent={24}
-        class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+        class="max-w-xl rounded-md border border-border bg-background p-1.5"
       >
         <TreeViewport<DepartmentNode>>
           {(item) => <Row controller={controller} itemKey={item.key} />}

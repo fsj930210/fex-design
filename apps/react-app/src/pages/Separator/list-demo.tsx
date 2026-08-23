@@ -10,7 +10,7 @@ export const ListDemo = () => (
     <div className="grid max-w-lg">
       {items.map(([label, value], index) => (
         <div key={label}>
-          <div className="flex justify-between py-space-md">
+          <div className="flex justify-between py-2">
             <span>{label}</span>
             <span className="text-muted-foreground">{value}</span>
           </div>

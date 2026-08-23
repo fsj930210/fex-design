@@ -4,7 +4,7 @@ import { Card } from '@fex-design/react/ui/card'
 export function RenderTypeDemo() {
   return (
     <Card title="自定义渲染类型" description="同一个 Root 模型可以选择 SVG 或 Canvas 渲染面。">
-      <div className="flex flex-wrap gap-space-lg">
+      <div className="flex flex-wrap gap-3">
         <QrCode.Root value="https://fex.design/qrcode/svg" size={160}>
           <QrCode.Svg aria-label="SVG QR code">
             <QrCode.Background />

@@ -9,8 +9,8 @@ const previewValue = ref<number | null>(null)
   <Card
     title="Arbitrary fractions"
     description="step controls interaction precision, while read-only values preserve their exact fraction."
-    ><div class="grid gap-space-lg">
-      <div class="grid gap-space-sm">
+    ><div class="grid gap-3">
+      <div class="grid gap-1.5">
         <Rate
           :value="value"
           :step="0.1"
@@ -23,7 +23,7 @@ const previewValue = ref<number | null>(null)
           Interactive value: {{ (previewValue ?? value).toFixed(1) }}
         </p>
       </div>
-      <div class="grid gap-space-sm">
+      <div class="grid gap-1.5">
         <Rate :value="4.37" read-only aria-label="Exact read-only rating" />
         <p class="text-sm text-muted-foreground">Read-only value: 4.37</p>
       </div>

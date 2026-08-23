@@ -66,19 +66,19 @@
   }
 </script>
 
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Sortable</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Quick sortable components for common lists, plus useSortable for table columns and other custom layouts.
         </p>
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
         <SortableRoot items={tasks} axis="y" onChange={(items) => (tasks = items as string[])}>
           {#snippet children({ items })}
@@ -88,7 +88,7 @@
               {task}
               </SortableItem>
             {/each}
-            <SortableOverlay class="flex min-h-12 items-center gap-space-sm px-space-md text-sm font-medium">
+            <SortableOverlay class="flex min-h-12 items-center gap-1.5 px-2 text-sm font-medium">
               {#snippet children({ activeId })}
                 <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
                 {activeId}
@@ -99,12 +99,12 @@
       </Card>
 
       <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
-        <div class="grid gap-space-md md:grid-cols-2">
+        <div class="grid gap-2 md:grid-cols-2">
           {#each Object.entries(previewPanels) as [containerId, items] (containerId)}
-            <div use:panelContainer={containerId} class="min-h-56 rounded-md border border-border bg-background p-space-md">
-              <h2 class="mb-space-md text-sm font-medium capitalize text-muted-foreground">{containerId}</h2>
+            <div use:panelContainer={containerId} class="min-h-56 rounded-md border border-border bg-background p-2">
+              <h2 class="mb-2 text-sm font-medium capitalize text-muted-foreground">{containerId}</h2>
               {#each items as item (item)}
-                <div use:panelItem={{ id: item, containerId }} class="mb-space-sm flex min-h-11 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing" style={styleToString((panelSnapshot.motionVersion, panelSortable.getItemStyle(item)))}>
+                <div use:panelItem={{ id: item, containerId }} class="mb-1.5 flex min-h-11 cursor-grab touch-none select-none items-center gap-1.5 rounded-md border border-border bg-elevated-background px-2 text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing" style={styleToString((panelSnapshot.motionVersion, panelSortable.getItemStyle(item)))}>
                   <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
                   {item}
                 </div>
@@ -113,7 +113,7 @@
           {/each}
         </div>
         {#if panelSnapshot.activeId}
-          <div data-sortable-overlay="" class="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" style={styleToString((panelSnapshot.motionVersion, panelSortable.getOverlayStyle()))}>
+          <div data-sortable-overlay="" class="flex min-h-11 items-center gap-1.5 rounded-md border border-border bg-elevated-background px-2 text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" style={styleToString((panelSnapshot.motionVersion, panelSortable.getOverlayStyle()))}>
             <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
             {panelSnapshot.activeId}
           </div>
@@ -123,17 +123,17 @@
       <Card title="Table Columns" description="useSortable can share motion styles across header and body cells.">
         <div class="overflow-hidden rounded-md border border-border bg-background">
           <table class="w-full table-fixed border-collapse text-sm">
-            <thead use:columnContainer><tr>{#each previewColumns as column (column)}<th use:columnItem={column} class="cursor-grab touch-none select-none border-b border-border bg-card px-space-md py-space-md text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing" style={styleToString((columnSnapshot.motionVersion, columnSortable.getItemStyle(column)))}><span class="inline-flex items-center gap-space-sm"><span class="text-muted-foreground">::</span>{columnLabels[column]}</span></th>{/each}</tr></thead>
-            <tbody>{#each rows as row (row.email)}<tr class="border-b border-border last:border-0">{#each previewColumns as column (column)}<td class="px-space-md py-space-sm" style={styleToString((columnSnapshot.motionVersion, { ...columnSortable.getMotionStyle(column), visibility: columnSnapshot.activeId === column ? 'hidden' : undefined }))}>{row[column as ColumnKey]}</td>{/each}</tr>{/each}</tbody>
+            <thead use:columnContainer><tr>{#each previewColumns as column (column)}<th use:columnItem={column} class="cursor-grab touch-none select-none border-b border-border bg-elevated-background px-2 py-2 text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing" style={styleToString((columnSnapshot.motionVersion, columnSortable.getItemStyle(column)))}><span class="inline-flex items-center gap-1.5"><span class="text-muted-foreground">::</span>{columnLabels[column]}</span></th>{/each}</tr></thead>
+            <tbody>{#each rows as row (row.email)}<tr class="border-b border-border last:border-0">{#each previewColumns as column (column)}<td class="px-2 py-1.5" style={styleToString((columnSnapshot.motionVersion, { ...columnSortable.getMotionStyle(column), visibility: columnSnapshot.activeId === column ? 'hidden' : undefined }))}>{row[column as ColumnKey]}</td>{/each}</tr>{/each}</tbody>
           </table>
         </div>
         {#if columnSnapshot.activeId}
-          <div data-sortable-overlay="" class="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70" style={styleToString((columnSnapshot.motionVersion, { ...columnSortable.getOverlayStyle(), height: 'auto' }))}>
-            <div class="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground">
+          <div data-sortable-overlay="" class="overflow-hidden rounded-md border border-border bg-elevated-background text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70" style={styleToString((columnSnapshot.motionVersion, { ...columnSortable.getOverlayStyle(), height: 'auto' }))}>
+            <div class="flex min-h-12 items-center gap-1.5 border-b border-border px-2 font-medium text-muted-foreground">
               <span>::</span>{columnLabels[columnSnapshot.activeId]}
             </div>
             {#each rows as row (row.email)}
-              <div class="border-b border-border px-space-md py-space-sm last:border-0">{row[columnSnapshot.activeId as ColumnKey]}</div>
+              <div class="border-b border-border px-2 py-1.5 last:border-0">{row[columnSnapshot.activeId as ColumnKey]}</div>
             {/each}
           </div>
         {/if}

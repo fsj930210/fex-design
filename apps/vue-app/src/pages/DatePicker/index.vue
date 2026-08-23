@@ -25,7 +25,7 @@ const submitted = ref<CalendarRange<CalendarValue>>({})
 const panelValue = ref<CalendarValue | null>(null)
 const open = ref(false)
 const disabledWeekend = (date: CalendarDate) => date.dayOfWeek === 6
-const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-space-md'
+const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-2'
 
 function setDate(
   next: CalendarValue | readonly CalendarValue[] | null,
@@ -70,21 +70,21 @@ function dynamicDisabled(date: CalendarDate, part: 'start' | 'end') {
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-xl">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-4">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >返回首页</RouterLink
         >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">DatePicker</h1>
-          <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
             DatePicker primitive 组合 Input、Popover 和
             Calendar，示例覆盖单选、多选、范围、禁用、面板切换和自定义渲染。
           </p>
         </div>
       </header>
-      <div class="space-y-space-xl">
+      <div class="space-y-4">
         <Card title="基本用法" description="非受控 DatePicker 选择后立即提交并关闭 Popover。"
           ><div :class="demoContentClass">
             <DemoDatePicker :default-value="today" placeholder="请选择日期" /></div
@@ -95,7 +95,7 @@ function dynamicDisabled(date: CalendarDate, part: 'start' | 'end') {
           ><div :class="demoContentClass">
             <div>
               <DemoDatePicker :value="controlled" @change="setControlledValue" />
-              <p class="mt-space-sm w-full text-xs text-muted-foreground">
+              <p class="mt-1.5 w-full text-xs text-muted-foreground">
                 当前值：{{ controlled ? getCalendarValueKey(controlled) : '未选择' }}
               </p>
             </div>
@@ -116,7 +116,7 @@ function dynamicDisabled(date: CalendarDate, part: 'start' | 'end') {
           ><div :class="demoContentClass">
             <div>
               <DemoDatePicker multiple :value="multiple" @change="setMultipleValue" />
-              <p class="mt-space-sm w-full text-xs text-muted-foreground">
+              <p class="mt-1.5 w-full text-xs text-muted-foreground">
                 当前值：{{
                   multiple.length ? multiple.map(getCalendarValueKey).join(', ') : '未选择'
                 }}
@@ -130,7 +130,7 @@ function dynamicDisabled(date: CalendarDate, part: 'start' | 'end') {
           ><div :class="demoContentClass">
             <div>
               <DemoDatePicker range :value="range" @change="setRange" />
-              <p class="mt-space-sm w-full text-xs text-muted-foreground">
+              <p class="mt-1.5 w-full text-xs text-muted-foreground">
                 当前范围：{{ range.start ? getCalendarValueKey(range.start) : '空' }} ~
                 {{ range.end ? getCalendarValueKey(range.end) : '空' }}
               </p>
@@ -148,7 +148,7 @@ function dynamicDisabled(date: CalendarDate, part: 'start' | 'end') {
                 :disabled-date="dynamicDisabled"
                 @change="setDynamicRange"
               />
-              <p class="mt-space-sm w-full text-xs text-muted-foreground">
+              <p class="mt-1.5 w-full text-xs text-muted-foreground">
                 当前范围：{{
                   dynamicRange.start ? getCalendarValueKey(dynamicRange.start) : '空'
                 }}
@@ -194,8 +194,8 @@ function dynamicDisabled(date: CalendarDate, part: 'start' | 'end') {
           title="切换日期和面板"
           description="受控 open 展示 Popover；Header 的单箭头切月、双箭头切年，年/月标签可切换面板。"
           ><div :class="demoContentClass">
-            <div class="space-y-space-sm">
-              <div class="flex gap-space-sm">
+            <div class="space-y-1.5">
+              <div class="flex gap-1.5">
                 <Button size="sm" variant="outline" @click="open = true">打开面板</Button
                 ><Button size="sm" variant="outline" @click="open = false">关闭面板</Button>
               </div>

@@ -42,7 +42,7 @@ export const stepIndicatorClassName = [
   'relative z-10 inline-flex size-[var(--step-indicator-size)] items-center justify-center rounded-full border-2 border-border bg-background text-xs font-medium text-muted-foreground',
   'group-data-[status=process]/step:border-primary group-data-[status=process]/step:text-primary',
   'group-data-[status=finish]/step:border-primary group-data-[status=finish]/step:bg-primary group-data-[status=finish]/step:text-primary-foreground',
-  'group-data-[status=error]/step:border-destructive group-data-[status=error]/step:text-destructive',
+  'group-data-[status=error]/step:border-danger group-data-[status=error]/step:text-danger',
   '[&_svg]:size-4',
 ].join(' ')
 

@@ -19,7 +19,7 @@ const controller = createTreeController<DepartmentNode>({
   <Card
     title="External controller and node mutation"
     description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange."
-    ><div class="mb-space-md flex flex-wrap gap-space-sm">
+    ><div class="mb-2 flex flex-wrap gap-1.5">
       <Button
         size="sm"
         variant="outline"
@@ -53,6 +53,6 @@ const controller = createTreeController<DepartmentNode>({
       :field-names="departmentFieldNames"
       :is-leaf="(node) => node.childCount === 0"
       :on-tree-data-change="(next) => (treeData = next)"
-      class="max-w-xl rounded-md border border-border bg-background p-space-sm"
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
   /></Card>
 </template>

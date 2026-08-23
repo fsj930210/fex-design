@@ -14,7 +14,7 @@ const targetKeys = ref<readonly (string | number)[]>(['susan', 'katherine'])
   <Card
     title="One-way composition"
     description="A custom action area only moves records to the target; target rows remove themselves through the same Transfer controller."
-    ><div class="space-y-space-md">
+    ><div class="space-y-2">
       <Transfer
         :items="members"
         :field-names="fieldNames"

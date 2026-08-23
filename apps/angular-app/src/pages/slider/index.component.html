@@ -1,17 +1,17 @@
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Slider</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Primitive slider with shared core value logic.
         </p>
       </div>
     </header>
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <fex-card title="Basic" description="Uncontrolled slider uses defaultValue.">
-        <div class="grid gap-space-sm">
+        <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
             defaultValue="32"
@@ -25,7 +25,7 @@
         </div>
       </fex-card>
       <fex-card title="Controlled" description="Controlled slider uses value and valueChange.">
-        <div class="grid gap-space-sm">
+        <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
             [value]="controlledValue()"
@@ -41,7 +41,7 @@
         </div>
       </fex-card>
       <fex-card title="Range" description="Use an array with two values for a range slider.">
-        <div class="grid gap-space-sm">
+        <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
             defaultValue="20,80"
@@ -60,7 +60,7 @@
         title="Multiple Thumbs"
         description="Use more than two values to create multiple thumbs."
       >
-        <div class="grid gap-space-sm">
+        <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
             defaultValue="15,45,75"
@@ -82,7 +82,7 @@
         title="Orientation"
         description="Slider supports horizontal and vertical orientation."
       >
-        <div class="flex items-center gap-space-xl">
+        <div class="flex items-center gap-4">
           <div class="w-full max-w-md">
             <div fexSliderPrimitive defaultValue="45" aria-label="Horizontal slider">
               <span fexSliderTrack><span fexSliderRange></span></span
@@ -101,7 +101,7 @@
         </div>
       </fex-card>
       <fex-card title="Sizes" description="Slider supports sm, default, and lg sizes.">
-        <div class="grid gap-space-md">
+        <div class="grid gap-2">
           <div fexSliderPrimitive size="sm" defaultValue="25" aria-label="Small slider">
             <span fexSliderTrack><span fexSliderRange></span></span
             ><span fexSliderThumb aria-label="Small slider"></span>
@@ -117,7 +117,7 @@
         </div>
       </fex-card>
       <fex-card title="Disabled" description="Disabled state blocks input.">
-        <div class="grid gap-space-sm">
+        <div class="grid gap-1.5">
           <div fexSliderPrimitive disabled defaultValue="60" aria-label="Disabled slider">
             <span fexSliderTrack><span fexSliderRange></span></span
             ><span fexSliderThumb aria-label="Disabled slider"></span>

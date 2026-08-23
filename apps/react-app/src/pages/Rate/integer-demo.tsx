@@ -10,7 +10,7 @@ export function IntegerDemo() {
       title="Default integer"
       description="The default step is 1, so pointer and keyboard input select whole values."
     >
-      <div className="grid gap-space-sm">
+      <div className="grid gap-1.5">
         <Rate value={value} onValueChange={setValue} aria-label="Integer rating" />
         <p className="text-sm text-muted-foreground">Current value: {value}</p>
       </div>

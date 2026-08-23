@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 export const alertClassName = cva(
   [
     'group/alert relative grid w-full gap-0.5 rounded-md border border-border px-2.5 py-2 text-left text-sm',
-    'bg-card-background text-card-foreground',
+    'bg-elevated-background text-elevated-foreground',
     'has-data-[slot=alert-action]:pr-[72px] has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2',
     '[&>svg]:row-span-2 [&>svg]:translate-y-0.5 [&>svg]:text-current [&>svg:not([class*=size-])]:size-4',
   ].join(' '),

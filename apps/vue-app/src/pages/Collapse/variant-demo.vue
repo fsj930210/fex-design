@@ -8,7 +8,7 @@ const variants: CollapseVariant[] = ['outlined', 'filled', 'ghost']
 
 <template>
   <Card title="Variants" description="Outlined, filled and ghost cover bordered and borderless panel styles.">
-    <div class="grid gap-space-lg lg:grid-cols-3">
+    <div class="grid gap-3 lg:grid-cols-3">
       <Collapse v-for="variant in variants" :key="variant" :variant="variant" :default-expanded-keys="['one']">
         <CollapseItem value="one">
           <CollapseTrigger>{{ variant }}</CollapseTrigger>

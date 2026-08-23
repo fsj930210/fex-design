@@ -9,7 +9,7 @@ export function KeyboardDemo() {
       title="Keyboard and events"
       description="The originating native event stays first and the numeric value is appended."
     >
-      <div className="max-w-sm space-y-space-sm">
+      <div className="max-w-sm space-y-1.5">
         <InputNumber
           defaultValue={5}
           clearable

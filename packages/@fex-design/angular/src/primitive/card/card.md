@@ -25,7 +25,7 @@ import {
     <fex-card-title>Variants</fex-card-title>
     <fex-card-description>按钮的基础视觉语义。</fex-card-description>
   </fex-card-header>
-  <fex-card-content class="flex flex-wrap items-center gap-space-md"> Content </fex-card-content>
+  <fex-card-content class="flex flex-wrap items-center gap-2"> Content </fex-card-content>
 </fex-card>
 ```
 

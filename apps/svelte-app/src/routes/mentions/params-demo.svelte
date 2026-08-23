@@ -22,7 +22,7 @@
       </MentionsList>
     </MentionsContent>
   </MentionsRoot>
-  <div class="mt-space-sm flex flex-wrap gap-space-xs text-xs text-muted-foreground">
+  <div class="mt-1.5 flex flex-wrap gap-1 text-xs text-muted-foreground">
     {#if params.length}
       {#each params as param (param)}<span>#{param}</span>{/each}
     {:else}

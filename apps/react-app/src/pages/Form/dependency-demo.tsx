@@ -28,8 +28,8 @@ export function DependencyDemo({ setResult }: { setResult: SetDemoResult }) {
       title="Dynamic validation and cascading updates"
       description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"
     >
-      <div className="grid gap-space-xl lg:grid-cols-2">
-        <Form form={dynamicRuleForm} className="grid gap-space-lg">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Form form={dynamicRuleForm} className="grid gap-3">
           <Field name="nicknameRequired">
             {(field) => (
               <FieldRoot orientation="horizontal">
@@ -88,7 +88,7 @@ export function DependencyDemo({ setResult }: { setResult: SetDemoResult }) {
           </Button>
         </Form>
 
-        <Form form={cascadeForm} className="grid gap-space-lg">
+        <Form form={cascadeForm} className="grid gap-3">
           <Field name="province">
             {(field) => (
               <FieldRoot>

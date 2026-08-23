@@ -20,9 +20,9 @@ const focusControl = ref<{ focus: () => void; blur: () => void } | null>(null)
 </script>
 
 <template>
-  <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-    <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-      <header class="space-y-space-md">
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-2">
         <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
           >返回首页</RouterLink
         >
@@ -32,7 +32,7 @@ const focusControl = ref<{ focus: () => void; blur: () => void } | null>(null)
         </p>
       </header>
 
-      <div class="grid gap-space-xl">
+      <div class="grid gap-4">
         <Card title="Basic" description="InputRoot 管理输入协议，InputControl 保留原生 input 语义。"
           ><InputRoot class="max-w-md"
             ><InputControl name="email" placeholder="admin@example.com" type="email" /></InputRoot
@@ -43,8 +43,8 @@ const focusControl = ref<{ focus: () => void; blur: () => void } | null>(null)
         <Card
           title="Controlled and uncontrolled"
           description="受控值由调用方维护；非受控值只声明初始值。"
-          ><div class="grid gap-space-lg md:grid-cols-2">
-            <div class="space-y-space-sm">
+          ><div class="grid gap-3 md:grid-cols-2">
+            <div class="space-y-1.5">
               <InputRoot :value="controlledValue" @value-change="controlledValue = $event"
                 ><InputControl aria-label="受控输入" placeholder="受控输入"
               /></InputRoot>
@@ -83,14 +83,14 @@ const focusControl = ref<{ focus: () => void; blur: () => void } | null>(null)
         <Card
           title="Manual focus and clear"
           description="调用方可以通过原生 ref 聚焦或移除焦点，并通过受控值手动清空。"
-          ><div class="max-w-md space-y-space-md">
+          ><div class="max-w-md space-y-2">
             <InputRoot :value="manualValue" @value-change="manualValue = $event"
               ><InputControl
                 ref="focusControl"
                 aria-label="手动控制输入"
                 placeholder="手动控制输入"
             /></InputRoot>
-            <div class="flex flex-wrap gap-space-sm">
+            <div class="flex flex-wrap gap-1.5">
               <Button size="sm" @click="focusControl?.focus()">聚焦</Button
               ><Button size="sm" variant="outline" @click="focusControl?.blur()">移除焦点</Button
               ><Button size="sm" variant="outline" @click="manualValue = ''">手动清空</Button>
@@ -98,7 +98,7 @@ const focusControl = ref<{ focus: () => void; blur: () => void } | null>(null)
           </div></Card
         >
         <Card title="States" description="禁用、只读和校验失败状态由 Root 统一下发。"
-          ><div class="grid gap-space-lg md:grid-cols-3">
+          ><div class="grid gap-3 md:grid-cols-3">
             <InputRoot disabled default-value="禁用内容"
               ><InputControl aria-label="禁用示例" /></InputRoot
             ><InputRoot read-only default-value="只读内容"

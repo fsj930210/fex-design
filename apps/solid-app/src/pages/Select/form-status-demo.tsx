@@ -18,7 +18,7 @@ export function FormStatusDemo() {
       title="Form validation"
       description="Submit the real form without a value to produce Select error state."
     >
-      <Form form={form} class="space-y-space-md">
+      <Form form={form} class="space-y-2">
         <Field
           name="framework"
           validators={{

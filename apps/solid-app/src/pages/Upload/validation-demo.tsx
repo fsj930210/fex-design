@@ -51,11 +51,11 @@ export function ValidationUploadDemo() {
           <DemoUploadList />
         </UploadRoot>
         <Show when={invalid()}>
-          <p class="mt-space-xs text-sm text-danger" role="alert">
+          <p class="mt-1 text-sm text-danger" role="alert">
             请至少选择一个文件。
           </p>
         </Show>
-        <Button class="mt-space-md" type="submit">
+        <Button class="mt-2" type="submit">
           校验表单
         </Button>
       </form>

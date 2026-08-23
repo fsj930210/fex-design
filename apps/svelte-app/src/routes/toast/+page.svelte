@@ -70,16 +70,16 @@
 
 <svelte:head><title>Toast - Svelte Admin</title></svelte:head>
 
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-6xl space-y-space-lg">
-    <header class="space-y-space-md">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-6xl space-y-3">
+    <header class="space-y-2">
       <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
       <h1 class="text-2xl font-semibold text-foreground">Toast</h1>
       <p class="max-w-2xl text-sm leading-6 text-muted-foreground">Primitive global feedback with quick calls, custom content, position, max count, manual destroy, stable id updates, and stacked display.</p>
     </header>
 
     <Card title="Types" description="Built-in variants only provide default semantics. Content and icon can still be customized.">
-      <div class="flex flex-wrap gap-space-sm">
+      <div class="flex flex-wrap gap-1.5">
         <Button variant="outline" onclick={() => toast.show('Hello, Fex Design!')}>Default</Button>
         <Button variant="outline" onclick={() => toast.success('This is a success message')}>Success</Button>
         <Button variant="outline" onclick={() => toast.info('This is an info message')}>Info</Button>
@@ -90,7 +90,7 @@
     </Card>
 
     <Card title="Position" description="The viewport controls placement. Service calls do not need to know where the toast appears.">
-      <div class="flex flex-wrap gap-space-sm">
+      <div class="flex flex-wrap gap-1.5">
         {#each placements as item (item)}
           <Button
             variant={placement === item ? 'default' : 'outline'}
@@ -103,14 +103,14 @@
     </Card>
 
     <Card title="Custom Content" description="Primitive parts let callers replace icon, add description, and render an action without changing the manager.">
-      <div class="flex flex-wrap gap-space-sm">
+      <div class="flex flex-wrap gap-1.5">
         <Button variant="outline" onclick={() => toast.success({ title: 'Event has been created', description: 'Monday, January 3rd at 6:00pm', icon: richIcon })}>Rich content</Button>
         <Button variant="outline" onclick={() => toast.show({ title: 'Event has been created', description: 'Sunday, December 03, 2023 at 9:00 AM', action: undoAction, duration: 6000 })}>With action</Button>
       </div>
     </Card>
 
     <Card title="Update And Destroy" description="A stable id updates one toast. Returned ids can be dismissed manually.">
-      <div class="flex flex-wrap gap-space-sm">
+      <div class="flex flex-wrap gap-1.5">
         <Button variant="outline" onclick={() => toast.loading({ id: 'save-user', title: 'Saving user', duration: -1 })}>Open keyed loading</Button>
         <Button variant="outline" onclick={() => toast.success({ id: 'save-user', title: 'Saved user', description: 'The same id updates the existing toast.', duration: 2500 })}>Update keyed toast</Button>
         <Button variant="outline" onclick={showManualToast}>Manual toast</Button>
@@ -120,7 +120,7 @@
     </Card>
 
     <Card title="Multiple And Stacked" description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible.">
-      <div class="flex flex-wrap gap-space-sm">
+      <div class="flex flex-wrap gap-1.5">
         <Button variant="outline" onclick={showManyMessages}>Show many</Button>
         <Button variant={stack ? 'default' : 'outline'} onclick={toggleStack}>{stack ? 'Stack on' : 'Stack off'}</Button>
       </div>

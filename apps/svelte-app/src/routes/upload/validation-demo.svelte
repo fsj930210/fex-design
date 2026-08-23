@@ -23,7 +23,7 @@
       <UploadTrigger>{#snippet children(value)}<Button {...value.props} variant="outline">选择必填文件</Button>{/snippet}</UploadTrigger>
       <DemoList />
     </UploadRoot>
-    {#if invalid}<p class="mt-space-xs text-sm text-danger" role="alert">请至少选择一个文件。</p>{/if}
-    <Button class="mt-space-md" type="submit">校验表单</Button>
+    {#if invalid}<p class="mt-1 text-sm text-danger" role="alert">请至少选择一个文件。</p>{/if}
+    <Button class="mt-2" type="submit">校验表单</Button>
   </form>
 </DemoSection>

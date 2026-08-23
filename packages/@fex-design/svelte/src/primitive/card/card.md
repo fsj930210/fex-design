@@ -25,7 +25,7 @@ Card groups related content in a bordered surface. It is used for admin panels, 
     <CardTitle>Variants</CardTitle>
     <CardDescription>按钮的基础视觉语义。</CardDescription>
   </CardHeader>
-  <CardContent class="flex flex-wrap items-center gap-space-md">
+  <CardContent class="flex flex-wrap items-center gap-2">
     Content
   </CardContent>
 </Card>

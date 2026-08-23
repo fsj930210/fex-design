@@ -26,7 +26,7 @@ Fex 的五个框架实现必须共享同一套视觉规格。Token 用于表达�
 以 Button 的 `sm` 高度为例：
 
 ```text
---control-height-sm
+--height-sm
 → --button-height-sm（可选覆盖）
 → --button-height（当前实例最终值）
 → height
@@ -36,13 +36,13 @@ Fex 的五个框架实现必须共享同一套视觉规格。Token 用于表达�
 
 ```css
 :root {
-  --control-height-sm: 28px;
+  --height-sm: 28px;
 }
 ```
 
 ```ts
 size: {
-  sm: '[--button-height:var(--button-height-sm,var(--control-height-sm))]',
+  sm: '[--button-height:var(--button-height-sm,var(--height-sm))]',
 }
 ```
 
@@ -55,7 +55,7 @@ base: 'h-[var(--button-height)]'
 ```css
 /* 所有同尺寸控件 */
 :root {
-  --control-height-sm: 30px;
+  --height-sm: 30px;
 }
 
 /* 只修改所有 Button */
@@ -71,10 +71,7 @@ base: 'h-[var(--button-height)]'
 
 ```tsx
 /* 只修改当前实例 */
-<Button
-  size="sm"
-  style={{ '--button-height': '42px' } as CSSProperties}
-/>
+<Button size="sm" style={{ '--button-height': '42px' } as CSSProperties} />
 ```
 
 ## 3. 用户覆盖优先级
@@ -129,48 +126,60 @@ Primitive 的部件本身直接接受原生 `class` / `className` 和 `style`。
 --foreground
 --secondary-background
 --muted-background
+--elevated-background
 --hover-background
+--active-background
 --selected-background
 --disabled-background
 --secondary-foreground
 --muted-foreground
 --disabled-foreground
 --placeholder-foreground
+--inverse-foreground
+--elevated-foreground
 --primary
 --primary-foreground
 --border
 --hover-border
+--active-border
+--selected-border
 --focus-border
 --disabled-border
 --danger
+--danger-background
 --danger-foreground
+--danger-border
 --success
+--success-background
+--success-foreground
+--success-border
 --warning
+--warning-background
+--warning-foreground
+--warning-border
 --info
+--info-background
+--info-foreground
+--info-border
 --focus-ring
+--mask
 ```
 
 ### 4.2 Control Size
 
 ```css
 :root {
-  --control-height-xs: 24px;
-  --control-height-sm: 28px;
-  --control-height-default: 32px;
-  --control-height-lg: 36px;
-  --control-height-xl: 40px;
+  --height-xs: 24px;
+  --height-sm: 28px;
+  --height-default: 32px;
+  --height-lg: 36px;
+  --height-xl: 40px;
 
-  --control-font-size-xs: 12px;
-  --control-font-size-sm: 13px;
-  --control-font-size-default: 14px;
-  --control-font-size-lg: 14px;
-  --control-font-size-xl: 16px;
-
-  --control-icon-size-xs: 12px;
-  --control-icon-size-sm: 14px;
-  --control-icon-size-default: 16px;
-  --control-icon-size-lg: 16px;
-  --control-icon-size-xl: 18px;
+  --icon-size-xs: 12px;
+  --icon-size-sm: 14px;
+  --icon-size-default: 16px;
+  --icon-size-lg: 18px;
+  --icon-size-xl: 20px;
 }
 ```
 
@@ -196,18 +205,8 @@ RadioButton
 
 ### 4.3 Radius
 
-```css
-:root {
-  --radius-none: 0;
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --radius-full: 9999px;
-}
-```
+Radius 直接使用 Tailwind 的 `rounded-*` 及其内置 Theme Variable，不重复声明 Fex Token。
+组件提供合理的 `rounded-md`、`rounded-full` 等默认 utility，用户通过 `class` 直接覆盖。
 
 组件的 `variant`、`size`、`shape`、`status` 是独立维度：
 
@@ -222,79 +221,40 @@ status  = 状态语义
 
 ### 4.4 Typography
 
-第一阶段至少公开：
-
-```text
---font-family
---font-size-xs
---font-size-sm
---font-size-default
---font-size-lg
---font-size-xl
---font-weight-normal
---font-weight-medium
---font-weight-semibold
-```
-
-Line Height 只有确认需要随 size 统一变化时再加入。
+字体族使用 Tailwind 的 `font-sans` 等 Theme Variable 和快捷方式，不重复声明 Fex 字体 Token。字号、字重和行高直接使用 Tailwind 的 `text-*`、`font-*`、`leading-*`。组件的 `size` variant 可以选择具体 utility，用户通过 `class` 覆盖。不建立 System、Control、Component 三层字号变量，避免为了 Token 而 Token 化。只有未来出现明确、稳定且跨大量组件无法由 utility 解决的需求时再评估。
 
 ### 4.5 Focus 和状态
 
 ```text
---focus-ring-width
---focus-ring-color
---disabled-opacity
---loading-opacity
+--hover-background / --hover-border
+--active-background / --active-border
+--selected-background / --selected-border
+--disabled-background / --disabled-foreground / --disabled-border
+--focus-border / --focus-ring
 ```
 
-Pointer、cursor、data-state 选择器属于组件实现，不是 Token。
+Active 和 Selected 保留不同语义名称，但当前默认引用相同色值，避免按下后进入选中状态时发生颜色跳变。Focus Ring 的宽度、Disabled 和 Loading 的透明度直接使用 Tailwind utility 或组件样式，不建立数值 Token。Pointer、cursor、data-state 选择器属于组件实现，不是 Token。
 
 ### 4.6 Motion
 
-第一阶段只提供少量稳定档位：
+通用动画时长和缓动直接使用 Tailwind 的 `duration-*`、`ease-*`，不重复创建
+`fast/default/slow` Token。只有 Drawer、Dialog 等组件存在用户确实需要覆盖的完整进入/退出动画时，
+才提供组件级 Motion Variable。
+
+### 4.7 Elevation
 
 ```text
---motion-duration-fast
---motion-duration-default
---motion-duration-slow
---motion-easing-standard
+--shadow-elevated
 ```
 
-### 4.7 Elevation 和 Layer
-
-```text
---shadow-control
---shadow-popup
---shadow-dialog
---shadow-toast
-
---z-sticky
---z-dropdown
---z-drawer
---z-dialog
---z-toast
---z-tooltip
---z-tour
-```
-
-弹层不再各自使用无语义的 `50`、`1000`、`1001`。
+普通小阴影直接使用 Tailwind 的 `shadow-xs` 等内置快捷方式。只有多个浮起表面共同使用且 Tailwind 默认值无法表达的阴影才保留系统级 `shadow-elevated`。组件专属阴影和 z-index 通过组件变量在消费位置 fallback，不在系统层预设未使用的组件名称 Token。
 
 ### 4.8 Layout Spacing
 
-保留现有：
-
-```text
---space-2xs
---space-xs
---space-sm
---space-md
---space-lg
---space-xl
---space-2xl
---space-3xl
-```
-
-主要用于页面布局、组件间距、Card 列表、Form Field 间距和 Density。组件内部规格不要求全部绑定 Layout Spacing。
+Space Token 在系统层定义数值，并在 Tailwind 映射层提供 `gap-space-xl`、`p-space-2xl` 等
+常用快捷 class。Height 和 Icon Size 由 `utilities.css` 提供 `h-xs`、`h-default`、
+`icon-size-sm` 等快捷 class。Font Size、Radius 等 Tailwind 已有清晰快捷方式的能力不重复创建。
+页面留白属于 App 布局，直接在 App 中使用响应式 Tailwind class，不放入通用 Token。
 
 ## 5. 第二批候选 Token
 
@@ -318,14 +278,14 @@ Switch 的轨道宽高、Slider 的轨道和 Thumb、Progress 的厚度属于组
 
 ```text
 Button/Input/Select
-- 当前 height、font-size、icon-size、radius
+- 当前 height、icon-size
 - 各 size 的可选组件覆盖
 
 Dialog/Drawer
-- width/size、max-height、radius、overlay、shadow、motion、z-index
+- width/size、max-height、overlay、shadow、motion、z-index
 
 Popover/Tooltip
-- min/max width、background、foreground、radius、shadow、motion
+- min/max width、background、foreground、shadow、motion
 
 Tree
 - indent、item height、line color、drop indicator color
@@ -334,16 +294,93 @@ Slider
 - track size、thumb size、track/range background
 
 Progress
-- track size、track/value background、radius
+- track size、track/value background
 
 Table/DataGrid
 - row height、cell padding、header background、border、sticky shadow
 
 Avatar
-- current size、radius、各 size 的可选组件覆盖
+- current size、各 size 的可选组件覆盖
 ```
 
 组件变量默认使用系统 Token fallback，不在 `:root` 中重复声明全部默认值。
+
+### 6.1 组件 Token 四条硬性规范
+
+以下规则是组件 Token 的实现和审查标准，所有组件及五个框架实现都必须遵守。
+
+#### 1. 消费时 fallback，禁止在组件节点声明默认值
+
+组件必须在消费变量的位置回退到系统 Token：
+
+```css
+background: var(--dropdown-content-background, var(--elevated-background));
+```
+
+对应 Tailwind 写法：
+
+```text
+bg-[var(--dropdown-content-background,var(--elevated-background))]
+```
+
+禁止在组件节点先声明默认值再消费：
+
+```css
+/* 错误：组件自身的声明会遮蔽祖先节点传入的组件变量。 */
+--dropdown-content-background: var(--elevated-background);
+background: var(--dropdown-content-background);
+```
+
+消费时 fallback 必须保证以下覆盖层级都能工作：
+
+```text
+系统 Token
+→ 用户可选的组件组 Token
+→ :root 或主题节点上的组件 Token
+→ 局部容器上的组件 Token
+→ 单实例 style
+```
+
+#### 2. 系统主题只保留跨组件语义 Token
+
+`packages/styles` 中的明暗主题只定义真正跨组件共享、并且用户希望共同变化的语义，例如
+`background`、`elevated-background`、`border`、`selected-background` 和 `mask`。
+
+禁止把组件名称直接沉淀为系统 Token，例如：
+
+```text
+--card-background
+--popover-background
+--select-content-background
+```
+
+Card、Popover、Select 等组件应分别提供组件 Token，并回退到合适的系统 Token。多个组件需要被用户编成一组时，用户可以定义组 Token，再把具体组件 Token 指向该组；组件库不为主观业务分组预设大量全局变量。
+
+#### 3. 组件 Token 属于组件样式模块和公开 API
+
+组件 Token 的名称、fallback 和消费方式定义在 `packages/@fex-design/styles/src/<component>.ts` 对应的组件样式事实源中。五个框架共享同一套变量名称、fallback 和部件语义；CLI 输出源码时将最终样式内联到复制出的组件源码。
+
+`packages/styles/src/components-token.css` 是推荐的组件级集中覆盖入口，不是唯一覆盖入口。用户可以在这里定义某个组件变量以覆盖该组件的全部实例，也可以通过作用域 CSS 覆盖某个区域，或通过 `style` 覆盖单个实例。
+
+组件 Token 默认应保持未定义，并依赖消费位置的系统 Token 或组件内置值 fallback。当前尚未完成逐组件重构的旧变量可以暂时保留在 `components-token.css` 中，以维持现有视觉；对应组件完成消费时 fallback 后必须删除这里的默认声明。不得为了列出变量而重复声明，也不得把组件 Token 提升成系统 Token。
+
+所有稳定公开的组件 Token 必须进入组件 API JSON 和文档，至少记录：
+
+- 变量名称和类型。
+- 所属组件部件。
+- 默认 fallback。
+- 全局、局部作用域和单实例覆盖示例。
+- 是否属于稳定公开契约。
+
+#### 4. Portal 组件必须提供完整的局部覆盖通道
+
+CSS Variable 只能沿真实 DOM 祖先链继承。Dropdown、Select、Popover、Dialog 等内容 Portal 到 `body` 后，无法继承触发器业务容器上的局部变量。因此所有 Portal 组件必须同时提供：
+
+- Content 等实际浮层部件的 `class` 和 `style` 覆盖能力。
+- 可配置的 Portal `container`，允许浮层挂载到局部主题容器内。
+- 在 UI 组合层提供结构化的部件样式入口，例如 `partClassName`、`partStyle` 或框架等价 API。
+
+`:root` 和主题节点上的组件变量仍可覆盖所有 Portal 实例；局部容器覆盖只有在 Portal 挂载于该容器内部时才依赖继承生效。禁止通过自动复制任意 computed CSS Variable 来掩盖 Portal 边界，这会增加运行时成本并造成不可追踪的同步行为。
 
 ## 7. 不公开的内容
 
@@ -418,4 +455,3 @@ API JSON 应记录公开 CSS Variable：
 4. 验证用户 class 在默认样式之后进入 `cn`。
 5. 验证 `style` 可以覆盖组件当前变量。
 6. 在文档 Demo 中展示系统、组件和单实例三种覆盖方式。
-

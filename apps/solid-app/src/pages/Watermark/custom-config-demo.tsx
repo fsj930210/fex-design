@@ -11,7 +11,7 @@ import { createSignal, type JSX } from 'solid-js'
 
 function Control(props: { label: string; children: JSX.Element }) {
   return (
-    <label class="grid gap-space-sm text-sm text-foreground">
+    <label class="grid gap-1.5 text-sm text-foreground">
       <span>{props.label}</span>
       {props.children}
     </label>
@@ -59,8 +59,8 @@ export function CustomConfigDemo() {
       title="Custom Config"
       description="Adjust content, font, layering, rotation, gap, and offset."
     >
-      <div class="grid gap-space-xl lg:grid-cols-[280px_minmax(0,1fr)]">
-        <div class="grid gap-space-lg">
+      <div class="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div class="grid gap-3">
           <Control label="Content">
             <InputRoot value={content()} onValueChange={setContent}>
               <InputControl aria-label="Watermark content" />
@@ -74,7 +74,7 @@ export function CustomConfigDemo() {
           <NumberSlider label="FontSize" value={fontSize()} min={12} max={42} onChange={setFontSize} />
           <NumberSlider label="ZIndex" value={zIndex()} min={1} max={20} onChange={setZIndex} />
           <NumberSlider label="Rotate" value={rotate()} min={-45} max={45} onChange={setRotate} />
-          <div class="grid grid-cols-2 gap-space-sm">
+          <div class="grid grid-cols-2 gap-1.5">
             <Control label="Gap X">
               <InputRoot value={String(gapX())} onValueChange={(value) => setGapX(Number(value) || 0)}>
                 <InputControl inputMode="numeric" aria-label="Gap X" />
@@ -106,7 +106,7 @@ export function CustomConfigDemo() {
           offset={[offsetX(), offsetY()]}
           class="min-h-96 rounded-md border border-border bg-background"
         >
-          <div class="grid min-h-96 place-items-center p-space-xl text-center text-sm text-muted-foreground">
+          <div class="grid min-h-96 place-items-center p-4 text-center text-sm text-muted-foreground">
             Config changes update the generated canvas tile.
           </div>
         </Watermark>

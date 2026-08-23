@@ -17,7 +17,7 @@
   </TimePickerTrigger>
   <TimePickerContent>
     <TimePickerPanel>{#each columns as column (column.unit)}{#if column.unit === 'hour'}<TimePickerHourColumn step={step?.hour} />{:else if column.unit === 'minute'}<TimePickerMinuteColumn step={step?.minute} />{:else if column.unit === 'second'}<TimePickerSecondColumn step={step?.second} />{:else}<TimePickerPeriodColumn />{/if}{/each}</TimePickerPanel>
-    {#if panelExtra}<div class="border-t border-border p-space-sm text-sm"><button type="button" class="text-primary">选择当前时间</button></div>{/if}
-    <div class="flex justify-end border-t border-border p-space-sm"><Button size="sm" variant="ghost" onclick={() => open = false}>确定</Button></div>
+    {#if panelExtra}<div class="border-t border-border p-1.5 text-sm"><button type="button" class="text-primary">选择当前时间</button></div>{/if}
+    <div class="flex justify-end border-t border-border p-1.5"><Button size="sm" variant="ghost" onclick={() => open = false}>确定</Button></div>
   </TimePickerContent>
 </TimePickerRoot>

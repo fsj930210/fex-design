@@ -9,7 +9,7 @@ export function ControlledCollapseDemo() {
   const [expandedKeys, setExpandedKeys] = useState<ExpansionKey[]>(['billing'])
   return (
     <Card title="Controlled" description="expandedKeys and onChange let external state own the panels.">
-      <div className="mb-space-md flex flex-wrap gap-space-sm">
+      <div className="mb-2 flex flex-wrap gap-1.5">
         <Button variant="outline" size="sm" onClick={() => setExpandedKeys(['profile'])}>
           Open profile
         </Button>

@@ -72,7 +72,7 @@ export function PrefixDemo() {
           </MentionsPrefixCase>
         </MentionsContent>
       </MentionsRoot>
-      <p className="mt-space-sm text-xs text-muted-foreground">{selected}</p>
+      <p className="mt-1.5 text-xs text-muted-foreground">{selected}</p>
     </Card>
   )
 }

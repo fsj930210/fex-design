@@ -2,6 +2,13 @@
   "name": "@fex/config-tsconfig",
   "private": true,
   "type": "module",
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p check.json",
+    "lint": "oxlint check.ts"
+  },
   "exports": {
     "./base.json": "./base.json",
     "./app.json": "./app.json",

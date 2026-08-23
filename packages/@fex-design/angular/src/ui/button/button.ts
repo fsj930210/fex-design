@@ -26,7 +26,17 @@ type ButtonVariant =
   | 'link'
   | 'dashed'
 
-type ButtonSize = 'default' | 'xs' | 'sm' | 'lg' | 'icon' | 'icon-xs' | 'icon-sm' | 'icon-lg'
+type ButtonSize =
+  | 'default'
+  | 'xs'
+  | 'sm'
+  | 'lg'
+  | 'xl'
+  | 'icon'
+  | 'icon-xs'
+  | 'icon-sm'
+  | 'icon-lg'
+  | 'icon-xl'
 
 type ButtonEffect =
   | 'expand-icon'

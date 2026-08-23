@@ -1,22 +1,22 @@
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-xl">
+<main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+  <div class="mx-auto w-full max-w-5xl space-y-4">
+    <header class="space-y-4">
       <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
-        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
           Angular adapter for the shared core floating overlay, covering triggers, placement,
           controlled state and custom popup containers.
         </p>
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="space-y-4">
       <fex-card
         title="Primitive"
         description="Low-level composition API. Trigger uses Angular attribute directive binding."
       >
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-popover side="bottom" align="start" [sideOffset]="8" [arrow]="true">
             <button fexPopoverTrigger class="text-sm text-foreground hover:text-primary">
               Primitive trigger
@@ -39,7 +39,7 @@
         title="Ui"
         description="Business UI can compose Button without an extra wrapper protocol."
       >
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-popover placement="bottomLeft" [sideOffset]="8" [arrow]="true">
             <button fexPopoverTrigger [class]="outlineButtonClass">Click</button>
             <fex-popover-content>
@@ -57,7 +57,7 @@
       </fex-card>
 
       <fex-card title="Triggers" description="Supports click, hover, focus and context-menu.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-popover [trigger]="['hover', 'focus']" [hoverCloseDelay]="120" [arrow]="true">
             <button fexPopoverTrigger [class]="secondaryButtonClass">Hover or focus</button>
             <fex-popover-content>
@@ -91,10 +91,10 @@
         title="Placement"
         description="Supports antd placement and Radix side/align options."
       >
-        <div class="flex w-full flex-col items-center gap-space-md py-space-lg">
+        <div class="flex w-full flex-col items-center gap-2 py-3">
           @for (group of placementGroups; track $index; let rowIndex = $index) {
             <div
-              class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-space-lg gap-y-space-md"
+              class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-3 gap-y-2"
             >
               @if (rowIndex > 0 && rowIndex < 4) {
                 <div class="justify-self-start">
@@ -159,7 +159,7 @@
       </fex-card>
 
       <fex-card title="Offsets" description="Tune main-axis sideOffset and cross-axis alignOffset.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-popover placement="bottomLeft" [sideOffset]="18" [arrow]="true">
             <button fexPopoverTrigger [class]="outlineButtonClass">sideOffset 18</button>
             <fex-popover-content>
@@ -190,7 +190,7 @@
       </fex-card>
 
       <fex-card title="Controlled" description="Controlled mode only requests outside updates.">
-        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+        <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-popover
             [open]="open"
             (openChange)="setOpen($event)"
@@ -215,7 +215,7 @@
       </fex-card>
 
       <fex-card title="getPopupContainer" description="Portal can mount into a custom container.">
-        <div #popupContainer class="relative min-h-40 rounded-md border border-dashed p-space-lg">
+        <div #popupContainer class="relative min-h-40 rounded-md border border-dashed p-3">
           <fex-popover [getPopupContainer]="getPopupContainer" placement="bottomLeft">
             <button fexPopoverTrigger [class]="outlineButtonClass">Mount inside dashed box</button>
             <fex-popover-content>

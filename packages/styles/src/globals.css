@@ -9,7 +9,7 @@
   }
 
   html {
-    font-family: var(--font-family);
+    font-family: var(--font-sans);
     color: var(--foreground);
     background: var(--background);
     text-rendering: optimizeLegibility;
@@ -80,6 +80,7 @@
   [aria-disabled='true'] {
     color: var(--disabled-foreground);
     cursor: not-allowed;
+    opacity: 0.5;
     pointer-events: none;
   }
 }

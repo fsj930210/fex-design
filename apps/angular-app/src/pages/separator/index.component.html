@@ -1,6 +1,6 @@
-<main class="grid gap-space-xl p-page-padding">
+<main class="grid gap-4 p-2 md:p-6">
   <fex-card title="Basic" description="Separate related sections with a semantic horizontal rule."
-    ><div class="grid max-w-xl gap-space-md">
+    ><div class="grid max-w-xl gap-2">
       <div>
         <div class="font-medium">Fex Design</div>
         <div class="text-sm text-muted-foreground">Composable components for five frameworks.</div>
@@ -9,12 +9,12 @@
       <div class="text-sm">React · Vue · Solid · Svelte · Angular</div>
     </div></fex-card
   ><fex-card title="Vertical" description="Use vertical separators between compact inline items."
-    ><div class="flex h-5 items-center gap-space-md">
+    ><div class="flex h-5 items-center gap-2">
       <span>Blog</span><fex-separator orientation="vertical" /><span>Docs</span
       ><fex-separator orientation="vertical" /><span>Source</span>
     </div></fex-card
   ><fex-card title="Menu" description="Divide groups without splitting related menu items."
-    ><div class="grid max-w-sm gap-space-sm">
+    ><div class="grid max-w-sm gap-1.5">
       <div>
         <div class="font-medium">Settings</div>
         <div class="text-sm text-muted-foreground">Manage preferences</div>
@@ -33,7 +33,7 @@
     ><div class="grid max-w-lg">
       @for (item of items; track item.label; let last = $last) {
         <div>
-          <div class="flex justify-between py-space-md">
+          <div class="flex justify-between py-2">
             <span>{{ item.label }}</span
             ><span class="text-muted-foreground">{{ item.value }}</span>
           </div>
@@ -45,9 +45,9 @@
   ><fex-card
     title="With Text"
     description="Compose a label between two separators and control its placement."
-    ><div class="grid max-w-xl gap-space-xl">
+    ><div class="grid max-w-xl gap-4">
       @for (placement of placements; track placement) {
-        <div class="flex items-center gap-space-md">
+        <div class="flex items-center gap-2">
           <fex-separator
             [class.w-12]="placement === 'Start'"
             [class.flex-1]="placement !== 'Start'"
@@ -58,13 +58,13 @@
   ><fex-card
     title="Variants"
     description="Use class composition for solid, dashed and dotted rules."
-    ><div class="grid max-w-xl gap-space-lg">
-      <div class="grid gap-space-sm"><span class="text-sm">Solid</span><fex-separator /></div>
-      <div class="grid gap-space-sm">
+    ><div class="grid max-w-xl gap-3">
+      <div class="grid gap-1.5"><span class="text-sm">Solid</span><fex-separator /></div>
+      <div class="grid gap-1.5">
         <span class="text-sm">Dashed</span
         ><fex-separator class="h-0 border-t border-dashed bg-transparent" />
       </div>
-      <div class="grid gap-space-sm">
+      <div class="grid gap-1.5">
         <span class="text-sm">Dotted</span
         ><fex-separator class="h-0 border-t border-dotted bg-transparent" />
       </div></div

@@ -19,7 +19,7 @@ export function DataTableDemoSection({
 
 export function DemoBranch({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="space-y-space-sm">
+    <section className="space-y-1.5">
       <h3 className="text-sm font-medium text-foreground">{title}</h3>
       {children}
     </section>

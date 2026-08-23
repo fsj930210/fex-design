@@ -8,9 +8,9 @@ import { ValidationDemo } from './validation-demo'
 
 export function TextareaPage() {
   return (
-    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
-      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-        <header class="space-y-space-md">
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-2">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
             Back home
           </A>
@@ -20,7 +20,7 @@ export function TextareaPage() {
             TextareaInput remains the native textarea node.
           </p>
         </header>
-        <div class="space-y-space-xl">
+        <div class="space-y-4">
           <BasicDemo />
           <AutosizeDemo />
           <ControlledDemo />

@@ -11,7 +11,7 @@
   import DrawerClose from '@fex-design/svelte/primitive/drawer-close'
   import Radio from '@fex-design/svelte/primitive/radio'
   import RadioGroup from '@fex-design/svelte/primitive/radio-group'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   const placements: DrawerPlacement[] = ['top', 'right', 'bottom', 'left']
   let placement: DrawerPlacement = 'right'
   let size = 400

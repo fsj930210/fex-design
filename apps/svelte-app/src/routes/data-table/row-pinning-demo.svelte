@@ -2,7 +2,7 @@
   import { rowPinningFeature } from '@fex-design/core/data-table/features/row-pinning'
   import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
   import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/svelte/primitive/data-table'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Badge from '@fex-design/svelte/primitive/badge'
   import { createDataTable } from '@fex-design/svelte/stores/create-data-table'
   import { people7, type Person } from './data'

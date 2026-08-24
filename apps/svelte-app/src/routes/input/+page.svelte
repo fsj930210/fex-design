@@ -6,7 +6,7 @@
   import InputAddonBefore from '@fex-design/svelte/primitive/input-addon-before'
   import InputAddonAfter from '@fex-design/svelte/primitive/input-addon-after'
   import InputClear from '@fex-design/svelte/primitive/input-clear'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   let controlledValue = $state('fex-design')

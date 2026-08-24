@@ -25,7 +25,7 @@ import {
 import type { OnChanges, SimpleChanges } from '@angular/core'
 import { CloseIcon } from '../../icon/close'
 import { createHostClassName } from '../../signals/host-class'
-import { Button, buttonPrimitiveClassName } from '../button/button'
+import { buttonPrimitiveClassName } from '../button/button'
 
 @Component({
   selector: 'fex-input-root',
@@ -174,11 +174,11 @@ export class InputAddonAfter {
   selector: 'button[fexInputClear]',
   standalone: true,
   imports: [CloseIcon],
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'input-clear',
+    type: 'button',
     '[hidden]': '!forceMount && !root.canClear',
     '[disabled]': '!forceMount && !root.canClear',
     '(pointerdown)': '$event.preventDefault()',

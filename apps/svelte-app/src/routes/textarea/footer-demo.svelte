@@ -3,7 +3,7 @@
   import TextareaInput from '@fex-design/svelte/primitive/textarea-input'
   import TextareaClear from '@fex-design/svelte/primitive/textarea-clear'
   import TextareaFooter from '@fex-design/svelte/primitive/textarea-footer'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import CheckIcon from '@fex-design/svelte/icon/check'
   import InfoIcon from '@fex-design/svelte/icon/info'

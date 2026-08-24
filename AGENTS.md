@@ -53,6 +53,10 @@
 - 新增页面后必须同步注册到该 app 的实际路由模块，例如 React/Solid/Vue/Angular 的 `src/routes/**`；SvelteKit 使用文件路由时也要按模块目录组织。不能只创建页面文件不接路由。
 - 所有 app 首页组件导航、组件路由表和组件文档目录索引必须按组件英文名称的字母顺序排列；新增组件时插入正确的字母位置，禁止仅追加到数组或列表末尾。
 - 文件命名要清晰、稳定、便于搜索。组件名表达业务含义，避免用 `Base`、`Common`、`Manager` 这类过宽泛的名字承载复杂职责。
+- 本仓库采用源码交付，组件定义名和公开导出名禁止携带品牌前缀或层级装饰。统一使用 `Button`、`ButtonGroup`、`Dialog` 等业务名称，不使用 `FexButton`、`ElButton`、`ButtonPrimitive`、`PrimitiveButton`。Primitive/UI/Pro 层级只由目录、Registry target 和导入路径表达；Primitive 和 UI 中的同名组件都保持同一个裸名称。高层组件组合低层组件时，允许仅在当前实现文件中使用 `import { Button as PrimitiveButton } ...` 这类局部别名，但局部别名不得成为组件定义名、公开导出名、DevTools 名称或稳定 API。
+- 组件公开入口统一使用具名导出，禁止提供 `export default` 或把内部默认导出继续透出为公开默认导出；调用方统一使用 `import { Button, ButtonGroup } from '...'`。Vue SFC 和 Svelte 组件文件因框架模块格式产生的内部默认导出，只能在同目录公开入口中转换为 `export { default as Button } from './button.vue'` / `./button.svelte`，不得泄漏成包的默认 API。
+- 同一组件族存在多个公开组件时，每个组件必须有独立实现文件，例如 `button.*`、`button-group.*`；组件族可以使用与组件同名的公开入口文件统一导出该子路径，但不得使用 `index.ts` 桶文件。五框架应保持相同的组件拆分边界，具体文件扩展名和模板文件遵循各框架惯例。
+- React 只能作为跨框架公共语义、行为、视觉和 Demo 场景的参考，禁止把 React 的 Props、children、ref、Context、hook、组件组织或类型组合方式直接翻译到 Vue、Solid、Svelte、Angular。实现或重构非 React 组件前，必须检查该框架当前官方推荐能力和成熟组件库的真实源码，再按本框架惯例设计；优先参考 Vue 的 Element Plus / Reka UI、Solid 的 Kobalte / Ark UI、Svelte 的 Bits UI / Ark UI、Angular 的 Angular Material / CDK。参考用于确认框架表达和工程惯例，不得不加判断地复制第三方 API、品牌约定或历史兼容代码。
 - 框架特有的通用逻辑要沉淀到对应框架组件包内，组件库和对应 app 都优先复用，不要在 app 里再写一套同类能力。
 - React 通用 hook 放在 `packages/@fex-design/react/src/hooks`。
 - Vue 通用组合式逻辑放在 `packages/@fex-design/vue/src/composables` 或该包既有同类目录。
@@ -124,6 +128,7 @@
 
 ## Vue 规范
 
+- Vue 组件设计必须以 Vue 官方 SFC/Composition API 规范和 Element Plus、Reka UI 等成熟 Vue 组件库的当前源码为依据；不得从 React `ComponentProps`、ReactNode、children 或 ref 模型反推 Vue Props、Slots 和 attrs。
 - Vue 代码优先使用 Composition API 和 `<script setup>`，逻辑按可复用 composable 拆分。
 - Vue UI 组件默认使用 SFC + `<template>` 表达结构，尤其是层级较多、slot 较多、状态分支较多的组件。不要为了和其它框架写法表面一致，把 Vue UI 写成大段 `h()` / render function；只有动态组件工厂、极小无结构封装、需要完全程序化生成 vnode 的明确场景才允许使用 `h()`，并要在代码附近说明原因。
 - Vue 组件结构和交互逻辑要分离：复杂交互放 composable、组件私有 helper 或 core adapter，SFC 负责模板、绑定和事件转发。不要把大量状态机、DOM 订阅、跨组件通信和样式拼装混在同一个 SFC 里。
@@ -133,20 +138,25 @@
 - `watch` / `watchEffect` 必须有明确原因，不要用它替代事件回调；如果监听多个来源，要保证依赖来源清晰。必须使用时要在附近写简短注释说明监听的是哪个外部系统或框架边界、为什么不能用事件回调或 `computed`、清理逻辑在哪里。
 - 模板中避免调用昂贵函数；需要派生的展示值优先使用 `computed`。
 - 组件 props 和 emits 要显式声明类型，双向绑定使用清晰的 `v-model` 命名，不要隐式修改 props。
+- Vue 组件库源码使用 `defineOptions({ name: 'Button' })` 声明无品牌前缀的稳定组件名；Primitive 和 UI 同名组件都使用相同裸名称，层级由路径表达。无 Slot Props 的默认或具名 Slot 直接在模板中使用 `<slot>` / `$slots`，不要为了模拟 React children 手写 `ButtonSlots`；只有作用域 Slot 需要约束传出参数时才使用 `defineSlots`，并聚焦 Slot Props 而不是返回 VNode 类型。
+- Vue 原生 attrs 和 style 使用 `useAttrs`、`StyleValue`、`CSSProperties` 及模板数组等 Vue 原生方式透传和合并，不把 `attrs.style` 强转为任意 Record，也不使用 React 的属性类型。
 - 列表渲染必须使用稳定 `:key`，不要用数组下标作为可变列表 key。
 
 ## Solid 规范
 
+- Solid 组件设计必须以 Solid 官方响应模型和 Kobalte、Ark UI Solid 等成熟组件库的当前源码为依据；不得套用 React 的重渲染、ReactNode、ComponentProps、ref 或 Context 类型设计。
 - Solid 以细粒度响应为核心，优先使用 signal、memo、resource 等原生响应能力，不要套用 React 的重渲染思路。
 - 派生数据用 `createMemo`，外部副作用用 `createEffect`；不要用 effect 写普通数据转换。
 - 事件回调中处理业务动作，避免通过 effect 监听 signal 再补做业务逻辑。
 - 少用 `createEffect` 串联业务状态变化；它应主要服务外部副作用，而不是替代事件回调。
 - props 解构要谨慎，避免破坏响应性；需要拆分 props 时使用框架推荐工具或保持访问器形式。
+- Solid Props 使用 `JSX.*Attributes`、`ParentProps`、accessor 和交叉类型等 Solid 原生表达；不要照搬 React 的 `ComponentProps`、`ReactNode`、ref 类型或空 `interface extends` 模板。组件定义和公开导出保持 `Button` 等裸名称，组合时才局部别名。
 - 列表使用 `<For>`，条件渲染使用 `<Show>`、`<Switch>`，避免手写低效数组映射造成响应边界不清。
 - 大型状态按业务边界拆分 store，避免一个 store 变化牵动无关 UI。
 
 ## Svelte 规范
 
+- Svelte 组件设计必须以 Svelte 5 官方能力和 Bits UI、Ark UI Svelte 等成熟组件库的当前源码为依据；不得把 React children、render prop、ReactNode、HTML Props 或 ref 类型机械改名后搬入 Svelte。
 - Svelte 代码要利用编译期响应能力，保持状态声明简单直接，避免把简单交互写成复杂 store。
 - 派生值使用框架推荐的派生机制；副作用只用于外部系统同步，不要用副作用替代普通赋值或事件回调。
 - store 只用于跨组件共享或复杂领域状态，局部 UI 状态放在组件本地。
@@ -154,14 +164,18 @@
 - 少用订阅或 reactive effect 串联普通业务流程；能在事件里完成的逻辑不要拆到监听里。
 - 列表渲染使用稳定 keyed each，避免可变列表复用错误 DOM。
 - 组件 props、事件和 slot 要保持明确，避免一个组件同时承担页面、数据请求、布局、复杂交互四种职责。
+- Svelte 5 Props 使用 `svelte/elements` 原生 HTML Attributes、`Snippet`、`$props()`、`$bindable()` 和 `{@render ...}` 等原生表达；不要引入 React children/ReactNode 模型。组件文件和公开导出保持 `Button` 等裸名称，组合时才局部别名。
 
 ## Angular 规范
 
+- Angular 组件设计必须以 Angular 当前官方能力和 Angular Material/CDK 等成熟组件库的当前源码为依据；不得为对齐 React 人造 Props 汇总接口、children、ref、Context 或 hook 等对应物。
 - Angular 代码采用 Signal-first 思路：优先使用 `signal`、`computed`、`effect`、signal inputs/outputs、resource 等现代 Angular 响应能力组织状态和异步数据。
 - Angular 顶层或核心元素的用户扩展 class 必须通过原生 `class="..."` 传入并自动合并，不设计 `customClass`、`hostClass`、`xxxClass` 这类替代属性。多个组件都需要读取并合并宿主初始 class 时，必须沉淀为 Angular 公共 signal/helper/directive，不要在每个组件里重复写 `ElementRef + getAttribute('class') + cn(...)`。
 - `signal` 管理本地可变状态，`computed` 管理派生数据，`effect` 只用于外部系统同步；不要用 `effect` 监听 signal 再补做普通业务逻辑。
 - Angular 也要少用监听式 `effect` 串联业务流程；用户动作、表单变化、分页筛选等优先在事件处理或表单回调中完成。
 - 组件优先使用 standalone component、强类型表单和清晰的依赖注入边界。
+- Angular 组件和指令使用 signal inputs/outputs、原生元素属性和 content projection 表达公开能力；不要为了对齐 React Props 而额外创建 `ButtonInputs` 这类汇总接口。共享枚举可以直接用于各个 `input<T>()`。类名和公开导出保持 `Button` 等裸名称，层级由目录和导入路径表达。
+- Angular 源码交付组件的 selector 同样禁止品牌前缀和层级装饰。基于原生元素的组件使用明确的元素约束和裸属性名，例如 `button[button]`、`div[buttonGroup]`，调用方式为 `<button button>`、`<div buttonGroup>`；不要使用 `fexButton`、`fexButtonPrimitive`、`fex-button-group`，也不要用看不出宿主元素类型的自定义元素包一层原生 DOM。Primitive 与 UI 使用相同裸 selector 时，由各自导入路径和独立 template scope 隔离，不在同一 scope 同时导入两个同 selector Component。
 - 组件按 `OnPush` 和细粒度响应的思路设计，减少不必要的模板重算和子树更新。
 - 模板表达式保持轻量，不调用昂贵函数；复杂展示值放到 signal、computed、pipe 或组件字段中。
 - 列表渲染必须使用 `trackBy` 或新控制流的 `track`，不要让 Angular 以对象引用猜测列表身份。
@@ -174,6 +188,7 @@
 ## 跨框架组件与性能
 
 - 跨框架组件应优先把无框架逻辑沉淀到 `packages/@fex-design/core`，再在各框架包里适配。
+- 基于原生元素的组件必须暴露其核心原生元素，并优先继承或透传该元素已有的属性和事件能力；不得把 `click`、`focus`、`blur`、`keydown`、`aria-*` 等原生能力逐项重新声明为组件 API。React 使用原生元素 Props/ref，Vue 使用 attrs 与 template ref expose，Solid 使用 JSX 原生属性/ref，Svelte 使用元素 attributes 与 bindable ref，Angular 使用原生元素宿主和公开 element。只有组件新增的语义属性、语义事件，或确实需要拦截加工的原生事件才显式声明。
 - 同一类能力如果 React、Vue、Solid、Svelte、Angular 都会用，先抽出纯逻辑、类型和算法到 `packages/@fex-design/core` 或 `packages/utils`；各框架包只封装生命周期、响应式绑定、DOM 适配和框架 API。
 - 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；设计 token、全局变量和基础 Tailwind source 配置放在 `packages/styles`，组件自身的 class 组合、variant、size、状态样式和 data attribute 规则必须沉淀到 `packages/@fex-design/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
 - 只有当展示组件演进出必须跨框架保持一致的行为逻辑时，才引入 `packages/@fex-design/core`，例如受控/非受控状态、键盘导航、选择模型、焦点管理、弹层协议、复杂 ARIA 行为或非平凡 variant 计算；不要仅仅为了复用 class 字符串或简单 props 映射而增加 core 抽象。
@@ -197,14 +212,18 @@
 - 组件默认圆角统一使用 `rounded-md` / `var(--radius-md)`，当前为 8px。Button、Input、Select、Textarea、Card、Dialog、Popover、Dropdown、Sheet 等基础控件和容器组件默认都用 md；只有明确的组件设计规格或特殊场景需要更大/更小圆角时，才允许局部覆盖，并要保持同类组件一致。
 - padding、margin、gap 等 spacing class 要优先使用最简表达；四边相同写 `p-space-*`，横纵不同才写 `px-space-* py-space-*`，单边不同才写具体方向，避免无意义重复。
 - 每个 UI 库都必须显式分层为 `primitive` 和 `ui`，其中 `primitive` 只承载底层结构、基础行为和最小样式协议，`ui` 承载面向业务的推荐封装和默认组合；少数真正复杂且高复用的工作流型组件可以额外有 `pro` 层，但 `pro` 只用于数据表、复杂表单、远程选择器这类明确的工作流封装。
+- UI 组件家族可以从本家族 UI 入口重新导出业务使用时高频需要、但实现所有权仍属于 Primitive 的组合部件，例如 `ui/button` 转出 `ButtonGroup`；这只是公开入口门面，不得复制实现或伪造一份 UI 包装。只服务自定义底层结构、已被 UI 完整封装的原子部件，例如 `ButtonIcon`，仍只从 Primitive 入口导出，不扩大 UI API。
 - 实现新组件或扩展组件时，如果用户没有明确指定层级，默认只实现 `primitive`；禁止自行推断并新增 `ui`、`pro` 或其它更高层封装。只有用户明确要求对应层级时才能实现，并且不得以“默认组合更方便”“顺手补齐分层”作为擅自扩大范围的理由。
 - 当前约定不把同一框架内的 `primitive`、`ui`、`hooks`、`icon` 拆成多个 package；按框架一个 package 管理，包内按类别目录分层。边界以该框架 package 的公开 `exports` 为准，业务侧和示例侧都只能通过公开子路径导入。
 - 跨框架 primitive 中凡是需要把行为挂到调用方元素上的能力，例如 Trigger、Close、Item、Anchor 等，统一使用 render prop / slot props / template context 传出 `props`、`ref` 或框架等价绑定能力、`state`；禁止把 `asChild` 作为公共 API，也不要用 clone child、隐式增强子节点或要求用户组件转发 ref 作为基础范式。
 - 组件的 demo 和文档必须覆盖本次实际实现且已公开的层级；如果用户明确要求并实际实现了 `ui` 或 `pro`，对应 demo 和文档也必须一并覆盖。不能为了满足 demo 覆盖而擅自新增用户未要求的 `ui` / `pro` 层；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
+- 组件源码文档同时提供英文和简体中文：`<component>.md` 是默认英文文档，`<component>.zh-CN.md` 是对应中文文档。语言由文件名区分，标题中不要追加“中文文档”或 “English Documentation”。两份文档必须覆盖相同的公开组件、Props/Inputs、slots/snippets/content projection、原生属性透传、ref/element 和示例能力；代码标识符、类型名、字面量、导入路径和框架语法保持原样，所有标题、表头、API 名称之外的描述文字必须完整使用该文件对应语言，禁止中英文说明混写。
 - Demo 页面中承载多个示例 `Card` 的直接父容器必须统一使用 `grid gap-space-xl`；禁止使用 `space-y-*` 给 Demo Card 列表制造间距。`space-y-*` 依赖直接子节点 margin，在 Angular 自定义元素、`display: contents` 宿主和不同框架组件边界下表现不一致，不能作为跨框架 Demo 列表布局方案。此规则适用于 React、Vue、Solid、Svelte、Angular 所有新增或修改的组件示例页。
 - `ui` 层的结构化 API 要优先采用显式对象形态来承载部件级样式与状态，例如 `partClassName`、`partStyle`、`slotProps` 之类的清晰结构，不要把 header/content/footer 等部件的样式塞进扁平 props，也不要让调用方依赖 DOM 深层 class。
 - `ui` 组件如果暴露多个部件的 class/style，必须使用结构化对象 API，不要新增 `headerClassName`、`contentClassName`、`footerClassName`、`headerStyle`、`contentStyle` 这类扁平 props。统一优先使用类似 `className={{ header, content, footer }}` / `class={{ header, content, footer }}`、`style={{ header, content, footer }}`、`partClassName`、`partStyle` 的对象形态；具体命名按框架习惯保持一致。primitive 层优先只承载宿主元素 class/style 合并，复杂部件定制主要放在 ui 层。
 - 新增组件样式前必须先参考 `packages/@fex-design/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。
+- 所有新增或修改的组件必须同时支持并验证 LTR 与 RTL。方向 API 统一使用逻辑值 `start` / `end`，样式优先使用 `ms` / `me`、`ps` / `pe`、`start` / `end`、逻辑圆角和 `rtl:` 变体；禁止新增 `left` / `right` 方向枚举或只在 LTR 下正确的物理方向布局。原生宿主应透传 `dir="ltr"` / `dir="rtl"`，组合组件的图标位置、键盘方向、弹层定位和连接边框必须随书写方向正确镜像。
+- 基础控件的可选装饰动效默认关闭。空闲状态下无限循环且不表达业务状态的动画不得进入公共 effect API；loading 等状态动画可以在对应状态期间运行。hover 动效必须提供 `focus-visible` 等键盘等价反馈，并尊重 `prefers-reduced-motion`。
 - 样式命名和组件结构要支持扩展，不要依赖脆弱的深层选择器覆盖。
 - 管理后台界面应以信息密度、可扫描性、稳定布局和可维护交互为优先，不做营销页式的大面积装饰。
 - `packages/@fex-design/*` 下新增或修改对外组件时，必须同步补充详细完整的 Markdown 文档。

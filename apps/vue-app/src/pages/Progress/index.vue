@@ -3,7 +3,7 @@ import { Progress } from '@fex-design/vue/primitive/progress'
 import { CheckIcon } from '@fex-design/vue/icon/check'
 import { MinusIcon } from '@fex-design/vue/icon/minus'
 import { PlusIcon } from '@fex-design/vue/icon/plus'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 const gradient = { from: '#1677ff', to: '#87d068', direction: 'to right' } as const

@@ -3,7 +3,7 @@
   import CalendarIcon from '@fex-design/svelte/icon/calendar'
   import ClockIcon from '@fex-design/svelte/icon/clock'
   import { TimePickerContent, TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerPeriodColumn, TimePickerRoot, TimePickerSecondColumn, TimePickerTrigger, type DisabledTime, type TimeValue } from '@fex-design/svelte/primitive/time-picker'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   let { value, defaultValue = null, onchange, use12Hours = false, format, step, disabledTime, disabled = false, invalid = false, prefix, calendarSuffix = false, panelExtra = false }: { value?: TimeValue | null; defaultValue?: TimeValue | null; onchange?: (value: TimeValue | null) => void; use12Hours?: boolean; format?: string; step?: { hour?: number; minute?: number; second?: number }; disabledTime?: DisabledTime; disabled?: boolean; invalid?: boolean; prefix?: string; calendarSuffix?: boolean; panelExtra?: boolean } = $props()
   let open = $state(false)
   const pattern = $derived(format ?? (use12Hours ? 'hh:mm:ss A' : 'HH:mm:ss'))

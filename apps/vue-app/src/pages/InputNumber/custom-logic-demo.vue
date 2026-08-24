@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { stepInputNumber } from '@fex-design/core/input-number/value'
 import { MinusIcon } from '@fex-design/vue/icon/minus'
 import { PlusIcon } from '@fex-design/vue/icon/plus'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 const value = ref(5)
 const step = (direction: 'increment' | 'decrement') =>

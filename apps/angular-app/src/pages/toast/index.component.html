@@ -14,23 +14,23 @@
       description="Built-in variants only provide default semantics. Content and icon can still be customized."
     >
       <div class="flex flex-wrap gap-1.5">
-        <button fexButton variant="outline" (click)="toast.show('Hello, Fex Design!')">
+        <button button variant="outline" (click)="toast.show('Hello, Fex Design!')">
           Default
         </button>
-        <button fexButton variant="outline" (click)="toast.success('This is a success message')">
+        <button button variant="outline" (click)="toast.success('This is a success message')">
           Success
         </button>
-        <button fexButton variant="outline" (click)="toast.info('This is an info message')">
+        <button button variant="outline" (click)="toast.info('This is an info message')">
           Info
         </button>
-        <button fexButton variant="outline" (click)="toast.warning('This is a warning message')">
+        <button button variant="outline" (click)="toast.warning('This is a warning message')">
           Warning
         </button>
-        <button fexButton variant="outline" (click)="toast.error('This is an error message')">
+        <button button variant="outline" (click)="toast.error('This is an error message')">
           Error
         </button>
         <button
-          fexButton
+          button
           variant="outline"
           (click)="toast.loading({ title: 'Loading data', duration: 2500 })"
         >
@@ -46,7 +46,7 @@
       <div class="flex flex-wrap gap-1.5">
         @for (item of placements; track item) {
           <button
-            fexButton
+            button
             [variant]="placement() === item ? 'default' : 'outline'"
             (click)="choosePlacement(item)"
           >
@@ -62,7 +62,7 @@
     >
       <div class="flex flex-wrap gap-1.5">
         <button
-          fexButton
+          button
           variant="outline"
           (click)="
             toast.success({
@@ -75,7 +75,7 @@
           Rich content
         </button>
         <button
-          fexButton
+          button
           variant="outline"
           (click)="
             toast.show({
@@ -97,14 +97,14 @@
     >
       <div class="flex flex-wrap gap-1.5">
         <button
-          fexButton
+          button
           variant="outline"
           (click)="toast.loading({ id: 'save-user', title: 'Saving user', duration: -1 })"
         >
           Open keyed loading
         </button>
         <button
-          fexButton
+          button
           variant="outline"
           (click)="
             toast.success({
@@ -117,16 +117,16 @@
         >
           Update keyed toast
         </button>
-        <button fexButton variant="outline" (click)="showManualToast()">Manual toast</button>
+        <button button variant="outline" (click)="showManualToast()">Manual toast</button>
         <button
-          fexButton
+          button
           variant="outline"
           [disabled]="!manualId()"
           (click)="manualId() && toast.dismiss(manualId()!)"
         >
           Destroy manual
         </button>
-        <button fexButton variant="outline" (click)="toast.clear()">Destroy all</button>
+        <button button variant="outline" (click)="toast.clear()">Destroy all</button>
       </div>
     </fex-card>
 
@@ -135,8 +135,8 @@
       description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible."
     >
       <div class="flex flex-wrap gap-1.5">
-        <button fexButton variant="outline" (click)="showManyMessages()">Show many</button>
-        <button fexButton [variant]="stack() ? 'default' : 'outline'" (click)="toggleStack()">
+        <button button variant="outline" (click)="showManyMessages()">Show many</button>
+        <button button [variant]="stack() ? 'default' : 'outline'" (click)="toggleStack()">
           {{ stack() ? 'Stack on' : 'Stack off' }}
         </button>
       </div>
@@ -178,7 +178,7 @@
             }
             @if (item.action) {
               <fex-toast-action
-                ><button fexButton size="sm">{{ item.action }}</button></fex-toast-action
+                ><button button size="sm">{{ item.action }}</button></fex-toast-action
               >
             }
           </fex-toast-root>

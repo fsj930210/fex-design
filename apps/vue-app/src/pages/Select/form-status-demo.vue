@@ -8,7 +8,7 @@ import {
 } from '@fex-design/vue/primitive/field'
 import { Form, useForm } from '@fex-design/vue/primitive/form'
 import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'
 const form = useForm({ defaultValues: { framework: '' }, onSubmit: () => undefined })

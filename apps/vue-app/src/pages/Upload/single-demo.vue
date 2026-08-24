@@ -2,7 +2,7 @@
 import { previewFeature } from '@fex-design/core/upload/features/preview'
 import { uploadFeature } from '@fex-design/core/upload/features/upload'
 import { UploadRoot, UploadTrigger, useUpload } from '@fex-design/vue/primitive/upload'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { uploadBody, uploadServerUrl } from './api'
 import DemoList from './demo-list.vue'
 import DemoSection from './demo-section.vue'

@@ -9,7 +9,7 @@
   import { createForm, type AnyFieldApi } from '@fex-design/svelte/primitive/form/create-form'
   import TextareaRoot from '@fex-design/svelte/primitive/textarea'
   import TextareaInput from '@fex-design/svelte/primitive/textarea-input'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   const form = createForm(() => ({

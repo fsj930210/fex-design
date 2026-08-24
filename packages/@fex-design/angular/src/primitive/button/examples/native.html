@@ -1,0 +1,9 @@
+<div class="flex flex-wrap items-center gap-3">
+  <form (submit)="$event.preventDefault()">
+    <button #nativeButton button>Focusable</button>
+    <button button type="button" (click)="nativeButton.element.focus()">Focus button</button>
+    <button button type="submit" name="action" value="save">Save</button>
+    <button button type="reset">Reset</button>
+    <button button disabled aria-label="Unavailable">Disabled</button>
+  </form>
+</div>

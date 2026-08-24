@@ -8,7 +8,7 @@
   import Form from '@fex-design/svelte/primitive/form'
   import { createForm, type AnyFieldApi } from '@fex-design/svelte/primitive/form/create-form'
   import InputNumber from '@fex-design/svelte/primitive/input-number'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   const form = createForm(() => ({

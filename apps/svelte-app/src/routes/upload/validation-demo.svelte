@@ -2,7 +2,7 @@
   import { uploadFeature } from '@fex-design/core/upload/features/upload'
   import type { UploadItem } from '@fex-design/core/upload/types'
   import { UploadRoot, UploadTrigger, createUpload } from '@fex-design/svelte/primitive/upload'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import { uploadBody, uploadServerUrl } from './api'
   import DemoList from './demo-list.svelte'
   import DemoSection from './demo-section.svelte'

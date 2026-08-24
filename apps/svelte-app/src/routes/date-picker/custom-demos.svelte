@@ -4,7 +4,7 @@
   import CalendarGrid from '@fex-design/svelte/primitive/calendar-grid'
   import CalendarWeekHeader from '@fex-design/svelte/primitive/calendar-week-header'
   import { DatePickerContent, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger } from '@fex-design/svelte/primitive/date-picker'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import CustomPanel from './custom-panel.svelte'
 

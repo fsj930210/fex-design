@@ -12,7 +12,7 @@ import {
   type DisabledTime,
   type TimeValue,
 } from '@fex-design/vue/primitive/time-picker'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { computed, ref } from 'vue'
 
 const props = withDefaults(

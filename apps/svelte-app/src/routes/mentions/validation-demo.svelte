@@ -12,7 +12,7 @@
   import MentionsContent from '@fex-design/svelte/primitive/mentions/content'
   import MentionsList from '@fex-design/svelte/primitive/mentions/list'
   import MentionsItem from '@fex-design/svelte/primitive/mentions/item'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import { mentionUsers } from './data'
 

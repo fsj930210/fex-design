@@ -16,7 +16,7 @@
   import { createForm } from '@fex-design/svelte/primitive/form/create-form'
   import InputRoot from '@fex-design/svelte/primitive/input'
   import InputControl from '@fex-design/svelte/primitive/input-control'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import Checkbox from '@fex-design/svelte/ui/checkbox'
 

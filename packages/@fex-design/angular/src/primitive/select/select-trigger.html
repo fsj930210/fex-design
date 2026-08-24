@@ -46,7 +46,7 @@
     @if (select.loading) { <fex-loading-icon class="animate-spin" /> } @else if (select.clearable &&
     select.selectedOptions.length) {
     <button
-      fexButtonPrimitive
+      button
       type="button"
       aria-label="Clear selection"
       [class]="clearClass"

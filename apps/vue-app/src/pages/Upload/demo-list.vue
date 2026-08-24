@@ -6,7 +6,7 @@ import {
   UploadList,
   useUploadContext,
 } from '@fex-design/vue/primitive/upload'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { onScopeDispose, shallowRef } from 'vue'
 import MultipartDetails from './multipart-details.vue'
 defineProps<{ showMultipart?: boolean }>()

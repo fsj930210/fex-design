@@ -1,0 +1,15 @@
+@if (showIcon()) {
+<span buttonIcon [placement]="iconPlacement()" [effect]="effect()">
+  @if (loading()) { @if (loadingIndicator()) {
+  <ng-content select="[slot=loading-indicator]" />
+  } @else {
+  <fex-loading-icon [class]="spinnerClassName" />
+  } } @else if (iconPlacement() === 'start') {
+  <ng-content select="[slot=start]" />
+  } @else {
+  <ng-content select="[slot=end]" />
+  }
+</span>
+}
+
+<ng-content />

@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js'
 import { QrCode } from '@fex-design/solid/primitive/qrcode'
-import Button from '@fex-design/solid/ui/button'
+import { Button } from '@fex-design/solid/ui/button'
 import Card from '@fex-design/solid/ui/card'
 
 export function OverlayDemo() {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { useDatePickerContext } from '@fex-design/vue/primitive/date-picker'
 
 const picker = useDatePickerContext('CustomPanel')

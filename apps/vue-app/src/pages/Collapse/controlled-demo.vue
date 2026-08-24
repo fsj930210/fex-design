@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ExpansionKey } from '@fex-design/core/expansion/types'
 import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/vue/primitive/collapse'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import { collapseItems } from './demo-data'

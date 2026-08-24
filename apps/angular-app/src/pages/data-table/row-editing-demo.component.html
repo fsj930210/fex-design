@@ -9,13 +9,13 @@
         @if (cell.column.id === '__actions__') {
           @if (draft()?.id === cell.row.id) {
             <span class="inline-flex gap-1.5"
-              ><button fexButton size="sm" (click)="save()">Save</button
-              ><button fexButton size="sm" variant="outline" (click)="draft.set(null)">
+              ><button button size="sm" (click)="save()">Save</button
+              ><button button size="sm" variant="outline" (click)="draft.set(null)">
                 Cancel
               </button></span
             >
           } @else {
-            <button fexButton size="sm" variant="outline" (click)="edit(cell)">Edit row</button>
+            <button button size="sm" variant="outline" (click)="edit(cell)">Edit row</button>
           }
         } @else if (draft()?.id === cell.row.id) {
           <fex-input-root [value]="value(cell)"

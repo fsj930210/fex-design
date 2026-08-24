@@ -8,7 +8,7 @@ import {
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/vue/primitive/select'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { ref } from 'vue'
 import Demo from './demo-section.vue'
 const options = ref<SelectOption[]>([

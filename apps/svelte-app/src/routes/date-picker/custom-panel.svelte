@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import { useDatePickerContext } from '@fex-design/svelte/primitive/date-picker'
 
   const picker = useDatePickerContext('CustomPanel')

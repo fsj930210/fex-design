@@ -1,6 +1,6 @@
 import { A } from '@solidjs/router'
-import { Button as PrimitiveButton, ButtonGroup } from '@fex-design/solid/primitive/button'
-import { Button } from '@fex-design/solid/ui/button'
+import { Button as PrimitiveButton } from '@fex-design/solid/primitive/button'
+import { Button, ButtonGroup } from '@fex-design/solid/ui/button'
 import { Card } from '@fex-design/solid/ui/card'
 import { PlusIcon } from '@fex-design/solid/icon/plus'
 import { For, type JSX, type ParentProps } from 'solid-js'
@@ -18,11 +18,12 @@ const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-
 const effects = [
   'expand-icon',
   'ring-hover',
-  'shine',
   'shine-hover',
-  'gooey-left',
-  'gooey-right',
-  'gradient-slide-show',
+  'gooey-start',
+  'gooey-end',
+  'underline',
+  'hover-underline',
+  'press',
 ] as const
 
 function DemoSection(props: ParentProps<{ title: string; description: string }>) {
@@ -124,14 +125,14 @@ export function ButtonPage(): JSX.Element {
             <Button effect="expand-icon" icon={<PlusIcon />}>
               Icon left
             </Button>
-            <Button variant="secondary" effect="gooey-left">
-              Secondary gooey left
+            <Button variant="secondary" effect="gooey-start">
+              Secondary gooey start
             </Button>
-            <Button variant="destructive" effect="gooey-right">
-              Destructive gooey right
+            <Button variant="destructive" effect="gooey-end">
+              Destructive gooey end
             </Button>
-            <Button variant="destructive" effect="shine">
-              Destructive shine
+            <Button variant="destructive" effect="press">
+              Pressed feedback
             </Button>
             <Button variant="outline" effect="ring-hover">
               Outline ring hover

@@ -1,27 +1,62 @@
-# Svelte Button
+# Svelte UI Button
+
+Recommended Button with variants, sizes, effects, icons and loading state. ButtonGroup is re-exported from this entry.
 
 ## Import
 
-```svelte
-<script lang="ts">
-  import Button from '@fex-design/svelte/ui/button'
-</script>
-```
+    import { Button, ButtonGroup } from '@fex-design/svelte/ui/button'
 
-## Basic
+## Examples
 
-```svelte
-<Button variant="default">Save</Button>
-```
+Examples are stored in `examples/<name>` as the source for the documentation preview.
 
-## Props
+| Name              | Covers                                                                        |
+| ----------------- | ----------------------------------------------------------------------------- |
+| basic             | Default and outline buttons.                                                  |
+| variants          | Every visual variant.                                                         |
+| sizes             | Text and icon-only sizes.                                                     |
+| effects           | Every opt-in interaction effect.                                              |
+| icons             | Start, end, and icon-only content.                                            |
+| loading           | Default loading states and placement.                                         |
+| loading-indicator | Custom loading indicator.                                                     |
+| states            | Native form behavior, disabled state, attributes, events, and element access. |
+| group             | Connected, spaced, horizontal, and vertical groups.                           |
+| combinations      | Multi-prop combinations plus LTR and RTL direction.                           |
 
-| Name            | Type                                                                                                                                                      | Default     | Required | Description                                         |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------- | --------------------------------------------------- |
-| `variant`       | `'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link' \| 'dashed'`                                                                 | `'default'` | No       | Visual style.                                       |
-| `size`          | `'default' \| 'xs' \| 'sm' \| 'lg' \| 'xl' \| 'icon' \| 'icon-xs' \| 'icon-sm' \| 'icon-lg' \| 'icon-xl'`                                                 | `'default'` | No       | Button size.                                        |
-| `effect`        | `'expand-icon' \| 'ring-hover' \| 'shine' \| 'shine-hover' \| 'gooey-left' \| 'gooey-right' \| 'underline' \| 'hover-underline' \| 'gradient-slide-show'` | `undefined` | No       | Optional visual effect.                             |
-| `icon`          | `Snippet`                                                                                                                                                 | `undefined` | No       | Icon snippet rendered beside the content.           |
-| `iconPlacement` | `'start' \| 'end'`                                                                                                                                        | `'start'`   | No       | Icon or loading icon position.                      |
-| `loading`       | `boolean`                                                                                                                                                 | `false`     | No       | Shows the built-in spinner and disables the button. |
-| `disabled`      | `boolean`                                                                                                                                                 | `false`     | No       | Disables user interaction.                          |
+## Button API
+
+| Name              | Type                                                                                                                          | Default              | Description                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------- |
+| variant           | 'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link' \| 'dashed'                                       | 'default'            | Visual variant.                                   |
+| size              | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'            | Control size.                                     |
+| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined            | Optional interaction effect; disabled by default. |
+| icon              | framework content                                                                                                             | undefined            | Normal-state icon.                                |
+| iconPlacement     | start or end                                                                                                                  | start                | Icon or indicator position.                       |
+| loading           | boolean                                                                                                                       | false                | Loading state; disables interaction.              |
+| loadingIndicator  | framework content                                                                                                             | built-in LoadingIcon | Loading visual override.                          |
+| disabled          | boolean                                                                                                                       | false                | Disabled state.                                   |
+| type              | native button type                                                                                                            | button               | Native button type.                               |
+| native attributes | HTMLButtonAttributes                                                                                                          | —                    | Native attributes and events.                     |
+| element access    | bind:ref                                                                                                                      | —                    | Native HTMLButtonElement.                         |
+
+## Variants
+
+`default`, `outline`, `secondary`, `ghost`, `destructive`, `link`, and `dashed`.
+
+## Effects
+
+`expand-icon`, `ring-hover`, `shine-hover`, `gooey-start`, `gooey-end`, `underline`, `hover-underline`, and `press`.
+
+All effects are opt-in. `press` only provides feedback while pressed. `gooey-start` and `gooey-end` use logical directions and mirror automatically with `dir="ltr"` / `dir="rtl"`. Button has no infinitely looping decorative effect while idle.
+
+## Direction
+
+Set the native `dir="ltr"` or `dir="rtl"` attribute. Icon placement, gooey direction, underline motion, and connected ButtonGroup layout all use logical `start` / `end` directions.
+
+## Content API
+
+children / icon / loadingIndicator snippets
+
+## ButtonGroup API
+
+ButtonGroup keeps the Primitive API: orientation, spacing, native div attributes, and native element behavior.

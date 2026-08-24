@@ -10,7 +10,7 @@
   import DialogPortal from '@fex-design/svelte/primitive/dialog-portal'
   import DialogTitle from '@fex-design/svelte/primitive/dialog-title'
   import DialogTrigger from '@fex-design/svelte/primitive/dialog-trigger'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   let open = $state(false)

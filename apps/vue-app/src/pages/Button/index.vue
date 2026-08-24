@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PrimitiveButton, { ButtonGroup } from '@fex-design/vue/primitive/button'
-import Button from '@fex-design/vue/ui/button'
+import { Button as PrimitiveButton } from '@fex-design/vue/primitive/button'
+import { Button, ButtonGroup } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { PlusIcon } from '@fex-design/vue/icon/plus'
 
@@ -17,11 +17,12 @@ const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-
 const effects = [
   'expand-icon',
   'ring-hover',
-  'shine',
   'shine-hover',
-  'gooey-left',
-  'gooey-right',
-  'gradient-slide-show',
+  'gooey-start',
+  'gooey-end',
+  'underline',
+  'hover-underline',
+  'press',
 ] as const
 </script>
 
@@ -133,9 +134,9 @@ const effects = [
               </template>
               Icon left
             </Button>
-            <Button variant="secondary" effect="gooey-left">Secondary gooey left</Button>
-            <Button variant="destructive" effect="gooey-right">Destructive gooey right</Button>
-            <Button variant="destructive" effect="shine">Destructive shine</Button>
+            <Button variant="secondary" effect="gooey-start">Secondary gooey start</Button>
+            <Button variant="destructive" effect="gooey-end">Destructive gooey end</Button>
+            <Button variant="destructive" effect="press">Pressed feedback</Button>
             <Button variant="outline" effect="ring-hover">Outline ring hover</Button>
             <Button variant="link" effect="hover-underline">Link hover underline</Button>
             <Button variant="link" effect="underline">Link underline</Button>

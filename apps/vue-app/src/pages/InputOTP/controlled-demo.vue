@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputOTPValue } from '@fex-design/core/input-otp/types'
 import { InputOTPGroup, InputOTPInput, InputOTPRoot } from '@fex-design/vue/primitive/input-otp'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 const value=ref<InputOTPValue>(['AB','',''])

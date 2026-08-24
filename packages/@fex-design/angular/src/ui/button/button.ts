@@ -1,9 +1,10 @@
-import {
-  buttonClassName,
-  buttonIconClassName,
-  buttonSpinnerClassName,
-} from '@fex-design/styles/button'
-import { buttonPrimitiveClassName } from '@fex-design/angular/primitive/button'
+import type {
+  ButtonEffect,
+  ButtonIconPlacement,
+  ButtonSize,
+  ButtonVariant,
+} from '@fex-design/core/button/types'
+import { buttonClassName, buttonSpinnerClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
 import {
   booleanAttribute,
@@ -12,47 +13,18 @@ import {
   computed,
   contentChild,
   ElementRef,
+  inject,
   input,
 } from '@angular/core'
 import { LoadingIcon } from '../../icon/loading'
+import { ButtonIcon } from '../../primitive/button/button-icon'
+import { buttonPrimitiveClassName } from '../../primitive/button/button'
 import { createHostClassName } from '../../signals/host-class'
 
-type ButtonVariant =
-  | 'default'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'destructive'
-  | 'link'
-  | 'dashed'
-
-type ButtonSize =
-  | 'default'
-  | 'xs'
-  | 'sm'
-  | 'lg'
-  | 'xl'
-  | 'icon'
-  | 'icon-xs'
-  | 'icon-sm'
-  | 'icon-lg'
-  | 'icon-xl'
-
-type ButtonEffect =
-  | 'expand-icon'
-  | 'ring-hover'
-  | 'shine'
-  | 'shine-hover'
-  | 'gooey-left'
-  | 'gooey-right'
-  | 'underline'
-  | 'hover-underline'
-  | 'gradient-slide-show'
-
 @Component({
-  selector: 'button[fexButton]',
+  selector: 'button[button]',
   standalone: true,
-  imports: [LoadingIcon],
+  imports: [ButtonIcon, LoadingIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
@@ -63,27 +35,31 @@ type ButtonEffect =
     '[attr.data-loading]': "loading() ? 'true' : null",
     '[disabled]': 'disabledState()',
   },
-  templateUrl: './button.html',
+  templateUrl: './button.template.html',
 })
 export class Button {
+  readonly element = inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement
+
   variant = input<ButtonVariant>('default')
   size = input<ButtonSize>('default')
-  effect = input<ButtonEffect | undefined>()
+  effect = input<ButtonEffect>()
 
-  iconPlacement = input<'start' | 'end'>('start')
+  iconPlacement = input<ButtonIconPlacement>('start')
   loading = input(false, { transform: booleanAttribute })
   disabled = input(false, { transform: booleanAttribute })
 
   protected readonly spinnerClassName = buttonSpinnerClassName
   private readonly startIcon = contentChild('[slot=start]', { read: ElementRef })
   private readonly endIcon = contentChild('[slot=end]', { read: ElementRef })
+  readonly loadingIndicator = contentChild('[slot=loading-indicator]', {
+    read: ElementRef,
+  })
 
   protected readonly disabledState = computed(() => this.disabled() || this.loading())
-  protected readonly showStartIcon = computed(
-    () => this.iconPlacement() === 'start' && (this.loading() || Boolean(this.startIcon())),
-  )
-  protected readonly showEndIcon = computed(
-    () => this.iconPlacement() === 'end' && (this.loading() || Boolean(this.endIcon())),
+  readonly showIcon = computed(
+    () =>
+      this.loading() ||
+      Boolean(this.iconPlacement() === 'start' ? this.startIcon() : this.endIcon()),
   )
 
   protected readonly hostClassName = createHostClassName(() =>
@@ -96,18 +72,6 @@ export class Button {
       }),
     ),
   )
-
-  protected readonly startIconClassName = computed(() =>
-    buttonIconClassName({
-      placement: 'start',
-      effect: this.effect(),
-    }),
-  )
-
-  protected readonly endIconClassName = computed(() =>
-    buttonIconClassName({
-      placement: 'end',
-      effect: this.effect(),
-    }),
-  )
 }
+
+export { ButtonGroup } from '../../primitive/button/button-group'

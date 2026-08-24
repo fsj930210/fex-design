@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@fex-design/vue/primitive/dialog'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 

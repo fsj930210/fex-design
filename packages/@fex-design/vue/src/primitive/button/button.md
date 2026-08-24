@@ -1,26 +1,55 @@
 # Vue Primitive Button
 
-`ButtonGroup` is exported from the same entry. It groups related actions, supports horizontal or vertical orientation, and uses `spacing="0"` for connected controls without owning a selection value.
+Low-level Button family primitives with native element passthrough.
 
 ## Import
 
-```vue
-<script setup lang="ts">
-import Button from '@fex-design/vue/primitive/button'
-</script>
-```
+    import { Button, ButtonGroup, ButtonIcon } from '@fex-design/vue/primitive/button'
 
-## Basic
+## Components
 
-```vue
-<template>
-  <Button>Save</Button>
-</template>
-```
+| Component   | Element | Purpose                               |
+| ----------- | ------- | ------------------------------------- |
+| Button      | button  | Native button foundation.             |
+| ButtonIcon  | span    | Icon placement and effect container.  |
+| ButtonGroup | div     | Layout and connected-button grouping. |
 
-## Props
+## Examples
 
-| Name                     | Type                              | Default     | Required | Description                                                                                                                                                                  |
-| ------------------------ | --------------------------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                   | `'button' \| 'submit' \| 'reset'` | `'button'`  | No       | Native button type.                                                                                                                                                          |
-| native button attributes | `HTMLAttributes`                  | `undefined` | No       | Native button attributes are passed through. The primitive includes the default button foundation classes but does not expose variant, size, loading, icon, or effect props. |
+Examples are stored in `examples/<name>` as the source for the documentation preview.
+
+| Name        | Covers                                                              |
+| ----------- | ------------------------------------------------------------------- |
+| basic       | Native button foundation.                                           |
+| icon        | Start and end ButtonIcon composition.                               |
+| group       | Connected, spaced, horizontal, and vertical ButtonGroup layouts.    |
+| native      | Native form attributes, events, disabled state, and element access. |
+| composition | Button, ButtonIcon, and ButtonGroup used together.                  |
+
+## Button API
+
+| Name              | Type               | Default | Description                   |
+| ----------------- | ------------------ | ------- | ----------------------------- |
+| type              | native button type | button  | Native button type.           |
+| native attributes | Vue button attrs   | —       | Native attributes and events. |
+| element access    | exposed ref        | —       | Native HTMLButtonElement.     |
+
+## ButtonIcon API
+
+| Name              | Type                                                                                                                          | Default   | Description                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------- |
+| placement         | start or end                                                                                                                  | start     | Icon position.                                    |
+| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined | Optional interaction effect; disabled by default. |
+| native attributes | Vue span attrs                                                                                                                | —         | Native span attributes and events.                |
+
+## Direction
+
+`Button`, `ButtonIcon`, and `ButtonGroup` pass through native `dir="ltr"` / `dir="rtl"`. Icon placement, gooey direction, underline motion, and connected group styles use logical `start` / `end` directions.
+
+## ButtonGroup API
+
+| Name              | Type                   | Default    | Description                                             |
+| ----------------- | ---------------------- | ---------- | ------------------------------------------------------- |
+| orientation       | horizontal or vertical | horizontal | Layout direction.                                       |
+| spacing           | number or string       | 0          | Gap; numbers use pixels. Zero enables connected styles. |
+| native attributes | Vue div attrs          | —          | Native div attributes and events.                       |

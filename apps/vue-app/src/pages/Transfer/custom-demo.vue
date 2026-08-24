@@ -2,7 +2,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/vue/icon/chevron'
 import { Transfer } from '@fex-design/vue/primitive/transfer'
 import { Badge } from '@fex-design/vue/primitive/badge'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { fieldNames, members } from './data'
 </script>

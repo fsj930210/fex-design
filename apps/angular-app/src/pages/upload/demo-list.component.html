@@ -28,18 +28,18 @@
           </div>
           <div class="flex gap-1">
             @if (state.item()?.status === 'pending') {
-              <button fexButton size="xs" variant="ghost" (click)="state.start()">上传</button>
+              <button button size="xs" variant="ghost" (click)="state.start()">上传</button>
             }
             @if (state.item()?.status === 'error' && state.item()?.errorStage !== 'before-upload') {
-              <button fexButton size="xs" variant="ghost" (click)="state.retry()">重试</button>
+              <button button size="xs" variant="ghost" (click)="state.retry()">重试</button>
             }
             @if (state.pause && state.item()?.status === 'uploading') {
-              <button fexButton size="xs" variant="ghost" (click)="state.pause()">暂停</button>
+              <button button size="xs" variant="ghost" (click)="state.pause()">暂停</button>
             }
             @if (state.continue && state.item()?.status === 'paused') {
-              <button fexButton size="xs" variant="ghost" (click)="state.continue()">继续</button>
+              <button button size="xs" variant="ghost" (click)="state.continue()">继续</button>
             }
-            <button fexButton size="xs" variant="destructive" (click)="state.remove()">删除</button>
+            <button button size="xs" variant="destructive" (click)="state.remove()">删除</button>
           </div></ng-template
         ></fex-upload-item
       >
@@ -48,7 +48,7 @@
 >
 @if (context.items().length) {
   <button
-    fexButton
+    button
     class="mt-1.5 w-full"
     size="xs"
     variant="ghost"

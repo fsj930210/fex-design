@@ -1,55 +1,13 @@
 <script setup lang="ts">
-import {
-  buttonClassName,
-  buttonIconClassName,
-  buttonSpinnerClassName,
-} from '@fex-design/styles/button'
+import { buttonClassName, buttonSpinnerClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
-import { computed, useAttrs } from 'vue'
+import { computed, useAttrs, useTemplateRef } from 'vue'
 import { LoadingIcon } from '../../icon/loading'
 import PrimitiveButton from '../../primitive/button/button.vue'
+import ButtonIcon from '../../primitive/button/button-icon.vue'
+import type { ButtonProps } from './button.types'
 
-type ButtonVariant =
-  | 'default'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'destructive'
-  | 'link'
-  | 'dashed'
-type ButtonSize =
-  | 'default'
-  | 'xs'
-  | 'sm'
-  | 'lg'
-  | 'xl'
-  | 'icon'
-  | 'icon-xs'
-  | 'icon-sm'
-  | 'icon-lg'
-  | 'icon-xl'
-type ButtonEffect =
-  | 'expand-icon'
-  | 'ring-hover'
-  | 'shine'
-  | 'shine-hover'
-  | 'gooey-left'
-  | 'gooey-right'
-  | 'underline'
-  | 'hover-underline'
-  | 'gradient-slide-show'
-
-export interface ButtonProps {
-  variant?: ButtonVariant
-  size?: ButtonSize
-  effect?: ButtonEffect
-  iconPlacement?: 'start' | 'end'
-  loading?: boolean
-  disabled?: boolean
-  type?: 'button' | 'submit' | 'reset'
-}
-
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'Button', inheritAttrs: false })
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'default',
@@ -61,23 +19,33 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 })
 
 const attrs = useAttrs()
+const primitiveButtonRef = useTemplateRef<{ ref: HTMLButtonElement | null }>('button')
 const isDisabled = computed(() => props.disabled || props.loading)
-const className = computed(() =>
-  cn(
-    buttonClassName({
-      variant: props.variant,
-      size: props.size,
-      effect: props.effect,
-    }),
-    attrs.class as string | undefined,
-  ),
-)
+const buttonRef = computed(() => primitiveButtonRef.value?.ref ?? null)
+
+function getButtonAttrs() {
+  return {
+    ...attrs,
+    class: cn(
+      buttonClassName({
+        variant: props.variant,
+        size: props.size,
+        effect: props.effect,
+      }),
+      attrs.class as string | undefined,
+    ),
+  }
+}
+
+defineExpose({
+  ref: buttonRef,
+})
 </script>
 
 <template>
   <PrimitiveButton
-    v-bind="{ ...attrs, class: undefined }"
-    :class="className"
+    v-bind="getButtonAttrs()"
+    ref="button"
     data-slot="button"
     :data-variant="variant"
     :data-size="size"
@@ -86,22 +54,24 @@ const className = computed(() =>
     :disabled="isDisabled"
     :type="type"
   >
-    <span
+    <ButtonIcon
       v-if="iconPlacement === 'start' && (loading || $slots.icon)"
-      :class="buttonIconClassName({ placement: 'start', effect })"
-      data-icon="inline-start"
+      placement="start"
+      :effect="effect"
     >
-      <LoadingIcon v-if="loading" :class="buttonSpinnerClassName" />
+      <slot v-if="loading && $slots.loadingIndicator" name="loadingIndicator" />
+      <LoadingIcon v-else-if="loading" :class="buttonSpinnerClassName" />
       <slot v-else name="icon" />
-    </span>
+    </ButtonIcon>
     <slot />
-    <span
+    <ButtonIcon
       v-if="iconPlacement === 'end' && (loading || $slots.icon)"
-      :class="buttonIconClassName({ placement: 'end', effect })"
-      data-icon="inline-end"
+      placement="end"
+      :effect="effect"
     >
-      <LoadingIcon v-if="loading" :class="buttonSpinnerClassName" />
+      <slot v-if="loading && $slots.loadingIndicator" name="loadingIndicator" />
+      <LoadingIcon v-else-if="loading" :class="buttonSpinnerClassName" />
       <slot v-else name="icon" />
-    </span>
+    </ButtonIcon>
   </PrimitiveButton>
 </template>

@@ -1,7 +1,7 @@
 import { stepInputNumber } from '@fex-design/core/input-number/value'
 import { MinusIcon } from '@fex-design/solid/icon/minus'
 import { PlusIcon } from '@fex-design/solid/icon/plus'
-import Button from '@fex-design/solid/ui/button'
+import { Button } from '@fex-design/solid/ui/button'
 import Card from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 export function CustomLogicDemo() {

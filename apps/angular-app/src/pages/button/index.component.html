@@ -14,21 +14,19 @@
     <div class="grid gap-4">
       <fex-card title="Button group" description="Groups related actions without owning their value.">
         <div class="flex flex-wrap items-start gap-3">
-          <fex-button-group><button fexButton variant="outline">Previous</button><button fexButton variant="outline">Current</button><button fexButton variant="outline">Next</button></fex-button-group>
-          <fex-button-group [spacing]="8"><button fexButton>Save</button><button fexButton>Publish</button></fex-button-group>
-          <fex-button-group orientation="vertical"><button fexButton variant="outline">Move up</button><button fexButton variant="outline">Move down</button></fex-button-group>
+          <div buttonGroup><button button variant="outline">Previous</button><button button variant="outline">Current</button><button button variant="outline">Next</button></div>
+          <div buttonGroup [spacing]="8"><button button>Save</button><button button>Publish</button></div>
+          <div buttonGroup orientation="vertical"><button button variant="outline">Move up</button><button button variant="outline">Move down</button></div>
         </div>
       </fex-card>
       <fex-card title="Primitive" description="Low-level button structure and minimal behavior.">
-        <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <button fexButtonPrimitive>Primitive button</button>
-        </div>
+        <button-primitive-demo />
       </fex-card>
 
       <fex-card title="Ui" description="Recommended business-facing button wrapper.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (variant of variants; track variant) {
-            <button fexButton [variant]="variant">{{ variant }}</button>
+            <button button [variant]="variant">{{ variant }}</button>
           }
         </div>
       </fex-card>
@@ -36,7 +34,7 @@
       <fex-card title="Variants" description="Core visual button variants.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (variant of variants; track variant) {
-            <button fexButton [variant]="variant">{{ variant }}</button>
+            <button button [variant]="variant">{{ variant }}</button>
           }
         </div>
       </fex-card>
@@ -45,7 +43,7 @@
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (size of sizes; track size) {
             <button
-              fexButton
+              button
               [size]="size"
               [attr.aria-label]="size.startsWith('icon') ? size : null"
             >
@@ -64,18 +62,18 @@
         description="Loading disables the button and follows icon placement."
       >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <button fexButton [loading]="true">Loading start</button>
-          <button fexButton [loading]="true" iconPlacement="end">Loading end</button>
+          <button button [loading]="true">Loading start</button>
+          <button button [loading]="true" iconPlacement="end">Loading end</button>
         </div>
       </fex-card>
 
       <fex-card title="Icon" description="Icons can be placed before or after the label.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <button fexButton>
+          <button button>
             <fex-plus-icon />
             Icon start
           </button>
-          <button fexButton iconPlacement="end">
+          <button button iconPlacement="end">
             Icon end
             <fex-plus-icon />
           </button>
@@ -85,7 +83,7 @@
       <fex-card title="Effects" description="Optional visual effects for button interactions.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (effect of effects; track effect) {
-            <button fexButton [effect]="effect" iconPlacement="end">
+            <button button [effect]="effect" iconPlacement="end">
               {{ effect }}
               @if (effect === 'expand-icon') {
                 <fex-plus-icon />
@@ -100,35 +98,35 @@
         description="Combinations of variants, icons, loading, and effects."
       >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <button fexButton effect="expand-icon" iconPlacement="end">
+          <button button effect="expand-icon" iconPlacement="end">
             Icon right
             <fex-plus-icon />
           </button>
-          <button fexButton effect="expand-icon">
+          <button button effect="expand-icon">
             <fex-plus-icon />
             Icon left
           </button>
-          <button fexButton variant="secondary" effect="gooey-left">Secondary gooey left</button>
-          <button fexButton variant="destructive" effect="gooey-right">
-            Destructive gooey right
+          <button button variant="secondary" effect="gooey-start">Secondary gooey start</button>
+          <button button variant="destructive" effect="gooey-end">
+            Destructive gooey end
           </button>
-          <button fexButton variant="destructive" effect="shine">Destructive shine</button>
-          <button fexButton variant="outline" effect="ring-hover">Outline ring hover</button>
-          <button fexButton variant="link" effect="hover-underline">Link hover underline</button>
-          <button fexButton variant="link" effect="underline">Link underline</button>
-          <button fexButton variant="outline" effect="hover-underline">
+          <button button variant="destructive" effect="press">Pressed feedback</button>
+          <button button variant="outline" effect="ring-hover">Outline ring hover</button>
+          <button button variant="link" effect="hover-underline">Link hover underline</button>
+          <button button variant="link" effect="underline">Link underline</button>
+          <button button variant="outline" effect="hover-underline">
             Outline hover underline
           </button>
-          <button fexButton variant="outline" effect="underline">Outline underline</button>
-          <button fexButton variant="destructive" [loading]="true">Destructive loading</button>
-          <button fexButton [loading]="true" iconPlacement="end">Loading with icon</button>
+          <button button variant="outline" effect="underline">Outline underline</button>
+          <button button variant="destructive" [loading]="true">Destructive loading</button>
+          <button button [loading]="true" iconPlacement="end">Loading with icon</button>
         </div>
       </fex-card>
 
       <fex-card title="Disabled" description="Disabled states across button variants.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <button fexButton disabled>Disabled</button>
-          <button fexButton disabled variant="outline">Disabled outline</button>
+          <button button disabled>Disabled</button>
+          <button button disabled variant="outline">Disabled outline</button>
         </div>
       </fex-card>
     </div>

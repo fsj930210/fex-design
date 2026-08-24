@@ -3,7 +3,7 @@
   import CollapseItem from '@fex-design/svelte/primitive/collapse-item'
   import CollapseTrigger from '@fex-design/svelte/primitive/collapse-trigger'
   import CollapseContent from '@fex-design/svelte/primitive/collapse-content'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import { collapseItems } from './demo-data'
 

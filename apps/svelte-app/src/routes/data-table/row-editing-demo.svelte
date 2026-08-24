@@ -4,7 +4,7 @@
   import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/svelte/primitive/data-table'
   import InputRoot from '@fex-design/svelte/primitive/input'
   import InputControl from '@fex-design/svelte/primitive/input-control'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import { createDataTable } from '@fex-design/svelte/stores/create-data-table'
   import { people6, type Person } from './data'
   import DemoSection from './demo-section.svelte'

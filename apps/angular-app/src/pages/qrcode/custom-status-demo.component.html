@@ -6,12 +6,12 @@
       <fex-qrcode-overlay>
         <div class="grid gap-1">
           <span class="text-sm font-medium">二维码已过期</span>
-          <button fexButton size="sm" (click)="expired.set(false)">重新加载</button>
+          <button button size="sm" (click)="expired.set(false)">重新加载</button>
         </div>
       </fex-qrcode-overlay>
       }
     </fex-qrcode-root>
-    <button fexButton variant="outline" (click)="expired.update((value) => !value)">
+    <button button variant="outline" (click)="expired.update((value) => !value)">
       切换状态
     </button>
   </div>

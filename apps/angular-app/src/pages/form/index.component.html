@@ -103,13 +103,13 @@
         </ng-container>
         <div class="flex gap-1.5">
           <button
-            fexButton
+            button
             type="submit"
             [disabled]="!loginForm.state.canSubmit || loginForm.state.isSubmitting"
           >
             {{ loginForm.state.isSubmitting ? '提交中…' : '登录' }}
           </button>
-          <button fexButton type="button" variant="outline" (click)="loginForm.reset()">
+          <button button type="button" variant="outline" (click)="loginForm.reset()">
             重置
           </button>
         </div>
@@ -219,7 +219,7 @@
             }
           </fex-field-root>
         </ng-container>
-        <button fexButton class="w-fit" type="submit">验证</button>
+        <button button class="w-fit" type="submit">验证</button>
       </form>
     </fex-card>
 
@@ -264,7 +264,7 @@
               </fex-input-root>
             </fex-field-root>
           </ng-container>
-          <button fexButton class="w-fit" type="submit">检查规则</button>
+          <button button class="w-fit" type="submit">检查规则</button>
         </form>
         <form [fexForm]="cascadeForm" class="grid gap-3">
           <ng-container [fexField]="cascadeForm" name="province" #province="field">
@@ -298,7 +298,7 @@
               <p fexFieldDescription>省份 change 事件中同步重设城市。</p>
             </fex-field-root>
           </ng-container>
-          <button fexButton class="w-fit" type="submit">保存地区</button>
+          <button button class="w-fit" type="submit">保存地区</button>
         </form>
       </div>
     </fex-card>
@@ -337,7 +337,7 @@
             <option>启用</option>
           </select></fex-field-root
         >
-        <button fexButton type="button" variant="outline">查询</button>
+        <button button type="button" variant="outline">查询</button>
       </div>
     </fex-card>
 
@@ -374,10 +374,10 @@
           >
         </ng-container>
         <div class="flex flex-wrap gap-1.5">
-          <button fexButton type="button" (click)="setNickname()">设置昵称</button
-          ><button fexButton type="button" variant="outline" (click)="getNickname()">
+          <button button type="button" (click)="setNickname()">设置昵称</button
+          ><button button type="button" variant="outline" (click)="getNickname()">
             读取昵称</button
-          ><button fexButton type="button" variant="outline" (click)="instanceForm.reset()">
+          ><button button type="button" variant="outline" (click)="instanceForm.reset()">
             重置
           </button>
         </div>
@@ -488,14 +488,14 @@
                   </div>
                   <div class="mt-2 flex gap-1.5">
                     <button
-                      fexButton
+                      button
                       type="button"
                       variant="outline"
                       (click)="contacts.api.insertValue(index + 1, createContact())"
                     >
                       在后面插入</button
                     ><button
-                      fexButton
+                      button
                       type="button"
                       variant="outline"
                       [disabled]="contacts.api.state.value.length === 1"
@@ -509,7 +509,7 @@
             </div>
           </fieldset>
           <button
-            fexButton
+            button
             class="w-fit"
             type="button"
             variant="outline"
@@ -518,7 +518,7 @@
             新增联系人
           </button>
         </ng-container>
-        <button fexButton class="w-fit" type="submit">校验并保存联系人</button>
+        <button button class="w-fit" type="submit">校验并保存联系人</button>
       </form>
     </fex-card>
 
@@ -586,7 +586,7 @@
               >
             </div>
           </fieldset>
-          <button fexButton class="w-fit" type="submit">提交 profile</button>
+          <button button class="w-fit" type="submit">提交 profile</button>
         </form>
         <div class="grid gap-2">
           <form
@@ -634,7 +634,7 @@
                 }
               </fex-field-root></ng-container
             >
-            <button fexButton class="w-fit" type="submit">保存资料</button>
+            <button button class="w-fit" type="submit">保存资料</button>
           </form>
           <form
             [fexForm]="securityForm"
@@ -682,9 +682,9 @@
               ></ng-container
             >
             <div class="flex gap-1.5">
-              <button fexButton type="button" variant="outline" (click)="useProfileEmail()">
+              <button button type="button" variant="outline" (click)="useProfileEmail()">
                 使用资料邮箱</button
-              ><button fexButton type="submit">保存安全设置</button>
+              ><button button type="submit">保存安全设置</button>
             </div>
           </form>
         </div>
@@ -697,9 +697,9 @@
     >
       <form [fexForm]="scrollForm" class="grid max-w-xl gap-3">
         <div class="flex flex-wrap gap-1.5">
-          <button fexButton type="button" variant="outline" (click)="scrollToAddress()">
+          <button button type="button" variant="outline" (click)="scrollToAddress()">
             定位收货地址</button
-          ><button fexButton type="submit">提交并定位首个错误</button>
+          ><button button type="submit">提交并定位首个错误</button>
         </div>
         <ng-container [fexField]="scrollForm" name="note" #note="field"
           ><fex-field-root

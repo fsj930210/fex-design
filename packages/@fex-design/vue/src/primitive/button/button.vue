@@ -1,41 +1,33 @@
 <script setup lang="ts">
 import { buttonPrimitiveClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
-import { computed, useAttrs, useTemplateRef } from 'vue'
+import { useAttrs, useTemplateRef } from 'vue'
+import type { ButtonProps } from './button.types'
 
-export interface ButtonProps {
-  type?: 'button' | 'submit' | 'reset'
-}
-
-defineOptions({ inheritAttrs: false })
+// oxlint-disable-next-line vue/no-reserved-component-names
+defineOptions({ name: 'Button', inheritAttrs: false })
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'button',
 })
-const emit = defineEmits<{ click: [event: MouseEvent] }>()
 
 const attrs = useAttrs()
-const elementRef = useTemplateRef<HTMLButtonElement>('buttonElement')
-const className = computed(() => cn(buttonPrimitiveClassName, attrs.class as string | undefined))
+const buttonRef = useTemplateRef<HTMLButtonElement>('button')
 
-function handleClick(event: MouseEvent) {
-  emit('click', event)
+function getButtonAttrs() {
+  return {
+    ...attrs,
+    class: cn(buttonPrimitiveClassName, attrs.class as string | undefined),
+  }
 }
 
 defineExpose({
-  elementRef,
+  ref: buttonRef,
 })
 </script>
 
 <template>
-  <button
-    ref="buttonElement"
-    data-slot="button"
-    @click="handleClick"
-    v-bind="{ ...attrs, class: undefined }"
-    :class="className"
-    :type="props.type"
-  >
+  <button v-bind="getButtonAttrs()" ref="button" data-slot="button" :type="props.type">
     <slot />
   </button>
 </template>

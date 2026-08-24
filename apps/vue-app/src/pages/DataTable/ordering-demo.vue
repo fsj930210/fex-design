@@ -6,7 +6,7 @@ import {
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
 import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/vue/primitive/data-table'
 import { useDataTable } from '@fex-design/vue/composables/use-data-table'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import { people5, type Person } from './data'
 import DemoSection from './demo-section.vue'
 const m = { columnOrderingFeature }

@@ -10,7 +10,7 @@ import {
 } from '@fex-design/styles/date-picker'
 import { cn } from '@fex/utils'
 import { createHostClassName } from '../../signals/host-class'
-import { Button, buttonPrimitiveClassName } from '../button/button'
+import { buttonPrimitiveClassName } from '../button/button'
 import { DatePickerState } from './use-date-picker'
 import { RangePickerState } from './use-range-picker'
 
@@ -45,10 +45,10 @@ abstract class DatePickerFooterAction {
 @Component({
   selector: 'button[fexDatePickerConfirm]',
   standalone: true,
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'date-picker-confirm',
+    type: 'button',
     '[class]': 'className()',
     '(click)': 'owner().confirm()',
   },
@@ -63,10 +63,10 @@ export class DatePickerConfirm extends DatePickerFooterAction {
 @Component({
   selector: 'button[fexDatePickerCancel]',
   standalone: true,
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'date-picker-cancel',
+    type: 'button',
     '[class]': 'className()',
     '(click)': 'owner().cancel()',
   },
@@ -81,9 +81,13 @@ export class DatePickerCancel extends DatePickerFooterAction {
 @Component({
   selector: 'button[fexDatePickerToday]',
   standalone: true,
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'date-picker-today', '[class]': 'className()', '(click)': 'today()' },
+  host: {
+    'data-slot': 'date-picker-today',
+    type: 'button',
+    '[class]': 'className()',
+    '(click)': 'today()',
+  },
   template: '<ng-content>今天</ng-content>',
 })
 export class DatePickerToday extends DatePickerFooterAction {
@@ -101,9 +105,8 @@ export class DatePickerToday extends DatePickerFooterAction {
 @Component({
   selector: 'button[fexDatePickerPreset]',
   standalone: true,
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'date-picker-preset', '[class]': 'className()' },
+  host: { 'data-slot': 'date-picker-preset', type: 'button', '[class]': 'className()' },
   template: '<ng-content />',
 })
 export class DatePickerPreset {

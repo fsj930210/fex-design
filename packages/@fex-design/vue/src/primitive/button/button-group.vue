@@ -1,24 +1,42 @@
 <script setup lang="ts">
 import { buttonGroupClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
-import { computed, useAttrs } from 'vue'
+import { useAttrs, type CSSProperties, type StyleValue } from 'vue'
+import type { ButtonGroupProps } from './button.types'
 
-defineOptions({ inheritAttrs: false })
-const props = withDefaults(defineProps<{
-  orientation?: 'horizontal' | 'vertical'
-  spacing?: number | string
-}>(), { orientation: 'horizontal', spacing: 0 })
+defineOptions({ name: 'ButtonGroup', inheritAttrs: false })
+const props = withDefaults(defineProps<ButtonGroupProps>(), {
+  orientation: 'horizontal',
+  spacing: 0,
+})
 const attrs = useAttrs()
-const className = computed(() => cn(buttonGroupClassName({
-  orientation: props.orientation,
-  connected: props.spacing === 0,
-}), attrs.class as string | undefined))
-const style = computed(() => ({
-  ...(attrs.style as Record<string, unknown> | undefined),
-  gap: typeof props.spacing === 'number' ? `${props.spacing}px` : props.spacing,
-}))
+
+function getButtonGroupAttrs() {
+  const gapStyle: CSSProperties = {
+    gap: typeof props.spacing === 'number' ? `${props.spacing}px` : props.spacing,
+  }
+
+  return {
+    ...attrs,
+    class: cn(
+      buttonGroupClassName({
+        orientation: props.orientation,
+        connected: props.spacing === 0,
+      }),
+      attrs.class as string | undefined,
+    ),
+    style: [attrs.style as StyleValue, gapStyle],
+  }
+}
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined, style: undefined }" role="group" data-slot="button-group" :data-orientation="props.orientation" :class="className" :style="style"><slot /></div>
+  <div
+    v-bind="getButtonGroupAttrs()"
+    role="group"
+    data-slot="button-group"
+    :data-orientation="props.orientation"
+  >
+    <slot />
+  </div>
 </template>

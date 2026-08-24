@@ -4,7 +4,7 @@ import { createTreeController } from '@fex-design/core/tree/create-tree-controll
 import type { CheckFeatureApi } from '@fex-design/core/tree/features/check'
 import type { ExpansionFeatureApi } from '@fex-design/core/tree/features/expansion'
 import type { SelectionFeatureApi } from '@fex-design/core/tree/features/selection'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import DemoTree from './demo-tree.vue'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'

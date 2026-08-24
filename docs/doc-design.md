@@ -280,8 +280,11 @@ docs/
 Markdown/MDX
 → 解释、场景、边界和示例编排
 
-API JSON
-→ Props、Events、Slots、CSS Variables、Playground 和 API Table
+Core 公共类型和 JSDoc
+→ API 的唯一维护源；复杂属性必须提供可校验的 Example
+
+自动生成的 API JSON
+→ Props、Events、Slots、CSS Variables、Playground 和 API Table；禁止人工修改
 
 五框架 Demo 源码
 → Preview 运行、Code 展示、测试、Registry 和 AI 示例
@@ -321,4 +324,3 @@ API JSON
 8. 搜索、导航、完整视觉设计。
 
 导航本身不是第一阶段风险；API JSON、Demo Runtime、属性编辑和五框架一致性优先。
-

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PrimitiveButton, { ButtonGroup } from '@fex-design/svelte/primitive/button'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
+  import { Button, ButtonGroup } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import PlusIcon from '@fex-design/svelte/icon/plus'
 
@@ -9,11 +9,12 @@
   const effects = [
     'expand-icon',
     'ring-hover',
-    'shine',
     'shine-hover',
-    'gooey-left',
-    'gooey-right',
-    'gradient-slide-show',
+    'gooey-start',
+    'gooey-end',
+    'underline',
+    'hover-underline',
+    'press',
   ] as const
 </script>
 
@@ -101,9 +102,9 @@
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Button effect="expand-icon" icon={demoIcon} iconPlacement="end">Icon right</Button>
           <Button effect="expand-icon" icon={demoIcon}>Icon left</Button>
-          <Button variant="secondary" effect="gooey-left">Secondary gooey left</Button>
-          <Button variant="destructive" effect="gooey-right">Destructive gooey right</Button>
-          <Button variant="destructive" effect="shine">Destructive shine</Button>
+          <Button variant="secondary" effect="gooey-start">Secondary gooey start</Button>
+          <Button variant="destructive" effect="gooey-end">Destructive gooey end</Button>
+          <Button variant="destructive" effect="press">Pressed feedback</Button>
           <Button variant="outline" effect="ring-hover">Outline ring hover</Button>
           <Button variant="link" effect="hover-underline">Link hover underline</Button>
           <Button variant="link" effect="underline">Link underline</Button>

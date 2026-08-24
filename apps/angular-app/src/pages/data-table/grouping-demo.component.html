@@ -9,7 +9,7 @@
         <div class="flex flex-wrap gap-1.5">
           @for (id of groupingColumns; track id) {
             <button
-              fexButton
+              button
               size="sm"
               [variant]="grid.table.getColumn(id)?.getIsGrouped() ? 'default' : 'outline'"
               (click)="grid.table.getColumn(id)?.toggleGrouping()"
@@ -25,7 +25,7 @@
               [style.padding-inline-start.px]="row.depth * 20 + 12"
             >
               <button
-                fexButton
+                button
                 size="icon-xs"
                 variant="ghost"
                 [attr.aria-label]="

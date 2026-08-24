@@ -3,14 +3,14 @@
   description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange."
   ><div class="mb-2 flex flex-wrap gap-1.5">
     <button
-      fexButton
+      button
       size="sm"
       variant="outline"
       (click)="controller.updateNode('engineering', { name: 'Engineering (renamed)' })"
     >
       Rename Engineering</button
-    ><button fexButton size="sm" variant="outline" (click)="addChild()">Add child</button
-    ><button fexButton size="sm" variant="outline" (click)="reveal()">Reveal Design</button>
+    ><button button size="sm" variant="outline" (click)="addChild()">Add child</button
+    ><button button size="sm" variant="outline" (click)="reveal()">Reveal Design</button>
   </div>
   <fex-demo-tree
     [controller]="controller"

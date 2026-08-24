@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/vue/primitive/collapse'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { useTemplateRef } from 'vue'
 import { collapseItems } from './demo-data'

@@ -1,0 +1,9 @@
+<script setup lang="ts">
+import { Button } from '@fex-design/vue/primitive/button'
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center gap-3">
+    <Button type="button">Primitive button</Button>
+  </div>
+</template>

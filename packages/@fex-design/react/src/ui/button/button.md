@@ -1,44 +1,62 @@
-# React Button
+# React UI Button
+
+Recommended Button with variants, sizes, effects, icons and loading state. ButtonGroup is re-exported from this entry.
 
 ## Import
 
-```tsx
-import { Button } from '@fex-design/react/ui/button'
-```
+    import { Button, ButtonGroup } from '@fex-design/react/ui/button'
 
-## Basic
+## Examples
 
-```tsx
-export function Example() {
-  return <Button variant="default">Save</Button>
-}
-```
+Examples are stored in `examples/<name>` as the source for the documentation preview.
 
-## Loading
+| Name              | Covers                                                                        |
+| ----------------- | ----------------------------------------------------------------------------- |
+| basic             | Default and outline buttons.                                                  |
+| variants          | Every visual variant.                                                         |
+| sizes             | Text and icon-only sizes.                                                     |
+| effects           | Every opt-in interaction effect.                                              |
+| icons             | Start, end, and icon-only content.                                            |
+| loading           | Default loading states and placement.                                         |
+| loading-indicator | Custom loading indicator.                                                     |
+| states            | Native form behavior, disabled state, attributes, events, and element access. |
+| group             | Connected, spaced, horizontal, and vertical groups.                           |
+| combinations      | Multi-prop combinations plus LTR and RTL direction.                           |
 
-```tsx
-export function Loading() {
-  return (
-    <>
-      <Button loading>Loading start</Button>
-      <Button loading iconPlacement="end">
-        Loading end
-      </Button>
-    </>
-  )
-}
-```
+## Button API
 
-## Props
+| Name              | Type                                                                                                                          | Default              | Description                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------- |
+| variant           | 'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link' \| 'dashed'                                       | 'default'            | Visual variant.                                   |
+| size              | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'            | Control size.                                     |
+| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined            | Optional interaction effect; disabled by default. |
+| icon              | framework content                                                                                                             | undefined            | Normal-state icon.                                |
+| iconPlacement     | start or end                                                                                                                  | start                | Icon or indicator position.                       |
+| loading           | boolean                                                                                                                       | false                | Loading state; disables interaction.              |
+| loadingIndicator  | framework content                                                                                                             | built-in LoadingIcon | Loading visual override.                          |
+| disabled          | boolean                                                                                                                       | false                | Disabled state.                                   |
+| type              | native button type                                                                                                            | button               | Native button type.                               |
+| native attributes | ComponentProps<'button'>                                                                                                      | —                    | Native attributes and events.                     |
+| element access    | ref                                                                                                                           | —                    | Native HTMLButtonElement.                         |
 
-| Name            | Type                                                                                                                                                      | Default     | Required | Description                                                                                |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------- | ------------------------------------------------------------------------------------------ |
-| `variant`       | `'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link' \| 'dashed'`                                                                 | `'default'` | No       | Visual style.                                                                              |
-| `size`          | `'default' \| 'xs' \| 'sm' \| 'lg' \| 'xl' \| 'icon' \| 'icon-xs' \| 'icon-sm' \| 'icon-lg' \| 'icon-xl'`                                                 | `'default'` | No       | Button size.                                                                               |
-| `effect`        | `'expand-icon' \| 'ring-hover' \| 'shine' \| 'shine-hover' \| 'gooey-left' \| 'gooey-right' \| 'underline' \| 'hover-underline' \| 'gradient-slide-show'` | `undefined` | No       | Optional visual effect. `underline` effects are intended for link or outline combinations. |
-| `icon`          | `ReactNode`                                                                                                                                               | `undefined` | No       | Icon rendered beside the content.                                                          |
-| `iconPlacement` | `'start' \| 'end'`                                                                                                                                        | `'start'`   | No       | Icon or loading icon position.                                                             |
-| `loading`       | `boolean`                                                                                                                                                 | `false`     | No       | Shows the built-in spinner and disables the button.                                        |
-| `disabled`      | `boolean`                                                                                                                                                 | `false`     | No       | Disables user interaction.                                                                 |
+## Variants
 
-Native button attributes are passed through.
+`default`, `outline`, `secondary`, `ghost`, `destructive`, `link`, and `dashed`.
+
+## Effects
+
+`expand-icon`, `ring-hover`, `shine-hover`, `gooey-start`, `gooey-end`, `underline`, `hover-underline`, and `press`.
+
+All effects are opt-in. `press` only provides feedback while pressed. `gooey-start` and `gooey-end` use logical directions and mirror automatically with `dir="ltr"` / `dir="rtl"`. Button has no infinitely looping decorative effect while idle.
+
+## Direction
+
+Set the native `dir="ltr"` or `dir="rtl"` attribute. Icon placement, gooey direction, underline motion, and connected ButtonGroup layout all use logical `start` / `end` directions.
+
+## Content API
+
+children / icon / loadingIndicator props
+
+## ButtonGroup API
+
+ButtonGroup keeps the Primitive API: orientation, spacing, native div attributes, and native element behavior.

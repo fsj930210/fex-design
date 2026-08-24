@@ -2,7 +2,7 @@
   import { stepInputNumber } from '@fex-design/core/input-number/value'
   import MinusIcon from '@fex-design/svelte/icon/minus'
   import PlusIcon from '@fex-design/svelte/icon/plus'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   let value = $state(5)

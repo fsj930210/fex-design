@@ -16,7 +16,7 @@ import {
   datePickerHeaderTitleClassName,
 } from '@fex-design/styles/date-picker'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../icon/chevron'
-import { Button, buttonPrimitiveClassName } from '../button/button'
+import { buttonPrimitiveClassName } from '../button/button'
 import { CalendarRoot } from '../calendar/calendar'
 import { DatePickerState } from './use-date-picker'
 import { RangePickerState } from './use-range-picker'
@@ -53,10 +53,10 @@ export class DatePickerHeaderTitle {
   selector: 'button[fexDatePickerHeaderButton]',
   standalone: true,
   imports: [ChevronLeftIcon, ChevronRightIcon],
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'date-picker-header-button',
+    type: 'button',
     '[attr.data-action]': 'action',
     '[class]': 'className',
     '(click)': 'runAction($event)',
@@ -106,10 +106,10 @@ export class DatePickerHeaderButton {
 @Component({
   selector: 'button[fexDatePickerHeaderLabel]',
   standalone: true,
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'date-picker-header-label',
+    type: 'button',
     '[attr.data-part]': 'part',
     '[attr.data-hovered]': "hovered ? 'true' : null",
     '[class]': 'className',

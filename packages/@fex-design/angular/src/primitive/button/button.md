@@ -1,26 +1,55 @@
 # Angular Primitive Button
 
-`ButtonGroup` is exported from the same entry. It groups related actions, supports horizontal or vertical orientation, and uses `[spacing]="0"` for connected controls without owning a selection value.
+Low-level Button family primitives with native element passthrough.
 
 ## Import
 
-```ts
-import { Button } from '@fex-design/angular/primitive/button'
-```
+    import { Button, ButtonGroup, ButtonIcon } from '@fex-design/angular/primitive/button'
 
-## Basic
+## Components
 
-```ts
-@Component({
-  standalone: true,
-  imports: [Button],
-  template: `<button fexButtonPrimitive>Save</button>`,
-})
-export class Example {}
-```
+| Component   | Element | Purpose                               |
+| ----------- | ------- | ------------------------------------- |
+| Button      | button  | Native button foundation.             |
+| ButtonIcon  | span    | Icon placement and effect container.  |
+| ButtonGroup | div     | Layout and connected-button grouping. |
 
-## Props
+## Examples
 
-| Name                     | Type                           | Default     | Required | Description                                                                                                                                                                  |
-| ------------------------ | ------------------------------ | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| native button attributes | `HTMLButtonElement attributes` | `undefined` | No       | Native button attributes are passed through. The primitive includes the default button foundation classes but does not expose variant, size, loading, icon, or effect props. |
+Examples are stored in `examples/<name>` as the source for the documentation preview.
+
+| Name        | Covers                                                              |
+| ----------- | ------------------------------------------------------------------- |
+| basic       | Native button foundation.                                           |
+| icon        | Start and end ButtonIcon composition.                               |
+| group       | Connected, spaced, horizontal, and vertical ButtonGroup layouts.    |
+| native      | Native form attributes, events, disabled state, and element access. |
+| composition | Button, ButtonIcon, and ButtonGroup used together.                  |
+
+## Button API
+
+| Name              | Type                   | Default | Description                   |
+| ----------------- | ---------------------- | ------- | ----------------------------- |
+| type              | native button type     | button  | Native button type.           |
+| native attributes | native button bindings | —       | Native attributes and events. |
+| element access    | element                | —       | Native HTMLButtonElement.     |
+
+## ButtonIcon API
+
+| Name              | Type                                                                                                                          | Default   | Description                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------- |
+| placement         | start or end                                                                                                                  | start     | Icon position.                                    |
+| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined | Optional interaction effect; disabled by default. |
+| native attributes | native span bindings                                                                                                          | —         | Native span attributes and events.                |
+
+## Direction
+
+`Button`, `ButtonIcon`, and `ButtonGroup` pass through native `dir="ltr"` / `dir="rtl"`. Icon placement, gooey direction, underline motion, and connected group styles use logical `start` / `end` directions.
+
+## ButtonGroup API
+
+| Name              | Type                   | Default    | Description                                             |
+| ----------------- | ---------------------- | ---------- | ------------------------------------------------------- |
+| orientation       | horizontal or vertical | horizontal | Layout direction.                                       |
+| spacing           | number or string       | 0          | Gap; numbers use pixels. Zero enables connected styles. |
+| native attributes | native div bindings    | —          | Native div attributes and events.                       |

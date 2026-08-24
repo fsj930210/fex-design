@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Radio, RadioGroup } from '@fex-design/vue/primitive/radio'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerMask, DrawerContent, DrawerResizeHandle, DrawerHeader, DrawerBody, DrawerClose } from '@fex-design/vue/primitive/drawer'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 const placements = ['top', 'right', 'bottom', 'left'] as const
 const placement = ref<(typeof placements)[number]>('right')
 const size = ref(400)

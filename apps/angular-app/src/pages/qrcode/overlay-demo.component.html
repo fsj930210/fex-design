@@ -7,11 +7,11 @@
       </svg>
       @if (expired()) {
       <fex-qrcode-overlay>
-        <button fexButton size="sm" (click)="expired.set(false)">Refresh</button>
+        <button button size="sm" (click)="expired.set(false)">Refresh</button>
       </fex-qrcode-overlay>
       }
     </fex-qrcode-root>
-    <button fexButton variant="outline" (click)="expired.update((value) => !value)">
+    <button button variant="outline" (click)="expired.update((value) => !value)">
       Toggle overlay
     </button>
   </div>

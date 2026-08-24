@@ -13,7 +13,7 @@ import MentionsItem from '@fex-design/vue/primitive/mentions/item'
 import MentionsList from '@fex-design/vue/primitive/mentions/list'
 import MentionsRoot from '@fex-design/vue/primitive/mentions/root'
 import MentionsTrigger from '@fex-design/vue/primitive/mentions/trigger'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { mentionUsers } from './data'
 

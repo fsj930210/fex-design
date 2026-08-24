@@ -1,6 +1,6 @@
 <script lang="ts">
   import { QrCodeCanvas, QrCodeRoot } from '@fex-design/svelte/primitive/qrcode'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   let container: HTMLDivElement | undefined

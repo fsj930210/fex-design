@@ -12,7 +12,7 @@ import {
   DatePickerRoot,
   DatePickerTrigger,
 } from '@fex-design/vue/primitive/date-picker'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import CustomPanel from './custom-panel.vue'
 

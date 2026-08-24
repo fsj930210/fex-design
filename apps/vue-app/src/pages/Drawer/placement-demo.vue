@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerMask, DrawerContent, DrawerHeader, DrawerBody, DrawerClose } from '@fex-design/vue/primitive/drawer'
 import { RadioGroup, Radio } from '@fex-design/vue/primitive/radio'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 const placement = ref<'top' | 'right' | 'bottom' | 'left'>('right')
 </script>
 <template>

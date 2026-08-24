@@ -7,7 +7,7 @@
   import DrawerMask from '@fex-design/svelte/primitive/drawer-mask'
   import DrawerPortal from '@fex-design/svelte/primitive/drawer-portal'
   import DrawerTrigger from '@fex-design/svelte/primitive/drawer-trigger'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
 </script>
 
 <Drawer>

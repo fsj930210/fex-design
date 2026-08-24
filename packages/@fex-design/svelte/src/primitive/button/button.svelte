@@ -1,28 +1,18 @@
 <script lang="ts">
   import { buttonPrimitiveClassName } from '@fex-design/styles/button'
   import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLButtonAttributes } from 'svelte/elements'
+  import type { ButtonProps } from './button.types'
 
-  interface ButtonProps extends Omit<HTMLButtonAttributes, 'class'> {
-    action?: (element: HTMLButtonElement) => { destroy?: () => void } | void
-    class?: string
-    children?: Snippet
-  }
-
-  let { action, class: className, children, type = 'button', ...rest }: ButtonProps = $props()
+  let {
+    class: className,
+    children,
+    ref = $bindable(null),
+    type = 'button',
+    ...rest
+  }: ButtonProps = $props()
   const classList = $derived(cn(buttonPrimitiveClassName, className))
-
-  function buttonAction(element: HTMLButtonElement) {
-    const cleanup = action?.(element)
-    return {
-      destroy() {
-        cleanup?.destroy?.()
-      },
-    }
-  }
 </script>
 
-<button data-slot="button" {...rest} class={classList} {type} use:buttonAction>
+<button bind:this={ref} data-slot="button" {...rest} class={classList} {type}>
   {@render children?.()}
 </button>

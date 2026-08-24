@@ -15,7 +15,7 @@
   import InfoIcon from '@fex-design/svelte/icon/info'
   import LoadingIcon from '@fex-design/svelte/icon/loading'
   import WarningIcon from '@fex-design/svelte/icon/warning'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   type ToastPlacement = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
 

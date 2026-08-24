@@ -1,8 +1,8 @@
 <fex-card title="Instance methods" description="The exported directive exposes methods for this Collapse instance.">
   <div class="mb-2 flex flex-wrap gap-1.5">
-    <button fexButton variant="outline" size="sm" (click)="collapse.expand('security')">Open security</button>
-    <button fexButton variant="outline" size="sm" (click)="collapse.toggle('billing')">Toggle billing</button>
-    <button fexButton variant="ghost" size="sm" (click)="collapse.clear()">Clear</button>
+    <button button variant="outline" size="sm" (click)="collapse.expand('security')">Open security</button>
+    <button button variant="outline" size="sm" (click)="collapse.toggle('billing')">Toggle billing</button>
+    <button button variant="ghost" size="sm" (click)="collapse.clear()">Clear</button>
   </div>
   <div fexCollapse #collapse="fexCollapse" [defaultExpandedKeys]="['profile']">
     @for (item of items; track item.value) {

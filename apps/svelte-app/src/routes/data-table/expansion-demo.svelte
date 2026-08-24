@@ -3,7 +3,7 @@
   import { createExpandedRowModel, rowExpandingFeature } from '@fex-design/core/data-table/features/row-expanding'
   import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
   import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/svelte/primitive/data-table'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import MinusIcon from '@fex-design/svelte/icon/minus'
   import PlusIcon from '@fex-design/svelte/icon/plus'
   import { createDataTable } from '@fex-design/svelte/stores/create-data-table'

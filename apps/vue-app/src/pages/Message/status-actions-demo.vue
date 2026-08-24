@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Bubble, BubbleContent } from '@fex-design/vue/primitive/bubble'
 import { Message, MessageAction, MessageActions, MessageBody, MessageContent, MessageFooter, MessageStatus } from '@fex-design/vue/primitive/message'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 const liked = ref(false)

@@ -15,7 +15,7 @@ import {
 } from '@fex-design/vue/primitive/field'
 import { Form as FormHost, scrollToField, useForm } from '@fex-design/vue/primitive/form'
 import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { Checkbox } from '@fex-design/vue/ui/checkbox'
 import { provideFormDemoContext } from './form-demo-context'

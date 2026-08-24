@@ -1,24 +1,12 @@
-import {
-  buttonClassName,
-  buttonIconClassName,
-  buttonSpinnerClassName,
-  type ButtonStyleProps,
-} from '@fex-design/styles/button'
+import { buttonClassName, buttonSpinnerClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
-import type { JSX, ParentProps } from 'solid-js'
 import { Show, splitProps } from 'solid-js'
 import { LoadingIcon } from '../../icon/loading'
 import { Button as PrimitiveButton } from '../../primitive/button/button'
+import { ButtonIcon } from '../../primitive/button/button-icon'
+import type { ButtonProps } from './button.types'
 
-export interface ButtonProps
-  extends
-    ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>>,
-    ButtonStyleProps {
-  icon?: JSX.Element | undefined
-  iconPlacement?: 'start' | 'end' | undefined
-  loading?: boolean | undefined
-  disabled?: boolean | undefined
-}
+export type { ButtonProps } from './button.types'
 
 export function Button(props: ButtonProps) {
   const [local, rest] = splitProps(props, [
@@ -27,6 +15,7 @@ export function Button(props: ButtonProps) {
     'size',
     'effect',
     'icon',
+    'loadingIndicator',
     'iconPlacement',
     'loading',
     'disabled',
@@ -39,7 +28,10 @@ export function Button(props: ButtonProps) {
   const iconPlacement = () => local.iconPlacement ?? 'start'
   const isLoading = () => local.loading === true
   const isDisabled = () => local.disabled === true || isLoading()
-  const iconNode = () => (isLoading() ? <LoadingIcon class={buttonSpinnerClassName} /> : local.icon)
+  const iconNode = () =>
+    isLoading()
+      ? (local.loadingIndicator ?? <LoadingIcon class={buttonSpinnerClassName} />)
+      : local.icon
 
   return (
     <PrimitiveButton
@@ -57,24 +49,19 @@ export function Button(props: ButtonProps) {
       disabled={isDisabled()}
     >
       <Show when={iconPlacement() === 'start' && iconNode()}>
-        <span
-          class={buttonIconClassName({ placement: 'start', effect: local.effect })}
-          data-icon="inline-start"
-        >
+        <ButtonIcon placement="start" effect={local.effect}>
           {iconNode()}
-        </span>
+        </ButtonIcon>
       </Show>
       {local.children}
       <Show when={iconPlacement() === 'end' && iconNode()}>
-        <span
-          class={buttonIconClassName({ placement: 'end', effect: local.effect })}
-          data-icon="inline-end"
-        >
+        <ButtonIcon placement="end" effect={local.effect}>
           {iconNode()}
-        </span>
+        </ButtonIcon>
       </Show>
     </PrimitiveButton>
   )
 }
 
-export default Button
+export { ButtonGroup } from '../../primitive/button/button-group'
+export type { ButtonGroupProps } from '../../primitive/button/button.types'

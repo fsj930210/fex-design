@@ -2,7 +2,7 @@
   import { columnOrderingFeature, moveDataTableColumn } from '@fex-design/core/data-table/features/column-ordering'
   import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
   import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/svelte/primitive/data-table'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import { createDataTable } from '@fex-design/svelte/stores/create-data-table'
   import { people5, type Person } from './data'
   import DemoSection from './demo-section.svelte'

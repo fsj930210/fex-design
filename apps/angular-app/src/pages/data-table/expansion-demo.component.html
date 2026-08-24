@@ -9,7 +9,7 @@
         ><ng-template fexDataTableCell let-cell>
           @if (cell.column.id === '__expand__') {
             <button
-              fexButton
+              button
               size="icon-sm"
               variant="outline"
               [attr.aria-expanded]="expanded(cell)"
@@ -34,7 +34,7 @@
         ><ng-template fexDataTableCell let-cell>
           @if (cell.column.id === '__expand__') {
             <button
-              fexButton
+              button
               size="icon-sm"
               variant="outline"
               [attr.aria-expanded]="expanded(cell)"

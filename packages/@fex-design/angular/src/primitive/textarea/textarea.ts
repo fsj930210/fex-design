@@ -25,7 +25,7 @@ import {
 import type { OnChanges, OnDestroy, SimpleChanges } from '@angular/core'
 import { CloseIcon } from '../../icon/close'
 import { createHostClassName } from '../../signals/host-class'
-import { Button, buttonPrimitiveClassName } from '../button/button'
+import { buttonPrimitiveClassName } from '../button/button'
 
 @Component({
   selector: 'fex-textarea-root',
@@ -156,11 +156,11 @@ export class TextareaFooter {
   selector: 'button[fexTextareaClear]',
   standalone: true,
   imports: [CloseIcon],
-  hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'textarea-clear',
+    type: 'button',
     '[hidden]': '!root.canClear',
     '[disabled]': '!root.canClear',
     '(pointerdown)': '$event.preventDefault()',

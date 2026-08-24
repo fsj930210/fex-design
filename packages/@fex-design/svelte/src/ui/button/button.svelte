@@ -1,25 +1,13 @@
 <script lang="ts">
   import {
     buttonClassName,
-    buttonIconClassName,
     buttonSpinnerClassName,
-    type ButtonStyleProps,
   } from '@fex-design/styles/button'
   import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLButtonAttributes } from 'svelte/elements'
   import LoadingIcon from '../../icon/loading.svelte'
   import PrimitiveButton from '../../primitive/button/button.svelte'
-
-  interface ButtonProps extends Omit<HTMLButtonAttributes, 'class' | 'disabled'>, ButtonStyleProps {
-    action?: (element: HTMLButtonElement) => { destroy?: () => void } | void
-    iconPlacement?: 'start' | 'end'
-    loading?: boolean
-    disabled?: boolean | null | undefined
-    class?: string
-    children?: Snippet
-    icon?: Snippet
-  }
+  import ButtonIcon from '../../primitive/button/button-icon.svelte'
+  import type { ButtonProps } from './button.types'
 
   let {
     variant = 'default',
@@ -29,25 +17,17 @@
     loading = false,
     disabled = false,
     type = 'button',
-    action,
+    ref = $bindable(null),
     class: className,
     children,
     icon,
-    onclick,
+    loadingIndicator,
     ...rest
   }: ButtonProps = $props()
 
   const classList = $derived(cn(buttonClassName({ variant, size, effect }), className))
   const isDisabled = $derived(disabled || loading)
 
-  function buttonAction(element: HTMLButtonElement) {
-    const cleanup = action?.(element)
-    return {
-      destroy() {
-        cleanup?.destroy?.()
-      },
-    }
-  }
 </script>
 
 <PrimitiveButton
@@ -60,26 +40,33 @@
   data-loading={loading ? 'true' : undefined}
   disabled={isDisabled}
   type={type}
-  action={buttonAction}
-  {onclick}
+  bind:ref
 >
   {#if iconPlacement === 'start' && (loading || icon)}
-    <span class={buttonIconClassName({ placement: 'start', effect })} data-icon="inline-start">
+    <ButtonIcon placement="start" {effect}>
       {#if loading}
-        <LoadingIcon class={buttonSpinnerClassName} />
+        {#if loadingIndicator}
+          {@render loadingIndicator()}
+        {:else}
+          <LoadingIcon class={buttonSpinnerClassName} />
+        {/if}
       {:else if icon}
         {@render icon()}
       {/if}
-    </span>
+    </ButtonIcon>
   {/if}
   {@render children?.()}
   {#if iconPlacement === 'end' && (loading || icon)}
-    <span class={buttonIconClassName({ placement: 'end', effect })} data-icon="inline-end">
+    <ButtonIcon placement="end" {effect}>
       {#if loading}
-        <LoadingIcon class={buttonSpinnerClassName} />
+        {#if loadingIndicator}
+          {@render loadingIndicator()}
+        {:else}
+          <LoadingIcon class={buttonSpinnerClassName} />
+        {/if}
       {:else if icon}
         {@render icon()}
       {/if}
-    </span>
+    </ButtonIcon>
   {/if}
 </PrimitiveButton>

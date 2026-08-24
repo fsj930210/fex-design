@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Watermark } from '@fex-design/vue/primitive/watermark'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 
 function removeWatermark() {

@@ -1,13 +1,13 @@
-﻿import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Button as PrimitiveButton, ButtonGroup } from '@fex-design/angular/primitive/button'
-import { Button } from '@fex-design/angular/ui/button'
+import { Button, ButtonGroup } from '@fex-design/angular/ui/button'
 import Card from '@fex-design/angular/ui/card'
 import { PlusIcon } from '@fex-design/angular/icon/plus'
+import { ButtonPrimitiveDemo } from './primitive-demo.component'
 
 @Component({
-  selector: 'fexButton-page',
-  imports: [PrimitiveButton, ButtonGroup, Button, Card, RouterLink, PlusIcon],
+  selector: 'button-page',
+  imports: [ButtonGroup, Button, ButtonPrimitiveDemo, Card, RouterLink, PlusIcon],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,10 +26,11 @@ export class ButtonComponent {
   protected effects = [
     'expand-icon',
     'ring-hover',
-    'shine',
     'shine-hover',
-    'gooey-left',
-    'gooey-right',
-    'gradient-slide-show',
+    'gooey-start',
+    'gooey-end',
+    'underline',
+    'hover-underline',
+    'press',
   ] as const
 }

@@ -10,7 +10,7 @@ import {
   InputRoot,
   InputSuffix,
 } from '@fex-design/vue/primitive/input'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 

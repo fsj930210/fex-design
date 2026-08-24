@@ -9,7 +9,7 @@ import {
 } from '@fex-design/vue/primitive/field'
 import { Form as FormHost, useForm, type AnyFieldApi } from '@fex-design/vue/primitive/form'
 import { TextareaInput, TextareaRoot } from '@fex-design/vue/primitive/textarea'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 
 const form = useForm({

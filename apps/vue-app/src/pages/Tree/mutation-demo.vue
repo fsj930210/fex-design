@@ -2,7 +2,7 @@
 import { expansionFeature, focusFeature } from '@fex-design/core'
 import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
 import type { FocusFeatureApi } from '@fex-design/core/tree/features/focus'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import DemoTree from './demo-tree.vue'

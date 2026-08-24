@@ -1,8 +1,8 @@
 <fex-card title="Controlled" description="expandedKeys and change let external state own the panels.">
   <div class="mb-2 flex flex-wrap gap-1.5">
-    <button fexButton variant="outline" size="sm" (click)="expandedKeys.set(['profile'])">Open profile</button>
-    <button fexButton variant="outline" size="sm" (click)="expandedKeys.set(['billing', 'security'])">Open billing and security</button>
-    <button fexButton variant="ghost" size="sm" (click)="expandedKeys.set([])">Clear</button>
+    <button button variant="outline" size="sm" (click)="expandedKeys.set(['profile'])">Open profile</button>
+    <button button variant="outline" size="sm" (click)="expandedKeys.set(['billing', 'security'])">Open billing and security</button>
+    <button button variant="ghost" size="sm" (click)="expandedKeys.set([])">Clear</button>
   </div>
   <div fexCollapse [expandedKeys]="expandedKeys()" (change)="expandedKeys.set($event.keys)">
     @for (item of items; track item.value) {

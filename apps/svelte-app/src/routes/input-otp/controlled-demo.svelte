@@ -3,7 +3,7 @@
   import InputOTPRoot from '@fex-design/svelte/primitive/input-otp'
   import InputOTPGroup from '@fex-design/svelte/primitive/input-otp-group'
   import InputOTPInput from '@fex-design/svelte/primitive/input-otp-input'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   let value=$state<InputOTPValue>(['AB','',''])
 </script>

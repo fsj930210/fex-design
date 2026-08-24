@@ -1,6 +1,6 @@
 <script lang="ts">
   import Watermark from '@fex-design/svelte/primitive/watermark'
-  import Button from '@fex-design/svelte/ui/button'
+  import { Button } from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
 
   function removeWatermark() {

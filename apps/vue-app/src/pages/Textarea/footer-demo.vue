@@ -5,7 +5,7 @@ import {
   TextareaInput,
   TextareaRoot,
 } from '@fex-design/vue/primitive/textarea'
-import Button from '@fex-design/vue/ui/button'
+import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { CheckIcon } from '@fex-design/vue/icon/check'
 import { InfoIcon } from '@fex-design/vue/icon/info'

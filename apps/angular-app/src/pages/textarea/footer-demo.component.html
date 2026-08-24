@@ -4,12 +4,12 @@
     <button fexTextareaClear aria-label="Clear message"></button>
     <div fexTextareaFooter>
       <div class="flex min-w-0 flex-wrap items-center gap-1">
-        <button fexButton aria-label="Attach" size="icon-sm" variant="ghost"><fex-plus-icon /></button>
-        <button fexButton size="sm" variant="ghost"><fex-info-icon />Context</button>
+        <button button aria-label="Attach" size="icon-sm" variant="ghost"><fex-plus-icon /></button>
+        <button button size="sm" variant="ghost"><fex-info-icon />Context</button>
       </div>
       <div class="flex shrink-0 items-center gap-2">
         <span>{{ value.length }} / 2000</span>
-        <button fexButton aria-label="Send" [disabled]="!value.trim()" size="icon-sm">
+        <button button aria-label="Send" [disabled]="!value.trim()" size="icon-sm">
           <fex-check-icon />
         </button>
       </div>

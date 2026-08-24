@@ -1,20 +1,11 @@
-import {
-  buttonClassName,
-  buttonIconClassName,
-  buttonSpinnerClassName,
-  type ButtonStyleProps,
-} from '@fex-design/styles/button'
+import { buttonClassName, buttonSpinnerClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
-import type { ButtonHTMLAttributes, ReactNode, Ref } from 'react'
 import { Button as PrimitiveButton } from '../../primitive/button/button'
+import { ButtonIcon } from '../../primitive/button/button-icon'
 import { LoadingIcon } from '../../icon/loading'
+import type { ButtonProps } from './button.types'
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonStyleProps {
-  ref?: Ref<HTMLButtonElement>
-  icon?: ReactNode
-  iconPlacement?: 'start' | 'end'
-  loading?: boolean
-}
+export type { ButtonProps } from './button.types'
 
 export function Button({
   className,
@@ -22,6 +13,7 @@ export function Button({
   size = 'default',
   effect,
   icon,
+  loadingIndicator,
   iconPlacement = 'start',
   loading = false,
   disabled,
@@ -31,7 +23,9 @@ export function Button({
   ...props
 }: ButtonProps) {
   const isDisabled = disabled || loading
-  const iconNode = loading ? <LoadingIcon className={buttonSpinnerClassName} /> : icon
+  const iconNode = loading
+    ? (loadingIndicator ?? <LoadingIcon className={buttonSpinnerClassName} />)
+    : icon
 
   return (
     <PrimitiveButton
@@ -47,21 +41,19 @@ export function Button({
       disabled={isDisabled}
     >
       {iconPlacement === 'start' && iconNode ? (
-        <span
-          className={buttonIconClassName({ placement: 'start', effect })}
-          data-icon="inline-start"
-        >
+        <ButtonIcon placement="start" effect={effect}>
           {iconNode}
-        </span>
+        </ButtonIcon>
       ) : null}
       {children}
       {iconPlacement === 'end' && iconNode ? (
-        <span className={buttonIconClassName({ placement: 'end', effect })} data-icon="inline-end">
+        <ButtonIcon placement="end" effect={effect}>
           {iconNode}
-        </span>
+        </ButtonIcon>
       ) : null}
     </PrimitiveButton>
   )
 }
 
-export default Button
+export { ButtonGroup } from '../../primitive/button/button-group'
+export type { ButtonGroupProps } from '../../primitive/button/button.types'

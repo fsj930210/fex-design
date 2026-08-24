@@ -43,6 +43,50 @@ Angular content projection/directives/signals/services
 
 框架语法可以不同，能力和结果不能不同。
 
+### 2.1 源码交付组件命名
+
+Fex 通过 CLI 把组件源码复制到用户项目，不在组件定义名和公开导出名中携带品牌前缀或层级装饰：
+
+```text
+正确：Button、ButtonGroup、Dialog、DialogTrigger
+错误：FexButton、ElButton、ButtonPrimitive、PrimitiveButton
+```
+
+Primitive、UI、Pro 的层级由目录、Registry target 和导入路径表达，不写进组件定义名。同一个组件族的 Primitive Button 和 UI Button 都公开为 `Button`；UI 实现组合 Primitive 时，只允许在当前实现文件中使用局部别名：
+
+```ts
+import { Button as PrimitiveButton } from '../../primitive/button/button'
+```
+
+局部别名只用于消除当前文件中的符号冲突，不得成为组件定义名、公开导出名、DevTools 名称或生成源码中的稳定 API。Vue 使用 `defineOptions({ name: 'Button' })` 明确稳定名称；React、Solid 使用 `Button` 函数名；Svelte 使用 `button.svelte` 对应的 `Button` 导出；Angular 使用 `Button` 类名。
+
+所有公开组件入口只提供具名导出，调用方统一使用 `import { Button, ButtonGroup } from '...'`，不提供公开 `default export`。Vue SFC 和 Svelte 组件文件的内部默认模块导出必须由同目录入口映射成具名导出，不能向调用方泄漏默认 API。
+
+### 2.2 框架原生类型表达
+
+公共属性的名称、语义、枚举和默认值必须一致，但不得为了表面一致把 React 类型模型复制到其它框架：
+
+```text
+React   → ComponentProps、ReactNode、ref
+Vue     → Props、emits、template slots、attrs
+Solid   → JSX attributes、ParentProps、accessors
+Svelte  → HTML attributes、Snippet、$props、@render
+Angular → signal inputs/outputs、原生元素、content projection
+```
+
+Core 只定义五框架共享的公共语义类型。`children`、Vue slot、Svelte Snippet、Angular content projection、React ref 等框架表达留在各自框架。无 Slot Props 的 Vue 默认/具名 Slot 直接写 `<slot>`，不为形式统一手写 `ButtonSlots`；只有作用域 Slot 确实需要声明传出参数时才使用 `defineSlots`。Angular 不为 signal inputs 额外制造 React Props 风格的 `ButtonInputs` 汇总接口。
+
+React 是公共语义、行为、视觉和 Demo 场景的参考实现，不是其它框架的类型与代码模板。每次实现或重构非 React 适配前，必须核对该框架官方推荐能力和成熟组件库的当前源码：
+
+```text
+Vue    → Vue 官方文档、Element Plus、Reka UI
+Solid  → Solid 官方文档、Kobalte、Ark UI Solid
+Svelte → Svelte 5 官方文档、Bits UI、Ark UI Svelte
+Angular → Angular 官方文档、Angular Material、CDK
+```
+
+审查重点包括 Props/Inputs、原生属性继承、children/slot/snippet/content projection、ref/element 暴露、事件、样式合并、组件命名和文件组织。参考成熟库是为了遵循框架惯例，不代表复制其品牌前缀、第三方特有 API、历史兼容层或与 Fex 公共 Contract 冲突的设计。
+
 ## 3. 分层
 
 ```text
@@ -76,16 +120,21 @@ Pro → UI → Primitive → Core/Styles/Utils
 
 禁止反向依赖。
 
-## 4. API JSON 是文档数据源
+## 4. API JSON 是自动生成的文档数据
 
-每个组件维护一份框架无关 API JSON：
+每个组件族生成一份框架无关 API JSON，不按 Primitive/UI/Pro 拆成多份，也不由人工直接维护：
 
 ```text
-docs/api/primitive/button.json
-docs/api/primitive/dialog.json
-docs/api/ui/tree-transfer.json
-docs/api/pro/data-grid.json
+packages/@fex-design/core/src/button/button.types.ts
+→ docs/generated/api/button.json
+
+packages/@fex-design/core/src/dialog/dialog.types.ts
+→ docs/generated/api/dialog.json
 ```
+
+Core 中的公共类型是组件 API 的唯一事实源。各框架的 `button.types.ts` 负责把公共类型组合成本框架的 Props、Slots、Events 和原生元素属性；生成工具同时用这些框架类型检查五框架实现是否完整，但不会把五份框架表达复制进 JSON。
+
+API JSON 是构建产物。禁止人工修改生成后的 JSON，也不要求开发者重复录入每个 Prop 的类型、枚举、默认值和编辑器配置。
 
 用途：
 
@@ -97,80 +146,92 @@ docs/api/pro/data-grid.json
 - Registry 和 CLI 查询。
 - 五框架 API 一致性校验。
 
-推荐结构：
+### 4.1 类型定义要求
 
-```json
-{
-  "$schema": "../../schemas/component-api.schema.json",
-  "name": "Dialog",
-  "slug": "dialog",
-  "layer": "primitive",
-  "status": "stable",
-  "description": "",
-  "components": [],
-  "props": [],
-  "events": [],
-  "slots": [],
-  "methods": [],
-  "cssVariables": [],
-  "dataAttributes": [],
-  "accessibility": {
-    "roles": [],
-    "keyboard": []
-  },
-  "demos": [],
-  "frameworkNotes": {}
+公共类型必须提供足够的信息供工具生成 API JSON：
+
+```ts
+export interface ButtonOptions {
+  /**
+   * 按钮视觉类型。
+   * @default 'default'
+   * @example 'outline'
+   */
+  variant?: ButtonVariant
+
+  /**
+   * 是否显示加载状态。加载时按钮不可点击。
+   * @default false
+   * @example true
+   */
+  loading?: boolean
 }
 ```
 
-类型使用结构化数据，不只写 TypeScript 字符串：
-
-```json
-{
-  "name": "size",
-  "type": {
-    "kind": "enum",
-    "values": ["xs", "sm", "default", "lg", "xl"]
-  },
-  "defaultValue": "default",
-  "description": "控件尺寸。",
-  "playground": {
-    "enabled": true,
-    "editor": "select",
-    "initialValue": "lg"
-  }
-}
-```
-
-事件：
-
-```json
-{
-  "name": "change",
-  "description": "值发生变化时触发。",
-  "parameters": [
-    {
-      "name": "value",
-      "type": { "kind": "string" }
-    }
-  ],
-  "playground": {
-    "log": true
-  }
-}
-```
-
-API JSON 是产品/API 设计契约，五框架源码是实现。构建时双向校验：
+生成工具读取类型结构和 JSDoc：
 
 ```text
-JSON 声明但某框架缺失 → 失败
-源码新增公开 API 但 JSON 未记录 → 失败
+类型和联合类型 → type、enum values、required
+正文           → description
+@default       → defaultValue
+@example       → example
+@deprecated    → deprecated
+@since         → since
+@remarks       → 补充说明
+@preview false → 不进入属性编辑器
+```
+
+简单类型的 Playground 编辑器由类型自动推导：
+
+```text
+boolean    → Switch
+enum       → Select
+string     → Input
+number     → InputNumber
+color      → Color Input
+简单数组   → Tags Input
+复杂对象   → JSON Editor
+```
+
+函数、render、slot、children、snippet 和 template 不允许在线输入任意代码，默认不进入属性编辑器，应由真实 Demo 展示。原生 HTML 属性不逐项复制进公共类型和 JSON，只记录对应的原生元素继承关系。
+
+### 4.2 复杂类型必须提供 Example
+
+对象、复杂数组和对象联合类型必须在公共类型上提供 `@example`。Example 必须是合法 JSON，并同时通过 TypeScript 类型和 API Schema 校验：
+
+```ts
+export interface TreeOptions {
+  /**
+   * 字段名称映射。
+   * @example
+   * {
+   *   "label": "title",
+   *   "value": "key",
+   *   "children": "nodes"
+   * }
+   */
+  fieldNames?: FieldNames
+}
+```
+
+生成后的 API JSON 使用结构化类型数据，不只保存 TypeScript 字符串。复杂属性的 Example 作为 JSON Editor 初始内容；非法 Example、缺少 Example 或与类型不匹配都应使生成失败。
+
+### 4.3 生成和校验
+
+API JSON 是公共类型契约的序列化结果，五框架源码是实现。构建时双向校验：
+
+```text
+Core 公共类型但某框架缺失 → 失败
+框架新增公共 API 但 Core 未记录 → 失败
 默认值、枚举或事件参数不同 → 失败
 JSON 指向不存在 Demo → 失败
 Playground editor 与类型不兼容 → 失败
+复杂类型缺少合法 Example → 失败
 ```
 
 ## 5. 组件文档和 Demo
+
+组件源码文档采用双语文件：`<component>.md` 为默认英文，`<component>.zh-CN.md` 为简体中文。语言由文件名区分，文档标题不追加“中文文档”或 “English Documentation”。两份文档共享同一份 Core 类型/JSDoc 和生成后的 API JSON 事实源，公开 API、API 顺序与示例覆盖必须一致；语言文件只改变标题、表头和说明文字，不改变类型、默认值、导入路径和代码标识符。除代码标识符与类型表达外，说明文字必须完整使用当前文件对应语言，不允许中英文说明混写。
 
 每个组件页面重点解决：用户看到属性后可以立即观察效果，不需要复制项目或跳到依赖库文档猜测。
 
@@ -182,6 +243,8 @@ Playground editor 与类型不兼容 → 失败
 + Code
 + Events
 ```
+
+所有组件从首次交付起同时支持 LTR 与 RTL。公共方向值使用逻辑 `start` / `end`，原生元素透传 `dir`，五框架 Demo 必须包含 RTL 预览；布局、图标、动效、键盘导航、弹层定位和连接边框均以逻辑方向实现，不能把物理 `left` / `right` 固化为公共契约。
 
 ### 5.1 添加属性
 
@@ -229,7 +292,7 @@ treeProps
 transferProps
 ```
 
-API JSON 使用 reference 指向 TreeProps/TransferProps，并排除由 TreeTransfer 自己拥有的 data、value、defaultValue、onChange 等状态来源。
+生成工具根据公共类型引用生成 TreeProps/TransferProps reference，并排除由 TreeTransfer 自己拥有的 data、value、defaultValue、onChange 等状态来源。此类复杂对象必须在类型定义中提供合法的 `@example`，不在生成后的 API JSON 中手工补写。
 
 非法 JSON 不发送给 Preview，继续使用最后一次合法值并显示错误位置。
 
@@ -463,14 +526,14 @@ compare_frameworks
 
 1. 审计 Primitive 五框架 API、行为、DOM、视觉和 exports。
 2. 确定 Primitive/UI/Pro 边界。
-3. 先写或更新 API JSON。
-4. 设计共享 Core 和 Styles。
-5. 实现五框架 Adapter/UI/Pro。
-6. 写五框架同场景 Demo。
-7. 接入属性编辑和 Events JSON。
-8. 校验 API JSON 与五框架实现。
+3. 在 Core 中设计或更新公共类型、默认值、JSDoc 和复杂类型 Example。
+4. 设计共享 Core 行为和 Styles CSS 边界。
+5. 实现五框架 `*.types.ts` 和 Adapter/UI/Pro。
+6. 由公共类型自动生成 API JSON。
+7. 写五框架同场景 Demo。
+8. 接入属性编辑和 Events JSON，并校验生成结果与五框架实现。
 9. 运行公共行为、无障碍和关键视觉验证。
-10. 生成文档、Registry 和 AI 数据。
+10. 生成文档、Registry 和 AI 数据，生成后的 API JSON 不人工修改。
 
 完成标准：
 
@@ -480,7 +543,8 @@ Core/Styles 边界明确
 五框架 API 对齐
 五框架行为对齐
 五框架视觉对齐
-API JSON 完整
+公共类型信息完整，复杂类型包含合法 Example
+API JSON 可重复自动生成且无人工修改
 Demo 覆盖公开能力
 Registry 依赖闭包完整
 独立 Demo URL 可运行
@@ -503,4 +567,3 @@ TreeTransfer
 ```
 
 三者跑通后再批量推进 UI/Pro 和文档，避免 API Schema、Preview 协议和 Registry 结构反复返工。
-

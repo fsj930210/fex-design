@@ -17,7 +17,7 @@
       >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-dialog>
-            <button fexButton fexDialogTrigger>Open dialog</button>
+            <button button fexDialogTrigger>Open dialog</button>
             <fex-dialog-portal>
               <fex-dialog-overlay />
               <fex-dialog-content>
@@ -35,8 +35,8 @@
                   dismiss.</fex-dialog-body
                 >
                 <fex-dialog-footer>
-                  <button fexButton fexDialogClose variant="outline">Cancel</button>
-                  <button fexButton fexDialogClose>Confirm</button>
+                  <button button fexDialogClose variant="outline">Cancel</button>
+                  <button button fexDialogClose>Confirm</button>
                 </fex-dialog-footer>
               </fex-dialog-content>
             </fex-dialog-portal>
@@ -50,7 +50,7 @@
       >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-dialog [open]="open" (openChange)="setOpen($event)">
-            <button fexButton fexDialogTrigger variant="outline">
+            <button button fexDialogTrigger variant="outline">
               {{ open ? 'Open' : 'Closed' }}
             </button>
             <fex-dialog-portal>
@@ -68,7 +68,7 @@
                   callback.</fex-dialog-body
                 >
                 <fex-dialog-footer
-                  ><button fexButton fexDialogClose>Done</button></fex-dialog-footer
+                  ><button button fexDialogClose>Done</button></fex-dialog-footer
                 >
               </fex-dialog-content>
             </fex-dialog-portal>
@@ -80,7 +80,7 @@
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (size of sizes; track size) {
             <fex-dialog>
-              <button fexButton fexDialogTrigger variant="outline">{{ size }}</button>
+              <button button fexDialogTrigger variant="outline">{{ size }}</button>
               <fex-dialog-portal>
                 <fex-dialog-overlay />
                 <fex-dialog-content [size]="size">
@@ -95,7 +95,7 @@
                   </fex-dialog-header>
                   <fex-dialog-body>The size prop only changes content width.</fex-dialog-body>
                   <fex-dialog-footer
-                    ><button fexButton fexDialogClose>Close</button></fex-dialog-footer
+                    ><button button fexDialogClose>Close</button></fex-dialog-footer
                   >
                 </fex-dialog-content>
               </fex-dialog-portal>
@@ -107,7 +107,7 @@
       <fex-card title="Dismiss" description="Overlay pointer dismissal can be disabled.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-dialog [closeOnOverlayPointer]="false">
-            <button fexButton fexDialogTrigger variant="outline">No overlay close</button>
+            <button button fexDialogTrigger variant="outline">No overlay close</button>
             <fex-dialog-portal>
               <fex-dialog-overlay />
               <fex-dialog-content>
@@ -122,8 +122,8 @@
                 </fex-dialog-header>
                 <fex-dialog-body>Use the footer actions or Escape to close.</fex-dialog-body>
                 <fex-dialog-footer>
-                  <button fexButton fexDialogClose variant="outline">Cancel</button>
-                  <button fexButton fexDialogClose>Confirm</button>
+                  <button button fexDialogClose variant="outline">Cancel</button>
+                  <button button fexDialogClose>Confirm</button>
                 </fex-dialog-footer>
               </fex-dialog-content>
             </fex-dialog-portal>

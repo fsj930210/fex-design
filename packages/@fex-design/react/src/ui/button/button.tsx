@@ -9,7 +9,8 @@ export type { ButtonProps } from './button.types'
 
 export function Button({
   className,
-  variant = 'default',
+  variant = 'outlined',
+  color,
   size = 'default',
   effect,
   icon,
@@ -32,22 +33,25 @@ export function Button({
       {...props}
       {...(ref ? { ref } : {})}
       type={type}
-      className={cn(buttonClassName({ variant, size, effect }), className)}
+      className={cn(buttonClassName({ variant, color, size, effect }), className)}
+      variant={variant}
+      color={color}
       data-slot="button"
       data-variant={variant}
+      data-color={color}
       data-size={size}
       data-effect={effect}
       data-loading={loading ? 'true' : undefined}
       disabled={isDisabled}
     >
       {iconPlacement === 'start' && iconNode ? (
-        <ButtonIcon placement="start" effect={effect}>
+        <ButtonIcon data-icon="inline-start">
           {iconNode}
         </ButtonIcon>
       ) : null}
       {children}
       {iconPlacement === 'end' && iconNode ? (
-        <ButtonIcon placement="end" effect={effect}>
+        <ButtonIcon data-icon="inline-end">
           {iconNode}
         </ButtonIcon>
       ) : null}

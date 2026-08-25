@@ -66,7 +66,7 @@ export function DataTablePagination<TFeatures extends TableFeatures, TData exten
         </span>
         <Button
           size="sm"
-          variant="outline"
+          variant="outlined"
           disabled={!paginationTable.getCanPreviousPage()}
           onClick={() => paginationTable.previousPage()}
         >
@@ -74,7 +74,7 @@ export function DataTablePagination<TFeatures extends TableFeatures, TData exten
         </Button>
         <Button
           size="sm"
-          variant="outline"
+          variant="outlined"
           disabled={!paginationTable.getCanNextPage()}
           onClick={() => paginationTable.nextPage()}
         >

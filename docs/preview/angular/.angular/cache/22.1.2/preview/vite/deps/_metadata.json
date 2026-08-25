@@ -1,0 +1,60 @@
+{
+  "hash": "4af35bb1",
+  "configHash": "79019ea0",
+  "lockfileHash": "283f5c14",
+  "browserHash": "8f80211c",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../../../../../node_modules/.pnpm/@angular+common@22.1.0_@ang_68d0c38a3c524078e9ef8568963b3f75/node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "19d08ff6",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../../../../node_modules/.pnpm/@angular+core@22.1.0_@angul_9d6166a37b1efb8ce9bd36eadb7f7af2/node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "e5768783",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../../../../node_modules/.pnpm/@angular+platform-browser@2_967013df9f3d865811155186e0451a9e/node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "8e5c96dd",
+      "needsInterop": false
+    },
+    "class-variance-authority": {
+      "src": "../../../../../../../../../node_modules/.pnpm/class-variance-authority@0.7.1/node_modules/class-variance-authority/dist/index.mjs",
+      "file": "class-variance-authority.js",
+      "fileHash": "c7a226f5",
+      "needsInterop": false
+    },
+    "clsx": {
+      "src": "../../../../../../../../../node_modules/.pnpm/clsx@2.1.1/node_modules/clsx/dist/clsx.mjs",
+      "file": "clsx.js",
+      "fileHash": "e2399c92",
+      "needsInterop": false
+    },
+    "tailwind-merge": {
+      "src": "../../../../../../../../../node_modules/.pnpm/tailwind-merge@3.6.0/node_modules/tailwind-merge/dist/bundle-mjs.mjs",
+      "file": "tailwind-merge.js",
+      "fileHash": "e4466382",
+      "needsInterop": false
+    },
+    "zone.js": {
+      "src": "../../../../../../../../../node_modules/.pnpm/zone.js@0.16.2/node_modules/zone.js/fesm2015/zone.js",
+      "file": "zone__js.js",
+      "fileHash": "ec12af40",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "common-DicgIR7D": {
+      "file": "common-DicgIR7D.js",
+      "isDynamicEntry": false
+    },
+    "core-WisFV3PK": {
+      "file": "core-WisFV3PK.js",
+      "isDynamicEntry": false
+    }
+  }
+}

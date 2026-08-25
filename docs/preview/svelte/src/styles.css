@@ -1,0 +1,5 @@
+@import '@fex/styles';
+@source "../../../../packages/@fex-design/svelte/src";
+@source "../../../../packages/@fex-design/styles/src";
+@source "../../../../docs/preview/svelte/src";
+@import '../../solid/src/preview.css';

@@ -1,0 +1,17 @@
+<div class="grid w-full gap-6 sm:grid-cols-2">
+  @for (direction of ['ltr', 'rtl']; track direction) {
+  <section [attr.dir]="direction" class="grid gap-3 rounded-lg border p-4">
+    <strong>{{ direction.toUpperCase() }}</strong>
+    <div class="flex flex-wrap gap-3">
+      <button button>
+        <span buttonIcon><fex-plus-icon /></span>Start icon</button
+      ><button button>
+        End icon<span buttonIcon placement="end"><fex-plus-icon /></span>
+      </button>
+    </div>
+    <div buttonGroup>
+      <button button>First</button><button button>Middle</button><button button>Last</button>
+    </div>
+  </section>
+  }
+</div>

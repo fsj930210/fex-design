@@ -1,0 +1,7 @@
+<div class="flex flex-wrap items-center gap-3">
+  @for (item of effects; track item.effect) {
+  <button button [class]="item.className" [attr.data-effect]="item.effect">
+    <span buttonIcon><fex-plus-icon /></span>{{ item.effect }}
+  </button>
+  }
+</div>

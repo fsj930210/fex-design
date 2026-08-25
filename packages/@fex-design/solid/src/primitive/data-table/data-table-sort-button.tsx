@@ -28,7 +28,7 @@ export function DataTableSortButton<TFeatures extends TableFeatures, TData exten
   return (
     <Button
       {...rest}
-      variant="ghost"
+      variant="text"
       disabled={!column.getCanSort()}
       aria-pressed={Boolean(direction())}
       class={cn(dataTableSortButtonClassName, local.class)}

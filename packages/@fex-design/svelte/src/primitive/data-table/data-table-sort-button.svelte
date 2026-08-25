@@ -18,7 +18,7 @@
 
 <Button
   type="button"
-  variant="ghost"
+  variant="text"
   disabled={!(column as unknown as SortableColumn).getCanSort()}
   aria-pressed={Boolean(direction)}
   class={dataTableSortButtonClassName}

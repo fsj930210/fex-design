@@ -1,0 +1,7 @@
+<div class="runtime" [attr.data-embed]="embedded ? 'true' : null">
+  @if (example) {
+    <ng-container *ngComponentOutlet="example" />
+  } @else {
+    <p>未找到示例</p>
+  }
+</div>

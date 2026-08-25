@@ -2,24 +2,19 @@
 import { buttonIconClassName } from '@fex-design/styles/button'
 import { cn } from '@fex/utils'
 import { useAttrs, useTemplateRef } from 'vue'
-import type { ButtonIconProps } from './button.types'
 
 defineOptions({ name: 'ButtonIcon', inheritAttrs: false })
 
-const props = withDefaults(defineProps<ButtonIconProps>(), {
-  placement: 'start',
-})
 const attrs = useAttrs()
 const iconRef = useTemplateRef<HTMLSpanElement>('icon')
 
 function getIconAttrs() {
+  const placement = attrs.placement === 'end' ? 'end' : 'start'
   return {
     ...attrs,
-    class: cn(
-      buttonIconClassName({ placement: props.placement, effect: props.effect }),
-      attrs.class as string | undefined,
-    ),
-    'data-icon': attrs['data-icon'] ?? `inline-${props.placement}`,
+    placement: undefined,
+    'data-icon': attrs['data-icon'] ?? (placement === 'end' ? 'inline-end' : 'inline-start'),
+    class: cn(buttonIconClassName(), attrs.class as string | undefined),
   }
 }
 

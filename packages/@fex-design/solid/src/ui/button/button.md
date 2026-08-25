@@ -27,7 +27,8 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 | Name              | Type                                                                                                                          | Default              | Description                                       |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------- |
-| variant           | 'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link' \| 'dashed'                                       | 'default'            | Visual variant.                                   |
+| variant           | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                               | 'solid'              | Structural variant.                               |
+| color             | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                    | —                    | Optional semantic color; unset uses the default white button. |
 | size              | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'            | Control size.                                     |
 | effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined            | Optional interaction effect; disabled by default. |
 | icon              | framework content                                                                                                             | undefined            | Normal-state icon.                                |

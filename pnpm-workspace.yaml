@@ -6,6 +6,9 @@ packages:
   - packages/mock
   - configs/*
   - server
+  - docs/site
+  - docs/preview/*
+  - docs/shared
 
 allowBuilds:
   '@parcel/watcher': true

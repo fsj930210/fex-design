@@ -1,10 +1,8 @@
-import type { ButtonGroupOptions, ButtonIconOptions } from '@fex-design/core/button/types'
+import type { ButtonAppearanceOptions, ButtonGroupOptions } from '@fex-design/core/button/types'
 import type { ButtonHTMLAttributes } from 'vue'
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonAppearanceOptions {
   type?: ButtonHTMLAttributes['type']
 }
 
 export interface ButtonGroupProps extends ButtonGroupOptions {}
-
-export interface ButtonIconProps extends ButtonIconOptions {}

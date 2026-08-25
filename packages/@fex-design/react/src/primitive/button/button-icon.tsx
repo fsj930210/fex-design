@@ -4,18 +4,17 @@ import type { ButtonIconProps } from './button.types'
 
 export function ButtonIcon({
   className,
-  effect,
   placement = 'start',
-  ref,
   'data-icon': dataIcon,
+  ref,
   ...props
 }: ButtonIconProps) {
   return (
     <span
       {...props}
       ref={ref}
-      className={cn(buttonIconClassName({ placement, effect }), className)}
-      data-icon={dataIcon ?? `inline-${placement}`}
+      className={cn(buttonIconClassName(), className)}
+      data-icon={dataIcon ?? (placement === 'end' ? 'inline-end' : 'inline-start')}
     />
   )
 }

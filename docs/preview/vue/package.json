@@ -1,0 +1,1 @@
+{"name":"@fex-design/docs-preview-vue","private":true,"type":"module","scripts":{"dev":"vite --host 127.0.0.1 --port 4114 --strictPort","build":"vite build"},"dependencies":{"@fex-design/docs-shared":"workspace:*","@fex-design/vue":"workspace:*","@fex/styles":"workspace:*","@tailwindcss/vite":"catalog:","@vitejs/plugin-vue":"latest","vite":"catalog:","vue":"3.5.40"}}

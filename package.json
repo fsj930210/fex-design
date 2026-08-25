@@ -17,7 +17,10 @@
     "dev:vue": "turbo run dev --filter=@fex-design/vue-app --ui=stream",
     "dev:solid": "turbo run dev --filter=@fex-design/solid-app --ui=stream",
     "dev:svelte": "turbo run dev --filter=@fex-design/svelte-app --ui=stream",
-    "dev:angular": "turbo run dev --filter=@fex-design/angular-app --ui=stream"
+    "dev:angular": "turbo run dev --filter=@fex-design/angular-app --ui=stream",
+    "docs:dev": "turbo run dev --filter=@fex-design/docs-site --filter=@fex-design/docs-preview-* --ui=stream --concurrency=100%",
+    "dev:docs": "pnpm run docs:dev",
+    "dev:docs:solid": "turbo run dev --filter=@fex-design/docs-preview-solid --ui=stream"
   },
   "devDependencies": {
     "@fex/config-oxc": "workspace:*",

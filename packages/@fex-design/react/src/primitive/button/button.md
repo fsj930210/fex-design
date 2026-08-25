@@ -11,7 +11,7 @@ Low-level Button family primitives with native element passthrough.
 | Component   | Element | Purpose                               |
 | ----------- | ------- | ------------------------------------- |
 | Button      | button  | Native button foundation.             |
-| ButtonIcon  | span    | Icon placement and effect container.  |
+| ButtonIcon  | span    | Icon container.                       |
 | ButtonGroup | div     | Layout and connected-button grouping. |
 
 ## Examples
@@ -36,15 +36,13 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 ## ButtonIcon API
 
-| Name              | Type                                                                                                                          | Default   | Description                                       |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------- |
-| placement         | start or end                                                                                                                  | start     | Icon position.                                    |
-| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined | Optional interaction effect; disabled by default. |
-| native attributes | ComponentProps<'span'>                                                                                                        | —         | Native span attributes and events.                |
+| Name              | Type                   | Default | Description                        |
+| ----------------- | ---------------------- | ------- | ---------------------------------- |
+| native attributes | ComponentProps<'span'> | —       | Native span attributes and events. |
 
 ## Direction
 
-`Button`, `ButtonIcon`, and `ButtonGroup` pass through native `dir="ltr"` / `dir="rtl"`. Icon placement, gooey direction, underline motion, and connected group styles use logical `start` / `end` directions.
+`Button`, `ButtonIcon`, and `ButtonGroup` pass through native `dir="ltr"` / `dir="rtl"`. Button effects and connected group styles use logical `start` / `end` directions.
 
 ## ButtonGroup API
 

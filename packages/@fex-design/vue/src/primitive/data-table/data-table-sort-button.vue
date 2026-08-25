@@ -31,7 +31,7 @@ const sortIndex = computed(() => {
 <template>
   <Button
     type="button"
-    variant="ghost"
+    variant="text"
     :disabled="!column.getCanSort()"
     :aria-pressed="Boolean(direction)"
     :class="cn(dataTableSortButtonClassName, props.class)"

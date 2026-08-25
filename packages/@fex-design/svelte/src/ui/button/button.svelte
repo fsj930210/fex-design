@@ -10,7 +10,8 @@
   import type { ButtonProps } from './button.types'
 
   let {
-    variant = 'default',
+    variant = 'outlined',
+    color,
     size = 'default',
     effect,
     iconPlacement = 'start',
@@ -25,7 +26,7 @@
     ...rest
   }: ButtonProps = $props()
 
-  const classList = $derived(cn(buttonClassName({ variant, size, effect }), className))
+  const classList = $derived(cn(buttonClassName({ variant, color, size, effect }), className))
   const isDisabled = $derived(disabled || loading)
 
 </script>
@@ -35,6 +36,9 @@
   class={classList}
   data-slot="button"
   data-variant={variant}
+  data-color={color}
+  {variant}
+  {color}
   data-size={size}
   data-effect={effect}
   data-loading={loading ? 'true' : undefined}
@@ -43,7 +47,7 @@
   bind:ref
 >
   {#if iconPlacement === 'start' && (loading || icon)}
-    <ButtonIcon placement="start" {effect}>
+    <ButtonIcon data-icon="inline-start">
       {#if loading}
         {#if loadingIndicator}
           {@render loadingIndicator()}
@@ -57,7 +61,7 @@
   {/if}
   {@render children?.()}
   {#if iconPlacement === 'end' && (loading || icon)}
-    <ButtonIcon placement="end" {effect}>
+    <ButtonIcon data-icon="inline-end">
       {#if loading}
         {#if loadingIndicator}
           {@render loadingIndicator()}

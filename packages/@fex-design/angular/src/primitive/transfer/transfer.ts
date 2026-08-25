@@ -100,7 +100,7 @@ export class TransferItemTemplate<TItem extends TransferDataItem = TransferDataI
 @Directive({ selector: 'button[fexTransferActionButton]', standalone: true })
 class TransferActionButton {
   @HostBinding('class') readonly className =
-    `${buttonClassName({ variant: 'outline', size: 'icon' })} !border-border`
+    `${buttonClassName({ variant: 'outlined', size: 'icon' })} !border-border`
 }
 
 @Component({

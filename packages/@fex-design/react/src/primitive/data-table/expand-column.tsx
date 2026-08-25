@@ -33,7 +33,7 @@ export function createDataTableExpandColumn<TFeatures extends TableFeatures, TDa
           aria-label={`${ariaLabel} ${row.id}`}
           aria-expanded={row.getIsExpanded()}
           size="icon-sm"
-          variant="outline"
+          variant="outlined"
           onClick={row.getToggleExpandedHandler()}
         >
           {row.getIsExpanded() ? <MinusIcon className="size-4" /> : <PlusIcon className="size-4" />}

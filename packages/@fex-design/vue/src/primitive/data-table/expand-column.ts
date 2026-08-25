@@ -28,7 +28,7 @@ export function createDataTableExpandColumn<TFeatures extends TableFeatures, TDa
             'aria-label': `${ariaLabel} ${row.id}`,
             'aria-expanded': row.getIsExpanded(),
             size: 'icon-sm',
-            variant: 'outline',
+            variant: 'outlined',
             onClick: row.getToggleExpandedHandler(),
           },
           () => h(row.getIsExpanded() ? MinusIcon : PlusIcon, { class: 'size-4' }),

@@ -26,7 +26,7 @@ function ActionButton({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className={buttonClassName({ variant: 'outline', size: 'icon' })}
+      className={buttonClassName({ variant: 'outlined', size: 'icon' })}
     >
       {children}
     </Button>

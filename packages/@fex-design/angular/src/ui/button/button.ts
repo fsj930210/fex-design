@@ -1,5 +1,6 @@
 import type {
   ButtonEffect,
+  ButtonColor,
   ButtonIconPlacement,
   ButtonSize,
   ButtonVariant,
@@ -11,7 +12,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  contentChild,
   ElementRef,
   inject,
   input,
@@ -30,6 +30,7 @@ import { createHostClassName } from '../../signals/host-class'
     '[class]': 'hostClassName()',
     'data-slot': 'button',
     '[attr.data-variant]': 'variant()',
+    '[attr.data-color]': 'color()',
     '[attr.data-size]': 'size()',
     '[attr.data-effect]': 'effect()',
     '[attr.data-loading]': "loading() ? 'true' : null",
@@ -40,7 +41,8 @@ import { createHostClassName } from '../../signals/host-class'
 export class Button {
   readonly element = inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement
 
-  variant = input<ButtonVariant>('default')
+  variant = input<ButtonVariant>('outlined')
+  color = input<ButtonColor>()
   size = input<ButtonSize>('default')
   effect = input<ButtonEffect>()
 
@@ -49,24 +51,14 @@ export class Button {
   disabled = input(false, { transform: booleanAttribute })
 
   protected readonly spinnerClassName = buttonSpinnerClassName
-  private readonly startIcon = contentChild('[slot=start]', { read: ElementRef })
-  private readonly endIcon = contentChild('[slot=end]', { read: ElementRef })
-  readonly loadingIndicator = contentChild('[slot=loading-indicator]', {
-    read: ElementRef,
-  })
-
   protected readonly disabledState = computed(() => this.disabled() || this.loading())
-  readonly showIcon = computed(
-    () =>
-      this.loading() ||
-      Boolean(this.iconPlacement() === 'start' ? this.startIcon() : this.endIcon()),
-  )
 
   protected readonly hostClassName = createHostClassName(() =>
     cn(
       buttonPrimitiveClassName(),
       buttonClassName({
         variant: this.variant(),
+        color: this.color(),
         size: this.size(),
         effect: this.effect(),
       }),

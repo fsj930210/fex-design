@@ -27,7 +27,8 @@
 
 | 名称             | 类型                                                                                                                          | 默认值        | 说明                               |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------------- |
-| variant          | 'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link' \| 'dashed'                                       | 'default'     | 视觉类型。                         |
+| variant          | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                               | 'outlined'    | 按钮结构变体。                     |
+| color            | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                    | —             | 可选语义配色；未设置时为默认白底按钮。 |
 | size             | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'     | 控件尺寸。                         |
 | effect           | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined     | 可选交互动效；默认不启用。         |
 | icon             | 框架内容类型                                                                                                                  | `undefined`   | 普通状态图标。                     |
@@ -41,7 +42,7 @@
 
 ## 视觉类型
 
-`default`、`outline`、`secondary`、`ghost`、`destructive`、`link`、`dashed`。
+`variant` 控制结构：`solid`、`outlined`、`dashed`、`filled`、`text`、`link`。`color` 可选 `primary`、`danger`、`warning`、`success`、`info`；未设置时使用默认白底配色。两者可以自由组合。
 
 ## 交互动效
 

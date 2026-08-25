@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { buttonPrimitiveClassName } from '@fex-design/styles/button'
+  import { buttonClassName } from '@fex-design/styles/button'
   import { cn } from '@fex/utils'
   import type { ButtonProps } from './button.types'
 
@@ -8,11 +8,13 @@
     children,
     ref = $bindable(null),
     type = 'button',
+    variant = 'outlined',
+    color,
     ...rest
   }: ButtonProps = $props()
-  const classList = $derived(cn(buttonPrimitiveClassName, className))
+  const classList = $derived(cn(buttonClassName({ variant, color }), className))
 </script>
 
-<button bind:this={ref} data-slot="button" {...rest} class={classList} {type}>
+<button bind:this={ref} data-slot="button" data-variant={variant} data-color={color} {...rest} class={classList} {type}>
   {@render children?.()}
 </button>

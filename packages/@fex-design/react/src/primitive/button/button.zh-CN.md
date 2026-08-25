@@ -11,7 +11,7 @@
 | 组件        | 元素   | 说明                 |
 | ----------- | ------ | -------------------- |
 | Button      | button | 原生按钮基础。       |
-| ButtonIcon  | span   | 图标位置与动效容器。 |
+| ButtonIcon  | span   | 图标容器。           |
 | ButtonGroup | div    | 布局与连接按钮分组。 |
 
 ## 示例
@@ -30,21 +30,21 @@
 
 | 名称     | 类型                            | 默认值   | 说明                           |
 | -------- | ------------------------------- | -------- | ------------------------------ |
+| variant  | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link' | 'outlined' | 按钮结构变体。 |
+| color    | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info' | — | 可选语义配色；未设置时为默认白底按钮。 |
 | type     | 'button' \| 'submit' \| 'reset' | 'button' | 原生按钮类型。                 |
 | 原生属性 | `ComponentProps<'button'>`      | —        | 透传原生属性与事件。           |
 | 元素访问 | ref                             | —        | 获取原生 `HTMLButtonElement`。 |
 
 ## ButtonIcon API
 
-| 名称      | 类型                                                                                                                          | 默认值    | 说明                       |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------- |
-| placement | 'start' \| 'end'                                                                                                              | 'start'   | 图标位置。                 |
-| effect    | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined | 可选交互动效；默认不启用。 |
-| 原生属性  | `ComponentProps<'span'>`                                                                                                      | —         | 透传原生 span 属性与事件。 |
+| 名称     | 类型                     | 默认值 | 说明                       |
+| -------- | ------------------------ | ------ | -------------------------- |
+| 原生属性 | `ComponentProps<'span'>` | —      | 透传原生 span 属性与事件。 |
 
 ## 书写方向
 
-`Button`、`ButtonIcon` 和 `ButtonGroup` 透传原生 `dir="ltr"` / `dir="rtl"`。图标位置、gooey 方向、下划线动画及分组连接样式均使用逻辑 `start` / `end`。
+`Button`、`ButtonIcon` 和 `ButtonGroup` 透传原生 `dir="ltr"` / `dir="rtl"`。Button 动效和分组连接样式使用逻辑 `start` / `end`。
 
 ## ButtonGroup API
 

@@ -62,7 +62,7 @@
       </select>
     </label>
     <span>Page {pagination.pageIndex + 1} / {pageCount}</span>
-    <Button size="sm" variant="outline" disabled={!canPrevious} onclick={() => paginationTable.previousPage()}>Previous</Button>
-    <Button size="sm" variant="outline" disabled={!canNext} onclick={() => paginationTable.nextPage()}>Next</Button>
+    <Button size="sm" variant="outlined" disabled={!canPrevious} onclick={() => paginationTable.previousPage()}>Previous</Button>
+    <Button size="sm" variant="outlined" disabled={!canNext} onclick={() => paginationTable.nextPage()}>Next</Button>
   </div>
 </div>

@@ -1,12 +1,15 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 
 export const buttonPrimitiveClassName = [
   'group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap',
-  'h-(--button-height) rounded-md border border-transparent bg-clip-padding text-sm font-medium',
-  'cursor-pointer select-none outline-none transition-all',
-  'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50',
+  '[--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))] [--button-content-gap:0.25rem]',
+  'h-(--button-height) gap-(--button-content-gap) rounded-md border border-border bg-background bg-clip-padding px-2.5 text-sm font-medium text-foreground',
+  'hover:bg-muted-background',
+  'cursor-pointer select-none outline-none transition-all active:brightness-90',
+  'focus-visible:border-[var(--button-color-border)] focus-visible:ring-3 focus-visible:ring-[color-mix(in_srgb,var(--button-color)_35%,transparent)]',
   'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   'data-[loading=true]:pointer-events-none data-[loading=true]:cursor-wait data-[loading=true]:opacity-75',
+  'aria-pressed:bg-primary/80 aria-pressed:text-primary-foreground aria-pressed:ring-2 aria-pressed:ring-primary/30',
   'aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20',
   '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-(--button-icon-size)',
 ].join(' ')
@@ -14,17 +17,29 @@ export const buttonPrimitiveClassName = [
 export const buttonClassName = cva(buttonPrimitiveClassName, {
   variants: {
     variant: {
-      default: 'bg-primary text-primary-foreground hover:bg-primary/80',
-      outline:
-        'border-border bg-background text-foreground hover:bg-muted-background hover:text-foreground aria-expanded:bg-muted-background aria-expanded:text-foreground',
-      secondary:
-        'bg-secondary-background text-foreground hover:bg-hover-background aria-expanded:bg-secondary-background aria-expanded:text-foreground',
-      ghost:
-        'text-foreground hover:bg-muted-background hover:text-foreground aria-expanded:bg-muted-background aria-expanded:text-foreground',
-      destructive:
-        'bg-danger/10 text-danger hover:bg-danger/20 focus-visible:border-danger/40 focus-visible:ring-danger/20',
-      link: 'h-auto border-transparent bg-transparent px-0 text-link underline-offset-4 [--button-underline-inset:0px] hover:text-link-hover hover:underline',
-      dashed: 'border-dashed border-border bg-background text-foreground hover:bg-muted-background',
+      solid:
+        'border-transparent bg-[var(--button-color)] text-[var(--button-color-foreground)] hover:bg-[var(--button-color-hover)]',
+      outlined:
+        'border-[var(--button-color-border)] bg-background text-[var(--button-color)] hover:bg-[var(--button-color-soft)]',
+      dashed:
+        'border-dashed border-[var(--button-color-border)] bg-background text-[var(--button-color)] hover:bg-[var(--button-color-soft)]',
+      filled:
+        'border-transparent bg-[var(--button-color-soft)] text-[var(--button-color)] hover:bg-[var(--button-color-soft-hover)]',
+      text: 'border-transparent bg-transparent text-[var(--button-color)] hover:bg-[var(--button-color-soft)]',
+      link: 'h-auto border-transparent bg-transparent px-0 text-[var(--button-color)] underline-offset-4 [--button-underline-inset:0px] hover:bg-transparent hover:underline',
+    },
+    color: {
+      default:
+        '[--button-color:var(--foreground)] [--button-color-foreground:var(--background)] [--button-color-hover:color-mix(in_srgb,var(--foreground)_85%,var(--background))] [--button-color-soft:var(--muted-background)] [--button-color-soft-hover:var(--hover-background)] [--button-color-border:var(--border)]',
+      primary:
+        '[--button-color:var(--primary)] [--button-color-foreground:var(--primary-foreground)] [--button-color-hover:color-mix(in_srgb,var(--primary)_85%,var(--background))] [--button-color-soft:var(--selected-background)] [--button-color-soft-hover:color-mix(in_srgb,var(--primary)_16%,var(--background))] [--button-color-border:var(--selected-border)]',
+      danger:
+        '[--button-color:var(--danger)] [--button-color-foreground:var(--danger-foreground)] [--button-color-hover:color-mix(in_srgb,var(--danger)_85%,var(--background))] [--button-color-soft:var(--danger-background)] [--button-color-soft-hover:color-mix(in_srgb,var(--danger)_18%,var(--background))] [--button-color-border:var(--danger-border)]',
+      warning:
+        '[--button-color:var(--warning)] [--button-color-foreground:var(--warning-foreground)] [--button-color-hover:color-mix(in_srgb,var(--warning)_85%,var(--background))] [--button-color-soft:var(--warning-background)] [--button-color-soft-hover:color-mix(in_srgb,var(--warning)_20%,var(--background))] [--button-color-border:var(--warning-border)]',
+      success:
+        '[--button-color:var(--success)] [--button-color-foreground:var(--success-foreground)] [--button-color-hover:color-mix(in_srgb,var(--success)_85%,var(--background))] [--button-color-soft:var(--success-background)] [--button-color-soft-hover:color-mix(in_srgb,var(--success)_18%,var(--background))] [--button-color-border:var(--success-border)]',
+      info: '[--button-color:var(--info)] [--button-color-foreground:var(--info-foreground)] [--button-color-hover:color-mix(in_srgb,var(--info)_85%,var(--background))] [--button-color-soft:var(--info-background)] [--button-color-soft-hover:color-mix(in_srgb,var(--info)_18%,var(--background))] [--button-color-border:var(--info-border)]',
     },
     effect: {
       'expand-icon': 'group gap-0 relative',
@@ -45,11 +60,11 @@ export const buttonClassName = cva(buttonPrimitiveClassName, {
     },
     size: {
       default:
-        '[--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))] gap-1.5 px-2.5 [--button-underline-inset:10px] has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2',
-      xs: '[--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))] gap-1 px-2 text-xs [--button-underline-inset:8px] has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5',
-      sm: '[--button-height:var(--button-height-sm,var(--height-sm))] [--button-icon-size:var(--button-icon-size-sm,var(--icon-size-sm))] gap-1 px-2.5 text-[0.8rem] [--button-underline-inset:8px] has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5',
-      lg: '[--button-height:var(--button-height-lg,var(--height-lg))] [--button-icon-size:var(--button-icon-size-lg,var(--icon-size-lg))] gap-1.5 px-3 [--button-underline-inset:10px] has-data-[icon=inline-end]:pe-2.5 has-data-[icon=inline-start]:ps-2.5',
-      xl: '[--button-height:var(--button-height-xl,var(--height-xl))] [--button-icon-size:var(--button-icon-size-xl,var(--icon-size-xl))] gap-2 px-4 text-base [--button-underline-inset:12px] has-data-[icon=inline-end]:pe-3 has-data-[icon=inline-start]:ps-3',
+        '[--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))] px-2.5 [--button-underline-inset:10px]',
+      xs: '[--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))] px-2 text-xs [--button-underline-inset:8px]',
+      sm: '[--button-height:var(--button-height-sm,var(--height-sm))] [--button-icon-size:var(--button-icon-size-sm,var(--icon-size-sm))] px-2.5 text-[0.8rem] [--button-underline-inset:8px]',
+      lg: '[--button-height:var(--button-height-lg,var(--height-lg))] [--button-icon-size:var(--button-icon-size-lg,var(--icon-size-lg))] px-3 [--button-underline-inset:10px]',
+      xl: '[--button-height:var(--button-height-xl,var(--height-xl))] [--button-icon-size:var(--button-icon-size-xl,var(--icon-size-xl))] px-4 text-base [--button-underline-inset:12px]',
       icon: 'w-(--button-height) px-0 [--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))]',
       'icon-xs':
         'w-(--button-height) px-0 text-xs [--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))]',
@@ -62,31 +77,23 @@ export const buttonClassName = cva(buttonPrimitiveClassName, {
     },
   },
   defaultVariants: {
-    variant: 'default',
+    variant: 'outlined',
+    color: 'default',
     size: 'default',
   },
 })
 
-const buttonIconBaseClassName = 'inline-flex shrink-0 items-center justify-center'
+const buttonIconBaseClassName = 'inline-flex shrink-0 items-center justify-center empty:hidden'
 
-const buttonExpandIconClassName = {
-  start:
-    'w-0 translate-x-0 pe-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-[100%] group-hover:pe-2 group-hover:opacity-100 group-focus-visible/button:w-5 group-focus-visible/button:translate-x-[100%] group-focus-visible/button:pe-2 group-focus-visible/button:opacity-100 rtl:group-hover:-translate-x-[100%] rtl:group-focus-visible/button:-translate-x-[100%] motion-reduce:transition-none',
-  end: 'w-0 translate-x-[100%] ps-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:ps-2 group-hover:opacity-100 group-focus-visible/button:w-5 group-focus-visible/button:translate-x-0 group-focus-visible/button:ps-2 group-focus-visible/button:opacity-100 rtl:-translate-x-[100%] rtl:group-hover:translate-x-0 rtl:group-focus-visible/button:translate-x-0 motion-reduce:transition-none',
-} satisfies Record<'start' | 'end', string>
+const buttonExpandIconClassName = [
+  'group-data-[effect=expand-icon]/button:w-0 group-data-[effect=expand-icon]/button:overflow-hidden group-data-[effect=expand-icon]/button:opacity-0 group-data-[effect=expand-icon]/button:transition-all group-data-[effect=expand-icon]/button:duration-200',
+  'group-data-[effect=expand-icon]/button:group-hover/button:w-[calc(var(--button-icon-size)+var(--button-content-gap))] group-data-[effect=expand-icon]/button:group-hover/button:opacity-100',
+  'group-data-[effect=expand-icon]/button:group-focus-visible/button:w-[calc(var(--button-icon-size)+var(--button-content-gap))] group-data-[effect=expand-icon]/button:group-focus-visible/button:opacity-100',
+  'group-data-[effect=expand-icon]/button:motion-reduce:transition-none',
+].join(' ')
 
-export function buttonIconClassName({
-  placement,
-  effect,
-}: {
-  placement: 'start' | 'end'
-  effect?: VariantProps<typeof buttonClassName>['effect']
-}) {
-  return [
-    buttonIconBaseClassName,
-    placement === 'end' ? 'order-last' : '',
-    effect === 'expand-icon' ? buttonExpandIconClassName[placement] : '',
-  ].join(' ')
+export function buttonIconClassName() {
+  return [buttonIconBaseClassName, buttonExpandIconClassName].join(' ')
 }
 
 export const buttonSpinnerClassName = 'size-[1em] animate-spin'

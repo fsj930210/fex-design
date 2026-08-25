@@ -1,10 +1,11 @@
 <div class="flex flex-wrap items-center gap-3">
   <div buttonGroup>
-    <button button>One</button>
-    <button button>Two</button>
+    <button button [class]="defaultClassName">Left</button>
+    <button button [class]="defaultClassName">Center</button>
+    <button button [class]="defaultClassName">Right</button>
   </div>
   <div buttonGroup orientation="vertical" [spacing]="8">
-    <button button>Top</button>
-    <button button>Bottom</button>
+    <button button [class]="defaultClassName">Top</button>
+    <button button [class]="defaultClassName">Bottom</button>
   </div>
 </div>

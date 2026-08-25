@@ -5,12 +5,12 @@ export function CombinationsExample() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <div dir="ltr">
-        <Button variant="destructive" size="lg" effect="press" icon={<PlusIcon />}>
+        <Button variant="solid" color="danger" size="lg" effect="press" icon={<PlusIcon />}>
           Delete
         </Button>
       </div>
       <div dir="rtl">
-        <Button variant="outline" effect="expand-icon" icon={<PlusIcon />} iconPlacement="end">
+        <Button variant="outlined" effect="expand-icon" icon={<PlusIcon />} iconPlacement="end">
           متابعة
         </Button>
       </div>

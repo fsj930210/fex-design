@@ -1,12 +1,19 @@
 /** Button 的视觉类型。 */
 export type ButtonVariant =
-  | 'default'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'destructive'
+  | 'solid'
+  | 'outlined'
+  | 'filled'
+  | 'text'
   | 'link'
   | 'dashed'
+
+/** Button 的内置语义色。 */
+export type ButtonColor =
+  | 'primary'
+  | 'danger'
+  | 'warning'
+  | 'success'
+  | 'info'
 
 /** Button 的控件尺寸。 */
 export type ButtonSize =
@@ -36,13 +43,22 @@ export type ButtonIconPlacement = 'start' | 'end'
 export type ButtonGroupOrientation = 'horizontal' | 'vertical'
 
 /** 五框架 UI Button 共享的公共属性。 */
-export interface ButtonOptions {
+export interface ButtonAppearanceOptions {
   /**
    * 按钮视觉类型。
-   * @default 'default'
-   * @example 'outline'
+   * @default 'outlined'
+   * @example 'outlined'
    */
   variant?: ButtonVariant
+  /**
+   * 按钮语义色，控制背景、文字、边框与交互反馈。
+   * @example 'danger'
+   */
+  color?: ButtonColor
+}
+
+/** 五框架 UI Button 共享的公共属性。 */
+export interface ButtonOptions extends ButtonAppearanceOptions {
   /**
    * 按钮尺寸。
    * @default 'default'
@@ -72,21 +88,6 @@ export interface ButtonOptions {
    * @example true
    */
   disabled?: boolean
-}
-
-/** ButtonIcon 原子部件的共享属性。 */
-export interface ButtonIconOptions {
-  /**
-   * 图标相对按钮文本的位置。
-   * @default 'start'
-   * @example 'end'
-   */
-  placement?: ButtonIconPlacement
-  /**
-   * 与 Button 一致的可选视觉效果。
-   * @example 'expand-icon'
-   */
-  effect?: ButtonEffect
 }
 
 /** 五框架 Primitive ButtonGroup 共享的公共属性。 */

@@ -258,7 +258,7 @@ export function Transfer<TItem extends TransferDataItem>(props: TransferProps<TI
             <>
               <Button
                 type="button"
-                class={buttonClassName({ variant: 'outline', size: 'icon' })}
+                class={buttonClassName({ variant: 'outlined', size: 'icon' })}
                 disabled={!can('target')}
                 aria-label="Move selected to target"
                 onClick={controller.moveToTarget}
@@ -267,7 +267,7 @@ export function Transfer<TItem extends TransferDataItem>(props: TransferProps<TI
               </Button>
               <Button
                 type="button"
-                class={buttonClassName({ variant: 'outline', size: 'icon' })}
+                class={buttonClassName({ variant: 'outlined', size: 'icon' })}
                 disabled={!can('source')}
                 aria-label="Move selected to source"
                 onClick={controller.moveToSource}
@@ -276,7 +276,7 @@ export function Transfer<TItem extends TransferDataItem>(props: TransferProps<TI
               </Button>
               <Button
                 type="button"
-                class={buttonClassName({ variant: 'outline', size: 'icon' })}
+                class={buttonClassName({ variant: 'outlined', size: 'icon' })}
                 disabled={!can('allTarget')}
                 aria-label="Move all to target"
                 onClick={controller.moveAllToTarget}
@@ -285,7 +285,7 @@ export function Transfer<TItem extends TransferDataItem>(props: TransferProps<TI
               </Button>
               <Button
                 type="button"
-                class={buttonClassName({ variant: 'outline', size: 'icon' })}
+                class={buttonClassName({ variant: 'outlined', size: 'icon' })}
                 disabled={!can('allSource')}
                 aria-label="Move all to source"
                 onClick={controller.moveAllToSource}

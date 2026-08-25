@@ -1,0 +1,5 @@
+{
+  "extends": "@fex/config-tsconfig/solid-app.json",
+  "compilerOptions": { "types": ["vite/client"], "resolveJsonModule": true },
+  "include": ["src", "vite.config.ts", "../api/**/*.json"]
+}

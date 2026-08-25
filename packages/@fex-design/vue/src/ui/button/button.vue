@@ -7,10 +7,11 @@ import PrimitiveButton from '../../primitive/button/button.vue'
 import ButtonIcon from '../../primitive/button/button-icon.vue'
 import type { ButtonProps } from './button.types'
 
+// oxlint-disable-next-line vue/no-reserved-component-names
 defineOptions({ name: 'Button', inheritAttrs: false })
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: 'default',
+  variant: 'outlined',
   size: 'default',
   iconPlacement: 'start',
   loading: false,
@@ -29,6 +30,7 @@ function getButtonAttrs() {
     class: cn(
       buttonClassName({
         variant: props.variant,
+        color: props.color,
         size: props.size,
         effect: props.effect,
       }),
@@ -48,6 +50,9 @@ defineExpose({
     ref="button"
     data-slot="button"
     :data-variant="variant"
+    :data-color="color"
+    :variant="variant"
+    :color="color"
     :data-size="size"
     :data-effect="effect"
     :data-loading="loading ? 'true' : undefined"
@@ -56,19 +61,14 @@ defineExpose({
   >
     <ButtonIcon
       v-if="iconPlacement === 'start' && (loading || $slots.icon)"
-      placement="start"
-      :effect="effect"
+      data-icon="inline-start"
     >
       <slot v-if="loading && $slots.loadingIndicator" name="loadingIndicator" />
       <LoadingIcon v-else-if="loading" :class="buttonSpinnerClassName" />
       <slot v-else name="icon" />
     </ButtonIcon>
     <slot />
-    <ButtonIcon
-      v-if="iconPlacement === 'end' && (loading || $slots.icon)"
-      placement="end"
-      :effect="effect"
-    >
+    <ButtonIcon v-if="iconPlacement === 'end' && (loading || $slots.icon)" data-icon="inline-end">
       <slot v-if="loading && $slots.loadingIndicator" name="loadingIndicator" />
       <LoadingIcon v-else-if="loading" :class="buttonSpinnerClassName" />
       <slot v-else name="icon" />

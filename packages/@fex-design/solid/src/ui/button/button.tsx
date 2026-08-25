@@ -12,6 +12,7 @@ export function Button(props: ButtonProps) {
   const [local, rest] = splitProps(props, [
     'class',
     'variant',
+    'color',
     'size',
     'effect',
     'icon',
@@ -23,7 +24,8 @@ export function Button(props: ButtonProps) {
     'type',
   ])
 
-  const variant = () => local.variant ?? 'default'
+  const variant = () => local.variant ?? 'outlined'
+  const color = () => local.color
   const size = () => local.size ?? 'default'
   const iconPlacement = () => local.iconPlacement ?? 'start'
   const isLoading = () => local.loading === true
@@ -38,24 +40,27 @@ export function Button(props: ButtonProps) {
       {...rest}
       type={local.type ?? 'button'}
       class={cn(
-        buttonClassName({ variant: variant(), size: size(), effect: local.effect }),
+        buttonClassName({ variant: variant(), color: color(), size: size(), effect: local.effect }),
         local.class,
       )}
       data-slot="button"
       data-variant={variant()}
+      data-color={color()}
+      variant={variant()}
+      color={color()}
       data-size={size()}
       data-effect={local.effect}
       data-loading={isLoading() ? 'true' : undefined}
       disabled={isDisabled()}
     >
       <Show when={iconPlacement() === 'start' && iconNode()}>
-        <ButtonIcon placement="start" effect={local.effect}>
+        <ButtonIcon data-icon="inline-start">
           {iconNode()}
         </ButtonIcon>
       </Show>
       {local.children}
       <Show when={iconPlacement() === 'end' && iconNode()}>
-        <ButtonIcon placement="end" effect={local.effect}>
+        <ButtonIcon data-icon="inline-end">
           {iconNode()}
         </ButtonIcon>
       </Show>

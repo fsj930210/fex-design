@@ -6,10 +6,9 @@
   let {
     class: className,
     children,
-    effect,
     placement = 'start',
-    ref = $bindable(null),
     'data-icon': dataIcon,
+    ref = $bindable(null),
     ...rest
   }: ButtonIconProps = $props()
 </script>
@@ -17,8 +16,8 @@
 <span
   bind:this={ref}
   {...rest}
-  class={cn(buttonIconClassName({ placement, effect }), className)}
-  data-icon={dataIcon ?? `inline-${placement}`}
+  class={cn(buttonIconClassName(), className)}
+  data-icon={dataIcon ?? (placement === 'end' ? 'inline-end' : 'inline-start')}
 >
   {@render children?.()}
 </span>

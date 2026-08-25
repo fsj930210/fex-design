@@ -247,7 +247,7 @@ function hasRegion(side: TransferSide, region: 'header' | 'footer') {
         <slot name="actions" :controller="controller" :snapshot="snapshot">
           <Button
             type="button"
-            :class="buttonClassName({ variant: 'outline', size: 'icon' })"
+            :class="buttonClassName({ variant: 'outlined', size: 'icon' })"
             :disabled="!can('target')"
             aria-label="Move selected to target"
             @click="controller.moveToTarget()"
@@ -255,7 +255,7 @@ function hasRegion(side: TransferSide, region: 'header' | 'footer') {
           /></Button>
           <Button
             type="button"
-            :class="buttonClassName({ variant: 'outline', size: 'icon' })"
+            :class="buttonClassName({ variant: 'outlined', size: 'icon' })"
             :disabled="!can('source')"
             aria-label="Move selected to source"
             @click="controller.moveToSource()"
@@ -263,7 +263,7 @@ function hasRegion(side: TransferSide, region: 'header' | 'footer') {
           /></Button>
           <Button
             type="button"
-            :class="buttonClassName({ variant: 'outline', size: 'icon' })"
+            :class="buttonClassName({ variant: 'outlined', size: 'icon' })"
             :disabled="!can('allTarget')"
             aria-label="Move all to target"
             @click="controller.moveAllToTarget()"
@@ -271,7 +271,7 @@ function hasRegion(side: TransferSide, region: 'header' | 'footer') {
           /></Button>
           <Button
             type="button"
-            :class="buttonClassName({ variant: 'outline', size: 'icon' })"
+            :class="buttonClassName({ variant: 'outlined', size: 'icon' })"
             :disabled="!can('allSource')"
             aria-label="Move all to source"
             @click="controller.moveAllToSource()"

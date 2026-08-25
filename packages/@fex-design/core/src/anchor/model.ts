@@ -8,6 +8,8 @@ import type {
 
 export { createAnchorController } from './create-anchor-controller'
 
+const anchorPositionEpsilon = 1
+
 export function flattenAnchorItems<TTitle>(
   items: readonly AnchorItem<TTitle>[],
   level = 0,
@@ -48,7 +50,8 @@ export function getAnchorActiveKeys<TTitle>({
   let currentIndex = 0
 
   for (const [index, position] of sorted.entries()) {
-    if (position.top > activeTop) break
+    // Layout coordinates can differ from scroll positions by a subpixel after scrolling.
+    if (position.top - activeTop > anchorPositionEpsilon) break
     currentIndex = index
   }
 

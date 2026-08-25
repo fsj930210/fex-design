@@ -59,13 +59,13 @@ const pagination = () =>
       ><span>Page {{ pagination().pageIndex + 1 }} / {{ Math.max(1, table.getPageCount()) }}</span
       ><Button
         size="sm"
-        variant="outline"
+        variant="outlined"
         :disabled="!table.getCanPreviousPage()"
         @click="table.previousPage()"
         >Previous</Button
       ><Button
         size="sm"
-        variant="outline"
+        variant="outlined"
         :disabled="!table.getCanNextPage()"
         @click="table.nextPage()"
         >Next</Button

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Button, ButtonGroup } from '@fex-design/angular/primitive/button'
+import { buttonClassName } from '@fex-design/styles/button'
 
 @Component({
   selector: 'button-group-example',
@@ -8,4 +9,6 @@ import { Button, ButtonGroup } from '@fex-design/angular/primitive/button'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './group.html',
 })
-export class GroupExample {}
+export class GroupExample {
+  protected readonly defaultClassName = buttonClassName()
+}

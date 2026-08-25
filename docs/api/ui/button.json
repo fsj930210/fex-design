@@ -1,0 +1,33 @@
+{
+  "name": "Button",
+  "slug": "button",
+  "layer": "ui",
+  "status": "stable",
+  "description": "触发即时操作，并清晰表达动作层级与当前状态。",
+  "importPath": {
+    "react": "@fex-design/react/ui/button",
+    "vue": "@fex-design/vue/ui/button",
+    "solid": "@fex-design/solid/ui/button",
+    "svelte": "@fex-design/svelte/ui/button",
+    "angular": "@fex-design/angular/ui/button"
+  },
+  "props": [
+    { "name": "disabled", "type": "boolean", "default": false, "description": "禁用按钮及其交互。", "editor": "boolean" },
+    { "name": "loading", "type": "boolean", "default": false, "description": "显示加载状态并阻止重复操作。", "editor": "boolean" },
+    { "name": "size", "type": "'xs' | 'sm' | 'default' | 'lg' | 'xl' | 'icon-xs' | 'icon-sm' | 'icon' | 'icon-lg' | 'icon-xl'", "default": "default", "description": "文本按钮或纯图标按钮的尺寸。", "editor": "enum", "options": ["xs", "sm", "default", "lg", "xl", "icon-xs", "icon-sm", "icon", "icon-lg", "icon-xl"] },
+    { "name": "variant", "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'", "default": "outlined", "description": "与 Primitive 共用的结构变体。", "editor": "enum", "options": ["solid", "outlined", "dashed", "filled", "text", "link"] },
+    { "name": "color", "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'", "description": "与 Primitive 共用的可选语义配色；不设置时使用白底默认按钮。", "editor": "enum", "options": ["primary", "danger", "warning", "success", "info"] },
+    { "name": "effect", "type": "'expand-icon' | 'ring-hover' | 'shine-hover' | 'gooey-start' | 'gooey-end' | 'underline' | 'hover-underline' | 'press'", "description": "可选的交互视觉效果。" },
+    { "name": "iconPlacement", "type": "'start' | 'end'", "default": "start", "description": "图标或加载指示器相对文本的位置。" },
+    { "name": "icon", "type": "FrameworkNode", "description": "按钮图标内容；各框架使用原生节点、slot 或 template 表达。" },
+    { "name": "loadingIndicator", "type": "FrameworkNode", "description": "完整替换默认加载指示器。" }
+  ],
+  "events": [
+    { "name": "click", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "用户激活按钮时触发。" }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "观察视觉层级、尺寸、加载和禁用状态。" },
+    { "id": "variants", "title": "变体与语义色", "description": "对照五种内置语义色、自定义色与渐变色。" },
+    { "id": "sizes", "title": "尺寸", "description": "对照文本与图标按钮的内置尺寸和自定义尺寸。" }
+  ]
+}

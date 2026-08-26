@@ -1,0 +1,78 @@
+---
+title: Card
+description: 对相关内容和操作进行分组，并允许每个语义区域独立定制。
+---
+
+## Primitive 与 UI
+
+Card 由 Header、Content 和 Footer 等区域组成；Primitive 与 UI 使用同一套区域变量。
+
+- **Primitive**：提供 `Card`、`CardHeader`、`CardTitle`、`CardDescription`、`CardExtra`、`CardContent` 和 `CardFooter`。
+- **UI**：通过 `title`、`description`、`extra` 和 `footer` 配置常用区域；`header` 可替换 Header 内容。
+
+## 何时使用
+
+Card 用于把同一个对象、任务或主题下的信息与操作组织成一个可扫描区域。它适合登录面板、项目概览、统计摘要、设置分组和带操作的内容块。
+
+- 内容本身必须能够形成独立语义；不要为了画边框把页面上的每一段文字都套进 Card。
+- 同一页面中的 Card 应保持稳定的信息层级，主要操作不要同时出现在 Header 和 Footer。
+- 只有正文内容时可以省略 Header 与 Footer；需要标题、说明或补充状态时再加入对应区域。
+- 列表密集、行列关系明确的数据优先使用 List 或 Table，而不是堆叠大量 Card。
+
+## Composition
+
+```text
+Card
+├── CardHeader
+│   ├── CardTitle
+│   ├── CardDescription
+│   └── CardExtra
+├── CardContent
+└── CardFooter
+```
+
+`CardTitle` 用于标题，`CardDescription` 用于辅助说明，`CardExtra` 用于 Header 的补充内容。
+
+## Header、Extra 与 Footer
+
+`CardExtra` 位于 Header 的补充区域，可放置状态、Badge、时间、菜单或操作。
+
+UI Card 设置 `header` 后，不再根据 `title`、`description` 或 `extra` 生成 Header。
+
+`CardFooter` 用于放置操作、摘要或辅助信息。
+
+## 样式边界
+
+Card 支持以下样式入口：
+
+1. `class` / `style`：设置根节点样式。
+2. `classNames` / `styles`：设置 `root`、`header`、`title`、`description`、`extra`、`content` 和 `footer` 区域样式。
+3. CSS Variables：设置圆角、边框、阴影、背景、padding 与 divider。
+
+Primitive 各区域部件可分别设置 `class` 和 `style`。
+
+<Layer value="primitive">
+
+## Primitive 能力
+
+Primitive Card 通过区域部件组合内容和布局。
+
+</Layer>
+
+## 示例
+
+下列示例直接运行当前所选框架的原生 Card 实现。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Card 的公开属性。" />
+
+<ApiSection layer="ui" title="UI API" description="UI Card 的快捷属性与区域样式入口。" />
+
+## CSS Variables
+
+CSS Variables 可写在单个 Card 上，仅覆盖该实例；也可写在业务容器上统一覆盖容器内的 Card；需要修改全站默认外观时，再放到主题根节点。区域变量优先于 `--card-background`，因此既能只改一个区域，也能一次替换整张 Card。
+
+<CssVariables />

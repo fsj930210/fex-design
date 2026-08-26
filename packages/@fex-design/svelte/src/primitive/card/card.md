@@ -1,55 +1,21 @@
-# Svelte Card
-
-## Purpose
-
-Card groups related content in a bordered surface. It is used for admin panels, component examples, forms, and compact content blocks.
+# Svelte Primitive Card
 
 ## Import
-
 ```svelte
 <script lang="ts">
-  import Card from '@fex-design/svelte/primitive/card'
-  import CardContent from '@fex-design/svelte/primitive/card-content'
-  import CardDescription from '@fex-design/svelte/primitive/card-description'
-  import CardFooter from '@fex-design/svelte/primitive/card-footer'
-  import CardHeader from '@fex-design/svelte/primitive/card-header'
-  import CardTitle from '@fex-design/svelte/primitive/card-title'
+  import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from '@fex-design/svelte/primitive/card'
 </script>
 ```
 
-## Basic
+## Components
+| Component | Host | Description |
+| --- | --- | --- |
+| Card | div | Root clipping, radius, border, and shadow. |
+| CardHeader / CardTitle / CardDescription / CardExtra | div | Snippet-composable Header regions; Extra is supplementary content. |
+| CardContent / CardFooter | div | Independent Content and Footer surfaces. |
 
-```svelte
-<Card>
-  <CardHeader class="border-b border-border">
-    <CardTitle>Variants</CardTitle>
-    <CardDescription>按钮的基础视觉语义。</CardDescription>
-  </CardHeader>
-  <CardContent class="flex flex-wrap items-center gap-2">
-    Content
-  </CardContent>
-</Card>
-```
+## Examples
+`examples/basic`, `examples/surface`, and `examples/custom-header` are the documentation-preview sources.
 
-## Props
-
-| Name               | Type                             | Default     | Required | Description                                       |
-| ------------------ | -------------------------------- | ----------- | -------- | ------------------------------------------------- |
-| `class`            | `string`                         | `undefined` | No       | Extra classes merged with the component defaults. |
-| native `div` props | `HTMLAttributes<HTMLDivElement>` | `undefined` | No       | Standard `div` attributes are passed through.     |
-
-## Events
-
-Card primitives do not define custom events. Native DOM listeners can be passed through.
-
-## Controlled And Uncontrolled
-
-Card has no internal state, so it does not have controlled or uncontrolled modes.
-
-## Notes
-
-Use CardHeader, CardContent, and CardFooter to keep spacing consistent. Add dividers such as `border-b border-border` at the composition site.
-
-## Common Composition
-
-Use Card as the base surface for component demos and compact admin panels.
+## API and styling
+Each part forwards `HTMLAttributes<HTMLDivElement>`, events, `class`, `style`, and `bind:this`. Use --card-radius, --card-border, --card-shadow, --card-background, region `-background` / `-padding`, and Header/Footer divider variables.

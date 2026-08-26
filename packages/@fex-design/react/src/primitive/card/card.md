@@ -1,75 +1,47 @@
-# React Card
+# React Primitive Card
 
-## Purpose
-
-Card groups related content in a bordered surface. It is intended for admin panels, component examples, forms, and compact content blocks that need a stable header/content/footer structure.
+Composable, native-div Card primitives. The Root owns clipping, radius, border, and shadow; each region owns its own surface, padding, and divider.
 
 ## Import
 
 ```tsx
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@fex-design/react/primitive/card'
+import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
 ```
 
-## Basic
+## Components
 
-```tsx
-export function Example() {
-  return (
-    <Card>
-      <CardHeader className="border-b border-border">
-        <CardTitle>Variants</CardTitle>
-        <CardDescription>按钮的基础视觉语义。</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-wrap items-center gap-2">Content</CardContent>
-    </Card>
-  )
-}
-```
+| Component | Element | Description |
+| --- | --- | --- |
+| Card | div | Root surface boundary. |
+| CardHeader | div | Header layout and its divider. |
+| CardTitle | div | Header title. |
+| CardDescription | div | Header supporting text. |
+| CardExtra | div | Supplementary Header content such as a badge, action, or tabs. |
+| CardContent | div | Main content surface. |
+| CardFooter | div | Footer surface and its divider. |
 
-## Props
+## Examples
 
-All Card primitives accept native `div` attributes, including `className`.
+Examples live in `examples/<name>` and are the source used by documentation previews.
 
-| Name               | Type                    | Default     | Required | Description                                       |
-| ------------------ | ----------------------- | ----------- | -------- | ------------------------------------------------- |
-| `className`        | `string`                | `undefined` | No       | Extra classes merged with the component defaults. |
-| native `div` props | `ComponentProps<'div'>` | `undefined` | No       | Standard `div` attributes are passed through.     |
+| Name | Coverage |
+| --- | --- |
+| basic | Seven-part composition. |
+| surface | Independent region surfaces and dividers. |
+| custom-header | Custom Header layout with CardExtra. |
 
-## Events
+## Primitive API
 
-Card primitives do not define custom callbacks. Native DOM event props such as `onClick` can be passed through when needed.
+All seven components forward `ComponentProps<'div'>`, native events, `className`, `style`, and `ref` to their host div. They have no controlled state or custom callbacks.
 
-## Controlled And Uncontrolled
+## CSS variables
 
-Card has no internal state, so it does not have controlled or uncontrolled modes.
-
-## Notes
-
-Use `CardHeader`, `CardContent`, and `CardFooter` to keep spacing consistent. Add `border-b border-border` or `border-t border-border` at the composition site when a section divider is needed.
-
-## Common Composition
-
-Use Card as the base surface for component demos:
-
-```tsx
-function DemoCard() {
-  return (
-    <Card>
-      <CardHeader className="border-b border-border">
-        <CardTitle>Sizes</CardTitle>
-        <CardDescription>文本按钮和 icon-only 按钮尺寸。</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-wrap items-center gap-2">
-        <button>default</button>
-      </CardContent>
-    </Card>
-  )
-}
-```
+| Variable | Default source | Description |
+| --- | --- | --- |
+| --card-radius | --radius-md | Root radius. |
+| --card-border | none | Root border shorthand. |
+| --card-shadow | none | Root shadow. |
+| --card-background | --elevated-background | Shared region background fallback. |
+| --card-header-background / --card-content-background / --card-footer-background | --card-background | Region background. |
+| --card-header-padding / --card-content-padding / --card-footer-padding | 1rem | Region padding. |
+| --card-header-divider / --card-footer-divider | 1px solid var(--border) | Region separator shorthand. |

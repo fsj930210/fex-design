@@ -2,6 +2,7 @@ import {
   cardClassName,
   cardContentClassName,
   cardDescriptionClassName,
+  cardExtraClassName,
   cardFooterClassName,
   cardHeaderClassName,
   cardTitleClassName,
@@ -28,5 +29,6 @@ export const Card = createCardPart('card', cardClassName)
 export const CardHeader = createCardPart('card-header', cardHeaderClassName)
 export const CardTitle = createCardPart('card-title', cardTitleClassName)
 export const CardDescription = createCardPart('card-description', cardDescriptionClassName)
+export const CardExtra = createCardPart('card-extra', cardExtraClassName)
 export const CardContent = createCardPart('card-content', cardContentClassName)
 export const CardFooter = createCardPart('card-footer', cardFooterClassName)

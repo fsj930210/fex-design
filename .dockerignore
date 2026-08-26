@@ -1,0 +1,11 @@
+.git
+.nx
+.pnpm-store
+.tmp
+.turbo
+node_modules
+**/node_modules
+**/dist
+**/.angular
+**/.vite
+*.log

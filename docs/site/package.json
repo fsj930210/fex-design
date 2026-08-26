@@ -5,15 +5,22 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 4100 --strictPort",
     "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@fex-design/docs-shared": "workspace:*",
     "@fex-design/solid": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@mdx-js/rollup": "^3.1.1",
     "@tailwindcss/vite": "catalog:",
+    "rehype-slug": "^6.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx-frontmatter": "^5.2.0",
     "shiki": "latest",
     "solid-js": "1.9.14",
+    "solid-mdx": "^0.0.7",
     "vite": "catalog:",
     "vite-plugin-solid": "latest"
   },

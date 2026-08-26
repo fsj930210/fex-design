@@ -1,6 +1,8 @@
-<div class="runtime" [attr.data-embed]="embedded ? 'true' : null">
+<div class="runtime box-border grid min-h-30 place-items-center p-8" [attr.data-embed]="embedded ? 'true' : null">
   @if (example) {
-    <ng-container *ngComponentOutlet="example" />
+    <div class="w-full">
+      <ng-container *ngComponentOutlet="example" />
+    </div>
   } @else {
     <p>未找到示例</p>
   }

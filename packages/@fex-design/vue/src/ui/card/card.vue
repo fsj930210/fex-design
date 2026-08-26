@@ -1,42 +1,33 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type {
+  CardClassNames as CardClassNamesBase,
+  CardOptions,
+  CardStyles as CardStylesBase,
+} from '@fex-design/core/card/types'
 import {
   Card as PrimitiveCard,
   CardContent,
   CardDescription,
+  CardExtra,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '../../primitive/card/card'
 
-type SectionClass = {
-  root?: string
-  header?: string
-  title?: string
-  description?: string
-  content?: string
-  footer?: string
-}
-
-type SectionStyle = {
-  root?: CSSProperties
-  header?: CSSProperties
-  title?: CSSProperties
-  description?: CSSProperties
-  content?: CSSProperties
-  footer?: CSSProperties
-}
-
-type CardSize = 'sm' | 'md' | 'lg'
-
+export type CardClassNames = CardClassNamesBase
+export type CardStyles = CardStylesBase<CSSProperties>
 export interface CardProps {
   title?: unknown
   description?: unknown
+  extra?: unknown
   footer?: unknown
-  size?: CardSize
-  class?: SectionClass
-  style?: SectionStyle
+  classNames?: CardClassNames
+  styles?: CardStyles
 }
+
+// Vue SFC 的 Props 分析器无法解析 Omit<imported generic>；公共字段契约仍由 core 持有。
+type CardContract = Omit<CardOptions<unknown, CSSProperties>, 'header'>
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<CardProps>()
@@ -45,33 +36,37 @@ const props = defineProps<CardProps>()
 <template>
   <PrimitiveCard
     v-bind="$attrs"
-    :data-size="size ?? 'md'"
-    :class="props.class?.root"
-    :style="props.style?.root"
+    :class="[$attrs.class, props.classNames?.root]"
+    :style="[$attrs.style, props.styles?.root]"
   >
-    <CardHeader
-      v-if="title || description"
-      :class="props.class?.header"
-      :style="props.style?.header"
-    >
-      <CardTitle v-if="title" :class="props.class?.title" :style="props.style?.title">{{
+    <slot name="header">
+      <CardHeader
+        v-if="title || description || extra || $slots.extra"
+        :class="props.classNames?.header"
+        :style="props.styles?.header"
+      >
+      <CardTitle v-if="title" :class="props.classNames?.title" :style="props.styles?.title">{{
         title
       }}</CardTitle>
       <CardDescription
         v-if="description"
-        :class="props.class?.description"
-        :style="props.style?.description"
+        :class="props.classNames?.description"
+        :style="props.styles?.description"
       >
         {{ description }}
       </CardDescription>
-    </CardHeader>
-    <CardContent :class="props.class?.content" :style="props.style?.content">
+      <CardExtra v-if="extra || $slots.extra" :class="props.classNames?.extra" :style="props.styles?.extra">
+        <slot name="extra">{{ extra }}</slot>
+      </CardExtra>
+      </CardHeader>
+    </slot>
+    <CardContent :class="props.classNames?.content" :style="props.styles?.content">
       <slot />
     </CardContent>
     <CardFooter
       v-if="$slots.footer || footer"
-      :class="props.class?.footer"
-      :style="props.style?.footer"
+      :class="props.classNames?.footer"
+      :style="props.styles?.footer"
     >
       <slot name="footer">{{ footer }}</slot>
     </CardFooter>

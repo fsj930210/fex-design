@@ -1,0 +1,44 @@
+{
+  "name": "Card",
+  "slug": "card",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "由 Card、Header、Title、Description、Extra、Content、Footer 组成的可组合信息容器。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/card",
+    "vue": "@fex-design/vue/primitive/card",
+    "solid": "@fex-design/solid/primitive/card",
+    "svelte": "@fex-design/svelte/primitive/card",
+    "angular": "@fex-design/angular/primitive/card"
+  },
+  "props": [],
+  "events": [],
+  "cssVariables": [
+    { "name": "--card-background", "description": "所有区域未单独设置背景时的 Card 背景。" },
+    { "name": "--card-border", "description": "Card 根节点边框。" },
+    { "name": "--card-radius", "description": "Card 圆角。" },
+    { "name": "--card-shadow", "description": "Card 阴影。" },
+    {
+      "name": "--card-header-background",
+      "description": "Header 背景，回退到 --card-background。"
+    },
+    { "name": "--card-header-padding", "description": "Header 内边距。" },
+    { "name": "--card-header-divider", "description": "Header 与 Content 之间的分隔线。" },
+    { "name": "--card-content-background", "description": "Content 背景。" },
+    { "name": "--card-content-padding", "description": "Content 内边距。" },
+    { "name": "--card-footer-background", "description": "Footer 背景。" },
+    { "name": "--card-footer-padding", "description": "Footer 内边距。" },
+    { "name": "--card-footer-divider", "description": "Footer 顶部分隔线。" }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基础组合", "description": "组合完整的账户信息 Card。" },
+    { "id": "extra", "title": "Extra 区域", "description": "单独说明 CardExtra 的补充内容语义。" },
+    { "id": "custom-header", "title": "自定义 Header", "description": "组合完整 Header 结构。" },
+    { "id": "surface", "title": "区域主题", "description": "展示三个独立的高对比 surface。" },
+    {
+      "id": "css-variables",
+      "title": "实例 CSS Variables",
+      "description": "覆盖当前 Card 的区域变量。"
+    }
+  ]
+}

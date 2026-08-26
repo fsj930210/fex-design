@@ -28,4 +28,5 @@ export interface ComponentApi {
   props: ApiProperty[]
   events: ApiEvent[]
   demos: Array<{ id: string; title: string; description: string }>
+  cssVariables?: Array<{ name: string; description: string }>
 }

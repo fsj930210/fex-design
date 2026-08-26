@@ -75,6 +75,7 @@
     "./primitive/card-header": "./src/primitive/card/card-header.svelte",
     "./primitive/card-title": "./src/primitive/card/card-title.svelte",
     "./primitive/card-description": "./src/primitive/card/card-description.svelte",
+    "./primitive/card-extra": "./src/primitive/card/card-extra.svelte",
     "./primitive/card-content": "./src/primitive/card/card-content.svelte",
     "./primitive/card-footer": "./src/primitive/card/card-footer.svelte",
     "./primitive/data-table": "./src/primitive/data-table/data-table.ts",

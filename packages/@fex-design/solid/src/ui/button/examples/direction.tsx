@@ -5,15 +5,17 @@ export function DirectionExample() {
   return (
     <div class="grid w-full gap-6 sm:grid-cols-2">
       {(['ltr', 'rtl'] as const).map((direction) => (
-        <section dir={direction} class="grid gap-3 rounded-lg border p-4">
+        <section class="grid gap-3 rounded-lg border p-4">
           <strong>{direction.toUpperCase()}</strong>
           <div class="flex flex-wrap gap-3">
-            <Button icon={<PlusIcon />}>Start icon</Button>
-            <Button icon={<PlusIcon />} iconPlacement="end">
+            <Button dir={direction} icon={<PlusIcon />}>
+              Start icon
+            </Button>
+            <Button dir={direction} icon={<PlusIcon />} iconPlacement="end">
               End icon
             </Button>
           </div>
-          <ButtonGroup>
+          <ButtonGroup dir={direction}>
             <Button>First</Button>
             <Button>Middle</Button>
             <Button>Last</Button>

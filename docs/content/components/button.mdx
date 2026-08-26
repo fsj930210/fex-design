@@ -1,0 +1,66 @@
+---
+title: Button
+description: 触发即时操作，并清晰表达动作层级与当前状态。
+---
+
+## Primitive 与 UI
+
+Button 提供按钮、图标和按钮组能力。
+
+- **Primitive**：提供 `Button`、`ButtonIcon` 和 `ButtonGroup`。
+- **UI**：提供按钮的快捷属性和预设外观。
+
+## 何时使用
+
+Button 用于触发即时操作。页面跳转使用链接；开关状态使用 Toggle；互斥选择使用 ToggleGroup、Radio 或 Tabs。
+
+## Composition
+
+`ButtonIcon` 用于图标内容，`ButtonGroup` 用于组织相关按钮。
+
+```text
+Button
+└── ButtonIcon (optional)
+
+ButtonGroup
+├── Button
+└── Button
+```
+
+## 状态与原生能力
+
+`disabled` 禁用交互；`loading` 显示加载指示器并阻止重复操作；`aria-pressed` 用于开关状态。
+
+## 样式覆盖
+
+`variant`、`color` 和 `size` 设置预设外观。CSS Variables 可设置高度、图标尺寸、内容间距和颜色。
+
+<Layer value="primitive">
+
+## Primitive 能力
+
+`Button`、`ButtonIcon` 和 `ButtonGroup` 可独立组合使用。
+
+</Layer>
+
+## 示例
+
+示例展示组件的常用用法。
+
+<Demos />
+
+## API
+
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="Primitive Button、ButtonIcon 与 ButtonGroup 的公开属性。"
+/>
+
+<ApiSection layer="ui" title="UI API" description="UI Button 的公开属性。" />
+
+## CSS Variables
+
+CSS Variables 可直接写在单个 Button 上完成实例级覆盖，也可写在局部容器或主题根节点，让其中所有 Button 继承。尺寸变量可以覆盖某个 size 的最终结果，颜色变量用于覆盖当前 variant 使用的语义色组。
+
+<CssVariables />

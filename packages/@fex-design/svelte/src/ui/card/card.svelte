@@ -1,74 +1,60 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
+  import type {
+    CardClassNames as CardClassNamesBase,
+    CardOptions,
+    CardStyles as CardStylesBase,
+  } from '@fex-design/core/card/types'
   import PrimitiveCard from '../../primitive/card/card.svelte'
   import CardContent from '../../primitive/card/card-content.svelte'
   import CardDescription from '../../primitive/card/card-description.svelte'
+  import CardExtra from '../../primitive/card/card-extra.svelte'
   import CardFooter from '../../primitive/card/card-footer.svelte'
   import CardHeader from '../../primitive/card/card-header.svelte'
   import CardTitle from '../../primitive/card/card-title.svelte'
 
-  type SectionClass = {
-    root?: string
-    header?: string
-    title?: string
-    description?: string
-    content?: string
-    footer?: string
-  }
+  export type CardClassNames = CardClassNamesBase
+  export type CardStyles = CardStylesBase<HTMLAttributes<HTMLDivElement>['style']>
 
-  type SectionStyle = {
-    root?: HTMLAttributes<HTMLDivElement>['style']
-    header?: HTMLAttributes<HTMLDivElement>['style']
-    title?: HTMLAttributes<HTMLDivElement>['style']
-    description?: HTMLAttributes<HTMLDivElement>['style']
-    content?: HTMLAttributes<HTMLDivElement>['style']
-    footer?: HTMLAttributes<HTMLDivElement>['style']
-  }
-
-  type CardSize = 'sm' | 'md' | 'lg'
-
-  interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'class' | 'style' | 'title'> {
-    title?: Snippet | string
-    description?: Snippet | string
-    footer?: Snippet | string
-    size?: CardSize
-    class?: SectionClass
-    style?: SectionStyle
+  interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>,
+    CardOptions<Snippet | string, HTMLAttributes<HTMLDivElement>['style']> {
     children?: Snippet
   }
 
-  let { title, description, footer, size, class: className, style, children, ...rest }: CardProps = $props()
+  let { title, description, extra, footer, header, class: className, style, classNames, styles, children, ...rest }: CardProps = $props()
 
   const rootProps = $derived({
-    'data-size': size ?? 'md',
-    ...(className?.root ? { class: className.root } : {}),
-    ...(style?.root ? { style: style.root } : {}),
+    ...(className || classNames?.root ? { class: `${className ?? ''} ${classNames?.root ?? ''}` } : {}),
+    ...(style || styles?.root ? { style: [style, styles?.root] } : {}),
   })
   const headerProps = $derived({
-    ...(className?.header ? { class: className.header } : {}),
-    ...(style?.header ? { style: style.header } : {}),
+    ...(classNames?.header ? { class: classNames.header } : {}),
+    ...(styles?.header ? { style: styles.header } : {}),
   })
   const titleProps = $derived({
-    ...(className?.title ? { class: className.title } : {}),
-    ...(style?.title ? { style: style.title } : {}),
+    ...(classNames?.title ? { class: classNames.title } : {}),
+    ...(styles?.title ? { style: styles.title } : {}),
   })
   const descriptionProps = $derived({
-    ...(className?.description ? { class: className.description } : {}),
-    ...(style?.description ? { style: style.description } : {}),
+    ...(classNames?.description ? { class: classNames.description } : {}),
+    ...(styles?.description ? { style: styles.description } : {}),
   })
   const contentProps = $derived({
-    ...(className?.content ? { class: className.content } : {}),
-    ...(style?.content ? { style: style.content } : {}),
+    ...(classNames?.content ? { class: classNames.content } : {}),
+    ...(styles?.content ? { style: styles.content } : {}),
   })
   const footerProps = $derived({
-    ...(className?.footer ? { class: className.footer } : {}),
-    ...(style?.footer ? { style: style.footer } : {}),
+    ...(classNames?.footer ? { class: classNames.footer } : {}),
+    ...(styles?.footer ? { style: styles.footer } : {}),
   })
+  const extraProps = $derived({ ...(classNames?.extra ? { class: classNames.extra } : {}), ...(styles?.extra ? { style: styles.extra } : {}) })
 </script>
 
 <PrimitiveCard {...rest} {...rootProps}>
-  {#if title || description}
+  {#if header}
+    {@render header()}
+  {:else if title || description || extra}
     <CardHeader {...headerProps}>
       {#if title}
         <CardTitle {...titleProps}>
@@ -78,6 +64,11 @@
             {title}
           {/if}
         </CardTitle>
+      {/if}
+      {#if extra}
+        <CardExtra {...extraProps}>
+          {#if typeof extra === 'function'}{@render extra()}{:else}{extra}{/if}
+        </CardExtra>
       {/if}
       {#if description}
         <CardDescription {...descriptionProps}>

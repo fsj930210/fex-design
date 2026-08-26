@@ -1,27 +1,27 @@
 export const cardClassName = [
-  'group/card flex flex-col gap-[var(--card-spacing)] overflow-visible',
-  '[--card-spacing:16px]',
-  'data-[size=sm]:[--card-spacing:12px] data-[size=md]:[--card-spacing:16px] data-[size=lg]:[--card-spacing:24px]',
-  'rounded-md bg-[var(--card-background,var(--elevated-background))] py-[var(--card-spacing)] text-sm text-[var(--card-foreground,var(--elevated-foreground))] ring-1 ring-foreground/10',
-  'has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0',
-  '*:[img:first-child]:rounded-t-md *:[img:last-child]:rounded-b-md',
+  'group/card block overflow-hidden rounded-[var(--card-radius,var(--radius-md))]',
+  '[border:var(--card-border,none)] shadow-[var(--card-shadow,none)]',
 ].join(' ')
 
 export const cardHeaderClassName = [
-  'group/card-header @container/card-header grid auto-rows-min items-start',
-  'gap-1 rounded-t-md px-[var(--card-spacing)]',
-  'has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto]',
-  '[.border-b]:pb-[var(--card-spacing)]',
+  'group/card-header grid grid-cols-[minmax(0,1fr)_auto] grid-rows-[auto_auto] gap-x-4 gap-y-1',
+  'bg-[var(--card-header-background,var(--card-background,var(--elevated-background)))] p-[var(--card-header-padding,1rem)]',
+  '[border-bottom:var(--card-header-divider,1px_solid_var(--border))]',
 ].join(' ')
 
 export const cardTitleClassName =
-  'text-base font-medium leading-snug text-foreground group-data-[size=sm]/card:text-sm'
+  'col-start-1 row-start-1 min-w-0 text-base font-medium leading-snug text-foreground'
 
-export const cardDescriptionClassName = 'text-sm text-muted-foreground'
+export const cardDescriptionClassName = 'col-start-1 row-start-2 min-w-0 text-sm text-muted-foreground'
 
-export const cardActionClassName = 'col-start-2 row-span-2 row-start-1 self-start justify-self-end'
+export const cardExtraClassName = 'col-start-2 row-span-2 row-start-1 self-start justify-self-end'
 
-export const cardContentClassName = 'px-[var(--card-spacing)]'
+export const cardContentClassName = [
+  'bg-[var(--card-content-background,var(--card-background,var(--elevated-background)))]',
+  'p-[var(--card-content-padding,1rem)]',
+].join(' ')
 
-export const cardFooterClassName =
-  'flex items-center rounded-b-md border-t border-border bg-muted-background/50 p-[var(--card-spacing)]'
+export const cardFooterClassName = [
+  'flex items-center bg-[var(--card-footer-background,var(--card-background,var(--elevated-background)))]',
+  '[border-top:var(--card-footer-divider,1px_solid_var(--border))] p-[var(--card-footer-padding,1rem)]',
+].join(' ')

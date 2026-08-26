@@ -12,22 +12,126 @@
     "angular": "@fex-design/angular/ui/button"
   },
   "props": [
-    { "name": "disabled", "type": "boolean", "default": false, "description": "禁用按钮及其交互。", "editor": "boolean" },
-    { "name": "loading", "type": "boolean", "default": false, "description": "显示加载状态并阻止重复操作。", "editor": "boolean" },
-    { "name": "size", "type": "'xs' | 'sm' | 'default' | 'lg' | 'xl' | 'icon-xs' | 'icon-sm' | 'icon' | 'icon-lg' | 'icon-xl'", "default": "default", "description": "文本按钮或纯图标按钮的尺寸。", "editor": "enum", "options": ["xs", "sm", "default", "lg", "xl", "icon-xs", "icon-sm", "icon", "icon-lg", "icon-xl"] },
-    { "name": "variant", "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'", "default": "outlined", "description": "与 Primitive 共用的结构变体。", "editor": "enum", "options": ["solid", "outlined", "dashed", "filled", "text", "link"] },
-    { "name": "color", "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'", "description": "与 Primitive 共用的可选语义配色；不设置时使用白底默认按钮。", "editor": "enum", "options": ["primary", "danger", "warning", "success", "info"] },
-    { "name": "effect", "type": "'expand-icon' | 'ring-hover' | 'shine-hover' | 'gooey-start' | 'gooey-end' | 'underline' | 'hover-underline' | 'press'", "description": "可选的交互视觉效果。" },
-    { "name": "iconPlacement", "type": "'start' | 'end'", "default": "start", "description": "图标或加载指示器相对文本的位置。" },
-    { "name": "icon", "type": "FrameworkNode", "description": "按钮图标内容；各框架使用原生节点、slot 或 template 表达。" },
-    { "name": "loadingIndicator", "type": "FrameworkNode", "description": "完整替换默认加载指示器。" }
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "禁用按钮及其交互。",
+      "editor": "boolean"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": false,
+      "description": "显示加载状态并阻止重复操作。",
+      "editor": "boolean"
+    },
+    {
+      "name": "size",
+      "type": "'xs' | 'sm' | 'default' | 'lg' | 'xl' | 'icon-xs' | 'icon-sm' | 'icon' | 'icon-lg' | 'icon-xl'",
+      "default": "default",
+      "description": "文本按钮或纯图标按钮的尺寸。",
+      "editor": "enum",
+      "options": [
+        "xs",
+        "sm",
+        "default",
+        "lg",
+        "xl",
+        "icon-xs",
+        "icon-sm",
+        "icon",
+        "icon-lg",
+        "icon-xl"
+      ]
+    },
+    {
+      "name": "variant",
+      "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+      "default": "outlined",
+      "description": "与 Primitive 共用的结构变体。",
+      "editor": "enum",
+      "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
+    },
+    {
+      "name": "color",
+      "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+      "description": "与 Primitive 共用的可选语义配色；不设置时使用白底默认按钮。",
+      "editor": "enum",
+      "options": ["primary", "danger", "warning", "success", "info"]
+    },
+    {
+      "name": "effect",
+      "type": "'expand-icon' | 'ring-hover' | 'shine-hover' | 'gooey-start' | 'gooey-end' | 'underline' | 'hover-underline' | 'press'",
+      "description": "可选的交互视觉效果。"
+    },
+    {
+      "name": "iconPlacement",
+      "type": "'start' | 'end'",
+      "default": "start",
+      "description": "图标或加载指示器相对文本的位置。"
+    },
+    {
+      "name": "icon",
+      "type": "FrameworkNode",
+      "description": "按钮图标内容；各框架使用原生节点、slot 或 template 表达。"
+    },
+    {
+      "name": "loadingIndicator",
+      "type": "FrameworkNode",
+      "description": "完整替换默认加载指示器。"
+    }
   ],
   "events": [
-    { "name": "click", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "用户激活按钮时触发。" }
+    {
+      "name": "click",
+      "parameters": [{ "name": "event", "type": "MouseEvent" }],
+      "description": "用户激活按钮时触发。"
+    }
+  ],
+  "cssVariables": [
+    { "name": "--button-height", "description": "当前按钮实例的高度。" },
+    { "name": "--button-icon-size", "description": "当前按钮实例的图标尺寸。" },
+    { "name": "--button-content-gap", "description": "图标与文字之间的间距。" },
+    { "name": "--button-color", "description": "当前语义色及文字色。" },
+    { "name": "--button-color-foreground", "description": "solid 变体的前景色。" },
+    { "name": "--button-color-hover", "description": "solid 变体的悬停背景色。" },
+    { "name": "--button-color-soft", "description": "弱背景按钮的背景色。" },
+    { "name": "--button-color-soft-hover", "description": "弱背景按钮的悬停颜色。" },
+    { "name": "--button-color-border", "description": "边框和焦点颜色。" },
+    { "name": "--button-underline-inset", "description": "Underline 效果的两侧缩进。" }
   ],
   "demos": [
     { "id": "basic", "title": "基础用法", "description": "观察视觉层级、尺寸、加载和禁用状态。" },
-    { "id": "variants", "title": "变体与语义色", "description": "对照五种内置语义色、自定义色与渐变色。" },
-    { "id": "sizes", "title": "尺寸", "description": "对照文本与图标按钮的内置尺寸和自定义尺寸。" }
+    {
+      "id": "variants",
+      "title": "变体与语义色",
+      "description": "对照五种内置语义色、自定义色与渐变色。"
+    },
+    { "id": "sizes", "title": "尺寸", "description": "对照文本与图标按钮的内置尺寸和自定义尺寸。" },
+    {
+      "id": "states",
+      "title": "状态",
+      "description": "观察 disabled、loading、pressed 与原生交互。"
+    },
+    { "id": "loading", "title": "加载", "description": "观察加载状态、位置与自定义指示器。" },
+    { "id": "icons", "title": "图标", "description": "展示前置、后置与纯图标按钮。" },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "验证逻辑方向下的图标位置与连接边界。"
+    },
+    {
+      "id": "effects",
+      "title": "交互效果",
+      "description": "展示 hover、press 与 underline 等效果。"
+    },
+    { "id": "combinations", "title": "组合用法", "description": "组合视觉、图标、加载与状态。" },
+    { "id": "group", "title": "按钮组", "description": "展示连接式、有间距与垂直按钮组。" },
+    {
+      "id": "css-variables",
+      "title": "实例 CSS Variables",
+      "description": "覆盖单个 Button 的尺寸与语义色变量。"
+    }
   ]
 }

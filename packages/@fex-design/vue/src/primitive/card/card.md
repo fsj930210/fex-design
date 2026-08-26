@@ -1,57 +1,21 @@
-# Vue Card
-
-## Purpose
-
-Card groups related content in a bordered surface. It is used for admin panels, component examples, forms, and compact content blocks.
+# Vue Primitive Card
 
 ## Import
-
 ```vue
 <script setup lang="ts">
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@fex-design/vue/primitive/card'
+import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from '@fex-design/vue/primitive/card'
 </script>
 ```
 
-## Basic
+## Components
+| Component | Host | Description |
+| --- | --- | --- |
+| Card | div | Root clipping, radius, border, and shadow. |
+| CardHeader / CardTitle / CardDescription / CardExtra | div | Slot-composable Header regions; Extra is supplementary content. |
+| CardContent / CardFooter | div | Independent Content and Footer surfaces. |
 
-```vue
-<template>
-  <Card>
-    <CardHeader class="border-b border-border">
-      <CardTitle>Variants</CardTitle>
-      <CardDescription>按钮的基础视觉语义。</CardDescription>
-    </CardHeader>
-    <CardContent class="flex flex-wrap items-center gap-2"> Content </CardContent>
-  </Card>
-</template>
-```
+## Examples
+`examples/basic`, `examples/surface`, and `examples/custom-header` are the documentation-preview sources.
 
-## Props
-
-| Name              | Type             | Default     | Required | Description                                       |
-| ----------------- | ---------------- | ----------- | -------- | ------------------------------------------------- |
-| `class`           | `string`         | `undefined` | No       | Extra classes merged with the component defaults. |
-| native attributes | `HTMLAttributes` | `undefined` | No       | Standard attributes are passed through.           |
-
-## Events
-
-Card primitives do not define custom events. Native DOM listeners can be passed through.
-
-## Controlled And Uncontrolled
-
-Card has no internal state, so it does not have controlled or uncontrolled modes.
-
-## Notes
-
-Use `CardHeader`, `CardContent`, and `CardFooter` to keep spacing consistent. Add dividers such as `border-b border-border` at the composition site.
-
-## Common Composition
-
-Use Card as the base surface for component demos and compact admin panels.
+## API and styling
+All parts forward native div attributes, events, `class`, and `style`; the exposed element is the host div. Use --card-radius, --card-border, --card-shadow, --card-background, region `-background` / `-padding`, and Header/Footer divider variables.

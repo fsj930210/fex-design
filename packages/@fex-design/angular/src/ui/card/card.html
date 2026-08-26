@@ -1,17 +1,22 @@
-@if (title() || description()) {
-<fex-card-header>
+@if (header()) {
+<ng-container *ngTemplateOutlet="header() ?? null" />
+} @else if (title() || description() || extra()) {
+<div cardHeader [className]="classNames().header" [style]="styles().header">
   @if (title()) {
-  <fex-card-title>{{ title() }}</fex-card-title>
+  <div cardTitle [className]="classNames().title" [style]="styles().title">{{ title() }}</div>
   } @if (description()) {
-  <fex-card-description>{{ description() }}</fex-card-description>
+  <div cardDescription [className]="classNames().description" [style]="styles().description">{{ description() }}</div>
   }
-</fex-card-header>
+  @if (extra()) {
+  <div cardExtra [className]="classNames().extra" [style]="styles().extra"><ng-container *ngTemplateOutlet="extra() ?? null" /></div>
+  }
+</div>
 }
-<fex-card-content>
+<div cardContent [className]="classNames().content" [style]="styles().content">
   <ng-content />
-</fex-card-content>
+</div>
 @if (footer()) {
-<fex-card-footer>
+<div cardFooter [className]="classNames().footer" [style]="styles().footer">
   <ng-container *ngTemplateOutlet="footer() ?? null" />
-</fex-card-footer>
+</div>
 }

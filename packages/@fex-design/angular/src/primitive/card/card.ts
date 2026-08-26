@@ -2,17 +2,20 @@ import {
   cardClassName,
   cardContentClassName,
   cardDescriptionClassName,
+  cardExtraClassName,
   cardFooterClassName,
   cardHeaderClassName,
   cardTitleClassName,
 } from '@fex-design/styles/card'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { cn } from '@fex/utils'
 import { createHostClassName } from '../../signals/host-class'
 
 @Component({
-  selector: 'fex-card-primitive',
+  selector: 'div[card]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: ':host { display: block; }',
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'card',
@@ -24,7 +27,7 @@ export class Card {
 }
 
 @Component({
-  selector: 'fex-card-header',
+  selector: 'div[cardHeader]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -34,11 +37,12 @@ export class Card {
   template: '<ng-content />',
 })
 export class CardHeader {
-  protected readonly hostClassName = createHostClassName(cardHeaderClassName)
+  className = input<string | undefined>()
+  protected readonly hostClassName = createHostClassName(() => cn(cardHeaderClassName, this.className()))
 }
 
 @Component({
-  selector: 'fex-card-title',
+  selector: 'div[cardTitle]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -48,11 +52,12 @@ export class CardHeader {
   template: '<ng-content />',
 })
 export class CardTitle {
-  protected readonly hostClassName = createHostClassName(cardTitleClassName)
+  className = input<string | undefined>()
+  protected readonly hostClassName = createHostClassName(() => cn(cardTitleClassName, this.className()))
 }
 
 @Component({
-  selector: 'fex-card-description',
+  selector: 'div[cardDescription]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -62,11 +67,27 @@ export class CardTitle {
   template: '<ng-content />',
 })
 export class CardDescription {
-  protected readonly hostClassName = createHostClassName(cardDescriptionClassName)
+  className = input<string | undefined>()
+  protected readonly hostClassName = createHostClassName(() => cn(cardDescriptionClassName, this.className()))
 }
 
 @Component({
-  selector: 'fex-card-content',
+  selector: 'div[cardExtra]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class]': 'hostClassName()',
+    'data-slot': 'card-extra',
+  },
+  template: '<ng-content />',
+})
+export class CardExtra {
+  className = input<string | undefined>()
+  protected readonly hostClassName = createHostClassName(() => cn(cardExtraClassName, this.className()))
+}
+
+@Component({
+  selector: 'div[cardContent]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -76,11 +97,12 @@ export class CardDescription {
   template: '<ng-content />',
 })
 export class CardContent {
-  protected readonly hostClassName = createHostClassName(cardContentClassName)
+  className = input<string | undefined>()
+  protected readonly hostClassName = createHostClassName(() => cn(cardContentClassName, this.className()))
 }
 
 @Component({
-  selector: 'fex-card-footer',
+  selector: 'div[cardFooter]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -90,5 +112,6 @@ export class CardContent {
   template: '<ng-content />',
 })
 export class CardFooter {
-  protected readonly hostClassName = createHostClassName(cardFooterClassName)
+  className = input<string | undefined>()
+  protected readonly hostClassName = createHostClassName(() => cn(cardFooterClassName, this.className()))
 }

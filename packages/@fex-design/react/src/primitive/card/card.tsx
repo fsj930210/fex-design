@@ -1,5 +1,5 @@
 import {
-  cardActionClassName,
+  cardExtraClassName,
   cardClassName,
   cardContentClassName,
   cardDescriptionClassName,
@@ -28,8 +28,8 @@ export function CardDescription({ className, ...props }: ComponentProps<'div'>) 
     />
   )
 }
-export function CardAction({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="card-action" className={cn(cardActionClassName, className)} {...props} />
+export function CardExtra({ className, ...props }: ComponentProps<'div'>) {
+  return <div data-slot="card-extra" className={cn(cardExtraClassName, className)} {...props} />
 }
 export function CardContent({ className, ...props }: ComponentProps<'div'>) {
   return <div data-slot="card-content" className={cn(cardContentClassName, className)} {...props} />

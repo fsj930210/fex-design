@@ -9,4 +9,5 @@
 @import './utilities.css';
 
 @source "../../../apps";
+@source "../../../docs/site/src";
 @source "../../@fex-design";

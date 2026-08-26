@@ -20,11 +20,17 @@
 
 | 名称        | 覆盖内容                                     |
 | ----------- | -------------------------------------------- |
-| basic       | 原生按钮基础能力。                           |
-| icon        | 起始与结束位置的 ButtonIcon 组合。           |
-| group       | 连接、间隔、水平与垂直 ButtonGroup 布局。    |
-| native      | 原生表单属性、事件、禁用状态与元素访问。     |
-| composition | Button、ButtonIcon 与 ButtonGroup 组合使用。 |
+| basic       | 默认与 Primary 按钮。                        |
+| variants    | 视觉变体与语义色。                           |
+| sizes       | 文本与图标尺寸。                             |
+| states      | 禁用、加载与按压状态。                       |
+| loading     | 加载位置与自定义指示器。                     |
+| icons       | 前置、后置与纯图标内容。                     |
+| direction   | LTR 与 RTL。                                 |
+| effects     | hover、press、underline 等反馈。             |
+| combinations| 常见属性组合。                               |
+| group       | 连接式、有间距与垂直按钮组。                 |
+| css-variables | 实例级 CSS Variables。                     |
 
 ## Button API
 

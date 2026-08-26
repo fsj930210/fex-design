@@ -1,8 +1,6 @@
 # React Card
 
-## Purpose
-
-Card groups related content in a bordered surface. It is intended for admin panels, component examples, forms, and compact content blocks that need a stable header/content/footer structure.
+The UI Card creates a conventional Header while retaining the Primitive regions and native div attributes.
 
 ## Import
 
@@ -10,56 +8,30 @@ Card groups related content in a bordered surface. It is intended for admin pane
 import { Card } from '@fex-design/react/ui/card'
 ```
 
-## Basic
+## Examples
 
-```tsx
-export function Example() {
-  return (
-    <Card title="Variants" description="按钮的基础视觉语义。">
-      Content
-    </Card>
-  )
-}
-```
+Examples live in `examples/<name>` and are the source used by documentation previews.
 
-## Props
+| Name | Coverage |
+| --- | --- |
+| basic | Generated Header, extra content, body, and Footer. |
+| custom-header | Complete Header replacement. |
+| styling | classNames, styles, and Card variables. |
 
-| Name               | Type                                                                                                                                                    | Default     | Required | Description                                                                       |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------- | --------------------------------------------------------------------------------- |
-| `title`            | `ReactNode`                                                                                                                                             | `undefined` | No       | Header title content.                                                             |
-| `description`      | `ReactNode`                                                                                                                                             | `undefined` | No       | Header description content.                                                       |
-| `footer`           | `ReactNode`                                                                                                                                             | `undefined` | No       | Footer content.                                                                   |
-| `size`             | `'sm' \| 'md' \| 'lg'`                                                                                                                                  | `'md'`      | No       | Quick spacing preset for the card layout.                                         |
-| `className`        | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }`                                           | `undefined` | No       | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
-| `style`            | `{ root?: CSSProperties; header?: CSSProperties; title?: CSSProperties; description?: CSSProperties; content?: CSSProperties; footer?: CSSProperties }` | `undefined` | No       | Part inline styles. Set `root` to override `--card-spacing`.                      |
-| native `div` props | `Omit<ComponentProps<'div'>, 'className' \| 'style'>`                                                                                                   | `undefined` | No       | Standard `div` attributes are passed through.                                     |
+## Card API
 
-## Events
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| title | ReactNode | — | Default Header title. |
+| description | ReactNode | — | Default Header supporting text. |
+| extra | ReactNode | — | Default Header supplementary content. |
+| header | ReactNode | — | Fully replaces the generated Header. |
+| footer | ReactNode | — | Independent Footer content. |
+| classNames | CardClassNames | — | Classes for root, header, title, description, extra, content, and footer. |
+| styles | CardStyles | — | Inline styles for the same stable parts. |
+| native attributes | ComponentProps<'div'> | — | Native attributes and events are forwarded to the Root. |
+| element access | ref | — | Receives the root HTMLDivElement. |
 
-Card primitives do not define custom callbacks. Native DOM event props such as `onClick` can be passed through when needed.
+## Replacement rules
 
-## Controlled And Uncontrolled
-
-Card has no internal state, so it does not have controlled or uncontrolled modes.
-
-## Notes
-
-Use `ui/card` for the default title, description, content, and footer layout. `size` provides quick spacing presets, and spacing is controlled by `--card-spacing` on the card root for custom values.
-
-## Common Composition
-
-Use Card as the base surface for component demos:
-
-```tsx
-function DemoCard() {
-  return (
-    <Card
-      title="Sizes"
-      description="文本按钮和 icon-only 按钮尺寸。"
-      className={{ content: 'flex flex-wrap items-center gap-2' }}
-    >
-      <button>default</button>
-    </Card>
-  )
-}
-```
+`header` has precedence over `title`, `description`, and `extra`. Use Primitive parts in `header` when you need the default region surface with a custom layout. Card CSS variables can be placed on a single instance, a component wrapper, or `:root`.

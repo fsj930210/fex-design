@@ -2,7 +2,6 @@
 @source "../../../../packages/@fex-design/angular/src";
 @source "../../../../packages/@fex-design/styles/src";
 @source "../../../../docs/preview/angular/src";
-:root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
-body { margin: 0; }
-.runtime { min-height: 120px; padding: 32px; display: grid; place-items: center; box-sizing: border-box; }
-.demo-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+@utility demo-row {
+  @apply flex flex-wrap items-center justify-center gap-3;
+}

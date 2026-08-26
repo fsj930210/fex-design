@@ -1,0 +1,72 @@
+{
+  "name": "Card",
+  "slug": "card",
+  "layer": "ui",
+  "status": "stable",
+  "description": "基于 Card Primitive 的快捷信息容器，提供标题、说明、额外内容、Footer 与语义化区域样式入口。",
+  "importPath": {
+    "react": "@fex-design/react/ui/card",
+    "vue": "@fex-design/vue/ui/card",
+    "solid": "@fex-design/solid/ui/card",
+    "svelte": "@fex-design/svelte/ui/card",
+    "angular": "@fex-design/angular/ui/card"
+  },
+  "props": [
+    { "name": "title", "type": "FrameworkNode", "description": "默认 Header 的标题内容。" },
+    { "name": "description", "type": "FrameworkNode", "description": "默认 Header 的辅助说明。" },
+    {
+      "name": "extra",
+      "type": "FrameworkNode",
+      "description": "默认 Header 的额外内容，如 Badge、按钮或菜单。"
+    },
+    {
+      "name": "header",
+      "type": "FrameworkNode",
+      "description": "完整替换默认 Header；提供时不再渲染 title、description、extra。"
+    },
+    { "name": "footer", "type": "FrameworkNode", "description": "底部内容。" },
+    {
+      "name": "classNames",
+      "type": "Partial<Record<'root' | 'header' | 'title' | 'description' | 'extra' | 'content' | 'footer', string>>",
+      "description": "按语义区域快速追加 class。"
+    },
+    {
+      "name": "styles",
+      "type": "Partial<Record<'root' | 'header' | 'title' | 'description' | 'extra' | 'content' | 'footer', CSSProperties>>",
+      "description": "按语义区域快速追加内联样式。"
+    }
+  ],
+  "events": [],
+  "cssVariables": [
+    { "name": "--card-background", "description": "所有区域未单独设置背景时的 Card 背景。" },
+    { "name": "--card-border", "description": "Card 根节点边框。" },
+    { "name": "--card-radius", "description": "Card 圆角。" },
+    { "name": "--card-shadow", "description": "Card 阴影。" },
+    {
+      "name": "--card-header-background",
+      "description": "Header 背景，回退到 --card-background。"
+    },
+    { "name": "--card-header-padding", "description": "Header 内边距。" },
+    { "name": "--card-header-divider", "description": "Header 与 Content 之间的分隔线。" },
+    { "name": "--card-content-background", "description": "Content 背景。" },
+    { "name": "--card-content-padding", "description": "Content 内边距。" },
+    { "name": "--card-footer-background", "description": "Footer 背景。" },
+    { "name": "--card-footer-padding", "description": "Footer 内边距。" },
+    { "name": "--card-footer-divider", "description": "Footer 顶部分隔线。" }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "构建完整的账户信息 Card。" },
+    { "id": "extra", "title": "Extra 区域", "description": "单独展示标题区补充内容。" },
+    { "id": "custom-header", "title": "自定义 Header", "description": "完整替换默认 Header。" },
+    {
+      "id": "styling",
+      "title": "结构化样式",
+      "description": "用高对比区域展示 classNames 与 styles。"
+    },
+    {
+      "id": "css-variables",
+      "title": "实例 CSS Variables",
+      "description": "覆盖当前 Card 的区域变量。"
+    }
+  ]
+}

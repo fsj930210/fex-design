@@ -1,6 +1,9 @@
-<div class="runtime box-border grid min-h-30 place-items-center p-8" [attr.data-embed]="embedded ? 'true' : null">
+<div
+  class="runtime box-border grid min-h-30 place-items-center p-8"
+  [attr.data-embed]="embedded ? 'true' : null"
+>
   @if (example) {
-    <div class="contents">
+    <div data-preview-example-host class="contents [&>*]:contents">
       <ng-container *ngComponentOutlet="example" />
     </div>
   } @else {

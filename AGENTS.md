@@ -190,6 +190,7 @@
 - 跨框架组件应优先把无框架逻辑沉淀到 `packages/@fex-design/core`，再在各框架包里适配。
 - 基于原生元素的组件必须暴露其核心原生元素，并优先继承或透传该元素已有的属性和事件能力；不得把 `click`、`focus`、`blur`、`keydown`、`aria-*` 等原生能力逐项重新声明为组件 API。React 使用原生元素 Props/ref，Vue 使用 attrs 与 template ref expose，Solid 使用 JSX 原生属性/ref，Svelte 使用元素 attributes 与 bindable ref，Angular 使用原生元素宿主和公开 element。只有组件新增的语义属性、语义事件，或确实需要拦截加工的原生事件才显式声明。
 - 同一类能力如果 React、Vue、Solid、Svelte、Angular 都会用，先抽出纯逻辑、类型和算法到 `packages/@fex-design/core` 或 `packages/utils`；各框架包只封装生命周期、响应式绑定、DOM 适配和框架 API。
+- 跨五框架具有同一字段集合、枚举、部件名或结构化配置的公开类型，必须先定义在 `packages/@fex-design/core/src/<component>/types.ts` 并通过 `@fex-design/core/<component>/types` 导出；框架包只能以各自的节点、原生属性、ref、slot/snippet/template 类型扩展该契约，禁止重复声明同一份公共字段。仅某一框架特有的原生类型可留在该框架组件文件中。
 - 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；设计 token、全局变量和基础 Tailwind source 配置放在 `packages/styles`，组件自身的 class 组合、variant、size、状态样式和 data attribute 规则必须沉淀到 `packages/@fex-design/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
 - 只有当展示组件演进出必须跨框架保持一致的行为逻辑时，才引入 `packages/@fex-design/core`，例如受控/非受控状态、键盘导航、选择模型、焦点管理、弹层协议、复杂 ARIA 行为或非平凡 variant 计算；不要仅仅为了复用 class 字符串或简单 props 映射而增加 core 抽象。
 - 简单组件优先使用单文件实现和文件级子路径导出，例如 `src/button.tsx`，Props 类型、组件类型和少量局部 helper 直接在组件文件内声明并按需导出，通过 `package.json` 的 `exports` 暴露 `./button`；不要为了单个组件提前创建 `button/index.ts`、`button/index.tsx`、`button.types.ts` 或模板化目录。只有当组件出现多个强相关文件、子组件、feature、hook/composable/primitive、locale、adapter、测试或文档需要共同归组时，才升级为 `src/button/button.tsx` 等目录结构；目录内也不要使用 `index.ts` 作为桶文件，类型文件只在多文件共享复杂公共类型时按需创建。

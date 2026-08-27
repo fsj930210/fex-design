@@ -32,12 +32,15 @@ export function DemoCard(props: {
   }
   const [source] = createResource(
     () => `${props.framework}:${demoLayer()}:${props.slug}:${props.scene.id}`,
-    async () =>
-      (
-        await fetch(
-          `/__example-source?framework=${props.framework}&layer=${demoLayer()}&component=${props.slug}&example=${props.scene.id}`,
-        )
-      ).json() as Promise<{ source: string; html: string }>,
+    async () => {
+      const response = await fetch(
+        import.meta.env.DEV
+          ? `/__example-source?framework=${props.framework}&layer=${demoLayer()}&component=${props.slug}&example=${props.scene.id}`
+          : `${import.meta.env.BASE_URL}example-source/${props.framework}/${demoLayer()}/${props.slug}/${props.scene.id}.json`,
+      )
+      if (!response.ok) throw new Error('Example source not found')
+      return response.json() as Promise<{ source: string; html: string }>
+    },
   )
 
   createEffect(() => {
@@ -87,7 +90,13 @@ export function DemoCard(props: {
           fallback={
             <div
               class="max-h-120 min-h-45 overflow-auto bg-background text-xs leading-relaxed [&_pre]:m-0 [&_pre]:min-h-45 [&_pre]:bg-background! [&_pre]:p-5.5"
-              innerHTML={source.loading ? '<pre>正在读取源码…</pre>' : (source()?.html ?? '')}
+              innerHTML={
+                source.loading
+                  ? '<pre>正在读取源码…</pre>'
+                  : source.error
+                    ? '<pre>源码加载失败。</pre>'
+                    : (source()?.html ?? '')
+              }
             />
           }
         >

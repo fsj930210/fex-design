@@ -1,0 +1,20 @@
+{
+  "extends": "@fex/config-tsconfig/base.json",
+  "files": [],
+  "references": [
+    { "path": "./apps/react-app" },
+    { "path": "./apps/vue-app" },
+    { "path": "./apps/solid-app" },
+    { "path": "./apps/svelte-app" },
+    { "path": "./apps/angular-app" },
+    { "path": "./packages/@fex-design/core" },
+    { "path": "./packages/@fex-design/react" },
+    { "path": "./packages/@fex-design/vue" },
+    { "path": "./packages/@fex-design/solid" },
+    { "path": "./packages/@fex-design/svelte" },
+    { "path": "./packages/@fex-design/angular" },
+    { "path": "./packages/styles" },
+    { "path": "./packages/utils" },
+    { "path": "./packages/mock" }
+  ]
+}

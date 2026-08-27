@@ -1,0 +1,4 @@
+{
+  "extends": "@fex/config-tsconfig/vue-app.json",
+  "include": ["src"]
+}

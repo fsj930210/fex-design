@@ -1,4 +1,4 @@
-import { Card } from '../card'
+import { Card } from '@fex-design/react/ui/card'
 
 export function BasicExample() {
   return (

@@ -1,4 +1,4 @@
-import { Button } from '../button'
+import { Button } from '@fex-design/react/ui/button'
 export function CssVariablesExample() {
   return (
     <div className="flex flex-wrap items-center gap-3">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Card from '../card.vue'
+import Card from '@fex-design/vue/ui/card'
 
 const directions = ['ltr', 'rtl'] as const
 </script>

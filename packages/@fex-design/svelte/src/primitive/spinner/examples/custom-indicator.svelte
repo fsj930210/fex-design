@@ -1,0 +1,2 @@
+<script lang="ts">import Spinner from '@fex-design/svelte/primitive/spinner'</script>
+<Spinner aria-label="自定义加载"><span class="inline-flex items-center gap-1 text-fuchsia-600" aria-hidden="true"><i class="size-1 rounded-full bg-current animate-bounce"></i><i class="size-1 rounded-full bg-current animate-bounce [animation-delay:120ms]"></i><i class="size-1 rounded-full bg-current animate-bounce [animation-delay:240ms]"></i></span></Spinner>

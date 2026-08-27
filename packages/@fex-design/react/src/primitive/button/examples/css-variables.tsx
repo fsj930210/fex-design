@@ -1,4 +1,4 @@
-import { Button } from '../button'
+import { Button } from '@fex-design/react/primitive/button'
 export function CssVariablesExample() {
   return (
     <div className="flex flex-wrap items-center gap-3">

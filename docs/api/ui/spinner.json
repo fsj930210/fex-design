@@ -1,0 +1,42 @@
+{
+  "name": "Spinner",
+  "slug": "spinner",
+  "layer": "ui",
+  "status": "stable",
+  "description": "独立 loading 指示器和内容区域 loading 容器。",
+  "importPath": {
+    "react": "@fex-design/react/ui/spinner",
+    "vue": "@fex-design/vue/ui/spinner",
+    "solid": "@fex-design/solid/ui/spinner",
+    "svelte": "@fex-design/svelte/ui/spinner",
+    "angular": "@fex-design/angular/ui/spinner"
+  },
+  "props": [
+    {
+      "name": "spinning",
+      "type": "boolean | undefined",
+      "description": "undefined 为独立 Spinner；false 显示内容；true 显示内容和遮罩。",
+      "editor": "boolean"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "指示器尺寸。",
+      "editor": "enum",
+      "options": ["sm", "md", "lg"]
+    },
+    { "name": "text", "type": "FrameworkNode", "description": "可选 loading 文本；存在时遮罩默认纵向排列指示器与文本，可通过 class、style、classNames.overlay 或 styles.overlay 覆盖。" },
+    { "name": "indicator", "type": "FrameworkNode", "description": "自定义 loading 指示器。" }
+  ],
+  "events": [],
+  "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "独立 Spinner。" },
+    { "id": "sizes", "title": "尺寸", "description": "可用尺寸。" },
+    { "id": "custom-indicator", "title": "自定义指示器", "description": "替换默认图标。" },
+    { "id": "container", "title": "内容加载", "description": "局部遮罩。" },
+    { "id": "text", "title": "带提示文本", "description": "Loading 描述。" },
+    { "id": "styling", "title": "结构化样式", "description": "语义区域样式。" }
+  ]
+}

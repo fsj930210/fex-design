@@ -1,11 +1,11 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 
-export const spinnerClassName = cva('inline-block shrink-0 animate-spin text-current', {
+export const spinnerClassName = cva('inline-block shrink-0 text-current', {
   variants: {
     size: {
-      sm: 'size-3',
-      md: 'size-4',
-      lg: 'size-5',
+      sm: 'size-4',
+      md: 'size-6',
+      lg: 'size-8',
     },
   },
   defaultVariants: {
@@ -13,4 +13,9 @@ export const spinnerClassName = cva('inline-block shrink-0 animate-spin text-cur
   },
 })
 
-export type SpinnerStyleProps = VariantProps<typeof spinnerClassName>
+export const spinnerContainerClassName = 'relative h-full'
+
+export const spinnerOverlayClassName =
+  'absolute inset-0 z-10 flex items-center justify-center gap-2 bg-background/70 backdrop-blur-[1px]'
+
+export const spinnerTextClassName = 'text-sm'

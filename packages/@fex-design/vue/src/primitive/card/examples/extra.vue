@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, CardContent, CardDescription, CardExtra, CardHeader, CardTitle } from '../card'
+import { Card, CardContent, CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/vue/primitive/card'
 </script>
 <template>
   <Card class="w-full max-w-2xl [--card-border:1px_solid_var(--border)]"

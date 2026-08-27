@@ -42,7 +42,7 @@ export default defineConfig({
       }),
       enforce: 'pre',
     },
-    solid({ extensions: ['.md', '.mdx'] }),
+    solid({ extensions: ['.tsx', '.ts', '.md', '.mdx'] }),
     tailwindcss(),
     {
       name: 'fex-example-source',
@@ -56,7 +56,7 @@ export default defineConfig({
           if (
             !extensions[framework] ||
             !['primitive', 'ui'].includes(layer ?? '') ||
-            !['button', 'card'].includes(component ?? '') ||
+            !['button', 'card', 'spinner'].includes(component ?? '') ||
             !/^[a-z-]+$/.test(example ?? '')
           ) {
             response.statusCode = 400

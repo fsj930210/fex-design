@@ -31,20 +31,26 @@ export function ExampleCard(
               源码
             </HeaderButton>
           </div>
-          <div
-            class="flex items-center gap-0.5 rounded-lg border border-[#dce3dd] bg-[#edf1ee] p-0.75"
-            aria-label="示例层级"
-          >
-            {props.layers.map((layer) => (
-              <HeaderButton
-                active={props.layer === layer}
-                onClick={() => props.onLayerChange(layer)}
-                compact
-              >
-                {layer === 'ui' ? 'UI' : 'Primitive'}
-              </HeaderButton>
-            ))}
-          </div>
+          {props.layers.length > 1 && (
+            <div
+              class="flex items-center gap-0.5 rounded-lg border border-[#dce3dd] bg-[#edf1ee] p-0.75"
+              aria-label="示例层级"
+            >
+              {props.layers.map((layer) => (
+                <HeaderButton active={props.layer === layer} onClick={() => props.onLayerChange(layer)} compact>
+                  {layer === 'ui' ? 'UI' : 'Primitive'}
+                </HeaderButton>
+              ))}
+            </div>
+          )}
+          {props.layers.length === 1 && (
+            <span
+              class="rounded-lg border border-[#dce3dd] bg-[#edf1ee] px-2.5 py-1 text-xs text-[#116149]"
+              aria-label="示例层级"
+            >
+              {props.layers[0] === 'ui' ? 'UI' : 'Primitive'}
+            </span>
+          )}
           <div class="flex items-center justify-end gap-0.5">
             {props.tab === 'code' && (
               <button

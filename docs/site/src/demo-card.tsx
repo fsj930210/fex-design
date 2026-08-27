@@ -1,6 +1,7 @@
 import { createEffect, createResource, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { PREVIEW_PROTOCOL } from '@fex-design/docs-shared/preview-protocol'
 import { ExampleCard } from './example-card'
+import { Spinner } from '@fex-design/solid/primitive/spinner'
 import type { Framework, PreviewRuntimeMessage } from './types'
 
 const developmentOrigins: Record<Framework, string> = {
@@ -80,7 +81,6 @@ export function DemoCard(props: {
         standaloneHref={url().replace('?embed=true', '')}
         onTabChange={setTab}
         onLayerChange={(layer) => {
-          setHeight(180)
           setDemoLayer(layer)
         }}
         onCopy={() => void copySource()}
@@ -103,7 +103,7 @@ export function DemoCard(props: {
           <div class="relative min-h-35 bg-background" style={{ height: `${height()}px` }}>
             <Show when={!ready()}>
               <div class="absolute inset-0 z-1 grid place-items-center bg-background" role="status">
-                <span class="size-5.5 animate-spin rounded-full border-2 border-border border-t-primary" />
+                <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
               </div>
             </Show>
             <iframe

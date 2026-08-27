@@ -1,5 +1,5 @@
 import { For } from 'solid-js'
-import { Card } from '../card'
+import { Card } from '@fex-design/solid/ui/card'
 
 export function DirectionExample() {
   return (

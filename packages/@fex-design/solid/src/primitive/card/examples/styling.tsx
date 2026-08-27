@@ -6,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../card'
+} from '@fex-design/solid/primitive/card'
 
 export function StylingExample() {
   return (

@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../card'
+} from '@fex-design/vue/primitive/card'
 </script>
 
 <template>

@@ -15,6 +15,10 @@ export function MdxDocument(props: {
   framework: Framework
   layer: LayerName
 }) {
+  const availableLayers = (sceneId: string): readonly LayerName[] =>
+    (['primitive', 'ui'] as const).filter((layer) =>
+      componentExamples[props.slug][layer].some((scene) => scene.id === sceneId),
+    )
   const components = {
     Layer: (layerProps: ParentProps<{ value: LayerName }>) => (
       <Show when={layerProps.value === props.layer}>{layerProps.children}</Show>
@@ -28,9 +32,7 @@ export function MdxDocument(props: {
               framework={props.framework}
               layer={props.layer}
               slug={props.slug}
-              layers={
-                props.slug === 'card' && scene.id === 'styling' ? ['ui'] : ['primitive', 'ui']
-              }
+              layers={availableLayers(scene.id)}
             />
           )}
         </For>
@@ -79,6 +81,14 @@ export function MdxDocument(props: {
       </pre>
     ),
     code: (codeProps: ParentProps) => <code class="font-mono">{codeProps.children}</code>,
+    table: (tableProps: ParentProps) => (
+      <div class="my-4 overflow-x-auto rounded-xl border border-border">
+        <table class="w-full border-collapse text-left text-sm">{tableProps.children}</table>
+      </div>
+    ),
+    thead: (headProps: ParentProps) => <thead class="bg-muted-background">{headProps.children}</thead>,
+    th: (cellProps: ParentProps) => <th class="px-4 py-3 font-medium text-muted-foreground">{cellProps.children}</th>,
+    td: (cellProps: ParentProps) => <td class="border-t border-border px-4 py-3 align-top">{cellProps.children}</td>,
   }
   return (
     <MDXProvider components={components}>

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardExtra, CardHeader, CardTitle } from '../card'
+import { Card, CardContent, CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/solid/primitive/card'
 export function CustomHeaderExample() {
   return (
     <Card class="w-full max-w-2xl [--card-border:1px_solid_var(--border)]">

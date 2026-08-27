@@ -102,7 +102,7 @@ export function App() {
           </p>
           <MdxDocument
             content={document()!.default}
-            slug={slug() as 'button' | 'card'}
+            slug={slug() as 'button' | 'card' | 'spinner'}
             framework={framework()}
             layer={layer()}
           />

@@ -6,6 +6,7 @@
     "./model": "./src/model.ts",
     "./button-manifest": "./src/button-manifest.ts",
     "./card-manifest": "./src/card-manifest.ts",
+    "./spinner-manifest": "./src/spinner-manifest.ts",
     "./preview-protocol": "./src/preview-protocol.ts"
   }
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Card from '../card.svelte'
+  import Card from '@fex-design/svelte/ui/card'
 
   const directions = ['ltr', 'rtl'] as const
 </script>

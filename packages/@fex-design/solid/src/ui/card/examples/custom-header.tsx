@@ -1,4 +1,4 @@
-import { Card } from '../card'
+import { Card } from '@fex-design/solid/ui/card'
 import { CardDescription, CardExtra, CardHeader, CardTitle } from '../../../primitive/card/card'
 export function CustomHeaderExample() {
   return (

@@ -1,0 +1,105 @@
+---
+title: Spinner
+description: 用于独立加载提示或保留内容状态下的局部 loading 遮罩。
+---
+
+## Primitive 与 UI
+
+Spinner 分为独立指示器和内容 loading 两类场景。
+
+- **Primitive**：提供 `Spinner`、`SpinnerContainer` 和 `SpinnerText`，用于直接组合指示器、文本和自定义布局。
+- **UI**：提供 `Spinner` 和 `SpinnerContainer`。`Spinner` 用于独立加载提示；`SpinnerContainer` 用于保留内容并控制局部 loading 遮罩。
+
+## 何时使用
+
+`Spinner` 适合只需要一个轻量 loading 状态的场景，例如按钮外部的小范围等待、异步字段或列表局部刷新。
+
+`SpinnerContainer` 适合内容已经存在、但需要展示刷新或异步等待状态的区域，例如表格、卡片正文、详情区和设置面板。它不会在 loading 时卸载 children，因此原内容的尺寸、滚动位置和内部状态可以保持稳定。
+
+不要用 Spinner 表达明确的空状态、失败状态或权限状态：这些场景应分别使用 Empty、错误提示或业务反馈组件。
+
+## Composition
+
+```text
+Primitive
+SpinnerContainer
+├── Spinner
+└── SpinnerText
+
+UI
+SpinnerContainer
+├── children
+└── overlay (spinning = true)
+    ├── Spinner
+    └── SpinnerText (optional)
+```
+
+Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。UI `SpinnerContainer` 负责 loading 状态、遮罩和默认居中布局。
+
+## 独立指示器
+
+```tsx
+<Spinner size="sm" aria-label="加载中" />
+```
+
+`Spinner` 默认使用内置 LoadingIcon。需要替换图标时，直接传入框架对应的内容或 slot；不需要为此再创建新的 Spinner 类型。
+
+## 内容 loading
+
+```tsx
+<SpinnerContainer spinning={loading} text="正在加载数据">
+  <DataTable />
+</SpinnerContainer>
+```
+
+`spinning` 有三个明确状态：
+
+| 值 | 输出 |
+| --- | --- |
+| `undefined` | 将 `SpinnerContainer` 作为独立 Spinner 快捷使用。 |
+| `false` | 仅显示 children，不显示遮罩。 |
+| `true` | 保留 children，并在内容上方显示遮罩和 Spinner。 |
+
+## 自定义指示器与文本
+
+容器场景中使用 `indicator` 替换默认 LoadingIcon，使用 `text` 提供描述内容。独立 Spinner 则使用 children 或框架 slot 替换图标。
+
+```tsx
+<SpinnerContainer
+  spinning
+  indicator={<CustomLoadingIcon />}
+  text="正在同步项目数据"
+>
+  <ProjectList />
+</SpinnerContainer>
+```
+
+## 样式边界
+
+样式入口按优先级分为三层：
+
+1. 根节点 `class` / `style`：用于组件实例级布局和尺寸。
+2. `classNames` / `styles`：用于 `root`、`spinner`、`overlay`、`text` 等稳定语义区域。
+3. Primitive 直接组合：需要完全接管 DOM 和布局时使用。
+
+`root` 对应内容容器根节点；`spinner` 对应指示器外层；`overlay` 对应 loading 遮罩；`text` 对应描述内容。自定义指示器本身由调用方传入，直接通过其自身的 class 或 style 定制。
+
+<Layer value="primitive">
+
+## Primitive 能力
+
+Primitive 组件提供带基础视觉样式的最小部件，但不产生 overlay，也不持有 loading 状态。它适合自定义页面布局、复杂区域嵌入或需要把 Spinner 放进已有浮层系统的场景。
+
+</Layer>
+
+## 示例
+
+下列示例运行当前所选框架的原生 Spinner 实现。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Spinner、SpinnerContainer 与 SpinnerText 的公开属性。" />
+
+<ApiSection layer="ui" title="UI API" description="UI Spinner 的独立指示器和内容 loading 容器属性。" />

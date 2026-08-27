@@ -1,24 +1,18 @@
 <script setup lang="ts">
-import { spinnerClassName, type SpinnerStyleProps } from '@fex-design/styles/spinner'
+import { spinnerContainerClassName } from '@fex-design/styles/spinner'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
-import { LoadingIcon } from '../../icon/loading'
-
+import PrimitiveSpinner from '../../primitive/spinner/spinner.vue'
+import SpinnerContainer from '../../primitive/spinner/spinner-container.vue'
+import SpinnerText from '../../primitive/spinner/spinner-text.vue'
 defineOptions({ name: 'Spinner', inheritAttrs: false })
-
-const props = defineProps<{
-  size?: SpinnerStyleProps['size']
-}>()
-
+withDefaults(defineProps<{ spinning?: boolean; text?: string; size?: 'sm' | 'md' | 'lg' }>(), { spinning: false })
 const attrs = useAttrs()
 </script>
-
 <template>
-  <span
-    v-bind="attrs"
-    data-slot="spinner"
-    :class="cn(spinnerClassName({ size: props.size }), attrs.class as string | undefined)"
-  >
-    <LoadingIcon />
-  </span>
+  <template v-if="!spinning"><slot /></template>
+  <SpinnerContainer v-else v-bind="attrs" :class="cn(spinnerContainerClassName, text && 'flex-col', attrs.class as string | undefined)">
+    <PrimitiveSpinner :size="size"><slot name="indicator" /></PrimitiveSpinner>
+    <SpinnerText v-if="text">{{ text }}</SpinnerText>
+  </SpinnerContainer>
 </template>

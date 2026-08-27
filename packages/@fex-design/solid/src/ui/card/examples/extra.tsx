@@ -1,4 +1,4 @@
-import { Card } from '../card'
+import { Card } from '@fex-design/solid/ui/card'
 export function ExtraExample() {
   return (
     <Card

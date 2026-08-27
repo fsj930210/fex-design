@@ -1,0 +1,31 @@
+{
+  "name": "Spinner",
+  "slug": "spinner",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "可组合的基础 loading 指示器、容器和文本原子组件。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/spinner",
+    "vue": "@fex-design/vue/primitive/spinner",
+    "solid": "@fex-design/solid/primitive/spinner",
+    "svelte": "@fex-design/svelte/primitive/spinner",
+    "angular": "@fex-design/angular/primitive/spinner"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "Spinner 指示器尺寸。",
+      "editor": "enum",
+      "options": ["sm", "md", "lg"]
+    }
+  ],
+  "events": [],
+  "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基础组合", "description": "直接组合 Primitive Spinner。" },
+    { "id": "sizes", "title": "尺寸", "description": "小、中、大尺寸。" },
+    { "id": "custom-indicator", "title": "自定义指示器", "description": "替换默认图标。" }
+  ]
+}

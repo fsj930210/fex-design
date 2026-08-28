@@ -33,7 +33,7 @@ for (const [framework, config] of Object.entries(frameworks)) {
         const name = example.name.slice(0, -config.extension.length - 1)
         let source = await readFile(resolve(examplesRoot, example.name), 'utf8')
         let angularTemplateRoot = examplesRoot
-        const reexport = source.match(/export \{ \w+ \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/)
+        const reexport = source.match(/export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/)
         if (layer === 'ui' && reexport) {
           const primitiveRoot = resolve(componentRoot, framework, 'src', 'primitive', reexport[1], 'examples')
           angularTemplateRoot = primitiveRoot

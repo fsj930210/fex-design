@@ -4,7 +4,7 @@
   "layer": "primitive",
   "status": "stable",
   "description": "保持内容宽高比的 styled div 容器。",
-  "nativeElement": "div",
+  "nativeElement": "AspectRatio：div",
   "importPath": { "react": "@fex-design/react/primitive/aspect-ratio", "vue": "@fex-design/vue/primitive/aspect-ratio", "solid": "@fex-design/solid/primitive/aspect-ratio", "svelte": "@fex-design/svelte/primitive/aspect-ratio", "angular": "@fex-design/angular/primitive/aspect-ratio" },
   "props": [{ "name": "ratio", "type": "number", "default": "—", "description": "容器的宽高比，例如 16 / 9。" }],
   "events": [], "cssVariables": [],

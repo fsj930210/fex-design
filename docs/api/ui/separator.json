@@ -4,7 +4,7 @@
   "layer": "ui",
   "status": "stable",
   "description": "Separator Primitive 的 UI 层入口。",
-  "nativeElement": "div",
+  "nativeElement": "Separator：div",
   "importPath": {
     "react": "@fex-design/react/ui/separator",
     "vue": "@fex-design/vue/ui/separator",

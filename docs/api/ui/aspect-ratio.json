@@ -4,7 +4,7 @@
   "layer": "ui",
   "status": "stable",
   "description": "AspectRatio Primitive 的 UI 层入口。",
-  "nativeElement": "div",
+  "nativeElement": "AspectRatio：div",
   "importPath": { "react": "@fex-design/react/ui/aspect-ratio", "vue": "@fex-design/vue/ui/aspect-ratio", "solid": "@fex-design/solid/ui/aspect-ratio", "svelte": "@fex-design/svelte/ui/aspect-ratio", "angular": "@fex-design/angular/ui/aspect-ratio" },
   "props": [{ "name": "ratio", "type": "number", "default": "—", "description": "容器的宽高比，例如 16 / 9；组件同时继承原生 div 属性。" }],
   "events": [], "cssVariables": [],

@@ -77,7 +77,7 @@ export default defineConfig({
             let source = await fs.readFile(file, 'utf8')
             let angularTemplateBase = base
             if (layer === 'ui') {
-              const reexport = source.match(/export \{ \w+ \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/)
+              const reexport = source.match(/export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/)
               if (reexport) {
                 const primitiveBase = path.resolve(process.cwd(), '../../packages/@fex-design', framework, 'src', 'primitive', reexport[1], 'examples')
                 angularTemplateBase = primitiveBase

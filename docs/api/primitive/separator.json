@@ -4,7 +4,7 @@
   "layer": "primitive",
   "status": "stable",
   "description": "用于在相关内容之间建立语义分隔的基础组件。",
-  "nativeElement": "div",
+  "nativeElement": "Separator：div",
   "importPath": {
     "react": "@fex-design/react/primitive/separator",
     "vue": "@fex-design/vue/primitive/separator",

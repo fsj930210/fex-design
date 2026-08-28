@@ -1,8 +1,6 @@
 import { Separator } from '@fex-design/react/primitive/separator'
-import { Card } from '@fex-design/react/ui/card'
 export const MenuDemo = () => (
-  <Card title="Menu" description="Divide groups without splitting related menu items.">
-    <div className="grid max-w-sm gap-1.5">
+  <div className="grid w-full max-w-sm gap-1.5">
       <div>
         <div className="font-medium">Settings</div>
         <div className="text-sm text-muted-foreground">Manage preferences</div>
@@ -16,6 +14,5 @@ export const MenuDemo = () => (
         <div className="font-medium">Sign out</div>
         <div className="text-sm text-muted-foreground">End the current session</div>
       </div>
-    </div>
-  </Card>
+  </div>
 )

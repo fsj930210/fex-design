@@ -1,5 +1,4 @@
 import { Separator } from '@fex-design/react/primitive/separator'
-import { Card } from '@fex-design/react/ui/card'
 const Labeled = ({
   label,
   placement,
@@ -16,14 +15,9 @@ const Labeled = ({
   </div>
 )
 export const TextDemo = () => (
-  <Card
-    title="With Text"
-    description="Compose a label between two separators and control its placement."
-  >
-    <div className="grid max-w-xl gap-4">
+  <div className="grid w-full max-w-xl gap-4">
       <Labeled label="Start" placement="start" />
       <Labeled label="Center" placement="center" />
       <Labeled label="End" placement="end" />
-    </div>
-  </Card>
+  </div>
 )

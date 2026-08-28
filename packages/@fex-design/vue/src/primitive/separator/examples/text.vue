@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Separator } from '@fex-design/vue/primitive/separator'
-import Card from '@fex-design/vue/ui/card'
 const items = [
   ['Workspace', 'Fex Design'],
   ['Plan', 'Team'],
@@ -8,10 +7,7 @@ const items = [
 ]
 </script>
 <template>
-  <Card
-    title="With Text"
-    description="Compose a label between two separators and control its placement."
-    ><div class="grid max-w-xl gap-4">
+  <div class="grid w-full max-w-xl gap-4">
       <div
         v-for="placement in ['Start', 'Center', 'End']"
         :key="placement"
@@ -22,5 +18,5 @@ const items = [
           >{{ placement }}</span
         ><Separator :class="placement === 'End' ? 'w-12' : 'flex-1'" />
       </div></div
-  ></Card>
+  >
 </template>

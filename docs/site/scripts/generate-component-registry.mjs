@@ -11,6 +11,7 @@ const apiRoot = resolve(docsRoot, 'api')
 const manifestRoot = resolve(docsRoot, 'shared/src')
 const output = resolve(siteRoot, 'src/generated/component-registry.ts')
 const layers = ['primitive', 'ui']
+const frameworks = ['react', 'vue', 'solid', 'svelte', 'angular']
 
 function fail(message) {
   throw new Error(`Component registry: ${message}`)
@@ -30,6 +31,20 @@ async function names(root, extension) {
     .filter((entry) => entry.isFile() && entry.name.endsWith(extension))
     .map((entry) => entry.name.slice(0, -extension.length))
     .sort()
+}
+
+async function validateFrameworkContracts(slug, layer) {
+  const file = resolve(apiRoot, layer, `${slug}.json`)
+  const api = JSON.parse(await readFile(file, 'utf8'))
+  for (const framework of frameworks) {
+    const native = api.frameworks?.[framework] ?? {}
+    const properties = (native.props ?? api.props).filter((property) => !native.omitProps?.includes(property.name))
+    for (const property of properties) {
+      if (property.type.includes('FrameworkNode') && !native.typeOverrides?.FrameworkNode) {
+        fail(`${file} leaves FrameworkNode unresolved for ${framework}.${property.name}`)
+      }
+    }
+  }
 }
 
 function parseManifest(sourceText, file) {
@@ -89,6 +104,7 @@ if (documentSlugs.join(',') !== manifestSlugs.join(',')) {
 
 const registry = []
 for (const slug of documentSlugs) {
+  await Promise.all(layers.map((layer) => validateFrameworkContracts(slug, layer)))
   const manifestFile = resolve(manifestRoot, `${slug}-manifest.ts`)
   const manifest = parseManifest(await readFile(manifestFile, 'utf8'), manifestFile)
   registry.push({ slug, manifestFile, ...manifest })

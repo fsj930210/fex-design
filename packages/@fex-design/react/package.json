@@ -81,6 +81,7 @@
     "./primitive/avatar": "./src/primitive/avatar/avatar.tsx",
     "./primitive/progress": "./src/primitive/progress/progress.tsx",
     "./primitive/separator": "./src/primitive/separator/separator.tsx",
+    "./ui/separator": "./src/ui/separator/separator.ts",
     "./primitive/skeleton": "./src/primitive/skeleton/skeleton.tsx",
     "./primitive/spinner": "./src/primitive/spinner/spinner.tsx",
     "./ui/button": "./src/ui/button/button.tsx",

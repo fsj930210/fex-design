@@ -3,8 +3,6 @@ import Card from '@fex-design/vue/ui/card'
 </script>
 <template>
   <Card
-    title="季度增长"
-    description="Header、Content、Footer 使用明显不同的颜色。"
     class="w-full max-w-2xl"
     :class-names="{
       header: 'bg-violet-600',
@@ -14,14 +12,19 @@ import Card from '@fex-design/vue/ui/card'
       footer: 'justify-end bg-amber-300',
     }"
     :styles="{ content: { padding: '2rem' } }"
-    ><template #extra
-      ><span class="rounded-full bg-white/20 px-2 py-1 text-xs font-semibold text-white"
-        >+28.4%</span
-      ></template
-    ><template #footer
-      ><button class="rounded-md bg-amber-950 px-3 py-1.5 font-semibold text-amber-50">
-        查看报告
-      </button></template
-    >Header、Content、Footer 使用明显不同的颜色，便于观察每个语义区域的覆盖边界。</Card
   >
+    <template #title>季度增长</template>
+    <template #description>Header、Content、Footer 使用明显不同的颜色。</template>
+    <template #extra>
+      <span class="rounded-full bg-white/20 px-2 py-1 text-xs font-semibold text-white"
+        >+28.4%</span
+      >
+    </template>
+    <template #footer>
+      <button class="rounded-md bg-amber-950 px-3 py-1.5 font-semibold text-amber-50">
+        查看报告
+      </button>
+    </template>
+    Header、Content、Footer 使用明显不同的颜色，便于观察每个语义区域的覆盖边界。
+  </Card>
 </template>

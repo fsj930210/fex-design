@@ -2,18 +2,16 @@
 import { separatorClassName } from '@fex-design/styles/separator'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
+import type { SeparatorOptions } from '@fex-design/core/separator/types'
 defineOptions({ inheritAttrs: false })
-const props = withDefaults(
-  defineProps<{ orientation?: 'horizontal' | 'vertical'; decorative?: boolean }>(),
-  { orientation: 'horizontal', decorative: true },
-)
+const props = withDefaults(defineProps<SeparatorOptions>(), { orientation: 'horizontal' })
 const attrs = useAttrs()
 </script>
 <template>
   <div
     v-bind="attrs"
-    :role="props.decorative ? 'none' : 'separator'"
-    :aria-orientation="props.decorative ? undefined : props.orientation"
+    role="separator"
+    :aria-orientation="props.orientation"
     data-slot="separator"
     :data-orientation="props.orientation"
     :class="cn(separatorClassName, attrs.class as string | undefined)"

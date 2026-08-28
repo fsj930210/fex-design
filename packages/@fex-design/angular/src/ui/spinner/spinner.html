@@ -1,6 +1,6 @@
 <ng-content />
 @if (spinning()) {
-  <div data-slot="spinner-overlay" [class]="overlayClassName()" [style]="styles().overlay">
+  <div spinnerOverlay [class]="overlayClassName()" [style]="styles().overlay">
     <span spinner [size]="size()" [indicator]="indicator()" [class]="classNames().spinner" [style]="styles().spinner"></span>
     @if (text()) {
       <span spinnerText [class]="classNames().text" [style]="styles().text">{{ text() }}</span>

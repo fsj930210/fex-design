@@ -5,6 +5,7 @@ import { ApiTable } from './api-table'
 import { componentApis, componentExamples, type DocumentedComponent } from './data'
 import { DemoCard } from './demo-card'
 import { CssVariableTable } from './css-variable-table'
+import { resolveComponentApi } from './component-api'
 import type { Framework } from './types'
 
 type LayerName = 'primitive' | 'ui'
@@ -46,8 +47,9 @@ export function MdxDocument(props: {
     ),
     ApiSection: (apiProps: { layer: LayerName; title: string; description: string }) => {
       const value = componentApis[props.slug][apiProps.layer]
+      const nativeApi = resolveComponentApi(value, props.framework)
       return (
-        <Show when={value.props.length > 0 || value.events.length > 0}>
+        <Show when={nativeApi.props.length > 0 || nativeApi.events.length > 0 || nativeApi.slots.length > 0}>
           <h3 id={`${apiProps.layer}-api`} class="mt-8 mb-2 text-lg font-semibold">
             {apiProps.title}
           </h3>

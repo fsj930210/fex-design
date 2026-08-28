@@ -34,6 +34,18 @@
       "@fex-design/core/bubble/types": [
         "packages/@fex-design/core/src/bubble/types.ts"
       ],
+      "@fex-design/core/spinner/types": [
+        "packages/@fex-design/core/src/spinner/types.ts"
+      ],
+      "@fex-design/core/button/types": [
+        "packages/@fex-design/core/src/button/types.ts"
+      ],
+      "@fex-design/core/separator/types": [
+        "packages/@fex-design/core/src/separator/types.ts"
+      ],
+      "@fex-design/core/card/types": [
+        "packages/@fex-design/core/src/card/types.ts"
+      ],
       "@fex-design/core/auto-complete/create-auto-complete-controller": [
         "packages/@fex-design/core/src/auto-complete/create-auto-complete-controller.ts"
       ],
@@ -769,8 +781,14 @@
       "@fex-design/angular/primitive/separator": [
         "packages/@fex-design/angular/src/primitive/separator/separator.ts"
       ],
+      "@fex-design/angular/ui/separator": [
+        "packages/@fex-design/angular/src/ui/separator/separator.ts"
+      ],
       "@fex-design/angular/primitive/skeleton": [
         "packages/@fex-design/angular/src/primitive/skeleton/skeleton.ts"
+      ],
+      "@fex-design/angular/primitive/spinner": [
+        "packages/@fex-design/angular/src/primitive/spinner/spinner.ts"
       ],
       "@fex-design/angular/ui/button": [
         "packages/@fex-design/angular/src/ui/button/button.ts"

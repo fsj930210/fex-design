@@ -89,6 +89,29 @@
       "description": "用户激活按钮时触发。"
     }
   ],
+  "frameworks": {
+    "react": { "typeOverrides": { "FrameworkNode": "ReactNode" } },
+    "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" } },
+    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" } },
+    "vue": {
+      "omitProps": ["icon", "loadingIndicator"],
+      "slots": [
+        { "name": "default", "description": "按钮文字或自定义主体内容。" },
+        { "name": "icon", "description": "按钮图标；根据 iconPlacement 排列。" },
+        { "name": "loadingIndicator", "description": "替换 loading 状态的默认指示器。" }
+      ]
+    },
+    "angular": {
+      "omitProps": ["icon", "loadingIndicator"],
+      "slots": [
+        { "name": "默认内容", "description": "按钮文字或主体内容。" },
+        { "name": "[slot=start]", "description": "未加载时投影到文本前的图标内容。" },
+        { "name": "[slot=end]", "description": "未加载时投影到文本后的图标内容。" },
+        { "name": "[slot=loading-indicator]", "description": "替换 loading 状态的默认指示器。" }
+      ],
+      "slotLabel": "内容投影"
+    }
+  },
   "cssVariables": [
     { "name": "--button-height", "description": "当前按钮实例的高度。" },
     { "name": "--button-icon-size", "description": "当前按钮实例的图标尺寸。" },

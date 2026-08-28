@@ -8,7 +8,7 @@ description: 对相关内容和操作进行分组，并允许每个语义区域�
 Card 由 Header、Content 和 Footer 等区域组成；Primitive 与 UI 使用同一套区域变量。
 
 - **Primitive**：提供 `Card`、`CardHeader`、`CardTitle`、`CardDescription`、`CardExtra`、`CardContent` 和 `CardFooter`。
-- **UI**：通过 `title`、`description`、`extra` 和 `footer` 配置常用区域；`header` 可替换 Header 内容。
+- **UI**：沿用各框架的内容表达：React、Solid 与 Svelte 使用组件参数；Vue 使用具名 Slots；Angular 使用 inputs、模板与内容投影。
 
 ## 何时使用
 
@@ -37,7 +37,7 @@ Card
 
 `CardExtra` 位于 Header 的补充区域，可放置状态、Badge、时间、菜单或操作。
 
-UI Card 设置 `header` 后，不再根据 `title`、`description` 或 `extra` 生成 Header。
+完整替换 Header 后，不再渲染默认标题、说明与补充区域。
 
 `CardFooter` 用于放置操作、摘要或辅助信息。
 
@@ -69,7 +69,7 @@ Primitive Card 通过区域部件组合内容和布局。
 
 <ApiSection layer="primitive" title="Primitive API" description="Primitive Card 的公开属性。" />
 
-<ApiSection layer="ui" title="UI API" description="UI Card 的快捷属性与区域样式入口。" />
+<ApiSection layer="ui" title="UI API" description="UI Card 在当前框架中的原生属性、Slots 或内容投影入口。" />
 
 ## CSS Variables
 

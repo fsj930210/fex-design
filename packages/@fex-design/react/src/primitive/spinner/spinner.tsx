@@ -1,6 +1,7 @@
 import {
   spinnerClassName,
   spinnerContainerClassName,
+  spinnerOverlayClassName,
   spinnerTextClassName,
 } from '@fex-design/styles/spinner'
 import { cn } from '@fex/utils'
@@ -39,5 +40,15 @@ export function Spinner({
 export function SpinnerText({ className, ...props }: ComponentProps<'span'>) {
   return (
     <span data-slot="spinner-text" className={cn(spinnerTextClassName, className)} {...props} />
+  )
+}
+
+export function SpinnerOverlay({ className, ...props }: ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="spinner-overlay"
+      className={cn(spinnerOverlayClassName, className)}
+      {...props}
+    />
   )
 }

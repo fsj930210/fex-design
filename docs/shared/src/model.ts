@@ -18,6 +18,22 @@ export interface ApiEvent {
   description: string
 }
 
+export interface ApiSlot {
+  name: string
+  description: string
+}
+
+export interface FrameworkApi {
+  /** Complete framework-native contract. When present, it replaces the shared rows. */
+  props?: ApiProperty[]
+  /** Framework-native differences applied to the shared property rows. */
+  omitProps?: string[]
+  typeOverrides?: Record<string, string>
+  events?: ApiEvent[]
+  slots?: ApiSlot[]
+  slotLabel?: string
+}
+
 export interface ComponentApi {
   name: string
   slug: string
@@ -27,6 +43,8 @@ export interface ComponentApi {
   importPath: Record<Framework, string>
   props: ApiProperty[]
   events: ApiEvent[]
+  slots?: ApiSlot[]
+  frameworks?: Partial<Record<Framework, FrameworkApi>>
   demos: Array<{ id: string; title: string; description: string }>
   cssVariables?: Array<{ name: string; description: string }>
 }

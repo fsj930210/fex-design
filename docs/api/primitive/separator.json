@@ -1,0 +1,38 @@
+{
+  "name": "Separator",
+  "slug": "separator",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "用于在相关内容之间建立语义分隔的基础组件。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/separator",
+    "vue": "@fex-design/vue/primitive/separator",
+    "solid": "@fex-design/solid/primitive/separator",
+    "svelte": "@fex-design/svelte/primitive/separator",
+    "angular": "@fex-design/angular/primitive/separator"
+  },
+  "props": [
+    {
+      "name": "orientation",
+      "type": "'horizontal' | 'vertical'",
+      "default": "horizontal",
+      "description": "分隔线方向。",
+      "editor": "enum",
+      "options": ["horizontal", "vertical"]
+    }
+  ],
+  "events": [],
+  "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "语义水平分隔线。" },
+    { "id": "vertical", "title": "垂直分隔线", "description": "行内垂直分隔线。" },
+    { "id": "menu", "title": "菜单分组", "description": "分隔菜单中的相关操作组。" },
+    { "id": "list", "title": "列表", "description": "在列表项之间插入分隔线。" },
+    { "id": "text", "title": "带文本", "description": "在两条分隔线之间组合文本。" },
+    {
+      "id": "variants",
+      "title": "Variants",
+      "description": "通过 class 组合 Solid、Dashed 和 Dotted 线型。"
+    }
+  ]
+}

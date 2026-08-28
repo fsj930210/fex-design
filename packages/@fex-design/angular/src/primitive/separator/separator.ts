@@ -1,5 +1,6 @@
 import { separatorClassName } from '@fex-design/styles/separator'
-import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import type { SeparatorOrientation } from '@fex-design/core/separator/types'
 import { createHostClassName } from '../../signals/host-class'
 @Component({
   selector: 'fex-separator',
@@ -7,15 +8,14 @@ import { createHostClassName } from '../../signals/host-class'
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
-    '[attr.role]': 'decorative()?"none":"separator"',
-    '[attr.aria-orientation]': 'decorative()?null:orientation()',
+    role: 'separator',
+    '[attr.aria-orientation]': 'orientation()',
     'data-slot': 'separator',
     '[attr.data-orientation]': 'orientation()',
   },
   template: '',
 })
 export class Separator {
-  readonly orientation = input<'horizontal' | 'vertical'>('horizontal')
-  readonly decorative = input(true, { transform: booleanAttribute })
+  readonly orientation = input<SeparatorOrientation>('horizontal')
   protected readonly hostClassName = createHostClassName(() => separatorClassName)
 }

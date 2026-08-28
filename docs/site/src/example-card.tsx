@@ -37,7 +37,11 @@ export function ExampleCard(
               aria-label="示例层级"
             >
               {props.layers.map((layer) => (
-                <HeaderButton active={props.layer === layer} onClick={() => props.onLayerChange(layer)} compact>
+                <HeaderButton
+                  active={props.layer === layer}
+                  onClick={() => props.onLayerChange(layer)}
+                  compact
+                >
                   {layer === 'ui' ? 'UI' : 'Primitive'}
                 </HeaderButton>
               ))}

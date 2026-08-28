@@ -1,2 +1,2 @@
-<script lang="ts">import { spinnerContainerClassName } from '@fex-design/styles/spinner'; import { cn } from '@fex/utils'; import type { HTMLAttributes } from 'svelte/elements'; import type { Snippet } from 'svelte'; let { class: className, children, ...rest }: HTMLAttributes<HTMLSpanElement> & { children?: Snippet } = $props()</script>
-<span {...rest} data-slot="spinner-container" class={cn(spinnerContainerClassName, className)}>{@render children?.()}</span>
+<script lang="ts">import { spinnerContainerClassName } from '@fex-design/styles/spinner'; import { cn } from '@fex/utils'; import type { HTMLAttributes } from 'svelte/elements'; import type { Snippet } from 'svelte'; let { class: className, children, ...rest }: HTMLAttributes<HTMLDivElement> & { children?: Snippet } = $props()</script>
+<div {...rest} data-slot="spinner-container" class={cn(spinnerContainerClassName, className)}>{@render children?.()}</div>

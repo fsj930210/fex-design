@@ -1,10 +1,11 @@
 import type { SpinnerContainerOptions, SpinnerOptions } from '@fex-design/core/spinner/types'
-import { spinnerContainerClassName, spinnerOverlayClassName } from '@fex-design/styles/spinner'
+import { spinnerContainerClassName } from '@fex-design/styles/spinner'
 import { cn } from '@fex/utils'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 import {
   Spinner,
   SpinnerContainer as PrimitiveSpinnerContainer,
+  SpinnerOverlay,
   SpinnerText,
 } from '../../primitive/spinner/spinner'
 
@@ -45,16 +46,11 @@ export function SpinnerContainer({
     >
       {children}
       {spinning ? (
-        <div
-          data-slot="spinner-overlay"
-          className={cn(spinnerOverlayClassName, classNames?.overlay, text && 'flex-col')}
+        <SpinnerOverlay
+          className={cn(classNames?.overlay, text && 'flex-col')}
           style={styles?.overlay}
         >
-          <Spinner
-            size={size}
-            className={cn(classNames?.spinner, classNames?.indicator)}
-            style={{ ...styles?.spinner, ...styles?.indicator }}
-          >
+          <Spinner size={size} className={classNames?.spinner} style={styles?.spinner}>
             {indicator}
           </Spinner>
           {text ? (
@@ -62,7 +58,7 @@ export function SpinnerContainer({
               {text}
             </SpinnerText>
           ) : null}
-        </div>
+        </SpinnerOverlay>
       ) : null}
     </PrimitiveSpinnerContainer>
   )

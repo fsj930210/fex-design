@@ -11,7 +11,9 @@ for (const layer of ['primitive', 'ui']) for (const component of await readdir(r
     for (const file of await readdir(resolve(root, layer, component.name, 'examples'), { withFileTypes: true })) {
       if (!file.isFile() || !file.name.endsWith('.ts')) continue
       const source = resolve(root, layer, component.name, 'examples', file.name)
-      const exported = (await readFile(source, 'utf8')).match(/export class (\w+)/)?.[1]
+      const content = await readFile(source, 'utf8')
+      const exported = content.match(/export class (\w+)/)?.[1]
+        ?? content.match(/export \{ (\w+) \} from/)?.[1]
       if (exported) entries.push({ key: `${layer}/${component.name}/${file.name.slice(0, -3)}`, exported, source })
     }
   } catch {}

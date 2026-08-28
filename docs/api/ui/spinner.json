@@ -30,13 +30,38 @@
     { "name": "indicator", "type": "FrameworkNode", "description": "自定义 loading 指示器。" }
   ],
   "events": [],
+  "frameworks": {
+    "react": { "typeOverrides": { "FrameworkNode": "ReactNode" } },
+    "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" } },
+    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" } },
+    "vue": {
+      "props": [
+        { "name": "spinning", "type": "boolean | undefined", "description": "undefined 为独立 Spinner；false 显示内容；true 显示内容和遮罩。" },
+        { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "md", "description": "指示器尺寸。" },
+        { "name": "text", "type": "string", "description": "可选 loading 文本。" }
+      ],
+      "slots": [
+        { "name": "default", "description": "spinning 为 false 时显示的内容。" },
+        { "name": "indicator", "description": "替换默认 loading 指示器。" }
+      ]
+    },
+    "angular": {
+      "props": [
+        { "name": "spinning", "type": "boolean | undefined", "description": "undefined 为独立 Spinner；false 显示内容；true 显示内容和遮罩。" },
+        { "name": "size", "type": "SpinnerSize", "default": "'md'", "description": "指示器尺寸。" },
+        { "name": "text", "type": "string", "description": "可选 loading 文本。" },
+        { "name": "indicator", "type": "TemplateRef<unknown>", "description": "替换默认 loading 指示器的模板。" }
+      ],
+      "slots": [{ "name": "默认内容", "description": "投影到 loading 容器中的内容。" }],
+      "slotLabel": "内容投影"
+    }
+  },
   "cssVariables": [],
   "demos": [
     { "id": "basic", "title": "基础用法", "description": "独立 Spinner。" },
     { "id": "sizes", "title": "尺寸", "description": "可用尺寸。" },
     { "id": "custom-indicator", "title": "自定义指示器", "description": "替换默认图标。" },
-    { "id": "container", "title": "内容加载", "description": "局部遮罩。" },
-    { "id": "text", "title": "带提示文本", "description": "Loading 描述。" },
+    { "id": "overlay", "title": "内容加载", "description": "控制内容区域的 loading 遮罩。" },
     { "id": "styling", "title": "结构化样式", "description": "语义区域样式。" }
   ]
 }

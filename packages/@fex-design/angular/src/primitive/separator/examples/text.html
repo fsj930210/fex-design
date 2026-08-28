@@ -1,0 +1,21 @@
+<div
+  card
+  title="With Text"
+  description="Compose a label between two separators and control its placement."
+>
+  <div class="grid max-w-xl gap-4">
+    @for (placement of placements; track placement) {
+    <div class="flex items-center gap-2">
+      <fex-separator
+        [class.w-12]="placement === 'Start'"
+        [class.flex-1]="placement !== 'Start'"
+      /><span class="shrink-0 text-sm text-muted-foreground"
+        >{{ placement }}</span
+      ><fex-separator
+        [class.w-12]="placement === 'End'"
+        [class.flex-1]="placement !== 'End'"
+      />
+    </div>
+    }
+  </div>
+</div>

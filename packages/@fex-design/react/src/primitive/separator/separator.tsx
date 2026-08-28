@@ -1,16 +1,17 @@
 import { separatorClassName } from '@fex-design/styles/separator'
 import { cn } from '@fex/utils'
+import type { SeparatorOptions } from '@fex-design/core/separator/types'
 import type { ComponentProps } from 'react'
+export type SeparatorProps = ComponentProps<'div'> & SeparatorOptions
 export function Separator({
   orientation = 'horizontal',
-  decorative = true,
   className,
   ...props
-}: ComponentProps<'div'> & { orientation?: 'horizontal' | 'vertical'; decorative?: boolean }) {
+}: SeparatorProps) {
   return (
     <div
-      role={decorative ? 'none' : 'separator'}
-      aria-orientation={decorative ? undefined : orientation}
+      role="separator"
+      aria-orientation={orientation}
       data-slot="separator"
       data-orientation={orientation}
       className={cn(separatorClassName, className)}

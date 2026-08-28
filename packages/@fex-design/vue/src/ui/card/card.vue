@@ -2,7 +2,6 @@
 import type { CSSProperties } from 'vue'
 import type {
   CardClassNames as CardClassNamesBase,
-  CardOptions,
   CardStyles as CardStylesBase,
 } from '@fex-design/core/card/types'
 import {
@@ -18,16 +17,9 @@ import {
 export type CardClassNames = CardClassNamesBase
 export type CardStyles = CardStylesBase<CSSProperties>
 export interface CardProps {
-  title?: unknown
-  description?: unknown
-  extra?: unknown
-  footer?: unknown
   classNames?: CardClassNames
   styles?: CardStyles
 }
-
-// Vue SFC 的 Props 分析器无法解析 Omit<imported generic>；公共字段契约仍由 core 持有。
-type CardContract = Omit<CardOptions<unknown, CSSProperties>, 'header'>
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<CardProps>()
@@ -41,22 +33,22 @@ const props = defineProps<CardProps>()
   >
     <slot name="header">
       <CardHeader
-        v-if="title || description || extra || $slots.extra"
+        v-if="$slots.title || $slots.description || $slots.extra"
         :class="props.classNames?.header"
         :style="props.styles?.header"
       >
-      <CardTitle v-if="title" :class="props.classNames?.title" :style="props.styles?.title">{{
-        title
-      }}</CardTitle>
+      <CardTitle v-if="$slots.title" :class="props.classNames?.title" :style="props.styles?.title">
+        <slot name="title" />
+      </CardTitle>
       <CardDescription
-        v-if="description"
+        v-if="$slots.description"
         :class="props.classNames?.description"
         :style="props.styles?.description"
       >
-        {{ description }}
+        <slot name="description" />
       </CardDescription>
-      <CardExtra v-if="extra || $slots.extra" :class="props.classNames?.extra" :style="props.styles?.extra">
-        <slot name="extra">{{ extra }}</slot>
+      <CardExtra v-if="$slots.extra" :class="props.classNames?.extra" :style="props.styles?.extra">
+        <slot name="extra" />
       </CardExtra>
       </CardHeader>
     </slot>
@@ -64,11 +56,11 @@ const props = defineProps<CardProps>()
       <slot />
     </CardContent>
     <CardFooter
-      v-if="$slots.footer || footer"
+      v-if="$slots.footer"
       :class="props.classNames?.footer"
       :style="props.styles?.footer"
     >
-      <slot name="footer">{{ footer }}</slot>
+      <slot name="footer" />
     </CardFooter>
   </PrimitiveCard>
 </template>

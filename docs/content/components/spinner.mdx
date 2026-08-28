@@ -7,7 +7,7 @@ description: 用于独立加载提示或保留内容状态下的局部 loading �
 
 Spinner 分为独立指示器和内容 loading 两类场景。
 
-- **Primitive**：提供 `Spinner`、`SpinnerContainer` 和 `SpinnerText`，用于直接组合指示器、文本和自定义布局。
+- **Primitive**：提供 `Spinner`、`SpinnerContainer`、`SpinnerOverlay` 和 `SpinnerText`，用于直接组合内容、遮罩、指示器和文本。
 - **UI**：提供 `Spinner` 和 `SpinnerContainer`。`Spinner` 用于独立加载提示；`SpinnerContainer` 用于保留内容并控制局部 loading 遮罩。
 
 ## 何时使用
@@ -23,8 +23,10 @@ Spinner 分为独立指示器和内容 loading 两类场景。
 ```text
 Primitive
 SpinnerContainer
-├── Spinner
-└── SpinnerText
+├── children
+└── SpinnerOverlay
+    ├── Spinner
+    └── SpinnerText
 
 UI
 SpinnerContainer
@@ -88,7 +90,7 @@ Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。UI `Spin
 
 ## Primitive 能力
 
-Primitive 组件提供带基础视觉样式的最小部件，但不产生 overlay，也不持有 loading 状态。它适合自定义页面布局、复杂区域嵌入或需要把 Spinner 放进已有浮层系统的场景。
+Primitive 组件提供带基础视觉样式的最小部件，但不持有 loading 状态。调用方通过条件渲染 `SpinnerOverlay` 手动控制遮罩，适合自定义页面布局、复杂区域嵌入或需要自行管理 loading 状态的场景。
 
 </Layer>
 
@@ -100,6 +102,6 @@ Primitive 组件提供带基础视觉样式的最小部件，但不产生 overla
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Primitive Spinner、SpinnerContainer 与 SpinnerText 的公开属性。" />
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Spinner、SpinnerContainer、SpinnerOverlay 与 SpinnerText 的公开属性。" />
 
 <ApiSection layer="ui" title="UI API" description="UI Spinner 的独立指示器和内容 loading 容器属性。" />

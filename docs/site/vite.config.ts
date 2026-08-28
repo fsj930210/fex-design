@@ -56,7 +56,7 @@ export default defineConfig({
           if (
             !extensions[framework] ||
             !['primitive', 'ui'].includes(layer ?? '') ||
-            !['button', 'card', 'spinner'].includes(component ?? '') ||
+            !['button', 'card', 'separator', 'spinner'].includes(component ?? '') ||
             !/^[a-z-]+$/.test(example ?? '')
           ) {
             response.statusCode = 400
@@ -75,11 +75,21 @@ export default defineConfig({
           const file = path.join(base, `${example}.${extensions[framework]}`)
           try {
             let source = await fs.readFile(file, 'utf8')
+            let angularTemplateBase = base
+            if (layer === 'ui') {
+              const reexport = source.match(/export \{ \w+ \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/)
+              if (reexport) {
+                const primitiveBase = path.resolve(process.cwd(), '../../packages/@fex-design', framework, 'src', 'primitive', reexport[1], 'examples')
+                angularTemplateBase = primitiveBase
+                source = await fs.readFile(path.join(primitiveBase, `${reexport[2]}.${extensions[framework]}`), 'utf8')
+                source = source.replaceAll(`@fex-design/${framework}/primitive/${reexport[1]}`, `@fex-design/${framework}/ui/${component}`)
+                if (framework === 'angular') source = source.replace("from '../separator'", "from '@fex-design/angular/ui/separator'")
+                if (framework === 'svelte') source = source.replace(/from ['"][^'"]*separator\.svelte['"]/, "from '@fex-design/svelte/ui/separator'")
+              }
+            }
             if (framework === 'angular') {
               try {
-                source +=
-                  `\n\n<!-- ${example}.html -->\n` +
-                  (await fs.readFile(path.join(base, `${example}.html`), 'utf8'))
+                  source += `\n\n<!-- ${example}.html -->\n${await fs.readFile(path.join(angularTemplateBase, `${example}.html`), 'utf8')}`
               } catch {}
             }
             const language =

@@ -1,0 +1,19 @@
+<div
+  card
+  title="List"
+  description="Place separators between rows, not after the final item."
+>
+  <div class="grid max-w-lg">
+    @for (item of items; track item.label; let last = $last) {
+    <div>
+      <div class="flex justify-between py-2">
+        <span>{{ item.label }}</span
+        ><span class="text-muted-foreground">{{ item.value }}</span>
+      </div>
+      @if (!last) {
+      <fex-separator />
+      }
+    </div>
+    }
+  </div>
+</div>

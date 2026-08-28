@@ -11,7 +11,7 @@ const path = window.location.pathname.split('/').filter(Boolean)
 const layer = query.get('layer') ?? path.at(-3)
 const component = query.get('component') ?? path.at(-2)
 const demo = query.get('demo') ?? path.at(-1)
-// Glob 是 Preview 的示例注册表；示例清单版本 2，强制 Vite 重新收集。
+// Glob 是 Preview 的示例注册表；示例清单版本 4，强制 Vite 重新收集。
 const exampleModules = import.meta.glob(
   '../../../../packages/@fex-design/solid/src/{primitive,ui}/*/examples/*.tsx',
   { eager: true },
@@ -20,7 +20,7 @@ const examplePath = Object.keys(exampleModules).find((key) =>
   key.includes(`/${layer}/${component}/examples/${demo}.tsx`),
 )
 const Example = examplePath
-  ? Object.values(exampleModules[examplePath]).find((value) => typeof value === 'function')
+  ? (exampleModules[examplePath].default ?? Object.values(exampleModules[examplePath]).find((value) => typeof value === 'function'))
   : undefined
 const embedded = query.get('embed') === 'true'
 

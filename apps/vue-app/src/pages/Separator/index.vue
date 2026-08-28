@@ -17,7 +17,7 @@ const items = [
             Composable components for five frameworks.
           </div>
         </div>
-        <Separator :decorative="false" />
+        <Separator />
         <div class="text-sm">React · Vue · Solid · Svelte · Angular</div>
       </div></Card
     ><Card title="Vertical" description="Use vertical separators between compact inline items."

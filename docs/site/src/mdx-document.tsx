@@ -78,11 +78,11 @@ export function MdxDocument(props: {
       <ul class="mt-3 mb-6 list-disc pl-6 leading-7 text-foreground">{listProps.children}</ul>
     ),
     pre: (preProps: ParentProps) => (
-      <pre class="my-4 mb-7 overflow-x-auto rounded-xl border border-border bg-muted-background px-5 py-4.5 text-foreground">
+      <pre class="my-4 mb-7 overflow-x-auto rounded-xl border border-border bg-muted-background px-5 py-4.5 text-foreground [&>code]:block [&>code]:whitespace-pre [&>code]:font-mono">
         {preProps.children}
       </pre>
     ),
-    code: (codeProps: ParentProps) => <code class="font-mono">{codeProps.children}</code>,
+    code: (codeProps: ParentProps & { class?: string }) => <code class={codeProps.class ?? 'font-mono'}>{codeProps.children}</code>,
     table: (tableProps: ParentProps) => (
       <div class="my-4 overflow-x-auto rounded-xl border border-border">
         <table class="w-full border-collapse text-left text-sm">{tableProps.children}</table>

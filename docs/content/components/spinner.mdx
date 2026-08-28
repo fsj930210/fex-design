@@ -76,16 +76,6 @@ Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。UI `Spin
 </SpinnerContainer>
 ```
 
-## 样式边界
-
-样式入口按优先级分为三层：
-
-1. 根节点 `class` / `style`：用于组件实例级布局和尺寸。
-2. `classNames` / `styles`：用于 `root`、`spinner`、`overlay`、`text` 等稳定语义区域。
-3. Primitive 直接组合：需要完全接管 DOM 和布局时使用。
-
-`root` 对应内容容器根节点；`spinner` 对应指示器外层；`overlay` 对应 loading 遮罩；`text` 对应描述内容。自定义指示器本身由调用方传入，直接通过其自身的 class 或 style 定制。
-
 <Layer value="primitive">
 
 ## Primitive 能力

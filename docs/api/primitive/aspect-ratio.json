@@ -1,0 +1,12 @@
+{
+  "name": "AspectRatio",
+  "slug": "aspect-ratio",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "保持内容宽高比的 styled div 容器。",
+  "nativeElement": "div",
+  "importPath": { "react": "@fex-design/react/primitive/aspect-ratio", "vue": "@fex-design/vue/primitive/aspect-ratio", "solid": "@fex-design/solid/primitive/aspect-ratio", "svelte": "@fex-design/svelte/primitive/aspect-ratio", "angular": "@fex-design/angular/primitive/aspect-ratio" },
+  "props": [{ "name": "ratio", "type": "number", "default": "—", "description": "容器的宽高比，例如 16 / 9。" }],
+  "events": [], "cssVariables": [],
+  "demos": [{ "id": "landscape", "title": "横向比例", "description": "使用 16:9 宽高比。" }, { "id": "portrait", "title": "竖向比例", "description": "使用 9:16 宽高比。" }, { "id": "square", "title": "正方形比例", "description": "使用 1:1 宽高比。" }]
+}

@@ -79,6 +79,7 @@
     "./primitive/tour": "./src/primitive/tour/tour.tsx",
     "./primitive/badge": "./src/primitive/badge/badge.tsx",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.tsx",
+    "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.tsx",
     "./primitive/avatar": "./src/primitive/avatar/avatar.tsx",
     "./primitive/progress": "./src/primitive/progress/progress.tsx",
     "./primitive/separator": "./src/primitive/separator/separator.tsx",

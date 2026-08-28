@@ -4,6 +4,7 @@
   "layer": "ui",
   "status": "stable",
   "description": "基于 Card Primitive 的快捷信息容器，提供标题、说明、额外内容、Footer 与语义化区域样式入口。",
+  "nativeElement": "Card：div\nCardHeader：div\nCardTitle：div\nCardDescription：div\nCardExtra：div\nCardContent：div\nCardFooter：div",
   "importPath": {
     "react": "@fex-design/react/ui/card",
     "vue": "@fex-design/vue/ui/card",

@@ -4,6 +4,7 @@
   "layer": "primitive",
   "status": "stable",
   "description": "由 Card、Header、Title、Description、Extra、Content、Footer 组成的可组合信息容器。",
+  "nativeElement": "Card：div\nCardHeader：div\nCardTitle：div\nCardDescription：div\nCardExtra：div\nCardContent：div\nCardFooter：div",
   "importPath": {
     "react": "@fex-design/react/primitive/card",
     "vue": "@fex-design/vue/primitive/card",

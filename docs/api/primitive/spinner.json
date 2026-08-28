@@ -4,6 +4,7 @@
   "layer": "primitive",
   "status": "stable",
   "description": "可组合的基础 loading 指示器、容器、遮罩和文本原子组件。",
+  "nativeElement": "Spinner：span\nSpinnerText：span\nSpinnerContainer：div\nSpinnerOverlay：div",
   "importPath": {
     "react": "@fex-design/react/primitive/spinner",
     "vue": "@fex-design/vue/primitive/spinner",

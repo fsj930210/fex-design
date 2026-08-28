@@ -4,6 +4,7 @@
   "layer": "ui",
   "status": "stable",
   "description": "独立 loading 指示器和内容区域 loading 容器。",
+  "nativeElement": "Spinner：span\nSpinnerText：span\nSpinnerContainer：div",
   "importPath": {
     "react": "@fex-design/react/ui/spinner",
     "vue": "@fex-design/vue/ui/spinner",

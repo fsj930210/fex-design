@@ -244,6 +244,7 @@
     "./primitive/tooltip-arrow": "./src/primitive/tooltip/tooltip-arrow.svelte",
     "./primitive/badge": "./src/primitive/badge/badge.ts",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.svelte",
+    "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.svelte",
     "./primitive/avatar": "./src/primitive/avatar/avatar.ts",
     "./primitive/avatar-image": "./src/primitive/avatar/avatar-image.svelte",
     "./primitive/avatar-fallback": "./src/primitive/avatar/avatar-fallback.svelte",

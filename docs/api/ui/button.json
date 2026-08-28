@@ -4,6 +4,7 @@
   "layer": "ui",
   "status": "stable",
   "description": "触发即时操作，并清晰表达动作层级与当前状态。",
+  "nativeElement": "Button：button\nButtonIcon：span\nButtonGroup：div",
   "importPath": {
     "react": "@fex-design/react/ui/button",
     "vue": "@fex-design/vue/ui/button",

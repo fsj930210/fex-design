@@ -2,8 +2,9 @@
 import { aspectRatioClassName } from '@fex-design/styles/aspect-ratio'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
+import type { AspectRatioOptions } from '@fex-design/core/aspect-ratio/types'
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{ ratio: number }>()
+const props = defineProps<AspectRatioOptions>()
 const attrs = useAttrs()
 </script>
 <template>

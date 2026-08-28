@@ -77,7 +77,7 @@ export function ExampleCard(
           </div>
         </div>
       }
-      classNames={{ content: 'p-0' }}
+      classNames={{ content: 'p-4' }}
     >
       {props.children}
     </Card>

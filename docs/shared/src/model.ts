@@ -40,6 +40,7 @@ export interface ComponentApi {
   layer: 'primitive' | 'ui' | 'pro'
   status: 'draft' | 'stable' | 'deprecated'
   description: string
+  nativeElement?: string
   importPath: Record<Framework, string>
   props: ApiProperty[]
   events: ApiEvent[]

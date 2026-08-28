@@ -22,6 +22,7 @@
     "./spinner/types": "./src/spinner/types.ts",
     "./button/types": "./src/button/types.ts",
     "./separator/types": "./src/separator/types.ts",
+    "./aspect-ratio/types": "./src/aspect-ratio/types.ts",
     "./card/types": "./src/card/types.ts",
     "./auto-complete/create-auto-complete-controller": "./src/auto-complete/create-auto-complete-controller.ts",
     "./auto-complete/items": "./src/auto-complete/items.ts",

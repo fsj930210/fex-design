@@ -1,6 +1,6 @@
 export const cardClassName = [
   'group/card block overflow-hidden rounded-[var(--card-radius,var(--radius-md))]',
-  '[border:var(--card-border,none)] shadow-[var(--card-shadow,none)]',
+  '[border:var(--card-border,1px_solid_var(--border))] shadow-[var(--card-shadow,none)]',
 ].join(' ')
 
 export const cardHeaderClassName = [

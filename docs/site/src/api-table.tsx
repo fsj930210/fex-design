@@ -7,6 +7,19 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
   const value = () => resolveComponentApi(props.value, props.framework)
   return (
     <div class="mt-5 space-y-6">
+      <Show when={props.value.nativeElement}>
+        {(nativeElement) => (
+          <section>
+            <h4 class="mb-2 text-sm font-semibold">原生能力</h4>
+            <div class="rounded-lg border border-border bg-muted-background px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+              <For each={nativeElement().split('\n')}>
+                {(line) => <code class="block text-primary">{line}</code>}
+              </For>
+              <p class="mt-2 mb-0">原生属性、事件、ARIA 属性、class 和 style 均可继续使用。</p>
+            </div>
+          </section>
+        )}
+      </Show>
       <Show when={value().props.length > 0}>
         <section>
           <h4 class="mb-2 text-sm font-semibold">属性</h4>

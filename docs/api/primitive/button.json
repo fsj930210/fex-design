@@ -4,6 +4,7 @@
   "layer": "primitive",
   "status": "stable",
   "description": "职责完整的按钮原子组件：提供原生语义与属性事件透传、基础交互状态、图标组合和按钮组能力，可独立构建自定义按钮系统。",
+  "nativeElement": "Button：button\nButtonIcon：span\nButtonGroup：div",
   "importPath": {
     "react": "@fex-design/react/primitive/button",
     "vue": "@fex-design/vue/primitive/button",

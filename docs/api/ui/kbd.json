@@ -4,6 +4,7 @@
   "layer": "ui",
   "status": "stable",
   "description": "Kbd Primitive 的 UI 层入口。",
+  "nativeElement": "Kbd：kbd\nKbdGroup：div",
   "importPath": { "react": "@fex-design/react/ui/kbd", "vue": "@fex-design/vue/ui/kbd", "solid": "@fex-design/solid/ui/kbd", "svelte": "@fex-design/svelte/ui/kbd", "angular": "@fex-design/angular/ui/kbd" },
   "props": [],
   "events": [],

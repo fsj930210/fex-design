@@ -17,6 +17,10 @@ function fail(message) {
   throw new Error(`Component registry: ${message}`)
 }
 
+function toIdentifier(slug) {
+  return slug.replace(/(^|-)([a-z])/g, (_, _separator, character) => character.toUpperCase())
+}
+
 function unwrapExpression(expression) {
   let current = expression
   while (ts.isAsExpression(current) || ts.isParenthesizedExpression(current) || ts.isSatisfiesExpression(current)) {
@@ -115,18 +119,19 @@ const lines = [
   "import type { ComponentApi } from '../types'",
 ]
 for (const item of registry) {
+  const name = toIdentifier(item.slug)
   for (const layer of layers) {
-    lines.push(`import ${layer}${item.slug[0].toUpperCase()}${item.slug.slice(1)}Api from '${importPath(output, resolve(apiRoot, layer, `${item.slug}.json`))}'`)
+    lines.push(`import ${layer}${name}Api from '${importPath(output, resolve(apiRoot, layer, `${item.slug}.json`))}'`)
   }
-  lines.push(`import * as ${item.slug}Manifest from '${importPath(output, item.manifestFile)}'`)
+  lines.push(`import * as ${item.slug.replace(/-/g, '')}Manifest from '${importPath(output, item.manifestFile)}'`)
 }
 lines.push('', 'export const componentApis = {')
 for (const item of registry) {
-  const name = `${item.slug[0].toUpperCase()}${item.slug.slice(1)}`
-  lines.push(`  ${item.slug}: { primitive: primitive${name}Api as ComponentApi, ui: ui${name}Api as ComponentApi },`)
+  const name = toIdentifier(item.slug)
+  lines.push(`  '${item.slug}': { primitive: primitive${name}Api as ComponentApi, ui: ui${name}Api as ComponentApi },`)
 }
 lines.push("} as const satisfies Record<string, Record<'primitive' | 'ui', ComponentApi>>", '', 'export const componentExamples = {')
-for (const item of registry) lines.push(`  ${item.slug}: ${item.slug}Manifest.${item.exportName},`)
+for (const item of registry) lines.push(`  '${item.slug}': ${item.slug.replace(/-/g, '')}Manifest.${item.exportName},`)
 lines.push('} as const', '', 'export type DocumentedComponent = keyof typeof componentApis', '', 'export function isDocumentedComponent(slug: string): slug is DocumentedComponent {', '  return slug in componentApis', '}', '')
 
 await mkdir(dirname(output), { recursive: true })

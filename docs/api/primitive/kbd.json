@@ -4,6 +4,7 @@
   "layer": "primitive",
   "status": "stable",
   "description": "带基础样式的键盘按键与按键组合。",
+  "nativeElement": "Kbd：kbd\nKbdGroup：div",
   "importPath": { "react": "@fex-design/react/primitive/kbd", "vue": "@fex-design/vue/primitive/kbd", "solid": "@fex-design/solid/primitive/kbd", "svelte": "@fex-design/svelte/primitive/kbd", "angular": "@fex-design/angular/primitive/kbd" },
   "props": [],
   "events": [],

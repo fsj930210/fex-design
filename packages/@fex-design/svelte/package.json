@@ -102,6 +102,8 @@
     "./primitive/form": "./src/primitive/form/form.svelte",
     "./primitive/form/create-form": "./src/primitive/form/create-form.ts",
     "./primitive/input": "./src/primitive/input/input.ts",
+    "./primitive/kbd": "./src/primitive/kbd/kbd.svelte",
+    "./primitive/kbd-group": "./src/primitive/kbd/kbd-group.svelte",
     "./primitive/input-otp": "./src/primitive/input-otp/input-otp-root.svelte",
     "./primitive/input-otp-group": "./src/primitive/input-otp/input-otp-group.svelte",
     "./primitive/input-otp-input": "./src/primitive/input-otp/input-otp-input.svelte",

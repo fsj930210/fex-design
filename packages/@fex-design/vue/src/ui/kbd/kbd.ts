@@ -1,2 +1,1 @@
-export { default as Kbd } from './kbd.vue'
-export { default as KbdGroup } from './kbd-group.vue'
+export { Kbd, KbdGroup } from '../../primitive/kbd/kbd'

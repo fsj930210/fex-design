@@ -1,0 +1,3 @@
+# Kbd UI
+
+The UI layer re-exports the styled Primitive `Kbd` and `KbdGroup`. Use them to display keyboard shortcuts; native attributes are forwarded.

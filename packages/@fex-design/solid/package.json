@@ -30,6 +30,7 @@
     "./primitive/field": "./src/primitive/field/field.tsx",
     "./primitive/form": "./src/primitive/form/form.tsx",
     "./primitive/input": "./src/primitive/input/input.tsx",
+    "./primitive/kbd": "./src/primitive/kbd/kbd.tsx",
     "./primitive/input-otp": "./src/primitive/input-otp/input-otp.tsx",
     "./primitive/input/create-input": "./src/primitive/input/create-input.ts",
     "./primitive/input-number": "./src/primitive/input-number/input-number.tsx",

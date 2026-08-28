@@ -1,0 +1,18 @@
+---
+title: Kbd
+description: 用于展示键盘按键和快捷键组合。
+---
+
+## Primitive 与 UI
+
+`Kbd` 是带基础样式的原生 `kbd` 封装，`KbdGroup` 用于组合多个按键。UI 层不增加额外交互，直接复用 Primitive。
+
+## 基础用法
+
+```tsx
+<KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup>
+```
+
+按键文本应简短；组件不会监听键盘事件，也不代表可交互控件。
+
+<Demos />

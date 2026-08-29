@@ -1,0 +1,2 @@
+<script lang="ts">import Avatar from '@fex-design/svelte/primitive/avatar'; import AvatarFallback from '@fex-design/svelte/primitive/avatar-fallback'; import AvatarGroup from '@fex-design/svelte/primitive/avatar-group'; import AvatarGroupCount from '@fex-design/svelte/primitive/avatar-group-count'</script>
+<AvatarGroup>{#each Array(3) as _}<Avatar shape="square"><AvatarFallback>FX</AvatarFallback></Avatar>{/each}<AvatarGroupCount class="rounded-md">+3</AvatarGroupCount></AvatarGroup>

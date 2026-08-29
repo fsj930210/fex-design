@@ -8,7 +8,7 @@
   import { getContext } from 'svelte'
   import ChevronLeftIcon from '../../icon/chevron-left.svelte'
   import ChevronRightIcon from '../../icon/chevron-right.svelte'
-  import Button from '../button/button.svelte'
+import { Button } from '@fex-design/svelte/primitive/button'
   import { calendarContextKey, type CalendarContextValue } from '../calendar/context'
   import { useHeaderOwner } from './date-picker-header-owner'
 

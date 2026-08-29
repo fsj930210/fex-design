@@ -12,7 +12,8 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
-    "./tree": "./src/tree.ts"
+    "./tree": "./src/tree.ts",
+    "./image/load-image": "./src/image/load-image.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

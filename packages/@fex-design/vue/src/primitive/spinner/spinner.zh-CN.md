@@ -1,15 +1,34 @@
 # Vue Primitive Spinner
 
-底层有样式 Spinner 原子组件。`Spinner` 提供指示器，`SpinnerContainer` 负责组合内容，`SpinnerText` 提供描述文本。Primitive 不管理 `spinning`，也不渲染内容遮罩。
+可组合的 loading 指示器、文本、容器和遮罩原子组件。
 
 ## 导入
 
-    import { Spinner, SpinnerContainer, SpinnerText } from '@fex-design/vue/primitive/spinner'
+    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/vue/primitive/spinner'
 
-## API
+## 组件
 
-`Spinner` 支持 `size: 'sm' | 'md' | 'lg'`；默认 slot 会替换内置 LoadingIcon。三个组件都透传原生属性，组合布局通过 `class` 和 `style` 控制。
+| 组件 | 元素 | 说明 |
+| --- | --- | --- |
+| Spinner | span | 继承原生 span，原生 span 的所有属性和事件均可透传；loading 指示器。 |
+| SpinnerText | span | 继承原生 span，原生 span 的所有属性和事件均可透传；loading 文本。 |
+| SpinnerContainer | div | 继承原生 div，原生 div 的所有属性和事件均可透传；内容与 loading 状态容器。 |
+| SpinnerOverlay | div | 继承原生 div，原生 div 的所有属性和事件均可透传；Primitive 遮罩节点。 |
 
 ## 示例
 
-`basic` 直接组合三个 Primitive 组件。
+示例保存在 `examples/<name>`，作为官网预览源码。
+
+| 名称 | 覆盖内容 |
+| --- | --- |
+| basic | 基础指示器。 |
+| sizes | 三种尺寸。 |
+| custom-indicator | 自定义指示器。 |
+| overlay | 内容区域遮罩。 |
+| styling | 结构化样式。 |
+
+## API
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| size | 'sm' | 'md' | 'lg' | 'md' | 指示器尺寸。 |

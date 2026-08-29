@@ -1,0 +1,724 @@
+{
+  "name": "Avatar primitives",
+  "slug": "avatar",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "可组合的头像基础组件集合。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/avatar",
+    "vue": "@fex-design/vue/primitive/avatar",
+    "solid": "@fex-design/solid/primitive/avatar",
+    "svelte": "@fex-design/svelte/primitive/avatar",
+    "angular": "@fex-design/angular/primitive/avatar"
+  },
+  "props": [],
+  "events": [],
+  "slots": [],
+  "demos": [],
+  "components": [
+    {
+      "name": "Avatar",
+      "slug": "avatar",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "Avatar 组件继承原生 span，原生 span 的所有属性和事件均可透传；作为头像图片、fallback 和 badge 的根容器。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/avatar",
+        "vue": "@fex-design/vue/primitive/avatar",
+        "solid": "@fex-design/solid/primitive/avatar",
+        "svelte": "@fex-design/svelte/primitive/avatar",
+        "angular": "@fex-design/angular/primitive/avatar"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "'md'",
+          "description": "头像尺寸。"
+        },
+        {
+          "name": "shape",
+          "type": "'circle' | 'square'",
+          "default": "'circle'",
+          "description": "头像形状。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "'md'",
+              "description": "头像尺寸。"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "default": "'circle'",
+              "description": "头像形状。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "'md'",
+              "description": "头像尺寸。"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "default": "'circle'",
+              "description": "头像形状。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "'md'",
+              "description": "头像尺寸。"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "default": "'circle'",
+              "description": "头像形状。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "'md'",
+              "description": "头像尺寸。"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "default": "'circle'",
+              "description": "头像形状。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "'md'",
+              "description": "头像尺寸。"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "default": "'circle'",
+              "description": "头像形状。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AvatarImage",
+      "slug": "avatar-image",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "AvatarImage 组件继承原生 img，原生 img 的所有属性和事件均可透传；负责显示头像图片。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/avatar",
+        "vue": "@fex-design/vue/primitive/avatar",
+        "solid": "@fex-design/solid/primitive/avatar",
+        "svelte": "@fex-design/svelte/primitive/avatar",
+        "angular": "@fex-design/angular/primitive/avatar"
+      },
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "description": "图片地址。"
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "description": "替代文本。"
+        },
+        {
+          "name": "srcSet",
+          "type": "string",
+          "description": "响应式图片地址。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "src",
+              "type": "string",
+              "description": "图片地址。"
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "description": "替代文本。"
+            },
+            {
+              "name": "srcSet",
+              "type": "string",
+              "description": "响应式图片地址。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "src",
+              "type": "string",
+              "description": "图片地址。"
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "description": "替代文本。"
+            },
+            {
+              "name": "srcSet",
+              "type": "string",
+              "description": "响应式图片地址。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "src",
+              "type": "string",
+              "description": "图片地址。"
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "description": "替代文本。"
+            },
+            {
+              "name": "srcSet",
+              "type": "string",
+              "description": "响应式图片地址。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "src",
+              "type": "string",
+              "description": "图片地址。"
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "description": "替代文本。"
+            },
+            {
+              "name": "srcSet",
+              "type": "string",
+              "description": "响应式图片地址。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "src",
+              "type": "string",
+              "description": "图片地址。"
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "description": "替代文本。"
+            },
+            {
+              "name": "srcSet",
+              "type": "string",
+              "description": "响应式图片地址。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AvatarFallback",
+      "slug": "avatar-fallback",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "AvatarFallback 组件继承原生 span，原生 span 的所有属性和事件均可透传；在图片不可用时显示替代内容。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/avatar",
+        "vue": "@fex-design/vue/primitive/avatar",
+        "solid": "@fex-design/solid/primitive/avatar",
+        "svelte": "@fex-design/svelte/primitive/avatar",
+        "angular": "@fex-design/angular/primitive/avatar"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AvatarBadge",
+      "slug": "avatar-badge",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "AvatarBadge 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于在头像右下角显示状态或图标。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/avatar",
+        "vue": "@fex-design/vue/primitive/avatar",
+        "solid": "@fex-design/solid/primitive/avatar",
+        "svelte": "@fex-design/svelte/primitive/avatar",
+        "angular": "@fex-design/angular/primitive/avatar"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AvatarGroup",
+      "slug": "avatar-group",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "AvatarGroup 组件继承原生 div，原生 div 的所有属性和事件均可透传；负责多个头像的重叠布局。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/avatar",
+        "vue": "@fex-design/vue/primitive/avatar",
+        "solid": "@fex-design/solid/primitive/avatar",
+        "svelte": "@fex-design/svelte/primitive/avatar",
+        "angular": "@fex-design/angular/primitive/avatar"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AvatarGroupCount",
+      "slug": "avatar-group-count",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "AvatarGroupCount 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于显示头像组的剩余数量或自定义溢出内容。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/avatar",
+        "vue": "@fex-design/vue/primitive/avatar",
+        "solid": "@fex-design/solid/primitive/avatar",
+        "svelte": "@fex-design/svelte/primitive/avatar",
+        "angular": "@fex-design/angular/primitive/avatar"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

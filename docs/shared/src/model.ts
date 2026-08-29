@@ -47,5 +47,6 @@ export interface ComponentApi {
   slots?: ApiSlot[]
   frameworks?: Partial<Record<Framework, FrameworkApi>>
   demos: Array<{ id: string; title: string; description: string }>
+  components?: ComponentApi[]
   cssVariables?: Array<{ name: string; description: string }>
 }

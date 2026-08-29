@@ -1,15 +1,34 @@
 # Vue Primitive Spinner
 
-Low-level styled Spinner primitives. `Spinner` provides the indicator, `SpinnerContainer` composes content, and `SpinnerText` provides description content. Primitive does not manage `spinning` or render a content overlay.
+Composable loading indicator, text, container, and overlay primitives.
 
 ## Import
 
-    import { Spinner, SpinnerContainer, SpinnerText } from '@fex-design/vue/primitive/spinner'
+    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/vue/primitive/spinner'
 
-## API
+## Components
 
-`Spinner` accepts `size: 'sm' | 'md' | 'lg'` and a default slot that replaces the built-in LoadingIcon. All components forward native attributes. Use `class` and `style` to control composition layout.
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Spinner | span | Inherits the native span; all native attributes and events pass through. Loading indicator. |
+| SpinnerText | span | Inherits the native span; all native attributes and events pass through. Loading text. |
+| SpinnerContainer | div | Inherits the native div; all native attributes and events pass through. Content and loading-state container. |
+| SpinnerOverlay | div | Inherits the native div; all native attributes and events pass through. Primitive overlay node. |
 
 ## Examples
 
-`basic` composes the three primitive components directly.
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Basic indicator. |
+| sizes | Three sizes. |
+| custom-indicator | Custom indicator. |
+| overlay | Content overlay. |
+| styling | Structured styling. |
+
+## API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| size | 'sm' | 'md' | 'lg' | 'md' | Indicator size. |

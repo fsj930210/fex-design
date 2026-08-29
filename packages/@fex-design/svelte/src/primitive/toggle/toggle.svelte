@@ -3,7 +3,7 @@
   import { cn } from '@fex/utils'
   import { getContext, type Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
-  import Button from '../button/button.svelte'
+import { Button } from '@fex-design/svelte/primitive/button'
   import { toggleGroupContextKey, type ToggleGroupContextValue } from './context'
   interface Props extends Omit<HTMLButtonAttributes, 'children' | 'onchange' | 'value'>, ToggleStyleProps { pressed?: boolean; defaultPressed?: boolean; value?: string; children?: Snippet; onchange?: (pressed: boolean) => void }
   let { pressed, defaultPressed = false, value, disabled, variant, size, class: className, onclick, onchange, children, ...rest }: Props = $props()

@@ -4,11 +4,11 @@
     [class]="item.className"
     [attr.aria-label]="item.size"
   >
-    @if (item.size.startsWith('icon')) {<span buttonIcon><fex-plus-icon /></span>} @else { {{
+    @if (item.size.startsWith('icon')) {<span buttonIcon><plus-icon /></span>} @else { {{
     item.size }} }</button
   >}
   <button button class="h-12 px-6 text-base">custom</button>
   <button button class="size-12 px-0" aria-label="custom icon size">
-    <span buttonIcon><fex-plus-icon /></span>
+    <span buttonIcon><plus-icon /></span>
   </button>
 </div>

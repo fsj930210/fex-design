@@ -8,13 +8,11 @@ import {
   avatarGroupOverflowClassName,
   type AvatarStyleProps,
 } from '@fex-design/styles/avatar'
-import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
-import { NgTemplateOutlet } from '@angular/common'
-import { ChangeDetectionStrategy, Component, ElementRef, TemplateRef, computed, contentChildren, effect, inject, input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, ElementRef, computed, effect, inject, input } from '@angular/core'
 import { createHostClassName } from '../../signals/host-class'
 import { AvatarContext } from './avatar-context'
 @Component({
-  selector: 'fex-avatar',
+  selector: 'avatar',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [AvatarContext],
@@ -36,31 +34,27 @@ export class Avatar {
 }
 
 @Component({
-  selector: 'fex-avatar-group',
+  selector: 'avatar-group',
   standalone: true,
-  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', role: 'group', 'data-slot': 'avatar-group' },
-  templateUrl: './avatar-group.html',
+  template: '<ng-content />',
 })
 export class AvatarGroup {
-  readonly maxCount = input<number | undefined>()
-  readonly overflow = input<TemplateRef<{ $implicit: number; items: readonly Avatar[] }> | undefined>()
-  private readonly avatars = contentChildren(Avatar)
   protected readonly hostClassName = createHostClassName(avatarGroupClassName)
-  protected readonly overflowCount = computed(() => splitOverflowItems(this.avatars(), this.maxCount()).overflowCount)
-  protected readonly overflowItems = computed(() => splitOverflowItems(this.avatars(), this.maxCount()).overflowItems)
-  protected readonly overflowClassName = `${avatarClassName({ size: 'md', shape: 'circle' })} ${avatarGroupOverflowClassName}`
-  constructor() {
-    effect(() => {
-      const split = splitOverflowItems(this.avatars(), this.maxCount())
-      const visible = new Set(split.visibleItems)
-      for (const avatar of this.avatars()) avatar.element.nativeElement.hidden = !visible.has(avatar)
-    })
-  }
 }
 @Component({
-  selector: 'fex-avatar-image',
+  selector: 'avatar-group-count',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'avatar-group-count' },
+  template: '<ng-content />',
+})
+export class AvatarGroupCount {
+  protected readonly hostClassName = createHostClassName(avatarGroupOverflowClassName)
+}
+@Component({
+  selector: 'avatar-image',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()' },
@@ -69,25 +63,21 @@ export class AvatarGroup {
 export class AvatarImage {
   readonly src = input.required<string>()
   readonly alt = input('')
+  readonly srcSet = input<string | undefined>()
   readonly class = input('')
   protected readonly context = inject(AvatarContext)
   protected readonly hostClassName = createHostClassName(() => avatarImageHostClassName)
   protected readonly imageClass = computed(() => `${avatarImageClassName} ${this.class()}`)
-  protected load() {
-    this.context.loaded.set(true)
-  }
-  protected error() {
-    this.context.loaded.set(false)
-  }
+  constructor() { effect(() => { const src = this.src(); if (src) this.context.controller.load({ src }); else this.context.controller.reset() }) }
 }
 @Component({
-  selector: 'fex-avatar-fallback',
+  selector: 'avatar-fallback',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'avatar-fallback',
-    '[hidden]': 'context.loaded()',
+    '[hidden]': "context.status() === 'loaded'",
   },
   template: '<ng-content />',
 })
@@ -96,7 +86,7 @@ export class AvatarFallback {
   protected readonly hostClassName = createHostClassName(() => avatarFallbackClassName)
 }
 @Component({
-  selector: 'fex-avatar-badge',
+  selector: 'avatar-badge',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', 'data-slot': 'avatar-badge' },

@@ -1,31 +1,37 @@
 # Angular UI Spinner
 
-Recommended Spinner entry for standalone indicators and content loading. `Spinner` is the standalone indicator; `SpinnerContainer` owns the `spinning` state and local overlay behavior.
+Standalone loading indicator and content container with automatic overlay.
 
 ## Import
 
-    import { Spinner, SpinnerContainer } from '@fex-design/angular/ui/spinner'
+    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/angular/ui/spinner'
+
+## Components
+
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Spinner | span | Inherits the native span; all native attributes and events pass through. Loading indicator. |
+| SpinnerText | span | Inherits the native span; all native attributes and events pass through. Loading text. |
+| SpinnerContainer | div | Inherits the native div; all native attributes and events pass through. Content and loading-state container. |
+| SpinnerOverlay | div | Inherits the native div; all native attributes and events pass through. Primitive overlay node. |
 
 ## Examples
 
+Examples live in `examples/<name>` and are used by the documentation preview.
+
 | Name | Covers |
 | --- | --- |
-| basic | Standalone Spinner. |
-| sizes | Available indicator sizes. |
-| custom-indicator | Custom indicator content. |
-| container | Content loading with an overlay. |
-| text | Loading text. |
-| styling | Semantic class and style customization. |
+| basic | Basic indicator. |
+| sizes | Three sizes. |
+| custom-indicator | Custom indicator. |
+| overlay | Content overlay. |
+| styling | Structured styling. |
 
-## SpinnerContainer API
+## API
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| spinning | `boolean \| undefined` | `undefined` | `undefined` renders the standalone Spinner; `false` renders content; `true` renders content and overlay. |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | Overlay indicator size. |
-| text | string or projected content | — | Loading description. |
-| indicator | projected content | built-in icon | Custom loading indicator. |
-| classNames | semantic class map | — | Targets root, spinner, overlay, and text. |
-| styles | semantic style map | — | Targets root, spinner, overlay, and text. |
-
-The overlay is horizontally centered by default; text adds the default vertical stack class and may be overridden with semantic classes.
+| spinning | boolean | undefined | undefined | Unset renders a standalone indicator; false shows content; true shows content with overlay. |
+| size | 'sm' | 'md' | 'lg' | 'md' | Indicator size. |
+| text | 框架原生内容类型 | — | Loading text. |
+| indicator | 框架原生内容类型 | — | Custom indicator. |

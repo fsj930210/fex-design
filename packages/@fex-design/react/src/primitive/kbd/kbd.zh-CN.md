@@ -1,13 +1,27 @@
-# Kbd Primitive
+# React Primitive Kbd
 
-`Kbd` 用于展示键盘按键，`KbdGroup` 用于组合多个按键。Primitive 提供带基础样式的原生元素封装，并透传原生属性与事件。
+带基础样式的按键和按键组合。
 
-```tsx
-import { Kbd, KbdGroup } from '@fex-design/react/primitive/kbd'
+## 导入
 
-<KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup>
-```
+    import { Kbd, KbdGroup } from '@fex-design/react/primitive/kbd'
+
+## 组件
+
+| 组件 | 元素 | 说明 |
+| --- | --- | --- |
+| Kbd | kbd | 继承原生 kbd，原生 kbd 的所有属性和事件均可透传；单个键盘按键。 |
+| KbdGroup | div | 继承原生 div，原生 div 的所有属性和事件均可透传；组合多个按键。 |
+
+## 示例
+
+示例保存在 `examples/<name>`，作为官网预览源码。
+
+| 名称 | 覆盖内容 |
+| --- | --- |
+| basic | 单个按键。 |
+| group | 快捷键组合。 |
 
 ## API
 
-`Kbd` 继承 `ComponentProps<'kbd'>`，`KbdGroup` 继承 `ComponentProps<'div'>`。`className` 会与组件默认样式合并，children 由调用方提供。
+该组件族不增加额外状态属性；内容、class、style、ARIA 和原生事件按对应元素透传。

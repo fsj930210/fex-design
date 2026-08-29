@@ -3,7 +3,7 @@
   import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
   import { datePickerTodayClassName } from '@fex-design/styles/date-picker'
   import type { Snippet } from 'svelte'
-  import Button from '../button/button.svelte'
+  import { Button } from '@fex-design/svelte/primitive/button'
   import { useFooterOwner } from './date-picker-footer.svelte'
   interface Props { children?: Snippet }
   let { children }: Props = $props()

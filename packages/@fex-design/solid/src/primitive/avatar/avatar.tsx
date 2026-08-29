@@ -7,13 +7,12 @@ import {
   avatarGroupOverflowClassName,
   type AvatarStyleProps,
 } from '@fex-design/styles/avatar'
-import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
 import { cn } from '@fex/utils'
+import { createImageLoadingController } from '@fex-design/core/image/create-image-loading-controller'
+import { loadImage } from '@fex/utils/image/load-image'
 import {
   createContext,
-  children,
-  createMemo,
-  For,
+  createEffect,
   createSignal,
   Show,
   splitProps,
@@ -21,12 +20,17 @@ import {
   type JSX,
   type ParentProps,
 } from 'solid-js'
-const Context = createContext<{ loaded: () => boolean; setLoaded: (value: boolean) => void }>()
+const Context = createContext<{
+  status: () => string
+  controller: ReturnType<typeof createImageLoadingController>
+}>()
 export function Avatar(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>> & AvatarStyleProps) {
   const [local, rest] = splitProps(props, ['class', 'children', 'size', 'shape'])
-  const [loaded, setLoaded] = createSignal(false)
+  const controller = createImageLoadingController(loadImage)
+  const [status, setStatus] = createSignal(controller.getStatus())
+  controller.subscribe(() => setStatus(controller.getStatus()))
   return (
-    <Context.Provider value={{ loaded, setLoaded }}>
+    <Context.Provider value={{ status, controller }}>
       <span
         {...rest}
         data-slot="avatar"
@@ -40,48 +44,60 @@ export function Avatar(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>> &
   )
 }
 
-export interface AvatarGroupProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {
-  maxCount?: number
-  overflow?: (count: number, items: readonly JSX.Element[]) => JSX.Element
-}
 export function AvatarGroup(props: AvatarGroupProps) {
-  const [local, rest] = splitProps(props, ['class', 'children', 'maxCount', 'overflow'])
-  const resolved = children(() => local.children)
-  const split = createMemo(() => splitOverflowItems(resolved.toArray(), local.maxCount))
-  return <div {...rest} role="group" data-slot="avatar-group" class={cn(avatarGroupClassName, local.class)}>
-    <For each={split().visibleItems}>{(item) => item}</For>
-    <Show when={split().overflowCount > 0}>{local.overflow?.(split().overflowCount, split().overflowItems) ?? <AvatarGroupOverflow>+{split().overflowCount}</AvatarGroupOverflow>}</Show>
-  </div>
-}
-export function AvatarGroupOverflow(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <span {...rest} data-slot="avatar-group-overflow" class={cn(avatarClassName({ size: 'md', shape: 'circle' }), avatarGroupOverflowClassName, local.class)}>{local.children}</span>
+  return (
+    <div
+      {...rest}
+      role="group"
+      data-slot="avatar-group"
+      class={cn(avatarGroupClassName, local.class)}
+    >
+      {local.children}
+    </div>
+  )
+}
+export interface AvatarGroupProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {}
+export function AvatarGroupCount(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return (
+    <span
+      {...rest}
+      data-slot="avatar-group-count"
+      class={cn(avatarGroupOverflowClassName, local.class)}
+    >
+      {local.children}
+    </span>
+  )
 }
 export function AvatarImage(props: JSX.ImgHTMLAttributes<HTMLImageElement>) {
-  const [local, rest] = splitProps(props, ['class', 'onLoad', 'onError'])
+  const [local, rest] = splitProps(props, ['class', 'src', 'crossorigin', 'referrerpolicy'])
   const context = useContext(Context)
+  createEffect(() =>
+    local.src
+      ? context?.controller.load({
+          src: local.src,
+          ...(local.crossorigin ? { crossOrigin: local.crossorigin } : {}),
+          ...(local.referrerpolicy ? { referrerPolicy: local.referrerpolicy } : {}),
+        })
+      : context?.controller.reset(),
+  )
   return (
-    <img
-      {...rest}
-      data-slot="avatar-image"
-      hidden={!context?.loaded()}
-      class={cn(avatarImageClassName, local.class)}
-      onLoad={(event) => {
-        context?.setLoaded(true)
-        typeof local.onLoad === 'function' && local.onLoad(event)
-      }}
-      onError={(event) => {
-        context?.setLoaded(false)
-        typeof local.onError === 'function' && local.onError(event)
-      }}
-    />
+    <Show when={context?.status() === 'loaded'}>
+      <img
+        {...rest}
+        src={local.src}
+        data-slot="avatar-image"
+        class={cn(avatarImageClassName, local.class)}
+      />
+    </Show>
   )
 }
 export function AvatarFallback(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
   const context = useContext(Context)
   return (
-    <Show when={!context?.loaded()}>
+    <Show when={context?.status() !== 'loaded'}>
       <span {...rest} data-slot="avatar-fallback" class={cn(avatarFallbackClassName, local.class)}>
         {local.children}
       </span>

@@ -4,7 +4,6 @@
   "layer": "primitive",
   "status": "stable",
   "description": "可组合的基础 loading 指示器、容器、遮罩和文本原子组件。",
-  "nativeElement": "Spinner：span\nSpinnerText：span\nSpinnerContainer：div\nSpinnerOverlay：div",
   "importPath": {
     "react": "@fex-design/react/primitive/spinner",
     "vue": "@fex-design/vue/primitive/spinner",
@@ -12,22 +11,464 @@
     "svelte": "@fex-design/svelte/primitive/spinner",
     "angular": "@fex-design/angular/primitive/spinner"
   },
-  "props": [
-    {
-      "name": "size",
-      "type": "'sm' | 'md' | 'lg'",
-      "default": "md",
-      "description": "Spinner 指示器尺寸。",
-      "editor": "enum",
-      "options": ["sm", "md", "lg"]
-    }
-  ],
+  "props": [],
   "events": [],
   "cssVariables": [],
   "demos": [
-    { "id": "basic", "title": "基础组合", "description": "直接组合 Primitive Spinner。" },
-    { "id": "sizes", "title": "尺寸", "description": "小、中、大尺寸。" },
-    { "id": "custom-indicator", "title": "自定义指示器", "description": "替换默认图标。" },
-    { "id": "overlay", "title": "内容加载", "description": "手动组合内容区域的 loading 遮罩。" }
+    {
+      "id": "basic",
+      "title": "基础组合",
+      "description": "直接组合 Primitive Spinner。"
+    },
+    {
+      "id": "sizes",
+      "title": "尺寸",
+      "description": "小、中、大尺寸。"
+    },
+    {
+      "id": "custom-indicator",
+      "title": "自定义指示器",
+      "description": "替换默认图标。"
+    },
+    {
+      "id": "overlay",
+      "title": "内容加载",
+      "description": "手动组合内容区域的 loading 遮罩。"
+    }
+  ],
+  "components": [
+    {
+      "name": "Spinner",
+      "slug": "spinner",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "Spinner 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于显示 loading 指示器。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/spinner",
+        "vue": "@fex-design/vue/primitive/spinner",
+        "solid": "@fex-design/solid/primitive/spinner",
+        "svelte": "@fex-design/svelte/primitive/spinner",
+        "angular": "@fex-design/angular/primitive/spinner"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Spinner 指示器尺寸。",
+          "editor": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "md",
+              "description": "Spinner 指示器尺寸。",
+              "editor": "enum",
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "md",
+              "description": "Spinner 指示器尺寸。",
+              "editor": "enum",
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "md",
+              "description": "Spinner 指示器尺寸。",
+              "editor": "enum",
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "md",
+              "description": "Spinner 指示器尺寸。",
+              "editor": "enum",
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "default": "md",
+              "description": "Spinner 指示器尺寸。",
+              "editor": "enum",
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SpinnerText",
+      "slug": "spinner-text",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "SpinnerText 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于显示 loading 文本。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/spinner",
+        "vue": "@fex-design/vue/primitive/spinner",
+        "solid": "@fex-design/solid/primitive/spinner",
+        "svelte": "@fex-design/svelte/primitive/spinner",
+        "angular": "@fex-design/angular/primitive/spinner"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SpinnerContainer",
+      "slug": "spinner-container",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "SpinnerContainer 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于承载内容和 loading 遮罩。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/spinner",
+        "vue": "@fex-design/vue/primitive/spinner",
+        "solid": "@fex-design/solid/primitive/spinner",
+        "svelte": "@fex-design/svelte/primitive/spinner",
+        "angular": "@fex-design/angular/primitive/spinner"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SpinnerOverlay",
+      "slug": "spinner-overlay",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "SpinnerOverlay 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于在内容上方显示 loading 遮罩。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/spinner",
+        "vue": "@fex-design/vue/primitive/spinner",
+        "solid": "@fex-design/solid/primitive/spinner",
+        "svelte": "@fex-design/svelte/primitive/spinner",
+        "angular": "@fex-design/angular/primitive/spinner"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    }
   ]
 }

@@ -6,19 +6,27 @@ import type { ComponentApi, Framework } from './types'
 export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
   const value = () => resolveComponentApi(props.value, props.framework)
   return (
-    <div class="mt-5 space-y-6">
-      <Show when={props.value.nativeElement}>
-        {(nativeElement) => (
-          <section>
-            <h4 class="mb-2 text-sm font-semibold">原生能力</h4>
-            <div class="rounded-lg border border-border bg-muted-background px-4 py-3 text-sm leading-relaxed text-muted-foreground">
-              <For each={nativeElement().split('\n')}>
-                {(line) => <code class="block text-primary">{line}</code>}
-              </For>
-              <p class="mt-2 mb-0">原生属性、事件、ARIA 属性、class 和 style 均可继续使用。</p>
-            </div>
-          </section>
-        )}
+    <div class="mt-5 space-y-8">
+      <Show when={props.value.components?.length}>
+        <For each={props.value.components}>
+          {(component) => {
+            const id = apiAnchorId(component.layer, component.name)
+            return (
+            <section aria-labelledby={id}>
+              <h3
+                id={id}
+                data-toc-item
+                data-toc-title={component.name}
+                class="scroll-mt-24 mb-2 text-base font-semibold"
+              >
+                {component.name}
+              </h3>
+              <p class="mb-4 leading-relaxed text-foreground">{component.description}</p>
+              <ApiTable value={component} framework={props.framework} />
+            </section>
+            )
+          }}
+        </For>
       </Show>
       <Show when={value().props.length > 0}>
         <section>
@@ -60,4 +68,8 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
       </Show>
     </div>
   )
+}
+
+function apiAnchorId(layer: ComponentApi['layer'], name: string) {
+  return `api-${layer}-${name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`
 }

@@ -8,7 +8,7 @@ import type { SpinnerSize } from '@fex-design/core/spinner/types'
 export class SpinnerContainer { protected readonly hostClassName = createHostClassName(spinnerContainerClassName) }
 @Component({ selector: 'div[spinnerOverlay]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { class: spinnerOverlayClassName, 'data-slot': 'spinner-overlay' }, template: '<ng-content />' })
 export class SpinnerOverlay {}
-@Component({ selector: 'span[spinner]', standalone: true, imports: [LoadingIcon, NgTemplateOutlet], changeDetection: ChangeDetectionStrategy.OnPush, host: { '[class]': 'hostClassName()', 'data-slot': 'spinner', role: 'status' }, template: '@if (indicator()) { <ng-container *ngTemplateOutlet="indicator()!" /> } @else { <fex-loading-icon /> }' })
+@Component({ selector: 'span[spinner]', standalone: true, imports: [LoadingIcon, NgTemplateOutlet], changeDetection: ChangeDetectionStrategy.OnPush, host: { '[class]': 'hostClassName()', 'data-slot': 'spinner', role: 'status' }, template: '@if (indicator()) { <ng-container *ngTemplateOutlet="indicator()!" /> } @else { <loading-icon /> }' })
 export class Spinner { readonly size = input<SpinnerSize>('md'); readonly indicator = input<TemplateRef<unknown> | undefined>(); protected readonly hostClassName = createHostClassName(() => spinnerClassName({ size: this.size() })) }
 @Component({ selector: 'span[spinnerText]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { '[class]': 'hostClassName()', 'data-slot': 'spinner-text' }, template: '<ng-content />' })
 export class SpinnerText { protected readonly hostClassName = createHostClassName(spinnerTextClassName) }

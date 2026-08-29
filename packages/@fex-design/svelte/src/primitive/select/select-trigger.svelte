@@ -7,7 +7,7 @@
   import ChevronRight from '../../icon/chevron-right.svelte'
   import CloseIcon from '../../icon/close.svelte'
   import LoadingIcon from '../../icon/loading.svelte'
-  import Button from '../button/button.svelte'
+import { Button } from '@fex-design/svelte/primitive/button'
   import PopoverTrigger from '../popover/popover-trigger.svelte'
   import Tag from '../tag/tag.svelte'
   import { selectContextKey, type SelectContext } from './context'

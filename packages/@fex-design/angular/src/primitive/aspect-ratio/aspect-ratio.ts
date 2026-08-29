@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { createHostClassName } from '../../signals/host-class'
 import type { AspectRatioOptions } from '@fex-design/core/aspect-ratio/types'
 @Component({
-  selector: 'fex-aspect-ratio',
+  selector: 'div[aspectRatio]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

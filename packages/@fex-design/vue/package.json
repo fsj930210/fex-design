@@ -79,6 +79,7 @@
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.ts",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.ts",
     "./primitive/avatar": "./src/primitive/avatar/avatar.ts",
+    "./ui/avatar": "./src/ui/avatar/avatar.ts",
     "./primitive/progress": "./src/primitive/progress/progress.ts",
     "./primitive/separator": "./src/primitive/separator/separator.ts",
     "./ui/separator": "./src/ui/separator/separator.ts",

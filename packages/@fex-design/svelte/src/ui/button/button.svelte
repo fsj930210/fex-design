@@ -5,8 +5,7 @@
   } from '@fex-design/styles/button'
   import { cn } from '@fex/utils'
   import LoadingIcon from '../../icon/loading.svelte'
-  import PrimitiveButton from '../../primitive/button/button.svelte'
-  import ButtonIcon from '../../primitive/button/button-icon.svelte'
+  import { Button as PrimitiveButton, ButtonIcon } from '@fex-design/svelte/primitive/button'
   import type { ButtonProps } from './button.types'
 
   let {

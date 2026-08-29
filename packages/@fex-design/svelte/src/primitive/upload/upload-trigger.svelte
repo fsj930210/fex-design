@@ -1,7 +1,7 @@
 <script lang="ts">
   import { uploadTriggerClassName } from '@fex-design/styles/upload'
   import type { Snippet } from 'svelte'
-  import PrimitiveButton from '../button/button.svelte'
+import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
   import { useUploadContext } from './context'
   interface UploadTriggerBindings { type: 'button', disabled: boolean, 'aria-controls': string, 'aria-invalid': boolean | undefined, class: string, onclick(): void }
   let { children }: { children?: Snippet<[{ props: UploadTriggerBindings }]> } = $props()

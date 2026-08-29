@@ -1,0 +1,3 @@
+<script lang="ts">import { Avatar, AvatarGroup } from '@fex-design/svelte/ui/avatar'; import PlusIcon from '@fex-design/svelte/icon/plus'</script>
+{#snippet overflow(count: number)}<span class="relative inline-flex size-8 items-center justify-center rounded-full bg-muted-background text-muted-foreground ring-2 ring-background [&>svg]:size-4"><PlusIcon /></span>{/snippet}
+<AvatarGroup maxCount={3} renderOverflow={overflow}><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar></AvatarGroup>

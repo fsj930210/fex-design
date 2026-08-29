@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Separator } from '../separator'
 @Component({
-  selector: 'fex-separator-list-example',
+  selector: 'separator-list-example',
   standalone: true,
   imports: [Separator],
   changeDetection: ChangeDetectionStrategy.OnPush,

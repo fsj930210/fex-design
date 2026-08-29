@@ -1,18 +1,32 @@
 # Svelte Primitive Separator
 
-提供语义分隔和原生 `div` 属性透传的底层 Separator。
+带语义和方向状态的基础分隔线。
 
 ## 导入
 
-    import Separator from '@fex-design/svelte/primitive/separator'
+    import { Separator } from '@fex-design/svelte/primitive/separator'
 
-## Separator API
+## 组件
 
-| 名称        | 类型                         | 默认值       | 说明                 |
-| ----------- | ---------------------------- | ------------ | -------------------- |
-| orientation | `'horizontal' \| 'vertical'` | `horizontal` | 分隔线方向。         |
-| 原生属性    | Svelte div attrs             | —            | 透传原生属性与事件。 |
+| 组件 | 元素 | 说明 |
+| --- | --- | --- |
+| Separator | div | 继承原生 div，原生 div 的所有属性和事件均可透传；在相关内容之间建立语义分隔。 |
 
-## 无障碍
+## 示例
 
-Separator 始终输出 `role="separator"`，并通过 `aria-orientation` 暴露方向。
+示例保存在 `examples/<name>`，作为官网预览源码。
+
+| 名称 | 覆盖内容 |
+| --- | --- |
+| basic | 水平分隔线。 |
+| vertical | 垂直分隔线。 |
+| menu | 菜单分组。 |
+| list | 列表项分隔。 |
+| text | 带文本组合。 |
+| variants | 通过 class 组合线型。 |
+
+## API
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| orientation | 'horizontal' | 'vertical' | 'horizontal' | 分隔线方向。 |

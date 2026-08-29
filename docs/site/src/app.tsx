@@ -108,7 +108,7 @@ export function App() {
           />
         </Show>
       </main>
-      <div class="sticky top-0 max-h-screen self-start overflow-y-auto overflow-x-hidden border-l border-border px-5 py-10.5 [--anchor-indent:12px] max-[1000px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:pl-2.5 [&_[data-slot=anchor-list][data-level='1']]:pl-[var(--anchor-indent)] [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-0.75 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-4.5 [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
+      <div class="sticky top-0 max-h-screen self-start overflow-y-auto overflow-x-hidden border-l border-border px-5 py-10.5 [--anchor-indent:8px] max-[1000px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:pl-2.5 [&_[data-slot=anchor-list][data-level='1']]:pl-[var(--anchor-indent)] [&_[data-slot=anchor-list][data-level='2']]:pl-[var(--anchor-indent)] [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-0.75 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-4.5 [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
         <Anchor items={toc()} offset={88} behavior="auto" />
       </div>
     </div>
@@ -124,9 +124,11 @@ function title(slug: string) {
 function collectToc(article: HTMLElement): readonly AnchorItem<string>[] {
   const items: Array<AnchorItem<string> & { children?: AnchorItem<string>[] }> = []
   let section: (typeof items)[number] | undefined
+  let subsection: (typeof items)[number] | undefined
   const elements = article?.querySelectorAll<HTMLElement>('h2[id], h3[id], [data-toc-item]') ?? []
   for (const element of elements) {
     const isSection = element.tagName === 'H2'
+    const isSubsection = element.tagName === 'H3' && !element.hasAttribute('data-toc-item')
     const key = element.id
     const item = {
       key,
@@ -136,6 +138,12 @@ function collectToc(article: HTMLElement): readonly AnchorItem<string>[] {
     if (isSection) {
       section = { ...item, children: [] }
       items.push(section)
+      subsection = undefined
+    } else if (isSubsection && section && key) {
+      subsection = { ...item, children: [] }
+      section.children!.push(subsection)
+    } else if (subsection && key) {
+      subsection.children!.push(item)
     } else if (section && key) {
       section.children!.push(item)
     }

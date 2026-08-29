@@ -2,6 +2,3 @@
 @source "../../../../packages/@fex-design/angular/src";
 @source "../../../../packages/@fex-design/styles/src";
 @source "../../../../docs/preview/angular/src";
-@utility demo-row {
-  @apply flex flex-wrap items-center justify-center gap-3;
-}

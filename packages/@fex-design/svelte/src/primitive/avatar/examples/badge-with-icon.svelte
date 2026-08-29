@@ -1,0 +1,2 @@
+<script lang="ts">import PlusIcon from '@fex-design/svelte/icon/plus'; import Avatar from '@fex-design/svelte/primitive/avatar'; import AvatarBadge from '@fex-design/svelte/primitive/avatar-badge'; import AvatarFallback from '@fex-design/svelte/primitive/avatar-fallback'; import AvatarImage from '@fex-design/svelte/primitive/avatar-image'</script>
+<Avatar><AvatarImage src="https://github.com/shadcn.png" alt="shadcn avatar" /><AvatarFallback>FX</AvatarFallback><AvatarBadge class="rounded-sm bg-foreground text-background" aria-label="Add"><PlusIcon /></AvatarBadge></Avatar>

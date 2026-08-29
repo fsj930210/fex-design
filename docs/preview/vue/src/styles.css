@@ -2,4 +2,3 @@
 @source "../../../../packages/@fex-design/vue/src";
 @source "../../../../packages/@fex-design/styles/src";
 @source "../../../../docs/preview/vue/src";
-@import '../../solid/src/preview.css';

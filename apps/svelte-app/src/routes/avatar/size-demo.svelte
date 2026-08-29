@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Avatar from '@fex-design/svelte/primitive/avatar'
+  import { Avatar } from '@fex-design/svelte/primitive/avatar'
   import AvatarFallback from '@fex-design/svelte/primitive/avatar-fallback'
   import Card from '@fex-design/svelte/ui/card'
 </script>

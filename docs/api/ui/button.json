@@ -4,7 +4,6 @@
   "layer": "ui",
   "status": "stable",
   "description": "触发即时操作，并清晰表达动作层级与当前状态。",
-  "nativeElement": "Button：button\nButtonIcon：span\nButtonGroup：div",
   "importPath": {
     "react": "@fex-design/react/ui/button",
     "vue": "@fex-design/vue/ui/button",
@@ -52,14 +51,27 @@
       "default": "outlined",
       "description": "与 Primitive 共用的结构变体。",
       "editor": "enum",
-      "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
+      "options": [
+        "solid",
+        "outlined",
+        "dashed",
+        "filled",
+        "text",
+        "link"
+      ]
     },
     {
       "name": "color",
       "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
       "description": "与 Primitive 共用的可选语义配色；不设置时使用白底默认按钮。",
       "editor": "enum",
-      "options": ["primary", "danger", "warning", "success", "info"]
+      "options": [
+        "primary",
+        "danger",
+        "warning",
+        "success",
+        "info"
+      ]
     },
     {
       "name": "effect",
@@ -86,60 +98,150 @@
   "events": [
     {
       "name": "click",
-      "parameters": [{ "name": "event", "type": "MouseEvent" }],
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent"
+        }
+      ],
       "description": "用户激活按钮时触发。"
     }
   ],
   "frameworks": {
-    "react": { "typeOverrides": { "FrameworkNode": "ReactNode" } },
-    "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" } },
-    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" } },
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet"
+      }
+    },
     "vue": {
-      "omitProps": ["icon", "loadingIndicator"],
+      "omitProps": [
+        "icon",
+        "loadingIndicator"
+      ],
       "slots": [
-        { "name": "default", "description": "按钮文字或自定义主体内容。" },
-        { "name": "icon", "description": "按钮图标；根据 iconPlacement 排列。" },
-        { "name": "loadingIndicator", "description": "替换 loading 状态的默认指示器。" }
+        {
+          "name": "default",
+          "description": "按钮文字或自定义主体内容。"
+        },
+        {
+          "name": "icon",
+          "description": "按钮图标；根据 iconPlacement 排列。"
+        },
+        {
+          "name": "loadingIndicator",
+          "description": "替换 loading 状态的默认指示器。"
+        }
       ]
     },
     "angular": {
-      "omitProps": ["icon", "loadingIndicator"],
+      "omitProps": [
+        "icon",
+        "loadingIndicator"
+      ],
       "slots": [
-        { "name": "默认内容", "description": "按钮文字或主体内容。" },
-        { "name": "[slot=start]", "description": "未加载时投影到文本前的图标内容。" },
-        { "name": "[slot=end]", "description": "未加载时投影到文本后的图标内容。" },
-        { "name": "[slot=loading-indicator]", "description": "替换 loading 状态的默认指示器。" }
+        {
+          "name": "默认内容",
+          "description": "按钮文字或主体内容。"
+        },
+        {
+          "name": "[slot=start]",
+          "description": "未加载时投影到文本前的图标内容。"
+        },
+        {
+          "name": "[slot=end]",
+          "description": "未加载时投影到文本后的图标内容。"
+        },
+        {
+          "name": "[slot=loading-indicator]",
+          "description": "替换 loading 状态的默认指示器。"
+        }
       ],
       "slotLabel": "内容投影"
     }
   },
   "cssVariables": [
-    { "name": "--button-height", "description": "当前按钮实例的高度。" },
-    { "name": "--button-icon-size", "description": "当前按钮实例的图标尺寸。" },
-    { "name": "--button-content-gap", "description": "图标与文字之间的间距。" },
-    { "name": "--button-color", "description": "当前语义色及文字色。" },
-    { "name": "--button-color-foreground", "description": "solid 变体的前景色。" },
-    { "name": "--button-color-hover", "description": "solid 变体的悬停背景色。" },
-    { "name": "--button-color-soft", "description": "弱背景按钮的背景色。" },
-    { "name": "--button-color-soft-hover", "description": "弱背景按钮的悬停颜色。" },
-    { "name": "--button-color-border", "description": "边框和焦点颜色。" },
-    { "name": "--button-underline-inset", "description": "Underline 效果的两侧缩进。" }
+    {
+      "name": "--button-height",
+      "description": "当前按钮实例的高度。"
+    },
+    {
+      "name": "--button-icon-size",
+      "description": "当前按钮实例的图标尺寸。"
+    },
+    {
+      "name": "--button-content-gap",
+      "description": "图标与文字之间的间距。"
+    },
+    {
+      "name": "--button-color",
+      "description": "当前语义色及文字色。"
+    },
+    {
+      "name": "--button-color-foreground",
+      "description": "solid 变体的前景色。"
+    },
+    {
+      "name": "--button-color-hover",
+      "description": "solid 变体的悬停背景色。"
+    },
+    {
+      "name": "--button-color-soft",
+      "description": "弱背景按钮的背景色。"
+    },
+    {
+      "name": "--button-color-soft-hover",
+      "description": "弱背景按钮的悬停颜色。"
+    },
+    {
+      "name": "--button-color-border",
+      "description": "边框和焦点颜色。"
+    },
+    {
+      "name": "--button-underline-inset",
+      "description": "Underline 效果的两侧缩进。"
+    }
   ],
   "demos": [
-    { "id": "basic", "title": "基础用法", "description": "观察视觉层级、尺寸、加载和禁用状态。" },
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "观察视觉层级、尺寸、加载和禁用状态。"
+    },
     {
       "id": "variants",
       "title": "变体与语义色",
       "description": "对照五种内置语义色、自定义色与渐变色。"
     },
-    { "id": "sizes", "title": "尺寸", "description": "对照文本与图标按钮的内置尺寸和自定义尺寸。" },
+    {
+      "id": "sizes",
+      "title": "尺寸",
+      "description": "对照文本与图标按钮的内置尺寸和自定义尺寸。"
+    },
     {
       "id": "states",
       "title": "状态",
       "description": "观察 disabled、loading、pressed 与原生交互。"
     },
-    { "id": "loading", "title": "加载", "description": "观察加载状态、位置与自定义指示器。" },
-    { "id": "icons", "title": "图标", "description": "展示前置、后置与纯图标按钮。" },
+    {
+      "id": "loading",
+      "title": "加载",
+      "description": "观察加载状态、位置与自定义指示器。"
+    },
+    {
+      "id": "icons",
+      "title": "图标",
+      "description": "展示前置、后置与纯图标按钮。"
+    },
     {
       "id": "direction",
       "title": "LTR 与 RTL",
@@ -150,8 +252,16 @@
       "title": "交互效果",
       "description": "展示 hover、press 与 underline 等效果。"
     },
-    { "id": "combinations", "title": "组合用法", "description": "组合视觉、图标、加载与状态。" },
-    { "id": "group", "title": "按钮组", "description": "展示连接式、有间距与垂直按钮组。" },
+    {
+      "id": "combinations",
+      "title": "组合用法",
+      "description": "组合视觉、图标、加载与状态。"
+    },
+    {
+      "id": "group",
+      "title": "按钮组",
+      "description": "展示连接式、有间距与垂直按钮组。"
+    },
     {
       "id": "css-variables",
       "title": "实例 CSS Variables",

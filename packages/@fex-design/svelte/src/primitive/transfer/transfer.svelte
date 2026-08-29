@@ -15,7 +15,7 @@
   import ChevronRightIcon from '../../icon/chevron-right.svelte'
   import ChevronsLeftIcon from '../../icon/chevrons-left.svelte'
   import ChevronsRightIcon from '../../icon/chevrons-right.svelte'
-  import Button from '../button/button.svelte'
+import { Button } from '@fex-design/svelte/primitive/button'
   import Checkbox from '../checkbox/checkbox.svelte'
   import CheckboxIndicator from '../checkbox/checkbox-indicator.svelte'
   import Listbox from '../listbox/listbox.svelte'

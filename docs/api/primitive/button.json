@@ -4,7 +4,6 @@
   "layer": "primitive",
   "status": "stable",
   "description": "职责完整的按钮原子组件：提供原生语义与属性事件透传、基础交互状态、图标组合和按钮组能力，可独立构建自定义按钮系统。",
-  "nativeElement": "Button：button\nButtonIcon：span\nButtonGroup：div",
   "importPath": {
     "react": "@fex-design/react/primitive/button",
     "vue": "@fex-design/vue/primitive/button",
@@ -12,44 +11,56 @@
     "svelte": "@fex-design/svelte/primitive/button",
     "angular": "@fex-design/angular/primitive/button"
   },
-  "props": [
-    {
-      "name": "variant",
-      "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
-      "default": "outlined",
-      "description": "按钮的结构变体；与 color 正交组合。",
-      "editor": "enum",
-      "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
-    },
-    {
-      "name": "color",
-      "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
-      "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
-      "editor": "enum",
-      "options": ["primary", "danger", "warning", "success", "info"]
-    },
-    {
-      "name": "data-slot",
-      "type": "string",
-      "default": "button",
-      "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
-    }
-  ],
+  "props": [],
   "events": [],
   "cssVariables": [
-    { "name": "--button-height", "description": "当前按钮实例的高度。" },
-    { "name": "--button-icon-size", "description": "当前按钮实例的图标尺寸。" },
-    { "name": "--button-content-gap", "description": "图标与文字之间的间距。" },
-    { "name": "--button-color", "description": "当前语义色及文字色。" },
-    { "name": "--button-color-foreground", "description": "solid 变体的前景色。" },
-    { "name": "--button-color-hover", "description": "solid 变体的悬停背景色。" },
-    { "name": "--button-color-soft", "description": "弱背景按钮的背景色。" },
-    { "name": "--button-color-soft-hover", "description": "弱背景按钮的悬停颜色。" },
-    { "name": "--button-color-border", "description": "边框和焦点颜色。" },
-    { "name": "--button-underline-inset", "description": "Underline 效果的两侧缩进。" }
+    {
+      "name": "--button-height",
+      "description": "当前按钮实例的高度。"
+    },
+    {
+      "name": "--button-icon-size",
+      "description": "当前按钮实例的图标尺寸。"
+    },
+    {
+      "name": "--button-content-gap",
+      "description": "图标与文字之间的间距。"
+    },
+    {
+      "name": "--button-color",
+      "description": "当前语义色及文字色。"
+    },
+    {
+      "name": "--button-color-foreground",
+      "description": "solid 变体的前景色。"
+    },
+    {
+      "name": "--button-color-hover",
+      "description": "solid 变体的悬停背景色。"
+    },
+    {
+      "name": "--button-color-soft",
+      "description": "弱背景按钮的背景色。"
+    },
+    {
+      "name": "--button-color-soft-hover",
+      "description": "弱背景按钮的悬停颜色。"
+    },
+    {
+      "name": "--button-color-border",
+      "description": "边框和焦点颜色。"
+    },
+    {
+      "name": "--button-underline-inset",
+      "description": "Underline 效果的两侧缩进。"
+    }
   ],
   "demos": [
-    { "id": "basic", "title": "基础用法", "description": "默认按钮和描边按钮。" },
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "默认按钮和描边按钮。"
+    },
     {
       "id": "variants",
       "title": "变体与语义色",
@@ -60,25 +71,595 @@
       "title": "尺寸",
       "description": "对照内置尺寸，并通过 class 自定义文本与图标按钮尺寸。"
     },
-    { "id": "states", "title": "状态", "description": "原生状态、事件和无障碍属性。" },
+    {
+      "id": "states",
+      "title": "状态",
+      "description": "原生状态、事件和无障碍属性。"
+    },
     {
       "id": "loading",
       "title": "加载",
       "description": "对比内置加载图标的位置和自定义加载指示器。"
     },
-    { "id": "icons", "title": "图标", "description": "组合 ButtonIcon。" },
-    { "id": "effects", "title": "交互效果", "description": "通过状态 class 组合交互效果。" },
-    { "id": "combinations", "title": "组合用法", "description": "组合颜色、图标、状态和按钮组。" },
+    {
+      "id": "icons",
+      "title": "图标",
+      "description": "组合 ButtonIcon。"
+    },
+    {
+      "id": "effects",
+      "title": "交互效果",
+      "description": "通过状态 class 组合交互效果。"
+    },
+    {
+      "id": "combinations",
+      "title": "组合用法",
+      "description": "组合颜色、图标、状态和按钮组。"
+    },
     {
       "id": "direction",
       "title": "LTR 与 RTL",
       "description": "验证逻辑方向下的图标位置与连接边界。"
     },
-    { "id": "group", "title": "按钮组", "description": "组织相关操作。" },
+    {
+      "id": "group",
+      "title": "按钮组",
+      "description": "组织相关操作。"
+    },
     {
       "id": "css-variables",
       "title": "实例 CSS Variables",
       "description": "覆盖单个 Button 的尺寸与语义色变量。"
+    }
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "slug": "button",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "Button 组件继承原生 button，原生 button 的所有属性和事件均可透传；用于触发用户操作。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/button",
+        "vue": "@fex-design/vue/primitive/button",
+        "solid": "@fex-design/solid/primitive/button",
+        "svelte": "@fex-design/svelte/primitive/button",
+        "angular": "@fex-design/angular/primitive/button"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+          "default": "outlined",
+          "description": "按钮的结构变体；与 color 正交组合。",
+          "editor": "enum",
+          "options": [
+            "solid",
+            "outlined",
+            "dashed",
+            "filled",
+            "text",
+            "link"
+          ]
+        },
+        {
+          "name": "color",
+          "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+          "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
+          "editor": "enum",
+          "options": [
+            "primary",
+            "danger",
+            "warning",
+            "success",
+            "info"
+          ]
+        },
+        {
+          "name": "data-slot",
+          "type": "string",
+          "default": "button",
+          "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "variant",
+              "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+              "default": "outlined",
+              "description": "按钮的结构变体；与 color 正交组合。",
+              "editor": "enum",
+              "options": [
+                "solid",
+                "outlined",
+                "dashed",
+                "filled",
+                "text",
+                "link"
+              ]
+            },
+            {
+              "name": "color",
+              "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+              "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
+              "editor": "enum",
+              "options": [
+                "primary",
+                "danger",
+                "warning",
+                "success",
+                "info"
+              ]
+            },
+            {
+              "name": "data-slot",
+              "type": "string",
+              "default": "button",
+              "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "variant",
+              "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+              "default": "outlined",
+              "description": "按钮的结构变体；与 color 正交组合。",
+              "editor": "enum",
+              "options": [
+                "solid",
+                "outlined",
+                "dashed",
+                "filled",
+                "text",
+                "link"
+              ]
+            },
+            {
+              "name": "color",
+              "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+              "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
+              "editor": "enum",
+              "options": [
+                "primary",
+                "danger",
+                "warning",
+                "success",
+                "info"
+              ]
+            },
+            {
+              "name": "data-slot",
+              "type": "string",
+              "default": "button",
+              "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "variant",
+              "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+              "default": "outlined",
+              "description": "按钮的结构变体；与 color 正交组合。",
+              "editor": "enum",
+              "options": [
+                "solid",
+                "outlined",
+                "dashed",
+                "filled",
+                "text",
+                "link"
+              ]
+            },
+            {
+              "name": "color",
+              "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+              "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
+              "editor": "enum",
+              "options": [
+                "primary",
+                "danger",
+                "warning",
+                "success",
+                "info"
+              ]
+            },
+            {
+              "name": "data-slot",
+              "type": "string",
+              "default": "button",
+              "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "variant",
+              "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+              "default": "outlined",
+              "description": "按钮的结构变体；与 color 正交组合。",
+              "editor": "enum",
+              "options": [
+                "solid",
+                "outlined",
+                "dashed",
+                "filled",
+                "text",
+                "link"
+              ]
+            },
+            {
+              "name": "color",
+              "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+              "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
+              "editor": "enum",
+              "options": [
+                "primary",
+                "danger",
+                "warning",
+                "success",
+                "info"
+              ]
+            },
+            {
+              "name": "data-slot",
+              "type": "string",
+              "default": "button",
+              "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "variant",
+              "type": "'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'",
+              "default": "outlined",
+              "description": "按钮的结构变体；与 color 正交组合。",
+              "editor": "enum",
+              "options": [
+                "solid",
+                "outlined",
+                "dashed",
+                "filled",
+                "text",
+                "link"
+              ]
+            },
+            {
+              "name": "color",
+              "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
+              "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
+              "editor": "enum",
+              "options": [
+                "primary",
+                "danger",
+                "warning",
+                "success",
+                "info"
+              ]
+            },
+            {
+              "name": "data-slot",
+              "type": "string",
+              "default": "button",
+              "description": "稳定的部件标识，供 ButtonGroup 和外部样式选择器使用。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ButtonIcon",
+      "slug": "button-icon",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "ButtonIcon 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于约束按钮内图标的尺寸和位置。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/button",
+        "vue": "@fex-design/vue/primitive/button",
+        "solid": "@fex-design/solid/primitive/button",
+        "svelte": "@fex-design/svelte/primitive/button",
+        "angular": "@fex-design/angular/primitive/button"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ButtonGroup",
+      "slug": "button-group",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "ButtonGroup 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于组织一组相关按钮。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/button",
+        "vue": "@fex-design/vue/primitive/button",
+        "solid": "@fex-design/solid/primitive/button",
+        "svelte": "@fex-design/svelte/primitive/button",
+        "angular": "@fex-design/angular/primitive/button"
+      },
+      "props": [
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical'",
+          "default": "'horizontal'",
+          "description": "按钮组排列方向。"
+        },
+        {
+          "name": "spacing",
+          "type": "number | string",
+          "default": "0",
+          "description": "按钮间距；0 使用连接样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "'horizontal'",
+              "description": "按钮组排列方向。"
+            },
+            {
+              "name": "spacing",
+              "type": "number | string",
+              "default": "0",
+              "description": "按钮间距；0 使用连接样式。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "'horizontal'",
+              "description": "按钮组排列方向。"
+            },
+            {
+              "name": "spacing",
+              "type": "number | string",
+              "default": "0",
+              "description": "按钮间距；0 使用连接样式。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "'horizontal'",
+              "description": "按钮组排列方向。"
+            },
+            {
+              "name": "spacing",
+              "type": "number | string",
+              "default": "0",
+              "description": "按钮间距；0 使用连接样式。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "'horizontal'",
+              "description": "按钮组排列方向。"
+            },
+            {
+              "name": "spacing",
+              "type": "number | string",
+              "default": "0",
+              "description": "按钮间距；0 使用连接样式。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "'horizontal'",
+              "description": "按钮组排列方向。"
+            },
+            {
+              "name": "spacing",
+              "type": "number | string",
+              "default": "0",
+              "description": "按钮间距；0 使用连接样式。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
     }
   ]
 }

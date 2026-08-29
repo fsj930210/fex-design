@@ -10,9 +10,9 @@
 
 | 组件        | 元素   | 说明                 |
 | ----------- | ------ | -------------------- |
-| Button      | button | 原生按钮基础。       |
-| ButtonIcon  | span   | 图标容器。           |
-| ButtonGroup | div    | 布局与连接按钮分组。 |
+| Button | button | 继承原生 button，原生 button 的所有属性和事件均可透传；原生按钮基础。 |
+| ButtonIcon | span | 继承原生 span，原生 span 的所有属性和事件均可透传；图标容器。 |
+| ButtonGroup | div | 继承原生 div，原生 div 的所有属性和事件均可透传；布局与连接按钮分组。 |
 
 ## 示例
 

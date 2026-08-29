@@ -10,7 +10,7 @@
   import type { RowData, TableFeatures } from '@tanstack/table-core'
   import type { HTMLAttributes } from 'svelte/elements'
   import type { SvelteDataTable } from '../../stores/create-data-table'
-  import Button from '../../ui/button/button.svelte'
+import { Button } from '@fex-design/svelte/ui/button'
 
   interface PaginationTable {
     getRowCount(): number

@@ -49,7 +49,7 @@ export function MdxDocument(props: {
       const value = componentApis[props.slug][apiProps.layer]
       const nativeApi = resolveComponentApi(value, props.framework)
       return (
-        <Show when={componentApis[props.slug][apiProps.layer].nativeElement || nativeApi.props.length > 0 || nativeApi.events.length > 0 || nativeApi.slots.length > 0}>
+        <Show when={componentApis[props.slug][apiProps.layer].components?.length || componentApis[props.slug][apiProps.layer].nativeElement || nativeApi.props.length > 0 || nativeApi.events.length > 0 || nativeApi.slots.length > 0}>
           <h3 id={`${apiProps.layer}-api`} class="mt-8 mb-2 text-lg font-semibold">
             {apiProps.title}
           </h3>

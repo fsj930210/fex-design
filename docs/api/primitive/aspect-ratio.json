@@ -4,9 +4,160 @@
   "layer": "primitive",
   "status": "stable",
   "description": "保持内容宽高比的 styled div 容器。",
-  "nativeElement": "AspectRatio：div",
-  "importPath": { "react": "@fex-design/react/primitive/aspect-ratio", "vue": "@fex-design/vue/primitive/aspect-ratio", "solid": "@fex-design/solid/primitive/aspect-ratio", "svelte": "@fex-design/svelte/primitive/aspect-ratio", "angular": "@fex-design/angular/primitive/aspect-ratio" },
-  "props": [{ "name": "ratio", "type": "number", "default": "—", "description": "容器的宽高比，例如 16 / 9。" }],
-  "events": [], "cssVariables": [],
-  "demos": [{ "id": "landscape", "title": "横向比例", "description": "使用 16:9 宽高比。" }, { "id": "portrait", "title": "竖向比例", "description": "使用 9:16 宽高比。" }, { "id": "square", "title": "正方形比例", "description": "使用 1:1 宽高比。" }]
+  "importPath": {
+    "react": "@fex-design/react/primitive/aspect-ratio",
+    "vue": "@fex-design/vue/primitive/aspect-ratio",
+    "solid": "@fex-design/solid/primitive/aspect-ratio",
+    "svelte": "@fex-design/svelte/primitive/aspect-ratio",
+    "angular": "@fex-design/angular/primitive/aspect-ratio"
+  },
+  "props": [],
+  "events": [],
+  "cssVariables": [],
+  "demos": [
+    {
+      "id": "landscape",
+      "title": "横向比例",
+      "description": "使用 16:9 宽高比。"
+    },
+    {
+      "id": "portrait",
+      "title": "竖向比例",
+      "description": "使用 9:16 宽高比。"
+    },
+    {
+      "id": "square",
+      "title": "正方形比例",
+      "description": "使用 1:1 宽高比。"
+    }
+  ],
+  "components": [
+    {
+      "name": "AspectRatio",
+      "slug": "aspect-ratio",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "AspectRatio 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于按 ratio 保持内容宽高比。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/aspect-ratio",
+        "vue": "@fex-design/vue/primitive/aspect-ratio",
+        "solid": "@fex-design/solid/primitive/aspect-ratio",
+        "svelte": "@fex-design/svelte/primitive/aspect-ratio",
+        "angular": "@fex-design/angular/primitive/aspect-ratio"
+      },
+      "props": [
+        {
+          "name": "ratio",
+          "type": "number",
+          "default": "—",
+          "description": "容器的宽高比，例如 16 / 9。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "ratio",
+              "type": "number",
+              "default": "—",
+              "description": "容器的宽高比，例如 16 / 9。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "ratio",
+              "type": "number",
+              "default": "—",
+              "description": "容器的宽高比，例如 16 / 9。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "ratio",
+              "type": "number",
+              "default": "—",
+              "description": "容器的宽高比，例如 16 / 9。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "ratio",
+              "type": "number",
+              "default": "—",
+              "description": "容器的宽高比，例如 16 / 9。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "ratio",
+              "type": "number",
+              "default": "—",
+              "description": "容器的宽高比，例如 16 / 9。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    }
+  ]
 }

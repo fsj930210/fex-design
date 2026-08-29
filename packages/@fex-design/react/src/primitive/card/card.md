@@ -1,47 +1,35 @@
 # React Primitive Card
 
-Composable, native-div Card primitives. The Root owns clipping, radius, border, and shadow; each region owns its own surface, padding, and divider.
+Composable information container made of seven semantic regions.
 
 ## Import
 
-```tsx
-import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
-```
+    import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@fex-design/react/primitive/card'
 
 ## Components
 
-| Component | Element | Description |
+| Component | Element | Purpose |
 | --- | --- | --- |
-| Card | div | Root surface boundary. |
-| CardHeader | div | Header layout and its divider. |
-| CardTitle | div | Header title. |
-| CardDescription | div | Header supporting text. |
-| CardExtra | div | Supplementary Header content such as a badge, action, or tabs. |
-| CardContent | div | Main content surface. |
-| CardFooter | div | Footer surface and its divider. |
+| Card | div | Inherits the native div; all native attributes and events pass through. Root information container. |
+| CardHeader | div | Inherits the native div; all native attributes and events pass through. Header layout. |
+| CardTitle | div | Inherits the native div; all native attributes and events pass through. Title. |
+| CardDescription | div | Inherits the native div; all native attributes and events pass through. Description. |
+| CardExtra | div | Inherits the native div; all native attributes and events pass through. Extra header content. |
+| CardContent | div | Inherits the native div; all native attributes and events pass through. Main content. |
+| CardFooter | div | Inherits the native div; all native attributes and events pass through. Footer content. |
 
 ## Examples
 
-Examples live in `examples/<name>` and are the source used by documentation previews.
+Examples live in `examples/<name>` and are used by the documentation preview.
 
-| Name | Coverage |
+| Name | Covers |
 | --- | --- |
-| basic | Seven-part composition. |
-| surface | Independent region surfaces and dividers. |
-| custom-header | Custom Header layout with CardExtra. |
+| basic | Complete information card. |
+| extra | Extra header content. |
+| custom-header | Custom header. |
+| surface | Section surfaces. |
+| css-variables | Instance CSS variables. |
 
-## Primitive API
+## API
 
-All seven components forward `ComponentProps<'div'>`, native events, `className`, `style`, and `ref` to their host div. They have no controlled state or custom callbacks.
-
-## CSS variables
-
-| Variable | Default source | Description |
-| --- | --- | --- |
-| --card-radius | --radius-md | Root radius. |
-| --card-border | none | Root border shorthand. |
-| --card-shadow | none | Root shadow. |
-| --card-background | --elevated-background | Shared region background fallback. |
-| --card-header-background / --card-content-background / --card-footer-background | --card-background | Region background. |
-| --card-header-padding / --card-content-padding / --card-footer-padding | 1rem | Region padding. |
-| --card-header-divider / --card-footer-divider | 1px solid var(--border) | Region separator shorthand. |
+This family adds no state props; content, class, style, ARIA attributes, and native events pass through to the corresponding elements.

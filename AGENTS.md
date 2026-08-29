@@ -54,6 +54,7 @@
 - 所有 app 首页组件导航、组件路由表和组件文档目录索引必须按组件英文名称的字母顺序排列；新增组件时插入正确的字母位置，禁止仅追加到数组或列表末尾。
 - 文件命名要清晰、稳定、便于搜索。组件名表达业务含义，避免用 `Base`、`Common`、`Manager` 这类过宽泛的名字承载复杂职责。
 - 本仓库采用源码交付，组件定义名和公开导出名禁止携带品牌前缀或层级装饰。统一使用 `Button`、`ButtonGroup`、`Dialog` 等业务名称，不使用 `FexButton`、`ElButton`、`ButtonPrimitive`、`PrimitiveButton`。Primitive/UI/Pro 层级只由目录、Registry target 和导入路径表达；Primitive 和 UI 中的同名组件都保持同一个裸名称。高层组件组合低层组件时，允许仅在当前实现文件中使用 `import { Button as PrimitiveButton } ...` 这类局部别名，但局部别名不得成为组件定义名、公开导出名、DevTools 名称或稳定 API。
+- **品牌前缀零容忍门禁**：任何新增或修改的组件、指令、图标、示例组件、测试宿主、文档代码和生成源码，都禁止出现公开 `FexXxx`、`fex-xxx`、`fexXxx` 名称；Icon、内部示例 selector 和演示模板同样不例外。包名 `@fex-design/*` 不属于组件公开名称，可以保留。唯一允许的层级名称是实现文件内不向外暴露的局部 import alias，例如 `Button as PrimitiveButton`。完成任务前必须扫描本次新增和修改文件；只要 selector、模板标签、属性指令、公开导出、示例源码或文档源码中仍有品牌前缀，就不得声明完成，也不得以“仅内部使用”“只是示例”作为例外。
 - 组件公开入口统一使用具名导出，禁止提供 `export default` 或把内部默认导出继续透出为公开默认导出；调用方统一使用 `import { Button, ButtonGroup } from '...'`。Vue SFC 和 Svelte 组件文件因框架模块格式产生的内部默认导出，只能在同目录公开入口中转换为 `export { default as Button } from './button.vue'` / `./button.svelte`，不得泄漏成包的默认 API。
 - 同一组件族存在多个公开组件时，每个组件必须有独立实现文件，例如 `button.*`、`button-group.*`；组件族可以使用与组件同名的公开入口文件统一导出该子路径，但不得使用 `index.ts` 桶文件。五框架应保持相同的组件拆分边界，具体文件扩展名和模板文件遵循各框架惯例。
 - React 只能作为跨框架公共语义、行为、视觉和 Demo 场景的参考，禁止把 React 的 Props、children、ref、Context、hook、组件组织或类型组合方式直接翻译到 Vue、Solid、Svelte、Angular。实现或重构非 React 组件前，必须检查该框架当前官方推荐能力和成熟组件库的真实源码，再按本框架惯例设计；优先参考 Vue 的 Element Plus / Reka UI、Solid 的 Kobalte / Ark UI、Svelte 的 Bits UI / Ark UI、Angular 的 Angular Material / CDK。参考用于确认框架表达和工程惯例，不得不加判断地复制第三方 API、品牌约定或历史兼容代码。
@@ -176,6 +177,7 @@
 - 组件优先使用 standalone component、强类型表单和清晰的依赖注入边界。
 - Angular 组件和指令使用 signal inputs/outputs、原生元素属性和 content projection 表达公开能力；不要为了对齐 React Props 而额外创建 `ButtonInputs` 这类汇总接口。共享枚举可以直接用于各个 `input<T>()`。类名和公开导出保持 `Button` 等裸名称，层级由目录和导入路径表达。
 - Angular 源码交付组件的 selector 同样禁止品牌前缀和层级装饰。基于原生元素的组件使用明确的元素约束和裸属性名，例如 `button[button]`、`div[buttonGroup]`，调用方式为 `<button button>`、`<div buttonGroup>`；不要使用 `fexButton`、`fexButtonPrimitive`、`fex-button-group`，也不要用看不出宿主元素类型的自定义元素包一层原生 DOM。Primitive 与 UI 使用相同裸 selector 时，由各自导入路径和独立 template scope 隔离，不在同一 scope 同时导入两个同 selector Component。
+- Angular 的图标和示例也遵循同一 selector 规则：使用 `plus-icon`、`separator-basic-example` 这类无品牌名称，不得使用 `fex-plus-icon`、`fex-separator-basic-example`。修改已有组件时，必须同步修改其模板、五框架示例、文档源码预览和生成注册，禁止只改组件定义或只改截图中出现的一处。
 - 组件按 `OnPush` 和细粒度响应的思路设计，减少不必要的模板重算和子树更新。
 - 模板表达式保持轻量，不调用昂贵函数；复杂展示值放到 signal、computed、pipe 或组件字段中。
 - 列表渲染必须使用 `trackBy` 或新控制流的 `track`，不要让 Angular 以对象引用猜测列表身份。

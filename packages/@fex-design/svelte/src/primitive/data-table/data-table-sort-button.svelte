@@ -2,7 +2,7 @@
   import { dataTableSortButtonClassName } from '@fex-design/styles/data-table'
   import type { Column, RowData, TableFeatures } from '@tanstack/table-core'
   import ChevronRightIcon from '../../icon/chevron-right.svelte'
-  import Button from '../../ui/button/button.svelte'
+import { Button } from '@fex-design/svelte/ui/button'
 
   interface SortableColumn {
     getCanSort(): boolean

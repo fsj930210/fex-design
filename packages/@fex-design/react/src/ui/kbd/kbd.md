@@ -1,27 +1,27 @@
-# Kbd UI
+# React UI Kbd
 
-The UI layer re-exports the styled Primitive `Kbd` and `KbdGroup`.
+UI entry for Kbd Primitive with no additional behavior.
 
 ## Import
 
-```tsx
-import { Kbd, KbdGroup } from '@fex-design/react/ui/kbd'
-```
+    import { Kbd, KbdGroup } from '@fex-design/react/ui/kbd'
 
-## Example
+## Components
 
-```tsx
-<KbdGroup>
-  <Kbd>Ctrl</Kbd>
-  <Kbd>K</Kbd>
-</KbdGroup>
-```
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Kbd | kbd | Inherits the native kbd; all native attributes and events pass through. Single keyboard key. |
+| KbdGroup | div | Inherits the native div; all native attributes and events pass through. Groups multiple keys. |
+
+## Examples
+
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Single key. |
+| group | Keyboard shortcut group. |
 
 ## API
 
-| Prop        | Type        | Default     | Required | Description              |
-| ----------- | ----------- | ----------- | ---- | ------------------------ |
-| `className` | `string`    | `undefined` | No | Merged with the element class. |
-| `children`  | `ReactNode` | `undefined` | No | Key label or icon. |
-
-The components forward native attributes and events and do not own state.
+This family adds no state props; content, class, style, ARIA attributes, and native events pass through to the corresponding elements.

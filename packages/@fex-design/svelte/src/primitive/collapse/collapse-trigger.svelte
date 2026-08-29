@@ -4,7 +4,7 @@
   import { getContext } from 'svelte'
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
-  import PrimitiveButton from '../button/button.svelte'
+import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
   import ChevronRightIcon from '../../icon/chevron-right.svelte'
   import { collapseContextKey, collapseItemContextKey, type CollapseContext, type CollapseItemContext } from './context'
 

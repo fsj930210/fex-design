@@ -56,7 +56,7 @@ export default defineConfig({
           if (
             !extensions[framework] ||
             !['primitive', 'ui'].includes(layer ?? '') ||
-            !['aspect-ratio', 'button', 'card', 'kbd', 'separator', 'spinner'].includes(component ?? '') ||
+            !['aspect-ratio', 'avatar', 'button', 'card', 'kbd', 'separator', 'spinner'].includes(component ?? '') ||
             !/^[a-z-]+$/.test(example ?? '')
           ) {
             response.statusCode = 400

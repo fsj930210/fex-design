@@ -1,3 +1,27 @@
-# Kbd Primitive
+# Angular Primitive Kbd
 
-`Kbd` 展示键盘按键，`KbdGroup` 组合按键。使用原生 `kbd` 与 `div` 宿主并透传内容。
+Styled keyboard key and key group primitives.
+
+## Import
+
+    import { Kbd, KbdGroup } from '@fex-design/angular/primitive/kbd'
+
+## Components
+
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Kbd | kbd | Inherits the native kbd; all native attributes and events pass through. Single keyboard key. |
+| KbdGroup | div | Inherits the native div; all native attributes and events pass through. Groups multiple keys. |
+
+## Examples
+
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Single key. |
+| group | Keyboard shortcut group. |
+
+## API
+
+This family adds no state props; content, class, style, ARIA attributes, and native events pass through to the corresponding elements.

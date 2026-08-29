@@ -40,12 +40,22 @@ async function names(root, extension) {
 async function validateFrameworkContracts(slug, layer) {
   const file = resolve(apiRoot, layer, `${slug}.json`)
   const api = JSON.parse(await readFile(file, 'utf8'))
-  for (const framework of frameworks) {
-    const native = api.frameworks?.[framework] ?? {}
-    const properties = (native.props ?? api.props).filter((property) => !native.omitProps?.includes(property.name))
-    for (const property of properties) {
-      if (property.type.includes('FrameworkNode') && !native.typeOverrides?.FrameworkNode) {
-        fail(`${file} leaves FrameworkNode unresolved for ${framework}.${property.name}`)
+  for (const component of [api, ...(api.components ?? [])]) {
+    for (const framework of frameworks) {
+      const shared = api.frameworks?.[framework] ?? {}
+      const native = component.frameworks?.[framework] ?? {}
+      const properties = (native.props ?? component.props).filter((property) => !native.omitProps?.includes(property.name))
+      const propertyNames = new Set(properties.map((property) => property.name))
+      if ((propertyNames.has('class') || propertyNames.has('className')) && !propertyNames.has('style')) {
+        fail(`${file} exposes class without style for ${framework}.${component.name}`)
+      }
+      const typeOverrides = { ...shared.typeOverrides, ...native.typeOverrides }
+      for (const property of properties) {
+        for (const placeholder of property.type.match(/Framework[A-Z][A-Za-z]+/g) ?? []) {
+          if (!typeOverrides[placeholder]) {
+            fail(`${file} leaves ${placeholder} unresolved for ${framework}.${component.name}.${property.name}`)
+          }
+        }
       }
     }
   }

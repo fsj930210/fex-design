@@ -43,7 +43,7 @@
     />
   </div>
   <span data-slot="select-suffix" [class]="suffixClass">
-    @if (select.loading) { <fex-loading-icon class="animate-spin" /> } @else if (select.clearable &&
+    @if (select.loading) { <loading-icon class="animate-spin" /> } @else if (select.clearable &&
     select.selectedOptions.length) {
     <button
       button

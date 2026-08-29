@@ -4,10 +4,208 @@
   "layer": "primitive",
   "status": "stable",
   "description": "带基础样式的键盘按键与按键组合。",
-  "nativeElement": "Kbd：kbd\nKbdGroup：div",
-  "importPath": { "react": "@fex-design/react/primitive/kbd", "vue": "@fex-design/vue/primitive/kbd", "solid": "@fex-design/solid/primitive/kbd", "svelte": "@fex-design/svelte/primitive/kbd", "angular": "@fex-design/angular/primitive/kbd" },
+  "importPath": {
+    "react": "@fex-design/react/primitive/kbd",
+    "vue": "@fex-design/vue/primitive/kbd",
+    "solid": "@fex-design/solid/primitive/kbd",
+    "svelte": "@fex-design/svelte/primitive/kbd",
+    "angular": "@fex-design/angular/primitive/kbd"
+  },
   "props": [],
   "events": [],
   "cssVariables": [],
-  "demos": [{ "id": "basic", "title": "基础用法", "description": "展示单个键盘按键。" }, { "id": "group", "title": "按键组合", "description": "使用 KbdGroup 组合快捷键。" }]
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "展示单个键盘按键。"
+    },
+    {
+      "id": "group",
+      "title": "按键组合",
+      "description": "使用 KbdGroup 组合快捷键。"
+    }
+  ],
+  "components": [
+    {
+      "name": "Kbd",
+      "slug": "kbd",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "Kbd 组件继承原生 kbd，原生 kbd 的所有属性和事件均可透传；用于表示单个键盘按键。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/kbd",
+        "vue": "@fex-design/vue/primitive/kbd",
+        "solid": "@fex-design/solid/primitive/kbd",
+        "svelte": "@fex-design/svelte/primitive/kbd",
+        "angular": "@fex-design/angular/primitive/kbd"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "KbdGroup",
+      "slug": "kbd-group",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "KbdGroup 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于组合多个按键。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/kbd",
+        "vue": "@fex-design/vue/primitive/kbd",
+        "solid": "@fex-design/solid/primitive/kbd",
+        "svelte": "@fex-design/svelte/primitive/kbd",
+        "angular": "@fex-design/angular/primitive/kbd"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
   import CloseIcon from '../../icon/close.svelte'
-  import PrimitiveButton from '../button/button.svelte'
+import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
   import { getInputContext } from './context'
 
   interface Props extends Omit<HTMLButtonAttributes, 'class'> {

@@ -1,7 +1,7 @@
 @if (loading()) {
 <span buttonIcon [placement]="iconPlacement()">
   <ng-content select="[slot=loading-indicator]">
-    <fex-loading-icon [class]="spinnerClassName" />
+    <loading-icon [class]="spinnerClassName" />
   </ng-content>
 </span>
 } @else {

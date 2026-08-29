@@ -6,7 +6,7 @@
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
   import { getContext } from 'svelte'
-  import Button from '../button/button.svelte'
+import { Button } from '@fex-design/svelte/primitive/button'
   import { calendarContextKey, type CalendarContextValue } from '../calendar/context'
   import { useHeaderOwner } from './date-picker-header-owner'
 

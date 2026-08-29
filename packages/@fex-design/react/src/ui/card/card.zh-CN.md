@@ -1,37 +1,38 @@
-# React Card
+# React UI Card
 
-UI Card 负责生成常规 Header，同时保留 Primitive 区域与原生 div 属性透传。
+基于 Card Primitive 的快捷容器，提供结构化内容与语义区域样式入口。
 
 ## 导入
 
-```tsx
-import { Card } from '@fex-design/react/ui/card'
-```
+    import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@fex-design/react/ui/card'
+
+## 组件
+
+| 组件 | 元素 | 说明 |
+| --- | --- | --- |
+| Card | div | 继承原生 div，原生 div 的所有属性和事件均可透传；信息容器根节点。 |
+| CardHeader | div | 继承原生 div，原生 div 的所有属性和事件均可透传；头部布局。 |
+| CardTitle | div | 继承原生 div，原生 div 的所有属性和事件均可透传；标题。 |
+| CardDescription | div | 继承原生 div，原生 div 的所有属性和事件均可透传；辅助说明。 |
+| CardExtra | div | 继承原生 div，原生 div 的所有属性和事件均可透传；标题区补充内容。 |
+| CardContent | div | 继承原生 div，原生 div 的所有属性和事件均可透传；主体内容。 |
+| CardFooter | div | 继承原生 div，原生 div 的所有属性和事件均可透传；底部内容。 |
 
 ## 示例
 
-示例保存在 `examples/<name>`，作为文档预览的源码。
+示例保存在 `examples/<name>`，作为官网预览源码。
 
 | 名称 | 覆盖内容 |
 | --- | --- |
-| basic | 默认 Header、extra、正文和 Footer。 |
-| custom-header | 完整替换 Header。 |
-| styling | classNames、styles 与 Card variables。 |
+| basic | 完整信息卡片。 |
+| extra | 标题区额外内容。 |
+| custom-header | 自定义 Header。 |
+| surface | 区域 surface。 |
+| css-variables | 实例 CSS Variables。 |
 
-## Card API
+## API
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- |
-| title | ReactNode | — | 默认 Header 标题。 |
-| description | ReactNode | — | 默认 Header 辅助说明。 |
-| extra | ReactNode | — | 默认 Header 补充内容。 |
-| header | ReactNode | — | 完整替换生成的 Header。 |
-| footer | ReactNode | — | 独立 Footer 内容。 |
-| classNames | CardClassNames | — | root、header、title、description、extra、content、footer 的 class。 |
-| styles | CardStyles | — | 相同稳定区域的内联样式。 |
-| 原生属性 | ComponentProps<'div'> | — | 透传至 Root 的原生属性与事件。 |
-| 元素访问 | ref | — | 获取 Root 的 HTMLDivElement。 |
-
-## 替换规则
-
-`header` 优先于 `title`、`description` 和 `extra`。需要复用默认区域 surface 但自定义布局时，在 `header` 中组合 Primitive 部件。Card CSS variables 可放在单个实例、组件容器或 `:root`。
+| --- | --- | --- | --- |
+| classNames | CardClassNames | — | 按 root、header、title、description、extra、content、footer 追加 class。 |
+| styles | CardStyles | — | 按语义区域追加内联样式。 |

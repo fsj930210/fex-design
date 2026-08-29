@@ -1,22 +1,38 @@
-# Vue Card
+# Vue UI Card
+
+Convenience Card built on Primitive with structured content and semantic-region styling.
 
 ## Import
-```vue
-<script setup lang="ts">
-import { Card } from '@fex-design/vue/ui/card'
-</script>
-```
+
+    import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@fex-design/vue/ui/card'
+
+## Components
+
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Card | div | Inherits the native div; all native attributes and events pass through. Root information container. |
+| CardHeader | div | Inherits the native div; all native attributes and events pass through. Header layout. |
+| CardTitle | div | Inherits the native div; all native attributes and events pass through. Title. |
+| CardDescription | div | Inherits the native div; all native attributes and events pass through. Description. |
+| CardExtra | div | Inherits the native div; all native attributes and events pass through. Extra header content. |
+| CardContent | div | Inherits the native div; all native attributes and events pass through. Main content. |
+| CardFooter | div | Inherits the native div; all native attributes and events pass through. Footer content. |
 
 ## Examples
-`examples/basic`, `examples/custom-header`, and `examples/styling` cover the default Header, Header replacement, and component styling.
 
-## Card API
-| Name | Type | Description |
-| --- | --- | --- |
-| title / description / extra | prop or slot | Generated Header content. |
-| header | named slot | Fully replaces the generated Header. |
-| footer | prop or named slot | Independent Footer content. |
-| classNames / styles | CardClassNames / CardStyles | Stable region styling. |
-| native attributes | attrs | Forwarded to Root. |
+Examples live in `examples/<name>` and are used by the documentation preview.
 
-The `header` slot takes precedence over title, description, and extra.
+| Name | Covers |
+| --- | --- |
+| basic | Complete information card. |
+| extra | Extra header content. |
+| custom-header | Custom header. |
+| surface | Section surfaces. |
+| css-variables | Instance CSS variables. |
+
+## API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| classNames | CardClassNames | — | Adds classes to root, header, title, description, extra, content, and footer. |
+| styles | CardStyles | — | Adds inline styles by semantic region. |

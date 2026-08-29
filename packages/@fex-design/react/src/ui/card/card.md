@@ -1,37 +1,38 @@
-# React Card
+# React UI Card
 
-The UI Card creates a conventional Header while retaining the Primitive regions and native div attributes.
+Convenience Card built on Primitive with structured content and semantic-region styling.
 
 ## Import
 
-```tsx
-import { Card } from '@fex-design/react/ui/card'
-```
+    import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@fex-design/react/ui/card'
+
+## Components
+
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Card | div | Inherits the native div; all native attributes and events pass through. Root information container. |
+| CardHeader | div | Inherits the native div; all native attributes and events pass through. Header layout. |
+| CardTitle | div | Inherits the native div; all native attributes and events pass through. Title. |
+| CardDescription | div | Inherits the native div; all native attributes and events pass through. Description. |
+| CardExtra | div | Inherits the native div; all native attributes and events pass through. Extra header content. |
+| CardContent | div | Inherits the native div; all native attributes and events pass through. Main content. |
+| CardFooter | div | Inherits the native div; all native attributes and events pass through. Footer content. |
 
 ## Examples
 
-Examples live in `examples/<name>` and are the source used by documentation previews.
+Examples live in `examples/<name>` and are used by the documentation preview.
 
-| Name | Coverage |
+| Name | Covers |
 | --- | --- |
-| basic | Generated Header, extra content, body, and Footer. |
-| custom-header | Complete Header replacement. |
-| styling | classNames, styles, and Card variables. |
+| basic | Complete information card. |
+| extra | Extra header content. |
+| custom-header | Custom header. |
+| surface | Section surfaces. |
+| css-variables | Instance CSS variables. |
 
-## Card API
+## API
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| title | ReactNode | — | Default Header title. |
-| description | ReactNode | — | Default Header supporting text. |
-| extra | ReactNode | — | Default Header supplementary content. |
-| header | ReactNode | — | Fully replaces the generated Header. |
-| footer | ReactNode | — | Independent Footer content. |
-| classNames | CardClassNames | — | Classes for root, header, title, description, extra, content, and footer. |
-| styles | CardStyles | — | Inline styles for the same stable parts. |
-| native attributes | ComponentProps<'div'> | — | Native attributes and events are forwarded to the Root. |
-| element access | ref | — | Receives the root HTMLDivElement. |
-
-## Replacement rules
-
-`header` has precedence over `title`, `description`, and `extra`. Use Primitive parts in `header` when you need the default region surface with a custom layout. Card CSS variables can be placed on a single instance, a component wrapper, or `:root`.
+| classNames | CardClassNames | — | Adds classes to root, header, title, description, extra, content, and footer. |
+| styles | CardStyles | — | Adds inline styles by semantic region. |

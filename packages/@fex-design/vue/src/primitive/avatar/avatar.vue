@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { avatarClassName, type AvatarStyleProps } from '@fex-design/styles/avatar'
 import { cn } from '@fex/utils'
-import { provide, ref, useAttrs } from 'vue'
-import { avatarContext } from './context'
+import { onBeforeUnmount, provide, useAttrs } from 'vue'
+import { avatarContext, createAvatarContext } from './context'
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(
   defineProps<{ size?: AvatarStyleProps['size']; shape?: AvatarStyleProps['shape'] }>(),
   { size: 'md', shape: 'circle' },
 )
 const attrs = useAttrs()
-const loaded = ref(false)
-provide(avatarContext, { loaded })
+const context = createAvatarContext()
+provide(avatarContext, context)
+onBeforeUnmount(() => context.controller.reset())
 </script>
 <template>
   <span

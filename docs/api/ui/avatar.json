@@ -1,0 +1,235 @@
+{
+  "name": "Avatar UI",
+  "slug": "avatar",
+  "layer": "ui",
+  "status": "stable",
+  "description": "直接使用的 Avatar 与 AvatarGroup。",
+  "importPath": {
+    "react": "@fex-design/react/ui/avatar",
+    "vue": "@fex-design/vue/ui/avatar",
+    "solid": "@fex-design/solid/ui/avatar",
+    "svelte": "@fex-design/svelte/ui/avatar",
+    "angular": "@fex-design/angular/ui/avatar"
+  },
+  "props": [],
+  "events": [],
+  "slots": [],
+  "demos": [],
+  "components": [
+    {
+      "name": "Avatar",
+      "slug": "avatar",
+      "layer": "ui",
+      "status": "stable",
+      "description": "带图片和 fallback 的完整头像。",
+      "importPath": {
+        "react": "@fex-design/react/ui/avatar",
+        "vue": "@fex-design/vue/ui/avatar",
+        "solid": "@fex-design/solid/ui/avatar",
+        "svelte": "@fex-design/svelte/ui/avatar",
+        "angular": "@fex-design/angular/ui/avatar"
+      },
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "description": "图片地址。"
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "default": "''",
+          "description": "替代文本。"
+        },
+        {
+          "name": "srcSet",
+          "type": "string",
+          "description": "响应式图片地址。"
+        },
+        {
+          "name": "fallback",
+          "type": "FrameworkNode",
+          "description": "图片不可用时的内容。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "'md'",
+          "description": "头像尺寸。"
+        },
+        {
+          "name": "shape",
+          "type": "'circle' | 'square'",
+          "default": "'circle'",
+          "description": "头像形状。"
+        },
+        {
+          "name": "classNames",
+          "type": "Partial<Record<'root' | 'image' | 'fallback', string>>",
+          "description": "设置头像各语义部件的 class。"
+        },
+        {
+          "name": "styles",
+          "type": "Partial<Record<'root' | 'image' | 'fallback', FrameworkStyle>>",
+          "description": "设置头像各语义部件的内联样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "vue": {
+          "omitProps": [
+            "fallback"
+          ],
+          "slotLabel": "Slots"
+        },
+        "svelte": {
+          "omitProps": [
+            "fallback"
+          ],
+          "slotLabel": "Snippet"
+        },
+        "angular": {
+          "omitProps": [
+            "fallback"
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    },
+    {
+      "name": "AvatarGroup",
+      "slug": "avatar-group",
+      "layer": "ui",
+      "status": "stable",
+      "description": "组合头像并自动显示溢出数量。",
+      "importPath": {
+        "react": "@fex-design/react/ui/avatar",
+        "vue": "@fex-design/vue/ui/avatar",
+        "solid": "@fex-design/solid/ui/avatar",
+        "svelte": "@fex-design/svelte/ui/avatar",
+        "angular": "@fex-design/angular/ui/avatar"
+      },
+      "props": [
+        {
+          "name": "maxCount",
+          "type": "number",
+          "description": "最多显示的头像数量。"
+        },
+        {
+          "name": "renderOverflow",
+          "type": "FrameworkNode",
+          "description": "自定义溢出节点。"
+        },
+        {
+          "name": "classNames",
+          "type": "Partial<Record<'root' | 'overflow', string>>",
+          "description": "设置头像组各语义部件的 class。"
+        },
+        {
+          "name": "styles",
+          "type": "Partial<Record<'root' | 'overflow', FrameworkStyle>>",
+          "description": "设置头像组各语义部件的内联样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "vue": {
+          "omitProps": [
+            "renderOverflow"
+          ],
+          "slots": [
+            {
+              "name": "overflow",
+              "description": "自定义溢出节点，slot props：count、items。"
+            }
+          ],
+          "slotLabel": "Slots"
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "maxCount",
+              "type": "number",
+              "description": "最多显示的头像数量。"
+            },
+            {
+              "name": "renderOverflow",
+              "type": "Snippet<[number]>",
+              "description": "自定义溢出节点。"
+            },
+            {
+              "name": "classNames",
+              "type": "Partial<Record<'root' | 'overflow', string>>",
+              "description": "设置头像组各语义部件的 class。"
+            },
+            {
+              "name": "styles",
+              "type": "Partial<Record<'root' | 'overflow', string>>",
+              "description": "设置头像组各语义部件的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "maxCount",
+              "type": "number",
+              "description": "最多显示的头像数量。"
+            },
+            {
+              "name": "overflow",
+              "type": "TemplateRef<{ $implicit: number; items: readonly Avatar[] }>",
+              "description": "自定义溢出节点。"
+            },
+            {
+              "name": "classNames",
+              "type": "Partial<Record<'root' | 'overflow', string>>",
+              "description": "设置头像组各语义部件的 class。"
+            },
+            {
+              "name": "styles",
+              "type": "Partial<Record<'root' | 'overflow', string>>",
+              "description": "设置头像组各语义部件的内联样式。"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkStyle": "CSSProperties"
+      }
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkNode": "VNode",
+        "FrameworkStyle": "StyleValue"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkStyle": "JSX.CSSProperties"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkStyle": "string"
+      }
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkNode": "TemplateRef<unknown>",
+        "FrameworkStyle": "string"
+      }
+    }
+  }
+}

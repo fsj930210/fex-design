@@ -1,13 +1,27 @@
-# Kbd Primitive
+# React Primitive Kbd
 
-`Kbd` displays a keyboard key and `KbdGroup` composes a sequence of keys. Both components are styled native-element wrappers and forward native attributes and events.
+Styled keyboard key and key group primitives.
 
-```tsx
-import { Kbd, KbdGroup } from '@fex-design/react/primitive/kbd'
+## Import
 
-<KbdGroup><Kbd>Ctrl</Kbd><Kbd>K</Kbd></KbdGroup>
-```
+    import { Kbd, KbdGroup } from '@fex-design/react/primitive/kbd'
+
+## Components
+
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Kbd | kbd | Inherits the native kbd; all native attributes and events pass through. Single keyboard key. |
+| KbdGroup | div | Inherits the native div; all native attributes and events pass through. Groups multiple keys. |
+
+## Examples
+
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Single key. |
+| group | Keyboard shortcut group. |
 
 ## API
 
-`Kbd` extends `ComponentProps<'kbd'>`; `KbdGroup` extends `ComponentProps<'div'>`. `className` is merged with the default styles.
+This family adds no state props; content, class, style, ARIA attributes, and native events pass through to the corresponding elements.

@@ -9,6 +9,9 @@
   "sideEffects": false,
   "exports": {
     "./collection/split-overflow-items": "./src/collection/split-overflow-items.ts",
+    "./avatar/types": "./src/avatar/types.ts",
+    "./image/types": "./src/image/types.ts",
+    "./image/create-image-loading-controller": "./src/image/create-image-loading-controller.ts",
     "./search/filter-by-search-text": "./src/search/filter-by-search-text.ts",
     "./masonry/create-masonry-controller": "./src/masonry/create-masonry-controller.ts",
     "./masonry/layout": "./src/masonry/layout.ts",

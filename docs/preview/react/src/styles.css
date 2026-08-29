@@ -1,5 +1,4 @@
 @import '@fex/styles';
-@import '../../solid/src/preview.css';
 @source "../../../../packages/@fex-design/react/src";
 @source "../../../../packages/@fex-design/styles/src";
 @source "../../../../docs/preview/react/src";

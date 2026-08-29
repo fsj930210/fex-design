@@ -3,147 +3,193 @@ import type { Type } from '@angular/core'
 import { Landscape as Example0 } from '../../../../packages/@fex-design/angular/src/primitive/aspect-ratio/examples/landscape'
 import { Portrait as Example1 } from '../../../../packages/@fex-design/angular/src/primitive/aspect-ratio/examples/portrait'
 import { Square as Example2 } from '../../../../packages/@fex-design/angular/src/primitive/aspect-ratio/examples/square'
-import { BasicExample as Example3 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/basic'
-import { CombinationsExample as Example4 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/combinations'
-import { CssVariablesExample as Example5 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/css-variables'
-import { DirectionExample as Example6 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/direction'
-import { EffectsExample as Example7 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/effects'
-import { GroupExample as Example8 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/group'
-import { IconsExample as Example9 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/icons'
-import { LoadingExample as Example10 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/loading'
-import { SizesExample as Example11 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/sizes'
-import { StatesExample as Example12 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/states'
-import { VariantsExample as Example13 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/variants'
-import { BasicExample as Example14 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/basic'
-import { CssVariablesExample as Example15 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/css-variables'
-import { CustomHeaderExample as Example16 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/custom-header'
-import { DirectionExample as Example17 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/direction'
-import { ExtraExample as Example18 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/extra'
-import { StylingExample as Example19 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/styling'
-import { SurfaceExample as Example20 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/surface'
-import { Basic as Example21 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/basic'
-import { ButtonExample as Example22 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/button'
-import { DirectionExample as Example23 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/direction'
-import { Group as Example24 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/group'
-import { Basic as Example25 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/basic'
-import { Direction as Example26 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/direction'
-import { List as Example27 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/list'
-import { Menu as Example28 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/menu'
-import { WithText as Example29 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/text'
-import { Variants as Example30 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/variants'
-import { Vertical as Example31 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/vertical'
-import { BasicExample as Example32 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/basic'
-import { CustomIndicatorExample as Example33 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/custom-indicator'
-import { OverlayExample as Example34 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/overlay'
-import { SizesExample as Example35 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/sizes'
-import { Landscape as Example36 } from '../../../../packages/@fex-design/angular/src/ui/aspect-ratio/examples/landscape'
-import { Portrait as Example37 } from '../../../../packages/@fex-design/angular/src/ui/aspect-ratio/examples/portrait'
-import { Square as Example38 } from '../../../../packages/@fex-design/angular/src/ui/aspect-ratio/examples/square'
-import { BasicExample as Example39 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/basic'
-import { CombinationsExample as Example40 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/combinations'
-import { CssVariablesExample as Example41 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/css-variables'
-import { DirectionExample as Example42 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/direction'
-import { EffectsExample as Example43 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/effects'
-import { GroupExample as Example44 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/group'
-import { IconsExample as Example45 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/icons'
-import { LoadingExample as Example46 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/loading'
-import { SizesExample as Example47 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/sizes'
-import { StatesExample as Example48 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/states'
-import { VariantsExample as Example49 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/variants'
-import { BasicExample as Example50 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/basic'
-import { CssVariablesExample as Example51 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/css-variables'
-import { CustomHeaderExample as Example52 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/custom-header'
-import { DirectionExample as Example53 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/direction'
-import { ExtraExample as Example54 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/extra'
-import { StylingExample as Example55 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/styling'
-import { Basic as Example56 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/basic'
-import { ButtonExample as Example57 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/button'
-import { DirectionExample as Example58 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/direction'
-import { Group as Example59 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/group'
-import { Basic as Example60 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/basic'
-import { Direction as Example61 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/direction'
-import { List as Example62 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/list'
-import { Menu as Example63 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/menu'
-import { WithText as Example64 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/text'
-import { Variants as Example65 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/variants'
-import { Vertical as Example66 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/vertical'
-import { BasicExample as Example67 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/basic'
-import { CustomIndicatorExample as Example68 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/custom-indicator'
-import { OverlayExample as Example69 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/overlay'
-import { SizesExample as Example70 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/sizes'
-import { StylingExample as Example71 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/styling'
+import { BadgeExample as Example3 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/badge'
+import { BadgeWithIconExample as Example4 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/badge-with-icon'
+import { BasicExample as Example5 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/basic'
+import { CssVariablesExample as Example6 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/css-variables'
+import { DirectionExample as Example7 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/direction'
+import { GroupExample as Example8 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/group'
+import { GroupCountExample as Example9 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/group-count'
+import { GroupShapeExample as Example10 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/group-shape'
+import { GroupWithIconExample as Example11 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/group-with-icon'
+import { MaxCountExample as Example12 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/max-count'
+import { ShapeExample as Example13 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/shape'
+import { SizesExample as Example14 } from '../../../../packages/@fex-design/angular/src/primitive/avatar/examples/sizes'
+import { BasicExample as Example15 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/basic'
+import { CombinationsExample as Example16 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/combinations'
+import { CssVariablesExample as Example17 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/css-variables'
+import { DirectionExample as Example18 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/direction'
+import { EffectsExample as Example19 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/effects'
+import { GroupExample as Example20 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/group'
+import { IconsExample as Example21 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/icons'
+import { LoadingExample as Example22 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/loading'
+import { SizesExample as Example23 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/sizes'
+import { StatesExample as Example24 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/states'
+import { VariantsExample as Example25 } from '../../../../packages/@fex-design/angular/src/primitive/button/examples/variants'
+import { BasicExample as Example26 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/basic'
+import { CssVariablesExample as Example27 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/css-variables'
+import { CustomHeaderExample as Example28 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/custom-header'
+import { DirectionExample as Example29 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/direction'
+import { ExtraExample as Example30 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/extra'
+import { StylingExample as Example31 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/styling'
+import { SurfaceExample as Example32 } from '../../../../packages/@fex-design/angular/src/primitive/card/examples/surface'
+import { Basic as Example33 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/basic'
+import { ButtonExample as Example34 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/button'
+import { DirectionExample as Example35 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/direction'
+import { Group as Example36 } from '../../../../packages/@fex-design/angular/src/primitive/kbd/examples/group'
+import { Basic as Example37 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/basic'
+import { Direction as Example38 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/direction'
+import { List as Example39 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/list'
+import { Menu as Example40 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/menu'
+import { WithText as Example41 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/text'
+import { Variants as Example42 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/variants'
+import { Vertical as Example43 } from '../../../../packages/@fex-design/angular/src/primitive/separator/examples/vertical'
+import { BasicExample as Example44 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/basic'
+import { CustomIndicatorExample as Example45 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/custom-indicator'
+import { OverlayExample as Example46 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/overlay'
+import { SizesExample as Example47 } from '../../../../packages/@fex-design/angular/src/primitive/spinner/examples/sizes'
+import { Landscape as Example48 } from '../../../../packages/@fex-design/angular/src/ui/aspect-ratio/examples/landscape'
+import { Portrait as Example49 } from '../../../../packages/@fex-design/angular/src/ui/aspect-ratio/examples/portrait'
+import { Square as Example50 } from '../../../../packages/@fex-design/angular/src/ui/aspect-ratio/examples/square'
+import { BasicExample as Example51 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/basic'
+import { CssVariablesExample as Example52 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/css-variables'
+import { DirectionExample as Example53 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/direction'
+import { GroupExample as Example54 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/group'
+import { GroupCountExample as Example55 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/group-count'
+import { GroupShapeExample as Example56 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/group-shape'
+import { GroupWithIconExample as Example57 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/group-with-icon'
+import { MaxCountExample as Example58 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/max-count'
+import { ShapeExample as Example59 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/shape'
+import { SizesExample as Example60 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/sizes'
+import { StylingExample as Example61 } from '../../../../packages/@fex-design/angular/src/ui/avatar/examples/styling'
+import { BasicExample as Example62 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/basic'
+import { CombinationsExample as Example63 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/combinations'
+import { CssVariablesExample as Example64 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/css-variables'
+import { DirectionExample as Example65 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/direction'
+import { EffectsExample as Example66 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/effects'
+import { GroupExample as Example67 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/group'
+import { IconsExample as Example68 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/icons'
+import { LoadingExample as Example69 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/loading'
+import { SizesExample as Example70 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/sizes'
+import { StatesExample as Example71 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/states'
+import { VariantsExample as Example72 } from '../../../../packages/@fex-design/angular/src/ui/button/examples/variants'
+import { BasicExample as Example73 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/basic'
+import { CssVariablesExample as Example74 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/css-variables'
+import { CustomHeaderExample as Example75 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/custom-header'
+import { DirectionExample as Example76 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/direction'
+import { ExtraExample as Example77 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/extra'
+import { StylingExample as Example78 } from '../../../../packages/@fex-design/angular/src/ui/card/examples/styling'
+import { Basic as Example79 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/basic'
+import { ButtonExample as Example80 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/button'
+import { DirectionExample as Example81 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/direction'
+import { Group as Example82 } from '../../../../packages/@fex-design/angular/src/ui/kbd/examples/group'
+import { Basic as Example83 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/basic'
+import { Direction as Example84 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/direction'
+import { List as Example85 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/list'
+import { Menu as Example86 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/menu'
+import { WithText as Example87 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/text'
+import { Variants as Example88 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/variants'
+import { Vertical as Example89 } from '../../../../packages/@fex-design/angular/src/ui/separator/examples/vertical'
+import { BasicExample as Example90 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/basic'
+import { CustomIndicatorExample as Example91 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/custom-indicator'
+import { OverlayExample as Example92 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/overlay'
+import { SizesExample as Example93 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/sizes'
+import { StylingExample as Example94 } from '../../../../packages/@fex-design/angular/src/ui/spinner/examples/styling'
 
 export const examples: Record<string, Type<unknown>> = {
   'primitive/aspect-ratio/landscape': Example0,
   'primitive/aspect-ratio/portrait': Example1,
   'primitive/aspect-ratio/square': Example2,
-  'primitive/button/basic': Example3,
-  'primitive/button/combinations': Example4,
-  'primitive/button/css-variables': Example5,
-  'primitive/button/direction': Example6,
-  'primitive/button/effects': Example7,
-  'primitive/button/group': Example8,
-  'primitive/button/icons': Example9,
-  'primitive/button/loading': Example10,
-  'primitive/button/sizes': Example11,
-  'primitive/button/states': Example12,
-  'primitive/button/variants': Example13,
-  'primitive/card/basic': Example14,
-  'primitive/card/css-variables': Example15,
-  'primitive/card/custom-header': Example16,
-  'primitive/card/direction': Example17,
-  'primitive/card/extra': Example18,
-  'primitive/card/styling': Example19,
-  'primitive/card/surface': Example20,
-  'primitive/kbd/basic': Example21,
-  'primitive/kbd/button': Example22,
-  'primitive/kbd/direction': Example23,
-  'primitive/kbd/group': Example24,
-  'primitive/separator/basic': Example25,
-  'primitive/separator/direction': Example26,
-  'primitive/separator/list': Example27,
-  'primitive/separator/menu': Example28,
-  'primitive/separator/text': Example29,
-  'primitive/separator/variants': Example30,
-  'primitive/separator/vertical': Example31,
-  'primitive/spinner/basic': Example32,
-  'primitive/spinner/custom-indicator': Example33,
-  'primitive/spinner/overlay': Example34,
-  'primitive/spinner/sizes': Example35,
-  'ui/aspect-ratio/landscape': Example36,
-  'ui/aspect-ratio/portrait': Example37,
-  'ui/aspect-ratio/square': Example38,
-  'ui/button/basic': Example39,
-  'ui/button/combinations': Example40,
-  'ui/button/css-variables': Example41,
-  'ui/button/direction': Example42,
-  'ui/button/effects': Example43,
-  'ui/button/group': Example44,
-  'ui/button/icons': Example45,
-  'ui/button/loading': Example46,
-  'ui/button/sizes': Example47,
-  'ui/button/states': Example48,
-  'ui/button/variants': Example49,
-  'ui/card/basic': Example50,
-  'ui/card/css-variables': Example51,
-  'ui/card/custom-header': Example52,
-  'ui/card/direction': Example53,
-  'ui/card/extra': Example54,
-  'ui/card/styling': Example55,
-  'ui/kbd/basic': Example56,
-  'ui/kbd/button': Example57,
-  'ui/kbd/direction': Example58,
-  'ui/kbd/group': Example59,
-  'ui/separator/basic': Example60,
-  'ui/separator/direction': Example61,
-  'ui/separator/list': Example62,
-  'ui/separator/menu': Example63,
-  'ui/separator/text': Example64,
-  'ui/separator/variants': Example65,
-  'ui/separator/vertical': Example66,
-  'ui/spinner/basic': Example67,
-  'ui/spinner/custom-indicator': Example68,
-  'ui/spinner/overlay': Example69,
-  'ui/spinner/sizes': Example70,
-  'ui/spinner/styling': Example71,
+  'primitive/avatar/badge': Example3,
+  'primitive/avatar/badge-with-icon': Example4,
+  'primitive/avatar/basic': Example5,
+  'primitive/avatar/css-variables': Example6,
+  'primitive/avatar/direction': Example7,
+  'primitive/avatar/group': Example8,
+  'primitive/avatar/group-count': Example9,
+  'primitive/avatar/group-shape': Example10,
+  'primitive/avatar/group-with-icon': Example11,
+  'primitive/avatar/max-count': Example12,
+  'primitive/avatar/shape': Example13,
+  'primitive/avatar/sizes': Example14,
+  'primitive/button/basic': Example15,
+  'primitive/button/combinations': Example16,
+  'primitive/button/css-variables': Example17,
+  'primitive/button/direction': Example18,
+  'primitive/button/effects': Example19,
+  'primitive/button/group': Example20,
+  'primitive/button/icons': Example21,
+  'primitive/button/loading': Example22,
+  'primitive/button/sizes': Example23,
+  'primitive/button/states': Example24,
+  'primitive/button/variants': Example25,
+  'primitive/card/basic': Example26,
+  'primitive/card/css-variables': Example27,
+  'primitive/card/custom-header': Example28,
+  'primitive/card/direction': Example29,
+  'primitive/card/extra': Example30,
+  'primitive/card/styling': Example31,
+  'primitive/card/surface': Example32,
+  'primitive/kbd/basic': Example33,
+  'primitive/kbd/button': Example34,
+  'primitive/kbd/direction': Example35,
+  'primitive/kbd/group': Example36,
+  'primitive/separator/basic': Example37,
+  'primitive/separator/direction': Example38,
+  'primitive/separator/list': Example39,
+  'primitive/separator/menu': Example40,
+  'primitive/separator/text': Example41,
+  'primitive/separator/variants': Example42,
+  'primitive/separator/vertical': Example43,
+  'primitive/spinner/basic': Example44,
+  'primitive/spinner/custom-indicator': Example45,
+  'primitive/spinner/overlay': Example46,
+  'primitive/spinner/sizes': Example47,
+  'ui/aspect-ratio/landscape': Example48,
+  'ui/aspect-ratio/portrait': Example49,
+  'ui/aspect-ratio/square': Example50,
+  'ui/avatar/basic': Example51,
+  'ui/avatar/css-variables': Example52,
+  'ui/avatar/direction': Example53,
+  'ui/avatar/group': Example54,
+  'ui/avatar/group-count': Example55,
+  'ui/avatar/group-shape': Example56,
+  'ui/avatar/group-with-icon': Example57,
+  'ui/avatar/max-count': Example58,
+  'ui/avatar/shape': Example59,
+  'ui/avatar/sizes': Example60,
+  'ui/avatar/styling': Example61,
+  'ui/button/basic': Example62,
+  'ui/button/combinations': Example63,
+  'ui/button/css-variables': Example64,
+  'ui/button/direction': Example65,
+  'ui/button/effects': Example66,
+  'ui/button/group': Example67,
+  'ui/button/icons': Example68,
+  'ui/button/loading': Example69,
+  'ui/button/sizes': Example70,
+  'ui/button/states': Example71,
+  'ui/button/variants': Example72,
+  'ui/card/basic': Example73,
+  'ui/card/css-variables': Example74,
+  'ui/card/custom-header': Example75,
+  'ui/card/direction': Example76,
+  'ui/card/extra': Example77,
+  'ui/card/styling': Example78,
+  'ui/kbd/basic': Example79,
+  'ui/kbd/button': Example80,
+  'ui/kbd/direction': Example81,
+  'ui/kbd/group': Example82,
+  'ui/separator/basic': Example83,
+  'ui/separator/direction': Example84,
+  'ui/separator/list': Example85,
+  'ui/separator/menu': Example86,
+  'ui/separator/text': Example87,
+  'ui/separator/variants': Example88,
+  'ui/separator/vertical': Example89,
+  'ui/spinner/basic': Example90,
+  'ui/spinner/custom-indicator': Example91,
+  'ui/spinner/overlay': Example92,
+  'ui/spinner/sizes': Example93,
+  'ui/spinner/styling': Example94,
 }

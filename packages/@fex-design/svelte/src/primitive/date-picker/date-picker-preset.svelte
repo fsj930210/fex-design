@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
   import { datePickerPresetClassName } from '@fex-design/styles/date-picker'
-  import Button from '../button/button.svelte'
+  import { Button } from '@fex-design/svelte/primitive/button'
   interface Props extends Omit<HTMLButtonAttributes, 'children' | 'class'> { class?: string; children?: Snippet }
   let { class: className, children, ...rest }: Props = $props()
 </script>

@@ -1,15 +1,34 @@
 # Solid Primitive Spinner
 
-Low-level styled Spinner primitives. `Spinner` renders the indicator, `SpinnerContainer` composes loading content, and `SpinnerText` renders the description. Primitive does not manage `spinning` or create a content overlay.
+Composable loading indicator, text, container, and overlay primitives.
 
 ## Import
 
-    import { Spinner, SpinnerContainer, SpinnerText } from '@fex-design/solid/primitive/spinner'
+    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/solid/primitive/spinner'
 
-## API
+## Components
 
-`Spinner` accepts `size: 'sm' | 'md' | 'lg'` and children that replace the built-in LoadingIcon. All components accept their native Solid span attributes. Control composition layout with `class` and `style`.
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Spinner | span | Inherits the native span; all native attributes and events pass through. Loading indicator. |
+| SpinnerText | span | Inherits the native span; all native attributes and events pass through. Loading text. |
+| SpinnerContainer | div | Inherits the native div; all native attributes and events pass through. Content and loading-state container. |
+| SpinnerOverlay | div | Inherits the native div; all native attributes and events pass through. Primitive overlay node. |
 
 ## Examples
 
-`basic` directly composes SpinnerContainer, Spinner, and SpinnerText.
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Basic indicator. |
+| sizes | Three sizes. |
+| custom-indicator | Custom indicator. |
+| overlay | Content overlay. |
+| styling | Structured styling. |
+
+## API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| size | 'sm' | 'md' | 'lg' | 'md' | Indicator size. |

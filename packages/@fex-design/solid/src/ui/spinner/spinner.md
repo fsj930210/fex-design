@@ -1,15 +1,37 @@
 # Solid UI Spinner
 
-Recommended entry for standalone indicators and content loading.
+Standalone loading indicator and content container with automatic overlay.
 
 ## Import
 
-    import { Spinner, SpinnerContainer } from '@fex-design/solid/ui/spinner'
+    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/solid/ui/spinner'
+
+## Components
+
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Spinner | span | Inherits the native span; all native attributes and events pass through. Loading indicator. |
+| SpinnerText | span | Inherits the native span; all native attributes and events pass through. Loading text. |
+| SpinnerContainer | div | Inherits the native div; all native attributes and events pass through. Content and loading-state container. |
+| SpinnerOverlay | div | Inherits the native div; all native attributes and events pass through. Primitive overlay node. |
 
 ## Examples
 
-`basic`, `sizes`, `custom-indicator`, `container`, `text`, and `styling` cover standalone indicators, custom indicator content, content loading, description text, and semantic styling.
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Basic indicator. |
+| sizes | Three sizes. |
+| custom-indicator | Custom indicator. |
+| overlay | Content overlay. |
+| styling | Structured styling. |
 
 ## API
 
-`Spinner` accepts `size` and children for custom indicator content. `SpinnerContainer` accepts `spinning`, `size`, `text`, `indicator`, `classNames`, and `styles`. `spinning` is undefined for standalone output, false for children-only output, and true for children plus overlay.
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| spinning | boolean | undefined | undefined | Unset renders a standalone indicator; false shows content; true shows content with overlay. |
+| size | 'sm' | 'md' | 'lg' | 'md' | Indicator size. |
+| text | 框架原生内容类型 | — | Loading text. |
+| indicator | 框架原生内容类型 | — | Custom indicator. |

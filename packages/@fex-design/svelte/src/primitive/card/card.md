@@ -1,21 +1,35 @@
 # Svelte Primitive Card
 
+Composable information container made of seven semantic regions.
+
 ## Import
-```svelte
-<script lang="ts">
-  import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from '@fex-design/svelte/primitive/card'
-</script>
-```
+
+    import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@fex-design/svelte/primitive/card'
 
 ## Components
-| Component | Host | Description |
+
+| Component | Element | Purpose |
 | --- | --- | --- |
-| Card | div | Root clipping, radius, border, and shadow. |
-| CardHeader / CardTitle / CardDescription / CardExtra | div | Snippet-composable Header regions; Extra is supplementary content. |
-| CardContent / CardFooter | div | Independent Content and Footer surfaces. |
+| Card | div | Inherits the native div; all native attributes and events pass through. Root information container. |
+| CardHeader | div | Inherits the native div; all native attributes and events pass through. Header layout. |
+| CardTitle | div | Inherits the native div; all native attributes and events pass through. Title. |
+| CardDescription | div | Inherits the native div; all native attributes and events pass through. Description. |
+| CardExtra | div | Inherits the native div; all native attributes and events pass through. Extra header content. |
+| CardContent | div | Inherits the native div; all native attributes and events pass through. Main content. |
+| CardFooter | div | Inherits the native div; all native attributes and events pass through. Footer content. |
 
 ## Examples
-`examples/basic`, `examples/surface`, and `examples/custom-header` are the documentation-preview sources.
 
-## API and styling
-Each part forwards `HTMLAttributes<HTMLDivElement>`, events, `class`, `style`, and `bind:this`. Use --card-radius, --card-border, --card-shadow, --card-background, region `-background` / `-padding`, and Header/Footer divider variables.
+Examples live in `examples/<name>` and are used by the documentation preview.
+
+| Name | Covers |
+| --- | --- |
+| basic | Complete information card. |
+| extra | Extra header content. |
+| custom-header | Custom header. |
+| surface | Section surfaces. |
+| css-variables | Instance CSS variables. |
+
+## API
+
+This family adds no state props; content, class, style, ARIA attributes, and native events pass through to the corresponding elements.

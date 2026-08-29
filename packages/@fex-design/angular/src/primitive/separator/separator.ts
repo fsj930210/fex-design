@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import type { SeparatorOrientation } from '@fex-design/core/separator/types'
 import { createHostClassName } from '../../signals/host-class'
 @Component({
-  selector: 'fex-separator',
+  selector: 'div[separator]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

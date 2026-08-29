@@ -4,7 +4,6 @@
   "layer": "ui",
   "status": "stable",
   "description": "基于 Card Primitive 的快捷信息容器，提供标题、说明、额外内容、Footer 与语义化区域样式入口。",
-  "nativeElement": "Card：div\nCardHeader：div\nCardTitle：div\nCardDescription：div\nCardExtra：div\nCardContent：div\nCardFooter：div",
   "importPath": {
     "react": "@fex-design/react/ui/card",
     "vue": "@fex-design/vue/ui/card",
@@ -28,89 +27,289 @@
   "frameworks": {
     "react": {
       "props": [
-        { "name": "title", "type": "ReactNode", "description": "默认 Header 的标题内容。" },
-        { "name": "description", "type": "ReactNode", "description": "默认 Header 的辅助说明。" },
-        { "name": "extra", "type": "ReactNode", "description": "默认 Header 的额外内容。" },
-        { "name": "header", "type": "ReactNode", "description": "完整替换默认 Header。" },
-        { "name": "footer", "type": "ReactNode", "description": "底部内容。" },
-        { "name": "children", "type": "ReactNode", "description": "Card 内容。" },
-        { "name": "classNames", "type": "CardClassNames", "description": "按语义区域追加 className。" },
-        { "name": "styles", "type": "CardStyles", "description": "按语义区域追加内联样式。" }
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "description": "默认 Header 的标题内容。"
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "description": "默认 Header 的辅助说明。"
+        },
+        {
+          "name": "extra",
+          "type": "ReactNode",
+          "description": "默认 Header 的额外内容。"
+        },
+        {
+          "name": "header",
+          "type": "ReactNode",
+          "description": "完整替换默认 Header。"
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "description": "底部内容。"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Card 内容。"
+        },
+        {
+          "name": "classNames",
+          "type": "CardClassNames",
+          "description": "按语义区域追加 className。"
+        },
+        {
+          "name": "styles",
+          "type": "CardStyles",
+          "description": "按语义区域追加内联样式。"
+        }
       ]
     },
     "solid": {
       "props": [
-        { "name": "title", "type": "JSX.Element", "description": "默认 Header 的标题内容。" },
-        { "name": "description", "type": "JSX.Element", "description": "默认 Header 的辅助说明。" },
-        { "name": "extra", "type": "JSX.Element", "description": "默认 Header 的额外内容。" },
-        { "name": "header", "type": "JSX.Element", "description": "完整替换默认 Header。" },
-        { "name": "footer", "type": "JSX.Element", "description": "底部内容。" },
-        { "name": "children", "type": "JSX.Element", "description": "Card 内容。" },
-        { "name": "classNames", "type": "CardClassNames", "description": "按语义区域追加 class。" },
-        { "name": "styles", "type": "CardStyles", "description": "按语义区域追加内联样式。" }
+        {
+          "name": "title",
+          "type": "JSX.Element",
+          "description": "默认 Header 的标题内容。"
+        },
+        {
+          "name": "description",
+          "type": "JSX.Element",
+          "description": "默认 Header 的辅助说明。"
+        },
+        {
+          "name": "extra",
+          "type": "JSX.Element",
+          "description": "默认 Header 的额外内容。"
+        },
+        {
+          "name": "header",
+          "type": "JSX.Element",
+          "description": "完整替换默认 Header。"
+        },
+        {
+          "name": "footer",
+          "type": "JSX.Element",
+          "description": "底部内容。"
+        },
+        {
+          "name": "children",
+          "type": "JSX.Element",
+          "description": "Card 内容。"
+        },
+        {
+          "name": "classNames",
+          "type": "CardClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "CardStyles",
+          "description": "按语义区域追加内联样式。"
+        }
       ]
     },
     "svelte": {
       "props": [
-        { "name": "title", "type": "Snippet | string", "description": "默认 Header 的标题内容。" },
-        { "name": "description", "type": "Snippet | string", "description": "默认 Header 的辅助说明。" },
-        { "name": "extra", "type": "Snippet | string", "description": "默认 Header 的额外内容。" },
-        { "name": "header", "type": "Snippet", "description": "完整替换默认 Header。" },
-        { "name": "footer", "type": "Snippet | string", "description": "底部内容。" },
-        { "name": "children", "type": "Snippet", "description": "Card 内容。" },
-        { "name": "classNames", "type": "CardClassNames", "description": "按语义区域追加 class。" },
-        { "name": "styles", "type": "CardStyles", "description": "按语义区域追加内联样式。" }
+        {
+          "name": "title",
+          "type": "Snippet | string",
+          "description": "默认 Header 的标题内容。"
+        },
+        {
+          "name": "description",
+          "type": "Snippet | string",
+          "description": "默认 Header 的辅助说明。"
+        },
+        {
+          "name": "extra",
+          "type": "Snippet | string",
+          "description": "默认 Header 的额外内容。"
+        },
+        {
+          "name": "header",
+          "type": "Snippet",
+          "description": "完整替换默认 Header。"
+        },
+        {
+          "name": "footer",
+          "type": "Snippet | string",
+          "description": "底部内容。"
+        },
+        {
+          "name": "children",
+          "type": "Snippet",
+          "description": "Card 内容。"
+        },
+        {
+          "name": "classNames",
+          "type": "CardClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "CardStyles",
+          "description": "按语义区域追加内联样式。"
+        }
       ]
     },
     "vue": {
       "props": [
-        { "name": "classNames", "type": "CardClassNames", "description": "按语义区域追加 class。" },
-        { "name": "styles", "type": "CardStyles", "description": "按语义区域追加内联样式。" }
+        {
+          "name": "classNames",
+          "type": "CardClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "CardStyles",
+          "description": "按语义区域追加内联样式。"
+        }
       ],
       "slots": [
-        { "name": "default", "description": "Card 内容。" },
-        { "name": "header", "description": "完整替换默认 Header。" },
-        { "name": "title", "description": "默认 Header 的标题内容。" },
-        { "name": "description", "description": "默认 Header 的辅助说明。" },
-        { "name": "extra", "description": "默认 Header 的额外内容。" },
-        { "name": "footer", "description": "底部内容。" }
+        {
+          "name": "default",
+          "description": "Card 内容。"
+        },
+        {
+          "name": "header",
+          "description": "完整替换默认 Header。"
+        },
+        {
+          "name": "title",
+          "description": "默认 Header 的标题内容。"
+        },
+        {
+          "name": "description",
+          "description": "默认 Header 的辅助说明。"
+        },
+        {
+          "name": "extra",
+          "description": "默认 Header 的额外内容。"
+        },
+        {
+          "name": "footer",
+          "description": "底部内容。"
+        }
       ]
     },
     "angular": {
       "props": [
-        { "name": "title", "type": "string", "description": "默认 Header 的标题文本。" },
-        { "name": "description", "type": "string", "description": "默认 Header 的辅助说明文本。" },
-        { "name": "extra", "type": "TemplateRef<unknown>", "description": "默认 Header 的额外模板。" },
-        { "name": "header", "type": "TemplateRef<unknown>", "description": "完整替换默认 Header 的模板。" },
-        { "name": "footer", "type": "TemplateRef<unknown>", "description": "底部模板。" },
-        { "name": "classNames", "type": "CardClassNames", "description": "按语义区域追加 class。" },
-        { "name": "styles", "type": "CardStyles", "description": "按语义区域追加内联样式。" }
+        {
+          "name": "title",
+          "type": "string",
+          "description": "默认 Header 的标题文本。"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "默认 Header 的辅助说明文本。"
+        },
+        {
+          "name": "extra",
+          "type": "TemplateRef<unknown>",
+          "description": "默认 Header 的额外模板。"
+        },
+        {
+          "name": "header",
+          "type": "TemplateRef<unknown>",
+          "description": "完整替换默认 Header 的模板。"
+        },
+        {
+          "name": "footer",
+          "type": "TemplateRef<unknown>",
+          "description": "底部模板。"
+        },
+        {
+          "name": "classNames",
+          "type": "CardClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "CardStyles",
+          "description": "按语义区域追加内联样式。"
+        }
       ],
-      "slots": [{ "name": "默认内容", "description": "投影到 CardContent 的内容。" }],
+      "slots": [
+        {
+          "name": "默认内容",
+          "description": "投影到 CardContent 的内容。"
+        }
+      ],
       "slotLabel": "内容投影"
     }
   },
   "cssVariables": [
-    { "name": "--card-background", "description": "所有区域未单独设置背景时的 Card 背景。" },
-    { "name": "--card-border", "description": "Card 根节点边框。" },
-    { "name": "--card-radius", "description": "Card 圆角。" },
-    { "name": "--card-shadow", "description": "Card 阴影。" },
+    {
+      "name": "--card-background",
+      "description": "所有区域未单独设置背景时的 Card 背景。"
+    },
+    {
+      "name": "--card-border",
+      "description": "Card 根节点边框。"
+    },
+    {
+      "name": "--card-radius",
+      "description": "Card 圆角。"
+    },
+    {
+      "name": "--card-shadow",
+      "description": "Card 阴影。"
+    },
     {
       "name": "--card-header-background",
       "description": "Header 背景，回退到 --card-background。"
     },
-    { "name": "--card-header-padding", "description": "Header 内边距。" },
-    { "name": "--card-header-divider", "description": "Header 与 Content 之间的分隔线。" },
-    { "name": "--card-content-background", "description": "Content 背景。" },
-    { "name": "--card-content-padding", "description": "Content 内边距。" },
-    { "name": "--card-footer-background", "description": "Footer 背景。" },
-    { "name": "--card-footer-padding", "description": "Footer 内边距。" },
-    { "name": "--card-footer-divider", "description": "Footer 顶部分隔线。" }
+    {
+      "name": "--card-header-padding",
+      "description": "Header 内边距。"
+    },
+    {
+      "name": "--card-header-divider",
+      "description": "Header 与 Content 之间的分隔线。"
+    },
+    {
+      "name": "--card-content-background",
+      "description": "Content 背景。"
+    },
+    {
+      "name": "--card-content-padding",
+      "description": "Content 内边距。"
+    },
+    {
+      "name": "--card-footer-background",
+      "description": "Footer 背景。"
+    },
+    {
+      "name": "--card-footer-padding",
+      "description": "Footer 内边距。"
+    },
+    {
+      "name": "--card-footer-divider",
+      "description": "Footer 顶部分隔线。"
+    }
   ],
   "demos": [
-    { "id": "basic", "title": "基础用法", "description": "构建完整的账户信息 Card。" },
-    { "id": "extra", "title": "Extra 区域", "description": "单独展示标题区补充内容。" },
-    { "id": "custom-header", "title": "自定义 Header", "description": "完整替换默认 Header。" },
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "构建完整的账户信息 Card。"
+    },
+    {
+      "id": "extra",
+      "title": "Extra 区域",
+      "description": "单独展示标题区补充内容。"
+    },
+    {
+      "id": "custom-header",
+      "title": "自定义 Header",
+      "description": "完整替换默认 Header。"
+    },
     {
       "id": "styling",
       "title": "结构化样式",

@@ -1,47 +1,35 @@
 # React Primitive Card
 
-提供原生 div 属性透传的可组合 Card 原子组件。Root 只负责裁切、圆角、边框和阴影；每个区域自行处理背景、padding 与 divider。
+由七个语义区域组成的可组合信息容器。
 
 ## 导入
 
-```tsx
-import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
-```
+    import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@fex-design/react/primitive/card'
 
 ## 组件
 
 | 组件 | 元素 | 说明 |
 | --- | --- | --- |
-| Card | div | 根节点与 surface 边界。 |
-| CardHeader | div | 标题区布局和分隔符。 |
-| CardTitle | div | 标题区标题。 |
-| CardDescription | div | 标题区辅助说明。 |
-| CardExtra | div | Badge、操作、Tabs 等标题区补充内容，不限于右上角。 |
-| CardContent | div | 正文 surface。 |
-| CardFooter | div | Footer surface 和分隔符。 |
+| Card | div | 继承原生 div，原生 div 的所有属性和事件均可透传；信息容器根节点。 |
+| CardHeader | div | 继承原生 div，原生 div 的所有属性和事件均可透传；头部布局。 |
+| CardTitle | div | 继承原生 div，原生 div 的所有属性和事件均可透传；标题。 |
+| CardDescription | div | 继承原生 div，原生 div 的所有属性和事件均可透传；辅助说明。 |
+| CardExtra | div | 继承原生 div，原生 div 的所有属性和事件均可透传；标题区补充内容。 |
+| CardContent | div | 继承原生 div，原生 div 的所有属性和事件均可透传；主体内容。 |
+| CardFooter | div | 继承原生 div，原生 div 的所有属性和事件均可透传；底部内容。 |
 
 ## 示例
 
-示例保存在 `examples/<name>`，作为文档预览的源码。
+示例保存在 `examples/<name>`，作为官网预览源码。
 
 | 名称 | 覆盖内容 |
 | --- | --- |
-| basic | 七个 Primitive 部件组合。 |
-| surface | 区域背景与 divider 独立覆盖。 |
-| custom-header | 使用 CardExtra 的自定义 Header。 |
+| basic | 完整信息卡片。 |
+| extra | 标题区额外内容。 |
+| custom-header | 自定义 Header。 |
+| surface | 区域 surface。 |
+| css-variables | 实例 CSS Variables。 |
 
-## Primitive API
+## API
 
-七个组件都透传 `ComponentProps<'div'>`、原生事件、`className`、`style` 和 `ref` 至宿主 div；没有受控状态或自定义回调。
-
-## CSS variables
-
-| 变量 | 默认来源 | 说明 |
-| --- | --- | --- |
-| --card-radius | --radius-md | Root 圆角。 |
-| --card-border | none | Root border 简写。 |
-| --card-shadow | none | Root 阴影。 |
-| --card-background | --elevated-background | 各区域共享背景回退值。 |
-| --card-header-background / --card-content-background / --card-footer-background | --card-background | 区域背景。 |
-| --card-header-padding / --card-content-padding / --card-footer-padding | 1rem | 区域内边距。 |
-| --card-header-divider / --card-footer-divider | 1px solid var(--border) | 区域分隔符简写。 |
+该组件族不增加额外状态属性；内容、class、style、ARIA 和原生事件按对应元素透传。

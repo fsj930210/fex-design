@@ -6,8 +6,7 @@ import { useEffect, useMemo, useRef, type HTMLAttributes, type Ref } from 'react
 import { useComposedRef } from '../../hooks/use-composed-ref'
 
 export interface WatermarkProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'content'>,
-    WatermarkOptions {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'content'>, WatermarkOptions {
   ref?: Ref<HTMLDivElement>
 }
 

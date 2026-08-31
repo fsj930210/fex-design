@@ -1,1 +1,1 @@
-export{CustomTriggerDemo}from'./demos'
+export { CustomTriggerDemo } from './demos'

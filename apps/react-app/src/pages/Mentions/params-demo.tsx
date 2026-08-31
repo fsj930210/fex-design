@@ -28,14 +28,20 @@ export function ParamsDemo() {
   const [value, setValue] = useState('')
   const [params, setParams] = useState<string[]>([])
   return (
-    <Card title="Parameter-only selection" description="Selection can pass AI params without mutating text.">
+    <Card
+      title="Parameter-only selection"
+      description="Selection can pass AI params without mutating text."
+    >
       <MentionsRoot
         prefix="#"
         value={value}
         onChange={setValue}
         onSelect={(item) => setParams((current) => [...current, item.value])}
       >
-        <MentionsTrigger placeholder="Type # to attach knowledge context" autoSize={{ minRows: 2 }} />
+        <MentionsTrigger
+          placeholder="Type # to attach knowledge context"
+          autoSize={{ minRows: 2 }}
+        />
         <MentionsContent>
           <DocItems />
         </MentionsContent>

@@ -4,10 +4,7 @@ export interface OverflowItems<T> {
   overflowCount: number
 }
 
-export function splitOverflowItems<T>(
-  items: readonly T[],
-  maxCount?: number,
-): OverflowItems<T> {
+export function splitOverflowItems<T>(items: readonly T[], maxCount?: number): OverflowItems<T> {
   if (maxCount === undefined || maxCount >= items.length) {
     return { visibleItems: items, overflowItems: [], overflowCount: 0 }
   }

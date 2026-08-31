@@ -7,4 +7,32 @@ import { CustomIndicatorDemo } from './indicator-demo'
 import { CustomMaskDemo } from './mask-demo'
 import { NonModalDemo } from './non-modal-demo'
 import { PlacementDemo } from './placement-demo'
-export function TourPage() { return <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4"><div class="mx-auto w-full max-w-5xl space-y-4"><header class="space-y-1.5"><A class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</A><div><h1 class="text-2xl font-semibold text-foreground">Tour 漫游引导</h1><p class="max-w-3xl text-sm leading-6 text-muted-foreground">通过组合式 primitive 实现可控、可扩展的页面引导。</p></div></header><div class="space-y-4"><BasicDemo /><ControlledDemo /><CustomActionsDemo /><CustomGapDemo /><CustomIndicatorDemo /><CustomMaskDemo /><NonModalDemo /><PlacementDemo /></div></div></main> }
+export function TourPage() {
+  return (
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-1.5">
+          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
+            返回首页
+          </A>
+          <div>
+            <h1 class="text-2xl font-semibold text-foreground">Tour 漫游引导</h1>
+            <p class="max-w-3xl text-sm leading-6 text-muted-foreground">
+              通过组合式 primitive 实现可控、可扩展的页面引导。
+            </p>
+          </div>
+        </header>
+        <div class="space-y-4">
+          <BasicDemo />
+          <ControlledDemo />
+          <CustomActionsDemo />
+          <CustomGapDemo />
+          <CustomIndicatorDemo />
+          <CustomMaskDemo />
+          <NonModalDemo />
+          <PlacementDemo />
+        </div>
+      </div>
+    </main>
+  )
+}

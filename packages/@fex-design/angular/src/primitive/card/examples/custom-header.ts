@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Card, CardContent, CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/angular/primitive/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardExtra,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/angular/primitive/card'
 
 @Component({
   selector: 'card-primitive-custom-header-example',

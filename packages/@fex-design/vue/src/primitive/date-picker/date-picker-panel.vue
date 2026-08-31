@@ -5,10 +5,7 @@ import {
   type CalendarDate,
   type CalendarPanel,
 } from '@fex-design/core/calendar'
-import {
-  getDefaultPanelByPicker,
-  getGranularityByPicker,
-} from '@fex-design/core/date-picker/panel'
+import { getDefaultPanelByPicker, getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { createRangePreviewValue } from '@fex-design/core/date-picker/range'
 import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
 import {

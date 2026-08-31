@@ -6,4 +6,5 @@ export interface ThemeProviderContext {
   snapshot: ShallowRef<ThemeSnapshot>
 }
 
-export const themeProviderContextKey: InjectionKey<ThemeProviderContext> = Symbol('ThemeProviderContext')
+export const themeProviderContextKey: InjectionKey<ThemeProviderContext> =
+  Symbol('ThemeProviderContext')

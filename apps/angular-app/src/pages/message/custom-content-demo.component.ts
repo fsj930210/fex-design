@@ -1,1 +1,19 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{Message,MessageBody,MessageContent,MessageGroup,MessageHeader,MessageStatus}from'@fex-design/angular/primitive/message';import Card from'@fex-design/angular/ui/card';@Component({selector:'fex-message-custom-content-demo',standalone:true,imports:[Card,Message,MessageBody,MessageHeader,MessageContent,MessageStatus,MessageGroup],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./custom-content-demo.component.html'})export class MessageCustomContentDemoComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import {
+  Message,
+  MessageBody,
+  MessageContent,
+  MessageGroup,
+  MessageHeader,
+  MessageStatus,
+} from '@fex-design/angular/primitive/message'
+import Card from '@fex-design/angular/ui/card'
+export
+@Component({
+  selector: 'fex-message-custom-content-demo',
+  standalone: true,
+  imports: [Card, Message, MessageBody, MessageHeader, MessageContent, MessageStatus, MessageGroup],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './custom-content-demo.component.html',
+})
+class MessageCustomContentDemoComponent {}

@@ -2,14 +2,7 @@
   "name": "@fex-design/styles",
   "private": true,
   "type": "module",
-  "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
-  "devDependencies": {
-    "typescript": "catalog:"
-  },
   "exports": {
     "./masonry": "./src/masonry.ts",
     "./auto-complete": "./src/auto-complete.ts",
@@ -74,7 +67,14 @@
     "./textarea": "./src/textarea.ts",
     "./time-picker": "./src/time-picker.ts"
   },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
+  },
   "dependencies": {
     "class-variance-authority": "latest"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

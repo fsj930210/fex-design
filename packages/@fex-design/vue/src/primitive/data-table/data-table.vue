@@ -229,7 +229,10 @@ const nativePartClass = (value: unknown) => (typeof value === 'string' ? value :
             v-for="headerGroup in headerGroups"
             :key="headerGroup.id"
             :class="
-              cn(dataTableHeaderRowClassName({ bordered: props.border }), props.partClass?.headerRow)
+              cn(
+                dataTableHeaderRowClassName({ bordered: props.border }),
+                props.partClass?.headerRow,
+              )
             "
           >
             <th

@@ -32,7 +32,8 @@ export function getAnchorViewportHeight(container: Window | HTMLElement) {
 }
 
 export function isAnchorScrolledToEnd(container: Window | HTMLElement) {
-  const scrollHeight = container instanceof Window ? document.documentElement.scrollHeight : container.scrollHeight
+  const scrollHeight =
+    container instanceof Window ? document.documentElement.scrollHeight : container.scrollHeight
   return scrollHeight - getAnchorScrollTop(container) - getAnchorViewportHeight(container) <= 2
 }
 

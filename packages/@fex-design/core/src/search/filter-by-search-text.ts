@@ -1,15 +1,14 @@
 export function normalizeSearchText(value: unknown): string {
-  return String(value ?? '').trim().toLocaleLowerCase()
+  return String(value ?? '')
+    .trim()
+    .toLocaleLowerCase()
 }
 
 export function tokenizeSearchText(keyword: string): readonly string[] {
   return normalizeSearchText(keyword).split(/\s+/).filter(Boolean)
 }
 
-export function matchSearchText(
-  keyword: string,
-  candidates: readonly unknown[],
-): boolean {
+export function matchSearchText(keyword: string, candidates: readonly unknown[]): boolean {
   const tokens = tokenizeSearchText(keyword)
   if (tokens.length === 0) return true
   const normalizedCandidates = candidates.map(normalizeSearchText).filter(Boolean)

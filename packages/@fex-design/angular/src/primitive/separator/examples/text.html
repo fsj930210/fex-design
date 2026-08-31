@@ -1,10 +1,9 @@
-
-  <div class="grid w-full max-w-xl gap-4">
-    @for (placement of placements; track placement) {
-    <div class="flex items-center gap-2">
-      <div separator class="flex-1"></div><span class="shrink-0 text-sm text-muted-foreground"
-        >{{ placement }}</span
-      ><div separator class="flex-1"></div>
-    </div>
-    }
+<div class="grid w-full max-w-xl gap-4">
+  @for (placement of placements; track placement) {
+  <div class="flex items-center gap-2">
+    <div separator class="flex-1"></div>
+    <span class="shrink-0 text-sm text-muted-foreground">{{ placement }}</span>
+    <div separator class="flex-1"></div>
   </div>
+  }
+</div>

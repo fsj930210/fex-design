@@ -49,9 +49,6 @@ provide(collapseItemContextKey, {
     :data-disabled="disabled || undefined"
     :class="className"
   >
-    <slot
-      :state="{ expanded, disabled }"
-      :actions="actions"
-    />
+    <slot :state="{ expanded, disabled }" :actions="actions" />
   </div>
 </template>

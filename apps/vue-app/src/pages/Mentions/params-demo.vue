@@ -13,7 +13,10 @@ const params = ref<string[]>([])
 </script>
 
 <template>
-  <Card title="Parameter-only selection" description="Selection stores params without writing mention text.">
+  <Card
+    title="Parameter-only selection"
+    description="Selection stores params without writing mention text."
+  >
     <MentionsRoot
       :value="value"
       prefix="#"
@@ -23,7 +26,12 @@ const params = ref<string[]>([])
       <MentionsTrigger placeholder="Type # to attach knowledge context" />
       <MentionsContent>
         <MentionsList>
-          <MentionsItem v-for="doc in mentionDocs" :key="doc.id" :item-key="doc.id" :value="doc.title">
+          <MentionsItem
+            v-for="doc in mentionDocs"
+            :key="doc.id"
+            :item-key="doc.id"
+            :value="doc.title"
+          >
             {{ doc.title }}
           </MentionsItem>
         </MentionsList>

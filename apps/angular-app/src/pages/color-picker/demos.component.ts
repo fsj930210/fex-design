@@ -16,14 +16,18 @@ import { PickerPanelDemoComponent } from './picker-panel.component'
 export
 @Component({
   selector: 'fex-color-picker-basic-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic-demo.component.html',
 })
 class BasicColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-controlled-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './controlled-demo.component.html',
 })
 class ControlledColorPickerDemoComponent {}
@@ -31,7 +35,17 @@ export
 @Component({
   selector: 'fex-color-picker-gradient-demo',
   standalone: true,
-  imports: [Card, GradientPickerRoot, GradientPickerTrack, GradientPickerStop, ColorPickerRoot, PickerPanelDemoComponent, Popover, PopoverContent, PopoverTrigger],
+  imports: [
+    Card,
+    GradientPickerRoot,
+    GradientPickerTrack,
+    GradientPickerStop,
+    ColorPickerRoot,
+    PickerPanelDemoComponent,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './gradient-demo.component.html',
 })
@@ -48,10 +62,26 @@ class GradientColorPickerDemoComponent {
   protected readonly value = signal<LinearGradientInput>(this.initial)
   protected readonly css = signal(formatLinearGradient(normalizeGradient(this.initial)))
   protected readonly gradient = viewChild.required(GradientPickerRoot)
-  protected readonly label = computed(() => this.gradient().snapshot().value.stops.map((stop) => `${stop.color.toString('rgb')} ${Math.round(stop.position * 100)}%`).join(', '))
-  protected readonly selectedColor = computed(() => this.gradient().snapshot().value.stops.find((stop) => stop.id === this.gradient().snapshot().selectedStopId)?.color)
+  protected readonly label = computed(() =>
+    this.gradient()
+      .snapshot()
+      .value.stops.map(
+        (stop) => `${stop.color.toString('rgb')} ${Math.round(stop.position * 100)}%`,
+      )
+      .join(', '),
+  )
+  protected readonly selectedColor = computed(
+    () =>
+      this.gradient()
+        .snapshot()
+        .value.stops.find((stop) => stop.id === this.gradient().snapshot().selectedStopId)?.color,
+  )
   protected setSelectedColor(value: { toString: (format: 'oklch') => string } | null) {
-    if (value) this.gradient().controller.setStopColor(this.gradient().snapshot().selectedStopId, value.toString('oklch'))
+    if (value)
+      this.gradient().controller.setStopColor(
+        this.gradient().snapshot().selectedStopId,
+        value.toString('oklch'),
+      )
   }
   protected update(event: { value: Parameters<typeof formatLinearGradient>[0] }) {
     this.value.set(event.value)
@@ -61,49 +91,63 @@ class GradientColorPickerDemoComponent {
 export
 @Component({
   selector: 'fex-color-picker-trigger-text-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './trigger-text-demo.component.html',
 })
 class TriggerTextColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-disabled-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './disabled-demo.component.html',
 })
 class DisabledColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-disabled-alpha-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './disabled-alpha-demo.component.html',
 })
 class DisabledAlphaColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-clear-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './clear-demo.component.html',
 })
 class ClearColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-custom-trigger-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-trigger-demo.component.html',
 })
 class CustomTriggerColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-custom-trigger-event-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-trigger-event-demo.component.html',
 })
 class CustomTriggerEventColorPickerDemoComponent {}
 export
 @Component({
   selector: 'fex-color-picker-format-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './format-demo.component.html',
 })
 class FormatColorPickerDemoComponent {}
@@ -111,7 +155,16 @@ export
 @Component({
   selector: 'fex-color-picker-presets-demo',
   standalone: true,
-  imports: [Card, ColorPickerRoot, ColorPickerSwatch, PickerPanelDemoComponent, Popover, PopoverContent, PopoverTrigger, ChevronDownIcon],
+  imports: [
+    Card,
+    ColorPickerRoot,
+    ColorPickerSwatch,
+    PickerPanelDemoComponent,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+    ChevronDownIcon,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './presets-demo.component.html',
 })
@@ -127,7 +180,9 @@ class PresetsColorPickerDemoComponent {
 export
 @Component({
   selector: 'fex-color-picker-custom-panel-demo',
-  standalone: true, imports: [Card, DemoPickerComponent], changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [Card, DemoPickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-panel-demo.component.html',
 })
 class CustomPanelColorPickerDemoComponent {}

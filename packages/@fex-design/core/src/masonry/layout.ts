@@ -11,15 +11,22 @@ export function resolveMasonryGap(gap: number | Partial<MasonryGap> | undefined)
   return { column: gap?.column ?? 0, row: gap?.row ?? gap?.column ?? 0 }
 }
 
-export function resolveMasonryColumns(columns: MasonryColumns | undefined, width: number, columnGap = 0): number {
+export function resolveMasonryColumns(
+  columns: MasonryColumns | undefined,
+  width: number,
+  columnGap = 0,
+): number {
   if (typeof columns === 'number') return Math.max(1, Math.floor(columns))
   if (Array.isArray(columns)) {
     return Math.max(
       1,
       [...columns]
         .sort((a, b) => a.minWidth - b.minWidth)
-        .reduce((result, breakpoint) =>
-          width >= breakpoint.minWidth ? Math.floor(breakpoint.columns) : result, 1),
+        .reduce(
+          (result, breakpoint) =>
+            width >= breakpoint.minWidth ? Math.floor(breakpoint.columns) : result,
+          1,
+        ),
     )
   }
   if (columns && 'minColumnWidth' in columns) {

@@ -6,22 +6,35 @@ export const drawerMaskClassName = [
   'data-[phase=opening]:opacity-0 data-[phase=open]:opacity-100 data-[phase=closing]:opacity-0 data-[phase=closed]:opacity-0',
 ].join(' ')
 
-export const drawerContentClassName = cva([
-  'fixed z-[calc(var(--drawer-z-index,50)+1)] flex max-h-dvh max-w-[100vw] flex-col overflow-hidden will-change-transform',
-  'border-border bg-background text-foreground shadow-xl outline-none',
-  'transition-[transform,opacity] duration-[var(--drawer-motion-duration,300ms)] ease-[var(--drawer-motion-ease,cubic-bezier(0.78,0.14,0.15,0.86))]',
-  'data-[phase=closing]:opacity-0 data-[phase=closed]:opacity-0',
-], { variants: { placement: {
-  left: 'inset-y-0 start-0 w-[var(--drawer-size)] data-[state=open]:animate-drawer-in-left data-[phase=closing]:animate-drawer-out-left',
-  right: 'inset-y-0 end-0 w-[var(--drawer-size)] data-[state=open]:animate-drawer-in-right data-[phase=closing]:animate-drawer-out-right',
-  top: 'inset-x-0 top-0 h-[var(--drawer-size)] data-[state=open]:animate-drawer-in-top data-[phase=closing]:animate-drawer-out-top',
-  bottom: 'inset-x-0 bottom-0 h-[var(--drawer-size)] data-[state=open]:animate-drawer-in-bottom data-[phase=closing]:animate-drawer-out-bottom',
-}, size: { sm: '', md: '', lg: '', xl: '', full: '' } }, defaultVariants: { placement: 'right' } })
+export const drawerContentClassName = cva(
+  [
+    'fixed z-[calc(var(--drawer-z-index,50)+1)] flex max-h-dvh max-w-[100vw] flex-col overflow-hidden will-change-transform',
+    'border-border bg-background text-foreground shadow-xl outline-none',
+    'transition-[transform,opacity] duration-[var(--drawer-motion-duration,300ms)] ease-[var(--drawer-motion-ease,cubic-bezier(0.78,0.14,0.15,0.86))]',
+    'data-[phase=closing]:opacity-0 data-[phase=closed]:opacity-0',
+  ],
+  {
+    variants: {
+      placement: {
+        left: 'inset-y-0 start-0 w-[var(--drawer-size)] data-[state=open]:animate-drawer-in-left data-[phase=closing]:animate-drawer-out-left',
+        right:
+          'inset-y-0 end-0 w-[var(--drawer-size)] data-[state=open]:animate-drawer-in-right data-[phase=closing]:animate-drawer-out-right',
+        top: 'inset-x-0 top-0 h-[var(--drawer-size)] data-[state=open]:animate-drawer-in-top data-[phase=closing]:animate-drawer-out-top',
+        bottom:
+          'inset-x-0 bottom-0 h-[var(--drawer-size)] data-[state=open]:animate-drawer-in-bottom data-[phase=closing]:animate-drawer-out-bottom',
+      },
+      size: { sm: '', md: '', lg: '', xl: '', full: '' },
+    },
+    defaultVariants: { placement: 'right' },
+  },
+)
 
 export const drawerHeaderClassName = 'flex shrink-0 items-center gap-2 border-b border-border p-4'
 export const drawerBodyClassName = 'min-h-0 flex-1 overflow-auto p-4'
-export const drawerFooterClassName = 'flex shrink-0 items-center justify-end gap-2 border-t border-border p-4'
-export const drawerCloseClassName = 'ms-auto inline-flex size-8 items-center justify-center rounded-md hover:bg-muted-background'
+export const drawerFooterClassName =
+  'flex shrink-0 items-center justify-end gap-2 border-t border-border p-4'
+export const drawerCloseClassName =
+  'ms-auto inline-flex size-8 items-center justify-center rounded-md hover:bg-muted-background'
 export const drawerResizeHandleClassName = [
   'absolute z-10 touch-none select-none',
   'before:pointer-events-none before:absolute before:bg-primary before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-100 active:before:opacity-100',

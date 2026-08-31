@@ -2,10 +2,6 @@
   "name": "@fex-design/vue",
   "private": true,
   "type": "module",
-  "scripts": {
-    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
@@ -76,6 +72,7 @@
     "./primitive/tooltip": "./src/primitive/tooltip/tooltip.ts",
     "./primitive/tour": "./src/primitive/tour/tour.ts",
     "./primitive/badge": "./src/primitive/badge/badge.ts",
+    "./ui/badge": "./src/ui/badge/badge.ts",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.ts",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.ts",
     "./primitive/avatar": "./src/primitive/avatar/avatar.ts",
@@ -118,6 +115,10 @@
     "./composables/use-sortable": "./src/composables/use-sortable.ts",
     "./composables/use-toasts": "./src/composables/use-toasts.ts",
     "./i18n": "./src/i18n/index.ts"
+  },
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

@@ -9,12 +9,7 @@ export function ControlledTourDemo() {
 
   return (
     <Card title="受控" description="open 和 current 可以完全交给业务状态管理。">
-      <Tour.Root
-        open={open}
-        current={current}
-        onOpenChange={setOpen}
-        onChange={setCurrent}
-      >
+      <Tour.Root open={open} current={current} onOpenChange={setOpen} onChange={setCurrent}>
         <div className="flex flex-wrap items-center gap-2">
           <DemoTarget name="controlled-first">受控目标一</DemoTarget>
           <DemoTarget name="controlled-second">受控目标二</DemoTarget>
@@ -33,7 +28,7 @@ export function ControlledTourDemo() {
         <Tour.Portal>
           <Tour.Overlay />
           <Tour.Step name="controlled-first" target="controlled-first">
-          <Tour.Content>
+            <Tour.Content>
               <Tour.Arrow />
               <TourPanel title="受控第一步" description="current 和 open 都由外部 state 管理。">
                 <DefaultTourActions />

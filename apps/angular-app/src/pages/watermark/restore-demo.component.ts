@@ -12,6 +12,8 @@ import Card from '@fex-design/angular/ui/card'
 })
 export class RestoreDemo {
   protected removeWatermark() {
-    document.querySelector('[data-demo="angular-watermark-restore"] [data-slot="watermark"]')?.remove()
+    document
+      .querySelector('[data-demo="angular-watermark-restore"] [data-slot="watermark"]')
+      ?.remove()
   }
 }

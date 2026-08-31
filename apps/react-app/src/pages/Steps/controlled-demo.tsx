@@ -1,2 +1,24 @@
-import { useState } from 'react'; import { Steps, type StepValue } from '@fex-design/react/primitive/steps'; import { Button } from '@fex-design/react/ui/button'; import { Card } from '@fex-design/react/ui/card'; import { StepList } from './step-list'
-export function ControlledDemo(){const [current,setCurrent]=useState<StepValue>('account');return <Card title="Controlled" description="Business completion updates current; navigation requests the same value through onChange."><Steps navigation current={current} onChange={setCurrent}><StepList/></Steps><Button className="mt-2" onClick={()=>setCurrent(current==='account'?'profile':'review')}>Complete current task</Button></Card>}
+import { useState } from 'react'
+import { Steps, type StepValue } from '@fex-design/react/primitive/steps'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
+import { StepList } from './step-list'
+export function ControlledDemo() {
+  const [current, setCurrent] = useState<StepValue>('account')
+  return (
+    <Card
+      title="Controlled"
+      description="Business completion updates current; navigation requests the same value through onChange."
+    >
+      <Steps navigation current={current} onChange={setCurrent}>
+        <StepList />
+      </Steps>
+      <Button
+        className="mt-2"
+        onClick={() => setCurrent(current === 'account' ? 'profile' : 'review')}
+      >
+        Complete current task
+      </Button>
+    </Card>
+  )
+}

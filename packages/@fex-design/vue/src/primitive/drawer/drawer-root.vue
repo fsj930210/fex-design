@@ -23,14 +23,62 @@ type DrawerRootProps = {
   maxSize?: number
   onSizeChange?: (size: number) => void
 }
-const props = withDefaults(defineProps<DrawerRootProps>(), { open: undefined, placement: 'right', defaultOpen: false, modal: true, mask: true, closeOnMaskPointer: true })
+const props = withDefaults(defineProps<DrawerRootProps>(), {
+  open: undefined,
+  placement: 'right',
+  defaultOpen: false,
+  modal: true,
+  mask: true,
+  closeOnMaskPointer: true,
+})
 const emit = defineEmits<{ openChange: [open: boolean, info: unknown] }>()
 const parent = inject(drawerKey, null)
 const depth = (parent?.depth ?? -1) + 1
-const localOpen = ref(props.defaultOpen); const triggerElement = shallowRef<HTMLButtonElement | null>(null)
-function options() { return { ...props, open: props.open, defaultOpen: localOpen.value, onOpenChange(next: boolean, info: unknown) { if (props.open === undefined) localOpen.value = next; emit('openChange', next, info) } } }
-let latest = options(); const drawer = createDrawerController(latest); const snapshot = useCoreStore(drawer); const placement = shallowRef<DrawerPlacement>(props.placement); const mask = shallowRef(props.mask); const closeOnMaskPointer = shallowRef(props.closeOnMaskPointer)
-function sync() { const next = options(); placement.value = props.placement ?? 'right'; mask.value = props.mask ?? true; closeOnMaskPointer.value = props.closeOnMaskPointer ?? true; if (!shallowEqualObject(latest, next)) { latest = next; drawer.setOptions(next) }; return '' }
-provide(drawerKey, { drawer, snapshot, placement, mask, closeOnMaskPointer, depth, triggerElement, resizeOptions: { ...(props.resizable === undefined ? {} : { resizable: props.resizable }), ...(props.minSize === undefined ? {} : { minSize: props.minSize }), ...(props.maxSize === undefined ? {} : { maxSize: props.maxSize }), ...(props.onSizeChange === undefined ? {} : { onSizeChange: props.onSizeChange }) } }); onBeforeUnmount(() => drawer.destroy())
+const localOpen = ref(props.defaultOpen)
+const triggerElement = shallowRef<HTMLButtonElement | null>(null)
+function options() {
+  return {
+    ...props,
+    open: props.open,
+    defaultOpen: localOpen.value,
+    onOpenChange(next: boolean, info: unknown) {
+      if (props.open === undefined) localOpen.value = next
+      emit('openChange', next, info)
+    },
+  }
+}
+let latest = options()
+const drawer = createDrawerController(latest)
+const snapshot = useCoreStore(drawer)
+const placement = shallowRef<DrawerPlacement>(props.placement)
+const mask = shallowRef(props.mask)
+const closeOnMaskPointer = shallowRef(props.closeOnMaskPointer)
+function sync() {
+  const next = options()
+  placement.value = props.placement ?? 'right'
+  mask.value = props.mask ?? true
+  closeOnMaskPointer.value = props.closeOnMaskPointer ?? true
+  if (!shallowEqualObject(latest, next)) {
+    latest = next
+    drawer.setOptions(next)
+  }
+  return ''
+}
+provide(drawerKey, {
+  drawer,
+  snapshot,
+  placement,
+  mask,
+  closeOnMaskPointer,
+  depth,
+  triggerElement,
+  resizeOptions: {
+    ...(props.resizable === undefined ? {} : { resizable: props.resizable }),
+    ...(props.minSize === undefined ? {} : { minSize: props.minSize }),
+    ...(props.maxSize === undefined ? {} : { maxSize: props.maxSize }),
+    ...(props.onSizeChange === undefined ? {} : { onSizeChange: props.onSizeChange }),
+  },
+})
+onBeforeUnmount(() => drawer.destroy())
 </script>
 <template>{{ sync() }}<slot /></template>

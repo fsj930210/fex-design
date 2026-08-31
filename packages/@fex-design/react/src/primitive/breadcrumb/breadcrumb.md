@@ -3,13 +3,24 @@
 `Breadcrumb` provides semantic navigation structure without owning routing or dropdown state.
 
 ```tsx
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@fex-design/react/primitive/breadcrumb'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@fex-design/react/primitive/breadcrumb'
 
-<Breadcrumb>
+;<Breadcrumb>
   <BreadcrumbList>
-    <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
     <BreadcrumbSeparator />
-    <BreadcrumbItem><BreadcrumbPage>Settings</BreadcrumbPage></BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbPage>Settings</BreadcrumbPage>
+    </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
 ```

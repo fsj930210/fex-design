@@ -9,8 +9,16 @@
     </header>
 
     <div class="grid gap-4">
-      <fex-card title="Input group" description="Connects related inputs, addons, and actions while each control keeps its own value.">
-        <fex-input-group class="max-w-xl"><span fexInputGroupAddon>https://</span><fex-input-root><input fexInputControl aria-label="Domain" placeholder="example.com" /></fex-input-root><button button>Open</button></fex-input-group>
+      <fex-card
+        title="Input group"
+        description="Connects related inputs, addons, and actions while each control keeps its own value."
+      >
+        <fex-input-group class="max-w-xl"
+          ><span fexInputGroupAddon>https://</span
+          ><fex-input-root
+            ><input fexInputControl aria-label="Domain" placeholder="example.com" /></fex-input-root
+          ><button button>Open</button></fex-input-group
+        >
       </fex-card>
       <fex-card
         title="Basic"
@@ -81,9 +89,7 @@
             <button button size="sm" (click)="focusControl.focus()">聚焦</button
             ><button button size="sm" variant="outline" (click)="focusControl.blur()">
               移除焦点</button
-            ><button button size="sm" variant="outline" (click)="manualValue = ''">
-              手动清空
-            </button>
+            ><button button size="sm" variant="outline" (click)="manualValue = ''">手动清空</button>
           </div>
         </div></fex-card
       >

@@ -14,19 +14,13 @@ import {
   inputOTPSeparatorClassName,
 } from '@fex-design/styles/input-otp'
 import { cn } from '@fex/utils'
-import {
-  createEffect,
-  onCleanup,
-  onMount,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createEffect, onCleanup, onMount, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { InputOTPContext, useInputOTPContext } from './input-otp-context'
 
 export interface InputOTPRootProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>>,
+  extends
+    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>>,
     Omit<InputOTPRootOptions, 'onChange' | 'onComplete'> {
   onChange?: (value: InputOTPValue, meta: InputOTPChangeMeta) => void
   onComplete?: (value: InputOTPValue, meta: InputOTPCompleteMeta) => void
@@ -34,8 +28,16 @@ export interface InputOTPRootProps
 
 export function InputOTPRoot(props: InputOTPRootProps) {
   const [local, rest] = splitProps(props, [
-    'value', 'defaultValue', 'disabled', 'readOnly', 'invalid', 'isComplete',
-    'onChange', 'onComplete', 'class', 'children',
+    'value',
+    'defaultValue',
+    'disabled',
+    'readOnly',
+    'invalid',
+    'isComplete',
+    'onChange',
+    'onComplete',
+    'class',
+    'children',
   ])
   const controller = createInputOTPController()
   const snapshot = createCoreStoreSignal(controller)
@@ -85,8 +87,10 @@ export function InputOTPRoot(props: InputOTPRootProps) {
   )
 }
 
-export interface InputOTPInputProps
-  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> {
+export interface InputOTPInputProps extends Omit<
+  JSX.InputHTMLAttributes<HTMLInputElement>,
+  'onChange' | 'value'
+> {
   index: number
   maxLength?: number
   autoAdvance?: boolean
@@ -98,8 +102,18 @@ export interface InputOTPInputProps
 export function InputOTPInput(props: InputOTPInputProps) {
   const context = useInputOTPContext('InputOTPInput')
   const [local, rest] = splitProps(props, [
-    'index', 'maxLength', 'autoAdvance', 'transform', 'accept', 'disabled', 'readOnly',
-    'class', 'ref', 'onChange', 'onPaste', 'onKeyDown',
+    'index',
+    'maxLength',
+    'autoAdvance',
+    'transform',
+    'accept',
+    'disabled',
+    'readOnly',
+    'class',
+    'ref',
+    'onChange',
+    'onPaste',
+    'onKeyDown',
   ])
   const config = () => ({
     index: local.index,
@@ -161,7 +175,10 @@ export function InputOTPInput(props: InputOTPInputProps) {
         if (typeof handler === 'function') handler(event)
         if (event.defaultPrevented) return
         const native = event as InputEvent
-        const result = applyText(event.currentTarget.value, native.inputType?.startsWith('delete') ? 'delete' : 'input')
+        const result = applyText(
+          event.currentTarget.value,
+          native.inputType?.startsWith('delete') ? 'delete' : 'input',
+        )
         if (!result.accepted) event.currentTarget.value = currentValue()
       }}
       onPaste={(event) => {
@@ -179,11 +196,14 @@ export function InputOTPInput(props: InputOTPInputProps) {
         const start = event.currentTarget.selectionStart ?? 0
         const end = event.currentTarget.selectionEnd ?? start
         if (event.key === 'Backspace' && currentValue() === '' && start === 0 && end === 0) {
-          event.preventDefault(); context.focusInput(local.index - 1, 'end')
+          event.preventDefault()
+          context.focusInput(local.index - 1, 'end')
         } else if (event.key === 'ArrowLeft' && start === 0 && end === 0) {
-          event.preventDefault(); context.focusInput(local.index - 1, 'end')
+          event.preventDefault()
+          context.focusInput(local.index - 1, 'end')
         } else if (event.key === 'ArrowRight' && start === currentValue().length && end === start) {
-          event.preventDefault(); context.focusInput(local.index + 1, 'start')
+          event.preventDefault()
+          context.focusInput(local.index + 1, 'start')
         }
       }}
     />
@@ -192,10 +212,23 @@ export function InputOTPInput(props: InputOTPInputProps) {
 
 export function InputOTPGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <div {...rest} data-slot="input-otp-group" class={cn(inputOTPGroupClassName, local.class)}>{local.children}</div>
+  return (
+    <div {...rest} data-slot="input-otp-group" class={cn(inputOTPGroupClassName, local.class)}>
+      {local.children}
+    </div>
+  )
 }
 
 export function InputOTPSeparator(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <span {...rest} aria-hidden="true" data-slot="input-otp-separator" class={cn(inputOTPSeparatorClassName, local.class)}>{local.children ?? '–'}</span>
+  return (
+    <span
+      {...rest}
+      aria-hidden="true"
+      data-slot="input-otp-separator"
+      class={cn(inputOTPSeparatorClassName, local.class)}
+    >
+      {local.children ?? '–'}
+    </span>
+  )
 }

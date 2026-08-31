@@ -27,13 +27,14 @@ export function DropdownContent(props: PopoverContentProps) {
       class={cn(popoverMenuContentClassName, props.class)}
       role={props.role ?? 'menu'}
       onClick={(event) => {
-        const item = event.target instanceof Element
-          ? event.target.closest<HTMLElement>('[role="menuitem"]')
-          : null
+        const item =
+          event.target instanceof Element
+            ? event.target.closest<HTMLElement>('[role="menuitem"]')
+            : null
         if (!event.defaultPrevented && item && !item.hasAttribute('aria-haspopup')) {
-          ;[...hoverAncestors, overlay].reverse().forEach((current) =>
-            current.close({ reason: 'manual', source: 'menu-item', event }),
-          )
+          ;[...hoverAncestors, overlay]
+            .reverse()
+            .forEach((current) => current.close({ reason: 'manual', source: 'menu-item', event }))
         }
       }}
     />

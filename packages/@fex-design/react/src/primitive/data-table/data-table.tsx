@@ -74,10 +74,10 @@ export interface DataTableClassName {
   loading?: string
 }
 
-export interface DataTableProps<TFeatures extends TableFeatures, TData extends RowData> extends Omit<
-  ComponentProps<'div'>,
-  'children' | 'className'
-> {
+export interface DataTableProps<
+  TFeatures extends TableFeatures,
+  TData extends RowData,
+> extends Omit<ComponentProps<'div'>, 'children' | 'className'> {
   table: ReactTable<TFeatures, TData, unknown>
   className?: DataTableClassName
   density?: 'compact' | 'default' | 'comfortable'
@@ -213,7 +213,10 @@ export function DataTable<TFeatures extends TableFeatures, TData extends RowData
       {...props}
       data-slot="data-table"
       data-loading={loading || undefined}
-      className={cn(dataTableRootClassName({ density, striped, bordered: border }), className?.root)}
+      className={cn(
+        dataTableRootClassName({ density, striped, bordered: border }),
+        className?.root,
+      )}
       style={
         {
           ...props.style,
@@ -475,7 +478,10 @@ export function DataTableColumnOverlay<TFeatures extends TableFeatures, TData ex
         <thead className={dataTableHeaderClassName}>
           <tr className={dataTableHeaderRowClassName()}>
             <th className={dataTableHeaderCellClassName}>
-              <div data-slot="data-table-header-content" className={dataTableHeaderContentClassName}>
+              <div
+                data-slot="data-table-header-content"
+                className={dataTableHeaderContentClassName}
+              >
                 <table.FlexRender header={header} />
               </div>
             </th>

@@ -13,7 +13,11 @@ import {
   ColorPickerSwatch,
 } from '@fex-design/angular/primitive/color-picker'
 import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
-import { InputNumber, InputNumberSuffix, type InputNumberChange } from '@fex-design/angular/primitive/input-number'
+import {
+  InputNumber,
+  InputNumberSuffix,
+  type InputNumberChange,
+} from '@fex-design/angular/primitive/input-number'
 import {
   SelectContent,
   SelectList,
@@ -100,6 +104,7 @@ export class PickerPanelDemoComponent {
     this.picker.controller.setChannel(channel, Number(value), 'field')
   }
   protected changeChannel(channel: ColorChannel, change: InputNumberChange) {
-    if (change.value !== undefined) this.picker.controller.setChannel(channel, change.value, 'field')
+    if (change.value !== undefined)
+      this.picker.controller.setChannel(channel, change.value, 'field')
   }
 }

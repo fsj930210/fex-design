@@ -1,8 +1,4 @@
-import type {
-  DialogController,
-  DialogOptions,
-  DialogSnapshot,
-} from '@fex-design/core/dialog/types'
+import type { DialogController, DialogOptions, DialogSnapshot } from '@fex-design/core/dialog/types'
 import { inject, type InjectionKey, type ShallowRef } from 'vue'
 
 export interface DialogContextValue {

@@ -5,8 +5,9 @@ import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-eff
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import { useTourContext } from './tour-context'
 
-export interface TourTargetRenderProps<TElement extends HTMLElement = HTMLElement>
-  extends HTMLAttributes<TElement> {
+export interface TourTargetRenderProps<
+  TElement extends HTMLElement = HTMLElement,
+> extends HTMLAttributes<TElement> {
   ref: Ref<TElement>
   'data-tour-target': string
 }
@@ -16,7 +17,10 @@ export interface TourTargetProps<TElement extends HTMLElement = HTMLElement> {
   children: (props: TourTargetRenderProps<TElement>) => ReactElement | null
 }
 
-export function TourTarget<TElement extends HTMLElement = HTMLElement>({ name, children }: TourTargetProps<TElement>) {
+export function TourTarget<TElement extends HTMLElement = HTMLElement>({
+  name,
+  children,
+}: TourTargetProps<TElement>) {
   const { controller } = useTourContext('TourTarget')
   const elementRef = useRef<TElement | null>(null)
   const resolver = useMemoizedFn(() => elementRef.current)

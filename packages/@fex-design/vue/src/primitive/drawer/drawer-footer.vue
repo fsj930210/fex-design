@@ -1,1 +1,10 @@
-<script setup lang="ts">import { drawerFooterClassName } from '@fex-design/styles/drawer'; import { cn } from '@fex/utils'; defineProps<{ class?: string }>()</script><template><div v-bind="$attrs" data-slot="drawer-footer" :class="cn(drawerFooterClassName, $props.class)"><slot /></div></template>
+<script setup lang="ts">
+import { drawerFooterClassName } from '@fex-design/styles/drawer'
+import { cn } from '@fex/utils'
+defineProps<{ class?: string }>()
+</script>
+<template>
+  <div v-bind="$attrs" data-slot="drawer-footer" :class="cn(drawerFooterClassName, $props.class)">
+    <slot />
+  </div>
+</template>

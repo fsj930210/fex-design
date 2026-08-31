@@ -7,10 +7,20 @@ import { getDemoTreeChildren, getDemoTreeRoots, type DemoDepartmentNode } from '
 import { useState } from 'react'
 import useMount from '@fex-design/react/hooks/use-mount'
 
-const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] => nodes.map((node) => ({ id: node.id, name: node.name, childCount: node.childCount, ...(node.disabled === undefined ? {} : { disabled: node.disabled }) }))
+const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] =>
+  nodes.map((node) => ({
+    id: node.id,
+    name: node.name,
+    childCount: node.childCount,
+    ...(node.disabled === undefined ? {} : { disabled: node.disabled }),
+  }))
 const loadChildren = async (node: { key: string | number }, context: { signal: AbortSignal }) => {
-  try { return convert(await getDemoTreeChildren(node.key, context.signal)) }
-  catch (error) { if (error instanceof DOMException && error.name === 'AbortError') return []; throw error }
+  try {
+    return convert(await getDemoTreeChildren(node.key, context.signal))
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') return []
+    throw error
+  }
 }
 
 export function AsyncTreeDemo() {
@@ -19,7 +29,9 @@ export function AsyncTreeDemo() {
     const request = new AbortController()
     void getDemoTreeRoots(request.signal)
       .then((nodes) => setAsyncTreeData(convert(nodes)))
-      .catch((error) => { if (error.name !== 'AbortError') throw error })
+      .catch((error) => {
+        if (error.name !== 'AbortError') throw error
+      })
     return () => request.abort()
   })
   return (

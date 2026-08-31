@@ -45,15 +45,11 @@ export function Button({
       disabled={isDisabled}
     >
       {iconPlacement === 'start' && iconNode ? (
-        <ButtonIcon data-icon="inline-start">
-          {iconNode}
-        </ButtonIcon>
+        <ButtonIcon data-icon="inline-start">{iconNode}</ButtonIcon>
       ) : null}
       {children}
       {iconPlacement === 'end' && iconNode ? (
-        <ButtonIcon data-icon="inline-end">
-          {iconNode}
-        </ButtonIcon>
+        <ButtonIcon data-icon="inline-end">{iconNode}</ButtonIcon>
       ) : null}
     </PrimitiveButton>
   )

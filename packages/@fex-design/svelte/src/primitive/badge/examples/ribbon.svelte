@@ -1,0 +1,2 @@
+<script lang="ts">import { BadgeRibbon } from '@fex-design/svelte/primitive/badge'; const colors = ['primary','info','success','warning','danger','#7c3aed'] as const</script>
+<div class="grid w-full max-w-xl gap-4 px-2">{#each colors as color}<div class="relative"><div class="overflow-hidden rounded-lg border"><div class="border-b px-4 py-3 font-semibold">{color} Ribbon</div><div class="px-4 py-3 text-muted-foreground">当前颜色：{color}</div></div><BadgeRibbon {color}>推荐</BadgeRibbon></div>{/each}</div>

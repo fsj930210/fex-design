@@ -27,8 +27,7 @@ import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { InputOTPContext, useInputOTPContext } from './input-otp-context'
 
 export interface InputOTPRootProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>,
-    InputOTPRootOptions {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, InputOTPRootOptions {
   ref?: Ref<HTMLDivElement> | undefined
 }
 
@@ -124,8 +123,10 @@ export function InputOTPRoot({
   )
 }
 
-export interface InputOTPInputProps
-  extends Omit<ComponentProps<'input'>, 'defaultValue' | 'disabled' | 'onChange' | 'readOnly' | 'value'> {
+export interface InputOTPInputProps extends Omit<
+  ComponentProps<'input'>,
+  'defaultValue' | 'disabled' | 'onChange' | 'readOnly' | 'value'
+> {
   index: number
   maxLength?: number | undefined
   autoAdvance?: boolean | undefined
@@ -216,7 +217,8 @@ export function InputOTPInput({
         if (event.defaultPrevented) return
         const result = applyText(
           event.currentTarget.value,
-          event.nativeEvent instanceof InputEvent && event.nativeEvent.inputType.startsWith('delete')
+          event.nativeEvent instanceof InputEvent &&
+            event.nativeEvent.inputType.startsWith('delete')
             ? 'delete'
             : 'input',
         )
@@ -237,14 +239,12 @@ export function InputOTPInput({
 }
 
 export function InputOTPGroup({ className, ...props }: ComponentProps<'div'>) {
-  return <div {...props} data-slot="input-otp-group" className={cn(inputOTPGroupClassName, className)} />
+  return (
+    <div {...props} data-slot="input-otp-group" className={cn(inputOTPGroupClassName, className)} />
+  )
 }
 
-export function InputOTPSeparator({
-  className,
-  children = '–',
-  ...props
-}: ComponentProps<'span'>) {
+export function InputOTPSeparator({ className, children = '–', ...props }: ComponentProps<'span'>) {
   return (
     <span
       {...props}

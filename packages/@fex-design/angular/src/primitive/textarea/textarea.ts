@@ -1,7 +1,4 @@
-import {
-  syncTextareaAutoSize,
-  type TextareaAutoSize,
-} from '@fex-design/core/textarea/autosize'
+import { syncTextareaAutoSize, type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
 import {
   textareaClearClassName,
   textareaFooterClassName,

@@ -46,6 +46,7 @@ export const stepIndicatorClassName = [
   '[&_svg]:size-4',
 ].join(' ')
 
-export const stepContentClassName = 'min-w-0 pb-4 text-sm @[36rem]/steps:group-data-[orientation=horizontal]/steps:pb-0'
+export const stepContentClassName =
+  'min-w-0 pb-4 text-sm @[36rem]/steps:group-data-[orientation=horizontal]/steps:pb-0'
 
 export type StepsStyleProps = VariantProps<typeof stepsClassName>

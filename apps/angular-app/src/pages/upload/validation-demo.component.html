@@ -3,8 +3,7 @@
   description="父组件控制文件列表；必填字段为空时提交表单，选择文件按钮会公开 invalid 状态。"
   ><form novalidate (submit)="submit($event)">
     <fex-upload-root [controller]="upload" [invalid]="invalid()" required
-      ><button button fexUploadTrigger variant="outline">选择必填文件</button
-      ><fex-demo-upload-list
+      ><button button fexUploadTrigger variant="outline">选择必填文件</button><fex-demo-upload-list
     /></fex-upload-root>
     @if (invalid()) {
       <p class="mt-1 text-sm text-danger" role="alert">请至少选择一个文件。</p>

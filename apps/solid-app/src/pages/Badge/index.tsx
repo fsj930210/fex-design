@@ -1,10 +1,10 @@
 import { Badge } from '@fex-design/solid/primitive/badge'
 import { Card } from '@fex-design/solid/ui/card'
-import { BadgeOverflow } from '@fex-design/solid/primitive/badge'
+import { BadgeGroup } from '@fex-design/solid/primitive/badge'
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 
-const variants = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const
+const colors = ['primary', 'info', 'success', 'warning', 'danger'] as const
 
 export function BadgePage() {
   return (
@@ -20,8 +20,18 @@ export function BadgePage() {
           </p>
         </header>
         <div class="grid gap-4">
-          <Card title="Variants" description="Badge visual styles."><div class="flex min-w-0 flex-wrap items-center gap-2"><For each={variants}>{(variant) => <Badge variant={variant}>{variant}</Badge>}</For></div></Card>
-          <Card title="Overflow" description="Keeps the collection compact without changing its values."><BadgeOverflow maxCount={3}><For each={['Design', 'Frontend', 'Backend', 'QA', 'Operations']}>{(item) => <Badge variant="secondary">{item}</Badge>}</For></BadgeOverflow></Card>
+          <Card title="Colors" description="用颜色表达徽标的语义状态。">
+            <div class="flex min-w-0 flex-wrap items-center gap-2">
+              <For each={colors}>{(color) => <Badge color={color}>{color}</Badge>}</For>
+            </div>
+          </Card>
+          <Card title="Group" description="使用 maxCount 收起过多的标签。">
+            <BadgeGroup maxCount={3}>
+              <For each={['Design', 'Frontend', 'Backend', 'QA', 'Operations']}>
+                {(item) => <Badge color="info">{item}</Badge>}
+              </For>
+            </BadgeGroup>
+          </Card>
         </div>
       </div>
     </main>

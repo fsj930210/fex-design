@@ -5,4 +5,21 @@ import MixedRulesDemo from './mixed-rules-demo.vue'
 import PasteDemo from './paste-demo.vue'
 import VariableLengthDemo from './variable-length-demo.vue'
 </script>
-<template><main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4"><div class="mx-auto w-full max-w-5xl space-y-4"><header class="space-y-2"><RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">返回首页</RouterLink><h1 class="text-2xl font-semibold">InputOTP 基础组件</h1><p class="text-sm text-muted-foreground">支持独立分段长度、输入规则和跨段粘贴的验证码输入组件。</p></header><div class="grid gap-4"><BasicDemo/><VariableLengthDemo/><MixedRulesDemo/><PasteDemo/><ControlledDemo/></div></div></main></template>
+<template>
+  <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+    <div class="mx-auto w-full max-w-5xl space-y-4">
+      <header class="space-y-2">
+        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
+          >返回首页</RouterLink
+        >
+        <h1 class="text-2xl font-semibold">InputOTP 基础组件</h1>
+        <p class="text-sm text-muted-foreground">
+          支持独立分段长度、输入规则和跨段粘贴的验证码输入组件。
+        </p>
+      </header>
+      <div class="grid gap-4">
+        <BasicDemo /><VariableLengthDemo /><MixedRulesDemo /><PasteDemo /><ControlledDemo />
+      </div>
+    </div>
+  </main>
+</template>

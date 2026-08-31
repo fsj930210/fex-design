@@ -82,7 +82,8 @@ export class FexResizeDirective implements OnInit, OnDestroy {
 
   start(event: PointerEvent, explicitEdge?: ResizeEdge) {
     this.updateController()
-    const edge = explicitEdge ?? getResizeEdge(event.target, this.elementRef.nativeElement) ?? this.edge
+    const edge =
+      explicitEdge ?? getResizeEdge(event.target, this.elementRef.nativeElement) ?? this.edge
     if (this.disabled || !this.controller.start(toInput(event), edge)) {
       return
     }

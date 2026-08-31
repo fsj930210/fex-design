@@ -9,4 +9,12 @@ const context = inject<any>(stepContextKey)
 if (!context) throw new Error('StepIndicator must be used inside Step.')
 const attrs = useAttrs()
 </script>
-<template><span v-bind="attrs" :class="cn(stepIndicatorClassName, attrs.class as string | undefined)"><slot><CheckIcon v-if="context.info.value.status === 'finish'" /><template v-else>{{ context.position.value }}</template></slot></span></template>
+<template>
+  <span v-bind="attrs" :class="cn(stepIndicatorClassName, attrs.class as string | undefined)"
+    ><slot
+      ><CheckIcon v-if="context.info.value.status === 'finish'" /><template v-else>{{
+        context.position.value
+      }}</template></slot
+    ></span
+  >
+</template>

@@ -1,1 +1,18 @@
-import{AvatarDemo}from'./avatar-demo';import{ConversationDemo}from'./conversation-demo';import{CustomContentDemo}from'./custom-content-demo';import{GroupDemo}from'./group-demo';import{HeaderFooterDemo}from'./header-footer-demo';import{StatusActionsDemo}from'./status-actions-demo';export function MessagePage(){return <main class="grid gap-4 p-2 md:p-6"><ConversationDemo/><AvatarDemo/><GroupDemo/><HeaderFooterDemo/><StatusActionsDemo/><CustomContentDemo/></main>}
+import { AvatarDemo } from './avatar-demo'
+import { ConversationDemo } from './conversation-demo'
+import { CustomContentDemo } from './custom-content-demo'
+import { GroupDemo } from './group-demo'
+import { HeaderFooterDemo } from './header-footer-demo'
+import { StatusActionsDemo } from './status-actions-demo'
+export function MessagePage() {
+  return (
+    <main class="grid gap-4 p-2 md:p-6">
+      <ConversationDemo />
+      <AvatarDemo />
+      <GroupDemo />
+      <HeaderFooterDemo />
+      <StatusActionsDemo />
+      <CustomContentDemo />
+    </main>
+  )
+}

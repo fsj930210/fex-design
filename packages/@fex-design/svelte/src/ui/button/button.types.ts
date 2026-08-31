@@ -2,7 +2,8 @@ import type { ButtonOptions } from '@fex-design/core/button/types'
 import type { Snippet } from 'svelte'
 import type { HTMLButtonAttributes } from 'svelte/elements'
 
-export interface ButtonProps extends Omit<HTMLButtonAttributes, 'color' | 'disabled'>, ButtonOptions {
+export interface ButtonProps
+  extends Omit<HTMLButtonAttributes, 'color' | 'disabled'>, ButtonOptions {
   icon?: Snippet
   loadingIndicator?: Snippet
   ref?: HTMLButtonElement | null

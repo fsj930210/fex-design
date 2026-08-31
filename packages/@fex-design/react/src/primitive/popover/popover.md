@@ -57,11 +57,7 @@ export function Demo() {
 默认组件只是逻辑 hooks 的消费方。用户如果不想使用内置 DOM，可以直接消费 `usePopoverTrigger`、`usePopoverContent` 和 `usePopoverArrow` 自己实现 UI。
 
 ```tsx
-import {
-  Popover,
-  usePopoverContent,
-  usePopoverTrigger,
-} from '@fex-design/react/primitive/popover'
+import { Popover, usePopoverContent, usePopoverTrigger } from '@fex-design/react/primitive/popover'
 
 function CustomTrigger() {
   const trigger = usePopoverTrigger({})

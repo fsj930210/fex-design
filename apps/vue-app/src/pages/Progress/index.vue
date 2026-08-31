@@ -143,7 +143,9 @@ const lines = {
           <span v-else class="text-sm">{{ demo.value }}%</span>
         </div>
       </div></Card
-    ><Card title="Step Circle" description="Show progress as fixed circular steps with custom count and gap."
+    ><Card
+      title="Step Circle"
+      description="Show progress as fixed circular steps with custom count and gap."
       ><div class="flex flex-wrap gap-4">
         <div
           v-for="demo in circleStepDemos"
@@ -168,7 +170,7 @@ const lines = {
                 stroke-linecap="butt"
                 pathLength="100"
                 :stroke-dasharray="getStepDasharray(demo.steps, demo.gap)"
-                :stroke-dashoffset="50 - ((index - 1) * (100 / demo.steps))"
+                :stroke-dashoffset="50 - (index - 1) * (100 / demo.steps)"
               />
             </svg>
             <span class="absolute text-2xl"
@@ -182,15 +184,13 @@ const lines = {
       </div></Card
     ><Card title="Size" description="Configure line thickness."
       ><div class="grid max-w-xl gap-3">
-        <div
-          v-for="[label, value, thickness] in lines.sizes"
-          :key="label"
-          class="grid gap-1.5"
-        >
+        <div v-for="[label, value, thickness] in lines.sizes" :key="label" class="grid gap-1.5">
           <span class="text-sm">{{ label }}</span
           ><Progress :value="value as number" :thickness="thickness as number" />
         </div></div></Card
-    ><Card title="Linecap" description="Round line / round track, butt and square endings with the same value."
+    ><Card
+      title="Linecap"
+      description="Round line / round track, butt and square endings with the same value."
       ><div class="grid max-w-xl gap-3">
         <div
           v-for="[label, linecap, trackLinecap] in lines.linecaps"

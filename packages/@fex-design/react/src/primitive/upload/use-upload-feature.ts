@@ -1,9 +1,6 @@
 import type { DropFeatureApi } from '@fex-design/core/upload/features/drop'
 import type { FileMd5FeatureApi } from '@fex-design/core/upload/features/file-md5'
-import type {
-  MultipartFeatureApi,
-  UploadPart,
-} from '@fex-design/core/upload/features/multipart'
+import type { MultipartFeatureApi, UploadPart } from '@fex-design/core/upload/features/multipart'
 import type { PreviewFeatureApi } from '@fex-design/core/upload/features/preview'
 import type { UploadId } from '@fex-design/core/upload/types'
 import { useSyncExternalStore } from 'react'

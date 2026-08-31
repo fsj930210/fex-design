@@ -3,12 +3,29 @@ import { ChevronDownIcon, ChevronRightIcon } from '@fex-design/angular/icon/chev
 import { DropdownContent } from '@fex-design/angular/primitive/dropdown'
 import { MenuItem, MenuList, MenuRoot } from '@fex-design/angular/primitive/menu'
 import { Popover, PopoverPortal, PopoverTrigger } from '@fex-design/angular/primitive/popover'
-import { horizontalItemClassName, horizontalListClassName, popupClassName, rootClassName, verticalItemClassName, verticalListClassName } from './demo-styles'
+import {
+  horizontalItemClassName,
+  horizontalListClassName,
+  popupClassName,
+  rootClassName,
+  verticalItemClassName,
+  verticalListClassName,
+} from './demo-styles'
 
 @Component({
   selector: 'app-menu-horizontal-nested-demo',
   standalone: true,
-  imports: [MenuRoot, MenuList, MenuItem, Popover, PopoverTrigger, PopoverPortal, DropdownContent, ChevronDownIcon, ChevronRightIcon],
+  imports: [
+    MenuRoot,
+    MenuList,
+    MenuItem,
+    Popover,
+    PopoverTrigger,
+    PopoverPortal,
+    DropdownContent,
+    ChevronDownIcon,
+    ChevronRightIcon,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './horizontal-nested-demo.component.html',
 })

@@ -1,5 +1,8 @@
 import { createContext, use } from 'react'
-import type { ContextMenuController, ContextMenuSnapshot } from '@fex-design/core/overlay/context-menu/types'
+import type {
+  ContextMenuController,
+  ContextMenuSnapshot,
+} from '@fex-design/core/overlay/context-menu/types'
 
 export interface ContextMenuContextValue<T> {
   controller: ContextMenuController<T>

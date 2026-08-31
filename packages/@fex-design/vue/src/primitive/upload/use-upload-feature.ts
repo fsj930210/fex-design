@@ -1,8 +1,5 @@
 import type { FileMd5FeatureApi } from '@fex-design/core/upload/features/file-md5'
-import type {
-  MultipartFeatureApi,
-  UploadPart,
-} from '@fex-design/core/upload/features/multipart'
+import type { MultipartFeatureApi, UploadPart } from '@fex-design/core/upload/features/multipart'
 import type { PreviewFeatureApi } from '@fex-design/core/upload/features/preview'
 import type { UploadId, UploadStatus } from '@fex-design/core/upload/types'
 import { computed, onScopeDispose, shallowRef, type MaybeRefOrGetter, toValue } from 'vue'

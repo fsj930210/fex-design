@@ -4,11 +4,7 @@ import {
   columnSizingFeature,
 } from '@fex-design/core/data-table/features/column-sizing'
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
-import {
-  DataTable,
-  tableFeatures,
-  type ColumnDef,
-} from '@fex-design/angular/primitive/data-table'
+import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/angular/primitive/data-table'
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import Card from '@fex-design/angular/ui/card'
 import { people5, type Person } from './data'

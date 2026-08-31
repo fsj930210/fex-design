@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/vue/primitive/collapse'
+import {
+  Collapse,
+  CollapseContent,
+  CollapseItem,
+  CollapseTrigger,
+} from '@fex-design/vue/primitive/collapse'
 import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { useTemplateRef } from 'vue'
@@ -9,10 +14,17 @@ const collapseRef = useTemplateRef<InstanceType<typeof Collapse>>('collapseRef')
 </script>
 
 <template>
-  <Card title="Instance methods" description="Template refs expose methods for this Collapse instance.">
+  <Card
+    title="Instance methods"
+    description="Template refs expose methods for this Collapse instance."
+  >
     <div class="mb-2 flex flex-wrap gap-1.5">
-      <Button variant="outline" size="sm" @click="collapseRef?.expand('security')">Open security</Button>
-      <Button variant="outline" size="sm" @click="collapseRef?.toggle('billing')">Toggle billing</Button>
+      <Button variant="outline" size="sm" @click="collapseRef?.expand('security')"
+        >Open security</Button
+      >
+      <Button variant="outline" size="sm" @click="collapseRef?.toggle('billing')"
+        >Toggle billing</Button
+      >
       <Button variant="ghost" size="sm" @click="collapseRef?.clear()">Clear</Button>
     </div>
     <Collapse ref="collapseRef" :default-expanded-keys="['profile']">

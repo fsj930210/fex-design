@@ -3,7 +3,10 @@ import type { CascaderFilterOption, CascaderNode } from './types'
 import { matchSearchText } from '../search/filter-by-search-text'
 
 function defaultFilter(keyword: string, path: readonly CascaderNode[]): boolean {
-  return matchSearchText(keyword, path.map((node) => node.label))
+  return matchSearchText(
+    keyword,
+    path.map((node) => node.label),
+  )
 }
 
 export function searchCascaderPaths(
@@ -16,11 +19,15 @@ export function searchCascaderPaths(
   for (const node of model.nodes.values()) {
     if (!node.leaf) continue
     const path = getCascaderPath(model, node.key)
-    const matches = filterOption === false
-      ? true
-      : typeof filterOption === 'function'
-        ? filterOption(keyword, path.map((item) => item.option))
-        : defaultFilter(keyword, path)
+    const matches =
+      filterOption === false
+        ? true
+        : typeof filterOption === 'function'
+          ? filterOption(
+              keyword,
+              path.map((item) => item.option),
+            )
+          : defaultFilter(keyword, path)
     if (matches) results.push(path)
   }
   return results

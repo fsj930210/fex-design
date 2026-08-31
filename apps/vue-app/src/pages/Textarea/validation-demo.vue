@@ -17,8 +17,7 @@ const form = useForm({
   onSubmit: () => undefined,
 })
 const validators = {
-  onSubmit: ({ value }: { value: string }) =>
-    value.trim() ? undefined : 'Message is required.',
+  onSubmit: ({ value }: { value: string }) => (value.trim() ? undefined : 'Message is required.'),
 }
 function invalid(state: AnyFieldApi['state']) {
   return state.meta.errors.length > 0

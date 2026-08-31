@@ -636,10 +636,7 @@ export function FormPage() {
               </Button>
             </Form>
             <div class="grid gap-2">
-              <Form
-                form={profileForm}
-                class="grid gap-2 rounded-md border border-border p-4"
-              >
+              <Form form={profileForm} class="grid gap-2 rounded-md border border-border p-4">
                 <FieldTitle>资料表单</FieldTitle>
                 <TextField name="name" label="姓名" />
                 <TextField
@@ -653,10 +650,7 @@ export function FormPage() {
                   保存资料
                 </Button>
               </Form>
-              <Form
-                form={securityForm}
-                class="grid gap-2 rounded-md border border-border p-4"
-              >
+              <Form form={securityForm} class="grid gap-2 rounded-md border border-border p-4">
                 <FieldTitle>安全表单</FieldTitle>
                 <TextField
                   name="notificationEmail"

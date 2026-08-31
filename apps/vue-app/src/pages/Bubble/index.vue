@@ -1,1 +1,18 @@
-<script setup lang="ts">import AccessibilityDemo from'./accessibility-demo.vue';import ActionsDemo from'./actions-demo.vue';import AlignmentDemo from'./alignment-demo.vue';import BasicDemo from'./basic-demo.vue';import CollapsibleDemo from'./collapsible-demo.vue';import GroupDemo from'./group-demo.vue';import LinksButtonsDemo from'./links-buttons-demo.vue';import PopoverDemo from'./popover-demo.vue';import StandaloneDemo from'./standalone-demo.vue';import TooltipDemo from'./tooltip-demo.vue';import VariantsDemo from'./variants-demo.vue'</script><template><main class="grid gap-4 p-2 md:p-6"><BasicDemo/><StandaloneDemo/><VariantsDemo/><AlignmentDemo/><GroupDemo/><LinksButtonsDemo/><ActionsDemo/><CollapsibleDemo/><TooltipDemo/><PopoverDemo/><AccessibilityDemo/></main></template>
+<script setup lang="ts">
+import AccessibilityDemo from './accessibility-demo.vue'
+import ActionsDemo from './actions-demo.vue'
+import AlignmentDemo from './alignment-demo.vue'
+import BasicDemo from './basic-demo.vue'
+import CollapsibleDemo from './collapsible-demo.vue'
+import GroupDemo from './group-demo.vue'
+import LinksButtonsDemo from './links-buttons-demo.vue'
+import PopoverDemo from './popover-demo.vue'
+import StandaloneDemo from './standalone-demo.vue'
+import TooltipDemo from './tooltip-demo.vue'
+import VariantsDemo from './variants-demo.vue'
+</script>
+<template>
+  <main class="grid gap-4 p-2 md:p-6">
+    <BasicDemo /><StandaloneDemo /><VariantsDemo /><AlignmentDemo /><GroupDemo /><LinksButtonsDemo /><ActionsDemo /><CollapsibleDemo /><TooltipDemo /><PopoverDemo /><AccessibilityDemo />
+  </main>
+</template>

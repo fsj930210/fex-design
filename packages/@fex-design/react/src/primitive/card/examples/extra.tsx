@@ -1,4 +1,11 @@
-import { Card, CardContent, CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardExtra,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/react/primitive/card'
 export function ExtraExample() {
   return (
     <Card className="w-full max-w-2xl [--card-border:1px_solid_var(--border)]">

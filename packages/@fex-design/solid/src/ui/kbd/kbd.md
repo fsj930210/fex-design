@@ -8,18 +8,18 @@ UI entry for Kbd Primitive with no additional behavior.
 
 ## Components
 
-| Component | Element | Purpose |
-| --- | --- | --- |
-| Kbd | kbd | Inherits the native kbd; all native attributes and events pass through. Single keyboard key. |
-| KbdGroup | div | Inherits the native div; all native attributes and events pass through. Groups multiple keys. |
+| Component | Element | Purpose                                                                                       |
+| --------- | ------- | --------------------------------------------------------------------------------------------- |
+| Kbd       | kbd     | Inherits the native kbd; all native attributes and events pass through. Single keyboard key.  |
+| KbdGroup  | div     | Inherits the native div; all native attributes and events pass through. Groups multiple keys. |
 
 ## Examples
 
 Examples live in `examples/<name>` and are used by the documentation preview.
 
-| Name | Covers |
-| --- | --- |
-| basic | Single key. |
+| Name  | Covers                   |
+| ----- | ------------------------ |
+| basic | Single key.              |
 | group | Keyboard shortcut group. |
 
 ## API

@@ -37,10 +37,7 @@ export interface CascaderColumn {
   nodes: readonly CascaderNode[]
 }
 
-export type CascaderFilterOption = (
-  keyword: string,
-  path: readonly CascaderOption[],
-) => boolean
+export type CascaderFilterOption = (keyword: string, path: readonly CascaderOption[]) => boolean
 
 export interface CascaderChangeMeta {
   selectedOptions: readonly CascaderOption[]

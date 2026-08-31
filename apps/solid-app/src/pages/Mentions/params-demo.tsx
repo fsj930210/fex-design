@@ -12,7 +12,11 @@ function Docs() {
   return (
     <MentionsList>
       <For each={filterByText(mentionDocs, mentions.text(), (doc) => doc.title)}>
-        {(doc) => <MentionsItem itemKey={doc.id} value={doc.title} data={doc}>{doc.title}</MentionsItem>}
+        {(doc) => (
+          <MentionsItem itemKey={doc.id} value={doc.title} data={doc}>
+            {doc.title}
+          </MentionsItem>
+        )}
       </For>
     </MentionsList>
   )
@@ -22,7 +26,10 @@ export function ParamsDemo() {
   const [value, setValue] = createSignal('')
   const [params, setParams] = createSignal<string[]>([])
   return (
-    <Card title="Parameter-only selection" description="Selection stores params without writing mention text.">
+    <Card
+      title="Parameter-only selection"
+      description="Selection stores params without writing mention text."
+    >
       <MentionsRoot
         prefix="#"
         value={value()}
@@ -30,10 +37,14 @@ export function ParamsDemo() {
         onSelect={(item) => setParams((current) => [...current, item.value])}
       >
         <MentionsTrigger placeholder="Type # to attach knowledge context" />
-        <MentionsContent><Docs /></MentionsContent>
+        <MentionsContent>
+          <Docs />
+        </MentionsContent>
       </MentionsRoot>
       <div class="mt-1.5 flex flex-wrap gap-1 text-xs text-muted-foreground">
-        <For each={params()} fallback="No params yet">{(param) => <span>#{param}</span>}</For>
+        <For each={params()} fallback="No params yet">
+          {(param) => <span>#{param}</span>}
+        </For>
       </div>
     </Card>
   )

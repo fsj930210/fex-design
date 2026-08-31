@@ -130,8 +130,8 @@ structural projection because parent/depth/index relationships may change.
 
 ## Optional features
 
-| Feature      | Public import                                   | Options                                                 | Requires         | API                                                                |
-| ------------ | ----------------------------------------------- | ------------------------------------------------------- | ---------------- | ------------------------------------------------------------------ |
+| Feature      | Public import                               | Options                                                 | Requires         | API                                                                |
+| ------------ | ------------------------------------------- | ------------------------------------------------------- | ---------------- | ------------------------------------------------------------------ |
 | Expansion    | `@fex-design/core/tree/features/expansion`  | `defaultExpandedKeys`                                   | —                | `expand`, `collapse`, `toggle`, `expandAll`, `collapseAll`         |
 | Selection    | `@fex-design/core/tree/features/selection`  | `defaultSelectedKeys`, `multiple`                       | —                | `isMultiple`, `select`, `unselect`, `toggle`, `selectAll`, `clear` |
 | Check        | `@fex-design/core/tree/features/check`      | `mode`, `defaultCheckedKeys`                            | —                | `check`, `uncheck`, `checkAll`, `clear`, `getState`                |

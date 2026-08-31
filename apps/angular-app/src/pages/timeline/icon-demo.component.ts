@@ -1,2 +1,29 @@
-import { ChangeDetectionStrategy,Component } from '@angular/core';import { CheckIcon } from '@fex-design/angular/icon/check';import { ClockIcon } from '@fex-design/angular/icon/clock';import { ErrorIcon } from '@fex-design/angular/icon/error';import { Timeline,TimelineContent,TimelineIndicator,TimelineItem } from '@fex-design/angular/primitive/timeline';import { Card } from '@fex-design/angular/ui/card';
-@Component({selector:'fex-timeline-icon-demo',standalone:true,imports:[Card,Timeline,TimelineItem,TimelineIndicator,TimelineContent,CheckIcon,ClockIcon,ErrorIcon],changeDetection:ChangeDetectionStrategy.OnPush,host:{class:'block'},templateUrl:'./icon-demo.component.html'}) export class IconDemoComponent {}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { CheckIcon } from '@fex-design/angular/icon/check'
+import { ClockIcon } from '@fex-design/angular/icon/clock'
+import { ErrorIcon } from '@fex-design/angular/icon/error'
+import {
+  Timeline,
+  TimelineContent,
+  TimelineIndicator,
+  TimelineItem,
+} from '@fex-design/angular/primitive/timeline'
+import { Card } from '@fex-design/angular/ui/card'
+@Component({
+  selector: 'fex-timeline-icon-demo',
+  standalone: true,
+  imports: [
+    Card,
+    Timeline,
+    TimelineItem,
+    TimelineIndicator,
+    TimelineContent,
+    CheckIcon,
+    ClockIcon,
+    ErrorIcon,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block' },
+  templateUrl: './icon-demo.component.html',
+})
+export class IconDemoComponent {}

@@ -34,12 +34,8 @@ defineProps<{ kind: 'basic' | 'avatar' | 'card' | 'text' | 'form' | 'table' | 'a
       /></div></Card
   ><Card v-else-if="kind === 'form'" title="Form" description="Match labels, controls and actions."
     ><div class="grid max-w-md gap-3">
-      <div class="grid gap-1.5">
-        <Skeleton class="h-4 w-24" /><Skeleton class="h-9 w-full" />
-      </div>
-      <div class="grid gap-1.5">
-        <Skeleton class="h-4 w-32" /><Skeleton class="h-9 w-full" />
-      </div>
+      <div class="grid gap-1.5"><Skeleton class="h-4 w-24" /><Skeleton class="h-9 w-full" /></div>
+      <div class="grid gap-1.5"><Skeleton class="h-4 w-32" /><Skeleton class="h-9 w-full" /></div>
       <Skeleton class="h-9 w-24" /></div></Card
   ><Card
     v-else-if="kind === 'table'"
@@ -49,11 +45,7 @@ defineProps<{ kind: 'basic' | 'avatar' | 'card' | 'text' | 'form' | 'table' | 'a
       <div class="grid grid-cols-3 gap-3 border-b pb-2">
         <Skeleton class="h-4 w-24" /><Skeleton class="h-4 w-20" /><Skeleton class="h-4 w-16" />
       </div>
-      <div
-        v-for="width in ['w-2/5', 'w-3/5', 'w-1/2']"
-        :key="width"
-        class="grid grid-cols-3 gap-3"
-      >
+      <div v-for="width in ['w-2/5', 'w-3/5', 'w-1/2']" :key="width" class="grid grid-cols-3 gap-3">
         <div class="flex items-center gap-1.5">
           <Skeleton class="size-8 rounded-full" /><Skeleton :class="['h-4', width]" />
         </div>

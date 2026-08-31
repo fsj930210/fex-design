@@ -6,4 +6,8 @@ import { useAttrs } from 'vue'
 defineOptions({ name: 'Kbd', inheritAttrs: false })
 const attrs = useAttrs()
 </script>
-<template><kbd v-bind="attrs" data-slot="kbd" :class="cn(kbdClassName, attrs.class as string | undefined)"><slot /></kbd></template>
+<template>
+  <kbd v-bind="attrs" data-slot="kbd" :class="cn(kbdClassName, attrs.class as string | undefined)"
+    ><slot
+  /></kbd>
+</template>

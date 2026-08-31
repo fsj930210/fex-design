@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import {
-  expansionFeature,
-  focusFeature,
-  keyboardFeature,
-  selectionFeature,
-} from '@fex-design/core'
+import { expansionFeature, focusFeature, keyboardFeature, selectionFeature } from '@fex-design/core'
 import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'

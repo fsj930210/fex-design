@@ -18,7 +18,9 @@ import { Button, ButtonGroup } from '@fex-design/vue/ui/button'
           ><template #icon><PlusIcon /></template>End icon</Button
         >
       </div>
-      <ButtonGroup :dir="direction"><Button>First</Button><Button>Middle</Button><Button>Last</Button></ButtonGroup>
+      <ButtonGroup :dir="direction"
+        ><Button>First</Button><Button>Middle</Button><Button>Last</Button></ButtonGroup
+      >
     </section>
   </div>
 </template>

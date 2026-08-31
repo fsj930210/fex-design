@@ -1,1 +1,32 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{Avatar,AvatarFallback,AvatarImage}from'@fex-design/angular/primitive/avatar';import{Bubble,BubbleContent}from'@fex-design/angular/primitive/bubble';import{Message,MessageAvatar,MessageBody,MessageContent,MessageGroup}from'@fex-design/angular/primitive/message';import Card from'@fex-design/angular/ui/card';@Component({selector:'fex-message-group-demo',standalone:true,imports:[Card,Avatar,AvatarImage,AvatarFallback,Bubble,BubbleContent,Message,MessageAvatar,MessageBody,MessageContent,MessageGroup],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./group-demo.component.html'})export class MessageGroupDemoComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Avatar, AvatarFallback, AvatarImage } from '@fex-design/angular/primitive/avatar'
+import { Bubble, BubbleContent } from '@fex-design/angular/primitive/bubble'
+import {
+  Message,
+  MessageAvatar,
+  MessageBody,
+  MessageContent,
+  MessageGroup,
+} from '@fex-design/angular/primitive/message'
+import Card from '@fex-design/angular/ui/card'
+export
+@Component({
+  selector: 'fex-message-group-demo',
+  standalone: true,
+  imports: [
+    Card,
+    Avatar,
+    AvatarImage,
+    AvatarFallback,
+    Bubble,
+    BubbleContent,
+    Message,
+    MessageAvatar,
+    MessageBody,
+    MessageContent,
+    MessageGroup,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './group-demo.component.html',
+})
+class MessageGroupDemoComponent {}

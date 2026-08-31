@@ -1,2 +1,38 @@
-import { MasonryItem,MasonryRoot,MasonryViewport } from '@fex-design/solid/primitive/masonry';import { Button } from '@fex-design/solid/ui/button';import { createSignal,For,Show } from 'solid-js';import { masonryItems } from './data'
-export function RtlHiddenMasonryDemo(){const [rtl,setRtl]=createSignal(false),[visible,setVisible]=createSignal(true);return <div class="grid gap-2"><div class="flex gap-1.5"><Button size="sm" variant="outline" onClick={()=>setRtl(v=>!v)}>方向：{rtl()?'RTL':'LTR'}</Button><Button size="sm" variant="outline" onClick={()=>setVisible(v=>!v)}>{visible()?'隐藏':'显示'}容器</Button></div><Show when={visible()}><MasonryRoot columns={3} gap={12} direction={rtl()?'rtl':'ltr'}><MasonryViewport><For each={masonryItems.slice(0,8)}>{(item,index)=><MasonryItem itemKey={item.id} index={index()}><div class="rounded-md border border-border bg-muted-background p-1.5" style={{height:`${item.height/2}px`}}>DOM {index()+1} · {rtl()?'RTL':'LTR'}</div></MasonryItem>}</For></MasonryViewport></MasonryRoot></Show></div>}
+import { MasonryItem, MasonryRoot, MasonryViewport } from '@fex-design/solid/primitive/masonry'
+import { Button } from '@fex-design/solid/ui/button'
+import { createSignal, For, Show } from 'solid-js'
+import { masonryItems } from './data'
+export function RtlHiddenMasonryDemo() {
+  const [rtl, setRtl] = createSignal(false),
+    [visible, setVisible] = createSignal(true)
+  return (
+    <div class="grid gap-2">
+      <div class="flex gap-1.5">
+        <Button size="sm" variant="outline" onClick={() => setRtl((v) => !v)}>
+          方向：{rtl() ? 'RTL' : 'LTR'}
+        </Button>
+        <Button size="sm" variant="outline" onClick={() => setVisible((v) => !v)}>
+          {visible() ? '隐藏' : '显示'}容器
+        </Button>
+      </div>
+      <Show when={visible()}>
+        <MasonryRoot columns={3} gap={12} direction={rtl() ? 'rtl' : 'ltr'}>
+          <MasonryViewport>
+            <For each={masonryItems.slice(0, 8)}>
+              {(item, index) => (
+                <MasonryItem itemKey={item.id} index={index()}>
+                  <div
+                    class="rounded-md border border-border bg-muted-background p-1.5"
+                    style={{ height: `${item.height / 2}px` }}
+                  >
+                    DOM {index() + 1} · {rtl() ? 'RTL' : 'LTR'}
+                  </div>
+                </MasonryItem>
+              )}
+            </For>
+          </MasonryViewport>
+        </MasonryRoot>
+      </Show>
+    </div>
+  )
+}

@@ -51,7 +51,7 @@ function GradientEditor() {
           <button
             {...slot.props}
             ref={slot.ref}
-          class="inline-flex h-9 w-fit max-w-full self-start items-center gap-2 rounded-md border border-border bg-background px-2 text-sm"
+            class="inline-flex h-9 w-fit max-w-full self-start items-center gap-2 rounded-md border border-border bg-background px-2 text-sm"
           >
             <span
               class="size-6 shrink-0 rounded"
@@ -154,7 +154,10 @@ export function FormatDemo() {
 }
 export function PresetsDemo() {
   return (
-    <Card title="预设颜色" description="打开面板后，可从预设分组选择颜色，也可使用右侧完整选择器编辑。">
+    <Card
+      title="预设颜色"
+      description="打开面板后，可从预设分组选择颜色，也可使用右侧完整选择器编辑。"
+    >
       <PresetPicker />
     </Card>
   )

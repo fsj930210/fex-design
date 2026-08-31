@@ -20,7 +20,16 @@ const InputContext = createContext<InputContextValue>()
 
 export function InputGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <div {...rest} role="group" data-slot="input-group" class={cn(inputGroupClassName, local.class)}>{local.children}</div>
+  return (
+    <div
+      {...rest}
+      role="group"
+      data-slot="input-group"
+      class={cn(inputGroupClassName, local.class)}
+    >
+      {local.children}
+    </div>
+  )
 }
 
 export const InputGroupAddon = part('input-group-addon', inputGroupAddonClassName)

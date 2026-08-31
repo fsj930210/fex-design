@@ -56,7 +56,7 @@ const initial: LinearGradientInput = {
                 )?.color ?? gradient.snapshot.value.stops[0]?.color
               "
               @change="
-                value =>
+                (value) =>
                   value &&
                   gradient.controller.setStopColor(gradient.snapshot.value.selectedStopId, value)
               "

@@ -22,7 +22,9 @@ function changedIndexes(previous: InputOTPValue, next: InputOTPValue): number[] 
   )
 }
 
-export function createInputOTPController(initialOptions: InputOTPRootOptions = {}): InputOTPController {
+export function createInputOTPController(
+  initialOptions: InputOTPRootOptions = {},
+): InputOTPController {
   let options = initialOptions
   let uncontrolledValue = [...(initialOptions.defaultValue ?? [])]
   let previousComplete = false
@@ -40,10 +42,7 @@ export function createInputOTPController(initialOptions: InputOTPRootOptions = {
 
   const resolveSnapshot = () => {
     const currentSegments = sortSegments(segments.values())
-    const value = normalizeInputOTPValue(
-      options.value ?? uncontrolledValue,
-      currentSegments.length,
-    )
+    const value = normalizeInputOTPValue(options.value ?? uncontrolledValue, currentSegments.length)
     const segmentSnapshots = resolveSegments(value)
     const complete = options.isComplete
       ? options.isComplete(value, segmentSnapshots)
@@ -130,7 +129,10 @@ export function createInputOTPController(initialOptions: InputOTPRootOptions = {
       const before = Array.from(previousSegmentValue).slice(0, selection.start)
       const after = Array.from(previousSegmentValue).slice(selection.end)
       const capacity = currentSegment.maxLength
-      const available = capacity === undefined ? characters.length : Math.max(0, capacity - before.length - after.length)
+      const available =
+        capacity === undefined
+          ? characters.length
+          : Math.max(0, capacity - before.length - after.length)
       const acceptedCharacters = characters.slice(0, available)
       const candidate = [...before, ...acceptedCharacters, ...after].join('')
 
@@ -188,7 +190,8 @@ export function createInputOTPController(initialOptions: InputOTPRootOptions = {
     previousComplete = complete
     refresh()
 
-    const writtenSegment = lastWrittenIndex === undefined ? undefined : segments.get(lastWrittenIndex)
+    const writtenSegment =
+      lastWrittenIndex === undefined ? undefined : segments.get(lastWrittenIndex)
     const wasAlreadyFull =
       writtenSegment?.maxLength !== undefined &&
       (previousValue[lastWrittenIndex!]?.length ?? 0) >= writtenSegment.maxLength

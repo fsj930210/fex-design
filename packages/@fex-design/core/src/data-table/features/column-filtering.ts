@@ -17,4 +17,5 @@ export type { ColumnFilter, ColumnFiltersState, FilterFn } from '@tanstack/table
 
 /** Keeps a remotely filtered column in the shared filter state without filtering local rows. */
 export const dataTableRemoteFilterFn: FilterFn<TableFeatures, RowData> = () => true
-dataTableRemoteFilterFn.autoRemove = (value) => value === undefined || value === null || value === ''
+dataTableRemoteFilterFn.autoRemove = (value) =>
+  value === undefined || value === null || value === ''

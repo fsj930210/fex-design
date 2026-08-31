@@ -1,1 +1,28 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{Bubble,BubbleContent}from'@fex-design/angular/primitive/bubble';import{Message,MessageBody,MessageContent,MessageFooter,MessageHeader}from'@fex-design/angular/primitive/message';import Card from'@fex-design/angular/ui/card';@Component({selector:'fex-message-header-footer-demo',standalone:true,imports:[Card,Bubble,BubbleContent,Message,MessageBody,MessageHeader,MessageContent,MessageFooter],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./header-footer-demo.component.html'})export class MessageHeaderFooterDemoComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Bubble, BubbleContent } from '@fex-design/angular/primitive/bubble'
+import {
+  Message,
+  MessageBody,
+  MessageContent,
+  MessageFooter,
+  MessageHeader,
+} from '@fex-design/angular/primitive/message'
+import Card from '@fex-design/angular/ui/card'
+export
+@Component({
+  selector: 'fex-message-header-footer-demo',
+  standalone: true,
+  imports: [
+    Card,
+    Bubble,
+    BubbleContent,
+    Message,
+    MessageBody,
+    MessageHeader,
+    MessageContent,
+    MessageFooter,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './header-footer-demo.component.html',
+})
+class MessageHeaderFooterDemoComponent {}

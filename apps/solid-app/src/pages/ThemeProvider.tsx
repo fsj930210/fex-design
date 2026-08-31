@@ -25,7 +25,10 @@ export function ThemeProviderPage() {
           </div>
         </header>
 
-        <Card title="Local Scope" description="A local provider applies theme variables to its own wrapper.">
+        <Card
+          title="Local Scope"
+          description="A local provider applies theme variables to its own wrapper."
+        >
           <ThemeProvider
             scope="local"
             storageKey="fex-theme-provider-local-demo"
@@ -86,7 +89,9 @@ export function ThemeProviderPage() {
                     <button
                       class="mb-3 rounded-md border border-border bg-elevated-background px-3 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background"
                       type="button"
-                      onClick={() => setInnerTheme((theme) => (theme === 'dark' ? 'light' : 'dark'))}
+                      onClick={() =>
+                        setInnerTheme((theme) => (theme === 'dark' ? 'light' : 'dark'))
+                      }
                     >
                       Switch inner to {innerTheme() === 'dark' ? 'light' : 'dark'}
                     </button>

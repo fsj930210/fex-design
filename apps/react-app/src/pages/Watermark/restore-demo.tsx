@@ -4,7 +4,9 @@ import { Card } from '@fex-design/react/ui/card'
 
 export function RestoreDemo() {
   const removeWatermark = () => {
-    document.querySelector('[data-demo="react-watermark-restore"] [data-slot="watermark"]')?.remove()
+    document
+      .querySelector('[data-demo="react-watermark-restore"] [data-slot="watermark"]')
+      ?.remove()
   }
 
   return (

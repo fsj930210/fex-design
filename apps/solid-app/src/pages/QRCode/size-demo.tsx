@@ -11,7 +11,10 @@ export function SizeDemo() {
         <For each={sizes}>
           {(size) => (
             <QrCode.Root value={'https://fex.design/qrcode/size/' + size} size={size}>
-              <QrCode.Svg><QrCode.Background /><QrCode.Modules /></QrCode.Svg>
+              <QrCode.Svg>
+                <QrCode.Background />
+                <QrCode.Modules />
+              </QrCode.Svg>
             </QrCode.Root>
           )}
         </For>

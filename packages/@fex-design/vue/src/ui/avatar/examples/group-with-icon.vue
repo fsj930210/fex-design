@@ -1,2 +1,13 @@
-<script setup lang="ts">import { PlusIcon } from '@fex-design/vue/icon/plus'; import { Avatar, AvatarGroup } from '@fex-design/vue/ui/avatar'</script>
-<template><AvatarGroup :max-count="3"><Avatar v-for="i in 4" :key="i" src="https://github.com/shadcn.png" fallback="FX" /><template #overflow><span class="relative inline-flex size-8 items-center justify-center rounded-full bg-muted-background text-muted-foreground ring-2 ring-background [&>svg]:size-4"><PlusIcon /></span></template></AvatarGroup></template>
+<script setup lang="ts">
+import { PlusIcon } from '@fex-design/vue/icon/plus'
+import { Avatar, AvatarGroup } from '@fex-design/vue/ui/avatar'
+</script>
+<template>
+  <AvatarGroup :max-count="3"
+    ><Avatar v-for="i in 4" :key="i" src="https://github.com/shadcn.png" fallback="FX" /><template
+      #overflow
+      ><span
+        class="relative inline-flex size-8 items-center justify-center rounded-full bg-muted-background text-muted-foreground ring-2 ring-background [&>svg]:size-4"
+        ><PlusIcon /></span></template
+  ></AvatarGroup>
+</template>

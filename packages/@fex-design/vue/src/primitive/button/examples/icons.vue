@@ -19,6 +19,3 @@ import { buttonClassName } from '@fex-design/styles/button'
     ></Button>
   </div>
 </template>
-
-
-

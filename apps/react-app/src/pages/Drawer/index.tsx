@@ -5,4 +5,33 @@ import { NestedDemo } from './nested-demo'
 import { PlacementDemo } from './placement-demo'
 import { PresetDemo } from './preset-demo'
 import { SizeDemo } from './size-demo'
-export function DrawerPage() { return <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4"><div className="mx-auto max-w-5xl space-y-4"><header><h1 className="text-2xl font-semibold">Drawer</h1><p className="mt-2 text-sm text-muted-foreground">Composable drawer primitives.</p></header><Card title="Basic and mask"><BasicDemo /></Card><Card title="Placement"><PlacementDemo /></Card><Card title="Presets"><PresetDemo /></Card><Card title="Header and footer"><HeaderFooterDemo /></Card><Card title="Resizable size"><SizeDemo /></Card><Card title="Nested"><NestedDemo /></Card></div></main> }
+export function DrawerPage() {
+  return (
+    <main className="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div className="mx-auto max-w-5xl space-y-4">
+        <header>
+          <h1 className="text-2xl font-semibold">Drawer</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Composable drawer primitives.</p>
+        </header>
+        <Card title="Basic and mask">
+          <BasicDemo />
+        </Card>
+        <Card title="Placement">
+          <PlacementDemo />
+        </Card>
+        <Card title="Presets">
+          <PresetDemo />
+        </Card>
+        <Card title="Header and footer">
+          <HeaderFooterDemo />
+        </Card>
+        <Card title="Resizable size">
+          <SizeDemo />
+        </Card>
+        <Card title="Nested">
+          <NestedDemo />
+        </Card>
+      </div>
+    </main>
+  )
+}

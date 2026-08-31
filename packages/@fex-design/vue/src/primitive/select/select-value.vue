@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  selectPlaceholderClassName,
-  selectValueClassName,
-} from '@fex-design/styles/select'
+import { selectPlaceholderClassName, selectValueClassName } from '@fex-design/styles/select'
 import Tag from '../tag/tag.vue'
 import { useSelect } from './use-select'
 
@@ -17,7 +14,14 @@ const select = useSelect('SelectValue')
         :key="option.value"
       >
         <slot name="tag" :option="option" :remove="() => select.removeValue(option.value)">
-          <Tag size="sm" closable :close-label="`Remove ${String(option.label)}`" @pointerdown.capture.prevent @close.stop="select.removeValue(option.value)">{{ option.label }}</Tag>
+          <Tag
+            size="sm"
+            closable
+            :close-label="`Remove ${String(option.label)}`"
+            @pointerdown.capture.prevent
+            @close.stop="select.removeValue(option.value)"
+            >{{ option.label }}</Tag
+          >
         </slot>
       </template>
       <Tag

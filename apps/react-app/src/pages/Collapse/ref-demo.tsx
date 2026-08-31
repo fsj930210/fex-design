@@ -1,4 +1,10 @@
-import { Collapse, CollapseContent, CollapseItem, CollapseTrigger, type CollapseRef } from '@fex-design/react/primitive/collapse'
+import {
+  Collapse,
+  CollapseContent,
+  CollapseItem,
+  CollapseTrigger,
+  type CollapseRef,
+} from '@fex-design/react/primitive/collapse'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
 import { useRef } from 'react'
@@ -7,7 +13,10 @@ import { collapseItems } from './demo-data'
 export function RefCollapseDemo() {
   const collapseRef = useRef<CollapseRef>(null)
   return (
-    <Card title="Instance methods" description="Use ref methods for imperative actions tied to this Collapse instance.">
+    <Card
+      title="Instance methods"
+      description="Use ref methods for imperative actions tied to this Collapse instance."
+    >
       <div className="mb-2 flex flex-wrap gap-1.5">
         <Button variant="outline" size="sm" onClick={() => collapseRef.current?.expand('security')}>
           Open security

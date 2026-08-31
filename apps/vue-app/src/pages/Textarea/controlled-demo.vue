@@ -24,7 +24,10 @@ const value = ref('Controlled textarea value')
         <p class="text-sm text-muted-foreground">Value: {{ value || '(empty)' }}</p>
       </div>
 
-      <TextareaRoot default-value="Uncontrolled textarea value" :auto-size="{ minRows: 2, maxRows: 5 }">
+      <TextareaRoot
+        default-value="Uncontrolled textarea value"
+        :auto-size="{ minRows: 2, maxRows: 5 }"
+      >
         <TextareaInput aria-label="Uncontrolled textarea" placeholder="Uncontrolled" />
         <TextareaClear aria-label="Clear uncontrolled textarea" />
       </TextareaRoot>

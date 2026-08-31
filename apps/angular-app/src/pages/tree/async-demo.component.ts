@@ -8,8 +8,15 @@ import { departmentFieldNames, type DepartmentNode } from './data'
 import { getDemoTreeChildren, getDemoTreeRoots, type DemoDepartmentNode } from '@fex/mock/tree-api'
 import { signal } from '@angular/core'
 
-const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] => nodes.map((node) => ({ id: node.id, name: node.name, childCount: node.childCount, ...(node.disabled === undefined ? {} : { disabled: node.disabled }) }))
-const loadChildren = async (item: { key: TreeKey }, context: { signal: AbortSignal }) => convert(await getDemoTreeChildren(item.key, context.signal))
+const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] =>
+  nodes.map((node) => ({
+    id: node.id,
+    name: node.name,
+    childCount: node.childCount,
+    ...(node.disabled === undefined ? {} : { disabled: node.disabled }),
+  }))
+const loadChildren = async (item: { key: TreeKey }, context: { signal: AbortSignal }) =>
+  convert(await getDemoTreeChildren(item.key, context.signal))
 
 @Component({
   selector: 'fex-async-tree-demo',
@@ -26,5 +33,7 @@ export class AsyncTreeDemoComponent {
     isLeaf: (node) => node.childCount === 0,
     features: [expansionFeature(), asyncLoadFeature<DepartmentNode>({ loadChildren })],
   })
-  constructor() { void getDemoTreeRoots().then((nodes) => this.data.set(convert(nodes))) }
+  constructor() {
+    void getDemoTreeRoots().then((nodes) => this.data.set(convert(nodes)))
+  }
 }

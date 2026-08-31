@@ -12,6 +12,3 @@ import { buttonClassName } from '@fex-design/styles/button'
 export class StatesExample {
   protected readonly defaultClassName = buttonClassName()
 }
-
-
-

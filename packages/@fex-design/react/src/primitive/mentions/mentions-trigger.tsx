@@ -13,8 +13,10 @@ export interface MentionsTriggerRenderProps {
   state: ReturnType<typeof useMentions>
 }
 
-export interface MentionsTriggerProps
-  extends Omit<ComponentProps<'textarea'>, 'children' | 'defaultValue' | 'value'> {
+export interface MentionsTriggerProps extends Omit<
+  ComponentProps<'textarea'>,
+  'children' | 'defaultValue' | 'value'
+> {
   children?: ((state: MentionsTriggerRenderProps) => ReactNode) | undefined
   rootClassName?: string | undefined
   autoSize?: TextareaRootProps['autoSize']
@@ -44,7 +46,8 @@ export function MentionsTrigger({
   }
   const syncSelection = (reason: 'selection' | 'input' = 'selection') => {
     const selection = getSelection(elementRef.current)
-    if (reason === 'input') rootContext.controller.setValue(elementRef.current?.value ?? '', selection)
+    if (reason === 'input')
+      rootContext.controller.setValue(elementRef.current?.value ?? '', selection)
     else rootContext.controller.setSelection(selection)
   }
   const inputProps: ComponentProps<'textarea'> = {
@@ -71,7 +74,10 @@ export function MentionsTrigger({
     onChange: (event) => {
       onChange?.(event)
       if (!event.defaultPrevented) {
-        rootContext.controller.setValue(event.currentTarget.value, getSelection(event.currentTarget))
+        rootContext.controller.setValue(
+          event.currentTarget.value,
+          getSelection(event.currentTarget),
+        )
       }
     },
     onKeyDown: (event: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -114,7 +120,9 @@ export function MentionsTrigger({
       status={rootContext.status}
       autoSize={autoSize}
       className={rootClassName}
-      onChange={(nextValue) => rootContext.controller.setValue(nextValue, getSelection(elementRef.current))}
+      onChange={(nextValue) =>
+        rootContext.controller.setValue(nextValue, getSelection(elementRef.current))
+      }
     >
       <TextareaInput {...inputProps} onChange={undefined} />
     </TextareaRoot>

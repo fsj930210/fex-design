@@ -1,1 +1,9 @@
-@if (context.status() === 'loaded') { <img [src]="src()" [alt]="alt()" [attr.srcset]="srcSet() || null" [class]="imageClass()" data-slot="avatar-image" /> }
+@if (context.status() === 'loaded') {
+<img
+  [src]="src()"
+  [alt]="alt()"
+  [attr.srcset]="srcSet() || null"
+  [class]="imageClass()"
+  data-slot="avatar-image"
+/>
+}

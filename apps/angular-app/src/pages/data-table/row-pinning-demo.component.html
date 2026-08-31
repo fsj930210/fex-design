@@ -17,9 +17,7 @@
           <span class="inline-flex gap-1">
             <button button size="sm" variant="outline" (click)="pin(cell, 'top')">Top</button>
             <button button size="sm" variant="outline" (click)="pin(cell, false)">Center</button>
-            <button button size="sm" variant="outline" (click)="pin(cell, 'bottom')">
-              Bottom
-            </button>
+            <button button size="sm" variant="outline" (click)="pin(cell, 'bottom')">Bottom</button>
           </span>
         } @else {
           {{ cell.getValue() }}

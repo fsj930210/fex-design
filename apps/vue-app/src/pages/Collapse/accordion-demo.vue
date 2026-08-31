@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/vue/primitive/collapse'
+import {
+  Collapse,
+  CollapseContent,
+  CollapseItem,
+  CollapseTrigger,
+} from '@fex-design/vue/primitive/collapse'
 import Card from '@fex-design/vue/ui/card'
 import { collapseItems } from './demo-data'
 </script>

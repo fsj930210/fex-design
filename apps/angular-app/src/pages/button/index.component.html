@@ -12,11 +12,23 @@
     </header>
 
     <div class="grid gap-4">
-      <fex-card title="Button group" description="Groups related actions without owning their value.">
+      <fex-card
+        title="Button group"
+        description="Groups related actions without owning their value."
+      >
         <div class="flex flex-wrap items-start gap-3">
-          <div buttonGroup><button button variant="outline">Previous</button><button button variant="outline">Current</button><button button variant="outline">Next</button></div>
-          <div buttonGroup [spacing]="8"><button button>Save</button><button button>Publish</button></div>
-          <div buttonGroup orientation="vertical"><button button variant="outline">Move up</button><button button variant="outline">Move down</button></div>
+          <div buttonGroup>
+            <button button variant="outline">Previous</button
+            ><button button variant="outline">Current</button
+            ><button button variant="outline">Next</button>
+          </div>
+          <div buttonGroup [spacing]="8">
+            <button button>Save</button><button button>Publish</button>
+          </div>
+          <div buttonGroup orientation="vertical">
+            <button button variant="outline">Move up</button
+            ><button button variant="outline">Move down</button>
+          </div>
         </div>
       </fex-card>
       <fex-card title="Primitive" description="Low-level button structure and minimal behavior.">
@@ -42,11 +54,7 @@
       <fex-card title="Sizes" description="Text and icon-only button sizes.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (size of sizes; track size) {
-            <button
-              button
-              [size]="size"
-              [attr.aria-label]="size.startsWith('icon') ? size : null"
-            >
+            <button button [size]="size" [attr.aria-label]="size.startsWith('icon') ? size : null">
               @if (size.startsWith('icon')) {
                 <fex-plus-icon />
               } @else {
@@ -107,16 +115,12 @@
             Icon left
           </button>
           <button button variant="secondary" effect="gooey-start">Secondary gooey start</button>
-          <button button variant="destructive" effect="gooey-end">
-            Destructive gooey end
-          </button>
+          <button button variant="destructive" effect="gooey-end">Destructive gooey end</button>
           <button button variant="destructive" effect="press">Pressed feedback</button>
           <button button variant="outline" effect="ring-hover">Outline ring hover</button>
           <button button variant="link" effect="hover-underline">Link hover underline</button>
           <button button variant="link" effect="underline">Link underline</button>
-          <button button variant="outline" effect="hover-underline">
-            Outline hover underline
-          </button>
+          <button button variant="outline" effect="hover-underline">Outline hover underline</button>
           <button button variant="outline" effect="underline">Outline underline</button>
           <button button variant="destructive" [loading]="true">Destructive loading</button>
           <button button [loading]="true" iconPlacement="end">Loading with icon</button>

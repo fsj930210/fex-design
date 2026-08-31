@@ -2,21 +2,21 @@
   "name": "@fex/utils",
   "private": true,
   "type": "module",
-  "devDependencies": {
-    "typescript": "catalog:"
-  },
-  "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
     "./tree": "./src/tree.ts",
     "./image/load-image": "./src/image/load-image.ts"
   },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
+  },
   "dependencies": {
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

@@ -96,7 +96,10 @@ export function SelectTrigger(props: SelectTriggerProps) {
                   : undefined
               }
               value={select.snapshot().searchValue}
-              class={cn(selectInputClassName,!select.showSearch()&&'absolute size-px min-w-0 overflow-hidden opacity-0')}
+              class={cn(
+                selectInputClassName,
+                !select.showSearch() && 'absolute size-px min-w-0 overflow-hidden opacity-0',
+              )}
               onFocus={() => select.controller.open()}
               onPointerDown={(event) => {
                 if (document.activeElement === event.currentTarget) select.controller.toggleOpen()
@@ -186,19 +189,23 @@ export function SelectValue(props: {
                     })}
                   </span>
                 ) : (
-                  <Tag size="sm" closable closeLabel={`Remove ${String(option.label)}`} onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => {
-                    event.stopPropagation()
-                    select.removeValue(option.value)
-                  }}>
+                  <Tag
+                    size="sm"
+                    closable
+                    closeLabel={`Remove ${String(option.label)}`}
+                    onPointerDownCapture={(event) => event.preventDefault()}
+                    onClose={(event) => {
+                      event.stopPropagation()
+                      select.removeValue(option.value)
+                    }}
+                  >
                     {option.label}
                   </Tag>
                 )
               }
             </For>
             <Show when={select.selectedOptions().length - visible().length > 0}>
-              <Tag size="sm">
-                +{select.selectedOptions().length - visible().length}
-              </Tag>
+              <Tag size="sm">+{select.selectedOptions().length - visible().length}</Tag>
             </Show>
           </div>
         </Show>

@@ -1,2 +1,40 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{RouterLink}from'@angular/router';import{BasicColorPickerDemoComponent,ClearColorPickerDemoComponent,ControlledColorPickerDemoComponent,CustomPanelColorPickerDemoComponent,CustomTriggerColorPickerDemoComponent,CustomTriggerEventColorPickerDemoComponent,DisabledAlphaColorPickerDemoComponent,DisabledColorPickerDemoComponent,FormatColorPickerDemoComponent,GradientColorPickerDemoComponent,PresetsColorPickerDemoComponent,TriggerTextColorPickerDemoComponent}from'./demos.component';
-@Component({selector:'fex-color-picker-page',standalone:true,imports:[RouterLink,BasicColorPickerDemoComponent,ControlledColorPickerDemoComponent,GradientColorPickerDemoComponent,TriggerTextColorPickerDemoComponent,DisabledColorPickerDemoComponent,DisabledAlphaColorPickerDemoComponent,ClearColorPickerDemoComponent,CustomTriggerColorPickerDemoComponent,CustomTriggerEventColorPickerDemoComponent,FormatColorPickerDemoComponent,PresetsColorPickerDemoComponent,CustomPanelColorPickerDemoComponent],host:{class:'block'},changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./index.component.html'})export class ColorPickerComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterLink } from '@angular/router'
+import {
+  BasicColorPickerDemoComponent,
+  ClearColorPickerDemoComponent,
+  ControlledColorPickerDemoComponent,
+  CustomPanelColorPickerDemoComponent,
+  CustomTriggerColorPickerDemoComponent,
+  CustomTriggerEventColorPickerDemoComponent,
+  DisabledAlphaColorPickerDemoComponent,
+  DisabledColorPickerDemoComponent,
+  FormatColorPickerDemoComponent,
+  GradientColorPickerDemoComponent,
+  PresetsColorPickerDemoComponent,
+  TriggerTextColorPickerDemoComponent,
+} from './demos.component'
+export
+@Component({
+  selector: 'fex-color-picker-page',
+  standalone: true,
+  imports: [
+    RouterLink,
+    BasicColorPickerDemoComponent,
+    ControlledColorPickerDemoComponent,
+    GradientColorPickerDemoComponent,
+    TriggerTextColorPickerDemoComponent,
+    DisabledColorPickerDemoComponent,
+    DisabledAlphaColorPickerDemoComponent,
+    ClearColorPickerDemoComponent,
+    CustomTriggerColorPickerDemoComponent,
+    CustomTriggerEventColorPickerDemoComponent,
+    FormatColorPickerDemoComponent,
+    PresetsColorPickerDemoComponent,
+    CustomPanelColorPickerDemoComponent,
+  ],
+  host: { class: 'block' },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './index.component.html',
+})
+class ColorPickerComponent {}

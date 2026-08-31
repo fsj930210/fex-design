@@ -1,7 +1,4 @@
-import {
-  syncTextareaAutoSize,
-  type TextareaAutoSize,
-} from '@fex-design/core/textarea/autosize'
+import { syncTextareaAutoSize, type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import type { TextareaContextValue } from './context'
 

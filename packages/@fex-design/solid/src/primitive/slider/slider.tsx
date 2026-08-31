@@ -1,9 +1,6 @@
 import { createSliderController } from '@fex-design/core/slider/create-slider-controller'
 import type { SliderOrientation } from '@fex-design/core/slider/types'
-import {
-  convertValueToPercentage,
-  getSliderValueFromPointer,
-} from '@fex-design/core/slider/utils'
+import { convertValueToPercentage, getSliderValueFromPointer } from '@fex-design/core/slider/utils'
 import {
   sliderRangeClassName,
   sliderRootClassName,

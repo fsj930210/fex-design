@@ -1,1 +1,36 @@
-import { A } from '@solidjs/router';import { BasicDemo } from './basic-demo';import { ControlledDemo } from './controlled-demo';import { CustomDemo } from './custom-demo';import { DisabledDemo } from './disabled-demo';import { DynamicDemo } from './dynamic-demo';import { NavigationDemo } from './navigation-demo';import { ResponsiveDemo } from './responsive-demo';export function StepsPage(){return <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4"><div class="mx-auto w-full max-w-5xl space-y-4"><header class="space-y-4"><A class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</A><div><h1 class="text-2xl font-semibold">Steps</h1><p class="mt-2 text-sm text-muted-foreground">Value-based workflow stages with navigation and responsive layout.</p></div></header><div class="space-y-4"><BasicDemo/><NavigationDemo/><DisabledDemo/><ControlledDemo/><DynamicDemo/><CustomDemo/><ResponsiveDemo/></div></div></main>}
+import { A } from '@solidjs/router'
+import { BasicDemo } from './basic-demo'
+import { ControlledDemo } from './controlled-demo'
+import { CustomDemo } from './custom-demo'
+import { DisabledDemo } from './disabled-demo'
+import { DynamicDemo } from './dynamic-demo'
+import { NavigationDemo } from './navigation-demo'
+import { ResponsiveDemo } from './responsive-demo'
+export function StepsPage() {
+  return (
+    <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
+      <div class="mx-auto w-full max-w-5xl space-y-4">
+        <header class="space-y-4">
+          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
+            Back home
+          </A>
+          <div>
+            <h1 class="text-2xl font-semibold">Steps</h1>
+            <p class="mt-2 text-sm text-muted-foreground">
+              Value-based workflow stages with navigation and responsive layout.
+            </p>
+          </div>
+        </header>
+        <div class="space-y-4">
+          <BasicDemo />
+          <NavigationDemo />
+          <DisabledDemo />
+          <ControlledDemo />
+          <DynamicDemo />
+          <CustomDemo />
+          <ResponsiveDemo />
+        </div>
+      </div>
+    </main>
+  )
+}

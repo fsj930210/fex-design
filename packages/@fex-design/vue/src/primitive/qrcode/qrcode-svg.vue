@@ -9,7 +9,9 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<{ class?: string }>()
 const attrs = useAttrs()
 const { model } = useQrCode('QrCodeSvg')
-const className = computed(() => cn(qrcodeSurfaceClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeSurfaceClassName, attrs.class as string | undefined, props.class),
+)
 const viewBox = computed(() => '0 0 ' + model.value.viewBoxSize + ' ' + model.value.viewBoxSize)
 const ariaLabel = computed(() => (attrs['aria-label'] as string | undefined) ?? 'QR code')
 </script>

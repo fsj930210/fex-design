@@ -8,7 +8,10 @@ const value = ref('Textarea count is implemented by the demo, not by the primiti
 </script>
 
 <template>
-  <Card title="Count" description="Character count is derived by the caller and rendered wherever needed.">
+  <Card
+    title="Count"
+    description="Character count is derived by the caller and rendered wherever needed."
+  >
     <div class="max-w-xl space-y-1.5">
       <TextareaRoot
         :value="value"

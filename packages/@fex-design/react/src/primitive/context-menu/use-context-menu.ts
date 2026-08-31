@@ -54,15 +54,17 @@ export function useContextMenuTrigger<T, TElement extends HTMLElement = HTMLElem
     contextMenu.overlay.setReferenceElement(element)
   })
   const composedRef = useComposedRef<TElement>((element) => setReference(element), ref)
-  const openAt = useMemoizedFn((event: MouseEvent<TElement>, x = event.clientX, y = event.clientY) => {
-    if (event.defaultPrevented) return
-    onContextMenu?.(event)
-    if (event.defaultPrevented) return
-    contextMenu.openAt(
-      { payload, element: event.currentTarget, clientX: x, clientY: y, event: event.nativeEvent },
-      eventInfo(event),
-    )
-  })
+  const openAt = useMemoizedFn(
+    (event: MouseEvent<TElement>, x = event.clientX, y = event.clientY) => {
+      if (event.defaultPrevented) return
+      onContextMenu?.(event)
+      if (event.defaultPrevented) return
+      contextMenu.openAt(
+        { payload, element: event.currentTarget, clientX: x, clientY: y, event: event.nativeEvent },
+        eventInfo(event),
+      )
+    },
+  )
   const triggerProps: ContextMenuTriggerRenderProps<TElement> = {
     ...props,
     ref: composedRef,

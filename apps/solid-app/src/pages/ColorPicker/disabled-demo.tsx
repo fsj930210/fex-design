@@ -1,1 +1,1 @@
-export{DisabledDemo}from'./demos'
+export { DisabledDemo } from './demos'

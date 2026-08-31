@@ -5,7 +5,12 @@ export interface LoadImageOptions {
   signal?: AbortSignal
 }
 
-export function loadImage({ src, crossOrigin, referrerPolicy, signal }: LoadImageOptions): Promise<void> {
+export function loadImage({
+  src,
+  crossOrigin,
+  referrerPolicy,
+  signal,
+}: LoadImageOptions): Promise<void> {
   return new Promise((resolve, reject) => {
     if (signal?.aborted) {
       reject(new DOMException('The image load was aborted.', 'AbortError'))
@@ -26,7 +31,8 @@ export function loadImage({ src, crossOrigin, referrerPolicy, signal }: LoadImag
       cleanup()
       callback()
     }
-    const handleAbort = () => settle(() => reject(new DOMException('The image load was aborted.', 'AbortError')))
+    const handleAbort = () =>
+      settle(() => reject(new DOMException('The image load was aborted.', 'AbortError')))
 
     if (crossOrigin !== undefined) image.crossOrigin = crossOrigin
     if (referrerPolicy !== undefined) image.referrerPolicy = referrerPolicy

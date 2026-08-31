@@ -53,7 +53,12 @@ export function PlacementTourDemo() {
         <Tour.Portal>
           <Tour.Overlay />
           {placements.map((placement) => (
-            <Tour.Step key={placement} name={`placement-${placement}`} target={`placement-${placement}`} placement={placement}>
+            <Tour.Step
+              key={placement}
+              name={`placement-${placement}`}
+              target={`placement-${placement}`}
+              placement={placement}
+            >
               <Tour.Content>
                 <Tour.Arrow />
                 <TourPanel title={placement} description={`当前浮层位于目标的 ${placement} 方向。`}>

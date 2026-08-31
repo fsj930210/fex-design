@@ -6,7 +6,10 @@ import TextareaRoot from '../textarea/textarea-root.vue'
 import { useMentions } from './context'
 
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{ class?: string; autoSize?: boolean | { minRows?: number; maxRows?: number } }>()
+const props = defineProps<{
+  class?: string
+  autoSize?: boolean | { minRows?: number; maxRows?: number }
+}>()
 const attrs = useAttrs()
 const mentions = useMentions('MentionsTrigger')
 const element = ref<HTMLTextAreaElement | null>(null)

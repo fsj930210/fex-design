@@ -38,24 +38,24 @@ import { ThemeProvider } from '@fex-design/angular/primitive/theme-provider'
 
 ## Inputs
 
-| Input | Type | Default | Description |
-| --- | --- | --- | --- |
-| `scope` | `'root' \\| 'local' \\| 'inherit'` | `'root'` | Theme target: document root, local host, or parent context. |
-| `storageKey` | `string` | - | localStorage key for persisted theme state. |
-| `themes` | `string[]` | `['light', 'dark']` | Selectable theme names. |
-| `defaultTheme` | `string` | `'light'` | Initial theme when no valid stored theme exists. |
-| `forcedTheme` | `string` | - | Highest-priority override; disables `setTheme`. |
-| `enableSystem` | `boolean` | `false` | Adds `system` and resolves it from `prefers-color-scheme`. |
-| `enableColorScheme` | `boolean` | `false` | Syncs CSS `color-scheme`. |
-| `attribute` | `'class' \\| \`data-${string}\`` | `'class'` | Attribute used to expose the active theme. |
-| `colorSchemeMap` | `Record<string, 'light' \\| 'dark'>` | - | Custom theme to color-scheme mapping. |
+| Input               | Type                       | Default             | Description                                                |
+| ------------------- | -------------------------- | ------------------- | ---------------------------------------------------------- |
+| `scope`             | `'root' \\                 | 'local' \\          | 'inherit'`                                                 | `'root'`                                   | Theme target: document root, local host, or parent context. |
+| `storageKey`        | `string`                   | -                   | localStorage key for persisted theme state.                |
+| `themes`            | `string[]`                 | `['light', 'dark']` | Selectable theme names.                                    |
+| `defaultTheme`      | `string`                   | `'light'`           | Initial theme when no valid stored theme exists.           |
+| `forcedTheme`       | `string`                   | -                   | Highest-priority override; disables `setTheme`.            |
+| `enableSystem`      | `boolean`                  | `false`             | Adds `system` and resolves it from `prefers-color-scheme`. |
+| `enableColorScheme` | `boolean`                  | `false`             | Syncs CSS `color-scheme`.                                  |
+| `attribute`         | `'class' \\                | \`data-${string}\`` | `'class'`                                                  | Attribute used to expose the active theme. |
+| `colorSchemeMap`    | `Record<string, 'light' \\ | 'dark'>`            | -                                                          | Custom theme to color-scheme mapping.      |
 
 ## Public Members
 
-| Member | Description |
-| --- | --- |
-| `snapshot` | Angular signal for the active snapshot. |
-| `currentSnapshot` | Current snapshot getter. |
+| Member            | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `snapshot`        | Angular signal for the active snapshot.                |
+| `currentSnapshot` | Current snapshot getter.                               |
 | `setTheme(theme)` | Updates user selection unless `forcedTheme` is active. |
 
 ## Controlled Behavior
@@ -67,4 +67,3 @@ Use `forcedTheme` to lock the effective theme. Otherwise the core controller own
 - Root providers cannot be nested.
 - `scope="root"` requires `storageKey` unless `forcedTheme` is provided.
 - `scope="inherit"` requires a parent provider and cannot receive `forcedTheme`.
-

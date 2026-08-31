@@ -1,7 +1,13 @@
 import { createOverlay } from '../overlay/create-overlay'
 import type { DrawerController, DrawerOptions, DrawerSnapshot } from './types'
 
-export type { DrawerController, DrawerOptions, DrawerPlacement, DrawerSize, DrawerSnapshot } from './types'
+export type {
+  DrawerController,
+  DrawerOptions,
+  DrawerPlacement,
+  DrawerSize,
+  DrawerSnapshot,
+} from './types'
 
 function toOverlayOptions(options: DrawerOptions) {
   return {
@@ -18,7 +24,10 @@ function toOverlayOptions(options: DrawerOptions) {
 
 export function createDrawerController(options: DrawerOptions = {}): DrawerController {
   const overlay = createOverlay(toOverlayOptions(options))
-  let snapshot: DrawerSnapshot = { ...overlay.getSnapshot(), placement: options.placement ?? 'right' }
+  let snapshot: DrawerSnapshot = {
+    ...overlay.getSnapshot(),
+    placement: options.placement ?? 'right',
+  }
   const listeners = new Set<() => void>()
   const unsubscribe = overlay.subscribe(() => {
     snapshot = { ...overlay.getSnapshot(), placement: snapshot.placement }

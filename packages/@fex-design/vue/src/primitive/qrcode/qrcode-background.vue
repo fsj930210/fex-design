@@ -9,7 +9,9 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<{ class?: string }>()
 const attrs = useAttrs()
 const { model } = useQrCode('QrCodeBackground')
-const className = computed(() => cn(qrcodeBackgroundClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeBackgroundClassName, attrs.class as string | undefined, props.class),
+)
 </script>
 
 <template>

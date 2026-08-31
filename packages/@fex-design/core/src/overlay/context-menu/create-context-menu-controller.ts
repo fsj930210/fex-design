@@ -38,7 +38,10 @@ export function createContextMenuController<T>(
     store.setSnapshot({ overlay: overlay.getSnapshot(), target: activeTarget })
   }
 
-  function notifyChange(open: boolean, info: Parameters<NonNullable<FloatingOverlayOptions['onOpenChange']>>[1]) {
+  function notifyChange(
+    open: boolean,
+    info: Parameters<NonNullable<FloatingOverlayOptions['onOpenChange']>>[1],
+  ) {
     const target = activeTarget
     currentOptions.onOpenChange?.(open, {
       reason: info.reason,

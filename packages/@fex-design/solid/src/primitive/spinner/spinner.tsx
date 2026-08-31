@@ -38,5 +38,7 @@ export function SpinnerText(props: JSX.HTMLAttributes<HTMLSpanElement>) {
 }
 export function SpinnerOverlay(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [local, rest] = splitProps(props, ['class'])
-  return <div {...rest} data-slot="spinner-overlay" class={cn(spinnerOverlayClassName, local.class)} />
+  return (
+    <div {...rest} data-slot="spinner-overlay" class={cn(spinnerOverlayClassName, local.class)} />
+  )
 }

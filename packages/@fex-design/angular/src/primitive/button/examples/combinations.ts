@@ -22,6 +22,3 @@ export class CombinationsExample {
     effect: 'expand-icon',
   })
 }
-
-
-

@@ -1,2 +1,10 @@
-import { Component } from '@angular/core'; import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../avatar'
-@Component({ selector: 'avatar-group-example', standalone: true, imports: [Avatar, AvatarGroup, AvatarImage, AvatarFallback], template: '<avatar-group><avatar><avatar-image src="https://github.com/shadcn.png" alt="shadcn avatar" /><avatar-fallback>FX</avatar-fallback></avatar><avatar><avatar-image src="https://github.com/shadcn.png" alt="shadcn avatar" /><avatar-fallback>FX</avatar-fallback></avatar><avatar><avatar-image src="https://github.com/shadcn.png" alt="shadcn avatar" /><avatar-fallback>FX</avatar-fallback></avatar></avatar-group>' }) export class GroupExample {}
+import { Component } from '@angular/core'
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../avatar'
+@Component({
+  selector: 'avatar-group-example',
+  standalone: true,
+  imports: [Avatar, AvatarGroup, AvatarImage, AvatarFallback],
+  template:
+    '<avatar-group><avatar><avatar-image src="https://github.com/shadcn.png" alt="shadcn avatar" /><avatar-fallback>FX</avatar-fallback></avatar><avatar><avatar-image src="https://github.com/shadcn.png" alt="shadcn avatar" /><avatar-fallback>FX</avatar-fallback></avatar><avatar><avatar-image src="https://github.com/shadcn.png" alt="shadcn avatar" /><avatar-fallback>FX</avatar-fallback></avatar></avatar-group>',
+})
+export class GroupExample {}

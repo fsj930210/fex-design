@@ -26,8 +26,7 @@ export const toggleGroupClassName = cva('inline-flex w-fit items-center', {
       outline: '',
     },
     connected: {
-      true:
-        '[&>[data-slot=toggle]]:rounded-none [&>[data-slot=toggle]:first-child]:rounded-l-md [&>[data-slot=toggle]:last-child]:rounded-r-md data-[orientation=vertical]:[&>[data-slot=toggle]:first-child]:rounded-t-md data-[orientation=vertical]:[&>[data-slot=toggle]:last-child]:rounded-b-md data-[orientation=vertical]:[&>[data-slot=toggle]:first-child]:rounded-bl-none data-[orientation=vertical]:[&>[data-slot=toggle]:last-child]:rounded-tr-none',
+      true: '[&>[data-slot=toggle]]:rounded-none [&>[data-slot=toggle]:first-child]:rounded-l-md [&>[data-slot=toggle]:last-child]:rounded-r-md data-[orientation=vertical]:[&>[data-slot=toggle]:first-child]:rounded-t-md data-[orientation=vertical]:[&>[data-slot=toggle]:last-child]:rounded-b-md data-[orientation=vertical]:[&>[data-slot=toggle]:first-child]:rounded-bl-none data-[orientation=vertical]:[&>[data-slot=toggle]:last-child]:rounded-tr-none',
       false: '',
     },
   },

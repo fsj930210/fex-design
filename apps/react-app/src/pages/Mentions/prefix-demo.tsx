@@ -59,7 +59,10 @@ export function PrefixDemo() {
         onChange={setValue}
         onSelect={(item, meta) => setSelected(meta.prefix + ' -> ' + item.value)}
       >
-        <MentionsTrigger placeholder="Try @Ada, #Pricing, or /summarize" autoSize={{ minRows: 2 }} />
+        <MentionsTrigger
+          placeholder="Try @Ada, #Pricing, or /summarize"
+          autoSize={{ minRows: 2 }}
+        />
         <MentionsContent>
           <MentionsPrefixCase prefix="@">
             <UserItems />

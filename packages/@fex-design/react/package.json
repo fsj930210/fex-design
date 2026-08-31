@@ -2,10 +2,6 @@
   "name": "@fex-design/react",
   "private": true,
   "type": "module",
-  "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.tsx",
@@ -78,6 +74,7 @@
     "./primitive/tooltip": "./src/primitive/tooltip/tooltip.tsx",
     "./primitive/tour": "./src/primitive/tour/tour.tsx",
     "./primitive/badge": "./src/primitive/badge/badge.tsx",
+    "./ui/badge": "./src/ui/badge/badge.tsx",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.tsx",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.tsx",
     "./primitive/avatar": "./src/primitive/avatar/avatar.tsx",
@@ -130,6 +127,10 @@
     "./hooks/use-tour": "./src/primitive/tour/use-tour.ts",
     "./hooks/use-unmount": "./src/hooks/use-unmount.ts",
     "./i18n": "./src/i18n/index.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^2.0.1",

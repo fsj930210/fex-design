@@ -1,7 +1,14 @@
-<fex-card title="Count" description="Character count is derived by the caller and rendered wherever needed.">
+<fex-card
+  title="Count"
+  description="Character count is derived by the caller and rendered wherever needed."
+>
   <div class="max-w-xl space-y-1.5">
     <fex-textarea-root [value]="value" (change)="value = $event" [autoSize]="autoSize">
-      <textarea fexTextareaInput aria-label="Textarea with count" [maxLength]="maxLength"></textarea>
+      <textarea
+        fexTextareaInput
+        aria-label="Textarea with count"
+        [maxLength]="maxLength"
+      ></textarea>
     </fex-textarea-root>
     <p class="text-right text-sm text-muted-foreground">{{ value.length }} / {{ maxLength }}</p>
   </div>

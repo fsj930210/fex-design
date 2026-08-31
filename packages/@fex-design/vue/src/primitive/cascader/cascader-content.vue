@@ -8,4 +8,9 @@ import CascaderPanel from './cascader-panel.vue'
 const props = defineProps<{ class?: string }>()
 const className = computed(() => cn(cascaderContentClassName, props.class))
 </script>
-<template><PopoverPortal><PopoverContent :class="className"><slot><CascaderPanel /></slot></PopoverContent></PopoverPortal></template>
+<template>
+  <PopoverPortal
+    ><PopoverContent :class="className"
+      ><slot><CascaderPanel /></slot></PopoverContent
+  ></PopoverPortal>
+</template>

@@ -10,7 +10,11 @@ export function ErrorLevelDemo() {
       <div className="flex flex-wrap gap-3">
         {levels.map((level) => (
           <div key={level} className="grid gap-1 text-center text-sm text-muted-foreground">
-            <QrCode.Root value={'https://fex.design/qrcode/error/' + level} size={128} errorLevel={level}>
+            <QrCode.Root
+              value={'https://fex.design/qrcode/error/' + level}
+              size={128}
+              errorLevel={level}
+            >
               <QrCode.Svg>
                 <QrCode.Background />
                 <QrCode.Modules />

@@ -1,6 +1,5 @@
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-} from '@fex-design/styles/date-picker'
+import {} from '@fex-design/styles/date-picker'
 import { cn } from '@fex/utils'
 import { For, Show, splitProps, type JSX } from 'solid-js'
 import { Tag } from '../tag/tag'
@@ -22,7 +21,15 @@ export function DatePickerTags(props: DatePickerTagsProps) {
     <div {...rest} class={cn('flex min-w-0 items-center gap-1', local.class)}>
       <For each={visibleValues()}>
         {(item) => (
-          <Tag size="sm" closable onPointerDownCapture={(event) => event.stopPropagation()} onClose={(event) => { event.stopPropagation(); context.select(item as never) }}>
+          <Tag
+            size="sm"
+            closable
+            onPointerDownCapture={(event) => event.stopPropagation()}
+            onClose={(event) => {
+              event.stopPropagation()
+              context.select(item as never)
+            }}
+          >
             <span class="truncate">{formatDatePickerValue(item, context)}</span>
           </Tag>
         )}

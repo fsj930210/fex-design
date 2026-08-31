@@ -18,7 +18,9 @@ import { Button, ButtonGroup, ButtonIcon } from '@fex-design/vue/primitive/butto
           >End icon<ButtonIcon placement="end"><PlusIcon /></ButtonIcon
         ></Button>
       </div>
-      <ButtonGroup :dir="direction"><Button>First</Button><Button>Middle</Button><Button>Last</Button></ButtonGroup>
+      <ButtonGroup :dir="direction"
+        ><Button>First</Button><Button>Middle</Button><Button>Last</Button></ButtonGroup
+      >
     </section>
   </div>
 </template>

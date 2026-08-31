@@ -44,20 +44,20 @@ import { useTheme } from '@fex-design/react/primitive/theme-provider/use-theme'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `children` | `ReactNode` | - | Rendered content. |
-| `scope` | `'root' \\| 'local' \\| 'inherit'` | `'root'` | Theme target: document root, local wrapper, or parent context. |
-| `storageKey` | `string` | - | localStorage key for persisted theme state. |
-| `themes` | `string[]` | `['light', 'dark']` | Selectable theme names and class names removed before applying the next theme. |
-| `defaultTheme` | `string` | `'light'` | Initial theme when no valid stored theme exists. |
-| `forcedTheme` | `string` | - | Highest-priority theme override. While set, `setTheme` is ignored. |
-| `enableSystem` | `boolean` | `false` | Adds `system` and resolves it from `prefers-color-scheme`. |
-| `enableColorScheme` | `boolean` | `false` | Syncs CSS `color-scheme` from the resolved theme. |
-| `attribute` | `'class' \\| \`data-${string}\`` | `'class'` | Attribute used to expose the active theme. |
-| `className` | `string` | - | Class applied to the local wrapper only. |
-| `as` | `keyof HTMLElementTagNameMap` | `'div'` | Local wrapper element. |
-| `colorSchemeMap` | `Record<string, 'light' \\| 'dark'>` | - | Maps custom theme names to browser color schemes. |
+| Prop                | Type                          | Default             | Description                                                                    |
+| ------------------- | ----------------------------- | ------------------- | ------------------------------------------------------------------------------ |
+| `children`          | `ReactNode`                   | -                   | Rendered content.                                                              |
+| `scope`             | `'root' \\                    | 'local' \\          | 'inherit'`                                                                     | `'root'`                                          | Theme target: document root, local wrapper, or parent context. |
+| `storageKey`        | `string`                      | -                   | localStorage key for persisted theme state.                                    |
+| `themes`            | `string[]`                    | `['light', 'dark']` | Selectable theme names and class names removed before applying the next theme. |
+| `defaultTheme`      | `string`                      | `'light'`           | Initial theme when no valid stored theme exists.                               |
+| `forcedTheme`       | `string`                      | -                   | Highest-priority theme override. While set, `setTheme` is ignored.             |
+| `enableSystem`      | `boolean`                     | `false`             | Adds `system` and resolves it from `prefers-color-scheme`.                     |
+| `enableColorScheme` | `boolean`                     | `false`             | Syncs CSS `color-scheme` from the resolved theme.                              |
+| `attribute`         | `'class' \\                   | \`data-${string}\`` | `'class'`                                                                      | Attribute used to expose the active theme.        |
+| `className`         | `string`                      | -                   | Class applied to the local wrapper only.                                       |
+| `as`                | `keyof HTMLElementTagNameMap` | `'div'`             | Local wrapper element.                                                         |
+| `colorSchemeMap`    | `Record<string, 'light' \\    | 'dark'>`            | -                                                                              | Maps custom theme names to browser color schemes. |
 
 ## useTheme
 
@@ -73,4 +73,3 @@ This primitive is controller-driven rather than fully controlled by a `theme` pr
 - `scope="root"` requires `storageKey` unless `forcedTheme` is provided.
 - `scope="inherit"` requires a parent provider and cannot receive `forcedTheme`.
 - Custom themes require matching CSS selectors such as `.tech-blue` or `[data-theme='tech-blue']`.
-

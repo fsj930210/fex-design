@@ -28,10 +28,25 @@ function ComponentsMenu() {
       </Popover.PopoverTrigger>
       <Popover.PopoverPortal>
         <Dropdown.DropdownContent className={navPanelClassName}>
-          <MenuList orientation="vertical" parentValue="components" className="grid grid-cols-2 gap-1">
+          <MenuList
+            orientation="vertical"
+            parentValue="components"
+            className="grid grid-cols-2 gap-1"
+          >
             {components.map(([label, description]) => (
               <MenuItem key={label} value={label}>
-                {({ props }) => <a {...props} href={`#${label.toLowerCase().replace(' ', '-')}`} className="block rounded-md p-3 outline-none transition-colors hover:bg-muted-background focus-visible:bg-muted-background"><div className="text-sm font-medium">{label}</div><p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">{description}</p></a>}
+                {({ props }) => (
+                  <a
+                    {...props}
+                    href={`#${label.toLowerCase().replace(' ', '-')}`}
+                    className="block rounded-md p-3 outline-none transition-colors hover:bg-muted-background focus-visible:bg-muted-background"
+                  >
+                    <div className="text-sm font-medium">{label}</div>
+                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">
+                      {description}
+                    </p>
+                  </a>
+                )}
               </MenuItem>
             ))}
           </MenuList>
@@ -42,5 +57,25 @@ function ComponentsMenu() {
 }
 
 export function NavDemo() {
-  return <MenuRoot role="navigation" aria-label="Product navigation"><MenuList orientation="horizontal" className={navListClassName}><MenuItem value="getting-started">{({ props }) => <a {...props} className={navTriggerClassName} href="#getting-started">Getting started</a>}</MenuItem><ComponentsMenu /><MenuItem value="documentation">{({ props }) => <a {...props} className={navTriggerClassName} href="#documentation">Documentation</a>}</MenuItem></MenuList></MenuRoot>
+  return (
+    <MenuRoot role="navigation" aria-label="Product navigation">
+      <MenuList orientation="horizontal" className={navListClassName}>
+        <MenuItem value="getting-started">
+          {({ props }) => (
+            <a {...props} className={navTriggerClassName} href="#getting-started">
+              Getting started
+            </a>
+          )}
+        </MenuItem>
+        <ComponentsMenu />
+        <MenuItem value="documentation">
+          {({ props }) => (
+            <a {...props} className={navTriggerClassName} href="#documentation">
+              Documentation
+            </a>
+          )}
+        </MenuItem>
+      </MenuList>
+    </MenuRoot>
+  )
 }

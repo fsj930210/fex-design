@@ -32,7 +32,10 @@ export function createImageLoadingController(loader: ImageLoader): ImageLoadingC
           if (currentRequest === requestId) setStatus('loaded')
         },
         (error: unknown) => {
-          if (currentRequest === requestId && !(error instanceof DOMException && error.name === 'AbortError')) {
+          if (
+            currentRequest === requestId &&
+            !(error instanceof DOMException && error.name === 'AbortError')
+          ) {
             setStatus('error')
           }
         },

@@ -59,7 +59,9 @@ export function SearchTreeDemo() {
             expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
           ]}
           searchKeyword={keyword}
-          titleRender={({ item, searchKeyword }) => highlightTreeTitle(item.node.name, searchKeyword)}
+          titleRender={({ item, searchKeyword }) =>
+            highlightTreeTitle(item.node.name, searchKeyword)
+          }
           className="max-w-xl rounded-md border border-border bg-background p-1.5"
         />
       ) : null}

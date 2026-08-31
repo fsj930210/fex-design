@@ -8,7 +8,10 @@ import { collapseItems } from './demo-data'
 
 export function CustomCollapseDemo() {
   return (
-    <Card title="Custom trigger" description="Use item render actions when the toggle target is fully custom.">
+    <Card
+      title="Custom trigger"
+      description="Use item render actions when the toggle target is fully custom."
+    >
       <Collapse variant="ghost" defaultExpandedKeys={['profile']}>
         <For each={collapseItems}>
           {(item) => (
@@ -16,11 +19,21 @@ export function CustomCollapseDemo() {
               {({ state, actions }) => (
                 <>
                   <div class="flex items-center gap-1.5 px-1.5 py-1.5">
-                    <Button variant="ghost" size="icon-sm" aria-expanded={state.expanded} aria-label="Toggle panel" onClick={actions.toggle}>
-                      <ChevronRightIcon class={cn('size-4 transition-transform', state.expanded && '-rotate-90')} />
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      aria-expanded={state.expanded}
+                      aria-label="Toggle panel"
+                      onClick={actions.toggle}
+                    >
+                      <ChevronRightIcon
+                        class={cn('size-4 transition-transform', state.expanded && '-rotate-90')}
+                      />
                     </Button>
                     <span class="flex-1 text-sm font-medium">{item.title}</span>
-                    <Button variant="outline" size="sm" onClick={actions.expand}>Open</Button>
+                    <Button variant="outline" size="sm" onClick={actions.expand}>
+                      Open
+                    </Button>
                   </div>
                   <CollapseContent class="pt-0">{item.content}</CollapseContent>
                 </>

@@ -1,1 +1,1 @@
-export{DisabledAlphaDemo}from'./demos'
+export { DisabledAlphaDemo } from './demos'

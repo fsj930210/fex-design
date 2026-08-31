@@ -4,11 +4,7 @@ import {
   moveDataTableColumn,
 } from '@fex-design/core/data-table/features/column-ordering'
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
-import {
-  DataTable,
-  tableFeatures,
-  type ColumnDef,
-} from '@fex-design/angular/primitive/data-table'
+import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/angular/primitive/data-table'
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { Button } from '@fex-design/angular/ui/button'
 import Card from '@fex-design/angular/ui/card'

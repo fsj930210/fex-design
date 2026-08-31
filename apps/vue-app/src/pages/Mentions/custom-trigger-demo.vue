@@ -24,7 +24,12 @@ const value = ref('')
       </MentionsTrigger>
       <MentionsContent>
         <MentionsList>
-          <MentionsItem v-for="user in mentionUsers" :key="user.id" :item-key="user.id" :value="user.name">
+          <MentionsItem
+            v-for="user in mentionUsers"
+            :key="user.id"
+            :item-key="user.id"
+            :value="user.name"
+          >
             {{ user.name }}
           </MentionsItem>
         </MentionsList>

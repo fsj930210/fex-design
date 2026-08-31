@@ -1,1 +1,13 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{Bubble,BubbleContent}from'@fex-design/angular/primitive/bubble';import{Button}from'@fex-design/angular/ui/button';import Card from'@fex-design/angular/ui/card';@Component({selector:'fex-bubble-links-buttons-demo',standalone:true,imports:[Card,Bubble,BubbleContent,Button],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./links-buttons-demo.component.html'})export class BubbleLinksButtonsDemoComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Bubble, BubbleContent } from '@fex-design/angular/primitive/bubble'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
+export
+@Component({
+  selector: 'fex-bubble-links-buttons-demo',
+  standalone: true,
+  imports: [Card, Bubble, BubbleContent, Button],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './links-buttons-demo.component.html',
+})
+class BubbleLinksButtonsDemoComponent {}

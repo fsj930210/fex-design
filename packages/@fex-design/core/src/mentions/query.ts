@@ -26,9 +26,7 @@ export function parseMentionsQuery({
   const beforeCursor = value.slice(0, selectionStart)
   const normalizedPrefixes = normalizeMentionsPrefixes(prefixes)
 
-  let match:
-    | { prefix: string; start: number; text: string }
-    | undefined
+  let match: { prefix: string; start: number; text: string } | undefined
 
   for (const prefix of normalizedPrefixes) {
     const start = beforeCursor.lastIndexOf(prefix)

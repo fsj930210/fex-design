@@ -38,8 +38,8 @@ Do not import package internals such as `src/**`, `dist/**`, or removed root sho
 
 Complex cross-framework primitives should keep framework-free state in `@fex-design/core` and bridge `getSnapshot + subscribe` through the framework helper:
 
-| Framework | Adapter                                                     |
-| --------- | ----------------------------------------------------------- |
+| Framework | Adapter                                                 |
+| --------- | ------------------------------------------------------- |
 | React     | `@fex-design/react/hooks/use-core-store`                |
 | Vue       | `@fex-design/vue/composables/use-core-store`            |
 | Solid     | `@fex-design/solid/primitives/create-core-store-signal` |

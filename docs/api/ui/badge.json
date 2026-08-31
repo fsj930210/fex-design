@@ -1,0 +1,70 @@
+{
+  "name": "Badge",
+  "slug": "badge",
+  "layer": "ui",
+  "status": "stable",
+  "description": "Badge 的快捷附着入口；BadgeGroup 直接重导出 Primitive 实现。",
+  "importPath": {
+    "react": "@fex-design/react/ui/badge",
+    "vue": "@fex-design/vue/ui/badge",
+    "solid": "@fex-design/solid/ui/badge",
+    "svelte": "@fex-design/svelte/ui/badge",
+    "angular": "@fex-design/angular/ui/badge"
+  },
+  "props": [
+    {
+      "name": "dot",
+      "type": "boolean",
+      "default": false,
+      "description": "使用独立 BadgeDot 作为附着标记。"
+    },
+    { "name": "count", "type": "framework-native content", "description": "显示内容。" },
+    { "name": "color", "type": "BadgeColor", "description": "五种内置语义颜色或任意 CSS 颜色值。" },
+    { "name": "overflowCount", "type": "number", "description": "数字封顶。" },
+    { "name": "showZero", "type": "boolean", "default": false, "description": "显示零值。" },
+    {
+      "name": "offset",
+      "type": "BadgeOffset",
+      "default": "[0, 0]",
+      "description": "附着时相对默认右上角的位置偏移。"
+    },
+    {
+      "name": "classNames",
+      "type": "BadgeClassNames",
+      "description": "分别定制 root、content 和 indicator 的类名。"
+    },
+    {
+      "name": "styles",
+      "type": "BadgeStyles",
+      "description": "分别定制 root、content 和 indicator 的行内样式。"
+    }
+  ],
+  "events": [],
+  "cssVariables": ["--badge-color", "--badge-color-foreground"],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "展示数字附着、自定义内容附着和独立 BadgeDot 小圆点。"
+    },
+    { "id": "custom", "title": "自定义内容", "description": "直接显示自定义短内容。" },
+    { "id": "zero", "title": "零值显示", "description": "使用 Switch 控制零值是否显示。" },
+    { "id": "overflow", "title": "封顶数字", "description": "超过 overflowCount 后显示为 N+。" },
+    { "id": "dot", "title": "小圆点", "description": "附着没有数字内容的小圆点。" },
+    { "id": "colors", "title": "多彩徽标", "description": "展示预设色和 CSS 自定义颜色。" },
+    {
+      "id": "ribbon",
+      "title": "BadgeRibbon 结构化组合",
+      "description": "将 Ribbon 组合到容器边缘。"
+    },
+    {
+      "id": "group",
+      "title": "BadgeGroup 集合溢出",
+      "description": "直接重导出 Primitive BadgeGroup。"
+    },
+    { "id": "direction", "title": "LTR 与 RTL", "description": "对比逻辑行内结束侧的附着位置。" },
+    { "id": "standalone", "title": "独立使用", "description": "不包裹内容时直接显示徽标。" },
+    { "id": "offset", "title": "自定义位置偏移", "description": "对比默认位置和 offset 偏移。" },
+    { "id": "styling", "title": "结构化样式", "description": "定制 root、content 和 indicator。" }
+  ]
+}

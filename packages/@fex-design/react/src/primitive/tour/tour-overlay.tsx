@@ -24,11 +24,13 @@ export interface TourOverlayProps {
 }
 
 export function TourOverlay({ children, className, style }: TourOverlayProps) {
-  const { snapshot, overlay, closeOnOverlayClick, controller, defaultGap, zIndex } = useTourContext('TourOverlay')
+  const { snapshot, overlay, closeOnOverlayClick, controller, defaultGap, zIndex } =
+    useTourContext('TourOverlay')
   const maskId = `tour-spotlight-mask-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
   const step = snapshot.currentStep
   const mask = step?.mask !== false && overlay
-  const color = typeof step?.mask === 'object' && step.mask.color ? step.mask.color : 'rgba(15, 23, 42, 0.58)'
+  const color =
+    typeof step?.mask === 'object' && step.mask.color ? step.mask.color : 'rgba(15, 23, 42, 0.58)'
   const gap = step?.gap?.offset ?? defaultGap
   const target = snapshot.targetRect
   const paddingX = Array.isArray(gap) ? gap[0] : gap
@@ -46,7 +48,11 @@ export function TourOverlay({ children, className, style }: TourOverlayProps) {
   })
   const props = {
     className: cn(tourOverlayClassName, className),
-    style: { pointerEvents: step?.disabledInteraction ? 'auto' : 'none', zIndex: zIndex - 1, ...style },
+    style: {
+      pointerEvents: step?.disabledInteraction ? 'auto' : 'none',
+      zIndex: zIndex - 1,
+      ...style,
+    },
     onClick,
     'data-slot': 'tour-overlay',
   } satisfies TourOverlayRenderProps['props']
@@ -55,7 +61,12 @@ export function TourOverlay({ children, className, style }: TourOverlayProps) {
   if (typeof children === 'function') return children(renderProps)
   return (
     <div {...props}>
-      <svg aria-hidden="true" className="size-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <svg
+        aria-hidden="true"
+        className="size-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
         <defs>
           <mask id={maskId}>
             <rect width="100" height="100" fill="white" />
@@ -70,12 +81,7 @@ export function TourOverlay({ children, className, style }: TourOverlayProps) {
             ) : null}
           </mask>
         </defs>
-        <rect
-          width="100"
-          height="100"
-          fill={color}
-          mask={`url(#${maskId})`}
-        />
+        <rect width="100" height="100" fill={color} mask={`url(#${maskId})`} />
       </svg>
     </div>
   )

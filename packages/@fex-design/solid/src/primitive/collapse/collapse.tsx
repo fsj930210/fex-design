@@ -150,7 +150,10 @@ export function Collapse(props: CollapseProps) {
         {...rest}
         data-slot="collapse"
         data-variant={context.variant()}
-        class={cn(collapseRootClassName({ variant: context.variant(), size: context.size() }), local.class)}
+        class={cn(
+          collapseRootClassName({ variant: context.variant(), size: context.size() }),
+          local.class,
+        )}
       >
         {local.children}
       </div>
@@ -207,8 +210,10 @@ export function CollapseItem(props: CollapseItemProps) {
   )
 }
 
-export interface CollapseTriggerProps
-  extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+export interface CollapseTriggerProps extends Omit<
+  JSX.ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
   showIcon?: boolean
   children?:
     | JSX.Element
@@ -249,9 +254,7 @@ export function CollapseTrigger(props: CollapseTriggerProps) {
       state: state(),
       icon:
         local.showIcon === false ? null : (
-          <ChevronRightIcon
-            class={cn(collapseIconClassName, state().expanded && '-rotate-90')}
-          />
+          <ChevronRightIcon class={cn(collapseIconClassName, state().expanded && '-rotate-90')} />
         ),
     })
   }
@@ -270,9 +273,7 @@ export function CollapseTrigger(props: CollapseTriggerProps) {
     >
       <span class="min-w-0 flex-1">{local.children}</span>
       {local.showIcon === false ? null : (
-        <ChevronRightIcon
-          class={cn(collapseIconClassName, state().expanded ? '-rotate-90' : '')}
-        />
+        <ChevronRightIcon class={cn(collapseIconClassName, state().expanded ? '-rotate-90' : '')} />
       )}
     </Button>
   )
@@ -303,7 +304,9 @@ export function CollapseContent(props: CollapseContentProps) {
         data-state={expanded() ? 'open' : 'closed'}
         class={cn(collapseContentInnerClassName({ variant: collapse.variant() }), local.class)}
       >
-        {typeof local.children === 'function' ? local.children({ expanded: expanded() }) : local.children}
+        {typeof local.children === 'function'
+          ? local.children({ expanded: expanded() })
+          : local.children}
       </div>
     </div>
   )

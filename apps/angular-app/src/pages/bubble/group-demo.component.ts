@@ -1,1 +1,12 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{Bubble,BubbleContent,BubbleGroup}from'@fex-design/angular/primitive/bubble';import Card from'@fex-design/angular/ui/card';@Component({selector:'fex-bubble-group-demo',standalone:true,imports:[Card,Bubble,BubbleContent,BubbleGroup],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./group-demo.component.html'})export class BubbleGroupDemoComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Bubble, BubbleContent, BubbleGroup } from '@fex-design/angular/primitive/bubble'
+import Card from '@fex-design/angular/ui/card'
+export
+@Component({
+  selector: 'fex-bubble-group-demo',
+  standalone: true,
+  imports: [Card, Bubble, BubbleContent, BubbleGroup],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './group-demo.component.html',
+})
+class BubbleGroupDemoComponent {}

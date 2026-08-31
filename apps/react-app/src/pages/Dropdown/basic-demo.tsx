@@ -6,11 +6,19 @@ export function BasicDemo() {
   return (
     <Dropdown.DropdownRoot>
       <Dropdown.DropdownTrigger>
-        {(props) => <button {...props} className={triggerClassName}>Actions</button>}
+        {(props) => (
+          <button {...props} className={triggerClassName}>
+            Actions
+          </button>
+        )}
       </Dropdown.DropdownTrigger>
       <PopoverPortal>
         <Dropdown.DropdownContent>
-          <MenuSurface><MenuAction>Edit</MenuAction><MenuAction>Duplicate</MenuAction><MenuAction>Archive</MenuAction></MenuSurface>
+          <MenuSurface>
+            <MenuAction>Edit</MenuAction>
+            <MenuAction>Duplicate</MenuAction>
+            <MenuAction>Archive</MenuAction>
+          </MenuSurface>
         </Dropdown.DropdownContent>
       </PopoverPortal>
     </Dropdown.DropdownRoot>

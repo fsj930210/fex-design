@@ -1,7 +1,4 @@
-import {
-  syncTextareaAutoSize,
-  type TextareaAutoSize,
-} from '@fex-design/core/textarea/autosize'
+import { syncTextareaAutoSize, type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
 import {
   textareaClearClassName,
   textareaFooterClassName,
@@ -133,8 +130,7 @@ export type TextareaClearRenderProps = Omit<ComponentProps<'button'>, 'ref' | 'c
 }
 
 export interface TextareaRootProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>,
-    UseTextareaOptions {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, UseTextareaOptions {
   status?: 'error' | 'warning' | undefined
   allowClear?: boolean | ((props: TextareaClearRenderProps) => ReactNode) | undefined
   ref?: Ref<HTMLDivElement> | undefined
@@ -181,7 +177,9 @@ export function TextareaRoot({
         className={cn(textareaRootClassName, className)}
       >
         {children}
-        {allowClear ? <TextareaClear>{typeof allowClear === 'function' ? allowClear : undefined}</TextareaClear> : null}
+        {allowClear ? (
+          <TextareaClear>{typeof allowClear === 'function' ? allowClear : undefined}</TextareaClear>
+        ) : null}
       </div>
     </TextareaContext>
   )

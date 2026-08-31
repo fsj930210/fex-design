@@ -5,4 +5,11 @@ import { useAttrs } from 'vue'
 defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 </script>
-<template><span v-bind="attrs" data-slot="avatar-group-count" :class="cn(avatarGroupOverflowClassName, attrs.class as string | undefined)"><slot /></span></template>
+<template>
+  <span
+    v-bind="attrs"
+    data-slot="avatar-group-count"
+    :class="cn(avatarGroupOverflowClassName, attrs.class as string | undefined)"
+    ><slot
+  /></span>
+</template>

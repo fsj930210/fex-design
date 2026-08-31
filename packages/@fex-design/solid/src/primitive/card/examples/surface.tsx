@@ -1,4 +1,10 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@fex-design/solid/primitive/card'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/solid/primitive/card'
 export function SurfaceExample() {
   return (
     <Card class="w-full max-w-2xl [--card-border:2px_solid_#7c3aed] [--card-header-background:#7c3aed] [--card-header-divider:none] [--card-content-background:#f5f3ff] [--card-footer-background:#facc15] [--card-footer-divider:2px_solid_#7c3aed]">

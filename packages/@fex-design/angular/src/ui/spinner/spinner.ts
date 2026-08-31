@@ -10,7 +10,12 @@ import { createHostClassName } from '../../signals/host-class'
   standalone: true,
   imports: [Spinner, SpinnerOverlay, SpinnerText],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class]': 'hostClassName()', '[style]': 'styles().root', '[attr.aria-busy]': 'spinning() ?? null', 'data-slot': 'spinner-container' },
+  host: {
+    '[class]': 'hostClassName()',
+    '[style]': 'styles().root',
+    '[attr.aria-busy]': 'spinning() ?? null',
+    'data-slot': 'spinner-container',
+  },
   templateUrl: './spinner.html',
 })
 export class SpinnerContainer {
@@ -20,8 +25,11 @@ export class SpinnerContainer {
   readonly indicator = input<TemplateRef<unknown> | undefined>()
   readonly classNames = input<SpinnerClassNames>({})
   readonly styles = input<SpinnerStyles<string>>({})
-  protected readonly hostClassName = createHostClassName(() => cn(spinnerContainerClassName, this.classNames().root))
-  protected readonly overlayClassName = () => cn(this.classNames().overlay, this.text() && 'flex-col')
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(spinnerContainerClassName, this.classNames().root),
+  )
+  protected readonly overlayClassName = () =>
+    cn(this.classNames().overlay, this.text() && 'flex-col')
 }
 
 export { Spinner }

@@ -15,7 +15,10 @@ export function FooterDemo() {
   const [value, setValue] = useState('')
 
   return (
-    <Card title="Footer" description="Footer is only a layout slot; actions are fully owned by the caller.">
+    <Card
+      title="Footer"
+      description="Footer is only a layout slot; actions are fully owned by the caller."
+    >
       <TextareaRoot
         value={value}
         onChange={setValue}

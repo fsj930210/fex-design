@@ -49,31 +49,31 @@ MentionsRoot accepts invalid, required, disabled, readOnly, and status. The defa
 
 ### MentionsRoot
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| value | string | undefined | Controlled text value. |
-| defaultValue | string | empty string | Initial uncontrolled text value. |
-| onChange | (value, meta) => void | undefined | Text value callback. |
-| prefix | string or string[] | @ | Active trigger prefixes. |
-| open | boolean | undefined | Controlled suggestion visibility. |
-| defaultOpen | boolean | false | Initial uncontrolled visibility. |
-| onOpenChange | (open, meta) => void | undefined | Visibility callback. |
-| onSearch | (text, meta) => void | undefined | Fires when the active prefix query changes. |
-| onSelect | (item, meta) => void | undefined | Fires when a registered item is selected. |
-| parseQuery | function | default parser | Advanced query parser override. |
-| invalid | boolean | false | Error styling state. |
-| required | boolean | false | Required ARIA state. |
-| disabled | boolean | false | Disables input interaction. |
-| readOnly | boolean | false | Keeps input readable but blocks writes. |
+| Prop         | Type                  | Default        | Description                                 |
+| ------------ | --------------------- | -------------- | ------------------------------------------- |
+| value        | string                | undefined      | Controlled text value.                      |
+| defaultValue | string                | empty string   | Initial uncontrolled text value.            |
+| onChange     | (value, meta) => void | undefined      | Text value callback.                        |
+| prefix       | string or string[]    | @              | Active trigger prefixes.                    |
+| open         | boolean               | undefined      | Controlled suggestion visibility.           |
+| defaultOpen  | boolean               | false          | Initial uncontrolled visibility.            |
+| onOpenChange | (open, meta) => void  | undefined      | Visibility callback.                        |
+| onSearch     | (text, meta) => void  | undefined      | Fires when the active prefix query changes. |
+| onSelect     | (item, meta) => void  | undefined      | Fires when a registered item is selected.   |
+| parseQuery   | function              | default parser | Advanced query parser override.             |
+| invalid      | boolean               | false          | Error styling state.                        |
+| required     | boolean               | false          | Required ARIA state.                        |
+| disabled     | boolean               | false          | Disables input interaction.                 |
+| readOnly     | boolean               | false          | Keeps input readable but blocks writes.     |
 
 ### MentionsItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| value | string | required | Item value passed to onSelect. |
-| itemKey | string or number | value | Stable registry key. |
-| disabled | boolean | false | Prevents activation and selection. |
-| data | unknown | undefined | Caller-owned metadata. |
+| Prop     | Type             | Default   | Description                        |
+| -------- | ---------------- | --------- | ---------------------------------- |
+| value    | string           | required  | Item value passed to onSelect.     |
+| itemKey  | string or number | value     | Stable registry key.               |
+| disabled | boolean          | false     | Prevents activation and selection. |
+| data     | unknown          | undefined | Caller-owned metadata.             |
 
 ## Notes
 

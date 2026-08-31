@@ -176,7 +176,10 @@ export class InputOTPInput {
   @HostListener('input', ['$event'])
   handleInput(event: InputEvent) {
     const element = event.currentTarget as HTMLInputElement
-    const result = this.applyText(element.value, event.inputType.startsWith('delete') ? 'delete' : 'input')
+    const result = this.applyText(
+      element.value,
+      event.inputType.startsWith('delete') ? 'delete' : 'input',
+    )
     if (!result.accepted) element.value = this.currentValue()
   }
 

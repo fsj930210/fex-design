@@ -91,7 +91,10 @@ type Province = keyof typeof locations
           >读取昵称</Button
         ><Button type="button" variant="outline" @click="instanceForm.reset()">重置</Button>
       </div>
-      <p class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground" aria-live="polite">
+      <p
+        class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground"
+        aria-live="polite"
+      >
         {{ instanceResult }}
       </p></FormHost
     ></Card

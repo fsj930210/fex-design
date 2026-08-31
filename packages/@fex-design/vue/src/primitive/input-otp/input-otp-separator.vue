@@ -11,5 +11,6 @@ const attrs = useAttrs()
     aria-hidden="true"
     data-slot="input-otp-separator"
     :class="cn(inputOTPSeparatorClassName, attrs.class as string | undefined)"
-  ><slot>–</slot></span>
+    ><slot>–</slot></span
+  >
 </template>

@@ -1,1 +1,1 @@
-{"extends":"../../../tsconfig.angular-workspace.json","include":["src/**/*.ts"]}
+{ "extends": "../../../tsconfig.angular-workspace.json", "include": ["src/**/*.ts"] }

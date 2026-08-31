@@ -1,5 +1,10 @@
 import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
-import type { AvatarClassNames, AvatarGroupClassNames, AvatarGroupStyles, AvatarStyles } from '@fex-design/core/avatar/types'
+import type {
+  AvatarClassNames,
+  AvatarGroupClassNames,
+  AvatarGroupStyles,
+  AvatarStyles,
+} from '@fex-design/core/avatar/types'
 import {
   Avatar as PrimitiveAvatar,
   AvatarFallback,
@@ -20,11 +25,36 @@ export interface AvatarProps extends Omit<ComponentProps<typeof PrimitiveAvatar>
   styles?: AvatarStyles<CSSProperties>
 }
 
-export function Avatar({ src, alt = '', srcSet, fallback, children, className, style, classNames, styles, ...props }: AvatarProps) {
+export function Avatar({
+  src,
+  alt = '',
+  srcSet,
+  fallback,
+  children,
+  className,
+  style,
+  classNames,
+  styles,
+  ...props
+}: AvatarProps) {
   return (
-    <PrimitiveAvatar {...props} className={cn(className, classNames?.root)} style={{ ...style, ...styles?.root }}>
-      {src ? <AvatarImage src={src} alt={alt} srcSet={srcSet} className={classNames?.image} style={styles?.image} /> : null}
-      <AvatarFallback className={classNames?.fallback} style={styles?.fallback}>{fallback ?? children}</AvatarFallback>
+    <PrimitiveAvatar
+      {...props}
+      className={cn(className, classNames?.root)}
+      style={{ ...style, ...styles?.root }}
+    >
+      {src ? (
+        <AvatarImage
+          src={src}
+          alt={alt}
+          srcSet={srcSet}
+          className={classNames?.image}
+          style={styles?.image}
+        />
+      ) : null}
+      <AvatarFallback className={classNames?.fallback} style={styles?.fallback}>
+        {fallback ?? children}
+      </AvatarFallback>
     </PrimitiveAvatar>
   )
 }
@@ -36,13 +66,33 @@ export interface AvatarGroupProps extends ComponentProps<typeof PrimitiveAvatarG
   styles?: AvatarGroupStyles<CSSProperties>
 }
 
-export function AvatarGroup({ maxCount, renderOverflow, children, className, style, classNames, styles, ...props }: AvatarGroupProps) {
-  const { visibleItems, overflowItems, overflowCount } = splitOverflowItems(Children.toArray(children), maxCount)
+export function AvatarGroup({
+  maxCount,
+  renderOverflow,
+  children,
+  className,
+  style,
+  classNames,
+  styles,
+  ...props
+}: AvatarGroupProps) {
+  const { visibleItems, overflowItems, overflowCount } = splitOverflowItems(
+    Children.toArray(children),
+    maxCount,
+  )
   return (
-    <PrimitiveAvatarGroup {...props} className={cn(className, classNames?.root)} style={{ ...style, ...styles?.root }}>
+    <PrimitiveAvatarGroup
+      {...props}
+      className={cn(className, classNames?.root)}
+      style={{ ...style, ...styles?.root }}
+    >
       {visibleItems}
       {overflowCount > 0
-        ? renderOverflow?.(overflowCount, overflowItems) ?? <AvatarGroupCount className={classNames?.overflow} style={styles?.overflow}>+{overflowCount}</AvatarGroupCount>
+        ? (renderOverflow?.(overflowCount, overflowItems) ?? (
+            <AvatarGroupCount className={classNames?.overflow} style={styles?.overflow}>
+              +{overflowCount}
+            </AvatarGroupCount>
+          ))
         : null}
     </PrimitiveAvatarGroup>
   )

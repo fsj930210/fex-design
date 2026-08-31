@@ -1,2 +1,17 @@
-import { ChangeDetectionStrategy,Component } from '@angular/core';import { Timeline,TimelineContent,TimelineIndicator,TimelineItem } from '@fex-design/angular/primitive/timeline';import { Card } from '@fex-design/angular/ui/card';
-@Component({selector:'fex-timeline-placement-demo',standalone:true,imports:[Card,Timeline,TimelineItem,TimelineIndicator,TimelineContent],changeDetection:ChangeDetectionStrategy.OnPush,host:{class:'block'},templateUrl:'./placement-demo.component.html'}) export class PlacementDemoComponent {}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import {
+  Timeline,
+  TimelineContent,
+  TimelineIndicator,
+  TimelineItem,
+} from '@fex-design/angular/primitive/timeline'
+import { Card } from '@fex-design/angular/ui/card'
+@Component({
+  selector: 'fex-timeline-placement-demo',
+  standalone: true,
+  imports: [Card, Timeline, TimelineItem, TimelineIndicator, TimelineContent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block' },
+  templateUrl: './placement-demo.component.html',
+})
+export class PlacementDemoComponent {}

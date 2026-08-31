@@ -13,18 +13,21 @@ import { useCoreStore } from '../../composables/use-core-store'
 import { inputOTPContextKey } from './context'
 
 defineOptions({ inheritAttrs: false })
-const props = withDefaults(defineProps<{
-  value?: InputOTPValue
-  defaultValue?: InputOTPValue
-  disabled?: boolean
-  readOnly?: boolean
-  invalid?: boolean
-  isComplete?: (value: InputOTPValue, segments: readonly InputOTPSegmentSnapshot[]) => boolean
-}>(), {
-  disabled: false,
-  readOnly: false,
-  invalid: false,
-})
+const props = withDefaults(
+  defineProps<{
+    value?: InputOTPValue
+    defaultValue?: InputOTPValue
+    disabled?: boolean
+    readOnly?: boolean
+    invalid?: boolean
+    isComplete?: (value: InputOTPValue, segments: readonly InputOTPSegmentSnapshot[]) => boolean
+  }>(),
+  {
+    disabled: false,
+    readOnly: false,
+    invalid: false,
+  },
+)
 const emit = defineEmits<{
   change: [value: InputOTPValue, meta: InputOTPChangeMeta]
   complete: [value: InputOTPValue, meta: InputOTPCompleteMeta]

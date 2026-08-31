@@ -25,20 +25,20 @@
 
 ## Button API
 
-| 名称             | 类型                                                                                                                          | 默认值        | 说明                               |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------------- |
-| variant          | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                               | 'outlined'    | 按钮结构变体。                     |
-| color            | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                    | —             | 可选语义配色；未设置时为默认白底按钮。 |
-| size             | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'     | 控件尺寸。                         |
-| effect           | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined     | 可选交互动效；默认不启用。         |
-| icon             | 框架内容类型                                                                                                                  | `undefined`   | 普通状态图标。                     |
-| iconPlacement    | 'start' \| 'end'                                                                                                              | 'start'       | 图标或加载指示器的位置。           |
-| loading          | `boolean`                                                                                                                     | `false`       | 是否处于加载状态；加载时禁止交互。 |
-| loadingIndicator | 框架内容类型                                                                                                                  | `LoadingIcon` | 自定义加载指示器。                 |
-| disabled         | `boolean`                                                                                                                     | `false`       | 是否禁用按钮。                     |
-| type             | 'button' \| 'submit' \| 'reset'                                                                                               | 'button'      | 原生按钮类型。                     |
-| 原生属性         | `ComponentProps<'button'>`                                                                                                    | —             | 透传原生属性与事件。               |
-| 元素访问         | ref                                                                                                                           | —             | 获取原生 `HTMLButtonElement`。     |
+| 名称             | 类型                                                                                                                          | 默认值        | 说明                                   |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------- |
+| variant          | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                             | 'outlined'    | 按钮结构变体。                         |
+| color            | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                     | —             | 可选语义配色；未设置时为默认白底按钮。 |
+| size             | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'     | 控件尺寸。                             |
+| effect           | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined     | 可选交互动效；默认不启用。             |
+| icon             | 框架内容类型                                                                                                                  | `undefined`   | 普通状态图标。                         |
+| iconPlacement    | 'start' \| 'end'                                                                                                              | 'start'       | 图标或加载指示器的位置。               |
+| loading          | `boolean`                                                                                                                     | `false`       | 是否处于加载状态；加载时禁止交互。     |
+| loadingIndicator | 框架内容类型                                                                                                                  | `LoadingIcon` | 自定义加载指示器。                     |
+| disabled         | `boolean`                                                                                                                     | `false`       | 是否禁用按钮。                         |
+| type             | 'button' \| 'submit' \| 'reset'                                                                                               | 'button'      | 原生按钮类型。                         |
+| 原生属性         | `ComponentProps<'button'>`                                                                                                    | —             | 透传原生属性与事件。                   |
+| 元素访问         | ref                                                                                                                           | —             | 获取原生 `HTMLButtonElement`。         |
 
 ## 视觉类型
 

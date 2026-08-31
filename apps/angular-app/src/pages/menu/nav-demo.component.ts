@@ -8,7 +8,16 @@ import { navListClassName, navPanelClassName, navTriggerClassName } from './demo
 @Component({
   selector: 'app-menu-nav-demo',
   standalone: true,
-  imports: [MenuRoot, MenuList, MenuItem, Popover, PopoverTrigger, PopoverPortal, DropdownContent, ChevronDownIcon],
+  imports: [
+    MenuRoot,
+    MenuList,
+    MenuItem,
+    Popover,
+    PopoverTrigger,
+    PopoverPortal,
+    DropdownContent,
+    ChevronDownIcon,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './nav-demo.component.html',
 })
@@ -22,5 +31,7 @@ export class MenuNavDemoComponent {
   protected readonly navListClassName = navListClassName
   protected readonly navPanelClassName = navPanelClassName
   protected readonly navTriggerClassName = navTriggerClassName
-  protected anchor(label: string) { return '#' + label.toLowerCase().replace(' ', '-') }
+  protected anchor(label: string) {
+    return '#' + label.toLowerCase().replace(' ', '-')
+  }
 }

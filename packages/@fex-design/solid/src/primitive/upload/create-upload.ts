@@ -1,9 +1,6 @@
 import { createUploadController } from '@fex-design/core/upload/create-upload-controller'
 import type { FileMd5FeatureApi } from '@fex-design/core/upload/features/file-md5'
-import type {
-  MultipartFeatureApi,
-  UploadPart,
-} from '@fex-design/core/upload/features/multipart'
+import type { MultipartFeatureApi, UploadPart } from '@fex-design/core/upload/features/multipart'
 import type { PreviewFeatureApi } from '@fex-design/core/upload/features/preview'
 import type {
   UploadController,

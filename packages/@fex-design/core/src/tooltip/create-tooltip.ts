@@ -5,11 +5,10 @@ import {
 } from '../overlay/create-floating-overlay'
 import type { FloatingAlign, FloatingSide } from '../floating/placement'
 
-export interface TooltipOptions
-  extends Omit<
-    FloatingOverlayOptions,
-    'allowedTriggers' | 'arrow' | 'dismiss' | 'modal' | 'trigger'
-  > {}
+export interface TooltipOptions extends Omit<
+  FloatingOverlayOptions,
+  'allowedTriggers' | 'arrow' | 'dismiss' | 'modal' | 'trigger'
+> {}
 
 export type Tooltip = Omit<FloatingOverlay, 'setOptions'> & {
   setOptions: (options: TooltipOptions) => void

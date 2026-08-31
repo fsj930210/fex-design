@@ -76,9 +76,7 @@ export function ValuePreview(props: { value: CalendarValue | readonly CalendarVa
       ? value.map((item) => formatDatePickerValue(item, { picker: 'date' })).join(', ')
       : formatDatePickerValue(value as CalendarValue | null, { picker: 'date' })
   }
-  return (
-    <p class="mt-1.5 w-full text-xs text-muted-foreground">当前值：{text() || '未选择'}</p>
-  )
+  return <p class="mt-1.5 w-full text-xs text-muted-foreground">当前值：{text() || '未选择'}</p>
 }
 
 export function RangePreview(props: { value: CalendarRange<CalendarValue> }) {

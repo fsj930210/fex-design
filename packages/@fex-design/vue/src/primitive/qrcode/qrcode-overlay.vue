@@ -7,7 +7,9 @@ defineOptions({ inheritAttrs: false })
 
 const props = defineProps<{ class?: string }>()
 const attrs = useAttrs()
-const className = computed(() => cn(qrcodeOverlayClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeOverlayClassName, attrs.class as string | undefined, props.class),
+)
 </script>
 
 <template>

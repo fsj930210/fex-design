@@ -3,7 +3,11 @@
 import { createThemeController } from '@fex-design/core/theme/create-theme-controller'
 import { THEME_MEDIA } from '@fex-design/core/theme/constants'
 import { getSystemTheme } from '@fex-design/core/theme/system-theme'
-import type { ThemeController, ThemeControllerOptions, ThemeScope } from '@fex-design/core/theme/types'
+import type {
+  ThemeController,
+  ThemeControllerOptions,
+  ThemeScope,
+} from '@fex-design/core/theme/types'
 import {
   createElement,
   use,
@@ -50,7 +54,9 @@ const ActiveThemeProvider: FC<ActiveThemeProviderProps> = ({
   }
 
   if (scope === 'root' && !options.storageKey && !options.forcedTheme) {
-    throw new Error("ThemeProvider scope='root' requires storageKey unless forcedTheme is provided.")
+    throw new Error(
+      "ThemeProvider scope='root' requires storageKey unless forcedTheme is provided.",
+    )
   }
 
   if (!controllerRef.current) {
@@ -157,4 +163,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   )
 }
 
-export type { ColorScheme, ThemeAttribute, ThemeScope, ThemeSnapshot } from '@fex-design/core/theme/types'
+export type {
+  ColorScheme,
+  ThemeAttribute,
+  ThemeScope,
+  ThemeSnapshot,
+} from '@fex-design/core/theme/types'

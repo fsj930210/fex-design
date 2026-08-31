@@ -9,7 +9,9 @@ import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 
 const tagColors: Record<string, string> = {
-  react: '#0284c7', vue: '#059669', angular: '#dc2626',
+  react: '#0284c7',
+  vue: '#059669',
+  angular: '#dc2626',
 }
 
 export function CustomTagDemo() {
@@ -22,7 +24,16 @@ export function CustomTagDemo() {
         <SelectTrigger
           placeholder="请选择框架"
           tagRender={(option, context) => (
-            <Tag size="sm" closable color={tagColors[String(option.value)] ?? 'neutral'} onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => { event.stopPropagation(); context.remove() }}>
+            <Tag
+              size="sm"
+              closable
+              color={tagColors[String(option.value)] ?? 'neutral'}
+              onPointerDownCapture={(event) => event.preventDefault()}
+              onClose={(event) => {
+                event.stopPropagation()
+                context.remove()
+              }}
+            >
               {option.label}
             </Tag>
           )}

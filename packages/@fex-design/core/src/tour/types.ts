@@ -32,15 +32,7 @@ export interface TourRegisteredStep<TData = unknown> extends TourStepOptions<TDa
 }
 
 export interface TourChangeInfo<TData = unknown> {
-  reason:
-    | 'open'
-    | 'next'
-    | 'previous'
-    | 'go-to'
-    | 'skip'
-    | 'close'
-    | 'complete'
-    | 'target-missing'
+  reason: 'open' | 'next' | 'previous' | 'go-to' | 'skip' | 'close' | 'complete' | 'target-missing'
   step?: TourRegisteredStep<TData> | undefined
 }
 

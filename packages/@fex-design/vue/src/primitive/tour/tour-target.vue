@@ -11,10 +11,26 @@ const element = shallowRef<HTMLElement | null>(null)
 let unregister: (() => void) | undefined
 function setReference(value: Element | ComponentPublicInstance | null) {
   const component = value as (ComponentPublicInstance & { $el?: unknown }) | null
-  element.value = value instanceof HTMLElement ? value : component?.$el instanceof HTMLElement ? component.$el : null
+  element.value =
+    value instanceof HTMLElement
+      ? value
+      : component?.$el instanceof HTMLElement
+        ? component.$el
+        : null
   controller.refreshTarget()
 }
-onMounted(() => { unregister = controller.registerTarget(props.name, () => element.value) })
-onBeforeUnmount(() => { unregister?.(); controller.refreshTarget() })
+onMounted(() => {
+  unregister = controller.registerTarget(props.name, () => element.value)
+})
+onBeforeUnmount(() => {
+  unregister?.()
+  controller.refreshTarget()
+})
 </script>
-<template><slot :props="{ ...attrs, 'data-tour-target': props.name }" :ref="setReference" :state="snapshot" /></template>
+<template>
+  <slot
+    :props="{ ...attrs, 'data-tour-target': props.name }"
+    :ref="setReference"
+    :state="snapshot"
+  />
+</template>

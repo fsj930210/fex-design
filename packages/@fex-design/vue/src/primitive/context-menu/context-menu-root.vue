@@ -46,9 +46,7 @@ type ContextMenuRootProps<T> = {
   hoverOpenDelay?: number
   hoverCloseDelay?: number
 }
-type ContextMenuChangeInfo<T> = Parameters<
-  NonNullable<ContextMenuOptions<T>['onOpenChange']>
->[1]
+type ContextMenuChangeInfo<T> = Parameters<NonNullable<ContextMenuOptions<T>['onOpenChange']>>[1]
 const props = withDefaults(defineProps<ContextMenuRootProps<TPayload>>(), {
   open: undefined,
   defaultOpen: false,
@@ -58,16 +56,14 @@ const props = withDefaults(defineProps<ContextMenuRootProps<TPayload>>(), {
 })
 const emit = defineEmits<{ openChange: [boolean, unknown] }>()
 const localOpen = ref(props.defaultOpen)
-const controller = createContextMenuController<TPayload>(
-  {
-    ...props,
-    open: props.open ?? localOpen.value,
-    onOpenChange(open: boolean, info: ContextMenuChangeInfo<TPayload>) {
-      if (props.open === undefined) localOpen.value = open
-      emit('openChange', open, info)
-    },
-  } as unknown as ContextMenuOptions<TPayload>,
-)
+const controller = createContextMenuController<TPayload>({
+  ...props,
+  open: props.open ?? localOpen.value,
+  onOpenChange(open: boolean, info: ContextMenuChangeInfo<TPayload>) {
+    if (props.open === undefined) localOpen.value = open
+    emit('openChange', open, info)
+  },
+} as unknown as ContextMenuOptions<TPayload>)
 const snapshot = useCoreStore(controller)
 watchEffect(() =>
   controller.setOptions({

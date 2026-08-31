@@ -1,25 +1,37 @@
 <script setup lang="ts">
-import { badgeClassName, type BadgeStyleProps } from '@fex-design/styles/badge'
+import { isBadgePresetColor, type BadgeOptions } from '@fex-design/core'
+import { badgeClassName } from '@fex-design/styles/badge'
 import { cn } from '@fex/utils'
 import { computed, useAttrs } from 'vue'
 
 defineOptions({ name: 'Badge', inheritAttrs: false })
 
-const props = defineProps<{
-  variant?: BadgeStyleProps['variant']
-}>()
+const props = defineProps<BadgeOptions>()
 
 const attrs = useAttrs()
-const variant = computed(() => props.variant ?? 'default')
+const presetColor = computed(() => (isBadgePresetColor(props.color) ? props.color : undefined))
+const customColor = computed(() => (props.color && !presetColor.value ? props.color : undefined))
+const value = computed(() =>
+  typeof props.count === 'number' &&
+  props.overflowCount != null &&
+  props.count > props.overflowCount
+    ? `${props.overflowCount}+`
+    : props.count,
+)
+const visible = computed(
+  () => (value.value != null && (value.value !== 0 || props.showZero)) || value.value == null,
+)
 </script>
 
 <template>
   <span
+    v-if="visible"
     v-bind="attrs"
     data-slot="badge"
-    :data-variant="variant"
-    :class="cn(badgeClassName({ variant }), attrs.class as string | undefined)"
+    :data-color="props.color ?? 'default'"
+    :class="cn(badgeClassName({ color: presetColor }), attrs.class as string | undefined)"
+    :style="[{ '--badge-color': customColor }, attrs.style]"
   >
-    <slot />
+    {{ value ?? '' }}<slot v-if="value == null" />
   </span>
 </template>

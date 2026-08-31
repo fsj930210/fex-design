@@ -42,10 +42,15 @@ export function InputPage() {
             </InputRoot>
           </Card>
 
-          <Card title="Input group" description="Connects related inputs, addons, and actions while each control keeps its own value.">
+          <Card
+            title="Input group"
+            description="Connects related inputs, addons, and actions while each control keeps its own value."
+          >
             <InputGroup className="max-w-xl">
               <InputGroupAddon>https://</InputGroupAddon>
-              <InputRoot><InputControl aria-label="Domain" placeholder="example.com" /></InputRoot>
+              <InputRoot>
+                <InputControl aria-label="Domain" placeholder="example.com" />
+              </InputRoot>
               <Button>Open</Button>
             </InputGroup>
           </Card>

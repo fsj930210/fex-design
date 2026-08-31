@@ -18,8 +18,10 @@ export interface ContextMenuOpenChangeInfo<T> {
   event?: unknown
 }
 
-export interface ContextMenuOptions<T>
-  extends Omit<FloatingOverlayOptions, 'trigger' | 'allowedTriggers' | 'onOpenChange'> {
+export interface ContextMenuOptions<T> extends Omit<
+  FloatingOverlayOptions,
+  'trigger' | 'allowedTriggers' | 'onOpenChange'
+> {
   onOpenChange?: (open: boolean, info: ContextMenuOpenChangeInfo<T>) => void
 }
 

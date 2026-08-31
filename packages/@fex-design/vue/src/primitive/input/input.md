@@ -9,12 +9,7 @@ Input primitives 将值协议、原生输入、清空和附属内容拆开，供
 
 ```vue
 <script setup lang="ts">
-import {
-  InputClear,
-  InputControl,
-  InputPrefix,
-  InputRoot,
-} from '@fex-design/vue/primitive/input'
+import { InputClear, InputControl, InputPrefix, InputRoot } from '@fex-design/vue/primitive/input'
 </script>
 <template>
   <InputRoot default-value="admin"

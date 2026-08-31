@@ -1,1 +1,9 @@
-import {Card} from'@fex-design/react/ui/card';import{ControlledPicker}from'./demo-picker';export function ControlledDemo(){return <Card title="受控模式" description="外部值通过 onChange 回流到所有原子部件。"><ControlledPicker/></Card>}
+import { Card } from '@fex-design/react/ui/card'
+import { ControlledPicker } from './demo-picker'
+export function ControlledDemo() {
+  return (
+    <Card title="受控模式" description="外部值通过 onChange 回流到所有原子部件。">
+      <ControlledPicker />
+    </Card>
+  )
+}

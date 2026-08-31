@@ -109,9 +109,7 @@
           >
             {{ loginForm.state.isSubmitting ? '提交中…' : '登录' }}
           </button>
-          <button button type="button" variant="outline" (click)="loginForm.reset()">
-            重置
-          </button>
+          <button button type="button" variant="outline" (click)="loginForm.reset()">重置</button>
         </div>
       </form>
     </fex-card>
@@ -375,13 +373,15 @@
         </ng-container>
         <div class="flex flex-wrap gap-1.5">
           <button button type="button" (click)="setNickname()">设置昵称</button
-          ><button button type="button" variant="outline" (click)="getNickname()">
-            读取昵称</button
+          ><button button type="button" variant="outline" (click)="getNickname()">读取昵称</button
           ><button button type="button" variant="outline" (click)="instanceForm.reset()">
             重置
           </button>
         </div>
-        <p class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground" aria-live="polite">
+        <p
+          class="rounded-md bg-muted-background px-3 py-2 text-sm text-muted-foreground"
+          aria-live="polite"
+        >
           {{ instanceResult() }}
         </p>
       </form>
@@ -589,10 +589,7 @@
           <button button class="w-fit" type="submit">提交 profile</button>
         </form>
         <div class="grid gap-2">
-          <form
-            [fexForm]="profileForm"
-            class="grid gap-2 rounded-md border border-border p-4"
-          >
+          <form [fexForm]="profileForm" class="grid gap-2 rounded-md border border-border p-4">
             <div fexFieldTitle>资料表单</div>
             <ng-container [fexField]="profileForm" name="name" #profileName="field"
               ><fex-field-root
@@ -636,10 +633,7 @@
             >
             <button button class="w-fit" type="submit">保存资料</button>
           </form>
-          <form
-            [fexForm]="securityForm"
-            class="grid gap-2 rounded-md border border-border p-4"
-          >
+          <form [fexForm]="securityForm" class="grid gap-2 rounded-md border border-border p-4">
             <div fexFieldTitle>安全表单</div>
             <ng-container
               [fexField]="securityForm"

@@ -40,5 +40,20 @@ export interface DatePickerTagProps extends Omit<ComponentProps<'span'>, 'onClos
 }
 
 export function DatePickerTag({ value, className, onRemove, ...props }: DatePickerTagProps) {
-  return <Tag {...props} data-slot="date-picker-tag" size="sm" closable={Boolean(onRemove)} className={className} onPointerDownCapture={(event) => event.stopPropagation()} onClose={(event) => { event.stopPropagation(); onRemove?.() }}>{value}</Tag>
+  return (
+    <Tag
+      {...props}
+      data-slot="date-picker-tag"
+      size="sm"
+      closable={Boolean(onRemove)}
+      className={className}
+      onPointerDownCapture={(event) => event.stopPropagation()}
+      onClose={(event) => {
+        event.stopPropagation()
+        onRemove?.()
+      }}
+    >
+      {value}
+    </Tag>
+  )
 }

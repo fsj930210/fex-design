@@ -1,1 +1,1 @@
-export{BasicDemo}from'./demos'
+export { BasicDemo } from './demos'

@@ -3,7 +3,10 @@ import { Card } from '@fex-design/solid/ui/card'
 
 export function IconDemo() {
   return (
-    <Card title="带 Icon 的例子" description="通过 Center 放置小 Logo，Modules 只为 Logo 背板留出必要空间。">
+    <Card
+      title="带 Icon 的例子"
+      description="通过 Center 放置小 Logo，Modules 只为 Logo 背板留出必要空间。"
+    >
       <QrCode.Root value="https://fex.design/qrcode/icon" size={176} errorLevel="H">
         <QrCode.Svg>
           <QrCode.Background />

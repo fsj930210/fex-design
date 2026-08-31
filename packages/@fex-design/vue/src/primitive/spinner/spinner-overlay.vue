@@ -5,4 +5,12 @@ import { useAttrs } from 'vue'
 defineOptions({ name: 'SpinnerOverlay', inheritAttrs: false })
 const attrs = useAttrs()
 </script>
-<template><div v-bind="attrs" data-slot="spinner-overlay" :class="cn(spinnerOverlayClassName, attrs.class as string | undefined)"><slot /></div></template>
+<template>
+  <div
+    v-bind="attrs"
+    data-slot="spinner-overlay"
+    :class="cn(spinnerOverlayClassName, attrs.class as string | undefined)"
+  >
+    <slot />
+  </div>
+</template>

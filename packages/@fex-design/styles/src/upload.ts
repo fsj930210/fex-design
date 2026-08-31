@@ -14,7 +14,9 @@ export const uploadItemClassName = cva([
 export const uploadPreviewClassName = cva([
   'flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-muted-background',
 ])
-export const uploadProgressClassName = cva(['h-1.5 w-full overflow-hidden rounded-full bg-muted-background'])
+export const uploadProgressClassName = cva([
+  'h-1.5 w-full overflow-hidden rounded-full bg-muted-background',
+])
 export const uploadProgressIndicatorClassName = cva([
   'h-full bg-primary transition-[width] duration-200',
 ])

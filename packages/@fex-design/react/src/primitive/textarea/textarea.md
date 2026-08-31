@@ -59,18 +59,18 @@ TextareaFooter is only a layout slot. Count, submit, model selection, attachment
 
 ### TextareaRoot
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| value | string | undefined | Controlled value. |
-| defaultValue | string | empty string | Initial uncontrolled value. |
-| onChange | (value, meta) => void | undefined | Value callback for input and clear. |
-| disabled | boolean | false | Disables input and clear behavior. |
-| readOnly | boolean | false | Keeps focusable input but blocks writes and clear. |
-| invalid | boolean | false | Error state. |
-| status | error or warning | undefined | Visual status. |
-| autoSize | boolean or minRows/maxRows object | undefined | Enables height sync. |
-| allowClear | boolean or render function | undefined | Optional inline clear shortcut. |
-| onClear | (meta) => void | undefined | Fires after a clear action. |
+| Prop         | Type                              | Default      | Description                                        |
+| ------------ | --------------------------------- | ------------ | -------------------------------------------------- |
+| value        | string                            | undefined    | Controlled value.                                  |
+| defaultValue | string                            | empty string | Initial uncontrolled value.                        |
+| onChange     | (value, meta) => void             | undefined    | Value callback for input and clear.                |
+| disabled     | boolean                           | false        | Disables input and clear behavior.                 |
+| readOnly     | boolean                           | false        | Keeps focusable input but blocks writes and clear. |
+| invalid      | boolean                           | false        | Error state.                                       |
+| status       | error or warning                  | undefined    | Visual status.                                     |
+| autoSize     | boolean or minRows/maxRows object | undefined    | Enables height sync.                               |
+| allowClear   | boolean or render function        | undefined    | Optional inline clear shortcut.                    |
+| onClear      | (meta) => void                    | undefined    | Fires after a clear action.                        |
 
 ### TextareaInput
 

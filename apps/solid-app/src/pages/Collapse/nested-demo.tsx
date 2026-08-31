@@ -1,4 +1,9 @@
-import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/solid/primitive/collapse'
+import {
+  Collapse,
+  CollapseContent,
+  CollapseItem,
+  CollapseTrigger,
+} from '@fex-design/solid/primitive/collapse'
 import { Card } from '@fex-design/solid/ui/card'
 import { collapseText } from './demo-data'
 

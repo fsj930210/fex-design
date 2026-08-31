@@ -8,7 +8,15 @@ import {
   avatarGroupOverflowClassName,
   type AvatarStyleProps,
 } from '@fex-design/styles/avatar'
-import { ChangeDetectionStrategy, Component, ElementRef, computed, effect, inject, input } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  input,
+} from '@angular/core'
 import { createHostClassName } from '../../signals/host-class'
 import { AvatarContext } from './avatar-context'
 @Component({
@@ -68,7 +76,13 @@ export class AvatarImage {
   protected readonly context = inject(AvatarContext)
   protected readonly hostClassName = createHostClassName(() => avatarImageHostClassName)
   protected readonly imageClass = computed(() => `${avatarImageClassName} ${this.class()}`)
-  constructor() { effect(() => { const src = this.src(); if (src) this.context.controller.load({ src }); else this.context.controller.reset() }) }
+  constructor() {
+    effect(() => {
+      const src = this.src()
+      if (src) this.context.controller.load({ src })
+      else this.context.controller.reset()
+    })
+  }
 }
 @Component({
   selector: 'avatar-fallback',

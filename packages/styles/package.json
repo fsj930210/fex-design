@@ -2,10 +2,6 @@
   "name": "@fex/styles",
   "private": true,
   "type": "module",
-  "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src/index.d.ts"
-  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -14,6 +10,10 @@
       "types": "./src/index.d.ts",
       "default": "./src/index.css"
     }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src/index.d.ts"
   },
   "dependencies": {
     "@fex/utils": "workspace:*"

@@ -14,9 +14,13 @@ export class ThemeStatusCardComponent {
   protected readonly snapshot = computed(() => this.provider().snapshot())
   protected readonly canSwitchTheme = computed(() => {
     const snapshot = this.snapshot()
-    return !snapshot.forcedTheme && snapshot.themes.includes('light') && snapshot.themes.includes('dark')
+    return (
+      !snapshot.forcedTheme && snapshot.themes.includes('light') && snapshot.themes.includes('dark')
+    )
   })
-  protected readonly nextTheme = computed(() => (this.snapshot().resolvedTheme === 'dark' ? 'light' : 'dark'))
+  protected readonly nextTheme = computed(() =>
+    this.snapshot().resolvedTheme === 'dark' ? 'light' : 'dark',
+  )
 
   protected switchTheme() {
     this.provider().setTheme(this.nextTheme())

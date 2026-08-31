@@ -37,8 +37,15 @@ const focusControl = ref<{ focus: () => void; blur: () => void } | null>(null)
           ><InputRoot class="max-w-md"
             ><InputControl name="email" placeholder="admin@example.com" type="email" /></InputRoot
         ></Card>
-        <Card title="Input group" description="Connects related inputs, addons, and actions while each control keeps its own value.">
-          <InputGroup class="max-w-xl"><InputGroupAddon>https://</InputGroupAddon><InputRoot><InputControl aria-label="Domain" placeholder="example.com" /></InputRoot><Button>Open</Button></InputGroup>
+        <Card
+          title="Input group"
+          description="Connects related inputs, addons, and actions while each control keeps its own value."
+        >
+          <InputGroup class="max-w-xl"
+            ><InputGroupAddon>https://</InputGroupAddon
+            ><InputRoot><InputControl aria-label="Domain" placeholder="example.com" /></InputRoot
+            ><Button>Open</Button></InputGroup
+          >
         </Card>
         <Card
           title="Controlled and uncontrolled"

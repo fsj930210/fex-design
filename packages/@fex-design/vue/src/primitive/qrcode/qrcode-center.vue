@@ -11,7 +11,9 @@ const props = withDefaults(defineProps<{ size?: number; class?: string }>(), { s
 const attrs = useAttrs()
 const { model } = useQrCode('QrCodeCenter')
 const rect = computed(() => getQrCodeCenterRect(model.value, props.size))
-const className = computed(() => cn(qrcodeCenterClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeCenterClassName, attrs.class as string | undefined, props.class),
+)
 </script>
 
 <template>

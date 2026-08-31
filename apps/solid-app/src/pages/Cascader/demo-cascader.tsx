@@ -1,1 +1,17 @@
-import{CascaderContent,CascaderPanel,CascaderRoot,CascaderTrigger,type CascaderRootProps}from'@fex-design/solid/primitive/cascader';export function DemoCascader(props:CascaderRootProps){return <CascaderRoot clearable placeholder="请选择地区" {...props}><CascaderTrigger/><CascaderContent><CascaderPanel/></CascaderContent></CascaderRoot>}
+import {
+  CascaderContent,
+  CascaderPanel,
+  CascaderRoot,
+  CascaderTrigger,
+  type CascaderRootProps,
+} from '@fex-design/solid/primitive/cascader'
+export function DemoCascader(props: CascaderRootProps) {
+  return (
+    <CascaderRoot clearable placeholder="请选择地区" {...props}>
+      <CascaderTrigger />
+      <CascaderContent>
+        <CascaderPanel />
+      </CascaderContent>
+    </CascaderRoot>
+  )
+}

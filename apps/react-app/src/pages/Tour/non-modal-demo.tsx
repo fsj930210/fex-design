@@ -12,7 +12,12 @@ export function NonModalTourDemo() {
         </div>
         <Tour.Portal>
           <Tour.Overlay />
-          <Tour.Step name="non-modal" target="non-modal-target" mask={false} disabledInteraction={false}>
+          <Tour.Step
+            name="non-modal"
+            target="non-modal-target"
+            mask={false}
+            disabledInteraction={false}
+          >
             <Tour.Content>
               <Tour.Arrow />
               <TourPanel title="非模态引导" description="页面其他区域和目标仍然可交互。" />

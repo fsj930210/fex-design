@@ -20,7 +20,17 @@ import { createHostClassName } from '../../signals/host-class'
 import { PopoverDomService, type PopoverPortalMount } from '../popover/popover-dom'
 
 function eventInfo(event: Event & Partial<PointerEvent>) {
-  return { target: event.target, currentTarget: event.currentTarget, clientX: event.clientX, clientY: event.clientY, button: event.button, pointerType: event.pointerType, event, preventDefault: event.preventDefault.bind(event), stopPropagation: event.stopPropagation.bind(event) }
+  return {
+    target: event.target,
+    currentTarget: event.currentTarget,
+    clientX: event.clientX,
+    clientY: event.clientY,
+    button: event.button,
+    pointerType: event.pointerType,
+    event,
+    preventDefault: event.preventDefault.bind(event),
+    stopPropagation: event.stopPropagation.bind(event),
+  }
 }
 
 @Component({
@@ -69,8 +79,12 @@ export class ContextMenu implements OnChanges, OnDestroy {
     })
   }
 
-  ngOnChanges() { this.syncOptions() }
-  ngOnDestroy() { this.controller.destroy() }
+  ngOnChanges() {
+    this.syncOptions()
+  }
+  ngOnDestroy() {
+    this.controller.destroy()
+  }
 }
 
 @Directive({
@@ -94,7 +108,10 @@ export class ContextMenuTrigger implements AfterViewInit, OnDestroy {
   @HostListener('contextmenu', ['$event'])
   contextMenuEvent(event: MouseEvent) {
     const element = this.elementRef.nativeElement
-    this.contextMenu.controller.openAt({ payload: this.payload, element, clientX: event.clientX, clientY: event.clientY, event }, eventInfo(event))
+    this.contextMenu.controller.openAt(
+      { payload: this.payload, element, clientX: event.clientX, clientY: event.clientY, event },
+      eventInfo(event),
+    )
   }
 
   @HostListener('keydown', ['$event'])
@@ -103,11 +120,16 @@ export class ContextMenuTrigger implements AfterViewInit, OnDestroy {
       event.preventDefault()
       const element = this.elementRef.nativeElement
       const rect = element.getBoundingClientRect()
-      this.contextMenu.controller.openAt({ payload: this.payload, element, clientX: rect.left, clientY: rect.bottom, event }, eventInfo(event))
+      this.contextMenu.controller.openAt(
+        { payload: this.payload, element, clientX: rect.left, clientY: rect.bottom, event },
+        eventInfo(event),
+      )
     }
   }
 
-  ngOnDestroy() { this.contextMenu.controller.overlay.setReferenceElement(null) }
+  ngOnDestroy() {
+    this.contextMenu.controller.overlay.setReferenceElement(null)
+  }
 }
 
 @Component({
@@ -124,9 +146,14 @@ export class ContextMenuPortal implements AfterViewInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private portalMount?: PopoverPortalMount
   ngAfterViewInit() {
-    this.portalMount = this.domService.mountFloatingElement(this.elementRef.nativeElement, this.contextMenu.controller.overlay.resolvePopupContainer())
+    this.portalMount = this.domService.mountFloatingElement(
+      this.elementRef.nativeElement,
+      this.contextMenu.controller.overlay.resolvePopupContainer(),
+    )
   }
-  ngOnDestroy() { this.portalMount?.cleanup() }
+  ngOnDestroy() {
+    this.portalMount?.cleanup()
+  }
 }
 
 @Component({
@@ -160,12 +187,17 @@ export class ContextMenuContent implements AfterViewInit, OnDestroy {
   protected readonly hostClassName = createHostClassName(this.contentClassName)
   ngAfterViewInit() {
     const element = this.elementRef.nativeElement
-    if (!this.portal) this.legacyPortalMount = this.domService.mountFloatingElement(element, this.contextMenu.controller.overlay.resolvePopupContainer())
+    if (!this.portal)
+      this.legacyPortalMount = this.domService.mountFloatingElement(
+        element,
+        this.contextMenu.controller.overlay.resolvePopupContainer(),
+      )
     this.contextMenu.contentElement = element
     this.contextMenu.controller.overlay.setFloatingElement(element)
   }
   ngOnDestroy() {
-    if (this.contextMenu.contentElement === this.elementRef.nativeElement) this.contextMenu.contentElement = null
+    if (this.contextMenu.contentElement === this.elementRef.nativeElement)
+      this.contextMenu.contentElement = null
     this.contextMenu.controller.overlay.setFloatingElement(null)
     this.legacyPortalMount?.cleanup()
   }
@@ -181,5 +213,8 @@ export class ContextMenuContent implements AfterViewInit, OnDestroy {
 export class ContextMenuItem {
   private readonly contextMenu = inject(ContextMenu)
   @HostListener('click', ['$event'])
-  click(event: MouseEvent) { if (!event.defaultPrevented) this.contextMenu.controller.overlay.close({ reason: 'manual', source: 'menu-item', event }) }
+  click(event: MouseEvent) {
+    if (!event.defaultPrevented)
+      this.contextMenu.controller.overlay.close({ reason: 'manual', source: 'menu-item', event })
+  }
 }

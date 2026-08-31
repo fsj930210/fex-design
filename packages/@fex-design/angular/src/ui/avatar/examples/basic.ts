@@ -5,6 +5,7 @@ import { Avatar } from '../avatar'
   selector: 'avatar-ui-basic-example',
   standalone: true,
   imports: [Avatar],
-  template: '<span avatar src="https://github.com/shadcn.png" alt="shadcn avatar" fallback="FX"></span>',
+  template:
+    '<span avatar src="https://github.com/shadcn.png" alt="shadcn avatar" fallback="FX"></span>',
 })
 export class BasicExample {}

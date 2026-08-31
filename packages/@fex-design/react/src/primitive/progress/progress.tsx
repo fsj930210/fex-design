@@ -72,7 +72,7 @@ export function Progress({
           ? 'var(--info)'
           : status === 'warning'
             ? 'var(--warning)'
-          : 'var(--primary)'
+            : 'var(--primary)'
   const circleStroke = stops
     ? `url(#${gradientId})`
     : typeof color === 'string'

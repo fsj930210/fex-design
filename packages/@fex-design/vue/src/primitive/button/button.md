@@ -8,11 +8,11 @@ Low-level Button family primitives with native element passthrough.
 
 ## Components
 
-| Component   | Element | Purpose                               |
-| ----------- | ------- | ------------------------------------- |
-| Button | button | Inherits the native button; all native attributes and events pass through. Native button foundation. |
-| ButtonIcon | span | Inherits the native span; all native attributes and events pass through. Icon container. |
-| ButtonGroup | div | Inherits the native div; all native attributes and events pass through. Layout and connected-button grouping. |
+| Component   | Element | Purpose                                                                                                       |
+| ----------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| Button      | button  | Inherits the native button; all native attributes and events pass through. Native button foundation.          |
+| ButtonIcon  | span    | Inherits the native span; all native attributes and events pass through. Icon container.                      |
+| ButtonGroup | div     | Inherits the native div; all native attributes and events pass through. Layout and connected-button grouping. |
 
 ## Examples
 

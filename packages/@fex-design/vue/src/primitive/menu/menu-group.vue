@@ -1,1 +1,3 @@
-<template><div role="group" data-slot="menu-group"><slot /></div></template>
+<template>
+  <div role="group" data-slot="menu-group"><slot /></div>
+</template>

@@ -1,9 +1,4 @@
-import {
-  expansionFeature,
-  focusFeature,
-  keyboardFeature,
-  selectionFeature,
-} from '@fex-design/core'
+import { expansionFeature, focusFeature, keyboardFeature, selectionFeature } from '@fex-design/core'
 import { Button } from '@fex-design/solid/ui/button'
 import { Card } from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'

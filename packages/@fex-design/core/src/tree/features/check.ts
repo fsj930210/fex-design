@@ -33,9 +33,7 @@ function getCheckedState<TNode extends TreeNodeData>(
     .getChildrenKeys(key)
     .filter((child) => !relations.getItem(child)?.disabled)
   if (enabledChildren.length === 0) return false
-  const childStates = enabledChildren.map((child) =>
-    getCheckedState(keys, child, mode, relations),
-  )
+  const childStates = enabledChildren.map((child) => getCheckedState(keys, child, mode, relations))
   if (childStates.every((state) => state === true)) return true
   return childStates.some((state) => state === true || state === 'indeterminate')
     ? 'indeterminate'

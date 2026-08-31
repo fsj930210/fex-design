@@ -11,10 +11,7 @@ import {
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex-design/core/calendar'
-import {
-  calendarCellClassName,
-  calendarWeekRangeCellClassName,
-} from '@fex-design/styles/calendar'
+import { calendarCellClassName, calendarWeekRangeCellClassName } from '@fex-design/styles/calendar'
 import { cn } from '@fex/utils'
 import { Fragment, type ComponentProps, type ReactNode, useState } from 'react'
 import { useControllableState } from '../../hooks/use-controllable-state'

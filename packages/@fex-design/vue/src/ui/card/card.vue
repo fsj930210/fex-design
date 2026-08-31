@@ -37,19 +37,27 @@ const props = defineProps<CardProps>()
         :class="props.classNames?.header"
         :style="props.styles?.header"
       >
-      <CardTitle v-if="$slots.title" :class="props.classNames?.title" :style="props.styles?.title">
-        <slot name="title" />
-      </CardTitle>
-      <CardDescription
-        v-if="$slots.description"
-        :class="props.classNames?.description"
-        :style="props.styles?.description"
-      >
-        <slot name="description" />
-      </CardDescription>
-      <CardExtra v-if="$slots.extra" :class="props.classNames?.extra" :style="props.styles?.extra">
-        <slot name="extra" />
-      </CardExtra>
+        <CardTitle
+          v-if="$slots.title"
+          :class="props.classNames?.title"
+          :style="props.styles?.title"
+        >
+          <slot name="title" />
+        </CardTitle>
+        <CardDescription
+          v-if="$slots.description"
+          :class="props.classNames?.description"
+          :style="props.styles?.description"
+        >
+          <slot name="description" />
+        </CardDescription>
+        <CardExtra
+          v-if="$slots.extra"
+          :class="props.classNames?.extra"
+          :style="props.styles?.extra"
+        >
+          <slot name="extra" />
+        </CardExtra>
       </CardHeader>
     </slot>
     <CardContent :class="props.classNames?.content" :style="props.styles?.content">

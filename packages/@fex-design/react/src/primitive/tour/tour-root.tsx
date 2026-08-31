@@ -65,10 +65,7 @@ export function TourRoot<TData = unknown>({
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
 
-  useIsomorphicLayoutEffect(
-    () => () => controller.destroy(),
-    [controller],
-  )
+  useIsomorphicLayoutEffect(() => () => controller.destroy(), [controller])
 
   return (
     <TourContext

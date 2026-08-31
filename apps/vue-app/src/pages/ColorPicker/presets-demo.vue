@@ -74,9 +74,7 @@ const value = ref('#1677FF')
   <Card
     title="预设颜色"
     description="打开面板后，可从预设分组选择颜色，也可使用右侧完整选择器编辑。"
-    ><ColorPickerRoot
-      :value="value"
-      @change="next => (value = next?.toString('oklch') ?? value)"
+    ><ColorPickerRoot :value="value" @change="(next) => (value = next?.toString('oklch') ?? value)"
       ><PopoverRoot placement="bottomLeft"
         ><PopoverTrigger v-slot="slot"
           ><button

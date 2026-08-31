@@ -1,2 +1,10 @@
-import { Component } from '@angular/core'; import { Avatar, AvatarFallback } from '../avatar'
-@Component({ selector: 'avatar-sizes-example', standalone: true, imports: [Avatar, AvatarFallback], template: '<div class="flex items-center gap-3"><avatar size="sm"><avatar-fallback>SM</avatar-fallback></avatar><avatar size="md"><avatar-fallback>MD</avatar-fallback></avatar><avatar size="lg"><avatar-fallback>LG</avatar-fallback></avatar></div>' }) export class SizesExample {}
+import { Component } from '@angular/core'
+import { Avatar, AvatarFallback } from '../avatar'
+@Component({
+  selector: 'avatar-sizes-example',
+  standalone: true,
+  imports: [Avatar, AvatarFallback],
+  template:
+    '<div class="flex items-center gap-3"><avatar size="sm"><avatar-fallback>SM</avatar-fallback></avatar><avatar size="md"><avatar-fallback>MD</avatar-fallback></avatar><avatar size="lg"><avatar-fallback>LG</avatar-fallback></avatar></div>',
+})
+export class SizesExample {}

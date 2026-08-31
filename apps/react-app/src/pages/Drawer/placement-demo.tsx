@@ -35,10 +35,7 @@ export function PlacementDemo() {
       <DrawerRoot placement={placement}>
         <DrawerTrigger>
           {(props) => (
-            <button
-              {...props}
-              className="rounded-md bg-primary px-3 py-2 text-primary-foreground"
-            >
+            <button {...props} className="rounded-md bg-primary px-3 py-2 text-primary-foreground">
               Open {placement}
             </button>
           )}

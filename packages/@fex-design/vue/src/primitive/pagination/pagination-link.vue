@@ -1,8 +1,5 @@
 ﻿<script setup lang="ts">
-import {
-  paginationLinkClassName,
-  paginationTextLinkClassName,
-} from '@fex-design/styles/pagination'
+import { paginationLinkClassName, paginationTextLinkClassName } from '@fex-design/styles/pagination'
 import { cn } from '@fex/utils'
 
 defineOptions({ inheritAttrs: false })

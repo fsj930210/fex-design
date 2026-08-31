@@ -4,7 +4,9 @@ import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primit
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'
 const colors: Record<string, string> = {
-  react: '#0284c7', vue: '#059669', angular: '#dc2626',
+  react: '#0284c7',
+  vue: '#059669',
+  angular: '#dc2626',
 }
 </script>
 <template>
@@ -14,7 +16,15 @@ const colors: Record<string, string> = {
     ><SelectRoot multiple :options="frameworkOptions" :default-value="['react', 'vue', 'angular']"
       ><SelectTrigger placeholder="请选择"
         ><template #tag="{ option, remove }"
-          ><Tag size="sm" closable :color="colors[String(option.value)] ?? 'neutral'" @pointerdown.capture.prevent @close.stop="remove">{{ option.label }}</Tag></template></SelectTrigger
+          ><Tag
+            size="sm"
+            closable
+            :color="colors[String(option.value)] ?? 'neutral'"
+            @pointerdown.capture.prevent
+            @close.stop="remove"
+            >{{ option.label }}</Tag
+          ></template
+        ></SelectTrigger
       ><SelectContent /></SelectRoot
   ></Demo>
 </template>

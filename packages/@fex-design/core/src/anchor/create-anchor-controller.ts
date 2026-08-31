@@ -1,10 +1,5 @@
 import { createStore } from '../store/create-store'
-import type {
-  AnchorController,
-  AnchorControllerOptions,
-  AnchorItem,
-  AnchorSnapshot,
-} from './types'
+import type { AnchorController, AnchorControllerOptions, AnchorItem, AnchorSnapshot } from './types'
 
 function equalKeys(left: readonly string[], right: readonly string[]) {
   return left.length === right.length && left.every((key, index) => key === right[index])

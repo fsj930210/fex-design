@@ -14,7 +14,7 @@ return <DataTable table={table} border />
 
 | 参数                                      | 类型                          | 默认值    | 必填 | 说明                   |
 | ----------------------------------------- | ----------------------------- | --------- | ---- | ---------------------- |
-| `table`                                   | `SolidDataTable`          | -         | 是   | primitive 创建的实例   |
+| `table`                                   | `SolidDataTable`              | -         | 是   | primitive 创建的实例   |
 | `density`                                 | `compact/default/comfortable` | `default` | 否   | 密度                   |
 | `striped` / `border` / `loading`          | `boolean`                     | `false`   | 否   | 展示状态               |
 | `virtual`                                 | 虚拟行配置                    | -         | 否   | 只渲染可视行           |

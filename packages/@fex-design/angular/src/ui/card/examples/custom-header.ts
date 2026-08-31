@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, TemplateRef, viewChild } from '@angular/core'
-import { Card, CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/angular/ui/card'
+import {
+  Card,
+  CardDescription,
+  CardExtra,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'card-ui-custom-header-example',

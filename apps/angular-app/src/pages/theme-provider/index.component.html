@@ -11,7 +11,10 @@
       </div>
     </header>
 
-    <fex-card title="Local Scope" description="A local provider applies theme variables to its own wrapper.">
+    <fex-card
+      title="Local Scope"
+      description="A local provider applies theme variables to its own wrapper."
+    >
       <fex-theme-provider
         #localProvider
         scope="local"
@@ -70,7 +73,10 @@
           />
           <fex-theme-provider #inheritedProvider scope="inherit">
             <div class="space-y-3 rounded-md border border-border bg-background p-3">
-              <fex-theme-status-card [provider]="inheritedProvider" title="Inherited middle scope" />
+              <fex-theme-status-card
+                [provider]="inheritedProvider"
+                title="Inherited middle scope"
+              />
               <fex-theme-provider
                 #innerProvider
                 scope="local"
@@ -111,17 +117,20 @@
       >
         <div class="mb-3 flex flex-wrap gap-1.5">
           @for (theme of customThemeOptions; track theme) {
-          <button
-            class="rounded-md border border-border bg-elevated-background px-2 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
-            [disabled]="customTheme() === theme"
-            type="button"
-            (click)="setCustomTheme(theme)"
-          >
-            {{ theme }}
-          </button>
+            <button
+              class="rounded-md border border-border bg-elevated-background px-2 py-1.5 text-sm text-elevated-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
+              [disabled]="customTheme() === theme"
+              type="button"
+              (click)="setCustomTheme(theme)"
+            >
+              {{ theme }}
+            </button>
           }
         </div>
-        <fex-theme-status-card [provider]="customProvider" [title]="'Local ' + customTheme() + ' theme'" />
+        <fex-theme-status-card
+          [provider]="customProvider"
+          [title]="'Local ' + customTheme() + ' theme'"
+        />
       </fex-theme-provider>
     </fex-card>
 

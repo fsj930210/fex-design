@@ -6,7 +6,10 @@ export interface StepsContextValue {
   snapshot: ShallowRef<StepsSnapshot>
   orientation: () => StepsOrientation
   navigation: () => boolean
-  registerElement: (value: import('@fex-design/core/steps/types').StepValue, element: HTMLElement | null) => void
+  registerElement: (
+    value: import('@fex-design/core/steps/types').StepValue,
+    element: HTMLElement | null,
+  ) => void
 }
 export const stepsContextKey: InjectionKey<StepsContextValue> = Symbol('StepsContext')
 export const stepContextKey = Symbol('StepContext')

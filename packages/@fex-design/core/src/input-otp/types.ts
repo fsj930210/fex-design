@@ -2,12 +2,7 @@ import type { SnapshotStore } from '../store/create-store'
 
 export type InputOTPValue = readonly string[]
 
-export type InputOTPChangeReason =
-  | 'input'
-  | 'paste'
-  | 'autofill'
-  | 'delete'
-  | 'composition'
+export type InputOTPChangeReason = 'input' | 'paste' | 'autofill' | 'delete' | 'composition'
 
 export interface InputOTPTransformContext {
   index: number

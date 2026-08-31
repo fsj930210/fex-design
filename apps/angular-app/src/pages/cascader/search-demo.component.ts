@@ -1,1 +1,15 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{regionOptions}from'./data';import{SimpleCascaderDemo}from'./simple-demo.component';@Component({selector:'fex-cascader-search-demo',standalone:true,imports:[SimpleCascaderDemo],changeDetection:ChangeDetectionStrategy.OnPush,template:'<fex-cascader-simple-demo title="Full-path search" description="Try 浙江, 杭州, 西湖, 工业园区, 娄葑街道, or 苏州 娄葑." [options]="options" [showSearch]="true" />'})export class SearchDemo{readonly options=regionOptions}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { regionOptions } from './data'
+import { SimpleCascaderDemo } from './simple-demo.component'
+export
+@Component({
+  selector: 'fex-cascader-search-demo',
+  standalone: true,
+  imports: [SimpleCascaderDemo],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template:
+    '<fex-cascader-simple-demo title="Full-path search" description="Try 浙江, 杭州, 西湖, 工业园区, 娄葑街道, or 苏州 娄葑." [options]="options" [showSearch]="true" />',
+})
+class SearchDemo {
+  readonly options = regionOptions
+}

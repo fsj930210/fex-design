@@ -34,7 +34,11 @@ export function App() {
   const navigate = (nextFramework: Framework, nextSlug: string) => {
     setFramework(nextFramework)
     setSlug(nextSlug)
-    history.replaceState(null, '', siteHref(`${nextFramework}/components/${nextSlug}?layer=${layer()}`))
+    history.replaceState(
+      null,
+      '',
+      siteHref(`${nextFramework}/components/${nextSlug}?layer=${layer()}`),
+    )
     scrollTo({ top: 0 })
   }
   return (

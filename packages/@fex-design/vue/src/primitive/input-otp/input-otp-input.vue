@@ -62,7 +62,10 @@ function applyText(
 function handleInput(event: Event) {
   const input = event.currentTarget as HTMLInputElement
   const inputEvent = event as InputEvent
-  const result = applyText(input.value, inputEvent.inputType?.startsWith('delete') ? 'delete' : 'input')
+  const result = applyText(
+    input.value,
+    inputEvent.inputType?.startsWith('delete') ? 'delete' : 'input',
+  )
   if (!result.accepted) input.value = currentValue.value
 }
 

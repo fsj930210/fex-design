@@ -7,7 +7,10 @@ import { collapseItems } from './demo-data'
 
 export function CustomCollapseDemo() {
   return (
-    <Card title="Custom trigger" description="Custom rendering can move the toggle to an icon while preserving ARIA props.">
+    <Card
+      title="Custom trigger"
+      description="Custom rendering can move the toggle to an icon while preserving ARIA props."
+    >
       <Collapse variant="ghost" defaultExpandedKeys={['profile']}>
         {collapseItems.map((item) => (
           <CollapseItem key={item.value} value={item.value}>

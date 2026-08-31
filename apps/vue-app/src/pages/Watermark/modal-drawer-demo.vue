@@ -40,7 +40,9 @@ const drawerOpen = ref(false)
             <Watermark content="FEX Admin">
               <DialogHeader>
                 <DialogTitle>Watermarked modal</DialogTitle>
-                <DialogDescription>Dialog content is covered by the watermark layer.</DialogDescription>
+                <DialogDescription
+                  >Dialog content is covered by the watermark layer.</DialogDescription
+                >
               </DialogHeader>
               <DialogBody class="min-h-36">This modal body is wrapped by Watermark.</DialogBody>
               <DialogFooter>

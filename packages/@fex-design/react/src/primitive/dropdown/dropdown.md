@@ -6,7 +6,11 @@ menu data or duplicate Menu parts.
 ## Import
 
 ```tsx
-import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex-design/react/primitive/dropdown'
+import {
+  DropdownContent,
+  DropdownRoot,
+  DropdownTrigger,
+} from '@fex-design/react/primitive/dropdown'
 import { MenuItem, MenuList, MenuRoot } from '@fex-design/react/primitive/menu'
 import { PopoverPortal } from '@fex-design/react/primitive/popover'
 ```
@@ -18,7 +22,11 @@ import { PopoverPortal } from '@fex-design/react/primitive/popover'
   <DropdownTrigger>{(props) => <button {...props}>Actions</button>}</DropdownTrigger>
   <PopoverPortal container={container}>
     <DropdownContent>
-      <MenuRoot><MenuList><MenuItem>Rename</MenuItem></MenuList></MenuRoot>
+      <MenuRoot>
+        <MenuList>
+          <MenuItem>Rename</MenuItem>
+        </MenuList>
+      </MenuRoot>
     </DropdownContent>
   </PopoverPortal>
 </DropdownRoot>
@@ -26,11 +34,11 @@ import { PopoverPortal } from '@fex-design/react/primitive/popover'
 
 ## Props
 
-| Part | Props | Notes |
-| --- | --- | --- |
-| `DropdownRoot` | `PopoverRootProps` | Controlled `open`, `defaultOpen`, `onOpenChange`, triggers, placement, offsets and dismiss behavior. |
-| `DropdownTrigger` | `PopoverTriggerProps` | Render prop that returns native bindings and a ref; sets `aria-haspopup="menu"`. |
-| `DropdownContent` | `PopoverContentProps` | Native div props; defaults to `role="menu"`. |
+| Part              | Props                 | Notes                                                                                                |
+| ----------------- | --------------------- | ---------------------------------------------------------------------------------------------------- |
+| `DropdownRoot`    | `PopoverRootProps`    | Controlled `open`, `defaultOpen`, `onOpenChange`, triggers, placement, offsets and dismiss behavior. |
+| `DropdownTrigger` | `PopoverTriggerProps` | Render prop that returns native bindings and a ref; sets `aria-haspopup="menu"`.                     |
+| `DropdownContent` | `PopoverContentProps` | Native div props; defaults to `role="menu"`.                                                         |
 
 ## Events and state
 

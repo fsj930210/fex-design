@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import {
-  Radio,
-  RadioButton,
-  RadioGroup,
-  type RadioValue,
-} from '@fex-design/vue/primitive/radio'
+import { Radio, RadioButton, RadioGroup, type RadioValue } from '@fex-design/vue/primitive/radio'
 import Card from '@fex-design/vue/ui/card'
 
 const options = [

@@ -56,22 +56,18 @@ Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。UI `Spin
 
 `spinning` 有三个明确状态：
 
-| 值 | 输出 |
-| --- | --- |
+| 值          | 输出                                              |
+| ----------- | ------------------------------------------------- |
 | `undefined` | 将 `SpinnerContainer` 作为独立 Spinner 快捷使用。 |
-| `false` | 仅显示 children，不显示遮罩。 |
-| `true` | 保留 children，并在内容上方显示遮罩和 Spinner。 |
+| `false`     | 仅显示 children，不显示遮罩。                     |
+| `true`      | 保留 children，并在内容上方显示遮罩和 Spinner。   |
 
 ## 自定义指示器与文本
 
 容器场景中使用 `indicator` 替换默认 LoadingIcon，使用 `text` 提供描述内容。独立 Spinner 则使用 children 或框架 slot 替换图标。
 
 ```tsx
-<SpinnerContainer
-  spinning
-  indicator={<CustomLoadingIcon />}
-  text="正在同步项目数据"
->
+<SpinnerContainer spinning indicator={<CustomLoadingIcon />} text="正在同步项目数据">
   <ProjectList />
 </SpinnerContainer>
 ```
@@ -92,6 +88,14 @@ Primitive 组件提供带基础视觉样式的最小部件，但不持有 loadin
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Primitive Spinner、SpinnerContainer、SpinnerOverlay 与 SpinnerText 的公开属性。" />
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="Primitive Spinner、SpinnerContainer、SpinnerOverlay 与 SpinnerText 的公开属性。"
+/>
 
-<ApiSection layer="ui" title="UI API" description="UI Spinner 的独立指示器和内容 loading 容器属性。" />
+<ApiSection
+  layer="ui"
+  title="UI API"
+  description="UI Spinner 的独立指示器和内容 loading 容器属性。"
+/>

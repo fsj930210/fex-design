@@ -15,7 +15,9 @@ const rows: Array<[string, string, string, string]> = [
   ['Katherine Johnson', 'Docs', 'Paused', '64%'],
 ]
 const activePayload = ref('')
-const label = computed(() => activePayload.value.startsWith('column:') ? 'Column actions' : 'Row actions')
+const label = computed(() =>
+  activePayload.value.startsWith('column:') ? 'Column actions' : 'Row actions',
+)
 
 function handleOpenChange(open: boolean, info: unknown) {
   if (!open) return

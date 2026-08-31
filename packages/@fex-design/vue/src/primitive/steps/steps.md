@@ -12,18 +12,18 @@ Each `Step` requires a stable, unique `value: string | number`. `current` and `d
 
 ## Props
 
-| Component | Prop | Type | Default | Description |
-| --- | --- | --- | --- | --- |
-| Steps | current | StepValue | - | Controlled current value. |
-| Steps | defaultCurrent | StepValue | - | Initial uncontrolled value. |
-| Steps | navigation | boolean | false | Enables pointer and keyboard navigation. |
-| Steps | orientation | horizontal \| vertical | horizontal | Layout direction. |
-| Steps | responsive | boolean | true | Lets horizontal layout become vertical in a narrow container. |
-| Steps | onChange | (value, meta) => void | - | Navigation request callback. |
-| Step | value | string \| number | required | Stable node identity. |
-| Step | disabled | boolean | false | Prevents navigation to the node. |
-| Step | status | wait \| process \| finish \| error \| custom string | derived | Overrides the derived status. |
-| Step | data | unknown | - | Business metadata returned in change metadata. |
+| Component | Prop           | Type                                                | Default    | Description                                                   |
+| --------- | -------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------- |
+| Steps     | current        | StepValue                                           | -          | Controlled current value.                                     |
+| Steps     | defaultCurrent | StepValue                                           | -          | Initial uncontrolled value.                                   |
+| Steps     | navigation     | boolean                                             | false      | Enables pointer and keyboard navigation.                      |
+| Steps     | orientation    | horizontal \| vertical                              | horizontal | Layout direction.                                             |
+| Steps     | responsive     | boolean                                             | true       | Lets horizontal layout become vertical in a narrow container. |
+| Steps     | onChange       | (value, meta) => void                               | -          | Navigation request callback.                                  |
+| Step      | value          | string \| number                                    | required   | Stable node identity.                                         |
+| Step      | disabled       | boolean                                             | false      | Prevents navigation to the node.                              |
+| Step      | status         | wait \| process \| finish \| error \| custom string | derived    | Overrides the derived status.                                 |
+| Step      | data           | unknown                                             | -          | Business metadata returned in change metadata.                |
 
 ## Change metadata
 

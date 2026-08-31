@@ -1,1 +1,10 @@
-import{regionOptions}from'./data';import{DemoCascader}from'./demo-cascader';import{DemoSection}from'./demo-section';export function MultipleDemo(){return <DemoSection title="Multiple" description="Parent-child conduction and indeterminate states."><DemoCascader multiple options={regionOptions}/></DemoSection>}
+import { regionOptions } from './data'
+import { DemoCascader } from './demo-cascader'
+import { DemoSection } from './demo-section'
+export function MultipleDemo() {
+  return (
+    <DemoSection title="Multiple" description="Parent-child conduction and indeterminate states.">
+      <DemoCascader multiple options={regionOptions} />
+    </DemoSection>
+  )
+}

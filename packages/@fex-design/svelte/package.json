@@ -2,10 +2,6 @@
   "name": "@fex-design/svelte",
   "private": true,
   "type": "module",
-  "scripts": {
-    "typecheck": "svelte-check --tsconfig tsconfig.json",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.svelte",
@@ -243,6 +239,7 @@
     "./primitive/tooltip-content": "./src/primitive/tooltip/tooltip-content.svelte",
     "./primitive/tooltip-arrow": "./src/primitive/tooltip/tooltip-arrow.svelte",
     "./primitive/badge": "./src/primitive/badge/badge.ts",
+    "./ui/badge": "./src/ui/badge/badge.ts",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.svelte",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.svelte",
     "./primitive/avatar": "./src/primitive/avatar/avatar.ts",
@@ -305,6 +302,10 @@
     "./actions/resize": "./src/actions/resize.ts",
     "./actions/sortable": "./src/actions/sortable.ts",
     "./i18n": "./src/i18n/index.ts"
+  },
+  "scripts": {
+    "typecheck": "svelte-check --tsconfig tsconfig.json",
+    "lint": "oxlint src"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

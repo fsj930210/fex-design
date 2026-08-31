@@ -5,10 +5,15 @@ import { createSignal } from 'solid-js'
 const maxLength = 120
 
 export function CountDemo() {
-  const [value, setValue] = createSignal('Textarea count is implemented by the demo, not by the primitive.')
+  const [value, setValue] = createSignal(
+    'Textarea count is implemented by the demo, not by the primitive.',
+  )
 
   return (
-    <Card title="Count" description="Character count is derived by the caller and rendered wherever needed.">
+    <Card
+      title="Count"
+      description="Character count is derived by the caller and rendered wherever needed."
+    >
       <div class="max-w-xl space-y-1.5">
         <TextareaRoot value={value()} onChange={setValue} autoSize={{ minRows: 3, maxRows: 6 }}>
           <TextareaInput aria-label="Textarea with count" maxLength={maxLength} />

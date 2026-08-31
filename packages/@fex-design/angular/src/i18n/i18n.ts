@@ -18,12 +18,7 @@ export class I18nService {
     return this.controller.changeLanguage(locale, options)
   }
 
-  registerBundle(
-    locale: string,
-    namespace: string,
-    bundle: I18nBundle,
-    revision?: string,
-  ) {
+  registerBundle(locale: string, namespace: string, bundle: I18nBundle, revision?: string) {
     this.controller.registerBundle(locale, namespace, bundle, revision)
   }
 }

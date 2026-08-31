@@ -1,1 +1,1 @@
-export{CustomPanelDemo}from'./demos'
+export { CustomPanelDemo } from './demos'

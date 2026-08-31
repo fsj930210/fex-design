@@ -196,17 +196,22 @@ export function SelectValue({
             })}
           </span>
         ) : (
-          <Tag key={option.value} size="sm" closable closeLabel={`Remove ${String(option.label)}`} onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => {
-            event.stopPropagation()
-            select.removeValue(option.value)
-          }}>
+          <Tag
+            key={option.value}
+            size="sm"
+            closable
+            closeLabel={`Remove ${String(option.label)}`}
+            onPointerDownCapture={(event) => event.preventDefault()}
+            onClose={(event) => {
+              event.stopPropagation()
+              select.removeValue(option.value)
+            }}
+          >
             {option.label}
           </Tag>
         ),
       )}
-      {overflowCount > 0 ? (
-        <Tag size="sm">+{overflowCount}</Tag>
-      ) : null}
+      {overflowCount > 0 ? <Tag size="sm">+{overflowCount}</Tag> : null}
     </div>
   )
 }

@@ -1,12 +1,5 @@
 /** Card 可被 classNames 与 styles 定位的稳定区域。 */
-export type CardPart =
-  | 'root'
-  | 'header'
-  | 'title'
-  | 'description'
-  | 'extra'
-  | 'content'
-  | 'footer'
+export type CardPart = 'root' | 'header' | 'title' | 'description' | 'extra' | 'content' | 'footer'
 
 /** Card 各语义区域的 class 配置。 */
 export type CardClassNames = Partial<Record<CardPart, string>>

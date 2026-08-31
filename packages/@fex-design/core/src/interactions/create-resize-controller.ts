@@ -175,10 +175,12 @@ export function createResizeController(options: ResizeControllerOptions) {
 }
 
 function isSameRect(previous: Rect, next: Rect) {
-  return previous.x === next.x
-    && previous.y === next.y
-    && previous.width === next.width
-    && previous.height === next.height
+  return (
+    previous.x === next.x &&
+    previous.y === next.y &&
+    previous.width === next.width &&
+    previous.height === next.height
+  )
 }
 
 function normalizeOptions(options: ResizeControllerOptions) {

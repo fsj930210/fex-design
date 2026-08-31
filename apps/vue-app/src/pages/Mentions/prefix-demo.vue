@@ -25,21 +25,36 @@ const selected = ref('Type @, #, or /')
       <MentionsContent>
         <MentionsPrefixCase prefix="@">
           <MentionsList>
-            <MentionsItem v-for="user in mentionUsers" :key="user.id" :item-key="user.id" :value="user.name">
+            <MentionsItem
+              v-for="user in mentionUsers"
+              :key="user.id"
+              :item-key="user.id"
+              :value="user.name"
+            >
               @{{ user.name }}
             </MentionsItem>
           </MentionsList>
         </MentionsPrefixCase>
         <MentionsPrefixCase prefix="#">
           <MentionsList>
-            <MentionsItem v-for="doc in mentionDocs" :key="doc.id" :item-key="doc.id" :value="doc.title">
+            <MentionsItem
+              v-for="doc in mentionDocs"
+              :key="doc.id"
+              :item-key="doc.id"
+              :value="doc.title"
+            >
               #{{ doc.title }}
             </MentionsItem>
           </MentionsList>
         </MentionsPrefixCase>
         <MentionsPrefixCase prefix="/">
           <MentionsList>
-            <MentionsItem v-for="command in mentionCommands" :key="command.id" :item-key="command.id" :value="command.id">
+            <MentionsItem
+              v-for="command in mentionCommands"
+              :key="command.id"
+              :item-key="command.id"
+              :value="command.id"
+            >
               /{{ command.label }}
             </MentionsItem>
           </MentionsList>

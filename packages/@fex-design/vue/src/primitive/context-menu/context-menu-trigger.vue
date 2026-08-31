@@ -10,10 +10,19 @@ function setReference(element: Element | ComponentPublicInstance | null) {
 }
 function openAt(event: MouseEvent, x = event.clientX, y = event.clientY) {
   if (event.defaultPrevented || !(event.currentTarget instanceof HTMLElement)) return
-  controller.openAt({ payload: props.payload, element: event.currentTarget, clientX: x, clientY: y, event }, {
-    target: event.target, currentTarget: event.currentTarget, clientX: x, clientY: y, button: event.button,
-    event, preventDefault: () => event.preventDefault(), stopPropagation: () => event.stopPropagation(),
-  })
+  controller.openAt(
+    { payload: props.payload, element: event.currentTarget, clientX: x, clientY: y, event },
+    {
+      target: event.target,
+      currentTarget: event.currentTarget,
+      clientX: x,
+      clientY: y,
+      button: event.button,
+      event,
+      preventDefault: () => event.preventDefault(),
+      stopPropagation: () => event.stopPropagation(),
+    },
+  )
 }
 const triggerProps = computed(() => ({
   'aria-haspopup': 'menu' as const,

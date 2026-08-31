@@ -5,17 +5,21 @@ export const messageClassName = [
   'group/message flex w-full min-w-0 items-end gap-[var(--message-column-gap,10px)] has-[[data-slot=message-footer]]:mb-[var(--message-footer-space,28px)]',
   'data-[side=end]:flex-row-reverse',
 ].join(' ')
-export const messageAvatarClassName = 'flex size-[var(--message-avatar-size,32px)] shrink-0 items-center justify-center'
+export const messageAvatarClassName =
+  'flex size-[var(--message-avatar-size,32px)] shrink-0 items-center justify-center'
 export const messageBodyClassName = [
   'relative flex min-w-0 max-w-[var(--message-max-width,min(88%,48rem))] flex-1 flex-col gap-[var(--message-content-gap,6px)]',
   'group-data-[side=start]/message:items-start group-data-[side=end]/message:items-end',
 ].join(' ')
-export const messageHeaderClassName = 'flex min-w-0 items-center gap-2 text-xs text-muted-foreground'
+export const messageHeaderClassName =
+  'flex min-w-0 items-center gap-2 text-xs text-muted-foreground'
 export const messageContentClassName = 'flex w-full min-w-0 flex-col gap-2'
-export const messageStatusClassName = cva(
-  'flex items-center gap-1.5 text-xs',
-  { variants: { tone: { neutral: 'text-muted-foreground', success: 'text-success', danger: 'text-danger' } }, defaultVariants: { tone: 'neutral' } },
-)
+export const messageStatusClassName = cva('flex items-center gap-1.5 text-xs', {
+  variants: {
+    tone: { neutral: 'text-muted-foreground', success: 'text-success', danger: 'text-danger' },
+  },
+  defaultVariants: { tone: 'neutral' },
+})
 export const messageActionsClassName = [
   'flex items-center gap-[var(--message-actions-gap,4px)] text-muted-foreground transition-opacity',
   'data-[align=start]:justify-start data-[align=end]:justify-end',

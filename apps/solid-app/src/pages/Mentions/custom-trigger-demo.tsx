@@ -10,13 +10,26 @@ import { filterByText, mentionUsers } from './data'
 
 function Users() {
   const mentions = useMentions()
-  return <MentionsList><For each={filterByText(mentionUsers, mentions.text(), (user) => user.name)}>{(user) => <MentionsItem itemKey={user.id} value={user.name}>{user.name}</MentionsItem>}</For></MentionsList>
+  return (
+    <MentionsList>
+      <For each={filterByText(mentionUsers, mentions.text(), (user) => user.name)}>
+        {(user) => (
+          <MentionsItem itemKey={user.id} value={user.name}>
+            {user.name}
+          </MentionsItem>
+        )}
+      </For>
+    </MentionsList>
+  )
 }
 
 export function CustomTriggerDemo() {
   const [value, setValue] = createSignal('')
   return (
-    <Card title="Custom trigger" description="Render props bind behavior to a custom textarea surface.">
+    <Card
+      title="Custom trigger"
+      description="Render props bind behavior to a custom textarea surface."
+    >
       <MentionsRoot value={value()} onChange={setValue}>
         <MentionsTrigger>
           {({ props, ref, state }) => (
@@ -32,7 +45,9 @@ export function CustomTriggerDemo() {
             />
           )}
         </MentionsTrigger>
-        <MentionsContent><Users /></MentionsContent>
+        <MentionsContent>
+          <Users />
+        </MentionsContent>
       </MentionsRoot>
     </Card>
   )

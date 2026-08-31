@@ -6,7 +6,7 @@ export function getAvailableThemes(themes = defaultThemes, enableSystem = false)
 }
 
 export function getFallbackTheme(themes: ThemeValue[], defaultTheme: ThemeValue) {
-  return themes.includes(defaultTheme) ? defaultTheme : themes[0] ?? defaultTheme
+  return themes.includes(defaultTheme) ? defaultTheme : (themes[0] ?? defaultTheme)
 }
 
 export function resolveTheme({

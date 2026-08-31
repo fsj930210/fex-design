@@ -1,1 +1,1 @@
-export{TriggerTextDemo}from'./demos'
+export { TriggerTextDemo } from './demos'

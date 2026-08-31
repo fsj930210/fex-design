@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, type Ref } from 'vue'
 import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
-import {
-  SliderRange,
-  SliderRoot,
-  SliderThumb,
-  SliderTrack,
-} from '@fex-design/vue/primitive/slider'
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '@fex-design/vue/primitive/slider'
 import { Watermark } from '@fex-design/vue/primitive/watermark'
 import Card from '@fex-design/vue/ui/card'
 

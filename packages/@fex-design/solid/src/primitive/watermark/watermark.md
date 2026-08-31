@@ -26,18 +26,18 @@ import { Watermark } from '@fex-design/solid/primitive/watermark'
 
 ## Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| content | string or string[] | undefined | Text rendered in the watermark tile. |
-| width | number | 120 | Tile drawing width. |
-| height | number | 64 | Tile drawing height. |
-| rotate | number | -22 | Tile rotation in degrees. |
-| gap | [number, number] | [100, 100] | Horizontal and vertical gap between tiles. |
-| offset | [number, number] | [0, 0] | Background position offset. |
-| zIndex | number | 9 | Watermark layer z-index. |
-| opacity | number | 1 | Canvas drawing opacity. |
-| font | WatermarkFont | default font | Text font options. |
-| className / class | string | undefined | Extra class for the root element. |
+| Name              | Type               | Default      | Description                                |
+| ----------------- | ------------------ | ------------ | ------------------------------------------ |
+| content           | string or string[] | undefined    | Text rendered in the watermark tile.       |
+| width             | number             | 120          | Tile drawing width.                        |
+| height            | number             | 64           | Tile drawing height.                       |
+| rotate            | number             | -22          | Tile rotation in degrees.                  |
+| gap               | [number, number]   | [100, 100]   | Horizontal and vertical gap between tiles. |
+| offset            | [number, number]   | [0, 0]       | Background position offset.                |
+| zIndex            | number             | 9            | Watermark layer z-index.                   |
+| opacity           | number             | 1            | Canvas drawing opacity.                    |
+| font              | WatermarkFont      | default font | Text font options.                         |
+| className / class | string             | undefined    | Extra class for the root element.          |
 
 ## Behavior
 
@@ -48,4 +48,3 @@ If the generated layer is removed from the root element, a MutationObserver appe
 ## Notes
 
 Images are supported as wrapped content. Use the component around an image or image preview area to add a text watermark over it.
-

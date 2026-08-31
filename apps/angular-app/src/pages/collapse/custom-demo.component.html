@@ -1,10 +1,23 @@
-<fex-card title="Custom trigger" description="Use item methods when the toggle target is fully custom.">
+<fex-card
+  title="Custom trigger"
+  description="Use item methods when the toggle target is fully custom."
+>
   <div fexCollapse variant="ghost" [defaultExpandedKeys]="['profile']">
     @for (item of items; track item.value) {
       <div [fexCollapseItem]="item.value" #panel="fexCollapseItem">
         <div class="flex items-center gap-1.5 px-1.5 py-1.5">
-          <button button variant="ghost" size="icon-sm" [attr.aria-expanded]="panel.expanded()" aria-label="Toggle panel" (click)="panel.toggle()">
-            <fex-chevron-right-icon class="size-4 transition-transform" [class.-rotate-90]="panel.expanded()" />
+          <button
+            button
+            variant="ghost"
+            size="icon-sm"
+            [attr.aria-expanded]="panel.expanded()"
+            aria-label="Toggle panel"
+            (click)="panel.toggle()"
+          >
+            <fex-chevron-right-icon
+              class="size-4 transition-transform"
+              [class.-rotate-90]="panel.expanded()"
+            />
           </button>
           <span class="flex-1 text-sm font-medium">{{ item.title }}</span>
           <button button variant="outline" size="sm" (click)="panel.expand()">Open</button>

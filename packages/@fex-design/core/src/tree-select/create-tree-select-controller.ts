@@ -13,11 +13,13 @@ function valuesEqual(left: readonly TreeSelectValue[], right: readonly TreeSelec
 }
 
 function itemsEqual<TNode>(left: TreeSelectItem<TNode> | undefined, right: TreeSelectItem<TNode>) {
-  return left?.value === right.value &&
+  return (
+    left?.value === right.value &&
     left.label === right.label &&
     left.node === right.node &&
     left.path === right.path &&
     left.disabled === right.disabled
+  )
 }
 
 export function createTreeSelectController<TNode = unknown>(
@@ -37,7 +39,9 @@ export function createTreeSelectController<TNode = unknown>(
       if (!valueControlled) return undefined
       return Array.isArray(options.value)
         ? [...options.value]
-        : (options.value === undefined ? [] : options.value as TreeSelectValue)
+        : options.value === undefined
+          ? []
+          : (options.value as TreeSelectValue)
     },
     get defaultValue() {
       return Array.isArray(options.defaultValue)
@@ -58,9 +62,7 @@ export function createTreeSelectController<TNode = unknown>(
   })
 
   function resolveItems(values: readonly TreeSelectValue[]) {
-    return values.map(
-      (value) => items.get(value) ?? { value, label: String(value) },
-    )
+    return values.map((value) => items.get(value) ?? { value, label: String(value) })
   }
 
   function publish(values = selection.getSnapshot().values) {
@@ -76,7 +78,8 @@ export function createTreeSelectController<TNode = unknown>(
       previous.disabled === next.disabled &&
       valuesEqual(previous.values, next.values) &&
       previous.selectedItems.every((item, index) => item === next.selectedItems[index])
-    ) return
+    )
+      return
     store.setSnapshot(next)
   }
 

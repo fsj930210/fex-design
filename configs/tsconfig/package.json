@@ -2,13 +2,6 @@
   "name": "@fex/config-tsconfig",
   "private": true,
   "type": "module",
-  "devDependencies": {
-    "typescript": "catalog:"
-  },
-  "scripts": {
-    "typecheck": "tsc --noEmit -p check.json",
-    "lint": "oxlint check.ts"
-  },
   "exports": {
     "./base.json": "./base.json",
     "./app.json": "./app.json",
@@ -20,7 +13,14 @@
     "./svelte-app.json": "./svelte-app.json",
     "./angular-app.json": "./angular-app.json"
   },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p check.json",
+    "lint": "oxlint check.ts"
+  },
   "dependencies": {
     "@fex/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

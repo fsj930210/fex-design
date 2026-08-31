@@ -9,7 +9,10 @@ export interface DataTableExpandColumnOptions {
   ariaLabel?: string
 }
 
-export function createDataTableExpandColumn<TFeatures extends TableFeatures, TData extends RowData>({
+export function createDataTableExpandColumn<
+  TFeatures extends TableFeatures,
+  TData extends RowData,
+>({
   id = '__expand__',
   size = 40,
   ariaLabel = 'Toggle row',

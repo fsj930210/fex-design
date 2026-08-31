@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { QrCodeBackground, QrCodeModules, QrCodeOverlay, QrCodeRoot, QrCodeSvg } from '@fex-design/vue/primitive/qrcode'
+import {
+  QrCodeBackground,
+  QrCodeModules,
+  QrCodeOverlay,
+  QrCodeRoot,
+  QrCodeSvg,
+} from '@fex-design/vue/primitive/qrcode'
 import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 </script>

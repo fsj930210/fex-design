@@ -1,6 +1,9 @@
 import { createContext, useContext } from 'solid-js'
 import type { Accessor } from 'solid-js'
-import type { ContextMenuController, ContextMenuSnapshot } from '@fex-design/core/overlay/context-menu/types'
+import type {
+  ContextMenuController,
+  ContextMenuSnapshot,
+} from '@fex-design/core/overlay/context-menu/types'
 
 export interface ContextMenuContextValue<T = unknown> {
   controller: ContextMenuController<T>

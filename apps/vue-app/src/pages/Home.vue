@@ -82,10 +82,7 @@ const componentLinks = [
 
       <section class="space-y-2">
         <h2 class="text-base font-medium text-foreground">Components</h2>
-        <nav
-          class="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3"
-          aria-label="组件示例"
-        >
+        <nav class="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3" aria-label="组件示例">
           <RouterLink
             v-for="link in componentLinks"
             :key="link.to"

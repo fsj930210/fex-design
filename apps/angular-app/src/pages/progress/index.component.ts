@@ -36,7 +36,8 @@ export class ProgressComponent {
   ]
   protected readonly dynamicValue = signal(20)
 
-  protected readonly getRange = (count: number) => Array.from({ length: count }, (_, index) => index)
+  protected readonly getRange = (count: number) =>
+    Array.from({ length: count }, (_, index) => index)
 
   protected getActiveSteps(value: number, steps: number) {
     return Math.round((value / 100) * steps)

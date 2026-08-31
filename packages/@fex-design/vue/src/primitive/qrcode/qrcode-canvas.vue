@@ -19,7 +19,9 @@ const props = defineProps<{
 const attrs = useAttrs()
 const { model } = useQrCode('QrCodeCanvas')
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const className = computed(() => cn(qrcodeSurfaceClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeSurfaceClassName, attrs.class as string | undefined, props.class),
+)
 const canvasStyle = computed<StyleValue>(() => [
   { width: model.value.size + 'px', height: model.value.size + 'px' },
   attrs.style as StyleValue,
@@ -32,7 +34,9 @@ watchEffect(() => {
 
   const current = model.value
   const ratio = window.devicePixelRatio || 1
-  const centerExclude = props.centerSize ? getQrCodeCenterExcludeRect(current, props.centerSize) : undefined
+  const centerExclude = props.centerSize
+    ? getQrCodeCenterExcludeRect(current, props.centerSize)
+    : undefined
   const cells = getQrCodeModuleCells(current, props.exclude ?? centerExclude)
   const moduleSize = current.size / current.viewBoxSize
 

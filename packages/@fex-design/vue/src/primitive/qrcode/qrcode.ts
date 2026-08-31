@@ -6,4 +6,8 @@ export { default as QrCodeModules } from './qrcode-modules.vue'
 export { default as QrCodeCenter } from './qrcode-center.vue'
 export { default as QrCodeOverlay } from './qrcode-overlay.vue'
 export { useQrCode } from './context'
-export type { QrCodeErrorLevel, QrCodeModel, QrCodeModuleExcludeRect } from '@fex-design/core/qrcode'
+export type {
+  QrCodeErrorLevel,
+  QrCodeModel,
+  QrCodeModuleExcludeRect,
+} from '@fex-design/core/qrcode'

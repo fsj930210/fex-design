@@ -25,20 +25,20 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 ## Button API
 
-| Name              | Type                                                                                                                          | Default              | Description                                       |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------- |
-| variant           | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                               | 'solid'              | Structural variant.                               |
-| color             | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                    | —                    | Optional semantic color; unset uses the default white button. |
-| size              | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'            | Control size.                                     |
-| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined            | Optional interaction effect; disabled by default. |
-| icon              | framework content                                                                                                             | undefined            | Normal-state icon.                                |
-| iconPlacement     | start or end                                                                                                                  | start                | Icon or indicator position.                       |
-| loading           | boolean                                                                                                                       | false                | Loading state; disables interaction.              |
-| loadingIndicator  | framework content                                                                                                             | built-in LoadingIcon | Loading visual override.                          |
-| disabled          | boolean                                                                                                                       | false                | Disabled state.                                   |
-| type              | native button type                                                                                                            | button               | Native button type.                               |
-| native attributes | ComponentProps<'button'>                                                                                                      | —                    | Native attributes and events.                     |
-| element access    | ref                                                                                                                           | —                    | Native HTMLButtonElement.                         |
+| Name              | Type                                                                                                                          | Default              | Description                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------- |
+| variant           | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                             | 'solid'              | Structural variant.                                           |
+| color             | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                     | —                    | Optional semantic color; unset uses the default white button. |
+| size              | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg' \| 'icon-xl'                       | 'default'            | Control size.                                                 |
+| effect            | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined            | Optional interaction effect; disabled by default.             |
+| icon              | framework content                                                                                                             | undefined            | Normal-state icon.                                            |
+| iconPlacement     | start or end                                                                                                                  | start                | Icon or indicator position.                                   |
+| loading           | boolean                                                                                                                       | false                | Loading state; disables interaction.                          |
+| loadingIndicator  | framework content                                                                                                             | built-in LoadingIcon | Loading visual override.                                      |
+| disabled          | boolean                                                                                                                       | false                | Disabled state.                                               |
+| type              | native button type                                                                                                            | button               | Native button type.                                           |
+| native attributes | ComponentProps<'button'>                                                                                                      | —                    | Native attributes and events.                                 |
+| element access    | ref                                                                                                                           | —                    | Native HTMLButtonElement.                                     |
 
 ## Variants
 

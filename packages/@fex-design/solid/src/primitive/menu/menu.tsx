@@ -8,7 +8,11 @@ import type { JSX, ParentProps } from 'solid-js'
 import { splitProps } from 'solid-js'
 
 export function MenuRoot(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
-  return <div {...props} role={props.role ?? 'menu'} data-slot="menu">{props.children}</div>
+  return (
+    <div {...props} role={props.role ?? 'menu'} data-slot="menu">
+      {props.children}
+    </div>
+  )
 }
 
 export type MenuListProps = ParentProps<JSX.HTMLAttributes<HTMLDivElement>> & {
@@ -72,16 +76,17 @@ export type MenuItemProps = Omit<JSX.HTMLAttributes<HTMLElement>, 'children'> & 
 
 export function MenuItem(props: MenuItemProps) {
   const [local, rest] = splitProps(props, ['children', 'disabled', 'selected', 'submenu', 'value'])
-  const itemProps = () => ({
-    ...rest,
-    role: rest.role ?? 'menuitem',
-    tabIndex: local.disabled ? -1 : (rest.tabIndex ?? -1),
-    'aria-disabled': local.disabled || undefined,
-    'aria-haspopup': local.submenu ? 'menu' : undefined,
-    'data-slot': 'menu-item',
-    'data-menu-value': local.value === undefined ? undefined : String(local.value),
-    'data-selected': local.selected ? 'true' : undefined,
-  }) satisfies JSX.HTMLAttributes<HTMLElement>
+  const itemProps = () =>
+    ({
+      ...rest,
+      role: rest.role ?? 'menuitem',
+      tabIndex: local.disabled ? -1 : (rest.tabIndex ?? -1),
+      'aria-disabled': local.disabled || undefined,
+      'aria-haspopup': local.submenu ? 'menu' : undefined,
+      'data-slot': 'menu-item',
+      'data-menu-value': local.value === undefined ? undefined : String(local.value),
+      'data-selected': local.selected ? 'true' : undefined,
+    }) satisfies JSX.HTMLAttributes<HTMLElement>
   const state = () => ({
     disabled: Boolean(local.disabled),
     selected: Boolean(local.selected),
@@ -92,15 +97,27 @@ export function MenuItem(props: MenuItemProps) {
     return local.children({ props: itemProps(), state: state() })
   }
 
-  return <button {...itemProps()} type="button" disabled={local.disabled}>{local.children}</button>
+  return (
+    <button {...itemProps()} type="button" disabled={local.disabled}>
+      {local.children}
+    </button>
+  )
 }
 
 export function MenuGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
-  return <div {...props} role="group" data-slot="menu-group">{props.children}</div>
+  return (
+    <div {...props} role="group" data-slot="menu-group">
+      {props.children}
+    </div>
+  )
 }
 
 export function MenuGroupLabel(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
-  return <div {...props} data-slot="menu-group-label">{props.children}</div>
+  return (
+    <div {...props} data-slot="menu-group-label">
+      {props.children}
+    </div>
+  )
 }
 
 export function MenuDivider(props: JSX.HTMLAttributes<HTMLDivElement>) {

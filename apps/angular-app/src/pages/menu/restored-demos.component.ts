@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { MenuDivider, MenuGroup, MenuGroupLabel, MenuItem, MenuList, MenuRoot } from '@fex-design/angular/primitive/menu'
+import {
+  MenuDivider,
+  MenuGroup,
+  MenuGroupLabel,
+  MenuItem,
+  MenuList,
+  MenuRoot,
+} from '@fex-design/angular/primitive/menu'
 import Card from '@fex-design/angular/ui/card'
 import { rootClassName, verticalItemClassName, verticalListClassName } from './demo-styles'
 

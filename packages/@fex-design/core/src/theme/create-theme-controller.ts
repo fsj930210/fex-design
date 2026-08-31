@@ -37,8 +37,12 @@ function mergeOptions(
   }
 }
 
-export function createThemeController(initialOptions: ThemeControllerOptions = {}): ThemeController {
-  const defaultOptions: Required<Pick<ThemeControllerOptions, 'themes' | 'defaultTheme' | 'attribute'>> &
+export function createThemeController(
+  initialOptions: ThemeControllerOptions = {},
+): ThemeController {
+  const defaultOptions: Required<
+    Pick<ThemeControllerOptions, 'themes' | 'defaultTheme' | 'attribute'>
+  > &
     Omit<ThemeControllerOptions, 'themes' | 'defaultTheme' | 'attribute'> = {
     attribute: 'class',
     defaultTheme: 'light',
@@ -111,7 +115,10 @@ export function createThemeController(initialOptions: ThemeControllerOptions = {
     },
     setForcedTheme(theme) {
       if (options.forcedTheme === theme) return
-      options = { ...options, ...(theme === undefined ? { forcedTheme: undefined } : { forcedTheme: theme }) }
+      options = {
+        ...options,
+        ...(theme === undefined ? { forcedTheme: undefined } : { forcedTheme: theme }),
+      }
       if (!options.forcedTheme) {
         const availableThemes = getAvailableThemes(options.themes, options.enableSystem)
         if (!availableThemes.includes(selectedTheme)) {

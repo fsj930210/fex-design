@@ -8,4 +8,12 @@ defineOptions({ name: 'Spinner', inheritAttrs: false })
 const props = defineProps<SpinnerOptions>()
 const attrs = useAttrs()
 </script>
-<template><span v-bind="attrs" data-slot="spinner" role="status" :class="cn(spinnerClassName({ size: props.size }), attrs.class as string | undefined)"><slot><LoadingIcon class="animate-spin" /></slot></span></template>
+<template>
+  <span
+    v-bind="attrs"
+    data-slot="spinner"
+    role="status"
+    :class="cn(spinnerClassName({ size: props.size }), attrs.class as string | undefined)"
+    ><slot><LoadingIcon class="animate-spin" /></slot
+  ></span>
+</template>

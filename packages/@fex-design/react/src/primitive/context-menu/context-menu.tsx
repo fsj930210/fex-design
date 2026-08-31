@@ -99,7 +99,12 @@ export function ContextMenuItem(props: ComponentProps<'button'>) {
       role={props.role ?? 'menuitem'}
       onClick={(event) => {
         props.onClick?.(event)
-        if (!event.defaultPrevented) controller.overlay.close({ reason: 'manual', source: 'menu-item', event: event.nativeEvent })
+        if (!event.defaultPrevented)
+          controller.overlay.close({
+            reason: 'manual',
+            source: 'menu-item',
+            event: event.nativeEvent,
+          })
       }}
     />
   )

@@ -83,15 +83,15 @@ function DemoTreeRow<TNode extends TreeNodeData>({
           isSearching: Boolean(searchKeyword),
           searchKeyword,
         }
-        const leadingNode = loadState === 'loading' ? (
-              <Spinner size="sm" aria-label="Loading children" />
-            ) : (
-              <TreeTrigger itemKey={currentItem.key} />
-            )
+        const leadingNode =
+          loadState === 'loading' ? (
+            <Spinner size="sm" aria-label="Loading children" />
+          ) : (
+            <TreeTrigger itemKey={currentItem.key} />
+          )
         const titleNode = (
           <TreeTitle>
-            {titleRender?.(titleContext) ??
-              String(currentItem.node[titleField] ?? currentItem.key)}
+            {titleRender?.(titleContext) ?? String(currentItem.node[titleField] ?? currentItem.key)}
           </TreeTitle>
         )
         const defaultNode = (
@@ -108,7 +108,17 @@ function DemoTreeRow<TNode extends TreeNodeData>({
             {titleNode}
           </div>
         )
-        return renderItem?.({ ...titleContext, defaultNode, itemProps, leadingNode, titleNode, checkedState, actions }) ?? defaultNode
+        return (
+          renderItem?.({
+            ...titleContext,
+            defaultNode,
+            itemProps,
+            leadingNode,
+            titleNode,
+            checkedState,
+            actions,
+          }) ?? defaultNode
+        )
       }}
     </TreeItem>
   )

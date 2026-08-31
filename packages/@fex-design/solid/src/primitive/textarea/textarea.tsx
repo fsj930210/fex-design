@@ -1,7 +1,4 @@
-import {
-  syncTextareaAutoSize,
-  type TextareaAutoSize,
-} from '@fex-design/core/textarea/autosize'
+import { syncTextareaAutoSize, type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
 import {
   textareaClearClassName,
   textareaFooterClassName,
@@ -94,8 +91,9 @@ function useTextareaContext(name: string) {
   return context
 }
 
-export interface TextareaRootProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>> {
+export interface TextareaRootProps extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>
+> {
   value?: string | undefined
   defaultValue?: string | undefined
   disabled?: boolean | undefined

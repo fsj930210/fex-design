@@ -8,27 +8,27 @@ Composable information container made of seven semantic regions.
 
 ## Components
 
-| Component | Element | Purpose |
-| --- | --- | --- |
-| Card | div | Inherits the native div; all native attributes and events pass through. Root information container. |
-| CardHeader | div | Inherits the native div; all native attributes and events pass through. Header layout. |
-| CardTitle | div | Inherits the native div; all native attributes and events pass through. Title. |
-| CardDescription | div | Inherits the native div; all native attributes and events pass through. Description. |
-| CardExtra | div | Inherits the native div; all native attributes and events pass through. Extra header content. |
-| CardContent | div | Inherits the native div; all native attributes and events pass through. Main content. |
-| CardFooter | div | Inherits the native div; all native attributes and events pass through. Footer content. |
+| Component       | Element | Purpose                                                                                             |
+| --------------- | ------- | --------------------------------------------------------------------------------------------------- |
+| Card            | div     | Inherits the native div; all native attributes and events pass through. Root information container. |
+| CardHeader      | div     | Inherits the native div; all native attributes and events pass through. Header layout.              |
+| CardTitle       | div     | Inherits the native div; all native attributes and events pass through. Title.                      |
+| CardDescription | div     | Inherits the native div; all native attributes and events pass through. Description.                |
+| CardExtra       | div     | Inherits the native div; all native attributes and events pass through. Extra header content.       |
+| CardContent     | div     | Inherits the native div; all native attributes and events pass through. Main content.               |
+| CardFooter      | div     | Inherits the native div; all native attributes and events pass through. Footer content.             |
 
 ## Examples
 
 Examples live in `examples/<name>` and are used by the documentation preview.
 
-| Name | Covers |
-| --- | --- |
-| basic | Complete information card. |
-| extra | Extra header content. |
-| custom-header | Custom header. |
-| surface | Section surfaces. |
-| css-variables | Instance CSS variables. |
+| Name          | Covers                     |
+| ------------- | -------------------------- |
+| basic         | Complete information card. |
+| extra         | Extra header content.      |
+| custom-header | Custom header.             |
+| surface       | Section surfaces.          |
+| css-variables | Instance CSS variables.    |
 
 ## API
 

@@ -22,8 +22,10 @@ export const tagClassName = cva(
   {
     variants: {
       variant: {
-        subtle: 'border-transparent bg-[color-mix(in_oklch,var(--tag-color)_12%,transparent)] text-[var(--tag-color)]',
-        outlined: 'border-[color-mix(in_oklch,var(--tag-color)_45%,transparent)] bg-transparent text-[var(--tag-color)]',
+        subtle:
+          'border-transparent bg-[color-mix(in_oklch,var(--tag-color)_12%,transparent)] text-[var(--tag-color)]',
+        outlined:
+          'border-[color-mix(in_oklch,var(--tag-color)_45%,transparent)] bg-transparent text-[var(--tag-color)]',
         solid: 'border-[var(--tag-color)] bg-[var(--tag-color)] text-[var(--tag-solid-foreground)]',
       },
       size: {

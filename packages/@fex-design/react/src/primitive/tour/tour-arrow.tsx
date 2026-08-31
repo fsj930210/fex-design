@@ -13,7 +13,9 @@ export interface TourArrowProps extends ComponentProps<'div'> {
 export function TourArrow({ className, style, ref, ...props }: TourArrowProps) {
   const { floating, snapshot } = useTourContentContext('TourArrow')
   useCoreStore(floating)
-  const setArrowElement = useMemoizedFn((element: HTMLDivElement | null) => floating.setArrowElement(element))
+  const setArrowElement = useMemoizedFn((element: HTMLDivElement | null) =>
+    floating.setArrowElement(element),
+  )
   const arrowRef = useComposedRef(setArrowElement, ref)
   const sideStyle: CSSProperties =
     snapshot.side === 'top'

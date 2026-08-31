@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  getCalendarToday,
-  type CalendarRange,
-  type CalendarValue,
-} from '@fex-design/core/calendar'
+import { getCalendarToday, type CalendarRange, type CalendarValue } from '@fex-design/core/calendar'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
 import {

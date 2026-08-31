@@ -1,7 +1,4 @@
-import type {
-  InputOTPController,
-  InputOTPSnapshot,
-} from '@fex-design/core/input-otp/types'
+import type { InputOTPController, InputOTPSnapshot } from '@fex-design/core/input-otp/types'
 import { createContext, use } from 'react'
 
 export interface InputOTPContextValue {

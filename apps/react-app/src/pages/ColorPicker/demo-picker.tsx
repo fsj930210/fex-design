@@ -127,7 +127,9 @@ function PickerPanel({ alpha = true, clear = false }: { alpha?: boolean; clear?:
         </div>
         <div className="flex min-w-0 items-center gap-2">
           {snapshot.format === 'hex' ? (
-            <div className="min-w-0 flex-1"><ColorTextInput value={value?.toHex() ?? ''} /></div>
+            <div className="min-w-0 flex-1">
+              <ColorTextInput value={value?.toHex() ?? ''} />
+            </div>
           ) : (
             <div className="grid min-w-0 flex-1 grid-flow-col auto-cols-fr gap-2">
               {fields.map((channel) => {
@@ -140,7 +142,9 @@ function PickerPanel({ alpha = true, clear = false }: { alpha?: boolean; clear?:
                     max={config.max}
                     step={config.step}
                     value={value ? getColorChannelValue(value, channel) : undefined}
-                    onChange={(_, next) => next !== undefined && controller.setChannel(channel, next, 'field')}
+                    onChange={(_, next) =>
+                      next !== undefined && controller.setChannel(channel, next, 'field')
+                    }
                     onBlur={() => controller.completeInteraction()}
                   />
                 )

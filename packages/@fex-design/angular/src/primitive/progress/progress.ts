@@ -97,7 +97,7 @@ export class Progress {
               ? 'var(--info)'
               : this.status() === 'warning'
                 ? 'var(--warning)'
-              : 'var(--primary)',
+                : 'var(--primary)',
   )
   protected readonly trackStroke = computed(() => this.trackColor() ?? 'var(--progress-remaining)')
   protected readonly resolvedTrackLinecap = computed(() => this.trackLinecap() ?? this.linecap())

@@ -19,7 +19,10 @@ export function ControlledDemo() {
           <p className="text-sm text-muted-foreground">Value: {value || '(empty)'}</p>
         </div>
 
-        <TextareaRoot defaultValue="Uncontrolled textarea value" autoSize={{ minRows: 2, maxRows: 5 }}>
+        <TextareaRoot
+          defaultValue="Uncontrolled textarea value"
+          autoSize={{ minRows: 2, maxRows: 5 }}
+        >
           <TextareaInput aria-label="Uncontrolled textarea" placeholder="Uncontrolled" />
           <TextareaClear aria-label="Clear uncontrolled textarea" />
         </TextareaRoot>

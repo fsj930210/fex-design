@@ -21,7 +21,15 @@ export type CardStyles = CardStylesBase<string>
 @Component({
   selector: 'div[card]',
   standalone: true,
-  imports: [CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter, NgTemplateOutlet],
+  imports: [
+    CardHeader,
+    CardTitle,
+    CardDescription,
+    CardExtra,
+    CardContent,
+    CardFooter,
+    NgTemplateOutlet,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: ':host { display: block; }',
   host: {

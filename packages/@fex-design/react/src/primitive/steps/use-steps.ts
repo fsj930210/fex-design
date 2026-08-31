@@ -28,10 +28,18 @@ export function useSteps<TData = unknown>(options: UseStepsOptions<TData> = {}) 
   const refs = useRef(new Map<StepValue, RefCallback<HTMLElement>>())
   const controllerRef = useLazyRef(() =>
     createStepsController<TData>({
-      get current() { return optionsRef.current.current },
-      get defaultCurrent() { return optionsRef.current.defaultCurrent },
-      get navigation() { return optionsRef.current.navigation },
-      onChange(value, meta) { optionsRef.current.onChange?.(value, meta) },
+      get current() {
+        return optionsRef.current.current
+      },
+      get defaultCurrent() {
+        return optionsRef.current.defaultCurrent
+      },
+      get navigation() {
+        return optionsRef.current.navigation
+      },
+      onChange(value, meta) {
+        optionsRef.current.onChange?.(value, meta)
+      },
     }),
   )
   const controller = controllerRef.current
@@ -79,7 +87,8 @@ export function useSteps<TData = unknown>(options: UseStepsOptions<TData> = {}) 
       props: {
         ref,
         role: navigation ? ('button' as const) : undefined,
-        tabIndex: navigation && !info.disabled ? (snapshot.current === record.value ? 0 : -1) : undefined,
+        tabIndex:
+          navigation && !info.disabled ? (snapshot.current === record.value ? 0 : -1) : undefined,
         'aria-current': snapshot.current === record.value ? ('step' as const) : undefined,
         'aria-disabled': info.disabled || undefined,
         'data-status': info.status,
@@ -95,9 +104,16 @@ export function useSteps<TData = unknown>(options: UseStepsOptions<TData> = {}) 
             controller.select(record.value, 'keyboard')
             return
           }
-          const direction = event.key === 'Home' ? 'first' : event.key === 'End' ? 'last'
-            : event.key === (orientation === 'horizontal' ? 'ArrowRight' : 'ArrowDown') ? 'next'
-              : event.key === (orientation === 'horizontal' ? 'ArrowLeft' : 'ArrowUp') ? 'previous' : undefined
+          const direction =
+            event.key === 'Home'
+              ? 'first'
+              : event.key === 'End'
+                ? 'last'
+                : event.key === (orientation === 'horizontal' ? 'ArrowRight' : 'ArrowDown')
+                  ? 'next'
+                  : event.key === (orientation === 'horizontal' ? 'ArrowLeft' : 'ArrowUp')
+                    ? 'previous'
+                    : undefined
           if (!direction) return
           event.preventDefault()
           const value = controller.move(record.value, direction)

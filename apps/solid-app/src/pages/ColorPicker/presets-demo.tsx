@@ -1,1 +1,1 @@
-export{PresetsDemo}from'./demos'
+export { PresetsDemo } from './demos'

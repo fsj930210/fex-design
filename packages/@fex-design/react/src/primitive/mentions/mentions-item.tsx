@@ -7,15 +7,21 @@ import { ListboxItem } from '../listbox/listbox'
 import { useMentionsContext } from './mentions-context'
 import { useMentionsItem } from './use-mentions'
 
-export interface MentionsItemProps<TData = unknown>
-  extends Omit<ComponentProps<'div'>, 'children' | 'value'> {
+export interface MentionsItemProps<TData = unknown> extends Omit<
+  ComponentProps<'div'>,
+  'children' | 'value'
+> {
   itemKey?: MentionsKey | undefined
   value: string
   disabled?: boolean | undefined
   data?: TData | undefined
   children?:
     | ReactNode
-    | ((state: { active: boolean; disabled: boolean; item: MentionsRegisteredItem<TData> }) => ReactNode)
+    | ((state: {
+        active: boolean
+        disabled: boolean
+        item: MentionsRegisteredItem<TData>
+      }) => ReactNode)
 }
 
 export function MentionsItem<TData = unknown>({
@@ -35,13 +41,10 @@ export function MentionsItem<TData = unknown>({
   const state = useMentionsItem(key, disabled)
   const item: MentionsRegisteredItem<TData> = { key, value, disabled, data }
 
-  useIsomorphicLayoutEffect(() => context.controller.registerItem(item), [
-    context.controller,
-    key,
-    value,
-    disabled,
-    data,
-  ])
+  useIsomorphicLayoutEffect(
+    () => context.controller.registerItem(item),
+    [context.controller, key, value, disabled, data],
+  )
 
   return (
     <ListboxItem
@@ -63,7 +66,9 @@ export function MentionsItem<TData = unknown>({
         if (!event.defaultPrevented) state.select()
       }}
     >
-      {typeof children === 'function' ? children({ active: state.active, disabled, item }) : children}
+      {typeof children === 'function'
+        ? children({ active: state.active, disabled, item })
+        : children}
     </ListboxItem>
   )
 }

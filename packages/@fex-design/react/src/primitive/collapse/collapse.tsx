@@ -9,13 +9,7 @@ import {
 import type { ExpansionChangeMeta, ExpansionKey } from '@fex-design/core/expansion/types'
 import { cn } from '@fex/utils'
 import { useId } from 'react'
-import type {
-  ButtonHTMLAttributes,
-  HTMLAttributes,
-  ReactElement,
-  ReactNode,
-  Ref,
-} from 'react'
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react'
 import { Button } from '../button/button'
 import { ChevronRightIcon } from '../../icon/chevron'
 import {
@@ -34,8 +28,10 @@ type CollapseTriggerDOMProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   'data-state': 'open' | 'closed'
 }
 
-export interface CollapseProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onChange'> {
+export interface CollapseProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children' | 'onChange'
+> {
   expandedKeys?: readonly ExpansionKey[]
   defaultExpandedKeys?: readonly ExpansionKey[]
   disabledKeys?: readonly ExpansionKey[]
@@ -148,8 +144,10 @@ export interface CollapseTriggerRenderProps {
   icon: ReactNode
 }
 
-export interface CollapseTriggerProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+export interface CollapseTriggerProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
   showIcon?: boolean
   children?: ReactNode | RenderChild<CollapseTriggerRenderProps>
 }

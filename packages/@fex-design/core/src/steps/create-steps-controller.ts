@@ -27,7 +27,12 @@ export function createStepsController<TData = unknown>(
   }
   const ordered = () => {
     const orderedValues = new Set(order)
-    return [...order.map((value) => steps.get(value)).filter((step): step is StepRecord<TData> => step !== undefined), ...[...steps.values()].filter((step) => !orderedValues.has(step.value))]
+    return [
+      ...order
+        .map((value) => steps.get(value))
+        .filter((step): step is StepRecord<TData> => step !== undefined),
+      ...[...steps.values()].filter((step) => !orderedValues.has(step.value)),
+    ]
   }
 
   function info(value: StepValue, currentValue = snapshot().current): StepInfo<TData> | undefined {
@@ -63,7 +68,11 @@ export function createStepsController<TData = unknown>(
       options = nextOptions
       if (isControlled() && store.getSnapshot().current !== options.current) {
         store.setSnapshot({ ...store.getSnapshot(), current: options.current })
-      } else if (!isControlled() && store.getSnapshot().current === undefined && options.defaultCurrent !== undefined) {
+      } else if (
+        !isControlled() &&
+        store.getSnapshot().current === undefined &&
+        options.defaultCurrent !== undefined
+      ) {
         store.setSnapshot({ ...store.getSnapshot(), current: options.defaultCurrent })
       }
     },
@@ -75,11 +84,16 @@ export function createStepsController<TData = unknown>(
         previous.disabled !== step.disabled ||
         previous.status !== step.status ||
         previous.data !== step.data
-      ) notifyRegistration()
+      )
+        notifyRegistration()
     },
     setOrder(values) {
       const nextOrder = values.filter((value) => steps.has(value))
-      if (nextOrder.length === order.length && nextOrder.every((value, index) => value === order[index])) return
+      if (
+        nextOrder.length === order.length &&
+        nextOrder.every((value, index) => value === order[index])
+      )
+        return
       order = nextOrder
       notifyRegistration()
     },

@@ -22,23 +22,49 @@ function errorsOf(value: unknown) {
 }
 
 export function ValidationDemo() {
-  const form = createForm(() => ({ defaultValues: { prompt: '' }, onSubmit: async () => undefined }))
+  const form = createForm(() => ({
+    defaultValues: { prompt: '' },
+    onSubmit: async () => undefined,
+  }))
   return (
-    <Card title="Form validation" description="Invalid state drives the default system Textarea styling.">
+    <Card
+      title="Form validation"
+      description="Invalid state drives the default system Textarea styling."
+    >
       <Form form={form} class="grid max-w-xl gap-2">
-        <Field name="prompt" validators={{ onSubmit: ({ value }) => String(value).trim() ? undefined : 'Prompt is required.' }}>
+        <Field
+          name="prompt"
+          validators={{
+            onSubmit: ({ value }) => (String(value).trim() ? undefined : 'Prompt is required.'),
+          }}
+        >
           {(field) => {
             const errors = () => errorsOf(field().state.meta.errors)
             const invalid = () => errors().length > 0
             return (
               <FieldRoot required invalid={invalid()} hasError={invalid()}>
-                <FieldLabel>Prompt <FieldRequiredIndicator /></FieldLabel>
+                <FieldLabel>
+                  Prompt <FieldRequiredIndicator />
+                </FieldLabel>
                 <FieldControl>
                   {() => (
-                    <MentionsRoot value={String(field().state.value)} onChange={(next) => field().handleChange(next)} invalid={invalid()} required>
+                    <MentionsRoot
+                      value={String(field().state.value)}
+                      onChange={(next) => field().handleChange(next)}
+                      invalid={invalid()}
+                      required
+                    >
                       <MentionsTrigger placeholder="Submit empty content to see validation" />
                       <MentionsContent>
-                        <MentionsList><For each={mentionUsers}>{(user) => <MentionsItem itemKey={user.id} value={user.name}>{user.name}</MentionsItem>}</For></MentionsList>
+                        <MentionsList>
+                          <For each={mentionUsers}>
+                            {(user) => (
+                              <MentionsItem itemKey={user.id} value={user.name}>
+                                {user.name}
+                              </MentionsItem>
+                            )}
+                          </For>
+                        </MentionsList>
                       </MentionsContent>
                     </MentionsRoot>
                   )}
@@ -48,7 +74,9 @@ export function ValidationDemo() {
             )
           }}
         </Field>
-        <Button class="w-fit" type="submit">Validate</Button>
+        <Button class="w-fit" type="submit">
+          Validate
+        </Button>
       </Form>
     </Card>
   )

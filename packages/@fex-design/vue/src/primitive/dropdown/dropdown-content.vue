@@ -6,17 +6,21 @@ import { usePopoverContext } from '../popover/context'
 const props = withDefaults(defineProps<{ class?: string; role?: string }>(), { role: 'menu' })
 const { hoverAncestors, overlay } = usePopoverContext('DropdownContent')
 function closeFromItem(event: MouseEvent) {
-  const item = event.target instanceof Element
-    ? event.target.closest<HTMLElement>('[role="menuitem"]')
-    : null
+  const item =
+    event.target instanceof Element ? event.target.closest<HTMLElement>('[role="menuitem"]') : null
   if (!event.defaultPrevented && item && !item.hasAttribute('aria-haspopup')) {
-    ;[...hoverAncestors, overlay].reverse().forEach((current) =>
-      current.close({ reason: 'manual', source: 'menu-item', event }),
-    )
+    ;[...hoverAncestors, overlay]
+      .reverse()
+      .forEach((current) => current.close({ reason: 'manual', source: 'menu-item', event }))
   }
 }
 </script>
 
 <template>
-  <PopoverContent :class="cn(popoverMenuContentClassName, props.class)" :role="props.role" @click="closeFromItem"><slot /></PopoverContent>
+  <PopoverContent
+    :class="cn(popoverMenuContentClassName, props.class)"
+    :role="props.role"
+    @click="closeFromItem"
+    ><slot
+  /></PopoverContent>
 </template>

@@ -1,4 +1,11 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/react/primitive/card'
 
 export function BasicExample() {
   return (

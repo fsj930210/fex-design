@@ -97,9 +97,7 @@ export function ValuePreview({
   const text = isCalendarValueArray(value)
     ? value.map((item) => formatDatePickerValue(item, { picker: 'date' })).join(', ')
     : formatDatePickerValue(value, { picker: 'date' })
-  return (
-    <p className="mt-1.5 w-full text-xs text-muted-foreground">当前值：{text || '未选择'}</p>
-  )
+  return <p className="mt-1.5 w-full text-xs text-muted-foreground">当前值：{text || '未选择'}</p>
 }
 
 function isCalendarValueArray(value: unknown): value is readonly CalendarValue[] {

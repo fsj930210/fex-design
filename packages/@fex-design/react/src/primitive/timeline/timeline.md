@@ -5,7 +5,13 @@ Timeline presents ordered events on a vertical or horizontal axis. It is a state
 ## Import
 
 ```tsx
-import { Timeline, TimelineContent, TimelineIndicator, TimelineItem, TimelineOpposite } from '@fex-design/react/primitive/timeline'
+import {
+  Timeline,
+  TimelineContent,
+  TimelineIndicator,
+  TimelineItem,
+  TimelineOpposite,
+} from '@fex-design/react/primitive/timeline'
 ```
 
 ## Usage
@@ -24,19 +30,19 @@ import { Timeline, TimelineContent, TimelineIndicator, TimelineItem, TimelineOpp
 
 ### Timeline
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Axis direction. |
-| `align` | `'start' \| 'end' \| 'alternate'` | `'end'` | No | Default content placement. |
-| `reverse` | `boolean` | `false` | No | Reverses visual order. |
+| Name          | Type                              | Default      | Required | Description                |
+| ------------- | --------------------------------- | ------------ | -------- | -------------------------- |
+| `orientation` | `'vertical' \| 'horizontal'`      | `'vertical'` | No       | Axis direction.            |
+| `align`       | `'start' \| 'end' \| 'alternate'` | `'end'`      | No       | Default content placement. |
+| `reverse`     | `boolean`                         | `false`      | No       | Reverses visual order.     |
 
 ### TimelineItem
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `status` | built-in status or any string | `'default'` | No | Sets the open `data-status` contract. |
-| `connectorStatus` | built-in status or any string | item status | No | Styles the outgoing connector independently. |
-| `placement` | `'start' \| 'end'` | root alignment | No | Overrides placement for one item. |
+| Name              | Type                          | Default        | Required | Description                                  |
+| ----------------- | ----------------------------- | -------------- | -------- | -------------------------------------------- |
+| `status`          | built-in status or any string | `'default'`    | No       | Sets the open `data-status` contract.        |
+| `connectorStatus` | built-in status or any string | item status    | No       | Styles the outgoing connector independently. |
+| `placement`       | `'start' \| 'end'`            | root alignment | No       | Overrides placement for one item.            |
 
 All primitives accept their native element attributes and merge caller classes. `TimelineIndicator`, `TimelineContent`, and `TimelineOpposite` have no component-specific props.
 

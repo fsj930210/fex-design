@@ -72,9 +72,7 @@ export interface MentionsControllerConfig<TData = unknown> {
   parseQuery?: ((input: MentionsParseInput) => MentionsQuery | null) | undefined
   onChange?: ((value: string, meta: MentionsChangeMeta) => void) | undefined
   onSearch?: ((text: string, meta: MentionsSearchMeta) => void) | undefined
-  onSelect?:
-    | ((item: MentionsRegisteredItem<TData>, meta: MentionsSelectMeta) => void)
-    | undefined
+  onSelect?: ((item: MentionsRegisteredItem<TData>, meta: MentionsSelectMeta) => void) | undefined
   onOpenChange?: ((open: boolean, meta: { reason: MentionsOpenReason }) => void) | undefined
 }
 
@@ -87,7 +85,10 @@ export interface MentionsController<TData = unknown> {
   registerItem: (item: MentionsRegisteredItem<TData>) => () => void
   getItems: () => readonly MentionsRegisteredItem<TData>[]
   moveActive: (direction: 1 | -1) => void
-  setActiveKey: (key: MentionsKey | undefined, interaction?: Exclude<MentionsInteraction, null>) => void
+  setActiveKey: (
+    key: MentionsKey | undefined,
+    interaction?: Exclude<MentionsInteraction, null>,
+  ) => void
   selectItem: (key: MentionsKey) => boolean
   selectActive: () => boolean
 }

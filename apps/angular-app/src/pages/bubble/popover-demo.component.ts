@@ -1,1 +1,32 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{Bubble,BubbleContent}from'@fex-design/angular/primitive/bubble';import{Popover,PopoverContent,PopoverDescription,PopoverHeader,PopoverPortal,PopoverTitle,PopoverTrigger}from'@fex-design/angular/primitive/popover';import Card from'@fex-design/angular/ui/card';@Component({selector:'fex-bubble-popover-demo',standalone:true,imports:[Card,Bubble,BubbleContent,Popover,PopoverTrigger,PopoverPortal,PopoverContent,PopoverHeader,PopoverTitle,PopoverDescription],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./popover-demo.component.html'})export class BubblePopoverDemoComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Bubble, BubbleContent } from '@fex-design/angular/primitive/bubble'
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverPortal,
+  PopoverTitle,
+  PopoverTrigger,
+} from '@fex-design/angular/primitive/popover'
+import Card from '@fex-design/angular/ui/card'
+export
+@Component({
+  selector: 'fex-bubble-popover-demo',
+  standalone: true,
+  imports: [
+    Card,
+    Bubble,
+    BubbleContent,
+    Popover,
+    PopoverTrigger,
+    PopoverPortal,
+    PopoverContent,
+    PopoverHeader,
+    PopoverTitle,
+    PopoverDescription,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './popover-demo.component.html',
+})
+class BubblePopoverDemoComponent {}

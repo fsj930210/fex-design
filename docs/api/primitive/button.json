@@ -133,27 +133,14 @@
           "default": "outlined",
           "description": "按钮的结构变体；与 color 正交组合。",
           "editor": "enum",
-          "options": [
-            "solid",
-            "outlined",
-            "dashed",
-            "filled",
-            "text",
-            "link"
-          ]
+          "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
         },
         {
           "name": "color",
           "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
           "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
           "editor": "enum",
-          "options": [
-            "primary",
-            "danger",
-            "warning",
-            "success",
-            "info"
-          ]
+          "options": ["primary", "danger", "warning", "success", "info"]
         },
         {
           "name": "data-slot",
@@ -174,27 +161,14 @@
               "default": "outlined",
               "description": "按钮的结构变体；与 color 正交组合。",
               "editor": "enum",
-              "options": [
-                "solid",
-                "outlined",
-                "dashed",
-                "filled",
-                "text",
-                "link"
-              ]
+              "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
             },
             {
               "name": "color",
               "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
               "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
               "editor": "enum",
-              "options": [
-                "primary",
-                "danger",
-                "warning",
-                "success",
-                "info"
-              ]
+              "options": ["primary", "danger", "warning", "success", "info"]
             },
             {
               "name": "data-slot",
@@ -222,27 +196,14 @@
               "default": "outlined",
               "description": "按钮的结构变体；与 color 正交组合。",
               "editor": "enum",
-              "options": [
-                "solid",
-                "outlined",
-                "dashed",
-                "filled",
-                "text",
-                "link"
-              ]
+              "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
             },
             {
               "name": "color",
               "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
               "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
               "editor": "enum",
-              "options": [
-                "primary",
-                "danger",
-                "warning",
-                "success",
-                "info"
-              ]
+              "options": ["primary", "danger", "warning", "success", "info"]
             },
             {
               "name": "data-slot",
@@ -270,27 +231,14 @@
               "default": "outlined",
               "description": "按钮的结构变体；与 color 正交组合。",
               "editor": "enum",
-              "options": [
-                "solid",
-                "outlined",
-                "dashed",
-                "filled",
-                "text",
-                "link"
-              ]
+              "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
             },
             {
               "name": "color",
               "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
               "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
               "editor": "enum",
-              "options": [
-                "primary",
-                "danger",
-                "warning",
-                "success",
-                "info"
-              ]
+              "options": ["primary", "danger", "warning", "success", "info"]
             },
             {
               "name": "data-slot",
@@ -318,27 +266,14 @@
               "default": "outlined",
               "description": "按钮的结构变体；与 color 正交组合。",
               "editor": "enum",
-              "options": [
-                "solid",
-                "outlined",
-                "dashed",
-                "filled",
-                "text",
-                "link"
-              ]
+              "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
             },
             {
               "name": "color",
               "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
               "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
               "editor": "enum",
-              "options": [
-                "primary",
-                "danger",
-                "warning",
-                "success",
-                "info"
-              ]
+              "options": ["primary", "danger", "warning", "success", "info"]
             },
             {
               "name": "data-slot",
@@ -366,27 +301,14 @@
               "default": "outlined",
               "description": "按钮的结构变体；与 color 正交组合。",
               "editor": "enum",
-              "options": [
-                "solid",
-                "outlined",
-                "dashed",
-                "filled",
-                "text",
-                "link"
-              ]
+              "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
             },
             {
               "name": "color",
               "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
               "description": "可选的完整语义配色；不设置时使用白底默认按钮。",
               "editor": "enum",
-              "options": [
-                "primary",
-                "danger",
-                "warning",
-                "success",
-                "info"
-              ]
+              "options": ["primary", "danger", "warning", "success", "info"]
             },
             {
               "name": "data-slot",

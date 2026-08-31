@@ -3,7 +3,17 @@ import { ListboxItem, ListboxRoot } from '@fex-design/react/primitive/listbox'
 import { TreeSelectOption } from '@fex-design/react/primitive/tree-select'
 import { Card } from '@fex-design/react/ui/card'
 import { Checkbox } from '@fex-design/react/ui/checkbox'
-import { getDemoTreeChildren, getDemoTreeExpandedKeys, getDemoTreeRoots, getDemoTreeSubtree, getDemoTreeSubtrees, searchDemoTree, searchDemoTreeAsTree, type DemoDepartmentNode, type DemoTreeSearchResult } from '@fex/mock/tree-api'
+import {
+  getDemoTreeChildren,
+  getDemoTreeExpandedKeys,
+  getDemoTreeRoots,
+  getDemoTreeSubtree,
+  getDemoTreeSubtrees,
+  searchDemoTree,
+  searchDemoTreeAsTree,
+  type DemoDepartmentNode,
+  type DemoTreeSearchResult,
+} from '@fex/mock/tree-api'
 import { useRef, useState } from 'react'
 import useMount from '@fex-design/react/hooks/use-mount'
 import { DemoTreeSelect } from './demo-shell'
@@ -25,17 +35,40 @@ function toDemoDepartmentNodes(nodes: readonly DepartmentNode[]): DemoDepartment
     name: node.name,
     childCount: node.childCount,
     ...(node.disabled === undefined ? {} : { disabled: node.disabled }),
-    ...(node.childrenList === undefined ? {} : { children: toDemoDepartmentNodes(node.childrenList) }),
+    ...(node.childrenList === undefined
+      ? {}
+      : { children: toDemoDepartmentNodes(node.childrenList) }),
   }))
 }
 
-function ResultList({ results, multiple, selectedValues = [], onSelectResult }: { results: readonly DemoTreeSearchResult[]; multiple?: boolean; selectedValues?: readonly TreeSelectValue[]; onSelectResult?: (result: DemoTreeSearchResult) => void }) {
+function ResultList({
+  results,
+  multiple,
+  selectedValues = [],
+  onSelectResult,
+}: {
+  results: readonly DemoTreeSearchResult[]
+  multiple?: boolean
+  selectedValues?: readonly TreeSelectValue[]
+  onSelectResult?: (result: DemoTreeSearchResult) => void
+}) {
   return (
-    <ListboxRoot items={results} getItemValue={(result) => result.node.id} value={selectedValues} {...(multiple === undefined ? {} : { multiple })}>
+    <ListboxRoot
+      items={results}
+      getItemValue={(result) => result.node.id}
+      value={selectedValues}
+      {...(multiple === undefined ? {} : { multiple })}
+    >
       {results.map((result) => (
         <TreeSelectOption
           key={result.node.id}
-          item={{ value: result.node.id, label: result.node.name, node: result.node, path: result.path, disabled: result.node.disabled }}
+          item={{
+            value: result.node.id,
+            label: result.node.name,
+            node: result.node,
+            path: result.path,
+            disabled: result.node.disabled,
+          }}
           toggle={multiple}
           clearSearchOnSelect={!multiple}
         >
@@ -45,10 +78,20 @@ function ResultList({ results, multiple, selectedValues = [], onSelectResult }: 
               disabled={result.node.disabled}
               className="flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 data-[selected=true]:bg-selected-background data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
               onClick={(event) => event.stopPropagation()}
-              onSelect={() => { select(); onSelectResult?.(result) }}
+              onSelect={() => {
+                select()
+                onSelectResult?.(result)
+              }}
             >
-              {multiple ? <Checkbox checked={selectedValues.includes(result.node.id)} tabIndex={-1} /> : null}
-              <span className="min-w-0"><span className="block text-sm font-medium">{result.node.name}</span><span className="block truncate text-xs text-muted-foreground">{result.path.map((part) => part.label).join(' / ')}</span></span>
+              {multiple ? (
+                <Checkbox checked={selectedValues.includes(result.node.id)} tabIndex={-1} />
+              ) : null}
+              <span className="min-w-0">
+                <span className="block text-sm font-medium">{result.node.name}</span>
+                <span className="block truncate text-xs text-muted-foreground">
+                  {result.path.map((part) => part.label).join(' / ')}
+                </span>
+              </span>
             </ListboxItem>
           )}
         </TreeSelectOption>
@@ -63,7 +106,9 @@ function useAsyncTreeData() {
     const request = new AbortController()
     void getDemoTreeRoots(request.signal)
       .then(setRoots)
-      .catch((error) => { if (error.name !== 'AbortError') throw error })
+      .catch((error) => {
+        if (error.name !== 'AbortError') throw error
+      })
     return () => request.abort()
   })
   return [roots, setRoots] as const
@@ -94,15 +139,21 @@ export function AsyncDemos() {
       return
     }
     setMode('search')
-    const request = new AbortController(); searchRequest.current = request
-    void searchDemoTree(next, request.signal).then(setResults).catch((error) => { if (error.name !== 'AbortError') throw error })
+    const request = new AbortController()
+    searchRequest.current = request
+    void searchDemoTree(next, request.signal)
+      .then(setResults)
+      .catch((error) => {
+        if (error.name !== 'AbortError') throw error
+      })
   }
   const locate = (result: DemoTreeSearchResult) => {
     setKeyword('')
     setResults([])
     setMode('locating')
     locateRequest.current?.abort()
-    const request = new AbortController(); locateRequest.current = request
+    const request = new AbortController()
+    locateRequest.current = request
     void getDemoTreeSubtree(result.node.id, request.signal).then((response) => {
       setLocatedTree(response.treeData)
       setLocatedExpandedKeys(response.expandedKeys)
@@ -111,7 +162,10 @@ export function AsyncDemos() {
   }
   return (
     <>
-      <Card title="异步单选搜索与路径树回显" description="真实服务端返回带路径的扁平结果；选择后加载祖先路径树，并将目标节点标签回填到输入框。">
+      <Card
+        title="异步单选搜索与路径树回显"
+        description="真实服务端返回带路径的扁平结果；选择后加载祖先路径树，并将目标节点标签回填到输入框。"
+      >
         <DemoTreeSelect
           treeData={toDepartmentNodes(roots)}
           value={value}
@@ -133,13 +187,21 @@ export function AsyncDemos() {
           onClear={() => setMode('browse')}
           expandedKeys={rootExpandedKeys}
           onExpandedKeysChange={setRootExpandedKeys}
-          asyncLoader={async (item, context) => toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))}
+          asyncLoader={async (item, context) =>
+            toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))
+          }
           onTreeDataChange={(next) => setRoots(toDemoDepartmentNodes(next))}
-          locatedTreeData={mode === 'located' && locatedTree.length ? toDepartmentNodes(locatedTree) : undefined}
+          locatedTreeData={
+            mode === 'located' && locatedTree.length ? toDepartmentNodes(locatedTree) : undefined
+          }
           locatedExpandedKeys={mode === 'located' ? locatedExpandedKeys : undefined}
         >
           {mode === 'search' ? (
-            keyword ? <ResultList results={results} onSelectResult={locate} /> : <p className="px-1.5 py-1 text-sm text-muted-foreground">请输入关键字搜索</p>
+            keyword ? (
+              <ResultList results={results} onSelectResult={locate} />
+            ) : (
+              <p className="px-1.5 py-1 text-sm text-muted-foreground">请输入关键字搜索</p>
+            )
           ) : mode === 'locating' ? (
             <p className="px-1.5 py-1 text-sm text-muted-foreground">正在加载路径树…</p>
           ) : undefined}
@@ -152,26 +214,73 @@ export function AsyncDemos() {
   )
 }
 
-function AsyncTreeMultipleDemo({ roots, setRoots }: { roots: readonly DemoDepartmentNode[]; setRoots: (nodes: DemoDepartmentNode[]) => void }) {
+function AsyncTreeMultipleDemo({
+  roots,
+  setRoots,
+}: {
+  roots: readonly DemoDepartmentNode[]
+  setRoots: (nodes: DemoDepartmentNode[]) => void
+}) {
   const [values, setValues] = useState<TreeSelectValue[]>([])
   const [keyword, setKeyword] = useState('')
   const [tree, setTree] = useState<DemoDepartmentNode[]>([])
   const [expandedKeys, setExpandedKeys] = useState<readonly (string | number)[]>([])
   const requestRef = useRef<AbortController | null>(null)
   const search = (next: string) => {
-    setKeyword(next); requestRef.current?.abort()
-    if (!next.trim()) { setTree([]); setExpandedKeys([]); return }
-    const request = new AbortController(); requestRef.current = request
-    void searchDemoTreeAsTree(next, request.signal).then((nodes) => { setTree(nodes); setExpandedKeys(getDemoTreeExpandedKeys(nodes)) })
+    setKeyword(next)
+    requestRef.current?.abort()
+    if (!next.trim()) {
+      setTree([])
+      setExpandedKeys([])
+      return
+    }
+    const request = new AbortController()
+    requestRef.current = request
+    void searchDemoTreeAsTree(next, request.signal).then((nodes) => {
+      setTree(nodes)
+      setExpandedKeys(getDemoTreeExpandedKeys(nodes))
+    })
   }
   return (
-    <Card title="异步多选搜索：裁剪树" description="后端只返回命中节点及其祖先。局部结果无法代表未加载的完整后代，因此示例使用严格勾选，父子不联动。">
-      <DemoTreeSelect treeData={toDepartmentNodes(keyword ? tree : roots)} multiple checkStrictly value={values} searchable searchValue={keyword} onSearchValueChange={search} onChange={(next) => setValues((next as TreeSelectValue[]) ?? [])} onClear={() => { setKeyword(''); setTree([]); setExpandedKeys([]) }} expandedKeys={expandedKeys} onExpandedKeysChange={setExpandedKeys} asyncLoader={keyword ? undefined : async (item, context) => toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))} onTreeDataChange={keyword ? undefined : (next) => setRoots(toDemoDepartmentNodes(next))} />
+    <Card
+      title="异步多选搜索：裁剪树"
+      description="后端只返回命中节点及其祖先。局部结果无法代表未加载的完整后代，因此示例使用严格勾选，父子不联动。"
+    >
+      <DemoTreeSelect
+        treeData={toDepartmentNodes(keyword ? tree : roots)}
+        multiple
+        checkStrictly
+        value={values}
+        searchable
+        searchValue={keyword}
+        onSearchValueChange={search}
+        onChange={(next) => setValues((next as TreeSelectValue[]) ?? [])}
+        onClear={() => {
+          setKeyword('')
+          setTree([])
+          setExpandedKeys([])
+        }}
+        expandedKeys={expandedKeys}
+        onExpandedKeysChange={setExpandedKeys}
+        asyncLoader={
+          keyword
+            ? undefined
+            : async (item, context) =>
+                toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))
+        }
+        onTreeDataChange={keyword ? undefined : (next) => setRoots(toDemoDepartmentNodes(next))}
+      />
     </Card>
   )
 }
 
-function AsyncMultipleDemo({ roots, setRoots }: { roots: readonly DemoDepartmentNode[]; setRoots: (nodes: DemoDepartmentNode[]) => void }) {
+function AsyncMultipleDemo({
+  roots,
+  setRoots,
+}: {
+  roots: readonly DemoDepartmentNode[]
+  setRoots: (nodes: DemoDepartmentNode[]) => void
+}) {
   const [values, setValues] = useState<TreeSelectValue[]>([])
   const [keyword, setKeyword] = useState('')
   const [results, setResults] = useState<DemoTreeSearchResult[]>([])
@@ -179,14 +288,23 @@ function AsyncMultipleDemo({ roots, setRoots }: { roots: readonly DemoDepartment
   const [showResults, setShowResults] = useState(false)
   const requestRef = useRef<AbortController | null>(null)
   const search = (next: string) => {
-    setKeyword(next); requestRef.current?.abort()
-    if (!next.trim()) { setResults([]); setShowResults(false); return }
+    setKeyword(next)
+    requestRef.current?.abort()
+    if (!next.trim()) {
+      setResults([])
+      setShowResults(false)
+      return
+    }
     setShowResults(true)
-    const request = new AbortController(); requestRef.current = request
+    const request = new AbortController()
+    requestRef.current = request
     void searchDemoTree(next, request.signal).then(setResults)
   }
   return (
-    <Card title="异步多选搜索" description="选中项会跨搜索词保留，建议使用复选框反馈；结果区域仍可完全自定义。">
+    <Card
+      title="异步多选搜索"
+      description="选中项会跨搜索词保留，建议使用复选框反馈；结果区域仍可完全自定义。"
+    >
       <DemoTreeSelect
         treeData={toDepartmentNodes(roots)}
         multiple
@@ -202,15 +320,13 @@ function AsyncMultipleDemo({ roots, setRoots }: { roots: readonly DemoDepartment
         }}
         expandedKeys={expandedKeys}
         onExpandedKeysChange={setExpandedKeys}
-        asyncLoader={async (item, context) => toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))}
+        asyncLoader={async (item, context) =>
+          toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))
+        }
         onTreeDataChange={(next) => setRoots(toDemoDepartmentNodes(next))}
       >
         {showResults ? (
-          <ResultList
-            results={results}
-            multiple
-            selectedValues={values}
-          />
+          <ResultList results={results} multiple selectedValues={values} />
         ) : undefined}
       </DemoTreeSelect>
     </Card>
@@ -228,7 +344,9 @@ function AsyncEchoDemo() {
         setTreeData(result.treeData)
         setExpandedKeys(result.expandedKeys)
       })
-      .catch((error) => { if (error.name !== 'AbortError') throw error })
+      .catch((error) => {
+        if (error.name !== 'AbortError') throw error
+      })
     return () => request.abort()
   })
   return (
@@ -245,7 +363,9 @@ function AsyncEchoDemo() {
           setExpandedKeys([])
           void getDemoTreeRoots().then(setTreeData)
         }}
-        asyncLoader={async (item, context) => toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))}
+        asyncLoader={async (item, context) =>
+          toDepartmentNodes(await getDemoTreeChildren(item.key, context.signal))
+        }
         onTreeDataChange={(next) => setTreeData(toDemoDepartmentNodes(next))}
       />
     </Card>

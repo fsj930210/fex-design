@@ -1,6 +1,6 @@
 # Badge Primitive
 
-`BadgeOverflow` belongs to the Badge family. `maxCount` keeps the first badges visible and summarizes the remainder; `renderOverflow` customizes that summary.
+Primitive 提供 `Badge`、`BadgeDot`、`BadgeRibbon` 和 `BadgeGroup`。`BadgeGroup` 负责集合布局、`maxCount` 与 `+N` 溢出；附着定位仍由 UI 层负责。
 
 ## 用途
 
@@ -15,16 +15,16 @@ import { Badge } from '@fex-design/react/primitive/badge'
 ## 核心示例
 
 ```tsx
-<Badge variant="secondary">Pending</Badge>
+<Badge color="warning">Pending</Badge>
 ```
 
 ## Props
 
-| 参数        | 类型                                                                          | 默认值      | 必填 | 说明                   |
-| ----------- | ----------------------------------------------------------------------------- | ----------- | ---- | ---------------------- |
-| `variant`   | `'default' \| 'secondary' \| 'destructive' \| 'outline' \| 'ghost' \| 'link'` | `'default'` | 否   | 徽标视觉语义。         |
-| `className` | `string`                                                                      | `undefined` | 否   | 合并到根元素的 class。 |
-| `children`  | `ReactNode`                                                                   | `undefined` | 否   | 徽标内容。             |
+| 参数        | 类型         | 默认值      | 必填 | 说明                                |
+| ----------- | ------------ | ----------- | ---- | ----------------------------------- |
+| `color`     | `BadgeColor` | —           | 否   | 五种内置语义颜色或任意 CSS 颜色值。 |
+| `className` | `string`     | `undefined` | 否   | 合并到根元素的 class。              |
+| `children`  | `ReactNode`  | `undefined` | 否   | 徽标内容。                          |
 
 ## 事件与状态
 

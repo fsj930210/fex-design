@@ -4,7 +4,9 @@
     <strong>{{ direction.toUpperCase() }}</strong>
     <div class="flex flex-wrap gap-3">
       <button button [attr.dir]="direction"><plus-icon slot="start" />Start icon</button
-      ><button button [attr.dir]="direction" iconPlacement="end">End icon<plus-icon slot="end" /></button>
+      ><button button [attr.dir]="direction" iconPlacement="end">
+        End icon<plus-icon slot="end" />
+      </button>
     </div>
     <div buttonGroup [attr.dir]="direction">
       <button button>First</button><button button>Middle</button><button button>Last</button>

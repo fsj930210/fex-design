@@ -10,15 +10,45 @@ import { filterByText, mentionCommands, mentionDocs, mentionUsers } from './data
 
 function Users() {
   const mentions = useMentions()
-  return <MentionsList><For each={filterByText(mentionUsers, mentions.text(), (item) => item.name)}>{(item) => <MentionsItem itemKey={item.id} value={item.name}>@{item.name}</MentionsItem>}</For></MentionsList>
+  return (
+    <MentionsList>
+      <For each={filterByText(mentionUsers, mentions.text(), (item) => item.name)}>
+        {(item) => (
+          <MentionsItem itemKey={item.id} value={item.name}>
+            @{item.name}
+          </MentionsItem>
+        )}
+      </For>
+    </MentionsList>
+  )
 }
 function Docs() {
   const mentions = useMentions()
-  return <MentionsList><For each={filterByText(mentionDocs, mentions.text(), (item) => item.title)}>{(item) => <MentionsItem itemKey={item.id} value={item.title}>#{item.title}</MentionsItem>}</For></MentionsList>
+  return (
+    <MentionsList>
+      <For each={filterByText(mentionDocs, mentions.text(), (item) => item.title)}>
+        {(item) => (
+          <MentionsItem itemKey={item.id} value={item.title}>
+            #{item.title}
+          </MentionsItem>
+        )}
+      </For>
+    </MentionsList>
+  )
 }
 function Commands() {
   const mentions = useMentions()
-  return <MentionsList><For each={filterByText(mentionCommands, mentions.text(), (item) => item.label)}>{(item) => <MentionsItem itemKey={item.id} value={item.id}>/{item.label}</MentionsItem>}</For></MentionsList>
+  return (
+    <MentionsList>
+      <For each={filterByText(mentionCommands, mentions.text(), (item) => item.label)}>
+        {(item) => (
+          <MentionsItem itemKey={item.id} value={item.id}>
+            /{item.label}
+          </MentionsItem>
+        )}
+      </For>
+    </MentionsList>
+  )
 }
 
 export function PrefixDemo() {
@@ -34,9 +64,15 @@ export function PrefixDemo() {
       >
         <MentionsTrigger placeholder="Try @Ada, #Pricing, or /summarize" />
         <MentionsContent>
-          <MentionsPrefixCase prefix="@"><Users /></MentionsPrefixCase>
-          <MentionsPrefixCase prefix="#"><Docs /></MentionsPrefixCase>
-          <MentionsPrefixCase prefix="/"><Commands /></MentionsPrefixCase>
+          <MentionsPrefixCase prefix="@">
+            <Users />
+          </MentionsPrefixCase>
+          <MentionsPrefixCase prefix="#">
+            <Docs />
+          </MentionsPrefixCase>
+          <MentionsPrefixCase prefix="/">
+            <Commands />
+          </MentionsPrefixCase>
         </MentionsContent>
       </MentionsRoot>
       <p class="mt-1.5 text-xs text-muted-foreground">{selected()}</p>

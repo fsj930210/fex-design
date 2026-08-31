@@ -5,13 +5,7 @@ Vue Tabs provides styled primitive navigation, keyboard behavior, close requests
 ## Import
 
 ```ts
-import {
-  TabsContent,
-  TabsItem,
-  TabsList,
-  TabsRoot,
-  useTabs,
-} from '@fex-design/vue/primitive/tabs'
+import { TabsContent, TabsItem, TabsList, TabsRoot, useTabs } from '@fex-design/vue/primitive/tabs'
 ```
 
 ## Basic usage

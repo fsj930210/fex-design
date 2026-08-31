@@ -1,8 +1,35 @@
 import { createMentionsController } from '@fex-design/core/mentions/create-mentions-controller'
-import type { MentionsChangeMeta, MentionsControllerConfig, MentionsKey, MentionsOpenReason, MentionsParseInput, MentionsQuery, MentionsRegisteredItem, MentionsSearchMeta, MentionsSelectMeta } from '@fex-design/core/mentions/types'
-import { mentionsContentClassName, mentionsItemClassName, mentionsListClassName, mentionsRootClassName } from '@fex-design/styles/mentions'
+import type {
+  MentionsChangeMeta,
+  MentionsControllerConfig,
+  MentionsKey,
+  MentionsOpenReason,
+  MentionsParseInput,
+  MentionsQuery,
+  MentionsRegisteredItem,
+  MentionsSearchMeta,
+  MentionsSelectMeta,
+} from '@fex-design/core/mentions/types'
+import {
+  mentionsContentClassName,
+  mentionsItemClassName,
+  mentionsListClassName,
+  mentionsRootClassName,
+} from '@fex-design/styles/mentions'
 import { cn } from '@fex/utils'
-import { Show, createContext, createEffect, createMemo, createUniqueId, onCleanup, splitProps, useContext, type Accessor, type JSX, type ParentProps } from 'solid-js'
+import {
+  Show,
+  createContext,
+  createEffect,
+  createMemo,
+  createUniqueId,
+  onCleanup,
+  splitProps,
+  useContext,
+  type Accessor,
+  type JSX,
+  type ParentProps,
+} from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { ListboxItem, ListboxRoot } from '../listbox/listbox'
 import { TextareaInput, TextareaRoot } from '../textarea/textarea'
@@ -33,8 +60,9 @@ function getSelection(element: HTMLTextAreaElement | undefined) {
   return { start: element?.selectionStart ?? 0, end: element?.selectionEnd ?? 0 }
 }
 
-export interface MentionsRootProps<TData = unknown>
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>> {
+export interface MentionsRootProps<TData = unknown> extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>
+> {
   value?: string | undefined
   defaultValue?: string | undefined
   onChange?: ((value: string, meta: MentionsChangeMeta) => void) | undefined
@@ -54,9 +82,23 @@ export interface MentionsRootProps<TData = unknown>
 
 export function MentionsRoot<TData = unknown>(props: MentionsRootProps<TData>) {
   const [local, rest] = splitProps(props, [
-    'children', 'class', 'value', 'defaultValue', 'prefix', 'open', 'defaultOpen',
-    'onChange', 'onOpenChange', 'onSearch', 'onSelect', 'parseQuery', 'disabled',
-    'readOnly', 'invalid', 'required', 'status',
+    'children',
+    'class',
+    'value',
+    'defaultValue',
+    'prefix',
+    'open',
+    'defaultOpen',
+    'onChange',
+    'onOpenChange',
+    'onSearch',
+    'onSelect',
+    'parseQuery',
+    'disabled',
+    'readOnly',
+    'invalid',
+    'required',
+    'status',
   ])
   const config: MentionsControllerConfig<TData> = {
     get value() {
@@ -136,8 +178,16 @@ export function MentionsTrigger(
 ) {
   const context = useMentionsContext('MentionsTrigger')
   const [local, rest] = splitProps(props, [
-    'children', 'class', 'rootClass', 'onInput', 'onKeyDown', 'onClick',
-    'onSelect', 'onFocus', 'onBlur', 'ref',
+    'children',
+    'class',
+    'rootClass',
+    'onInput',
+    'onKeyDown',
+    'onClick',
+    'onSelect',
+    'onFocus',
+    'onBlur',
+    'ref',
   ])
   let element: HTMLTextAreaElement | undefined
   let composing = false
@@ -161,11 +211,12 @@ export function MentionsTrigger(
         ? undefined
         : context.listId + '-' + context.snapshot().activeKey,
     'aria-invalid': context.invalid() || undefined,
-     'aria-required': context.required() || undefined,
-     onInput: (event) => {
-       if (typeof local.onInput === 'function') local.onInput(event)
-       if (!event.defaultPrevented) context.controller.setValue(event.currentTarget.value, getSelection(event.currentTarget))
-     },
+    'aria-required': context.required() || undefined,
+    onInput: (event) => {
+      if (typeof local.onInput === 'function') local.onInput(event)
+      if (!event.defaultPrevented)
+        context.controller.setValue(event.currentTarget.value, getSelection(event.currentTarget))
+    },
     onKeyDown: (event) => {
       if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
       if (event.defaultPrevented || composing) return
@@ -196,13 +247,14 @@ export function MentionsTrigger(
     onCompositionStart: () => {
       composing = true
     },
-     onCompositionEnd: (event) => {
-       composing = false
-       context.controller.setValue(event.currentTarget.value, getSelection(event.currentTarget))
-     },
-   }))
+    onCompositionEnd: (event) => {
+      composing = false
+      context.controller.setValue(event.currentTarget.value, getSelection(event.currentTarget))
+    },
+  }))
 
-  if (local.children) return local.children({ props: triggerProps(), state: mentions, ref: setElement })
+  if (local.children)
+    return local.children({ props: triggerProps(), state: mentions, ref: setElement })
 
   return (
     <TextareaRoot
@@ -213,11 +265,7 @@ export function MentionsTrigger(
       invalid={context.invalid()}
       onChange={(value) => context.controller.setValue(value, getSelection(element))}
     >
-      <TextareaInput
-        {...triggerProps()}
-        ref={setElement}
-        class={local.class}
-      />
+      <TextareaInput {...triggerProps()} ref={setElement} class={local.class} />
     </TextareaRoot>
   )
 }
@@ -253,8 +301,9 @@ export function MentionsList(props: ParentProps<JSX.HTMLAttributes<HTMLDivElemen
   )
 }
 
-export interface MentionsItemProps<TData = unknown>
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'value'>> {
+export interface MentionsItemProps<TData = unknown> extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'value'>
+> {
   itemKey?: MentionsKey | undefined
   value: string
   disabled?: boolean | undefined

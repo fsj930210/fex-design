@@ -1,0 +1,14 @@
+<span data-slot="badge-content" [class]="classNames().content" [style]="styles().content"
+  ><ng-content
+/></span>
+@if (visible()) {
+<span
+  [attr.data-slot]="dot() ? 'badge-dot' : 'badge'"
+  [attr.data-color]="color()"
+  [class]="indicatorClassName()"
+  [style.translate]="offset() ? 'none' : null"
+  [style.transform]="offsetTransform()"
+  [style]="styles().indicator"
+  >{{ dot() ? '' : value() }}</span
+>
+}

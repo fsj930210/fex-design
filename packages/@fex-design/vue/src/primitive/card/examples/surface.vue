@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@fex-design/vue/primitive/card'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/vue/primitive/card'
 </script>
 <template>
   <Card

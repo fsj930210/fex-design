@@ -1,1 +1,1 @@
-export{FormatDemo}from'./demos'
+export { FormatDemo } from './demos'

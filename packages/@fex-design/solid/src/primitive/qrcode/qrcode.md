@@ -42,7 +42,9 @@ Svelte also exposes file-level entries such as `primitive/qrcode-root`, `primiti
     <QrCodeModules centerSize={40} />
     <QrCodeCenter size={40}>
       <rect width="100" height="100" rx="20" className="fill-background" />
-      <text x="50" y="52" textAnchor="middle" dominantBaseline="middle">FX</text>
+      <text x="50" y="52" textAnchor="middle" dominantBaseline="middle">
+        FX
+      </text>
     </QrCodeCenter>
   </QrCodeSvg>
 </QrCodeRoot>
@@ -50,28 +52,28 @@ Svelte also exposes file-level entries such as `primitive/qrcode-root`, `primiti
 
 ## Parts
 
-| Part | Purpose |
-| --- | --- |
-| `QrCodeRoot` | Creates and provides the QR code model. |
-| `QrCodeSvg` | Renders an SVG surface. |
-| `QrCodeBackground` | Renders the SVG background rect. |
-| `QrCodeModules` | Renders dark QR modules as an SVG path. |
-| `QrCodeCanvas` | Renders the QR model to a canvas. |
-| `QrCodeCenter` | Embeds centered custom content inside the SVG surface. |
-| `QrCodeOverlay` | Provides an overlay slot for loading, expired, or custom states. |
+| Part               | Purpose                                                          |
+| ------------------ | ---------------------------------------------------------------- |
+| `QrCodeRoot`       | Creates and provides the QR code model.                          |
+| `QrCodeSvg`        | Renders an SVG surface.                                          |
+| `QrCodeBackground` | Renders the SVG background rect.                                 |
+| `QrCodeModules`    | Renders dark QR modules as an SVG path.                          |
+| `QrCodeCanvas`     | Renders the QR model to a canvas.                                |
+| `QrCodeCenter`     | Embeds centered custom content inside the SVG surface.           |
+| `QrCodeOverlay`    | Provides an overlay slot for loading, expired, or custom states. |
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | required | Encoded QR content. |
-| `size` | `number` | `160` | Rendered square size in pixels. |
-| `margin` | `number` | `4` | Quiet-zone module count. |
-| `errorLevel` | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'` | QR error correction level. |
-| `color` | `string` | `'#000000'` | Dark module color. |
-| `bgColor` | `string` | `'#ffffff'` | Background color. |
-| `centerSize` | `number` | `undefined` | Clears the matching center area when rendering modules. |
-| `exclude` | `QrCodeModuleExcludeRect` | `undefined` | Explicit module-space rectangle to skip. |
+| Prop         | Type                       | Default     | Description                                             |
+| ------------ | -------------------------- | ----------- | ------------------------------------------------------- |
+| `value`      | `string`                   | required    | Encoded QR content.                                     |
+| `size`       | `number`                   | `160`       | Rendered square size in pixels.                         |
+| `margin`     | `number`                   | `4`         | Quiet-zone module count.                                |
+| `errorLevel` | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'`       | QR error correction level.                              |
+| `color`      | `string`                   | `'#000000'` | Dark module color.                                      |
+| `bgColor`    | `string`                   | `'#ffffff'` | Background color.                                       |
+| `centerSize` | `number`                   | `undefined` | Clears the matching center area when rendering modules. |
+| `exclude`    | `QrCodeModuleExcludeRect`  | `undefined` | Explicit module-space rectangle to skip.                |
 
 ## Events
 

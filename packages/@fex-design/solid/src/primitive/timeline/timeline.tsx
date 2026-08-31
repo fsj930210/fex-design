@@ -92,6 +92,9 @@ function createTimelinePart(slot: string, className: string) {
   }
 }
 
-export const TimelineIndicator = createTimelinePart('timeline-indicator', timelineIndicatorClassName)
+export const TimelineIndicator = createTimelinePart(
+  'timeline-indicator',
+  timelineIndicatorClassName,
+)
 export const TimelineContent = createTimelinePart('timeline-content', timelineContentClassName)
 export const TimelineOpposite = createTimelinePart('timeline-opposite', timelineOppositeClassName)

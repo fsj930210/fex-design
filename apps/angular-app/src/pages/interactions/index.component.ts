@@ -5,10 +5,7 @@ import { FexDraggableDirective } from '@fex-design/angular/directives/draggable'
 import { FexDroppableDirective } from '@fex-design/angular/directives/droppable'
 import { FexDropzoneDirective } from '@fex-design/angular/directives/dropzone'
 import { FexMoveDirective } from '@fex-design/angular/directives/move'
-import {
-  FexResizeDirective,
-  FexResizeHandleDirective,
-} from '@fex-design/angular/directives/resize'
+import { FexResizeDirective, FexResizeHandleDirective } from '@fex-design/angular/directives/resize'
 import Card from '@fex-design/angular/ui/card'
 
 const draggableItems = {

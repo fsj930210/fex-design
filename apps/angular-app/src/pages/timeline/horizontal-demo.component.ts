@@ -1,2 +1,20 @@
-import { ChangeDetectionStrategy,Component } from '@angular/core';import { Timeline,TimelineContent,TimelineIndicator,TimelineItem,TimelineOpposite } from '@fex-design/angular/primitive/timeline';import { Card } from '@fex-design/angular/ui/card';
-@Component({selector:'fex-timeline-horizontal-demo',standalone:true,imports:[Card,Timeline,TimelineItem,TimelineIndicator,TimelineContent,TimelineOpposite],changeDetection:ChangeDetectionStrategy.OnPush,host:{class:'block'},templateUrl:'./horizontal-demo.component.html'}) export class HorizontalDemoComponent {protected readonly labels=['Ordered','Paid','Shipped','Delivered']}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import {
+  Timeline,
+  TimelineContent,
+  TimelineIndicator,
+  TimelineItem,
+  TimelineOpposite,
+} from '@fex-design/angular/primitive/timeline'
+import { Card } from '@fex-design/angular/ui/card'
+@Component({
+  selector: 'fex-timeline-horizontal-demo',
+  standalone: true,
+  imports: [Card, Timeline, TimelineItem, TimelineIndicator, TimelineContent, TimelineOpposite],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block' },
+  templateUrl: './horizontal-demo.component.html',
+})
+export class HorizontalDemoComponent {
+  protected readonly labels = ['Ordered', 'Paid', 'Shipped', 'Delivered']
+}

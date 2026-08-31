@@ -8,22 +8,22 @@ Styled aspect-ratio container.
 
 ## Components
 
-| Component | Element | Purpose |
-| --- | --- | --- |
-| AspectRatio | div | Inherits the native div; all native attributes and events pass through. Keeps content at the requested ratio. |
+| Component   | Element | Purpose                                                                                                       |
+| ----------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| AspectRatio | div     | Inherits the native div; all native attributes and events pass through. Keeps content at the requested ratio. |
 
 ## Examples
 
 Examples live in `examples/<name>` and are used by the documentation preview.
 
-| Name | Covers |
-| --- | --- |
+| Name      | Covers                |
+| --------- | --------------------- |
 | landscape | 16:9 landscape ratio. |
-| portrait | 9:16 portrait ratio. |
-| square | 1:1 square ratio. |
+| portrait  | 9:16 portrait ratio.  |
+| square    | 1:1 square ratio.     |
 
 ## API
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| ratio | number | — | Aspect ratio such as `16 / 9`. |
+| Name  | Type   | Default | Description                    |
+| ----- | ------ | ------- | ------------------------------ |
+| ratio | number | —       | Aspect ratio such as `16 / 9`. |

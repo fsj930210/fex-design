@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@fex-design/angular/primitive/breadcrumb'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@fex-design/angular/primitive/breadcrumb'
 import { Card } from '@fex-design/angular/ui/card'
 import { BreadcrumbDropdownDemoComponent } from './dropdown-demo.component'
 import { ClassicBreadcrumbComponent } from './classic-breadcrumb.component'
@@ -12,7 +19,22 @@ import { ParallelogramBreadcrumbComponent } from './parallelogram-breadcrumb.com
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [RouterLink, Card, Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, ClassicBreadcrumbComponent, CustomSeparatorBreadcrumbComponent, CapsuleBreadcrumbComponent, RibbonBreadcrumbComponent, ParallelogramBreadcrumbComponent, BreadcrumbDropdownDemoComponent],
+  imports: [
+    RouterLink,
+    Card,
+    Breadcrumb,
+    BreadcrumbList,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+    ClassicBreadcrumbComponent,
+    CustomSeparatorBreadcrumbComponent,
+    CapsuleBreadcrumbComponent,
+    RibbonBreadcrumbComponent,
+    ParallelogramBreadcrumbComponent,
+    BreadcrumbDropdownDemoComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index.component.html',
 })

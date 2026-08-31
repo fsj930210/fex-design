@@ -13,7 +13,10 @@ import {
   type JSX,
   type ParentProps,
 } from 'solid-js'
-import { ThemeProviderContext, type ThemeProviderContext as ThemeProviderContextValue } from './context'
+import {
+  ThemeProviderContext,
+  type ThemeProviderContext as ThemeProviderContextValue,
+} from './context'
 
 export interface ThemeProviderProps extends ParentProps, ThemeControllerOptions {
   scope?: ThemeScope
@@ -28,7 +31,9 @@ export function ThemeProvider(props: ThemeProviderProps) {
     throw new Error("ThemeProvider scope='root' cannot be nested.")
   }
   if (scope() === 'root' && !props.storageKey && !props.forcedTheme) {
-    throw new Error("ThemeProvider scope='root' requires storageKey unless forcedTheme is provided.")
+    throw new Error(
+      "ThemeProvider scope='root' requires storageKey unless forcedTheme is provided.",
+    )
   }
   if (scope() === 'inherit' && !parentContext) {
     throw new Error("ThemeProvider scope='inherit' requires a parent provider.")

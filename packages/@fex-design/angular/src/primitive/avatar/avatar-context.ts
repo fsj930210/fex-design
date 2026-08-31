@@ -5,5 +5,7 @@ import { Injectable, signal } from '@angular/core'
 export class AvatarContext {
   readonly controller = createImageLoadingController(loadImage)
   readonly status = signal(this.controller.getStatus())
-  constructor() { this.controller.subscribe(() => this.status.set(this.controller.getStatus())) }
+  constructor() {
+    this.controller.subscribe(() => this.status.set(this.controller.getStatus()))
+  }
 }

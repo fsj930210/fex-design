@@ -51,27 +51,14 @@
       "default": "outlined",
       "description": "与 Primitive 共用的结构变体。",
       "editor": "enum",
-      "options": [
-        "solid",
-        "outlined",
-        "dashed",
-        "filled",
-        "text",
-        "link"
-      ]
+      "options": ["solid", "outlined", "dashed", "filled", "text", "link"]
     },
     {
       "name": "color",
       "type": "'primary' | 'danger' | 'warning' | 'success' | 'info'",
       "description": "与 Primitive 共用的可选语义配色；不设置时使用白底默认按钮。",
       "editor": "enum",
-      "options": [
-        "primary",
-        "danger",
-        "warning",
-        "success",
-        "info"
-      ]
+      "options": ["primary", "danger", "warning", "success", "info"]
     },
     {
       "name": "effect",
@@ -124,10 +111,7 @@
       }
     },
     "vue": {
-      "omitProps": [
-        "icon",
-        "loadingIndicator"
-      ],
+      "omitProps": ["icon", "loadingIndicator"],
       "slots": [
         {
           "name": "default",
@@ -144,10 +128,7 @@
       ]
     },
     "angular": {
-      "omitProps": [
-        "icon",
-        "loadingIndicator"
-      ],
+      "omitProps": ["icon", "loadingIndicator"],
       "slots": [
         {
           "name": "默认内容",

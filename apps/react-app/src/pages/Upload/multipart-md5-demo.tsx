@@ -1,7 +1,4 @@
-import {
-  fileMd5Feature,
-  type FileMd5FeatureApi,
-} from '@fex-design/core/upload/features/file-md5'
+import { fileMd5Feature, type FileMd5FeatureApi } from '@fex-design/core/upload/features/file-md5'
 import { multipartFeature } from '@fex-design/core/upload/features/multipart'
 import { UploadRoot, UploadTrigger, useUpload } from '@fex-design/react/primitive/upload'
 import { Button } from '@fex-design/react/ui/button'

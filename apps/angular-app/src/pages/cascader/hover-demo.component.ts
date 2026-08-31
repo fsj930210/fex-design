@@ -1,1 +1,15 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{regionOptions}from'./data';import{SimpleCascaderDemo}from'./simple-demo.component';@Component({selector:'fex-cascader-hover-demo',standalone:true,imports:[SimpleCascaderDemo],changeDetection:ChangeDetectionStrategy.OnPush,template:'<fex-cascader-simple-demo title="Hover expansion" description="Move across independently scrolling columns." [options]="options" expandTrigger="hover" />'})export class HoverDemo{readonly options=regionOptions}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { regionOptions } from './data'
+import { SimpleCascaderDemo } from './simple-demo.component'
+export
+@Component({
+  selector: 'fex-cascader-hover-demo',
+  standalone: true,
+  imports: [SimpleCascaderDemo],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template:
+    '<fex-cascader-simple-demo title="Hover expansion" description="Move across independently scrolling columns." [options]="options" expandTrigger="hover" />',
+})
+class HoverDemo {
+  readonly options = regionOptions
+}

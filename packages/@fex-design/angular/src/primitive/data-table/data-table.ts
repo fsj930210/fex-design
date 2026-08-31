@@ -235,9 +235,7 @@ export class DataTable {
   protected readonly viewportClassName = computed(() =>
     cn(dataTableViewportClassName, this.partClass().viewport),
   )
-  protected readonly tableClassName = computed(() =>
-    cn(dataTableClassName, this.partClass().table),
-  )
+  protected readonly tableClassName = computed(() => cn(dataTableClassName, this.partClass().table))
   protected readonly headerClassName = computed(() =>
     cn(dataTableHeaderClassName, this.partClass().header),
   )
@@ -295,11 +293,14 @@ export class DataTable {
   }
   protected rowStyle(row: DataTableRow) {
     return this.layoutStyle(
-      getDataTableRowLayout(row as unknown as DataTableRowRenderingSource, this.pinningTable()).style,
+      getDataTableRowLayout(row as unknown as DataTableRowRenderingSource, this.pinningTable())
+        .style,
     )
   }
   protected cells(row: DataTableRow) {
-    return getDataTableRenderedCells(row as unknown as DataTableRowRenderingSource) as DataTableCell[]
+    return getDataTableRenderedCells(
+      row as unknown as DataTableRowRenderingSource,
+    ) as DataTableCell[]
   }
   protected cellClass(cell: DataTableCell) {
     const layout = getDataTableColumnLayout(
@@ -348,8 +349,9 @@ export class DataTable {
   }
   protected canResize(header: DataTableHeader) {
     return (
-      (header.column as DataTableHeader['column'] & { getCanResize?: () => boolean }).getCanResize?.() ??
-      false
+      (
+        header.column as DataTableHeader['column'] & { getCanResize?: () => boolean }
+      ).getCanResize?.() ?? false
     )
   }
   protected isResizing(header: DataTableHeader) {
@@ -361,7 +363,9 @@ export class DataTable {
   }
   protected resize(header: DataTableHeader, event: MouseEvent | TouchEvent) {
     ;(
-      header as DataTableHeader & { getResizeHandler?: () => (value: MouseEvent | TouchEvent) => void }
+      header as DataTableHeader & {
+        getResizeHandler?: () => (value: MouseEvent | TouchEvent) => void
+      }
     ).getResizeHandler?.()(event)
   }
   protected resetSize(header: DataTableHeader) {

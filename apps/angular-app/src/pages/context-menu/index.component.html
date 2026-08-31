@@ -5,19 +5,28 @@
       <div>
         <h1 class="text-2xl font-semibold text-foreground">ContextMenu</h1>
         <p class="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-          Right-click primitive based on pointer virtual references. The trigger directive binds to existing elements,
-          so tree rows, table headers and custom panels keep their DOM shape.
+          Right-click primitive based on pointer virtual references. The trigger directive binds to
+          existing elements, so tree rows, table headers and custom panels keep their DOM shape.
         </p>
       </div>
     </header>
     <div class="space-y-4">
-      <fex-card title="Basic right click" description="The trigger directive binds directly to the caller element; no wrapper is inserted.">
+      <fex-card
+        title="Basic right click"
+        description="The trigger directive binds directly to the caller element; no wrapper is inserted."
+      >
         <app-context-menu-basic-demo />
       </fex-card>
-      <fex-card title="Tree node menu" description="Each tree row stays the actual trigger target, preserving indentation and row structure.">
+      <fex-card
+        title="Tree node menu"
+        description="Each tree row stays the actual trigger target, preserving indentation and row structure."
+      >
         <app-context-menu-tree-demo />
       </fex-card>
-      <fex-card title="Data table header and row menus" description="The same ContextMenu root can serve header cells and body rows with different payloads.">
+      <fex-card
+        title="Data table header and row menus"
+        description="The same ContextMenu root can serve header cells and body rows with different payloads."
+      >
         <app-context-menu-data-table-demo />
       </fex-card>
     </div>

@@ -50,7 +50,11 @@ export class ThemeProvider implements AfterViewInit, OnChanges, OnDestroy {
   private unsubscribe?: () => void
   private removeMediaListener?: () => void
   private removeStorageListener?: () => void
-  readonly snapshot = signal<ThemeSnapshot>({ theme: 'light', themes: ['light', 'dark'], resolvedTheme: 'light' })
+  readonly snapshot = signal<ThemeSnapshot>({
+    theme: 'light',
+    themes: ['light', 'dark'],
+    resolvedTheme: 'light',
+  })
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
@@ -69,7 +73,9 @@ export class ThemeProvider implements AfterViewInit, OnChanges, OnDestroy {
       throw new Error("ThemeProvider scope='root' cannot be nested.")
     }
     if (this.scope === 'root' && !this.storageKey && !this.forcedTheme) {
-      throw new Error("ThemeProvider scope='root' requires storageKey unless forcedTheme is provided.")
+      throw new Error(
+        "ThemeProvider scope='root' requires storageKey unless forcedTheme is provided.",
+      )
     }
     if (this.scope === 'inherit' && !this.parent) {
       throw new Error("ThemeProvider scope='inherit' requires a parent provider.")
@@ -110,7 +116,8 @@ export class ThemeProvider implements AfterViewInit, OnChanges, OnDestroy {
     return this.scope === 'inherit' && this.parent ? this.parent.activeController : this.controller
   }
 
-  setTheme = (theme: Parameters<ThemeController['setTheme']>[0]) => this.activeController.setTheme(theme)
+  setTheme = (theme: Parameters<ThemeController['setTheme']>[0]) =>
+    this.activeController.setTheme(theme)
 
   get currentSnapshot() {
     return this.activeController.getSnapshot()

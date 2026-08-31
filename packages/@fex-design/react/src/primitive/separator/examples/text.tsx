@@ -16,8 +16,8 @@ const Labeled = ({
 )
 export const TextDemo = () => (
   <div className="grid w-full max-w-xl gap-4">
-      <Labeled label="Start" placement="start" />
-      <Labeled label="Center" placement="center" />
-      <Labeled label="End" placement="end" />
+    <Labeled label="Start" placement="start" />
+    <Labeled label="Center" placement="center" />
+    <Labeled label="End" placement="end" />
   </div>
 )

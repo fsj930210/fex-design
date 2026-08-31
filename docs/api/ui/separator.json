@@ -18,10 +18,7 @@
       "default": "horizontal",
       "description": "分隔线方向。",
       "editor": "enum",
-      "options": [
-        "horizontal",
-        "vertical"
-      ]
+      "options": ["horizontal", "vertical"]
     }
   ],
   "events": [],

@@ -1,14 +1,12 @@
-
-  <div class="grid w-full max-w-lg">
-    @for (item of items; track item.label; let last = $last) {
-    <div>
-      <div class="flex justify-between py-2">
-        <span>{{ item.label }}</span
-        ><span class="text-muted-foreground">{{ item.value }}</span>
-      </div>
-      @if (!last) {
-      <div separator></div>
-      }
+<div class="grid w-full max-w-lg">
+  @for (item of items; track item.label; let last = $last) {
+  <div>
+    <div class="flex justify-between py-2">
+      <span>{{ item.label }}</span><span class="text-muted-foreground">{{ item.value }}</span>
     </div>
+    @if (!last) {
+    <div separator></div>
     }
   </div>
+  }
+</div>

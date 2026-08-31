@@ -1,1 +1,9 @@
-import {Card} from'@fex-design/react/ui/card';import{InlinePicker}from'./demo-picker';export function CustomPanelDemo(){return <Card title="自定义面板" description="使用 OKLCH Lightness、Chroma 与 Hue 重新组合面板。"><InlinePicker oklch/></Card>}
+import { Card } from '@fex-design/react/ui/card'
+import { InlinePicker } from './demo-picker'
+export function CustomPanelDemo() {
+  return (
+    <Card title="自定义面板" description="使用 OKLCH Lightness、Chroma 与 Hue 重新组合面板。">
+      <InlinePicker oklch />
+    </Card>
+  )
+}

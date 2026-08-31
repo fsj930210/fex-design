@@ -1,1 +1,6 @@
-import type{MessageSide}from'@fex-design/core/message/types';import{InjectionToken,type Signal}from'@angular/core';export const MESSAGE_CONTEXT=new InjectionToken<{side:Signal<MessageSide>;busy:Signal<boolean>}>('MESSAGE_CONTEXT')
+import type { MessageSide } from '@fex-design/core/message/types'
+import { InjectionToken, type Signal } from '@angular/core'
+export const MESSAGE_CONTEXT = new InjectionToken<{
+  side: Signal<MessageSide>
+  busy: Signal<boolean>
+}>('MESSAGE_CONTEXT')

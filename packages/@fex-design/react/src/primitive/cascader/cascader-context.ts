@@ -18,7 +18,9 @@ export interface CascaderContextValue {
   status?: 'error' | 'warning' | undefined
   placeholder?: string | undefined
   selectedPaths: readonly (readonly CascaderNode[])[]
-  displayRender?: ((labels: readonly string[], path: readonly CascaderOption[]) => ReactNode) | undefined
+  displayRender?:
+    | ((labels: readonly string[], path: readonly CascaderOption[]) => ReactNode)
+    | undefined
 }
 
 export const CascaderContext = createContext<CascaderContextValue | null>(null)

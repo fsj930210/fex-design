@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, Directive, HostListener, forwardRef } from '@angular/core'
 import {
-  popoverContentClassName,
-  popoverMenuContentClassName,
-} from '@fex-design/styles/popover'
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  HostListener,
+  forwardRef,
+} from '@angular/core'
+import { popoverContentClassName, popoverMenuContentClassName } from '@fex-design/styles/popover'
 import { cn } from '@fex/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/popover'
 import { createHostClassName } from '../../signals/host-class'
@@ -37,13 +40,14 @@ export class DropdownContent extends PopoverContent {
 
   @HostListener('click', ['$event'])
   closeFromItem(event: MouseEvent) {
-    const item = event.target instanceof Element
-      ? event.target.closest<HTMLElement>('[role="menuitem"]')
-      : null
+    const item =
+      event.target instanceof Element
+        ? event.target.closest<HTMLElement>('[role="menuitem"]')
+        : null
     if (!event.defaultPrevented && item && !item.hasAttribute('aria-haspopup')) {
-      ;[...this.popover.hoverAncestors, this.popover.overlay].reverse().forEach((current) =>
-        current.close({ reason: 'manual', source: 'menu-item', event }),
-      )
+      ;[...this.popover.hoverAncestors, this.popover.overlay]
+        .reverse()
+        .forEach((current) => current.close({ reason: 'manual', source: 'menu-item', event }))
     }
   }
 }

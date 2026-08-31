@@ -23,7 +23,11 @@ function toIdentifier(slug) {
 
 function unwrapExpression(expression) {
   let current = expression
-  while (ts.isAsExpression(current) || ts.isParenthesizedExpression(current) || ts.isSatisfiesExpression(current)) {
+  while (
+    ts.isAsExpression(current) ||
+    ts.isParenthesizedExpression(current) ||
+    ts.isSatisfiesExpression(current)
+  ) {
     current = current.expression
   }
   return current
@@ -44,16 +48,23 @@ async function validateFrameworkContracts(slug, layer) {
     for (const framework of frameworks) {
       const shared = api.frameworks?.[framework] ?? {}
       const native = component.frameworks?.[framework] ?? {}
-      const properties = (native.props ?? component.props).filter((property) => !native.omitProps?.includes(property.name))
+      const properties = (native.props ?? component.props).filter(
+        (property) => !native.omitProps?.includes(property.name),
+      )
       const propertyNames = new Set(properties.map((property) => property.name))
-      if ((propertyNames.has('class') || propertyNames.has('className')) && !propertyNames.has('style')) {
+      if (
+        (propertyNames.has('class') || propertyNames.has('className')) &&
+        !propertyNames.has('style')
+      ) {
         fail(`${file} exposes class without style for ${framework}.${component.name}`)
       }
       const typeOverrides = { ...shared.typeOverrides, ...native.typeOverrides }
       for (const property of properties) {
         for (const placeholder of property.type.match(/Framework[A-Z][A-Za-z]+/g) ?? []) {
           if (!typeOverrides[placeholder]) {
-            fail(`${file} leaves ${placeholder} unresolved for ${framework}.${component.name}.${property.name}`)
+            fail(
+              `${file} leaves ${placeholder} unresolved for ${framework}.${component.name}.${property.name}`,
+            )
           }
         }
       }
@@ -66,10 +77,16 @@ function parseManifest(sourceText, file) {
   const declarations = []
   for (const statement of source.statements) {
     if (!ts.isVariableStatement(statement)) continue
-    if (!statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)) continue
+    if (!statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword))
+      continue
     for (const declaration of statement.declarationList.declarations) {
-      if (!ts.isIdentifier(declaration.name) || !declaration.name.text.endsWith('Examples')) continue
-      if (!declaration.initializer || !ts.isObjectLiteralExpression(unwrapExpression(declaration.initializer))) continue
+      if (!ts.isIdentifier(declaration.name) || !declaration.name.text.endsWith('Examples'))
+        continue
+      if (
+        !declaration.initializer ||
+        !ts.isObjectLiteralExpression(unwrapExpression(declaration.initializer))
+      )
+        continue
       declarations.push(declaration)
     }
   }
@@ -79,13 +96,17 @@ function parseManifest(sourceText, file) {
   const manifestObject = unwrapExpression(declaration.initializer)
   for (const property of manifestObject.properties) {
     if (!ts.isPropertyAssignment(property) || !ts.isIdentifier(property.name)) continue
-    if (!layers.includes(property.name.text) || !ts.isArrayLiteralExpression(property.initializer)) continue
+    if (!layers.includes(property.name.text) || !ts.isArrayLiteralExpression(property.initializer))
+      continue
     const ids = []
     for (const item of property.initializer.elements) {
-      if (!ts.isObjectLiteralExpression(item)) fail(`${file} has an invalid ${property.name.text} scene`)
+      if (!ts.isObjectLiteralExpression(item))
+        fail(`${file} has an invalid ${property.name.text} scene`)
       const id = item.properties.find(
         (candidate) =>
-          ts.isPropertyAssignment(candidate) && ts.isIdentifier(candidate.name) && candidate.name.text === 'id',
+          ts.isPropertyAssignment(candidate) &&
+          ts.isIdentifier(candidate.name) &&
+          candidate.name.text === 'id',
       )
       if (!id || !ts.isPropertyAssignment(id) || !ts.isStringLiteral(id.initializer)) {
         fail(`${file} has a scene without a string id`)
@@ -104,16 +125,23 @@ function importPath(from, target) {
 }
 
 const documentSlugs = await names(contentRoot, '.mdx')
-const apiSlugs = new Map(await Promise.all(layers.map(async (layer) => [layer, await names(resolve(apiRoot, layer), '.json')])))
+const apiSlugs = new Map(
+  await Promise.all(
+    layers.map(async (layer) => [layer, await names(resolve(apiRoot, layer), '.json')]),
+  ),
+)
 const manifestSlugs = (await names(manifestRoot, '-manifest.ts')).sort()
 
 for (const layer of layers) {
   const expected = documentSlugs.join(',')
   const actual = apiSlugs.get(layer).join(',')
-  if (expected !== actual) fail(`${layer} API slugs (${actual}) do not match documents (${expected})`)
+  if (expected !== actual)
+    fail(`${layer} API slugs (${actual}) do not match documents (${expected})`)
 }
 if (documentSlugs.join(',') !== manifestSlugs.join(',')) {
-  fail(`manifest slugs (${manifestSlugs.join(',')}) do not match documents (${documentSlugs.join(',')})`)
+  fail(
+    `manifest slugs (${manifestSlugs.join(',')}) do not match documents (${documentSlugs.join(',')})`,
+  )
 }
 
 const registry = []
@@ -131,18 +159,38 @@ const lines = [
 for (const item of registry) {
   const name = toIdentifier(item.slug)
   for (const layer of layers) {
-    lines.push(`import ${layer}${name}Api from '${importPath(output, resolve(apiRoot, layer, `${item.slug}.json`))}'`)
+    lines.push(
+      `import ${layer}${name}Api from '${importPath(output, resolve(apiRoot, layer, `${item.slug}.json`))}'`,
+    )
   }
-  lines.push(`import * as ${item.slug.replace(/-/g, '')}Manifest from '${importPath(output, item.manifestFile)}'`)
+  lines.push(
+    `import * as ${item.slug.replace(/-/g, '')}Manifest from '${importPath(output, item.manifestFile)}'`,
+  )
 }
 lines.push('', 'export const componentApis = {')
 for (const item of registry) {
   const name = toIdentifier(item.slug)
-  lines.push(`  '${item.slug}': { primitive: primitive${name}Api as ComponentApi, ui: ui${name}Api as ComponentApi },`)
+  lines.push(
+    `  '${item.slug}': { primitive: primitive${name}Api as ComponentApi, ui: ui${name}Api as ComponentApi },`,
+  )
 }
-lines.push("} as const satisfies Record<string, Record<'primitive' | 'ui', ComponentApi>>", '', 'export const componentExamples = {')
-for (const item of registry) lines.push(`  '${item.slug}': ${item.slug.replace(/-/g, '')}Manifest.${item.exportName},`)
-lines.push('} as const', '', 'export type DocumentedComponent = keyof typeof componentApis', '', 'export function isDocumentedComponent(slug: string): slug is DocumentedComponent {', '  return slug in componentApis', '}', '')
+lines.push(
+  "} as const satisfies Record<string, Record<'primitive' | 'ui', ComponentApi>>",
+  '',
+  'export const componentExamples = {',
+)
+for (const item of registry)
+  lines.push(`  '${item.slug}': ${item.slug.replace(/-/g, '')}Manifest.${item.exportName},`)
+lines.push(
+  '} as const',
+  '',
+  'export type DocumentedComponent = keyof typeof componentApis',
+  '',
+  'export function isDocumentedComponent(slug: string): slug is DocumentedComponent {',
+  '  return slug in componentApis',
+  '}',
+  '',
+)
 
 await mkdir(dirname(output), { recursive: true })
 await writeFile(output, lines.join('\n'))

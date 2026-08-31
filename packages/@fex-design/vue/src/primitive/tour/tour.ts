@@ -8,4 +8,9 @@ export { default as TourArrow } from './tour-arrow.vue'
 export { default as TourControl, type TourAction } from './tour-control.vue'
 export { useTourContext, useTourContentContext } from './context'
 export { useTour } from './use-tour'
-export type { TourOptions, TourStepOptions, TourSnapshot, TourController } from '@fex-design/core/tour/types'
+export type {
+  TourOptions,
+  TourStepOptions,
+  TourSnapshot,
+  TourController,
+} from '@fex-design/core/tour/types'

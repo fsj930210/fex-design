@@ -10,5 +10,7 @@ const attrs = useAttrs()
     v-bind="attrs"
     data-slot="input-otp-group"
     :class="cn(inputOTPGroupClassName, attrs.class as string | undefined)"
-  ><slot /></div>
+  >
+    <slot />
+  </div>
 </template>

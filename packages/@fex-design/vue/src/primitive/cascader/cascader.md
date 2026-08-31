@@ -21,26 +21,26 @@ A single value is a complete path such as `['zhejiang', 'hangzhou', 'xihu']`. A 
 
 ## Root props
 
-| Prop | Type | Description |
-| --- | --- | --- |
-| `options` | `readonly CascaderOption[]` | Hierarchical source data. |
-| `fieldNames` | `{ value?, label?, children?, disabled?, isLeaf? }` | Declarative field mapping. |
-| `value` / `defaultValue` | `CascaderValue` | Controlled or initial path value. |
-| `onChange` | `(value, meta) => void` | User selection change with selected option paths. |
-| `multiple` | `boolean` | Enables checkbox path selection. |
-| `checkStrictly` | `boolean` | Disables parent-child check conduction. |
-| `changeOnSelect` | `boolean` | Allows intermediate paths to be submitted. |
-| `open` / `defaultOpen` | `boolean` | Controlled or initial popup state. |
-| `onOpenChange` | `(open) => void` | Popup-state notification. |
-| `expandTrigger` | `'click' | 'hover'` | How non-leaf options expand. |
-| `showSearch` | `boolean` | Enables full-depth path search. |
-| `filterOption` | `boolean | (keyword, path) => boolean` | Default local filter, custom filter, or `false` for remote results. |
-| `onSearch` | `(keyword) => void` | Uses the same search contract as Select. |
-| `loadData` | `(selectedOptions) => Promise<void>` | Loads children for an unresolved path. |
-| `loading` | `boolean` | Displays the project loading icon in the trigger. |
-| `clearable` | `boolean` | Enables the project clear button. |
-| `disabled` | `boolean` | Disables interaction. |
-| `status` | `'error' | 'warning'` | Field validation styling. |
+| Prop                     | Type                                                | Description                                       |
+| ------------------------ | --------------------------------------------------- | ------------------------------------------------- |
+| `options`                | `readonly CascaderOption[]`                         | Hierarchical source data.                         |
+| `fieldNames`             | `{ value?, label?, children?, disabled?, isLeaf? }` | Declarative field mapping.                        |
+| `value` / `defaultValue` | `CascaderValue`                                     | Controlled or initial path value.                 |
+| `onChange`               | `(value, meta) => void`                             | User selection change with selected option paths. |
+| `multiple`               | `boolean`                                           | Enables checkbox path selection.                  |
+| `checkStrictly`          | `boolean`                                           | Disables parent-child check conduction.           |
+| `changeOnSelect`         | `boolean`                                           | Allows intermediate paths to be submitted.        |
+| `open` / `defaultOpen`   | `boolean`                                           | Controlled or initial popup state.                |
+| `onOpenChange`           | `(open) => void`                                    | Popup-state notification.                         |
+| `expandTrigger`          | `'click'                                            | 'hover'`                                          | How non-leaf options expand.                                        |
+| `showSearch`             | `boolean`                                           | Enables full-depth path search.                   |
+| `filterOption`           | `boolean                                            | (keyword, path) => boolean`                       | Default local filter, custom filter, or `false` for remote results. |
+| `onSearch`               | `(keyword) => void`                                 | Uses the same search contract as Select.          |
+| `loadData`               | `(selectedOptions) => Promise<void>`                | Loads children for an unresolved path.            |
+| `loading`                | `boolean`                                           | Displays the project loading icon in the trigger. |
+| `clearable`              | `boolean`                                           | Enables the project clear button.                 |
+| `disabled`               | `boolean`                                           | Disables interaction.                             |
+| `status`                 | `'error'                                            | 'warning'`                                        | Field validation styling.                                           |
 
 ## Parts
 
@@ -67,4 +67,3 @@ The trigger uses combobox state, columns use listbox semantics, and options expo
 ## Notes
 
 Values must use string or number path segments. Keep sibling values unique within a parent path. Do not mutate options in place; replace affected branches after lazy loading so framework adapters can react.
-

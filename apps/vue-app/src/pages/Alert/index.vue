@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import {
-  Alert,
-  AlertAction,
-  AlertDescription,
-  AlertTitle,
-} from '@fex-design/vue/primitive/alert'
+import { Alert, AlertAction, AlertDescription, AlertTitle } from '@fex-design/vue/primitive/alert'
 import { Badge } from '@fex-design/vue/primitive/badge'
 import Card from '@fex-design/vue/ui/card'
 import { InfoIcon } from '@fex-design/vue/icon/info'

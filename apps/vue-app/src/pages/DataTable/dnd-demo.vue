@@ -214,11 +214,7 @@ function motionRef(register: (id: string, element: HTMLElement | null) => unknow
     description="Both axes reuse the existing useSortable controller, overlay and motion registry. DataTable only exposes native part props so callers can attach the project interaction without binding a policy into the table primitive."
   >
     <div class="space-y-3">
-      <section
-        v-for="item in [free, locked]"
-        :key="String(item.constrained)"
-        class="space-y-1.5"
-      >
+      <section v-for="item in [free, locked]" :key="String(item.constrained)" class="space-y-1.5">
         <h3 class="text-sm font-medium text-foreground">
           {{ item.constrained ? 'Column: group boundaries + pinned locked' : 'Column reorder' }}
         </h3>

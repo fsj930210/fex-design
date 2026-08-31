@@ -1,1 +1,1 @@
-export{ClearDemo}from'./demos'
+export { ClearDemo } from './demos'

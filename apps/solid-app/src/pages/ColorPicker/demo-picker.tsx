@@ -125,7 +125,9 @@ export function PickerPanel(props: { alpha?: boolean; clear?: boolean; oklch?: b
                           ? getColorChannelValue(picker.snapshot().value!, channel)
                           : undefined
                       }
-                      onChange={(_, next) => next !== undefined && picker.controller.setChannel(channel, next, 'field')}
+                      onChange={(_, next) =>
+                        next !== undefined && picker.controller.setChannel(channel, next, 'field')
+                      }
                       onBlur={() => picker.controller.completeInteraction()}
                     />
                   )

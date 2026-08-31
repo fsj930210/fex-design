@@ -11,6 +11,3 @@ import { buttonClassName } from '@fex-design/styles/button'
     <Button :class="buttonClassName()" aria-pressed="true">Pressed</Button>
   </div>
 </template>
-
-
-

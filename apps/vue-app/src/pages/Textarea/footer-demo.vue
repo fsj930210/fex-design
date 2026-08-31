@@ -16,7 +16,10 @@ const value = ref('')
 </script>
 
 <template>
-  <Card title="Footer" description="Footer is only a layout slot; actions are fully owned by the caller.">
+  <Card
+    title="Footer"
+    description="Footer is only a layout slot; actions are fully owned by the caller."
+  >
     <TextareaRoot
       class="max-w-2xl"
       :value="value"
@@ -27,12 +30,18 @@ const value = ref('')
       <TextareaClear aria-label="Clear message" />
       <TextareaFooter>
         <div class="flex min-w-0 flex-wrap items-center gap-1">
-          <Button aria-label="Attach" size="icon-sm" variant="ghost"><template #icon><PlusIcon /></template></Button>
-          <Button size="sm" variant="ghost"><template #icon><InfoIcon /></template>Context</Button>
+          <Button aria-label="Attach" size="icon-sm" variant="ghost"
+            ><template #icon><PlusIcon /></template
+          ></Button>
+          <Button size="sm" variant="ghost"
+            ><template #icon><InfoIcon /></template>Context</Button
+          >
         </div>
         <div class="flex shrink-0 items-center gap-2">
           <span>{{ value.length }} / 2000</span>
-          <Button aria-label="Send" :disabled="!value.trim()" size="icon-sm"><template #icon><CheckIcon /></template></Button>
+          <Button aria-label="Send" :disabled="!value.trim()" size="icon-sm"
+            ><template #icon><CheckIcon /></template
+          ></Button>
         </div>
       </TextareaFooter>
     </TextareaRoot>

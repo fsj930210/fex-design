@@ -75,7 +75,9 @@ function handleKeydown(event: KeyboardEvent) {
     void controller.previous()
   }
 }
-function refresh() { controller.refreshTarget() }
+function refresh() {
+  controller.refreshTarget()
+}
 
 provide(tourKey, {
   controller,

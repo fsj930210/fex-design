@@ -12,8 +12,15 @@ export function ErrorLevelDemo() {
         <For each={levels}>
           {(level) => (
             <div class="grid gap-1 text-center text-sm text-muted-foreground">
-              <QrCode.Root value={'https://fex.design/qrcode/error/' + level} size={128} errorLevel={level}>
-                <QrCode.Svg><QrCode.Background /><QrCode.Modules /></QrCode.Svg>
+              <QrCode.Root
+                value={'https://fex.design/qrcode/error/' + level}
+                size={128}
+                errorLevel={level}
+              >
+                <QrCode.Svg>
+                  <QrCode.Background />
+                  <QrCode.Modules />
+                </QrCode.Svg>
               </QrCode.Root>
               <span>{level}</span>
             </div>

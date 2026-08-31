@@ -6,12 +6,7 @@ import {
   FieldRequiredIndicator,
   FieldRoot,
 } from '@fex-design/angular/primitive/field'
-import {
-  Form,
-  FormField,
-  injectForm,
-  type AnyFieldApi,
-} from '@fex-design/angular/primitive/form'
+import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
 import { MentionsContent } from '@fex-design/angular/primitive/mentions/content'
 import { MentionsItem } from '@fex-design/angular/primitive/mentions/item'
 import { MentionsList } from '@fex-design/angular/primitive/mentions/list'
@@ -46,7 +41,7 @@ export class MentionsValidationDemo {
   protected readonly users = mentionUsers
   protected readonly form = injectForm({ defaultValues: { prompt: '' }, onSubmit: () => undefined })
   protected readonly validators = {
-    onSubmit: ({ value }: { value: string }) => value.trim() ? undefined : 'Prompt is required.',
+    onSubmit: ({ value }: { value: string }) => (value.trim() ? undefined : 'Prompt is required.'),
   }
   protected invalid(field: AnyFieldApi) {
     return field.state.meta.errors.length > 0

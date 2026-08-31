@@ -18,9 +18,13 @@ const props = defineProps<{
 }>()
 const attrs = useAttrs()
 const { model } = useQrCode('QrCodeModules')
-const className = computed(() => cn(qrcodeModulesClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeModulesClassName, attrs.class as string | undefined, props.class),
+)
 const path = computed(() => {
-  const centerExclude = props.centerSize ? getQrCodeCenterExcludeRect(model.value, props.centerSize) : undefined
+  const centerExclude = props.centerSize
+    ? getQrCodeCenterExcludeRect(model.value, props.centerSize)
+    : undefined
   return getQrCodeSvgPath(model.value, props.exclude ?? centerExclude)
 })
 </script>

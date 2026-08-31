@@ -35,7 +35,8 @@ export class CustomCellPanel {
   protected readonly releaseDate = createCalendarDate(2026, 7, 30)
   protected readonly getGranularityByPicker = getGranularityByPicker
   protected readonly getCalendarValueKey = getCalendarValueKey
-  protected readonly panelClassName = 'block min-w-72 bg-elevated-background text-elevated-foreground'
+  protected readonly panelClassName =
+    'block min-w-72 bg-elevated-background text-elevated-foreground'
   protected readonly weekHeaderClassName =
     'grid grid-cols-7 px-3 py-2 text-center text-xs text-muted-foreground'
   protected readonly gridClassName =

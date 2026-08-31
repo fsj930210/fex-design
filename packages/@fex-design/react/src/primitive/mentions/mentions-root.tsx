@@ -20,8 +20,10 @@ function normalizePrefix(prefix: string | readonly string[] | undefined) {
   return prefix ? [prefix] : ['@']
 }
 
-export interface MentionsRootProps<TData = unknown>
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
+export interface MentionsRootProps<TData = unknown> extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'defaultValue' | 'onChange'
+> {
   value?: string | undefined
   defaultValue?: string | undefined
   onChange?: ((value: string, meta: MentionsChangeMeta) => void) | undefined
@@ -96,7 +98,8 @@ export function MentionsRoot<TData = unknown>({
     onChange: (nextValue, meta) => latest.current.onChange?.(nextValue, meta),
     onOpenChange: (nextOpen, meta) => latest.current.onOpenChange?.(nextOpen, meta),
     onSearch: (text, meta) => latest.current.onSearch?.(text, meta),
-    onSelect: (item, meta) => latest.current.onSelect?.(item as MentionsRegisteredItem<TData>, meta),
+    onSelect: (item, meta) =>
+      latest.current.onSelect?.(item as MentionsRegisteredItem<TData>, meta),
   })
   const snapshot = useCoreStore(controllerRef.current)
   const listId = 'mentions-' + useId()

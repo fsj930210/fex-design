@@ -57,11 +57,7 @@
           "default": "md",
           "description": "Spinner 指示器尺寸。",
           "editor": "enum",
-          "options": [
-            "sm",
-            "md",
-            "lg"
-          ]
+          "options": ["sm", "md", "lg"]
         }
       ],
       "events": [],
@@ -76,11 +72,7 @@
               "default": "md",
               "description": "Spinner 指示器尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "className",
@@ -102,11 +94,7 @@
               "default": "md",
               "description": "Spinner 指示器尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "class",
@@ -128,11 +116,7 @@
               "default": "md",
               "description": "Spinner 指示器尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "class",
@@ -154,11 +138,7 @@
               "default": "md",
               "description": "Spinner 指示器尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "class",
@@ -180,11 +160,7 @@
               "default": "md",
               "description": "Spinner 指示器尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "class",

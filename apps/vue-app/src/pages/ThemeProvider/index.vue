@@ -30,7 +30,10 @@ function toggleInheritedTheme() {
         </div>
       </header>
 
-      <Card title="Local Scope" description="A local provider applies theme variables to its own wrapper.">
+      <Card
+        title="Local Scope"
+        description="A local provider applies theme variables to its own wrapper."
+      >
         <ThemeProvider
           scope="local"
           storage-key="fex-theme-provider-local-demo"

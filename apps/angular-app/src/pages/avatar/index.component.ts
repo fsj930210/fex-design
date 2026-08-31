@@ -6,7 +6,12 @@ import { AvatarGroupDemoComponent } from './group-demo.component'
 @Component({
   selector: 'fex-avatar-page',
   standalone: true,
-  imports: [AvatarSizeDemoComponent, AvatarShapeDemoComponent, AvatarContentDemoComponent, AvatarGroupDemoComponent],
+  imports: [
+    AvatarSizeDemoComponent,
+    AvatarShapeDemoComponent,
+    AvatarContentDemoComponent,
+    AvatarGroupDemoComponent,
+  ],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

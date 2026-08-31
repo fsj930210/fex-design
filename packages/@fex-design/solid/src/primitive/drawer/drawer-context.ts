@@ -1,5 +1,8 @@
 import { createContext, useContext, type Accessor } from 'solid-js'
-import type { createDrawerController, DrawerPlacement } from '@fex-design/core/drawer/create-drawer-controller'
+import type {
+  createDrawerController,
+  DrawerPlacement,
+} from '@fex-design/core/drawer/create-drawer-controller'
 import type { createResize } from '../../primitives/create-resize'
 
 export interface DrawerContextValue {

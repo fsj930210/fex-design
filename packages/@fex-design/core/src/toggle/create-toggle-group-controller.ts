@@ -40,7 +40,8 @@ export function createToggleGroupController(
         current.multiple === next.multiple &&
         current.disabled === next.disabled &&
         equal(current.value, next.value)
-      ) return current
+      )
+        return current
       return next
     }
     const next = createSnapshot(options, options.value)
@@ -48,7 +49,8 @@ export function createToggleGroupController(
       controlledSnapshot.multiple === next.multiple &&
       controlledSnapshot.disabled === next.disabled &&
       equal(controlledSnapshot.value, next.value)
-    ) return controlledSnapshot
+    )
+      return controlledSnapshot
     controlledSnapshot = next
     return next
   }
@@ -58,8 +60,9 @@ export function createToggleGroupController(
     if (previous.disabled) return undefined
     const next = createSnapshot(options, value)
     if (equal(previous.value, next.value)) return undefined
-    const changedValue = previous.value.find((item) => !next.value.includes(item))
-      ?? next.value.find((item) => !previous.value.includes(item))
+    const changedValue =
+      previous.value.find((item) => !next.value.includes(item)) ??
+      next.value.find((item) => !previous.value.includes(item))
     if (changedValue === undefined) return undefined
     const meta: ToggleGroupChangeMeta = {
       previousValue: previous.value,
@@ -80,7 +83,9 @@ export function createToggleGroupController(
       const snapshot = getSnapshot()
       const pressed = snapshot.value.includes(value)
       if (snapshot.multiple) {
-        return commit(pressed ? snapshot.value.filter((item) => item !== value) : [...snapshot.value, value])
+        return commit(
+          pressed ? snapshot.value.filter((item) => item !== value) : [...snapshot.value, value],
+        )
       }
       return commit(pressed ? '' : value)
     },

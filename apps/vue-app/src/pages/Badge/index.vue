@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Badge, BadgeOverflow } from '@fex-design/vue/primitive/badge'
+import { Badge, BadgeGroup } from '@fex-design/vue/primitive/badge'
 import Card from '@fex-design/vue/ui/card'
 
-const variants = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const
+const colors = ['primary', 'info', 'success', 'warning', 'danger'] as const
 const overflowItems = ['Design', 'Frontend', 'Backend', 'QA', 'Operations']
 </script>
 
@@ -18,11 +18,19 @@ const overflowItems = ['Design', 'Frontend', 'Backend', 'QA', 'Operations']
           Use badges for compact status, category, and count labels.
         </p>
       </header>
-      <div class="grid gap-4"><Card title="Variants" description="Badge visual styles."
-        ><div class="flex min-w-0 flex-wrap items-center gap-2">
-          <Badge v-for="variant in variants" :key="variant" :variant="variant">{{ variant }}</Badge>
-        </div></Card
-      ><Card title="Overflow" description="Keeps the collection compact without changing its values."><BadgeOverflow :max-count="3"><Badge v-for="item in overflowItems" :key="item" variant="secondary">{{ item }}</Badge></BadgeOverflow></Card></div>
+      <div class="grid gap-4">
+        <Card title="Variants" description="Badge visual styles."
+          ><div class="flex min-w-0 flex-wrap items-center gap-2">
+            <Badge v-for="color in colors" :key="color" :color="color">{{ color }}</Badge>
+          </div></Card
+        ><Card title="Group" description="使用 maxCount 收起过多的标签。"
+          ><BadgeGroup :max-count="3"
+            ><Badge v-for="item in overflowItems" :key="item" color="info">{{
+              item
+            }}</Badge></BadgeGroup
+          ></Card
+        >
+      </div>
     </div>
   </main>
 </template>

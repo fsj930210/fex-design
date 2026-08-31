@@ -48,12 +48,12 @@
     </fex-transfer>
     <label class="flex w-fit items-center gap-2 text-sm text-muted-foreground">
       <button
-        fexSwitchPrimitive
+        switch
         aria-label="Disable one-way Transfer"
         [checked]="disabled()"
         (checkedChange)="disabled.set($event.checked)"
       >
-        <span fexSwitchThumb></span>
+        <span switchThumb></span>
       </button>
       Disabled
     </label>

@@ -35,4 +35,3 @@ may render any Tree, Listbox, tags, or custom panel they need.
 The items input is useful for initial and asynchronous echo because it establishes value-to-label
 mapping before option rows are mounted. Search requests, cancellation, loading, empty/error states,
 result ranking, path formatting, and subtree loading all remain application-owned.
-

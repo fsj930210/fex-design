@@ -1,9 +1,5 @@
 import type { MultipartFeatureApi } from '@fex-design/core/upload/features/multipart'
-import type {
-  UploadController,
-  UploadFeatureApi,
-  UploadId,
-} from '@fex-design/core/upload/types'
+import type { UploadController, UploadFeatureApi, UploadId } from '@fex-design/core/upload/types'
 import { useSyncExternalStore } from 'react'
 
 export function useUploadItem<TResponse>(upload: UploadController<TResponse>, id: UploadId) {

@@ -19,7 +19,7 @@ const table = useDataTable({ features, data: users, columns, getRowId: (row) => 
 
 | 参数                                      | 类型                                        | 默认值    | 必填 | 说明                                                                     |
 | ----------------------------------------- | ------------------------------------------- | --------- | ---- | ------------------------------------------------------------------------ |
-| `table`                                   | `VueDataTable`                          | -         | 是   | composable 创建的实例                                                    |
+| `table`                                   | `VueDataTable`                              | -         | 是   | composable 创建的实例                                                    |
 | `density`                                 | `compact/default/comfortable`               | `default` | 否   | 行密度                                                                   |
 | `striped` / `border` / `loading`          | `boolean`                                   | `false`   | 否   | 展示状态                                                                 |
 | `virtual`                                 | `{ height; estimateRowHeight?; overscan? }` | -         | 否   | 虚拟行                                                                   |

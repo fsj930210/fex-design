@@ -17,7 +17,7 @@ Svelte 5 适配通过 store 订阅 TanStack Table v9，共享 core 布局、固�
 
 | 参数                                | 类型                          | 默认值    | 必填 | 说明                    |
 | ----------------------------------- | ----------------------------- | --------- | ---- | ----------------------- |
-| `table`                             | `SvelteDataTable`         | -         | 是   | store helper 创建的实例 |
+| `table`                             | `SvelteDataTable`             | -         | 是   | store helper 创建的实例 |
 | `density`                           | `compact/default/comfortable` | `default` | 否   | 密度                    |
 | `striped` / `border` / `loading`    | `boolean`                     | `false`   | 否   | 展示状态                |
 | `virtual`                           | 虚拟行配置                    | -         | 否   | TanStack Virtual        |

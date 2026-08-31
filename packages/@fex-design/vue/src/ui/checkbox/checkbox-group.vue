@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  checkboxGroupClassName,
-  type CheckboxGroupStyleProps,
-} from '@fex-design/styles/checkbox'
+import { checkboxGroupClassName, type CheckboxGroupStyleProps } from '@fex-design/styles/checkbox'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
 import { CheckboxGroup as PrimitiveCheckboxGroup } from '../../primitive/checkbox/checkbox'

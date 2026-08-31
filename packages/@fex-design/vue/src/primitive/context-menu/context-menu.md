@@ -35,30 +35,30 @@ import {
 
 ## Root props
 
-| 参数 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `open` | `boolean` | - | 受控打开状态。 |
-| `defaultOpen` | `boolean` | `false` | 非受控初始打开状态。 |
-| `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `right` | 默认从鼠标坐标向哪个方向展开。 |
-| `align` | `'start' \| 'center' \| 'end'` | `start` | 浮层对齐方式。 |
-| `sideOffset` | `number` | `2` | 菜单与右键坐标的主轴距离。 |
-| `getPopupContainer` | `(reference) => HTMLElement` | `document.body` | Teleport 挂载容器。 |
+| 参数                | 类型                                     | 默认值          | 说明                           |
+| ------------------- | ---------------------------------------- | --------------- | ------------------------------ |
+| `open`              | `boolean`                                | -               | 受控打开状态。                 |
+| `defaultOpen`       | `boolean`                                | `false`         | 非受控初始打开状态。           |
+| `side`              | `'top' \| 'right' \| 'bottom' \| 'left'` | `right`         | 默认从鼠标坐标向哪个方向展开。 |
+| `align`             | `'start' \| 'center' \| 'end'`           | `start`         | 浮层对齐方式。                 |
+| `sideOffset`        | `number`                                 | `2`             | 菜单与右键坐标的主轴距离。     |
+| `getPopupContainer` | `(reference) => HTMLElement`             | `document.body` | Teleport 挂载容器。            |
 
 ## 事件
 
-| 事件 | 类型 | 说明 |
-| --- | --- | --- |
+| 事件          | 类型                   | 说明                                                                          |
+| ------------- | ---------------------- | ----------------------------------------------------------------------------- |
 | `open-change` | `(open, info) => void` | 打开状态变化。info 包含 `payload`、`target`、`clientX`、`clientY` 和 reason。 |
 
 ## Trigger slot
 
 `ContextMenuTrigger` 不创建额外 DOM，而是通过 slot 暴露：
 
-| 字段 | 说明 |
-| --- | --- |
+| 字段    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
 | `props` | 需要绑定到调用方元素的右键、键盘、ARIA 与 data-state props。 |
-| `ref` | 可显式绑定的元素注册函数；通常 `v-bind="props"` 已包含 ref。 |
-| `state` | core snapshot，包含当前 target 和 overlay 状态。 |
+| `ref`   | 可显式绑定的元素注册函数；通常 `v-bind="props"` 已包含 ref。 |
+| `state` | core snapshot，包含当前 target 和 overlay 状态。             |
 
 ## 组合方式
 

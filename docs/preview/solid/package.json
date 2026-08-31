@@ -2,7 +2,11 @@
   "name": "@fex-design/docs-preview-solid",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "vite --host 127.0.0.1 --port 4112 --strictPort", "build": "vite build", "typecheck": "tsc --noEmit -p tsconfig.json" },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4112 --strictPort",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
   "dependencies": {
     "@fex-design/docs-shared": "workspace:*",
     "@fex-design/solid": "workspace:*",
@@ -12,5 +16,8 @@
     "vite": "catalog:",
     "vite-plugin-solid": "latest"
   },
-  "devDependencies": { "@fex/config-tsconfig": "workspace:*", "typescript": "catalog:" }
+  "devDependencies": {
+    "@fex/config-tsconfig": "workspace:*",
+    "typescript": "catalog:"
+  }
 }

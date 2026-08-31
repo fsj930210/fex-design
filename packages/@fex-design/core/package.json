@@ -2,10 +2,6 @@
   "name": "@fex-design/core",
   "private": true,
   "type": "module",
-  "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
   "exports": {
     "./collection/split-overflow-items": "./src/collection/split-overflow-items.ts",
@@ -203,6 +199,10 @@
     "./sortable/create-sortable-controller": "./src/sortable/create-sortable-controller.ts",
     "./sortable/motion": "./src/sortable/motion.ts",
     "./sortable/types": "./src/sortable/types.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",

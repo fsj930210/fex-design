@@ -79,21 +79,15 @@
       "demos": [],
       "frameworks": {
         "vue": {
-          "omitProps": [
-            "fallback"
-          ],
+          "omitProps": ["fallback"],
           "slotLabel": "Slots"
         },
         "svelte": {
-          "omitProps": [
-            "fallback"
-          ],
+          "omitProps": ["fallback"],
           "slotLabel": "Snippet"
         },
         "angular": {
-          "omitProps": [
-            "fallback"
-          ],
+          "omitProps": ["fallback"],
           "slotLabel": "内容投影"
         }
       }
@@ -138,9 +132,7 @@
       "demos": [],
       "frameworks": {
         "vue": {
-          "omitProps": [
-            "renderOverflow"
-          ],
+          "omitProps": ["renderOverflow"],
           "slots": [
             {
               "name": "overflow",

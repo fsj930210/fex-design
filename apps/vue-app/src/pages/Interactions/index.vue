@@ -120,9 +120,7 @@ export default { name: 'InteractionsPage' }
               />
             </div>
           </div>
-          <p
-            class="mt-2 rounded-md bg-muted-background px-2 py-1.5 text-sm text-muted-foreground"
-          >
+          <p class="mt-2 rounded-md bg-muted-background px-2 py-1.5 text-sm text-muted-foreground">
             {{ dropResult }}
           </p>
         </Card>

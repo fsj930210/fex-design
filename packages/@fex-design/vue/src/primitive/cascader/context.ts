@@ -1,4 +1,9 @@
-import type { CascaderController, CascaderNode, CascaderOption, CascaderSnapshot } from '@fex-design/core/cascader/types'
+import type {
+  CascaderController,
+  CascaderNode,
+  CascaderOption,
+  CascaderSnapshot,
+} from '@fex-design/core/cascader/types'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface CascaderContextValue {
@@ -13,6 +18,8 @@ export interface CascaderContextValue {
   loading: ComputedRef<boolean>
   status: ComputedRef<'error' | 'warning' | undefined>
   placeholder: ComputedRef<string | undefined>
-  displayRender?: ((labels: readonly string[], path: readonly CascaderOption[]) => unknown) | undefined
+  displayRender?:
+    | ((labels: readonly string[], path: readonly CascaderOption[]) => unknown)
+    | undefined
 }
 export const cascaderKey: InjectionKey<CascaderContextValue> = Symbol('cascader')

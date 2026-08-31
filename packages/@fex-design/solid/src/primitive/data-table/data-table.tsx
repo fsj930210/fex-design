@@ -64,10 +64,10 @@ export interface DataTableClass {
   loading?: string
 }
 
-export interface DataTableProps<TFeatures extends TableFeatures, TData extends RowData> extends Omit<
-  JSX.HTMLAttributes<HTMLDivElement>,
-  'class' | 'children'
-> {
+export interface DataTableProps<
+  TFeatures extends TableFeatures,
+  TData extends RowData,
+> extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'class' | 'children'> {
   table: SolidDataTable<TFeatures, TData>
   class?: DataTableClass
   density?: 'compact' | 'default' | 'comfortable'
@@ -414,11 +414,13 @@ export function DataTable<TFeatures extends TableFeatures, TData extends RowData
                                   class={cn(
                                     dataTableCellClassName,
                                     cellLayout().pinned && dataTablePinnedCellClassName,
-                                    cellLayout().pinned === 'start' && dataTablePinnedStartClassName,
+                                    cellLayout().pinned === 'start' &&
+                                      dataTablePinnedStartClassName,
                                     cellLayout().pinned === 'end' && dataTablePinnedEndClassName,
                                     cellLayout().isStartEdge && dataTablePinnedStartEdgeClassName,
                                     cellLayout().isEndEdge && dataTablePinnedEndEdgeClassName,
-                                    cellMeta()?.align && dataTableAlignClassName[cellMeta()!.align!],
+                                    cellMeta()?.align &&
+                                      dataTableAlignClassName[cellMeta()!.align!],
                                     cellMeta()?.cellClassName,
                                     local.class?.cell,
                                     cellProps().class,

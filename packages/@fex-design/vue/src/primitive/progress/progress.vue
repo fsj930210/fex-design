@@ -76,7 +76,7 @@ const stroke = computed(() =>
             ? 'var(--info)'
             : props.status === 'warning'
               ? 'var(--warning)'
-            : 'var(--primary)',
+              : 'var(--primary)',
 )
 const trackStroke = computed(() => props.trackColor ?? 'var(--progress-remaining)')
 const resolvedTrackLinecap = computed(() => props.trackLinecap ?? props.linecap)

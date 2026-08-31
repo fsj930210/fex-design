@@ -11,7 +11,8 @@ const props = withDefaults(defineProps<{ showIcon?: boolean }>(), { showIcon: tr
 const attrs = useAttrs()
 const collapseContext = inject(collapseContextKey)
 const itemContext = inject(collapseItemContextKey)
-if (!collapseContext || !itemContext) throw new Error('CollapseTrigger must be used inside CollapseItem.')
+if (!collapseContext || !itemContext)
+  throw new Error('CollapseTrigger must be used inside CollapseItem.')
 const collapse = collapseContext
 const item = itemContext
 const expanded = computed(() => collapse.isExpanded(item.value))
@@ -60,9 +61,6 @@ function handleClick(event: MouseEvent) {
     @click="handleClick"
   >
     <span class="min-w-0 flex-1"><slot /></span>
-    <ChevronRightIcon
-      v-if="props.showIcon"
-      :class="collapseIconClassName"
-    />
+    <ChevronRightIcon v-if="props.showIcon" :class="collapseIconClassName" />
   </PrimitiveButton>
 </template>

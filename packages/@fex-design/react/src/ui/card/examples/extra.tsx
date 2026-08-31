@@ -11,6 +11,8 @@ export function ExtraExample() {
           <span className="text-sm font-semibold text-emerald-700">运行中</span>
         </div>
       }
-    >Extra 与标题说明独立，可放状态、操作或补充信息。</Card>
+    >
+      Extra 与标题说明独立，可放状态、操作或补充信息。
+    </Card>
   )
 }

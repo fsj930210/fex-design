@@ -10,16 +10,25 @@ import { mentionUsers } from './data'
 
 const value = ref('')
 const selected = ref('No mention selected')
-
 </script>
 
 <template>
   <Card title="Basic @" description="Default prefix is @ and selection only notifies the caller.">
-    <MentionsRoot :value="value" @change="(next) => (value = next)" @select="({ value: name }) => (selected = 'Selected ' + name)">
+    <MentionsRoot
+      :value="value"
+      @change="(next) => (value = next)"
+      @select="({ value: name }) => (selected = 'Selected ' + name)"
+    >
       <MentionsTrigger placeholder="Type @ to mention a teammate" />
       <MentionsContent>
         <MentionsList>
-          <MentionsItem v-for="user in mentionUsers" :key="user.id" :item-key="user.id" :value="user.name" :data="user">
+          <MentionsItem
+            v-for="user in mentionUsers"
+            :key="user.id"
+            :item-key="user.id"
+            :value="user.name"
+            :data="user"
+          >
             <span class="flex min-w-0 flex-col">
               <span class="truncate font-medium">{{ user.name }}</span>
               <span class="text-xs text-muted-foreground">{{ user.role }}</span>

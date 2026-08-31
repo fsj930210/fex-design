@@ -49,9 +49,15 @@ const effects = [
         </Card>
         <Card title="Button group" description="Groups related actions without owning their value.">
           <div class="flex flex-wrap items-start gap-3">
-            <ButtonGroup><Button variant="outline">Previous</Button><Button variant="outline">Current</Button><Button variant="outline">Next</Button></ButtonGroup>
+            <ButtonGroup
+              ><Button variant="outline">Previous</Button><Button variant="outline">Current</Button
+              ><Button variant="outline">Next</Button></ButtonGroup
+            >
             <ButtonGroup :spacing="8"><Button>Save</Button><Button>Publish</Button></ButtonGroup>
-            <ButtonGroup orientation="vertical"><Button variant="outline">Move up</Button><Button variant="outline">Move down</Button></ButtonGroup>
+            <ButtonGroup orientation="vertical"
+              ><Button variant="outline">Move up</Button
+              ><Button variant="outline">Move down</Button></ButtonGroup
+            >
           </div>
         </Card>
 

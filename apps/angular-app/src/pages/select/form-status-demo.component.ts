@@ -5,12 +5,7 @@ import {
   FieldLabel,
   FieldRoot,
 } from '@fex-design/angular/primitive/field'
-import {
-  Form,
-  FormField,
-  injectForm,
-  type AnyFieldApi,
-} from '@fex-design/angular/primitive/form'
+import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
 import {
   SelectContent,
   SelectList,

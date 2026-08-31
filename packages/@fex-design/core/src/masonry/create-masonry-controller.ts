@@ -21,7 +21,14 @@ export function createMasonryController(initial: MasonryControllerOptions = {}):
   let options = initial
   const items = new Map<MasonryKey, MasonryItemInput>()
   const listeners = new Set<() => void>()
-  let snapshot = createMasonryLayout(width, [], options.columns, options.gap, options.placement, options.direction)
+  let snapshot = createMasonryLayout(
+    width,
+    [],
+    options.columns,
+    options.gap,
+    options.placement,
+    options.direction,
+  )
   let scheduled = false
 
   const isEqual = (left: MasonryLayoutDetail, right: MasonryLayoutDetail) =>
@@ -32,9 +39,16 @@ export function createMasonryController(initial: MasonryControllerOptions = {}):
     left.items.length === right.items.length &&
     left.items.every((item, index) => {
       const other = right.items[index]
-      return other !== undefined && item.key === other.key && item.index === other.index &&
-        item.height === other.height && item.column === other.column && item.top === other.top &&
-        item.inlineStart === other.inlineStart && item.width === other.width
+      return (
+        other !== undefined &&
+        item.key === other.key &&
+        item.index === other.index &&
+        item.height === other.height &&
+        item.column === other.column &&
+        item.top === other.top &&
+        item.inlineStart === other.inlineStart &&
+        item.width === other.width
+      )
     })
 
   const publish = () => {
@@ -80,7 +94,8 @@ export function createMasonryController(initial: MasonryControllerOptions = {}):
         previous?.height === item.height &&
         previous.index === item.index &&
         previous.column === item.column
-      ) return
+      )
+        return
       items.set(item.key, item)
       schedulePublish()
     },

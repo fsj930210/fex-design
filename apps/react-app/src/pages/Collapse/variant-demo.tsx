@@ -1,10 +1,18 @@
-import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/react/primitive/collapse'
+import {
+  Collapse,
+  CollapseContent,
+  CollapseItem,
+  CollapseTrigger,
+} from '@fex-design/react/primitive/collapse'
 import { Card } from '@fex-design/react/ui/card'
 import { collapseText } from './demo-data'
 
 export function VariantCollapseDemo() {
   return (
-    <Card title="Variants" description="Outlined, filled and ghost cover bordered and borderless panel styles.">
+    <Card
+      title="Variants"
+      description="Outlined, filled and ghost cover bordered and borderless panel styles."
+    >
       <div className="grid gap-3 lg:grid-cols-3">
         {(['outlined', 'filled', 'ghost'] as const).map((variant) => (
           <Collapse key={variant} variant={variant} defaultExpandedKeys={['one']}>

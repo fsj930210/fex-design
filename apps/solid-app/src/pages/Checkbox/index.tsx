@@ -1,10 +1,6 @@
 import { CheckboxRoot } from '@fex-design/solid/primitive/checkbox'
 import { Card } from '@fex-design/solid/ui/card'
-import {
-  Checkbox,
-  CheckboxGroup,
-  type CheckboxCheckedState,
-} from '@fex-design/solid/ui/checkbox'
+import { Checkbox, CheckboxGroup, type CheckboxCheckedState } from '@fex-design/solid/ui/checkbox'
 import { For, createMemo, createSignal, type JSX } from 'solid-js'
 import { A } from '@solidjs/router'
 

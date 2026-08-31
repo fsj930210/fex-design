@@ -32,9 +32,13 @@ export function TourContent<TData = unknown>({
 }: TourContentProps<TData>) {
   const { controller, snapshot, defaultGap, zIndex } = useTourContext('TourContent')
   const step = snapshot.currentStep as TourRegisteredStep<TData> | null
-  const floating = useLazyRef(() => createFloating({ placement: 'bottom', arrow: true, offset: 12 })).current
+  const floating = useLazyRef(() =>
+    createFloating({ placement: 'bottom', arrow: true, offset: 12 }),
+  ).current
   const floatingSnapshot = useCoreStore(floating)
-  const setContentElement = useMemoizedFn((element: HTMLDivElement | null) => floating.setFloatingElement(element))
+  const setContentElement = useMemoizedFn((element: HTMLDivElement | null) =>
+    floating.setFloatingElement(element),
+  )
   const contentRef = useComposedRef(setContentElement, ref)
   const target = step?.target ? controller.getTarget(step.target) : null
   const showArrow = step?.arrow !== false
@@ -79,8 +83,14 @@ export function TourContent<TData = unknown>({
     'data-side': string
     'data-placement': string
   }
-  const renderProps = { props: contentProps, step, index: snapshot.currentIndex, total: snapshot.total }
-  const content = typeof children === 'function' ? children(renderProps) : <div {...contentProps}>{children}</div>
+  const renderProps = {
+    props: contentProps,
+    step,
+    index: snapshot.currentIndex,
+    total: snapshot.total,
+  }
+  const content =
+    typeof children === 'function' ? children(renderProps) : <div {...contentProps}>{children}</div>
   return (
     <TourContentContext value={{ floating, snapshot: floatingSnapshot, setContentElement }}>
       {content}

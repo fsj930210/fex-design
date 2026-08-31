@@ -1,9 +1,15 @@
 <ng-content />
 @if (spinning()) {
-  <div spinnerOverlay [class]="overlayClassName()" [style]="styles().overlay">
-    <span spinner [size]="size()" [indicator]="indicator()" [class]="classNames().spinner" [style]="styles().spinner"></span>
-    @if (text()) {
-      <span spinnerText [class]="classNames().text" [style]="styles().text">{{ text() }}</span>
-    }
-  </div>
+<div spinnerOverlay [class]="overlayClassName()" [style]="styles().overlay">
+  <span
+    spinner
+    [size]="size()"
+    [indicator]="indicator()"
+    [class]="classNames().spinner"
+    [style]="styles().spinner"
+  ></span>
+  @if (text()) {
+  <span spinnerText [class]="classNames().text" [style]="styles().text">{{ text() }}</span>
+  }
+</div>
 }

@@ -22,7 +22,9 @@ class CustomTagDemo {
   protected color(value: string) {
     return (
       {
-        react: '#0284c7', vue: '#059669', angular: '#dc2626',
+        react: '#0284c7',
+        vue: '#059669',
+        angular: '#dc2626',
       }[value] ?? 'neutral'
     )
   }

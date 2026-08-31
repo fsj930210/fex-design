@@ -15,9 +15,7 @@ export const defaultCascaderFieldNames: ResolvedCascaderFieldNames = {
   isLeaf: 'isLeaf',
 }
 
-export function resolveCascaderFieldNames(
-  fields?: CascaderFieldNames,
-): ResolvedCascaderFieldNames {
+export function resolveCascaderFieldNames(fields?: CascaderFieldNames): ResolvedCascaderFieldNames {
   return {
     value: fields?.value ?? defaultCascaderFieldNames.value,
     label: fields?.label ?? defaultCascaderFieldNames.label,

@@ -23,10 +23,10 @@ function normalizeNumber(value: number | undefined, fallback: number, min: numbe
 function isCellExcluded(cell: QrCodeModuleCell, exclude?: QrCodeModuleExcludeRect) {
   return Boolean(
     exclude &&
-      cell.x >= exclude.x &&
-      cell.x < exclude.x + exclude.width &&
-      cell.y >= exclude.y &&
-      cell.y < exclude.y + exclude.height,
+    cell.x >= exclude.x &&
+    cell.x < exclude.x + exclude.width &&
+    cell.y >= exclude.y &&
+    cell.y < exclude.y + exclude.height,
   )
 }
 

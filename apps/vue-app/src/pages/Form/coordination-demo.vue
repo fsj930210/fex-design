@@ -130,9 +130,7 @@ type Province = keyof typeof locations
                 v-if="invalid(state)"
                 :errors="errors(state.meta.errors)" /></FieldRoot></Field
           ><Button class="w-fit" type="submit">保存资料</Button></FormHost
-        ><FormHost
-          :form="securityForm"
-          class="grid gap-2 rounded-md border border-border p-4"
+        ><FormHost :form="securityForm" class="grid gap-2 rounded-md border border-border p-4"
           ><FieldTitle>安全表单</FieldTitle
           ><Field
             name="notificationEmail"

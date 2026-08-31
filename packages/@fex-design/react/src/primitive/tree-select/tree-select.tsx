@@ -20,8 +20,7 @@ import {
 import { TreeSelectContext, useTreeSelect } from './tree-select-context'
 
 export interface TreeSelectRootProps<TNode = unknown>
-  extends TreeSelectOptions<TNode>,
-    Omit<PopoverRootProps, 'children'> {
+  extends TreeSelectOptions<TNode>, Omit<PopoverRootProps, 'children'> {
   controller?: TreeSelectController<TNode> | undefined
   children?: ReactNode
   searchable?: boolean | undefined
@@ -35,10 +34,18 @@ export function TreeSelectRoot<TNode = unknown>(props: TreeSelectRootProps<TNode
   optionsRef.current = props
   const controllerRef = useRef<TreeSelectController<TNode> | null>(null)
   controllerRef.current ??= createTreeSelectController({
-    get value() { return optionsRef.current.value },
-    get defaultValue() { return optionsRef.current.defaultValue },
-    get multiple() { return optionsRef.current.multiple },
-    get disabled() { return optionsRef.current.disabled },
+    get value() {
+      return optionsRef.current.value
+    },
+    get defaultValue() {
+      return optionsRef.current.defaultValue
+    },
+    get multiple() {
+      return optionsRef.current.multiple
+    },
+    get disabled() {
+      return optionsRef.current.disabled
+    },
     onChange: (value, meta) => optionsRef.current.onChange?.(value, meta),
   })
   const controller = props.controller ?? controllerRef.current
@@ -48,7 +55,10 @@ export function TreeSelectRoot<TNode = unknown>(props: TreeSelectRootProps<TNode
   const searchValue = props.searchValue ?? uncontrolledSearchRef.current
   const [uncontrolledOpen, setUncontrolledOpen] = useState(props.defaultOpen ?? false)
   const open = props.open ?? uncontrolledOpen
-  const setOpen = (nextOpen: boolean, info: Parameters<NonNullable<PopoverRootProps['onOpenChange']>>[1] = { reason: 'manual' }) => {
+  const setOpen = (
+    nextOpen: boolean,
+    info: Parameters<NonNullable<PopoverRootProps['onOpenChange']>>[1] = { reason: 'manual' },
+  ) => {
     if (props.open === undefined) setUncontrolledOpen(nextOpen)
     props.onOpenChange?.(nextOpen, info)
   }
@@ -76,7 +86,15 @@ export function TreeSelectRoot<TNode = unknown>(props: TreeSelectRootProps<TNode
   } = props
   return (
     <TreeSelectContext
-      value={{ controller, snapshot, searchable: props.searchable === true, searchValue, setSearchValue, openPanel: () => setOpen(true), closePanel: () => setOpen(false) }}
+      value={{
+        controller,
+        snapshot,
+        searchable: props.searchable === true,
+        searchValue,
+        setSearchValue,
+        openPanel: () => setOpen(true),
+        closePanel: () => setOpen(false),
+      }}
     >
       <PopoverRoot
         {...popoverProps}
@@ -110,28 +128,37 @@ export interface TreeSelectTriggerProps<TNode = unknown> {
   displayValue?: ((items: readonly TreeSelectItem<TNode>[]) => string) | undefined
 }
 
-export function TreeSelectTrigger<TNode = unknown>({ children, displayValue }: TreeSelectTriggerProps<TNode>) {
+export function TreeSelectTrigger<TNode = unknown>({
+  children,
+  displayValue,
+}: TreeSelectTriggerProps<TNode>) {
   const treeSelect = useTreeSelect<TNode>()
   const selectedText = displayValue
     ? displayValue(treeSelect.snapshot.selectedItems)
     : treeSelect.snapshot.selectedItems.map((item) => item.label).join(', ')
   return (
     <PopoverTrigger>
-      {(triggerProps) => children({
-        triggerProps,
-        inputProps: {
-          readOnly: !treeSelect.searchable,
-          value: treeSelect.snapshot.multiple ? treeSelect.searchValue : treeSelect.searchable && treeSelect.searchValue ? treeSelect.searchValue : selectedText,
-          onChange: (event) => treeSelect.setSearchValue(event.currentTarget.value),
-          onFocus: treeSelect.openPanel,
-          onClick: treeSelect.openPanel,
-        },
-        selectedItems: treeSelect.snapshot.selectedItems,
-        clear: () => {
-          treeSelect.controller.clear()
-          treeSelect.setSearchValue('')
-        },
-      })}
+      {(triggerProps) =>
+        children({
+          triggerProps,
+          inputProps: {
+            readOnly: !treeSelect.searchable,
+            value: treeSelect.snapshot.multiple
+              ? treeSelect.searchValue
+              : treeSelect.searchable && treeSelect.searchValue
+                ? treeSelect.searchValue
+                : selectedText,
+            onChange: (event) => treeSelect.setSearchValue(event.currentTarget.value),
+            onFocus: treeSelect.openPanel,
+            onClick: treeSelect.openPanel,
+          },
+          selectedItems: treeSelect.snapshot.selectedItems,
+          clear: () => {
+            treeSelect.controller.clear()
+            treeSelect.setSearchValue('')
+          },
+        })
+      }
     </PopoverTrigger>
   )
 }
@@ -142,7 +169,14 @@ export interface TreeSelectContentProps extends ComponentProps<typeof PopoverCon
 }
 
 export function TreeSelectContent({ container, forceMount, ...props }: TreeSelectContentProps) {
-  return <PopoverPortal {...(container === undefined ? {} : { container })} {...(forceMount === undefined ? {} : { forceMount })}><PopoverContent {...props} /></PopoverPortal>
+  return (
+    <PopoverPortal
+      {...(container === undefined ? {} : { container })}
+      {...(forceMount === undefined ? {} : { forceMount })}
+    >
+      <PopoverContent {...props} />
+    </PopoverPortal>
+  )
 }
 
 export interface TreeSelectOptionProps<TNode = unknown> {
@@ -153,9 +187,18 @@ export interface TreeSelectOptionProps<TNode = unknown> {
   children(state: { selected: boolean; select(): void }): ReactNode
 }
 
-export function TreeSelectOption<TNode = unknown>({ item, toggle, closeOnSelect, clearSearchOnSelect = true, children }: TreeSelectOptionProps<TNode>) {
+export function TreeSelectOption<TNode = unknown>({
+  item,
+  toggle,
+  closeOnSelect,
+  clearSearchOnSelect = true,
+  children,
+}: TreeSelectOptionProps<TNode>) {
   const treeSelect = useTreeSelect<TNode>()
-  useIsomorphicLayoutEffect(() => treeSelect.controller.registerItem(item), [treeSelect.controller, item])
+  useIsomorphicLayoutEffect(
+    () => treeSelect.controller.registerItem(item),
+    [treeSelect.controller, item],
+  )
   const select = () => {
     if (item.disabled) return
     if (toggle ?? treeSelect.snapshot.multiple) treeSelect.controller.toggle(item)

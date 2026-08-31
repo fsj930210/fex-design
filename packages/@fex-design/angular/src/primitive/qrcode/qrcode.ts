@@ -80,7 +80,7 @@ export class QrCodeRoot {
     '[attr.width]': 'root.model().size',
     '[attr.height]': 'root.model().size',
     'shape-rendering': 'crispEdges',
-    'xmlns': 'http://www.w3.org/2000/svg',
+    xmlns: 'http://www.w3.org/2000/svg',
     'data-slot': 'qrcode-svg',
   },
   template: '<ng-content />',

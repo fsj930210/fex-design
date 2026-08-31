@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, signal, type WritableSignal } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+  type WritableSignal,
+} from '@angular/core'
 import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
 import {
   SliderRange,

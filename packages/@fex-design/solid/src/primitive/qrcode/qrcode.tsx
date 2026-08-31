@@ -206,9 +206,7 @@ export function QrCodeCanvas(props: QrCodeCanvasProps) {
   )
 }
 
-export type QrCodeCenterProps = ParentProps<
-  JSX.SvgSVGAttributes<SVGSVGElement> & { size?: number }
->
+export type QrCodeCenterProps = ParentProps<JSX.SvgSVGAttributes<SVGSVGElement> & { size?: number }>
 
 export function QrCodeCenter(props: QrCodeCenterProps) {
   const [local, rest] = splitProps(props, ['size', 'class', 'style', 'children'])

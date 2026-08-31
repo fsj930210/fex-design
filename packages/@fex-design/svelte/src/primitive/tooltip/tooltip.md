@@ -17,13 +17,13 @@ import TooltipArrow from '@fex-design/svelte/primitive/tooltip-arrow'
 
 ## Props
 
-| 组件 | 参数 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- | --- |
-| Root | `open` / `defaultOpen` | `boolean` | `- / false` | 否 | 受控与非受控状态 |
-| Root | `onOpenChange` | `(open, info) => void` | - | 否 | 状态变化 |
-| Root | `placement` / `sideOffset` | `FloatingPlacement / number` | `top / 6` | 否 | 定位 |
-| Root | `hoverOpenDelay` / `hoverCloseDelay` | `number` | `400 / 100` | 否 | 延迟 |
-| Content / Arrow | `class`、`style` | 原生属性 | - | 否 | 样式合并 |
+| 组件            | 参数                                 | 类型                         | 默认值      | 必填 | 说明             |
+| --------------- | ------------------------------------ | ---------------------------- | ----------- | ---- | ---------------- |
+| Root            | `open` / `defaultOpen`               | `boolean`                    | `- / false` | 否   | 受控与非受控状态 |
+| Root            | `onOpenChange`                       | `(open, info) => void`       | -           | 否   | 状态变化         |
+| Root            | `placement` / `sideOffset`           | `FloatingPlacement / number` | `top / 6`   | 否   | 定位             |
+| Root            | `hoverOpenDelay` / `hoverCloseDelay` | `number`                     | `400 / 100` | 否   | 延迟             |
+| Content / Arrow | `class`、`style`                     | 原生属性                     | -           | 否   | 样式合并         |
 
 ## 说明
 

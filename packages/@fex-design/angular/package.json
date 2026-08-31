@@ -2,11 +2,6 @@
   "name": "@fex-design/angular",
   "private": true,
   "type": "module",
-  "scripts": {
-    "sync-paths": "node scripts/sync-tsconfig-paths.mjs",
-    "typecheck": "ngc -p tsconfig.json --noEmit",
-    "lint": "oxlint src"
-  },
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
@@ -75,6 +70,7 @@
     "./primitive/tooltip": "./src/primitive/tooltip/tooltip.ts",
     "./primitive/tour": "./src/primitive/tour/tour.ts",
     "./primitive/badge": "./src/primitive/badge/badge.ts",
+    "./ui/badge": "./src/ui/badge/badge.ts",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.ts",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.ts",
     "./primitive/avatar": "./src/primitive/avatar/avatar.ts",
@@ -119,6 +115,11 @@
     "./services/toast": "./src/services/toast.ts",
     "./i18n": "./src/i18n/i18n.ts"
   },
+  "scripts": {
+    "sync-paths": "node scripts/sync-tsconfig-paths.mjs",
+    "typecheck": "ngc -p tsconfig.json --noEmit",
+    "lint": "oxlint src"
+  },
   "dependencies": {
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
@@ -130,9 +131,9 @@
     "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
+    "@angular/common": "22.1.0",
     "@angular/compiler": "22.1.0",
     "@angular/compiler-cli": "22.1.0",
-    "@angular/common": "22.1.0",
     "@angular/core": "22.1.0",
     "typescript": "catalog:"
   },

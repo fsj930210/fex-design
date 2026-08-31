@@ -6,6 +6,8 @@ export function CssVariablesExample() {
       title={<strong className="text-lg font-bold text-pink-950">实例级主题</strong>}
       description="只影响这一张 Card"
       footer="变量可以同时替换圆角、阴影和三个区域。"
-    >所有值都直接写在当前 Card 实例上。</Card>
+    >
+      所有值都直接写在当前 Card 实例上。
+    </Card>
   )
 }

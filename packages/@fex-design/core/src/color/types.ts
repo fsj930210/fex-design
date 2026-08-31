@@ -1,9 +1,29 @@
 export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsb' | 'oklch'
 
-export interface RgbColor { r: number; g: number; b: number; alpha: number }
-export interface HslColor { h: number; s: number; l: number; alpha: number }
-export interface HsbColor { h: number; s: number; b: number; alpha: number }
-export interface OklchColor { l: number; c: number; h: number; alpha: number }
+export interface RgbColor {
+  r: number
+  g: number
+  b: number
+  alpha: number
+}
+export interface HslColor {
+  h: number
+  s: number
+  l: number
+  alpha: number
+}
+export interface HsbColor {
+  h: number
+  s: number
+  b: number
+  alpha: number
+}
+export interface OklchColor {
+  l: number
+  c: number
+  h: number
+  alpha: number
+}
 
 export interface ColorValue {
   readonly alpha: number

@@ -1,18 +1,32 @@
 import { CheckIcon } from '@fex-design/react/icon/check'
 import { ClockIcon } from '@fex-design/react/icon/clock'
-import { Timeline, TimelineContent, TimelineIndicator, TimelineItem, TimelineOpposite } from '@fex-design/react/primitive/timeline'
+import {
+  Timeline,
+  TimelineContent,
+  TimelineIndicator,
+  TimelineItem,
+  TimelineOpposite,
+} from '@fex-design/react/primitive/timeline'
 import { Badge } from '@fex-design/react/primitive/badge'
 import { Card } from '@fex-design/react/ui/card'
 
 export function CustomNodeDemo() {
   return (
-    <Card title="Custom node content" description="Content can compose existing components and indicators can use a larger custom surface.">
+    <Card
+      title="Custom node content"
+      description="Content can compose existing components and indicators can use a larger custom surface."
+    >
       <Timeline>
         <TimelineItem status="completed" className="[--timeline-indicator-size:2rem]">
           <TimelineOpposite className="flex items-center justify-end">Aug 2</TimelineOpposite>
-          <TimelineIndicator className="!self-center shadow-sm"><CheckIcon /></TimelineIndicator>
+          <TimelineIndicator className="!self-center shadow-sm">
+            <CheckIcon />
+          </TimelineIndicator>
           <TimelineContent className="rounded-md border border-border bg-background p-2 shadow-sm">
-            <div className="flex items-center gap-1.5"><strong>Version 2.4 released</strong><Badge>Stable</Badge></div>
+            <div className="flex items-center gap-1.5">
+              <strong>Version 2.4 released</strong>
+              <Badge>Stable</Badge>
+            </div>
             <p className="mt-1.5 text-muted-foreground">Timeline primitives are now available.</p>
           </TimelineContent>
         </TimelineItem>
@@ -22,16 +36,25 @@ export function CustomNodeDemo() {
             <ClockIcon />
           </TimelineIndicator>
           <TimelineContent className="rounded-md border border-violet-200 bg-violet-50 p-2">
-            <div className="flex items-center gap-1.5"><strong>Design review</strong><Badge>Reviewing</Badge></div>
-            <p className="mt-1.5 text-muted-foreground">The team is reviewing the horizontal layout.</p>
+            <div className="flex items-center gap-1.5">
+              <strong>Design review</strong>
+              <Badge>Reviewing</Badge>
+            </div>
+            <p className="mt-1.5 text-muted-foreground">
+              The team is reviewing the horizontal layout.
+            </p>
           </TimelineContent>
         </TimelineItem>
         <TimelineItem status="pending" className="[--timeline-indicator-size:2rem]">
           <TimelineOpposite className="flex items-center justify-end">Next</TimelineOpposite>
-          <TimelineIndicator className="!self-center border-dashed text-[10px] font-semibold">QA</TimelineIndicator>
+          <TimelineIndicator className="!self-center border-dashed text-[10px] font-semibold">
+            QA
+          </TimelineIndicator>
           <TimelineContent className="rounded-md border border-dashed border-border p-2">
             <strong>Quality verification</strong>
-            <p className="mt-1.5 text-muted-foreground">A fully custom text node marks the next milestone.</p>
+            <p className="mt-1.5 text-muted-foreground">
+              A fully custom text node marks the next milestone.
+            </p>
           </TimelineContent>
         </TimelineItem>
       </Timeline>

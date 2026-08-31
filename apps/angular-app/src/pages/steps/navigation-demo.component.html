@@ -1,1 +1,8 @@
-<fex-card title="Navigation" description="navigation enables pointer and keyboard switching and reports complete node metadata."><fex-steps navigation defaultCurrent="account" (change)="change($event)"><fex-steps-step-list/></fex-steps><p class="mt-2 text-sm text-muted-foreground">{{message()}}</p></fex-card>
+<fex-card
+  title="Navigation"
+  description="navigation enables pointer and keyboard switching and reports complete node metadata."
+  ><fex-steps navigation defaultCurrent="account" (change)="change($event)"
+    ><fex-steps-step-list
+  /></fex-steps>
+  <p class="mt-2 text-sm text-muted-foreground">{{ message() }}</p></fex-card
+>

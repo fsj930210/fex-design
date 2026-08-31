@@ -5,12 +5,7 @@
 ## 用途与导入
 
 ```tsx
-import {
-  InputClear,
-  InputControl,
-  InputPrefix,
-  InputRoot,
-} from '@fex-design/solid/primitive/input'
+import { InputClear, InputControl, InputPrefix, InputRoot } from '@fex-design/solid/primitive/input'
 export function Demo() {
   return (
     <InputRoot defaultValue="admin">

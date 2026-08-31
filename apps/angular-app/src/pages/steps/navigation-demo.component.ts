@@ -15,6 +15,8 @@ export class NavigationDemoComponent {
   message = signal('Use click, Enter, Space or arrow keys.')
 
   change(event: { value: StepValue; meta: StepsChangeMeta }) {
-    this.message.set(`${String(event.meta.previous?.value ?? 'none')} -> ${String(event.value)} (${event.meta.trigger})`)
+    this.message.set(
+      `${String(event.meta.previous?.value ?? 'none')} -> ${String(event.value)} (${event.meta.trigger})`,
+    )
   }
 }

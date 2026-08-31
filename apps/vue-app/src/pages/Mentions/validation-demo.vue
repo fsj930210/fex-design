@@ -19,7 +19,7 @@ import { mentionUsers } from './data'
 
 const form = useForm({ defaultValues: { prompt: '' }, onSubmit: () => undefined })
 const validators = {
-  onSubmit: ({ value }: { value: string }) => value.trim() ? undefined : 'Prompt is required.',
+  onSubmit: ({ value }: { value: string }) => (value.trim() ? undefined : 'Prompt is required.'),
 }
 function invalid(state: AnyFieldApi['state']) {
   return state.meta.errors.length > 0
@@ -30,7 +30,10 @@ function errors(items: unknown[]) {
 </script>
 
 <template>
-  <Card title="Form validation" description="Field invalid state drives the default Textarea styling.">
+  <Card
+    title="Form validation"
+    description="Field invalid state drives the default Textarea styling."
+  >
     <FormHost :form="form" class="grid max-w-xl gap-2">
       <Field name="prompt" :validators="validators" v-slot="{ field, state }">
         <FieldRoot required :invalid="invalid(state)" :has-error="invalid(state)">
@@ -45,7 +48,12 @@ function errors(items: unknown[]) {
               <MentionsTrigger placeholder="Submit empty content to see validation" />
               <MentionsContent>
                 <MentionsList>
-                  <MentionsItem v-for="user in mentionUsers" :key="user.id" :item-key="user.id" :value="user.name">
+                  <MentionsItem
+                    v-for="user in mentionUsers"
+                    :key="user.id"
+                    :item-key="user.id"
+                    :value="user.name"
+                  >
                     {{ user.name }}
                   </MentionsItem>
                 </MentionsList>

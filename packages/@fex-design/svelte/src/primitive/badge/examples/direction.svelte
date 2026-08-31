@@ -1,0 +1,2 @@
+<script lang="ts">import { Badge } from '@fex-design/svelte/primitive/badge';const directions=['ltr','rtl'] as const</script>
+<div class="flex items-center justify-center gap-12">{#each directions as dir}<div {dir} class="grid justify-items-center gap-2"><span>{dir.toUpperCase()}</span><span class="relative inline-flex"><span class="block size-10 rounded bg-muted-background"></span><Badge count={5} class="absolute end-0 top-0 z-10 -translate-y-1/2 translate-x-1/2 rtl:-translate-x-1/2"/></span></div>{/each}</div>

@@ -8,7 +8,11 @@ export function ImageDemo() {
   return (
     <Card title="Image Content" description="Wrap an image to add a text watermark over it.">
       <Watermark content="FEX Admin" className="rounded-md border border-border bg-background">
-        <img className="block aspect-[5/2] w-full object-cover" src={image} alt="Document preview" />
+        <img
+          className="block aspect-[5/2] w-full object-cover"
+          src={image}
+          alt="Document preview"
+        />
       </Watermark>
     </Card>
   )

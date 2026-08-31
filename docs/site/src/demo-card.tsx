@@ -24,6 +24,8 @@ export function DemoCard(props: {
   const [copied, setCopied] = createSignal(false)
   const [height, setHeight] = createSignal(180)
   const [ready, setReady] = createSignal(false)
+  const [shouldLoad, setShouldLoad] = createSignal(false)
+  let article!: HTMLElement
   let frame!: HTMLIFrameElement
   const url = () => {
     if (import.meta.env.DEV) {
@@ -32,7 +34,10 @@ export function DemoCard(props: {
     return `${import.meta.env.BASE_URL}previews/${props.framework}/?layer=${demoLayer()}&component=${props.slug}&demo=${props.scene.id}&embed=true`
   }
   const [source] = createResource(
-    () => `${props.framework}:${demoLayer()}:${props.slug}:${props.scene.id}`,
+    () =>
+      tab() === 'code'
+        ? `${props.framework}:${demoLayer()}:${props.slug}:${props.scene.id}`
+        : undefined,
     async () => {
       const response = await fetch(
         import.meta.env.DEV
@@ -49,13 +54,25 @@ export function DemoCard(props: {
     setReady(false)
   })
   onMount(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isNearViewport = Boolean(entry?.isIntersecting)
+        setShouldLoad(isNearViewport)
+        if (!isNearViewport) setReady(false)
+      },
+      { rootMargin: '100px 0px' },
+    )
+    observer.observe(article)
     const receive = (event: MessageEvent<PreviewRuntimeMessage>) => {
       if (event.source !== frame?.contentWindow || event.data?.protocol !== PREVIEW_PROTOCOL) return
       if (event.data.type === 'ready') setReady(true)
       if (event.data.type === 'resize') setHeight(Math.max(140, Math.ceil(event.data.height)))
     }
     addEventListener('message', receive)
-    onCleanup(() => removeEventListener('message', receive))
+    onCleanup(() => {
+      observer.disconnect()
+      removeEventListener('message', receive)
+    })
   })
   const copySource = async () => {
     if (!source()) return
@@ -66,6 +83,9 @@ export function DemoCard(props: {
 
   return (
     <article
+      ref={(element) => {
+        article = element
+      }}
       class="mt-9.5"
       id={`example-${props.scene.id}`}
       data-toc-item
@@ -106,16 +126,19 @@ export function DemoCard(props: {
                 <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
               </div>
             </Show>
-            <iframe
-              ref={(element) => {
-                frame = element
-              }}
-              class="block h-full min-h-35 w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
-              data-ready={ready()}
-              title={`${props.framework} ${demoLayer()} ${props.slug} ${props.scene.id}`}
-              src={url()}
-              scrolling="no"
-            />
+            <Show when={shouldLoad()}>
+              <iframe
+                ref={(element) => {
+                  frame = element
+                }}
+                class="block h-full min-h-35 w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
+                data-ready={ready()}
+                title={`${props.framework} ${demoLayer()} ${props.slug} ${props.scene.id}`}
+                src={url()}
+                loading="lazy"
+                scrolling="no"
+              />
+            </Show>
           </div>
         </Show>
       </ExampleCard>

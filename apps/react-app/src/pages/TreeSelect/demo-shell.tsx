@@ -1,9 +1,25 @@
-import { asyncLoadFeature, checkFeature, expansionFeature, selectionFeature } from '@fex-design/core'
+import {
+  asyncLoadFeature,
+  checkFeature,
+  expansionFeature,
+  selectionFeature,
+} from '@fex-design/core'
 import type { TreeItem, TreeKey } from '@fex-design/core/tree/types'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
-import { InputClear, InputControl, InputRoot, type InputRootProps } from '@fex-design/react/primitive/input'
+import {
+  InputClear,
+  InputControl,
+  InputRoot,
+  type InputRootProps,
+} from '@fex-design/react/primitive/input'
 import { Tag } from '@fex-design/react/primitive/tag'
-import { TreeSelectContent, TreeSelectOption, TreeSelectRoot, TreeSelectTrigger, useTreeSelect } from '@fex-design/react/primitive/tree-select'
+import {
+  TreeSelectContent,
+  TreeSelectOption,
+  TreeSelectRoot,
+  TreeSelectTrigger,
+  useTreeSelect,
+} from '@fex-design/react/primitive/tree-select'
 import { Checkbox } from '@fex-design/react/ui/checkbox'
 import type { ReactNode } from 'react'
 import { DemoTree } from '../Tree/demo-tree'
@@ -25,7 +41,12 @@ interface Props {
   children?: ReactNode | undefined
   expandedKeys?: readonly TreeKey[] | undefined
   onExpandedKeysChange?: ((keys: readonly TreeKey[]) => void) | undefined
-  asyncLoader?: ((item: TreeItem<DepartmentNode>, context: { signal: AbortSignal }) => Promise<readonly DepartmentNode[]>) | undefined
+  asyncLoader?:
+    | ((
+        item: TreeItem<DepartmentNode>,
+        context: { signal: AbortSignal },
+      ) => Promise<readonly DepartmentNode[]>)
+    | undefined
   onTreeDataChange?: ((treeData: readonly DepartmentNode[]) => void) | undefined
   locatedTreeData?: readonly DepartmentNode[] | undefined
   locatedExpandedKeys?: readonly TreeKey[] | undefined
@@ -38,7 +59,14 @@ function toItems(nodes: readonly DepartmentNode[]): TreeSelectItem<DepartmentNod
   ])
 }
 
-function TreeSelectPanelState({ children }: { children: (selectedKeys: readonly TreeSelectValue[], setCheckedKeys: (keys: readonly TreeSelectValue[]) => void) => ReactNode }) {
+function TreeSelectPanelState({
+  children,
+}: {
+  children: (
+    selectedKeys: readonly TreeSelectValue[],
+    setCheckedKeys: (keys: readonly TreeSelectValue[]) => void,
+  ) => ReactNode
+}) {
   const { controller, snapshot } = useTreeSelect<DepartmentNode>()
   return children(snapshot.values, controller.setValues)
 }
@@ -46,11 +74,55 @@ function TreeSelectPanelState({ children }: { children: (selectedKeys: readonly 
 function SelectedTags({ maxTagCount }: { maxTagCount: number }) {
   const treeSelect = useTreeSelect<DepartmentNode>()
   const items = treeSelect.snapshot.selectedItems
-  if (items.length > maxTagCount) return <Tag size="sm" className="ml-1.5">已选择 {items.length} 项</Tag>
-  return <>{items.map((item) => <Tag key={item.value} size="sm" closable className="ml-1.5" onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => { event.stopPropagation(); treeSelect.controller.setValues(treeSelect.snapshot.values.filter((value) => value !== item.value)) }}>{item.label}</Tag>)}</>
+  if (items.length > maxTagCount)
+    return (
+      <Tag size="sm" className="ml-1.5">
+        已选择 {items.length} 项
+      </Tag>
+    )
+  return (
+    <>
+      {items.map((item) => (
+        <Tag
+          key={item.value}
+          size="sm"
+          closable
+          className="ml-1.5"
+          onPointerDownCapture={(event) => event.preventDefault()}
+          onClose={(event) => {
+            event.stopPropagation()
+            treeSelect.controller.setValues(
+              treeSelect.snapshot.values.filter((value) => value !== item.value),
+            )
+          }}
+        >
+          {item.label}
+        </Tag>
+      ))}
+    </>
+  )
 }
 
-export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkStrictly, maxTagCount = 2, searchable, searchValue, onSearchValueChange, onChange, onClear, children, expandedKeys, onExpandedKeysChange, asyncLoader, onTreeDataChange, locatedTreeData, locatedExpandedKeys }: Props) {
+export function DemoTreeSelect({
+  treeData,
+  value,
+  defaultValue,
+  multiple,
+  checkStrictly,
+  maxTagCount = 2,
+  searchable,
+  searchValue,
+  onSearchValueChange,
+  onChange,
+  onClear,
+  children,
+  expandedKeys,
+  onExpandedKeysChange,
+  asyncLoader,
+  onTreeDataChange,
+  locatedTreeData,
+  locatedExpandedKeys,
+}: Props) {
   const renderTree = (
     data: readonly DepartmentNode[],
     treeExpandedKeys: readonly TreeKey[] | undefined,
@@ -65,34 +137,60 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
       isLeaf={isDepartmentLeaf}
       selectedKeys={multiple ? [] : selectedKeys}
       checkedKeys={multiple ? selectedKeys : undefined}
-      onCheckedKeysChange={multiple ? (keys, meta) => {
-        if (!checkStrictly) { setCheckedKeys(keys); return }
-        const next = new Set(selectedKeys)
-        meta.changedKeys.forEach((key) => keys.includes(key) ? next.add(key) : next.delete(key))
-        setCheckedKeys([...next])
-      } : undefined}
+      onCheckedKeysChange={
+        multiple
+          ? (keys, meta) => {
+              if (!checkStrictly) {
+                setCheckedKeys(keys)
+                return
+              }
+              const next = new Set(selectedKeys)
+              meta.changedKeys.forEach((key) =>
+                keys.includes(key) ? next.add(key) : next.delete(key),
+              )
+              setCheckedKeys([...next])
+            }
+          : undefined
+      }
       checkable={multiple}
       expandedKeys={treeExpandedKeys}
       onExpandedKeysChange={onTreeExpandedKeysChange}
       onTreeDataChange={useAsyncLoader ? onTreeDataChange : undefined}
       itemClassName="cursor-pointer data-[disabled=true]:cursor-not-allowed"
       searchKeyword={searchValue ?? ''}
-      titleRender={({ item, searchKeyword: keyword }) => highlightTreeTitle(item.node.name, keyword)}
+      titleRender={({ item, searchKeyword: keyword }) =>
+        highlightTreeTitle(item.node.name, keyword)
+      }
       features={[
         expansionFeature<DepartmentNode>(
           treeExpandedKeys === undefined
             ? { defaultExpandedKeys: ['company', 'engineering', 'finance', 'product'] }
             : {},
         ),
-        ...(useAsyncLoader && asyncLoader ? [asyncLoadFeature<DepartmentNode>({ loadChildren: asyncLoader })] : []),
-        ...(multiple ? [checkFeature<DepartmentNode>({ mode: checkStrictly ? 'strict' : 'cascade' })] : [selectionFeature<DepartmentNode>()]),
+        ...(useAsyncLoader && asyncLoader
+          ? [asyncLoadFeature<DepartmentNode>({ loadChildren: asyncLoader })]
+          : []),
+        ...(multiple
+          ? [checkFeature<DepartmentNode>({ mode: checkStrictly ? 'strict' : 'cascade' })]
+          : [selectionFeature<DepartmentNode>()]),
       ]}
-      renderItem={({ item, defaultNode, itemProps, leadingNode, titleNode, checkedState, actions }) => {
+      renderItem={({
+        item,
+        defaultNode,
+        itemProps,
+        leadingNode,
+        titleNode,
+        checkedState,
+        actions,
+      }) => {
         if (multiple) {
           return (
             <div
               {...itemProps}
-              className={cn(itemProps.className, 'cursor-pointer data-[disabled=true]:cursor-not-allowed')}
+              className={cn(
+                itemProps.className,
+                'cursor-pointer data-[disabled=true]:cursor-not-allowed',
+              )}
               onClick={(event) => {
                 event.stopPropagation()
                 actions.toggleChecked()
@@ -110,7 +208,12 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
             </div>
           )
         }
-        const option: TreeSelectItem<DepartmentNode> = { value: item.key, label: item.node.name, node: item.node, disabled: item.disabled }
+        const option: TreeSelectItem<DepartmentNode> = {
+          value: item.key,
+          label: item.node.name,
+          node: item.node,
+          disabled: item.disabled,
+        }
         return (
           <TreeSelectOption item={option}>
             {({ selected, select }) => (
@@ -118,7 +221,10 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
                 {...itemProps}
                 data-selected={!multiple && selected ? true : undefined}
                 data-disabled={item.disabled || undefined}
-                className={cn(itemProps.className, 'cursor-pointer data-[selected]:bg-selected-background data-[disabled]:cursor-not-allowed')}
+                className={cn(
+                  itemProps.className,
+                  'cursor-pointer data-[selected]:bg-selected-background data-[disabled]:cursor-not-allowed',
+                )}
                 onClick={(event) => {
                   event.stopPropagation()
                   itemProps.onClick?.(event)
@@ -163,7 +269,9 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
             {multiple ? <SelectedTags maxTagCount={maxTagCount} /> : null}
             <InputControl
               readOnly={inputProps.readOnly}
-              placeholder={selectedItems.length ? undefined : searchable ? '搜索部门' : '请选择部门'}
+              placeholder={
+                selectedItems.length ? undefined : searchable ? '搜索部门' : '请选择部门'
+              }
               onChange={inputProps.onChange}
               onFocus={inputProps.onFocus}
               onClick={inputProps.onClick}
@@ -186,9 +294,18 @@ export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkS
           {(selectedKeys, setCheckedKeys) => (
             <>
               {children}
-              {locatedTreeData ? renderTree(locatedTreeData, locatedExpandedKeys, selectedKeys, setCheckedKeys) : null}
+              {locatedTreeData
+                ? renderTree(locatedTreeData, locatedExpandedKeys, selectedKeys, setCheckedKeys)
+                : null}
               <div className={children || locatedTreeData ? 'hidden' : undefined}>
-                {renderTree(treeData, expandedKeys, selectedKeys, setCheckedKeys, onExpandedKeysChange, true)}
+                {renderTree(
+                  treeData,
+                  expandedKeys,
+                  selectedKeys,
+                  setCheckedKeys,
+                  onExpandedKeysChange,
+                  true,
+                )}
               </div>
             </>
           )}

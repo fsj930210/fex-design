@@ -30,7 +30,9 @@ const model = computed(() =>
     bgColor: props.bgColor,
   }),
 )
-const className = computed(() => cn(qrcodeRootClassName, attrs.class as string | undefined, props.class))
+const className = computed(() =>
+  cn(qrcodeRootClassName, attrs.class as string | undefined, props.class),
+)
 const rootStyle = computed<StyleValue>(() => [
   {
     width: model.value.size + 'px',

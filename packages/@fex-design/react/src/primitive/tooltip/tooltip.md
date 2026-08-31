@@ -5,7 +5,13 @@ Tooltip 为元素提供简短、非交互式说明，定位能力复用 floating
 ## 导入
 
 ```tsx
-import { TooltipArrow, TooltipContent, TooltipPortal, TooltipRoot, TooltipTrigger } from '@fex-design/react/primitive/tooltip'
+import {
+  TooltipArrow,
+  TooltipContent,
+  TooltipPortal,
+  TooltipRoot,
+  TooltipTrigger,
+} from '@fex-design/react/primitive/tooltip'
 ```
 
 ## 基础用法
@@ -13,7 +19,12 @@ import { TooltipArrow, TooltipContent, TooltipPortal, TooltipRoot, TooltipTrigge
 ```tsx
 <TooltipRoot>
   <TooltipTrigger>{(props) => <button {...props}>Save</button>}</TooltipTrigger>
-  <TooltipPortal><TooltipContent>Save changes<TooltipArrow /></TooltipContent></TooltipPortal>
+  <TooltipPortal>
+    <TooltipContent>
+      Save changes
+      <TooltipArrow />
+    </TooltipContent>
+  </TooltipPortal>
 </TooltipRoot>
 ```
 
@@ -21,19 +32,19 @@ import { TooltipArrow, TooltipContent, TooltipPortal, TooltipRoot, TooltipTrigge
 
 ## Props
 
-| 组件 | 参数 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- | --- |
-| Root | `open` | `boolean` | - | 否 | 受控打开状态 |
-| Root | `defaultOpen` | `boolean` | `false` | 否 | 非受控初始状态 |
-| Root | `onOpenChange` | `(open, info) => void` | - | 否 | 状态变化回调 |
-| Root | `disabled` | `boolean` | `false` | 否 | 禁止触发 |
-| Root | `placement` | `FloatingPlacement` | `top` | 否 | 复用 floating 方位 |
-| Root | `sideOffset` | `number` | `6` | 否 | 与 trigger 的距离 |
-| Root | `alignOffset` | `number` | `0` | 否 | 对齐轴偏移 |
-| Root | `hoverOpenDelay` | `number` | `400` | 否 | hover 打开延迟 |
-| Root | `hoverCloseDelay` | `number` | `100` | 否 | hover 关闭延迟 |
-| Content | 原生 div 属性 | `HTMLAttributes` | - | 否 | class、style 和原生属性透传 |
-| Arrow | 原生 div 属性 | `HTMLAttributes` | - | 否 | 显式箭头及 class 合并 |
+| 组件    | 参数              | 类型                   | 默认值  | 必填 | 说明                        |
+| ------- | ----------------- | ---------------------- | ------- | ---- | --------------------------- |
+| Root    | `open`            | `boolean`              | -       | 否   | 受控打开状态                |
+| Root    | `defaultOpen`     | `boolean`              | `false` | 否   | 非受控初始状态              |
+| Root    | `onOpenChange`    | `(open, info) => void` | -       | 否   | 状态变化回调                |
+| Root    | `disabled`        | `boolean`              | `false` | 否   | 禁止触发                    |
+| Root    | `placement`       | `FloatingPlacement`    | `top`   | 否   | 复用 floating 方位          |
+| Root    | `sideOffset`      | `number`               | `6`     | 否   | 与 trigger 的距离           |
+| Root    | `alignOffset`     | `number`               | `0`     | 否   | 对齐轴偏移                  |
+| Root    | `hoverOpenDelay`  | `number`               | `400`   | 否   | hover 打开延迟              |
+| Root    | `hoverCloseDelay` | `number`               | `100`   | 否   | hover 关闭延迟              |
+| Content | 原生 div 属性     | `HTMLAttributes`       | -       | 否   | class、style 和原生属性透传 |
+| Arrow   | 原生 div 属性     | `HTMLAttributes`       | -       | 否   | 显式箭头及 class 合并       |
 
 ## 受控与事件
 

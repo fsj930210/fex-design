@@ -1,0 +1,6 @@
+:host:has(> [data-slot='badge-content']:empty) > [data-slot='badge'],
+:host:has(> [data-slot='badge-content']:empty) > [data-slot='badge-dot'] {
+  position: static;
+  translate: none;
+  transform: none;
+}

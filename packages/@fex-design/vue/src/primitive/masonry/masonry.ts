@@ -2,4 +2,9 @@ export { default as MasonryRoot } from './masonry-root.vue'
 export { default as MasonryViewport } from './masonry-viewport.vue'
 export { default as MasonryItem } from './masonry-item.vue'
 export { default as MasonryVirtualViewport } from './masonry-virtual-viewport.vue'
-export type { MasonryColumns, MasonryGap, MasonryLayoutDetail, MasonryPlacement } from '@fex-design/core/masonry/types'
+export type {
+  MasonryColumns,
+  MasonryGap,
+  MasonryLayoutDetail,
+  MasonryPlacement,
+} from '@fex-design/core/masonry/types'

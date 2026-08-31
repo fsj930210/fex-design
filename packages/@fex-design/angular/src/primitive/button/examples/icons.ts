@@ -14,6 +14,3 @@ export class IconsExample {
   protected readonly defaultClassName = buttonClassName()
   protected readonly iconClassName = buttonClassName({ size: 'icon' })
 }
-
-
-

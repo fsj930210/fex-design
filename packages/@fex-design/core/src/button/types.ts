@@ -1,19 +1,8 @@
 /** Button 的视觉类型。 */
-export type ButtonVariant =
-  | 'solid'
-  | 'outlined'
-  | 'filled'
-  | 'text'
-  | 'link'
-  | 'dashed'
+export type ButtonVariant = 'solid' | 'outlined' | 'filled' | 'text' | 'link' | 'dashed'
 
 /** Button 的内置语义色。 */
-export type ButtonColor =
-  | 'primary'
-  | 'danger'
-  | 'warning'
-  | 'success'
-  | 'info'
+export type ButtonColor = 'primary' | 'danger' | 'warning' | 'success' | 'info'
 
 /** Button 的控件尺寸。 */
 export type ButtonSize =

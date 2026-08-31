@@ -1,0 +1,19 @@
+<div class="flex items-center gap-6">
+  <label class="flex items-center gap-2"
+    ><button
+      switch
+      [checked]="showZero()"
+      (checkedChange)="showZero.set($event.checked)"
+      aria-label="显示 0"
+    >
+      <span switchThumb></span></button
+    ><span>显示 0</span></label
+  ><span class="relative inline-flex"
+    ><span class="block size-10 rounded bg-muted-background"></span
+    ><badge
+      [count]="0"
+      [showZero]="showZero()"
+      class="absolute end-0 top-0 z-10 -translate-y-1/2 translate-x-1/2"
+    ></badge
+  ></span>
+</div>

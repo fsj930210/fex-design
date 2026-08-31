@@ -12,7 +12,8 @@ export const cardHeaderClassName = [
 export const cardTitleClassName =
   'col-start-1 row-start-1 min-w-0 text-base font-medium leading-snug text-foreground'
 
-export const cardDescriptionClassName = 'col-start-1 row-start-2 min-w-0 text-sm text-muted-foreground'
+export const cardDescriptionClassName =
+  'col-start-1 row-start-2 min-w-0 text-sm text-muted-foreground'
 
 export const cardExtraClassName = 'col-start-2 row-span-2 row-start-1 self-start justify-self-end'
 

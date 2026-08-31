@@ -1,4 +1,10 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@fex-design/react/primitive/card'
 
 export function SurfaceExample() {
   return (

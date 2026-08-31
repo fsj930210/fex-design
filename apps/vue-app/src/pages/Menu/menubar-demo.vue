@@ -23,18 +23,41 @@ const menus = [
 <template>
   <MenuRoot role="menubar" aria-label="Editor commands" :class="menubarClassName">
     <MenuList orientation="horizontal" :class="horizontalListClassName">
-      <PopoverRoot v-for="menu in menus" :key="menu.name" :trigger="['click']" side="bottom" align="start">
+      <PopoverRoot
+        v-for="menu in menus"
+        :key="menu.name"
+        :trigger="['click']"
+        side="bottom"
+        align="start"
+      >
         <PopoverTrigger v-slot="popover">
           <MenuItem :value="menu.name" submenu>
             <template #trigger="slot">
-              <button v-bind="mergeProps(slot.props, popover.props)" :ref="popover.ref" aria-haspopup="menu" :class="menubarTriggerClassName">{{ menu.name }}</button>
+              <button
+                v-bind="mergeProps(slot.props, popover.props)"
+                :ref="popover.ref"
+                aria-haspopup="menu"
+                :class="menubarTriggerClassName"
+              >
+                {{ menu.name }}
+              </button>
             </template>
           </MenuItem>
         </PopoverTrigger>
         <PopoverPortal>
           <DropdownContent :class="popupClassName">
-            <MenuList orientation="vertical" :parent-value="menu.name" :class="verticalListClassName">
-              <MenuItem v-for="item in menu.items" :key="item" :value="`${menu.name}-${item}`" :class="verticalItemClassName">{{ item }}</MenuItem>
+            <MenuList
+              orientation="vertical"
+              :parent-value="menu.name"
+              :class="verticalListClassName"
+            >
+              <MenuItem
+                v-for="item in menu.items"
+                :key="item"
+                :value="`${menu.name}-${item}`"
+                :class="verticalItemClassName"
+                >{{ item }}</MenuItem
+              >
             </MenuList>
           </DropdownContent>
         </PopoverPortal>

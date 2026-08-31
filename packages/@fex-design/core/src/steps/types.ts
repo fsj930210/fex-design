@@ -54,5 +54,8 @@ export interface StepsController<TData = unknown> extends SnapshotStore<StepsSna
   getStepInfo: (value: StepValue) => StepInfo<TData> | undefined
   getPosition: (value: StepValue) => number
   select: (value: StepValue, trigger: StepsChangeTrigger) => StepValue | undefined
-  move: (value: StepValue, direction: 'next' | 'previous' | 'first' | 'last') => StepValue | undefined
+  move: (
+    value: StepValue,
+    direction: 'next' | 'previous' | 'first' | 'last',
+  ) => StepValue | undefined
 }

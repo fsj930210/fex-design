@@ -1,8 +1,4 @@
-import {
-  tabsContentClassName,
-  tabsItemClassName,
-  tabsListClassName,
-} from '@fex-design/styles/tabs'
+import { tabsContentClassName, tabsItemClassName, tabsListClassName } from '@fex-design/styles/tabs'
 import { cn } from '@fex/utils'
 import {
   booleanAttribute,

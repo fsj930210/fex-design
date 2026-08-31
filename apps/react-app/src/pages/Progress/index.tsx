@@ -44,8 +44,7 @@ function StepLine({
             key={index}
             className="h-2 w-4 rounded-[1px]"
             style={{
-              background:
-                index < activeSteps ? color : 'var(--progress-remaining)',
+              background: index < activeSteps ? color : 'var(--progress-remaining)',
             }}
           />
         ))}
@@ -140,7 +139,10 @@ export function ProgressPage() {
           <Line label="Upload progress" value={35} />
         </div>
       </Card>
-      <Card title="Status" description="Info, warning, success and error use system semantic tokens.">
+      <Card
+        title="Status"
+        description="Info, warning, success and error use system semantic tokens."
+      >
         <div className="grid max-w-xl gap-3">
           <Line label="Normal" value={35} />
           <Line label="Info" value={68} status="info" />
@@ -194,7 +196,10 @@ export function ProgressPage() {
           <StepLine value={60} steps={5} color="var(--success)" />
         </div>
       </Card>
-      <Card title="Step Circle" description="Show progress as fixed circular steps with custom count and gap.">
+      <Card
+        title="Step Circle"
+        description="Show progress as fixed circular steps with custom count and gap."
+      >
         <div className="flex flex-wrap gap-4">
           <div className="grid justify-items-center gap-1.5">
             <CircleSteps value={50} steps={12} gap={2} />
@@ -213,7 +218,10 @@ export function ProgressPage() {
           <Line label="Large · 12px" value={80} thickness={12} />
         </div>
       </Card>
-      <Card title="Linecap" description="Round line / round track, butt and square endings with the same value.">
+      <Card
+        title="Linecap"
+        description="Round line / round track, butt and square endings with the same value."
+      >
         <div className="grid max-w-xl gap-3">
           <Line label="Round line / round track" value={36} thickness={12} linecap="round" />
           <Line

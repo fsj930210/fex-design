@@ -1,0 +1,91 @@
+{
+  "name": "Badge",
+  "slug": "badge",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "用于展示状态、数量、点标记和紧凑标签的具体组件。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/badge",
+    "vue": "@fex-design/vue/primitive/badge",
+    "solid": "@fex-design/solid/primitive/badge",
+    "svelte": "@fex-design/svelte/primitive/badge",
+    "angular": "@fex-design/angular/primitive/badge"
+  },
+  "props": [],
+  "events": [],
+  "cssVariables": ["--badge-color", "--badge-color-foreground"],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "展示数字附着、自定义内容附着和独立 BadgeDot 小圆点。"
+    },
+    { "id": "custom", "title": "自定义内容", "description": "直接显示自定义短内容。" },
+    {
+      "id": "zero",
+      "title": "零值显示",
+      "description": "count 为 0 时默认隐藏，showZero 后显示。"
+    },
+    { "id": "overflow", "title": "封顶数字", "description": "超过 overflowCount 后显示为 N+。" },
+    { "id": "dot", "title": "小圆点", "description": "附着没有数字内容的小圆点。" },
+    { "id": "colors", "title": "语义颜色", "description": "使用内置颜色表达状态。" },
+    { "id": "ribbon", "title": "Ribbon", "description": "将 Ribbon 附着到卡片或容器边缘。" },
+    {
+      "id": "group",
+      "title": "BadgeGroup 集合溢出",
+      "description": "使用 maxCount 收起过多的徽标，并显示 +N。"
+    },
+    { "id": "direction", "title": "LTR 与 RTL", "description": "对比逻辑行内结束侧的附着位置。" }
+  ],
+  "components": [
+    {
+      "name": "Badge",
+      "slug": "badge",
+      "layer": "primitive",
+      "description": "显示文本或数字内容的独立徽标。",
+      "props": [
+        {
+          "name": "color",
+          "type": "BadgeColor",
+          "description": "五种内置语义颜色或任意 CSS 颜色值。"
+        },
+        { "name": "count", "type": "framework-native content", "description": "显示内容。" },
+        { "name": "overflowCount", "type": "number", "description": "数字封顶为 N+。" },
+        { "name": "showZero", "type": "boolean", "default": false, "description": "是否显示零值。" }
+      ],
+      "frameworks": {}
+    },
+    {
+      "name": "BadgeDot",
+      "slug": "badge-dot",
+      "layer": "primitive",
+      "description": "独立点状态标记。",
+      "props": [{ "name": "color", "type": "BadgeColor", "description": "点标记颜色。" }],
+      "frameworks": {}
+    },
+    {
+      "name": "BadgeRibbon",
+      "slug": "badge-ribbon",
+      "layer": "primitive",
+      "description": "由使用者定位的独立 Ribbon 标记，内容通过 children、slot 或 content projection 传入。",
+      "props": [
+        { "name": "color", "type": "BadgeColor", "description": "Ribbon 颜色。" },
+        {
+          "name": "placement",
+          "type": "'start' | 'end'",
+          "default": "end",
+          "description": "Ribbon 朝向。"
+        }
+      ],
+      "frameworks": {}
+    },
+    {
+      "name": "BadgeGroup",
+      "slug": "badge-group",
+      "layer": "primitive",
+      "description": "管理 Badge 集合布局、maxCount 和 +N 溢出内容。",
+      "props": [{ "name": "maxCount", "type": "number", "description": "最多显示的子项数量。" }],
+      "frameworks": {}
+    }
+  ]
+}

@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import {
-  SliderRange,
-  SliderRoot,
-  SliderThumb,
-  SliderTrack,
-} from '@fex-design/vue/primitive/slider'
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '@fex-design/vue/primitive/slider'
 import Card from '@fex-design/vue/ui/card'
 
 const basicValue = ref([32])

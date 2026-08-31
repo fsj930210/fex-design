@@ -33,17 +33,45 @@ for (const [framework, config] of Object.entries(frameworks)) {
         const name = example.name.slice(0, -config.extension.length - 1)
         let source = await readFile(resolve(examplesRoot, example.name), 'utf8')
         let angularTemplateRoot = examplesRoot
-        const reexport = source.match(/export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/)
+        const reexport = source.match(
+          /export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/,
+        )
         if (layer === 'ui' && reexport) {
-          const primitiveRoot = resolve(componentRoot, framework, 'src', 'primitive', reexport[1], 'examples')
+          const primitiveRoot = resolve(
+            componentRoot,
+            framework,
+            'src',
+            'primitive',
+            reexport[1],
+            'examples',
+          )
           angularTemplateRoot = primitiveRoot
-          source = await readFile(resolve(primitiveRoot, `${reexport[2]}.${config.extension}`), 'utf8')
-          source = source.replaceAll(`@fex-design/${framework}/primitive/${reexport[1]}`, `@fex-design/${framework}/ui/${component.name}`)
-          if (framework === 'angular') source = source.replaceAll("from '../separator'", "from '@fex-design/angular/ui/separator'")
-          if (framework === 'svelte') source = source.replace(/from ['"][^'"]*separator\.svelte['"]/, "from '@fex-design/svelte/ui/separator'")
+          source = await readFile(
+            resolve(primitiveRoot, `${reexport[2]}.${config.extension}`),
+            'utf8',
+          )
+          source = source.replaceAll(
+            `@fex-design/${framework}/primitive/${reexport[1]}`,
+            `@fex-design/${framework}/ui/${component.name}`,
+          )
+          if (framework === 'angular')
+            source = source.replaceAll(
+              "from '../separator'",
+              "from '@fex-design/angular/ui/separator'",
+            )
+          if (framework === 'svelte')
+            source = source.replace(
+              /from ['"][^'"]*separator\.svelte['"]/,
+              "from '@fex-design/svelte/ui/separator'",
+            )
         }
-        if (layer === 'ui' && framework === 'svelte') source = source.replace(/from ['"][^'"]*separator\.svelte['"]/, "from '@fex-design/svelte/ui/separator'")
-        if (layer === 'ui' && framework === 'angular') source = source.replace("from '../separator'", "from '@fex-design/angular/ui/separator'")
+        if (layer === 'ui' && framework === 'svelte')
+          source = source.replace(
+            /from ['"][^'"]*separator\.svelte['"]/,
+            "from '@fex-design/svelte/ui/separator'",
+          )
+        if (layer === 'ui' && framework === 'angular')
+          source = source.replace("from '../separator'", "from '@fex-design/angular/ui/separator'")
         if (framework === 'angular') {
           try {
             source += `\n\n<!-- ${name}.html -->\n${await readFile(resolve(angularTemplateRoot, `${name}.html`), 'utf8')}`

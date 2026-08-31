@@ -1,31 +1,66 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 
 export const badgeClassName = cva(
-  [
-    'inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-full',
-    'border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap',
-    'transition-[color,box-shadow]',
-    'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50',
-    'aria-invalid:border-danger aria-invalid:ring-danger/20',
-    '[&>svg]:pointer-events-none [&>svg]:size-3',
-  ].join(' '),
+  'inline-flex h-5 min-w-5 w-fit shrink-0 items-center justify-center rounded-full border border-transparent bg-[var(--badge-color,var(--badge-semantic-color))] px-1.5 py-0 text-xs leading-none font-medium text-[var(--badge-color-foreground,var(--badge-semantic-color-foreground))] whitespace-nowrap',
   {
     variants: {
-      variant: {
-        default: 'bg-primary text-primary-foreground [a&]:hover:bg-primary/80',
-        secondary: 'bg-secondary-background text-foreground [a&]:hover:bg-hover-background',
-        destructive: 'bg-danger text-danger-foreground [a&]:hover:bg-danger/90',
-        outline: 'border-border text-foreground [a&]:hover:bg-muted-background',
-        ghost: 'text-foreground [a&]:hover:bg-muted-background',
-        link: 'text-link underline-offset-4 [a&]:hover:text-link-hover [a&]:hover:underline',
+      color: {
+        default:
+          '[--badge-semantic-color:var(--color-danger)] [--badge-semantic-color-foreground:var(--color-danger-foreground)]',
+        primary:
+          '[--badge-semantic-color:var(--color-primary)] [--badge-semantic-color-foreground:var(--color-primary-foreground)]',
+        danger:
+          '[--badge-semantic-color:var(--color-danger)] [--badge-semantic-color-foreground:var(--color-danger-foreground)]',
+        warning:
+          '[--badge-semantic-color:var(--color-warning)] [--badge-semantic-color-foreground:var(--color-warning-foreground)]',
+        success:
+          '[--badge-semantic-color:var(--color-success)] [--badge-semantic-color-foreground:var(--color-success-foreground)]',
+        info: '[--badge-semantic-color:var(--color-info)] [--badge-semantic-color-foreground:var(--color-info-foreground)]',
       },
     },
-    defaultVariants: {
-      variant: 'default',
-    },
+    defaultVariants: { color: 'default' },
   },
 )
-
-export const badgeOverflowClassName = 'inline-flex flex-wrap items-center gap-1.5'
-
-export type BadgeStyleProps = VariantProps<typeof badgeClassName>
+export const badgeDotClassName =
+  'inline-block size-2 rounded-full bg-current text-[var(--badge-color,var(--badge-semantic-color))]'
+export const badgeDotColorClassName = cva('', {
+  variants: {
+    color: {
+      default: '[--badge-semantic-color:var(--color-danger)]',
+      primary: '[--badge-semantic-color:var(--color-primary)]',
+      danger: '[--badge-semantic-color:var(--color-danger)]',
+      warning: '[--badge-semantic-color:var(--color-warning)]',
+      success: '[--badge-semantic-color:var(--color-success)]',
+      info: '[--badge-semantic-color:var(--color-info)]',
+    },
+  },
+  defaultVariants: { color: 'default' },
+})
+export const badgeRootClassName =
+  'relative inline-flex w-fit [&>[data-slot=badge]]:absolute [&>[data-slot=badge]]:end-0 [&>[data-slot=badge]]:top-0 [&>[data-slot=badge]]:z-10 [&>[data-slot=badge]]:-translate-y-1/2 [&>[data-slot=badge]]:translate-x-1/2 rtl:[&>[data-slot=badge]]:-translate-x-1/2 [&>[data-slot=badge-dot]]:absolute [&>[data-slot=badge-dot]]:end-0 [&>[data-slot=badge-dot]]:top-0 [&>[data-slot=badge-dot]]:z-10 [&>[data-slot=badge-dot]]:-translate-y-1/2 [&>[data-slot=badge-dot]]:translate-x-1/2 rtl:[&>[data-slot=badge-dot]]:-translate-x-1/2'
+export const badgeIndicatorClassName =
+  'absolute end-0 top-0 z-10 -translate-y-1/2 translate-x-1/2 rtl:-translate-x-1/2'
+export const badgeGroupClassName = 'inline-flex flex-wrap items-center gap-1.5'
+export const badgeRibbonRootClassName = 'relative block w-full'
+export const badgeRibbonClassName =
+  "absolute -end-2 top-2 z-10 rounded-sm rounded-ee-none px-2 text-sm leading-[22px] whitespace-nowrap after:absolute after:end-0 after:top-full after:size-2 after:origin-top after:scale-y-75 after:border-4 after:border-solid after:border-current after:[border-inline-end-color:transparent] after:[border-block-end-color:transparent] after:brightness-75 after:content-[''] data-[placement=start]:end-auto data-[placement=start]:-start-2 data-[placement=start]:rounded-ee-sm data-[placement=start]:rounded-es-none data-[placement=start]:after:end-auto data-[placement=start]:after:start-0 data-[placement=start]:after:[border-inline-end-color:currentColor] data-[placement=start]:after:[border-inline-start-color:transparent]"
+export const badgeRibbonColorClassName = cva('', {
+  variants: {
+    color: {
+      default:
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-primary)] [--badge-semantic-color-foreground:var(--color-primary-foreground)]',
+      primary:
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-primary)] [--badge-semantic-color-foreground:var(--color-primary-foreground)]',
+      danger:
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-danger)] [--badge-semantic-color-foreground:var(--color-danger-foreground)]',
+      warning:
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-warning)] [--badge-semantic-color-foreground:var(--color-warning-foreground)]',
+      success:
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-success)] [--badge-semantic-color-foreground:var(--color-success-foreground)]',
+      info: 'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-info)] [--badge-semantic-color-foreground:var(--color-info-foreground)]',
+    },
+  },
+  defaultVariants: { color: 'primary' },
+})
+export const badgeRibbonTextClassName =
+  'relative text-[var(--badge-color-foreground,var(--badge-semantic-color-foreground))]'

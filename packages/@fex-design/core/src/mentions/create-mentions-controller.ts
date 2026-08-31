@@ -57,10 +57,7 @@ export function createMentionsController<TData = unknown>(
     store.updateSnapshot((current) => {
       const next = { ...current, ...patch }
       return Object.keys(patch).every((key) =>
-        Object.is(
-          current[key as keyof MentionsSnapshot],
-          next[key as keyof MentionsSnapshot],
-        ),
+        Object.is(current[key as keyof MentionsSnapshot], next[key as keyof MentionsSnapshot]),
       )
         ? current
         : next
@@ -79,7 +76,9 @@ export function createMentionsController<TData = unknown>(
   }
 
   function emitSearch(query: MentionsQuery | null) {
-    const key = query ? query.prefix + '\n' + query.text + '\n' + query.start + '\n' + query.end : ''
+    const key = query
+      ? query.prefix + '\n' + query.text + '\n' + query.start + '\n' + query.end
+      : ''
     if (!query || key === lastSearchKey) return
     lastSearchKey = key
     config.onSearch?.(query.text, { prefix: query.prefix, query })
@@ -97,9 +96,9 @@ export function createMentionsController<TData = unknown>(
     const activeKey =
       query === null
         ? undefined
-        : snapshot().activeKey ??
+        : (snapshot().activeKey ??
           registry.getItems().find((item) => item.value === query.text)?.key ??
-          firstEnabledKey()
+          firstEnabledKey())
     update({ query, activeKey })
     if (query) {
       setOpen(true, reason)
@@ -122,7 +121,8 @@ export function createMentionsController<TData = unknown>(
       if (value !== previousValue) config.onChange?.(value, { reason })
       syncQuery(value, selection, 'input')
     },
-    setSelection: (selection, reason = 'selection') => syncQuery(snapshot().value, selection, reason),
+    setSelection: (selection, reason = 'selection') =>
+      syncQuery(snapshot().value, selection, reason),
     setOpen,
     registerItem: (item) => {
       const unregister = registry.register(item)

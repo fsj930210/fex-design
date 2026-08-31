@@ -5,10 +5,13 @@
   @if (title()) {
   <div cardTitle [className]="classNames().title" [style]="styles().title">{{ title() }}</div>
   } @if (description()) {
-  <div cardDescription [className]="classNames().description" [style]="styles().description">{{ description() }}</div>
-  }
-  @if (extra()) {
-  <div cardExtra [className]="classNames().extra" [style]="styles().extra"><ng-container *ngTemplateOutlet="extra() ?? null" /></div>
+  <div cardDescription [className]="classNames().description" [style]="styles().description">
+    {{ description() }}
+  </div>
+  } @if (extra()) {
+  <div cardExtra [className]="classNames().extra" [style]="styles().extra">
+    <ng-container *ngTemplateOutlet="extra() ?? null" />
+  </div>
   }
 </div>
 }

@@ -10,7 +10,13 @@ import { ContextMenuSurfaceComponent } from './menu-surface.component'
 @Component({
   selector: 'app-context-menu-basic-demo',
   standalone: true,
-  imports: [ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuContent, ContextMenuSurfaceComponent],
+  imports: [
+    ContextMenu,
+    ContextMenuTrigger,
+    ContextMenuPortal,
+    ContextMenuContent,
+    ContextMenuSurfaceComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic-demo.component.html',
 })

@@ -47,8 +47,7 @@ export function useQrCode(component = 'useQrCode') {
 }
 
 export interface QrCodeRootProps
-  extends Omit<ComponentProps<'div'>, 'children' | 'color' | 'defaultValue'>,
-    QrCodeModelOptions {
+  extends Omit<ComponentProps<'div'>, 'children' | 'color' | 'defaultValue'>, QrCodeModelOptions {
   children?: ReactNode
   ref?: Ref<HTMLDivElement>
 }
@@ -172,13 +171,7 @@ export interface QrCodeCanvasProps extends CanvasHTMLAttributes<HTMLCanvasElemen
   ref?: Ref<HTMLCanvasElement>
 }
 
-export function QrCodeCanvas({
-  centerSize,
-  exclude,
-  className,
-  ref,
-  ...props
-}: QrCodeCanvasProps) {
+export function QrCodeCanvas({ centerSize, exclude, className, ref, ...props }: QrCodeCanvasProps) {
   const { model } = useQrCode('QrCodeCanvas')
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 

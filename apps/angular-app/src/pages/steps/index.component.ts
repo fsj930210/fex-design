@@ -1,1 +1,27 @@
-import { ChangeDetectionStrategy,Component } from '@angular/core';import { RouterLink } from '@angular/router';import { BasicDemoComponent } from './basic-demo.component';import { ControlledDemoComponent } from './controlled-demo.component';import { CustomDemoComponent } from './custom-demo.component';import { DisabledDemoComponent } from './disabled-demo.component';import { DynamicDemoComponent } from './dynamic-demo.component';import { NavigationDemoComponent } from './navigation-demo.component';import { ResponsiveDemoComponent } from './responsive-demo.component';@Component({selector:'fex-steps-page',standalone:true,imports:[RouterLink,BasicDemoComponent,NavigationDemoComponent,DisabledDemoComponent,ControlledDemoComponent,DynamicDemoComponent,CustomDemoComponent,ResponsiveDemoComponent],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./index.component.html'})export class StepsComponent{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterLink } from '@angular/router'
+import { BasicDemoComponent } from './basic-demo.component'
+import { ControlledDemoComponent } from './controlled-demo.component'
+import { CustomDemoComponent } from './custom-demo.component'
+import { DisabledDemoComponent } from './disabled-demo.component'
+import { DynamicDemoComponent } from './dynamic-demo.component'
+import { NavigationDemoComponent } from './navigation-demo.component'
+import { ResponsiveDemoComponent } from './responsive-demo.component'
+export
+@Component({
+  selector: 'fex-steps-page',
+  standalone: true,
+  imports: [
+    RouterLink,
+    BasicDemoComponent,
+    NavigationDemoComponent,
+    DisabledDemoComponent,
+    ControlledDemoComponent,
+    DynamicDemoComponent,
+    CustomDemoComponent,
+    ResponsiveDemoComponent,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './index.component.html',
+})
+class StepsComponent {}

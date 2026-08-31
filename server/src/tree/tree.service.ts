@@ -45,11 +45,12 @@ export class TreeService {
   searchTree(keyword: string): DepartmentNode[] {
     const normalized = keyword.trim().toLocaleLowerCase()
     if (!normalized) return []
-    const filter = (nodes: readonly DepartmentNode[]): DepartmentNode[] => nodes.flatMap((node) => {
-      const children = filter(node.children ?? [])
-      if (!node.name.toLocaleLowerCase().includes(normalized) && children.length === 0) return []
-      return [{ ...withoutChildren(node), ...(children.length ? { children } : {}) }]
-    })
+    const filter = (nodes: readonly DepartmentNode[]): DepartmentNode[] =>
+      nodes.flatMap((node) => {
+        const children = filter(node.children ?? [])
+        if (!node.name.toLocaleLowerCase().includes(normalized) && children.length === 0) return []
+        return [{ ...withoutChildren(node), ...(children.length ? { children } : {}) }]
+      })
     return filter(departmentTree)
   }
 
@@ -75,12 +76,13 @@ export class TreeService {
       if (!this.findNode(key)) throw new NotFoundException(`Tree node ${key} was not found.`)
     }
     const expandedKeys = new Set<string>()
-    const collect = (nodes: readonly DepartmentNode[]): DepartmentNode[] => nodes.flatMap((node) => {
-      const children = collect(node.children ?? [])
-      if (!selected.has(node.id) && children.length === 0) return []
-      if (children.length) expandedKeys.add(node.id)
-      return [{ ...withoutChildren(node), ...(children.length ? { children } : {}) }]
-    })
+    const collect = (nodes: readonly DepartmentNode[]): DepartmentNode[] =>
+      nodes.flatMap((node) => {
+        const children = collect(node.children ?? [])
+        if (!selected.has(node.id) && children.length === 0) return []
+        if (children.length) expandedKeys.add(node.id)
+        return [{ ...withoutChildren(node), ...(children.length ? { children } : {}) }]
+      })
     return { treeData: collect(departmentTree), expandedKeys: [...expandedKeys], targetKeys }
   }
 

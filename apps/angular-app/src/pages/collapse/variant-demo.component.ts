@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { ChevronRightIcon } from '@fex-design/angular/icon/chevron'
 import type { CollapseVariant } from '@fex-design/angular/primitive/collapse'
-import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/angular/primitive/collapse'
+import {
+  Collapse,
+  CollapseContent,
+  CollapseItem,
+  CollapseTrigger,
+} from '@fex-design/angular/primitive/collapse'
 import Card from '@fex-design/angular/ui/card'
 import { collapseText } from './demo-data'
 

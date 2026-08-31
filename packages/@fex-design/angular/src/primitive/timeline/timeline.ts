@@ -5,7 +5,13 @@ import {
   timelineItemClassName,
   timelineOppositeClassName,
 } from '@fex-design/styles/timeline'
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core'
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core'
 import { createHostClassName } from '../../signals/host-class'
 
 export type TimelineOrientation = 'vertical' | 'horizontal'

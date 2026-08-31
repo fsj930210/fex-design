@@ -6,7 +6,7 @@
   const query = new URLSearchParams(location.search)
   const path = location.pathname.split('/').filter(Boolean), layer = query.get('layer') ?? path.at(-3), component = query.get('component') ?? path.at(-2), demo = query.get('demo') ?? path.at(-1)
   const embedded = query.get('embed') === 'true'
-  // Glob 是 Preview 的示例注册表；示例清单版本 4，强制 Vite 重新收集。
+  // Glob 是 Preview 的示例注册表；示例清单版本 5，强制 Vite 重新收集。
   const modules = import.meta.glob('../../../../packages/@fex-design/svelte/src/{primitive,ui}/*/examples/*.svelte', { eager: true }) as Record<string, { default: any }>
   const examplePath = Object.keys(modules).find(key => key.includes(`/${layer}/${component}/examples/${demo}.svelte`))
   const Example = examplePath ? modules[examplePath].default : undefined

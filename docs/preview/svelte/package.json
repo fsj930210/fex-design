@@ -1,1 +1,18 @@
-{"name":"@fex-design/docs-preview-svelte","private":true,"type":"module","scripts":{"dev":"vite --host 127.0.0.1 --port 4113 --strictPort","build":"vite build"},"dependencies":{"@fex-design/docs-shared":"workspace:*","@fex-design/svelte":"workspace:*","@fex/styles":"workspace:*","@tailwindcss/vite":"catalog:","@sveltejs/vite-plugin-svelte":"latest","svelte":"5.56.8","vite":"catalog:"}}
+{
+  "name": "@fex-design/docs-preview-svelte",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4113 --strictPort",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@fex-design/docs-shared": "workspace:*",
+    "@fex-design/svelte": "workspace:*",
+    "@fex/styles": "workspace:*",
+    "@sveltejs/vite-plugin-svelte": "latest",
+    "@tailwindcss/vite": "catalog:",
+    "svelte": "5.56.8",
+    "vite": "catalog:"
+  }
+}

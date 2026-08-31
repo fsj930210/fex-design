@@ -89,7 +89,7 @@ export function Progress(props: ProgressProps) {
           ? 'var(--info)'
           : local.status === 'warning'
             ? 'var(--warning)'
-          : 'var(--primary)'
+            : 'var(--primary)'
   const circleStroke = () =>
     stops() ? `url(#${id})` : typeof local.color === 'string' ? local.color : statusColor()
   const circleTrackStroke = () => local.trackColor ?? 'var(--progress-remaining)'

@@ -6,13 +6,18 @@ defineProps<{ title: string }>()
 
 const { controller, snapshot } = useTheme()
 const canSwitchTheme = computed(
-  () => !snapshot.value.forcedTheme && snapshot.value.themes.includes('light') && snapshot.value.themes.includes('dark'),
+  () =>
+    !snapshot.value.forcedTheme &&
+    snapshot.value.themes.includes('light') &&
+    snapshot.value.themes.includes('dark'),
 )
 const nextTheme = computed(() => (snapshot.value.resolvedTheme === 'dark' ? 'light' : 'dark'))
 </script>
 
 <template>
-  <div class="rounded-md border border-border bg-elevated-background p-3 text-elevated-foreground shadow-elevated">
+  <div
+    class="rounded-md border border-border bg-elevated-background p-3 text-elevated-foreground shadow-elevated"
+  >
     <div class="space-y-1.5">
       <p class="text-base font-medium">{{ title }}</p>
       <p class="text-sm text-muted-foreground">theme: {{ snapshot.theme }}</p>

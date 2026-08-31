@@ -8,11 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@fex-design/vue/primitive/breadcrumb'
-import {
-  DropdownContent,
-  DropdownRoot,
-  DropdownTrigger,
-} from '@fex-design/vue/primitive/dropdown'
+import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex-design/vue/primitive/dropdown'
 import { PopoverPortal } from '@fex-design/vue/primitive/popover'
 </script>
 

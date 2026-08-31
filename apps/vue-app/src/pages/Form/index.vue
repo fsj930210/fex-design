@@ -249,9 +249,9 @@ provideFormDemoContext({
       <CoordinationDemo />
       <ScrollDemo />
       <Card title="Latest result">
-        <pre class="overflow-auto rounded-md bg-muted-background p-3 text-sm text-muted-foreground">{{
-          result
-        }}</pre>
+        <pre
+          class="overflow-auto rounded-md bg-muted-background p-3 text-sm text-muted-foreground"
+          >{{ result }}</pre>
       </Card>
     </div>
   </main>

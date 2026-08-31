@@ -1,8 +1,4 @@
-import type {
-  TransferDataItem,
-  TransferKey,
-  TransferSide,
-} from '@fex-design/core/transfer/types'
+import type { TransferDataItem, TransferKey, TransferSide } from '@fex-design/core/transfer/types'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useTransferContext, useTransferPanelSide } from './transfer-context'
 

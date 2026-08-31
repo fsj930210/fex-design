@@ -18,7 +18,10 @@ const buttonRef = useTemplateRef<HTMLButtonElement>('button')
 function getButtonAttrs() {
   return {
     ...attrs,
-    class: cn(buttonClassName({ variant: props.variant, color: props.color }), attrs.class as string | undefined),
+    class: cn(
+      buttonClassName({ variant: props.variant, color: props.color }),
+      attrs.class as string | undefined,
+    ),
   }
 }
 
@@ -28,7 +31,14 @@ defineExpose({
 </script>
 
 <template>
-  <button v-bind="getButtonAttrs()" ref="button" data-slot="button" :data-variant="props.variant" :data-color="props.color" :type="props.type">
+  <button
+    v-bind="getButtonAttrs()"
+    ref="button"
+    data-slot="button"
+    :data-variant="props.variant"
+    :data-color="props.color"
+    :type="props.type"
+  >
     <slot />
   </button>
 </template>

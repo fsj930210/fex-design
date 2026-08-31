@@ -1,0 +1,4 @@
+<span *ngIf="count() !== undefined || showZero()"
+  >{{ count() !== undefined && overflowCount() !== undefined && +count()! > overflowCount()! ?
+  overflowCount() + '+' : count() }}</span
+><ng-content *ngIf="count() === undefined && !showZero()" />

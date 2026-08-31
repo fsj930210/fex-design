@@ -15,7 +15,10 @@ export function FooterDemo() {
   const [value, setValue] = createSignal('')
 
   return (
-    <Card title="Footer" description="Footer is only a layout slot; actions are fully owned by the caller.">
+    <Card
+      title="Footer"
+      description="Footer is only a layout slot; actions are fully owned by the caller."
+    >
       <TextareaRoot
         value={value()}
         onChange={setValue}
@@ -33,7 +36,12 @@ export function FooterDemo() {
           </div>
           <div class="flex shrink-0 items-center gap-2">
             <span>{value().length} / 2000</span>
-            <Button aria-label="Send" disabled={!value().trim()} icon={<CheckIcon />} size="icon-sm" />
+            <Button
+              aria-label="Send"
+              disabled={!value().trim()}
+              icon={<CheckIcon />}
+              size="icon-sm"
+            />
           </div>
         </TextareaFooter>
       </TextareaRoot>

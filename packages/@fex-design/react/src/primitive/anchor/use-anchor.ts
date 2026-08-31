@@ -7,11 +7,7 @@ import {
 } from '@fex-design/core/anchor/dom'
 import { createAnchorController } from '@fex-design/core/anchor/model'
 import { flattenAnchorItems, getAnchorActiveKeys } from '@fex-design/core/anchor/model'
-import type {
-  AnchorActiveMode,
-  AnchorItem,
-  AnchorOrientation,
-} from '@fex-design/core/anchor/types'
+import type { AnchorActiveMode, AnchorItem, AnchorOrientation } from '@fex-design/core/anchor/types'
 import { useEffect, useMemo, useRef } from 'react'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import { useCoreStore } from '../../hooks/use-core-store'
@@ -44,11 +40,14 @@ export function useAnchor<TTitle>({
 }: UseAnchorOptions<TTitle>) {
   const rootRef = useRef<HTMLElement | null>(null)
   const linkRefs = useRef(new Map<string, HTMLButtonElement>())
-  const controller = useLazyRef(() => createAnchorController<TTitle>({ activeKeys: controlledKeys, defaultActiveKeys, onChange })).current
+  const controller = useLazyRef(() =>
+    createAnchorController<TTitle>({ activeKeys: controlledKeys, defaultActiveKeys, onChange }),
+  ).current
   controller.updateOptions({ activeKeys: controlledKeys, defaultActiveKeys, onChange })
   const { activeKeys } = useCoreStore(controller)
   const flatItems = useMemo(() => flattenAnchorItems(items), [items])
-  const visibleItems = orientation === 'horizontal' ? flatItems.filter((item) => item.level === 0) : flatItems
+  const visibleItems =
+    orientation === 'horizontal' ? flatItems.filter((item) => item.level === 0) : flatItems
 
   const resolveContainer = useMemoizedFn(() =>
     typeof container === 'function' ? container() : (container ?? window),
@@ -56,7 +55,10 @@ export function useAnchor<TTitle>({
 
   const change = useMemoizedFn((nextKeys: readonly string[]) => {
     const activeSet = new Set(nextKeys)
-    controller.change(nextKeys, flatItems.filter(({ item }) => activeSet.has(item.key)).map(({ item }) => item))
+    controller.change(
+      nextKeys,
+      flatItems.filter(({ item }) => activeSet.has(item.key)).map(({ item }) => item),
+    )
   })
 
   const update = useMemoizedFn(() => {
@@ -65,15 +67,17 @@ export function useAnchor<TTitle>({
       const target = resolveAnchorTarget(item.target)
       return target ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }] : []
     })
-    change(getAnchorActiveKeys({
-      positions,
-      scrollTop: getAnchorScrollTop(scrollContainer),
-      viewportHeight: getAnchorViewportHeight(scrollContainer),
-      offset,
-      activeOffset,
-      mode: activeMode,
-      scrolledToEnd: isAnchorScrolledToEnd(scrollContainer),
-    }))
+    change(
+      getAnchorActiveKeys({
+        positions,
+        scrollTop: getAnchorScrollTop(scrollContainer),
+        viewportHeight: getAnchorViewportHeight(scrollContainer),
+        offset,
+        activeOffset,
+        mode: activeMode,
+        scrolledToEnd: isAnchorScrolledToEnd(scrollContainer),
+      }),
+    )
   })
 
   useEffect(() => {
@@ -98,9 +102,13 @@ export function useAnchor<TTitle>({
     if (!target) return
     const scrollContainer = resolveContainer()
     const top = Math.max(getAnchorTargetTop(target, scrollContainer) - offset, 0)
-    change(activeMode === 'progress'
-      ? visibleItems.slice(0, visibleItems.findIndex(({ item: entry }) => entry.key === item.key) + 1).map(({ item: entry }) => entry.key)
-      : [item.key])
+    change(
+      activeMode === 'progress'
+        ? visibleItems
+            .slice(0, visibleItems.findIndex(({ item: entry }) => entry.key === item.key) + 1)
+            .map(({ item: entry }) => entry.key)
+        : [item.key],
+    )
     scrollContainer.scrollTo({ top, behavior })
   })
 

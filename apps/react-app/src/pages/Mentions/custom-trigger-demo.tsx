@@ -25,7 +25,10 @@ function UserItems() {
 export function CustomTriggerDemo() {
   const [value, setValue] = useState('')
   return (
-    <Card title="Custom trigger" description="Render props bind mention behavior to a custom textarea.">
+    <Card
+      title="Custom trigger"
+      description="Render props bind mention behavior to a custom textarea."
+    >
       <MentionsRoot value={value} onChange={setValue}>
         <MentionsTrigger>
           {({ props, ref, state }) => (

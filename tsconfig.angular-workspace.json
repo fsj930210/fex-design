@@ -13,39 +13,19 @@
       "@fex-design/core/masonry/create-masonry-controller": [
         "packages/@fex-design/core/src/masonry/create-masonry-controller.ts"
       ],
-      "@fex-design/core/masonry/layout": [
-        "packages/@fex-design/core/src/masonry/layout.ts"
-      ],
-      "@fex-design/core/masonry/types": [
-        "packages/@fex-design/core/src/masonry/types.ts"
-      ],
-      "@fex-design/core/anchor/dom": [
-        "packages/@fex-design/core/src/anchor/dom.ts"
-      ],
+      "@fex-design/core/masonry/layout": ["packages/@fex-design/core/src/masonry/layout.ts"],
+      "@fex-design/core/masonry/types": ["packages/@fex-design/core/src/masonry/types.ts"],
+      "@fex-design/core/anchor/dom": ["packages/@fex-design/core/src/anchor/dom.ts"],
       "@fex-design/core/anchor/create-anchor-controller": [
         "packages/@fex-design/core/src/anchor/create-anchor-controller.ts"
       ],
-      "@fex-design/core/anchor/model": [
-        "packages/@fex-design/core/src/anchor/model.ts"
-      ],
-      "@fex-design/core/anchor/types": [
-        "packages/@fex-design/core/src/anchor/types.ts"
-      ],
-      "@fex-design/core/bubble/types": [
-        "packages/@fex-design/core/src/bubble/types.ts"
-      ],
-      "@fex-design/core/spinner/types": [
-        "packages/@fex-design/core/src/spinner/types.ts"
-      ],
-      "@fex-design/core/button/types": [
-        "packages/@fex-design/core/src/button/types.ts"
-      ],
-      "@fex-design/core/separator/types": [
-        "packages/@fex-design/core/src/separator/types.ts"
-      ],
-      "@fex-design/core/card/types": [
-        "packages/@fex-design/core/src/card/types.ts"
-      ],
+      "@fex-design/core/anchor/model": ["packages/@fex-design/core/src/anchor/model.ts"],
+      "@fex-design/core/anchor/types": ["packages/@fex-design/core/src/anchor/types.ts"],
+      "@fex-design/core/bubble/types": ["packages/@fex-design/core/src/bubble/types.ts"],
+      "@fex-design/core/spinner/types": ["packages/@fex-design/core/src/spinner/types.ts"],
+      "@fex-design/core/button/types": ["packages/@fex-design/core/src/button/types.ts"],
+      "@fex-design/core/separator/types": ["packages/@fex-design/core/src/separator/types.ts"],
+      "@fex-design/core/card/types": ["packages/@fex-design/core/src/card/types.ts"],
       "@fex-design/core/auto-complete/create-auto-complete-controller": [
         "packages/@fex-design/core/src/auto-complete/create-auto-complete-controller.ts"
       ],
@@ -55,93 +35,47 @@
       "@fex-design/core/auto-complete/types": [
         "packages/@fex-design/core/src/auto-complete/types.ts"
       ],
-      "@fex-design/core/calendar": [
-        "packages/@fex-design/core/src/calendar/index.ts"
-      ],
-      "@fex-design/core/calendar/grid": [
-        "packages/@fex-design/core/src/calendar/grid.ts"
-      ],
-      "@fex-design/core/calendar/range": [
-        "packages/@fex-design/core/src/calendar/range.ts"
-      ],
-      "@fex-design/core/calendar/temporal": [
-        "packages/@fex-design/core/src/calendar/temporal.ts"
-      ],
-      "@fex-design/core/calendar/types": [
-        "packages/@fex-design/core/src/calendar/types.ts"
-      ],
+      "@fex-design/core/calendar": ["packages/@fex-design/core/src/calendar/index.ts"],
+      "@fex-design/core/calendar/grid": ["packages/@fex-design/core/src/calendar/grid.ts"],
+      "@fex-design/core/calendar/range": ["packages/@fex-design/core/src/calendar/range.ts"],
+      "@fex-design/core/calendar/temporal": ["packages/@fex-design/core/src/calendar/temporal.ts"],
+      "@fex-design/core/calendar/types": ["packages/@fex-design/core/src/calendar/types.ts"],
       "@fex-design/core/date-picker/constraints": [
         "packages/@fex-design/core/src/date-picker/constraints.ts"
       ],
-      "@fex-design/core/date-picker/input": [
-        "packages/@fex-design/core/src/date-picker/input.ts"
-      ],
-      "@fex-design/core/date-picker/panel": [
-        "packages/@fex-design/core/src/date-picker/panel.ts"
-      ],
-      "@fex-design/core/date-picker/range": [
-        "packages/@fex-design/core/src/date-picker/range.ts"
-      ],
-      "@fex-design/core/date-picker/types": [
-        "packages/@fex-design/core/src/date-picker/types.ts"
-      ],
-      "@fex-design/core/date-picker/value": [
-        "packages/@fex-design/core/src/date-picker/value.ts"
-      ],
+      "@fex-design/core/date-picker/input": ["packages/@fex-design/core/src/date-picker/input.ts"],
+      "@fex-design/core/date-picker/panel": ["packages/@fex-design/core/src/date-picker/panel.ts"],
+      "@fex-design/core/date-picker/range": ["packages/@fex-design/core/src/date-picker/range.ts"],
+      "@fex-design/core/date-picker/types": ["packages/@fex-design/core/src/date-picker/types.ts"],
+      "@fex-design/core/date-picker/value": ["packages/@fex-design/core/src/date-picker/value.ts"],
       "@fex-design/core/input-otp/completion": [
         "packages/@fex-design/core/src/input-otp/completion.ts"
       ],
       "@fex-design/core/input-otp/create-input-otp-controller": [
         "packages/@fex-design/core/src/input-otp/create-input-otp-controller.ts"
       ],
-      "@fex-design/core/input-otp/types": [
-        "packages/@fex-design/core/src/input-otp/types.ts"
-      ],
-      "@fex-design/core/input-otp/value": [
-        "packages/@fex-design/core/src/input-otp/value.ts"
-      ],
-      "@fex-design/core/qrcode": [
-        "packages/@fex-design/core/src/qrcode/qrcode.ts"
-      ],
-      "@fex-design/core/qrcode/types": [
-        "packages/@fex-design/core/src/qrcode/types.ts"
-      ],
-      "@fex-design/core/progress/progress": [
-        "packages/@fex-design/core/src/progress/progress.ts"
-      ],
-      "@fex-design/core/progress/types": [
-        "packages/@fex-design/core/src/progress/types.ts"
-      ],
-      "@fex-design/core/carousel/types": [
-        "packages/@fex-design/core/src/carousel/types.ts"
-      ],
+      "@fex-design/core/input-otp/types": ["packages/@fex-design/core/src/input-otp/types.ts"],
+      "@fex-design/core/input-otp/value": ["packages/@fex-design/core/src/input-otp/value.ts"],
+      "@fex-design/core/qrcode": ["packages/@fex-design/core/src/qrcode/qrcode.ts"],
+      "@fex-design/core/qrcode/types": ["packages/@fex-design/core/src/qrcode/types.ts"],
+      "@fex-design/core/progress/progress": ["packages/@fex-design/core/src/progress/progress.ts"],
+      "@fex-design/core/progress/types": ["packages/@fex-design/core/src/progress/types.ts"],
+      "@fex-design/core/carousel/types": ["packages/@fex-design/core/src/carousel/types.ts"],
       "@fex-design/core/carousel/create-carousel-controller": [
         "packages/@fex-design/core/src/carousel/create-carousel-controller.ts"
       ],
-      "@fex-design/core/date/utils": [
-        "packages/@fex-design/core/src/date/utils.ts"
-      ],
-      "@fex-design/core/time-picker/types": [
-        "packages/@fex-design/core/src/time-picker/types.ts"
-      ],
-      "@fex-design/core/time-picker/value": [
-        "packages/@fex-design/core/src/time-picker/value.ts"
-      ],
+      "@fex-design/core/date/utils": ["packages/@fex-design/core/src/date/utils.ts"],
+      "@fex-design/core/time-picker/types": ["packages/@fex-design/core/src/time-picker/types.ts"],
+      "@fex-design/core/time-picker/value": ["packages/@fex-design/core/src/time-picker/value.ts"],
       "@fex-design/core/time-picker/options": [
         "packages/@fex-design/core/src/time-picker/options.ts"
       ],
       "@fex-design/core/time-picker/create-time-picker-controller": [
         "packages/@fex-design/core/src/time-picker/create-time-picker-controller.ts"
       ],
-      "@fex-design/core/textarea/autosize": [
-        "packages/@fex-design/core/src/textarea/autosize.ts"
-      ],
-      "@fex-design/core/data-table/types": [
-        "packages/@fex-design/core/src/data-table/types.ts"
-      ],
-      "@fex-design/core/data-table/layout": [
-        "packages/@fex-design/core/src/data-table/layout.ts"
-      ],
+      "@fex-design/core/textarea/autosize": ["packages/@fex-design/core/src/textarea/autosize.ts"],
+      "@fex-design/core/data-table/types": ["packages/@fex-design/core/src/data-table/types.ts"],
+      "@fex-design/core/data-table/layout": ["packages/@fex-design/core/src/data-table/layout.ts"],
       "@fex-design/core/data-table/rendering": [
         "packages/@fex-design/core/src/data-table/layout.ts"
       ],
@@ -187,54 +121,34 @@
       "@fex-design/core/data-table/features/column-grouping": [
         "packages/@fex-design/core/src/data-table/features/column-grouping.ts"
       ],
-      "@fex-design/core/calendar/value": [
-        "packages/@fex-design/core/src/calendar/value.ts"
-      ],
+      "@fex-design/core/calendar/value": ["packages/@fex-design/core/src/calendar/value.ts"],
       "@fex-design/core/cascader/create-cascader-controller": [
         "packages/@fex-design/core/src/cascader/create-cascader-controller.ts"
       ],
-      "@fex-design/core/cascader/model": [
-        "packages/@fex-design/core/src/cascader/model.ts"
-      ],
-      "@fex-design/core/cascader/search": [
-        "packages/@fex-design/core/src/cascader/search.ts"
-      ],
-      "@fex-design/core/cascader/types": [
-        "packages/@fex-design/core/src/cascader/types.ts"
-      ],
+      "@fex-design/core/cascader/model": ["packages/@fex-design/core/src/cascader/model.ts"],
+      "@fex-design/core/cascader/search": ["packages/@fex-design/core/src/cascader/search.ts"],
+      "@fex-design/core/cascader/types": ["packages/@fex-design/core/src/cascader/types.ts"],
       "@fex-design/core/store/create-store": [
         "packages/@fex-design/core/src/store/create-store.ts"
       ],
       "@fex-design/core/i18n/create-i18n-controller": [
         "packages/@fex-design/core/src/i18n/create-i18n-controller.ts"
       ],
-      "@fex-design/core/i18n/types": [
-        "packages/@fex-design/core/src/i18n/types.ts"
-      ],
-      "@fex-design/core/theme/apply-theme": [
-        "packages/@fex-design/core/src/theme/apply-theme.ts"
-      ],
-      "@fex-design/core/theme/constants": [
-        "packages/@fex-design/core/src/theme/constants.ts"
-      ],
+      "@fex-design/core/i18n/types": ["packages/@fex-design/core/src/i18n/types.ts"],
+      "@fex-design/core/theme/apply-theme": ["packages/@fex-design/core/src/theme/apply-theme.ts"],
+      "@fex-design/core/theme/constants": ["packages/@fex-design/core/src/theme/constants.ts"],
       "@fex-design/core/theme/create-theme-controller": [
         "packages/@fex-design/core/src/theme/create-theme-controller.ts"
       ],
       "@fex-design/core/theme/resolve-theme": [
         "packages/@fex-design/core/src/theme/resolve-theme.ts"
       ],
-      "@fex-design/core/theme/storage": [
-        "packages/@fex-design/core/src/theme/storage.ts"
-      ],
+      "@fex-design/core/theme/storage": ["packages/@fex-design/core/src/theme/storage.ts"],
       "@fex-design/core/theme/system-theme": [
         "packages/@fex-design/core/src/theme/system-theme.ts"
       ],
-      "@fex-design/core/theme/types": [
-        "packages/@fex-design/core/src/theme/types.ts"
-      ],
-      "@fex-design/core/steps/types": [
-        "packages/@fex-design/core/src/steps/types.ts"
-      ],
+      "@fex-design/core/theme/types": ["packages/@fex-design/core/src/theme/types.ts"],
+      "@fex-design/core/steps/types": ["packages/@fex-design/core/src/steps/types.ts"],
       "@fex-design/core/steps/create-steps-controller": [
         "packages/@fex-design/core/src/steps/create-steps-controller.ts"
       ],
@@ -265,24 +179,18 @@
       "@fex-design/core/tree/features/search": [
         "packages/@fex-design/core/src/tree/features/search.ts"
       ],
-      "@fex-design/core/tree/features/dnd": [
-        "packages/@fex-design/core/src/tree/features/dnd.ts"
-      ],
+      "@fex-design/core/tree/features/dnd": ["packages/@fex-design/core/src/tree/features/dnd.ts"],
       "@fex-design/core/tree/features/keyboard": [
         "packages/@fex-design/core/src/tree/features/keyboard.ts"
       ],
       "@fex-design/core/tree/get-search-subtree": [
         "packages/@fex-design/core/src/tree/get-search-subtree.ts"
       ],
-      "@fex-design/core/tree/types": [
-        "packages/@fex-design/core/src/tree/types.ts"
-      ],
+      "@fex-design/core/tree/types": ["packages/@fex-design/core/src/tree/types.ts"],
       "@fex-design/core/tree-select/create-tree-select-controller": [
         "packages/@fex-design/core/src/tree-select/create-tree-select-controller.ts"
       ],
-      "@fex-design/core/tree-select/types": [
-        "packages/@fex-design/core/src/tree-select/types.ts"
-      ],
+      "@fex-design/core/tree-select/types": ["packages/@fex-design/core/src/tree-select/types.ts"],
       "@fex-design/core/upload/create-upload-controller": [
         "packages/@fex-design/core/src/upload/create-upload-controller.ts"
       ],
@@ -292,9 +200,7 @@
       "@fex-design/core/upload/get-dropped-files": [
         "packages/@fex-design/core/src/upload/get-dropped-files.ts"
       ],
-      "@fex-design/core/upload/types": [
-        "packages/@fex-design/core/src/upload/types.ts"
-      ],
+      "@fex-design/core/upload/types": ["packages/@fex-design/core/src/upload/types.ts"],
       "@fex-design/core/upload/features/directory": [
         "packages/@fex-design/core/src/upload/features/directory.ts"
       ],
@@ -322,69 +228,45 @@
       "@fex-design/core/watermark/create-watermark-image": [
         "packages/@fex-design/core/src/watermark/create-watermark-image.ts"
       ],
-      "@fex-design/core/watermark/types": [
-        "packages/@fex-design/core/src/watermark/types.ts"
-      ],
+      "@fex-design/core/watermark/types": ["packages/@fex-design/core/src/watermark/types.ts"],
       "@fex-design/core/toggle/create-toggle-controller": [
         "packages/@fex-design/core/src/toggle/create-toggle-controller.ts"
       ],
       "@fex-design/core/toggle/create-toggle-group-controller": [
         "packages/@fex-design/core/src/toggle/create-toggle-group-controller.ts"
       ],
-      "@fex-design/core/toggle/types": [
-        "packages/@fex-design/core/src/toggle/types.ts"
-      ],
+      "@fex-design/core/toggle/types": ["packages/@fex-design/core/src/toggle/types.ts"],
       "@fex-design/core/tabs/create-tabs-controller": [
         "packages/@fex-design/core/src/tabs/create-tabs-controller.ts"
       ],
-      "@fex-design/core/tabs/types": [
-        "packages/@fex-design/core/src/tabs/types.ts"
-      ],
+      "@fex-design/core/tabs/types": ["packages/@fex-design/core/src/tabs/types.ts"],
       "@fex-design/core/tooltip/create-tooltip": [
         "packages/@fex-design/core/src/tooltip/create-tooltip.ts"
       ],
       "@fex-design/core/slider/create-slider-controller": [
         "packages/@fex-design/core/src/slider/create-slider-controller.ts"
       ],
-      "@fex-design/core/slider/types": [
-        "packages/@fex-design/core/src/slider/types.ts"
-      ],
-      "@fex-design/core/slider/utils": [
-        "packages/@fex-design/core/src/slider/utils.ts"
-      ],
+      "@fex-design/core/slider/types": ["packages/@fex-design/core/src/slider/types.ts"],
+      "@fex-design/core/slider/utils": ["packages/@fex-design/core/src/slider/utils.ts"],
       "@fex-design/core/rate/create-rate-controller": [
         "packages/@fex-design/core/src/rate/create-rate-controller.ts"
       ],
-      "@fex-design/core/rate/types": [
-        "packages/@fex-design/core/src/rate/types.ts"
-      ],
-      "@fex-design/core/rate/utils": [
-        "packages/@fex-design/core/src/rate/utils.ts"
-      ],
+      "@fex-design/core/rate/types": ["packages/@fex-design/core/src/rate/types.ts"],
+      "@fex-design/core/rate/utils": ["packages/@fex-design/core/src/rate/utils.ts"],
       "@fex-design/core/scrollbar/create-scrollbar-controller": [
         "packages/@fex-design/core/src/scrollbar/create-scrollbar-controller.ts"
       ],
-      "@fex-design/core/scrollbar/types": [
-        "packages/@fex-design/core/src/scrollbar/types.ts"
-      ],
+      "@fex-design/core/scrollbar/types": ["packages/@fex-design/core/src/scrollbar/types.ts"],
       "@fex-design/core/checkbox/create-checkbox-controller": [
         "packages/@fex-design/core/src/checkbox/create-checkbox-controller.ts"
       ],
       "@fex-design/core/checkbox/create-checkbox-group-controller": [
         "packages/@fex-design/core/src/checkbox/create-checkbox-group-controller.ts"
       ],
-      "@fex-design/core/checkbox/types": [
-        "packages/@fex-design/core/src/checkbox/types.ts"
-      ],
-      "@fex-design/core/checkbox/utils": [
-        "packages/@fex-design/core/src/checkbox/utils.ts"
-      ],
-      "@fex-design/core/color/color": [
-        "packages/@fex-design/core/src/color/color.ts"
-      ],
-      "@fex-design/core/color/types": [
-        "packages/@fex-design/core/src/color/types.ts"
-      ],
+      "@fex-design/core/checkbox/types": ["packages/@fex-design/core/src/checkbox/types.ts"],
+      "@fex-design/core/checkbox/utils": ["packages/@fex-design/core/src/checkbox/utils.ts"],
+      "@fex-design/core/color/color": ["packages/@fex-design/core/src/color/color.ts"],
+      "@fex-design/core/color/types": ["packages/@fex-design/core/src/color/types.ts"],
       "@fex-design/core/color-picker/channels": [
         "packages/@fex-design/core/src/color-picker/channels.ts"
       ],
@@ -400,78 +282,48 @@
       "@fex-design/core/dialog/create-dialog-controller": [
         "packages/@fex-design/core/src/dialog/create-dialog-controller.ts"
       ],
-      "@fex-design/core/dialog/types": [
-        "packages/@fex-design/core/src/dialog/types.ts"
-      ],
+      "@fex-design/core/dialog/types": ["packages/@fex-design/core/src/dialog/types.ts"],
       "@fex-design/core/drawer/create-drawer-controller": [
         "packages/@fex-design/core/src/drawer/create-drawer-controller.ts"
       ],
-      "@fex-design/core/drawer/types": [
-        "packages/@fex-design/core/src/drawer/types.ts"
-      ],
+      "@fex-design/core/drawer/types": ["packages/@fex-design/core/src/drawer/types.ts"],
       "@fex-design/core/toast/create-toast-manager": [
         "packages/@fex-design/core/src/toast/create-toast-manager.ts"
       ],
-      "@fex-design/core/toast/types": [
-        "packages/@fex-design/core/src/toast/types.ts"
-      ],
-      "@fex-design/core/dropzone/accept": [
-        "packages/@fex-design/core/src/dropzone/accept.ts"
-      ],
+      "@fex-design/core/toast/types": ["packages/@fex-design/core/src/toast/types.ts"],
+      "@fex-design/core/dropzone/accept": ["packages/@fex-design/core/src/dropzone/accept.ts"],
       "@fex-design/core/dropzone/create-dropzone-controller": [
         "packages/@fex-design/core/src/dropzone/create-dropzone-controller.ts"
       ],
-      "@fex-design/core/dropzone/files": [
-        "packages/@fex-design/core/src/dropzone/files.ts"
-      ],
-      "@fex-design/core/dropzone/types": [
-        "packages/@fex-design/core/src/dropzone/types.ts"
-      ],
-      "@fex-design/core/dropzone/validate": [
-        "packages/@fex-design/core/src/dropzone/validate.ts"
-      ],
+      "@fex-design/core/dropzone/files": ["packages/@fex-design/core/src/dropzone/files.ts"],
+      "@fex-design/core/dropzone/types": ["packages/@fex-design/core/src/dropzone/types.ts"],
+      "@fex-design/core/dropzone/validate": ["packages/@fex-design/core/src/dropzone/validate.ts"],
       "@fex-design/core/form/scroll-to-first-error": [
         "packages/@fex-design/core/src/form/scroll-to-first-error.ts"
       ],
       "@fex-design/core/gradient/create-gradient-controller": [
         "packages/@fex-design/core/src/gradient/create-gradient-controller.ts"
       ],
-      "@fex-design/core/gradient/gradient": [
-        "packages/@fex-design/core/src/gradient/gradient.ts"
-      ],
-      "@fex-design/core/gradient/types": [
-        "packages/@fex-design/core/src/gradient/types.ts"
-      ],
+      "@fex-design/core/gradient/gradient": ["packages/@fex-design/core/src/gradient/gradient.ts"],
+      "@fex-design/core/gradient/types": ["packages/@fex-design/core/src/gradient/types.ts"],
       "@fex-design/core/mentions/create-mentions-controller": [
         "packages/@fex-design/core/src/mentions/create-mentions-controller.ts"
       ],
-      "@fex-design/core/mentions/query": [
-        "packages/@fex-design/core/src/mentions/query.ts"
-      ],
+      "@fex-design/core/mentions/query": ["packages/@fex-design/core/src/mentions/query.ts"],
       "@fex-design/core/mentions/replace-query": [
         "packages/@fex-design/core/src/mentions/replace-query.ts"
       ],
-      "@fex-design/core/mentions/types": [
-        "packages/@fex-design/core/src/mentions/types.ts"
-      ],
-      "@fex-design/core/menu/navigation": [
-        "packages/@fex-design/core/src/menu/navigation.ts"
-      ],
-      "@fex-design/core/message/types": [
-        "packages/@fex-design/core/src/message/types.ts"
-      ],
+      "@fex-design/core/mentions/types": ["packages/@fex-design/core/src/mentions/types.ts"],
+      "@fex-design/core/menu/navigation": ["packages/@fex-design/core/src/menu/navigation.ts"],
+      "@fex-design/core/message/types": ["packages/@fex-design/core/src/message/types.ts"],
       "@fex-design/core/disclosure/create-disclosure": [
         "packages/@fex-design/core/src/disclosure/create-disclosure.ts"
       ],
       "@fex-design/core/expansion/create-expansion-controller": [
         "packages/@fex-design/core/src/expansion/create-expansion-controller.ts"
       ],
-      "@fex-design/core/expansion/types": [
-        "packages/@fex-design/core/src/expansion/types.ts"
-      ],
-      "@fex-design/core/expansion/utils": [
-        "packages/@fex-design/core/src/expansion/utils.ts"
-      ],
+      "@fex-design/core/expansion/types": ["packages/@fex-design/core/src/expansion/types.ts"],
+      "@fex-design/core/expansion/utils": ["packages/@fex-design/core/src/expansion/utils.ts"],
       "@fex-design/core/floating/create-floating": [
         "packages/@fex-design/core/src/floating/create-floating.ts"
       ],
@@ -481,9 +333,7 @@
       "@fex-design/core/tour/create-tour-controller": [
         "packages/@fex-design/core/src/tour/create-tour-controller.ts"
       ],
-      "@fex-design/core/tour/types": [
-        "packages/@fex-design/core/src/tour/types.ts"
-      ],
+      "@fex-design/core/tour/types": ["packages/@fex-design/core/src/tour/types.ts"],
       "@fex-design/core/interactions/bounds": [
         "packages/@fex-design/core/src/interactions/bounds.ts"
       ],
@@ -496,9 +346,7 @@
       "@fex-design/core/interactions/dnd-store": [
         "packages/@fex-design/core/src/interactions/dnd-store.ts"
       ],
-      "@fex-design/core/interactions/rect": [
-        "packages/@fex-design/core/src/interactions/rect.ts"
-      ],
+      "@fex-design/core/interactions/rect": ["packages/@fex-design/core/src/interactions/rect.ts"],
       "@fex-design/core/interactions/types": [
         "packages/@fex-design/core/src/interactions/types.ts"
       ],
@@ -523,42 +371,26 @@
       "@fex-design/core/overlay/trigger/create-trigger": [
         "packages/@fex-design/core/src/overlay/trigger/create-trigger.ts"
       ],
-      "@fex-design/core/resizable/layout": [
-        "packages/@fex-design/core/src/resizable/layout.ts"
-      ],
-      "@fex-design/core/resizable/types": [
-        "packages/@fex-design/core/src/resizable/types.ts"
-      ],
+      "@fex-design/core/resizable/layout": ["packages/@fex-design/core/src/resizable/layout.ts"],
+      "@fex-design/core/resizable/types": ["packages/@fex-design/core/src/resizable/types.ts"],
       "@fex-design/core/select/create-select-controller": [
         "packages/@fex-design/core/src/select/create-select-controller.ts"
       ],
       "@fex-design/core/select/filter-options": [
         "packages/@fex-design/core/src/select/filter-options.ts"
       ],
-      "@fex-design/core/select/types": [
-        "packages/@fex-design/core/src/select/types.ts"
-      ],
-      "@fex-design/core/select/virtual": [
-        "packages/@fex-design/core/src/select/virtual.ts"
-      ],
+      "@fex-design/core/select/types": ["packages/@fex-design/core/src/select/types.ts"],
+      "@fex-design/core/select/virtual": ["packages/@fex-design/core/src/select/virtual.ts"],
       "@fex-design/core/selection/create-selection-controller": [
         "packages/@fex-design/core/src/selection/create-selection-controller.ts"
       ],
-      "@fex-design/core/selection/types": [
-        "packages/@fex-design/core/src/selection/types.ts"
-      ],
-      "@fex-design/core/selection/utils": [
-        "packages/@fex-design/core/src/selection/utils.ts"
-      ],
+      "@fex-design/core/selection/types": ["packages/@fex-design/core/src/selection/types.ts"],
+      "@fex-design/core/selection/utils": ["packages/@fex-design/core/src/selection/utils.ts"],
       "@fex-design/core/transfer/create-transfer-controller": [
         "packages/@fex-design/core/src/transfer/create-transfer-controller.ts"
       ],
-      "@fex-design/core/transfer/types": [
-        "packages/@fex-design/core/src/transfer/types.ts"
-      ],
-      "@fex-design/core/transfer/utils": [
-        "packages/@fex-design/core/src/transfer/utils.ts"
-      ],
+      "@fex-design/core/transfer/types": ["packages/@fex-design/core/src/transfer/types.ts"],
+      "@fex-design/core/transfer/utils": ["packages/@fex-design/core/src/transfer/utils.ts"],
       "@fex-design/core/sortable/array-move": [
         "packages/@fex-design/core/src/sortable/array-move.ts"
       ],
@@ -568,12 +400,8 @@
       "@fex-design/core/sortable/create-sortable-controller": [
         "packages/@fex-design/core/src/sortable/create-sortable-controller.ts"
       ],
-      "@fex-design/core/sortable/motion": [
-        "packages/@fex-design/core/src/sortable/motion.ts"
-      ],
-      "@fex-design/core/sortable/types": [
-        "packages/@fex-design/core/src/sortable/types.ts"
-      ],
+      "@fex-design/core/sortable/motion": ["packages/@fex-design/core/src/sortable/motion.ts"],
+      "@fex-design/core/sortable/types": ["packages/@fex-design/core/src/sortable/types.ts"],
       "@fex-design/angular/primitive/alert": [
         "packages/@fex-design/angular/src/primitive/alert/alert.ts"
       ],
@@ -790,69 +618,31 @@
       "@fex-design/angular/primitive/spinner": [
         "packages/@fex-design/angular/src/primitive/spinner/spinner.ts"
       ],
-      "@fex-design/angular/ui/button": [
-        "packages/@fex-design/angular/src/ui/button/button.ts"
-      ],
-      "@fex-design/angular/ui/card": [
-        "packages/@fex-design/angular/src/ui/card/card.ts"
-      ],
+      "@fex-design/angular/ui/button": ["packages/@fex-design/angular/src/ui/button/button.ts"],
+      "@fex-design/angular/ui/card": ["packages/@fex-design/angular/src/ui/card/card.ts"],
       "@fex-design/angular/ui/checkbox": [
         "packages/@fex-design/angular/src/ui/checkbox/checkbox.ts"
       ],
-      "@fex-design/angular/ui/kbd": [
-        "packages/@fex-design/angular/src/ui/kbd/kbd.ts"
-      ],
-      "@fex-design/angular/ui/listbox": [
-        "packages/@fex-design/angular/src/ui/listbox/listbox.ts"
-      ],
-      "@fex-design/angular/ui/spinner": [
-        "packages/@fex-design/angular/src/ui/spinner/spinner.ts"
-      ],
-      "@fex-design/angular/icon/check": [
-        "packages/@fex-design/angular/src/icon/check.ts"
-      ],
-      "@fex-design/angular/icon/calendar": [
-        "packages/@fex-design/angular/src/icon/calendar.ts"
-      ],
-      "@fex-design/angular/icon/clock": [
-        "packages/@fex-design/angular/src/icon/clock.ts"
-      ],
-      "@fex-design/angular/icon/chevron": [
-        "packages/@fex-design/angular/src/icon/chevron.ts"
-      ],
-      "@fex-design/angular/icon/close": [
-        "packages/@fex-design/angular/src/icon/close.ts"
-      ],
-      "@fex-design/angular/icon/error": [
-        "packages/@fex-design/angular/src/icon/error.ts"
-      ],
-      "@fex-design/angular/icon/info": [
-        "packages/@fex-design/angular/src/icon/info.ts"
-      ],
+      "@fex-design/angular/ui/kbd": ["packages/@fex-design/angular/src/ui/kbd/kbd.ts"],
+      "@fex-design/angular/ui/listbox": ["packages/@fex-design/angular/src/ui/listbox/listbox.ts"],
+      "@fex-design/angular/ui/spinner": ["packages/@fex-design/angular/src/ui/spinner/spinner.ts"],
+      "@fex-design/angular/icon/check": ["packages/@fex-design/angular/src/icon/check.ts"],
+      "@fex-design/angular/icon/calendar": ["packages/@fex-design/angular/src/icon/calendar.ts"],
+      "@fex-design/angular/icon/clock": ["packages/@fex-design/angular/src/icon/clock.ts"],
+      "@fex-design/angular/icon/chevron": ["packages/@fex-design/angular/src/icon/chevron.ts"],
+      "@fex-design/angular/icon/close": ["packages/@fex-design/angular/src/icon/close.ts"],
+      "@fex-design/angular/icon/error": ["packages/@fex-design/angular/src/icon/error.ts"],
+      "@fex-design/angular/icon/info": ["packages/@fex-design/angular/src/icon/info.ts"],
       "@fex-design/angular/icon/grip-vertical": [
         "packages/@fex-design/angular/src/icon/grip-vertical.ts"
       ],
-      "@fex-design/angular/icon/loading": [
-        "packages/@fex-design/angular/src/icon/loading.ts"
-      ],
-      "@fex-design/angular/icon/trash": [
-        "packages/@fex-design/angular/src/icon/trash.ts"
-      ],
-      "@fex-design/angular/icon/minus": [
-        "packages/@fex-design/angular/src/icon/minus.ts"
-      ],
-      "@fex-design/angular/icon/more": [
-        "packages/@fex-design/angular/src/icon/more.ts"
-      ],
-      "@fex-design/angular/icon/plus": [
-        "packages/@fex-design/angular/src/icon/plus.ts"
-      ],
-      "@fex-design/angular/icon/star": [
-        "packages/@fex-design/angular/src/icon/star.ts"
-      ],
-      "@fex-design/angular/icon/warning": [
-        "packages/@fex-design/angular/src/icon/warning.ts"
-      ],
+      "@fex-design/angular/icon/loading": ["packages/@fex-design/angular/src/icon/loading.ts"],
+      "@fex-design/angular/icon/trash": ["packages/@fex-design/angular/src/icon/trash.ts"],
+      "@fex-design/angular/icon/minus": ["packages/@fex-design/angular/src/icon/minus.ts"],
+      "@fex-design/angular/icon/more": ["packages/@fex-design/angular/src/icon/more.ts"],
+      "@fex-design/angular/icon/plus": ["packages/@fex-design/angular/src/icon/plus.ts"],
+      "@fex-design/angular/icon/star": ["packages/@fex-design/angular/src/icon/star.ts"],
+      "@fex-design/angular/icon/warning": ["packages/@fex-design/angular/src/icon/warning.ts"],
       "@fex-design/angular/directives/draggable": [
         "packages/@fex-design/angular/src/directives/draggable.ts"
       ],
@@ -886,12 +676,8 @@
       "@fex-design/angular/signals/host-class": [
         "packages/@fex-design/angular/src/signals/host-class.ts"
       ],
-      "@fex-design/angular/services/toast": [
-        "packages/@fex-design/angular/src/services/toast.ts"
-      ],
-      "@fex-design/angular/i18n": [
-        "packages/@fex-design/angular/src/i18n/i18n.ts"
-      ]
+      "@fex-design/angular/services/toast": ["packages/@fex-design/angular/src/services/toast.ts"],
+      "@fex-design/angular/i18n": ["packages/@fex-design/angular/src/i18n/i18n.ts"]
     }
   }
 }

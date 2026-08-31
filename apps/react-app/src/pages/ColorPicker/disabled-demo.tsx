@@ -1,1 +1,9 @@
-import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function DisabledDemo(){return <Card title="禁用" description="disabled 同时阻止面板和外部触发器交互。"><PopupPicker disabled/></Card>}
+import { Card } from '@fex-design/react/ui/card'
+import { PopupPicker } from './demo-picker'
+export function DisabledDemo() {
+  return (
+    <Card title="禁用" description="disabled 同时阻止面板和外部触发器交互。">
+      <PopupPicker disabled />
+    </Card>
+  )
+}

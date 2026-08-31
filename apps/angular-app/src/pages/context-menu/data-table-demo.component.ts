@@ -10,7 +10,13 @@ import { ContextMenuSurfaceComponent } from './menu-surface.component'
 @Component({
   selector: 'app-context-menu-data-table-demo',
   standalone: true,
-  imports: [ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuContent, ContextMenuSurfaceComponent],
+  imports: [
+    ContextMenu,
+    ContextMenuTrigger,
+    ContextMenuPortal,
+    ContextMenuContent,
+    ContextMenuSurfaceComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './data-table-demo.component.html',
 })

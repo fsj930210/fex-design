@@ -60,10 +60,8 @@ export const collapseContentInnerClassName = cva('min-h-0 overflow-hidden', {
     variant: {
       outlined:
         'bg-elevated-background px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
-      filled:
-        'px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
-      ghost:
-        'px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
+      filled: 'px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
+      ghost: 'px-[var(--collapse-content-padding)] py-4 data-[state=closed]:!p-0',
     },
   },
   defaultVariants: { variant: 'outlined' },

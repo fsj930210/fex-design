@@ -9,7 +9,18 @@ const props = defineProps<{ class?: string; style?: StyleValue }>()
 const { overlay, snapshot } = useTooltipContext('TooltipArrow')
 const arrowClass = computed(() => cn(tooltipArrowClassName, props.class))
 const position = computed(() => getTooltipArrowPosition(snapshot.value.side, snapshot.value.align))
-function setArrow(element: Element | ComponentPublicInstance | null) { overlay.setArrowElement(element instanceof HTMLDivElement ? element : null) }
+function setArrow(element: Element | ComponentPublicInstance | null) {
+  overlay.setArrowElement(element instanceof HTMLDivElement ? element : null)
+}
 onBeforeUnmount(() => overlay.setArrowElement(null))
 </script>
-<template><div :ref="setArrow" data-slot="tooltip-arrow" :data-side="snapshot.side" :data-align="snapshot.align" :class="arrowClass" :style="[position, props.style]" /></template>
+<template>
+  <div
+    :ref="setArrow"
+    data-slot="tooltip-arrow"
+    :data-side="snapshot.side"
+    :data-align="snapshot.align"
+    :class="arrowClass"
+    :style="[position, props.style]"
+  />
+</template>

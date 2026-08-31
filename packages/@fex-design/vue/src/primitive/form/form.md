@@ -6,12 +6,7 @@ TanStack `form.Field` 是唯一字段状态入口；`Form` 处理原生提交和
 
 ```vue
 <script setup lang="ts">
-import {
-  FieldControl,
-  FieldError,
-  FieldLabel,
-  FieldRoot,
-} from '@fex-design/vue/primitive/field'
+import { FieldControl, FieldError, FieldLabel, FieldRoot } from '@fex-design/vue/primitive/field'
 import { Form, useForm } from '@fex-design/vue/primitive/form'
 import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
 const form = useForm({ defaultValues: { name: '' }, onSubmit: ({ value }) => console.log(value) })

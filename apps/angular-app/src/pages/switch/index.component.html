@@ -11,38 +11,38 @@
     </header>
     <div class="space-y-4">
       <fex-card title="Basic" description="Uncontrolled switch uses defaultChecked."
-        ><button fexSwitchPrimitive defaultChecked aria-label="Enable notifications">
-          <span fexSwitchThumb></span></button
+        ><button switch defaultChecked aria-label="Enable notifications">
+          <span switchThumb></span></button
       ></fex-card>
       <fex-card title="Controlled" description="Controlled switch uses checked and checkedChange."
         ><div class="grid gap-2">
           <button
-            fexSwitchPrimitive
+            switch
             [checked]="checked()"
             (checkedChange)="checked.set($event.checked)"
             aria-label="Controlled switch"
           >
-            <span fexSwitchThumb></span>
+            <span switchThumb></span>
           </button>
           <p class="text-sm text-muted-foreground">Current value: {{ checked() }}</p>
         </div></fex-card
       >
       <fex-card title="Sizes" description="Switch supports sm, default, and lg sizes."
         ><div class="flex items-center gap-2">
-          <button fexSwitchPrimitive size="sm" defaultChecked aria-label="Small switch">
-            <span fexSwitchThumb size="sm"></span></button
-          ><button fexSwitchPrimitive defaultChecked aria-label="Default switch">
-            <span fexSwitchThumb></span></button
-          ><button fexSwitchPrimitive size="lg" defaultChecked aria-label="Large switch">
-            <span fexSwitchThumb size="lg"></span>
+          <button switch size="sm" defaultChecked aria-label="Small switch">
+            <span switchThumb size="sm"></span></button
+          ><button switch defaultChecked aria-label="Default switch">
+            <span switchThumb></span></button
+          ><button switch size="lg" defaultChecked aria-label="Large switch">
+            <span switchThumb size="lg"></span>
           </button></div
       ></fex-card>
       <fex-card title="Disabled" description="Disabled state blocks interaction."
         ><div class="flex items-center gap-2">
-          <button fexSwitchPrimitive disabled aria-label="Disabled switch">
-            <span fexSwitchThumb></span></button
-          ><button fexSwitchPrimitive disabled defaultChecked aria-label="Disabled checked switch">
-            <span fexSwitchThumb></span>
+          <button switch disabled aria-label="Disabled switch">
+            <span switchThumb></span></button
+          ><button switch disabled defaultChecked aria-label="Disabled checked switch">
+            <span switchThumb></span>
           </button></div
       ></fex-card>
     </div>

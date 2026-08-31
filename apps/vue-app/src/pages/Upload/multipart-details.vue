@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  useUploadMd5,
-  useUploadParts,
-  useUploadProgress,
-} from '@fex-design/vue/primitive/upload'
+import { useUploadMd5, useUploadParts, useUploadProgress } from '@fex-design/vue/primitive/upload'
 import { computed } from 'vue'
 const props = defineProps<{ id: string }>()
 const md5 = useUploadMd5(() => props.id)

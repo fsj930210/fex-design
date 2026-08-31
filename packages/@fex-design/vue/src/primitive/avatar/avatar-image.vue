@@ -7,7 +7,11 @@ defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 const context = inject(avatarContext)
 const status = context?.status ?? ref('idle')
-watch(() => String(attrs.src ?? ''), (src) => src ? context?.controller.load({ src }) : context?.controller.reset(), { immediate: true })
+watch(
+  () => String(attrs.src ?? ''),
+  (src) => (src ? context?.controller.load({ src }) : context?.controller.reset()),
+  { immediate: true },
+)
 </script>
 <template>
   <img

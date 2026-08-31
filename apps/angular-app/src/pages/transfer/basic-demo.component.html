@@ -21,9 +21,7 @@
         [title]="{ source: 'Team directory', target: 'Project team' }"
         (targetKeysChange)="targetKeys.set($event)"
       />
-      <p class="mt-1 text-xs text-muted-foreground">
-        Target keys: {{ targetKeys().join(', ') }}
-      </p>
+      <p class="mt-1 text-xs text-muted-foreground">Target keys: {{ targetKeys().join(', ') }}</p>
     </section>
   </div>
 </fex-card>

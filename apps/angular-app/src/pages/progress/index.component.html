@@ -7,7 +7,9 @@
         <span>Upload progress</span><span class="text-muted-foreground">35%</span>
       </div>
       <fex-progress [value]="35" /></div></fex-card
-  ><fex-card title="Status" description="Info, warning, success and error use system semantic tokens."
+  ><fex-card
+    title="Status"
+    description="Info, warning, success and error use system semantic tokens."
     ><div class="grid max-w-xl gap-3">
       <div><span>Normal · 35%</span><fex-progress [value]="35" /></div>
       <div><span>Info / 68%</span><fex-progress [value]="68" status="info" /></div>
@@ -62,57 +64,67 @@
   ><fex-card title="Step Line" description="Show progress as fixed linear steps."
     ><div class="grid gap-3">
       @for (demo of stepLineDemos; track demo.value) {
-      <div class="flex items-center gap-1.5">
-        <div class="flex gap-1">
-          @for (index of getRange(demo.steps); track index) {
-          <span
-            class="h-2 w-4 rounded-[1px]"
-            [style.background]="index < getActiveSteps(demo.value, demo.steps) ? demo.color : 'var(--progress-remaining)'"
-          ></span>
+        <div class="flex items-center gap-1.5">
+          <div class="flex gap-1">
+            @for (index of getRange(demo.steps); track index) {
+              <span
+                class="h-2 w-4 rounded-[1px]"
+                [style.background]="
+                  index < getActiveSteps(demo.value, demo.steps)
+                    ? demo.color
+                    : 'var(--progress-remaining)'
+                "
+              ></span>
+            }
+          </div>
+          @if (demo.success) {
+            <span
+              class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
+              ><fex-check-icon class="size-3"
+            /></span>
+          } @else {
+            <span class="text-sm">{{ demo.value }}%</span>
           }
         </div>
-        @if (demo.success) {
-        <span
-          class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
-          ><fex-check-icon class="size-3"
-        /></span>
-        } @else {
-        <span class="text-sm">{{ demo.value }}%</span>
-        }
-      </div>
       }
     </div></fex-card
-  ><fex-card title="Step Circle" description="Show progress as fixed circular steps with custom count and gap."
+  ><fex-card
+    title="Step Circle"
+    description="Show progress as fixed circular steps with custom count and gap."
     ><div class="flex flex-wrap gap-4">
       @for (demo of circleStepDemos; track demo.label) {
-      <div class="grid justify-items-center gap-1.5">
-        <div class="relative inline-flex size-32 items-center justify-center">
-          <svg aria-hidden="true" class="size-32" viewBox="0 0 128 128">
-            @for (index of getRange(demo.steps); track index) {
-            <circle
-              cx="64"
-              cy="64"
-              r="56"
-              fill="none"
-              [attr.stroke]="index < getActiveSteps(demo.value, demo.steps) ? demo.color : 'var(--progress-remaining)'"
-              stroke-width="16"
-              stroke-linecap="butt"
-              pathLength="100"
-              [attr.stroke-dasharray]="getStepDasharray(demo.steps, demo.gap)"
-              [attr.stroke-dashoffset]="getStepDashoffset(index, demo.steps)"
-            />
-            }
-          </svg>
-          <span class="absolute text-2xl">
-            @if (demo.success) {
-            <fex-check-icon class="size-8 text-success" />
-            } @else {
-            {{ demo.value }}%
-            }
-          </span>
+        <div class="grid justify-items-center gap-1.5">
+          <div class="relative inline-flex size-32 items-center justify-center">
+            <svg aria-hidden="true" class="size-32" viewBox="0 0 128 128">
+              @for (index of getRange(demo.steps); track index) {
+                <circle
+                  cx="64"
+                  cy="64"
+                  r="56"
+                  fill="none"
+                  [attr.stroke]="
+                    index < getActiveSteps(demo.value, demo.steps)
+                      ? demo.color
+                      : 'var(--progress-remaining)'
+                  "
+                  stroke-width="16"
+                  stroke-linecap="butt"
+                  pathLength="100"
+                  [attr.stroke-dasharray]="getStepDasharray(demo.steps, demo.gap)"
+                  [attr.stroke-dashoffset]="getStepDashoffset(index, demo.steps)"
+                />
+              }
+            </svg>
+            <span class="absolute text-2xl">
+              @if (demo.success) {
+                <fex-check-icon class="size-8 text-success" />
+              } @else {
+                {{ demo.value }}%
+              }
+            </span>
+          </div>
+          <span class="text-sm">{{ demo.label }}</span>
         </div>
-        <span class="text-sm">{{ demo.label }}</span>
-      </div>
       }
     </div></fex-card
   ><fex-card title="Size" description="Configure line thickness."
@@ -122,15 +134,21 @@
       <div>
         <span>Large · 12px</span><fex-progress [value]="80" [thickness]="12" />
       </div></div></fex-card
-  ><fex-card title="Linecap" description="Round line / round track, butt and square endings with the same value."
+  ><fex-card
+    title="Linecap"
+    description="Round line / round track, butt and square endings with the same value."
     ><div class="grid max-w-xl gap-3">
-      <div><span>Round line / round track</span><fex-progress [value]="36" [thickness]="12" linecap="round" /></div>
+      <div>
+        <span>Round line / round track</span
+        ><fex-progress [value]="36" [thickness]="12" linecap="round" />
+      </div>
       <div>
         <span>Butt · round track</span
         ><fex-progress [value]="36" [thickness]="12" linecap="butt" trackLinecap="round" />
       </div>
       <div>
-        <span>Square line / round track</span><fex-progress [value]="36" [thickness]="12" linecap="square" />
+        <span>Square line / round track</span
+        ><fex-progress [value]="36" [thickness]="12" linecap="square" />
       </div></div></fex-card
   ><fex-card title="Circle" description="Circular progress supports status and gradients."
     ><div class="flex flex-wrap gap-4">

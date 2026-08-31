@@ -6,12 +6,7 @@ import {
   FieldRequiredIndicator,
   FieldRoot,
 } from '@fex-design/angular/primitive/field'
-import {
-  Form,
-  FormField,
-  injectForm,
-  type AnyFieldApi,
-} from '@fex-design/angular/primitive/form'
+import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
 import { TextareaInput, TextareaRoot } from '@fex-design/angular/primitive/textarea'
 import { Button } from '@fex-design/angular/ui/button'
 import Card from '@fex-design/angular/ui/card'
@@ -40,8 +35,7 @@ export class TextareaValidationDemo {
     onSubmit: () => undefined,
   })
   protected readonly validators = {
-    onSubmit: ({ value }: { value: string }) =>
-      value.trim() ? undefined : 'Message is required.',
+    onSubmit: ({ value }: { value: string }) => (value.trim() ? undefined : 'Message is required.'),
   }
   protected invalid(field: AnyFieldApi) {
     return field.state.meta.errors.length > 0

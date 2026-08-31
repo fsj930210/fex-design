@@ -32,7 +32,7 @@ function UsersGrid({ data }: { data: User[] }) {
 
 | 参数                 | 类型                                        | 默认值       | 必填 | 说明                                                    |
 | -------------------- | ------------------------------------------- | ------------ | ---- | ------------------------------------------------------- |
-| `table`              | `ReactTable<TFeatures, TData>`              | -            | 是   | `useDataTable` 创建的 v9 实例                       |
+| `table`              | `ReactTable<TFeatures, TData>`              | -            | 是   | `useDataTable` 创建的 v9 实例                           |
 | `density`            | `'compact' \| 'default' \| 'comfortable'`   | `'default'`  | 否   | 行密度                                                  |
 | `striped`            | `boolean`                                   | `false`      | 否   | 斑马纹                                                  |
 | `border`             | `boolean`                                   | `false`      | 否   | 展示完整单元格网格；开启后不重复画普通分隔符            |
@@ -45,7 +45,7 @@ function UsersGrid({ data }: { data: User[] }) {
 | `getHeaderProps`     | `(header) => th props`                      | -            | 否   | 连接拖拽等调用方行为                                    |
 | `getCellProps`       | `(cell) => td props`                        | -            | 否   | 连接 motion/ref/style                                   |
 | `getRowProps`        | `(row) => tr props`                         | -            | 否   | 连接行拖拽或测试属性                                    |
-| `className`          | `DataTableClassName`                         | -            | 否   | root/viewport/table/header/body/row/cell 等结构化 class |
+| `className`          | `DataTableClassName`                        | -            | 否   | root/viewport/table/header/body/row/cell 等结构化 class |
 
 ## 状态与事件
 

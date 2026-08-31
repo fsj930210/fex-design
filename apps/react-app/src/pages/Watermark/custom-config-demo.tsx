@@ -71,27 +71,45 @@ export function CustomConfigDemo() {
               <InputControl aria-label="Watermark color" />
             </InputRoot>
           </Control>
-          <NumberSlider label="FontSize" value={fontSize} min={12} max={42} onChange={setFontSize} />
+          <NumberSlider
+            label="FontSize"
+            value={fontSize}
+            min={12}
+            max={42}
+            onChange={setFontSize}
+          />
           <NumberSlider label="ZIndex" value={zIndex} min={1} max={20} onChange={setZIndex} />
           <NumberSlider label="Rotate" value={rotate} min={-45} max={45} onChange={setRotate} />
           <div className="grid grid-cols-2 gap-1.5">
             <Control label="Gap X">
-              <InputRoot value={String(gapX)} onValueChange={(value) => setGapX(Number(value) || 0)}>
+              <InputRoot
+                value={String(gapX)}
+                onValueChange={(value) => setGapX(Number(value) || 0)}
+              >
                 <InputControl inputMode="numeric" aria-label="Gap X" />
               </InputRoot>
             </Control>
             <Control label="Gap Y">
-              <InputRoot value={String(gapY)} onValueChange={(value) => setGapY(Number(value) || 0)}>
+              <InputRoot
+                value={String(gapY)}
+                onValueChange={(value) => setGapY(Number(value) || 0)}
+              >
                 <InputControl inputMode="numeric" aria-label="Gap Y" />
               </InputRoot>
             </Control>
             <Control label="Offset X">
-              <InputRoot value={String(offsetX)} onValueChange={(value) => setOffsetX(Number(value) || 0)}>
+              <InputRoot
+                value={String(offsetX)}
+                onValueChange={(value) => setOffsetX(Number(value) || 0)}
+              >
                 <InputControl inputMode="numeric" aria-label="Offset X" />
               </InputRoot>
             </Control>
             <Control label="Offset Y">
-              <InputRoot value={String(offsetY)} onValueChange={(value) => setOffsetY(Number(value) || 0)}>
+              <InputRoot
+                value={String(offsetY)}
+                onValueChange={(value) => setOffsetY(Number(value) || 0)}
+              >
                 <InputControl inputMode="numeric" aria-label="Offset Y" />
               </InputRoot>
             </Control>

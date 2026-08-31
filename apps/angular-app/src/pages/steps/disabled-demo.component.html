@@ -1,1 +1,8 @@
-<fex-card title="Disabled" description="Disabled nodes cannot be selected and are skipped by keyboard navigation."><fex-steps navigation [current]="value()" (change)="value.set($event.value)"><fex-steps-step-list [disabled]="true"/></fex-steps><p class="mt-2 text-sm text-muted-foreground">Current value: {{value()}}</p></fex-card>
+<fex-card
+  title="Disabled"
+  description="Disabled nodes cannot be selected and are skipped by keyboard navigation."
+  ><fex-steps navigation [current]="value()" (change)="value.set($event.value)"
+    ><fex-steps-step-list [disabled]="true"
+  /></fex-steps>
+  <p class="mt-2 text-sm text-muted-foreground">Current value: {{ value() }}</p></fex-card
+>

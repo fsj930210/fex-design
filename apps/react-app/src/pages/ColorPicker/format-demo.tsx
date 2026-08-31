@@ -1,1 +1,9 @@
-import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function FormatDemo(){return <Card title="颜色编码" description="支持 HEX、RGB、HSL、HSB 与 OKLCH 双向转换。"><PopupPicker text/></Card>}
+import { Card } from '@fex-design/react/ui/card'
+import { PopupPicker } from './demo-picker'
+export function FormatDemo() {
+  return (
+    <Card title="颜色编码" description="支持 HEX、RGB、HSL、HSB 与 OKLCH 双向转换。">
+      <PopupPicker text />
+    </Card>
+  )
+}

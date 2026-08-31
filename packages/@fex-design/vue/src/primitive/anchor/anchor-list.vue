@@ -33,7 +33,9 @@ const emit = defineEmits<{ activate: [item: AnchorItem<string>] }>()
         :class="anchorLinkClassName({ orientation, active: highlightedKeys.has(item.key) })"
         @click="emit('activate', item)"
       >
-        <slot name="item" :item="item" :active="activeKeys.includes(item.key)">{{ item.title }}</slot>
+        <slot name="item" :item="item" :active="activeKeys.includes(item.key)">{{
+          item.title
+        }}</slot>
       </button>
       <AnchorList
         v-if="orientation === 'vertical' && item.children?.length"
@@ -43,7 +45,10 @@ const emit = defineEmits<{ activate: [item: AnchorItem<string>] }>()
         :orientation="orientation"
         :level="(level ?? 0) + 1"
         @activate="emit('activate', $event)"
-      ><template #item="slotProps"><slot name="item" v-bind="slotProps">{{ slotProps.item.title }}</slot></template></AnchorList>
+        ><template #item="slotProps"
+          ><slot name="item" v-bind="slotProps">{{ slotProps.item.title }}</slot></template
+        ></AnchorList
+      >
     </li>
   </ul>
 </template>

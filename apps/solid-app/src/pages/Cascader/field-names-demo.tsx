@@ -1,1 +1,13 @@
-import{customFieldOptions}from'./data';import{DemoCascader}from'./demo-cascader';import{DemoSection}from'./demo-section';export function FieldNamesDemo(){return <DemoSection title="Field names" description="One declarative mapping adapts backend data."><DemoCascader options={customFieldOptions} fieldNames={{value:'id',label:'name',children:'nodes',disabled:'unavailable'}}/></DemoSection>}
+import { customFieldOptions } from './data'
+import { DemoCascader } from './demo-cascader'
+import { DemoSection } from './demo-section'
+export function FieldNamesDemo() {
+  return (
+    <DemoSection title="Field names" description="One declarative mapping adapts backend data.">
+      <DemoCascader
+        options={customFieldOptions}
+        fieldNames={{ value: 'id', label: 'name', children: 'nodes', disabled: 'unavailable' }}
+      />
+    </DemoSection>
+  )
+}

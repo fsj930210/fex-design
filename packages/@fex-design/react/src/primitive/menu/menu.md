@@ -19,7 +19,13 @@ lists declare their own orientation.
 ```tsx
 <MenuRoot role="navigation">
   <MenuList orientation="horizontal">
-    <MenuItem value="home">{({ props }) => <a {...props} href="/">Home</a>}</MenuItem>
+    <MenuItem value="home">
+      {({ props }) => (
+        <a {...props} href="/">
+          Home
+        </a>
+      )}
+    </MenuItem>
   </MenuList>
 </MenuRoot>
 ```
@@ -33,13 +39,13 @@ Set `submenu` on the trigger item and match its `value` with the child list `par
 
 ## Parts
 
-| Part | Purpose |
-| --- | --- |
-| `MenuRoot` | Semantic container; its native `role` can be `menu`, `menubar` or `navigation`. |
-| `MenuList` | One focus/navigation level with `orientation` and optional `parentValue`. |
-| `MenuItem` | Default button or render-prop binding for a custom link/button trigger. |
-| `MenuGroup` | Semantic item group. |
-| `MenuGroupLabel` | Accessible group label content. |
-| `MenuDivider` | Separator between groups. |
+| Part             | Purpose                                                                         |
+| ---------------- | ------------------------------------------------------------------------------- |
+| `MenuRoot`       | Semantic container; its native `role` can be `menu`, `menubar` or `navigation`. |
+| `MenuList`       | One focus/navigation level with `orientation` and optional `parentValue`.       |
+| `MenuItem`       | Default button or render-prop binding for a custom link/button trigger.         |
+| `MenuGroup`      | Semantic item group.                                                            |
+| `MenuGroupLabel` | Accessible group label content.                                                 |
+| `MenuDivider`    | Separator between groups.                                                       |
 
 Menu does not implement text search. Command-style filtering belongs to the composing component.

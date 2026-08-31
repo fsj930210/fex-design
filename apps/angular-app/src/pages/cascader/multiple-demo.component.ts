@@ -1,1 +1,15 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{regionOptions}from'./data';import{SimpleCascaderDemo}from'./simple-demo.component';@Component({selector:'fex-cascader-multiple-demo',standalone:true,imports:[SimpleCascaderDemo],changeDetection:ChangeDetectionStrategy.OnPush,template:'<fex-cascader-simple-demo title="Multiple" description="Parent-child conduction and indeterminate states." [options]="options" [multiple]="true" />'})export class MultipleDemo{readonly options=regionOptions}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { regionOptions } from './data'
+import { SimpleCascaderDemo } from './simple-demo.component'
+export
+@Component({
+  selector: 'fex-cascader-multiple-demo',
+  standalone: true,
+  imports: [SimpleCascaderDemo],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template:
+    '<fex-cascader-simple-demo title="Multiple" description="Parent-child conduction and indeterminate states." [options]="options" [multiple]="true" />',
+})
+class MultipleDemo {
+  readonly options = regionOptions
+}

@@ -38,7 +38,9 @@ export class Card {
 })
 export class CardHeader {
   className = input<string | undefined>()
-  protected readonly hostClassName = createHostClassName(() => cn(cardHeaderClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(cardHeaderClassName, this.className()),
+  )
 }
 
 @Component({
@@ -53,7 +55,9 @@ export class CardHeader {
 })
 export class CardTitle {
   className = input<string | undefined>()
-  protected readonly hostClassName = createHostClassName(() => cn(cardTitleClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(cardTitleClassName, this.className()),
+  )
 }
 
 @Component({
@@ -68,7 +72,9 @@ export class CardTitle {
 })
 export class CardDescription {
   className = input<string | undefined>()
-  protected readonly hostClassName = createHostClassName(() => cn(cardDescriptionClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(cardDescriptionClassName, this.className()),
+  )
 }
 
 @Component({
@@ -83,7 +89,9 @@ export class CardDescription {
 })
 export class CardExtra {
   className = input<string | undefined>()
-  protected readonly hostClassName = createHostClassName(() => cn(cardExtraClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(cardExtraClassName, this.className()),
+  )
 }
 
 @Component({
@@ -98,7 +106,9 @@ export class CardExtra {
 })
 export class CardContent {
   className = input<string | undefined>()
-  protected readonly hostClassName = createHostClassName(() => cn(cardContentClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(cardContentClassName, this.className()),
+  )
 }
 
 @Component({
@@ -113,5 +123,7 @@ export class CardContent {
 })
 export class CardFooter {
   className = input<string | undefined>()
-  protected readonly hostClassName = createHostClassName(() => cn(cardFooterClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(cardFooterClassName, this.className()),
+  )
 }

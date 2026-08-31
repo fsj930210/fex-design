@@ -5,7 +5,11 @@ export const triggerClassName =
   'inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border bg-background px-4 text-sm font-medium text-foreground shadow-sm hover:bg-muted-background'
 
 export function MenuSurface({ children }: { children: ReactNode }) {
-  return <MenuRoot><MenuList className="space-y-0.5">{children}</MenuList></MenuRoot>
+  return (
+    <MenuRoot>
+      <MenuList className="space-y-0.5">{children}</MenuList>
+    </MenuRoot>
+  )
 }
 
 export function MenuAction(props: ButtonHTMLAttributes<HTMLButtonElement>) {

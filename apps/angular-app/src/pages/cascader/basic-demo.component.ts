@@ -1,1 +1,15 @@
-import{ChangeDetectionStrategy,Component}from'@angular/core';import{regionOptions}from'./data';import{SimpleCascaderDemo}from'./simple-demo.component';@Component({selector:'fex-cascader-basic-demo',standalone:true,imports:[SimpleCascaderDemo],changeDetection:ChangeDetectionStrategy.OnPush,template:'<fex-cascader-simple-demo title="Basic" description="Leaf selection, disabled nodes and project Scrollbar tracks." [options]="options" />'})export class BasicDemo{readonly options=regionOptions}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { regionOptions } from './data'
+import { SimpleCascaderDemo } from './simple-demo.component'
+export
+@Component({
+  selector: 'fex-cascader-basic-demo',
+  standalone: true,
+  imports: [SimpleCascaderDemo],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template:
+    '<fex-cascader-simple-demo title="Basic" description="Leaf selection, disabled nodes and project Scrollbar tracks." [options]="options" />',
+})
+class BasicDemo {
+  readonly options = regionOptions
+}

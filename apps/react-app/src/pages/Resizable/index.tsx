@@ -31,9 +31,7 @@ export function ResizablePage() {
               <ResizablePanelGroup direction="horizontal" defaultLayout={[28, 72]}>
                 <ResizablePanel id="sidebar" minSize={18} maxSize={45} className="p-2">
                   <h2 className="text-sm font-medium">Sidebar</h2>
-                  <p className="mt-1.5 text-sm text-muted-foreground">
-                    Resize from the handle.
-                  </p>
+                  <p className="mt-1.5 text-sm text-muted-foreground">Resize from the handle.</p>
                 </ResizablePanel>
                 <ResizableHandle />
                 <ResizablePanel id="content" minSize={45} className="p-2">

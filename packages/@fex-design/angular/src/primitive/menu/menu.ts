@@ -15,8 +15,16 @@ import {
 } from '@angular/core'
 import type { AfterContentInit } from '@angular/core'
 
-@Component({ selector: 'fex-menu-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { '[attr.role]': 'role', 'data-slot': 'menu' }, template: '<ng-content />' })
-export class MenuRoot { @Input() role = 'menu' }
+@Component({
+  selector: 'fex-menu-root',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[attr.role]': 'role', 'data-slot': 'menu' },
+  template: '<ng-content />',
+})
+export class MenuRoot {
+  @Input() role = 'menu'
+}
 
 @Component({
   selector: 'fex-menu-list',
@@ -71,11 +79,29 @@ export class MenuItem {
   @Input() submenu = false
 }
 
-@Component({ selector: 'fex-menu-group', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'group', 'data-slot': 'menu-group' }, template: '<ng-content />' })
+@Component({
+  selector: 'fex-menu-group',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { role: 'group', 'data-slot': 'menu-group' },
+  template: '<ng-content />',
+})
 export class MenuGroup {}
 
-@Component({ selector: 'fex-menu-group-label', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'menu-group-label' }, template: '<ng-content />' })
+@Component({
+  selector: 'fex-menu-group-label',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { 'data-slot': 'menu-group-label' },
+  template: '<ng-content />',
+})
 export class MenuGroupLabel {}
 
-@Component({ selector: 'fex-menu-divider', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'separator', 'data-slot': 'menu-divider' }, template: '' })
+@Component({
+  selector: 'fex-menu-divider',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { role: 'separator', 'data-slot': 'menu-divider' },
+  template: '',
+})
 export class MenuDivider {}

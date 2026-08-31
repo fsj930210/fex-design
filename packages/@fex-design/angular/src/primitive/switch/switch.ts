@@ -16,7 +16,7 @@ export type SwitchState = 'checked' | 'unchecked'
 type SwitchSize = 'sm' | 'default' | 'lg'
 
 @Component({
-  selector: 'button[fexSwitchPrimitive]',
+  selector: 'button[switch]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -60,7 +60,7 @@ export class SwitchRoot {
 }
 
 @Component({
-  selector: 'span[fexSwitchThumb]',
+  selector: 'span[switchThumb]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

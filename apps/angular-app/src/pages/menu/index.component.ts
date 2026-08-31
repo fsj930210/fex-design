@@ -9,7 +9,14 @@ import { MenuRestoredDemosComponent } from './restored-demos.component'
 @Component({
   selector: 'app-menu-page',
   standalone: true,
-  imports: [RouterLink, Card, MenuHorizontalNestedDemoComponent, MenuMenubarDemoComponent, MenuNavDemoComponent, MenuRestoredDemosComponent],
+  imports: [
+    RouterLink,
+    Card,
+    MenuHorizontalNestedDemoComponent,
+    MenuMenubarDemoComponent,
+    MenuNavDemoComponent,
+    MenuRestoredDemosComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index.component.html',
 })

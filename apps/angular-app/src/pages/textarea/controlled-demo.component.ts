@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import {
-  TextareaClear,
-  TextareaInput,
-  TextareaRoot,
-} from '@fex-design/angular/primitive/textarea'
+import { TextareaClear, TextareaInput, TextareaRoot } from '@fex-design/angular/primitive/textarea'
 import Card from '@fex-design/angular/ui/card'
 
 @Component({

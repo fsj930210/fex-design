@@ -4,7 +4,10 @@ import { createMemo } from 'solid-js'
 export function ThemeStatusCard(props: { title: string }) {
   const { controller, snapshot } = useTheme()
   const canSwitchTheme = createMemo(
-    () => !snapshot().forcedTheme && snapshot().themes.includes('light') && snapshot().themes.includes('dark'),
+    () =>
+      !snapshot().forcedTheme &&
+      snapshot().themes.includes('light') &&
+      snapshot().themes.includes('dark'),
   )
   const nextTheme = createMemo(() => (snapshot().resolvedTheme === 'dark' ? 'light' : 'dark'))
 

@@ -30,8 +30,7 @@ export function ValidationDemo() {
         <Field
           name="message"
           validators={{
-            onSubmit: ({ value }) =>
-              String(value).trim() ? undefined : 'Message is required.',
+            onSubmit: ({ value }) => (String(value).trim() ? undefined : 'Message is required.'),
           }}
         >
           {(field) => {

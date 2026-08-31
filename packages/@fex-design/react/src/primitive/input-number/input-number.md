@@ -18,18 +18,18 @@ import { useInputNumber } from '@fex-design/react/primitive/input-number/use-inp
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value/defaultValue` | `number \| undefined` | — | Controlled value or uncontrolled initial value. |
-| `min/max` | `number` | — | Range applied on blur and step. |
-| `step` | `number` | `1` | Increment/decrement offset. |
-| `precision` | `number` | inferred | Decimal rounding precision. |
-| `parser` | `(text) => number \| undefined` | finite parser | Converts draft text. |
-| `formatter` | `(value, info) => string` | string formatter | Produces display text. |
-| `clearable` | `boolean` | `false` | Composes InputClear. |
-| `prefix/suffix` | `ReactNode` | icon actions | Suffix replaces the action area. |
-| `disabled/readOnly/invalid/status` | Input state props | — | Forwarded to InputRoot. |
-| `onChange` | `(event, value) => void` | — | Preserves the source event first. |
+| Prop                               | Type                            | Default          | Description                                     |
+| ---------------------------------- | ------------------------------- | ---------------- | ----------------------------------------------- |
+| `value/defaultValue`               | `number \| undefined`           | —                | Controlled value or uncontrolled initial value. |
+| `min/max`                          | `number`                        | —                | Range applied on blur and step.                 |
+| `step`                             | `number`                        | `1`              | Increment/decrement offset.                     |
+| `precision`                        | `number`                        | inferred         | Decimal rounding precision.                     |
+| `parser`                           | `(text) => number \| undefined` | finite parser    | Converts draft text.                            |
+| `formatter`                        | `(value, info) => string`       | string formatter | Produces display text.                          |
+| `clearable`                        | `boolean`                       | `false`          | Composes InputClear.                            |
+| `prefix/suffix`                    | `ReactNode`                     | icon actions     | Suffix replaces the action area.                |
+| `disabled/readOnly/invalid/status` | Input state props               | —                | Forwarded to InputRoot.                         |
+| `onChange`                         | `(event, value) => void`        | —                | Preserves the source event first.               |
 
 ## Events, state and composition
 

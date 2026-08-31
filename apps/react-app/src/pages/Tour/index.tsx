@@ -19,7 +19,8 @@ export function TourPage() {
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Tour</h1>
             <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-              Composable guided tours with registered targets, floating positioning and fully custom content.
+              Composable guided tours with registered targets, floating positioning and fully custom
+              content.
             </p>
           </div>
         </header>

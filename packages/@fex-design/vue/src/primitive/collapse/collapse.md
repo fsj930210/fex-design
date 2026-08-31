@@ -5,7 +5,12 @@ Composable disclosure panels built on the shared expansion core.
 ## Import
 
 ```ts
-import { Collapse, CollapseItem, CollapseTrigger, CollapseContent } from '@fex-design/vue/primitive/collapse'
+import {
+  Collapse,
+  CollapseItem,
+  CollapseTrigger,
+  CollapseContent,
+} from '@fex-design/vue/primitive/collapse'
 ```
 
 ## Basic Usage
@@ -21,16 +26,16 @@ import { Collapse, CollapseItem, CollapseTrigger, CollapseContent } from '@fex-d
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `expandedKeys` | `ExpansionKey[]` | `undefined` | Controlled expanded keys. |
-| `defaultExpandedKeys` | `ExpansionKey[]` | `undefined` | Initial uncontrolled expanded keys. |
-| `disabledKeys` | `ExpansionKey[]` | `undefined` | Keys that cannot be toggled. |
-| `multiple` | `boolean` | `true` | Whether multiple panels may be open. Use `false` for accordion behavior. |
-| `collapsible` | `boolean` | `true` | In single mode, whether the open panel may be collapsed to none. |
-| `variant` | `'outlined' | 'filled' | 'ghost'` | `'outlined'` | Visual treatment. |
-| `size` | `'sm' | 'md' | 'lg'` | `'md'` | Header and content spacing. |
-| `onChange` | `(keys, meta) => void` | `undefined` | Fires after expansion changes. |
+| Prop                  | Type                   | Default     | Description                                                              |
+| --------------------- | ---------------------- | ----------- | ------------------------------------------------------------------------ |
+| `expandedKeys`        | `ExpansionKey[]`       | `undefined` | Controlled expanded keys.                                                |
+| `defaultExpandedKeys` | `ExpansionKey[]`       | `undefined` | Initial uncontrolled expanded keys.                                      |
+| `disabledKeys`        | `ExpansionKey[]`       | `undefined` | Keys that cannot be toggled.                                             |
+| `multiple`            | `boolean`              | `true`      | Whether multiple panels may be open. Use `false` for accordion behavior. |
+| `collapsible`         | `boolean`              | `true`      | In single mode, whether the open panel may be collapsed to none.         |
+| `variant`             | `'outlined'            | 'filled'    | 'ghost'`                                                                 | `'outlined'` | Visual treatment.           |
+| `size`                | `'sm'                  | 'md'        | 'lg'`                                                                    | `'md'`       | Header and content spacing. |
+| `onChange`            | `(keys, meta) => void` | `undefined` | Fires after expansion changes.                                           |
 
 ## Events And Methods
 

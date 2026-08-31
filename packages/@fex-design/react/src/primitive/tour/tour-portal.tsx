@@ -10,7 +10,9 @@ export interface TourPortalProps {
 export function TourPortal({ children, container }: TourPortalProps) {
   const { snapshot, getPopupContainer, controller } = useTourContext('TourPortal')
   if (typeof document === 'undefined') return null
-  const target = snapshot.currentStep?.target ? controller.getTarget(snapshot.currentStep.target) : null
+  const target = snapshot.currentStep?.target
+    ? controller.getTarget(snapshot.currentStep.target)
+    : null
   const popupContainer = container ?? getPopupContainer?.(target) ?? document.body
   return popupContainer ? createPortal(children, popupContainer) : null
 }

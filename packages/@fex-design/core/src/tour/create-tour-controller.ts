@@ -12,7 +12,12 @@ import type {
 function sameRect(left: DOMRect | null, right: DOMRect | null) {
   if (left === right) return true
   if (!left || !right) return false
-  return left.x === right.x && left.y === right.y && left.width === right.width && left.height === right.height
+  return (
+    left.x === right.x &&
+    left.y === right.y &&
+    left.width === right.width &&
+    left.height === right.height
+  )
 }
 
 export function createTourController<TData = unknown>(
@@ -47,7 +52,7 @@ export function createTourController<TData = unknown>(
   }
 
   function getTarget(step: TourRegisteredStep<TData> | null) {
-    return step?.target ? targets.get(step.target)?.() ?? null : null
+    return step?.target ? (targets.get(step.target)?.() ?? null) : null
   }
 
   function createSnapshot(): TourSnapshot<TData> {
@@ -81,7 +86,8 @@ export function createTourController<TData = unknown>(
         previousSnapshot.targetKey === nextSnapshot.targetKey &&
         previousSnapshot.targetAvailable === nextSnapshot.targetAvailable &&
         sameRect(previousSnapshot.targetRect, nextSnapshot.targetRect)
-      ) return previousSnapshot
+      )
+        return previousSnapshot
       return nextSnapshot
     })
   }
@@ -108,7 +114,9 @@ export function createTourController<TData = unknown>(
       const element = getTarget(snapshot.currentStep)
       const scrollOptions = snapshot.currentStep.scrollIntoViewOptions
       if (element && scrollOptions !== false) {
-        element.scrollIntoView(scrollOptions === true ? { block: 'nearest', inline: 'nearest' } : scrollOptions)
+        element.scrollIntoView(
+          scrollOptions === true ? { block: 'nearest', inline: 'nearest' } : scrollOptions,
+        )
       }
       lastScrolledStep = snapshot.currentStep.name
       emit(createSnapshot())

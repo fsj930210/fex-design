@@ -16,13 +16,13 @@ Stateless vertical and horizontal ordered-event primitives.
 
 ## Props
 
-| Component | Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- | --- |
-| Timeline | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Axis direction. |
-| Timeline | `align` | `'start' \| 'end' \| 'alternate'` | `'end'` | No | Default placement. |
-| Timeline | `reverse` | `boolean` | `false` | No | Reverses visual order. |
-| Item | `status` | built-in status or any string | `'default'` | No | Open status value. |
-| Item | `connectorStatus` | status string | item status | No | Outgoing connector status. |
-| Item | `placement` | `'start' \| 'end'` | root alignment | No | Per-item override. |
+| Component | Name              | Type                              | Default        | Required | Description                |
+| --------- | ----------------- | --------------------------------- | -------------- | -------- | -------------------------- |
+| Timeline  | `orientation`     | `'vertical' \| 'horizontal'`      | `'vertical'`   | No       | Axis direction.            |
+| Timeline  | `align`           | `'start' \| 'end' \| 'alternate'` | `'end'`        | No       | Default placement.         |
+| Timeline  | `reverse`         | `boolean`                         | `false`        | No       | Reverses visual order.     |
+| Item      | `status`          | built-in status or any string     | `'default'`    | No       | Open status value.         |
+| Item      | `connectorStatus` | status string                     | item status    | No       | Outgoing connector status. |
+| Item      | `placement`       | `'start' \| 'end'`                | root alignment | No       | Per-item override.         |
 
 All parts accept native attributes, snippets, and caller classes. There are no events or controlled/uncontrolled values. Compose icons inside Indicator and arbitrary UI inside Content. Current items expose `aria-current="step"`; local sizing uses `--timeline-item-gap` and `--timeline-indicator-size`.

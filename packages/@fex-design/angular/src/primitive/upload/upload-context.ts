@@ -5,9 +5,9 @@ export class UploadContext<TResponse = unknown> {
   readonly upload = signal<UploadController<TResponse> | undefined>(undefined)
   readonly input = signal<HTMLInputElement | undefined>(undefined)
   readonly invalid = signal(false)
-  readonly items = signal<
-    readonly import('@fex-design/core/upload/types').UploadItem<TResponse>[]
-  >([])
+  readonly items = signal<readonly import('@fex-design/core/upload/types').UploadItem<TResponse>[]>(
+    [],
+  )
   private unsubscribe?: () => void
   setUpload(upload: UploadController<TResponse>) {
     if (this.upload() === upload) return

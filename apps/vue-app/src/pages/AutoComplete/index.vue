@@ -17,9 +17,7 @@ import RemoteDemo from './remote-demo.vue'
           complete backend records.
         </p>
       </header>
-      <div class="grid gap-4">
-        <BasicDemo /><ControlledDemo /><RemoteDemo /><CustomDemo />
-      </div>
+      <div class="grid gap-4"><BasicDemo /><ControlledDemo /><RemoteDemo /><CustomDemo /></div>
     </div>
   </main>
 </template>

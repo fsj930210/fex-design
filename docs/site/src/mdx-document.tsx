@@ -49,7 +49,15 @@ export function MdxDocument(props: {
       const value = componentApis[props.slug][apiProps.layer]
       const nativeApi = resolveComponentApi(value, props.framework)
       return (
-        <Show when={componentApis[props.slug][apiProps.layer].components?.length || componentApis[props.slug][apiProps.layer].nativeElement || nativeApi.props.length > 0 || nativeApi.events.length > 0 || nativeApi.slots.length > 0}>
+        <Show
+          when={
+            componentApis[props.slug][apiProps.layer].components?.length ||
+            componentApis[props.slug][apiProps.layer].nativeElement ||
+            nativeApi.props.length > 0 ||
+            nativeApi.events.length > 0 ||
+            nativeApi.slots.length > 0
+          }
+        >
           <h3 id={`${apiProps.layer}-api`} class="mt-8 mb-2 text-lg font-semibold">
             {apiProps.title}
           </h3>
@@ -82,15 +90,23 @@ export function MdxDocument(props: {
         {preProps.children}
       </pre>
     ),
-    code: (codeProps: ParentProps & { class?: string }) => <code class={codeProps.class ?? 'font-mono'}>{codeProps.children}</code>,
+    code: (codeProps: ParentProps & { class?: string }) => (
+      <code class={codeProps.class ?? 'font-mono'}>{codeProps.children}</code>
+    ),
     table: (tableProps: ParentProps) => (
       <div class="my-4 overflow-x-auto rounded-xl border border-border">
         <table class="w-full border-collapse text-left text-sm">{tableProps.children}</table>
       </div>
     ),
-    thead: (headProps: ParentProps) => <thead class="bg-muted-background">{headProps.children}</thead>,
-    th: (cellProps: ParentProps) => <th class="px-4 py-3 font-medium text-muted-foreground">{cellProps.children}</th>,
-    td: (cellProps: ParentProps) => <td class="border-t border-border px-4 py-3 align-top">{cellProps.children}</td>,
+    thead: (headProps: ParentProps) => (
+      <thead class="bg-muted-background">{headProps.children}</thead>
+    ),
+    th: (cellProps: ParentProps) => (
+      <th class="px-4 py-3 font-medium text-muted-foreground">{cellProps.children}</th>
+    ),
+    td: (cellProps: ParentProps) => (
+      <td class="border-t border-border px-4 py-3 align-top">{cellProps.children}</td>
+    ),
   }
   return (
     <MDXProvider components={components}>

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { CalendarValue } from '@fex-design/core/calendar'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerMultipleTagsClassName,
-} from '@fex-design/styles/date-picker'
+import { datePickerMultipleTagsClassName } from '@fex-design/styles/date-picker'
 import { cn } from '@fex/utils'
 import { computed } from 'vue'
 import Tag from '../tag/tag.vue'
@@ -41,10 +39,7 @@ function remove(value: CalendarValue, event: Event) {
     >
       {{ label(value) }}
     </Tag>
-    <Tag
-      v-if="overflowCount > 0"
-      data-slot="date-picker-tag-overflow"
-      size="sm"
+    <Tag v-if="overflowCount > 0" data-slot="date-picker-tag-overflow" size="sm"
       >+{{ overflowCount }}</Tag
     >
   </div>

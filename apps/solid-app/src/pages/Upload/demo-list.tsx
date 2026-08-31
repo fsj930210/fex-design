@@ -90,12 +90,7 @@ export function DemoUploadList(props: { showMultipart?: boolean }) {
         )}
       </UploadList>
       <Show when={count()}>
-        <Button
-          class="mt-1.5 w-full"
-          size="xs"
-          variant="ghost"
-          onClick={() => void upload.clear()}
-        >
+        <Button class="mt-1.5 w-full" size="xs" variant="ghost" onClick={() => void upload.clear()}>
           清空列表
         </Button>
       </Show>

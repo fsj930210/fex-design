@@ -7,5 +7,18 @@ import MenuSurface from './menu-surface.vue'
 </script>
 
 <template>
-  <DropdownRoot><DropdownTrigger v-slot="slot"><button v-bind="slot.props" :ref="slot.ref" :class="triggerClassName">Actions</button></DropdownTrigger><PopoverPortal><DropdownContent><MenuSurface><MenuAction>Edit</MenuAction><MenuAction>Duplicate</MenuAction><MenuAction>Archive</MenuAction></MenuSurface></DropdownContent></PopoverPortal></DropdownRoot>
+  <DropdownRoot
+    ><DropdownTrigger v-slot="slot"
+      ><button v-bind="slot.props" :ref="slot.ref" :class="triggerClassName">
+        Actions
+      </button></DropdownTrigger
+    ><PopoverPortal
+      ><DropdownContent
+        ><MenuSurface
+          ><MenuAction>Edit</MenuAction><MenuAction>Duplicate</MenuAction
+          ><MenuAction>Archive</MenuAction></MenuSurface
+        ></DropdownContent
+      ></PopoverPortal
+    ></DropdownRoot
+  >
 </template>

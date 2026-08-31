@@ -54,15 +54,11 @@ export function Button(props: ButtonProps) {
       disabled={isDisabled()}
     >
       <Show when={iconPlacement() === 'start' && iconNode()}>
-        <ButtonIcon data-icon="inline-start">
-          {iconNode()}
-        </ButtonIcon>
+        <ButtonIcon data-icon="inline-start">{iconNode()}</ButtonIcon>
       </Show>
       {local.children}
       <Show when={iconPlacement() === 'end' && iconNode()}>
-        <ButtonIcon data-icon="inline-end">
-          {iconNode()}
-        </ButtonIcon>
+        <ButtonIcon data-icon="inline-end">{iconNode()}</ButtonIcon>
       </Show>
     </PrimitiveButton>
   )

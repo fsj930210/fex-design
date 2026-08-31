@@ -1,5 +1,7 @@
 <fex-card title="Avatar group" description="Keep the first avatars visible and summarize the rest.">
   <div avatarGroup [maxCount]="3">
-    @for (name of names; track name) { <span avatar>{{ name }}</span> }
+    @for (name of names; track name) {
+      <span avatar>{{ name }}</span>
+    }
   </div>
 </fex-card>

@@ -18,7 +18,13 @@ export function AdvancedDemo() {
           <QrCode.Background />
           <QrCode.Modules centerSize={56} />
           <QrCode.Center size={56}>
-            <circle cx="50" cy="50" r="48" className="fill-background stroke-border" strokeWidth="2" />
+            <circle
+              cx="50"
+              cy="50"
+              r="48"
+              className="fill-background stroke-border"
+              strokeWidth="2"
+            />
             <text
               x="50"
               y="52"

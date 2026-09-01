@@ -44,7 +44,7 @@ BadgeRibbon 使用框架原生输入和 JSX.Element children 区分 Ribbon 标�
 
 ## CSS Variables
 
-Badge 和 BadgeDot 沿用 Primitive 变量：`--badge-height`、`--badge-min-width`、`--badge-padding-inline`、`--badge-font-size`、`--badge-dot-size`、`--badge-color` 和 `--badge-color-foreground`。
+Badge 和 BadgeDot 沿用 Primitive 变量。`--badge-color` 覆盖单个指示器；`--badge-color-{primary|info|success|warning|danger}` 及对应的 `-foreground` 变量用于在组件作用域内覆盖语义色。
 
 ## 示例
 示例覆盖附着、零值、封顶、小圆点、颜色、集合、LTR/RTL、独立使用、位置偏移、结构化样式和 Ribbon。

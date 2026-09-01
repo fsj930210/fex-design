@@ -1,30 +1,23 @@
 import {
   isTagPresetColor,
-  tagClassName,
-  tagCloseClassName,
-  type TagColor,
-  type TagStyleProps,
-} from '@fex-design/styles/tag'
+  type TagOptions,
+  type TagPresetColor,
+} from '@fex-design/core/tag/types'
+import { tagClassName, tagCloseClassName } from '@fex-design/styles/tag'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
-  contentChild,
-  Directive,
   input,
-  output,
 } from '@angular/core'
+import { NgComponentOutlet } from '@angular/common'
 import { CloseIcon } from '../../icon/close'
 import { createHostClassName } from '../../signals/host-class'
 
-@Directive({ selector: '[fexTagCloseIcon]', standalone: true })
-export class TagCloseIcon {}
-
 @Component({
-  selector: 'fex-tag',
+  selector: 'span[tag]',
   standalone: true,
-  imports: [CloseIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
@@ -35,25 +28,47 @@ export class TagCloseIcon {}
     '[attr.data-disabled]': "disabled() ? 'true' : null",
     'data-slot': 'tag',
   },
-  templateUrl: './tag.html',
+  template: '<ng-content />',
 })
 export class Tag {
-  readonly color = input<TagColor>('neutral')
-  readonly variant = input<TagStyleProps['variant']>('subtle')
-  readonly size = input<TagStyleProps['size']>('md')
-  readonly closable = input(false, { transform: booleanAttribute })
-  readonly closeLabel = input('Close')
+  readonly color = input<TagOptions['color']>()
+  readonly variant = input<NonNullable<TagOptions['variant']>>('filled')
+  readonly size = input<NonNullable<TagOptions['size']>>('md')
   readonly disabled = input(false, { transform: booleanAttribute })
-  readonly close = output<MouseEvent>()
-  protected readonly projectedCloseIcon = contentChild(TagCloseIcon)
+  protected readonly presetColor = computed<TagPresetColor | undefined>(() => {
+    const color = this.color()
+    return isTagPresetColor(color) ? color : undefined
+  })
   protected readonly dataColor = computed(() =>
-    isTagPresetColor(this.color()) ? this.color() : 'custom',
+    this.presetColor() ?? (this.color() ? 'custom' : null),
   )
   protected readonly customColor = computed(() =>
-    isTagPresetColor(this.color()) ? null : this.color(),
+    this.color() && !this.presetColor() ? this.color() : null,
   )
-  protected readonly closeClassName = tagCloseClassName
   protected readonly hostClassName = createHostClassName(() =>
-    tagClassName({ variant: this.variant(), size: this.size() }),
+    tagClassName({
+      variant: this.variant(),
+      color: this.presetColor(),
+      size: this.size(),
+    }),
   )
+}
+
+@Component({
+  selector: 'button[tagClose]',
+  standalone: true,
+  imports: [NgComponentOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class]': 'hostClassName()',
+    '[attr.aria-label]': 'ariaLabel()',
+    'data-slot': 'tag-close',
+    type: 'button',
+  },
+  templateUrl: './tag-close.html',
+})
+export class TagClose {
+  readonly ariaLabel = input('Close', { alias: 'aria-label' })
+  protected readonly defaultIcon = CloseIcon
+  protected readonly hostClassName = createHostClassName(tagCloseClassName)
 }

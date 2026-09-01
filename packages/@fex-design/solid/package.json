@@ -87,6 +87,7 @@
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",
     "./ui/listbox": "./src/ui/listbox/listbox.tsx",
     "./ui/spinner": "./src/ui/spinner/spinner.tsx",
+    "./ui/tag": "./src/ui/tag/tag.tsx",
     "./icon/check": "./src/icon/check.tsx",
     "./icon/calendar": "./src/icon/calendar.tsx",
     "./icon/clock": "./src/icon/clock.tsx",

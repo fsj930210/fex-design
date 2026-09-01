@@ -6,16 +6,16 @@ export const badgeClassName = cva(
     variants: {
       color: {
         default:
-          '[--badge-semantic-color:var(--color-danger)] [--badge-semantic-color-foreground:var(--color-danger-foreground)]',
+          '[--badge-semantic-color:var(--badge-color-danger,var(--color-danger))] [--badge-semantic-color-foreground:var(--badge-color-danger-foreground,var(--color-danger-foreground))]',
         primary:
-          '[--badge-semantic-color:var(--color-primary)] [--badge-semantic-color-foreground:var(--color-primary-foreground)]',
+          '[--badge-semantic-color:var(--badge-color-primary,var(--color-primary))] [--badge-semantic-color-foreground:var(--badge-color-primary-foreground,var(--color-primary-foreground))]',
         danger:
-          '[--badge-semantic-color:var(--color-danger)] [--badge-semantic-color-foreground:var(--color-danger-foreground)]',
+          '[--badge-semantic-color:var(--badge-color-danger,var(--color-danger))] [--badge-semantic-color-foreground:var(--badge-color-danger-foreground,var(--color-danger-foreground))]',
         warning:
-          '[--badge-semantic-color:var(--color-warning)] [--badge-semantic-color-foreground:var(--color-warning-foreground)]',
+          '[--badge-semantic-color:var(--badge-color-warning,var(--color-warning))] [--badge-semantic-color-foreground:var(--badge-color-warning-foreground,var(--color-warning-foreground))]',
         success:
-          '[--badge-semantic-color:var(--color-success)] [--badge-semantic-color-foreground:var(--color-success-foreground)]',
-        info: '[--badge-semantic-color:var(--color-info)] [--badge-semantic-color-foreground:var(--color-info-foreground)]',
+          '[--badge-semantic-color:var(--badge-color-success,var(--color-success))] [--badge-semantic-color-foreground:var(--badge-color-success-foreground,var(--color-success-foreground))]',
+        info: '[--badge-semantic-color:var(--badge-color-info,var(--color-info))] [--badge-semantic-color-foreground:var(--badge-color-info-foreground,var(--color-info-foreground))]',
       },
       size: {
         sm: '[--badge-size-height:var(--badge-height-sm,1rem)] [--badge-size-min-width:var(--badge-min-width-sm,var(--badge-height-sm,1rem))] [--badge-size-padding-inline:var(--badge-padding-inline-sm,0.25rem)] [--badge-size-font-size:var(--badge-font-size-sm,0.625rem)]',
@@ -42,12 +42,12 @@ export const badgeDotClassName = cva(
 export const badgeDotColorClassName = cva('', {
   variants: {
     color: {
-      default: '[--badge-semantic-color:var(--color-danger)]',
-      primary: '[--badge-semantic-color:var(--color-primary)]',
-      danger: '[--badge-semantic-color:var(--color-danger)]',
-      warning: '[--badge-semantic-color:var(--color-warning)]',
-      success: '[--badge-semantic-color:var(--color-success)]',
-      info: '[--badge-semantic-color:var(--color-info)]',
+      default: '[--badge-semantic-color:var(--badge-color-danger,var(--color-danger))]',
+      primary: '[--badge-semantic-color:var(--badge-color-primary,var(--color-primary))]',
+      danger: '[--badge-semantic-color:var(--badge-color-danger,var(--color-danger))]',
+      warning: '[--badge-semantic-color:var(--badge-color-warning,var(--color-warning))]',
+      success: '[--badge-semantic-color:var(--badge-color-success,var(--color-success))]',
+      info: '[--badge-semantic-color:var(--badge-color-info,var(--color-info))]',
     },
   },
   defaultVariants: { color: 'default' },
@@ -64,16 +64,16 @@ export const badgeRibbonColorClassName = cva('', {
   variants: {
     color: {
       default:
-        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-primary)] [--badge-semantic-color-foreground:var(--color-primary-foreground)]',
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--badge-color-primary,var(--color-primary))] [--badge-semantic-color-foreground:var(--badge-color-primary-foreground,var(--color-primary-foreground))]',
       primary:
-        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-primary)] [--badge-semantic-color-foreground:var(--color-primary-foreground)]',
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--badge-color-primary,var(--color-primary))] [--badge-semantic-color-foreground:var(--badge-color-primary-foreground,var(--color-primary-foreground))]',
       danger:
-        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-danger)] [--badge-semantic-color-foreground:var(--color-danger-foreground)]',
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--badge-color-danger,var(--color-danger))] [--badge-semantic-color-foreground:var(--badge-color-danger-foreground,var(--color-danger-foreground))]',
       warning:
-        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-warning)] [--badge-semantic-color-foreground:var(--color-warning-foreground)]',
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--badge-color-warning,var(--color-warning))] [--badge-semantic-color-foreground:var(--badge-color-warning-foreground,var(--color-warning-foreground))]',
       success:
-        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-success)] [--badge-semantic-color-foreground:var(--color-success-foreground)]',
-      info: 'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--color-info)] [--badge-semantic-color-foreground:var(--color-info-foreground)]',
+        'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--badge-color-success,var(--color-success))] [--badge-semantic-color-foreground:var(--badge-color-success-foreground,var(--color-success-foreground))]',
+      info: 'bg-[var(--badge-color,var(--badge-semantic-color))] text-[var(--badge-color,var(--badge-semantic-color))] [--badge-semantic-color:var(--badge-color-info,var(--color-info))] [--badge-semantic-color-foreground:var(--badge-color-info-foreground,var(--color-info-foreground))]',
     },
   },
   defaultVariants: { color: 'primary' },

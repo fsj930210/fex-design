@@ -1,0 +1,2 @@
+<script setup lang="ts">import { Tag } from '@fex-design/vue/ui/tag'</script>
+<template><div class="flex flex-wrap gap-2" style="--tag-color-primary:#7c3aed;--tag-color-primary-foreground:#fff;--tag-color-danger:#e11d48;--tag-color-danger-foreground:#fff"><Tag color="primary">覆盖后的 Primary</Tag><Tag color="primary" variant="solid">覆盖后的 Primary</Tag><Tag color="danger" variant="outlined">覆盖后的 Danger</Tag></div></template>

@@ -1,0 +1,22 @@
+<ng-content />
+@if (closable()) {
+  @if (projectedCloseIcon()) {
+    <button
+      tagClose
+      [disabled]="disabled()"
+      [class]="closeClassName()"
+      [style]="styles().close"
+      (click)="close.emit($event)"
+    >
+      <ng-content select="[tagCloseIcon]" />
+    </button>
+  } @else {
+    <button
+      tagClose
+      [disabled]="disabled()"
+      [class]="closeClassName()"
+      [style]="styles().close"
+      (click)="close.emit($event)"
+    ></button>
+  }
+}

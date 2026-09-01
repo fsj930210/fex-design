@@ -52,7 +52,7 @@
 
 ## CSS Variables
 
-`--badge-height`、`--badge-min-width`、`--badge-padding-inline` 和 `--badge-font-size` 用于调整 Badge；`--badge-dot-size` 用于调整 BadgeDot；`--badge-color` 和 `--badge-color-foreground` 用于调整颜色。
+`--badge-height`、`--badge-min-width`、`--badge-padding-inline` 和 `--badge-font-size` 用于调整 Badge；`--badge-dot-size` 用于调整 BadgeDot；`--badge-color` 和 `--badge-color-foreground` 覆盖单个实例。使用 `--badge-color-{primary|info|success|warning|danger}` 及对应的 `-foreground` 变量，可在组件作用域内覆盖 Badge 语义色。
 
 ## 书写方向与无障碍
 逻辑位置跟随原生 `dir="ltr"` / `dir="rtl"`。Badge 默认是展示元素；当颜色或数字承载独立含义时，应补充无障碍标签。

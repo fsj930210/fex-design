@@ -48,7 +48,7 @@ Examples in `examples/<name>` cover values, custom content, zero handling, numer
 
 ## CSS Variables
 
-`--badge-height`, `--badge-min-width`, `--badge-padding-inline`, and `--badge-font-size` customize Badge geometry. `--badge-dot-size` customizes BadgeDot; `--badge-color` and `--badge-color-foreground` customize colors.
+`--badge-height`, `--badge-min-width`, `--badge-padding-inline`, and `--badge-font-size` customize Badge geometry. `--badge-dot-size` customizes BadgeDot; `--badge-color` and `--badge-color-foreground` override one instance. Use `--badge-color-{primary|info|success|warning|danger}` and the matching `-foreground` variables to override Badge semantic colors within a scope.
 
 ## Direction and accessibility
 Logical placement follows native `dir="ltr"` / `dir="rtl"`. Badge is presentational by default; add an accessible label when color or a number carries otherwise unavailable meaning.

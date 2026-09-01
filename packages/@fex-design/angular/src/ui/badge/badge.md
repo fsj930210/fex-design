@@ -44,7 +44,7 @@ BadgeRibbon separates the ribbon marker from wrapped content using framework-nat
 
 ## CSS Variables
 
-Badge and BadgeDot use the Primitive variables: `--badge-height`, `--badge-min-width`, `--badge-padding-inline`, `--badge-font-size`, `--badge-dot-size`, `--badge-color`, and `--badge-color-foreground`.
+Badge and BadgeDot use the Primitive variables. `--badge-color` overrides one indicator; `--badge-color-{primary|info|success|warning|danger}` and the matching `-foreground` variables override semantic colors within a scope.
 
 ## Examples
 Examples cover attachment, zero, overflow, dots, colors, groups, LTR/RTL, standalone badges, offset, structured styling, and ribbons.

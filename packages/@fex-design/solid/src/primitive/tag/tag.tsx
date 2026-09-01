@@ -1,70 +1,71 @@
 import {
   isTagPresetColor,
-  tagClassName,
-  tagCloseClassName,
-  type TagColor,
-  type TagStyleProps,
-} from '@fex-design/styles/tag'
+  type TagOptions,
+  type TagPresetColor,
+} from '@fex-design/core/tag/types'
+import { tagClassName, tagCloseClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
-import type { JSX, ParentProps } from 'solid-js'
-import { splitProps } from 'solid-js'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { CloseIcon } from '../../icon/close'
 
-type TagStyle = JSX.CSSProperties & { '--tag-color'?: string }
-export interface TagProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'color'>>, TagStyleProps {
-  color?: TagColor
-  closable?: boolean
-  closeIcon?: JSX.Element
-  closeLabel?: string
-  disabled?: boolean
-  onClose?: JSX.EventHandler<HTMLButtonElement, MouseEvent>
+type TagStyle = JSX.CSSProperties & {
+  '--tag-color'?: string
+  '--tag-color-foreground'?: string
 }
+
+export interface TagProps
+  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'color'>>,
+    TagOptions {}
 
 export function Tag(props: TagProps) {
   const [local, rest] = splitProps(props, [
     'class',
     'style',
-    'children',
     'color',
     'variant',
     'size',
-    'closable',
-    'closeIcon',
-    'closeLabel',
     'disabled',
-    'onClose',
   ])
-  const color = () => local.color ?? 'neutral'
-  const preset = () => isTagPresetColor(color())
+  const presetColor = (): TagPresetColor | undefined =>
+    isTagPresetColor(local.color) ? local.color : undefined
   const style = (): TagStyle => ({
-    ...(preset() ? undefined : { '--tag-color': color() }),
+    ...(local.color && !presetColor() ? { '--tag-color': local.color } : undefined),
     ...(typeof local.style === 'object' ? local.style : {}),
   })
   return (
     <span
       {...rest}
       data-slot="tag"
-      data-color={preset() ? color() : 'custom'}
-      data-variant={local.variant ?? 'subtle'}
+      data-color={presetColor() ?? (local.color ? 'custom' : undefined)}
+      data-variant={local.variant ?? 'filled'}
       data-size={local.size ?? 'md'}
       data-disabled={local.disabled ? 'true' : undefined}
-      class={cn(tagClassName({ variant: local.variant, size: local.size }), local.class)}
+      class={cn(
+        tagClassName({
+          variant: local.variant ?? 'filled',
+          color: presetColor(),
+          size: local.size ?? 'md',
+        }),
+        local.class,
+      )}
       style={style()}
+    />
+  )
+}
+
+export interface TagCloseProps extends ParentProps<JSX.ButtonHTMLAttributes<HTMLButtonElement>> {}
+
+export function TagClose(props: TagCloseProps) {
+  const [local, rest] = splitProps(props, ['class', 'children', 'type', 'aria-label'])
+  return (
+    <button
+      {...rest}
+      type={local.type ?? 'button'}
+      aria-label={local['aria-label'] ?? 'Close'}
+      data-slot="tag-close"
+      class={cn(tagCloseClassName, local.class)}
     >
-      {local.children}
-      {local.closable ? (
-        <button
-          type="button"
-          data-slot="tag-close"
-          aria-label={local.closeLabel ?? 'Close'}
-          disabled={local.disabled}
-          class={tagCloseClassName}
-          onClick={local.onClose}
-        >
-          {local.closeIcon ?? <CloseIcon aria-hidden />}
-        </button>
-      ) : null}
-    </span>
+      {local.children ?? <CloseIcon aria-hidden />}
+    </button>
   )
 }

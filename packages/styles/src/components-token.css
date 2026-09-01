@@ -22,12 +22,16 @@
   --skeleton-gradient-to: oklch(0.89 0 0);
 
   /* Tag */
-  --tag-color-neutral: var(--muted-foreground);
   --tag-color-primary: var(--primary);
+  --tag-color-primary-foreground: var(--primary-foreground);
   --tag-color-success: var(--success);
+  --tag-color-success-foreground: var(--success-foreground);
   --tag-color-warning: var(--warning);
+  --tag-color-warning-foreground: var(--warning-foreground);
   --tag-color-danger: var(--danger);
-  --tag-solid-foreground: white;
+  --tag-color-danger-foreground: var(--danger-foreground);
+  --tag-color-info: var(--info);
+  --tag-color-info-foreground: var(--info-foreground);
 
   /* Button gradient effect */
   --gradient-lime: oklch(0.78 0.2 145);
@@ -46,12 +50,16 @@
   --skeleton-gradient-to: oklch(0.38 0 0);
 
   /* Tag */
-  --tag-color-neutral: var(--muted-foreground);
   --tag-color-primary: var(--primary);
+  --tag-color-primary-foreground: var(--primary-foreground);
   --tag-color-success: var(--success);
+  --tag-color-success-foreground: var(--success-foreground);
   --tag-color-warning: var(--warning);
+  --tag-color-warning-foreground: var(--warning-foreground);
   --tag-color-danger: var(--danger);
-  --tag-solid-foreground: oklch(0.985 0 0);
+  --tag-color-danger-foreground: var(--danger-foreground);
+  --tag-color-info: var(--info);
+  --tag-color-info-foreground: var(--info-foreground);
 
   /* Button gradient effect */
   --gradient-lime: oklch(0.74 0.2 145);

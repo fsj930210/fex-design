@@ -53,7 +53,15 @@
     { "name": "--badge-font-size", "description": "当前 Badge 指示器字号。" },
     { "name": "--badge-dot-size", "description": "当前小圆点直径。" },
     { "name": "--badge-color", "description": "Badge 或小圆点背景色。" },
-    { "name": "--badge-color-foreground", "description": "Badge 前景色。" }
+    { "name": "--badge-color-foreground", "description": "Badge 前景色。" },
+    {
+      "name": "--badge-color-{primary|info|success|warning|danger}",
+      "description": "在组件作用域内覆盖对应 Badge 语义背景色。"
+    },
+    {
+      "name": "--badge-color-{primary|info|success|warning|danger}-foreground",
+      "description": "在组件作用域内覆盖对应 Badge 语义前景色。"
+    }
   ],
   "demos": [
     {

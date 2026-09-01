@@ -86,6 +86,7 @@
     "./ui/kbd": "./src/ui/kbd/kbd.ts",
     "./ui/listbox": "./src/ui/listbox/listbox.ts",
     "./ui/spinner": "./src/ui/spinner/spinner.ts",
+    "./ui/tag": "./src/ui/tag/tag.ts",
     "./icon/check": "./src/icon/check.ts",
     "./icon/calendar": "./src/icon/calendar.ts",
     "./icon/clock": "./src/icon/clock.ts",

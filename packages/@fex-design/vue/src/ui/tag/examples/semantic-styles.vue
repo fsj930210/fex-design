@@ -1,0 +1,2 @@
+<script setup lang="ts">import { Tag } from '@fex-design/vue/ui/tag'</script>
+<template><Tag closable color="primary" :class-names="{ root: 'border-dashed', close: 'hover:opacity-80' }" :styles="{ root: { maxWidth: '280px', backgroundColor: '#f3e8ff', borderColor: '#9333ea', color: '#6b21a8', fontSize: '16px', fontWeight: 700 }, close: { marginInlineStart: '8px', borderRadius: '999px', backgroundColor: '#7e22ce', color: '#fff' } }">使用结构化样式定制的标签</Tag></template>

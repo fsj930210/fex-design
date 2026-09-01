@@ -92,6 +92,7 @@
     "./ui/listbox": "./src/ui/listbox/listbox.tsx",
     "./ui/resizable": "./src/ui/resizable/resizable.tsx",
     "./ui/spinner": "./src/ui/spinner/spinner.tsx",
+    "./ui/tag": "./src/ui/tag/tag.tsx",
     "./pro/dialog": "./src/pro/dialog/index.ts",
     "./icon/check": "./src/icon/check.tsx",
     "./icon/calendar": "./src/icon/calendar.tsx",

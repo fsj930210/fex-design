@@ -65,6 +65,7 @@ export default defineConfig({
               'kbd',
               'separator',
               'spinner',
+              'tag',
             ].includes(component ?? '') ||
             !/^[a-z-]+$/.test(example ?? '')
           ) {

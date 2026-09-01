@@ -42,6 +42,7 @@ import { BADGE_ITEM, type BadgeItem } from './badge-item'
     '[class]': 'hostClassName()',
     'data-slot': 'badge',
     '[attr.data-color]': 'color() ?? "default"',
+    '[attr.data-size]': 'size()',
     '[style.--badge-color]': 'customColor()',
   },
   templateUrl: './badge.html',
@@ -49,6 +50,7 @@ import { BADGE_ITEM, type BadgeItem } from './badge-item'
 export class Badge {
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef)
   readonly color = input<BadgeOptions['color']>()
+  readonly size = input<NonNullable<BadgeOptions['size']>>('md')
   readonly count = input<BadgeOptions['count']>()
   readonly showZero = input<NonNullable<BadgeOptions['showZero']>>(false)
   readonly overflowCount = input<BadgeOptions['overflowCount']>()
@@ -60,7 +62,7 @@ export class Badge {
     this.color() && !this.presetColor() ? this.color() : undefined,
   )
   protected readonly hostClassName = createHostClassName(() =>
-    badgeClassName({ color: this.presetColor() }),
+    badgeClassName({ color: this.presetColor(), size: this.size() }),
   )
 }
 
@@ -104,12 +106,14 @@ export class BadgeGroup {
     '[class]': 'hostClassName()',
     'data-slot': 'badge-dot',
     '[attr.data-color]': 'color() ?? "default"',
+    '[attr.data-size]': 'size()',
     '[style.--badge-color]': 'customColor()',
   },
   template: '',
 })
 export class BadgeDot {
   readonly color = input<BadgeDotOptions['color']>()
+  readonly size = input<NonNullable<BadgeDotOptions['size']>>('md')
   protected readonly presetColor = computed<BadgePresetColor | undefined>(() => {
     const color = this.color()
     return isBadgePresetColor(color) ? color : undefined
@@ -118,7 +122,8 @@ export class BadgeDot {
     this.color() && !this.presetColor() ? this.color() : undefined,
   )
   protected readonly hostClassName = createHostClassName(
-    () => `${badgeDotClassName} ${badgeDotColorClassName({ color: this.presetColor() })}`,
+    () =>
+      `${badgeDotClassName({ size: this.size() })} ${badgeDotColorClassName({ color: this.presetColor() })}`,
   )
 }
 

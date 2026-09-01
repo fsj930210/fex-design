@@ -16,6 +16,7 @@ const props = withDefaults(
     BadgeOptions &
       BadgeAttachmentOptions & {
         dot?: boolean
+        size?: 'sm' | 'md' | 'lg'
         class?: string
         classNames?: BadgeClassNames
         styles?: BadgeStyles<StyleValue>
@@ -29,6 +30,7 @@ const indicatorStyle = computed(() => ({
 }))
 const indicatorProps = computed(() => ({
   ...(props.color !== undefined ? { color: props.color } : {}),
+  ...(props.size !== undefined ? { size: props.size } : {}),
   ...(props.count !== undefined ? { count: props.count } : {}),
   ...(props.showZero ? { showZero: true } : {}),
   ...(props.overflowCount !== undefined ? { overflowCount: props.overflowCount } : {}),
@@ -36,6 +38,7 @@ const indicatorProps = computed(() => ({
 }))
 const dotProps = computed(() => ({
   ...(props.color !== undefined ? { color: props.color } : {}),
+  ...(props.size !== undefined ? { size: props.size } : {}),
   style: indicatorStyle.value,
 }))
 </script>
@@ -76,8 +79,8 @@ const dotProps = computed(() => ({
   <PrimitiveBadgeDot
     v-else-if="props.dot"
     v-bind="{ ...$attrs, ...dotProps }"
-    :class="props.classNames?.indicator"
-    :style="[indicatorStyle, props.styles?.indicator]"
+    :class="[props.class, props.classNames?.indicator]"
+    :style="[$attrs.style, indicatorStyle, props.styles?.indicator]"
   />
   <PrimitiveBadge
     v-else

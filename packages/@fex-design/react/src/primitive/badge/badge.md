@@ -1,31 +1,58 @@
-# Badge Primitive
+# React Primitive Badge
 
-Primitive 提供 `Badge`、`BadgeDot`、`BadgeRibbon` 和 `BadgeGroup`。`BadgeGroup` 负责集合布局、`maxCount` 与 `+N` 溢出；附着定位仍由 UI 层负责。
+Composable primitives for short values, status dots, ribbons, and badge collections. Primitive owns badge rendering and collection overflow; attachment positioning belongs to UI.
 
-## 用途
+## Import
 
-`Badge` 用于状态、分类、标签和短计数展示，不内置业务映射。
+    import { Badge, BadgeDot, BadgeGroup, BadgeRibbon } from '@fex-design/react/primitive/badge'
 
-## 导入路径
+## Components
 
-```tsx
-import { Badge } from '@fex-design/react/primitive/badge'
-```
+| Component | Element | Purpose |
+| --- | --- | --- |
+| Badge | span | Short value or count with semantic or custom color. |
+| BadgeDot | span | Standalone status dot without numeric content. |
+| BadgeGroup | div | Badge layout with optional `maxCount` and `+N` overflow. |
+| BadgeRibbon | span | Standalone ribbon marker; the consumer owns its containing block. |
 
-## 核心示例
+## Examples
 
-```tsx
-<Badge color="warning">Pending</Badge>
-```
+Examples in `examples/<name>` cover values, custom content, zero handling, numeric overflow, dots, colors, groups, direction, and ribbons.
 
-## Props
+## Badge API
 
-| 参数        | 类型         | 默认值      | 必填 | 说明                                |
-| ----------- | ------------ | ----------- | ---- | ----------------------------------- |
-| `color`     | `BadgeColor` | —           | 否   | 五种内置语义颜色或任意 CSS 颜色值。 |
-| `className` | `string`     | `undefined` | 否   | 合并到根元素的 class。              |
-| `children`  | `ReactNode`  | `undefined` | 否   | 徽标内容。                          |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| count | ReactNode | — | Badge value; numbers can be capped by `overflowCount`. |
+| showZero | boolean | false | Shows numeric `0`; otherwise a count-only zero badge is hidden. |
+| overflowCount | number | — | Replaces larger numeric counts with `N+`. |
+| color | preset or CSS color | danger | Semantic preset or any CSS color. |
+| size | 'sm' \\| 'md' \\| 'lg' | md | Badge size. |
+| children | ReactNode | — | Content used when `count` is absent. |
+| native attributes | ComponentProps<'span'> | — | Native span attributes and events. |
 
-## 事件与状态
+## BadgeDot API
 
-组件继承 `span` 原生属性与事件，没有受控状态。需要可点击语义时应使用合适的交互元素。
+`BadgeDot` accepts `color`, `size`, and native span attributes. It has no count or status-name mapping.
+
+## BadgeGroup API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| maxCount | number | — | Maximum visible child count. |
+| overflow | `(count, items) => ReactNode` | built-in `+N` | Custom overflow renderer. |
+| children | ReactNode | — | Badge items. |
+
+## BadgeRibbon API
+
+`BadgeRibbon` accepts `color`, logical `placement="start" | "end"`, children, and native span attributes. Default placement is `end`; default color is `primary`.
+
+## Direction and accessibility
+
+
+## CSS Variables
+
+`--badge-height`, `--badge-min-width`, `--badge-padding-inline`, and `--badge-font-size` customize Badge geometry. `--badge-dot-size` customizes BadgeDot; `--badge-color` and `--badge-color-foreground` customize colors.
+
+## Direction and accessibility
+Logical placement follows native `dir="ltr"` / `dir="rtl"`. Badge is presentational by default; add an accessible label when color or a number carries otherwise unavailable meaning.

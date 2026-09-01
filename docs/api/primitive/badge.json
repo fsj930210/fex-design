@@ -13,7 +13,15 @@
   },
   "props": [],
   "events": [],
-  "cssVariables": ["--badge-color", "--badge-color-foreground"],
+  "cssVariables": [
+    { "name": "--badge-height", "description": "当前 Badge 实例高度。" },
+    { "name": "--badge-min-width", "description": "当前 Badge 实例最小宽度。" },
+    { "name": "--badge-padding-inline", "description": "当前 Badge 实例行内间距。" },
+    { "name": "--badge-font-size", "description": "当前 Badge 实例字号。" },
+    { "name": "--badge-dot-size", "description": "当前 BadgeDot 实例直径。" },
+    { "name": "--badge-color", "description": "Badge 或 BadgeDot 背景色。" },
+    { "name": "--badge-color-foreground", "description": "Badge 前景色。" }
+  ],
   "demos": [
     {
       "id": "basic",
@@ -21,6 +29,12 @@
       "description": "展示数字附着、自定义内容附着和独立 BadgeDot 小圆点。"
     },
     { "id": "custom", "title": "自定义内容", "description": "直接显示自定义短内容。" },
+    { "id": "sizes", "title": "尺寸", "description": "对比 sm、md、lg 三种徽标和小圆点尺寸。" },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "覆盖徽标尺寸、字号、内边距、颜色和小圆点大小。"
+    },
     {
       "id": "zero",
       "title": "零值显示",
@@ -49,6 +63,12 @@
           "type": "BadgeColor",
           "description": "五种内置语义颜色或任意 CSS 颜色值。"
         },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "徽标尺寸。"
+        },
         { "name": "count", "type": "framework-native content", "description": "显示内容。" },
         { "name": "overflowCount", "type": "number", "description": "数字封顶为 N+。" },
         { "name": "showZero", "type": "boolean", "default": false, "description": "是否显示零值。" }
@@ -60,7 +80,15 @@
       "slug": "badge-dot",
       "layer": "primitive",
       "description": "独立点状态标记。",
-      "props": [{ "name": "color", "type": "BadgeColor", "description": "点标记颜色。" }],
+      "props": [
+        { "name": "color", "type": "BadgeColor", "description": "点标记颜色。" },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "小圆点尺寸。"
+        }
+      ],
       "frameworks": {}
     },
     {

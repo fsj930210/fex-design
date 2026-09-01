@@ -1,0 +1,9 @@
+<div class="grid gap-3">
+  @for (size of sizes; track size) {
+    <div class="flex items-center gap-4">
+      <span class="w-6 text-sm text-muted-foreground">{{ size }}</span>
+      <badge [count]="8" [size]="size" />
+      <span badgeDot color="success" [size]="size"></span>
+    </div>
+  }
+</div>

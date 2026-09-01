@@ -7,15 +7,9 @@ Badge 用于展示紧凑的状态、分类或数量信息。Primitive 只提供�
 
 ## Primitive 与 UI
 
-Primitive 提供 `Badge`、`BadgeDot`、`BadgeRibbon` 和 `BadgeGroup`。其中 `BadgeGroup` 负责基础集合布局、`maxCount` 与 `+N` 溢出；Primitive 不提供附着定位，也不决定徽标附着到哪个元素。UI `Badge` 和 UI `BadgeRibbon` 负责附着结构，UI 直接重导出 Primitive `BadgeGroup`。
+Primitive 提供可独立使用的徽标、小圆点、Ribbon 和徽标组，不负责附着定位。
 
-Badge 的常见场景包括：消息数量、通知未读数、在线状态点、头像右上角提示、集合项数量封顶，以及卡片右上角的 Ribbon。`BadgeDot` 是独立点标记；`BadgeGroup` 使用 `maxCount` 生成 `+N`；Primitive `BadgeRibbon` 只渲染 Ribbon 标记，内容使用各框架原生 children、slot 或 content projection。
-
-UI 附着徽标默认位于内容的右上角。UI `Badge` 的 `offset` 使用 `[inline, block]` 调整相对位置：第一个值沿行内结束方向移动，第二个值向下移动；Primitive 不提供 `offset`。
-
-UI `Badge` 还提供 `classNames` 和 `styles`，可分别定制 `root`、`content`、`indicator` 三个结构槽位；这属于 UI 附着结构能力，不下放给 Primitive。
-
-`color` 内置 `primary`、`info`、`success`、`warning`、`danger` 五种语义颜色，同时接受任意 CSS 颜色值；`BadgeDot` 使用同一套颜色能力，没有额外的 status API。`--badge-color` 和 `--badge-color-foreground` 可用于实例级或主题级覆盖，适用于独立 Badge、UI 附着徽标、BadgeDot 和 BadgeRibbon。
+UI 在此基础上增加右上角附着、位置偏移和结构化样式；徽标组直接复用 Primitive。
 
 ## 示例
 

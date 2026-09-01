@@ -8,7 +8,7 @@ const layer = query.get('layer') ?? path.at(-3)
 const component = query.get('component') ?? path.at(-2)
 const demo = query.get('demo') ?? path.at(-1)
 const embedded = query.get('embed') === 'true'
-// Glob 是 Preview 的示例注册表；示例清单版本 5，强制 Vite 重新收集。
+// Glob 是 Preview 的示例注册表；示例清单版本 7，强制 Vite 重新收集。
 const modules = import.meta.glob(
   '../../../../packages/@fex-design/vue/src/{primitive,ui}/*/examples/*.vue',
   { eager: true },

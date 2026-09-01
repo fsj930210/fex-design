@@ -6,7 +6,7 @@ import { computed, useAttrs } from 'vue'
 
 defineOptions({ name: 'Badge', inheritAttrs: false })
 
-const props = defineProps<BadgeOptions>()
+const props = defineProps<BadgeOptions & { size?: 'sm' | 'md' | 'lg' }>()
 
 const attrs = useAttrs()
 const presetColor = computed(() => (isBadgePresetColor(props.color) ? props.color : undefined))
@@ -29,7 +29,8 @@ const visible = computed(
     v-bind="attrs"
     data-slot="badge"
     :data-color="props.color ?? 'default'"
-    :class="cn(badgeClassName({ color: presetColor }), attrs.class as string | undefined)"
+    :data-size="props.size ?? 'md'"
+    :class="cn(badgeClassName({ color: presetColor, size: props.size }), attrs.class as string | undefined)"
     :style="[{ '--badge-color': customColor }, attrs.style]"
   >
     {{ value ?? '' }}<slot v-if="value == null" />

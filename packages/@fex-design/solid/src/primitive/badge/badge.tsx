@@ -28,6 +28,7 @@ export function Badge(props: BadgeProps) {
     'style',
     'children',
     'color',
+    'size',
     'count',
     'showZero',
     'overflowCount',
@@ -45,8 +46,12 @@ export function Badge(props: BadgeProps) {
         {...rest}
         data-slot="badge"
         data-color={local.color}
+        data-size={local.size ?? 'md'}
         class={cn(
-          badgeClassName({ color: isBadgePresetColor(local.color) ? local.color : undefined }),
+          badgeClassName({
+            color: isBadgePresetColor(local.color) ? local.color : undefined,
+            size: local.size,
+          }),
           local.class,
         )}
         style={{
@@ -62,14 +67,15 @@ export function Badge(props: BadgeProps) {
 export function BadgeDot(
   props: Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'color'> & BadgeDotOptions,
 ) {
-  const [local, rest] = splitProps(props, ['class', 'style', 'color'])
+  const [local, rest] = splitProps(props, ['class', 'style', 'color', 'size'])
   return (
     <span
       {...rest}
       data-slot="badge-dot"
       data-color={local.color ?? 'default'}
+      data-size={local.size ?? 'md'}
       class={cn(
-        badgeDotClassName,
+        badgeDotClassName({ size: local.size }),
         badgeDotColorClassName({
           color: isBadgePresetColor(local.color) ? local.color : undefined,
         }),

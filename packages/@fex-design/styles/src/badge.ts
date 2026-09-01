@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority'
 
 export const badgeClassName = cva(
-  'inline-flex h-5 min-w-5 w-fit shrink-0 items-center justify-center rounded-full border border-transparent bg-[var(--badge-color,var(--badge-semantic-color))] px-1.5 py-0 text-xs leading-none font-medium text-[var(--badge-color-foreground,var(--badge-semantic-color-foreground))] whitespace-nowrap',
+  'inline-flex h-[var(--badge-height,var(--badge-size-height))] min-w-[var(--badge-min-width,var(--badge-size-min-width))] w-fit shrink-0 items-center justify-center rounded-full border border-transparent bg-[var(--badge-color,var(--badge-semantic-color))] px-[var(--badge-padding-inline,var(--badge-size-padding-inline))] py-0 text-[length:var(--badge-font-size,var(--badge-size-font-size))] leading-none font-medium text-[var(--badge-color-foreground,var(--badge-semantic-color-foreground))] whitespace-nowrap',
   {
     variants: {
       color: {
@@ -17,12 +17,28 @@ export const badgeClassName = cva(
           '[--badge-semantic-color:var(--color-success)] [--badge-semantic-color-foreground:var(--color-success-foreground)]',
         info: '[--badge-semantic-color:var(--color-info)] [--badge-semantic-color-foreground:var(--color-info-foreground)]',
       },
+      size: {
+        sm: '[--badge-size-height:var(--badge-height-sm,1rem)] [--badge-size-min-width:var(--badge-min-width-sm,var(--badge-height-sm,1rem))] [--badge-size-padding-inline:var(--badge-padding-inline-sm,0.25rem)] [--badge-size-font-size:var(--badge-font-size-sm,0.625rem)]',
+        md: '[--badge-size-height:var(--badge-height-md,1.25rem)] [--badge-size-min-width:var(--badge-min-width-md,var(--badge-height-md,1.25rem))] [--badge-size-padding-inline:var(--badge-padding-inline-md,0.375rem)] [--badge-size-font-size:var(--badge-font-size-md,0.75rem)]',
+        lg: '[--badge-size-height:var(--badge-height-lg,1.5rem)] [--badge-size-min-width:var(--badge-min-width-lg,var(--badge-height-lg,1.5rem))] [--badge-size-padding-inline:var(--badge-padding-inline-lg,0.5rem)] [--badge-size-font-size:var(--badge-font-size-lg,0.875rem)]',
+      },
     },
-    defaultVariants: { color: 'default' },
+    defaultVariants: { color: 'default', size: 'md' },
   },
 )
-export const badgeDotClassName =
-  'inline-block size-2 rounded-full bg-current text-[var(--badge-color,var(--badge-semantic-color))]'
+export const badgeDotClassName = cva(
+  'inline-block size-[var(--badge-dot-size,var(--badge-size-dot-size))] rounded-full bg-current text-[var(--badge-color,var(--badge-semantic-color))]',
+  {
+    variants: {
+      size: {
+        sm: '[--badge-size-dot-size:var(--badge-dot-size-sm,0.375rem)]',
+        md: '[--badge-size-dot-size:var(--badge-dot-size-md,0.5rem)]',
+        lg: '[--badge-size-dot-size:var(--badge-dot-size-lg,0.625rem)]',
+      },
+    },
+    defaultVariants: { size: 'md' },
+  },
+)
 export const badgeDotColorClassName = cva('', {
   variants: {
     color: {

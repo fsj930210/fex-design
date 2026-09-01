@@ -18,13 +18,14 @@ import {
 import { cn } from '@fex/utils'
 import { Children, type ComponentProps, type ReactNode } from 'react'
 
-export type { BadgeColor } from '@fex-design/core'
+export type { BadgeColor, BadgeSize } from '@fex-design/core'
 export interface BadgeProps
   extends Omit<ComponentProps<'span'>, 'color'>, BadgeOptions<ReactNode> {}
 
 export function Badge({
   className,
   color,
+  size = 'md',
   count,
   showZero = false,
   overflowCount,
@@ -44,7 +45,8 @@ export function Badge({
     <span
       data-slot="badge"
       data-color={color}
-      className={cn(badgeClassName({ color: presetColor }), className)}
+      data-size={size}
+      className={cn(badgeClassName({ color: presetColor, size }), className)}
       style={
         {
           '--badge-color': customColor,
@@ -61,6 +63,7 @@ export function Badge({
 export function BadgeDot({
   className,
   color,
+  size = 'md',
   style,
   ...props
 }: Omit<ComponentProps<'span'>, 'color'> & BadgeDotOptions) {
@@ -70,7 +73,12 @@ export function BadgeDot({
     <span
       data-slot="badge-dot"
       data-color={color ?? 'default'}
-      className={cn(badgeDotClassName, badgeDotColorClassName({ color: presetColor }), className)}
+      data-size={size}
+      className={cn(
+        badgeDotClassName({ size }),
+        badgeDotColorClassName({ color: presetColor }),
+        className,
+      )}
       style={
         {
           '--badge-color': customColor,

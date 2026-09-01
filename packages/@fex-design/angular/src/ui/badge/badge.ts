@@ -37,6 +37,7 @@ export { BadgeGroup } from '../../primitive/badge/badge'
   host: {
     '[class]': 'hostClassName()',
     '[attr.data-slot]': 'attached() ? "badge-root" : "badge"',
+    '[attr.data-size]': 'attached() ? null : size()',
     '[style]': 'styles().root',
     '[style.--badge-color]': 'customColor()',
   },
@@ -48,6 +49,7 @@ export class Badge {
   readonly count = input<BadgeOptions['count']>()
   readonly dot = input(false, { transform: booleanAttribute })
   readonly color = input<BadgeOptions['color']>()
+  readonly size = input<NonNullable<BadgeOptions['size']>>('md')
   readonly showZero = input<NonNullable<BadgeOptions['showZero']>>(false)
   readonly overflowCount = input<BadgeOptions['overflowCount']>()
   readonly offset = input<BadgeAttachmentOptions['offset']>()
@@ -64,7 +66,9 @@ export class Badge {
   protected readonly hostClassName = createHostClassName(
     () =>
       `${
-        this.attached() ? badgeRootClassName : badgeClassName({ color: this.presetColor() })
+        this.attached()
+          ? badgeRootClassName
+          : badgeClassName({ color: this.presetColor(), size: this.size() })
       } ${this.classNames().root ?? ''}`,
   )
   protected readonly value = computed(() => {
@@ -77,8 +81,8 @@ export class Badge {
   )
   protected readonly indicatorClassName = computed(() =>
     this.dot()
-      ? `${badgeDotClassName} ${badgeDotColorClassName({ color: this.presetColor() })} ${this.classNames().indicator ?? ''}`
-      : `${badgeClassName({ color: this.presetColor() })} ${this.classNames().indicator ?? ''}`,
+      ? `${badgeDotClassName({ size: this.size() })} ${badgeDotColorClassName({ color: this.presetColor() })} ${this.classNames().indicator ?? ''}`
+      : `${badgeClassName({ color: this.presetColor(), size: this.size() })} ${this.classNames().indicator ?? ''}`,
   )
   protected readonly offsetTransform = computed(() => getBadgeOffsetTransform(this.offset()))
 }

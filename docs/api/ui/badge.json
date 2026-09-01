@@ -20,6 +20,12 @@
     },
     { "name": "count", "type": "framework-native content", "description": "显示内容。" },
     { "name": "color", "type": "BadgeColor", "description": "五种内置语义颜色或任意 CSS 颜色值。" },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "独立或附着指示器的尺寸。"
+    },
     { "name": "overflowCount", "type": "number", "description": "数字封顶。" },
     { "name": "showZero", "type": "boolean", "default": false, "description": "显示零值。" },
     {
@@ -40,7 +46,15 @@
     }
   ],
   "events": [],
-  "cssVariables": ["--badge-color", "--badge-color-foreground"],
+  "cssVariables": [
+    { "name": "--badge-height", "description": "当前 Badge 指示器高度。" },
+    { "name": "--badge-min-width", "description": "当前 Badge 指示器最小宽度。" },
+    { "name": "--badge-padding-inline", "description": "当前 Badge 指示器行内间距。" },
+    { "name": "--badge-font-size", "description": "当前 Badge 指示器字号。" },
+    { "name": "--badge-dot-size", "description": "当前小圆点直径。" },
+    { "name": "--badge-color", "description": "Badge 或小圆点背景色。" },
+    { "name": "--badge-color-foreground", "description": "Badge 前景色。" }
+  ],
   "demos": [
     {
       "id": "basic",
@@ -48,6 +62,12 @@
       "description": "展示数字附着、自定义内容附着和独立 BadgeDot 小圆点。"
     },
     { "id": "custom", "title": "自定义内容", "description": "直接显示自定义短内容。" },
+    { "id": "sizes", "title": "尺寸", "description": "对比 sm、md、lg 三种独立徽标和小圆点尺寸。" },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "覆盖徽标尺寸、字号、内边距、颜色和小圆点大小。"
+    },
     { "id": "zero", "title": "零值显示", "description": "使用 Switch 控制零值是否显示。" },
     { "id": "overflow", "title": "封顶数字", "description": "超过 overflowCount 后显示为 N+。" },
     { "id": "dot", "title": "小圆点", "description": "附着没有数字内容的小圆点。" },

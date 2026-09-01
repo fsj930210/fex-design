@@ -50,13 +50,17 @@ export function Badge({
     )
   if (children == null)
     return dot ? (
-      <BadgeDot {...props} className={classNames?.indicator} style={indicatorStyle} />
+      <BadgeDot
+        {...props}
+        className={cn(className, classNames?.indicator)}
+        style={{ ...style, ...indicatorStyle }}
+      />
     ) : (
       <PrimitiveBadge
         {...props}
         {...(count !== undefined ? { count } : {})}
-        className={classNames?.indicator}
-        style={indicatorStyle}
+        className={cn(className, classNames?.indicator)}
+        style={{ ...style, ...indicatorStyle }}
       />
     )
   return (

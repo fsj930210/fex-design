@@ -7,6 +7,16 @@ export const badgeExamples = {
     },
     { id: 'custom', title: '自定义内容', description: '直接显示自定义短内容。' },
     {
+      id: 'sizes',
+      title: '尺寸',
+      description: '对比 sm、md、lg 三种 Badge 与 BadgeDot 尺寸。',
+    },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '使用 CSS 变量覆盖徽标尺寸、字号、内边距、颜色和小圆点大小。',
+    },
+    {
       id: 'zero',
       title: '零值显示',
       description: '使用 Switch 控制 showZero：关闭时隐藏 0，开启时显示 0；示例自行提供附着容器。',
@@ -45,6 +55,16 @@ export const badgeExamples = {
       description: '展示数字附着、自定义内容附着，以及可独立使用的 BadgeDot 小圆点。',
     },
     { id: 'custom', title: '自定义内容', description: '直接显示自定义短内容。' },
+    {
+      id: 'sizes',
+      title: '尺寸',
+      description: '对比 sm、md、lg 三种独立 Badge 与小圆点尺寸。',
+    },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '使用 CSS 变量覆盖徽标尺寸、字号、内边距、颜色和小圆点大小。',
+    },
     {
       id: 'zero',
       title: '零值显示',

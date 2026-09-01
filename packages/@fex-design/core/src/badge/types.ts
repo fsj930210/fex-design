@@ -1,6 +1,7 @@
 export const badgePresetColors = ['primary', 'info', 'success', 'warning', 'danger'] as const
 export type BadgePresetColor = (typeof badgePresetColors)[number]
 export type BadgeColor = BadgePresetColor | (string & {})
+export type BadgeSize = 'sm' | 'md' | 'lg'
 export type BadgePlacement = 'start' | 'end'
 export type BadgeOffset = readonly [inline: number | string, block: number | string]
 
@@ -18,6 +19,7 @@ export function isBadgePresetColor(color: string | undefined): color is BadgePre
 
 export interface BadgeOptions<TContent = string | number> {
   color?: BadgeColor
+  size?: BadgeSize
   count?: TContent
   showZero?: boolean
   overflowCount?: number
@@ -25,6 +27,7 @@ export interface BadgeOptions<TContent = string | number> {
 
 export interface BadgeDotOptions {
   color?: BadgeColor
+  size?: BadgeSize
 }
 
 export interface BadgeAttachmentOptions {

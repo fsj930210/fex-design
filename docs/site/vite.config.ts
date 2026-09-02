@@ -56,17 +56,7 @@ export default defineConfig({
           if (
             !extensions[framework] ||
             !['primitive', 'ui'].includes(layer ?? '') ||
-            ![
-              'aspect-ratio',
-              'avatar',
-              'badge',
-              'button',
-              'card',
-              'kbd',
-              'separator',
-              'spinner',
-              'tag',
-            ].includes(component ?? '') ||
+            !/^[a-z][a-z-]*$/.test(component ?? '') ||
             !/^[a-z-]+$/.test(example ?? '')
           ) {
             response.statusCode = 400

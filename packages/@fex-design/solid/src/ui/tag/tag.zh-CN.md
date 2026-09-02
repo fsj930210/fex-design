@@ -24,6 +24,7 @@
 | colors        | 五种语义色以及自定义 CSS 颜色。                    |
 | dynamic       | 使用业务状态添加、删除标签。                       |
 | css-variables | 实例级语义颜色变量覆盖。                           |
+| direction     | 原生 LTR、RTL 方向以及关闭按钮的逻辑位置。          |
 | semantic-styles | UI 专属 root、close 结构化样式。               |
 
 ## Tag API
@@ -77,4 +78,3 @@ Solid 使用 `children?: JSX.Element`; `closeIcon?: JSX.Element`。这是框架�
 ## 可访问性
 
 自动生成的关闭按钮默认无障碍名称为 `Close`。如果上下文无法明确指出目标标签，应提供更具体的名称。删除状态由业务维护，删除后应把焦点恢复到可预测位置。
-

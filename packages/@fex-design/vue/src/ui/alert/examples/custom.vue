@@ -1,0 +1,2 @@
+<script setup lang="ts">import { Alert } from '@fex-design/vue/ui/alert'; import { StarIcon } from '@fex-design/vue/icon/star'</script>
+<template><div class="w-full max-w-sm"><Alert type="success" show-icon closable title="Long alert title wraps to multiple lines when the alert container is narrow enough."><template #icon><StarIcon /></template><template #action><button class="underline">Action</button></template></Alert></div></template>

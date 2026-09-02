@@ -1,50 +1,43 @@
 # Alert Primitive
 
-## 用途
+Alert communicates success, informational, warning, or error feedback inside the current page. The Primitive layer supplies styled structural parts and leaves icon selection, closing state, and business behavior to composition.
 
-`Alert` 用于展示需要用户注意的状态信息。Primitive 层只提供结构、slot、可访问语义和默认样式，不处理关闭、请求或业务状态。
-
-## 导入路径
+## Import
 
 ```tsx
-import { Alert, AlertDescription, AlertTitle } from '@fex-design/react/primitive/alert'
+import { Alert, AlertAction, AlertDescription, AlertIcon, AlertTitle } from '@fex-design/react/primitive/alert'
 ```
 
-## 核心示例
+## Examples
 
-```tsx
-import { Alert, AlertDescription, AlertTitle } from '@fex-design/react/primitive/alert'
+The examples cover basic composition, four semantic types, three variants, a composed close action, a copy-ready looping announcement, custom icon/action content, and LTR/RTL.
 
-export function Demo() {
-  return (
-    <Alert variant="warning">
-      <AlertTitle>配置未完成</AlertTitle>
-      <AlertDescription>请补充必要字段后再提交。</AlertDescription>
-    </Alert>
-  )
-}
-```
+## Components
 
-## Props
+### Alert
 
-| 参数名      | 类型                                                             | 默认值      | 必填 | 说明                             |
-| ----------- | ---------------------------------------------------------------- | ----------- | ---- | -------------------------------- |
-| `variant`   | `'default' \| 'destructive' \| 'success' \| 'warning' \| 'info'` | `'default'` | 否   | 提示语义样式。                   |
-| `className` | `string`                                                         | `undefined` | 否   | 合并到根元素或子 slot 的 class。 |
-| `children`  | `ReactNode`                                                      | `undefined` | 否   | 提示内容。                       |
+Inherits native `div` attributes, events, `style`, `className`, and `ref`. `type` selects `success | info | warning | error`; `variant` selects `filled | outlined | solid`.
 
-## 事件/回调
+### AlertIcon
 
-继承对应原生元素事件，例如 `onClick`、`onMouseEnter`。组件本身不定义业务回调。
+Inherits native `span` attributes. It only establishes icon size and alignment and never chooses an icon from `type`.
 
-## 受控/非受控
+### AlertTitle
 
-无内部状态，不区分受控和非受控。
+Inherits native `div` attributes and identifies the primary message.
 
-## 注意事项
+### AlertDescription
 
-根元素默认带 `role="alert"`。如果提示不需要即时被辅助技术朗读，可按场景覆盖 `role`。
+Inherits native `div` attributes and contains supporting text, links, or richer content.
 
-## 常见组合
+### AlertAction
 
-可与图标、操作区和文本 slot 组合使用：`AlertTitle` 放标题，`AlertDescription` 放说明，`AlertAction` 放右上角操作。
+Inherits native `div` attributes and positions user-provided actions. Primitive does not implement close state.
+
+## Styling
+
+Use `--alert-color`, `--alert-color-foreground`, `--alert-color-background`, and `--alert-color-border` for an instance. Type-level overrides use `--alert-color-{type}` plus `-foreground`, `-background`, and `-border`. Stable parts are exposed through `data-slot`.
+
+## Accessibility
+
+The root defaults to `role="alert"`; override it for content that should not be announced immediately. Decorative icons should use `aria-hidden="true"`. Interactive content belongs in `AlertAction` and must retain an accessible name and visible focus state.

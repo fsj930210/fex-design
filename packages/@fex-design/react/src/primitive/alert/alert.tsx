@@ -1,22 +1,31 @@
+import type { AlertOptions } from '@fex-design/core/alert/types'
 import {
   alertActionClassName,
   alertClassName,
   alertDescriptionClassName,
+  alertIconClassName,
   alertTitleClassName,
-  type AlertStyleProps,
 } from '@fex-design/styles/alert'
 import { cn } from '@fex/utils'
 import type { ComponentProps } from 'react'
 
-export function Alert({ className, variant, ...props }: ComponentProps<'div'> & AlertStyleProps) {
+export type AlertProps = ComponentProps<'div'> & AlertOptions
+
+export function Alert({ className, type = 'info', variant = 'filled', ...props }: AlertProps) {
   return (
     <div
       data-slot="alert"
       role="alert"
-      className={cn(alertClassName({ variant }), className)}
+      className={cn(alertClassName({ type, variant }), className)}
       {...props}
     />
   )
+}
+
+export type AlertIconProps = ComponentProps<'span'>
+
+export function AlertIcon({ className, ...props }: AlertIconProps) {
+  return <span data-slot="alert-icon" className={cn(alertIconClassName, className)} {...props} />
 }
 
 export function AlertTitle({ className, ...props }: ComponentProps<'div'>) {

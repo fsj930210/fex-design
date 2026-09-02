@@ -9,7 +9,7 @@ import { Badge } from '@fex-design/vue/primitive/badge'
       :dir="dir"
       class="grid justify-items-center gap-2"
     >
-      <span>{{ dir.toUpperCase() }}</span
+      <span>{{ dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</span
       ><span class="relative inline-flex"
         ><span class="block size-10 rounded bg-muted-background" /><Badge
           :count="5"

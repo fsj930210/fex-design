@@ -24,6 +24,7 @@
 | colors        | 五种语义色以及自定义 CSS 颜色。                    |
 | dynamic       | 使用业务状态添加、删除标签。                       |
 | css-variables | 实例级语义颜色变量覆盖。                           |
+| direction     | 原生 LTR、RTL 方向以及关闭按钮的逻辑位置。          |
 | semantic-styles | UI 专属 root、close 结构化样式。               |
 
 ## Tag API

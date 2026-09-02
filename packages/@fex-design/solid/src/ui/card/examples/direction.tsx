@@ -8,16 +8,22 @@ export function DirectionExample() {
         {(dir) => (
           <Card
             dir={dir}
-            title={dir.toUpperCase()}
-            description="Header 与 Footer 按逻辑方向排列。"
-            extra={<button class="rounded-md border px-3 py-1.5 text-sm">操作</button>}
+            title={dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}
+            description={
+              dir === 'ltr'
+                ? '标题与操作按逻辑方向排列。'
+                : 'يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي.'
+            }
+            extra={<button class="rounded-md border px-3 py-1.5 text-sm">{dir === 'ltr' ? '操作' : 'إجراء'}</button>}
             footer={
               <button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">
-                保存
+                {dir === 'ltr' ? '保存' : 'حفظ'}
               </button>
             }
           >
-            内容区域保持可读顺序。
+            {dir === 'ltr'
+              ? '内容区域保持中文阅读顺序。'
+              : 'يحافظ المحتوى على ترتيب القراءة العربية.'}
           </Card>
         )}
       </For>

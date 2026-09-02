@@ -13,7 +13,6 @@ export function CloseIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
-      aria-hidden="true"
       {...props}
     >
       <path d="M18 6 6 18" />

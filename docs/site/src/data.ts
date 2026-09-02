@@ -1,5 +1,6 @@
 export {
   componentApis,
+  componentDocuments,
   componentExamples,
   isDocumentedComponent,
   type DocumentedComponent,

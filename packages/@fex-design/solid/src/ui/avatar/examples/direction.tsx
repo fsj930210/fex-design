@@ -4,7 +4,7 @@ export function DirectionExample() {
   return (
     <div class="flex items-center gap-8">
       <div dir="ltr">
-        <p>LTR</p>
+        <p>LTR · 中文示例</p>
         <AvatarGroup>
           <Avatar src="https://github.com/shadcn.png" fallback="FX" />
           <Avatar src="https://github.com/shadcn.png" fallback="FX" />
@@ -12,7 +12,7 @@ export function DirectionExample() {
         </AvatarGroup>
       </div>
       <div dir="rtl">
-        <p>RTL</p>
+        <p>RTL · مثال عربي</p>
         <AvatarGroup>
           <Avatar src="https://github.com/shadcn.png" fallback="FX" />
           <Avatar src="https://github.com/shadcn.png" fallback="FX" />

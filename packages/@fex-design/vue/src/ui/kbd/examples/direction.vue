@@ -9,7 +9,7 @@ import { Kbd, KbdGroup } from '@fex-design/vue/ui/kbd'
       :dir="dir"
       class="grid gap-3 rounded-lg border p-4"
     >
-      <strong>{{ dir.toUpperCase() }}</strong
+      <strong>{{ dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</strong
       ><KbdGroup><Kbd>Ctrl</Kbd><Kbd>+</Kbd><Kbd>K</Kbd></KbdGroup>
     </div>
   </div>

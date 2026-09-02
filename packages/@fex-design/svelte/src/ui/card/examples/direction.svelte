@@ -8,13 +8,17 @@
   {#each directions as dir (dir)}
     <Card
       {dir}
-      title={dir.toUpperCase()}
-      description="Header 与 Footer 按逻辑方向排列。"
+      title={dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}
+      description={dir === 'ltr'
+        ? '标题与操作按逻辑方向排列。'
+        : 'يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي.'}
       class="w-full"
     >
-      {#snippet children()}内容区域保持可读顺序。{/snippet}
-      {#snippet extra()}<button class="rounded-md border px-3 py-1.5 text-sm">操作</button>{/snippet}
-      {#snippet footer()}<button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">保存</button>{/snippet}
+      {#snippet children()}{dir === 'ltr'
+          ? '内容区域保持中文阅读顺序。'
+          : 'يحافظ المحتوى على ترتيب القراءة العربية.'}{/snippet}
+      {#snippet extra()}<button class="rounded-md border px-3 py-1.5 text-sm">{dir === 'ltr' ? '操作' : 'إجراء'}</button>{/snippet}
+      {#snippet footer()}<button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">{dir === 'ltr' ? '保存' : 'حفظ'}</button>{/snippet}
     </Card>
   {/each}
 </div>

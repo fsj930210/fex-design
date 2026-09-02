@@ -1,7 +1,7 @@
-<ng-template #extra><button class="rounded-md border px-3 py-1.5 text-sm">操作</button></ng-template
+<ng-template #extra><button aria-label="更多操作" class="rounded-md border px-3 py-1.5 text-sm">⋯</button></ng-template
 ><ng-template #footer
   ><button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">
-    保存
+    ✓
   </button></ng-template
 >
 <div class="grid w-full gap-6 sm:grid-cols-2">
@@ -9,12 +9,12 @@
   <div
     card
     [attr.dir]="dir"
-    [title]="dir.toUpperCase()"
-    description="Header 与 Footer 按逻辑方向排列。"
+    [title]="dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'"
+    [description]="dir === 'ltr' ? '标题与操作按逻辑方向排列。' : 'يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي.'"
     [extra]="extraTemplate()"
     [footer]="footerTemplate()"
   >
-    内容区域保持可读顺序。
+    {{ dir === 'ltr' ? '内容区域保持中文阅读顺序。' : 'يحافظ المحتوى على ترتيب القراءة العربية.' }}
   </div>
   }
 </div>

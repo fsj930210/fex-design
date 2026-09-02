@@ -10,8 +10,8 @@ const Item = (props: { dir: 'ltr' | 'rtl'; label: string }) => (
 export function Direction() {
   return (
     <div class="flex items-center justify-center gap-12">
-      <Item dir="ltr" label="LTR" />
-      <Item dir="rtl" label="RTL" />
+      <Item dir="ltr" label="LTR · 中文示例" />
+      <Item dir="rtl" label="RTL · مثال عربي" />
     </div>
   )
 }

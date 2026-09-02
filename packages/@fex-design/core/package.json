@@ -6,6 +6,7 @@
   "exports": {
     "./collection/split-overflow-items": "./src/collection/split-overflow-items.ts",
     "./avatar/types": "./src/avatar/types.ts",
+    "./alert/types": "./src/alert/types.ts",
     "./image/types": "./src/image/types.ts",
     "./image/create-image-loading-controller": "./src/image/create-image-loading-controller.ts",
     "./search/filter-by-search-text": "./src/search/filter-by-search-text.ts",

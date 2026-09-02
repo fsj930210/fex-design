@@ -13,7 +13,6 @@ export function MinusIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      aria-hidden="true"
       {...props}
     >
       <path d="M5 12h14" />

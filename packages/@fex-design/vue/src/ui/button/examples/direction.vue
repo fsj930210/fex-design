@@ -10,16 +10,16 @@ import { Button, ButtonGroup } from '@fex-design/vue/ui/button'
       :key="direction"
       class="grid gap-3 rounded-lg border p-4"
     >
-      <strong>{{ direction.toUpperCase() }}</strong>
+      <strong>{{ direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</strong>
       <div class="flex flex-wrap gap-3">
         <Button :dir="direction"
-          ><template #icon><PlusIcon /></template>Start icon</Button
+          ><template #icon><PlusIcon /></template>{{ direction === 'ltr' ? '前置图标' : 'أيقونة البداية' }}</Button
         ><Button :dir="direction" icon-placement="end"
-          ><template #icon><PlusIcon /></template>End icon</Button
+          ><template #icon><PlusIcon /></template>{{ direction === 'ltr' ? '后置图标' : 'أيقونة النهاية' }}</Button
         >
       </div>
       <ButtonGroup :dir="direction"
-        ><Button>First</Button><Button>Middle</Button><Button>Last</Button></ButtonGroup
+        ><Button>{{ direction === 'ltr' ? '第一项' : 'الأول' }}</Button><Button>{{ direction === 'ltr' ? '中间项' : 'الأوسط' }}</Button><Button>{{ direction === 'ltr' ? '最后一项' : 'الأخير' }}</Button></ButtonGroup
       >
     </section>
   </div>

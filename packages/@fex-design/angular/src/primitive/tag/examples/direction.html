@@ -1,0 +1,14 @@
+<div class="grid w-full gap-6 sm:grid-cols-2">
+  @for (direction of ['ltr', 'rtl']; track direction) {
+    <section [attr.dir]="direction" class="grid gap-3 rounded-lg border p-4">
+      <strong>{{ direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</strong>
+      <div class="flex flex-wrap gap-2">
+        <span tag color="info">{{ direction === 'ltr' ? '状态标签' : 'علامة الحالة' }}</span>
+        <span tag color="primary">
+          {{ direction === 'ltr' ? '可关闭标签' : 'وسم قابل للإغلاق' }}
+          <button tagClose [attr.aria-label]="'删除' + direction.toUpperCase() + '标签'"></button>
+        </span>
+      </div>
+    </section>
+  }
+</div>

@@ -4,13 +4,13 @@ import { Avatar, AvatarGroup } from '@fex-design/vue/ui/avatar'
 <template>
   <div class="flex items-center gap-8">
     <div dir="ltr">
-      <p>LTR</p>
+      <p>LTR · 中文示例</p>
       <AvatarGroup
         ><Avatar v-for="i in 3" :key="i" src="https://github.com/shadcn.png" fallback="FX"
       /></AvatarGroup>
     </div>
     <div dir="rtl">
-      <p>RTL</p>
+      <p>RTL · مثال عربي</p>
       <AvatarGroup
         ><Avatar v-for="i in 3" :key="i" src="https://github.com/shadcn.png" fallback="FX"
       /></AvatarGroup>

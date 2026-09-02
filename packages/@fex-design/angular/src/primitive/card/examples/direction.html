@@ -2,13 +2,13 @@
   @for (dir of directions; track dir) {
   <div card [attr.dir]="dir">
     <div cardHeader>
-      <div cardTitle>{{ dir.toUpperCase() }}</div>
-      <div cardDescription>Header 与 Footer 按逻辑方向排列。</div>
-      <div cardExtra><button class="rounded-md border px-3 py-1.5 text-sm">操作</button></div>
+      <div cardTitle>{{ dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</div>
+      <div cardDescription>{{ dir === 'ltr' ? '标题与操作按逻辑方向排列。' : 'يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي.' }}</div>
+      <div cardExtra><button class="rounded-md border px-3 py-1.5 text-sm">{{ dir === 'ltr' ? '操作' : 'إجراء' }}</button></div>
     </div>
-    <div cardContent>内容区域保持可读顺序。</div>
+    <div cardContent>{{ dir === 'ltr' ? '内容区域保持中文阅读顺序。' : 'يحافظ المحتوى على ترتيب القراءة العربية.' }}</div>
     <div cardFooter>
-      <button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">保存</button>
+      <button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">{{ dir === 'ltr' ? '保存' : 'حفظ' }}</button>
     </div>
   </div>
   }

@@ -5,19 +5,19 @@ export function DirectionDemo() {
     <div className="grid w-full gap-4">
       <div className="grid gap-4">
         <div dir="ltr" className="grid gap-2">
-          <strong>LTR</strong>
+          <strong>LTR · 中文示例</strong>
           <div className="flex items-center gap-2">
-            <span>Start</span>
+            <span>开始</span>
             <Separator className="flex-1" />
-            <span>End</span>
+            <span>结束</span>
           </div>
         </div>
         <div dir="rtl" className="grid gap-2">
-          <strong>RTL</strong>
+          <strong>RTL · مثال عربي</strong>
           <div className="flex items-center gap-2">
-            <span>Start</span>
+            <span>البداية</span>
             <Separator className="flex-1" />
-            <span>End</span>
+            <span>النهاية</span>
           </div>
         </div>
       </div>

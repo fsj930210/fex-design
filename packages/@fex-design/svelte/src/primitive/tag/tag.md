@@ -24,6 +24,7 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 | colors        | Five semantic colors and custom CSS colors.                   |
 | dynamic       | Adding and removing tags with application-owned state.        |
 | css-variables | Instance-level semantic color overrides.                      |
+| direction     | Native LTR and RTL direction with logical close placement.    |
 
 ## Tag API
 

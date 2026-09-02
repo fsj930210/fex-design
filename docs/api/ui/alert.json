@@ -1,0 +1,44 @@
+{
+  "name": "Alert",
+  "slug": "alert",
+  "layer": "ui",
+  "status": "stable",
+  "description": "在 Primitive Alert 上增加内置状态图标、可关闭行为和结构化样式。",
+  "importPath": { "react": "@fex-design/react/ui/alert", "vue": "@fex-design/vue/ui/alert", "solid": "@fex-design/solid/ui/alert", "svelte": "@fex-design/svelte/ui/alert", "angular": "@fex-design/angular/ui/alert" },
+  "props": [
+    { "name": "type", "type": "'success' | 'info' | 'warning' | 'error'", "default": "info", "description": "反馈语义并决定内置图标。", "editor": "enum", "options": ["success", "info", "warning", "error"] },
+    { "name": "variant", "type": "'filled' | 'outlined' | 'solid'", "default": "filled", "description": "视觉变体。", "editor": "enum", "options": ["filled", "outlined", "solid"] },
+    { "name": "title", "type": "FrameworkContent", "description": "标题内容。" },
+    { "name": "description", "type": "FrameworkContent", "description": "描述内容。" },
+    { "name": "showIcon", "type": "boolean", "default": "false", "description": "显示当前 type 的内置图标。", "editor": "boolean" },
+    { "name": "icon", "type": "FrameworkNode", "description": "showIcon 为 true 时替换内置图标。" },
+    { "name": "action", "type": "FrameworkNode", "description": "操作区内容。" },
+    { "name": "closable", "type": "boolean", "default": "false", "description": "显示关闭按钮并在点击后隐藏 Alert。", "editor": "boolean" },
+    { "name": "closeIcon", "type": "FrameworkNode", "description": "替换默认关闭图标。" },
+    { "name": "classNames", "type": "AlertClassNames", "description": "按语义区域设置类名。" },
+    { "name": "styles", "type": "AlertStyles", "description": "按语义区域设置行内样式。" }
+  ],
+  "events": [{ "name": "close", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "点击关闭按钮时触发；阻止默认行为可阻止隐藏。" }],
+  "cssVariables": [
+    { "name": "--alert-color", "description": "当前实例主色。" },
+    { "name": "--alert-color-foreground", "description": "solid 前景色。" },
+    { "name": "--alert-color-background", "description": "filled 背景色。" },
+    { "name": "--alert-color-border", "description": "边框色。" },
+    { "name": "--alert-color-{success|info|warning|error}{|-foreground|-background|-border}", "description": "覆盖对应反馈类型的组件颜色。" },
+    { "name": "--alert-radius", "description": "圆角。" },
+    { "name": "--alert-padding-block", "description": "块轴内边距。" },
+    { "name": "--alert-padding-inline", "description": "行轴内边距。" },
+    { "name": "--alert-content-gap", "description": "图标、内容和操作区间距。" },
+    { "name": "--alert-icon-size", "description": "状态图标尺寸。" }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基本展示" }, { "id": "types", "title": "Type" }, { "id": "variants", "title": "Variant" }, { "id": "closable", "title": "可关闭" }, { "id": "carousel", "title": "循环公告" }, { "id": "custom", "title": "自定义图标与操作" }, { "id": "direction", "title": "LTR 与 RTL" }, { "id": "semantic-styles", "title": "语义化样式" }
+  ],
+  "frameworks": {
+    "react": { "typeOverrides": { "FrameworkNode": "ReactNode", "FrameworkContent": "ReactNode" }, "slots": [], "events": [{ "name": "onClose", "parameters": [{ "name": "event", "type": "React.MouseEvent<HTMLButtonElement>" }], "description": "关闭按钮点击事件。" }] },
+    "vue": { "omitProps": ["icon", "action", "closeIcon"], "typeOverrides": { "FrameworkNode": "VNodeChild", "FrameworkContent": "string" }, "slots": [{ "name": "title", "description": "覆盖标题 prop 的复杂内容。" }, { "name": "default", "description": "覆盖 description prop 的复杂内容。" }, { "name": "icon", "description": "自定义图标。" }, { "name": "action", "description": "操作区。" }, { "name": "closeIcon", "description": "关闭图标。" }], "events": [{ "name": "close", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "关闭按钮点击事件。" }] },
+    "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element", "FrameworkContent": "JSX.Element" }, "slots": [], "events": [{ "name": "onClose", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "关闭按钮点击事件。" }] },
+    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet", "FrameworkContent": "Snippet" }, "slots": [], "events": [{ "name": "onClose", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "关闭按钮点击事件。" }] },
+    "angular": { "omitProps": ["icon", "action", "closeIcon"], "typeOverrides": { "FrameworkNode": "string", "FrameworkContent": "string" }, "slots": [{ "name": "[alertIcon]", "description": "自定义图标投影。" }, { "name": "[alertTitle]", "description": "覆盖 title input 的复杂标题。" }, { "name": "default", "description": "覆盖 description input 的复杂内容。" }, { "name": "[alertAction]", "description": "操作区投影。" }, { "name": "[alertCloseIcon]", "description": "关闭图标投影。" }], "slotLabel": "Content projection", "events": [{ "name": "close", "parameters": [{ "name": "event", "type": "MouseEvent" }], "description": "关闭按钮点击事件。" }] }
+  }
+}

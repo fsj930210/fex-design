@@ -1,22 +1,28 @@
 <script setup lang="ts">
-import { alertClassName, type AlertStyleProps } from '@fex-design/styles/alert'
+import type { AlertOptions } from '@fex-design/core/alert/types'
+import { alertClassName } from '@fex-design/styles/alert'
 import { cn } from '@fex/utils'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(
-  defineProps<{ class?: string | undefined; variant?: AlertStyleProps['variant'] }>(),
+  defineProps<{
+    class?: string | undefined
+    type?: AlertOptions['type']
+    variant?: AlertOptions['variant']
+  }>(),
   {
-    variant: 'default',
+    type: 'info',
+    variant: 'filled',
   },
 )
 </script>
 
 <template>
   <div
-    v-bind="$attrs"
     data-slot="alert"
     role="alert"
-    :class="cn(alertClassName({ variant: props.variant }), props.class)"
+    v-bind="$attrs"
+    :class="cn(alertClassName({ type: props.type, variant: props.variant }), props.class)"
   >
     <slot />
   </div>

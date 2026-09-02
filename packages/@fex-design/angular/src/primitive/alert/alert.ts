@@ -1,29 +1,42 @@
+import type { AlertOptions } from '@fex-design/core/alert/types'
 import {
   alertActionClassName,
   alertClassName,
   alertDescriptionClassName,
+  alertIconClassName,
   alertTitleClassName,
-  type AlertStyleProps,
 } from '@fex-design/styles/alert'
 import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { createHostClassName } from '../../signals/host-class'
 
 @Component({
-  selector: 'fex-alert',
+  selector: 'div[alert]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', 'data-slot': 'alert', role: 'alert' },
   template: '<ng-content />',
 })
 export class Alert {
-  readonly variant = input<AlertStyleProps['variant']>('default')
+  readonly type = input<NonNullable<AlertOptions['type']>>('info')
+  readonly variant = input<NonNullable<AlertOptions['variant']>>('filled')
   protected readonly hostClassName = createHostClassName(() =>
-    alertClassName({ variant: this.variant() }),
+    alertClassName({ type: this.type(), variant: this.variant() }),
   )
 }
 
 @Component({
-  selector: 'fex-alert-title',
+  selector: 'span[alertIcon]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'alert-icon' },
+  template: '<ng-content />',
+})
+export class AlertIcon {
+  protected readonly hostClassName = createHostClassName(alertIconClassName)
+}
+
+@Component({
+  selector: 'div[alertTitle]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -37,7 +50,7 @@ export class AlertTitle {
 }
 
 @Component({
-  selector: 'fex-alert-description',
+  selector: 'div[alertDescription]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -51,7 +64,7 @@ export class AlertDescription {
 }
 
 @Component({
-  selector: 'fex-alert-action',
+  selector: 'div[alertAction]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

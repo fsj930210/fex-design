@@ -1,26 +1,11 @@
-import type { Component } from 'solid-js'
-
-export interface DocumentMeta {
-  title: string
-  description: string
-}
-export interface ComponentDocumentModule {
-  default: Component
-  frontmatter: DocumentMeta
-}
-
-const documents = import.meta.glob('../../content/components/*.mdx', { eager: true }) as Record<
-  string,
-  ComponentDocumentModule
->
+import { componentDocuments, type DocumentedComponent } from './data'
 
 export function getComponentDocument(slug: string) {
-  return Object.entries(documents).find(([path]) => path.endsWith(`/${slug}.mdx`))?.[1]
+  return slug in componentDocuments
+    ? componentDocuments[slug as DocumentedComponent]
+    : undefined
 }
 
 export function getDocumentSlugs() {
-  return Object.keys(documents)
-    .map((path) => path.match(/\/([^/]+)\.mdx$/)?.[1])
-    .filter((slug): slug is string => Boolean(slug))
-    .sort()
+  return Object.keys(componentDocuments) as DocumentedComponent[]
 }

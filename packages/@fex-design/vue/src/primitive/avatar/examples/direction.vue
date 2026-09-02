@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@fex-design/vu
 <template>
   <div class="flex items-center gap-8">
     <div dir="ltr">
-      <p class="mb-2 text-xs text-muted-foreground">LTR</p>
+      <p class="mb-2 text-xs text-muted-foreground">LTR · 中文示例</p>
       <AvatarGroup
         ><Avatar v-for="i in 3" :key="i"
           ><AvatarImage src="https://github.com/shadcn.png" alt="shadcn avatar" /><AvatarFallback
@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@fex-design/vu
       >
     </div>
     <div dir="rtl">
-      <p class="mb-2 text-xs text-muted-foreground">RTL</p>
+      <p class="mb-2 text-xs text-muted-foreground">RTL · مثال عربي</p>
       <AvatarGroup
         ><Avatar v-for="i in 3" :key="i"
           ><AvatarImage src="https://github.com/shadcn.png" alt="shadcn avatar" /><AvatarFallback

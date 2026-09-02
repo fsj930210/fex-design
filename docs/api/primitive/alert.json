@@ -1,0 +1,123 @@
+{
+  "name": "Alert",
+  "slug": "alert",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "提供 styled Alert 根节点以及可组合的图标、标题、描述和操作区。",
+  "importPath": { "react": "@fex-design/react/primitive/alert", "vue": "@fex-design/vue/primitive/alert", "solid": "@fex-design/solid/primitive/alert", "svelte": "@fex-design/svelte/primitive/alert", "angular": "@fex-design/angular/primitive/alert" },
+  "props": [
+    { "name": "type", "type": "'success' | 'info' | 'warning' | 'error'", "default": "info", "description": "反馈语义。", "editor": "enum", "options": ["success", "info", "warning", "error"] },
+    { "name": "variant", "type": "'filled' | 'outlined' | 'solid'", "default": "filled", "description": "视觉变体。", "editor": "enum", "options": ["filled", "outlined", "solid"] },
+    { "name": "children", "type": "FrameworkNode", "description": "组合内容。" }
+  ],
+  "events": [],
+  "cssVariables": [
+    { "name": "--alert-color", "description": "当前实例主色。" },
+    { "name": "--alert-color-foreground", "description": "solid 前景色。" },
+    { "name": "--alert-color-background", "description": "filled 背景色。" },
+    { "name": "--alert-color-border", "description": "边框色。" },
+    { "name": "--alert-color-{success|info|warning|error}{|-foreground|-background|-border}", "description": "覆盖对应反馈类型的组件颜色。" }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基本展示" }, { "id": "types", "title": "Type" }, { "id": "variants", "title": "Variant" }, { "id": "closable", "title": "可关闭" }, { "id": "carousel", "title": "循环公告" }, { "id": "custom", "title": "自定义图标与操作" }, { "id": "direction", "title": "LTR 与 RTL" }
+  ],
+  "components": [
+    {
+      "name": "Alert",
+      "slug": "alert",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "继承原生 div 属性和事件的提示根节点。",
+      "importPath": { "react": "@fex-design/react/primitive/alert", "vue": "@fex-design/vue/primitive/alert", "solid": "@fex-design/solid/primitive/alert", "svelte": "@fex-design/svelte/primitive/alert", "angular": "@fex-design/angular/primitive/alert" },
+      "props": [{ "name": "type", "type": "AlertType", "default": "info", "description": "反馈语义。" }, { "name": "variant", "type": "AlertVariant", "default": "filled", "description": "视觉变体。" }, { "name": "children", "type": "FrameworkNode", "description": "组合内容。" }],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "组合内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "内容投影。" }], "slotLabel": "Content projection" }
+      }
+    },
+    {
+      "name": "AlertIcon",
+      "slug": "alert-icon",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "继承原生 span 属性的图标布局容器。",
+      "importPath": { "react": "@fex-design/react/primitive/alert", "vue": "@fex-design/vue/primitive/alert", "solid": "@fex-design/solid/primitive/alert", "svelte": "@fex-design/svelte/primitive/alert-icon", "angular": "@fex-design/angular/primitive/alert" },
+      "props": [{ "name": "children", "type": "FrameworkNode", "description": "图标内容。" }],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "图标内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "图标内容投影。" }], "slotLabel": "Content projection" }
+      }
+    },
+    {
+      "name": "AlertTitle",
+      "slug": "alert-title",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "继承原生 div 属性的标题区域。",
+      "importPath": { "react": "@fex-design/react/primitive/alert", "vue": "@fex-design/vue/primitive/alert", "solid": "@fex-design/solid/primitive/alert", "svelte": "@fex-design/svelte/primitive/alert-title", "angular": "@fex-design/angular/primitive/alert" },
+      "props": [{ "name": "children", "type": "FrameworkNode", "description": "标题内容。" }],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "标题内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "标题内容投影。" }], "slotLabel": "Content projection" }
+      }
+    },
+    {
+      "name": "AlertDescription",
+      "slug": "alert-description",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "继承原生 div 属性的描述区域。",
+      "importPath": { "react": "@fex-design/react/primitive/alert", "vue": "@fex-design/vue/primitive/alert", "solid": "@fex-design/solid/primitive/alert", "svelte": "@fex-design/svelte/primitive/alert-description", "angular": "@fex-design/angular/primitive/alert" },
+      "props": [{ "name": "children", "type": "FrameworkNode", "description": "描述内容。" }],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "描述内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "描述内容投影。" }], "slotLabel": "Content projection" }
+      }
+    },
+    {
+      "name": "AlertAction",
+      "slug": "alert-action",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "继承原生 div 属性的操作区域。",
+      "importPath": { "react": "@fex-design/react/primitive/alert", "vue": "@fex-design/vue/primitive/alert", "solid": "@fex-design/solid/primitive/alert", "svelte": "@fex-design/svelte/primitive/alert-action", "angular": "@fex-design/angular/primitive/alert" },
+      "props": [{ "name": "children", "type": "FrameworkNode", "description": "操作内容。" }],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "操作内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "操作内容投影。" }], "slotLabel": "Content projection" }
+      }
+    }
+  ],
+  "frameworks": {
+    "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+    "vue": { "omitProps": ["children"], "typeOverrides": { "FrameworkNode": "VNodeChild" }, "slots": [{ "name": "default", "description": "内容。" }] },
+    "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+    "angular": { "omitProps": ["children"], "typeOverrides": { "FrameworkNode": "never" }, "slots": [{ "name": "default", "description": "内容投影。" }], "slotLabel": "Content projection" }
+  }
+}

@@ -1,0 +1,32 @@
+@if (visible()) {
+  @if (showIcon()) {
+    <span aria-hidden="true" data-slot="alert-icon" [class]="alertIconClassName + ' ' + (classNames().icon ?? '')" [style]="styles().icon">
+      @if (projectedIcon()) { <ng-content select="[alertIcon]" /> }
+      @else if (type() === 'success') { <circle-check-icon /> }
+      @else if (type() === 'warning') { <circle-warning-icon /> }
+      @else if (type() === 'error') { <circle-error-icon /> }
+      @else { <circle-info-icon /> }
+    </span>
+  }
+  <div data-slot="alert-content" [class]="alertContentClassName + ' ' + (classNames().content ?? '')" [style]="styles().content">
+    @if (title() || projectedTitle()) {
+      <div data-slot="alert-title" [class]="alertTitleClassName + ' ' + (classNames().title ?? '')" [style]="styles().title">
+        @if (projectedTitle()) { <ng-content select="[alertTitle]" /> } @else { {{ title() }} }
+      </div>
+    }
+    @if (description()) {
+      <div data-slot="alert-description" [class]="alertDescriptionClassName + ' ' + (classNames().description ?? '')" [style]="styles().description">{{ description() }}</div>
+    } @else {
+      <div data-slot="alert-description" [class]="alertDescriptionClassName + ' ' + (classNames().description ?? '')" [style]="styles().description"><ng-content /></div>
+    }
+  </div>
+  @if (projectedAction()) {
+    <div data-slot="alert-action" [class]="alertActionClassName + ' ' + (classNames().action ?? '')" [style]="styles().action"><ng-content select="[alertAction]" /></div>
+  }
+  @if (closable()) {
+    <button type="button" aria-label="Close alert" data-slot="alert-close" [class]="alertCloseClassName + ' ' + (classNames().close ?? '')" [style]="styles().close" (click)="closeAlert($event)">
+      @if (projectedCloseIcon()) { <ng-content select="[alertCloseIcon]" /> }
+      @else { <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg> }
+    </button>
+  }
+}

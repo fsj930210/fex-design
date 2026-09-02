@@ -13,7 +13,6 @@ export function PlusIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
-      aria-hidden="true"
       {...props}
     >
       <path d="M5 12h14" />

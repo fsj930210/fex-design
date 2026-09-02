@@ -13,17 +13,6 @@ UI 不增加能力，直接复用 Primitive。
 
 Kbd 用于展示键盘按键、快捷键组合和按钮对应的快捷键提示。
 
-## Composition
-
-使用下面的组合方式构建 `Kbd` 和 `KbdGroup`：
-
-```text
-Kbd
-KbdGroup
-├── Kbd
-└── Kbd
-```
-
 ## 示例
 
 示例展示 Kbd 的基础用法、按键组合、按钮快捷键以及 LTR/RTL 书写方向。
@@ -32,5 +21,25 @@ KbdGroup
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Kbd 与 KbdGroup 的组件 API。" />
-<ApiSection layer="ui" title="UI API" description="UI Kbd 与 KbdGroup 的组件 API。" />
+<ApiSection layer="primitive" title="Primitive API" description="Kbd 与 KbdGroup 的组件 API。">
+  <ApiComposition layer="primitive">
+    ```text
+    Kbd
+    KbdGroup
+    ├── Kbd
+    └── Kbd
+    ```
+  </ApiComposition>
+</ApiSection>
+<ApiSection layer="ui" title="UI API" description="UI Kbd 与 KbdGroup 的组件 API。">
+  <ApiComposition layer="ui">
+    UI 直接重导出 Primitive，因此使用相同组合结构。
+
+    ```text
+    Kbd
+    KbdGroup
+    ├── Kbd
+    └── Kbd
+    ```
+  </ApiComposition>
+</ApiSection>

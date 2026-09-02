@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import { tagClassName, tagCloseClassName } from './tag'
+import { tagClassName, tagActionClassName } from './tag'
 
 export const cascaderTriggerClassName = cva(
   [
@@ -28,7 +28,7 @@ export const cascaderInputClassName =
 /** @deprecated Use the Tag primitive. */
 export const cascaderTagClassName = tagClassName({ size: 'sm' })
 /** @deprecated Use the Tag primitive. */
-export const cascaderTagRemoveClassName = tagCloseClassName
+export const cascaderTagRemoveClassName = tagActionClassName
 export const cascaderSuffixClassName =
   'ml-auto inline-flex h-5 shrink-0 items-center justify-center pr-2.5 text-muted-foreground [&_svg]:size-4'
 export const cascaderIndicatorClassName =

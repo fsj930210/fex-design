@@ -1,7 +1,7 @@
 @if (autoComplete.loading) {
 <div class="flex min-h-20 items-center justify-center"><span spinner /></div>
 } @else if (!autoComplete.visibleItems.length) {
-<fex-empty><fex-empty-description>No suggestions</fex-empty-description></fex-empty>
+<div empty><p emptyDescription>No suggestions</p></div>
 } @else { @for (entry of autoComplete.visibleItems; track entry.key) {
 <div
   role="option"

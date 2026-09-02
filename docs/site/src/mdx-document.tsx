@@ -45,7 +45,9 @@ export function MdxDocument(props: {
         framework={props.framework}
       />
     ),
-    ApiSection: (apiProps: { layer: LayerName; title: string; description: string }) => {
+    ApiSection: (
+      apiProps: ParentProps<{ layer: LayerName; title: string; description: string }>,
+    ) => {
       const value = componentApis[props.slug][apiProps.layer]
       const nativeApi = resolveComponentApi(value, props.framework)
       return (
@@ -62,10 +64,24 @@ export function MdxDocument(props: {
             {apiProps.title}
           </h3>
           <p class="leading-relaxed text-foreground">{apiProps.description}</p>
+          {apiProps.children}
           <ApiTable value={value} framework={props.framework} />
         </Show>
       )
     },
+    ApiComposition: (compositionProps: ParentProps<{ layer: LayerName }>) => (
+      <section class="mt-6">
+        <h4
+          id={`${compositionProps.layer}-composition`}
+          data-toc-item
+          data-toc-title="Composition"
+          class="mb-2 text-base font-semibold"
+        >
+          Composition
+        </h4>
+        {compositionProps.children}
+      </section>
+    ),
     CssVariables: () => (
       <CssVariableTable value={componentApis[props.slug][props.layer].cssVariables ?? []} />
     ),

@@ -1,4 +1,4 @@
-import { Tag, TagClose } from '@fex-design/react/primitive/tag'
+import { Tag, TagAction } from '@fex-design/react/primitive/tag'
 import { useState } from 'react'
 
 const initialTags = [
@@ -22,7 +22,7 @@ export default function Dynamic() {
         {tags.map((tag) => (
           <Tag key={tag.id} color="primary">
             {tag.label}
-            <TagClose aria-label={`删除${tag.label}`} onClick={() => setTags((items) => items.filter((item) => item.id !== tag.id))} />
+            <TagAction aria-label={`删除${tag.label}`} onClick={() => setTags((items) => items.filter((item) => item.id !== tag.id))} />
           </Tag>
         ))}
       </div>

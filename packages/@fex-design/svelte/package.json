@@ -258,6 +258,7 @@
     "./primitive/spinner": "./src/primitive/spinner/spinner.svelte",
     "./ui/button": "./src/ui/button/button.ts",
     "./ui/card": "./src/ui/card/card.ts",
+    "./ui/empty": "./src/ui/empty/empty.ts",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",
     "./ui/checkbox-group": "./src/ui/checkbox/checkbox-group.svelte",
     "./ui/card-header": "./src/primitive/card/card-header.svelte",

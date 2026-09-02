@@ -1,17 +1,17 @@
 # React Primitive Tag
 
-Styled Tag primitives for compact categories, attributes, and status values. Primitive exposes the root `Tag` and the composable `TagClose` button without owning removal state.
+Styled Tag primitives for compact categories, attributes, and status values. Primitive exposes the root `Tag` and the composable `TagAction` button without prescribing the action or owning application state.
 
 ## Import
 
-    import { Tag, TagClose } from '@fex-design/react/primitive/tag'
+    import { Tag, TagAction } from '@fex-design/react/primitive/tag'
 
 ## Components
 
 | Component | Element | Purpose |
 | --------- | ------- | ------- |
 | Tag | span | Inherits the native span; renders variant, color, size, and disabled styling. |
-| TagClose | button | Inherits the native button; renders CloseIcon by default and accepts complete custom content. |
+| TagAction | button | Inherits the native button; renders CloseIcon by default and accepts complete custom content. |
 
 ## Examples
 
@@ -37,13 +37,13 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 | content | `children?: ReactNode` | — | Tag content. |
 | native attributes | ComponentProps<'span'> | — | Native span attributes and events. |
 
-## TagClose API
+## TagAction API
 
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| disabled | boolean | false | Disables the native close button. |
+| disabled | boolean | false | Disables the native action button. |
 | content | `children?: ReactNode` | CloseIcon | Completely replaces the default close icon when provided. |
-| events | `onClick` / native mouse events | — | Native button events; Primitive adds no close-specific event. |
+| events | `onClick` / native mouse events | — | Native button events; Primitive adds no action-specific event. |
 | native attributes | ComponentProps<'button'> | — | Native button attributes and events. |
 
 ## Variants and colors
@@ -73,8 +73,8 @@ Tag dimensions are controlled by the `size` API; no public size variables are ex
 
 ## Content and composition
 
-Content follows React's native model: `children?: ReactNode`. Place `TagClose` inside `Tag` when Primitive composition needs a close control. `TagClose` does not remove its parent and does not coordinate the parent disabled state.
+Content follows React's native model: `children?: ReactNode`. Place `TagAction` inside `Tag` for an inline operation. It defaults to CloseIcon, while custom content can represent remove, edit, more, or another action. `TagAction` does not prescribe behavior or coordinate the parent disabled state.
 
 ## Accessibility
 
-Use concise visible text. Give every `TagClose` an accessible name that identifies the affected tag. Removal must happen in the native click handler and focus should move to a predictable nearby control when the removed tag held focus.
+Use concise visible text. Give every `TagAction` an accessible name that describes its operation and target. Handle the operation in the native click event; after destructive actions, move focus to a predictable nearby control.

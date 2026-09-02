@@ -1,6 +1,6 @@
 # Angular UI Tag
 
-Recommended Tag composition. UI builds on Primitive Tag, creates TagClose when `closable` is enabled, coordinates disabled state, and exposes structured styling for the root and close parts.
+Recommended Tag composition. UI builds on Primitive Tag, creates TagAction when `closable` is enabled, coordinates disabled state, and exposes structured styling for the root and close parts.
 
 ## Import
 

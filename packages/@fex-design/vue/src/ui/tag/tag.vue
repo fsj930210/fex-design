@@ -6,7 +6,7 @@ import type {
 } from '@fex-design/core/tag/types'
 import { computed, type StyleValue, useAttrs } from 'vue'
 import PrimitiveTag from '../../primitive/tag/tag.vue'
-import TagClose from '../../primitive/tag/tag-close.vue'
+import TagAction from '../../primitive/tag/tag-action.vue'
 
 defineOptions({ name: 'Tag', inheritAttrs: false })
 const props = withDefaults(
@@ -35,17 +35,19 @@ const rootStyle = computed(() => [attrs.style, props.styles?.root])
     :style="rootStyle"
   >
     <slot />
-    <TagClose
+    <TagAction
       v-if="closable && $slots.closeIcon"
+      aria-label="Close"
       :disabled="disabled"
       :class="classNames?.close"
       :style="styles?.close"
       @click="emit('close', $event)"
     >
       <slot name="closeIcon" />
-    </TagClose>
-    <TagClose
+    </TagAction>
+    <TagAction
       v-else-if="closable"
+      aria-label="Close"
       :disabled="disabled"
       :class="classNames?.close"
       :style="styles?.close"

@@ -85,6 +85,7 @@
     "./primitive/spinner": "./src/primitive/spinner/spinner.ts",
     "./ui/button": "./src/ui/button/button.ts",
     "./ui/card": "./src/ui/card/card.ts",
+    "./ui/empty": "./src/ui/empty/empty.ts",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.ts",
     "./ui/listbox": "./src/ui/listbox/listbox.ts",

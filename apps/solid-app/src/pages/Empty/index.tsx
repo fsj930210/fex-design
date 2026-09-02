@@ -27,7 +27,7 @@ export function EmptyPage() {
         <Card title="Primitive" description="Media, title, description, and content slots.">
           <Empty>
             <EmptyHeader>
-              <EmptyMedia variant="icon">
+              <EmptyMedia>
                 <InfoIcon />
               </EmptyMedia>
               <EmptyTitle>No approval tasks</EmptyTitle>

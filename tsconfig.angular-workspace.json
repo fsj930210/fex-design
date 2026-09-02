@@ -10,6 +10,9 @@
       "@fex-design/core/avatar/types": [
         "packages/@fex-design/core/src/avatar/types.ts"
       ],
+      "@fex-design/core/alert/types": [
+        "packages/@fex-design/core/src/alert/types.ts"
+      ],
       "@fex-design/core/image/types": [
         "packages/@fex-design/core/src/image/types.ts"
       ],
@@ -57,6 +60,12 @@
       ],
       "@fex-design/core/card/types": [
         "packages/@fex-design/core/src/card/types.ts"
+      ],
+      "@fex-design/core/empty/types": [
+        "packages/@fex-design/core/src/empty/types.ts"
+      ],
+      "@fex-design/core/tag/types": [
+        "packages/@fex-design/core/src/tag/types.ts"
       ],
       "@fex-design/core/auto-complete/create-auto-complete-controller": [
         "packages/@fex-design/core/src/auto-complete/create-auto-complete-controller.ts"
@@ -784,6 +793,9 @@
       "@fex-design/angular/primitive/badge": [
         "packages/@fex-design/angular/src/primitive/badge/badge.ts"
       ],
+      "@fex-design/angular/ui/alert": [
+        "packages/@fex-design/angular/src/ui/alert/alert.ts"
+      ],
       "@fex-design/angular/ui/badge": [
         "packages/@fex-design/angular/src/ui/badge/badge.ts"
       ],
@@ -820,6 +832,9 @@
       "@fex-design/angular/ui/card": [
         "packages/@fex-design/angular/src/ui/card/card.ts"
       ],
+      "@fex-design/angular/ui/empty": [
+        "packages/@fex-design/angular/src/ui/empty/empty.ts"
+      ],
       "@fex-design/angular/ui/checkbox": [
         "packages/@fex-design/angular/src/ui/checkbox/checkbox.ts"
       ],
@@ -832,8 +847,23 @@
       "@fex-design/angular/ui/spinner": [
         "packages/@fex-design/angular/src/ui/spinner/spinner.ts"
       ],
+      "@fex-design/angular/ui/tag": [
+        "packages/@fex-design/angular/src/ui/tag/tag.ts"
+      ],
       "@fex-design/angular/icon/check": [
         "packages/@fex-design/angular/src/icon/check.ts"
+      ],
+      "@fex-design/angular/icon/circle-check": [
+        "packages/@fex-design/angular/src/icon/circle-check.ts"
+      ],
+      "@fex-design/angular/icon/circle-error": [
+        "packages/@fex-design/angular/src/icon/circle-error.ts"
+      ],
+      "@fex-design/angular/icon/circle-info": [
+        "packages/@fex-design/angular/src/icon/circle-info.ts"
+      ],
+      "@fex-design/angular/icon/circle-warning": [
+        "packages/@fex-design/angular/src/icon/circle-warning.ts"
       ],
       "@fex-design/angular/icon/calendar": [
         "packages/@fex-design/angular/src/icon/calendar.ts"

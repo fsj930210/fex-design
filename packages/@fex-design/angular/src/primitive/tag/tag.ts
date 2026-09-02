@@ -3,7 +3,7 @@ import {
   type TagOptions,
   type TagPresetColor,
 } from '@fex-design/core/tag/types'
-import { tagClassName, tagCloseClassName } from '@fex-design/styles/tag'
+import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -55,20 +55,20 @@ export class Tag {
 }
 
 @Component({
-  selector: 'button[tagClose]',
+  selector: 'button[tagAction]',
   standalone: true,
   imports: [NgComponentOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
     '[attr.aria-label]': 'ariaLabel()',
-    'data-slot': 'tag-close',
+    'data-slot': 'tag-action',
     type: 'button',
   },
-  templateUrl: './tag-close.html',
+  templateUrl: './tag-action.html',
 })
-export class TagClose {
-  readonly ariaLabel = input('Close', { alias: 'aria-label' })
+export class TagAction {
+  readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' })
   protected readonly defaultIcon = CloseIcon
-  protected readonly hostClassName = createHostClassName(tagCloseClassName)
+  protected readonly hostClassName = createHostClassName(tagActionClassName)
 }

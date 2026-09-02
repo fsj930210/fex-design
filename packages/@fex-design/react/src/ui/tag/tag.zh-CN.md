@@ -1,17 +1,17 @@
 # React UI Tag
 
-推荐使用的 Tag 组合层。UI 基于 Primitive Tag，在 `closable` 开启时创建 TagClose，联动 disabled，并提供 root、close 结构化样式。
+推荐使用的 Tag 组合层。UI 基于 Primitive Tag，在 `closable` 开启时创建 TagAction，联动 disabled，并提供 root、close 结构化样式。
 
 ## 导入
 
-    import { Tag, TagClose } from '@fex-design/react/ui/tag'
+    import { Tag, TagAction } from '@fex-design/react/ui/tag'
 
 ## 组件
 
 | 组件 | 元素 | 说明 |
 | ---- | ---- | ---- |
 | Tag | span | 推荐的组合式 Tag，支持可选关闭控件和结构化样式。 |
-| TagClose | button | 从 Primitive 转出，供手动组合关闭按钮。 |
+| TagAction | button | 从 Primitive 转出，供手动组合任意标签内操作。 |
 
 ## 示例
 

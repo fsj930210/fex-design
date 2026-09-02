@@ -5,7 +5,6 @@ import {
   emptyHeaderClassName,
   emptyMediaClassName,
   emptyTitleClassName,
-  type EmptyMediaStyleProps,
 } from '@fex-design/styles/empty'
 import { cn } from '@fex/utils'
 import type { JSX, ParentProps } from 'solid-js'
@@ -38,14 +37,13 @@ export function EmptyDescription(props: ParentProps<JSX.HTMLAttributes<HTMLParag
   )
 }
 
-export function EmptyMedia(props: DivProps & EmptyMediaStyleProps) {
-  const [local, rest] = splitProps(props, ['class', 'children', 'variant'])
+export function EmptyMedia(props: DivProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
   return (
     <div
       {...rest}
-      data-slot="empty-icon"
-      data-variant={local.variant ?? 'default'}
-      class={cn(emptyMediaClassName({ variant: local.variant }), local.class)}
+      data-slot="empty-media"
+      class={cn(emptyMediaClassName, local.class)}
     >
       {local.children}
     </div>

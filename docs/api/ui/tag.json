@@ -16,7 +16,7 @@
     { "name": "color", "type": "TagColor", "description": "预设色或任意 CSS 颜色。" },
     { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "md", "description": "标签尺寸。", "editor": "enum", "options": ["sm", "md", "lg"] },
     { "name": "disabled", "type": "boolean", "default": "false", "description": "设置禁用状态并禁用关闭按钮。", "editor": "boolean" },
-    { "name": "closable", "type": "boolean", "default": "false", "description": "显示 TagClose。", "editor": "boolean" },
+    { "name": "closable", "type": "boolean", "default": "false", "description": "显示 TagAction。", "editor": "boolean" },
     { "name": "children", "type": "FrameworkNode", "description": "标签内容。" },
     { "name": "closeIcon", "type": "FrameworkNode", "description": "完全替换默认关闭图标。" },
     { "name": "classNames", "type": "TagClassNames", "description": "分别定制 root 和 close 类名。" },

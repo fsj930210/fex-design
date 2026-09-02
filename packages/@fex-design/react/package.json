@@ -87,6 +87,7 @@
     "./primitive/spinner": "./src/primitive/spinner/spinner.tsx",
     "./ui/button": "./src/ui/button/button.tsx",
     "./ui/card": "./src/ui/card/card.tsx",
+    "./ui/empty": "./src/ui/empty/empty.tsx",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.tsx",
     "./ui/dialog": "./src/ui/dialog/index.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",

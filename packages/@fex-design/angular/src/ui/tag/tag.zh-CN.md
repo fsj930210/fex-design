@@ -1,6 +1,6 @@
 # Angular UI Tag
 
-推荐使用的 Tag 组合层。UI 基于 Primitive Tag，在 `closable` 开启时创建 TagClose，联动 disabled，并提供 root、close 结构化样式。
+推荐使用的 Tag 组合层。UI 基于 Primitive Tag，在 `closable` 开启时创建 TagAction，联动 disabled，并提供 root、close 结构化样式。
 
 ## 导入
 

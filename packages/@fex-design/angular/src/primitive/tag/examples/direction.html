@@ -6,7 +6,7 @@
         <span tag color="info">{{ direction === 'ltr' ? '状态标签' : 'علامة الحالة' }}</span>
         <span tag color="primary">
           {{ direction === 'ltr' ? '可关闭标签' : 'وسم قابل للإغلاق' }}
-          <button tagClose [attr.aria-label]="'删除' + direction.toUpperCase() + '标签'"></button>
+          <button tagAction [attr.aria-label]="'删除' + direction.toUpperCase() + '标签'"></button>
         </span>
       </div>
     </section>

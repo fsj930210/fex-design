@@ -7,7 +7,7 @@ Tag 用于承载简短的分类、属性或状态文本。`color` 支持五种�
 
 ## Primitive 与 UI
 
-Primitive 提供 styled `Tag` 和带默认关闭图标的 `TagClose`。`TagClose` 使用原生按钮属性和事件，内容可以完全替换默认图标。
+Primitive 提供 styled `Tag` 和通用的 `TagAction`。`TagAction` 使用原生按钮属性和事件，默认显示 CloseIcon；替换内容后也可以表达编辑、更多等其他标签内操作。
 
 UI 在 Primitive 上增加 `closable`、关闭事件以及 `classNames` / `styles` 的 root、close 结构化定制，不保存标签显隐状态。
 
@@ -17,6 +17,25 @@ UI 在 Primitive 上增加 `closable`、关闭事件以及 `classNames` / `style
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Primitive Tag 与 TagClose 的公开属性。" />
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Tag 与 TagAction 的公开属性。">
+  <ApiComposition layer="primitive">
+    ```text
+    Tag
+    └── TagAction (optional)
+    ```
 
-<ApiSection layer="ui" title="UI API" description="UI Tag 的可关闭快捷组合与结构化样式。" />
+    `TagAction` 是独立操作按钮，由调用方决定它表示关闭、编辑、更多或其他行为；组件本身不修改 Tag 状态。
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="UI Tag 的可关闭快捷组合与结构化样式。">
+  <ApiComposition layer="ui">
+    UI `Tag` 通过 `closable` 创建关闭区域；自定义 close icon 使用当前框架的原生内容入口，不需要手动组合 `TagAction`。
+
+    ```text
+    Tag
+    ├── content
+    └── close (closable = true)
+    ```
+  </ApiComposition>
+</ApiSection>

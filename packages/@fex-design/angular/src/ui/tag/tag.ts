@@ -5,7 +5,7 @@ import {
   type TagPresetColor,
   type TagStyles,
 } from '@fex-design/core/tag/types'
-import { tagClassName, tagCloseClassName } from '@fex-design/styles/tag'
+import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -16,7 +16,7 @@ import {
   input,
   output,
 } from '@angular/core'
-import { TagClose } from '../../primitive/tag/tag'
+import { TagAction } from '../../primitive/tag/tag'
 import { createHostClassName } from '../../signals/host-class'
 
 @Directive({ selector: '[tagCloseIcon]', standalone: true })
@@ -25,7 +25,7 @@ export class TagCloseIcon {}
 @Component({
   selector: 'span[tag]',
   standalone: true,
-  imports: [TagClose],
+  imports: [TagAction],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
@@ -67,6 +67,6 @@ export class Tag {
     })} ${this.classNames().root ?? ''}`,
   )
   protected readonly closeClassName = computed(
-    () => `${tagCloseClassName} ${this.classNames().close ?? ''}`,
+    () => `${tagActionClassName} ${this.classNames().close ?? ''}`,
   )
 }

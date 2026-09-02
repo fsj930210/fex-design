@@ -21,6 +21,37 @@ UI 在此基础上增加右上角附着、位置偏移和结构化样式；徽�
   layer="primitive"
   title="Primitive API"
   description="Primitive Badge、BadgeDot 与 BadgeRibbon 的公开属性。"
-/>
+>
+  <ApiComposition layer="primitive">
+    ```text
+    Badge
+    └── BadgeDot (optional)
 
-<ApiSection layer="ui" title="UI API" description="UI Badge 的快捷附着用法。" />
+    BadgeRibbon
+    └── content
+
+    BadgeGroup
+    ├── Badge
+    └── Badge
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="UI Badge 的快捷附着用法。">
+  <ApiComposition layer="ui">
+    UI `Badge` 自己创建附着指示器或 Dot；`BadgeRibbon` 提供 Ribbon 快捷组合，`BadgeGroup` 直接复用 Primitive。
+
+    ```text
+    Badge
+    ├── content
+    └── indicator
+
+    BadgeRibbon
+    └── content
+
+    BadgeGroup
+    ├── Badge
+    └── Badge
+    ```
+  </ApiComposition>
+</ApiSection>

@@ -13,19 +13,6 @@ UI 在此基础上增加尺寸、图标、加载状态、交互效果和预设�
 
 Button 用于触发即时操作。页面跳转使用链接；开关状态使用 Toggle；互斥选择使用 ToggleGroup、Radio 或 Tabs。
 
-## Composition
-
-`ButtonIcon` 用于图标内容，`ButtonGroup` 用于组织相关按钮。
-
-```text
-Button
-└── ButtonIcon (optional)
-
-ButtonGroup
-├── Button
-└── Button
-```
-
 <Layer value="primitive">
 
 ## Primitive 能力
@@ -46,9 +33,34 @@ ButtonGroup
   layer="primitive"
   title="Primitive API"
   description="Primitive Button、ButtonIcon 与 ButtonGroup 的公开属性。"
-/>
+>
+  <ApiComposition layer="primitive">
+    Primitive `ButtonIcon` 用于图标内容，`ButtonGroup` 用于组织相关按钮。
 
-<ApiSection layer="ui" title="UI API" description="UI Button 的公开属性。" />
+    ```text
+    Button
+    └── ButtonIcon (optional)
+
+    ButtonGroup
+    ├── Button
+    └── Button
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="UI Button 的公开属性。">
+  <ApiComposition layer="ui">
+    UI `Button` 通过 icon API 或框架原生内容入口接收图标，不公开 `ButtonIcon`；`ButtonGroup` 直接复用 Primitive。
+
+    ```text
+    Button
+
+    ButtonGroup
+    ├── Button
+    └── Button
+    ```
+  </ApiComposition>
+</ApiSection>
 
 ## CSS Variables
 

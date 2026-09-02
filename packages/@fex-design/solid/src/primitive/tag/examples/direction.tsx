@@ -1,5 +1,5 @@
 import { For } from 'solid-js'
-import { Tag, TagClose } from '@fex-design/solid/primitive/tag'
+import { Tag, TagAction } from '@fex-design/solid/primitive/tag'
 
 export function DirectionExample() {
   return (
@@ -12,7 +12,7 @@ export function DirectionExample() {
               <Tag color="info">{direction === 'ltr' ? '状态标签' : 'علامة الحالة'}</Tag>
               <Tag color="primary">
                 {direction === 'ltr' ? '可关闭标签' : 'وسم قابل للإغلاق'}
-                <TagClose aria-label={`删除${direction.toUpperCase()}标签`} />
+                <TagAction aria-label={`删除${direction.toUpperCase()}标签`} />
               </Tag>
             </div>
           </section>

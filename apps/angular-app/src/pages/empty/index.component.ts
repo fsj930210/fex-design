@@ -10,10 +10,9 @@ import {
 } from '@fex-design/angular/primitive/empty'
 import { Badge } from '@fex-design/angular/primitive/badge'
 import Card from '@fex-design/angular/ui/card'
-import { InfoIcon } from '@fex-design/angular/icon/info'
 
 @Component({
-  selector: 'fex-empty-page',
+  selector: 'empty-page',
   imports: [
     RouterLink,
     Card,
@@ -24,7 +23,6 @@ import { InfoIcon } from '@fex-design/angular/icon/info'
     EmptyMedia,
     EmptyTitle,
     Badge,
-    InfoIcon,
   ],
   host: { class: 'block' },
   templateUrl: './index.component.html',

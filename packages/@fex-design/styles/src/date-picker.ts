@@ -1,4 +1,4 @@
-import { tagClassName, tagCloseClassName } from './tag'
+import { tagClassName, tagActionClassName } from './tag'
 
 // The Angular host adapter retains Popover's default padding and max-width in
 // its host class. Important utilities keep the picker panel contract intact.
@@ -23,7 +23,7 @@ export const datePickerMultipleTagsClassName =
 /** @deprecated Use the Tag primitive. */
 export const datePickerTagClassName = tagClassName({ size: 'sm' })
 /** @deprecated Use the Tag primitive. */
-export const datePickerTagRemoveClassName = tagCloseClassName
+export const datePickerTagRemoveClassName = tagActionClassName
 /** @deprecated Use the Tag primitive. */
 export const datePickerTagOverflowClassName = tagClassName({ size: 'sm' })
 

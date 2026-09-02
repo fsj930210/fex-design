@@ -5,7 +5,6 @@ import {
   emptyHeaderClassName,
   emptyMediaClassName,
   emptyTitleClassName,
-  type EmptyMediaStyleProps,
 } from '@fex-design/styles/empty'
 import { cn } from '@fex/utils'
 import type { ComponentProps } from 'react'
@@ -18,18 +17,9 @@ export function EmptyHeader({ className, ...props }: ComponentProps<'div'>) {
   return <div data-slot="empty-header" className={cn(emptyHeaderClassName, className)} {...props} />
 }
 
-export function EmptyMedia({
-  className,
-  variant = 'default',
-  ...props
-}: ComponentProps<'div'> & EmptyMediaStyleProps) {
+export function EmptyMedia({ className, ...props }: ComponentProps<'div'>) {
   return (
-    <div
-      data-slot="empty-icon"
-      data-variant={variant}
-      className={cn(emptyMediaClassName({ variant }), className)}
-      {...props}
-    />
+    <div data-slot="empty-media" className={cn(emptyMediaClassName, className)} {...props} />
   )
 }
 

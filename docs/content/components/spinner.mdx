@@ -17,26 +17,6 @@ UI 提供开箱即用的独立加载提示和局部内容加载容器。
 
 不要用 Spinner 表达明确的空状态、失败状态或权限状态：这些场景应分别使用 Empty、错误提示或业务反馈组件。
 
-## Composition
-
-```text
-Primitive
-SpinnerContainer
-├── children
-└── SpinnerOverlay
-    ├── Spinner
-    └── SpinnerText
-
-UI
-SpinnerContainer
-├── children
-└── overlay (spinning = true)
-    ├── Spinner
-    └── SpinnerText (optional)
-```
-
-Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。UI `SpinnerContainer` 负责 loading 状态、遮罩和默认居中布局。
-
 ## 独立指示器
 
 ```tsx
@@ -91,10 +71,34 @@ Primitive 组件提供带基础视觉样式的最小部件，但不持有 loadin
   layer="primitive"
   title="Primitive API"
   description="Primitive Spinner、SpinnerContainer、SpinnerOverlay 与 SpinnerText 的公开属性。"
-/>
+>
+  <ApiComposition layer="primitive">
+    ```text
+    SpinnerContainer
+    ├── children
+    └── SpinnerOverlay
+        ├── Spinner
+        └── SpinnerText
+    ```
+
+    Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。
+  </ApiComposition>
+</ApiSection>
 
 <ApiSection
   layer="ui"
   title="UI API"
   description="UI Spinner 的独立指示器和内容 loading 容器属性。"
-/>
+>
+  <ApiComposition layer="ui">
+    ```text
+    SpinnerContainer
+    ├── children
+    └── overlay (spinning = true)
+        ├── Spinner
+        └── SpinnerText (optional)
+    ```
+
+    UI `SpinnerContainer` 负责 loading 状态、遮罩和默认居中布局；`Spinner` 可独立使用。
+  </ApiComposition>
+</ApiSection>

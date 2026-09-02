@@ -3,7 +3,7 @@ import {
   type TagOptions,
   type TagPresetColor,
 } from '@fex-design/core/tag/types'
-import { tagClassName, tagCloseClassName } from '@fex-design/styles/tag'
+import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import type { ComponentProps, CSSProperties } from 'react'
 import { CloseIcon } from '../../icon/close'
@@ -43,22 +43,22 @@ export function Tag({
   )
 }
 
-export interface TagCloseProps extends ComponentProps<'button'> {}
+export interface TagActionProps extends ComponentProps<'button'> {}
 
-export function TagClose({
+export function TagAction({
   type = 'button',
-  'aria-label': ariaLabel = 'Close',
+  'aria-label': ariaLabel,
   className,
   children,
   ...props
-}: TagCloseProps) {
+}: TagActionProps) {
   return (
     <button
       {...props}
       type={type}
       aria-label={ariaLabel}
-      data-slot="tag-close"
-      className={cn(tagCloseClassName, className)}
+      data-slot="tag-action"
+      className={cn(tagActionClassName, className)}
     >
       {children ?? <CloseIcon aria-hidden />}
     </button>

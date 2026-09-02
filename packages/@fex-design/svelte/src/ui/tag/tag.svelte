@@ -8,7 +8,7 @@
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import PrimitiveTag from '../../primitive/tag/tag.svelte'
-  import TagClose from '../../primitive/tag/tag-close.svelte'
+  import TagAction from '../../primitive/tag/tag-action.svelte'
 
   interface Props extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, TagOptions {
     children?: Snippet
@@ -41,17 +41,19 @@
 >
   {@render children?.()}
   {#if closable && closeIcon}
-    <TagClose
+    <TagAction
       {disabled}
+      aria-label="Close"
       class={classNames?.close}
       style={styles?.close}
       onclick={onClose}
     >
       {@render closeIcon()}
-    </TagClose>
+    </TagAction>
   {:else if closable}
-    <TagClose
+    <TagAction
       {disabled}
+      aria-label="Close"
       class={classNames?.close}
       style={styles?.close}
       onclick={onClose}

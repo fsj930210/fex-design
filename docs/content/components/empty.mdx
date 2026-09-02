@@ -1,0 +1,40 @@
+---
+title: Empty
+description: 在没有数据、搜索结果或可执行对象时提供清晰的状态说明和后续操作。
+---
+
+Empty 用于解释当前区域为什么没有内容，并在需要时提供下一步操作。
+
+## Primitive 与 UI
+
+Primitive 提供 `Empty`、`EmptyHeader`、`EmptyMedia`、`EmptyTitle`、`EmptyDescription` 和 `EmptyContent` 六个有样式区域。
+
+UI 使用 `image`、`title`、`description` 和内容入口快速生成同一套区域结构。未传 `image` 时使用内置图形，传入 `null` 时隐藏媒体；内容始终进入 `EmptyContent`。
+
+Primitive 与 UI 的基础、操作内容和图片定制示例保持相同文案、布局和最终展示。只有 UI 额外提供 `classNames` / `styles` 结构化样式入口。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Empty 各区域的原生宿主属性与组合关系。">
+  <ApiComposition layer="primitive">
+    ```text
+    Empty
+    ├── EmptyHeader
+    │   ├── EmptyMedia
+    │   │   └── custom media
+    │   ├── EmptyTitle
+    │   └── EmptyDescription
+    └── EmptyContent
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="UI Empty 在当前框架中的快捷属性、Slots、Snippet 或内容投影入口。" />
+
+## 无障碍
+
+内置图形是装饰性内容，不会重复描述空状态。只有动态更新的空状态需要主动播报时，才在根元素上增加 `role="status"` 和 `aria-live="polite"`。

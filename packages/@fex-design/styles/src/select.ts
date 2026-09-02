@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { selectableItemSelectedClassName } from './selectable-item'
-import { tagClassName, tagCloseClassName } from './tag'
+import { tagClassName, tagActionClassName } from './tag'
 
 export const selectTriggerClassName = cva(
   [
@@ -29,13 +29,13 @@ export const selectPlaceholderClassName = 'truncate text-muted-foreground'
 /** @deprecated Use the Tag primitive. */
 export const selectTagClassName = tagClassName({ size: 'sm' })
 /** @deprecated Use the Tag primitive. */
-export const selectTagRemoveClassName = tagCloseClassName
+export const selectTagRemoveClassName = tagActionClassName
 /** @deprecated Use the Tag primitive. */
 export const selectTagOverflowClassName = tagClassName({ size: 'sm' })
 /** @deprecated Use the Tag primitive. */
 export const treeSelectTagClassName = tagClassName({ size: 'sm' })
 /** @deprecated Use the Tag primitive. */
-export const treeSelectTagRemoveClassName = tagCloseClassName
+export const treeSelectTagRemoveClassName = tagActionClassName
 /** @deprecated Use the Tag primitive. */
 export const treeSelectTagOverflowClassName = tagClassName({ size: 'sm' })
 export const selectSuffixClassName =

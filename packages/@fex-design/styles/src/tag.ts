@@ -38,7 +38,7 @@ export const tagClassName = cva(
   },
 )
 
-export const tagCloseClassName = [
+export const tagActionClassName = [
   '-me-0.5 ms-0.5 inline-flex size-[1em] shrink-0 items-center justify-center text-current opacity-55 outline-none',
   'hover:opacity-100 focus-visible:rounded-[2px] focus-visible:ring-1 focus-visible:ring-current',
   'disabled:pointer-events-none disabled:opacity-30 [&>svg]:size-2.5',

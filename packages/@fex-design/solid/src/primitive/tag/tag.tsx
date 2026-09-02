@@ -3,7 +3,7 @@ import {
   type TagOptions,
   type TagPresetColor,
 } from '@fex-design/core/tag/types'
-import { tagClassName, tagCloseClassName } from '@fex-design/styles/tag'
+import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { CloseIcon } from '../../icon/close'
@@ -53,17 +53,17 @@ export function Tag(props: TagProps) {
   )
 }
 
-export interface TagCloseProps extends ParentProps<JSX.ButtonHTMLAttributes<HTMLButtonElement>> {}
+export interface TagActionProps extends ParentProps<JSX.ButtonHTMLAttributes<HTMLButtonElement>> {}
 
-export function TagClose(props: TagCloseProps) {
+export function TagAction(props: TagActionProps) {
   const [local, rest] = splitProps(props, ['class', 'children', 'type', 'aria-label'])
   return (
     <button
       {...rest}
       type={local.type ?? 'button'}
-      aria-label={local['aria-label'] ?? 'Close'}
-      data-slot="tag-close"
-      class={cn(tagCloseClassName, local.class)}
+      aria-label={local['aria-label']}
+      data-slot="tag-action"
+      class={cn(tagActionClassName, local.class)}
     >
       {local.children ?? <CloseIcon aria-hidden />}
     </button>

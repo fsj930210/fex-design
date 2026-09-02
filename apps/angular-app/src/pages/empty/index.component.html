@@ -7,18 +7,15 @@
         Use empty states when lists, search results, or filters return no data.
       </p>
     </header>
-    <fex-card title="Primitive" description="Media, title, description, and content slots."
-      ><fex-empty
-        ><fex-empty-header
-          ><fex-empty-media variant="icon"><fex-info-icon /></fex-empty-media
-          ><fex-empty-title>No approval tasks</fex-empty-title
-          ><fex-empty-description
-            >Adjust filters and try again, or create a new workflow record.</fex-empty-description
-          ></fex-empty-header
-        ><fex-empty-content
-          ><fex-badge variant="outline">0 items</fex-badge></fex-empty-content
-        ></fex-empty
-      ></fex-card
-    >
+    <div card title="Primitive" description="Media, title, description, and content slots.">
+      <div empty>
+        <div emptyHeader>
+          <div emptyMedia><svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect width="48" height="48" rx="12" fill="currentColor" opacity="0.1" /></svg></div>
+          <div emptyTitle>No approval tasks</div>
+          <p emptyDescription>Adjust filters and try again, or create a new workflow record.</p>
+        </div>
+        <div emptyContent><badge variant="outline">0 items</badge></div>
+      </div>
+    </div>
   </div>
 </main>

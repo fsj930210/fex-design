@@ -17,6 +17,18 @@ UI 将这些部件封装为一个 `Alert`，提供内置状态图标、可关闭
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Alert 可组合部件与原生宿主能力。" />
+<ApiSection layer="primitive" title="Primitive API" description="Alert 可组合部件与原生宿主能力。">
+  <ApiComposition layer="primitive">
+    Primitive 通过独立部件组合消息结构；图标、描述和操作区均为可选。
+
+    ```text
+    Alert
+    ├── AlertIcon (optional)
+    ├── AlertTitle
+    ├── AlertDescription (optional)
+    └── AlertAction (optional)
+    ```
+  </ApiComposition>
+</ApiSection>
 
 <ApiSection layer="ui" title="UI API" description="单组件 Alert 的状态图标、关闭行为和结构化样式。" />

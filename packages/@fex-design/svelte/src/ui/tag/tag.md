@@ -1,17 +1,17 @@
 # Svelte UI Tag
 
-Recommended Tag composition. UI builds on Primitive Tag, creates TagClose when `closable` is enabled, coordinates disabled state, and exposes structured styling for the root and close parts.
+Recommended Tag composition. UI builds on Primitive Tag, creates TagAction when `closable` is enabled, coordinates disabled state, and exposes structured styling for the root and close parts.
 
 ## Import
 
-    import { Tag, TagClose } from '@fex-design/svelte/ui/tag'
+    import { Tag, TagAction } from '@fex-design/svelte/ui/tag'
 
 ## Components
 
 | Component | Element | Purpose |
 | --------- | ------- | ------- |
 | Tag | span | Recommended composed Tag with optional close control and structured styling. |
-| TagClose | button | Re-exported Primitive close button for manual composition. |
+| TagAction | button | Re-exported Primitive action button for manual composition. |
 
 ## Examples
 

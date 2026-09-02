@@ -18,20 +18,6 @@ Card 用于把同一个对象、任务或主题下的信息与操作组织成一
 - 只有正文内容时可以省略 Header 与 Footer；需要标题、说明或补充状态时再加入对应区域。
 - 列表密集、行列关系明确的数据优先使用 List 或 Table，而不是堆叠大量 Card。
 
-## Composition
-
-```text
-Card
-├── CardHeader
-│   ├── CardTitle
-│   ├── CardDescription
-│   └── CardExtra
-├── CardContent
-└── CardFooter
-```
-
-`CardTitle` 用于标题，`CardDescription` 用于辅助说明，`CardExtra` 用于 Header 的补充内容。
-
 ## Header、Extra 与 Footer
 
 `CardExtra` 位于 Header 的补充区域，可放置状态、Badge、时间、菜单或操作。
@@ -56,7 +42,21 @@ Primitive Card 通过区域部件组合内容和布局。
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Primitive Card 的公开属性。" />
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Card 的公开属性。">
+  <ApiComposition layer="primitive">
+    ```text
+    Card
+    ├── CardHeader
+    │   ├── CardTitle
+    │   ├── CardDescription
+    │   └── CardExtra
+    ├── CardContent
+    └── CardFooter
+    ```
+
+    `CardTitle` 用于标题，`CardDescription` 用于辅助说明，`CardExtra` 用于 Header 的补充内容。
+  </ApiComposition>
+</ApiSection>
 
 <ApiSection
   layer="ui"

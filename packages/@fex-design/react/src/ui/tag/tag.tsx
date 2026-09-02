@@ -3,12 +3,12 @@ import { cn } from '@fex/utils'
 import type { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import {
   Tag as PrimitiveTag,
-  TagClose,
+  TagAction,
   type TagProps as PrimitiveTagProps,
 } from '../../primitive/tag/tag'
 
-export type { TagCloseProps } from '../../primitive/tag/tag'
-export { TagClose } from '../../primitive/tag/tag'
+export type { TagActionProps } from '../../primitive/tag/tag'
+export { TagAction } from '../../primitive/tag/tag'
 
 export interface TagProps
   extends PrimitiveTagProps,
@@ -37,14 +37,15 @@ export function Tag({
     >
       {children}
       {closable ? (
-        <TagClose
+        <TagAction
           disabled={disabled}
+          aria-label="Close"
           className={classNames?.close}
           style={styles?.close}
           onClick={onClose}
         >
           {closeIcon}
-        </TagClose>
+        </TagAction>
       ) : null}
     </PrimitiveTag>
   )

@@ -1,0 +1,247 @@
+{
+  "name": "Empty",
+  "slug": "empty",
+  "layer": "ui",
+  "status": "stable",
+  "description": "基于 Empty Primitive 的快捷空状态，提供默认图形、标题、说明、内容和结构化样式。",
+  "importPath": {
+    "react": "@fex-design/react/ui/empty",
+    "vue": "@fex-design/vue/ui/empty",
+    "solid": "@fex-design/solid/ui/empty",
+    "svelte": "@fex-design/svelte/ui/empty",
+    "angular": "@fex-design/angular/ui/empty"
+  },
+  "props": [
+    {
+      "name": "classNames",
+      "type": "Partial<Record<'root' | 'header' | 'image' | 'title' | 'description' | 'content', string>>",
+      "description": "按语义区域追加 class。"
+    },
+    {
+      "name": "styles",
+      "type": "Partial<Record<'root' | 'header' | 'image' | 'title' | 'description' | 'content', Style>>",
+      "description": "按语义区域追加内联样式。"
+    }
+  ],
+  "events": [],
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "image",
+          "type": "ReactNode | string | null",
+          "default": "内置图形",
+          "description": "图片地址或自定义图形；null 隐藏媒体。"
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "description": "标题内容。"
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "description": "辅助说明。"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "渲染到 EmptyContent 的内容。"
+        },
+        {
+          "name": "classNames",
+          "type": "EmptyClassNames",
+          "description": "按语义区域追加 className。"
+        },
+        {
+          "name": "styles",
+          "type": "EmptyStyles",
+          "description": "按语义区域追加内联样式。"
+        }
+      ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "image",
+          "type": "string | null",
+          "default": "内置图形",
+          "description": "图片地址；null 隐藏媒体。"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "标题文本。"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "辅助说明文本。"
+        },
+        {
+          "name": "classNames",
+          "type": "EmptyClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "EmptyStyles",
+          "description": "按语义区域追加内联样式。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "渲染到 EmptyContent 的内容。"
+        },
+        {
+          "name": "image",
+          "description": "自定义媒体，覆盖 image prop。"
+        },
+        {
+          "name": "title",
+          "description": "自定义标题，覆盖 title prop。"
+        },
+        {
+          "name": "description",
+          "description": "自定义说明，覆盖 description prop。"
+        }
+      ]
+    },
+    "solid": {
+      "props": [
+        {
+          "name": "image",
+          "type": "JSX.Element | string | null",
+          "default": "内置图形",
+          "description": "图片地址或自定义图形；null 隐藏媒体。"
+        },
+        {
+          "name": "title",
+          "type": "JSX.Element",
+          "description": "标题内容。"
+        },
+        {
+          "name": "description",
+          "type": "JSX.Element",
+          "description": "辅助说明。"
+        },
+        {
+          "name": "children",
+          "type": "JSX.Element",
+          "description": "渲染到 EmptyContent 的内容。"
+        },
+        {
+          "name": "classNames",
+          "type": "EmptyClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "EmptyStyles",
+          "description": "按语义区域追加内联样式。"
+        }
+      ]
+    },
+    "svelte": {
+      "props": [
+        {
+          "name": "image",
+          "type": "Snippet | string | null",
+          "default": "内置图形",
+          "description": "图片地址或自定义 Snippet；null 隐藏媒体。"
+        },
+        {
+          "name": "title",
+          "type": "Snippet | string",
+          "description": "标题内容。"
+        },
+        {
+          "name": "description",
+          "type": "Snippet | string",
+          "description": "辅助说明。"
+        },
+        {
+          "name": "children",
+          "type": "Snippet",
+          "description": "渲染到 EmptyContent 的内容。"
+        },
+        {
+          "name": "classNames",
+          "type": "EmptyClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "EmptyStyles",
+          "description": "按语义区域追加内联样式。"
+        }
+      ]
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "image",
+          "type": "string | TemplateRef<unknown> | null",
+          "default": "内置图形",
+          "description": "图片地址或模板；null 隐藏媒体。"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "标题文本。"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "辅助说明文本。"
+        },
+        {
+          "name": "classNames",
+          "type": "EmptyClassNames",
+          "description": "按语义区域追加 class。"
+        },
+        {
+          "name": "styles",
+          "type": "EmptyStyles",
+          "description": "按语义区域追加内联样式。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "默认内容",
+          "description": "投影到 EmptyContent 的内容。"
+        }
+      ],
+      "slotLabel": "内容投影"
+    }
+  },
+  "cssVariables": [],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "使用默认图形、标题和描述快速创建空状态。"
+    },
+    {
+      "id": "content",
+      "title": "操作内容",
+      "description": "通过内容入口添加一个或多个操作。"
+    },
+    {
+      "id": "image",
+      "title": "图片定制",
+      "description": "对比默认图形、自定义图形和隐藏图形。"
+    },
+    {
+      "id": "styling",
+      "title": "结构化样式",
+      "description": "使用 classNames 和 styles 定制六个语义区域。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "使用中文 LTR 与阿拉伯语 RTL 对比内容方向和操作排列。"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+@if (image() !== null || title() || description()) {
+  <div emptyHeader [className]="classNames().header" [style]="styles().header">
+    @if (image() !== null) {
+      <div emptyMedia [className]="classNames().image" [style]="styles().image">
+        @if (imageUrl()) {
+          <img [src]="imageUrl()" alt="" />
+        } @else if (imageTemplate()) {
+          <ng-container *ngTemplateOutlet="imageTemplate() ?? null" />
+        } @else {
+          <empty-default-image />
+        }
+      </div>
+    }
+    @if (title()) {
+      <div emptyTitle [className]="classNames().title" [style]="styles().title">{{ title() }}</div>
+    }
+    @if (description()) {
+      <p emptyDescription [className]="classNames().description" [style]="styles().description">{{ description() }}</p>
+    }
+  </div>
+}
+<div emptyContent [className]="classNames().content" [style]="styles().content"><ng-content /></div>

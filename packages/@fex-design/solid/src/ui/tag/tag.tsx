@@ -3,12 +3,12 @@ import { cn } from '@fex/utils'
 import { splitProps, type JSX } from 'solid-js'
 import {
   Tag as PrimitiveTag,
-  TagClose,
+  TagAction,
   type TagProps as PrimitiveTagProps,
 } from '../../primitive/tag/tag'
 
-export type { TagCloseProps } from '../../primitive/tag/tag'
-export { TagClose } from '../../primitive/tag/tag'
+export type { TagActionProps } from '../../primitive/tag/tag'
+export { TagAction } from '../../primitive/tag/tag'
 
 export type TagProps = PrimitiveTagProps &
   TagUiOptions<JSX.Element, JSX.CSSProperties> & {
@@ -36,14 +36,15 @@ export function Tag(props: TagProps) {
     >
       {local.children}
       {local.closable ? (
-        <TagClose
+        <TagAction
           disabled={local.disabled}
+          aria-label="Close"
           class={local.classNames?.close}
           style={local.styles?.close}
           onClick={local.onClose}
         >
           {local.closeIcon}
-        </TagClose>
+        </TagAction>
       ) : null}
     </PrimitiveTag>
   )

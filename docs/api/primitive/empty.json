@@ -1,0 +1,749 @@
+{
+  "name": "Empty",
+  "slug": "empty",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "用于组合媒体、标题、描述和操作内容的有样式空状态区域。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/empty",
+    "vue": "@fex-design/vue/primitive/empty",
+    "solid": "@fex-design/solid/primitive/empty",
+    "svelte": "@fex-design/svelte/primitive/empty",
+    "angular": "@fex-design/angular/primitive/empty"
+  },
+  "props": [],
+  "events": [],
+  "cssVariables": [],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "组合媒体、标题和描述。"
+    },
+    {
+      "id": "content",
+      "title": "操作内容",
+      "description": "使用 EmptyContent 添加一个或多个操作。"
+    },
+    {
+      "id": "image",
+      "title": "图片定制",
+      "description": "对比默认媒体、自定义媒体和隐藏媒体。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "使用中文 LTR 与阿拉伯语 RTL 对比内容方向和操作排列。"
+    }
+  ],
+  "components": [
+    {
+      "name": "Empty",
+      "slug": "empty",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "Empty 组件继承原生 div，原生 div 的所有属性和事件均可透传；根空状态容器。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/empty",
+        "vue": "@fex-design/vue/primitive/empty",
+        "solid": "@fex-design/solid/primitive/empty",
+        "svelte": "@fex-design/svelte/primitive/empty",
+        "angular": "@fex-design/angular/primitive/empty"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到原生 div 的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "根空状态容器。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "根空状态容器。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "JSX.Element",
+              "description": "根空状态容器。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "Snippet",
+              "description": "根空状态容器。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到宿主元素的内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "内容投影",
+              "description": "根空状态容器。"
+            }
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    },
+    {
+      "name": "EmptyHeader",
+      "slug": "empty-header",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "EmptyHeader 组件继承原生 div，原生 div 的所有属性和事件均可透传；组织媒体、标题和描述。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/empty",
+        "vue": "@fex-design/vue/primitive/empty",
+        "solid": "@fex-design/solid/primitive/empty",
+        "svelte": "@fex-design/svelte/primitive/empty",
+        "angular": "@fex-design/angular/primitive/empty"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到原生 div 的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "组织媒体、标题和描述。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "组织媒体、标题和描述。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "JSX.Element",
+              "description": "组织媒体、标题和描述。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "Snippet",
+              "description": "组织媒体、标题和描述。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到宿主元素的内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "内容投影",
+              "description": "组织媒体、标题和描述。"
+            }
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    },
+    {
+      "name": "EmptyMedia",
+      "slug": "empty-media",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "EmptyMedia 组件继承原生 div，原生 div 的所有属性和事件均可透传；承载自定义图标或图片。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/empty",
+        "vue": "@fex-design/vue/primitive/empty",
+        "solid": "@fex-design/solid/primitive/empty",
+        "svelte": "@fex-design/svelte/primitive/empty",
+        "angular": "@fex-design/angular/primitive/empty"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到原生 div 的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "承载自定义图标或图片。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "承载自定义图标或图片。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "JSX.Element",
+              "description": "承载自定义图标或图片。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "Snippet",
+              "description": "承载自定义图标或图片。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到宿主元素的内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "内容投影",
+              "description": "承载自定义图标或图片。"
+            }
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    },
+    {
+      "name": "EmptyTitle",
+      "slug": "empty-title",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "EmptyTitle 组件继承原生 div，原生 div 的所有属性和事件均可透传；承载空状态标题。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/empty",
+        "vue": "@fex-design/vue/primitive/empty",
+        "solid": "@fex-design/solid/primitive/empty",
+        "svelte": "@fex-design/svelte/primitive/empty",
+        "angular": "@fex-design/angular/primitive/empty"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到原生 div 的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "承载空状态标题。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "承载空状态标题。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "JSX.Element",
+              "description": "承载空状态标题。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "Snippet",
+              "description": "承载空状态标题。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到宿主元素的内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "内容投影",
+              "description": "承载空状态标题。"
+            }
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    },
+    {
+      "name": "EmptyDescription",
+      "slug": "empty-description",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "EmptyDescription 组件继承原生 p，原生 p 的所有属性和事件均可透传；承载空状态辅助说明。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/empty",
+        "vue": "@fex-design/vue/primitive/empty",
+        "solid": "@fex-design/solid/primitive/empty",
+        "svelte": "@fex-design/svelte/primitive/empty",
+        "angular": "@fex-design/angular/primitive/empty"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到原生 p 的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "承载空状态辅助说明。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 p 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "承载空状态辅助说明。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 p 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "JSX.Element",
+              "description": "承载空状态辅助说明。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 p 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "Snippet",
+              "description": "承载空状态辅助说明。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到宿主元素的内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "内容投影",
+              "description": "承载空状态辅助说明。"
+            }
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    },
+    {
+      "name": "EmptyContent",
+      "slug": "empty-content",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "EmptyContent 组件继承原生 div，原生 div 的所有属性和事件均可透传；承载操作或补充内容。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/empty",
+        "vue": "@fex-design/vue/primitive/empty",
+        "solid": "@fex-design/solid/primitive/empty",
+        "svelte": "@fex-design/svelte/primitive/empty",
+        "angular": "@fex-design/angular/primitive/empty"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到原生 div 的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "承载操作或补充内容。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "承载操作或补充内容。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "JSX.Element",
+              "description": "承载操作或补充内容。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到原生 div 的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加内联样式。"
+            },
+            {
+              "name": "children",
+              "type": "Snippet",
+              "description": "承载操作或补充内容。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到宿主元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到宿主元素的内联样式。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "内容投影",
+              "description": "承载操作或补充内容。"
+            }
+          ],
+          "slotLabel": "内容投影"
+        }
+      }
+    }
+  ]
+}

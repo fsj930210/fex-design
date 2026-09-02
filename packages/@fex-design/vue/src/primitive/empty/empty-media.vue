@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { emptyMediaClassName, type EmptyMediaStyleProps } from '@fex-design/styles/empty'
+import { emptyMediaClassName } from '@fex-design/styles/empty'
 import { cn } from '@fex/utils'
 
 defineOptions({ inheritAttrs: false })
-const props = withDefaults(
-  defineProps<{ class?: string | undefined; variant?: EmptyMediaStyleProps['variant'] }>(),
-  { variant: 'icon' },
-)
+const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
   <div
     v-bind="$attrs"
-    data-slot="empty-icon"
-    :data-variant="props.variant"
-    :class="cn(emptyMediaClassName({ variant: props.variant }), props.class)"
+    data-slot="empty-media"
+    :class="cn(emptyMediaClassName, props.class)"
   >
     <slot />
   </div>

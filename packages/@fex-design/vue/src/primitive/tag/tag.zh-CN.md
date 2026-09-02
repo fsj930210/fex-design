@@ -1,17 +1,17 @@
 # Vue Primitive Tag
 
-用于承载简短分类、属性和状态信息的 styled Tag 原子组件。Primitive 提供根节点 `Tag` 与可组合的 `TagClose` 按钮，不持有标签删除状态。
+用于承载简短分类、属性和状态信息的 styled Tag 原子组件。Primitive 提供根节点 `Tag` 与可组合的 `TagAction` 按钮，不规定具体操作，也不持有业务状态。
 
 ## 导入
 
-    import { Tag, TagClose } from '@fex-design/vue/primitive/tag'
+    import { Tag, TagAction } from '@fex-design/vue/primitive/tag'
 
 ## 组件
 
 | 组件 | 元素 | 说明 |
 | ---- | ---- | ---- |
 | Tag | span | 继承原生 span，提供 variant、color、size 和 disabled 样式。 |
-| TagClose | button | 继承原生 button，默认显示 CloseIcon，也可完全替换内容。 |
+| TagAction | button | 继承原生 button，默认显示 CloseIcon，也可完全替换内容。 |
 
 ## 示例
 
@@ -37,13 +37,13 @@
 | 内容 | default slot | — | 标签内容。 |
 | 原生属性 | Vue span attrs | — | 透传原生 span 属性与事件。 |
 
-## TagClose API
+## TagAction API
 
 | 名称 | 类型 | 默认值 | 说明 |
 | ---- | ---- | ------ | ---- |
-| disabled | boolean | false | 禁用原生关闭按钮。 |
+| disabled | boolean | false | 禁用原生操作按钮。 |
 | 内容 | default slot | CloseIcon | 传入内容时完全替换默认关闭图标。 |
-| 事件 | native `click` listener | — | 原生按钮事件；Primitive 不增加专用关闭事件。 |
+| 事件 | native `click` listener | — | 原生按钮事件；Primitive 不增加专用 action 事件。 |
 | 原生属性 | Vue button attrs | — | 透传原生 button 属性与事件。 |
 
 ## 视觉变体与颜色
@@ -73,8 +73,8 @@
 
 ## 内容与组合
 
-内容遵循 Vue 原生模型：default slot。Primitive 需要关闭能力时，在 `Tag` 内组合 `TagClose`。`TagClose` 不会删除父标签，也不会自动联动父级 disabled。
+内容遵循 Vue 原生模型：default slot。需要标签内操作时，在 `Tag` 内组合 `TagAction`。它默认显示 CloseIcon，自定义内容可以表达删除、编辑、更多或其他操作；`TagAction` 不规定具体行为，也不会自动联动父级 disabled。
 
 ## 可访问性
 
-可见文案应保持简短。每个 `TagClose` 都应提供能指出目标标签的无障碍名称。删除操作放在原生点击事件中处理；如果被删除标签持有焦点，应把焦点移动到可预测的相邻控件。
+可见文案应保持简短。每个 `TagAction` 都应提供描述操作及目标的无障碍名称。具体操作放在原生点击事件中处理；执行删除等破坏性操作后，应把焦点移动到可预测的相邻控件。

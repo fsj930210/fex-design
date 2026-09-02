@@ -1,6 +1,6 @@
 import { Badge } from '@fex-design/react/primitive/badge'
 import { Card } from '@fex-design/react/ui/card'
-import { InfoIcon } from '@fex-design/react/icon/info'
+import { CircleInfoIcon } from '@fex-design/react/icon/circle-info'
 import {
   Empty,
   EmptyContent,
@@ -27,8 +27,8 @@ export function EmptyPage() {
         <Card title="Primitive" description="Media, title, description, and content slots.">
           <Empty>
             <EmptyHeader>
-              <EmptyMedia variant="icon">
-                <InfoIcon />
+              <EmptyMedia>
+                <CircleInfoIcon />
               </EmptyMedia>
               <EmptyTitle>No approval tasks</EmptyTitle>
               <EmptyDescription>

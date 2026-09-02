@@ -1,4 +1,4 @@
-import { Tag, TagClose } from '@fex-design/react/primitive/tag'
+import { Tag, TagAction } from '@fex-design/react/primitive/tag'
 
 export default function Basic() {
   return (
@@ -8,11 +8,15 @@ export default function Basic() {
       <Tag size="lg">大型标签</Tag>
       <Tag color="primary">
         可关闭标签
-        <TagClose aria-label="删除可关闭标签" />
+        <TagAction aria-label="删除可关闭标签" />
+      </Tag>
+      <Tag color="info">
+        可编辑标签
+        <TagAction aria-label="编辑标签">编辑</TagAction>
       </Tag>
       <Tag disabled>
         禁用标签
-        <TagClose disabled aria-label="删除禁用标签" />
+        <TagAction disabled aria-label="删除禁用标签" />
       </Tag>
     </div>
   )

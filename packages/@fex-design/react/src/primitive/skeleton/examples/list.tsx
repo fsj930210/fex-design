@@ -1,0 +1,2 @@
+import { SkeletonAvatar, SkeletonText } from '@fex-design/react/primitive/skeleton'
+export default function Example() { return <div className="grid w-full max-w-xl gap-5">{[0,1,2].map(item => <div key={item} className="flex items-start gap-3"><SkeletonAvatar size="lg" /><div className="grid min-w-0 flex-1 gap-2"><SkeletonText className="w-2/5" /><SkeletonText /><SkeletonText className="w-4/5" /></div></div>)}</div> }

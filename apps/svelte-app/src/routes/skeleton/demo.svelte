@@ -1,6 +1,6 @@
 <script lang="ts">
   import { skeletonAnimationClassName } from '@fex-design/styles/skeleton'
-  import Skeleton from '@fex-design/svelte/primitive/skeleton'
+  import { SkeletonBlock as Skeleton } from '@fex-design/svelte/primitive/skeleton'
   import Card from '@fex-design/svelte/ui/card'
   let { kind }: { kind: 'basic' | 'avatar' | 'card' | 'text' | 'form' | 'table' | 'animation' } = $props()
 </script>

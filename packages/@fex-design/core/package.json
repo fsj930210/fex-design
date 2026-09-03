@@ -20,6 +20,7 @@
     "./anchor/types": "./src/anchor/types.ts",
     "./bubble/types": "./src/bubble/types.ts",
     "./spinner/types": "./src/spinner/types.ts",
+    "./skeleton/types": "./src/skeleton/types.ts",
     "./button/types": "./src/button/types.ts",
     "./separator/types": "./src/separator/types.ts",
     "./aspect-ratio/types": "./src/aspect-ratio/types.ts",

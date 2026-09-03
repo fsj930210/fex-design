@@ -1,0 +1,2 @@
+import { SkeletonButton, SkeletonText } from '@fex-design/react/ui/skeleton'
+export default function Example() { return <div className="grid min-w-[32rem] grid-cols-[1.2fr_1fr_6rem] gap-x-6 gap-y-4">{Array.from({length:12},(_,index) => index % 3 === 2 ? <SkeletonButton key={index} size="sm" className="w-16" /> : <SkeletonText key={index} className={index < 3 ? 'w-2/3' : undefined} />)}</div> }

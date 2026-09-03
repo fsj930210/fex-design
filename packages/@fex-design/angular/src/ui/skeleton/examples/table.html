@@ -1,0 +1,2 @@
+<div class="grid min-w-[32rem] grid-cols-[1.2fr_1fr_6rem] gap-x-6 gap-y-4">@for (index of indexes; track index) {@if (index % 3 === 2) {<div skeletonButton size="sm" class="w-16"></div>} @else {<div skeletonText [class]="index < 3 ? 'w-2/3' : ''"></div>}}</div>
+

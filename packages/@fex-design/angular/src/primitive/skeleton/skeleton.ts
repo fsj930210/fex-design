@@ -1,13 +1,6 @@
-import { skeletonClassName } from '@fex-design/styles/skeleton'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { createHostClassName } from '../../signals/host-class'
-@Component({
-  selector: 'fex-skeleton',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class]': 'hostClassName()', 'aria-hidden': 'true', 'data-slot': 'skeleton' },
-  template: '',
-})
-export class Skeleton {
-  protected readonly hostClassName = createHostClassName(() => skeletonClassName)
-}
+export { SkeletonAvatar } from './skeleton-avatar'
+export { SkeletonBlock } from './skeleton-block'
+export { SkeletonButton } from './skeleton-button'
+export { SkeletonImage } from './skeleton-image'
+export { SkeletonInput } from './skeleton-input'
+export { SkeletonText } from './skeleton-text'

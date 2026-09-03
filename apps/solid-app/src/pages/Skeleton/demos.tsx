@@ -1,4 +1,4 @@
-import { Skeleton } from '@fex-design/solid/primitive/skeleton'
+import { SkeletonBlock as Skeleton } from '@fex-design/solid/primitive/skeleton'
 import { skeletonAnimationClassName } from '@fex-design/styles/skeleton'
 import { Card } from '@fex-design/solid/ui/card'
 export const BasicDemo = () => (

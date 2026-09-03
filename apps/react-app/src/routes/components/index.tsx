@@ -3,14 +3,6 @@ import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
   {
-    path: '/aspect-ratio',
-    element: createLazyRouteElement(() => import('../../pages/AspectRatio'), 'AspectRatioPage'),
-  },
-  {
-    path: '/avatar',
-    element: createLazyRouteElement(() => import('../../pages/Avatar'), 'AvatarPage'),
-  },
-  {
     path: '/bubble',
     element: createLazyRouteElement(() => import('../../pages/Bubble'), 'BubblePage'),
   },
@@ -75,14 +67,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Breadcrumb'), 'BreadcrumbPage'),
   },
   {
-    path: '/button',
-    element: createLazyRouteElement(() => import('../../pages/Button'), 'ButtonPage'),
-  },
-  {
-    path: '/card',
-    element: createLazyRouteElement(() => import('../../pages/Card'), 'CardPage'),
-  },
-  {
     path: '/calendar',
     element: createLazyRouteElement(() => import('../../pages/Calendar'), 'CalendarPage'),
   },
@@ -111,18 +95,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Dropdown'), 'DropdownPage'),
   },
   {
-    path: '/alert',
-    element: createLazyRouteElement(() => import('../../pages/Alert'), 'AlertPage'),
-  },
-  {
-    path: '/badge',
-    element: createLazyRouteElement(() => import('../../pages/Badge'), 'BadgePage'),
-  },
-  {
-    path: '/empty',
-    element: createLazyRouteElement(() => import('../../pages/Empty'), 'EmptyPage'),
-  },
-  {
     path: '/input',
     element: createLazyRouteElement(() => import('../../pages/Input'), 'InputPage'),
   },
@@ -141,10 +113,6 @@ export const componentRoutes = [
   {
     path: '/form',
     element: createLazyRouteElement(() => import('../../pages/Form'), 'FormPage'),
-  },
-  {
-    path: '/kbd',
-    element: createLazyRouteElement(() => import('../../pages/Kbd'), 'KbdPage'),
   },
   {
     path: '/listbox',
@@ -229,10 +197,6 @@ export const componentRoutes = [
   {
     path: '/tabs',
     element: createLazyRouteElement(() => import('../../pages/Tabs'), 'TabsPage'),
-  },
-  {
-    path: '/tag',
-    element: createLazyRouteElement(() => import('../../pages/Tag'), 'TagPage'),
   },
   {
     path: '/timeline',

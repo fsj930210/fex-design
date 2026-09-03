@@ -1,0 +1,2 @@
+<script lang="ts">import { Skeleton } from '@fex-design/svelte/ui/skeleton'; let loading = $state(true)</script>
+<div class="grid w-full max-w-xl gap-4"><button type="button" class="w-fit rounded-md border px-3 py-2" onclick={() => loading = !loading}>loading: {String(loading)}</button><Skeleton {loading} animation="wave" avatar={{size:'lg'}} title={{width:'40%'}} paragraph={{rows:3,width:'70%'}}><div class="rounded-lg border p-5"><strong>项目概览</strong><p class="mt-2 text-sm text-muted-foreground">真实内容在 loading 结束后显示。</p></div></Skeleton></div>

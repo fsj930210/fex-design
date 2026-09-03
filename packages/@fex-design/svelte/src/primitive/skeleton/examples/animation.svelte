@@ -1,0 +1,2 @@
+<script lang="ts">import { SkeletonAvatar, SkeletonButton, SkeletonText } from '@fex-design/svelte/primitive/skeleton'; const modes = [{value:'none',label:'无动画'},{value:'pulse',label:'呼吸'},{value:'wave',label:'流光'}] as const</script>
+<div class="grid gap-5">{#each modes as mode (mode.value)}<div class="grid gap-2"><b>{mode.label}</b><div class="flex items-center gap-3"><SkeletonAvatar animation={mode.value} /><SkeletonText animation={mode.value} class="w-48" /><SkeletonButton animation={mode.value} /></div></div>{/each}</div>

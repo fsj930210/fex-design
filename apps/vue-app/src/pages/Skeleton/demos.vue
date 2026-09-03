@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Skeleton } from '@fex-design/vue/primitive/skeleton'
+import { SkeletonBlock as Skeleton } from '@fex-design/vue/primitive/skeleton'
 import { skeletonAnimationClassName } from '@fex-design/styles/skeleton'
 import Card from '@fex-design/vue/ui/card'
 defineProps<{ kind: 'basic' | 'avatar' | 'card' | 'text' | 'form' | 'table' | 'animation' }>()

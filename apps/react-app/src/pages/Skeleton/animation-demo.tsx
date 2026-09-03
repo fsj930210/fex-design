@@ -1,4 +1,4 @@
-import { Skeleton } from '@fex-design/react/primitive/skeleton'
+import { SkeletonBlock as Skeleton } from '@fex-design/react/primitive/skeleton'
 import { skeletonAnimationClassName } from '@fex-design/styles/skeleton'
 import { Card } from '@fex-design/react/ui/card'
 export function AnimationDemo() {

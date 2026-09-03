@@ -10,5 +10,14 @@ Styled empty-state regions implemented as standalone, host-element constrained c
 
 Use `<div empty>`, `<div emptyHeader>`, `<div emptyMedia>`, `<div emptyTitle>`, `<p emptyDescription>`, and `<div emptyContent>`. Native host attributes and events remain available.
 
+## Examples
+
 `basic`, `content`, `image`, and `direction` match UI Empty visually.
 
+## Direction
+
+Native `dir` controls inherited LTR and RTL layout.
+
+## Accessibility
+
+Add live-region semantics to the native host only when dynamic updates require announcement.

@@ -1,0 +1,2 @@
+import { SkeletonAvatar, SkeletonButton, SkeletonText } from '@fex-design/solid/primitive/skeleton'; import { For } from 'solid-js'; const modes = [['none','无动画'],['pulse','呼吸'],['wave','流光']] as const
+export default () => <div class="grid gap-5"><For each={modes}>{([animation,label]) => <div class="grid gap-2"><b>{label}</b><div class="flex items-center gap-3"><SkeletonAvatar animation={animation} /><SkeletonText animation={animation} class="w-48" /><SkeletonButton animation={animation} /></div></div>}</For></div>

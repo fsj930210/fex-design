@@ -1,1 +1,6 @@
-export { default as Skeleton } from './skeleton.vue'
+export { default as SkeletonAvatar } from './skeleton-avatar.vue'
+export { default as SkeletonBlock } from './skeleton-block.vue'
+export { default as SkeletonButton } from './skeleton-button.vue'
+export { default as SkeletonImage } from './skeleton-image.vue'
+export { default as SkeletonInput } from './skeleton-input.vue'
+export { default as SkeletonText } from './skeleton-text.vue'

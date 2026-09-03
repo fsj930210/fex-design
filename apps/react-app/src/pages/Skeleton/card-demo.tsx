@@ -1,4 +1,4 @@
-import { Skeleton } from '@fex-design/react/primitive/skeleton'
+import { SkeletonBlock as Skeleton } from '@fex-design/react/primitive/skeleton'
 import { Card } from '@fex-design/react/ui/card'
 export function CardDemo() {
   return (

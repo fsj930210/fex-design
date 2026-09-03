@@ -1,0 +1,57 @@
+{
+  "name": "Skeleton",
+  "slug": "skeleton",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "带基础样式的骨架占位组件族。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/skeleton",
+    "vue": "@fex-design/vue/primitive/skeleton",
+    "solid": "@fex-design/solid/primitive/skeleton",
+    "svelte": "@fex-design/svelte/primitive/skeleton",
+    "angular": "@fex-design/angular/primitive/skeleton"
+  },
+  "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }],
+  "events": [],
+  "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基本", "description": "标明每个基础占位组件。" },
+    { "id": "list", "title": "列表", "description": "头像与文本列表。" },
+    { "id": "table", "title": "表格", "description": "表格骨架。" },
+    { "id": "image", "title": "图片内容", "description": "图片内容骨架。" },
+    { "id": "form", "title": "表单", "description": "表单骨架。" },
+    { "id": "animation", "title": "动画", "description": "三种动画模式。" }
+  ],
+  "components": [
+    {
+      "name": "SkeletonBlock", "slug": "skeleton-block", "layer": "primitive", "status": "stable", "description": "自由尺寸占位块。",
+      "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }], "events": [], "demos": []
+    },
+    {
+      "name": "SkeletonText", "slug": "skeleton-text", "layer": "primitive", "status": "stable", "description": "单行文本占位。",
+      "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }, { "name": "round", "type": "boolean", "default": "false", "description": "使用全圆角。" }], "events": [], "demos": []
+    },
+    {
+      "name": "SkeletonAvatar", "slug": "skeleton-avatar", "layer": "primitive", "status": "stable", "description": "头像占位。",
+      "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }, { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "'md'", "description": "与 Avatar 对齐的尺寸。" }, { "name": "shape", "type": "'circle' | 'square'", "default": "'circle'", "description": "头像形状。" }], "events": [], "demos": []
+    },
+    {
+      "name": "SkeletonButton", "slug": "skeleton-button", "layer": "primitive", "status": "stable", "description": "按钮占位。",
+      "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }, { "name": "size", "type": "'xs' | 'sm' | 'default' | 'lg' | 'xl'", "default": "'default'", "description": "与 Button 对齐的高度。" }, { "name": "shape", "type": "'round' | 'square' | 'circle'", "description": "不传为普通矩形。" }, { "name": "block", "type": "boolean", "default": "false", "description": "占满容器宽度。" }], "events": [], "demos": []
+    },
+    {
+      "name": "SkeletonInput", "slug": "skeleton-input", "layer": "primitive", "status": "stable", "description": "输入框占位。",
+      "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }, { "name": "block", "type": "boolean", "default": "false", "description": "占满容器宽度。" }], "events": [], "demos": []
+    },
+    {
+      "name": "SkeletonImage", "slug": "skeleton-image", "layer": "primitive", "status": "stable", "description": "图片区域占位。",
+      "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }], "events": [], "demos": []
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+import { Skeleton } from '@fex-design/react/ui/skeleton'
+import { useState } from 'react'
+export default function Example() { const [loading,setLoading] = useState(true); return <div className="grid w-full max-w-xl gap-4"><button type="button" className="w-fit rounded-md border px-3 py-2" onClick={() => setLoading(value => !value)}>loading: {String(loading)}</button><Skeleton loading={loading} animation="wave" avatar={{ size: 'lg' }} title={{ width: '40%' }} paragraph={{ rows: 3, width: '70%' }}><div className="rounded-lg border p-5"><strong>项目概览</strong><p className="mt-2 text-sm text-muted-foreground">真实内容在 loading 结束后显示。</p></div></Skeleton></div> }

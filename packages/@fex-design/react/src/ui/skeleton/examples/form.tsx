@@ -1,0 +1,2 @@
+import { SkeletonButton, SkeletonInput, SkeletonText } from '@fex-design/react/ui/skeleton'
+export default function Example() { return <div className="grid w-full max-w-md gap-4"><div className="grid gap-2"><SkeletonText className="w-20" /><SkeletonInput block /></div><div className="grid gap-2"><SkeletonText className="w-28" /><SkeletonInput block /></div><SkeletonButton className="w-24" /></div> }

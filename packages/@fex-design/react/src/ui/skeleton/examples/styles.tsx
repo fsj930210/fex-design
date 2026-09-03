@@ -1,0 +1,2 @@
+import { Skeleton } from '@fex-design/react/ui/skeleton'
+export default function Example() { return <Skeleton avatar={{ size: 'lg' }} title={{ width: '45%' }} paragraph={{ rows: 3, width: '70%' }} classNames={{ root: 'rounded-xl border border-dashed border-primary p-5', avatar: 'bg-blue-300', title: 'bg-blue-400', paragraph: 'bg-blue-200' }} styles={{ avatar: { width: 56, height: 56 }, title: { height: 20 } }} /> }

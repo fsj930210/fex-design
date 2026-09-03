@@ -1,4 +1,4 @@
-import { Skeleton } from '@fex-design/react/primitive/skeleton'
+import { SkeletonBlock as Skeleton } from '@fex-design/react/primitive/skeleton'
 import { Card } from '@fex-design/react/ui/card'
 const rows = ['w-2/5', 'w-3/5', 'w-1/2']
 export function TableDemo() {

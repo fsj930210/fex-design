@@ -1,16 +1,30 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Skeleton } from '@fex-design/angular/primitive/skeleton'
-import { skeletonAnimationClassName } from '@fex-design/styles/skeleton'
-import Card from '@fex-design/angular/ui/card'
+import {
+  SkeletonAvatar,
+  SkeletonBlock,
+  SkeletonButton,
+  SkeletonImage,
+  SkeletonInput,
+  SkeletonText,
+} from '@fex-design/angular/primitive/skeleton'
+import { Card } from '@fex-design/angular/ui/card'
+
 @Component({
-  selector: 'fex-skeleton-page',
+  selector: 'skeleton-page',
   standalone: true,
-  imports: [Card, Skeleton],
+  imports: [
+    Card,
+    SkeletonAvatar,
+    SkeletonBlock,
+    SkeletonButton,
+    SkeletonImage,
+    SkeletonInput,
+    SkeletonText,
+  ],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonComponent {
-  protected readonly animationClassName = skeletonAnimationClassName
-  protected readonly widths = [40, 60, 50]
+  protected readonly rows = [0, 1, 2]
 }

@@ -1,6 +1,6 @@
 # React UI Empty
 
-Convenience Empty built from the same Primitive regions.
+Convenience Empty built from the same Primitive regions with a built-in image and structured styling.
 
 ## Import
 
@@ -8,9 +8,17 @@ Convenience Empty built from the same Primitive regions.
 
 ## Examples
 
-`basic`, `content`, `image`, and `direction` match Primitive output. `styling` demonstrates semantic-region `classNames` and `styles`.
+| Name | Covers |
+| --- | --- |
+| basic | Built-in image, title, and description. |
+| content | Custom children rendered in EmptyContent. |
+| image | Image URL and custom React content. |
+| direction | Chinese LTR and Arabic RTL layouts. |
+| styling | Structured classNames and styles. |
 
-## API
+The first four examples match Primitive Empty in copy, layout, and final appearance.
+
+## Empty API
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,7 +27,17 @@ Convenience Empty built from the same Primitive regions.
 | description | ReactNode | — | Supporting description. |
 | children | ReactNode | — | Content rendered in EmptyContent. |
 | classNames | EmptyClassNames | — | Classes for root, header, image, title, description, and content. |
-| styles | EmptyStyles | — | Inline styles by semantic region. |
+| styles | EmptyStyles | — | Inline styles for the six semantic regions. |
+| native attributes | ComponentProps<'div'> | — | Native root attributes and events. |
 
-All other native `div` attributes pass through to the root.
+## Structured styles
 
+Use `classNames` and `styles` for per-instance root, header, image, title, description, and content customization. Empty defines no component-specific CSS variables.
+
+## Direction
+
+Pass native `dir="ltr"` or `dir="rtl"`. Alignment and content layout follow the inherited writing direction.
+
+## Accessibility
+
+Empty is presentational by default. Add live-region semantics only when dynamic changes need announcement; action controls supplied through children keep their native accessible names and keyboard behavior.

@@ -71,7 +71,10 @@ for (const [framework, config] of Object.entries(frameworks)) {
             "from '@fex-design/svelte/ui/separator'",
           )
         if (layer === 'ui' && framework === 'angular')
-          source = source.replace("from '../separator'", "from '@fex-design/angular/ui/separator'")
+          source = source.replaceAll(
+            `from '../${component.name}'`,
+            `from '@fex-design/angular/ui/${component.name}'`,
+          )
         if (framework === 'angular') {
           try {
             source += `\n\n<!-- ${name}.html -->\n${await readFile(resolve(angularTemplateRoot, `${name}.html`), 'utf8')}`

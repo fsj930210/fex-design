@@ -1,8 +1,8 @@
-import { Anchor, type AnchorItem } from '@fex-design/solid/primitive/anchor'
+import { Anchor, type AnchorItemData } from '@fex-design/solid/ui/anchor'
 import { Card } from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 
-const items: AnchorItem<string>[] = [
+const items: AnchorItemData<string>[] = [
   { key: 'anchor-overview', title: 'Overview', target: '#anchor-overview' },
   {
     key: 'anchor-api',
@@ -27,7 +27,7 @@ export function AnchorDemo() {
           <Anchor
             items={items}
             activeKeys={currentKeys()}
-            activeOffset={80}
+            targetOffset={80}
             container={() => container ?? window}
             onChange={setCurrentKeys}
           />
@@ -38,7 +38,7 @@ export function AnchorDemo() {
             items={items}
             activeMode="progress"
             activeKeys={activeKeys()}
-            activeOffset={80}
+            targetOffset={80}
             container={() => container ?? window}
             onChange={setActiveKeys}
           />

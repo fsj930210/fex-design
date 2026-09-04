@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Anchor } from '@fex-design/vue/primitive/anchor'
+import { Anchor } from '@fex-design/vue/ui/anchor'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 const container = ref<HTMLElement>()
@@ -14,7 +14,7 @@ const items = [
     ><Anchor
       :items="items"
       orientation="horizontal"
-      :active-offset="80"
+      :target-offset="80"
       :container="() => container ?? window"
     />
     <div ref="container" class="mt-2 h-40 overflow-y-auto rounded-md border border-border p-3">

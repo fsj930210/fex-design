@@ -1,0 +1,40 @@
+<div class="grid w-full gap-6 sm:grid-cols-2">
+  <section #ltrContainer dir="ltr" class="h-80 overflow-auto rounded-lg border">
+    <div class="grid min-h-full grid-cols-[8rem_minmax(0,1fr)] gap-6 p-4">
+      <div class="sticky top-4 self-start">
+        <strong>LTR · 中文示例</strong>
+        <nav anchorRoot [container]="ltrContainer" class="mt-3">
+          <div anchorRail><span anchorIndicator></span></div>
+          <ul anchorList>
+            <li anchorItem value="ltr-overview" target="#angular-ltr-overview"><button anchorLink>概览</button></li>
+            <li anchorItem value="ltr-usage" target="#angular-ltr-usage"><button anchorLink>使用方式</button><ul anchorList><li anchorItem value="ltr-api" target="#angular-ltr-api"><button anchorLink>API</button></li></ul></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="grid gap-32 pb-64">
+        <section id="angular-ltr-overview">概览</section>
+        <section id="angular-ltr-usage">使用方式</section>
+        <section id="angular-ltr-api">API</section>
+      </div>
+    </div>
+  </section>
+  <section #rtlContainer dir="rtl" class="h-80 overflow-auto rounded-lg border">
+    <div class="grid min-h-full grid-cols-[8rem_minmax(0,1fr)] gap-6 p-4">
+      <div class="sticky top-4 self-start">
+        <strong>RTL · مثال عربي</strong>
+        <nav anchorRoot [container]="rtlContainer" class="mt-3">
+          <div anchorRail><span anchorIndicator></span></div>
+          <ul anchorList>
+            <li anchorItem value="rtl-overview" target="#angular-rtl-overview"><button anchorLink>نظرة عامة</button></li>
+            <li anchorItem value="rtl-usage" target="#angular-rtl-usage"><button anchorLink>طريقة الاستخدام</button><ul anchorList><li anchorItem value="rtl-api" target="#angular-rtl-api"><button anchorLink>واجهة البرمجة</button></li></ul></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="grid gap-32 pb-64">
+        <section id="angular-rtl-overview">نظرة عامة</section>
+        <section id="angular-rtl-usage">طريقة الاستخدام</section>
+        <section id="angular-rtl-api">واجهة البرمجة</section>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,18 @@
+<div class="grid w-full max-w-2xl gap-3">
+  <p class="text-sm text-muted-foreground">点击“第二节”：容器会滚到底，但高亮仍保留在点击项。</p>
+  <div #container class="grid h-72 grid-cols-[10rem_1fr] gap-6 overflow-auto rounded-lg border p-4">
+    <nav anchorRoot [container]="container" class="sticky top-0 self-start">
+      <div anchorRail><span anchorIndicator></span></div>
+      <ul anchorList>
+        <li anchorItem value="first" target="#angular-click-lock-first"><button anchorLink>第一节</button></li>
+        <li anchorItem value="second" target="#angular-click-lock-second"><button anchorLink>点击第二节</button></li>
+        <li anchorItem value="third" target="#angular-click-lock-third"><button anchorLink>第三节</button></li>
+      </ul>
+    </nav>
+    <div class="grid gap-28 pb-16">
+      <section id="angular-click-lock-first"><h3 class="font-semibold">第一节</h3></section>
+      <section id="angular-click-lock-second"><h3 class="font-semibold">点击第二节</h3></section>
+      <section id="angular-click-lock-third"><h3 class="font-semibold">第三节</h3></section>
+    </div>
+  </div>
+</div>

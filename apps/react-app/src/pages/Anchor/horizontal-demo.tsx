@@ -1,4 +1,4 @@
-import { Anchor } from '@fex-design/react/primitive/anchor'
+import { Anchor } from '@fex-design/react/ui/anchor'
 import { Card } from '@fex-design/react/ui/card'
 import { useRef } from 'react'
 
@@ -11,7 +11,7 @@ export function HorizontalDemo() {
     >
       <Anchor
         orientation="horizontal"
-        activeOffset={80}
+        targetOffset={80}
         container={() => containerRef.current ?? window}
         items={[
           { key: 'horizontal-one', title: 'Overview', target: '#horizontal-overview' },

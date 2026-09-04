@@ -1,4 +1,4 @@
-import { Anchor } from '@fex-design/solid/primitive/anchor'
+import { Anchor } from '@fex-design/solid/ui/anchor'
 import { Card } from '@fex-design/solid/ui/card'
 
 export function HorizontalDemo() {
@@ -7,7 +7,7 @@ export function HorizontalDemo() {
     <Card title="Horizontal" description="Horizontal anchors use the same tracking behavior.">
       <Anchor
         orientation="horizontal"
-        activeOffset={80}
+        targetOffset={80}
         container={() => container ?? window}
         items={[
           { key: 'horizontal-one', title: 'Overview', target: '#horizontal-overview' },

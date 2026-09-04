@@ -1,18 +1,53 @@
 import type { AnchorTarget } from './types'
 
+export function createAnchorClickScrollGuard(unlockDelay = 160) {
+  let locked = false
+  let unlockTimer: ReturnType<typeof setTimeout> | undefined
+
+  const scheduleUnlock = () => {
+    if (unlockTimer !== undefined) clearTimeout(unlockTimer)
+    unlockTimer = setTimeout(() => {
+      locked = false
+      unlockTimer = undefined
+    }, unlockDelay)
+  }
+
+  return {
+    lock() {
+      locked = true
+      scheduleUnlock()
+    },
+    shouldHandleScroll() {
+      if (!locked) return true
+      scheduleUnlock()
+      return false
+    },
+    dispose() {
+      if (unlockTimer !== undefined) clearTimeout(unlockTimer)
+      unlockTimer = undefined
+      locked = false
+    },
+  }
+}
+
 export function resolveAnchorTarget(target: AnchorTarget): HTMLElement | null {
   if (typeof target === 'function') return target()
-  if (target instanceof HTMLElement) return target
+  if (typeof target === 'string') {
+    if (typeof document === 'undefined') return null
 
-  const id = target.startsWith('#') ? target.slice(1) : target
-  const byId = document.getElementById(id)
-  if (byId) return byId
+    const id = target.startsWith('#') ? target.slice(1) : target
+    const byId = document.getElementById(id)
+    if (byId) return byId
 
-  try {
-    return document.querySelector<HTMLElement>(target)
-  } catch {
-    return null
+    try {
+      return document.querySelector<HTMLElement>(target)
+    } catch {
+      return null
+    }
   }
+
+  if ('current' in target) return target.current
+  return target
 }
 
 export function getAnchorTargetTop(element: HTMLElement, container: Window | HTMLElement) {

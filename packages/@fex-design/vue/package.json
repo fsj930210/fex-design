@@ -73,6 +73,7 @@
     "./primitive/tour": "./src/primitive/tour/tour.ts",
     "./primitive/badge": "./src/primitive/badge/badge.ts",
     "./ui/alert": "./src/ui/alert/alert.ts",
+    "./ui/anchor": "./src/ui/anchor/anchor.ts",
     "./ui/badge": "./src/ui/badge/badge.ts",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.ts",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.ts",

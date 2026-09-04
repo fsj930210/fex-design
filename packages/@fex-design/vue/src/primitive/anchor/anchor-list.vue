@@ -1,54 +1,10 @@
 <script setup lang="ts">
-import type { AnchorItem, AnchorOrientation } from '@fex-design/core/anchor/types'
-import { anchorLinkClassName, anchorListClassName } from '@fex-design/styles/anchor'
-
-defineOptions({ name: 'FexAnchorList' })
-defineProps<{
-  items: readonly AnchorItem<string>[]
-  activeKeys: readonly string[]
-  highlightedKeys: ReadonlySet<string>
-  orientation: AnchorOrientation
-  level?: number
-}>()
-const emit = defineEmits<{ activate: [item: AnchorItem<string>] }>()
+import { anchorListClassName } from '@fex-design/styles/anchor'
+import { cn } from '@fex/utils'
+import { inject, useAttrs } from 'vue'
+import { anchorContextKey } from './anchor-context'
+defineOptions({ name: 'AnchorList', inheritAttrs: false })
+const attrs = useAttrs(); const anchor = inject(anchorContextKey)
+if (!anchor) throw new Error('AnchorList must be used inside AnchorRoot')
 </script>
-
-<template>
-  <ul
-    data-slot="anchor-list"
-    :data-level="level ?? 0"
-    :class="anchorListClassName({ orientation, nested: (level ?? 0) > 0 })"
-  >
-    <li
-      v-for="item in items"
-      :key="item.key"
-      data-slot="anchor-item"
-      :data-active="activeKeys.includes(item.key) || undefined"
-    >
-      <button
-        type="button"
-        data-slot="anchor-link"
-        :data-anchor-key="item.key"
-        :data-state="activeKeys.includes(item.key) ? 'active' : 'inactive'"
-        :class="anchorLinkClassName({ orientation, active: highlightedKeys.has(item.key) })"
-        @click="emit('activate', item)"
-      >
-        <slot name="item" :item="item" :active="activeKeys.includes(item.key)">{{
-          item.title
-        }}</slot>
-      </button>
-      <AnchorList
-        v-if="orientation === 'vertical' && item.children?.length"
-        :items="item.children"
-        :active-keys="activeKeys"
-        :highlighted-keys="highlightedKeys"
-        :orientation="orientation"
-        :level="(level ?? 0) + 1"
-        @activate="emit('activate', $event)"
-        ><template #item="slotProps"
-          ><slot name="item" v-bind="slotProps">{{ slotProps.item.title }}</slot></template
-        ></AnchorList
-      >
-    </li>
-  </ul>
-</template>
+<template><ul v-bind="attrs" data-slot="anchor-list" :class="cn(anchorListClassName({ orientation: anchor.orientation.value }), attrs.class as string | undefined)"><slot /></ul></template>

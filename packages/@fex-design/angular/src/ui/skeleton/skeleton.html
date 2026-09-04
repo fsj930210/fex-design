@@ -5,7 +5,7 @@
 } @else {
   @if (avatar()) {
     <div [class]="avatarAreaClassName">
-      <div skeletonAvatar [animation]="avatarOptions().animation ?? animation()" [shape]="avatarOptions().shape ?? 'circle'" [size]="avatarOptions().size ?? 'md'" [class]="classNames().avatar" [style]="styles().avatar"></div>
+      <div skeletonAvatar [animation]="avatarOptions().animation ?? animation()" [shape]="avatarOptions().shape ?? 'circle'" [size]="avatarOptions().size ?? 'md'" [class]="avatarClassName()" [style]="styles().avatar"></div>
     </div>
   }
   <div [class]="bodyClassName">
@@ -15,7 +15,7 @@
     @if (paragraph() && rows() > 0) {
       <div [class]="paragraphClassName">
         @for (index of rowIndexes(); track index) {
-          <div skeletonText [animation]="animation()" [round]="round()" [class]="classNames().paragraph" [style]="widthStyle(rowWidth(index), styles().paragraph)"></div>
+          <div skeletonText [animation]="animation()" [round]="round()" [class]="paragraphItemClassName()" [style]="widthStyle(rowWidth(index), styles().paragraph)"></div>
         }
       </div>
     }

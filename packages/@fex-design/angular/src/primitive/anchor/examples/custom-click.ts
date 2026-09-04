@@ -1,0 +1,2 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core'; import { AnchorIndicator,AnchorItem,AnchorLink,AnchorList,AnchorRail,AnchorRoot } from '../anchor'
+@Component({selector:'anchor-custom-click-example',standalone:true,imports:[AnchorRoot,AnchorRail,AnchorIndicator,AnchorList,AnchorItem,AnchorLink],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./custom-click.html'}) export class AnchorCustomClickExample{protected normal(){console.log('正常点击')}protected blocked(event:MouseEvent){event.preventDefault();console.log('已阻止内部滚动')}}

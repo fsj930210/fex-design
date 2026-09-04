@@ -1,3 +1,66 @@
-# Anchor
+# Solid Primitive Anchor
 
-Anchor tracks target elements in a window or custom scroll container. `activeKeys` is always an array: `current` contains at most one key, while `progress` contains every item passed so far. The primitive uses buttons and never changes the URL. Vertical anchors support real nested headings; horizontal anchors render the first level only. Item titles accept Solid JSX.
+Composable, styled Anchor primitives with native element behavior.
+
+## Import
+
+    import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '@fex-design/solid/primitive/anchor'
+
+## Components
+
+| Component | Host | Purpose |
+| --- | --- | --- |
+| AnchorRoot | nav | Owns registration, active state, scrolling, orientation, and change events. |
+| AnchorList | ul | Groups root or nested items. |
+| AnchorItem | li | Registers one key, target, and optional targetOffset. |
+| AnchorLink | button | Activates and scrolls to its enclosing item; native events pass through. |
+| AnchorRail | div | Renders the visual rail. |
+| AnchorIndicator | span | Renders current or progress ink. |
+
+## Examples
+
+| Name | Covers |
+| --- | --- |
+| basic | Vertical composition and nested items. |
+| horizontal | Horizontal first-level navigation. |
+| progress | Accumulated reading progress. |
+| controlled | Controlled and uncontrolled active state. |
+| offset | Root offset and item override. |
+| direction | LTR and RTL behavior. |
+| custom-click | Native click handling and preventDefault. |
+
+## AnchorRoot API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| activeKeys | readonly string[] | — | Controlled active keys. |
+| defaultActiveKeys | readonly string[] | [] | Initial uncontrolled keys. |
+| activeMode | current or progress | current | Current item or accumulated progress. |
+| orientation | vertical or horizontal | vertical | Layout direction. |
+| container | Window, HTMLElement, or resolver | window | Scroll container. |
+| targetOffset | number | 0 | Default scroll offset. |
+| threshold | number | 16 | Activation line measured from the container top. |
+| behavior | ScrollBehavior | smooth | Scroll behavior. |
+| change | callback | — | Reports active keys and registered items. |
+| native attributes | Solid JSX native attributes and refs | — | Native attributes, events, and element access. |
+
+## AnchorItem API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | — | Stable item key. |
+| target | selector, HTMLElement, ref-like value, or resolver | — | Resolves the target DOM element without changing the URL. |
+| targetOffset | number | root value | Overrides AnchorRoot targetOffset. |
+| native attributes | Solid JSX native attributes and refs | — | Native li attributes and events. |
+
+## Native parts
+
+AnchorLink is a native button; AnchorList, AnchorRail, and AnchorIndicator retain their native host attributes. Events: `onChange`; native `onClick` on AnchorLink.
+
+## Custom UI logic
+
+The Primitive components expose the compositional contract; component-private context is not a public custom-UI primitive.
+
+## Direction
+
+Native dir="ltr" and dir="rtl" are supported. Rail, indicator, nesting, and horizontal placement use logical directions.

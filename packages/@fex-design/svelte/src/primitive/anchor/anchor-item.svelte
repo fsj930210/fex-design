@@ -1,0 +1,6 @@
+<script lang="ts">
+  import type { AnchorRegisteredItem, AnchorTarget } from '@fex-design/core/anchor/types'; import { anchorItemClassName } from '@fex-design/styles/anchor'; import { cn } from '@fex/utils'; import { getContext, onMount, setContext, type Snippet } from 'svelte'; import type { HTMLLiAttributes } from 'svelte/elements'; import { anchorContextKey, anchorItemContextKey, type AnchorContextValue } from './context'
+  interface Props extends HTMLLiAttributes { value: string; target: AnchorTarget; targetOffset?: number; children?: Snippet }
+  let { value, target, targetOffset, class: className, children, ...rest }: Props = $props(); const anchor = getContext<AnchorContextValue>(anchorContextKey); const parent = getContext<AnchorRegisteredItem | undefined>(anchorItemContextKey); const item: AnchorRegisteredItem = { key: value, target, ...(targetOffset === undefined ? {} : { targetOffset }), ...(parent ? { parentKey: parent.key } : {}) }; setContext(anchorItemContextKey, item); onMount(() => anchor.registerItem(item))
+</script>
+<li {...rest} data-slot="anchor-item" data-active={anchor.activeKeys().includes(value) || undefined} data-highlighted={anchor.highlightedKeys().has(value) || undefined} class={cn(anchorItemClassName, className)}>{@render children?.()}</li>

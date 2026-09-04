@@ -1,0 +1,38 @@
+---
+title: Anchor
+description: 跟随页面滚动高亮当前内容位置，不依赖 hash，也不会修改 URL。
+---
+
+## Primitive 与 UI
+
+Primitive 提供带样式的 `AnchorRoot`、`AnchorList`、`AnchorItem`、`AnchorLink`、`AnchorRail` 与 `AnchorIndicator`，并提供框架原生逻辑能力供用户构建自定义结构。
+
+UI `Anchor` 是为了快速使用的：传入 `items` 即可生成完整 Anchor，并通过 `classNames` 与 `styles` 定制语义部件。
+
+## 何时使用
+
+用于长页面、文档或局部滚动容器的内容导航。`target` 可以是选择器、元素、ref-like 对象或解析函数；组件只查找并滚动到目标，不写入 URL。
+
+## 示例
+
+示例覆盖基础、横向、Progress、受控与非受控、单项偏移覆盖、LTR/RTL、自定义点击、点击保持高亮以及 UI 结构化样式。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="可自由组合的 Anchor 结构与逻辑能力。">
+  <ApiComposition layer="primitive">
+    ```text
+    AnchorRoot
+    ├── AnchorRail
+    │   └── AnchorIndicator
+    └── AnchorList
+        └── AnchorItem
+            ├── AnchorLink
+            └── AnchorList (optional)
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="由 items 快速生成完整结构。" />

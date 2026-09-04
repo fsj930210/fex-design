@@ -1,0 +1,5 @@
+<script lang="ts">
+  import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '@fex-design/svelte/primitive/anchor'
+  let container: HTMLDivElement
+</script>
+<div bind:this={container} class="h-80 w-full max-w-2xl overflow-auto rounded-lg border px-4 pb-4"><AnchorRoot orientation="horizontal" container={() => container} class="sticky top-0 z-10 bg-background pt-4"><AnchorRail><AnchorIndicator /></AnchorRail><AnchorList><AnchorItem value="intro" target="#svelte-horizontal-intro"><AnchorLink>介绍</AnchorLink></AnchorItem><AnchorItem value="features" target="#svelte-horizontal-features"><AnchorLink>功能</AnchorLink></AnchorItem><AnchorItem value="api" target="#svelte-horizontal-api"><AnchorLink>API</AnchorLink></AnchorItem></AnchorList></AnchorRoot><div class="grid gap-24 pt-8 pb-48"><section id="svelte-horizontal-intro"><h3 class="font-semibold">介绍</h3></section><section id="svelte-horizontal-features"><h3 class="font-semibold">功能</h3></section><section id="svelte-horizontal-api"><h3 class="font-semibold">API</h3></section></div></div>

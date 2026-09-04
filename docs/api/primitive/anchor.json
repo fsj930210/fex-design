@@ -1,0 +1,26 @@
+{
+  "name": "Anchor",
+  "slug": "anchor",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "带样式、可组合且不修改 URL 的页内滚动导航。",
+  "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" },
+  "props": [], "events": [], "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "组合纵向 Anchor。" },
+    { "id": "horizontal", "title": "横向", "description": "横向排列一级项目。" },
+    { "id": "progress", "title": "Progress", "description": "连续高亮阅读进度。" },
+    { "id": "controlled", "title": "受控与非受控", "description": "对照两种状态模式。" },
+    { "id": "offset", "title": "自定义 Offset", "description": "单项偏移覆盖根偏移。" },
+    { "id": "direction", "title": "LTR 与 RTL", "description": "验证逻辑方向。" },
+    { "id": "custom-click", "title": "自定义 onClick", "description": "透传原生点击事件。" }
+  ],
+  "components": [
+    { "name": "AnchorRoot", "slug": "anchor-root", "layer": "primitive", "status": "stable", "description": "继承原生 nav，管理激活状态、滚动容器和默认 targetOffset。", "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" }, "props": [{"name":"activeKeys","type":"readonly string[]","description":"受控激活项。"},{"name":"defaultActiveKeys","type":"readonly string[]","default":"[]","description":"非受控初始激活项。"},{"name":"activeMode","type":"'current' | 'progress'","default":"'current'","description":"单项或连续进度高亮。"},{"name":"orientation","type":"'vertical' | 'horizontal'","default":"'vertical'","description":"排列方向。"},{"name":"container","type":"Window | HTMLElement | (() => Window | HTMLElement)","default":"window","description":"滚动容器。"},{"name":"targetOffset","type":"number","default":"0","description":"目标滚动偏移。"},{"name":"threshold","type":"number","default":"16","description":"目标距离容器顶部多少像素时切换激活项。"},{"name":"behavior","type":"ScrollBehavior","default":"'smooth'","description":"滚动行为。"}], "events": [{"name":"change","type":"(activeKeys, items) => void","description":"激活项改变。"}], "slots": [], "demos": [], "frameworks": {} },
+    { "name": "AnchorList", "slug": "anchor-list", "layer": "primitive", "status": "stable", "description": "继承原生 ul，组织根级或嵌套项目。", "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" }, "props": [], "events": [], "slots": [], "demos": [], "frameworks": {} },
+    { "name": "AnchorItem", "slug": "anchor-item", "layer": "primitive", "status": "stable", "description": "继承原生 li，注册一个滚动目标。", "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" }, "props": [{"name":"value","type":"string","description":"稳定标识。"},{"name":"target","type":"string | HTMLElement | AnchorTargetRef | (() => HTMLElement | null)","description":"选择器、元素、ref-like 对象或解析函数。"},{"name":"targetOffset","type":"number","description":"覆盖 AnchorRoot 的偏移。"}], "events": [], "slots": [], "demos": [], "frameworks": {} },
+    { "name": "AnchorLink", "slug": "anchor-link", "layer": "primitive", "status": "stable", "description": "继承原生 button，触发激活与滚动，原生属性和事件均可透传。", "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" }, "props": [], "events": [{"name":"click","type":"MouseEvent","description":"先执行用户事件；preventDefault 后不执行内部滚动。"}], "slots": [], "demos": [], "frameworks": {} },
+    { "name": "AnchorRail", "slug": "anchor-rail", "layer": "primitive", "status": "stable", "description": "继承原生 div，显示轨道。", "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" }, "props": [], "events": [], "slots": [], "demos": [], "frameworks": {} },
+    { "name": "AnchorIndicator", "slug": "anchor-indicator", "layer": "primitive", "status": "stable", "description": "继承原生 span，显示当前或连续进度指示条。", "importPath": { "react": "@fex-design/react/primitive/anchor", "vue": "@fex-design/vue/primitive/anchor", "solid": "@fex-design/solid/primitive/anchor", "svelte": "@fex-design/svelte/primitive/anchor", "angular": "@fex-design/angular/primitive/anchor" }, "props": [], "events": [], "slots": [], "demos": [], "frameworks": {} }
+  ]
+}

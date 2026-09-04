@@ -1,28 +1,28 @@
-<fex-card
+<div card
   title="Current and progress"
   description="Switch between a single current anchor and all anchors passed so far."
 >
   <div class="grid gap-3 lg:grid-cols-[10rem_10rem_1fr]">
     <div>
       <p class="mb-1.5 text-xs font-medium text-muted-foreground">Current</p>
-      <fex-anchor
+      <nav anchor
         [items]="items"
         [activeKeys]="currentKeys()"
-        [activeOffset]="80"
+        [targetOffset]="80"
         [container]="getContainer"
         (change)="currentKeys.set($event.activeKeys)"
-      />
+      ></nav>
     </div>
     <div>
       <p class="mb-1.5 text-xs font-medium text-muted-foreground">Progress</p>
-      <fex-anchor
+      <nav anchor
         [items]="items"
         activeMode="progress"
         [activeKeys]="activeKeys()"
-        [activeOffset]="80"
+        [targetOffset]="80"
         [container]="getContainer"
         (change)="activeKeys.set($event.activeKeys)"
-      />
+      ></nav>
     </div>
     <div #container class="h-72 overflow-y-auto rounded-md border border-border p-3">
       <section id="anchor-overview" class="min-h-48">
@@ -53,4 +53,4 @@
     current: {{ currentKeys().join(', ') || 'none' }} · progress:
     {{ activeKeys().join(', ') || 'none' }}
   </p>
-</fex-card>
+</div>

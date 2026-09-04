@@ -1,0 +1,11 @@
+<div class="grid w-full max-w-2xl gap-3">
+  <p class="text-sm text-muted-foreground">点击“第二节”：容器会滚到底，但高亮仍保留在点击项。</p>
+  <div #container class="grid h-72 grid-cols-[10rem_1fr] gap-6 overflow-auto rounded-lg border p-4">
+    <nav anchor [items]="items" [container]="container" class="sticky top-0 self-start"></nav>
+    <div class="grid gap-28 pb-16">
+      @for (item of items; track item.key) {
+        <section [id]="'angular-ui-click-lock-' + item.key"><h3 class="font-semibold">{{ item.title }}</h3></section>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div anchorRail [class]="classNames().rail" [style]="styles().rail">
+  <span anchorIndicator [class]="classNames().indicator" [style]="styles().indicator"></span>
+</div>
+
+<ng-template #list let-anchorItems>
+  <ul anchorList [class]="classNames().list" [style]="styles().list">
+    @for (item of anchorItems; track item.key) {
+      <li
+        anchorItem
+        [value]="item.key"
+        [target]="item.target"
+        [targetOffset]="item.targetOffset"
+        [class]="classNames().item"
+        [style]="styles().item"
+      >
+        <button anchorLink [class]="classNames().link" [style]="styles().link" (click)="itemClick.emit({ event: $event, item })">
+          {{ item.title }}
+        </button>
+        @if (item.children?.length) {
+          <ng-container
+            [ngTemplateOutlet]="list"
+            [ngTemplateOutletContext]="{ $implicit: item.children }"
+          />
+        }
+      </li>
+    }
+  </ul>
+</ng-template>
+
+<ng-container [ngTemplateOutlet]="list" [ngTemplateOutletContext]="{ $implicit: items() }" />

@@ -1,6 +1,5 @@
 import { createEffect, createMemo, createSignal, For, Show } from 'solid-js'
-import { Anchor } from '@fex-design/solid/primitive/anchor'
-import type { AnchorItem } from '@fex-design/solid/primitive/anchor'
+import { Anchor, type AnchorItemData } from '@fex-design/solid/ui/anchor'
 import { frameworks } from '@fex-design/docs-shared/model'
 import { isDocumentedComponent } from './data'
 import { getComponentDocument, getDocumentSlugs } from './content'
@@ -23,7 +22,7 @@ export function App() {
     (new URLSearchParams(location.search).get('layer') as 'primitive' | 'ui') ?? 'ui',
   )
   const document = createMemo(() => getComponentDocument(slug()))
-  const [toc, setToc] = createSignal<readonly AnchorItem<string>[]>([])
+  const [toc, setToc] = createSignal<readonly AnchorItemData<string>[]>([])
   let article!: HTMLElement
   // MDX heading ids 由 rehype-slug 生成；文档变化后从真实 DOM 同步目录。
   createEffect(() => {
@@ -112,8 +111,8 @@ export function App() {
           />
         </Show>
       </main>
-      <div class="sticky top-0 max-h-screen self-start overflow-y-auto overflow-x-hidden border-l border-border px-5 py-10.5 [--anchor-indent:8px] max-[1000px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:pl-2.5 [&_[data-slot=anchor-list][data-level='1']]:pl-[var(--anchor-indent)] [&_[data-slot=anchor-list][data-level='2']]:pl-[var(--anchor-indent)] [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-0.75 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-4.5 [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
-        <Anchor items={toc()} offset={88} behavior="auto" />
+      <div class="sticky top-0 max-h-screen self-start overflow-y-auto overflow-x-hidden border-l border-border px-5 py-10.5 [--anchor-indent:8px] max-[1000px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-2.5 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-0.75 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-4.5 [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
+        <Anchor items={toc()} targetOffset={88} behavior="auto" />
       </div>
     </div>
   )
@@ -125,8 +124,8 @@ function title(slug: string) {
     .join(' ')
 }
 
-function collectToc(article: HTMLElement): readonly AnchorItem<string>[] {
-  const items: Array<AnchorItem<string> & { children?: AnchorItem<string>[] }> = []
+function collectToc(article: HTMLElement): readonly AnchorItemData<string>[] {
+  const items: Array<AnchorItemData<string> & { children?: AnchorItemData<string>[] }> = []
   let section: (typeof items)[number] | undefined
   let subsection: (typeof items)[number] | undefined
   const elements = article?.querySelectorAll<HTMLElement>('h2[id], h3[id], [data-toc-item]') ?? []

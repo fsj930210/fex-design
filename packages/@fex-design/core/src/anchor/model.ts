@@ -26,34 +26,47 @@ export function flattenAnchorItems<TTitle>(
   return result.map((entry, index) => ({ ...entry, index }))
 }
 
-export function getAnchorActiveKeys<TTitle>({
+export function getAnchorActiveKeys<TItem extends { key: string }>({
   positions,
   scrollTop,
   viewportHeight,
-  offset = 0,
-  activeOffset = 0,
+  threshold = 16,
   mode = 'current',
   scrolledToEnd = false,
 }: {
-  positions: readonly AnchorTargetPosition<TTitle>[]
+  positions: readonly AnchorTargetPosition<TItem>[]
   scrollTop: number
   viewportHeight: number
-  offset?: number
-  activeOffset?: number
+  threshold?: number
   mode?: AnchorActiveMode
   scrolledToEnd?: boolean
 }): string[] {
   if (positions.length === 0) return []
 
   const sorted = [...positions].sort((left, right) => left.top - right.top)
-  const activeTop = scrollTop + offset + activeOffset
-  let currentIndex = 0
-
-  for (const [index, position] of sorted.entries()) {
-    // Layout coordinates can differ from scroll positions by a subpixel after scrolling.
-    if (position.top - activeTop > anchorPositionEpsilon) break
-    currentIndex = index
-  }
+  const activeTop = scrollTop + threshold
+  const viewportBottom = scrollTop + viewportHeight
+  // Ignore headings that have left the viewport, then use the visible heading nearest
+  // to the activation line. This preserves the first visible heading at rest without
+  // retaining it across a large content gap after it has scrolled away.
+  const visible = sorted
+    .map((position, index) => ({ position, index }))
+    .filter(
+      ({ position }) =>
+        position.top >= scrollTop - anchorPositionEpsilon &&
+        position.top <= viewportBottom + anchorPositionEpsilon,
+    )
+  let currentIndex = visible.reduce(
+    (nearestIndex, entry) => {
+      if (nearestIndex === -1) return entry.index
+      const nearest = sorted[nearestIndex]
+      if (!nearest) return entry.index
+      return Math.abs(entry.position.top - activeTop) < Math.abs(nearest.top - activeTop)
+        ? entry.index
+        : nearestIndex
+    },
+    -1,
+  )
 
   if (scrolledToEnd) {
     currentIndex = sorted.length - 1

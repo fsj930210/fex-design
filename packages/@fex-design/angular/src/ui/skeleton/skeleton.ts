@@ -20,7 +20,9 @@ export class Skeleton {
   protected readonly avatarAreaClassName = skeletonAvatarAreaClassName
   protected readonly bodyClassName = skeletonBodyClassName
   protected readonly paragraphClassName = skeletonParagraphClassName
+  protected readonly avatarClassName = () => cn(this.classNames().avatar)
   protected readonly titleClassName = () => cn(skeletonTitleClassName, this.classNames().title)
+  protected readonly paragraphItemClassName = () => cn(this.classNames().paragraph)
   protected readonly hostClassName = createHostClassName(() => this.loading() === false || this.placeholder() ? 'contents' : cn(skeletonRootClassName, this.classNames().root))
   protected readonly avatarOptions = () => typeof this.avatar() === 'object' ? this.avatar() as SkeletonAvatarOptions : {}
   protected readonly titleOptions = () => typeof this.title() === 'object' ? this.title() as SkeletonTitleOptions : {}

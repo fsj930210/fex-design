@@ -75,6 +75,7 @@
     "./primitive/tour": "./src/primitive/tour/tour.tsx",
     "./primitive/badge": "./src/primitive/badge/badge.tsx",
     "./ui/alert": "./src/ui/alert/alert.tsx",
+    "./ui/anchor": "./src/ui/anchor/anchor.tsx",
     "./ui/badge": "./src/ui/badge/badge.tsx",
     "./primitive/aspect-ratio": "./src/primitive/aspect-ratio/aspect-ratio.tsx",
     "./ui/aspect-ratio": "./src/ui/aspect-ratio/aspect-ratio.tsx",

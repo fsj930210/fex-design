@@ -1,8 +1,8 @@
-import { Anchor, type AnchorItem } from '@fex-design/react/primitive/anchor'
+import { Anchor, type AnchorItemData } from '@fex-design/react/ui/anchor'
 import { Card } from '@fex-design/react/ui/card'
 import { useRef, useState } from 'react'
 
-const items: AnchorItem[] = [
+const items: AnchorItemData[] = [
   { key: 'anchor-overview', title: 'Overview', target: '#anchor-overview' },
   {
     key: 'anchor-api',
@@ -28,7 +28,7 @@ export function AnchorDemo() {
           <Anchor
             items={items}
             activeKeys={currentKeys}
-            activeOffset={80}
+            targetOffset={80}
             container={() => containerRef.current ?? window}
             onChange={setCurrentKeys}
           />
@@ -38,7 +38,7 @@ export function AnchorDemo() {
           <Anchor
             items={items}
             activeMode="progress"
-            activeOffset={80}
+            targetOffset={80}
             activeKeys={activeKeys}
             container={() => containerRef.current ?? window}
             onChange={setActiveKeys}

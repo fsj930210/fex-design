@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Anchor, type AnchorItem } from '@fex-design/vue/primitive/anchor'
+import { Anchor, type AnchorItem } from '@fex-design/vue/ui/anchor'
 import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 
@@ -29,7 +29,7 @@ const items: AnchorItem<string>[] = [
         <Anchor
           :items="items"
           :active-keys="currentKeys"
-          :active-offset="80"
+          :target-offset="80"
           :container="() => container ?? window"
           @change="currentKeys = $event"
         />
@@ -40,7 +40,7 @@ const items: AnchorItem<string>[] = [
           :items="items"
           active-mode="progress"
           :active-keys="activeKeys"
-          :active-offset="80"
+          :target-offset="80"
           :container="() => container ?? window"
           @change="activeKeys = $event"
         />

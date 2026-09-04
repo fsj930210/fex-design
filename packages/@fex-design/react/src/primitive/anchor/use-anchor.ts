@@ -1,116 +1,180 @@
 import {
+  createAnchorClickScrollGuard,
+  ensureAnchorLinkVisible,
+  getAnchorIndicatorStyles,
   getAnchorScrollTop,
   getAnchorTargetTop,
   getAnchorViewportHeight,
   isAnchorScrolledToEnd,
   resolveAnchorTarget,
 } from '@fex-design/core/anchor/dom'
-import { createAnchorController } from '@fex-design/core/anchor/model'
-import { flattenAnchorItems, getAnchorActiveKeys } from '@fex-design/core/anchor/model'
-import type { AnchorActiveMode, AnchorItem, AnchorOrientation } from '@fex-design/core/anchor/types'
-import { useEffect, useMemo, useRef } from 'react'
+import { createAnchorController, getAnchorActiveKeys } from '@fex-design/core/anchor/model'
+import type {
+  AnchorActiveMode,
+  AnchorOrientation,
+  AnchorRegisteredItem,
+} from '@fex-design/core/anchor/types'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 
-export interface UseAnchorOptions<TTitle> {
-  items: readonly AnchorItem<TTitle>[]
+export interface UseAnchorOptions {
   activeKeys?: readonly string[]
   defaultActiveKeys?: readonly string[]
   activeMode?: AnchorActiveMode
   orientation?: AnchorOrientation
-  container?: Window | HTMLElement | (() => Window | HTMLElement)
-  offset?: number
-  activeOffset?: number
+  container?: Window | HTMLElement | (() => Window | HTMLElement | null | undefined)
+  targetOffset?: number
+  threshold?: number
   behavior?: ScrollBehavior
-  onChange?: (activeKeys: readonly string[], items: readonly AnchorItem<TTitle>[]) => void
+  onChange?: (activeKeys: readonly string[], items: readonly AnchorRegisteredItem[]) => void
 }
 
-export function useAnchor<TTitle>({
-  items,
+export function useAnchor({
   activeKeys: controlledKeys,
   defaultActiveKeys = [],
   activeMode = 'current',
   orientation = 'vertical',
   container,
-  offset = 0,
-  activeOffset = 0,
+  targetOffset = 0,
+  threshold = 16,
   behavior = 'smooth',
   onChange,
-}: UseAnchorOptions<TTitle>) {
+}: UseAnchorOptions = {}) {
   const rootRef = useRef<HTMLElement | null>(null)
-  const linkRefs = useRef(new Map<string, HTMLButtonElement>())
+  const itemMap = useRef(new Map<string, AnchorRegisteredItem>())
+  const [items, setItems] = useState<readonly AnchorRegisteredItem[]>([])
+  const [inkStyles, setInkStyles] = useState<ReturnType<typeof getAnchorIndicatorStyles>>([])
   const controller = useLazyRef(() =>
-    createAnchorController<TTitle>({ activeKeys: controlledKeys, defaultActiveKeys, onChange }),
+    createAnchorController<unknown>({
+      ...(controlledKeys === undefined ? {} : { activeKeys: controlledKeys }),
+      defaultActiveKeys,
+    }),
   ).current
-  controller.updateOptions({ activeKeys: controlledKeys, defaultActiveKeys, onChange })
-  const { activeKeys } = useCoreStore(controller)
-  const flatItems = useMemo(() => flattenAnchorItems(items), [items])
-  const visibleItems =
-    orientation === 'horizontal' ? flatItems.filter((item) => item.level === 0) : flatItems
-
-  const resolveContainer = useMemoizedFn(() =>
-    typeof container === 'function' ? container() : (container ?? window),
-  )
-
-  const change = useMemoizedFn((nextKeys: readonly string[]) => {
-    const activeSet = new Set(nextKeys)
-    controller.change(
-      nextKeys,
-      flatItems.filter(({ item }) => activeSet.has(item.key)).map(({ item }) => item),
-    )
+  const clickScrollGuard = useLazyRef(() => createAnchorClickScrollGuard()).current
+  controller.updateOptions({
+    ...(controlledKeys === undefined ? {} : { activeKeys: controlledKeys }),
+    defaultActiveKeys,
+    onChange: (keys) => {
+      const activeSet = new Set(keys)
+      onChange?.(keys, items.filter((item) => activeSet.has(item.key)))
+    },
   })
-
-  const update = useMemoizedFn(() => {
+  const { activeKeys } = useCoreStore(controller)
+  const visibleItems = useMemo(
+    () => (orientation === 'horizontal' ? items.filter((item) => !item.parentKey) : items),
+    [items, orientation],
+  )
+  const highlightedKeys = useMemo(() => {
+    const result = new Set(activeKeys)
+    for (const item of items) {
+      if (!result.has(item.key)) continue
+      let parentKey = item.parentKey
+      while (parentKey) {
+        result.add(parentKey)
+        parentKey = itemMap.current.get(parentKey)?.parentKey
+      }
+    }
+    return result
+  }, [activeKeys, items])
+  const resolveContainer = useMemoizedFn(() => {
+    const resolved = typeof container === 'function' ? container() : container
+    return resolved ?? window
+  })
+  const change = useMemoizedFn((keys: readonly string[]) => controller.change(keys, []))
+  const refreshIndicator = useMemoizedFn(() => {
+    const root = rootRef.current
+    if (!root) return
+    ensureAnchorLinkVisible(root, activeKeys, orientation)
+    setInkStyles(getAnchorIndicatorStyles(root, activeKeys, orientation))
+  })
+  const refresh = useMemoizedFn(() => {
     const scrollContainer = resolveContainer()
-    const positions = visibleItems.flatMap(({ item }) => {
+    const positions = visibleItems.flatMap((item) => {
       const target = resolveAnchorTarget(item.target)
-      return target ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }] : []
+      return target
+        ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }]
+        : []
     })
     change(
       getAnchorActiveKeys({
         positions,
         scrollTop: getAnchorScrollTop(scrollContainer),
         viewportHeight: getAnchorViewportHeight(scrollContainer),
-        offset,
-        activeOffset,
+        threshold,
         mode: activeMode,
         scrolledToEnd: isAnchorScrolledToEnd(scrollContainer),
       }),
     )
+    refreshIndicator()
   })
-
-  useEffect(() => {
-    const scrollContainer = resolveContainer()
-    let frame = 0
-    const handleUpdate = () => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(update)
-    }
-    handleUpdate()
-    scrollContainer.addEventListener('scroll', handleUpdate, { passive: true })
-    window.addEventListener('resize', handleUpdate)
-    return () => {
-      cancelAnimationFrame(frame)
-      scrollContainer.removeEventListener('scroll', handleUpdate)
-      window.removeEventListener('resize', handleUpdate)
-    }
-  }, [resolveContainer, update])
-
-  const activate = useMemoizedFn((item: AnchorItem<TTitle>) => {
+  const activate = useMemoizedFn((item: AnchorRegisteredItem) => {
     const target = resolveAnchorTarget(item.target)
     if (!target) return
     const scrollContainer = resolveContainer()
-    const top = Math.max(getAnchorTargetTop(target, scrollContainer) - offset, 0)
+    const index = visibleItems.findIndex((entry) => entry.key === item.key)
     change(
       activeMode === 'progress'
-        ? visibleItems
-            .slice(0, visibleItems.findIndex(({ item: entry }) => entry.key === item.key) + 1)
-            .map(({ item: entry }) => entry.key)
+        ? visibleItems.slice(0, index + 1).map((entry) => entry.key)
         : [item.key],
     )
-    scrollContainer.scrollTo({ top, behavior })
+    clickScrollGuard.lock()
+    scrollContainer.scrollTo({
+      top: Math.max(getAnchorTargetTop(target, scrollContainer) - (item.targetOffset ?? targetOffset), 0),
+      behavior,
+    })
+  })
+  const registerItem = useMemoizedFn((item: AnchorRegisteredItem) => {
+    itemMap.current.set(item.key, item)
+    setItems([...itemMap.current.values()])
+    requestAnimationFrame(refresh)
+    return () => {
+      itemMap.current.delete(item.key)
+      setItems([...itemMap.current.values()])
+      requestAnimationFrame(refresh)
+    }
   })
 
-  return { activeKeys, activate, flatItems, linkRefs, rootRef, visibleItems }
+  // Scroll and resize are external browser systems that drive the active item.
+  useEffect(() => {
+    const scrollContainer = resolveContainer()
+    let frame = 0
+    const schedule = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(refresh)
+    }
+    const handleScroll = () => {
+      if (clickScrollGuard.shouldHandleScroll()) schedule()
+    }
+    schedule()
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      cancelAnimationFrame(frame)
+      scrollContainer.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', schedule)
+      clickScrollGuard.dispose()
+    }
+  }, [refresh, resolveContainer])
+
+  // Indicator geometry is measured from rendered links after active state changes.
+  useEffect(() => refreshIndicator(), [activeKeys, refreshIndicator])
+
+  // Item registration changes the measurable targets after child effects run.
+  useEffect(() => refresh(), [items, refresh])
+
+  return {
+    activeKeys,
+    activate,
+    highlightedKeys,
+    inkStyles,
+    items,
+    orientation,
+    refresh,
+    registerItem,
+    rootRef,
+  }
 }
+
+export type AnchorApi = ReturnType<typeof useAnchor>

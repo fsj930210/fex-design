@@ -1,13 +1,13 @@
-<fex-card title="Horizontal" description="Horizontal anchors use the same tracking behavior."
-  ><fex-anchor
+<div card title="Horizontal" description="Horizontal anchors use the same tracking behavior."
+  ><nav anchor
     [items]="items"
     orientation="horizontal"
-    [activeOffset]="80"
+    [targetOffset]="80"
     [container]="getContainer"
-  />
+  ></nav>
   <div #container class="mt-2 h-40 overflow-y-auto rounded-md border border-border p-3">
     <section id="horizontal-overview" class="min-h-32">Overview content</section>
     <section id="horizontal-api" class="min-h-32">API content</section>
     <section id="horizontal-examples" class="min-h-32">Examples content</section>
-  </div></fex-card
->
+  </div>
+</div>

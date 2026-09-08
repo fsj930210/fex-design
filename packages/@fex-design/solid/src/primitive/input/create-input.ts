@@ -6,7 +6,6 @@ export interface CreateInputOptions {
   defaultValue?: string | undefined
   disabled?: Accessor<boolean | undefined>
   readOnly?: Accessor<boolean | undefined>
-  invalid?: Accessor<boolean | undefined>
   onValueChange?:
     | ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void)
     | undefined
@@ -18,7 +17,6 @@ export function createInput(options: CreateInputOptions = {}) {
   const value = createMemo(() => options.value?.() ?? internalValue())
   const disabled = createMemo(() => options.disabled?.() ?? false)
   const readOnly = createMemo(() => options.readOnly?.() ?? false)
-  const invalid = createMemo(() => options.invalid?.() ?? false)
   const canClear = createMemo(() => value() !== '' && !disabled() && !readOnly())
   function setValue(nextValue: string, reason: InputChangeReason, event?: InputEvent) {
     if (disabled() || readOnly()) return
@@ -35,7 +33,6 @@ export function createInput(options: CreateInputOptions = {}) {
     value,
     disabled,
     readOnly,
-    invalid,
     canClear,
     setValue,
     clear,

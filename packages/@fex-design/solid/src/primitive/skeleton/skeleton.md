@@ -58,7 +58,7 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | animation | SkeletonAnimation | 'none' | Placeholder animation. |
-| size | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' | 'default' | Matches the five Button heights. |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | Matches the three Button heights. |
 | shape | 'round' \| 'square' \| 'circle' | — | Omit for a rectangle; round is a pill, square and circle are equal-width shapes. |
 | block | boolean | false | Fills the parent width. |
 

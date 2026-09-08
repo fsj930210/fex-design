@@ -41,6 +41,7 @@
     "./date-picker/range": "./src/date-picker/range.ts",
     "./date-picker/types": "./src/date-picker/types.ts",
     "./date-picker/value": "./src/date-picker/value.ts",
+    "./input/types": "./src/input/types.ts",
     "./input-otp/completion": "./src/input-otp/completion.ts",
     "./input-otp/create-input-otp-controller": "./src/input-otp/create-input-otp-controller.ts",
     "./input-otp/types": "./src/input-otp/types.ts",
@@ -210,12 +211,12 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
-    "@tanstack/form-core": "1.33.3",
-    "@tanstack/table-core": "9.0.0-beta.47",
+    "@tanstack/form-core": "1.33.5",
+    "@tanstack/table-core": "9.2.4",
     "culori": "^4.0.2",
     "embla-carousel": "8.6.0",
     "embla-carousel-autoplay": "8.6.0",
-    "i18next": "^26.3.6",
+    "i18next": "^26.4.2",
     "spark-md5": "3.0.2",
     "uqr": "^0.1.3"
   },

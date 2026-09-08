@@ -2,9 +2,9 @@ import type { AlertClassNames, AlertOptions, AlertStyles } from '@fex-design/cor
 import { alertActionClassName, alertClassName, alertCloseClassName, alertContentClassName, alertDescriptionClassName, alertIconClassName, alertTitleClassName } from '@fex-design/styles/alert'
 import { booleanAttribute, ChangeDetectionStrategy, Component, contentChild, Directive, input, output, signal } from '@angular/core'
 import { CircleCheckIcon } from '../../icon/circle-check'
-import { CircleErrorIcon } from '../../icon/circle-error'
-import { CircleInfoIcon } from '../../icon/circle-info'
-import { CircleWarningIcon } from '../../icon/circle-warning'
+import { CircleXIcon } from '../../icon/circle-x'
+import { InfoIcon } from '../../icon/info'
+import { TriangleAlertIcon } from '../../icon/triangle-alert'
 import { createHostClassName } from '../../signals/host-class'
 
 @Directive({ selector: '[alertIcon]', standalone: true })
@@ -19,7 +19,7 @@ export class AlertCloseIconContent {}
 @Component({
   selector: 'alert',
   standalone: true,
-  imports: [CircleCheckIcon, CircleInfoIcon, CircleWarningIcon, CircleErrorIcon],
+  imports: [CircleCheckIcon, InfoIcon, TriangleAlertIcon, CircleXIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',

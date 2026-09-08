@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '@fex-design/svelte/ui/button'
   import PlusIcon from '@fex-design/svelte/icon/plus'
-  const sizes = ["xs","sm","default","lg","xl","icon-xs","icon-sm","icon","icon-lg","icon-xl"] as const
+  const sizes = ["sm","md","lg","icon-sm","icon-md","icon-lg"] as const
 </script>
 
 <div class="flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-4">

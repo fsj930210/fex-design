@@ -1,0 +1,1 @@
+<script lang="ts">import { Input } from '@fex-design/svelte/ui/input'; const variants=['outlined','filled','borderless','underlined'] as const</script><div class="grid w-full gap-3">{#each variants as variant (variant)}<Input {variant} placeholder={variant}/>{/each}</div>

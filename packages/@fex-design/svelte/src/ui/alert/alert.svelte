@@ -5,10 +5,10 @@
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import CircleCheckIcon from '../../icon/circle-check.svelte'
-  import CloseIcon from '../../icon/close.svelte'
-  import CircleErrorIcon from '../../icon/circle-error.svelte'
-  import CircleInfoIcon from '../../icon/circle-info.svelte'
-  import CircleWarningIcon from '../../icon/circle-warning.svelte'
+  import XIcon from '../../icon/x.svelte'
+  import CircleXIcon from '../../icon/circle-x.svelte'
+  import InfoIcon from '../../icon/info.svelte'
+  import TriangleAlertIcon from '../../icon/triangle-alert.svelte'
   import PrimitiveAlert from '../../primitive/alert/alert.svelte'
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>, AlertOptions {
@@ -59,11 +59,11 @@
         {:else if type === 'success'}
           <CircleCheckIcon />
         {:else if type === 'warning'}
-          <CircleWarningIcon />
+          <TriangleAlertIcon />
         {:else if type === 'error'}
-          <CircleErrorIcon />
+          <CircleXIcon />
         {:else}
-          <CircleInfoIcon />
+          <InfoIcon />
         {/if}
       </span>
     {/if}
@@ -93,7 +93,7 @@
         {#if closeIcon}
           {@render closeIcon()}
         {:else}
-          <CloseIcon />
+          <XIcon />
         {/if}
       </button>
     {/if}

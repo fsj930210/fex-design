@@ -69,7 +69,6 @@ export function DatePickerTrigger({
             value={context.multiple ? '' : text}
             disabled={context.disabled}
             readOnly={context.readOnly}
-            status={status ?? context.status}
             onValueChange={input}
             onClear={context.allowClear ? context.clear : undefined}
             onClick={(event) => {

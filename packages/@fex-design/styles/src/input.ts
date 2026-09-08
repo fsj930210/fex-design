@@ -1,46 +1,71 @@
-export const inputRootClassName = [
-  'group/input-root flex h-(--input-height) w-full min-w-0 items-stretch overflow-hidden rounded-md border border-border bg-background text-foreground [--input-height:var(--input-height-default,var(--height-default))] [--input-icon-size:var(--input-icon-size-default,var(--icon-size-default))]',
-  'transition-colors',
-  'focus-within:border-focus focus-within:ring-3 focus-within:ring-focus/50',
+import { cva } from 'class-variance-authority'
+
+const inputBaseClassName = [
+  'group/input-root relative flex h-(--input-height) w-full min-w-0 items-stretch overflow-hidden rounded-md border bg-[var(--input-background,var(--background))] text-[var(--input-color,var(--foreground))]',
+  '[--input-height:var(--input-height-md,var(--height-default))] [--input-icon-size:var(--input-icon-size-md,var(--icon-size-default))] [--input-clear-icon-size:0.875rem]',
+  'border-[var(--input-border-color,var(--border))] outline-none transition-colors',
+  'hover:border-foreground/30 focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-3 focus-within:ring-[var(--input-ring-color,var(--focus-ring))]',
+  'has-[[aria-invalid=true]]:border-danger has-[[aria-invalid=true]]:ring-3 has-[[aria-invalid=true]]:ring-danger/20',
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-disabled-background data-[disabled=true]:text-disabled-foreground data-[disabled=true]:opacity-70',
-  'data-[invalid=true]:border-danger data-[invalid=true]:ring-3 data-[invalid=true]:ring-danger/20',
-  'data-[status=error]:border-danger data-[status=error]:ring-3 data-[status=error]:ring-danger/20',
-  'data-[status=warning]:border-warning data-[status=warning]:ring-3 data-[status=warning]:ring-warning/20',
 ].join(' ')
 
+export const inputRootClassName = cva(inputBaseClassName, {
+  variants: {
+    variant: {
+      outlined: '',
+      filled:
+        'border-transparent bg-muted-background hover:bg-hover-background focus-within:border-focus focus-within:bg-background',
+      borderless:
+        'border-transparent bg-transparent hover:bg-muted-background focus-within:border-transparent focus-within:bg-muted-background focus-within:ring-0',
+      underlined:
+        'rounded-none border-x-0 border-t-0 bg-transparent hover:border-foreground/40 focus-within:ring-0',
+    },
+    size: {
+      sm: '[--input-height:var(--input-height-sm,1.5rem)] [--input-icon-size:var(--input-icon-size-sm,0.75rem)] [--input-clear-icon-size:0.75rem] [&_[data-slot=input-control]]:px-2 [&_[data-slot=input-control]]:text-xs',
+      md: '[--input-height:var(--input-height-md,var(--height-default))] [--input-icon-size:var(--input-icon-size-md,var(--icon-size-default))]',
+      lg: '[--input-height:var(--input-height-lg,2.75rem)] [--input-icon-size:var(--input-icon-size-lg,1.25rem)] [--input-clear-icon-size:1rem] [&_[data-slot=input-control]]:px-4 [&_[data-slot=input-control]]:text-base',
+    },
+  },
+  defaultVariants: { variant: 'outlined', size: 'md' },
+})
+
 export const inputControlClassName = [
-  'min-w-0 flex-1 bg-transparent px-2.5 py-1 text-base text-foreground outline-none placeholder:text-placeholder-foreground md:text-sm',
+  'min-w-0 flex-1 bg-transparent px-2.5 py-1 text-sm text-inherit outline-none',
+  'placeholder:text-[var(--input-placeholder-color,var(--placeholder-foreground))]',
   'disabled:cursor-not-allowed file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
 ].join(' ')
 
 export const inputPrefixClassName =
-  'flex shrink-0 items-center pl-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
+  'flex shrink-0 items-center ps-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
 export const inputSuffixClassName =
-  'flex shrink-0 items-center pr-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
+  'flex shrink-0 items-center pe-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
 
 const inputAddonClassName =
-  'flex shrink-0 items-center bg-muted-background px-2.5 text-sm text-muted-foreground'
-
-export const inputAddonBeforeClassName = `${inputAddonClassName} border-r border-border`
-export const inputAddonAfterClassName = `${inputAddonClassName} border-l border-border`
+  'relative z-0 flex shrink-0 self-stretch items-center border border-[var(--input-border-color,var(--border))] bg-muted-background px-2.5 text-sm text-muted-foreground [&:has(>[data-input-addon-fill])]:overflow-hidden [&:has(>[data-input-addon-fill])]:border-0 [&:has(>[data-input-addon-fill])]:bg-transparent [&:has(>[data-input-addon-fill])]:p-0 [&>[data-input-addon-fill]]:!rounded-none'
+export const inputAddonBeforeClassName = `${inputAddonClassName} rounded-s-md`
+export const inputAddonAfterClassName = `${inputAddonClassName} rounded-e-md`
 
 export const inputClearClassName = [
-  'flex shrink-0 items-center justify-center px-2 text-muted-foreground outline-none transition-colors hover:text-foreground',
-  'focus-visible:bg-muted-background focus-visible:text-foreground disabled:pointer-events-none disabled:opacity-0 [&_svg]:size-(--input-icon-size)',
+  'invisible flex shrink-0 items-center justify-center bg-transparent px-2 text-muted-foreground opacity-0 outline-none transition-[color,opacity]',
+  'group-hover/input-root:visible group-hover/input-root:opacity-100 group-focus-within/input-root:visible group-focus-within/input-root:opacity-100 active:visible active:opacity-100',
+  'hover:text-foreground focus-visible:visible focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-focus/40 disabled:pointer-events-none disabled:opacity-0',
+  '[&_svg]:size-(--input-clear-icon-size)',
 ].join(' ')
+
+export const inputActionClassName = [
+  'inline-flex shrink-0 cursor-pointer items-center justify-center bg-transparent p-1 text-muted-foreground outline-none transition-colors hover:text-foreground',
+  'focus-visible:ring-2 focus-visible:ring-focus/40 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-(--input-icon-size)',
+].join(' ')
+
+export const inputSearchAddonClassName =
+  'h-full border-0 px-3 focus-visible:z-10 focus-visible:ring-inset'
 
 export const inputGroupClassName = [
   'flex w-full min-w-0 items-stretch',
-  '[&>[data-slot=input-root]]:rounded-none [&>[data-slot=input-root]]:relative [&>[data-slot=input-root]]:z-0',
-  '[&>[data-slot=input-root]:focus-within]:z-10 [&>[data-slot=input-root]+[data-slot=input-root]]:-ms-px',
-  '[&>[data-slot=input-root]:first-child]:rounded-s-md [&>[data-slot=input-root]:last-child]:rounded-e-md',
-  '[&>[data-slot=button]]:rounded-none [&>[data-slot=button]]:relative [&>[data-slot=button]]:z-0',
-  '[&>[data-slot=button]:focus-visible]:z-10 [&>[data-slot=button]+*]:-ms-px',
-  '[&>[data-slot=button]:first-child]:rounded-s-md [&>[data-slot=button]:last-child]:rounded-e-md',
-  '[&>[data-slot=input-group-addon]+*]:-ms-px',
-].join(' ')
-
-export const inputGroupAddonClassName = [
-  'inline-flex h-(--input-height) shrink-0 items-center border border-border bg-muted-background px-2.5 text-sm text-muted-foreground [--input-height:var(--input-height-default,var(--height-default))]',
-  'first:rounded-s-md last:rounded-e-md',
+  '[&>*]:relative [&>*]:z-0 [&>*]:min-w-0 [&>*]:rounded-none',
+  '[&>*:first-child]:rounded-s-[var(--input-group-radius,var(--radius-md))] [&>*:last-child]:rounded-e-[var(--input-group-radius,var(--radius-md))]',
+  '[&>[data-slot=input-group]>*]:rounded-none',
+  '[&>[data-slot=input-group]:first-child>*:first-child]:rounded-s-[var(--input-group-radius,var(--radius-md))]',
+  '[&>[data-slot=input-group]:last-child>*:last-child]:rounded-e-[var(--input-group-radius,var(--radius-md))]',
+  '[&>*:focus-within]:z-10 [&>*+*]:-ms-px',
 ].join(' ')

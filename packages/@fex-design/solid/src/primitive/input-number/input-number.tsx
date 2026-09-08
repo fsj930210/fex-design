@@ -130,8 +130,6 @@ export function InputNumber(props: ParentProps<InputNumberProps>) {
       value={draft()}
       disabled={local.disabled}
       readOnly={local.readOnly}
-      invalid={local.invalid}
-      status={local.status}
       class={local.class}
       data-out-of-range={outOfRange() || undefined}
       onValueChange={(text, meta) => input(text, meta.event)}
@@ -141,6 +139,7 @@ export function InputNumber(props: ParentProps<InputNumberProps>) {
         {...inputProps}
         type="text"
         role="spinbutton"
+        aria-invalid={local.invalid || local.status === 'error' || undefined}
         aria-valuemin={local.min}
         aria-valuemax={local.max}
         aria-valuenow={value()}

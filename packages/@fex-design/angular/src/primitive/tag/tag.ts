@@ -12,7 +12,7 @@ import {
   input,
 } from '@angular/core'
 import { NgComponentOutlet } from '@angular/common'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { createHostClassName } from '../../signals/host-class'
 
 @Component({
@@ -69,6 +69,6 @@ export class Tag {
 })
 export class TagAction {
   readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' })
-  protected readonly defaultIcon = CloseIcon
+  protected readonly defaultIcon = XIcon
   protected readonly hostClassName = createHostClassName(tagActionClassName)
 }

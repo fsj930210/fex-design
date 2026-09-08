@@ -28,21 +28,17 @@
     },
     {
       "name": "size",
-      "type": "'xs' | 'sm' | 'default' | 'lg' | 'xl' | 'icon-xs' | 'icon-sm' | 'icon' | 'icon-lg' | 'icon-xl'",
-      "default": "default",
+      "type": "'sm' | 'md' | 'lg' | 'icon-sm' | 'icon-md' | 'icon-lg'",
+      "default": "md",
       "description": "文本按钮或纯图标按钮的尺寸。",
       "editor": "enum",
       "options": [
-        "xs",
         "sm",
-        "default",
+        "md",
         "lg",
-        "xl",
-        "icon-xs",
         "icon-sm",
-        "icon",
-        "icon-lg",
-        "icon-xl"
+        "icon-md",
+        "icon-lg"
       ]
     },
     {

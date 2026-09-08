@@ -26,7 +26,7 @@ import {
 import { Portal } from 'solid-js/web'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { createResize } from '../../primitives/create-resize'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { DrawerContext, useDrawer } from './drawer-context'
 
 export interface DrawerProps extends ParentProps, DrawerOptions {
@@ -297,7 +297,7 @@ export function DrawerClose(props: JSX.ButtonHTMLAttributes<HTMLButtonElement>) 
         if (!e.defaultPrevented) drawer.close({ source: 'close-button', event: e })
       }}
     >
-      {props.children ?? <CloseIcon class="size-4" />}
+      {props.children ?? <XIcon class="size-4" />}
     </button>
   )
 }

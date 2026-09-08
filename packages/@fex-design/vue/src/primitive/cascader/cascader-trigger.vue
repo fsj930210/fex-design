@@ -10,7 +10,7 @@ import {
 import { cn } from '@fex/utils'
 import { computed } from 'vue'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { LoadingIcon } from '../../icon/loading'
 import PrimitiveButton from '../button/button.vue'
 import PopoverTrigger from '../popover/popover-trigger.vue'
@@ -77,7 +77,7 @@ function keydown(event: KeyboardEvent) {
           v-else-if="cascader.clearable.value && cascader.selectedPaths.value.length"
           :class="cascaderClearClassName"
           @click.stop="cascader.controller.clear()"
-          ><CloseIcon /></PrimitiveButton
+          ><XIcon /></PrimitiveButton
         ><span
           v-else
           :data-state="cascader.snapshot.value.open ? 'open' : 'closed'"

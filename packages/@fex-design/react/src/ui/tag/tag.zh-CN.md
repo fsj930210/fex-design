@@ -46,7 +46,7 @@
 
 `closable` 只负责渲染并连接关闭按钮，组件不会自行隐藏，也不持有列表状态。请在 `onClose?: MouseEventHandler<HTMLButtonElement>` 中删除对应业务数据。`disabled` 为 true 时，自动生成的关闭按钮也会禁用。
 
-自定义关闭图标通过 `children?: ReactNode`; `closeIcon?: ReactNode` 完全替换内置 CloseIcon。
+自定义关闭图标通过 `children?: ReactNode`; `closeIcon?: ReactNode` 完全替换内置 XIcon。
 
 ## 结构化样式
 

@@ -3,8 +3,7 @@
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
-  import CloseIcon from '../../icon/close.svelte'
-import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
+  import CircleXIcon from '../../icon/circle-x.svelte'
   import { getInputContext } from './context'
 
   interface Props extends Omit<HTMLButtonAttributes, 'class'> {
@@ -17,7 +16,6 @@ import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
     class: className,
     forceMount = false,
     children,
-    onpointerdown,
     onclick,
     ...rest
   }: Props = $props()
@@ -25,22 +23,18 @@ import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
 </script>
 
 {#if forceMount || input.canClear()}
-  <PrimitiveButton
+  <button
     type="button"
     aria-label="Clear input"
     {...rest}
     data-slot="input-clear"
     disabled={!forceMount && !input.canClear()}
     class={cn(inputClearClassName, className)}
-    onpointerdown={(event) => {
-      onpointerdown?.(event)
-      if (!event.defaultPrevented) event.preventDefault()
-    }}
     onclick={(event) => {
       onclick?.(event)
       if (!event.defaultPrevented) input.clear()
     }}
   >
-    {#if children}{@render children()}{:else}<CloseIcon />{/if}
-  </PrimitiveButton>
+    {#if children}{@render children()}{:else}<CircleXIcon />{/if}
+  </button>
 {/if}

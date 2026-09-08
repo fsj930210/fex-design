@@ -32,7 +32,7 @@ import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import { useResize } from '../../hooks/use-resize'
 import { useCoreStore } from '../../hooks/use-core-store'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { DrawerContext, DrawerResizeContext } from './drawer-context'
 
 const edges: Record<DrawerPlacement, 'left' | 'right' | 'top' | 'bottom'> = {
@@ -334,9 +334,9 @@ export function DrawerClose({
   const { drawer } = useDrawer()
   const content =
     children === '×' || children === '脳' ? (
-      <CloseIcon className="size-4" />
+      <XIcon className="size-4" />
     ) : (
-      (children ?? <CloseIcon className="size-4" />)
+      (children ?? <XIcon className="size-4" />)
     )
   return (
     <button

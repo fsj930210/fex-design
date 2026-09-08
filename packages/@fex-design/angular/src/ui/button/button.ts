@@ -43,7 +43,7 @@ export class Button {
 
   variant = input<ButtonVariant>('outlined')
   color = input<ButtonColor>()
-  size = input<ButtonSize>('default')
+  size = input<ButtonSize>('md')
   effect = input<ButtonEffect>()
 
   iconPlacement = input<ButtonIconPlacement>('start')

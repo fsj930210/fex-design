@@ -46,7 +46,7 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 Enabling `closable` only renders and wires the close button. The component never hides itself or owns collection state. Remove the corresponding item in `onClose?: JSX.EventHandler<HTMLButtonElement, MouseEvent>`. When `disabled` is true, the generated close button is also disabled.
 
-A custom close icon completely replaces the built-in CloseIcon through `children?: JSX.Element`; `closeIcon?: JSX.Element`.
+A custom close icon completely replaces the built-in XIcon through `children?: JSX.Element`; `closeIcon?: JSX.Element`.
 
 ## Structured styles
 

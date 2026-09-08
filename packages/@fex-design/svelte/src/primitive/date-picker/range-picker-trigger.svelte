@@ -49,14 +49,13 @@
     value=""
     disabled={context.disabled}
     readOnly={context.readOnly}
-    status={status ?? context.status}
     class={cn(datePickerRangeTriggerClassName, className)}
     onValueChange={() => undefined}
     onclick={open}
   >
-    <InputRoot data-range-part="start" data-active={(context.getOpen() ? context.getActivePart() === 'start' : focusedPart === 'start') || undefined} value={previewStartText} readOnly={context.readOnly} class={datePickerRangeInputClassName} onValueChange={(value) => input('start', value)}><InputControl class={cn(datePickerRangeInputControlClassName, previewStartText !== startText && 'text-muted-foreground')} placeholder={startPlaceholder} onfocus={() => focus('start')} /></InputRoot>
+    <InputRoot data-range-part="start" data-active={(context.getOpen() ? context.getActivePart() === 'start' : focusedPart === 'start') || undefined} value={previewStartText} readOnly={context.readOnly} class={datePickerRangeInputClassName} onValueChange={(value) => input('start', value)}><InputControl aria-invalid={(status ?? context.status) === 'error' || undefined} class={cn(datePickerRangeInputControlClassName, previewStartText !== startText && 'text-muted-foreground')} placeholder={startPlaceholder} onfocus={() => focus('start')} /></InputRoot>
     <span aria-hidden="true" class={datePickerRangeSeparatorClassName}>{separator}</span>
-    <InputRoot data-range-part="end" data-active={(context.getOpen() ? context.getActivePart() === 'end' : focusedPart === 'end') || undefined} value={previewEndText} readOnly={context.readOnly} class={datePickerRangeInputClassName} onValueChange={(value) => input('end', value)}><InputControl class={cn(datePickerRangeInputControlClassName, previewEndText !== endText && 'text-muted-foreground')} placeholder={endPlaceholder} onfocus={() => focus('end')} /></InputRoot>
+    <InputRoot data-range-part="end" data-active={(context.getOpen() ? context.getActivePart() === 'end' : focusedPart === 'end') || undefined} value={previewEndText} readOnly={context.readOnly} class={datePickerRangeInputClassName} onValueChange={(value) => input('end', value)}><InputControl aria-invalid={(status ?? context.status) === 'error' || undefined} class={cn(datePickerRangeInputControlClassName, previewEndText !== endText && 'text-muted-foreground')} placeholder={endPlaceholder} onfocus={() => focus('end')} /></InputRoot>
     {#if context.allowClear && hasValue}<InputClear forceMount onpointerdown={(event) => event.stopPropagation()} onclick={(event) => { event.stopPropagation(); context.clear() }} />{:else}<InputSuffix><CalendarIcon /></InputSuffix>{/if}
   </InputRoot>
 {/snippet}</PopoverTrigger>

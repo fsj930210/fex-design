@@ -4,8 +4,8 @@
   import { buttonClassName } from '@fex-design/styles/button'
 
   const sizes = [
-    'xs', 'sm', 'default', 'lg', 'xl',
-    'icon-xs', 'icon-sm', 'icon', 'icon-lg', 'icon-xl',
+    'sm', 'md', 'lg',
+    'icon-sm', 'icon-md', 'icon-lg',
   ] as const
 </script>
 

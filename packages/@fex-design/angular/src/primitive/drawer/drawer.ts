@@ -29,7 +29,7 @@ import {
 import type { AfterViewInit, OnChanges, OnDestroy } from '@angular/core'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { createHostClassName } from '../../signals/host-class'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { FexResizeDirective } from '../../directives/resize'
 
 @Component({
@@ -293,7 +293,7 @@ export class DrawerFooter {
 @Component({
   selector: 'button[fexDrawerClose]',
   standalone: true,
-  imports: [CloseIcon],
+  imports: [XIcon],
   host: {
     type: 'button',
     'aria-label': 'Close',

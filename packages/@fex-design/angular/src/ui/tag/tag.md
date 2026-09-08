@@ -11,7 +11,7 @@ Recommended Tag composition. UI builds on Primitive Tag, creates TagAction when 
 | Component | Element | Purpose |
 | --------- | ------- | ------- |
 | Tag | span | Recommended composed Tag with optional close control and structured styling. |
-| TagCloseIcon | projected node | Marks custom close-icon content with `[tagCloseIcon]`. |
+| TagCloseIcon | projected node | Marks custom x-icon content with `[tagCloseIcon]`. |
 
 ## Examples
 
@@ -46,7 +46,7 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 Enabling `closable` only renders and wires the close button. The component never hides itself or owns collection state. Remove the corresponding item in `close` output with `MouseEvent`. When `disabled` is true, the generated close button is also disabled.
 
-A custom close icon completely replaces the built-in CloseIcon through default content projection; `[tagCloseIcon]` projection.
+A custom close icon completely replaces the built-in XIcon through default content projection; `[tagCloseIcon]` projection.
 
 ## Structured styles
 

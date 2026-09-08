@@ -2,7 +2,7 @@
 import { textareaClearClassName } from '@fex-design/styles/textarea'
 import { cn } from '@fex/utils'
 import { computed, inject } from 'vue'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import PrimitiveButton from '../button/button.vue'
 import { textareaContextKey } from './context'
 
@@ -39,6 +39,6 @@ function click(event: MouseEvent) {
     @pointerdown="pointerdown"
     @click="click"
   >
-    <slot><CloseIcon /></slot>
+    <slot><XIcon /></slot>
   </PrimitiveButton>
 </template>

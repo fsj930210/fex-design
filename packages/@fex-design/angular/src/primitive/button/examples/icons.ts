@@ -12,5 +12,5 @@ import { buttonClassName } from '@fex-design/styles/button'
 })
 export class IconsExample {
   protected readonly defaultClassName = buttonClassName()
-  protected readonly iconClassName = buttonClassName({ size: 'icon' })
+  protected readonly iconClassName = buttonClassName({ size: 'icon-md' })
 }

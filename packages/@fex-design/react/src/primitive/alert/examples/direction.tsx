@@ -1,6 +1,6 @@
 import { Alert, AlertAction, AlertIcon, AlertTitle } from '@fex-design/react/primitive/alert'
-import { CircleWarningIcon } from '@fex-design/react/icon/circle-warning'
-import { CloseIcon } from '@fex-design/react/icon/close'
+import { TriangleAlertIcon } from '../../../icon/triangle-alert'
+import { XIcon } from '../../../icon/x'
 import { alertCloseClassName } from '@fex-design/styles/alert'
 
 const items = [
@@ -15,10 +15,10 @@ export default function Direction() {
         <section key={item.dir} dir={item.dir} className="grid gap-3 rounded-lg border p-4">
           <strong>{item.dir.toUpperCase()}</strong>
           <Alert type="warning">
-            <AlertIcon><CircleWarningIcon /></AlertIcon>
+            <AlertIcon><TriangleAlertIcon /></AlertIcon>
             <AlertTitle>{item.title}</AlertTitle>
             <AlertAction><button className="underline">{item.action}</button></AlertAction>
-            <button className={alertCloseClassName} data-slot="alert-close" aria-label="关闭提示"><CloseIcon /></button>
+            <button className={alertCloseClassName} data-slot="alert-close" aria-label="关闭提示"><XIcon /></button>
           </Alert>
         </section>
       ))}

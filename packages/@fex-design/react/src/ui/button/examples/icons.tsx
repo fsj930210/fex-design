@@ -8,7 +8,7 @@ export function IconsExample() {
       <Button icon={<PlusIcon />} iconPlacement="end">
         Continue
       </Button>
-      <Button icon={<PlusIcon />} size="icon" aria-label="Create" />
+      <Button icon={<PlusIcon />} size="icon-md" aria-label="Create" />
     </div>
   )
 }

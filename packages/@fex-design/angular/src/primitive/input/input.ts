@@ -1,9 +1,9 @@
+import type { InputSize, InputVariant } from '@fex-design/core/input/types'
 import {
   inputAddonAfterClassName,
   inputAddonBeforeClassName,
   inputClearClassName,
   inputControlClassName,
-  inputGroupAddonClassName,
   inputGroupClassName,
   inputPrefixClassName,
   inputRootClassName,
@@ -11,85 +11,68 @@ import {
 } from '@fex-design/styles/input'
 import { cn } from '@fex/utils'
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   Directive,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Input,
-  Output,
   inject,
+  input,
+  output,
   signal,
+  type OnInit,
 } from '@angular/core'
-import type { OnChanges, SimpleChanges } from '@angular/core'
-import { CloseIcon } from '../../icon/close'
+import { CircleXIcon } from '../../icon/circle-x'
 import { createHostClassName } from '../../signals/host-class'
-import { buttonPrimitiveClassName } from '../button/button'
 
 @Component({
-  selector: 'fex-input-root',
+  selector: 'div[inputRoot]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
-    '[attr.data-disabled]': 'disabled || null',
-    '[attr.data-readonly]': 'readOnly || null',
-    '[attr.data-invalid]': 'resolvedInvalid || null',
-    '[attr.data-status]': 'status || null',
+    '[attr.data-disabled]': "disabled() ? 'true' : null",
+    '[attr.data-readonly]': "readOnly() ? 'true' : null",
+    '[attr.data-size]': 'size()',
+    '[attr.data-variant]': 'variant()',
     'data-slot': 'input-root',
   },
   template: '<ng-content />',
 })
-export class InputRoot implements OnChanges {
-  private readonly classInput = signal('')
-  @Input('class') set className(value: string | null | undefined) {
-    this.classInput.set(value ?? '')
-  }
-  @Input() value?: string
-  @Input() defaultValue = ''
-  @Input() disabled = false
-  @Input() readOnly = false
-  @Input() invalid = false
-  @Input() status: 'error' | 'warning' | undefined = undefined
-  @Output() readonly valueChange = new EventEmitter<string>()
-  @Output() readonly clear = new EventEmitter<void>()
+export class InputRoot implements OnInit {
+  readonly value = input<string>()
+  readonly defaultValue = input('')
+  readonly disabled = input(false, { transform: booleanAttribute })
+  readonly readOnly = input(false, { transform: booleanAttribute })
+  readonly size = input<InputSize>('md')
+  readonly variant = input<InputVariant>('outlined')
+  readonly valueChange = output<string>()
+  readonly cleared = output<void>({ alias: 'clear' })
+  private readonly uncontrolledValue = signal(this.defaultValue())
+  private focusElement?: HTMLInputElement
+  readonly currentValue = () => this.value() ?? this.uncontrolledValue()
+  readonly canClear = () => this.currentValue() !== '' && !this.disabled() && !this.readOnly()
   protected readonly hostClassName = createHostClassName(() =>
-    cn(inputRootClassName, this.classInput()),
+    inputRootClassName({ size: this.size(), variant: this.variant() }),
   )
-  private readonly uncontrolledValue = signal(this.defaultValue)
-  private focusElement?: HTMLElement
-  get currentValue() {
-    return this.value ?? this.uncontrolledValue()
-  }
-  get resolvedInvalid() {
-    return this.invalid || this.status === 'error'
-  }
-  get canClear() {
-    return this.currentValue !== '' && !this.disabled && !this.readOnly
-  }
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['defaultValue'] && this.value === undefined)
-      this.uncontrolledValue.set(this.defaultValue)
-  }
-  setFocusElement(element: HTMLElement) {
-    this.focusElement = element
-  }
+  ngOnInit() { if (this.value() === undefined) this.uncontrolledValue.set(this.defaultValue()) }
+  setFocusElement(element: HTMLInputElement) { this.focusElement = element }
   setValue(value: string) {
-    if (this.disabled || this.readOnly) return
-    if (this.value === undefined) this.uncontrolledValue.set(value)
+    if (this.disabled() || this.readOnly()) return
+    if (this.value() === undefined) this.uncontrolledValue.set(value)
     this.valueChange.emit(value)
   }
   clearValue() {
-    if (!this.canClear) return
+    if (!this.canClear()) return
     this.setValue('')
-    this.clear.emit()
+    this.cleared.emit()
     this.focusElement?.focus()
   }
 }
 
 @Component({
-  selector: 'fex-input-group',
+  selector: 'div[inputGroup]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', role: 'group', 'data-slot': 'input-group' },
@@ -100,96 +83,58 @@ export class InputGroup {
 }
 
 @Directive({
-  selector: '[fexInputGroupAddon]',
-  standalone: true,
-  host: { '[class]': 'hostClassName()', 'data-slot': 'input-group-addon' },
-})
-export class InputGroupAddon {
-  protected readonly hostClassName = createHostClassName(inputGroupAddonClassName)
-}
-
-@Directive({
-  selector: 'input[fexInputControl]',
+  selector: 'input[inputControl]',
   standalone: true,
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'input-control',
-    '[value]': 'root.currentValue',
-    '[disabled]': 'root.disabled',
-    '[readOnly]': 'root.readOnly',
-    '[attr.aria-invalid]': 'root.resolvedInvalid || null',
+    '[value]': 'root.currentValue()',
+    '[disabled]': 'root.disabled()',
+    '[readOnly]': 'root.readOnly()',
   },
 })
 export class InputControl {
   readonly root = inject(InputRoot)
-  private readonly classInput = signal('')
-  @Input('class') set className(value: string | null | undefined) {
-    this.classInput.set(value ?? '')
-  }
-  protected readonly hostClassName = createHostClassName(() =>
-    cn(inputControlClassName, this.classInput()),
-  )
-  private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)
-  constructor() {
-    this.root.setFocusElement(this.element.nativeElement)
-  }
+  readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement
+  protected readonly hostClassName = createHostClassName(inputControlClassName)
+  constructor() { this.root.setFocusElement(this.element) }
   @HostListener('input', ['$event']) onInput(event: Event) {
     this.root.setValue((event.currentTarget as HTMLInputElement).value)
   }
+  focus(options?: FocusOptions) { this.element.focus(options) }
+  blur() { this.element.blur() }
+  select() { this.element.select() }
 }
 
-@Directive({
-  selector: '[fexInputPrefix]',
-  standalone: true,
-  host: { '[class]': 'hostClassName()', 'data-slot': 'input-prefix' },
-})
-export class InputPrefix {
-  protected readonly hostClassName = createHostClassName(inputPrefixClassName)
-}
-@Directive({
-  selector: '[fexInputSuffix]',
-  standalone: true,
-  host: { '[class]': 'hostClassName()', 'data-slot': 'input-suffix' },
-})
-export class InputSuffix {
-  protected readonly hostClassName = createHostClassName(inputSuffixClassName)
-}
-@Directive({
-  selector: '[fexInputAddonBefore]',
-  standalone: true,
-  host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-before' },
-})
-export class InputAddonBefore {
-  protected readonly hostClassName = createHostClassName(inputAddonBeforeClassName)
-}
-@Directive({
-  selector: '[fexInputAddonAfter]',
-  standalone: true,
-  host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-after' },
-})
-export class InputAddonAfter {
-  protected readonly hostClassName = createHostClassName(inputAddonAfterClassName)
-}
+@Directive({ selector: '[inputPrefix]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-prefix' } })
+export class InputPrefix { protected readonly hostClassName = createHostClassName(inputPrefixClassName) }
+
+@Directive({ selector: '[inputSuffix]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-suffix' } })
+export class InputSuffix { protected readonly hostClassName = createHostClassName(inputSuffixClassName) }
+
+@Directive({ selector: '[inputAddonBefore]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-before' } })
+export class InputAddonBefore { protected readonly hostClassName = createHostClassName(inputAddonBeforeClassName) }
+
+@Directive({ selector: '[inputAddonAfter]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-after' } })
+export class InputAddonAfter { protected readonly hostClassName = createHostClassName(inputAddonAfterClassName) }
+
 @Component({
-  selector: 'button[fexInputClear]',
+  selector: 'button[inputClear]',
   standalone: true,
-  imports: [CloseIcon],
+  imports: [CircleXIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'input-clear',
     type: 'button',
-    '[hidden]': '!forceMount && !root.canClear',
-    '[disabled]': '!forceMount && !root.canClear',
-    '(pointerdown)': '$event.preventDefault()',
+    '[hidden]': '!forceMount() && !root.canClear()',
+    '[disabled]': '!forceMount() && !root.canClear()',
     '(click)': 'root.clearValue()',
   },
-  template: '<ng-content><fex-close-icon /></ng-content>',
+  templateUrl: './input-clear.html',
 })
 export class InputClear {
-  @Input() forceMount = false
+  readonly forceMount = input(false, { transform: booleanAttribute })
   readonly root = inject(InputRoot)
-  protected readonly hostClassName = createHostClassName(
-    buttonPrimitiveClassName(inputClearClassName),
-  )
+  protected readonly hostClassName = createHostClassName(() => cn(inputClearClassName))
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
-  selector: 'fex-info-icon',
+  selector: 'info-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'contents' },

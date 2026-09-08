@@ -41,7 +41,6 @@
     value={context.multiple ? '' : text}
     disabled={context.disabled}
     readOnly={context.readOnly}
-    status={status ?? context.status}
     class={cn(datePickerTriggerClassName, className)}
     onValueChange={input}
     onClear={context.allowClear ? context.clear : undefined}
@@ -49,6 +48,7 @@
   >
     {#if context.multiple && displayValue}<DatePickerTags />{/if}
     <InputControl
+      aria-invalid={(status ?? context.status) === 'error' || undefined}
       bind:this={inputControl}
       class={context.multiple && displayValue ? datePickerMultipleInputClassName : undefined}
       placeholder={context.multiple && displayValue ? '' : placeholder ?? context.format}

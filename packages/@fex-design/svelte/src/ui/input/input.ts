@@ -1,0 +1,5 @@
+export { default as Input } from './input.svelte'
+export { default as InputPassword } from './input-password.svelte'
+export { default as InputSearch } from './input-search.svelte'
+export { InputGroup } from '@fex-design/svelte/primitive/input'
+export type { InputPasswordProps, InputProps, InputSearchProps } from './input.types'

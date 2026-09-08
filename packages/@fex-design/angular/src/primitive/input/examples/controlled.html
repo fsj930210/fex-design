@@ -1,0 +1,10 @@
+<div class="grid w-full gap-3">
+  <div inputRoot [value]="value()" (valueChange)="value.set($event)">
+    <input inputControl /><button inputClear></button>
+  </div>
+  <div inputRoot defaultValue="非受控内容"><input inputControl /><button inputClear></button></div>
+  <div class="flex gap-2">
+    <button button (click)="value.set('外部设置')">外部设置</button
+    ><button button (click)="value.set('')">外部清空</button>
+  </div>
+</div>

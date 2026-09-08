@@ -20,7 +20,7 @@ import {
   signal,
 } from '@angular/core'
 import type { OnChanges, OnDestroy, SimpleChanges } from '@angular/core'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { createHostClassName } from '../../signals/host-class'
 import { buttonPrimitiveClassName } from '../button/button'
 
@@ -152,7 +152,7 @@ export class TextareaFooter {
 @Component({
   selector: 'button[fexTextareaClear]',
   standalone: true,
-  imports: [CloseIcon],
+  imports: [XIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
@@ -163,7 +163,7 @@ export class TextareaFooter {
     '(pointerdown)': '$event.preventDefault()',
     '(click)': 'root.clearValue()',
   },
-  template: '<ng-content><fex-close-icon /></ng-content>',
+  template: '<ng-content><x-icon /></ng-content>',
 })
 export class TextareaClear {
   readonly root = inject(TextareaRoot)

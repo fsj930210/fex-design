@@ -5,7 +5,7 @@
   import { getContext, type Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import ChevronRight from '../../icon/chevron-right.svelte'
-  import CloseIcon from '../../icon/close.svelte'
+  import XIcon from '../../icon/x.svelte'
   import LoadingIcon from '../../icon/loading.svelte'
 import { Button } from '@fex-design/svelte/primitive/button'
   import PopoverTrigger from '../popover/popover-trigger.svelte'
@@ -25,6 +25,6 @@ import { Button } from '@fex-design/svelte/primitive/button'
     {@render prefix?.()}<div class={selectValueContainerClassName}>
       {#if selected().length}{#if select.multiple()}<div class={selectValueClassName}>{#each visible() as item (item.value)}{#if tag}{@render tag(item,()=>select.removeValue(item.value))}{:else}<Tag size="sm" closable closeLabel={`Remove ${String(item.label)}`} onpointerdown={event=>event.preventDefault()} onClose={event=>{event.stopPropagation();select.removeValue(item.value)}}>{item.label}</Tag>{/if}{/each}{#if selected().length-visible().length>0}<Tag size="sm">+{selected().length-visible().length}</Tag>{/if}</div>{:else}<div class={selectValueClassName}>{selected()[0]?.label}</div>{/if}{:else if !$snapshot.searchValue&&!select.showSearch()}<span class={selectPlaceholderClassName}>{placeholder}</span>{/if}
       <input role="combobox" aria-expanded={$snapshot.open} aria-controls={select.listId} disabled={select.disabled()} readonly={!select.showSearch()} placeholder={select.showSearch()&&!selected().length?placeholder:undefined} value={$snapshot.searchValue} class={cn(selectInputClassName,!select.showSearch()&&'absolute size-px min-w-0 overflow-hidden opacity-0')} onfocus={()=>select.controller.open()} onpointerdown={inputPointerdown} onclick={event=>event.stopPropagation()} oninput={event=>{select.controller.setSearchValue(event.currentTarget.value);select.controller.open()}}/>
-    </div><span data-slot="select-suffix" class={selectSuffixClassName}>{#if select.loading()}<LoadingIcon class="animate-spin"/>{:else if select.clearable()&&selected().length}<Button type="button" aria-label="Clear selection" class={selectClearClassName} onpointerdown={event=>event.preventDefault()} onclick={event=>{event.stopPropagation();select.controller.clear()}}><CloseIcon class="size-4"/></Button>{:else if suffix}{@render suffix()}{:else}<span data-state={$snapshot.open?'open':'closed'} class={selectIndicatorClassName}><ChevronRight class="size-4 rotate-90"/></span>{/if}</span>
+    </div><span data-slot="select-suffix" class={selectSuffixClassName}>{#if select.loading()}<LoadingIcon class="animate-spin"/>{:else if select.clearable()&&selected().length}<Button type="button" aria-label="Clear selection" class={selectClearClassName} onpointerdown={event=>event.preventDefault()} onclick={event=>{event.stopPropagation();select.controller.clear()}}><XIcon class="size-4"/></Button>{:else if suffix}{@render suffix()}{:else}<span data-state={$snapshot.open?'open':'closed'} class={selectIndicatorClassName}><ChevronRight class="size-4 rotate-90"/></span>{/if}</span>
   </div>
 {/snippet}</PopoverTrigger>

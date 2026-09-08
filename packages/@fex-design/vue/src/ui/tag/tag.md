@@ -46,7 +46,7 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 Enabling `closable` only renders and wires the close button. The component never hides itself or owns collection state. Remove the corresponding item in `close` emit with `MouseEvent`. When `disabled` is true, the generated close button is also disabled.
 
-A custom close icon completely replaces the built-in CloseIcon through default slot; named `closeIcon` slot.
+A custom close icon completely replaces the built-in XIcon through default slot; named `closeIcon` slot.
 
 ## Structured styles
 

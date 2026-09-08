@@ -3,16 +3,16 @@ import { Button, ButtonIcon } from '@fex-design/vue/primitive/button'
 import { PlusIcon } from '@fex-design/vue/icon/plus'
 import { buttonClassName } from '@fex-design/styles/button'
 const sizeNames = [
-  'xs',
+
   'sm',
-  'default',
+  'md',
   'lg',
-  'xl',
-  'icon-xs',
+
+
   'icon-sm',
-  'icon',
+  'icon-md',
   'icon-lg',
-  'icon-xl',
+
 ] as const
 const sizes = sizeNames.map((size) => ({ size, className: buttonClassName({ size }) }))
 </script>

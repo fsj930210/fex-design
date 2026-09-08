@@ -11,7 +11,7 @@ Styled Tag primitives for compact categories, attributes, and status values. Pri
 | Component | Element | Purpose |
 | --------- | ------- | ------- |
 | Tag | span | Inherits the native span; renders variant, color, size, and disabled styling. |
-| TagAction | button | Inherits the native button; renders CloseIcon by default and accepts complete custom content. |
+| TagAction | button | Inherits the native button; renders XIcon by default and accepts complete custom content. |
 
 ## Examples
 
@@ -42,7 +42,7 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
 | disabled | boolean | false | Disables the native action button. |
-| content | `children?: JSX.Element` | CloseIcon | Completely replaces the default close icon when provided. |
+| content | `children?: JSX.Element` | XIcon | Completely replaces the default close icon when provided. |
 | events | native `onClick` handler | — | Native button events; Primitive adds no action-specific event. |
 | native attributes | JSX.ButtonHTMLAttributes<HTMLButtonElement> | — | Native button attributes and events. |
 
@@ -73,7 +73,7 @@ Tag dimensions are controlled by the `size` API; no public size variables are ex
 
 ## Content and composition
 
-Content follows Solid's native model: `children?: JSX.Element`. Place `TagAction` inside `Tag` for an inline operation. It defaults to CloseIcon, while custom content can represent remove, edit, more, or another action. `TagAction` does not prescribe behavior or coordinate the parent disabled state.
+Content follows Solid's native model: `children?: JSX.Element`. Place `TagAction` inside `Tag` for an inline operation. It defaults to XIcon, while custom content can represent remove, edit, more, or another action. `TagAction` does not prescribe behavior or coordinate the parent disabled state.
 
 ## Accessibility
 

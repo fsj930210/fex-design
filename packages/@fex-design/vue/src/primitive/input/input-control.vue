@@ -26,7 +26,7 @@ function setElement(value: Element | ComponentPublicInstance | null) {
   element.value = value as HTMLInputElement | null
   inputContext.setFocusElement(element.value)
 }
-defineExpose({ focus: () => element.value?.focus(), blur: () => element.value?.blur() })
+defineExpose({ focus: () => element.value?.focus(), blur: () => element.value?.blur(), select: () => element.value?.select() })
 </script>
 <template>
   <input
@@ -35,7 +35,6 @@ defineExpose({ focus: () => element.value?.focus(), blur: () => element.value?.b
     :value="inputContext.value.value"
     :disabled="inputContext.disabled.value"
     :readonly="inputContext.readOnly.value"
-    :aria-invalid="inputContext.invalid.value || undefined"
     data-slot="input-control"
     :class="className"
     @blur="emit('blur', $event)"

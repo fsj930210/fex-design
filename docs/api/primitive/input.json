@@ -1,0 +1,13 @@
+{
+  "name":"Input","slug":"input","layer":"primitive","status":"stable","description":"可自由组合的单行输入结构。",
+  "importPath":{"react":"@fex-design/react/primitive/input","vue":"@fex-design/vue/primitive/input","solid":"@fex-design/solid/primitive/input","svelte":"@fex-design/svelte/primitive/input","angular":"@fex-design/angular/primitive/input"},
+  "components":[
+    {"name":"InputRoot","layer":"primitive","description":"管理输入值、清除、尺寸和形态的根容器。","props":[]},{"name":"InputControl","layer":"primitive","description":"真实 input 元素，接收原生 input 属性和事件。","props":[]},{"name":"InputPrefix","layer":"primitive","description":"输入框内的起始内容。","props":[]},{"name":"InputSuffix","layer":"primitive","description":"输入框内的结束内容。","props":[]},{"name":"InputAddonBefore","layer":"primitive","description":"输入框边界外、与输入主体相连的起始附加区域。","props":[]},{"name":"InputAddonAfter","layer":"primitive","description":"输入框边界外、与输入主体相连的结束附加区域。","props":[]},{"name":"InputClear","layer":"primitive","description":"按当前值和交互状态显示的清除按钮。","props":[]},{"name":"InputGroup","layer":"primitive","description":"连接任意直接子元素，并统一处理相邻边框和首尾圆角。","props":[]}
+  ],
+  "props":[
+    {"name":"size","type":"'sm' | 'md' | 'lg'","default":"md","description":"Root 的尺寸。"},{"name":"variant","type":"'outlined' | 'filled' | 'borderless' | 'underlined'","default":"outlined","description":"Root 的视觉形态。"},{"name":"value","type":"string","description":"受控值。"},{"name":"defaultValue","type":"string","default":"","description":"非受控初始值。"},{"name":"disabled","type":"boolean","default":false,"description":"禁用输入。"},{"name":"readOnly","type":"boolean","default":false,"description":"只读输入。"}
+  ],
+  "events":[{"name":"valueChange","description":"输入或清除后返回新值。"},{"name":"clear","description":"成功清除后触发。"}],
+  "cssVariables":[{"name":"--input-height","description":"当前实例高度。"},{"name":"--input-icon-size","description":"普通图标尺寸。"},{"name":"--input-clear-icon-size","description":"清除图标尺寸，随 sm、md、lg 分别为 12px、14px、16px。"},{"name":"--input-group-radius","description":"InputGroup 外侧圆角；可在直接子元素上局部覆盖。"},{"name":"--input-background","description":"基础背景。"},{"name":"--input-border-color","description":"基础边框。"},{"name":"--input-color","description":"输入文字颜色。"},{"name":"--input-placeholder-color","description":"占位文字颜色。"},{"name":"--input-ring-color","description":"聚焦环颜色。"}],
+  "demos":[{"id":"basic"},{"id":"sizes"},{"id":"variants"},{"id":"controlled"},{"id":"affixes"},{"id":"group"},{"id":"password"},{"id":"search"},{"id":"states"},{"id":"focus"}]
+}

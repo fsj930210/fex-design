@@ -11,7 +11,7 @@ import {
 import { cn } from '@fex/utils'
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { LoadingIcon } from '../../icon/loading'
 import { InputClearButton } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
@@ -93,7 +93,7 @@ export function CascaderTrigger({
                   cascader.controller.clear()
                 }}
               >
-                <CloseIcon />
+                <XIcon />
               </InputClearButton>
             ) : (
               <span

@@ -1,0 +1,8 @@
+@if (addonBefore() != null) { <span inputAddonBefore [class]="classNames().addonBefore ?? ''" [style]="styles().addonBefore">@if (template(addonBefore()); as content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(addonBefore()) }} }</span> }
+<div inputRoot [value]="value()" [defaultValue]="defaultValue()" [disabled]="disabled()" [readOnly]="readOnly()" [size]="size()" [variant]="variant()" [class]="classNames().root ?? ''" [style]="styles().root" (valueChange)="valueChange.emit($event)" (clear)="cleared.emit()">
+@if (prefix() != null) { <span inputPrefix [class]="classNames().prefix ?? ''" [style]="styles().prefix">@if (template(prefix()); as content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(prefix()) }} }</span> }
+<input inputControl [type]="type()" [placeholder]="placeholder() ?? ''" [name]="name() ?? ''" [autocomplete]="autocomplete() ?? ''" [attr.aria-invalid]="ariaInvalid() || null" [class]="classNames().control ?? ''" [style]="styles().control" />
+@if (clearable()) { <button inputClear [class]="classNames().clear ?? ''" [style]="styles().clear" aria-label="Clear input"></button> }
+@if (suffix() != null) { <span inputSuffix [class]="classNames().suffix ?? ''" [style]="styles().suffix">@if (template(suffix()); as content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(suffix()) }} }</span> }
+</div>
+@if (addonAfter() != null) { <span inputAddonAfter [class]="classNames().addonAfter ?? ''" [style]="styles().addonAfter">@if (template(addonAfter()); as content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(addonAfter()) }} }</span> }

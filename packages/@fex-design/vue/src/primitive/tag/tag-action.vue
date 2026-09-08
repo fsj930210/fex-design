@@ -2,7 +2,7 @@
 import { tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 
 defineOptions({ name: 'TagAction', inheritAttrs: false })
 const attrs = useAttrs()
@@ -16,6 +16,6 @@ const attrs = useAttrs()
     :aria-label="attrs['aria-label'] as string | undefined"
     :class="cn(tagActionClassName, attrs.class as string | undefined)"
   >
-    <slot><CloseIcon aria-hidden="true" /></slot>
+    <slot><XIcon aria-hidden="true" /></slot>
   </button>
 </template>

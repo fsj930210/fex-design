@@ -12,7 +12,7 @@ import {
 import { cn } from '@fex/utils'
 import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { Button } from '../button/button'
@@ -139,7 +139,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
                     select.controller.clear()
                   }}
                 >
-                  <CloseIcon class="size-4" />
+                  <XIcon class="size-4" />
                 </Button>
               </Show>
             </Show>

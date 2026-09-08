@@ -58,7 +58,7 @@
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | animation | SkeletonAnimation | 'none' | 占位动画。 |
-| size | 'xs' \| 'sm' \| 'default' \| 'lg' \| 'xl' | 'default' | 与 Button 的五档高度对齐。 |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | 与 Button 的三档高度对齐。 |
 | shape | 'round' \| 'square' \| 'circle' | — | 不传为普通矩形；`round` 为胶囊圆角，`square` 等宽方形，`circle` 等宽圆形。 |
 | block | boolean | false | 是否占满父容器宽度。 |
 

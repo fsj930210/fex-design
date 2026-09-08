@@ -6,7 +6,7 @@ import {
 } from '@fex-design/styles/tabs'
 import { cn } from '@fex/utils'
 import { mergeProps, onCleanup, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import {
   createTabs,
   type CreateTabsOptions,
@@ -100,7 +100,7 @@ export function TabsItem(props: TabsItemProps) {
       {local.children}
       {local.closable && (
         <button {...closeProps()}>
-          <CloseIcon class="size-4" />
+          <XIcon class="size-4" />
         </button>
       )}
     </div>

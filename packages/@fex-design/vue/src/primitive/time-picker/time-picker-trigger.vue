@@ -41,12 +41,11 @@ function clear() {
         :value="text"
         :disabled="context.disabled.value"
         :read-only="context.readOnly.value"
-        :invalid="invalid"
         @value-change="input"
         @clear="clear"
       >
         <InputPrefix v-if="$slots.prefix"><slot name="prefix" /></InputPrefix>
-        <InputControl aria-label="Time" :placeholder="placeholder ?? context.format.value" />
+        <InputControl :aria-invalid="invalid || undefined" aria-label="Time" :placeholder="placeholder ?? context.format.value" />
         <InputClear v-if="allowClear" />
         <InputSuffix v-if="!allowClear || !text"
           ><slot name="suffix"><ClockIcon class="size-4" /></slot

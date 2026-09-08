@@ -13,7 +13,7 @@ import { cn } from '@fex/utils'
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '../../icon/chevron'
 import { LoadingIcon } from '../../icon/loading'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { Tag } from '../tag/tag'
 import { InputClearButton } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
@@ -128,7 +128,7 @@ export function SelectTrigger({
                   select.controller.clear()
                 }}
               >
-                <CloseIcon className="size-4" />
+                <XIcon className="size-4" />
               </InputClearButton>
             ) : suffix ? (
               suffix

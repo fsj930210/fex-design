@@ -8,7 +8,7 @@ import {
 import { cn } from '@fex/utils'
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactElement, ReactNode, Ref } from 'react'
 import { useComposedRef } from '../../hooks/use-composed-ref'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { TabsContext, useTabsContext } from './tabs-context'
 import {
   useTabs,
@@ -107,7 +107,7 @@ export function TabsItem({
       {children ?? label}
       {state.closable ? (
         <button {...closeProps} className={tabsCloseClassName}>
-          <CloseIcon className="size-4" />
+          <XIcon className="size-4" />
         </button>
       ) : null}
     </div>

@@ -5,7 +5,6 @@ import {
   InputControl,
   InputRoot,
   InputSuffix,
-  type InputRootProps,
 } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
 import { useAutoComplete } from './use-auto-complete'
@@ -17,8 +16,6 @@ export interface AutoCompleteTriggerProps extends Omit<
   children?: (bindings: ReturnType<typeof useAutoComplete>) => ReactNode
   className?: string
   clearable?: boolean
-  invalid?: boolean
-  status?: InputRootProps['status']
   prefix?: ReactNode
   suffix?: ReactNode
 }
@@ -27,8 +24,6 @@ export function AutoCompleteTrigger({
   children,
   className,
   clearable,
-  invalid,
-  status,
   prefix,
   suffix,
   onBlur,
@@ -58,8 +53,6 @@ export function AutoCompleteTrigger({
           value={autoComplete.snapshot.value}
           disabled={autoComplete.disabled}
           readOnly={autoComplete.readOnly}
-          {...(invalid === undefined ? {} : { invalid })}
-          {...(status === undefined ? {} : { status })}
           onValueChange={(value) => {
             autoComplete.controller.setValue(value)
             autoComplete.controller.setOpen(true, 'input')

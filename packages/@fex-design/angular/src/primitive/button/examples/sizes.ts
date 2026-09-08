@@ -4,16 +4,16 @@ import { PlusIcon } from '@fex-design/angular/icon/plus'
 import { buttonClassName } from '@fex-design/styles/button'
 
 const sizeNames = [
-  'xs',
+
   'sm',
-  'default',
+  'md',
   'lg',
-  'xl',
-  'icon-xs',
+
+
   'icon-sm',
-  'icon',
+  'icon-md',
   'icon-lg',
-  'icon-xl',
+
 ] as const
 
 @Component({

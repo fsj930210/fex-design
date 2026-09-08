@@ -18,7 +18,7 @@ import {
   type ReactNode,
   type Ref,
 } from 'react'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { useComposedRef } from '../../hooks/use-composed-ref'
 import { useControllableState } from '../../hooks/use-controllable-state'
 import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect'
@@ -292,5 +292,5 @@ export function TextareaClear({
 
   if (typeof children === 'function') return children(clearProps)
 
-  return <Button {...clearProps}>{children ?? <CloseIcon />}</Button>
+  return <Button {...clearProps}>{children ?? <XIcon />}</Button>
 }

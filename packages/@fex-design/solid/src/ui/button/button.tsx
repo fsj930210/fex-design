@@ -26,7 +26,7 @@ export function Button(props: ButtonProps) {
 
   const variant = () => local.variant ?? 'outlined'
   const color = () => local.color
-  const size = () => local.size ?? 'default'
+  const size = () => local.size ?? 'md'
   const iconPlacement = () => local.iconPlacement ?? 'start'
   const isLoading = () => local.loading === true
   const isDisabled = () => local.disabled === true || isLoading()

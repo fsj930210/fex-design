@@ -117,7 +117,6 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
             value=""
             disabled={context.disabled}
             readOnly={context.readOnly}
-            status={local.status ?? context.status}
             onValueChange={() => undefined}
             onClick={(event) => {
               if (context.disabled) {
@@ -152,6 +151,7 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
               onFocus={() => focus('start')}
               onValueChange={(value) => input('start', value)}
               preview={previewStartText() !== startText()}
+              ariaInvalid={local.status === 'error'}
             />
             <span aria-hidden="true" class={datePickerRangeSeparatorClassName}>
               {local.separator ?? '→'}
@@ -168,6 +168,7 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
               onFocus={() => focus('end')}
               onValueChange={(value) => input('end', value)}
               preview={previewEndText() !== endText()}
+              ariaInvalid={local.status === 'error'}
             />
             {context.allowClear && hasValue() ? (
               <InputClear
@@ -198,6 +199,7 @@ function RangeInput(props: {
   onFocus: JSX.FocusEventHandlerUnion<HTMLInputElement, FocusEvent>
   onValueChange: (value: string) => void
   preview?: boolean
+  ariaInvalid?: boolean
 }) {
   return (
     <InputRoot
@@ -211,6 +213,7 @@ function RangeInput(props: {
     >
       <InputControl
         {...props.inputProps}
+        aria-invalid={props.ariaInvalid || props.inputProps?.['aria-invalid'] || undefined}
         class={cn(
           datePickerRangeInputControlClassName,
           props.preview && 'text-muted-foreground',

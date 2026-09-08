@@ -17,7 +17,7 @@ export function IconsExample() {
           <PlusIcon />
         </ButtonIcon>
       </Button>
-      <Button class={buttonClassName({ size: 'icon' })} aria-label="Create">
+      <Button class={buttonClassName({ size: 'icon-md' })} aria-label="Create">
         <ButtonIcon>
           <PlusIcon />
         </ButtonIcon>

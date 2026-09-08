@@ -11,10 +11,10 @@ import {
 import { cn } from '@fex/utils'
 import { computed, ref, type StyleValue, useAttrs } from 'vue'
 import { CircleCheckIcon } from '../../icon/circle-check'
-import { CloseIcon } from '../../icon/close'
-import { CircleErrorIcon } from '../../icon/circle-error'
-import { CircleInfoIcon } from '../../icon/circle-info'
-import { CircleWarningIcon } from '../../icon/circle-warning'
+import { XIcon } from '../../icon/x'
+import { CircleXIcon } from '../../icon/circle-x'
+import { InfoIcon } from '../../icon/info'
+import { TriangleAlertIcon } from '../../icon/triangle-alert'
 import PrimitiveAlert from '../../primitive/alert/alert-root.vue'
 
 defineOptions({ name: 'Alert', inheritAttrs: false })
@@ -36,7 +36,7 @@ const attrs = useAttrs()
 const visible = ref(true)
 const builtinIcon = computed(
   () =>
-    ({ success: CircleCheckIcon, info: CircleInfoIcon, warning: CircleWarningIcon, error: CircleErrorIcon })[props.type],
+    ({ success: CircleCheckIcon, info: InfoIcon, warning: TriangleAlertIcon, error: CircleXIcon })[props.type],
 )
 function close(event: MouseEvent) {
   emit('close', event)
@@ -94,6 +94,6 @@ function close(event: MouseEvent) {
       :class="cn(alertCloseClassName, classNames?.close)"
       :style="styles?.close"
       @click="close"
-    ><slot name="closeIcon"><CloseIcon /></slot></button>
+    ><slot name="closeIcon"><XIcon /></slot></button>
   </PrimitiveAlert>
 </template>

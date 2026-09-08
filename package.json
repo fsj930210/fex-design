@@ -10,8 +10,8 @@
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
-    "format": "oxfmt .",
-    "format:check": "oxfmt --check .",
+    "format": "oxfmt . && prettier --write \"apps/**/*.svelte\" \"packages/**/*.svelte\" \"docs/**/*.svelte\" --plugin=prettier-plugin-svelte",
+    "format:check": "oxfmt --check . && prettier --check \"apps/**/*.svelte\" \"packages/**/*.svelte\" \"docs/**/*.svelte\" --plugin=prettier-plugin-svelte",
     "check": "turbo run lint typecheck build",
     "dev:react": "turbo run dev --filter=@fex-design/react-app --ui=stream",
     "dev:vue": "turbo run dev --filter=@fex-design/vue-app --ui=stream",
@@ -28,9 +28,11 @@
   "devDependencies": {
     "@fex/config-oxc": "workspace:*",
     "@fex/config-tsconfig": "workspace:*",
-    "oxfmt": "0.61.0",
-    "oxlint": "1.76.0",
-    "turbo": "2.10.11"
+    "oxfmt": "0.67.0",
+    "oxlint": "1.81.0",
+    "prettier": "3.9.6",
+    "prettier-plugin-svelte": "4.1.1",
+    "turbo": "2.10.12"
   },
   "packageManager": "pnpm@11.19.0"
 }

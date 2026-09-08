@@ -64,12 +64,13 @@
   }
 </script>
 
-<InputRoot value={draft} {disabled} readOnly={readonly} {invalid} {status} class={className} data-out-of-range={outOfRange || undefined} onValueChange={(text, meta) => input(text, meta.event)}>
+<InputRoot value={draft} {disabled} readOnly={readonly} class={className} data-out-of-range={outOfRange || undefined} onValueChange={(text, meta) => input(text, meta.event)}>
   {#if prefix}<InputPrefix>{@render prefix()}</InputPrefix>{/if}
   <InputControl
     {...rest}
     type="text"
     role="spinbutton"
+    aria-invalid={invalid || status === 'error' || undefined}
     aria-valuemin={min}
     aria-valuemax={max}
     aria-valuenow={currentValue}

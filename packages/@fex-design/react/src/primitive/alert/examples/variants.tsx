@@ -1,5 +1,5 @@
 import { Alert, AlertIcon, AlertTitle } from '@fex-design/react/primitive/alert'
-import { CircleInfoIcon } from '@fex-design/react/icon/circle-info'
+import { InfoIcon } from '../../../icon/info'
 
 const variants = [
   ['filled', 'Filled Alert'],
@@ -12,7 +12,7 @@ export default function Variants() {
     <div className="grid w-full gap-3">
       {variants.map(([variant, title]) => (
         <Alert key={variant} variant={variant}>
-          <AlertIcon><CircleInfoIcon /></AlertIcon>
+          <AlertIcon><InfoIcon /></AlertIcon>
           <AlertTitle>{title}</AlertTitle>
         </Alert>
       ))}

@@ -76,7 +76,6 @@ export function DatePickerTrigger(props: DatePickerTriggerProps) {
             value={context.multiple ? '' : text()}
             disabled={context.disabled}
             readOnly={context.readOnly}
-            status={local.status ?? context.status}
             onValueChange={input}
             onClear={context.allowClear ? context.clear : undefined}
             onClick={(event) => {
@@ -99,6 +98,7 @@ export function DatePickerTrigger(props: DatePickerTriggerProps) {
             {local.prefix ? <InputPrefix>{local.prefix}</InputPrefix> : null}
             {context.multiple ? <DatePickerTags class={datePickerMultipleTagsClassName} /> : null}
             <InputControl
+              aria-invalid={(local.status ?? context.status) === 'error' || undefined}
               {...local.inputProps}
               ref={(element) => {
                 inputElement = element

@@ -13,7 +13,7 @@ import {
   ToastClose,
   toast,
 } from '@fex-design/react/primitive/toast'
-import { CloseIcon } from '@fex-design/react/icon/close'
+import { XIcon } from '@fex-design/react/icon/x'
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ toast.error({ id: 'http-401', title: 'Session expired' })
   {(items) => items.map((item) => (
     <ToastRoot key={item.id} toast={item}>
       <ToastTitle>{item.title}</ToastTitle>
-      <ToastClose toast={item}><CloseIcon className="size-4" /></ToastClose>
+      <ToastClose toast={item}><XIcon className="size-4" /></ToastClose>
       {item.description ? <ToastDescription>{item.description}</ToastDescription> : null}
     </ToastRoot>
   ))}

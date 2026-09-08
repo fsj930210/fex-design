@@ -2,7 +2,7 @@
 import { tabsCloseClassName, tabsItemClassName } from '@fex-design/styles/tabs'
 import { cn } from '@fex/utils'
 import { computed, inject, mergeProps, onBeforeUnmount, useAttrs } from 'vue'
-import CloseIcon from '../../icon/close-icon.vue'
+import XIcon from '../../icon/x-icon.vue'
 import { tabsContextKey } from './context'
 
 defineOptions({ inheritAttrs: false })
@@ -43,6 +43,6 @@ onBeforeUnmount(() => context.registerItem(item.value, null))
     :close-props="closeProps"
   />
   <div v-else v-bind="itemProps">
-    <slot /><button v-if="props.closable" v-bind="closeProps"><CloseIcon class="size-4" /></button>
+    <slot /><button v-if="props.closable" v-bind="closeProps"><XIcon class="size-4" /></button>
   </div>
 </template>

@@ -11,7 +11,7 @@ export function Button({
   className,
   variant = 'outlined',
   color,
-  size = 'default',
+  size = 'md',
   effect,
   icon,
   loadingIndicator,

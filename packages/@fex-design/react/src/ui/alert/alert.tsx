@@ -1,9 +1,9 @@
 import type { AlertUiOptions } from '@fex-design/core/alert/types'
 import { CircleCheckIcon } from '../../icon/circle-check'
-import { CircleErrorIcon } from '../../icon/circle-error'
-import { CircleInfoIcon } from '../../icon/circle-info'
-import { CircleWarningIcon } from '../../icon/circle-warning'
-import { CloseIcon } from '../../icon/close'
+import { CircleXIcon } from '../../icon/circle-x'
+import { InfoIcon } from '../../icon/info'
+import { TriangleAlertIcon } from '../../icon/triangle-alert'
+import { XIcon } from '../../icon/x'
 import {
   alertActionClassName,
   alertCloseClassName,
@@ -24,9 +24,9 @@ export interface AlertProps
 
 const icons = {
   success: CircleCheckIcon,
-  info: CircleInfoIcon,
-  warning: CircleWarningIcon,
-  error: CircleErrorIcon,
+  info: InfoIcon,
+  warning: TriangleAlertIcon,
+  error: CircleXIcon,
 }
 
 export function Alert({
@@ -82,7 +82,7 @@ export function Alert({
           style={styles?.close}
           onClick={(event) => { onClose?.(event); if (!event.defaultPrevented) setVisible(false) }}
         >
-          {closeIcon ?? <CloseIcon />}
+          {closeIcon ?? <XIcon />}
         </button>
       ) : null}
     </PrimitiveAlert>

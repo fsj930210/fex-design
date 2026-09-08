@@ -51,8 +51,6 @@ export function AutoCompleteTrigger(props: AutoCompleteTriggerProps) {
           value={autoComplete.snapshot().value}
           disabled={autoComplete.disabled()}
           readOnly={autoComplete.readOnly()}
-          invalid={local.invalid}
-          status={local.status}
           onValueChange={(value) => {
             autoComplete.controller.setValue(value)
             autoComplete.controller.setOpen(true, 'input')
@@ -63,6 +61,7 @@ export function AutoCompleteTrigger(props: AutoCompleteTriggerProps) {
           <InputControl
             {...controlProps}
             role="combobox"
+            aria-invalid={local.invalid || local.status === 'error' || undefined}
             aria-expanded={autoComplete.snapshot().open}
             aria-controls={autoComplete.listId}
             aria-activedescendant={

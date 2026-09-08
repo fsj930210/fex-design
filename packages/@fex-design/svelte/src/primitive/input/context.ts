@@ -5,13 +5,12 @@ export interface InputContextValue {
   value: () => string
   disabled: () => boolean
   readOnly: () => boolean
-  invalid: () => boolean
   canClear: () => boolean
   setValue: (value: string, reason: InputChangeReason, event?: Event) => void
   clear: () => void
   setFocusElement: (element: HTMLElement | null) => void
 }
-const key = Symbol('FexInput')
+const key = Symbol('Input')
 export function setInputContext(value: InputContextValue) {
   setContext(key, value)
 }

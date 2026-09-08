@@ -11,7 +11,7 @@ import { Button } from '@fex-design/vue/ui/button'
     <Button icon-placement="end">
       <template #icon> <PlusIcon /> </template>Continue</Button
     >
-    <Button size="icon" aria-label="Create">
+    <Button size="icon-md" aria-label="Create">
       <template #icon>
         <PlusIcon />
       </template>

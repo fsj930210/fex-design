@@ -47,7 +47,7 @@ import {
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon, ChevronRightIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { LoadingIcon } from '../../icon/loading'
 import { MinusIcon } from '../../icon/minus'
 import { Button } from '../button/button'
@@ -253,7 +253,7 @@ export function CascaderTrigger(props: ParentProps<JSX.HTMLAttributes<HTMLDivEle
                     cascader.controller.clear()
                   }}
                 >
-                  <CloseIcon />
+                  <XIcon />
                 </Button>
               </Show>
             </Show>

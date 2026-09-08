@@ -3,9 +3,9 @@
     <span aria-hidden="true" data-slot="alert-icon" [class]="alertIconClassName + ' ' + (classNames().icon ?? '')" [style]="styles().icon">
       @if (projectedIcon()) { <ng-content select="[alertIcon]" /> }
       @else if (type() === 'success') { <circle-check-icon /> }
-      @else if (type() === 'warning') { <circle-warning-icon /> }
-      @else if (type() === 'error') { <circle-error-icon /> }
-      @else { <circle-info-icon /> }
+      @else if (type() === 'warning') { <triangle-alert-icon /> }
+      @else if (type() === 'error') { <circle-x-icon /> }
+      @else { <info-icon /> }
     </span>
   }
   <div data-slot="alert-content" [class]="alertContentClassName + ' ' + (classNames().content ?? '')" [style]="styles().content">

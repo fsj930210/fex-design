@@ -1,0 +1,76 @@
+<div class="grid w-full gap-3">
+  <div inputGroup>
+    <div inputRoot defaultValue="组件库"><input inputControl (keydown)="enter($event)" /></div>
+    <span inputAddonAfter
+      ><button
+        button
+        variant="solid"
+        color="primary"
+        data-input-addon-fill=""
+        aria-label="Search"
+        [class]="addonClassName"
+        (click)="search('组件库','addonAfter')"
+      >
+        <search-icon /></button
+    ></span>
+  </div>
+  <div inputGroup>
+    <div inputRoot defaultValue="加载中"><input inputControl /></div>
+    <span inputAddonAfter
+      ><button
+        button
+        variant="solid"
+        color="primary"
+        disabled
+        data-input-addon-fill=""
+        aria-label="Search"
+        [class]="addonClassName"
+      >
+        <loading-icon [class]="spinnerClassName" /></button
+    ></span>
+  </div>
+  <div inputRoot>
+    <input inputControl placeholder="仅按 Enter 搜索" (keydown)="enter($event)" />
+  </div>
+  <div inputRoot>
+    <span inputPrefix
+      ><button
+        type="button"
+        aria-label="Search"
+        [class]="actionClassName"
+        (click)="search('','prefix')"
+      >
+        <search-icon /></button></span
+    ><input inputControl placeholder="前置搜索图标" (keydown)="enter($event)" />
+  </div>
+  <div inputGroup>
+    <span inputAddonBefore
+      ><button
+        button
+        variant="solid"
+        color="primary"
+        data-input-addon-fill=""
+        aria-label="Search"
+        [class]="addonClassName"
+        (click)="search('','addonBefore')"
+      >
+        站内
+      </button></span
+    >
+    <div inputRoot><input inputControl placeholder="双侧搜索按钮" (keydown)="enter($event)" /></div>
+    <span inputAddonAfter
+      ><button
+        button
+        variant="solid"
+        color="primary"
+        data-input-addon-fill=""
+        aria-label="Search"
+        [class]="addonClassName"
+        (click)="search('','addonAfter')"
+      >
+        搜索
+      </button></span
+    >
+  </div>
+  <p class="text-sm text-muted-foreground">{{result()}}</p>
+</div>

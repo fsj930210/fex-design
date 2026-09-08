@@ -3,7 +3,7 @@
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
-  import CloseIcon from '../../icon/close.svelte'
+  import XIcon from '../../icon/x.svelte'
 import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
   import { getTextareaContext } from './context'
 
@@ -41,6 +41,6 @@ import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
       if (!event.defaultPrevented) textarea.clear()
     }}
   >
-    {#if children}{@render children()}{:else}<CloseIcon />{/if}
+    {#if children}{@render children()}{:else}<XIcon />{/if}
   </PrimitiveButton>
 {/if}

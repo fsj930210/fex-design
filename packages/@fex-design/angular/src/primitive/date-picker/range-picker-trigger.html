@@ -1,14 +1,13 @@
-<fex-input-root
+<div inputRoot
   [class]="triggerClassName + (className ? ' ' + className : '')"
   [value]="rootValue()"
   [disabled]="state.context().disabled"
   [readOnly]="state.context().readOnly"
-  [status]="status ?? state.context().status"
   (click)="openFromTrigger($event)"
   (blur)="blur($event)"
   (clear)="clear()"
 >
-  <fex-input-root
+  <div inputRoot
     data-range-part="start"
     [attr.data-active]="state.context().open && state.context().activePart === 'start' ? 'true' : null"
     [class]="rangeInputClassName"
@@ -18,16 +17,17 @@
   >
     <input
       #startInput
-      fexInputControl
+      inputControl
+      [attr.aria-invalid]="(status ?? state.context().status) === 'error' || null"
       [class]="inputClassName('start')"
       [value]="startText()"
       [placeholder]="startPlaceholder"
       (focus)="openPart('start', startInput, $event)"
       (click)="$event.stopPropagation(); openPart('start', startInput, $event)"
     />
-  </fex-input-root>
+  </div>
   <span aria-hidden="true" [class]="rangeSeparatorClassName">{{ separator }}</span>
-  <fex-input-root
+  <div inputRoot
     data-range-part="end"
     [attr.data-active]="state.context().open && state.context().activePart === 'end' ? 'true' : null"
     [class]="rangeInputClassName"
@@ -37,23 +37,24 @@
   >
     <input
       #endInput
-      fexInputControl
+      inputControl
+      [attr.aria-invalid]="(status ?? state.context().status) === 'error' || null"
       [class]="inputClassName('end')"
       [value]="endText()"
       [placeholder]="endPlaceholder"
       (focus)="openPart('end', endInput, $event)"
       (click)="$event.stopPropagation(); openPart('end', endInput, $event)"
     />
-  </fex-input-root>
+  </div>
   @if (state.context().allowClear && hasValue()) {
   <button
-    fexInputClear
+    inputClear
     type="button"
     (pointerdown)="$event.stopPropagation()"
     (click)="clear($event)"
   ></button>
   } @if (!state.context().allowClear || !hasValue()) {
-  <span fexInputSuffix>
+  <span inputSuffix>
     @if (suffix) {
     <span>{{ suffix }}</span>
     } @else {
@@ -61,4 +62,4 @@
     }
   </span>
   }
-</fex-input-root>
+</div>

@@ -1,15 +1,17 @@
 {
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
-    "source.format.oxc": "always",
     "source.fixAll.oxc": "always"
   },
   "oxc.enable.oxfmt": true,
   "oxc.enable.oxlint": true,
   "oxc.requireConfig": true,
+  "svelte.plugin.svelte.format.enable": true,
+  "svelte.plugin.svelte.format.config.printWidth": 100,
+  "svelte.plugin.svelte.format.config.singleQuote": true,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -39,13 +41,16 @@
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[vue]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true
   },
   "[svelte]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "editor.formatOnSave": true
   },
   "[html]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true
   },
   "[css]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"

@@ -78,7 +78,7 @@ Accepts native textarea props except value, which is supplied by TextareaRoot. N
 
 ### TextareaClear
 
-Accepts native button props and optional forceMount. It clears to an empty string, preserves input focus on pointer down and renders a project CloseIcon by default.
+Accepts native button props and optional forceMount. It clears to an empty string, preserves input focus on pointer down and renders a project XIcon by default.
 
 ### TextareaFooter
 

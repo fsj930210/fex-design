@@ -74,7 +74,7 @@ export function PaginationPrevious(
 ) {
   const [local, rest] = splitProps(props, ['children', 'text'])
   return (
-    <PaginationLink {...rest} aria-label="Go to previous page" size="default">
+    <PaginationLink {...rest} aria-label="Go to previous page" size="md">
       <ChevronLeftIcon />
       <span class={paginationTextClassName}>{local.text ?? 'Previous'}</span>
     </PaginationLink>
@@ -84,7 +84,7 @@ export function PaginationPrevious(
 export function PaginationNext(props: ComponentProps<typeof PaginationLink> & { text?: string }) {
   const [local, rest] = splitProps(props, ['children', 'text'])
   return (
-    <PaginationLink {...rest} aria-label="Go to next page" size="default">
+    <PaginationLink {...rest} aria-label="Go to next page" size="md">
       <span class={paginationTextClassName}>{local.text ?? 'Next'}</span>
       <ChevronRightIcon />
     </PaginationLink>

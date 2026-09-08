@@ -1,14 +1,12 @@
-<fex-input-root
+<div inputRoot
   [value]="draft()"
   [disabled]="disabled"
   [readOnly]="readOnly"
-  [invalid]="invalid"
-  [status]="status"
   [class]="className"
   [attr.data-out-of-range]="outOfRange || null"
 >
   <input
-    fexInputControl
+    inputControl
     type="text"
     role="spinbutton"
     [attr.name]="name || null"
@@ -22,9 +20,9 @@
     (keydown)="handleKeydown($event)"
   />
   @if (clearable) {
-  <button fexInputClear aria-label="Clear input" (click)="clear($event)"></button>
+  <button inputClear aria-label="Clear input" (click)="clear($event)"></button>
   }
-  <span fexInputSuffix [class]="customSuffix ? '' : inputNumberActionsClassName">
+  <span inputSuffix [class]="customSuffix ? '' : inputNumberActionsClassName">
     @if (customSuffix) {
     <ng-content select="[fexInputNumberSuffix]" />
     } @else {
@@ -52,4 +50,5 @@
     </button>
     }
   </span>
-</fex-input-root>
+</div>
+    [attr.aria-invalid]="invalid || status === 'error' || null"

@@ -48,17 +48,17 @@
       "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
       "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "标签内容投影。" }], "slotLabel": "Content projection" }
     } },
-    { "name": "TagAction", "slug": "tag-action", "layer": "primitive", "status": "stable", "description": "继承原生 button 属性和事件；默认显示 CloseIcon，自定义内容可表达任意标签内操作。", "importPath": {
+    { "name": "TagAction", "slug": "tag-action", "layer": "primitive", "status": "stable", "description": "继承原生 button 属性和事件；默认显示 XIcon，自定义内容可表达任意标签内操作。", "importPath": {
       "react": "@fex-design/react/primitive/tag", "vue": "@fex-design/vue/primitive/tag", "solid": "@fex-design/solid/primitive/tag", "svelte": "@fex-design/svelte/primitive/tag", "angular": "@fex-design/angular/primitive/tag"
     }, "props": [
       { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用操作按钮。" },
-      { "name": "children", "type": "FrameworkNode", "description": "完全替换默认 CloseIcon，可用于编辑、更多等其他操作。" }
+      { "name": "children", "type": "FrameworkNode", "description": "完全替换默认 XIcon，可用于编辑、更多等其他操作。" }
     ], "events": [], "slots": [], "demos": [], "frameworks": {
       "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
-      "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "完全替换默认 CloseIcon。" }] },
+      "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "完全替换默认 XIcon。" }] },
       "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
       "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
-      "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "完全替换默认 CloseIcon 的内容投影。" }], "slotLabel": "Content projection" }
+      "angular": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "完全替换默认 XIcon 的内容投影。" }], "slotLabel": "Content projection" }
     } }
   ],
   "frameworks": {

@@ -14,7 +14,6 @@ export interface UseInputOptions {
   defaultValue?: string | undefined
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
-  invalid?: boolean | undefined
   onValueChange?: ((value: string, meta: InputChangeMeta) => void) | undefined
   onClear?: ((meta: InputChangeMeta) => void) | undefined
 }
@@ -23,7 +22,6 @@ export interface InputController {
   value: string
   disabled: boolean
   readOnly: boolean
-  invalid: boolean
   canClear: boolean
   focusRef: RefCallback<HTMLElement>
   setValue: (value: string, meta: InputChangeMeta) => void
@@ -36,7 +34,6 @@ export function useInput({
   defaultValue = '',
   disabled = false,
   readOnly = false,
-  invalid = false,
   onValueChange,
   onClear,
 }: UseInputOptions = {}): InputController {
@@ -71,7 +68,6 @@ export function useInput({
     value: currentValue,
     disabled,
     readOnly,
-    invalid,
     canClear: currentValue !== '' && !disabled && !readOnly,
     focusRef,
     setValue,

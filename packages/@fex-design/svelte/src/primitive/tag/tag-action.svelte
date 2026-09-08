@@ -3,7 +3,7 @@
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
-  import CloseIcon from '../../icon/close.svelte'
+  import XIcon from '../../icon/x.svelte'
 
   interface Props extends HTMLButtonAttributes {
     children?: Snippet
@@ -28,6 +28,6 @@
   {#if children}
     {@render children()}
   {:else}
-    <CloseIcon aria-hidden="true" />
+    <XIcon aria-hidden="true" />
   {/if}
 </button>

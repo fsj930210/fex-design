@@ -1,0 +1,8 @@
+<div class="grid w-full gap-3">
+  <div input #inputRef defaultValue="通过实例控制"></div>
+  <div class="flex gap-2">
+    <button button (click)="control().focus()">聚焦</button
+    ><button button (click)="control().blur()">失焦</button
+    ><button button (click)="control().select()">全选</button>
+  </div>
+</div>

@@ -12,7 +12,7 @@ defineOptions({ name: 'Button', inheritAttrs: false })
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'outlined',
-  size: 'default',
+  size: 'md',
   iconPlacement: 'start',
   loading: false,
   disabled: false,

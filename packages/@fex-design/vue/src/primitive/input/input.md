@@ -1,33 +1,72 @@
-# Vue Input Primitives
+# Vue Primitive Input
 
-`InputGroup` and `InputGroupAddon` are exported from this family entry. They connect independently owned Input, Button, Select, and addon elements without introducing another value state.
+Styled, composable Input primitives. `InputRoot` owns the shared value and state; `InputControl` remains the real native input.
 
-## 用途与导入
+## Import
 
-Input primitives 将值协议、原生输入、清空和附属内容拆开，供表单、Select、DatePicker 等组合使用。
-逻辑层单独从 `@fex-design/vue/primitive/input/use-input` 引入，不经由组件入口重新导出。
+    import { InputRoot, InputControl, InputPrefix, InputSuffix, InputAddonBefore, InputAddonAfter, InputClear, InputGroup } from '@fex-design/vue/primitive/input'
 
-```vue
-<script setup lang="ts">
-import { InputClear, InputControl, InputPrefix, InputRoot } from '@fex-design/vue/primitive/input'
-</script>
-<template>
-  <InputRoot default-value="admin"
-    ><InputPrefix>@</InputPrefix><InputControl aria-label="账号" /><InputClear
-  /></InputRoot>
-</template>
-```
+## Components
 
-## Props
+| Component | Element | Purpose |
+| --- | --- | --- |
+| InputRoot | div | Styled input boundary and controlled/uncontrolled value owner. |
+| InputControl | input | Native text input and focus target. |
+| InputPrefix | span | Non-interactive content inside the start of InputRoot. |
+| InputSuffix | span | Non-interactive content inside the end of InputRoot. |
+| InputAddonBefore | span | Start addon outside the InputRoot focus ring. |
+| InputAddonAfter | span | End addon outside the InputRoot focus ring. |
+| InputClear | button | Clear action connected to the nearest InputRoot. |
+| InputGroup | div | Connects arbitrary direct children without assuming their component type. |
 
-| 组件           | 参数                        | 类型                  | 默认值      | 必填 | 说明               |
-| -------------- | --------------------------- | --------------------- | ----------- | ---- | ------------------ |
-| `InputRoot`    | `value`                     | `string`              | `undefined` | 否   | 受控值。           |
-| `InputRoot`    | `defaultValue`              | `string`              | `''`        | 否   | 非受控初值。       |
-| `InputRoot`    | `disabled/readOnly/invalid` | `boolean`             | `false`     | 否   | 字段状态。         |
-| `InputControl` | 原生 input 属性             | `InputHTMLAttributes` | `undefined` | 否   | 透传到原生 input。 |
-| `InputClear`   | `forceMount`                | `boolean`             | `false`     | 否   | 无值时仍挂载。     |
+## Examples
 
-## 事件、状态与组合
+| Name | Covers |
+| --- | --- |
+| basic | Empty and clearable inputs. |
+| sizes | `sm`, `md`, and `lg` (24px, 32px, and 44px). |
+| variants | `outlined`, `filled`, `borderless`, and `underlined`. |
+| controlled | Controlled and uncontrolled InputRoot state. |
+| affixes | Prefix, Suffix, AddonBefore, and AddonAfter composition. |
+| group | Input with Button and Input with Input. |
+| password | Password visibility composed from Control, Suffix, and a native button. |
+| search | Enter, Prefix, and Addon search actions composed from Primitive parts. |
+| states | Disabled, read-only, and native `aria-invalid`. |
+| focus | Native focus, blur, and select through InputControl. |
 
-Root 触发 `valueChange(value, meta)` 和 `clear(meta)`；Control 保留原生 `input/focus/blur` 事件。受控模式使用 `:value` 与 `@value-change`，非受控模式使用 `default-value`。Prefix、Suffix、AddonBefore、AddonAfter 只负责原子结构；Field 仍是独立表单组件。清空在 disabled/readOnly/空值时不可用，并在成功后恢复 Control 焦点。
+## InputRoot API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | — | Controlled value. |
+| defaultValue | string | `''` | Uncontrolled initial value. |
+| size | `'sm' \| 'md' \| 'lg'` | `'md'` | Control height. |
+| variant | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | Visual structure. |
+| disabled | boolean | false | Disables the input context. |
+| readOnly | boolean | false | Makes the input context read-only. |
+| value change | framework event | — | Reports input and clear value changes. |
+| clear | framework event | — | Fires after a successful clear. |
+
+## InputControl API
+
+Native contract: native input attrs and listeners through `$attrs`. Template refs expose `focus()`, `blur()`, and `select()`.
+
+`aria-invalid` is passed to the native input and is the only error-state contract. There is no custom `invalid` or `status` prop.
+
+## Composition
+
+Prefix and Suffix live inside InputRoot and do not add behavior. Addons are siblings of InputRoot inside InputGroup, so the Input focus ring does not cover them. InputClear renders a 12px, 14px, or 16px icon for `sm`, `md`, or `lg` and becomes visible only while the valued input is interactive.
+
+InputGroup styles arbitrary direct children: the first receives only the start radius, the last only the end radius, and middle joins have no radius. Set `--input-group-radius` globally, on one group, or on a direct child to override it.
+
+## Styling
+
+`class`, `classNames`, and Vue `StyleValue` bindings. State-specific colors use selectors such as `hover`, `focus-within`, data attributes, and `[aria-invalid=true]`; CSS variables stay limited to reusable base tokens.
+
+## Direction
+
+All spacing and connected radii use logical start/end properties and follow native `dir="ltr"` or `dir="rtl"`.
+
+## Accessibility
+
+Provide an associated label through Field or native labeling. InputClear is a real button, keyboard reachable when visible, and restores focus to InputControl after clearing. Disabled and read-only behavior uses native input semantics.

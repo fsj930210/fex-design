@@ -9,17 +9,13 @@ export function SizesExample() {
       <For
         each={
           [
-            'xs',
-            'sm',
-            'default',
+              'sm',
+            'md',
             'lg',
-            'xl',
-            'icon-xs',
-            'icon-sm',
-            'icon',
+                'icon-sm',
+            'icon-md',
             'icon-lg',
-            'icon-xl',
-          ] as const
+            ] as const
         }
       >
         {(size) => (

@@ -120,7 +120,6 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
       value=""
       :disabled="context.disabled"
       :read-only="context.readOnly"
-      :status="props.status ?? context.status"
       @value-change="() => undefined"
       @click="
         (event) =>
@@ -139,6 +138,7 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
         @value-change="input('start', $event)"
       >
         <InputControl
+          :aria-invalid="props.status === 'error' || undefined"
           :class="
             cn(
               datePickerRangeInputControlClassName,
@@ -165,6 +165,7 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
         @value-change="input('end', $event)"
       >
         <InputControl
+          :aria-invalid="props.status === 'error' || undefined"
           :class="
             cn(
               datePickerRangeInputControlClassName,

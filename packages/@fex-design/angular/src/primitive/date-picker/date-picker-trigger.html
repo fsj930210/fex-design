@@ -1,34 +1,34 @@
-<fex-input-root
+<div inputRoot
   [class]="rootClassName()"
   [value]="inputValue()"
   [disabled]="state.context().disabled"
   [readOnly]="state.context().readOnly"
-  [status]="status ?? state.context().status"
   (click)="open(datePickerInputControl, $event)"
   (valueChange)="input($event)"
   (clear)="clear()"
 >
   @if (prefix) {
-  <span fexInputPrefix>{{ prefix }}</span>
+  <span inputPrefix>{{ prefix }}</span>
   } @if (state.context().multiple && state.calendarValues().length) {
   <fex-date-picker-tags />
   }
   <input
     #datePickerInputControl
-    fexInputControl
+    inputControl
+    [attr.aria-invalid]="(status ?? state.context().status) === 'error' || null"
     [class]="inputClassName()"
     [placeholder]="state.context().multiple && state.calendarValues().length ? '' : placeholder ?? state.context().format"
     (focus)="open(datePickerInputControl, $event)"
   />
   @if (state.context().allowClear) {
   <button
-    fexInputClear
+    inputClear
     type="button"
     (pointerdown)="$event.stopPropagation()"
     (click)="clear($event)"
   ></button>
   } @if (showSuffix()) {
-  <span fexInputSuffix>
+  <span inputSuffix>
     @if (suffix) {
     <span>{{ suffix }}</span>
     } @else {
@@ -36,4 +36,4 @@
     }
   </span>
   }
-</fex-input-root>
+</div>

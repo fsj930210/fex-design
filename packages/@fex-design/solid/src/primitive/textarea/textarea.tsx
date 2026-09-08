@@ -19,7 +19,7 @@ import {
   type ParentProps,
 } from 'solid-js'
 import { Show } from 'solid-js'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { Button } from '../button/button'
 
 export type TextareaChangeReason = 'input' | 'clear'
@@ -239,7 +239,7 @@ export function TextareaClear(
           if (!event.defaultPrevented) context.clear()
         }}
       >
-        {local.children ?? <CloseIcon />}
+        {local.children ?? <XIcon />}
       </Button>
     </Show>
   )

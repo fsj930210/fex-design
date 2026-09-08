@@ -14,7 +14,7 @@ import { buttonClassName } from '@fex-design/styles/button'
         <PlusIcon />
       </ButtonIcon>
     </Button>
-    <Button :class="buttonClassName({ size: 'icon' })" aria-label="Create"
+    <Button :class="buttonClassName({ size: 'icon-md' })" aria-label="Create"
       ><ButtonIcon><PlusIcon /></ButtonIcon
     ></Button>
   </div>

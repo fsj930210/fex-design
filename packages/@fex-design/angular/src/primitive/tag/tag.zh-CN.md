@@ -11,7 +11,7 @@
 | 组件 | 元素 | 说明 |
 | ---- | ---- | ---- |
 | Tag | span | 继承原生 span，提供 variant、color、size 和 disabled 样式。 |
-| TagAction | button | 继承原生 button，默认显示 CloseIcon，也可完全替换内容。 |
+| TagAction | button | 继承原生 button，默认显示 XIcon，也可完全替换内容。 |
 
 ## 示例
 
@@ -42,7 +42,7 @@
 | 名称 | 类型 | 默认值 | 说明 |
 | ---- | ---- | ------ | ---- |
 | disabled | boolean | false | 禁用原生操作按钮。 |
-| 内容 | `<ng-content />` | CloseIcon | 传入内容时完全替换默认关闭图标。 |
+| 内容 | `<ng-content />` | XIcon | 传入内容时完全替换默认关闭图标。 |
 | 事件 | native `(click)` event | — | 原生按钮事件；Primitive 不增加专用 action 事件。 |
 | 原生属性 | native button bindings | — | 透传原生 button 属性与事件。 |
 
@@ -73,7 +73,7 @@
 
 ## 内容与组合
 
-内容遵循 Angular 原生模型：`<ng-content />`。需要标签内操作时，在 `Tag` 内组合 `TagAction`。它默认显示 CloseIcon，自定义内容可以表达删除、编辑、更多或其他操作；`TagAction` 不规定具体行为，也不会自动联动父级 disabled。
+内容遵循 Angular 原生模型：`<ng-content />`。需要标签内操作时，在 `Tag` 内组合 `TagAction`。它默认显示 XIcon，自定义内容可以表达删除、编辑、更多或其他操作；`TagAction` 不规定具体行为，也不会自动联动父级 disabled。
 
 ## 可访问性
 

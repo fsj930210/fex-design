@@ -7,6 +7,6 @@
 <div class="flex flex-wrap items-center gap-3">
   <Button {icon}>Create</Button>
   <Button {icon} iconPlacement="end">Continue</Button>
-  <Button {icon} size="icon" aria-label="Create" />
+  <Button {icon} size="icon-md" aria-label="Create" />
 </div>
 

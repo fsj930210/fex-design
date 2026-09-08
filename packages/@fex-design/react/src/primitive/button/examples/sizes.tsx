@@ -7,16 +7,12 @@ export function SizesExample() {
     <div className="flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-4">
       {(
         [
-          'xs',
           'sm',
-          'default',
+          'md',
           'lg',
-          'xl',
-          'icon-xs',
           'icon-sm',
-          'icon',
+          'icon-md',
           'icon-lg',
-          'icon-xl',
         ] as const
       ).map((size) => (
         <Button key={size} className={buttonClassName({ size })} aria-label={size}>

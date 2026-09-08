@@ -6,16 +6,12 @@ export type ButtonColor = 'primary' | 'danger' | 'warning' | 'success' | 'info'
 
 /** Button 的控件尺寸。 */
 export type ButtonSize =
-  | 'xs'
   | 'sm'
-  | 'default'
+  | 'md'
   | 'lg'
-  | 'xl'
-  | 'icon-xs'
   | 'icon-sm'
-  | 'icon'
+  | 'icon-md'
   | 'icon-lg'
-  | 'icon-xl'
 
 /** Button 的可选视觉效果。 */
 export type ButtonEffect =
@@ -50,7 +46,7 @@ export interface ButtonAppearanceOptions {
 export interface ButtonOptions extends ButtonAppearanceOptions {
   /**
    * 按钮尺寸。
-   * @default 'default'
+   * @default 'md'
    * @example 'lg'
    */
   size?: ButtonSize

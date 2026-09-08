@@ -35,11 +35,9 @@ export const skeletonAvatarClassName = cva('', {
 export const skeletonButtonClassName = cva('w-20 rounded-md', {
   variants: {
     size: {
-      xs: 'h-[var(--button-height-xs,var(--height-xs))]',
-      sm: 'h-[var(--button-height-sm,var(--height-sm))]',
-      default: 'h-[var(--button-height-default,var(--height-default))]',
-      lg: 'h-[var(--button-height-lg,var(--height-lg))]',
-      xl: 'h-[var(--button-height-xl,var(--height-xl))]',
+      sm: 'h-[var(--button-height-sm,1.5rem)]',
+      md: 'h-[var(--button-height-md,var(--height-default))]',
+      lg: 'h-[var(--button-height-lg,2.75rem)]',
     },
     shape: {
       round: 'rounded-full',
@@ -52,11 +50,11 @@ export const skeletonButtonClassName = cva('w-20 rounded-md', {
     { shape: 'square', block: true, class: 'aspect-auto' },
     { shape: 'circle', block: true, class: 'aspect-auto' },
   ],
-  defaultVariants: { size: 'default', block: false },
+  defaultVariants: { size: 'md', block: false },
 })
 
 export const skeletonInputClassName =
-  'h-[var(--input-height-default,var(--height-default))] w-64 rounded-md'
+  'h-[var(--input-height-md,var(--height-default))] w-64 rounded-md'
 export const skeletonInputBlockClassName = 'w-full'
 export const skeletonImageClassName =
   'flex aspect-square w-24 items-center justify-center rounded-md text-muted-foreground/70 [&_svg]:size-8'

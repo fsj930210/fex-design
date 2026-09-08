@@ -43,13 +43,12 @@ function input(event: Event) {
       :value="autoComplete.snapshot.value.value"
       :disabled="autoComplete.disabled.value"
       :read-only="autoComplete.readOnly.value"
-      :invalid="props.invalid"
-      :status="props.status"
       @value-change="valueChange"
       @clear="autoComplete.controller.clear()"
     >
       <slot name="prefix" />
       <InputControl
+        :aria-invalid="props.invalid || props.status === 'error' || undefined"
         v-bind="attrs"
         role="combobox"
         :aria-expanded="autoComplete.snapshot.value.open"

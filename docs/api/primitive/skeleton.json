@@ -41,7 +41,7 @@
     {
       "name": "SkeletonButton", "slug": "skeleton-button", "layer": "primitive", "status": "stable", "description": "按钮占位。",
       "importPath": { "react": "@fex-design/react/primitive/skeleton", "vue": "@fex-design/vue/primitive/skeleton", "solid": "@fex-design/solid/primitive/skeleton", "svelte": "@fex-design/svelte/primitive/skeleton", "angular": "@fex-design/angular/primitive/skeleton" },
-      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }, { "name": "size", "type": "'xs' | 'sm' | 'default' | 'lg' | 'xl'", "default": "'default'", "description": "与 Button 对齐的高度。" }, { "name": "shape", "type": "'round' | 'square' | 'circle'", "description": "不传为普通矩形。" }, { "name": "block", "type": "boolean", "default": "false", "description": "占满容器宽度。" }], "events": [], "demos": []
+      "props": [{ "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "占位动画。" }, { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "'md'", "description": "与 Button 对齐的高度。" }, { "name": "shape", "type": "'round' | 'square' | 'circle'", "description": "不传为普通矩形。" }, { "name": "block", "type": "boolean", "default": "false", "description": "占满容器宽度。" }], "events": [], "demos": []
     },
     {
       "name": "SkeletonInput", "slug": "skeleton-input", "layer": "primitive", "status": "stable", "description": "输入框占位。",

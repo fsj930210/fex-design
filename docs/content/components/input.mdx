@@ -1,0 +1,59 @@
+---
+title: Input
+description: 接收单行文本，并提供尺寸、形态、清除、密码与搜索快捷能力。
+---
+
+## Primitive 与 UI
+
+Primitive 提供可自由组合的 `InputRoot`、`InputControl`、Prefix、Suffix、Addon、Clear 和 `InputGroup`。UI 提供开箱即用的 `Input`、`InputPassword` 与 `InputSearch`，并直接复用 `InputGroup`。
+
+浮动 Label 属于 Field，不由 Input 负责；普通 Input 的 Prefix 与 Suffix 只承载内容，只有 InputSearch 会把其搜索位置包装成可触发搜索的内部按钮。
+
+## 何时使用
+
+Input 用于接收单行文本。密码使用 InputPassword，具有明确提交意图的搜索使用 InputSearch；多行文本使用 Textarea，带 Label、说明和验证信息的完整表单项使用 Field。
+
+<Layer value="primitive">
+
+## Primitive 能力
+
+`InputRoot`、`InputControl`、Prefix、Suffix、Addon、Clear 和 `InputGroup` 可单独组合。同名 Primitive/UI demo 使用相同内容和布局，便于直接对照组合层和快捷层。
+
+</Layer>
+
+## 示例
+
+basic、sizes、variants、controlled、affixes、group、password、search、states 和 focus 都提供 Primitive/UI 两种实现：Primitive 展示原子部件组合，UI 展示快捷组件；semantic-styles 专门展示 UI 的结构化样式入口。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="Input 的自由组合结构与原生输入能力。">
+  <ApiComposition layer="primitive">
+    ```text
+    InputGroup
+    ├── InputAddonBefore (optional)
+    ├── InputRoot
+    │   ├── InputPrefix (optional)
+    │   ├── InputControl
+    │   ├── InputClear (optional)
+    │   └── InputSuffix (optional)
+    └── InputAddonAfter / Button (optional)
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="快速使用的 Input、InputPassword 与 InputSearch。">
+  <ApiComposition layer="ui">
+    `InputSearch` 默认在右侧渲染与输入主体等高的搜索 Button；Input 的 ring 只覆盖 Prefix、Control、Clear 与 Suffix，不覆盖 Addon。显式传入 `addonAfter=null` 可移除默认按钮。Enter、Prefix、Suffix、AddonBefore 与 AddonAfter 都会报告对应搜索来源。
+  </ApiComposition>
+</ApiSection>
+
+## CSS Variables
+
+CSS Variables 只负责基础视觉和尺寸；hover、focus-within、variant 与 `aria-invalid` 使用选择器覆盖，避免为每个状态增加变量。`className`/`class` 落在真实 Input Root，内部区域可通过 `classNames`、`styles` 或 `data-slot` 定位。
+
+`InputGroup` 只为直接子元素提供默认连接圆角，不限定子元素类型，也不使用 `!important`。在 Group 上设置 `[--input-group-radius:0px]` 可移除整组外圆角，设置为其他值可更换整组圆角；在某个直接子元素上设置同一变量，则只局部覆盖该元素的外侧圆角。
+
+<CssVariables />

@@ -3,16 +3,16 @@ import { Button } from '@fex-design/solid/ui/button'
 import { PlusIcon } from '@fex-design/solid/icon/plus'
 
 const sizes = [
-  'xs',
+
   'sm',
-  'default',
+  'md',
   'lg',
-  'xl',
-  'icon-xs',
+
+
   'icon-sm',
-  'icon',
+  'icon-md',
   'icon-lg',
-  'icon-xl',
+
 ] as const
 
 export function SizesExample() {

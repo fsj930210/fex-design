@@ -3,16 +3,15 @@ import {
   inputAddonBeforeClassName,
   inputClearClassName,
   inputControlClassName,
-  inputGroupAddonClassName,
   inputGroupClassName,
   inputPrefixClassName,
   inputRootClassName,
   inputSuffixClassName,
 } from '@fex-design/styles/input'
+import type { InputVisualOptions } from '@fex-design/core/input/types'
 import { cn } from '@fex/utils'
 import { createContext, splitProps, type JSX, type ParentProps, useContext } from 'solid-js'
-import { CloseIcon } from '../../icon/close'
-import { Button } from '../button/button'
+import { CircleXIcon } from '../../icon/circle-x'
 import { createInput, type InputChangeReason } from './create-input'
 
 type InputContextValue = ReturnType<typeof createInput>
@@ -32,15 +31,11 @@ export function InputGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>
   )
 }
 
-export const InputGroupAddon = part('input-group-addon', inputGroupAddonClassName)
-
-export interface InputRootProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {
+export interface InputRootProps extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'size'>>, InputVisualOptions {
   value?: string | undefined
   defaultValue?: string | undefined
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
-  invalid?: boolean | undefined
-  status?: 'error' | 'warning' | undefined
   onValueChange?:
     | ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void)
     | undefined
@@ -54,8 +49,8 @@ export function InputRoot(props: InputRootProps) {
     'defaultValue',
     'disabled',
     'readOnly',
-    'invalid',
-    'status',
+    'size',
+    'variant',
     'onValueChange',
     'onClear',
   ])
@@ -64,7 +59,6 @@ export function InputRoot(props: InputRootProps) {
     defaultValue: props.defaultValue,
     disabled: () => props.disabled,
     readOnly: () => props.readOnly,
-    invalid: () => props.invalid || props.status === 'error',
     onValueChange: (value, meta) => props.onValueChange?.(value, meta),
     onClear: () => props.onClear?.(),
   })
@@ -75,9 +69,9 @@ export function InputRoot(props: InputRootProps) {
         data-slot="input-root"
         data-disabled={input.disabled() || undefined}
         data-readonly={input.readOnly() || undefined}
-        data-invalid={input.invalid() || undefined}
-        data-status={local.status}
-        class={cn(inputRootClassName, local.class)}
+        data-size={local.size ?? 'md'}
+        data-variant={local.variant ?? 'outlined'}
+        class={cn(inputRootClassName({ size: local.size, variant: local.variant }), local.class)}
       >
         {local.children}
       </div>
@@ -110,7 +104,7 @@ export function InputControl(props: JSX.InputHTMLAttributes<HTMLInputElement>) {
       value={context.value()}
       disabled={context.disabled() || local.disabled}
       readOnly={context.readOnly() || local.readOnly}
-      aria-invalid={local['aria-invalid'] ?? (context.invalid() || undefined)}
+      aria-invalid={local['aria-invalid']}
       data-slot="input-control"
       class={cn(inputControlClassName, local.class)}
       onInput={(event) => {
@@ -139,26 +133,21 @@ export function InputClear(
     'forceMount',
     'class',
     'children',
-    'onPointerDown',
     'onClick',
   ])
   return local.forceMount || context.canClear() ? (
-    <Button
+    <button
       {...rest}
       type="button"
       data-slot="input-clear"
       disabled={!local.forceMount && !context.canClear()}
       class={cn(inputClearClassName, local.class)}
-      onPointerDown={(event) => {
-        if (typeof local.onPointerDown === 'function') local.onPointerDown(event)
-        if (!event.defaultPrevented) event.preventDefault()
-      }}
       onClick={(event) => {
         if (typeof local.onClick === 'function') local.onClick(event)
         if (!event.defaultPrevented) context.clear()
       }}
     >
-      {local.children ?? <CloseIcon />}
-    </Button>
+      {local.children ?? <CircleXIcon />}
+    </button>
   ) : null
 }

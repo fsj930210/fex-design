@@ -80,7 +80,6 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
       :value="context.multiple ? '' : text"
       :disabled="context.disabled"
       :read-only="context.readOnly"
-      :status="props.status ?? context.status"
       @value-change="input"
       @clear="canClear() && context.clear()"
       @click="
@@ -91,6 +90,7 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
       <InputPrefix v-if="$slots.prefix"><slot name="prefix" /></InputPrefix>
       <DatePickerTags v-if="context.multiple && displayValue" />
       <InputControl
+        :aria-invalid="(props.status ?? context.status) === 'error' || undefined"
         ref="inputRef"
         :class="context.multiple && displayValue ? datePickerMultipleInputClassName : undefined"
         :placeholder="context.multiple && displayValue ? '' : (props.placeholder ?? context.format)"

@@ -1,0 +1,9 @@
+import { Input } from '@fex-design/solid/ui/input'
+export function BasicExample() {
+  return (
+    <div class="grid w-full gap-3">
+      <Input placeholder="请输入内容" />
+      <Input defaultValue="可清除内容" clearable />
+    </div>
+  )
+}

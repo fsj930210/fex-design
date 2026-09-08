@@ -6,7 +6,7 @@ import {
 import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import type { ComponentProps, CSSProperties } from 'react'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 
 type TagCSSProperties = CSSProperties & {
   '--tag-color'?: string
@@ -60,7 +60,7 @@ export function TagAction({
       data-slot="tag-action"
       className={cn(tagActionClassName, className)}
     >
-      {children ?? <CloseIcon aria-hidden />}
+      {children ?? <XIcon aria-hidden />}
     </button>
   )
 }

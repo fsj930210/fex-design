@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { drawerCloseClassName } from '@fex-design/styles/drawer'
 import { cn } from '@fex/utils'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { useDrawerContext } from './context'
 const props = defineProps<{ class?: string }>()
 const { drawer } = useDrawerContext('DrawerClose')
@@ -18,6 +18,6 @@ function click(e: MouseEvent) {
     :class="cn(drawerCloseClassName, props.class)"
     @click="click"
   >
-    <slot><CloseIcon class="size-4" /></slot>
+    <slot><XIcon class="size-4" /></slot>
   </button>
 </template>

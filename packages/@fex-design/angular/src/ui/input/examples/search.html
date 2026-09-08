@@ -1,0 +1,26 @@
+<ng-template #searchIcon><search-icon /></ng-template>
+<div class="grid w-full gap-3">
+  <div inputSearch defaultValue="组件库" clearable (search)="searched($event)"></div>
+  <div inputSearch loading defaultValue="加载中"></div>
+  <div
+    inputSearch
+    [addonAfter]="null"
+    placeholder="仅按 Enter 搜索"
+    (search)="searched($event)"
+  ></div>
+  <div
+    inputSearch
+    [prefix]="searchIcon"
+    [addonAfter]="null"
+    placeholder="前置搜索图标"
+    (search)="searched($event)"
+  ></div>
+  <div
+    inputSearch
+    addonBefore="站内"
+    addonAfter="搜索"
+    placeholder="双侧搜索按钮"
+    (search)="searched($event)"
+  ></div>
+  <p class="text-sm text-muted-foreground">{{result()}}</p>
+</div>

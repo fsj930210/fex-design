@@ -6,7 +6,7 @@ import {
 import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 
 type TagStyle = JSX.CSSProperties & {
   '--tag-color'?: string
@@ -65,7 +65,7 @@ export function TagAction(props: TagActionProps) {
       data-slot="tag-action"
       class={cn(tagActionClassName, local.class)}
     >
-      {local.children ?? <CloseIcon aria-hidden />}
+      {local.children ?? <XIcon aria-hidden />}
     </button>
   )
 }

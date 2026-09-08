@@ -26,6 +26,7 @@ export interface RangePickerTriggerProps extends Omit<
   InputRootProps,
   'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children'
 > {
+  status?: 'error' | 'warning' | undefined
   startPlaceholder?: string | undefined
   endPlaceholder?: string | undefined
   separator?: ReactNode
@@ -103,7 +104,6 @@ export function RangePickerTrigger({
             value=""
             disabled={context.disabled}
             readOnly={context.readOnly}
-            status={status ?? context.status}
             onValueChange={() => undefined}
             onClick={(event) => {
               if (context.disabled) {
@@ -136,6 +136,7 @@ export function RangePickerTrigger({
               }}
               onValueChange={(value) => input('start', value)}
               preview={previewStartText !== startText}
+              ariaInvalid={status === 'error'}
             />
             <span aria-hidden="true" className={datePickerRangeSeparatorClassName}>
               {separator}
@@ -153,6 +154,7 @@ export function RangePickerTrigger({
               }}
               onValueChange={(value) => input('end', value)}
               preview={previewEndText !== endText}
+              ariaInvalid={status === 'error'}
             />
             {context.allowClear && hasValue ? (
               <InputClearButton
@@ -182,6 +184,7 @@ function RangeInput({
   onFocus,
   onValueChange,
   preview = false,
+  ariaInvalid,
 }: {
   part: 'start' | 'end'
   value: string
@@ -191,6 +194,7 @@ function RangeInput({
   onFocus: NonNullable<InputControlProps['onFocus']>
   onValueChange: (value: string) => void
   preview?: boolean
+  ariaInvalid?: boolean
 }) {
   return (
     <InputRoot
@@ -204,6 +208,7 @@ function RangeInput({
     >
       <InputControl
         {...inputProps}
+        aria-invalid={ariaInvalid || inputProps?.['aria-invalid'] || undefined}
         className={cn(
           datePickerRangeInputControlClassName,
           preview && 'text-muted-foreground',

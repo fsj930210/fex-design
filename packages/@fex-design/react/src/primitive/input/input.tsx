@@ -3,32 +3,30 @@ import {
   inputAddonBeforeClassName,
   inputClearClassName,
   inputControlClassName,
-  inputGroupAddonClassName,
   inputGroupClassName,
   inputPrefixClassName,
   inputRootClassName,
   inputSuffixClassName,
 } from '@fex-design/styles/input'
+import type { InputVisualOptions } from '@fex-design/core/input/types'
 import { cn } from '@fex/utils'
 import {
   type ChangeEvent,
   type ComponentProps,
   type HTMLAttributes,
   type MouseEvent,
-  type PointerEvent,
   type ReactNode,
   type Ref,
 } from 'react'
-import { CloseIcon } from '../../icon/close'
+import { CircleXIcon } from '../../icon/circle-x'
 import { useComposedRef } from '../../hooks/use-composed-ref'
-import { Button } from '../button/button'
 import { InputContext, useInputContext } from './input-context'
 import { useInput, type UseInputOptions } from './use-input'
 
 export interface InputRootProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, UseInputOptions {
-  invalid?: boolean
-  status?: 'error' | 'warning' | undefined
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange' | 'size'>,
+    UseInputOptions,
+    InputVisualOptions {
   ref?: Ref<HTMLDivElement> | undefined
 }
 
@@ -48,29 +46,13 @@ export function InputGroup({ className, ref, ...props }: InputGroupProps) {
   )
 }
 
-export interface InputGroupAddonProps extends ComponentProps<'span'> {
-  ref?: Ref<HTMLSpanElement> | undefined
-}
-
-export function InputGroupAddon({ className, ref, ...props }: InputGroupAddonProps) {
-  return (
-    <span
-      {...props}
-      ref={ref}
-      data-slot="input-group-addon"
-      className={cn(inputGroupAddonClassName, className)}
-    />
-  )
-}
-
 export function InputRoot({
   value,
   defaultValue,
   disabled,
   readOnly,
-  invalid = false,
-  status,
-  'aria-invalid': ariaInvalid,
+  size = 'md',
+  variant = 'outlined',
   onValueChange,
   onClear,
   className,
@@ -78,14 +60,11 @@ export function InputRoot({
   children,
   ...props
 }: InputRootProps) {
-  const resolvedInvalid =
-    invalid || status === 'error' || ariaInvalid === true || ariaInvalid === 'true'
   const input = useInput({
     value,
     defaultValue,
     disabled,
     readOnly,
-    invalid: resolvedInvalid,
     onValueChange,
     onClear,
   })
@@ -98,9 +77,9 @@ export function InputRoot({
         data-slot="input-root"
         data-disabled={input.disabled ? 'true' : undefined}
         data-readonly={input.readOnly ? 'true' : undefined}
-        data-invalid={input.invalid ? 'true' : undefined}
-        data-status={status}
-        className={cn(inputRootClassName, className)}
+        data-size={size}
+        data-variant={variant}
+        className={cn(inputRootClassName({ size, variant }), className)}
       >
         {children}
       </div>
@@ -131,7 +110,7 @@ export function InputControl({
       value={context.value}
       disabled={context.disabled || disabled}
       readOnly={context.readOnly || readOnly}
-      aria-invalid={ariaInvalid ?? (context.invalid || undefined)}
+      aria-invalid={ariaInvalid}
       data-slot="input-control"
       className={cn(inputControlClassName, className)}
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -221,25 +200,20 @@ export function InputClearButton({
   children,
   'aria-label': ariaLabel = 'Clear input',
   'data-slot': dataSlot = 'input-clear',
-  onPointerDown,
   ref,
   ...props
 }: InputClearButtonProps) {
   return (
-    <Button
+    <button
       {...props}
       ref={ref}
       type="button"
       aria-label={ariaLabel}
       data-slot={dataSlot}
       className={cn(inputClearClassName, className)}
-      onPointerDown={(event: PointerEvent<HTMLButtonElement>) => {
-        onPointerDown?.(event)
-        if (!event.defaultPrevented) event.preventDefault()
-      }}
     >
-      {children ?? <CloseIcon />}
-    </Button>
+      {children ?? <CircleXIcon />}
+    </button>
   )
 }
 
@@ -248,7 +222,6 @@ export function InputClear({
   className,
   children,
   'aria-label': ariaLabel = 'Clear input',
-  onPointerDown,
   onClick,
   ref,
   ...props
@@ -264,7 +237,6 @@ export function InputClear({
       data-visible={input.canClear ? 'true' : 'false'}
       disabled={!forceMount && !input.canClear}
       className={className}
-      onPointerDown={onPointerDown}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {
         onClick?.(event)
         if (!event.defaultPrevented) input.clear()

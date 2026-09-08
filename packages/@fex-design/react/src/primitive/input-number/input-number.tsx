@@ -91,8 +91,6 @@ export function InputNumber(inputNumberProps: InputNumberProps) {
       value={inputNumber.draft}
       disabled={disabled}
       readOnly={readOnly}
-      invalid={invalid}
-      status={status}
       data-out-of-range={inputNumber.outOfRange ? 'true' : undefined}
       className={className}
       onValueChange={(text, meta) => {

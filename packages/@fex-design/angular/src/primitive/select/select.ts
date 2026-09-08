@@ -41,7 +41,7 @@ import {
 } from '@angular/core'
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
@@ -227,7 +227,7 @@ export class SelectRoot implements OnChanges {
 @Component({
   selector: 'fex-select-trigger',
   standalone: true,
-  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, CloseIcon, LoadingIcon, Tag],
+  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-trigger.html',
 })

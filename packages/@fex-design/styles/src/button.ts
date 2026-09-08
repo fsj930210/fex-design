@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority'
 
 export const buttonPrimitiveClassName = [
   'group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap',
-  '[--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))] [--button-content-gap:0.25rem]',
+  '[--button-height:var(--button-height-md,var(--height-default))] [--button-icon-size:var(--button-icon-size-md,var(--icon-size-default))] [--button-content-gap:0.25rem]',
   'h-(--button-height) gap-(--button-content-gap) rounded-md border border-border bg-background bg-clip-padding px-2.5 text-sm font-medium text-foreground',
   'hover:bg-muted-background',
   'cursor-pointer select-none outline-none transition-all active:brightness-90',
@@ -59,27 +59,21 @@ export const buttonClassName = cva(buttonPrimitiveClassName, {
         'active:not-aria-[haspopup]:translate-y-px active:not-aria-[haspopup]:scale-[0.98] motion-reduce:transition-none',
     },
     size: {
-      default:
-        '[--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))] px-2.5 [--button-underline-inset:10px]',
-      xs: '[--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))] px-2 text-xs [--button-underline-inset:8px]',
-      sm: '[--button-height:var(--button-height-sm,var(--height-sm))] [--button-icon-size:var(--button-icon-size-sm,var(--icon-size-sm))] px-2.5 text-[0.8rem] [--button-underline-inset:8px]',
-      lg: '[--button-height:var(--button-height-lg,var(--height-lg))] [--button-icon-size:var(--button-icon-size-lg,var(--icon-size-lg))] px-3 [--button-underline-inset:10px]',
-      xl: '[--button-height:var(--button-height-xl,var(--height-xl))] [--button-icon-size:var(--button-icon-size-xl,var(--icon-size-xl))] px-4 text-base [--button-underline-inset:12px]',
-      icon: 'w-(--button-height) px-0 [--button-height:var(--button-height-default,var(--height-default))] [--button-icon-size:var(--button-icon-size-default,var(--icon-size-default))]',
-      'icon-xs':
-        'w-(--button-height) px-0 text-xs [--button-height:var(--button-height-xs,var(--height-xs))] [--button-icon-size:var(--button-icon-size-xs,var(--icon-size-xs))]',
+      sm: '[--button-height:var(--button-height-sm,1.5rem)] [--button-icon-size:var(--button-icon-size-sm,0.75rem)] px-2 text-xs [--button-underline-inset:8px]',
+      md: '[--button-height:var(--button-height-md,var(--height-default))] [--button-icon-size:var(--button-icon-size-md,var(--icon-size-default))] px-2.5 [--button-underline-inset:10px]',
+      lg: '[--button-height:var(--button-height-lg,2.75rem)] [--button-icon-size:var(--button-icon-size-lg,1.25rem)] px-4 text-base [--button-underline-inset:12px]',
       'icon-sm':
-        'w-(--button-height) px-0 text-[0.8rem] [--button-height:var(--button-height-sm,var(--height-sm))] [--button-icon-size:var(--button-icon-size-sm,var(--icon-size-sm))]',
+        'w-(--button-height) px-0 text-xs [--button-height:var(--button-height-sm,1.5rem)] [--button-icon-size:var(--button-icon-size-sm,0.75rem)]',
+      'icon-md':
+        'w-(--button-height) px-0 [--button-height:var(--button-height-md,var(--height-default))] [--button-icon-size:var(--button-icon-size-md,var(--icon-size-default))]',
       'icon-lg':
-        'w-(--button-height) px-0 [--button-height:var(--button-height-lg,var(--height-lg))] [--button-icon-size:var(--button-icon-size-lg,var(--icon-size-lg))]',
-      'icon-xl':
-        'w-(--button-height) px-0 text-base [--button-height:var(--button-height-xl,var(--height-xl))] [--button-icon-size:var(--button-icon-size-xl,var(--icon-size-xl))]',
+        'w-(--button-height) px-0 text-base [--button-height:var(--button-height-lg,2.75rem)] [--button-icon-size:var(--button-icon-size-lg,1.25rem)]',
     },
   },
   defaultVariants: {
     variant: 'outlined',
     color: 'default',
-    size: 'default',
+    size: 'md',
   },
 })
 

@@ -1,31 +1,72 @@
-# Solid Input Primitives
+# Solid Primitive Input
 
-`InputGroup` and `InputGroupAddon` are exported from this family entry. They connect independently owned Input, Button, Select, and addon elements without introducing another value state.
+Styled, composable Input primitives. `InputRoot` owns the shared value and state; `InputControl` remains the real native input.
 
-## 用途与导入
+## Import
 
-```tsx
-import { InputClear, InputControl, InputPrefix, InputRoot } from '@fex-design/solid/primitive/input'
-export function Demo() {
-  return (
-    <InputRoot defaultValue="admin">
-      <InputPrefix>@</InputPrefix>
-      <InputControl aria-label="账号" />
-      <InputClear />
-    </InputRoot>
-  )
-}
-```
+    import { InputRoot, InputControl, InputPrefix, InputSuffix, InputAddonBefore, InputAddonAfter, InputClear, InputGroup } from '@fex-design/solid/primitive/input'
 
-## Props
+## Components
 
-| 组件           | 参数                        | 类型                      | 默认值      | 必填 | 说明             |
-| -------------- | --------------------------- | ------------------------- | ----------- | ---- | ---------------- |
-| `InputRoot`    | `value`                     | `string`                  | `undefined` | 否   | 受控值。         |
-| `InputRoot`    | `defaultValue`              | `string`                  | `''`        | 否   | 非受控初值。     |
-| `InputRoot`    | `onValueChange`             | `(value, meta) => void`   | `undefined` | 否   | 输入或清空回调。 |
-| `InputRoot`    | `disabled/readOnly/invalid` | `boolean`                 | `false`     | 否   | 字段状态。       |
-| `InputControl` | 原生 input 属性             | `JSX.InputHTMLAttributes` | `undefined` | 否   | 原生属性和事件。 |
-| `InputClear`   | `forceMount`                | `boolean`                 | `false`     | 否   | 无值时仍挂载。   |
+| Component | Element | Purpose |
+| --- | --- | --- |
+| InputRoot | div | Styled input boundary and controlled/uncontrolled value owner. |
+| InputControl | input | Native text input and focus target. |
+| InputPrefix | span | Non-interactive content inside the start of InputRoot. |
+| InputSuffix | span | Non-interactive content inside the end of InputRoot. |
+| InputAddonBefore | span | Start addon outside the InputRoot focus ring. |
+| InputAddonAfter | span | End addon outside the InputRoot focus ring. |
+| InputClear | button | Clear action connected to the nearest InputRoot. |
+| InputGroup | div | Connects arbitrary direct children without assuming their component type. |
 
-受控模式用 `value/onValueChange`，非受控模式用 `defaultValue`。逻辑层使用 `import { createInput } from '@fex-design/solid/primitive/input/create-input'`。Field 不属于 Input 内部；Prefix、Suffix 和两个 Addon 只提供结构。清空会遵守 disabled/readOnly 并恢复焦点。
+## Examples
+
+| Name | Covers |
+| --- | --- |
+| basic | Empty and clearable inputs. |
+| sizes | `sm`, `md`, and `lg` (24px, 32px, and 44px). |
+| variants | `outlined`, `filled`, `borderless`, and `underlined`. |
+| controlled | Controlled and uncontrolled InputRoot state. |
+| affixes | Prefix, Suffix, AddonBefore, and AddonAfter composition. |
+| group | Input with Button and Input with Input. |
+| password | Password visibility composed from Control, Suffix, and a native button. |
+| search | Enter, Prefix, and Addon search actions composed from Primitive parts. |
+| states | Disabled, read-only, and native `aria-invalid`. |
+| focus | Native focus, blur, and select through InputControl. |
+
+## InputRoot API
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | — | Controlled value. |
+| defaultValue | string | `''` | Uncontrolled initial value. |
+| size | `'sm' \| 'md' \| 'lg'` | `'md'` | Control height. |
+| variant | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | Visual structure. |
+| disabled | boolean | false | Disables the input context. |
+| readOnly | boolean | false | Makes the input context read-only. |
+| value change | framework event | — | Reports input and clear value changes. |
+| clear | framework event | — | Fires after a successful clear. |
+
+## InputControl API
+
+Native contract: `JSX.InputHTMLAttributes<HTMLInputElement>`. `ref` returns the native `HTMLInputElement`.
+
+`aria-invalid` is passed to the native input and is the only error-state contract. There is no custom `invalid` or `status` prop.
+
+## Composition
+
+Prefix and Suffix live inside InputRoot and do not add behavior. Addons are siblings of InputRoot inside InputGroup, so the Input focus ring does not cover them. InputClear renders a 12px, 14px, or 16px icon for `sm`, `md`, or `lg` and becomes visible only while the valued input is interactive.
+
+InputGroup styles arbitrary direct children: the first receives only the start radius, the last only the end radius, and middle joins have no radius. Set `--input-group-radius` globally, on one group, or on a direct child to override it.
+
+## Styling
+
+`class`, `classNames`, and `JSX.CSSProperties` styles. State-specific colors use selectors such as `hover`, `focus-within`, data attributes, and `[aria-invalid=true]`; CSS variables stay limited to reusable base tokens.
+
+## Direction
+
+All spacing and connected radii use logical start/end properties and follow native `dir="ltr"` or `dir="rtl"`.
+
+## Accessibility
+
+Provide an associated label through Field or native labeling. InputClear is a real button, keyboard reachable when visible, and restores focus to InputControl after clearing. Disabled and read-only behavior uses native input semantics.

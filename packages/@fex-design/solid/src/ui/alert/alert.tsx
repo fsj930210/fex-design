@@ -11,10 +11,10 @@ import { cn } from '@fex/utils'
 import { createSignal, splitProps, type JSX } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { CircleCheckIcon } from '../../icon/circle-check'
-import { CloseIcon } from '../../icon/close'
-import { CircleErrorIcon } from '../../icon/circle-error'
-import { CircleInfoIcon } from '../../icon/circle-info'
-import { CircleWarningIcon } from '../../icon/circle-warning'
+import { XIcon } from '../../icon/x'
+import { CircleXIcon } from '../../icon/circle-x'
+import { InfoIcon } from '../../icon/info'
+import { TriangleAlertIcon } from '../../icon/triangle-alert'
 import { Alert as PrimitiveAlert, type AlertProps as PrimitiveAlertProps } from '../../primitive/alert/alert'
 
 export type AlertProps = Omit<PrimitiveAlertProps, 'title'> &
@@ -22,7 +22,7 @@ export type AlertProps = Omit<PrimitiveAlertProps, 'title'> &
     onClose?: JSX.EventHandler<HTMLButtonElement, MouseEvent>
   }
 
-const icons = { success: CircleCheckIcon, info: CircleInfoIcon, warning: CircleWarningIcon, error: CircleErrorIcon }
+const icons = { success: CircleCheckIcon, info: InfoIcon, warning: TriangleAlertIcon, error: CircleXIcon }
 
 export function Alert(props: AlertProps) {
   const [visible, setVisible] = createSignal(true)
@@ -45,7 +45,7 @@ export function Alert(props: AlertProps) {
         {local.description || local.children ? <div data-slot="alert-description" class={cn(alertDescriptionClassName, local.classNames?.description)} style={local.styles?.description}>{local.description ?? local.children}</div> : null}
       </div>
       {local.action ? <div data-slot="alert-action" class={cn(alertActionClassName, local.classNames?.action)} style={local.styles?.action}>{local.action}</div> : null}
-      {local.closable ? <button type="button" aria-label="Close alert" data-slot="alert-close" class={cn(alertCloseClassName, local.classNames?.close)} style={local.styles?.close} onClick={(event) => { local.onClose?.(event); if (!event.defaultPrevented) setVisible(false) }}>{local.closeIcon ?? <CloseIcon />}</button> : null}
+      {local.closable ? <button type="button" aria-label="Close alert" data-slot="alert-close" class={cn(alertCloseClassName, local.classNames?.close)} style={local.styles?.close} onClick={(event) => { local.onClose?.(event); if (!event.defaultPrevented) setVisible(false) }}>{local.closeIcon ?? <XIcon />}</button> : null}
     </PrimitiveAlert>
   ) : null
 }

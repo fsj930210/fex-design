@@ -11,7 +11,7 @@
   let {
     variant = 'outlined',
     color,
-    size = 'default',
+    size = 'md',
     effect,
     iconPlacement = 'start',
     loading = false,

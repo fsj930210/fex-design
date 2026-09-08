@@ -10,7 +10,7 @@ import {
 import { cn } from '@fex/utils'
 import { computed, useSlots } from 'vue'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { LoadingIcon } from '../../icon/loading'
 import PrimitiveButton from '../button/button.vue'
 import PopoverTrigger from '../popover/popover-trigger.vue'
@@ -106,7 +106,7 @@ function inputPointerdown(event: PointerEvent) {
           :class="selectClearClassName"
           @pointerdown.prevent
           @click.stop="select.controller.clear()"
-          ><CloseIcon class="size-4"
+          ><XIcon class="size-4"
         /></PrimitiveButton>
         <slot v-else-if="slots.suffix" name="suffix" />
         <span

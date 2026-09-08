@@ -9,11 +9,11 @@
     "build": "ng build --base-href ./"
   },
   "dependencies": {
-    "@angular/build": "22.1.2",
-    "@angular/common": "22.1.0",
-    "@angular/compiler": "22.1.0",
-    "@angular/core": "22.1.0",
-    "@angular/platform-browser": "22.1.0",
+    "@angular/build": "22.1.7",
+    "@angular/common": "22.1.5",
+    "@angular/compiler": "22.1.5",
+    "@angular/core": "22.1.5",
+    "@angular/platform-browser": "22.1.5",
     "@fex-design/angular": "workspace:*",
     "@fex-design/docs-shared": "workspace:*",
     "@fex-design/styles": "workspace:*",
@@ -28,8 +28,8 @@
     "zone.js": "latest"
   },
   "devDependencies": {
-    "@angular/cli": "22.1.2",
-    "@angular/compiler-cli": "22.1.0",
+    "@angular/cli": "22.1.7",
+    "@angular/compiler-cli": "22.1.5",
     "typescript": "catalog:"
   }
 }

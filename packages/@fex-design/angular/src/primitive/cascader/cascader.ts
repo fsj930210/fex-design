@@ -45,7 +45,7 @@ import {
 } from '@angular/core'
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon, ChevronRightIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
+import { XIcon } from '../../icon/x'
 import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { MinusIcon } from '../../icon/minus'
@@ -181,7 +181,7 @@ export class CascaderRoot implements OnChanges {
 @Component({
   selector: 'fex-cascader-trigger',
   standalone: true,
-  imports: [CommonModule, PopoverTrigger, Button, ChevronDownIcon, CloseIcon, LoadingIcon, Tag],
+  imports: [CommonModule, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cascader-trigger.html',
 })

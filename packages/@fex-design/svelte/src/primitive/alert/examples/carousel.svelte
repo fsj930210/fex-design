@@ -1,11 +1,11 @@
 <script lang="ts">
   import Alert from '../alert.svelte'
   import AlertIcon from '../alert-icon.svelte'
-  import CircleWarningIcon from '../../../icon/circle-warning.svelte'
+  import TriangleAlertIcon from '../../../icon/triangle-alert.svelte'
 </script>
 
 <Alert type="warning">
-  <AlertIcon><CircleWarningIcon /></AlertIcon>
+  <AlertIcon><TriangleAlertIcon /></AlertIcon>
   <div class="marquee overflow-hidden">
     <div class="track flex w-max">
       <span class="pe-12">系统将在今晚 22:00 至 23:00 进行维护，<a href="#notice">查看公告详情</a></span>

@@ -11,7 +11,7 @@ import {
 import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
 import type { TreeOptions } from '@fex-design/core/tree/types'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { DemoTreeComponent } from './demo-tree.component'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 

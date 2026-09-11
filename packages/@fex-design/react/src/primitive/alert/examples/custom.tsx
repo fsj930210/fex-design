@@ -9,10 +9,23 @@ export default function Custom() {
   return visible ? (
     <div className="w-full max-w-sm">
       <Alert type="success">
-        <AlertIcon aria-hidden="true"><StarIcon /></AlertIcon>
-        <AlertTitle>Long alert title wraps to multiple lines when the alert container is narrow enough.</AlertTitle>
-        <AlertAction><button className="underline">Action</button></AlertAction>
-        <button className={alertCloseClassName} data-slot="alert-close" aria-label="关闭提示" onClick={() => setVisible(false)}><XIcon /></button>
+        <AlertIcon aria-hidden="true">
+          <StarIcon />
+        </AlertIcon>
+        <AlertTitle>
+          Long alert title wraps to multiple lines when the alert container is narrow enough.
+        </AlertTitle>
+        <AlertAction>
+          <button className="underline">Action</button>
+        </AlertAction>
+        <button
+          className={alertCloseClassName}
+          data-slot="alert-close"
+          aria-label="关闭提示"
+          onClick={() => setVisible(false)}
+        >
+          <XIcon />
+        </button>
       </Alert>
     </div>
   ) : null

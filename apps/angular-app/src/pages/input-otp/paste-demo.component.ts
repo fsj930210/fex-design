@@ -1,7 +1,7 @@
 import type { InputOTPChangeMeta, InputOTPValue } from '@fex-design/core/input-otp/types'
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { InputOTPGroup, InputOTPInput, InputOTPRoot } from '@fex-design/angular/primitive/input-otp'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-input-otp-paste-demo',
   standalone: true,

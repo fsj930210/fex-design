@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Custom panel regions"
   description="Source and target headers, bodies and optional footers are configured independently while the panel structure remains built in."
 >
@@ -7,7 +7,7 @@
       <div class="flex flex-col items-center gap-2">
         <button
           button
-          variant="outline"
+          variant="outlined"
           size="sm"
           [disabled]="!api.canMoveToTarget"
           (click)="api.controller.moveToTarget()"
@@ -16,7 +16,7 @@
         </button>
         <button
           button
-          variant="outline"
+          variant="outlined"
           size="sm"
           [disabled]="!api.canMoveToSource"
           (click)="api.controller.moveToSource()"
@@ -31,7 +31,7 @@
       >
     </ng-template>
     <ng-template fexTransferPanel="source" region="header" let-api>
-      <span class="font-medium">Candidate pool</span><fex-badge>{{ api.items.length }}</fex-badge>
+      <span class="font-medium">Candidate pool</span><badge>{{ api.items.length }}</badge>
     </ng-template>
     <ng-template fexTransferPanel="target" region="header" let-api>
       <span class="font-medium text-primary">Delivery team</span>
@@ -44,4 +44,4 @@
       <span class="text-muted-foreground">Changes are applied when the form is submitted.</span>
     </ng-template>
   </fex-transfer>
-</fex-card>
+</div>

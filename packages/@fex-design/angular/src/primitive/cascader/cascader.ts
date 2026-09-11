@@ -46,7 +46,7 @@ import {
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon, ChevronRightIcon } from '../../icon/chevron'
 import { XIcon } from '../../icon/x'
-import { Tag } from '../tag/tag'
+import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { MinusIcon } from '../../icon/minus'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
@@ -144,15 +144,19 @@ export class CascaderRoot implements OnChanges {
       },
       onChange: (value, meta) => root.change.emit({ value, meta }),
       onOpenChange: (open) => {
-        root.popover.open = open
+
         root.popover.syncOptions()
         root.openChange.emit(open)
       },
       onSearch: (value) => root.search.emit(value),
     })
     this.snapshot = createCoreStoreSignal(this.controller)
-    this.popover.align = 'start'
-    this.popover.open = this.controller.getSnapshot().open
+
+
+    this.popover.connectOptions(() => ({
+      align: 'start', open: this.snapshot().open, defaultOpen: this.defaultOpen,
+    }))
+    this.popover.syncOptions()
     const subscription = this.popover.openChange.subscribe((next) =>
       next ? this.controller.open() : this.controller.close(),
     )
@@ -160,8 +164,8 @@ export class CascaderRoot implements OnChanges {
   }
   ngOnChanges() {
     this.controller.refresh()
-    this.popover.open = this.snapshot().open
-    this.popover.defaultOpen = this.defaultOpen
+
+
     this.popover.syncOptions()
   }
   get selectedPaths() {
@@ -181,7 +185,7 @@ export class CascaderRoot implements OnChanges {
 @Component({
   selector: 'fex-cascader-trigger',
   standalone: true,
-  imports: [CommonModule, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag],
+  imports: [CommonModule, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag, TagAction],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cascader-trigger.html',
 })

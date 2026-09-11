@@ -11,33 +11,27 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card title="Primitive" description="卡片底层结构与 slot 语义。">
+      <div card title="Primitive" description="卡片底层结构与 slot 语义。">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <fex-card-primitive class="w-full">
-            <fex-card-header class="border-b border-border">
-              <fex-card-title>Primitive card</fex-card-title>
-              <fex-card-description>底层结构展示。</fex-card-description>
-            </fex-card-header>
-            <fex-card-content>Content</fex-card-content>
-          </fex-card-primitive>
+          <card-composition-demo />
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Ui" description="面向业务的默认卡片封装。">
+      <div card title="Ui" description="面向业务的默认卡片封装。">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <fex-card title="Basic" description="包含标题、描述和内容区域。">
+          <div card title="Basic" description="包含标题、描述和内容区域。">
             <p class="text-sm leading-6 text-foreground">
               Card 默认使用系统边框、背景、圆角和 spacing token。
             </p>
-          </fex-card>
+          </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Basic" description="包含标题、描述和内容区域的标准卡片结构。">
+      <div card title="Basic" description="包含标题、描述和内容区域的标准卡片结构。">
         <p class="text-sm leading-6 text-foreground">
           Card 默认使用系统边框、背景、圆角和 spacing token，适合作为组件示例页的基础展示容器。
         </p>
-      </fex-card>
+      </div>
 
       <ng-template #footerTemplate>
         <span class="text-sm text-muted-foreground">Footer content</span>
@@ -57,9 +51,9 @@
         </div>
       </ng-template>
 
-      <fex-card
+      <div card
         title="Spacing"
-        description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。"
+        description="通过 --card-spacing 自定义卡片间距。"
       >
         <div class="flex flex-wrap gap-1.5">
           @for (option of spacingOptions; track option.value) {
@@ -79,11 +73,10 @@
           }
         </div>
         <div class="mt-4 flex justify-center">
-          <fex-card
+          <div card
             class="w-full max-w-md"
             title="Login to your account"
             description="Enter your email below to login to your account"
-            [size]="selectedSpacing().size"
             [style.--card-spacing]="selectedSpacing().spacing"
             [footer]="loginFooterTemplate"
           >
@@ -106,11 +99,11 @@
                 <div class="h-9 rounded-md border border-border bg-background"></div>
               </div>
             </div>
-          </fex-card>
+          </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="With Footer"
         description="需要底部操作区时使用 footer。"
         [footer]="footerTemplate"
@@ -118,7 +111,7 @@
         <p class="text-sm leading-6 text-muted-foreground">
           Header、Content 和 Footer 分别维护自己的 padding，组合时保持一致的信息密度。
         </p>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

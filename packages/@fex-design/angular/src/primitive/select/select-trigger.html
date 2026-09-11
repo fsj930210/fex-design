@@ -1,5 +1,5 @@
 <div
-  fexPopoverTrigger
+  popoverTrigger
   role="presentation"
   data-slot="select-trigger"
   [attr.data-disabled]="select.disabled || null"
@@ -18,16 +18,15 @@
         *ngTemplateOutlet="tag; context: { $implicit: item, remove: remove(item.value) }"
       />
       } @else {
-      <fex-tag
+      <span tag
         size="sm"
-        closable
-        [closeLabel]="'Remove ' + item.label"
+       
+       
         (pointerdown)="$event.preventDefault()"
-        (close)="$event.stopPropagation(); select.removeValue(item.value)"
-        >{{ item.label }}</fex-tag
-      >
+       
+        >{{ item.label }}<button tagAction [aria-label]="'Remove ' + item.label" (click)="$event.stopPropagation(); select.removeValue(item.value)"></button></span>
       } } @if (overflow > 0) {
-      <fex-tag size="sm">+{{ overflow }}</fex-tag>
+      <span tag size="sm">+{{ overflow }}</span>
       }
     </div>
     } @else {

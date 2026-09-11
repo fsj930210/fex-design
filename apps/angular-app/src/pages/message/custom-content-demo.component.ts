@@ -7,7 +7,7 @@ import {
   MessageHeader,
   MessageStatus,
 } from '@fex-design/angular/primitive/message'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-message-custom-content-demo',

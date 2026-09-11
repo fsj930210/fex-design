@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  export type { CheckboxCheckedState } from '@fex-design/core/checkbox/types'
+  export type { CheckboxCheckedState } from "@fex-design/core/checkbox/types";
 </script>
 
 <script lang="ts">
@@ -9,24 +9,29 @@
     checkboxIndicatorClassName,
     checkboxMinusIconClassName,
     type CheckboxStyleProps,
-  } from '@fex-design/styles/checkbox'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
-  import CheckboxRoot from '../../primitive/checkbox/checkbox.svelte'
-  import CheckboxIndicator from '../../primitive/checkbox/checkbox-indicator.svelte'
-  import CheckIcon from '../../icon/check.svelte'
-  import MinusIcon from '../../icon/minus.svelte'
+  } from "@fex-design/styles/checkbox";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type {
+    CheckboxChangeMeta,
+    CheckboxCheckedState,
+  } from "@fex-design/core/checkbox/types";
+  import CheckboxRoot from "../../primitive/checkbox/checkbox.svelte";
+  import CheckboxIndicator from "../../primitive/checkbox/checkbox-indicator.svelte";
+  import CheckIcon from "../../icon/check.svelte";
+  import MinusIcon from "../../icon/minus.svelte";
 
   interface CheckboxProps {
-    checked?: CheckboxCheckedState | undefined
-    defaultChecked?: CheckboxCheckedState | undefined
-    disabled?: boolean | undefined
-    size?: CheckboxStyleProps['size']
-    class?: string
-    children?: Snippet
-    onCheckedChange?: ((checked: CheckboxCheckedState, meta: CheckboxChangeMeta) => void) | undefined
-    [key: string]: unknown
+    checked?: CheckboxCheckedState | undefined;
+    defaultChecked?: CheckboxCheckedState | undefined;
+    disabled?: boolean | undefined;
+    size?: CheckboxStyleProps["size"];
+    class?: string;
+    children?: Snippet;
+    onCheckedChange?:
+      | ((checked: CheckboxCheckedState, meta: CheckboxChangeMeta) => void)
+      | undefined;
+    [key: string]: unknown;
   }
 
   let {
@@ -38,8 +43,8 @@
     children: indicatorChildren,
     onCheckedChange,
     ...rest
-  }: CheckboxProps = $props()
-  const classList = $derived(cn(checkboxClassName({ size }), className))
+  }: CheckboxProps = $props();
+  const classList = $derived(cn(checkboxClassName({ size }), className));
 </script>
 
 <CheckboxRoot
@@ -52,7 +57,11 @@
   {onCheckedChange}
 >
   {#snippet children(checkedState)}
-    <CheckboxIndicator checked={checkedState} class={checkboxIndicatorClassName} data-slot="checkbox-indicator">
+    <CheckboxIndicator
+      checked={checkedState}
+      class={checkboxIndicatorClassName}
+      data-slot="checkbox-indicator"
+    >
       {#if indicatorChildren}
         {@render indicatorChildren()}
       {:else}

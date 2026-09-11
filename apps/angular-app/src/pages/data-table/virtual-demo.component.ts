@@ -3,7 +3,7 @@ import { columnSizingFeature } from '@fex-design/core/data-table/features/column
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
 import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/angular/primitive/data-table'
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { virtualPeople, type Person } from './data'
 type Features = {
   columnSizingFeature: typeof columnSizingFeature

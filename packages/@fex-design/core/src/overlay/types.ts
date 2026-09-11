@@ -1,4 +1,5 @@
 import type { DisclosureChangeInfo, DisclosureOptions } from '../disclosure/create-disclosure'
+import type { FloatingMountOptions } from './presence/types'
 
 export type OverlayPhase = 'closed' | 'opening' | 'open' | 'closing'
 
@@ -20,7 +21,7 @@ export interface OverlayDismissOptions {
   overlayPointer?: boolean | undefined
 }
 
-export interface OverlayOptions extends DisclosureOptions {
+export interface OverlayOptions extends DisclosureOptions, FloatingMountOptions {
   forceMount?: boolean | undefined
   closeDelay?: number | undefined
   modal?: boolean | undefined

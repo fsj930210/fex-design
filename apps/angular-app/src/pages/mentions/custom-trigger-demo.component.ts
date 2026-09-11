@@ -4,7 +4,7 @@ import { MentionsItem } from '@fex-design/angular/primitive/mentions/item'
 import { MentionsList } from '@fex-design/angular/primitive/mentions/list'
 import { MentionsRoot } from '@fex-design/angular/primitive/mentions/root'
 import { MentionsTriggerInput } from '@fex-design/angular/primitive/mentions/trigger-input'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { mentionUsers } from './data'
 
 @Component({

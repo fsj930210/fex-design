@@ -6,12 +6,14 @@ import { computed, onBeforeUnmount, shallowRef, useAttrs } from 'vue'
 import { eventInfo } from './context'
 import { usePopoverContext } from './context'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'PopoverContent', inheritAttrs: false })
 
 const props = defineProps<{ class?: string; style?: StyleValue }>()
 const attrs = useAttrs()
-const { hoverAncestors, overlay, snapshot } = usePopoverContext('PopoverContent')
+const { overlay, snapshot } = usePopoverContext('PopoverContent')
 const contentElement = shallowRef<HTMLDivElement | null>(null)
+
+defineExpose({ element: contentElement })
 
 const contentClass = computed(() => cn(popoverContentClassName(), props.class))
 const contentStyle = computed<Record<string, string>>(() => ({
@@ -27,13 +29,11 @@ function setContentElement(element: Element | ComponentPublicInstance | null) {
 }
 
 function handlePointerEnter(event: PointerEvent) {
-  hoverAncestors.forEach((ancestor) => ancestor.content.pointerEnter(eventInfo(event)))
-  overlay.content.pointerEnter(eventInfo(event))
+  if (!event.defaultPrevented) overlay.content.pointerEnter(eventInfo(event))
 }
 
 function handlePointerLeave(event: PointerEvent) {
-  hoverAncestors.forEach((ancestor) => ancestor.content.pointerLeave(eventInfo(event)))
-  overlay.content.pointerLeave(eventInfo(event))
+  if (!event.defaultPrevented) overlay.content.pointerLeave(eventInfo(event))
 }
 
 onBeforeUnmount(() => {
@@ -50,6 +50,8 @@ onBeforeUnmount(() => {
     tabindex="-1"
     data-slot="popover-content"
     :data-state="snapshot.open ? 'open' : 'closed'"
+    :hidden="snapshot.phase === 'closed'"
+    :inert="!snapshot.open"
     :data-phase="snapshot.phase"
     :data-side="snapshot.side"
     :data-align="snapshot.align"

@@ -1,4 +1,4 @@
-<fex-card title="自定义尺寸" description="通过 Root 的 size 控制二维码输出尺寸。">
+<div card title="自定义尺寸" description="通过 Root 的 size 控制二维码输出尺寸。">
   <div class="flex flex-wrap items-end gap-3">
     @for (size of sizes; track size) {
       <fex-qrcode-root [value]="'https://fex.design/qrcode/size/' + size" [size]="size">
@@ -9,4 +9,4 @@
       </fex-qrcode-root>
     }
   </div>
-</fex-card>
+</div>

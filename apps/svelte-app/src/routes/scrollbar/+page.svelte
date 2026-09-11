@@ -1,28 +1,34 @@
 <script lang="ts">
-  import ScrollbarRoot from '@fex-design/svelte/primitive/scrollbar'
-  import ScrollbarViewport from '@fex-design/svelte/primitive/scrollbar-viewport'
-  import ScrollbarBar from '@fex-design/svelte/primitive/scrollbar-bar'
-  import ScrollbarTrack from '@fex-design/svelte/primitive/scrollbar-track'
-  import ScrollbarThumb from '@fex-design/svelte/primitive/scrollbar-thumb'
-  import ScrollbarCorner from '@fex-design/svelte/primitive/scrollbar-corner'
-  import Card from '@fex-design/svelte/ui/card'
+  import ScrollbarRoot from "@fex-design/svelte/primitive/scrollbar";
+  import ScrollbarViewport from "@fex-design/svelte/primitive/scrollbar-viewport";
+  import ScrollbarBar from "@fex-design/svelte/primitive/scrollbar-bar";
+  import ScrollbarTrack from "@fex-design/svelte/primitive/scrollbar-track";
+  import ScrollbarThumb from "@fex-design/svelte/primitive/scrollbar-thumb";
+  import ScrollbarCorner from "@fex-design/svelte/primitive/scrollbar-corner";
+  import Card from "@fex-design/svelte/ui/card";
 
-  const items = Array.from({ length: 30 }, (_, index) => index + 1)
-  const virtualRowHeight = 40
-  const virtualRowCount = 300
-  let virtualStart = $state(0)
+  const items = Array.from({ length: 30 }, (_, index) => index + 1);
+  const virtualRowHeight = 40;
+  const virtualRowCount = 300;
+  let virtualStart = $state(0);
   let virtualRows = $derived(
-    Array.from({ length: 14 }, (_, index) => virtualStart + index + 1).filter((row) => row <= virtualRowCount),
-  )
+    Array.from({ length: 14 }, (_, index) => virtualStart + index + 1).filter(
+      (row) => row <= virtualRowCount,
+    ),
+  );
 </script>
 
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
   <div class="mx-auto w-full max-w-5xl space-y-4">
     <header class="space-y-2">
-      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/"
+        >Back home</a
+      >
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Scrollbar</h1>
-        <p class="mt-1.5 text-sm text-muted-foreground">Primitive overlay scrollbar with native scrolling.</p>
+        <p class="mt-1.5 text-sm text-muted-foreground">
+          Primitive overlay scrollbar with native scrolling.
+        </p>
       </div>
     </header>
 
@@ -32,7 +38,9 @@
           <ScrollbarViewport overflowX="hidden">
             <div class="space-y-2 p-3">
               {#each items as item (item)}
-                <div class="rounded-md border border-border p-3 text-sm">Activity {item}</div>
+                <div class="rounded-md border border-border p-3 text-sm">
+                  Activity {item}
+                </div>
               {/each}
             </div>
           </ScrollbarViewport>
@@ -45,7 +53,11 @@
           <ScrollbarViewport overflowY="hidden">
             <div class="flex w-max gap-3 p-3">
               {#each items as item (item)}
-                <div class="grid size-28 shrink-0 place-items-center rounded-md border border-border">Card {item}</div>
+                <div
+                  class="grid size-28 shrink-0 place-items-center rounded-md border border-border"
+                >
+                  Card {item}
+                </div>
               {/each}
             </div>
           </ScrollbarViewport>
@@ -58,7 +70,11 @@
           <ScrollbarViewport>
             <div class="grid h-140 w-190 grid-cols-5 gap-3 p-3">
               {#each items as item (item)}
-                <div class="grid h-24 place-items-center rounded-md border border-border">{item}</div>
+                <div
+                  class="grid h-24 place-items-center rounded-md border border-border"
+                >
+                  {item}
+                </div>
               {/each}
             </div>
           </ScrollbarViewport>
@@ -68,13 +84,22 @@
         </ScrollbarRoot>
       </Card>
 
-      <Card title="Inset visible tracks" description="Tracks are opt-in; this rail starts below the fixed toolbar.">
+      <Card
+        title="Inset visible tracks"
+        description="Tracks are opt-in; this rail starts below the fixed toolbar."
+      >
         <ScrollbarRoot autoHide="never" class="h-72 rounded-md border">
-          <div class="h-12 border-b border-border bg-muted-background px-3 py-3 text-sm font-medium">Fixed toolbar</div>
+          <div
+            class="h-12 border-b border-border bg-muted-background px-3 py-3 text-sm font-medium"
+          >
+            Fixed toolbar
+          </div>
           <ScrollbarViewport class="h-[calc(100%-3rem)]">
             <div class="space-y-2 p-3">
               {#each items as item (item)}
-                <div class="rounded-md border border-border bg-background p-3">Activity item {item}</div>
+                <div class="rounded-md border border-border bg-background p-3">
+                  Activity item {item}
+                </div>
               {/each}
             </div>
           </ScrollbarViewport>
@@ -93,13 +118,27 @@
       </Card>
     </div>
 
-    <Card title="Scroll events · virtual list" description="The scroll event updates only the rendered window; 300 rows keep native scrolling.">
-      <ScrollbarRoot class="h-72 rounded-md border" onScrollChange={({ scrollTop }) => (virtualStart = Math.floor(scrollTop / virtualRowHeight))}>
+    <Card
+      title="Scroll events · virtual list"
+      description="The scroll event updates only the rendered window; 300 rows keep native scrolling."
+    >
+      <ScrollbarRoot
+        class="h-72 rounded-md border"
+        onScrollChange={({ scrollTop }) =>
+          (virtualStart = Math.floor(scrollTop / virtualRowHeight))}
+      >
         <ScrollbarViewport overflowX="hidden">
           <div class="relative h-[12000px]">
-            <div class="absolute inset-x-0" style:transform={`translateY(${virtualStart * virtualRowHeight}px)`}>
+            <div
+              class="absolute inset-x-0"
+              style:transform={`translateY(${virtualStart * virtualRowHeight}px)`}
+            >
               {#each virtualRows as row (row)}
-                <div class="flex h-10 items-center border-b border-border px-3 text-sm">Virtual activity {row}</div>
+                <div
+                  class="flex h-10 items-center border-b border-border px-3 text-sm"
+                >
+                  Virtual activity {row}
+                </div>
               {/each}
             </div>
           </div>
@@ -108,13 +147,16 @@
       </ScrollbarRoot>
     </Card>
 
-    <Card title="Data grid scroll" description="Plain table in a native viewport; layout controls the Bar track geometry.">
+    <Card
+      title="Data grid scroll"
+      description="Plain table in a native viewport; layout controls the Bar track geometry."
+    >
       <ScrollbarRoot class="h-96 rounded-md border">
         <ScrollbarViewport>
           <table class="w-full min-w-[1500px] text-left text-sm">
             <thead class="sticky top-0 bg-muted-background">
               <tr>
-                {#each ['ID','Name','Status','Amount','Region'] as column (column)}
+                {#each ["ID", "Name", "Status", "Amount", "Region"] as column (column)}
                   <th class="border-b border-border px-4 py-3">{column}</th>
                 {/each}
               </tr>

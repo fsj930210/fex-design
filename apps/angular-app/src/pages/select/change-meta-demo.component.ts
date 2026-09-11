@@ -6,7 +6,7 @@ import {
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-select-change-meta-demo',

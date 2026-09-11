@@ -12,7 +12,7 @@ import {
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { Badge } from '@fex-design/angular/primitive/badge'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people7, type Person } from './data'
 
 const modules = { rowPinningFeature }

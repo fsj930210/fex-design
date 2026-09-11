@@ -6,7 +6,7 @@ import {
   SliderThumb,
   SliderTrack,
 } from '@fex-design/angular/primitive/slider'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-slider-page',

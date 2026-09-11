@@ -1,48 +1,73 @@
 <script lang="ts">
-  import type { TreeController, TreeItem as CoreItem, TreeVisibleItem } from '@fex-design/core/tree/types'
-  import { TreeItem, TreeTitle, TreeTrigger } from '@fex-design/svelte/primitive/tree'
-  import Checkbox from '@fex-design/svelte/ui/checkbox'
-  import Spinner from '@fex-design/svelte/ui/spinner'
-  import type { Snippet } from 'svelte'
-  import type { DepartmentNode } from './data'
+  import type {
+    TreeController,
+    TreeItem as CoreItem,
+    TreeVisibleItem,
+  } from "@fex-design/core/tree/types";
+  import {
+    TreeItem,
+    TreeTitle,
+    TreeTrigger,
+  } from "@fex-design/svelte/primitive/tree";
+  import Checkbox from "@fex-design/svelte/ui/checkbox";
+  import Spinner from "@fex-design/svelte/ui/spinner";
+  import type { Snippet } from "svelte";
+  import type { DepartmentNode } from "./data";
 
   interface Context {
-    item: CoreItem<DepartmentNode>
-    tree: TreeController<DepartmentNode>
-    isSearching: boolean
-    searchKeyword: string
+    item: CoreItem<DepartmentNode>;
+    tree: TreeController<DepartmentNode>;
+    isSearching: boolean;
+    searchKeyword: string;
   }
 
-  let { tree, item, checkable = false, searchKeyword = '', itemClass, title }: {
-    tree: TreeController<DepartmentNode>
-    item: TreeVisibleItem<DepartmentNode>
-    checkable?: boolean
-    searchKeyword?: string
-    itemClass?: string
-    title?: Snippet<[Context]>
-  } = $props()
+  let {
+    tree,
+    item,
+    checkable = false,
+    searchKeyword = "",
+    itemClass,
+    title,
+  }: {
+    tree: TreeController<DepartmentNode>;
+    item: TreeVisibleItem<DepartmentNode>;
+    checkable?: boolean;
+    searchKeyword?: string;
+    itemClass?: string;
+    title?: Snippet<[Context]>;
+  } = $props();
 
   const itemProps = $derived({
     itemKey: item.key,
     controller: tree,
     ...(itemClass === undefined ? {} : { class: itemClass }),
-  })
+  });
 </script>
 
 <TreeItem {...itemProps}>
   {#snippet children(state)}
     <div {...state.itemProps}>
-      {#if state.loadState === 'loading'}
+      {#if state.loadState === "loading"}
         <Spinner size="sm" aria-label="Loading children" />
       {:else}
         <TreeTrigger itemKey={state.item.key} />
       {/if}
-      {#if checkable && tree.hasFeature('check')}
-        <Checkbox checked={state.checkedState} disabled={state.item.disabled} onclick={(event: MouseEvent) => event.stopPropagation()} onCheckedChange={() => state.actions.toggleChecked()} />
+      {#if checkable && tree.hasFeature("check")}
+        <Checkbox
+          checked={state.checkedState}
+          disabled={state.item.disabled}
+          onclick={(event: MouseEvent) => event.stopPropagation()}
+          onCheckedChange={() => state.actions.toggleChecked()}
+        />
       {/if}
       <TreeTitle>
         {#if title}
-          {@render title({ item: state.item, tree, isSearching: Boolean(searchKeyword), searchKeyword })}
+          {@render title({
+            item: state.item,
+            tree,
+            isSearching: Boolean(searchKeyword),
+            searchKeyword,
+          })}
         {:else}
           {String(state.item.node.name)}
         {/if}

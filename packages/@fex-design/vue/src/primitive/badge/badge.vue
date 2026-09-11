@@ -30,7 +30,12 @@ const visible = computed(
     data-slot="badge"
     :data-color="props.color ?? 'default'"
     :data-size="props.size ?? 'md'"
-    :class="cn(badgeClassName({ color: presetColor, size: props.size }), attrs.class as string | undefined)"
+    :class="
+      cn(
+        badgeClassName({ color: presetColor, size: props.size }),
+        attrs.class as string | undefined,
+      )
+    "
     :style="[{ '--badge-color': customColor }, attrs.style]"
   >
     {{ value ?? '' }}<slot v-if="value == null" />

@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Tag } from '@fex-design/angular/primitive/tag'
+import { Tag, TagAction } from '@fex-design/angular/primitive/tag'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { frameworkOptions } from './data'
 export
 @Component({
   selector: 'fex-select-custom-tag-demo',
   standalone: true,
-  imports: [Card, Tag, SelectRoot, SelectTrigger, SelectContent, SelectList],
+  imports: [Card, Tag, TagAction, SelectRoot, SelectTrigger, SelectContent, SelectList],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-tag-demo.component.html',
 })

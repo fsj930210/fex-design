@@ -1,13 +1,13 @@
-<fex-card
+<div card
   title="Conversation"
   description="Message owns the row and side while Bubble owns the content surface."
   ><div role="log" class="grid gap-4">
     <fex-message
       ><div fexMessageAvatar>
-        <fex-avatar
-          ><fex-avatar-image src="/avatar-demo.svg" alt="Assistant" /><fex-avatar-fallback
-            >AI</fex-avatar-fallback
-          ></fex-avatar
+        <avatar
+          ><avatar-image src="/avatar-demo.svg" alt="Assistant" /><avatar-fallback
+            >AI</avatar-fallback
+          ></avatar
         >
       </div>
       <div fexMessageBody>
@@ -23,7 +23,7 @@
       </div></fex-message
     ><fex-message side="end"
       ><div fexMessageAvatar>
-        <fex-avatar><fex-avatar-fallback>ME</fex-avatar-fallback></fex-avatar>
+        <avatar><avatar-fallback>ME</avatar-fallback></avatar>
       </div>
       <div fexMessageBody>
         <div fexMessageContent>
@@ -34,5 +34,4 @@
         <div fexMessageFooter>Delivered</div>
       </div></fex-message
     >
-  </div></fex-card
->
+  </div></div>

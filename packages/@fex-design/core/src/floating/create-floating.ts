@@ -293,29 +293,8 @@ export function createFloating(options: FloatingOptions = {}): Floating {
     )
     void floating.offsetHeight
     const preferredPlacement = getPlacement(currentOptions)
-    const preferredParts = partsFromPlacement(preferredPlacement)
-    const floatingRect = floating.getBoundingClientRect()
-    const viewportWidth = floating.ownerDocument.documentElement.clientWidth
-    const space = {
-      top: referenceRectBeforePosition.top - verticalPadding,
-      right: viewportWidth - referenceRectBeforePosition.right - verticalPadding,
-      bottom: viewportHeight - referenceRectBeforePosition.bottom - verticalPadding,
-      left: referenceRectBeforePosition.left - verticalPadding,
-    }
-    const required =
-      preferredParts.side === 'top' || preferredParts.side === 'bottom'
-        ? floatingRect.height
-        : floatingRect.width
-    const opposite = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' } as const
-    const oppositeSide = opposite[preferredParts.side]
-    const resolvedSide =
-      space[preferredParts.side] < required && space[oppositeSide] > space[preferredParts.side]
-        ? oppositeSide
-        : preferredParts.side
-    const resolvedPlacement: Placement =
-      preferredParts.align === 'center' ? resolvedSide : `${resolvedSide}-${preferredParts.align}`
     const result = await computePosition(reference, floating, {
-      placement: resolvedPlacement,
+      placement: preferredPlacement,
       strategy: currentOptions.strategy ?? 'absolute',
       middleware: getMiddleware(),
     })
@@ -329,23 +308,54 @@ export function createFloating(options: FloatingOptions = {}): Floating {
     const resultParts = partsFromPlacement(result.placement)
     const arrowData = result.middlewareData.arrow
     const hideData = result.middlewareData.hide
+    // Floating UI may shift an aligned panel so the arrow can keep pointing at the
+    // reference center. Compound placements give panel-edge alignment priority:
+    // topLeft/leftTop align the two start edges, and the matching end variants align
+    // the two end edges. The arrow remains inset toward that same edge.
+    const arrowAlignmentOffset = arrowData?.alignmentOffset ?? 0
+    const resolvedX =
+      resultParts.side === 'top' || resultParts.side === 'bottom'
+        ? result.x - arrowAlignmentOffset
+        : result.x
+    const resolvedY =
+      resultParts.side === 'left' || resultParts.side === 'right'
+        ? result.y - arrowAlignmentOffset
+        : result.y
+    const arrowSize = currentArrow?.offsetWidth ?? 0
+    const arrowPadding = currentOptions.arrowPadding ?? defaultArrowPadding
+    const floatingRect = floating.getBoundingClientRect()
+    const alignedArrowPosition = (availableSize: number, middlewarePosition?: number) => {
+      if (resultParts.align === 'start') return arrowPadding
+      if (resultParts.align === 'end') {
+        return Math.max(arrowPadding, availableSize - arrowSize - arrowPadding)
+      }
+      return middlewarePosition
+    }
+    const arrowX =
+      resultParts.side === 'top' || resultParts.side === 'bottom'
+        ? alignedArrowPosition(floatingRect.width, arrowData?.x)
+        : arrowData?.x
+    const arrowY =
+      resultParts.side === 'left' || resultParts.side === 'right'
+        ? alignedArrowPosition(floatingRect.height, arrowData?.y)
+        : arrowData?.y
 
     // 坐标和尺寸通过 CSS 变量写入 DOM，adapter 只绑定固定的 position/left/top 规则。
     // 这样可以避免每个框架都重复维护一份定位样式对象，也能让样式包直接消费这些变量。
     patchFloatingVars(floating, {
-      x: result.x,
-      y: result.y,
+      x: resolvedX,
+      y: resolvedY,
       strategy: result.strategy,
-      transformOrigin: getTransformOrigin(resultParts.side, arrowData?.x, arrowData?.y),
+      transformOrigin: getTransformOrigin(resultParts.side, arrowX, arrowY),
       referenceX: referenceRect.x,
       referenceY: referenceRect.y,
       referenceWidth: referenceRect.width,
       referenceHeight: referenceRect.height,
       sideOffset: currentOptions.sideOffset ?? currentOptions.offset ?? 0,
-      ...(arrowData?.x !== undefined ? { arrowX: arrowData.x } : {}),
-      ...(arrowData?.y !== undefined ? { arrowY: arrowData.y } : {}),
+      ...(arrowX !== undefined ? { arrowX } : {}),
+      ...(arrowY !== undefined ? { arrowY } : {}),
       ...(currentArrow && arrowElement === currentArrow
-        ? { arrowSize: currentArrow.offsetWidth }
+        ? { arrowSize }
         : {}),
       ...(currentOptions.zIndex !== undefined ? { zIndex: currentOptions.zIndex } : {}),
     })
@@ -356,7 +366,7 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       resultParts.align === 'center' ? resultParts.side : `${resultParts.side}-${resultParts.align}`
     floating.style.setProperty(
       '--floating-transform-origin',
-      getTransformOrigin(resultParts.side, arrowData?.x, arrowData?.y),
+      getTransformOrigin(resultParts.side, arrowX, arrowY),
     )
     // data-side/data-placement 必须使用 Floating UI 返回的最终 placement，而不是用户传入的原始 placement。
     // 发生 flip 后如果 adapter 继续用原始 placement，最常见的问题就是内容位置正确但箭头方向错误。

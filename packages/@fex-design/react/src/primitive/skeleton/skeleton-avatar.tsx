@@ -5,5 +5,11 @@ import type { ComponentProps } from 'react'
 import { SkeletonBlock } from './skeleton-block'
 export type SkeletonAvatarProps = ComponentProps<'div'> & SkeletonAvatarOptions
 export function SkeletonAvatar({ className, shape, size, ...props }: SkeletonAvatarProps) {
-  return <SkeletonBlock data-slot="skeleton-avatar" className={cn(skeletonAvatarClassName({ shape, size }), className)} {...props} />
+  return (
+    <SkeletonBlock
+      data-slot="skeleton-avatar"
+      className={cn(skeletonAvatarClassName({ shape, size }), className)}
+      {...props}
+    />
+  )
 }

@@ -35,8 +35,8 @@ export const cascaderIndicatorClassName =
   'inline-flex size-4 items-center justify-center transition-transform data-[state=open]:rotate-180'
 export const cascaderClearClassName = 'size-4 px-0 py-0'
 export const cascaderContentClassName = [
-  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-content-padding:0px]',
-  'w-max min-w-[var(--cascader-content-min-width,var(--floating-reference-width))] [--popover-content-max-width:var(--cascader-content-max-width,var(--floating-available-width))]',
+  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-padding:0px]',
+  'w-max min-w-[var(--cascader-content-min-width,var(--floating-reference-width))] max-w-[var(--cascader-content-max-width,var(--floating-available-width))]',
   'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--cascader-content-max-height,320px))]',
 ].join(' ')
 export const cascaderPanelClassName = 'flex h-[var(--cascader-panel-height,240px)] min-w-full w-max'

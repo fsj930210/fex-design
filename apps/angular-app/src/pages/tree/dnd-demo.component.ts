@@ -11,7 +11,7 @@ import {
   TreeViewport,
 } from '@fex-design/angular/primitive/tree'
 import { TreeDndItemDirective } from '@fex-design/angular/primitive/tree/tree-dnd-item'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import {
   departmentFieldNames,
   departmentTreeData,

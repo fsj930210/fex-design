@@ -7,7 +7,7 @@ import {
   AlertTitle,
 } from '@fex-design/angular/primitive/alert'
 import { Badge } from '@fex-design/angular/primitive/badge'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { InfoIcon } from '@fex-design/angular/icon/info'
 
 @Component({
@@ -18,5 +18,5 @@ import { InfoIcon } from '@fex-design/angular/icon/info'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertComponent {
-  protected readonly variants = ['default', 'success', 'warning', 'info', 'destructive'] as const
+  protected readonly variants = ['success', 'warning', 'info', 'error'] as const
 }

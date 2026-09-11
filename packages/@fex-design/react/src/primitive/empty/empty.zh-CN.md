@@ -8,24 +8,24 @@
 
 ## 组件
 
-| 组件 | 元素 | 说明 |
-| --- | --- | --- |
-| Empty | div | 空状态根容器。 |
-| EmptyHeader | div | 组合媒体、标题和说明。 |
-| EmptyMedia | div | 媒体或图片容器。 |
-| EmptyTitle | div | 空状态主标题。 |
-| EmptyDescription | p | 补充说明。 |
-| EmptyContent | div | 操作或自定义内容。 |
+| 组件             | 元素 | 说明                   |
+| ---------------- | ---- | ---------------------- |
+| Empty            | div  | 空状态根容器。         |
+| EmptyHeader      | div  | 组合媒体、标题和说明。 |
+| EmptyMedia       | div  | 媒体或图片容器。       |
+| EmptyTitle       | div  | 空状态主标题。         |
+| EmptyDescription | p    | 补充说明。             |
+| EmptyContent     | div  | 操作或自定义内容。     |
 
 每个组件均向对应宿主元素透传原生属性、事件、class、style、ARIA 属性、children 和 ref。
 
 ## 示例
 
-| 名称 | 覆盖内容 |
-| --- | --- |
-| basic | 内置空状态组合。 |
-| content | 自定义操作内容。 |
-| image | 自定义图片内容。 |
+| 名称      | 覆盖内容                       |
+| --------- | ------------------------------ |
+| basic     | 内置空状态组合。               |
+| content   | 自定义操作内容。               |
+| image     | 自定义图片内容。               |
 | direction | 中文 LTR 与阿拉伯语 RTL 布局。 |
 
 四个示例与 UI Empty 的文案、布局和最终展示保持一致。

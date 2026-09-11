@@ -1,0 +1,512 @@
+{
+  "name": "Popover",
+  "slug": "popover",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "自由组合带样式的浮层部件。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/popover",
+    "vue": "@fex-design/vue/primitive/popover",
+    "solid": "@fex-design/solid/primitive/popover",
+    "svelte": "@fex-design/svelte/primitive/popover",
+    "angular": "@fex-design/angular/primitive/popover"
+  },
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控打开状态。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控初始打开状态。"
+    },
+    {
+      "name": "trigger",
+      "type": "Array<'hover' | 'focus' | 'click' | 'context-menu'>",
+      "default": "['click']",
+      "description": "可组合多种触发方式；空数组仅通过程序控制。"
+    },
+    {
+      "name": "placement",
+      "type": "'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight' | 'left' | 'leftTop' | 'leftBottom' | 'right' | 'rightTop' | 'rightBottom'",
+      "default": "'bottom'",
+      "description": "十二种快捷位置。"
+    },
+    {
+      "name": "side",
+      "type": "'top' | 'right' | 'bottom' | 'left'",
+      "description": "覆盖 placement 的方向。"
+    },
+    {
+      "name": "align",
+      "type": "'start' | 'center' | 'end'",
+      "description": "对齐触发元素的起始边、中心或结束边。top/bottom 对齐左右边，left/right 对齐上下边。"
+    },
+    {
+      "name": "sideOffset",
+      "type": "number",
+      "default": "6",
+      "description": "浮层与触发元素之间的间距，单位 px。正值远离触发元素。"
+    },
+    {
+      "name": "alignOffset",
+      "type": "number",
+      "default": "0",
+      "description": "调整面板与触发元素的对齐位置，单位 px。top/bottom 正值向右（LTR），left/right 正值向下；负值反向。"
+    },
+    {
+      "name": "arrow",
+      "type": "boolean",
+      "default": "false",
+      "description": "是否展示箭头。"
+    },
+    {
+      "name": "arrowPadding",
+      "type": "number",
+      "description": "箭头距浮层角落的最小距离，单位 px，用于避免箭头碰到圆角。不是内容 padding；通常无需修改。",
+      "default": "16"
+    },
+    {
+      "name": "avoidCollisions",
+      "type": "boolean",
+      "default": "true",
+      "description": "空间不足时自动调整定位。"
+    },
+    {
+      "name": "collisionPadding",
+      "type": "number | Partial<Record<'top' | 'right' | 'bottom' | 'left', number>>",
+      "description": "自动避让时与可用区域边缘保持的距离，单位 px。可分别设置 top/right/bottom/left；不是内容 padding。",
+      "default": "8"
+    },
+    {
+      "name": "collisionBoundary",
+      "type": "'clippingAncestors' | Element | Element[]",
+      "description": "指定自动避让的边界元素；未指定时考虑滚动裁剪祖先和视口。仅在需要限制浮层活动区域时设置。"
+    },
+    {
+      "name": "strategy",
+      "type": "'absolute' | 'fixed'",
+      "default": "'absolute'",
+      "description": "定位方式。absolute 相对定位父级；fixed 相对视口，适用于固定布局。通常使用默认值。"
+    },
+    {
+      "name": "matchReferenceWidth",
+      "type": "boolean | 'min'",
+      "default": "false",
+      "description": "true：浮层宽度等于触发元素宽度；min：仅将触发元素宽度作为最小宽度；false：由内容和样式决定。"
+    },
+    {
+      "name": "hideWhenDetached",
+      "type": "boolean",
+      "default": "false",
+      "description": "触发元素滚出可见区域后隐藏浮层，常用于滚动列表。"
+    },
+    {
+      "name": "zIndex",
+      "type": "number",
+      "description": "浮层层级。"
+    },
+    {
+      "name": "getPopupContainer",
+      "type": "(triggerNode: HTMLElement | null) => HTMLElement",
+      "description": "返回浮层要插入的父元素，默认 body。改变 DOM 挂载位置，不改变以触发元素为定位参照的行为。"
+    },
+    {
+      "name": "hoverOpenDelay",
+      "type": "number",
+      "default": "0",
+      "description": "hover 打开延迟，单位 ms。"
+    },
+    {
+      "name": "hoverCloseDelay",
+      "type": "number",
+      "default": "80",
+      "description": "hover 关闭延迟，单位 ms。"
+    },
+    {
+      "name": "closeDelay",
+      "type": "number",
+      "default": "140",
+      "description": "关闭动画保留时长，单位 ms。"
+    },
+    {
+      "name": "lazyMount",
+      "type": "boolean",
+      "default": "true",
+      "description": "第一次打开前不创建内容。"
+    },
+    {
+      "name": "destroyOnHidden",
+      "type": "boolean",
+      "default": "false",
+      "description": "关闭动画结束后卸载内容；重新打开会创建新的内容子树。"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "禁用触发。"
+    },
+    {
+      "name": "dismiss",
+      "type": "{ escapeKey?: boolean; outsidePointer?: boolean }",
+      "default": "{ escapeKey: true, outsidePointer: true }",
+      "description": "配置 Escape 和外部指针关闭。"
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        },
+        {
+          "name": "info",
+          "type": "PopoverChangeInfo"
+        }
+      ],
+      "description": "请求改变打开状态；受控模式由调用方同步 open。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本使用",
+      "description": "展示触发元素与浮层内容。"
+    },
+    {
+      "id": "triggers",
+      "title": "触发方式",
+      "description": "hover、focus、click、context-menu 四种触发方式及组合。"
+    },
+    {
+      "id": "placement",
+      "title": "十二个方向",
+      "description": "四个方向分别支持 start、center、end 对齐。"
+    },
+    {
+      "id": "arrow",
+      "title": "箭头展示",
+      "description": "显示、隐藏箭头，并调整箭头位置。"
+    },
+    {
+      "id": "container",
+      "title": "挂载容器",
+      "description": "默认挂载到 body，也可挂载到指定容器。"
+    },
+    {
+      "id": "controlled",
+      "title": "手动控制与挂载策略",
+      "description": "受控与非受控开关、浮层内关闭，以及表单状态保留和销毁。验证提前挂载时，在独立预览的 Elements > body 中搜索 [data-slot=popover-content]：首次加载有 2 个，打开再关闭“提前挂载，关闭销毁”后剩 1 个。"
+    },
+    {
+      "id": "offsets",
+      "title": "偏移",
+      "description": "通过 sideOffset 与 alignOffset 调整位置。"
+    }
+  ],
+  "frameworks": {
+    "vue": {
+      "events": [
+        {
+          "name": "update:open",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "用于 v-model:open。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            },
+            {
+              "name": "info",
+              "type": "PopoverChangeInfo"
+            }
+          ],
+          "description": "开关请求。"
+        }
+      ]
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "开关请求。"
+        },
+        {
+          "name": "openChangeInfo",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "PopoverChangeInfo"
+            }
+          ],
+          "description": "开关原因。"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "PopoverPortal",
+      "slug": "popover-portal",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "把内容挂到指定容器，默认挂载到 body。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "container",
+          "type": "HTMLElement | null",
+          "description": "直接指定挂载元素。优先于根组件 getPopupContainer；都未指定时使用触发元素所属文档的 body。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "typeOverrides": {
+            "HTMLElement | null": "HTMLElement | RefObject<HTMLElement | null> | null"
+          }
+        }
+      }
+    },
+    {
+      "name": "PopoverTrigger",
+      "slug": "popover-trigger",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "连接触发元素；继承原生 button 的属性和事件，并将它们合并到实际触发元素。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件的内联样式。React/Solid 使用样式对象，Vue 支持对象或字符串，Svelte/Angular 使用原生 style 写法。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "PopoverContent",
+      "slug": "popover-content",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "浮层面板；继承原生 div 的属性和事件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件的内联样式。React/Solid 使用样式对象，Vue 支持对象或字符串，Svelte/Angular 使用原生 style 写法。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "PopoverArrow",
+      "slug": "popover-arrow",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "指向触发元素的装饰性箭头；继承原生 div 的属性和事件，位置随浮层自动计算。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件的内联样式。React/Solid 使用样式对象，Vue 支持对象或字符串，Svelte/Angular 使用原生 style 写法。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "PopoverHeader",
+      "slug": "popover-header",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "标题区域；继承原生 div 的属性和事件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件的内联样式。React/Solid 使用样式对象，Vue 支持对象或字符串，Svelte/Angular 使用原生 style 写法。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "PopoverTitle",
+      "slug": "popover-title",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "提供浮层可访问标题；继承原生 div 的属性和事件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件的内联样式。React/Solid 使用样式对象，Vue 支持对象或字符串，Svelte/Angular 使用原生 style 写法。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "PopoverDescription",
+      "slug": "popover-description",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "提供浮层可访问描述；继承原生 div 的属性和事件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/popover",
+        "vue": "@fex-design/vue/primitive/popover",
+        "solid": "@fex-design/solid/primitive/popover",
+        "svelte": "@fex-design/svelte/primitive/popover",
+        "angular": "@fex-design/angular/primitive/popover"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件的内联样式。React/Solid 使用样式对象，Vue 支持对象或字符串，Svelte/Angular 使用原生 style 写法。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--popover-background",
+      "description": "浮层面板及箭头的背景色，默认 var(--elevated-background)。"
+    },
+    {
+      "name": "--popover-foreground",
+      "description": "浮层面板的默认前景色，默认 var(--elevated-foreground)。"
+    },
+    {
+      "name": "--popover-border",
+      "description": "浮层面板及箭头的边框颜色，默认 var(--border)。"
+    },
+    {
+      "name": "--popover-radius",
+      "description": "浮层面板的圆角，默认 var(--radius-md)。"
+    },
+    {
+      "name": "--popover-shadow",
+      "description": "浮层面板的阴影，默认 var(--shadow-lg)。"
+    },
+    {
+      "name": "--popover-padding",
+      "description": "浮层面板的内容内边距，默认 12px。"
+    },
+    {
+      "name": "--popover-arrow-size",
+      "description": "箭头正方形旋转前的边长，默认 12px。"
+    },
+    {
+      "name": "--popover-title-gap",
+      "description": "标题区域与正文之间的距离，默认 8px。"
+    },
+    {
+      "name": "--popover-motion-duration",
+      "description": "浮层打开和关闭动画时长，默认 140ms。"
+    }
+  ]
+}

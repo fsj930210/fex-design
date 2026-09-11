@@ -7,20 +7,15 @@
         Show status messages with clear semantics.
       </p>
     </header>
-    <fex-card title="Primitive" description="Structure with icon, title, description, and action."
+    <div card title="Primitive" description="Structure with icon, title, description, and action."
       ><div class="grid gap-2">
         @for (variant of variants; track variant) {
-          <fex-alert [variant]="variant"
-            ><fex-info-icon /><fex-alert-title>{{ variant }}</fex-alert-title
-            ><fex-alert-description
+          <div alert [type]="variant"
+            ><info-icon /><div alertTitle>{{ variant }}</div><div alertDescription
               >The current task is in {{ variant }} state. Continue with the page
-              action.</fex-alert-description
-            ><fex-alert-action
-              ><fex-badge variant="outline">New</fex-badge></fex-alert-action
-            ></fex-alert
-          >
+              action.</div><div alertAction
+              ><badge variant="outlined">New</badge></div></div>
         }
-      </div></fex-card
-    >
+      </div></div>
   </div>
 </main>

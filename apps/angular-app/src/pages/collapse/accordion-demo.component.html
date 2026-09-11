@@ -1,4 +1,4 @@
-<fex-card title="Accordion" description="Set multiple=false to keep at most one panel expanded.">
+<div card title="Accordion" description="Set multiple=false to keep at most one panel expanded.">
   <div fexCollapse [multiple]="false" [collapsible]="false" [defaultExpandedKeys]="['profile']">
     @for (item of items; track item.value) {
       <div [fexCollapseItem]="item.value">
@@ -12,4 +12,4 @@
       </div>
     }
   </div>
-</fex-card>
+</div>

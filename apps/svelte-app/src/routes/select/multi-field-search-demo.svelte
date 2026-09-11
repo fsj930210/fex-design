@@ -1,1 +1,13 @@
-<script lang="ts">import{defaultSelectFilterOption}from'@fex-design/core/select/filter-options';import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Multi-field search" description="Search label, searchText and keywords; try google or meta." options={frameworkOptions} showSearch filterOption={defaultSelectFilterOption}/>
+<script lang="ts">
+  import { defaultSelectFilterOption } from "@fex-design/core/select/filter-options";
+  import { frameworkOptions } from "./data";
+  import Demo from "./simple-demo.svelte";
+</script>
+
+<Demo
+  title="Multi-field search"
+  description="Search label, searchText and keywords; try google or meta."
+  options={frameworkOptions}
+  showSearch
+  filterOption={defaultSelectFilterOption}
+/>

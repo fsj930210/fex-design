@@ -1,2 +1,22 @@
-<script lang="ts">import { Avatar, AvatarGroup } from '@fex-design/svelte/ui/avatar'</script>
-<div class="flex items-center gap-8"><div dir="ltr"><p class="mb-2 text-xs text-muted-foreground">LTR · 中文示例</p><AvatarGroup><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar></AvatarGroup></div><div dir="rtl"><p class="mb-2 text-xs text-muted-foreground">RTL · مثال عربي</p><AvatarGroup><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar src="https://github.com/shadcn.png">FX</Avatar></AvatarGroup></div></div>
+<script lang="ts">
+  import { Avatar, AvatarGroup } from "@fex-design/svelte/ui/avatar";
+</script>
+
+<div class="flex items-center gap-8">
+  <div dir="ltr">
+    <p class="mb-2 text-xs text-muted-foreground">LTR · 中文示例</p>
+    <AvatarGroup
+      ><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar
+        src="https://github.com/shadcn.png">FX</Avatar
+      ><Avatar src="https://github.com/shadcn.png">FX</Avatar></AvatarGroup
+    >
+  </div>
+  <div dir="rtl">
+    <p class="mb-2 text-xs text-muted-foreground">RTL · مثال عربي</p>
+    <AvatarGroup
+      ><Avatar src="https://github.com/shadcn.png">FX</Avatar><Avatar
+        src="https://github.com/shadcn.png">FX</Avatar
+      ><Avatar src="https://github.com/shadcn.png">FX</Avatar></AvatarGroup
+    >
+  </div>
+</div>

@@ -14,11 +14,13 @@ import {
 } from '@fex-design/styles/alert'
 import { cn } from '@fex/utils'
 import { useState, type ComponentProps, type CSSProperties, type ReactNode } from 'react'
-import { Alert as PrimitiveAlert, type AlertProps as PrimitiveAlertProps } from '../../primitive/alert/alert'
+import {
+  Alert as PrimitiveAlert,
+  type AlertProps as PrimitiveAlertProps,
+} from '../../primitive/alert/alert'
 
 export interface AlertProps
-  extends Omit<PrimitiveAlertProps, 'title'>,
-    AlertUiOptions<ReactNode, CSSProperties> {
+  extends Omit<PrimitiveAlertProps, 'title'>, AlertUiOptions<ReactNode, CSSProperties> {
   onClose?: ComponentProps<'button'>['onClick']
 }
 
@@ -68,11 +70,39 @@ export function Alert({
           {icon ?? <BuiltinIcon />}
         </span>
       ) : null}
-      <div data-slot="alert-content" className={cn(alertContentClassName, classNames?.content)} style={styles?.content}>
-        {title ? <div data-slot="alert-title" className={cn(alertTitleClassName, classNames?.title)} style={styles?.title}>{title}</div> : null}
-        {description || children ? <div data-slot="alert-description" className={cn(alertDescriptionClassName, classNames?.description)} style={styles?.description}>{description ?? children}</div> : null}
+      <div
+        data-slot="alert-content"
+        className={cn(alertContentClassName, classNames?.content)}
+        style={styles?.content}
+      >
+        {title ? (
+          <div
+            data-slot="alert-title"
+            className={cn(alertTitleClassName, classNames?.title)}
+            style={styles?.title}
+          >
+            {title}
+          </div>
+        ) : null}
+        {description || children ? (
+          <div
+            data-slot="alert-description"
+            className={cn(alertDescriptionClassName, classNames?.description)}
+            style={styles?.description}
+          >
+            {description ?? children}
+          </div>
+        ) : null}
       </div>
-      {action ? <div data-slot="alert-action" className={cn(alertActionClassName, classNames?.action)} style={styles?.action}>{action}</div> : null}
+      {action ? (
+        <div
+          data-slot="alert-action"
+          className={cn(alertActionClassName, classNames?.action)}
+          style={styles?.action}
+        >
+          {action}
+        </div>
+      ) : null}
       {closable ? (
         <button
           type="button"
@@ -80,7 +110,10 @@ export function Alert({
           data-slot="alert-close"
           className={cn(alertCloseClassName, classNames?.close)}
           style={styles?.close}
-          onClick={(event) => { onClose?.(event); if (!event.defaultPrevented) setVisible(false) }}
+          onClick={(event) => {
+            onClose?.(event)
+            if (!event.defaultPrevented) setVisible(false)
+          }}
         >
           {closeIcon ?? <XIcon />}
         </button>

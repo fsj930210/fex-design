@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { MinusIcon } from '@fex-design/angular/icon/minus'
 import { PlusIcon } from '@fex-design/angular/icon/plus'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-input-number-custom-logic-demo',
   standalone: true,

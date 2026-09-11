@@ -1,7 +1,8 @@
 import { createStore } from '../../store/create-store'
 import type { OverlayPhase } from '../types'
+import type { FloatingMountOptions } from './types'
 
-export interface PresenceOptions {
+export interface PresenceOptions extends FloatingMountOptions {
   open?: boolean | undefined
   forceMount?: boolean | undefined
   closeDelay?: number | undefined
@@ -25,7 +26,7 @@ function getSnapshotFromOptions(options: PresenceOptions): PresenceSnapshot {
   return {
     // forceMount 用于动画库或用户自定义渲染：即使关闭也保留 DOM。
     // mounted 只回答“DOM 是否应该存在”，phase 才回答“现在处于哪个过渡阶段”。
-    mounted: Boolean(options.forceMount || open),
+    mounted: Boolean(options.forceMount || open || options.lazyMount === false),
     phase: open ? 'open' : 'closed',
   }
 }
@@ -48,7 +49,16 @@ export function createPresence(options: PresenceOptions = {}): Presence {
   // presenceVersion 用于丢弃过期的异步阶段切换。
   // 例如刚进入 opening，用户马上关闭；如果没有版本校验，opening 的 setTimeout 可能把 phase 改回 open。
   let presenceVersion = 0
+  let hasOpened = options.open ?? false
   const store = createStore<PresenceSnapshot>(getSnapshotFromOptions(currentOptions))
+
+  function mountedWhenClosed() {
+    if (currentOptions.forceMount) return true
+    if (!hasOpened) return currentOptions.lazyMount === false
+    // Existing overlay consumers retain their unmount-on-close default. Popover
+    // supplies destroyOnHidden=false explicitly through its shared defaults.
+    return currentOptions.destroyOnHidden === false
+  }
 
   function clearCloseTimer() {
     if (closeTimer) {
@@ -70,7 +80,7 @@ export function createPresence(options: PresenceOptions = {}): Presence {
     clearCloseTimer()
     clearOpenTimer()
     setPresenceSnapshot(store, {
-      mounted: Boolean(currentOptions.forceMount),
+      mounted: mountedWhenClosed(),
       phase: 'closed',
     })
   }
@@ -82,6 +92,7 @@ export function createPresence(options: PresenceOptions = {}): Presence {
     const open = currentOptions.open ?? false
 
     if (open) {
+      hasOpened = true
       // 打开时必须取消关闭定时器，否则“关闭延迟尚未结束又重新打开”的场景会被旧 timer 关闭。
       clearCloseTimer()
       const nextPhase: OverlayPhase = snapshot.phase === 'closed' ? 'opening' : 'open'
@@ -115,7 +126,7 @@ export function createPresence(options: PresenceOptions = {}): Presence {
       return
     }
 
-    setPresenceSnapshot(store, { mounted: Boolean(currentOptions.forceMount), phase: 'closed' })
+    setPresenceSnapshot(store, { mounted: mountedWhenClosed(), phase: 'closed' })
   }
 
   return {

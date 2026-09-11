@@ -53,18 +53,19 @@ export class Tag {
     const color = this.color()
     return isTagPresetColor(color) ? color : undefined
   })
-  protected readonly dataColor = computed(() =>
-    this.presetColor() ?? (this.color() ? 'custom' : null),
+  protected readonly dataColor = computed(
+    () => this.presetColor() ?? (this.color() ? 'custom' : null),
   )
   protected readonly customColor = computed(() =>
     this.color() && !this.presetColor() ? this.color() : null,
   )
-  protected readonly hostClassName = createHostClassName(() =>
-    `${tagClassName({
-      variant: this.variant(),
-      color: this.presetColor(),
-      size: this.size(),
-    })} ${this.classNames().root ?? ''}`,
+  protected readonly hostClassName = createHostClassName(
+    () =>
+      `${tagClassName({
+        variant: this.variant(),
+        color: this.presetColor(),
+        size: this.size(),
+      })} ${this.classNames().root ?? ''}`,
   )
   protected readonly closeClassName = computed(
     () => `${tagActionClassName} ${this.classNames().close ?? ''}`,

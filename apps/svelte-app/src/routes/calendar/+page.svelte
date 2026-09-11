@@ -5,76 +5,82 @@
     getCalendarValueKey,
     type CalendarCell as CalendarCellModel,
     type CalendarValue,
-  } from '@fex-design/core/calendar'
-  import CalendarRoot from '@fex-design/svelte/primitive/calendar'
-  import CalendarCell from '@fex-design/svelte/primitive/calendar-cell'
-  import CalendarGrid from '@fex-design/svelte/primitive/calendar-grid'
-  import CalendarHeader from '@fex-design/svelte/primitive/calendar-header'
-  import CalendarNavigationButton from '@fex-design/svelte/primitive/calendar-navigation-button'
-  import CalendarWeekHeader from '@fex-design/svelte/primitive/calendar-week-header'
-  import Card from '@fex-design/svelte/ui/card'
-  import type { Snippet } from 'svelte'
+  } from "@fex-design/core/calendar";
+  import CalendarRoot from "@fex-design/svelte/primitive/calendar";
+  import CalendarCell from "@fex-design/svelte/primitive/calendar-cell";
+  import CalendarGrid from "@fex-design/svelte/primitive/calendar-grid";
+  import CalendarHeader from "@fex-design/svelte/primitive/calendar-header";
+  import CalendarNavigationButton from "@fex-design/svelte/primitive/calendar-navigation-button";
+  import CalendarWeekHeader from "@fex-design/svelte/primitive/calendar-week-header";
+  import Card from "@fex-design/svelte/ui/card";
+  import type { Snippet } from "svelte";
 
-  const july = createCalendarDate(2026, 7, 1)
-  const today = createCalendarDate(2026, 7, 11)
-  const minDate = createCalendarDate(2026, 7, 5)
-  const maxDate = createCalendarDate(2026, 7, 24)
-  const minYearPanelDate = createCalendarDate(2024, 1, 1)
+  const july = createCalendarDate(2026, 7, 1);
+  const today = createCalendarDate(2026, 7, 11);
+  const minDate = createCalendarDate(2026, 7, 5);
+  const maxDate = createCalendarDate(2026, 7, 24);
+  const minYearPanelDate = createCalendarDate(2024, 1, 1);
 
   const scheduleMap = new Map([
-    ['date:2026-07-08', '评审'],
-    ['date:2026-07-11', '发布'],
-    ['date:2026-07-18', '值班'],
-  ])
+    ["date:2026-07-08", "评审"],
+    ["date:2026-07-11", "发布"],
+    ["date:2026-07-18", "值班"],
+  ]);
 
-  let dateValue: CalendarValue | null = $state(today)
-  let weekValue: CalendarValue | null = $state(null)
-  let monthValue: CalendarValue | null = $state(null)
-  let quarterValue: CalendarValue | null = $state(null)
-  let yearValue: CalendarValue | null = $state(null)
+  let dateValue: CalendarValue | null = $state(today);
+  let weekValue: CalendarValue | null = $state(null);
+  let monthValue: CalendarValue | null = $state(null);
+  let quarterValue: CalendarValue | null = $state(null);
+  let yearValue: CalendarValue | null = $state(null);
 
   function getCellClassName(cell: CalendarCellModel) {
     return [
-      'flex min-h-14 items-center justify-center rounded-md p-1 text-center text-sm',
-      cell.state.disabled ? 'cursor-not-allowed opacity-40' : '',
-      cell.state.outside && !cell.state.selected ? 'text-muted-foreground' : 'text-foreground',
-    ]
+      "flex min-h-14 items-center justify-center rounded-md p-1 text-center text-sm",
+      cell.state.disabled ? "cursor-not-allowed opacity-40" : "",
+      cell.state.outside && !cell.state.selected
+        ? "text-muted-foreground"
+        : "text-foreground",
+    ];
   }
 
   function getContentClassName(cell: CalendarCellModel) {
     return [
-      'inline-flex h-16 w-20 flex-col items-center justify-center rounded-md border px-1.5 py-1 transition-colors',
-      cell.state.selected ? 'bg-foreground text-background shadow-sm' : '',
-      cell.state.today && !cell.state.selected ? 'border-primary' : 'border-transparent',
-      !cell.state.disabled && !cell.state.selected ? 'hover:bg-muted-background' : '',
-    ]
+      "inline-flex h-16 w-20 flex-col items-center justify-center rounded-md border px-1.5 py-1 transition-colors",
+      cell.state.selected ? "bg-foreground text-background shadow-sm" : "",
+      cell.state.today && !cell.state.selected
+        ? "border-primary"
+        : "border-transparent",
+      !cell.state.disabled && !cell.state.selected
+        ? "hover:bg-muted-background"
+        : "",
+    ];
   }
 
   function getDateLabelClassName(cell: CalendarCellModel) {
-    return 'font-medium'
+    return "font-medium";
   }
 
   function getScheduleLabel(cell: CalendarCellModel) {
-    return scheduleMap.get(getCalendarValueKey(cell.value))
+    return scheduleMap.get(getCalendarValueKey(cell.value));
   }
 
   type UnitDemo = {
-    title: 'Month' | 'Quarter' | 'Year'
-    panel: 'month' | 'quarter' | 'year'
-    granularity: 'month' | 'quarter' | 'year'
-  }
+    title: "Month" | "Quarter" | "Year";
+    panel: "month" | "quarter" | "year";
+    granularity: "month" | "quarter" | "year";
+  };
 
   const unitDemos: UnitDemo[] = [
-    { title: 'Month', panel: 'month', granularity: 'month' },
-    { title: 'Quarter', panel: 'quarter', granularity: 'quarter' },
-    { title: 'Year', panel: 'year', granularity: 'year' },
-  ]
+    { title: "Month", panel: "month", granularity: "month" },
+    { title: "Quarter", panel: "quarter", granularity: "quarter" },
+    { title: "Year", panel: "year", granularity: "year" },
+  ];
 
   type DemoSectionProps = {
-    title: string
-    description: string
-    children: Snippet
-  }
+    title: string;
+    description: string;
+    children: Snippet;
+  };
 </script>
 
 {#snippet DemoSection({ title, description, children }: DemoSectionProps)}
@@ -88,14 +94,36 @@
     {#snippet children({ viewDate, panel })}
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <div class="text-sm font-medium text-foreground">{viewDate.year} 年 {viewDate.month} 月</div>
+          <div class="text-sm font-medium text-foreground">
+            {viewDate.year} 年 {viewDate.month} 月
+          </div>
           <div class="text-xs text-muted-foreground">panel: {panel}</div>
         </div>
         <div class="flex items-center gap-1.5">
-          <CalendarNavigationButton action="previous-year" aria-label="上一年" class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background">«</CalendarNavigationButton>
-          <CalendarNavigationButton action="previous-month" aria-label="上一月" class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background">‹</CalendarNavigationButton>
-          <CalendarNavigationButton action="next-month" aria-label="下一月" class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background">›</CalendarNavigationButton>
-          <CalendarNavigationButton action="next-year" aria-label="下一年" class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background">»</CalendarNavigationButton>
+          <CalendarNavigationButton
+            action="previous-year"
+            aria-label="上一年"
+            class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background"
+            >«</CalendarNavigationButton
+          >
+          <CalendarNavigationButton
+            action="previous-month"
+            aria-label="上一月"
+            class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background"
+            >‹</CalendarNavigationButton
+          >
+          <CalendarNavigationButton
+            action="next-month"
+            aria-label="下一月"
+            class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background"
+            >›</CalendarNavigationButton
+          >
+          <CalendarNavigationButton
+            action="next-year"
+            aria-label="下一年"
+            class="size-8 rounded-md border border-border text-sm hover:border-focus hover:bg-muted-background"
+            >»</CalendarNavigationButton
+          >
         </div>
       </div>
     {/snippet}
@@ -105,19 +133,36 @@
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
   <div class="mx-auto w-full max-w-5xl space-y-4">
     <header class="space-y-4">
-      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</a>
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/"
+        >返回首页</a
+      >
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Calendar</h1>
         <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-          基于 Temporal 的 Calendar core 和 Svelte primitive。当前只展示基础网格、粒度、禁用日期和自定义 cell 内容，不包含 ui 封装。
+          基于 Temporal 的 Calendar core 和 Svelte
+          primitive。当前只展示基础网格、粒度、禁用日期和自定义 cell
+          内容，不包含 ui 封装。
         </p>
       </div>
     </header>
 
     <div class="space-y-4">
-      {@render DemoSection({ title: 'Date', description: '日期面板支持受控值、禁用区间和自定义单元格内容。', children: dateDemo })}
-      {@render DemoSection({ title: 'Week', description: '周粒度会把同一行日期映射到同一个 week value，供 WeekPicker 复用。', children: weekDemo })}
-      {@render DemoSection({ title: 'Month / Quarter / Year', description: '月份、季度、年份作为独立粒度，不用日期值冒充。', children: unitDemo })}
+      {@render DemoSection({
+        title: "Date",
+        description: "日期面板支持受控值、禁用区间和自定义单元格内容。",
+        children: dateDemo,
+      })}
+      {@render DemoSection({
+        title: "Week",
+        description:
+          "周粒度会把同一行日期映射到同一个 week value，供 WeekPicker 复用。",
+        children: weekDemo,
+      })}
+      {@render DemoSection({
+        title: "Month / Quarter / Year",
+        description: "月份、季度、年份作为独立粒度，不用日期值冒充。",
+        children: unitDemo,
+      })}
     </div>
   </div>
 </main>
@@ -132,27 +177,45 @@
     onValueChange={(value) => (dateValue = value)}
   >
     {@render DemoHeader()}
-    <CalendarWeekHeader class="mb-1.5 grid grid-cols-7 gap-1.5 text-center text-xs text-muted-foreground" />
-    <CalendarGrid class="grid gap-1.5 [&_[data-slot=calendar-row]]:grid [&_[data-slot=calendar-row]]:grid-cols-7 [&_[data-slot=calendar-row]]:gap-1.5">
+    <CalendarWeekHeader
+      class="mb-1.5 grid grid-cols-7 gap-1.5 text-center text-xs text-muted-foreground"
+    />
+    <CalendarGrid
+      class="grid gap-1.5 [&_[data-slot=calendar-row]]:grid [&_[data-slot=calendar-row]]:grid-cols-7 [&_[data-slot=calendar-row]]:gap-1.5"
+    >
       {#snippet children(cell)}
         <CalendarCell {cell} class={getCellClassName(cell)}>
           <span class={getContentClassName(cell)}>
             <span class={getDateLabelClassName(cell)}>{cell.label}</span>
             {#if getScheduleLabel(cell)}
-              <span class="mt-1 block h-4 text-xs leading-4 opacity-80">{getScheduleLabel(cell)}</span>
+              <span class="mt-1 block h-4 text-xs leading-4 opacity-80"
+                >{getScheduleLabel(cell)}</span
+              >
             {/if}
           </span>
         </CalendarCell>
       {/snippet}
     </CalendarGrid>
-    <p class="mt-2 text-sm text-muted-foreground">当前值：{dateValue ? getCalendarValueKey(dateValue) : '未选择'}</p>
+    <p class="mt-2 text-sm text-muted-foreground">
+      当前值：{dateValue ? getCalendarValueKey(dateValue) : "未选择"}
+    </p>
   </CalendarRoot>
 {/snippet}
 
 {#snippet weekDemo()}
-  <CalendarRoot granularity="week" defaultViewDate={july} {today} value={weekValue} onValueChange={(value) => (weekValue = value)}>
-    <CalendarWeekHeader class="mb-1.5 grid grid-cols-7 gap-1.5 text-center text-xs text-muted-foreground" />
-    <CalendarGrid class="grid gap-1.5 [&_[data-slot=calendar-row]]:grid [&_[data-slot=calendar-row]]:grid-cols-7 [&_[data-slot=calendar-row]]:gap-1.5">
+  <CalendarRoot
+    granularity="week"
+    defaultViewDate={july}
+    {today}
+    value={weekValue}
+    onValueChange={(value) => (weekValue = value)}
+  >
+    <CalendarWeekHeader
+      class="mb-1.5 grid grid-cols-7 gap-1.5 text-center text-xs text-muted-foreground"
+    />
+    <CalendarGrid
+      class="grid gap-1.5 [&_[data-slot=calendar-row]]:grid [&_[data-slot=calendar-row]]:grid-cols-7 [&_[data-slot=calendar-row]]:gap-1.5"
+    >
       {#snippet children(cell)}
         <CalendarCell {cell} class={getCellClassName(cell)}>
           <span class={getContentClassName(cell)}>
@@ -161,7 +224,9 @@
         </CalendarCell>
       {/snippet}
     </CalendarGrid>
-    <p class="mt-2 text-sm text-muted-foreground">当前周：{weekValue ? getCalendarValueKey(weekValue) : '未选择'}</p>
+    <p class="mt-2 text-sm text-muted-foreground">
+      当前周：{weekValue ? getCalendarValueKey(weekValue) : "未选择"}
+    </p>
   </CalendarRoot>
 {/snippet}
 
@@ -174,15 +239,23 @@
           defaultViewDate={july}
           defaultPanel={item.panel}
           granularity={item.granularity}
-          value={item.title === 'Month' ? monthValue : item.title === 'Quarter' ? quarterValue : yearValue}
-          disabledDate={(date) => item.granularity === 'year' && compareCalendarDate(date, minYearPanelDate) < 0}
+          value={item.title === "Month"
+            ? monthValue
+            : item.title === "Quarter"
+              ? quarterValue
+              : yearValue}
+          disabledDate={(date) =>
+            item.granularity === "year" &&
+            compareCalendarDate(date, minYearPanelDate) < 0}
           onValueChange={(value) => {
-            if (item.title === 'Month') monthValue = value
-            if (item.title === 'Quarter') quarterValue = value
-            if (item.title === 'Year') yearValue = value
+            if (item.title === "Month") monthValue = value;
+            if (item.title === "Quarter") quarterValue = value;
+            if (item.title === "Year") yearValue = value;
           }}
         >
-          <CalendarGrid class="grid gap-1.5 [&_[data-slot=calendar-row]]:grid [&_[data-slot=calendar-row]]:grid-cols-4 [&_[data-slot=calendar-row]]:gap-1.5">
+          <CalendarGrid
+            class="grid gap-1.5 [&_[data-slot=calendar-row]]:grid [&_[data-slot=calendar-row]]:grid-cols-4 [&_[data-slot=calendar-row]]:gap-1.5"
+          >
             {#snippet children(cell)}
               <CalendarCell {cell} class={getCellClassName(cell)}>
                 <span class={getContentClassName(cell)}>
@@ -193,7 +266,13 @@
           </CalendarGrid>
         </CalendarRoot>
         <p class="mt-2 text-xs text-muted-foreground">
-          {item.title === 'Month' && monthValue ? getCalendarValueKey(monthValue) : item.title === 'Quarter' && quarterValue ? getCalendarValueKey(quarterValue) : item.title === 'Year' && yearValue ? getCalendarValueKey(yearValue) : '未选择'}
+          {item.title === "Month" && monthValue
+            ? getCalendarValueKey(monthValue)
+            : item.title === "Quarter" && quarterValue
+              ? getCalendarValueKey(quarterValue)
+              : item.title === "Year" && yearValue
+                ? getCalendarValueKey(yearValue)
+                : "未选择"}
         </p>
       </div>
     {/each}

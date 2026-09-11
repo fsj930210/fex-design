@@ -1,10 +1,18 @@
 <script lang="ts">
-  import { dialogDescriptionClassName } from '@fex-design/styles/dialog'
-  import { cn } from '@fex/utils'
-  import { getContext } from 'svelte'
-  import type { Snippet } from 'svelte'
-  import { dialogContextKey, type DialogContext } from './dialog-context'
-  let { children, class: className }: { children?: Snippet; class?: string } = $props()
-  const { descriptionId } = getContext<DialogContext>(dialogContextKey)
+  import { dialogDescriptionClassName } from "@fex-design/styles/dialog";
+  import { cn } from "@fex/utils";
+  import { getContext } from "svelte";
+  import type { Snippet } from "svelte";
+  import { dialogContextKey, type DialogContext } from "./dialog-context";
+  let { children, class: className }: { children?: Snippet; class?: string } =
+    $props();
+  const { descriptionId } = getContext<DialogContext>(dialogContextKey);
 </script>
-<p id={descriptionId} data-slot="dialog-description" class={cn(dialogDescriptionClassName, className)}>{@render children?.()}</p>
+
+<p
+  id={descriptionId}
+  data-slot="dialog-description"
+  class={cn(dialogDescriptionClassName, className)}
+>
+  {@render children?.()}
+</p>

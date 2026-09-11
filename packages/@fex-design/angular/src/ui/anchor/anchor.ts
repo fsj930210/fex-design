@@ -1,20 +1,42 @@
 import { NgTemplateOutlet } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core'
-import type { AnchorClassNames, AnchorItem as AnchorItemData, AnchorStyles } from '@fex-design/core/anchor/types'
+import type {
+  AnchorClassNames,
+  AnchorItem as AnchorItemData,
+  AnchorStyles,
+} from '@fex-design/core/anchor/types'
 import { anchorRootClassName } from '@fex-design/styles/anchor'
 import { cn } from '@fex/utils'
-import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '../../primitive/anchor/anchor'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '../../primitive/anchor/anchor'
 import { createHostClassName } from '../../signals/host-class'
 
 @Component({
   selector: 'nav[anchor]',
   standalone: true,
   imports: [AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, NgTemplateOutlet],
-  hostDirectives: [{
-    directive: AnchorRoot,
-    inputs: ['activeKeys', 'defaultActiveKeys', 'activeMode', 'orientation', 'container', 'targetOffset', 'threshold', 'behavior'],
-    outputs: ['change'],
-  }],
+  hostDirectives: [
+    {
+      directive: AnchorRoot,
+      inputs: [
+        'activeKeys',
+        'defaultActiveKeys',
+        'activeMode',
+        'orientation',
+        'container',
+        'targetOffset',
+        'threshold',
+        'behavior',
+      ],
+      outputs: ['change'],
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './anchor.html',
   host: { '[class]': 'hostClassName()', '[style]': 'styles().root' },

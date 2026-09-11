@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 import { RouterLink } from '@angular/router'
 import { CheckboxRoot } from '@fex-design/angular/primitive/checkbox'
 import { Checkbox, CheckboxGroupUi } from '@fex-design/angular/ui/checkbox'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 const options = [
   { label: 'Read records', value: 'read' },

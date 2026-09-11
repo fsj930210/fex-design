@@ -8,33 +8,40 @@
     type CalendarRange,
     type CalendarValue,
     type CalendarWeekday,
-  } from '@fex-design/core/calendar'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import { setContext, untrack } from 'svelte'
-  import { calendarContextKey, type CalendarContextValue } from './context'
+  } from "@fex-design/core/calendar";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import { setContext, untrack } from "svelte";
+  import { calendarContextKey, type CalendarContextValue } from "./context";
 
-  interface CalendarRootProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-    value?: CalendarValue | null | undefined
-    values?: readonly CalendarValue[] | undefined
-    range?: CalendarRange | undefined
-    defaultValue?: CalendarValue | null | undefined
-    viewDate?: CalendarDate | undefined
-    defaultViewDate?: CalendarDate | undefined
-    panel?: CalendarPanel | undefined
-    defaultPanel?: CalendarPanel | undefined
-    granularity?: CalendarGranularity | undefined
-    weekStartsOn?: CalendarWeekday | undefined
-    today?: CalendarDate | undefined
-    min?: CalendarDate | undefined
-    max?: CalendarDate | undefined
-    disabledDate?: ((date: CalendarDate) => boolean) | undefined
-    children?: Snippet | undefined
-    onValueChange?: ((value: CalendarValue) => void) | undefined
-    onCellSelect?: ((cell: import('@fex-design/core/calendar').CalendarCell) => void) | undefined
-    onCellHover?: ((cell: import('@fex-design/core/calendar').CalendarCell) => void) | undefined
-    onViewDateChange?: ((viewDate: CalendarDate) => void) | undefined
-    onPanelChange?: ((panel: CalendarPanel) => void) | undefined
+  interface CalendarRootProps extends Omit<
+    HTMLAttributes<HTMLDivElement>,
+    "children"
+  > {
+    value?: CalendarValue | null | undefined;
+    values?: readonly CalendarValue[] | undefined;
+    range?: CalendarRange | undefined;
+    defaultValue?: CalendarValue | null | undefined;
+    viewDate?: CalendarDate | undefined;
+    defaultViewDate?: CalendarDate | undefined;
+    panel?: CalendarPanel | undefined;
+    defaultPanel?: CalendarPanel | undefined;
+    granularity?: CalendarGranularity | undefined;
+    weekStartsOn?: CalendarWeekday | undefined;
+    today?: CalendarDate | undefined;
+    min?: CalendarDate | undefined;
+    max?: CalendarDate | undefined;
+    disabledDate?: ((date: CalendarDate) => boolean) | undefined;
+    children?: Snippet | undefined;
+    onValueChange?: ((value: CalendarValue) => void) | undefined;
+    onCellSelect?:
+      | ((cell: import("@fex-design/core/calendar").CalendarCell) => void)
+      | undefined;
+    onCellHover?:
+      | ((cell: import("@fex-design/core/calendar").CalendarCell) => void)
+      | undefined;
+    onViewDateChange?: ((viewDate: CalendarDate) => void) | undefined;
+    onPanelChange?: ((panel: CalendarPanel) => void) | undefined;
   }
 
   let {
@@ -45,8 +52,8 @@
     viewDate,
     defaultViewDate = getCalendarToday(),
     panel,
-    defaultPanel = 'date',
-    granularity = 'date',
+    defaultPanel = "date",
+    granularity = "date",
     weekStartsOn = 0,
     today,
     min,
@@ -59,15 +66,15 @@
     onViewDateChange,
     onPanelChange,
     ...rest
-  }: CalendarRootProps = $props()
+  }: CalendarRootProps = $props();
 
-  let internalValue: CalendarValue | null = $state(untrack(() => defaultValue))
-  let internalViewDate: CalendarDate = $state(untrack(() => defaultViewDate))
-  let internalPanel: CalendarPanel = $state(untrack(() => defaultPanel))
-  let hoveredRowIndex: number | null = $state(null)
-  const currentValue: CalendarValue | null = $derived(value ?? internalValue)
-  const currentViewDate: CalendarDate = $derived(viewDate ?? internalViewDate)
-  const currentPanel: CalendarPanel = $derived(panel ?? internalPanel)
+  let internalValue: CalendarValue | null = $state(untrack(() => defaultValue));
+  let internalViewDate: CalendarDate = $state(untrack(() => defaultViewDate));
+  let internalPanel: CalendarPanel = $state(untrack(() => defaultPanel));
+  let hoveredRowIndex: number | null = $state(null);
+  const currentValue: CalendarValue | null = $derived(value ?? internalValue);
+  const currentViewDate: CalendarDate = $derived(viewDate ?? internalViewDate);
+  const currentPanel: CalendarPanel = $derived(panel ?? internalPanel);
   const grid = $derived(
     createCalendarGrid({
       viewDate: currentViewDate,
@@ -82,16 +89,16 @@
       ...(values ? { values } : {}),
       ...(range ? { range } : {}),
     }),
-  )
+  );
 
   function setViewDate(nextViewDate: CalendarDate) {
-    if (viewDate === undefined) internalViewDate = nextViewDate
-    onViewDateChange?.(nextViewDate)
+    if (viewDate === undefined) internalViewDate = nextViewDate;
+    onViewDateChange?.(nextViewDate);
   }
 
   function setPanel(nextPanel: CalendarPanel) {
-    if (panel === undefined) internalPanel = nextPanel
-    onPanelChange?.(nextPanel)
+    if (panel === undefined) internalPanel = nextPanel;
+    onPanelChange?.(nextPanel);
   }
 
   const context: CalendarContextValue = {
@@ -105,24 +112,30 @@
     setViewDate,
     setPanel,
     selectCell: (cell) => {
-      if (cell.state.disabled) return
-      onCellSelect?.(cell)
-      if (value === undefined) internalValue = cell.value
-      onValueChange?.(cell.value)
+      if (cell.state.disabled) return;
+      onCellSelect?.(cell);
+      if (value === undefined) internalValue = cell.value;
+      onValueChange?.(cell.value);
     },
     hoverCell: (cell) => {
-      if (cell.state.disabled) return
-      hoveredRowIndex = cell.rowIndex
-      onCellHover?.(cell)
+      if (cell.state.disabled) return;
+      hoveredRowIndex = cell.rowIndex;
+      onCellHover?.(cell);
     },
     clearHoveredRow: () => {
-      hoveredRowIndex = null
+      hoveredRowIndex = null;
     },
-  }
+  };
 
-  setContext(calendarContextKey, context)
+  setContext(calendarContextKey, context);
 </script>
 
-<div {...rest} data-slot="calendar-root" data-panel={currentPanel} data-granularity={granularity} onmouseleave={() => hoveredRowIndex = null}>
+<div
+  {...rest}
+  data-slot="calendar-root"
+  data-panel={currentPanel}
+  data-granularity={granularity}
+  onmouseleave={() => (hoveredRowIndex = null)}
+>
   {@render children?.()}
 </div>

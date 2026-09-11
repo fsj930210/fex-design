@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte'
-  import { useMentions } from './context'
+  import type { Snippet } from "svelte";
+  import { useMentions } from "./context";
 
-  let { prefix, children }: { prefix: string; children?: Snippet } = $props()
-  const mentions = useMentions('MentionsPrefixCase')
+  let { prefix, children }: { prefix: string; children?: Snippet } = $props();
+  const mentions = useMentions("MentionsPrefixCase");
 </script>
 
 {#if mentions.snapshot().query?.prefix === prefix}

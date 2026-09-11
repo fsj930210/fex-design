@@ -1,4 +1,5 @@
-<div inputRoot
+<div
+  inputRoot
   [value]="draft()"
   [disabled]="disabled"
   [readOnly]="readOnly"
@@ -51,4 +52,4 @@
     }
   </span>
 </div>
-    [attr.aria-invalid]="invalid || status === 'error' || null"
+[attr.aria-invalid]="invalid || status === 'error' || null"

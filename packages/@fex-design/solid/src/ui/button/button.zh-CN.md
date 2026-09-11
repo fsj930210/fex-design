@@ -29,7 +29,7 @@
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------- |
 | variant          | 'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'                                                             | 'outlined'    | 按钮结构变体。                         |
 | color            | 'primary' \| 'danger' \| 'warning' \| 'success' \| 'info'                                                                     | —             | 可选语义配色；未设置时为默认白底按钮。 |
-| size             | 'sm' \| 'md' \| 'lg' \| 'icon-sm' \| 'icon-md' \| 'icon-lg'                       | 'md'          | 控件尺寸。                             |
+| size             | 'sm' \| 'md' \| 'lg' \| 'icon-sm' \| 'icon-md' \| 'icon-lg'                                                                   | 'md'          | 控件尺寸。                             |
 | effect           | 'expand-icon' \| 'ring-hover' \| 'shine-hover' \| 'gooey-start' \| 'gooey-end' \| 'underline' \| 'hover-underline' \| 'press' | undefined     | 可选交互动效；默认不启用。             |
 | icon             | 框架内容类型                                                                                                                  | `undefined`   | 普通状态图标。                         |
 | iconPlacement    | 'start' \| 'end'                                                                                                              | 'start'       | 图标或加载指示器的位置。               |

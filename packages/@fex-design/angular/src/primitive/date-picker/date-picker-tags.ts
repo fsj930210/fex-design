@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import type { CalendarValue } from '@fex-design/core/calendar'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import { datePickerMultipleTagsClassName } from '@fex-design/styles/date-picker'
-import { Tag } from '../tag/tag'
+import { Tag, TagAction } from '../tag/tag'
 import { createHostClassName } from '../../signals/host-class'
 import { DatePickerState } from './use-date-picker'
 
 @Component({
   selector: 'fex-date-picker-tags',
   standalone: true,
-  imports: [Tag],
+  imports: [Tag, TagAction],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'date-picker-tags',

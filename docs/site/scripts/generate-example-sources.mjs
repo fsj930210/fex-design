@@ -6,6 +6,7 @@ import { codeToHtml } from 'shiki'
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const componentRoot = resolve(siteRoot, '../../packages/@fex-design')
 const outputRoot = resolve(siteRoot, 'public/example-source')
+const componentFilter = process.argv.find((value) => value.startsWith('--component='))?.slice(12)
 const frameworks = {
   angular: { extension: 'ts', language: 'typescript' },
   react: { extension: 'tsx', language: 'tsx' },
@@ -14,13 +15,13 @@ const frameworks = {
   vue: { extension: 'vue', language: 'vue' },
 }
 
-await rm(outputRoot, { recursive: true, force: true })
+if (!componentFilter) await rm(outputRoot, { recursive: true, force: true })
 
 for (const [framework, config] of Object.entries(frameworks)) {
   for (const layer of ['primitive', 'ui']) {
     const layerRoot = resolve(componentRoot, framework, 'src', layer)
     for (const component of await readdir(layerRoot, { withFileTypes: true })) {
-      if (!component.isDirectory()) continue
+      if (!component.isDirectory() || (componentFilter && component.name !== componentFilter)) continue
       const examplesRoot = resolve(layerRoot, component.name, 'examples')
       let examples
       try {

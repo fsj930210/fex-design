@@ -1,2 +1,26 @@
-<script lang="ts">import CheckIcon from '@fex-design/svelte/icon/check';import ClockIcon from '@fex-design/svelte/icon/clock';import ErrorIcon from '@fex-design/svelte/icon/error';import Timeline from '@fex-design/svelte/primitive/timeline';import Item from '@fex-design/svelte/primitive/timeline-item';import Indicator from '@fex-design/svelte/primitive/timeline-indicator';import Content from '@fex-design/svelte/primitive/timeline-content';import Card from '@fex-design/svelte/ui/card'</script>
-<Card title="Custom icons" description="Indicators accept project icons or any caller-owned node."><Timeline><Item status="completed"><Indicator><CheckIcon/></Indicator><Content>Checks passed</Content></Item><Item status="current"><Indicator><ClockIcon/></Indicator><Content>Processing</Content></Item><Item status="error"><Indicator><ErrorIcon/></Indicator><Content>Deployment failed</Content></Item></Timeline></Card>
+<script lang="ts">
+  import CheckIcon from "@fex-design/svelte/icon/check";
+  import ClockIcon from "@fex-design/svelte/icon/clock";
+  import ErrorIcon from "@fex-design/svelte/icon/error";
+  import Timeline from "@fex-design/svelte/primitive/timeline";
+  import Item from "@fex-design/svelte/primitive/timeline-item";
+  import Indicator from "@fex-design/svelte/primitive/timeline-indicator";
+  import Content from "@fex-design/svelte/primitive/timeline-content";
+  import Card from "@fex-design/svelte/ui/card";
+</script>
+
+<Card
+  title="Custom icons"
+  description="Indicators accept project icons or any caller-owned node."
+  ><Timeline
+    ><Item status="completed"
+      ><Indicator><CheckIcon /></Indicator><Content>Checks passed</Content
+      ></Item
+    ><Item status="current"
+      ><Indicator><ClockIcon /></Indicator><Content>Processing</Content></Item
+    ><Item status="error"
+      ><Indicator><ErrorIcon /></Indicator><Content>Deployment failed</Content
+      ></Item
+    ></Timeline
+  ></Card
+>

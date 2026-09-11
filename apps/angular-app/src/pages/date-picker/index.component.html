@@ -11,13 +11,13 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card title="基本用法" description="非受控 DatePicker 选择后立即提交并关闭 Popover。">
+      <div card title="基本用法" description="非受控 DatePicker 选择后立即提交并关闭 Popover。">
         <div class="flex min-w-0 flex-wrap items-start gap-2">
           <demo-date-picker [defaultValue]="today" placeholder="请选择日期" />
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="受控与非受控"
         description="value/change 管理受控值，defaultValue 提供非受控初始值。"
       >
@@ -30,9 +30,9 @@
           </div>
           <demo-date-picker [defaultValue]="today.add({ months: 1 })" />
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="禁用日期"
         description="minDate/maxDate 限定固定区间，disabledDate 承载业务规则。"
       >
@@ -44,9 +44,9 @@
           <demo-date-picker [disabledDate]="disabledWeekend" />
           <demo-date-picker [disabled]="true" />
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="多选"
         description="multiple 使用 CalendarValue 数组，默认需要确认，不会选中后立刻关闭。"
       >
@@ -62,9 +62,9 @@
             </p>
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="RangePicker"
         description="范围选择使用专门入口，双面板复用 Calendar range state。"
       >
@@ -77,9 +77,9 @@
             </p>
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="动态范围禁用"
         description="选择一端后通过 disabledDate 限制另一端，只允许 7 天窗口。"
       >
@@ -96,9 +96,9 @@
             </p>
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="选择器类型" description="Primitive 面板支持日期、周、月份、季度和年份。">
+      <div card title="选择器类型" description="Primitive 面板支持日期、周、月份、季度和年份。">
         <div class="flex min-w-0 flex-wrap items-start gap-2">
           <demo-date-picker picker="date" placeholder="日期" />
           <demo-date-picker picker="week" placeholder="周" />
@@ -106,9 +106,9 @@
           <demo-date-picker picker="quarter" placeholder="季度" />
           <demo-date-picker picker="year" placeholder="年份" />
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="格式化"
         description="format 只影响输入与展示；value/change 仍然保持 CalendarValue。"
       >
@@ -116,9 +116,9 @@
           <demo-date-picker format="YYYY/MM/DD" placeholder="YYYY/MM/DD" />
           <demo-date-picker picker="month" format="YYYY/MM" placeholder="YYYY/MM" />
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="范围类型" description="RangePicker 使用同一套 primitive 面板组。">
+      <div card title="范围类型" description="RangePicker 使用同一套 primitive 面板组。">
         <div class="flex min-w-0 flex-wrap items-start gap-2">
           <demo-range-picker />
           <demo-range-picker picker="week" />
@@ -126,18 +126,18 @@
           <demo-range-picker picker="quarter" />
           <demo-range-picker picker="year" />
         </div>
-      </fex-card>
+      </div>
 
       <demo-status-demos />
 
       <demo-custom-demos />
 
-      <fex-card title="受控打开" description="open 状态通过 DatePickerRoot 流转。">
+      <div card title="受控打开" description="open 状态通过 DatePickerRoot 流转。">
         <div class="flex min-w-0 flex-wrap items-start gap-2">
           <div class="space-y-1.5">
             <div class="flex gap-1.5">
-              <button button size="sm" variant="outline" (click)="open.set(true)">打开</button>
-              <button button size="sm" variant="outline" (click)="open.set(false)">关闭</button>
+              <button button size="sm" variant="outlined" (click)="open.set(true)">打开</button>
+              <button button size="sm" variant="outlined" (click)="open.set(false)">关闭</button>
             </div>
             <demo-date-picker
               [open]="open()"
@@ -147,13 +147,13 @@
             />
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="允许空值" description="RangePicker 可以允许某一端为空。">
+      <div card title="允许空值" description="RangePicker 可以允许某一端为空。">
         <div class="flex min-w-0 flex-wrap items-start gap-2">
           <demo-range-picker [allowEmpty]="{ end: true }" />
         </div>
-      </fex-card>
+      </div>
 
       <demo-integration-demos />
     </div>

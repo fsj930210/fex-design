@@ -22,7 +22,7 @@ import {
 } from '@fex-design/angular/primitive/form'
 import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { Checkbox } from '@fex-design/angular/ui/checkbox'
 
 const locations = {

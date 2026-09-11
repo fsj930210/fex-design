@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { Button } from '@fex-design/angular/ui/button'
 import { RadioGroup, Radio } from '@fex-design/angular/primitive/radio'
 import {

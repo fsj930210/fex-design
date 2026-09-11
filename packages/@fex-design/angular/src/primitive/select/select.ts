@@ -42,7 +42,7 @@ import {
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon } from '../../icon/chevron'
 import { XIcon } from '../../icon/x'
-import { Tag } from '../tag/tag'
+import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { Button } from '../button/button'
@@ -167,7 +167,7 @@ export class SelectRoot implements OnChanges {
         return root.defaultOpen
       },
       onOpenChange: (next) => {
-        root.popover.open = next
+
         root.popover.syncOptions()
         root.openChange.emit(next)
       },
@@ -175,8 +175,10 @@ export class SelectRoot implements OnChanges {
     })
     this.controller = controller
     this.snapshot = createCoreStoreSignal(controller)
-    this.popover.open = controller.getSnapshot().open
-    this.popover.defaultOpen = this.defaultOpen
+
+    this.popover.connectOptions(() => ({
+      open: this.snapshot().open, defaultOpen: this.defaultOpen,
+    }))
     this.popover.syncOptions()
     const subscription = this.popover.openChange.subscribe((next) => this.syncOpen(next))
     this.destroyRef.onDestroy(() => subscription.unsubscribe())
@@ -194,8 +196,7 @@ export class SelectRoot implements OnChanges {
       this.suppressChange = false
       this.defaultValueInitialized = true
     }
-    this.popover.open = this.snapshot().open
-    this.popover.defaultOpen = this.defaultOpen
+
     this.popover.syncOptions()
   }
   get isMultiple() {
@@ -227,7 +228,7 @@ export class SelectRoot implements OnChanges {
 @Component({
   selector: 'fex-select-trigger',
   standalone: true,
-  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag],
+  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag, TagAction],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-trigger.html',
 })

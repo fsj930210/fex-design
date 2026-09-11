@@ -5,7 +5,13 @@ Alert communicates success, informational, warning, or error feedback inside the
 ## Import
 
 ```tsx
-import { Alert, AlertAction, AlertDescription, AlertIcon, AlertTitle } from '@fex-design/react/primitive/alert'
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from '@fex-design/react/primitive/alert'
 ```
 
 ## Examples

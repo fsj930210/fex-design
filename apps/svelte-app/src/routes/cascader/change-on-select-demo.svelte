@@ -1,1 +1,11 @@
-<script lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Change on select" description="Intermediate paths can be submitted."><DemoCascader changeOnSelect options={regionOptions}/></Demo>
+<script lang="ts">
+  import { regionOptions } from "./data";
+  import DemoCascader from "./demo-cascader.svelte";
+  import Demo from "./demo-section.svelte";
+</script>
+
+<Demo
+  title="Change on select"
+  description="Intermediate paths can be submitted."
+  ><DemoCascader changeOnSelect options={regionOptions} /></Demo
+>

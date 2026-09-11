@@ -8,4 +8,17 @@ defineOptions({ name: 'SkeletonInput', inheritAttrs: false })
 const props = defineProps<SkeletonVisualOptions & { block?: boolean }>()
 const attrs = useAttrs()
 </script>
-<template><SkeletonBlock v-bind="attrs" data-slot="skeleton-input" :animation="props.animation" :class="cn(skeletonInputClassName, props.block && skeletonInputBlockClassName, attrs.class as string | undefined)" /></template>
+<template>
+  <SkeletonBlock
+    v-bind="attrs"
+    data-slot="skeleton-input"
+    :animation="props.animation"
+    :class="
+      cn(
+        skeletonInputClassName,
+        props.block && skeletonInputBlockClassName,
+        attrs.class as string | undefined,
+      )
+    "
+  />
+</template>

@@ -1,1 +1,10 @@
-<script lang="ts">import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Group" description="Options sharing a group render below a stable group label." options={frameworkOptions}/>
+<script lang="ts">
+  import { frameworkOptions } from "./data";
+  import Demo from "./simple-demo.svelte";
+</script>
+
+<Demo
+  title="Group"
+  description="Options sharing a group render below a stable group label."
+  options={frameworkOptions}
+/>

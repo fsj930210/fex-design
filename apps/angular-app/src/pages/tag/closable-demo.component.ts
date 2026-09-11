@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { Tag } from '@fex-design/angular/primitive/tag'
-import Card from '@fex-design/angular/ui/card'
+import { Tag, TagAction } from '@fex-design/angular/primitive/tag'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-tag-closable-demo',
   standalone: true,
-  imports: [Card, Tag],
+  imports: [Card, Tag, TagAction],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './closable-demo.component.html',
 })

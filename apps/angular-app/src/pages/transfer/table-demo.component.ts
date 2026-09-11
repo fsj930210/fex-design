@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Transfer, TransferPanelTemplate } from '@fex-design/angular/primitive/transfer'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { transferFieldNames, transferMembers } from './data'
 import { TransferTablePanelComponent } from './table-panel.component'
 

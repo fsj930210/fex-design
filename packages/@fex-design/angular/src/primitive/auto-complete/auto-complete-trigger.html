@@ -1,5 +1,6 @@
-<div inputRoot
-  fexPopoverTrigger
+<div
+  inputRoot
+  popoverTrigger
   [class]="className"
   [value]="autoComplete.snapshot().value"
   [disabled]="autoComplete.disabled"
@@ -25,4 +26,4 @@
   <ng-content select="[suffix]" />
   }
 </div>
-    [attr.aria-invalid]="invalid || status === 'error' || null"
+[attr.aria-invalid]="invalid || status === 'error' || null"

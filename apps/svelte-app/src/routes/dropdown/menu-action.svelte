@@ -1,12 +1,15 @@
 <script lang="ts">
-  import { MenuItem } from '@fex-design/svelte/primitive/menu'
-  import type { Snippet } from 'svelte'
-  import type { HTMLButtonAttributes } from 'svelte/elements'
-  import { itemClassName } from './demo-classes'
+  import { MenuItem } from "@fex-design/svelte/primitive/menu";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
+  import { itemClassName } from "./demo-classes";
   interface Props extends HTMLButtonAttributes {
-    action?: (element: HTMLElement) => { destroy?: () => void } | void
-    children?: Snippet
+    action?: (element: HTMLElement) => { destroy?: () => void } | void;
+    children?: Snippet;
   }
-  let { action, children, ...rest }: Props = $props()
+  let { action, children, ...rest }: Props = $props();
 </script>
-<MenuItem {...rest} {action} class={itemClassName}>{@render children?.()}</MenuItem>
+
+<MenuItem {...rest} {action} class={itemClassName}
+  >{@render children?.()}</MenuItem
+>

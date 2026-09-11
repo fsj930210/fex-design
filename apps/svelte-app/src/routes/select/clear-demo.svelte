@@ -1,1 +1,12 @@
-<script lang="ts">import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Clear" description="Clear and the dropdown indicator share one suffix position." options={frameworkOptions} clearable defaultValue="solid"/>
+<script lang="ts">
+  import { frameworkOptions } from "./data";
+  import Demo from "./simple-demo.svelte";
+</script>
+
+<Demo
+  title="Clear"
+  description="Clear and the dropdown indicator share one suffix position."
+  options={frameworkOptions}
+  clearable
+  defaultValue="solid"
+/>

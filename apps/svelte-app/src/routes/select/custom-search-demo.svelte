@@ -1,1 +1,16 @@
-<script lang="ts">import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte';const filter=(keyword:string,option:{label:string})=>option.label.toLocaleLowerCase().startsWith(keyword.trim().toLocaleLowerCase())</script><Demo title="Custom search" description="A custom filterOption matches labels by prefix only." options={frameworkOptions} showSearch filterOption={filter}/>
+<script lang="ts">
+  import { frameworkOptions } from "./data";
+  import Demo from "./simple-demo.svelte";
+  const filter = (keyword: string, option: { label: string }) =>
+    option.label
+      .toLocaleLowerCase()
+      .startsWith(keyword.trim().toLocaleLowerCase());
+</script>
+
+<Demo
+  title="Custom search"
+  description="A custom filterOption matches labels by prefix only."
+  options={frameworkOptions}
+  showSearch
+  filterOption={filter}
+/>

@@ -1,46 +1,50 @@
 <script lang="ts" generics="TNode extends TreeNodeData">
-  import type { AsyncLoadFeatureApi } from '@fex-design/core/tree/features/async-load'
-  import type { CheckFeatureApi } from '@fex-design/core/tree/features/check'
-  import type { ExpansionFeatureApi } from '@fex-design/core/tree/features/expansion'
-  import type { FocusFeatureApi } from '@fex-design/core/tree/features/focus'
-  import type { SelectionFeatureApi } from '@fex-design/core/tree/features/selection'
+  import type { AsyncLoadFeatureApi } from "@fex-design/core/tree/features/async-load";
+  import type { CheckFeatureApi } from "@fex-design/core/tree/features/check";
+  import type { ExpansionFeatureApi } from "@fex-design/core/tree/features/expansion";
+  import type { FocusFeatureApi } from "@fex-design/core/tree/features/focus";
+  import type { SelectionFeatureApi } from "@fex-design/core/tree/features/selection";
   import type {
     TreeController,
     TreeItem as CoreTreeItem,
     TreeKey,
     TreeNodeData,
-  } from '@fex-design/core/tree/types'
-  import { treeItemClassName } from '@fex-design/styles/tree'
-  import { cn } from '@fex/utils'
-  import { getContext, type Snippet, untrack } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import { readableCoreStore } from '../../stores/core-store'
-  import { styleToString, treeContextKey, type TreeContext } from './tree-context'
+  } from "@fex-design/core/tree/types";
+  import { treeItemClassName } from "@fex-design/styles/tree";
+  import { cn } from "@fex/utils";
+  import { getContext, type Snippet, untrack } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import { readableCoreStore } from "../../stores/core-store";
+  import {
+    styleToString,
+    treeContextKey,
+    type TreeContext,
+  } from "./tree-context";
 
   interface TreeItemState {
-    item: CoreTreeItem<TNode>
-    itemProps: HTMLAttributes<HTMLDivElement>
-    expanded: boolean
-    selected: boolean
-    checked: boolean
-    checkedState: boolean | 'indeterminate'
-    focused: boolean
-    loadState: string
-    loadError: unknown
+    item: CoreTreeItem<TNode>;
+    itemProps: HTMLAttributes<HTMLDivElement>;
+    expanded: boolean;
+    selected: boolean;
+    checked: boolean;
+    checkedState: boolean | "indeterminate";
+    focused: boolean;
+    loadState: string;
+    loadError: unknown;
     actions: {
-      expand(): void
-      collapse(): void
-      toggleExpanded(): void
-      toggleSelected(): void
-      toggleChecked(): void
-    }
+      expand(): void;
+      collapse(): void;
+      toggleExpanded(): void;
+      toggleSelected(): void;
+      toggleChecked(): void;
+    };
   }
 
-  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-    itemKey: TreeKey
-    controller?: TreeController<TNode>
-    block?: boolean
-    children?: Snippet<[TreeItemState]>
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+    itemKey: TreeKey;
+    controller?: TreeController<TNode>;
+    block?: boolean;
+    children?: Snippet<[TreeItemState]>;
   }
 
   let {
@@ -53,74 +57,77 @@
     onclick,
     onfocus,
     ...rest
-  }: Props = $props()
+  }: Props = $props();
 
-  const context = getContext<TreeContext<TNode>>(treeContextKey)
-  const tree = untrack(() => controller ?? context.tree)
-  const { indent, rowHeight } = context
+  const context = getContext<TreeContext<TNode>>(treeContextKey);
+  const tree = untrack(() => controller ?? context.tree);
+  const { indent, rowHeight } = context;
   const snapshot = readableCoreStore({
     getSnapshot: tree.getSnapshot,
     subscribe: (listener) => tree.subscribeNode(itemKey, listener),
-  })
+  });
   const actions = {
-    expand: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.expand(itemKey),
-    collapse: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(itemKey),
+    expand: () =>
+      tree.getFeature<ExpansionFeatureApi>("expansion")?.expand(itemKey),
+    collapse: () =>
+      tree.getFeature<ExpansionFeatureApi>("expansion")?.collapse(itemKey),
     toggleExpanded: () =>
-      tree.getFeature<ExpansionFeatureApi>('expansion')?.toggle(itemKey),
+      tree.getFeature<ExpansionFeatureApi>("expansion")?.toggle(itemKey),
     toggleSelected: () =>
-      tree.getFeature<SelectionFeatureApi>('selection')?.toggle(itemKey),
+      tree.getFeature<SelectionFeatureApi>("selection")?.toggle(itemKey),
     toggleChecked: () =>
       tree
-        .getFeature<CheckFeatureApi>('check')
+        .getFeature<CheckFeatureApi>("check")
         ?.check(itemKey, !$snapshot.checkedKeys.includes(itemKey)),
-  }
+  };
 
   const state = $derived.by(() => {
-    const item = tree.getItem(itemKey)
-    if (!item) return null
+    const item = tree.getItem(itemKey);
+    if (!item) return null;
 
     const checkedState =
-      tree.getFeature<CheckFeatureApi>('check')?.getState(itemKey) ?? false
-    const asyncLoad = tree.getFeature<AsyncLoadFeatureApi>('async-load')
-    const expanded = $snapshot.expandedKeys.includes(itemKey)
-    const selected = $snapshot.selectedKeys.includes(itemKey)
-    const checked = $snapshot.checkedKeys.includes(itemKey)
-    const focused = $snapshot.focusedKey === itemKey
+      tree.getFeature<CheckFeatureApi>("check")?.getState(itemKey) ?? false;
+    const asyncLoad = tree.getFeature<AsyncLoadFeatureApi>("async-load");
+    const expanded = $snapshot.expandedKeys.includes(itemKey);
+    const selected = $snapshot.selectedKeys.includes(itemKey);
+    const checked = $snapshot.checkedKeys.includes(itemKey);
+    const focused = $snapshot.focusedKey === itemKey;
     const itemProps: HTMLAttributes<HTMLDivElement> = {
       ...rest,
-      role: 'treeitem',
+      role: "treeitem",
       tabindex: focused ? 0 : -1,
-      'aria-level': item.depth + 1,
-      'aria-expanded': item.isLeaf ? undefined : expanded,
-      'aria-selected': selected || undefined,
-      'aria-checked': checkedState === 'indeterminate' ? 'mixed' : checked || undefined,
-      'aria-disabled': item.disabled || undefined,
-      'aria-posinset': item.index + 1,
-      'data-key': String(item.key),
-      'data-selected': selected || undefined,
-      'data-selectable': tree.hasFeature('selection') || undefined,
-      'data-expanded': expanded || undefined,
-      'data-checked': checked || undefined,
-      'data-disabled': item.disabled || undefined,
-      'data-leaf': item.isLeaf || undefined,
-      'data-block': block || undefined,
+      "aria-level": item.depth + 1,
+      "aria-expanded": item.isLeaf ? undefined : expanded,
+      "aria-selected": selected || undefined,
+      "aria-checked":
+        checkedState === "indeterminate" ? "mixed" : checked || undefined,
+      "aria-disabled": item.disabled || undefined,
+      "aria-posinset": item.index + 1,
+      "data-key": String(item.key),
+      "data-selected": selected || undefined,
+      "data-selectable": tree.hasFeature("selection") || undefined,
+      "data-expanded": expanded || undefined,
+      "data-checked": checked || undefined,
+      "data-disabled": item.disabled || undefined,
+      "data-leaf": item.isLeaf || undefined,
+      "data-block": block || undefined,
       class: cn(treeItemClassName(), className),
       style:
         styleToString({
           height: `${rowHeight()}px`,
           marginInlineStart: `${item.depth * indent()}px`,
-          paddingInlineStart: '4px',
-          '--tree-item-inline-start': '4px',
-        }) + (style ? `;${style}` : ''),
+          paddingInlineStart: "4px",
+          "--tree-item-inline-start": "4px",
+        }) + (style ? `;${style}` : ""),
       onfocus: (event) => {
-        onfocus?.(event)
-        tree.getFeature<FocusFeatureApi>('focus')?.focus(item.key)
+        onfocus?.(event);
+        tree.getFeature<FocusFeatureApi>("focus")?.focus(item.key);
       },
       onclick: (event) => {
-        onclick?.(event)
-        if (!event.defaultPrevented && !item.disabled) actions.toggleSelected()
+        onclick?.(event);
+        if (!event.defaultPrevented && !item.disabled) actions.toggleSelected();
       },
-    }
+    };
 
     return {
       item,
@@ -130,11 +137,11 @@
       checked,
       checkedState,
       focused,
-      loadState: asyncLoad?.getState(itemKey) ?? 'unloaded',
+      loadState: asyncLoad?.getState(itemKey) ?? "unloaded",
       loadError: asyncLoad?.getError(itemKey),
       actions,
-    }
-  })
+    };
+  });
 </script>
 
 {#if state}

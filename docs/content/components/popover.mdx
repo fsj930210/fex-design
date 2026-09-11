@@ -1,0 +1,46 @@
+---
+title: Popover
+description: 在触发元素附近展示可交互的补充内容，支持组合触发、定位与独立挂载策略。
+---
+
+## Primitive 与 UI
+
+Primitive 提供带样式的 Popover、PopoverTrigger、PopoverPortal、PopoverContent、PopoverArrow、PopoverHeader、PopoverTitle 和 PopoverDescription，适合自由组合内容结构。各框架同时提供独立逻辑入口，用于自定义 DOM。
+
+UI 组合这些部件，提供标题、内容与结构化样式。两层具有相同的触发、定位、关闭和挂载行为。
+
+## 何时使用
+
+Popover 用于在触发元素附近展示需要阅读或交互的补充内容。简单文字提示使用 Tooltip；需要用户确认的操作使用 Dialog 或 Popconfirm。
+
+## 示例
+
+下列示例展示触发方式、十二个位置、箭头、挂载容器、受控状态与定位距离。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="Popover 根组件控制打开状态、触发方式、定位和挂载策略；其余部件用于组合触发元素与浮层内容。">
+  <ApiComposition layer="primitive">
+    ```text
+    Popover
+    ├── PopoverTrigger
+    └── PopoverPortal
+        └── PopoverContent
+            ├── PopoverArrow (optional)
+            ├── PopoverHeader (optional)
+            │   └── PopoverTitle (optional)
+            └── PopoverDescription (optional)
+    ```
+
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="快速组合标题、内容和箭头，并定制语义部件样式。" />
+
+## CSS Variables
+
+CSS Variables 可写在单个浮层面板、业务容器或主题根节点。UI 通过 `className` / `class`、`style`、`classNames` 和 `styles` 定制面板及语义部件；Primitive 在对应部件上使用原生 `className` / `class` 和 `style`。箭头自动继承面板的背景色和边框色。
+
+<CssVariables />

@@ -7,7 +7,7 @@ import {
   MasonryVirtualViewport,
 } from '@fex-design/angular/primitive/masonry'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 interface DemoItem {
   id: string
   height: number

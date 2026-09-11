@@ -8,7 +8,7 @@
       </p>
     </header>
 
-    <fex-card
+    <div card
       title="Primitive composition"
       description="通过 controller 自行实现 Previous、Next 与 Indicators。"
     >
@@ -40,9 +40,9 @@
           [snapshot]="basicCarousel.snapshot()"
         />
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Autoplay"
       description="Autoplay 是 primitive 的内置配置，controller.autoplay 返回官方实例。"
     >
@@ -74,9 +74,9 @@
           [snapshot]="autoplayCarousel.snapshot()"
         />
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Official plugin"
       description="AutoHeight 直接从 embla-carousel-auto-height 导入，不经过 FEX 封装。"
     >
@@ -109,6 +109,6 @@
           [snapshot]="autoHeightCarousel.snapshot()"
         />
       </div>
-    </fex-card>
+    </div>
   </div>
 </main>

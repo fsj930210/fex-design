@@ -1,16 +1,27 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import type { CheckboxCheckedState } from '@fex-design/core/checkbox/types'
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import type { CheckboxCheckedState } from "@fex-design/core/checkbox/types";
 
   interface CheckboxIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
-    checked?: CheckboxCheckedState
-    forceMount?: boolean
-    children?: Snippet
+    checked?: CheckboxCheckedState;
+    forceMount?: boolean;
+    children?: Snippet;
   }
 
-  let { checked = false, forceMount = false, children, ...rest }: CheckboxIndicatorProps = $props()
-  const state = $derived(checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked')
+  let {
+    checked = false,
+    forceMount = false,
+    children,
+    ...rest
+  }: CheckboxIndicatorProps = $props();
+  const state = $derived(
+    checked === "indeterminate"
+      ? "indeterminate"
+      : checked
+        ? "checked"
+        : "unchecked",
+  );
 </script>
 
 {#if forceMount || checked !== false}

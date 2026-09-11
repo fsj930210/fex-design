@@ -1,16 +1,25 @@
 <script lang="ts">
-  import type { ContextMenuOpenChangeInfo } from '@fex-design/core/overlay/context-menu/types'
-  import ContextMenu from '@fex-design/svelte/primitive/context-menu'
-  import ContextMenuContent from '@fex-design/svelte/primitive/context-menu-content'
-  import ContextMenuPortal from '@fex-design/svelte/primitive/context-menu-portal'
-  import ContextMenuTrigger from '@fex-design/svelte/primitive/context-menu-trigger'
-  import MenuSurface from './menu-surface.svelte'
+  import type { ContextMenuOpenChangeInfo } from "@fex-design/core/overlay/context-menu/types";
+  import ContextMenu from "@fex-design/svelte/primitive/context-menu";
+  import ContextMenuContent from "@fex-design/svelte/primitive/context-menu-content";
+  import ContextMenuPortal from "@fex-design/svelte/primitive/context-menu-portal";
+  import ContextMenuTrigger from "@fex-design/svelte/primitive/context-menu-trigger";
+  import MenuSurface from "./menu-surface.svelte";
 
-  let last = $state('Right click the panel')
+  let last = $state("Right click the panel");
 
-  function handleOpenChange(open: boolean, info: ContextMenuOpenChangeInfo<string>) {
-    if (!open) return
-    last = 'Opened ' + info.payload + ' at ' + Math.round(info.clientX ?? 0) + ', ' + Math.round(info.clientY ?? 0)
+  function handleOpenChange(
+    open: boolean,
+    info: ContextMenuOpenChangeInfo<string>,
+  ) {
+    if (!open) return;
+    last =
+      "Opened " +
+      info.payload +
+      " at " +
+      Math.round(info.clientX ?? 0) +
+      ", " +
+      Math.round(info.clientY ?? 0);
   }
 </script>
 

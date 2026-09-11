@@ -187,7 +187,11 @@ export function InputSearch({
   const search = (source: 'enter' | 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter') => {
     if (!loading) onSearch?.(currentValue, { source })
   }
-  const action = (content: ReactNode, source: 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter', styled = false) =>
+  const action = (
+    content: ReactNode,
+    source: 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter',
+    styled = false,
+  ) =>
     content == null ? null : (
       <SearchAction loading={loading} source={source} styled={styled} onClick={search}>
         {content}

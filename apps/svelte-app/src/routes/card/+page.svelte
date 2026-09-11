@@ -1,37 +1,49 @@
 <script lang="ts">
-  import PrimitiveCard from '@fex-design/svelte/primitive/card'
-  import Card from '@fex-design/svelte/ui/card'
-  import CardContent from '@fex-design/svelte/ui/card-content'
-  import CardDescription from '@fex-design/svelte/ui/card-description'
-  import CardHeader from '@fex-design/svelte/ui/card-header'
-  import CardTitle from '@fex-design/svelte/ui/card-title'
+  import PrimitiveCard from "@fex-design/svelte/primitive/card";
+  import Card from "@fex-design/svelte/ui/card";
+  import CardContent from "@fex-design/svelte/ui/card-content";
+  import CardDescription from "@fex-design/svelte/ui/card-description";
+  import CardHeader from "@fex-design/svelte/ui/card-header";
+  import CardTitle from "@fex-design/svelte/ui/card-title";
 
   type SpacingOption = {
-    label: string
-    value: 'sm' | 'md' | 'lg' | 'custom'
-    size: 'sm' | 'md' | 'lg'
-    rootStyle?: string
-  }
+    label: string;
+    value: "sm" | "md" | "lg" | "custom";
+    size: "sm" | "md" | "lg";
+    rootStyle?: string;
+  };
 
-  const defaultSpacingOption: SpacingOption = { label: 'md', value: 'md', size: 'md' }
+  const defaultSpacingOption: SpacingOption = {
+    label: "md",
+    value: "md",
+    size: "md",
+  };
 
   const spacingOptions: SpacingOption[] = [
-    { label: 'sm', value: 'sm', size: 'sm' },
+    { label: "sm", value: "sm", size: "sm" },
     defaultSpacingOption,
-    { label: 'lg', value: 'lg', size: 'lg' },
-    { label: '40px', value: 'custom', size: 'md', rootStyle: '--card-spacing:40px' },
-  ]
+    { label: "lg", value: "lg", size: "lg" },
+    {
+      label: "40px",
+      value: "custom",
+      size: "md",
+      rootStyle: "--card-spacing:40px",
+    },
+  ];
 
-  let spacing: SpacingOption['value'] = $state('md')
+  let spacing: SpacingOption["value"] = $state("md");
   const selectedSpacing = $derived(
-    spacingOptions.find((option) => option.value === spacing) ?? defaultSpacingOption,
-  )
+    spacingOptions.find((option) => option.value === spacing) ??
+      defaultSpacingOption,
+  );
 </script>
 
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
   <div class="mx-auto w-full max-w-5xl space-y-4">
     <header class="space-y-4">
-      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</a>
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/"
+        >返回首页</a
+      >
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Card</h1>
         <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -63,21 +75,28 @@
         </div>
       </Card>
 
-      <Card title="Basic" description="包含标题、描述和内容区域的标准卡片结构。">
+      <Card
+        title="Basic"
+        description="包含标题、描述和内容区域的标准卡片结构。"
+      >
         <p class="text-sm leading-6 text-foreground">
-          Card 默认使用系统边框、背景、圆角和 spacing token，适合作为组件示例页的基础展示容器。
+          Card 默认使用系统边框、背景、圆角和 spacing
+          token，适合作为组件示例页的基础展示容器。
         </p>
       </Card>
 
-      <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+      <Card
+        title="Spacing"
+        description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。"
+      >
         <div class="flex flex-wrap gap-1.5">
           {#each spacingOptions as option}
             <button
               class={[
-                'rounded-md border px-3 py-1 text-sm transition-colors',
+                "rounded-md border px-3 py-1 text-sm transition-colors",
                 spacing === option.value
-                  ? 'border-focus bg-muted-background text-foreground'
-                  : 'border-border bg-background text-muted-foreground hover:bg-muted-background hover:text-foreground',
+                  ? "border-focus bg-muted-background text-foreground"
+                  : "border-border bg-background text-muted-foreground hover:bg-muted-background hover:text-foreground",
               ]}
               type="button"
               onclick={() => (spacing = option.value)}
@@ -91,30 +110,44 @@
             size={selectedSpacing.size}
             title="Login to your account"
             description="Enter your email below to login to your account"
-            class={{ root: 'w-full max-w-md' }}
-            {...(selectedSpacing.rootStyle ? { style: { root: selectedSpacing.rootStyle } } : {})}
+            class={{ root: "w-full max-w-md" }}
+            {...selectedSpacing.rootStyle
+              ? { style: { root: selectedSpacing.rootStyle } }
+              : {}}
           >
             <div class="grid gap-3">
               <div class="grid gap-1.5">
                 <div class="text-sm font-medium text-foreground">Email</div>
-                <div class="h-9 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground">
+                <div
+                  class="h-9 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground"
+                >
                   m@example.com
                 </div>
               </div>
               <div class="grid gap-1.5">
-                <div class="flex items-center justify-between gap-2 text-sm font-medium text-foreground">
+                <div
+                  class="flex items-center justify-between gap-2 text-sm font-medium text-foreground"
+                >
                   <span>Password</span>
-                  <span class="font-normal text-muted-foreground">Forgot your password?</span>
+                  <span class="font-normal text-muted-foreground"
+                    >Forgot your password?</span
+                  >
                 </div>
-                <div class="h-9 rounded-md border border-border bg-background"></div>
+                <div
+                  class="h-9 rounded-md border border-border bg-background"
+                ></div>
               </div>
             </div>
             {#snippet footer()}
               <div class="grid w-full gap-2">
-                <div class="rounded-md bg-foreground px-3 py-1.5 text-center text-sm font-medium text-background">
+                <div
+                  class="rounded-md bg-foreground px-3 py-1.5 text-center text-sm font-medium text-background"
+                >
                   Login
                 </div>
-                <div class="rounded-md border border-border bg-background px-3 py-1.5 text-center text-sm font-medium text-foreground">
+                <div
+                  class="rounded-md border border-border bg-background px-3 py-1.5 text-center text-sm font-medium text-foreground"
+                >
                   Login with Google
                 </div>
               </div>
@@ -123,9 +156,14 @@
         </div>
       </Card>
 
-      <Card title="With Footer" description="需要底部操作区时使用 footer。" footer="Footer content">
+      <Card
+        title="With Footer"
+        description="需要底部操作区时使用 footer。"
+        footer="Footer content"
+      >
         <p class="text-sm leading-6 text-muted-foreground">
-          Header、Content 和 Footer 分别维护自己的 padding，组合时保持一致的信息密度。
+          Header、Content 和 Footer 分别维护自己的
+          padding，组合时保持一致的信息密度。
         </p>
       </Card>
     </div>

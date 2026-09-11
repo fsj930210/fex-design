@@ -1,31 +1,45 @@
 <script lang="ts">
-  import Card from '@fex-design/svelte/ui/card'
-  import { useI18n } from '@fex-design/svelte/i18n'
-  import { setI18nDemoMode } from '../../lib/i18n'
+  import Card from "@fex-design/svelte/ui/card";
+  import { useI18n } from "@fex-design/svelte/i18n";
+  import { setI18nDemoMode } from "../../lib/i18n";
 
-  const namespaces = ['common', 'admin', 'order']
-  const { controller, snapshot } = useI18n()
-  let error = $state('')
-  let runtimeReady = $state(false)
+  const namespaces = ["common", "admin", "order"];
+  const { controller, snapshot } = useI18n();
+  let error = $state("");
+  let runtimeReady = $state(false);
 
   function t(key: string, values?: Record<string, unknown>) {
-    void $snapshot
-    return controller.t(key, values)
+    void $snapshot;
+    return controller.t(key, values);
   }
 
-  async function change(locale: string, mode: 'normal' | 'delayed' | 'failure') {
-    error = ''
-    setI18nDemoMode(mode)
-    const result = await controller.changeLanguage(locale, { namespaces })
-    setI18nDemoMode('normal')
-    if (result.locale !== locale) error = 'Remote resource failed. The current locale was preserved.'
+  async function change(
+    locale: string,
+    mode: "normal" | "delayed" | "failure",
+  ) {
+    error = "";
+    setI18nDemoMode(mode);
+    const result = await controller.changeLanguage(locale, { namespaces });
+    setI18nDemoMode("normal");
+    if (result.locale !== locale)
+      error = "Remote resource failed. The current locale was preserved.";
   }
 
   function addRuntimeBundle() {
-    controller.registerBundle($snapshot.locale, 'runtime', {
-      editor: { saved: $snapshot.locale === 'zh-CN' ? '运行时文本已保存' : 'Runtime text saved' },
-    }, 'local-edit-1')
-    runtimeReady = true
+    controller.registerBundle(
+      $snapshot.locale,
+      "runtime",
+      {
+        editor: {
+          saved:
+            $snapshot.locale === "zh-CN"
+              ? "运行时文本已保存"
+              : "Runtime text saved",
+        },
+      },
+      "local-edit-1",
+    );
+    runtimeReady = true;
   }
 </script>
 
@@ -34,64 +48,121 @@
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
   <div class="mx-auto w-full max-w-5xl">
     <header class="mb-4 space-y-2">
-      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/"
+        >Back home</a
+      >
       <h1 class="text-2xl font-semibold text-foreground">I18n</h1>
     </header>
 
     <div class="grid gap-4">
-      <Card title="Core translation API" description="Use t with interpolation, plural values, and namespaces.">
+      <Card
+        title="Core translation API"
+        description="Use t with interpolation, plural values, and namespaces."
+      >
         <div class="flex flex-wrap items-center gap-2">
-          <span>{t('demo.greeting', { name: 'Fex' })}</span>
-          <span>{t('order:count', { count: 1 })}</span>
-          <span>{t('order:count', { count: 5 })}</span>
-          <span>{t('admin:status.ready')}</span>
+          <span>{t("demo.greeting", { name: "Fex" })}</span>
+          <span>{t("order:count", { count: 1 })}</span>
+          <span>{t("order:count", { count: 5 })}</span>
+          <span>{t("admin:status.ready")}</span>
         </div>
       </Card>
 
-      <Card title="Local bundle and namespaces" description="The initial Chinese resources are available before any network request.">
+      <Card
+        title="Local bundle and namespaces"
+        description="The initial Chinese resources are available before any network request."
+      >
         <div class="grid gap-1.5 text-sm text-muted-foreground sm:grid-cols-2">
-          <span>common: {t('demo.title')}</span>
-          <span>admin: {t('admin:filter.placeholder')}</span>
-          <span>order: {t('order:title')}</span>
+          <span>common: {t("demo.title")}</span>
+          <span>admin: {t("admin:filter.placeholder")}</span>
+          <span>order: {t("order:title")}</span>
           <span>locale: {$snapshot.locale}</span>
         </div>
       </Card>
 
-      <Card title="Language switching" description="Switching waits for the requested namespaces before changing the active locale.">
+      <Card
+        title="Language switching"
+        description="Switching waits for the requested namespaces before changing the active locale."
+      >
         <div class="flex flex-wrap items-center gap-2">
-          <button class="rounded-md border border-border px-2 py-1.5" type="button" onclick={() => change('zh-CN', 'normal')}>中文</button>
-          <button class="rounded-md border border-border px-2 py-1.5" type="button" onclick={() => change('en-US', 'normal')}>English</button>
-          <button class="rounded-md border border-border px-2 py-1.5" type="button" onclick={() => change('fr-FR', 'normal')}>Francais</button>
-          <span class="text-sm text-muted-foreground">{$snapshot.locale} {$snapshot.revision ?? 'local'}</span>
+          <button
+            class="rounded-md border border-border px-2 py-1.5"
+            type="button"
+            onclick={() => change("zh-CN", "normal")}>中文</button
+          >
+          <button
+            class="rounded-md border border-border px-2 py-1.5"
+            type="button"
+            onclick={() => change("en-US", "normal")}>English</button
+          >
+          <button
+            class="rounded-md border border-border px-2 py-1.5"
+            type="button"
+            onclick={() => change("fr-FR", "normal")}>Francais</button
+          >
+          <span class="text-sm text-muted-foreground"
+            >{$snapshot.locale} {$snapshot.revision ?? "local"}</span
+          >
         </div>
       </Card>
 
-      <Card title="Remote bundle" description="The current text stays visible until the delayed resource is ready.">
+      <Card
+        title="Remote bundle"
+        description="The current text stays visible until the delayed resource is ready."
+      >
         <div class="flex flex-wrap items-center gap-2">
-          <button class="rounded-md border border-border px-2 py-1.5" disabled={$snapshot.status === 'loading'} type="button" onclick={() => change('en-US', 'delayed')}>
-            {$snapshot.status === 'loading' ? 'Loading...' : 'Load English remotely'}
+          <button
+            class="rounded-md border border-border px-2 py-1.5"
+            disabled={$snapshot.status === "loading"}
+            type="button"
+            onclick={() => change("en-US", "delayed")}
+          >
+            {$snapshot.status === "loading"
+              ? "Loading..."
+              : "Load English remotely"}
           </button>
-          <span>{t('order:title')}</span>
-          <span class="text-sm text-muted-foreground">status: {$snapshot.status}</span>
+          <span>{t("order:title")}</span>
+          <span class="text-sm text-muted-foreground"
+            >status: {$snapshot.status}</span
+          >
         </div>
       </Card>
 
-      <Card title="Fallback, missing key, and failure" description="Missing English keys fall back to Chinese; unknown keys are visible; failed loads preserve the active locale.">
+      <Card
+        title="Fallback, missing key, and failure"
+        description="Missing English keys fall back to Chinese; unknown keys are visible; failed loads preserve the active locale."
+      >
         <div class="flex flex-wrap items-center gap-2">
-          <span>{t('order:owner')}</span>
-          <span>{t('missing:unknown')}</span>
-          <button class="rounded-md border border-border px-2 py-1.5" type="button" onclick={() => change('fr-FR', 'failure')}>Simulate remote failure</button>
+          <span>{t("order:owner")}</span>
+          <span>{t("missing:unknown")}</span>
+          <button
+            class="rounded-md border border-border px-2 py-1.5"
+            type="button"
+            onclick={() => change("fr-FR", "failure")}
+            >Simulate remote failure</button
+          >
           <span class="text-sm text-error">{error}</span>
         </div>
       </Card>
 
-      <Card title="Runtime resource editing" description="The host can add a newly published namespace without rebuilding the application.">
+      <Card
+        title="Runtime resource editing"
+        description="The host can add a newly published namespace without rebuilding the application."
+      >
         <div class="flex flex-wrap items-center gap-2">
-          <button class="rounded-md border border-border px-2 py-1.5" disabled={runtimeReady} type="button" onclick={addRuntimeBundle}>
-            {runtimeReady ? 'Runtime bundle registered' : 'Register edited text'}
+          <button
+            class="rounded-md border border-border px-2 py-1.5"
+            disabled={runtimeReady}
+            type="button"
+            onclick={addRuntimeBundle}
+          >
+            {runtimeReady
+              ? "Runtime bundle registered"
+              : "Register edited text"}
           </button>
-          <span>{t('runtime:editor.saved')}</span>
-          <span class="text-sm text-muted-foreground">revision: {$snapshot.revision ?? 'local'}</span>
+          <span>{t("runtime:editor.saved")}</span>
+          <span class="text-sm text-muted-foreground"
+            >revision: {$snapshot.revision ?? "local"}</span
+          >
         </div>
       </Card>
     </div>

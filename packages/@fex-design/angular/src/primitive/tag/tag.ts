@@ -1,8 +1,4 @@
-import {
-  isTagPresetColor,
-  type TagOptions,
-  type TagPresetColor,
-} from '@fex-design/core/tag/types'
+import { isTagPresetColor, type TagOptions, type TagPresetColor } from '@fex-design/core/tag/types'
 import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import {
   booleanAttribute,
@@ -39,8 +35,8 @@ export class Tag {
     const color = this.color()
     return isTagPresetColor(color) ? color : undefined
   })
-  protected readonly dataColor = computed(() =>
-    this.presetColor() ?? (this.color() ? 'custom' : null),
+  protected readonly dataColor = computed(
+    () => this.presetColor() ?? (this.color() ? 'custom' : null),
   )
   protected readonly customColor = computed(() =>
     this.color() && !this.presetColor() ? this.color() : null,

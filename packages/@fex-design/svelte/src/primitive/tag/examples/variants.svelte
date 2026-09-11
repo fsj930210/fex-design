@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Tag } from '@fex-design/svelte/primitive/tag'
+  import { Tag } from "@fex-design/svelte/primitive/tag";
 </script>
 
 <div class="flex flex-wrap gap-2">

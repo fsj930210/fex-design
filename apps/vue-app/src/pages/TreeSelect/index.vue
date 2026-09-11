@@ -32,12 +32,10 @@ const syncController = createTreeController<DepartmentNode>({
 })
 const syncData = computed(() =>
   keyword.value
-    ? (syncController
-        .getFeature<SearchFeatureApi<DepartmentNode>>('search')
-        ?.getSubtree({
-          keyword: keyword.value,
-          filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
-        }) ?? [])
+    ? (syncController.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
+        keyword: keyword.value,
+        filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
+      }) ?? [])
     : departmentTreeData,
 )
 const roots = ref<DemoDepartmentNode[]>([])

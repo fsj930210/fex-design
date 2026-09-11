@@ -8,27 +8,27 @@
 
 ## 示例
 
-| 名称 | 覆盖内容 |
-| --- | --- |
-| basic | 内置图形、标题和说明。 |
-| content | 渲染到 EmptyContent 的自定义 children。 |
-| image | 图片地址和自定义 React 内容。 |
-| direction | 中文 LTR 与阿拉伯语 RTL 布局。 |
-| styling | 结构化 classNames 和 styles。 |
+| 名称      | 覆盖内容                                |
+| --------- | --------------------------------------- |
+| basic     | 内置图形、标题和说明。                  |
+| content   | 渲染到 EmptyContent 的自定义 children。 |
+| image     | 图片地址和自定义 React 内容。           |
+| direction | 中文 LTR 与阿拉伯语 RTL 布局。          |
+| styling   | 结构化 classNames 和 styles。           |
 
 前四个示例与 Primitive Empty 的文案、布局和最终展示保持一致。
 
 ## Empty API
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| image | ReactNode \| string \| null | 内置图形 | 图片地址或自定义图片；`null` 隐藏媒体区域。 |
-| title | ReactNode | — | 空状态主标题。 |
-| description | ReactNode | — | 补充说明。 |
-| children | ReactNode | — | 渲染到 EmptyContent 的内容。 |
-| classNames | EmptyClassNames | — | root、header、image、title、description、content 的类名。 |
-| styles | EmptyStyles | — | 六个语义区域的行内样式。 |
-| 原生属性 | ComponentProps<'div'> | — | 根元素原生属性与事件。 |
+| 名称        | 类型                        | 默认值   | 说明                                                      |
+| ----------- | --------------------------- | -------- | --------------------------------------------------------- |
+| image       | ReactNode \| string \| null | 内置图形 | 图片地址或自定义图片；`null` 隐藏媒体区域。               |
+| title       | ReactNode                   | —        | 空状态主标题。                                            |
+| description | ReactNode                   | —        | 补充说明。                                                |
+| children    | ReactNode                   | —        | 渲染到 EmptyContent 的内容。                              |
+| classNames  | EmptyClassNames             | —        | root、header、image、title、description、content 的类名。 |
+| styles      | EmptyStyles                 | —        | 六个语义区域的行内样式。                                  |
+| 原生属性    | ComponentProps<'div'>       | —        | 根元素原生属性与事件。                                    |
 
 ## 结构化样式
 

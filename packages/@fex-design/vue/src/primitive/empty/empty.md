@@ -17,4 +17,3 @@ Each region accepts its native attributes through attrs and renders its default 
 ## Accessibility
 
 Use native ARIA attrs on `Empty` when dynamic updates require announcement.
-

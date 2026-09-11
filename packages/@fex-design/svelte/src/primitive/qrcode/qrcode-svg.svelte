@@ -1,26 +1,28 @@
 <script lang="ts">
-  import { qrcodeSurfaceClassName } from '@fex-design/styles/qrcode'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { SVGAttributes } from 'svelte/elements'
-  import { useQrCode } from './context'
+  import { qrcodeSurfaceClassName } from "@fex-design/styles/qrcode";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { SVGAttributes } from "svelte/elements";
+  import { useQrCode } from "./context";
 
-  interface Props extends Omit<SVGAttributes<SVGSVGElement>, 'class'> {
-    class?: string
-    children?: Snippet
+  interface Props extends Omit<SVGAttributes<SVGSVGElement>, "class"> {
+    class?: string;
+    children?: Snippet;
   }
 
   let {
     class: className,
     children,
-    role = 'img',
-    'aria-label': ariaLabel = 'QR code',
+    role = "img",
+    "aria-label": ariaLabel = "QR code",
     ...rest
-  }: Props = $props()
-  const { getModel } = useQrCode('QrCodeSvg')
-  const model = $derived(getModel())
-  const classList = $derived(cn(qrcodeSurfaceClassName, className))
-  const viewBox = $derived('0 0 ' + model.viewBoxSize + ' ' + model.viewBoxSize)
+  }: Props = $props();
+  const { getModel } = useQrCode("QrCodeSvg");
+  const model = $derived(getModel());
+  const classList = $derived(cn(qrcodeSurfaceClassName, className));
+  const viewBox = $derived(
+    "0 0 " + model.viewBoxSize + " " + model.viewBoxSize,
+  );
 </script>
 
 <svg

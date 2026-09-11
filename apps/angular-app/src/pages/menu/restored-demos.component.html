@@ -1,4 +1,4 @@
-<fex-card title="Basic" description="Items, nested children, group, divider and disabled state.">
+<div card title="Basic" description="Items, nested children, group, divider and disabled state.">
   <fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass">
       <button
@@ -45,8 +45,8 @@
       >
     </fex-menu-list></fex-menu-root
   >
-</fex-card>
-<fex-card title="Controlled" description="Expanded and selected state are owned by the caller.">
+</div>
+<div card title="Controlled" description="Expanded and selected state are owned by the caller.">
   <fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass"
       ><button
@@ -84,8 +84,8 @@
       </div></fex-menu-list
     ></fex-menu-root
   >
-</fex-card>
-<fex-card
+</div>
+<div card
   title="Multiple Selection"
   description="The caller composes multiple selected items with the same primitive."
   ><fex-menu-root [class]="rootClass"
@@ -103,9 +103,8 @@
         </button>
       }
     </fex-menu-list></fex-menu-root
-  ></fex-card
->
-<fex-card title="Suffix" description="Items accept arbitrary right-side content."
+  ></div>
+<div card title="Suffix" description="Items accept arbitrary right-side content."
   ><fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass"
       ><button fexMenuItem value="users" [class]="itemClass">
@@ -119,9 +118,8 @@
         ><span class="rounded-md bg-primary/10 px-1.5 py-0.5 text-xs text-primary">new</span>
       </button></fex-menu-list
     ></fex-menu-root
-  ></fex-card
->
-<fex-card title="Custom Item" description="The directive binds menu behavior to custom DOM."
+  ></div>
+<div card title="Custom Item" description="The directive binds menu behavior to custom DOM."
   ><fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass"
       ><a fexMenuItem value="profile" href="#profile" [class]="itemClass"
@@ -133,5 +131,4 @@
         ><span class="text-xs text-muted-foreground">Healthy</span>
       </button></fex-menu-list
     ></fex-menu-root
-  ></fex-card
->
+  ></div>

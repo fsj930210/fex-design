@@ -1,1 +1,11 @@
-{"files":{"packages/@fex-design/styles/.turbo/turbo-typecheck.log":{"size":32,"mtime_nanos":1788848189884790800,"mode":420,"is_dir":false}},"order":["packages/@fex-design/styles/.turbo/turbo-typecheck.log"]}
+{
+  "files": {
+    "packages/@fex-design/styles/.turbo/turbo-typecheck.log": {
+      "size": 32,
+      "mtime_nanos": 1788848189884790800,
+      "mode": 420,
+      "is_dir": false
+    }
+  },
+  "order": ["packages/@fex-design/styles/.turbo/turbo-typecheck.log"]
+}

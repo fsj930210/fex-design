@@ -16,7 +16,7 @@ import {
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { ChevronDownIcon, ChevronUpIcon } from '@fex-design/angular/icon/chevron'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { dataTableSortButtonClassName } from '@fex-design/styles/data-table'
 import { people, type Person } from './data'
 const modules = { rowSortingFeature, sortedRowModel: createSortedRowModel() }

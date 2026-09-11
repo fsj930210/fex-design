@@ -7,11 +7,7 @@ const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
-  <div
-    v-bind="$attrs"
-    data-slot="empty-media"
-    :class="cn(emptyMediaClassName, props.class)"
-  >
+  <div v-bind="$attrs" data-slot="empty-media" :class="cn(emptyMediaClassName, props.class)">
     <slot />
   </div>
 </template>

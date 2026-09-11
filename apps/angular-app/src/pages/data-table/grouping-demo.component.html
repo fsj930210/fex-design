@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Row grouping and aggregation"
   description="Each group is a full-width summary row above its members. Department is the outer level; Status is nested inside it. The chevron expands only that group, and the right side displays the aggregated visits."
 >
@@ -11,7 +11,7 @@
             <button
               button
               size="sm"
-              [variant]="grid.table.getColumn(id)?.getIsGrouped() ? 'default' : 'outline'"
+              [variant]="grid.table.getColumn(id)?.getIsGrouped() ? 'solid' : 'outlined'"
               (click)="grid.table.getColumn(id)?.toggleGrouping()"
             >
               {{ grid.table.getColumn(id)?.getIsGrouped() ? 'Ungroup' : 'Group' }} {{ id }}
@@ -26,8 +26,8 @@
             >
               <button
                 button
-                size="icon-xs"
-                variant="ghost"
+                size="icon-sm"
+                variant="text"
                 [attr.aria-label]="
                   (row.getIsExpanded() ? 'Collapse ' : 'Expand ') +
                   groupLabel(grid.table, row) +
@@ -58,4 +58,4 @@
       </section>
     }
   </div>
-</fex-card>
+</div>

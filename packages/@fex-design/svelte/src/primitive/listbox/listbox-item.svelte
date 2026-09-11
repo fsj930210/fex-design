@@ -1,28 +1,41 @@
 <script lang="ts">
-  import type { SelectionValue } from '@fex-design/core/selection/types'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import { getContext } from 'svelte'
-  import { listboxContextKey, type ListboxContext } from './context'
+  import type { SelectionValue } from "@fex-design/core/selection/types";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import { getContext } from "svelte";
+  import { listboxContextKey, type ListboxContext } from "./context";
 
-  interface ListboxItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onselect'> {
-    value: SelectionValue
-    disabled?: boolean
-    onSelect?: (value: SelectionValue) => void
-    children?: Snippet
+  interface ListboxItemProps extends Omit<
+    HTMLAttributes<HTMLDivElement>,
+    "onselect"
+  > {
+    value: SelectionValue;
+    disabled?: boolean;
+    onSelect?: (value: SelectionValue) => void;
+    children?: Snippet;
   }
 
-  let { value, disabled = false, onSelect, children, onclick, onkeydown, ...rest }: ListboxItemProps = $props()
-  const context = getContext<ListboxContext>(listboxContextKey)
-  const selected = $derived(context.selectedValues().includes(value))
-  const itemDisabled = $derived(disabled || context.controller.isDisabled(value))
+  let {
+    value,
+    disabled = false,
+    onSelect,
+    children,
+    onclick,
+    onkeydown,
+    ...rest
+  }: ListboxItemProps = $props();
+  const context = getContext<ListboxContext>(listboxContextKey);
+  const selected = $derived(context.selectedValues().includes(value));
+  const itemDisabled = $derived(
+    disabled || context.controller.isDisabled(value),
+  );
 
   function select() {
     if (itemDisabled) {
-      return
+      return;
     }
-    context.selectItem(value)
-    onSelect?.(value)
+    context.selectItem(value);
+    onSelect?.(value);
   }
 </script>
 
@@ -33,17 +46,17 @@
   aria-selected={selected}
   aria-disabled={itemDisabled || undefined}
   data-slot="listbox-item"
-  data-selected={selected ? 'true' : 'false'}
-  data-disabled={itemDisabled ? 'true' : undefined}
+  data-selected={selected ? "true" : "false"}
+  data-disabled={itemDisabled ? "true" : undefined}
   onclick={(event) => {
-    onclick?.(event)
-    if (!event.defaultPrevented) select()
+    onclick?.(event);
+    if (!event.defaultPrevented) select();
   }}
   onkeydown={(event) => {
-    onkeydown?.(event)
-    if (event.key !== 'Enter' && event.key !== ' ') return
-    event.preventDefault()
-    select()
+    onkeydown?.(event);
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    select();
   }}
 >
   {@render children?.()}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Tag } from '@fex-design/svelte/ui/tag'
+  import { Tag } from "@fex-design/svelte/ui/tag";
 </script>
 
 <div

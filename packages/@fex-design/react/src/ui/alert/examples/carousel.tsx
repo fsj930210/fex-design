@@ -7,8 +7,12 @@ export default function Carousel() {
       <Alert type="warning" showIcon className="overflow-hidden">
         <div className="alert-marquee overflow-hidden">
           <div className="alert-marquee-track flex w-max">
-            <span className="pe-12">系统将在今晚 22:00 至 23:00 进行维护，<a href="#notice">查看公告详情</a></span>
-            <span aria-hidden="true" className="alert-marquee-copy pe-12">系统将在今晚 22:00 至 23:00 进行维护，查看公告详情</span>
+            <span className="pe-12">
+              系统将在今晚 22:00 至 23:00 进行维护，<a href="#notice">查看公告详情</a>
+            </span>
+            <span aria-hidden="true" className="alert-marquee-copy pe-12">
+              系统将在今晚 22:00 至 23:00 进行维护，查看公告详情
+            </span>
           </div>
         </div>
       </Alert>

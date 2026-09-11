@@ -1,8 +1,8 @@
 <div class="flex gap-2">
-  <button button variant="secondary" (click)="open = !open">
+  <button button variant="filled" (click)="open = !open">
     {{ open ? 'Close externally' : 'Open externally' }}</button
   ><fex-tooltip [open]="open" (openChange)="open = $event"
-    ><button button fexTooltipTrigger variant="outline">Controlled trigger</button
+    ><button button fexTooltipTrigger variant="outlined">Controlled trigger</button
     ><fex-tooltip-portal
       ><fex-tooltip-content
         >Controlled state remains external<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal

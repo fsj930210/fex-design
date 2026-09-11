@@ -4,7 +4,7 @@ import { MinusIcon } from '@fex-design/angular/icon/minus'
 import { PlusIcon } from '@fex-design/angular/icon/plus'
 import { Progress } from '@fex-design/angular/primitive/progress'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-progress-page',
   standalone: true,

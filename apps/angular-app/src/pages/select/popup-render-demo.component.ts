@@ -9,7 +9,7 @@ import {
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-select-popup-render-demo',

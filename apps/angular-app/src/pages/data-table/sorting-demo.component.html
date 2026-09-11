@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Column sorting"
   description="Multi-sort is supported for local columns as well: each click adds or changes a priority and the superscript shows that priority. Columns without meta.sortFn remain remote terms in the same sorting state, while their pass-through comparator leaves local row order unchanged."
 >
@@ -10,7 +10,7 @@
           <ng-template fexDataTableHeader let-header>
             <button
               button
-              variant="ghost"
+              variant="text"
               type="button"
               [class]="sortButtonClassName"
               [attr.aria-pressed]="direction(header) || null"
@@ -42,4 +42,4 @@
       </section>
     }
   </div>
-</fex-card>
+</div>

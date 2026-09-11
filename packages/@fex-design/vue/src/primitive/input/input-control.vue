@@ -26,7 +26,11 @@ function setElement(value: Element | ComponentPublicInstance | null) {
   element.value = value as HTMLInputElement | null
   inputContext.setFocusElement(element.value)
 }
-defineExpose({ focus: () => element.value?.focus(), blur: () => element.value?.blur(), select: () => element.value?.select() })
+defineExpose({
+  focus: () => element.value?.focus(),
+  blur: () => element.value?.blur(),
+  select: () => element.value?.select(),
+})
 </script>
 <template>
   <input

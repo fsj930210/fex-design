@@ -88,6 +88,7 @@
     "./ui/input": "./src/ui/input/input.ts",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.ts",
+    "./ui/popover": "./src/ui/popover/popover.ts",
     "./ui/listbox": "./src/ui/listbox/listbox.ts",
     "./ui/spinner": "./src/ui/spinner/spinner.ts",
     "./ui/skeleton": "./src/ui/skeleton/skeleton.ts",

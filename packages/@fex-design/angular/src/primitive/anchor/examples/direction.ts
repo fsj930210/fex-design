@@ -1,2 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'; import { AnchorIndicator,AnchorItem,AnchorLink,AnchorList,AnchorRail,AnchorRoot } from '../anchor'
-@Component({selector:'anchor-direction-example',standalone:true,imports:[AnchorRoot,AnchorRail,AnchorIndicator,AnchorList,AnchorItem,AnchorLink],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./direction.html'}) export class AnchorDirectionExample{}
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '../anchor'
+@Component({
+  selector: 'anchor-direction-example',
+  standalone: true,
+  imports: [AnchorRoot, AnchorRail, AnchorIndicator, AnchorList, AnchorItem, AnchorLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './direction.html',
+})
+export class AnchorDirectionExample {}

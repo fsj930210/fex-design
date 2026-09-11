@@ -2,7 +2,7 @@
   lang="ts"
   generics="TFeatures extends TableFeatures, TData extends RowData"
 >
-  import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
+  import type { DataTableColumnMeta } from "@fex-design/core/data-table/types";
   import {
     getDataTableColumnLayout,
     getDataTableHeaderLayout,
@@ -17,7 +17,7 @@
     type DataTablePinningTableSource,
     type DataTableRenderingTableSource,
     type DataTableRowRenderingSource,
-  } from '@fex-design/core/data-table/layout'
+  } from "@fex-design/core/data-table/layout";
   import {
     dataTableAlignClassName,
     dataTableBodyClassName,
@@ -48,65 +48,80 @@
     dataTableClassName,
     dataTableViewportClassName,
     dataTableVirtualSpacerClassName,
-  } from '@fex-design/styles/data-table'
-  import { cn } from '@fex/utils'
-  import type { Cell, Header, Row, RowData, TableFeatures } from '@tanstack/table-core'
-  import { createVirtualizer } from '@tanstack/svelte-virtual'
-  import { untrack, type Snippet } from 'svelte'
-  import type { HTMLAttributes, HTMLTdAttributes, HTMLThAttributes } from 'svelte/elements'
+  } from "@fex-design/styles/data-table";
+  import { cn } from "@fex/utils";
+  import type {
+    Cell,
+    Header,
+    Row,
+    RowData,
+    TableFeatures,
+  } from "@tanstack/table-core";
+  import { createVirtualizer } from "@tanstack/svelte-virtual";
+  import { untrack, type Snippet } from "svelte";
+  import type {
+    HTMLAttributes,
+    HTMLTdAttributes,
+    HTMLThAttributes,
+  } from "svelte/elements";
 
-  import type { SvelteDataTable } from '../../stores/create-data-table'
+  import type { SvelteDataTable } from "../../stores/create-data-table";
 
   interface DataTableClass {
-    root?: string
-    viewport?: string
-    table?: string
-    header?: string
-    headerRow?: string
-    headerCell?: string
-    body?: string
-    row?: string
-    cell?: string
-    empty?: string
-    loading?: string
+    root?: string;
+    viewport?: string;
+    table?: string;
+    header?: string;
+    headerRow?: string;
+    headerCell?: string;
+    body?: string;
+    row?: string;
+    cell?: string;
+    empty?: string;
+    loading?: string;
   }
 
-  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class' | 'children'> {
-    table: SvelteDataTable<TFeatures, TData>
-    class?: DataTableClass
-    density?: 'compact' | 'default' | 'comfortable'
-    striped?: boolean
-    border?: boolean
-    loading?: boolean
-    loadingContent?: string
-    emptyContent?: string
-    virtual?: { height: number; estimateRowHeight?: number; overscan?: number }
-    header?: Snippet<[Header<TFeatures, TData>, number]>
-    cell?: Snippet<[Cell<TFeatures, TData>, number]>
-    groupRow?: Snippet<[Row<TFeatures, TData>, number]>
-    subComponent?: Snippet<[Row<TFeatures, TData>, number]>
-    getHeaderProps?: (header: Header<TFeatures, TData>) => HTMLThAttributes
-    getCellProps?: (cell: Cell<TFeatures, TData>) => HTMLTdAttributes
-    getRowProps?: (row: Row<TFeatures, TData>) => HTMLAttributes<HTMLTableRowElement>
-    headerAction?: PartAction<Header<TFeatures, TData>>
-    cellAction?: PartAction<Cell<TFeatures, TData>>
-    rowAction?: PartAction<Row<TFeatures, TData>>
+  interface Props extends Omit<
+    HTMLAttributes<HTMLDivElement>,
+    "class" | "children"
+  > {
+    table: SvelteDataTable<TFeatures, TData>;
+    class?: DataTableClass;
+    density?: "compact" | "default" | "comfortable";
+    striped?: boolean;
+    border?: boolean;
+    loading?: boolean;
+    loadingContent?: string;
+    emptyContent?: string;
+    virtual?: { height: number; estimateRowHeight?: number; overscan?: number };
+    header?: Snippet<[Header<TFeatures, TData>, number]>;
+    cell?: Snippet<[Cell<TFeatures, TData>, number]>;
+    groupRow?: Snippet<[Row<TFeatures, TData>, number]>;
+    subComponent?: Snippet<[Row<TFeatures, TData>, number]>;
+    getHeaderProps?: (header: Header<TFeatures, TData>) => HTMLThAttributes;
+    getCellProps?: (cell: Cell<TFeatures, TData>) => HTMLTdAttributes;
+    getRowProps?: (
+      row: Row<TFeatures, TData>,
+    ) => HTMLAttributes<HTMLTableRowElement>;
+    headerAction?: PartAction<Header<TFeatures, TData>>;
+    cellAction?: PartAction<Cell<TFeatures, TData>>;
+    rowAction?: PartAction<Row<TFeatures, TData>>;
   }
 
   type PartAction<TItem> = (
     node: HTMLElement,
     item: TItem,
-  ) => { update?: (item: TItem) => void; destroy?: () => void } | void
+  ) => { update?: (item: TItem) => void; destroy?: () => void } | void;
 
   let {
     table,
     class: classes,
-    density = 'default',
+    density = "default",
     striped = false,
     border = false,
     loading = false,
-    loadingContent = 'Loading…',
-    emptyContent = 'No data',
+    loadingContent = "Loading…",
+    emptyContent = "No data",
     virtual,
     header,
     cell,
@@ -120,37 +135,38 @@
     rowAction,
     style,
     ...rest
-  }: Props = $props()
+  }: Props = $props();
 
   type RenderColumn = ReturnType<typeof table.getAllLeafColumns>[number] &
-    DataTableColumnLayoutSource
-  type RenderCell = Cell<TFeatures, TData> & { column: RenderColumn }
-  type RenderRow = Row<TFeatures, TData> & DataTableRowRenderingSource<RenderCell>
+    DataTableColumnLayoutSource;
+  type RenderCell = Cell<TFeatures, TData> & { column: RenderColumn };
+  type RenderRow = Row<TFeatures, TData> &
+    DataTableRowRenderingSource<RenderCell>;
   type RenderTable = SvelteDataTable<TFeatures, TData> &
-    DataTableRenderingTableSource<RenderRow, RenderColumn>
+    DataTableRenderingTableSource<RenderRow, RenderColumn>;
 
   // svelte-ignore state_referenced_locally -- a DataTable table/controller is intentionally stable.
-  const renderTable = table as unknown as RenderTable
+  const renderTable = table as unknown as RenderTable;
   // svelte-ignore state_referenced_locally -- pinning layout reads the same stable controller.
-  const pinningTable = table as unknown as DataTablePinningTableSource
+  const pinningTable = table as unknown as DataTablePinningTableSource;
   // svelte-ignore state_referenced_locally -- subscriptions belong to the stable controller.
-  const snapshot = table.dataTableSnapshot
-  let viewportElement = $state<HTMLDivElement | null>(null)
+  const snapshot = table.dataTableSnapshot;
+  let viewportElement = $state<HTMLDivElement | null>(null);
   const virtualizer = createVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: 0,
     getScrollElement: () => viewportElement,
     estimateSize: () => virtual?.estimateRowHeight ?? 40,
     overscan: 8,
-  })
+  });
 
   const renderedRows = $derived.by(() => {
-    void $snapshot
-    return [...getDataTableRenderedRows(renderTable)]
-  })
+    void $snapshot;
+    return [...getDataTableRenderedRows(renderTable)];
+  });
   const virtualRows = $derived.by(() => {
-    void $snapshot
-    return [...getDataTableVirtualRows(renderTable)]
-  })
+    void $snapshot;
+    return [...getDataTableVirtualRows(renderTable)];
+  });
   $effect(() => {
     // The virtualizer store is both the command target and a notification
     // source. Reading it reactively here would make setOptions retrigger this
@@ -160,53 +176,63 @@
       getScrollElement: () => viewportElement,
       estimateSize: () => virtual?.estimateRowHeight ?? 40,
       overscan: virtual?.overscan ?? 8,
-    })
-  })
+    });
+  });
   const rows = $derived(
     virtual
       ? $virtualizer
           .getVirtualItems()
-          .map(item => virtualRows[item.index])
+          .map((item) => virtualRows[item.index])
           .filter((row): row is RenderRow => row !== undefined)
       : renderedRows,
-  )
-  const virtualTop = $derived($virtualizer.getVirtualItems()[0]?.start ?? 0)
+  );
+  const virtualTop = $derived($virtualizer.getVirtualItems()[0]?.start ?? 0);
   const virtualBottom = $derived.by(() => {
-    const last = $virtualizer.getVirtualItems().at(-1)
-    return last ? Math.max(0, $virtualizer.getTotalSize() - last.end) : 0
-  })
+    const last = $virtualizer.getVirtualItems().at(-1);
+    return last ? Math.max(0, $virtualizer.getTotalSize() - last.end) : 0;
+  });
   const columns = $derived.by(() => {
-    void $snapshot
-    return [...getDataTableVisibleLeafColumns(renderTable)]
-  })
+    void $snapshot;
+    return [...getDataTableVisibleLeafColumns(renderTable)];
+  });
   const headerGroups = $derived.by(() => {
-    void $snapshot
-    return [...table.getHeaderGroups()]
-  })
+    void $snapshot;
+    return [...table.getHeaderGroups()];
+  });
   const sizingLayout = $derived.by(() => {
-    void $snapshot
-    return getDataTableSizingLayout(table)
-  })
-  const tableWidth = $derived(sizingLayout.tableWidth)
+    void $snapshot;
+    return getDataTableSizingLayout(table);
+  });
+  const tableWidth = $derived(sizingLayout.tableWidth);
 
-  function renderTemplate(template: unknown, context: unknown, revision: number) {
-    void revision
-    return typeof template === 'function' ? template(context) : template
+  function renderTemplate(
+    template: unknown,
+    context: unknown,
+    revision: number,
+  ) {
+    void revision;
+    return typeof template === "function" ? template(context) : template;
   }
   function text(value: unknown) {
-    return value === undefined || value === null ? '' : String(value)
+    return value === undefined || value === null ? "" : String(value);
   }
   function metaOf(column: { columnDef: { meta?: unknown } }) {
-    return column.columnDef.meta as DataTableColumnMeta | undefined
+    return column.columnDef.meta as DataTableColumnMeta | undefined;
   }
-  function layoutStyle(layout: ReturnType<typeof getDataTableColumnLayout>['style']) {
+  function layoutStyle(
+    layout: ReturnType<typeof getDataTableColumnLayout>["style"],
+  ) {
     return {
       position: layout.position,
       width: layout.width === undefined ? undefined : `${layout.width}px`,
       insetInlineStart:
-        layout.insetInlineStart === undefined ? undefined : `${layout.insetInlineStart}px`,
+        layout.insetInlineStart === undefined
+          ? undefined
+          : `${layout.insetInlineStart}px`,
       insetInlineEnd:
-        layout.insetInlineEnd === undefined ? undefined : `${layout.insetInlineEnd}px`,
+        layout.insetInlineEnd === undefined
+          ? undefined
+          : `${layout.insetInlineEnd}px`,
       top: layout.top,
       bottom: layout.bottom,
       zIndex: layout.zIndex,
@@ -214,117 +240,143 @@
         ? `var(--${layout.backgroundColor})`
         : undefined,
       boxShadow: layout.boxShadow,
-    }
+    };
   }
   function styleToString(value: Record<string, string | number | undefined>) {
     return Object.entries(value)
-      .filter((entry): entry is [string, string | number] => entry[1] !== undefined)
-      .map(([key, item]) => `${key.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`)}:${item}`)
-      .join(';')
+      .filter(
+        (entry): entry is [string, string | number] => entry[1] !== undefined,
+      )
+      .map(
+        ([key, item]) =>
+          `${key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)}:${item}`,
+      )
+      .join(";");
   }
   function mergedStyle(
-    layout: ReturnType<typeof getDataTableColumnLayout>['style'],
+    layout: ReturnType<typeof getDataTableColumnLayout>["style"],
     nativeStyle: string | null | undefined,
   ) {
-    const layoutValue = styleToString(layoutStyle(layout))
-    return nativeStyle ? `${layoutValue};${nativeStyle}` : layoutValue
+    const layoutValue = styleToString(layoutStyle(layout));
+    return nativeStyle ? `${layoutValue};${nativeStyle}` : layoutValue;
   }
   function isGrouped(row: RenderRow) {
-    return 'getIsGrouped' in row && typeof row.getIsGrouped === 'function' && row.getIsGrouped()
+    return (
+      "getIsGrouped" in row &&
+      typeof row.getIsGrouped === "function" &&
+      row.getIsGrouped()
+    );
   }
   function isExpanded(row: RenderRow) {
-    return 'getIsExpanded' in row && typeof row.getIsExpanded === 'function' && row.getIsExpanded()
+    return (
+      "getIsExpanded" in row &&
+      typeof row.getIsExpanded === "function" &&
+      row.getIsExpanded()
+    );
   }
   function headerLayoutOf(item: Header<TFeatures, TData>, revision: number) {
-    void revision
-    return getDataTableHeaderLayout(item, pinningTable)
+    void revision;
+    return getDataTableHeaderLayout(item, pinningTable);
   }
   function rowLayoutOf(row: RenderRow, revision: number) {
-    void revision
-    return getDataTableRowLayout(row, pinningTable)
+    void revision;
+    return getDataTableRowLayout(row, pinningTable);
   }
   function cellsOf(row: RenderRow, revision: number) {
-    void revision
-    return [...getDataTableRenderedCells(row)]
+    void revision;
+    return [...getDataTableRenderedCells(row)];
   }
   function columnSizeOf(column: RenderColumn, revision: number) {
-    void revision
-    return column.getSize?.()
+    void revision;
+    return column.getSize?.();
   }
   function cellLayoutOf(item: Cell<TFeatures, TData>, revision: number) {
-    void revision
-    return getDataTableColumnLayout(item.column, pinningTable)
+    void revision;
+    return getDataTableColumnLayout(item.column, pinningTable);
   }
   function rowPinned(row: RenderRow, revision: number) {
-    void revision
-    return row.getIsPinned?.() ?? false
+    void revision;
+    return row.getIsPinned?.() ?? false;
   }
   function headerPropsOf(item: Header<TFeatures, TData>, revision: number) {
-    void revision
-    return getHeaderProps?.(item) ?? {}
+    void revision;
+    return getHeaderProps?.(item) ?? {};
   }
   function cellPropsOf(item: Cell<TFeatures, TData>, revision: number) {
-    void revision
-    return getCellProps?.(item) ?? {}
+    void revision;
+    return getCellProps?.(item) ?? {};
   }
   function rowPropsOf(row: Row<TFeatures, TData>, revision: number) {
-    void revision
-    return getRowProps?.(row) ?? {}
+    void revision;
+    return getRowProps?.(row) ?? {};
   }
   type ResizableHeader = Header<TFeatures, TData> & {
-    column: Header<TFeatures, TData>['column'] & {
-      getCanResize?: () => boolean
-      getIsResizing?: () => boolean
-      resetSize?: () => void
-    }
-    getResizeHandler?: () => (event: MouseEvent | TouchEvent) => void
-  }
-  const resizable = (value: Header<TFeatures, TData>) => value as ResizableHeader
-  const resizeHandle = (node: HTMLElement, initialHeader: Header<TFeatures, TData>) => {
-    let currentHeader = initialHeader
-    let cleanupPointerSession: (() => void) | undefined
+    column: Header<TFeatures, TData>["column"] & {
+      getCanResize?: () => boolean;
+      getIsResizing?: () => boolean;
+      resetSize?: () => void;
+    };
+    getResizeHandler?: () => (event: MouseEvent | TouchEvent) => void;
+  };
+  const resizable = (value: Header<TFeatures, TData>) =>
+    value as ResizableHeader;
+  const resizeHandle = (
+    node: HTMLElement,
+    initialHeader: Header<TFeatures, TData>,
+  ) => {
+    let currentHeader = initialHeader;
+    let cleanupPointerSession: (() => void) | undefined;
     const onPointerDown = (event: PointerEvent) => {
-      if (event.button !== 0) return
-      event.preventDefault()
-      const ownerDocument = node.ownerDocument
+      if (event.button !== 0) return;
+      event.preventDefault();
+      const ownerDocument = node.ownerDocument;
       const onPointerMove = (moveEvent: PointerEvent) => {
-        ownerDocument.dispatchEvent(new MouseEvent('mousemove', { clientX: moveEvent.clientX }))
-      }
+        ownerDocument.dispatchEvent(
+          new MouseEvent("mousemove", { clientX: moveEvent.clientX }),
+        );
+      };
       const onPointerUp = (upEvent: PointerEvent) => {
-        cleanupPointerSession?.()
-        ownerDocument.dispatchEvent(new MouseEvent('mouseup', { clientX: upEvent.clientX }))
-      }
-      cleanupPointerSession?.()
+        cleanupPointerSession?.();
+        ownerDocument.dispatchEvent(
+          new MouseEvent("mouseup", { clientX: upEvent.clientX }),
+        );
+      };
+      cleanupPointerSession?.();
       cleanupPointerSession = () => {
-        ownerDocument.removeEventListener('pointermove', onPointerMove)
-        ownerDocument.removeEventListener('pointerup', onPointerUp)
-        ownerDocument.removeEventListener('pointercancel', onPointerUp)
-        cleanupPointerSession = undefined
-      }
-      ownerDocument.addEventListener('pointermove', onPointerMove)
-      ownerDocument.addEventListener('pointerup', onPointerUp)
-      ownerDocument.addEventListener('pointercancel', onPointerUp)
-      resizable(currentHeader).getResizeHandler?.()(event as unknown as MouseEvent)
-    }
-    node.addEventListener('pointerdown', onPointerDown)
+        ownerDocument.removeEventListener("pointermove", onPointerMove);
+        ownerDocument.removeEventListener("pointerup", onPointerUp);
+        ownerDocument.removeEventListener("pointercancel", onPointerUp);
+        cleanupPointerSession = undefined;
+      };
+      ownerDocument.addEventListener("pointermove", onPointerMove);
+      ownerDocument.addEventListener("pointerup", onPointerUp);
+      ownerDocument.addEventListener("pointercancel", onPointerUp);
+      resizable(currentHeader).getResizeHandler?.()(
+        event as unknown as MouseEvent,
+      );
+    };
+    node.addEventListener("pointerdown", onPointerDown);
     return {
       update(nextHeader: Header<TFeatures, TData>) {
-        currentHeader = nextHeader
+        currentHeader = nextHeader;
       },
       destroy() {
-        cleanupPointerSession?.()
-        node.removeEventListener('pointerdown', onPointerDown)
+        cleanupPointerSession?.();
+        node.removeEventListener("pointerdown", onPointerDown);
       },
-    }
-  }
-  function applyHeaderAction(node: HTMLElement, item: Header<TFeatures, TData>) {
-    return headerAction?.(node, item)
+    };
+  };
+  function applyHeaderAction(
+    node: HTMLElement,
+    item: Header<TFeatures, TData>,
+  ) {
+    return headerAction?.(node, item);
   }
   function applyCellAction(node: HTMLElement, item: Cell<TFeatures, TData>) {
-    return cellAction?.(node, item)
+    return cellAction?.(node, item);
   }
   function applyRowAction(node: HTMLElement, item: Row<TFeatures, TData>) {
-    return rowAction?.(node, item)
+    return rowAction?.(node, item);
   }
 </script>
 
@@ -332,8 +384,11 @@
   {...rest}
   data-slot="data-table"
   data-loading={loading || undefined}
-  class={cn(dataTableRootClassName({ density, striped, bordered: border }), classes?.root)}
-  style={`--data-table-header-height:var(--data-table-row-height);${sizingLayout.rootWidth ? `width:${sizingLayout.rootWidth};` : ''}${style ?? ''}`}
+  class={cn(
+    dataTableRootClassName({ density, striped, bordered: border }),
+    classes?.root,
+  )}
+  style={`--data-table-header-height:var(--data-table-row-height);${sizingLayout.rootWidth ? `width:${sizingLayout.rootWidth};` : ""}${style ?? ""}`}
 >
   <div
     bind:this={viewportElement}
@@ -343,18 +398,28 @@
   >
     <table
       class={cn(dataTableClassName, classes?.table)}
-      style:width={tableWidth === undefined ? '100%' : `${tableWidth}px`}
+      style:width={tableWidth === undefined ? "100%" : `${tableWidth}px`}
     >
       {#if tableWidth !== undefined}
         <colgroup>
           {#each columns as column (column.id)}
-            <col style:width={columnSizeOf(column, $snapshot.revision) === undefined ? undefined : `${columnSizeOf(column, $snapshot.revision)}px`} />
+            <col
+              style:width={columnSizeOf(column, $snapshot.revision) ===
+              undefined
+                ? undefined
+                : `${columnSizeOf(column, $snapshot.revision)}px`}
+            />
           {/each}
         </colgroup>
       {/if}
       <thead class={cn(dataTableHeaderClassName, classes?.header)}>
         {#each headerGroups as headerGroup (headerGroup.id)}
-          <tr class={cn(dataTableHeaderRowClassName({ bordered: border }), classes?.headerRow)}>
+          <tr
+            class={cn(
+              dataTableHeaderRowClassName({ bordered: border }),
+              classes?.headerRow,
+            )}
+          >
             {#each headerGroup.headers as item, index (item.id)}
               {@const nativeProps = headerPropsOf(item, $snapshot.revision)}
               {@const layout = headerLayoutOf(item, $snapshot.revision)}
@@ -366,12 +431,17 @@
                   dataTableHeaderCellClassName,
                   layout.pinned && dataTablePinnedCellClassName,
                   layout.pinned && dataTablePinnedHeaderCellClassName,
-                  layout.pinned === 'start' && dataTablePinnedStartClassName,
-                  layout.pinned === 'end' && dataTablePinnedEndClassName,
+                  layout.pinned === "start" && dataTablePinnedStartClassName,
+                  layout.pinned === "end" && dataTablePinnedEndClassName,
                   layout.isStartEdge && dataTablePinnedStartEdgeClassName,
                   layout.isEndEdge && dataTablePinnedEndEdgeClassName,
-                  !border && headerGroup.headers.slice(index + 1).some(next => !next.isPlaceholder) && dataTableHeaderSeparatorClassName,
-                  metaOf(item.column)?.align && dataTableAlignClassName[metaOf(item.column)!.align!],
+                  !border &&
+                    headerGroup.headers
+                      .slice(index + 1)
+                      .some((next) => !next.isPlaceholder) &&
+                    dataTableHeaderSeparatorClassName,
+                  metaOf(item.column)?.align &&
+                    dataTableAlignClassName[metaOf(item.column)!.align!],
                   metaOf(item.column)?.headerClassName,
                   classes?.headerCell,
                   nativeProps.class,
@@ -379,9 +449,21 @@
                 style={mergedStyle(layout.style, nativeProps.style)}
               >
                 {#if !item.isPlaceholder}
-                  <div data-slot="data-table-header-content" class={dataTableHeaderContentClassName}>
+                  <div
+                    data-slot="data-table-header-content"
+                    class={dataTableHeaderContentClassName}
+                  >
                     {#key $snapshot.revision}
-                      {#if header}{@render header(item, $snapshot.revision)}{:else}{text(renderTemplate(item.column.columnDef.header, item.getContext(), $snapshot.revision))}{/if}
+                      {#if header}{@render header(
+                          item,
+                          $snapshot.revision,
+                        )}{:else}{text(
+                          renderTemplate(
+                            item.column.columnDef.header,
+                            item.getContext(),
+                            $snapshot.revision,
+                          ),
+                        )}{/if}
                     {/key}
                   </div>
                 {/if}
@@ -390,7 +472,8 @@
                     type="button"
                     use:resizeHandle={item}
                     aria-label={`Resize ${item.column.id}`}
-                    data-resizing={resizable(item).column.getIsResizing?.() || undefined}
+                    data-resizing={resizable(item).column.getIsResizing?.() ||
+                      undefined}
                     class={dataTableResizeHandleClassName}
                     ondblclick={() => resizable(item).column.resetSize?.()}
                   ></button>
@@ -402,7 +485,16 @@
       </thead>
       <tbody class={cn(dataTableBodyClassName, classes?.body)}>
         {#if virtual && virtualTop > 0}
-          <tr aria-hidden="true"><td colspan={Math.max(1, getDataTableVisibleLeafColumnCount(renderTable))} class={dataTableVirtualSpacerClassName} style:height={`${virtualTop}px`}></td></tr>
+          <tr aria-hidden="true"
+            ><td
+              colspan={Math.max(
+                1,
+                getDataTableVisibleLeafColumnCount(renderTable),
+              )}
+              class={dataTableVirtualSpacerClassName}
+              style:height={`${virtualTop}px`}
+            ></td></tr
+          >
         {/if}
         {#if rows.length}
           {#each rows as row (row.id)}
@@ -417,10 +509,11 @@
               class={cn(
                 dataTableRowClassName,
                 pinned && dataTablePinnedRowClassName,
-                pinned === 'top' && dataTablePinnedTopRowClassName,
-                pinned === 'bottom' && dataTablePinnedBottomRowClassName,
-                rowLayout.edge === 'top' && dataTablePinnedTopEdgeClassName,
-                rowLayout.edge === 'bottom' && dataTablePinnedBottomEdgeClassName,
+                pinned === "top" && dataTablePinnedTopRowClassName,
+                pinned === "bottom" && dataTablePinnedBottomRowClassName,
+                rowLayout.edge === "top" && dataTablePinnedTopEdgeClassName,
+                rowLayout.edge === "bottom" &&
+                  dataTablePinnedBottomEdgeClassName,
                 isGrouped(row) && dataTableGroupedRowClassName,
                 classes?.row,
                 nativeRowProps.class,
@@ -428,12 +521,24 @@
               style={mergedStyle(rowLayout.style, nativeRowProps.style)}
             >
               {#if $snapshot.revision >= 0 && isGrouped(row) && groupRow}
-                <td colspan={Math.max(1, getDataTableVisibleLeafColumnCount(renderTable))} class={cn(dataTableCellClassName, classes?.cell)}>
-                  {#key $snapshot.revision}{@render groupRow(row, $snapshot.revision)}{/key}
+                <td
+                  colspan={Math.max(
+                    1,
+                    getDataTableVisibleLeafColumnCount(renderTable),
+                  )}
+                  class={cn(dataTableCellClassName, classes?.cell)}
+                >
+                  {#key $snapshot.revision}{@render groupRow(
+                      row,
+                      $snapshot.revision,
+                    )}{/key}
                 </td>
               {:else}
                 {#each cellsOf(row, $snapshot.revision) as item (item.id)}
-                  {@const nativeCellProps = cellPropsOf(item, $snapshot.revision)}
+                  {@const nativeCellProps = cellPropsOf(
+                    item,
+                    $snapshot.revision,
+                  )}
                   {@const cellLayout = cellLayoutOf(item, $snapshot.revision)}
                   <td
                     {...nativeCellProps}
@@ -441,11 +546,15 @@
                     class={cn(
                       dataTableCellClassName,
                       cellLayout.pinned && dataTablePinnedCellClassName,
-                      cellLayout.pinned === 'start' && dataTablePinnedStartClassName,
-                      cellLayout.pinned === 'end' && dataTablePinnedEndClassName,
-                      cellLayout.isStartEdge && dataTablePinnedStartEdgeClassName,
+                      cellLayout.pinned === "start" &&
+                        dataTablePinnedStartClassName,
+                      cellLayout.pinned === "end" &&
+                        dataTablePinnedEndClassName,
+                      cellLayout.isStartEdge &&
+                        dataTablePinnedStartEdgeClassName,
                       cellLayout.isEndEdge && dataTablePinnedEndEdgeClassName,
-                      metaOf(item.column)?.align && dataTableAlignClassName[metaOf(item.column)!.align!],
+                      metaOf(item.column)?.align &&
+                        dataTableAlignClassName[metaOf(item.column)!.align!],
                       metaOf(item.column)?.cellClassName,
                       classes?.cell,
                       nativeCellProps.class,
@@ -454,7 +563,16 @@
                   >
                     <div class={dataTableCellContentClassName}>
                       {#key $snapshot.revision}
-                        {#if cell}{@render cell(item, $snapshot.revision)}{:else}{text(renderTemplate(item.column.columnDef.cell, item.getContext(), $snapshot.revision) ?? item.getValue())}{/if}
+                        {#if cell}{@render cell(
+                            item,
+                            $snapshot.revision,
+                          )}{:else}{text(
+                            renderTemplate(
+                              item.column.columnDef.cell,
+                              item.getContext(),
+                              $snapshot.revision,
+                            ) ?? item.getValue(),
+                          )}{/if}
                       {/key}
                     </div>
                   </td>
@@ -462,17 +580,44 @@
               {/if}
             </tr>
             {#if $snapshot.revision >= 0 && isExpanded(row) && subComponent}
-              <tr class={dataTableRowClassName}><td colspan={getDataTableVisibleLeafColumnCount(renderTable)}>{#key $snapshot.revision}{@render subComponent(row, $snapshot.revision)}{/key}</td></tr>
+              <tr class={dataTableRowClassName}
+                ><td colspan={getDataTableVisibleLeafColumnCount(renderTable)}
+                  >{#key $snapshot.revision}{@render subComponent(
+                      row,
+                      $snapshot.revision,
+                    )}{/key}</td
+                ></tr
+              >
             {/if}
           {/each}
         {:else}
-          <tr><td colspan={Math.max(1, getDataTableVisibleLeafColumnCount(renderTable))} class={cn(dataTableEmptyClassName, classes?.empty)}>{emptyContent}</td></tr>
+          <tr
+            ><td
+              colspan={Math.max(
+                1,
+                getDataTableVisibleLeafColumnCount(renderTable),
+              )}
+              class={cn(dataTableEmptyClassName, classes?.empty)}
+              >{emptyContent}</td
+            ></tr
+          >
         {/if}
         {#if virtual && virtualBottom > 0}
-          <tr aria-hidden="true"><td colspan={Math.max(1, getDataTableVisibleLeafColumnCount(renderTable))} class={dataTableVirtualSpacerClassName} style:height={`${virtualBottom}px`}></td></tr>
+          <tr aria-hidden="true"
+            ><td
+              colspan={Math.max(
+                1,
+                getDataTableVisibleLeafColumnCount(renderTable),
+              )}
+              class={dataTableVirtualSpacerClassName}
+              style:height={`${virtualBottom}px`}
+            ></td></tr
+          >
         {/if}
       </tbody>
     </table>
   </div>
-  {#if loading}<div class={cn(dataTableLoadingClassName, classes?.loading)}>{loadingContent}</div>{/if}
+  {#if loading}<div class={cn(dataTableLoadingClassName, classes?.loading)}>
+      {loadingContent}
+    </div>{/if}
 </div>

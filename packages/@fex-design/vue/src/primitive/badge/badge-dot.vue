@@ -15,7 +15,13 @@ const customColor = computed(() => (props.color && !presetColor.value ? props.co
     data-slot="badge-dot"
     :data-color="color ?? 'default'"
     :data-size="props.size ?? 'md'"
-    :class="cn(badgeDotClassName({ size: props.size }), badgeDotColorClassName({ color: presetColor }), attrs.class)"
+    :class="
+      cn(
+        badgeDotClassName({ size: props.size }),
+        badgeDotColorClassName({ color: presetColor }),
+        attrs.class,
+      )
+    "
     :style="[{ '--badge-color': customColor }, attrs.style]"
   />
 </template>

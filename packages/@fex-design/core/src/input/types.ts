@@ -20,12 +20,7 @@ export interface InputVisualOptions {
   variant?: InputVariant
 }
 
-export type InputSearchSource =
-  | 'enter'
-  | 'prefix'
-  | 'suffix'
-  | 'addonBefore'
-  | 'addonAfter'
+export type InputSearchSource = 'enter' | 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter'
 
 export interface InputSearchMeta {
   source: InputSearchSource

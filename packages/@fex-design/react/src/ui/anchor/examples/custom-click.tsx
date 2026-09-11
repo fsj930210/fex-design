@@ -7,7 +7,10 @@ const items = [
 export function CustomClickExample() {
   const container = useRef<HTMLDivElement>(null)
   return (
-    <div ref={container} className="grid h-80 w-full max-w-2xl grid-cols-[14rem_1fr] gap-6 overflow-auto rounded-lg border p-4">
+    <div
+      ref={container}
+      className="grid h-80 w-full max-w-2xl grid-cols-[14rem_1fr] gap-6 overflow-auto rounded-lg border p-4"
+    >
       <Anchor
         items={items}
         container={() => container.current}
@@ -17,7 +20,10 @@ export function CustomClickExample() {
           if (item.key === 'blocked') event.preventDefault()
         }}
       />
-      <div className="grid gap-40 pb-64"><section id="react-ui-click-normal">正常目标</section><section id="react-ui-click-blocked">被阻止的目标</section></div>
+      <div className="grid gap-40 pb-64">
+        <section id="react-ui-click-normal">正常目标</section>
+        <section id="react-ui-click-blocked">被阻止的目标</section>
+      </div>
     </div>
   )
 }

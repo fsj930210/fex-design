@@ -33,7 +33,9 @@ const input = useInput({
   onClear: (meta) => emit('clear', meta),
 })
 provide(inputContextKey, input)
-const className = computed(() => cn(inputRootClassName({ size: props.size, variant: props.variant }), props.class))
+const className = computed(() =>
+  cn(inputRootClassName({ size: props.size, variant: props.variant }), props.class),
+)
 </script>
 <template>
   <div

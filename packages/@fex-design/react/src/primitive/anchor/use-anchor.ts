@@ -58,7 +58,10 @@ export function useAnchor({
     defaultActiveKeys,
     onChange: (keys) => {
       const activeSet = new Set(keys)
-      onChange?.(keys, items.filter((item) => activeSet.has(item.key)))
+      onChange?.(
+        keys,
+        items.filter((item) => activeSet.has(item.key)),
+      )
     },
   })
   const { activeKeys } = useCoreStore(controller)
@@ -93,9 +96,7 @@ export function useAnchor({
     const scrollContainer = resolveContainer()
     const positions = visibleItems.flatMap((item) => {
       const target = resolveAnchorTarget(item.target)
-      return target
-        ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }]
-        : []
+      return target ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }] : []
     })
     change(
       getAnchorActiveKeys({
@@ -121,7 +122,10 @@ export function useAnchor({
     )
     clickScrollGuard.lock()
     scrollContainer.scrollTo({
-      top: Math.max(getAnchorTargetTop(target, scrollContainer) - (item.targetOffset ?? targetOffset), 0),
+      top: Math.max(
+        getAnchorTargetTop(target, scrollContainer) - (item.targetOffset ?? targetOffset),
+        0,
+      ),
       behavior,
     })
   })

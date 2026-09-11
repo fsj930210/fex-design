@@ -1,21 +1,38 @@
 <script lang="ts">
-  import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
-  import { Button, ButtonGroup } from '@fex-design/svelte/ui/button'
-  import Card from '@fex-design/svelte/ui/card'
-  import PlusIcon from '@fex-design/svelte/icon/plus'
+  import { Button as PrimitiveButton } from "@fex-design/svelte/primitive/button";
+  import { Button, ButtonGroup } from "@fex-design/svelte/ui/button";
+  import Card from "@fex-design/svelte/ui/card";
+  import PlusIcon from "@fex-design/svelte/icon/plus";
 
-  const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
-  const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
+  const variants = [
+    "default",
+    "outline",
+    "secondary",
+    "ghost",
+    "destructive",
+    "link",
+    "dashed",
+  ] as const;
+  const sizes = [
+    "xs",
+    "sm",
+    "default",
+    "lg",
+    "icon",
+    "icon-xs",
+    "icon-sm",
+    "icon-lg",
+  ] as const;
   const effects = [
-    'expand-icon',
-    'ring-hover',
-    'shine-hover',
-    'gooey-start',
-    'gooey-end',
-    'underline',
-    'hover-underline',
-    'press',
-  ] as const
+    "expand-icon",
+    "ring-hover",
+    "shine-hover",
+    "gooey-start",
+    "gooey-end",
+    "underline",
+    "hover-underline",
+    "press",
+  ] as const;
 </script>
 
 {#snippet demoIcon()}
@@ -25,7 +42,9 @@
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
   <div class="mx-auto w-full max-w-5xl space-y-4">
     <header class="space-y-4">
-      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</a>
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/"
+        >返回首页</a
+      >
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Button</h1>
         <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -35,7 +54,23 @@
     </header>
 
     <div class="grid gap-4">
-      <Card title="Button group" description="Groups related actions without owning their value."><div class="flex flex-wrap items-start gap-3"><ButtonGroup><Button variant="outline">Previous</Button><Button variant="outline">Current</Button><Button variant="outline">Next</Button></ButtonGroup><ButtonGroup spacing={8}><Button>Save</Button><Button>Publish</Button></ButtonGroup><ButtonGroup orientation="vertical"><Button variant="outline">Move up</Button><Button variant="outline">Move down</Button></ButtonGroup></div></Card>
+      <Card
+        title="Button group"
+        description="Groups related actions without owning their value."
+        ><div class="flex flex-wrap items-start gap-3">
+          <ButtonGroup
+            ><Button variant="outline">Previous</Button><Button
+              variant="outline">Current</Button
+            ><Button variant="outline">Next</Button></ButtonGroup
+          ><ButtonGroup spacing={8}
+            ><Button>Save</Button><Button>Publish</Button></ButtonGroup
+          ><ButtonGroup orientation="vertical"
+            ><Button variant="outline">Move up</Button><Button variant="outline"
+              >Move down</Button
+            ></ButtonGroup
+          >
+        </div></Card
+      >
       <Card title="Primitive" description="按钮底层骨架与最小行为。">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <PrimitiveButton>Primitive button</PrimitiveButton>
@@ -61,8 +96,11 @@
       <Card title="Sizes" description="文本按钮和 icon-only 按钮尺寸。">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           {#each sizes as size}
-            <Button {size} aria-label={size.startsWith('icon') ? size : undefined}>
-              {#if size.startsWith('icon')}
+            <Button
+              {size}
+              aria-label={size.startsWith("icon") ? size : undefined}
+            >
+              {#if size.startsWith("icon")}
                 {@render demoIcon()}
               {:else}
                 {size}
@@ -72,7 +110,10 @@
         </div>
       </Card>
 
-      <Card title="Loading" description="加载态会禁用按钮，loading icon 跟随 iconPlacement。">
+      <Card
+        title="Loading"
+        description="加载态会禁用按钮，loading icon 跟随 iconPlacement。"
+      >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <Button loading>Loading start</Button>
           <Button loading iconPlacement="end">Loading end</Button>
@@ -89,8 +130,10 @@
       <Card title="Effects" description="单独展示适合基础按钮使用的视觉效果。">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           {#each effects as effect}
-            {#if effect === 'expand-icon'}
-              <Button {effect} icon={demoIcon} iconPlacement="end">{effect}</Button>
+            {#if effect === "expand-icon"}
+              <Button {effect} icon={demoIcon} iconPlacement="end"
+                >{effect}</Button
+              >
             {:else}
               <Button {effect} iconPlacement="end">{effect}</Button>
             {/if}
@@ -98,18 +141,34 @@
         </div>
       </Card>
 
-      <Card title="Mixed Usage" description="不同 variant、icon、loading 和 effect 的组合。">
+      <Card
+        title="Mixed Usage"
+        description="不同 variant、icon、loading 和 effect 的组合。"
+      >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
-          <Button effect="expand-icon" icon={demoIcon} iconPlacement="end">Icon right</Button>
+          <Button effect="expand-icon" icon={demoIcon} iconPlacement="end"
+            >Icon right</Button
+          >
           <Button effect="expand-icon" icon={demoIcon}>Icon left</Button>
-          <Button variant="secondary" effect="gooey-start">Secondary gooey start</Button>
-          <Button variant="destructive" effect="gooey-end">Destructive gooey end</Button>
+          <Button variant="secondary" effect="gooey-start"
+            >Secondary gooey start</Button
+          >
+          <Button variant="destructive" effect="gooey-end"
+            >Destructive gooey end</Button
+          >
           <Button variant="destructive" effect="press">Pressed feedback</Button>
-          <Button variant="outline" effect="ring-hover">Outline ring hover</Button>
-          <Button variant="link" effect="hover-underline">Link hover underline</Button>
+          <Button variant="outline" effect="ring-hover"
+            >Outline ring hover</Button
+          >
+          <Button variant="link" effect="hover-underline"
+            >Link hover underline</Button
+          >
           <Button variant="link" effect="underline">Link underline</Button>
-          <Button variant="outline" effect="hover-underline">Outline hover underline</Button>
-          <Button variant="outline" effect="underline">Outline underline</Button>
+          <Button variant="outline" effect="hover-underline"
+            >Outline hover underline</Button
+          >
+          <Button variant="outline" effect="underline">Outline underline</Button
+          >
           <Button variant="destructive" loading>Destructive loading</Button>
           <Button loading iconPlacement="end">Loading with icon</Button>
         </div>

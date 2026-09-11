@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="One-way composition"
   description="A custom action area only moves records to the target; target rows remove themselves through the same Transfer controller."
 >
@@ -13,8 +13,8 @@
       <ng-template fexTransferActions let-api>
         <button
           button
-          size="icon"
-          variant="outline"
+          size="icon-md"
+          variant="outlined"
           aria-label="Move selected to target"
           [disabled]="!api.canMoveToTarget"
           (click)="api.controller.moveToTarget()"
@@ -33,8 +33,8 @@
               <span class="min-w-0 flex-1 truncate">{{ item.name }}</span>
               <button
                 button
-                variant="ghost"
-                size="icon-xs"
+                variant="text"
+                size="icon-sm"
                 [attr.aria-label]="'Remove ' + item.name"
                 [disabled]="disabled() || item.disabled === true"
                 (click)="api.setCheckedKeys([item.id]); api.controller.moveToSource()"
@@ -58,4 +58,4 @@
       Disabled
     </label>
   </div>
-</fex-card>
+</div>

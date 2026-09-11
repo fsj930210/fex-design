@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Custom trigger"
   description="Use item methods when the toggle target is fully custom."
 >
@@ -8,7 +8,7 @@
         <div class="flex items-center gap-1.5 px-1.5 py-1.5">
           <button
             button
-            variant="ghost"
+            variant="text"
             size="icon-sm"
             [attr.aria-expanded]="panel.expanded()"
             aria-label="Toggle panel"
@@ -20,10 +20,10 @@
             />
           </button>
           <span class="flex-1 text-sm font-medium">{{ item.title }}</span>
-          <button button variant="outline" size="sm" (click)="panel.expand()">Open</button>
+          <button button variant="outlined" size="sm" (click)="panel.expand()">Open</button>
         </div>
         <div fexCollapseContent class="pt-0">{{ item.content }}</div>
       </div>
     }
   </div>
-</fex-card>
+</div>

@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Row pinning"
   description="Pinned rows are opaque layers above the scrollable center region. Their edge shadow appears only at the boundary, and the controls can add more rows to either region."
 >
@@ -9,15 +9,15 @@
         @if (cell.column.id === 'name') {
           <span class="inline-flex items-center gap-2">
             @if (pinned(cell); as position) {
-              <fex-badge variant="outline">Pinned {{ position }}</fex-badge>
+              <badge variant="outline">Pinned {{ position }}</badge>
             }
             {{ cell.row.original.name }}
           </span>
         } @else if (cell.column.id === 'pin') {
           <span class="inline-flex gap-1">
-            <button button size="sm" variant="outline" (click)="pin(cell, 'top')">Top</button>
-            <button button size="sm" variant="outline" (click)="pin(cell, false)">Center</button>
-            <button button size="sm" variant="outline" (click)="pin(cell, 'bottom')">Bottom</button>
+            <button button size="sm" variant="outlined" (click)="pin(cell, 'top')">Top</button>
+            <button button size="sm" variant="outlined" (click)="pin(cell, false)">Center</button>
+            <button button size="sm" variant="outlined" (click)="pin(cell, 'bottom')">Bottom</button>
           </span>
         } @else {
           {{ cell.getValue() }}
@@ -25,4 +25,4 @@
       </ng-template>
     </fex-data-table>
   </section>
-</fex-card>
+</div>

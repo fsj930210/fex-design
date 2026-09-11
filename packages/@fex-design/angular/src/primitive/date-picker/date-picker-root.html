@@ -1,4 +1,4 @@
-<fex-popover
+<div popoverRoot
   [open]="context().open"
   [trigger]="[]"
   placement="bottom"
@@ -6,8 +6,7 @@
   (openChange)="setOpen($event)"
 >
   <ng-content select="fex-date-picker-trigger" />
-  <fex-popover-portal
-    ><fex-popover-content [class]="contentClassName()">
-      <ng-content select="fex-date-picker-content" /> </fex-popover-content
-  ></fex-popover-portal>
-</fex-popover>
+  <ng-template popoverPortal
+    ><div popoverContent [class]="contentClassName()">
+      <ng-content select="fex-date-picker-content" /> </div></ng-template>
+</div>

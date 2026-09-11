@@ -2,7 +2,7 @@ import type { InputOTPChangeMeta, InputOTPValue } from '@fex-design/core/input-o
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { InputOTPGroup, InputOTPInput, InputOTPRoot } from '@fex-design/angular/primitive/input-otp'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-input-otp-controlled-demo',
   standalone: true,

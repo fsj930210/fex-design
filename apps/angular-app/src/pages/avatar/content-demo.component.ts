@@ -5,7 +5,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@fex-design/angular/primitive/avatar'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-avatar-content-demo',
   standalone: true,

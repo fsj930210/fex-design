@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import type { PopoverPortalOptions } from '@fex-design/core/popover/types'
 import { computed } from 'vue'
 import { usePopoverContext } from './context'
 
-const props = defineProps<{
-  container?: HTMLElement | null
-  forceMount?: boolean
-}>()
+defineOptions({ name: 'PopoverPortal' })
 
-const { overlay, snapshot } = usePopoverContext('PopoverPortal')
-const popupContainer = computed(() => props.container ?? overlay.resolvePopupContainer() ?? 'body')
-const shouldRender = computed(() => snapshot.value.mounted || props.forceMount)
+const props = defineProps<PopoverPortalOptions>()
+
+const { snapshot } = usePopoverContext('PopoverPortal')
+const popupContainer = computed(() => props.container ?? snapshot.value.popupContainer)
+const shouldRender = computed(() => snapshot.value.mounted && popupContainer.value != null)
 </script>
 
 <template>

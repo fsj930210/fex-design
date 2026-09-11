@@ -1,6 +1,23 @@
 import type { AlertClassNames, AlertOptions, AlertStyles } from '@fex-design/core/alert/types'
-import { alertActionClassName, alertClassName, alertCloseClassName, alertContentClassName, alertDescriptionClassName, alertIconClassName, alertTitleClassName } from '@fex-design/styles/alert'
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChild, Directive, input, output, signal } from '@angular/core'
+import {
+  alertActionClassName,
+  alertClassName,
+  alertCloseClassName,
+  alertContentClassName,
+  alertDescriptionClassName,
+  alertIconClassName,
+  alertTitleClassName,
+} from '@fex-design/styles/alert'
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  Directive,
+  input,
+  output,
+  signal,
+} from '@angular/core'
 import { CircleCheckIcon } from '../../icon/circle-check'
 import { CircleXIcon } from '../../icon/circle-x'
 import { InfoIcon } from '../../icon/info'

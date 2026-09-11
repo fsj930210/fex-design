@@ -10,7 +10,7 @@ import { getSearchSubtree } from '@fex-design/core/tree/get-search-subtree'
 import type { TreeKey, TreeOptions } from '@fex-design/core/tree/types'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
 import { InputClear, InputControl, InputRoot } from '@fex-design/angular/primitive/input'
-import { Tag } from '@fex-design/angular/primitive/tag'
+import { Tag, TagAction } from '@fex-design/angular/primitive/tag'
 import {
   TreeSelectContent,
   TreeSelectOption,
@@ -18,7 +18,7 @@ import {
   TreeSelectRoot,
   TreeSelectTrigger,
 } from '@fex-design/angular/primitive/tree-select'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { Checkbox } from '@fex-design/angular/ui/checkbox'
 import {
   getDemoTreeChildren,
@@ -65,7 +65,7 @@ function toItems(nodes: readonly DepartmentNode[]): TreeSelectItem<DepartmentNod
     RouterLink,
     Card,
     Checkbox,
-    Tag,
+    Tag, TagAction,
     DemoTreeComponent,
     InputRoot,
     InputControl,

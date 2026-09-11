@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
 
   interface CheckboxGroupProps extends HTMLAttributes<HTMLDivElement> {
-    children?: Snippet
+    children?: Snippet;
   }
 
-  let { children, ...rest }: CheckboxGroupProps = $props()
+  let { children, ...rest }: CheckboxGroupProps = $props();
 </script>
 
 <div {...rest}>

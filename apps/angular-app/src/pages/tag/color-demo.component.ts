@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Tag } from '@fex-design/angular/primitive/tag'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-tag-color-demo',

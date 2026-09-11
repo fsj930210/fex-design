@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { CloseIcon } from '@fex-design/angular/icon/close'
+import { XIcon } from '@fex-design/angular/icon/x'
 import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/angular/primitive/tabs'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { createTab, initialTabs } from './data'
 @Component({
   selector: 'fex-dynamic-tabs-demo',
   standalone: true,
-  imports: [Card, CloseIcon, TabsRoot, TabsList, TabsItem, TabsContent],
+  imports: [Card, XIcon, TabsRoot, TabsList, TabsItem, TabsContent],
   templateUrl: './dynamic-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

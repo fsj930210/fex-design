@@ -14,7 +14,7 @@ import {
 import { Radio, RadioGroup, type RadioValue } from '@fex-design/angular/primitive/radio'
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { Checkbox } from '@fex-design/angular/ui/checkbox'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people6, type Person } from './data'
 
 const modules = { rowSelectionFeature, columnSizingFeature }

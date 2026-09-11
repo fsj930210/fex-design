@@ -1,1 +1,26 @@
-<script lang="ts">import type{MessageGroupSpacing}from'@fex-design/core/message/types';import{messageGroupClassName}from'@fex-design/styles/message';import{cn}from'@fex/utils';import type{Snippet}from'svelte';import type{HTMLAttributes}from'svelte/elements';interface Props extends HTMLAttributes<HTMLDivElement>{spacing?:MessageGroupSpacing;children?:Snippet}let{spacing='default',class:className,children,...rest}:Props=$props()</script><div {...rest} data-slot="message-group" data-spacing={spacing} class={cn(messageGroupClassName({spacing}),className)}>{@render children?.()}</div>
+<script lang="ts">
+  import type { MessageGroupSpacing } from "@fex-design/core/message/types";
+  import { messageGroupClassName } from "@fex-design/styles/message";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props extends HTMLAttributes<HTMLDivElement> {
+    spacing?: MessageGroupSpacing;
+    children?: Snippet;
+  }
+  let {
+    spacing = "default",
+    class: className,
+    children,
+    ...rest
+  }: Props = $props();
+</script>
+
+<div
+  {...rest}
+  data-slot="message-group"
+  data-spacing={spacing}
+  class={cn(messageGroupClassName({ spacing }), className)}
+>
+  {@render children?.()}
+</div>

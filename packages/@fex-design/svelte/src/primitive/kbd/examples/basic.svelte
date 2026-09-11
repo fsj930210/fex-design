@@ -1,2 +1,5 @@
-<script lang="ts">import Kbd from '../kbd.svelte'</script>
+<script lang="ts">
+  import Kbd from "../kbd.svelte";
+</script>
+
 <Kbd>⌘</Kbd>

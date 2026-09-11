@@ -19,6 +19,7 @@
     "@fex-design/styles": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/postcss": "catalog:",
     "class-variance-authority": "latest",
     "clsx": "^2.1.1",

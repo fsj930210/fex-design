@@ -1,2 +1,23 @@
-<script lang="ts">import Timeline from '@fex-design/svelte/primitive/timeline';import Item from '@fex-design/svelte/primitive/timeline-item';import Indicator from '@fex-design/svelte/primitive/timeline-indicator';import Content from '@fex-design/svelte/primitive/timeline-content';import Card from '@fex-design/svelte/ui/card'</script>
-<Card title="Per-item placement" description="Each item can override the root alignment for deliberately staggered layouts."><Timeline align="alternate"><Item placement="start" status="completed"><Indicator/><Content>Start side</Content></Item><Item placement="end" status="completed"><Indicator/><Content>End side</Content></Item><Item placement="end" status="current"><Indicator/><Content>Another end-side item</Content></Item><Item placement="start" status="pending"><Indicator/><Content>Back to start</Content></Item></Timeline></Card>
+<script lang="ts">
+  import Timeline from "@fex-design/svelte/primitive/timeline";
+  import Item from "@fex-design/svelte/primitive/timeline-item";
+  import Indicator from "@fex-design/svelte/primitive/timeline-indicator";
+  import Content from "@fex-design/svelte/primitive/timeline-content";
+  import Card from "@fex-design/svelte/ui/card";
+</script>
+
+<Card
+  title="Per-item placement"
+  description="Each item can override the root alignment for deliberately staggered layouts."
+  ><Timeline align="alternate"
+    ><Item placement="start" status="completed"
+      ><Indicator /><Content>Start side</Content></Item
+    ><Item placement="end" status="completed"
+      ><Indicator /><Content>End side</Content></Item
+    ><Item placement="end" status="current"
+      ><Indicator /><Content>Another end-side item</Content></Item
+    ><Item placement="start" status="pending"
+      ><Indicator /><Content>Back to start</Content></Item
+    ></Timeline
+  ></Card
+>

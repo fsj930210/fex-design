@@ -25,7 +25,15 @@ export interface AnchorProps extends Omit<AnchorRootProps, 'children'> {
   onItemClick?: (event: MouseEvent<HTMLButtonElement>, item: AnchorUiItem) => void
 }
 
-export function Anchor({ items, className, style, classNames, styles, onItemClick, ...props }: AnchorProps) {
+export function Anchor({
+  items,
+  className,
+  style,
+  classNames,
+  styles,
+  onItemClick,
+  ...props
+}: AnchorProps) {
   const renderItems = (entries: readonly AnchorUiItem[]): ReactNode => (
     <AnchorList className={classNames?.list} style={styles?.list}>
       {entries.map((item) => (
@@ -37,7 +45,11 @@ export function Anchor({ items, className, style, classNames, styles, onItemClic
           className={classNames?.item}
           style={styles?.item}
         >
-          <AnchorLink className={classNames?.link} style={styles?.link} onClick={(event) => onItemClick?.(event, item)}>
+          <AnchorLink
+            className={classNames?.link}
+            style={styles?.link}
+            onClick={(event) => onItemClick?.(event, item)}
+          >
             {item.title}
           </AnchorLink>
           {item.children?.length ? renderItems(item.children) : null}

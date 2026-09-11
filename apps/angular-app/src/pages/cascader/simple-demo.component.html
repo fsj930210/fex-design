@@ -1,4 +1,4 @@
-<fex-card [title]="title" [description]="description"
+<div card [title]="title" [description]="description"
   ><div class="max-w-xl">
     <fex-cascader
       [options]="options"
@@ -18,4 +18,4 @@
       (change)="valueChange.emit($event.value)"
       ><fex-cascader-trigger /><fex-cascader-content><fex-cascader-panel /></fex-cascader-content
     ></fex-cascader></div
-></fex-card>
+></div>

@@ -21,7 +21,10 @@ export function Alert(props: AlertProps) {
       data-slot="alert"
       role="alert"
       {...rest}
-      class={cn(alertClassName({ type: local.type ?? 'info', variant: local.variant ?? 'filled' }), local.class)}
+      class={cn(
+        alertClassName({ type: local.type ?? 'info', variant: local.variant ?? 'filled' }),
+        local.class,
+      )}
     >
       {local.children}
     </div>
@@ -32,7 +35,11 @@ export type AlertIconProps = ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>
 
 export function AlertIcon(props: AlertIconProps) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <span {...rest} data-slot="alert-icon" class={cn(alertIconClassName, local.class)}>{local.children}</span>
+  return (
+    <span {...rest} data-slot="alert-icon" class={cn(alertIconClassName, local.class)}>
+      {local.children}
+    </span>
+  )
 }
 
 export function AlertTitle(props: DivProps) {

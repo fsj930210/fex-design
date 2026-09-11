@@ -1,11 +1,17 @@
 <script lang="ts">
-  import Empty from '@fex-design/svelte/ui/empty'
+  import Empty from "@fex-design/svelte/ui/empty";
 </script>
+
 <Empty
   title="暂无通知"
   description="新的通知会显示在这里。"
-  classNames={{ root: 'min-h-72 bg-secondary-background', image: 'text-primary', title: 'text-base', content: 'mt-2' }}
-  styles={{ description: 'max-width: 24rem' }}
+  classNames={{
+    root: "min-h-72 bg-secondary-background",
+    image: "text-primary",
+    title: "text-base",
+    content: "mt-2",
+  }}
+  styles={{ description: "max-width: 24rem" }}
 >
   <button class="rounded-md border border-border px-3 py-2">刷新</button>
 </Empty>

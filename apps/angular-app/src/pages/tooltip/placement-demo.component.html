@@ -1,7 +1,7 @@
 <div class="grid grid-cols-3 gap-2 py-3">
   @for (placement of placements; track placement) {
     <fex-tooltip [placement]="placement"
-      ><button button fexTooltipTrigger class="h-16" variant="outline">{{ placement }}</button
+      ><button button fexTooltipTrigger class="h-16" variant="outlined">{{ placement }}</button
       ><fex-tooltip-portal
         ><fex-tooltip-content
           >{{ placement }}<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal

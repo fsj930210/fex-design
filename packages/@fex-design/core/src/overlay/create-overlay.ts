@@ -11,6 +11,10 @@ import {
 import { createPresence } from './presence/create-presence'
 import type { Overlay, OverlayEventInfo, OverlayOptions, OverlaySnapshot } from './types'
 
+// A single Escape can reach several document listeners after the first closes.
+// Retain event identity so newly exposed ancestors do not consume it again.
+const handledEscapeEvents = new WeakSet<object>()
+
 export function createOverlay(options: OverlayOptions = {}): Overlay {
   let currentOptions = options
   let overlayElement: HTMLElement | null = null
@@ -22,6 +26,8 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
   const presence = createPresence({
     open: disclosure.getSnapshot().open,
     forceMount: options.forceMount,
+    lazyMount: options.lazyMount,
+    destroyOnHidden: options.destroyOnHidden,
     closeDelay: options.closeDelay,
   })
   const store = createStore<OverlaySnapshot>({
@@ -52,6 +58,9 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
 
   function emit() {
     readSnapshot()
+    // Retained hidden content must not take part in Escape/outside arbitration.
+    if (disclosure.getSnapshot().open && layer.element) addLayerRecord(layer)
+    else removeLayerRecord(layer)
   }
 
   const unsubscribeDisclosure = disclosure.subscribe(() => {
@@ -60,6 +69,8 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
     presence.setOptions({
       open: disclosure.getSnapshot().open,
       forceMount: currentOptions.forceMount,
+      lazyMount: currentOptions.lazyMount,
+      destroyOnHidden: currentOptions.destroyOnHidden,
       closeDelay: currentOptions.closeDelay,
     })
     emit()
@@ -100,6 +111,8 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
       presence.setOptions({
         open: disclosure.getSnapshot().open,
         forceMount: nextOptions.forceMount,
+        lazyMount: nextOptions.lazyMount,
+        destroyOnHidden: nextOptions.destroyOnHidden,
         closeDelay: nextOptions.closeDelay,
       })
       emit()
@@ -108,7 +121,7 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
       // layer element 是用于“点击是否发生在当前浮层内”的 DOM 边界。
       // content 挂载时入栈，卸载时出栈；如果忘记出栈，后续外部点击会被旧层误判。
       layer.element = element
-      if (element) {
+      if (element && disclosure.getSnapshot().open) {
         addLayerRecord(layer)
       } else {
         removeLayerRecord(layer)
@@ -127,7 +140,13 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
         if (currentOptions.dismiss?.escapeKey === false) {
           return
         }
-        closeFromDismiss({ reason: 'escape-key', event: event.event })
+        if (!isTopLayer(layer)) return
+        const originalEvent = event.event
+        if (originalEvent && typeof originalEvent === 'object') {
+          if (handledEscapeEvents.has(originalEvent)) return
+          handledEscapeEvents.add(originalEvent)
+        }
+        closeFromDismiss({ reason: 'escape-key', event: originalEvent })
       },
       outsidePointer: (event: OverlayEventInfo) => {
         if (currentOptions.dismiss?.outsidePointer === false) {

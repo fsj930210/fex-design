@@ -1,34 +1,50 @@
 <script lang="ts">
-  import { popoverContentClassName } from '@fex-design/styles/popover'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import { getContext } from 'svelte'
-  import { popoverContextKey, type PopoverContext } from './popover-context'
+  import { popoverContentClassName } from "@fex-design/styles/popover";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import { getContext } from "svelte";
+  import { popoverContextKey, type PopoverContext } from "./popover-context";
 
-  interface PopoverContentProps extends Omit<HTMLAttributes<HTMLDivElement>, 'class'> {
-    class?: string
-    children?: Snippet
+  interface PopoverContentProps extends Omit<
+    HTMLAttributes<HTMLDivElement>,
+    "class"
+  > {
+    class?: string;
+    children?: Snippet;
+    ref?: HTMLDivElement | null;
   }
 
-  let { class: className, children, role = 'dialog', style, ...rest }: PopoverContentProps = $props()
-  const { contentElement, hoverAncestors, overlay, snapshot } = getContext<PopoverContext>(popoverContextKey)
-  const classList = $derived(cn(popoverContentClassName(), className))
+  let {
+    class: className,
+    children,
+    ref = $bindable(null),
+    role = "dialog",
+    style,
+    ...rest
+  }: PopoverContentProps = $props();
+  const { contentElement, overlay, snapshot } =
+    getContext<PopoverContext>(popoverContextKey);
+  const classList = $derived(cn(popoverContentClassName(), className));
 
   function contentAction(element: HTMLDivElement) {
-    contentElement.current = element
-    overlay.setFloatingElement(element)
+    ref = element;
+    contentElement.current = element;
+    overlay.setFloatingElement(element);
     return {
       destroy() {
+        if (ref === element) ref = null;
         if (contentElement.current === element) {
-          contentElement.current = null
+          contentElement.current = null;
         }
-        overlay.setFloatingElement(null)
+        overlay.setFloatingElement(null);
       },
-    }
+    };
   }
 
   function handlePointerEnter(event: PointerEvent) {
+    rest.onpointerenter?.(event as PointerEvent & { currentTarget: HTMLDivElement });
+    if (event.defaultPrevented) return;
     const info = {
       target: event.target,
       currentTarget: event.currentTarget,
@@ -36,12 +52,13 @@
       clientY: event.clientY,
       pointerType: event.pointerType,
       event,
-    }
-    hoverAncestors.forEach((ancestor) => ancestor.content.pointerEnter(info))
-    overlay.content.pointerEnter(info)
+    };
+    overlay.content.pointerEnter(info);
   }
 
   function handlePointerLeave(event: PointerEvent) {
+    rest.onpointerleave?.(event as PointerEvent & { currentTarget: HTMLDivElement });
+    if (event.defaultPrevented) return;
     const info = {
       target: event.target,
       currentTarget: event.currentTarget,
@@ -49,9 +66,8 @@
       clientY: event.clientY,
       pointerType: event.pointerType,
       event,
-    }
-    hoverAncestors.forEach((ancestor) => ancestor.content.pointerLeave(info))
-    overlay.content.pointerLeave(info)
+    };
+    overlay.content.pointerLeave(info);
   }
 </script>
 
@@ -62,7 +78,9 @@
     {role}
     tabindex="-1"
     data-slot="popover-content"
-    data-state={$snapshot.open ? 'open' : 'closed'}
+    data-state={$snapshot.open ? "open" : "closed"}
+    hidden={$snapshot.phase === "closed"}
+    inert={!$snapshot.open}
     data-phase={$snapshot.phase}
     data-side={$snapshot.side}
     data-align={$snapshot.align}

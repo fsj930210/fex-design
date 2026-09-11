@@ -138,7 +138,7 @@ function clear(event: MouseEvent) {
     @value-change="(text, meta) => input(text, meta?.event)"
   >
     <InputPrefix v-if="slots.prefix"><slot name="prefix" /></InputPrefix>
-  <InputControl
+    <InputControl
       v-bind="attrs"
       type="text"
       role="spinbutton"
@@ -176,4 +176,4 @@ function clear(event: MouseEvent) {
     </InputSuffix>
   </InputRoot>
 </template>
-    :aria-invalid="props.invalid || props.status === 'error' || undefined"
+:aria-invalid="props.invalid || props.status === 'error' || undefined"

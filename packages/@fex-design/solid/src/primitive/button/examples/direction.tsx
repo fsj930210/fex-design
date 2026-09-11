@@ -6,7 +6,7 @@ export function DirectionExample() {
     <div class="grid w-full gap-6 sm:grid-cols-2">
       {(['ltr', 'rtl'] as const).map((direction) => (
         <section class="grid gap-3 rounded-lg border p-4">
-<strong>{direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}</strong>
+          <strong>{direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}</strong>
           <div class="flex flex-wrap gap-3">
             <Button dir={direction}>
               <ButtonIcon>

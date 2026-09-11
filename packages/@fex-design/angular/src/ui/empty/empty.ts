@@ -1,8 +1,23 @@
 import { NgTemplateOutlet } from '@angular/common'
-import { ChangeDetectionStrategy, Component, computed, input, type TemplateRef } from '@angular/core'
-import type { EmptyClassNames as EmptyClassNamesBase, EmptyStyles as EmptyStylesBase } from '@fex-design/core/empty/types'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  type TemplateRef,
+} from '@angular/core'
+import type {
+  EmptyClassNames as EmptyClassNamesBase,
+  EmptyStyles as EmptyStylesBase,
+} from '@fex-design/core/empty/types'
 import { emptyClassName } from '@fex-design/styles/empty'
-import { EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../../primitive/empty/empty'
+import {
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '../../primitive/empty/empty'
 import { createHostClassName } from '../../signals/host-class'
 
 export type EmptyClassNames = EmptyClassNamesBase
@@ -20,7 +35,15 @@ class DefaultEmptyImage {}
 @Component({
   selector: 'div[empty]',
   standalone: true,
-  imports: [NgTemplateOutlet, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent, DefaultEmptyImage],
+  imports: [
+    NgTemplateOutlet,
+    EmptyHeader,
+    EmptyMedia,
+    EmptyTitle,
+    EmptyDescription,
+    EmptyContent,
+    DefaultEmptyImage,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', '[style]': 'styles().root', 'data-slot': 'empty' },
   templateUrl: './empty.html',
@@ -31,9 +54,17 @@ export class Empty {
   readonly description = input<string | undefined>()
   readonly classNames = input<EmptyClassNames>({})
   readonly styles = input<EmptyStyles>({})
-  protected readonly hostClassName = createHostClassName(() => [emptyClassName, this.classNames().root].filter(Boolean).join(' '))
-  protected readonly imageUrl = computed(() => typeof this.image() === 'string' ? this.image() as string : undefined)
-  protected readonly imageTemplate = computed(() => typeof this.image() === 'object' && this.image() !== null ? this.image() as TemplateRef<unknown> : undefined)
+  protected readonly hostClassName = createHostClassName(() =>
+    [emptyClassName, this.classNames().root].filter(Boolean).join(' '),
+  )
+  protected readonly imageUrl = computed(() =>
+    typeof this.image() === 'string' ? (this.image() as string) : undefined,
+  )
+  protected readonly imageTemplate = computed(() =>
+    typeof this.image() === 'object' && this.image() !== null
+      ? (this.image() as TemplateRef<unknown>)
+      : undefined,
+  )
 }
 
 export { EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle }

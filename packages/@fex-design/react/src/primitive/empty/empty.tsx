@@ -18,9 +18,7 @@ export function EmptyHeader({ className, ...props }: ComponentProps<'div'>) {
 }
 
 export function EmptyMedia({ className, ...props }: ComponentProps<'div'>) {
-  return (
-    <div data-slot="empty-media" className={cn(emptyMediaClassName, className)} {...props} />
-  )
+  return <div data-slot="empty-media" className={cn(emptyMediaClassName, className)} {...props} />
 }
 
 export function EmptyTitle({ className, ...props }: ComponentProps<'div'>) {

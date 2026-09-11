@@ -4,4 +4,9 @@ export { default as AnchorItem } from './anchor-item.svelte'
 export { default as AnchorLink } from './anchor-link.svelte'
 export { default as AnchorRail } from './anchor-rail.svelte'
 export { default as AnchorIndicator } from './anchor-indicator.svelte'
-export type { AnchorActiveMode, AnchorOrientation, AnchorRegisteredItem, AnchorTarget } from '@fex-design/core/anchor/types'
+export type {
+  AnchorActiveMode,
+  AnchorOrientation,
+  AnchorRegisteredItem,
+  AnchorTarget,
+} from '@fex-design/core/anchor/types'

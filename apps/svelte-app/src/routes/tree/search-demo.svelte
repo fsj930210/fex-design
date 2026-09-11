@@ -1,22 +1,89 @@
 <script lang="ts">
-  import { expansionFeature, searchFeature } from '@fex-design/core'
-  import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
-  import type { SearchFeatureApi } from '@fex-design/core/tree/features/search'
-  import InputRoot from '@fex-design/svelte/primitive/input'
-  import InputControl from '@fex-design/svelte/primitive/input-control'
-  import Card from '@fex-design/svelte/ui/card'
-  import DemoTree from './demo-tree.svelte'
-  import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
+  import { expansionFeature, searchFeature } from "@fex-design/core";
+  import { createTreeController } from "@fex-design/core/tree/create-tree-controller";
+  import type { SearchFeatureApi } from "@fex-design/core/tree/features/search";
+  import InputRoot from "@fex-design/svelte/primitive/input";
+  import InputControl from "@fex-design/svelte/primitive/input-control";
+  import Card from "@fex-design/svelte/ui/card";
+  import DemoTree from "./demo-tree.svelte";
+  import {
+    departmentFieldNames,
+    departmentTreeData,
+    type DepartmentNode,
+  } from "./data";
 
-  const controller = createTreeController<DepartmentNode>({ treeData: departmentTreeData, fieldNames: departmentFieldNames, isLeaf: node => node.childCount === 0, features: [expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }), searchFeature()] })
-  let keyword = $state('')
-  const subtree = $derived(controller.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({ keyword, filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()) }) ?? [])
-  const showing = $derived(Boolean(keyword.trim()))
-  function parts(title: string) { const index = title.toLowerCase().indexOf(keyword.toLowerCase()); return index < 0 ? { before: title, match: '', after: '' } : { before: title.slice(0, index), match: title.slice(index, index + keyword.length), after: title.slice(index + keyword.length) } }
+  const controller = createTreeController<DepartmentNode>({
+    treeData: departmentTreeData,
+    fieldNames: departmentFieldNames,
+    isLeaf: (node) => node.childCount === 0,
+    features: [
+      expansionFeature({
+        defaultExpandedKeys: ["company", "engineering", "product"],
+      }),
+      searchFeature(),
+    ],
+  });
+  let keyword = $state("");
+  const subtree = $derived(
+    controller
+      .getFeature<SearchFeatureApi<DepartmentNode>>("search")
+      ?.getSubtree({
+        keyword,
+        filterTreeNode: (node, value) =>
+          node.name.toLowerCase().includes(value.toLowerCase()),
+      }) ?? [],
+  );
+  const showing = $derived(Boolean(keyword.trim()));
+  function parts(title: string) {
+    const index = title.toLowerCase().indexOf(keyword.toLowerCase());
+    return index < 0
+      ? { before: title, match: "", after: "" }
+      : {
+          before: title.slice(0, index),
+          match: title.slice(index, index + keyword.length),
+          after: title.slice(index + keyword.length),
+        };
+  }
 </script>
 
-<Card title="Search data and custom title rendering" description="The core returns filtered tree data; title rendering decides how a keyword is highlighted.">
-  <InputRoot value={keyword} class="mb-2 max-w-sm"><InputControl oninput={event => keyword = event.currentTarget.value} placeholder="Search departments" /></InputRoot>
-  <div hidden={showing}><DemoTree {controller} treeData={departmentTreeData} fieldNames={departmentFieldNames} isLeaf={node => node.childCount === 0} features={[expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] })]} class="max-w-xl rounded-md border border-border bg-background p-1.5" /></div>
-  {#if showing}<DemoTree treeData={subtree} fieldNames={departmentFieldNames} isLeaf={node => node.childCount === 0} features={[expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] })]} searchKeyword={keyword} class="max-w-xl rounded-md border border-border bg-background p-1.5">{#snippet title({ item })}{parts(item.node.name).before}<mark class="rounded-sm bg-warning/20 px-0.5 text-inherit">{parts(item.node.name).match}</mark>{parts(item.node.name).after}{/snippet}</DemoTree>{/if}
+<Card
+  title="Search data and custom title rendering"
+  description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
+>
+  <InputRoot value={keyword} class="mb-2 max-w-sm"
+    ><InputControl
+      oninput={(event) => (keyword = event.currentTarget.value)}
+      placeholder="Search departments"
+    /></InputRoot
+  >
+  <div hidden={showing}>
+    <DemoTree
+      {controller}
+      treeData={departmentTreeData}
+      fieldNames={departmentFieldNames}
+      isLeaf={(node) => node.childCount === 0}
+      features={[
+        expansionFeature({
+          defaultExpandedKeys: ["company", "engineering", "product"],
+        }),
+      ]}
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
+    />
+  </div>
+  {#if showing}<DemoTree
+      treeData={subtree}
+      fieldNames={departmentFieldNames}
+      isLeaf={(node) => node.childCount === 0}
+      features={[
+        expansionFeature({
+          defaultExpandedKeys: ["company", "engineering", "product"],
+        }),
+      ]}
+      searchKeyword={keyword}
+      class="max-w-xl rounded-md border border-border bg-background p-1.5"
+      >{#snippet title({ item })}{parts(item.node.name).before}<mark
+          class="rounded-sm bg-warning/20 px-0.5 text-inherit"
+          >{parts(item.node.name).match}</mark
+        >{parts(item.node.name).after}{/snippet}</DemoTree
+    >{/if}
 </Card>

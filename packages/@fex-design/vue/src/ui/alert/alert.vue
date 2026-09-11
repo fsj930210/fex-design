@@ -36,7 +36,9 @@ const attrs = useAttrs()
 const visible = ref(true)
 const builtinIcon = computed(
   () =>
-    ({ success: CircleCheckIcon, info: InfoIcon, warning: TriangleAlertIcon, error: CircleXIcon })[props.type],
+    ({ success: CircleCheckIcon, info: InfoIcon, warning: TriangleAlertIcon, error: CircleXIcon })[
+      props.type
+    ],
 )
 function close(event: MouseEvent) {
   emit('close', event)
@@ -72,20 +74,26 @@ function close(event: MouseEvent) {
         data-slot="alert-title"
         :class="cn(alertTitleClassName, classNames?.title)"
         :style="styles?.title"
-      ><slot name="title">{{ title }}</slot></div>
+      >
+        <slot name="title">{{ title }}</slot>
+      </div>
       <div
         v-if="description || $slots.default"
         data-slot="alert-description"
         :class="cn(alertDescriptionClassName, classNames?.description)"
         :style="styles?.description"
-      ><slot>{{ description }}</slot></div>
+      >
+        <slot>{{ description }}</slot>
+      </div>
     </div>
     <div
       v-if="$slots.action"
       data-slot="alert-action"
       :class="cn(alertActionClassName, classNames?.action)"
       :style="styles?.action"
-    ><slot name="action" /></div>
+    >
+      <slot name="action" />
+    </div>
     <button
       v-if="closable"
       type="button"
@@ -94,6 +102,8 @@ function close(event: MouseEvent) {
       :class="cn(alertCloseClassName, classNames?.close)"
       :style="styles?.close"
       @click="close"
-    ><slot name="closeIcon"><XIcon /></slot></button>
+    >
+      <slot name="closeIcon"><XIcon /></slot>
+    </button>
   </PrimitiveAlert>
 </template>

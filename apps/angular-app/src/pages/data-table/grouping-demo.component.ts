@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   aggregationFn_sum,
   columnGroupingFeature,
+  rowAggregationFeature,
   createGroupedRowModel,
 } from '@fex-design/core/data-table/features/column-grouping'
 import {
@@ -22,11 +23,12 @@ import {
 } from '@fex-design/angular/signals/create-data-table'
 import { Button } from '@fex-design/angular/ui/button'
 import { ChevronDownIcon, ChevronRightIcon } from '@fex-design/angular/icon/chevron'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people9, type Person } from './data'
 
 const modules = {
   columnGroupingFeature,
+  rowAggregationFeature,
   groupedRowModel: createGroupedRowModel(),
   rowExpandingFeature,
   expandedRowModel: createExpandedRowModel(),

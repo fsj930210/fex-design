@@ -3,13 +3,16 @@
   <section class="grid gap-3 rounded-lg border p-4">
     <strong>{{ direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</strong>
     <div class="flex flex-wrap gap-3">
-      <button button [attr.dir]="direction"><plus-icon slot="start" />{{ direction === 'ltr' ? '前置图标' : 'أيقونة البداية' }}</button
+      <button button [attr.dir]="direction">
+        <plus-icon slot="start" />{{ direction === 'ltr' ? '前置图标' : 'أيقونة البداية' }}</button
       ><button button [attr.dir]="direction" iconPlacement="end">
         {{ direction === 'ltr' ? '后置图标' : 'أيقونة النهاية' }}<plus-icon slot="end" />
       </button>
     </div>
     <div buttonGroup [attr.dir]="direction">
-      <button button>{{ direction === 'ltr' ? '第一项' : 'الأول' }}</button><button button>{{ direction === 'ltr' ? '中间项' : 'الأوسط' }}</button><button button>{{ direction === 'ltr' ? '最后一项' : 'الأخير' }}</button>
+      <button button>{{ direction === 'ltr' ? '第一项' : 'الأول' }}</button
+      ><button button>{{ direction === 'ltr' ? '中间项' : 'الأوسط' }}</button
+      ><button button>{{ direction === 'ltr' ? '最后一项' : 'الأخير' }}</button>
     </div>
   </section>
   }

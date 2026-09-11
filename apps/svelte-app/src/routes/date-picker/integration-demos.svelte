@@ -1,7 +1,11 @@
 <script lang="ts">
-  import { getCalendarToday, type CalendarRange, type CalendarValue } from '@fex-design/core/calendar'
-  import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
-  import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
+  import {
+    getCalendarToday,
+    type CalendarRange,
+    type CalendarValue,
+  } from "@fex-design/core/calendar";
+  import { formatDatePickerValue } from "@fex-design/core/date-picker/value";
+  import { datePickerDateTimePanelClassName } from "@fex-design/styles/date-picker";
   import {
     DatePickerCancel,
     DatePickerConfirm,
@@ -14,78 +18,137 @@
     RangePickerPanelGroup,
     RangePickerRoot,
     RangePickerTrigger,
-  } from '@fex-design/svelte/primitive/date-picker'
-  import { TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerRoot, TimePickerSecondColumn, type TimeValue } from '@fex-design/svelte/primitive/time-picker'
-  import Card from '@fex-design/svelte/ui/card'
-  import PresetRangePanel from './preset-range-panel.svelte'
+  } from "@fex-design/svelte/primitive/date-picker";
+  import {
+    TimePickerHourColumn,
+    TimePickerMinuteColumn,
+    TimePickerPanel,
+    TimePickerRoot,
+    TimePickerSecondColumn,
+    type TimeValue,
+  } from "@fex-design/svelte/primitive/time-picker";
+  import Card from "@fex-design/svelte/ui/card";
+  import PresetRangePanel from "./preset-range-panel.svelte";
 
-  const today = getCalendarToday()
-  let presetRange: CalendarRange<CalendarValue> = $state(lastDays(7))
-  let submitted: CalendarRange<CalendarValue> = $state({})
-  let submitCount = $state(0)
-  let dateTimeDate: CalendarValue | null = $state(today)
-  let time: TimeValue = $state({ hour: 9, minute: 30, second: 0 })
+  const today = getCalendarToday();
+  let presetRange: CalendarRange<CalendarValue> = $state(lastDays(7));
+  let submitted: CalendarRange<CalendarValue> = $state({});
+  let submitCount = $state(0);
+  let dateTimeDate: CalendarValue | null = $state(today);
+  let time: TimeValue = $state({ hour: 9, minute: 30, second: 0 });
   // svelte-ignore state_referenced_locally -- draft state is reset explicitly by dialog events.
-  let draftTime: TimeValue = $state(time)
+  let draftTime: TimeValue = $state(time);
 
   function lastDays(days: number): CalendarRange<CalendarValue> {
-    return { start: today.subtract({ days: days - 1 }), end: today }
+    return { start: today.subtract({ days: days - 1 }), end: today };
   }
 
-  function setDateTimeDate(value: CalendarValue | readonly CalendarValue[] | null) {
-    dateTimeDate = Array.isArray(value) ? null : value as CalendarValue | null
+  function setDateTimeDate(
+    value: CalendarValue | readonly CalendarValue[] | null,
+  ) {
+    dateTimeDate = Array.isArray(value)
+      ? null
+      : (value as CalendarValue | null);
   }
 
   function rangeText(value: CalendarRange<CalendarValue>) {
-    return `${value.start ? formatDatePickerValue(value.start, { picker: 'date' }) : '空'} ~ ${value.end ? formatDatePickerValue(value.end, { picker: 'date' }) : '空'}`
+    return `${value.start ? formatDatePickerValue(value.start, { picker: "date" }) : "空"} ~ ${value.end ? formatDatePickerValue(value.end, { picker: "date" }) : "空"}`;
   }
 
   function dateTimeDisplayValue() {
-    return `${formatDatePickerValue(dateTimeDate, { picker: 'date' })} ${formatTime(time)}`.trim()
+    return `${formatDatePickerValue(dateTimeDate, { picker: "date" })} ${formatTime(time)}`.trim();
   }
 
   function formatTime(value: TimeValue) {
-    return `${String(value.hour).padStart(2, '0')}:${String(value.minute).padStart(2, '0')}:${String(value.second ?? 0).padStart(2, '0')}`
+    return `${String(value.hour).padStart(2, "0")}:${String(value.minute).padStart(2, "0")}:${String(value.second ?? 0).padStart(2, "0")}`;
   }
 </script>
 
-<Card title="预设范围" description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。">
+<Card
+  title="预设范围"
+  description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。"
+>
   <div>
-    <RangePickerRoot value={presetRange} onChange={(next) => presetRange = next as CalendarRange<CalendarValue>}>
+    <RangePickerRoot
+      value={presetRange}
+      onChange={(next) => (presetRange = next as CalendarRange<CalendarValue>)}
+    >
       <RangePickerTrigger class="w-80" />
       <RangePickerContent class="overflow-hidden p-0">
-        <PresetRangePanel onSelect={(next) => presetRange = next as CalendarRange<CalendarValue>} />
+        <PresetRangePanel
+          onSelect={(next) =>
+            (presetRange = next as CalendarRange<CalendarValue>)}
+        />
       </RangePickerContent>
     </RangePickerRoot>
-    <p class="mt-1.5 w-full text-xs text-muted-foreground">当前范围：{rangeText(presetRange)}</p>
+    <p class="mt-1.5 w-full text-xs text-muted-foreground">
+      当前范围：{rangeText(presetRange)}
+    </p>
   </div>
 </Card>
 
-<Card title="确认后提交" description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。">
+<Card
+  title="确认后提交"
+  description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。"
+>
   <div>
-    <RangePickerRoot needConfirm onChange={(next) => submitted = next as CalendarRange<CalendarValue>}>
+    <RangePickerRoot
+      needConfirm
+      onChange={(next) => (submitted = next as CalendarRange<CalendarValue>)}
+    >
       <RangePickerTrigger class="w-80" />
       <RangePickerContent class="overflow-hidden p-0">
         <RangePickerPanelGroup />
         <DatePickerFooter>
-          <DatePickerConfirm onclick={() => submitCount += 1}>确认并提交</DatePickerConfirm>
+          <DatePickerConfirm onclick={() => (submitCount += 1)}
+            >确认并提交</DatePickerConfirm
+          >
         </DatePickerFooter>
       </RangePickerContent>
     </RangePickerRoot>
-    <p class="mt-1.5 w-full text-xs text-muted-foreground">当前范围：{rangeText(submitted)}</p>
+    <p class="mt-1.5 w-full text-xs text-muted-foreground">
+      当前范围：{rangeText(submitted)}
+    </p>
     <p class="mt-1.5 text-xs text-muted-foreground">已提交 {submitCount} 次</p>
   </div>
 </Card>
 
-<Card title="日期与时间" description="一个触发器组合日期和时间，确认后一起关闭面板。">
-  <DatePickerRoot needConfirm value={dateTimeDate} onChange={setDateTimeDate} onOpenChange={(open) => { if (open) draftTime = time }}>
-    <DatePickerTrigger class="w-64" displayValue={dateTimeDisplayValue()} placeholder="请选择日期和时间" />
+<Card
+  title="日期与时间"
+  description="一个触发器组合日期和时间，确认后一起关闭面板。"
+>
+  <DatePickerRoot
+    needConfirm
+    value={dateTimeDate}
+    onChange={setDateTimeDate}
+    onOpenChange={(open) => {
+      if (open) draftTime = time;
+    }}
+  >
+    <DatePickerTrigger
+      class="w-64"
+      displayValue={dateTimeDisplayValue()}
+      placeholder="请选择日期和时间"
+    />
     <DatePickerContent class="w-[36rem] min-w-[36rem] overflow-hidden p-0">
-      <TimePickerRoot open={true} value={draftTime} format="HH:mm:ss" onchange={(next) => { if (next) draftTime = next }}>
+      <TimePickerRoot
+        open={true}
+        value={draftTime}
+        format="HH:mm:ss"
+        onchange={(next) => {
+          if (next) draftTime = next;
+        }}
+      >
         <div class="flex">
-          <DatePickerPanel class={`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`} />
+          <DatePickerPanel
+            class={`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`}
+          />
           <div class="flex w-42 shrink-0 flex-col border-l border-border">
-            <div class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">{formatTime(draftTime)}</div>
+            <div
+              class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold"
+            >
+              {formatTime(draftTime)}
+            </div>
             <TimePickerPanel class="h-[224px] min-h-0 overflow-hidden">
               <TimePickerHourColumn class="h-[224px]" />
               <TimePickerMinuteColumn class="h-[224px]" />
@@ -95,8 +158,12 @@
         </div>
       </TimePickerRoot>
       <DatePickerFooter>
-        <DatePickerCancel onclick={() => draftTime = time}>取消</DatePickerCancel>
-        <DatePickerConfirm onclick={() => time = draftTime}>确定</DatePickerConfirm>
+        <DatePickerCancel onclick={() => (draftTime = time)}
+          >取消</DatePickerCancel
+        >
+        <DatePickerConfirm onclick={() => (time = draftTime)}
+          >确定</DatePickerConfirm
+        >
       </DatePickerFooter>
     </DatePickerContent>
   </DatePickerRoot>

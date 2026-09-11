@@ -38,9 +38,9 @@ export function ProgressExample() {
       </AnchorRoot>
       <div className="grid gap-24 pb-48">
         {steps.map(([key, title]) => (
-          <section id={`anchor-progress-${key}`} key={key}><h3 className="font-semibold">
-            {title}
-          </h3></section>
+          <section id={`anchor-progress-${key}`} key={key}>
+            <h3 className="font-semibold">{title}</h3>
+          </section>
         ))}
       </div>
     </div>

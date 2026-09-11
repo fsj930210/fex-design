@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button } from '@fex-design/svelte/ui/button'
+  import { Button } from "@fex-design/svelte/ui/button";
 </script>
 
 {#snippet loadingIndicator()}<span class="animate-pulse">•••</span>{/snippet}
@@ -17,4 +17,3 @@
     <Button class="w-fit" loading {loadingIndicator}>Uploading</Button>
   </div>
 </div>
-

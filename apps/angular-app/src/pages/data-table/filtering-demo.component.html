@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Column filtering"
   description="meta.filterFn opts a column into local filtering. Missing filterFn means remote, while onColumnFiltersChange still receives the complete filter list."
   ><div class="grid gap-3 xl:grid-cols-3">
@@ -7,12 +7,12 @@
         <h3 class="text-sm font-medium">{{ grid.title }}</h3>
         <div class="flex gap-1.5">
           @for (id of ['name', 'department', 'status']; track id) {
-            <fex-input-root
+            <div inputRoot
               ><input
-                fexInputControl
+                inputControl
                 [placeholder]="'Filter ' + id"
                 (input)="filter(grid, id, $event)"
-            /></fex-input-root>
+            /></div>
           }
         </div>
         <fex-data-table [table]="grid.table" />
@@ -21,5 +21,4 @@
         </p>
       </section>
     }
-  </div></fex-card
->
+  </div></div>

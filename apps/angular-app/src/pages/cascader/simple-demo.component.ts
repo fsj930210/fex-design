@@ -11,7 +11,7 @@ import {
   CascaderRoot,
   CascaderTrigger,
 } from '@fex-design/angular/primitive/cascader'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-cascader-simple-demo',

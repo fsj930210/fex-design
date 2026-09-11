@@ -1,21 +1,24 @@
 <script lang="ts">
-  import TextareaRoot from '@fex-design/svelte/primitive/textarea'
-  import TextareaInput from '@fex-design/svelte/primitive/textarea-input'
-  import TextareaClear from '@fex-design/svelte/primitive/textarea-clear'
-  import TextareaFooter from '@fex-design/svelte/primitive/textarea-footer'
-  import { Button } from '@fex-design/svelte/ui/button'
-  import Card from '@fex-design/svelte/ui/card'
-  import CheckIcon from '@fex-design/svelte/icon/check'
-  import InfoIcon from '@fex-design/svelte/icon/info'
-  import PlusIcon from '@fex-design/svelte/icon/plus'
+  import TextareaRoot from "@fex-design/svelte/primitive/textarea";
+  import TextareaInput from "@fex-design/svelte/primitive/textarea-input";
+  import TextareaClear from "@fex-design/svelte/primitive/textarea-clear";
+  import TextareaFooter from "@fex-design/svelte/primitive/textarea-footer";
+  import { Button } from "@fex-design/svelte/ui/button";
+  import Card from "@fex-design/svelte/ui/card";
+  import CheckIcon from "@fex-design/svelte/icon/check";
+  import InfoIcon from "@fex-design/svelte/icon/info";
+  import PlusIcon from "@fex-design/svelte/icon/plus";
 
-  let value = $state('')
+  let value = $state("");
 </script>
 
-<Card title="Footer" description="Footer is only a layout slot; actions are fully owned by the caller.">
+<Card
+  title="Footer"
+  description="Footer is only a layout slot; actions are fully owned by the caller."
+>
   <TextareaRoot
     class="max-w-2xl"
-    value={value}
+    {value}
     onChange={(next) => (value = next)}
     autoSize={{ minRows: 1, maxRows: 8 }}
   >

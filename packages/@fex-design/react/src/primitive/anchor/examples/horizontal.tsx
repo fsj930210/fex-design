@@ -10,7 +10,10 @@ import { useRef } from 'react'
 export function HorizontalExample() {
   const container = useRef<HTMLDivElement>(null)
   return (
-    <div ref={container} className="h-80 w-full max-w-2xl overflow-auto rounded-lg border px-4 pb-4">
+    <div
+      ref={container}
+      className="h-80 w-full max-w-2xl overflow-auto rounded-lg border px-4 pb-4"
+    >
       <AnchorRoot
         orientation="horizontal"
         container={() => container.current!}
@@ -32,9 +35,15 @@ export function HorizontalExample() {
         </AnchorList>
       </AnchorRoot>
       <div className="grid gap-24 pt-8 pb-48">
-        <section id="anchor-horizontal-intro"><h3 className="font-semibold">介绍</h3></section>
-        <section id="anchor-horizontal-features"><h3 className="font-semibold">功能</h3></section>
-        <section id="anchor-horizontal-api"><h3 className="font-semibold">API</h3></section>
+        <section id="anchor-horizontal-intro">
+          <h3 className="font-semibold">介绍</h3>
+        </section>
+        <section id="anchor-horizontal-features">
+          <h3 className="font-semibold">功能</h3>
+        </section>
+        <section id="anchor-horizontal-api">
+          <h3 className="font-semibold">API</h3>
+        </section>
       </div>
     </div>
   )

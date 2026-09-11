@@ -85,7 +85,7 @@ export class AutoCompleteRoot implements OnChanges {
     // The option getters intentionally capture the component instance for live Angular inputs.
     // oxlint-disable-next-line typescript/no-this-alias
     const root = this
-    this.popover.trigger = []
+
     this.controller = createAutoCompleteController<Item>({
       get items() {
         return root.items as readonly Item[]
@@ -119,7 +119,7 @@ export class AutoCompleteRoot implements OnChanges {
       onSelect: (value, meta) => root.select.emit({ value, meta }),
       onClear: (meta) => root.clear.emit(meta),
       onOpenChange: (open, meta) => {
-        root.popover.open = root.open ?? open
+
         root.popover.syncOptions()
         root.openChange.emit({ open, meta })
       },
@@ -127,8 +127,10 @@ export class AutoCompleteRoot implements OnChanges {
     const snapshotBinding = createCoreStoreSignalBinding(this.controller)
     this.snapshot = snapshotBinding.snapshot
     this.refreshSnapshot = snapshotBinding.refresh
-    this.popover.open = this.snapshot().open
-    this.popover.defaultOpen = this.defaultOpen
+
+    this.popover.connectOptions(() => ({
+      trigger: [], open: this.snapshot().open, defaultOpen: this.defaultOpen,
+    }))
     this.popover.syncOptions()
     const subscription = this.popover.openChange.subscribe((open) =>
       this.controller.setOpen(open, open ? 'programmatic' : 'outside'),
@@ -137,8 +139,7 @@ export class AutoCompleteRoot implements OnChanges {
   }
   ngOnChanges(_changes: SimpleChanges) {
     this.refreshSnapshot()
-    this.popover.open = this.snapshot().open
-    this.popover.defaultOpen = this.defaultOpen
+
     this.popover.syncOptions()
   }
   get visibleItems() {

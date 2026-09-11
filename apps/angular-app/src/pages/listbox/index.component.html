@@ -11,7 +11,7 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card
+      <div card
         title="Primitive"
         description="Headless root and item parts without default item layout."
       >
@@ -25,9 +25,9 @@
             </fex-listbox-item>
           }
         </fex-listbox>
-      </fex-card>
+      </div>
 
-      <fex-card title="Single" description="Controlled single selection uses change.">
+      <div card title="Single" description="Controlled single selection uses change.">
         <fex-ui-listbox class="max-w-xl" [value]="selectedTrick()" (change)="setSingle($event)">
           @for (trick of tricks.slice(0, 4); track trick.value) {
             <fex-ui-listbox-item [value]="trick.value">
@@ -43,9 +43,9 @@
             </fex-ui-listbox-item>
           }
         </fex-ui-listbox>
-      </fex-card>
+      </div>
 
-      <fex-card title="Multiple" description="Multiple selection returns an array.">
+      <div card title="Multiple" description="Multiple selection returns an array.">
         <fex-ui-listbox
           class="max-w-xl"
           multiple
@@ -66,9 +66,9 @@
             </fex-ui-listbox-item>
           }
         </fex-ui-listbox>
-      </fex-card>
+      </div>
 
-      <fex-card title="Horizontal" description="Horizontal orientation lays items out in rows.">
+      <div card title="Horizontal" description="Horizontal orientation lays items out in rows.">
         <fex-ui-listbox defaultValue="tre-flip" orientation="horizontal">
           @for (trick of tricks.slice(0, 4); track trick.value) {
             <fex-ui-listbox-item class="w-56" [value]="trick.value">
@@ -84,9 +84,9 @@
             </fex-ui-listbox-item>
           }
         </fex-ui-listbox>
-      </fex-card>
+      </div>
 
-      <fex-card title="Grouped Items" description="Group related options with the same controller.">
+      <div card title="Grouped Items" description="Group related options with the same controller.">
         <fex-ui-listbox class="mx-auto max-w-xl" multiple [defaultValue]="['kickflip', 'heelflip']">
           <fex-ui-listbox-group>
             <fex-ui-listbox-group-label>Basic Tricks</fex-ui-listbox-group-label>
@@ -121,9 +121,9 @@
             }
           </fex-ui-listbox-group>
         </fex-ui-listbox>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Disabled"
         description="Disabled values can be displayed as selected but cannot be changed by user actions."
       >
@@ -142,7 +142,7 @@
             </fex-ui-listbox-item>
           }
         </fex-ui-listbox>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

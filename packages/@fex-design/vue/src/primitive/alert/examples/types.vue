@@ -18,7 +18,13 @@ const items = [
     <Alert v-for="item in items" :key="item.type" :type="item.type">
       <AlertIcon><component :is="item.icon" /></AlertIcon><AlertTitle>{{ item.title }}</AlertTitle>
     </Alert>
-    <Alert style="--alert-color:#7c3aed;--alert-color-background:#f5f3ff;--alert-color-border:#c4b5fd">
+    <Alert
+      style="
+        --alert-color: #7c3aed;
+        --alert-color-background: #f5f3ff;
+        --alert-color-border: #c4b5fd;
+      "
+    >
       <AlertIcon><InfoIcon /></AlertIcon><AlertTitle>自定义颜色</AlertTitle>
     </Alert>
   </div>

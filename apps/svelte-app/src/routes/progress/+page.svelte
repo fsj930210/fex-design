@@ -1,44 +1,62 @@
 <script lang="ts">
-  import Progress from '@fex-design/svelte/primitive/progress'
-  import CheckIcon from '@fex-design/svelte/icon/check'
-  import MinusIcon from '@fex-design/svelte/icon/minus'
-  import PlusIcon from '@fex-design/svelte/icon/plus'
-  import { Button } from '@fex-design/svelte/ui/button'
-  import Card from '@fex-design/svelte/ui/card'
+  import Progress from "@fex-design/svelte/primitive/progress";
+  import CheckIcon from "@fex-design/svelte/icon/check";
+  import MinusIcon from "@fex-design/svelte/icon/minus";
+  import PlusIcon from "@fex-design/svelte/icon/plus";
+  import { Button } from "@fex-design/svelte/ui/button";
+  import Card from "@fex-design/svelte/ui/card";
 
-  const gradient = { from: '#1677ff', to: '#87d068', direction: 'to right' } as const
+  const gradient = {
+    from: "#1677ff",
+    to: "#87d068",
+    direction: "to right",
+  } as const;
   const segmentGradient = {
     stops: {
-      '0%': 'var(--success)',
-      '49.999%': 'var(--success)',
-      '50%': 'var(--info)',
-      '100%': 'var(--info)',
+      "0%": "var(--success)",
+      "49.999%": "var(--success)",
+      "50%": "var(--info)",
+      "100%": "var(--info)",
     },
-    direction: 'to right',
-  } as const
+    direction: "to right",
+  } as const;
   const stepLineDemos = [
-    { value: 50, steps: 5, color: 'var(--info)' },
-    { value: 30, steps: 5, color: 'var(--info)' },
-    { value: 100, steps: 5, color: 'var(--success)', success: true },
-    { value: 60, steps: 5, color: 'var(--success)' },
-  ]
+    { value: 50, steps: 5, color: "var(--info)" },
+    { value: 30, steps: 5, color: "var(--info)" },
+    { value: 100, steps: 5, color: "var(--success)", success: true },
+    { value: 60, steps: 5, color: "var(--success)" },
+  ];
   const circleStepDemos = [
-    { label: 'Custom count', value: 50, steps: 12, gap: 2, color: 'var(--info)' },
-    { label: 'Custom gap', value: 100, steps: 8, gap: 5, color: 'var(--success)', success: true },
-  ]
-  const getActiveSteps = (value: number, steps: number) => Math.round((value / 100) * steps)
+    {
+      label: "Custom count",
+      value: 50,
+      steps: 12,
+      gap: 2,
+      color: "var(--info)",
+    },
+    {
+      label: "Custom gap",
+      value: 100,
+      steps: 8,
+      gap: 5,
+      color: "var(--success)",
+      success: true,
+    },
+  ];
+  const getActiveSteps = (value: number, steps: number) =>
+    Math.round((value / 100) * steps);
   const getStepDasharray = (steps: number, gap: number) => {
-    const stepLength = 100 / steps
-    const dash = Math.max(0, stepLength - gap)
-    return `${dash} ${100 - dash}`
-  }
-  let dynamicValue = $state(20)
+    const stepLength = 100 / steps;
+    const dash = Math.max(0, stepLength - gap);
+    return `${dash} ${100 - dash}`;
+  };
+  let dynamicValue = $state(20);
   const decrease = () => {
-    dynamicValue = Math.max(0, dynamicValue - 10)
-  }
+    dynamicValue = Math.max(0, dynamicValue - 10);
+  };
   const increase = () => {
-    dynamicValue = Math.min(100, dynamicValue + 10)
-  }
+    dynamicValue = Math.min(100, dynamicValue + 10);
+  };
 </script>
 
 <main class="grid gap-4 p-2 md:p-6">
@@ -48,34 +66,57 @@
   >
     <div class="grid max-w-xl gap-1.5">
       <div class="flex justify-between text-sm">
-        <span>Upload progress</span><span class="text-muted-foreground">35%</span>
+        <span>Upload progress</span><span class="text-muted-foreground"
+          >35%</span
+        >
       </div>
       <Progress value={35} />
     </div>
   </Card>
-  <Card title="Status" description="Info, warning, success and error use system semantic tokens.">
+  <Card
+    title="Status"
+    description="Info, warning, success and error use system semantic tokens."
+  >
     <div class="grid max-w-xl gap-3">
       <div><span>Normal · 35%</span><Progress value={35} /></div>
       <div><span>Info / 68%</span><Progress value={68} status="info" /></div>
-      <div><span>Warning / 82%</span><Progress value={82} status="warning" /></div>
-      <div><span>Success · 100%</span><Progress value={100} status="success" /></div>
+      <div>
+        <span>Warning / 82%</span><Progress value={82} status="warning" />
+      </div>
+      <div>
+        <span>Success · 100%</span><Progress value={100} status="success" />
+      </div>
       <div><span>Error · 42%</span><Progress value={42} status="error" /></div>
     </div>
   </Card>
-  <Card title="Color" description="Use arbitrary CSS colors, track colors and gradients.">
+  <Card
+    title="Color"
+    description="Use arbitrary CSS colors, track colors and gradients."
+  >
     <div class="grid max-w-xl gap-3">
-      <div><span>Custom color</span><Progress value={68} color="#7c3aed" /></div>
       <div>
-        <span>Custom track</span><Progress value={52} color="#0891b2" trackColor="#cffafe" />
+        <span>Custom color</span><Progress value={68} color="#7c3aed" />
+      </div>
+      <div>
+        <span>Custom track</span><Progress
+          value={52}
+          color="#0891b2"
+          trackColor="#cffafe"
+        />
       </div>
       <div><span>Gradient</span><Progress value={88} color={gradient} /></div>
     </div>
   </Card>
-  <Card title="Segmented" description="Use hard color stops to show staged progress.">
+  <Card
+    title="Segmented"
+    description="Use hard color stops to show staged progress."
+  >
     <div class="grid max-w-xl gap-4">
       <div class="grid gap-1.5">
         <div class="flex justify-between text-sm">
-          <span>Segmented line</span><span class="text-muted-foreground">60%</span>
+          <span>Segmented line</span><span class="text-muted-foreground"
+            >60%</span
+          >
         </div>
         <Progress value={60} color={segmentGradient} showValue />
       </div>
@@ -116,7 +157,7 @@
                 class="h-2 w-4 rounded-[1px]"
                 style:background={index < getActiveSteps(demo.value, demo.steps)
                   ? demo.color
-                  : 'var(--progress-remaining)'}
+                  : "var(--progress-remaining)"}
               ></span>
             {/each}
           </div>
@@ -132,7 +173,10 @@
       {/each}
     </div>
   </Card>
-  <Card title="Step Circle" description="Show progress as fixed circular steps with custom count and gap.">
+  <Card
+    title="Step Circle"
+    description="Show progress as fixed circular steps with custom count and gap."
+  >
     <div class="flex flex-wrap gap-4">
       {#each circleStepDemos as demo (demo.label)}
         <div class="grid justify-items-center gap-1.5">
@@ -146,7 +190,7 @@
                   fill="none"
                   stroke={index < getActiveSteps(demo.value, demo.steps)
                     ? demo.color
-                    : 'var(--progress-remaining)'}
+                    : "var(--progress-remaining)"}
                   stroke-width="16"
                   stroke-linecap="butt"
                   pathLength="100"
@@ -156,7 +200,9 @@
               {/each}
             </svg>
             <span class="absolute text-2xl">
-              {#if demo.success}<CheckIcon class="size-8 text-success" />{:else}{demo.value}%{/if}
+              {#if demo.success}<CheckIcon
+                  class="size-8 text-success"
+                />{:else}{demo.value}%{/if}
             </span>
           </div>
           <span class="text-sm">{demo.label}</span>
@@ -171,9 +217,18 @@
       <div><span>Large · 12px</span><Progress value={80} thickness={12} /></div>
     </div>
   </Card>
-  <Card title="Linecap" description="Round line / round track, butt and square endings with the same value.">
+  <Card
+    title="Linecap"
+    description="Round line / round track, butt and square endings with the same value."
+  >
     <div class="grid max-w-xl gap-3">
-      <div><span>Round line / round track</span><Progress value={36} thickness={12} linecap="round" /></div>
+      <div>
+        <span>Round line / round track</span><Progress
+          value={36}
+          thickness={12}
+          linecap="round"
+        />
+      </div>
       <div>
         <span>Butt · round track</span><Progress
           value={36}
@@ -182,19 +237,56 @@
           trackLinecap="round"
         />
       </div>
-      <div><span>Square line / round track</span><Progress value={36} thickness={12} linecap="square" /></div>
+      <div>
+        <span>Square line / round track</span><Progress
+          value={36}
+          thickness={12}
+          linecap="square"
+        />
+      </div>
     </div>
   </Card>
-  <Card title="Circle" description="Circular progress supports status and gradients.">
+  <Card
+    title="Circle"
+    description="Circular progress supports status and gradients."
+  >
     <div class="flex flex-wrap gap-4">
-      <Progress variant="circle" value={72} size={96} thickness={8} color={gradient} showValue />
-      <Progress variant="circle" value={100} size={96} thickness={8} status="success" showValue />
-      <Progress variant="circle" value={42} size={96} thickness={8} status="error" showValue />
+      <Progress
+        variant="circle"
+        value={72}
+        size={96}
+        thickness={8}
+        color={gradient}
+        showValue
+      />
+      <Progress
+        variant="circle"
+        value={100}
+        size={96}
+        thickness={8}
+        status="success"
+        showValue
+      />
+      <Progress
+        variant="circle"
+        value={42}
+        size={96}
+        thickness={8}
+        status="error"
+        showValue
+      />
     </div>
   </Card>
   <Card title="Dashboard" description="Configure the gap degree and placement.">
     <div class="flex flex-wrap gap-4">
-      <Progress variant="dashboard" value={64} size={96} thickness={8} gapDegree={90} showValue />
+      <Progress
+        variant="dashboard"
+        value={64}
+        size={96}
+        thickness={8}
+        gapDegree={90}
+        showValue
+      />
       <Progress
         variant="dashboard"
         value={64}
@@ -206,32 +298,62 @@
       />
     </div>
   </Card>
-  <Card title="Dynamic" description="Control the same progress value from external actions.">
+  <Card
+    title="Dynamic"
+    description="Control the same progress value from external actions."
+  >
     <div class="grid max-w-xl gap-3">
       <div class="grid gap-1.5">
         <div class="flex justify-between text-sm">
-          <span>Controlled line</span><span class="text-muted-foreground">{dynamicValue}%</span>
+          <span>Controlled line</span><span class="text-muted-foreground"
+            >{dynamicValue}%</span
+          >
         </div>
         <Progress value={dynamicValue} />
       </div>
       <div class="flex flex-wrap items-center gap-4">
-        <Progress variant="circle" value={dynamicValue} size={96} thickness={8} showValue />
+        <Progress
+          variant="circle"
+          value={dynamicValue}
+          size={96}
+          thickness={8}
+          showValue
+        />
         <div class="flex gap-1.5">
-          <Button variant="outline" size="icon-sm" disabled={dynamicValue <= 0} onclick={decrease}>
+          <Button
+            variant="outline"
+            size="icon-sm"
+            disabled={dynamicValue <= 0}
+            onclick={decrease}
+          >
             <MinusIcon />
           </Button>
-          <Button variant="outline" size="icon-sm" disabled={dynamicValue >= 100} onclick={increase}>
+          <Button
+            variant="outline"
+            size="icon-sm"
+            disabled={dynamicValue >= 100}
+            onclick={increase}
+          >
             <PlusIcon />
           </Button>
         </div>
       </div>
     </div>
   </Card>
-  <Card title="Indeterminate" description="Use a moving indicator when the value is unknown.">
+  <Card
+    title="Indeterminate"
+    description="Use a moving indicator when the value is unknown."
+  >
     <div class="grid max-w-xl gap-4">
       <div><span>Processing</span><Progress value={null} /></div>
       <div class="grid w-fit justify-items-center gap-1.5">
-        <Progress variant="circle" value={null} size={72} thickness={6} color="#1677ff" />
+        <Progress
+          variant="circle"
+          value={null}
+          size={72}
+          thickness={6}
+          color="#1677ff"
+        />
         <span class="text-sm">Processing</span>
       </div>
     </div>

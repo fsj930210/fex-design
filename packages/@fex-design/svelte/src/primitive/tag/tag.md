@@ -8,43 +8,43 @@ Styled Tag primitives for compact categories, attributes, and status values. Pri
 
 ## Components
 
-| Component | Element | Purpose |
-| --------- | ------- | ------- |
-| Tag | span | Inherits the native span; renders variant, color, size, and disabled styling. |
-| TagAction | button | Inherits the native button; renders XIcon by default and accepts complete custom content. |
+| Component | Element | Purpose                                                                                   |
+| --------- | ------- | ----------------------------------------------------------------------------------------- |
+| Tag       | span    | Inherits the native span; renders variant, color, size, and disabled styling.             |
+| TagAction | button  | Inherits the native button; renders XIcon by default and accepts complete custom content. |
 
 ## Examples
 
 Examples are stored in `examples/<name>` as the source for the documentation preview.
 
-| Name          | Covers                                                        |
-| ------------- | ------------------------------------------------------------- |
+| Name          | Covers                                                         |
+| ------------- | -------------------------------------------------------------- |
 | basic         | Regular tags, three sizes, closable composition, and disabled. |
-| variants      | Filled, solid, and outlined visual variants.                  |
-| colors        | Five semantic colors and custom CSS colors.                   |
-| dynamic       | Adding and removing tags with application-owned state.        |
-| css-variables | Instance-level semantic color overrides.                      |
-| direction     | Native LTR and RTL direction with logical close placement.    |
+| variants      | Filled, solid, and outlined visual variants.                   |
+| colors        | Five semantic colors and custom CSS colors.                    |
+| dynamic       | Adding and removing tags with application-owned state.         |
+| css-variables | Instance-level semantic color overrides.                       |
+| direction     | Native LTR and RTL direction with logical close placement.     |
 
 ## Tag API
 
-| Name | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| variant | 'filled' \| 'solid' \| 'outlined' | 'filled' | Visual treatment. |
-| color | TagColor | — | primary, success, warning, danger, info, or any valid CSS color. |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | Tag size. |
-| disabled | boolean | false | Applies disabled semantics and styling to the tag. |
-| content | `children?: Snippet` | — | Tag content. |
-| native attributes | HTMLAttributes<HTMLSpanElement> | — | Native span attributes and events. |
+| Name              | Type                              | Default  | Description                                                      |
+| ----------------- | --------------------------------- | -------- | ---------------------------------------------------------------- |
+| variant           | 'filled' \| 'solid' \| 'outlined' | 'filled' | Visual treatment.                                                |
+| color             | TagColor                          | —        | primary, success, warning, danger, info, or any valid CSS color. |
+| size              | 'sm' \| 'md' \| 'lg'              | 'md'     | Tag size.                                                        |
+| disabled          | boolean                           | false    | Applies disabled semantics and styling to the tag.               |
+| content           | `children?: Snippet`              | —        | Tag content.                                                     |
+| native attributes | HTMLAttributes<HTMLSpanElement>   | —        | Native span attributes and events.                               |
 
 ## TagAction API
 
-| Name | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| disabled | boolean | false | Disables the native action button. |
-| content | `children?: Snippet` | XIcon | Completely replaces the default close icon when provided. |
-| events | native `onclick` handler | — | Native button events; Primitive adds no action-specific event. |
-| native attributes | HTMLButtonAttributes | — | Native button attributes and events. |
+| Name              | Type                     | Default | Description                                                    |
+| ----------------- | ------------------------ | ------- | -------------------------------------------------------------- |
+| disabled          | boolean                  | false   | Disables the native action button.                             |
+| content           | `children?: Snippet`     | XIcon   | Completely replaces the default close icon when provided.      |
+| events            | native `onclick` handler | —       | Native button events; Primitive adds no action-specific event. |
+| native attributes | HTMLButtonAttributes     | —       | Native button attributes and events.                           |
 
 ## Variants and colors
 

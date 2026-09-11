@@ -1,10 +1,10 @@
 <fex-menu-root role="menubar" aria-label="Editor commands" [class]="rootClassName">
   <fex-menu-list orientation="horizontal" [class]="horizontalListClassName">
     @for (menu of menus; track menu.name) {
-      <fex-popover [trigger]="['click']" side="bottom" align="start">
+      <div popoverRoot [trigger]="['click']" side="bottom" align="start">
         <button
           fexMenuItem
-          fexPopoverTrigger
+          popoverTrigger
           [value]="menu.name"
           [submenu]="true"
           aria-haspopup="menu"
@@ -12,7 +12,7 @@
         >
           {{ menu.name }}
         </button>
-        <fex-popover-portal
+        <ng-template popoverPortal
           ><fex-dropdown-content [class]="popupClassName"
             ><fex-menu-list
               orientation="vertical"
@@ -29,9 +29,8 @@
                 </button>
               }
             </fex-menu-list></fex-dropdown-content
-          ></fex-popover-portal
-        >
-      </fex-popover>
+          ></ng-template>
+      </div>
     }
   </fex-menu-list>
 </fex-menu-root>

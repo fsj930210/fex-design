@@ -5,8 +5,8 @@
     QrCodeModules,
     QrCodeRoot,
     QrCodeSvg,
-  } from '@fex-design/svelte/primitive/qrcode'
-  import Card from '@fex-design/svelte/ui/card'
+  } from "@fex-design/svelte/primitive/qrcode";
+  import Card from "@fex-design/svelte/ui/card";
 </script>
 
 <Card
@@ -18,7 +18,13 @@
       <QrCodeBackground />
       <QrCodeModules centerSize={44} />
       <QrCodeCenter size={44} aria-label="Fex Design">
-        <circle cx="50" cy="50" r="48" class="fill-background stroke-border" stroke-width="2"></circle>
+        <circle
+          cx="50"
+          cy="50"
+          r="48"
+          class="fill-background stroke-border"
+          stroke-width="2"
+        ></circle>
         <text
           x="50"
           y="52"

@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Pagination"
   description="Pagination is a core feature with two mutually exclusive registrations: client includes the paginated row model; server only owns pagination state/APIs and receives already-paged data."
 >
@@ -31,7 +31,7 @@
             <button
               button
               size="sm"
-              variant="outline"
+              variant="outlined"
               [disabled]="!client.getCanPreviousPage()"
               (click)="client.previousPage()"
             >
@@ -40,7 +40,7 @@
             <button
               button
               size="sm"
-              variant="outline"
+              variant="outlined"
               [disabled]="!client.getCanNextPage()"
               (click)="client.nextPage()"
             >
@@ -78,7 +78,7 @@
             <button
               button
               size="sm"
-              variant="outline"
+              variant="outlined"
               [disabled]="!server.getCanPreviousPage()"
               (click)="serverPrevious()"
             >
@@ -87,7 +87,7 @@
             <button
               button
               size="sm"
-              variant="outline"
+              variant="outlined"
               [disabled]="!server.getCanNextPage()"
               (click)="serverNext()"
             >
@@ -103,4 +103,4 @@
       </div>
     </section>
   </div>
-</fex-card>
+</div>

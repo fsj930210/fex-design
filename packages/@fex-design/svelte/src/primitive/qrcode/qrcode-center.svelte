@@ -1,21 +1,27 @@
 <script lang="ts">
-  import { getQrCodeCenterRect } from '@fex-design/core/qrcode'
-  import { qrcodeCenterClassName } from '@fex-design/styles/qrcode'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { SVGAttributes } from 'svelte/elements'
-  import { useQrCode } from './context'
+  import { getQrCodeCenterRect } from "@fex-design/core/qrcode";
+  import { qrcodeCenterClassName } from "@fex-design/styles/qrcode";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { SVGAttributes } from "svelte/elements";
+  import { useQrCode } from "./context";
 
-  interface Props extends Omit<SVGAttributes<SVGSVGElement>, 'class'> {
-    size?: number
-    class?: string
-    children?: Snippet
+  interface Props extends Omit<SVGAttributes<SVGSVGElement>, "class"> {
+    size?: number;
+    class?: string;
+    children?: Snippet;
   }
 
-  let { size = 40, class: className, style, children, ...rest }: Props = $props()
-  const { getModel } = useQrCode('QrCodeCenter')
-  const rect = $derived(getQrCodeCenterRect(getModel(), size))
-  const classList = $derived(cn(qrcodeCenterClassName, className))
+  let {
+    size = 40,
+    class: className,
+    style,
+    children,
+    ...rest
+  }: Props = $props();
+  const { getModel } = useQrCode("QrCodeCenter");
+  const rect = $derived(getQrCodeCenterRect(getModel(), size));
+  const classList = $derived(cn(qrcodeCenterClassName, className));
 </script>
 
 <svg

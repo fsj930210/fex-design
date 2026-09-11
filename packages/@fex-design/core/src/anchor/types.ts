@@ -6,11 +6,7 @@ export interface AnchorTargetRef {
   readonly current: HTMLElement | null
 }
 
-export type AnchorTarget =
-  | string
-  | HTMLElement
-  | AnchorTargetRef
-  | (() => HTMLElement | null)
+export type AnchorTarget = string | HTMLElement | AnchorTargetRef | (() => HTMLElement | null)
 
 export interface AnchorItem<TTitle = unknown> {
   key: string

@@ -3,7 +3,7 @@ import { tagClassName, tagActionClassName } from './tag'
 // The Angular host adapter retains Popover's default padding and max-width in
 // its host class. Important utilities keep the picker panel contract intact.
 export const datePickerContentClassName =
-  '![--popover-content-max-width:720px] !overflow-hidden !p-0'
+  '!max-w-[min(720px,var(--floating-available-width,calc(100vw-16px)))] !overflow-hidden !p-0'
 
 export const datePickerTriggerClassName = 'cursor-pointer'
 

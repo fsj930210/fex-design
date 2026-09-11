@@ -9,7 +9,7 @@ import {
 import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
 import { InputNumber, type InputNumberChange } from '@fex-design/angular/primitive/input-number'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-input-number-validation-demo',

@@ -1,17 +1,21 @@
 <script lang="ts">
-  import { toastDescriptionClassName } from '@fex-design/styles/toast'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
+  import { toastDescriptionClassName } from "@fex-design/styles/toast";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
 
-  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'> {
-    children?: Snippet
-    class?: string
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class"> {
+    children?: Snippet;
+    class?: string;
   }
 
-  let { children, class: className, ...rest }: Props = $props()
+  let { children, class: className, ...rest }: Props = $props();
 </script>
 
-<div {...rest} data-slot="toast-description" class={cn(toastDescriptionClassName, className)}>
+<div
+  {...rest}
+  data-slot="toast-description"
+  class={cn(toastDescriptionClassName, className)}
+>
   {@render children?.()}
 </div>

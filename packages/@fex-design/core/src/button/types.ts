@@ -5,13 +5,7 @@ export type ButtonVariant = 'solid' | 'outlined' | 'filled' | 'text' | 'link' | 
 export type ButtonColor = 'primary' | 'danger' | 'warning' | 'success' | 'info'
 
 /** Button 的控件尺寸。 */
-export type ButtonSize =
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'icon-sm'
-  | 'icon-md'
-  | 'icon-lg'
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon-sm' | 'icon-md' | 'icon-lg'
 
 /** Button 的可选视觉效果。 */
 export type ButtonEffect =

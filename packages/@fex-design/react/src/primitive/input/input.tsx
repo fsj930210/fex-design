@@ -24,7 +24,8 @@ import { InputContext, useInputContext } from './input-context'
 import { useInput, type UseInputOptions } from './use-input'
 
 export interface InputRootProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange' | 'size'>,
+  extends
+    Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange' | 'size'>,
     UseInputOptions,
     InputVisualOptions {
   ref?: Ref<HTMLDivElement> | undefined

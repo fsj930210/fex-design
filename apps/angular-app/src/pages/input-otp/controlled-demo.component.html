@@ -1,4 +1,4 @@
-<fex-card title="受控值" description="外部状态可以更新或清空所有输入段。"
+<div card title="受控值" description="外部状态可以更新或清空所有输入段。"
   ><div class="grid gap-2">
     <div fexInputOTPRoot [value]="value()" (valueChange)="change($event)">
       <div fexInputOTPGroup>
@@ -14,6 +14,5 @@
       </div>
     </div>
     <p class="text-sm text-muted-foreground">分段值：{{ value() }}</p>
-    <button button class="w-fit" variant="outline" (click)="clear()">清空</button>
-  </div></fex-card
->
+    <button button class="w-fit" variant="outlined" (click)="clear()">清空</button>
+  </div></div>

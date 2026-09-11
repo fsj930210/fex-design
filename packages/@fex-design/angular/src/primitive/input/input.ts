@@ -56,8 +56,12 @@ export class InputRoot implements OnInit {
   protected readonly hostClassName = createHostClassName(() =>
     inputRootClassName({ size: this.size(), variant: this.variant() }),
   )
-  ngOnInit() { if (this.value() === undefined) this.uncontrolledValue.set(this.defaultValue()) }
-  setFocusElement(element: HTMLInputElement) { this.focusElement = element }
+  ngOnInit() {
+    if (this.value() === undefined) this.uncontrolledValue.set(this.defaultValue())
+  }
+  setFocusElement(element: HTMLInputElement) {
+    this.focusElement = element
+  }
   setValue(value: string) {
     if (this.disabled() || this.readOnly()) return
     if (this.value() === undefined) this.uncontrolledValue.set(value)
@@ -97,26 +101,58 @@ export class InputControl {
   readonly root = inject(InputRoot)
   readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement
   protected readonly hostClassName = createHostClassName(inputControlClassName)
-  constructor() { this.root.setFocusElement(this.element) }
+  constructor() {
+    this.root.setFocusElement(this.element)
+  }
   @HostListener('input', ['$event']) onInput(event: Event) {
     this.root.setValue((event.currentTarget as HTMLInputElement).value)
   }
-  focus(options?: FocusOptions) { this.element.focus(options) }
-  blur() { this.element.blur() }
-  select() { this.element.select() }
+  focus(options?: FocusOptions) {
+    this.element.focus(options)
+  }
+  blur() {
+    this.element.blur()
+  }
+  select() {
+    this.element.select()
+  }
 }
 
-@Directive({ selector: '[inputPrefix]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-prefix' } })
-export class InputPrefix { protected readonly hostClassName = createHostClassName(inputPrefixClassName) }
+@Directive({
+  selector: '[inputPrefix]',
+  standalone: true,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'input-prefix' },
+})
+export class InputPrefix {
+  protected readonly hostClassName = createHostClassName(inputPrefixClassName)
+}
 
-@Directive({ selector: '[inputSuffix]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-suffix' } })
-export class InputSuffix { protected readonly hostClassName = createHostClassName(inputSuffixClassName) }
+@Directive({
+  selector: '[inputSuffix]',
+  standalone: true,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'input-suffix' },
+})
+export class InputSuffix {
+  protected readonly hostClassName = createHostClassName(inputSuffixClassName)
+}
 
-@Directive({ selector: '[inputAddonBefore]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-before' } })
-export class InputAddonBefore { protected readonly hostClassName = createHostClassName(inputAddonBeforeClassName) }
+@Directive({
+  selector: '[inputAddonBefore]',
+  standalone: true,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-before' },
+})
+export class InputAddonBefore {
+  protected readonly hostClassName = createHostClassName(inputAddonBeforeClassName)
+}
 
-@Directive({ selector: '[inputAddonAfter]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-after' } })
-export class InputAddonAfter { protected readonly hostClassName = createHostClassName(inputAddonAfterClassName) }
+@Directive({
+  selector: '[inputAddonAfter]',
+  standalone: true,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'input-addon-after' },
+})
+export class InputAddonAfter {
+  protected readonly hostClassName = createHostClassName(inputAddonAfterClassName)
+}
 
 @Component({
   selector: 'button[inputClear]',

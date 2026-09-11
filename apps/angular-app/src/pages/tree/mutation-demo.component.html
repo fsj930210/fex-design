@@ -1,19 +1,19 @@
-<fex-card
+<div card
   title="External controller and node mutation"
   description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange."
   ><div class="mb-2 flex flex-wrap gap-1.5">
     <button
       button
       size="sm"
-      variant="outline"
+      variant="outlined"
       (click)="controller.updateNode('engineering', { name: 'Engineering (renamed)' })"
     >
       Rename Engineering</button
-    ><button button size="sm" variant="outline" (click)="addChild()">Add child</button
-    ><button button size="sm" variant="outline" (click)="reveal()">Reveal Design</button>
+    ><button button size="sm" variant="outlined" (click)="addChild()">Add child</button
+    ><button button size="sm" variant="outlined" (click)="reveal()">Reveal Design</button>
   </div>
   <fex-demo-tree
     [controller]="controller"
     [options]="options()"
     class="block max-w-xl rounded-md border border-border bg-background p-1.5"
-/></fex-card>
+/></div>

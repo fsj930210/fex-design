@@ -1,13 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import {
-  Card as PrimitiveCard,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@fex-design/angular/primitive/card'
-import Card from '@fex-design/angular/ui/card'
+import { CardCompositionDemo } from './composition-demo.component'
+import { Card } from '@fex-design/angular/ui/card'
 
 type SpacingOption = {
   label: string
@@ -19,15 +13,15 @@ type SpacingOption = {
 const defaultSpacingOption: SpacingOption = { label: 'md', value: 'md', size: 'md' }
 
 const spacingOptions: SpacingOption[] = [
-  { label: 'sm', value: 'sm', size: 'sm' },
+  { label: 'sm', value: 'sm', size: 'sm', spacing: '16px' },
   defaultSpacingOption,
-  { label: 'lg', value: 'lg', size: 'lg' },
+  { label: 'lg', value: 'lg', size: 'lg', spacing: '32px' },
   { label: '40px', value: 'custom', size: 'md', spacing: '40px' },
 ]
 
 @Component({
   selector: 'fex-card-page',
-  imports: [PrimitiveCard, Card, CardContent, CardDescription, CardHeader, CardTitle, RouterLink],
+  imports: [CardCompositionDemo, Card, RouterLink],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,1 +1,10 @@
-<script lang="ts">import { Input } from '@fex-design/svelte/ui/input'</script><div class="grid w-full gap-3"><Input disabled defaultValue="禁用"/><Input readonly defaultValue="只读"/><Input aria-invalid="true" defaultValue="输入有误"/></div>
+<script lang="ts">
+  import { Input } from "@fex-design/svelte/ui/input";
+</script>
+
+<div class="grid w-full gap-3">
+  <Input disabled defaultValue="禁用" /><Input
+    readonly
+    defaultValue="只读"
+  /><Input aria-invalid="true" defaultValue="输入有误" />
+</div>

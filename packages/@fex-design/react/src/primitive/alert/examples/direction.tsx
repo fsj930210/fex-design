@@ -15,10 +15,16 @@ export default function Direction() {
         <section key={item.dir} dir={item.dir} className="grid gap-3 rounded-lg border p-4">
           <strong>{item.dir.toUpperCase()}</strong>
           <Alert type="warning">
-            <AlertIcon><TriangleAlertIcon /></AlertIcon>
+            <AlertIcon>
+              <TriangleAlertIcon />
+            </AlertIcon>
             <AlertTitle>{item.title}</AlertTitle>
-            <AlertAction><button className="underline">{item.action}</button></AlertAction>
-            <button className={alertCloseClassName} data-slot="alert-close" aria-label="关闭提示"><XIcon /></button>
+            <AlertAction>
+              <button className="underline">{item.action}</button>
+            </AlertAction>
+            <button className={alertCloseClassName} data-slot="alert-close" aria-label="关闭提示">
+              <XIcon />
+            </button>
           </Alert>
         </section>
       ))}

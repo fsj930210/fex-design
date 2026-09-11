@@ -1,1 +1,10 @@
-<script lang="ts">import { InputControl,InputRoot } from '@fex-design/svelte/primitive/input'; const sizes=['sm','md','lg'] as const</script><div class="grid w-full gap-3">{#each sizes as size (size)}<InputRoot {size}><InputControl placeholder={size}/></InputRoot>{/each}</div>
+<script lang="ts">
+  import { InputControl, InputRoot } from "@fex-design/svelte/primitive/input";
+  const sizes = ["sm", "md", "lg"] as const;
+</script>
+
+<div class="grid w-full gap-3">
+  {#each sizes as size (size)}<InputRoot {size}
+      ><InputControl placeholder={size} /></InputRoot
+    >{/each}
+</div>

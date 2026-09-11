@@ -8,34 +8,34 @@
 
 ## 示例
 
-| 名称 | 覆盖内容 |
-| --- | --- |
-| basic | 空 Input 和可清除 Input。 |
-| sizes | `sm`、`md`、`lg`，与 Primitive 使用相同场景。 |
-| variants | 四种结构形态。 |
-| controlled | 受控、非受控值以及外部更新。 |
-| affixes | Prefix、Suffix、Addon、图标内容和输入框内文本操作。 |
-| group | Input 与 Button、Input 与 Input 的组合。 |
-| password | 密码可见性、关闭切换、清除和 `aria-invalid`。 |
-| search | loading、仅 Enter 搜索、Prefix 搜索和 Addon 搜索操作。 |
-| states | Input 家族的禁用、只读和错误状态。 |
-| focus | 命令式聚焦、失焦和全选。 |
-| semantic-styles | 结构化 class/style、状态选择器和基础 CSS Variables。 |
+| 名称            | 覆盖内容                                               |
+| --------------- | ------------------------------------------------------ |
+| basic           | 空 Input 和可清除 Input。                              |
+| sizes           | `sm`、`md`、`lg`，与 Primitive 使用相同场景。          |
+| variants        | 四种结构形态。                                         |
+| controlled      | 受控、非受控值以及外部更新。                           |
+| affixes         | Prefix、Suffix、Addon、图标内容和输入框内文本操作。    |
+| group           | Input 与 Button、Input 与 Input 的组合。               |
+| password        | 密码可见性、关闭切换、清除和 `aria-invalid`。          |
+| search          | loading、仅 Enter 搜索、Prefix 搜索和 Addon 搜索操作。 |
+| states          | Input 家族的禁用、只读和错误状态。                     |
+| focus           | 命令式聚焦、失焦和全选。                               |
+| semantic-styles | 结构化 class/style、状态选择器和基础 CSS Variables。   |
 
 ## Input API
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| value | string | — | 受控值。 |
-| defaultValue | string | `''` | 非受控初始值。 |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | 高度为 24px、32px 或 44px。 |
-| variant | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | 视觉结构。 |
-| clearable | boolean | false | 启用仅在交互状态显示的清除操作。 |
-| prefix / suffix | 通过内容属性传入 Svelte 5 `Snippet`。 | — | InputRoot 内部内容；普通 Input 中不承担交互。 |
-| addonBefore / addonAfter | 通过内容属性传入 Svelte 5 `Snippet`。 | — | 位于 Input 聚焦环之外的附加内容。 |
-| classNames | 结构区域 class 映射 | — | root、control、prefix、suffix、clear、addon 和 action 的 class。 |
-| styles | 结构区域 style 映射 | — | 相同语义区域的框架原生 style。 |
-| 原生属性 | Svelte `HTMLInputAttributes` | — | 原生 input 属性与事件。 |
+| 名称                     | 类型                                                     | 默认值       | 说明                                                             |
+| ------------------------ | -------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| value                    | string                                                   | —            | 受控值。                                                         |
+| defaultValue             | string                                                   | `''`         | 非受控初始值。                                                   |
+| size                     | `'sm' \| 'md' \| 'lg'`                                   | `'md'`       | 高度为 24px、32px 或 44px。                                      |
+| variant                  | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | 视觉结构。                                                       |
+| clearable                | boolean                                                  | false        | 启用仅在交互状态显示的清除操作。                                 |
+| prefix / suffix          | 通过内容属性传入 Svelte 5 `Snippet`。                    | —            | InputRoot 内部内容；普通 Input 中不承担交互。                    |
+| addonBefore / addonAfter | 通过内容属性传入 Svelte 5 `Snippet`。                    | —            | 位于 Input 聚焦环之外的附加内容。                                |
+| classNames               | 结构区域 class 映射                                      | —            | root、control、prefix、suffix、clear、addon 和 action 的 class。 |
+| styles                   | 结构区域 style 映射                                      | —            | 相同语义区域的框架原生 style。                                   |
+| 原生属性                 | Svelte `HTMLInputAttributes`                             | —            | 原生 input 属性与事件。                                          |
 
 ## InputPassword
 

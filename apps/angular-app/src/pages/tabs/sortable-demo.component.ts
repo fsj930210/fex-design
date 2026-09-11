@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { EllipsisIcon } from '@fex-design/angular/icon/more'
 import { FexSortable, FexSortableItemDirective } from '@fex-design/angular/primitive/sortable'
 import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/angular/primitive/tabs'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { initialTabs } from './data'
 
 @Component({

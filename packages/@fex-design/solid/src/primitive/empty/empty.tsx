@@ -40,11 +40,7 @@ export function EmptyDescription(props: ParentProps<JSX.HTMLAttributes<HTMLParag
 export function EmptyMedia(props: DivProps) {
   const [local, rest] = splitProps(props, ['class', 'children'])
   return (
-    <div
-      {...rest}
-      data-slot="empty-media"
-      class={cn(emptyMediaClassName, local.class)}
-    >
+    <div {...rest} data-slot="empty-media" class={cn(emptyMediaClassName, local.class)}>
       {local.children}
     </div>
   )

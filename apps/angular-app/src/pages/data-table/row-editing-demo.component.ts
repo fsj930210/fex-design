@@ -11,7 +11,7 @@ import {
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people6, type Person } from './data'
 type Features = {
   columnSizingFeature: typeof columnSizingFeature

@@ -1,7 +1,13 @@
-import type { InputClassNames, InputSearchMeta, InputStyles, InputVisualOptions } from '@fex-design/core/input/types'
+import type {
+  InputClassNames,
+  InputSearchMeta,
+  InputStyles,
+  InputVisualOptions,
+} from '@fex-design/core/input/types'
 import type { JSX } from 'solid-js'
 
-export interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'value'>, InputVisualOptions {
+export interface InputProps
+  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'value'>, InputVisualOptions {
   value?: string
   defaultValue?: string
   onValueChange?: (value: string) => void
@@ -14,5 +20,10 @@ export interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElemen
   classNames?: InputClassNames
   styles?: InputStyles<JSX.CSSProperties>
 }
-export interface InputPasswordProps extends Omit<InputProps, 'type'> { visibilityToggle?: boolean }
-export interface InputSearchProps extends Omit<InputProps, 'type'> { loading?: boolean; onSearch?: (value: string, meta: InputSearchMeta) => void }
+export interface InputPasswordProps extends Omit<InputProps, 'type'> {
+  visibilityToggle?: boolean
+}
+export interface InputSearchProps extends Omit<InputProps, 'type'> {
+  loading?: boolean
+  onSearch?: (value: string, meta: InputSearchMeta) => void
+}

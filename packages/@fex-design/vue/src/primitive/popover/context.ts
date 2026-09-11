@@ -1,16 +1,14 @@
-import type {
-  FloatingOverlay,
-  FloatingOverlayOptions,
-} from '@fex-design/core/overlay/create-floating-overlay'
+import type { PopoverController } from '@fex-design/core/popover/create-popover'
+import type { PopoverOptions } from '@fex-design/core/popover/types'
 import { inject, type InjectionKey, type ShallowRef } from 'vue'
 
-export type PopoverSnapshot = ReturnType<FloatingOverlay['getSnapshot']>
+export type PopoverSnapshot = ReturnType<PopoverController['getSnapshot']>
 
 export interface PopoverContextValue {
-  arrow: ShallowRef<boolean>
+
   arrowElement: ShallowRef<HTMLElement | null>
-  overlay: FloatingOverlay
-  hoverAncestors: FloatingOverlay[]
+  overlay: PopoverController
+  hoverAncestors: readonly PopoverController[]
   triggerElement: ShallowRef<HTMLElement | null>
   snapshot: ShallowRef<PopoverSnapshot>
 }
@@ -25,43 +23,7 @@ export function usePopoverContext(component: string) {
   return context
 }
 
-export type PopoverRootProps = FloatingOverlayOptions
-
-export interface PopoverDismissRecord {
-  overlay: FloatingOverlay
-  triggerElement: ShallowRef<HTMLElement | null>
-  getContentElement: () => HTMLElement | null
-  getArrowElement: () => HTMLElement | null
-}
-
-const dismissRecords = new Set<PopoverDismissRecord>()
-
-export function registerPopoverDismissRecord(record: PopoverDismissRecord) {
-  dismissRecords.add(record)
-  return () => dismissRecords.delete(record)
-}
-
-export function dismissOpenPopovers(event: Event, except?: FloatingOverlay) {
-  const target = event.target
-  dismissRecords.forEach((record) => {
-    if (record.overlay === except || !record.overlay.getSnapshot().open) {
-      return
-    }
-    if (target instanceof Node) {
-      const triggerElement = record.triggerElement.value
-      const contentElement = record.getContentElement()
-      const arrowElement = record.getArrowElement()
-      if (
-        triggerElement?.contains(target) ||
-        contentElement?.contains(target) ||
-        arrowElement?.contains(target)
-      ) {
-        return
-      }
-    }
-    record.overlay.close({ reason: 'outside-pointer', event })
-  })
-}
+export type PopoverRootProps = PopoverOptions
 
 export function eventInfo(event: Event & Partial<PointerEvent>) {
   return {

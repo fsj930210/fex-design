@@ -5,8 +5,10 @@ import type { ComponentPublicInstance, HTMLAttributes } from 'vue'
 import { computed, onBeforeUnmount } from 'vue'
 import { usePopoverContext } from './context'
 
+defineOptions({ name: 'PopoverArrow' })
+
 const props = defineProps<{ class?: string; style?: HTMLAttributes['style'] }>()
-const { arrow, arrowElement, overlay, snapshot } = usePopoverContext('PopoverArrow')
+const { arrowElement, overlay, snapshot } = usePopoverContext('PopoverArrow')
 const arrowClass = computed(() => cn(popoverArrowClassName, props.class))
 const arrowStyle = computed(() => {
   // 必须在 computed 中读取 snapshot.value.side，确保 Vue 建立响应式依赖。
@@ -14,16 +16,13 @@ const arrowStyle = computed(() => {
   const sideStyle =
     snapshot.value.side === 'left' || snapshot.value.side === 'right'
       ? {
-          top: 'clamp(var(--popover-arrow-inset,32px), var(--floating-arrow-y,50%), calc(100% - var(--popover-arrow-inset,32px)))',
+          top: 'var(--floating-arrow-y, 0px)',
         }
       : {
-          left: 'clamp(var(--popover-arrow-inset,32px), var(--floating-arrow-x,50%), calc(100% - var(--popover-arrow-inset,32px)))',
+          left: 'var(--floating-arrow-x, 0px)',
         }
 
-  return {
-    ...sideStyle,
-    ...(typeof props.style === 'object' && props.style ? props.style : undefined),
-  }
+  return sideStyle
 })
 
 function setArrowElement(element: Element | ComponentPublicInstance | null) {
@@ -41,11 +40,11 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    v-if="arrow"
+    v-if="snapshot.arrow"
     :ref="setArrowElement"
     data-slot="popover-arrow"
     :data-side="snapshot.side"
     :class="arrowClass"
-    :style="arrowStyle"
+    :style="[arrowStyle, props.style]"
   />
 </template>

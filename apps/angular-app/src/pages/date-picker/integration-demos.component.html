@@ -1,5 +1,5 @@
 <div class="space-y-4">
-  <fex-card
+  <div card
     title="预设范围"
     description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。"
   >
@@ -14,9 +14,9 @@
         当前范围：{{ rangeText(presetRange()) }}
       </p>
     </div>
-  </fex-card>
+  </div>
 
-  <fex-card
+  <div card
     title="确认后提交"
     description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。"
   >
@@ -37,9 +37,9 @@
       </p>
       <p class="mt-1.5 text-xs text-muted-foreground">已提交 {{ submitCount() }} 次</p>
     </div>
-  </fex-card>
+  </div>
 
-  <fex-card title="日期与时间" description="一个触发器组合日期和时间，确认后一起关闭面板。">
+  <div card title="日期与时间" description="一个触发器组合日期和时间，确认后一起关闭面板。">
     <fex-date-picker-root
       [needConfirm]="true"
       [value]="dateTimeDate()"
@@ -80,5 +80,5 @@
         </fex-date-picker-footer>
       </fex-date-picker-content>
     </fex-date-picker-root>
-  </fex-card>
+  </div>
 </div>

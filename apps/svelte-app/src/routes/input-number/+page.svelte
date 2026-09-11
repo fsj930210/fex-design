@@ -1,13 +1,13 @@
 <script>
-  import BasicDemo from './basic-demo.svelte'
-  import ConstraintsDemo from './constraints-demo.svelte'
-  import CustomLogicDemo from './custom-logic-demo.svelte'
-  import FormatterDemo from './formatter-demo.svelte'
-  import KeyboardDemo from './keyboard-demo.svelte'
-  import MinMaxDemo from './min-max-demo.svelte'
-  import StatesDemo from './states-demo.svelte'
-  import SuffixDemo from './suffix-demo.svelte'
-  import ValidationDemo from './validation-demo.svelte'
+  import BasicDemo from "./basic-demo.svelte";
+  import ConstraintsDemo from "./constraints-demo.svelte";
+  import CustomLogicDemo from "./custom-logic-demo.svelte";
+  import FormatterDemo from "./formatter-demo.svelte";
+  import KeyboardDemo from "./keyboard-demo.svelte";
+  import MinMaxDemo from "./min-max-demo.svelte";
+  import StatesDemo from "./states-demo.svelte";
+  import SuffixDemo from "./suffix-demo.svelte";
+  import ValidationDemo from "./validation-demo.svelte";
 </script>
 
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">

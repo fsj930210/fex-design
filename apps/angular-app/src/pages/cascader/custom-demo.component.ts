@@ -6,7 +6,7 @@ import {
   CascaderTrigger,
 } from '@fex-design/angular/primitive/cascader'
 import { InfoIcon } from '@fex-design/angular/icon/info'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { regionOptions } from './data'
 export
 @Component({

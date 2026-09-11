@@ -14,7 +14,11 @@ export function DirectionExample() {
                 ? '标题与操作按逻辑方向排列。'
                 : 'يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي.'
             }
-            extra={<button class="rounded-md border px-3 py-1.5 text-sm">{dir === 'ltr' ? '操作' : 'إجراء'}</button>}
+            extra={
+              <button class="rounded-md border px-3 py-1.5 text-sm">
+                {dir === 'ltr' ? '操作' : 'إجراء'}
+              </button>
+            }
             footer={
               <button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">
                 {dir === 'ltr' ? '保存' : 'حفظ'}

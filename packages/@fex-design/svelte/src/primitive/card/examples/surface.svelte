@@ -1,2 +1,19 @@
-<script lang="ts">import Card from '@fex-design/svelte/primitive/card'; import CardHeader from '@fex-design/svelte/primitive/card-header'; import CardTitle from '@fex-design/svelte/primitive/card-title'; import CardContent from '@fex-design/svelte/primitive/card-content'; import CardFooter from '@fex-design/svelte/primitive/card-footer'</script>
-<Card class="w-full max-w-2xl [--card-border:2px_solid_#7c3aed] [--card-header-background:#7c3aed] [--card-header-divider:none] [--card-content-background:#f5f3ff] [--card-footer-background:#facc15] [--card-footer-divider:2px_solid_#7c3aed]"><CardHeader><CardTitle class="text-lg font-bold text-white">三个独立 Surface</CardTitle></CardHeader><CardContent class="text-violet-950">Content 使用浅紫背景，和 Header 的高饱和紫色形成清晰边界。</CardContent><CardFooter class="font-semibold text-amber-950">Footer 使用黄色背景和独立 divider。</CardFooter></Card>
+<script lang="ts">
+  import Card from "@fex-design/svelte/primitive/card";
+  import CardHeader from "@fex-design/svelte/primitive/card-header";
+  import CardTitle from "@fex-design/svelte/primitive/card-title";
+  import CardContent from "@fex-design/svelte/primitive/card-content";
+  import CardFooter from "@fex-design/svelte/primitive/card-footer";
+</script>
+
+<Card
+  class="w-full max-w-2xl [--card-border:2px_solid_#7c3aed] [--card-header-background:#7c3aed] [--card-header-divider:none] [--card-content-background:#f5f3ff] [--card-footer-background:#facc15] [--card-footer-divider:2px_solid_#7c3aed]"
+  ><CardHeader
+    ><CardTitle class="text-lg font-bold text-white">三个独立 Surface</CardTitle
+    ></CardHeader
+  ><CardContent class="text-violet-950"
+    >Content 使用浅紫背景，和 Header 的高饱和紫色形成清晰边界。</CardContent
+  ><CardFooter class="font-semibold text-amber-950"
+    >Footer 使用黄色背景和独立 divider。</CardFooter
+  ></Card
+>

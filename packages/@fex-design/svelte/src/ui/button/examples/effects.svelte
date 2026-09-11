@@ -1,17 +1,17 @@
 <script lang="ts">
-  import PlusIcon from '@fex-design/svelte/icon/plus'
-  import { Button } from '@fex-design/svelte/ui/button'
+  import PlusIcon from "@fex-design/svelte/icon/plus";
+  import { Button } from "@fex-design/svelte/ui/button";
 
   const effects = [
-    'expand-icon',
-    'ring-hover',
-    'shine-hover',
-    'gooey-start',
-    'gooey-end',
-    'underline',
-    'hover-underline',
-    'press',
-  ] as const
+    "expand-icon",
+    "ring-hover",
+    "shine-hover",
+    "gooey-start",
+    "gooey-end",
+    "underline",
+    "hover-underline",
+    "press",
+  ] as const;
 </script>
 
 {#snippet icon()}<PlusIcon />{/snippet}
@@ -20,4 +20,3 @@
     <Button effect={item} {icon}>{item}</Button>
   {/each}
 </div>
-

@@ -3,20 +3,21 @@
     TagClassNames,
     TagOptions,
     TagStyles,
-  } from '@fex-design/core/tag/types'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import PrimitiveTag from '../../primitive/tag/tag.svelte'
-  import TagAction from '../../primitive/tag/tag-action.svelte'
+  } from "@fex-design/core/tag/types";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import PrimitiveTag from "../../primitive/tag/tag.svelte";
+  import TagAction from "../../primitive/tag/tag-action.svelte";
 
-  interface Props extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, TagOptions {
-    children?: Snippet
-    closable?: boolean
-    closeIcon?: Snippet
-    onClose?: (event: MouseEvent) => void
-    classNames?: TagClassNames
-    styles?: TagStyles<string>
+  interface Props
+    extends Omit<HTMLAttributes<HTMLSpanElement>, "color">, TagOptions {
+    children?: Snippet;
+    closable?: boolean;
+    closeIcon?: Snippet;
+    onClose?: (event: MouseEvent) => void;
+    classNames?: TagClassNames;
+    styles?: TagStyles<string>;
   }
 
   let {
@@ -30,14 +31,14 @@
     classNames,
     styles,
     ...rest
-  }: Props = $props()
+  }: Props = $props();
 </script>
 
 <PrimitiveTag
   {...rest}
   {disabled}
   class={cn(className, classNames?.root)}
-  style={`${typeof style === 'string' ? style : ''}${styles?.root ?? ''}`}
+  style={`${typeof style === "string" ? style : ""}${styles?.root ?? ""}`}
 >
   {@render children?.()}
   {#if closable && closeIcon}

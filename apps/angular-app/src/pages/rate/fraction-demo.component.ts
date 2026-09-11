@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { Rate } from '@fex-design/angular/primitive/rate'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-rate-fraction-demo',

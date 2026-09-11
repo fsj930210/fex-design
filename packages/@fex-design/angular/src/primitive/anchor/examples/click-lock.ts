@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '../anchor'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '../anchor'
 
 @Component({
   selector: 'anchor-click-lock-example',

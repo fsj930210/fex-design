@@ -4,7 +4,7 @@ import { expansionFeature } from '@fex-design/core/tree/features/expansion'
 import { searchFeature, type SearchFeatureApi } from '@fex-design/core/tree/features/search'
 import type { TreeOptions } from '@fex-design/core/tree/types'
 import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { DemoTreeComponent } from './demo-tree.component'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 

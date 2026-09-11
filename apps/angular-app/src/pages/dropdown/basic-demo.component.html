@@ -1,6 +1,6 @@
 <fex-dropdown
   ><button fexDropdownTrigger [class]="triggerClassName">Actions</button
-  ><fex-popover-portal
+  ><ng-template popoverPortal
     ><fex-dropdown-content
       ><fex-menu-root
         ><fex-menu-list class="space-y-0.5"
@@ -9,6 +9,5 @@
           ><button fexMenuItem [class]="itemClassName">Archive</button></fex-menu-list
         ></fex-menu-root
       ></fex-dropdown-content
-    ></fex-popover-portal
-  ></fex-dropdown
+    ></ng-template></fex-dropdown
 >

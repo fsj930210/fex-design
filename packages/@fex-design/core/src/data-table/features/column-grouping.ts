@@ -1,5 +1,6 @@
 export {
   columnGroupingFeature,
+  rowAggregationFeature,
   createGroupedRowModel,
   aggregationFn_count,
   aggregationFn_extent,

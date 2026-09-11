@@ -11,9 +11,15 @@ const style = {
 export default function CssVariables() {
   return (
     <div className="flex flex-wrap gap-2" style={style}>
-      <Tag color="primary" variant="filled">覆盖后的 Primary</Tag>
-      <Tag color="primary" variant="solid">覆盖后的 Primary</Tag>
-      <Tag color="danger" variant="outlined">覆盖后的 Danger</Tag>
+      <Tag color="primary" variant="filled">
+        覆盖后的 Primary
+      </Tag>
+      <Tag color="primary" variant="solid">
+        覆盖后的 Primary
+      </Tag>
+      <Tag color="danger" variant="outlined">
+        覆盖后的 Danger
+      </Tag>
     </div>
   )
 }

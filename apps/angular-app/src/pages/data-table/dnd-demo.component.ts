@@ -21,7 +21,7 @@ import {
 import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { EllipsisIcon } from '@fex-design/angular/icon/more'
 import { bindSortableItem, FexSortable } from '@fex-design/angular/primitive/sortable'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people5, type Person } from './data'
 
 const modules = { columnOrderingFeature, columnPinningFeature, columnSizingFeature }

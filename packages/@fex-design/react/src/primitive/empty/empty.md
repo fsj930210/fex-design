@@ -8,24 +8,24 @@ Styled empty-state regions for composing media, title, description, and content.
 
 ## Components
 
-| Component | Element | Purpose |
-| --- | --- | --- |
-| Empty | div | Root empty-state container. |
-| EmptyHeader | div | Groups media, title, and description. |
-| EmptyMedia | div | Media or image container. |
-| EmptyTitle | div | Main empty-state title. |
-| EmptyDescription | p | Supporting description. |
-| EmptyContent | div | Actions or custom content. |
+| Component        | Element | Purpose                               |
+| ---------------- | ------- | ------------------------------------- |
+| Empty            | div     | Root empty-state container.           |
+| EmptyHeader      | div     | Groups media, title, and description. |
+| EmptyMedia       | div     | Media or image container.             |
+| EmptyTitle       | div     | Main empty-state title.               |
+| EmptyDescription | p       | Supporting description.               |
+| EmptyContent     | div     | Actions or custom content.            |
 
 Every component passes through native attributes, events, class, style, ARIA attributes, children, and ref for its host element.
 
 ## Examples
 
-| Name | Covers |
-| --- | --- |
-| basic | Built-in empty-state composition. |
-| content | Custom action content. |
-| image | Custom image content. |
+| Name      | Covers                              |
+| --------- | ----------------------------------- |
+| basic     | Built-in empty-state composition.   |
+| content   | Custom action content.              |
+| image     | Custom image content.               |
 | direction | Chinese LTR and Arabic RTL layouts. |
 
 The four examples match UI Empty in copy, layout, and final appearance.

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Alert } from '@fex-design/svelte/ui/alert'
+  import { Alert } from "@fex-design/svelte/ui/alert";
 </script>
 
 <div class="grid w-full gap-3">

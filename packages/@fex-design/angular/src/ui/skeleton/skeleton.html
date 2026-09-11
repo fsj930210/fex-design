@@ -1,23 +1,40 @@
 @if (loading() === false) {
-  <ng-content />
+<ng-content />
 } @else if (placeholder()) {
-  <ng-container [ngTemplateOutlet]="placeholder()!.template" />
-} @else {
-  @if (avatar()) {
-    <div [class]="avatarAreaClassName">
-      <div skeletonAvatar [animation]="avatarOptions().animation ?? animation()" [shape]="avatarOptions().shape ?? 'circle'" [size]="avatarOptions().size ?? 'md'" [class]="avatarClassName()" [style]="styles().avatar"></div>
-    </div>
-  }
-  <div [class]="bodyClassName">
-    @if (title()) {
-      <div skeletonText [animation]="animation()" [round]="round()" [class]="titleClassName()" [style]="widthStyle(titleOptions().width, styles().title)"></div>
-    }
-    @if (paragraph() && rows() > 0) {
-      <div [class]="paragraphClassName">
-        @for (index of rowIndexes(); track index) {
-          <div skeletonText [animation]="animation()" [round]="round()" [class]="paragraphItemClassName()" [style]="widthStyle(rowWidth(index), styles().paragraph)"></div>
-        }
-      </div>
+<ng-container [ngTemplateOutlet]="placeholder()!.template" />
+} @else { @if (avatar()) {
+<div [class]="avatarAreaClassName">
+  <div
+    skeletonAvatar
+    [animation]="avatarOptions().animation ?? animation()"
+    [shape]="avatarOptions().shape ?? 'circle'"
+    [size]="avatarOptions().size ?? 'md'"
+    [class]="avatarClassName()"
+    [style]="styles().avatar"
+  ></div>
+</div>
+}
+<div [class]="bodyClassName">
+  @if (title()) {
+  <div
+    skeletonText
+    [animation]="animation()"
+    [round]="round()"
+    [class]="titleClassName()"
+    [style]="widthStyle(titleOptions().width, styles().title)"
+  ></div>
+  } @if (paragraph() && rows() > 0) {
+  <div [class]="paragraphClassName">
+    @for (index of rowIndexes(); track index) {
+    <div
+      skeletonText
+      [animation]="animation()"
+      [round]="round()"
+      [class]="paragraphItemClassName()"
+      [style]="widthStyle(rowWidth(index), styles().paragraph)"
+    ></div>
     }
   </div>
+  }
+</div>
 }

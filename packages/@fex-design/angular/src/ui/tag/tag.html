@@ -1,24 +1,22 @@
 <ng-content />
-@if (closable()) {
-  @if (projectedCloseIcon()) {
-    <button
-      tagAction
-      aria-label="Close"
-      [disabled]="disabled()"
-      [class]="closeClassName()"
-      [style]="styles().close"
-      (click)="close.emit($event)"
-    >
-      <ng-content select="[tagCloseIcon]" />
-    </button>
-  } @else {
-    <button
-      tagAction
-      aria-label="Close"
-      [disabled]="disabled()"
-      [class]="closeClassName()"
-      [style]="styles().close"
-      (click)="close.emit($event)"
-    ></button>
-  }
-}
+@if (closable()) { @if (projectedCloseIcon()) {
+<button
+  tagAction
+  aria-label="Close"
+  [disabled]="disabled()"
+  [class]="closeClassName()"
+  [style]="styles().close"
+  (click)="close.emit($event)"
+>
+  <ng-content select="[tagCloseIcon]" />
+</button>
+} @else {
+<button
+  tagAction
+  aria-label="Close"
+  [disabled]="disabled()"
+  [class]="closeClassName()"
+  [style]="styles().close"
+  (click)="close.emit($event)"
+></button>
+} }

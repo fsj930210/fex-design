@@ -90,6 +90,7 @@
     "./ui/checkbox": "./src/ui/checkbox/checkbox.tsx",
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",
     "./ui/listbox": "./src/ui/listbox/listbox.tsx",
+    "./ui/popover": "./src/ui/popover/popover.tsx",
     "./ui/spinner": "./src/ui/spinner/spinner.tsx",
     "./ui/skeleton": "./src/ui/skeleton/skeleton-entry.ts",
     "./ui/tag": "./src/ui/tag/tag.tsx",

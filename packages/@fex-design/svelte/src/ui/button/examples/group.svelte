@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, ButtonGroup } from '@fex-design/svelte/ui/button'
+  import { Button, ButtonGroup } from "@fex-design/svelte/ui/button";
 </script>
 
 <div class="flex flex-wrap items-center gap-3">
@@ -13,4 +13,3 @@
     <Button>Bottom</Button>
   </ButtonGroup>
 </div>
-

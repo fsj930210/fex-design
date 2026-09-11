@@ -5,16 +5,7 @@ import { buttonClassName } from '@fex-design/styles/button'
 export function SizesExample() {
   return (
     <div className="flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-4">
-      {(
-        [
-          'sm',
-          'md',
-          'lg',
-          'icon-sm',
-          'icon-md',
-          'icon-lg',
-        ] as const
-      ).map((size) => (
+      {(['sm', 'md', 'lg', 'icon-sm', 'icon-md', 'icon-lg'] as const).map((size) => (
         <Button key={size} className={buttonClassName({ size })} aria-label={size}>
           {size.startsWith('icon') ? (
             <ButtonIcon>

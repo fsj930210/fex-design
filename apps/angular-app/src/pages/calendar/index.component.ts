@@ -17,7 +17,7 @@ import {
   CalendarRoot,
   CalendarWeekHeader,
 } from '@fex-design/angular/primitive/calendar'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 type UnitDemo = {
   title: string

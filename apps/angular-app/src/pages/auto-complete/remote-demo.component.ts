@@ -4,7 +4,7 @@ import {
   AutoCompleteRoot,
   AutoCompleteTrigger,
 } from '@fex-design/angular/primitive/auto-complete'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { fieldNames, users, type UserSuggestion } from './data'
 
 @Component({

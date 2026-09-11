@@ -7,7 +7,7 @@
         Basic table structure without built-in sorting, selection, or pagination.
       </p>
     </header>
-    <fex-card title="Primitive" description="Caption, header, body, row, and cell slots."
+    <div card title="Primitive" description="Caption, header, body, row, and cell slots."
       ><table fexTable>
         <caption fexTableCaption>
           Latest three invoices
@@ -26,13 +26,12 @@
               <td fexTableCell class="font-medium">{{ invoice.id }}</td>
               <td fexTableCell>{{ invoice.customer }}</td>
               <td fexTableCell>
-                <fex-badge variant="outline">{{ invoice.status }}</fex-badge>
+                <badge variant="outline">{{ invoice.status }}</badge>
               </td>
               <td fexTableCell class="text-right">{{ invoice.amount }}</td>
             </tr>
           }
         </tbody>
-      </table></fex-card
-    >
+      </table></div>
   </div>
 </main>

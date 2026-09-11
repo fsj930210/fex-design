@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { AspectRatio } from '@fex-design/angular/primitive/aspect-ratio'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-ratio-demo',
   standalone: true,

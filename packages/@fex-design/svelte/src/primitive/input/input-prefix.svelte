@@ -1,1 +1,17 @@
-<script lang="ts">import { inputPrefixClassName } from '@fex-design/styles/input'; import { cn } from '@fex/utils'; import type { Snippet } from 'svelte'; import type { HTMLAttributes } from 'svelte/elements'; interface Props extends Omit<HTMLAttributes<HTMLSpanElement>, 'class'> { class?: string; children?: Snippet }; let { class: className, children, ...rest }: Props = $props()</script><span {...rest} data-slot="input-prefix" class={cn(inputPrefixClassName, className)}>{@render children?.()}</span>
+<script lang="ts">
+  import { inputPrefixClassName } from "@fex-design/styles/input";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props extends Omit<HTMLAttributes<HTMLSpanElement>, "class"> {
+    class?: string;
+    children?: Snippet;
+  }
+  let { class: className, children, ...rest }: Props = $props();
+</script>
+
+<span
+  {...rest}
+  data-slot="input-prefix"
+  class={cn(inputPrefixClassName, className)}>{@render children?.()}</span
+>

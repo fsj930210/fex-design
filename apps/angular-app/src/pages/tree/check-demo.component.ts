@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 import { checkFeature } from '@fex-design/core/tree/features/check'
 import { expansionFeature } from '@fex-design/core/tree/features/expansion'
 import type { TreeKey, TreeOptions } from '@fex-design/core/tree/types'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { DemoTreeComponent } from './demo-tree.component'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 

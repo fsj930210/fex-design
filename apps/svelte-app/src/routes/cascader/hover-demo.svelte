@@ -1,1 +1,11 @@
-<script lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Hover expansion" description="Move across independently scrolling columns."><DemoCascader expandTrigger="hover" options={regionOptions}/></Demo>
+<script lang="ts">
+  import { regionOptions } from "./data";
+  import DemoCascader from "./demo-cascader.svelte";
+  import Demo from "./demo-section.svelte";
+</script>
+
+<Demo
+  title="Hover expansion"
+  description="Move across independently scrolling columns."
+  ><DemoCascader expandTrigger="hover" options={regionOptions} /></Demo
+>

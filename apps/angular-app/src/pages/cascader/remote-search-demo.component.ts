@@ -7,7 +7,7 @@ import {
   CascaderRoot,
   CascaderTrigger,
 } from '@fex-design/angular/primitive/cascader'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { remoteRegionSearch } from './data'
 @Component({
   selector: 'fex-cascader-remote-search-demo',

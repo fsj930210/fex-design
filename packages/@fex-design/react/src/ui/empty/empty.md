@@ -8,27 +8,27 @@ Convenience Empty built from the same Primitive regions with a built-in image an
 
 ## Examples
 
-| Name | Covers |
-| --- | --- |
-| basic | Built-in image, title, and description. |
-| content | Custom children rendered in EmptyContent. |
-| image | Image URL and custom React content. |
-| direction | Chinese LTR and Arabic RTL layouts. |
-| styling | Structured classNames and styles. |
+| Name      | Covers                                    |
+| --------- | ----------------------------------------- |
+| basic     | Built-in image, title, and description.   |
+| content   | Custom children rendered in EmptyContent. |
+| image     | Image URL and custom React content.       |
+| direction | Chinese LTR and Arabic RTL layouts.       |
+| styling   | Structured classNames and styles.         |
 
 The first four examples match Primitive Empty in copy, layout, and final appearance.
 
 ## Empty API
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| image | ReactNode \| string \| null | Built-in image | Image URL or custom image; `null` hides media. |
-| title | ReactNode | — | Main empty-state title. |
-| description | ReactNode | — | Supporting description. |
-| children | ReactNode | — | Content rendered in EmptyContent. |
-| classNames | EmptyClassNames | — | Classes for root, header, image, title, description, and content. |
-| styles | EmptyStyles | — | Inline styles for the six semantic regions. |
-| native attributes | ComponentProps<'div'> | — | Native root attributes and events. |
+| Name              | Type                        | Default        | Description                                                       |
+| ----------------- | --------------------------- | -------------- | ----------------------------------------------------------------- |
+| image             | ReactNode \| string \| null | Built-in image | Image URL or custom image; `null` hides media.                    |
+| title             | ReactNode                   | —              | Main empty-state title.                                           |
+| description       | ReactNode                   | —              | Supporting description.                                           |
+| children          | ReactNode                   | —              | Content rendered in EmptyContent.                                 |
+| classNames        | EmptyClassNames             | —              | Classes for root, header, image, title, description, and content. |
+| styles            | EmptyStyles                 | —              | Inline styles for the six semantic regions.                       |
+| native attributes | ComponentProps<'div'>       | —              | Native root attributes and events.                                |
 
 ## Structured styles
 

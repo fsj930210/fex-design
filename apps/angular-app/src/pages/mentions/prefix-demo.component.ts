@@ -5,7 +5,7 @@ import { MentionsList } from '@fex-design/angular/primitive/mentions/list'
 import { MentionsPrefixCase } from '@fex-design/angular/primitive/mentions/prefix-case'
 import { MentionsRoot } from '@fex-design/angular/primitive/mentions/root'
 import { MentionsTrigger } from '@fex-design/angular/primitive/mentions/trigger'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { mentionCommands, mentionDocs, mentionUsers } from './data'
 
 @Component({

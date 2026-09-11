@@ -1,18 +1,25 @@
 <script lang="ts">
-  import MentionsRoot from '@fex-design/svelte/primitive/mentions/root'
-  import MentionsTrigger from '@fex-design/svelte/primitive/mentions/trigger'
-  import MentionsContent from '@fex-design/svelte/primitive/mentions/content'
-  import MentionsList from '@fex-design/svelte/primitive/mentions/list'
-  import MentionsItem from '@fex-design/svelte/primitive/mentions/item'
-  import Card from '@fex-design/svelte/ui/card'
-  import { mentionUsers } from './data'
+  import MentionsRoot from "@fex-design/svelte/primitive/mentions/root";
+  import MentionsTrigger from "@fex-design/svelte/primitive/mentions/trigger";
+  import MentionsContent from "@fex-design/svelte/primitive/mentions/content";
+  import MentionsList from "@fex-design/svelte/primitive/mentions/list";
+  import MentionsItem from "@fex-design/svelte/primitive/mentions/item";
+  import Card from "@fex-design/svelte/ui/card";
+  import { mentionUsers } from "./data";
 
-  let value = $state('')
-  let selected = $state('No mention selected')
+  let value = $state("");
+  let selected = $state("No mention selected");
 </script>
 
-<Card title="Basic @" description="Default prefix is @ and selection only notifies the caller.">
-  <MentionsRoot value={value} onChange={(next) => (value = next)} onSelect={(item) => (selected = 'Selected ' + item.value)}>
+<Card
+  title="Basic @"
+  description="Default prefix is @ and selection only notifies the caller."
+>
+  <MentionsRoot
+    {value}
+    onChange={(next) => (value = next)}
+    onSelect={(item) => (selected = "Selected " + item.value)}
+  >
     <MentionsTrigger placeholder="Type @ to mention a teammate" />
     <MentionsContent>
       <MentionsList>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, type ComponentPublicInstance } from 'vue'
-import { dismissOpenPopovers, eventInfo, usePopoverContext } from '../popover/context'
+import { eventInfo, usePopoverContext } from '../popover/context'
 import { treeSelectKey } from './context'
 
 const treeSelect = inject(treeSelectKey)
@@ -40,7 +40,6 @@ const triggerProps = computed(() => ({
   'data-state': snapshot.value.open ? 'open' : 'closed',
   onClick(event: MouseEvent) {
     syncReference(event)
-    dismissOpenPopovers(event, overlay)
     treeSelect.openPanel()
   },
   onPointerenter(event: PointerEvent) {
@@ -60,7 +59,6 @@ const triggerProps = computed(() => ({
   },
   onContextmenu(event: MouseEvent) {
     syncReference(event)
-    dismissOpenPopovers(event, overlay)
     overlay.trigger.contextMenu(eventInfo(event))
   },
 }))

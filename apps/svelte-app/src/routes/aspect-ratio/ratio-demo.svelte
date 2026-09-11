@@ -1,2 +1,21 @@
-<script lang="ts">import AspectRatio from '@fex-design/svelte/primitive/aspect-ratio'; import Card from '@fex-design/svelte/ui/card'; let { title, description, ratio, sizeClass }: { title: string; description: string; ratio: number; sizeClass: string } = $props()</script>
-<Card {title} {description}><AspectRatio {ratio} class={['rounded-md', sizeClass]}><img src="/aspect-ratio-demo.svg" alt="Mountain landscape" class="size-full object-cover" /></AspectRatio></Card>
+<script lang="ts">
+  import AspectRatio from "@fex-design/svelte/primitive/aspect-ratio";
+  import Card from "@fex-design/svelte/ui/card";
+  let {
+    title,
+    description,
+    ratio,
+    sizeClass,
+  }: { title: string; description: string; ratio: number; sizeClass: string } =
+    $props();
+</script>
+
+<Card {title} {description}
+  ><AspectRatio {ratio} class={["rounded-md", sizeClass]}
+    ><img
+      src="/aspect-ratio-demo.svg"
+      alt="Mountain landscape"
+      class="size-full object-cover"
+    /></AspectRatio
+  ></Card
+>

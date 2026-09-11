@@ -10,11 +10,11 @@
       </div>
     </header>
     <div class="space-y-4">
-      <fex-card title="Basic" description="Uncontrolled switch uses defaultChecked."
+      <div card title="Basic" description="Uncontrolled switch uses defaultChecked."
         ><button switch defaultChecked aria-label="Enable notifications">
           <span switchThumb></span></button
-      ></fex-card>
-      <fex-card title="Controlled" description="Controlled switch uses checked and checkedChange."
+      ></div>
+      <div card title="Controlled" description="Controlled switch uses checked and checkedChange."
         ><div class="grid gap-2">
           <button
             switch
@@ -25,9 +25,8 @@
             <span switchThumb></span>
           </button>
           <p class="text-sm text-muted-foreground">Current value: {{ checked() }}</p>
-        </div></fex-card
-      >
-      <fex-card title="Sizes" description="Switch supports sm, default, and lg sizes."
+        </div></div>
+      <div card title="Sizes" description="Switch supports sm, default, and lg sizes."
         ><div class="flex items-center gap-2">
           <button switch size="sm" defaultChecked aria-label="Small switch">
             <span switchThumb size="sm"></span></button
@@ -36,15 +35,15 @@
           ><button switch size="lg" defaultChecked aria-label="Large switch">
             <span switchThumb size="lg"></span>
           </button></div
-      ></fex-card>
-      <fex-card title="Disabled" description="Disabled state blocks interaction."
+      ></div>
+      <div card title="Disabled" description="Disabled state blocks interaction."
         ><div class="flex items-center gap-2">
           <button switch disabled aria-label="Disabled switch">
             <span switchThumb></span></button
           ><button switch disabled defaultChecked aria-label="Disabled checked switch">
             <span switchThumb></span>
           </button></div
-      ></fex-card>
+      ></div>
     </div>
   </div>
 </main>

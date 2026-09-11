@@ -129,6 +129,9 @@ export function createTrigger(options: TriggerOptions): TriggerBehavior {
       // 外部 dismiss 会先清空 trigger 来源，再关闭 overlay。
       // shouldRequest=false 用于“已经由 overlay.close 负责通知”的场景，避免重复触发 onOpenChange。
       openSources.clear()
+      clearTimer(openTimer)
+      clearTimer(closeTimer)
+      pointerInsideContent = false
       if (!shouldRequest) {
         return
       }

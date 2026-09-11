@@ -318,12 +318,10 @@ export function TreeSelectPage() {
   })
   const syncData = createMemo(() =>
     keyword()
-      ? (syncController
-          .getFeature<SearchFeatureApi<DepartmentNode>>('search')
-          ?.getSubtree({
-            keyword: keyword(),
-            filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
-          }) ?? [])
+      ? (syncController.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
+          keyword: keyword(),
+          filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
+        }) ?? [])
       : departmentTreeData,
   )
   const [roots, setRoots] = createSignal<DemoDepartmentNode[]>([])

@@ -15,7 +15,9 @@ const directions = ['ltr', 'rtl'] as const
       <strong>{{ direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</strong>
       <div class="flex flex-wrap gap-2">
         <Tag color="info">{{ direction === 'ltr' ? '状态标签' : 'علامة الحالة' }}</Tag>
-        <Tag color="primary" closable>{{ direction === 'ltr' ? '可关闭标签' : 'وسم قابل للإغلاق' }}</Tag>
+        <Tag color="primary" closable>{{
+          direction === 'ltr' ? '可关闭标签' : 'وسم قابل للإغلاق'
+        }}</Tag>
       </div>
     </section>
   </div>

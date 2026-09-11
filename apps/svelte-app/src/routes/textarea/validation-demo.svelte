@@ -1,27 +1,30 @@
 <script lang="ts">
-  import FieldRoot from '@fex-design/svelte/primitive/field'
-  import FieldControl from '@fex-design/svelte/primitive/field-control'
-  import FieldError from '@fex-design/svelte/primitive/field-error'
-  import FieldLabel from '@fex-design/svelte/primitive/field-label'
-  import FieldRequiredIndicator from '@fex-design/svelte/primitive/field-required-indicator'
-  import Field from '@fex-design/svelte/primitive/form-field'
-  import Form from '@fex-design/svelte/primitive/form'
-  import { createForm, type AnyFieldApi } from '@fex-design/svelte/primitive/form/create-form'
-  import TextareaRoot from '@fex-design/svelte/primitive/textarea'
-  import TextareaInput from '@fex-design/svelte/primitive/textarea-input'
-  import { Button } from '@fex-design/svelte/ui/button'
-  import Card from '@fex-design/svelte/ui/card'
+  import FieldRoot from "@fex-design/svelte/primitive/field";
+  import FieldControl from "@fex-design/svelte/primitive/field-control";
+  import FieldError from "@fex-design/svelte/primitive/field-error";
+  import FieldLabel from "@fex-design/svelte/primitive/field-label";
+  import FieldRequiredIndicator from "@fex-design/svelte/primitive/field-required-indicator";
+  import Field from "@fex-design/svelte/primitive/form-field";
+  import Form from "@fex-design/svelte/primitive/form";
+  import {
+    createForm,
+    type AnyFieldApi,
+  } from "@fex-design/svelte/primitive/form/create-form";
+  import TextareaRoot from "@fex-design/svelte/primitive/textarea";
+  import TextareaInput from "@fex-design/svelte/primitive/textarea-input";
+  import { Button } from "@fex-design/svelte/ui/button";
+  import Card from "@fex-design/svelte/ui/card";
 
   const form = createForm(() => ({
-    defaultValues: { message: '' },
+    defaultValues: { message: "" },
     onSubmit: () => undefined,
-  }))
+  }));
   const validators = {
     onSubmit: ({ value }: { value: string }) =>
-      value.trim() ? undefined : 'Message is required.',
-  }
-  const invalid = (field: AnyFieldApi) => field.state.meta.errors.length > 0
-  const errors = (field: AnyFieldApi) => field.state.meta.errors.map(String)
+      value.trim() ? undefined : "Message is required.",
+  };
+  const invalid = (field: AnyFieldApi) => field.state.meta.errors.length > 0;
+  const errors = (field: AnyFieldApi) => field.state.meta.errors.map(String);
 </script>
 
 <Card
@@ -32,7 +35,7 @@
     <Field name="message" {validators}>
       {#snippet children(field)}
         {@const hasError = invalid(field)}
-        <FieldRoot required invalid={hasError} hasError={hasError}>
+        <FieldRoot required invalid={hasError} {hasError}>
           <FieldLabel>
             {#snippet children()}Message <FieldRequiredIndicator />{/snippet}
           </FieldLabel>
@@ -55,7 +58,7 @@
           {#if hasError}
             <FieldError>
               {#snippet children()}
-                {errors(field).join(', ')}
+                {errors(field).join(", ")}
               {/snippet}
             </FieldError>
           {/if}

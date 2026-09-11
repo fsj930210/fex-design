@@ -1,17 +1,24 @@
 <script lang="ts">
-  import { popoverHeaderClassName } from '@fex-design/styles/popover'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
+  import { popoverHeaderClassName } from "@fex-design/styles/popover";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
 
-  interface PopoverHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'class'> {
-    class?: string
-    children?: Snippet
+  interface PopoverHeaderProps extends Omit<
+    HTMLAttributes<HTMLDivElement>,
+    "class"
+  > {
+    class?: string;
+    children?: Snippet;
   }
 
-  let { class: className, children, ...rest }: PopoverHeaderProps = $props()
+  let { class: className, children, ...rest }: PopoverHeaderProps = $props();
 </script>
 
-<div {...rest} data-slot="popover-header" class={cn(popoverHeaderClassName, className)}>
+<div
+  {...rest}
+  data-slot="popover-header"
+  class={cn(popoverHeaderClassName, className)}
+>
   {@render children?.()}
 </div>

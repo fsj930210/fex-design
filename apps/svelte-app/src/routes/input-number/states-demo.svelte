@@ -1,6 +1,6 @@
 <script>
-  import InputNumber from '@fex-design/svelte/primitive/input-number'
-  import Card from '@fex-design/svelte/ui/card'
+  import InputNumber from "@fex-design/svelte/primitive/input-number";
+  import Card from "@fex-design/svelte/ui/card";
 </script>
 
 <Card title="States" description="Input state styling is reused.">

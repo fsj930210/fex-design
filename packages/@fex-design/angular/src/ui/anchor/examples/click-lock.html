@@ -4,7 +4,9 @@
     <nav anchor [items]="items" [container]="container" class="sticky top-0 self-start"></nav>
     <div class="grid gap-28 pb-16">
       @for (item of items; track item.key) {
-        <section [id]="'angular-ui-click-lock-' + item.key"><h3 class="font-semibold">{{ item.title }}</h3></section>
+      <section [id]="'angular-ui-click-lock-' + item.key">
+        <h3 class="font-semibold">{{ item.title }}</h3>
+      </section>
       }
     </div>
   </div>

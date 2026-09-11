@@ -27,8 +27,7 @@ import { InfoIcon } from '@fex-design/vue/icon/info'
       <Card title="Primitive" description="Media, title, description, and content slots."
         ><Empty
           ><EmptyHeader
-            ><EmptyMedia><InfoIcon /></EmptyMedia
-            ><EmptyTitle>No approval tasks</EmptyTitle
+            ><EmptyMedia><InfoIcon /></EmptyMedia><EmptyTitle>No approval tasks</EmptyTitle
             ><EmptyDescription
               >Adjust filters and try again, or create a new workflow record.</EmptyDescription
             ></EmptyHeader

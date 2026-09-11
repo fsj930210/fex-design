@@ -11,7 +11,7 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card
+      <div card
         title="Drag And Drop"
         description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops."
       >
@@ -121,9 +121,9 @@
             <span class="text-muted-foreground">::</span>
           </div>
         }
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Dropzone"
         description="The directive handles drag state, validation, and hidden input selection."
       >
@@ -138,9 +138,9 @@
           <input #fileInput type="file" hidden accept="image/*,.txt" multiple />
           <span>{{ files.length > 0 ? files.join(', ') : 'Drop images or text files here' }}</span>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Move" description="useMove adds draggable behavior to any existing element.">
+      <div card title="Move" description="useMove adds draggable behavior to any existing element.">
         <div class="relative h-64 overflow-hidden rounded-md border border-border bg-background">
           <div
             fexMove
@@ -160,9 +160,9 @@
             </p>
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Resize"
         description="useResize supports edge and corner handles for floating surfaces."
       >
@@ -214,7 +214,7 @@
             ></div>
           </div>
         </div>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

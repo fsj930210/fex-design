@@ -1,82 +1,67 @@
 # Popover
 
-Popover 是基于 `@fex-design/core` 的浮层 primitive。core 负责触发、开关状态、定位、碰撞处理、箭头变量和挂载容器，Angular 层只负责 attribute directive、HostListener、signal 与 DOM 挂载适配。
+A styled, composable floating panel with shared Core trigger, positioning, dismissal and mounting behavior.
 
-## 导入
+## Import
 
 ```ts
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverPortal,
-  PopoverContent,
-  PopoverArrow,
-  PopoverHeader,
-  PopoverTitle,
-  PopoverDescription,
-} from '@fex-design/angular/primitive/popover'
+import { Popover } from '@fex-design/angular/primitive/popover'
 ```
 
-## 核心使用示例
+## Framework contract
 
-```html
-<fex-popover placement="bottomLeft" [sideOffset]="8" [alignOffset]="28" [arrow]="true">
-  <button fexPopoverTrigger>Open</button>
-  <fex-popover-portal>
-    <fex-popover-content>
-      <fex-popover-arrow />
-      <fex-popover-header>
-        <fex-popover-title>Title</fex-popover-title>
-        <fex-popover-description>Content</fex-popover-description>
-      </fex-popover-header>
-    </fex-popover-content>
-  </fex-popover-portal>
-</fex-popover>
-```
+Use native attribute selectors with signal inputs/outputs. The trigger is button[popoverTrigger]; deferred primitive content belongs in ng-template[popoverPortal]. UI content accepts a string or TemplateRef.
 
-`fex-popover-portal` owns DOM mounting. Its `container` input overrides
-`getPopupContainer`; without either value the trigger document body is used. `PopoverContent` only
-registers and renders the floating element.
+Parts: Popover, PopoverTrigger, PopoverPortal, PopoverContent, PopoverArrow, PopoverHeader, PopoverTitle, PopoverDescription.
 
-Content without a Portal keeps the previous automatic-mount behavior for compatibility. New
-compositions should always use the explicit Portal so mounting ownership is visible and configurable.
+The component entry exports `createPopover`, a standalone framework adapter for a Core controller. Internal context readers are separate from this entry.
 
-## Props / Inputs
+## Examples
 
-| 参数名              | 类型                             | 默认值          | 必填 | 说明                             |
-| ------------------- | -------------------------------- | --------------- | ---- | -------------------------------- |
-| `open`              | `boolean`                        | -               | 否   | 受控打开状态。                   |
-| `defaultOpen`       | `boolean`                        | `false`         | 否   | 非受控默认打开状态。             |
-| `trigger`           | `OverlayTrigger[]`               | `['click']`     | 否   | 触发方式数组。                   |
-| `placement`         | `FloatingPlacement`              | `bottom`        | 否   | antd 风格位置，如 `bottomLeft`。 |
-| `side`              | `top \| right \| bottom \| left` | -               | 否   | Radix 风格主方向。               |
-| `align`             | `start \| center \| end`         | -               | 否   | Radix 风格对齐方式。             |
-| `sideOffset`        | `number`                         | `6`             | 否   | 主轴偏移。                       |
-| `alignOffset`       | `number`                         | `0`             | 否   | 交叉轴偏移。                     |
-| `arrow`             | `boolean`                        | `false`         | 否   | 是否启用箭头。                   |
-| `hoverOpenDelay`    | `number`                         | `0`             | 否   | hover 打开延迟。                 |
-| `hoverCloseDelay`   | `number`                         | `80`            | 否   | core 的跨 Portal hover 宽限期。  |
-| `getPopupContainer` | `(reference) => HTMLElement`     | `document.body` | 否   | 浮层挂载容器。                   |
+1. Basic usage
+2. Hover, focus, click, context-menu and combinations
+3. Twelve placements
+4. Arrows
+5. Default body and custom containers
+6. Controlled/uncontrolled state, closing from content, retaining or discarding a draft
+7. sideOffset and alignOffset
 
-## 事件 / Outputs
+## Shared API
 
-| 名称         | 类型                    | 说明               |
-| ------------ | ----------------------- | ------------------ |
-| `openChange` | `EventEmitter<boolean>` | 打开状态变化请求。 |
+Behavior types live in @fex-design/core/popover/types. Both layers and all five frameworks share these semantics.
 
-## 受控 / 非受控
+| API | Default | Meaning |
+| --- | --- | --- |
+| open / defaultOpen | — / false | Controlled state / uncontrolled initial state |
+| trigger | ['click'] | hover, focus, click, context-menu |
+| placement | bottom | top, topLeft, topRight, bottom, bottomLeft, bottomRight, left, leftTop, leftBottom, right, rightTop, rightBottom |
+| side / align | — | top, right, bottom, left / start, center, end |
+| sideOffset / alignOffset | 6 / 0 | Distance from trigger / panel alignment offset, px |
+| arrow / arrowPadding | false / 16 | Arrow visibility / edge padding, px |
+| avoidCollisions / collisionPadding | true / 8 | Collision adjustment / boundary padding, px |
+| hoverOpenDelay / hoverCloseDelay | 0 / 80 | Hover opening / closing delay, ms |
+| closeDelay | 140 | Closing transition duration, ms |
+| lazyMount | true | Do not mount content before the first opening |
+| destroyOnHidden | false | Whether to unmount after the closing transition |
+| getPopupContainer | body | Resolve the portal target from the trigger |
 
-不传 `open` 时组件使用 `defaultOpen` 初始化内部状态；传入 `open` 后进入受控模式，组件通过 `openChange` 请求外部更新。
+See the website Popover API for the complete properties and events. Native attributes, events and element references follow each framework contract; all delays use ms.
 
-## 注意事项
+## Portal container
 
-- `fexPopoverTrigger` 必须绑定在真实 button 元素上，core 需要该 DOM 作为定位 reference。
-- `fex-popover-content` 会被移动到 `getPopupContainer` 返回的容器中，因此外部点击判断使用真实 DOM 边界。
-- 箭头元素会注册给 Floating UI arrow middleware，不只是装饰节点。
+Content defaults to the trigger owner document body. Both UI and Primitive roots accept getPopupContainer, which the internal Portal reads. Primitive PopoverPortal also accepts container directly. Precedence: container → getPopupContainer → body.
 
-## 常见组合方式
+## Mount lifecycle
 
-- Click Popover：`[trigger]="['click']"`。
-- Hover + Focus：`[trigger]="['hover', 'focus']"`。
-- Context Menu：`[trigger]="['context-menu']"`。
-- 自定义容器：传入 `[getPopupContainer]`。
+| lazyMount | destroyOnHidden | Before first opening | After closing |
+| --- | --- | --- | --- |
+| true | false | Unmounted | Retain DOM and internal state |
+| true | true | Unmounted | Unmount; recreate on reopening |
+| false | false | Mounted | Retain DOM and internal state |
+| false | true | Mounted | Unmount; recreate on reopening |
+
+The default suits forms: mount on first opening and retain the draft after closing. destroyOnHidden only unmounts the content subtree; it does not clear externally owned state.
+
+## Accessibility
+
+The trigger synchronizes aria-expanded and aria-controls. PopoverTitle and PopoverDescription associate the panel label and description; custom markup should provide an equivalent accessible name. Retained hidden panels are inert. Core coordinates Escape and outside-pointer dismissal through the layer order.

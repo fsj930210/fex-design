@@ -56,7 +56,8 @@ export function Badge(props: BadgeProps) {
         )}
         style={{
           ...(typeof local.style === 'object' ? local.style : {}),
-          '--badge-color': local.color && !isBadgePresetColor(local.color) ? local.color : undefined,
+          '--badge-color':
+            local.color && !isBadgePresetColor(local.color) ? local.color : undefined,
         }}
       >
         {value() ?? local.children}

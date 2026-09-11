@@ -8,7 +8,7 @@ import {
 } from '../popover/popover'
 import { popoverMenuContentClassName } from '@fex-design/styles/popover'
 import { cn } from '@fex/utils'
-import { usePopover } from '../popover/use-popover'
+import { usePopoverContext } from '../popover/popover-context'
 
 export type DropdownRootProps = PopoverRootProps
 export type DropdownTriggerProps = PopoverTriggerProps
@@ -23,7 +23,7 @@ export function DropdownTrigger(props: DropdownTriggerProps) {
 }
 
 export function DropdownContent(props: DropdownContentProps) {
-  const { hoverAncestors, overlay } = usePopover('DropdownContent')
+  const { hoverAncestors, overlay } = usePopoverContext('DropdownContent')
   return (
     <PopoverContent
       {...props}

@@ -1,17 +1,27 @@
 <script lang="ts">
-  import { checkboxGroupClassName, type CheckboxGroupStyleProps } from '@fex-design/styles/checkbox'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import CheckboxGroupPrimitive from '../../primitive/checkbox/checkbox-group.svelte'
+  import {
+    checkboxGroupClassName,
+    type CheckboxGroupStyleProps,
+  } from "@fex-design/styles/checkbox";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import CheckboxGroupPrimitive from "../../primitive/checkbox/checkbox-group.svelte";
 
   interface CheckboxGroupProps extends HTMLAttributes<HTMLDivElement> {
-    orientation?: CheckboxGroupStyleProps['orientation']
-    children?: Snippet
+    orientation?: CheckboxGroupStyleProps["orientation"];
+    children?: Snippet;
   }
 
-  let { orientation = 'vertical', class: className, children, ...rest }: CheckboxGroupProps = $props()
-  const classList = $derived(cn(checkboxGroupClassName({ orientation }), className))
+  let {
+    orientation = "vertical",
+    class: className,
+    children,
+    ...rest
+  }: CheckboxGroupProps = $props();
+  const classList = $derived(
+    cn(checkboxGroupClassName({ orientation }), className),
+  );
 </script>
 
 <CheckboxGroupPrimitive

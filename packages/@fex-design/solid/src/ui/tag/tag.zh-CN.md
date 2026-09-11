@@ -8,39 +8,39 @@
 
 ## 组件
 
-| 组件 | 元素 | 说明 |
-| ---- | ---- | ---- |
-| Tag | span | 推荐的组合式 Tag，支持可选关闭控件和结构化样式。 |
-| TagAction | button | 从 Primitive 转出，供手动组合任意标签内操作。 |
+| 组件      | 元素   | 说明                                             |
+| --------- | ------ | ------------------------------------------------ |
+| Tag       | span   | 推荐的组合式 Tag，支持可选关闭控件和结构化样式。 |
+| TagAction | button | 从 Primitive 转出，供手动组合任意标签内操作。    |
 
 ## 示例
 
 示例保存在 `examples/<name>`，作为文档预览的源码。
 
-| 名称          | 覆盖内容                                           |
-| ------------- | -------------------------------------------------- |
-| basic         | 常规标签、三种尺寸、可关闭组合和禁用状态。         |
-| variants      | filled、solid、outlined 三种视觉变体。              |
-| colors        | 五种语义色以及自定义 CSS 颜色。                    |
-| dynamic       | 使用业务状态添加、删除标签。                       |
-| css-variables | 实例级语义颜色变量覆盖。                           |
-| direction     | 原生 LTR、RTL 方向以及关闭按钮的逻辑位置。          |
-| semantic-styles | UI 专属 root、close 结构化样式。               |
+| 名称            | 覆盖内容                                   |
+| --------------- | ------------------------------------------ |
+| basic           | 常规标签、三种尺寸、可关闭组合和禁用状态。 |
+| variants        | filled、solid、outlined 三种视觉变体。     |
+| colors          | 五种语义色以及自定义 CSS 颜色。            |
+| dynamic         | 使用业务状态添加、删除标签。               |
+| css-variables   | 实例级语义颜色变量覆盖。                   |
+| direction       | 原生 LTR、RTL 方向以及关闭按钮的逻辑位置。 |
+| semantic-styles | UI 专属 root、close 结构化样式。           |
 
 ## Tag API
 
-| 名称 | 类型 | 默认值 | 说明 |
-| ---- | ---- | ------ | ---- |
-| variant | 'filled' \| 'solid' \| 'outlined' | 'filled' | 标签视觉变体。 |
-| color | TagColor | — | 语义色名称或任意合法 CSS 颜色。 |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | 标签尺寸。 |
-| disabled | boolean | false | 设置禁用样式，并禁用自动生成的关闭按钮。 |
-| closable | boolean | false | 渲染关闭控件。 |
-| 内容 | `children?: JSX.Element`; `closeIcon?: JSX.Element` | — | 标签内容以及可选的关闭图标替换。 |
-| 关闭事件 | `onClose?: JSX.EventHandler<HTMLButtonElement, MouseEvent>` | — | 通知自动生成的关闭按钮被触发。 |
-| classNames | TagClassNames | — | 分别设置 `root`、`close` 类名。 |
-| styles | TagStyles | — | 分别设置 `root`、`close` 的框架原生样式。 |
-| 原生属性 | JSX.HTMLAttributes<HTMLSpanElement> | — | 透传原生 span 属性与事件。 |
+| 名称       | 类型                                                        | 默认值   | 说明                                      |
+| ---------- | ----------------------------------------------------------- | -------- | ----------------------------------------- |
+| variant    | 'filled' \| 'solid' \| 'outlined'                           | 'filled' | 标签视觉变体。                            |
+| color      | TagColor                                                    | —        | 语义色名称或任意合法 CSS 颜色。           |
+| size       | 'sm' \| 'md' \| 'lg'                                        | 'md'     | 标签尺寸。                                |
+| disabled   | boolean                                                     | false    | 设置禁用样式，并禁用自动生成的关闭按钮。  |
+| closable   | boolean                                                     | false    | 渲染关闭控件。                            |
+| 内容       | `children?: JSX.Element`; `closeIcon?: JSX.Element`         | —        | 标签内容以及可选的关闭图标替换。          |
+| 关闭事件   | `onClose?: JSX.EventHandler<HTMLButtonElement, MouseEvent>` | —        | 通知自动生成的关闭按钮被触发。            |
+| classNames | TagClassNames                                               | —        | 分别设置 `root`、`close` 类名。           |
+| styles     | TagStyles                                                   | —        | 分别设置 `root`、`close` 的框架原生样式。 |
+| 原生属性   | JSX.HTMLAttributes<HTMLSpanElement>                         | —        | 透传原生 span 属性与事件。                |
 
 ## 关闭行为
 
@@ -58,18 +58,18 @@
 
 UI 保持 Primitive 的颜色变量契约。
 
-| 变量                             | 作用                                |
-| -------------------------------- | ----------------------------------- |
-| `--tag-color-primary`            | primary 语义色。                    |
-| `--tag-color-primary-foreground` | solid primary 标签的前景色。        |
-| `--tag-color-success`            | success 语义色。                    |
-| `--tag-color-success-foreground` | solid success 标签的前景色。        |
-| `--tag-color-warning`            | warning 语义色。                    |
-| `--tag-color-warning-foreground` | solid warning 标签的前景色。        |
-| `--tag-color-danger`             | danger 语义色。                     |
-| `--tag-color-danger-foreground`  | solid danger 标签的前景色。         |
-| `--tag-color-info`               | info 语义色。                       |
-| `--tag-color-info-foreground`    | solid info 标签的前景色。           |
+| 变量                             | 作用                         |
+| -------------------------------- | ---------------------------- |
+| `--tag-color-primary`            | primary 语义色。             |
+| `--tag-color-primary-foreground` | solid primary 标签的前景色。 |
+| `--tag-color-success`            | success 语义色。             |
+| `--tag-color-success-foreground` | solid success 标签的前景色。 |
+| `--tag-color-warning`            | warning 语义色。             |
+| `--tag-color-warning-foreground` | solid warning 标签的前景色。 |
+| `--tag-color-danger`             | danger 语义色。              |
+| `--tag-color-danger-foreground`  | solid danger 标签的前景色。  |
+| `--tag-color-info`               | info 语义色。                |
+| `--tag-color-info-foreground`    | solid info 标签的前景色。    |
 
 ## 内容模型
 

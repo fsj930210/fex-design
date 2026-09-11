@@ -12,6 +12,7 @@
     "@fex/styles": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-vue": "latest",
+    "typescript": "6.0.3",
     "vite": "catalog:",
     "vue": "3.5.42"
   }

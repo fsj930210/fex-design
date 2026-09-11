@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { textareaClearClassName } from '@fex-design/styles/textarea'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import type { HTMLButtonAttributes } from 'svelte/elements'
-  import XIcon from '../../icon/x.svelte'
-import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
-  import { getTextareaContext } from './context'
+  import { textareaClearClassName } from "@fex-design/styles/textarea";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
+  import XIcon from "../../icon/x.svelte";
+  import { Button as PrimitiveButton } from "@fex-design/svelte/primitive/button";
+  import { getTextareaContext } from "./context";
 
-  interface Props extends Omit<HTMLButtonAttributes, 'class'> {
-    class?: string | undefined
-    forceMount?: boolean | undefined
-    children?: Snippet | undefined
+  interface Props extends Omit<HTMLButtonAttributes, "class"> {
+    class?: string | undefined;
+    forceMount?: boolean | undefined;
+    children?: Snippet | undefined;
   }
 
   let {
@@ -20,8 +20,8 @@ import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
     onpointerdown,
     onclick,
     ...rest
-  }: Props = $props()
-  const textarea = getTextareaContext('TextareaClear')
+  }: Props = $props();
+  const textarea = getTextareaContext("TextareaClear");
 </script>
 
 {#if forceMount || textarea.canClear()}
@@ -33,12 +33,12 @@ import { Button as PrimitiveButton } from '@fex-design/svelte/primitive/button'
     disabled={!forceMount && !textarea.canClear()}
     class={cn(textareaClearClassName, className)}
     onpointerdown={(event) => {
-      onpointerdown?.(event)
-      if (!event.defaultPrevented) event.preventDefault()
+      onpointerdown?.(event);
+      if (!event.defaultPrevented) event.preventDefault();
     }}
     onclick={(event) => {
-      onclick?.(event)
-      if (!event.defaultPrevented) textarea.clear()
+      onclick?.(event);
+      if (!event.defaultPrevented) textarea.clear();
     }}
   >
     {#if children}{@render children()}{:else}<XIcon />{/if}

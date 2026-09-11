@@ -10,7 +10,7 @@
       </div>
     </header>
     <div class="grid gap-4 lg:grid-cols-2">
-      <fex-card title="Vertical" description="Single vertical Bar.">
+      <div card title="Vertical" description="Single vertical Bar.">
         <div fexScrollbarRoot class="h-72 rounded-md border">
           <div fexScrollbarViewport overflowX="hidden">
             <div class="space-y-2 p-3">
@@ -23,8 +23,8 @@
             <div fexScrollbarTrack><div fexScrollbarThumb [axis]="'y'"></div></div>
           </div>
         </div>
-      </fex-card>
-      <fex-card title="Horizontal" description="Single horizontal Bar.">
+      </div>
+      <div card title="Horizontal" description="Single horizontal Bar.">
         <div fexScrollbarRoot class="h-40 rounded-md border">
           <div fexScrollbarViewport overflowY="hidden">
             <div class="flex w-max gap-3 p-3">
@@ -41,8 +41,8 @@
             <div fexScrollbarTrack><div fexScrollbarThumb [axis]="'x'"></div></div>
           </div>
         </div>
-      </fex-card>
-      <fex-card title="Both axes" description="Independent floating Bars.">
+      </div>
+      <div card title="Both axes" description="Independent floating Bars.">
         <div fexScrollbarRoot class="h-72 rounded-md border">
           <div fexScrollbarViewport>
             <div class="grid h-140 w-190 grid-cols-5 gap-3 p-3">
@@ -61,8 +61,8 @@
           </div>
           <div fexScrollbarCorner></div>
         </div>
-      </fex-card>
-      <fex-card
+      </div>
+      <div card
         title="Inset visible tracks"
         description="Tracks are opt-in; this rail starts below the fixed toolbar."
       >
@@ -93,9 +93,9 @@
           </div>
           <div fexScrollbarCorner></div>
         </div>
-      </fex-card>
+      </div>
     </div>
-    <fex-card
+    <div card
       title="Scroll events · virtual list"
       description="The scroll event updates only the rendered window; 300 rows keep native scrolling."
     >
@@ -118,8 +118,8 @@
           <div fexScrollbarTrack><div fexScrollbarThumb [axis]="'y'"></div></div>
         </div>
       </div>
-    </fex-card>
-    <fex-card
+    </div>
+    <div card
       title="Data grid scroll"
       description="Plain table in a native viewport; layout controls the Bar track geometry."
     >
@@ -154,6 +154,6 @@
         </div>
         <div fexScrollbarCorner></div>
       </div>
-    </fex-card>
+    </div>
   </div>
 </main>

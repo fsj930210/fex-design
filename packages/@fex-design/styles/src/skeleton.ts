@@ -10,8 +10,7 @@ export const skeletonAnimationVariants = cva('', {
     animation: {
       none: '',
       pulse: 'animate-pulse',
-      wave:
-        'animate-[skeleton-loading_1.4s_ease_infinite] bg-[linear-gradient(90deg,var(--skeleton-gradient-from)_25%,var(--skeleton-gradient-to)_37%,var(--skeleton-gradient-from)_63%)] bg-[length:400%_100%]',
+      wave: 'animate-[skeleton-loading_1.4s_ease_infinite] bg-[linear-gradient(90deg,var(--skeleton-gradient-from)_25%,var(--skeleton-gradient-to)_37%,var(--skeleton-gradient-from)_63%)] bg-[length:400%_100%]',
     },
   },
   defaultVariants: { animation: 'none' },

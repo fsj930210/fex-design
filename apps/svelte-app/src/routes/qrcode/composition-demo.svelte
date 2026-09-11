@@ -5,11 +5,14 @@
     QrCodeModules,
     QrCodeRoot,
     QrCodeSvg,
-  } from '@fex-design/svelte/primitive/qrcode'
-  import Card from '@fex-design/svelte/ui/card'
+  } from "@fex-design/svelte/primitive/qrcode";
+  import Card from "@fex-design/svelte/ui/card";
 </script>
 
-<Card title="Composition" description="Modules 和 Center 可以独立组合，中心内容由调用方决定。">
+<Card
+  title="Composition"
+  description="Modules 和 Center 可以独立组合，中心内容由调用方决定。"
+>
   <QrCodeRoot
     value="https://fex.design/composition"
     size={176}

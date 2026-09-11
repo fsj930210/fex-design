@@ -18,7 +18,7 @@ import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { MinusIcon } from '@fex-design/angular/icon/minus'
 import { PlusIcon } from '@fex-design/angular/icon/plus'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people4, peopleTree, type Person } from './data'
 const modules = {
   rowExpandingFeature,

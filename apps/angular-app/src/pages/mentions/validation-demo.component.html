@@ -1,4 +1,4 @@
-<fex-card title="Form validation" description="Invalid state drives the default Textarea styling.">
+<div card title="Form validation" description="Invalid state drives the default Textarea styling.">
   <form [fexForm]="form" class="grid max-w-xl gap-2">
     <ng-container [fexField]="form" name="prompt" [validators]="validators" #promptField="field">
       <fex-field-root
@@ -35,4 +35,4 @@
     </ng-container>
     <button button type="submit">Validate</button>
   </form>
-</fex-card>
+</div>

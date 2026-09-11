@@ -4,6 +4,21 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex-design/core/popover/types": [
+        "packages/@fex-design/core/src/popover/types.ts"
+      ],
+      "@fex-design/core/popover/options": [
+        "packages/@fex-design/core/src/popover/options.ts"
+      ],
+      "@fex-design/core/popover/create-popover": [
+        "packages/@fex-design/core/src/popover/create-popover.ts"
+      ],
+      "@fex-design/core/overlay/types": [
+        "packages/@fex-design/core/src/overlay/types.ts"
+      ],
+      "@fex-design/core/overlay/presence/types": [
+        "packages/@fex-design/core/src/overlay/presence/types.ts"
+      ],
       "@fex-design/core/collection/split-overflow-items": [
         "packages/@fex-design/core/src/collection/split-overflow-items.ts"
       ],
@@ -48,6 +63,9 @@
       ],
       "@fex-design/core/spinner/types": [
         "packages/@fex-design/core/src/spinner/types.ts"
+      ],
+      "@fex-design/core/skeleton/types": [
+        "packages/@fex-design/core/src/skeleton/types.ts"
       ],
       "@fex-design/core/button/types": [
         "packages/@fex-design/core/src/button/types.ts"
@@ -108,6 +126,9 @@
       ],
       "@fex-design/core/date-picker/value": [
         "packages/@fex-design/core/src/date-picker/value.ts"
+      ],
+      "@fex-design/core/input/types": [
+        "packages/@fex-design/core/src/input/types.ts"
       ],
       "@fex-design/core/input-otp/completion": [
         "packages/@fex-design/core/src/input-otp/completion.ts"
@@ -796,6 +817,9 @@
       "@fex-design/angular/ui/alert": [
         "packages/@fex-design/angular/src/ui/alert/alert.ts"
       ],
+      "@fex-design/angular/ui/anchor": [
+        "packages/@fex-design/angular/src/ui/anchor/anchor.ts"
+      ],
       "@fex-design/angular/ui/badge": [
         "packages/@fex-design/angular/src/ui/badge/badge.ts"
       ],
@@ -835,17 +859,26 @@
       "@fex-design/angular/ui/empty": [
         "packages/@fex-design/angular/src/ui/empty/empty.ts"
       ],
+      "@fex-design/angular/ui/input": [
+        "packages/@fex-design/angular/src/ui/input/input.ts"
+      ],
       "@fex-design/angular/ui/checkbox": [
         "packages/@fex-design/angular/src/ui/checkbox/checkbox.ts"
       ],
       "@fex-design/angular/ui/kbd": [
         "packages/@fex-design/angular/src/ui/kbd/kbd.ts"
       ],
+      "@fex-design/angular/ui/popover": [
+        "packages/@fex-design/angular/src/ui/popover/popover.ts"
+      ],
       "@fex-design/angular/ui/listbox": [
         "packages/@fex-design/angular/src/ui/listbox/listbox.ts"
       ],
       "@fex-design/angular/ui/spinner": [
         "packages/@fex-design/angular/src/ui/spinner/spinner.ts"
+      ],
+      "@fex-design/angular/ui/skeleton": [
+        "packages/@fex-design/angular/src/ui/skeleton/skeleton.ts"
       ],
       "@fex-design/angular/ui/tag": [
         "packages/@fex-design/angular/src/ui/tag/tag.ts"
@@ -856,14 +889,14 @@
       "@fex-design/angular/icon/circle-check": [
         "packages/@fex-design/angular/src/icon/circle-check.ts"
       ],
-      "@fex-design/angular/icon/circle-error": [
-        "packages/@fex-design/angular/src/icon/circle-error.ts"
+      "@fex-design/angular/icon/circle-x": [
+        "packages/@fex-design/angular/src/icon/circle-x.ts"
       ],
-      "@fex-design/angular/icon/circle-info": [
-        "packages/@fex-design/angular/src/icon/circle-info.ts"
+      "@fex-design/angular/icon/info": [
+        "packages/@fex-design/angular/src/icon/info.ts"
       ],
-      "@fex-design/angular/icon/circle-warning": [
-        "packages/@fex-design/angular/src/icon/circle-warning.ts"
+      "@fex-design/angular/icon/triangle-alert": [
+        "packages/@fex-design/angular/src/icon/triangle-alert.ts"
       ],
       "@fex-design/angular/icon/calendar": [
         "packages/@fex-design/angular/src/icon/calendar.ts"
@@ -874,17 +907,23 @@
       "@fex-design/angular/icon/chevron": [
         "packages/@fex-design/angular/src/icon/chevron.ts"
       ],
-      "@fex-design/angular/icon/close": [
-        "packages/@fex-design/angular/src/icon/close.ts"
+      "@fex-design/angular/icon/x": [
+        "packages/@fex-design/angular/src/icon/x.ts"
       ],
       "@fex-design/angular/icon/error": [
         "packages/@fex-design/angular/src/icon/error.ts"
       ],
-      "@fex-design/angular/icon/info": [
-        "packages/@fex-design/angular/src/icon/info.ts"
-      ],
       "@fex-design/angular/icon/grip-vertical": [
         "packages/@fex-design/angular/src/icon/grip-vertical.ts"
+      ],
+      "@fex-design/angular/icon/eye": [
+        "packages/@fex-design/angular/src/icon/eye.ts"
+      ],
+      "@fex-design/angular/icon/eye-off": [
+        "packages/@fex-design/angular/src/icon/eye-off.ts"
+      ],
+      "@fex-design/angular/icon/search": [
+        "packages/@fex-design/angular/src/icon/search.ts"
       ],
       "@fex-design/angular/icon/loading": [
         "packages/@fex-design/angular/src/icon/loading.ts"

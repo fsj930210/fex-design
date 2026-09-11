@@ -7,7 +7,8 @@ import type {
 import type { ComponentProps, CSSProperties, ReactNode, Ref } from 'react'
 
 export interface InputProps
-  extends Omit<ComponentProps<'input'>, 'size' | 'prefix' | 'defaultValue' | 'value'>,
+  extends
+    Omit<ComponentProps<'input'>, 'size' | 'prefix' | 'defaultValue' | 'value'>,
     InputVisualOptions {
   value?: string
   defaultValue?: string

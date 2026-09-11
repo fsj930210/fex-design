@@ -12,7 +12,7 @@ import { createDataTable } from '@fex-design/angular/signals/create-data-table'
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/angular/icon/chevron'
 import { MinusIcon } from '@fex-design/angular/icon/minus'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { people6, type Person } from './data'
 
 const modules = { columnPinningFeature, columnSizingFeature }

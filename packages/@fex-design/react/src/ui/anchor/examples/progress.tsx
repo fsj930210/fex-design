@@ -18,15 +18,15 @@ export function ProgressExample() {
       <Anchor
         items={items}
         activeMode="progress"
-       
+
         container={() => container.current}
         className="sticky top-0 self-start"
       />
       <div className="grid gap-24 pb-48">
         {items.map((item) => (
-          <section key={item.key} id={`react-ui-progress-${item.key}`}><h3 className="font-semibold">
-            {item.title}
-          </h3></section>
+          <section key={item.key} id={`react-ui-progress-${item.key}`}>
+            <h3 className="font-semibold">{item.title}</h3>
+          </section>
         ))}
       </div>
     </div>

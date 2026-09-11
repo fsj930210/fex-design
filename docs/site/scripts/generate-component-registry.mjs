@@ -182,8 +182,7 @@ lines.push(
   '',
   'export const componentDocuments = {',
 )
-for (const item of registry)
-  lines.push(`  '${item.slug}': ${item.slug.replace(/-/g, '')}Document,`)
+for (const item of registry) lines.push(`  '${item.slug}': ${item.slug.replace(/-/g, '')}Document,`)
 lines.push(
   '} as const satisfies Record<keyof typeof componentApis, ComponentDocumentModule>',
   '',

@@ -16,7 +16,9 @@ import {
         ><CardTitle>{{ dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</CardTitle
         ><CardDescription>Header 与 Footer 按逻辑方向排列。</CardDescription
         ><CardExtra
-          ><button class="rounded-md border px-3 py-1.5 text-sm">{{ dir === 'ltr' ? '操作' : 'إجراء' }}</button></CardExtra
+          ><button class="rounded-md border px-3 py-1.5 text-sm">
+            {{ dir === 'ltr' ? '操作' : 'إجراء' }}
+          </button></CardExtra
         ></CardHeader
       ><CardContent>内容区域保持可读顺序。</CardContent
       ><CardFooter

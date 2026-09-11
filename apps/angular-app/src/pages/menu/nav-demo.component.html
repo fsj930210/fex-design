@@ -3,17 +3,17 @@
     <a fexMenuItem value="getting-started" [class]="navTriggerClassName" href="#getting-started"
       >Getting started</a
     >
-    <fex-popover [trigger]="['hover', 'click']" side="bottom" align="center">
+    <div popoverRoot [trigger]="['hover', 'click']" side="bottom" align="center">
       <button
         fexMenuItem
-        fexPopoverTrigger
+        popoverTrigger
         value="components"
         [submenu]="true"
         [class]="navTriggerClassName"
       >
         <span>Components</span><fex-chevron-down-icon class="size-3.5 shrink-0 [&_svg]:size-3.5" />
       </button>
-      <fex-popover-portal
+      <ng-template popoverPortal
         ><fex-dropdown-content [class]="navPanelClassName"
           ><fex-menu-list
             orientation="vertical"
@@ -33,9 +33,8 @@
               >
             }
           </fex-menu-list></fex-dropdown-content
-        ></fex-popover-portal
-      >
-    </fex-popover>
+        ></ng-template>
+    </div>
     <a fexMenuItem value="documentation" [class]="navTriggerClassName" href="#documentation"
       >Documentation</a
     >

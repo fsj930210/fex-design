@@ -1,2 +1,16 @@
-<script lang="ts">import { Avatar, AvatarGroup } from '@fex-design/svelte/ui/avatar'</script>
-<AvatarGroup maxCount={3}><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar></AvatarGroup>
+<script lang="ts">
+  import { Avatar, AvatarGroup } from "@fex-design/svelte/ui/avatar";
+</script>
+
+<AvatarGroup maxCount={3}
+  ><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar
+    shape="square"
+    src="https://github.com/shadcn.png">FX</Avatar
+  ><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar
+    shape="square"
+    src="https://github.com/shadcn.png">FX</Avatar
+  ><Avatar shape="square" src="https://github.com/shadcn.png">FX</Avatar><Avatar
+    shape="square"
+    src="https://github.com/shadcn.png">FX</Avatar
+  ></AvatarGroup
+>

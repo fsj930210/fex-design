@@ -7,7 +7,7 @@
       [attr.data-index]="virtualItem.index"
       [attr.data-column]="virtualItem.lane"
       [style.width.px]="columnWidth()"
-      [style.transform]="'translate3d(' + (directionSign() * (virtualItem.lane ?? 0) * (columnWidth() + gap().column)) + 'px,' + virtualItem.start + 'px,0)'"
+      [style.transform]="'translate3d(' + (directionSign() * virtualItem.lane * (columnWidth() + gap().column)) + 'px,' + virtualItem.start + 'px,0)'"
     >
       <ng-container
         *ngTemplateOutlet="template(); context: { $implicit: items()[virtualItem.index], index: virtualItem.index }"

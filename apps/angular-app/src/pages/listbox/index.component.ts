@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import {
   ListboxItem as PrimitiveListboxItem,
   ListboxRoot as PrimitiveListboxRoot,

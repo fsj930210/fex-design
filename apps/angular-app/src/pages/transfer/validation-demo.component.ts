@@ -3,7 +3,7 @@ import { FieldControl, FieldLabel, FieldRoot } from '@fex-design/angular/primiti
 import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
 import { Transfer } from '@fex-design/angular/primitive/transfer'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { transferFieldNames, transferMembers } from './data'
 
 @Component({

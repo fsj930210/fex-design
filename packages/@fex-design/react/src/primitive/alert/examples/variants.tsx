@@ -12,7 +12,9 @@ export default function Variants() {
     <div className="grid w-full gap-3">
       {variants.map(([variant, title]) => (
         <Alert key={variant} variant={variant}>
-          <AlertIcon><InfoIcon /></AlertIcon>
+          <AlertIcon>
+            <InfoIcon />
+          </AlertIcon>
           <AlertTitle>{title}</AlertTitle>
         </Alert>
       ))}

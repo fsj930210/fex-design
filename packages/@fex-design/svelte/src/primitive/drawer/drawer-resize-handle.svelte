@@ -1,1 +1,17 @@
-<script lang="ts">import { drawerResizeHandleClassName } from '@fex-design/styles/drawer'; import { useDrawer } from './drawer-context'; const context=useDrawer('DrawerResizeHandle'); const edge=$derived(({left:'right',right:'left',top:'bottom',bottom:'top'} as const)[context.placement() as 'left'|'right'|'top'|'bottom']);</script><div data-slot="drawer-resize-handle" data-edge={edge} data-resize-edge={edge} class={drawerResizeHandleClassName}></div>
+<script lang="ts">
+  import { drawerResizeHandleClassName } from "@fex-design/styles/drawer";
+  import { useDrawer } from "./drawer-context";
+  const context = useDrawer("DrawerResizeHandle");
+  const edge = $derived(
+    ({ left: "right", right: "left", top: "bottom", bottom: "top" } as const)[
+      context.placement() as "left" | "right" | "top" | "bottom"
+    ],
+  );
+</script>
+
+<div
+  data-slot="drawer-resize-handle"
+  data-edge={edge}
+  data-resize-edge={edge}
+  class={drawerResizeHandleClassName}
+></div>

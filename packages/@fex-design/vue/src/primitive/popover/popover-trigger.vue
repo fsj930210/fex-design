@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, useAttrs, type ComponentPublicInstance } from 'vue'
 import { usePopoverContext } from './context'
-import { dismissOpenPopovers, eventInfo } from './context'
+import { eventInfo } from './context'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'PopoverTrigger', inheritAttrs: false })
 
 const attrs = useAttrs()
 const { overlay, snapshot, triggerElement } = usePopoverContext('PopoverTrigger')
@@ -28,36 +28,53 @@ function syncReferenceFromEvent(event: Event) {
   }
 }
 
+function callNativeHandler(name: string, event: Event) {
+  const handlers = attrs[name]
+  for (const handler of Array.isArray(handlers) ? handlers : [handlers]) {
+    if (typeof handler === 'function') handler(event)
+  }
+}
+
 const triggerProps = computed(() => ({
   ...attrs,
-  type: 'button' as const,
+  type: attrs.type ?? 'button',
   'aria-haspopup': 'dialog' as const,
   'aria-expanded': snapshot.value.open,
   'data-state': snapshot.value.open ? 'open' : 'closed',
   onClick(event: MouseEvent) {
+    callNativeHandler('onClick', event)
+    if (event.defaultPrevented) return
     syncReferenceFromEvent(event)
-    dismissOpenPopovers(event, overlay)
     overlay.trigger.click(eventInfo(event))
   },
   onPointerenter(event: PointerEvent) {
+    callNativeHandler('onPointerenter', event)
+    if (event.defaultPrevented) return
     syncReferenceFromEvent(event)
     overlay.trigger.pointerEnter(eventInfo(event))
   },
   onPointerleave(event: PointerEvent) {
+    callNativeHandler('onPointerleave', event)
+    if (event.defaultPrevented) return
     syncReferenceFromEvent(event)
     overlay.trigger.pointerLeave(eventInfo(event))
   },
   onFocus(event: FocusEvent) {
+    callNativeHandler('onFocus', event)
+    if (event.defaultPrevented) return
     syncReferenceFromEvent(event)
     overlay.trigger.focus(eventInfo(event))
   },
   onBlur(event: FocusEvent) {
+    callNativeHandler('onBlur', event)
+    if (event.defaultPrevented) return
     syncReferenceFromEvent(event)
     overlay.trigger.blur(eventInfo(event))
   },
   onContextmenu(event: MouseEvent) {
+    callNativeHandler('onContextmenu', event)
+    if (event.defaultPrevented) return
     syncReferenceFromEvent(event)
-    dismissOpenPopovers(event, overlay)
     overlay.trigger.contextMenu(eventInfo(event))
   },
 }))

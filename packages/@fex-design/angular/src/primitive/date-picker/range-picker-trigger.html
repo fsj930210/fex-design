@@ -1,4 +1,5 @@
-<div inputRoot
+<div
+  inputRoot
   [class]="triggerClassName + (className ? ' ' + className : '')"
   [value]="rootValue()"
   [disabled]="state.context().disabled"
@@ -7,7 +8,8 @@
   (blur)="blur($event)"
   (clear)="clear()"
 >
-  <div inputRoot
+  <div
+    inputRoot
     data-range-part="start"
     [attr.data-active]="state.context().open && state.context().activePart === 'start' ? 'true' : null"
     [class]="rangeInputClassName"
@@ -27,7 +29,8 @@
     />
   </div>
   <span aria-hidden="true" [class]="rangeSeparatorClassName">{{ separator }}</span>
-  <div inputRoot
+  <div
+    inputRoot
     data-range-part="end"
     [attr.data-active]="state.context().open && state.context().activePart === 'end' ? 'true' : null"
     [class]="rangeInputClassName"

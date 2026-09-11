@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Row expansion"
   description="The same expansion state supports hierarchical subRows and arbitrary detail panels. The expand control is an optional column factory, not a special DataTable mode."
 >
@@ -11,7 +11,7 @@
             <button
               button
               size="icon-sm"
-              variant="outline"
+              variant="outlined"
               [attr.aria-expanded]="expanded(cell)"
               [disabled]="!can(cell)"
               (click)="toggle(cell)"
@@ -19,7 +19,7 @@
               @if (expanded(cell)) {
                 <fex-minus-icon />
               } @else {
-                <fex-plus-icon />
+                <plus-icon />
               }
             </button>
           } @else {
@@ -36,14 +36,14 @@
             <button
               button
               size="icon-sm"
-              variant="outline"
+              variant="outlined"
               [attr.aria-expanded]="expanded(cell)"
               (click)="toggle(cell)"
             >
               @if (expanded(cell)) {
                 <fex-minus-icon />
               } @else {
-                <fex-plus-icon />
+                <plus-icon />
               }
             </button>
           } @else {
@@ -58,4 +58,4 @@
       >
     </section>
   </div>
-</fex-card>
+</div>

@@ -70,12 +70,7 @@ export function PaginationPrevious({
   ...props
 }: ComponentProps<typeof PaginationLink> & { text?: string }) {
   return (
-    <PaginationLink
-      aria-label="Go to previous page"
-      size="md"
-      className={className}
-      {...props}
-    >
+    <PaginationLink aria-label="Go to previous page" size="md" className={className} {...props}>
       <ChevronLeftIcon />
       <span className={paginationTextClassName}>{text}</span>
     </PaginationLink>

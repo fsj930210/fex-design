@@ -10,7 +10,10 @@ import { useRef } from 'react'
 export function CustomClickExample() {
   const container = useRef<HTMLDivElement>(null)
   return (
-    <div ref={container} className="grid h-80 w-full max-w-2xl grid-cols-[14rem_1fr] gap-6 overflow-auto rounded-lg border p-4">
+    <div
+      ref={container}
+      className="grid h-80 w-full max-w-2xl grid-cols-[14rem_1fr] gap-6 overflow-auto rounded-lg border p-4"
+    >
       <AnchorRoot container={() => container.current} className="sticky top-0 self-start">
         <AnchorRail>
           <AnchorIndicator />

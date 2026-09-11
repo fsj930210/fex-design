@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
-  FieldControl,
   FieldError,
   FieldLabel,
   FieldRequiredIndicator,
@@ -13,7 +12,7 @@ import { MentionsList } from '@fex-design/angular/primitive/mentions/list'
 import { MentionsRoot } from '@fex-design/angular/primitive/mentions/root'
 import { MentionsTrigger } from '@fex-design/angular/primitive/mentions/trigger'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { mentionUsers } from './data'
 
 @Component({
@@ -23,7 +22,6 @@ import { mentionUsers } from './data'
     Form,
     FormField,
     FieldRoot,
-    FieldControl,
     FieldLabel,
     FieldRequiredIndicator,
     FieldError,

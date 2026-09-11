@@ -8,44 +8,44 @@
 
 ## 组件
 
-| 组件 | 元素 | 说明 |
-| --- | --- | --- |
-| InputRoot | div | 输入框视觉边界以及受控/非受控值容器。 |
-| InputControl | input | 原生文本输入和聚焦目标。 |
-| InputPrefix | span | InputRoot 内起始位置的非交互内容。 |
-| InputSuffix | span | InputRoot 内结束位置的非交互内容。 |
-| InputAddonBefore | span | 位于 InputRoot 聚焦环之外的起始附加区域。 |
-| InputAddonAfter | span | 位于 InputRoot 聚焦环之外的结束附加区域。 |
-| InputClear | button | 与最近 InputRoot 连接的清除操作。 |
-| InputGroup | div | 连接任意直接子元素，不假设子元素组件类型。 |
+| 组件             | 元素   | 说明                                       |
+| ---------------- | ------ | ------------------------------------------ |
+| InputRoot        | div    | 输入框视觉边界以及受控/非受控值容器。      |
+| InputControl     | input  | 原生文本输入和聚焦目标。                   |
+| InputPrefix      | span   | InputRoot 内起始位置的非交互内容。         |
+| InputSuffix      | span   | InputRoot 内结束位置的非交互内容。         |
+| InputAddonBefore | span   | 位于 InputRoot 聚焦环之外的起始附加区域。  |
+| InputAddonAfter  | span   | 位于 InputRoot 聚焦环之外的结束附加区域。  |
+| InputClear       | button | 与最近 InputRoot 连接的清除操作。          |
+| InputGroup       | div    | 连接任意直接子元素，不假设子元素组件类型。 |
 
 ## 示例
 
-| 名称 | 覆盖内容 |
-| --- | --- |
-| basic | 空输入和可清除输入。 |
-| sizes | `sm`、`md`、`lg`，高度分别为 24px、32px、44px。 |
-| variants | `outlined`、`filled`、`borderless`、`underlined`。 |
-| controlled | InputRoot 的受控与非受控状态。 |
-| affixes | Prefix、Suffix、AddonBefore、AddonAfter 组合。 |
-| group | Input 与 Button、Input 与 Input 的连接组合。 |
-| password | 使用 Control、Suffix 和原生按钮组合密码可见性。 |
-| search | 使用 Primitive 部件组合 Enter、Prefix 和 Addon 搜索入口。 |
-| states | 禁用、只读和原生 `aria-invalid`。 |
-| focus | 通过 InputControl 调用原生 focus、blur 和 select。 |
+| 名称       | 覆盖内容                                                  |
+| ---------- | --------------------------------------------------------- |
+| basic      | 空输入和可清除输入。                                      |
+| sizes      | `sm`、`md`、`lg`，高度分别为 24px、32px、44px。           |
+| variants   | `outlined`、`filled`、`borderless`、`underlined`。        |
+| controlled | InputRoot 的受控与非受控状态。                            |
+| affixes    | Prefix、Suffix、AddonBefore、AddonAfter 组合。            |
+| group      | Input 与 Button、Input 与 Input 的连接组合。              |
+| password   | 使用 Control、Suffix 和原生按钮组合密码可见性。           |
+| search     | 使用 Primitive 部件组合 Enter、Prefix 和 Addon 搜索入口。 |
+| states     | 禁用、只读和原生 `aria-invalid`。                         |
+| focus      | 通过 InputControl 调用原生 focus、blur 和 select。        |
 
 ## InputRoot API
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| value | string | — | 受控值。 |
-| defaultValue | string | `''` | 非受控初始值。 |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | 控件高度。 |
-| variant | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | 视觉结构。 |
-| disabled | boolean | false | 禁用输入上下文。 |
-| readOnly | boolean | false | 将输入上下文设为只读。 |
-| 值变化 | 框架事件 | — | 输入和清除后报告新值。 |
-| clear | 框架事件 | — | 成功清除后触发。 |
+| 名称         | 类型                                                     | 默认值       | 说明                   |
+| ------------ | -------------------------------------------------------- | ------------ | ---------------------- |
+| value        | string                                                   | —            | 受控值。               |
+| defaultValue | string                                                   | `''`         | 非受控初始值。         |
+| size         | `'sm' \| 'md' \| 'lg'`                                   | `'md'`       | 控件高度。             |
+| variant      | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | 视觉结构。             |
+| disabled     | boolean                                                  | false        | 禁用输入上下文。       |
+| readOnly     | boolean                                                  | false        | 将输入上下文设为只读。 |
+| 值变化       | 框架事件                                                 | —            | 输入和清除后报告新值。 |
+| clear        | 框架事件                                                 | —            | 成功清除后触发。       |
 
 ## InputControl API
 

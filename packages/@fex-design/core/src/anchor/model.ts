@@ -56,17 +56,14 @@ export function getAnchorActiveKeys<TItem extends { key: string }>({
         position.top >= scrollTop - anchorPositionEpsilon &&
         position.top <= viewportBottom + anchorPositionEpsilon,
     )
-  let currentIndex = visible.reduce(
-    (nearestIndex, entry) => {
-      if (nearestIndex === -1) return entry.index
-      const nearest = sorted[nearestIndex]
-      if (!nearest) return entry.index
-      return Math.abs(entry.position.top - activeTop) < Math.abs(nearest.top - activeTop)
-        ? entry.index
-        : nearestIndex
-    },
-    -1,
-  )
+  let currentIndex = visible.reduce((nearestIndex, entry) => {
+    if (nearestIndex === -1) return entry.index
+    const nearest = sorted[nearestIndex]
+    if (!nearest) return entry.index
+    return Math.abs(entry.position.top - activeTop) < Math.abs(nearest.top - activeTop)
+      ? entry.index
+      : nearestIndex
+  }, -1)
 
   if (scrolledToEnd) {
     currentIndex = sorted.length - 1

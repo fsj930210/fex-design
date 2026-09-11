@@ -5,7 +5,7 @@ import {
   InputOTPRoot,
   InputOTPSeparator,
 } from '@fex-design/angular/primitive/input-otp'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-input-otp-mixed-rules-demo',
   standalone: true,

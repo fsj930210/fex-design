@@ -10,7 +10,13 @@ export default function Direction() {
       {items.map((item) => (
         <section key={item.dir} dir={item.dir} className="grid gap-3 rounded-lg border p-4">
           <strong>{item.dir.toUpperCase()}</strong>
-          <Alert type="warning" showIcon closable title={item.title} action={<button className="underline">{item.action}</button>} />
+          <Alert
+            type="warning"
+            showIcon
+            closable
+            title={item.title}
+            action={<button className="underline">{item.action}</button>}
+          />
         </section>
       ))}
     </div>

@@ -1,24 +1,29 @@
 <script lang="ts">
-  import Card from '@fex-design/svelte/ui/card'
+  import Card from "@fex-design/svelte/ui/card";
 
-  const directions = ['ltr', 'rtl'] as const
+  const directions = ["ltr", "rtl"] as const;
 </script>
 
 <div class="grid w-full gap-6 sm:grid-cols-2">
   {#each directions as dir (dir)}
     <Card
       {dir}
-      title={dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}
-      description={dir === 'ltr'
-        ? '标题与操作按逻辑方向排列。'
-        : 'يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي.'}
+      title={dir === "ltr" ? "LTR · 中文示例" : "RTL · مثال عربي"}
+      description={dir === "ltr"
+        ? "标题与操作按逻辑方向排列。"
+        : "يُرتَّب العنوان والإجراء حسب الاتجاه المنطقي."}
       class="w-full"
     >
-      {#snippet children()}{dir === 'ltr'
-          ? '内容区域保持中文阅读顺序。'
-          : 'يحافظ المحتوى على ترتيب القراءة العربية.'}{/snippet}
-      {#snippet extra()}<button class="rounded-md border px-3 py-1.5 text-sm">{dir === 'ltr' ? '操作' : 'إجراء'}</button>{/snippet}
-      {#snippet footer()}<button class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground">{dir === 'ltr' ? '保存' : 'حفظ'}</button>{/snippet}
+      {#snippet children()}{dir === "ltr"
+          ? "内容区域保持中文阅读顺序。"
+          : "يحافظ المحتوى على ترتيب القراءة العربية."}{/snippet}
+      {#snippet extra()}<button class="rounded-md border px-3 py-1.5 text-sm"
+          >{dir === "ltr" ? "操作" : "إجراء"}</button
+        >{/snippet}
+      {#snippet footer()}<button
+          class="rounded-md bg-primary px-3 py-1.5 text-primary-foreground"
+          >{dir === "ltr" ? "保存" : "حفظ"}</button
+        >{/snippet}
     </Card>
   {/each}
 </div>

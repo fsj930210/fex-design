@@ -6,13 +6,12 @@ import {
   InputClear,
   InputControl,
   InputGroup,
-  InputGroupAddon,
   InputPrefix,
   InputRoot,
   InputSuffix,
 } from '@fex-design/angular/primitive/input'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fexInput-page',
@@ -23,7 +22,6 @@ import Card from '@fex-design/angular/ui/card'
     InputRoot,
     InputControl,
     InputGroup,
-    InputGroupAddon,
     InputPrefix,
     InputSuffix,
     InputAddonBefore,

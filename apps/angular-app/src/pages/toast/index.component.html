@@ -9,35 +9,35 @@
       </p>
     </header>
 
-    <fex-card
+    <div card
       title="Types"
       description="Built-in variants only provide default semantics. Content and icon can still be customized."
     >
       <div class="flex flex-wrap gap-1.5">
-        <button button variant="outline" (click)="toast.show('Hello, Fex Design!')">Default</button>
-        <button button variant="outline" (click)="toast.success('This is a success message')">
+        <button button variant="outlined" (click)="toast.show('Hello, Fex Design!')">Default</button>
+        <button button variant="outlined" (click)="toast.success('This is a success message')">
           Success
         </button>
-        <button button variant="outline" (click)="toast.info('This is an info message')">
+        <button button variant="outlined" (click)="toast.info('This is an info message')">
           Info
         </button>
-        <button button variant="outline" (click)="toast.warning('This is a warning message')">
+        <button button variant="outlined" (click)="toast.warning('This is a warning message')">
           Warning
         </button>
-        <button button variant="outline" (click)="toast.error('This is an error message')">
+        <button button variant="outlined" (click)="toast.error('This is an error message')">
           Error
         </button>
         <button
           button
-          variant="outline"
+          variant="outlined"
           (click)="toast.loading({ title: 'Loading data', duration: 2500 })"
         >
           Loading
         </button>
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Position"
       description="The viewport controls placement. Service calls do not need to know where the toast appears."
     >
@@ -45,23 +45,23 @@
         @for (item of placements; track item) {
           <button
             button
-            [variant]="placement() === item ? 'default' : 'outline'"
+            [variant]="placement() === item ? 'solid' : 'outlined'"
             (click)="choosePlacement(item)"
           >
             {{ labelPlacement(item) }}
           </button>
         }
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Custom Content"
       description="Primitive parts let callers replace icon, add description, and render an action without changing the manager."
     >
       <div class="flex flex-wrap gap-1.5">
         <button
           button
-          variant="outline"
+          variant="outlined"
           (click)="
             toast.success({
               title: 'Event has been created',
@@ -74,7 +74,7 @@
         </button>
         <button
           button
-          variant="outline"
+          variant="outlined"
           (click)="
             toast.show({
               title: 'Event has been created',
@@ -87,23 +87,23 @@
           With action
         </button>
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Update And Destroy"
       description="A stable id updates one toast. Returned ids can be dismissed manually."
     >
       <div class="flex flex-wrap gap-1.5">
         <button
           button
-          variant="outline"
+          variant="outlined"
           (click)="toast.loading({ id: 'save-user', title: 'Saving user', duration: -1 })"
         >
           Open keyed loading
         </button>
         <button
           button
-          variant="outline"
+          variant="outlined"
           (click)="
             toast.success({
               id: 'save-user',
@@ -115,30 +115,30 @@
         >
           Update keyed toast
         </button>
-        <button button variant="outline" (click)="showManualToast()">Manual toast</button>
+        <button button variant="outlined" (click)="showManualToast()">Manual toast</button>
         <button
           button
-          variant="outline"
+          variant="outlined"
           [disabled]="!manualId()"
           (click)="manualId() && toast.dismiss(manualId()!)"
         >
           Destroy manual
         </button>
-        <button button variant="outline" (click)="toast.clear()">Destroy all</button>
+        <button button variant="outlined" (click)="toast.clear()">Destroy all</button>
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Multiple And Stacked"
       description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible."
     >
       <div class="flex flex-wrap gap-1.5">
-        <button button variant="outline" (click)="showManyMessages()">Show many</button>
-        <button button [variant]="stack() ? 'default' : 'outline'" (click)="toggleStack()">
+        <button button variant="outlined" (click)="showManyMessages()">Show many</button>
+        <button button [variant]="stack() ? 'solid' : 'outlined'" (click)="toggleStack()">
           {{ stack() ? 'Stack on' : 'Stack off' }}
         </button>
       </div>
-    </fex-card>
+    </div>
   </div>
 
   @for (currentPlacement of placements; track currentPlacement) {
@@ -159,9 +159,9 @@
                 } @else if (item.variant === 'success') {
                   <fex-check-icon />
                 } @else if (item.variant === 'loading') {
-                  <fex-loading-icon class="animate-spin" />
+                  <loading-icon class="animate-spin" />
                 } @else if (item.variant === 'info') {
-                  <fex-info-icon />
+                  <info-icon />
                 } @else if (item.variant === 'warning') {
                   <fex-warning-icon />
                 } @else if (item.variant === 'error') {
@@ -170,7 +170,7 @@
               </fex-toast-icon>
             }
             <fex-toast-title>{{ item.title }}</fex-toast-title>
-            <button fexToastClose [item]="item"><fex-close-icon /></button>
+            <button fexToastClose [item]="item"><x-icon /></button>
             @if (item.description) {
               <fex-toast-description>{{ item.description }}</fex-toast-description>
             }

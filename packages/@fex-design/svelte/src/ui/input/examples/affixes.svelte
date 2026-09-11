@@ -1,1 +1,20 @@
-<script lang="ts">import { Input } from '@fex-design/svelte/ui/input'; import SearchIcon from '@fex-design/svelte/icon/search'; import { Button } from '@fex-design/svelte/ui/button'</script>{#snippet search()}<SearchIcon/>{/snippet}{#snippet cny()}CNY{/snippet}{#snippet protocol()}https://{/snippet}{#snippet domain()}.com{/snippet}{#snippet code()}<Button variant="text" size="sm">获取验证码</Button>{/snippet}<div class="grid w-full gap-3"><Input prefix={search} placeholder="Prefix"/><Input suffix={cny} placeholder="Suffix"/><Input prefix={protocol} suffix={domain}/><Input addonBefore={protocol} addonAfter={domain}/><Input suffix={code} placeholder="手机号"/></div>
+<script lang="ts">
+  import { Input } from "@fex-design/svelte/ui/input";
+  import SearchIcon from "@fex-design/svelte/icon/search";
+  import { Button } from "@fex-design/svelte/ui/button";
+</script>
+
+{#snippet search()}<SearchIcon
+  />{/snippet}{#snippet cny()}CNY{/snippet}{#snippet protocol()}https://{/snippet}{#snippet domain()}.com{/snippet}{#snippet code()}<Button
+    variant="text"
+    size="sm">获取验证码</Button
+  >{/snippet}
+<div class="grid w-full gap-3">
+  <Input prefix={search} placeholder="Prefix" /><Input
+    suffix={cny}
+    placeholder="Suffix"
+  /><Input prefix={protocol} suffix={domain} /><Input
+    addonBefore={protocol}
+    addonAfter={domain}
+  /><Input suffix={code} placeholder="手机号" />
+</div>

@@ -61,8 +61,7 @@
             >}</button
           >} <span [class]="optionLabelClass">{{ node.label }}</span
           ><span [class]="optionIconClass"
-            >@if(itemState.loading){<loading-icon class="animate-spin" />}@else
-            if(!node.leaf){<fex-chevron-right-icon />}@else if(itemState.selected){<fex-check-icon />}</span
+            >@if(itemState.loading){<loading-icon class="animate-spin" />}@else if (!node.leaf){<fex-chevron-right-icon />}@else if (itemState.selected){<fex-check-icon />}</span
           >
         </div>
         }

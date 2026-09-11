@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button, ButtonGroup } from '@fex-design/svelte/primitive/button'
-  import { buttonClassName } from '@fex-design/styles/button'
+  import { Button, ButtonGroup } from "@fex-design/svelte/primitive/button";
+  import { buttonClassName } from "@fex-design/styles/button";
 </script>
 
 <div class="flex flex-wrap items-center gap-3">
@@ -14,4 +14,3 @@
     <Button class={buttonClassName()}>Bottom</Button>
   </ButtonGroup>
 </div>
-

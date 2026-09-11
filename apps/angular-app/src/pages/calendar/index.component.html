@@ -12,7 +12,7 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card title="Date" description="日期面板支持受控值、禁用区间和自定义单元格内容。">
+      <div card title="Date" description="日期面板支持受控值、禁用区间和自定义单元格内容。">
         <fex-calendar-root
           [value]="dateValue()"
           [defaultViewDate]="july"
@@ -91,9 +91,9 @@
             当前值：{{ dateValue() ? getCalendarValueKey(dateValue()!) : '未选择' }}
           </p>
         </fex-calendar-root>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Week"
         description="周粒度会把同一行日期映射到同一个 week value，供 WeekPicker 复用。"
       >
@@ -122,9 +122,9 @@
             当前周：{{ weekValue() ? getCalendarValueKey(weekValue()!) : '未选择' }}
           </p>
         </fex-calendar-root>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Month / Quarter / Year"
         description="月份、季度、年份作为独立粒度，不用日期值冒充。"
       >
@@ -158,7 +158,7 @@
             </div>
           }
         </div>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

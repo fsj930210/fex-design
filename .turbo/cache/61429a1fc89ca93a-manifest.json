@@ -1,1 +1,11 @@
-{"files":{"configs/oxc/.turbo/turbo-typecheck.log":{"size":32,"mtime_nanos":1788848365556164200,"mode":420,"is_dir":false}},"order":["configs/oxc/.turbo/turbo-typecheck.log"]}
+{
+  "files": {
+    "configs/oxc/.turbo/turbo-typecheck.log": {
+      "size": 32,
+      "mtime_nanos": 1788848365556164200,
+      "mode": 420,
+      "is_dir": false
+    }
+  },
+  "order": ["configs/oxc/.turbo/turbo-typecheck.log"]
+}

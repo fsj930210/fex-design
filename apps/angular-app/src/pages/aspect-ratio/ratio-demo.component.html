@@ -1,5 +1,5 @@
-<fex-card [title]="title()" [description]="description()"
-  ><fex-aspect-ratio
+<div card [title]="title()" [description]="description()"
+  ><div aspectRatio
     [ratio]="ratio()"
     class="rounded-md"
     [class.max-w-2xl]="sizeClass() === 'max-w-2xl'"
@@ -8,5 +8,4 @@
     ><img
       src="/aspect-ratio-demo.svg"
       alt="Mountain landscape"
-      class="size-full object-cover" /></fex-aspect-ratio
-></fex-card>
+      class="size-full object-cover" /></div></div>

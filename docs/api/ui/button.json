@@ -32,14 +32,7 @@
       "default": "md",
       "description": "文本按钮或纯图标按钮的尺寸。",
       "editor": "enum",
-      "options": [
-        "sm",
-        "md",
-        "lg",
-        "icon-sm",
-        "icon-md",
-        "icon-lg"
-      ]
+      "options": ["sm", "md", "lg", "icon-sm", "icon-md", "icon-lg"]
     },
     {
       "name": "variant",

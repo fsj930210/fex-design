@@ -1,25 +1,28 @@
 <script lang="ts">
-  import AsyncDemo from './async-demo.svelte'
-  import AsyncSearchDemo from './async-search-demo.svelte'
-  import BasicDemo from './basic-demo.svelte'
-  import BatchActionsDemo from './batch-actions-demo.svelte'
-  import CheckDemo from './check-demo.svelte'
-  import ControlledDemo from './controlled-demo.svelte'
-  import DndDemo from './dnd-demo.svelte'
-  import MutationDemo from './mutation-demo.svelte'
-  import SearchDemo from './search-demo.svelte'
-  import VirtualDemo from './virtual-demo.svelte'
+  import AsyncDemo from "./async-demo.svelte";
+  import AsyncSearchDemo from "./async-search-demo.svelte";
+  import BasicDemo from "./basic-demo.svelte";
+  import BatchActionsDemo from "./batch-actions-demo.svelte";
+  import CheckDemo from "./check-demo.svelte";
+  import ControlledDemo from "./controlled-demo.svelte";
+  import DndDemo from "./dnd-demo.svelte";
+  import MutationDemo from "./mutation-demo.svelte";
+  import SearchDemo from "./search-demo.svelte";
+  import VirtualDemo from "./virtual-demo.svelte";
 </script>
 
 <svelte:head><title>Tree</title></svelte:head>
 <main class="min-h-screen bg-secondary-background px-2 md:px-6 py-4">
   <div class="mx-auto w-full max-w-5xl space-y-4">
     <header class="space-y-1.5">
-      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/"
+        >Back home</a
+      >
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Tree</h1>
         <p class="max-w-3xl text-sm leading-6 text-muted-foreground">
-          Headless tree state, field mapping, async children, search data, keyboard navigation and virtual rendering.
+          Headless tree state, field mapping, async children, search data,
+          keyboard navigation and virtual rendering.
         </p>
       </div>
     </header>

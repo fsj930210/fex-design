@@ -8,11 +8,11 @@
 
 ## 组件
 
-| 组件 | 元素 | 说明 |
-| --- | --- | --- |
-| Badge | span | 展示短文本或计数，支持语义色和自定义颜色。 |
-| BadgeDot | span | 展示不带数字内容的独立状态小圆点。 |
-| BadgeGroup | div | 排列徽标，并可用 `maxCount` 收起为 `+N`。 |
+| 组件        | 元素 | 说明                                       |
+| ----------- | ---- | ------------------------------------------ |
+| Badge       | span | 展示短文本或计数，支持语义色和自定义颜色。 |
+| BadgeDot    | span | 展示不带数字内容的独立状态小圆点。         |
+| BadgeGroup  | div  | 排列徽标，并可用 `maxCount` 收起为 `+N`。  |
 | BadgeRibbon | span | 展示独立 Ribbon 标记；包含块由使用方提供。 |
 
 ## 示例
@@ -21,15 +21,15 @@
 
 ## Badge API
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| count | ReactNode | — | 徽标值；数字可由 `overflowCount` 封顶。 |
-| showZero | boolean | false | 是否显示数字 `0`。 |
-| overflowCount | number | — | 数字超过限制后显示为 `N+`。 |
-| color | 预设色或 CSS 颜色 | danger | 语义预设色或任意 CSS 颜色。 |
-| size | 'sm' \\| 'md' \\| 'lg' | md | 徽标尺寸。 |
-| children | ReactNode | — | 未传 `count` 时展示的内容。 |
-| 原生属性 | ComponentProps<'span'> | — | 透传原生 span 属性与事件。 |
+| 名称          | 类型                   | 默认值  | 说明                                    |
+| ------------- | ---------------------- | ------- | --------------------------------------- |
+| count         | ReactNode              | —       | 徽标值；数字可由 `overflowCount` 封顶。 |
+| showZero      | boolean                | false   | 是否显示数字 `0`。                      |
+| overflowCount | number                 | —       | 数字超过限制后显示为 `N+`。             |
+| color         | 预设色或 CSS 颜色      | danger  | 语义预设色或任意 CSS 颜色。             |
+| size          | 'sm' \\                | 'md' \\ | 'lg'                                    | md  | 徽标尺寸。 |
+| children      | ReactNode              | —       | 未传 `count` 时展示的内容。             |
+| 原生属性      | ComponentProps<'span'> | —       | 透传原生 span 属性与事件。              |
 
 ## BadgeDot API
 
@@ -37,11 +37,11 @@
 
 ## BadgeGroup API
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| maxCount | number | — | 最多显示的子项数量。 |
-| overflow | `(count, items) => ReactNode` | 内置 `+N` | 自定义溢出节点。 |
-| children | ReactNode | — | 徽标子项。 |
+| 名称     | 类型                          | 默认值    | 说明                 |
+| -------- | ----------------------------- | --------- | -------------------- |
+| maxCount | number                        | —         | 最多显示的子项数量。 |
+| overflow | `(count, items) => ReactNode` | 内置 `+N` | 自定义溢出节点。     |
+| children | ReactNode                     | —         | 徽标子项。           |
 
 ## BadgeRibbon API
 
@@ -49,10 +49,10 @@
 
 ## 书写方向与无障碍
 
-
 ## CSS Variables
 
 `--badge-height`、`--badge-min-width`、`--badge-padding-inline` 和 `--badge-font-size` 用于调整 Badge；`--badge-dot-size` 用于调整 BadgeDot；`--badge-color` 和 `--badge-color-foreground` 覆盖单个实例。使用 `--badge-color-{primary|info|success|warning|danger}` 及对应的 `-foreground` 变量，可在组件作用域内覆盖 Badge 语义色。
 
 ## 书写方向与无障碍
+
 逻辑位置跟随原生 `dir="ltr"` / `dir="rtl"`。Badge 默认是展示元素；当颜色或数字承载独立含义时，应补充无障碍标签。

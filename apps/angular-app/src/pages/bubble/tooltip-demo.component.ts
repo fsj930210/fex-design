@@ -7,7 +7,7 @@ import {
   TooltipPortal,
   TooltipTrigger,
 } from '@fex-design/angular/primitive/tooltip'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-bubble-tooltip-demo',

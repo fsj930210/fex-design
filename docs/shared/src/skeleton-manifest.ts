@@ -1,6 +1,10 @@
 export const skeletonExamples = {
   primitive: [
-    { id: 'basic', title: '基本', description: '标明 Text、Avatar、Button、Input、Block 与 Image。' },
+    {
+      id: 'basic',
+      title: '基本',
+      description: '标明 Text、Avatar、Button、Input、Block 与 Image。',
+    },
     { id: 'list', title: '列表', description: '组合头像和列表文本。' },
     { id: 'table', title: '表格', description: '组合表头、单元格和操作按钮。' },
     { id: 'image', title: '图片内容', description: '组合图片、标题和正文。' },
@@ -8,7 +12,11 @@ export const skeletonExamples = {
     { id: 'animation', title: '动画', description: '对比无动画、呼吸和流光。' },
   ],
   ui: [
-    { id: 'basic', title: '基本', description: 'UI 直接重导出的六个独立占位组件，与 Primitive 行为一致。' },
+    {
+      id: 'basic',
+      title: '基本',
+      description: 'UI 直接重导出的六个独立占位组件，与 Primitive 行为一致。',
+    },
     { id: 'list', title: '列表', description: '组合头像和列表文本。' },
     { id: 'table', title: '表格', description: '组合表头、单元格和操作按钮。' },
     { id: 'image', title: '图片内容', description: '组合图片、标题和正文。' },

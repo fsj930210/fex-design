@@ -1,14 +1,14 @@
-<fex-card
+<div card
   title="Async search and locate"
   description="The real server returns path-aware matches and an ancestor subtree."
 >
-  <fex-input-root
+  <div inputRoot
     [value]="inputValue()"
     (valueChange)="search($event)"
     (clear)="clear()"
     class="mb-2 max-w-sm"
-    ><input fexInputControl placeholder="Search remote departments" /><button fexInputClear></button
-  ></fex-input-root>
+    ><input inputControl placeholder="Search remote departments" /><button inputClear></button
+  ></div>
   @if (keyword()) {
     <fex-listbox>
       @for (result of results(); track result.node.id) {
@@ -28,4 +28,4 @@
   } @else if (treeData().length) {
     <fex-demo-tree [options]="options()" />
   }
-</fex-card>
+</div>

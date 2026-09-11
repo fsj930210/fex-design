@@ -1,8 +1,4 @@
-import {
-  isTagPresetColor,
-  type TagOptions,
-  type TagPresetColor,
-} from '@fex-design/core/tag/types'
+import { isTagPresetColor, type TagOptions, type TagPresetColor } from '@fex-design/core/tag/types'
 import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
@@ -14,8 +10,7 @@ type TagStyle = JSX.CSSProperties & {
 }
 
 export interface TagProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'color'>>,
-    TagOptions {}
+  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'color'>>, TagOptions {}
 
 export function Tag(props: TagProps) {
   const [local, rest] = splitProps(props, [

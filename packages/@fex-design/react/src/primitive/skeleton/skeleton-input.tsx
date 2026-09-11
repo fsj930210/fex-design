@@ -5,5 +5,11 @@ import type { ComponentProps } from 'react'
 import { SkeletonBlock } from './skeleton-block'
 export type SkeletonInputProps = ComponentProps<'div'> & SkeletonVisualOptions & { block?: boolean }
 export function SkeletonInput({ block, className, ...props }: SkeletonInputProps) {
-  return <SkeletonBlock data-slot="skeleton-input" className={cn(skeletonInputClassName, block && skeletonInputBlockClassName, className)} {...props} />
+  return (
+    <SkeletonBlock
+      data-slot="skeleton-input"
+      className={cn(skeletonInputClassName, block && skeletonInputBlockClassName, className)}
+      {...props}
+    />
+  )
 }

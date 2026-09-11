@@ -7,7 +7,21 @@ const variants: readonly TagVariant[] = ['filled', 'solid', 'outlined']
 </script>
 <template>
   <div class="grid gap-4">
-    <section v-for="variant in variants" :key="variant" class="grid gap-2"><h4 class="text-sm font-medium">预设颜色（{{ variant }}）</h4><div class="flex flex-wrap gap-2"><Tag v-for="color in presets" :key="color" :color="color" :variant="variant">{{ color }}</Tag></div></section>
-    <section v-for="variant in variants" :key="`custom-${variant}`" class="grid gap-2"><h4 class="text-sm font-medium">自定义颜色（{{ variant }}）</h4><div class="flex flex-wrap gap-2"><Tag v-for="color in customColors" :key="color" :color="color" :variant="variant">{{ color }}</Tag></div></section>
+    <section v-for="variant in variants" :key="variant" class="grid gap-2">
+      <h4 class="text-sm font-medium">预设颜色（{{ variant }}）</h4>
+      <div class="flex flex-wrap gap-2">
+        <Tag v-for="color in presets" :key="color" :color="color" :variant="variant">{{
+          color
+        }}</Tag>
+      </div>
+    </section>
+    <section v-for="variant in variants" :key="`custom-${variant}`" class="grid gap-2">
+      <h4 class="text-sm font-medium">自定义颜色（{{ variant }}）</h4>
+      <div class="flex flex-wrap gap-2">
+        <Tag v-for="color in customColors" :key="color" :color="color" :variant="variant">{{
+          color
+        }}</Tag>
+      </div>
+    </section>
   </div>
 </template>

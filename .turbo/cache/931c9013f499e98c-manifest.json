@@ -1,1 +1,11 @@
-{"files":{"configs/tsconfig/.turbo/turbo-typecheck.log":{"size":29,"mtime_nanos":1788848285696034700,"mode":420,"is_dir":false}},"order":["configs/tsconfig/.turbo/turbo-typecheck.log"]}
+{
+  "files": {
+    "configs/tsconfig/.turbo/turbo-typecheck.log": {
+      "size": 29,
+      "mtime_nanos": 1788848285696034700,
+      "mode": 420,
+      "is_dir": false
+    }
+  },
+  "order": ["configs/tsconfig/.turbo/turbo-typecheck.log"]
+}

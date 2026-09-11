@@ -44,7 +44,7 @@ export const selectIndicatorClassName =
   'inline-flex size-4 items-center justify-center transition-transform data-[state=open]:rotate-180'
 export const selectClearClassName = 'size-4 px-0 py-0'
 export const selectContentClassName = [
-  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-content-padding:0px]',
+  'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-padding:0px]',
   'min-w-[var(--select-content-min-width,0px)]',
   'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--select-content-max-height,320px))]',
 ].join(' ')

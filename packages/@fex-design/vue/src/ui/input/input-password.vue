@@ -7,10 +7,15 @@ import Input from './input.vue'
 import type { InputProps } from './input.types'
 
 defineOptions({ name: 'InputPassword', inheritAttrs: false })
-const props = withDefaults(defineProps<InputProps & { visibilityToggle?: boolean }>(), { visibilityToggle: true })
+const props = withDefaults(defineProps<InputProps & { visibilityToggle?: boolean }>(), {
+  visibilityToggle: true,
+})
 const visible = ref(false)
 const attrs = useAttrs()
-const inputProps = computed(() => { const { visibilityToggle: _visibilityToggle, ...rest } = props; return { ...attrs, ...rest } })
+const inputProps = computed(() => {
+  const { visibilityToggle: _visibilityToggle, ...rest } = props
+  return { ...attrs, ...rest }
+})
 </script>
 
 <template>
@@ -21,7 +26,15 @@ const inputProps = computed(() => { const { visibilityToggle: _visibilityToggle,
     <template v-if="$slots.clearIcon" #clearIcon><slot name="clearIcon" /></template>
     <template #suffix>
       <slot name="suffix" />
-      <button v-if="visibilityToggle" type="button" data-slot="input-action" :aria-label="visible ? 'Hide password' : 'Show password'" :aria-pressed="visible" :class="inputActionClassName" @click="visible = !visible">
+      <button
+        v-if="visibilityToggle"
+        type="button"
+        data-slot="input-action"
+        :aria-label="visible ? 'Hide password' : 'Show password'"
+        :aria-pressed="visible"
+        :class="inputActionClassName"
+        @click="visible = !visible"
+      >
         <EyeOffIcon v-if="visible" /><EyeIcon v-else />
       </button>
     </template>

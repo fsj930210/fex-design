@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Add, remove and extra"
   description="Application data drives primitive Items and Contents."
   ><div
@@ -26,7 +26,7 @@
                 (pointerdown)="$event.stopPropagation()"
                 (click)="tab.requestClose($event)"
               >
-                <fex-close-icon class="size-4" />
+                <x-icon class="size-4" />
               </button>
             }
           </div>
@@ -43,5 +43,4 @@
     @for (item of items(); track item.value) {
       <div *fexTabsContent="item.value">{{ item.content }}</div>
     }
-  </div></fex-card
->
+  </div></div>

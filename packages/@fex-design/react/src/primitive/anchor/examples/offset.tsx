@@ -32,8 +32,12 @@ export function OffsetExample() {
         </AnchorList>
       </AnchorRoot>
       <div className="grid gap-40 pb-64">
-        <section id="anchor-offset-global"><h3 className="font-semibold">使用全局偏移</h3></section>
-        <section id="anchor-offset-item"><h3 className="font-semibold">覆盖单项偏移</h3></section>
+        <section id="anchor-offset-global">
+          <h3 className="font-semibold">使用全局偏移</h3>
+        </section>
+        <section id="anchor-offset-item">
+          <h3 className="font-semibold">覆盖单项偏移</h3>
+        </section>
       </div>
     </div>
   )

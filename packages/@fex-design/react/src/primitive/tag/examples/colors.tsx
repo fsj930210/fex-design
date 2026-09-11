@@ -12,7 +12,11 @@ export default function Colors() {
         <section key={variant} className="grid gap-2">
           <h4 className="text-sm font-medium">预设颜色（{variant}）</h4>
           <div className="flex flex-wrap gap-2">
-            {presets.map((color) => <Tag key={color} color={color} variant={variant}>{color}</Tag>)}
+            {presets.map((color) => (
+              <Tag key={color} color={color} variant={variant}>
+                {color}
+              </Tag>
+            ))}
           </div>
         </section>
       ))}
@@ -20,7 +24,11 @@ export default function Colors() {
         <section key={`custom-${variant}`} className="grid gap-2">
           <h4 className="text-sm font-medium">自定义颜色（{variant}）</h4>
           <div className="flex flex-wrap gap-2">
-            {customColors.map((color) => <Tag key={color} color={color} variant={variant}>{color}</Tag>)}
+            {customColors.map((color) => (
+              <Tag key={color} color={color} variant={variant}>
+                {color}
+              </Tag>
+            ))}
           </div>
         </section>
       ))}

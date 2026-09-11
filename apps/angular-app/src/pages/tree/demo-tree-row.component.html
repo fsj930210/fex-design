@@ -1,6 +1,6 @@
 <div [fexTreeItem]="item().key" #treeItem="fexTreeItem">
   @if (treeItem.loadState() === 'loading') {
-    <fex-spinner size="sm" aria-label="Loading children" />
+    <span spinner size="sm" aria-label="Loading children" ></span>
   } @else if (!item().isLeaf && tree().hasFeature('expansion')) {
     <button fexTreeTrigger><fex-chevron-down-icon class="size-4" /></button>
   } @else {

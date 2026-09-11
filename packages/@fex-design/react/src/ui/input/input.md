@@ -8,34 +8,34 @@ Ready-to-use `Input`, `InputPassword`, and `InputSearch` built from the Primitiv
 
 ## Examples
 
-| Name | Covers |
-| --- | --- |
-| basic | Empty and clearable Input. |
-| sizes | `sm`, `md`, and `lg`, matching the Primitive scenario. |
-| variants | All four structural variants. |
-| controlled | Controlled and uncontrolled values plus external updates. |
-| affixes | Prefix, Suffix, Addons, icon content, and an inline text action. |
-| group | Input with Button and Input with Input. |
-| password | Visibility toggle, hidden toggle action, clear, and `aria-invalid`. |
-| search | Loading, Enter-only search, Prefix search, and Addon search actions. |
-| states | Disabled, read-only, and invalid Input family states. |
-| focus | Imperative focus, blur, and select. |
-| semantic-styles | Part classes/styles, selector overrides, and base CSS variables. |
+| Name            | Covers                                                               |
+| --------------- | -------------------------------------------------------------------- |
+| basic           | Empty and clearable Input.                                           |
+| sizes           | `sm`, `md`, and `lg`, matching the Primitive scenario.               |
+| variants        | All four structural variants.                                        |
+| controlled      | Controlled and uncontrolled values plus external updates.            |
+| affixes         | Prefix, Suffix, Addons, icon content, and an inline text action.     |
+| group           | Input with Button and Input with Input.                              |
+| password        | Visibility toggle, hidden toggle action, clear, and `aria-invalid`.  |
+| search          | Loading, Enter-only search, Prefix search, and Addon search actions. |
+| states          | Disabled, read-only, and invalid Input family states.                |
+| focus           | Imperative focus, blur, and select.                                  |
+| semantic-styles | Part classes/styles, selector overrides, and base CSS variables.     |
 
 ## Input API
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| value | string | — | Controlled value. |
-| defaultValue | string | `''` | Uncontrolled initial value. |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | 24px, 32px, or 44px height. |
-| variant | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | Visual structure. |
-| clearable | boolean | false | Enables the interaction-only clear action. |
-| prefix / suffix | `ReactNode` props | — | Content inside InputRoot; non-interactive on regular Input. |
-| addonBefore / addonAfter | `ReactNode` props | — | Content outside the Input focus ring. |
-| classNames | part-class map | — | Classes for root, control, prefix, suffix, clear, addons, and action. |
-| styles | part-style map | — | Native style values for the same semantic parts. |
-| native attributes | `ComponentProps<'input'>` | — | Native input attributes and events. |
+| Name                     | Type                                                     | Default      | Description                                                           |
+| ------------------------ | -------------------------------------------------------- | ------------ | --------------------------------------------------------------------- |
+| value                    | string                                                   | —            | Controlled value.                                                     |
+| defaultValue             | string                                                   | `''`         | Uncontrolled initial value.                                           |
+| size                     | `'sm' \| 'md' \| 'lg'`                                   | `'md'`       | 24px, 32px, or 44px height.                                           |
+| variant                  | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | Visual structure.                                                     |
+| clearable                | boolean                                                  | false        | Enables the interaction-only clear action.                            |
+| prefix / suffix          | `ReactNode` props                                        | —            | Content inside InputRoot; non-interactive on regular Input.           |
+| addonBefore / addonAfter | `ReactNode` props                                        | —            | Content outside the Input focus ring.                                 |
+| classNames               | part-class map                                           | —            | Classes for root, control, prefix, suffix, clear, addons, and action. |
+| styles                   | part-style map                                           | —            | Native style values for the same semantic parts.                      |
+| native attributes        | `ComponentProps<'input'>`                                | —            | Native input attributes and events.                                   |
 
 ## InputPassword
 

@@ -12,13 +12,13 @@ import {
 } from '@fex-design/angular/primitive/toast'
 import type { AngularToastItem } from '@fex-design/angular/primitive/toast'
 import { CheckIcon } from '@fex-design/angular/icon/check'
-import { CloseIcon } from '@fex-design/angular/icon/close'
+import { XIcon } from '@fex-design/angular/icon/x'
 import { ErrorIcon } from '@fex-design/angular/icon/error'
 import { InfoIcon } from '@fex-design/angular/icon/info'
 import { LoadingIcon } from '@fex-design/angular/icon/loading'
 import { WarningIcon } from '@fex-design/angular/icon/warning'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import type { ToastPlacement } from '@fex-design/styles/toast'
 
 @Component({
@@ -29,7 +29,7 @@ import type { ToastPlacement } from '@fex-design/styles/toast'
     Button,
     Card,
     CheckIcon,
-    CloseIcon,
+    XIcon,
     ErrorIcon,
     InfoIcon,
     LoadingIcon,

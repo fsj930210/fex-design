@@ -8,4 +8,16 @@ defineOptions({ name: 'SkeletonAvatar', inheritAttrs: false })
 const props = defineProps<SkeletonAvatarOptions>()
 const attrs = useAttrs()
 </script>
-<template><SkeletonBlock v-bind="attrs" data-slot="skeleton-avatar" :animation="props.animation" :class="cn(skeletonAvatarClassName({ shape: props.shape, size: props.size }), attrs.class as string | undefined)" /></template>
+<template>
+  <SkeletonBlock
+    v-bind="attrs"
+    data-slot="skeleton-avatar"
+    :animation="props.animation"
+    :class="
+      cn(
+        skeletonAvatarClassName({ shape: props.shape, size: props.size }),
+        attrs.class as string | undefined,
+      )
+    "
+  />
+</template>

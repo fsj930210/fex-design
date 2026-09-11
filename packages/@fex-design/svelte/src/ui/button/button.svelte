@@ -2,32 +2,36 @@
   import {
     buttonClassName,
     buttonSpinnerClassName,
-  } from '@fex-design/styles/button'
-  import { cn } from '@fex/utils'
-  import LoadingIcon from '../../icon/loading.svelte'
-  import { Button as PrimitiveButton, ButtonIcon } from '@fex-design/svelte/primitive/button'
-  import type { ButtonProps } from './button.types'
+  } from "@fex-design/styles/button";
+  import { cn } from "@fex/utils";
+  import LoadingIcon from "../../icon/loading.svelte";
+  import {
+    Button as PrimitiveButton,
+    ButtonIcon,
+  } from "@fex-design/svelte/primitive/button";
+  import type { ButtonProps } from "./button.types";
 
   let {
-    variant = 'outlined',
+    variant = "outlined",
     color,
-    size = 'md',
+    size = "md",
     effect,
-    iconPlacement = 'start',
+    iconPlacement = "start",
     loading = false,
     disabled = false,
-    type = 'button',
+    type = "button",
     ref = $bindable(null),
     class: className,
     children,
     icon,
     loadingIndicator,
     ...rest
-  }: ButtonProps = $props()
+  }: ButtonProps = $props();
 
-  const classList = $derived(cn(buttonClassName({ variant, color, size, effect }), className))
-  const isDisabled = $derived(disabled || loading)
-
+  const classList = $derived(
+    cn(buttonClassName({ variant, color, size, effect }), className),
+  );
+  const isDisabled = $derived(disabled || loading);
 </script>
 
 <PrimitiveButton
@@ -40,12 +44,12 @@
   {color}
   data-size={size}
   data-effect={effect}
-  data-loading={loading ? 'true' : undefined}
+  data-loading={loading ? "true" : undefined}
   disabled={isDisabled}
-  type={type}
+  {type}
   bind:ref
 >
-  {#if iconPlacement === 'start' && (loading || icon)}
+  {#if iconPlacement === "start" && (loading || icon)}
     <ButtonIcon data-icon="inline-start">
       {#if loading}
         {#if loadingIndicator}
@@ -59,7 +63,7 @@
     </ButtonIcon>
   {/if}
   {@render children?.()}
-  {#if iconPlacement === 'end' && (loading || icon)}
+  {#if iconPlacement === "end" && (loading || icon)}
     <ButtonIcon data-icon="inline-end">
       {#if loading}
         {#if loadingIndicator}

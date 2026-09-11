@@ -10,7 +10,7 @@
       </div>
     </header>
     <div class="space-y-4">
-      <fex-card
+      <div card
         title="Horizontal"
         description="Pointer and keyboard resizing with min and max constraints."
         ><div
@@ -34,9 +34,8 @@
               Use arrow keys while the handle is focused.
             </p>
           </div>
-        </div></fex-card
-      >
-      <fex-card title="Vertical" description="Use a vertical group for stacked panels."
+        </div></div>
+      <div card title="Vertical" description="Use a vertical group for stacked panels."
         ><div
           class="grid h-80 overflow-hidden rounded-md border border-border bg-background"
           [ngStyle]="gridStyle('vertical', verticalLayout())"
@@ -55,9 +54,8 @@
           <div data-resizable-panel="main" class="p-2">
             <h2 class="text-sm font-medium">Content</h2>
           </div>
-        </div></fex-card
-      >
-      <fex-card
+        </div></div>
+      <div card
         title="Nested"
         description="Horizontal and vertical groups can be composed in one frame."
         ><div
@@ -87,9 +85,8 @@
             ></button>
             <div data-resizable-panel="nested-console" class="p-2">Console</div>
           </div>
-        </div></fex-card
-      >
-      <fex-card title="Disabled Handle" description="A disabled handle keeps the layout fixed."
+        </div></div>
+      <div card title="Disabled Handle" description="A disabled handle keeps the layout fixed."
         ><div
           class="grid h-48 grid-cols-[35%_12px_1fr] overflow-hidden rounded-md border border-border bg-background"
         >
@@ -101,8 +98,7 @@
             class="relative cursor-not-allowed opacity-50 after:block after:h-full after:w-px after:bg-border"
           ></button>
           <div class="p-2">Fixed layout</div>
-        </div></fex-card
-      >
+        </div></div>
     </div>
   </div>
 </main>

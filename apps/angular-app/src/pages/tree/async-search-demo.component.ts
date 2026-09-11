@@ -3,7 +3,7 @@ import { expansionFeature, selectionFeature } from '@fex-design/core'
 import type { TreeOptions } from '@fex-design/core/tree/types'
 import { InputClear, InputControl, InputRoot } from '@fex-design/angular/primitive/input'
 import { ListboxItem, ListboxRoot } from '@fex-design/angular/primitive/listbox'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import {
   getDemoTreeSubtree,
   searchDemoTree,

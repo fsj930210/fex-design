@@ -8,44 +8,44 @@ Styled, composable Input primitives. `InputRoot` owns the shared value and state
 
 ## Components
 
-| Component | Element | Purpose |
-| --- | --- | --- |
-| InputRoot | div | Styled input boundary and controlled/uncontrolled value owner. |
-| InputControl | input | Native text input and focus target. |
-| InputPrefix | span | Non-interactive content inside the start of InputRoot. |
-| InputSuffix | span | Non-interactive content inside the end of InputRoot. |
-| InputAddonBefore | span | Start addon outside the InputRoot focus ring. |
-| InputAddonAfter | span | End addon outside the InputRoot focus ring. |
-| InputClear | button | Clear action connected to the nearest InputRoot. |
-| InputGroup | div | Connects arbitrary direct children without assuming their component type. |
+| Component        | Element | Purpose                                                                   |
+| ---------------- | ------- | ------------------------------------------------------------------------- |
+| InputRoot        | div     | Styled input boundary and controlled/uncontrolled value owner.            |
+| InputControl     | input   | Native text input and focus target.                                       |
+| InputPrefix      | span    | Non-interactive content inside the start of InputRoot.                    |
+| InputSuffix      | span    | Non-interactive content inside the end of InputRoot.                      |
+| InputAddonBefore | span    | Start addon outside the InputRoot focus ring.                             |
+| InputAddonAfter  | span    | End addon outside the InputRoot focus ring.                               |
+| InputClear       | button  | Clear action connected to the nearest InputRoot.                          |
+| InputGroup       | div     | Connects arbitrary direct children without assuming their component type. |
 
 ## Examples
 
-| Name | Covers |
-| --- | --- |
-| basic | Empty and clearable inputs. |
-| sizes | `sm`, `md`, and `lg` (24px, 32px, and 44px). |
-| variants | `outlined`, `filled`, `borderless`, and `underlined`. |
-| controlled | Controlled and uncontrolled InputRoot state. |
-| affixes | Prefix, Suffix, AddonBefore, and AddonAfter composition. |
-| group | Input with Button and Input with Input. |
-| password | Password visibility composed from Control, Suffix, and a native button. |
-| search | Enter, Prefix, and Addon search actions composed from Primitive parts. |
-| states | Disabled, read-only, and native `aria-invalid`. |
-| focus | Native focus, blur, and select through InputControl. |
+| Name       | Covers                                                                  |
+| ---------- | ----------------------------------------------------------------------- |
+| basic      | Empty and clearable inputs.                                             |
+| sizes      | `sm`, `md`, and `lg` (24px, 32px, and 44px).                            |
+| variants   | `outlined`, `filled`, `borderless`, and `underlined`.                   |
+| controlled | Controlled and uncontrolled InputRoot state.                            |
+| affixes    | Prefix, Suffix, AddonBefore, and AddonAfter composition.                |
+| group      | Input with Button and Input with Input.                                 |
+| password   | Password visibility composed from Control, Suffix, and a native button. |
+| search     | Enter, Prefix, and Addon search actions composed from Primitive parts.  |
+| states     | Disabled, read-only, and native `aria-invalid`.                         |
+| focus      | Native focus, blur, and select through InputControl.                    |
 
 ## InputRoot API
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| value | string | — | Controlled value. |
-| defaultValue | string | `''` | Uncontrolled initial value. |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | Control height. |
-| variant | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | Visual structure. |
-| disabled | boolean | false | Disables the input context. |
-| readOnly | boolean | false | Makes the input context read-only. |
-| value change | framework event | — | Reports input and clear value changes. |
-| clear | framework event | — | Fires after a successful clear. |
+| Name         | Type                                                     | Default      | Description                            |
+| ------------ | -------------------------------------------------------- | ------------ | -------------------------------------- |
+| value        | string                                                   | —            | Controlled value.                      |
+| defaultValue | string                                                   | `''`         | Uncontrolled initial value.            |
+| size         | `'sm' \| 'md' \| 'lg'`                                   | `'md'`       | Control height.                        |
+| variant      | `'outlined' \| 'filled' \| 'borderless' \| 'underlined'` | `'outlined'` | Visual structure.                      |
+| disabled     | boolean                                                  | false        | Disables the input context.            |
+| readOnly     | boolean                                                  | false        | Makes the input context read-only.     |
+| value change | framework event                                          | —            | Reports input and clear value changes. |
+| clear        | framework event                                          | —            | Fires after a successful clear.        |
 
 ## InputControl API
 

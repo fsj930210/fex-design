@@ -6,7 +6,7 @@ import {
   BubbleReactionCount,
   BubbleReactions,
 } from '@fex-design/angular/primitive/bubble'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-bubble-standalone-demo',

@@ -13,12 +13,41 @@
   },
   "props": [
     { "name": "loading", "type": "boolean", "description": "为 false 时显示子内容。" },
-    { "name": "animation", "type": "'none' | 'pulse' | 'wave'", "default": "'none'", "description": "传递给内部占位组件。" },
-    { "name": "avatar", "type": "boolean | SkeletonAvatarOptions", "default": "false", "description": "头像快捷配置。" },
-    { "name": "title", "type": "boolean | { width?: number | string }", "default": "true", "description": "标题占位配置。" },
-    { "name": "paragraph", "type": "boolean | { rows?: number; width?: SkeletonWidth | SkeletonWidth[] }", "default": "true", "description": "段落行数和宽度。" },
-    { "name": "round", "type": "boolean", "default": "false", "description": "标题和段落使用全圆角。" },
-    { "name": "classNames", "type": "Partial<Record<'root' | 'avatar' | 'title' | 'paragraph', string>>", "description": "结构化类名。" },
+    {
+      "name": "animation",
+      "type": "'none' | 'pulse' | 'wave'",
+      "default": "'none'",
+      "description": "传递给内部占位组件。"
+    },
+    {
+      "name": "avatar",
+      "type": "boolean | SkeletonAvatarOptions",
+      "default": "false",
+      "description": "头像快捷配置。"
+    },
+    {
+      "name": "title",
+      "type": "boolean | { width?: number | string }",
+      "default": "true",
+      "description": "标题占位配置。"
+    },
+    {
+      "name": "paragraph",
+      "type": "boolean | { rows?: number; width?: SkeletonWidth | SkeletonWidth[] }",
+      "default": "true",
+      "description": "段落行数和宽度。"
+    },
+    {
+      "name": "round",
+      "type": "boolean",
+      "default": "false",
+      "description": "标题和段落使用全圆角。"
+    },
+    {
+      "name": "classNames",
+      "type": "Partial<Record<'root' | 'avatar' | 'title' | 'paragraph', string>>",
+      "description": "结构化类名。"
+    },
     { "name": "styles", "type": "SkeletonStyles", "description": "结构化行内样式。" }
   ],
   "events": [],
@@ -31,7 +60,13 @@
     "vue": { "slotLabel": "Slots" },
     "solid": { "slotLabel": "Content" },
     "svelte": { "slotLabel": "Snippets" },
-    "angular": { "slotLabel": "Content projection / template", "slots": [{ "name": "ng-content", "description": "真实内容。" }, { "name": "ng-template[skeletonPlaceholder]", "description": "自定义骨架模板。" }] }
+    "angular": {
+      "slotLabel": "Content projection / template",
+      "slots": [
+        { "name": "ng-content", "description": "真实内容。" },
+        { "name": "ng-template[skeletonPlaceholder]", "description": "自定义骨架模板。" }
+      ]
+    }
   },
   "cssVariables": [],
   "demos": [

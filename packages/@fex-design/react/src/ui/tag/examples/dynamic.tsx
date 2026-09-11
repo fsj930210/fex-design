@@ -20,12 +20,30 @@ export default function Dynamic() {
     <div className="grid gap-3">
       <div className="flex flex-wrap gap-2">
         {tags.map((tag) => (
-          <Tag key={tag.id} color="primary" closable onClose={() => setTags((items) => items.filter((item) => item.id !== tag.id))}>{tag.label}</Tag>
+          <Tag
+            key={tag.id}
+            color="primary"
+            closable
+            onClose={() => setTags((items) => items.filter((item) => item.id !== tag.id))}
+          >
+            {tag.label}
+          </Tag>
         ))}
       </div>
       <div className="flex gap-2">
-        <input className="h-8 rounded-md border px-2 text-sm" value={name} placeholder="输入标签名称" onChange={(event) => setName(event.target.value)} />
-        <button type="button" className="h-8 rounded-md bg-primary px-3 text-sm text-primary-foreground" onClick={addTag}>添加标签</button>
+        <input
+          className="h-8 rounded-md border px-2 text-sm"
+          value={name}
+          placeholder="输入标签名称"
+          onChange={(event) => setName(event.target.value)}
+        />
+        <button
+          type="button"
+          className="h-8 rounded-md bg-primary px-3 text-sm text-primary-foreground"
+          onClick={addTag}
+        >
+          添加标签
+        </button>
       </div>
     </div>
   )

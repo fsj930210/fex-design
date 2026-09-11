@@ -8,39 +8,39 @@ Recommended Tag composition. UI builds on Primitive Tag, creates TagAction when 
 
 ## Components
 
-| Component | Element | Purpose |
-| --------- | ------- | ------- |
-| Tag | span | Recommended composed Tag with optional close control and structured styling. |
-| TagCloseIcon | projected node | Marks custom x-icon content with `[tagCloseIcon]`. |
+| Component    | Element        | Purpose                                                                      |
+| ------------ | -------------- | ---------------------------------------------------------------------------- |
+| Tag          | span           | Recommended composed Tag with optional close control and structured styling. |
+| TagCloseIcon | projected node | Marks custom x-icon content with `[tagCloseIcon]`.                           |
 
 ## Examples
 
 Examples are stored in `examples/<name>` as the source for the documentation preview.
 
-| Name          | Covers                                                        |
-| ------------- | ------------------------------------------------------------- |
-| basic         | Regular tags, three sizes, closable composition, and disabled. |
-| variants      | Filled, solid, and outlined visual variants.                  |
-| colors        | Five semantic colors and custom CSS colors.                   |
-| dynamic       | Adding and removing tags with application-owned state.        |
-| css-variables | Instance-level semantic color overrides.                      |
-| direction     | Native LTR and RTL direction with logical close placement.    |
-| semantic-styles | UI-only root and close structured styling.              |
+| Name            | Covers                                                         |
+| --------------- | -------------------------------------------------------------- |
+| basic           | Regular tags, three sizes, closable composition, and disabled. |
+| variants        | Filled, solid, and outlined visual variants.                   |
+| colors          | Five semantic colors and custom CSS colors.                    |
+| dynamic         | Adding and removing tags with application-owned state.         |
+| css-variables   | Instance-level semantic color overrides.                       |
+| direction       | Native LTR and RTL direction with logical close placement.     |
+| semantic-styles | UI-only root and close structured styling.                     |
 
 ## Tag API
 
-| Name | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| variant | 'filled' \| 'solid' \| 'outlined' | 'filled' | Visual treatment. |
-| color | TagColor | — | Semantic name or any valid CSS color. |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | Tag size. |
-| disabled | boolean | false | Disables the generated close button and applies disabled styling. |
-| closable | boolean | false | Renders the close control. |
-| content | default content projection; `[tagCloseIcon]` projection | — | Tag content and optional close icon override. |
-| close event | `close` output with `MouseEvent` | — | Reports activation of the generated close button. |
-| classNames | TagClassNames | — | Classes for `root` and `close`. |
-| styles | TagStyles | — | Framework-native styles for `root` and `close`. |
-| native attributes | native span bindings | — | Native span attributes and events. |
+| Name              | Type                                                    | Default  | Description                                                       |
+| ----------------- | ------------------------------------------------------- | -------- | ----------------------------------------------------------------- |
+| variant           | 'filled' \| 'solid' \| 'outlined'                       | 'filled' | Visual treatment.                                                 |
+| color             | TagColor                                                | —        | Semantic name or any valid CSS color.                             |
+| size              | 'sm' \| 'md' \| 'lg'                                    | 'md'     | Tag size.                                                         |
+| disabled          | boolean                                                 | false    | Disables the generated close button and applies disabled styling. |
+| closable          | boolean                                                 | false    | Renders the close control.                                        |
+| content           | default content projection; `[tagCloseIcon]` projection | —        | Tag content and optional close icon override.                     |
+| close event       | `close` output with `MouseEvent`                        | —        | Reports activation of the generated close button.                 |
+| classNames        | TagClassNames                                           | —        | Classes for `root` and `close`.                                   |
+| styles            | TagStyles                                               | —        | Framework-native styles for `root` and `close`.                   |
+| native attributes | native span bindings                                    | —        | Native span attributes and events.                                |
 
 ## Close behavior
 

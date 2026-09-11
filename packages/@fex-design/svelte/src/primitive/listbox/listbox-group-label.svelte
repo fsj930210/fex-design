@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
 
   interface ListboxGroupLabelProps extends HTMLAttributes<HTMLDivElement> {
-    children?: Snippet
+    children?: Snippet;
   }
 
-  let { children, ...rest }: ListboxGroupLabelProps = $props()
+  let { children, ...rest }: ListboxGroupLabelProps = $props();
 </script>
 
 <div {...rest} data-slot="listbox-group-label">

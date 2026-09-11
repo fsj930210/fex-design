@@ -12,7 +12,7 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card
+      <div card
         title="Primitive"
         description="Self-owned checkbox primitive exported as low-level parts."
       >
@@ -21,9 +21,9 @@
           [defaultChecked]="true"
           aria-label="Primitive checkbox"
         ></button>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Basic"
         description="Default UI wrapper with native data and aria attributes."
       >
@@ -36,9 +36,9 @@
             ><span>Invalid style from aria-invalid</span>
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Controlled" description="Controlled state uses checked and checkedChange.">
+      <div card title="Controlled" description="Controlled state uses checked and checkedChange.">
         <div class="grid min-w-0 gap-2">
           <div class="inline-flex items-center gap-2 text-sm">
             <button
@@ -50,9 +50,9 @@
           </div>
           <p class="text-sm text-muted-foreground">Current value: {{ controlled() }}</p>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Indeterminate" description="Compose check-all behavior from normal events.">
+      <div card title="Indeterminate" description="Compose check-all behavior from normal events.">
         <div class="grid min-w-0 gap-2">
           <div class="inline-flex items-center gap-2 text-sm">
             <button
@@ -75,9 +75,9 @@
             }
           </div>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Group"
         description="CheckboxGroup is a layout wrapper; value arrays stay in the caller."
       >
@@ -98,9 +98,9 @@
             Selected: {{ permissions().join(', ') || 'none' }}
           </p>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Disabled" description="Disabled state comes from the Root disabled prop.">
+      <div card title="Disabled" description="Disabled state comes from the Root disabled prop.">
         <div fexCheckboxGroup>
           <div class="inline-flex items-center gap-2 text-sm">
             <button fexCheckbox disabled></button><span>Disabled unchecked</span>
@@ -110,7 +110,7 @@
             ><span>Disabled checked</span>
           </div>
         </div>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

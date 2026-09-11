@@ -11,7 +11,7 @@
       </div>
     </header>
 
-    <fex-card
+    <div card
       title="Local Scope"
       description="A local provider applies theme variables to its own wrapper."
     >
@@ -23,9 +23,9 @@
       >
         <fex-theme-status-card [provider]="localProvider" title="Interactive local theme" />
       </fex-theme-provider>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Multiple Themes"
       description="Independent local scopes can render light and dark together."
     >
@@ -47,9 +47,9 @@
           <fex-theme-status-card [provider]="darkProvider" title="Forced dark scope" />
         </fex-theme-provider>
       </div>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Inherited Scope"
       description="Three nested providers: parent can switch, inherited child follows it, inner local scope stays independent."
     >
@@ -99,9 +99,9 @@
           </fex-theme-provider>
         </div>
       </fex-theme-provider>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Custom Local Theme"
       description="A local provider can resolve a non-global theme name and expose it through data-theme."
     >
@@ -132,9 +132,9 @@
           [title]="'Local ' + customTheme() + ' theme'"
         />
       </fex-theme-provider>
-    </fex-card>
+    </div>
 
-    <fex-card
+    <div card
       title="Forced Theme Priority"
       description="When forcedTheme is set, setTheme is ignored and the resolved theme remains locked."
     >
@@ -147,6 +147,6 @@
       >
         <fex-theme-status-card [provider]="lockedProvider" title="Locked dark theme" />
       </fex-theme-provider>
-    </fex-card>
+    </div>
   </div>
 </main>

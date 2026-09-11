@@ -1,2 +1,20 @@
-import { ChangeDetectionStrategy, Component, ElementRef, viewChild } from '@angular/core'; import { AnchorIndicator,AnchorItem,AnchorLink,AnchorList,AnchorRail,AnchorRoot } from '../anchor'
-@Component({selector:'anchor-offset-example',standalone:true,imports:[AnchorRoot,AnchorRail,AnchorIndicator,AnchorList,AnchorItem,AnchorLink],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./offset.html'}) export class AnchorOffsetExample{private readonly containerRef=viewChild.required<ElementRef<HTMLElement>>('container');protected readonly container=()=>this.containerRef().nativeElement}
+import { ChangeDetectionStrategy, Component, ElementRef, viewChild } from '@angular/core'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '../anchor'
+@Component({
+  selector: 'anchor-offset-example',
+  standalone: true,
+  imports: [AnchorRoot, AnchorRail, AnchorIndicator, AnchorList, AnchorItem, AnchorLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './offset.html',
+})
+export class AnchorOffsetExample {
+  private readonly containerRef = viewChild.required<ElementRef<HTMLElement>>('container')
+  protected readonly container = () => this.containerRef().nativeElement
+}

@@ -1,11 +1,6 @@
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { LoadingIcon } from '../../icon/loading'
-import {
-  InputClear,
-  InputControl,
-  InputRoot,
-  InputSuffix,
-} from '../input/input'
+import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
 import { useAutoComplete } from './use-auto-complete'
 

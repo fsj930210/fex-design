@@ -5,7 +5,7 @@ export function DirectionExample() {
     <div className="grid w-full gap-6 sm:grid-cols-2">
       {(['ltr', 'rtl'] as const).map((direction) => (
         <section key={direction} dir={direction} className="grid gap-3 rounded-lg border p-4">
-<strong>{direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}</strong>
+          <strong>{direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}</strong>
           <div className="flex flex-wrap gap-2">
             <Tag color="info">{direction === 'ltr' ? '状态标签' : 'علامة الحالة'}</Tag>
             <Tag color="primary" closable>

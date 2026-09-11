@@ -31,7 +31,14 @@ const props = defineProps<EmptyProps>()
     :style="[$attrs.style, props.styles?.root]"
   >
     <EmptyHeader
-      v-if="props.image !== null || props.title || props.description || $slots.image || $slots.title || $slots.description"
+      v-if="
+        props.image !== null ||
+        props.title ||
+        props.description ||
+        $slots.image ||
+        $slots.title ||
+        $slots.description
+      "
       :class="props.classNames?.header"
       :style="props.styles?.header"
     >
@@ -60,7 +67,11 @@ const props = defineProps<EmptyProps>()
         <slot name="description">{{ props.description }}</slot>
       </EmptyDescription>
     </EmptyHeader>
-    <EmptyContent v-if="$slots.default" :class="props.classNames?.content" :style="props.styles?.content">
+    <EmptyContent
+      v-if="$slots.default"
+      :class="props.classNames?.content"
+      :style="props.styles?.content"
+    >
       <slot />
     </EmptyContent>
   </PrimitiveEmpty>

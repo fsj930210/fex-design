@@ -9,14 +9,7 @@ export interface AlertOptions {
   variant?: AlertVariant
 }
 
-export type AlertPart =
-  | 'root'
-  | 'icon'
-  | 'content'
-  | 'title'
-  | 'description'
-  | 'action'
-  | 'close'
+export type AlertPart = 'root' | 'icon' | 'content' | 'title' | 'description' | 'action' | 'close'
 
 export type AlertClassNames = Partial<Record<AlertPart, string>>
 export type AlertStyles<TStyle> = Partial<Record<AlertPart, TStyle>>

@@ -4,7 +4,7 @@
       <h1 class="text-2xl font-semibold">Drawer</h1>
       <p class="mt-2 text-sm text-muted-foreground">Composable drawer primitives.</p>
     </header>
-    <fex-card title="Basic and mask"
+    <div card title="Basic and mask"
       ><fex-drawer
         ><button button fexDrawerTrigger>Open drawer</button
         ><fex-drawer-portal
@@ -15,9 +15,8 @@
             ></fex-drawer-content
           ></fex-drawer-portal
         ></fex-drawer
-      ></fex-card
-    >
-    <fex-card title="Placement"
+      ></div>
+    <div card title="Placement"
       ><div class="space-y-3">
         <div
           fexRadioGroup
@@ -43,11 +42,10 @@
             ></fex-drawer-portal
           ></fex-drawer
         >
-      </div></fex-card
-    >
-    <fex-card title="Presets"><fex-drawer-preset-demo /></fex-card>
-    <fex-card title="Header and footer"><fex-drawer-header-footer-demo /></fex-card>
-    <fex-card title="Resizable size"
+      </div></div>
+    <div card title="Presets"><fex-drawer-preset-demo /></div>
+    <div card title="Header and footer"><fex-drawer-header-footer-demo /></div>
+    <div card title="Resizable size"
       ><div class="space-y-3">
         <div
           fexRadioGroup
@@ -93,9 +91,8 @@
             ></fex-drawer-portal
           ></fex-drawer
         >
-      </div></fex-card
-    >
-    <fex-card title="Nested"
+      </div></div>
+    <div card title="Nested"
       ><fex-drawer
         ><button button fexDrawerTrigger>Open parent</button
         ><fex-drawer-portal
@@ -103,7 +100,7 @@
             ><fex-drawer-header>Parent<button fexDrawerClose></button></fex-drawer-header
             ><fex-drawer-body
               ><fex-drawer size="sm"
-                ><button button variant="outline" fexDrawerTrigger>Open nested</button
+                ><button button variant="outlined" fexDrawerTrigger>Open nested</button
                 ><fex-drawer-portal
                   ><fex-drawer-mask /><fex-drawer-content size="sm" aria-label="Nested drawer"
                     ><fex-drawer-header>Nested<button fexDrawerClose></button></fex-drawer-header
@@ -116,7 +113,6 @@
             ></fex-drawer-content
           ></fex-drawer-portal
         ></fex-drawer
-      ></fex-card
-    >
+      ></div>
   </div>
 </main>

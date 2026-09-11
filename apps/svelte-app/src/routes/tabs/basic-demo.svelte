@@ -1,2 +1,23 @@
-<script lang="ts">import TabsRoot from '@fex-design/svelte/primitive/tabs-root'; import TabsList from '@fex-design/svelte/primitive/tabs-list'; import TabsItem from '@fex-design/svelte/primitive/tabs-item'; import TabsContent from '@fex-design/svelte/primitive/tabs-content'; import Card from '@fex-design/svelte/ui/card'</script>
-<Card title="Primitive" description="Without value or defaultValue, the first enabled Item is selected."><TabsRoot><TabsList><TabsItem value="overview">Overview</TabsItem><TabsItem value="analytics">Analytics</TabsItem><TabsItem value="disabled" disabled>Disabled</TabsItem></TabsList><TabsContent value="overview">Overview content is mounted initially.</TabsContent><TabsContent value="analytics">Analytics mounts on first visit and remains mounted.</TabsContent><TabsContent value="disabled">Disabled content.</TabsContent></TabsRoot></Card>
+<script lang="ts">
+  import TabsRoot from "@fex-design/svelte/primitive/tabs-root";
+  import TabsList from "@fex-design/svelte/primitive/tabs-list";
+  import TabsItem from "@fex-design/svelte/primitive/tabs-item";
+  import TabsContent from "@fex-design/svelte/primitive/tabs-content";
+  import Card from "@fex-design/svelte/ui/card";
+</script>
+
+<Card
+  title="Primitive"
+  description="Without value or defaultValue, the first enabled Item is selected."
+  ><TabsRoot
+    ><TabsList
+      ><TabsItem value="overview">Overview</TabsItem><TabsItem value="analytics"
+        >Analytics</TabsItem
+      ><TabsItem value="disabled" disabled>Disabled</TabsItem></TabsList
+    ><TabsContent value="overview"
+      >Overview content is mounted initially.</TabsContent
+    ><TabsContent value="analytics"
+      >Analytics mounts on first visit and remains mounted.</TabsContent
+    ><TabsContent value="disabled">Disabled content.</TabsContent></TabsRoot
+  ></Card
+>

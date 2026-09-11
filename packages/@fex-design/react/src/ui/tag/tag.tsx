@@ -10,9 +10,7 @@ import {
 export type { TagActionProps } from '../../primitive/tag/tag'
 export { TagAction } from '../../primitive/tag/tag'
 
-export interface TagProps
-  extends PrimitiveTagProps,
-    TagUiOptions<ReactNode, CSSProperties> {
+export interface TagProps extends PrimitiveTagProps, TagUiOptions<ReactNode, CSSProperties> {
   onClose?: MouseEventHandler<HTMLButtonElement>
 }
 

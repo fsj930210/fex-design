@@ -1,0 +1,26 @@
+<ng-content select="[popoverTrigger]" />
+<ng-template popoverPortal>
+  <div popoverContent [class]="className() + ' ' + (classNames().root ?? '')" [style]="styles().root">
+    @if (snapshot().arrow) {
+      <div popoverArrow [class]="classNames().arrow ?? ''" [style]="styles().arrow"></div>
+    }
+    @if (title() != null) {
+      <div popoverHeader>
+        <div popoverTitle [class]="classNames().title ?? ''" [style]="styles().title">
+          @if (titleTemplate(); as template) {
+            <ng-container [ngTemplateOutlet]="template" />
+          } @else {
+            {{ title() }}
+          }
+        </div>
+      </div>
+    }
+    <div data-slot="popover-body" [class]="classNames().content ?? ''" [style]="styles().content">
+      @if (contentTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="contentContext()" />
+      } @else {
+        {{ content() }}
+      }
+    </div>
+  </div>
+</ng-template>

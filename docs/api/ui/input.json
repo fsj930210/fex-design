@@ -1,12 +1,145 @@
 {
-  "name":"Input","slug":"input","layer":"ui","status":"stable","description":"快速使用的 Input、InputPassword 与 InputSearch。",
-  "importPath":{"react":"@fex-design/react/ui/input","vue":"@fex-design/vue/ui/input","solid":"@fex-design/solid/ui/input","svelte":"@fex-design/svelte/ui/input","angular":"@fex-design/angular/ui/input"},
-  "components":[{"name":"Input","layer":"ui","description":"带结构区域和可清除能力的单行输入。","props":[]},{"name":"InputPassword","layer":"ui","description":"内置密码可见性切换。","props":[]},{"name":"InputSearch","layer":"ui","description":"内置 Enter 和各搜索位置的触发行为。","props":[]},{"name":"InputGroup","layer":"ui","description":"连接任意直接子元素，并统一处理相邻边框和首尾圆角。","props":[]}],
-  "props":[
-    {"name":"size","type":"'sm' | 'md' | 'lg'","default":"md","description":"输入尺寸。"},{"name":"variant","type":"'outlined' | 'filled' | 'borderless' | 'underlined'","default":"outlined","description":"输入形态。"},{"name":"clearable","type":"boolean","default":false,"description":"有值且处于交互状态时显示清除按钮。"},{"name":"prefix","type":"FrameworkNode","description":"输入框内起始内容；InputSearch 中会触发搜索。"},{"name":"suffix","type":"FrameworkNode","description":"输入框内结束内容；InputSearch 中会触发搜索。"},{"name":"addonBefore","type":"FrameworkNode","description":"起始附加内容；InputSearch 中渲染为完整按钮。"},{"name":"addonAfter","type":"FrameworkNode | null","description":"结束附加内容；InputSearch 默认搜索按钮，null 时移除。"},{"name":"loading","type":"boolean","default":false,"description":"InputSearch 加载状态并阻止重复搜索。"},{"name":"visibilityToggle","type":"boolean","default":true,"description":"InputPassword 是否显示可见性切换。"},{"name":"classNames","type":"Partial<Record<InputPart, string>>","description":"各语义区域 class。"},{"name":"styles","type":"Partial<Record<InputPart, FrameworkStyle>>","description":"各语义区域原生 style。"}
+  "name": "Input",
+  "slug": "input",
+  "layer": "ui",
+  "status": "stable",
+  "description": "快速使用的 Input、InputPassword 与 InputSearch。",
+  "importPath": {
+    "react": "@fex-design/react/ui/input",
+    "vue": "@fex-design/vue/ui/input",
+    "solid": "@fex-design/solid/ui/input",
+    "svelte": "@fex-design/svelte/ui/input",
+    "angular": "@fex-design/angular/ui/input"
+  },
+  "components": [
+    {
+      "name": "Input",
+      "layer": "ui",
+      "description": "带结构区域和可清除能力的单行输入。",
+      "props": []
+    },
+    { "name": "InputPassword", "layer": "ui", "description": "内置密码可见性切换。", "props": [] },
+    {
+      "name": "InputSearch",
+      "layer": "ui",
+      "description": "内置 Enter 和各搜索位置的触发行为。",
+      "props": []
+    },
+    {
+      "name": "InputGroup",
+      "layer": "ui",
+      "description": "连接任意直接子元素，并统一处理相邻边框和首尾圆角。",
+      "props": []
+    }
   ],
-  "events":[{"name":"valueChange","description":"输入值变化。"},{"name":"clear","description":"清除完成。"},{"name":"search","description":"返回当前值和 source。"}],
-  "frameworks":{"react":{"typeOverrides":{"FrameworkNode":"ReactNode","FrameworkStyle":"CSSProperties"}},"vue":{"typeOverrides":{"FrameworkNode":"VNodeChild","FrameworkStyle":"CSSProperties"}},"solid":{"typeOverrides":{"FrameworkNode":"JSX.Element","FrameworkStyle":"JSX.CSSProperties"}},"svelte":{"typeOverrides":{"FrameworkNode":"Snippet","FrameworkStyle":"string"}},"angular":{"typeOverrides":{"FrameworkNode":"string | TemplateRef<unknown>","FrameworkStyle":"string"}}},
-  "cssVariables":[{"name":"--input-height","description":"当前实例高度。"},{"name":"--input-icon-size","description":"普通图标尺寸。"},{"name":"--input-clear-icon-size","description":"清除图标尺寸，随 sm、md、lg 分别为 12px、14px、16px。"},{"name":"--input-group-radius","description":"InputGroup 外侧圆角；可在直接子元素上局部覆盖。"},{"name":"--input-background","description":"基础背景。"},{"name":"--input-border-color","description":"基础边框。"},{"name":"--input-color","description":"输入文字颜色。"},{"name":"--input-placeholder-color","description":"占位文字颜色。"},{"name":"--input-ring-color","description":"聚焦环颜色。"}],
-  "demos":[{"id":"basic"},{"id":"sizes"},{"id":"variants"},{"id":"controlled"},{"id":"affixes"},{"id":"group"},{"id":"password"},{"id":"search"},{"id":"states"},{"id":"focus"},{"id":"semantic-styles"}]
+  "props": [
+    { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "md", "description": "输入尺寸。" },
+    {
+      "name": "variant",
+      "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+      "default": "outlined",
+      "description": "输入形态。"
+    },
+    {
+      "name": "clearable",
+      "type": "boolean",
+      "default": false,
+      "description": "有值且处于交互状态时显示清除按钮。"
+    },
+    {
+      "name": "prefix",
+      "type": "FrameworkNode",
+      "description": "输入框内起始内容；InputSearch 中会触发搜索。"
+    },
+    {
+      "name": "suffix",
+      "type": "FrameworkNode",
+      "description": "输入框内结束内容；InputSearch 中会触发搜索。"
+    },
+    {
+      "name": "addonBefore",
+      "type": "FrameworkNode",
+      "description": "起始附加内容；InputSearch 中渲染为完整按钮。"
+    },
+    {
+      "name": "addonAfter",
+      "type": "FrameworkNode | null",
+      "description": "结束附加内容；InputSearch 默认搜索按钮，null 时移除。"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": false,
+      "description": "InputSearch 加载状态并阻止重复搜索。"
+    },
+    {
+      "name": "visibilityToggle",
+      "type": "boolean",
+      "default": true,
+      "description": "InputPassword 是否显示可见性切换。"
+    },
+    {
+      "name": "classNames",
+      "type": "Partial<Record<InputPart, string>>",
+      "description": "各语义区域 class。"
+    },
+    {
+      "name": "styles",
+      "type": "Partial<Record<InputPart, FrameworkStyle>>",
+      "description": "各语义区域原生 style。"
+    }
+  ],
+  "events": [
+    { "name": "valueChange", "description": "输入值变化。" },
+    { "name": "clear", "description": "清除完成。" },
+    { "name": "search", "description": "返回当前值和 source。" }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": { "FrameworkNode": "ReactNode", "FrameworkStyle": "CSSProperties" }
+    },
+    "vue": {
+      "typeOverrides": { "FrameworkNode": "VNodeChild", "FrameworkStyle": "CSSProperties" }
+    },
+    "solid": {
+      "typeOverrides": { "FrameworkNode": "JSX.Element", "FrameworkStyle": "JSX.CSSProperties" }
+    },
+    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet", "FrameworkStyle": "string" } },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkNode": "string | TemplateRef<unknown>",
+        "FrameworkStyle": "string"
+      }
+    }
+  },
+  "cssVariables": [
+    { "name": "--input-height", "description": "当前实例高度。" },
+    { "name": "--input-icon-size", "description": "普通图标尺寸。" },
+    {
+      "name": "--input-clear-icon-size",
+      "description": "清除图标尺寸，随 sm、md、lg 分别为 12px、14px、16px。"
+    },
+    {
+      "name": "--input-group-radius",
+      "description": "InputGroup 外侧圆角；可在直接子元素上局部覆盖。"
+    },
+    { "name": "--input-background", "description": "基础背景。" },
+    { "name": "--input-border-color", "description": "基础边框。" },
+    { "name": "--input-color", "description": "输入文字颜色。" },
+    { "name": "--input-placeholder-color", "description": "占位文字颜色。" },
+    { "name": "--input-ring-color", "description": "聚焦环颜色。" }
+  ],
+  "demos": [
+    { "id": "basic" },
+    { "id": "sizes" },
+    { "id": "variants" },
+    { "id": "controlled" },
+    { "id": "affixes" },
+    { "id": "group" },
+    { "id": "password" },
+    { "id": "search" },
+    { "id": "states" },
+    { "id": "focus" },
+    { "id": "semantic-styles" }
+  ]
 }

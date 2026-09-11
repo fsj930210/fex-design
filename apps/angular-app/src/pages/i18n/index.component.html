@@ -6,7 +6,7 @@
     </header>
 
     <div class="grid gap-4">
-      <fex-card
+      <div card
         title="Core translation API"
         description="Use t with interpolation, plural values, and namespaces."
       >
@@ -16,9 +16,9 @@
           <span>{{ i18n.t('order:count', { count: 5 }) }}</span>
           <span>{{ i18n.t('admin:status.ready') }}</span>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Local bundle and namespaces"
         description="The initial Chinese resources are available before any network request."
       >
@@ -28,9 +28,9 @@
           <span>order: {{ i18n.t('order:title') }}</span>
           <span>locale: {{ i18n.snapshot().locale }}</span>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Language switching"
         description="Switching waits for the requested namespaces before changing the active locale."
       >
@@ -60,9 +60,9 @@
             >{{ i18n.snapshot().locale }} {{ i18n.snapshot().revision ?? 'local' }}</span
           >
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Remote bundle"
         description="The current text stays visible until the delayed resource is ready."
       >
@@ -78,9 +78,9 @@
           <span>{{ i18n.t('order:title') }}</span>
           <span class="text-sm text-muted-foreground">status: {{ i18n.snapshot().status }}</span>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Fallback, missing key, and failure"
         description="Missing English keys fall back to Chinese; unknown keys are visible; failed loads preserve the active locale."
       >
@@ -96,9 +96,9 @@
           </button>
           <span class="text-sm text-error">{{ error() }}</span>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Runtime resource editing"
         description="The host can add a newly published namespace without rebuilding the application."
       >
@@ -116,7 +116,7 @@
             >revision: {{ i18n.snapshot().revision ?? 'local' }}</span
           >
         </div>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

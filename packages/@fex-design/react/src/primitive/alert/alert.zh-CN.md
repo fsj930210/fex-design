@@ -5,7 +5,13 @@ Alert 用于在当前页面中传达成功、信息、警告或错误反馈。Pr
 ## 导入
 
 ```tsx
-import { Alert, AlertAction, AlertDescription, AlertIcon, AlertTitle } from '@fex-design/react/primitive/alert'
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from '@fex-design/react/primitive/alert'
 ```
 
 ## 示例

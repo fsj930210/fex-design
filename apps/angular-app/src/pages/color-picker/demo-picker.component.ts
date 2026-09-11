@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core'
 import { ColorPickerRoot, ColorPickerSwatch } from '@fex-design/angular/primitive/color-picker'
-import { Popover, PopoverContent, PopoverTrigger } from '@fex-design/angular/primitive/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@fex-design/angular/primitive/popover'
 import { PickerPanelDemoComponent } from './picker-panel.component'
 @Component({
   selector: 'fex-color-picker-demo',
@@ -10,6 +10,7 @@ import { PickerPanelDemoComponent } from './picker-panel.component'
     ColorPickerSwatch,
     Popover,
     PopoverContent,
+    PopoverPortal,
     PopoverTrigger,
     PickerPanelDemoComponent,
   ],

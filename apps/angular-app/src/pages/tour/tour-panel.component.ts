@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core'
-import { CloseIcon } from '@fex-design/angular/icon/close'
+import { XIcon } from '@fex-design/angular/icon/x'
 import { TourControl, TourRoot } from '@fex-design/angular/primitive/tour'
 @Component({
   selector: 'app-tour-panel',
   standalone: true,
-  imports: [TourControl, CloseIcon],
+  imports: [TourControl, XIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tour-panel.component.html',
 })

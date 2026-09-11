@@ -1,20 +1,13 @@
-<fex-card
+<div card
   title="Popover"
   description="Compose the existing Popover for details without adding overlay behavior to Bubble."
-  ><fex-popover
+  ><div popoverRoot
     ><fex-bubble variant="danger"
-      ><button fexBubbleContent fexPopoverTrigger>
+      ><button fexBubbleContent popoverTrigger>
         Failed to run the command. Show details.
       </button></fex-bubble
-    ><fex-popover-portal
-      ><fex-popover-content
-        ><fex-popover-header class="w-72"
-          ><fex-popover-title>Command error</fex-popover-title
-          ><fex-popover-description
-            >Dependency installation exited with code 1.</fex-popover-description
-          ></fex-popover-header
-        ></fex-popover-content
-      ></fex-popover-portal
-    ></fex-popover
-  ></fex-card
->
+    ><ng-template popoverPortal
+      ><div popoverContent
+        ><div popoverHeader class="w-72"
+          ><div popoverTitle>Command error</div><div popoverDescription
+            >Dependency installation exited with code 1.</div></div></div></ng-template></div></div>

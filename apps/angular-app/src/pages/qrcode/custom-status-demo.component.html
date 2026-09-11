@@ -1,4 +1,4 @@
-<fex-card title="自定义状态渲染器" description="调用方完全控制遮罩内容、按钮和状态切换逻辑。">
+<div card title="自定义状态渲染器" description="调用方完全控制遮罩内容、按钮和状态切换逻辑。">
   <div class="flex flex-wrap items-center gap-2">
     <fex-qrcode-root value="https://fex.design/qrcode/custom-status" [size]="176">
       <svg fexQrCodeSvg>
@@ -14,6 +14,6 @@
         </fex-qrcode-overlay>
       }
     </fex-qrcode-root>
-    <button button variant="outline" (click)="expired.update((value) => !value)">切换状态</button>
+    <button button variant="outlined" (click)="expired.update((value) => !value)">切换状态</button>
   </div>
-</fex-card>
+</div>

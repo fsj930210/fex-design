@@ -1,5 +1,5 @@
 <div
-  fexPopoverTrigger
+  popoverTrigger
   role="presentation"
   [attr.data-disabled]="cascader.disabled || null"
   [attr.data-status]="cascader.status"
@@ -10,12 +10,11 @@
   <div [class]="valueContainerClass">
     @if (cascader.selectedPaths.length) { @if (cascader.multiple) { @for (path of
     cascader.selectedPaths; track path.at(-1)?.key) {
-    <fex-tag
+    <span tag
       size="sm"
-      closable
-      (close)="$event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key)"
-      >{{ cascader.display(path) }}</fex-tag
-    >
+     
+     
+      >{{ cascader.display(path) }}<button tagAction aria-label="移除标签" (click)="$event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key)"></button></span>
     } } @else {
     <div [class]="valueClass">{{ cascader.display(cascader.selectedPaths[0]!) }}</div>
     } } @else if (!cascader.snapshot().searchValue && !cascader.showSearch) {
@@ -34,8 +33,7 @@
     />
   </div>
   <span [class]="suffixClass"
-    >@if(cascader.loading){<loading-icon class="animate-spin" />}@else
-    if(cascader.clearable&&cascader.selectedPaths.length){<button
+    >@if(cascader.loading){<loading-icon class="animate-spin" />}@else if (cascader.clearable&&cascader.selectedPaths.length){<button
       button
       type="button"
       [class]="clearClass"

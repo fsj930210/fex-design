@@ -6,7 +6,7 @@ import {
   TextareaRoot,
 } from '@fex-design/angular/primitive/textarea'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { CheckIcon } from '@fex-design/angular/icon/check'
 import { InfoIcon } from '@fex-design/angular/icon/info'
 import { PlusIcon } from '@fex-design/angular/icon/plus'

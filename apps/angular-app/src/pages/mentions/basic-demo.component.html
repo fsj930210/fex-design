@@ -1,4 +1,4 @@
-<fex-card title="Basic @" description="Default prefix is @ and selection only notifies the caller.">
+<div card title="Basic @" description="Default prefix is @ and selection only notifies the caller.">
   <fex-mentions-root [value]="value" (change)="update($event)" (itemSelect)="select($event)">
     <fex-mentions-trigger placeholder="Type @ to mention a teammate" />
     <fex-mentions-content>
@@ -15,4 +15,4 @@
     </fex-mentions-content>
   </fex-mentions-root>
   <p class="mt-1.5 text-xs text-muted-foreground">{{ selected }}</p>
-</fex-card>
+</div>

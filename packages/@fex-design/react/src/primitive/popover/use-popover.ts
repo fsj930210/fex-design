@@ -1,3 +1,6 @@
+import { shallowEqualObject } from '@fex/utils'
+import { useCoreStoreSelector } from '../../hooks/use-core-store-selector'
+import { selectOpen, selectContent, selectArrow } from './selectors'
 import type { CSSProperties, FocusEvent, KeyboardEvent, MouseEvent, PointerEvent } from 'react'
 import { popoverArrowClassName, popoverContentClassName } from '@fex-design/styles/popover'
 import { cn } from '@fex/utils'
@@ -10,9 +13,11 @@ import type {
   PopoverTriggerRenderProps,
   UsePopoverTriggerProps,
 } from './popover'
-import { usePopoverContext } from './popover-context'
+import { usePopoverContext, type PopoverContextValue } from './popover-context'
 
-export function usePopover(component = 'usePopover') {
+export { usePopover } from './use-popover-controller'
+
+export function usePopoverContextSnapshot(component = 'usePopover') {
   const context = usePopoverContext(component)
   const snapshot = useCoreStore(context.overlay)
   return { ...context, snapshot }
@@ -45,8 +50,9 @@ export function usePopoverTrigger({
   onBlur,
   onContextMenu,
   ...props
-}: UsePopoverTriggerProps) {
-  const { overlay, snapshot, triggerRef } = usePopover('usePopoverTrigger')
+}: UsePopoverTriggerProps, binding?: PopoverContextValue) {
+  const { overlay, triggerRef } = usePopoverContext('usePopoverTrigger', binding)
+  const open = useCoreStoreSelector(overlay, selectOpen)
   const setReference = useMemoizedFn((element: HTMLButtonElement | null) => {
     triggerRef.current = element
     overlay.setReferenceElement(element)
@@ -66,12 +72,13 @@ export function usePopoverTrigger({
   const triggerProps: PopoverTriggerRenderProps = {
     ...props,
     ref: composedRef,
+    type: props.type ?? 'button',
     'aria-haspopup': props['aria-haspopup'] ?? 'dialog',
-    'aria-expanded': snapshot.open,
-    'data-state': snapshot.open ? 'open' : 'closed',
+    'aria-expanded': open,
+    'data-state': open ? 'open' : 'closed',
     onClick: (event) => {
       onClick?.(event)
-      if (!event.defaultPrevented && snapshot.trigger.includes('click')) {
+      if (!event.defaultPrevented && overlay.getSnapshot().trigger.includes('click')) {
         syncReferenceFromEvent(event)
         overlay.trigger.click(toEventInfo(event))
       }
@@ -92,17 +99,9 @@ export function usePopoverTrigger({
     },
     onMouseEnter: (event) => {
       onMouseEnter?.(event)
-      if (!event.defaultPrevented) {
-        syncReferenceFromEvent(event)
-        overlay.trigger.pointerEnter(toEventInfo(event))
-      }
     },
     onMouseLeave: (event) => {
       onMouseLeave?.(event)
-      if (!event.defaultPrevented) {
-        syncReferenceFromEvent(event)
-        overlay.trigger.pointerLeave(toEventInfo(event))
-      }
     },
     onFocus: (event) => {
       onFocus?.(event)
@@ -126,7 +125,7 @@ export function usePopoverTrigger({
       }
     },
   }
-  return { props: triggerProps, snapshot }
+  return { props: triggerProps, open }
 }
 
 export function usePopoverContent({
@@ -137,8 +136,9 @@ export function usePopoverContent({
   onPointerLeave,
   onKeyDown,
   ...props
-}: PopoverContentProps) {
-  const { overlay, snapshot } = usePopover('usePopoverContent')
+}: PopoverContentProps, binding?: PopoverContextValue) {
+  const { overlay } = usePopoverContext('usePopoverContent', binding)
+  const snapshot = useCoreStoreSelector(overlay, selectContent, shallowEqualObject)
   const setContentElement = useMemoizedFn((element: HTMLDivElement | null) =>
     overlay.setFloatingElement(element),
   )
@@ -151,7 +151,9 @@ export function usePopoverContent({
       ...props,
       ref: composedRef,
       role: props.role ?? 'dialog',
-      tabIndex: -1,
+      tabIndex: props.tabIndex ?? -1,
+      hidden: snapshot.phase === 'closed',
+      inert: !snapshot.open,
       'data-slot': 'popover-content',
       'data-state': snapshot.open ? ('open' as const) : ('closed' as const),
       'data-phase': snapshot.phase,
@@ -168,41 +170,42 @@ export function usePopoverContent({
       } as CSSProperties,
       onPointerEnter: (event: PointerEvent<HTMLDivElement>) => {
         onPointerEnter?.(event)
-        overlay.content.pointerEnter(toEventInfo(event))
+        if (!event.defaultPrevented) overlay.content.pointerEnter(toEventInfo(event))
       },
       onPointerLeave: (event: PointerEvent<HTMLDivElement>) => {
         onPointerLeave?.(event)
-        overlay.content.pointerLeave(toEventInfo(event))
+        if (!event.defaultPrevented) overlay.content.pointerLeave(toEventInfo(event))
       },
       onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => onKeyDown?.(event),
     },
   }
 }
 
-export function usePopoverArrow({ ref, className, style, ...props }: PopoverArrowProps) {
-  const { arrowRef, overlay, arrow, snapshot } = usePopover('usePopoverArrow')
+export function usePopoverArrow({ ref, className, style, ...props }: PopoverArrowProps, binding?: PopoverContextValue) {
+  const { arrowRef, overlay } = usePopoverContext('usePopoverArrow', binding)
+  const { arrow, side } = useCoreStoreSelector(overlay, selectArrow, shallowEqualObject)
   const setArrowElement = useMemoizedFn((element: HTMLDivElement | null) => {
     arrowRef.current = element
     overlay.setArrowElement(element)
   })
   const composedRef = useComposedRef<HTMLDivElement>(setArrowElement, ref)
-  if (!arrow) return { mounted: false as const, props: null, snapshot }
+  if (!arrow) return { mounted: false as const, props: null, side }
   const floatingArrowStyle =
-    snapshot.side === 'left' || snapshot.side === 'right'
+    side === 'left' || side === 'right'
       ? {
-          top: 'clamp(var(--popover-arrow-inset,32px), var(--floating-arrow-y,50%), calc(100% - var(--popover-arrow-inset,32px)))',
+          top: 'var(--floating-arrow-y, 0px)',
         }
       : {
-          left: 'clamp(var(--popover-arrow-inset,32px), var(--floating-arrow-x,50%), calc(100% - var(--popover-arrow-inset,32px)))',
+          left: 'var(--floating-arrow-x, 0px)',
         }
   return {
     mounted: true as const,
-    snapshot,
+    side,
     props: {
       ...props,
       ref: composedRef,
       'data-slot': 'popover-arrow',
-      'data-side': snapshot.side,
+      'data-side': side,
       className: cn(popoverArrowClassName, className),
       style: { ...floatingArrowStyle, ...style } as CSSProperties,
     },

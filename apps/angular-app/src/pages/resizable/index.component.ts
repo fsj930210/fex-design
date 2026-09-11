@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { NgStyle } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { resizePanelPair } from '@fex-design/core/resizable/layout'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 type Direction = 'horizontal' | 'vertical'
 type PanelConfig = {

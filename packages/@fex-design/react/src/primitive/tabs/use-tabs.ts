@@ -94,23 +94,19 @@ export function useTabs(options: UseTabsOptions = {}) {
   const snapshot = useCoreStore(controller)
   const orientation = options.orientation ?? 'horizontal'
 
-  const getItemState = useMemoizedFn(
-    (item: TabsItemData): TabsItemState => ({
-      active: snapshot.value === item.value,
-      focused: snapshot.focusedValue === item.value,
-      disabled: item.disabled === true,
-      closable: item.closable === true,
-      orientation,
-    }),
-  )
+  const getItemState = useMemoizedFn((item: TabsItemData): TabsItemState => ({
+    active: snapshot.value === item.value,
+    focused: snapshot.focusedValue === item.value,
+    disabled: item.disabled === true,
+    closable: item.closable === true,
+    orientation,
+  }))
 
-  const getListProps = useMemoizedFn(
-    (): TabsListDOMProps => ({
-      role: 'tablist' as const,
-      'aria-orientation': orientation,
-      'data-orientation': orientation,
-    }),
-  )
+  const getListProps = useMemoizedFn((): TabsListDOMProps => ({
+    role: 'tablist' as const,
+    'aria-orientation': orientation,
+    'data-orientation': orientation,
+  }))
 
   const getItemProps = useMemoizedFn((item: TabsItemData): TabsItemDOMProps => {
     itemsRef.current.set(item.value, item)
@@ -199,16 +195,14 @@ export function useTabs(options: UseTabsOptions = {}) {
     }),
   )
 
-  const getContentProps = useMemoizedFn(
-    (value: TabsValue): TabsContentDOMProps => ({
-      id: `${baseId}-panel-${value}`,
-      role: 'tabpanel',
-      tabIndex: 0,
-      'aria-labelledby': `${baseId}-tab-${value}`,
-      hidden: snapshot.value !== value,
-      'data-state': snapshot.value === value ? 'active' : 'inactive',
-    }),
-  )
+  const getContentProps = useMemoizedFn((value: TabsValue): TabsContentDOMProps => ({
+    id: `${baseId}-panel-${value}`,
+    role: 'tabpanel',
+    tabIndex: 0,
+    'aria-labelledby': `${baseId}-tab-${value}`,
+    hidden: snapshot.value !== value,
+    'data-state': snapshot.value === value ? 'active' : 'inactive',
+  }))
 
   return {
     snapshot,

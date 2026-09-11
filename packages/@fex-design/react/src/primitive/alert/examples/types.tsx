@@ -17,15 +17,25 @@ export default function Types() {
     <div className="grid w-full gap-3">
       {items.map(([type, title, Icon]) => (
         <Alert key={type} type={type}>
-          <AlertIcon><Icon /></AlertIcon>
+          <AlertIcon>
+            <Icon />
+          </AlertIcon>
           <AlertTitle>{title}</AlertTitle>
         </Alert>
       ))}
       <Alert
         type="info"
-        style={{ '--alert-color': '#7c3aed', '--alert-color-background': '#f5f3ff', '--alert-color-border': '#c4b5fd' } as CSSProperties}
+        style={
+          {
+            '--alert-color': '#7c3aed',
+            '--alert-color-background': '#f5f3ff',
+            '--alert-color-border': '#c4b5fd',
+          } as CSSProperties
+        }
       >
-        <AlertIcon><InfoIcon /></AlertIcon>
+        <AlertIcon>
+          <InfoIcon />
+        </AlertIcon>
         <AlertTitle>自定义颜色</AlertTitle>
       </Alert>
     </div>

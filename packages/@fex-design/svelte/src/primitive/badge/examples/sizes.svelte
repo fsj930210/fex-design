@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Badge, BadgeDot } from '@fex-design/svelte/primitive/badge'
-  import type { BadgeSize } from '@fex-design/core'
+  import { Badge, BadgeDot } from "@fex-design/svelte/primitive/badge";
+  import type { BadgeSize } from "@fex-design/core";
 
-  const sizes: readonly BadgeSize[] = ['sm', 'md', 'lg']
+  const sizes: readonly BadgeSize[] = ["sm", "md", "lg"];
 </script>
 
 <div class="grid gap-3">

@@ -1,12 +1,12 @@
-<fex-card
+<div card
   title="Search data and custom title rendering"
   description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
-  ><fex-input-root [value]="keyword()" class="mb-2 max-w-sm"
+  ><div inputRoot [value]="keyword()" class="mb-2 max-w-sm"
     ><input
-      fexInputControl
+      inputControl
       (input)="keyword.set($any($event.target).value)"
       placeholder="Search departments"
-  /></fex-input-root>
+  /></div>
   <div [hidden]="showing()">
     <fex-demo-tree
       [controller]="controller"
@@ -21,4 +21,4 @@
       class="block max-w-xl rounded-md border border-border bg-background p-1.5"
     />
   }
-</fex-card>
+</div>

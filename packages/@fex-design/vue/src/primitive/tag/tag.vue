@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  isTagPresetColor,
-  type TagOptions,
-  type TagPresetColor,
-} from '@fex-design/core/tag/types'
+import { isTagPresetColor, type TagOptions, type TagPresetColor } from '@fex-design/core/tag/types'
 import { tagClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import { computed, useAttrs } from 'vue'
@@ -32,7 +28,9 @@ const rootStyle = computed(() => [
     :data-variant="variant"
     :data-size="size"
     :data-disabled="disabled ? 'true' : undefined"
-    :class="cn(tagClassName({ variant, color: presetColor, size }), attrs.class as string | undefined)"
+    :class="
+      cn(tagClassName({ variant, color: presetColor, size }), attrs.class as string | undefined)
+    "
     :style="rootStyle"
   >
     <slot />

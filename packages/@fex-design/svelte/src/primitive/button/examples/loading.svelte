@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button, ButtonIcon } from '@fex-design/svelte/primitive/button'
-  import LoadingIcon from '@fex-design/svelte/icon/loading'
-  import { buttonSpinnerClassName } from '@fex-design/styles/button'
+  import { Button, ButtonIcon } from "@fex-design/svelte/primitive/button";
+  import LoadingIcon from "@fex-design/svelte/icon/loading";
+  import { buttonSpinnerClassName } from "@fex-design/styles/button";
 </script>
 
 <div class="grid gap-4">
@@ -14,7 +14,9 @@
       </Button>
       <Button disabled data-loading="true">
         Publishing
-        <ButtonIcon placement="end"><LoadingIcon class={buttonSpinnerClassName} /></ButtonIcon>
+        <ButtonIcon placement="end"
+          ><LoadingIcon class={buttonSpinnerClassName} /></ButtonIcon
+        >
       </Button>
       <Button variant="outlined" disabled data-loading="true">
         <ButtonIcon><LoadingIcon class={buttonSpinnerClassName} /></ButtonIcon>

@@ -2,16 +2,13 @@ import { Button } from '@fex-design/react/ui/button'
 import { PlusIcon } from '@fex-design/react/icon/plus'
 
 const sizes = [
-
   'sm',
   'md',
   'lg',
 
-
   'icon-sm',
   'icon-md',
   'icon-lg',
-
 ] as const
 
 export function SizesExample() {

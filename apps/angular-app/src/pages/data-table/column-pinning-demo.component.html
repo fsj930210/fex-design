@@ -1,4 +1,4 @@
-<fex-card
+<div card
   title="Column pinning"
   description="TanStack v9 uses logical start/end regions. DataTable only renders their sticky layout; callers can provide any pin controls and can keep DnD restrictions outside the component."
 >
@@ -10,8 +10,8 @@
           {{ header.column.id }}
           <button
             button
-            size="icon-xs"
-            variant="ghost"
+            size="icon-sm"
+            variant="text"
             [attr.aria-label]="'Pin ' + header.column.id + ' to start'"
             (click)="pin(header.column.id, 'start')"
           >
@@ -19,8 +19,8 @@
           </button>
           <button
             button
-            size="icon-xs"
-            variant="ghost"
+            size="icon-sm"
+            variant="text"
             [attr.aria-label]="'Unpin ' + header.column.id"
             (click)="pin(header.column.id, false)"
           >
@@ -28,8 +28,8 @@
           </button>
           <button
             button
-            size="icon-xs"
-            variant="ghost"
+            size="icon-sm"
+            variant="text"
             [attr.aria-label]="'Pin ' + header.column.id + ' to end'"
             (click)="pin(header.column.id, 'end')"
           >
@@ -39,4 +39,4 @@
       </ng-template>
     </fex-data-table>
   </section>
-</fex-card>
+</div>

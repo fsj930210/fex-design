@@ -6,18 +6,7 @@ import { For } from 'solid-js'
 export function SizesExample() {
   return (
     <div class="flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-4">
-      <For
-        each={
-          [
-              'sm',
-            'md',
-            'lg',
-                'icon-sm',
-            'icon-md',
-            'icon-lg',
-            ] as const
-        }
-      >
+      <For each={['sm', 'md', 'lg', 'icon-sm', 'icon-md', 'icon-lg'] as const}>
         {(size) => (
           <Button class={buttonClassName({ size })} aria-label={size}>
             {size.startsWith('icon') ? (

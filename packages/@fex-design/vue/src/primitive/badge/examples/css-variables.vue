@@ -3,7 +3,9 @@ import { Badge, BadgeDot } from '@fex-design/vue/primitive/badge'
 </script>
 
 <template>
-  <div class="flex items-center gap-4 [--badge-color-danger:#e11d48] [--badge-color-success:#059669]">
+  <div
+    class="flex items-center gap-4 [--badge-color-danger:#e11d48] [--badge-color-success:#059669]"
+  >
     <Badge count="success" color="success" />
     <Badge count="danger" color="danger" />
     <Badge

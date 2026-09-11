@@ -11,7 +11,7 @@
     </header>
 
     <div class="space-y-4">
-      <fex-card
+      <div card
         title="Primitive"
         description="Trigger uses an Angular attribute directive and content owns ARIA labels."
       >
@@ -35,22 +35,22 @@
                   dismiss.</fex-dialog-body
                 >
                 <fex-dialog-footer>
-                  <button button fexDialogClose variant="outline">Cancel</button>
+                  <button button fexDialogClose variant="outlined">Cancel</button>
                   <button button fexDialogClose>Confirm</button>
                 </fex-dialog-footer>
               </fex-dialog-content>
             </fex-dialog-portal>
           </fex-dialog>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card
+      <div card
         title="Controlled"
         description="Controlled mode requests updates through openChange."
       >
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-dialog [open]="open" (openChange)="setOpen($event)">
-            <button button fexDialogTrigger variant="outline">
+            <button button fexDialogTrigger variant="outlined">
               {{ open ? 'Open' : 'Closed' }}
             </button>
             <fex-dialog-portal>
@@ -72,13 +72,13 @@
             </fex-dialog-portal>
           </fex-dialog>
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Sizes" description="Content size is a primitive style variant.">
+      <div card title="Sizes" description="Content size is a primitive style variant.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           @for (size of sizes; track size) {
             <fex-dialog>
-              <button button fexDialogTrigger variant="outline">{{ size }}</button>
+              <button button fexDialogTrigger variant="outlined">{{ size }}</button>
               <fex-dialog-portal>
                 <fex-dialog-overlay />
                 <fex-dialog-content [size]="size">
@@ -100,12 +100,12 @@
             </fex-dialog>
           }
         </div>
-      </fex-card>
+      </div>
 
-      <fex-card title="Dismiss" description="Overlay pointer dismissal can be disabled.">
+      <div card title="Dismiss" description="Overlay pointer dismissal can be disabled.">
         <div class="flex min-w-0 flex-wrap items-center gap-2">
           <fex-dialog [closeOnOverlayPointer]="false">
-            <button button fexDialogTrigger variant="outline">No overlay close</button>
+            <button button fexDialogTrigger variant="outlined">No overlay close</button>
             <fex-dialog-portal>
               <fex-dialog-overlay />
               <fex-dialog-content>
@@ -120,14 +120,14 @@
                 </fex-dialog-header>
                 <fex-dialog-body>Use the footer actions or Escape to close.</fex-dialog-body>
                 <fex-dialog-footer>
-                  <button button fexDialogClose variant="outline">Cancel</button>
+                  <button button fexDialogClose variant="outlined">Cancel</button>
                   <button button fexDialogClose>Confirm</button>
                 </fex-dialog-footer>
               </fex-dialog-content>
             </fex-dialog-portal>
           </fex-dialog>
         </div>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

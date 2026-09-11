@@ -10,7 +10,7 @@
       </div>
     </header>
     <div class="space-y-4">
-      <fex-card title="Basic" description="Uncontrolled slider uses defaultValue.">
+      <div card title="Basic" description="Uncontrolled slider uses defaultValue.">
         <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
@@ -23,8 +23,8 @@
           </div>
           <p class="text-sm text-muted-foreground">Current value: {{ basicValue().join(', ') }}</p>
         </div>
-      </fex-card>
-      <fex-card title="Controlled" description="Controlled slider uses value and valueChange.">
+      </div>
+      <div card title="Controlled" description="Controlled slider uses value and valueChange.">
         <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
@@ -39,8 +39,8 @@
             Current value: {{ controlledValue().join(', ') }}
           </p>
         </div>
-      </fex-card>
-      <fex-card title="Range" description="Use an array with two values for a range slider.">
+      </div>
+      <div card title="Range" description="Use an array with two values for a range slider.">
         <div class="grid gap-1.5">
           <div
             fexSliderPrimitive
@@ -55,8 +55,8 @@
           </div>
           <p class="text-sm text-muted-foreground">Current value: {{ rangeValue().join(', ') }}</p>
         </div>
-      </fex-card>
-      <fex-card
+      </div>
+      <div card
         title="Multiple Thumbs"
         description="Use more than two values to create multiple thumbs."
       >
@@ -77,8 +77,8 @@
             Current value: {{ multipleValue().join(', ') }}
           </p>
         </div>
-      </fex-card>
-      <fex-card
+      </div>
+      <div card
         title="Orientation"
         description="Slider supports horizontal and vertical orientation."
       >
@@ -99,8 +99,8 @@
             ><span fexSliderThumb aria-label="Vertical slider"></span>
           </div>
         </div>
-      </fex-card>
-      <fex-card title="Sizes" description="Slider supports sm, default, and lg sizes.">
+      </div>
+      <div card title="Sizes" description="Slider supports sm, default, and lg sizes.">
         <div class="grid gap-2">
           <div fexSliderPrimitive size="sm" defaultValue="25" aria-label="Small slider">
             <span fexSliderTrack><span fexSliderRange></span></span
@@ -115,8 +115,8 @@
             ><span fexSliderThumb aria-label="Large slider"></span>
           </div>
         </div>
-      </fex-card>
-      <fex-card title="Disabled" description="Disabled state blocks input.">
+      </div>
+      <div card title="Disabled" description="Disabled state blocks input.">
         <div class="grid gap-1.5">
           <div fexSliderPrimitive disabled defaultValue="60" aria-label="Disabled slider">
             <span fexSliderTrack><span fexSliderRange></span></span
@@ -124,7 +124,7 @@
           </div>
           <p class="text-sm text-muted-foreground">Current value: 60</p>
         </div>
-      </fex-card>
+      </div>
     </div>
   </div>
 </main>

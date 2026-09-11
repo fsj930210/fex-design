@@ -31,7 +31,8 @@ export function InputGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>
   )
 }
 
-export interface InputRootProps extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'size'>>, InputVisualOptions {
+export interface InputRootProps
+  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'size'>>, InputVisualOptions {
   value?: string | undefined
   defaultValue?: string | undefined
   disabled?: boolean | undefined
@@ -129,12 +130,7 @@ export function InputClear(
   props: ParentProps<JSX.ButtonHTMLAttributes<HTMLButtonElement>> & { forceMount?: boolean },
 ) {
   const context = useInputContext('InputClear')
-  const [local, rest] = splitProps(props, [
-    'forceMount',
-    'class',
-    'children',
-    'onClick',
-  ])
+  const [local, rest] = splitProps(props, ['forceMount', 'class', 'children', 'onClick'])
   return local.forceMount || context.canClear() ? (
     <button
       {...rest}

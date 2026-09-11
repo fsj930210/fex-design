@@ -4,6 +4,11 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./popover/types": "./src/popover/types.ts",
+    "./popover/options": "./src/popover/options.ts",
+    "./popover/create-popover": "./src/popover/create-popover.ts",
+    "./overlay/types": "./src/overlay/types.ts",
+    "./overlay/presence/types": "./src/overlay/presence/types.ts",
     "./collection/split-overflow-items": "./src/collection/split-overflow-items.ts",
     "./avatar/types": "./src/avatar/types.ts",
     "./alert/types": "./src/alert/types.ts",

@@ -1,0 +1,35 @@
+<div class="w-full flex items-center justify-center min-h-[360px] py-16">
+<div class="grid w-full gap-4">
+  
+  
+  <div #container class="relative w-full h-96 overflow-auto rounded-lg border-2 border-dashed p-6">
+<p>自定义挂载区域：浮层插入此虚线框，仍以按钮为定位参照。</p>
+<div class="flex min-h-[560px] justify-center gap-4 pt-24">
+    @for (item of cases; track item.label) {
+      <div>
+        <div popoverRoot #panel
+        [open]="options(item).open"
+        [trigger]="options(item).trigger"
+        [placement]="options(item).placement"
+        [arrow]="options(item).arrow"
+        [arrowPadding]="options(item).arrowPadding"
+        [align]="options(item).align"
+        [side]="options(item).side"
+        [sideOffset]="options(item).sideOffset"
+        [alignOffset]="options(item).alignOffset"
+        [getPopupContainer]="options(item).getPopupContainer"
+        [lazyMount]="options(item).lazyMount"
+        [destroyOnHidden]="options(item).destroyOnHidden"
+        title="提示信息" [content]="body">
+        <button button popoverTrigger>{{ item.label }}</button>
+        <ng-template #body>
+          <p>这里可以放置说明和交互内容。</p>
+        </ng-template>
+      </div>
+      </div>
+    }
+    </div>
+  </div>
+</div>
+
+</div>

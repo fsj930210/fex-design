@@ -15,12 +15,10 @@ const controller = createTreeController<DepartmentNode>({
 export function SearchDemos() {
   const [keyword, setKeyword] = useState('')
   const treeData = keyword
-    ? (controller
-        .getFeature<SearchFeatureApi<DepartmentNode>>('search')
-        ?.getSubtree({
-          keyword,
-          filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
-        }) ?? [])
+    ? (controller.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
+        keyword,
+        filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
+      }) ?? [])
     : departmentTreeData
   return (
     <Card

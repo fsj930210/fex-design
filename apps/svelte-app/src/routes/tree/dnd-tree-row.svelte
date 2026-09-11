@@ -1,15 +1,30 @@
 <script lang="ts">
-  import type { TreeController, TreeKey } from '@fex-design/core/tree/types'
-  import { TreeItem, TreeTitle, TreeTrigger } from '@fex-design/svelte/primitive/tree'
-  import { treeDndItemAction } from '@fex-design/svelte/primitive/tree/tree-dnd-item'
-  import type { DepartmentNode } from './data'
+  import type { TreeController, TreeKey } from "@fex-design/core/tree/types";
+  import {
+    TreeItem,
+    TreeTitle,
+    TreeTrigger,
+  } from "@fex-design/svelte/primitive/tree";
+  import { treeDndItemAction } from "@fex-design/svelte/primitive/tree/tree-dnd-item";
+  import type { DepartmentNode } from "./data";
 
-  let { controller, itemKey, indent = 24 }: { controller: TreeController<DepartmentNode>; itemKey: TreeKey; indent?: number } = $props()
+  let {
+    controller,
+    itemKey,
+    indent = 24,
+  }: {
+    controller: TreeController<DepartmentNode>;
+    itemKey: TreeKey;
+    indent?: number;
+  } = $props();
 </script>
 
-<TreeItem controller={controller} {itemKey}>
+<TreeItem {controller} {itemKey}>
   {#snippet children(state)}
-    <div {...state.itemProps} use:treeDndItemAction={{ tree: controller, itemKey, indent }}>
+    <div
+      {...state.itemProps}
+      use:treeDndItemAction={{ tree: controller, itemKey, indent }}
+    >
       <TreeTrigger itemKey={state.item.key} />
       <TreeTitle>{String(state.item.node.name)}</TreeTitle>
     </div>

@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import type {
-  TagClassNames,
-  TagOptions,
-  TagStyles,
-} from '@fex-design/core/tag/types'
+import type { TagClassNames, TagOptions, TagStyles } from '@fex-design/core/tag/types'
 import { computed, type StyleValue, useAttrs } from 'vue'
 import PrimitiveTag from '../../primitive/tag/tag.vue'
 import TagAction from '../../primitive/tag/tag-action.vue'

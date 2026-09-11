@@ -1,29 +1,39 @@
 <script lang="ts">
-  import type { TreeController, TreeItem, TreeKey, TreeOptions, TreeVisibleItem } from '@fex-design/core/tree/types'
-  import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex-design/svelte/primitive/tree'
-  import { cn } from '@fex/utils'
-  import type { Snippet } from 'svelte'
-  import DemoTreeRow from './demo-tree-row.svelte'
-  import type { DepartmentNode } from './data'
+  import type {
+    TreeController,
+    TreeItem,
+    TreeKey,
+    TreeOptions,
+    TreeVisibleItem,
+  } from "@fex-design/core/tree/types";
+  import {
+    TreeRoot,
+    TreeViewport,
+    TreeVirtualViewport,
+  } from "@fex-design/svelte/primitive/tree";
+  import { cn } from "@fex/utils";
+  import type { Snippet } from "svelte";
+  import DemoTreeRow from "./demo-tree-row.svelte";
+  import type { DepartmentNode } from "./data";
 
   interface TitleContext {
-    item: TreeItem<DepartmentNode>
-    tree: TreeController<DepartmentNode>
-    isSearching: boolean
-    searchKeyword: string
+    item: TreeItem<DepartmentNode>;
+    tree: TreeController<DepartmentNode>;
+    isSearching: boolean;
+    searchKeyword: string;
   }
 
   interface Props extends TreeOptions<DepartmentNode> {
-    controller?: TreeController<DepartmentNode>
-    checkable?: boolean
-    virtual?: boolean
-    height?: number
-    overscan?: number
-    indent?: number
-    searchKeyword?: string
-    class?: string
-    itemClass?: string
-    title?: Snippet<[TitleContext]>
+    controller?: TreeController<DepartmentNode>;
+    checkable?: boolean;
+    virtual?: boolean;
+    height?: number;
+    overscan?: number;
+    indent?: number;
+    searchKeyword?: string;
+    class?: string;
+    itemClass?: string;
+    title?: Snippet<[TitleContext]>;
   }
 
   let {
@@ -53,11 +63,11 @@
     height = 320,
     overscan,
     indent,
-    searchKeyword = '',
+    searchKeyword = "",
     class: className,
     itemClass,
     title,
-  }: Props = $props()
+  }: Props = $props();
 
   const options = $derived.by<TreeOptions<DepartmentNode>>(() => ({
     treeData,
@@ -80,30 +90,45 @@
     ...(onFocusedKeyChange === undefined ? {} : { onFocusedKeyChange }),
     ...(multiple === undefined ? {} : { multiple }),
     ...(onTreeDataChange === undefined ? {} : { onTreeDataChange }),
-  }))
+  }));
 
   const rootProps = $derived({
     options,
     ...(controller === undefined ? {} : { controller }),
     ...(indent === undefined ? {} : { indent }),
-  })
+  });
   const virtualProps = $derived({
     height,
     ...(overscan === undefined ? {} : { overscan }),
-  })
+  });
 
   let viewport = $state<
-    | { scrollToKey(key: TreeKey, settings?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean }): boolean }
-    | undefined>()
+    | {
+        scrollToKey(
+          key: TreeKey,
+          settings?: {
+            align?: "auto" | "start" | "center" | "end";
+            reveal?: boolean;
+          },
+        ): boolean;
+      }
+    | undefined
+  >();
 
   export function scrollToKey(
     key: TreeKey,
-    settings?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean },
+    settings?: {
+      align?: "auto" | "start" | "center" | "end";
+      reveal?: boolean;
+    },
   ) {
-    return viewport?.scrollToKey(key, settings) ?? false
+    return viewport?.scrollToKey(key, settings) ?? false;
   }
 
-  function getRowProps(tree: TreeController<DepartmentNode>, item: TreeVisibleItem<DepartmentNode>) {
+  function getRowProps(
+    tree: TreeController<DepartmentNode>,
+    item: TreeVisibleItem<DepartmentNode>,
+  ) {
     return {
       tree,
       item,
@@ -111,14 +136,18 @@
       searchKeyword,
       ...(itemClass === undefined ? {} : { itemClass }),
       ...(title === undefined ? {} : { title }),
-    }
+    };
   }
 </script>
 
-<TreeRoot {...rootProps} class={cn('w-full', className)}>
+<TreeRoot {...rootProps} class={cn("w-full", className)}>
   {#snippet children(tree)}
     {#if virtual}
-      <TreeVirtualViewport bind:this={viewport} {...virtualProps} controller={tree}>
+      <TreeVirtualViewport
+        bind:this={viewport}
+        {...virtualProps}
+        controller={tree}
+      >
         {#snippet children(item)}
           <DemoTreeRow {...getRowProps(tree, item)} />
         {/snippet}

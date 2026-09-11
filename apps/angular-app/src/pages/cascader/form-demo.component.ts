@@ -12,7 +12,7 @@ import {
   FieldRoot,
 } from '@fex-design/angular/primitive/field'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { regionOptions } from './data'
 export
 @Component({

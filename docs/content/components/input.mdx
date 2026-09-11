@@ -29,24 +29,36 @@ basic、sizes、variants、controlled、affixes、group、password、search、st
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Input 的自由组合结构与原生输入能力。">
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="Input 的自由组合结构与原生输入能力。"
+>
   <ApiComposition layer="primitive">
-    ```text
-    InputGroup
-    ├── InputAddonBefore (optional)
-    ├── InputRoot
-    │   ├── InputPrefix (optional)
-    │   ├── InputControl
-    │   ├── InputClear (optional)
-    │   └── InputSuffix (optional)
-    └── InputAddonAfter / Button (optional)
-    ```
+
+```text
+InputGroup
+├── InputAddonBefore (optional)
+├── InputRoot
+│   ├── InputPrefix (optional)
+│   ├── InputControl
+│   ├── InputClear (optional)
+│   └── InputSuffix (optional)
+└── InputAddonAfter / Button (optional)
+```
+
   </ApiComposition>
 </ApiSection>
 
-<ApiSection layer="ui" title="UI API" description="快速使用的 Input、InputPassword 与 InputSearch。">
+<ApiSection
+  layer="ui"
+  title="UI API"
+  description="快速使用的 Input、InputPassword 与 InputSearch。"
+>
   <ApiComposition layer="ui">
-    `InputSearch` 默认在右侧渲染与输入主体等高的搜索 Button；Input 的 ring 只覆盖 Prefix、Control、Clear 与 Suffix，不覆盖 Addon。显式传入 `addonAfter=null` 可移除默认按钮。Enter、Prefix、Suffix、AddonBefore 与 AddonAfter 都会报告对应搜索来源。
+    `InputSearch` 默认在右侧渲染与输入主体等高的搜索 Button；Input 的 ring 只覆盖
+    Prefix、Control、Clear 与 Suffix，不覆盖 Addon。显式传入 `addonAfter=null`
+    可移除默认按钮。Enter、Prefix、Suffix、AddonBefore 与 AddonAfter 都会报告对应搜索来源。
   </ApiComposition>
 </ApiSection>
 

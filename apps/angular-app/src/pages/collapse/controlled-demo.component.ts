@@ -8,7 +8,7 @@ import {
   CollapseTrigger,
 } from '@fex-design/angular/primitive/collapse'
 import { Button } from '@fex-design/angular/ui/button'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 import { collapseItems } from './demo-data'
 
 @Component({

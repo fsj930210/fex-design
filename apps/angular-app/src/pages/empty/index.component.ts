@@ -9,7 +9,7 @@ import {
   EmptyTitle,
 } from '@fex-design/angular/primitive/empty'
 import { Badge } from '@fex-design/angular/primitive/badge'
-import Card from '@fex-design/angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'empty-page',

@@ -1,8 +1,4 @@
-import {
-  isTagPresetColor,
-  type TagOptions,
-  type TagPresetColor,
-} from '@fex-design/core/tag/types'
+import { isTagPresetColor, type TagOptions, type TagPresetColor } from '@fex-design/core/tag/types'
 import { tagClassName, tagActionClassName } from '@fex-design/styles/tag'
 import { cn } from '@fex/utils'
 import type { ComponentProps, CSSProperties } from 'react'

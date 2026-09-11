@@ -14,7 +14,7 @@ const variants = [
   'link',
   'dashed',
 ] as const
-const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
+const sizes = ['sm', 'md', 'lg', 'icon-sm', 'icon-md', 'icon-lg'] as const
 const effects = [
   'expand-icon',
   'ring-hover',

@@ -36,7 +36,7 @@ const value = ref(4.3)
 | `readOnly`     | `boolean`                   | `false`      | No       | Preserves focus semantics but blocks changes.      |
 | `allowClear`   | `boolean`                   | `true`       | No       | Clears when the current bucket is committed again. |
 | `direction`    | `'ltr' \| 'rtl'`            | `'ltr'`      | No       | Fill, pointer and keyboard direction.              |
-| `size`         | `'sm' \| 'default' \| 'lg'` | `'default'`  | No       | Item size.                                         |
+| `size`         | `'sm' \| 'md' \| 'lg'` | `'md'`  | No       | Item size.                                         |
 | `getValueText` | `(value, count) => string`  | English text | No       | Produces `aria-valuetext`.                         |
 
 ## Events and slot

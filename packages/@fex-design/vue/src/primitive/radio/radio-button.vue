@@ -6,7 +6,7 @@ import { useRadioContext, type RadioValue } from './context'
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(
   defineProps<{ value: RadioValue; disabled?: boolean; size?: RadioButtonStyleProps['size'] }>(),
-  { disabled: false, size: 'default' },
+  { disabled: false, size: 'md' },
 )
 const attrs = useAttrs()
 const context = useRadioContext('RadioButton')

@@ -71,7 +71,7 @@ export function CustomRate() {
 | `readOnly`             | `boolean`                   | `false`            | No       | Keeps slider semantics while preventing value changes.                     |
 | `allowClear`           | `boolean`                   | `true`             | No       | Clears the value when the committed item region matches the current value. |
 | `direction`            | `'ltr' \| 'rtl'`            | `'ltr'`            | No       | Controls pointer, keyboard and fill direction.                             |
-| `size`                 | `'sm' \| 'default' \| 'lg'` | `'default'`        | No       | Sets the default item size and gap.                                        |
+| `size`                 | `'sm' \| 'md' \| 'lg'` | `'md'`        | No       | Sets the default item size and gap.                                        |
 | `getValueText`         | `(value, count) => string`  | English value text | No       | Produces `aria-valuetext`.                                                 |
 | `children`             | `(state) => ReactNode`      | Star               | No       | Renders the empty and filled content layers.                               |
 | `onValuePreviewChange` | `(value \| null) => void`   | —                  | No       | Reports hover and drag previews; `null` restores the committed value.      |

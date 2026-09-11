@@ -7,8 +7,8 @@ const showZero = ref(false)
 <template>
   <div class="flex items-center gap-6">
     <label class="flex items-center gap-2"
-      ><SwitchRoot :checked="showZero" aria-label="显示 0" @checked-change="showZero = $event"
-        ><template #default="{ checked }"><SwitchThumb :checked="checked" /></template></SwitchRoot
+      ><SwitchRoot :checked="showZero" aria-label="显示 0" @change="showZero = $event"
+        ><SwitchThumb /></SwitchRoot
       ><span>显示 0</span></label
     ><Badge :count="0" :show-zero="showZero"
       ><span class="block size-10 rounded bg-muted-background"

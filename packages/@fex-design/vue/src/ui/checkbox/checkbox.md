@@ -17,7 +17,7 @@ import { Checkbox, CheckboxGroup } from '@fex-design/vue/ui/checkbox'
 | `checked`        | `boolean \| 'indeterminate'` | `undefined` | No       | Controlled checked state.    |
 | `defaultChecked` | `boolean \| 'indeterminate'` | `false`     | No       | Initial unchecked state.     |
 | `disabled`       | `boolean`                    | `false`     | No       | Disables interaction.        |
-| `size`           | `'sm' \| 'default' \| 'lg'`  | `'default'` | No       | Visual size.                 |
+| `size`           | `'sm' \| 'md' \| 'lg'`  | `'md'` | No       | Visual size.                 |
 | `checked-change` | `(checked, meta) => void`    | -           | No       | Emitted after state changes. |
 
 Use `aria-invalid` for invalid styling. `CheckboxGroup` is a layout wrapper and does not own a value array.

@@ -26,7 +26,7 @@ export function Example() {
 | `readOnly`             | `boolean`                   | `false`     | No       | Blocks value changes.                              |
 | `allowClear`           | `boolean`                   | `true`      | No       | Clears when the current bucket is committed again. |
 | `direction`            | `'ltr' \| 'rtl'`            | `'ltr'`     | No       | Fill, pointer and keyboard direction.              |
-| `size`                 | `'sm' \| 'default' \| 'lg'` | `'default'` | No       | Item size.                                         |
+| `size`                 | `'sm' \| 'md' \| 'lg'` | `'md'` | No       | Item size.                                         |
 | `children`             | `(state) => JSX.Element`    | Star        | No       | Renders empty and filled layers.                   |
 | `onValuePreviewChange` | `(value \| null) => void`   | —           | No       | Reports hover and drag previews.                   |
 | `onValueChange`        | `(value) => void`           | —           | No       | Reports changed values.                            |

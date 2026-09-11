@@ -1,13 +1,13 @@
 :root {
   /* Shared control and icon sizes that Tailwind does not name semantically. */
   --height-xs: 24px;
-  --height-sm: 28px;
-  --height-default: 32px;
-  --height-lg: 36px;
+  --height-sm: 24px;
+  --height-md: 32px;
+  --height-lg: 44px;
   --height-xl: 40px;
   --icon-size-xs: 12px;
   --icon-size-sm: 14px;
-  --icon-size-default: 16px;
+  --icon-size-md: 16px;
   --icon-size-lg: 18px;
   --icon-size-xl: 20px;
 

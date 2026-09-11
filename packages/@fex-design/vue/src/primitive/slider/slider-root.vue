@@ -28,7 +28,7 @@ const props = withDefaults(
     min: 0,
     minStepsBetweenThumbs: 0,
     orientation: 'horizontal',
-    size: 'default',
+    size: 'md',
     step: 1,
   },
 )

@@ -25,7 +25,7 @@
   let {
     value,
     disabled,
-    size = "default",
+    size = "md",
     children,
     class: className,
     onclick,

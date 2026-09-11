@@ -1,33 +1,20 @@
 <script lang="ts">
-  import {
-    switchThumbClassName,
-    type SwitchStyleProps,
-  } from "@fex-design/styles/switch";
-  import { cn } from "@fex/utils";
-  import type { HTMLAttributes } from "svelte/elements";
-  import type { SwitchState } from "./switch.svelte";
-
-  interface SwitchThumbProps
-    extends HTMLAttributes<HTMLSpanElement>, SwitchStyleProps {
-    checked?: boolean | undefined;
-    state?: SwitchState | undefined;
+  import { switchThumbClassName } from '@fex-design/styles/switch'
+  import { cn } from '@fex/utils'
+  import type { HTMLAttributes } from 'svelte/elements'
+  import type { Snippet } from 'svelte'
+  interface Props extends HTMLAttributes<HTMLSpanElement> {
+    ref?: HTMLSpanElement | null | undefined
+    children?: Snippet | undefined
   }
-
-  let {
-    checked,
-    state,
-    size = "default",
-    class: className,
-    ...rest
-  }: SwitchThumbProps = $props();
-
-  const switchState: SwitchState = $derived(
-    state ?? (checked ? "checked" : "unchecked"),
-  );
+  let { class: className, ref = $bindable(null), children, ...rest }: Props = $props()
 </script>
-
 <span
   {...rest}
-  data-state={switchState}
-  class={cn(switchThumbClassName({ size }), className)}
-></span>
+  bind:this={ref}
+  aria-hidden="true"
+  data-slot="switch-thumb"
+  class={cn(switchThumbClassName, className)}
+>
+  {@render children?.()}
+</span>

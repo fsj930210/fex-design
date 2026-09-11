@@ -140,6 +140,8 @@
     }
   },
   "cssVariables": [
+    { "name": "--button-height-sm / --button-height-md / --button-height-lg", "description": "Button 各尺寸的组件级高度；未设置时回退到对应的全局 --height-*。" },
+    { "name": "--button-icon-size-sm / --button-icon-size-md / --button-icon-size-lg", "description": "Button 各尺寸的组件级图标尺寸；md 未设置时回退到全局 --icon-size-md。" },
     {
       "name": "--button-height",
       "description": "当前按钮实例的高度。"

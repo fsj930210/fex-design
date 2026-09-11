@@ -9,7 +9,7 @@ Fex 的五个框架实现必须共享同一套视觉规格。Token 用于表达�
 - React、Vue、Solid、Svelte、Angular 共享同一套系统 Token 和组件样式事实源。
 - 用户修改 CSS Variable 后，无需修改组件 API。
 - 源码交付、内网二次封装为 npm 包、局部业务覆盖三种场景都可用。
-- `size="xs | sm | default | lg | xl"` 等公共 API 保持稳定，实际数值由 Token 决定。
+- `size="xs | sm | md | lg | xl"` 等公共 API 保持稳定，实际数值由 Token 决定。
 - 用户仍可通过 `class`、`style` 和 UI 层结构化部件样式直接覆盖默认设计。
 - 只沉淀有明确复用事实的 Token，避免 Token 数量失控。
 
@@ -36,7 +36,7 @@ Fex 的五个框架实现必须共享同一套视觉规格。Token 用于表达�
 
 ```css
 :root {
-  --height-sm: 28px;
+  --height-sm: 24px;
 }
 ```
 
@@ -170,14 +170,14 @@ Primitive 的部件本身直接接受原生 `class` / `className` 和 `style`。
 ```css
 :root {
   --height-xs: 24px;
-  --height-sm: 28px;
-  --height-default: 32px;
-  --height-lg: 36px;
+  --height-sm: 24px;
+  --height-md: 32px;
+  --height-lg: 44px;
   --height-xl: 40px;
 
   --icon-size-xs: 12px;
   --icon-size-sm: 14px;
-  --icon-size-default: 16px;
+  --icon-size-md: 16px;
   --icon-size-lg: 18px;
   --icon-size-xl: 20px;
 }
@@ -252,7 +252,7 @@ Active 和 Selected 保留不同语义名称，但当前默认引用相同色值
 ### 4.8 Layout Spacing
 
 Space Token 在系统层定义数值，并在 Tailwind 映射层提供 `gap-space-xl`、`p-space-2xl` 等
-常用快捷 class。Height 和 Icon Size 由 `utilities.css` 提供 `h-xs`、`h-default`、
+常用快捷 class。Height 和 Icon Size 由 `utilities.css` 提供 `h-xs`、`h-md`、
 `icon-size-sm` 等快捷 class。Font Size、Radius 等 Tailwind 已有清晰快捷方式的能力不重复创建。
 页面留白属于 App 布局，直接在 App 中使用响应式 Tailwind class，不放入通用 Token。
 

@@ -116,7 +116,7 @@ export function RadioGroup({
 export function Radio({
   value,
   disabled = false,
-  size = 'default',
+  size = 'md',
   className,
   ref,
   onClick,
@@ -154,7 +154,7 @@ export function Radio({
 export function RadioButton({
   value,
   disabled = false,
-  size = 'default',
+  size = 'md',
   className,
   ref,
   onClick,

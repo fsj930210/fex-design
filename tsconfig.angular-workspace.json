@@ -616,6 +616,9 @@
       "@fex-design/core/sortable/types": [
         "packages/@fex-design/core/src/sortable/types.ts"
       ],
+      "@fex-design/core/switch/types": [
+        "packages/@fex-design/core/src/switch/types.ts"
+      ],
       "@fex-design/angular/primitive/alert": [
         "packages/@fex-design/angular/src/primitive/alert/alert.ts"
       ],
@@ -879,6 +882,9 @@
       ],
       "@fex-design/angular/ui/skeleton": [
         "packages/@fex-design/angular/src/ui/skeleton/skeleton.ts"
+      ],
+      "@fex-design/angular/ui/switch": [
+        "packages/@fex-design/angular/src/ui/switch/switch.ts"
       ],
       "@fex-design/angular/ui/tag": [
         "packages/@fex-design/angular/src/ui/tag/tag.ts"

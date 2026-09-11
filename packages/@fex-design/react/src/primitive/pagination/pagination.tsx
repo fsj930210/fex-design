@@ -40,7 +40,7 @@ export function PaginationItem({ ...props }: ComponentProps<'li'>) {
 
 type PaginationLinkProps = {
   isActive?: boolean
-  size?: 'default' | 'icon'
+  size?: 'md' | 'icon'
 } & ComponentProps<'a'>
 
 export function PaginationLink({
@@ -56,7 +56,7 @@ export function PaginationLink({
       data-active={isActive ? 'true' : undefined}
       className={cn(
         paginationLinkClassName,
-        size === 'default' ? paginationTextLinkClassName : '',
+        size === 'md' ? paginationTextLinkClassName : '',
         className,
       )}
       {...props}

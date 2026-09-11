@@ -1,0 +1,279 @@
+{
+  "name": "Switch",
+  "slug": "switch",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "可组合的 Switch Root、Content 和 Thumb。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/switch",
+    "vue": "@fex-design/vue/primitive/switch",
+    "solid": "@fex-design/solid/primitive/switch",
+    "svelte": "@fex-design/svelte/primitive/switch",
+    "angular": "@fex-design/angular/primitive/switch"
+  },
+  "components": [
+    {
+      "name": "SwitchRoot",
+      "layer": "primitive",
+      "description": "管理状态、交互、形状和尺寸。",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "description": "受控开启状态。"
+        },
+        {
+          "name": "defaultChecked",
+          "type": "boolean",
+          "default": false,
+          "description": "非受控初始状态。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用并阻止切换。"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": false,
+          "description": "显示加载反馈并阻止切换。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "开关尺寸。"
+        },
+        {
+          "name": "shape",
+          "type": "'rounded' | 'pill'",
+          "default": "rounded",
+          "description": "轨道和滑块形状。"
+        }
+      ]
+    },
+    {
+      "name": "SwitchContent",
+      "layer": "primitive",
+      "description": "按 checked 或 unchecked 状态显示轨道内容。",
+      "props": [
+        {
+          "name": "state",
+          "type": "'checked' | 'unchecked'",
+          "required": true,
+          "description": "显示内容的目标状态。"
+        }
+      ]
+    },
+    {
+      "name": "SwitchThumb",
+      "layer": "primitive",
+      "description": "继承 Root 尺寸和形状的滑块。",
+      "props": []
+    }
+  ],
+  "props": [
+    {
+      "name": "checked",
+      "type": "boolean",
+      "description": "受控开启状态。"
+    },
+    {
+      "name": "defaultChecked",
+      "type": "boolean",
+      "default": false,
+      "description": "非受控初始状态。"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "禁用并阻止切换。"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": false,
+      "description": "显示加载反馈并阻止切换。"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "开关尺寸。"
+    },
+    {
+      "name": "shape",
+      "type": "'rounded' | 'pill'",
+      "default": "rounded",
+      "description": "轨道和滑块形状。"
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "description": "用户请求切换时返回 checked 和原始点击事件。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--switch-height-sm / --switch-height-md / --switch-height-lg",
+      "description": "Switch 各尺寸的组件级高度；未设置时分别回退到全局 --height-sm / --height-md / --height-lg。"
+    },
+    {
+      "name": "--switch-track-height",
+      "description": "当前尺寸的轨道高度。"
+    },
+    {
+      "name": "--switch-track-background",
+      "description": "关闭状态的轨道背景。"
+    },
+    {
+      "name": "--switch-track-checked-background",
+      "description": "开启状态的轨道背景。"
+    },
+    {
+      "name": "--switch-track-border-color",
+      "description": "关闭状态的轨道边框。"
+    },
+    {
+      "name": "--switch-track-checked-border-color",
+      "description": "开启状态的轨道边框。"
+    },
+    {
+      "name": "--switch-color",
+      "description": "关闭状态的内容颜色。"
+    },
+    {
+      "name": "--switch-checked-color",
+      "description": "开启状态的内容颜色。"
+    },
+    {
+      "name": "--switch-thumb-background",
+      "description": "滑块背景。"
+    },
+    {
+      "name": "--switch-thumb-color",
+      "description": "滑块内容颜色。"
+    },
+    {
+      "name": "--switch-thumb-size",
+      "description": "当前尺寸的滑块边长。"
+    },
+    {
+      "name": "--switch-thumb-radius",
+      "description": "当前形状的滑块圆角。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本展示",
+      "description": "分别展示 rounded、pill 的关闭和开启状态。"
+    },
+    {
+      "id": "shape",
+      "title": "Shape",
+      "description": "并排比较 rounded 和 pill 两种形状。"
+    },
+    {
+      "id": "size",
+      "title": "Size",
+      "description": "两种形状分别展示 sm、md、lg，默认尺寸为 md。"
+    },
+    {
+      "id": "content",
+      "title": "文本和图标",
+      "description": "两种形状均展示 checked、unchecked 的文字和真实图标。"
+    },
+    {
+      "id": "loading",
+      "title": "Loading",
+      "description": "两种形状均展示关闭和开启状态的加载反馈。"
+    },
+    {
+      "id": "disabled",
+      "title": "Disabled",
+      "description": "两种形状均展示关闭和开启状态的禁用开关。"
+    },
+    {
+      "id": "validation",
+      "title": "校验失败",
+      "description": "两种形状使用 aria-invalid 和 aria-describedby 表达校验失败。"
+    },
+    {
+      "id": "controlled",
+      "title": "受控与非受控",
+      "description": "非受控开关自行更新；受控开关由外部按钮设置开启和关闭。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "两种形状在 LTR 与 RTL 下保持正确的内容和滑块方向。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS Variables",
+      "description": "两种形状使用实例 CSS Variables 覆盖轨道、边框、文字和滑块。"
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkContent": "ReactNode"
+      },
+      "events": [
+        {
+          "name": "onChange",
+          "description": "返回新的 checked 值和原始点击事件。"
+        }
+      ]
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkContent": "slot"
+      },
+      "events": [
+        {
+          "name": "change",
+          "description": "返回新的 checked 值和原始点击事件。"
+        }
+      ]
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkContent": "JSX.Element"
+      },
+      "events": [
+        {
+          "name": "onChange",
+          "description": "返回新的 checked 值和原始点击事件。"
+        }
+      ]
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkContent": "Snippet"
+      },
+      "events": [
+        {
+          "name": "onChange",
+          "description": "返回新的 checked 值和原始点击事件。"
+        }
+      ]
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkContent": "string | TemplateRef<unknown>"
+      },
+      "events": [
+        {
+          "name": "change",
+          "description": "返回包含 checked 和原始点击事件的对象。"
+        }
+      ]
+    }
+  }
+}

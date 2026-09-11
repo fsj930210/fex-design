@@ -27,12 +27,12 @@ export function SwitchPage() {
           </Card>
           <Card
             title="Controlled"
-            description="Controlled switch uses checked and onCheckedChange."
+            description="Controlled switch uses checked and onChange."
           >
             <div class="grid gap-2">
               <SwitchRoot
                 checked={checked()}
-                onCheckedChange={setChecked}
+                onChange={setChecked}
                 aria-label="Controlled switch"
               >
                 <SwitchThumb />
@@ -40,7 +40,7 @@ export function SwitchPage() {
               <p class="text-sm text-muted-foreground">Current value: {String(checked())}</p>
             </div>
           </Card>
-          <Card title="Sizes" description="Switch supports sm, default, and lg sizes.">
+          <Card title="Sizes" description="Switch supports sm, md, and lg sizes.">
             <div class="flex items-center gap-2">
               <SwitchRoot size="sm" defaultChecked aria-label="Small switch">
                 <SwitchThumb />

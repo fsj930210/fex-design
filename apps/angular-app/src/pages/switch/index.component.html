@@ -14,26 +14,26 @@
         ><button switch defaultChecked aria-label="Enable notifications">
           <span switchThumb></span></button
       ></div>
-      <div card title="Controlled" description="Controlled switch uses checked and checkedChange."
+      <div card title="Controlled" description="Controlled switch uses checked and change."
         ><div class="grid gap-2">
           <button
             switch
             [checked]="checked()"
-            (checkedChange)="checked.set($event.checked)"
+            (change)="checked.set($event.checked)"
             aria-label="Controlled switch"
           >
             <span switchThumb></span>
           </button>
           <p class="text-sm text-muted-foreground">Current value: {{ checked() }}</p>
         </div></div>
-      <div card title="Sizes" description="Switch supports sm, default, and lg sizes."
+      <div card title="Sizes" description="Switch supports sm, md, and lg sizes."
         ><div class="flex items-center gap-2">
           <button switch size="sm" defaultChecked aria-label="Small switch">
-            <span switchThumb size="sm"></span></button
+            <span switchThumb></span></button
           ><button switch defaultChecked aria-label="Default switch">
             <span switchThumb></span></button
           ><button switch size="lg" defaultChecked aria-label="Large switch">
-            <span switchThumb size="lg"></span>
+            <span switchThumb></span>
           </button></div
       ></div>
       <div card title="Disabled" description="Disabled state blocks interaction."

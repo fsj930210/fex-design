@@ -132,7 +132,7 @@ export function ToggleGroup({
   orientation = 'horizontal',
   spacing = 8,
   variant = 'default',
-  size = 'default',
+  size = 'md',
   className,
   style,
   ref,

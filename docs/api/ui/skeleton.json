@@ -68,7 +68,10 @@
       ]
     }
   },
-  "cssVariables": [],
+  "cssVariables": [
+    { "name": "--skeleton-button-height-sm / --skeleton-button-height-md / --skeleton-button-height-lg", "description": "SkeletonButton 各尺寸的组件级高度；未设置时回退到对应的全局 --height-*。" },
+    { "name": "--skeleton-input-height-md", "description": "SkeletonInput 的组件级高度；未设置时回退到全局 --height-md。" }
+  ],
   "demos": [
     { "id": "basic", "title": "基本", "description": "单独使用占位组件。" },
     { "id": "list", "title": "列表", "description": "列表骨架。" },

@@ -60,7 +60,7 @@ export function Rate({
   readOnly = false,
   allowClear = true,
   direction = 'ltr',
-  size = 'default',
+  size = 'md',
   getValueText = (currentValue, maximum) => `${currentValue} out of ${maximum}`,
   children = DefaultContent,
   className,

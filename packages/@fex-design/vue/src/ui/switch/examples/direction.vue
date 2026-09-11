@@ -1,0 +1,5 @@
+<script setup lang="ts">
+import { Switch } from '@fex-design/vue/ui/switch'
+
+</script>
+<template><div class="grid gap-6 sm:grid-cols-2"><section dir="ltr" class="grid gap-2"><span class="text-sm text-muted-foreground">LTR</span><div class="flex flex-wrap items-center gap-3"><Switch shape="rounded" default-checked aria-label="rounded 文字开关"><template #checkedContent>开启</template><template #uncheckedContent>关闭</template></Switch><Switch shape="pill" default-checked aria-label="pill 文字开关"><template #checkedContent>开启</template><template #uncheckedContent>关闭</template></Switch></div></section><section dir="rtl" class="grid gap-2"><span class="text-sm text-muted-foreground">RTL</span><div class="flex flex-wrap items-center gap-3"><Switch shape="rounded" default-checked aria-label="rounded 文字开关"><template #checkedContent>开启</template><template #uncheckedContent>关闭</template></Switch><Switch shape="pill" default-checked aria-label="pill 文字开关"><template #checkedContent>开启</template><template #uncheckedContent>关闭</template></Switch></div></section></div></template>

@@ -123,7 +123,7 @@ export class Radio {
 
   value = input.required<RadioValue>()
   disabled = input(false, { transform: booleanAttribute })
-  size = input<RadioStyleProps['size']>('default')
+  size = input<RadioStyleProps['size']>('md')
 
   protected readonly checked = computed(() => this.group.currentValue() === this.value())
   protected readonly disabledState = computed(() => this.group.disabled() || this.disabled())
@@ -162,7 +162,7 @@ export class RadioButton {
 
   value = input.required<RadioValue>()
   disabled = input(false, { transform: booleanAttribute })
-  size = input<RadioButtonStyleProps['size']>('default')
+  size = input<RadioButtonStyleProps['size']>('md')
 
   protected readonly checked = computed(() => this.group.currentValue() === this.value())
   protected readonly disabledState = computed(() => this.group.disabled() || this.disabled())

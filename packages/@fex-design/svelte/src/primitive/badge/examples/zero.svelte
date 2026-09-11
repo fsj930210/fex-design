@@ -1,7 +1,6 @@
 <script lang="ts">
   import Badge from "@fex-design/svelte/primitive/badge";
-  import SwitchRoot from "@fex-design/svelte/primitive/switch";
-  import SwitchThumb from "@fex-design/svelte/primitive/switch-thumb";
+  import { SwitchRoot, SwitchThumb } from '@fex-design/svelte/primitive/switch'
   let showZero = $state(false);
 </script>
 
@@ -10,10 +9,8 @@
     ><SwitchRoot
       checked={showZero}
       aria-label="显示 0"
-      onCheckedChange={(value) => (showZero = value)}
-      >{#snippet children(_checked, state)}<SwitchThumb
-          {state}
-        />{/snippet}</SwitchRoot
+      onChange={(value) => (showZero = value)}
+      >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
     ><span>显示 0</span></label
   ><span class="relative inline-flex"
     ><span class="block size-10 rounded bg-muted-background"></span><Badge

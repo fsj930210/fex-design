@@ -19,12 +19,12 @@ export const checkboxClassName = cva(
     variants: {
       size: {
         sm: 'size-3.5',
-        default: 'size-4',
+        md: 'size-4',
         lg: 'size-5 [&_svg]:size-3.5',
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: 'md',
     },
   },
 )

@@ -118,7 +118,7 @@ export function SliderPage() {
               </SliderRoot>
             </div>
           </Card>
-          <Card title="Sizes" description="Slider supports sm, default, and lg sizes.">
+          <Card title="Sizes" description="Slider supports sm, md, and lg sizes.">
             <div class="grid gap-2">
               <SliderRoot size="sm" defaultValue={[25]} aria-label="Small slider">
                 <SliderTrack>

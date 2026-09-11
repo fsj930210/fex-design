@@ -19,7 +19,7 @@ import {
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { createHostClassName } from '../../signals/host-class'
 
-type SliderSize = 'sm' | 'default' | 'lg'
+type SliderSize = 'sm' | 'md' | 'lg'
 type SliderOrientation = 'horizontal' | 'vertical'
 type SliderController = ReturnType<typeof createSliderController>
 
@@ -61,7 +61,7 @@ export class SliderRoot {
   minStepsBetweenThumbs = input(0, { transform: numberAttribute })
   orientation = input<SliderOrientation>('horizontal')
   disabled = input(false, { transform: booleanAttribute })
-  size = input<SliderSize>('default')
+  size = input<SliderSize>('md')
   valueChange = output<number[]>()
   valueCommit = output<number[]>()
 

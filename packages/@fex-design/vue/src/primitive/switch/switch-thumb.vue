@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { switchThumbClassName, type SwitchStyleProps } from '@fex-design/styles/switch'
+import { switchThumbClassName } from '@fex-design/styles/switch'
 import { cn } from '@fex/utils'
-import { computed, useAttrs } from 'vue'
-defineOptions({ inheritAttrs: false })
-const props = withDefaults(defineProps<{ checked?: boolean; size?: SwitchStyleProps['size'] }>(), {
-  checked: false,
-  size: 'default',
-})
+import { useAttrs, useTemplateRef } from 'vue'
+defineOptions({ name: 'SwitchThumb', inheritAttrs: false })
+
 const attrs = useAttrs()
-const state = computed(() => (props.checked ? 'checked' : 'unchecked'))
+const element = useTemplateRef<HTMLSpanElement>('element')
+defineExpose({ element })
 </script>
 <template>
   <span
     v-bind="attrs"
-    :data-state="state"
-    :class="cn(switchThumbClassName({ size: props.size }), attrs.class as string | undefined)"
-  />
+    ref="element"
+    aria-hidden="true"
+    data-slot="switch-thumb"
+    :class="cn(switchThumbClassName, attrs.class as string | undefined)"
+  >
+    <slot />
+  </span>
 </template>

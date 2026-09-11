@@ -1,0 +1,5 @@
+<script setup lang="ts">
+import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitive/switch'
+
+</script>
+<template><div class="grid gap-6 sm:grid-cols-2"><section class="grid gap-2"><span class="text-sm text-muted-foreground">rounded</span><div class="flex flex-wrap items-center gap-3"><SwitchRoot shape="rounded" size="sm" default-checked aria-label="rounded sm"><SwitchThumb /></SwitchRoot><SwitchRoot shape="rounded" size="md" default-checked aria-label="rounded md"><SwitchThumb /></SwitchRoot><SwitchRoot shape="rounded" size="lg" default-checked aria-label="rounded lg"><SwitchThumb /></SwitchRoot></div></section><section class="grid gap-2"><span class="text-sm text-muted-foreground">pill</span><div class="flex flex-wrap items-center gap-3"><SwitchRoot shape="pill" size="sm" default-checked aria-label="pill sm"><SwitchThumb /></SwitchRoot><SwitchRoot shape="pill" size="md" default-checked aria-label="pill md"><SwitchThumb /></SwitchRoot><SwitchRoot shape="pill" size="lg" default-checked aria-label="pill lg"><SwitchThumb /></SwitchRoot></div></section></div></template>

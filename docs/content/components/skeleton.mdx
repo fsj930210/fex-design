@@ -19,3 +19,7 @@ UI 重新导出全部 Primitive，并增加组合版 `Skeleton`：根据 avatar�
 
 <ApiSection layer="primitive" title="Primitive API" description="六个可独立使用的骨架占位组件。" />
 <ApiSection layer="ui" title="UI API" description="全部 Primitive 重导出以及组合版 Skeleton。" />
+
+## CSS Variables
+
+`SkeletonButton` 默认通过 `--skeleton-button-height-sm`、`--skeleton-button-height-md`、`--skeleton-button-height-lg` 回退到对应的全局 `--height-*`；`SkeletonInput` 通过 `--skeleton-input-height-md` 回退到全局 `--height-md`。这些组件级变量只调整 Skeleton 预设，不会改变 Button 或 Input。

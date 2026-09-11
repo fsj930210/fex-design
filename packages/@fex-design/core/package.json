@@ -208,7 +208,8 @@
     "./sortable/containers": "./src/sortable/containers.ts",
     "./sortable/create-sortable-controller": "./src/sortable/create-sortable-controller.ts",
     "./sortable/motion": "./src/sortable/motion.ts",
-    "./sortable/types": "./src/sortable/types.ts"
+    "./sortable/types": "./src/sortable/types.ts",
+    "./switch/types": "./src/switch/types.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",

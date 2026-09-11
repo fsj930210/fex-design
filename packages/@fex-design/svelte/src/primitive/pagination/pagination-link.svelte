@@ -10,7 +10,7 @@
     class?: string | undefined;
     children?: Snippet;
     isActive?: boolean;
-    size?: "default" | "icon";
+    size?: "md" | "icon";
   }
   let {
     class: className,
@@ -22,7 +22,7 @@
   const classList = $derived(
     cn(
       paginationLinkClassName,
-      size === "default" ? paginationTextLinkClassName : "",
+      size === "md" ? paginationTextLinkClassName : "",
       className,
     ),
   );

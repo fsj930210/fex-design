@@ -47,7 +47,7 @@ export function PaginationItem(props: ParentProps<JSX.LiHTMLAttributes<HTMLLIEle
 
 type PaginationLinkProps = ParentProps<JSX.AnchorHTMLAttributes<HTMLAnchorElement>> & {
   isActive?: boolean
-  size?: 'default' | 'icon'
+  size?: 'md' | 'icon'
 }
 
 export function PaginationLink(props: PaginationLinkProps) {
@@ -60,7 +60,7 @@ export function PaginationLink(props: PaginationLinkProps) {
       data-active={local.isActive ? 'true' : undefined}
       class={cn(
         paginationLinkClassName,
-        (local.size ?? 'icon') === 'default' ? paginationTextLinkClassName : '',
+        (local.size ?? 'icon') === 'md' ? paginationTextLinkClassName : '',
         local.class,
       )}
     >

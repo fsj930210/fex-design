@@ -41,7 +41,7 @@
     orientation = "horizontal",
     spacing = 8,
     variant = "default",
-    size = "default",
+    size = "md",
     class: className,
     onchange,
     onkeydown,

@@ -18,8 +18,8 @@
   height: var(--height-sm);
 }
 
-@utility h-default {
-  height: var(--height-default);
+@utility h-md {
+  height: var(--height-md);
 }
 
 @utility h-lg {
@@ -40,9 +40,9 @@
   height: var(--icon-size-sm);
 }
 
-@utility icon-size-default {
-  width: var(--icon-size-default);
-  height: var(--icon-size-default);
+@utility icon-size-md {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
 }
 
 @utility icon-size-lg {

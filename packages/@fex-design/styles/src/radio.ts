@@ -25,12 +25,12 @@ export const radioRootClassName = cva(
     variants: {
       size: {
         sm: 'size-3.5',
-        default: 'size-4',
+        md: 'size-4',
         lg: 'size-5',
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: 'md',
     },
   },
 )
@@ -39,12 +39,12 @@ export const radioIndicatorClassName = cva('block rounded-full bg-current transi
   variants: {
     size: {
       sm: 'size-1.5',
-      default: 'size-2',
+      md: 'size-2',
       lg: 'size-2.5',
     },
   },
   defaultVariants: {
-    size: 'default',
+    size: 'md',
   },
 })
 
@@ -63,12 +63,12 @@ export const radioButtonClassName = cva(
     variants: {
       size: {
         sm: 'h-7 px-3 text-xs',
-        default: 'h-8 px-4 text-sm',
+        md: 'h-8 px-4 text-sm',
         lg: 'h-9 px-5 text-sm',
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: 'md',
     },
   },
 )

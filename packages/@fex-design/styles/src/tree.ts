@@ -23,11 +23,11 @@ export const treeItemClassName = cva(
     variants: {
       size: {
         sm: 'min-h-7',
-        default: 'min-h-8',
+        md: 'min-h-8',
         lg: 'min-h-9',
       },
     },
-    defaultVariants: { size: 'default' },
+    defaultVariants: { size: 'md' },
   },
 )
 

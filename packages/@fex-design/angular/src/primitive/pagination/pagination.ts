@@ -68,9 +68,9 @@ export class PaginationItem {}
 })
 export class PaginationLink {
   readonly isActive = input(false)
-  readonly size = input<'default' | 'icon'>('icon')
+  readonly size = input<'md' | 'icon'>('icon')
   protected readonly hostClassName = createHostClassName(() =>
-    cn(paginationLinkClassName, this.size() === 'default' ? paginationTextLinkClassName : ''),
+    cn(paginationLinkClassName, this.size() === 'md' ? paginationTextLinkClassName : ''),
   )
 }
 

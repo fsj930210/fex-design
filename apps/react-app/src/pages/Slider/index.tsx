@@ -132,7 +132,7 @@ export function SliderPage() {
               <DemoSlider orientation="vertical" defaultValue={[60]} aria-label="Vertical slider" />
             </div>
           </Card>
-          <Card title="Sizes" description="Slider supports sm, default, and lg sizes.">
+          <Card title="Sizes" description="Slider supports sm, md, and lg sizes.">
             <div className="grid gap-2">
               <DemoSlider size="sm" defaultValue={[25]} aria-label="Small slider" />
               <DemoSlider defaultValue={[50]} aria-label="Default slider" />

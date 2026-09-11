@@ -54,7 +54,7 @@ export function SliderRoot({
   minStepsBetweenThumbs = 0,
   orientation = 'horizontal',
   disabled = false,
-  size = 'default',
+  size = 'md',
   className,
   ref,
   children,

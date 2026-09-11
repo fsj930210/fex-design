@@ -84,6 +84,8 @@
     { "name": "clear", "description": "成功清除后触发。" }
   ],
   "cssVariables": [
+    { "name": "--input-height-sm / --input-height-md / --input-height-lg", "description": "Input 各尺寸的组件级高度；未设置时回退到对应的全局 --height-*。" },
+    { "name": "--input-icon-size-sm / --input-icon-size-md / --input-icon-size-lg", "description": "Input 各尺寸的组件级图标尺寸；md 未设置时回退到全局 --icon-size-md。" },
     { "name": "--input-height", "description": "当前实例高度。" },
     { "name": "--input-icon-size", "description": "普通图标尺寸。" },
     {

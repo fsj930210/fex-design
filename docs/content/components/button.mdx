@@ -66,6 +66,6 @@ Button 用于触发即时操作。页面跳转使用链接；开关状态使用 
 
 ## CSS Variables
 
-CSS Variables 可直接写在单个 Button 上完成实例级覆盖，也可写在局部容器或主题根节点，让其中所有 Button 继承。尺寸变量可以覆盖某个 size 的最终结果，颜色变量用于覆盖当前 variant 使用的语义色组。
+Button 默认从全局 `--height-sm`、`--height-md`、`--height-lg` 取得高度，md 图标从 `--icon-size-md` 取得尺寸。只调整 Button 时使用 `--button-height-*` 和 `--button-icon-size-*`；单个实例可继续用 `--button-height`、`--button-icon-size` 覆盖最终结果。变量可写在组件、局部容器或主题根节点上。
 
 <CssVariables />

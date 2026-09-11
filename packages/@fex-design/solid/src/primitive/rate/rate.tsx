@@ -186,7 +186,7 @@ export function Rate(props: RateProps) {
       aria-readonly={snapshot().readOnly || undefined}
       data-disabled={snapshot().disabled ? 'true' : undefined}
       data-readonly={String(snapshot().readOnly)}
-      class={cn(rateRootClassName({ size: local.size ?? 'default' }), local.class)}
+      class={cn(rateRootClassName({ size: local.size ?? 'md' }), local.class)}
       onPointerDown={(event) => {
         if (typeof local.onPointerDown === 'function') local.onPointerDown(event)
         if (event.defaultPrevented || snapshot().disabled || snapshot().readOnly) return

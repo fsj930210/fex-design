@@ -18,7 +18,7 @@ import { CheckIcon } from '../../icon/check'
 import { MinusIcon } from '../../icon/minus'
 import { createHostClassName } from '../../signals/host-class'
 
-type CheckboxSize = 'sm' | 'default' | 'lg'
+type CheckboxSize = 'sm' | 'md' | 'lg'
 type CheckboxOrientation = 'horizontal' | 'vertical'
 type CheckboxCheckedState = boolean | 'indeterminate'
 interface CheckboxChangeMeta {
@@ -45,7 +45,7 @@ interface CheckboxChangeMeta {
   templateUrl: './checkbox.html',
 })
 export class Checkbox {
-  size = input<CheckboxSize>('default')
+  size = input<CheckboxSize>('md')
   checked = input<CheckboxCheckedState | undefined>()
   defaultChecked = input<CheckboxCheckedState | undefined>()
   disabled = input(false, { transform: booleanAttribute })

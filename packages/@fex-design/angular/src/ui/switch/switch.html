@@ -1,0 +1,23 @@
+@if (checkedContent() !== undefined) {
+  <span switchContent state="checked" [class]="classNames().content" [style]="styles().content">
+    @if (template(checkedContent()); as contentTemplate) {
+      <ng-container *ngTemplateOutlet="contentTemplate" />
+    } @else {
+      {{ text(checkedContent()) }}
+    }
+  </span>
+}
+@if (uncheckedContent() !== undefined) {
+  <span switchContent state="unchecked" [class]="classNames().content" [style]="styles().content">
+    @if (template(uncheckedContent()); as contentTemplate) {
+      <ng-container *ngTemplateOutlet="contentTemplate" />
+    } @else {
+      {{ text(uncheckedContent()) }}
+    }
+  </span>
+}
+<span switchThumb [class]="classNames().thumb" [style]="styles().thumb">
+  @if (loading()) {
+    <span spinner aria-hidden="true"></span>
+  }
+</span>

@@ -51,7 +51,7 @@
         switch
         aria-label="Disable one-way Transfer"
         [checked]="disabled()"
-        (checkedChange)="disabled.set($event.checked)"
+        (change)="disabled.set($event.checked)"
       >
         <span switchThumb></span>
       </button>

@@ -64,7 +64,7 @@ InputGroup
 
 ## CSS Variables
 
-CSS Variables 只负责基础视觉和尺寸；hover、focus-within、variant 与 `aria-invalid` 使用选择器覆盖，避免为每个状态增加变量。`className`/`class` 落在真实 Input Root，内部区域可通过 `classNames`、`styles` 或 `data-slot` 定位。
+Input 默认从全局 `--height-sm`、`--height-md`、`--height-lg` 取得高度，md 图标从 `--icon-size-md` 取得尺寸。只调整 Input 时使用 `--input-height-*` 和 `--input-icon-size-*`；单个实例可继续用 `--input-height`、`--input-icon-size` 覆盖最终结果。hover、focus-within、variant 与 `aria-invalid` 使用选择器覆盖。`className`/`class` 落在真实 Input Root，内部区域可通过 `classNames`、`styles` 或 `data-slot` 定位。
 
 `InputGroup` 只为直接子元素提供默认连接圆角，不限定子元素类型，也不使用 `!important`。在 Group 上设置 `[--input-group-radius:0px]` 可移除整组外圆角，设置为其他值可更换整组圆角；在某个直接子元素上设置同一变量，则只局部覆盖该元素的外侧圆角。
 

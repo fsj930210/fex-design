@@ -11,11 +11,11 @@ export const toggleClassName = cva(`${buttonPrimitiveClassName} w-fit`, {
     },
     size: {
       sm: 'h-7 gap-1 px-2 text-xs [&_svg:not([class*=size-])]:size-3.5',
-      default: 'h-8 gap-1.5 px-2.5 text-sm',
+      md: 'h-8 gap-1.5 px-2.5 text-sm',
       lg: 'h-9 gap-1.5 px-3 text-sm',
     },
   },
-  defaultVariants: { variant: 'default', size: 'default' },
+  defaultVariants: { variant: 'default', size: 'md' },
 })
 
 export const toggleGroupClassName = cva('inline-flex w-fit items-center', {

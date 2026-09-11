@@ -1,6 +1,5 @@
 <script lang="ts">
-  import SwitchRoot from "@fex-design/svelte/primitive/switch";
-  import SwitchThumb from "@fex-design/svelte/primitive/switch-thumb";
+  import { SwitchRoot, SwitchThumb } from '@fex-design/svelte/primitive/switch'
   import Card from "@fex-design/svelte/ui/card";
   let checked = $state(true);
 </script>
@@ -21,22 +20,18 @@
     <div class="space-y-4">
       <Card title="Basic" description="Uncontrolled switch uses defaultChecked."
         ><SwitchRoot defaultChecked aria-label="Enable notifications"
-          >{#snippet children(_checked, state)}<SwitchThumb
-              {state}
-            />{/snippet}</SwitchRoot
+          >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
         ></Card
       >
       <Card
         title="Controlled"
-        description="Controlled switch uses checked and onCheckedChange."
+        description="Controlled switch uses checked and onChange."
         ><div class="grid gap-2">
           <SwitchRoot
             {checked}
-            onCheckedChange={(next) => (checked = next)}
+            onChange={(next) => (checked = next)}
             aria-label="Controlled switch"
-            >{#snippet children(_checked, state)}<SwitchThumb
-                {state}
-              />{/snippet}</SwitchRoot
+            >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
           >
           <p class="text-sm text-muted-foreground">
             Current value: {String(checked)}
@@ -45,38 +40,26 @@
       >
       <Card
         title="Sizes"
-        description="Switch supports sm, default, and lg sizes."
+        description="Switch supports sm, md, and lg sizes."
         ><div class="flex items-center gap-2">
           <SwitchRoot size="sm" defaultChecked aria-label="Small switch"
-            >{#snippet children(_checked, state)}<SwitchThumb
-                size="sm"
-                {state}
-              />{/snippet}</SwitchRoot
+            >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
           ><SwitchRoot defaultChecked aria-label="Default switch"
-            >{#snippet children(_checked, state)}<SwitchThumb
-                {state}
-              />{/snippet}</SwitchRoot
+            >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
           ><SwitchRoot size="lg" defaultChecked aria-label="Large switch"
-            >{#snippet children(_checked, state)}<SwitchThumb
-                size="lg"
-                {state}
-              />{/snippet}</SwitchRoot
+            >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
           >
         </div></Card
       >
       <Card title="Disabled" description="Disabled state blocks interaction."
         ><div class="flex items-center gap-2">
           <SwitchRoot disabled aria-label="Disabled switch"
-            >{#snippet children(_checked, state)}<SwitchThumb
-                {state}
-              />{/snippet}</SwitchRoot
+            >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
           ><SwitchRoot
             disabled
             defaultChecked
             aria-label="Disabled checked switch"
-            >{#snippet children(_checked, state)}<SwitchThumb
-                {state}
-              />{/snippet}</SwitchRoot
+            >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
           >
         </div></Card
       >

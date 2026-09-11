@@ -57,7 +57,7 @@ const targetKeys = ref<readonly (string | number)[]>(['susan', 'katherine'])
         ><SwitchRoot
           :checked="disabled"
           aria-label="Disable one-way Transfer"
-          @checked-change="disabled = $event"
+          @change="disabled = $event"
           ><template #default="{ checked }"
             ><SwitchThumb :checked="checked" /></template></SwitchRoot
         >Disabled</label

@@ -34,9 +34,9 @@ export const skeletonAvatarClassName = cva('', {
 export const skeletonButtonClassName = cva('w-20 rounded-md', {
   variants: {
     size: {
-      sm: 'h-[var(--button-height-sm,1.5rem)]',
-      md: 'h-[var(--button-height-md,var(--height-default))]',
-      lg: 'h-[var(--button-height-lg,2.75rem)]',
+      sm: 'h-[var(--skeleton-button-height-sm,var(--height-sm))]',
+      md: 'h-[var(--skeleton-button-height-md,var(--height-md))]',
+      lg: 'h-[var(--skeleton-button-height-lg,var(--height-lg))]',
     },
     shape: {
       round: 'rounded-full',
@@ -53,7 +53,7 @@ export const skeletonButtonClassName = cva('w-20 rounded-md', {
 })
 
 export const skeletonInputClassName =
-  'h-[var(--input-height-md,var(--height-default))] w-64 rounded-md'
+  'h-[var(--skeleton-input-height-md,var(--height-md))] w-64 rounded-md'
 export const skeletonInputBlockClassName = 'w-full'
 export const skeletonImageClassName =
   'flex aspect-square w-24 items-center justify-center rounded-md text-muted-foreground/70 [&_svg]:size-8'

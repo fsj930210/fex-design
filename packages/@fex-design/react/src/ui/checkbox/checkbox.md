@@ -21,7 +21,7 @@ import { Checkbox, CheckboxGroup } from '@fex-design/react/ui/checkbox'
 | `checked`         | `boolean \| 'indeterminate'`          | `undefined`  | No       | Controlled checked state.                                                   |
 | `defaultChecked`  | `boolean \| 'indeterminate'`          | `false`      | No       | Initial unchecked state.                                                    |
 | `onCheckedChange` | `(checked, meta) => void`             | `undefined`  | No       | Fires when checked state changes.                                           |
-| `size`            | `'sm' \| 'default' \| 'lg'`           | `'default'`  | No       | Visual size.                                                                |
+| `size`            | `'sm' \| 'md' \| 'lg'`           | `'md'`  | No       | Visual size.                                                                |
 | `children`        | `ReactNode`                           | default icon | No       | Indicator content.                                                          |
 | button props      | `ComponentProps<typeof CheckboxRoot>` | -            | No       | Root attributes, including `className`, `disabled`, `aria-*`, and `data-*`. |
 

@@ -25,19 +25,19 @@ const checked = ref(true)
             ><template #default="{ checked: currentChecked }"
               ><SwitchThumb :checked="currentChecked" /></template></SwitchRoot
         ></Card>
-        <Card title="Controlled" description="Controlled switch uses checked and checked-change."
+        <Card title="Controlled" description="Controlled switch uses checked and change."
           ><div class="grid gap-2">
             <SwitchRoot
               :checked="checked"
               aria-label="Controlled switch"
-              @checked-change="(next) => (checked = next)"
+              @change="(next) => (checked = next)"
               ><template #default="{ checked: currentChecked }"
                 ><SwitchThumb :checked="currentChecked" /></template
             ></SwitchRoot>
             <p class="text-sm text-muted-foreground">Current value: {{ String(checked) }}</p>
           </div></Card
         >
-        <Card title="Sizes" description="Switch supports sm, default, and lg sizes."
+        <Card title="Sizes" description="Switch supports sm, md, and lg sizes."
           ><div class="flex items-center gap-2">
             <SwitchRoot size="sm" default-checked aria-label="Small switch"
               ><template #default="{ checked: currentChecked }"

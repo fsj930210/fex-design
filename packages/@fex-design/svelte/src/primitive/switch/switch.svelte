@@ -1,66 +1,33 @@
 <script lang="ts">
-  import {
-    switchClassName,
-    type SwitchStyleProps,
-  } from "@fex-design/styles/switch";
-  import { cn } from "@fex/utils";
-  import type { Snippet } from "svelte";
-  import type { HTMLButtonAttributes } from "svelte/elements";
-
-  export type SwitchState = "checked" | "unchecked";
-
-  interface SwitchProps
-    extends
-      Omit<HTMLButtonAttributes, "checked" | "children" | "type">,
-      SwitchStyleProps {
-    checked?: boolean | undefined;
-    defaultChecked?: boolean | undefined;
-    children?: Snippet<[boolean, SwitchState]> | undefined;
-    onCheckedChange?:
-      ((checked: boolean, event: MouseEvent) => void) | undefined;
+  import type { SwitchOptions } from '@fex-design/core/switch/types'
+  import { switchClassName } from '@fex-design/styles/switch'
+  import { cn } from '@fex/utils'
+  import type { HTMLButtonAttributes } from 'svelte/elements'
+  import type { Snippet } from 'svelte'
+  interface Props extends Omit<HTMLButtonAttributes, 'children' | 'type' | 'role' | 'onchange'>, SwitchOptions {
+    ref?: HTMLButtonElement | null | undefined
+    children?: Snippet<[{ checked: boolean; loading: boolean }]> | undefined
+    onChange?: ((checked: boolean, event: MouseEvent) => void) | undefined
   }
-
-  let {
-    checked,
-    defaultChecked = false,
-    disabled,
-    size = "default",
-    class: className,
-    children,
-    onclick,
-    onCheckedChange,
-    ...rest
-  }: SwitchProps = $props();
-
-  let hasInteracted: boolean = $state(false);
-  let internalChecked: boolean = $state(false);
-  const currentChecked: boolean = $derived(
-    checked ?? (hasInteracted ? internalChecked : defaultChecked),
-  );
-  const switchState: SwitchState = $derived(
-    currentChecked ? "checked" : "unchecked",
-  );
+  let { checked, defaultChecked = false, disabled = false, loading = false,
+    size = 'md', shape = 'rounded', class: className, ref = $bindable(null),
+    children, onclick, onChange, ...rest }: Props = $props()
+  // svelte-ignore state_referenced_locally -- defaultChecked initializes uncontrolled state once.
+  let internalChecked = $state(defaultChecked)
+  const currentChecked = $derived(checked ?? internalChecked)
 </script>
-
-<button
-  {...rest}
-  type="button"
-  role="switch"
-  {disabled}
-  aria-checked={currentChecked}
-  data-state={switchState}
-  data-disabled={disabled ? "true" : undefined}
-  class={cn(switchClassName({ size }), className)}
+<button {...rest} bind:this={ref} type="button" role="switch" disabled={disabled || loading}
+  aria-checked={currentChecked} aria-busy={loading || undefined}
+  data-slot="switch" data-state={currentChecked ? 'checked' : 'unchecked'}
+  data-disabled={disabled ? '' : undefined} data-loading={loading ? '' : undefined}
+  data-size={size} data-shape={shape}
+  class={cn(switchClassName({ size, shape }), className)}
   onclick={(event) => {
-    onclick?.(event);
-    if (event.defaultPrevented || disabled) return;
-    const nextChecked = !currentChecked;
-    if (checked === undefined) {
-      hasInteracted = true;
-      internalChecked = nextChecked;
-    }
-    onCheckedChange?.(nextChecked, event);
-  }}
->
-  {@render children?.(currentChecked, switchState)}
+    onclick?.(event)
+    if (event.defaultPrevented || disabled || loading) return
+    const next = !currentChecked
+    if (checked === undefined) internalChecked = next
+    onChange?.(next, event)
+  }}>
+  {@render children?.({ checked: currentChecked, loading })}
 </button>

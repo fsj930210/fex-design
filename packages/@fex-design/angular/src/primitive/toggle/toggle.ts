@@ -52,7 +52,7 @@ export class ToggleGroup {
   orientation = input<'horizontal' | 'vertical'>('horizontal')
   spacing = input(8)
   variant = input<ToggleStyleProps['variant']>('default')
-  size = input<ToggleStyleProps['size']>('default')
+  size = input<ToggleStyleProps['size']>('md')
   change = output<ToggleGroupValue>()
   readonly controller: ToggleGroupController
   readonly snapshot: Signal<ToggleGroupSnapshot>

@@ -82,7 +82,7 @@ export function OneWayTransferDemo() {
         <label className="flex w-fit items-center gap-2 text-sm text-muted-foreground">
           <SwitchRoot
             checked={disabled}
-            onCheckedChange={setDisabled}
+            onChange={setDisabled}
             aria-label="Disable one-way Transfer"
           >
             <SwitchThumb />

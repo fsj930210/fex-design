@@ -88,7 +88,7 @@ export const ToggleGroup = defineComponent({
     orientation: { type: String as PropType<'horizontal' | 'vertical'>, default: 'horizontal' },
     spacing: { type: Number, default: 8 },
     variant: { type: String as PropType<Variant>, default: 'default' },
-    size: { type: String as PropType<Size>, default: 'default' },
+    size: { type: String as PropType<Size>, default: 'md' },
   },
   emits: { change: (_value: ToggleGroupValue, _meta: ToggleGroupChangeMeta) => true },
   setup(props, { attrs, emit, slots }) {

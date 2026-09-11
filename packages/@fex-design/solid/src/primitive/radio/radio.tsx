@@ -128,7 +128,7 @@ export function Radio(props: RadioProps) {
   ])
   const checked = () => context.value() === local.value
   const currentDisabled = () => context.disabled() || local.disabled === true
-  const size = () => local.size ?? 'default'
+  const size = () => local.size ?? 'md'
 
   return (
     <button
@@ -167,7 +167,7 @@ export function RadioButton(props: RadioButtonProps) {
   ])
   const checked = () => context.value() === local.value
   const currentDisabled = () => context.disabled() || local.disabled === true
-  const size = () => local.size ?? 'default'
+  const size = () => local.size ?? 'md'
 
   return (
     <button

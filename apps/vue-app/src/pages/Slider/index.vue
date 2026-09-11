@@ -117,7 +117,7 @@ function setMultipleValue(next: number[]) {
             /></SliderRoot>
           </div>
         </Card>
-        <Card title="Sizes" description="Slider supports sm, default, and lg sizes.">
+        <Card title="Sizes" description="Slider supports sm, md, and lg sizes.">
           <div class="grid gap-2">
             <SliderRoot size="sm" :default-value="[25]" aria-label="Small slider"
               ><SliderTrack><SliderRange /></SliderTrack><SliderThumb aria-label="Small slider"

@@ -147,7 +147,7 @@ export function ToggleGroup(props: ToggleGroupProps) {
   const context: GroupContext = {
     disabled: () => local.disabled ?? false,
     variant: () => local.variant ?? 'default',
-    size: () => local.size ?? 'default',
+    size: () => local.size ?? 'md',
     isPressed: (value) => {
       version()
       return controller.isPressed(value)

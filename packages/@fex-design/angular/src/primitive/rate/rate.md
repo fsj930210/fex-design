@@ -27,7 +27,7 @@ export class Example {}
 | `readOnly`     | `boolean`                   | `false`      | No       | Blocks value changes.                              |
 | `allowClear`   | `boolean`                   | `true`       | No       | Clears when the current bucket is committed again. |
 | `direction`    | `'ltr' \| 'rtl'`            | `'ltr'`      | No       | Fill, pointer and keyboard direction.              |
-| `size`         | `'sm' \| 'default' \| 'lg'` | `'default'`  | No       | Item size.                                         |
+| `size`         | `'sm' \| 'md' \| 'lg'` | `'md'`  | No       | Item size.                                         |
 | `content`      | `TemplateRef`               | Star         | No       | Renders empty and filled layers.                   |
 | `getValueText` | `(value, count) => string`  | English text | No       | Produces `aria-valuetext`.                         |
 

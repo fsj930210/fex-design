@@ -36,7 +36,7 @@ const props = withDefaults(
     readOnly: false,
     allowClear: true,
     direction: 'ltr',
-    size: 'default',
+    size: 'md',
   },
 )
 const emit = defineEmits<{

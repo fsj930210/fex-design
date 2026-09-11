@@ -17,7 +17,7 @@ import { Checkbox, CheckboxGroupUi } from '@fex-design/angular/ui/checkbox'
 | `checked`        | `boolean \| 'indeterminate'` | `undefined` | No       | Controlled checked state.  |
 | `defaultChecked` | `boolean \| 'indeterminate'` | `false`     | No       | Initial unchecked state.   |
 | `disabled`       | `boolean`                    | `false`     | No       | Disables interaction.      |
-| `size`           | `'sm' \| 'default' \| 'lg'`  | `'default'` | No       | Visual size.               |
+| `size`           | `'sm' \| 'md' \| 'lg'`  | `'md'` | No       | Visual size.               |
 | `checkedChange`  | `{ checked, meta }`          | -           | No       | Emits after state changes. |
 
 Use `aria-invalid` for invalid styling. `div[fexCheckboxGroup]` is a layout wrapper and does not own a value array.

@@ -11,12 +11,12 @@ export const rateRootClassName = cva(
     variants: {
       size: {
         sm: 'gap-0.5 [--rate-icon-size:16px]',
-        default: 'gap-1 [--rate-icon-size:20px]',
+        md: 'gap-1 [--rate-icon-size:20px]',
         lg: 'gap-1.5 [--rate-icon-size:24px]',
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: 'md',
     },
   },
 )

@@ -38,13 +38,13 @@ export const listboxItemClassName = cva(
   {
     variants: {
       size: {
-        default: 'min-h-16',
+        md: 'min-h-16',
         sm: 'min-h-12 p-2',
         lg: 'min-h-20 p-4',
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: 'md',
     },
   },
 )

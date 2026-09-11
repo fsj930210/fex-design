@@ -55,7 +55,7 @@
     readOnly = false,
     allowClear = true,
     direction = "ltr",
-    size = "default",
+    size = "md",
     getValueText,
     children,
     class: className,

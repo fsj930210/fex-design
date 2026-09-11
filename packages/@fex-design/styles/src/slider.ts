@@ -4,7 +4,7 @@ export const sliderRootClassName = cva('relative touch-none select-none', {
   variants: {
     size: {
       sm: '[--slider-track-height:4px] [--slider-thumb-size:14px]',
-      default: '[--slider-track-height:6px] [--slider-thumb-size:16px]',
+      md: '[--slider-track-height:6px] [--slider-thumb-size:16px]',
       lg: '[--slider-track-height:8px] [--slider-thumb-size:20px]',
     },
     orientation: {
@@ -13,7 +13,7 @@ export const sliderRootClassName = cva('relative touch-none select-none', {
     },
   },
   defaultVariants: {
-    size: 'default',
+    size: 'md',
     orientation: 'horizontal',
   },
 })

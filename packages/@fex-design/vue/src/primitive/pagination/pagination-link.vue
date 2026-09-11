@@ -7,9 +7,9 @@ const props = withDefaults(
   defineProps<{
     class?: string | undefined
     isActive?: boolean
-    size?: 'default' | 'icon'
+    size?: 'md' | 'icon'
   }>(),
-  { size: 'icon-md' },
+  { size: 'icon' },
 )
 </script>
 
@@ -22,7 +22,7 @@ const props = withDefaults(
     :class="
       cn(
         paginationLinkClassName,
-        props.size === 'default' ? paginationTextLinkClassName : '',
+        props.size === 'md' ? paginationTextLinkClassName : '',
         props.class,
       )
     "

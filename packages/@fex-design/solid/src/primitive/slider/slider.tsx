@@ -82,7 +82,7 @@ export function SliderRoot(props: SliderRootProps) {
     storeSnapshot()
     return controller.getSnapshot()
   }
-  const size = () => local.size ?? 'default'
+  const size = () => local.size ?? 'md'
 
   return (
     <SliderContext.Provider value={{ controller, snapshot, rootElement: () => rootElement }}>

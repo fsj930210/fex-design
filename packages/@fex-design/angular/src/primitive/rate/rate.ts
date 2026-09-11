@@ -26,7 +26,7 @@ import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { createHostClassName } from '../../signals/host-class'
 import { getRatePointerValue } from './rate-interactions'
 
-export type RateSize = 'sm' | 'default' | 'lg'
+export type RateSize = 'sm' | 'md' | 'lg'
 export interface RateItemRenderState {
   index: number
   layer: 'empty' | 'filled'
@@ -82,7 +82,7 @@ export class Rate {
   readOnly = input(false, { transform: booleanAttribute })
   allowClear = input(true, { transform: booleanAttribute })
   direction = input<RateDirection>('ltr')
-  size = input<RateSize>('default')
+  size = input<RateSize>('md')
   getValueText = input<((value: number, count: number) => string) | undefined>()
   content = input<TemplateRef<{ $implicit: RateItemRenderState }> | undefined>()
   valuePreviewChange = output<number | null>()

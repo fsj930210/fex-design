@@ -42,14 +42,9 @@ export function createDataTableSelectionColumn<
     return mode === 'multiple' ? (
       <DataTableCheckbox
         aria-label="Select all rows"
-        checked={
-          table.getIsAllRowsSelected()
-            ? true
-            : table.getIsSomeRowsSelected()
-              ? 'indeterminate'
-              : false
-        }
-        onCheckedChange={(checked) => table.toggleAllRowsSelected(checked === true)}
+        checked={table.getIsAllRowsSelected()}
+        indeterminate={table.getIsSomeRowsSelected()}
+        onChange={(event) => table.toggleAllRowsSelected(event.currentTarget.checked)}
       />
     ) : null
   }
@@ -59,8 +54,9 @@ export function createDataTableSelectionColumn<
       <DataTableCheckbox
         aria-label={`${ariaLabel} ${row.id}`}
         disabled={!row.getCanSelect()}
-        checked={row.getIsSelected() ? true : row.getIsSomeSelected() ? 'indeterminate' : false}
-        onCheckedChange={(checked) => row.toggleSelected(checked === true)}
+        checked={row.getIsSelected()}
+        indeterminate={row.getIsSomeSelected()}
+        onChange={(event) => row.toggleSelected(event.currentTarget.checked)}
       />
     ) : (
       <RadioGroup

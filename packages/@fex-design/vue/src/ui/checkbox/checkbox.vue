@@ -1,59 +1,68 @@
 <script setup lang="ts">
-import type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import { type CheckboxStyleProps } from '@fex-design/styles/checkbox'
+import { computed, useAttrs, type PropType, type StyleValue } from 'vue'
 import {
-  checkboxCheckIconClassName,
-  checkboxClassName,
-  checkboxIndicatorClassName,
-  checkboxMinusIconClassName,
-  type CheckboxStyleProps,
-} from '@fex-design/styles/checkbox'
-import { cn } from '@fex/utils'
-import { useAttrs } from 'vue'
-import { CheckIcon } from '../../icon/check'
-import { MinusIcon } from '../../icon/minus'
-import { CheckboxIndicator, CheckboxRoot } from '../../primitive/checkbox/checkbox'
-
-defineOptions({ inheritAttrs: false })
-const props = withDefaults(
-  defineProps<{
-    checked?: CheckboxCheckedState
-    defaultChecked?: CheckboxCheckedState
-    disabled?: boolean
-    size?: CheckboxStyleProps['size']
-  }>(),
-  {
-    checked: undefined,
-    defaultChecked: undefined,
-    disabled: undefined,
-  },
-)
-const emit = defineEmits<{
-  checkedChange: [checked: CheckboxCheckedState, meta: CheckboxChangeMeta]
-}>()
+  CheckboxControl,
+  CheckboxIndicator,
+  CheckboxLabel,
+  CheckboxRoot,
+} from '../../primitive/checkbox/checkbox'
+defineOptions({ name: 'Checkbox', inheritAttrs: false })
+const props = defineProps({
+  value: [String, Number] as PropType<CheckboxValue>,
+  checked: { type: Boolean, default: undefined },
+  defaultChecked: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
+  indeterminate: { type: Boolean, default: false },
+  size: String as PropType<CheckboxStyleProps['size']>,
+  classNames: Object as PropType<{ root?: string; control?: string; indicator?: string; label?: string }>,
+  styles: Object as PropType<{ root?: StyleValue; control?: StyleValue; indicator?: StyleValue; label?: StyleValue }>,
+})
+const emit = defineEmits<{ change: [event: Event] }>()
 const attrs = useAttrs()
+const controlAttrs = computed(() => {
+  const { class: _class, style: _style, ...rest } = attrs
+  return rest
+})
 </script>
-
 <template>
   <CheckboxRoot
-    v-bind="attrs"
-    :checked="props.checked"
-    :default-checked="props.defaultChecked"
+    :value="props.value"
     :disabled="props.disabled"
-    data-slot="checkbox"
-    :class="cn(checkboxClassName({ size: props.size }), attrs.class as string | undefined)"
-    @checked-change="(checked, meta) => emit('checkedChange', checked, meta)"
+    :size="props.size"
+    :class="[attrs.class, props.classNames?.root]"
+    :style="[attrs.style as StyleValue, props.styles?.root]"
   >
-    <template #default="{ checked }">
-      <CheckboxIndicator
-        :checked="checked"
-        data-slot="checkbox-indicator"
-        :class="checkboxIndicatorClassName"
-      >
-        <slot
-          ><CheckIcon :class="checkboxCheckIconClassName" /><MinusIcon
-            :class="checkboxMinusIconClassName"
-        /></slot>
-      </CheckboxIndicator>
-    </template>
+    <CheckboxControl
+      v-bind="controlAttrs"
+      :value="props.value"
+      :checked="props.checked"
+      :default-checked="props.defaultChecked"
+      :disabled="props.disabled"
+      :indeterminate="props.indeterminate"
+      :class="props.classNames?.control"
+      :style="props.styles?.control"
+      @change="emit('change', $event)"
+    />
+    <CheckboxIndicator
+      v-if="$slots.indicator"
+      :class="props.classNames?.indicator"
+      :style="props.styles?.indicator"
+    >
+      <slot name="indicator" />
+    </CheckboxIndicator>
+    <CheckboxIndicator
+      v-else
+      :class="props.classNames?.indicator"
+      :style="props.styles?.indicator"
+    />
+    <CheckboxLabel
+      v-if="$slots.default"
+      :class="props.classNames?.label"
+      :style="props.styles?.label"
+    >
+      <slot />
+    </CheckboxLabel>
   </CheckboxRoot>
 </template>

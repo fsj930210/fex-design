@@ -1,0 +1,525 @@
+{
+  "name": "Checkbox",
+  "slug": "checkbox",
+  "layer": "ui",
+  "status": "stable",
+  "description": "用于选择多个选项或确认单个条件。",
+  "importPath": {
+    "react": "@fex-design/react/ui/checkbox",
+    "vue": "@fex-design/vue/ui/checkbox",
+    "solid": "@fex-design/solid/ui/checkbox",
+    "svelte": "@fex-design/svelte/ui/checkbox",
+    "angular": "@fex-design/angular/ui/checkbox"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": "boolean",
+      "description": "受控选中状态。"
+    },
+    {
+      "name": "defaultChecked",
+      "type": "boolean",
+      "default": false,
+      "description": "非受控初始选中状态。",
+      "editor": "boolean"
+    },
+    {
+      "name": "indeterminate",
+      "type": "boolean",
+      "default": false,
+      "description": "设置中间状态；不改变 checked 的值。",
+      "editor": "boolean"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "禁用 Checkbox。",
+      "editor": "boolean"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "Checkbox 尺寸。",
+      "editor": "enum",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "value",
+      "type": "string | number",
+      "description": "位于 CheckboxGroup 中时使用的选项值。"
+    },
+    {
+      "name": "indicator",
+      "type": "FrameworkNode",
+      "description": "替换默认选中与中间状态标记。"
+    },
+    {
+      "name": "classNames",
+      "type": "Partial<Record<CheckboxPart, string>>",
+      "description": "分别设置 root、control、indicator 和 label 的 class。"
+    },
+    {
+      "name": "styles",
+      "type": "Partial<Record<CheckboxPart, FrameworkStyle>>",
+      "description": "分别设置 root、control、indicator 和 label 的内联样式。"
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "Event"
+        }
+      ],
+      "description": "用户改变原生 checkbox 状态时触发。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--checkbox-size",
+      "description": "方框边长。"
+    },
+    {
+      "name": "--checkbox-background",
+      "description": "未选中状态的背景色。"
+    },
+    {
+      "name": "--checkbox-border-color",
+      "description": "未选中状态的边框色。"
+    },
+    {
+      "name": "--checkbox-checked-background",
+      "description": "选中和中间状态的背景色。"
+    },
+    {
+      "name": "--checkbox-checked-border-color",
+      "description": "选中和中间状态的边框色；未设置时回退到选中背景色。"
+    },
+    {
+      "name": "--checkbox-indicator-color",
+      "description": "选中和中间状态标记的颜色。"
+    },
+    {
+      "name": "--checkbox-ring-color",
+      "description": "键盘聚焦环颜色。"
+    },
+    {
+      "name": "--checkbox-content-gap",
+      "description": "方框与标签内容之间的间距。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "未选中与默认选中的 Checkbox。"
+    },
+    {
+      "id": "states",
+      "title": "状态",
+      "description": "对照未选中、已选中、中间状态和禁用状态。"
+    },
+    {
+      "id": "sizes",
+      "title": "尺寸",
+      "description": "对照 sm、md 和 lg 三种尺寸。"
+    },
+    {
+      "id": "controlled",
+      "title": "受控与非受控",
+      "description": "通过外部按钮设置受控状态，并对照非受控初始值。"
+    },
+    {
+      "id": "group",
+      "title": "CheckboxGroup",
+      "description": "使用平级 value 数组管理一组选项。"
+    },
+    {
+      "id": "check-all",
+      "title": "全选",
+      "description": "由业务选择结果计算 checked 和 indeterminate。"
+    },
+    {
+      "id": "validation",
+      "title": "校验失败",
+      "description": "使用 aria-invalid，并通过 aria-describedby 关联错误说明。"
+    },
+    {
+      "id": "custom-indicator",
+      "title": "自定义 Indicator",
+      "description": "替换选中状态使用的视觉标记。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "对照中文 LTR 与阿拉伯语 RTL 排列。"
+    },
+    {
+      "id": "css-variables",
+      "title": "实例 CSS Variables",
+      "description": "覆盖单个 Checkbox 的尺寸、背景和标记颜色。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "使用明显的颜色分别覆盖 root、control、indicator 和 label。"
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkStyle": "CSSProperties"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkStyle": "JSX.CSSProperties"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkStyle": "string"
+      }
+    },
+    "vue": {
+      "omitProps": [
+        "indicator"
+      ],
+      "typeOverrides": {
+        "FrameworkStyle": "StyleValue"
+      },
+      "slots": [
+        {
+          "name": "default",
+          "description": "标签内容。"
+        },
+        {
+          "name": "indicator",
+          "description": "替换默认选中与中间状态标记。"
+        }
+      ]
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkNode": "TemplateRef<void>",
+        "FrameworkStyle": "string"
+      },
+      "slots": [
+        {
+          "name": "默认内容",
+          "description": "标签内容。"
+        }
+      ],
+      "slotLabel": "内容投影"
+    }
+  },
+  "components": [
+    {
+      "name": "CheckboxGroup",
+      "slug": "checkbox-group",
+      "layer": "ui",
+      "status": "stable",
+      "description": "CheckboxGroup 管理平级选项值；可使用 options 快速生成选项，也可传入框架原生子内容。",
+      "importPath": {
+        "react": "@fex-design/react/ui/checkbox",
+        "vue": "@fex-design/vue/ui/checkbox",
+        "solid": "@fex-design/solid/ui/checkbox",
+        "svelte": "@fex-design/svelte/ui/checkbox",
+        "angular": "@fex-design/angular/ui/checkbox"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "CheckboxValue[]",
+          "description": "受控选中值。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "CheckboxValue[]",
+          "default": "[]",
+          "description": "非受控初始选中值。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用组内所有 Checkbox。",
+          "editor": "boolean"
+        },
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical'",
+          "default": "vertical",
+          "description": "选项排列方向。",
+          "editor": "enum",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        {
+          "name": "options",
+          "type": "CheckboxOption[]",
+          "description": "快捷选项列表。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CheckboxValue[]",
+              "description": "受控选中值。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CheckboxValue[]",
+              "default": "[]",
+              "description": "非受控初始选中值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "禁用组内所有 Checkbox。",
+              "editor": "boolean"
+            },
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "vertical",
+              "description": "选项排列方向。",
+              "editor": "enum",
+              "options": [
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "name": "options",
+              "type": "CheckboxOption[]",
+              "description": "快捷选项列表。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "追加到根元素的 className。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CheckboxValue[]",
+              "description": "受控选中值。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CheckboxValue[]",
+              "default": "[]",
+              "description": "非受控初始选中值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "禁用组内所有 Checkbox。",
+              "editor": "boolean"
+            },
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "vertical",
+              "description": "选项排列方向。",
+              "editor": "enum",
+              "options": [
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "name": "options",
+              "type": "CheckboxOption[]",
+              "description": "快捷选项列表。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CheckboxValue[]",
+              "description": "受控选中值。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CheckboxValue[]",
+              "default": "[]",
+              "description": "非受控初始选中值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "禁用组内所有 Checkbox。",
+              "editor": "boolean"
+            },
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "vertical",
+              "description": "选项排列方向。",
+              "editor": "enum",
+              "options": [
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "name": "options",
+              "type": "CheckboxOption[]",
+              "description": "快捷选项列表。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CheckboxValue[]",
+              "description": "受控选中值。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CheckboxValue[]",
+              "default": "[]",
+              "description": "非受控初始选中值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "禁用组内所有 Checkbox。",
+              "editor": "boolean"
+            },
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "vertical",
+              "description": "选项排列方向。",
+              "editor": "enum",
+              "options": [
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "name": "options",
+              "type": "CheckboxOption[]",
+              "description": "快捷选项列表。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CheckboxValue[]",
+              "description": "受控选中值。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CheckboxValue[]",
+              "default": "[]",
+              "description": "非受控初始选中值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "禁用组内所有 Checkbox。",
+              "editor": "boolean"
+            },
+            {
+              "name": "orientation",
+              "type": "'horizontal' | 'vertical'",
+              "default": "vertical",
+              "description": "选项排列方向。",
+              "editor": "enum",
+              "options": [
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "name": "options",
+              "type": "CheckboxOption[]",
+              "description": "快捷选项列表。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "追加到根元素的 class。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "追加到根元素的内联样式。"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

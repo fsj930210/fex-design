@@ -1,0 +1,1 @@
+<div class="grid gap-3"><div class="flex gap-2"><button button size="sm" (click)="checked.set(true)">选中</button><button button size="sm" (click)="checked.set(false)">取消选中</button></div><div checkbox [checked]="checked()" (change)="change($event)">受控 Checkbox</div><div checkbox defaultChecked>非受控：默认选中</div></div>

@@ -1,61 +1,83 @@
-import {
-  checkboxClassName,
-  checkboxCheckIconClassName,
-  checkboxGroupClassName,
-  checkboxIndicatorClassName,
-  checkboxMinusIconClassName,
-  type CheckboxGroupStyleProps,
-  type CheckboxStyleProps,
-} from '@fex-design/styles/checkbox'
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 import { cn } from '@fex/utils'
-import type { ComponentProps } from 'react'
 import {
-  CheckboxIndicator,
+  CheckboxControl,
   CheckboxGroup as PrimitiveCheckboxGroup,
+  CheckboxIndicator,
+  CheckboxLabel,
   CheckboxRoot,
 } from '../../primitive/checkbox/checkbox'
-import { CheckIcon } from '../../icon/check'
-import { MinusIcon } from '../../icon/minus'
-
-export type { CheckboxCheckedState } from '../../primitive/checkbox/checkbox'
-
-export interface CheckboxProps extends ComponentProps<typeof CheckboxRoot>, CheckboxStyleProps {}
-
-export interface CheckboxGroupProps
-  extends ComponentProps<typeof PrimitiveCheckboxGroup>, CheckboxGroupStyleProps {}
-
-export function Checkbox({ className, children, size, ...props }: CheckboxProps) {
+export interface CheckboxClassNames {
+  root?: string
+  control?: string
+  indicator?: string
+  label?: string
+}
+export interface CheckboxStyles {
+  root?: CSSProperties
+  control?: CSSProperties
+  indicator?: CSSProperties
+  label?: CSSProperties
+}
+export interface CheckboxProps extends Omit<
+  ComponentProps<typeof CheckboxControl>,
+  'children' | 'size'
+> {
+  children?: ReactNode
+  indicator?: ReactNode
+  size?: ComponentProps<typeof CheckboxRoot>['size']
+  className?: string
+  style?: CSSProperties
+  classNames?: CheckboxClassNames
+  styles?: CheckboxStyles
+}
+export function Checkbox({
+  children,
+  indicator,
+  size,
+  className,
+  style,
+  classNames,
+  styles,
+  ...props
+}: CheckboxProps) {
   return (
     <CheckboxRoot
-      data-slot="checkbox"
-      className={cn(checkboxClassName({ size }), className)}
-      {...props}
+      size={size}
+      className={cn(className, classNames?.root)}
+      style={{ ...style, ...styles?.root }}
+      value={props.value}
+      disabled={props.disabled}
     >
-      <CheckboxIndicator data-slot="checkbox-indicator" className={checkboxIndicatorClassName}>
-        {children ?? (
-          <>
-            <CheckIcon className={checkboxCheckIconClassName} />
-            <MinusIcon className={checkboxMinusIconClassName} />
-          </>
-        )}
+      <CheckboxControl {...props} className={classNames?.control} style={styles?.control} />
+      <CheckboxIndicator className={classNames?.indicator} style={styles?.indicator}>
+        {indicator}
       </CheckboxIndicator>
+      {children !== undefined && (
+        <CheckboxLabel className={classNames?.label} style={styles?.label}>
+          {children}
+        </CheckboxLabel>
+      )}
     </CheckboxRoot>
   )
 }
-
-export function CheckboxGroup({
-  className,
-  orientation = 'vertical',
-  ...props
-}: CheckboxGroupProps) {
+export interface CheckboxOption<T extends CheckboxValue = CheckboxValue> {
+  label: ReactNode
+  value: T
+  disabled?: boolean
+}
+export interface CheckboxGroupProps extends ComponentProps<typeof PrimitiveCheckboxGroup> {
+  options?: readonly CheckboxOption[]
+}
+export function CheckboxGroup({ options, children, ...props }: CheckboxGroupProps) {
   return (
-    <PrimitiveCheckboxGroup
-      {...props}
-      data-slot="checkbox-group"
-      data-orientation={orientation}
-      className={cn(checkboxGroupClassName({ orientation }), className)}
-    />
+    <PrimitiveCheckboxGroup {...props}>
+      {options?.map((option) => (
+        <Checkbox key={String(option.value)} value={option.value} disabled={option.disabled}>
+          {option.label}
+        </Checkbox>
+      )) ?? children}
+    </PrimitiveCheckboxGroup>
   )
 }
-
-export default Checkbox

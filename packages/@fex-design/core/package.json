@@ -140,7 +140,6 @@
     "./rate/utils": "./src/rate/utils.ts",
     "./scrollbar/create-scrollbar-controller": "./src/scrollbar/create-scrollbar-controller.ts",
     "./scrollbar/types": "./src/scrollbar/types.ts",
-    "./checkbox/create-checkbox-controller": "./src/checkbox/create-checkbox-controller.ts",
     "./checkbox/create-checkbox-group-controller": "./src/checkbox/create-checkbox-group-controller.ts",
     "./checkbox/types": "./src/checkbox/types.ts",
     "./checkbox/utils": "./src/checkbox/utils.ts",

@@ -1,15 +1,14 @@
-import type { CheckboxCheckedState } from '@fex-design/core/checkbox/types'
-import type { ButtonHTMLAttributes } from 'react'
+import type { InputHTMLAttributes } from 'react'
 import { Checkbox } from '../../ui/checkbox/checkbox'
 
 interface DataTableCheckboxProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
+  InputHTMLAttributes<HTMLInputElement>,
   'onChange' | 'checked' | 'defaultChecked'
 > {
-  checked: CheckboxCheckedState
-  onCheckedChange: (checked: CheckboxCheckedState) => void
+  checked: boolean
+  indeterminate?: boolean
 }
 
-export function DataTableCheckbox({ checked, onCheckedChange, ...props }: DataTableCheckboxProps) {
-  return <Checkbox {...props} checked={checked} onCheckedChange={onCheckedChange} />
+export function DataTableCheckbox(props: DataTableCheckboxProps) {
+  return <Checkbox {...props} />
 }

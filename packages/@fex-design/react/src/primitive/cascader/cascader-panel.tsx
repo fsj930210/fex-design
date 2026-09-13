@@ -13,7 +13,7 @@ import {
 } from '@fex-design/styles/cascader'
 import {
   checkboxCheckIconClassName,
-  checkboxClassName,
+  checkboxControlClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
 } from '@fex-design/styles/checkbox'
@@ -23,7 +23,7 @@ import { CheckIcon } from '../../icon/check'
 import { ChevronRightIcon } from '../../icon/chevron'
 import { LoadingIcon } from '../../icon/loading'
 import { MinusIcon } from '../../icon/minus'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
 import { PopoverContent, PopoverPortal } from '../popover/popover'
 import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar/scrollbar'
 import { useCascader } from './cascader-context'
@@ -179,14 +179,15 @@ export function CascaderOption({
         <>
           {cascader.multiple ? (
             <CheckboxRoot
-              checked={state.indeterminate ? 'indeterminate' : state.checked}
               disabled={state.disabled}
-              className={checkboxClassName()}
-              onClick={(event) => {
-                event.stopPropagation()
-                cascader.controller.toggleCheck(node.key)
-              }}
             >
+              <CheckboxControl
+                checked={state.checked}
+                indeterminate={state.indeterminate}
+                className={checkboxControlClassName}
+                onClick={(event) => event.stopPropagation()}
+                onChange={() => cascader.controller.toggleCheck(node.key)}
+              />
               <CheckboxIndicator className={checkboxIndicatorClassName}>
                 <CheckIcon className={checkboxCheckIconClassName} />
                 <MinusIcon className={checkboxMinusIconClassName} />

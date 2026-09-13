@@ -1,12 +1,25 @@
-<span
-  fexCheckboxIndicator
-  [checked]="currentChecked()"
-  [class]="indicatorClassName"
-  data-slot="checkbox-indicator"
->
-  @if (currentChecked() === 'indeterminate') {
-  <fex-minus-icon />
-  } @else if (currentChecked() === true) {
-  <fex-check-icon />
+<div checkboxRoot [value]="value()" [disabled]="disabled()" [size]="size()" [class]="classNames()?.root" [style]="styles()?.root">
+  <input
+    checkboxControl
+    type="checkbox"
+    [value]="value()"
+    [checked]="checked()"
+    [defaultChecked]="defaultChecked()"
+    [disabled]="disabled()"
+    [indeterminate]="indeterminate()"
+    [required]="required()"
+    [name]="name()"
+    [attr.aria-invalid]="ariaInvalid() || null"
+    [attr.aria-describedby]="ariaDescribedBy()"
+    [class]="classNames()?.control"
+    [style]="styles()?.control"
+  />
+  @if (indicator(); as customIndicator) {
+  <span checkboxIndicator [class]="classNames()?.indicator" [style]="styles()?.indicator">
+    <ng-container [ngTemplateOutlet]="customIndicator" />
+  </span>
+  } @else {
+  <span checkboxIndicator [class]="classNames()?.indicator" [style]="styles()?.indicator"></span>
   }
-</span>
+  <label checkboxLabel [class]="classNames()?.label" [style]="styles()?.label"><ng-content /></label>
+</div>

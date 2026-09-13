@@ -1,26 +1,5 @@
-# Svelte Checkbox
+# Svelte UI Checkbox
 
-## Import
+Convenience Checkbox and CheckboxGroup composed from Primitive parts. UI shares every Primitive example and adds semantic-styles. Checkbox uses native change; Group manages only flat values.
 
-```svelte
-<script>
-  import Checkbox from '@fex-design/svelte/ui/checkbox'
-  import CheckboxGroup from '@fex-design/svelte/ui/checkbox-group'
-</script>
-```
-
-## Usage
-
-```svelte
-<Checkbox checked={checked} onCheckedChange={(next) => (checked = next)} />
-```
-
-| Name              | Type                         | Default     | Required | Description                |
-| ----------------- | ---------------------------- | ----------- | -------- | -------------------------- |
-| `checked`         | `boolean \| 'indeterminate'` | `undefined` | No       | Controlled checked state.  |
-| `defaultChecked`  | `boolean \| 'indeterminate'` | `false`     | No       | Initial unchecked state.   |
-| `disabled`        | `boolean`                    | `false`     | No       | Disables interaction.      |
-| `size`            | `'sm' \| 'md' \| 'lg'`  | `'md'` | No       | Visual size.               |
-| `onCheckedChange` | `(checked, meta) => void`    | -           | No       | Fires after state changes. |
-
-Use `aria-invalid` for invalid styling. `CheckboxGroup` is a layout wrapper and does not own a value array.
+Uses the same CSS variables as Primitive.

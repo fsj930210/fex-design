@@ -5,7 +5,7 @@ import {
 } from '@fex-design/core/transfer/utils'
 import {
   checkboxCheckIconClassName,
-  checkboxClassName,
+  checkboxControlClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
 } from '@fex-design/styles/checkbox'
@@ -26,7 +26,7 @@ import { cn } from '@fex/utils'
 import type { ReactNode } from 'react'
 import { CheckIcon } from '../../icon/check'
 import { MinusIcon } from '../../icon/minus'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
 import { ListboxItem, ListboxRoot } from '../listbox/listbox'
 import type { TransferPanelConfig, TransferPanelContent } from './transfer-panel'
 import { TransferRoot, type TransferRootProps } from './transfer-root'
@@ -66,12 +66,15 @@ function HeaderCheckbox({
 }) {
   return (
     <CheckboxRoot
-      checked={checked}
       disabled={disabled}
-      aria-label={label}
-      onCheckedChange={(next) => onChange(next === true)}
-      className={checkboxClassName()}
     >
+      <CheckboxControl
+        checked={checked === true}
+        indeterminate={checked === 'indeterminate'}
+        aria-label={label}
+        className={checkboxControlClassName}
+        onChange={(event) => onChange(event.currentTarget.checked)}
+      />
       <CheckboxIndicator className={checkboxIndicatorClassName}>
         <CheckIcon className={checkboxCheckIconClassName} />
         <MinusIcon className={checkboxMinusIconClassName} />

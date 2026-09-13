@@ -4,27 +4,6 @@ export type CheckboxCheckedState = boolean | 'indeterminate'
 
 export type CheckboxValue = string | number
 
-export interface CheckboxSnapshot {
-  checked: CheckboxCheckedState
-  disabled: boolean
-}
-
-export interface CheckboxChangeMeta {
-  previousChecked: CheckboxCheckedState
-  checked: CheckboxCheckedState
-}
-
-export interface CheckboxOptions {
-  checked?: CheckboxCheckedState | undefined
-  defaultChecked?: CheckboxCheckedState | undefined
-  disabled?: boolean | undefined
-  onChange?: (checked: CheckboxCheckedState, meta: CheckboxChangeMeta) => void
-}
-
-export interface CheckboxController extends SnapshotStore<CheckboxSnapshot> {
-  setChecked: (checked: CheckboxCheckedState) => CheckboxChangeMeta | undefined
-  toggle: () => CheckboxChangeMeta | undefined
-}
 
 export interface CheckboxGroupSnapshot {
   value: CheckboxValue[]

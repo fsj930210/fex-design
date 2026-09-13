@@ -44,7 +44,7 @@ export function DataTableColumnVisibility<TFeatures extends TableFeatures, TData
           <label class={dataTableVisibilityItemClassName}>
             <DataTableCheckbox
               checked={isVisible(column)}
-              onCheckedChange={(checked) => column.toggleVisibility(checked === true)}
+              onChange={(event) => column.toggleVisibility(event.currentTarget.checked)}
             />
             <span>{column.id}</span>
           </label>

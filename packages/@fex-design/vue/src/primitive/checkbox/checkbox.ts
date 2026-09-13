@@ -1,4 +1,6 @@
-export type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
+export type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'
 export { default as CheckboxRoot } from './checkbox-root.vue'
+export { default as CheckboxControl } from './checkbox-control.vue'
 export { default as CheckboxIndicator } from './checkbox-indicator.vue'
+export { default as CheckboxLabel } from './checkbox-label.vue'
 export { default as CheckboxGroup } from './checkbox-group.vue'

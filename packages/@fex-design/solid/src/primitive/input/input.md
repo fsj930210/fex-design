@@ -32,6 +32,7 @@ Styled, composable Input primitives. `InputRoot` owns the shared value and state
 | password   | Password visibility composed from Control, Suffix, and a native button. |
 | search     | Enter, Prefix, and Addon search actions composed from Primitive parts.  |
 | states     | Disabled, read-only, and native `aria-invalid`.                         |
+| validation | Invalid styling with an error message linked by `aria-describedby`.       |
 | focus      | Native focus, blur, and select through InputControl.                    |
 
 ## InputRoot API

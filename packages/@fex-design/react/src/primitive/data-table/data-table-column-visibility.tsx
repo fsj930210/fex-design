@@ -41,7 +41,7 @@ export function DataTableColumnVisibility<TFeatures extends TableFeatures, TData
             <DataTableCheckbox
               checked={column.getIsVisible()}
               aria-label={`Toggle ${column.id} column`}
-              onCheckedChange={(checked) => column.toggleVisibility(checked === true)}
+              onChange={(event) => column.toggleVisibility(event.currentTarget.checked)}
             />
             {typeof column.columnDef.header === 'string' ? column.columnDef.header : column.id}
           </label>

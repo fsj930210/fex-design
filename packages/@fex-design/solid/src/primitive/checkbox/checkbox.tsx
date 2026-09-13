@@ -1,116 +1,193 @@
-import { createCheckboxController } from '@fex-design/core/checkbox/create-checkbox-controller'
-import type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
-import { createContext, splitProps, useContext, type JSX, type ParentProps } from 'solid-js'
+import { createCheckboxGroupController } from '@fex-design/core/checkbox/create-checkbox-group-controller'
+import type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'
+import {
+  checkboxControlClassName,
+  checkboxCheckIconClassName,
+  checkboxGroupClassName,
+  checkboxIndicatorClassName,
+  checkboxLabelClassName,
+  checkboxMinusIconClassName,
+  checkboxRootClassName,
+  type CheckboxGroupStyleProps,
+  type CheckboxStyleProps,
+} from '@fex-design/styles/checkbox'
+import { cn } from '@fex/utils'
+import {
+  createContext,
+  createEffect,
+  createUniqueId,
+  splitProps,
+  useContext,
+  type JSX,
+  type ParentProps,
+} from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
-
-export type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
-
-interface CheckboxContextValue {
-  checked: () => CheckboxCheckedState
+import { CheckIcon } from '../../icon/check'
+import { MinusIcon } from '../../icon/minus'
+interface RootContext {
+  controlId: string
+  value?: CheckboxValue
+  disabled?: boolean
 }
-
-const CheckboxContext = createContext<CheckboxContextValue>()
-
-export interface CheckboxRootProps extends ParentProps<
-  Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onChange'>
-> {
-  checked?: CheckboxCheckedState
-  defaultChecked?: CheckboxCheckedState
-  onCheckedChange?: (checked: CheckboxCheckedState, meta: CheckboxChangeMeta) => void
+interface GroupContext {
+  value: () => CheckboxValue[]
+  disabled: () => boolean
+  toggle(value: CheckboxValue): void
 }
-
+const RootContext = createContext<RootContext>()
+const GroupContext = createContext<GroupContext>()
+export interface CheckboxRootProps
+  extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>>, CheckboxStyleProps {
+  value?: CheckboxValue
+  disabled?: boolean
+}
 export function CheckboxRoot(props: CheckboxRootProps) {
-  const [local, rest] = splitProps(props, [
-    'checked',
-    'defaultChecked',
-    'disabled',
-    'children',
-    'onClick',
-    'onCheckedChange',
-  ])
-  const options = {
-    get checked() {
-      return local.checked
-    },
-    get defaultChecked() {
-      return local.defaultChecked
-    },
-    get disabled() {
-      return local.disabled
-    },
-  }
-  const controller = createCheckboxController(options)
-  const snapshot = createCoreStoreSignal(controller)
-  const currentChecked = () => local.checked ?? snapshot().checked
-  const currentDisabled = () => local.disabled === true || snapshot().disabled
-  const state = () =>
-    currentChecked() === 'indeterminate'
-      ? 'indeterminate'
-      : currentChecked()
-        ? 'checked'
-        : 'unchecked'
-  const ariaChecked = (): boolean | 'mixed' => {
-    const checked = currentChecked()
-    return checked === 'indeterminate' ? 'mixed' : checked
-  }
-
+  const [local, rest] = splitProps(props, ['value', 'disabled', 'size', 'class', 'children'])
+  const controlId = createUniqueId()
   return (
-    <CheckboxContext.Provider value={{ checked: currentChecked }}>
-      <button
+    <RootContext.Provider value={{ controlId, value: local.value, disabled: local.disabled }}>
+      <div
         {...rest}
-        type="button"
-        role="checkbox"
-        disabled={currentDisabled()}
-        aria-checked={ariaChecked()}
-        data-state={state()}
-        data-disabled={currentDisabled() ? 'true' : undefined}
-        onClick={(event) => {
-          if (typeof local.onClick === 'function') {
-            local.onClick(event)
-          }
-          if (event.defaultPrevented) return
-          if (currentDisabled()) return
-          const meta =
-            local.checked === undefined
-              ? controller.toggle()
-              : {
-                  previousChecked: currentChecked(),
-                  checked: currentChecked() !== true,
-                }
-          if (meta === undefined) {
-            return
-          }
-          local.onCheckedChange?.(meta.checked, meta)
-        }}
+        data-slot="checkbox-root"
+        data-size={local.size ?? 'md'}
+        class={cn(checkboxRootClassName({ size: local.size }), local.class)}
       >
         {local.children}
-      </button>
-    </CheckboxContext.Provider>
+      </div>
+    </RootContext.Provider>
   )
 }
-
-export interface CheckboxIndicatorProps extends ParentProps<JSX.HTMLAttributes<HTMLSpanElement>> {
-  forceMount?: boolean
+export interface CheckboxControlProps extends Omit<
+  JSX.InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'size' | 'value'
+> {
+  value?: CheckboxValue
+  indeterminate?: boolean
 }
-
-export function CheckboxIndicator(props: CheckboxIndicatorProps) {
-  const context = useContext(CheckboxContext)
-  const [local, rest] = splitProps(props, ['forceMount', 'children'])
-  const checked = () => context?.checked() ?? false
-  const state = () =>
-    checked() === 'indeterminate' ? 'indeterminate' : checked() ? 'checked' : 'unchecked'
-
+export function CheckboxControl(props: CheckboxControlProps) {
+  const root = useContext(RootContext)
+  const group = useContext(GroupContext)
+  const [local, rest] = splitProps(props, [
+    'id',
+    'value',
+    'checked',
+    'disabled',
+    'name',
+    'indeterminate',
+    'class',
+    'onChange',
+    'ref',
+  ])
+  let input!: HTMLInputElement
+  const currentValue = () => local.value ?? root?.value
+  const inGroup = () => group !== undefined && currentValue() !== undefined
+  createEffect(() => {
+    if (input) input.indeterminate = Boolean(local.indeterminate)
+  })
   return (
-    <>
-      {(local.forceMount || checked() !== false) && (
-        <span {...rest} data-state={state()}>
-          {local.children}
-        </span>
-      )}
-    </>
+    <input
+      {...rest}
+      ref={(node) => {
+        input = node
+        if (typeof local.ref === 'function') local.ref(node)
+      }}
+      id={local.id ?? root?.controlId}
+      type="checkbox"
+      name={local.name}
+      value={currentValue()}
+      checked={inGroup() ? group!.value().includes(currentValue()!) : local.checked}
+      disabled={Boolean(local.disabled || root?.disabled || group?.disabled())}
+      data-slot="checkbox-control"
+      class={cn(checkboxControlClassName, local.class)}
+      onChange={(event) => {
+        if (typeof local.onChange === 'function') local.onChange(event)
+        if (!event.defaultPrevented && inGroup()) group!.toggle(currentValue()!)
+      }}
+    />
   )
 }
-
-export function CheckboxGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
-  return <div {...props}>{props.children}</div>
+export function CheckboxIndicator(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>) {
+  return (
+    <span
+      {...props}
+      aria-hidden="true"
+      data-slot="checkbox-indicator"
+      class={cn(checkboxIndicatorClassName, props.class)}
+    >
+      {props.children ?? (
+        <>
+          <CheckIcon data-slot="checkbox-check" class={checkboxCheckIconClassName} />
+          <MinusIcon data-slot="checkbox-minus" class={checkboxMinusIconClassName} />
+        </>
+      )}
+    </span>
+  )
+}
+export function CheckboxLabel(props: ParentProps<JSX.LabelHTMLAttributes<HTMLLabelElement>>) {
+  const root = useContext(RootContext)
+  return (
+    <label
+      {...props}
+      for={props.for ?? root?.controlId}
+      data-slot="checkbox-label"
+      class={cn(checkboxLabelClassName, props.class)}
+    >
+      {props.children}
+    </label>
+  )
+}
+export interface CheckboxGroupProps
+  extends
+    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>>,
+    CheckboxGroupStyleProps {
+  value?: readonly CheckboxValue[]
+  defaultValue?: readonly CheckboxValue[]
+  disabled?: boolean
+  onChange?: (value: CheckboxValue[], meta: CheckboxGroupChangeMeta) => void
+}
+export function CheckboxGroup(props: CheckboxGroupProps) {
+  const options = {
+    get value() {
+      return props.value
+    },
+    get defaultValue() {
+      return props.defaultValue
+    },
+    get disabled() {
+      return props.disabled
+    },
+    get onChange() {
+      return props.onChange
+    },
+  }
+  const controller = createCheckboxGroupController(options)
+  const snapshot = createCoreStoreSignal(controller)
+  const [local, rest] = splitProps(props, [
+    'value',
+    'defaultValue',
+    'disabled',
+    'onChange',
+    'orientation',
+    'class',
+    'children',
+  ])
+  return (
+    <GroupContext.Provider
+      value={{
+        value: () => (local.value ? [...local.value] : snapshot().value),
+        disabled: () => local.disabled === true,
+        toggle: controller.toggle,
+      }}
+    >
+      <div
+        {...rest}
+        role="group"
+        data-slot="checkbox-group"
+        data-orientation={local.orientation ?? 'vertical'}
+        class={cn(checkboxGroupClassName({ orientation: local.orientation }), local.class)}
+      >
+        {local.children}
+      </div>
+    </GroupContext.Provider>
+  )
 }

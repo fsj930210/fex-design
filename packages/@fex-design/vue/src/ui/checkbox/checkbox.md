@@ -1,23 +1,5 @@
-# Vue Checkbox
+# Vue UI Checkbox
 
-## Import
+Convenience Checkbox and CheckboxGroup composed from Primitive parts. UI shares every Primitive example and adds semantic-styles. Checkbox uses native change; Group manages only flat values.
 
-```ts
-import { Checkbox, CheckboxGroup } from '@fex-design/vue/ui/checkbox'
-```
-
-## Usage
-
-```vue
-<Checkbox :checked="checked" @checked-change="checked = $event" />
-```
-
-| Name             | Type                         | Default     | Required | Description                  |
-| ---------------- | ---------------------------- | ----------- | -------- | ---------------------------- |
-| `checked`        | `boolean \| 'indeterminate'` | `undefined` | No       | Controlled checked state.    |
-| `defaultChecked` | `boolean \| 'indeterminate'` | `false`     | No       | Initial unchecked state.     |
-| `disabled`       | `boolean`                    | `false`     | No       | Disables interaction.        |
-| `size`           | `'sm' \| 'md' \| 'lg'`  | `'md'` | No       | Visual size.                 |
-| `checked-change` | `(checked, meta) => void`    | -           | No       | Emitted after state changes. |
-
-Use `aria-invalid` for invalid styling. `CheckboxGroup` is a layout wrapper and does not own a value array.
+Uses the same CSS variables as Primitive.

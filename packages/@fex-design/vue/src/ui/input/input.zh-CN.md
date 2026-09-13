@@ -19,6 +19,7 @@
 | password        | 密码可见性、关闭切换、清除和 `aria-invalid`。          |
 | search          | loading、仅 Enter 搜索、Prefix 搜索和 Addon 搜索操作。 |
 | states          | Input 家族的禁用、只读和错误状态。                     |
+| validation      | 校验失败样式，以及通过 `aria-describedby` 关联错误说明。 |
 | focus           | 命令式聚焦、失焦和全选。                               |
 | semantic-styles | 结构化 class/style、状态选择器和基础 CSS Variables。   |
 

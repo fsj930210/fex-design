@@ -1,0 +1,67 @@
+---
+title: Checkbox
+description: 从一组可选项中选择一个或多个值。
+---
+
+## Primitive 与 UI
+
+Primitive 提供可独立组合的 `CheckboxRoot`、`CheckboxControl`、`CheckboxIndicator`、`CheckboxLabel` 和 `CheckboxGroup`。`CheckboxControl` 使用原生 `input[type=checkbox]`。
+
+UI 提供包含默认结构和选中标记的 `Checkbox`，以及支持 `options` 的 `CheckboxGroup`。
+
+## 何时使用
+
+Checkbox 用于在一组选项中选择零项、多项或确认单个条件。互斥选择使用 Radio；即时开启或关闭设置使用 Switch。
+
+<Layer value="primitive">
+
+## Primitive 能力
+
+各部件可以分别替换结构、标记和标签。`CheckboxGroup` 只管理平级 value 数组；Tree、Table 或“全选”的父子关系由业务数据计算，并通过 `checked` 与 `indeterminate` 传给对应 Control。
+
+</Layer>
+
+## 示例
+
+示例展示组件的常用用法。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Checkbox 部件与 CheckboxGroup 的公开属性。">
+  <ApiComposition layer="primitive">
+    `CheckboxControl` 是原生 checkbox；`CheckboxIndicator` 只承载选中或中间状态标记；`CheckboxLabel` 与 Control 自动关联。
+
+    ```text
+    CheckboxRoot
+    ├── CheckboxControl
+    ├── CheckboxIndicator
+    └── CheckboxLabel (optional)
+
+    CheckboxGroup
+    └── CheckboxRoot ...
+    ```
+
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="UI Checkbox 与 CheckboxGroup 的公开属性。">
+  <ApiComposition layer="ui">
+    UI `Checkbox` 内置 Control、Indicator 和可选 Label；`CheckboxGroup` 可以接收 options，也可以接收框架原生子内容。
+
+    ```text
+    Checkbox
+
+    CheckboxGroup
+    └── Checkbox ...
+    ```
+
+  </ApiComposition>
+</ApiSection>
+
+## CSS Variables
+
+Checkbox 默认使用主题中的背景、边框、Primary 和焦点颜色。变量可以写在单个 Checkbox、局部容器或主题根节点上；中间状态复用选中状态颜色。
+
+<CssVariables />

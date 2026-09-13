@@ -1,63 +1,82 @@
-import {
-  checkboxCheckIconClassName,
-  checkboxClassName,
-  checkboxGroupClassName,
-  checkboxIndicatorClassName,
-  checkboxMinusIconClassName,
-  type CheckboxGroupStyleProps,
-  type CheckboxStyleProps,
-} from '@fex-design/styles/checkbox'
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import { checkboxCheckIconClassName, checkboxMinusIconClassName } from '@fex-design/styles/checkbox'
 import { cn } from '@fex/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
-import { CheckIcon } from '../../icon/check'
-import { MinusIcon } from '../../icon/minus'
 import {
+  CheckboxControl,
   CheckboxGroup as PrimitiveCheckboxGroup,
   CheckboxIndicator,
+  CheckboxLabel,
   CheckboxRoot,
-  type CheckboxRootProps,
+  type CheckboxControlProps,
+  type CheckboxGroupProps as PrimitiveGroupProps,
 } from '../../primitive/checkbox/checkbox'
-
-export type { CheckboxCheckedState } from '../../primitive/checkbox/checkbox'
-
-export interface CheckboxProps extends ParentProps<CheckboxRootProps>, CheckboxStyleProps {}
-
+import { CheckIcon } from '../../icon/check'
+import { MinusIcon } from '../../icon/minus'
+export interface CheckboxProps extends ParentProps<CheckboxControlProps> {
+  size?: 'sm' | 'md' | 'lg'
+  class?: string
+  indicator?: JSX.Element
+  classNames?: { root?: string; control?: string; indicator?: string; label?: string }
+  styles?: { root?: JSX.CSSProperties; control?: JSX.CSSProperties; indicator?: JSX.CSSProperties; label?: JSX.CSSProperties }
+}
 export function Checkbox(props: CheckboxProps) {
-  const [local, rest] = splitProps(props, ['class', 'size', 'children'])
+  const [local, rest] = splitProps(props, [
+    'children',
+    'size',
+    'class',
+    'indicator',
+    'classNames',
+    'styles',
+    'value',
+    'disabled',
+  ])
   return (
     <CheckboxRoot
-      {...rest}
-      data-slot="checkbox"
-      class={cn(checkboxClassName({ size: local.size }), local.class)}
+      size={local.size}
+      class={cn(local.class, local.classNames?.root)}
+      style={local.styles?.root}
+      value={local.value}
+      disabled={local.disabled}
     >
-      <CheckboxIndicator data-slot="checkbox-indicator" class={checkboxIndicatorClassName}>
-        {local.children ?? (
+      <CheckboxControl
+        {...rest}
+        value={local.value}
+        disabled={local.disabled}
+        class={local.classNames?.control}
+        style={local.styles?.control}
+      />
+      <CheckboxIndicator class={local.classNames?.indicator} style={local.styles?.indicator}>
+        {local.indicator ?? (
           <>
-            <CheckIcon class={checkboxCheckIconClassName} />
-            <MinusIcon class={checkboxMinusIconClassName} />
+            <CheckIcon data-slot="checkbox-check" class={checkboxCheckIconClassName} />
+            <MinusIcon data-slot="checkbox-minus" class={checkboxMinusIconClassName} />
           </>
         )}
       </CheckboxIndicator>
+      {local.children !== undefined && (
+        <CheckboxLabel class={local.classNames?.label} style={local.styles?.label}>{local.children}</CheckboxLabel>
+      )}
     </CheckboxRoot>
   )
 }
-
-export interface CheckboxGroupProps
-  extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>>, CheckboxGroupStyleProps {}
-
+export interface CheckboxOption {
+  label: JSX.Element
+  value: CheckboxValue
+  disabled?: boolean
+}
+export interface CheckboxGroupProps extends PrimitiveGroupProps {
+  options?: readonly CheckboxOption[]
+}
 export function CheckboxGroup(props: CheckboxGroupProps) {
-  const [local, rest] = splitProps(props, ['class', 'orientation'])
+  const [local, rest] = splitProps(props, ['options', 'children'])
   return (
-    <PrimitiveCheckboxGroup
-      {...rest}
-      data-slot="checkbox-group"
-      data-orientation={local.orientation ?? 'vertical'}
-      class={cn(
-        checkboxGroupClassName({ orientation: local.orientation ?? 'vertical' }),
-        local.class,
-      )}
-    />
+    <PrimitiveCheckboxGroup {...rest}>
+      {local.options?.map((option) => (
+        <Checkbox value={option.value} disabled={option.disabled}>
+          {option.label}
+        </Checkbox>
+      )) ?? local.children}
+    </PrimitiveCheckboxGroup>
   )
 }
-
-export default Checkbox

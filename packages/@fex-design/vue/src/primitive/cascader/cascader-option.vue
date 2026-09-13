@@ -7,7 +7,7 @@ import {
 } from '@fex-design/styles/cascader'
 import {
   checkboxCheckIconClassName,
-  checkboxClassName,
+  checkboxControlClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
 } from '@fex-design/styles/checkbox'
@@ -16,7 +16,7 @@ import { CheckIcon } from '../../icon/check'
 import { ChevronRightIcon } from '../../icon/chevron'
 import { LoadingIcon } from '../../icon/loading'
 import { MinusIcon } from '../../icon/minus'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
 import { useCascader } from './use-cascader'
 
 const props = defineProps<{ node: CascaderNode; label?: string }>()
@@ -49,12 +49,8 @@ function enter() {
     <slot :node="node" :state="state"
       ><CheckboxRoot
         v-if="cascader.multiple.value"
-        :checked="state.indeterminate ? 'indeterminate' : state.checked"
         :disabled="node.disabled"
-        :class="checkboxClassName()"
-        @click.stop="cascader.controller.toggleCheck(node.key)"
-        ><CheckboxIndicator
-          :checked="state.indeterminate ? 'indeterminate' : state.checked"
+        ><CheckboxControl :checked="state.checked" :indeterminate="state.indeterminate" :class="checkboxControlClassName" @click.stop @change="cascader.controller.toggleCheck(node.key)" /><CheckboxIndicator
           :class="checkboxIndicatorClassName"
           ><CheckIcon :class="checkboxCheckIconClassName" /><MinusIcon
             :class="checkboxMinusIconClassName" /></CheckboxIndicator></CheckboxRoot

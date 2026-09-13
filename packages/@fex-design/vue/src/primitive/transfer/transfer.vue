@@ -15,7 +15,7 @@ import {
 import { buttonClassName } from '@fex-design/styles/button'
 import {
   checkboxCheckIconClassName,
-  checkboxClassName,
+  checkboxControlClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
 } from '@fex-design/styles/checkbox'
@@ -44,7 +44,7 @@ import {
 } from '../../icon/chevron'
 import { MinusIcon } from '../../icon/minus'
 import Button from '../button/button.vue'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
 import { ListboxItem, ListboxRoot } from '../listbox/listbox'
 
 export interface TransferPanelApi<T extends Record<string, unknown>> {
@@ -125,6 +125,9 @@ function allState(side: TransferSide) {
 function toggleAll(side: TransferSide, checked: boolean) {
   api(side).setCheckedKeys(checked ? enabledKeys(side) : [])
 }
+function toggleAllEvent(side: TransferSide, event: Event) {
+  toggleAll(side, (event.target as HTMLInputElement).checked)
+}
 function can(action: 'target' | 'source' | 'allTarget' | 'allSource') {
   void snapshot.value
   return action === 'target'
@@ -181,12 +184,8 @@ function hasRegion(side: TransferSide, region: 'header' | 'footer') {
         >
           <slot :name="`${side}Header`" :api="api(side)">
             <CheckboxRoot
-              :checked="allState(side)"
               :disabled="props.disabled || enabledKeys(side).length === 0"
-              :class="checkboxClassName()"
-              :aria-label="`Select all ${props.title?.[side] ?? (side === 'source' ? 'Source' : 'Target')}`"
-              @checked-change="toggleAll(side, $event === true)"
-              ><CheckboxIndicator :checked="allState(side)" :class="checkboxIndicatorClassName"
+              ><CheckboxControl :checked="allState(side) === true" :indeterminate="allState(side) === 'indeterminate'" :class="checkboxControlClassName" :aria-label="`Select all ${props.title?.[side] ?? (side === 'source' ? 'Source' : 'Target')}`" @change="toggleAllEvent(side, $event)" /><CheckboxIndicator :class="checkboxIndicatorClassName"
                 ><CheckIcon :class="checkboxCheckIconClassName" /><MinusIcon
                   :class="checkboxMinusIconClassName" /></CheckboxIndicator
             ></CheckboxRoot>

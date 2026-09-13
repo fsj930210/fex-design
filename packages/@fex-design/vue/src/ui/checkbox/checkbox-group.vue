@@ -1,26 +1,33 @@
 <script setup lang="ts">
-import { checkboxGroupClassName, type CheckboxGroupStyleProps } from '@fex-design/styles/checkbox'
-import { cn } from '@fex/utils'
-import { useAttrs } from 'vue'
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import Checkbox from './checkbox.vue'
 import { CheckboxGroup as PrimitiveCheckboxGroup } from '../../primitive/checkbox/checkbox'
-defineOptions({ inheritAttrs: false })
-const props = withDefaults(
-  defineProps<{ orientation?: CheckboxGroupStyleProps['orientation'] }>(),
-  { orientation: 'vertical' },
-)
-const attrs = useAttrs()
+defineOptions({ name: 'CheckboxGroup' })
+defineProps<{
+  value?: CheckboxValue[]
+  defaultValue?: CheckboxValue[]
+  disabled?: boolean
+  orientation?: 'horizontal' | 'vertical'
+  options?: { label: string; value: CheckboxValue; disabled?: boolean }[]
+}>()
+defineEmits<{ change: [value: CheckboxValue[], meta: unknown] }>()
 </script>
 <template>
   <PrimitiveCheckboxGroup
-    v-bind="attrs"
-    data-slot="checkbox-group"
-    :data-orientation="props.orientation"
-    :class="
-      cn(
-        checkboxGroupClassName({ orientation: props.orientation }),
-        attrs.class as string | undefined,
-      )
-    "
-    ><slot
+    :value="value"
+    :default-value="defaultValue"
+    :disabled="disabled"
+    :name="name"
+    :orientation="orientation"
+    @change="(value, meta) => $emit('change', value, meta)"
+    ><template v-if="options"
+      ><Checkbox
+        v-for="option in options"
+        :key="String(option.value)"
+        :value="option.value"
+        :disabled="option.disabled"
+        >{{ option.label }}</Checkbox
+      ></template
+    ><slot v-else
   /></PrimitiveCheckboxGroup>
 </template>

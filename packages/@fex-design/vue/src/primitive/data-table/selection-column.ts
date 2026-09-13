@@ -40,12 +40,9 @@ export function createDataTableSelectionColumn<
     return mode === 'multiple'
       ? h(DataTableCheckbox, {
           ariaLabel: 'Select all rows',
-          checked: table.getIsAllRowsSelected()
-            ? true
-            : table.getIsSomeRowsSelected()
-              ? 'indeterminate'
-              : false,
-          onChange: (checked) => table.toggleAllRowsSelected(checked === true),
+          checked: table.getIsAllRowsSelected(),
+          indeterminate: table.getIsSomeRowsSelected(),
+          onChange: (checked) => table.toggleAllRowsSelected(checked),
         })
       : null
   }
@@ -55,8 +52,9 @@ export function createDataTableSelectionColumn<
       ? h(DataTableCheckbox, {
           ariaLabel: `${ariaLabel} ${row.id}`,
           disabled: !row.getCanSelect(),
-          checked: row.getIsSelected() ? true : row.getIsSomeSelected() ? 'indeterminate' : false,
-          onChange: (checked) => row.toggleSelected(checked === true),
+          checked: row.getIsSelected(),
+          indeterminate: row.getIsSomeSelected(),
+          onChange: (checked) => row.toggleSelected(checked),
         })
       : h(
           RadioGroup,

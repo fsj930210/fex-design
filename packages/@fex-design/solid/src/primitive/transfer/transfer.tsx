@@ -14,7 +14,7 @@ import {
 import { buttonClassName } from '@fex-design/styles/button'
 import {
   checkboxCheckIconClassName,
-  checkboxClassName,
+  checkboxControlClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
 } from '@fex-design/styles/checkbox'
@@ -43,7 +43,7 @@ import {
   ChevronsRightIcon,
 } from '../../icon/chevron'
 import { Button } from '../button/button'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
 import { ListboxItem, ListboxRoot } from '../listbox/listbox'
 
 export interface TransferPanelApi<TItem extends TransferDataItem> {
@@ -156,12 +156,15 @@ export function Transfer<TItem extends TransferDataItem>(props: TransferProps<TI
     return (
       <>
         <CheckboxRoot
-          checked={checked}
           disabled={local.disabled || enabled.length === 0}
-          class={checkboxClassName()}
-          aria-label={`Select all ${title()}`}
-          onCheckedChange={(next) => panel.setCheckedKeys(next === true ? enabled : [])}
         >
+          <CheckboxControl
+            checked={checked === true}
+            indeterminate={checked === 'indeterminate'}
+            class={checkboxControlClassName}
+            aria-label={`Select all ${title()}`}
+            onChange={(event) => panel.setCheckedKeys(event.currentTarget.checked ? enabled : [])}
+          />
           <CheckboxIndicator class={checkboxIndicatorClassName}>
             <CheckIcon class={checkboxCheckIconClassName} />
             <MinusIcon class={checkboxMinusIconClassName} />

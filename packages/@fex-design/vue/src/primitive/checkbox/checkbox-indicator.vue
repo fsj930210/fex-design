@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import type { CheckboxCheckedState } from '@fex-design/core/checkbox/types'
+import { checkboxCheckIconClassName, checkboxIndicatorClassName, checkboxMinusIconClassName } from '@fex-design/styles/checkbox'
 import { cn } from '@fex/utils'
-import { computed, useAttrs } from 'vue'
-defineOptions({ inheritAttrs: false })
-const props = defineProps<{
-  checked?: CheckboxCheckedState
-  class?: string
-  forceMount?: boolean
-}>()
+import { useAttrs } from 'vue'
+import { CheckIcon } from '../../icon/check'
+import { MinusIcon } from '../../icon/minus'
+defineOptions({ name: 'CheckboxIndicator', inheritAttrs: false })
 const attrs = useAttrs()
-const state = computed(() =>
-  props.checked === 'indeterminate' ? 'indeterminate' : props.checked ? 'checked' : 'unchecked',
-)
 </script>
 <template>
   <span
-    v-if="props.forceMount || props.checked !== false"
     v-bind="attrs"
-    :class="cn(props.class, attrs.class as string | undefined)"
-    :data-state="state"
-    ><slot
-  /></span>
+    aria-hidden="true"
+    data-slot="checkbox-indicator"
+    :class="cn(checkboxIndicatorClassName, attrs.class as string | undefined)"
+    ><slot><CheckIcon data-slot="checkbox-check" :class="checkboxCheckIconClassName" /><MinusIcon data-slot="checkbox-minus" :class="checkboxMinusIconClassName" /></slot></span>
 </template>

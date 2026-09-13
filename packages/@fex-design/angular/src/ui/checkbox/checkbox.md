@@ -1,23 +1,5 @@
-# Angular Checkbox
+# Angular UI Checkbox
 
-## Import
+Convenience Checkbox and CheckboxGroup composed from Primitive parts. UI shares every Primitive example and adds semantic-styles. Checkbox uses native change; Group manages only flat values.
 
-```ts
-import { Checkbox, CheckboxGroupUi } from '@fex-design/angular/ui/checkbox'
-```
-
-## Usage
-
-```html
-<button fexCheckbox [checked]="checked()" (checkedChange)="checked.set($event.checked)"></button>
-```
-
-| Name             | Type                         | Default     | Required | Description                |
-| ---------------- | ---------------------------- | ----------- | -------- | -------------------------- |
-| `checked`        | `boolean \| 'indeterminate'` | `undefined` | No       | Controlled checked state.  |
-| `defaultChecked` | `boolean \| 'indeterminate'` | `false`     | No       | Initial unchecked state.   |
-| `disabled`       | `boolean`                    | `false`     | No       | Disables interaction.      |
-| `size`           | `'sm' \| 'md' \| 'lg'`  | `'md'` | No       | Visual size.               |
-| `checkedChange`  | `{ checked, meta }`          | -           | No       | Emits after state changes. |
-
-Use `aria-invalid` for invalid styling. `div[fexCheckboxGroup]` is a layout wrapper and does not own a value array.
+Uses the same CSS variables as Primitive.

@@ -1,127 +1,201 @@
-import { createCheckboxController } from '@fex-design/core/checkbox/create-checkbox-controller'
-import type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
+import { createCheckboxGroupController } from '@fex-design/core/checkbox/create-checkbox-group-controller'
+import type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'
+import {
+  checkboxControlClassName,
+  checkboxCheckIconClassName,
+  checkboxGroupClassName,
+  checkboxIndicatorClassName,
+  checkboxLabelClassName,
+  checkboxMinusIconClassName,
+  checkboxRootClassName,
+  type CheckboxGroupStyleProps,
+  type CheckboxStyleProps,
+} from '@fex-design/styles/checkbox'
+import { cn } from '@fex/utils'
 import {
   createContext,
   use,
+  useId,
   useRef,
-  type ButtonHTMLAttributes,
   type HTMLAttributes,
+  type InputHTMLAttributes,
+  type LabelHTMLAttributes,
   type Ref,
 } from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
+import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
+import { CheckIcon } from '../../icon/check'
+import { MinusIcon } from '../../icon/minus'
 
-export type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex-design/core/checkbox/types'
-
-export interface CheckboxRootProps extends Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  'checked' | 'defaultChecked' | 'onChange' | 'type'
-> {
-  checked?: CheckboxCheckedState
-  defaultChecked?: CheckboxCheckedState
-  ref?: Ref<HTMLButtonElement>
-  onCheckedChange?: (checked: CheckboxCheckedState, meta: CheckboxChangeMeta) => void
+export type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'
+interface RootContext {
+  controlId: string
+  value?: CheckboxValue
+  disabled?: boolean
 }
-
-export interface CheckboxIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
-  forceMount?: boolean
+interface GroupContext {
+  value: CheckboxValue[]
+  disabled: boolean
+  toggle: (value: CheckboxValue) => void
 }
+const RootContext = createContext<RootContext | null>(null)
+const GroupContext = createContext<GroupContext | null>(null)
 
-export interface CheckboxGroupProps extends HTMLAttributes<HTMLDivElement> {
+export interface CheckboxRootProps extends HTMLAttributes<HTMLDivElement>, CheckboxStyleProps {
+  value?: CheckboxValue
+  disabled?: boolean
   ref?: Ref<HTMLDivElement>
 }
-
-interface CheckboxContextValue {
-  checked: CheckboxCheckedState
-}
-
-const CheckboxContext = createContext<CheckboxContextValue | null>(null)
-
-function getAriaChecked(checked: CheckboxCheckedState) {
-  return checked === 'indeterminate' ? 'mixed' : checked
-}
-
 export function CheckboxRoot({
+  value,
+  disabled,
+  size,
+  className,
+  ref,
+  ...props
+}: CheckboxRootProps) {
+  const controlId = useId()
+  return (
+    <RootContext value={{ controlId, value, disabled }}>
+      <div
+        {...props}
+        ref={ref}
+        data-slot="checkbox-root"
+        data-size={size ?? 'md'}
+        className={cn(checkboxRootClassName({ size }), className)}
+      />
+    </RootContext>
+  )
+}
+
+export interface CheckboxControlProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'size' | 'value'
+> {
+  value?: CheckboxValue
+  indeterminate?: boolean
+  ref?: Ref<HTMLInputElement>
+}
+export function CheckboxControl({
+  id,
+  value,
   checked,
   defaultChecked,
   disabled,
+  indeterminate = false,
   className,
   ref,
-  children,
-  onCheckedChange,
-  onClick,
+  onChange,
   ...props
-}: CheckboxRootProps) {
-  const optionsRef = useRef({ checked, defaultChecked, disabled })
-  Object.assign(optionsRef.current, { checked, defaultChecked, disabled })
-  const controllerRef = useLazyRef(() => createCheckboxController(optionsRef.current))
-  const snapshot = useCoreStore(controllerRef.current)
-  const currentChecked = checked ?? snapshot.checked
-  const currentDisabled = disabled ?? snapshot.disabled
-  const state =
-    currentChecked === 'indeterminate' ? 'indeterminate' : currentChecked ? 'checked' : 'unchecked'
-
+}: CheckboxControlProps) {
+  const root = use(RootContext)
+  const group = use(GroupContext)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const currentValue = value ?? root?.value
+  const inGroup = group !== null && currentValue !== undefined
+  useIsomorphicLayoutEffect(() => {
+    if (inputRef.current) inputRef.current.indeterminate = indeterminate
+  }, [indeterminate])
   return (
-    <CheckboxContext value={{ checked: currentChecked }}>
-      <button
-        {...props}
-        ref={ref}
-        type="button"
-        role="checkbox"
-        aria-checked={getAriaChecked(currentChecked)}
-        disabled={currentDisabled}
-        data-state={state}
-        data-disabled={currentDisabled ? 'true' : undefined}
-        className={className}
-        onClick={(event) => {
-          onClick?.(event)
-          if (event.defaultPrevented) {
-            return
-          }
-          if (currentDisabled) return
-          const meta =
-            checked === undefined
-              ? controllerRef.current.toggle()
-              : {
-                  previousChecked: currentChecked,
-                  checked: currentChecked !== true,
-                }
-          if (meta === undefined) {
-            return
-          }
-          onCheckedChange?.(meta.checked, meta)
-        }}
-      >
-        {children}
-      </button>
-    </CheckboxContext>
+    <input
+      {...props}
+      ref={(node) => {
+        inputRef.current = node
+        if (typeof ref === 'function') ref(node)
+        else if (ref) ref.current = node
+      }}
+      id={id ?? root?.controlId}
+      type="checkbox"
+      name={props.name}
+      value={currentValue}
+      checked={inGroup ? group.value.includes(currentValue) : checked}
+      defaultChecked={inGroup ? undefined : defaultChecked}
+      disabled={Boolean(disabled || root?.disabled || group?.disabled)}
+      data-slot="checkbox-control"
+      className={cn(checkboxControlClassName, className)}
+      onChange={(event) => {
+        onChange?.(event)
+        if (!event.defaultPrevented && inGroup && currentValue !== undefined)
+          group.toggle(currentValue)
+      }}
+    />
   )
 }
-
-export function CheckboxIndicator({
-  forceMount = false,
-  className,
-  children,
-  ...props
-}: CheckboxIndicatorProps) {
-  const context = use(CheckboxContext)
-  const checked = context?.checked ?? false
-
-  if (!forceMount && checked === false) {
-    return null
-  }
-
+export function CheckboxIndicator({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
+  const { children, ...rest } = props
   return (
     <span
-      {...props}
-      className={className}
-      data-state={checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
+      {...rest}
+      aria-hidden="true"
+      data-slot="checkbox-indicator"
+      className={cn(checkboxIndicatorClassName, className)}
     >
-      {children}
+      {children ?? (
+        <>
+          <CheckIcon data-slot="checkbox-check" className={checkboxCheckIconClassName} />
+          <MinusIcon data-slot="checkbox-minus" className={checkboxMinusIconClassName} />
+        </>
+      )}
     </span>
   )
 }
+export function CheckboxLabel({
+  htmlFor,
+  className,
+  ...props
+}: LabelHTMLAttributes<HTMLLabelElement>) {
+  const root = use(RootContext)
+  return (
+    <label
+      {...props}
+      htmlFor={htmlFor ?? root?.controlId}
+      data-slot="checkbox-label"
+      className={cn(checkboxLabelClassName, className)}
+    />
+  )
+}
 
-export function CheckboxGroup({ ref, ...props }: CheckboxGroupProps) {
-  return <div {...props} ref={ref} />
+export interface CheckboxGroupProps
+  extends
+    Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>,
+    CheckboxGroupStyleProps {
+  value?: readonly CheckboxValue[]
+  defaultValue?: readonly CheckboxValue[]
+  disabled?: boolean
+  onChange?: (value: CheckboxValue[], meta: CheckboxGroupChangeMeta) => void
+  ref?: Ref<HTMLDivElement>
+}
+export function CheckboxGroup({
+  value,
+  defaultValue,
+  disabled,
+  onChange,
+  orientation = 'vertical',
+  className,
+  ref,
+  ...props
+}: CheckboxGroupProps) {
+  const optionsRef = useRef({ value, defaultValue, disabled, onChange })
+  Object.assign(optionsRef.current, { value, defaultValue, disabled, onChange })
+  const controllerRef = useLazyRef(() => createCheckboxGroupController(optionsRef.current))
+  const snapshot = useCoreStore(controllerRef.current)
+  return (
+    <GroupContext
+      value={{
+        value: value ? [...value] : snapshot.value,
+        disabled: disabled === true,
+        toggle: controllerRef.current.toggle,
+      }}
+    >
+      <div
+        {...props}
+        ref={ref}
+        role="group"
+        data-slot="checkbox-group"
+        data-orientation={orientation}
+        className={cn(checkboxGroupClassName({ orientation }), className)}
+      />
+    </GroupContext>
+  )
 }

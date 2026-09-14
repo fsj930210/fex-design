@@ -19,14 +19,14 @@
     <div card title="Placement"
       ><div class="space-y-3">
         <div
-          fexRadioGroup
+          radioGroup
           [value]="placement"
           orientation="horizontal"
           (valueChange)="setPlacement($event.value)"
         >
           @for (item of placements; track item) {
             <label class="inline-flex items-center gap-2 text-sm text-foreground"
-              ><button fexRadio [value]="item"></button><span>{{ item }}</span></label
+              ><button radio [value]="item"></button><span>{{ item }}</span></label
             >
           }
         </div>
@@ -48,14 +48,14 @@
     <div card title="Resizable size"
       ><div class="space-y-3">
         <div
-          fexRadioGroup
+          radioGroup
           [value]="resizePlacement"
           orientation="horizontal"
           (valueChange)="setResizePlacement($event.value)"
         >
           @for (item of placements; track item) {
             <label class="inline-flex items-center gap-2 text-sm text-foreground"
-              ><button fexRadio [value]="item"></button><span>{{ item }}</span></label
+              ><button radio [value]="item"></button><span>{{ item }}</span></label
             >
           }
         </div>

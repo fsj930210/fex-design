@@ -23,6 +23,7 @@ function select(event: MouseEvent) {
     role="radio"
     :disabled="currentDisabled"
     :aria-checked="checked"
+    data-slot="radio-button"
     :data-state="checked ? 'checked' : 'unchecked'"
     :data-disabled="currentDisabled ? 'true' : undefined"
     :data-value="props.value"

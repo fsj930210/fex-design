@@ -93,7 +93,7 @@ export function RadioGroup(props: RadioGroupProps) {
   })
   const snapshot = createCoreStoreSignal(controller)
   const currentValue = () => local.value ?? snapshot().value
-  const orientation = () => local.orientation ?? 'vertical'
+  const orientation = () => local.orientation ?? 'horizontal'
 
   return (
     <RadioContext.Provider
@@ -106,6 +106,7 @@ export function RadioGroup(props: RadioGroupProps) {
       <div
         {...rest}
         role="radiogroup"
+        data-slot="radio-group"
         data-orientation={orientation()}
         data-disabled={local.disabled ? 'true' : undefined}
         class={cn(radioGroupClassName({ orientation: orientation() }), local.class)}
@@ -137,6 +138,7 @@ export function Radio(props: RadioProps) {
       role="radio"
       disabled={currentDisabled()}
       aria-checked={checked()}
+      data-slot="radio"
       data-state={checked() ? 'checked' : 'unchecked'}
       data-disabled={currentDisabled() ? 'true' : undefined}
       data-value={local.value}
@@ -149,7 +151,7 @@ export function Radio(props: RadioProps) {
         context.select(local.value)
       }}
     >
-      {checked() ? <span class={radioIndicatorClassName({ size: size() })} /> : null}
+      {checked() ? <span data-slot="radio-indicator" class={radioIndicatorClassName} /> : null}
       {local.children}
     </button>
   )
@@ -176,6 +178,7 @@ export function RadioButton(props: RadioButtonProps) {
       role="radio"
       disabled={currentDisabled()}
       aria-checked={checked()}
+      data-slot="radio-button"
       data-state={checked() ? 'checked' : 'unchecked'}
       data-disabled={currentDisabled() ? 'true' : undefined}
       data-value={local.value}

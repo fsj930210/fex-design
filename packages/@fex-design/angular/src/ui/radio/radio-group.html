@@ -1,0 +1,5 @@
+@if (options(); as items) { @for (option of items; track option.value) {
+  <div radio [value]="option.value" [disabled]="option.disabled">{{ option.label }}</div>
+} } @else {
+<ng-content />
+}

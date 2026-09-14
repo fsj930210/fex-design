@@ -27,12 +27,13 @@ function select(event: MouseEvent) {
     role="radio"
     :disabled="currentDisabled"
     :aria-checked="checked"
+    data-slot="radio"
     :data-state="checked ? 'checked' : 'unchecked'"
     :data-disabled="currentDisabled ? 'true' : undefined"
     :data-value="props.value"
     :class="cn(radioRootClassName({ size: props.size }), attrs.class as string | undefined)"
     @click="select"
   >
-    <span v-if="checked" :class="radioIndicatorClassName({ size: props.size })" /><slot />
+    <span v-if="checked" data-slot="radio-indicator" :class="radioIndicatorClassName" /><slot />
   </button>
 </template>

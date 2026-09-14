@@ -44,11 +44,12 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
 }
 
 @Component({
-  selector: 'div[fexRadioGroup]',
+  selector: 'div[radioGroup]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'radiogroup',
+    'data-slot': 'radio-group',
     '[class]': 'hostClassName()',
     '[attr.data-orientation]': 'orientation()',
     '[attr.data-disabled]': "disabled() ? 'true' : null",
@@ -59,7 +60,7 @@ export class RadioGroup {
   value = input<RadioValue | undefined>()
   defaultValue = input<RadioValue | undefined>()
   disabled = input(false, { transform: booleanAttribute })
-  orientation = input<RadioGroupStyleProps['orientation']>('vertical')
+  orientation = input<RadioGroupStyleProps['orientation']>('horizontal')
   valueChange = output<{ value: RadioValue; meta: RadioChangeMeta }>()
 
   readonly controller: SelectionController
@@ -103,12 +104,13 @@ export class RadioGroup {
 }
 
 @Component({
-  selector: 'button[fexRadio]',
+  selector: 'button[radio]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     type: 'button',
     role: 'radio',
+    'data-slot': 'radio',
     '[class]': 'hostClassName()',
     '[disabled]': 'disabledState()',
     '[attr.aria-checked]': 'checked()',
@@ -127,9 +129,7 @@ export class Radio {
 
   protected readonly checked = computed(() => this.group.currentValue() === this.value())
   protected readonly disabledState = computed(() => this.group.disabled() || this.disabled())
-  protected readonly indicatorClassName = computed(() =>
-    radioIndicatorClassName({ size: this.size() }),
-  )
+  protected readonly indicatorClassName = radioIndicatorClassName
   protected readonly hostClassName = createHostClassName(() =>
     cn(radioRootClassName({ size: this.size() })),
   )
@@ -142,12 +142,13 @@ export class Radio {
 }
 
 @Component({
-  selector: 'button[fexRadioButton]',
+  selector: 'button[radioButton]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     type: 'button',
     role: 'radio',
+    'data-slot': 'radio-button',
     '[class]': 'hostClassName()',
     '[disabled]': 'disabledState()',
     '[attr.aria-checked]': 'checked()',

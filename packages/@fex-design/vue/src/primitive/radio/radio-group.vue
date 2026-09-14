@@ -14,7 +14,7 @@ const props = withDefaults(
     disabled?: boolean
     orientation?: RadioGroupStyleProps['orientation']
   }>(),
-  { disabled: false, orientation: 'vertical' },
+  { disabled: false, orientation: 'horizontal' },
 )
 const emit = defineEmits<{ valueChange: [value: RadioValue, meta: RadioChangeMeta] }>()
 const attrs = useAttrs()
@@ -50,6 +50,7 @@ provide(radioContextKey, {
   <div
     v-bind="attrs"
     role="radiogroup"
+    data-slot="radio-group"
     :data-orientation="props.orientation"
     :data-disabled="props.disabled ? 'true' : undefined"
     :class="

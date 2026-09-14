@@ -48,6 +48,7 @@
   role="radio"
   disabled={currentDisabled}
   aria-checked={checked}
+  data-slot="radio"
   data-state={checked ? "checked" : "unchecked"}
   data-disabled={currentDisabled ? "true" : undefined}
   data-value={value}
@@ -59,7 +60,7 @@
   }}
 >
   {#if checked}
-    <span class={radioIndicatorClassName({ size })}></span>
+    <span data-slot="radio-indicator" class={radioIndicatorClassName}></span>
   {/if}
   {@render children?.()}
 </button>

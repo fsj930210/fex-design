@@ -1,0 +1,241 @@
+{
+  "name": "Radio",
+  "slug": "radio",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "互斥选择 Primitive，提供圆形 Radio 与按钮式 RadioButton。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/radio",
+    "vue": "@fex-design/vue/primitive/radio",
+    "solid": "@fex-design/solid/primitive/radio",
+    "svelte": "@fex-design/svelte/primitive/radio",
+    "angular": "@fex-design/angular/primitive/radio"
+  },
+  "props": [],
+  "events": [],
+  "cssVariables": [
+    {
+      "name": "--radio-size",
+      "description": "圆形 Radio 的边长。"
+    },
+    {
+      "name": "--radio-indicator-size",
+      "description": "选中圆点的边长，默认是控件尺寸的 50%。"
+    },
+    {
+      "name": "--radio-border-color",
+      "description": "未选中状态的边框色。"
+    },
+    {
+      "name": "--radio-background",
+      "description": "圆形 Radio 的背景色。"
+    },
+    {
+      "name": "--radio-checked-color",
+      "description": "选中状态的边框和圆点颜色。"
+    },
+    {
+      "name": "--radio-ring-color",
+      "description": "圆形 Radio 的键盘聚焦环颜色。"
+    },
+    {
+      "name": "--radio-content-gap",
+      "description": "UI Radio 控件与标签之间的间距。"
+    },
+    {
+      "name": "--radio-button-height",
+      "description": "RadioButton 高度。"
+    },
+    {
+      "name": "--radio-button-padding-inline",
+      "description": "RadioButton 水平内边距。"
+    },
+    {
+      "name": "--radio-button-border-color",
+      "description": "RadioButton 未选中边框色。"
+    },
+    {
+      "name": "--radio-button-background",
+      "description": "RadioButton 未选中背景色。"
+    },
+    {
+      "name": "--radio-button-checked-background",
+      "description": "RadioButton 选中背景和边框色。"
+    },
+    {
+      "name": "--radio-button-checked-foreground",
+      "description": "RadioButton 选中文字颜色。"
+    },
+    {
+      "name": "--radio-button-ring-color",
+      "description": "RadioButton 键盘聚焦环颜色。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "在 RadioGroup 中选择一个值。"
+    },
+    {
+      "id": "states",
+      "title": "状态",
+      "description": "对照未选中、已选中和禁用状态。"
+    },
+    {
+      "id": "sizes",
+      "title": "尺寸",
+      "description": "对照 sm、md 和 lg 三种尺寸。"
+    },
+    {
+      "id": "controlled",
+      "title": "受控与非受控",
+      "description": "通过外部按钮修改受控值，并对照非受控初始值。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "对照中文 LTR 与阿拉伯语 RTL 排列。"
+    },
+    {
+      "id": "css-variables",
+      "title": "实例 CSS Variables",
+      "description": "覆盖单个 Radio 和 RadioButton 的尺寸与颜色。"
+    }
+  ],
+  "components": [
+    {
+      "name": "RadioGroup",
+      "slug": "radio-group",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "RadioGroup 继承原生 div，管理一个受控或非受控选中值。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/radio",
+        "vue": "@fex-design/vue/primitive/radio",
+        "solid": "@fex-design/solid/primitive/radio",
+        "svelte": "@fex-design/svelte/primitive/radio",
+        "angular": "@fex-design/angular/primitive/radio"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "string | number",
+          "description": "受控选中值。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | number",
+          "description": "非受控初始选中值。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用组内所有选项。",
+          "editor": "boolean"
+        },
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "选项排列方向。",
+          "editor": "enum",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "Radio",
+      "slug": "radio",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "Radio 继承原生 button，用于圆形单选控件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/radio",
+        "vue": "@fex-design/vue/primitive/radio",
+        "solid": "@fex-design/solid/primitive/radio",
+        "svelte": "@fex-design/svelte/primitive/radio",
+        "angular": "@fex-design/angular/primitive/radio"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "string | number",
+          "description": "当前选项值。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用当前选项。",
+          "editor": "boolean"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "选项尺寸。",
+          "editor": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "RadioButton",
+      "slug": "radio-button",
+      "layer": "primitive",
+      "status": "stable",
+      "description": "RadioButton 继承原生 button，是按钮式单选快捷形态。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/radio",
+        "vue": "@fex-design/vue/primitive/radio",
+        "solid": "@fex-design/solid/primitive/radio",
+        "svelte": "@fex-design/svelte/primitive/radio",
+        "angular": "@fex-design/angular/primitive/radio"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "string | number",
+          "description": "当前选项值。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用当前选项。",
+          "editor": "boolean"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "选项尺寸。",
+          "editor": "enum",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    }
+  ]
+}

@@ -38,7 +38,7 @@
     value,
     defaultValue,
     disabled,
-    orientation = "vertical",
+    orientation = "horizontal",
     children,
     class: className,
     onValueChange,
@@ -85,6 +85,7 @@
 <div
   {...rest}
   role="radiogroup"
+  data-slot="radio-group"
   data-orientation={orientation}
   data-disabled={disabled ? "true" : undefined}
   class={cn(radioGroupClassName({ orientation }), className)}

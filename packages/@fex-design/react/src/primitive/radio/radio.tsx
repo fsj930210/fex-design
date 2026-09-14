@@ -61,7 +61,7 @@ export function RadioGroup({
   value,
   defaultValue,
   disabled = false,
-  orientation = 'vertical',
+  orientation = 'horizontal',
   className,
   ref,
   children,
@@ -103,6 +103,7 @@ export function RadioGroup({
         {...props}
         ref={ref}
         role="radiogroup"
+        data-slot="radio-group"
         data-orientation={orientation}
         data-disabled={disabled ? 'true' : undefined}
         className={cn(radioGroupClassName({ orientation }), className)}
@@ -135,6 +136,7 @@ export function Radio({
       role="radio"
       aria-checked={checked}
       disabled={currentDisabled}
+      data-slot="radio"
       data-state={checked ? 'checked' : 'unchecked'}
       data-disabled={currentDisabled ? 'true' : undefined}
       data-value={value}
@@ -145,7 +147,7 @@ export function Radio({
         context.select(value)
       }}
     >
-      {checked ? <span className={radioIndicatorClassName({ size })} /> : null}
+      {checked ? <span data-slot="radio-indicator" className={radioIndicatorClassName} /> : null}
       {children}
     </button>
   )
@@ -173,6 +175,7 @@ export function RadioButton({
       role="radio"
       aria-checked={checked}
       disabled={currentDisabled}
+      data-slot="radio-button"
       data-state={checked ? 'checked' : 'unchecked'}
       data-disabled={currentDisabled ? 'true' : undefined}
       data-value={value}

@@ -22,11 +22,11 @@
             @if (cell.column.id === '__select__') {
               @if (grid.mode === 'single') {
                 <div
-                  fexRadioGroup
+                  radioGroup
                   [value]="selectedId(grid)"
                   (valueChange)="selectSingle(grid, $event.value)"
                 >
-                  <button fexRadio [value]="cell.row.id" [disabled]="disabled(cell)"></button>
+                  <button radio [value]="cell.row.id" [disabled]="disabled(cell)"></button>
                 </div>
               } @else {
                 <button

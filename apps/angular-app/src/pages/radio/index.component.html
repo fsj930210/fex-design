@@ -12,10 +12,10 @@
 
     <div class="space-y-4">
       <div card title="Basic" description="RadioGroup owns one selected value.">
-        <div fexRadioGroup defaultValue="apple" orientation="horizontal">
+        <div radioGroup defaultValue="apple" orientation="horizontal">
           @for (option of options; track option.value) {
             <label class="inline-flex min-w-0 items-center gap-2 text-sm">
-              <button fexRadio [value]="option.value"></button>
+              <button radio [value]="option.value"></button>
               <span>{{ option.label }}</span>
             </label>
           }
@@ -25,14 +25,14 @@
       <div card title="Controlled" description="Controlled state uses value and valueChange.">
         <div class="grid min-w-0 gap-2">
           <div
-            fexRadioGroup
+            radioGroup
             [value]="controlled()"
             (valueChange)="controlled.set($event.value)"
             orientation="horizontal"
           >
             @for (option of options; track option.value) {
               <label class="inline-flex min-w-0 items-center gap-2 text-sm">
-                <button fexRadio [value]="option.value"></button>
+                <button radio [value]="option.value"></button>
                 <span>{{ option.label }}</span>
               </label>
             }
@@ -43,10 +43,10 @@
 
       <div card title="Group" description="Vertical group layout still uses one selected value.">
         <div class="grid min-w-0 gap-2">
-          <div fexRadioGroup [value]="groupValue()" (valueChange)="groupValue.set($event.value)">
+          <div radioGroup [value]="groupValue()" (valueChange)="groupValue.set($event.value)">
             @for (option of options; track option.value) {
               <label class="inline-flex min-w-0 items-center gap-2 text-sm">
-                <button fexRadio [value]="option.value"></button>
+                <button radio [value]="option.value"></button>
                 <span>{{ option.label }}</span>
               </label>
             }
@@ -61,14 +61,14 @@
       >
         <div class="grid min-w-0 gap-2">
           <div
-            fexRadioGroup
+            radioGroup
             [value]="buttonValue()"
             (valueChange)="buttonValue.set($event.value)"
             orientation="horizontal"
             class="grid grid-cols-3 gap-0"
           >
             @for (option of options; track option.value) {
-              <button fexRadioButton [value]="option.value">{{ option.label }}</button>
+              <button radioButton [value]="option.value">{{ option.label }}</button>
             }
           </div>
           <p class="text-sm text-muted-foreground">Current value: {{ buttonValue() }}</p>
@@ -80,26 +80,26 @@
         description="Disabled state can live on the group or a single radio."
       >
         <div class="grid min-w-0 gap-2">
-          <div fexRadioGroup defaultValue="pear" orientation="horizontal">
+          <div radioGroup defaultValue="pear" orientation="horizontal">
             <label class="inline-flex min-w-0 items-center gap-2 text-sm"
-              ><button fexRadio value="apple"></button><span>Apple</span></label
+              ><button radio value="apple"></button><span>Apple</span></label
             >
             <label class="inline-flex min-w-0 items-center gap-2 text-sm"
-              ><button fexRadio value="pear"></button><span>Pear</span></label
+              ><button radio value="pear"></button><span>Pear</span></label
             >
             <label class="inline-flex min-w-0 items-center gap-2 text-sm"
-              ><button fexRadio value="orange" disabled></button><span>Orange disabled</span></label
+              ><button radio value="orange" disabled></button><span>Orange disabled</span></label
             >
           </div>
           <div
-            fexRadioGroup
+            radioGroup
             defaultValue="apple"
             disabled
             orientation="horizontal"
             class="grid grid-cols-3 gap-0"
           >
             @for (option of options; track option.value) {
-              <button fexRadioButton [value]="option.value">{{ option.label }}</button>
+              <button radioButton [value]="option.value">{{ option.label }}</button>
             }
           </div>
         </div>

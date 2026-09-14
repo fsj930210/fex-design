@@ -88,6 +88,7 @@
     "./ui/card": "./src/ui/card/card.ts",
     "./ui/empty": "./src/ui/empty/empty.ts",
     "./ui/input": "./src/ui/input/input.ts",
+    "./ui/radio": "./src/ui/radio/radio.ts",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.ts",
     "./ui/popover": "./src/ui/popover/popover.ts",

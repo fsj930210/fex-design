@@ -87,6 +87,7 @@
     "./ui/card": "./src/ui/card/card.tsx",
     "./ui/empty": "./src/ui/empty/empty.tsx",
     "./ui/input": "./src/ui/input/input.tsx",
+    "./ui/radio": "./src/ui/radio/radio.tsx",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.tsx",
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",
     "./ui/listbox": "./src/ui/listbox/listbox.tsx",

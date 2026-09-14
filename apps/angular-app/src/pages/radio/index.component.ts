@@ -15,7 +15,7 @@ const options = [
 ] as const
 
 @Component({
-  selector: 'fex-radio-page',
+  selector: 'radio-page',
   standalone: true,
   imports: [RouterLink, RadioGroup, Radio, RadioButton, Card],
   host: { class: 'block' },

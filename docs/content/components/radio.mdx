@@ -1,0 +1,52 @@
+---
+title: Radio
+description: 从一组互斥选项中选择一个值。
+---
+
+## Primitive 与 UI
+
+Primitive 提供 `RadioGroup`、圆形 `Radio` 和按钮式 `RadioButton`。两种选项形态共享同一个 Group 状态模型，Primitive 已包含默认样式并可直接使用。
+
+UI 提供带标签结构的 `Radio`、支持 `options` 的 `RadioGroup`，以及按钮式快捷入口 `RadioButton` 和 `RadioButtonGroup`。
+
+## 何时使用
+
+Radio 用于必须从互斥选项中选择一个值。多个独立布尔选择使用 Checkbox；即时开启或关闭设置使用 Switch。文字较短且选项数量较少时，可以使用 RadioButton。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="RadioGroup、Radio 与 RadioButton 的公开属性。">
+  <ApiComposition layer="primitive">
+    `Radio` 与 `RadioButton` 都必须位于 `RadioGroup` 中；前者是圆形控件，后者是按钮式快捷形态。
+
+    ```text
+    RadioGroup
+    ├── Radio ...
+    └── RadioButton ...
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="带标签与 options 快捷组合的 Radio API。">
+  <ApiComposition layer="ui">
+    UI `Radio` 内置标签结构；两个 Group 均可接收 options，也可接收框架原生子内容。
+
+    ```text
+    RadioGroup
+    └── Radio ...
+
+    RadioButtonGroup
+    └── RadioButton ...
+    ```
+  </ApiComposition>
+</ApiSection>
+
+## CSS Variables
+
+变量可以设置在单个选项、局部容器或主题根节点上。禁用和校验状态继续复用主题 semantic token，不建立重复的状态变量族。
+
+<CssVariables />

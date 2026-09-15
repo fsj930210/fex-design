@@ -12,7 +12,8 @@
       </div>
     </header>
 
-    <div card
+    <div
+      card
       title="Basic form"
       description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
     >
@@ -30,7 +31,8 @@
             [hasError]="invalid(account.api)"
           >
             <label fexFieldLabel>账号 <span fexFieldRequiredIndicator>*</span></label>
-            <div inputRoot
+            <div
+              inputRoot
               [value]="account.api.state.value"
               (valueChange)="account.api.handleChange($event)"
               [attr.aria-invalid]="invalid(account.api)"
@@ -65,7 +67,8 @@
             [hasError]="invalid(password.api)"
           >
             <label fexFieldLabel>密码 <span fexFieldRequiredIndicator>*</span></label>
-            <div inputRoot
+            <div
+              inputRoot
               [value]="password.api.state.value"
               (valueChange)="password.api.handleChange($event)"
               [attr.aria-invalid]="invalid(password.api)"
@@ -114,7 +117,8 @@
       </form>
     </div>
 
-    <div card
+    <div
+      card
       title="Validation timing, async validation and dependencies"
       description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
     >
@@ -132,7 +136,8 @@
             [hasError]="invalid(username.api)"
           >
             <label fexFieldLabel>用户名 <span fexFieldRequiredIndicator>*</span></label>
-            <div inputRoot
+            <div
+              inputRoot
               [value]="username.api.state.value"
               (valueChange)="username.api.handleChange($event)"
               [attr.aria-invalid]="invalid(username.api)"
@@ -161,7 +166,8 @@
             [hasError]="invalid(newPassword.api)"
           >
             <label fexFieldLabel>新密码 <span fexFieldRequiredIndicator>*</span></label>
-            <div inputRoot
+            <div
+              inputRoot
               [value]="newPassword.api.state.value"
               (valueChange)="newPassword.api.handleChange($event)"
               [attr.aria-invalid]="invalid(newPassword.api)"
@@ -195,7 +201,8 @@
             [hasError]="invalid(confirm.api)"
           >
             <label fexFieldLabel>确认密码 <span fexFieldRequiredIndicator>*</span></label>
-            <div inputRoot
+            <div
+              inputRoot
               [value]="confirm.api.state.value"
               (valueChange)="confirm.api.handleChange($event)"
               [attr.aria-invalid]="invalid(confirm.api)"
@@ -221,7 +228,8 @@
       </form>
     </div>
 
-    <div card
+    <div
+      card
       title="Dynamic validation and cascading updates"
       description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"
     >
@@ -253,7 +261,8 @@
               [hasError]="invalid(nickname.api)"
             >
               <label fexFieldLabel>昵称</label>
-              <div inputRoot
+              <div
+                inputRoot
                 [value]="nickname.api.state.value"
                 (valueChange)="nickname.api.handleChange($event)"
                 [attr.aria-invalid]="invalid(nickname.api)"
@@ -301,29 +310,30 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Field structure and primitive layouts"
       description="布局属于 Field 的 DOM 结构能力，不是 Form 的 labelCol/wrapperCol 配置；UI 层以后只组合这些 primitive。"
     >
       <div fexFieldGroup>
         <fex-field-root orientation="vertical"
-          ><label fexFieldLabel>Vertical</label
-          ><div inputRoot value=""
-            ><input inputControl placeholder="标签在上方" /></div></fex-field-root>
+          ><label fexFieldLabel>Vertical</label>
+          <div inputRoot value=""><input inputControl placeholder="标签在上方" /></div
+        ></fex-field-root>
         <fex-field-root orientation="horizontal"
-          ><label fexFieldLabel>Horizontal</label
-          ><div inputRoot value=""
-            ><input inputControl placeholder="标签按内容宽度排列" /></div></fex-field-root>
+          ><label fexFieldLabel>Horizontal</label>
+          <div inputRoot value=""><input inputControl placeholder="标签按内容宽度排列" /></div
+        ></fex-field-root>
         <fex-field-root orientation="responsive"
-          ><label fexFieldLabel>Responsive</label
-          ><div inputRoot value=""
-            ><input inputControl placeholder="窄屏纵向，变宽后横向" /></div></fex-field-root>
+          ><label fexFieldLabel>Responsive</label>
+          <div inputRoot value=""><input inputControl placeholder="窄屏纵向，变宽后横向" /></div
+        ></fex-field-root>
       </div>
       <div fexFieldGroup orientation="inline" class="mt-3">
         <fex-field-root orientation="inline"
-          ><label fexFieldLabel>关键字</label
-          ><div inputRoot value=""
-            ><input inputControl class="w-48" placeholder="内联筛选" /></div></fex-field-root>
+          ><label fexFieldLabel>关键字</label>
+          <div inputRoot value=""><input inputControl class="w-48" placeholder="内联筛选" /></div
+        ></fex-field-root>
         <fex-field-root orientation="inline"
           ><label fexFieldLabel>状态</label
           ><select [class]="selectClass + ' w-32'">
@@ -335,19 +345,22 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Form instance and defaultValue"
       description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"
     >
       <form [fexForm]="instanceForm" class="grid max-w-xl gap-3">
         <ng-container [fexField]="instanceForm" name="source" #source="field">
           <fex-field-root [hasDescription]="true"
-            ><label fexFieldLabel>Form 初始值</label
-            ><div inputRoot
+            ><label fexFieldLabel>Form 初始值</label>
+            <div
+              inputRoot
               [value]="source.api.state.value"
               (valueChange)="source.api.handleChange($event)"
-              ><input inputControl fexFieldControl (blur)="source.api.handleBlur()"
-            /></div>
+            >
+              <input inputControl fexFieldControl (blur)="source.api.handleBlur()" />
+            </div>
             <p fexFieldDescription>来自 useForm.defaultValues。</p></fex-field-root
           >
         </ng-container>
@@ -358,12 +371,14 @@
           #instanceNickname="field"
         >
           <fex-field-root [hasDescription]="true"
-            ><label fexFieldLabel>字段初始值</label
-            ><div inputRoot
+            ><label fexFieldLabel>字段初始值</label>
+            <div
+              inputRoot
               [value]="instanceNickname.api.state.value"
               (valueChange)="instanceNickname.api.handleChange($event)"
-              ><input inputControl fexFieldControl (blur)="instanceNickname.api.handleBlur()"
-            /></div>
+            >
+              <input inputControl fexFieldControl (blur)="instanceNickname.api.handleBlur()" />
+            </div>
             <p fexFieldDescription>使用 TanStack 原生 defaultValue。</p></fex-field-root
           >
         </ng-container>
@@ -383,7 +398,8 @@
       </form>
     </div>
 
-    <div card
+    <div
+      card
       title="Dynamic nested fields"
       description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 Angular track。"
     >
@@ -414,16 +430,19 @@
                         [required]="true"
                         [invalid]="invalid(contactName.api)"
                         [hasError]="invalid(contactName.api)"
-                        ><label fexFieldLabel>姓名 <span fexFieldRequiredIndicator>*</span></label
-                        ><div inputRoot
+                        ><label fexFieldLabel>姓名 <span fexFieldRequiredIndicator>*</span></label>
+                        <div
+                          inputRoot
                           [value]="contactName.api.state.value"
                           (valueChange)="contactName.api.handleChange($event)"
                           [attr.aria-invalid]="invalid(contactName.api)"
-                          ><input
+                        >
+                          <input
                             inputControl
                             fexFieldControl
                             (blur)="contactName.api.handleBlur()"
-                        /></div>
+                          />
+                        </div>
                         @if (invalid(contactName.api)) {
                           <div fexFieldError>
                             @for (error of errors(contactName.api); track error) {
@@ -443,17 +462,20 @@
                         [required]="true"
                         [invalid]="invalid(contactEmail.api)"
                         [hasError]="invalid(contactEmail.api)"
-                        ><label fexFieldLabel>邮箱 <span fexFieldRequiredIndicator>*</span></label
-                        ><div inputRoot
+                        ><label fexFieldLabel>邮箱 <span fexFieldRequiredIndicator>*</span></label>
+                        <div
+                          inputRoot
                           [value]="contactEmail.api.state.value"
                           (valueChange)="contactEmail.api.handleChange($event)"
                           [attr.aria-invalid]="invalid(contactEmail.api)"
-                          ><input
+                        >
+                          <input
                             inputControl
                             fexFieldControl
                             type="email"
                             (blur)="contactEmail.api.handleBlur()"
-                        /></div>
+                          />
+                        </div>
                         @if (invalid(contactEmail.api)) {
                           <div fexFieldError>
                             @for (error of errors(contactEmail.api); track error) {
@@ -518,7 +540,8 @@
       </form>
     </div>
 
-    <div card
+    <div
+      card
       title="Path prefix and multiple forms"
       description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"
     >
@@ -536,13 +559,15 @@
                   [required]="true"
                   [invalid]="invalid(displayName.api)"
                   [hasError]="invalid(displayName.api)"
-                  ><label fexFieldLabel>显示名称 <span fexFieldRequiredIndicator>*</span></label
-                  ><div inputRoot
+                  ><label fexFieldLabel>显示名称 <span fexFieldRequiredIndicator>*</span></label>
+                  <div
+                    inputRoot
                     [value]="displayName.api.state.value"
                     (valueChange)="displayName.api.handleChange($event)"
                     [attr.aria-invalid]="invalid(displayName.api)"
-                    ><input inputControl fexFieldControl (blur)="displayName.api.handleBlur()"
-                  /></div>
+                  >
+                    <input inputControl fexFieldControl (blur)="displayName.api.handleBlur()" />
+                  </div>
                   @if (invalid(displayName.api)) {
                     <div fexFieldError>
                       @for (error of errors(displayName.api); track error) {
@@ -560,17 +585,20 @@
                 ><fex-field-root
                   [invalid]="invalid(profileEmail.api)"
                   [hasError]="invalid(profileEmail.api)"
-                  ><label fexFieldLabel>联系邮箱</label
-                  ><div inputRoot
+                  ><label fexFieldLabel>联系邮箱</label>
+                  <div
+                    inputRoot
                     [value]="profileEmail.api.state.value"
                     (valueChange)="profileEmail.api.handleChange($event)"
                     [attr.aria-invalid]="invalid(profileEmail.api)"
-                    ><input
+                  >
+                    <input
                       inputControl
                       fexFieldControl
                       type="email"
                       (blur)="profileEmail.api.handleBlur()"
-                  /></div>
+                    />
+                  </div>
                   @if (invalid(profileEmail.api)) {
                     <div fexFieldError>
                       @for (error of errors(profileEmail.api); track error) {
@@ -589,14 +617,17 @@
             <div fexFieldTitle>资料表单</div>
             <ng-container [fexField]="profileForm" name="name" #profileName="field"
               ><fex-field-root
-                ><label fexFieldLabel>姓名</label
-                ><div inputRoot
+                ><label fexFieldLabel>姓名</label>
+                <div
+                  inputRoot
                   [value]="profileName.api.state.value"
                   (valueChange)="profileName.api.handleChange($event)"
-                  ><input
+                >
+                  <input
                     inputControl
                     fexFieldControl
-                    (blur)="profileName.api.handleBlur()" /></div></fex-field-root
+                    (blur)="profileName.api.handleBlur()"
+                  /></div></fex-field-root
             ></ng-container>
             <ng-container
               [fexField]="profileForm"
@@ -607,17 +638,20 @@
                 [required]="true"
                 [invalid]="invalid(profileFormEmail.api)"
                 [hasError]="invalid(profileFormEmail.api)"
-                ><label fexFieldLabel>资料邮箱 <span fexFieldRequiredIndicator>*</span></label
-                ><div inputRoot
+                ><label fexFieldLabel>资料邮箱 <span fexFieldRequiredIndicator>*</span></label>
+                <div
+                  inputRoot
                   [value]="profileFormEmail.api.state.value"
                   (valueChange)="profileFormEmail.api.handleChange($event)"
                   [attr.aria-invalid]="invalid(profileFormEmail.api)"
-                  ><input
+                >
+                  <input
                     inputControl
                     fexFieldControl
                     type="email"
                     (blur)="profileFormEmail.api.handleBlur()"
-                /></div>
+                  />
+                </div>
                 @if (invalid(profileFormEmail.api)) {
                   <div fexFieldError>
                     @for (error of errors(profileFormEmail.api); track error) {
@@ -640,17 +674,20 @@
                 [required]="true"
                 [invalid]="invalid(notificationEmail.api)"
                 [hasError]="invalid(notificationEmail.api)"
-                ><label fexFieldLabel>通知邮箱 <span fexFieldRequiredIndicator>*</span></label
-                ><div inputRoot
+                ><label fexFieldLabel>通知邮箱 <span fexFieldRequiredIndicator>*</span></label>
+                <div
+                  inputRoot
                   [value]="notificationEmail.api.state.value"
                   (valueChange)="notificationEmail.api.handleChange($event)"
                   [attr.aria-invalid]="invalid(notificationEmail.api)"
-                  ><input
+                >
+                  <input
                     inputControl
                     fexFieldControl
                     type="email"
                     (blur)="notificationEmail.api.handleBlur()"
-                /></div>
+                  />
+                </div>
                 @if (invalid(notificationEmail.api)) {
                   <div fexFieldError>
                     @for (error of errors(notificationEmail.api); track error) {
@@ -681,7 +718,8 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Scroll to a specific field"
       description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"
     >
@@ -693,14 +731,17 @@
         </div>
         <ng-container [fexField]="scrollForm" name="note" #note="field"
           ><fex-field-root
-            ><label fexFieldLabel>备注（选填）</label
-            ><div inputRoot
+            ><label fexFieldLabel>备注（选填）</label>
+            <div
+              inputRoot
               [value]="note.api.state.value"
               (valueChange)="note.api.handleChange($event)"
-              ><input
+            >
+              <input
                 inputControl
                 fexFieldControl
-                (blur)="note.api.handleBlur()" /></div></fex-field-root
+                (blur)="note.api.handleBlur()"
+              /></div></fex-field-root
         ></ng-container>
         <div
           class="flex min-h-[24rem] items-center justify-center rounded-md border border-dashed border-border text-sm text-muted-foreground"
@@ -716,17 +757,20 @@
             [required]="true"
             [invalid]="invalid(deliveryAddress.api)"
             [hasError]="invalid(deliveryAddress.api)"
-            ><label fexFieldLabel>收货地址 <span fexFieldRequiredIndicator>*</span></label
-            ><div inputRoot
+            ><label fexFieldLabel>收货地址 <span fexFieldRequiredIndicator>*</span></label>
+            <div
+              inputRoot
               [value]="deliveryAddress.api.state.value"
               (valueChange)="deliveryAddress.api.handleChange($event)"
               [attr.aria-invalid]="invalid(deliveryAddress.api)"
-              ><input
+            >
+              <input
                 inputControl
                 fexFieldControl
                 placeholder="位于长表单底部"
                 (blur)="deliveryAddress.api.handleBlur()"
-            /></div>
+              />
+            </div>
             @if (invalid(deliveryAddress.api)) {
               <div fexFieldError>
                 @for (error of errors(deliveryAddress.api); track error) {

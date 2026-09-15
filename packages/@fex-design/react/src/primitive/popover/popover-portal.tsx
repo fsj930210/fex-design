@@ -14,7 +14,8 @@ export interface PopoverPortalProps extends Omit<PopoverPortalOptions, 'containe
 export function PopoverPortal({ children, container }: PopoverPortalProps) {
   const { overlay } = usePopoverContext('PopoverPortal')
   const snapshot = useCoreStoreSelector(overlay, selectPortal, shallowEqualObject)
-  const popupContainer = (container && 'current' in container ? container.current : container) ?? snapshot.popupContainer
+  const popupContainer =
+    (container && 'current' in container ? container.current : container) ?? snapshot.popupContainer
 
   if (!popupContainer || !snapshot.mounted) {
     return null

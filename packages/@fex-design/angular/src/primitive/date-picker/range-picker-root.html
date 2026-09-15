@@ -1,4 +1,5 @@
-<div popoverRoot
+<div
+  popoverRoot
   [open]="context().open"
   [trigger]="[]"
   placement="bottom"
@@ -8,5 +9,6 @@
   <ng-content select="fex-range-picker-trigger" />
   <ng-template popoverPortal
     ><div popoverContent [class]="contentClassName()">
-      <ng-content select="fex-range-picker-content" /> </div></ng-template>
+      <ng-content select="fex-range-picker-content" /></div
+  ></ng-template>
 </div>

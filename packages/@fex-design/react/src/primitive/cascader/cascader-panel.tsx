@@ -178,9 +178,7 @@ export function CascaderOption({
       {render?.(node, state) ?? (
         <>
           {cascader.multiple ? (
-            <CheckboxRoot
-              disabled={state.disabled}
-            >
+            <CheckboxRoot disabled={state.disabled}>
               <CheckboxControl
                 checked={state.checked}
                 indeterminate={state.indeterminate}

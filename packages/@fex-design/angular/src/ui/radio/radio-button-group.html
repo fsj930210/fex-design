@@ -1,5 +1,5 @@
 @if (options(); as items) { @for (option of items; track option.value) {
-  <button radioButton [value]="option.value" [disabled]="option.disabled">{{ option.label }}</button>
+<button radioButton [value]="option.value" [disabled]="option.disabled">{{ option.label }}</button>
 } } @else {
 <ng-content />
 }

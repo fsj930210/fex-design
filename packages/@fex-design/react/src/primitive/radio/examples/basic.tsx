@@ -1,2 +1,26 @@
 import { Radio, RadioButton, RadioGroup } from '@fex-design/react/primitive/radio'
-export default function Example(){return <div className="grid gap-4"><section className="grid gap-2"><span>Radio</span><RadioGroup defaultValue="apple" orientation="horizontal"><label className="inline-flex items-center gap-2"><Radio value="apple"/>苹果</label><label className="inline-flex items-center gap-2"><Radio value="pear"/>梨</label></RadioGroup></section><section className="grid gap-2"><span>RadioButton</span><RadioGroup defaultValue="apple" orientation="horizontal" className="gap-0"><RadioButton value="apple">苹果</RadioButton><RadioButton value="pear">梨</RadioButton></RadioGroup></section></div>}
+export default function Example() {
+  return (
+    <div className="grid gap-4">
+      <section className="grid gap-2">
+        <span>Radio</span>
+        <RadioGroup defaultValue="apple" orientation="horizontal">
+          <label className="inline-flex items-center gap-2">
+            <Radio value="apple" />
+            苹果
+          </label>
+          <label className="inline-flex items-center gap-2">
+            <Radio value="pear" />梨
+          </label>
+        </RadioGroup>
+      </section>
+      <section className="grid gap-2">
+        <span>RadioButton</span>
+        <RadioGroup defaultValue="apple" orientation="horizontal" className="gap-0">
+          <RadioButton value="apple">苹果</RadioButton>
+          <RadioButton value="pear">梨</RadioButton>
+        </RadioGroup>
+      </section>
+    </div>
+  )
+}

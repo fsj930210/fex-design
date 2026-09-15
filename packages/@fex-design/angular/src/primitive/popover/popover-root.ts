@@ -2,7 +2,11 @@ import { Directive, ElementRef, inject, input, output, signal } from '@angular/c
 import type { PopoverOptions, PopoverChangeInfo } from '@fex-design/core/popover/types'
 import { createPopover } from './create-popover'
 
-@Directive({ selector: 'div[popoverRoot], span[popoverRoot], ng-container[popoverRoot]', standalone: true, exportAs: 'popover' })
+@Directive({
+  selector: 'div[popoverRoot], span[popoverRoot], ng-container[popoverRoot]',
+  standalone: true,
+  exportAs: 'popover',
+})
 export class Popover {
   private readonly parent = inject(Popover, { optional: true, skipSelf: true })
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement
@@ -33,10 +37,17 @@ export class Popover {
   readonly destroyOnHidden = input<PopoverOptions['destroyOnHidden']>()
   readonly openChange = output<boolean>()
   readonly openChangeInfo = output<PopoverChangeInfo>()
-  private readonly binding = createPopover(() => this.options(), () => this.parent?.overlay)
+  private readonly binding = createPopover(
+    () => this.options(),
+    () => this.parent?.overlay,
+  )
   readonly snapshot = this.binding.snapshot
-  get overlay() { return this.binding.overlay }
-  get hoverAncestors() { return this.overlay.ancestors }
+  get overlay() {
+    return this.binding.overlay
+  }
+  get hoverAncestors() {
+    return this.overlay.ancestors
+  }
   referenceElement: HTMLElement | null = null
   contentElement: HTMLElement | null = null
   arrowElement: HTMLElement | null = null
@@ -44,7 +55,9 @@ export class Popover {
   private readonly optionSource = signal<(() => PopoverOptions) | undefined>(undefined)
 
   /** Composite controls connect their own Core state without assigning signal inputs. */
-  connectOptions(source: () => PopoverOptions) { this.optionSource.set(source) }
+  connectOptions(source: () => PopoverOptions) {
+    this.optionSource.set(source)
+  }
 
   options(): PopoverOptions {
     return {
@@ -81,5 +94,7 @@ export class Popover {
     }
   }
 
-  syncOptions() { this.overlay.setOptions(this.options()) }
+  syncOptions() {
+    this.overlay.setOptions(this.options())
+  }
 }

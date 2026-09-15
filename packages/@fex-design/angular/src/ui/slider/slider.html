@@ -1,0 +1,50 @@
+<div
+  sliderRoot
+  [value]="arrayValue()"
+  [defaultValue]="arrayDefault()"
+  [min]="min()"
+  [max]="max()"
+  [step]="step()"
+  [marks]="markValues()"
+  [orientation]="orientation()"
+  [direction]="direction()"
+  [reverse]="reverse()"
+  [disabled]="disabled() === true"
+  [disabledThumbs]="disabledThumbs()"
+  [keyboard]="keyboard()"
+  [minStepsBetweenThumbs]="minStepsBetweenThumbs()"
+  [draggableRange]="draggableRange()"
+  [editable]="editable()"
+  [minCount]="minCount()"
+  [maxCount]="maxCount()"
+  [size]="size()"
+  [class]="rootClass()"
+  [style]="styles().root"
+  (change)="handleChange($event)"
+  (end)="handleEnd($event)"
+>
+  <span sliderTrack [class]="trackClass()" [style]="styles().track">
+    @if (included()) {
+    <span sliderRange [class]="rangeClass()" [style]="styles().range"></span> } @for (dot of
+    dotValues(); track dot) { <span sliderMark [class]="markClass()" [value]="dot" aria-hidden="true"></span> } @for (mark
+    of marks(); track mark.value) {
+    <span
+      sliderMark
+      [value]="mark.value"
+      [class]="markClass() + ' ' + (mark.class ?? '')"
+      [style]="mergeStyles(styles().mark, mark.style)"
+      >{{ mark.label }}</span
+    >
+    }
+  </span>
+  @for (item of currentValues(); track $index) {
+  <span
+    sliderThumb
+    [index]="$index"
+    [disabled]="disabledThumbs()[$index]"
+    [class]="thumbClass()"
+    [style]="styles().thumb"
+    [attr.aria-label]="'滑块 ' + ($index + 1)"
+  ></span>
+  }
+</div>

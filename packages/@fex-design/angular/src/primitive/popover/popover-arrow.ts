@@ -1,4 +1,13 @@
-import { computed, input, ChangeDetectionStrategy, Component, ElementRef, inject, type AfterViewInit, type OnDestroy } from '@angular/core'
+import {
+  computed,
+  input,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  type AfterViewInit,
+  type OnDestroy,
+} from '@angular/core'
 import { popoverArrowClassName } from '@fex-design/styles/popover'
 import { cn } from '@fex/utils'
 import { Popover } from './popover-root'
@@ -39,4 +48,3 @@ export class PopoverArrow implements AfterViewInit, OnDestroy {
     this.popover.overlay.setArrowElement(null)
   }
 }
-

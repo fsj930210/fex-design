@@ -17,4 +17,3 @@ export function PopoverTrigger({ children, ...props }: PopoverTriggerProps) {
   const trigger = usePopoverTrigger(props)
   return children(trigger.props)
 }
-

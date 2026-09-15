@@ -1,25 +1,46 @@
 <script setup lang="ts">
 import { computed, useAttrs, type CSSProperties } from 'vue'
-import type { PopoverChangeInfo, PopoverClassNames, PopoverOptions, PopoverSemanticPart } from '@fex-design/core/popover/types'
+import type {
+  PopoverChangeInfo,
+  PopoverClassNames,
+  PopoverOptions,
+  PopoverSemanticPart,
+} from '@fex-design/core/popover/types'
 import { splitPopoverOptions } from '@fex-design/core/popover/options'
 import { cn } from '@fex/utils'
 import {
-  Popover as PrimitivePopover, PopoverArrow, PopoverContent, PopoverHeader,
-  PopoverPortal, PopoverTitle, PopoverTrigger,
+  Popover as PrimitivePopover,
+  PopoverArrow,
+  PopoverContent,
+  PopoverHeader,
+  PopoverPortal,
+  PopoverTitle,
+  PopoverTrigger,
 } from '../../primitive/popover/popover'
 import { TriggerSlot } from './trigger-slot'
 
 defineOptions({ name: 'Popover', inheritAttrs: false })
-const props = withDefaults(defineProps<Omit<PopoverOptions, 'onOpenChange'> & {
-  title?: string
-  content?: string
-  classNames?: PopoverClassNames
-  styles?: Partial<Record<PopoverSemanticPart, CSSProperties>>
-}>(), {
-  open: undefined, defaultOpen: undefined, arrow: undefined, disabled: undefined,
-  avoidCollisions: undefined, hideWhenDetached: undefined, lazyMount: undefined,
-  destroyOnHidden: undefined, matchReferenceWidth: undefined,
-})
+const props = withDefaults(
+  defineProps<
+    Omit<PopoverOptions, 'onOpenChange'> & {
+      title?: string
+      content?: string
+      classNames?: PopoverClassNames
+      styles?: Partial<Record<PopoverSemanticPart, CSSProperties>>
+    }
+  >(),
+  {
+    open: undefined,
+    defaultOpen: undefined,
+    arrow: undefined,
+    disabled: undefined,
+    avoidCollisions: undefined,
+    hideWhenDetached: undefined,
+    lazyMount: undefined,
+    destroyOnHidden: undefined,
+    matchReferenceWidth: undefined,
+  },
+)
 const attrs = useAttrs()
 const options = computed(() => splitPopoverOptions(props)[0])
 const emit = defineEmits<{

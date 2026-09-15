@@ -8,5 +8,4 @@ import { Radio, RadioButton, RadioGroup } from '@fex-design/angular/ui/radio'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './css-variables.html',
 })
-export class RadioCssVariablesExample {
-}
+export class RadioCssVariablesExample {}

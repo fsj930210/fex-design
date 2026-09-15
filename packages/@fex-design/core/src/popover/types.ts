@@ -1,5 +1,8 @@
 import type { DisclosureChangeInfo } from '../disclosure/create-disclosure'
-import type { FloatingOverlayOptions, FloatingOverlaySnapshot } from '../overlay/create-floating-overlay'
+import type {
+  FloatingOverlayOptions,
+  FloatingOverlaySnapshot,
+} from '../overlay/create-floating-overlay'
 import type { OverlayTrigger } from '../overlay/trigger/create-trigger'
 import type { FloatingMountOptions } from '../overlay/presence/types'
 
@@ -8,10 +11,13 @@ export type PopoverChangeInfo = DisclosureChangeInfo
 export type { FloatingAlign, FloatingPlacement, FloatingSide } from '../floating/placement'
 
 /** Primitive 与 UI、五框架共用的 Popover 行为配置。 */
-export interface PopoverOptions extends Omit<
-  FloatingOverlayOptions,
-  'forceMount' | 'allowedTriggers' | 'autoAdjustOverflow' | 'offset' | 'modal'
->, FloatingMountOptions {
+export interface PopoverOptions
+  extends
+    Omit<
+      FloatingOverlayOptions,
+      'forceMount' | 'allowedTriggers' | 'autoAdjustOverflow' | 'offset' | 'modal'
+    >,
+    FloatingMountOptions {
   /**
    * 触发方式，可以组合；context-menu 使用连字符。
    * @default ['click']

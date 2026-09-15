@@ -32,7 +32,7 @@
 | password   | 使用 Control、Suffix 和原生按钮组合密码可见性。           |
 | search     | 使用 Primitive 部件组合 Enter、Prefix 和 Addon 搜索入口。 |
 | states     | 禁用、只读和原生 `aria-invalid`。                         |
-| validation | 校验失败样式，以及通过 `aria-describedby` 关联错误说明。   |
+| validation | 校验失败样式，以及通过 `aria-describedby` 关联错误说明。  |
 | focus      | 通过 InputControl 调用原生 focus、blur 和 select。        |
 
 ## InputRoot API

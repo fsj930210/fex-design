@@ -8,7 +8,5 @@
     aria-invalid="true"
     aria-describedby="email-error"
   />
-  <p id="email-error" class="text-sm text-danger">
-    请输入完整的邮箱地址。
-  </p>
+  <p id="email-error" class="text-sm text-danger">请输入完整的邮箱地址。</p>
 </div>

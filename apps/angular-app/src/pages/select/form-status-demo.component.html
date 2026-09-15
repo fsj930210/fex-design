@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Form validation"
   description="Submit the real form without a value to produce Select error state."
-  ><form [fexForm]="form" class="max-w-md space-y-2">
+>
+  <form [fexForm]="form" class="max-w-md space-y-2">
     <ng-container [fexField]="form" name="framework" [validators]="validators" #framework="field"
       ><fex-field-root [invalid]="invalid(framework.api)" [hasError]="invalid(framework.api)"
         ><label fexFieldLabel>Framework</label
@@ -23,4 +25,5 @@
         }
       </fex-field-root></ng-container
     ><button button type="submit">Validate</button>
-  </form></div>
+  </form>
+</div>

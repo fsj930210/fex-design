@@ -3,7 +3,6 @@ import type { Readable } from 'svelte/store'
 export const popoverContextKey = Symbol('Popover')
 
 export interface PopoverContext {
-
   arrowElement: { current: HTMLElement | null }
   overlay: PopoverController
   hoverAncestors: readonly PopoverController[]

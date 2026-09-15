@@ -37,9 +37,13 @@ export function PopoverArrow(props: PopoverArrowProps) {
         data-slot="popover-arrow"
         data-side={snapshot().side}
         class={cn(popoverArrowClassName, local.class)}
-        style={typeof local.style === 'string'
-          ? `${Object.entries(sideStyle()).map(([key, value]) => `${key}:${value}`).join(';')};${local.style}`
-          : { ...sideStyle(), ...local.style }}
+        style={
+          typeof local.style === 'string'
+            ? `${Object.entries(sideStyle())
+                .map(([key, value]) => `${key}:${value}`)
+                .join(';')};${local.style}`
+            : { ...sideStyle(), ...local.style }
+        }
       />
     </Show>
   )

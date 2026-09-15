@@ -32,14 +32,15 @@
   ></fex-select>
   <div class="flex min-w-0 items-center gap-2">
     @if (picker.snapshot().format === 'hex') {
-      <div inputRoot class="min-w-0 flex-1" [value]="text()" (valueChange)="editText($event)"
-        ><input
+      <div inputRoot class="min-w-0 flex-1" [value]="text()" (valueChange)="editText($event)">
+        <input
           inputControl
           aria-label="颜色值"
           (focus)="beginText()"
           (blur)="commitText()"
           (keydown.enter)="$any($event.target).blur()"
-      /></div>
+        />
+      </div>
     } @else {
       <div class="grid min-w-0 flex-1 grid-flow-col auto-cols-fr gap-2">
         @for (channel of fields(); track channel) {

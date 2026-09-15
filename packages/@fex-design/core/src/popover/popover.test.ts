@@ -10,7 +10,9 @@ test('configuration changes publish shared snapshots without changing open state
   const popover = createPopover()
   const container = {} as HTMLElement
   let notifications = 0
-  const unsubscribe = popover.subscribe(() => { notifications++ })
+  const unsubscribe = popover.subscribe(() => {
+    notifications++
+  })
   popover.setOptions({ arrow: true, getPopupContainer: () => container })
   const snapshot = popover.getSnapshot()
   assert.equal(snapshot.arrow, true)
@@ -33,7 +35,8 @@ test('portal resolution defaults to body and follows custom container configurat
   const popover = createPopover()
   try {
     Object.defineProperty(globalThis, 'document', {
-      configurable: true, value: { body },
+      configurable: true,
+      value: { body },
     })
     assert.equal(popover.resolvePopupContainer(), body)
     popover.setOptions({ getPopupContainer: () => customContainer })
@@ -140,7 +143,8 @@ test('hidden retained layers do not intercept Escape and reopening restores prio
 test('hover and focus sources keep content open until both leave', async () => {
   const requests: boolean[] = []
   const trigger = createTrigger({
-    trigger: ['hover', 'focus'], hoverCloseDelay: 0,
+    trigger: ['hover', 'focus'],
+    hoverCloseDelay: 0,
     onOpenChangeRequest: (open) => requests.push(open),
   })
   trigger.trigger.pointerEnter({})
@@ -156,7 +160,8 @@ test('hover and focus sources keep content open until both leave', async () => {
 test('dismiss cancels pending hover open instead of reopening a closed Popover', async () => {
   const requests: boolean[] = []
   const trigger = createTrigger({
-    trigger: ['hover'], hoverOpenDelay: 10,
+    trigger: ['hover'],
+    hoverOpenDelay: 10,
     onOpenChangeRequest: (open) => requests.push(open),
   })
   trigger.trigger.pointerEnter({})

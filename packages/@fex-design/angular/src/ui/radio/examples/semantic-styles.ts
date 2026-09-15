@@ -9,5 +9,9 @@ import { Radio, RadioButton, RadioGroup } from '@fex-design/angular/ui/radio'
   templateUrl: './semantic-styles.html',
 })
 export class RadioSemanticStylesExample {
-  readonly classNames = { root: 'gap-3', control: 'ring-2 ring-orange-300 [--radio-checked-color:var(--success)]', label: 'font-bold text-violet-700' }
+  readonly classNames = {
+    root: 'gap-3',
+    control: 'ring-2 ring-orange-300 [--radio-checked-color:var(--success)]',
+    label: 'font-bold text-violet-700',
+  }
 }

@@ -9,88 +9,113 @@
     </header>
 
     <div class="grid gap-4">
-      <div card
+      <div
+        card
         title="Input group"
         description="Connects related inputs, addons, and actions while each control keeps its own value."
       >
-        <div inputGroup class="max-w-xl"
-          ><span inputAddonBefore>https://</span
-          ><div inputRoot
-            ><input inputControl aria-label="Domain" placeholder="example.com" /></div><button button>Open</button></div>
+        <div inputGroup class="max-w-xl">
+          <span inputAddonBefore>https://</span>
+          <div inputRoot><input inputControl aria-label="Domain" placeholder="example.com" /></div>
+          <button button>Open</button>
+        </div>
       </div>
-      <div card
+      <div
+        card
         title="Basic"
         description="InputRoot 管理输入协议，InputControl 保留原生 input 语义。"
-        ><div inputRoot class="max-w-md"
-          ><input
-            inputControl
-            name="email"
-            placeholder="admin@example.com"
-            type="email" /></div></div>
-      <div card
+      >
+        <div inputRoot class="max-w-md">
+          <input inputControl name="email" placeholder="admin@example.com" type="email" />
+        </div>
+      </div>
+      <div
+        card
         title="Controlled and uncontrolled"
         description="受控值由调用方维护；非受控值只声明初始值。"
-        ><div class="grid gap-3 md:grid-cols-2">
+      >
+        <div class="grid gap-3 md:grid-cols-2">
           <div class="space-y-1.5">
-            <div inputRoot [value]="controlledValue" (valueChange)="controlledValue = $event"
-              ><input inputControl aria-label="受控输入" placeholder="受控输入"
-            /></div>
+            <div inputRoot [value]="controlledValue" (valueChange)="controlledValue = $event">
+              <input inputControl aria-label="受控输入" placeholder="受控输入" />
+            </div>
             <p class="text-sm text-muted-foreground">受控值：{{ controlledValue || '（空）' }}</p>
           </div>
-          <div inputRoot defaultValue="uncontrolled-value"
-            ><input inputControl aria-label="非受控输入" placeholder="非受控输入"
-          /></div></div
-      ></div>
-      <div card title="Prefix" description="InputPrefix 位于输入框内部、原生输入内容之前。"
-        ><div inputRoot class="max-w-md"
-          ><span inputPrefix aria-hidden="true">@</span
-          ><input inputControl aria-label="用户名" placeholder="username" /></div></div>
-      <div card title="Suffix" description="InputSuffix 位于输入框内部、原生输入内容之后。"
-        ><div inputRoot class="max-w-md"
-          ><input inputControl aria-label="域名" placeholder="example" /><span inputSuffix
+          <div inputRoot defaultValue="uncontrolled-value">
+            <input inputControl aria-label="非受控输入" placeholder="非受控输入" />
+          </div>
+        </div>
+      </div>
+      <div card title="Prefix" description="InputPrefix 位于输入框内部、原生输入内容之前。">
+        <div inputRoot class="max-w-md">
+          <span inputPrefix aria-hidden="true">@</span
+          ><input inputControl aria-label="用户名" placeholder="username" />
+        </div>
+      </div>
+      <div card title="Suffix" description="InputSuffix 位于输入框内部、原生输入内容之后。">
+        <div inputRoot class="max-w-md">
+          <input inputControl aria-label="域名" placeholder="example" /><span inputSuffix
             >.com</span
-          ></div></div>
-      <div card
+          >
+        </div>
+      </div>
+      <div
+        card
         title="Addons"
         description="AddonBefore 和 AddonAfter 位于输入框两端，并与 Root 边框连成整体。"
-        ><div inputRoot class="max-w-xl"
-          ><span inputAddonBefore>https://</span
-          ><input inputControl aria-label="站点地址" placeholder="example" /><span
-            inputAddonAfter
+      >
+        <div inputRoot class="max-w-xl">
+          <span inputAddonBefore>https://</span
+          ><input inputControl aria-label="站点地址" placeholder="example" /><span inputAddonAfter
             >/console</span
-          ></div></div>
-      <div card title="Clear" description="InputClear 仅在有值且可编辑时显示，清空后恢复输入焦点。"
-        ><div inputRoot defaultValue="clearable-value" class="max-w-md"
-          ><input inputControl aria-label="可清空输入" /><button
+          >
+        </div>
+      </div>
+      <div card title="Clear" description="InputClear 仅在有值且可编辑时显示，清空后恢复输入焦点。">
+        <div inputRoot defaultValue="clearable-value" class="max-w-md">
+          <input inputControl aria-label="可清空输入" /><button
             inputClear
             aria-label="清空输入"
-          ></button></div></div>
-      <div card
+          ></button>
+        </div>
+      </div>
+      <div
+        card
         title="Manual focus and clear"
         description="调用方可以通过原生 ref 聚焦或移除焦点，并通过受控值手动清空。"
-        ><div class="max-w-md space-y-2">
-          <div inputRoot [value]="manualValue" (valueChange)="manualValue = $event"
-            ><input
+      >
+        <div class="max-w-md space-y-2">
+          <div inputRoot [value]="manualValue" (valueChange)="manualValue = $event">
+            <input
               #focusControl
               inputControl
               aria-label="手动控制输入"
               placeholder="手动控制输入"
-          /></div>
+            />
+          </div>
           <div class="flex flex-wrap gap-1.5">
             <button button size="sm" (click)="focusControl.focus()">聚焦</button
             ><button button size="sm" variant="outlined" (click)="focusControl.blur()">
               移除焦点</button
-            ><button button size="sm" variant="outlined" (click)="manualValue = ''">手动清空</button>
+            ><button button size="sm" variant="outlined" (click)="manualValue = ''">
+              手动清空
+            </button>
           </div>
-        </div></div>
-      <div card title="States" description="禁用、只读和校验失败状态由 Root 统一下发。"
-        ><div class="grid gap-3 md:grid-cols-3">
-          <div inputRoot [disabled]="true" defaultValue="禁用内容"
-            ><input inputControl aria-label="禁用示例" /></div><div inputRoot [readOnly]="true" defaultValue="只读内容"
-            ><input inputControl aria-label="只读示例" /></div><div inputRoot [attr.aria-invalid]="true"
-            ><input inputControl aria-label="错误示例" placeholder="校验失败"
-          /></div></div
-      ></div>
+        </div>
+      </div>
+      <div card title="States" description="禁用、只读和校验失败状态由 Root 统一下发。">
+        <div class="grid gap-3 md:grid-cols-3">
+          <div inputRoot [disabled]="true" defaultValue="禁用内容">
+            <input inputControl aria-label="禁用示例" />
+          </div>
+          <div inputRoot [readOnly]="true" defaultValue="只读内容">
+            <input inputControl aria-label="只读示例" />
+          </div>
+          <div inputRoot [attr.aria-invalid]="true">
+            <input inputControl aria-label="错误示例" placeholder="校验失败" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </main>

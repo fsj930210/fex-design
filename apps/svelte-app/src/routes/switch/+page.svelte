@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SwitchRoot, SwitchThumb } from '@fex-design/svelte/primitive/switch'
+  import { SwitchRoot, SwitchThumb } from "@fex-design/svelte/primitive/switch";
   import Card from "@fex-design/svelte/ui/card";
   let checked = $state(true);
 </script>
@@ -38,9 +38,7 @@
           </p>
         </div></Card
       >
-      <Card
-        title="Sizes"
-        description="Switch supports sm, md, and lg sizes."
+      <Card title="Sizes" description="Switch supports sm, md, and lg sizes."
         ><div class="flex items-center gap-2">
           <SwitchRoot size="sm" defaultChecked aria-label="Small switch"
             >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot

@@ -1,22 +1,25 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
-export const sliderRootClassName = cva('relative touch-none select-none', {
-  variants: {
-    size: {
-      sm: '[--slider-track-height:4px] [--slider-thumb-size:14px]',
-      md: '[--slider-track-height:6px] [--slider-thumb-size:16px]',
-      lg: '[--slider-track-height:8px] [--slider-thumb-size:20px]',
+export const sliderRootClassName = cva(
+  'relative cursor-pointer touch-none select-none [--slider-track-background:var(--color-border)] [--slider-range-background:var(--color-primary)] [--slider-disabled-range-background:var(--color-muted-foreground)] [--slider-thumb-background:var(--color-background)] [--slider-thumb-border-color:var(--color-primary)] [--slider-mark-color:var(--color-muted-foreground)] data-[disabled]:cursor-not-allowed data-[disabled]:[&_*]:cursor-not-allowed',
+  {
+    variants: {
+      size: {
+        sm: '[--slider-track-height:4px] [--slider-thumb-size:14px]',
+        md: '[--slider-track-height:6px] [--slider-thumb-size:16px]',
+        lg: '[--slider-track-height:8px] [--slider-thumb-size:20px]',
+      },
+      orientation: {
+        horizontal: 'h-[var(--slider-thumb-size)] w-full min-w-0',
+        vertical: 'h-40 w-[var(--slider-thumb-size)]',
+      },
     },
-    orientation: {
-      horizontal: 'h-[var(--slider-thumb-size)] min-w-0',
-      vertical: 'h-40 w-[var(--slider-thumb-size)]',
+    defaultVariants: {
+      size: 'md',
+      orientation: 'horizontal',
     },
   },
-  defaultVariants: {
-    size: 'md',
-    orientation: 'horizontal',
-  },
-})
+)
 
 export const sliderInputClassName = [
   'h-[var(--slider-thumb-size)] w-full min-w-0 cursor-pointer appearance-none bg-transparent outline-none',
@@ -33,22 +36,31 @@ export const sliderInputClassName = [
 export const sliderValueClassName = 'text-sm text-muted-foreground'
 
 export const sliderTrackClassName = [
-  'absolute block overflow-hidden rounded-full bg-border',
+  'absolute block cursor-pointer rounded-full bg-[var(--slider-track-background)]',
   'data-[orientation=horizontal]:top-1/2 data-[orientation=horizontal]:h-[var(--slider-track-height)] data-[orientation=horizontal]:w-full data-[orientation=horizontal]:-translate-y-1/2',
   'data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-[var(--slider-track-height)] data-[orientation=vertical]:-translate-x-1/2',
-  'data-[disabled=true]:bg-border',
+  'data-[disabled]:cursor-not-allowed data-[disabled]:bg-border',
 ].join(' ')
 
 export const sliderRangeClassName = [
-  'absolute rounded-full bg-primary data-[disabled=true]:bg-muted-foreground',
+  'absolute cursor-pointer rounded-full bg-[var(--slider-range-background)] transition-none data-[disabled]:cursor-not-allowed data-[disabled]:bg-[var(--slider-disabled-range-background)]',
   'data-[orientation=horizontal]:inset-y-0',
   'data-[orientation=vertical]:inset-x-0',
 ].join(' ')
 
 export const sliderThumbClassName = [
-  'z-10 block size-[var(--slider-thumb-size)] cursor-pointer rounded-full border border-primary bg-background shadow-md outline-none transition-shadow hover:shadow-lg',
+  'z-10 block size-[var(--slider-thumb-size)] cursor-pointer rounded-full border border-[var(--slider-thumb-border-color)] bg-[var(--slider-thumb-background)] shadow-md outline-none transition-shadow hover:shadow-lg',
   'focus-visible:ring-3 focus-visible:ring-focus/50',
-  'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:border-muted-foreground',
+  'data-[disabled]:cursor-not-allowed data-[disabled]:border-muted-foreground data-[disabled]:bg-background data-[disabled]:opacity-100 data-[disabled]:shadow-none data-[disabled]:hover:shadow-none',
+].join(' ')
+
+export const sliderMarkClassName = [
+  'absolute z-0 size-2 -translate-x-1/2 cursor-pointer rounded-full border border-[var(--slider-mark-color)] bg-[var(--slider-thumb-background)] text-xs text-muted-foreground',
+  '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-full [&>span]:mt-2 [&>span]:-translate-x-1/2 [&>span]:whitespace-nowrap',
+  'data-[edge=start]:[&>span]:translate-x-0 data-[edge=end]:[&>span]:-translate-x-full',
+  'data-[orientation=horizontal]:top-1/2 data-[orientation=horizontal]:-translate-y-1/2',
+  'data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:translate-x-[-50%]',
+  'data-[active=true]:border-[var(--slider-range-background)]',
 ].join(' ')
 
 export type SliderStyleProps = VariantProps<typeof sliderRootClassName>

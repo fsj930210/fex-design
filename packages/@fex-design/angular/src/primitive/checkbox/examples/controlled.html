@@ -1,1 +1,16 @@
-<div class="grid gap-3"><div class="flex gap-2"><button button size="sm" (click)="checked.set(true)">选中</button><button button size="sm" (click)="checked.set(false)">取消选中</button></div><div checkboxRoot><input checkboxControl type="checkbox" [checked]="checked()" (change)="change($event)"><span checkboxIndicator></span><label checkboxLabel>受控 Checkbox</label></div><div checkboxRoot><input checkboxControl type="checkbox" defaultChecked><span checkboxIndicator></span><label checkboxLabel>非受控：默认选中</label></div></div>
+<div class="grid gap-3">
+  <div class="flex gap-2">
+    <button button size="sm" (click)="checked.set(true)">选中</button
+    ><button button size="sm" (click)="checked.set(false)">取消选中</button>
+  </div>
+  <div checkboxRoot>
+    <input checkboxControl type="checkbox" [checked]="checked()" (change)="change($event)" /><span
+      checkboxIndicator
+    ></span
+    ><label checkboxLabel>受控 Checkbox</label>
+  </div>
+  <div checkboxRoot>
+    <input checkboxControl type="checkbox" defaultChecked /><span checkboxIndicator></span
+    ><label checkboxLabel>非受控：默认选中</label>
+  </div>
+</div>

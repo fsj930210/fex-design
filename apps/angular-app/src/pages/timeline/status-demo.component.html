@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Built-in and custom status"
   description="Built-in statuses have defaults; custom values remain available through data-status."
-  ><fex-timeline>
+>
+  <fex-timeline>
     @for (status of statuses; track status) {
       <fex-timeline-item [status]="status"
         ><fex-timeline-indicator /><fex-timeline-content class="capitalize">{{
@@ -14,4 +16,5 @@
         class="border-violet-600 bg-violet-100 text-violet-700"
       /><fex-timeline-content>Custom: reviewing</fex-timeline-content></fex-timeline-item
     ></fex-timeline
-  ></div>
+  >
+</div>

@@ -339,9 +339,7 @@ export function CascaderOption(props: { node: CascaderNode; label?: string }) {
       onClick={() => cascader.controller.select(props.node.key)}
     >
       <Show when={cascader.multiple()}>
-        <CheckboxRoot
-          disabled={props.node.disabled}
-        >
+        <CheckboxRoot disabled={props.node.disabled}>
           <CheckboxControl
             checked={state().checked}
             indeterminate={state().indeterminate}

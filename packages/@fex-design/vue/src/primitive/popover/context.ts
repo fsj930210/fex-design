@@ -5,7 +5,6 @@ import { inject, type InjectionKey, type ShallowRef } from 'vue'
 export type PopoverSnapshot = ReturnType<PopoverController['getSnapshot']>
 
 export interface PopoverContextValue {
-
   arrowElement: ShallowRef<HTMLElement | null>
   overlay: PopoverController
   hoverAncestors: readonly PopoverController[]

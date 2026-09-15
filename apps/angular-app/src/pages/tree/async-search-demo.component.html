@@ -1,14 +1,17 @@
-<div card
+<div
+  card
   title="Async search and locate"
   description="The real server returns path-aware matches and an ancestor subtree."
 >
-  <div inputRoot
+  <div
+    inputRoot
     [value]="inputValue()"
     (valueChange)="search($event)"
     (clear)="clear()"
     class="mb-2 max-w-sm"
-    ><input inputControl placeholder="Search remote departments" /><button inputClear></button
-  ></div>
+  >
+    <input inputControl placeholder="Search remote departments" /><button inputClear></button>
+  </div>
   @if (keyword()) {
     <fex-listbox>
       @for (result of results(); track result.node.id) {

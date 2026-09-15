@@ -120,11 +120,7 @@
           "default": "md",
           "description": "Checkbox 尺寸。",
           "editor": "enum",
-          "options": [
-            "sm",
-            "md",
-            "lg"
-          ]
+          "options": ["sm", "md", "lg"]
         },
         {
           "name": "value",
@@ -151,11 +147,7 @@
               "default": "md",
               "description": "Checkbox 尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "value",
@@ -189,11 +181,7 @@
               "default": "md",
               "description": "Checkbox 尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "value",
@@ -227,11 +215,7 @@
               "default": "md",
               "description": "Checkbox 尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "value",
@@ -265,11 +249,7 @@
               "default": "md",
               "description": "Checkbox 尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "value",
@@ -303,11 +283,7 @@
               "default": "md",
               "description": "Checkbox 尺寸。",
               "editor": "enum",
-              "options": [
-                "sm",
-                "md",
-                "lg"
-              ]
+              "options": ["sm", "md", "lg"]
             },
             {
               "name": "value",
@@ -752,10 +728,7 @@
           "default": "vertical",
           "description": "选项排列方向。",
           "editor": "enum",
-          "options": [
-            "horizontal",
-            "vertical"
-          ]
+          "options": ["horizontal", "vertical"]
         }
       ],
       "events": [],
@@ -788,10 +761,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "className",
@@ -831,10 +801,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "class",
@@ -874,10 +841,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "class",
@@ -917,10 +881,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "class",
@@ -960,10 +921,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "class",

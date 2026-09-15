@@ -43,7 +43,7 @@ function setMultipleValue(next: number[]) {
       <div class="space-y-4">
         <Card title="Basic" description="Uncontrolled slider uses defaultValue.">
           <div class="grid gap-1.5">
-            <SliderRoot :default-value="[32]" aria-label="Volume" @value-change="setBasicValue">
+            <SliderRoot :default-value="[32]" aria-label="Volume" @change="setBasicValue">
               <SliderTrack><SliderRange /></SliderTrack>
               <SliderThumb aria-label="Volume" />
             </SliderRoot>
@@ -55,7 +55,7 @@ function setMultipleValue(next: number[]) {
             <SliderRoot
               :value="controlledValue"
               aria-label="Controlled slider"
-              @value-change="setControlledValue"
+              @change="setControlledValue"
             >
               <SliderTrack><SliderRange /></SliderTrack>
               <SliderThumb aria-label="Controlled slider" />
@@ -71,7 +71,7 @@ function setMultipleValue(next: number[]) {
               :default-value="[20, 80]"
               :min-steps-between-thumbs="4"
               aria-label="Range slider"
-              @value-change="setRangeValue"
+              @change="setRangeValue"
             >
               <SliderTrack><SliderRange /></SliderTrack>
               <SliderThumb :index="0" aria-label="Minimum value" />
@@ -89,7 +89,7 @@ function setMultipleValue(next: number[]) {
               :default-value="[15, 45, 75]"
               :min-steps-between-thumbs="4"
               aria-label="Multiple thumbs slider"
-              @value-change="setMultipleValue"
+              @change="setMultipleValue"
             >
               <SliderTrack><SliderRange /></SliderTrack>
               <SliderThumb :index="0" aria-label="First value" />

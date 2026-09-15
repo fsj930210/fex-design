@@ -1,9 +1,13 @@
 import { cloneVNode, Comment, defineComponent, Fragment, type VNode } from 'vue'
 
 function elements(nodes: VNode[]): VNode[] {
-  return nodes.flatMap((node) => node.type === Fragment
-    ? elements(node.children as VNode[])
-    : node.type === Comment ? [] : [node])
+  return nodes.flatMap((node) =>
+    node.type === Fragment
+      ? elements(node.children as VNode[])
+      : node.type === Comment
+        ? []
+        : [node],
+  )
 }
 
 /** A tiny vnode adapter is necessary to bind the user's existing trigger DOM. */

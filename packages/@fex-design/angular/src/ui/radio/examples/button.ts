@@ -9,5 +9,8 @@ import { RadioButtonGroup } from '@fex-design/angular/ui/radio'
   templateUrl: './button.html',
 })
 export class RadioButtonExample {
-  readonly options = [{ label: '苹果', value: 'apple' }, { label: '梨', value: 'pear' }] as const
+  readonly options = [
+    { label: '苹果', value: 'apple' },
+    { label: '梨', value: 'pear' },
+  ] as const
 }

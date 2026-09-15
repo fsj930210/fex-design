@@ -141,15 +141,13 @@
       ),
     selectedOptions: () => {
       controller.getSnapshot();
-      return selection
-        .getSnapshot()
-        .values.map(
-          (item) =>
-            options.find((option) => option.value === item) ?? {
-              value: item,
-              label: String(item),
-            },
-        );
+      return selection.getSnapshot().values.map(
+        (item) =>
+          options.find((option) => option.value === item) ?? {
+            value: item,
+            label: String(item),
+          },
+      );
     },
     multiple: isMultiple,
     showSearch: () => showSearch || mode === "tags",

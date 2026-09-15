@@ -7,15 +7,16 @@
         分页结构只负责可访问语义和基础交互样式。
       </p>
     </header>
-    <div card title="Primitive" description="上一页、页码、省略号和下一页组合。"
-      ><nav fexPagination>
+    <div card title="Primitive" description="上一页、页码、省略号和下一页组合。">
+      <nav fexPagination>
         <ul fexPaginationContent>
           <li fexPaginationItem><a fexPaginationPrevious href="#previous" text="上一页"></a></li>
           <li fexPaginationItem><a fexPaginationLink href="#1">1</a></li>
           <li fexPaginationItem><a fexPaginationLink href="#2" [isActive]="true">2</a></li>
           <li fexPaginationItem><span fexPaginationEllipsis></span></li>
           <li fexPaginationItem><a fexPaginationNext href="#next" text="下一页"></a></li>
-        </ul></nav
-    ></div>
+        </ul>
+      </nav>
+    </div>
   </div>
 </main>

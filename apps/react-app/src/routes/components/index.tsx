@@ -7,10 +7,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Bubble'), 'BubblePage'),
   },
   {
-    path: '/anchor',
-    element: createLazyRouteElement(() => import('../../pages/Anchor'), 'AnchorPage'),
-  },
-  {
     path: '/auto-complete',
     element: createLazyRouteElement(() => import('../../pages/AutoComplete'), 'AutoCompletePage'),
   },
@@ -71,10 +67,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Calendar'), 'CalendarPage'),
   },
   {
-    path: '/checkbox',
-    element: createLazyRouteElement(() => import('../../pages/Checkbox'), 'CheckboxPage'),
-  },
-  {
     path: '/collapse',
     element: createLazyRouteElement(() => import('../../pages/Collapse'), 'CollapsePage'),
   },
@@ -94,10 +86,7 @@ export const componentRoutes = [
     path: '/dropdown',
     element: createLazyRouteElement(() => import('../../pages/Dropdown'), 'DropdownPage'),
   },
-  {
-    path: '/input',
-    element: createLazyRouteElement(() => import('../../pages/Input'), 'InputPage'),
-  },
+
   {
     path: '/i18n',
     element: createLazyRouteElement(() => import('../../pages/I18n'), 'I18nPage'),
@@ -139,16 +128,8 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Pagination'), 'PaginationPage'),
   },
   {
-    path: '/popover',
-    element: createLazyRouteElement(() => import('../../pages/Popover'), 'PopoverPage'),
-  },
-  {
     path: '/progress',
     element: createLazyRouteElement(() => import('../../pages/Progress'), 'ProgressPage'),
-  },
-  {
-    path: '/radio',
-    element: createLazyRouteElement(() => import('../../pages/Radio'), 'RadioPage'),
   },
   {
     path: '/qrcode',
@@ -158,18 +139,7 @@ export const componentRoutes = [
     path: '/rate',
     element: createLazyRouteElement(() => import('../../pages/Rate'), 'RatePage'),
   },
-  {
-    path: '/spinner',
-    element: createLazyRouteElement(() => import('../../pages/Spinner'), 'SpinnerPage'),
-  },
-  {
-    path: '/separator',
-    element: createLazyRouteElement(() => import('../../pages/Separator'), 'SeparatorPage'),
-  },
-  {
-    path: '/skeleton',
-    element: createLazyRouteElement(() => import('../../pages/Skeleton'), 'SkeletonPage'),
-  },
+
   {
     path: '/slider',
     element: createLazyRouteElement(() => import('../../pages/Slider'), 'SliderPage'),
@@ -185,10 +155,6 @@ export const componentRoutes = [
   {
     path: '/steps',
     element: createLazyRouteElement(() => import('../../pages/Steps'), 'StepsPage'),
-  },
-  {
-    path: '/switch',
-    element: createLazyRouteElement(() => import('../../pages/Switch'), 'SwitchPage'),
   },
   {
     path: '/table',

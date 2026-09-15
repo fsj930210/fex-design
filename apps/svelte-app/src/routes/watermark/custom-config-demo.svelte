@@ -1,10 +1,12 @@
 <script lang="ts">
   import InputControl from "@fex-design/svelte/primitive/input-control";
   import InputRoot from "@fex-design/svelte/primitive/input";
-  import Slider from "@fex-design/svelte/primitive/slider";
-  import SliderRange from "@fex-design/svelte/primitive/slider-range";
-  import SliderThumb from "@fex-design/svelte/primitive/slider-thumb";
-  import SliderTrack from "@fex-design/svelte/primitive/slider-track";
+  import {
+    SliderRange,
+    SliderRoot as Slider,
+    SliderThumb,
+    SliderTrack,
+  } from "@fex-design/svelte/primitive/slider";
   import Watermark from "@fex-design/svelte/primitive/watermark";
   import Card from "@fex-design/svelte/ui/card";
 
@@ -52,7 +54,7 @@
           min={12}
           max={42}
           aria-label="FontSize"
-          onValueChange={(value) => (fontSize = value[0] ?? fontSize)}
+          onChange={(value) => (fontSize = value[0] ?? fontSize)}
         >
           <SliderTrack><SliderRange /></SliderTrack>
           <SliderThumb aria-label="FontSize" />
@@ -65,7 +67,7 @@
           min={1}
           max={20}
           aria-label="ZIndex"
-          onValueChange={(value) => (zIndex = value[0] ?? zIndex)}
+          onChange={(value) => (zIndex = value[0] ?? zIndex)}
         >
           <SliderTrack><SliderRange /></SliderTrack>
           <SliderThumb aria-label="ZIndex" />
@@ -78,7 +80,7 @@
           min={-45}
           max={45}
           aria-label="Rotate"
-          onValueChange={(value) => (rotate = value[0] ?? rotate)}
+          onChange={(value) => (rotate = value[0] ?? rotate)}
         >
           <SliderTrack><SliderRange /></SliderTrack>
           <SliderThumb aria-label="Rotate" />

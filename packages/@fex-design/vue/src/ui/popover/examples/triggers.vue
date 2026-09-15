@@ -13,25 +13,26 @@ const cases = [
   { label: 'Hover + Focus', options: { trigger: ['hover', 'focus'] } },
   { label: 'Hover + Click', options: { trigger: ['hover', 'click'] } },
   { label: 'Focus + Click', options: { trigger: ['focus', 'click'] } },
-  { label: '悬停延迟 300ms / 400ms', options: { trigger: ['hover'], hoverOpenDelay: 300, hoverCloseDelay: 400 } },
+  {
+    label: '悬停延迟 300ms / 400ms',
+    options: { trigger: ['hover'], hoverOpenDelay: 300, hoverCloseDelay: 400 },
+  },
 ] satisfies DemoCase[]
 </script>
 
 <template>
   <div class="w-full flex items-center justify-center min-h-[360px] py-16">
-  <div class="grid gap-4">
-    
-    <div class="flex flex-wrap items-center gap-3">
-      <div v-for="item in cases" :key="item.label">
-        <Popover v-bind="item.options" title="提示信息">
-          <Button>{{ item.label }}</Button>
-          <template #content="{ close }">
-            <p>这里可以放置说明和交互内容。</p>
-          </template>
-        </Popover>
+    <div class="grid gap-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <div v-for="item in cases" :key="item.label">
+          <Popover v-bind="item.options" title="提示信息">
+            <Button>{{ item.label }}</Button>
+            <template #content="{ close }">
+              <p>这里可以放置说明和交互内容。</p>
+            </template>
+          </Popover>
+        </div>
       </div>
-      
     </div>
-  </div>
   </div>
 </template>

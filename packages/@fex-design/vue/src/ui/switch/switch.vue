@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import type { SwitchClassNames, SwitchShape, SwitchSize, SwitchStyles } from '@fex-design/core/switch/types'
+import type {
+  SwitchClassNames,
+  SwitchShape,
+  SwitchSize,
+  SwitchStyles,
+} from '@fex-design/core/switch/types'
 import { computed, useAttrs, useTemplateRef, type PropType, type StyleValue } from 'vue'
 import { SwitchRoot, SwitchContent, SwitchThumb } from '../../primitive/switch/switch'
 import { Spinner } from '../../primitive/spinner/spinner'
@@ -39,9 +44,24 @@ defineExpose({ element })
     :style="rootStyle"
     @change="(checked, event) => emit('change', checked, event)"
     @click="emit('click', $event)"
-    @update:checked="emit('update:checked', $event)">
-    <SwitchContent v-if="$slots.checkedContent" state="checked" :class="props.classNames.content" :style="props.styles.content"><slot name="checkedContent" /></SwitchContent>
-    <SwitchContent v-if="$slots.uncheckedContent" state="unchecked" :class="props.classNames.content" :style="props.styles.content"><slot name="uncheckedContent" /></SwitchContent>
-    <SwitchThumb :class="props.classNames.thumb" :style="props.styles.thumb"><Spinner v-if="props.loading" aria-hidden="true" /></SwitchThumb>
+    @update:checked="emit('update:checked', $event)"
+  >
+    <SwitchContent
+      v-if="$slots.checkedContent"
+      state="checked"
+      :class="props.classNames.content"
+      :style="props.styles.content"
+      ><slot name="checkedContent"
+    /></SwitchContent>
+    <SwitchContent
+      v-if="$slots.uncheckedContent"
+      state="unchecked"
+      :class="props.classNames.content"
+      :style="props.styles.content"
+      ><slot name="uncheckedContent"
+    /></SwitchContent>
+    <SwitchThumb :class="props.classNames.thumb" :style="props.styles.thumb"
+      ><Spinner v-if="props.loading" aria-hidden="true"
+    /></SwitchThumb>
   </SwitchRoot>
 </template>

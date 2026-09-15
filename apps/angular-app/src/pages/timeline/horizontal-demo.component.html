@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Horizontal"
   description="The same anatomy creates a horizontally scrollable timeline."
-  ><fex-timeline orientation="horizontal" aria-label="Order progress">
+>
+  <fex-timeline orientation="horizontal" aria-label="Order progress">
     @for (label of labels; track label; let index = $index) {
       <fex-timeline-item [status]="index < 2 ? 'completed' : index === 2 ? 'current' : 'pending'"
         ><fex-timeline-opposite>Step {{ index + 1 }}</fex-timeline-opposite
@@ -10,4 +12,5 @@
         }}</fex-timeline-content></fex-timeline-item
       >
     }
-  </fex-timeline></div>
+  </fex-timeline>
+</div>

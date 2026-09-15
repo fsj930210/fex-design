@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Primitive"
   description="Without value or defaultValue, the first enabled Item is selected."
-  ><div fexTabsRoot>
+>
+  <div fexTabsRoot>
     <div fexTabsList>
       <div fexTabsItem value="overview">Overview</div>
       <div fexTabsItem value="analytics">Analytics</div>
@@ -10,4 +12,5 @@
     <div *fexTabsContent="'overview'">Overview content is mounted initially.</div>
     <div *fexTabsContent="'analytics'">Analytics mounts on first visit and remains mounted.</div>
     <div *fexTabsContent="'disabled'">Disabled content.</div>
-  </div></div>
+  </div>
+</div>

@@ -25,16 +25,9 @@ export function SwitchPage() {
               <SwitchThumb />
             </SwitchRoot>
           </Card>
-          <Card
-            title="Controlled"
-            description="Controlled switch uses checked and onChange."
-          >
+          <Card title="Controlled" description="Controlled switch uses checked and onChange.">
             <div class="grid gap-2">
-              <SwitchRoot
-                checked={checked()}
-                onChange={setChecked}
-                aria-label="Controlled switch"
-              >
+              <SwitchRoot checked={checked()} onChange={setChecked} aria-label="Controlled switch">
                 <SwitchThumb />
               </SwitchRoot>
               <p class="text-sm text-muted-foreground">Current value: {String(checked())}</p>

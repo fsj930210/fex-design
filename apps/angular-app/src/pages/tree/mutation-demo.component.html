@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="External controller and node mutation"
   description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange."
-  ><div class="mb-2 flex flex-wrap gap-1.5">
+>
+  <div class="mb-2 flex flex-wrap gap-1.5">
     <button
       button
       size="sm"
@@ -16,4 +18,5 @@
     [controller]="controller"
     [options]="options()"
     class="block max-w-xl rounded-md border border-border bg-background p-1.5"
-/></div>
+  />
+</div>

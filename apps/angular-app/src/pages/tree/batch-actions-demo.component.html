@@ -1,8 +1,11 @@
-<div card
+<div
+  card
   title="Controller batch actions"
   description="All batch operations are explicit controller actions. selectAll only acts when multiple selection is enabled."
-  ><div class="mb-2 flex flex-wrap gap-1.5">
-    <button button size="sm" variant="outlined" (click)="expansion()?.expandAll()">Expand all</button
+>
+  <div class="mb-2 flex flex-wrap gap-1.5">
+    <button button size="sm" variant="outlined" (click)="expansion()?.expandAll()">
+      Expand all</button
     ><button button size="sm" variant="outlined" (click)="expansion()?.collapseAll()">
       Collapse all</button
     ><button button size="sm" variant="outlined" (click)="selection()?.selectAll()">
@@ -17,4 +20,5 @@
     [options]="options"
     [checkable]="true"
     class="block max-w-xl rounded-md border border-border bg-background p-1.5"
-/></div>
+  />
+</div>

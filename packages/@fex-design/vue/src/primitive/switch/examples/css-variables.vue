@@ -1,5 +1,51 @@
 <script setup lang="ts">
 import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitive/switch'
-
 </script>
-<template><div class="grid gap-6 sm:grid-cols-2"><section class="grid gap-2"><span class="text-sm text-muted-foreground">rounded</span><div class="flex flex-wrap items-center gap-3"><SwitchRoot shape="rounded" default-checked :style="{ '--switch-track-background': '#dbeafe', '--switch-track-checked-background': '#7c3aed', '--switch-track-border-color': '#60a5fa', '--switch-track-checked-border-color': '#6d28d9', '--switch-color': '#1e3a8a', '--switch-checked-color': '#fff', '--switch-thumb-background': '#fef3c7', '--switch-thumb-color': '#7c3aed' }" aria-label="rounded CSS Variables"><SwitchContent state="checked">开启</SwitchContent><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb /></SwitchRoot></div></section><section class="grid gap-2"><span class="text-sm text-muted-foreground">pill</span><div class="flex flex-wrap items-center gap-3"><SwitchRoot shape="pill" default-checked :style="{ '--switch-track-background': '#dbeafe', '--switch-track-checked-background': '#7c3aed', '--switch-track-border-color': '#60a5fa', '--switch-track-checked-border-color': '#6d28d9', '--switch-color': '#1e3a8a', '--switch-checked-color': '#fff', '--switch-thumb-background': '#fef3c7', '--switch-thumb-color': '#7c3aed' }" aria-label="pill CSS Variables"><SwitchContent state="checked">开启</SwitchContent><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb /></SwitchRoot></div></section></div></template>
+<template>
+  <div class="grid gap-6 sm:grid-cols-2">
+    <section class="grid gap-2">
+      <span class="text-sm text-muted-foreground">rounded</span>
+      <div class="flex flex-wrap items-center gap-3">
+        <SwitchRoot
+          shape="rounded"
+          default-checked
+          :style="{
+            '--switch-track-background': '#dbeafe',
+            '--switch-track-checked-background': '#7c3aed',
+            '--switch-track-border-color': '#60a5fa',
+            '--switch-track-checked-border-color': '#6d28d9',
+            '--switch-color': '#1e3a8a',
+            '--switch-checked-color': '#fff',
+            '--switch-thumb-background': '#fef3c7',
+            '--switch-thumb-color': '#7c3aed',
+          }"
+          aria-label="rounded CSS Variables"
+          ><SwitchContent state="checked">开启</SwitchContent
+          ><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb
+        /></SwitchRoot>
+      </div>
+    </section>
+    <section class="grid gap-2">
+      <span class="text-sm text-muted-foreground">pill</span>
+      <div class="flex flex-wrap items-center gap-3">
+        <SwitchRoot
+          shape="pill"
+          default-checked
+          :style="{
+            '--switch-track-background': '#dbeafe',
+            '--switch-track-checked-background': '#7c3aed',
+            '--switch-track-border-color': '#60a5fa',
+            '--switch-track-checked-border-color': '#6d28d9',
+            '--switch-color': '#1e3a8a',
+            '--switch-checked-color': '#fff',
+            '--switch-thumb-background': '#fef3c7',
+            '--switch-thumb-color': '#7c3aed',
+          }"
+          aria-label="pill CSS Variables"
+          ><SwitchContent state="checked">开启</SwitchContent
+          ><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb
+        /></SwitchRoot>
+      </div>
+    </section>
+  </div>
+</template>

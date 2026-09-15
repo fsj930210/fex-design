@@ -30,20 +30,20 @@ The component entry exports `createPopover`, a standalone framework adapter for 
 
 Behavior types live in @fex-design/core/popover/types. Both layers and all five frameworks share these semantics.
 
-| API | Default | Meaning |
-| --- | --- | --- |
-| open / defaultOpen | — / false | Controlled state / uncontrolled initial state |
-| trigger | ['click'] | hover, focus, click, context-menu |
-| placement | bottom | top, topLeft, topRight, bottom, bottomLeft, bottomRight, left, leftTop, leftBottom, right, rightTop, rightBottom |
-| side / align | — | top, right, bottom, left / start, center, end |
-| sideOffset / alignOffset | 6 / 0 | Distance from trigger / panel alignment offset, px |
-| arrow / arrowPadding | false / 16 | Arrow visibility / edge padding, px |
-| avoidCollisions / collisionPadding | true / 8 | Collision adjustment / boundary padding, px |
-| hoverOpenDelay / hoverCloseDelay | 0 / 80 | Hover opening / closing delay, ms |
-| closeDelay | 140 | Closing transition duration, ms |
-| lazyMount | true | Do not mount content before the first opening |
-| destroyOnHidden | false | Whether to unmount after the closing transition |
-| getPopupContainer | body | Resolve the portal target from the trigger |
+| API                                | Default    | Meaning                                                                                                          |
+| ---------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| open / defaultOpen                 | — / false  | Controlled state / uncontrolled initial state                                                                    |
+| trigger                            | ['click']  | hover, focus, click, context-menu                                                                                |
+| placement                          | bottom     | top, topLeft, topRight, bottom, bottomLeft, bottomRight, left, leftTop, leftBottom, right, rightTop, rightBottom |
+| side / align                       | —          | top, right, bottom, left / start, center, end                                                                    |
+| sideOffset / alignOffset           | 6 / 0      | Distance from trigger / panel alignment offset, px                                                               |
+| arrow / arrowPadding               | false / 16 | Arrow visibility / edge padding, px                                                                              |
+| avoidCollisions / collisionPadding | true / 8   | Collision adjustment / boundary padding, px                                                                      |
+| hoverOpenDelay / hoverCloseDelay   | 0 / 80     | Hover opening / closing delay, ms                                                                                |
+| closeDelay                         | 140        | Closing transition duration, ms                                                                                  |
+| lazyMount                          | true       | Do not mount content before the first opening                                                                    |
+| destroyOnHidden                    | false      | Whether to unmount after the closing transition                                                                  |
+| getPopupContainer                  | body       | Resolve the portal target from the trigger                                                                       |
 
 See the website Popover API for the complete properties and events. Native attributes, events and element references follow each framework contract; all delays use ms.
 
@@ -53,12 +53,12 @@ Content defaults to the trigger owner document body. Both UI and Primitive roots
 
 ## Mount lifecycle
 
-| lazyMount | destroyOnHidden | Before first opening | After closing |
-| --- | --- | --- | --- |
-| true | false | Unmounted | Retain DOM and internal state |
-| true | true | Unmounted | Unmount; recreate on reopening |
-| false | false | Mounted | Retain DOM and internal state |
-| false | true | Mounted | Unmount; recreate on reopening |
+| lazyMount | destroyOnHidden | Before first opening | After closing                  |
+| --------- | --------------- | -------------------- | ------------------------------ |
+| true      | false           | Unmounted            | Retain DOM and internal state  |
+| true      | true            | Unmounted            | Unmount; recreate on reopening |
+| false     | false           | Mounted              | Retain DOM and internal state  |
+| false     | true            | Mounted              | Unmount; recreate on reopening |
 
 The default suits forms: mount on first opening and retain the draft after closing. destroyOnHidden only unmounts the content subtree; it does not clear externally owned state.
 

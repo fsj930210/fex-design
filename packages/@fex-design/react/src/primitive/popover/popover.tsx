@@ -17,9 +17,11 @@ function RenderContent({ children }: { children: (state: PopoverRenderState) => 
 
 export function Popover({ children, ...options }: PopoverProps) {
   const context = usePopover(options)
-  return <PopoverContext value={context}>
+  return (
+    <PopoverContext value={context}>
       {typeof children === 'function' ? <RenderContent>{children}</RenderContent> : children}
-  </PopoverContext>
+    </PopoverContext>
+  )
 }
 
 export { Popover as PopoverRoot }

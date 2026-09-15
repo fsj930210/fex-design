@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Add, remove and extra"
   description="Application data drives primitive Items and Contents."
-  ><div
+>
+  <div
     fexTabsRoot
     [value]="value()"
     (change)="value.set($event.value ?? '')"
@@ -43,4 +45,5 @@
     @for (item of items(); track item.value) {
       <div *fexTabsContent="item.value">{{ item.content }}</div>
     }
-  </div></div>
+  </div>
+</div>

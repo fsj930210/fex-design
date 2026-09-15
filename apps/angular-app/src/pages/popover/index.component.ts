@@ -11,7 +11,16 @@ import { SemanticStylesExample } from '../../../../../packages/@fex-design/angul
 @Component({
   selector: 'popover-page',
   standalone: true,
-  imports: [BasicExample, TriggersExample, PlacementExample, ArrowExample, ContainerExample, ControlledExample, OffsetsExample, SemanticStylesExample],
+  imports: [
+    BasicExample,
+    TriggersExample,
+    PlacementExample,
+    ArrowExample,
+    ContainerExample,
+    ControlledExample,
+    OffsetsExample,
+    SemanticStylesExample,
+  ],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -8,5 +8,4 @@ import { Radio, RadioButton, RadioGroup } from '@fex-design/angular/primitive/ra
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class RadioBasicExample {
-}
+export class RadioBasicExample {}

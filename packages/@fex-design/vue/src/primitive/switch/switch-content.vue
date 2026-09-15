@@ -10,9 +10,14 @@ const element = useTemplateRef<HTMLSpanElement>('element')
 defineExpose({ element })
 </script>
 <template>
-  <span v-bind="attrs" ref="element" aria-hidden="true" data-slot="switch-content"
+  <span
+    v-bind="attrs"
+    ref="element"
+    aria-hidden="true"
+    data-slot="switch-content"
     :data-state="props.state"
-    :class="cn(switchContentClassName, attrs.class as string | undefined)">
+    :class="cn(switchContentClassName, attrs.class as string | undefined)"
+  >
     <slot />
   </span>
 </template>

@@ -8,29 +8,34 @@ type DemoCase = { label: string; options: PopoverOptions }
 const container = ref<HTMLDivElement | null>(null)
 const cases = [
   { label: '挂载到 body', options: {} },
-  { label: '在框内打开浮层', options: {
-    getPopupContainer: () => container.value ?? document.body,
-  } },
+  {
+    label: '在框内打开浮层',
+    options: {
+      getPopupContainer: () => container.value ?? document.body,
+    },
+  },
 ] satisfies DemoCase[]
 </script>
 
 <template>
   <div class="w-full flex items-center justify-center min-h-[360px] py-16">
-  <div class="grid gap-4">
-    
-    <div ref="container" class="relative w-full h-96 overflow-auto rounded-lg border-2 border-dashed p-6">
-<p>自定义挂载区域：浮层插入此虚线框，仍以按钮为定位参照。</p>
-<div class="flex min-h-[560px] justify-center gap-4 pt-24">
-      <div v-for="item in cases" :key="item.label">
-        <Popover v-bind="item.options" title="提示信息">
-          <Button>{{ item.label }}</Button>
-          <template #content="{ close }">
-            <p>这里可以放置说明和交互内容。</p>
-          </template>
-        </Popover>
-      </div>
+    <div class="grid gap-4">
+      <div
+        ref="container"
+        class="relative w-full h-96 overflow-auto rounded-lg border-2 border-dashed p-6"
+      >
+        <p>自定义挂载区域：浮层插入此虚线框，仍以按钮为定位参照。</p>
+        <div class="flex min-h-[560px] justify-center gap-4 pt-24">
+          <div v-for="item in cases" :key="item.label">
+            <Popover v-bind="item.options" title="提示信息">
+              <Button>{{ item.label }}</Button>
+              <template #content="{ close }">
+                <p>这里可以放置说明和交互内容。</p>
+              </template>
+            </Popover>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>

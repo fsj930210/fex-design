@@ -43,7 +43,9 @@
   }
 
   function handlePointerEnter(event: PointerEvent) {
-    rest.onpointerenter?.(event as PointerEvent & { currentTarget: HTMLDivElement });
+    rest.onpointerenter?.(
+      event as PointerEvent & { currentTarget: HTMLDivElement },
+    );
     if (event.defaultPrevented) return;
     const info = {
       target: event.target,
@@ -57,7 +59,9 @@
   }
 
   function handlePointerLeave(event: PointerEvent) {
-    rest.onpointerleave?.(event as PointerEvent & { currentTarget: HTMLDivElement });
+    rest.onpointerleave?.(
+      event as PointerEvent & { currentTarget: HTMLDivElement },
+    );
     if (event.defaultPrevented) return;
     const info = {
       target: event.target,

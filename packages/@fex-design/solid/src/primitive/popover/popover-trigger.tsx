@@ -28,34 +28,48 @@ export function PopoverTrigger(props: PopoverTriggerProps) {
     overlay.setReferenceElement(null)
   })
 
-  const triggerProps = mergeProps({ type: 'button' as const, 'aria-haspopup': 'dialog' as const }, rest, {
-    get 'aria-expanded'() { return snapshot().open },
-    get 'data-state'() { return snapshot().open ? 'open' : 'closed' },
-    onClick: (event: Parameters<JSX.EventHandler<HTMLButtonElement, MouseEvent>>[0]) => {
-      callEventHandler(rest.onClick, event)
-      if (!event.defaultPrevented) overlay.trigger.click(eventInfo(event))
+  const triggerProps = mergeProps(
+    { type: 'button' as const, 'aria-haspopup': 'dialog' as const },
+    rest,
+    {
+      get 'aria-expanded'() {
+        return snapshot().open
+      },
+      get 'data-state'() {
+        return snapshot().open ? 'open' : 'closed'
+      },
+      onClick: (event: Parameters<JSX.EventHandler<HTMLButtonElement, MouseEvent>>[0]) => {
+        callEventHandler(rest.onClick, event)
+        if (!event.defaultPrevented) overlay.trigger.click(eventInfo(event))
+      },
+      onPointerEnter: (event: Parameters<JSX.EventHandler<HTMLButtonElement, PointerEvent>>[0]) => {
+        callEventHandler(rest.onPointerEnter, event)
+        if (!event.defaultPrevented) overlay.trigger.pointerEnter(eventInfo(event))
+      },
+      onPointerLeave: (event: Parameters<JSX.EventHandler<HTMLButtonElement, PointerEvent>>[0]) => {
+        callEventHandler(rest.onPointerLeave, event)
+        if (!event.defaultPrevented) overlay.trigger.pointerLeave(eventInfo(event))
+      },
+      onFocus: (event: Parameters<JSX.EventHandler<HTMLButtonElement, FocusEvent>>[0]) => {
+        callEventHandler(rest.onFocus, event)
+        if (!event.defaultPrevented) overlay.trigger.focus(eventInfo(event))
+      },
+      onBlur: (event: Parameters<JSX.EventHandler<HTMLButtonElement, FocusEvent>>[0]) => {
+        callEventHandler(rest.onBlur, event)
+        if (!event.defaultPrevented) overlay.trigger.blur(eventInfo(event))
+      },
+      onContextMenu: (event: Parameters<JSX.EventHandler<HTMLButtonElement, MouseEvent>>[0]) => {
+        callEventHandler(rest.onContextMenu, event)
+        if (!event.defaultPrevented) overlay.trigger.contextMenu(eventInfo(event))
+      },
     },
-    onPointerEnter: (event: Parameters<JSX.EventHandler<HTMLButtonElement, PointerEvent>>[0]) => {
-      callEventHandler(rest.onPointerEnter, event)
-      if (!event.defaultPrevented) overlay.trigger.pointerEnter(eventInfo(event))
-    },
-    onPointerLeave: (event: Parameters<JSX.EventHandler<HTMLButtonElement, PointerEvent>>[0]) => {
-      callEventHandler(rest.onPointerLeave, event)
-      if (!event.defaultPrevented) overlay.trigger.pointerLeave(eventInfo(event))
-    },
-    onFocus: (event: Parameters<JSX.EventHandler<HTMLButtonElement, FocusEvent>>[0]) => {
-      callEventHandler(rest.onFocus, event)
-      if (!event.defaultPrevented) overlay.trigger.focus(eventInfo(event))
-    },
-    onBlur: (event: Parameters<JSX.EventHandler<HTMLButtonElement, FocusEvent>>[0]) => {
-      callEventHandler(rest.onBlur, event)
-      if (!event.defaultPrevented) overlay.trigger.blur(eventInfo(event))
-    },
-    onContextMenu: (event: Parameters<JSX.EventHandler<HTMLButtonElement, MouseEvent>>[0]) => {
-      callEventHandler(rest.onContextMenu, event)
-      if (!event.defaultPrevented) overlay.trigger.contextMenu(eventInfo(event))
-    },
-  })
+  )
 
-  return local.children({ ref: setReference, get state() { return snapshot() }, props: triggerProps })
+  return local.children({
+    ref: setReference,
+    get state() {
+      return snapshot()
+    },
+    props: triggerProps,
+  })
 }

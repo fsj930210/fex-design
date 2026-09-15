@@ -195,10 +195,7 @@
       ]
     },
     "vue": {
-      "omitProps": [
-        "checkedContent",
-        "uncheckedContent"
-      ],
+      "omitProps": ["checkedContent", "uncheckedContent"],
       "typeOverrides": {
         "FrameworkContent": "slot",
         "FrameworkStyle": "StyleValue"

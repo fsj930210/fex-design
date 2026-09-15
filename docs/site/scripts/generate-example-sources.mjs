@@ -21,7 +21,8 @@ for (const [framework, config] of Object.entries(frameworks)) {
   for (const layer of ['primitive', 'ui']) {
     const layerRoot = resolve(componentRoot, framework, 'src', layer)
     for (const component of await readdir(layerRoot, { withFileTypes: true })) {
-      if (!component.isDirectory() || (componentFilter && component.name !== componentFilter)) continue
+      if (!component.isDirectory() || (componentFilter && component.name !== componentFilter))
+        continue
       const examplesRoot = resolve(layerRoot, component.name, 'examples')
       let examples
       try {

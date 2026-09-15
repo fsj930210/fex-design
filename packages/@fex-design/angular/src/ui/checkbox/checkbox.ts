@@ -1,6 +1,13 @@
 import type { CheckboxValue } from '@fex-design/core/checkbox/types'
 import { NgTemplateOutlet } from '@angular/common'
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, TemplateRef } from '@angular/core'
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  input,
+  TemplateRef,
+} from '@angular/core'
 import {
   CheckboxControl,
   CheckboxGroup as PrimitiveCheckboxGroup,
@@ -26,7 +33,9 @@ export class Checkbox {
   ariaInvalid = input(false, { alias: 'aria-invalid', transform: booleanAttribute })
   ariaDescribedBy = input<string | undefined>(undefined, { alias: 'aria-describedby' })
   size = input<'sm' | 'md' | 'lg'>('md')
-  classNames = input<Partial<Record<'root' | 'control' | 'indicator' | 'label', string>> | undefined>()
+  classNames = input<
+    Partial<Record<'root' | 'control' | 'indicator' | 'label', string>> | undefined
+  >()
   styles = input<Partial<Record<'root' | 'control' | 'indicator' | 'label', string>> | undefined>()
   indicator = input<TemplateRef<void> | undefined>()
 }
@@ -34,9 +43,7 @@ export class Checkbox {
   selector: 'div[checkboxGroup]',
   standalone: true,
   imports: [Checkbox],
-  providers: [
-    { provide: PrimitiveCheckboxGroup, useExisting: forwardRef(() => CheckboxGroup) },
-  ],
+  providers: [{ provide: PrimitiveCheckboxGroup, useExisting: forwardRef(() => CheckboxGroup) }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './checkbox-group.html',
 })

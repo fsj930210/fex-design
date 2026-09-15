@@ -1,0 +1,4 @@
+<div class="grid w-full max-w-xl gap-3">
+  <div slider [value]="values()" [editable]="true" [minCount]="2" [maxCount]="5" (change)="changeValues($event.value)"></div>
+  <p>当前节点：{{ values().join('、') }}</p>
+</div>

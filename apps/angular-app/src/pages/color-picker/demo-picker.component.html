@@ -7,8 +7,8 @@
   @if (inline()) {
     <fex-color-picker-panel-demo [alpha]="alpha()" [clear]="clear()" [oklch]="oklch()" />
   } @else {
-    <div popoverRoot [trigger]="hover() ? ['hover'] : ['click']"
-      ><button
+    <div popoverRoot [trigger]="hover() ? ['hover'] : ['click']">
+      <button
         popoverTrigger
         [disabled]="disabled()"
         [attr.data-disabled]="disabled() || null"
@@ -18,11 +18,11 @@
         @if (text()) {
           <span class="text-sm">Color</span>
         }</button
-      ><ng-template popoverPortal><div popoverContent
-        ><fex-color-picker-panel-demo
-          [alpha]="alpha()"
-          [clear]="clear()"
-          [oklch]="oklch()" /></div></ng-template></div>
+      ><ng-template popoverPortal
+        ><div popoverContent>
+          <fex-color-picker-panel-demo [alpha]="alpha()" [clear]="clear()" [oklch]="oklch()" /></div
+      ></ng-template>
+    </div>
   }
 </fex-color-picker-root>
 @if (controlled()) {

@@ -9,7 +9,7 @@ import {
 import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
-  selector: 'fex-slider-page',
+  selector: 'slider-page',
   standalone: true,
   imports: [RouterLink, Card, SliderRoot, SliderTrack, SliderRange, SliderThumb],
   host: { class: 'block' },

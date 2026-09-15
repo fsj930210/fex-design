@@ -18,13 +18,13 @@
         *ngTemplateOutlet="tag; context: { $implicit: item, remove: remove(item.value) }"
       />
       } @else {
-      <span tag
-        size="sm"
-       
-       
-        (pointerdown)="$event.preventDefault()"
-       
-        >{{ item.label }}<button tagAction [aria-label]="'Remove ' + item.label" (click)="$event.stopPropagation(); select.removeValue(item.value)"></button></span>
+      <span tag size="sm" (pointerdown)="$event.preventDefault()"
+        >{{ item.label }}<button
+          tagAction
+          [aria-label]="'Remove ' + item.label"
+          (click)="$event.stopPropagation(); select.removeValue(item.value)"
+        ></button
+      ></span>
       } } @if (overflow > 0) {
       <span tag size="sm">+{{ overflow }}</span>
       }

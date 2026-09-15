@@ -1,1 +1,10 @@
-<div class="grid gap-3"><div checkbox [checked]="all()" [indeterminate]="partial()" (change)="toggleAll($event)">全部权限</div><div checkboxGroup [value]="selected()" (change)="groupChange($event)"><div checkbox value="read">读取</div><div checkbox value="write">编辑</div><div checkbox value="publish">发布</div></div></div>
+<div class="grid gap-3">
+  <div checkbox [checked]="all()" [indeterminate]="partial()" (change)="toggleAll($event)">
+    全部权限
+  </div>
+  <div checkboxGroup [value]="selected()" (change)="groupChange($event)">
+    <div checkbox value="read">读取</div>
+    <div checkbox value="write">编辑</div>
+    <div checkbox value="publish">发布</div>
+  </div>
+</div>

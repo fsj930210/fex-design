@@ -111,15 +111,16 @@ export class TimePickerRoot {
 
   constructor() {
     this.popover.connectOptions(() => ({
-      trigger: ['focus', 'click'], open: this.open(),
-      defaultOpen: this.defaultOpen(), placement: this.placement(),
+      trigger: ['focus', 'click'],
+      open: this.open(),
+      defaultOpen: this.defaultOpen(),
+      placement: this.placement(),
     }))
     this.popover.openChange.subscribe((value) => this.openChange.emit(value))
     effect(() => {
       const value = this.value()
       if (value !== undefined) this.controller.setControlledValue(value)
     })
-
   }
 }
 

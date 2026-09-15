@@ -18,8 +18,9 @@
 </script>
 
 <span
+  data-slot="slider-track"
   {...rest}
-  data-disabled={currentSnapshot.disabled ? "true" : undefined}
+  data-disabled={currentSnapshot.disabled || (currentSnapshot.disabledThumbs.length > 0 && currentSnapshot.disabledThumbs.every(Boolean)) ? "true" : undefined}
   data-orientation={currentSnapshot.orientation}
   class={cn(sliderTrackClassName, className)}
 >

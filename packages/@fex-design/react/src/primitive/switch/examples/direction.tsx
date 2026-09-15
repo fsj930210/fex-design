@@ -1,6 +1,38 @@
 import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/react/primitive/switch'
 
 export default function Example() {
-  
-  return <div className="grid gap-6 sm:grid-cols-2"><section dir="ltr" className="grid gap-2"><span className="text-sm text-muted-foreground">LTR</span><div className="flex flex-wrap items-center gap-3"><SwitchRoot shape="rounded" defaultChecked aria-label="rounded 文字开关"><SwitchContent state="checked">开启</SwitchContent><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb /></SwitchRoot><SwitchRoot shape="pill" defaultChecked aria-label="pill 文字开关"><SwitchContent state="checked">开启</SwitchContent><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb /></SwitchRoot></div></section><section dir="rtl" className="grid gap-2"><span className="text-sm text-muted-foreground">RTL</span><div className="flex flex-wrap items-center gap-3"><SwitchRoot shape="rounded" defaultChecked aria-label="rounded 文字开关"><SwitchContent state="checked">开启</SwitchContent><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb /></SwitchRoot><SwitchRoot shape="pill" defaultChecked aria-label="pill 文字开关"><SwitchContent state="checked">开启</SwitchContent><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb /></SwitchRoot></div></section></div>
+  return (
+    <div className="grid gap-6 sm:grid-cols-2">
+      <section dir="ltr" className="grid gap-2">
+        <span className="text-sm text-muted-foreground">LTR</span>
+        <div className="flex flex-wrap items-center gap-3">
+          <SwitchRoot shape="rounded" defaultChecked aria-label="rounded 文字开关">
+            <SwitchContent state="checked">开启</SwitchContent>
+            <SwitchContent state="unchecked">关闭</SwitchContent>
+            <SwitchThumb />
+          </SwitchRoot>
+          <SwitchRoot shape="pill" defaultChecked aria-label="pill 文字开关">
+            <SwitchContent state="checked">开启</SwitchContent>
+            <SwitchContent state="unchecked">关闭</SwitchContent>
+            <SwitchThumb />
+          </SwitchRoot>
+        </div>
+      </section>
+      <section dir="rtl" className="grid gap-2">
+        <span className="text-sm text-muted-foreground">RTL</span>
+        <div className="flex flex-wrap items-center gap-3">
+          <SwitchRoot shape="rounded" defaultChecked aria-label="rounded 文字开关">
+            <SwitchContent state="checked">开启</SwitchContent>
+            <SwitchContent state="unchecked">关闭</SwitchContent>
+            <SwitchThumb />
+          </SwitchRoot>
+          <SwitchRoot shape="pill" defaultChecked aria-label="pill 文字开关">
+            <SwitchContent state="checked">开启</SwitchContent>
+            <SwitchContent state="unchecked">关闭</SwitchContent>
+            <SwitchThumb />
+          </SwitchRoot>
+        </div>
+      </section>
+    </div>
+  )
 }

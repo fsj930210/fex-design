@@ -155,9 +155,7 @@ export function Transfer<TItem extends TransferDataItem>(props: TransferProps<TI
     const title = () => props.title?.[side] ?? (side === 'source' ? 'Source' : 'Target')
     return (
       <>
-        <CheckboxRoot
-          disabled={local.disabled || enabled.length === 0}
-        >
+        <CheckboxRoot disabled={local.disabled || enabled.length === 0}>
           <CheckboxControl
             checked={checked === true}
             indeterminate={checked === 'indeterminate'}

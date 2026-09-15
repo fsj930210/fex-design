@@ -16,8 +16,18 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   indeterminate: { type: Boolean, default: false },
   size: String as PropType<CheckboxStyleProps['size']>,
-  classNames: Object as PropType<{ root?: string; control?: string; indicator?: string; label?: string }>,
-  styles: Object as PropType<{ root?: StyleValue; control?: StyleValue; indicator?: StyleValue; label?: StyleValue }>,
+  classNames: Object as PropType<{
+    root?: string
+    control?: string
+    indicator?: string
+    label?: string
+  }>,
+  styles: Object as PropType<{
+    root?: StyleValue
+    control?: StyleValue
+    indicator?: StyleValue
+    label?: StyleValue
+  }>,
 })
 const emit = defineEmits<{ change: [event: Event] }>()
 const attrs = useAttrs()

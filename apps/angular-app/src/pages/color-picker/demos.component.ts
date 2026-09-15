@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core'
 import { Card } from '@fex-design/angular/ui/card'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@fex-design/angular/primitive/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from '@fex-design/angular/primitive/popover'
 import { ChevronDownIcon } from '@fex-design/angular/icon/chevron'
 import {
   ColorPickerRoot,

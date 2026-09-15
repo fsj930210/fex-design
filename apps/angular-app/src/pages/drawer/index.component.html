@@ -4,8 +4,8 @@
       <h1 class="text-2xl font-semibold">Drawer</h1>
       <p class="mt-2 text-sm text-muted-foreground">Composable drawer primitives.</p>
     </header>
-    <div card title="Basic and mask"
-      ><fex-drawer
+    <div card title="Basic and mask">
+      <fex-drawer
         ><button button fexDrawerTrigger>Open drawer</button
         ><fex-drawer-portal
           ><fex-drawer-mask /><fex-drawer-content aria-label="Basic drawer"
@@ -15,9 +15,10 @@
             ></fex-drawer-content
           ></fex-drawer-portal
         ></fex-drawer
-      ></div>
-    <div card title="Placement"
-      ><div class="space-y-3">
+      >
+    </div>
+    <div card title="Placement">
+      <div class="space-y-3">
         <div
           radioGroup
           [value]="placement"
@@ -42,11 +43,12 @@
             ></fex-drawer-portal
           ></fex-drawer
         >
-      </div></div>
+      </div>
+    </div>
     <div card title="Presets"><fex-drawer-preset-demo /></div>
     <div card title="Header and footer"><fex-drawer-header-footer-demo /></div>
-    <div card title="Resizable size"
-      ><div class="space-y-3">
+    <div card title="Resizable size">
+      <div class="space-y-3">
         <div
           radioGroup
           [value]="resizePlacement"
@@ -91,9 +93,10 @@
             ></fex-drawer-portal
           ></fex-drawer
         >
-      </div></div>
-    <div card title="Nested"
-      ><fex-drawer
+      </div>
+    </div>
+    <div card title="Nested">
+      <fex-drawer
         ><button button fexDrawerTrigger>Open parent</button
         ><fex-drawer-portal
           ><fex-drawer-mask /><fex-drawer-content aria-label="Parent drawer"
@@ -113,6 +116,7 @@
             ></fex-drawer-content
           ></fex-drawer-portal
         ></fex-drawer
-      ></div>
+      >
+    </div>
   </div>
 </main>

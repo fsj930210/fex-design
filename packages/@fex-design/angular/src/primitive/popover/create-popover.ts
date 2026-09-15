@@ -1,13 +1,28 @@
-import { DestroyRef, effect, inject, Injector, runInInjectionContext, untracked } from '@angular/core'
-import { createPopover as createCorePopover, type PopoverController } from '@fex-design/core/popover/create-popover'
+import {
+  DestroyRef,
+  effect,
+  inject,
+  Injector,
+  runInInjectionContext,
+  untracked,
+} from '@angular/core'
+import {
+  createPopover as createCorePopover,
+  type PopoverController,
+} from '@fex-design/core/popover/create-popover'
 import type { PopoverOptions } from '@fex-design/core/popover/types'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 
 /** Angular adapter for custom templates; initialize after inputs are available. */
-export function createPopover(options: () => PopoverOptions, parent?: () => PopoverController | undefined) {
+export function createPopover(
+  options: () => PopoverOptions,
+  parent?: () => PopoverController | undefined,
+) {
   const injector = inject(Injector)
   let controller: PopoverController | undefined
-  let readSnapshot: ReturnType<typeof createCoreStoreSignal<ReturnType<PopoverController['getSnapshot']>>> | undefined
+  let readSnapshot:
+    | ReturnType<typeof createCoreStoreSignal<ReturnType<PopoverController['getSnapshot']>>>
+    | undefined
   function instance() {
     if (!controller) {
       controller = createCorePopover(options(), parent?.())
@@ -24,7 +39,9 @@ export function createPopover(options: () => PopoverOptions, parent?: () => Popo
   })
   inject(DestroyRef).onDestroy(() => controller?.destroy())
   return {
-    get overlay() { return instance() },
+    get overlay() {
+      return instance()
+    },
     snapshot() {
       instance()
       return readSnapshot!()

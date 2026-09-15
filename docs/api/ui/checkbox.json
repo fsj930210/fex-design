@@ -44,11 +44,7 @@
       "default": "md",
       "description": "Checkbox 尺寸。",
       "editor": "enum",
-      "options": [
-        "sm",
-        "md",
-        "lg"
-      ]
+      "options": ["sm", "md", "lg"]
     },
     {
       "name": "value",
@@ -194,9 +190,7 @@
       }
     },
     "vue": {
-      "omitProps": [
-        "indicator"
-      ],
+      "omitProps": ["indicator"],
       "typeOverrides": {
         "FrameworkStyle": "StyleValue"
       },
@@ -264,10 +258,7 @@
           "default": "vertical",
           "description": "选项排列方向。",
           "editor": "enum",
-          "options": [
-            "horizontal",
-            "vertical"
-          ]
+          "options": ["horizontal", "vertical"]
         },
         {
           "name": "options",
@@ -305,10 +296,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "options",
@@ -353,10 +341,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "options",
@@ -401,10 +386,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "options",
@@ -449,10 +431,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "options",
@@ -497,10 +476,7 @@
               "default": "vertical",
               "description": "选项排列方向。",
               "editor": "enum",
-              "options": [
-                "horizontal",
-                "vertical"
-              ]
+              "options": ["horizontal", "vertical"]
             },
             {
               "name": "options",

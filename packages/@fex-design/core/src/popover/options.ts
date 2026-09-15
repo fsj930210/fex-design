@@ -2,12 +2,32 @@ import type { PopoverOptions } from './types'
 
 /** UI adapters use one list when separating behavior from native content props. */
 export const popoverOptionKeys = [
-  'open', 'defaultOpen', 'onOpenChange', 'trigger', 'disabled',
-  'placement', 'side', 'align', 'sideOffset', 'alignOffset', 'strategy',
-  'avoidCollisions', 'collisionBoundary', 'collisionPadding',
-  'arrow', 'arrowPadding', 'matchReferenceWidth', 'hideWhenDetached', 'zIndex',
-  'getPopupContainer', 'hoverOpenDelay', 'hoverCloseDelay', 'closeDelay', 'dismiss',
-  'lazyMount', 'destroyOnHidden',
+  'open',
+  'defaultOpen',
+  'onOpenChange',
+  'trigger',
+  'disabled',
+  'placement',
+  'side',
+  'align',
+  'sideOffset',
+  'alignOffset',
+  'strategy',
+  'avoidCollisions',
+  'collisionBoundary',
+  'collisionPadding',
+  'arrow',
+  'arrowPadding',
+  'matchReferenceWidth',
+  'hideWhenDetached',
+  'zIndex',
+  'getPopupContainer',
+  'hoverOpenDelay',
+  'hoverCloseDelay',
+  'closeDelay',
+  'dismiss',
+  'lazyMount',
+  'destroyOnHidden',
 ] as const satisfies readonly (keyof PopoverOptions)[]
 
 export function splitPopoverOptions<T extends PopoverOptions>(props: T) {

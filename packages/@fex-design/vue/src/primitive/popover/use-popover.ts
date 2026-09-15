@@ -13,10 +13,17 @@ export function usePopover(options: () => PopoverOptions) {
   const arrowElement = shallowRef<HTMLElement | null>(null)
   // Props are Vue's boundary with the external Core instance. Scope disposal
   // removes the watcher; the same instance survives every reactive update.
-  watch(() => ({ ...options() }), (next) => overlay.setOptions(next), { flush: 'post' })
+  watch(
+    () => ({ ...options() }),
+    (next) => overlay.setOptions(next),
+    { flush: 'post' },
+  )
   onScopeDispose(() => overlay.destroy())
   return {
-    overlay, snapshot, triggerElement, arrowElement,
+    overlay,
+    snapshot,
+    triggerElement,
+    arrowElement,
 
     hoverAncestors: overlay.ancestors,
   }

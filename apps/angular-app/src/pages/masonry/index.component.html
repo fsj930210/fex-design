@@ -1,8 +1,10 @@
 <main class="grid gap-4 p-2 md:p-6">
-  <div card
+  <div
+    card
     title="基础瀑布流"
     description="固定三列，展示输入序号、稳定 key 和最终列；默认按当前最短列分配。"
-    ><fex-masonry [columns]="3" [gap]="16" (layoutChange)="setColumns('basic', $event)"
+  >
+    <fex-masonry [columns]="3" [gap]="16" (layoutChange)="setColumns('basic', $event)"
       ><fex-masonry-viewport>
         @for (item of items.slice(0, 9); track item.id; let index = $index) {
           <article
@@ -19,11 +21,14 @@
           </article>
         }
       </fex-masonry-viewport></fex-masonry
-    ></div>
-  <div card
+    >
+  </div>
+  <div
+    card
     title="图片加载与失败"
     description="不同宽高比图片使用 aspect-ratio 占位；加载成功或失败都会触发真实尺寸重测。"
-    ><fex-masonry [columns]="{ minColumnWidth: 160, max: 3 }" [gap]="16"
+  >
+    <fex-masonry [columns]="{ minColumnWidth: 160, max: 3 }" [gap]="16"
       ><fex-masonry-viewport>
         @for (image of images; track image[0]; let index = $index) {
           <article
@@ -45,18 +50,22 @@
           </article>
         }
       </fex-masonry-viewport></fex-masonry
-    ></div>
-  <div card
+    >
+  </div>
+  <div
+    card
     title="动态内容高度"
     description="展开、追加内容和连续更新后重新测量，不把动态内容逻辑绑定到 Masonry。"
-    ><div class="grid gap-2">
+  >
+    <div class="grid gap-2">
       <div
         class="flex flex-wrap items-center gap-1.5 rounded-md border border-border bg-muted-background p-1.5"
       >
         <span class="mr-auto text-sm"
           >当前观察：<strong>Card {{ dynamicTarget() + 1 }}</strong> · 新增
           {{ detailCount() }} 段</span
-        ><button button size="sm" variant="outlined" (click)="switchDynamicTarget()">切换目标</button
+        ><button button size="sm" variant="outlined" (click)="switchDynamicTarget()">
+          切换目标</button
         ><button button size="sm" (click)="addDynamicDetail()">追加内容</button
         ><button
           button
@@ -100,11 +109,14 @@
           }
         </fex-masonry-viewport></fex-masonry
       >
-    </div></div>
-  <div card
+    </div>
+  </div>
+  <div
+    card
     title="动态增删与排序"
     description="覆盖添加、删除、中间插入、打乱和恢复，所有项目使用稳定 key。"
-    ><div class="grid gap-2">
+  >
+    <div class="grid gap-2">
       <div class="flex flex-wrap gap-1.5">
         <button button size="sm" (click)="add()">末尾添加</button
         ><button button size="sm" variant="outlined" (click)="add(true)">中间插入</button
@@ -129,11 +141,14 @@
           }
         </fex-masonry-viewport></fex-masonry
       >
-    </div></div>
-  <div card
+    </div>
+  </div>
+  <div
+    card
     title="响应式列数"
     description="同时验证最小列宽和容器断点；拖动控制的是组件容器宽度，不依赖窗口断点。"
-    ><div class="grid gap-4">
+  >
+    <div class="grid gap-4">
       @for (
         config of [
           { title: '最小列宽', columns: minColumns },
@@ -178,11 +193,14 @@
           </div>
         </section>
       }
-    </div></div>
-  <div card
+    </div>
+  </div>
+  <div
+    card
     title="排布策略与指定列"
     description="同一数据对照 ordered、shortest，并展示自动项目与固定列项目混排。"
-    ><div class="grid gap-4">
+  >
+    <div class="grid gap-4">
       @for (strategy of ['ordered', 'shortest']; track strategy) {
         <section class="grid gap-1.5">
           <h3 class="font-medium">
@@ -234,11 +252,14 @@
           </fex-masonry-viewport></fex-masonry
         >
       </section>
-    </div></div>
-  <div card
+    </div>
+  </div>
+  <div
+    card
     title="RTL 与隐藏容器恢复"
     description="验证 inline-start 方向、DOM 顺序，以及容器宽度从 0 恢复后的重新布局。"
-    ><div class="grid gap-2">
+  >
+    <div class="grid gap-2">
       <div class="flex gap-1.5">
         <button button size="sm" variant="outlined" (click)="rtl.set(!rtl())">
           方向：{{ rtl() ? 'RTL' : 'LTR' }}</button
@@ -262,11 +283,14 @@
           </fex-masonry-viewport></fex-masonry
         >
       }
-    </div></div>
-  <div card
+    </div>
+  </div>
+  <div
+    card
     title="虚拟瀑布流"
     description="5,000 条数据使用 TanStack Virtual lanes；展示挂载量、动态测量和滚动定位。"
-    ><fex-masonry [columns]="{ minColumnWidth: 180, max: 4 }" [gap]="12"
+  >
+    <fex-masonry [columns]="{ minColumnWidth: 180, max: 4 }" [gap]="12"
       ><fex-masonry-virtual-viewport
         [items]="virtualItems"
         [getItemKey]="getItemKey"
@@ -284,5 +308,6 @@
           </article></ng-template
         ></fex-masonry-virtual-viewport
       ></fex-masonry
-    ></div>
+    >
+  </div>
 </main>

@@ -1,4 +1,17 @@
 <div [class]="rootClassName + ' ' + (classNames()?.root ?? '')" [style]="styles()?.root">
-  <button radio [id]="controlId" [value]="value()" [disabled]="disabled()" [size]="size()" [class]="classNames()?.control" [style]="styles()?.control"></button>
-  <label [for]="controlId" [class]="labelClassName + ' ' + (classNames()?.label ?? '')" [style]="styles()?.label"><ng-content /></label>
+  <button
+    radio
+    [id]="controlId"
+    [value]="value()"
+    [disabled]="disabled()"
+    [size]="size()"
+    [class]="classNames()?.control"
+    [style]="styles()?.control"
+  ></button>
+  <label
+    [for]="controlId"
+    [class]="labelClassName + ' ' + (classNames()?.label ?? '')"
+    [style]="styles()?.label"
+    ><ng-content
+  /></label>
 </div>

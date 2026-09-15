@@ -11,5 +11,7 @@ import { cn } from '@fex/utils'
 })
 export class PopoverDescription {
   readonly className = input('', { alias: 'class' })
-  protected readonly hostClassName = computed(() => cn(popoverDescriptionClassName, this.className()))
+  protected readonly hostClassName = computed(() =>
+    cn(popoverDescriptionClassName, this.className()),
+  )
 }

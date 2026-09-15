@@ -144,7 +144,6 @@ export class CascaderRoot implements OnChanges {
       },
       onChange: (value, meta) => root.change.emit({ value, meta }),
       onOpenChange: (open) => {
-
         root.popover.syncOptions()
         root.openChange.emit(open)
       },
@@ -152,9 +151,10 @@ export class CascaderRoot implements OnChanges {
     })
     this.snapshot = createCoreStoreSignal(this.controller)
 
-
     this.popover.connectOptions(() => ({
-      align: 'start', open: this.snapshot().open, defaultOpen: this.defaultOpen,
+      align: 'start',
+      open: this.snapshot().open,
+      defaultOpen: this.defaultOpen,
     }))
     this.popover.syncOptions()
     const subscription = this.popover.openChange.subscribe((next) =>
@@ -164,7 +164,6 @@ export class CascaderRoot implements OnChanges {
   }
   ngOnChanges() {
     this.controller.refresh()
-
 
     this.popover.syncOptions()
   }
@@ -185,7 +184,16 @@ export class CascaderRoot implements OnChanges {
 @Component({
   selector: 'fex-cascader-trigger',
   standalone: true,
-  imports: [CommonModule, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag, TagAction],
+  imports: [
+    CommonModule,
+    PopoverTrigger,
+    Button,
+    ChevronDownIcon,
+    XIcon,
+    LoadingIcon,
+    Tag,
+    TagAction,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cascader-trigger.html',
 })

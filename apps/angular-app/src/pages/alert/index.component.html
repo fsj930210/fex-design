@@ -7,15 +7,19 @@
         Show status messages with clear semantics.
       </p>
     </header>
-    <div card title="Primitive" description="Structure with icon, title, description, and action."
-      ><div class="grid gap-2">
+    <div card title="Primitive" description="Structure with icon, title, description, and action.">
+      <div class="grid gap-2">
         @for (variant of variants; track variant) {
-          <div alert [type]="variant"
-            ><info-icon /><div alertTitle>{{ variant }}</div><div alertDescription
-              >The current task is in {{ variant }} state. Continue with the page
-              action.</div><div alertAction
-              ><badge variant="outlined">New</badge></div></div>
+          <div alert [type]="variant">
+            <info-icon />
+            <div alertTitle>{{ variant }}</div>
+            <div alertDescription>
+              The current task is in {{ variant }} state. Continue with the page action.
+            </div>
+            <div alertAction><badge variant="outlined">New</badge></div>
+          </div>
         }
-      </div></div>
+      </div>
+    </div>
   </div>
 </main>

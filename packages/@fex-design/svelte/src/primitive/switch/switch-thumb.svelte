@@ -1,14 +1,20 @@
 <script lang="ts">
-  import { switchThumbClassName } from '@fex-design/styles/switch'
-  import { cn } from '@fex/utils'
-  import type { HTMLAttributes } from 'svelte/elements'
-  import type { Snippet } from 'svelte'
+  import { switchThumbClassName } from "@fex-design/styles/switch";
+  import { cn } from "@fex/utils";
+  import type { HTMLAttributes } from "svelte/elements";
+  import type { Snippet } from "svelte";
   interface Props extends HTMLAttributes<HTMLSpanElement> {
-    ref?: HTMLSpanElement | null | undefined
-    children?: Snippet | undefined
+    ref?: HTMLSpanElement | null | undefined;
+    children?: Snippet | undefined;
   }
-  let { class: className, ref = $bindable(null), children, ...rest }: Props = $props()
+  let {
+    class: className,
+    ref = $bindable(null),
+    children,
+    ...rest
+  }: Props = $props();
 </script>
+
 <span
   {...rest}
   bind:this={ref}

@@ -167,7 +167,6 @@ export class SelectRoot implements OnChanges {
         return root.defaultOpen
       },
       onOpenChange: (next) => {
-
         root.popover.syncOptions()
         root.openChange.emit(next)
       },
@@ -177,7 +176,8 @@ export class SelectRoot implements OnChanges {
     this.snapshot = createCoreStoreSignal(controller)
 
     this.popover.connectOptions(() => ({
-      open: this.snapshot().open, defaultOpen: this.defaultOpen,
+      open: this.snapshot().open,
+      defaultOpen: this.defaultOpen,
     }))
     this.popover.syncOptions()
     const subscription = this.popover.openChange.subscribe((next) => this.syncOpen(next))
@@ -228,7 +228,16 @@ export class SelectRoot implements OnChanges {
 @Component({
   selector: 'fex-select-trigger',
   standalone: true,
-  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, XIcon, LoadingIcon, Tag, TagAction],
+  imports: [
+    NgTemplateOutlet,
+    PopoverTrigger,
+    Button,
+    ChevronDownIcon,
+    XIcon,
+    LoadingIcon,
+    Tag,
+    TagAction,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-trigger.html',
 })

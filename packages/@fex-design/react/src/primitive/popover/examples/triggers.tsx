@@ -18,7 +18,10 @@ const cases = [
   { label: 'Hover + Focus', options: { trigger: ['hover', 'focus'] } },
   { label: 'Hover + Click', options: { trigger: ['hover', 'click'] } },
   { label: 'Focus + Click', options: { trigger: ['focus', 'click'] } },
-  { label: '悬停延迟 300ms / 400ms', options: { trigger: ['hover'], hoverOpenDelay: 300, hoverCloseDelay: 400 } },
+  {
+    label: '悬停延迟 300ms / 400ms',
+    options: { trigger: ['hover'], hoverOpenDelay: 300, hoverCloseDelay: 400 },
+  },
 ] satisfies { label: string; options: PopoverOptions }[]
 
 function DemoPopover({

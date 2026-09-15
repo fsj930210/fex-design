@@ -39,7 +39,9 @@
             @if (state.continue && state.item()?.status === 'paused') {
               <button button size="sm" variant="text" (click)="state.continue()">继续</button>
             }
-            <button button size="sm" variant="solid" color="danger" (click)="state.remove()">删除</button>
+            <button button size="sm" variant="solid" color="danger" (click)="state.remove()">
+              删除
+            </button>
           </div></ng-template
         ></fex-upload-item
       >
@@ -47,13 +49,7 @@
   </ng-template></fex-upload-list
 >
 @if (context.items().length) {
-  <button
-    button
-    class="mt-1.5 w-full"
-    size="sm"
-    variant="text"
-    (click)="context.upload()?.clear()"
-  >
+  <button button class="mt-1.5 w-full" size="sm" variant="text" (click)="context.upload()?.clear()">
     清空列表
   </button>
 }

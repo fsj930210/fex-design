@@ -32,13 +32,28 @@ function handleClick(event: MouseEvent) {
 }
 </script>
 <template>
-  <button v-bind="attrs" ref="element" type="button" role="switch"
-    :disabled="props.disabled || props.loading" :aria-checked="checked" :aria-busy="props.loading || undefined"
-    data-slot="switch" :data-state="checked ? 'checked' : 'unchecked'"
-    :data-disabled="props.disabled ? '' : undefined" :data-loading="props.loading ? '' : undefined"
-    :data-size="props.size" :data-shape="props.shape"
-    :class="cn(switchClassName({ size: props.size, shape: props.shape }), attrs.class as string | undefined)"
-    @click="handleClick">
+  <button
+    v-bind="attrs"
+    ref="element"
+    type="button"
+    role="switch"
+    :disabled="props.disabled || props.loading"
+    :aria-checked="checked"
+    :aria-busy="props.loading || undefined"
+    data-slot="switch"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    :data-disabled="props.disabled ? '' : undefined"
+    :data-loading="props.loading ? '' : undefined"
+    :data-size="props.size"
+    :data-shape="props.shape"
+    :class="
+      cn(
+        switchClassName({ size: props.size, shape: props.shape }),
+        attrs.class as string | undefined,
+      )
+    "
+    @click="handleClick"
+  >
     <slot :checked="checked" :loading="props.loading" />
   </button>
 </template>

@@ -1,4 +1,11 @@
-<div checkboxRoot [value]="value()" [disabled]="disabled()" [size]="size()" [class]="classNames()?.root" [style]="styles()?.root">
+<div
+  checkboxRoot
+  [value]="value()"
+  [disabled]="disabled()"
+  [size]="size()"
+  [class]="classNames()?.root"
+  [style]="styles()?.root"
+>
   <input
     checkboxControl
     type="checkbox"
@@ -21,5 +28,7 @@
   } @else {
   <span checkboxIndicator [class]="classNames()?.indicator" [style]="styles()?.indicator"></span>
   }
-  <label checkboxLabel [class]="classNames()?.label" [style]="styles()?.label"><ng-content /></label>
+  <label checkboxLabel [class]="classNames()?.label" [style]="styles()?.label"
+    ><ng-content
+  /></label>
 </div>

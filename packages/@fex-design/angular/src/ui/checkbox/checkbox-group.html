@@ -1,5 +1,5 @@
 @if (options(); as items) { @for (option of items; track option.value) {
-  <div checkbox [value]="option.value" [disabled]="option.disabled">{{ option.label }}</div>
+<div checkbox [value]="option.value" [disabled]="option.disabled">{{ option.label }}</div>
 } } @else {
 <ng-content />
 }

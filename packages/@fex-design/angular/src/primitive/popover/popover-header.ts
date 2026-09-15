@@ -13,4 +13,3 @@ export class PopoverHeader {
   readonly className = input('', { alias: 'class' })
   protected readonly hostClassName = computed(() => cn(popoverHeaderClassName, this.className()))
 }
-

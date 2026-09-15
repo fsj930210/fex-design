@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, computed, signal, viewChild } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  computed,
+  signal,
+  viewChild,
+} from '@angular/core'
 import type { FloatingPlacement, PopoverOptions } from '@fex-design/core/popover/types'
 import { Popover, PopoverTrigger } from '@fex-design/angular/ui/popover'
 import { Button } from '@fex-design/angular/ui/button'
@@ -13,13 +20,18 @@ type DemoCase = { label: string; options: PopoverOptions }
   templateUrl: './container.html',
 })
 export class ContainerExample {
-readonly container = viewChild<ElementRef<HTMLDivElement>>('container')
-readonly cases = [
-  { label: '挂载到 body', options: {} },
-  { label: '在框内打开浮层', options: {
-    getPopupContainer: () => this.container()?.nativeElement ?? document.body,
-  } },
-] satisfies DemoCase[]
+  readonly container = viewChild<ElementRef<HTMLDivElement>>('container')
+  readonly cases = [
+    { label: '挂载到 body', options: {} },
+    {
+      label: '在框内打开浮层',
+      options: {
+        getPopupContainer: () => this.container()?.nativeElement ?? document.body,
+      },
+    },
+  ] satisfies DemoCase[]
 
-  options(item: DemoCase): PopoverOptions { return item.options }
+  options(item: DemoCase): PopoverOptions {
+    return item.options
+  }
 }

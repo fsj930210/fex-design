@@ -13,7 +13,6 @@ export function eventInfo(event: Event & Partial<PointerEvent>) {
   }
 }
 
-
 /** Solid native events accept either a callback or a bound [callback, data] tuple. */
 export function callEventHandler<T, E extends Event>(
   handler: JSX.EventHandlerUnion<T, E> | undefined,

@@ -10,12 +10,13 @@
       </div>
     </header>
     <div class="space-y-4">
-      <div card title="Basic" description="Uncontrolled switch uses defaultChecked."
-        ><button switch defaultChecked aria-label="Enable notifications">
-          <span switchThumb></span></button
-      ></div>
-      <div card title="Controlled" description="Controlled switch uses checked and change."
-        ><div class="grid gap-2">
+      <div card title="Basic" description="Uncontrolled switch uses defaultChecked.">
+        <button switch defaultChecked aria-label="Enable notifications">
+          <span switchThumb></span>
+        </button>
+      </div>
+      <div card title="Controlled" description="Controlled switch uses checked and change.">
+        <div class="grid gap-2">
           <button
             switch
             [checked]="checked()"
@@ -25,25 +26,28 @@
             <span switchThumb></span>
           </button>
           <p class="text-sm text-muted-foreground">Current value: {{ checked() }}</p>
-        </div></div>
-      <div card title="Sizes" description="Switch supports sm, md, and lg sizes."
-        ><div class="flex items-center gap-2">
+        </div>
+      </div>
+      <div card title="Sizes" description="Switch supports sm, md, and lg sizes.">
+        <div class="flex items-center gap-2">
           <button switch size="sm" defaultChecked aria-label="Small switch">
             <span switchThumb></span></button
           ><button switch defaultChecked aria-label="Default switch">
             <span switchThumb></span></button
           ><button switch size="lg" defaultChecked aria-label="Large switch">
             <span switchThumb></span>
-          </button></div
-      ></div>
-      <div card title="Disabled" description="Disabled state blocks interaction."
-        ><div class="flex items-center gap-2">
+          </button>
+        </div>
+      </div>
+      <div card title="Disabled" description="Disabled state blocks interaction.">
+        <div class="flex items-center gap-2">
           <button switch disabled aria-label="Disabled switch">
             <span switchThumb></span></button
           ><button switch disabled defaultChecked aria-label="Disabled checked switch">
             <span switchThumb></span>
-          </button></div
-      ></div>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </main>

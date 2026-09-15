@@ -1,0 +1,5 @@
+export { default as SliderRoot } from './slider.svelte'
+export { default as SliderTrack } from './slider-track.svelte'
+export { default as SliderRange } from './slider-range.svelte'
+export { default as SliderThumb } from './slider-thumb.svelte'
+export { default as SliderMark } from './slider-mark.svelte'

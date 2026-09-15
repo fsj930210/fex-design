@@ -31,7 +31,7 @@ function NumberSlider(props: {
         value={[props.value]}
         min={props.min}
         max={props.max}
-        onValueChange={(value) => props.onChange(value[0] ?? props.value)}
+        onChange={(value) => props.onChange(value[0] ?? props.value)}
         aria-label={props.label}
       >
         <SliderTrack>

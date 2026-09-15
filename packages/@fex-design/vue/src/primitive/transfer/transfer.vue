@@ -183,9 +183,14 @@ function hasRegion(side: TransferSide, region: 'header' | 'footer') {
           :class="transferPanelHeaderClassName"
         >
           <slot :name="`${side}Header`" :api="api(side)">
-            <CheckboxRoot
-              :disabled="props.disabled || enabledKeys(side).length === 0"
-              ><CheckboxControl :checked="allState(side) === true" :indeterminate="allState(side) === 'indeterminate'" :class="checkboxControlClassName" :aria-label="`Select all ${props.title?.[side] ?? (side === 'source' ? 'Source' : 'Target')}`" @change="toggleAllEvent(side, $event)" /><CheckboxIndicator :class="checkboxIndicatorClassName"
+            <CheckboxRoot :disabled="props.disabled || enabledKeys(side).length === 0"
+              ><CheckboxControl
+                :checked="allState(side) === true"
+                :indeterminate="allState(side) === 'indeterminate'"
+                :class="checkboxControlClassName"
+                :aria-label="`Select all ${props.title?.[side] ?? (side === 'source' ? 'Source' : 'Target')}`"
+                @change="toggleAllEvent(side, $event)" /><CheckboxIndicator
+                :class="checkboxIndicatorClassName"
                 ><CheckIcon :class="checkboxCheckIconClassName" /><MinusIcon
                   :class="checkboxMinusIconClassName" /></CheckboxIndicator
             ></CheckboxRoot>

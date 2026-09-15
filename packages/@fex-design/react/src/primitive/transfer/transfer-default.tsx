@@ -65,9 +65,7 @@ function HeaderCheckbox({
   onChange(checked: boolean): void
 }) {
   return (
-    <CheckboxRoot
-      disabled={disabled}
-    >
+    <CheckboxRoot disabled={disabled}>
       <CheckboxControl
         checked={checked === true}
         indeterminate={checked === 'indeterminate'}

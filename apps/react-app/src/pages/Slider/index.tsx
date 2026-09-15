@@ -17,7 +17,7 @@ function DemoSlider({
   showValue = false,
   value,
   defaultValue,
-  onValueChange,
+  onChange,
   ...props
 }: DemoSliderProps) {
   const [internalValue, setInternalValue] = useState(defaultValue ?? [props.min ?? 0])
@@ -29,9 +29,9 @@ function DemoSlider({
         {...props}
         value={value}
         defaultValue={defaultValue}
-        onValueChange={(nextValue) => {
+        onChange={(nextValue, meta) => {
           if (value === undefined) setInternalValue(nextValue)
-          onValueChange?.(nextValue)
+          onChange?.(nextValue, meta)
         }}
       >
         <SliderTrack>
@@ -74,7 +74,7 @@ export function SliderPage() {
           <Card title="Controlled" description="Controlled slider uses value and onValueChange.">
             <DemoSlider
               value={value}
-              onValueChange={setValue}
+              onChange={setValue}
               showValue
               aria-label="Controlled slider"
             />
@@ -85,7 +85,7 @@ export function SliderPage() {
                 defaultValue={[20, 80]}
                 minStepsBetweenThumbs={4}
                 aria-label="Range slider"
-                onValueChange={setRangeValue}
+                onChange={setRangeValue}
               >
                 <SliderTrack>
                   <SliderRange />
@@ -107,7 +107,7 @@ export function SliderPage() {
                 defaultValue={[15, 45, 75]}
                 minStepsBetweenThumbs={4}
                 aria-label="Multiple thumbs slider"
-                onValueChange={setMultipleValue}
+                onChange={setMultipleValue}
               >
                 <SliderTrack>
                   <SliderRange />

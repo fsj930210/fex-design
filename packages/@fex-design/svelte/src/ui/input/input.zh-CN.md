@@ -8,20 +8,20 @@
 
 ## 示例
 
-| 名称            | 覆盖内容                                               |
-| --------------- | ------------------------------------------------------ |
-| basic           | 空 Input 和可清除 Input。                              |
-| sizes           | `sm`、`md`、`lg`，与 Primitive 使用相同场景。          |
-| variants        | 四种结构形态。                                         |
-| controlled      | 受控、非受控值以及外部更新。                           |
-| affixes         | Prefix、Suffix、Addon、图标内容和输入框内文本操作。    |
-| group           | Input 与 Button、Input 与 Input 的组合。               |
-| password        | 密码可见性、关闭切换、清除和 `aria-invalid`。          |
-| search          | loading、仅 Enter 搜索、Prefix 搜索和 Addon 搜索操作。 |
-| states          | Input 家族的禁用、只读和错误状态。                     |
+| 名称            | 覆盖内容                                                 |
+| --------------- | -------------------------------------------------------- |
+| basic           | 空 Input 和可清除 Input。                                |
+| sizes           | `sm`、`md`、`lg`，与 Primitive 使用相同场景。            |
+| variants        | 四种结构形态。                                           |
+| controlled      | 受控、非受控值以及外部更新。                             |
+| affixes         | Prefix、Suffix、Addon、图标内容和输入框内文本操作。      |
+| group           | Input 与 Button、Input 与 Input 的组合。                 |
+| password        | 密码可见性、关闭切换、清除和 `aria-invalid`。            |
+| search          | loading、仅 Enter 搜索、Prefix 搜索和 Addon 搜索操作。   |
+| states          | Input 家族的禁用、只读和错误状态。                       |
 | validation      | 校验失败样式，以及通过 `aria-describedby` 关联错误说明。 |
-| focus           | 命令式聚焦、失焦和全选。                               |
-| semantic-styles | 结构化 class/style、状态选择器和基础 CSS Variables。   |
+| focus           | 命令式聚焦、失焦和全选。                                 |
+| semantic-styles | 结构化 class/style、状态选择器和基础 CSS Variables。     |
 
 ## Input API
 

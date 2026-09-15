@@ -1,9 +1,15 @@
 import { Switch } from '@fex-design/solid/ui/switch'
 
 export default function Example() {
-  
-  return <div class="grid gap-6 sm:grid-cols-2"><section class="grid gap-2">
-  <span class="text-sm text-muted-foreground">两种形状</span>
-  <div class="flex flex-wrap items-center gap-3"><Switch shape="rounded" defaultChecked aria-label="rounded"></Switch><Switch shape="pill" defaultChecked aria-label="pill"></Switch></div>
-</section></div>
+  return (
+    <div class="grid gap-6 sm:grid-cols-2">
+      <section class="grid gap-2">
+        <span class="text-sm text-muted-foreground">两种形状</span>
+        <div class="flex flex-wrap items-center gap-3">
+          <Switch shape="rounded" defaultChecked aria-label="rounded"></Switch>
+          <Switch shape="pill" defaultChecked aria-label="pill"></Switch>
+        </div>
+      </section>
+    </div>
+  )
 }

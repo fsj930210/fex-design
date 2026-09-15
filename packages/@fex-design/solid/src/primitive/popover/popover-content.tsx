@@ -7,7 +7,16 @@ import { eventInfo, callEventHandler } from './event-info'
 export type PopoverContentProps = JSX.HTMLAttributes<HTMLDivElement>
 
 export function PopoverContent(props: PopoverContentProps) {
-  const [local, rest] = splitProps(props, ['children', 'class', 'onClick', 'role', 'style', 'ref', 'onPointerEnter', 'onPointerLeave'])
+  const [local, rest] = splitProps(props, [
+    'children',
+    'class',
+    'onClick',
+    'role',
+    'style',
+    'ref',
+    'onPointerEnter',
+    'onPointerLeave',
+  ])
   const { contentElement, overlay, snapshot } = usePopover('PopoverContent')
 
   function setContentElement(element: HTMLDivElement) {
@@ -38,7 +47,7 @@ export function PopoverContent(props: PopoverContentProps) {
         tabIndex={-1}
         data-slot="popover-content"
         data-state={snapshot().open ? 'open' : 'closed'}
-        hidden={snapshot().phase === "closed"}
+        hidden={snapshot().phase === 'closed'}
         inert={!snapshot().open}
         data-phase={snapshot().phase}
         data-side={snapshot().side}
@@ -54,9 +63,17 @@ export function PopoverContent(props: PopoverContentProps) {
           if (!event.defaultPrevented) overlay.content.pointerLeave(eventInfo(event))
         }}
         class={cn(popoverContentClassName(), local.class)}
-        style={typeof local.style === 'string'
-          ? `position: var(--floating-strategy, absolute); left: var(--floating-x, 0px); top: var(--floating-y, 0px); transform-origin: var(--floating-transform-origin); ${local.style}`
-          : { position: 'var(--floating-strategy, absolute)' as JSX.CSSProperties['position'], left: 'var(--floating-x, 0px)', top: 'var(--floating-y, 0px)', 'transform-origin': 'var(--floating-transform-origin)', ...local.style }}
+        style={
+          typeof local.style === 'string'
+            ? `position: var(--floating-strategy, absolute); left: var(--floating-x, 0px); top: var(--floating-y, 0px); transform-origin: var(--floating-transform-origin); ${local.style}`
+            : {
+                position: 'var(--floating-strategy, absolute)' as JSX.CSSProperties['position'],
+                left: 'var(--floating-x, 0px)',
+                top: 'var(--floating-y, 0px)',
+                'transform-origin': 'var(--floating-transform-origin)',
+                ...local.style,
+              }
+        }
       >
         {local.children}
       </div>

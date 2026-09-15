@@ -1,0 +1,7 @@
+<div class="grid w-full max-w-xl gap-3">
+<div sliderRoot [value]="values()" editable [minCount]="2" [maxCount]="5" (change)="values.set($event.value)">
+  <span sliderTrack><span sliderRange></span></span>
+  @for (_ of values(); track $index) {<span sliderThumb [index]="$index" [attr.aria-label]="'滑块 ' + ($index + 1)"></span>}
+</div>
+<p>当前节点：{{ values().join('、') }}</p>
+</div>

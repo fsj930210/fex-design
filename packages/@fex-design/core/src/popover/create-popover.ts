@@ -10,12 +10,18 @@ import { createPopoverAccessibility } from './accessibility'
 
 const triggers: NonNullable<PopoverOptions['trigger']> = ['click']
 const allowedTriggers: NonNullable<PopoverOptions['trigger']> = [
-  'click', 'hover', 'focus', 'context-menu',
+  'click',
+  'hover',
+  'focus',
+  'context-menu',
 ]
 const dismiss = { escapeKey: true, outsidePointer: true }
 const children = new WeakMap<PopoverController, Set<PopoverController>>()
 
-export interface PopoverController extends Omit<FloatingOverlay, 'setOptions' | 'getSnapshot' | 'subscribe'> {
+export interface PopoverController extends Omit<
+  FloatingOverlay,
+  'setOptions' | 'getSnapshot' | 'subscribe'
+> {
   getSnapshot: () => PopoverSnapshot
   subscribe: (listener: () => void) => () => void
   setOptions: (options: PopoverOptions) => void
@@ -48,11 +54,14 @@ export function createPopover(
   let reason: DisclosureReason = 'manual'
   let source: string | undefined
   function withChangeInfo(next: PopoverOptions) {
-    return resolveOptions({ ...next, onOpenChange(open, info) {
-      reason = info.reason
-      source = info.source
-      next.onOpenChange?.(open, info)
-    } })
+    return resolveOptions({
+      ...next,
+      onOpenChange(open, info) {
+        reason = info.reason
+        source = info.source
+        next.onOpenChange?.(open, info)
+      },
+    })
   }
   const overlay = createFloatingOverlay(withChangeInfo(options))
   let currentOptions = options
@@ -67,7 +76,12 @@ export function createPopover(
     const arrow = currentOptions.arrow ?? false
     const popupContainer = overlay.resolvePopupContainer()
     const previous = store.getSnapshot()
-    if (base === previousBase && previous.arrow === arrow && previous.popupContainer === popupContainer) return
+    if (
+      base === previousBase &&
+      previous.arrow === arrow &&
+      previous.popupContainer === popupContainer
+    )
+      return
     previousBase = base
     store.setSnapshot({ ...base, arrow, popupContainer })
   }

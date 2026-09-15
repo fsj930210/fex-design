@@ -1,8 +1,10 @@
 <script lang="ts">
-  import SliderRoot from "@fex-design/svelte/primitive/slider";
-  import SliderTrack from "@fex-design/svelte/primitive/slider-track";
-  import SliderRange from "@fex-design/svelte/primitive/slider-range";
-  import SliderThumb from "@fex-design/svelte/primitive/slider-thumb";
+  import {
+    SliderRange,
+    SliderRoot,
+    SliderThumb,
+    SliderTrack,
+  } from "@fex-design/svelte/primitive/slider";
   import Card from "@fex-design/svelte/ui/card";
 
   let basicValue = $state([32]);
@@ -46,7 +48,7 @@
           <SliderRoot
             defaultValue={[32]}
             aria-label="Volume"
-            onValueChange={handleBasicValueChange}
+            onChange={handleBasicValueChange}
           >
             <SliderTrack><SliderRange /></SliderTrack>
             <SliderThumb aria-label="Volume" />
@@ -63,7 +65,7 @@
         <div class="grid gap-1.5">
           <SliderRoot
             value={controlledValue}
-            onValueChange={handleControlledValueChange}
+            onChange={handleControlledValueChange}
             aria-label="Controlled slider"
           >
             <SliderTrack><SliderRange /></SliderTrack>
@@ -83,7 +85,7 @@
             defaultValue={[20, 80]}
             minStepsBetweenThumbs={4}
             aria-label="Range slider"
-            onValueChange={handleRangeValueChange}
+            onChange={handleRangeValueChange}
           >
             <SliderTrack><SliderRange /></SliderTrack>
             <SliderThumb index={0} aria-label="Minimum value" />
@@ -103,7 +105,7 @@
             defaultValue={[15, 45, 75]}
             minStepsBetweenThumbs={4}
             aria-label="Multiple thumbs slider"
-            onValueChange={handleMultipleValueChange}
+            onChange={handleMultipleValueChange}
           >
             <SliderTrack><SliderRange /></SliderTrack>
             <SliderThumb index={0} aria-label="First value" />
@@ -137,10 +139,7 @@
           >
         </div>
       </Card>
-      <Card
-        title="Sizes"
-        description="Slider supports sm, md, and lg sizes."
-      >
+      <Card title="Sizes" description="Slider supports sm, md, and lg sizes.">
         <div class="grid gap-2">
           <SliderRoot size="sm" defaultValue={[25]} aria-label="Small slider"
             ><SliderTrack><SliderRange /></SliderTrack><SliderThumb

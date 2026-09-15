@@ -1,19 +1,16 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
-export const radioGroupClassName = cva(
-  'grid min-w-0 gap-2',
-  {
-    variants: {
-      orientation: {
-        horizontal: 'grid-flow-col auto-cols-max items-center',
-        vertical: 'grid-flow-row',
-      },
-    },
-    defaultVariants: {
-      orientation: 'horizontal',
+export const radioGroupClassName = cva('grid min-w-0 gap-2', {
+  variants: {
+    orientation: {
+      horizontal: 'grid-flow-col auto-cols-max items-center',
+      vertical: 'grid-flow-row',
     },
   },
-)
+  defaultVariants: {
+    orientation: 'horizontal',
+  },
+})
 
 export const radioRootClassName = cva(
   [

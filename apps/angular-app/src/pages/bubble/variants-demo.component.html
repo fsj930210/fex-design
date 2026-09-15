@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Variants and rich content"
   description="Visual treatment stays independent from sender role and content remains composable."
-  ><div class="grid gap-3">
+>
+  <div class="grid gap-3">
     @for (variant of ['solid', 'soft', 'outline', 'plain', 'danger']; track variant) {
       <fex-bubble [variant]="$any(variant)"
         ><fex-bubble-content
@@ -10,4 +12,5 @@
         ></fex-bubble
       >
     }
-  </div></div>
+  </div>
+</div>

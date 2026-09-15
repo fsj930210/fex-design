@@ -16,10 +16,17 @@ function PopoverChildren(props: Pick<PopoverProps, 'children'> & { state: Popove
 export function Popover(props: PopoverProps) {
   const [local, options] = splitProps(props, ['children'])
   const context = createPopover(() => options)
-  const state = { get open() { return context.snapshot().open }, close: context.overlay.close }
-  return <PopoverContext.Provider value={context}>
-    <PopoverChildren state={state}>{local.children}</PopoverChildren>
-  </PopoverContext.Provider>
+  const state = {
+    get open() {
+      return context.snapshot().open
+    },
+    close: context.overlay.close,
+  }
+  return (
+    <PopoverContext.Provider value={context}>
+      <PopoverChildren state={state}>{local.children}</PopoverChildren>
+    </PopoverContext.Provider>
+  )
 }
 
 export { createPopover } from './create-popover'

@@ -1,11 +1,11 @@
 @for (value of visibleValues(); track label(value)) {
-<span tag
-  data-slot="date-picker-tag"
-  size="sm"
- 
-  (pointerdown)="$event.stopPropagation()"
- 
-  >{{ label(value) }}<button tagAction aria-label="移除标签" (click)="remove(value, $event)"></button></span>
+<span tag data-slot="date-picker-tag" size="sm" (pointerdown)="$event.stopPropagation()"
+  >{{ label(value) }}<button
+    tagAction
+    aria-label="移除标签"
+    (click)="remove(value, $event)"
+  ></button
+></span>
 } @if (overflowCount() > 0) {
 <span tag data-slot="date-picker-tag-overflow" size="sm">+{{ overflowCount() }}</span>
 }

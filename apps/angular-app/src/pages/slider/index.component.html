@@ -13,13 +13,13 @@
       <div card title="Basic" description="Uncontrolled slider uses defaultValue.">
         <div class="grid gap-1.5">
           <div
-            fexSliderPrimitive
+            sliderRoot
             defaultValue="32"
             aria-label="Volume"
-            (valueChange)="basicValue.set($event)"
+            (change)="basicValue.set($event.value)"
           >
-            <span fexSliderTrack><span fexSliderRange></span></span>
-            <span fexSliderThumb aria-label="Volume"></span>
+            <span sliderTrack><span sliderRange></span></span>
+            <span sliderThumb aria-label="Volume"></span>
           </div>
           <p class="text-sm text-muted-foreground">Current value: {{ basicValue().join(', ') }}</p>
         </div>
@@ -27,13 +27,13 @@
       <div card title="Controlled" description="Controlled slider uses value and valueChange.">
         <div class="grid gap-1.5">
           <div
-            fexSliderPrimitive
+            sliderRoot
             [value]="controlledValue()"
             aria-label="Controlled slider"
-            (valueChange)="controlledValue.set($event)"
+            (change)="controlledValue.set($event.value)"
           >
-            <span fexSliderTrack><span fexSliderRange></span></span>
-            <span fexSliderThumb aria-label="Controlled slider"></span>
+            <span sliderTrack><span sliderRange></span></span>
+            <span sliderThumb aria-label="Controlled slider"></span>
           </div>
           <p class="text-sm text-muted-foreground">
             Current value: {{ controlledValue().join(', ') }}
@@ -43,84 +43,81 @@
       <div card title="Range" description="Use an array with two values for a range slider.">
         <div class="grid gap-1.5">
           <div
-            fexSliderPrimitive
+            sliderRoot
             defaultValue="20,80"
             minStepsBetweenThumbs="4"
             aria-label="Range slider"
-            (valueChange)="rangeValue.set($event)"
+            (change)="rangeValue.set($event.value)"
           >
-            <span fexSliderTrack><span fexSliderRange></span></span>
-            <span fexSliderThumb index="0" aria-label="Minimum value"></span>
-            <span fexSliderThumb index="1" aria-label="Maximum value"></span>
+            <span sliderTrack><span sliderRange></span></span>
+            <span sliderThumb index="0" aria-label="Minimum value"></span>
+            <span sliderThumb index="1" aria-label="Maximum value"></span>
           </div>
           <p class="text-sm text-muted-foreground">Current value: {{ rangeValue().join(', ') }}</p>
         </div>
       </div>
-      <div card
+      <div
+        card
         title="Multiple Thumbs"
         description="Use more than two values to create multiple thumbs."
       >
         <div class="grid gap-1.5">
           <div
-            fexSliderPrimitive
+            sliderRoot
             defaultValue="15,45,75"
             minStepsBetweenThumbs="4"
             aria-label="Multiple thumbs slider"
-            (valueChange)="multipleValue.set($event)"
+            (change)="multipleValue.set($event.value)"
           >
-            <span fexSliderTrack><span fexSliderRange></span></span>
-            <span fexSliderThumb index="0" aria-label="First value"></span>
-            <span fexSliderThumb index="1" aria-label="Second value"></span>
-            <span fexSliderThumb index="2" aria-label="Third value"></span>
+            <span sliderTrack><span sliderRange></span></span>
+            <span sliderThumb index="0" aria-label="First value"></span>
+            <span sliderThumb index="1" aria-label="Second value"></span>
+            <span sliderThumb index="2" aria-label="Third value"></span>
           </div>
           <p class="text-sm text-muted-foreground">
             Current value: {{ multipleValue().join(', ') }}
           </p>
         </div>
       </div>
-      <div card
+      <div
+        card
         title="Orientation"
         description="Slider supports horizontal and vertical orientation."
       >
         <div class="flex items-center gap-4">
           <div class="w-full max-w-md">
-            <div fexSliderPrimitive defaultValue="45" aria-label="Horizontal slider">
-              <span fexSliderTrack><span fexSliderRange></span></span
-              ><span fexSliderThumb aria-label="Horizontal slider"></span>
+            <div sliderRoot defaultValue="45" aria-label="Horizontal slider">
+              <span sliderTrack><span sliderRange></span></span
+              ><span sliderThumb aria-label="Horizontal slider"></span>
             </div>
           </div>
-          <div
-            fexSliderPrimitive
-            orientation="vertical"
-            defaultValue="60"
-            aria-label="Vertical slider"
-          >
-            <span fexSliderTrack><span fexSliderRange></span></span
-            ><span fexSliderThumb aria-label="Vertical slider"></span>
+          <div sliderRoot orientation="vertical" defaultValue="60" aria-label="Vertical slider">
+            <span sliderTrack><span sliderRange></span></span
+            ><span sliderThumb aria-label="Vertical slider"></span>
           </div>
         </div>
       </div>
       <div card title="Sizes" description="Slider supports sm, md, and lg sizes.">
         <div class="grid gap-2">
-          <div fexSliderPrimitive size="sm" defaultValue="25" aria-label="Small slider">
-            <span fexSliderTrack><span fexSliderRange></span></span
-            ><span fexSliderThumb aria-label="Small slider"></span>
+          <div sliderRoot size="sm" defaultValue="25" aria-label="Small slider">
+            <span sliderTrack><span sliderRange></span></span
+            ><span sliderThumb aria-label="Small slider"></span>
           </div>
-          <div fexSliderPrimitive defaultValue="50" aria-label="Default slider">
-            <span fexSliderTrack><span fexSliderRange></span></span
-            ><span fexSliderThumb aria-label="Default slider"></span>
+          <div sliderRoot defaultValue="50" aria-label="Default slider">
+            <span sliderTrack><span sliderRange></span></span
+            ><span sliderThumb aria-label="Default slider"></span>
           </div>
-          <div fexSliderPrimitive size="lg" defaultValue="75" aria-label="Large slider">
-            <span fexSliderTrack><span fexSliderRange></span></span
-            ><span fexSliderThumb aria-label="Large slider"></span>
+          <div sliderRoot size="lg" defaultValue="75" aria-label="Large slider">
+            <span sliderTrack><span sliderRange></span></span
+            ><span sliderThumb aria-label="Large slider"></span>
           </div>
         </div>
       </div>
       <div card title="Disabled" description="Disabled state blocks input.">
         <div class="grid gap-1.5">
-          <div fexSliderPrimitive disabled defaultValue="60" aria-label="Disabled slider">
-            <span fexSliderTrack><span fexSliderRange></span></span
-            ><span fexSliderThumb aria-label="Disabled slider"></span>
+          <div sliderRoot disabled defaultValue="60" aria-label="Disabled slider">
+            <span sliderTrack><span sliderRange></span></span
+            ><span sliderThumb aria-label="Disabled slider"></span>
           </div>
           <p class="text-sm text-muted-foreground">Current value: 60</p>
         </div>

@@ -1,5 +1,15 @@
 import type { PopoverPortalOptions } from '@fex-design/core/popover/types'
-import { DestroyRef, Directive, effect, inject, input, TemplateRef, untracked, ViewContainerRef, type EmbeddedViewRef } from '@angular/core'
+import {
+  DestroyRef,
+  Directive,
+  effect,
+  inject,
+  input,
+  TemplateRef,
+  untracked,
+  ViewContainerRef,
+  type EmbeddedViewRef,
+} from '@angular/core'
 import { Popover } from './popover-root'
 
 /** TemplateRef is required so lazy content is not eagerly projected by Angular. */

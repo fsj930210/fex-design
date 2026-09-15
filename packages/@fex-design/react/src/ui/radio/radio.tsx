@@ -23,16 +23,33 @@ export interface RadioProps extends Omit<ComponentProps<typeof PrimitiveRadio>, 
   classNames?: RadioClassNames
   styles?: RadioStyles
 }
-export function Radio({ children, className, style, classNames, styles, id, ...props }: RadioProps) {
+export function Radio({
+  children,
+  className,
+  style,
+  classNames,
+  styles,
+  id,
+  ...props
+}: RadioProps) {
   const controlId = id ?? useId()
   return (
     <div
       className={cn(radioItemClassName, className, classNames?.root)}
       style={{ ...style, ...styles?.root }}
     >
-      <PrimitiveRadio {...props} id={controlId} className={classNames?.control} style={styles?.control} />
+      <PrimitiveRadio
+        {...props}
+        id={controlId}
+        className={classNames?.control}
+        style={styles?.control}
+      />
       {children !== undefined && (
-        <label htmlFor={controlId} className={cn(radioLabelClassName, classNames?.label)} style={styles?.label}>
+        <label
+          htmlFor={controlId}
+          className={cn(radioLabelClassName, classNames?.label)}
+          style={styles?.label}
+        >
           {children}
         </label>
       )}
@@ -67,7 +84,13 @@ export function RadioGroup({ options, children, ...props }: RadioGroupProps) {
 export interface RadioButtonGroupProps extends ComponentProps<typeof PrimitiveRadioGroup> {
   options?: readonly RadioOption[]
 }
-export function RadioButtonGroup({ options, children, className, orientation = 'horizontal', ...props }: RadioButtonGroupProps) {
+export function RadioButtonGroup({
+  options,
+  children,
+  className,
+  orientation = 'horizontal',
+  ...props
+}: RadioButtonGroupProps) {
   return (
     <PrimitiveRadioGroup {...props} orientation={orientation} className={cn('gap-0', className)}>
       {options?.map((option) => (

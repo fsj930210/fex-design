@@ -18,7 +18,12 @@ export interface CheckboxProps extends ParentProps<CheckboxControlProps> {
   class?: string
   indicator?: JSX.Element
   classNames?: { root?: string; control?: string; indicator?: string; label?: string }
-  styles?: { root?: JSX.CSSProperties; control?: JSX.CSSProperties; indicator?: JSX.CSSProperties; label?: JSX.CSSProperties }
+  styles?: {
+    root?: JSX.CSSProperties
+    control?: JSX.CSSProperties
+    indicator?: JSX.CSSProperties
+    label?: JSX.CSSProperties
+  }
 }
 export function Checkbox(props: CheckboxProps) {
   const [local, rest] = splitProps(props, [
@@ -55,7 +60,9 @@ export function Checkbox(props: CheckboxProps) {
         )}
       </CheckboxIndicator>
       {local.children !== undefined && (
-        <CheckboxLabel class={local.classNames?.label} style={local.styles?.label}>{local.children}</CheckboxLabel>
+        <CheckboxLabel class={local.classNames?.label} style={local.styles?.label}>
+          {local.children}
+        </CheckboxLabel>
       )}
     </CheckboxRoot>
   )

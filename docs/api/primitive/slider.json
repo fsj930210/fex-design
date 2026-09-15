@@ -1,0 +1,214 @@
+{
+  "name": "Slider",
+  "slug": "slider",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "可组合的 Slider Root、Track、Range、Thumb 和 Mark。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/slider",
+    "vue": "@fex-design/vue/primitive/slider",
+    "solid": "@fex-design/solid/primitive/slider",
+    "svelte": "@fex-design/svelte/primitive/slider",
+    "angular": "@fex-design/angular/primitive/slider"
+  },
+  "props": [],
+  "events": [],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "单值、受控与非受控 Slider，并区分 change 与 end。" },
+    { "id": "weight", "title": "权重分配", "description": "一个值派生左右占比，并为两侧使用不同颜色。" },
+    { "id": "range", "title": "范围与多节点", "description": "数组值自动生成多个 Thumb。" },
+    { "id": "disabled", "title": "禁用状态", "description": "整体禁用和按索引禁用 Thumb。" },
+    { "id": "draggable-range", "title": "范围可拖拽", "description": "整体移动由相邻 Thumb 界定的范围。" },
+    { "id": "editable", "title": "动态增删节点", "description": "配合 minCount 与 maxCount 约束节点数量。" },
+    { "id": "marks", "title": "动态刻度", "description": "展示 included、marks、dots 与 step=null 的组合。" },
+    { "id": "direction", "title": "方向", "description": "对照 horizontal、vertical、LTR、RTL 与 reverse。" },
+    { "id": "sizes", "title": "尺寸", "description": "对照 sm、md 与 lg 三种尺寸。" },
+    { "id": "css-variables", "title": "实例 CSS Variables", "description": "覆盖单个 Slider 的轨道、范围和 Thumb 变量。" }
+  ],
+  "components": [
+    {
+      "name": "SliderRoot",
+      "slug": "slider-root",
+      "layer": "primitive",
+      "status": "stable",
+      "nativeElement": "div",
+      "description": "Slider 的状态与交互根节点，继承原生 div 属性；组合 Track、Range、Thumb 和 Mark。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/slider",
+        "vue": "@fex-design/vue/primitive/slider",
+        "solid": "@fex-design/solid/primitive/slider",
+        "svelte": "@fex-design/svelte/primitive/slider",
+        "angular": "@fex-design/angular/primitive/slider"
+      },
+      "props": [
+        { "name": "value", "type": "readonly number[]", "description": "受控值。" },
+        { "name": "defaultValue", "type": "readonly number[]", "description": "非受控初始值。" },
+        { "name": "min", "type": "number", "default": 0, "description": "最小值。" },
+        { "name": "max", "type": "number", "default": 100, "description": "最大值。" },
+        {
+          "name": "step",
+          "type": "number | null",
+          "default": 1,
+          "description": "步长；null 时仅允许 marks、min、max。"
+        },
+        { "name": "marks", "type": "readonly number[]", "description": "离散合法值和 Mark 数值。" },
+        {
+          "name": "minStepsBetweenThumbs",
+          "type": "number",
+          "default": 0,
+          "description": "相邻 Thumb 至少间隔的 step 数。"
+        },
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "方向。"
+        },
+        { "name": "direction", "type": "'ltr' | 'rtl'", "default": "ltr", "description": "文字与键盘方向。" },
+        { "name": "reverse", "type": "boolean", "default": false, "description": "反转数值方向。" },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用全部交互。"
+        },
+        { "name": "disabledThumbs", "type": "readonly boolean[]", "description": "按索引禁用指定 Thumb。" },
+        {
+          "name": "keyboard",
+          "type": "boolean",
+          "default": true,
+          "description": "是否允许键盘改变值。"
+        },
+        {
+          "name": "draggableRange",
+          "type": "boolean",
+          "default": false,
+          "description": "允许整体拖动范围。"
+        },
+        {
+          "name": "editable",
+          "type": "boolean",
+          "default": false,
+          "description": "允许增加和删除节点。"
+        },
+        {
+          "name": "minCount",
+          "type": "number",
+          "default": 0,
+          "description": "editable 最少节点数。"
+        },
+        { "name": "maxCount", "type": "number", "description": "editable 最多节点数。" },
+        { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "md", "description": "尺寸。" },
+        { "name": "children", "type": "FrameworkNode", "description": "Track、Range、Thumb、Mark 或自定义组合内容。" }
+      ],
+      "events": [
+        { "name": "change", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "用户改变值时实时触发。" },
+        { "name": "end", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "一次指针或键盘交互结束后触发。" }
+      ],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "events": [{ "name": "onChange", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "值变化时实时触发。" }, { "name": "onEnd", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "一次交互结束后触发。" }], "slots": [] },
+        "vue": { "omitProps": ["children"], "events": [{ "name": "change", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "值变化时实时触发。" }, { "name": "end", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "一次交互结束后触发。" }], "slots": [{ "name": "default", "description": "Track、Range、Thumb、Mark 或自定义组合内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "events": [{ "name": "onChange", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "值变化时实时触发。" }, { "name": "onEnd", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "一次交互结束后触发。" }], "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "events": [{ "name": "onChange", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "值变化时实时触发。" }, { "name": "onEnd", "parameters": [{ "name": "value", "type": "number[]" }, { "name": "meta", "type": "SliderChangeMeta" }], "description": "一次交互结束后触发。" }], "slots": [] },
+        "angular": { "omitProps": ["children"], "events": [{ "name": "change", "parameters": [{ "name": "event", "type": "{ value: number[]; meta: SliderChangeMeta }" }], "description": "值变化时输出 value 与 meta。" }, { "name": "end", "parameters": [{ "name": "event", "type": "{ value: number[]; meta: SliderChangeMeta }" }], "description": "一次交互结束后输出 value 与 meta。" }], "slotLabel": "内容投影", "slots": [{ "name": "默认内容", "description": "Track、Range、Thumb、Mark 或自定义组合内容。" }] }
+      }
+    },
+    {
+      "name": "SliderTrack",
+      "slug": "slider-track",
+      "layer": "primitive",
+      "status": "stable",
+      "nativeElement": "span",
+      "description": "完整轨道容器，继承原生 span 属性；通常承载 SliderRange 和 SliderMark。",
+      "importPath": { "react": "@fex-design/react/primitive/slider", "vue": "@fex-design/vue/primitive/slider", "solid": "@fex-design/solid/primitive/slider", "svelte": "@fex-design/svelte/primitive/slider", "angular": "@fex-design/angular/primitive/slider" },
+      "props": [{ "name": "data-slot", "type": "'slider-track'", "default": "slider-track", "description": "稳定的轨道部件标识。" }, { "name": "children", "type": "FrameworkNode", "description": "SliderRange、SliderMark 或自定义轨道内容。" }],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "SliderRange、SliderMark 或自定义轨道内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slotLabel": "内容投影", "slots": [{ "name": "默认内容", "description": "SliderRange、SliderMark 或自定义轨道内容。" }] }
+      }
+    },
+    {
+      "name": "SliderRange",
+      "slug": "slider-range",
+      "layer": "primitive",
+      "status": "stable",
+      "nativeElement": "span",
+      "description": "由当前值自动定位的选中范围，继承原生 span 属性，无需传入位置。",
+      "importPath": { "react": "@fex-design/react/primitive/slider", "vue": "@fex-design/vue/primitive/slider", "solid": "@fex-design/solid/primitive/slider", "svelte": "@fex-design/svelte/primitive/slider", "angular": "@fex-design/angular/primitive/slider" },
+      "props": [{ "name": "data-slot", "type": "'slider-range'", "default": "slider-range", "description": "稳定的范围部件标识。" }],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "SliderThumb",
+      "slug": "slider-thumb",
+      "layer": "primitive",
+      "status": "stable",
+      "nativeElement": "span",
+      "description": "对应 values 中一个值的可拖动节点，输出原生 slider ARIA 属性并继承 span 属性。",
+      "importPath": { "react": "@fex-design/react/primitive/slider", "vue": "@fex-design/vue/primitive/slider", "solid": "@fex-design/solid/primitive/slider", "svelte": "@fex-design/svelte/primitive/slider", "angular": "@fex-design/angular/primitive/slider" },
+      "props": [
+        { "name": "index", "type": "number", "default": 0, "description": "对应 values 索引。" },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": false,
+          "description": "禁用当前 Thumb。"
+        },
+        { "name": "data-slot", "type": "'slider-thumb'", "default": "slider-thumb", "description": "稳定的节点部件标识。" },
+        { "name": "children", "type": "FrameworkNode", "description": "可选的 Thumb 内部内容。" }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "可选的 Thumb 内部内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slotLabel": "内容投影", "slots": [{ "name": "默认内容", "description": "可选的 Thumb 内部内容。" }] }
+      }
+    },
+    {
+      "name": "SliderMark",
+      "slug": "slider-mark",
+      "layer": "primitive",
+      "status": "stable",
+      "nativeElement": "span",
+      "description": "按 value 自动定位并响应 Root 状态更新的刻度，继承原生 span 属性。",
+      "importPath": { "react": "@fex-design/react/primitive/slider", "vue": "@fex-design/vue/primitive/slider", "solid": "@fex-design/solid/primitive/slider", "svelte": "@fex-design/svelte/primitive/slider", "angular": "@fex-design/angular/primitive/slider" },
+      "props": [
+        { "name": "value", "type": "number", "description": "刻度对应值；Root 的值变化时位置和 active 状态会同步更新。" },
+        { "name": "data-slot", "type": "'slider-mark'", "default": "slider-mark", "description": "稳定的刻度部件标识。" },
+        { "name": "children", "type": "FrameworkNode", "description": "刻度标签内容。" }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "frameworks": {
+        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "vue": { "omitProps": ["children"], "slots": [{ "name": "default", "description": "刻度标签内容。" }] },
+        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
+        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "angular": { "omitProps": ["children"], "slotLabel": "内容投影", "slots": [{ "name": "默认内容", "description": "刻度标签内容。" }] }
+      }
+    }
+  ],
+  "cssVariables": [
+    { "name": "--slider-track-height", "description": "轨道厚度。" },
+    { "name": "--slider-track-background", "description": "轨道背景。" },
+    { "name": "--slider-range-background", "description": "范围背景。" },
+    { "name": "--slider-thumb-size", "description": "Thumb 尺寸。" },
+    { "name": "--slider-thumb-background", "description": "Thumb 背景。" },
+    { "name": "--slider-thumb-border-color", "description": "Thumb 边框。" }
+  ]
+}

@@ -51,10 +51,7 @@
         </div>
       </ng-template>
 
-      <div card
-        title="Spacing"
-        description="通过 --card-spacing 自定义卡片间距。"
-      >
+      <div card title="Spacing" description="通过 --card-spacing 自定义卡片间距。">
         <div class="flex flex-wrap gap-1.5">
           @for (option of spacingOptions; track option.value) {
             <button
@@ -73,7 +70,8 @@
           }
         </div>
         <div class="mt-4 flex justify-center">
-          <div card
+          <div
+            card
             class="w-full max-w-md"
             title="Login to your account"
             description="Enter your email below to login to your account"
@@ -103,7 +101,8 @@
         </div>
       </div>
 
-      <div card
+      <div
+        card
         title="With Footer"
         description="需要底部操作区时使用 footer。"
         [footer]="footerTemplate"

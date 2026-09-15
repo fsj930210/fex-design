@@ -1,7 +1,7 @@
 <script lang="ts">
   import ChevronRight from "@fex-design/svelte/icon/chevron-right";
   import Trash from "@fex-design/svelte/icon/trash";
-  import { SwitchRoot, SwitchThumb } from '@fex-design/svelte/primitive/switch'
+  import { SwitchRoot, SwitchThumb } from "@fex-design/svelte/primitive/switch";
   import Transfer from "@fex-design/svelte/primitive/transfer";
   import Button from "@fex-design/svelte/ui/button";
   import Card from "@fex-design/svelte/ui/card";
@@ -49,9 +49,7 @@
             </div>{/each}
         </div>{/snippet}</Transfer
     ><label class="flex w-fit items-center gap-2 text-sm text-muted-foreground"
-      ><SwitchRoot
-        checked={disabled}
-        onChange={(value) => (disabled = value)}
+      ><SwitchRoot checked={disabled} onChange={(value) => (disabled = value)}
         >{#snippet children()}<SwitchThumb />{/snippet}</SwitchRoot
       >Disabled</label
     >

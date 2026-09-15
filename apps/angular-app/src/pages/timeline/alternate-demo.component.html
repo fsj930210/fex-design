@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Alternate"
   description="Items automatically alternate around a centered vertical axis."
-  ><fex-timeline align="alternate">
+>
+  <fex-timeline align="alternate">
     @for (label of labels; track label; let index = $index) {
       <fex-timeline-item [status]="index < 3 ? 'completed' : 'current'"
         ><fex-timeline-opposite>Day {{ index + 1 }}</fex-timeline-opposite
@@ -10,4 +12,5 @@
         }}</fex-timeline-content></fex-timeline-item
       >
     }
-  </fex-timeline></div>
+  </fex-timeline>
+</div>

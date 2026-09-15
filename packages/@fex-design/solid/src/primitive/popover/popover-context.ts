@@ -1,7 +1,6 @@
 import { createContext, useContext, type Accessor } from 'solid-js'
 import type { PopoverController } from '@fex-design/core/popover/create-popover'
 export interface PopoverContextValue {
-
   arrowElement: { current: HTMLElement | null }
   contentElement: { current: HTMLElement | null }
   overlay: PopoverController

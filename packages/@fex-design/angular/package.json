@@ -94,6 +94,7 @@
     "./ui/spinner": "./src/ui/spinner/spinner.ts",
     "./ui/skeleton": "./src/ui/skeleton/skeleton.ts",
     "./ui/switch": "./src/ui/switch/switch.ts",
+    "./ui/slider": "./src/ui/slider/slider.ts",
     "./ui/tag": "./src/ui/tag/tag.ts",
     "./icon/check": "./src/icon/check.ts",
     "./icon/circle-check": "./src/icon/circle-check.ts",

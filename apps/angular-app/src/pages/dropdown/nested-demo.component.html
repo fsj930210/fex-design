@@ -15,7 +15,13 @@
                   ><fex-menu-list class="space-y-0.5"
                     ><button fexMenuItem [class]="itemClassName">PDF</button
                     ><button fexMenuItem [class]="itemClassName">Spreadsheet</button>
-                    <div popoverRoot [trigger]="['hover']" side="right" align="start" [sideOffset]="6">
+                    <div
+                      popoverRoot
+                      [trigger]="['hover']"
+                      side="right"
+                      align="start"
+                      [sideOffset]="6"
+                    >
                       <button fexMenuItem popoverTrigger [class]="itemClassName">
                         More formats <fex-chevron-right-icon class="size-4" />
                       </button>
@@ -29,13 +35,16 @@
                               </button></fex-menu-list
                             ></fex-menu-root
                           ></fex-dropdown-content
-                        ></ng-template>
+                        ></ng-template
+                      >
                     </div>
                   </fex-menu-list></fex-menu-root
                 ></fex-dropdown-content
-              ></ng-template>
+              ></ng-template
+            >
           </div>
         </fex-menu-list></fex-menu-root
       ></fex-dropdown-content
-    ></ng-template></fex-dropdown
+    ></ng-template
+  ></fex-dropdown
 >

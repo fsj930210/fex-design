@@ -1,4 +1,5 @@
-<div card
+<div
+  card
   title="Custom Config"
   description="Adjust content, font, layering, rotation, gap, and offset."
 >
@@ -19,43 +20,43 @@
       <label class="grid gap-1.5 text-sm text-foreground">
         <span>FontSize: {{ fontSize() }}</span>
         <div
-          fexSliderPrimitive
+          sliderRoot
           [value]="[fontSize()]"
           min="12"
           max="42"
           aria-label="FontSize"
-          (valueChange)="fontSize.set($event[0] ?? fontSize())"
+          (change)="fontSize.set($event.value[0] ?? fontSize())"
         >
-          <span fexSliderTrack><span fexSliderRange></span></span>
-          <span fexSliderThumb aria-label="FontSize"></span>
+          <span sliderTrack><span sliderRange></span></span>
+          <span sliderThumb aria-label="FontSize"></span>
         </div>
       </label>
       <label class="grid gap-1.5 text-sm text-foreground">
         <span>ZIndex: {{ zIndex() }}</span>
         <div
-          fexSliderPrimitive
+          sliderRoot
           [value]="[zIndex()]"
           min="1"
           max="20"
           aria-label="ZIndex"
-          (valueChange)="zIndex.set($event[0] ?? zIndex())"
+          (change)="zIndex.set($event.value[0] ?? zIndex())"
         >
-          <span fexSliderTrack><span fexSliderRange></span></span>
-          <span fexSliderThumb aria-label="ZIndex"></span>
+          <span sliderTrack><span sliderRange></span></span>
+          <span sliderThumb aria-label="ZIndex"></span>
         </div>
       </label>
       <label class="grid gap-1.5 text-sm text-foreground">
         <span>Rotate: {{ rotate() }}</span>
         <div
-          fexSliderPrimitive
+          sliderRoot
           [value]="[rotate()]"
           min="-45"
           max="45"
           aria-label="Rotate"
-          (valueChange)="rotate.set($event[0] ?? rotate())"
+          (change)="rotate.set($event.value[0] ?? rotate())"
         >
-          <span fexSliderTrack><span fexSliderRange></span></span>
-          <span fexSliderThumb aria-label="Rotate"></span>
+          <span sliderTrack><span sliderRange></span></span>
+          <span sliderThumb aria-label="Rotate"></span>
         </div>
       </label>
       <div class="grid grid-cols-2 gap-1.5">

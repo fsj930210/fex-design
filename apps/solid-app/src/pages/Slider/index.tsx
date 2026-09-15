@@ -31,7 +31,7 @@ export function SliderPage() {
         <div class="space-y-4">
           <Card title="Basic" description="Uncontrolled slider uses defaultValue.">
             <div class="grid gap-1.5">
-              <SliderRoot defaultValue={[32]} aria-label="Volume" onValueChange={setBasicValue}>
+              <SliderRoot defaultValue={[32]} aria-label="Volume" onChange={setBasicValue}>
                 <SliderTrack>
                   <SliderRange />
                 </SliderTrack>
@@ -44,7 +44,7 @@ export function SliderPage() {
             <div class="grid gap-1.5">
               <SliderRoot
                 value={controlledValue()}
-                onValueChange={setControlledValue}
+                onChange={setControlledValue}
                 aria-label="Controlled slider"
               >
                 <SliderTrack>
@@ -63,7 +63,7 @@ export function SliderPage() {
                 defaultValue={[20, 80]}
                 minStepsBetweenThumbs={4}
                 aria-label="Range slider"
-                onValueChange={setRangeValue}
+                onChange={setRangeValue}
               >
                 <SliderTrack>
                   <SliderRange />
@@ -83,7 +83,7 @@ export function SliderPage() {
                 defaultValue={[15, 45, 75]}
                 minStepsBetweenThumbs={4}
                 aria-label="Multiple thumbs slider"
-                onValueChange={setMultipleValue}
+                onChange={setMultipleValue}
               >
                 <SliderTrack>
                   <SliderRange />

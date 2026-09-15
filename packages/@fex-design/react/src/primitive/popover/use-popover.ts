@@ -39,18 +39,21 @@ function toEventInfo(
   }
 }
 
-export function usePopoverTrigger({
-  ref,
-  onClick,
-  onPointerEnter,
-  onPointerLeave,
-  onMouseEnter,
-  onMouseLeave,
-  onFocus,
-  onBlur,
-  onContextMenu,
-  ...props
-}: UsePopoverTriggerProps, binding?: PopoverContextValue) {
+export function usePopoverTrigger(
+  {
+    ref,
+    onClick,
+    onPointerEnter,
+    onPointerLeave,
+    onMouseEnter,
+    onMouseLeave,
+    onFocus,
+    onBlur,
+    onContextMenu,
+    ...props
+  }: UsePopoverTriggerProps,
+  binding?: PopoverContextValue,
+) {
   const { overlay, triggerRef } = usePopoverContext('usePopoverTrigger', binding)
   const open = useCoreStoreSelector(overlay, selectOpen)
   const setReference = useMemoizedFn((element: HTMLButtonElement | null) => {
@@ -128,15 +131,18 @@ export function usePopoverTrigger({
   return { props: triggerProps, open }
 }
 
-export function usePopoverContent({
-  ref,
-  className,
-  style,
-  onPointerEnter,
-  onPointerLeave,
-  onKeyDown,
-  ...props
-}: PopoverContentProps, binding?: PopoverContextValue) {
+export function usePopoverContent(
+  {
+    ref,
+    className,
+    style,
+    onPointerEnter,
+    onPointerLeave,
+    onKeyDown,
+    ...props
+  }: PopoverContentProps,
+  binding?: PopoverContextValue,
+) {
   const { overlay } = usePopoverContext('usePopoverContent', binding)
   const snapshot = useCoreStoreSelector(overlay, selectContent, shallowEqualObject)
   const setContentElement = useMemoizedFn((element: HTMLDivElement | null) =>
@@ -181,7 +187,10 @@ export function usePopoverContent({
   }
 }
 
-export function usePopoverArrow({ ref, className, style, ...props }: PopoverArrowProps, binding?: PopoverContextValue) {
+export function usePopoverArrow(
+  { ref, className, style, ...props }: PopoverArrowProps,
+  binding?: PopoverContextValue,
+) {
   const { arrowRef, overlay } = usePopoverContext('usePopoverArrow', binding)
   const { arrow, side } = useCoreStoreSelector(overlay, selectArrow, shallowEqualObject)
   const setArrowElement = useMemoizedFn((element: HTMLDivElement | null) => {

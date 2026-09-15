@@ -1,1 +1,25 @@
-<div class="grid gap-3"><div checkboxRoot><input checkboxControl type="checkbox" [checked]="all()" [indeterminate]="partial()" (change)="toggleAll($event)"><span checkboxIndicator></span><label checkboxLabel>全部权限</label></div><div checkboxGroup [value]="selected()" (change)="groupChange($event)"><div checkboxRoot><input checkboxControl type="checkbox" value="read"><span checkboxIndicator></span><label checkboxLabel>读取</label></div><div checkboxRoot><input checkboxControl type="checkbox" value="write"><span checkboxIndicator></span><label checkboxLabel>编辑</label></div><div checkboxRoot><input checkboxControl type="checkbox" value="publish"><span checkboxIndicator></span><label checkboxLabel>发布</label></div></div></div>
+<div class="grid gap-3">
+  <div checkboxRoot>
+    <input
+      checkboxControl
+      type="checkbox"
+      [checked]="all()"
+      [indeterminate]="partial()"
+      (change)="toggleAll($event)"
+    /><span checkboxIndicator></span><label checkboxLabel>全部权限</label>
+  </div>
+  <div checkboxGroup [value]="selected()" (change)="groupChange($event)">
+    <div checkboxRoot>
+      <input checkboxControl type="checkbox" value="read" /><span checkboxIndicator></span
+      ><label checkboxLabel>读取</label>
+    </div>
+    <div checkboxRoot>
+      <input checkboxControl type="checkbox" value="write" /><span checkboxIndicator></span
+      ><label checkboxLabel>编辑</label>
+    </div>
+    <div checkboxRoot>
+      <input checkboxControl type="checkbox" value="publish" /><span checkboxIndicator></span
+      ><label checkboxLabel>发布</label>
+    </div>
+  </div>
+</div>

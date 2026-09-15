@@ -20,12 +20,45 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             <For each={value().props}>
               {(property) => (
                 <div class="grid grid-cols-[120px_1.4fr_90px_2fr] items-start gap-3.5 border-t border-border px-4 py-3.25 text-[13px] max-[720px]:grid-cols-[90px_1fr] max-[720px]:[&>:nth-child(n+3)]:hidden">
-                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">{property.name}</code>
-                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">{property.type}</code>
+                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
+                    {property.name}
+                  </code>
+                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
+                    {property.type}
+                  </code>
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
                     {String(property.default ?? '—')}
                   </code>
                   <span>{property.description}</span>
+                </div>
+              )}
+            </For>
+          </div>
+        </section>
+      </Show>
+      <Show when={value().events.length > 0}>
+        <section>
+          <h4 class="mb-2 text-sm font-semibold">事件</h4>
+          <div class="overflow-hidden rounded-lg border border-border">
+            <div class="grid grid-cols-[120px_1.4fr_2fr] items-start gap-3.5 bg-muted-background px-4 py-3.25 text-[13px] font-semibold text-secondary-foreground max-[720px]:grid-cols-[90px_1fr] max-[720px]:[&>:nth-child(3)]:hidden">
+              <span>事件</span>
+              <span>参数</span>
+              <span>说明</span>
+            </div>
+            <For each={value().events}>
+              {(event) => (
+                <div class="grid grid-cols-[120px_1.4fr_2fr] items-start gap-3.5 border-t border-border px-4 py-3.25 text-[13px] max-[720px]:grid-cols-[90px_1fr] max-[720px]:[&>:nth-child(3)]:hidden">
+                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
+                    {event.name}
+                  </code>
+                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
+                    {event.parameters.length > 0
+                      ? event.parameters
+                          .map((parameter) => `${parameter.name}: ${parameter.type}`)
+                          .join('\n')
+                      : '—'}
+                  </code>
+                  <span>{event.description}</span>
                 </div>
               )}
             </For>
@@ -43,7 +76,9 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             <For each={value().slots}>
               {(slot) => (
                 <div class="grid grid-cols-[120px_1fr] gap-3.5 border-t border-border px-4 py-3.25 text-[13px]">
-                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">{slot.name}</code>
+                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
+                    {slot.name}
+                  </code>
                   <span>{slot.description}</span>
                 </div>
               )}

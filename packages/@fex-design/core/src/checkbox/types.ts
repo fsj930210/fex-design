@@ -4,7 +4,6 @@ export type CheckboxCheckedState = boolean | 'indeterminate'
 
 export type CheckboxValue = string | number
 
-
 export interface CheckboxGroupSnapshot {
   value: CheckboxValue[]
   disabled: boolean

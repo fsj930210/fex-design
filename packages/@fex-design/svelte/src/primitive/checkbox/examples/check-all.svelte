@@ -1,5 +1,38 @@
 <script lang="ts">
-  import { CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxLabel, CheckboxGroup } from '@fex-design/svelte/primitive/checkbox';
-  const values = ['read','write','publish']; let selected = $state(['read']); const all = $derived(selected.length === values.length); const partial = $derived(selected.length > 0 && !all);
+  import {
+    CheckboxRoot,
+    CheckboxControl,
+    CheckboxIndicator,
+    CheckboxLabel,
+    CheckboxGroup,
+  } from "@fex-design/svelte/primitive/checkbox";
+  const values = ["read", "write", "publish"];
+  let selected = $state(["read"]);
+  const all = $derived(selected.length === values.length);
+  const partial = $derived(selected.length > 0 && !all);
 </script>
-<div class="grid gap-3"><CheckboxRoot><CheckboxControl checked={all} indeterminate={partial} onchange={(event) => selected = event.currentTarget.checked ? [...values] : []} /><CheckboxIndicator /><CheckboxLabel>全部权限</CheckboxLabel></CheckboxRoot><CheckboxGroup value={selected} onChange={(value) => selected = value}><CheckboxRoot><CheckboxControl value="read" /><CheckboxIndicator /><CheckboxLabel>读取</CheckboxLabel></CheckboxRoot><CheckboxRoot><CheckboxControl value="write" /><CheckboxIndicator /><CheckboxLabel>编辑</CheckboxLabel></CheckboxRoot><CheckboxRoot><CheckboxControl value="publish" /><CheckboxIndicator /><CheckboxLabel>发布</CheckboxLabel></CheckboxRoot></CheckboxGroup></div>
+
+<div class="grid gap-3">
+  <CheckboxRoot
+    ><CheckboxControl
+      checked={all}
+      indeterminate={partial}
+      onchange={(event) =>
+        (selected = event.currentTarget.checked ? [...values] : [])}
+    /><CheckboxIndicator /><CheckboxLabel>全部权限</CheckboxLabel></CheckboxRoot
+  ><CheckboxGroup value={selected} onChange={(value) => (selected = value)}
+    ><CheckboxRoot
+      ><CheckboxControl value="read" /><CheckboxIndicator /><CheckboxLabel
+        >读取</CheckboxLabel
+      ></CheckboxRoot
+    ><CheckboxRoot
+      ><CheckboxControl value="write" /><CheckboxIndicator /><CheckboxLabel
+        >编辑</CheckboxLabel
+      ></CheckboxRoot
+    ><CheckboxRoot
+      ><CheckboxControl value="publish" /><CheckboxIndicator /><CheckboxLabel
+        >发布</CheckboxLabel
+      ></CheckboxRoot
+    ></CheckboxGroup
+  >
+</div>

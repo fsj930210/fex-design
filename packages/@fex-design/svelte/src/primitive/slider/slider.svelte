@@ -27,13 +27,32 @@
     defaultValue?: number[] | undefined;
     min?: number | undefined;
     max?: number | undefined;
-    step?: number | undefined;
+    step?: number | null | undefined;
+    marks?: number[] | undefined;
     minStepsBetweenThumbs?: number | undefined;
     orientation?: SliderOrientation | undefined;
+    direction?: "ltr" | "rtl" | undefined;
+    reverse?: boolean | undefined;
+    disabledThumbs?: boolean[] | undefined;
+    keyboard?: boolean | undefined;
+    draggableRange?: boolean | undefined;
+    editable?: boolean | undefined;
+    minCount?: number | undefined;
+    maxCount?: number | undefined;
     disabled?: boolean | undefined;
     children?: Snippet | undefined;
-    onValueChange?: ((value: number[]) => void) | undefined;
-    onValueCommit?: ((value: number[]) => void) | undefined;
+    onChange?:
+      | ((
+          value: number[],
+          meta: import("@fex-design/core/slider/types").SliderChangeMeta,
+        ) => void)
+      | undefined;
+    onEnd?:
+      | ((
+          value: number[],
+          meta: import("@fex-design/core/slider/types").SliderChangeMeta,
+        ) => void)
+      | undefined;
   }
 
   let {
@@ -42,8 +61,17 @@
     min = 0,
     max = 100,
     step = 1,
+    marks = [],
     minStepsBetweenThumbs = 0,
     orientation = "horizontal",
+    direction,
+    reverse = false,
+    disabledThumbs = [],
+    keyboard = true,
+    draggableRange = false,
+    editable = false,
+    minCount = 0,
+    maxCount = Number.POSITIVE_INFINITY,
     disabled = false,
     size = "md",
     class: className,
@@ -51,12 +79,14 @@
     onpointerdown,
     onpointermove,
     onpointerup,
-    onValueChange,
-    onValueCommit,
+    onChange,
+    onEnd,
     ...rest
   }: SliderProps = $props();
 
   let rootElement: HTMLDivElement | undefined;
+  let dragRange = false;
+  let pointerOffset = 0;
   const options = {
     get value() {
       return value;
@@ -73,17 +103,44 @@
     get step() {
       return step;
     },
+    get marks() {
+      return marks;
+    },
     get minStepsBetweenThumbs() {
       return minStepsBetweenThumbs;
     },
     get orientation() {
       return orientation;
     },
+    get direction() {
+      return direction ?? (rest.dir === "rtl" ? "rtl" : "ltr");
+    },
+    get reverse() {
+      return reverse;
+    },
+    get disabledThumbs() {
+      return disabledThumbs;
+    },
+    get keyboard() {
+      return keyboard;
+    },
+    get draggableRange() {
+      return draggableRange;
+    },
+    get editable() {
+      return editable;
+    },
+    get minCount() {
+      return minCount;
+    },
+    get maxCount() {
+      return maxCount;
+    },
     get disabled() {
       return disabled;
     },
-    onChange: (nextValue: number[]) => onValueChange?.(nextValue),
-    onCommit: (nextValue: number[]) => onValueCommit?.(nextValue),
+    onChange: (nextValue, meta) => onChange?.(nextValue, meta),
+    onEnd: (nextValue, meta) => onEnd?.(nextValue, meta),
   };
   const controller = createSliderController(options);
   const storeSnapshot = readableCoreStore(controller);
@@ -102,8 +159,10 @@
 <div
   {...rest}
   bind:this={rootElement}
-  data-disabled={currentSnapshot.disabled ? "true" : undefined}
+  data-disabled={currentSnapshot.disabled || (currentSnapshot.disabledThumbs.length > 0 && currentSnapshot.disabledThumbs.every(Boolean)) ? "true" : undefined}
   data-orientation={currentSnapshot.orientation}
+  data-slot="slider"
+  data-reverse={currentSnapshot.reverse ? "" : undefined}
   class={cn(
     sliderRootClassName({ size, orientation: currentSnapshot.orientation }),
     className,
@@ -113,16 +172,41 @@
     if (event.defaultPrevented || currentSnapshot.disabled || !rootElement)
       return;
     rootElement.setPointerCapture(event.pointerId);
-    controller.startSlide(
-      getSliderValueFromPointer(
-        event.clientX,
-        event.clientY,
-        rootElement.getBoundingClientRect(),
-        currentSnapshot.min,
-        currentSnapshot.max,
-        currentSnapshot.orientation,
-      ),
+    const target = event.target as HTMLElement;
+    const nextValue = getSliderValueFromPointer(
+      event.clientX,
+      event.clientY,
+      rootElement.getBoundingClientRect(),
+      currentSnapshot.min,
+      currentSnapshot.max,
+      currentSnapshot.orientation,
+      currentSnapshot.direction,
+      currentSnapshot.reverse,
     );
+    const thumbIndex = Number(
+      target
+        .closest('[data-slot="slider-thumb"]')
+        ?.getAttribute("data-index"),
+    );
+    if (Number.isInteger(thumbIndex)) {
+      controller.setActiveIndex(thumbIndex);
+      pointerOffset = currentSnapshot.values[thumbIndex]! - nextValue;
+    } else pointerOffset = 0;
+    dragRange =
+      !!target.closest('[data-slot="slider-range"]') &&
+      currentSnapshot.draggableRange;
+    if (dragRange) controller.startRangeSlide(nextValue);
+    else if (
+      currentSnapshot.editable &&
+      !target.closest('[data-slot="slider-thumb"]')
+    )
+      controller.addValue(nextValue);
+    else
+      controller.startSlide(
+        Number.isInteger(thumbIndex)
+          ? currentSnapshot.values[thumbIndex]!
+          : nextValue,
+      );
   }}
   onpointermove={(event) => {
     onpointermove?.(event);
@@ -132,22 +216,34 @@
       !rootElement?.hasPointerCapture(event.pointerId)
     )
       return;
-    controller.moveSlide(
-      getSliderValueFromPointer(
-        event.clientX,
-        event.clientY,
-        rootElement.getBoundingClientRect(),
-        currentSnapshot.min,
-        currentSnapshot.max,
-        currentSnapshot.orientation,
-      ),
+    const nextValue = getSliderValueFromPointer(
+      event.clientX,
+      event.clientY,
+      rootElement.getBoundingClientRect(),
+      currentSnapshot.min,
+      currentSnapshot.max,
+      currentSnapshot.orientation,
+      currentSnapshot.direction,
+      currentSnapshot.reverse,
     );
+    dragRange
+      ? controller.moveRangeSlide(nextValue)
+      : controller.moveSlide(nextValue + pointerOffset);
   }}
   onpointerup={(event) => {
     onpointerup?.(event);
     if (!rootElement?.hasPointerCapture(event.pointerId)) return;
     rootElement.releasePointerCapture(event.pointerId);
     controller.endSlide();
+    dragRange = false;
+  }}
+  onpointercancel={() => {
+    dragRange = false;
+    controller.cancelSlide();
+  }}
+  onlostpointercapture={() => {
+    dragRange = false;
+    controller.cancelSlide();
   }}
 >
   {@render children?.()}

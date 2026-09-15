@@ -1,4 +1,45 @@
 import { Button } from '@fex-design/react/ui/button'
 import { Radio, RadioButton, RadioGroup, type RadioValue } from '@fex-design/react/ui/radio'
 import { useState } from 'react'
-export default function Example(){const [value,setValue]=useState<RadioValue>('pear');return <div className="grid gap-4"><div className="flex gap-2"><Button size="sm" onClick={()=>setValue('apple')}>选择苹果</Button><Button size="sm" onClick={()=>setValue('pear')}>选择梨</Button></div><section className="grid gap-2"><span>Radio</span><RadioGroup value={value} onValueChange={setValue} orientation="horizontal"><Radio value="apple">苹果</Radio><Radio value="pear">梨</Radio></RadioGroup><RadioGroup defaultValue="apple" orientation="horizontal"><Radio value="apple">非受控：苹果</Radio><Radio value="pear">非受控：梨</Radio></RadioGroup></section><section className="grid gap-2"><span>RadioButton</span><RadioGroup value={value} onValueChange={setValue} orientation="horizontal" className="gap-0"><RadioButton value="apple">苹果</RadioButton><RadioButton value="pear">梨</RadioButton></RadioGroup><RadioGroup defaultValue="apple" orientation="horizontal" className="gap-0"><RadioButton value="apple">非受控：苹果</RadioButton><RadioButton value="pear">非受控：梨</RadioButton></RadioGroup></section></div>}
+export default function Example() {
+  const [value, setValue] = useState<RadioValue>('pear')
+  return (
+    <div className="grid gap-4">
+      <div className="flex gap-2">
+        <Button size="sm" onClick={() => setValue('apple')}>
+          选择苹果
+        </Button>
+        <Button size="sm" onClick={() => setValue('pear')}>
+          选择梨
+        </Button>
+      </div>
+      <section className="grid gap-2">
+        <span>Radio</span>
+        <RadioGroup value={value} onValueChange={setValue} orientation="horizontal">
+          <Radio value="apple">苹果</Radio>
+          <Radio value="pear">梨</Radio>
+        </RadioGroup>
+        <RadioGroup defaultValue="apple" orientation="horizontal">
+          <Radio value="apple">非受控：苹果</Radio>
+          <Radio value="pear">非受控：梨</Radio>
+        </RadioGroup>
+      </section>
+      <section className="grid gap-2">
+        <span>RadioButton</span>
+        <RadioGroup
+          value={value}
+          onValueChange={setValue}
+          orientation="horizontal"
+          className="gap-0"
+        >
+          <RadioButton value="apple">苹果</RadioButton>
+          <RadioButton value="pear">梨</RadioButton>
+        </RadioGroup>
+        <RadioGroup defaultValue="apple" orientation="horizontal" className="gap-0">
+          <RadioButton value="apple">非受控：苹果</RadioButton>
+          <RadioButton value="pear">非受控：梨</RadioButton>
+        </RadioGroup>
+      </section>
+    </div>
+  )
+}

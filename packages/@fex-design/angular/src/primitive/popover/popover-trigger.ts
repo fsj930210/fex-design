@@ -1,12 +1,21 @@
-import { Directive, ElementRef, HostListener, inject, type AfterViewInit, type OnDestroy } from '@angular/core'
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  inject,
+  type AfterViewInit,
+  type OnDestroy,
+} from '@angular/core'
 import { Popover } from './popover-root'
 import { eventInfo } from './event-info'
 
 @Directive({
-  selector: 'button[popoverTrigger], input[popoverTrigger], div[popoverTrigger], span[popoverTrigger]',
+  selector:
+    'button[popoverTrigger], input[popoverTrigger], div[popoverTrigger], span[popoverTrigger]',
   standalone: true,
   host: {
-    '[attr.type]': "element.tagName === 'BUTTON' ? element.getAttribute('type') ?? 'button' : element.getAttribute('type')",
+    '[attr.type]':
+      "element.tagName === 'BUTTON' ? element.getAttribute('type') ?? 'button' : element.getAttribute('type')",
     'aria-haspopup': 'dialog',
     '[attr.aria-expanded]': 'popover.snapshot().open',
     '[attr.data-state]': "popover.snapshot().open ? 'open' : 'closed'",
@@ -68,4 +77,3 @@ export class PopoverTrigger implements AfterViewInit, OnDestroy {
     this.popover.overlay.trigger.contextMenu(eventInfo(event))
   }
 }
-

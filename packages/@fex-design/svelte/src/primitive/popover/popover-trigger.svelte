@@ -2,10 +2,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { getContext } from "svelte";
-  import {
-    popoverContextKey,
-    type PopoverContext,
-  } from "./popover-context";
+  import { popoverContextKey, type PopoverContext } from "./popover-context";
 
   type PopoverTriggerProps = Omit<HTMLButtonAttributes, "children"> & {
     children?: Snippet<
@@ -61,19 +58,29 @@
     "aria-expanded": $snapshot.open,
     "data-state": $snapshot.open ? "open" : "closed",
     onclick: (event: MouseEvent) => {
-      rest.onclick?.(event as MouseEvent & { currentTarget: HTMLButtonElement });
+      rest.onclick?.(
+        event as MouseEvent & { currentTarget: HTMLButtonElement },
+      );
       if (!event.defaultPrevented) overlay.trigger.click(eventInfo(event));
     },
     onpointerenter: (event: PointerEvent) => {
-      rest.onpointerenter?.(event as PointerEvent & { currentTarget: HTMLButtonElement });
-      if (!event.defaultPrevented) overlay.trigger.pointerEnter(eventInfo(event));
+      rest.onpointerenter?.(
+        event as PointerEvent & { currentTarget: HTMLButtonElement },
+      );
+      if (!event.defaultPrevented)
+        overlay.trigger.pointerEnter(eventInfo(event));
     },
     onpointerleave: (event: PointerEvent) => {
-      rest.onpointerleave?.(event as PointerEvent & { currentTarget: HTMLButtonElement });
-      if (!event.defaultPrevented) overlay.trigger.pointerLeave(eventInfo(event));
+      rest.onpointerleave?.(
+        event as PointerEvent & { currentTarget: HTMLButtonElement },
+      );
+      if (!event.defaultPrevented)
+        overlay.trigger.pointerLeave(eventInfo(event));
     },
     onfocus: (event: FocusEvent) => {
-      rest.onfocus?.(event as FocusEvent & { currentTarget: HTMLButtonElement });
+      rest.onfocus?.(
+        event as FocusEvent & { currentTarget: HTMLButtonElement },
+      );
       if (!event.defaultPrevented) overlay.trigger.focus(eventInfo(event));
     },
     onblur: (event: FocusEvent) => {
@@ -81,8 +88,11 @@
       if (!event.defaultPrevented) overlay.trigger.blur(eventInfo(event));
     },
     oncontextmenu: (event: MouseEvent) => {
-      rest.oncontextmenu?.(event as PointerEvent & { currentTarget: HTMLButtonElement });
-      if (!event.defaultPrevented) overlay.trigger.contextMenu(eventInfo(event));
+      rest.oncontextmenu?.(
+        event as PointerEvent & { currentTarget: HTMLButtonElement },
+      );
+      if (!event.defaultPrevented)
+        overlay.trigger.contextMenu(eventInfo(event));
     },
   } satisfies HTMLButtonAttributes);
 </script>

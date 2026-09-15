@@ -119,7 +119,6 @@ export class AutoCompleteRoot implements OnChanges {
       onSelect: (value, meta) => root.select.emit({ value, meta }),
       onClear: (meta) => root.clear.emit(meta),
       onOpenChange: (open, meta) => {
-
         root.popover.syncOptions()
         root.openChange.emit({ open, meta })
       },
@@ -129,7 +128,9 @@ export class AutoCompleteRoot implements OnChanges {
     this.refreshSnapshot = snapshotBinding.refresh
 
     this.popover.connectOptions(() => ({
-      trigger: [], open: this.snapshot().open, defaultOpen: this.defaultOpen,
+      trigger: [],
+      open: this.snapshot().open,
+      defaultOpen: this.defaultOpen,
     }))
     this.popover.syncOptions()
     const subscription = this.popover.openChange.subscribe((open) =>

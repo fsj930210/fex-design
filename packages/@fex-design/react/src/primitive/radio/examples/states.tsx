@@ -1,2 +1,34 @@
 import { Radio, RadioButton, RadioGroup } from '@fex-design/react/primitive/radio'
-export default function Example(){return <div className="grid gap-4"><section className="grid gap-2"><span>Radio</span><RadioGroup defaultValue="checked" orientation="horizontal"><label className="inline-flex items-center gap-2"><Radio value="empty"/>未选中</label><label className="inline-flex items-center gap-2"><Radio value="checked"/>已选中</label><label className="inline-flex items-center gap-2"><Radio value="disabled" disabled/>禁用</label></RadioGroup></section><section className="grid gap-2"><span>RadioButton</span><RadioGroup defaultValue="checked" orientation="horizontal" className="gap-0"><RadioButton value="empty">未选中</RadioButton><RadioButton value="checked">已选中</RadioButton><RadioButton value="disabled" disabled>禁用</RadioButton></RadioGroup></section></div>}
+export default function Example() {
+  return (
+    <div className="grid gap-4">
+      <section className="grid gap-2">
+        <span>Radio</span>
+        <RadioGroup defaultValue="checked" orientation="horizontal">
+          <label className="inline-flex items-center gap-2">
+            <Radio value="empty" />
+            未选中
+          </label>
+          <label className="inline-flex items-center gap-2">
+            <Radio value="checked" />
+            已选中
+          </label>
+          <label className="inline-flex items-center gap-2">
+            <Radio value="disabled" disabled />
+            禁用
+          </label>
+        </RadioGroup>
+      </section>
+      <section className="grid gap-2">
+        <span>RadioButton</span>
+        <RadioGroup defaultValue="checked" orientation="horizontal" className="gap-0">
+          <RadioButton value="empty">未选中</RadioButton>
+          <RadioButton value="checked">已选中</RadioButton>
+          <RadioButton value="disabled" disabled>
+            禁用
+          </RadioButton>
+        </RadioGroup>
+      </section>
+    </div>
+  )
+}

@@ -1,7 +1,8 @@
 import type { DisclosureReason } from '../disclosure/create-disclosure'
 
 let nextContentId = 0
-const focusable = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+const focusable =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 /** Shared DOM accessibility; framework adapters only register their real nodes. */
 export function createPopoverAccessibility(isOpen: () => boolean) {
@@ -23,7 +24,8 @@ export function createPopoverAccessibility(isOpen: () => boolean) {
       if (previous && current === previous) content.removeAttribute(attribute)
       return null
     }
-    if (!part.id) part.id = `${content.id}-${attribute === 'aria-labelledby' ? 'title' : 'description'}`
+    if (!part.id)
+      part.id = `${content.id}-${attribute === 'aria-labelledby' ? 'title' : 'description'}`
     if (current !== part.id) content.setAttribute(attribute, part.id)
     return part.id
   }
@@ -33,7 +35,11 @@ export function createPopoverAccessibility(isOpen: () => boolean) {
     if (!content.id) content.id = `popover-content-${++nextContentId}`
     if (reference) reference.setAttribute('aria-controls', content.id)
     labelledBy = updateRelation('aria-labelledby', '[data-slot="popover-title"]', labelledBy)
-    describedBy = updateRelation('aria-describedby', '[data-slot="popover-description"]', describedBy)
+    describedBy = updateRelation(
+      'aria-describedby',
+      '[data-slot="popover-description"]',
+      describedBy,
+    )
   }
 
   function focusContent(reason: DisclosureReason) {
@@ -44,14 +50,17 @@ export function createPopoverAccessibility(isOpen: () => boolean) {
       if (!target || content !== target || !isOpen() || !target.isConnected) return
       if (target.getAttribute('role') !== 'dialog') return
       if (target.contains(target.ownerDocument.activeElement)) return
-      const first = Array.from(target.querySelectorAll<HTMLElement>(focusable))
-        .find((element) => !element.closest('[hidden], [inert]') && element.getClientRects().length > 0)
+      const first = Array.from(target.querySelectorAll<HTMLElement>(focusable)).find(
+        (element) => !element.closest('[hidden], [inert]') && element.getClientRects().length > 0,
+      )
       ;(first ?? target).focus({ preventScroll: true })
     })
   }
 
   return {
-    get restoringFocus() { return restoringFocus },
+    get restoringFocus() {
+      return restoringFocus
+    },
     setReference(element: HTMLElement | null) {
       reference = element
       syncRelations()
@@ -70,20 +79,38 @@ export function createPopoverAccessibility(isOpen: () => boolean) {
       const Observer = content.ownerDocument.defaultView?.MutationObserver
       if (Observer) {
         observer = new Observer(syncRelations)
-        observer.observe(content, { childList: true, subtree: true, attributes: true, attributeFilter: ['id'] })
+        observer.observe(content, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['id'],
+        })
       }
       if (isOpen()) focusContent(reason)
     },
     sync(reason: DisclosureReason, source?: string) {
       const open = isOpen()
       if (open && !wasOpen) focusContent(reason)
-      if (!open && wasOpen && content?.contains(content.ownerDocument.activeElement)
-        && reason !== 'outside-pointer' && source !== 'ancestor-close') {
+      if (
+        !open &&
+        wasOpen &&
+        content?.contains(content.ownerDocument.activeElement) &&
+        reason !== 'outside-pointer' &&
+        source !== 'ancestor-close'
+      ) {
         restoringFocus = true
-        try { reference?.focus({ preventScroll: true }) } finally { restoringFocus = false }
+        try {
+          reference?.focus({ preventScroll: true })
+        } finally {
+          restoringFocus = false
+        }
       }
       wasOpen = open
     },
-    destroy() { observer?.disconnect(); content = null; reference = null },
+    destroy() {
+      observer?.disconnect()
+      content = null
+      reference = null
+    },
   }
 }

@@ -16,4 +16,3 @@ export function PopoverTitle({ ref, className, ...props }: PopoverTitleProps) {
     />
   )
 }
-

@@ -1,4 +1,5 @@
-<div card
+<div
+  card
   title="渐变色"
   description="选择色标后编辑当前颜色；点击轨道新增色标，拖动色标调整位置，使用 OKLCH 插值。"
 >
@@ -11,26 +12,27 @@
         <span class="size-6 shrink-0 rounded" [style.background]="css()"></span>
         <span class="truncate">{{ label() }}</span>
       </button>
-      <ng-template popoverPortal><div popoverContent>
-        <fex-color-picker-root
-          [value]="selectedColor()"
-          format="rgb"
-          (change)="setSelectedColor($event.value)"
-        >
-          <div class="grid w-80 gap-3">
-            <div fexGradientPickerTrack>
-              @for (stop of gradient.snapshot().value.stops; track stop.id) {
-                <button
-                  fexGradientPickerStop
-                  [id]="stop.id"
-                  [attr.aria-label]="stop.position * 100 + '% color stop'"
-                ></button>
-              }
+      <ng-template popoverPortal
+        ><div popoverContent>
+          <fex-color-picker-root
+            [value]="selectedColor()"
+            format="rgb"
+            (change)="setSelectedColor($event.value)"
+          >
+            <div class="grid w-80 gap-3">
+              <div fexGradientPickerTrack>
+                @for (stop of gradient.snapshot().value.stops; track stop.id) {
+                  <button
+                    fexGradientPickerStop
+                    [id]="stop.id"
+                    [attr.aria-label]="stop.position * 100 + '% color stop'"
+                  ></button>
+                }
+              </div>
+              <fex-color-picker-panel-demo />
             </div>
-            <fex-color-picker-panel-demo />
-          </div>
-        </fex-color-picker-root>
-      </div></ng-template>
+          </fex-color-picker-root></div
+      ></ng-template>
     </div>
   </fex-gradient-picker-root>
 </div>

@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { Radio, RadioButton, RadioGroup, type RadioValue } from '@fex-design/angular/primitive/radio'
+import {
+  Radio,
+  RadioButton,
+  RadioGroup,
+  type RadioValue,
+} from '@fex-design/angular/primitive/radio'
 import { Button } from '@fex-design/angular/ui/button'
 
 @Component({

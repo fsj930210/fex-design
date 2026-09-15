@@ -47,10 +47,13 @@ function enter() {
     @click="cascader.controller.select(node.key)"
   >
     <slot :node="node" :state="state"
-      ><CheckboxRoot
-        v-if="cascader.multiple.value"
-        :disabled="node.disabled"
-        ><CheckboxControl :checked="state.checked" :indeterminate="state.indeterminate" :class="checkboxControlClassName" @click.stop @change="cascader.controller.toggleCheck(node.key)" /><CheckboxIndicator
+      ><CheckboxRoot v-if="cascader.multiple.value" :disabled="node.disabled"
+        ><CheckboxControl
+          :checked="state.checked"
+          :indeterminate="state.indeterminate"
+          :class="checkboxControlClassName"
+          @click.stop
+          @change="cascader.controller.toggleCheck(node.key)" /><CheckboxIndicator
           :class="checkboxIndicatorClassName"
           ><CheckIcon :class="checkboxCheckIconClassName" /><MinusIcon
             :class="checkboxMinusIconClassName" /></CheckboxIndicator></CheckboxRoot

@@ -1,0 +1,9 @@
+<div class="grid w-full max-w-xl gap-4">
+  <div sliderRoot [value]="value()" (change)="value.set($event.value)" (end)="ended.set($event.value)">
+    <span sliderTrack><span sliderRange></span></span><span sliderThumb aria-label="音量"></span>
+  </div>
+  <p>当前值：{{ value()[0] }}；结束值：{{ ended()[0] }}</p>
+  <div sliderRoot [defaultValue]="[60]" [keyboard]="false">
+    <span sliderTrack><span sliderRange></span></span><span sliderThumb></span>
+  </div>
+</div>

@@ -85,10 +85,12 @@
     ></fex-menu-root
   >
 </div>
-<div card
+<div
+  card
   title="Multiple Selection"
   description="The caller composes multiple selected items with the same primitive."
-  ><fex-menu-root [class]="rootClass"
+>
+  <fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass">
       @for (value of multipleItems; track value) {
         <button
@@ -103,9 +105,10 @@
         </button>
       }
     </fex-menu-list></fex-menu-root
-  ></div>
-<div card title="Suffix" description="Items accept arbitrary right-side content."
-  ><fex-menu-root [class]="rootClass"
+  >
+</div>
+<div card title="Suffix" description="Items accept arbitrary right-side content.">
+  <fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass"
       ><button fexMenuItem value="users" [class]="itemClass">
         <span class="flex-1">Users</span
@@ -118,9 +121,10 @@
         ><span class="rounded-md bg-primary/10 px-1.5 py-0.5 text-xs text-primary">new</span>
       </button></fex-menu-list
     ></fex-menu-root
-  ></div>
-<div card title="Custom Item" description="The directive binds menu behavior to custom DOM."
-  ><fex-menu-root [class]="rootClass"
+  >
+</div>
+<div card title="Custom Item" description="The directive binds menu behavior to custom DOM.">
+  <fex-menu-root [class]="rootClass"
     ><fex-menu-list [class]="listClass"
       ><a fexMenuItem value="profile" href="#profile" [class]="itemClass"
         ><span class="flex-1">Custom link item</span
@@ -131,4 +135,5 @@
         ><span class="text-xs text-muted-foreground">Healthy</span>
       </button></fex-menu-list
     ></fex-menu-root
-  ></div>
+  >
+</div>

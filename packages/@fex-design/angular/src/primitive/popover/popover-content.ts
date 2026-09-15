@@ -1,4 +1,14 @@
-import { computed, input, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, type AfterViewInit, type OnDestroy } from '@angular/core'
+import {
+  computed,
+  input,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  type AfterViewInit,
+  type OnDestroy,
+} from '@angular/core'
 import { popoverContentClassName } from '@fex-design/styles/popover'
 import { cn } from '@fex/utils'
 import { Popover } from './popover-root'
@@ -61,4 +71,3 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     this.popover.overlay.setFloatingElement(null)
   }
 }
-

@@ -1,4 +1,5 @@
-<div card
+<div
+  card
   title="Cell editing"
   description="Editing belongs to application data, not a hidden table copy. Click a value, then press Enter or blur to commit; Escape cancels the current cell."
 >
@@ -7,9 +8,9 @@
     <fex-data-table [table]="table">
       <ng-template fexDataTableCell let-cell>
         @if (editing()?.rowId === cell.row.id && editing()?.field === cell.column.id) {
-          <div inputRoot [value]="value(cell)"
-            ><input inputControl autofocus (blur)="commit(cell, $event)"
-          /></div>
+          <div inputRoot [value]="value(cell)">
+            <input inputControl autofocus (blur)="commit(cell, $event)" />
+          </div>
         } @else {
           <button
             button

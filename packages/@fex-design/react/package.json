@@ -100,6 +100,7 @@
     "./ui/spinner": "./src/ui/spinner/spinner.tsx",
     "./ui/skeleton": "./src/ui/skeleton/skeleton-entry.ts",
     "./ui/switch": "./src/ui/switch/switch.tsx",
+    "./ui/slider": "./src/ui/slider/slider.tsx",
     "./ui/tag": "./src/ui/tag/tag.tsx",
     "./pro/dialog": "./src/pro/dialog/index.ts",
     "./icon/check": "./src/icon/check.tsx",

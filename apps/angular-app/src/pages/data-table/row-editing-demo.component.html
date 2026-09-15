@@ -1,4 +1,5 @@
-<div card
+<div
+  card
   title="Row editing"
   description="Edit row creates one application-owned draft. Save replaces that row in the caller data; Cancel discards the draft without touching the table data."
 >
@@ -18,9 +19,9 @@
             <button button size="sm" variant="outlined" (click)="edit(cell)">Edit row</button>
           }
         } @else if (draft()?.id === cell.row.id) {
-          <div inputRoot [value]="value(cell)"
-            ><input inputControl (input)="field(cell, $event)"
-          /></div>
+          <div inputRoot [value]="value(cell)">
+            <input inputControl (input)="field(cell, $event)" />
+          </div>
         } @else {
           {{ value(cell) }}
         }

@@ -19,7 +19,7 @@ Ready-to-use `Input`, `InputPassword`, and `InputSearch` built from the Primitiv
 | password        | Visibility toggle, hidden toggle action, clear, and `aria-invalid`.  |
 | search          | Loading, Enter-only search, Prefix search, and Addon search actions. |
 | states          | Disabled, read-only, and invalid Input family states.                |
-| validation      | Invalid styling with an error message linked by `aria-describedby`. |
+| validation      | Invalid styling with an error message linked by `aria-describedby`.  |
 | focus           | Imperative focus, blur, and select.                                  |
 | semantic-styles | Part classes/styles, selector overrides, and base CSS variables.     |
 

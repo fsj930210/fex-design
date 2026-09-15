@@ -1,5 +1,11 @@
 import { radioItemClassName, radioLabelClassName } from '@fex-design/styles/radio'
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core'
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  input,
+} from '@angular/core'
 import {
   Radio as PrimitiveRadio,
   RadioButton,

@@ -9,12 +9,15 @@
       </p>
     </header>
 
-    <div card
+    <div
+      card
       title="Types"
       description="Built-in variants only provide default semantics. Content and icon can still be customized."
     >
       <div class="flex flex-wrap gap-1.5">
-        <button button variant="outlined" (click)="toast.show('Hello, Fex Design!')">Default</button>
+        <button button variant="outlined" (click)="toast.show('Hello, Fex Design!')">
+          Default
+        </button>
         <button button variant="outlined" (click)="toast.success('This is a success message')">
           Success
         </button>
@@ -37,7 +40,8 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Position"
       description="The viewport controls placement. Service calls do not need to know where the toast appears."
     >
@@ -54,7 +58,8 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Custom Content"
       description="Primitive parts let callers replace icon, add description, and render an action without changing the manager."
     >
@@ -89,7 +94,8 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Update And Destroy"
       description="A stable id updates one toast. Returned ids can be dismissed manually."
     >
@@ -128,7 +134,8 @@
       </div>
     </div>
 
-    <div card
+    <div
+      card
       title="Multiple And Stacked"
       description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible."
     >

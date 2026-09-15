@@ -1,7 +1,9 @@
-<div card
+<div
+  card
   title="Dynamic nodes"
   description="Stable values keep selection reliable when nodes are inserted or removed."
-  ><fex-steps navigation defaultCurrent="profile"
+>
+  <fex-steps navigation defaultCurrent="profile"
     ><fex-step value="account"
       ><fex-step-indicator /><fex-step-content><strong>Account</strong></fex-step-content></fex-step
     ><fex-step value="profile"
@@ -19,4 +21,5 @@
     ></fex-steps
   ><button button class="mt-2" (click)="extra.set(!extra())">
     {{ extra() ? 'Remove' : 'Insert' }} approval
-  </button></div>
+  </button>
+</div>

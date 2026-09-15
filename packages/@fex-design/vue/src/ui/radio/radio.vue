@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { radioItemClassName, radioLabelClassName, type RadioStyleProps } from '@fex-design/styles/radio'
+import {
+  radioItemClassName,
+  radioLabelClassName,
+  type RadioStyleProps,
+} from '@fex-design/styles/radio'
 import { cn } from '@fex/utils'
 import { computed, useAttrs, useId, type PropType, type StyleValue } from 'vue'
 import { Radio as PrimitiveRadio, type RadioValue } from '../../primitive/radio/radio'
@@ -20,8 +24,25 @@ const controlAttrs = computed(() => {
 })
 </script>
 <template>
-  <div :class="cn(radioItemClassName, attrs.class as string | undefined, props.classNames?.root)" :style="[attrs.style as StyleValue, props.styles?.root]">
-    <PrimitiveRadio v-bind="controlAttrs" :id="controlId" :value="props.value" :disabled="props.disabled" :size="props.size" :class="props.classNames?.control" :style="props.styles?.control" />
-    <label v-if="$slots.default" :for="controlId" :class="cn(radioLabelClassName, props.classNames?.label)" :style="props.styles?.label"><slot /></label>
+  <div
+    :class="cn(radioItemClassName, attrs.class as string | undefined, props.classNames?.root)"
+    :style="[attrs.style as StyleValue, props.styles?.root]"
+  >
+    <PrimitiveRadio
+      v-bind="controlAttrs"
+      :id="controlId"
+      :value="props.value"
+      :disabled="props.disabled"
+      :size="props.size"
+      :class="props.classNames?.control"
+      :style="props.styles?.control"
+    />
+    <label
+      v-if="$slots.default"
+      :for="controlId"
+      :class="cn(radioLabelClassName, props.classNames?.label)"
+      :style="props.styles?.label"
+      ><slot
+    /></label>
   </div>
 </template>

@@ -1,5 +1,5 @@
-<div card title="单字符验证码" description="每个输入框填满后才自动聚焦下一段。"
-  ><div fexInputOTPRoot>
+<div card title="单字符验证码" description="每个输入框填满后才自动聚焦下一段。">
+  <div fexInputOTPRoot>
     <div fexInputOTPGroup>
       @for (index of indexes.slice(0, 3); track index) {
         <input
@@ -22,5 +22,6 @@
           [attr.aria-label]="'第 ' + (index + 1) + ' 位'"
         />
       }
-    </div></div
-></div>
+    </div>
+  </div>
+</div>

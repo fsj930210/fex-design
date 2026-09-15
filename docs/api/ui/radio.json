@@ -30,11 +30,7 @@
       "default": "md",
       "description": "选项尺寸。",
       "editor": "enum",
-      "options": [
-        "sm",
-        "md",
-        "lg"
-      ]
+      "options": ["sm", "md", "lg"]
     },
     {
       "name": "classNames",
@@ -249,10 +245,7 @@
           "default": "horizontal",
           "description": "选项排列方向。",
           "editor": "enum",
-          "options": [
-            "horizontal",
-            "vertical"
-          ]
+          "options": ["horizontal", "vertical"]
         },
         {
           "name": "options",
@@ -296,11 +289,7 @@
           "default": "md",
           "description": "选项尺寸。",
           "editor": "enum",
-          "options": [
-            "sm",
-            "md",
-            "lg"
-          ]
+          "options": ["sm", "md", "lg"]
         }
       ],
       "events": [],

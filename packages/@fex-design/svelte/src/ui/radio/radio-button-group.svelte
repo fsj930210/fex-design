@@ -9,13 +9,24 @@
     defaultValue?: RadioValue;
     disabled?: boolean;
     orientation?: "horizontal" | "vertical";
-    options?: readonly { label: string; value: RadioValue; disabled?: boolean }[];
+    options?: readonly {
+      label: string;
+      value: RadioValue;
+      disabled?: boolean;
+    }[];
     onValueChange?: (value: RadioValue, meta: unknown) => void;
     children?: Snippet;
     class?: string;
   }
-  let { options, children, orientation = "horizontal", class: className, ...rest }: Props = $props();
+  let {
+    options,
+    children,
+    orientation = "horizontal",
+    class: className,
+    ...rest
+  }: Props = $props();
 </script>
+
 <PrimitiveGroup {...rest} {orientation} class={cn("gap-0", className)}>
   {#if options}
     {#each options as option (option.value)}

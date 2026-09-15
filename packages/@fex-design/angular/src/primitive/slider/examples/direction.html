@@ -1,0 +1,21 @@
+<div class="grid w-full max-w-xl gap-6">
+  <section dir="ltr">
+    <p>中文 LTR</p>
+    <div sliderRoot [defaultValue]="[30]">
+      <span sliderTrack><span sliderRange></span></span><span sliderThumb></span>
+    </div>
+  </section>
+  <section dir="rtl">
+    <p>العربية RTL</p>
+    <div sliderRoot [defaultValue]="[30]" direction="rtl">
+      <span sliderTrack><span sliderRange></span></span><span sliderThumb></span>
+    </div>
+  </section>
+  <section><p>Reverse</p><div sliderRoot [defaultValue]="[30]" reverse>
+    <span sliderTrack><span sliderRange></span></span><span sliderThumb></span>
+  </div></section>
+  <div class="flex h-48 gap-12">
+    <section class="grid gap-2"><p>垂直</p><div sliderRoot orientation="vertical" [defaultValue]="[35]"><span sliderTrack><span sliderRange></span></span><span sliderThumb></span></div></section>
+    <section class="grid gap-2"><p>垂直 Reverse</p><div sliderRoot orientation="vertical" reverse [defaultValue]="[35]"><span sliderTrack><span sliderRange></span></span><span sliderThumb></span></div></section>
+  </div>
+</div>

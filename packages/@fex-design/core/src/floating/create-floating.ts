@@ -354,9 +354,7 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       sideOffset: currentOptions.sideOffset ?? currentOptions.offset ?? 0,
       ...(arrowX !== undefined ? { arrowX } : {}),
       ...(arrowY !== undefined ? { arrowY } : {}),
-      ...(currentArrow && arrowElement === currentArrow
-        ? { arrowSize }
-        : {}),
+      ...(currentArrow && arrowElement === currentArrow ? { arrowSize } : {}),
       ...(currentOptions.zIndex !== undefined ? { zIndex: currentOptions.zIndex } : {}),
     })
 

@@ -8,7 +8,10 @@ export function eventInfo(event: Event): OverlayEventInfo {
     clientX: 'clientX' in event && typeof event.clientX === 'number' ? event.clientX : undefined,
     clientY: 'clientY' in event && typeof event.clientY === 'number' ? event.clientY : undefined,
     button: 'button' in event && typeof event.button === 'number' ? event.button : undefined,
-    pointerType: 'pointerType' in event && typeof event.pointerType === 'string' ? event.pointerType : undefined,
+    pointerType:
+      'pointerType' in event && typeof event.pointerType === 'string'
+        ? event.pointerType
+        : undefined,
     event,
     preventDefault: event.preventDefault.bind(event),
     stopPropagation: event.stopPropagation.bind(event),

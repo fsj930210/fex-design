@@ -1,10 +1,12 @@
 <div class="grid grid-cols-3 gap-2 py-3">
   @for (placement of placements; track placement) {
-    <fex-tooltip [placement]="placement"
-      ><button button fexTooltipTrigger class="h-16" variant="outlined">{{ placement }}</button
-      ><fex-tooltip-portal
-        ><fex-tooltip-content
-          >{{ placement }}<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal
-    ></fex-tooltip>
+    <div tooltipRoot [placement]="placement">
+      <button button tooltipTrigger class="h-16" variant="outlined">{{ placement }}</button
+      ><ng-template tooltipPortal
+        ><div tooltipContent>
+          {{ placement }}
+          <div tooltipArrow></div></div
+      ></ng-template>
+    </div>
   }
 </div>

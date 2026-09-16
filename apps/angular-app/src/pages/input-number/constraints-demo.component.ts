@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { InputNumber } from '@fex-design/angular/primitive/input-number'
+import { InputNumber } from '@fex-design/angular/ui/input-number'
 import { Card } from '@fex-design/angular/ui/card'
 @Component({
-  selector: 'fex-input-number-constraints-demo',
+  selector: 'input-number-constraints-demo',
   standalone: true,
   imports: [Card, InputNumber],
   changeDetection: ChangeDetectionStrategy.OnPush,

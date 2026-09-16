@@ -1,4 +1,9 @@
-import { convertValueToPercentage, getSliderRangeDisabledState, isSliderMarkActive, isSliderReversed } from '@fex-design/core/slider/utils'
+import {
+  convertValueToPercentage,
+  getSliderRangeDisabledState,
+  isSliderMarkActive,
+  isSliderReversed,
+} from '@fex-design/core/slider/utils'
 import {
   sliderMarkClassName,
   sliderRangeClassName,
@@ -18,7 +23,12 @@ export function SliderTrack(props: SliderTrackProps) {
     <span
       {...rest}
       data-slot="slider-track"
-      data-disabled={snapshot().disabled || (snapshot().disabledThumbs.length > 0 && snapshot().disabledThumbs.every(Boolean)) ? 'true' : undefined}
+      data-disabled={
+        snapshot().disabled ||
+        (snapshot().disabledThumbs.length > 0 && snapshot().disabledThumbs.every(Boolean))
+          ? 'true'
+          : undefined
+      }
       data-orientation={snapshot().orientation}
       class={cn(sliderTrackClassName, local.class)}
     >
@@ -32,7 +42,14 @@ export interface SliderRangeProps extends JSX.HTMLAttributes<HTMLSpanElement> {}
 export function SliderRange(props: SliderRangeProps) {
   const [local, rest] = splitProps(props, ['class', 'style'])
   const { snapshot } = useSliderContext('SliderRange')
-  const disabledState = () => getSliderRangeDisabledState(snapshot().values, snapshot().disabledThumbs, snapshot().orientation, snapshot().direction, snapshot().reverse)
+  const disabledState = () =>
+    getSliderRangeDisabledState(
+      snapshot().values,
+      snapshot().disabledThumbs,
+      snapshot().orientation,
+      snapshot().direction,
+      snapshot().reverse,
+    )
   const rangeStyle = () => {
     const percentages = snapshot().values.map((value) =>
       convertValueToPercentage(value, snapshot().min, snapshot().max),

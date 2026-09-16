@@ -12,7 +12,7 @@ import {
   useColorPicker,
 } from '@fex-design/solid/primitive/color-picker'
 import { InputControl, InputRoot } from '@fex-design/solid/primitive/input'
-import { InputNumber } from '@fex-design/solid/primitive/input-number'
+import { InputNumber } from '@fex-design/solid/ui/input-number'
 import {
   Popover,
   PopoverContent,

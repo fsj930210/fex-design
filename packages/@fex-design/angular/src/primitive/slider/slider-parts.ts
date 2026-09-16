@@ -1,4 +1,9 @@
-import { convertValueToPercentage, getSliderRangeDisabledState, isSliderMarkActive, isSliderReversed } from '@fex-design/core/slider/utils'
+import {
+  convertValueToPercentage,
+  getSliderRangeDisabledState,
+  isSliderMarkActive,
+  isSliderReversed,
+} from '@fex-design/core/slider/utils'
 import {
   sliderMarkClassName,
   sliderRangeClassName,
@@ -33,7 +38,9 @@ export class SliderTrack {
   protected readonly hostClassName = createHostClassName(sliderTrackClassName)
   protected readonly allDisabled = computed(() => {
     const state = this.root.snapshot()
-    return state.disabled || (state.disabledThumbs.length > 0 && state.disabledThumbs.every(Boolean))
+    return (
+      state.disabled || (state.disabledThumbs.length > 0 && state.disabledThumbs.every(Boolean))
+    )
   })
   constructor(readonly root: SliderRoot) {}
 }
@@ -59,7 +66,13 @@ export class SliderRange {
   protected readonly hostClassName = createHostClassName(sliderRangeClassName)
   protected readonly disabledState = computed(() => {
     const state = this.root.snapshot()
-    return getSliderRangeDisabledState(state.values, state.disabledThumbs, state.orientation, state.direction, state.reverse)
+    return getSliderRangeDisabledState(
+      state.values,
+      state.disabledThumbs,
+      state.orientation,
+      state.direction,
+      state.reverse,
+    )
   })
   protected readonly placement = computed(() => {
     const state = this.root.snapshot()

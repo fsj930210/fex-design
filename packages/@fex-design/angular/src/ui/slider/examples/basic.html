@@ -1,5 +1,10 @@
 <div class="grid w-full max-w-xl gap-4">
-  <div slider [value]="value()" (change)="changeValue($event.value)" (end)="endValue($event.value)"></div>
+  <div
+    slider
+    [value]="value()"
+    (change)="changeValue($event.value)"
+    (end)="endValue($event.value)"
+  ></div>
   <p>当前值：{{ value() }}；结束值：{{ ended() }}</p>
   <div slider [defaultValue]="60" [keyboard]="false"></div>
 </div>

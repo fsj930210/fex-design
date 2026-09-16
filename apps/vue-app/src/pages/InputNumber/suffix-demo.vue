@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InputNumber } from '@fex-design/vue/primitive/input-number'
+import { InputNumber } from '@fex-design/vue/ui/input-number'
 import Card from '@fex-design/vue/ui/card'
 </script>
 <template>

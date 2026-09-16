@@ -103,17 +103,24 @@ export function TooltipPortal(props: ParentProps) {
     </Show>
   )
 }
-export interface TooltipContentProps extends ParentProps {
-  class?: string
-  style?: string
+export interface TooltipContentProps extends ParentProps, JSX.HTMLAttributes<HTMLDivElement> {
+  color?: string
 }
 export function TooltipContent(props: TooltipContentProps) {
-  const [local] = splitProps(props, ['children', 'class', 'style'])
+  const [local, rest] = splitProps(props, [
+    'children',
+    'class',
+    'style',
+    'color',
+    'onPointerEnter',
+    'onPointerLeave',
+  ])
   const { contentId, overlay, snapshot } = useTooltip('TooltipContent')
   onCleanup(() => overlay.setFloatingElement(null))
   return (
     <Show when={snapshot().mounted}>
       <div
+        {...rest}
         id={contentId}
         ref={(element) =>
           queueMicrotask(() => element.isConnected && overlay.setFloatingElement(element))
@@ -126,14 +133,33 @@ export function TooltipContent(props: TooltipContentProps) {
         data-align={snapshot().align}
         data-placement={snapshot().placement}
         class={cn(tooltipContentClassName, local.class)}
-        style={`position: var(--floating-strategy, absolute); left: var(--floating-x, 0px); top: var(--floating-y, 0px); transform-origin: var(--floating-transform-origin); ${local.style ?? ''}`}
+        onPointerEnter={(event) => {
+          if (typeof local.onPointerEnter === 'function') local.onPointerEnter(event)
+          if (!event.defaultPrevented) overlay.content.pointerEnter(eventInfo(event))
+        }}
+        onPointerLeave={(event) => {
+          if (typeof local.onPointerLeave === 'function') local.onPointerLeave(event)
+          if (!event.defaultPrevented) overlay.content.pointerLeave(eventInfo(event))
+        }}
+        style={
+          typeof local.style === 'string'
+            ? `position:var(--floating-strategy, absolute);left:var(--floating-x, 0px);top:var(--floating-y, 0px);transform-origin:var(--floating-transform-origin);${local.color ? `--tooltip-background:${local.color};` : ''}${local.style}`
+            : {
+                position: 'var(--floating-strategy, absolute)',
+                left: 'var(--floating-x, 0px)',
+                top: 'var(--floating-y, 0px)',
+                'transform-origin': 'var(--floating-transform-origin)',
+                ...(local.color ? { '--tooltip-background': local.color } : {}),
+                ...(local.style ?? {}),
+              }
+        }
       >
         {local.children}
       </div>
     </Show>
   )
 }
-export function TooltipArrow(props: { class?: string }) {
+export function TooltipArrow(props: { class?: string; style?: JSX.CSSProperties }) {
   const { overlay, snapshot } = useTooltip('TooltipArrow')
   onCleanup(() => overlay.setArrowElement(null))
   const style = () => getTooltipArrowPosition(snapshot().side, snapshot().align)
@@ -144,7 +170,7 @@ export function TooltipArrow(props: { class?: string }) {
       data-side={snapshot().side}
       data-align={snapshot().align}
       class={cn(tooltipArrowClassName, props.class)}
-      style={style()}
+      style={{ ...style(), ...props.style }}
     />
   )
 }

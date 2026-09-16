@@ -14,10 +14,29 @@ export default function Example() {
       <button onClick={() => setRecommended((value) => (value === 37 ? 60 : 37))}>
         将建议刻度移到 {recommended === 37 ? 60 : 37}°C
       </button>
-      <section className="grid gap-6"><h4>included=true</h4><div className="grid gap-3"><p>单值</p><Slider defaultValue={37} marks={marks} /></div><div className="grid gap-3"><p>范围</p><Slider defaultValue={[26, 37]} marks={marks} /></div></section>
-      <section className="grid gap-4"><h4>included=false（刻度彼此独立）</h4><Slider defaultValue={37} marks={marks} included={false} /></section>
-      <section className="grid gap-4"><h4>marks &amp; step（步长与刻度并存）</h4><Slider defaultValue={37} marks={marks} dots step={10} /></section>
-      <section className="grid gap-4"><h4>step=null（只能落在标记点）</h4><Slider defaultValue={37} marks={marks} step={null} /></section>
+      <section className="grid gap-6">
+        <h4>included=true</h4>
+        <div className="grid gap-3">
+          <p>单值</p>
+          <Slider defaultValue={37} marks={marks} />
+        </div>
+        <div className="grid gap-3">
+          <p>范围</p>
+          <Slider defaultValue={[26, 37]} marks={marks} />
+        </div>
+      </section>
+      <section className="grid gap-4">
+        <h4>included=false（刻度彼此独立）</h4>
+        <Slider defaultValue={37} marks={marks} included={false} />
+      </section>
+      <section className="grid gap-4">
+        <h4>marks &amp; step（步长与刻度并存）</h4>
+        <Slider defaultValue={37} marks={marks} dots step={10} />
+      </section>
+      <section className="grid gap-4">
+        <h4>step=null（只能落在标记点）</h4>
+        <Slider defaultValue={37} marks={marks} step={null} />
+      </section>
     </div>
   )
 }

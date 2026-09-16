@@ -120,9 +120,7 @@ export function getSliderRangeDisabledState(
     const start = (offset / total) * 100
     offset += span.size
     const end = (offset / total) * 100
-    const color = span.disabled
-      ? 'var(--slider-disabled-range-background)'
-      : 'transparent'
+    const color = span.disabled ? 'var(--slider-disabled-range-background)' : 'transparent'
     return [`${color} ${start}%`, `${color} ${end}%`]
   })
   return {

@@ -10,7 +10,9 @@ export default function Example() {
         onChange={(next) => typeof next === 'number' && setValue(next)}
         onEnd={(next) => typeof next === 'number' && setEnded(next)}
       />
-      <p>当前值：{value()}；结束值：{ended()}</p>
+      <p>
+        当前值：{value()}；结束值：{ended()}
+      </p>
       <Slider defaultValue={60} keyboard={false} />
     </div>
   )

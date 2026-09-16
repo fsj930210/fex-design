@@ -7,5 +7,4 @@ import { Slider } from '@fex-design/angular/ui/slider'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './css-variables.html',
 })
-export class SliderCssVariablesExample {
-}
+export class SliderCssVariablesExample {}

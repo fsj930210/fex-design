@@ -8,7 +8,7 @@ import {
   FieldRoot,
 } from '@fex-design/vue/primitive/field'
 import { Form as FormHost, useForm, type AnyFieldApi } from '@fex-design/vue/primitive/form'
-import { InputNumber } from '@fex-design/vue/primitive/input-number'
+import { InputNumber } from '@fex-design/vue/ui/input-number'
 import { Button } from '@fex-design/vue/ui/button'
 import Card from '@fex-design/vue/ui/card'
 

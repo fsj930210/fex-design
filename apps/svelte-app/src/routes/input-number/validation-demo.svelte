@@ -10,7 +10,7 @@
     createForm,
     type AnyFieldApi,
   } from "@fex-design/svelte/primitive/form/create-form";
-  import InputNumber from "@fex-design/svelte/primitive/input-number";
+  import InputNumber from "@fex-design/svelte/ui/input-number";
   import { Button } from "@fex-design/svelte/ui/button";
   import Card from "@fex-design/svelte/ui/card";
 

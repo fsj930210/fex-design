@@ -1,0 +1,22 @@
+<div class="grid gap-6 sm:grid-cols-2">
+  <div class="flex justify-center" dir="ltr">
+    <div tooltipRoot placement="topLeft" [avoidCollisions]="false">
+      <button button tooltipTrigger>查看中文提示</button
+      ><ng-template tooltipPortal
+        ><div tooltipContent dir="ltr">
+          这是从起始侧对齐的中文提示
+          <div tooltipArrow></div></div
+      ></ng-template>
+    </div>
+  </div>
+  <div class="flex justify-center" dir="rtl">
+    <div tooltipRoot placement="topLeft" [avoidCollisions]="false">
+      <button button tooltipTrigger>تلميح</button
+      ><ng-template tooltipPortal
+        ><div tooltipContent dir="rtl">
+          تلميح عربي بمحاذاة جهة البداية
+          <div tooltipArrow></div></div
+      ></ng-template>
+    </div>
+  </div>
+</div>

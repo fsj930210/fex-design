@@ -7,7 +7,7 @@ import { TooltipDisabledDemo } from './disabled-demo.component'
 import { TooltipPlacementDemo } from './placement-demo.component'
 import { TooltipStyleDemo } from './style-demo.component'
 @Component({
-  selector: 'fex-tooltip-page',
+  selector: 'tooltip-page',
   standalone: true,
   imports: [
     RouterLink,

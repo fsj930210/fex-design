@@ -1,0 +1,123 @@
+{
+  "name": "Tooltip",
+  "slug": "tooltip",
+  "layer": "ui",
+  "status": "draft",
+  "description": "组合触发元素、内容、Portal 和默认箭头的快捷 Tooltip。",
+  "importPath": {
+    "react": "@fex-design/react/ui/tooltip",
+    "vue": "@fex-design/vue/ui/tooltip",
+    "solid": "@fex-design/solid/ui/tooltip",
+    "svelte": "@fex-design/svelte/ui/tooltip",
+    "angular": "@fex-design/angular/ui/tooltip"
+  },
+  "props": [
+    {
+      "name": "title",
+      "type": "FrameworkTitle",
+      "required": true,
+      "description": "简短、非交互式提示内容。"
+    },
+    { "name": "color", "type": "string", "description": "设置面板与箭头背景，不自动计算前景色。" },
+    { "name": "arrow", "type": "boolean", "default": "true", "description": "是否显示箭头。" },
+    { "name": "open", "type": "boolean", "description": "受控打开状态。" },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控初始状态。"
+    },
+    {
+      "name": "placement",
+      "type": "FloatingPlacement",
+      "default": "'top'",
+      "description": "提示位置。"
+    },
+    { "name": "classNames", "type": "TooltipClassNames", "description": "root 和 arrow 的类名。" },
+    { "name": "styles", "type": "FrameworkStyles", "description": "root 和 arrow 的原生内联样式。" }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        { "name": "open", "type": "boolean" },
+        { "name": "info", "type": "DisclosureChangeInfo" }
+      ],
+      "description": "请求改变打开状态。"
+    }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基本使用", "description": "title 快捷调用。" },
+    {
+      "id": "placement",
+      "title": "十二个位置",
+      "description": "四个方向分别支持 start、center、end 对齐。"
+    },
+    { "id": "controlled", "title": "受控状态", "description": "外部控制打开状态。" },
+    { "id": "color", "title": "自定义颜色", "description": "使用 color 设置面板与箭头背景色。" },
+    {
+      "id": "css-variables",
+      "title": "CSS Variables",
+      "description": "通过组件变量定制颜色、宽度和动效。"
+    },
+    {
+      "id": "direction",
+      "title": "文字方向",
+      "description": "对比中文 LTR 与阿拉伯文 RTL 的起始侧对齐。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "通过 classNames 和 styles 明显改变 root 和 arrow 的颜色和尺寸。"
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkTitle": "ReactNode",
+        "FrameworkStyles": "Partial<Record<TooltipSemanticPart, CSSProperties>>"
+      }
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkTitle": "string",
+        "FrameworkStyles": "Partial<Record<TooltipSemanticPart, CSSProperties>>"
+      },
+      "slots": [
+        { "name": "default", "description": "一个触发元素。" },
+        { "name": "title", "description": "提示内容。" }
+      ]
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkTitle": "JSX.Element",
+        "FrameworkStyles": "Partial<Record<TooltipSemanticPart, JSX.CSSProperties>>"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkTitle": "string | Snippet",
+        "FrameworkStyles": "Partial<Record<TooltipSemanticPart, string>>"
+      }
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkTitle": "string | TemplateRef<unknown>",
+        "FrameworkStyles": "Partial<Record<TooltipSemanticPart, Record<string, string | number>>>"
+      },
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [{ "name": "open", "type": "boolean" }],
+          "description": "开关请求。"
+        }
+      ]
+    }
+  },
+  "cssVariables": [
+    { "name": "--tooltip-background", "description": "面板和箭头背景，默认 var(--foreground)。" },
+    { "name": "--tooltip-foreground", "description": "文字颜色，默认 var(--background)。" },
+    { "name": "--tooltip-content-max-width", "description": "最大宽度，默认 280px。" },
+    { "name": "--tooltip-motion-duration", "description": "动画时长，默认 100ms。" }
+  ]
+}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import InputNumber from "@fex-design/svelte/primitive/input-number";
+  import InputNumber from "@fex-design/svelte/ui/input-number";
   import Card from "@fex-design/svelte/ui/card";
 
   let value = $state<number | undefined>();

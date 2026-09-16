@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     PREVIEW_PROTOCOL,
     isPreviewHostMessage,
@@ -12,15 +12,16 @@
     component = query.get("component") ?? path.at(-2),
     demo = query.get("demo") ?? path.at(-1);
   const embedded = query.get("embed") === "true";
-  // Glob 是 Preview 的示例注册表；示例清单版本 7，强制 Vite 重新收集。
+  // Keep loaders lazy: one Preview URL must only fetch its selected example graph.
   const modules = import.meta.glob(
     "../../../../packages/@fex-design/svelte/src/{primitive,ui}/*/examples/*.svelte",
-    { eager: true },
-  ) as Record<string, { default: any }>;
+    { eager: false },
+  ) as Record<string, () => Promise<{ default: any }>>;
   const examplePath = Object.keys(modules).find((key) =>
     key.includes(`/${layer}/${component}/examples/${demo}.svelte`),
   );
-  const Example = examplePath ? modules[examplePath].default : undefined;
+  let Example: any = $state(undefined);
+  let loaded = $state(false);
   const send = (type: string, payload = {}) =>
     parent.postMessage(
       { protocol: PREVIEW_PROTOCOL, type, framework: "svelte", ...payload },
@@ -36,8 +37,15 @@
       send("resize", { height: Math.ceil(runtime.scrollHeight) });
     const observer = new ResizeObserver(sendResize);
     observer.observe(runtime);
-    send("ready");
-    sendResize();
+    const load = async () => {
+      const module = examplePath ? await modules[examplePath]?.() : undefined;
+      Example = module?.default;
+      loaded = true;
+      await tick();
+      send("ready");
+      sendResize();
+    };
+    void load();
     return () => {
       removeEventListener("message", receive);
       observer.disconnect();
@@ -49,7 +57,7 @@
   class="runtime box-border grid min-h-30 place-items-center p-8"
   data-embed={embedded ? "true" : undefined}
 >
-  {#if Example}<Example />{:else}<p>
+  {#if Example}<Example />{:else if loaded}<p>
       未找到示例：{layer}/{component}/{demo}
     </p>{/if}
 </div>

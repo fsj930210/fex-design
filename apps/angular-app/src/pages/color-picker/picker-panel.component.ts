@@ -17,7 +17,7 @@ import {
   InputNumber,
   InputNumberSuffix,
   type InputNumberChange,
-} from '@fex-design/angular/primitive/input-number'
+} from '@fex-design/angular/ui/input-number'
 import {
   SelectContent,
   SelectList,

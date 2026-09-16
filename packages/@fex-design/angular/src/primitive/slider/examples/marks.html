@@ -1,10 +1,63 @@
 <div class="grid w-full max-w-2xl gap-8 pb-6">
-  <button type="button" (click)="moveRecommended()">将建议刻度移到 {{ recommended() === 37 ? 60 : 37 }}°C</button>
-  <section class="grid gap-4"><h4>included=true（单值与范围）</h4>
-    <div sliderRoot [defaultValue]="[37]" [marks]="marks()"><span sliderTrack><span sliderRange></span>@for (value of marks(); track value) {<span sliderMark [value]="value">{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span>}</span><span sliderThumb></span></div>
-    <div sliderRoot [defaultValue]="[26, 37]" [marks]="marks()"><span sliderTrack><span sliderRange></span>@for (value of marks(); track value) {<span sliderMark [value]="value">{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span>}</span><span sliderThumb [index]="0"></span><span sliderThumb [index]="1"></span></div>
+  <button type="button" (click)="moveRecommended()">
+    将建议刻度移到 {{ recommended() === 37 ? 60 : 37 }}°C
+  </button>
+  <section class="grid gap-4">
+    <h4>included=true（单值与范围）</h4>
+    <div sliderRoot [defaultValue]="[37]" [marks]="marks()">
+      <span sliderTrack
+        ><span sliderRange></span>@for (value of marks(); track value) {<span
+          sliderMark
+          [value]="value"
+          >{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span
+        >}</span
+      ><span sliderThumb></span>
+    </div>
+    <div sliderRoot [defaultValue]="[26, 37]" [marks]="marks()">
+      <span sliderTrack
+        ><span sliderRange></span>@for (value of marks(); track value) {<span
+          sliderMark
+          [value]="value"
+          >{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span
+        >}</span
+      ><span sliderThumb [index]="0"></span><span sliderThumb [index]="1"></span>
+    </div>
   </section>
-  <section class="grid gap-4"><h4>included=false（刻度彼此独立）</h4><div sliderRoot [defaultValue]="[37]" [marks]="marks()"><span sliderTrack>@for (value of marks(); track value) {<span sliderMark [value]="value">{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span>}</span><span sliderThumb></span></div></section>
-  <section class="grid gap-4"><h4>marks &amp; step（步长与刻度并存）</h4><div sliderRoot [defaultValue]="[37]" [marks]="marks()" [step]="10"><span sliderTrack><span sliderRange></span>@for (value of dots; track value) {<span sliderMark [value]="value" aria-hidden="true"></span>}@for (value of marks(); track value) {<span sliderMark [value]="value">{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span>}</span><span sliderThumb></span></div></section>
-  <section class="grid gap-4"><h4>step=null（只能落在标记点）</h4><div sliderRoot [defaultValue]="[37]" [marks]="marks()" [step]="null"><span sliderTrack><span sliderRange></span>@for (value of marks(); track value) {<span sliderMark [value]="value">{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span>}</span><span sliderThumb></span></div></section>
+  <section class="grid gap-4">
+    <h4>included=false（刻度彼此独立）</h4>
+    <div sliderRoot [defaultValue]="[37]" [marks]="marks()">
+      <span sliderTrack
+        >@for (value of marks(); track value) {<span sliderMark [value]="value"
+          >{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span
+        >}</span
+      ><span sliderThumb></span>
+    </div>
+  </section>
+  <section class="grid gap-4">
+    <h4>marks &amp; step（步长与刻度并存）</h4>
+    <div sliderRoot [defaultValue]="[37]" [marks]="marks()" [step]="10">
+      <span sliderTrack
+        ><span sliderRange></span>@for (value of dots; track value) {<span
+          sliderMark
+          [value]="value"
+          aria-hidden="true"
+        ></span
+        >}@for (value of marks(); track value) {<span sliderMark [value]="value"
+          >{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span
+        >}</span
+      ><span sliderThumb></span>
+    </div>
+  </section>
+  <section class="grid gap-4">
+    <h4>step=null（只能落在标记点）</h4>
+    <div sliderRoot [defaultValue]="[37]" [marks]="marks()" [step]="null">
+      <span sliderTrack
+        ><span sliderRange></span>@for (value of marks(); track value) {<span
+          sliderMark
+          [value]="value"
+          >{{ value === recommended() ? '建议 ' + value + '°C' : value + '°C' }}</span
+        >}</span
+      ><span sliderThumb></span>
+    </div>
+  </section>
 </div>

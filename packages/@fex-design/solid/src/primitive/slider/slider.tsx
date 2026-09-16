@@ -5,10 +5,7 @@ import type {
   SliderOrientation,
 } from '@fex-design/core/slider/types'
 import { getSliderValueFromPointer } from '@fex-design/core/slider/utils'
-import {
-  sliderRootClassName,
-  type SliderStyleProps,
-} from '@fex-design/styles/slider'
+import { sliderRootClassName, type SliderStyleProps } from '@fex-design/styles/slider'
 import { cn } from '@fex/utils'
 import { splitProps, type JSX } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
@@ -139,7 +136,12 @@ export function SliderRoot(props: SliderRootProps) {
         ref={(element) => {
           rootElement = element
         }}
-        data-disabled={snapshot().disabled || (snapshot().disabledThumbs.length > 0 && snapshot().disabledThumbs.every(Boolean)) ? 'true' : undefined}
+        data-disabled={
+          snapshot().disabled ||
+          (snapshot().disabledThumbs.length > 0 && snapshot().disabledThumbs.every(Boolean))
+            ? 'true'
+            : undefined
+        }
         data-orientation={snapshot().orientation}
         data-slot="slider"
         data-reverse={snapshot().reverse ? '' : undefined}
@@ -173,7 +175,10 @@ export function SliderRoot(props: SliderRootProps) {
           if (dragRange) controller.startRangeSlide(nextValue)
           else if (snapshot().editable && !target.closest('[data-slot="slider-thumb"]'))
             controller.addValue(nextValue)
-          else controller.startSlide(Number.isInteger(thumbIndex) ? snapshot().values[thumbIndex]! : nextValue)
+          else
+            controller.startSlide(
+              Number.isInteger(thumbIndex) ? snapshot().values[thumbIndex]! : nextValue,
+            )
         }}
         onPointerMove={(event) => {
           if (typeof local.onPointerMove === 'function') local.onPointerMove(event)
@@ -220,4 +225,9 @@ export function SliderRoot(props: SliderRootProps) {
 }
 
 export { SliderMark, SliderRange, SliderThumb, SliderTrack } from './slider-parts'
-export type { SliderMarkProps, SliderRangeProps, SliderThumbProps, SliderTrackProps } from './slider-parts'
+export type {
+  SliderMarkProps,
+  SliderRangeProps,
+  SliderThumbProps,
+  SliderTrackProps,
+} from './slider-parts'

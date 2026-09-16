@@ -8,6 +8,17 @@ A styled, composable floating panel with shared Core trigger, positioning, dismi
 import { Popover } from '@fex-design/react/primitive/popover'
 ```
 
+## Components
+
+| Component                           | Purpose                                                            |
+| ----------------------------------- | ------------------------------------------------------------------ |
+| Popover / PopoverRoot               | Owns controller state and child context.                           |
+| PopoverTrigger                      | Connects configured trigger events and accessibility attributes.   |
+| PopoverPortal                       | Mounts content in the resolved container.                          |
+| PopoverContent                      | Connects floating position, presence, dismiss, and focus behavior. |
+| PopoverArrow                        | Connects arrow geometry.                                           |
+| PopoverHeader / Title / Description | Provides structured content and accessible labels.                 |
+
 ## Framework contract
 
 Use a React element as the trigger. Content accepts ReactNode or a function receiving open and close.
@@ -61,6 +72,10 @@ Content defaults to the trigger owner document body. Both UI and Primitive roots
 | false     | true            | Mounted              | Unmount; recreate on reopening |
 
 The default suits forms: mount on first opening and retain the draft after closing. destroyOnHidden only unmounts the content subtree; it does not clear externally owned state.
+
+## Logic API
+
+`usePopover(options)` is the public React adapter for custom Popover markup. It owns a stable Core controller and returns stable controller plus triggerRef and arrowRef. Use controller methods to open/close, connect reference/content/arrow elements, and subscribe to state. Internal context readers are not part of this standalone API.
 
 ## Accessibility
 

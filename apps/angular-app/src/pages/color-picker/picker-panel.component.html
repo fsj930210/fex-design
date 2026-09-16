@@ -44,7 +44,8 @@
     } @else {
       <div class="grid min-w-0 flex-1 grid-flow-col auto-cols-fr gap-2">
         @for (channel of fields(); track channel) {
-          <fex-input-number
+          <div
+            inputNumber
             class="min-w-0"
             [min]="config(channel).min"
             [max]="config(channel).max"
@@ -52,17 +53,19 @@
             [value]="channelValue(channel)"
             (change)="changeChannel(channel, $event)"
             (blur)="picker.controller.completeInteraction()"
-          />
+          ></div>
         }
       </div>
     }
     @if (alpha()) {
-      <fex-input-number
+      <div
+        inputNumber
         class="w-20 shrink-0"
         [value]="(picker.snapshot().value?.alpha ?? 1) * 100"
         [readOnly]="true"
-        ><span fexInputNumberSuffix>%</span></fex-input-number
       >
+        <span inputSuffix>%</span>
+      </div>
     }
   </div>
 </div>

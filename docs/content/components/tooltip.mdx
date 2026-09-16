@@ -1,0 +1,46 @@
+---
+title: Tooltip
+description: 为元素提供简短、非交互式说明，默认通过 hover 和 focus 显示。
+---
+
+## Primitive 与 UI
+
+Primitive 提供带样式的 TooltipRoot、TooltipTrigger、TooltipPortal、TooltipContent 和 TooltipArrow，用于自由组合。UI Tooltip 自动组合 Portal、Content 与默认箭头，通过 `title` 快速提供说明。
+
+## 何时使用
+
+用于解释图标按钮、缩略文本或不明显的操作。Tooltip 内容保持简短且不包含按钮、链接和表单；需要交互内容时使用 Popover。
+
+## 示例
+
+示例覆盖默认 hover/focus、内容可悬停、十二个位置、受控状态、`color`、CSS Variables、LTR/RTL 和结构化样式。
+
+<Demos />
+
+## API
+
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="Root 控制状态与定位，其余部件连接触发元素、挂载容器、提示内容与箭头。"
+>
+  <ApiComposition layer="primitive">
+
+```text
+TooltipRoot
+├── TooltipTrigger
+└── TooltipPortal
+    └── TooltipContent
+        └── TooltipArrow (optional)
+```
+
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="通过 title 快速创建带默认箭头的 Tooltip。" />
+
+## CSS Variables
+
+Primitive `TooltipContent` 与 UI `Tooltip` 都支持 `color` 设置背景与箭头颜色；前景色继续由默认 token 或 `--tooltip-foreground` 控制，不进行运行时颜色计算。
+
+<CssVariables />

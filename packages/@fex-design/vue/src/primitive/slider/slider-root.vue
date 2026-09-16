@@ -159,7 +159,8 @@ function handlePointerDown(event: PointerEvent) {
   if (dragRange) controller.startRangeSlide(value)
   else if (snapshot.value.editable && !target.closest('[data-slot="slider-thumb"]'))
     controller.addValue(value)
-  else controller.startSlide(Number.isInteger(thumbIndex) ? snapshot.value.values[thumbIndex]! : value)
+  else
+    controller.startSlide(Number.isInteger(thumbIndex) ? snapshot.value.values[thumbIndex]! : value)
 }
 
 function handlePointerMove(event: PointerEvent) {
@@ -191,7 +192,12 @@ function handlePointerCancel() {
   <div
     v-bind="attrs"
     ref="rootElement"
-    :data-disabled="snapshot.disabled || (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean)) ? 'true' : undefined"
+    :data-disabled="
+      snapshot.disabled ||
+      (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean))
+        ? 'true'
+        : undefined
+    "
     :data-orientation="snapshot.orientation"
     :data-reverse="snapshot.reverse ? '' : undefined"
     data-slot="slider"

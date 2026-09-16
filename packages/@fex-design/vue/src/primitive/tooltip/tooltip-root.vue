@@ -1,28 +1,11 @@
 <script setup lang="ts">
 import { createTooltip, type TooltipOptions } from '@fex-design/core/tooltip/create-tooltip'
-import type { FloatingOverlayOptions } from '@fex-design/core/overlay/create-floating-overlay'
 import { shallowEqualObject } from '@fex/utils'
 import { computed, onBeforeUnmount, provide, ref, shallowRef, useId, watchEffect } from 'vue'
 import { useCoreStore } from '../../composables/use-core-store'
 import { tooltipKey } from './context'
 
-interface TooltipRootProps {
-  align?: FloatingOverlayOptions['align']
-  alignOffset?: number
-  avoidCollisions?: boolean
-  closeDelay?: number
-  collisionPadding?: FloatingOverlayOptions['collisionPadding']
-  defaultOpen?: boolean
-  disabled?: boolean
-  forceMount?: boolean
-  getPopupContainer?: FloatingOverlayOptions['getPopupContainer']
-  hoverCloseDelay?: number
-  hoverOpenDelay?: number
-  open?: boolean
-  placement?: FloatingOverlayOptions['placement']
-  side?: FloatingOverlayOptions['side']
-  sideOffset?: number
-}
+type TooltipRootProps = Omit<TooltipOptions, 'onOpenChange'>
 const props = withDefaults(defineProps<TooltipRootProps>(), { defaultOpen: false, open: undefined })
 const emit = defineEmits<{
   openChange: [open: boolean, info: Parameters<NonNullable<TooltipOptions['onOpenChange']>>[1]]

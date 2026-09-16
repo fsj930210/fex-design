@@ -12,5 +12,4 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './direction.html',
 })
-export class SliderDirectionExample {
-}
+export class SliderDirectionExample {}

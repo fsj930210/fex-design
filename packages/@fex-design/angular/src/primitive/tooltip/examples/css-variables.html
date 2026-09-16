@@ -1,0 +1,19 @@
+<div class="flex min-h-64 items-center justify-center">
+  <div tooltipRoot>
+    <button button tooltipTrigger>CSS Variables</button>
+    <ng-template tooltipPortal>
+      <div
+        tooltipContent
+        style="
+          --tooltip-background: #164e63;
+          --tooltip-foreground: #ecfeff;
+          --tooltip-content-max-width: 180px;
+          --tooltip-motion-duration: 300ms;
+        "
+      >
+        CSS Variables 同时控制颜色、宽度和动效时长。
+        <div tooltipArrow></div>
+      </div>
+    </ng-template>
+  </div>
+</div>

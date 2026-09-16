@@ -5,7 +5,7 @@ import { PlusIcon } from '@fex-design/angular/icon/plus'
 import { Button } from '@fex-design/angular/ui/button'
 import { Card } from '@fex-design/angular/ui/card'
 @Component({
-  selector: 'fex-input-number-custom-logic-demo',
+  selector: 'input-number-custom-logic-demo',
   standalone: true,
   imports: [Card, Button, MinusIcon, PlusIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,

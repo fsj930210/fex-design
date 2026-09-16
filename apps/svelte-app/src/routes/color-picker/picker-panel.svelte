@@ -16,7 +16,7 @@
   } from "@fex-design/svelte/primitive/color-picker";
   import InputRoot from "@fex-design/svelte/primitive/input";
   import InputControl from "@fex-design/svelte/primitive/input-control";
-  import InputNumber from "@fex-design/svelte/primitive/input-number";
+  import InputNumber from "@fex-design/svelte/ui/input-number";
   import SelectRoot from "@fex-design/svelte/primitive/select";
   import SelectTrigger from "@fex-design/svelte/primitive/select-trigger";
   import SelectContent from "@fex-design/svelte/primitive/select-content";

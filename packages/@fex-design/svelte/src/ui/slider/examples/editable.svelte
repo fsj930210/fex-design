@@ -4,6 +4,12 @@
 </script>
 
 <div class="grid w-full max-w-xl gap-3">
-  <Slider value={values} editable minCount={2} maxCount={5} onChange={(next) => Array.isArray(next) && (values = next)} />
+  <Slider
+    value={values}
+    editable
+    minCount={2}
+    maxCount={5}
+    onChange={(next) => Array.isArray(next) && (values = next)}
+  />
   <p>当前节点：{values.join("、")}</p>
 </div>

@@ -1,4 +1,4 @@
-import { InputNumber } from '@fex-design/react/primitive/input-number'
+import { InputNumber } from '@fex-design/react/ui/input-number'
 import { Card } from '@fex-design/react/ui/card'
 
 export function StatesDemo() {

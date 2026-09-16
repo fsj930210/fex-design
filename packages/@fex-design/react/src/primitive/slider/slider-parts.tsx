@@ -1,4 +1,9 @@
-import { convertValueToPercentage, getSliderRangeDisabledState, isSliderMarkActive, isSliderReversed } from '@fex-design/core/slider/utils'
+import {
+  convertValueToPercentage,
+  getSliderRangeDisabledState,
+  isSliderMarkActive,
+  isSliderReversed,
+} from '@fex-design/core/slider/utils'
 import {
   sliderMarkClassName,
   sliderRangeClassName,
@@ -24,7 +29,12 @@ export function SliderTrack({ ref, className, ...props }: SliderTrackProps) {
       {...props}
       ref={ref}
       data-slot="slider-track"
-      data-disabled={snapshot.disabled || (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean)) ? '' : undefined}
+      data-disabled={
+        snapshot.disabled ||
+        (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean))
+          ? ''
+          : undefined
+      }
       data-orientation={snapshot.orientation}
       className={cn(sliderTrackClassName, className)}
     />
@@ -44,7 +54,13 @@ export function SliderRange({ ref, className, style, ...props }: SliderRangeProp
   const end = Math.max(...percentages)
   const visualStart = reversed ? 100 - end : start
   const visualEnd = reversed ? start : 100 - end
-  const disabledState = getSliderRangeDisabledState(snapshot.values, snapshot.disabledThumbs, snapshot.orientation, snapshot.direction, snapshot.reverse)
+  const disabledState = getSliderRangeDisabledState(
+    snapshot.values,
+    snapshot.disabledThumbs,
+    snapshot.orientation,
+    snapshot.direction,
+    snapshot.reverse,
+  )
   const rangeStyle =
     snapshot.orientation === 'vertical'
       ? { bottom: `${visualStart}%`, top: `${visualEnd}%` }

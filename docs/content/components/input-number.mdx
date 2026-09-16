@@ -1,0 +1,49 @@
+---
+title: InputNumber
+description: 输入、解析、格式化并按范围和步长调整 number 值。
+---
+
+## Primitive 与 UI
+
+Primitive 在现有 Input 与 Button Primitive 上提供 `InputNumberRoot`、`InputNumberControl`、`InputNumberClear`、`InputNumberActions`、`InputNumberIncrement` 和 `InputNumberDecrement`。增减操作内置可完全替换的默认图标。UI `InputNumber` 只提供相同结构的快捷组装和结构化样式入口。
+
+React、Vue、Solid、Svelte 与 Angular 各自提供本框架原生的 `useInputNumber` 实现；它属于 InputNumber 组件族逻辑层，不依赖默认 UI 结构。
+
+## 何时使用
+
+用于输入具有步长、精度、范围或格式化要求的 number。普通文本继续使用 Input；业务校验由 Field 或 Form 负责，InputNumber 通过 `aria-invalid` 与 `aria-describedby` 表达结果。
+
+## 示例
+
+Primitive 与 UI 使用相同内容、布局和交互结果；示例只聚焦数字输入独有的约束、编辑缓冲、格式化、增减控制、键盘、越界和尾部操作。UI 仅额外提供 semantic-styles。
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="可组合的数字输入行为与结构。">
+  <ApiComposition layer="primitive">
+
+```text
+InputNumberRoot
+├── InputPrefix (optional, from Input)
+├── InputNumberControl
+├── InputNumberClear (optional)
+├── InputSuffix (optional, from Input)
+└── InputNumberActions (optional)
+    ├── InputNumberIncrement
+    └── InputNumberDecrement
+```
+
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="一次完成默认数字输入结构的快捷组件。" />
+
+InputNumber 复用 Input 的尺寸、形态、禁用、只读、原生 input 属性、元素引用和方向能力。正式数值变化统一使用 `onChange` / `change`；编辑中的展示文本由 Primitive 内部 draft 保存。
+
+## CSS Variables
+
+InputNumber 复用 Input 与 Button 的基础变量。组件独有结构通过 `data-slot="input-number-actions"`、`input-number-increment` 和 `input-number-decrement` 定位；UI 可使用 `classNames`、`styles` 和状态选择器定制。
+
+<CssVariables />

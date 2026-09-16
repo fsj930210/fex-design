@@ -1,10 +1,12 @@
 <div class="grid w-full max-w-xl gap-3">
-<div class="flex justify-between"><span>模型准确率 {{ value() }}%</span><span>响应速度 {{ right() }}%</span></div>
-<div
-  slider
-  [value]="value()"
-  [classNames]="weightClasses"
-  aria-label="模型权重分配"
-  (change)="changeValue($event.value)"
-></div>
+  <div class="flex justify-between">
+    <span>模型准确率 {{ value() }}%</span><span>响应速度 {{ right() }}%</span>
+  </div>
+  <div
+    slider
+    [value]="value()"
+    [classNames]="weightClasses"
+    aria-label="模型权重分配"
+    (change)="changeValue($event.value)"
+  ></div>
 </div>

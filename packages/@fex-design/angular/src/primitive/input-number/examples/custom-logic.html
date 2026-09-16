@@ -1,0 +1,19 @@
+<div class="inline-flex items-center gap-2">
+  <button
+    button
+    aria-label="减少"
+    [disabled]="!number.canDecrement()"
+    (click)="number.decrement($event)"
+  >
+    <minus-icon />
+  </button>
+  <output class="min-w-10 text-center font-medium">{{ number.value() }}</output>
+  <button
+    button
+    aria-label="增加"
+    [disabled]="!number.canIncrement()"
+    (click)="number.increment($event)"
+  >
+    <plus-icon />
+  </button>
+</div>

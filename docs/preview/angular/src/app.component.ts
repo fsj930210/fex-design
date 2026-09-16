@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common'
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, signal, type Type } from '@angular/core'
 import type { ApiValue } from '@fex-design/docs-shared/model'
 import { PREVIEW_PROTOCOL, isPreviewHostMessage } from '@fex-design/docs-shared/preview-protocol'
 import { examples } from './examples.generated'
@@ -14,15 +14,21 @@ export class AppComponent {
   private readonly query = new URLSearchParams(location.search)
   protected readonly embedded = this.query.get('embed') === 'true'
   protected readonly values = signal<Record<string, ApiValue>>({})
-  protected readonly example =
+  protected readonly example = signal<Type<unknown> | null | undefined>(undefined)
+  private readonly loadExample =
     examples[
       `${this.query.get('layer') ?? location.pathname.split('/').filter(Boolean).at(-3)}/${this.query.get('component') ?? location.pathname.split('/').filter(Boolean).at(-2)}/${this.query.get('demo') ?? location.pathname.split('/').filter(Boolean).at(-1)}`
-    ] ?? null
+    ]
 
   constructor() {
     addEventListener('message', (event) => {
       if (isPreviewHostMessage(event.data)) this.values.set(event.data.props)
     })
+    void this.initialize()
+  }
+
+  private async initialize() {
+    this.example.set(this.loadExample ? await this.loadExample() : null)
     queueMicrotask(() => {
       const runtime = document.querySelector<HTMLElement>('.runtime')!
       const sendResize = () => this.send('resize', { height: Math.ceil(runtime.scrollHeight) })

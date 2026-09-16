@@ -9,5 +9,7 @@
     {value}
     onChange={(next) => typeof next === "number" && (value = next)}
     onEnd={(next) => typeof next === "number" && (ended = next)}
-  /><p>当前值：{value}；结束值：{ended}</p><Slider defaultValue={60} keyboard={false} />
+  />
+  <p>当前值：{value}；结束值：{ended}</p>
+  <Slider defaultValue={60} keyboard={false} />
 </div>

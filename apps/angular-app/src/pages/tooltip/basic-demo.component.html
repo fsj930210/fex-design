@@ -1,14 +1,18 @@
 <div class="flex gap-2">
-  <fex-tooltip
-    ><button button fexTooltipTrigger variant="outlined">Hover or focus</button
-    ><fex-tooltip-portal
-      ><fex-tooltip-content
-        >Helpful information<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal></fex-tooltip
-  ><fex-tooltip
-    ><button button fexTooltipTrigger variant="outlined">Save</button
-    ><fex-tooltip-portal
-      ><fex-tooltip-content class="flex items-center gap-2"
-        >Save changes <kbd kbd>S</kbd
-        ><fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal
-  ></fex-tooltip>
+  <div tooltipRoot>
+    <button button tooltipTrigger variant="outlined">Hover or focus</button
+    ><ng-template tooltipPortal
+      ><div tooltipContent>
+        Helpful information
+        <div tooltipArrow></div></div
+    ></ng-template>
+  </div>
+  <div tooltipRoot>
+    <button button tooltipTrigger variant="outlined">Save</button
+    ><ng-template tooltipPortal
+      ><div tooltipContent class="flex items-center gap-2">
+        Save changes <kbd kbd>S</kbd>
+        <div tooltipArrow></div></div
+    ></ng-template>
+  </div>
 </div>

@@ -16,14 +16,15 @@
         [hasError]="invalid(quantityField.api)"
       >
         <label fexFieldLabel>Quantity <span fexFieldRequiredIndicator>*</span></label>
-        <fex-input-number
+        <div
+          inputNumber
           fexFieldControl
           [clearable]="true"
           [value]="quantityField.api.state.value"
           [min]="1"
           [invalid]="invalid(quantityField.api)"
           (change)="change(quantityField.api, $event)"
-        />
+        ></div>
         @if (invalid(quantityField.api)) {
           <div fexFieldError>
             @for (error of errors(quantityField.api); track error) {

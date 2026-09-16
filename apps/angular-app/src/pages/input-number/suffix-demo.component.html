@@ -4,10 +4,8 @@
   description="Suffix replaces actions while clear remains independent."
 >
   <div class="grid gap-2 md:grid-cols-3">
-    <fex-input-number [clearable]="true" [defaultValue]="20" /><fex-input-number [defaultValue]="20"
-      ><span fexInputNumberSuffix>kg</span></fex-input-number
-    ><fex-input-number [clearable]="true" [defaultValue]="20"
-      ><span fexInputNumberSuffix>%</span></fex-input-number
-    >
+    <div inputNumber [clearable]="true" [defaultValue]="20"></div>
+    <div inputNumber [defaultValue]="20"><span inputSuffix>kg</span></div>
+    <div inputNumber [clearable]="true" [defaultValue]="20"><span inputSuffix>%</span></div>
   </div>
 </div>

@@ -4,17 +4,21 @@
       ><fex-bubble-content
         >Did you remove the stale route and regenerate the registry?</fex-bubble-content
       ></fex-bubble
-    ><fex-tooltip
-      ><button fexTooltipTrigger>
+    >
+    <div tooltipRoot>
+      <button tooltipTrigger>
         <fex-bubble side="end" variant="solid"
           ><fex-bubble-content
             >Yes. The route is gone and the registry is clean.</fex-bubble-content
           ></fex-bubble
         ></button
-      ><fex-tooltip-portal
-        ><fex-tooltip-content
-          >Read at 10:24 · Delivered to 3 devices<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal></fex-tooltip
-    ><fex-bubble variant="plain"
+      ><ng-template tooltipPortal
+        ><div tooltipContent>
+          Read at 10:24 · Delivered to 3 devices
+          <div tooltipArrow></div></div
+      ></ng-template>
+    </div>
+    <fex-bubble variant="plain"
       ><fex-bubble-content class="text-muted-foreground"
         >Hover or focus the reply to inspect its delivery metadata.</fex-bubble-content
       ></fex-bubble

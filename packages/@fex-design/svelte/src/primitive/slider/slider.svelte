@@ -159,7 +159,11 @@
 <div
   {...rest}
   bind:this={rootElement}
-  data-disabled={currentSnapshot.disabled || (currentSnapshot.disabledThumbs.length > 0 && currentSnapshot.disabledThumbs.every(Boolean)) ? "true" : undefined}
+  data-disabled={currentSnapshot.disabled ||
+  (currentSnapshot.disabledThumbs.length > 0 &&
+    currentSnapshot.disabledThumbs.every(Boolean))
+    ? "true"
+    : undefined}
   data-orientation={currentSnapshot.orientation}
   data-slot="slider"
   data-reverse={currentSnapshot.reverse ? "" : undefined}
@@ -184,9 +188,7 @@
       currentSnapshot.reverse,
     );
     const thumbIndex = Number(
-      target
-        .closest('[data-slot="slider-thumb"]')
-        ?.getAttribute("data-index"),
+      target.closest('[data-slot="slider-thumb"]')?.getAttribute("data-index"),
     );
     if (Number.isInteger(thumbIndex)) {
       controller.setActiveIndex(thumbIndex);

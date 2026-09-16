@@ -7,14 +7,7 @@ import {
   sliderTrackClassName,
 } from '@fex-design/styles/slider'
 import { cn } from '@fex/utils'
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  output,
-  signal,
-} from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core'
 import {
   SliderMark,
   SliderRange,
@@ -74,11 +67,12 @@ export class Slider {
       ? [this.defaultValue() as number]
       : (this.defaultValue() as number[] | undefined),
   )
-  protected readonly currentValues = computed(() =>
-    this.arrayValue() ??
-    (this.internalValues().length > 0
-      ? this.internalValues()
-      : (this.arrayDefault() ?? [this.min()])),
+  protected readonly currentValues = computed(
+    () =>
+      this.arrayValue() ??
+      (this.internalValues().length > 0
+        ? this.internalValues()
+        : (this.arrayDefault() ?? [this.min()])),
   )
   protected readonly disabledThumbs = computed(() =>
     Array.isArray(this.disabled()) ? (this.disabled() as boolean[]) : [],
@@ -91,18 +85,10 @@ export class Slider {
       this.className(),
     ),
   )
-  protected readonly trackClass = computed(() =>
-    cn(sliderTrackClassName, this.classNames().track),
-  )
-  protected readonly rangeClass = computed(() =>
-    cn(sliderRangeClassName, this.classNames().range),
-  )
-  protected readonly thumbClass = computed(() =>
-    cn(sliderThumbClassName, this.classNames().thumb),
-  )
-  protected readonly markClass = computed(() =>
-    cn(sliderMarkClassName, this.classNames().mark),
-  )
+  protected readonly trackClass = computed(() => cn(sliderTrackClassName, this.classNames().track))
+  protected readonly rangeClass = computed(() => cn(sliderRangeClassName, this.classNames().range))
+  protected readonly thumbClass = computed(() => cn(sliderThumbClassName, this.classNames().thumb))
+  protected readonly markClass = computed(() => cn(sliderMarkClassName, this.classNames().mark))
   protected readonly dotValues = computed(() =>
     this.dots() && this.step()
       ? Array.from(

@@ -7,9 +7,18 @@
   import { tooltipContextKey, type TooltipContext } from "./tooltip-context";
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class"> {
     class?: string;
+    color?: string;
     children?: Snippet;
   }
-  let { class: className, children, style, ...rest }: Props = $props();
+  let {
+    class: className,
+    children,
+    color,
+    style,
+    onpointerenter,
+    onpointerleave,
+    ...rest
+  }: Props = $props();
   const { contentId, overlay, snapshot } =
     getContext<TooltipContext>(tooltipContextKey);
   const classes = $derived(cn(tooltipContentClassName, className));
@@ -31,7 +40,25 @@
     data-align={$snapshot.align}
     data-placement={$snapshot.placement}
     class={classes}
-    {style}
+    onpointerenter={(event) => {
+      onpointerenter?.(event);
+      if (!event.defaultPrevented)
+        overlay.content.pointerEnter({
+          target: event.target,
+          currentTarget: event.currentTarget,
+          event,
+        });
+    }}
+    onpointerleave={(event) => {
+      onpointerleave?.(event);
+      if (!event.defaultPrevented)
+        overlay.content.pointerLeave({
+          target: event.target,
+          currentTarget: event.currentTarget,
+          event,
+        });
+    }}
+    style={`${color ? `--tooltip-background:${color};` : ""}${style ?? ""}`}
     style:position="var(--floating-strategy, absolute)"
     style:left="var(--floating-x, 0px)"
     style:top="var(--floating-y, 0px)"

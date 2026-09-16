@@ -1,0 +1,8 @@
+export { default as InputNumberRoot } from './input-number-root.svelte'
+export { default as InputNumberControl } from './input-number-control.svelte'
+export { default as InputNumberActions } from './input-number-actions.svelte'
+export { default as InputNumberIncrement } from './input-number-increment.svelte'
+export { default as InputNumberDecrement } from './input-number-decrement.svelte'
+export { default as InputNumberClear } from './input-number-clear.svelte'
+export { useInputNumber } from './use-input-number.svelte'
+export type { UseInputNumberOptions, UseInputNumberReturn } from './use-input-number.svelte'

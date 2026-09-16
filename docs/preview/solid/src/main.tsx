@@ -5,24 +5,19 @@ import { createSignal, ErrorBoundary, onCleanup, onMount, Show } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import './styles.css'
 
-const [props, setProps] = createSignal<Record<string, ApiValue>>({})
 const query = new URLSearchParams(window.location.search)
 const path = window.location.pathname.split('/').filter(Boolean)
 const layer = query.get('layer') ?? path.at(-3)
 const component = query.get('component') ?? path.at(-2)
 const demo = query.get('demo') ?? path.at(-1)
-// Glob 是 Preview 的示例注册表；示例清单版本 7，强制 Vite 重新收集。
+// Keep loaders lazy: one Preview URL must only fetch its selected example graph.
 const exampleModules = import.meta.glob(
   '../../../../packages/@fex-design/solid/src/{primitive,ui}/*/examples/*.tsx',
-  { eager: true },
-) as Record<string, Record<string, () => unknown>>
+  { eager: false },
+) as Record<string, () => Promise<Record<string, () => unknown>>>
 const examplePath = Object.keys(exampleModules).find((key) =>
   key.includes(`/${layer}/${component}/examples/${demo}.tsx`),
 )
-const Example = examplePath
-  ? (exampleModules[examplePath].default ??
-    Object.values(exampleModules[examplePath]).find((value) => typeof value === 'function'))
-  : undefined
 const embedded = query.get('embed') === 'true'
 
 function send(type: 'ready' | 'resize' | 'event' | 'error', payload: Record<string, unknown> = {}) {
@@ -34,16 +29,34 @@ function send(type: 'ready' | 'resize' | 'event' | 'error', payload: Record<stri
 
 function Preview() {
   let root!: HTMLDivElement
+  const [, setProps] = createSignal<Record<string, ApiValue>>({})
+  const [Example, setExample] = createSignal<(() => unknown) | null | undefined>(undefined)
   onMount(() => {
+    const sendResize = () => send('resize', { height: Math.ceil(root.scrollHeight) })
+    const reportReady = () => {
+      send('ready')
+      sendResize()
+    }
     const onMessage = (event: MessageEvent) => {
-      if (isPreviewHostMessage(event.data)) setProps(event.data.props)
+      if (!isPreviewHostMessage(event.data)) return
+      setProps(event.data.props)
+      if (Example() !== undefined) reportReady()
     }
     window.addEventListener('message', onMessage)
-    const sendResize = () => send('resize', { height: Math.ceil(root.scrollHeight) })
     const observer = new ResizeObserver(sendResize)
     observer.observe(root)
-    send('ready')
-    sendResize()
+    const load = async () => {
+      const module = examplePath ? await exampleModules[examplePath]?.() : undefined
+      const loadedExample = module
+        ? (module.default ??
+          Object.values(module).find((value) => typeof value === 'function') ??
+          null)
+        : null
+      // Solid setters treat a bare function as an updater, so store the component through a wrapper.
+      setExample(() => loadedExample)
+      queueMicrotask(reportReady)
+    }
+    void load()
     onCleanup(() => {
       window.removeEventListener('message', onMessage)
       observer.disconnect()
@@ -67,14 +80,14 @@ function Preview() {
         }}
       >
         <Show
-          when={Example}
+          when={Example()}
           fallback={
             <p>
               未找到示例：{layer}/{component}/{demo}
             </p>
           }
         >
-          <Dynamic component={Example} />
+          <Dynamic component={Example()!} />
         </Show>
       </ErrorBoundary>
     </div>

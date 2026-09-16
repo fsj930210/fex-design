@@ -10,7 +10,7 @@ import { StatesDemoComponent } from './states-demo.component'
 import { SuffixDemoComponent } from './suffix-demo.component'
 import { ValidationDemoComponent } from './validation-demo.component'
 @Component({
-  selector: 'fex-input-number-page',
+  selector: 'input-number-page',
   standalone: true,
   imports: [
     RouterLink,

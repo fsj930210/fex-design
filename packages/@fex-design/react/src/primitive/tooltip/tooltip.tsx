@@ -1,4 +1,12 @@
-import { useId, useRef, useState, type HTMLAttributes, type ReactNode, type Ref } from 'react'
+import {
+  useId,
+  useRef,
+  useState,
+  type CSSProperties,
+  type HTMLAttributes,
+  type ReactNode,
+  type Ref,
+} from 'react'
 import { createPortal } from 'react-dom'
 import { createTooltip, type TooltipOptions } from '@fex-design/core/tooltip/create-tooltip'
 import { shallowEqualObject } from '@fex/utils'
@@ -74,9 +82,13 @@ export function TooltipPortal({ children, container, forceMount }: TooltipPortal
 
 export interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement>
+  color?: string
 }
-export function TooltipContent({ children, ...props }: TooltipContentProps) {
-  const content = useTooltipContent(props)
+export function TooltipContent({ children, color, style, ...props }: TooltipContentProps) {
+  const content = useTooltipContent({
+    ...props,
+    style: { ...(color ? ({ '--tooltip-background': color } as CSSProperties) : {}), ...style },
+  })
   return content.mounted ? <div {...content.props}>{children}</div> : null
 }
 

@@ -324,20 +324,36 @@ export function createFloating(options: FloatingOptions = {}): Floating {
     const arrowSize = currentArrow?.offsetWidth ?? 0
     const arrowPadding = currentOptions.arrowPadding ?? defaultArrowPadding
     const floatingRect = floating.getBoundingClientRect()
-    const alignedArrowPosition = (availableSize: number, middlewarePosition?: number) => {
-      if (resultParts.align === 'start') return arrowPadding
-      if (resultParts.align === 'end') {
+    const floatingDirection =
+      floating.ownerDocument.defaultView?.getComputedStyle(floating).direction ?? 'ltr'
+    const alignedArrowPosition = (
+      availableSize: number,
+      middlewarePosition: number | undefined,
+      horizontal: boolean,
+    ) => {
+      // Floating UI interprets start/end logically. Keep the forced edge inset logical too:
+      // top-start is left in LTR and right in RTL, while vertical block alignment is unchanged.
+      const align =
+        horizontal && floatingDirection === 'rtl'
+          ? resultParts.align === 'start'
+            ? 'end'
+            : resultParts.align === 'end'
+              ? 'start'
+              : resultParts.align
+          : resultParts.align
+      if (align === 'start') return arrowPadding
+      if (align === 'end') {
         return Math.max(arrowPadding, availableSize - arrowSize - arrowPadding)
       }
       return middlewarePosition
     }
     const arrowX =
       resultParts.side === 'top' || resultParts.side === 'bottom'
-        ? alignedArrowPosition(floatingRect.width, arrowData?.x)
+        ? alignedArrowPosition(floatingRect.width, arrowData?.x, true)
         : arrowData?.x
     const arrowY =
       resultParts.side === 'left' || resultParts.side === 'right'
-        ? alignedArrowPosition(floatingRect.height, arrowData?.y)
+        ? alignedArrowPosition(floatingRect.height, arrowData?.y, false)
         : arrowData?.y
 
     // 坐标和尺寸通过 CSS 变量写入 DOM，adapter 只绑定固定的 position/left/top 规则。

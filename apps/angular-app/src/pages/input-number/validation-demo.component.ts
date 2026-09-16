@@ -7,12 +7,12 @@ import {
   FieldRoot,
 } from '@fex-design/angular/primitive/field'
 import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
-import { InputNumber, type InputNumberChange } from '@fex-design/angular/primitive/input-number'
+import { InputNumber, type InputNumberChange } from '@fex-design/angular/ui/input-number'
 import { Button } from '@fex-design/angular/ui/button'
 import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
-  selector: 'fex-input-number-validation-demo',
+  selector: 'input-number-validation-demo',
   standalone: true,
   imports: [
     Card,

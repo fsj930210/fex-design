@@ -1,0 +1,12 @@
+<div class="flex flex-wrap items-center justify-center gap-4">
+  @for (item of colors; track item.value) {
+  <div tooltipRoot>
+    <button button tooltipTrigger>{{ item.label }}</button
+    ><ng-template tooltipPortal
+      ><div tooltipContent [color]="item.value">
+        {{ item.label }} Tooltip
+        <div tooltipArrow></div></div
+    ></ng-template>
+  </div>
+  }
+</div>

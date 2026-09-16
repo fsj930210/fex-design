@@ -52,7 +52,7 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
                     {event.name}
                   </code>
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-primary">
-                    {event.parameters.length > 0
+                    {(event.parameters?.length ?? 0) > 0
                       ? event.parameters
                           .map((parameter) => `${parameter.name}: ${parameter.type}`)
                           .join('\n')

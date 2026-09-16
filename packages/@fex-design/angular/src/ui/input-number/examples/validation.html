@@ -1,0 +1,11 @@
+<div class="grid w-full gap-2">
+  <p>购买数量</p>
+  <div
+    inputNumber
+    [defaultValue]="8"
+    id="purchase-quantity"
+    invalid
+    describedBy="purchase-quantity-error"
+  ></div>
+  <p id="purchase-quantity-error" class="text-sm text-danger">购买数量不能超过当前库存 5</p>
+</div>

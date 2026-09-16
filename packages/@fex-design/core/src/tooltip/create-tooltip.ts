@@ -10,25 +10,34 @@ export interface TooltipOptions extends Omit<
   'allowedTriggers' | 'arrow' | 'dismiss' | 'modal' | 'trigger'
 > {}
 
+export type TooltipSemanticPart = 'root' | 'arrow'
+export type TooltipClassNames = Partial<Record<TooltipSemanticPart, string>>
+
 export type Tooltip = Omit<FloatingOverlay, 'setOptions'> & {
   setOptions: (options: TooltipOptions) => void
 }
 
-export function getTooltipArrowPosition(side: FloatingSide, align: FloatingAlign) {
-  const edgeOffset =
-    side === 'left' || side === 'right'
-      ? 'var(--tooltip-arrow-edge-offset-y, clamp(14px, 25%, 24px))'
-      : 'var(--tooltip-arrow-edge-offset-x, clamp(16px, 25%, 32px))'
-  const position =
-    align === 'start'
-      ? edgeOffset
-      : align === 'end'
-        ? `calc(100% - ${edgeOffset})`
-        : side === 'left' || side === 'right'
-          ? 'calc(var(--floating-arrow-y, calc(50% - 4px)) + var(--tooltip-arrow-half-size, 4px))'
-          : 'calc(var(--floating-arrow-x, calc(50% - 4px)) + var(--tooltip-arrow-half-size, 4px))'
-
-  return side === 'left' || side === 'right' ? { top: position } : { left: position }
+export function getTooltipArrowPosition(side: FloatingSide, _align: FloatingAlign) {
+  const align = _align
+  const edgeOffset = 'var(--tooltip-arrow-edge-offset-y, clamp(14px, 25%, 24px))'
+  const centeredArrowX =
+    'calc(var(--floating-arrow-x, calc(50% - var(--floating-arrow-size, 8px) / 2)) + var(--floating-arrow-size, 8px) / 2)'
+  const centeredArrowY =
+    'calc(var(--floating-arrow-y, calc(50% - var(--floating-arrow-size, 8px) / 2)) + var(--floating-arrow-size, 8px) / 2)'
+  if (side === 'left' || side === 'right') {
+    return {
+      top:
+        align === 'start'
+          ? edgeOffset
+          : align === 'end'
+            ? `calc(100% - ${edgeOffset})`
+            : centeredArrowY,
+    }
+  }
+  if (align === 'center') {
+    return { left: centeredArrowX }
+  }
+  return {}
 }
 
 function toFloatingOverlayOptions(options: TooltipOptions): FloatingOverlayOptions {

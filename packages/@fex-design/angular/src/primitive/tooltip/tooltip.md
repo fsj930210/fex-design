@@ -1,38 +1,47 @@
-# Tooltip
+# Angular Primitive Tooltip
 
-Tooltip 是 hover/focus 触发的非交互说明组件，复用共享 floating core。
+Accessible hover/focus hint built on the shared floating controller.
 
-## 导入与示例
+## Import
 
-```ts
-import {
-  Tooltip,
-  TooltipArrow,
-  TooltipContent,
-  TooltipPortal,
-  TooltipTrigger,
-} from '@fex-design/angular/primitive/tooltip'
-```
+    import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow } from '@fex-design/angular/primitive/tooltip'
 
-```html
-<fex-tooltip
-  ><button fexTooltipTrigger>Save</button
-  ><fex-tooltip-portal
-    ><fex-tooltip-content
-      >Save changes<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal
-></fex-tooltip>
-```
+## Components
 
-## Props
+| Component      | Purpose                                               |
+| -------------- | ----------------------------------------------------- |
+| TooltipRoot    | Owns open state, timing, positioning, and context.    |
+| TooltipTrigger | Connects hover/focus behavior and aria-describedby.   |
+| TooltipPortal  | Mounts content in the resolved container.             |
+| TooltipContent | Renders role="tooltip" content and positioning state. |
+| TooltipArrow   | Renders the optional positioned arrow.                |
 
-| 组件            | 参数                                 | 类型                         | 默认值      | 必填 | 说明                  |
-| --------------- | ------------------------------------ | ---------------------------- | ----------- | ---- | --------------------- |
-| Tooltip         | `open` / `defaultOpen`               | `boolean`                    | `- / false` | 否   | 受控与非受控状态      |
-| Tooltip         | `placement` / `sideOffset`           | `FloatingPlacement / number` | `top / 6`   | 否   | 定位                  |
-| Tooltip         | `hoverOpenDelay` / `hoverCloseDelay` | `number`                     | `400 / 100` | 否   | 延迟                  |
-| Tooltip         | `disabled`                           | `boolean`                    | `false`     | 否   | 禁止触发              |
-| Content / Arrow | `class`                              | 原生 class                   | -           | 否   | 自动与默认 class 合并 |
+## Examples
 
-## 事件、状态与注意事项
+| Name          | Covers                                  |
+| ------------- | --------------------------------------- |
+| basic         | Trigger and accessible tooltip content. |
+| controlled    | Controlled open state.                  |
+| placement     | Twelve placements.                      |
+| color         | Custom content color.                   |
+| direction     | LTR and RTL behavior.                   |
+| css-variables | CSS variable customization.             |
 
-`(openChange)` 发出下一状态；传入 `[open]` 时由调用方回写。Arrow 是显式组件，Content 与 Arrow 共用 `--tooltip-background`。内容不可交互。disabled 按钮外层使用 `tabindex="0"` wrapper 和 `fexTooltipTrigger`，内部按钮保持原生 disabled。
+## API
+
+| Name                             | Type                     | Default | Description                                    |
+| -------------------------------- | ------------------------ | ------- | ---------------------------------------------- |
+| open / defaultOpen               | boolean                  | false   | Controlled / uncontrolled open state.          |
+| disabled                         | boolean                  | false   | Disables tooltip triggers.                     |
+| placement                        | TooltipPlacement         | top     | Twelve shortcut placements.                    |
+| side / align                     | Side / Align             | —       | Explicit floating direction and alignment.     |
+| sideOffset / alignOffset         | number                   | 6 / 0   | Distance and alignment offsets in pixels.      |
+| avoidCollisions                  | boolean                  | true    | Adjusts placement when space is insufficient.  |
+| hoverOpenDelay / hoverCloseDelay | number                   | 0 / 80  | Hover delays in milliseconds.                  |
+| closeDelay                       | number                   | 140     | Keeps content mounted for the exit transition. |
+| getPopupContainer                | (trigger) => HTMLElement | body    | Resolves the portal container.                 |
+| onOpenChange                     | (open, info) => void     | —       | Reports state requests and their reason.       |
+
+## Accessibility
+
+Content uses role="tooltip". The trigger receives aria-describedby only while content is mounted. Keyboard focus opens the hint; Escape closes it and focus is preserved.

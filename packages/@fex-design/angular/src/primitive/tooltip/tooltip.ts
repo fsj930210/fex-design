@@ -2,13 +2,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
+  DestroyRef,
   ElementRef,
   EventEmitter,
+  effect,
   HostListener,
   Input,
   Output,
+  TemplateRef,
+  untracked,
+  ViewContainerRef,
   inject,
+  input,
   type AfterViewInit,
+  type EmbeddedViewRef,
   type OnChanges,
   type OnDestroy,
 } from '@angular/core'
@@ -21,7 +28,6 @@ import {
 import { tooltipArrowClassName, tooltipContentClassName } from '@fex-design/styles/tooltip'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { createHostClassName } from '../../signals/host-class'
-import { PopoverDomService, type PopoverPortalMount } from '../popover/popover-dom'
 
 let tooltipId = 0
 const eventInfo = (event: Event) => ({
@@ -31,7 +37,7 @@ const eventInfo = (event: Event) => ({
 })
 
 @Component({
-  selector: 'fex-tooltip',
+  selector: 'div[tooltipRoot], span[tooltipRoot]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { style: 'display: contents' },
@@ -46,12 +52,13 @@ export class Tooltip implements OnChanges, OnDestroy {
   @Input() align?: TooltipOptions['align']
   @Input() sideOffset?: number
   @Input() alignOffset?: number
+  @Input() avoidCollisions?: TooltipOptions['avoidCollisions']
   @Input() hoverOpenDelay?: number
   @Input() hoverCloseDelay?: number
   @Input() closeDelay?: number
   @Input() getPopupContainer?: TooltipOptions['getPopupContainer']
   @Output() openChange = new EventEmitter<boolean>()
-  readonly contentId = `fex-tooltip-${++tooltipId}`
+  readonly contentId = `tooltip-${++tooltipId}`
   private localOpen = this.defaultOpen
   readonly overlay: TooltipCore = createTooltip(this.options())
   readonly snapshot = createCoreStoreSignal(this.overlay)
@@ -64,6 +71,7 @@ export class Tooltip implements OnChanges, OnDestroy {
       align: this.align,
       sideOffset: this.sideOffset,
       alignOffset: this.alignOffset,
+      avoidCollisions: this.avoidCollisions,
       hoverOpenDelay: this.hoverOpenDelay,
       hoverCloseDelay: this.hoverCloseDelay,
       closeDelay: this.closeDelay,
@@ -86,7 +94,8 @@ export class Tooltip implements OnChanges, OnDestroy {
 }
 
 @Directive({
-  selector: '[fexTooltipTrigger]',
+  selector:
+    'button[tooltipTrigger], input[tooltipTrigger], div[tooltipTrigger], span[tooltipTrigger]',
   standalone: true,
   host: {
     '[attr.aria-describedby]': 'describedBy()',
@@ -107,47 +116,53 @@ export class TooltipTrigger implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.tooltip.overlay.setReferenceElement(null)
   }
-  @HostListener('pointerenter', ['$event']) pointerEnter(event: PointerEvent) {
+  @HostListener('pointerenter', ['$event']) pointerEnter(event: Event) {
+    if (event.defaultPrevented) return
     this.tooltip.overlay.trigger.pointerEnter(eventInfo(event))
   }
-  @HostListener('pointerleave', ['$event']) pointerLeave(event: PointerEvent) {
+  @HostListener('pointerleave', ['$event']) pointerLeave(event: Event) {
+    if (event.defaultPrevented) return
     this.tooltip.overlay.trigger.pointerLeave(eventInfo(event))
   }
-  @HostListener('focus', ['$event']) focus(event: FocusEvent) {
+  @HostListener('focus', ['$event']) focus(event: Event) {
+    if (event.defaultPrevented) return
     this.tooltip.overlay.trigger.focus(eventInfo(event))
   }
-  @HostListener('blur', ['$event']) blur(event: FocusEvent) {
+  @HostListener('blur', ['$event']) blur(event: Event) {
+    if (event.defaultPrevented) return
     this.tooltip.overlay.trigger.blur(eventInfo(event))
   }
 }
 
-@Component({
-  selector: 'fex-tooltip-portal',
-  standalone: true,
-  providers: [PopoverDomService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'tooltip-portal', style: 'display: contents' },
-  template: '<ng-content />',
-})
-export class TooltipPortal implements AfterViewInit, OnDestroy {
-  @Input() container?: HTMLElement | null
+@Directive({ selector: 'ng-template[tooltipPortal]', standalone: true })
+export class TooltipPortal {
+  readonly container = input<HTMLElement | null>()
   private readonly tooltip = inject(Tooltip)
-  private readonly dom = inject(PopoverDomService)
-  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement
-  private mount?: PopoverPortalMount
-  ngAfterViewInit() {
-    this.mount = this.dom.mountFloatingElement(
-      this.host,
-      this.container ?? this.tooltip.overlay.resolvePopupContainer(),
-    )
-  }
-  ngOnDestroy() {
-    this.mount?.cleanup()
+  private readonly template = inject(TemplateRef<unknown>)
+  private readonly views = inject(ViewContainerRef)
+  private view: EmbeddedViewRef<unknown> | undefined
+  constructor() {
+    effect(() => {
+      const mounted = this.tooltip.snapshot().mounted
+      untracked(() => {
+        if (!mounted) {
+          this.views.clear()
+          this.view = undefined
+          return
+        }
+        if (!this.view) this.view = this.views.createEmbeddedView(this.template)
+        const target = this.container() ?? this.tooltip.overlay.resolvePopupContainer()
+        if (target)
+          for (const node of this.view.rootNodes)
+            if (node.parentNode !== target) target.appendChild(node)
+      })
+    })
+    inject(DestroyRef).onDestroy(() => this.views.clear())
   }
 }
 
 @Component({
-  selector: 'fex-tooltip-content',
+  selector: 'div[tooltipContent]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -172,6 +187,19 @@ export class TooltipContent implements AfterViewInit, OnDestroy {
   protected readonly tooltip = inject(Tooltip)
   protected readonly hostClassName = createHostClassName(tooltipContentClassName)
   private readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
+  @Input()
+  set color(value: string | undefined) {
+    if (value) this.element.style.setProperty('--tooltip-background', value)
+    else this.element.style.removeProperty('--tooltip-background')
+  }
+  @HostListener('pointerenter', ['$event']) pointerEnter(event: Event) {
+    if (event.defaultPrevented) return
+    this.tooltip.overlay.content.pointerEnter(eventInfo(event))
+  }
+  @HostListener('pointerleave', ['$event']) pointerLeave(event: Event) {
+    if (event.defaultPrevented) return
+    this.tooltip.overlay.content.pointerLeave(eventInfo(event))
+  }
   ngAfterViewInit() {
     this.tooltip.overlay.setFloatingElement(this.element)
   }
@@ -181,7 +209,7 @@ export class TooltipContent implements AfterViewInit, OnDestroy {
 }
 
 @Component({
-  selector: 'fex-tooltip-arrow',
+  selector: 'div[tooltipArrow]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

@@ -2,7 +2,7 @@ import type { ComponentApi, Framework } from './types'
 
 export function resolveComponentApi(value: ComponentApi, framework: Framework) {
   const native = value.frameworks?.[framework]
-  const props = (native?.props ?? value.props)
+  const props = (native?.props ?? value.props ?? [])
     .filter((property) => !native?.omitProps?.includes(property.name))
     .map((property) => ({
       ...property,
@@ -27,6 +27,7 @@ export function resolveComponentApi(value: ComponentApi, framework: Framework) {
               {
                 name: className,
                 type: 'string',
+                default: undefined,
                 description: `追加到原生 ${value.nativeElement} 的 ${className}。`,
               },
             ]),
@@ -36,6 +37,7 @@ export function resolveComponentApi(value: ComponentApi, framework: Framework) {
               {
                 name: 'style',
                 type: styleType,
+                default: undefined,
                 description: `追加到原生 ${value.nativeElement} 的内联样式。`,
               },
             ]),
@@ -43,7 +45,7 @@ export function resolveComponentApi(value: ComponentApi, framework: Framework) {
     : []
   return {
     props: [...props, ...nativeProps],
-    events: native?.events ?? value.events,
+    events: native?.events ?? value.events ?? [],
     slots: native?.slots ?? value.slots ?? [],
     slotLabel: native?.slotLabel ?? 'Slots',
   }

@@ -1,0 +1,205 @@
+{
+  "name": "TooltipRoot",
+  "slug": "tooltip",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "控制 Tooltip 的 hover、focus、状态和定位。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/tooltip",
+    "vue": "@fex-design/vue/primitive/tooltip",
+    "solid": "@fex-design/solid/primitive/tooltip",
+    "svelte": "@fex-design/svelte/primitive/tooltip",
+    "angular": "@fex-design/angular/primitive/tooltip"
+  },
+  "props": [
+    { "name": "open", "type": "boolean", "description": "受控打开状态。" },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控初始打开状态。"
+    },
+    {
+      "name": "placement",
+      "type": "FloatingPlacement",
+      "default": "'top'",
+      "description": "提示位置。"
+    },
+    {
+      "name": "sideOffset",
+      "type": "number",
+      "default": "6",
+      "description": "与触发元素的距离，单位 px。"
+    },
+    {
+      "name": "alignOffset",
+      "type": "number",
+      "default": "0",
+      "description": "沿对齐轴偏移，单位 px。"
+    },
+    {
+      "name": "hoverOpenDelay",
+      "type": "number",
+      "default": "400",
+      "description": "hover 打开延迟，单位 ms。"
+    },
+    {
+      "name": "hoverCloseDelay",
+      "type": "number",
+      "default": "100",
+      "description": "hover 关闭延迟，单位 ms。"
+    },
+    { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用触发。" },
+    {
+      "name": "getPopupContainer",
+      "type": "(trigger: HTMLElement | null) => HTMLElement",
+      "description": "返回挂载容器，默认 body。"
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        { "name": "open", "type": "boolean" },
+        { "name": "info", "type": "DisclosureChangeInfo" }
+      ],
+      "description": "请求改变打开状态。"
+    }
+  ],
+  "demos": [
+    { "id": "basic", "title": "基本使用", "description": "hover、focus 和内容可悬停。" },
+    {
+      "id": "placement",
+      "title": "十二个位置",
+      "description": "四个方向分别支持 start、center、end 对齐。"
+    },
+    { "id": "controlled", "title": "受控状态", "description": "外部控制打开状态。" },
+    {
+      "id": "color",
+      "title": "自定义颜色",
+      "description": "使用 TooltipContent 的 color 设置面板与箭头背景色。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS Variables",
+      "description": "通过组件变量定制颜色、宽度和动效。"
+    },
+    {
+      "id": "direction",
+      "title": "文字方向",
+      "description": "对比中文 LTR 与阿拉伯文 RTL 的起始侧对齐。"
+    }
+  ],
+  "frameworks": {
+    "vue": {
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [
+            { "name": "open", "type": "boolean" },
+            { "name": "info", "type": "DisclosureChangeInfo" }
+          ],
+          "description": "开关请求。"
+        }
+      ]
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [{ "name": "open", "type": "boolean" }],
+          "description": "开关请求。"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "TooltipTrigger",
+      "slug": "tooltip-trigger",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "连接实际触发元素；继承该原生元素的属性和事件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/tooltip",
+        "vue": "@fex-design/vue/primitive/tooltip",
+        "solid": "@fex-design/solid/primitive/tooltip",
+        "svelte": "@fex-design/svelte/primitive/tooltip",
+        "angular": "@fex-design/angular/primitive/tooltip"
+      },
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "TooltipPortal",
+      "slug": "tooltip-portal",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "把内容挂载到指定容器。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/tooltip",
+        "vue": "@fex-design/vue/primitive/tooltip",
+        "solid": "@fex-design/solid/primitive/tooltip",
+        "svelte": "@fex-design/svelte/primitive/tooltip",
+        "angular": "@fex-design/angular/primitive/tooltip"
+      },
+      "props": [
+        { "name": "container", "type": "HTMLElement | null", "description": "指定挂载元素。" }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "TooltipContent",
+      "slug": "tooltip-content",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "带 role=tooltip 的提示面板；继承原生 div。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/tooltip",
+        "vue": "@fex-design/vue/primitive/tooltip",
+        "solid": "@fex-design/solid/primitive/tooltip",
+        "svelte": "@fex-design/svelte/primitive/tooltip",
+        "angular": "@fex-design/angular/primitive/tooltip"
+      },
+      "props": [
+        { "name": "color", "type": "string", "description": "设置面板与箭头背景色。" },
+        { "name": "className / class", "type": "string", "description": "追加 CSS 类名。" },
+        { "name": "style", "type": "原生样式类型", "description": "设置内联样式。" }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "TooltipArrow",
+      "slug": "tooltip-arrow",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "指向触发元素的装饰箭头；继承原生 div。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/tooltip",
+        "vue": "@fex-design/vue/primitive/tooltip",
+        "solid": "@fex-design/solid/primitive/tooltip",
+        "svelte": "@fex-design/svelte/primitive/tooltip",
+        "angular": "@fex-design/angular/primitive/tooltip"
+      },
+      "props": [
+        { "name": "className / class", "type": "string", "description": "追加 CSS 类名。" },
+        { "name": "style", "type": "原生样式类型", "description": "设置内联样式。" }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    }
+  ],
+  "cssVariables": [
+    { "name": "--tooltip-background", "description": "面板和箭头背景，默认 var(--foreground)。" },
+    { "name": "--tooltip-foreground", "description": "文字颜色，默认 var(--background)。" },
+    { "name": "--tooltip-content-max-width", "description": "最大宽度，默认 280px。" },
+    { "name": "--tooltip-motion-duration", "description": "动画时长，默认 100ms。" }
+  ]
+}

@@ -7,7 +7,7 @@ import {
   FieldRoot,
 } from '@fex-design/solid/primitive/field'
 import { createForm, Form } from '@fex-design/solid/primitive/form'
-import { InputNumber } from '@fex-design/solid/primitive/input-number'
+import { InputNumber } from '@fex-design/solid/ui/input-number'
 import { Button } from '@fex-design/solid/ui/button'
 import { Card } from '@fex-design/solid/ui/card'
 

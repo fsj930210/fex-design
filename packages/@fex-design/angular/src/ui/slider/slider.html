@@ -26,8 +26,9 @@
   <span sliderTrack [class]="trackClass()" [style]="styles().track">
     @if (included()) {
     <span sliderRange [class]="rangeClass()" [style]="styles().range"></span> } @for (dot of
-    dotValues(); track dot) { <span sliderMark [class]="markClass()" [value]="dot" aria-hidden="true"></span> } @for (mark
-    of marks(); track mark.value) {
+    dotValues(); track dot) {
+    <span sliderMark [class]="markClass()" [value]="dot" aria-hidden="true"></span> } @for (mark of
+    marks(); track mark.value) {
     <span
       sliderMark
       [value]="mark.value"

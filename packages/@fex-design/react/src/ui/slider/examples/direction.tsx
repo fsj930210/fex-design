@@ -12,10 +12,19 @@ export default function Example() {
         <p>العربية RTL</p>
         <Slider defaultValue={30} />
       </section>
-      <section><p>Reverse</p><Slider defaultValue={30} reverse /></section>
+      <section>
+        <p>Reverse</p>
+        <Slider defaultValue={30} reverse />
+      </section>
       <div className="flex h-48 gap-12">
-        <section className="grid gap-2"><p>垂直</p><Slider orientation="vertical" defaultValue={35} /></section>
-        <section className="grid gap-2"><p>垂直 Reverse</p><Slider orientation="vertical" reverse defaultValue={35} /></section>
+        <section className="grid gap-2">
+          <p>垂直</p>
+          <Slider orientation="vertical" defaultValue={35} />
+        </section>
+        <section className="grid gap-2">
+          <p>垂直 Reverse</p>
+          <Slider orientation="vertical" reverse defaultValue={35} />
+        </section>
       </div>
     </div>
   )

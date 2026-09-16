@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { convertValueToPercentage, isSliderMarkActive, isSliderReversed } from '@fex-design/core/slider/utils'
+import {
+  convertValueToPercentage,
+  isSliderMarkActive,
+  isSliderReversed,
+} from '@fex-design/core/slider/utils'
 import { sliderMarkClassName } from '@fex-design/styles/slider'
 import { cn } from '@fex/utils'
 import { computed, useAttrs } from 'vue'

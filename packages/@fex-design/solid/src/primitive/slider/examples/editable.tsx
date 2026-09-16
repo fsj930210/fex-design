@@ -10,10 +10,12 @@ export default function Example() {
   return (
     <div class="grid w-full max-w-xl gap-3">
       <SliderRoot value={values()} editable minCount={2} maxCount={5} onChange={setValues}>
-      <SliderTrack>
-        <SliderRange />
-      </SliderTrack>
-        <For each={values()}>{(_, index) => <SliderThumb index={index()} aria-label={`滑块 ${index() + 1}`} />}</For>
+        <SliderTrack>
+          <SliderRange />
+        </SliderTrack>
+        <For each={values()}>
+          {(_, index) => <SliderThumb index={index()} aria-label={`滑块 ${index() + 1}`} />}
+        </For>
       </SliderRoot>
       <p>当前节点：{values().join('、')}</p>
     </div>

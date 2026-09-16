@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { convertValueToPercentage, getSliderRangeDisabledState, isSliderReversed } from '@fex-design/core/slider/utils'
+import {
+  convertValueToPercentage,
+  getSliderRangeDisabledState,
+  isSliderReversed,
+} from '@fex-design/core/slider/utils'
 import { sliderRangeClassName } from '@fex-design/styles/slider'
 import { cn } from '@fex/utils'
 import { computed, useAttrs } from 'vue'
@@ -8,7 +12,15 @@ import { useSliderContext } from './context'
 defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 const { snapshot } = useSliderContext('SliderRange')
-const disabledState = computed(() => getSliderRangeDisabledState(snapshot.value.values, snapshot.value.disabledThumbs, snapshot.value.orientation, snapshot.value.direction, snapshot.value.reverse))
+const disabledState = computed(() =>
+  getSliderRangeDisabledState(
+    snapshot.value.values,
+    snapshot.value.disabledThumbs,
+    snapshot.value.orientation,
+    snapshot.value.direction,
+    snapshot.value.reverse,
+  ),
+)
 const rangeStyle = computed(() => {
   const percentages = snapshot.value.values.map((value) =>
     convertValueToPercentage(value, snapshot.value.min, snapshot.value.max),
@@ -23,8 +35,16 @@ const rangeStyle = computed(() => {
   const visualStart = reversed ? 100 - endValue : start
   const visualEnd = reversed ? start : 100 - endValue
   return snapshot.value.orientation === 'vertical'
-    ? { bottom: `${visualStart}%`, top: `${visualEnd}%`, backgroundImage: disabledState.value.backgroundImage }
-    : { left: `${visualStart}%`, right: `${visualEnd}%`, backgroundImage: disabledState.value.backgroundImage }
+    ? {
+        bottom: `${visualStart}%`,
+        top: `${visualEnd}%`,
+        backgroundImage: disabledState.value.backgroundImage,
+      }
+    : {
+        left: `${visualStart}%`,
+        right: `${visualEnd}%`,
+        backgroundImage: disabledState.value.backgroundImage,
+      }
 })
 </script>
 

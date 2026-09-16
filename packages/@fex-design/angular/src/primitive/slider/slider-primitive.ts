@@ -76,7 +76,9 @@ export class SliderRoot {
   readonly snapshot: Signal<SliderSnapshot>
   protected readonly allDisabled = computed(() => {
     const state = this.snapshot()
-    return state.disabled || (state.disabledThumbs.length > 0 && state.disabledThumbs.every(Boolean))
+    return (
+      state.disabled || (state.disabledThumbs.length > 0 && state.disabledThumbs.every(Boolean))
+    )
   })
   protected readonly hostClassName = computed(() =>
     cn(

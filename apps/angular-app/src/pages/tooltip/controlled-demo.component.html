@@ -1,10 +1,13 @@
 <div class="flex gap-2">
   <button button variant="filled" (click)="open = !open">
-    {{ open ? 'Close externally' : 'Open externally' }}</button
-  ><fex-tooltip [open]="open" (openChange)="open = $event"
-    ><button button fexTooltipTrigger variant="outlined">Controlled trigger</button
-    ><fex-tooltip-portal
-      ><fex-tooltip-content
-        >Controlled state remains external<fex-tooltip-arrow /></fex-tooltip-content></fex-tooltip-portal
-  ></fex-tooltip>
+    {{ open ? 'Close externally' : 'Open externally' }}
+  </button>
+  <div tooltipRoot [open]="open" (openChange)="open = $event">
+    <button button tooltipTrigger variant="outlined">Controlled trigger</button
+    ><ng-template tooltipPortal
+      ><div tooltipContent>
+        Controlled state remains external
+        <div tooltipArrow></div></div
+    ></ng-template>
+  </div>
 </div>

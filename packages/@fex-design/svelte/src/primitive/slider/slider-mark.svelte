@@ -38,6 +38,5 @@
   data-edge={visual === 0 ? "start" : visual === 100 ? "end" : undefined}
   data-orientation={current.orientation}
   class={cn(sliderMarkClassName, className)}
-  style={`${placement}${style ?? ""}`}
-  ><span>{@render children?.()}</span></span
+  style={`${placement}${style ?? ""}`}><span>{@render children?.()}</span></span
 >

@@ -12,7 +12,7 @@ import {
   useColorPicker,
 } from '@fex-design/vue/primitive/color-picker'
 import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
-import { InputNumber } from '@fex-design/vue/primitive/input-number'
+import { InputNumber } from '@fex-design/vue/ui/input-number'
 import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
 import { computed, ref } from 'vue'
 const props = withDefaults(defineProps<{ alpha?: boolean; clear?: boolean; oklch?: boolean }>(), {

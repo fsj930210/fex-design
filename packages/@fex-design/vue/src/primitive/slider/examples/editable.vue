@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import {
-  SliderRange,
-  SliderRoot,
-  SliderThumb,
-  SliderTrack,
-} from '@fex-design/vue/primitive/slider'
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '@fex-design/vue/primitive/slider'
 import { ref } from 'vue'
 const values = ref([20, 50, 80])
 </script>

@@ -13,7 +13,12 @@ const { snapshot } = useSliderContext('SliderTrack')
   <span
     data-slot="slider-track"
     v-bind="attrs"
-    :data-disabled="snapshot.disabled || (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean)) ? 'true' : undefined"
+    :data-disabled="
+      snapshot.disabled ||
+      (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean))
+        ? 'true'
+        : undefined
+    "
     :data-orientation="snapshot.orientation"
     :class="cn(sliderTrackClassName, attrs.class as string | undefined)"
     ><slot

@@ -126,7 +126,12 @@ export function SliderRoot({
         ref={composeRefs(rootRef, ref)}
         dir={direction ?? props.dir}
         data-slot="slider"
-        data-disabled={snapshot.disabled || (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean)) ? '' : undefined}
+        data-disabled={
+          snapshot.disabled ||
+          (snapshot.disabledThumbs.length > 0 && snapshot.disabledThumbs.every(Boolean))
+            ? ''
+            : undefined
+        }
         data-orientation={snapshot.orientation}
         data-reverse={snapshot.reverse ? '' : undefined}
         className={cn(sliderRootClassName({ size, orientation: snapshot.orientation }), className)}

@@ -1,0 +1,14 @@
+<div class="grid w-full gap-2">
+  <p>购买数量</p>
+  <div inputNumberRoot [defaultValue]="8">
+    <input
+      inputNumberControl
+      id="purchase-quantity"
+      aria-invalid="true"
+      aria-describedby="purchase-quantity-error"
+    /><span inputNumberActions
+      ><button inputNumberIncrement></button><button inputNumberDecrement></button
+    ></span>
+  </div>
+  <p id="purchase-quantity-error" class="text-sm text-danger">购买数量不能超过当前库存 5</p>
+</div>

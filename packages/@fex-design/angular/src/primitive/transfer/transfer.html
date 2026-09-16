@@ -28,7 +28,7 @@
         >
           @if (headerState($any(side)) !== false) {
           <span fexCheckboxIndicator [checked]="headerState($any(side))" [class]="indicatorClass"
-            ><fex-check-icon [class]="checkIconClass" /><fex-minus-icon [class]="minusIconClass"
+            ><fex-check-icon [class]="checkIconClass" /><minus-icon [class]="minusIconClass"
           /></span>
           }</button
         ><span class="min-w-0 flex-1 truncate font-medium">{{ panelTitle($any(side)) }}</span

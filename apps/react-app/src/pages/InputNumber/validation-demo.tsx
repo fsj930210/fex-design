@@ -7,7 +7,7 @@ import {
   FieldRoot,
 } from '@fex-design/react/primitive/field'
 import { Form, useForm } from '@fex-design/react/primitive/form'
-import { InputNumber } from '@fex-design/react/primitive/input-number'
+import { InputNumber } from '@fex-design/react/ui/input-number'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
 

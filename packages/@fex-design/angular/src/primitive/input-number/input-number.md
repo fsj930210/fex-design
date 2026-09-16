@@ -1,38 +1,75 @@
-# Angular InputNumber Primitive
+# Angular Primitive InputNumber
 
-## Purpose and import
+Composable numeric input built from the existing Input and Button primitives.
 
-The standalone primitive composes InputRoot, InputControl, InputClear and InputSuffix while core owns numeric normalization.
+## Import
 
-```ts
-import {
-  InputNumber,
-  InputNumberSuffix,
-  type InputNumberChange,
-} from '@fex-design/angular/primitive/input-number'
-```
+    import { InputNumberRoot, InputNumberControl, InputNumberClear, InputNumberActions, InputNumberIncrement, InputNumberDecrement, useInputNumber } from '@fex-design/angular/primitive/input-number'
 
-## Usage
+## Components
 
-```html
-<fex-input-number [value]="amount" [min]="0" [max]="10" (change)="amount = $event.value" />
-<fex-input-number><span fexInputNumberSuffix>kg</span></fex-input-number>
-```
+| Component            | Element | Purpose                                                   |
+| -------------------- | ------- | --------------------------------------------------------- |
+| InputNumberRoot      | div     | Owns numeric state, draft text, constraints, and context. |
+| InputNumberControl   | input   | Reuses InputControl and native spinbutton behavior.       |
+| InputNumberClear     | button  | Reuses InputClear and clears the number.                  |
+| InputNumberActions   | span    | Groups step actions.                                      |
+| InputNumberIncrement | button  | Reuses Button; the default PlusIcon is replaceable.       |
+| InputNumberDecrement | button  | Reuses Button; the default MinusIcon is replaceable.      |
 
-## Inputs
+## Examples
 
-| Input                              | Type                   | Default          | Description                                     |
-| ---------------------------------- | ---------------------- | ---------------- | ----------------------------------------------- |
-| `value/defaultValue`               | `number \| undefined`  | —                | Controlled value or uncontrolled initial value. |
-| `min/max`                          | `number`               | —                | Range applied on blur and step.                 |
-| `step`                             | `number`               | `1`              | Increment/decrement offset.                     |
-| `precision`                        | `number`               | inferred         | Decimal rounding precision.                     |
-| `parser`                           | `InputNumberParser`    | finite parser    | Converts draft text.                            |
-| `formatter`                        | `InputNumberFormatter` | string formatter | Produces display text.                          |
-| `clearable`                        | `boolean`              | `false`          | Composes InputClear.                            |
-| `disabled/readOnly/invalid/status` | Input state inputs     | —                | Forwarded to InputRoot.                         |
-| `class`                            | `string`               | —                | Merged on InputRoot.                            |
+| Name         | Covers                                                     |
+| ------------ | ---------------------------------------------------------- |
+| basic        | Controlled and uncontrolled values.                        |
+| constraints  | min, max, step, and precision.                             |
+| formatter    | Parsing and display formatting.                            |
+| editing      | Draft text and blur commit.                                |
+| controls     | Default, hidden, and replaced step controls.               |
+| keyboard     | Arrow key stepping.                                        |
+| range        | Controlled out-of-range values.                            |
+| custom-logic | Custom UI driven by useInputNumber and the library Button. |
+| affixes      | Prefix, clear, suffix, and actions together.               |
+| validation   | Visible invalid state and error description.               |
 
-## Output, state and composition
+## InputNumberRoot API
 
-`change` emits `{ event, value }`, preserving the framework-native source event and parameter-order semantics. Binding `[value]="undefined"` is controlled empty; omit `value` and use `defaultValue` for uncontrolled state. Projected `fexInputNumberSuffix` content replaces the complete MinusIcon/PlusIcon action area while clear remains separate. Form/Field owns labels, errors and validation state; pass its invalid state to InputNumber.
+| Name                 | Type                                     | Default  | Description                                    |
+| -------------------- | ---------------------------------------- | -------- | ---------------------------------------------- |
+| value / defaultValue | number or undefined                      | —        | Controlled value / uncontrolled initial value. |
+| min / max            | number                                   | —        | Numeric bounds.                                |
+| step                 | number                                   | 1        | Step amount.                                   |
+| precision            | number                                   | —        | Precision used on commit.                      |
+| parser / formatter   | InputNumberParser / InputNumberFormatter | built-in | Separates editable text from the number.       |
+| disabled / readOnly  | boolean                                  | false    | Disables editing and actions.                  |
+| keyboard             | boolean                                  | true     | Enables ArrowUp and ArrowDown.                 |
+| onChange             | (event, value) => void                   | —        | Reports the original event and number.         |
+
+Control inherits `native input host attributes`; native focus, blur, keyboard, aria, data attributes, and element access pass through.
+
+## useInputNumber API
+
+The public logic layer accepts the same options and drives custom DOM without rendering the default structure. Reactive values use Signal / computed.
+
+| Name                 | Type                                     | Default  | Description                                    |
+| -------------------- | ---------------------------------------- | -------- | ---------------------------------------------- |
+| value / defaultValue | number or undefined                      | —        | Controlled value / uncontrolled initial value. |
+| min / max            | number                                   | —        | Numeric bounds.                                |
+| step                 | number                                   | 1        | Step amount.                                   |
+| precision            | number                                   | —        | Precision used on commit.                      |
+| parser / formatter   | InputNumberParser / InputNumberFormatter | built-in | Separates editable text from the number.       |
+| disabled / readOnly  | boolean                                  | false    | Disables editing and actions.                  |
+| keyboard             | boolean                                  | true     | Enables ArrowUp and ArrowDown.                 |
+| onChange             | (event, value) => void                   | —        | Reports the original event and number.         |
+
+### Return value
+
+| Group        | Members                                                   |
+| ------------ | --------------------------------------------------------- |
+| State        | value, draft, formattedValue, min, max, outOfRange        |
+| Availability | canClear, canIncrement, canDecrement                      |
+| Actions      | input, blur, keydown, clear, increment, decrement, commit |
+
+## Direction and validation
+
+Parts pass through native dir. Validation uses aria-invalid and aria-describedby. Changes use change/onChange, never onValueChange.

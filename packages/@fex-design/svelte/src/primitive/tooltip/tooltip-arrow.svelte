@@ -30,5 +30,5 @@
   data-side={$snapshot.side}
   data-align={$snapshot.align}
   class={classes}
-  style={`${position.left ? `left: ${position.left}` : `top: ${position.top}`}; ${style ?? ""}`}
+  style={`${position.left ? `left: ${position.left};` : position.top ? `top: ${position.top};` : ""}${style ?? ""}`}
 ></div>

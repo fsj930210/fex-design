@@ -10,6 +10,14 @@ export const defaultInputNumberParser: InputNumberParser = (text) => {
 export const defaultInputNumberFormatter: InputNumberFormatter = (value) =>
   value === undefined ? '' : String(value)
 
+export function parseInputNumber(
+  text: string,
+  parser: InputNumberParser = defaultInputNumberParser,
+) {
+  const value = parser(text)
+  return value !== undefined && Number.isFinite(value) ? value : undefined
+}
+
 function decimalPlaces(value: number) {
   const [, fraction = '', exponent = '0'] =
     String(value)

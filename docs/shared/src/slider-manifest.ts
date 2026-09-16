@@ -18,7 +18,11 @@ export const sliderExamples = {
       title: '动态增删节点',
       description: '点击轨道添加节点，Delete 或 Backspace 删除节点，并受 minCount、maxCount 限制。',
     },
-    { id: 'marks', title: '刻度与步长', description: '对照展示 included、范围、Dots、step 与 step=null，并支持动态 Mark。' },
+    {
+      id: 'marks',
+      title: '刻度与步长',
+      description: '对照展示 included、范围、Dots、step 与 step=null，并支持动态 Mark。',
+    },
     {
       id: 'direction',
       title: '方向与反转',

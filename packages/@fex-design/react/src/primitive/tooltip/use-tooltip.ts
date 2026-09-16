@@ -68,6 +68,8 @@ export function useTooltipContent({
   ref,
   className,
   style,
+  onPointerEnter,
+  onPointerLeave,
   ...props
 }: HTMLAttributes<HTMLDivElement> & { ref?: Ref<HTMLDivElement> }) {
   const { contentId, overlay, snapshot } = useTooltip('useTooltipContent')
@@ -91,6 +93,14 @@ export function useTooltipContent({
       'data-align': snapshot.align,
       'data-placement': snapshot.placement,
       className: cn(tooltipContentClassName, className),
+      onPointerEnter: (event: PointerEvent<HTMLDivElement>) => {
+        onPointerEnter?.(event)
+        if (!event.defaultPrevented) overlay.content.pointerEnter(eventInfo(event))
+      },
+      onPointerLeave: (event: PointerEvent<HTMLDivElement>) => {
+        onPointerLeave?.(event)
+        if (!event.defaultPrevented) overlay.content.pointerLeave(eventInfo(event))
+      },
       style: {
         position: 'var(--floating-strategy, absolute)',
         left: 'var(--floating-x, 0px)',

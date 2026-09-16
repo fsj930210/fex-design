@@ -1,7 +1,13 @@
 <div class="grid w-full max-w-xl gap-3">
-<div class="flex justify-between"><span>模型准确率 {{ left() }}%</span><span>响应速度 {{ right() }}%</span></div>
-<div sliderRoot [value]="value()" (change)="value.set($event.value)">
-  <span sliderTrack class="bg-orange-500"><span sliderRange class="bg-blue-500"></span></span
-  ><span sliderThumb aria-label="模型权重分配" [attr.aria-valuetext]="'模型准确率 ' + left() + '%，响应速度 ' + right() + '%' "></span>
-</div>
+  <div class="flex justify-between">
+    <span>模型准确率 {{ left() }}%</span><span>响应速度 {{ right() }}%</span>
+  </div>
+  <div sliderRoot [value]="value()" (change)="value.set($event.value)">
+    <span sliderTrack class="bg-orange-500"><span sliderRange class="bg-blue-500"></span></span
+    ><span
+      sliderThumb
+      aria-label="模型权重分配"
+      [attr.aria-valuetext]="'模型准确率 ' + left() + '%，响应速度 ' + right() + '%' "
+    ></span>
+  </div>
 </div>

@@ -1,0 +1,6 @@
+<div class="flex min-h-64 items-center justify-center gap-3">
+  <button button (click)="open.set(!open())">外部{{ open() ? '关闭' : '打开' }}</button>
+  <div tooltip [open]="open()" (openChange)="open.set($event)" title="状态由调用方管理">
+    <button button tooltipTrigger variant="outlined">受控提示</button>
+  </div>
+</div>

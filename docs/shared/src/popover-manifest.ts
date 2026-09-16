@@ -1,6 +1,11 @@
 export const popoverExamples = {
   primitive: [
     {
+      id: 'custom-logic',
+      title: '自定义逻辑层',
+      description: '使用各框架公开逻辑适配器驱动自定义结构。',
+    },
+    {
       id: 'basic',
       title: '基本使用',
       description: '展示触发元素与浮层内容。',
@@ -37,6 +42,11 @@ export const popoverExamples = {
     },
   ],
   ui: [
+    {
+      id: 'custom-logic',
+      title: '自定义逻辑层',
+      description: '使用各框架公开逻辑适配器驱动自定义结构。',
+    },
     {
       id: 'basic',
       title: '基本使用',

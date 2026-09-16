@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { InputNumber } from '@fex-design/vue/primitive/input-number'
+import { InputNumber } from '@fex-design/vue/ui/input-number'
 import Card from '@fex-design/vue/ui/card'
 const message = ref('Use ArrowUp, ArrowDown or the icon buttons.')
 </script>

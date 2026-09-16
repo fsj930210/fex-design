@@ -1,0 +1,15 @@
+<ng-content select="[tooltipTrigger]" />
+<ng-template tooltipPortal>
+  <div
+    tooltipContent
+    [attr.dir]="direction()"
+    [class]="className() + ' ' + (classNames().root ?? '')"
+    [style]="rootStyle()"
+  >
+    @if (titleTemplate(); as template) {
+    <ng-container [ngTemplateOutlet]="template" />
+    } @else { {{ title() }} } @if (arrow()) {
+    <div tooltipArrow [class]="classNames().arrow ?? ''" [style]="styles().arrow"></div>
+    }
+  </div>
+</ng-template>

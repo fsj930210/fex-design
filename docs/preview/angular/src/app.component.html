@@ -2,11 +2,11 @@
   class="runtime box-border grid min-h-30 place-items-center p-8"
   [attr.data-embed]="embedded ? 'true' : null"
 >
-  @if (example) {
+  @if (example(); as loadedExample) {
     <div data-preview-example-host class="contents [&>*]:contents">
-      <ng-container *ngComponentOutlet="example" />
+      <ng-container *ngComponentOutlet="loadedExample" />
     </div>
-  } @else {
+  } @else if (example() === null) {
     <p>未找到示例</p>
   }
 </div>

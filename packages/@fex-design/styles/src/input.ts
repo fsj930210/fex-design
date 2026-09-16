@@ -36,9 +36,9 @@ export const inputControlClassName = [
 ].join(' ')
 
 export const inputPrefixClassName =
-  'flex shrink-0 items-center ps-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
+  'flex shrink-0 items-center ps-2.5 text-muted-foreground empty:hidden [&_svg]:size-(--input-icon-size)'
 export const inputSuffixClassName =
-  'flex shrink-0 items-center pe-2.5 text-muted-foreground [&_svg]:size-(--input-icon-size)'
+  'flex shrink-0 items-center pe-2.5 text-muted-foreground empty:hidden [&_svg]:size-(--input-icon-size)'
 
 const inputAddonClassName =
   'relative z-0 flex shrink-0 self-stretch items-center border border-[var(--input-border-color,var(--border))] bg-muted-background px-2.5 text-sm text-muted-foreground [&:has(>[data-input-addon-fill])]:overflow-hidden [&:has(>[data-input-addon-fill])]:border-0 [&:has(>[data-input-addon-fill])]:bg-transparent [&:has(>[data-input-addon-fill])]:p-0 [&>[data-input-addon-fill]]:!rounded-none'

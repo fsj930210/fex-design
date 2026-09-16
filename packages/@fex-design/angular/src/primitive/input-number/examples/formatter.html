@@ -1,0 +1,8 @@
+<div class="grid w-full gap-2">
+  <p>金额格式化展示与 number 值分离</p>
+  <div inputNumberRoot [defaultValue]="1000" [formatter]="formatter" [parser]="parser">
+    <input inputNumberControl /><span inputNumberActions
+      ><button inputNumberIncrement></button><button inputNumberDecrement></button
+    ></span>
+  </div>
+</div>

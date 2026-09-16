@@ -8,6 +8,17 @@
 import { Popover } from '@fex-design/vue/primitive/popover'
 ```
 
+## 组件
+
+| 组件                                | 用途                                 |
+| ----------------------------------- | ------------------------------------ |
+| Popover / PopoverRoot               | 管理控制器状态与子级上下文。         |
+| PopoverTrigger                      | 连接触发事件与可访问属性。           |
+| PopoverPortal                       | 将内容挂载到解析后的容器。           |
+| PopoverContent                      | 连接浮层定位、挂载、关闭与焦点行为。 |
+| PopoverArrow                        | 连接箭头几何信息。                   |
+| PopoverHeader / Title / Description | 提供结构化内容与可访问标签。         |
+
 ## 框架契约
 
 触发器使用默认 slot；title 与 content 具名 slot 定制内容，content slot 提供 open、close。通过 v-model:open 控制状态。
@@ -61,6 +72,10 @@ Primitive 与 UI 的行为类型统一定义在 @fex-design/core/popover/types�
 | false     | true            | 提前挂载   | 卸载，再次打开重新创建 |
 
 默认策略适合表单：第一次打开才创建，关闭后保留草稿。destroyOnHidden 只卸载内容子树，不会清除调用方存储的外部状态。
+
+## 逻辑 API
+
+`usePopover(options)` 是供自定义 Popover 结构使用的公开 Vue 适配器。它持有稳定的 Core 控制器，并返回 controller, snapshot refs, and element refs。通过控制器打开/关闭、连接触发/内容/箭头元素并订阅状态；内部 context 读取函数不属于这套独立 API。
 
 ## 可访问性
 

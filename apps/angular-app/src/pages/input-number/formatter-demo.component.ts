@@ -1,10 +1,10 @@
 import type { InputNumberFormatInfo } from '@fex-design/core/input-number/types'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { InputNumber } from '@fex-design/angular/primitive/input-number'
+import { InputNumber } from '@fex-design/angular/ui/input-number'
 import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
-  selector: 'fex-input-number-formatter-demo',
+  selector: 'input-number-formatter-demo',
   standalone: true,
   imports: [Card, InputNumber],
   changeDetection: ChangeDetectionStrategy.OnPush,

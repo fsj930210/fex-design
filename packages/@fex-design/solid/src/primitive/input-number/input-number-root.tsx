@@ -40,13 +40,13 @@ export function InputNumberRoot(props: ParentProps<InputNumberRootProps>) {
     'size',
     'variant',
     'onChange',
-    'children',
   ])
   const inputNumber = useInputNumber(() => ({ ...local, controlled: local.controlled ?? hasValue }))
-  return (
-    <InputNumberContext.Provider value={inputNumber}>
+  const Content = () => {
+    const [, inputRootProps] = splitProps(rest, ['children'])
+    return (
       <InputRoot
-        {...rest}
+        {...inputRootProps}
         value={inputNumber.draft()}
         disabled={local.disabled}
         readOnly={local.readOnly}
@@ -58,8 +58,13 @@ export function InputNumberRoot(props: ParentProps<InputNumberRootProps>) {
           if (meta.reason === 'input') inputNumber.input(text, meta.event)
         }}
       >
-        {local.content ? local.content() : local.children}
+        {local.content ? local.content() : props.children}
       </InputRoot>
+    )
+  }
+  return (
+    <InputNumberContext.Provider value={inputNumber}>
+      <Content />
     </InputNumberContext.Provider>
   )
 }

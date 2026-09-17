@@ -24,12 +24,9 @@ export function DemoCard(props: {
   const [copied, setCopied] = createSignal(false)
   const [height, setHeight] = createSignal(180)
   const [ready, setReady] = createSignal(false)
-  const [failed, setFailed] = createSignal(false)
   const [shouldLoad, setShouldLoad] = createSignal(false)
-  const [manualAttempt, setManualAttempt] = createSignal(0)
   let article!: HTMLElement
   let frame!: HTMLIFrameElement
-  let readyTimeout: number | undefined
   const url = () => {
     if (import.meta.env.DEV) {
       return `${developmentOrigins[props.framework]}/examples/${props.framework}/${demoLayer()}/${props.slug}/${props.scene.id}?embed=true`
@@ -55,47 +52,25 @@ export function DemoCard(props: {
   createEffect(() => {
     url()
     setReady(false)
-    setFailed(false)
-    setManualAttempt(0)
   })
-  const frameUrl = () => `${url()}&previewAttempt=${manualAttempt()}`
-  const clearReadyTimeout = () => {
-    if (readyTimeout !== undefined) window.clearTimeout(readyTimeout)
-    readyTimeout = undefined
-  }
-  const waitForReady = () => {
-    clearReadyTimeout()
-    readyTimeout = window.setTimeout(() => {
-      if (shouldLoad() && !ready()) setFailed(true)
-    }, 10_000)
-  }
   onMount(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         const isNearViewport = Boolean(entry?.isIntersecting)
         setShouldLoad(isNearViewport)
-        if (isNearViewport && !ready()) waitForReady()
-        else if (!isNearViewport) {
-          setReady(false)
-          clearReadyTimeout()
-        }
+        if (!isNearViewport) setReady(false)
       },
       { rootMargin: '100px 0px' },
     )
     observer.observe(article)
     const receive = (event: MessageEvent<PreviewRuntimeMessage>) => {
       if (event.source !== frame?.contentWindow || event.data?.protocol !== PREVIEW_PROTOCOL) return
-      if (event.data.type === 'ready') {
-        setReady(true)
-        setFailed(false)
-        clearReadyTimeout()
-      }
+      if (event.data.type === 'ready') setReady(true)
       if (event.data.type === 'resize') setHeight(Math.max(140, Math.ceil(event.data.height)))
     }
     addEventListener('message', receive)
     onCleanup(() => {
       observer.disconnect()
-      clearReadyTimeout()
       removeEventListener('message', receive)
     })
   })
@@ -146,24 +121,9 @@ export function DemoCard(props: {
           }
         >
           <div class="relative min-h-35 bg-background" style={{ height: `${height()}px` }}>
-            <Show when={!shouldLoad() || !ready()}>
+            <Show when={!ready()}>
               <div class="absolute inset-0 z-1 grid place-items-center bg-background" role="status">
-                <Show
-                  when={!failed()}
-                  fallback={
-                    <button
-                      class="cursor-pointer rounded-md border border-border bg-background px-3 py-2 text-sm text-primary"
-                      onClick={() => {
-                        setFailed(false)
-                        setManualAttempt((attempt) => attempt + 1)
-                      }}
-                    >
-                      示例加载失败，点击重试
-                    </button>
-                  }
-                >
-                  <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
-                </Show>
+                <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
               </div>
             </Show>
             <Show when={shouldLoad()}>
@@ -171,17 +131,10 @@ export function DemoCard(props: {
                 ref={(element) => {
                   frame = element
                 }}
-                onLoad={() => {
-                  frame.contentWindow?.postMessage(
-                    { protocol: PREVIEW_PROTOCOL, type: 'render', props: {} },
-                    '*',
-                  )
-                  waitForReady()
-                }}
-                class="block h-full min-h-35 w-full border-0 bg-background"
+                class="block h-full min-h-35 w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
                 data-ready={ready()}
                 title={`${props.framework} ${demoLayer()} ${props.slug} ${props.scene.id}`}
-                src={frameUrl()}
+                src={url()}
                 loading="lazy"
                 scrolling="no"
               />

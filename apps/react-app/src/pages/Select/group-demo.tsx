@@ -1,6 +1,5 @@
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -13,11 +12,9 @@ export function GroupDemo() {
       title="Group"
       description="Options with the same group are rendered under one accessible group label."
     >
-      <SelectRoot options={frameworkOptions}>
+      <SelectRoot items={frameworkOptions}>
         <SelectTrigger placeholder="请选择技术" />
-        <SelectContent>
-          <SelectList />
-        </SelectContent>
+        <SelectContent />
       </SelectRoot>
     </SelectDemoSection>
   )

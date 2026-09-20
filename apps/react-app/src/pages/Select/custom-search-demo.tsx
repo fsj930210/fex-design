@@ -1,6 +1,5 @@
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -15,15 +14,13 @@ export function CustomSearchDemo() {
     >
       <SelectRoot
         showSearch
-        options={frameworkOptions}
+        items={frameworkOptions}
         filterOption={(keyword, option) =>
           option.label.toLocaleLowerCase().startsWith(keyword.trim().toLocaleLowerCase())
         }
       >
         <SelectTrigger placeholder="按名称前缀搜索" />
-        <SelectContent>
-          <SelectList />
-        </SelectContent>
+        <SelectContent />
       </SelectRoot>
     </SelectDemoSection>
   )

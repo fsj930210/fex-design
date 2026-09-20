@@ -8,7 +8,7 @@ import Demo from './demo-section.vue'
   <Demo
     title="Local search"
     description="filterOption filters options locally and search still receives every keyword."
-    ><SelectRoot show-search :options="frameworkOptions" :filter-option="defaultSelectFilterOption"
+    ><SelectRoot show-search :items="frameworkOptions" :filter-option="defaultSelectFilterOption"
       ><SelectTrigger placeholder="搜索选项" /><SelectContent /></SelectRoot
   ></Demo>
 </template>

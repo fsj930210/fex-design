@@ -1,8 +1,8 @@
 <div card title="Custom popup rendering" description="Custom content extends the default menu.">
   <div class="max-w-md">
-    <fex-select [options]="options"
-      ><fex-select-trigger placeholder="自定义下拉面板" /><fex-select-content
-        ><fex-select-list />
+    <div selectRoot [items]="options"
+      ><div selectTrigger placeholder="自定义下拉面板" ></div><div selectContent
+        >
         <div
           class="flex items-center gap-2 border-t border-border p-2"
           (pointerdown)="$event.stopPropagation()"
@@ -11,8 +11,8 @@
             <input inputControl placeholder="请输入新选项" />
           </div>
           <button button size="sm" variant="text" (click)="add()"><plus-icon />添加</button>
-        </div></fex-select-content
-      ></fex-select
+        </div></div
+      ></div
     >
   </div>
 </div>

@@ -22,7 +22,6 @@ import {
 } from '@fex-design/react/primitive/popover'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -120,9 +119,7 @@ function PickerPanel({ alpha = true, clear = false }: { alpha?: boolean; clear?:
             onChange={(format) => controller.setFormat(format as ColorFormat)}
           >
             <SelectTrigger />
-            <SelectContent>
-              <SelectList />
-            </SelectContent>
+            <SelectContent />
           </SelectRoot>
         </div>
         <div className="flex min-w-0 items-center gap-2">

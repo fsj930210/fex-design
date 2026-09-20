@@ -13,7 +13,6 @@ export interface SelectContextValue {
   visibleOptions: readonly SelectOption[]
   filterOption?: SelectFilterOption | undefined
   multiple: boolean
-  tags: boolean
   showSearch: boolean
   disabled: boolean
   clearable: boolean

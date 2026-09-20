@@ -7,7 +7,7 @@ export function MultipleDemo() {
       title="Multiple"
       description="Multiple selection keeps the panel open and renders selected values together."
     >
-      <SelectRoot multiple options={frameworkOptions} defaultValue={['react', 'vue']}>
+      <SelectRoot multiple items={frameworkOptions} defaultValue={['react', 'vue']}>
         <SelectTrigger maxTagCount={3} placeholder="请选择" />
         <SelectContent />
       </SelectRoot>

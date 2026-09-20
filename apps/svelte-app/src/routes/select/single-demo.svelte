@@ -6,6 +6,6 @@
 <Demo
   title="Single"
   description="Single selection closes the panel after choosing an option."
-  options={frameworkOptions}
+  items={frameworkOptions}
   defaultValue="react"
 />

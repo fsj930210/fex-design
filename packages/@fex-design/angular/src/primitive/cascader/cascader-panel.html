@@ -47,15 +47,14 @@
           (click)="cascader.controller.select(node.key)"
         >
           @if(cascader.multiple){<button
-            fexCheckboxPrimitive
-            [checked]="itemState.indeterminate ? 'indeterminate' : itemState.checked"
+            type="button"
+            [attr.aria-pressed]="itemState.checked"
             [disabled]="node.disabled"
             [class]="checkboxClass"
             (click)="$event.stopPropagation();cascader.controller.toggleCheck(node.key)"
           >
             @if(itemState.checked || itemState.indeterminate){<span
-              fexCheckboxIndicator
-              [checked]="itemState.indeterminate ? 'indeterminate' : true"
+              checkboxIndicator
               [class]="checkboxIndicatorClass"
               >@if(itemState.indeterminate){<minus-icon />}@else{<fex-check-icon />}</span
             >}</button

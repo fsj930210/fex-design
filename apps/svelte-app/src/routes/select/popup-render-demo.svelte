@@ -5,7 +5,6 @@
   import InputControl from "@fex-design/svelte/primitive/input-control";
   import SelectRoot from "@fex-design/svelte/primitive/select";
   import SelectContent from "@fex-design/svelte/primitive/select-content";
-  import SelectList from "@fex-design/svelte/primitive/select-list";
   import SelectTrigger from "@fex-design/svelte/primitive/select-trigger";
   import Button from "@fex-design/svelte/ui/button";
   import Demo from "./demo-section.svelte";
@@ -29,9 +28,9 @@
 <Demo
   title="Custom popup rendering"
   description="Custom content extends the default menu."
-  ><SelectRoot {options}
+  ><SelectRoot items={options}
     ><SelectTrigger placeholder="自定义下拉面板" /><SelectContent
-      ><SelectList />
+      >{#snippet footer()}
       <div
         role="presentation"
         class="flex items-center gap-2 border-t border-border p-2"
@@ -44,7 +43,7 @@
         ><Button size="sm" variant="ghost" onclick={add}
           ><PlusIcon class="size-4" />添加</Button
         >
-      </div></SelectContent
+      </div>{/snippet}</SelectContent
     ></SelectRoot
   ></Demo
 >

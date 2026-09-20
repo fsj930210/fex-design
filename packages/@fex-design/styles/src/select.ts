@@ -1,10 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { selectableItemSelectedClassName } from './selectable-item'
-import { tagClassName, tagActionClassName } from './tag'
 
 export const selectTriggerClassName = cva(
   [
-    'flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-border bg-background py-1 pl-3 text-sm text-foreground outline-none',
+    'group/select-trigger flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-border bg-background text-sm text-foreground outline-none',
     'focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20',
     'data-[status=error]:border-danger data-[status=error]:ring-2 data-[status=error]:ring-danger/20',
     'data-[status=warning]:border-warning data-[status=warning]:ring-2 data-[status=warning]:ring-warning/20',
@@ -13,46 +12,33 @@ export const selectTriggerClassName = cva(
   {
     variants: {
       size: {
-        sm: 'min-h-8 pl-2 text-xs',
-        md: 'min-h-9 pl-3 text-sm',
-        lg: 'min-h-10 pl-3 text-base',
+        sm: 'min-h-8 text-xs',
+        md: 'min-h-9 text-sm',
+        lg: 'min-h-10 text-base',
       },
     },
     defaultVariants: { size: 'md' },
   },
 )
-export const selectValueContainerClassName = 'flex min-w-0 flex-1 flex-wrap items-center gap-1.5'
+export const selectValueContainerClassName = 'flex flex-1 flex-wrap items-center gap-1'
 export const selectValueClassName = 'contents'
-export const selectInputClassName =
-  'min-w-8 flex-1 bg-transparent outline-none placeholder:text-muted-foreground'
 export const selectPlaceholderClassName = 'truncate text-muted-foreground'
-/** @deprecated Use the Tag primitive. */
-export const selectTagClassName = tagClassName({ size: 'sm' })
-/** @deprecated Use the Tag primitive. */
-export const selectTagRemoveClassName = tagActionClassName
-/** @deprecated Use the Tag primitive. */
-export const selectTagOverflowClassName = tagClassName({ size: 'sm' })
-/** @deprecated Use the Tag primitive. */
-export const treeSelectTagClassName = tagClassName({ size: 'sm' })
-/** @deprecated Use the Tag primitive. */
-export const treeSelectTagRemoveClassName = tagActionClassName
-/** @deprecated Use the Tag primitive. */
-export const treeSelectTagOverflowClassName = tagClassName({ size: 'sm' })
+export const selectInputClassName = 'min-w-0 flex-1 border-0 bg-transparent outline-none'
 export const selectSuffixClassName =
-  'ml-auto inline-flex h-5 shrink-0 items-center justify-center pr-2.5 text-muted-foreground [&_svg]:size-4'
+  'relative z-10 ml-auto inline-flex shrink-0 items-center justify-center text-muted-foreground'
 export const selectIndicatorClassName =
-  'inline-flex size-4 items-center justify-center transition-transform data-[state=open]:rotate-180'
-export const selectClearClassName = 'size-4 px-0 py-0'
+  'inline-flex  items-center justify-center transition-transform data-[state=open]:rotate-180'
+
 export const selectContentClassName = [
   'z-[var(--floating-z-index,50)] overflow-hidden rounded-md border border-border bg-elevated-background text-elevated-foreground shadow-lg [--popover-padding:0px]',
-  'min-w-[var(--select-content-min-width,0px)]',
-  'max-h-[min(var(--floating-available-height,calc(100vh-16px)),var(--select-content-max-height,320px))]',
+  'min-w-[var(--floating-reference-width)]',
+  'max-h-[var(--floating-available-height,calc(100vh-16px))]',
 ].join(' ')
 export const selectListClassName =
   'max-h-[inherit] overflow-y-auto p-1 overscroll-contain outline-none'
 export const selectOptionClassName = [
-  'group/select-option relative flex min-h-[var(--select-option-height,32px)] cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors',
-  'data-[active=true]:bg-muted-background data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
+  'group/select-option relative flex min-h-8 cursor-default select-none items-center gap-2 cursor-pointer rounded-md px-2 py-1.5 text-sm outline-none transition-colors',
+  'data-[active=true]:bg-muted-background data-[disabled=true]:cursor-not-allowed data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
   selectableItemSelectedClassName,
 ].join(' ')
 export const selectOptionLabelClassName = 'min-w-0 flex-1 truncate'

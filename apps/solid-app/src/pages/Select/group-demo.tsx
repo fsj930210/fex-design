@@ -4,7 +4,7 @@ import { SelectDemoSection as Demo } from './demo-section'
 export function GroupDemo() {
   return (
     <Demo title="Group" description="Options sharing a group render below a stable group label.">
-      <SelectRoot options={frameworkOptions}>
+      <SelectRoot items={frameworkOptions}>
         <SelectTrigger placeholder="请选择" />
         <SelectContent />
       </SelectRoot>

@@ -2,12 +2,7 @@
   "name": "@fex-design/angular-app",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "ng serve --project angular-app --host 127.0.0.1 --port 4000",
-    "build": "ng build angular-app",
-    "typecheck": "ngc -p tsconfig.json --noEmit",
-    "lint": "oxlint src"
-  },
+  "scripts": {},
   "dependencies": {
     "@angular/build": "22.1.7",
     "@angular/common": "22.1.5",

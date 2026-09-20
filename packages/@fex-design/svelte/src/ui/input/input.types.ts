@@ -16,7 +16,7 @@ export interface InputProps
   suffix?: Snippet
   addonBefore?: Snippet
   addonAfter?: Snippet
-  clearIcon?: Snippet
+  clear?: Snippet
   clearable?: boolean
   classNames?: InputClassNames
   styles?: InputStyles<string>

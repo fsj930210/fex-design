@@ -7,7 +7,7 @@ const prefixFilter = (keyword: string, option: { label: string }) =>
 </script>
 <template>
   <Demo title="Custom search" description="A custom filterOption matches labels by prefix only."
-    ><SelectRoot show-search :options="frameworkOptions" :filter-option="prefixFilter"
+    ><SelectRoot show-search :items="frameworkOptions" :filter-option="prefixFilter"
       ><SelectTrigger placeholder="按名称前缀搜索" /><SelectContent /></SelectRoot
   ></Demo>
 </template>

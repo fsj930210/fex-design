@@ -64,7 +64,7 @@ defineExpose({
         :style="styles?.control"
       />
       <InputClear v-if="clearable" :class="classNames?.clear" :style="styles?.clear"
-        ><slot name="clearIcon"><CircleXIcon /></slot
+        ><slot name="clear"><CircleXIcon /></slot
       ></InputClear>
       <InputSuffix v-if="$slots.suffix" :class="classNames?.suffix" :style="styles?.suffix"
         ><slot name="suffix"
@@ -100,7 +100,7 @@ defineExpose({
       :style="styles?.control"
     />
     <InputClear v-if="clearable" :class="classNames?.clear" :style="styles?.clear"
-      ><slot name="clearIcon"><CircleXIcon /></slot
+      ><slot name="clear"><CircleXIcon /></slot
     ></InputClear>
     <InputSuffix v-if="$slots.suffix" :class="classNames?.suffix" :style="styles?.suffix"
       ><slot name="suffix"

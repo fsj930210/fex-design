@@ -7,7 +7,7 @@
 <Demo
   title="Local search"
   description="filterOption filters locally and search receives every keyword."
-  options={frameworkOptions}
+  items={frameworkOptions}
   showSearch
   filterOption={defaultSelectFilterOption}
 />

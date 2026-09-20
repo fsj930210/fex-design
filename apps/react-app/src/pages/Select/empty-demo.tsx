@@ -1,6 +1,5 @@
 import {
   SelectContent,
-  SelectEmpty,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -12,11 +11,9 @@ export function EmptyDemo() {
       title="Empty"
       description="Empty content is explicit so products can provide domain-specific guidance."
     >
-      <SelectRoot options={[]}>
+      <SelectRoot items={[]}>
         <SelectTrigger placeholder="暂无可选项" />
-        <SelectContent>
-          <SelectEmpty>No technologies available</SelectEmpty>
-        </SelectContent>
+        <SelectContent emptyContent="No technologies available" />
       </SelectRoot>
     </SelectDemoSection>
   )

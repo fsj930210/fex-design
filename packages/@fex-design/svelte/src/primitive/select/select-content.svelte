@@ -8,14 +8,25 @@
   let {
     class: className,
     children,
-  }: { class?: string | undefined; children?: Snippet | undefined } = $props();
+    option,
+    emptyText,
+    loadingText,
+    footer,
+  }: {
+    class?: string | undefined;
+    children?: Snippet | undefined;
+    option?: Snippet<[import('@fex-design/core/select/types').SelectOption, { selected: boolean; active: boolean; disabled: boolean }]>;
+    emptyText?: string;
+    loadingText?: string;
+    footer?: Snippet;
+  } = $props();
 </script>
 
 <PopoverPortal
   ><PopoverContent
     class={cn(selectContentClassName, className)}
-    style="width: var(--select-content-width, var(--floating-reference-width)); max-width: min(var(--floating-available-width), var(--select-content-max-width, var(--floating-reference-width)));"
-    >{#if children}{@render children()}{:else}<SelectList
-      />{/if}</PopoverContent
+    style="width: var(--floating-reference-width); max-width: var(--floating-available-width);"
+    >{#if children}{@render children()}{:else}<SelectList {option} {emptyText} {loadingText}
+      />{/if}{@render footer?.()}</PopoverContent
   ></PopoverPortal
 >

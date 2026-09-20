@@ -2,16 +2,15 @@ import type { SelectOption } from '@fex-design/core/select/types'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
 import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
-  selector: 'fex-select-change-meta-demo',
+  selector: 'select-change-meta-demo',
   standalone: true,
-  imports: [Card, SelectRoot, SelectTrigger, SelectContent, SelectList],
+  imports: [Card, SelectRoot, SelectTrigger, SelectContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './change-meta-demo.component.html',
 })

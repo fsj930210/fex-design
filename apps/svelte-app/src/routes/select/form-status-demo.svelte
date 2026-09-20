@@ -35,7 +35,7 @@
             >{#snippet children(binding)}<SelectRoot
                 value={field.state.value}
                 status={invalid ? "error" : undefined}
-                options={frameworkOptions}
+                items={frameworkOptions}
                 onChange={(value) => field.handleChange(String(value ?? ""))}
                 ><SelectTrigger
                   {...binding.props}

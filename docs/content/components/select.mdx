@@ -1,0 +1,50 @@
+---
+title: Select
+description: 从动态数据中选择一个或多个已有项目。
+---
+
+## Primitive 与 UI
+
+Primitive 提供 `SelectRoot`、`SelectTrigger`、`SelectValue`、`SelectContent`、`SelectItem`、`SelectGroup`、`SelectLabel` 和 `SelectSeparator`。Root 接收动态 `items`，Content 内部负责过滤、键盘导航和真正的虚拟渲染；Item 挂载时不做注册。
+
+UI `Select` 是 Ant Design 风格的快捷组合，接收任意对象数组，并通过 `fieldNames.value` 与 `fieldNames.label` 映射字段。`disabled` 仍是项目自身的布尔字段，分组使用带 `options` 的组对象或 Primitive 的 `SelectGroup`。
+
+TagsInput 是独立组件，不属于 Select；Select 只支持单选和多选已有项目。AutoComplete 继续处理输入建议场景。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiSection layer="primitive" title="Primitive API" description="可组合 Select 部件与共享状态。">
+  <ApiComposition layer="primitive">
+
+```text
+SelectRoot
+├── SelectTrigger
+│   └── SelectValue
+└── SelectContent
+    ├── SelectGroup
+    │   ├── SelectLabel
+    │   └── SelectItem ...
+    ├── SelectSeparator
+    └── SelectItem ...
+```
+
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="ui" title="UI API" description="items 快捷组合与框架原生内容入口。">
+  <ApiComposition layer="ui">
+    `inputProps` 传给 Input，`popoverProps` 传给 Popover；`getPopupContainer` 保持 Select 顶层入口并从 `popoverProps` 类型中排除。`className`/`class` 与 `style` 作用于 Trigger 的 Input Root，和 `inputProps` 同名样式按内部默认 → `inputProps` → Select 顶层顺序合并。
+
+    loading、clear 与 suffix 共用尾部展示位：loading 优先；有值且 hover/focus 时展示 clear；其余时间展示 suffix 或默认下拉箭头。
+  </ApiComposition>
+</ApiSection>
+
+## CSS Variables
+
+Select 不新增组件变量。Trigger 使用 Input 的变量和结构化样式，Content 使用 Popover/Floating 的变量；虚拟行高由 `virtual.itemHeight` 明确控制。
+
+<CssVariables />

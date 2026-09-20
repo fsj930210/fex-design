@@ -7,6 +7,7 @@ import type { ComponentProps } from 'react'
 import { InputRoot } from '../input/input'
 import { InputNumberContext } from './input-number-context'
 import { useInputNumber } from './use-input-number'
+import { cn } from '@fex/utils'
 
 export interface InputNumberRootProps
   extends
@@ -36,6 +37,7 @@ export function InputNumberRoot({
   onChange,
   controlled,
   children,
+  className,
   ...props
 }: InputNumberRootProps) {
   const inputNumber = useInputNumber({
@@ -58,6 +60,7 @@ export function InputNumberRoot({
       <InputRoot
         {...props}
         value={inputNumber.draft}
+        className={cn('pr-5', className)}
         disabled={disabled}
         readOnly={readOnly}
         data-slot="input-number-root"

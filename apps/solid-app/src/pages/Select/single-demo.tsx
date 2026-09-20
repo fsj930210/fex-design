@@ -4,7 +4,7 @@ import { SelectDemoSection as Demo } from './demo-section'
 export function SingleDemo() {
   return (
     <Demo title="Single" description="Single selection closes the panel after choosing an option.">
-      <SelectRoot options={frameworkOptions} defaultValue="react">
+      <SelectRoot items={frameworkOptions} defaultValue="react">
         <SelectTrigger placeholder="请选择" />
         <SelectContent />
       </SelectRoot>

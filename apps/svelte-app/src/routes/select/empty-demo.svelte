@@ -5,5 +5,5 @@
 <Demo
   title="Empty"
   description="An explicit empty state is rendered when there are no options."
-  options={[]}
+  items={[]}
 />

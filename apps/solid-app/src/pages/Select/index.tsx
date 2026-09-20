@@ -3,7 +3,6 @@ import { ChangeMetaDemo } from './change-meta-demo'
 import { ClearDemo } from './clear-demo'
 import { CustomRenderDemo } from './custom-render-demo'
 import { CustomSearchDemo } from './custom-search-demo'
-import { CustomTagDemo } from './custom-tag-demo'
 import { EmptyDemo } from './empty-demo'
 import { FormStatusDemo } from './form-status-demo'
 import { GroupDemo } from './group-demo'
@@ -15,7 +14,6 @@ import { PopupRenderDemo } from './popup-render-demo'
 import { PrefixSuffixDemo } from './prefix-suffix-demo'
 import { RemoteSearchDemo } from './remote-search-demo'
 import { SingleDemo } from './single-demo'
-import { TagsDemo } from './tags-demo'
 import { VirtualDemo } from './virtual-demo'
 export function SelectPage() {
   return (
@@ -27,17 +25,15 @@ export function SelectPage() {
           </A>
           <h1 class="text-2xl font-semibold text-foreground">Select</h1>
           <p class="text-sm text-muted-foreground">
-            Single, multiple and tags selection with search, grouping and virtualization.
+            Single and multiple selection with search, grouping and virtualization.
           </p>
         </header>
         <div class="grid gap-4">
           <SingleDemo />
           <MultipleDemo />
-          <TagsDemo />
           <ClearDemo />
           <MaxCountDemo />
           <ChangeMetaDemo />
-          <CustomTagDemo />
           <PrefixSuffixDemo />
           <FormStatusDemo />
           <PopupRenderDemo />

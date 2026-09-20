@@ -4,7 +4,6 @@ import { PlusIcon } from '@fex-design/vue/icon/plus'
 import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/vue/primitive/select'
@@ -27,16 +26,16 @@ function addItem() {
   <Demo
     title="Custom popup rendering"
     description="The content slot wraps the default menu with interactive custom content."
-    ><SelectRoot :options="options"
-      ><SelectTrigger placeholder="自定义下拉面板" /><SelectContent
-        ><SelectList />
+    ><SelectRoot :items="options"
+      ><SelectTrigger placeholder="自定义下拉面板" /><SelectContent>
+        <template #footer>
         <div class="flex items-center gap-2 border-t border-border p-2" @pointerdown.stop>
           <InputRoot :value="name" class="flex-1" @value-change="name = $event"
             ><InputControl placeholder="请输入新选项" /></InputRoot
           ><Button size="sm" variant="ghost" @click="addItem"
             ><PlusIcon class="size-4" />添加</Button
           >
-        </div></SelectContent
+        </div></template></SelectContent
       ></SelectRoot
     ></Demo
   >

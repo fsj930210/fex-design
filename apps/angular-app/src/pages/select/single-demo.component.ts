@@ -3,11 +3,11 @@ import { frameworkOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'
 export
 @Component({
-  selector: 'fex-select-single-demo',
+  selector: 'select-single-demo',
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<fex-select-simple-demo title="Single" description="Single selection closes the panel after choosing an option." [options]="options" defaultValue="react" />',
+    '<select-simple-demo title="Single" description="Single selection closes the panel after choosing an option." [items]="options" defaultValue="react" />',
 })
 class SingleDemo {
   protected readonly options = frameworkOptions

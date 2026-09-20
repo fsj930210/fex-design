@@ -3,11 +3,11 @@ import { virtualOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'
 export
 @Component({
-  selector: 'fex-select-virtual-demo',
+  selector: 'select-virtual-demo',
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<fex-select-simple-demo title="Virtual scrolling" description="Only visible options mount from 1,000 entries." [options]="options" [showSearch]="true" [virtual]="virtual" />',
+    '<select-simple-demo title="Virtual scrolling" description="Only visible options mount from 1,000 entries." [items]="options" [showSearch]="true" [virtual]="virtual" />',
 })
 class VirtualDemo {
   protected readonly options = virtualOptions

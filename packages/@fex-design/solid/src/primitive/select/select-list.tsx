@@ -2,7 +2,6 @@ import { groupSelectOptions } from '@fex-design/core/select/filter-options'
 import { getSelectVirtualRange } from '@fex-design/core/select/virtual'
 import type {
   SelectFilterOption,
-  SelectMode,
   SelectOption,
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
@@ -26,28 +25,33 @@ export function SelectContent(
   props: ParentProps<{
     class?: string
     popupRender?: (menu: JSX.Element, context: { close: () => void }) => JSX.Element
+    optionRender?: (option: SelectOption, state: { selected: boolean; active: boolean; disabled: boolean }) => JSX.Element
+    emptyContent?: JSX.Element
+    loadingContent?: JSX.Element
   }>,
 ) {
   const select = useSelect('SelectContent')
-  const menu = () => props.children ?? <SelectList />
+  const menu = () => props.children ?? <SelectList optionRender={props.optionRender} emptyContent={props.emptyContent} loadingContent={props.loadingContent} />
   return (
     <PopoverPortal>
       <PopoverContent
         class={cn(selectContentClassName, props.class)}
-        style="width: var(--select-content-width, var(--floating-reference-width)); max-width: min(var(--floating-available-width), var(--select-content-max-width, var(--floating-reference-width)));"
+        style="width: var(--floating-reference-width); max-width: var(--floating-available-width);"
       >
         {props.popupRender ? props.popupRender(menu(), { close: select.controller.close }) : menu()}
       </PopoverContent>
     </PopoverPortal>
   )
 }
-export function SelectList(
+function SelectList(
   props: ParentProps<{
     class?: string
     optionRender?: (
       option: SelectOption,
       state: { selected: boolean; active: boolean; disabled: boolean },
     ) => JSX.Element
+    emptyContent?: JSX.Element
+    loadingContent?: JSX.Element
   }>,
 ) {
   const select = useSelect('SelectList')
@@ -78,6 +82,8 @@ export function SelectList(
         })
       }
     >
+      <Show when={!select.loading()} fallback={<SelectLoading>{props.loadingContent}</SelectLoading>}>
+      <Show when={select.visibleOptions().length} fallback={<SelectEmpty>{props.emptyContent}</SelectEmpty>}>
       <Show
         when={range()}
         fallback={
@@ -100,6 +106,8 @@ export function SelectList(
             </div>
           </div>
         )}
+      </Show>
+      </Show>
       </Show>
     </div>
   )
@@ -143,11 +151,46 @@ function SelectOptionView(props: {
     </div>
   )
 }
-export function SelectEmpty(props: ParentProps<{ class?: string }>) {
+export function SelectItem(props: ParentProps<{ item: SelectOption; class?: string }>) {
+  const select = useSelect('SelectItem')
+  const state = () => ({
+    selected: select.controller.selection.isSelected(props.item.value),
+    active: select.snapshot().activeValue === props.item.value,
+    disabled:
+      props.item.disabled === true || select.controller.selection.isDisabled(props.item.value),
+  })
+  return (
+    <div
+      role="option"
+      aria-selected={state().selected}
+      aria-disabled={state().disabled || undefined}
+      data-active={state().active || undefined}
+      data-selected={state().selected || undefined}
+      data-disabled={state().disabled || undefined}
+      class={cn(selectOptionClassName, props.class)}
+      onPointerMove={() => select.controller.setActiveValue(props.item.value, 'pointer')}
+      onPointerDown={(event) => event.preventDefault()}
+      onClick={() => !state().disabled && select.controller.selectValue(props.item.value)}
+    >
+      <span class={selectOptionLabelClassName}>{props.children ?? props.item.label}</span>
+      <span class={selectOptionIndicatorClassName}><CheckIcon /></span>
+    </div>
+  )
+}
+export function SelectGroup(props: ParentProps<{ label?: string }>) {
+  return <div role="group" aria-label={props.label}>{props.children}</div>
+}
+export function SelectLabel(props: ParentProps<{ class?: string }>) {
+  return <div class={cn(selectGroupLabelClassName, props.class)}>{props.children}</div>
+}
+export function SelectSeparator(props: { class?: string }) {
+  return <div role="separator" class={cn('my-1 h-px bg-border', props.class)} />
+}
+function SelectEmpty(props: ParentProps<{ class?: string }>) {
   return <div class={cn(selectEmptyClassName, props.class)}>{props.children ?? 'No options'}</div>
 }
-export function SelectLoading(props: ParentProps<{ class?: string }>) {
+function SelectLoading(props: ParentProps<{ class?: string }>) {
   return <div class={cn(selectLoadingClassName, props.class)}>{props.children ?? 'Loading...'}</div>
 }
 export { useSelect } from './select-context'
-export type { SelectFilterOption, SelectMode, SelectOption, SelectVirtualOptions }
+export type { SelectFilterOption, SelectOption, SelectVirtualOptions }

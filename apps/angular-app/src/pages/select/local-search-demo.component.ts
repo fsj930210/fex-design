@@ -4,11 +4,11 @@ import { frameworkOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'
 export
 @Component({
-  selector: 'fex-select-local-search-demo',
+  selector: 'select-local-search-demo',
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<fex-select-simple-demo title="Local search" description="filterOption filters locally and search receives every keyword." [options]="options" [showSearch]="true" [filterOption]="filter" />',
+    '<select-simple-demo title="Local search" description="filterOption filters locally and search receives every keyword." [items]="options" [showSearch]="true" [filterOption]="filter" />',
 })
 class LocalSearchDemo {
   protected readonly options = frameworkOptions

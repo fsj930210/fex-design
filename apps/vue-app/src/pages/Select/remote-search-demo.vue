@@ -2,7 +2,6 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/vue/primitive/select'
@@ -54,12 +53,12 @@ onBeforeUnmount(() => {
       show-search
       :loading="loading"
       :open="open"
-      :options="options"
+      :items="options"
       @open-change="open = $event"
       @search="search"
-      ><SelectTrigger placeholder="请输入关键词远程搜索" /><SelectContent
-        ><SelectList
-          loading-text="Searching remote options…"
-          empty-text="No remote results" /></SelectContent></SelectRoot
+      ><SelectTrigger placeholder="请输入关键词远程搜索" /><SelectContent>
+        <template #loading>Searching remote options…</template>
+        <template #empty>No remote results</template>
+      </SelectContent></SelectRoot
   ></Demo>
 </template>

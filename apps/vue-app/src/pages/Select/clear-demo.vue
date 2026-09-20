@@ -7,7 +7,7 @@ import Demo from './demo-section.vue'
   <Demo
     title="Clear"
     description="Clear and the dropdown indicator share one suffix position and never render together."
-    ><SelectRoot clearable default-value="solid" :options="frameworkOptions"
+    ><SelectRoot clearable default-value="solid" :items="frameworkOptions"
       ><SelectTrigger placeholder="请选择" /><SelectContent /></SelectRoot
   ></Demo>
 </template>

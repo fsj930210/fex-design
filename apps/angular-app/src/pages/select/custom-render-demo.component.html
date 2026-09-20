@@ -4,17 +4,17 @@
   description="The option template replaces content while behavior remains intact."
 >
   <div class="max-w-md">
-    <fex-select [options]="options"
-      ><fex-select-trigger placeholder="请选择技术" /><fex-select-content
-        ><fex-select-list
+    <div selectRoot [items]="options"
+      ><div selectTrigger placeholder="请选择技术" ></div><div selectContent
+        ><div selectList
           ><ng-template #option let-item
             ><div class="flex items-center justify-between gap-3">
               <span>{{ item.label }}</span
               ><span class="text-xs text-muted-foreground">{{ item.group }}</span>
             </div></ng-template
-          ></fex-select-list
-        ></fex-select-content
-      ></fex-select
+          ></div
+        ></div
+      ></div
     >
   </div>
 </div>

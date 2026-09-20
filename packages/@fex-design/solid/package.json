@@ -90,6 +90,7 @@
     "./ui/input": "./src/ui/input/input.tsx",
     "./ui/input-number": "./src/ui/input-number/input-number.tsx",
     "./ui/radio": "./src/ui/radio/radio.tsx",
+    "./ui/select": "./src/ui/select/select.tsx",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.tsx",
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",
     "./ui/listbox": "./src/ui/listbox/listbox.tsx",

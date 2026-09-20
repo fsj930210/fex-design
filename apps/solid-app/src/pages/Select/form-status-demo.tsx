@@ -37,7 +37,7 @@ export function FormStatusDemo() {
                     <SelectRoot
                       value={field().state.value as string}
                       status={invalid() ? 'error' : undefined}
-                      options={frameworkOptions}
+                      items={frameworkOptions}
                       onChange={(value) => field().handleChange(String(value ?? ''))}
                     >
                       <SelectTrigger {...props} placeholder="请选择" />

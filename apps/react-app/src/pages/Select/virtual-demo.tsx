@@ -1,6 +1,5 @@
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -13,11 +12,9 @@ export function VirtualDemo() {
       title="Virtual scrolling"
       description="Only the visible fixed-height options and overscan are mounted from 1,000 entries."
     >
-      <SelectRoot showSearch options={virtualOptions} virtual={{ itemHeight: 32, overscan: 4 }}>
+      <SelectRoot showSearch items={virtualOptions} virtual={{ itemHeight: 32, overscan: 4 }}>
         <SelectTrigger placeholder="请输入关键词或选择选项" />
-        <SelectContent className="[--select-content-max-height:256px]">
-          <SelectList />
-        </SelectContent>
+        <SelectContent />
       </SelectRoot>
     </SelectDemoSection>
   )

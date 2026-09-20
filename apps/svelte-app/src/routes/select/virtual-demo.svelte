@@ -6,7 +6,7 @@
 <Demo
   title="Virtual scrolling"
   description="Only visible options and overscan mount from 1,000 entries."
-  options={virtualOptions}
+  items={virtualOptions}
   showSearch
   virtual={{ itemHeight: 32, overscan: 4 }}
 />

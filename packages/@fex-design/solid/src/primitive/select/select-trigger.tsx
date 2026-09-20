@@ -12,7 +12,7 @@ import {
 import { cn } from '@fex/utils'
 import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { XIcon } from '../../icon/x'
+import { CircleXIcon } from '../../icon/circle-x'
 import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { Button } from '../button/button'
@@ -22,6 +22,7 @@ import { useSelect } from './select-context'
 export interface SelectTriggerProps extends ParentProps<
   Omit<JSX.HTMLAttributes<HTMLDivElement>, 'prefix'>
 > {
+  inputProps?: SelectInputProps
   prefix?: JSX.Element
   suffix?: JSX.Element
   placeholder?: string
@@ -31,9 +32,15 @@ export interface SelectTriggerProps extends ParentProps<
     context: { remove: () => void; disabled: boolean },
   ) => JSX.Element
 }
+export interface SelectInputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+  prefix?: JSX.Element
+  suffix?: JSX.Element
+  clear?: JSX.Element
+}
 export function SelectTrigger(props: SelectTriggerProps) {
   const [local, rest] = splitProps(props, [
     'class',
+    'inputProps',
     'children',
     'prefix',
     'suffix',
@@ -55,7 +62,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
       select.controller.moveActiveTo(event.key === 'Home' ? 'first' : 'last')
     } else if (event.key === 'Enter') {
       event.preventDefault()
-      if (!select.controller.selectActive()) select.controller.createTag()
+      select.controller.selectActive()
     } else if (event.key === 'Backspace' && !select.snapshot().searchValue)
       select.controller.removeLastSelected()
     else if (event.key === 'Escape') select.controller.close()
@@ -75,7 +82,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
           class={cn(selectTriggerClassName(), local.class)}
           onKeyDown={keydown}
         >
-          {local.prefix}
+          {local.inputProps?.prefix ?? local.prefix}
           <div class={selectValueContainerClassName}>
             <SelectValue
               maxTagCount={local.maxTagCount}
@@ -85,6 +92,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
               {local.children}
             </SelectValue>
             <input
+              {...local.inputProps}
               role="combobox"
               aria-expanded={select.snapshot().open}
               aria-controls={select.listId}
@@ -116,19 +124,17 @@ export function SelectTrigger(props: SelectTriggerProps) {
           </div>
           <span data-slot="select-suffix" class={selectSuffixClassName}>
             <Show when={!select.loading()} fallback={<LoadingIcon class="animate-spin" />}>
-              <Show
-                when={select.clearable() && select.selectedOptions().length}
-                fallback={
-                  local.suffix ?? (
+              <span class={select.clearable() && select.selectedOptions().length ? 'group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0' : undefined}>
+                {local.inputProps?.suffix ?? local.suffix ?? (
                     <span
                       data-state={select.snapshot().open ? 'open' : 'closed'}
                       class={selectIndicatorClassName}
                     >
                       <ChevronDownIcon />
                     </span>
-                  )
-                }
-              >
+                  )}
+              </span>
+              <Show when={select.clearable() && select.selectedOptions().length}>
                 <Button
                   type="button"
                   aria-label="Clear selection"
@@ -139,7 +145,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
                     select.controller.clear()
                   }}
                 >
-                  <XIcon class="size-4" />
+                  {local.inputProps?.clear ?? <CircleXIcon />}
                 </Button>
               </Show>
             </Show>

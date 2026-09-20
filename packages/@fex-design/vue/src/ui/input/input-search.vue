@@ -81,6 +81,6 @@ function search(source: InputSearchMeta['source']) {
         @click="search('addonAfter')"
         ><slot v-if="!loading" name="addonAfter"><SearchIcon /></slot></Button
     ></template>
-    <template v-if="$slots.clearIcon" #clearIcon><slot name="clearIcon" /></template>
+    <template v-if="$slots.clear" #clear><slot name="clear" /></template>
   </Input>
 </template>

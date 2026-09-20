@@ -15,7 +15,7 @@ const result = ref('请选择用户')
     description="change returns value plus the complete selected option for backend fields."
     ><div class="space-y-2">
       <SelectRoot
-        :options="options"
+        :items="options"
         @change="
           (value, meta) =>
             (result = JSON.stringify({ value, selectedItem: meta.selectedItem }, null, 2))

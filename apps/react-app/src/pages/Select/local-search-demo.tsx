@@ -1,7 +1,6 @@
 import { defaultSelectFilterOption } from '@fex-design/core/select/filter-options'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -17,13 +16,11 @@ export function LocalSearchDemo() {
       <SelectRoot
         showSearch
         filterOption={defaultSelectFilterOption}
-        options={frameworkOptions}
+        items={frameworkOptions}
         onSearch={() => undefined}
       >
         <SelectTrigger placeholder="请输入关键词搜索" />
-        <SelectContent>
-          <SelectList />
-        </SelectContent>
+        <SelectContent />
       </SelectRoot>
     </SelectDemoSection>
   )

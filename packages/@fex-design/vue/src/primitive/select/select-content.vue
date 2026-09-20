@@ -14,10 +14,9 @@ const className = computed(() => cn(selectContentClassName, props.class))
     ><PopoverContent
       :class="className"
       :style="{
-        width: 'var(--select-content-width, var(--floating-reference-width))',
-        maxWidth:
-          'min(var(--floating-available-width), var(--select-content-max-width, var(--floating-reference-width)))',
+        width: 'var(--floating-reference-width)',
+        maxWidth: 'var(--floating-available-width)',
       }"
-      ><slot><SelectList /></slot></PopoverContent
+      ><slot><SelectList><template #option="slotProps"><slot name="option" v-bind="slotProps">{{ slotProps.option.label }}</slot></template><template #empty><slot name="empty" /></template><template #loading><slot name="loading" /></template></SelectList></slot><slot name="footer" /></PopoverContent
   ></PopoverPortal>
 </template>

@@ -23,7 +23,7 @@ const inputProps = computed(() => {
     <template v-if="$slots.prefix" #prefix><slot name="prefix" /></template>
     <template v-if="$slots.addonBefore" #addonBefore><slot name="addonBefore" /></template>
     <template v-if="$slots.addonAfter" #addonAfter><slot name="addonAfter" /></template>
-    <template v-if="$slots.clearIcon" #clearIcon><slot name="clearIcon" /></template>
+    <template v-if="$slots.clear" #clear><slot name="clear" /></template>
     <template #suffix>
       <slot name="suffix" />
       <button

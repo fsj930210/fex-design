@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@
 import type { OnDestroy } from '@angular/core'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
@@ -11,9 +10,9 @@ import { Card } from '@fex-design/angular/ui/card'
 import { frameworkOptions } from './data'
 export
 @Component({
-  selector: 'fex-select-remote-search-demo',
+  selector: 'select-remote-search-demo',
   standalone: true,
-  imports: [Card, SelectRoot, SelectTrigger, SelectContent, SelectList],
+  imports: [Card, SelectRoot, SelectTrigger, SelectContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './remote-search-demo.component.html',
 })

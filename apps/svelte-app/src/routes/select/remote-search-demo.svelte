@@ -2,7 +2,6 @@
   import type { SelectOption } from "@fex-design/core/select/types";
   import SelectRoot from "@fex-design/svelte/primitive/select";
   import SelectContent from "@fex-design/svelte/primitive/select-content";
-  import SelectList from "@fex-design/svelte/primitive/select-list";
   import SelectTrigger from "@fex-design/svelte/primitive/select-trigger";
   import { onDestroy } from "svelte";
   import { frameworkOptions } from "./data";
@@ -46,14 +45,13 @@
     showSearch
     {loading}
     {open}
-    {options}
+    items={options}
     onOpenChange={(value) => (open = value)}
     onSearch={search}
     ><SelectTrigger placeholder="请输入关键词远程搜索" /><SelectContent
-      ><SelectList
-        loadingText="Searching remote options..."
-        emptyText="No remote results"
-      /></SelectContent
+      loadingText="Searching remote options..."
+      emptyText="No remote results"
+    />
     ></SelectRoot
   ></Demo
 >

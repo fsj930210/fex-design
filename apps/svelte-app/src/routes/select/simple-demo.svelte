@@ -1,7 +1,6 @@
 <script lang="ts">
   import type {
     SelectFilterOption,
-    SelectMode,
     SelectOption,
     SelectVirtualOptions,
   } from "@fex-design/core/select/types";
@@ -13,8 +12,7 @@
   let {
     title,
     description,
-    options,
-    mode,
+    items,
     multiple = false,
     clearable = false,
     showSearch = false,
@@ -27,8 +25,7 @@
   }: {
     title: string;
     description: string;
-    options: readonly SelectOption[];
-    mode?: SelectMode;
+    items: readonly SelectOption[];
     multiple?: boolean;
     clearable?: boolean;
     showSearch?: boolean;
@@ -43,8 +40,7 @@
 
 <Demo {title} {description}
   ><SelectRoot
-    {options}
-    {mode}
+    {items}
     {multiple}
     {clearable}
     {showSearch}
@@ -52,8 +48,6 @@
     {filterOption}
     {maxCount}
     {virtual}
-    ><SelectTrigger {placeholder} {maxTagCount} /><SelectContent
-      class={virtual ? "[--select-content-max-height:256px]" : undefined}
-    /></SelectRoot
+    ><SelectTrigger {placeholder} {maxTagCount} /><SelectContent /></SelectRoot
   ></Demo
 >

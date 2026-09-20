@@ -10,7 +10,7 @@ import {
 import { cn } from '@fex/utils'
 import { computed, useSlots } from 'vue'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { XIcon } from '../../icon/x'
+import { CircleXIcon } from '../../icon/circle-x'
 import { LoadingIcon } from '../../icon/loading'
 import PrimitiveButton from '../button/button.vue'
 import PopoverTrigger from '../popover/popover-trigger.vue'
@@ -36,7 +36,7 @@ function keydown(event: KeyboardEvent) {
     select.controller.moveActiveTo(event.key === 'Home' ? 'first' : 'last')
   } else if (event.key === 'Enter') {
     event.preventDefault()
-    if (!select.controller.selectActive()) select.controller.createTag()
+    select.controller.selectActive()
   } else if (event.key === 'Backspace' && !select.snapshot.value.searchValue)
     select.controller.removeLastSelected()
   else if (event.key === 'Escape') select.controller.close()
@@ -99,22 +99,21 @@ function inputPointerdown(event: PointerEvent) {
       </div>
       <span data-slot="select-suffix" :class="selectSuffixClassName">
         <LoadingIcon v-if="select.loading.value" class="animate-spin" />
+        <template v-else>
+        <span :class="select.clearable.value && select.selectedOptions.value.length ? 'group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0' : undefined">
+          <slot v-if="slots.suffix" name="suffix" />
+          <span v-else :data-state="select.snapshot.value.open ? 'open' : 'closed'" :class="selectIndicatorClassName"><ChevronDownIcon /></span>
+        </span>
         <PrimitiveButton
-          v-else-if="select.clearable.value && select.selectedOptions.value.length"
+          v-if="select.clearable.value && select.selectedOptions.value.length"
           type="button"
           aria-label="Clear selection"
           :class="selectClearClassName"
           @pointerdown.prevent
           @click.stop="select.controller.clear()"
-          ><XIcon class="size-4"
-        /></PrimitiveButton>
-        <slot v-else-if="slots.suffix" name="suffix" />
-        <span
-          v-else
-          :data-state="select.snapshot.value.open ? 'open' : 'closed'"
-          :class="selectIndicatorClassName"
-          ><ChevronDownIcon
-        /></span>
+          ><slot name="clear"><CircleXIcon /></slot
+        ></PrimitiveButton>
+        </template>
       </span>
     </div>
   </PopoverTrigger>

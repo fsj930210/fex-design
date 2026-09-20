@@ -7,7 +7,7 @@ export function MaxCountDemo() {
       title="Maximum selection count"
       description="maxCount limits actual selection; maxTagCount only controls presentation."
     >
-      <SelectRoot multiple maxCount={3} options={frameworkOptions} defaultValue={['react']}>
+      <SelectRoot multiple maxCount={3} items={frameworkOptions} defaultValue={['react']}>
         <SelectTrigger maxTagCount={2} placeholder="最多选择三个" />
         <SelectContent />
       </SelectRoot>

@@ -1,7 +1,5 @@
 import type { SelectionController, SelectionValue } from '../selection/types'
 
-export type SelectMode = 'tags'
-
 export interface SelectOption<TValue extends SelectionValue = SelectionValue> {
   value: TValue
   label: string
@@ -40,17 +38,13 @@ export interface SelectSnapshot<TValue extends SelectionValue = SelectionValue> 
 export interface SelectControllerOptions<TValue extends SelectionValue = SelectionValue> {
   selection: SelectionController
   options?: readonly SelectOption<TValue>[] | undefined
-  mode?: SelectMode | undefined
   multiple?: boolean | undefined
   maxCount?: number | undefined
   open?: boolean | undefined
   defaultOpen?: boolean | undefined
-  searchValue?: string | undefined
-  defaultSearchValue?: string | undefined
   loop?: boolean | undefined
   onOpenChange?: ((open: boolean) => void) | undefined
   onSearch?: ((keyword: string) => void) | undefined
-  onTagCreate?: ((value: string) => boolean | void) | undefined
 }
 
 export interface SelectController<TValue extends SelectionValue = SelectionValue> {
@@ -66,7 +60,6 @@ export interface SelectController<TValue extends SelectionValue = SelectionValue
   moveActiveTo: (position: 'first' | 'last') => void
   selectValue: (value: TValue) => void
   selectActive: () => boolean
-  createTag: (keyword?: string) => boolean
   removeLastSelected: () => void
   clear: () => void
 }

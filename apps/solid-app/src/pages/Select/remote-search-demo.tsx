@@ -1,13 +1,10 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   SelectContent,
-  SelectEmpty,
-  SelectList,
-  SelectLoading,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/solid/primitive/select'
-import { createSignal, onCleanup, Show } from 'solid-js'
+import { createSignal, onCleanup } from 'solid-js'
 import { frameworkOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'
 export function RemoteSearchDemo() {
@@ -58,21 +55,12 @@ export function RemoteSearchDemo() {
         showSearch
         loading={loading()}
         open={open()}
-        options={options()}
+        items={options()}
         onOpenChange={setOpen}
         onSearch={search}
       >
         <SelectTrigger placeholder="请输入关键词远程搜索" />
-        <SelectContent>
-          <Show
-            when={!loading()}
-            fallback={<SelectLoading>Searching remote options…</SelectLoading>}
-          >
-            <Show when={options().length} fallback={<SelectEmpty>No remote results</SelectEmpty>}>
-              <SelectList />
-            </Show>
-          </Show>
-        </SelectContent>
+        <SelectContent loadingContent="Searching remote options…" emptyContent="No remote results" />
       </SelectRoot>
     </Demo>
   )

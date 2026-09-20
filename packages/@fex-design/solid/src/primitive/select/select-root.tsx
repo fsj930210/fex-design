@@ -2,7 +2,6 @@ import { createSelectController } from '@fex-design/core/select/create-select-co
 import { filterSelectOptions } from '@fex-design/core/select/filter-options'
 import type {
   SelectFilterOption,
-  SelectMode,
   SelectOption,
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
@@ -11,6 +10,7 @@ import type { SelectionValue } from '@fex-design/core/selection/types'
 import { createMemo, createUniqueId, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { Popover } from '../popover/popover'
+import type { PopoverProps } from '../popover/popover'
 import { SelectContext } from './select-context'
 
 export interface SelectChangeMeta {
@@ -20,8 +20,7 @@ export interface SelectChangeMeta {
   changedValues: SelectionValue[]
 }
 export interface SelectRootProps extends ParentProps {
-  options?: readonly SelectOption[]
-  mode?: SelectMode
+  items?: readonly SelectOption[]
   multiple?: boolean
   value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
@@ -38,9 +37,10 @@ export interface SelectRootProps extends ParentProps {
   virtual?: SelectVirtualOptions
   maxCount?: number
   status?: 'error' | 'warning' | undefined
+  popoverProps?: Omit<PopoverProps, 'children'>
 }
 export function SelectRoot(props: SelectRootProps) {
-  const multiple = () => props.multiple === true || props.mode === 'tags'
+  const multiple = () => props.multiple === true
   const selection = createSelectionController({
     get value() {
       return props.value
@@ -52,11 +52,11 @@ export function SelectRoot(props: SelectRootProps) {
       return multiple()
     },
     get disabledValues() {
-      return props.options?.filter((item) => item.disabled).map((item) => item.value)
+      return props.items?.filter((item) => item.disabled).map((item) => item.value)
     },
     onChange(values, meta) {
       const resolve = (value: SelectionValue) =>
-        props.options?.find((item) => item.value === value) ?? { value, label: String(value) }
+        props.items?.find((item) => item.value === value) ?? { value, label: String(value) }
       const selectedItems = values.map(resolve)
       const selectedItem =
         meta.changedValues.map(resolve).find((item) => values.includes(item.value)) ??
@@ -74,13 +74,10 @@ export function SelectRoot(props: SelectRootProps) {
     selection,
     get options() {
       return filterSelectOptions(
-        props.options ?? [],
+        props.items ?? [],
         controller.getSnapshot().searchValue,
         props.filterOption,
       )
-    },
-    get mode() {
-      return props.mode
     },
     get multiple() {
       return multiple()
@@ -98,7 +95,7 @@ export function SelectRoot(props: SelectRootProps) {
     onSearch: (keyword) => props.onSearch?.(keyword),
   })
   const snapshot = createCoreStoreSignal(controller)
-  const options = () => props.options ?? []
+  const options = () => props.items ?? []
   const visibleOptions = createMemo(() =>
     filterSelectOptions(options(), snapshot().searchValue, props.filterOption),
   )
@@ -118,8 +115,7 @@ export function SelectRoot(props: SelectRootProps) {
     visibleOptions,
     selectedOptions,
     multiple,
-    tags: () => props.mode === 'tags',
-    showSearch: () => props.showSearch === true || props.mode === 'tags',
+    showSearch: () => props.showSearch === true,
     disabled: () => props.disabled === true,
     clearable: () => props.clearable === true,
     loading: () => props.loading === true,
@@ -131,6 +127,7 @@ export function SelectRoot(props: SelectRootProps) {
   return (
     <SelectContext.Provider value={context}>
       <Popover
+        {...props.popoverProps}
         open={snapshot().open}
         defaultOpen={props.defaultOpen ?? false}
         onOpenChange={(open) => (open ? controller.open() : controller.close())}

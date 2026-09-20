@@ -1,8 +1,7 @@
 <div card [title]="title" [description]="description">
   <div class="max-w-md">
-    <fex-select
-      [options]="options"
-      [mode]="mode"
+    <div selectRoot
+      [items]="items"
       [multiple]="multiple"
       [clearable]="clearable"
       [showSearch]="showSearch"
@@ -10,9 +9,9 @@
       [filterOption]="filterOption"
       [maxCount]="maxCount"
       [virtual]="virtual"
-      ><fex-select-trigger
+      ><div selectTrigger
         [placeholder]="placeholder"
-        [maxTagCount]="maxTagCount" /><fex-select-content><fex-select-list /></fex-select-content
-    ></fex-select>
+        [maxTagCount]="maxTagCount" ></div><div selectContent></div
+    ></div>
   </div>
 </div>

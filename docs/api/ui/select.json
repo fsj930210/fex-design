@@ -1,0 +1,34 @@
+{
+  "name": "Select",
+  "slug": "select",
+  "layer": "ui",
+  "status": "stable",
+  "description": "基于 items 的单选与多选快捷组件。",
+  "importPath": {
+    "react": "@fex-design/react/ui/select",
+    "vue": "@fex-design/vue/ui/select",
+    "solid": "@fex-design/solid/ui/select",
+    "svelte": "@fex-design/svelte/ui/select",
+    "angular": "@fex-design/angular/ui/select"
+  },
+  "props": [
+    { "name": "items", "type": "readonly TItem[]", "description": "任意结构的动态项目。" },
+    { "name": "fieldNames", "type": "{ value: keyof TItem; label: keyof TItem }", "description": "值和标签字段映射。" },
+    { "name": "multiple", "type": "boolean", "default": false, "description": "启用多选。", "editor": "boolean" },
+    { "name": "searchable", "type": "boolean", "default": false, "description": "启用搜索。", "editor": "boolean" },
+    { "name": "inputProps", "type": "SelectInputProps", "description": "传给 Trigger Input 的完整配置。" },
+    { "name": "popoverProps", "type": "SelectPopoverProps", "description": "传给 Popover 的配置，排除 getPopupContainer。" },
+    { "name": "getPopupContainer", "type": "(trigger: HTMLElement | null) => HTMLElement", "description": "解析弹层挂载容器。" },
+    { "name": "virtual", "type": "SelectVirtualOptions", "description": "固定行高虚拟化配置。" }
+  ],
+  "events": [
+    { "name": "change", "type": "(value, meta) => void", "description": "选择变化。" },
+    { "name": "search", "type": "(keyword: string) => void", "description": "搜索输入变化。" }
+  ],
+  "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基础用法", "description": "使用 items 快速生成 Select。" },
+    { "id": "field-names", "title": "字段映射", "description": "映射任意对象的值和标签字段。" },
+    { "id": "virtual", "title": "虚拟列表", "description": "搜索并虚拟渲染 1000 个项目。" }
+  ]
+}

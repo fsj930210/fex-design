@@ -16,7 +16,7 @@ export interface InputProps
   addonBefore?: JSX.Element
   addonAfter?: JSX.Element
   clearable?: boolean
-  clearIcon?: JSX.Element
+  clear?: JSX.Element
   classNames?: InputClassNames
   styles?: InputStyles<JSX.CSSProperties>
 }

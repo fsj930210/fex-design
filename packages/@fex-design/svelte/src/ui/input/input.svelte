@@ -23,7 +23,7 @@
     suffix,
     addonBefore,
     addonAfter,
-    clearIcon,
+    clear,
     clearable = false,
     classNames,
     styles,
@@ -58,7 +58,7 @@
       bind:ref
     />
     {#if clearable}<InputClear class={classNames?.clear} style={styles?.clear}
-        >{#if clearIcon}{@render clearIcon()}{:else}<CircleXIcon
+        >{#if clear}{@render clear()}{:else}<CircleXIcon
           />{/if}</InputClear
       >{/if}
     {#if suffix}<InputSuffix class={classNames?.suffix} style={styles?.suffix}

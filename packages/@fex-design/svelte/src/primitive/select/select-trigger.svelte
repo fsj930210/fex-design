@@ -12,9 +12,9 @@
   } from "@fex-design/styles/select";
   import { cn } from "@fex/utils";
   import { getContext, type Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import type { HTMLAttributes, HTMLInputAttributes } from "svelte/elements";
   import ChevronRight from "../../icon/chevron-right.svelte";
-  import XIcon from "../../icon/x.svelte";
+  import CircleXIcon from "../../icon/circle-x.svelte";
   import LoadingIcon from "../../icon/loading.svelte";
   import { Button } from "@fex-design/svelte/primitive/button";
   import PopoverTrigger from "../popover/popover-trigger.svelte";
@@ -29,6 +29,8 @@
     maxTagCount?: number;
     prefix?: Snippet;
     suffix?: Snippet;
+    clear?: Snippet;
+    inputProps?: HTMLInputAttributes;
     tag?: Snippet<[SelectOption, () => void]>;
   }
   let {
@@ -37,6 +39,8 @@
     maxTagCount,
     prefix,
     suffix,
+    clear,
+    inputProps = {},
     tag,
     ...rest
   }: Props = $props();
@@ -60,7 +64,7 @@
       select.controller.moveActiveTo(event.key === "Home" ? "first" : "last");
     } else if (event.key === "Enter") {
       event.preventDefault();
-      if (!select.controller.selectActive()) select.controller.createTag();
+      select.controller.selectActive();
     } else if (event.key === "Backspace" && !$snapshot.searchValue)
       select.controller.removeLastSelected();
     else if (event.key === "Escape") select.controller.close();
@@ -126,6 +130,7 @@
             class={selectPlaceholderClassName}>{placeholder}</span
           >{/if}
         <input
+          {...inputProps}
           role="combobox"
           aria-expanded={$snapshot.open}
           aria-controls={select.listId}
@@ -152,7 +157,12 @@
       <span data-slot="select-suffix" class={selectSuffixClassName}
         >{#if select.loading()}<LoadingIcon
             class="animate-spin"
-          />{:else if select.clearable() && selected().length}<Button
+          />{:else}<span class={select.clearable() && selected().length ? "group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0" : undefined}
+          >{#if suffix}{@render suffix()}{:else}<span
+            data-state={$snapshot.open ? "open" : "closed"}
+            class={selectIndicatorClassName}
+            ><ChevronRight class="size-4 rotate-90" /></span>{/if}</span
+          >{#if select.clearable() && selected().length}<Button
             type="button"
             aria-label="Clear selection"
             class={selectClearClassName}
@@ -160,12 +170,7 @@
             onclick={(event) => {
               event.stopPropagation();
               select.controller.clear();
-            }}><XIcon class="size-4" /></Button
-          >{:else if suffix}{@render suffix()}{:else}<span
-            data-state={$snapshot.open ? "open" : "closed"}
-            class={selectIndicatorClassName}
-            ><ChevronRight class="size-4 rotate-90" /></span
-          >{/if}</span
+            }}>{#if clear}{@render clear()}{:else}<CircleXIcon />{/if}</Button>{/if}{/if}</span
       >
     </div>
   {/snippet}</PopoverTrigger

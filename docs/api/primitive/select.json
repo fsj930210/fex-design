@@ -1,0 +1,90 @@
+{
+  "name": "Select",
+  "slug": "select",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "可组合的单选与多选 Primitive。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/select",
+    "vue": "@fex-design/vue/primitive/select",
+    "solid": "@fex-design/solid/primitive/select",
+    "svelte": "@fex-design/svelte/primitive/select",
+    "angular": "@fex-design/angular/primitive/select"
+  },
+  "components": [
+    {
+      "name": "SelectRoot",
+      "layer": "primitive",
+      "description": "管理选中、展开和搜索状态。",
+      "props": []
+    },
+    {
+      "name": "SelectTrigger",
+      "layer": "primitive",
+      "description": "连接输入控件与弹层触发器。",
+      "props": []
+    },
+    {
+      "name": "SelectValue",
+      "layer": "primitive",
+      "description": "渲染当前值或占位内容。",
+      "props": []
+    },
+    {
+      "name": "SelectContent",
+      "layer": "primitive",
+      "description": "弹层内容和项目列表容器。",
+      "props": []
+    },
+    { "name": "SelectItem", "layer": "primitive", "description": "可选项目。", "props": [] },
+    { "name": "SelectGroup", "layer": "primitive", "description": "项目分组。", "props": [] },
+    { "name": "SelectLabel", "layer": "primitive", "description": "分组标题。", "props": [] },
+    { "name": "SelectSeparator", "layer": "primitive", "description": "项目分隔线。", "props": [] }
+  ],
+  "props": [
+    { "name": "items", "type": "readonly SelectOption[]", "description": "动态项目列表。" },
+    { "name": "value", "type": "SelectionValue | SelectionValue[]", "description": "受控选中值。" },
+    {
+      "name": "defaultValue",
+      "type": "SelectionValue | SelectionValue[]",
+      "description": "非受控初始值。"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "default": false,
+      "description": "启用多选。",
+      "editor": "boolean"
+    },
+    {
+      "name": "showSearch",
+      "type": "boolean",
+      "default": false,
+      "description": "使 Trigger 可输入搜索。",
+      "editor": "boolean"
+    },
+    {
+      "name": "filterOption",
+      "type": "SelectFilterOption | false",
+      "description": "自定义本地过滤或关闭本地过滤。"
+    },
+    { "name": "open", "type": "boolean", "description": "受控展开状态。" },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": false,
+      "description": "非受控初始展开状态。"
+    },
+    { "name": "onOpenChange", "type": "(open: boolean) => void", "description": "展开状态变化。" },
+    { "name": "virtual", "type": "SelectVirtualOptions", "description": "固定行高虚拟化配置。" }
+  ],
+  "events": [
+    { "name": "change", "type": "(value, meta) => void", "description": "选择变化。" },
+    { "name": "search", "type": "(keyword: string) => void", "description": "搜索输入变化。" }
+  ],
+  "cssVariables": [],
+  "demos": [
+    { "id": "basic", "title": "基础组合", "description": "组合 Root、Trigger 与 Content。" },
+    { "id": "virtual", "title": "虚拟列表", "description": "只渲染可视区项目。" }
+  ]
+}

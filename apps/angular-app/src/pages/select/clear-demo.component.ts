@@ -3,11 +3,11 @@ import { frameworkOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'
 export
 @Component({
-  selector: 'fex-select-clear-demo',
+  selector: 'select-clear-demo',
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<fex-select-simple-demo title="Clear" description="Clear and indicator share one suffix." [options]="options" [clearable]="true" defaultValue="solid" />',
+    '<select-simple-demo title="Clear" description="Clear and indicator share one suffix." [items]="options" [clearable]="true" defaultValue="solid" />',
 })
 class ClearDemo {
   protected readonly options = frameworkOptions

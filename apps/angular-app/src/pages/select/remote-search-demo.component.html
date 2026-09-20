@@ -4,17 +4,17 @@
   description="The mock request waits two seconds, cancels stale keywords and returns matches."
 >
   <div class="max-w-md">
-    <fex-select
+    <div selectRoot
       [showSearch]="true"
       [loading]="loading"
       [open]="open"
-      [options]="options"
+      [items]="options"
       (openChange)="open = $event"
       (search)="search($event)"
-      ><fex-select-trigger placeholder="请输入关键词远程搜索" /><fex-select-content
-        ><fex-select-list
+      ><div selectTrigger placeholder="请输入关键词远程搜索" ></div><div selectContent
+        ><div selectList
           loadingText="Searching remote options..."
-          emptyText="No remote results" /></fex-select-content
-    ></fex-select>
+          emptyText="No remote results" ></div></div
+    ></div>
   </div>
 </div>

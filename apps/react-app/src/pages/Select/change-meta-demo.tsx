@@ -1,7 +1,6 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
   type SelectChangeMeta,
@@ -29,11 +28,9 @@ export function ChangeMetaDemo() {
       description="onChange returns value plus the complete selected option for backend fields."
     >
       <div className="space-y-2">
-        <SelectRoot options={backendOptions} onChange={handleChange}>
+        <SelectRoot items={backendOptions} onChange={handleChange}>
           <SelectTrigger placeholder="请选择用户" />
-          <SelectContent>
-            <SelectList />
-          </SelectContent>
+          <SelectContent />
         </SelectRoot>
         <pre className="overflow-auto rounded-md bg-muted-background p-3 text-xs">{result}</pre>
       </div>

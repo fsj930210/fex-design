@@ -1,0 +1,26 @@
+<div
+  selectRoot
+  [items]="options()"
+  [value]="value()"
+  [defaultValue]="defaultValue()"
+  [multiple]="multiple()"
+  [showSearch]="searchable()"
+  [filterOption]="filterOption()"
+  [clearable]="clearable()"
+  [disabled]="disabled()"
+  [loading]="loading()"
+  [maxCount]="maxCount()"
+  [virtual]="virtual()"
+  [status]="status()"
+  [open]="popoverProps().open"
+  [defaultOpen]="popoverProps().defaultOpen ?? false"
+  (change)="change.emit($event)"
+  (search)="search.emit($event)"
+>
+  <div selectTrigger [placeholder]="placeholder()" [maxTagCount]="maxTagCount()">
+    @if (prefix(); as template) { <ng-template #prefix><ng-container *ngTemplateOutlet="template" /></ng-template> }
+    @if (suffix(); as template) { <ng-template #suffix><ng-container *ngTemplateOutlet="template" /></ng-template> }
+    @if (clear(); as template) { <ng-template #clear><ng-container *ngTemplateOutlet="template" /></ng-template> }
+  </div>
+  <div selectContent></div>
+</div>

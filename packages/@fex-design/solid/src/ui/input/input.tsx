@@ -33,7 +33,7 @@ export function Input(props: InputProps) {
     'addonBefore',
     'addonAfter',
     'clearable',
-    'clearIcon',
+    'clear',
     'classNames',
     'styles',
     'class',
@@ -71,7 +71,7 @@ export function Input(props: InputProps) {
       />
       {local.clearable && (
         <InputClear class={local.classNames?.clear} style={local.styles?.clear}>
-          {local.clearIcon}
+          {local.clear}
         </InputClear>
       )}
       {local.suffix != null && (

@@ -1,6 +1,5 @@
 import type {
   SelectFilterOption,
-  SelectMode,
   SelectOption,
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
@@ -8,24 +7,22 @@ import type { SelectionValue } from '@fex-design/core/selection/types'
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
 import { Card } from '@fex-design/angular/ui/card'
 export
 @Component({
-  selector: 'fex-select-simple-demo',
+  selector: 'select-simple-demo',
   standalone: true,
-  imports: [Card, SelectRoot, SelectTrigger, SelectContent, SelectList],
+  imports: [Card, SelectRoot, SelectTrigger, SelectContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './simple-demo.component.html',
 })
 class SimpleSelectDemo {
   @Input({ required: true }) title = ''
   @Input({ required: true }) description = ''
-  @Input() options: readonly SelectOption[] = []
-  @Input() mode?: SelectMode
+  @Input() items: readonly SelectOption[] = []
   @Input() multiple = false
   @Input() clearable = false
   @Input() showSearch = false

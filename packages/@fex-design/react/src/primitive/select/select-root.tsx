@@ -2,7 +2,6 @@ import { createSelectController } from '@fex-design/core/select/create-select-co
 import { filterSelectOptions } from '@fex-design/core/select/filter-options'
 import type {
   SelectFilterOption,
-  SelectMode,
   SelectOption,
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
@@ -26,8 +25,7 @@ export interface SelectRootProps extends Omit<
   'children' | 'onOpenChange' | 'open'
 > {
   children?: ReactNode
-  options?: readonly SelectOption[]
-  mode?: SelectMode
+  items?: readonly SelectOption[]
   multiple?: boolean
   value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
@@ -48,7 +46,7 @@ export interface SelectRootProps extends Omit<
 }
 
 export function SelectRoot(props: SelectRootProps) {
-  const multiple = props.multiple === true || props.mode === 'tags'
+  const multiple = props.multiple === true
   const optionsRef = useRef({ ...props, multiple })
   Object.assign(optionsRef.current, props, { multiple })
   const selectionRef = useRef<ReturnType<typeof createSelectionController> | null>(null)
@@ -63,11 +61,11 @@ export function SelectRoot(props: SelectRootProps) {
       return optionsRef.current.multiple
     },
     get disabledValues() {
-      return optionsRef.current.options?.filter((item) => item.disabled).map((item) => item.value)
+      return optionsRef.current.items?.filter((item) => item.disabled).map((item) => item.value)
     },
     onChange: (values, meta) => {
       const resolveOption = (value: SelectionValue) =>
-        optionsRef.current.options?.find((item) => item.value === value) ?? {
+        optionsRef.current.items?.find((item) => item.value === value) ?? {
           value,
           label: String(value),
         }
@@ -89,13 +87,10 @@ export function SelectRoot(props: SelectRootProps) {
     get options() {
       const keyword = controllerRef.current?.getSnapshot().searchValue ?? ''
       return filterSelectOptions(
-        optionsRef.current.options ?? [],
+        optionsRef.current.items ?? [],
         keyword,
         optionsRef.current.filterOption,
       )
-    },
-    get mode() {
-      return optionsRef.current.mode
     },
     get multiple() {
       return optionsRef.current.multiple
@@ -114,7 +109,7 @@ export function SelectRoot(props: SelectRootProps) {
   })
   const snapshot = useCoreStore(controllerRef.current)
   const selection = selectionRef.current.getSnapshot()
-  const options = props.options ?? []
+  const options = props.items ?? []
   const visibleOptions = filterSelectOptions(options, snapshot.searchValue, props.filterOption)
   const selectedOptions = selection.values.map(
     (value) => options.find((item) => item.value === value) ?? { value, label: String(value) },
@@ -132,8 +127,7 @@ export function SelectRoot(props: SelectRootProps) {
         visibleOptions,
         filterOption: props.filterOption,
         multiple,
-        tags: props.mode === 'tags',
-        showSearch: props.showSearch === true || props.mode === 'tags',
+        showSearch: props.showSearch === true,
         disabled: props.disabled === true,
         clearable: props.clearable === true,
         loading: props.loading === true,

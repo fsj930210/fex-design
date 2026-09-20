@@ -19,15 +19,15 @@
         />
         } @else {
         <button
-          fexCheckboxPrimitive
-          [checked]="headerState($any(side))"
+          type="button"
+          [attr.aria-pressed]="headerState($any(side)) === true"
           [disabled]="disabled() || enabledKeys($any(side)).length === 0"
           [attr.aria-label]="'Select all ' + panelTitle($any(side))"
           [class]="checkboxClass"
-          (checkedChange)="toggleAll($any(side), $event.checked === true)"
+          (click)="toggleAll($any(side), headerState($any(side)) !== true)"
         >
           @if (headerState($any(side)) !== false) {
-          <span fexCheckboxIndicator [checked]="headerState($any(side))" [class]="indicatorClass"
+          <span checkboxIndicator [class]="indicatorClass"
             ><fex-check-icon [class]="checkIconClass" /><minus-icon [class]="minusIconClass"
           /></span>
           }</button

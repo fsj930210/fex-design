@@ -33,7 +33,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
     addonBefore,
     addonAfter,
     clearable = false,
-    clearIcon,
+    clear,
     className,
     style,
     classNames,
@@ -72,7 +72,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
       />
       {clearable ? (
         <InputClear className={classNames?.clear} style={styles?.clear}>
-          {clearIcon}
+          {clear}
         </InputClear>
       ) : null}
       {suffix != null || suffixAction != null ? (

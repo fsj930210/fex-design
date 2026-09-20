@@ -1,11 +1,9 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
-  selectClearClassName,
   selectIndicatorClassName,
   selectInputClassName,
   selectPlaceholderClassName,
   selectSuffixClassName,
-  selectTriggerClassName,
   selectValueClassName,
   selectValueContainerClassName,
 } from '@fex-design/styles/select'
@@ -13,28 +11,31 @@ import { cn } from '@fex/utils'
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '../../icon/chevron'
 import { LoadingIcon } from '../../icon/loading'
-import { XIcon } from '../../icon/x'
 import { Tag } from '../tag/tag'
-import { InputClearButton } from '../input/input'
+import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
+import type { InputProps } from '../../ui/input/input.types'
 import { PopoverTrigger } from '../popover/popover'
 import { useSelect } from './use-select'
 
 export interface SelectTriggerProps extends Omit<ComponentProps<'div'>, 'children' | 'prefix'> {
   children?: ReactNode
-  prefix?: ReactNode
+  inputProps?: SelectInputProps
   maxTagCount?: number
   placeholder?: string
-  suffix?: ReactNode
   tagRender?: (
     option: SelectOption,
     context: { remove: () => void; disabled: boolean },
   ) => ReactNode
 }
 
+export type SelectInputProps = Omit<
+  InputProps,
+  'value' | 'defaultValue' | 'onValueChange' | 'addonBefore' | 'addonAfter' | 'clearable'
+>
+
 export function SelectTrigger({
   children,
-  prefix,
-  suffix,
+  inputProps,
   tagRender,
   maxTagCount,
   placeholder,
@@ -44,8 +45,32 @@ export function SelectTrigger({
 }: SelectTriggerProps) {
   const select = useSelect()
   const hasValue = select.selection.values.length > 0
+  const {
+    prefix,
+    suffix,
+    clear,
+    className: inputClassName,
+    style: inputStyle,
+    classNames,
+    styles,
+    onKeyDown: inputOnKeyDown,
+    onFocus,
+    onPointerDown,
+    onClick,
+    onChange,
+    ...controlProps
+  } = inputProps ?? {}
+  const indicator = suffix ?? (
+    <span
+      data-state={select.snapshot.open ? 'open' : 'closed'}
+      className={selectIndicatorClassName}
+    >
+      <ChevronDownIcon aria-hidden />
+    </span>
+  )
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(event)
+    inputOnKeyDown?.(event as KeyboardEvent<HTMLInputElement>)
     if (event.defaultPrevented) return
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
@@ -56,7 +81,7 @@ export function SelectTrigger({
       select.controller.moveActiveTo(event.key === 'Home' ? 'first' : 'last')
     } else if (event.key === 'Enter') {
       event.preventDefault()
-      if (!select.controller.selectActive()) select.controller.createTag()
+      select.controller.selectActive()
     } else if (event.key === 'Backspace' && !select.snapshot.searchValue)
       select.controller.removeLastSelected()
     else if (event.key === 'Escape') select.controller.close()
@@ -64,7 +89,7 @@ export function SelectTrigger({
   return (
     <PopoverTrigger>
       {(triggerProps) => (
-        <div
+        <InputRoot
           {...props}
           {...(triggerProps as ComponentProps<'div'>)}
           role={undefined}
@@ -72,19 +97,26 @@ export function SelectTrigger({
           data-disabled={select.disabled ? 'true' : undefined}
           data-status={select.status}
           aria-invalid={select.status === 'error' || undefined}
-          className={cn(selectTriggerClassName(), className)}
+          value={select.snapshot.searchValue}
+          disabled={select.disabled}
+          readOnly={!select.showSearch}
+          className={cn('cursor-pointer', classNames?.root, inputClassName, className)}
+          style={{ ...styles?.root, ...inputStyle, ...props.style }}
+          onValueChange={(value) => {
+            select.controller.setSearchValue(value)
+            select.controller.open()
+          }}
           onKeyDown={handleKeyDown}
         >
-          {prefix}
+          {prefix != null ? (
+            <InputPrefix className={classNames?.prefix} style={styles?.prefix}>
+              {prefix}
+            </InputPrefix>
+          ) : null}
           <div className={selectValueContainerClassName}>
-            <SelectValue
-              maxTagCount={maxTagCount}
-              placeholder={select.showSearch ? undefined : placeholder}
-              tagRender={tagRender}
-            >
-              {children}
-            </SelectValue>
-            <input
+            {children}
+            <InputControl
+              {...controlProps}
               role="combobox"
               aria-expanded={select.snapshot.open}
               aria-controls={select.listId}
@@ -98,50 +130,43 @@ export function SelectTrigger({
               placeholder={select.showSearch && !hasValue ? placeholder : undefined}
               value={select.snapshot.searchValue}
               className={cn(
-                selectInputClassName,
+                classNames?.control,
                 !select.showSearch && 'absolute size-px min-w-0 overflow-hidden opacity-0',
               )}
-              onFocus={() => select.controller.open()}
-              onPointerDown={(event) => {
-                if (document.activeElement === event.currentTarget) select.controller.toggleOpen()
-                else select.controller.open()
+              style={styles?.control}
+              onFocus={(event) => {
+                onFocus?.(event)
+                if (!event.defaultPrevented) select.controller.open()
               }}
+              onPointerDown={onPointerDown}
               onClick={(event) => {
-                event.stopPropagation()
+                onClick?.(event)
               }}
               onChange={(event) => {
-                select.controller.setSearchValue(event.currentTarget.value)
-                select.controller.open()
+                onChange?.(event)
               }}
             />
           </div>
-          <span data-slot="select-suffix" className={selectSuffixClassName}>
-            {select.loading ? (
-              <LoadingIcon className="animate-spin" />
-            ) : select.clearable && hasValue ? (
-              <InputClearButton
-                data-slot="select-clear"
-                aria-label="Clear selection"
-                className={selectClearClassName}
+          <InputSuffix
+            data-slot="select-suffix"
+            className={cn(classNames?.suffix)}
+            style={styles?.suffix}
+          >
+            {select.loading ? <LoadingIcon className="animate-spin" /> : null}
+            {select.clearable && hasValue ? (
+              <InputClear
                 onClick={(event) => {
                   event.stopPropagation()
                   select.controller.clear()
                 }}
               >
-                <XIcon className="size-4" />
-              </InputClearButton>
-            ) : suffix ? (
-              suffix
+                {clear}
+              </InputClear>
             ) : (
-              <span
-                data-state={select.snapshot.open ? 'open' : 'closed'}
-                className={selectIndicatorClassName}
-              >
-                <ChevronDownIcon aria-hidden />
-              </span>
+              indicator
             )}
-          </span>
-        </div>
+          </InputSuffix>
+        </InputRoot>
       )}
     </PopoverTrigger>
   )
@@ -158,7 +183,6 @@ export interface SelectValueProps extends ComponentProps<'div'> {
 export function SelectValue({
   children,
   maxTagCount,
-  placeholder,
   tagRender,
   className,
   ...props
@@ -170,10 +194,10 @@ export function SelectValue({
         {children}
       </div>
     )
-  if (!select.selectedOptions.length)
-    return select.snapshot.searchValue ? null : (
-      <span className={selectPlaceholderClassName}>{placeholder ?? select.placeholder}</span>
-    )
+  if (!select.selectedOptions.length) return null
+  // return select.snapshot.searchValue ? null : (
+  //   <span className={selectPlaceholderClassName}>{placeholder ?? select.placeholder}</span>
+  // )
   if (!select.multiple)
     return (
       <div {...props} className={cn(selectValueClassName, className)}>

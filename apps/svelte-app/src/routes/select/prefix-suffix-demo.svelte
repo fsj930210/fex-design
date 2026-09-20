@@ -12,11 +12,11 @@
   title="Prefix and suffix"
   description="prefix decorates the input; suffix replaces the chevron."
   ><div class="space-y-2">
-    <SelectRoot options={frameworkOptions}
+    <SelectRoot items={frameworkOptions}
       ><SelectTrigger placeholder="带前缀"
         >{#snippet prefix()}<InfoIcon class="size-4" />{/snippet}</SelectTrigger
       ><SelectContent /></SelectRoot
-    ><SelectRoot options={frameworkOptions}
+    ><SelectRoot items={frameworkOptions}
       ><SelectTrigger placeholder="自定义后缀"
         >{#snippet suffix()}<CheckIcon />{/snippet}</SelectTrigger
       ><SelectContent /></SelectRoot

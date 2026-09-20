@@ -1,6 +1,5 @@
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -13,11 +12,9 @@ export function ClearDemo() {
       title="Clear"
       description="Clear and the dropdown indicator share one suffix position and never render together."
     >
-      <SelectRoot clearable options={frameworkOptions} defaultValue="solid">
+      <SelectRoot clearable items={frameworkOptions} defaultValue="solid">
         <SelectTrigger placeholder="请选择框架" />
-        <SelectContent>
-          <SelectList />
-        </SelectContent>
+        <SelectContent />
       </SelectRoot>
     </SelectDemoSection>
   )

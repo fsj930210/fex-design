@@ -7,7 +7,7 @@
 <Demo
   title="Multi-field search"
   description="Search label, searchText and keywords; try google or meta."
-  options={frameworkOptions}
+  items={frameworkOptions}
   showSearch
   filterOption={defaultSelectFilterOption}
 />

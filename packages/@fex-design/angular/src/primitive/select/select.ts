@@ -4,7 +4,6 @@ import { filterSelectOptions, groupSelectOptions } from '@fex-design/core/select
 import { getSelectVirtualRange } from '@fex-design/core/select/virtual'
 import type {
   SelectFilterOption,
-  SelectMode,
   SelectOption,
   SelectSnapshot,
   SelectVirtualOptions,
@@ -17,6 +16,10 @@ import {
   selectIndicatorClassName,
   selectInputClassName,
   selectListClassName,
+  selectGroupLabelClassName,
+  selectOptionClassName,
+  selectOptionIndicatorClassName,
+  selectOptionLabelClassName,
   selectSuffixClassName,
   selectTriggerClassName,
   selectValueClassName,
@@ -39,9 +42,7 @@ import {
   signal,
   type Signal,
 } from '@angular/core'
-import { CheckIcon } from '../../icon/check'
-import { ChevronDownIcon } from '../../icon/chevron'
-import { XIcon } from '../../icon/x'
+import { CircleXIcon } from '../../icon/circle-x'
 import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
@@ -55,7 +56,7 @@ export interface SelectChangeMeta {
   changedValues: SelectionValue[]
 }
 @Component({
-  selector: 'fex-select',
+  selector: 'div[selectRoot]',
   standalone: true,
   providers: [Popover],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,13 +68,12 @@ export class SelectRoot implements OnChanges {
   private readonly optionsState = signal<readonly SelectOption[]>([])
   private readonly loadingState = signal(false)
   @Input()
-  set options(value: readonly SelectOption[]) {
+  set items(value: readonly SelectOption[]) {
     this.optionsState.set(value)
   }
-  get options() {
+  get items() {
     return this.optionsState()
   }
-  @Input() mode: SelectMode | undefined
   @Input() multiple = false
   @Input() value: SelectionValue | SelectionValue[] | undefined
   @Input() defaultValue: SelectionValue | SelectionValue[] | undefined
@@ -120,12 +120,12 @@ export class SelectRoot implements OnChanges {
         return root.isMultiple
       },
       get disabledValues() {
-        return root.options.filter((item) => item.disabled).map((item) => item.value)
+        return root.items.filter((item) => item.disabled).map((item) => item.value)
       },
       onChange(values, meta) {
         if (root.suppressChange) return
         const resolve = (value: SelectionValue) =>
-          root.options.find((item) => item.value === value) ?? { value, label: String(value) }
+          root.items.find((item) => item.value === value) ?? { value, label: String(value) }
         const selectedItems = values.map(resolve)
         const selectedItem =
           meta.changedValues.map(resolve).find((item) => values.includes(item.value)) ??
@@ -146,13 +146,10 @@ export class SelectRoot implements OnChanges {
       selection: this.selection,
       get options() {
         return filterSelectOptions(
-          root.options,
+          root.items,
           controller.getSnapshot().searchValue,
           root.filterOption,
         )
-      },
-      get mode() {
-        return root.mode
       },
       get multiple() {
         return root.isMultiple
@@ -200,13 +197,13 @@ export class SelectRoot implements OnChanges {
     this.popover.syncOptions()
   }
   get isMultiple() {
-    return this.multiple || this.mode === 'tags'
+    return this.multiple
   }
   get canSearch() {
-    return this.showSearch || this.mode === 'tags'
+    return this.showSearch
   }
   get visibleOptions() {
-    return filterSelectOptions(this.options, this.snapshot().searchValue, this.filterOption)
+    return filterSelectOptions(this.items, this.snapshot().searchValue, this.filterOption)
   }
   get selectedOptions() {
     this.snapshot()
@@ -214,7 +211,7 @@ export class SelectRoot implements OnChanges {
       .getSnapshot()
       .values.map(
         (value) =>
-          this.options.find((item) => item.value === value) ?? { value, label: String(value) },
+          this.items.find((item) => item.value === value) ?? { value, label: String(value) },
       )
   }
   syncOpen(next: boolean) {
@@ -226,14 +223,13 @@ export class SelectRoot implements OnChanges {
   }
 }
 @Component({
-  selector: 'fex-select-trigger',
+  selector: '[selectTrigger]',
   standalone: true,
   imports: [
     NgTemplateOutlet,
     PopoverTrigger,
     Button,
-    ChevronDownIcon,
-    XIcon,
+    CircleXIcon,
     LoadingIcon,
     Tag,
     TagAction,
@@ -247,6 +243,7 @@ export class SelectTrigger {
   @Input() maxTagCount: number | undefined
   @ContentChild('prefix') prefix?: TemplateRef<void>
   @ContentChild('suffix') suffix?: TemplateRef<void>
+  @ContentChild('clear') clear?: TemplateRef<void>
   @ContentChild('tag') tag?: TemplateRef<{ $implicit: SelectOption; remove: () => void }>
   readonly triggerClass = selectTriggerClassName()
   readonly valueContainerClass = selectValueContainerClassName
@@ -285,14 +282,14 @@ export class SelectTrigger {
       this.select.controller.moveActiveTo(event.key === 'Home' ? 'first' : 'last')
     } else if (event.key === 'Enter') {
       event.preventDefault()
-      if (!this.select.controller.selectActive()) this.select.controller.createTag()
+      this.select.controller.selectActive()
     } else if (event.key === 'Backspace' && !this.select.snapshot().searchValue)
       this.select.controller.removeLastSelected()
     else if (event.key === 'Escape') this.select.controller.close()
   }
 }
 @Component({
-  selector: 'fex-select-content',
+  selector: '[selectContent]',
   standalone: true,
   imports: [PopoverPortal, PopoverContent, forwardRef(() => SelectList)],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -302,9 +299,62 @@ export class SelectContent {
   readonly contentClass = selectContentClassName
 }
 @Component({
-  selector: 'fex-select-list',
+  selector: 'div[selectItem]',
   standalone: true,
-  imports: [NgTemplateOutlet, CheckIcon],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    role: 'option',
+    '[class]': 'itemClass',
+    '[attr.aria-selected]': 'selected',
+    '[attr.aria-disabled]': 'disabled || null',
+    '[attr.data-selected]': 'selected || null',
+    '[attr.data-active]': 'active || null',
+    '[attr.data-disabled]': 'disabled || null',
+    '(pointermove)': "select.controller.setActiveValue(item.value, 'pointer')",
+    '(pointerdown)': '$event.preventDefault()',
+    '(click)': 'choose()',
+  },
+  templateUrl: './select-item.html',
+})
+export class SelectItem {
+  readonly select = inject(SelectRoot)
+  @Input({ alias: 'selectItem', required: true }) item!: SelectOption
+  readonly itemClass = selectOptionClassName
+  readonly labelClass = selectOptionLabelClassName
+  readonly indicatorClass = selectOptionIndicatorClassName
+  get selected() { return this.select.selection.isSelected(this.item.value) }
+  get active() { return this.select.snapshot().activeValue === this.item.value }
+  get disabled() { return this.item.disabled === true || this.select.selection.isDisabled(this.item.value) }
+  choose() { if (!this.disabled) this.select.controller.selectValue(this.item.value) }
+}
+@Component({
+  selector: 'div[selectGroup]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { role: 'group', '[attr.aria-label]': 'label' },
+  template: '<ng-content />',
+})
+export class SelectGroup { @Input() label: string | undefined }
+@Component({
+  selector: 'div[selectLabel]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'labelClass' },
+  template: '<ng-content />',
+})
+export class SelectLabel { readonly labelClass = selectGroupLabelClassName }
+@Component({
+  selector: 'div[selectSeparator]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { role: 'separator', class: 'my-1 h-px bg-border' },
+  template: '',
+})
+export class SelectSeparator {}
+@Component({
+  selector: '[selectList]',
+  standalone: true,
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'listClass',
@@ -362,4 +412,4 @@ export class SelectList {
     this.viewport = { scrollTop: element.scrollTop, height: element.clientHeight }
   }
 }
-export type { SelectFilterOption, SelectMode, SelectOption, SelectVirtualOptions }
+export type { SelectFilterOption, SelectOption, SelectVirtualOptions }

@@ -15,7 +15,7 @@ export function ChangeMetaDemo() {
     >
       <div class="space-y-2">
         <SelectRoot
-          options={options}
+          items={options}
           onChange={(value, meta) =>
             setResult(JSON.stringify({ value, selectedItem: meta.selectedItem }, null, 2))
           }

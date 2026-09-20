@@ -2,12 +2,7 @@
   "name": "@fex-design/solid-app",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 4002 --strictPort",
-    "build": "vite build",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "oxlint src vite.config.ts"
-  },
+  "scripts": {},
   "dependencies": {
     "@fex-design/core": "workspace:*",
     "@fex-design/solid": "workspace:*",

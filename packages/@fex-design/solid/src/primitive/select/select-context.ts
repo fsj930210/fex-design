@@ -13,7 +13,6 @@ export interface SelectContextValue {
   visibleOptions: Accessor<readonly SelectOption[]>
   selectedOptions: Accessor<readonly SelectOption[]>
   multiple: Accessor<boolean>
-  tags: Accessor<boolean>
   showSearch: Accessor<boolean>
   disabled: Accessor<boolean>
   clearable: Accessor<boolean>

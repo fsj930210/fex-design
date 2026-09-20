@@ -17,10 +17,9 @@ export function createSelectController<TValue extends SelectionValue>(
   options: SelectControllerOptions<TValue>,
 ): SelectController<TValue> {
   const isOpenControlled = () => options.open !== undefined
-  const isSearchControlled = () => options.searchValue !== undefined
   const initialSnapshot: SelectSnapshot<TValue> = {
     open: options.open ?? options.defaultOpen ?? false,
-    searchValue: options.searchValue ?? options.defaultSearchValue ?? '',
+    searchValue: '',
     activeValue: undefined,
     interaction: null,
     selectedValues: options.selection.getSnapshot().values,
@@ -32,7 +31,7 @@ export function createSelectController<TValue extends SelectionValue>(
   function snapshot(): SelectSnapshot<TValue> {
     const current = store.getSnapshot()
     const open = options.open ?? current.open
-    const searchValue = options.searchValue ?? current.searchValue
+    const searchValue = current.searchValue
     const selectedValues = options.selection.getSnapshot().values
     if (
       current === resolvedSource &&
@@ -72,8 +71,8 @@ export function createSelectController<TValue extends SelectionValue>(
 
   function clearSearchAfterSelection() {
     if (snapshot().searchValue === '') return
-    if (isSearchControlled()) options.onSearch?.('')
-    else update({ searchValue: '' })
+    update({ searchValue: '' })
+    options.onSearch?.('')
   }
 
   function findOption(value: TValue | undefined): SelectOption<TValue> | undefined {
@@ -101,7 +100,7 @@ export function createSelectController<TValue extends SelectionValue>(
     toggleOpen: () => setOpen(!snapshot().open),
     setSearchValue: (keyword) => {
       if (snapshot().searchValue === keyword) return
-      if (!isSearchControlled()) update({ searchValue: keyword })
+      update({ searchValue: keyword })
       options.onSearch?.(keyword)
     },
     setActiveValue: (value, interaction = 'pointer') => {
@@ -133,7 +132,7 @@ export function createSelectController<TValue extends SelectionValue>(
     selectValue: (value) => {
       const option = findOption(value)
       if (!option || option.disabled || options.selection.isDisabled(value)) return
-      const multiple = options.multiple === true || options.mode === 'tags'
+      const multiple = options.multiple === true
       if (multiple) {
         const selected = options.selection.isSelected(value)
         if (
@@ -153,20 +152,6 @@ export function createSelectController<TValue extends SelectionValue>(
       const value = snapshot().activeValue
       if (value === undefined) return false
       controller.selectValue(value)
-      return true
-    },
-    createTag: (keyword = snapshot().searchValue) => {
-      if (options.mode !== 'tags') return false
-      const value = keyword.trim()
-      if (!value || options.onTagCreate?.(value) === false) return false
-      if (
-        !options.selection.isSelected(value) &&
-        options.maxCount !== undefined &&
-        options.selection.getSnapshot().values.length >= options.maxCount
-      )
-        return false
-      if (!options.selection.isSelected(value)) options.selection.select(value)
-      clearSearchAfterSelection()
       return true
     },
     removeLastSelected: () => {

@@ -9,7 +9,6 @@ import {
 import { Form, useForm } from '@fex-design/react/primitive/form'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -45,13 +44,11 @@ export function FormStatusDemo() {
                     <SelectRoot
                       value={field.state.value as string}
                       {...(invalid ? { status: 'error' as const } : {})}
-                      options={frameworkOptions}
+                      items={frameworkOptions}
                       onChange={(value) => field.handleChange(String(value ?? ''))}
                     >
                       <SelectTrigger {...props} placeholder="请选择框架" />
-                      <SelectContent>
-                        <SelectList />
-                      </SelectContent>
+                      <SelectContent />
                     </SelectRoot>
                   )}
                 </FieldControl>

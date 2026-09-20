@@ -2,9 +2,6 @@ import type { SelectOption } from '@fex-design/core/select/types'
 import useUnmount from '@fex-design/react/hooks/use-unmount'
 import {
   SelectContent,
-  SelectEmpty,
-  SelectList,
-  SelectLoading,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
@@ -63,20 +60,12 @@ export function RemoteSearchDemo() {
         showSearch
         loading={loading}
         open={open}
-        options={options}
+        items={options}
         onOpenChange={setOpen}
         onSearch={handleSearch}
       >
         <SelectTrigger placeholder="请输入关键词远程搜索" />
-        <SelectContent>
-          {loading ? (
-            <SelectLoading>Searching remote options…</SelectLoading>
-          ) : options.length ? (
-            <SelectList />
-          ) : (
-            <SelectEmpty>No remote results</SelectEmpty>
-          )}
-        </SelectContent>
+        <SelectContent loadingContent="Searching remote options…" emptyContent="No remote results" />
       </SelectRoot>
     </SelectDemoSection>
   )

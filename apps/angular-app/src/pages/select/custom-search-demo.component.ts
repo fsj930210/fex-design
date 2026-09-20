@@ -3,11 +3,11 @@ import { frameworkOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'
 export
 @Component({
-  selector: 'fex-select-custom-search-demo',
+  selector: 'select-custom-search-demo',
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<fex-select-simple-demo title="Custom search" description="A custom filterOption matches labels by prefix." [options]="options" [showSearch]="true" [filterOption]="filter" />',
+    '<select-simple-demo title="Custom search" description="A custom filterOption matches labels by prefix." [items]="options" [showSearch]="true" [filterOption]="filter" />',
 })
 class CustomSearchDemo {
   protected readonly options = frameworkOptions

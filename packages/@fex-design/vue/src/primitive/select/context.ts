@@ -13,7 +13,6 @@ export interface SelectContextValue {
   visibleOptions: ComputedRef<readonly SelectOption[]>
   selectedOptions: ComputedRef<readonly SelectOption[]>
   multiple: ComputedRef<boolean>
-  tags: ComputedRef<boolean>
   showSearch: ComputedRef<boolean>
   disabled: ComputedRef<boolean>
   clearable: ComputedRef<boolean>

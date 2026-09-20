@@ -91,6 +91,7 @@
     "./ui/input": "./src/ui/input/input.ts",
     "./ui/input-number": "./src/ui/input-number/input-number.ts",
     "./ui/radio": "./src/ui/radio/radio.ts",
+    "./ui/select": "./src/ui/select/select.ts",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.ts",
     "./ui/popover": "./src/ui/popover/popover.ts",

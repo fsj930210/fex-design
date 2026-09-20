@@ -18,7 +18,7 @@ export interface InputProps
   addonBefore?: ReactNode
   addonAfter?: ReactNode
   clearable?: boolean
-  clearIcon?: ReactNode
+  clear?: ReactNode
   classNames?: InputClassNames
   styles?: InputStyles<CSSProperties>
   ref?: Ref<HTMLInputElement>

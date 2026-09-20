@@ -3,7 +3,6 @@
   import { filterSelectOptions } from "@fex-design/core/select/filter-options";
   import type {
     SelectFilterOption,
-    SelectMode,
     SelectOption,
     SelectVirtualOptions,
   } from "@fex-design/core/select/types";
@@ -16,8 +15,7 @@
   import { selectContextKey, type SelectContext } from "./context";
   interface Props {
     children?: Snippet | undefined;
-    options?: readonly SelectOption[] | undefined;
-    mode?: SelectMode | undefined;
+    items?: readonly SelectOption[] | undefined;
     multiple?: boolean | undefined;
     value?: SelectionValue | SelectionValue[] | undefined;
     defaultValue?: SelectionValue | SelectionValue[] | undefined;
@@ -44,11 +42,11 @@
     virtual?: SelectVirtualOptions | undefined;
     maxCount?: number | undefined;
     status?: "error" | "warning" | undefined;
+    popoverProps?: Record<string, unknown> | undefined;
   }
   let {
     children,
-    options = [],
-    mode,
+    items = [],
     multiple = false,
     value,
     defaultValue,
@@ -65,8 +63,9 @@
     virtual,
     maxCount,
     status,
+    popoverProps = {},
   }: Props = $props();
-  const isMultiple = () => multiple || mode === "tags";
+  const isMultiple = () => multiple;
   const selection = createSelectionController({
     get value() {
       return value;
@@ -78,11 +77,11 @@
       return isMultiple();
     },
     get disabledValues() {
-      return options.filter((item) => item.disabled).map((item) => item.value);
+      return items.filter((item) => item.disabled).map((item) => item.value);
     },
     onChange(values, meta) {
       const resolve = (item: SelectionValue) =>
-        options.find((option) => option.value === item) ?? {
+        items.find((option) => option.value === item) ?? {
           value: item,
           label: String(item),
         };
@@ -104,13 +103,10 @@
     selection,
     get options() {
       return filterSelectOptions(
-        options,
+        items,
         controller.getSnapshot().searchValue,
         filterOption,
       );
-    },
-    get mode() {
-      return mode;
     },
     get multiple() {
       return isMultiple();
@@ -132,10 +128,10 @@
   const context: SelectContext = {
     controller,
     snapshot,
-    options: () => options,
+    options: () => items,
     visibleOptions: () =>
       filterSelectOptions(
-        options,
+        items,
         controller.getSnapshot().searchValue,
         filterOption,
       ),
@@ -143,14 +139,14 @@
       controller.getSnapshot();
       return selection.getSnapshot().values.map(
         (item) =>
-          options.find((option) => option.value === item) ?? {
+          items.find((option) => option.value === item) ?? {
             value: item,
             label: String(item),
           },
       );
     },
     multiple: isMultiple,
-    showSearch: () => showSearch || mode === "tags",
+    showSearch: () => showSearch,
     disabled: () => disabled,
     clearable: () => clearable,
     loading: () => loading,
@@ -163,6 +159,7 @@
 </script>
 
 <Popover
+  {...popoverProps}
   open={$snapshot.open}
   {defaultOpen}
   onOpenChange={(next) => (next ? controller.open() : controller.close())}

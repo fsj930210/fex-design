@@ -3,11 +3,11 @@ import { frameworkOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'
 export
 @Component({
-  selector: 'fex-select-group-demo',
+  selector: 'select-group-demo',
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<fex-select-simple-demo title="Group" description="Options sharing a group render below a label." [options]="options" />',
+    '<select-simple-demo title="Group" description="Options sharing a group render below a label." [items]="options" />',
 })
 class GroupDemo {
   protected readonly options = frameworkOptions

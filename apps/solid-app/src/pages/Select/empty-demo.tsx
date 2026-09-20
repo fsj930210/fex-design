@@ -1,6 +1,5 @@
 import {
   SelectContent,
-  SelectEmpty,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/solid/primitive/select'
@@ -11,11 +10,9 @@ export function EmptyDemo() {
       title="Empty"
       description="An explicit empty state is rendered when there are no options."
     >
-      <SelectRoot options={[]}>
+      <SelectRoot items={[]}>
         <SelectTrigger placeholder="请选择" />
-        <SelectContent>
-          <SelectEmpty />
-        </SelectContent>
+        <SelectContent />
       </SelectRoot>
     </Demo>
   )

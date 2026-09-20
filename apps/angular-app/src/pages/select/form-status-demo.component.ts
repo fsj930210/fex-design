@@ -8,7 +8,6 @@ import {
 import { Form, FormField, injectForm, type AnyFieldApi } from '@fex-design/angular/primitive/form'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
@@ -17,7 +16,7 @@ import { Card } from '@fex-design/angular/ui/card'
 import { frameworkOptions } from './data'
 export
 @Component({
-  selector: 'fex-select-form-status-demo',
+  selector: 'select-form-status-demo',
   standalone: true,
   imports: [
     Card,
@@ -31,7 +30,6 @@ export
     SelectRoot,
     SelectTrigger,
     SelectContent,
-    SelectList,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './form-status-demo.component.html',

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   SelectContent,
-  SelectList,
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/angular/primitive/select'
@@ -9,9 +8,9 @@ import { Card } from '@fex-design/angular/ui/card'
 import { frameworkOptions } from './data'
 export
 @Component({
-  selector: 'fex-select-custom-render-demo',
+  selector: 'select-custom-render-demo',
   standalone: true,
-  imports: [Card, SelectRoot, SelectTrigger, SelectContent, SelectList],
+  imports: [Card, SelectRoot, SelectTrigger, SelectContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-render-demo.component.html',
 })

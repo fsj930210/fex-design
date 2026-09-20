@@ -3,7 +3,6 @@
   import ClearDemo from "./clear-demo.svelte";
   import CustomRenderDemo from "./custom-render-demo.svelte";
   import CustomSearchDemo from "./custom-search-demo.svelte";
-  import CustomTagDemo from "./custom-tag-demo.svelte";
   import EmptyDemo from "./empty-demo.svelte";
   import FormStatusDemo from "./form-status-demo.svelte";
   import GroupDemo from "./group-demo.svelte";
@@ -15,7 +14,6 @@
   import PrefixSuffixDemo from "./prefix-suffix-demo.svelte";
   import RemoteSearchDemo from "./remote-search-demo.svelte";
   import SingleDemo from "./single-demo.svelte";
-  import TagsDemo from "./tags-demo.svelte";
   import VirtualDemo from "./virtual-demo.svelte";
 </script>
 
@@ -27,13 +25,13 @@
       >
       <h1 class="text-2xl font-semibold text-foreground">Select</h1>
       <p class="text-sm text-muted-foreground">
-        Single, multiple and tags selection with search, grouping and
+        Single and multiple selection with search, grouping and
         virtualization.
       </p>
     </header>
     <div class="grid gap-4">
-      <SingleDemo /><MultipleDemo /><TagsDemo /><ClearDemo /><MaxCountDemo
-      /><ChangeMetaDemo /><CustomTagDemo /><PrefixSuffixDemo /><FormStatusDemo
+      <SingleDemo /><MultipleDemo /><ClearDemo /><MaxCountDemo
+      /><ChangeMetaDemo /><PrefixSuffixDemo /><FormStatusDemo
       /><PopupRenderDemo /><GroupDemo /><CustomRenderDemo /><LocalSearchDemo
       /><MultiFieldSearchDemo /><CustomSearchDemo /><RemoteSearchDemo
       /><EmptyDemo /><VirtualDemo />

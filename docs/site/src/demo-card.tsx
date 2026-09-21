@@ -1,4 +1,4 @@
-import { createEffect, createResource, createSignal, onCleanup, onMount, Show } from 'solid-js'
+﻿import { createEffect, createResource, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { PREVIEW_PROTOCOL } from '@fex-design/docs-shared/preview-protocol'
 import { ExampleCard } from './example-card'
 import { Spinner } from '@fex-design/solid/primitive/spinner'
@@ -24,15 +24,40 @@ export function DemoCard(props: {
   const [copied, setCopied] = createSignal(false)
   const [height, setHeight] = createSignal(180)
   const [ready, setReady] = createSignal(false)
-  const [shouldLoad, setShouldLoad] = createSignal(false)
+  const [hasEntered, setHasEntered] = createSignal(false)
   let article!: HTMLElement
   let frame!: HTMLIFrameElement
-  const url = () => {
+
+  // 1. Runtime URL: 不再包含 component/demo/layer 等查询参数，统一使用干净的 runtime 入口
+  const runtimeUrl = () => {
     if (import.meta.env.DEV) {
-      return `${developmentOrigins[props.framework]}/examples/${props.framework}/${demoLayer()}/${props.slug}/${props.scene.id}?embed=true`
+      return `${developmentOrigins[props.framework]}/?embed=true`
     }
-    return `${import.meta.env.BASE_URL}previews/${props.framework}/?layer=${demoLayer()}&component=${props.slug}&demo=${props.scene.id}&embed=true`
+    return `${import.meta.env.BASE_URL}previews/${props.framework}/?embed=true`
   }
+
+  const standaloneHref = () => {
+    if (import.meta.env.DEV) {
+      return `${developmentOrigins[props.framework]}/examples/${props.framework}/${demoLayer()}/${props.slug}/${props.scene.id}`
+    }
+    return `${import.meta.env.BASE_URL}previews/${props.framework}/?layer=${demoLayer()}&component=${props.slug}&demo=${props.scene.id}`
+  }
+
+  const sendRender = () => {
+    if (!frame?.contentWindow) return
+    frame.contentWindow.postMessage(
+      {
+        protocol: PREVIEW_PROTOCOL,
+        type: 'render',
+        layer: demoLayer(),
+        component: props.slug,
+        demo: props.scene.id,
+        props: {},
+      },
+      '*',
+    )
+  }
+
   const [source] = createResource(
     () =>
       tab() === 'code'
@@ -49,24 +74,38 @@ export function DemoCard(props: {
     },
   )
 
+  // 当 demoLayer 发生切换时，向 iframe 发送新的 render 消息
   createEffect(() => {
-    url()
-    setReady(false)
+    demoLayer()
+    props.slug
+    props.scene.id
+    if (ready()) {
+      sendRender()
+    }
   })
+
   onMount(() => {
+    // 首次进入视口后激活 iframe，一旦加载后不再销毁，保证滚动流畅无白屏重建
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const isNearViewport = Boolean(entry?.isIntersecting)
-        setShouldLoad(isNearViewport)
-        if (!isNearViewport) setReady(false)
+        if (entry?.isIntersecting) {
+          setHasEntered(true)
+          observer.disconnect()
+        }
       },
-      { rootMargin: '100px 0px' },
+      { rootMargin: '200px 0px' },
     )
     observer.observe(article)
+
     const receive = (event: MessageEvent<PreviewRuntimeMessage>) => {
       if (event.source !== frame?.contentWindow || event.data?.protocol !== PREVIEW_PROTOCOL) return
-      if (event.data.type === 'ready') setReady(true)
-      if (event.data.type === 'resize') setHeight(Math.max(140, Math.ceil(event.data.height)))
+      if (event.data.type === 'ready') {
+        setReady(true)
+        sendRender()
+      }
+      if (event.data.type === 'resize') {
+        setHeight(Math.max(140, Math.ceil(event.data.height)))
+      }
     }
     addEventListener('message', receive)
     onCleanup(() => {
@@ -74,6 +113,7 @@ export function DemoCard(props: {
       removeEventListener('message', receive)
     })
   })
+
   const copySource = async () => {
     if (!source()) return
     await navigator.clipboard.writeText(source()!.source)
@@ -98,7 +138,7 @@ export function DemoCard(props: {
         layer={demoLayer()}
         layers={props.layers}
         copied={copied()}
-        standaloneHref={url().replace('?embed=true', '')}
+        standaloneHref={standaloneHref()}
         onTabChange={setTab}
         onLayerChange={(layer) => {
           setDemoLayer(layer)
@@ -126,7 +166,7 @@ export function DemoCard(props: {
                 <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
               </div>
             </Show>
-            <Show when={shouldLoad()}>
+            <Show when={hasEntered()}>
               <iframe
                 ref={(element) => {
                   frame = element
@@ -134,9 +174,12 @@ export function DemoCard(props: {
                 class="block h-full min-h-35 w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
                 data-ready={ready()}
                 title={`${props.framework} ${demoLayer()} ${props.slug} ${props.scene.id}`}
-                src={url()}
+                src={runtimeUrl()}
                 loading="lazy"
                 scrolling="no"
+                onLoad={() => {
+                  sendRender()
+                }}
               />
             </Show>
           </div>

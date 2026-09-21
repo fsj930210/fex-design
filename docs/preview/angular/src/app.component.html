@@ -1,12 +1,12 @@
-<div
+﻿<div
   class="runtime box-border grid min-h-30 place-items-center p-8"
   [attr.data-embed]="embedded ? 'true' : null"
 >
-  @if (example) {
+  @if (example(); as comp) {
     <div data-preview-example-host class="contents [&>*]:contents">
-      <ng-container *ngComponentOutlet="example" />
+      <ng-container *ngComponentOutlet="comp" />
     </div>
   } @else {
-    <p>未找到示例</p>
+    <p>未找到示例：{{ currentInfo().layer }}/{{ currentInfo().component }}/{{ currentInfo().demo }}</p>
   }
 </div>

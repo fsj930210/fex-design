@@ -1,30 +1,41 @@
-import { PREVIEW_PROTOCOL, isPreviewHostMessage } from '@fex-design/docs-shared/preview-protocol'
+﻿import { PREVIEW_PROTOCOL, isPreviewHostMessage } from '@fex-design/docs-shared/preview-protocol'
 import type { ApiValue } from '@fex-design/docs-shared/model'
 import { render } from 'solid-js/web'
-import { createSignal, ErrorBoundary, onCleanup, onMount, Show } from 'solid-js'
+import { createEffect, createSignal, ErrorBoundary, onCleanup, onMount, Show } from 'solid-js'
+import type { Component } from 'solid-js'
 import './styles.css'
 
-const [props, setProps] = createSignal<Record<string, ApiValue>>({})
 const query = new URLSearchParams(window.location.search)
 const path = window.location.pathname.split('/').filter(Boolean)
-const layer = query.get('layer') ?? path.at(-3)
-const component = query.get('component') ?? path.at(-2)
-const demo = query.get('demo') ?? path.at(-1)
-// Keep the registry lazy, then resolve the single URL-selected example before rendering.
-// This avoids loading every example in every iframe while preserving one Solid owner tree.
+const initialLayer = query.get('layer') ?? path.at(-3) ?? 'ui'
+const initialComponent = query.get('component') ?? path.at(-2) ?? ''
+const initialDemo = query.get('demo') ?? path.at(-1) ?? ''
+const embedded = query.get('embed') === 'true'
+
 const exampleModules = import.meta.glob(
   '../../../../packages/@fex-design/components/solid/src/{primitive,ui}/*/examples/*.tsx',
   { eager: false },
 ) as Record<string, () => Promise<Record<string, () => unknown>>>
-const examplePath = Object.keys(exampleModules).find((key) =>
-  key.includes(`/src/${layer}/${component}/examples/${demo}.tsx`),
-)
-const exampleModule = examplePath ? await exampleModules[examplePath]?.() : undefined
-const Example = exampleModule
-  ? (exampleModule.default ??
-    Object.values(exampleModule).find((value) => typeof value === 'function'))
-  : undefined
-const embedded = query.get('embed') === 'true'
+
+const moduleCache = new Map<string, Component>()
+
+function findLoader(layer: string, component: string, demo: string) {
+  const target = `/src/${layer}/${component}/examples/${demo}.tsx`
+  const key = Object.keys(exampleModules).find((k) => k.includes(target))
+  return key ? exampleModules[key] : undefined
+}
+
+async function loadExample(layer: string, component: string, demo: string): Promise<Component | undefined> {
+  const cacheKey = `${layer}/${component}/${demo}`
+  if (moduleCache.has(cacheKey)) return moduleCache.get(cacheKey)
+  const loader = findLoader(layer, component, demo)
+  if (!loader) return undefined
+  const mod = await loader()
+  const comp = (mod.default ??
+    Object.values(mod).find((value) => typeof value === 'function')) as Component | undefined
+  if (comp) moduleCache.set(cacheKey, comp)
+  return comp
+}
 
 function send(type: 'ready' | 'resize' | 'event' | 'error', payload: Record<string, unknown> = {}) {
   window.parent.postMessage(
@@ -35,29 +46,69 @@ function send(type: 'ready' | 'resize' | 'event' | 'error', payload: Record<stri
 
 function Preview() {
   let root!: HTMLDivElement
+  const [, setProps] = createSignal<Record<string, ApiValue>>({})
+  const [currentInfo, setCurrentInfo] = createSignal({
+    layer: initialLayer,
+    component: initialComponent,
+    demo: initialDemo,
+  })
+  const [exampleComp, setExampleComp] = createSignal<Component | null>(null)
+  const [loading, setLoading] = createSignal(true)
+
+  createEffect(() => {
+    const info = currentInfo()
+    if (!info.component || !info.demo) {
+      setLoading(false)
+      return
+    }
+    setLoading(true)
+    let active = true
+    loadExample(info.layer, info.component, info.demo).then((comp) => {
+      if (!active) return
+      setExampleComp(() => comp ?? null)
+      setLoading(false)
+    })
+    onCleanup(() => {
+      active = false
+    })
+  })
+
   onMount(() => {
     const onMessage = (event: MessageEvent) => {
-      if (isPreviewHostMessage(event.data)) setProps(event.data.props)
+      if (isPreviewHostMessage(event.data)) {
+        if (event.data.props) setProps(event.data.props)
+        if (event.data.component && event.data.demo) {
+          setCurrentInfo({
+            layer: event.data.layer ?? 'ui',
+            component: event.data.component,
+            demo: event.data.demo,
+          })
+        }
+      }
     }
     window.addEventListener('message', onMessage)
-    const sendResize = () => send('resize', { height: Math.ceil(root.scrollHeight) })
+    const sendResize = () => {
+      if (root) send('resize', { height: Math.ceil(root.scrollHeight) })
+    }
     const observer = new ResizeObserver(sendResize)
     observer.observe(root)
     send('ready')
     sendResize()
+
     onCleanup(() => {
       window.removeEventListener('message', onMessage)
       observer.disconnect()
     })
   })
+
   return (
     <div
       ref={root}
       class={`runtime box-border grid min-h-30 place-items-center p-8 ${!embedded ? 'min-h-screen content-center gap-8' : ''}`}
       data-embed={embedded ? 'true' : undefined}
     >
-      <Show when={!embedded}>
-        <a class="fixed top-5 left-5 text-sm no-underline" href={`/solid/components/${component}`}>
+      <Show when={!embedded && currentInfo().component}>
+        <a class="fixed top-5 left-5 text-sm no-underline" href={`/solid/components/${currentInfo().component}`}>
           ← 返回文档
         </a>
       </Show>
@@ -67,19 +118,24 @@ function Preview() {
           return <pre class="whitespace-pre-wrap text-red-600">{String(error)}</pre>
         }}
       >
-        {Example ? (
-          <Example />
-        ) : (
-          <p>
-            未找到示例：{layer}/{component}/{demo}
-          </p>
-        )}
+        <Show when={!loading()} fallback={<div class="box-border grid min-h-30 place-items-center" />}>
+          <Show
+            when={exampleComp()}
+            fallback={
+              <p>
+                未找到示例：{currentInfo().layer}/{currentInfo().component}/{currentInfo().demo}
+              </p>
+            }
+          >
+            {(Comp) => {
+              const ComponentToRender = Comp()
+              return <ComponentToRender />
+            }}
+          </Show>
+        </Show>
       </ErrorBoundary>
     </div>
   )
 }
 
 render(() => <Preview />, document.getElementById('root')!)
-
-
-

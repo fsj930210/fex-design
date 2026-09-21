@@ -5,7 +5,10 @@ export const PREVIEW_PROTOCOL = 'fex-preview-v1' as const
 export type PreviewHostMessage = {
   protocol: typeof PREVIEW_PROTOCOL
   type: 'render'
-  props: Record<string, ApiValue>
+  layer?: 'primitive' | 'ui'
+  component?: string
+  demo?: string
+  props?: Record<string, ApiValue>
 }
 
 export type PreviewRuntimeMessage =
@@ -17,5 +20,5 @@ export type PreviewRuntimeMessage =
 export function isPreviewHostMessage(value: unknown): value is PreviewHostMessage {
   if (!value || typeof value !== 'object') return false
   const message = value as Partial<PreviewHostMessage>
-  return message.protocol === PREVIEW_PROTOCOL && message.type === 'render' && !!message.props
+  return message.protocol === PREVIEW_PROTOCOL && message.type === 'render'
 }

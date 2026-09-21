@@ -1,0 +1,13 @@
+﻿<script setup lang="ts">
+import { cardFooterClassName } from '@fex-design/components-styles/card'
+import { cn } from '@fex-design/utils'
+
+defineOptions({ inheritAttrs: false })
+const props = defineProps<{ class?: string | undefined }>()
+</script>
+
+<template>
+  <div v-bind="$attrs" data-slot="card-footer" :class="cn(cardFooterClassName, props.class)">
+    <slot />
+  </div>
+</template>

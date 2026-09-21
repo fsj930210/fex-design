@@ -8,11 +8,12 @@
   },
   "dependencies": {
     "@fex-design/docs-shared": "workspace:*",
-    "@fex-design/svelte": "workspace:*",
-    "@fex/styles": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
     "@sveltejs/vite-plugin-svelte": "latest",
     "@tailwindcss/vite": "catalog:",
     "svelte": "5.57.0",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "@fex-design/svelte": "workspace:*",
+    "@fex-design/styles": "workspace:*"
   }
 }

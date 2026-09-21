@@ -29,8 +29,8 @@
               "exclude": [
                 "@fex-design/angular",
                 "@fex-design/core",
-                "@fex-design/styles",
-                "@fex/utils"
+                "@fex-design/components-styles",
+                "@fex-design/utils"
               ]
             }
           }

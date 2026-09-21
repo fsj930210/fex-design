@@ -13,11 +13,11 @@ const demo = query.get('demo') ?? path.at(-1)
 const embedded = query.get('embed') === 'true'
 // Glob 是 Preview 的示例注册表；示例清单版本 7，强制 Vite 重新收集。
 const exampleModules = import.meta.glob(
-  '../../../../packages/@fex-design/react/src/{primitive,ui}/*/examples/*.tsx',
+  '../../../../packages/@fex-design/components/react/src/{primitive,ui}/*/examples/*.tsx',
   { eager: true },
 ) as Record<string, Record<string, ComponentType>>
 const examplePath = Object.keys(exampleModules).find((key) =>
-  key.includes(`/${layer}/${component}/examples/${demo}.tsx`),
+  key.includes(`/src/${layer}/${component}/examples/${demo}.tsx`),
 )
 const Example = examplePath
   ? Object.values(exampleModules[examplePath]).find((value) => typeof value === 'function')
@@ -60,3 +60,6 @@ function App() {
   )
 }
 createRoot(document.getElementById('root')!).render(<App />)
+
+
+

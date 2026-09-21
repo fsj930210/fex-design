@@ -1,0 +1,24 @@
+<script lang="ts">
+  import {
+    cascaderColumnClassName,
+    cascaderColumnViewportClassName,
+  } from "@fex-design/components-styles/cascader";
+  import { cn } from "@fex-design/utils";
+  import type { Snippet } from "svelte";
+  import Scrollbar from "../scrollbar/scrollbar.svelte";
+  import ScrollbarBar from "../scrollbar/scrollbar-bar.svelte";
+  import ScrollbarViewport from "../scrollbar/scrollbar-viewport.svelte";
+  let { class: className, children }: { class?: string; children?: Snippet } =
+    $props();
+</script>
+
+<div role="listbox" class={cn(cascaderColumnClassName, className)}>
+  <Scrollbar class="h-full"
+    ><ScrollbarViewport
+      overflowX="hidden"
+      overflowY="auto"
+      class={cascaderColumnViewportClassName}
+      >{@render children?.()}</ScrollbarViewport
+    ><ScrollbarBar axis="y" /></Scrollbar
+  >
+</div>

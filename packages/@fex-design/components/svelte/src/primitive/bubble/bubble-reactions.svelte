@@ -1,0 +1,35 @@
+<script lang="ts">
+  import type {
+    BubbleAttachmentSide,
+    ConversationSide,
+  } from "@fex-design/core/bubble/types";
+  import { bubbleReactionsClassName } from "@fex-design/components-styles/bubble";
+  import { cn } from "@fex-design/utils";
+  import { getContext, type Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  import { bubbleContextKey, type BubbleContextValue } from "./context";
+  interface Props extends HTMLAttributes<HTMLDivElement> {
+    side?: BubbleAttachmentSide;
+    align?: ConversationSide;
+    children?: Snippet;
+  }
+  let {
+    side = "bottom",
+    align: alignProp,
+    class: className,
+    children,
+    ...rest
+  }: Props = $props();
+  const context = getContext<BubbleContextValue | undefined>(bubbleContextKey);
+  let align = $derived(alignProp ?? context?.side() ?? "start");
+</script>
+
+<div
+  {...rest}
+  data-slot="bubble-reactions"
+  data-side={side}
+  data-align={align}
+  class={cn(bubbleReactionsClassName({ side }), className)}
+>
+  {@render children?.()}
+</div>

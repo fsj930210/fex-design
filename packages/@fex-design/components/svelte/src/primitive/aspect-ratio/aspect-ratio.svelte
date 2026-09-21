@@ -1,0 +1,23 @@
+<script lang="ts">
+  import { aspectRatioClassName } from "@fex-design/components-styles/aspect-ratio";
+  import { cn } from "@fex-design/utils";
+  import type { AspectRatioOptions } from "@fex-design/core/aspect-ratio/types";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props
+    extends Omit<HTMLAttributes<HTMLDivElement>, "class">, AspectRatioOptions {
+    class?: string;
+    children?: Snippet;
+  }
+  let { ratio, class: className, children, style, ...rest }: Props = $props();
+</script>
+
+<div
+  {...rest}
+  data-slot="aspect-ratio"
+  class={cn(aspectRatioClassName, className)}
+  style:aspect-ratio={ratio}
+  {style}
+>
+  {@render children?.()}
+</div>

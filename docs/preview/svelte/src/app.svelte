@@ -14,11 +14,11 @@
   const embedded = query.get("embed") === "true";
   // Glob 是 Preview 的示例注册表；示例清单版本 7，强制 Vite 重新收集。
   const modules = import.meta.glob(
-    "../../../../packages/@fex-design/svelte/src/{primitive,ui}/*/examples/*.svelte",
+    "../../../../packages/@fex-design/components/svelte/src/{primitive,ui}/*/examples/*.svelte",
     { eager: true },
   ) as Record<string, { default: any }>;
   const examplePath = Object.keys(modules).find((key) =>
-    key.includes(`/${layer}/${component}/examples/${demo}.svelte`),
+    key.includes(`/src/${layer}/${component}/examples/${demo}.svelte`),
   );
   const Example = examplePath ? modules[examplePath].default : undefined;
   const send = (type: string, payload = {}) =>
@@ -53,3 +53,6 @@
       未找到示例：{layer}/{component}/{demo}
     </p>{/if}
 </div>
+
+
+

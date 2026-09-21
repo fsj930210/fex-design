@@ -23,7 +23,9 @@
     "dev:docs:solid": "turbo run dev --filter=@fex-design/docs-preview-solid --ui=stream",
     "build:docs": "node ./scripts/build-docs.mjs",
     "docs:build": "pnpm run build:docs",
-    "docs:preview": "pnpm --dir docs/site preview"
+    "docs:preview": "pnpm --dir docs/site preview",
+    "icons:build": "pnpm --filter=@fex-design/icons build",
+    "icons:dev": "pnpm --filter=@fex-design/icons dev"
   },
   "devDependencies": {
     "@fex/config-oxc": "workspace:*",

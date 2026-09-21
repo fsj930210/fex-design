@@ -14,11 +14,9 @@
     "@angular/compiler": "22.1.5",
     "@angular/core": "22.1.5",
     "@angular/platform-browser": "22.1.5",
-    "@fex-design/angular": "workspace:*",
     "@fex-design/docs-shared": "workspace:*",
-    "@fex-design/styles": "workspace:*",
-    "@fex/styles": "workspace:*",
-    "@fex/utils": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/postcss": "catalog:",
     "class-variance-authority": "latest",
@@ -26,7 +24,9 @@
     "rxjs": "latest",
     "tailwind-merge": "^3.6.0",
     "tslib": "latest",
-    "zone.js": "latest"
+    "zone.js": "latest",
+    "@fex-design/angular": "workspace:*",
+    "@fex-design/styles": "workspace:*"
   },
   "devDependencies": {
     "@angular/cli": "22.1.7",

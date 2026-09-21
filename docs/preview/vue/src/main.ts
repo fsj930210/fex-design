@@ -10,11 +10,11 @@ const demo = query.get('demo') ?? path.at(-1)
 const embedded = query.get('embed') === 'true'
 // Glob 是 Preview 的示例注册表；示例清单版本 7，强制 Vite 重新收集。
 const modules = import.meta.glob(
-  '../../../../packages/@fex-design/vue/src/{primitive,ui}/*/examples/*.vue',
+  '../../../../packages/@fex-design/components/vue/src/{primitive,ui}/*/examples/*.vue',
   { eager: true },
 ) as Record<string, { default: object }>
 const examplePath = Object.keys(modules).find((key) =>
-  key.includes(`/${layer}/${component}/examples/${demo}.vue`),
+  key.includes(`/src/${layer}/${component}/examples/${demo}.vue`),
 )
 const Example = examplePath ? modules[examplePath].default : undefined
 const values = reactive<Record<string, never>>({})
@@ -40,3 +40,6 @@ const runtime = document.querySelector<HTMLElement>('.runtime')!
 const sendResize = () => send('resize', { height: Math.ceil(runtime.scrollHeight) })
 new ResizeObserver(sendResize).observe(runtime)
 sendResize()
+
+
+

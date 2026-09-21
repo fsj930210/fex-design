@@ -1,0 +1,221 @@
+import type { SelectOption } from '@fex-design/core/select/types'
+import {
+  selectClearClassName,
+  selectIndicatorClassName,
+  selectInputClassName,
+  selectPlaceholderClassName,
+  selectSuffixClassName,
+  selectTriggerClassName,
+  selectValueClassName,
+  selectValueContainerClassName,
+} from '@fex-design/components-styles/select'
+import { cn } from '@fex-design/utils'
+import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { ChevronDownIcon } from '@fex-design/solid/icons/chevron'
+import { CircleXIcon } from '@fex-design/solid/icons/circle-x'
+import { Tag } from '../tag/tag'
+import { LoadingIcon } from '@fex-design/solid/icons/loading'
+import { Button } from '../button/button'
+import { PopoverTrigger } from '../popover/popover'
+import { useSelect } from './select-context'
+
+export interface SelectTriggerProps extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'prefix'>
+> {
+  inputProps?: SelectInputProps
+  prefix?: JSX.Element
+  suffix?: JSX.Element
+  placeholder?: string
+  maxTagCount?: number
+  tagRender?: (
+    option: SelectOption,
+    context: { remove: () => void; disabled: boolean },
+  ) => JSX.Element
+}
+export interface SelectInputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+  prefix?: JSX.Element
+  suffix?: JSX.Element
+  clear?: JSX.Element
+}
+export function SelectTrigger(props: SelectTriggerProps) {
+  const [local, rest] = splitProps(props, [
+    'class',
+    'inputProps',
+    'children',
+    'prefix',
+    'suffix',
+    'placeholder',
+    'maxTagCount',
+    'tagRender',
+    'onKeyDown',
+  ])
+  const select = useSelect('SelectTrigger')
+  function keydown(event: KeyboardEvent) {
+    if (typeof local.onKeyDown === 'function') local.onKeyDown(event as never)
+    if (event.defaultPrevented) return
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      select.controller.open()
+      select.controller.moveActive(event.key === 'ArrowDown' ? 1 : -1)
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault()
+      select.controller.moveActiveTo(event.key === 'Home' ? 'first' : 'last')
+    } else if (event.key === 'Enter') {
+      event.preventDefault()
+      select.controller.selectActive()
+    } else if (event.key === 'Backspace' && !select.snapshot().searchValue)
+      select.controller.removeLastSelected()
+    else if (event.key === 'Escape') select.controller.close()
+  }
+  return (
+    <PopoverTrigger>
+      {(trigger) => (
+        <div
+          {...rest}
+          {...(trigger.props as unknown as JSX.HTMLAttributes<HTMLDivElement>)}
+          ref={trigger.ref as never}
+          role={undefined}
+          data-slot="select-trigger"
+          data-disabled={select.disabled() || undefined}
+          data-status={select.status()}
+          aria-invalid={select.status() === 'error' || undefined}
+          class={cn(selectTriggerClassName(), local.class)}
+          onKeyDown={keydown}
+        >
+          {local.inputProps?.prefix ?? local.prefix}
+          <div class={selectValueContainerClassName}>
+            <SelectValue
+              maxTagCount={local.maxTagCount}
+              placeholder={select.showSearch() ? undefined : local.placeholder}
+              tagRender={local.tagRender}
+            >
+              {local.children}
+            </SelectValue>
+            <input
+              {...local.inputProps}
+              role="combobox"
+              aria-expanded={select.snapshot().open}
+              aria-controls={select.listId}
+              disabled={select.disabled()}
+              readOnly={!select.showSearch()}
+              placeholder={
+                select.showSearch() && !select.selectedOptions().length
+                  ? local.placeholder
+                  : undefined
+              }
+              value={select.snapshot().searchValue}
+              class={cn(
+                selectInputClassName,
+                !select.showSearch() && 'absolute size-px min-w-0 overflow-hidden opacity-0',
+              )}
+              onFocus={() => select.controller.open()}
+              onPointerDown={(event) => {
+                if (document.activeElement === event.currentTarget) select.controller.toggleOpen()
+                else select.controller.open()
+              }}
+              onClick={(event) => {
+                event.stopPropagation()
+              }}
+              onInput={(event) => {
+                select.controller.setSearchValue(event.currentTarget.value)
+                select.controller.open()
+              }}
+            />
+          </div>
+          <span data-slot="select-suffix" class={selectSuffixClassName}>
+            <Show when={!select.loading()} fallback={<LoadingIcon class="animate-spin" />}>
+              <span class={select.clearable() && select.selectedOptions().length ? 'group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0' : undefined}>
+                {local.inputProps?.suffix ?? local.suffix ?? (
+                    <span
+                      data-state={select.snapshot().open ? 'open' : 'closed'}
+                      class={selectIndicatorClassName}
+                    >
+                      <ChevronDownIcon />
+                    </span>
+                  )}
+              </span>
+              <Show when={select.clearable() && select.selectedOptions().length}>
+                <Button
+                  type="button"
+                  aria-label="Clear selection"
+                  class={selectClearClassName}
+                  onPointerDown={(event) => event.preventDefault()}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    select.controller.clear()
+                  }}
+                >
+                  {local.inputProps?.clear ?? <CircleXIcon />}
+                </Button>
+              </Show>
+            </Show>
+          </span>
+        </div>
+      )}
+    </PopoverTrigger>
+  )
+}
+export function SelectValue(props: {
+  children?: JSX.Element | undefined
+  placeholder?: string | undefined
+  maxTagCount?: number | undefined
+  tagRender?: SelectTriggerProps['tagRender'] | undefined
+  class?: string | undefined
+}) {
+  const select = useSelect('SelectValue')
+  const visible = () =>
+    props.maxTagCount === undefined
+      ? select.selectedOptions()
+      : select.selectedOptions().slice(0, Math.max(0, props.maxTagCount))
+  return (
+    <Show
+      when={!props.children}
+      fallback={<div class={cn(selectValueClassName, props.class)}>{props.children}</div>}
+    >
+      <Show
+        when={select.selectedOptions().length}
+        fallback={
+          <Show when={!select.snapshot().searchValue}>
+            <span class={selectPlaceholderClassName}>{props.placeholder}</span>
+          </Show>
+        }
+      >
+        <Show
+          when={select.multiple()}
+          fallback={<div class={selectValueClassName}>{select.selectedOptions()[0]?.label}</div>}
+        >
+          <div class={selectValueClassName}>
+            <For each={visible()}>
+              {(option) =>
+                props.tagRender ? (
+                  <span>
+                    {props.tagRender(option, {
+                      remove: () => select.removeValue(option.value),
+                      disabled: option.disabled === true,
+                    })}
+                  </span>
+                ) : (
+                  <Tag
+                    size="sm"
+                    closable
+                    closeLabel={`Remove ${String(option.label)}`}
+                    onPointerDownCapture={(event) => event.preventDefault()}
+                    onClose={(event) => {
+                      event.stopPropagation()
+                      select.removeValue(option.value)
+                    }}
+                  >
+                    {option.label}
+                  </Tag>
+                )
+              }
+            </For>
+            <Show when={select.selectedOptions().length - visible().length > 0}>
+              <Tag size="sm">+{select.selectedOptions().length - visible().length}</Tag>
+            </Show>
+          </div>
+        </Show>
+      </Show>
+    </Show>
+  )
+}

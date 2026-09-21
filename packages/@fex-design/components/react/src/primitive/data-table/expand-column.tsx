@@ -1,0 +1,46 @@
+import type { ColumnDef, RowData, TableFeatures } from '@tanstack/react-table'
+import { MinusIcon } from '@fex-design/react/icons/minus'
+import { PlusIcon } from '@fex-design/react/icons/plus'
+import { Button } from '../../ui/button/button'
+
+export interface DataTableExpandColumnOptions {
+  id?: string
+  size?: number
+  ariaLabel?: string
+}
+
+export function createDataTableExpandColumn<
+  TFeatures extends TableFeatures,
+  TData extends RowData,
+>({
+  id = '__expand__',
+  size = 40,
+  ariaLabel = 'Toggle row',
+}: DataTableExpandColumnOptions = {}): ColumnDef<TFeatures, TData> {
+  type ExpandRow = {
+    id: string
+    getCanExpand: () => boolean
+    getIsExpanded: () => boolean
+    getToggleExpandedHandler: () => () => void
+  }
+  return {
+    id,
+    size,
+    enableSorting: false,
+    enableColumnFilter: false,
+    enableHiding: false,
+    header: '',
+    cell: ({ row }: { row: ExpandRow }) =>
+      row.getCanExpand() ? (
+        <Button
+          aria-label={`${ariaLabel} ${row.id}`}
+          aria-expanded={row.getIsExpanded()}
+          size="icon-sm"
+          variant="outlined"
+          onClick={row.getToggleExpandedHandler()}
+        >
+          {row.getIsExpanded() ? <MinusIcon className="size-4" /> : <PlusIcon className="size-4" />}
+        </Button>
+      ) : null,
+  } as unknown as ColumnDef<TFeatures, TData>
+}

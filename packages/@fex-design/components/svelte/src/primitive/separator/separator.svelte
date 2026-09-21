@@ -1,0 +1,24 @@
+<script lang="ts">
+  import type { SeparatorOptions } from "@fex-design/core/separator/types";
+  import { separatorClassName } from "@fex-design/components-styles/separator";
+  import { cn } from "@fex-design/utils";
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props
+    extends Omit<HTMLAttributes<HTMLDivElement>, "class">, SeparatorOptions {
+    class?: string;
+  }
+  let {
+    orientation = "horizontal",
+    class: className,
+    ...rest
+  }: Props = $props();
+</script>
+
+<div
+  {...rest}
+  role="separator"
+  aria-orientation={orientation}
+  data-slot="separator"
+  data-orientation={orientation}
+  class={cn(separatorClassName, className)}
+></div>

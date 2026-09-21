@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { codeToHtml } from 'shiki'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const componentRoot = resolve(siteRoot, '../../packages/@fex-design')
+const componentRoot = resolve(siteRoot, '../../packages/@fex-design/components')
 const outputRoot = resolve(siteRoot, 'public/example-source')
 const componentFilter = process.argv.find((value) => value.startsWith('--component='))?.slice(12)
 const frameworks = {
@@ -90,3 +90,6 @@ for (const [framework, config] of Object.entries(frameworks)) {
     }
   }
 }
+
+
+

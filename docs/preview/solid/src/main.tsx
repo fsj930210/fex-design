@@ -13,11 +13,11 @@ const demo = query.get('demo') ?? path.at(-1)
 // Keep the registry lazy, then resolve the single URL-selected example before rendering.
 // This avoids loading every example in every iframe while preserving one Solid owner tree.
 const exampleModules = import.meta.glob(
-  '../../../../packages/@fex-design/solid/src/{primitive,ui}/*/examples/*.tsx',
+  '../../../../packages/@fex-design/components/solid/src/{primitive,ui}/*/examples/*.tsx',
   { eager: false },
 ) as Record<string, () => Promise<Record<string, () => unknown>>>
 const examplePath = Object.keys(exampleModules).find((key) =>
-  key.includes(`/${layer}/${component}/examples/${demo}.tsx`),
+  key.includes(`/src/${layer}/${component}/examples/${demo}.tsx`),
 )
 const exampleModule = examplePath ? await exampleModules[examplePath]?.() : undefined
 const Example = exampleModule
@@ -80,3 +80,6 @@ function Preview() {
 }
 
 render(() => <Preview />, document.getElementById('root')!)
+
+
+

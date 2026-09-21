@@ -16,7 +16,7 @@
     "lint": "oxlint ."
   },
   "dependencies": {
-    "@fex/utils": "workspace:*"
+    "@fex-design/utils": "workspace:*"
   },
   "devDependencies": {
     "@fex/config-tsconfig": "workspace:*",

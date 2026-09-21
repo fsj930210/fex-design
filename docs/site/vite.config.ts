@@ -65,10 +65,10 @@ export default defineConfig({
           }
           const base = path.resolve(
             process.cwd(),
-            '../../packages/@fex-design',
+            '../../packages/@fex-design/components',
             framework,
-            'src',
             layer!,
+            'src',
             component,
             'examples',
           )
@@ -83,10 +83,10 @@ export default defineConfig({
               if (reexport) {
                 const primitiveBase = path.resolve(
                   process.cwd(),
-                  '../../packages/@fex-design',
+                  '../../packages/@fex-design/components',
                   framework,
-                  'src',
                   'primitive',
+                  'src',
                   reexport[1],
                   'examples',
                 )
@@ -134,3 +134,5 @@ export default defineConfig({
     },
   ],
 })
+
+

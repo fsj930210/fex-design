@@ -1,1 +1,0 @@
-{ "extends": "@fex/config-tsconfig/app.json", "include": ["src/**/*.ts"] }

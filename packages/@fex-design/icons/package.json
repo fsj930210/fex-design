@@ -1,0 +1,13 @@
+{
+  "name": "@fex-design/icons",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./svg/*": "./svg/*"
+  },
+  "scripts": {
+    "build:icons": "node scripts/build-icons.mjs",
+    "build": "node scripts/build-icons.mjs",
+    "dev": "node scripts/watch-icons.mjs"
+  }
+}

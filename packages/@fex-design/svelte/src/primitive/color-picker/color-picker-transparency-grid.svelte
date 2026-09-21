@@ -1,8 +1,0 @@
-<script lang="ts">
-  import { colorPickerTransparencyGridClassName } from "@fex-design/styles/color-picker";
-  import { cn } from "@fex/utils";
-  import type { HTMLAttributes } from "svelte/elements";
-  let { class: className, ...rest }: HTMLAttributes<HTMLSpanElement> = $props();
-</script>
-
-<span {...rest} class={cn(colorPickerTransparencyGridClassName, className)} />

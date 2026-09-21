@@ -1,0 +1,20 @@
+<script lang="ts">
+  import { fieldLabelClassName } from "@fex-design/components-styles/field";
+  import { cn } from "@fex-design/utils";
+  import type { HTMLLabelAttributes } from "svelte/elements";
+  import type { Snippet } from "svelte";
+  import { getFieldContext } from "./context";
+  let {
+    class: className,
+    children,
+    ...rest
+  }: HTMLLabelAttributes & { children?: Snippet } = $props();
+  const field = getFieldContext("FieldLabel");
+</script>
+
+<label
+  {...rest}
+  for={rest.for ?? field.controlId()}
+  data-slot="field-label"
+  class={cn(fieldLabelClassName, className)}>{@render children?.()}</label
+>

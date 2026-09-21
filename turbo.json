@@ -1,28 +1,46 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["configs/tsconfig/**", "configs/oxc/**"],
+  "globalDependencies": [
+    "configs/tsconfig/**",
+    "configs/oxc/**"
+  ],
   "tasks": {
     "dev": {
       "cache": false,
       "persistent": true
     },
     "@fex-design/angular-app#dev": {
-      "dependsOn": ["@fex-design/angular#sync-paths"],
+      "dependsOn": [
+        "@fex-design/angular#sync-paths"
+      ],
       "cache": false,
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**", ".svelte-kit/**"]
+      "dependsOn": [
+        "@fex-design/icons#build",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        "build/**",
+        ".svelte-kit/**"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": [
+        "^typecheck"
+      ],
       "outputs": []
     },
     "lint": {
       "outputs": []
     },
     "sync-paths": {
+      "cache": false
+    },
+    "check": {},
+    "@fex-design/icons#build": {
       "cache": false
     }
   }

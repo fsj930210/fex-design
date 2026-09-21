@@ -358,7 +358,7 @@ Card、Popover、Select 等组件应分别提供组件 Token，并回退到合�
 
 #### 3. 组件 Token 属于组件样式模块和公开 API
 
-组件 Token 的名称、fallback 和消费方式定义在 `packages/@fex-design/styles/src/<component>.ts` 对应的组件样式事实源中。五个框架共享同一套变量名称、fallback 和部件语义；CLI 输出源码时将最终样式内联到复制出的组件源码。
+组件 Token 的名称、fallback 和消费方式定义在 `packages/@fex-design/components-styles/src/<component>.ts` 对应的组件样式事实源中。五个框架共享同一套变量名称、fallback 和部件语义；CLI 输出源码时将最终样式内联到复制出的组件源码。
 
 `packages/styles/src/components-token.css` 是推荐的组件级集中覆盖入口，不是唯一覆盖入口。用户可以在这里定义某个组件变量以覆盖该组件的全部实例，也可以通过作用域 CSS 覆盖某个区域，或通过 `style` 覆盖单个实例。
 

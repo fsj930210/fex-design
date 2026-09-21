@@ -1,0 +1,222 @@
+import { shallowEqualObject } from '@fex-design/utils'
+import { useCoreStoreSelector } from '@fex-design/react/hooks/use-core-store-selector'
+import { selectOpen, selectContent, selectArrow } from './selectors'
+import type { CSSProperties, FocusEvent, KeyboardEvent, MouseEvent, PointerEvent } from 'react'
+import { popoverArrowClassName, popoverContentClassName } from '@fex-design/components-styles/popover'
+import { cn } from '@fex-design/utils'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
+import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
+import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
+import type {
+  PopoverArrowProps,
+  PopoverContentProps,
+  PopoverTriggerRenderProps,
+  UsePopoverTriggerProps,
+} from './popover'
+import { usePopoverContext, type PopoverContextValue } from './popover-context'
+
+export { usePopover } from './use-popover-controller'
+
+export function usePopoverContextSnapshot(component = 'usePopover') {
+  const context = usePopoverContext(component)
+  const snapshot = useCoreStore(context.overlay)
+  return { ...context, snapshot }
+}
+
+function toEventInfo(
+  event: MouseEvent<HTMLElement> | PointerEvent<HTMLElement> | FocusEvent<HTMLElement>,
+) {
+  return {
+    target: event.target,
+    currentTarget: event.currentTarget,
+    clientX: 'clientX' in event ? event.clientX : undefined,
+    clientY: 'clientY' in event ? event.clientY : undefined,
+    button: 'button' in event ? event.button : undefined,
+    pointerType: 'pointerType' in event ? event.pointerType : undefined,
+    event,
+    preventDefault: event.preventDefault.bind(event),
+    stopPropagation: event.stopPropagation.bind(event),
+  }
+}
+
+export function usePopoverTrigger(
+  {
+    ref,
+    onClick,
+    onPointerEnter,
+    onPointerLeave,
+    onMouseEnter,
+    onMouseLeave,
+    onFocus,
+    onBlur,
+    onContextMenu,
+    ...props
+  }: UsePopoverTriggerProps,
+  binding?: PopoverContextValue,
+) {
+  const { overlay, triggerRef } = usePopoverContext('usePopoverTrigger', binding)
+  const open = useCoreStoreSelector(overlay, selectOpen)
+  const setReference = useMemoizedFn((element: HTMLButtonElement | null) => {
+    triggerRef.current = element
+    overlay.setReferenceElement(element)
+  })
+  const syncReferenceFromEvent = useMemoizedFn(
+    (
+      event:
+        | MouseEvent<HTMLButtonElement>
+        | PointerEvent<HTMLButtonElement>
+        | FocusEvent<HTMLButtonElement>,
+    ) => {
+      triggerRef.current = event.currentTarget
+      overlay.setReferenceElement(event.currentTarget)
+    },
+  )
+  const composedRef = useComposedRef<HTMLButtonElement>(setReference, ref)
+  const triggerProps: PopoverTriggerRenderProps = {
+    ...props,
+    ref: composedRef,
+    type: props.type ?? 'button',
+    'aria-haspopup': props['aria-haspopup'] ?? 'dialog',
+    'aria-expanded': open,
+    'data-state': open ? 'open' : 'closed',
+    onClick: (event) => {
+      onClick?.(event)
+      if (!event.defaultPrevented && overlay.getSnapshot().trigger.includes('click')) {
+        syncReferenceFromEvent(event)
+        overlay.trigger.click(toEventInfo(event))
+      }
+    },
+    onPointerEnter: (event) => {
+      onPointerEnter?.(event)
+      if (!event.defaultPrevented) {
+        syncReferenceFromEvent(event)
+        overlay.trigger.pointerEnter(toEventInfo(event))
+      }
+    },
+    onPointerLeave: (event) => {
+      onPointerLeave?.(event)
+      if (!event.defaultPrevented) {
+        syncReferenceFromEvent(event)
+        overlay.trigger.pointerLeave(toEventInfo(event))
+      }
+    },
+    onMouseEnter: (event) => {
+      onMouseEnter?.(event)
+    },
+    onMouseLeave: (event) => {
+      onMouseLeave?.(event)
+    },
+    onFocus: (event) => {
+      onFocus?.(event)
+      if (!event.defaultPrevented) {
+        syncReferenceFromEvent(event)
+        overlay.trigger.focus(toEventInfo(event))
+      }
+    },
+    onBlur: (event) => {
+      onBlur?.(event)
+      if (!event.defaultPrevented) {
+        syncReferenceFromEvent(event)
+        overlay.trigger.blur(toEventInfo(event))
+      }
+    },
+    onContextMenu: (event) => {
+      onContextMenu?.(event)
+      if (!event.defaultPrevented) {
+        syncReferenceFromEvent(event)
+        overlay.trigger.contextMenu(toEventInfo(event))
+      }
+    },
+  }
+  return { props: triggerProps, open }
+}
+
+export function usePopoverContent(
+  {
+    ref,
+    className,
+    style,
+    onPointerEnter,
+    onPointerLeave,
+    onKeyDown,
+    ...props
+  }: PopoverContentProps,
+  binding?: PopoverContextValue,
+) {
+  const { overlay } = usePopoverContext('usePopoverContent', binding)
+  const snapshot = useCoreStoreSelector(overlay, selectContent, shallowEqualObject)
+  const setContentElement = useMemoizedFn((element: HTMLDivElement | null) =>
+    overlay.setFloatingElement(element),
+  )
+  const composedRef = useComposedRef<HTMLDivElement>(setContentElement, ref)
+  if (!snapshot.mounted) return { mounted: false as const, props: null, snapshot }
+  return {
+    mounted: true as const,
+    snapshot,
+    props: {
+      ...props,
+      ref: composedRef,
+      role: props.role ?? 'dialog',
+      tabIndex: props.tabIndex ?? -1,
+      hidden: snapshot.phase === 'closed',
+      inert: !snapshot.open,
+      'data-slot': 'popover-content',
+      'data-state': snapshot.open ? ('open' as const) : ('closed' as const),
+      'data-phase': snapshot.phase,
+      'data-side': snapshot.side,
+      'data-align': snapshot.align,
+      'data-placement': snapshot.placement,
+      className: cn(popoverContentClassName(), className),
+      style: {
+        position: 'var(--floating-strategy, absolute)',
+        left: 'var(--floating-x, 0px)',
+        top: 'var(--floating-y, 0px)',
+        transformOrigin: 'var(--floating-transform-origin)',
+        ...style,
+      } as CSSProperties,
+      onPointerEnter: (event: PointerEvent<HTMLDivElement>) => {
+        onPointerEnter?.(event)
+        if (!event.defaultPrevented) overlay.content.pointerEnter(toEventInfo(event))
+      },
+      onPointerLeave: (event: PointerEvent<HTMLDivElement>) => {
+        onPointerLeave?.(event)
+        if (!event.defaultPrevented) overlay.content.pointerLeave(toEventInfo(event))
+      },
+      onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => onKeyDown?.(event),
+    },
+  }
+}
+
+export function usePopoverArrow(
+  { ref, className, style, ...props }: PopoverArrowProps,
+  binding?: PopoverContextValue,
+) {
+  const { arrowRef, overlay } = usePopoverContext('usePopoverArrow', binding)
+  const { arrow, side } = useCoreStoreSelector(overlay, selectArrow, shallowEqualObject)
+  const setArrowElement = useMemoizedFn((element: HTMLDivElement | null) => {
+    arrowRef.current = element
+    overlay.setArrowElement(element)
+  })
+  const composedRef = useComposedRef<HTMLDivElement>(setArrowElement, ref)
+  if (!arrow) return { mounted: false as const, props: null, side }
+  const floatingArrowStyle =
+    side === 'left' || side === 'right'
+      ? {
+          top: 'var(--floating-arrow-y, 0px)',
+        }
+      : {
+          left: 'var(--floating-arrow-x, 0px)',
+        }
+  return {
+    mounted: true as const,
+    side,
+    props: {
+      ...props,
+      ref: composedRef,
+      'data-slot': 'popover-arrow',
+      'data-side': side,
+      className: cn(popoverArrowClassName, className),
+      style: { ...floatingArrowStyle, ...style } as CSSProperties,
+    },
+  }
+}

@@ -444,7 +444,7 @@ Core、Utils 和全局 Theme 只复制一份，不内联进每个组件。
 
 ## 9. Shared Styles 的分发
 
-仓库母版继续使用一份 `@fex-design/styles` 保证五框架一致。
+仓库母版继续使用一份 `@fex-design/components-styles` 保证五框架一致。
 
 CLI 分发时：
 

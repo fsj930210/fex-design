@@ -14,7 +14,7 @@
     "lint": "oxlint src"
   },
   "dependencies": {
-    "@fex/utils": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "msw": "latest"
   },
   "devDependencies": {

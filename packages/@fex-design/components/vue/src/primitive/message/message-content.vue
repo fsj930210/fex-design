@@ -1,0 +1,16 @@
+<script setup lang="ts">
+import { messageContentClassName } from '@fex-design/components-styles/message'
+import { cn } from '@fex-design/utils'
+import { useAttrs } from 'vue'
+defineOptions({ inheritAttrs: false })
+const attrs = useAttrs()
+</script>
+<template>
+  <div
+    v-bind="attrs"
+    data-slot="message-content"
+    :class="cn(messageContentClassName, attrs.class as string | undefined)"
+  >
+    <slot />
+  </div>
+</template>

@@ -1,0 +1,65 @@
+import type { SpinnerContainerOptions, SpinnerOptions } from '@fex-design/core/spinner/types'
+import { spinnerContainerClassName } from '@fex-design/components-styles/spinner'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps, CSSProperties, ReactNode } from 'react'
+import {
+  Spinner,
+  SpinnerContainer as PrimitiveSpinnerContainer,
+  SpinnerOverlay,
+  SpinnerText,
+} from '@fex-design/react/primitive/spinner/spinner'
+
+export { Spinner }
+
+export interface SpinnerContainerProps
+  extends
+    Omit<ComponentProps<'div'>, 'children'>,
+    SpinnerContainerOptions<ReactNode, CSSProperties>,
+    SpinnerOptions {
+  children?: ReactNode
+}
+
+export function SpinnerContainer({
+  children,
+  className,
+  indicator,
+  classNames,
+  size = 'md',
+  styles,
+  spinning,
+  text,
+  ...props
+}: SpinnerContainerProps) {
+  if (spinning === undefined) {
+    return (
+      <Spinner size={size} className={cn(className, classNames?.spinner)} style={styles?.spinner}>
+        {indicator}
+      </Spinner>
+    )
+  }
+  return (
+    <PrimitiveSpinnerContainer
+      {...props}
+      aria-busy={spinning}
+      className={cn(spinnerContainerClassName, className, classNames?.root)}
+      style={styles?.root}
+    >
+      {children}
+      {spinning ? (
+        <SpinnerOverlay
+          className={cn(classNames?.overlay, text && 'flex-col')}
+          style={styles?.overlay}
+        >
+          <Spinner size={size} className={classNames?.spinner} style={styles?.spinner}>
+            {indicator}
+          </Spinner>
+          {text ? (
+            <SpinnerText className={classNames?.text} style={styles?.text}>
+              {text}
+            </SpinnerText>
+          ) : null}
+        </SpinnerOverlay>
+      ) : null}
+    </PrimitiveSpinnerContainer>
+  )
+}

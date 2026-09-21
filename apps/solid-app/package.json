@@ -5,17 +5,17 @@
   "scripts": {},
   "dependencies": {
     "@fex-design/core": "workspace:*",
-    "@fex-design/solid": "workspace:*",
     "@fex-design/styles": "workspace:*",
     "@fex/mock": "workspace:*",
-    "@fex/styles": "workspace:*",
-    "@fex/utils": "workspace:*",
     "@solidjs/router": "latest",
     "@tailwindcss/vite": "catalog:",
     "embla-carousel-auto-height": "8.6.0",
     "solid-js": "1.9.15",
     "vite": "catalog:",
-    "vite-plugin-solid": "latest"
+    "vite-plugin-solid": "latest",
+    "@fex-design/solid": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
+    "@fex-design/utils": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:"

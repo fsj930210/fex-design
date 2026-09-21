@@ -1,0 +1,32 @@
+<script module lang="ts">
+  export { default as SpinnerContainer } from "./spinner-container.svelte";
+  export { default as SpinnerOverlay } from "./spinner-overlay.svelte";
+  export { default as SpinnerText } from "./spinner-text.svelte";
+</script>
+
+<script lang="ts">
+  import { spinnerClassName } from "@fex-design/components-styles/spinner";
+  import { cn } from "@fex-design/utils";
+  import type { HTMLAttributes } from "svelte/elements";
+  import type { Snippet } from "svelte";
+  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  let {
+    class: className,
+    size = "md",
+    children,
+    ...rest
+  }: HTMLAttributes<HTMLSpanElement> & {
+    size?: "sm" | "md" | "lg";
+    children?: Snippet;
+  } = $props();
+</script>
+
+<span
+  {...rest}
+  data-slot="spinner"
+  role="status"
+  class={cn(spinnerClassName({ size }), className)}
+  >{#if children}{@render children()}{:else}<LoadingIcon
+      class="animate-spin"
+    />{/if}</span
+>

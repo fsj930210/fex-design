@@ -1,0 +1,19 @@
+<script setup lang="ts">
+import type { MessageGroupSpacing } from '@fex-design/core/message/types'
+import { messageGroupClassName } from '@fex-design/components-styles/message'
+import { cn } from '@fex-design/utils'
+import { useAttrs } from 'vue'
+defineOptions({ inheritAttrs: false })
+withDefaults(defineProps<{ spacing?: MessageGroupSpacing }>(), { spacing: 'default' })
+const attrs = useAttrs()
+</script>
+<template>
+  <div
+    v-bind="attrs"
+    data-slot="message-group"
+    :data-spacing="spacing"
+    :class="cn(messageGroupClassName({ spacing }), attrs.class as string | undefined)"
+  >
+    <slot />
+  </div>
+</template>

@@ -1,0 +1,31 @@
+import { createSignal } from 'solid-js'
+import { Alert, AlertAction, AlertIcon, AlertTitle } from '@fex-design/solid/primitive/alert'
+import { StarIcon } from '@fex-design/solid/icons/star'
+import { XIcon } from '@fex-design/solid/icons/x'
+import { alertCloseClassName } from '@fex-design/components-styles/alert'
+export default function Custom() {
+  const [visible, setVisible] = createSignal(true)
+  return visible() ? (
+    <div class="w-full max-w-sm">
+      <Alert type="success">
+        <AlertIcon>
+          <StarIcon />
+        </AlertIcon>
+        <AlertTitle>
+          Long alert title wraps to multiple lines when the alert container is narrow enough.
+        </AlertTitle>
+        <AlertAction>
+          <button class="underline">Action</button>
+        </AlertAction>
+        <button
+          class={alertCloseClassName}
+          data-slot="alert-close"
+          aria-label="关闭提示"
+          onClick={() => setVisible(false)}
+        >
+          <XIcon />
+        </button>
+      </Alert>
+    </div>
+  ) : null
+}

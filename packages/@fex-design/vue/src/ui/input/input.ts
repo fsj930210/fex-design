@@ -1,5 +1,0 @@
-export { default as Input } from './input.vue'
-export { default as InputPassword } from './input-password.vue'
-export { default as InputSearch } from './input-search.vue'
-export { InputGroup } from '../../primitive/input/input'
-export type { InputProps } from './input.types'

@@ -6,17 +6,17 @@
   "dependencies": {
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
-    "@fex-design/vue": "workspace:*",
     "@fex/mock": "workspace:*",
-    "@fex/styles": "workspace:*",
-    "@fex/utils": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-vue": "latest",
     "embla-carousel-auto-height": "8.6.0",
     "vite": "catalog:",
     "vue": "3.5.42",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "@fex-design/vue": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
+    "@fex-design/utils": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",

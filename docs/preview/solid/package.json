@@ -9,12 +9,13 @@
   },
   "dependencies": {
     "@fex-design/docs-shared": "workspace:*",
-    "@fex-design/solid": "workspace:*",
-    "@fex/styles": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "solid-js": "1.9.15",
     "vite": "catalog:",
-    "vite-plugin-solid": "latest"
+    "vite-plugin-solid": "latest",
+    "@fex-design/solid": "workspace:*",
+    "@fex-design/styles": "workspace:*"
   },
   "devDependencies": {
     "@fex/config-tsconfig": "workspace:*",

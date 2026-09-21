@@ -10,11 +10,9 @@
     "@angular/core": "22.1.5",
     "@angular/platform-browser": "22.1.5",
     "@angular/router": "22.1.5",
-    "@fex-design/angular": "workspace:*",
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
     "@fex/mock": "workspace:*",
-    "@fex/styles": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tanstack/angular-form": "1.33.5",
     "@tanstack/angular-virtual": "latest",
@@ -25,7 +23,10 @@
     "rxjs": "latest",
     "tslib": "latest",
     "uqr": "^0.1.3",
-    "zone.js": "latest"
+    "zone.js": "latest",
+    "@fex-design/angular": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
+    "@fex-design/utils": "workspace:*"
   },
   "devDependencies": {
     "@angular/cli": "22.1.7",

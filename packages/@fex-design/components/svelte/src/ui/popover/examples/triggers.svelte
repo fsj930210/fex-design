@@ -1,0 +1,53 @@
+<script lang="ts">
+  import { buttonClassName } from "@fex-design/components-styles/button";
+  import type {
+    FloatingPlacement,
+    PopoverOptions,
+  } from "@fex-design/core/popover/types";
+  import { Popover } from "@fex-design/svelte/ui/popover";
+  import { Button } from "@fex-design/svelte/ui/button";
+  type DemoCase = { label: string; options: PopoverOptions };
+  const cases = [
+    { label: "Hover 悬停", options: { trigger: ["hover"] } },
+    { label: "Focus 聚焦", options: { trigger: ["focus"] } },
+    { label: "Click 点击", options: { trigger: ["click"] } },
+    { label: "Context menu 右键", options: { trigger: ["context-menu"] } },
+    { label: "Hover + Focus", options: { trigger: ["hover", "focus"] } },
+    { label: "Hover + Click", options: { trigger: ["hover", "click"] } },
+    { label: "Focus + Click", options: { trigger: ["focus", "click"] } },
+    {
+      label: "悬停延迟 300ms / 400ms",
+      options: {
+        trigger: ["hover"],
+        hoverOpenDelay: 300,
+        hoverCloseDelay: 400,
+      },
+    },
+  ] satisfies DemoCase[];
+</script>
+
+<div class="w-full flex items-center justify-center min-h-[360px] py-16">
+  <div class="grid gap-4">
+    <div class="flex flex-wrap gap-3">
+      {#each cases as item (item.label)}
+        <div>
+          <Popover {...item.options} title="提示信息">
+            {#snippet children({ action, props })}
+              <button
+                use:action
+                {...props}
+                class={buttonClassName()}
+                data-slot="button"
+                data-variant="outlined"
+                data-size="md">{item.label}</button
+              >
+            {/snippet}
+            {#snippet content(state)}
+              <p>这里可以放置说明和交互内容。</p>
+            {/snippet}
+          </Popover>
+        </div>
+      {/each}
+    </div>
+  </div>
+</div>

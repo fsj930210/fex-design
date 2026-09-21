@@ -1,4 +1,4 @@
-@import '@fex/styles';
-@source "../../../../packages/@fex-design/solid/src";
-@source "../../../../packages/@fex-design/styles/src";
+@import "@fex-design/styles";
+@source "../../../../packages/@fex-design/components/solid";
+@source "../../../../packages/@fex-design/components/styles/src";
 @source "../../../../docs/preview/solid/src";

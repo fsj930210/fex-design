@@ -13,8 +13,7 @@
   },
   "dependencies": {
     "@fex-design/docs-shared": "workspace:*",
-    "@fex-design/solid": "workspace:*",
-    "@fex/styles": "workspace:*",
+    "@fex-design/components-styles": "workspace:*",
     "@mdx-js/rollup": "^3.1.1",
     "@tailwindcss/vite": "catalog:",
     "rehype-slug": "^6.0.0",
@@ -25,7 +24,9 @@
     "solid-js": "1.9.15",
     "solid-mdx": "^0.0.7",
     "vite": "catalog:",
-    "vite-plugin-solid": "latest"
+    "vite-plugin-solid": "latest",
+    "@fex-design/solid": "workspace:*",
+    "@fex-design/styles": "workspace:*"
   },
   "devDependencies": {
     "@fex/config-tsconfig": "workspace:*",

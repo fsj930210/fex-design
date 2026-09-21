@@ -1,8 +1,7 @@
 packages:
   - apps/*
   - packages/@fex-design/*
-  - packages/styles
-  - packages/utils
+  - packages/@fex-design/components/*
   - packages/mock
   - configs/*
   - server

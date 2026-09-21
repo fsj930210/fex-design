@@ -1,0 +1,46 @@
+<script lang="ts">
+  import { textareaClearClassName } from "@fex-design/components-styles/textarea";
+  import { cn } from "@fex-design/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
+  import XIcon from '@fex-design/svelte/icons/x.svelte';
+  import { Button as PrimitiveButton } from "@fex-design/svelte/primitive/button";
+  import { getTextareaContext } from "./context";
+
+  interface Props extends Omit<HTMLButtonAttributes, "class"> {
+    class?: string | undefined;
+    forceMount?: boolean | undefined;
+    children?: Snippet | undefined;
+  }
+
+  let {
+    class: className,
+    forceMount = false,
+    children,
+    onpointerdown,
+    onclick,
+    ...rest
+  }: Props = $props();
+  const textarea = getTextareaContext("TextareaClear");
+</script>
+
+{#if forceMount || textarea.canClear()}
+  <PrimitiveButton
+    type="button"
+    aria-label="Clear textarea"
+    {...rest}
+    data-slot="textarea-clear"
+    disabled={!forceMount && !textarea.canClear()}
+    class={cn(textareaClearClassName, className)}
+    onpointerdown={(event) => {
+      onpointerdown?.(event);
+      if (!event.defaultPrevented) event.preventDefault();
+    }}
+    onclick={(event) => {
+      onclick?.(event);
+      if (!event.defaultPrevented) textarea.clear();
+    }}
+  >
+    {#if children}{@render children()}{:else}<XIcon />{/if}
+  </PrimitiveButton>
+{/if}

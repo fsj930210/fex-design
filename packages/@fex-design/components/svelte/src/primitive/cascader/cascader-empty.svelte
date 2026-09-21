@@ -1,0 +1,9 @@
+<script lang="ts">
+  import { cascaderEmptyClassName } from "@fex-design/components-styles/cascader";
+  import type { Snippet } from "svelte";
+  let { children }: { children?: Snippet } = $props();
+</script>
+
+<div class={cascaderEmptyClassName}>
+  {#if children}{@render children()}{:else}No options{/if}
+</div>

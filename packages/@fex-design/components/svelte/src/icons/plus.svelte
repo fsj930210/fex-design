@@ -12,8 +12,7 @@
   stroke="currentColor"
   stroke-width="2"
   stroke-linecap="round"
-  stroke-linejoin="round"
- {...props}>
+  stroke-linejoin="round" {...props}>
   <path d="M5 12h14" />
   <path d="M12 5v14" />
 </svg>

@@ -11,8 +11,7 @@ export function GripVerticalIcon({ className, ...props }: SVGProps<SVGSVGElement
   stroke="currentColor"
   strokeWidth="2"
   strokeLinecap="round"
-  strokeLinejoin="round"
- className={className} {...props}>
+  strokeLinejoin="round" className={className} {...props}>
   <circle cx="9" cy="12" r="1" />
   <circle cx="9" cy="5" r="1" />
   <circle cx="9" cy="19" r="1" />

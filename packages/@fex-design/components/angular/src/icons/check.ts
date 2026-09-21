@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   selector: "check-icon",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "contents" },
   templateUrl: "./check.html",
 })
 export class CheckIcon {}

@@ -11,8 +11,7 @@ export function EyeIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   stroke="currentColor"
   strokeWidth="2"
   strokeLinecap="round"
-  strokeLinejoin="round"
- className={className} {...props}>
+  strokeLinejoin="round" className={className} {...props}>
   <path
     d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
   />

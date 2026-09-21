@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   selector: "chevron-up-icon",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "contents" },
   templateUrl: "./chevron-up.html",
 })
 export class ChevronUpIcon {}

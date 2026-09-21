@@ -11,8 +11,7 @@ export function InfoIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   stroke="currentColor"
   stroke-width="2"
   stroke-linecap="round"
-  stroke-linejoin="round"
- {...props}>
+  stroke-linejoin="round" {...props}>
   <circle cx="12" cy="12" r="10" />
   <path d="M12 16v-4" />
   <path d="M12 8h.01" />

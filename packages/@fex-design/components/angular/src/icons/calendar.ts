@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   selector: "calendar-icon",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "contents" },
   templateUrl: "./calendar.html",
 })
 export class CalendarIcon {}

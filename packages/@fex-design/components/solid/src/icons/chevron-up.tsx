@@ -11,8 +11,7 @@ export function ChevronUpIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   stroke="currentColor"
   stroke-width="2"
   stroke-linecap="round"
-  stroke-linejoin="round"
- {...props}>
+  stroke-linejoin="round" {...props}>
   <path d="m18 15-6-6-6 6" />
 </svg>
   );

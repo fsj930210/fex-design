@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   selector: "info-icon",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "contents" },
   templateUrl: "./info.html",
 })
 export class InfoIcon {}

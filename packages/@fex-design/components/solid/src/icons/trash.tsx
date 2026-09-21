@@ -8,8 +8,7 @@ export function TrashIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   stroke="currentColor"
   stroke-width="2"
   stroke-linecap="round"
-  stroke-linejoin="round"
- {...props}>
+  stroke-linejoin="round" {...props}>
   <path d="M3 6h18" />
   <path d="M8 6V4h8v2" />
   <path d="M19 6l-1 14H6L5 6" />

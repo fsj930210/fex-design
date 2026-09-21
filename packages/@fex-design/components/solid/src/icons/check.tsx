@@ -11,8 +11,7 @@ export function CheckIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   stroke="currentColor"
   stroke-width="2"
   stroke-linecap="round"
-  stroke-linejoin="round"
- {...props}>
+  stroke-linejoin="round" {...props}>
   <path d="M20 6 9 17l-5-5" />
 </svg>
   );

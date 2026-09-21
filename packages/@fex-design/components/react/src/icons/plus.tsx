@@ -11,8 +11,7 @@ export function PlusIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   stroke="currentColor"
   strokeWidth="2"
   strokeLinecap="round"
-  strokeLinejoin="round"
- className={className} {...props}>
+  strokeLinejoin="round" className={className} {...props}>
   <path d="M5 12h14" />
   <path d="M12 5v14" />
 </svg>

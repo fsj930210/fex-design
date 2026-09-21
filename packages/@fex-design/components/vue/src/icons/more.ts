@@ -1,1 +1,1 @@
-export { default as EllipsisIcon } from './ellipsis-icon.vue'
+export { default as MoreIcon } from './more-icon.vue'

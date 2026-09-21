@@ -11,8 +11,7 @@ export function CalendarIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   stroke="currentColor"
   strokeWidth="2"
   strokeLinecap="round"
-  strokeLinejoin="round"
- className={className} {...props}>
+  strokeLinejoin="round" className={className} {...props}>
   <path d="M8 2v4" />
   <path d="M16 2v4" />
   <rect width="18" height="18" x="3" y="4" rx="2" />

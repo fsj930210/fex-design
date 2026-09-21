@@ -11,8 +11,7 @@ export function MoreIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   stroke="currentColor"
   strokeWidth="2"
   strokeLinecap="round"
-  strokeLinejoin="round"
- className={className} {...props}>
+  strokeLinejoin="round" className={className} {...props}>
   <circle cx="12" cy="12" r="1" />
   <circle cx="19" cy="12" r="1" />
   <circle cx="5" cy="12" r="1" />

@@ -25,7 +25,7 @@ export function PopupRenderDemo() {
       title="Custom popup rendering"
       description="popupRender wraps the default menu with interactive custom content."
     >
-      <SelectRoot items={options}>
+      <SelectRoot options={options}>
         <SelectTrigger placeholder="自定义下拉面板" />
         <SelectContent
           popupRender={(menu) => (

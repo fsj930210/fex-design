@@ -33,7 +33,7 @@
     [class]="classNames().control ?? ''"
     [style]="styles().control"
   />
-  @if (clearable()) {
+  @if (clearable() && root()?.currentValue() && !disabled() && !readOnly()) {
   <button
     inputClear
     [class]="classNames().clear ?? ''"

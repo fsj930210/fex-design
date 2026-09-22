@@ -7,7 +7,7 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Custom search" description="A custom filterOption matches labels by prefix." [items]="options" [showSearch]="true" [filterOption]="filter" />',
+    '<select-simple-demo title="Custom search" description="A custom filterOption matches labels by prefix." [options]="options" [showSearch]="true" [filterOption]="filter" />',
 })
 class CustomSearchDemo {
   protected readonly options = frameworkOptions

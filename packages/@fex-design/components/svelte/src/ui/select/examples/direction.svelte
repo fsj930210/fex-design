@@ -1,0 +1,1 @@
+<script lang="ts">import Select from '@fex-design/svelte/ui/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]</script><div class="grid w-full grid-cols-2 gap-4"><div dir="ltr"><Select {options} placeholder="Select framework"/></div><div dir="rtl"><Select {options} placeholder="اختر إطار العمل"/></div></div>

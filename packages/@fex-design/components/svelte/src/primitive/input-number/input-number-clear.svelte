@@ -17,22 +17,18 @@
   };
 </script>
 
-{#if n.canClear()}
-  {#if children}
-    <InputClear
-      {...rest}
-      forceMount
-      data-slot="input-number-clear"
-      onclick={clear}
-    >
-      {@render children()}
-    </InputClear>
-  {:else}
-    <InputClear
-      {...rest}
-      forceMount
-      data-slot="input-number-clear"
-      onclick={clear}
-    />
-  {/if}
+{#if children}
+  <InputClear
+    {...rest}
+    data-slot="input-number-clear"
+    onclick={clear}
+  >
+    {@render children()}
+  </InputClear>
+{:else}
+  <InputClear
+    {...rest}
+    data-slot="input-number-clear"
+    onclick={clear}
+  />
 {/if}

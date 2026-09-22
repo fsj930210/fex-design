@@ -14,7 +14,6 @@ import type { ComponentProps, ReactNode } from 'react'
 import type { PopoverRootProps } from '@fex-design/react/primitive/popover/popover'
 import {
   SelectContent,
-  SelectItem,
   SelectRoot,
   SelectTrigger,
   SelectValue,
@@ -35,7 +34,7 @@ export interface SelectProps<TItem extends object = SelectOption> extends Omit<
   ComponentProps<'div'>,
   'children' | 'defaultValue' | 'onChange'
 > {
-  items: readonly DataItem<TItem>[]
+  options: readonly DataItem<TItem>[]
   fieldNames?: SelectFieldNames<TItem>
   value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
@@ -64,7 +63,7 @@ export interface SelectProps<TItem extends object = SelectOption> extends Omit<
 }
 
 export function Select<TItem extends object = SelectOption>({
-  items,
+  options: sourceOptions,
   fieldNames = { value: 'value', label: 'label' } as SelectFieldNames<TItem>,
   className,
   style,
@@ -78,7 +77,7 @@ export function Select<TItem extends object = SelectOption>({
   maxTagCount,
   ...props
 }: SelectProps<TItem>) {
-  const options = normalizeSelectOptions(items, fieldNames)
+  const options = normalizeSelectOptions(sourceOptions, fieldNames)
   const renderOption = optionRender
     ? (option: SelectOption, state: { selected: boolean; active: boolean; disabled: boolean }) =>
         optionRender(option.data as TItem, state)
@@ -87,7 +86,7 @@ export function Select<TItem extends object = SelectOption>({
     <SelectRoot
       {...props}
       {...popoverProps}
-      items={options}
+      options={options}
       showSearch={searchable}
       getPopupContainer={getPopupContainer}
     >
@@ -100,19 +99,11 @@ export function Select<TItem extends object = SelectOption>({
       >
         <SelectValue maxTagCount={maxTagCount} placeholder={props.placeholder} />
       </SelectTrigger>
-      <SelectContent popupRender={popupRender}>
-        {options.map((option) => (
-          <SelectItem key={String(option.value)} value={option.value}>
-            {renderOption
-              ? renderOption(option, {
-                  selected: false,
-                  active: false,
-                  disabled: option.disabled === true,
-                })
-              : option.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
+      <SelectContent
+        popupRender={popupRender}
+        emptyContent={emptyContent}
+        optionRender={renderOption}
+      />
     </SelectRoot>
   )
 }

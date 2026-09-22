@@ -66,7 +66,7 @@ export function TimePickerTrigger({
         >
           {prefix ? <InputPrefix>{prefix}</InputPrefix> : null}
           <InputControl {...inputProps} placeholder={placeholder ?? context.format} />
-          {allowClear ? <InputClear /> : null}
+          {allowClear && text ? <InputClear /> : null}
           {!allowClear || !text ? (
             <InputSuffix>{suffix ?? <ClockIcon className="size-4" />}</InputSuffix>
           ) : null}

@@ -1,0 +1,1 @@
+<script lang="ts">import SelectRoot from '@fex-design/svelte/primitive/select'; import SelectTrigger from '@fex-design/svelte/primitive/select-trigger'; import SelectContent from '@fex-design/svelte/primitive/select-content'; const options=[]</script><SelectRoot {options}><SelectTrigger class="w-72"/><SelectContent emptyText="暂无匹配数据"/></SelectRoot>

@@ -8,7 +8,7 @@ import { SelectContent, SelectRoot, SelectTrigger, type SelectChangeMeta, type S
 export type SelectPopoverProps = Omit<PopoverProps, 'children' | 'getPopupContainer'>
 export interface SelectProps<TItem extends object = SelectOption>
   extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  items: readonly SelectItem<TItem>[]
+  options: readonly SelectItem<TItem>[]
   fieldNames?: SelectFieldNames<TItem>
   value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
@@ -28,22 +28,24 @@ export interface SelectProps<TItem extends object = SelectOption>
   inputProps?: SelectInputProps
   popoverProps?: SelectPopoverProps
   getPopupContainer?: PopoverProps['getPopupContainer']
+  emptyContent?: JSX.Element
+  popupRender?: (menu: JSX.Element, context: { close: () => void }) => JSX.Element
 }
 
 export function Select<TItem extends object = SelectOption>(props: SelectProps<TItem>) {
   const [local, triggerProps] = splitProps(props, [
-    'items', 'fieldNames', 'value', 'defaultValue', 'multiple', 'onChange', 'searchable',
+    'options', 'fieldNames', 'value', 'defaultValue', 'multiple', 'onChange', 'searchable',
     'filterOption', 'onSearch', 'clearable', 'disabled', 'loading', 'placeholder',
     'maxCount', 'maxTagCount', 'virtual', 'status', 'inputProps', 'popoverProps',
-    'getPopupContainer',
+    'getPopupContainer', 'emptyContent', 'popupRender',
   ])
   const options = createMemo(() => normalizeSelectOptions(
-    local.items,
+    local.options,
     local.fieldNames ?? ({ value: 'value', label: 'label' } as SelectFieldNames<TItem>),
   ))
   return (
     <SelectRoot
-      items={options()}
+      options={options()}
       value={local.value}
       defaultValue={local.defaultValue}
       multiple={local.multiple}
@@ -63,7 +65,7 @@ export function Select<TItem extends object = SelectOption>(props: SelectProps<T
       onOpenChange={local.popoverProps?.onOpenChange}
     >
       <SelectTrigger {...triggerProps} inputProps={local.inputProps} placeholder={local.placeholder} maxTagCount={local.maxTagCount} />
-      <SelectContent />
+      <SelectContent emptyContent={local.emptyContent} popupRender={local.popupRender} />
     </SelectRoot>
   )
 }

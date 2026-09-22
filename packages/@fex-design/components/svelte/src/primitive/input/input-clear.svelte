@@ -8,13 +8,11 @@
 
   interface Props extends Omit<HTMLButtonAttributes, "class"> {
     class?: string;
-    forceMount?: boolean;
     children?: Snippet;
   }
 
   let {
     class: className,
-    forceMount = false,
     children,
     onclick,
     ...rest
@@ -22,19 +20,16 @@
   const input = getInputContext("InputClear");
 </script>
 
-{#if forceMount || input.canClear()}
-  <button
-    type="button"
-    aria-label="Clear input"
-    {...rest}
-    data-slot="input-clear"
-    disabled={!forceMount && !input.canClear()}
-    class={cn(inputClearClassName, className)}
-    onclick={(event) => {
-      onclick?.(event);
-      if (!event.defaultPrevented) input.clear();
-    }}
-  >
-    {#if children}{@render children()}{:else}<CircleXIcon />{/if}
-  </button>
-{/if}
+<button
+  type="button"
+  aria-label="Clear input"
+  {...rest}
+  data-slot="input-clear"
+  class={cn(inputClearClassName, className)}
+  onclick={(event) => {
+    onclick?.(event);
+    if (!event.defaultPrevented) input.clear();
+  }}
+>
+  {#if children}{@render children()}{:else}<CircleXIcon />{/if}
+</button>

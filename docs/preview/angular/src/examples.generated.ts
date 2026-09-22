@@ -114,238 +114,267 @@ import { RadioDirectionExample as Example110 } from '../../../../packages/@fex-d
 import { RadioSizesExample as Example111 } from '../../../../packages/@fex-design/components/angular/src/primitive/radio/examples/sizes'
 import { RadioStatesExample as Example112 } from '../../../../packages/@fex-design/components/angular/src/primitive/radio/examples/states'
 import { SelectBasicExample as Example113 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/basic'
-import { SelectVirtualExample as Example114 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/virtual'
-import { Basic as Example115 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/basic'
-import { Direction as Example116 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/direction'
-import { List as Example117 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/list'
-import { Menu as Example118 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/menu'
-import { WithText as Example119 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/text'
-import { Variants as Example120 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/variants'
-import { Vertical as Example121 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/vertical'
-import { SkeletonAnimationExample as Example122 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/animation'
-import { SkeletonBasicExample as Example123 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/basic'
-import { SkeletonFormExample as Example124 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/form'
-import { SkeletonImageExample as Example125 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/image'
-import { SkeletonListExample as Example126 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/list'
-import { SkeletonTableExample as Example127 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/table'
-import { SliderBasicExample as Example128 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/basic'
-import { SliderCssVariablesExample as Example129 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/css-variables'
-import { SliderDirectionExample as Example130 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/direction'
-import { SliderDisabledExample as Example131 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/disabled'
-import { SliderDraggableRangeExample as Example132 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/draggable-range'
-import { SliderEditableExample as Example133 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/editable'
-import { SliderMarksExample as Example134 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/marks'
-import { SliderRangeExample as Example135 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/range'
-import { SliderSizesExample as Example136 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/sizes'
-import { SliderWeightExample as Example137 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/weight'
-import { BasicExample as Example138 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/basic'
-import { CustomIndicatorExample as Example139 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/custom-indicator'
-import { OverlayExample as Example140 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/overlay'
-import { SizesExample as Example141 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/sizes'
-import { SwitchBasicExample as Example142 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/basic'
-import { SwitchContentExample as Example143 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/content'
-import { SwitchControlledExample as Example144 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/controlled'
-import { SwitchCssVariablesExample as Example145 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/css-variables'
-import { SwitchDirectionExample as Example146 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/direction'
-import { SwitchDisabledExample as Example147 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/disabled'
-import { SwitchLoadingExample as Example148 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/loading'
-import { SwitchShapeExample as Example149 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/shape'
-import { SwitchSizeExample as Example150 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/size'
-import { SwitchValidationExample as Example151 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/validation'
-import { Basic as Example152 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/basic'
-import { Colors as Example153 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/colors'
-import { CssVariables as Example154 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/css-variables'
-import { DirectionExample as Example155 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/direction'
-import { Dynamic as Example156 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/dynamic'
-import { Variants as Example157 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/variants'
-import { BasicExample as Example158 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/basic'
-import { ColorExample as Example159 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/color'
-import { ControlledExample as Example160 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/controlled'
-import { CssVariablesExample as Example161 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/css-variables'
-import { DirectionExample as Example162 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/direction'
-import { PlacementExample as Example163 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/placement'
-import { AlertBasicExample as Example164 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/basic'
-import { AlertCarouselExample as Example165 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/carousel'
-import { AlertClosableExample as Example166 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/closable'
-import { AlertCustomExample as Example167 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/custom'
-import { AlertDirectionExample as Example168 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/direction'
-import { AlertSemanticStylesExample as Example169 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/semantic-styles'
-import { AlertTypesExample as Example170 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/types'
-import { AlertVariantsExample as Example171 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/variants'
-import { AnchorUiBasicExample as Example172 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/basic'
-import { AnchorUiClickLockExample as Example173 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/click-lock'
-import { AnchorUiControlledExample as Example174 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/controlled'
-import { AnchorUiCustomClickExample as Example175 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/custom-click'
-import { AnchorUiDirectionExample as Example176 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/direction'
-import { AnchorUiHorizontalExample as Example177 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/horizontal'
-import { AnchorUiOffsetExample as Example178 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/offset'
-import { AnchorUiProgressExample as Example179 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/progress'
-import { AnchorUiSemanticStylesExample as Example180 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/semantic-styles'
-import { Landscape as Example181 } from '../../../../packages/@fex-design/components/angular/src/ui/aspect-ratio/examples/landscape'
-import { Portrait as Example182 } from '../../../../packages/@fex-design/components/angular/src/ui/aspect-ratio/examples/portrait'
-import { Square as Example183 } from '../../../../packages/@fex-design/components/angular/src/ui/aspect-ratio/examples/square'
-import { BasicExample as Example184 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/basic'
-import { CssVariablesExample as Example185 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/css-variables'
-import { DirectionExample as Example186 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/direction'
-import { GroupExample as Example187 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group'
-import { GroupCountExample as Example188 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group-count'
-import { GroupShapeExample as Example189 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group-shape'
-import { GroupWithIconExample as Example190 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group-with-icon'
-import { MaxCountExample as Example191 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/max-count'
-import { ShapeExample as Example192 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/shape'
-import { SizesExample as Example193 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/sizes'
-import { StylingExample as Example194 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/styling'
-import { Basic as Example195 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/basic'
-import { Colors as Example196 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/colors'
-import { CssVariables as Example197 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/css-variables'
-import { Custom as Example198 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/custom'
-import { Direction as Example199 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/direction'
-import { Dot as Example200 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/dot'
-import { Group as Example201 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/group'
-import { Offset as Example202 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/offset'
-import { Overflow as Example203 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/overflow'
-import { Ribbon as Example204 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/ribbon'
-import { Sizes as Example205 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/sizes'
-import { Standalone as Example206 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/standalone'
-import { Styling as Example207 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/styling'
-import { Zero as Example208 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/zero'
-import { BasicExample as Example209 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/basic'
-import { CombinationsExample as Example210 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/combinations'
-import { CssVariablesExample as Example211 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/css-variables'
-import { DirectionExample as Example212 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/direction'
-import { EffectsExample as Example213 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/effects'
-import { GroupExample as Example214 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/group'
-import { IconsExample as Example215 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/icons'
-import { LoadingExample as Example216 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/loading'
-import { SizesExample as Example217 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/sizes'
-import { StatesExample as Example218 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/states'
-import { VariantsExample as Example219 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/variants'
-import { BasicExample as Example220 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/basic'
-import { CssVariablesExample as Example221 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/css-variables'
-import { CustomHeaderExample as Example222 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/custom-header'
-import { DirectionExample as Example223 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/direction'
-import { ExtraExample as Example224 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/extra'
-import { StylingExample as Example225 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/styling'
-import { CheckboxUiBasicExample as Example226 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/basic'
-import { CheckboxUiCheckAllExample as Example227 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/check-all'
-import { CheckboxUiControlledExample as Example228 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/controlled'
-import { CheckboxUiCssVariablesExample as Example229 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/css-variables'
-import { CheckboxUiCustomIndicatorExample as Example230 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/custom-indicator'
-import { CheckboxUiDirectionExample as Example231 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/direction'
-import { CheckboxUiGroupExample as Example232 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/group'
-import { CheckboxUiSemanticStylesExample as Example233 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/semantic-styles'
-import { CheckboxUiSizesExample as Example234 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/sizes'
-import { CheckboxUiStatesExample as Example235 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/states'
-import { CheckboxUiValidationExample as Example236 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/validation'
-import { BasicExample as Example237 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/basic'
-import { ContentExample as Example238 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/content'
-import { DirectionExample as Example239 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/direction'
-import { ImageExample as Example240 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/image'
-import { StylingExample as Example241 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/styling'
-import { AffixesExample as Example242 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/affixes'
-import { BasicExample as Example243 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/basic'
-import { ConstraintsExample as Example244 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/constraints'
-import { ControlsExample as Example245 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/controls'
-import { CustomLogicExample as Example246 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/custom-logic'
-import { EditingExample as Example247 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/editing'
-import { FormatterExample as Example248 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/formatter'
-import { KeyboardExample as Example249 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/keyboard'
-import { RangeExample as Example250 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/range'
-import { SemanticStylesExample as Example251 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/semantic-styles'
-import { ValidationExample as Example252 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/validation'
-import { AffixesExample as Example253 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/affixes'
-import { BasicExample as Example254 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/basic'
-import { ControlledExample as Example255 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/controlled'
-import { FocusExample as Example256 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/focus'
-import { GroupExample as Example257 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/group'
-import { PasswordExample as Example258 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/password'
-import { SearchExample as Example259 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/search'
-import { SemanticStylesExample as Example260 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/semantic-styles'
-import { SizesExample as Example261 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/sizes'
-import { StatesExample as Example262 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/states'
-import { ValidationExample as Example263 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/validation'
-import { VariantsExample as Example264 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/variants'
-import { Basic as Example265 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/basic'
-import { ButtonExample as Example266 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/button'
-import { DirectionExample as Example267 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/direction'
-import { Group as Example268 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/group'
-import { ArrowExample as Example269 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/arrow'
-import { BasicExample as Example270 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/basic'
-import { ContainerExample as Example271 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/container'
-import { ControlledExample as Example272 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/controlled'
-import { CustomLogicExample as Example273 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/custom-logic'
-import { OffsetsExample as Example274 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/offsets'
-import { PlacementExample as Example275 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/placement'
-import { SemanticStylesExample as Example276 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/semantic-styles'
-import { TriggersExample as Example277 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/triggers'
-import { RadioBasicExample as Example278 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/basic'
-import { RadioButtonExample as Example279 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/button'
-import { RadioControlledExample as Example280 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/controlled'
-import { RadioCssVariablesExample as Example281 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/css-variables'
-import { RadioDirectionExample as Example282 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/direction'
-import { RadioSemanticStylesExample as Example283 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/semantic-styles'
-import { RadioSizesExample as Example284 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/sizes'
-import { RadioStatesExample as Example285 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/states'
-import { SelectBasicExample as Example286 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/basic'
-import { SelectFieldNamesExample as Example287 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/field-names'
-import { SelectVirtualExample as Example288 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/virtual'
-import { Basic as Example289 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/basic'
-import { Direction as Example290 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/direction'
-import { List as Example291 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/list'
-import { Menu as Example292 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/menu'
-import { WithText as Example293 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/text'
-import { Variants as Example294 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/variants'
-import { Vertical as Example295 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/vertical'
-import { SkeletonAnimationExample as Example296 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/animation'
-import { SkeletonBasicExample as Example297 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/basic'
-import { SkeletonContentExample as Example298 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/content'
-import { SkeletonFormExample as Example299 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/form'
-import { SkeletonImageExample as Example300 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/image'
-import { SkeletonListExample as Example301 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/list'
-import { SkeletonStylesExample as Example302 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/styles'
-import { SkeletonTableExample as Example303 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/table'
-import { SkeletonWidthExample as Example304 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/width'
-import { SliderBasicExample as Example305 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/basic'
-import { SliderCssVariablesExample as Example306 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/css-variables'
-import { SliderDirectionExample as Example307 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/direction'
-import { SliderDisabledExample as Example308 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/disabled'
-import { SliderDraggableRangeExample as Example309 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/draggable-range'
-import { SliderEditableExample as Example310 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/editable'
-import { SliderMarksExample as Example311 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/marks'
-import { SliderRangeExample as Example312 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/range'
-import { SliderSemanticStylesExample as Example313 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/semantic-styles'
-import { SliderSizesExample as Example314 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/sizes'
-import { SliderWeightExample as Example315 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/weight'
-import { BasicExample as Example316 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/basic'
-import { CustomIndicatorExample as Example317 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/custom-indicator'
-import { OverlayExample as Example318 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/overlay'
-import { SizesExample as Example319 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/sizes'
-import { StylingExample as Example320 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/styling'
-import { SwitchBasicExample as Example321 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/basic'
-import { SwitchContentExample as Example322 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/content'
-import { SwitchControlledExample as Example323 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/controlled'
-import { SwitchCssVariablesExample as Example324 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/css-variables'
-import { SwitchDirectionExample as Example325 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/direction'
-import { SwitchDisabledExample as Example326 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/disabled'
-import { SwitchLoadingExample as Example327 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/loading'
-import { SwitchSemanticStylesExample as Example328 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/semantic-styles'
-import { SwitchShapeExample as Example329 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/shape'
-import { SwitchSizeExample as Example330 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/size'
-import { SwitchValidationExample as Example331 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/validation'
-import { Basic as Example332 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/basic'
-import { Colors as Example333 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/colors'
-import { CssVariables as Example334 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/css-variables'
-import { DirectionExample as Example335 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/direction'
-import { Dynamic as Example336 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/dynamic'
-import { SemanticStyles as Example337 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/semantic-styles'
-import { Variants as Example338 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/variants'
-import { BasicExample as Example339 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/basic'
-import { ColorExample as Example340 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/color'
-import { ControlledExample as Example341 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/controlled'
-import { CssVariablesExample as Example342 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/css-variables'
-import { DirectionExample as Example343 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/direction'
-import { PlacementExample as Example344 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/placement'
-import { SemanticStylesExample as Example345 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/semantic-styles'
+import { SelectClearExample as Example114 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/clear'
+import { SelectControlledExample as Example115 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/controlled'
+import { SelectVariablesExample as Example116 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/css-variables'
+import { SelectCustomExample as Example117 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/custom-search'
+import { SelectDirectionExample as Example118 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/direction'
+import { SelectEmptyExample as Example119 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/empty-demo'
+import { SelectFieldsExample as Example120 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/field-names'
+import { SelectGroupExample as Example121 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/group'
+import { SelectLocalExample as Example122 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/local-search'
+import { SelectMultipleExample as Example123 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/multiple'
+import { SelectPopupExample as Example124 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/popup-render-demo'
+import { SelectAffixExample as Example125 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/prefix-suffix-demo'
+import { SelectRemoteExample as Example126 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/remote-search'
+import { SelectStylesExample as Example127 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/semantic-styles'
+import { SelectSingleExample as Example128 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/single'
+import { SelectVirtualExample as Example129 } from '../../../../packages/@fex-design/components/angular/src/primitive/select/examples/virtual'
+import { Basic as Example130 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/basic'
+import { Direction as Example131 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/direction'
+import { List as Example132 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/list'
+import { Menu as Example133 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/menu'
+import { WithText as Example134 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/text'
+import { Variants as Example135 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/variants'
+import { Vertical as Example136 } from '../../../../packages/@fex-design/components/angular/src/primitive/separator/examples/vertical'
+import { SkeletonAnimationExample as Example137 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/animation'
+import { SkeletonBasicExample as Example138 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/basic'
+import { SkeletonFormExample as Example139 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/form'
+import { SkeletonImageExample as Example140 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/image'
+import { SkeletonListExample as Example141 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/list'
+import { SkeletonTableExample as Example142 } from '../../../../packages/@fex-design/components/angular/src/primitive/skeleton/examples/table'
+import { SliderBasicExample as Example143 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/basic'
+import { SliderCssVariablesExample as Example144 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/css-variables'
+import { SliderDirectionExample as Example145 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/direction'
+import { SliderDisabledExample as Example146 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/disabled'
+import { SliderDraggableRangeExample as Example147 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/draggable-range'
+import { SliderEditableExample as Example148 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/editable'
+import { SliderMarksExample as Example149 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/marks'
+import { SliderRangeExample as Example150 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/range'
+import { SliderSizesExample as Example151 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/sizes'
+import { SliderWeightExample as Example152 } from '../../../../packages/@fex-design/components/angular/src/primitive/slider/examples/weight'
+import { BasicExample as Example153 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/basic'
+import { CustomIndicatorExample as Example154 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/custom-indicator'
+import { OverlayExample as Example155 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/overlay'
+import { SizesExample as Example156 } from '../../../../packages/@fex-design/components/angular/src/primitive/spinner/examples/sizes'
+import { SwitchBasicExample as Example157 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/basic'
+import { SwitchContentExample as Example158 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/content'
+import { SwitchControlledExample as Example159 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/controlled'
+import { SwitchCssVariablesExample as Example160 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/css-variables'
+import { SwitchDirectionExample as Example161 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/direction'
+import { SwitchDisabledExample as Example162 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/disabled'
+import { SwitchLoadingExample as Example163 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/loading'
+import { SwitchShapeExample as Example164 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/shape'
+import { SwitchSizeExample as Example165 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/size'
+import { SwitchValidationExample as Example166 } from '../../../../packages/@fex-design/components/angular/src/primitive/switch/examples/validation'
+import { Basic as Example167 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/basic'
+import { Colors as Example168 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/colors'
+import { CssVariables as Example169 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/css-variables'
+import { DirectionExample as Example170 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/direction'
+import { Dynamic as Example171 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/dynamic'
+import { Variants as Example172 } from '../../../../packages/@fex-design/components/angular/src/primitive/tag/examples/variants'
+import { BasicExample as Example173 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/basic'
+import { ColorExample as Example174 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/color'
+import { ControlledExample as Example175 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/controlled'
+import { CssVariablesExample as Example176 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/css-variables'
+import { DirectionExample as Example177 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/direction'
+import { PlacementExample as Example178 } from '../../../../packages/@fex-design/components/angular/src/primitive/tooltip/examples/placement'
+import { AlertBasicExample as Example179 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/basic'
+import { AlertCarouselExample as Example180 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/carousel'
+import { AlertClosableExample as Example181 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/closable'
+import { AlertCustomExample as Example182 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/custom'
+import { AlertDirectionExample as Example183 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/direction'
+import { AlertSemanticStylesExample as Example184 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/semantic-styles'
+import { AlertTypesExample as Example185 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/types'
+import { AlertVariantsExample as Example186 } from '../../../../packages/@fex-design/components/angular/src/ui/alert/examples/variants'
+import { AnchorUiBasicExample as Example187 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/basic'
+import { AnchorUiClickLockExample as Example188 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/click-lock'
+import { AnchorUiControlledExample as Example189 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/controlled'
+import { AnchorUiCustomClickExample as Example190 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/custom-click'
+import { AnchorUiDirectionExample as Example191 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/direction'
+import { AnchorUiHorizontalExample as Example192 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/horizontal'
+import { AnchorUiOffsetExample as Example193 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/offset'
+import { AnchorUiProgressExample as Example194 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/progress'
+import { AnchorUiSemanticStylesExample as Example195 } from '../../../../packages/@fex-design/components/angular/src/ui/anchor/examples/semantic-styles'
+import { Landscape as Example196 } from '../../../../packages/@fex-design/components/angular/src/ui/aspect-ratio/examples/landscape'
+import { Portrait as Example197 } from '../../../../packages/@fex-design/components/angular/src/ui/aspect-ratio/examples/portrait'
+import { Square as Example198 } from '../../../../packages/@fex-design/components/angular/src/ui/aspect-ratio/examples/square'
+import { BasicExample as Example199 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/basic'
+import { CssVariablesExample as Example200 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/css-variables'
+import { DirectionExample as Example201 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/direction'
+import { GroupExample as Example202 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group'
+import { GroupCountExample as Example203 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group-count'
+import { GroupShapeExample as Example204 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group-shape'
+import { GroupWithIconExample as Example205 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/group-with-icon'
+import { MaxCountExample as Example206 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/max-count'
+import { ShapeExample as Example207 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/shape'
+import { SizesExample as Example208 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/sizes'
+import { StylingExample as Example209 } from '../../../../packages/@fex-design/components/angular/src/ui/avatar/examples/styling'
+import { Basic as Example210 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/basic'
+import { Colors as Example211 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/colors'
+import { CssVariables as Example212 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/css-variables'
+import { Custom as Example213 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/custom'
+import { Direction as Example214 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/direction'
+import { Dot as Example215 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/dot'
+import { Group as Example216 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/group'
+import { Offset as Example217 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/offset'
+import { Overflow as Example218 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/overflow'
+import { Ribbon as Example219 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/ribbon'
+import { Sizes as Example220 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/sizes'
+import { Standalone as Example221 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/standalone'
+import { Styling as Example222 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/styling'
+import { Zero as Example223 } from '../../../../packages/@fex-design/components/angular/src/ui/badge/examples/zero'
+import { BasicExample as Example224 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/basic'
+import { CombinationsExample as Example225 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/combinations'
+import { CssVariablesExample as Example226 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/css-variables'
+import { DirectionExample as Example227 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/direction'
+import { EffectsExample as Example228 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/effects'
+import { GroupExample as Example229 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/group'
+import { IconsExample as Example230 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/icons'
+import { LoadingExample as Example231 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/loading'
+import { SizesExample as Example232 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/sizes'
+import { StatesExample as Example233 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/states'
+import { VariantsExample as Example234 } from '../../../../packages/@fex-design/components/angular/src/ui/button/examples/variants'
+import { BasicExample as Example235 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/basic'
+import { CssVariablesExample as Example236 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/css-variables'
+import { CustomHeaderExample as Example237 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/custom-header'
+import { DirectionExample as Example238 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/direction'
+import { ExtraExample as Example239 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/extra'
+import { StylingExample as Example240 } from '../../../../packages/@fex-design/components/angular/src/ui/card/examples/styling'
+import { CheckboxUiBasicExample as Example241 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/basic'
+import { CheckboxUiCheckAllExample as Example242 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/check-all'
+import { CheckboxUiControlledExample as Example243 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/controlled'
+import { CheckboxUiCssVariablesExample as Example244 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/css-variables'
+import { CheckboxUiCustomIndicatorExample as Example245 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/custom-indicator'
+import { CheckboxUiDirectionExample as Example246 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/direction'
+import { CheckboxUiGroupExample as Example247 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/group'
+import { CheckboxUiSemanticStylesExample as Example248 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/semantic-styles'
+import { CheckboxUiSizesExample as Example249 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/sizes'
+import { CheckboxUiStatesExample as Example250 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/states'
+import { CheckboxUiValidationExample as Example251 } from '../../../../packages/@fex-design/components/angular/src/ui/checkbox/examples/validation'
+import { BasicExample as Example252 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/basic'
+import { ContentExample as Example253 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/content'
+import { DirectionExample as Example254 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/direction'
+import { ImageExample as Example255 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/image'
+import { StylingExample as Example256 } from '../../../../packages/@fex-design/components/angular/src/ui/empty/examples/styling'
+import { AffixesExample as Example257 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/affixes'
+import { BasicExample as Example258 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/basic'
+import { ConstraintsExample as Example259 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/constraints'
+import { ControlsExample as Example260 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/controls'
+import { CustomLogicExample as Example261 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/custom-logic'
+import { EditingExample as Example262 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/editing'
+import { FormatterExample as Example263 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/formatter'
+import { KeyboardExample as Example264 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/keyboard'
+import { RangeExample as Example265 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/range'
+import { SemanticStylesExample as Example266 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/semantic-styles'
+import { ValidationExample as Example267 } from '../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/validation'
+import { AffixesExample as Example268 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/affixes'
+import { BasicExample as Example269 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/basic'
+import { ControlledExample as Example270 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/controlled'
+import { FocusExample as Example271 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/focus'
+import { GroupExample as Example272 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/group'
+import { PasswordExample as Example273 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/password'
+import { SearchExample as Example274 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/search'
+import { SemanticStylesExample as Example275 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/semantic-styles'
+import { SizesExample as Example276 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/sizes'
+import { StatesExample as Example277 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/states'
+import { ValidationExample as Example278 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/validation'
+import { VariantsExample as Example279 } from '../../../../packages/@fex-design/components/angular/src/ui/input/examples/variants'
+import { Basic as Example280 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/basic'
+import { ButtonExample as Example281 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/button'
+import { DirectionExample as Example282 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/direction'
+import { Group as Example283 } from '../../../../packages/@fex-design/components/angular/src/ui/kbd/examples/group'
+import { ArrowExample as Example284 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/arrow'
+import { BasicExample as Example285 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/basic'
+import { ContainerExample as Example286 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/container'
+import { ControlledExample as Example287 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/controlled'
+import { CustomLogicExample as Example288 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/custom-logic'
+import { OffsetsExample as Example289 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/offsets'
+import { PlacementExample as Example290 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/placement'
+import { SemanticStylesExample as Example291 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/semantic-styles'
+import { TriggersExample as Example292 } from '../../../../packages/@fex-design/components/angular/src/ui/popover/examples/triggers'
+import { RadioBasicExample as Example293 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/basic'
+import { RadioButtonExample as Example294 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/button'
+import { RadioControlledExample as Example295 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/controlled'
+import { RadioCssVariablesExample as Example296 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/css-variables'
+import { RadioDirectionExample as Example297 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/direction'
+import { RadioSemanticStylesExample as Example298 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/semantic-styles'
+import { RadioSizesExample as Example299 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/sizes'
+import { RadioStatesExample as Example300 } from '../../../../packages/@fex-design/components/angular/src/ui/radio/examples/states'
+import { SelectBasicExample as Example301 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/basic'
+import { SelectClearExample as Example302 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/clear'
+import { SelectControlledExample as Example303 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/controlled'
+import { SelectVariablesExample as Example304 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/css-variables'
+import { SelectCustomSearchExample as Example305 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/custom-search'
+import { SelectDirectionExample as Example306 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/direction'
+import { SelectEmptyExample as Example307 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/empty-demo'
+import { SelectFieldNamesExample as Example308 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/field-names'
+import { SelectGroupExample as Example309 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/group'
+import { SelectLocalSearchExample as Example310 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/local-search'
+import { SelectMultipleExample as Example311 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/multiple'
+import { SelectPopupExample as Example312 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/popup-render-demo'
+import { SelectAffixExample as Example313 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/prefix-suffix-demo'
+import { SelectRemoteSearchExample as Example314 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/remote-search'
+import { SelectStylesExample as Example315 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/semantic-styles'
+import { SelectSingleExample as Example316 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/single'
+import { SelectVirtualExample as Example317 } from '../../../../packages/@fex-design/components/angular/src/ui/select/examples/virtual'
+import { Basic as Example318 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/basic'
+import { Direction as Example319 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/direction'
+import { List as Example320 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/list'
+import { Menu as Example321 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/menu'
+import { WithText as Example322 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/text'
+import { Variants as Example323 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/variants'
+import { Vertical as Example324 } from '../../../../packages/@fex-design/components/angular/src/ui/separator/examples/vertical'
+import { SkeletonAnimationExample as Example325 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/animation'
+import { SkeletonBasicExample as Example326 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/basic'
+import { SkeletonContentExample as Example327 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/content'
+import { SkeletonFormExample as Example328 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/form'
+import { SkeletonImageExample as Example329 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/image'
+import { SkeletonListExample as Example330 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/list'
+import { SkeletonStylesExample as Example331 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/styles'
+import { SkeletonTableExample as Example332 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/table'
+import { SkeletonWidthExample as Example333 } from '../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/width'
+import { SliderBasicExample as Example334 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/basic'
+import { SliderCssVariablesExample as Example335 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/css-variables'
+import { SliderDirectionExample as Example336 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/direction'
+import { SliderDisabledExample as Example337 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/disabled'
+import { SliderDraggableRangeExample as Example338 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/draggable-range'
+import { SliderEditableExample as Example339 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/editable'
+import { SliderMarksExample as Example340 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/marks'
+import { SliderRangeExample as Example341 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/range'
+import { SliderSemanticStylesExample as Example342 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/semantic-styles'
+import { SliderSizesExample as Example343 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/sizes'
+import { SliderWeightExample as Example344 } from '../../../../packages/@fex-design/components/angular/src/ui/slider/examples/weight'
+import { BasicExample as Example345 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/basic'
+import { CustomIndicatorExample as Example346 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/custom-indicator'
+import { OverlayExample as Example347 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/overlay'
+import { SizesExample as Example348 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/sizes'
+import { StylingExample as Example349 } from '../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/styling'
+import { SwitchBasicExample as Example350 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/basic'
+import { SwitchContentExample as Example351 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/content'
+import { SwitchControlledExample as Example352 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/controlled'
+import { SwitchCssVariablesExample as Example353 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/css-variables'
+import { SwitchDirectionExample as Example354 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/direction'
+import { SwitchDisabledExample as Example355 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/disabled'
+import { SwitchLoadingExample as Example356 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/loading'
+import { SwitchSemanticStylesExample as Example357 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/semantic-styles'
+import { SwitchShapeExample as Example358 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/shape'
+import { SwitchSizeExample as Example359 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/size'
+import { SwitchValidationExample as Example360 } from '../../../../packages/@fex-design/components/angular/src/ui/switch/examples/validation'
+import { Basic as Example361 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/basic'
+import { Colors as Example362 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/colors'
+import { CssVariables as Example363 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/css-variables'
+import { DirectionExample as Example364 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/direction'
+import { Dynamic as Example365 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/dynamic'
+import { SemanticStyles as Example366 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/semantic-styles'
+import { Variants as Example367 } from '../../../../packages/@fex-design/components/angular/src/ui/tag/examples/variants'
+import { BasicExample as Example368 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/basic'
+import { ColorExample as Example369 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/color'
+import { ControlledExample as Example370 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/controlled'
+import { CssVariablesExample as Example371 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/css-variables'
+import { DirectionExample as Example372 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/direction'
+import { PlacementExample as Example373 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/placement'
+import { SemanticStylesExample as Example374 } from '../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/semantic-styles'
 
 export const examples: Record<string, Type<unknown>> = {
   'primitive/alert/basic': Example0,
@@ -462,236 +491,265 @@ export const examples: Record<string, Type<unknown>> = {
   'primitive/radio/sizes': Example111,
   'primitive/radio/states': Example112,
   'primitive/select/basic': Example113,
-  'primitive/select/virtual': Example114,
-  'primitive/separator/basic': Example115,
-  'primitive/separator/direction': Example116,
-  'primitive/separator/list': Example117,
-  'primitive/separator/menu': Example118,
-  'primitive/separator/text': Example119,
-  'primitive/separator/variants': Example120,
-  'primitive/separator/vertical': Example121,
-  'primitive/skeleton/animation': Example122,
-  'primitive/skeleton/basic': Example123,
-  'primitive/skeleton/form': Example124,
-  'primitive/skeleton/image': Example125,
-  'primitive/skeleton/list': Example126,
-  'primitive/skeleton/table': Example127,
-  'primitive/slider/basic': Example128,
-  'primitive/slider/css-variables': Example129,
-  'primitive/slider/direction': Example130,
-  'primitive/slider/disabled': Example131,
-  'primitive/slider/draggable-range': Example132,
-  'primitive/slider/editable': Example133,
-  'primitive/slider/marks': Example134,
-  'primitive/slider/range': Example135,
-  'primitive/slider/sizes': Example136,
-  'primitive/slider/weight': Example137,
-  'primitive/spinner/basic': Example138,
-  'primitive/spinner/custom-indicator': Example139,
-  'primitive/spinner/overlay': Example140,
-  'primitive/spinner/sizes': Example141,
-  'primitive/switch/basic': Example142,
-  'primitive/switch/content': Example143,
-  'primitive/switch/controlled': Example144,
-  'primitive/switch/css-variables': Example145,
-  'primitive/switch/direction': Example146,
-  'primitive/switch/disabled': Example147,
-  'primitive/switch/loading': Example148,
-  'primitive/switch/shape': Example149,
-  'primitive/switch/size': Example150,
-  'primitive/switch/validation': Example151,
-  'primitive/tag/basic': Example152,
-  'primitive/tag/colors': Example153,
-  'primitive/tag/css-variables': Example154,
-  'primitive/tag/direction': Example155,
-  'primitive/tag/dynamic': Example156,
-  'primitive/tag/variants': Example157,
-  'primitive/tooltip/basic': Example158,
-  'primitive/tooltip/color': Example159,
-  'primitive/tooltip/controlled': Example160,
-  'primitive/tooltip/css-variables': Example161,
-  'primitive/tooltip/direction': Example162,
-  'primitive/tooltip/placement': Example163,
-  'ui/alert/basic': Example164,
-  'ui/alert/carousel': Example165,
-  'ui/alert/closable': Example166,
-  'ui/alert/custom': Example167,
-  'ui/alert/direction': Example168,
-  'ui/alert/semantic-styles': Example169,
-  'ui/alert/types': Example170,
-  'ui/alert/variants': Example171,
-  'ui/anchor/basic': Example172,
-  'ui/anchor/click-lock': Example173,
-  'ui/anchor/controlled': Example174,
-  'ui/anchor/custom-click': Example175,
-  'ui/anchor/direction': Example176,
-  'ui/anchor/horizontal': Example177,
-  'ui/anchor/offset': Example178,
-  'ui/anchor/progress': Example179,
-  'ui/anchor/semantic-styles': Example180,
-  'ui/aspect-ratio/landscape': Example181,
-  'ui/aspect-ratio/portrait': Example182,
-  'ui/aspect-ratio/square': Example183,
-  'ui/avatar/basic': Example184,
-  'ui/avatar/css-variables': Example185,
-  'ui/avatar/direction': Example186,
-  'ui/avatar/group': Example187,
-  'ui/avatar/group-count': Example188,
-  'ui/avatar/group-shape': Example189,
-  'ui/avatar/group-with-icon': Example190,
-  'ui/avatar/max-count': Example191,
-  'ui/avatar/shape': Example192,
-  'ui/avatar/sizes': Example193,
-  'ui/avatar/styling': Example194,
-  'ui/badge/basic': Example195,
-  'ui/badge/colors': Example196,
-  'ui/badge/css-variables': Example197,
-  'ui/badge/custom': Example198,
-  'ui/badge/direction': Example199,
-  'ui/badge/dot': Example200,
-  'ui/badge/group': Example201,
-  'ui/badge/offset': Example202,
-  'ui/badge/overflow': Example203,
-  'ui/badge/ribbon': Example204,
-  'ui/badge/sizes': Example205,
-  'ui/badge/standalone': Example206,
-  'ui/badge/styling': Example207,
-  'ui/badge/zero': Example208,
-  'ui/button/basic': Example209,
-  'ui/button/combinations': Example210,
-  'ui/button/css-variables': Example211,
-  'ui/button/direction': Example212,
-  'ui/button/effects': Example213,
-  'ui/button/group': Example214,
-  'ui/button/icons': Example215,
-  'ui/button/loading': Example216,
-  'ui/button/sizes': Example217,
-  'ui/button/states': Example218,
-  'ui/button/variants': Example219,
-  'ui/card/basic': Example220,
-  'ui/card/css-variables': Example221,
-  'ui/card/custom-header': Example222,
-  'ui/card/direction': Example223,
-  'ui/card/extra': Example224,
-  'ui/card/styling': Example225,
-  'ui/checkbox/basic': Example226,
-  'ui/checkbox/check-all': Example227,
-  'ui/checkbox/controlled': Example228,
-  'ui/checkbox/css-variables': Example229,
-  'ui/checkbox/custom-indicator': Example230,
-  'ui/checkbox/direction': Example231,
-  'ui/checkbox/group': Example232,
-  'ui/checkbox/semantic-styles': Example233,
-  'ui/checkbox/sizes': Example234,
-  'ui/checkbox/states': Example235,
-  'ui/checkbox/validation': Example236,
-  'ui/empty/basic': Example237,
-  'ui/empty/content': Example238,
-  'ui/empty/direction': Example239,
-  'ui/empty/image': Example240,
-  'ui/empty/styling': Example241,
-  'ui/input-number/affixes': Example242,
-  'ui/input-number/basic': Example243,
-  'ui/input-number/constraints': Example244,
-  'ui/input-number/controls': Example245,
-  'ui/input-number/custom-logic': Example246,
-  'ui/input-number/editing': Example247,
-  'ui/input-number/formatter': Example248,
-  'ui/input-number/keyboard': Example249,
-  'ui/input-number/range': Example250,
-  'ui/input-number/semantic-styles': Example251,
-  'ui/input-number/validation': Example252,
-  'ui/input/affixes': Example253,
-  'ui/input/basic': Example254,
-  'ui/input/controlled': Example255,
-  'ui/input/focus': Example256,
-  'ui/input/group': Example257,
-  'ui/input/password': Example258,
-  'ui/input/search': Example259,
-  'ui/input/semantic-styles': Example260,
-  'ui/input/sizes': Example261,
-  'ui/input/states': Example262,
-  'ui/input/validation': Example263,
-  'ui/input/variants': Example264,
-  'ui/kbd/basic': Example265,
-  'ui/kbd/button': Example266,
-  'ui/kbd/direction': Example267,
-  'ui/kbd/group': Example268,
-  'ui/popover/arrow': Example269,
-  'ui/popover/basic': Example270,
-  'ui/popover/container': Example271,
-  'ui/popover/controlled': Example272,
-  'ui/popover/custom-logic': Example273,
-  'ui/popover/offsets': Example274,
-  'ui/popover/placement': Example275,
-  'ui/popover/semantic-styles': Example276,
-  'ui/popover/triggers': Example277,
-  'ui/radio/basic': Example278,
-  'ui/radio/button': Example279,
-  'ui/radio/controlled': Example280,
-  'ui/radio/css-variables': Example281,
-  'ui/radio/direction': Example282,
-  'ui/radio/semantic-styles': Example283,
-  'ui/radio/sizes': Example284,
-  'ui/radio/states': Example285,
-  'ui/select/basic': Example286,
-  'ui/select/field-names': Example287,
-  'ui/select/virtual': Example288,
-  'ui/separator/basic': Example289,
-  'ui/separator/direction': Example290,
-  'ui/separator/list': Example291,
-  'ui/separator/menu': Example292,
-  'ui/separator/text': Example293,
-  'ui/separator/variants': Example294,
-  'ui/separator/vertical': Example295,
-  'ui/skeleton/animation': Example296,
-  'ui/skeleton/basic': Example297,
-  'ui/skeleton/content': Example298,
-  'ui/skeleton/form': Example299,
-  'ui/skeleton/image': Example300,
-  'ui/skeleton/list': Example301,
-  'ui/skeleton/styles': Example302,
-  'ui/skeleton/table': Example303,
-  'ui/skeleton/width': Example304,
-  'ui/slider/basic': Example305,
-  'ui/slider/css-variables': Example306,
-  'ui/slider/direction': Example307,
-  'ui/slider/disabled': Example308,
-  'ui/slider/draggable-range': Example309,
-  'ui/slider/editable': Example310,
-  'ui/slider/marks': Example311,
-  'ui/slider/range': Example312,
-  'ui/slider/semantic-styles': Example313,
-  'ui/slider/sizes': Example314,
-  'ui/slider/weight': Example315,
-  'ui/spinner/basic': Example316,
-  'ui/spinner/custom-indicator': Example317,
-  'ui/spinner/overlay': Example318,
-  'ui/spinner/sizes': Example319,
-  'ui/spinner/styling': Example320,
-  'ui/switch/basic': Example321,
-  'ui/switch/content': Example322,
-  'ui/switch/controlled': Example323,
-  'ui/switch/css-variables': Example324,
-  'ui/switch/direction': Example325,
-  'ui/switch/disabled': Example326,
-  'ui/switch/loading': Example327,
-  'ui/switch/semantic-styles': Example328,
-  'ui/switch/shape': Example329,
-  'ui/switch/size': Example330,
-  'ui/switch/validation': Example331,
-  'ui/tag/basic': Example332,
-  'ui/tag/colors': Example333,
-  'ui/tag/css-variables': Example334,
-  'ui/tag/direction': Example335,
-  'ui/tag/dynamic': Example336,
-  'ui/tag/semantic-styles': Example337,
-  'ui/tag/variants': Example338,
-  'ui/tooltip/basic': Example339,
-  'ui/tooltip/color': Example340,
-  'ui/tooltip/controlled': Example341,
-  'ui/tooltip/css-variables': Example342,
-  'ui/tooltip/direction': Example343,
-  'ui/tooltip/placement': Example344,
-  'ui/tooltip/semantic-styles': Example345,
+  'primitive/select/clear': Example114,
+  'primitive/select/controlled': Example115,
+  'primitive/select/css-variables': Example116,
+  'primitive/select/custom-search': Example117,
+  'primitive/select/direction': Example118,
+  'primitive/select/empty-demo': Example119,
+  'primitive/select/field-names': Example120,
+  'primitive/select/group': Example121,
+  'primitive/select/local-search': Example122,
+  'primitive/select/multiple': Example123,
+  'primitive/select/popup-render-demo': Example124,
+  'primitive/select/prefix-suffix-demo': Example125,
+  'primitive/select/remote-search': Example126,
+  'primitive/select/semantic-styles': Example127,
+  'primitive/select/single': Example128,
+  'primitive/select/virtual': Example129,
+  'primitive/separator/basic': Example130,
+  'primitive/separator/direction': Example131,
+  'primitive/separator/list': Example132,
+  'primitive/separator/menu': Example133,
+  'primitive/separator/text': Example134,
+  'primitive/separator/variants': Example135,
+  'primitive/separator/vertical': Example136,
+  'primitive/skeleton/animation': Example137,
+  'primitive/skeleton/basic': Example138,
+  'primitive/skeleton/form': Example139,
+  'primitive/skeleton/image': Example140,
+  'primitive/skeleton/list': Example141,
+  'primitive/skeleton/table': Example142,
+  'primitive/slider/basic': Example143,
+  'primitive/slider/css-variables': Example144,
+  'primitive/slider/direction': Example145,
+  'primitive/slider/disabled': Example146,
+  'primitive/slider/draggable-range': Example147,
+  'primitive/slider/editable': Example148,
+  'primitive/slider/marks': Example149,
+  'primitive/slider/range': Example150,
+  'primitive/slider/sizes': Example151,
+  'primitive/slider/weight': Example152,
+  'primitive/spinner/basic': Example153,
+  'primitive/spinner/custom-indicator': Example154,
+  'primitive/spinner/overlay': Example155,
+  'primitive/spinner/sizes': Example156,
+  'primitive/switch/basic': Example157,
+  'primitive/switch/content': Example158,
+  'primitive/switch/controlled': Example159,
+  'primitive/switch/css-variables': Example160,
+  'primitive/switch/direction': Example161,
+  'primitive/switch/disabled': Example162,
+  'primitive/switch/loading': Example163,
+  'primitive/switch/shape': Example164,
+  'primitive/switch/size': Example165,
+  'primitive/switch/validation': Example166,
+  'primitive/tag/basic': Example167,
+  'primitive/tag/colors': Example168,
+  'primitive/tag/css-variables': Example169,
+  'primitive/tag/direction': Example170,
+  'primitive/tag/dynamic': Example171,
+  'primitive/tag/variants': Example172,
+  'primitive/tooltip/basic': Example173,
+  'primitive/tooltip/color': Example174,
+  'primitive/tooltip/controlled': Example175,
+  'primitive/tooltip/css-variables': Example176,
+  'primitive/tooltip/direction': Example177,
+  'primitive/tooltip/placement': Example178,
+  'ui/alert/basic': Example179,
+  'ui/alert/carousel': Example180,
+  'ui/alert/closable': Example181,
+  'ui/alert/custom': Example182,
+  'ui/alert/direction': Example183,
+  'ui/alert/semantic-styles': Example184,
+  'ui/alert/types': Example185,
+  'ui/alert/variants': Example186,
+  'ui/anchor/basic': Example187,
+  'ui/anchor/click-lock': Example188,
+  'ui/anchor/controlled': Example189,
+  'ui/anchor/custom-click': Example190,
+  'ui/anchor/direction': Example191,
+  'ui/anchor/horizontal': Example192,
+  'ui/anchor/offset': Example193,
+  'ui/anchor/progress': Example194,
+  'ui/anchor/semantic-styles': Example195,
+  'ui/aspect-ratio/landscape': Example196,
+  'ui/aspect-ratio/portrait': Example197,
+  'ui/aspect-ratio/square': Example198,
+  'ui/avatar/basic': Example199,
+  'ui/avatar/css-variables': Example200,
+  'ui/avatar/direction': Example201,
+  'ui/avatar/group': Example202,
+  'ui/avatar/group-count': Example203,
+  'ui/avatar/group-shape': Example204,
+  'ui/avatar/group-with-icon': Example205,
+  'ui/avatar/max-count': Example206,
+  'ui/avatar/shape': Example207,
+  'ui/avatar/sizes': Example208,
+  'ui/avatar/styling': Example209,
+  'ui/badge/basic': Example210,
+  'ui/badge/colors': Example211,
+  'ui/badge/css-variables': Example212,
+  'ui/badge/custom': Example213,
+  'ui/badge/direction': Example214,
+  'ui/badge/dot': Example215,
+  'ui/badge/group': Example216,
+  'ui/badge/offset': Example217,
+  'ui/badge/overflow': Example218,
+  'ui/badge/ribbon': Example219,
+  'ui/badge/sizes': Example220,
+  'ui/badge/standalone': Example221,
+  'ui/badge/styling': Example222,
+  'ui/badge/zero': Example223,
+  'ui/button/basic': Example224,
+  'ui/button/combinations': Example225,
+  'ui/button/css-variables': Example226,
+  'ui/button/direction': Example227,
+  'ui/button/effects': Example228,
+  'ui/button/group': Example229,
+  'ui/button/icons': Example230,
+  'ui/button/loading': Example231,
+  'ui/button/sizes': Example232,
+  'ui/button/states': Example233,
+  'ui/button/variants': Example234,
+  'ui/card/basic': Example235,
+  'ui/card/css-variables': Example236,
+  'ui/card/custom-header': Example237,
+  'ui/card/direction': Example238,
+  'ui/card/extra': Example239,
+  'ui/card/styling': Example240,
+  'ui/checkbox/basic': Example241,
+  'ui/checkbox/check-all': Example242,
+  'ui/checkbox/controlled': Example243,
+  'ui/checkbox/css-variables': Example244,
+  'ui/checkbox/custom-indicator': Example245,
+  'ui/checkbox/direction': Example246,
+  'ui/checkbox/group': Example247,
+  'ui/checkbox/semantic-styles': Example248,
+  'ui/checkbox/sizes': Example249,
+  'ui/checkbox/states': Example250,
+  'ui/checkbox/validation': Example251,
+  'ui/empty/basic': Example252,
+  'ui/empty/content': Example253,
+  'ui/empty/direction': Example254,
+  'ui/empty/image': Example255,
+  'ui/empty/styling': Example256,
+  'ui/input-number/affixes': Example257,
+  'ui/input-number/basic': Example258,
+  'ui/input-number/constraints': Example259,
+  'ui/input-number/controls': Example260,
+  'ui/input-number/custom-logic': Example261,
+  'ui/input-number/editing': Example262,
+  'ui/input-number/formatter': Example263,
+  'ui/input-number/keyboard': Example264,
+  'ui/input-number/range': Example265,
+  'ui/input-number/semantic-styles': Example266,
+  'ui/input-number/validation': Example267,
+  'ui/input/affixes': Example268,
+  'ui/input/basic': Example269,
+  'ui/input/controlled': Example270,
+  'ui/input/focus': Example271,
+  'ui/input/group': Example272,
+  'ui/input/password': Example273,
+  'ui/input/search': Example274,
+  'ui/input/semantic-styles': Example275,
+  'ui/input/sizes': Example276,
+  'ui/input/states': Example277,
+  'ui/input/validation': Example278,
+  'ui/input/variants': Example279,
+  'ui/kbd/basic': Example280,
+  'ui/kbd/button': Example281,
+  'ui/kbd/direction': Example282,
+  'ui/kbd/group': Example283,
+  'ui/popover/arrow': Example284,
+  'ui/popover/basic': Example285,
+  'ui/popover/container': Example286,
+  'ui/popover/controlled': Example287,
+  'ui/popover/custom-logic': Example288,
+  'ui/popover/offsets': Example289,
+  'ui/popover/placement': Example290,
+  'ui/popover/semantic-styles': Example291,
+  'ui/popover/triggers': Example292,
+  'ui/radio/basic': Example293,
+  'ui/radio/button': Example294,
+  'ui/radio/controlled': Example295,
+  'ui/radio/css-variables': Example296,
+  'ui/radio/direction': Example297,
+  'ui/radio/semantic-styles': Example298,
+  'ui/radio/sizes': Example299,
+  'ui/radio/states': Example300,
+  'ui/select/basic': Example301,
+  'ui/select/clear': Example302,
+  'ui/select/controlled': Example303,
+  'ui/select/css-variables': Example304,
+  'ui/select/custom-search': Example305,
+  'ui/select/direction': Example306,
+  'ui/select/empty-demo': Example307,
+  'ui/select/field-names': Example308,
+  'ui/select/group': Example309,
+  'ui/select/local-search': Example310,
+  'ui/select/multiple': Example311,
+  'ui/select/popup-render-demo': Example312,
+  'ui/select/prefix-suffix-demo': Example313,
+  'ui/select/remote-search': Example314,
+  'ui/select/semantic-styles': Example315,
+  'ui/select/single': Example316,
+  'ui/select/virtual': Example317,
+  'ui/separator/basic': Example318,
+  'ui/separator/direction': Example319,
+  'ui/separator/list': Example320,
+  'ui/separator/menu': Example321,
+  'ui/separator/text': Example322,
+  'ui/separator/variants': Example323,
+  'ui/separator/vertical': Example324,
+  'ui/skeleton/animation': Example325,
+  'ui/skeleton/basic': Example326,
+  'ui/skeleton/content': Example327,
+  'ui/skeleton/form': Example328,
+  'ui/skeleton/image': Example329,
+  'ui/skeleton/list': Example330,
+  'ui/skeleton/styles': Example331,
+  'ui/skeleton/table': Example332,
+  'ui/skeleton/width': Example333,
+  'ui/slider/basic': Example334,
+  'ui/slider/css-variables': Example335,
+  'ui/slider/direction': Example336,
+  'ui/slider/disabled': Example337,
+  'ui/slider/draggable-range': Example338,
+  'ui/slider/editable': Example339,
+  'ui/slider/marks': Example340,
+  'ui/slider/range': Example341,
+  'ui/slider/semantic-styles': Example342,
+  'ui/slider/sizes': Example343,
+  'ui/slider/weight': Example344,
+  'ui/spinner/basic': Example345,
+  'ui/spinner/custom-indicator': Example346,
+  'ui/spinner/overlay': Example347,
+  'ui/spinner/sizes': Example348,
+  'ui/spinner/styling': Example349,
+  'ui/switch/basic': Example350,
+  'ui/switch/content': Example351,
+  'ui/switch/controlled': Example352,
+  'ui/switch/css-variables': Example353,
+  'ui/switch/direction': Example354,
+  'ui/switch/disabled': Example355,
+  'ui/switch/loading': Example356,
+  'ui/switch/semantic-styles': Example357,
+  'ui/switch/shape': Example358,
+  'ui/switch/size': Example359,
+  'ui/switch/validation': Example360,
+  'ui/tag/basic': Example361,
+  'ui/tag/colors': Example362,
+  'ui/tag/css-variables': Example363,
+  'ui/tag/direction': Example364,
+  'ui/tag/dynamic': Example365,
+  'ui/tag/semantic-styles': Example366,
+  'ui/tag/variants': Example367,
+  'ui/tooltip/basic': Example368,
+  'ui/tooltip/color': Example369,
+  'ui/tooltip/controlled': Example370,
+  'ui/tooltip/css-variables': Example371,
+  'ui/tooltip/direction': Example372,
+  'ui/tooltip/placement': Example373,
+  'ui/tooltip/semantic-styles': Example374,
 }

@@ -12,7 +12,7 @@
   let {
     title,
     description,
-    items,
+    options,
     multiple = false,
     clearable = false,
     showSearch = false,
@@ -25,7 +25,7 @@
   }: {
     title: string;
     description: string;
-    items: readonly SelectOption[];
+    options: readonly SelectOption[];
     multiple?: boolean;
     clearable?: boolean;
     showSearch?: boolean;
@@ -40,7 +40,7 @@
 
 <Demo {title} {description}
   ><SelectRoot
-    {items}
+    {options}
     {multiple}
     {clearable}
     {showSearch}

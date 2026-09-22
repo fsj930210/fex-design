@@ -185,41 +185,11 @@ export function InputAddonAfter({ className, ref, ...props }: InputAddonAfterPro
 }
 
 export interface InputClearProps extends Omit<ComponentProps<'button'>, 'type'> {
-  forceMount?: boolean
   ref?: Ref<HTMLButtonElement> | undefined
   children?: ReactNode
-}
-
-export interface InputClearButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
-  ref?: Ref<HTMLButtonElement> | undefined
-  children?: ReactNode
-  'data-slot'?: string | undefined
-}
-
-export function InputClearButton({
-  className,
-  children,
-  'aria-label': ariaLabel = 'Clear input',
-  'data-slot': dataSlot = 'input-clear',
-  ref,
-  ...props
-}: InputClearButtonProps) {
-  return (
-    <button
-      {...props}
-      ref={ref}
-      type="button"
-      aria-label={ariaLabel}
-      data-slot={dataSlot}
-      className={cn(inputClearClassName, className)}
-    >
-      {children ?? <CircleXIcon />}
-    </button>
-  )
 }
 
 export function InputClear({
-  forceMount = false,
   className,
   children,
   'aria-label': ariaLabel = 'Clear input',
@@ -228,22 +198,21 @@ export function InputClear({
   ...props
 }: InputClearProps) {
   const input = useInputContext('InputClear')
-  if (!forceMount && !input.canClear) return null
 
   return (
-    <InputClearButton
+    <button
       {...props}
       ref={ref}
+      type="button"
       aria-label={ariaLabel}
-      data-visible={input.canClear ? 'true' : 'false'}
-      disabled={!forceMount && !input.canClear}
-      className={className}
+      data-slot="input-clear"
+      className={cn(inputClearClassName, className)}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {
         onClick?.(event)
         if (!event.defaultPrevented) input.clear()
       }}
     >
-      {children}
-    </InputClearButton>
+      {children ?? <CircleXIcon />}
+    </button>
   )
 }

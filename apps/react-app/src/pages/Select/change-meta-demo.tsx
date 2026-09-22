@@ -28,7 +28,7 @@ export function ChangeMetaDemo() {
       description="onChange returns value plus the complete selected option for backend fields."
     >
       <div className="space-y-2">
-        <SelectRoot items={backendOptions} onChange={handleChange}>
+        <SelectRoot options={backendOptions} onChange={handleChange}>
           <SelectTrigger placeholder="请选择用户" />
           <SelectContent />
         </SelectRoot>

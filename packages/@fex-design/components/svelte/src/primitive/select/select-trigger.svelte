@@ -2,6 +2,7 @@
   import type { SelectOption } from "@fex-design/core/select/types";
   import {
     selectClearClassName,
+    selectClearableIndicatorClassName,
     selectIndicatorClassName,
     selectInputClassName,
     selectPlaceholderClassName,
@@ -16,9 +17,9 @@
   import ChevronRight from '@fex-design/svelte/icons/chevron-right.svelte';
   import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
   import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
-  import { Button } from "@fex-design/svelte/primitive/button";
   import PopoverTrigger from "../popover/popover-trigger.svelte";
   import Tag from "../tag/tag.svelte";
+  import TagAction from "../tag/tag-action.svelte";
   import { selectContextKey, type SelectContext } from "./context";
   interface Props extends Omit<
     HTMLAttributes<HTMLDivElement>,
@@ -35,7 +36,7 @@
   }
   let {
     class: className,
-    placeholder,
+    placeholder = "请选择",
     maxTagCount,
     prefix,
     suffix,
@@ -69,10 +70,8 @@
       select.controller.removeLastSelected();
     else if (event.key === "Escape") select.controller.close();
   }
-  function inputPointerdown(event: PointerEvent) {
-    if (document.activeElement === event.currentTarget)
-      select.controller.toggleOpen();
-    else select.controller.open();
+  function inputPointerdown() {
+    select.controller.open();
   }
   function bridge<T extends Event>(
     handler: ((event: T) => void) | null | undefined,
@@ -89,6 +88,7 @@
       use:slot.action
       data-slot="select-trigger"
       data-disabled={select.disabled() || undefined}
+      data-clearable={select.clearable() && selected().length ? "true" : undefined}
       data-status={select.status()}
       aria-invalid={select.status() === "error" || undefined}
       aria-expanded={$snapshot.open}
@@ -112,15 +112,14 @@
               {#each visible() as item (item.value)}{#if tag}{@render tag(
                     item,
                     () => select.removeValue(item.value),
-                  )}{:else}<Tag
-                    size="sm"
-                    closable
-                    closeLabel={`Remove ${String(item.label)}`}
-                    onpointerdown={(event) => event.preventDefault()}
-                    onClose={(event) => {
-                      event.stopPropagation();
-                      select.removeValue(item.value);
-                    }}>{item.label}</Tag
+                  )}{:else}<Tag size="sm" onpointerdown={(event) => event.preventDefault()}
+                    >{item.label}<TagAction
+                      aria-label={`Remove ${String(item.label)}`}
+                      onclick={(event) => {
+                        event.stopPropagation();
+                        select.removeValue(item.value);
+                      }}
+                    /></Tag
                   >{/if}{/each}{#if selected().length - visible().length > 0}<Tag
                   size="sm">+{selected().length - visible().length}</Tag
                 >{/if}
@@ -157,12 +156,12 @@
       <span data-slot="select-suffix" class={selectSuffixClassName}
         >{#if select.loading()}<LoadingIcon
             class="animate-spin"
-          />{:else}<span class={select.clearable() && selected().length ? "group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0" : undefined}
+          />{:else}<span class={select.clearable() && selected().length ? selectClearableIndicatorClassName : undefined}
           >{#if suffix}{@render suffix()}{:else}<span
             data-state={$snapshot.open ? "open" : "closed"}
             class={selectIndicatorClassName}
             ><ChevronRight class="size-4 rotate-90" /></span>{/if}</span
-          >{#if select.clearable() && selected().length}<Button
+          >{#if select.clearable() && selected().length}<button
             type="button"
             aria-label="Clear selection"
             class={selectClearClassName}
@@ -170,7 +169,7 @@
             onclick={(event) => {
               event.stopPropagation();
               select.controller.clear();
-            }}>{#if clear}{@render clear()}{:else}<CircleXIcon />{/if}</Button>{/if}{/if}</span
+            }}>{#if clear}{@render clear()}{:else}<CircleXIcon />{/if}</button>{/if}{/if}</span
       >
     </div>
   {/snippet}</PopoverTrigger

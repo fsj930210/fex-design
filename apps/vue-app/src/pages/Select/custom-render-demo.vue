@@ -11,7 +11,7 @@ import Demo from './demo-section.vue'
   <Demo
     title="Custom option rendering"
     description="The option slot replaces content while selection and keyboard behavior remain intact."
-    ><SelectRoot :items="frameworkOptions"
+    ><SelectRoot :options="frameworkOptions"
       ><SelectTrigger placeholder="请选择技术" /><SelectContent
         ><template #option="{ option }"
             ><div class="flex items-center justify-between gap-3">

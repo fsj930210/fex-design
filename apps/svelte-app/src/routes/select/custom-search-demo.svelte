@@ -10,7 +10,7 @@
 <Demo
   title="Custom search"
   description="A custom filterOption matches labels by prefix only."
-  items={frameworkOptions}
+  options={frameworkOptions}
   showSearch
   filterOption={filter}
 />

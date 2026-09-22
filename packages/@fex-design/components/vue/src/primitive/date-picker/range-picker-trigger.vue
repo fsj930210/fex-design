@@ -179,7 +179,6 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
       </InputRoot>
       <InputClear
         v-if="canClear()"
-        :force-mount="true"
         aria-label="清除日期范围"
         @pointerdown.stop.prevent
         @click.stop.prevent="context.clear()"

@@ -4,7 +4,7 @@
   description="change returns value plus the complete selected option."
 >
   <div class="max-w-md space-y-2">
-    <div selectRoot [items]="options" (change)="update($event)"
+    <div selectRoot [options]="options" (change)="update($event)"
       ><div selectTrigger placeholder="请选择用户" ></div><div selectContent
         ></div
     ></div>

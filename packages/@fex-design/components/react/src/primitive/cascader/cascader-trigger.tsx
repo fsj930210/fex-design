@@ -13,7 +13,6 @@ import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { XIcon } from '@fex-design/react/icons/x'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
-import { InputClearButton } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
 import { Tag } from '../tag/tag'
 import { useCascader } from './cascader-context'
@@ -85,7 +84,8 @@ export function CascaderTrigger({
             {cascader.loading ? (
               <LoadingIcon className="animate-spin" />
             ) : cascader.clearable && hasValue ? (
-              <InputClearButton
+              <button
+                type="button"
                 className={cascaderClearClassName}
                 aria-label="Clear selection"
                 onClick={(event) => {
@@ -94,7 +94,7 @@ export function CascaderTrigger({
                 }}
               >
                 <XIcon />
-              </InputClearButton>
+              </button>
             ) : (
               <span
                 data-state={cascader.snapshot.open ? 'open' : 'closed'}

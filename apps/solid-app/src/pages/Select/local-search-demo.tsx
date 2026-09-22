@@ -8,7 +8,7 @@ export function LocalSearchDemo() {
       title="Local search"
       description="filterOption filters locally and onSearch still receives every keyword."
     >
-      <SelectRoot showSearch filterOption={defaultSelectFilterOption} items={frameworkOptions}>
+      <SelectRoot showSearch filterOption={defaultSelectFilterOption} options={frameworkOptions}>
         <SelectTrigger placeholder="搜索选项" />
         <SelectContent />
       </SelectRoot>

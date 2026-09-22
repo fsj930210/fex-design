@@ -22,6 +22,7 @@ import {
 } from '@angular/core'
 import {
   SelectContent,
+  SelectList,
   SelectRoot,
   SelectTrigger,
   type SelectChangeMeta,
@@ -39,17 +40,18 @@ export interface SelectInputProps {
 export interface SelectPopoverProps {
   open?: boolean
   defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 @Component({
   selector: 'div[select]',
   standalone: true,
-  imports: [NgTemplateOutlet, SelectRoot, SelectTrigger, SelectContent],
+  imports: [NgTemplateOutlet, SelectRoot, SelectTrigger, SelectContent, SelectList],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select.html',
 })
 export class Select<TItem extends object = SelectOption> {
-  readonly items = input.required<readonly SelectItem<TItem>[]>()
+  readonly options = input.required<readonly SelectItem<TItem>[]>()
   readonly fieldNames = input<SelectFieldNames<TItem>>(
     { value: 'value', label: 'label' } as SelectFieldNames<TItem>,
   )
@@ -61,6 +63,7 @@ export class Select<TItem extends object = SelectOption> {
   readonly disabled = input(false, { transform: booleanAttribute })
   readonly loading = input(false, { transform: booleanAttribute })
   readonly placeholder = input('')
+  readonly emptyText = input('No options')
   readonly maxCount = input<number>()
   readonly maxTagCount = input<number>()
   readonly virtual = input<SelectVirtualOptions>()
@@ -73,12 +76,18 @@ export class Select<TItem extends object = SelectOption> {
     meta: SelectChangeMeta
   }>()
   readonly search = output<string>()
+  readonly openChange = output<boolean>()
   readonly prefix = contentChild<TemplateRef<void>>('prefix')
   readonly suffix = contentChild<TemplateRef<void>>('suffix')
   readonly clear = contentChild<TemplateRef<void>>('clear')
-  protected readonly options = computed(() =>
-    normalizeSelectOptions(this.items(), this.fieldNames()),
+  readonly footer = contentChild<TemplateRef<void>>('footer')
+  protected readonly normalizedOptions = computed(() =>
+    normalizeSelectOptions(this.options(), this.fieldNames()),
   )
+  protected handleOpenChange(open: boolean) {
+    this.popoverProps().onOpenChange?.(open)
+    this.openChange.emit(open)
+  }
 }
 
 export type { SelectFieldNames, SelectFilterOption, SelectOption, SelectVirtualOptions }

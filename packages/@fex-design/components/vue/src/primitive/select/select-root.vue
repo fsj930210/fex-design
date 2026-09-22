@@ -22,7 +22,7 @@ interface SelectChangeMeta {
 
 const props = withDefaults(
   defineProps<{
-    items?: readonly SelectOption[]
+    options?: readonly SelectOption[]
     value?: SelectionValue | SelectionValue[]
     defaultValue?: SelectionValue | SelectionValue[]
     multiple?: boolean
@@ -39,7 +39,7 @@ const props = withDefaults(
     popoverProps?: Record<string, unknown>
   }>(),
   {
-    items: () => [],
+    options: () => [],
     disabled: false,
     clearable: false,
     loading: false,
@@ -64,18 +64,18 @@ const selection = createSelectionController({
     return isMultiple.value
   },
   get disabledValues() {
-    return props.items.filter((option) => option.disabled).map((option) => option.value)
+    return props.options.filter((option) => option.disabled).map((option) => option.value)
   },
   onChange(values, meta) {
     const selectedItems = values.map(
       (value) =>
-        props.items.find((option) => option.value === value) ?? { value, label: String(value) },
+        props.options.find((option) => option.value === value) ?? { value, label: String(value) },
     )
     const selectedItem =
       meta.changedValues
         .map(
           (value) =>
-            props.items.find((option) => option.value === value) ?? {
+            props.options.find((option) => option.value === value) ?? {
               value,
               label: String(value),
             },
@@ -94,7 +94,7 @@ controller = createSelectController({
   selection,
   get options() {
     return filterSelectOptions(
-      props.items,
+      props.options,
       controller.getSnapshot().searchValue,
       props.filterOption,
     )
@@ -115,11 +115,11 @@ controller = createSelectController({
   onSearch: (keyword) => emit('search', keyword),
 })
 const snapshot = useCoreStore(controller)
-const options = computed(() => props.items)
+const options = computed(() => props.options)
 const visibleOptions = computed(() =>
   props.filterOption
-    ? filterSelectOptions(props.items, snapshot.value.searchValue, props.filterOption)
-    : props.items,
+    ? filterSelectOptions(props.options, snapshot.value.searchValue, props.filterOption)
+    : props.options,
 )
 const selectedOptions = computed(() => {
   void snapshot.value.selectedValues
@@ -127,7 +127,7 @@ const selectedOptions = computed(() => {
     .getSnapshot()
     .values.map(
       (value) =>
-        props.items.find((option) => option.value === value) ?? { value, label: String(value) },
+        props.options.find((option) => option.value === value) ?? { value, label: String(value) },
     )
 })
 provide(selectKey, {

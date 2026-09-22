@@ -15,7 +15,7 @@
   import { selectContextKey, type SelectContext } from "./context";
   interface Props {
     children?: Snippet | undefined;
-    items?: readonly SelectOption[] | undefined;
+    options?: readonly SelectOption[] | undefined;
     multiple?: boolean | undefined;
     value?: SelectionValue | SelectionValue[] | undefined;
     defaultValue?: SelectionValue | SelectionValue[] | undefined;
@@ -46,7 +46,7 @@
   }
   let {
     children,
-    items = [],
+    options = [],
     multiple = false,
     value,
     defaultValue,
@@ -77,11 +77,11 @@
       return isMultiple();
     },
     get disabledValues() {
-      return items.filter((item) => item.disabled).map((item) => item.value);
+      return options.filter((option) => option.disabled).map((option) => option.value);
     },
     onChange(values, meta) {
       const resolve = (item: SelectionValue) =>
-        items.find((option) => option.value === item) ?? {
+        options.find((option) => option.value === item) ?? {
           value: item,
           label: String(item),
         };
@@ -103,7 +103,7 @@
     selection,
     get options() {
       return filterSelectOptions(
-        items,
+        options,
         controller.getSnapshot().searchValue,
         filterOption,
       );
@@ -128,10 +128,10 @@
   const context: SelectContext = {
     controller,
     snapshot,
-    options: () => items,
+    options: () => options,
     visibleOptions: () =>
       filterSelectOptions(
-        items,
+        options,
         controller.getSnapshot().searchValue,
         filterOption,
       ),
@@ -139,7 +139,7 @@
       controller.getSnapshot();
       return selection.getSnapshot().values.map(
         (item) =>
-          items.find((option) => option.value === item) ?? {
+          options.find((option) => option.value === item) ?? {
             value: item,
             label: String(item),
           },

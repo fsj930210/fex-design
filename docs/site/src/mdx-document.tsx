@@ -36,7 +36,7 @@ export function MdxDocument(props: {
         const uiScenes = componentExamples[props.slug].ui || []
         const primScenes = componentExamples[props.slug].primitive || []
         const seen = new Set<string>()
-        const list: Array<{ id: string; title: string; description: string }> = []
+        const list: Array<{ id: string; title: string; description: string; height?: number }> = []
         for (const s of [...uiScenes, ...primScenes]) {
           if (!seen.has(s.id)) {
             seen.add(s.id)

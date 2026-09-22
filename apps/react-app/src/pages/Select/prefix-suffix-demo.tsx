@@ -15,14 +15,14 @@ export function PrefixSuffixDemo() {
       description="prefix decorates the input; suffix replaces only the default dropdown chevron."
     >
       <div className="space-y-2">
-        <SelectRoot items={frameworkOptions}>
+        <SelectRoot options={frameworkOptions}>
           <SelectTrigger
             prefix={<InfoIcon className="size-4 text-muted-foreground" />}
             placeholder="带前缀"
           />
           <SelectContent />
         </SelectRoot>
-        <SelectRoot items={frameworkOptions}>
+        <SelectRoot options={frameworkOptions}>
           <SelectTrigger suffix={<CheckIcon />} placeholder="自定义后缀" />
           <SelectContent />
         </SelectRoot>

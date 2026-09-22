@@ -5,6 +5,7 @@
     isPreviewHostMessage,
   } from "@fex-design/docs-shared/preview-protocol";
   import type { ApiValue } from "@fex-design/docs-shared/model";
+  import { observeRuntimeHeight } from "../../runtime-resize";
 
   let values: Record<string, ApiValue> = $state({});
   const query = new URLSearchParams(location.search);
@@ -82,25 +83,24 @@
     };
     addEventListener("message", receive);
     const runtime = document.querySelector<HTMLElement>(".runtime")!;
-    const sendResize = () =>
-      send("resize", { height: Math.ceil(runtime.scrollHeight) });
-    const observer = new ResizeObserver(sendResize);
-    observer.observe(runtime);
+    const stopObservingHeight = observeRuntimeHeight(runtime, (height) =>
+      send("resize", { height }),
+    );
     send("ready");
-    sendResize();
     return () => {
       removeEventListener("message", receive);
-      observer.disconnect();
+      stopObservingHeight();
     };
   });
 </script>
 
 <div
-  class="runtime box-border grid min-h-30 place-items-center p-8"
+  class="runtime box-border grid place-items-center p-8"
+  class:min-h-screen={!embedded}
   data-embed={embedded ? "true" : undefined}
 >
   {#if loading}
-    <div class="box-border grid min-h-30 place-items-center"></div>
+    <div class="grid h-full place-items-center"></div>
   {:else if Example}
     <Example />
   {:else}

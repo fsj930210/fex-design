@@ -79,7 +79,7 @@ export function AutoCompleteTrigger(props: AutoCompleteTriggerProps) {
             }}
             onKeyDown={keydown}
           />
-          {local.clearable ? <InputClear /> : null}
+          {local.clearable && autoComplete.snapshot().value ? <InputClear /> : null}
           {(autoComplete.loading() || local.suffix) && (
             <InputSuffix>
               {autoComplete.loading() ? <LoadingIcon class="animate-spin" /> : local.suffix}

@@ -8,7 +8,7 @@
   import SelectContent from '@fex-design/svelte/primitive/select/select-content.svelte';
 
   interface Props {
-    items: readonly SelectItem<TItem>[];
+    options: readonly SelectItem<TItem>[];
     fieldNames?: SelectFieldNames<TItem>;
     value?: SelectionValue | SelectionValue[];
     defaultValue?: SelectionValue | SelectionValue[];
@@ -26,26 +26,35 @@
     virtual?: SelectVirtualOptions;
     status?: "error" | "warning";
     inputProps?: import('svelte/elements').HTMLInputAttributes;
-    popoverProps?: Record<string, unknown>;
+    popoverProps?: Record<string, unknown> & {
+      open?: boolean;
+      defaultOpen?: boolean;
+      onOpenChange?: (open: boolean) => void;
+    };
     prefix?: Snippet;
     suffix?: Snippet;
     clear?: Snippet;
+    emptyText?: string;
+    footer?: Snippet;
   }
   let {
-    items, fieldNames, value, defaultValue, multiple, onChange, searchable,
+    options: sourceOptions, fieldNames, value, defaultValue, multiple, onChange, searchable,
     filterOption, onSearch, clearable, disabled, loading, placeholder,
     maxCount, maxTagCount, virtual, status, inputProps, popoverProps = {},
-    prefix, suffix, clear,
+    prefix, suffix, clear, emptyText, footer,
   }: Props = $props();
   const options = $derived(normalizeSelectOptions(
-    items,
+    sourceOptions,
     fieldNames ?? ({ value: "value", label: "label" } as SelectFieldNames<TItem>),
   ));
 </script>
 
 <SelectRoot
   {popoverProps}
-  items={options}
+  open={popoverProps.open}
+  defaultOpen={popoverProps.defaultOpen}
+  onOpenChange={popoverProps.onOpenChange}
+  {options}
   {value}
   {defaultValue}
   {multiple}
@@ -61,5 +70,5 @@
   {status}
 >
   <SelectTrigger {placeholder} {maxTagCount} {prefix} {suffix} {clear} {inputProps} />
-  <SelectContent />
+  <SelectContent {emptyText} {footer} />
 </SelectRoot>

@@ -11,7 +11,7 @@ export function EmptyDemo() {
       title="Empty"
       description="Empty content is explicit so products can provide domain-specific guidance."
     >
-      <SelectRoot items={[]}>
+      <SelectRoot options={[]}>
         <SelectTrigger placeholder="暂无可选项" />
         <SelectContent emptyContent="No technologies available" />
       </SelectRoot>

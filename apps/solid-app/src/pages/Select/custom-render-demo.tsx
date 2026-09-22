@@ -11,7 +11,7 @@ export function CustomRenderDemo() {
       title="Custom option rendering"
       description="optionRender replaces option content while shared behavior remains intact."
     >
-      <SelectRoot items={frameworkOptions}>
+      <SelectRoot options={frameworkOptions}>
         <SelectTrigger placeholder="请选择技术" />
         <SelectContent
           optionRender={(option) => (

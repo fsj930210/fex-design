@@ -22,7 +22,7 @@ export
 class SimpleSelectDemo {
   @Input({ required: true }) title = ''
   @Input({ required: true }) description = ''
-  @Input() items: readonly SelectOption[] = []
+  @Input() options: readonly SelectOption[] = []
   @Input() multiple = false
   @Input() clearable = false
   @Input() showSearch = false

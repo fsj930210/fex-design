@@ -20,7 +20,7 @@ export interface SelectChangeMeta {
   changedValues: SelectionValue[]
 }
 export interface SelectRootProps extends ParentProps {
-  items?: readonly SelectOption[]
+  options?: readonly SelectOption[]
   multiple?: boolean
   value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
@@ -52,11 +52,11 @@ export function SelectRoot(props: SelectRootProps) {
       return multiple()
     },
     get disabledValues() {
-      return props.items?.filter((item) => item.disabled).map((item) => item.value)
+      return props.options?.filter((option) => option.disabled).map((option) => option.value)
     },
     onChange(values, meta) {
       const resolve = (value: SelectionValue) =>
-        props.items?.find((item) => item.value === value) ?? { value, label: String(value) }
+        props.options?.find((option) => option.value === value) ?? { value, label: String(value) }
       const selectedItems = values.map(resolve)
       const selectedItem =
         meta.changedValues.map(resolve).find((item) => values.includes(item.value)) ??
@@ -74,7 +74,7 @@ export function SelectRoot(props: SelectRootProps) {
     selection,
     get options() {
       return filterSelectOptions(
-        props.items ?? [],
+        props.options ?? [],
         controller.getSnapshot().searchValue,
         props.filterOption,
       )
@@ -95,7 +95,7 @@ export function SelectRoot(props: SelectRootProps) {
     onSearch: (keyword) => props.onSearch?.(keyword),
   })
   const snapshot = createCoreStoreSignal(controller)
-  const options = () => props.items ?? []
+  const options = () => props.options ?? []
   const visibleOptions = createMemo(() =>
     filterSelectOptions(options(), snapshot().searchValue, props.filterOption),
   )

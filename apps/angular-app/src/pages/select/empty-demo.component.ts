@@ -6,6 +6,6 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Empty" description="An explicit empty state is rendered." [items]="[]" />',
+    '<select-simple-demo title="Empty" description="An explicit empty state is rendered." [options]="[]" />',
 })
 class EmptyDemo {}

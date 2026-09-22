@@ -1,0 +1,7 @@
+import { Select } from '@fex-design/react/ui/select'
+
+const options = [{ value: 'react', label: 'React' }, { value: 'vue', label: 'Vue' }]
+
+export default function Example() {
+  return <Select className="w-72" options={options} inputProps={{ prefix: '框架', suffix: '⌘K' }} placeholder="请选择" />
+}

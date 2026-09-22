@@ -1,0 +1,1 @@
+import { Select } from '@fex-design/react/ui/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]; export default function Example(){return <Select className="w-72 [--input-background:#faf5ff] [--input-border-color:#c084fc] [--input-ring-color:#9333ea]" options={options} placeholder="请选择框架"/>}

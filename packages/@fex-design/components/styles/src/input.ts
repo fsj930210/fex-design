@@ -1,10 +1,14 @@
 import { cva } from 'class-variance-authority'
 
+export const inputFocusClassName =
+  'focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-3 focus-within:ring-[var(--input-ring-color,var(--focus-ring))]'
+
 const inputBaseClassName = [
-  'group/input-root relative flex h-(--input-height) w-full min-w-0 items-stretch overflow-hidden rounded-md border bg-[var(--input-background,var(--background))] text-[var(--input-color,var(--foreground))]',
+  'group/input-root relative flex h-(--input-height) w-full min-w-0 items-stretch gap-2 overflow-hidden rounded-md border bg-[var(--input-background,var(--background))] text-[var(--input-color,var(--foreground))]',
   '[--input-height:var(--input-height-md,var(--height-md))] [--input-icon-size:var(--input-icon-size-md,var(--icon-size-md))] [--input-clear-icon-size:0.875rem]',
   'border-[var(--input-border-color,var(--border))] outline-none transition-colors',
-  'hover:border-foreground/30 focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-3 focus-within:ring-[var(--input-ring-color,var(--focus-ring))]',
+  'hover:border-foreground/30',
+  inputFocusClassName,
   'has-[[aria-invalid=true]]:border-danger has-[[aria-invalid=true]]:ring-3 has-[[aria-invalid=true]]:ring-danger/20',
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-disabled-background data-[disabled=true]:text-disabled-foreground data-[disabled=true]:opacity-70',
 ].join(' ')

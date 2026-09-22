@@ -12,6 +12,7 @@ import { createSelectionController } from '@fex-design/core/selection/create-sel
 import type { SelectionValue } from '@fex-design/core/selection/types'
 import {
   selectClearClassName,
+  selectClearableIndicatorClassName,
   selectContentClassName,
   selectIndicatorClassName,
   selectInputClassName,
@@ -46,7 +47,6 @@ import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
-import { Button } from '../button/button'
 import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
 
 export interface SelectChangeMeta {
@@ -68,10 +68,10 @@ export class SelectRoot implements OnChanges {
   private readonly optionsState = signal<readonly SelectOption[]>([])
   private readonly loadingState = signal(false)
   @Input()
-  set items(value: readonly SelectOption[]) {
+  set options(value: readonly SelectOption[]) {
     this.optionsState.set(value)
   }
-  get items() {
+  get options() {
     return this.optionsState()
   }
   @Input() multiple = false
@@ -120,12 +120,12 @@ export class SelectRoot implements OnChanges {
         return root.isMultiple
       },
       get disabledValues() {
-        return root.items.filter((item) => item.disabled).map((item) => item.value)
+        return root.options.filter((option) => option.disabled).map((option) => option.value)
       },
       onChange(values, meta) {
         if (root.suppressChange) return
         const resolve = (value: SelectionValue) =>
-          root.items.find((item) => item.value === value) ?? { value, label: String(value) }
+          root.options.find((option) => option.value === value) ?? { value, label: String(value) }
         const selectedItems = values.map(resolve)
         const selectedItem =
           meta.changedValues.map(resolve).find((item) => values.includes(item.value)) ??
@@ -146,7 +146,7 @@ export class SelectRoot implements OnChanges {
       selection: this.selection,
       get options() {
         return filterSelectOptions(
-          root.items,
+          root.options,
           controller.getSnapshot().searchValue,
           root.filterOption,
         )
@@ -203,7 +203,7 @@ export class SelectRoot implements OnChanges {
     return this.showSearch
   }
   get visibleOptions() {
-    return filterSelectOptions(this.items, this.snapshot().searchValue, this.filterOption)
+    return filterSelectOptions(this.options, this.snapshot().searchValue, this.filterOption)
   }
   get selectedOptions() {
     this.snapshot()
@@ -211,7 +211,7 @@ export class SelectRoot implements OnChanges {
       .getSnapshot()
       .values.map(
         (value) =>
-          this.items.find((item) => item.value === value) ?? { value, label: String(value) },
+          this.options.find((option) => option.value === value) ?? { value, label: String(value) },
       )
   }
   syncOpen(next: boolean) {
@@ -228,7 +228,6 @@ export class SelectRoot implements OnChanges {
   imports: [
     NgTemplateOutlet,
     PopoverTrigger,
-    Button,
     CircleXIcon,
     LoadingIcon,
     Tag,
@@ -239,7 +238,7 @@ export class SelectRoot implements OnChanges {
 })
 export class SelectTrigger {
   readonly select = inject(SelectRoot)
-  @Input() placeholder = ''
+  @Input() placeholder = '请选择'
   @Input() maxTagCount: number | undefined
   @ContentChild('prefix') prefix?: TemplateRef<void>
   @ContentChild('suffix') suffix?: TemplateRef<void>
@@ -252,6 +251,7 @@ export class SelectTrigger {
   readonly suffixClass = selectSuffixClassName
   readonly indicatorClass = selectIndicatorClassName
   readonly clearClass = selectClearClassName
+  readonly clearableIndicatorClass = selectClearableIndicatorClassName
   get visibleSelected() {
     return this.maxTagCount === undefined
       ? this.select.selectedOptions
@@ -267,10 +267,8 @@ export class SelectTrigger {
     this.select.controller.setSearchValue((event.currentTarget as HTMLInputElement).value)
     this.select.controller.open()
   }
-  inputPointerdown(event: PointerEvent) {
-    const input = event.currentTarget as HTMLInputElement
-    if (document.activeElement === input) this.select.controller.toggleOpen()
-    else this.select.controller.open()
+  inputPointerdown() {
+    this.select.controller.open()
   }
   keydown(event: KeyboardEvent) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {

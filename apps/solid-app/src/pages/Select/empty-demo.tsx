@@ -10,7 +10,7 @@ export function EmptyDemo() {
       title="Empty"
       description="An explicit empty state is rendered when there are no options."
     >
-      <SelectRoot items={[]}>
+      <SelectRoot options={[]}>
         <SelectTrigger placeholder="请选择" />
         <SelectContent />
       </SelectRoot>

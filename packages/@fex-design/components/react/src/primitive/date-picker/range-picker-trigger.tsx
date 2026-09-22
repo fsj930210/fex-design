@@ -7,11 +7,12 @@ import {
   datePickerRangeSeparatorClassName,
   datePickerRangeTriggerClassName,
 } from '@fex-design/components-styles/date-picker'
+import { inputClearClassName } from '@fex-design/components-styles/input'
 import { CalendarIcon } from '@fex-design/react/icons/calendar'
+import { CircleXIcon } from '@fex-design/react/icons/circle-x'
 import { cn } from '@fex-design/utils'
 import useUpdateEffect from '@fex-design/react/hooks/use-update-effect'
 import {
-  InputClearButton,
   InputControl,
   InputRoot,
   InputSuffix,
@@ -157,14 +158,18 @@ export function RangePickerTrigger({
               ariaInvalid={status === 'error'}
             />
             {context.allowClear && hasValue ? (
-              <InputClearButton
+              <button
+                type="button"
+                className={inputClearClassName}
                 aria-label="清除日期范围"
                 onPointerDown={(event) => event.stopPropagation()}
                 onClick={(event) => {
                   event.stopPropagation()
                   context.clear()
                 }}
-              />
+              >
+                <CircleXIcon />
+              </button>
             ) : (
               <InputSuffix>{suffix ?? <CalendarIcon className="size-4" />}</InputSuffix>
             )}

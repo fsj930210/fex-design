@@ -30,7 +30,7 @@ const required = {
             ><SelectRoot
               :value="state.value"
               :status="state.meta.errors.length ? 'error' : undefined"
-              :items="frameworkOptions"
+              :options="frameworkOptions"
               @change="field.handleChange($event)"
               ><SelectTrigger placeholder="请选择" /><SelectContent /></SelectRoot></FieldControl
           ><FieldError :errors="state.meta.errors" /></FieldRoot></Field

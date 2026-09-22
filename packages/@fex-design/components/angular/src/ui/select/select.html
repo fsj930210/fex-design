@@ -1,6 +1,6 @@
 <div
   selectRoot
-  [items]="options()"
+  [options]="normalizedOptions()"
   [value]="value()"
   [defaultValue]="defaultValue()"
   [multiple]="multiple()"
@@ -14,6 +14,7 @@
   [status]="status()"
   [open]="popoverProps().open"
   [defaultOpen]="popoverProps().defaultOpen ?? false"
+  (openChange)="handleOpenChange($event)"
   (change)="change.emit($event)"
   (search)="search.emit($event)"
 >
@@ -22,5 +23,8 @@
     @if (suffix(); as template) { <ng-template #suffix><ng-container *ngTemplateOutlet="template" /></ng-template> }
     @if (clear(); as template) { <ng-template #clear><ng-container *ngTemplateOutlet="template" /></ng-template> }
   </div>
-  <div selectContent></div>
+  <div selectContent>
+    <div selectList [emptyText]="emptyText()"></div>
+    @if (footer(); as template) { <ng-container *ngTemplateOutlet="template" /> }
+  </div>
 </div>

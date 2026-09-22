@@ -6,7 +6,7 @@
 <Demo
   title="Clear"
   description="Clear and the dropdown indicator share one suffix position."
-  items={frameworkOptions}
+  options={frameworkOptions}
   clearable
   defaultValue="solid"
 />

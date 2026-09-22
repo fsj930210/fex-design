@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   selectClearClassName,
+  selectClearableIndicatorClassName,
   selectIndicatorClassName,
   selectInputClassName,
   selectSuffixClassName,
@@ -12,7 +13,6 @@ import { computed, useSlots } from 'vue'
 import { ChevronDownIcon } from '@fex-design/vue/icons/chevron'
 import { CircleXIcon } from '@fex-design/vue/icons/circle-x'
 import { LoadingIcon } from '@fex-design/vue/icons/loading'
-import PrimitiveButton from '../button/button.vue'
 import PopoverTrigger from '../popover/popover-trigger.vue'
 import SelectValue from './select-value.vue'
 import { useSelect } from './use-select'
@@ -26,6 +26,7 @@ const props = defineProps<{
 const select = useSelect('SelectTrigger')
 const slots = useSlots()
 const className = computed(() => cn(selectTriggerClassName(), props.class))
+const placeholder = computed(() => props.placeholder ?? '请选择')
 function keydown(event: KeyboardEvent) {
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault()
@@ -45,10 +46,8 @@ function input(event: Event) {
   select.controller.setSearchValue((event.target as HTMLInputElement).value)
   select.controller.open()
 }
-function inputPointerdown(event: PointerEvent) {
-  const inputElement = event.currentTarget as HTMLInputElement
-  if (document.activeElement === inputElement) select.controller.toggleOpen()
-  else select.controller.open()
+function inputPointerdown() {
+  select.controller.open()
 }
 </script>
 <template>
@@ -59,6 +58,7 @@ function inputPointerdown(event: PointerEvent) {
       role="presentation"
       data-slot="select-trigger"
       :data-disabled="select.disabled.value || undefined"
+      :data-clearable="select.clearable.value && select.selectedOptions.value.length ? 'true' : undefined"
       :data-status="select.status.value"
       :class="className"
       @keydown="keydown"
@@ -66,7 +66,7 @@ function inputPointerdown(event: PointerEvent) {
       <slot name="prefix" />
       <div :class="selectValueContainerClassName">
         <SelectValue
-          :placeholder="select.showSearch.value ? undefined : props.placeholder"
+          :placeholder="select.showSearch.value ? undefined : placeholder"
           :max-tag-count="props.maxTagCount"
           ><template #tag="slotProps"><slot name="tag" v-bind="slotProps" /></template
           ><template #value="slotProps"
@@ -81,7 +81,7 @@ function inputPointerdown(event: PointerEvent) {
           :readonly="!select.showSearch.value"
           :placeholder="
             select.showSearch.value && !select.selectedOptions.value.length
-              ? props.placeholder
+              ? placeholder
               : undefined
           "
           :value="select.snapshot.value.searchValue"
@@ -100,11 +100,11 @@ function inputPointerdown(event: PointerEvent) {
       <span data-slot="select-suffix" :class="selectSuffixClassName">
         <LoadingIcon v-if="select.loading.value" class="animate-spin" />
         <template v-else>
-        <span :class="select.clearable.value && select.selectedOptions.value.length ? 'group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0' : undefined">
+        <span :class="select.clearable.value && select.selectedOptions.value.length ? selectClearableIndicatorClassName : undefined">
           <slot v-if="slots.suffix" name="suffix" />
           <span v-else :data-state="select.snapshot.value.open ? 'open' : 'closed'" :class="selectIndicatorClassName"><ChevronDownIcon /></span>
         </span>
-        <PrimitiveButton
+        <button
           v-if="select.clearable.value && select.selectedOptions.value.length"
           type="button"
           aria-label="Clear selection"
@@ -112,7 +112,7 @@ function inputPointerdown(event: PointerEvent) {
           @pointerdown.prevent
           @click.stop="select.controller.clear()"
           ><slot name="clear"><CircleXIcon /></slot
-        ></PrimitiveButton>
+        ></button>
         </template>
       </span>
     </div>

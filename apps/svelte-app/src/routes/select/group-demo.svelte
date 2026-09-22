@@ -6,5 +6,5 @@
 <Demo
   title="Group"
   description="Options sharing a group render below a stable group label."
-  items={frameworkOptions}
+  options={frameworkOptions}
 />

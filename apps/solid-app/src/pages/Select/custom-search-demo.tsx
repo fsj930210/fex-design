@@ -6,7 +6,7 @@ export function CustomSearchDemo() {
     <Demo title="Custom search" description="A custom filterOption matches labels by prefix only.">
       <SelectRoot
         showSearch
-        items={frameworkOptions}
+        options={frameworkOptions}
         filterOption={(keyword, option) =>
           option.label.toLocaleLowerCase().startsWith(keyword.trim().toLocaleLowerCase())
         }

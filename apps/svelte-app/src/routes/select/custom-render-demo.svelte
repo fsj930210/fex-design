@@ -9,7 +9,7 @@
 <Demo
   title="Custom option rendering"
   description="The option snippet replaces content while behavior remains intact."
-  ><SelectRoot items={frameworkOptions}
+  ><SelectRoot options={frameworkOptions}
     ><SelectTrigger placeholder="请选择技术" /><SelectContent
         >{#snippet option(item)}<div
             class="flex items-center justify-between gap-3"

@@ -84,7 +84,7 @@
         }}
         onkeydown={keydown}
       />
-      {#if clearable}<InputClear />{/if}
+      {#if clearable && $snapshot.value}<InputClear />{/if}
       {#if autoComplete.loading() || suffix}<InputSuffix
           >{#if autoComplete.loading()}<LoadingIcon
               class="animate-spin"

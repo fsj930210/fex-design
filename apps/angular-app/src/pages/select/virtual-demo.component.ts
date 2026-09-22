@@ -7,7 +7,7 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Virtual scrolling" description="Only visible options mount from 1,000 entries." [items]="options" [showSearch]="true" [virtual]="virtual" />',
+    '<select-simple-demo title="Virtual scrolling" description="Only visible options mount from 1,000 entries." [options]="options" [showSearch]="true" [virtual]="virtual" />',
 })
 class VirtualDemo {
   protected readonly options = virtualOptions

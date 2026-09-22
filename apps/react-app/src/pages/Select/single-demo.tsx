@@ -12,7 +12,7 @@ export function SingleDemo() {
       title="Single"
       description="Single selection closes the panel after choosing an option."
     >
-      <SelectRoot items={frameworkOptions} defaultValue="react">
+      <SelectRoot options={frameworkOptions} defaultValue="react">
         <SelectTrigger placeholder="请选择框架" />
         <SelectContent />
       </SelectRoot>

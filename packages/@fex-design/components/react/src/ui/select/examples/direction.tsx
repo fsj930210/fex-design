@@ -1,0 +1,1 @@
+import { Select } from '@fex-design/react/ui/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]; export default function Example(){return <div className="grid w-full grid-cols-2 gap-4"><div dir="ltr"><Select options={options} placeholder="Select framework"/></div><div dir="rtl"><Select options={options} placeholder="اختر إطار العمل"/></div></div>}

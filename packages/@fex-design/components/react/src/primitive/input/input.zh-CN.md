@@ -56,7 +56,7 @@
 
 ## 组合结构
 
-Prefix 和 Suffix 位于 InputRoot 内，只承载内容。Addon 是 InputGroup 中 InputRoot 的兄弟节点，因此 Input 聚焦环不覆盖 Addon。InputClear 在 `sm`、`md`、`lg` 下分别使用 12px、14px、16px 图标，只有输入有值且处于交互状态时才显示。
+Prefix 和 Suffix 位于 InputRoot 内，只承载内容。Addon 是 InputGroup 中 InputRoot 的兄弟节点，因此 Input 聚焦环不覆盖 Addon。InputClear 被组合后始终渲染，是否存在由使用者决定；其图标在 `sm`、`md`、`lg` 下分别为 12px、14px、16px。
 
 InputGroup 对任意直接子元素生效：首项仅保留起始侧圆角，末项仅保留结束侧圆角，中间连接处无圆角。`--input-group-radius` 可在全局、单个 Group 或直接子元素上覆盖。
 

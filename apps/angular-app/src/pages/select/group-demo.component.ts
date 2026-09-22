@@ -7,7 +7,7 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Group" description="Options sharing a group render below a label." [items]="options" />',
+    '<select-simple-demo title="Group" description="Options sharing a group render below a label." [options]="options" />',
 })
 class GroupDemo {
   protected readonly options = frameworkOptions

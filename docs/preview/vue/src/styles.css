@@ -1,4 +1,5 @@
 @import "@fex-design/styles";
+@import "../../runtime.css";
 @source "../../../../packages/@fex-design/components/vue";
 @source "../../../../packages/@fex-design/components/styles/src";
 @source "../../../../docs/preview/vue/src";

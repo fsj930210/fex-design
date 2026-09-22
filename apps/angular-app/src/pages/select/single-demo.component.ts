@@ -7,7 +7,7 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Single" description="Single selection closes the panel after choosing an option." [items]="options" defaultValue="react" />',
+    '<select-simple-demo title="Single" description="Single selection closes the panel after choosing an option." [options]="options" defaultValue="react" />',
 })
 class SingleDemo {
   protected readonly options = frameworkOptions

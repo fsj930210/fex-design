@@ -1,0 +1,1 @@
+<script setup lang="ts">import { Select } from '@fex-design/vue/ui/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]</script><template><Select class="w-72 [--input-background:#faf5ff] [--input-border-color:#c084fc] [--input-ring-color:#9333ea]" :options="options" /></template>

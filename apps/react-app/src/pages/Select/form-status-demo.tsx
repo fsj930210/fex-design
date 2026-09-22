@@ -44,7 +44,7 @@ export function FormStatusDemo() {
                     <SelectRoot
                       value={field.state.value as string}
                       {...(invalid ? { status: 'error' as const } : {})}
-                      items={frameworkOptions}
+                      options={frameworkOptions}
                       onChange={(value) => field.handleChange(String(value ?? ''))}
                     >
                       <SelectTrigger {...props} placeholder="请选择框架" />

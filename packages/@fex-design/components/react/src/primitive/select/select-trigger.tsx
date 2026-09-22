@@ -1,7 +1,8 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
+  selectClearClassName,
+  selectClearableIndicatorClassName,
   selectIndicatorClassName,
-  selectInputClassName,
   selectPlaceholderClassName,
   selectSuffixClassName,
   selectValueClassName,
@@ -11,7 +12,7 @@ import { cn } from '@fex-design/utils'
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
-import { Tag } from '../tag/tag'
+import { Tag, TagAction } from '../tag/tag'
 import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
 import type { InputProps } from '../../ui/input/input.types'
 import { PopoverTrigger } from '../popover/popover'
@@ -38,7 +39,7 @@ export function SelectTrigger({
   inputProps,
   tagRender,
   maxTagCount,
-  placeholder,
+  placeholder = '请选择',
   className,
   onKeyDown,
   ...props
@@ -55,9 +56,6 @@ export function SelectTrigger({
     styles,
     onKeyDown: inputOnKeyDown,
     onFocus,
-    onPointerDown,
-    onClick,
-    onChange,
     ...controlProps
   } = inputProps ?? {}
   const indicator = suffix ?? (
@@ -93,18 +91,27 @@ export function SelectTrigger({
           {...props}
           {...(triggerProps as ComponentProps<'div'>)}
           role={undefined}
+          aria-haspopup="listbox"
           data-slot="select-trigger"
-          data-disabled={select.disabled ? 'true' : undefined}
+          data-clearable={select.clearable && hasValue ? 'true' : undefined}
           data-status={select.status}
-          aria-invalid={select.status === 'error' || undefined}
           value={select.snapshot.searchValue}
           disabled={select.disabled}
           readOnly={!select.showSearch}
-          className={cn('cursor-pointer', classNames?.root, inputClassName, className)}
+          className={cn(
+            'group/select-trigger cursor-pointer',
+            classNames?.root,
+            inputClassName,
+            className,
+          )}
           style={{ ...styles?.root, ...inputStyle, ...props.style }}
           onValueChange={(value) => {
             select.controller.setSearchValue(value)
             select.controller.open()
+          }}
+          onClick={(event) => {
+            props.onClick?.(event)
+            if (!event.defaultPrevented) select.controller.open()
           }}
           onKeyDown={handleKeyDown}
         >
@@ -114,10 +121,18 @@ export function SelectTrigger({
             </InputPrefix>
           ) : null}
           <div className={selectValueContainerClassName}>
-            {children}
+            {children ?? (
+              <SelectValue
+                placeholder={placeholder}
+                maxTagCount={maxTagCount}
+                tagRender={tagRender}
+              />
+            )}
             <InputControl
               {...controlProps}
               role="combobox"
+              aria-haspopup="listbox"
+              aria-invalid={select.status === 'error' || undefined}
               aria-expanded={select.snapshot.open}
               aria-controls={select.listId}
               aria-activedescendant={
@@ -125,10 +140,7 @@ export function SelectTrigger({
                   ? undefined
                   : `${select.listId}-${select.snapshot.activeValue}`
               }
-              disabled={select.disabled}
-              readOnly={!select.showSearch}
               placeholder={select.showSearch && !hasValue ? placeholder : undefined}
-              value={select.snapshot.searchValue}
               className={cn(
                 classNames?.control,
                 !select.showSearch && 'absolute size-px min-w-0 overflow-hidden opacity-0',
@@ -138,33 +150,31 @@ export function SelectTrigger({
                 onFocus?.(event)
                 if (!event.defaultPrevented) select.controller.open()
               }}
-              onPointerDown={onPointerDown}
-              onClick={(event) => {
-                onClick?.(event)
-              }}
-              onChange={(event) => {
-                onChange?.(event)
-              }}
             />
           </div>
           <InputSuffix
             data-slot="select-suffix"
-            className={cn(classNames?.suffix)}
+            className={cn(selectSuffixClassName, classNames?.suffix)}
             style={styles?.suffix}
           >
             {select.loading ? <LoadingIcon className="animate-spin" /> : null}
+            <span className={select.clearable && hasValue ? selectClearableIndicatorClassName : undefined}>
+              {indicator}
+            </span>
             {select.clearable && hasValue ? (
               <InputClear
+                className={selectClearClassName}
+                aria-label="Clear selection"
+                onPointerDown={(event) => event.preventDefault()}
                 onClick={(event) => {
+                  event.preventDefault()
                   event.stopPropagation()
                   select.controller.clear()
                 }}
               >
                 {clear}
               </InputClear>
-            ) : (
-              indicator
-            )}
+            ) : null}
           </InputSuffix>
         </InputRoot>
       )}
@@ -183,6 +193,7 @@ export interface SelectValueProps extends ComponentProps<'div'> {
 export function SelectValue({
   children,
   maxTagCount,
+  placeholder = '请选择',
   tagRender,
   className,
   ...props
@@ -194,10 +205,11 @@ export function SelectValue({
         {children}
       </div>
     )
-  if (!select.selectedOptions.length) return null
-  // return select.snapshot.searchValue ? null : (
-  //   <span className={selectPlaceholderClassName}>{placeholder ?? select.placeholder}</span>
-  // )
+  if (!select.selectedOptions.length)
+    return select.showSearch || select.snapshot.searchValue ? null : (
+      <span className={selectPlaceholderClassName}>{placeholder}</span>
+    )
+  if (!select.multiple && select.showSearch && select.snapshot.open) return null
   if (!select.multiple)
     return (
       <div {...props} className={cn(selectValueClassName, className)}>
@@ -220,18 +232,15 @@ export function SelectValue({
             })}
           </span>
         ) : (
-          <Tag
-            key={option.value}
-            size="sm"
-            closable
-            closeLabel={`Remove ${String(option.label)}`}
-            onPointerDownCapture={(event) => event.preventDefault()}
-            onClose={(event) => {
-              event.stopPropagation()
-              select.removeValue(option.value)
-            }}
-          >
+          <Tag key={option.value} size="sm" onPointerDownCapture={(event) => event.preventDefault()}>
             {option.label}
+            <TagAction
+              aria-label={`Remove ${String(option.label)}`}
+              onClick={(event) => {
+                event.stopPropagation()
+                select.removeValue(option.value)
+              }}
+            />
           </Tag>
         ),
       )}

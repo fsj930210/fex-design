@@ -162,7 +162,6 @@
         /></InputRoot
       >
       {#if context.allowClear && hasValue}<InputClear
-          forceMount
           onpointerdown={(event) => event.stopPropagation()}
           onclick={(event) => {
             event.stopPropagation();

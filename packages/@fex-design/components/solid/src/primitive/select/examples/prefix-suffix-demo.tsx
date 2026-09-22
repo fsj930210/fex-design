@@ -1,0 +1,1 @@
+import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/solid/primitive/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]; export default function Example(){return <SelectRoot options={options}><SelectTrigger class="w-72" inputProps={{prefix:'框架',suffix:'⌘K'}}/><SelectContent/></SelectRoot>}

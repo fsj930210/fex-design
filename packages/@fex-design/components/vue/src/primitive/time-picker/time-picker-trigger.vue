@@ -50,7 +50,7 @@ function clear() {
           aria-label="Time"
           :placeholder="placeholder ?? context.format.value"
         />
-        <InputClear v-if="allowClear" />
+        <InputClear v-if="allowClear && text" />
         <InputSuffix v-if="!allowClear || !text"
           ><slot name="suffix"><ClockIcon class="size-4" /></slot
         ></InputSuffix>

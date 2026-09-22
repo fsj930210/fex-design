@@ -8,7 +8,7 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Local search" description="filterOption filters locally and search receives every keyword." [items]="options" [showSearch]="true" [filterOption]="filter" />',
+    '<select-simple-demo title="Local search" description="filterOption filters locally and search receives every keyword." [options]="options" [showSearch]="true" [filterOption]="filter" />',
 })
 class LocalSearchDemo {
   protected readonly options = frameworkOptions

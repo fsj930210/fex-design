@@ -17,10 +17,12 @@ const developmentOrigins: Record<Framework, string> = {
   vue: 'http://127.0.0.1:4114',
 }
 
+const MINIMUM_PREVIEW_HEIGHT = 240
+
 type DemoLayer = 'primitive' | 'ui'
 
 export function DemoCard(props: {
-  scene: { id: string; title: string; description: string }
+  scene: { id: string; title: string; description: string; height?: number }
   framework: Framework
   layer: DemoLayer
   slug: string
@@ -75,13 +77,14 @@ export function DemoCard(props: {
 
 function SingleDemoPanel(props: {
   layer: DemoLayer
-  scene: { id: string; title: string; description: string }
+  scene: { id: string; title: string; description: string; height?: number }
   framework: Framework
   slug: string
 }) {
   const [tab, setTab] = createSignal<'preview' | 'code'>('preview')
   const [copied, setCopied] = createSignal(false)
-  const [height, setHeight] = createSignal(240)
+  const minimumHeight = () => props.scene.height ?? MINIMUM_PREVIEW_HEIGHT
+  const [height, setHeight] = createSignal(minimumHeight())
   const [ready, setReady] = createSignal(false)
   const [hasEntered, setHasEntered] = createSignal(false)
   let panel!: HTMLElement
@@ -163,7 +166,7 @@ function SingleDemoPanel(props: {
         sendRender()
       }
       if (event.data.type === 'resize') {
-        setHeight(Math.max(220, Math.ceil(event.data.height)))
+        setHeight(Math.max(minimumHeight(), Math.ceil(event.data.height)))
       }
     }
     addEventListener('message', receive)
@@ -262,7 +265,7 @@ function SingleDemoPanel(props: {
             />
           }
         >
-          <div class="relative min-h-35 bg-background flex items-center justify-center p-4" style={{ height: `${height()}px` }}>
+          <div class="relative bg-background" style={{ height: `${height()}px` }}>
             <Show when={!ready()}>
               <div class="absolute inset-0 z-1 grid place-items-center bg-background" role="status">
                 <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
@@ -273,7 +276,7 @@ function SingleDemoPanel(props: {
                 ref={(element) => {
                   frame = element
                 }}
-                class="block h-full min-h-35 w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
+                class="block h-full w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
                 data-ready={ready()}
                 title={`${props.framework} ${props.layer} ${props.slug} ${props.scene.id}`}
                 src={runtimeUrl()}

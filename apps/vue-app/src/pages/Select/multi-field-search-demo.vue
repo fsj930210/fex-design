@@ -8,7 +8,7 @@ import Demo from './demo-section.vue'
   <Demo
     title="Multi-field search"
     description="Search label, searchText and keywords; try google or meta."
-    ><SelectRoot show-search :items="frameworkOptions" :filter-option="defaultSelectFilterOption"
+    ><SelectRoot show-search :options="frameworkOptions" :filter-option="defaultSelectFilterOption"
       ><SelectTrigger placeholder="输入 google 或 meta" /><SelectContent /></SelectRoot
   ></Demo>
 </template>

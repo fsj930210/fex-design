@@ -7,7 +7,7 @@ import Demo from './demo-section.vue'
   <Demo
     title="Virtual scrolling"
     description="Only the visible fixed-height options and overscan are mounted from 1,000 entries."
-    ><SelectRoot show-search :items="virtualOptions" :virtual="{ itemHeight: 32, overscan: 4 }"
+    ><SelectRoot show-search :options="virtualOptions" :virtual="{ itemHeight: 32, overscan: 4 }"
       ><SelectTrigger placeholder="请输入关键词或选择选项" /><SelectContent /></SelectRoot
   ></Demo>
 </template>

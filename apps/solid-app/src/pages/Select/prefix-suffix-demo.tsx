@@ -10,11 +10,11 @@ export function PrefixSuffixDemo() {
       description="prefix decorates the input; suffix replaces only the default chevron."
     >
       <div class="space-y-2">
-        <SelectRoot items={frameworkOptions}>
+        <SelectRoot options={frameworkOptions}>
           <SelectTrigger prefix={<InfoIcon class="size-4" />} placeholder="带前缀" />
           <SelectContent />
         </SelectRoot>
-        <SelectRoot items={frameworkOptions}>
+        <SelectRoot options={frameworkOptions}>
           <SelectTrigger suffix={<CheckIcon />} placeholder="自定义后缀" />
           <SelectContent />
         </SelectRoot>

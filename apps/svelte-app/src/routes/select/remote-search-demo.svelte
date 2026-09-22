@@ -45,7 +45,7 @@
     showSearch
     {loading}
     {open}
-    items={options}
+    options={options}
     onOpenChange={(value) => (open = value)}
     onSearch={search}
     ><SelectTrigger placeholder="请输入关键词远程搜索" /><SelectContent

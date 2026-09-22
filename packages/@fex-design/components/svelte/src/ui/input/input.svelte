@@ -3,7 +3,6 @@
   import {
     InputAddonAfter,
     InputAddonBefore,
-    InputClear,
     InputControl,
     InputGroup,
     InputPrefix,
@@ -12,6 +11,7 @@
   } from "@fex-design/svelte/primitive/input";
   import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
   import type { InputProps } from "./input.types";
+  import InputClearWhenAvailable from "./input-clear.svelte";
   let {
     class: className,
     value,
@@ -57,9 +57,9 @@
       style={styles?.control}
       bind:ref
     />
-    {#if clearable}<InputClear class={classNames?.clear} style={styles?.clear}
+    {#if clearable}<InputClearWhenAvailable class={classNames?.clear} style={styles?.clear}
         >{#if clear}{@render clear()}{:else}<CircleXIcon
-          />{/if}</InputClear
+          />{/if}</InputClearWhenAvailable
       >{/if}
     {#if suffix}<InputSuffix class={classNames?.suffix} style={styles?.suffix}
         >{@render suffix()}</InputSuffix

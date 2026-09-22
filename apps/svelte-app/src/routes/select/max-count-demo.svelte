@@ -6,7 +6,7 @@
 <Demo
   title="Maximum selection count"
   description="maxCount limits selection; maxTagCount controls presentation."
-  items={frameworkOptions}
+  options={frameworkOptions}
   multiple
   defaultValue={["react"]}
   maxCount={3}

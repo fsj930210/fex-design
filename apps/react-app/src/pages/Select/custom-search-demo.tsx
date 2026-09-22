@@ -14,7 +14,7 @@ export function CustomSearchDemo() {
     >
       <SelectRoot
         showSearch
-        items={frameworkOptions}
+        options={frameworkOptions}
         filterOption={(keyword, option) =>
           option.label.toLocaleLowerCase().startsWith(keyword.trim().toLocaleLowerCase())
         }

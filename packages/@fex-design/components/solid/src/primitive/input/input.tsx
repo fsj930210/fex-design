@@ -127,16 +127,15 @@ export const InputSuffix = part('input-suffix', inputSuffixClassName)
 export const InputAddonBefore = part('input-addon-before', inputAddonBeforeClassName)
 export const InputAddonAfter = part('input-addon-after', inputAddonAfterClassName)
 export function InputClear(
-  props: ParentProps<JSX.ButtonHTMLAttributes<HTMLButtonElement>> & { forceMount?: boolean },
+  props: ParentProps<JSX.ButtonHTMLAttributes<HTMLButtonElement>>,
 ) {
   const context = useInputContext('InputClear')
-  const [local, rest] = splitProps(props, ['forceMount', 'class', 'children', 'onClick'])
-  return local.forceMount || context.canClear() ? (
+  const [local, rest] = splitProps(props, ['class', 'children', 'onClick'])
+  return (
     <button
       {...rest}
       type="button"
       data-slot="input-clear"
-      disabled={!local.forceMount && !context.canClear()}
       class={cn(inputClearClassName, local.class)}
       onClick={(event) => {
         if (typeof local.onClick === 'function') local.onClick(event)
@@ -145,5 +144,5 @@ export function InputClear(
     >
       {local.children ?? <CircleXIcon />}
     </button>
-  ) : null
+  )
 }

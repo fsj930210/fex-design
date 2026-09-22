@@ -1,3 +1,3 @@
 export * from './select-root'
 export * from './select-trigger'
-export { SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator } from './select-content'
+export { SelectContent, SelectGroup, SelectItem, SelectLabel, SelectList, SelectSeparator } from './select-content'

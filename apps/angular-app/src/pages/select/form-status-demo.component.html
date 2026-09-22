@@ -11,7 +11,7 @@
           fexFieldControl
           [value]="framework.api.state.value"
           [status]="invalid(framework.api) ? 'error' : undefined"
-          [items]="options"
+          [options]="options"
           (change)="framework.api.handleChange($event.value)"
           ><div selectTrigger placeholder="请选择" ></div><div selectContent
             ></div

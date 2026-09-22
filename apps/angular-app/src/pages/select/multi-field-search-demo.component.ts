@@ -8,7 +8,7 @@ export
   standalone: true,
   imports: [SimpleSelectDemo],
   template:
-    '<select-simple-demo title="Multi-field search" description="Search label, searchText and keywords." [items]="options" [showSearch]="true" [filterOption]="filter" placeholder="输入 google 或 meta" />',
+    '<select-simple-demo title="Multi-field search" description="Search label, searchText and keywords." [options]="options" [showSearch]="true" [filterOption]="filter" placeholder="输入 google 或 meta" />',
 })
 class MultiFieldSearchDemo {
   protected readonly options = frameworkOptions

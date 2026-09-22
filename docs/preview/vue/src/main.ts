@@ -1,6 +1,7 @@
 ﻿import { PREVIEW_PROTOCOL, isPreviewHostMessage } from '@fex-design/docs-shared/preview-protocol'
 import { createApp, defineComponent, h, onMounted, ref, shallowRef, watch } from 'vue'
 import type { Component } from 'vue'
+import { observeRuntimeHeight } from '../../runtime-resize'
 import './styles.css'
 
 const query = new URLSearchParams(location.search)
@@ -101,21 +102,22 @@ const Root = defineComponent({
 
       const runtime = document.querySelector<HTMLElement>('.runtime')
       if (runtime) {
-        const sendResize = () => send('resize', { height: Math.ceil(runtime.scrollHeight) })
-        new ResizeObserver(sendResize).observe(runtime)
-        sendResize()
+        observeRuntimeHeight(runtime, (height) => send('resize', { height }))
       }
     })
 
     return () => {
       if (loading.value) {
-        return h('div', { class: 'runtime box-border grid min-h-30 place-items-center p-8' })
+        return h('div', {
+          class: `runtime box-border grid place-items-center p-8 ${embedded ? '' : 'min-h-screen'}`,
+          'data-embed': embedded ? 'true' : undefined,
+        })
       }
 
       return h(
         'div',
         {
-          class: 'runtime box-border grid min-h-30 place-items-center p-8',
+          class: `runtime box-border grid place-items-center p-8 ${embedded ? '' : 'min-h-screen'}`,
           'data-embed': embedded ? 'true' : undefined,
         },
         exampleComp.value

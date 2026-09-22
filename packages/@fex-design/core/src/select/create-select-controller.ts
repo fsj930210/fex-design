@@ -69,7 +69,7 @@ export function createSelectController<TValue extends SelectionValue>(
     options.onOpenChange?.(open)
   }
 
-  function clearSearchAfterSelection() {
+  function clearSearch() {
     if (snapshot().searchValue === '') return
     update({ searchValue: '' })
     options.onSearch?.('')
@@ -96,6 +96,7 @@ export function createSelectController<TValue extends SelectionValue>(
     close: () => {
       setOpen(false)
       update({ activeValue: undefined, interaction: null })
+      clearSearch()
     },
     toggleOpen: () => setOpen(!snapshot().open),
     setSearchValue: (keyword) => {
@@ -146,7 +147,7 @@ export function createSelectController<TValue extends SelectionValue>(
         options.selection.replace(value)
         controller.close()
       }
-      clearSearchAfterSelection()
+      clearSearch()
     },
     selectActive: () => {
       const value = snapshot().activeValue

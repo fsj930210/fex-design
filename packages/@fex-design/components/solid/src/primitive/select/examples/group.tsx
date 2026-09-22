@@ -1,0 +1,1 @@
+import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/solid/primitive/select'; const options=[{value:'react',label:'React',group:'前端框架'},{value:'vue',label:'Vue',group:'前端框架'},{value:'nest',label:'NestJS',group:'后端框架'}]; export default function Example(){return <SelectRoot options={options}><SelectTrigger class="w-72"/><SelectContent/></SelectRoot>}

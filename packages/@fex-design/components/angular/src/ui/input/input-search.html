@@ -50,7 +50,7 @@
     [style]="styles().control"
     (keydown)="keydown($event)"
   />
-  @if (clearable()) {
+  @if (clearable() && root()?.currentValue() && !disabled() && !readOnly()) {
   <button
     inputClear
     [class]="classNames().clear ?? ''"

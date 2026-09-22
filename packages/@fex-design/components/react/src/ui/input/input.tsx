@@ -1,6 +1,6 @@
 import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
 import { cn } from '@fex-design/utils'
-import { useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useState, type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { useControllableState } from '@fex-design/react/hooks/use-controllable-state'
 import { EyeIcon } from '@fex-design/react/icons/eye'
 import { EyeOffIcon } from '@fex-design/react/icons/eye-off'
@@ -18,8 +18,14 @@ import {
   InputSuffix,
 } from '@fex-design/react/primitive/input/input'
 import type { InputProps, InputPasswordProps, InputSearchProps } from './input.types'
+import { useInputContext } from '../../primitive/input/input-context'
 
 export type { InputProps, InputPasswordProps, InputSearchProps } from './input.types'
+
+function InputClearWhenAvailable(props: ComponentProps<typeof InputClear>) {
+  const input = useInputContext('InputClearWhenAvailable')
+  return input.value !== '' && !input.disabled && !input.readOnly ? <InputClear {...props} /> : null
+}
 
 function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode) {
   const {
@@ -71,9 +77,9 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
         style={styles?.control}
       />
       {clearable ? (
-        <InputClear className={classNames?.clear} style={styles?.clear}>
+        <InputClearWhenAvailable className={classNames?.clear} style={styles?.clear}>
           {clear}
-        </InputClear>
+        </InputClearWhenAvailable>
       ) : null}
       {suffix != null || suffixAction != null ? (
         <InputSuffix className={classNames?.suffix} style={styles?.suffix}>

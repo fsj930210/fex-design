@@ -56,7 +56,7 @@ Native contract: native input attrs and listeners through `$attrs`. Template ref
 
 ## Composition
 
-Prefix and Suffix live inside InputRoot and do not add behavior. Addons are siblings of InputRoot inside InputGroup, so the Input focus ring does not cover them. InputClear renders a 12px, 14px, or 16px icon for `sm`, `md`, or `lg` and becomes visible only while the valued input is interactive.
+Prefix and Suffix live inside InputRoot and do not add behavior. Addons are siblings of InputRoot inside InputGroup, so the Input focus ring does not cover them. InputClear renders whenever it is composed; the consumer decides whether it should be present. Its icon is 12px, 14px, or 16px for `sm`, `md`, or `lg`.
 
 InputGroup styles arbitrary direct children: the first receives only the start radius, the last only the end radius, and middle joins have no radius. Set `--input-group-radius` globally, on one group, or on a direct child to override it.
 

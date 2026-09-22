@@ -12,7 +12,7 @@ export function ClearDemo() {
       title="Clear"
       description="Clear and the dropdown indicator share one suffix position and never render together."
     >
-      <SelectRoot clearable items={frameworkOptions} defaultValue="solid">
+      <SelectRoot clearable options={frameworkOptions} defaultValue="solid">
         <SelectTrigger placeholder="请选择框架" />
         <SelectContent />
       </SelectRoot>

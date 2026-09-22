@@ -15,10 +15,10 @@
     aria-label="Time"
     [placeholder]="placeholder() ?? root.resolvedFormat()"
   />
-  @if (allowClear()) { <button inputClear type="button"></button> } @if (!allowClear() || !text()) {
+  @if (allowClear() && text()) { <button inputClear type="button"></button> } @if (!allowClear() || !text()) {
   <span inputSuffix
     >@if (suffix()) { <ng-container *ngTemplateOutlet="suffix()!.template" /> } @else {
-    <fex-clock-icon class="size-4" /> }</span
+    <clock-icon class="size-4" /> }</span
   >
   }
 </div>

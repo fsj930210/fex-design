@@ -12,7 +12,7 @@ export function GroupDemo() {
       title="Group"
       description="Options with the same group are rendered under one accessible group label."
     >
-      <SelectRoot items={frameworkOptions}>
+      <SelectRoot options={frameworkOptions}>
         <SelectTrigger placeholder="请选择技术" />
         <SelectContent />
       </SelectRoot>

@@ -1,5 +1,6 @@
 ﻿import { PREVIEW_PROTOCOL, isPreviewHostMessage } from '@fex-design/docs-shared/preview-protocol'
 import type { ApiValue } from '@fex-design/docs-shared/model'
+import { observeRuntimeHeight } from '../../runtime-resize'
 import { useEffect, useState } from 'react'
 import type { ComponentType } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -102,15 +103,16 @@ function App() {
   useEffect(() => {
     const runtime = document.querySelector<HTMLElement>('.runtime')
     if (!runtime) return
-    const sendResize = () => send('resize', { height: Math.ceil(runtime.scrollHeight) })
-    const observer = new ResizeObserver(sendResize)
-    observer.observe(runtime)
-    sendResize()
-    return () => observer.disconnect()
+    return observeRuntimeHeight(runtime, (height) => send('resize', { height }))
   }, [ExampleComp, loading])
 
   if (loading) {
-    return <div className="runtime box-border grid min-h-30 place-items-center p-8" />
+    return (
+      <div
+        className={`runtime box-border grid place-items-center p-8 ${embedded ? '' : 'min-h-screen'}`}
+        data-embed={embedded ? 'true' : undefined}
+      />
+    )
   }
 
   if (!ExampleComp) {
@@ -123,7 +125,7 @@ function App() {
 
   return (
     <div
-      className="runtime box-border grid min-h-30 place-items-center p-8"
+      className={`runtime box-border grid place-items-center p-8 ${embedded ? '' : 'min-h-screen'}`}
       data-embed={embedded ? 'true' : undefined}
     >
       <ExampleComp />

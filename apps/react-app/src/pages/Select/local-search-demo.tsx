@@ -16,7 +16,7 @@ export function LocalSearchDemo() {
       <SelectRoot
         showSearch
         filterOption={defaultSelectFilterOption}
-        items={frameworkOptions}
+        options={frameworkOptions}
         onSearch={() => undefined}
       >
         <SelectTrigger placeholder="请输入关键词搜索" />

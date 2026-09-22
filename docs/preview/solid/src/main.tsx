@@ -3,6 +3,7 @@ import type { ApiValue } from '@fex-design/docs-shared/model'
 import { render } from 'solid-js/web'
 import { createEffect, createSignal, ErrorBoundary, onCleanup, onMount, Show } from 'solid-js'
 import type { Component } from 'solid-js'
+import { observeRuntimeHeight } from '../../runtime-resize'
 import './styles.css'
 
 const query = new URLSearchParams(window.location.search)
@@ -101,24 +102,19 @@ function Preview() {
       }
     }
     window.addEventListener('message', onMessage)
-    const sendResize = () => {
-      if (root) send('resize', { height: Math.ceil(root.scrollHeight) })
-    }
-    const observer = new ResizeObserver(sendResize)
-    observer.observe(root)
+    const stopObservingHeight = observeRuntimeHeight(root, (height) => send('resize', { height }))
     send('ready')
-    sendResize()
 
     onCleanup(() => {
       window.removeEventListener('message', onMessage)
-      observer.disconnect()
+      stopObservingHeight()
     })
   })
 
   return (
     <div
       ref={root}
-      class={`runtime box-border grid min-h-30 place-items-center p-8 ${!embedded ? 'min-h-screen content-center gap-8' : ''}`}
+      class={`runtime box-border grid place-items-center p-8 ${embedded ? '' : 'min-h-screen content-center gap-8'}`}
       data-embed={embedded ? 'true' : undefined}
     >
       <Show when={!embedded && currentInfo().component}>
@@ -132,7 +128,7 @@ function Preview() {
           return <pre class="whitespace-pre-wrap text-red-600">{String(error)}</pre>
         }}
       >
-        <Show when={!loading()} fallback={<div class="box-border grid min-h-30 place-items-center" />}>
+        <Show when={!loading()} fallback={<div class="grid h-full place-items-center" />}>
           <Show
             when={exampleComp()}
             fallback={

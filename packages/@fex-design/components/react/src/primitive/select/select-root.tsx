@@ -25,7 +25,7 @@ export interface SelectRootProps extends Omit<
   'children' | 'onOpenChange' | 'open'
 > {
   children?: ReactNode
-  items?: readonly SelectOption[]
+  options?: readonly SelectOption[]
   multiple?: boolean
   value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
@@ -61,11 +61,11 @@ export function SelectRoot(props: SelectRootProps) {
       return optionsRef.current.multiple
     },
     get disabledValues() {
-      return optionsRef.current.items?.filter((item) => item.disabled).map((item) => item.value)
+      return optionsRef.current.options?.filter((option) => option.disabled).map((option) => option.value)
     },
     onChange: (values, meta) => {
       const resolveOption = (value: SelectionValue) =>
-        optionsRef.current.items?.find((item) => item.value === value) ?? {
+        optionsRef.current.options?.find((option) => option.value === value) ?? {
           value,
           label: String(value),
         }
@@ -87,7 +87,7 @@ export function SelectRoot(props: SelectRootProps) {
     get options() {
       const keyword = controllerRef.current?.getSnapshot().searchValue ?? ''
       return filterSelectOptions(
-        optionsRef.current.items ?? [],
+        optionsRef.current.options ?? [],
         keyword,
         optionsRef.current.filterOption,
       )
@@ -109,7 +109,7 @@ export function SelectRoot(props: SelectRootProps) {
   })
   const snapshot = useCoreStore(controllerRef.current)
   const selection = selectionRef.current.getSnapshot()
-  const options = props.items ?? []
+  const options = props.options ?? []
   const visibleOptions = filterSelectOptions(options, snapshot.searchValue, props.filterOption)
   const selectedOptions = selection.values.map(
     (value) => options.find((item) => item.value === value) ?? { value, label: String(value) },

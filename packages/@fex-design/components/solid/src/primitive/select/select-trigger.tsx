@@ -1,6 +1,7 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   selectClearClassName,
+  selectClearableIndicatorClassName,
   selectIndicatorClassName,
   selectInputClassName,
   selectPlaceholderClassName,
@@ -13,9 +14,8 @@ import { cn } from '@fex-design/utils'
 import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon } from '@fex-design/solid/icons/chevron'
 import { CircleXIcon } from '@fex-design/solid/icons/circle-x'
-import { Tag } from '../tag/tag'
+import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
-import { Button } from '../button/button'
 import { PopoverTrigger } from '../popover/popover'
 import { useSelect } from './select-context'
 
@@ -50,6 +50,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
     'onKeyDown',
   ])
   const select = useSelect('SelectTrigger')
+  const placeholder = () => local.placeholder ?? '请选择'
   function keydown(event: KeyboardEvent) {
     if (typeof local.onKeyDown === 'function') local.onKeyDown(event as never)
     if (event.defaultPrevented) return
@@ -77,6 +78,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
           role={undefined}
           data-slot="select-trigger"
           data-disabled={select.disabled() || undefined}
+          data-clearable={select.clearable() && select.selectedOptions().length ? 'true' : undefined}
           data-status={select.status()}
           aria-invalid={select.status() === 'error' || undefined}
           class={cn(selectTriggerClassName(), local.class)}
@@ -86,7 +88,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
           <div class={selectValueContainerClassName}>
             <SelectValue
               maxTagCount={local.maxTagCount}
-              placeholder={select.showSearch() ? undefined : local.placeholder}
+              placeholder={select.showSearch() ? undefined : placeholder()}
               tagRender={local.tagRender}
             >
               {local.children}
@@ -100,7 +102,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
               readOnly={!select.showSearch()}
               placeholder={
                 select.showSearch() && !select.selectedOptions().length
-                  ? local.placeholder
+                  ? placeholder()
                   : undefined
               }
               value={select.snapshot().searchValue}
@@ -110,8 +112,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
               )}
               onFocus={() => select.controller.open()}
               onPointerDown={(event) => {
-                if (document.activeElement === event.currentTarget) select.controller.toggleOpen()
-                else select.controller.open()
+                select.controller.open()
               }}
               onClick={(event) => {
                 event.stopPropagation()
@@ -124,7 +125,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
           </div>
           <span data-slot="select-suffix" class={selectSuffixClassName}>
             <Show when={!select.loading()} fallback={<LoadingIcon class="animate-spin" />}>
-              <span class={select.clearable() && select.selectedOptions().length ? 'group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0' : undefined}>
+              <span class={select.clearable() && select.selectedOptions().length ? selectClearableIndicatorClassName : undefined}>
                 {local.inputProps?.suffix ?? local.suffix ?? (
                     <span
                       data-state={select.snapshot().open ? 'open' : 'closed'}
@@ -135,7 +136,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
                   )}
               </span>
               <Show when={select.clearable() && select.selectedOptions().length}>
-                <Button
+                <button
                   type="button"
                   aria-label="Clear selection"
                   class={selectClearClassName}
@@ -146,7 +147,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
                   }}
                 >
                   {local.inputProps?.clear ?? <CircleXIcon />}
-                </Button>
+                </button>
               </Show>
             </Show>
           </span>
@@ -195,17 +196,9 @@ export function SelectValue(props: {
                     })}
                   </span>
                 ) : (
-                  <Tag
-                    size="sm"
-                    closable
-                    closeLabel={`Remove ${String(option.label)}`}
-                    onPointerDownCapture={(event) => event.preventDefault()}
-                    onClose={(event) => {
-                      event.stopPropagation()
-                      select.removeValue(option.value)
-                    }}
-                  >
+                  <Tag size="sm" onPointerDownCapture={(event) => event.preventDefault()}>
                     {option.label}
+                    <TagAction aria-label={`Remove ${String(option.label)}`} onClick={(event) => { event.stopPropagation(); select.removeValue(option.value) }} />
                   </Tag>
                 )
               }

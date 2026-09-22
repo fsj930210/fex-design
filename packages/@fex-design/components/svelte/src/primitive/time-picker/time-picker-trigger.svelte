@@ -83,7 +83,7 @@
           aria-invalid={invalid || undefined}
           aria-label="Time"
           placeholder={placeholder ?? context.format()}
-        />{#if allowClear}<InputClear
+        />{#if allowClear && text}<InputClear
           />{/if}{#if !allowClear || !text}<InputSuffix
             >{#if suffix}{@render suffix()}{:else}<ClockIcon
                 class="size-4"

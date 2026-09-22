@@ -28,7 +28,7 @@
 <Demo
   title="Custom popup rendering"
   description="Custom content extends the default menu."
-  ><SelectRoot items={options}
+  ><SelectRoot options={options}
     ><SelectTrigger placeholder="自定义下拉面板" /><SelectContent
       >{#snippet footer()}
       <div

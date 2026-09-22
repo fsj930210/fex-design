@@ -172,7 +172,6 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
             />
             {context.allowClear && hasValue() ? (
               <InputClear
-                forceMount
                 onPointerDown={(event) => event.stopPropagation()}
                 onClick={(event) => {
                   event.stopPropagation()

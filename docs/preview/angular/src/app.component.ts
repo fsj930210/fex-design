@@ -11,6 +11,7 @@ function applyTheme(theme?: string) {
 ﻿import { NgComponentOutlet } from '@angular/common'
 import { ChangeDetectionStrategy, Component, computed, signal, type Type } from '@angular/core'
 import type { ApiValue } from '@fex-design/docs-shared/model'
+import { observeRuntimeHeight } from '../../runtime-resize'
 import { PREVIEW_PROTOCOL, isPreviewHostMessage } from '@fex-design/docs-shared/preview-protocol'
 import { examples } from './examples.generated'
 
@@ -63,10 +64,8 @@ export class AppComponent {
     queueMicrotask(() => {
       const runtime = document.querySelector<HTMLElement>('.runtime')
       if (runtime) {
-        const sendResize = () => this.send('resize', { height: Math.ceil(runtime.scrollHeight) })
-        new ResizeObserver(sendResize).observe(runtime)
+        observeRuntimeHeight(runtime, (height) => this.send('resize', { height }))
         this.send('ready')
-        sendResize()
       }
     })
   }

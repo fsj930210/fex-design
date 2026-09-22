@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
       show-search
       :loading="loading"
       :open="open"
-      :items="options"
+      :options="options"
       @open-change="open = $event"
       @search="search"
       ><SelectTrigger placeholder="请输入关键词远程搜索" /><SelectContent>

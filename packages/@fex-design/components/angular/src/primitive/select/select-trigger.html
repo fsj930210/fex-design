@@ -3,6 +3,7 @@
   role="presentation"
   data-slot="select-trigger"
   [attr.data-disabled]="select.disabled || null"
+  [attr.data-clearable]="select.clearable && select.selectedOptions.length ? 'true' : null"
   [attr.data-status]="select.status"
   [attr.aria-invalid]="select.status === 'error' || null"
   [attr.aria-expanded]="select.snapshot().open"
@@ -43,20 +44,19 @@
       [value]="select.snapshot().searchValue"
       [class]="select.canSearch ? inputClass : inputClass + ' absolute size-px min-w-0 overflow-hidden opacity-0'"
       (focus)="select.controller.open()"
-      (pointerdown)="inputPointerdown($event)"
+      (pointerdown)="inputPointerdown()"
       (click)="$event.stopPropagation()"
       (input)="input($event)"
     />
   </div>
   <span data-slot="select-suffix" [class]="suffixClass">
     @if (select.loading) { <loading-icon class="animate-spin" /> } @else {
-    <span [class]="select.clearable && select.selectedOptions.length ? 'group-hover/select-trigger:opacity-0 group-focus-within/select-trigger:opacity-0' : ''">
+    <span [class]="select.clearable && select.selectedOptions.length ? clearableIndicatorClass : ''">
       @if (suffix) { <ng-container *ngTemplateOutlet="suffix" /> } @else {
       <span [attr.data-state]="select.snapshot().open ? 'open' : 'closed'" [class]="indicatorClass">⌄</span> }
     </span>
     @if (select.clearable && select.selectedOptions.length) {
     <button
-      button
       type="button"
       aria-label="Clear selection"
       [class]="clearClass"

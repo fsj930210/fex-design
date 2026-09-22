@@ -1,0 +1,1 @@
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'; export default function Example(){return <SelectRoot options={[]}><SelectTrigger className="w-72" placeholder="请选择"/><SelectContent emptyContent="暂无匹配数据"/></SelectRoot>}

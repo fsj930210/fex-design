@@ -5,7 +5,6 @@ import { CircleXIcon } from '@fex-design/vue/icons/circle-x'
 import {
   InputAddonAfter,
   InputAddonBefore,
-  InputClear,
   InputControl,
   InputGroup,
   InputPrefix,
@@ -13,6 +12,7 @@ import {
   InputSuffix,
 } from '@fex-design/vue/primitive/input/input'
 import type { InputProps } from './input.types'
+import InputClearWhenAvailable from './input-clear.vue'
 
 defineOptions({ name: 'Input', inheritAttrs: false })
 const props = withDefaults(defineProps<InputProps>(), {
@@ -63,9 +63,9 @@ defineExpose({
         :class="classNames?.control"
         :style="styles?.control"
       />
-      <InputClear v-if="clearable" :class="classNames?.clear" :style="styles?.clear"
+      <InputClearWhenAvailable v-if="clearable" :class="classNames?.clear" :style="styles?.clear"
         ><slot name="clear"><CircleXIcon /></slot
-      ></InputClear>
+      ></InputClearWhenAvailable>
       <InputSuffix v-if="$slots.suffix" :class="classNames?.suffix" :style="styles?.suffix"
         ><slot name="suffix"
       /></InputSuffix>
@@ -99,9 +99,9 @@ defineExpose({
       :class="classNames?.control"
       :style="styles?.control"
     />
-    <InputClear v-if="clearable" :class="classNames?.clear" :style="styles?.clear"
+    <InputClearWhenAvailable v-if="clearable" :class="classNames?.clear" :style="styles?.clear"
       ><slot name="clear"><CircleXIcon /></slot
-    ></InputClear>
+    ></InputClearWhenAvailable>
     <InputSuffix v-if="$slots.suffix" :class="classNames?.suffix" :style="styles?.suffix"
       ><slot name="suffix"
     /></InputSuffix>

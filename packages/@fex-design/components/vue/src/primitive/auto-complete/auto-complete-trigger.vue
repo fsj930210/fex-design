@@ -63,7 +63,7 @@ function input(event: Event) {
         @blur="autoComplete.controller.setOpen(false, 'blur')"
         @keydown="keydown"
       />
-      <InputClear v-if="props.clearable" />
+      <InputClear v-if="props.clearable && autoComplete.snapshot.value.value" />
       <InputSuffix v-if="autoComplete.loading.value || slots.suffix">
         <LoadingIcon v-if="autoComplete.loading.value" class="animate-spin" />
         <slot v-else name="suffix" />

@@ -156,7 +156,7 @@ export function TimePickerTrigger(props: TimePickerTriggerProps) {
             <InputPrefix>{local.prefix}</InputPrefix>
           </Show>
           <InputControl {...local.inputProps} placeholder={local.placeholder ?? context.format()} />
-          <Show when={local.allowClear !== false}>
+          <Show when={local.allowClear !== false && text()}>
             <InputClear />
           </Show>
           <Show when={local.allowClear === false || !text()}>

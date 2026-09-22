@@ -71,7 +71,7 @@ export function AutoCompleteTrigger({
             }}
             onKeyDown={keydown}
           />
-          {clearable ? <InputClear /> : null}
+          {clearable && autoComplete.snapshot.value ? <InputClear /> : null}
           <InputSuffix>
             {autoComplete.loading ? <LoadingIcon className="animate-spin" /> : suffix}
           </InputSuffix>

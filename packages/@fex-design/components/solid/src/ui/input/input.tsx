@@ -41,15 +41,20 @@ export function Input(props: InputProps) {
     'disabled',
     'readOnly',
   ])
+  const [internalValue, setInternalValue] = createSignal(local.defaultValue ?? '')
+  const currentValue = createMemo(() => local.value ?? internalValue())
+  const updateValue = (value: string) => {
+    if (local.value === undefined) setInternalValue(value)
+    local.onValueChange?.(value)
+  }
   const rootStyle = () =>
     local.styles?.root
       ? { ...local.styles.root, ...(typeof local.style === 'object' ? local.style : {}) }
       : local.style
   const root = (
     <InputRoot
-      value={local.value}
-      defaultValue={local.defaultValue}
-      onValueChange={(value) => local.onValueChange?.(value)}
+      value={currentValue()}
+      onValueChange={updateValue}
       size={local.size}
       variant={local.variant}
       disabled={local.disabled}
@@ -69,7 +74,7 @@ export function Input(props: InputProps) {
         class={local.classNames?.control}
         style={local.styles?.control}
       />
-      {local.clearable && (
+      {local.clearable && currentValue() !== '' && !local.disabled && !local.readOnly && (
         <InputClear class={local.classNames?.clear} style={local.styles?.clear}>
           {local.clear}
         </InputClear>

@@ -1,0 +1,1 @@
+import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/solid/primitive/select'; export default function Example(){return <SelectRoot options={[]}><SelectTrigger class="w-72"/><SelectContent emptyContent="暂无匹配数据"/></SelectRoot>}

@@ -163,14 +163,11 @@ export class InputAddonAfter {
     '[class]': 'hostClassName()',
     'data-slot': 'input-clear',
     type: 'button',
-    '[hidden]': '!forceMount() && !root.canClear()',
-    '[disabled]': '!forceMount() && !root.canClear()',
     '(click)': 'root.clearValue()',
   },
   templateUrl: './input-clear.html',
 })
 export class InputClear {
-  readonly forceMount = input(false, { transform: booleanAttribute })
   readonly root = inject(InputRoot)
   protected readonly hostClassName = createHostClassName(() => cn(inputClearClassName))
 }

@@ -26,7 +26,7 @@ function addItem() {
   <Demo
     title="Custom popup rendering"
     description="The content slot wraps the default menu with interactive custom content."
-    ><SelectRoot :items="options"
+    ><SelectRoot :options="options"
       ><SelectTrigger placeholder="自定义下拉面板" /><SelectContent>
         <template #footer>
         <div class="flex items-center gap-2 border-t border-border p-2" @pointerdown.stop>

@@ -1,5 +1,6 @@
 ﻿<div
-  class="runtime box-border grid min-h-30 place-items-center p-8"
+  class="runtime box-border grid place-items-center p-8"
+  [class.min-h-screen]="!embedded"
   [attr.data-embed]="embedded ? 'true' : null"
 >
   @if (example(); as comp) {

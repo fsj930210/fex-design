@@ -3,7 +3,7 @@
   "slug": "select",
   "layer": "ui",
   "status": "stable",
-  "description": "基于 items 的单选与多选快捷组件。",
+  "description": "基于 options 的单选与多选快捷组件。",
   "importPath": {
     "react": "@fex-design/react/ui/select",
     "vue": "@fex-design/vue/ui/select",
@@ -12,12 +12,14 @@
     "angular": "@fex-design/angular/ui/select"
   },
   "props": [
-    { "name": "items", "type": "readonly TItem[]", "description": "任意结构的动态项目。" },
+    { "name": "options", "type": "readonly TItem[]", "description": "任意结构的动态选项。" },
     { "name": "fieldNames", "type": "{ value: keyof TItem; label: keyof TItem }", "description": "值和标签字段映射。" },
+    { "name": "value", "type": "SelectionValue | SelectionValue[]", "description": "受控选中值。" },
+    { "name": "defaultValue", "type": "SelectionValue | SelectionValue[]", "description": "非受控初始选中值。" },
     { "name": "multiple", "type": "boolean", "default": false, "description": "启用多选。", "editor": "boolean" },
     { "name": "searchable", "type": "boolean", "default": false, "description": "启用搜索。", "editor": "boolean" },
     { "name": "inputProps", "type": "SelectInputProps", "description": "传给 Trigger Input 的完整配置。" },
-    { "name": "popoverProps", "type": "SelectPopoverProps", "description": "传给 Popover 的配置，排除 getPopupContainer。" },
+    { "name": "popoverProps", "type": "SelectPopoverProps", "description": "Popover 配置；通过 open、defaultOpen 和 onOpenChange 管理展开状态。" },
     { "name": "getPopupContainer", "type": "(trigger: HTMLElement | null) => HTMLElement", "description": "解析弹层挂载容器。" },
     { "name": "virtual", "type": "SelectVirtualOptions", "description": "固定行高虚拟化配置。" }
   ],
@@ -27,8 +29,22 @@
   ],
   "cssVariables": [],
   "demos": [
-    { "id": "basic", "title": "基础用法", "description": "使用 items 快速生成 Select。" },
-    { "id": "field-names", "title": "字段映射", "description": "映射任意对象的值和标签字段。" },
+    { "id": "basic", "title": "基础用法", "description": "使用 options 快速生成 Select。" },
+    { "id": "single", "title": "单选", "description": "单选值与受控变化。" },
+    { "id": "controlled", "title": "受控与非受控", "description": "对比 value 与 open 的受控状态和非受控初始值。" },
+    { "id": "multiple", "title": "多选", "description": "多选值、标签和最大数量。" },
+    { "id": "field-names", "title": "字段映射", "description": "把 profileId 映射为 value，把 displayName 映射为 label。" },
+    { "id": "group", "title": "分组", "description": "使用分组标题组织选项。" },
+    { "id": "local-search", "title": "本地搜索", "description": "在已有选项中搜索。" },
+    { "id": "remote-search", "title": "远程搜索", "description": "模拟异步接口、加载状态与连续请求竞态处理。" },
+    { "id": "custom-search", "title": "自定义搜索", "description": "使用字符顺序匹配；输入 rt 可以匹配 React。" },
+    { "id": "clear", "title": "清除", "description": "显示可清除的当前值。" },
+    { "id": "empty-demo", "title": "空状态", "description": "显示自定义空状态。" },
+    { "id": "popup-render-demo", "title": "自定义面板", "description": "扩展下拉面板内容。" },
+    { "id": "prefix-suffix-demo", "title": "前后缀", "description": "自定义输入前后缀。" },
+    { "id": "direction", "title": "LTR 与 RTL", "description": "对比双向布局。" },
+    { "id": "semantic-styles", "title": "结构化样式", "description": "定制语义部位样式。" },
+    { "id": "css-variables", "title": "CSS 变量", "description": "通过 CSS 变量定制 Select。" },
     { "id": "virtual", "title": "虚拟列表", "description": "搜索并虚拟渲染 1000 个项目。" }
   ]
 }

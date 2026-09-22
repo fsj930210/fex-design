@@ -55,7 +55,7 @@ export function RemoteSearchDemo() {
         showSearch
         loading={loading()}
         open={open()}
-        items={options()}
+        options={options()}
         onOpenChange={setOpen}
         onSearch={search}
       >

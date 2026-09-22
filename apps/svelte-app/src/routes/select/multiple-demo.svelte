@@ -6,7 +6,7 @@
 <Demo
   title="Multiple"
   description="Multiple selection keeps the panel open and renders selected values together."
-  items={frameworkOptions}
+  options={frameworkOptions}
   multiple
   defaultValue={["react", "vue"]}
   maxTagCount={3}

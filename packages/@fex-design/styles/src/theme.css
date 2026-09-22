@@ -1,5 +1,8 @@
 @theme inline {
   --color-background: var(--background);
+  --color-card: var(--card, var(--secondary-background));
+  --color-card-foreground: var(--card-foreground, var(--foreground));
+  --color-muted: var(--muted, var(--muted-background));
   --color-secondary-background: var(--secondary-background);
   --color-muted-background: var(--muted-background);
   --color-hover-background: var(--hover-background);

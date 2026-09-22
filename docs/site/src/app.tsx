@@ -1,4 +1,4 @@
-﻿import { createEffect, createMemo, createSignal, For, Show } from 'solid-js'
+import { createEffect, createMemo, createSignal, For, Show } from 'solid-js'
 import { Anchor, type AnchorItemData } from '@fex-design/solid/ui/anchor'
 import { frameworks } from '@fex-design/docs-shared/model'
 import { isDocumentedComponent } from './data'
@@ -24,7 +24,13 @@ const initialRoute = getParsedRoute()
 const siteHref = (path = '') => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
 
 export function App() {
-  const initialTheme = (localStorage.getItem('fex_theme') as 'light' | 'dark') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark')
+  const getInitialTheme = (): 'light' | 'dark' => {
+    if (typeof window === 'undefined') return 'dark'
+    const saved = localStorage.getItem('fex_theme')
+    if (saved === 'light' || saved === 'dark') return saved
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+  const initialTheme = getInitialTheme()
   const [theme, setTheme] = createSignal<'light' | 'dark'>(initialTheme)
   const [isHome, setIsHome] = createSignal<boolean>(initialRoute.isHome)
   const [framework, setFramework] = createSignal<Framework>(initialRoute.framework)
@@ -32,14 +38,14 @@ export function App() {
   const [layer] = createSignal<'primitive' | 'ui'>(
     (new URLSearchParams(location.search).get('layer') as 'primitive' | 'ui') ?? 'ui',
   )
-  const document = createMemo(() => getComponentDocument(slug()))
+  const componentDoc = createMemo(() => getComponentDocument(slug()))
   const [toc, setToc] = createSignal<readonly AnchorItemData<string>[]>([])
   let article!: HTMLElement
 
   // MDX heading ids 由 rehype-slug 生成；文档变化后从真实 DOM 同步目录。
   createEffect(() => {
     if (!isHome()) {
-      document()
+      componentDoc()
       layer()
       queueMicrotask(() => setToc(collectToc(article)))
     }
@@ -65,10 +71,16 @@ export function App() {
 
 createEffect(() => {
     const currentTheme = theme()
-    document.documentElement.classList.remove('light', 'dark')
-    document.documentElement.classList.add(currentTheme)
-    document.documentElement.setAttribute('data-theme', currentTheme)
-    localStorage.setItem('fex_theme', currentTheme)
+    if (typeof window !== 'undefined' && window.document?.documentElement) {
+      const root = window.document.documentElement
+      root.classList.remove('light', 'dark')
+      root.classList.add(currentTheme)
+      root.setAttribute('data-theme', currentTheme)
+      root.style.colorScheme = currentTheme
+      try {
+        localStorage.setItem('fex_theme', currentTheme)
+      } catch {}
+    }
   })
 
   const toggleTheme = () => {
@@ -90,7 +102,8 @@ createEffect(() => {
   return (
     <div class="min-h-screen bg-background font-sans text-foreground">
       {/* 顶部全局 Header */}
-      <header class="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-border bg-background/95 px-6 backdrop-blur-xl sm:px-8 transition-colors duration-200">
+      <header class="sticky top-0 z-30 flex h-16 w-full items-center border-b border-border bg-background/95 px-4 backdrop-blur-xl transition-colors duration-200">
+        <div class="flex h-full w-full items-center justify-between">
         <div class="flex items-center gap-8">
           <a
             class="flex items-center gap-2.5 text-lg font-bold text-foreground no-underline cursor-pointer"
@@ -174,6 +187,7 @@ createEffect(() => {
             </Show>
           </button>
         </div>
+        </div>
       </header>
 
       <Show
@@ -186,9 +200,9 @@ createEffect(() => {
         }
       >
         {/* 组件文档布局 */}
-        <div class="grid min-h-[calc(100vh-64px)] grid-cols-[240px_minmax(0,1fr)_220px] justify-center max-[1080px]:grid-cols-[200px_minmax(0,1fr)] max-[768px]:block">
+        <div class="w-full px-4 flex min-h-[calc(100vh-64px)] max-[1080px]:block">
           {/* 左侧组件导航 */}
-          <aside class="sticky top-16 h-[calc(100vh-64px)] overflow-y-auto border-r border-border px-5 py-6 max-[768px]:hidden">
+          <aside class="sticky top-16 h-[calc(100vh-64px)] w-[256px] shrink-0 overflow-y-auto border-r border-border px-3 py-6 max-[1080px]:hidden">
             <p class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
               Components
             </p>
@@ -214,10 +228,10 @@ createEffect(() => {
           {/* 中间主文档区 */}
           <main
             ref={article}
-            class="min-w-0 max-w-4xl px-8 pt-10 pb-28 sm:px-12 max-[768px]:px-5 max-[768px]:pt-6"
+            class="min-w-0 flex-1 w-full px-6 pt-8 pb-24"
           >
             <Show
-              when={document() && isDocumentedComponent(slug())}
+              when={componentDoc() && isDocumentedComponent(slug())}
               fallback={
                 <div class="mt-4.5 rounded-lg border border-dashed border-border bg-muted-background p-6 text-muted-foreground">
                   <h1 class="my-0 text-3xl font-bold tracking-tight">文档未找到</h1>
@@ -226,13 +240,13 @@ createEffect(() => {
               }
             >
               <h1 class="mt-0 mb-3 text-4xl font-bold tracking-tight sm:text-5xl">
-                {document()!.frontmatter.title}
+                {componentDoc()!.frontmatter.title}
               </h1>
               <p class="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                {document()!.frontmatter.description}
+                {componentDoc()!.frontmatter.description}
               </p>
               <MdxDocument
-                content={document()!.default}
+                content={componentDoc()!.default}
                 slug={slug() as 'button' | 'card' | 'spinner'}
                 framework={framework()}
                 layer={layer()}
@@ -241,7 +255,7 @@ createEffect(() => {
           </main>
 
           {/* 右侧 Anchor 目录 */}
-          <div class="sticky top-16 h-[calc(100vh-64px)] self-start overflow-y-auto border-l border-border px-4 py-8 [--anchor-indent:8px] max-[1080px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-2 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-1 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-snug [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
+          <div class="sticky top-16 h-[calc(100vh-64px)] w-[256px] shrink-0 self-start overflow-y-auto border-l border-border px-3 py-6 [--anchor-indent:8px] max-[1280px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-2 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-1 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-snug [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
             <p class="mb-3 px-2 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
               本页目录
             </p>
@@ -289,3 +303,10 @@ function collectToc(article: HTMLElement): readonly AnchorItemData<string>[] {
   }
   return items
 }
+
+
+
+
+
+
+

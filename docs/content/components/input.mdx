@@ -29,6 +29,19 @@ basic、sizes、variants、controlled、affixes、group、password、search、st
 
 ## API
 
+<ApiContainer>
+<ApiSection
+  layer="ui"
+  title="UI API"
+  description="快速使用的 Input、InputPassword 与 InputSearch。"
+>
+  <ApiComposition layer="ui">
+    `InputSearch` 默认在右侧渲染与输入主体等高的搜索 Button；Input 的 ring 只覆盖
+    Prefix、Control、Clear 与 Suffix，不覆盖 Addon。显式传入 `addonAfter=null`
+    可移除默认按钮。Enter、Prefix、Suffix、AddonBefore 与 AddonAfter 都会报告对应搜索来源。
+  </ApiComposition>
+</ApiSection>
+
 <ApiSection
   layer="primitive"
   title="Primitive API"
@@ -49,18 +62,7 @@ InputGroup
 
   </ApiComposition>
 </ApiSection>
-
-<ApiSection
-  layer="ui"
-  title="UI API"
-  description="快速使用的 Input、InputPassword 与 InputSearch。"
->
-  <ApiComposition layer="ui">
-    `InputSearch` 默认在右侧渲染与输入主体等高的搜索 Button；Input 的 ring 只覆盖
-    Prefix、Control、Clear 与 Suffix，不覆盖 Addon。显式传入 `addonAfter=null`
-    可移除默认按钮。Enter、Prefix、Suffix、AddonBefore 与 AddonAfter 都会报告对应搜索来源。
-  </ApiComposition>
-</ApiSection>
+</ApiContainer>
 
 ## CSS Variables
 

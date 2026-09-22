@@ -71,6 +71,7 @@
   onMount(() => {
     const receive = (event: MessageEvent) => {
       if (isPreviewHostMessage(event.data)) {
+        if (event.data.theme) applyTheme(event.data.theme);
         if (event.data.props) values = event.data.props;
         if (event.data.component && event.data.demo) {
           currentLayer = event.data.layer ?? "ui";

@@ -17,6 +17,15 @@ TagsInput 是独立组件，不属于 Select；Select 只支持单选和多选�
 
 ## API
 
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="items 快捷组合与框架原生内容入口。">
+  <ApiComposition layer="ui">
+    `inputProps` 传给 Input，`popoverProps` 传给 Popover；`getPopupContainer` 保持 Select 顶层入口并从 `popoverProps` 类型中排除。`className`/`class` 与 `style` 作用于 Trigger 的 Input Root，和 `inputProps` 同名样式按内部默认 → `inputProps` → Select 顶层顺序合并。
+
+    loading、clear 与 suffix 共用尾部展示位：loading 优先；有值且 hover/focus 时展示 clear；其余时间展示 suffix 或默认下拉箭头。
+  </ApiComposition>
+</ApiSection>
+
 <ApiSection layer="primitive" title="Primitive API" description="可组合 Select 部件与共享状态。">
   <ApiComposition layer="primitive">
 
@@ -34,14 +43,7 @@ SelectRoot
 
   </ApiComposition>
 </ApiSection>
-
-<ApiSection layer="ui" title="UI API" description="items 快捷组合与框架原生内容入口。">
-  <ApiComposition layer="ui">
-    `inputProps` 传给 Input，`popoverProps` 传给 Popover；`getPopupContainer` 保持 Select 顶层入口并从 `popoverProps` 类型中排除。`className`/`class` 与 `style` 作用于 Trigger 的 Input Root，和 `inputProps` 同名样式按内部默认 → `inputProps` → Select 顶层顺序合并。
-
-    loading、clear 与 suffix 共用尾部展示位：loading 优先；有值且 hover/focus 时展示 clear；其余时间展示 suffix 或默认下拉箭头。
-  </ApiComposition>
-</ApiSection>
+</ApiContainer>
 
 ## CSS Variables
 

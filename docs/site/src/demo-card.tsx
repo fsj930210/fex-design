@@ -1,8 +1,13 @@
-﻿import { createEffect, createResource, createSignal, onCleanup, onMount, Show } from 'solid-js'
+import { createEffect, createResource, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { PREVIEW_PROTOCOL } from '@fex-design/docs-shared/preview-protocol'
-import { ExampleCard } from './example-card'
+import { Card } from '@fex-design/solid/ui/card'
 import { Spinner } from '@fex-design/solid/primitive/spinner'
 import type { Framework, PreviewRuntimeMessage } from './types'
+
+const getCurrentTheme = (): 'light' | 'dark' => {
+  if (typeof document === 'undefined') return 'dark'
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+}
 
 const developmentOrigins: Record<Framework, string> = {
   angular: 'http://127.0.0.1:4110',
@@ -12,35 +17,91 @@ const developmentOrigins: Record<Framework, string> = {
   vue: 'http://127.0.0.1:4114',
 }
 
+type DemoLayer = 'primitive' | 'ui'
+
 export function DemoCard(props: {
   scene: { id: string; title: string; description: string }
   framework: Framework
-  layer: 'primitive' | 'ui'
+  layer: DemoLayer
   slug: string
-  layers: readonly ('primitive' | 'ui')[]
+  layers: readonly DemoLayer[]
+}) {
+  const hasBothLayers = () => props.layers.includes('ui') && props.layers.includes('primitive')
+
+  return (
+    <article
+      class="mt-9.5"
+      id={`example-${props.scene.id}`}
+      data-toc-item
+      data-toc-title={props.scene.title}
+    >
+      <div class="flex items-baseline justify-between gap-4">
+        <h3 class="m-0 text-lg font-semibold text-foreground">{props.scene.title}</h3>
+        
+      </div>
+      <p class="mt-1.5 mb-0 leading-relaxed text-muted-foreground text-sm">{props.scene.description}</p>
+
+      <Show
+        when={hasBothLayers()}
+        fallback={
+          <div class="mt-3.5">
+            <SingleDemoPanel
+              layer={props.layers[0] || props.layer}
+              scene={props.scene}
+              framework={props.framework}
+              slug={props.slug}
+            />
+          </div>
+        }
+      >
+        <div class="mt-3.5 flex flex-col md:flex-row gap-4 w-full items-stretch">
+          <SingleDemoPanel
+            layer="ui"
+            scene={props.scene}
+            framework={props.framework}
+            slug={props.slug}
+          />
+          <SingleDemoPanel
+            layer="primitive"
+            scene={props.scene}
+            framework={props.framework}
+            slug={props.slug}
+          />
+        </div>
+      </Show>
+    </article>
+  )
+}
+
+function SingleDemoPanel(props: {
+  layer: DemoLayer
+  scene: { id: string; title: string; description: string }
+  framework: Framework
+  slug: string
 }) {
   const [tab, setTab] = createSignal<'preview' | 'code'>('preview')
-  const [demoLayer, setDemoLayer] = createSignal<'primitive' | 'ui'>(props.layer)
   const [copied, setCopied] = createSignal(false)
-  const [height, setHeight] = createSignal(180)
+  const [height, setHeight] = createSignal(240)
   const [ready, setReady] = createSignal(false)
   const [hasEntered, setHasEntered] = createSignal(false)
-  let article!: HTMLElement
+  let panel!: HTMLElement
   let frame!: HTMLIFrameElement
 
-  // 1. Runtime URL: 不再包含 component/demo/layer 等查询参数，统一使用干净的 runtime 入口
   const runtimeUrl = () => {
+    const theme = getCurrentTheme()
+    const host = typeof window !== 'undefined' ? window.location.hostname : '127.0.0.1'
     if (import.meta.env.DEV) {
-      return `${developmentOrigins[props.framework]}/?embed=true`
+      const origin = developmentOrigins[props.framework].replace('127.0.0.1', host)
+      return `${origin}/?embed=true&theme=${theme}`
     }
-    return `${import.meta.env.BASE_URL}previews/${props.framework}/?embed=true`
+    return `${import.meta.env.BASE_URL}previews/${props.framework}/?embed=true&theme=${theme}`
   }
 
   const standaloneHref = () => {
     if (import.meta.env.DEV) {
-      return `${developmentOrigins[props.framework]}/examples/${props.framework}/${demoLayer()}/${props.slug}/${props.scene.id}`
+      return `${developmentOrigins[props.framework]}/examples/${props.framework}/${props.layer}/${props.slug}/${props.scene.id}`
     }
-    return `${import.meta.env.BASE_URL}previews/${props.framework}/?layer=${demoLayer()}&component=${props.slug}&demo=${props.scene.id}`
+    return `${import.meta.env.BASE_URL}previews/${props.framework}/?layer=${props.layer}&component=${props.slug}&demo=${props.scene.id}`
   }
 
   const sendRender = () => {
@@ -49,10 +110,11 @@ export function DemoCard(props: {
       {
         protocol: PREVIEW_PROTOCOL,
         type: 'render',
-        layer: demoLayer(),
+        layer: props.layer,
         component: props.slug,
         demo: props.scene.id,
         props: {},
+        theme: getCurrentTheme(),
       },
       '*',
     )
@@ -61,22 +123,20 @@ export function DemoCard(props: {
   const [source] = createResource(
     () =>
       tab() === 'code'
-        ? `${props.framework}:${demoLayer()}:${props.slug}:${props.scene.id}`
+        ? `${props.framework}:${props.layer}:${props.slug}:${props.scene.id}`
         : undefined,
     async () => {
       const response = await fetch(
         import.meta.env.DEV
-          ? `/__example-source?framework=${props.framework}&layer=${demoLayer()}&component=${props.slug}&example=${props.scene.id}`
-          : `${import.meta.env.BASE_URL}example-source/${props.framework}/${demoLayer()}/${props.slug}/${props.scene.id}.json`,
+          ? `/__example-source?framework=${props.framework}&layer=${props.layer}&component=${props.slug}&example=${props.scene.id}`
+          : `${import.meta.env.BASE_URL}example-source/${props.framework}/${props.layer}/${props.slug}/${props.scene.id}.json`,
       )
       if (!response.ok) throw new Error('Example source not found')
       return response.json() as Promise<{ source: string; html: string }>
     },
   )
 
-  // 当 demoLayer 发生切换时，向 iframe 发送新的 render 消息
   createEffect(() => {
-    demoLayer()
     props.slug
     props.scene.id
     if (ready()) {
@@ -85,7 +145,6 @@ export function DemoCard(props: {
   })
 
   onMount(() => {
-    // 首次进入视口后激活 iframe，一旦加载后不再销毁，保证滚动流畅无白屏重建
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
@@ -95,7 +154,7 @@ export function DemoCard(props: {
       },
       { rootMargin: '200px 0px' },
     )
-    observer.observe(article)
+    observer.observe(panel)
 
     const receive = (event: MessageEvent<PreviewRuntimeMessage>) => {
       if (event.source !== frame?.contentWindow || event.data?.protocol !== PREVIEW_PROTOCOL) return
@@ -104,7 +163,7 @@ export function DemoCard(props: {
         sendRender()
       }
       if (event.data.type === 'resize') {
-        setHeight(Math.max(140, Math.ceil(event.data.height)))
+        setHeight(Math.max(220, Math.ceil(event.data.height)))
       }
     }
     addEventListener('message', receive)
@@ -122,34 +181,77 @@ export function DemoCard(props: {
   }
 
   return (
-    <article
-      ref={(element) => {
-        article = element
-      }}
-      class="mt-9.5"
-      id={`example-${props.scene.id}`}
-      data-toc-item
-      data-toc-title={props.scene.title}
-    >
-      <h3 class="m-0 text-lg font-semibold">{props.scene.title}</h3>
-      <p class="mt-1.5 mb-0 leading-relaxed text-muted-foreground">{props.scene.description}</p>
-      <ExampleCard
-        tab={tab()}
-        layer={demoLayer()}
-        layers={props.layers}
-        copied={copied()}
-        standaloneHref={standaloneHref()}
-        onTabChange={setTab}
-        onLayerChange={(layer) => {
-          setDemoLayer(layer)
-        }}
-        onCopy={() => void copySource()}
-      >
+    <div ref={panel} class="flex-1 min-w-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm flex flex-col">
+      {/* Panel Header */}
+      <div class="flex items-center justify-between border-b border-border bg-muted/40 px-3 py-2 text-xs">
+        <div class="flex items-center gap-1.5">
+          <button
+            class={`rounded-md px-2.5 py-1 text-xs font-medium cursor-pointer transition-colors ${
+              tab() === 'preview'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+            onClick={() => setTab('preview')}
+          >
+            预览
+          </button>
+          <button
+            class={`rounded-md px-2.5 py-1 text-xs font-medium cursor-pointer transition-colors ${
+              tab() === 'code'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+            onClick={() => setTab('code')}
+          >
+            源码
+          </button>
+        </div>
+
+        {/* Layer Badge */}
+        <div class="flex items-center gap-2">
+          <span
+            class={`rounded px-2 py-0.5 text-[11px] font-semibold border ${
+              props.layer === 'ui'
+                ? 'border-blue-500/30 bg-blue-500/10 text-blue-600 dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-400'
+                : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-400'
+            }`}
+          >
+            {props.layer === 'ui' ? 'UI (开箱即用)' : 'Primitive (解构拼装)'}
+          </span>
+        </div>
+
+        {/* Actions */}
+        <div class="flex items-center gap-1">
+          <Show when={tab() === 'code'}>
+            <button
+              class="grid size-7 cursor-pointer place-items-center rounded-md text-muted-foreground hover:bg-background hover:text-foreground"
+              aria-label="复制源码"
+              onClick={() => void copySource()}
+            >
+              <Show when={copied()} fallback={<CopyIcon />}>
+                <CheckIcon />
+              </Show>
+            </button>
+          </Show>
+          <a
+            class="grid size-7 place-items-center rounded-md text-muted-foreground no-underline hover:bg-background hover:text-foreground"
+            href={standaloneHref()}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="新窗口打开"
+          >
+            <OpenIcon />
+          </a>
+        </div>
+      </div>
+
+      {/* Panel Content */}
+      <div class="flex-1 bg-background">
         <Show
           when={tab() === 'preview'}
           fallback={
             <div
-              class="max-h-120 min-h-45 overflow-auto bg-background text-xs leading-relaxed [&_pre]:m-0 [&_pre]:min-h-45 [&_pre]:bg-background! [&_pre]:p-5.5"
+              class="max-h-120 min-h-45 overflow-auto bg-background p-4 text-xs leading-relaxed font-mono"
               innerHTML={
                 source.loading
                   ? '<pre>正在读取源码…</pre>'
@@ -160,7 +262,7 @@ export function DemoCard(props: {
             />
           }
         >
-          <div class="relative min-h-35 bg-background" style={{ height: `${height()}px` }}>
+          <div class="relative min-h-35 bg-background flex items-center justify-center p-4" style={{ height: `${height()}px` }}>
             <Show when={!ready()}>
               <div class="absolute inset-0 z-1 grid place-items-center bg-background" role="status">
                 <Spinner size="lg" class="text-primary" aria-label="正在加载示例" />
@@ -173,10 +275,10 @@ export function DemoCard(props: {
                 }}
                 class="block h-full min-h-35 w-full border-0 bg-background opacity-0 transition-opacity duration-150 data-[ready=true]:opacity-100"
                 data-ready={ready()}
-                title={`${props.framework} ${demoLayer()} ${props.slug} ${props.scene.id}`}
+                title={`${props.framework} ${props.layer} ${props.slug} ${props.scene.id}`}
                 src={runtimeUrl()}
                 loading="lazy"
-                scrolling="no"
+                scrolling="auto"
                 onLoad={() => {
                   sendRender()
                 }}
@@ -184,7 +286,37 @@ export function DemoCard(props: {
             </Show>
           </div>
         </Show>
-      </ExampleCard>
-    </article>
+      </div>
+    </div>
   )
 }
+
+function CheckIcon() {
+  return (
+    <svg class="size-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m5 12 4 4L19 6" />
+    </svg>
+  )
+}
+
+function CopyIcon() {
+  return (
+    <svg class="size-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="9" y="9" width="11" height="11" rx="2" />
+      <path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3" />
+    </svg>
+  )
+}
+
+function OpenIcon() {
+  return (
+    <svg class="size-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14 5h5v5M10 14 19 5" />
+      <path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" />
+    </svg>
+  )
+}
+
+
+
+

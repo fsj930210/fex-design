@@ -1,3 +1,13 @@
+function applyTheme(theme?: string) {
+  if (typeof document === 'undefined') return
+  const current = theme === 'light' ? 'light' : 'dark'
+  const root = document.documentElement
+  root.classList.remove('light', 'dark')
+  root.classList.add(current)
+  root.setAttribute('data-theme', current)
+  root.style.colorScheme = current
+}
+
 ﻿import { NgComponentOutlet } from '@angular/common'
 import { ChangeDetectionStrategy, Component, computed, signal, type Type } from '@angular/core'
 import type { ApiValue } from '@fex-design/docs-shared/model'
@@ -14,6 +24,7 @@ export class AppComponent {
   private readonly query = new URLSearchParams(location.search)
   private readonly path = location.pathname.split('/').filter(Boolean)
   protected readonly embedded = this.query.get('embed') === 'true'
+  private readonly initialTheme = applyTheme(this.query.get('theme') ?? undefined)
   protected readonly values = signal<Record<string, ApiValue>>({})
 
   private readonly initialLayer = this.query.get('layer') ?? this.path.at(-3) ?? 'ui'
@@ -36,13 +47,16 @@ export class AppComponent {
   constructor() {
     addEventListener('message', (event) => {
       if (isPreviewHostMessage(event.data)) {
-        if (event.data.props) this.values.set(event.data.props)
-        if (event.data.component && event.data.demo) {
-          this.currentInfo.set({
-            layer: event.data.layer ?? 'ui',
-            component: event.data.component,
-            demo: event.data.demo,
-          })
+        if ('theme' in event.data && event.data.theme) applyTheme(event.data.theme)
+        if (event.data.type === 'render') {
+          if (event.data.props) this.values.set(event.data.props)
+          if (event.data.component && event.data.demo) {
+            this.currentInfo.set({
+              layer: event.data.layer ?? 'ui',
+              component: event.data.component,
+              demo: event.data.demo,
+            })
+          }
         }
       }
     })

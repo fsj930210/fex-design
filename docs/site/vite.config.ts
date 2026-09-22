@@ -67,8 +67,8 @@ export default defineConfig({
             process.cwd(),
             '../../packages/@fex-design/components',
             framework,
-            layer!,
             'src',
+            layer!,
             component,
             'examples',
           )
@@ -85,8 +85,8 @@ export default defineConfig({
                   process.cwd(),
                   '../../packages/@fex-design/components',
                   framework,
-                  'primitive',
                   'src',
+                  'primitive',
                   reexport[1],
                   'examples',
                 )
@@ -134,5 +134,6 @@ export default defineConfig({
     },
   ],
 })
+
 
 

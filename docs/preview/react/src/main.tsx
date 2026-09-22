@@ -12,6 +12,19 @@ const initialComponent = query.get('component') ?? path.at(-2) ?? ''
 const initialDemo = query.get('demo') ?? path.at(-1) ?? ''
 const embedded = query.get('embed') === 'true'
 
+function applyTheme(theme?: string) {
+  if (typeof document === 'undefined') return
+  const current = theme === 'light' ? 'light' : 'dark'
+  const root = document.documentElement
+  root.classList.remove('light', 'dark')
+  root.classList.add(current)
+  root.setAttribute('data-theme', current)
+  root.style.colorScheme = current
+}
+
+const initialTheme = query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
+applyTheme(initialTheme)
+
 const exampleLoaders = import.meta.glob(
   '../../../../packages/@fex-design/components/react/src/{primitive,ui}/*/examples/*.tsx',
 ) as Record<string, () => Promise<Record<string, ComponentType>>>
@@ -68,13 +81,16 @@ function App() {
   useEffect(() => {
     const receive = (event: MessageEvent) => {
       if (isPreviewHostMessage(event.data)) {
-        if (event.data.props) setValues(event.data.props)
-        if (event.data.component && event.data.demo) {
-          setCurrentInfo({
-            layer: event.data.layer ?? 'ui',
-            component: event.data.component,
-            demo: event.data.demo,
-          })
+        if ('theme' in event.data && event.data.theme) applyTheme(event.data.theme)
+        if (event.data.type === 'render') {
+          if (event.data.props) setValues(event.data.props)
+          if (event.data.component && event.data.demo) {
+            setCurrentInfo({
+              layer: event.data.layer ?? 'ui',
+              component: event.data.component,
+              demo: event.data.demo,
+            })
+          }
         }
       }
     }

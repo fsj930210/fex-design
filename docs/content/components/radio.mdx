@@ -19,19 +19,7 @@ Radio 用于必须从互斥选项中选择一个值。多个独立布尔选择�
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="RadioGroup、Radio 与 RadioButton 的公开属性。">
-  <ApiComposition layer="primitive">
-    `Radio` 与 `RadioButton` 都必须位于 `RadioGroup` 中；前者是圆形控件，后者是按钮式快捷形态。
-
-    ```text
-    RadioGroup
-    ├── Radio ...
-    └── RadioButton ...
-    ```
-
-  </ApiComposition>
-</ApiSection>
-
+<ApiContainer>
 <ApiSection layer="ui" title="UI API" description="带标签与 options 快捷组合的 Radio API。">
   <ApiComposition layer="ui">
     UI `Radio` 内置标签结构；两个 Group 均可接收 options，也可接收框架原生子内容。
@@ -46,6 +34,20 @@ Radio 用于必须从互斥选项中选择一个值。多个独立布尔选择�
 
   </ApiComposition>
 </ApiSection>
+
+<ApiSection layer="primitive" title="Primitive API" description="RadioGroup、Radio 与 RadioButton 的公开属性。">
+  <ApiComposition layer="primitive">
+    `Radio` 与 `RadioButton` 都必须位于 `RadioGroup` 中；前者是圆形控件，后者是按钮式快捷形态。
+
+    ```text
+    RadioGroup
+    ├── Radio ...
+    └── RadioButton ...
+    ```
+
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>
 
 ## CSS Variables
 

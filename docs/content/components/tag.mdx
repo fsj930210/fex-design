@@ -17,18 +17,7 @@ UI 在 Primitive 上增加 `closable`、关闭事件以及 `classNames` / `style
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Primitive Tag 与 TagAction 的公开属性。">
-  <ApiComposition layer="primitive">
-    ```text
-    Tag
-    └── TagAction (optional)
-    ```
-
-    `TagAction` 是独立操作按钮，由调用方决定它表示关闭、编辑、更多或其他行为；组件本身不修改 Tag 状态。
-
-  </ApiComposition>
-</ApiSection>
-
+<ApiContainer>
 <ApiSection layer="ui" title="UI API" description="UI Tag 的可关闭快捷组合与结构化样式。">
   <ApiComposition layer="ui">
     UI `Tag` 通过 `closable` 创建关闭区域；自定义 close icon 使用当前框架的原生内容入口，不需要手动组合 `TagAction`。
@@ -41,3 +30,16 @@ UI 在 Primitive 上增加 `closable`、关闭事件以及 `classNames` / `style
 
   </ApiComposition>
 </ApiSection>
+
+<ApiSection layer="primitive" title="Primitive API" description="Primitive Tag 与 TagAction 的公开属性。">
+  <ApiComposition layer="primitive">
+    ```text
+    Tag
+    └── TagAction (optional)
+    ```
+
+    `TagAction` 是独立操作按钮，由调用方决定它表示关闭、编辑、更多或其他行为；组件本身不修改 Tag 状态。
+
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>

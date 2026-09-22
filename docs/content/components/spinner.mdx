@@ -67,25 +67,7 @@ Primitive 组件提供带基础视觉样式的最小部件，但不持有 loadin
 
 ## API
 
-<ApiSection
-  layer="primitive"
-  title="Primitive API"
-  description="Primitive Spinner、SpinnerContainer、SpinnerOverlay 与 SpinnerText 的公开属性。"
->
-  <ApiComposition layer="primitive">
-    ```text
-    SpinnerContainer
-    ├── children
-    └── SpinnerOverlay
-        ├── Spinner
-        └── SpinnerText
-    ```
-
-    Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。
-
-  </ApiComposition>
-</ApiSection>
-
+<ApiContainer>
 <ApiSection
   layer="ui"
   title="UI API"
@@ -104,3 +86,23 @@ Primitive 组件提供带基础视觉样式的最小部件，但不持有 loadin
 
   </ApiComposition>
 </ApiSection>
+
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="Primitive Spinner、SpinnerContainer、SpinnerOverlay 与 SpinnerText 的公开属性。"
+>
+  <ApiComposition layer="primitive">
+    ```text
+    SpinnerContainer
+    ├── children
+    └── SpinnerOverlay
+        ├── Spinner
+        └── SpinnerText
+    ```
+
+    Primitive 不负责 `spinning`，调用方拥有条件渲染和布局。
+
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>

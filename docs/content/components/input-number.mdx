@@ -21,6 +21,9 @@ Primitive 与 UI 使用相同内容、布局和交互结果；示例只聚焦数
 
 ## API
 
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="一次完成默认数字输入结构的快捷组件。" />
+
 <ApiSection layer="primitive" title="Primitive API" description="可组合的数字输入行为与结构。">
   <ApiComposition layer="primitive">
 
@@ -37,10 +40,7 @@ InputNumberRoot
 
   </ApiComposition>
 </ApiSection>
-
-<ApiSection layer="ui" title="UI API" description="一次完成默认数字输入结构的快捷组件。" />
-
-InputNumber 复用 Input 的尺寸、形态、禁用、只读、原生 input 属性、元素引用和方向能力。正式数值变化统一使用 `onChange` / `change`；编辑中的展示文本由 Primitive 内部 draft 保存。
+</ApiContainer>
 
 ## CSS Variables
 

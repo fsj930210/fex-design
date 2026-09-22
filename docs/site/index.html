@@ -6,6 +6,17 @@
     <title>Fex Design - 跨五大前端框架的下一代企业级组件库</title>
     <meta name="description" content="Fex Design 是一套高可维护、低重复渲染、支持五大前端框架（React, Vue, Solid, Svelte, Angular）的企业级现代组件库体系。" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('fex_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.remove('light', 'dark');
+          document.documentElement.classList.add(theme);
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

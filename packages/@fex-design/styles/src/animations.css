@@ -193,8 +193,35 @@
     var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility animate-spin {
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@utility animate-pulse {
+  animation: pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
+  *:not(.animate-spin):not([class*="animate-spin"]):not([class*="animate-spin"] *):not(.animate-pulse):not([class*="animate-pulse"]):not([class*="animate-pulse"] *):not([data-slot="loading-indicator"] *):not([class*="loading"] *),
   ::before,
   ::after {
     scroll-behavior: auto !important;
@@ -203,3 +230,4 @@
     transition-duration: 1ms !important;
   }
 }
+

@@ -2,14 +2,21 @@ import type { ApiValue, Framework } from './model'
 
 export const PREVIEW_PROTOCOL = 'fex-preview-v1' as const
 
-export type PreviewHostMessage = {
-  protocol: typeof PREVIEW_PROTOCOL
-  type: 'render'
-  layer?: 'primitive' | 'ui'
-  component?: string
-  demo?: string
-  props?: Record<string, ApiValue>
-}
+export type PreviewHostMessage =
+  | {
+      protocol: typeof PREVIEW_PROTOCOL
+      type: 'render'
+      layer?: 'primitive' | 'ui'
+      component?: string
+      demo?: string
+      props?: Record<string, ApiValue>
+      theme?: 'light' | 'dark'
+    }
+  | {
+      protocol: typeof PREVIEW_PROTOCOL
+      type: 'theme'
+      theme: 'light' | 'dark'
+    }
 
 export type PreviewRuntimeMessage =
   | { protocol: typeof PREVIEW_PROTOCOL; type: 'ready'; framework: Framework }
@@ -20,5 +27,8 @@ export type PreviewRuntimeMessage =
 export function isPreviewHostMessage(value: unknown): value is PreviewHostMessage {
   if (!value || typeof value !== 'object') return false
   const message = value as Partial<PreviewHostMessage>
-  return message.protocol === PREVIEW_PROTOCOL && message.type === 'render'
+  return (
+    message.protocol === PREVIEW_PROTOCOL &&
+    (message.type === 'render' || message.type === 'theme')
+  )
 }

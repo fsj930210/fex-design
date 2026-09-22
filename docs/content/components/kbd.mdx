@@ -21,16 +21,7 @@ Kbd 用于展示键盘按键、快捷键组合和按钮对应的快捷键提示�
 
 ## API
 
-<ApiSection layer="primitive" title="Primitive API" description="Kbd 与 KbdGroup 的组件 API。">
-  <ApiComposition layer="primitive">
-    ```text
-    Kbd
-    KbdGroup
-    ├── Kbd
-    └── Kbd
-    ```
-  </ApiComposition>
-</ApiSection>
+<ApiContainer>
 <ApiSection layer="ui" title="UI API" description="UI Kbd 与 KbdGroup 的组件 API。">
   <ApiComposition layer="ui">
     UI 直接重导出 Primitive，因此使用相同组合结构。
@@ -44,3 +35,15 @@ Kbd 用于展示键盘按键、快捷键组合和按钮对应的快捷键提示�
 
   </ApiComposition>
 </ApiSection>
+
+<ApiSection layer="primitive" title="Primitive API" description="Kbd 与 KbdGroup 的组件 API。">
+  <ApiComposition layer="primitive">
+    ```text
+    Kbd
+    KbdGroup
+    ├── Kbd
+    └── Kbd
+    ```
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>

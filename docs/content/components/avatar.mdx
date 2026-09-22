@@ -15,6 +15,23 @@ UI 提供开箱即用的头像，并为头像组增加自动截断。
 
 ## API
 
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="直接使用的 Avatar 与 AvatarGroup。">
+  <ApiComposition layer="ui">
+    UI `Avatar` 在单组件内处理图片、回退内容和状态；`AvatarGroup` 组合多个 Avatar，并可自动生成溢出节点。
+
+    ```text
+    Avatar
+
+    AvatarGroup
+    ├── Avatar
+    ├── Avatar
+    └── overflow avatar (optional)
+    ```
+
+  </ApiComposition>
+</ApiSection>
+
 <ApiSection layer="primitive" title="Primitive API" description="Avatar 的可组合基础部件。">
   <ApiComposition layer="primitive">
     ```text
@@ -31,21 +48,7 @@ UI 提供开箱即用的头像，并为头像组增加自动截断。
 
   </ApiComposition>
 </ApiSection>
-<ApiSection layer="ui" title="UI API" description="直接使用的 Avatar 与 AvatarGroup。">
-  <ApiComposition layer="ui">
-    UI `Avatar` 在单组件内处理图片、回退内容和状态；`AvatarGroup` 组合多个 Avatar，并可自动生成溢出节点。
-
-    ```text
-    Avatar
-
-    AvatarGroup
-    ├── Avatar
-    ├── Avatar
-    └── overflow avatar (optional)
-    ```
-
-  </ApiComposition>
-</ApiSection>
+</ApiContainer>
 
 ## CSS Variables
 

@@ -20,7 +20,7 @@ import {
   type Ref,
 } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
-import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
 import useUnmount from '@fex-design/react/hooks/use-unmount'
 
@@ -68,9 +68,16 @@ export function CarouselRoot({
   }
   const configRef = useRef<CreateCarouselControllerOptions>(currentConfig)
   configRef.current = currentConfig
-  const controller = useLazyRef(() => createCarouselController(configRef.current)).current
+  const instanceRef = useRef<CarouselController | null>(null)
+  if (!instanceRef.current) {
+    instanceRef.current = createCarouselController(configRef.current)
+  }
+  const controller = instanceRef.current
   const snapshot = useCoreStore(controller)
-  useUnmount(() => controller.destroy())
+  useUnmount(() => {
+    instanceRef.current?.destroy()
+    instanceRef.current = null
+  })
   if (typeof controllerRef === 'function') controllerRef(controller)
   else if (controllerRef) controllerRef.current = controller
   return (

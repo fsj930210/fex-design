@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../node_modules/@fex-design/cli/schema.json",
+  "framework": "react",
+  "tailwind": {
+    "version": "v4",
+    "css": "src/index.css",
+    "baseColor": "neutral"
+  },
+  "aliases": {
+    "components": "@demo/ui/components",
+    "ui": "@demo/ui/components/ui",
+    "primitive": "@demo/ui/components/primitive",
+    "pro": "@demo/ui/components/pro",
+    "hooks": "@demo/hooks",
+    "utils": "@demo/utils",
+    "lib": "@/lib",
+    "icons": "@demo/ui/components/icons"
+  }
+}

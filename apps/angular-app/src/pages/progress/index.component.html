@@ -1,263 +1,130 @@
-<main class="grid gap-4 p-2 md:p-6">
-  <div
-    card
-    title="Basic"
-    description="A determinate line progress bar with an external label and value."
-  >
-    <div class="grid max-w-xl gap-1.5">
-      <div class="flex justify-between text-sm">
-        <span>Upload progress</span><span class="text-muted-foreground">35%</span>
-      </div>
-      <fex-progress [value]="35" />
-    </div>
+<div class="flex flex-col gap-6 p-6">
+  <div>
+    <h1 class="text-2xl font-bold tracking-tight">Progress</h1>
+    <p class="text-muted-foreground">
+      展示操作的当前进度，或显示任务完成的百分比。
+    </p>
   </div>
-  <div
-    card
-    title="Status"
-    description="Info, warning, success and error use system semantic tokens."
-  >
-    <div class="grid max-w-xl gap-3">
-      <div><span>Normal · 35%</span><fex-progress [value]="35" /></div>
-      <div><span>Info / 68%</span><fex-progress [value]="68" status="info" /></div>
-      <div><span>Warning / 82%</span><fex-progress [value]="82" status="warning" /></div>
-      <div><span>Success · 100%</span><fex-progress [value]="100" status="success" /></div>
-      <div><span>Error · 42%</span><fex-progress [value]="42" status="error" /></div>
-    </div>
-  </div>
-  <div card title="Color" description="Use arbitrary CSS colors, track colors and gradients.">
-    <div class="grid max-w-xl gap-3">
-      <div><span>Custom color</span><fex-progress [value]="68" color="#7c3aed" /></div>
-      <div>
-        <span>Custom track</span><fex-progress [value]="52" color="#0891b2" trackColor="#cffafe" />
+
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <div card title="Basic" class="p-4">
+      <div class="grid gap-4">
+        <div progress label="Upload progress" [value]="35" infoPlacement="top"></div>
+        <div progress label="Task completion" [value]="70" infoPlacement="top"></div>
       </div>
-      <div><span>Gradient</span><fex-progress [value]="88" [color]="gradient" /></div>
     </div>
-  </div>
-  <div card title="Segmented" description="Use hard color stops to show staged progress.">
-    <div class="grid max-w-xl gap-4">
-      <div class="grid gap-1.5">
-        <div class="flex justify-between text-sm">
-          <span>Segmented line</span><span class="text-muted-foreground">60%</span>
-        </div>
-        <fex-progress [value]="60" [color]="segmentGradient" [showValue]="true" />
+
+    <div card title="Status" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="0" status="pending"></div>
+        <div progress [value]="50" status="active"></div>
+        <div progress [value]="70" status="active"></div>
+        <div progress [value]="100" status="success"></div>
+        <div progress [value]="60" status="error"></div>
       </div>
-      <div class="flex flex-wrap gap-4">
-        <div class="grid justify-items-center gap-1.5">
-          <fex-progress
-            variant="circle"
-            [value]="60"
-            [size]="112"
-            [thickness]="8"
-            [color]="segmentGradient"
-            [showValue]="true"
-          />
-          <span class="text-sm">Circle</span>
-        </div>
-        <div class="grid justify-items-center gap-1.5">
-          <fex-progress
-            variant="dashboard"
-            [value]="60"
-            [size]="112"
-            [thickness]="8"
-            [color]="segmentGradient"
-            [gapDegree]="90"
-            [showValue]="true"
-          />
-          <span class="text-sm">Dashboard</span>
+    </div>
+
+    <div card title="Format & info placement" class="p-4">
+      <div class="grid gap-4">
+        <div progress label="Storage used" [value]="72" infoPlacement="top"></div>
+        <div progress label="Processing" [value]="48" infoPlacement="inside" [showInfo]="true"></div>
+        <div progress label="Review" [value]="84" infoPlacement="bottom" [showInfo]="true"></div>
+      </div>
+    </div>
+
+    <div card title="Color" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="65" color="#7c3aed"></div>
+        <div progress [value]="80" color="#059669" trackColor="#cffafe"></div>
+        <div progress [value]="90" [color]="gradient"></div>
+      </div>
+    </div>
+
+    <div card title="Segmented" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="70" [color]="segmentGradient"></div>
+        <div class="flex items-center justify-around">
+          <div progress variant="circle" [value]="70" [size]="96" [color]="segmentGradient" [showValue]="true"></div>
+          <div progress variant="dashboard" [value]="70" [size]="96" [color]="segmentGradient" [showValue]="true"></div>
         </div>
       </div>
     </div>
-  </div>
-  <div card title="Step Line" description="Show progress as fixed linear steps.">
-    <div class="grid gap-3">
-      @for (demo of stepLineDemos; track demo.value) {
-        <div class="flex items-center gap-1.5">
-          <div class="flex gap-1">
-            @for (index of getRange(demo.steps); track index) {
-              <span
-                class="h-2 w-4 rounded-[1px]"
-                [style.background]="
-                  index < getActiveSteps(demo.value, demo.steps)
-                    ? demo.color
-                    : 'var(--progress-remaining)'
-                "
-              ></span>
-            }
-          </div>
-          @if (demo.success) {
-            <span
-              class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
-              ><fex-check-icon class="size-3"
-            /></span>
-          } @else {
-            <span class="text-sm">{{ demo.value }}%</span>
-          }
-        </div>
-      }
-    </div>
-  </div>
-  <div
-    card
-    title="Step Circle"
-    description="Show progress as fixed circular steps with custom count and gap."
-  >
-    <div class="flex flex-wrap gap-4">
-      @for (demo of circleStepDemos; track demo.label) {
-        <div class="grid justify-items-center gap-1.5">
-          <div class="relative inline-flex size-32 items-center justify-center">
-            <svg aria-hidden="true" class="size-32" viewBox="0 0 128 128">
-              @for (index of getRange(demo.steps); track index) {
-                <circle
-                  cx="64"
-                  cy="64"
-                  r="56"
-                  fill="none"
-                  [attr.stroke]="
-                    index < getActiveSteps(demo.value, demo.steps)
-                      ? demo.color
-                      : 'var(--progress-remaining)'
-                  "
-                  stroke-width="16"
-                  stroke-linecap="butt"
-                  pathLength="100"
-                  [attr.stroke-dasharray]="getStepDasharray(demo.steps, demo.gap)"
-                  [attr.stroke-dashoffset]="getStepDashoffset(index, demo.steps)"
-                />
-              }
-            </svg>
-            <span class="absolute text-2xl">
-              @if (demo.success) {
-                <fex-check-icon class="size-8 text-success" />
-              } @else {
-                {{ demo.value }}%
-              }
-            </span>
-          </div>
-          <span class="text-sm">{{ demo.label }}</span>
-        </div>
-      }
-    </div>
-  </div>
-  <div card title="Size" description="Configure line thickness.">
-    <div class="grid max-w-xl gap-3">
-      <div><span>Thin · 4px</span><fex-progress [value]="30" [thickness]="4" /></div>
-      <div><span>Medium · 8px</span><fex-progress [value]="55" [thickness]="8" /></div>
-      <div><span>Large · 12px</span><fex-progress [value]="80" [thickness]="12" /></div>
-    </div>
-  </div>
-  <div
-    card
-    title="Linecap"
-    description="Round line / round track, butt and square endings with the same value."
-  >
-    <div class="grid max-w-xl gap-3">
-      <div>
-        <span>Round line / round track</span
-        ><fex-progress [value]="36" [thickness]="12" linecap="round" />
-      </div>
-      <div>
-        <span>Butt · round track</span
-        ><fex-progress [value]="36" [thickness]="12" linecap="butt" trackLinecap="round" />
-      </div>
-      <div>
-        <span>Square line / round track</span
-        ><fex-progress [value]="36" [thickness]="12" linecap="square" />
+
+    <div card title="Step Line" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="50" [steps]="5" color="var(--info)"></div>
+        <div progress [value]="80" [steps]="5" color="var(--info)" [success]="true"></div>
+        <div progress [value]="100" [steps]="5" color="var(--info)" [success]="true"></div>
       </div>
     </div>
-  </div>
-  <div card title="Circle" description="Circular progress supports status and gradients.">
-    <div class="flex flex-wrap gap-4">
-      <fex-progress
-        variant="circle"
-        [value]="72"
-        [size]="96"
-        [thickness]="8"
-        [color]="gradient"
-        [showValue]="true"
-      /><fex-progress
-        variant="circle"
-        [value]="100"
-        [size]="96"
-        [thickness]="8"
-        status="success"
-        [showValue]="true"
-      /><fex-progress
-        variant="circle"
-        [value]="42"
-        [size]="96"
-        [thickness]="8"
-        status="error"
-        [showValue]="true"
-      />
-    </div>
-  </div>
-  <div card title="Dashboard" description="Configure the gap degree and placement.">
-    <div class="flex flex-wrap gap-4">
-      <fex-progress
-        variant="dashboard"
-        [value]="64"
-        [size]="96"
-        [thickness]="8"
-        [gapDegree]="90"
-        [showValue]="true"
-      /><fex-progress
-        variant="dashboard"
-        [value]="64"
-        [size]="96"
-        [thickness]="8"
-        [gapDegree]="90"
-        gapPlacement="top"
-        [showValue]="true"
-      />
-    </div>
-  </div>
-  <div card title="Dynamic" description="Control the same progress value from external actions.">
-    <div class="grid max-w-xl gap-3">
-      <div class="grid gap-1.5">
-        <div class="flex justify-between text-sm">
-          <span>Controlled line</span
-          ><span class="text-muted-foreground">{{ dynamicValue() }}%</span>
-        </div>
-        <fex-progress [value]="dynamicValue()" />
+
+    <div card title="Step Circle" class="p-4">
+      <div class="flex items-center justify-around">
+        <div progress variant="circle" [value]="50" [steps]="10" [gap]="2" color="var(--info)" [showValue]="true"></div>
+        <div progress variant="circle" [value]="80" [steps]="10" [gap]="2" color="var(--info)" [showValue]="true"></div>
+        <div progress variant="circle" [value]="100" [steps]="10" [gap]="2" color="var(--info)" [success]="true"></div>
       </div>
-      <div class="flex flex-wrap items-center gap-4">
-        <fex-progress
-          variant="circle"
-          [value]="dynamicValue()"
-          [size]="96"
-          [thickness]="8"
-          [showValue]="true"
-        />
-        <div class="flex gap-1.5">
-          <button
-            button
-            variant="outlined"
-            size="icon-sm"
-            [disabled]="dynamicValue() <= 0"
-            (click)="decrease()"
-          >
-            <minus-icon />
+    </div>
+
+    <div card title="Size" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="50" [thickness]="4"></div>
+        <div progress [value]="50" [thickness]="8"></div>
+        <div progress [value]="50" [thickness]="12"></div>
+      </div>
+    </div>
+
+    <div card title="Linecap" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="50" linecap="round" [thickness]="8"></div>
+        <div progress [value]="50" linecap="butt" [thickness]="8"></div>
+        <div progress [value]="50" linecap="square" [thickness]="8"></div>
+      </div>
+    </div>
+
+    <div card title="Circle" class="p-4">
+      <div class="flex flex-wrap items-center justify-around gap-4">
+        <div progress variant="circle" [value]="75" [size]="96" [thickness]="8" status="active" [showValue]="true"></div>
+        <div progress variant="circle" [value]="70" [size]="96" [thickness]="8" status="error" [showValue]="true"></div>
+        <div progress variant="circle" [value]="100" [size]="96" [thickness]="8" status="success" [showValue]="true"></div>
+      </div>
+    </div>
+
+    <div card title="Dashboard" class="p-4">
+      <div class="flex items-center justify-around">
+        <div progress variant="dashboard" [value]="70" [size]="96" [thickness]="8" [gapDegree]="90" gapPlacement="bottom" [showValue]="true"></div>
+        <div progress variant="dashboard" [value]="70" [size]="96" [thickness]="8" [gapDegree]="90" gapPlacement="top" [showValue]="true"></div>
+      </div>
+    </div>
+
+    <div card title="RTL / LTR" class="p-4">
+      <div class="grid gap-4">
+        <div dir="ltr"><div progress label="LTR direction" [value]="65" infoPlacement="top"></div></div>
+        <div dir="rtl"><div progress label="RTL direction" [value]="65" infoPlacement="top"></div></div>
+      </div>
+    </div>
+
+    <div card title="Structured composition" class="p-4">
+      <div progress label="Upload" [value]="72" status="active" infoPlacement="top" [classNames]="{ root: 'grid gap-2', label: 'font-medium', info: 'text-primary' }"></div>
+    </div>
+
+    <div card title="Dynamic & Indeterminate" class="p-4">
+      <div class="grid gap-4">
+        <div progress [value]="value()"></div>
+        <div class="flex items-center gap-2">
+          <button button size="sm" variant="outline" (click)="decrease()">
+            <minus-icon class="size-4" />
           </button>
-          <button
-            button
-            variant="outlined"
-            size="icon-sm"
-            [disabled]="dynamicValue() >= 100"
-            (click)="increase()"
-          >
-            <plus-icon />
+          <button button size="sm" variant="outline" (click)="increase()">
+            <plus-icon class="size-4" />
           </button>
+          <span class="text-sm text-muted-foreground">{{ value() }}%</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div progress [value]="null"></div>
+          <div progress variant="circle" [value]="null" [size]="48" [thickness]="4"></div>
         </div>
       </div>
     </div>
   </div>
-  <div card title="Indeterminate" description="Use a moving indicator when the value is unknown.">
-    <div class="grid max-w-xl gap-4">
-      <div><span>Processing</span><fex-progress [value]="null" /></div>
-      <div class="grid w-fit justify-items-center gap-1.5">
-        <fex-progress variant="circle" [value]="null" [size]="72" [thickness]="6" color="#1677ff" />
-        <span class="text-sm">Processing</span>
-      </div>
-    </div>
-  </div>
-</main>
+</div>

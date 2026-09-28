@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom'
 import { useState, type ComponentProps, type HTMLAttributes, type ReactNode, type Ref } from 'react'
 import { createContextMenuController } from '@fex-design/core/overlay/context-menu/create-context-menu-controller'
 import type { ContextMenuOptions } from '@fex-design/core/overlay/context-menu/types'
-import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { useRef } from 'react'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
 import useUnmount from '@fex-design/react/hooks/use-unmount'
 import { ContextMenuContext, useContextMenuContext } from './context-menu-context'
@@ -20,16 +20,17 @@ export function ContextMenuRoot<T>({ children, ...props }: ContextMenuRootProps<
   const { open, defaultOpen, onOpenChange, ...options } = props
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false)
   const openValue = open ?? uncontrolledOpen
-  const controllerRef = useLazyRef(() =>
-    createContextMenuController<T>({
+  const controllerRef = useRef<ReturnType<typeof createContextMenuController<T>> | null>(null)
+  if (!controllerRef.current) {
+    controllerRef.current = createContextMenuController<T>({
       ...options,
       open: openValue,
       onOpenChange: (nextOpen, info) => {
         if (open === undefined) setUncontrolledOpen(nextOpen)
         onOpenChange?.(nextOpen, info)
       },
-    }),
-  )
+    })
+  }
   const controller = controllerRef.current
   useIsomorphicLayoutEffect(() => {
     controller.setOptions({
@@ -41,7 +42,10 @@ export function ContextMenuRoot<T>({ children, ...props }: ContextMenuRootProps<
       },
     })
   }, [controller, openValue, open, onOpenChange, options])
-  useUnmount(() => controller.destroy())
+  useUnmount(() => {
+    controllerRef.current?.destroy()
+    controllerRef.current = null
+  })
   return <ContextMenuContext value={{ controller }}>{children}</ContextMenuContext>
 }
 

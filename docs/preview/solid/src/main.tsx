@@ -6,6 +6,8 @@ import type { Component } from 'solid-js'
 import { observeRuntimeHeight } from '../../runtime-resize'
 import './styles.css'
 
+// Progress primitive examples are loaded from the workspace source glob.
+
 const query = new URLSearchParams(window.location.search)
 const path = window.location.pathname.split('/').filter(Boolean)
 const initialLayer = query.get('layer') ?? path.at(-3) ?? 'ui'

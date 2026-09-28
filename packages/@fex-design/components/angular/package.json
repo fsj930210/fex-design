@@ -88,6 +88,7 @@
     "./ui/empty": "./src/ui/empty/empty.ts",
     "./ui/input": "./src/ui/input/input.ts",
     "./ui/input-number": "./src/ui/input-number/input-number.ts",
+    "./ui/progress": "./src/ui/progress/progress.ts",
     "./ui/radio": "./src/ui/radio/radio.ts",
     "./ui/select": "./src/ui/select/select.ts",
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",

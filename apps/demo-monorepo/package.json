@@ -1,0 +1,7 @@
+{
+  "name": "@demo-monorepo/root",
+  "private": true,
+  "scripts": {
+    "fex": "node ../../packages/@fex-design/cli/bin/fex.js"
+  }
+}

@@ -1,0 +1,11 @@
+﻿import { Progress } from "@fex-design/solid/ui/progress"
+
+export default function SizeExample() {
+  return (
+    <div class="grid w-full max-w-md gap-3">
+      <Progress value={30} thickness={4} />
+      <Progress value={50} thickness={8} />
+      <Progress value={70} thickness={12} />
+    </div>
+  )
+}

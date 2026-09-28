@@ -1,0 +1,55 @@
+---
+title: Progress
+description: 展示操作的当前进度，或显示任务完成的百分比。
+---
+
+<ManualInstall />
+
+## 何时使用
+
+- 任务执行需要较长时间，需要向用户反馈明确的完成进度时。
+- 展现当前操作在整体中所占的百分比（如上传、下载、存储空间占用等）。
+- 表达任务生命周期：尚未开始、进行中、成功或失败。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection
+  layer="ui"
+  title="UI API"
+  description="组合进度条、状态、信息展示与步进形态的配置。"
+>
+</ApiSection>
+
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="可组合的根节点、线性部件与环形 SVG 部件。"
+>
+  <ApiComposition layer="primitive">
+    ```text
+    Progress (line)
+    ├── ProgressLabel (optional)
+    ├── ProgressTrack
+    │   └── ProgressRange
+    └── ProgressValue (optional)
+
+    Progress (circle / dashboard)
+    ├── ProgressCircle
+    │   ├── ProgressCircleTrack
+    │   └── ProgressCircleRange
+    └── ProgressValue (optional)
+    ```
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+## CSS Variables
+
+Progress 轨道底色默认使用 `--progress-remaining`。单个实例可通过内联样式或自定义 class 覆盖此变量，也可以在局部容器或主题根节点上统一覆盖。
+
+<CssVariables />

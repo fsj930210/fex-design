@@ -21,6 +21,15 @@
   let Example = $state<any>(undefined);
   let loading = $state(true);
 
+  function applyTheme(theme: string) {
+    const next = theme === "light" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.classList.toggle("light", next === "light");
+    document.documentElement.dataset.theme = next;
+    document.documentElement.style.colorScheme = next;
+  }
+  applyTheme(query.get("theme") ?? "dark");
+
   const modules = import.meta.glob(
     "../../../../packages/@fex-design/components/svelte/src/{primitive,ui}/*/examples/*.svelte",
   ) as Record<string, () => Promise<{ default: any }>>;

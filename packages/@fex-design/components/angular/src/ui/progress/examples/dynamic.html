@@ -1,0 +1,4 @@
+﻿<div class="grid w-full max-w-md gap-4">
+  <div class="flex items-center gap-6"><div progress [value]="value()"></div><div progress variant="circle" [value]="value()" [size]="96" [showInfo]="true"></div></div>
+  <div class="flex gap-2"><button type="button" (click)="decrease()" class="px-3 py-1 text-sm border rounded hover:bg-muted">-10%</button><button type="button" (click)="increase()" class="px-3 py-1 text-sm border rounded hover:bg-muted">+10%</button></div>
+</div>

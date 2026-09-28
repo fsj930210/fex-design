@@ -1,306 +1,171 @@
-import { Progress } from '@fex-design/react/primitive/progress'
-import { CheckIcon } from '@fex-design/react/icon/check'
-import { MinusIcon } from '@fex-design/react/icon/minus'
-import { PlusIcon } from '@fex-design/react/icon/plus'
-import { Button } from '@fex-design/react/ui/button'
-import { Card } from '@fex-design/react/ui/card'
-import { useState, type ComponentProps } from 'react'
-const gradient = { from: '#1677ff', to: '#87d068', direction: 'to right' } as const
+import { useState } from "react";
+import { MinusIcon } from "@fex-design/react/icons/minus";
+import { PlusIcon } from "@fex-design/react/icons/plus";
+import { Button } from "@fex-design/react/ui/button";
+import { Card } from "@fex-design/react/ui/card";
+import { Progress } from "@fex-design/react/ui/progress";
+
+const gradient = {
+  from: "#1677ff",
+  to: "#87d068",
+};
+
 const segmentGradient = {
   stops: {
-    '0%': 'var(--success)',
-    '49.999%': 'var(--success)',
-    '50%': 'var(--info)',
-    '100%': 'var(--info)',
+    "0%": "#1677ff",
+    "50%": "#1677ff",
+    "50.01%": "#52c41a",
+    "100%": "#52c41a",
   },
-  direction: 'to right',
-} as const
-const Line = ({ label, ...props }: { label: string } & ComponentProps<typeof Progress>) => (
-  <div className="grid gap-1.5">
-    <div className="flex justify-between text-sm">
-      <span>{label}</span>
-      {props.value != null && <span className="text-muted-foreground">{props.value}%</span>}
-    </div>
-    <Progress {...props} />
-  </div>
-)
-function StepLine({
-  value,
-  steps = 5,
-  color = 'var(--info)',
-  success = false,
-}: {
-  value: number
-  steps?: number
-  color?: string
-  success?: boolean
-}) {
-  const activeSteps = Math.round((value / 100) * steps)
+};
+
+export default function ProgressPage() {
+  const [value, setValue] = useState(50);
+  const increase = () => setValue((prev) => Math.min(100, prev + 10));
+  const decrease = () => setValue((prev) => Math.max(0, prev - 10));
+
   return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex gap-1">
-        {Array.from({ length: steps }).map((_, index) => (
-          <span
-            key={index}
-            className="h-2 w-4 rounded-[1px]"
-            style={{
-              background: index < activeSteps ? color : 'var(--progress-remaining)',
-            }}
-          />
-        ))}
+    <div className="flex flex-col gap-6 p-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">Progress</h1>
+        <p className="text-muted-foreground">
+          展示操作的当前进度，或显示任务完成的百分比。
+        </p>
       </div>
-      {success ? (
-        <span className="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white">
-          <CheckIcon className="size-3" />
-        </span>
-      ) : (
-        <span className="text-sm">{value}%</span>
-      )}
-    </div>
-  )
-}
-function CircleSteps({
-  value,
-  steps = 10,
-  gap = 2,
-  color = 'var(--info)',
-  success = false,
-}: {
-  value: number
-  steps?: number
-  gap?: number
-  color?: string
-  success?: boolean
-}) {
-  const size = 128
-  const thickness = 16
-  const center = size / 2
-  const radius = (size - thickness) / 2
-  const circumference = 2 * Math.PI * radius
-  const stepLength = 100 / steps
-  const activeSteps = Math.round((value / 100) * steps)
-  return (
-    <div className="relative inline-flex size-32 items-center justify-center">
-      <svg aria-hidden="true" className="size-32" viewBox={`0 0 ${size} ${size}`}>
-        {Array.from({ length: steps }).map((_, index) => {
-          const dash = Math.max(0, stepLength - gap)
-          return (
-            <circle
-              key={index}
-              cx={center}
-              cy={center}
-              r={radius}
-              fill="none"
-              stroke={index < activeSteps ? color : 'var(--progress-remaining)'}
-              strokeWidth={thickness}
-              strokeLinecap="butt"
-              pathLength={100}
-              strokeDasharray={`${dash} ${100 - dash}`}
-              strokeDashoffset={50 - index * stepLength}
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <Card title="Basic" className="p-4">
+          <div className="grid gap-4">
+            <Progress label="Upload progress" value={35} infoPlacement="top" />
+            <Progress label="Task completion" value={70} infoPlacement="top" />
+          </div>
+        </Card>
+
+        <Card title="Format & info placement" className="p-4">
+          <div className="grid gap-4">
+            <Progress
+              label="Storage used"
+              value={72}
+              infoPlacement="top"
+              format={(percent) => `${percent ?? 0} / 100 GB`}
             />
-          )
-        })}
-      </svg>
-      <span className="absolute text-2xl">
-        {success ? <CheckIcon className="size-8 text-success" /> : `${value}%`}
-      </span>
-    </div>
-  )
-}
-function DynamicProgressDemo() {
-  const [value, setValue] = useState(20)
-  const decrease = () => setValue((current) => Math.max(0, current - 10))
-  const increase = () => setValue((current) => Math.min(100, current + 10))
-  return (
-    <div className="grid max-w-xl gap-3">
-      <Line label="Controlled line" value={value} />
-      <div className="flex flex-wrap items-center gap-4">
-        <Progress variant="circle" value={value} size={96} thickness={8} showValue />
-        <div className="flex gap-1.5">
-          <Button variant="outline" size="icon-sm" onClick={decrease} disabled={value <= 0}>
-            <MinusIcon />
-          </Button>
-          <Button variant="outline" size="icon-sm" onClick={increase} disabled={value >= 100}>
-            <PlusIcon />
-          </Button>
-        </div>
+            <Progress label="Processing" value={48} infoPlacement="inside" showInfo />
+            <Progress label="Review" value={84} infoPlacement="bottom" showInfo />
+          </div>
+        </Card>
+
+        <Card title="Status" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={0} status="pending" />
+            <Progress value={50} status="active" />
+            <Progress value={70} status="active" />
+            <Progress value={100} status="success" />
+            <Progress value={60} status="error" />
+          </div>
+        </Card>
+
+        <Card title="Color" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={65} color="#7c3aed" />
+            <Progress value={80} color="#059669" trackColor="#cffafe" />
+            <Progress value={90} color={gradient} />
+          </div>
+        </Card>
+
+        <Card title="Segmented" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={70} color={segmentGradient} />
+            <div className="flex items-center justify-around">
+              <Progress variant="circle" value={70} size={96} color={segmentGradient} showValue />
+              <Progress variant="dashboard" value={70} size={96} color={segmentGradient} showValue />
+            </div>
+          </div>
+        </Card>
+
+        <Card title="Step Line" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={50} steps={5} color="var(--info)" />
+            <Progress value={80} steps={5} color="var(--info)" success />
+            <Progress value={100} steps={5} color="var(--info)" success />
+          </div>
+        </Card>
+
+        <Card title="Step Circle" className="p-4">
+          <div className="flex items-center justify-around">
+            <Progress variant="circle" value={50} steps={10} gap={2} color="var(--info)" showValue />
+            <Progress variant="circle" value={80} steps={10} gap={2} color="var(--info)" showValue />
+            <Progress variant="circle" value={100} steps={10} gap={2} color="var(--info)" success />
+          </div>
+        </Card>
+
+        <Card title="Size" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={50} thickness={4} />
+            <Progress value={50} thickness={8} />
+            <Progress value={50} thickness={12} />
+          </div>
+        </Card>
+
+        <Card title="Linecap" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={50} linecap="round" thickness={8} />
+            <Progress value={50} linecap="butt" thickness={8} />
+            <Progress value={50} linecap="square" thickness={8} />
+          </div>
+        </Card>
+
+        <Card title="Circle" className="p-4">
+          <div className="flex flex-wrap items-center justify-around gap-4">
+            <Progress variant="circle" value={75} size={96} thickness={8} status="active" showValue />
+            <Progress variant="circle" value={70} size={96} thickness={8} status="error" showValue />
+            <Progress variant="circle" value={100} size={96} thickness={8} status="success" showValue />
+          </div>
+        </Card>
+
+        <Card title="Dashboard" className="p-4">
+          <div className="flex items-center justify-around">
+            <Progress variant="dashboard" value={70} size={96} thickness={8} gapDegree={90} gapPlacement="bottom" showValue />
+            <Progress variant="dashboard" value={70} size={96} thickness={8} gapDegree={90} gapPlacement="top" showValue />
+          </div>
+        </Card>
+
+        <Card title="RTL / LTR" className="p-4">
+          <div className="grid gap-4">
+            <div dir="ltr">
+              <Progress label="LTR direction" value={65} infoPlacement="top" />
+            </div>
+            <div dir="rtl">
+              <Progress label="RTL direction" value={65} infoPlacement="top" />
+            </div>
+          </div>
+        </Card>
+
+        <Card title="Structured composition" className="p-4">
+          <Progress
+            label="Upload"
+            value={72}
+            status="active"
+            infoPlacement="top"
+            classNames={{ root: "grid gap-2", label: "font-medium", info: "text-primary" }}
+            styles={{ range: { background: "linear-gradient(90deg, #6366f1, #a855f7)" } }}
+          />
+        </Card>
+
+        <Card title="Dynamic value" className="p-4">
+          <div className="grid gap-4">
+            <Progress value={value} />
+            <div className="flex items-center gap-2">
+              <Button size="sm" variant="outline" onClick={decrease}>
+                <MinusIcon className="size-4" />
+              </Button>
+              <Button size="sm" variant="outline" onClick={increase}>
+                <PlusIcon className="size-4" />
+              </Button>
+              <span className="text-sm text-muted-foreground">{value}%</span>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
-  )
-}
-export function ProgressPage() {
-  return (
-    <main className="grid gap-4 p-2 md:p-6">
-      <Card
-        title="Basic"
-        description="A determinate line progress bar with an external label and value."
-      >
-        <div className="max-w-xl">
-          <Line label="Upload progress" value={35} />
-        </div>
-      </Card>
-      <Card
-        title="Status"
-        description="Info, warning, success and error use system semantic tokens."
-      >
-        <div className="grid max-w-xl gap-3">
-          <Line label="Normal" value={35} />
-          <Line label="Info" value={68} status="info" />
-          <Line label="Warning" value={82} status="warning" />
-          <Line label="Success" value={100} status="success" />
-          <Line label="Error" value={42} status="error" />
-        </div>
-      </Card>
-      <Card title="Color" description="Use arbitrary CSS colors, track colors and gradients.">
-        <div className="grid max-w-xl gap-3">
-          <Line label="Custom color" value={68} color="#7c3aed" />
-          <Line label="Custom track" value={52} color="#0891b2" trackColor="#cffafe" />
-          <Line label="Gradient" value={88} color={gradient} />
-        </div>
-      </Card>
-      <Card title="Segmented" description="Use hard color stops to show staged progress.">
-        <div className="grid max-w-xl gap-4">
-          <Line label="Segmented line" value={60} color={segmentGradient} showValue />
-          <div className="flex flex-wrap gap-4">
-            <div className="grid justify-items-center gap-1.5">
-              <Progress
-                variant="circle"
-                value={60}
-                size={112}
-                thickness={8}
-                color={segmentGradient}
-                showValue
-              />
-              <span className="text-sm">Circle</span>
-            </div>
-            <div className="grid justify-items-center gap-1.5">
-              <Progress
-                variant="dashboard"
-                value={60}
-                size={112}
-                thickness={8}
-                color={segmentGradient}
-                gapDegree={90}
-                showValue
-              />
-              <span className="text-sm">Dashboard</span>
-            </div>
-          </div>
-        </div>
-      </Card>
-      <Card title="Step Line" description="Show progress as fixed linear steps.">
-        <div className="grid gap-3">
-          <StepLine value={50} steps={5} />
-          <StepLine value={30} steps={5} />
-          <StepLine value={100} steps={5} color="var(--success)" success />
-          <StepLine value={60} steps={5} color="var(--success)" />
-        </div>
-      </Card>
-      <Card
-        title="Step Circle"
-        description="Show progress as fixed circular steps with custom count and gap."
-      >
-        <div className="flex flex-wrap gap-4">
-          <div className="grid justify-items-center gap-1.5">
-            <CircleSteps value={50} steps={12} gap={2} />
-            <span className="text-sm">Custom count</span>
-          </div>
-          <div className="grid justify-items-center gap-1.5">
-            <CircleSteps value={100} steps={8} gap={5} color="var(--success)" success />
-            <span className="text-sm">Custom gap</span>
-          </div>
-        </div>
-      </Card>
-      <Card title="Size" description="Configure line thickness.">
-        <div className="grid max-w-xl gap-3">
-          <Line label="Thin · 4px" value={30} thickness={4} />
-          <Line label="Medium · 8px" value={55} thickness={8} />
-          <Line label="Large · 12px" value={80} thickness={12} />
-        </div>
-      </Card>
-      <Card
-        title="Linecap"
-        description="Round line / round track, butt and square endings with the same value."
-      >
-        <div className="grid max-w-xl gap-3">
-          <Line label="Round line / round track" value={36} thickness={12} linecap="round" />
-          <Line
-            label="Butt · round track"
-            value={36}
-            thickness={12}
-            linecap="butt"
-            trackLinecap="round"
-          />
-          <Line label="Square line / round track" value={36} thickness={12} linecap="square" />
-        </div>
-      </Card>
-      <Card
-        title="Circle"
-        description="Circular progress supports size, thickness, status and gradients."
-      >
-        <div className="flex flex-wrap gap-4">
-          {[
-            ['Gradient', 72, 'normal'],
-            ['Success', 100, 'success'],
-            ['Error', 42, 'error'],
-          ].map(([label, value, status]) => (
-            <div key={label} className="grid justify-items-center gap-1.5">
-              <Progress
-                variant="circle"
-                value={value as number}
-                size={96}
-                thickness={8}
-                color={label === 'Gradient' ? gradient : undefined}
-                status={status as 'normal' | 'info' | 'warning' | 'success' | 'error'}
-                showValue
-              />
-              <span className="text-sm">{label}</span>
-            </div>
-          ))}
-        </div>
-      </Card>
-      <Card title="Dashboard" description="Configure the gap degree and its placement.">
-        <div className="flex flex-wrap gap-4">
-          <div className="grid justify-items-center gap-1.5">
-            <Progress
-              variant="dashboard"
-              value={64}
-              size={96}
-              thickness={8}
-              gapDegree={90}
-              showValue
-            />
-            <span className="text-sm">Bottom gap</span>
-          </div>
-          <div className="grid justify-items-center gap-1.5">
-            <Progress
-              variant="dashboard"
-              value={64}
-              size={96}
-              thickness={8}
-              gapDegree={90}
-              gapPlacement="top"
-              showValue
-            />
-            <span className="text-sm">Top gap</span>
-          </div>
-        </div>
-      </Card>
-      <Card title="Dynamic" description="Control the same progress value from external actions.">
-        <DynamicProgressDemo />
-      </Card>
-      <Card
-        title="Indeterminate"
-        description="Use a moving indicator when the completion value is unknown."
-      >
-        <div className="grid max-w-xl gap-4">
-          <Line label="Processing" value={null} />
-          <div className="grid w-fit justify-items-center gap-1.5">
-            <Progress variant="circle" value={null} size={72} thickness={6} color="#1677ff" />
-            <span className="text-sm">Processing</span>
-          </div>
-        </div>
-      </Card>
-    </main>
-  )
+  );
 }

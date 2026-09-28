@@ -1,0 +1,11 @@
+<div class="flex gap-4">
+  <div progressRoot [value]="75" variant="circle" [size]="96" [thickness]="8" class="relative">
+    <svg progressCircle>
+      <circle progressCircleTrack />
+      <circle progressCircleRange class="text-primary" />
+    </svg>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span progressValue class="text-sm font-semibold"></span>
+    </div>
+  </div>
+</div>

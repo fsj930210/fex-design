@@ -81,7 +81,10 @@ export function DialogRoot({
     closeDelay,
     dismiss,
   }
-  const dialogRef = useLazyRef(() => createDialogController(dialogOptions))
+  const dialogRef = useRef<ReturnType<typeof createDialogController> | null>(null)
+  if (!dialogRef.current) {
+    dialogRef.current = createDialogController(dialogOptions)
+  }
   const latestOptionsRef = useRef(dialogOptions)
   const dialog = dialogRef.current
 
@@ -92,7 +95,10 @@ export function DialogRoot({
     }
   })
 
-  useUnmount(() => dialog.destroy())
+  useUnmount(() => {
+    dialogRef.current?.destroy()
+    dialogRef.current = null
+  })
 
   return (
     <DialogContext

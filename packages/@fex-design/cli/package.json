@@ -1,0 +1,24 @@
+{
+  "name": "@fex-design/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "fex": "./bin/fex.js"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema.json": "./schema.json"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "files": [
+    "bin",
+    "src",
+    "schema.json"
+  ]
+}

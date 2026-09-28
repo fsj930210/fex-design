@@ -1,0 +1,139 @@
+{
+  "name": "Progress",
+  "slug": "progress",
+  "layer": "ui",
+  "status": "stable",
+  "description": "展示操作的当前进度，或显示任务完成的百分比，支持条形、圆环、仪表盘、步进分格等完整场景。",
+  "importPath": {
+    "react": "@fex-design/react/ui/progress",
+    "vue": "@fex-design/vue/ui/progress",
+    "solid": "@fex-design/solid/ui/progress",
+    "svelte": "@fex-design/svelte/ui/progress",
+    "angular": "@fex-design/angular/ui/progress"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": "number | null",
+      "default": 0,
+      "description": "当前进度值；null 表示尚未开始"
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": 0,
+      "description": "最小值"
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": 100,
+      "description": "最大值"
+    },
+    {
+      "name": "variant",
+      "type": "'line' | 'circle' | 'dashboard'",
+      "default": "'line'",
+      "description": "形态变体：线性、圆环、仪表盘"
+    },
+    {
+      "name": "status",
+      "type": "'pending' | 'active' | 'success' | 'error'",
+      "default": "'pending'",
+      "description": "任务生命周期状态"
+    },
+    {
+      "name": "steps",
+      "type": "number",
+      "description": "分段步进格数（同时支持 line 和 circle）"
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "default": 2,
+      "description": "分步圆环格之间的间隙角度或距离"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg' | number",
+      "description": "尺寸预设或圆环直径（像素）"
+    },
+    {
+      "name": "thickness",
+      "type": "number",
+      "description": "线条高度或圆环描边粗细（像素）"
+    },
+    {
+      "name": "color",
+      "type": "ProgressColor",
+      "description": "进度条颜色，支持 CSS 颜色值或 { from, to } 渐变对象"
+    },
+    {
+      "name": "trackColor",
+      "type": "string",
+      "description": "未完成轨道的底色"
+    },
+    {
+      "name": "linecap",
+      "type": "'round' | 'butt' | 'square'",
+      "default": "'round'",
+      "description": "进度条端点形状"
+    },
+    {
+      "name": "trackLinecap",
+      "type": "'round' | 'butt' | 'square'",
+      "description": "未完成轨道端点形状"
+    },
+    {
+      "name": "gapDegree",
+      "type": "number",
+      "default": 75,
+      "description": "仪表盘缺口角度 (0 ~ 295)"
+    },
+    {
+      "name": "gapPlacement",
+      "type": "'top' | 'bottom' | 'start' | 'end'",
+      "default": "'bottom'",
+      "description": "仪表盘缺口方向"
+    },
+    {
+      "name": "infoPlacement",
+      "type": "'outside' | 'inside' | 'top' | 'bottom' | 'none'",
+      "default": "'outside'",
+      "description": "文本数值显示位置"
+    },
+    {
+      "name": "showInfo",
+      "type": "boolean",
+      "description": "是否显示文本数值"
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "description": "进度条标题或说明标签"
+    },
+    {
+      "name": "format",
+      "type": "(percent: number | null, value: number | null) => ReactNode",
+      "description": "自定义进度信息的渲染内容"
+    },
+    {
+      "name": "success",
+      "type": "boolean",
+      "description": "是否强制进入成功状态并展示打勾图标"
+    }
+  ],
+  "frameworks": [
+    "react",
+    "vue",
+    "solid",
+    "svelte",
+    "angular"
+  ],
+  "cssVariables": [
+    {
+      "name": "--progress-remaining",
+      "description": "进度条未完成轨道的底色，默认为柔和的次级背景色。"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+﻿<script lang="ts">import { Progress } from "@fex-design/svelte/ui/progress"</script>
+<div class="grid w-full max-w-md gap-4"><div class="flex items-center gap-6"><Progress variant="circle" value={50} size={96} steps={8} gap={2} color="var(--info)" linecap="butt" trackLinecap="butt" showInfo /><Progress variant="circle" value={100} size={96} steps={8} gap={2} color="var(--success)" linecap="butt" trackLinecap="butt" success showInfo /></div></div>

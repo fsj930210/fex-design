@@ -1,0 +1,8 @@
+{
+  "extends": "@fex/config-tsconfig/node.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "typeRoots": ["../../../node_modules/.pnpm/@types+node@26.4.1/node_modules/@types"]
+  },
+  "include": ["src", "bin"]
+}

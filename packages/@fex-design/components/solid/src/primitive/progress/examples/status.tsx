@@ -1,0 +1,3 @@
+﻿import { Progress, ProgressRange, ProgressTrack, ProgressValue } from "@fex-design/solid/primitive/progress"
+const items = [["pending", 0], ["active", 40], ["active", 60], ["success", 100], ["error", 80]] as const
+export default function StatusExample() { return <div class="grid w-full max-w-md gap-3">{items.map(([status, value], index) => <Progress value={value} status={status} class="flex w-full flex-col"><div class="flex w-full items-center"><ProgressTrack class="min-w-0 flex-1"><ProgressRange /></ProgressTrack><ProgressValue class="ms-2 shrink-0 text-sm font-medium">{value}%</ProgressValue></div></Progress>)}</div> }

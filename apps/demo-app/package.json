@@ -1,0 +1,29 @@
+{
+  "name": "@fex-design/demo-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4099 --strictPort",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "fex": "node ../../packages/@fex-design/cli/bin/fex.js"
+  },
+  "dependencies": {
+    "@fex-design/styles": "workspace:*",
+    "@tailwindcss/vite": "catalog:",
+    "@vitejs/plugin-react": "latest",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwind-merge": "^3.0.0",
+    "vite": "catalog:",
+    "@floating-ui/dom": "^1.6.13"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "catalog:"
+  }
+}
+

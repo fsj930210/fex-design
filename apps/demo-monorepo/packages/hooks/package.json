@@ -1,0 +1,9 @@
+{
+  "name": "@demo/hooks",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@demo/utils": "workspace:*",
+    "react": "^19.0.0"
+  }
+}

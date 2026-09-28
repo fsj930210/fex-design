@@ -30,7 +30,8 @@ const exampleLoaders = import.meta.glob(
   '../../../../packages/@fex-design/components/react/src/{primitive,ui}/*/examples/*.tsx',
 ) as Record<string, () => Promise<Record<string, ComponentType>>>
 
-const moduleCache = new Map<string, ComponentType>()
+// Keep the loader module hot-reloadable when new example files are added.
+const moduleCache = new Map<string, ComponentType>() // examples are discovered by Vite's glob
 
 function findLoader(layer: string, component: string, demo: string) {
   const target = `/src/${layer}/${component}/examples/${demo}.tsx`

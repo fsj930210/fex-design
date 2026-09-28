@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Fex Components Configuration",
+  "description": "Configuration schema for Fex CLI components.json",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Relative path to the local offline schema.json or schema URI"
+    },
+    "framework": {
+      "type": "string",
+      "enum": [
+        "react",
+        "vue",
+        "solid",
+        "svelte",
+        "angular"
+      ],
+      "description": "Target UI framework used by this project",
+      "default": "react"
+    },
+    "tailwind": {
+      "type": "object",
+      "description": "Tailwind CSS configuration and entry file",
+      "properties": {
+        "version": {
+          "type": "string",
+          "enum": [
+            "v3",
+            "v4"
+          ],
+          "default": "v4",
+          "description": "Tailwind CSS major version"
+        },
+        "css": {
+          "type": "string",
+          "description": "Path to the main CSS stylesheet containing Tailwind directives",
+          "default": "src/index.css"
+        },
+        "baseColor": {
+          "type": "string",
+          "description": "Base color palette for design tokens (e.g. neutral, slate)",
+          "default": "neutral"
+        }
+      },
+      "required": [
+        "css"
+      ],
+      "additionalProperties": false
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Import aliases and target directory mappings for components, hooks, and utils",
+      "properties": {
+        "components": {
+          "type": "string",
+          "description": "Root alias or path for all components (e.g. @/components or @pkg/ui/components)"
+        },
+        "ui": {
+          "type": "string",
+          "description": "Alias for styled UI components (e.g. @/components/ui)"
+        },
+        "primitive": {
+          "type": "string",
+          "description": "Alias for headless primitive components (e.g. @/components/primitive)"
+        },
+        "pro": {
+          "type": "string",
+          "description": "Alias for enterprise pro composite components (e.g. @/components/pro)"
+        },
+        "hooks": {
+          "type": "string",
+          "description": "Alias for shared hooks/composables (e.g. @/hooks or @pkg/hooks)"
+        },
+        "utils": {
+          "type": "string",
+          "description": "Alias for utility functions and shared controllers (e.g. @/lib/utils or @pkg/utils)"
+        },
+        "lib": {
+          "type": "string",
+          "description": "Optional root alias for library utilities (e.g. @/lib)"
+        },
+        "icons": {
+          "type": "string",
+          "description": "Alias for component icon elements (e.g. @/components/icons)"
+        }
+      },
+      "required": [
+        "components",
+        "ui",
+        "primitive",
+        "hooks",
+        "utils"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "framework",
+    "aliases"
+  ],
+  "additionalProperties": false
+}

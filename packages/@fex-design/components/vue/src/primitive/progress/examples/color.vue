@@ -1,0 +1,2 @@
+<template><div class="grid gap-4"><Progress :value="70" color="#7c3aed"><ProgressTrack><ProgressRange /></ProgressTrack></Progress><Progress :value="80" :color="gradient"><ProgressTrack><ProgressRange /></ProgressTrack></Progress></div></template>
+<script setup lang="ts">import { Progress, ProgressTrack, ProgressRange } from '@fex-design/vue/primitive/progress'; const gradient = { from: '#1677ff', to: '#87d068' }</script>

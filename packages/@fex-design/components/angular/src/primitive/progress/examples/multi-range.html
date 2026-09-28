@@ -1,0 +1,9 @@
+<div class="w-full max-w-md space-y-4">
+  <div progressRoot [max]="100">
+    <div progressTrack class="h-3">
+      <div progressRange [value]="30" class="bg-primary"></div>
+      <div progressRange [value]="25" [offset]="30" class="bg-success"></div>
+      <div progressRange [value]="15" [offset]="55" class="bg-warning"></div>
+    </div>
+  </div>
+</div>

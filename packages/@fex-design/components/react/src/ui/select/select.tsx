@@ -11,7 +11,7 @@ import type {
 import type { SelectionValue } from '@fex-design/core/selection/types'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, ReactNode } from 'react'
-import type { PopoverRootProps } from '@fex-design/react/primitive/popover/popover'
+import type { PopoverRootProps } from '@fex-design/react/primitive/popover'
 import {
   SelectContent,
   SelectRoot,
@@ -19,7 +19,7 @@ import {
   SelectValue,
   type SelectChangeMeta,
   type SelectInputProps,
-} from '@fex-design/react/primitive/select/select'
+} from '@fex-design/react/primitive/select'
 
 export type SelectPopoverProps = Omit<
   PopoverRootProps,

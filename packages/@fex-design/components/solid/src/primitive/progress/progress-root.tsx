@@ -15,21 +15,6 @@ import {
   type ParentProps,
 } from "solid-js"
 import { ProgressContext } from "./progress-context"
-import { ProgressCircle } from "./progress-circle"
-import { ProgressCircleRange } from "./progress-circle-range"
-import { ProgressCircleTrack } from "./progress-circle-track"
-import { ProgressRange } from "./progress-range"
-import { ProgressTrack } from "./progress-track"
-import { ProgressValue } from "./progress-value"
-
-export { ProgressCircle } from "./progress-circle"
-export { ProgressCircleRange } from "./progress-circle-range"
-export { ProgressCircleTrack } from "./progress-circle-track"
-export { ProgressLabel } from "./progress-label"
-export { ProgressRange } from "./progress-range"
-export { ProgressTrack } from "./progress-track"
-export { ProgressValue } from "./progress-value"
-export { useProgressContext } from "./progress-context"
 
 export interface ProgressProps extends JSX.HTMLAttributes<HTMLDivElement> {
   value?: number | null
@@ -110,3 +95,6 @@ export function Progress(props: ParentProps<ProgressProps>) {
     </ProgressContext.Provider>
   )
 }
+
+export { Progress as ProgressRoot }
+export type ProgressRootProps = ProgressProps

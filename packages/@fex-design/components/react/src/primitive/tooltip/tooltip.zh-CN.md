@@ -44,7 +44,7 @@
 
 ## Hook API
 
-`useTooltip` 读取 Root 状态。`useTooltipTrigger`、`useTooltipContent` 与 `useTooltipArrow` 为自定义 React 结构返回属性，且必须在 TooltipRoot 内使用。
+`useTooltip` 读取 Root 状态与当前控制器。
 
 ## 可访问性
 

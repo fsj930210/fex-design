@@ -1,10 +1,8 @@
 import type { PopoverPortalOptions } from './utils'
-import { shallowEqualObject } from '@demo/utils'
 import type { ReactNode, RefObject } from 'react'
 import { createPortal } from 'react-dom'
 import { usePopoverContext } from './popover-context'
-import { useCoreStoreSelector } from '@demo/hooks/use-core-store-selector'
-import { selectPortal } from './selectors'
+import { useCoreStore } from '@demo/hooks/use-core-store'
 
 export interface PopoverPortalProps extends Omit<PopoverPortalOptions, 'container'> {
   container?: HTMLElement | RefObject<HTMLElement | null> | null | undefined
@@ -13,7 +11,7 @@ export interface PopoverPortalProps extends Omit<PopoverPortalOptions, 'containe
 
 export function PopoverPortal({ children, container }: PopoverPortalProps) {
   const { overlay } = usePopoverContext('PopoverPortal')
-  const snapshot = useCoreStoreSelector(overlay, selectPortal, shallowEqualObject)
+  const snapshot = useCoreStore(overlay)
   const popupContainer =
     (container && 'current' in container ? container.current : container) ?? snapshot.popupContainer
 

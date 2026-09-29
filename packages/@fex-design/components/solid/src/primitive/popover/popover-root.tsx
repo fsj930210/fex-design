@@ -29,12 +29,5 @@ export function Popover(props: PopoverProps) {
   )
 }
 
-export { createPopover } from './create-popover'
-export type { PopoverOptions } from '@fex-design/core/popover/types'
-export * from './popover-trigger'
-export * from './popover-portal'
-export * from './popover-content'
-export * from './popover-arrow'
-export * from './popover-header'
-export * from './popover-title'
-export * from './popover-description'
+export { Popover as PopoverRoot }
+export type PopoverRootProps = PopoverProps

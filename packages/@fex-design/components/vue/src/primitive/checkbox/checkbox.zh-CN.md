@@ -8,7 +8,6 @@
 
 ## 示例
 
-Primitive 与 UI 使用相同场景：basic、states、sizes、controlled、group、check-all、validation、custom-indicator、direction、css-variables。Primitive 示例显式组合各部件。
 
 ## API
 

@@ -15,7 +15,7 @@ import {
   PopoverTitle,
   PopoverTrigger,
   type PopoverTriggerProps,
-} from '@fex-design/solid/primitive/popover/popover'
+} from '@fex-design/solid/primitive/popover'
 import { usePopover } from '@fex-design/solid/primitive/popover/popover-context'
 
 export type PopoverProps = PopoverOptions &

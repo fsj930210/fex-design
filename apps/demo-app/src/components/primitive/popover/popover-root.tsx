@@ -1,10 +1,9 @@
 import { useState, type ReactNode } from 'react'
 import type { PopoverOptions, PopoverRenderState } from './utils'
-import { useCoreStoreSelector } from '@/hooks/use-core-store-selector'
+import { useCoreStore } from '@/hooks/use-core-store'
 import { useMemoizedFn } from '@/hooks/use-memoized-fn'
-import { selectOpen } from './selectors'
 import { PopoverContext, usePopoverContext } from './popover-context'
-import { usePopover } from './use-popover-controller'
+import { usePopover } from './use-popover'
 
 export interface PopoverProps extends PopoverOptions {
   children?: ReactNode | ((state: PopoverRenderState) => ReactNode)
@@ -12,8 +11,8 @@ export interface PopoverProps extends PopoverOptions {
 
 function RenderContent({ children }: { children: (state: PopoverRenderState) => ReactNode }) {
   const { overlay } = usePopoverContext('Popover')
-  const open = useCoreStoreSelector(overlay, selectOpen)
-  return children({ open, close: overlay.close })
+  const snapshot = useCoreStore(overlay)
+  return children({ open: snapshot.open, close: overlay.close })
 }
 
 export function Popover({
@@ -46,14 +45,3 @@ export function Popover({
 
 export { Popover as PopoverRoot }
 export type PopoverRootProps = PopoverProps
-export { usePopover } from './use-popover-controller'
-export type { PopoverContextValue as PopoverBinding } from './popover-context'
-export { usePopoverTrigger, usePopoverContent, usePopoverArrow } from './use-popover'
-export type { PopoverOptions } from './utils'
-export * from './popover-trigger'
-export * from './popover-portal'
-export * from './popover-content'
-export * from './popover-arrow'
-export * from './popover-header'
-export * from './popover-title'
-export * from './popover-description'

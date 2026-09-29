@@ -3,27 +3,11 @@ title: Input
 description: 接收单行文本，并提供尺寸、形态、清除、密码与搜索快捷能力。
 ---
 
-## Primitive 与 UI
-
-Primitive 提供可自由组合的 `InputRoot`、`InputControl`、Prefix、Suffix、Addon、Clear 和 `InputGroup`。UI 提供开箱即用的 `Input`、`InputPassword` 与 `InputSearch`，并直接复用 `InputGroup`。
-
-浮动 Label 属于 Field，不由 Input 负责；普通 Input 的 Prefix 与 Suffix 只承载内容，只有 InputSearch 会把其搜索位置包装成可触发搜索的内部按钮。
-
 ## 何时使用
 
 Input 用于接收单行文本。密码使用 InputPassword，具有明确提交意图的搜索使用 InputSearch；多行文本使用 Textarea，带 Label、说明和验证信息的完整表单项使用 Field。
 
-<Layer value="primitive">
-
-## Primitive 能力
-
-`InputRoot`、`InputControl`、Prefix、Suffix、Addon、Clear 和 `InputGroup` 可单独组合。同名 Primitive/UI demo 使用相同内容和布局，便于直接对照组合层和快捷层。
-
-</Layer>
-
 ## 示例
-
-basic、sizes、variants、controlled、affixes、group、password、search、states 和 focus 都提供 Primitive/UI 两种实现：Primitive 展示原子部件组合，UI 展示快捷组件；semantic-styles 专门展示 UI 的结构化样式入口。
 
 <Demos />
 

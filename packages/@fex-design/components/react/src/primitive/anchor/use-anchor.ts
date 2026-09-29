@@ -181,4 +181,3 @@ export function useAnchor({
   }
 }
 
-export type AnchorApi = ReturnType<typeof useAnchor>

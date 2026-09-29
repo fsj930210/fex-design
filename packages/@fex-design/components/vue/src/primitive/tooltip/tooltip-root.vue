@@ -31,7 +31,7 @@ let latestOptions = createOptions()
 const overlay = createTooltip(latestOptions)
 const snapshot = useCoreStore(overlay)
 provide(tooltipKey, {
-  contentId: `fex-tooltip-${useId().replaceAll(':', '')}`,
+  contentId: `tooltip-${useId().replaceAll(':', '')}`,
   overlay,
   snapshot,
   triggerElement,

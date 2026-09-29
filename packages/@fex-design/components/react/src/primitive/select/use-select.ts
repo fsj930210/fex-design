@@ -22,4 +22,3 @@ export function useSelectOption(value: SelectionValue) {
   }
 }
 
-export type { SelectFilterOption, SelectOption } from '@fex-design/core/select/types'

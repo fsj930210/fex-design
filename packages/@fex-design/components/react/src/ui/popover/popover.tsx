@@ -1,21 +1,20 @@
-import { useCoreStoreSelector } from '@fex-design/react/hooks/use-core-store-selector'
-import { usePopoverContext } from '@fex-design/react/primitive/popover/popover-context'
-import { selectOpen } from '@fex-design/react/primitive/popover/selectors'
+import { useCoreStore } from "@fex-design/react/hooks/use-core-store"
+import { usePopoverContext } from "@fex-design/react/primitive/popover/popover-context"
 import {
   cloneElement,
   type ComponentProps,
   type CSSProperties,
   type ReactElement,
   type ReactNode,
-} from 'react'
+} from "react"
 import type {
   PopoverClassNames,
   PopoverOptions,
   PopoverRenderState,
   PopoverSemanticPart,
-} from '@fex-design/core/popover/types'
-import { splitPopoverOptions } from '@fex-design/core/popover/options'
-import { cn } from '@fex-design/utils'
+} from "@fex-design/core/popover/types"
+import { splitPopoverOptions } from "@fex-design/core/popover/options"
+import { cn } from "@fex-design/utils"
 import {
   Popover as PrimitivePopover,
   PopoverArrow,
@@ -23,27 +22,26 @@ import {
   PopoverHeader,
   PopoverPortal,
   PopoverTitle,
-  usePopoverTrigger,
-} from '@fex-design/react/primitive/popover/popover'
+  PopoverTrigger,
+} from "@fex-design/react/primitive/popover"
 
 export interface PopoverProps
-  extends PopoverOptions, Omit<ComponentProps<'div'>, 'children' | 'title' | 'content'> {
-  children: ReactElement<ComponentProps<'button'>>
+  extends PopoverOptions, Omit<ComponentProps<"div">, "children" | "title" | "content"> {
+  children: ReactElement<ComponentProps<"button">>
   title?: ReactNode
   content?: ReactNode | ((state: PopoverRenderState) => ReactNode)
   classNames?: PopoverClassNames
   styles?: Partial<Record<PopoverSemanticPart, CSSProperties>>
 }
 
-function Trigger({ children }: Pick<PopoverProps, 'children'>) {
-  const trigger = usePopoverTrigger(children.props)
-  return cloneElement(children, trigger.props)
+function Trigger({ children }: Pick<PopoverProps, "children">) {
+  return <PopoverTrigger>{(triggerProps) => cloneElement(children, triggerProps)}</PopoverTrigger>
 }
 
 function Content({ render }: { render: (state: PopoverRenderState) => ReactNode }) {
-  const { overlay } = usePopoverContext('PopoverContent')
-  const open = useCoreStoreSelector(overlay, selectOpen)
-  return render({ open, close: overlay.close })
+  const { overlay } = usePopoverContext("PopoverContent")
+  const snapshot = useCoreStore(overlay)
+  return render({ open: snapshot.open, close: overlay.close })
 }
 
 export function Popover(props: PopoverProps) {
@@ -68,7 +66,7 @@ export function Popover(props: PopoverProps) {
             </PopoverHeader>
           ) : null}
           <div data-slot="popover-body" className={classNames?.content} style={styles?.content}>
-            {typeof content === 'function' ? <Content render={content} /> : content}
+            {typeof content === "function" ? <Content render={content} /> : content}
           </div>
         </PopoverContent>
       </PopoverPortal>
@@ -76,9 +74,9 @@ export function Popover(props: PopoverProps) {
   )
 }
 
-export { usePopover } from '@fex-design/react/primitive/popover/popover'
+export { usePopover } from "@fex-design/react/primitive/popover"
 export type {
   PopoverOptions,
   PopoverClassNames,
   PopoverSemanticPart,
-} from '@fex-design/core/popover/types'
+} from "@fex-design/core/popover/types"

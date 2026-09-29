@@ -44,7 +44,7 @@ Accessible hover/focus hint built on the shared floating controller.
 
 ## Hook API
 
-`useTooltip` reads the Root state. `useTooltipTrigger`, `useTooltipContent`, and `useTooltipArrow` return props for custom React markup; they must run under TooltipRoot.
+`useTooltip` reads the Root state and controller.
 
 ## Accessibility
 

@@ -225,7 +225,7 @@
     "./primitive/textarea-clear": "./src/primitive/textarea/textarea-clear.svelte",
     "./primitive/textarea-footer": "./src/primitive/textarea/textarea-footer.svelte",
     "./primitive/time-picker": "./src/primitive/time-picker/time-picker.ts",
-    "./primitive/tooltip": "./src/primitive/tooltip/tooltip.svelte",
+    "./primitive/tooltip": "./src/primitive/tooltip/tooltip.ts",
     "./primitive/tour": "./src/primitive/tour/tour.svelte",
     "./primitive/tour-step": "./src/primitive/tour/tour-step.svelte",
     "./primitive/tour-target": "./src/primitive/tour/tour-target.svelte",

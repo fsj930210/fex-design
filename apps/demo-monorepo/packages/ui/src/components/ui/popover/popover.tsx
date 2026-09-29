@@ -1,6 +1,5 @@
-import { useCoreStoreSelector } from '@demo/hooks/use-core-store-selector'
+import { useCoreStore } from '@demo/hooks/use-core-store'
 import { usePopoverContext } from '@demo/ui/components/primitive/popover/popover-context'
-import { selectOpen } from '@demo/ui/components/primitive/popover/selectors'
 import {
   cloneElement,
   type ComponentProps,
@@ -23,8 +22,8 @@ import {
   PopoverHeader,
   PopoverPortal,
   PopoverTitle,
-  usePopoverTrigger,
-} from '@demo/ui/components/primitive/popover/popover'
+  PopoverTrigger,
+} from '@demo/ui/components/primitive/popover'
 
 export interface PopoverProps
   extends PopoverOptions, Omit<ComponentProps<'div'>, 'children' | 'title' | 'content'> {
@@ -36,14 +35,13 @@ export interface PopoverProps
 }
 
 function Trigger({ children }: Pick<PopoverProps, 'children'>) {
-  const trigger = usePopoverTrigger(children.props)
-  return cloneElement(children, trigger.props)
+  return <PopoverTrigger>{(triggerProps) => cloneElement(children, triggerProps)}</PopoverTrigger>
 }
 
 function Content({ render }: { render: (state: PopoverRenderState) => ReactNode }) {
   const { overlay } = usePopoverContext('PopoverContent')
-  const open = useCoreStoreSelector(overlay, selectOpen)
-  return render({ open, close: overlay.close })
+  const snapshot = useCoreStore(overlay)
+  return render({ open: snapshot.open, close: overlay.close })
 }
 
 export function Popover(props: PopoverProps) {
@@ -76,7 +74,7 @@ export function Popover(props: PopoverProps) {
   )
 }
 
-export { usePopover } from '@demo/ui/components/primitive/popover/popover'
+export { usePopover } from '@demo/ui/components/primitive/popover'
 export type {
   PopoverOptions,
   PopoverClassNames,

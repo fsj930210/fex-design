@@ -13,7 +13,7 @@ import {
   TooltipRoot,
   TooltipTrigger,
   type TooltipTriggerRenderProps,
-} from '@fex-design/solid/primitive/tooltip/tooltip'
+} from '@fex-design/solid/primitive/tooltip'
 
 export type TooltipProps = TooltipOptions &
   Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'title' | 'color'> & {
@@ -55,7 +55,7 @@ export function Tooltip(props: TooltipProps) {
   )
 }
 
-export { useTooltip } from '@fex-design/solid/primitive/tooltip/tooltip-context'
+export { useTooltip } from '@fex-design/solid/primitive/tooltip-context'
 export type {
   TooltipOptions,
   TooltipClassNames,

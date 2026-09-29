@@ -8,13 +8,6 @@ import type {
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, type Ref } from 'react'
 import { ProgressContext } from './progress-context'
-import { ProgressCircle } from './progress-circle'
-import { ProgressCircleRange } from './progress-circle-range'
-import { ProgressCircleTrack } from './progress-circle-track'
-import { ProgressLabel } from './progress-label'
-import { ProgressRange } from './progress-range'
-import { ProgressTrack } from './progress-track'
-import { ProgressValue } from './progress-value'
 
 export interface ProgressProps extends Omit<ComponentProps<'div'>, 'color'> {
   ref?: Ref<HTMLDivElement>
@@ -79,26 +72,5 @@ export function Progress({
   )
 }
 
-export {
-  ProgressCircle,
-  ProgressCircleRange,
-  ProgressCircleTrack,
-  ProgressLabel,
-  ProgressRange,
-  ProgressTrack,
-  ProgressValue,
-}
-export { useProgressContext } from './progress-context'
-export type { ProgressCircleProps } from './progress-circle'
-export type { ProgressCircleRangeProps } from './progress-circle-range'
-export type { ProgressCircleTrackProps } from './progress-circle-track'
-export type { ProgressLabelProps } from './progress-label'
-export type { ProgressRangeProps } from './progress-range'
-export type { ProgressTrackProps } from './progress-track'
-export type { ProgressValueProps } from './progress-value'
-export type {
-  ProgressColor,
-  ProgressLinecap,
-  ProgressStatus,
-  ProgressVariant,
-} from '@fex-design/core/progress/types'
+export { Progress as ProgressRoot }
+export type ProgressRootProps = ProgressProps

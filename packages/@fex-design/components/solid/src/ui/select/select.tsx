@@ -2,8 +2,8 @@ import { normalizeSelectOptions, type SelectFieldNames, type SelectItem } from '
 import type { SelectFilterOption, SelectOption, SelectVirtualOptions } from '@fex-design/core/select/types'
 import type { SelectionValue } from '@fex-design/core/selection/types'
 import { createMemo, splitProps, type JSX } from 'solid-js'
-import type { PopoverProps } from '@fex-design/solid/primitive/popover/popover'
-import { SelectContent, SelectRoot, SelectTrigger, type SelectChangeMeta, type SelectInputProps } from '@fex-design/solid/primitive/select/select'
+import type { PopoverProps } from '@fex-design/solid/primitive/popover'
+import { SelectContent, SelectRoot, SelectTrigger, type SelectChangeMeta, type SelectInputProps } from '@fex-design/solid/primitive/select'
 
 export type SelectPopoverProps = Omit<PopoverProps, 'children' | 'getPopupContainer'>
 export interface SelectProps<TItem extends object = SelectOption>

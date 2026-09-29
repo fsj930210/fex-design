@@ -3,27 +3,12 @@ title: Checkbox
 description: 从一组可选项中选择一个或多个值。
 ---
 
-## Primitive 与 UI
-
-Primitive 提供可独立组合的 `CheckboxRoot`、`CheckboxControl`、`CheckboxIndicator`、`CheckboxLabel` 和 `CheckboxGroup`。`CheckboxControl` 使用原生 `input[type=checkbox]`。
-
-UI 提供包含默认结构和选中标记的 `Checkbox`，以及支持 `options` 的 `CheckboxGroup`。
-
 ## 何时使用
 
 Checkbox 用于在一组选项中选择零项、多项或确认单个条件。互斥选择使用 Radio；即时开启或关闭设置使用 Switch。
 
-<Layer value="primitive">
-
-## Primitive 能力
-
-各部件可以分别替换结构、标记和标签。`CheckboxGroup` 只管理平级 value 数组；Tree、Table 或“全选”的父子关系由业务数据计算，并通过 `checked` 与 `indeterminate` 传给对应 Control。
-
-</Layer>
-
 ## 示例
 
-示例展示组件的常用用法。
 
 <Demos />
 

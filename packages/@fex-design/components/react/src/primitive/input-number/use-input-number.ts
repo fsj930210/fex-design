@@ -139,4 +139,3 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
   }
 }
 
-export type UseInputNumberReturn = ReturnType<typeof useInputNumber>

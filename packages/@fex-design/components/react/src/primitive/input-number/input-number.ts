@@ -10,5 +10,4 @@ export {
 export {
   useInputNumber,
   type UseInputNumberOptions,
-  type UseInputNumberReturn,
 } from './use-input-number'

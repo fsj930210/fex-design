@@ -1,8 +1,8 @@
 import { createContext, use } from 'react'
-import type { AnchorApi } from './use-anchor'
+import type { useAnchor } from './use-anchor'
 import type { AnchorRegisteredItem } from '@fex-design/core/anchor/types'
 
-export interface AnchorContextValue extends AnchorApi {
+export type AnchorContextValue = ReturnType<typeof useAnchor> & {
   parentKey?: string
 }
 

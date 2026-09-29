@@ -17,8 +17,8 @@ import {
   TooltipContent,
   TooltipPortal,
   TooltipRoot,
-  useTooltipTrigger,
-} from '@/components/primitive/tooltip/tooltip'
+  TooltipTrigger,
+} from '@/components/primitive/tooltip'
 
 export interface TooltipProps
   extends TooltipOptions, Omit<ComponentProps<'div'>, 'children' | 'title' | 'color'> {
@@ -31,8 +31,7 @@ export interface TooltipProps
 }
 
 function Trigger({ children }: Pick<TooltipProps, 'children'>) {
-  const trigger = useTooltipTrigger(children.props)
-  return cloneElement(children, trigger.props)
+  return <TooltipTrigger>{(triggerProps) => cloneElement(children, triggerProps)}</TooltipTrigger>
 }
 
 export function Tooltip(props: TooltipProps) {
@@ -67,7 +66,7 @@ export function Tooltip(props: TooltipProps) {
   )
 }
 
-export { useTooltip } from '@/components/primitive/tooltip/tooltip'
+export { useTooltip } from '@/components/primitive/tooltip'
 export type {
   TooltipOptions,
   TooltipClassNames,

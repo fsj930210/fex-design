@@ -4,25 +4,25 @@ import {
   type CSSProperties,
   type ReactElement,
   type ReactNode,
-} from 'react'
+} from "react"
 import type {
   TooltipClassNames,
   TooltipOptions,
   TooltipSemanticPart,
-} from '@fex-design/core/tooltip/create-tooltip'
-import { splitTooltipOptions } from '@fex-design/core/tooltip/options'
-import { cn } from '@fex-design/utils'
+} from "@fex-design/core/tooltip/create-tooltip"
+import { splitTooltipOptions } from "@fex-design/core/tooltip/options"
+import { cn } from "@fex-design/utils"
 import {
   TooltipArrow,
   TooltipContent,
   TooltipPortal,
   TooltipRoot,
-  useTooltipTrigger,
-} from '@fex-design/react/primitive/tooltip/tooltip'
+  TooltipTrigger,
+} from "@fex-design/react/primitive/tooltip"
 
 export interface TooltipProps
-  extends TooltipOptions, Omit<ComponentProps<'div'>, 'children' | 'title' | 'color'> {
-  children: ReactElement<ComponentProps<'button'>>
+  extends TooltipOptions, Omit<ComponentProps<"div">, "children" | "title" | "color"> {
+  children: ReactElement<ComponentProps<"button">>
   title: ReactNode
   color?: string
   arrow?: boolean
@@ -30,9 +30,8 @@ export interface TooltipProps
   styles?: Partial<Record<TooltipSemanticPart, CSSProperties>>
 }
 
-function Trigger({ children }: Pick<TooltipProps, 'children'>) {
-  const trigger = useTooltipTrigger(children.props)
-  return cloneElement(children, trigger.props)
+function Trigger({ children }: Pick<TooltipProps, "children">) {
+  return <TooltipTrigger>{(triggerProps) => cloneElement(children, triggerProps)}</TooltipTrigger>
 }
 
 export function Tooltip(props: TooltipProps) {
@@ -67,9 +66,9 @@ export function Tooltip(props: TooltipProps) {
   )
 }
 
-export { useTooltip } from '@fex-design/react/primitive/tooltip/tooltip'
+export { useTooltip } from "@fex-design/react/primitive/tooltip"
 export type {
   TooltipOptions,
   TooltipClassNames,
   TooltipSemanticPart,
-} from '@fex-design/core/tooltip/create-tooltip'
+} from "@fex-design/core/tooltip/create-tooltip"

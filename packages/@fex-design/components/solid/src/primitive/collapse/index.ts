@@ -1,0 +1,6 @@
+export { Collapse, Collapse as CollapseRoot, type CollapseProps, type CollapseRootProps } from "./collapse-root"
+export { CollapseItem, type CollapseItemProps } from "./collapse-item"
+export { CollapseTrigger, type CollapseTriggerProps } from "./collapse-trigger"
+export { CollapseContent, type CollapseContentProps } from "./collapse-content"
+export type { CollapseRef } from "./collapse-context"
+export type { ExpansionKey, ExpansionChangeMeta } from "@fex-design/core/expansion/types"

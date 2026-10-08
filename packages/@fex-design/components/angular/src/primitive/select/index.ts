@@ -1,5 +1,5 @@
 export {
-  SelectChangeMeta,
+  type SelectChangeMeta,
   SelectRoot,
   SelectTrigger,
   SelectContent,

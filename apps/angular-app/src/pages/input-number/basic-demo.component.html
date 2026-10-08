@@ -1,9 +1,0 @@
-<div card title="Basic" description="Controlled and uncontrolled numeric values use icon actions.">
-  <div class="grid gap-3 md:grid-cols-2">
-    <div inputNumber [defaultValue]="3"></div>
-    <div>
-      <div inputNumber [value]="value" (change)="change($event)"></div>
-      <p class="text-sm text-muted-foreground">Value: {{ value ?? 'empty' }}</p>
-    </div>
-  </div>
-</div>

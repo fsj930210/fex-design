@@ -21,7 +21,7 @@ import {
   type Signal,
 } from '@angular/core'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
 import { PopoverDomService } from '../popover/popover-dom'
 
 @Component({

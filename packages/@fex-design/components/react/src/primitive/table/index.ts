@@ -1,0 +1,8 @@
+export { TableRoot, TableRoot as Table, type TableProps, type TableRootProps } from "./table-root"
+export { TableHeader, type TableHeaderProps } from "./table-header"
+export { TableBody, type TableBodyProps } from "./table-body"
+export { TableFooter, type TableFooterProps } from "./table-footer"
+export { TableRow, type TableRowProps } from "./table-row"
+export { TableHead, type TableHeadProps } from "./table-head"
+export { TableCell, type TableCellProps } from "./table-cell"
+export { TableCaption, type TableCaptionProps } from "./table-caption"

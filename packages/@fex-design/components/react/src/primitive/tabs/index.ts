@@ -1,0 +1,5 @@
+export { TabsRoot, TabsRoot as Tabs, type TabsRootProps, type TabsProps } from "./tabs-root"
+export { TabsList, type TabsListProps } from "./tabs-list"
+export { TabsItem, type TabsItemProps } from "./tabs-item"
+export { TabsContent, type TabsContentProps } from "./tabs-content"
+export { useTabs } from "./use-tabs"

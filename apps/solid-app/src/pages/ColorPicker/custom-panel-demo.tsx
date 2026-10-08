@@ -1,1 +1,0 @@
-export { CustomPanelDemo } from './demos'

@@ -1,0 +1,7 @@
+export { Avatar, AvatarRoot, type AvatarProps, type AvatarRootProps } from './avatar-root'
+export { AvatarImage, type AvatarImageProps } from './avatar-image'
+export { AvatarFallback, type AvatarFallbackProps } from './avatar-fallback'
+export { AvatarBadge } from './avatar-badge'
+export { AvatarGroup, type AvatarGroupProps } from './avatar-group'
+export { AvatarGroupCount } from './avatar-group-count'
+export { AvatarContext, useAvatarContext, type AvatarContextValue } from './avatar-context'

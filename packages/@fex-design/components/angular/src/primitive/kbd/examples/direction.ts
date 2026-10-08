@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Kbd, KbdGroup } from '../kbd'
+import { Kbd, KbdGroup } from '..'
 @Component({
   selector: 'kbd-direction-example',
   standalone: true,

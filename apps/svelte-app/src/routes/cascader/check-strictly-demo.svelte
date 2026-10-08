@@ -1,9 +1,0 @@
-<script lang="ts">
-  import { regionOptions } from "./data";
-  import DemoCascader from "./demo-cascader.svelte";
-  import Demo from "./demo-section.svelte";
-</script>
-
-<Demo title="Check strictly" description="Every node is selected independently."
-  ><DemoCascader multiple checkStrictly options={regionOptions} /></Demo
->

@@ -48,7 +48,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { NgTemplateOutlet } from '@angular/common'
 import { ClockIcon } from '@fex-design/angular/icons/clock'
 import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
 import {
   ScrollbarBar,
   ScrollbarRoot,

@@ -1,1 +1,0 @@
-export { GradientDemo } from './demos'

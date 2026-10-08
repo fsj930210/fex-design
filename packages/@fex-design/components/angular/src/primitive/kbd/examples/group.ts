@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Kbd, KbdGroup } from '../kbd'
+import { Kbd, KbdGroup } from '..'
 @Component({
   selector: 'kbd-group-example',
   standalone: true,

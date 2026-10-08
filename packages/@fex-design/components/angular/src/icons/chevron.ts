@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
-  selector: 'fex-chevron-right-icon',
+  selector: 'chevron-right-icon, fex-chevron-right-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chevron-right.html',
@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 export class ChevronRightIcon {}
 
 @Component({
-  selector: 'fex-chevron-left-icon',
+  selector: 'chevron-left-icon, fex-chevron-left-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chevron-left.html',
@@ -17,7 +17,7 @@ export class ChevronRightIcon {}
 export class ChevronLeftIcon {}
 
 @Component({
-  selector: 'fex-chevron-down-icon',
+  selector: 'chevron-down-icon, fex-chevron-down-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chevron-down.html',
@@ -25,7 +25,7 @@ export class ChevronLeftIcon {}
 export class ChevronDownIcon {}
 
 @Component({
-  selector: 'fex-chevron-up-icon',
+  selector: 'chevron-up-icon, fex-chevron-up-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chevron-up.html',
@@ -33,7 +33,7 @@ export class ChevronDownIcon {}
 export class ChevronUpIcon {}
 
 @Component({
-  selector: 'fex-chevrons-right-icon',
+  selector: 'chevrons-right-icon, fex-chevrons-right-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chevrons-right.html',
@@ -41,7 +41,7 @@ export class ChevronUpIcon {}
 export class ChevronsRightIcon {}
 
 @Component({
-  selector: 'fex-chevrons-left-icon',
+  selector: 'chevrons-left-icon, fex-chevrons-left-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chevrons-left.html',

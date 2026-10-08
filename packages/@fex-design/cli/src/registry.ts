@@ -80,9 +80,20 @@ export async function resolveRegistryGraph(
     registryDependencies.add(`${lyr}/${componentName}`)
     const srcFiles = getSourceFiles(compDir)
     const hasExclusiveUtils = lyr === "primitive" && !!bundleComponentExclusiveUtils(componentName, masterRepoRoot)
-    const isSingleFile = srcFiles.length === 1 && !hasExclusiveUtils
+    const isIndexFile = (file: string) => path.basename(file, path.extname(file)) === "index"
+    const nonIndexFiles = srcFiles.filter((file) => !isIndexFile(file))
+    const isVueOrSvelteSfc = (file: string) => file.endsWith(".vue") || file.endsWith(".svelte")
+    const isSingleFileUI =
+      lyr === "ui" &&
+      nonIndexFiles.length === 1 &&
+      nonIndexFiles.some(isVueOrSvelteSfc) &&
+      srcFiles.some(isIndexFile)
+    const isSingleFile = (srcFiles.length === 1 && !hasExclusiveUtils) || isSingleFileUI
 
     for (const f of srcFiles) {
+      if (isSingleFileUI && isIndexFile(f)) {
+        continue
+      }
       const relPath = path.relative(compDir, f).replace(/\\/g, "/")
       let content = fs.readFileSync(f, "utf-8")
 
@@ -120,10 +131,12 @@ export async function resolveRegistryGraph(
               (o) => o !== f && path.basename(o, path.extname(o)) === componentName && path.extname(o) === ".tsx" && ext === ".ts"
             ))
         filePath = isEntryBarrel ? `${componentName}/index${ext}` : `${componentName}/${relPath}`
-        content = content.replace(
+        if (baseName !== "index") {
+          content = content.replace(
           new RegExp(`from\\s+['"]\\.\\/${componentName}(?:\\.[a-zA-Z]+)?['"]`, "g"),
           "from './index'"
         )
+        }
       }
 
       files.push({

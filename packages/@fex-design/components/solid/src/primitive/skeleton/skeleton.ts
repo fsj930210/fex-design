@@ -1,6 +1,0 @@
-export * from './skeleton-avatar'
-export * from './skeleton-block'
-export * from './skeleton-button'
-export * from './skeleton-image'
-export * from './skeleton-input'
-export * from './skeleton-text'

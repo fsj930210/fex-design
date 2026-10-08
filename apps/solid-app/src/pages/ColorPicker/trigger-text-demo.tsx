@@ -1,1 +1,0 @@
-export { TriggerTextDemo } from './demos'

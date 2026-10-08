@@ -36,10 +36,16 @@ const tsconfig = {
     paths: {
       ...corePaths,
       ...componentPaths,
-      "@fex-design/angular/*": ["packages/@fex-design/components/angular/src/*"]
+      '@fex-design/components-styles/*': ['packages/@fex-design/components/styles/src/*.ts'],
+      '@fex-design/components-styles': ['packages/@fex-design/components/styles/src/index.ts'],
+      '@fex-design/styles/*': ['packages/@fex-design/components/styles/src/*.ts'],
+      '@fex-design/styles': ['packages/@fex-design/styles/src/index.css'],
+      '@fex-design/angular/icon/*': ['packages/@fex-design/components/angular/src/icons/*.ts'],
+      '@fex-design/angular/icons/*': ['packages/@fex-design/components/angular/src/icons/*.ts'],
+      '@fex-design/angular/*': ['packages/@fex-design/components/angular/src/*'],
     },
   },
 }
 
 await writeFile(outputPath, `${JSON.stringify(tsconfig, null, 2)}\n`)
-console.log("Generated tsconfig.angular-workspace.json with updated paths!");
+console.log('Generated tsconfig.angular-workspace.json with updated paths!')

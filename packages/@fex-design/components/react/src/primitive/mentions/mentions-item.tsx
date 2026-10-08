@@ -3,7 +3,7 @@ import { mentionsItemClassName } from '@fex-design/components-styles/mentions'
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, type ReactNode } from 'react'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
-import { ListboxItem } from '../listbox/listbox'
+import { ListboxItem } from '../listbox'
 import { useMentionsContext } from './mentions-context'
 import { useMentionsItem } from './use-mentions'
 

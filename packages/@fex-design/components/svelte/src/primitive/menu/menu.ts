@@ -1,6 +1,0 @@
-export { default as MenuRoot } from './menu-root.svelte'
-export { default as MenuList } from './menu-list.svelte'
-export { default as MenuItem } from './menu-item.svelte'
-export { default as MenuGroup } from './menu-group.svelte'
-export { default as MenuGroupLabel } from './menu-group-label.svelte'
-export { default as MenuDivider } from './menu-divider.svelte'

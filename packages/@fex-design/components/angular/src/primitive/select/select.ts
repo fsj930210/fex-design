@@ -47,7 +47,7 @@ import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
 
 export interface SelectChangeMeta {
   selectedItem?: SelectOption | undefined

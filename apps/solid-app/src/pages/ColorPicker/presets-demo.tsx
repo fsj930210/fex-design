@@ -1,1 +1,0 @@
-export { PresetsDemo } from './demos'

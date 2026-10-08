@@ -46,8 +46,11 @@ export function App() {
   createEffect(() => {
     if (!isHome()) {
       componentDoc()
+      slug()
+      framework()
       layer()
       queueMicrotask(() => setToc(collectToc(article)))
+      setTimeout(() => setToc(collectToc(article)), 60)
     }
   })
 

@@ -168,6 +168,7 @@ export class InputAddonAfter {
   templateUrl: './input-clear.html',
 })
 export class InputClear {
+  readonly forceMount = input(false, { transform: booleanAttribute })
   readonly root = inject(InputRoot)
   protected readonly hostClassName = createHostClassName(() => cn(inputClearClassName))
 }

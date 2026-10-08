@@ -1,1 +1,0 @@
-export { BasicDemo } from './demos'

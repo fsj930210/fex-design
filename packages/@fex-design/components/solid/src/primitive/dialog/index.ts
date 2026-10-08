@@ -1,19 +1,13 @@
-export {
-  DialogRoot,
-  DialogTrigger,
-  DialogPortal,
-  DialogOverlay,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-  type DialogProps,
-  type DialogTriggerProps,
-  type DialogOverlayProps,
-  type DialogContentProps,
-  type DialogCloseProps,
-} from './dialog'
-export { useDialogContext } from './dialog-context'
+export { Dialog, Dialog as DialogRoot, type DialogProps, type DialogRootProps } from "./dialog-root"
+export { DialogTrigger, type DialogTriggerProps, type DialogTriggerRenderProps } from "./dialog-trigger"
+export { DialogPortal, type DialogPortalProps } from "./dialog-portal"
+export { DialogOverlay, type DialogOverlayProps } from "./dialog-overlay"
+export { DialogContent, type DialogContentProps } from "./dialog-content"
+export { DialogHeader, type DialogHeaderProps } from "./dialog-header"
+export { DialogTitle, type DialogTitleProps } from "./dialog-title"
+export { DialogDescription, type DialogDescriptionProps } from "./dialog-description"
+export { DialogBody, type DialogBodyProps } from "./dialog-body"
+export { DialogFooter, type DialogFooterProps } from "./dialog-footer"
+export { DialogClose, type DialogCloseProps, type DialogCloseRenderProps } from "./dialog-close"
+export { useDialogContext } from "./dialog-context"
+export type { DialogOptions } from "@fex-design/core/dialog/create-dialog-controller"

@@ -9,4 +9,8 @@ export {
   TimePickerMinuteColumn,
   TimePickerSecondColumn,
   TimePickerPeriodColumn,
+  type DisabledTime,
+  type TimePeriod,
+  type TimePickerChangeDetails,
+  type TimeValue,
 } from './time-picker'

@@ -27,7 +27,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 let checkboxId = 0
 @Component({
-  selector: 'div[checkboxRoot]',
+  selector: 'div[checkboxRoot], button[checkboxRoot]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -39,6 +39,8 @@ let checkboxId = 0
 })
 export class CheckboxRoot {
   value = input<CheckboxValue | undefined>()
+  checked = input<boolean | 'indeterminate' | undefined>()
+  defaultChecked = input(false, { transform: booleanAttribute })
   disabled = input(false, { transform: booleanAttribute })
   size = input<'sm' | 'md' | 'lg'>('md')
   readonly controlId = `checkbox-${++checkboxId}`
@@ -106,9 +108,9 @@ export class CheckboxGroup {
 export class CheckboxControl {
   id = input<string | undefined>()
   value = input<CheckboxValue | undefined>()
-  name = input<string | undefined>()
-  checked = input<boolean | undefined>()
+  checked = input<boolean | 'indeterminate' | undefined>()
   defaultChecked = input(false, { transform: booleanAttribute })
+  name = input<string | undefined>()
   disabled = input(false, { transform: booleanAttribute })
   indeterminate = input(false, { transform: booleanAttribute })
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)

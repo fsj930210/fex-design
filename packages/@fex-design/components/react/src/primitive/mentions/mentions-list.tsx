@@ -1,7 +1,7 @@
 import { mentionsListClassName } from '@fex-design/components-styles/mentions'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
-import { ListboxRoot } from '../listbox/listbox'
+import { ListboxRoot } from '../listbox'
 import { useMentionsContext } from './mentions-context'
 
 export function MentionsList({ className, ...props }: ComponentProps<'div'>) {

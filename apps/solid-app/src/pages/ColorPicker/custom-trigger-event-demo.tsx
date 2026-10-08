@@ -1,1 +1,0 @@
-export { CustomTriggerEventDemo } from './demos'

@@ -1,5 +1,5 @@
 import { type ComponentProps, type KeyboardEvent, type ReactNode, type Ref, useRef } from 'react'
-import { TextareaInput, TextareaRoot, type TextareaRootProps } from '../textarea/textarea'
+import { TextareaInput, TextareaRoot, type TextareaRootProps } from '../textarea'
 import { useMentionsContext } from './mentions-context'
 import { useMentions } from './use-mentions'
 

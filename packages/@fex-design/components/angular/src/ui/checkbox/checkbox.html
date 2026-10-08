@@ -10,16 +10,17 @@
     checkboxControl
     type="checkbox"
     [value]="value()"
-    [checked]="checked()"
+    [checked]="resolvedChecked()"
     [defaultChecked]="defaultChecked()"
     [disabled]="disabled()"
-    [indeterminate]="indeterminate()"
+    [indeterminate]="resolvedIndeterminate()"
     [required]="required()"
     [name]="name()"
     [attr.aria-invalid]="ariaInvalid() || null"
     [attr.aria-describedby]="ariaDescribedBy()"
     [class]="classNames()?.control"
     [style]="styles()?.control"
+    (change)="handleControlChange($event)"
   />
   @if (indicator(); as customIndicator) {
   <span checkboxIndicator [class]="classNames()?.indicator" [style]="styles()?.indicator">

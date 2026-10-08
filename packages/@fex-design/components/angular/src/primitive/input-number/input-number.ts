@@ -1,8 +1,0 @@
-export { InputNumberRoot } from './input-number-root'
-export { InputNumberControl } from './input-number-control'
-export { InputNumberActions } from './input-number-actions'
-export { InputNumberIncrement } from './input-number-increment'
-export { InputNumberDecrement } from './input-number-decrement'
-export { InputNumberClear } from './input-number-clear'
-export { useInputNumber } from './use-input-number'
-export type { UseInputNumberOptions, UseInputNumberReturn } from './use-input-number'

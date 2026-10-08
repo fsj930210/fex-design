@@ -51,8 +51,8 @@ import { LoadingIcon } from '@fex-design/angular/icons/loading'
 import { MinusIcon } from '@fex-design/angular/icons/minus'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 import { Button } from '../button/button'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
+import { CheckboxIndicator } from '../checkbox'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
 import {
   ScrollbarBar,
   ScrollbarRoot,
@@ -252,7 +252,6 @@ export class CascaderContent {
     ScrollbarBar,
     ScrollbarTrack,
     ScrollbarThumb,
-    CheckboxRoot,
     CheckboxIndicator,
     CheckIcon,
     MinusIcon,

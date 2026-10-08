@@ -33,7 +33,7 @@ import { Empty, EmptyDescription } from '../empty/empty'
 import { createCoreStoreSignalBinding } from '@fex-design/angular/signals/core-store-signal'
 import { Spinner } from '../../ui/spinner/spinner'
 import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
 type Item = Record<string, unknown>
 @Component({
   selector: 'fex-auto-complete',

@@ -22,7 +22,7 @@ import {
   CalendarRoot,
   CalendarWeekHeader,
   type CalendarRootProps,
-} from '../calendar/calendar'
+} from '../calendar'
 import { useCalendarContext } from '../calendar/calendar-context'
 import { useDatePickerContext, useRangePickerContext } from './context'
 import {
@@ -172,3 +172,4 @@ export function RangePickerPanel<TValue extends CalendarValue = CalendarValue>(
     </CalendarRoot>
   )
 }
+

@@ -1,6 +1,0 @@
-export { default as SkeletonAvatar } from './skeleton-avatar.svelte'
-export { default as SkeletonBlock } from './skeleton-block.svelte'
-export { default as SkeletonButton } from './skeleton-button.svelte'
-export { default as SkeletonImage } from './skeleton-image.svelte'
-export { default as SkeletonInput } from './skeleton-input.svelte'
-export { default as SkeletonText } from './skeleton-text.svelte'

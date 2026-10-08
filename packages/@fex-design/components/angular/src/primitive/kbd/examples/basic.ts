@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Kbd } from '../kbd'
+import { Kbd } from '..'
 @Component({
   selector: 'kbd-basic-example',
   standalone: true,

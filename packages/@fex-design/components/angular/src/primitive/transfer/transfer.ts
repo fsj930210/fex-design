@@ -56,7 +56,7 @@ import {
   ChevronsLeftIcon,
   ChevronsRightIcon,
 } from '@fex-design/angular/icons/chevron'
-import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxIndicator } from '../checkbox'
 import { ListboxItem, ListboxRoot } from '../listbox/listbox'
 
 export interface TransferPanelApi<TItem extends TransferDataItem> {
@@ -109,7 +109,6 @@ class TransferActionButton {
   imports: [
     NgTemplateOutlet,
     TransferActionButton,
-    CheckboxRoot,
     CheckboxIndicator,
     CheckIcon,
     MinusIcon,

@@ -1,1 +1,0 @@
-export { DisabledAlphaDemo } from './demos'

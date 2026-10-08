@@ -18,7 +18,7 @@ import type {
 import type { DatePickerPicker } from '@fex-design/core/date-picker/types'
 import { datePickerContentClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
-import { Popover, PopoverContent, PopoverPortal } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal } from '../popover'
 import { RangePickerContent } from './date-picker-content'
 import { RangePickerState, type UseRangePickerOptions } from './use-range-picker'
 

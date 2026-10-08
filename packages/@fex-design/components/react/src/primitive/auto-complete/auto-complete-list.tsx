@@ -1,10 +1,8 @@
-import {
-  autoCompleteListClassName,
-  autoCompleteOptionClassName,
-} from '@fex-design/components-styles/auto-complete'
+import { autoCompleteListClassName } from '@fex-design/components-styles/auto-complete'
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, type ReactNode } from 'react'
-import { useAutoComplete, useAutoCompleteOption } from './use-auto-complete'
+import { useAutoComplete } from './use-auto-complete'
+import { AutoCompleteOption } from './auto-complete-option'
 
 export interface AutoCompleteListProps extends ComponentProps<'div'> {
   renderItem?: (item: unknown, state: { active: boolean; disabled: boolean }) => ReactNode
@@ -34,45 +32,5 @@ export function AutoCompleteList({
           </AutoCompleteOption>
         ))}
     </div>
-  )
-}
-
-export interface AutoCompleteOptionProps extends ComponentProps<'div'> {
-  itemKey: string | number
-}
-
-export function AutoCompleteOption({
-  itemKey,
-  className,
-  onPointerMove,
-  onPointerDown,
-  onClick,
-  ...props
-}: AutoCompleteOptionProps) {
-  const autoComplete = useAutoComplete()
-  const state = useAutoCompleteOption(itemKey)
-  return (
-    <div
-      {...props}
-      id={`${autoComplete.listId}-${itemKey}`}
-      role="option"
-      aria-selected={state.active}
-      aria-disabled={state.disabled || undefined}
-      data-active={state.active ? 'true' : undefined}
-      data-disabled={state.disabled ? 'true' : undefined}
-      className={cn(autoCompleteOptionClassName, className)}
-      onPointerMove={(event) => {
-        onPointerMove?.(event)
-        if (!event.defaultPrevented) state.activate()
-      }}
-      onPointerDown={(event) => {
-        onPointerDown?.(event)
-        if (!event.defaultPrevented) event.preventDefault()
-      }}
-      onClick={(event) => {
-        onClick?.(event)
-        if (!event.defaultPrevented) state.select()
-      }}
-    />
   )
 }

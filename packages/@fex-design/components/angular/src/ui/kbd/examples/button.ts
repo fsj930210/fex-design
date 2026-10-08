@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Button } from '@fex-design/angular/ui/button'
-import { Kbd } from '../kbd'
+import { Kbd } from '@fex-design/angular/primitive/kbd'
 @Component({
   selector: 'kbd-ui-button-example',
   standalone: true,

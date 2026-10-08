@@ -1,1 +1,0 @@
-export { FormatDemo } from './demos'

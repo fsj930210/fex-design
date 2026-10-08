@@ -1,1 +1,0 @@
-export { CustomTriggerDemo } from './demos'

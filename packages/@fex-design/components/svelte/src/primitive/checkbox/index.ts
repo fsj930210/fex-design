@@ -1,0 +1,6 @@
+export { default as CheckboxRoot } from './checkbox.svelte'
+export { default as CheckboxControl } from './checkbox-control.svelte'
+export { default as CheckboxIndicator } from './checkbox-indicator.svelte'
+export { default as CheckboxLabel } from './checkbox-label.svelte'
+export { default as CheckboxGroup } from './checkbox-group.svelte'
+export type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'

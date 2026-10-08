@@ -5,10 +5,10 @@ import {
   Tag as PrimitiveTag,
   TagAction,
   type TagProps as PrimitiveTagProps,
-} from '@fex-design/react/primitive/tag/tag'
+} from '@fex-design/react/primitive/tag'
 
-export type { TagActionProps } from '@fex-design/react/primitive/tag/tag'
-export { TagAction } from '@fex-design/react/primitive/tag/tag'
+export type { TagActionProps } from '@fex-design/react/primitive/tag'
+export { TagAction } from '@fex-design/react/primitive/tag'
 
 export interface TagProps extends PrimitiveTagProps, TagUiOptions<ReactNode, CSSProperties> {
   onClose?: MouseEventHandler<HTMLButtonElement>

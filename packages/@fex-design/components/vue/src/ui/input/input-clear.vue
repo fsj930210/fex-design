@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-import { InputClear } from '@fex-design/vue/primitive/input/input'
+import { InputClear } from '@fex-design/vue/primitive/input'
 import { inputContextKey } from '../../primitive/input/input-context'
 
 defineOptions({ name: 'InputClearWhenAvailable', inheritAttrs: false })

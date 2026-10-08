@@ -1,7 +1,7 @@
 import type { InputNumberPart } from '@fex-design/core/input-number/types'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
-import { InputPrefix, InputSuffix } from '@fex-design/react/primitive/input/input'
+import { InputPrefix, InputSuffix } from '@fex-design/react/primitive/input'
 import {
   InputNumberActions,
   InputNumberClear,
@@ -10,7 +10,7 @@ import {
   InputNumberIncrement,
   InputNumberRoot,
   type InputNumberRootProps,
-} from '@fex-design/react/primitive/input-number/input-number'
+} from '@fex-design/react/primitive/input-number'
 
 export interface InputNumberProps
   extends

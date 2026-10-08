@@ -1,1 +1,35 @@
-﻿<div progress variant="dashboard" [value]="64" [size]="96" [thickness]="8" [gapDegree]="90" gapPlacement="top" [showValue]="true"></div>
+<div class="grid w-full max-w-md gap-4">
+  <label class="grid gap-2 text-sm">
+    <span class="font-medium">
+      分段间隔：{{ gap() }}px
+    </span>
+    <div slider [value]="gap()" [min]="0" [max]="8" [step]="1" (change)="changeGap($event.value)"></div>
+  </label>
+  <div class="flex items-center gap-6">
+    <div
+      progress
+      variant="circle"
+      [value]="50"
+      [size]="96"
+      [steps]="8"
+      [gap]="gap()"
+      color="var(--info)"
+      linecap="butt"
+      trackLinecap="butt"
+      [showInfo]="true"
+    ></div>
+    <div
+      progress
+      variant="circle"
+      [value]="100"
+      [size]="96"
+      [steps]="8"
+      [gap]="gap()"
+      color="var(--success)"
+      linecap="butt"
+      trackLinecap="butt"
+      [showInfo]="true"
+      [success]="true"
+    ></div>
+  </div>
+</div>

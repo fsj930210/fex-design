@@ -1,0 +1,46 @@
+<div class="grid w-full max-w-md gap-4">
+  <div progressRoot [value]="90" class="inline-flex items-center gap-2">
+    <div progressTrack>
+      <div progressRange class="bg-[linear-gradient(to_right,_#1677ff,_#87d068)]"></div>
+    </div>
+    <span progressValue>
+      90%
+    </span>
+  </div>
+  <div class="flex items-center gap-6">
+    <div progressRoot [value]="90" variant="circle" [size]="96" class="relative">
+      <svg progressCircle>
+        <defs>
+          <linearGradient id="progress-gradient-circle" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1677ff" />
+            <stop offset="100%" stop-color="#87d068" />
+          </linearGradient>
+        </defs>
+        <circle progressCircleTrack />
+        <circle progressCircleRange stroke="url(#progress-gradient-circle)" />
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span progressValue>
+          90%
+        </span>
+      </div>
+    </div>
+    <div progressRoot [value]="90" variant="dashboard" [size]="96" class="relative">
+      <svg progressCircle [gapDegree]="90">
+        <defs>
+          <linearGradient id="progress-gradient-dashboard" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1677ff" />
+            <stop offset="100%" stop-color="#87d068" />
+          </linearGradient>
+        </defs>
+        <circle progressCircleTrack [gapDegree]="90" />
+        <circle progressCircleRange [gapDegree]="90" stroke="url(#progress-gradient-dashboard)" />
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span progressValue>
+          90%
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

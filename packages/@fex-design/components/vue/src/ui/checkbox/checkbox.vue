@@ -7,7 +7,7 @@ import {
   CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot,
-} from '@fex-design/vue/primitive/checkbox/checkbox'
+} from '@fex-design/vue/primitive/checkbox'
 defineOptions({ name: 'Checkbox', inheritAttrs: false })
 const props = defineProps({
   value: [String, Number] as PropType<CheckboxValue>,

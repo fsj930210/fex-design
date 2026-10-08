@@ -1,2 +1,0 @@
-<template><Progress :max="5"><ProgressTrack class="h-2 gap-1 bg-transparent"><ProgressRange v-for="(offset, index) in [0,1,2]" :key="index" :value="1" :offset="offset" class="rounded bg-primary" /><ProgressRange :value="1" :offset="3" class="rounded bg-muted" /><ProgressRange :value="1" :offset="4" class="rounded bg-muted" /></ProgressTrack></Progress></template>
-<script setup lang="ts">import { Progress, ProgressTrack, ProgressRange } from '@fex-design/vue/primitive/progress'</script>

@@ -8,10 +8,12 @@
 
   interface ProgressCircleProps extends SVGAttributes<SVGSVGElement> {
     gapDegree?: number
+    rotation?: number
+    ref?: SVGSVGElement | null
     children?: Snippet
   }
 
-  let { gapDegree, class: className, style, children, ...rest }: ProgressCircleProps = $props()
+  let { gapDegree, rotation, ref = $bindable(null), class: className, style, children, ...rest }: ProgressCircleProps = $props()
   const { context } = getContext<ProgressContext>(progressContextKey)
   const current = $derived(context())
   const size = $derived(current.size ?? 48)
@@ -29,6 +31,7 @@
 </script>
 
 <svg
+  bind:this={ref}
   {...rest}
   viewBox="0 0 {size} {size}"
   width={size}
@@ -36,7 +39,7 @@
   data-slot="progress-circle"
   data-status={current.status}
   class={cn(progressCircleClassName, className)}
-  style="transform: rotate({geometry.rotation}deg); {style ?? ''}"
+  style="transform: rotate({rotation ?? geometry.rotation}deg); {style ?? ''}"
 >
   {@render children?.()}
 </svg>

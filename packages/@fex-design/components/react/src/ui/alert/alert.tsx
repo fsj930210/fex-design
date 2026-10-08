@@ -17,7 +17,7 @@ import { useState, type ComponentProps, type CSSProperties, type ReactNode } fro
 import {
   Alert as PrimitiveAlert,
   type AlertProps as PrimitiveAlertProps,
-} from '@fex-design/react/primitive/alert/alert'
+} from '@fex-design/react/primitive/alert'
 
 export interface AlertProps
   extends Omit<PrimitiveAlertProps, 'title'>, AlertUiOptions<ReactNode, CSSProperties> {

@@ -845,7 +845,7 @@
         "packages/@fex-design/components/angular/src/ui/avatar/avatar.ts"
       ],
       "@fex-design/angular/primitive/progress": [
-        "packages/@fex-design/components/angular/src/primitive/progress/progress.ts"
+        "packages/@fex-design/components/angular/src/primitive/progress/index.ts"
       ],
       "@fex-design/angular/primitive/separator": [
         "packages/@fex-design/components/angular/src/primitive/separator/separator.ts"

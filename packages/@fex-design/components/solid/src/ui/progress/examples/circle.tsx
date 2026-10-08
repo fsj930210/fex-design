@@ -1,6 +1,7 @@
-﻿import { Progress } from "@fex-design/solid/ui/progress"
+import { Progress } from '@fex-design/solid/ui/progress'
 
-export default function CircleExample() {
+export function ProgressCircleExample() {
+
   return (
     <div class="flex flex-wrap gap-4 items-center">
       <Progress variant="circle" value={30} size={96} showInfo />

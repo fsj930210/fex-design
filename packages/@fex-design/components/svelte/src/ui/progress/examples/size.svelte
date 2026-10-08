@@ -1,5 +1,6 @@
-﻿<script lang="ts">
-  import { Progress } from "@fex-design/svelte/ui/progress"
+<script lang="ts">
+  import { Progress } from '@fex-design/svelte/ui/progress'
+
 </script>
 
 <div class="grid w-full max-w-md gap-3">

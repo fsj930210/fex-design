@@ -62,8 +62,8 @@ export function HomePage(props: {
     {
       title: '现代化开发脚手架 CLI',
       sub: 'Developer Tooling & Automation',
-      tag: 'CLI In Dev',
-      badge: '即将发布',
+      tag: 'CLI Ready',
+      badge: '已发布',
       spotlight: 'rgba(168, 85, 247, 0.2)',
       accent: 'text-purple-600 dark:text-purple-400 bg-purple-500/10 border-purple-500/20',
       desc: '专为 Fex Design 打造的代码生成与工程脚手架。快速初始化五框架模板项目、交互式拉取源码级组件、同步最新 Design Tokens，赋予开发者类 shadcn 式的源码拥有感与自研掌控力。',

@@ -1,21 +1,49 @@
-﻿import { Progress } from "@fex-design/solid/ui/progress"
+import { Progress } from '@fex-design/solid/ui/progress'
 
-export default function SegmentedExample() {
-  const segmentGradient = {
-    stops: {
-      "0%": "#1677ff",
-      "50%": "#1677ff",
-      "50.01%": "#faad14",
-      "75%": "#faad14",
-      "75.01%": "#52c41a",
-      "100%": "#52c41a",
-    },
-  }
+export function ProgressSegmentedExample() {
+
   return (
-    <div class="grid w-full max-w-md gap-4">
-      <Progress value={75} color={segmentGradient} />
-      <div class="flex gap-4">
-        <Progress variant="circle" value={80} color={segmentGradient} showInfo />
+    <div class="grid w-full max-w-md gap-5">
+      <div class="grid gap-3">
+        <Progress value={50} steps={5} color="var(--info)" />
+        <Progress value={80} steps={5} color="var(--info)" />
+        <Progress value={100} steps={5} color="var(--info)" success />
+      </div>
+      <div class="flex items-center gap-6">
+        <Progress
+          variant="circle"
+          value={50}
+          size={96}
+          steps={10}
+          gap={2}
+          linecap="butt"
+          trackLinecap="butt"
+          color="var(--info)"
+          showInfo
+        />
+        <Progress
+          variant="circle"
+          value={80}
+          size={96}
+          steps={10}
+          gap={2}
+          linecap="butt"
+          trackLinecap="butt"
+          color="var(--info)"
+          showInfo
+        />
+        <Progress
+          variant="circle"
+          value={100}
+          size={96}
+          steps={10}
+          gap={2}
+          linecap="butt"
+          trackLinecap="butt"
+          color="var(--info)"
+          showInfo
+          success
+        />
       </div>
     </div>
   )

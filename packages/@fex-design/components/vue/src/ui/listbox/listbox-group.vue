@@ -2,7 +2,7 @@
 import { listboxGroupClassName } from '@fex-design/components-styles/listbox'
 import { cn } from '@fex-design/utils'
 import { useAttrs } from 'vue'
-import { ListboxGroup } from '@fex-design/vue/primitive/listbox/listbox'
+import { ListboxGroup } from '@fex-design/vue/primitive/listbox'
 defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 </script>

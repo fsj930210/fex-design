@@ -12,7 +12,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@fex-design/vue/primitive/card/card'
+} from '@fex-design/vue/primitive/card'
 
 export type CardClassNames = CardClassNamesBase
 export type CardStyles = CardStylesBase<CSSProperties>

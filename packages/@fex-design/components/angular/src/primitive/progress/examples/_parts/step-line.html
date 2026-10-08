@@ -1,0 +1,23 @@
+<div class="inline-flex items-center gap-1.5">
+  <div progressRoot [value]="value()" class="contents">
+    <div progressTrack class="flex h-auto w-auto min-w-0 items-center gap-1 overflow-visible bg-transparent">
+      @for (index of indices; track index) {
+        <div
+          progressRange
+          [value]="1"
+          [style.width]="'1rem'"
+          [class]="index < active() ? 'h-2 flex-none rounded-[1px] bg-info' : 'h-2 flex-none rounded-[1px] bg-[var(--progress-remaining)]'"
+        ></div>
+      }
+    </div>
+    @if (active() < 5) {
+      <span progressValue class="text-sm">
+        {{ value() }}%
+      </span>
+    } @else {
+      <span class="flex size-4 items-center justify-center rounded-full bg-success text-white">
+        <check-icon class="size-3" />
+      </span>
+    }
+  </div>
+</div>

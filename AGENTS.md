@@ -56,7 +56,7 @@
 - 本仓库采用源码交付，组件定义名和公开导出名禁止携带品牌前缀或层级装饰。统一使用 `Button`、`ButtonGroup`、`Dialog` 等业务名称，不使用 `FexButton`、`ElButton`、`ButtonPrimitive`、`PrimitiveButton`。Primitive/UI/Pro 层级只由目录、Registry target 和导入路径表达；Primitive 和 UI 中的同名组件都保持同一个裸名称。高层组件组合低层组件时，允许仅在当前实现文件中使用 `import { Button as PrimitiveButton } ...` 这类局部别名，但局部别名不得成为组件定义名、公开导出名、DevTools 名称或稳定 API。
 - **品牌前缀零容忍门禁**：任何新增或修改的组件、指令、图标、示例组件、测试宿主、文档代码和生成源码，都禁止出现公开 `FexXxx`、`fex-xxx`、`fexXxx` 名称；Icon、内部示例 selector 和演示模板同样不例外。包名 `@fex-design/*` 不属于组件公开名称，可以保留。唯一允许的层级名称是实现文件内不向外暴露的局部 import alias，例如 `Button as PrimitiveButton`。完成任务前必须扫描本次新增和修改文件；只要 selector、模板标签、属性指令、公开导出、示例源码或文档源码中仍有品牌前缀，就不得声明完成，也不得以“仅内部使用”“只是示例”作为例外。
 - 组件公开入口统一使用具名导出，禁止提供 `export default` 或把内部默认导出继续透出为公开默认导出；调用方统一使用 `import { Button, ButtonGroup } from '...'`。Vue SFC 和 Svelte 组件文件因框架模块格式产生的内部默认导出，只能在同目录公开入口中转换为 `export { default as Button } from './button.vue'` / `./button.svelte`，不得泄漏成包的默认 API。
-- 同一组件族存在多个公开组件时，每个组件必须有独立实现文件，例如 `button.*`、`button-group.*`；组件族可以使用与组件同名的公开入口文件统一导出该子路径，但不得使用 `index.ts` 桶文件。五框架应保持相同的组件拆分边界，具体文件扩展名和模板文件遵循各框架惯例。
+- 同一组件族存在多个公开组件或多部件拆分时（例如 `tooltip-root.*`、`tooltip-trigger.*`、`table-column.*`），每个子部件应有清晰的独立实现文件；组件目录内统一使用 `index.ts` 作为该组件族的微型聚合入口，对外统一暴露干净的组件子路径（例如 `from "@/components/primitive/tooltip"` 或 `from "@/components/ui/table"`）。组件级 `index.ts` 必须使用严格显式具名导出（例如 `export { TooltipRoot, type TooltipRootProps } from "./tooltip-root"`），严禁使用 `export * from ...`，防止内部私有 context、未校验 helper 或类型黑盒泄露。严禁在 `src/` 根部或跨组件层级创建聚合所有组件的大桶文件。五框架应保持相同的组件拆分边界，具体文件扩展名和模板文件遵循各框架惯例。
 - React 只能作为跨框架公共语义、行为、视觉和 Demo 场景的参考，禁止把 React 的 Props、children、ref、Context、hook、组件组织或类型组合方式直接翻译到 Vue、Solid、Svelte、Angular。实现或重构非 React 组件前，必须检查该框架当前官方推荐能力和成熟组件库的真实源码，再按本框架惯例设计；优先参考 Vue 的 Element Plus / Reka UI、Solid 的 Kobalte / Ark UI、Svelte 的 Bits UI / Ark UI、Angular 的 Angular Material / CDK。参考用于确认框架表达和工程惯例，不得不加判断地复制第三方 API、品牌约定或历史兼容代码。
 - 框架特有的通用逻辑要沉淀到对应框架组件包内，组件库和对应 app 都优先复用，不要在 app 里再写一套同类能力。
 - React 通用 hook 放在 `packages/@fex-design/react/src/hooks`。
@@ -194,7 +194,11 @@
 - 同一类能力如果 React、Vue、Solid、Svelte、Angular 都会用，先抽出纯逻辑、类型和算法到 `packages/@fex-design/core` 或 `packages/utils`；各框架包只封装生命周期、响应式绑定、DOM 适配和框架 API。
 - 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；设计 token、全局变量和基础 Tailwind source 配置放在 `packages/styles`，组件自身的 class 组合、variant、size、状态样式和 data attribute 规则必须沉淀到 `packages/@fex-design/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
 - 只有当展示组件演进出必须跨框架保持一致的行为逻辑时，才引入 `packages/@fex-design/core`，例如受控/非受控状态、键盘导航、选择模型、焦点管理、弹层协议、复杂 ARIA 行为或非平凡 variant 计算；不要仅仅为了复用 class 字符串或简单 props 映射而增加 core 抽象。
-- 简单组件优先使用单文件实现和文件级子路径导出，例如 `src/button.tsx`，Props 类型、组件类型和少量局部 helper 直接在组件文件内声明并按需导出，通过 `package.json` 的 `exports` 暴露 `./button`；不要为了单个组件提前创建 `button/index.ts`、`button/index.tsx`、`button.types.ts` 或模板化目录。只有当组件出现多个强相关文件、子组件、feature、hook/composable/primitive、locale、adapter、测试或文档需要共同归组时，才升级为 `src/button/button.tsx` 等目录结构；目录内也不要使用 `index.ts` 作为桶文件，类型文件只在多文件共享复杂公共类型时按需创建。
+- 组件物理文件组织与子路径导出规范：
+  - **简单单文件组件平铺**：绝大多数 UI 层组件及轻量 Primitive 组件必须使用单文件平铺实现，例如 `src/ui/button.tsx`、`src/primitive/separator.tsx`，类型与组件直接在文件内显式具名导出。严禁为仅有单个核心实现的简单组件创建空壳同名文件夹（禁止出现 `src/ui/button/button.tsx` 这种二级重复结构）。
+  - **复杂多部件组件升级为目录 + 显式具名 `index.ts`**：当组件包含多个强相关子组件、解构部件、专属 hook 或私有 context 时（例如 Primitive 层的 Tooltip、Dialog，或复杂的 UI Table、Form），按组件名升级为独立目录（例如 `src/primitive/tooltip/` 或 `src/ui/table/`），并在目录内通过 `index.ts` 进行显式具名聚合导出。
+  - **消灭二级同名重复路径**：对外公开的子路径与业务导入路径永远只指向组件名本身（如 `@/components/ui/tooltip`、`@/components/primitive/tooltip`），禁止在公开导出、CLI 产物或使用示例中出现 `tooltip/tooltip`、`button/button` 式的同名冗余路径。
+  - **禁止全局大桶与 `export *`**：组件级 `index.ts` 仅允许用于本组件族内部子部件与公开类型的具名输出，严禁跨组件建立全局 `src/index.ts` 聚合大桶，严禁在任何 `index.ts` 中使用 `export *`。
 - 复杂跨框架组件如果需要在 core 中维护可变状态并通知 UI 刷新，必须优先沉淀一套可复用的 core store/subscription 基础设施，例如 `getSnapshot`、`subscribe`、`setSnapshot`、`updateSnapshot`，由 Tree、Dialog、Popover、Menu、Table 等 controller 复用；不要在每个组件里重复实现一套发布订阅、监听集合、通知循环或状态快照管理。
 - 各框架包也必须沉淀统一的 core store 适配层，例如 React hook、Vue composable、Solid primitive、Svelte store/action、Angular signal helper，用来桥接 core 的 `getSnapshot + subscribe` 到本框架响应式系统；不要在每个组件适配层里重复写订阅、取消订阅和快照同步逻辑。
 - core store/subscription 只负责通知“状态快照已变化”，业务语义必须通过明确的 controller action 和纯 reducer 表达，例如 `expand`、`collapse`、`open`、`close`、`select`、`moveFocus`；不要把普通业务流转设计成到处 `emit/on` 的事件总线。

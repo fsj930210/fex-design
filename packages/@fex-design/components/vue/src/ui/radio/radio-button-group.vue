@@ -3,7 +3,7 @@ import {
   RadioButton,
   RadioGroup as PrimitiveRadioGroup,
   type RadioValue,
-} from '@fex-design/vue/primitive/radio/radio'
+} from '@fex-design/vue/primitive/radio'
 defineOptions({ name: 'RadioButtonGroup' })
 withDefaults(
   defineProps<{

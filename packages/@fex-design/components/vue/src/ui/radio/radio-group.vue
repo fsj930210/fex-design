@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RadioGroup as PrimitiveRadioGroup, type RadioValue } from '@fex-design/vue/primitive/radio/radio'
+import { RadioGroup as PrimitiveRadioGroup, type RadioValue } from '@fex-design/vue/primitive/radio'
 import Radio from './radio.vue'
 defineOptions({ name: 'RadioGroup' })
 defineProps<{

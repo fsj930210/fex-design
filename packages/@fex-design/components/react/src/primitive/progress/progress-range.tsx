@@ -32,7 +32,7 @@ export function ProgressRange({
       ref={ref}
       data-slot="progress-range"
       data-status={context.status}
-      className={cn(progressLineRangeClassName, className)}
+      className={cn(progressLineRangeClassName, offset !== undefined && 'absolute top-0', className)}
       style={rangeStyle}
     />
   )

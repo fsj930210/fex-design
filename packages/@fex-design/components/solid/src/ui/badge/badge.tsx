@@ -3,8 +3,8 @@ import {
   BadgeDot,
   BadgeRibbon as PrimitiveBadgeRibbon,
   type BadgeProps,
-} from '@fex-design/solid/primitive/badge/badge'
-export { BadgeGroup } from '@fex-design/solid/primitive/badge/badge'
+} from '@fex-design/solid/primitive/badge'
+export { BadgeGroup } from '@fex-design/solid/primitive/badge'
 import {
   getBadgeOffsetTransform,
   type BadgeAttachmentOptions,

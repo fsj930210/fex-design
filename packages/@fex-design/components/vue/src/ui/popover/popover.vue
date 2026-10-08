@@ -16,7 +16,7 @@ import {
   PopoverPortal,
   PopoverTitle,
   PopoverTrigger,
-} from '@fex-design/vue/primitive/popover/popover'
+} from '@fex-design/vue/primitive/popover'
 import { TriggerSlot } from './trigger-slot'
 
 defineOptions({ name: 'Popover', inheritAttrs: false })

@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { ProgressComponent } from "../progress.component";
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Progress } from '@fex-design/angular/ui/progress'
 
 @Component({
-  selector: "progress-basic-example",
+  selector: 'progress-basic-example',
   standalone: true,
-  imports: [ProgressComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./basic.html",
+  imports: [Progress],
+  templateUrl: './basic.html',
 })
 export class ProgressBasicExample {
+
 }

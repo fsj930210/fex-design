@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { normalizeSelectOptions, type SelectFieldNames, type SelectItem } from '@fex-design/core/select/normalize-options'
 import type { SelectFilterOption, SelectVirtualOptions } from '@fex-design/core/select/types'
 import type { SelectionValue } from '@fex-design/core/selection/types'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
 
 defineOptions({ name: 'Select', inheritAttrs: false })
 const props = defineProps<{

@@ -6,7 +6,7 @@ import {
 } from '@fex-design/components-styles/radio'
 import { cn } from '@fex-design/utils'
 import { computed, useAttrs, useId, type PropType, type StyleValue } from 'vue'
-import { Radio as PrimitiveRadio, type RadioValue } from '@fex-design/vue/primitive/radio/radio'
+import { Radio as PrimitiveRadio, type RadioValue } from '@fex-design/vue/primitive/radio'
 defineOptions({ name: 'Radio', inheritAttrs: false })
 const props = defineProps({
   value: { type: [String, Number] as PropType<RadioValue>, required: true },

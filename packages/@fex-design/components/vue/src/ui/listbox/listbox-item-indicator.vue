@@ -3,7 +3,7 @@ import { listboxItemIndicatorClassName } from '@fex-design/components-styles/lis
 import { cn } from '@fex-design/utils'
 import { useAttrs } from 'vue'
 import { CheckIcon } from '@fex-design/vue/icons/check'
-import { ListboxItemIndicator } from '@fex-design/vue/primitive/listbox/listbox'
+import { ListboxItemIndicator } from '@fex-design/vue/primitive/listbox'
 defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 </script>

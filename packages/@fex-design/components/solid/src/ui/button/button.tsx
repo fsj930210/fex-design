@@ -2,7 +2,7 @@ import { buttonClassName, buttonSpinnerClassName } from '@fex-design/components-
 import { cn } from '@fex-design/utils'
 import { Show, splitProps } from 'solid-js'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
-import { Button as PrimitiveButton } from '@fex-design/solid/primitive/button/button'
+import { Button as PrimitiveButton } from '@fex-design/solid/primitive/button'
 import { ButtonIcon } from '@fex-design/solid/primitive/button/button-icon'
 import type { ButtonProps } from './button.types'
 

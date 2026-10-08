@@ -1,5 +1,5 @@
 import { Card } from '@fex-design/react/ui/card'
-import { CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/react/primitive/card/card'
+import { CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/react/primitive/card'
 
 export function CustomHeaderExample() {
   return (

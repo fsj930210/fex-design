@@ -6,7 +6,7 @@ import {
   RadioButton as PrimitiveRadioButton,
   RadioGroup as PrimitiveRadioGroup,
   type RadioValue,
-} from '@fex-design/react/primitive/radio/radio'
+} from '@fex-design/react/primitive/radio'
 
 export interface RadioClassNames {
   root?: string

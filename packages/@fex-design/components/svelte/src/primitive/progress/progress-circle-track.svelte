@@ -1,6 +1,7 @@
 <script lang="ts">
   import { progressCircleTrackClassName } from "@fex-design/components-styles/progress"
   import { getProgressGeometry } from "@fex-design/core/progress/progress"
+  import type { ProgressLinecap } from '@fex-design/core/progress/types'
   import { cn } from "@fex-design/utils"
   import { getContext } from "svelte"
   import type { SVGAttributes } from "svelte/elements"
@@ -8,9 +9,11 @@
 
   interface ProgressCircleTrackProps extends SVGAttributes<SVGCircleElement> {
     gapDegree?: number
+    trackLinecap?: ProgressLinecap
+    ref?: SVGCircleElement | null
   }
 
-  let { gapDegree, class: className, style, ...rest }: ProgressCircleTrackProps = $props()
+  let { gapDegree, trackLinecap, ref = $bindable(null), class: className, style, ...rest }: ProgressCircleTrackProps = $props()
   const { context } = getContext<ProgressContext>(progressContextKey)
   const current = $derived(context())
   const size = $derived(current.size ?? 48)
@@ -29,15 +32,16 @@
 </script>
 
 <circle
+  bind:this={ref}
   {...rest}
   cx={geometry.center}
   cy={geometry.center}
   r={geometry.radius}
   fill="none"
-  stroke={current.trackColor ?? "currentColor"}
+  stroke="currentColor"
   stroke-width={thickness}
   stroke-dasharray={geometry.trackDasharray}
-  stroke-linecap={current.trackLinecap ?? "round"}
+  stroke-linecap={trackLinecap ?? "round"}
   pathLength={100}
   data-slot="progress-circle-track"
   class={cn(progressCircleTrackClassName, className)}

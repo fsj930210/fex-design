@@ -18,7 +18,7 @@ import { TriangleAlertIcon } from '@fex-design/solid/icons/triangle-alert'
 import {
   Alert as PrimitiveAlert,
   type AlertProps as PrimitiveAlertProps,
-} from '@fex-design/solid/primitive/alert/alert'
+} from '@fex-design/solid/primitive/alert'
 
 export type AlertProps = Omit<PrimitiveAlertProps, 'title'> &
   AlertUiOptions<JSX.Element, JSX.CSSProperties> & {

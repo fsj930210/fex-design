@@ -13,7 +13,7 @@ import {
   TooltipPortal,
   TooltipRoot,
   TooltipTrigger,
-} from '@fex-design/vue/primitive/tooltip/tooltip'
+} from '@fex-design/vue/primitive/tooltip'
 import { TriggerSlot } from '../popover/trigger-slot'
 
 defineOptions({ name: 'Tooltip', inheritAttrs: false })

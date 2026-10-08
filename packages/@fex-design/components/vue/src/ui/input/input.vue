@@ -10,7 +10,7 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
-} from '@fex-design/vue/primitive/input/input'
+} from '@fex-design/vue/primitive/input'
 import type { InputProps } from './input.types'
 import InputClearWhenAvailable from './input-clear.vue'
 

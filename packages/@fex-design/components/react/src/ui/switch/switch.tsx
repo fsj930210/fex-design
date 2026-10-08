@@ -6,8 +6,8 @@ import {
   SwitchContent,
   SwitchThumb,
   type SwitchRootProps,
-} from '@fex-design/react/primitive/switch/switch'
-import { Spinner } from '@fex-design/react/primitive/spinner/spinner'
+} from '@fex-design/react/primitive/switch'
+import { Spinner } from '@fex-design/react/primitive/spinner'
 export type SwitchProps = Omit<SwitchRootProps, 'children'> &
   SwitchUiOptions<ReactNode, CSSProperties>
 export function Switch({

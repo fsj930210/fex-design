@@ -79,6 +79,8 @@ export async function resolveRegistryGraph(
 
     registryDependencies.add(`${lyr}/${componentName}`)
     const srcFiles = getSourceFiles(compDir)
+    const hasExclusiveUtils = lyr === "primitive" && !!bundleComponentExclusiveUtils(componentName, masterRepoRoot)
+    const isSingleFile = srcFiles.length === 1 && !hasExclusiveUtils
 
     for (const f of srcFiles) {
       const relPath = path.relative(compDir, f).replace(/\\/g, "/")
@@ -104,8 +106,28 @@ export async function resolveRegistryGraph(
         needsSharedCore = true
       }
 
+      let filePath = `${componentName}/${relPath}`
+      if (isSingleFile) {
+        filePath = `${componentName}${path.extname(f)}`
+      } else {
+        const baseName = path.basename(f, path.extname(f))
+        const ext = path.extname(f)
+        const isEntryBarrel =
+          baseName === "index" ||
+          (baseName === componentName &&
+            (ext === ".ts" || ext === ".tsx") &&
+            !srcFiles.some(
+              (o) => o !== f && path.basename(o, path.extname(o)) === componentName && path.extname(o) === ".tsx" && ext === ".ts"
+            ))
+        filePath = isEntryBarrel ? `${componentName}/index${ext}` : `${componentName}/${relPath}`
+        content = content.replace(
+          new RegExp(`from\\s+['"]\\.\\/${componentName}(?:\\.[a-zA-Z]+)?['"]`, "g"),
+          "from './index'"
+        )
+      }
+
       files.push({
-        path: `${componentName}/${relPath}`,
+        path: filePath,
         target: lyr,
         content,
       })
@@ -243,16 +265,26 @@ function transformComponentImports(
   // 3. Framework component & hook imports
   res = res.replace(
     new RegExp(`from\\s+['"]@fex-design\\/${framework}\\/primitive\\/([^'"]+)['"]`, "g"),
-    "from '$primitive/$1'"
+    (_m, p1) => {
+      const parts = p1.split("/")
+      return parts.length === 2 && parts[0] === parts[1] ? "from '$primitive/" + parts[0] + "'" : "from '$primitive/" + p1 + "'"
+    }
   )
   res = res.replace(
     new RegExp(`from\\s+['"]@fex-design\\/${framework}\\/ui\\/([^'"]+)['"]`, "g"),
-    "from '$ui/$1'"
+    (_m, p1) => {
+      const parts = p1.split("/")
+      return parts.length === 2 && parts[0] === parts[1] ? "from '$ui/" + parts[0] + "'" : "from '$ui/" + p1 + "'"
+    }
   )
   res = res.replace(
     new RegExp(`from\\s+['"]@fex-design\\/${framework}\\/pro\\/([^'"]+)['"]`, "g"),
-    "from '$pro/$1'"
+    (_m, p1) => {
+      const parts = p1.split("/")
+      return parts.length === 2 && parts[0] === parts[1] ? "from '$pro/" + parts[0] + "'" : "from '$pro/" + p1 + "'"
+    }
   )
+  res = res.replace(/from\s+['"](\$primitive|\$ui|\$pro)\/([a-zA-Z0-9_-]+)\/\2['"]/g, "from '$1/$2'")
   res = res.replace(
     new RegExp(`from\\s+['"]@fex-design\\/${framework}\\/hooks\\/([^'"]+)['"]`, "g"),
     "from '$hooks/$1'"

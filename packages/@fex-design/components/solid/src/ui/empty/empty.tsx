@@ -8,7 +8,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex-design/solid/primitive/empty/empty'
+} from '@fex-design/solid/primitive/empty'
 
 export type EmptyStyles = EmptyStylesBase<JSX.CSSProperties>
 export interface EmptyProps

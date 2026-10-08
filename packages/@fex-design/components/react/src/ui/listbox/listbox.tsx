@@ -20,7 +20,7 @@ import {
   ListboxItemIndicator as PrimitiveListboxItemIndicator,
   ListboxRoot as PrimitiveListboxRoot,
   type ListboxRootProps as PrimitiveListboxRootProps,
-} from '@fex-design/react/primitive/listbox/listbox'
+} from '@fex-design/react/primitive/listbox'
 
 export type ListboxRootProps<TItem = unknown> = Omit<
   PrimitiveListboxRootProps<TItem>,

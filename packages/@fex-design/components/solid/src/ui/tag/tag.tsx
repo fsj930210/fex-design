@@ -5,10 +5,10 @@ import {
   Tag as PrimitiveTag,
   TagAction,
   type TagProps as PrimitiveTagProps,
-} from '@fex-design/solid/primitive/tag/tag'
+} from '@fex-design/solid/primitive/tag'
 
-export type { TagActionProps } from '@fex-design/solid/primitive/tag/tag'
-export { TagAction } from '@fex-design/solid/primitive/tag/tag'
+export type { TagActionProps } from '@fex-design/solid/primitive/tag'
+export { TagAction } from '@fex-design/solid/primitive/tag'
 
 export type TagProps = PrimitiveTagProps &
   TagUiOptions<JSX.Element, JSX.CSSProperties> & {

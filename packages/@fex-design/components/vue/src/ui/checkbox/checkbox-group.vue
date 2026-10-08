@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CheckboxValue } from '@fex-design/core/checkbox/types'
 import Checkbox from './checkbox.vue'
-import { CheckboxGroup as PrimitiveCheckboxGroup } from '@fex-design/vue/primitive/checkbox/checkbox'
+import { CheckboxGroup as PrimitiveCheckboxGroup } from '@fex-design/vue/primitive/checkbox'
 defineOptions({ name: 'CheckboxGroup' })
 defineProps<{
   value?: CheckboxValue[]

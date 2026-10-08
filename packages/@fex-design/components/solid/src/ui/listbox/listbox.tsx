@@ -21,7 +21,7 @@ import {
   ListboxItemIndicator as PrimitiveListboxItemIndicator,
   ListboxRoot as PrimitiveListboxRoot,
   type ListboxRootProps as PrimitiveListboxRootProps,
-} from '@fex-design/solid/primitive/listbox/listbox'
+} from '@fex-design/solid/primitive/listbox'
 
 export type ListboxRootProps<TItem = unknown> = PrimitiveListboxRootProps<TItem> &
   ListboxRootStyleProps & {

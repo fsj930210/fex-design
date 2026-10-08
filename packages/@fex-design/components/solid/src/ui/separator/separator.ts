@@ -1,1 +1,1 @@
-export { Separator } from '@fex-design/solid/primitive/separator/separator'
+export { Separator } from '@fex-design/solid/primitive/separator'

@@ -1,51 +1,71 @@
 # Progress
 
-A feature-rich, high-performance, and accessible progress component. Built on top of Progress Primitive to deliver out-of-the-box linear, circular, dashboard, and stepped progress bars.
+Assembles Progress Primitive into linear, circle, dashboard and segmented progress, with info placement and semantic styling.
 
 ## Import
 
-```tsx
+```ts
 import { Progress } from '@fex-design/svelte/ui/progress'
+```
+
+```svelte
+<Progress value={65} label="Upload progress" infoPlacement="top" />
 ```
 
 ## Examples
 
-| ID | Title | Description |
-| :--- | :--- | :--- |
-| `basic` | Basic | Standard linear progress bar with top label and percentage display. |
-| `status` | Status | Supports pending, active, success, and error task statuses. |
-| `color` | Color | Custom solid colors, track background colors, and gradient configurations. |
-| `segmented` | Segmented | Gradient stops segmented progress bar. |
-| `step-line` | Step Line | Discrete stepped blocks progress bar. |
-| `step-circle` | Step Circle | Circular segmented stepped progress bar with customizable gaps. |
-| `size` | Size | Preset size and line thickness variations. |
-| `linecap` | Linecap | Support for round, butt, and square line stroke ends. |
-| `circle` | Circle | 360-degree closed circular progress indicator. |
-| `dashboard` | Dashboard | Dashboard arch with configurable gap degree and placement. |
-| `dynamic` | Dynamic | Interactive dynamic controls. |
+| ID | Scenario |
+| --- | --- |
+| `basic` | Basic |
+| `status` | Status |
+| `color` | Color |
+| `segmented` | Segmented progress |
+| `size` | Size |
+| `linecap` | Border radius |
+| `circle` | Circle |
+| `dashboard` | Dashboard |
+| `dynamic` | Dynamic value |
+| `direction` | LTR / RTL |
+| `structured` | Semantic styles |
+| `custom-gap` | Segment gap |
+| `format` | Formatting and info placement |
+| `gradient` | Gradient |
+| `multi-range` | Multiple ranges |
 
-## Props API
+## API
 
-| Property | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `value` | `number \| null` | `0` | Current progress value; null means pending without a numeric value. |
-| `min` | `number` | `0` | Minimum value boundary. |
-| `max` | `number` | `100` | Maximum value boundary. |
-| `variant` | `'line' \| 'circle' \| 'dashboard'` | `'line'` | Shape variant of the progress indicator. |
-| `status` | `'pending' \| 'active' \| 'success' \| 'error'` | `'pending'` | Task lifecycle status. |
-| `size` | `'sm' \| 'md' \| 'lg' \| number` | `'md'` | Preset size or diameter dimension. |
-| `thickness` | `number` | `variant === 'line' ? 8 : 6` | Track thickness / stroke width in pixels. |
-| `steps` | `number` | `undefined` | Number of discrete stepped segments for linear or circular steps. |
-| `gap` | `number` | `2` | Gap spacing in pixels between circular steps. |
-| `showInfo` | `boolean` | `true` for line, `false` for circle | Whether to display progress percentage or icon. |
-| `infoPlacement` | `'outside' \| 'inside' \| 'top' \| 'none'` | `'outside'` | Placement position of the progress text label. |
-| `label` | `ReactNode` | `undefined` | Title label displayed alongside the progress bar. |
-| `format` | `function` | `undefined` | Custom formatter function returning text or icon for progress. |
-| `color` | `ProgressColor` | `undefined` | Custom fill color, hex, variable, or gradient object. |
-| `trackColor` | `string` | `undefined` | Background track color override. |
-| `linecap` | `'round' \| 'butt' \| 'square'` | `'round'` | Stroke line cap style for progress range. |
-| `trackLinecap` | `'round' \| 'butt' \| 'square'` | `'round'` | Stroke line cap style for background track. |
-| `gapDegree` | `number` | `75` | Gap angle in degrees for dashboard variant. |
-| `gapPlacement` | `'top' \| 'bottom' \| 'start' \| 'end'` | `'bottom'` | Location of the gap opening for dashboard variant. |
-| `classNames` | `object` | `undefined` | Fine-grained class overrides for root, track, range, info, label, step. |
-| `styles` | `object` | `undefined` | Fine-grained style overrides for root, track, range, info, label, step. |
+| Property | Type / Default |
+| --- | --- |
+| value / min / max | number / null; 0 / 0 / 100 |
+| variant | line / circle / dashboard; line |
+| status | pending / active / success / error; derived |
+| size | sm / md / lg / number; line: 8, circle: 48 |
+| thickness | number; line: 8, circle: 4 |
+| steps / gap | number; gap: 2px |
+| color | string / { from, to, direction? } / { stops, direction? } |
+| trackColor | string |
+| linecap / trackLinecap | round / butt / square; round |
+| gapDegree | number; 75 |
+| gapPlacement | top / bottom / start / end / left / right; bottom |
+| showInfo / showValue | boolean / undefined |
+| infoPlacement | outside / inside / top / bottom / none; outside |
+| label | Snippet / string |
+| format | (percent, value) => string / number |
+| success | boolean; false |
+| classNames / styles | root, track, range, info, label, step |
+
+Info visibility uses showInfo ?? showValue ?? the default. Lines show info by default; circles and dashboards default to visible only for inside placement. format takes precedence over success icons and receives percent in 0–100. bottom does not duplicate the top label; none renders no info.
+
+Regular circle gradients use separate SVG gradient IDs; segmented circles select colors per segment. gapDegree applies to regular dashboards. top uses 315° rotation; the other gapPlacement values follow the current React geometry rotation. trackColor applies to lines and stepped tracks; regular circles retain the Primitive default track style.
+
+classNames and styles target the corresponding parts. Native root style takes precedence over styles.root. Native attributes, events and element access follow framework conventions.
+
+label accepts text or a Snippet. info accepts a Snippet receiving { percent, value } and takes precedence over format. Use bind:ref to access the element.
+
+## CSS
+
+--progress-remaining controls the remaining track color.
+
+`ranges` composes adjacent line ranges from `{ value, color? }` items. Values are lengths within `max - min`; their sum replaces `value` and is capped at capacity. It applies only to line progress without `steps`.
+
+Line radii use native class/style or `classNames`/`styles`; `linecap` and `trackLinecap` apply only to circle/dashboard SVG strokes.

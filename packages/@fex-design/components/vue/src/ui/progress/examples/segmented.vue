@@ -1,2 +1,52 @@
-﻿<script setup lang="ts">import { Progress } from "@fex-design/vue/ui/progress"</script>
-<template><div class="grid w-full max-w-md gap-5"><div class="grid gap-3"><Progress :value="50" :steps="5" color="var(--info)" /><Progress :value="80" :steps="5" color="var(--info)" /><Progress :value="100" :steps="5" color="var(--info)" success /></div><div class="flex items-center gap-6"><Progress variant="circle" :value="50" :size="96" :steps="10" :gap="2" linecap="butt" track-linecap="butt" color="var(--info)" show-info /><Progress variant="circle" :value="80" :size="96" :steps="10" :gap="2" linecap="butt" track-linecap="butt" color="var(--info)" show-info /><Progress variant="circle" :value="100" :size="96" :steps="10" :gap="2" linecap="butt" track-linecap="butt" color="var(--info)" success show-info /></div></div></template>
+<script setup lang="ts">
+import { Progress } from '@fex-design/vue/ui/progress'
+
+defineOptions({ name: 'ProgressSegmentedExample' })
+
+</script>
+
+<template>
+  <div class="grid w-full max-w-md gap-5">
+    <div class="grid gap-3">
+      <Progress :value="50" :steps="5" color="var(--info)" />
+      <Progress :value="80" :steps="5" color="var(--info)" />
+      <Progress :value="100" :steps="5" color="var(--info)" :success="true" />
+    </div>
+    <div class="flex items-center gap-6">
+      <Progress
+        variant="circle"
+        :value="50"
+        :size="96"
+        :steps="10"
+        :gap="2"
+        linecap="butt"
+        trackLinecap="butt"
+        color="var(--info)"
+        :showInfo="true"
+      />
+      <Progress
+        variant="circle"
+        :value="80"
+        :size="96"
+        :steps="10"
+        :gap="2"
+        linecap="butt"
+        trackLinecap="butt"
+        color="var(--info)"
+        :showInfo="true"
+      />
+      <Progress
+        variant="circle"
+        :value="100"
+        :size="96"
+        :steps="10"
+        :gap="2"
+        linecap="butt"
+        trackLinecap="butt"
+        color="var(--info)"
+        :showInfo="true"
+        :success="true"
+      />
+    </div>
+  </div>
+</template>

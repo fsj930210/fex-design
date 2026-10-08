@@ -1,0 +1,6 @@
+export { SkeletonAvatar } from './skeleton-avatar'
+export { SkeletonBlock } from './skeleton-block'
+export { SkeletonButton } from './skeleton-button'
+export { SkeletonImage } from './skeleton-image'
+export { SkeletonInput } from './skeleton-input'
+export { SkeletonText } from './skeleton-text'

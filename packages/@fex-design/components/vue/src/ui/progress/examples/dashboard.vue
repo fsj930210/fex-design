@@ -1,9 +1,13 @@
-﻿<script setup lang="ts">
-import { Progress } from "@fex-design/vue/ui/progress"
+<script setup lang="ts">
+import { Progress } from '@fex-design/vue/ui/progress'
+
+defineOptions({ name: 'ProgressDashboardExample' })
+
 </script>
+
 <template>
   <div class="flex gap-6 items-center">
-    <Progress variant="dashboard" :value="75" :gap-degree="90" gap-placement="bottom" :size="96" show-info />
-    <Progress variant="dashboard" :value="75" :gap-degree="90" gap-placement="top" :size="96" show-info />
+    <Progress variant="dashboard" :value="75" :thickness="4" :gapDegree="90" gapPlacement="bottom" :size="96" :showInfo="true" />
+    <Progress variant="dashboard" :value="75" :thickness="4" :gapDegree="90" gapPlacement="top" :size="96" :showInfo="true" />
   </div>
 </template>

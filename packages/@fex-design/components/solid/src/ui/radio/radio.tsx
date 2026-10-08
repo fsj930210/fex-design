@@ -8,7 +8,7 @@ import {
   type RadioGroupProps as PrimitiveGroupProps,
   type RadioProps as PrimitiveRadioProps,
   type RadioValue,
-} from '@fex-design/solid/primitive/radio/radio'
+} from '@fex-design/solid/primitive/radio'
 
 export interface RadioProps extends ParentProps<PrimitiveRadioProps> {
   classNames?: { root?: string; control?: string; label?: string }

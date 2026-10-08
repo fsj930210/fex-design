@@ -13,7 +13,7 @@ import {
   AnchorRail,
   AnchorRoot,
   type AnchorRootProps,
-} from '@fex-design/react/primitive/anchor/anchor'
+} from '@fex-design/react/primitive/anchor'
 
 export type AnchorStyles = AnchorStylesBase<CSSProperties>
 export type AnchorUiItem = AnchorItemData<ReactNode>

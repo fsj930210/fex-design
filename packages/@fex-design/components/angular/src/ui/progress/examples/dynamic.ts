@@ -1,15 +1,15 @@
-﻿import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
-import { ProgressComponent } from "../progress.component";
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
+import { Progress } from '@fex-design/angular/ui/progress'
 
 @Component({
-  selector: "progress-dynamic-example",
+  selector: 'progress-dynamic-example',
   standalone: true,
-  imports: [ProgressComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./dynamic.html",
+  imports: [Progress],
+  templateUrl: './dynamic.html',
 })
 export class ProgressDynamicExample {
-  readonly value = signal(30);
-  increase() { this.value.update(v => Math.min(100, v + 10)); }
-  decrease() { this.value.update(v => Math.max(0, v - 10)); }
+  readonly value = signal(30)
+  decrease() { this.value.update(current => Math.max(0, current - 10)) }
+  increase() { this.value.update(current => Math.min(100, current + 10)) }
 }

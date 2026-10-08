@@ -1,1 +1,21 @@
-﻿<div class="grid w-full max-w-md gap-4"><div progress [value]="90" [color]="gradient"></div><div class="flex items-center gap-6"><div progress variant="circle" [value]="90" [size]="96" [color]="gradient" [showInfo]="true"></div><div progress variant="dashboard" [value]="90" [size]="96" [color]="gradient" [showInfo]="true"></div></div></div>
+<div class="grid w-full max-w-md gap-4">
+  <div progress [value]="90" [color]="{'from':'#1677ff','to':'#87d068'}"></div>
+  <div class="flex items-center gap-6">
+    <div
+      progress
+      variant="circle"
+      [value]="90"
+      [size]="96"
+      [color]="{'from':'#1677ff','to':'#87d068'}"
+      [showInfo]="true"
+    ></div>
+    <div
+      progress
+      variant="dashboard"
+      [value]="90"
+      [size]="96"
+      [color]="{'from':'#1677ff','to':'#87d068'}"
+      [showInfo]="true"
+    ></div>
+  </div>
+</div>

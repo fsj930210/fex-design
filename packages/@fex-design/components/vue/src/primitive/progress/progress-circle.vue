@@ -2,12 +2,12 @@
 import { progressCircleClassName } from '@fex-design/components-styles/progress'
 import { getProgressGeometry } from '@fex-design/core/progress/progress'
 import { cn } from '@fex-design/utils'
-import { computed } from 'vue'
+import { computed, useTemplateRef, type StyleValue } from 'vue'
 import { useProgressContext } from './progress-context'
 
-defineOptions({ name: 'ProgressCircle' })
+defineOptions({ name: 'ProgressCircle', inheritAttrs: false })
 
-const props = defineProps<{ gapDegree?: number }>()
+const props = defineProps<{ gapDegree?: number; rotation?: number }>()
 const context = useProgressContext('ProgressCircle')
 
 const size = computed(() => context.value.size ?? 48)
@@ -22,16 +22,20 @@ const geometry = computed(() =>
     gapDegree: props.gapDegree,
   }),
 )
+const element = useTemplateRef<SVGSVGElement>('element')
+defineExpose({ element })
 </script>
 <template>
   <svg
+    ref="element"
+    v-bind="$attrs"
     data-slot="progress-circle"
-    :data-status="context.value.status"
+    :data-status="context.status"
     :viewBox="`0 0 ${size} ${size}`"
     :width="size"
     :height="size"
     :class="cn(progressCircleClassName, $attrs.class as string | undefined)"
-    :style="[{ transform: `rotate(${geometry.rotation}deg)` }, $attrs.style as any]"
+    :style="[{ transform: `rotate(${props.rotation ?? geometry.rotation}deg)` }, $attrs.style as StyleValue]"
   >
     <slot />
   </svg>

@@ -5,7 +5,7 @@ import type {
   InputNumberPart,
 } from '@fex-design/core/input-number/types'
 import { getCurrentInstance, type StyleValue } from 'vue'
-import { InputPrefix, InputSuffix } from '@fex-design/vue/primitive/input/input'
+import { InputPrefix, InputSuffix } from '@fex-design/vue/primitive/input'
 import {
   InputNumberActions,
   InputNumberClear,
@@ -13,7 +13,7 @@ import {
   InputNumberDecrement,
   InputNumberIncrement,
   InputNumberRoot,
-} from '@fex-design/vue/primitive/input-number/input-number'
+} from '@fex-design/vue/primitive/input-number'
 defineOptions({ name: 'InputNumber', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{

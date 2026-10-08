@@ -1,227 +1,151 @@
+import { NgTemplateOutlet } from '@angular/common'
 import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from "@angular/core"
-import { CheckIcon } from "@fex-design/angular/icons/check"
+  booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef,
+  inject, input, type TemplateRef,
+} from '@angular/core'
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import {
-  Progress,
-  ProgressCircle,
-  ProgressCircleRange,
-  ProgressCircleTrack,
-  ProgressLabel,
-  ProgressRange,
-  ProgressTrack,
-} from "@fex-design/angular/primitive/progress"
+  ProgressCircle, ProgressCircleRange, ProgressCircleTrack,
+  ProgressLabel, ProgressRange, ProgressTrack,
+} from '@fex-design/angular/primitive/progress'
+import { CheckIcon } from '@fex-design/angular/icons/check'
 import {
-  progressStepLineContainerClassName,
-  progressStepLineItemClassName,
-  progressStepLineTrackClassName,
-  progressTopHeaderClassName,
-} from "@fex-design/components-styles/progress"
+  progressStepLineContainerClassName, progressStepLineItemClassName,
+  progressStepLineTrackClassName, progressTopHeaderClassName,
+} from '@fex-design/components-styles/progress'
 import {
-  getCircleStepsGeometry,
-  getLineStepsGeometry,
-  getLinearProgressBackground,
-  normalizeProgressValue,
-  resolveProgressStatus,
-} from "@fex-design/core/progress/progress"
+  getProgressRanges, getCircleStepsGeometry, getLineStepsGeometry, getLinearProgressBackground,
+  getProgressGradientStops, getProgressStepColor, normalizeProgressValue, resolveProgressStatus,
+} from '@fex-design/core/progress/progress'
 import type {
-  ProgressColor,
-  ProgressGapPlacement,
-  ProgressInfoPlacement,
-  ProgressLinecap,
-  ProgressSize,
-  ProgressStatus,
-  ProgressVariant,
-} from "@fex-design/core/progress/types"
-import { cn } from "@fex-design/utils"
+  ProgressRangeItem, ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap,
+  ProgressSize, ProgressStatus, ProgressVariant,
+} from '@fex-design/core/progress/types'
+import { cn } from '@fex-design/utils'
+import { mergeProgressStyle, type ProgressClassNames, type ProgressStyles } from './styles'
+import { progressContext } from '../../primitive/progress/progress-context'
+
+let nextGradientId = 0
+function optionalBoolean(value: unknown): boolean | undefined {
+  return value === undefined ? undefined : booleanAttribute(value)
+}
 
 @Component({
-  selector: "div[progress], [progress]",
+  selector: 'div[progress]',
   standalone: true,
+  exportAs: 'progress',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    Progress,
-    ProgressTrack,
-    ProgressRange,
-    ProgressLabel,
-    ProgressCircle,
-    ProgressCircleTrack,
-    ProgressCircleRange,
-    CheckIcon,
-  ],
-  templateUrl: "./progress.component.html",
+  imports: [NgTemplateOutlet, ProgressTrack, ProgressRange, ProgressLabel,
+    ProgressCircle, ProgressCircleTrack, ProgressCircleRange, CheckIcon],
+  providers: [{ provide: progressContext, useFactory: () => inject(Progress).context }],
+  templateUrl: './progress.component.html',
+  host: {
+    '[class]': 'hostClassName()',
+    '[style]': 'rootStyle()',
+    'data-slot': 'progress',
+    '[attr.data-variant]': "isLineSteps() ? 'steps' : isCircleSteps() ? 'circle-steps' : variant()",
+    '[attr.data-status]': 'resolvedStatus()',
+    '[attr.role]': "hasSteps() ? null : 'progressbar'",
+    '[attr.aria-valuemin]': 'hasSteps() ? null : normalized().min',
+    '[attr.aria-valuemax]': 'hasSteps() ? null : normalized().max',
+    '[attr.aria-valuenow]': 'hasSteps() ? null : normalized().value',
+    '[attr.aria-valuetext]': 'ariaValueText()',
+  },
 })
-export class ProgressComponent {
+export class Progress {
+  readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
   readonly value = input<number | null>(0)
   readonly min = input(0)
   readonly max = input(100)
-  readonly variant = input<ProgressVariant>("line")
+  readonly variant = input<ProgressVariant>('line')
   readonly status = input<ProgressStatus>()
   readonly size = input<ProgressSize>()
   readonly thickness = input<number>()
+  readonly ranges = input<readonly ProgressRangeItem[]>()
   readonly steps = input<number>()
-  readonly gap = input<number>(2)
+  readonly gap = input(2)
   readonly color = input<ProgressColor>()
   readonly trackColor = input<string>()
-  readonly linecap = input<ProgressLinecap>("round")
+  readonly linecap = input<ProgressLinecap>('round')
   readonly trackLinecap = input<ProgressLinecap>()
-  readonly gapDegree = input<number>(75)
-  readonly gapPlacement = input<ProgressGapPlacement>("bottom")
-  readonly primitiveGapPlacement = computed<"top" | "bottom" | "start" | "end">(() => {
-    const placement = this.gapPlacement()
-    return placement === "left" ? "start" : placement === "right" ? "end" : placement
-  })
-  readonly showInfo = input<boolean>()
-  readonly showValue = input(false, { transform: booleanAttribute })
-  readonly infoPlacement = input<ProgressInfoPlacement>("outside")
+  readonly gapDegree = input(75)
+  readonly gapPlacement = input<ProgressGapPlacement>('bottom')
+  readonly showInfo = input(undefined, { transform: optionalBoolean })
+  readonly showValue = input(undefined, { transform: optionalBoolean })
+  readonly infoPlacement = input<ProgressInfoPlacement>('outside')
   readonly label = input<string>()
-  readonly format = input<(percent: number | null, value: number | null) => string>()
+  readonly labelTemplate = input<TemplateRef<unknown>>()
+  readonly infoTemplate = input<TemplateRef<{ percent: number | null; value: number | null }>>()
+  readonly format = input<(percent: number | null, value: number | null) => string | number>()
   readonly success = input(false, { transform: booleanAttribute })
-  readonly classNames = input<Record<string, string>>()
-  readonly styles = input<Record<string, string>>()
-  readonly class = input<string>("")
-
-  readonly normalized = computed(() =>
-    normalizeProgressValue(this.value(), this.min(), this.max())
-  )
-
-  readonly isComplete = computed(() =>
-    this.normalized().percentage !== null && this.normalized().percentage! >= 1
-  )
-
-  readonly isSuccess = computed(() =>
-    this.success() || this.status() === "success" || (this.isComplete() && !this.status())
-  )
-
-  readonly effectiveStatus = computed<ProgressStatus>(() =>
-    this.success() ? "success" : resolveProgressStatus(this.status(), this.value(), this.min(), this.max())
-  )
-
-  readonly shouldShowInfo = computed(() =>
-    this.showInfo() ?? (this.showValue() || this.variant() === "line" || this.infoPlacement() === "inside")
-  )
-
-  readonly numSize = computed(() => {
-    const s = this.size()
-    if (typeof s === "number") return s
-    if (s === "sm") return this.variant() === "line" ? 4 : 32
-    if (s === "lg") return this.variant() === "line" ? 12 : 96
-    return this.variant() === "line" ? 8 : 48
-  })
-
-  readonly numThickness = computed(() => {
-    const t = this.thickness()
-    if (t !== undefined) return t
-    const s = this.size()
-    if (typeof s === "number" && this.variant() === "line") return s
-    if (s === "sm") return 4
-    if (s === "lg") return 8
-    return this.variant() === "line" ? 8 : 4
-  })
-
-  readonly isLineSteps = computed(() =>
-    (this.steps() ?? 0) > 0 && this.variant() !== "circle" && this.variant() !== "dashboard"
-  )
-
-  readonly isCircleSteps = computed(() =>
-    (this.steps() ?? 0) > 0 && (this.variant() === "circle" || this.variant() === "dashboard")
-  )
-
-  readonly lineSteps = computed(() =>
-    this.isLineSteps()
-      ? getLineStepsGeometry({
-          value: this.value(),
-          min: this.min(),
-          max: this.max(),
-          steps: this.steps() ?? 10,
-        })
-      : null
-  )
-
-  readonly circleSteps = computed(() =>
-    this.isCircleSteps()
-      ? getCircleStepsGeometry({
-          value: this.value(),
-          min: this.min(),
-          max: this.max(),
-          size: this.numSize(),
-          thickness: this.numThickness(),
-          steps: this.steps() ?? 10,
-          gap: this.gap() ?? 2,
-        })
-      : null
-  )
-
-  readonly infoText = computed(() => {
-    const fmt = this.format()
-    const norm = this.normalized()
-    if (fmt) {
-      return fmt(
-        norm.percentage !== null ? Math.round(norm.percentage * 100) : null,
-        norm.value
-      )
-    }
-    return norm.percentage !== null ? `${Math.round(norm.percentage * 100)}%` : ""
-  })
-
-  readonly stepActiveColor = computed(() =>
-    getLinearProgressBackground(this.color())
-  )
-
-  readonly circleActiveColor = computed(() =>
-    typeof this.color() === "string" ? (this.color() as string) : null
-  )
-
-  readonly stepLineContainerClass = computed(() =>
-    cn(progressStepLineContainerClassName, this.classNames()?.["root"], this.class())
-  )
-
-  readonly stepLineTrackClass = computed(() =>
-    cn(progressStepLineTrackClassName, this.classNames()?.["track"])
-  )
-
-  readonly stepLineItemClass = computed(() =>
-    cn(progressStepLineItemClassName, this.classNames()?.["step"])
-  )
-
-  readonly infoClass = computed(() =>
-    cn("text-sm font-medium", this.classNames()?.["info"])
-  )
-
-  readonly circleStepsContainerClass = computed(() =>
-    cn("relative inline-flex items-center justify-center", this.classNames()?.["root"], this.class())
-  )
-
-  readonly circleInfoClass = computed(() =>
-    cn("absolute inset-0 flex items-center justify-center text-sm font-medium", this.classNames()?.["info"])
-  )
-
-  readonly lineRootClass = computed(() =>
-    cn("flex flex-col w-full", this.classNames()?.["root"], this.class())
-  )
-
-  readonly topHeaderClass = computed(() =>
-    cn(progressTopHeaderClassName, this.classNames()?.["label"])
-  )
-
-  readonly topInfoClass = computed(() =>
-    cn("text-muted-foreground", this.classNames()?.["info"])
-  )
-
-  readonly outsideInfoClass = computed(() =>
-    cn("ms-2 shrink-0 text-sm font-medium", this.classNames()?.["info"])
-  )
-
-  readonly circleRootClass = computed(() =>
-    cn("relative inline-flex items-center justify-center", this.classNames()?.["root"], this.class())
-  )
-
-  readonly circleCenterInfoClass = computed(() =>
-    cn("absolute inset-0 flex items-center justify-center font-medium", this.classNames()?.["info"])
-  )
+  readonly classNames = input<ProgressClassNames>()
+  readonly styles = input<ProgressStyles>()
+  protected readonly rangeLayout = computed(() => this.ranges() !== undefined && this.variant() === 'line' && !this.hasSteps() ? getProgressRanges(this.ranges()!, this.min(), this.max()) : null)
+  protected readonly effectiveValue = computed(() => this.rangeLayout()?.value ?? this.value())
+  readonly normalized = computed(() => normalizeProgressValue(this.effectiveValue(), this.min(), this.max()))
+  readonly resolvedStatus = computed(() => this.success() ? 'success'
+    : resolveProgressStatus(this.status(), this.effectiveValue(), this.min(), this.max()))
+  readonly resolvedThickness = computed(() => this.thickness() ?? (
+    typeof this.size() === 'number' && this.variant() === 'line' ? this.size() as number
+    : this.size() === 'sm' ? 4 : this.size() === 'lg' ? 8 : this.variant() === 'line' ? 8 : 4))
+  protected readonly numSize = computed(() => typeof this.size() === 'number' ? this.size() as number
+    : this.size() === 'sm' ? (this.variant() === 'line' ? 4 : 32)
+    : this.size() === 'lg' ? (this.variant() === 'line' ? 12 : 96)
+    : this.variant() === 'line' ? 8 : 48)
+  readonly context = { normalized: this.normalized, status: this.resolvedStatus,
+    variant: this.variant, size: this.numSize, thickness: this.resolvedThickness }
+  protected readonly shouldShowInfo = computed(() => this.showInfo() ?? this.showValue()
+    ?? (this.variant() === 'line' || this.infoPlacement() === 'inside'))
+  protected readonly hasSteps = computed(() => (this.steps() ?? 0) > 0)
+  protected readonly isCircle = computed(() => this.variant() === 'circle' || this.variant() === 'dashboard')
+  protected readonly isLineSteps = computed(() => this.hasSteps() && !this.isCircle())
+  protected readonly isCircleSteps = computed(() => this.hasSteps() && this.isCircle())
+  protected readonly lineSteps = computed(() => this.isLineSteps()
+    ? getLineStepsGeometry({ value: this.value(), min: this.min(), max: this.max(), steps: this.steps() }) : null)
+  protected readonly circleSteps = computed(() => this.isCircleSteps()
+    ? getCircleStepsGeometry({ value: this.value(), min: this.min(), max: this.max(), steps: this.steps(),
+      size: this.numSize(), thickness: this.resolvedThickness(), gap: this.gap() }) : null)
+  protected readonly percent = computed(() => this.normalized().percentage === null ? null
+    : Math.round(this.normalized().percentage! * 100))
+  protected readonly ariaValueText = computed(() => this.hasSteps() || this.percent() === null ? null : `${this.percent()}%`)
+  protected readonly infoContext = computed(() => ({ percent: this.percent(), value: this.normalized().value }))
+  protected readonly infoText = computed(() => this.percent() === null ? '' : `${this.percent()}%`)
+  protected readonly formattedInfo = computed(() => this.format()?.(this.percent(), this.normalized().value))
+  protected readonly gradientId = `progress-gradient-${nextGradientId++}`
+  protected readonly gradient = computed(() => getProgressGradientStops(this.color())?.map(([offset, color]) => ({
+    offset: `${Number.parseFloat(offset)}%`, color,
+  })))
+  protected readonly circleStroke = computed(() => typeof this.color() === 'string' ? this.color() as string
+    : this.gradient() ? `url(#${this.gradientId})` : undefined)
+  protected readonly background = computed(() => getLinearProgressBackground(this.color()))
+  protected readonly activeColor = computed(() => this.resolvedStatus() === 'success' ? 'var(--success)' : this.background() ?? 'var(--primary)')
+  protected stepColor(index: number) {
+    return this.resolvedStatus() === 'success' ? 'var(--success)' : getProgressStepColor(this.color(), index, this.steps()!)
+  }
+  protected readonly rootStyle = computed(() => this.isCircleSteps()
+    ? mergeProgressStyle({ width: `${this.circleSteps()!.size}px`, height: `${this.circleSteps()!.size}px` }, this.styles()?.root)
+    : this.styles()?.root ?? '')
+  protected readonly trackStyle = computed(() => mergeProgressStyle({
+    height: `${this.resolvedThickness()}px`,
+    'background-color': this.trackColor(),
+  }, this.styles()?.track))
+  protected readonly rangeStyle = computed(() => mergeProgressStyle({
+    background: this.background(),
+  }, this.styles()?.range))
+  protected stepStyle(active: boolean) {
+    return mergeProgressStyle({ background: active ? this.activeColor() : this.trackColor() ?? 'var(--progress-remaining)' }, this.styles()?.step)
+  }
+  protected readonly hostClassName = createHostClassName(() => cn(
+    this.isLineSteps() ? progressStepLineContainerClassName : this.isCircle() ? 'relative inline-flex items-center justify-center' : 'flex flex-col w-full',
+    this.classNames()?.root,
+  ))
+  protected readonly stepTrackClass = computed(() => cn(progressStepLineTrackClassName, this.classNames()?.track))
+  protected readonly stepClass = computed(() => cn(progressStepLineItemClassName, this.classNames()?.step))
+  protected readonly headerClass = computed(() => cn(progressTopHeaderClassName, this.classNames()?.label))
+  protected readonly trackClass = computed(() => cn('min-w-0 flex-1', this.classNames()?.track))
+  protected readonly rangeClass = computed(() => this.classNames()?.range ?? '')
+  protected rangeItemStyle(color: string | undefined) {
+    return mergeProgressStyle({ 'border-radius': '0', background: color ?? 'var(--primary)' }, this.styles()?.range)
+  }
+  protected infoClass(base: string) { return cn(base, this.classNames()?.info) }
 }
-

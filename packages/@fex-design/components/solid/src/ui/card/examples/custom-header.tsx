@@ -1,5 +1,5 @@
 import { Card } from '@fex-design/solid/ui/card'
-import { CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/solid/primitive/card/card'
+import { CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/solid/primitive/card'
 export function CustomHeaderExample() {
   return (
     <Card

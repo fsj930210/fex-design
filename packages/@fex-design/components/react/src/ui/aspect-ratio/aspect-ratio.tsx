@@ -1,1 +1,1 @@
-export { AspectRatio } from '@fex-design/react/primitive/aspect-ratio/aspect-ratio'
+export { AspectRatio } from '@fex-design/react/primitive/aspect-ratio'

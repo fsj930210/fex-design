@@ -9,7 +9,7 @@
     SwitchRoot,
     SwitchContent,
     SwitchThumb,
-  } from '@fex-design/svelte/primitive/switch/switch';
+  } from '@fex-design/svelte/primitive/switch';
   import Spinner from '@fex-design/svelte/primitive/spinner/spinner.svelte';
   type Props = Omit<ComponentProps<typeof SwitchRoot>, "children"> & {
     checkedContent?: Snippet | undefined;

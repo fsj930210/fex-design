@@ -20,31 +20,43 @@
           "name": "value",
           "type": "number | null",
           "default": 0,
-          "description": "当前进度值；null 表示尚未提供进度值，不触发动画"
+          "description": "当前进度；null 表示没有数值。"
         },
         {
           "name": "min",
           "type": "number",
           "default": 0,
-          "description": "最小值"
+          "description": "最小值。"
         },
         {
           "name": "max",
           "type": "number",
           "default": 100,
-          "description": "最大值"
+          "description": "最大值。"
         },
         {
           "name": "variant",
           "type": "'line' | 'circle' | 'dashboard'",
           "default": "'line'",
-          "description": "进度条形态变体"
+          "description": "形态。"
         },
         {
           "name": "status",
           "type": "'pending' | 'active' | 'success' | 'error'",
-          "default": "'pending'",
-          "description": "任务生命周期状态"
+          "default": "根据 value 推导",
+          "description": "默认根据归一化进度推导状态。"
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "default": 48,
+          "description": "圆环或仪表盘直径（像素）。"
+        },
+        {
+          "name": "thickness",
+          "type": "number",
+          "default": "line: 8; circle/dashboard: 4",
+          "description": "轨道高度或圆环描边宽度（像素）。"
         }
       ],
       "frameworks": {
@@ -55,12 +67,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -77,28 +90,33 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressTrack",
       "description": "线性进度条轨道容器部件。",
-      "props": [
-        {
-          "name": "data-slot",
-          "type": "string",
-          "description": "部件槽位标识"
-        }
-      ],
+      "props": [],
       "frameworks": {
         "react": {
           "typeOverrides": {
@@ -107,12 +125,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -129,17 +148,28 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressRange",
@@ -148,12 +178,12 @@
         {
           "name": "value",
           "type": "number",
-          "description": "单独指定本段填充条的值（多段场景）"
+          "description": "独立填充段的数值；省略时读取 Root 的归一化比例。"
         },
         {
           "name": "offset",
           "type": "number",
-          "description": "左侧偏移百分比（多段场景）"
+          "description": "填充段起点的百分比偏移。"
         }
       ],
       "frameworks": {
@@ -164,12 +194,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -186,42 +217,55 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressValue",
       "description": "进度百分比文本展示部件。",
-      "props": [
-        {
-          "name": "data-slot",
-          "type": "string",
-          "description": "部件槽位标识"
-        }
-      ],
+      "props": [],
       "frameworks": {
         "react": {
           "typeOverrides": {
             "FrameworkNode": "ReactNode"
           },
-          "slots": []
+          "slots": [],
+          "props": [
+            {
+              "name": "children",
+              "type": "ReactNode | ((context: { value: number | null; percentage: number | null }) => ReactNode)",
+              "description": "数值内容或自定义渲染函数；没有内容时不自动显示百分比。"
+            }
+          ]
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "作用域 slot 提供 value 和 percentage（0–1）。"
             }
           ]
         },
@@ -229,37 +273,56 @@
           "typeOverrides": {
             "FrameworkNode": "JSX.Element"
           },
-          "slots": []
+          "slots": [],
+          "props": [
+            {
+              "name": "children",
+              "type": "JSX.Element | ((context: { value: number | null; percentage: number | null }) => JSX.Element)",
+              "description": "数值内容或访问当前归一化进度的渲染函数。"
+            }
+          ]
         },
         "svelte": {
           "typeOverrides": {
             "FrameworkNode": "Snippet"
           },
-          "slots": []
-        },
-        "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
-          "slots": [
+          "slots": [],
+          "props": [
             {
-              "name": "default"
+              "name": "children",
+              "type": "Snippet<[{ value: number | null; percentage: number | null }]>",
+              "description": "访问当前归一化进度的 snippet。"
             }
           ]
+        },
+        "angular": {
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
+          "slots": [
+            {
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
+            }
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "span",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressLabel",
       "description": "进度条语义标签部件。",
-      "props": [
-        {
-          "name": "data-slot",
-          "type": "string",
-          "description": "部件槽位标识"
-        }
-      ],
+      "props": [],
       "frameworks": {
         "react": {
           "typeOverrides": {
@@ -268,12 +331,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -290,26 +354,43 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "span",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressCircle",
       "description": "环形进度条 SVG 根容器部件。",
       "props": [
         {
-          "name": "data-slot",
-          "type": "string",
-          "description": "部件槽位标识"
+          "name": "gapDegree",
+          "type": "number",
+          "default": 75,
+          "description": "仪表盘缺口角度，其他形态忽略。"
+        },
+        {
+          "name": "rotation",
+          "type": "number",
+          "description": "覆盖圆环 SVG 旋转角度。"
         }
       ],
       "frameworks": {
@@ -320,12 +401,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -342,26 +424,44 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "svg",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressCircleTrack",
       "description": "环形进度条底圈部件。",
       "props": [
         {
-          "name": "data-slot",
-          "type": "string",
-          "description": "部件槽位标识"
+          "name": "gapDegree",
+          "type": "number",
+          "default": 75,
+          "description": "仪表盘缺口角度。"
+        },
+        {
+          "name": "trackLinecap",
+          "type": "'round' | 'butt' | 'square'",
+          "default": "'round'",
+          "description": "背景圆弧端点形状。"
         }
       ],
       "frameworks": {
@@ -372,12 +472,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -394,26 +495,44 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "circle",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     },
     {
       "name": "ProgressCircleRange",
       "description": "环形进度条填充圆弧部件。",
       "props": [
         {
-          "name": "data-slot",
-          "type": "string",
-          "description": "部件槽位标识"
+          "name": "gapDegree",
+          "type": "number",
+          "default": 75,
+          "description": "仪表盘缺口角度。"
+        },
+        {
+          "name": "linecap",
+          "type": "'round' | 'butt' | 'square'",
+          "default": "'round'",
+          "description": "填充圆弧端点形状。"
         }
       ],
       "frameworks": {
@@ -424,12 +543,13 @@
           "slots": []
         },
         "vue": {
-          "omitProps": [
-            "children"
-          ],
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "部件内容。"
             }
           ]
         },
@@ -446,31 +566,80 @@
           "slots": []
         },
         "angular": {
-          "omitProps": [
-            "children"
-          ],
-          "slotLabel": "内容投影",
+          "typeOverrides": {
+            "FrameworkNode": "string"
+          },
           "slots": [
             {
-              "name": "default"
+              "name": "default",
+              "description": "通过原生内容投影提供部件内容。"
             }
-          ]
+          ],
+          "slotLabel": "内容投影"
         }
-      }
+      },
+      "nativeElement": "circle",
+      "importPath": {
+        "react": "@fex-design/react/primitive/progress",
+        "vue": "@fex-design/vue/primitive/progress",
+        "solid": "@fex-design/solid/primitive/progress",
+        "svelte": "@fex-design/svelte/primitive/progress",
+        "angular": "@fex-design/angular/primitive/progress"
+      },
+      "events": [],
+      "demos": []
     }
   ],
-  "frameworks": [
-    "react",
-    "vue",
-    "solid",
-    "svelte",
-    "angular"
-  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode"
+      },
+      "slots": []
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkNode": "string"
+      },
+      "slots": [
+        {
+          "name": "default",
+          "description": "部件内容。"
+        }
+      ]
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element"
+      },
+      "slots": []
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet"
+      },
+      "slots": []
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkNode": "string"
+      },
+      "slots": [
+        {
+          "name": "default",
+          "description": "通过原生内容投影提供部件内容。"
+        }
+      ],
+      "slotLabel": "内容投影"
+    }
+  },
   "props": [],
   "cssVariables": [
     {
       "name": "--progress-remaining",
       "description": "进度条未完成轨道的底色，默认为柔和的次级背景色。"
     }
-  ]
+  ],
+  "events": [],
+  "demos": []
 }

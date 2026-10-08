@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { Button, ButtonGroup } from "@/components/ui/button/button"
-import { Card } from "@/components/ui/card/card"
-import { Badge } from "@/components/ui/badge/badge"
-import { Alert } from "@/components/ui/alert/alert"
-import { Separator } from "@/components/ui/separator/separator"
-import { Popover } from "@/components/ui/popover/popover"
-import { Tooltip } from "@/components/ui/tooltip/tooltip"
+import { Button, ButtonGroup } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Alert } from "@/components/ui/alert"
+import { Separator } from "@/components/ui/separator"
+import { Popover } from "@/components/ui/popover"
+import { Tooltip } from "@/components/ui/tooltip"
 
 export default function App() {
   const [clickCount, setClickCount] = useState(0)

@@ -12,7 +12,6 @@ function Dashboard({ rotation }: { rotation?: number }) {
       value={75}
       size={96}
       thickness={4}
-      gapDegree={90}
       className="relative"
     >
       <ProgressCircle gapDegree={90} rotation={rotation}>

@@ -3,8 +3,6 @@
   import { normalizeProgressValue, resolveProgressStatus } from "@fex-design/core/progress/progress"
   import type {
     ProgressContextValue,
-    ProgressColor,
-    ProgressLinecap,
     ProgressStatus,
     ProgressVariant,
   } from "@fex-design/core/progress/types"
@@ -12,12 +10,6 @@
   import { setContext, type Snippet } from "svelte"
   import type { HTMLAttributes } from "svelte/elements"
   import { progressContextKey } from "./context"
-  import ProgressCircleRange from "./progress-circle-range.svelte"
-  import ProgressCircleTrack from "./progress-circle-track.svelte"
-  import ProgressCircle from "./progress-circle.svelte"
-  import ProgressRange from "./progress-range.svelte"
-  import ProgressTrack from "./progress-track.svelte"
-  import ProgressValue from "./progress-value.svelte"
 
   interface ProgressProps extends HTMLAttributes<HTMLDivElement> {
     value?: number | null
@@ -27,12 +19,7 @@
     status?: ProgressStatus
     size?: number
     thickness?: number
-    linecap?: ProgressLinecap
-    trackLinecap?: ProgressLinecap
-    color?: ProgressColor
-    trackColor?: string
-    gapDegree?: number
-    gapPlacement?: "top" | "bottom" | "start" | "end"
+    ref?: HTMLDivElement | null
     children?: Snippet
   }
 
@@ -44,12 +31,7 @@
     status,
     size = 48,
     thickness,
-    linecap = "round",
-    trackLinecap,
-    color,
-    trackColor,
-    gapDegree,
-    gapPlacement = "bottom",
+    ref = $bindable(null),
     class: className,
     children,
     ...rest
@@ -66,12 +48,7 @@
     percentage: normalized.percentage,
     status: resolvedStatus,
     variant,
-    status,
     thickness: resolvedThickness,
-    color,
-    trackColor,
-    linecap,
-    trackLinecap,
     size,
   })
 
@@ -81,6 +58,7 @@
 </script>
 
 <div
+  bind:this={ref}
   {...rest}
   role="progressbar"
   aria-valuemin={normalized.min}

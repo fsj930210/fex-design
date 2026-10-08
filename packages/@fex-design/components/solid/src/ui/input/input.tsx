@@ -16,7 +16,7 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
-} from '@fex-design/solid/primitive/input/input'
+} from '@fex-design/solid/primitive/input'
 import type { InputPasswordProps, InputProps, InputSearchProps } from './input.types'
 
 export type { InputPasswordProps, InputProps, InputSearchProps } from './input.types'

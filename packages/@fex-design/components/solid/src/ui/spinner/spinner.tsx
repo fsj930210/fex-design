@@ -8,7 +8,7 @@ import {
   SpinnerContainer as PrimitiveSpinnerContainer,
   SpinnerOverlay,
   SpinnerText,
-} from '@fex-design/solid/primitive/spinner/spinner'
+} from '@fex-design/solid/primitive/spinner'
 export { Spinner }
 export function SpinnerContainer(
   props: JSX.HTMLAttributes<HTMLDivElement> &

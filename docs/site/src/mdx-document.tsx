@@ -1,4 +1,4 @@
-import { createMemo, For, Show, type Component, type ParentProps } from 'solid-js'
+import { createMemo, createSignal, createEffect, For, Show, type Component, type ParentProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { MDXProvider } from 'solid-mdx'
 import { ApiTable } from './api-table'
@@ -8,6 +8,7 @@ import { DemoCard } from './demo-card'
 import { CssVariableTable } from './css-variable-table'
 import { resolveComponentApi } from './component-api'
 import { Installation } from './installation'
+import { Usage } from './usage'
 import { LayerComparison } from './layer-comparison'
 import type { Framework } from './types'
 
@@ -19,14 +20,21 @@ export function MdxDocument(props: {
   framework: Framework
   layer: LayerName
 }) {
+  const [activeLayer, setActiveLayer] = createSignal<LayerName>(props.layer ?? 'ui')
+
+  createEffect(() => {
+    if (props.layer) {
+      setActiveLayer(props.layer)
+    }
+  })
   const availableLayers = (sceneId: string): readonly LayerName[] =>
     (['primitive', 'ui'] as const).filter((layer) =>
       componentExamples[props.slug][layer]?.some((scene) => scene.id === sceneId),
     )
 
   const components = {
-    Installation: () => <Installation slug={props.slug} framework={props.framework} />,
-    ManualInstall: () => <Installation slug={props.slug} framework={props.framework} />,
+    Installation: () => <Installation slug={props.slug} framework={props.framework} layer={activeLayer()} onLayerChange={setActiveLayer} />,
+    ManualInstall: () => null,
     LayerComparison: () => null,
     Layer: (layerProps: ParentProps<{ value: LayerName }>) => (
       <Show when={layerProps.value === props.layer}>{layerProps.children}</Show>
@@ -179,7 +187,8 @@ export function MdxDocument(props: {
 
   return (
     <MDXProvider components={components}>
-      <Installation slug={props.slug} framework={props.framework} />
+      <Installation slug={props.slug} framework={props.framework} layer={activeLayer()} onLayerChange={setActiveLayer} />
+      <Usage slug={props.slug} framework={props.framework} layer={activeLayer()} onLayerChange={setActiveLayer} />
       <Dynamic component={props.content} />
     </MDXProvider>
   )

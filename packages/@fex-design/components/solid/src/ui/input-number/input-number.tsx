@@ -1,7 +1,7 @@
 import type { InputNumberPart } from '@fex-design/core/input-number/types'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
-import { InputPrefix, InputSuffix } from '@fex-design/solid/primitive/input/input'
+import { InputPrefix, InputSuffix } from '@fex-design/solid/primitive/input'
 import {
   InputNumberActions,
   InputNumberClear,
@@ -10,7 +10,7 @@ import {
   InputNumberIncrement,
   InputNumberRoot,
   type InputNumberRootProps,
-} from '@fex-design/solid/primitive/input-number/input-number'
+} from '@fex-design/solid/primitive/input-number'
 export interface InputNumberProps
   extends
     Omit<

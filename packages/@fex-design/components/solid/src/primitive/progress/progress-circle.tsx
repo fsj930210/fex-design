@@ -1,25 +1,8 @@
-import {
-  progressCircleClassName,
-  progressCircleRangeClassName,
-  progressCircleTrackClassName,
-  progressLabelClassName,
-  progressLineClassName,
-  progressLineRangeClassName,
-  progressValueClassName,
-} from "@fex-design/components-styles/progress"
-import {
-  getLinearProgressBackground,
-  getProgressGeometry,
-} from "@fex-design/core/progress/progress"
-import type { ProgressColor } from "@fex-design/core/progress/types"
-import { cn } from "@fex-design/utils"
-import {
-  createMemo,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from "solid-js"
-import { useProgressContext } from "./progress-context"
+import { progressCircleClassName } from '@fex-design/components-styles/progress'
+import { getProgressGeometry } from '@fex-design/core/progress/progress'
+import { cn } from '@fex-design/utils'
+import { createMemo, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { useProgressContext } from './progress-context'
 
 export interface ProgressCircleProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   gapDegree?: number
@@ -43,6 +26,10 @@ export function ProgressCircle(props: ParentProps<ProgressCircleProps>) {
     })
   )
 
+  const style = () => typeof local.style === 'string'
+    ? `transform: rotate(${local.rotation ?? geometry().rotation}deg); ${local.style}`
+    : { transform: `rotate(${local.rotation ?? geometry().rotation}deg)`, ...local.style }
+
   return (
     <svg
       {...others}
@@ -52,10 +39,7 @@ export function ProgressCircle(props: ParentProps<ProgressCircleProps>) {
       data-slot="progress-circle"
       data-status={context().status}
       class={cn(progressCircleClassName, local.class)}
-      style={{
-        transform: `rotate(${local.rotation ?? geometry().rotation}deg)`,
-        ...(typeof local.style === "object" ? local.style : {}),
-      }}
+      style={style()}
     >
       {local.children}
     </svg>

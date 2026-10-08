@@ -7,4 +7,4 @@ export {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex-design/vue/primitive/empty/empty'
+} from '@fex-design/vue/primitive/empty'

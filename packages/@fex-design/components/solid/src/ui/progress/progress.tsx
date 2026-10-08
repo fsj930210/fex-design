@@ -1,25 +1,120 @@
-import { Progress as PrimitiveProgress, ProgressCircle, ProgressCircleRange, ProgressCircleTrack, ProgressLabel, ProgressRange, ProgressTrack } from '@fex-design/solid/primitive/progress'
-import { getCircleStepsGeometry, getLineStepsGeometry, getLinearProgressBackground, normalizeProgressValue, resolveProgressStatus } from '@fex-design/core/progress/progress'
-import type { ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap, ProgressSize, ProgressStatus, ProgressVariant } from '@fex-design/core/progress/types'
+import {
+  progressStepLineContainerClassName, progressStepLineItemClassName,
+  progressStepLineTrackClassName, progressTopHeaderClassName,
+} from '@fex-design/components-styles/progress'
+import {
+  Progress as PrimitiveProgress, ProgressCircle, ProgressCircleRange, ProgressCircleTrack,
+  ProgressLabel, ProgressRange, ProgressTrack,
+} from '@fex-design/solid/primitive/progress'
 import { cn } from '@fex-design/utils'
-import { For, Show, splitProps, type JSX } from 'solid-js'
+import { createUniqueId, For, Match, Show, splitProps, Switch } from 'solid-js'
+import { ProgressInfo } from './progress-info'
+import type { ProgressProps } from './types'
+import { useProgress } from './use-progress'
 
-export interface ProgressProps extends JSX.HTMLAttributes<HTMLDivElement> { value?: number|null; min?: number; max?: number; variant?: ProgressVariant; status?: ProgressStatus; size?: ProgressSize; thickness?: number; steps?: number; gap?: number; color?: ProgressColor; trackColor?: string; linecap?: ProgressLinecap; trackLinecap?: ProgressLinecap; gapDegree?: number; gapPlacement?: ProgressGapPlacement; showInfo?: boolean; showValue?: boolean; infoPlacement?: ProgressInfoPlacement; label?: JSX.Element; format?: (percent:number|null,value:number|null)=>JSX.Element; success?: boolean; classNames?: Partial<Record<'root'|'track'|'range'|'info'|'label'|'step',string>>; styles?: Partial<Record<'root'|'track'|'range'|'info'|'label'|'step',JSX.CSSProperties>> }
-const pct=(value:number|null|undefined,min:number,max:number)=>{const n=normalizeProgressValue(value,min,max); return n.percentage===null?null:Math.round(n.percentage*100)}
-export function Progress(props:ProgressProps){
- const [p,rest]=splitProps(props,['value','min','max','variant','status','size','thickness','steps','gap','color','trackColor','linecap','trackLinecap','gapDegree','gapPlacement','showInfo','showValue','infoPlacement','label','format','success','classNames','styles','class','style'])
- const value=()=>p.value===undefined?0:p.value,min=()=>p.min??0,max=()=>p.max??100,variant=()=>p.variant??'line',status=()=>p.success?'success':resolveProgressStatus(p.status,value(),min(),max()),show=()=>p.showInfo??p.showValue??(variant()==='line'||p.infoPlacement==='inside')
- const size=()=>typeof p.size==='number'?p.size:p.size==='sm'?(variant()==='line'?4:32):p.size==='lg'?(variant()==='line'?12:96):(variant()==='line'?8:48)
- const thickness=()=>p.thickness??(typeof p.size==='number'&&variant()==='line'?p.size:p.size==='sm'?4:p.size==='lg'?8:variant()==='line'?8:4)
- const info=()=>p.format?p.format(pct(value(),min(),max()),normalizeProgressValue(value(),min(),max()).value):(pct(value(),min(),max())===null?'':`${pct(value(),min(),max())}%`)
- const commonStyle=()=>({...((p.style??{}) as JSX.CSSProperties),...p.styles?.root})
- return <Show when={!p.steps||p.steps<=0} fallback={<Show when={variant()==='circle'||variant()==='dashboard'} fallback={<div data-slot="progress" data-variant="steps" class={cn('flex w-full items-center gap-2',p.classNames?.root,p.class)} style={commonStyle()}><div class={cn('flex flex-1 gap-1',p.classNames?.track)}>{getLineStepsGeometry({value:value(),min:min(),max:max(),steps:p.steps!}).steps.map(step=><span data-slot="progress-step" class={cn('h-2 flex-1 rounded-sm',p.classNames?.step)} style={{background:step.active?(getLinearProgressBackground(p.color)??'var(--primary)'):(p.trackColor??'var(--progress-remaining)'),...p.styles?.step}} />)}</div><Show when={show()}><span class={p.classNames?.info}>{info()}</span></Show></div>}><div data-slot="progress" data-variant="circle-steps" class={cn('relative inline-flex items-center justify-center',p.classNames?.root,p.class)} style={{width:`${getCircleStepsGeometry({value:value(),min:min(),max:max(),size:size(),thickness:thickness(),steps:p.steps!,gap:p.gap??2}).size}px`,height:`${getCircleStepsGeometry({value:value(),min:min(),max:max(),size:size(),thickness:thickness(),steps:p.steps!,gap:p.gap??2}).size}px`,...commonStyle()}}><svg viewBox="0 0 48 48" class="size-full -rotate-90">{getCircleStepsGeometry({value:value(),min:min(),max:max(),size:size(),thickness:thickness(),steps:p.steps!,gap:p.gap??2}).steps.map(step=><circle cx="24" cy="24" r="20" fill="none" stroke={step.active?(p.color as string??'var(--primary)'):(p.trackColor??'var(--progress-remaining)')} stroke-width={thickness()} />)}</svg><Show when={show()}><div class="absolute inset-0 flex items-center justify-center">{info()}</div></Show></div></Show>}>
- <PrimitiveProgress {...rest} value={value()} min={min()} max={max()} variant={variant()} status={status()} size={size()} thickness={thickness()} color={p.color} trackColor={p.trackColor} linecap={p.linecap} trackLinecap={p.trackLinecap} gapDegree={p.gapDegree} gapPlacement={p.gapPlacement} class={cn(variant()==='line'?'flex w-full flex-col':'relative inline-flex items-center justify-center',p.classNames?.root,p.class)} style={commonStyle()}>
-  <Show when={variant()==='line'} fallback={<><ProgressCircle gapDegree={variant()==='dashboard'?p.gapDegree:undefined} class={p.classNames?.track}><ProgressCircleTrack /><ProgressCircleRange color={p.color} class={p.classNames?.range}/></ProgressCircle><Show when={show()}><div class={cn('absolute inset-0 flex items-center justify-center',p.classNames?.info)}>{info()}</div></Show></>}>
-   <Show when={p.label||((show())&&p.infoPlacement==='top')}><div class={cn('flex w-full items-center justify-between text-sm mb-1.5',p.classNames?.label)}><Show when={p.label}><ProgressLabel>{p.label}</ProgressLabel></Show><Show when={show()&&p.infoPlacement==='top'}><span class="text-muted-foreground">{info()}</span></Show></div></Show>
-   <div class="flex w-full items-center"><ProgressTrack class={cn('min-w-0 flex-1',p.classNames?.track)} style={{height:`${thickness()}px`,backgroundColor:p.trackColor,...p.styles?.track}}><ProgressRange color={p.color} class={p.classNames?.range} style={{background:getLinearProgressBackground(p.color),...p.styles?.range}}/></ProgressTrack><Show when={show()&&(p.infoPlacement??'outside')==='outside'}><span class={cn('ms-2 shrink-0 text-sm font-medium',p.classNames?.info)}>{info()}</span></Show></div>
-  </Show>
- </PrimitiveProgress>
- </Show>
+export function Progress(props: ProgressProps) {
+  const [p, rest] = splitProps(props, ['value', 'min', 'max', 'variant', 'status', 'size', 'thickness',
+    'ranges', 'steps', 'gap', 'color', 'trackColor', 'linecap', 'trackLinecap', 'gapDegree', 'gapPlacement',
+    'showInfo', 'showValue', 'infoPlacement', 'label', 'format', 'success', 'classNames', 'styles', 'class', 'style'])
+  const m = useProgress(p)
+  const gradientId = createUniqueId().replace(/:/g, '')
+  const info = () => <ProgressInfo model={m} format={p.format} />
+  return (
+    <Switch fallback={
+      <PrimitiveProgress {...rest} value={m.value()} min={m.min()} max={m.max()} variant="line"
+        status={m.status()} thickness={m.thickness()}
+        class={cn('flex flex-col w-full', p.classNames?.root, p.class)} style={m.rootStyle()}>
+        <Show when={m.placement() !== 'bottom' && (p.label || (m.showInfo() && m.placement() === 'top'))}>
+          <div class={cn(progressTopHeaderClassName, p.classNames?.label)}>
+            <Show when={p.label} fallback={<span />}><ProgressLabel>{p.label}</ProgressLabel></Show>
+            <Show when={m.showInfo() && m.placement() === 'top'}>
+              <span class={cn('text-muted-foreground', p.classNames?.info)} style={p.styles?.info}>{info()}</span>
+            </Show>
+          </div>
+        </Show>
+        <div class={cn('flex w-full items-center', m.placement() === 'inside' && 'relative')}>
+          <ProgressTrack class={cn('min-w-0 flex-1', p.classNames?.track)} style={m.trackStyle()}>
+            <Show when={m.rangeLayout()} fallback={<ProgressRange class={p.classNames?.range} style={m.rangeStyle()} />}>{(layout) =>
+              <For each={layout().ranges}>{(range) => <ProgressRange value={range.value} offset={range.offset} class={p.classNames?.range}
+                style={{ 'border-radius': '0', background: range.color ?? 'var(--primary)', ...p.styles?.range }} />}</For>
+            }</Show>
+          </ProgressTrack>
+          <Show when={m.showInfo() && m.placement() === 'outside'}>
+            <span class={cn('ms-2 shrink-0 text-sm font-medium', p.classNames?.info)} style={p.styles?.info}>{info()}</span>
+          </Show>
+          <Show when={m.showInfo() && m.placement() === 'inside'}>
+            <span class={cn('pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-sm font-medium text-white', p.classNames?.info)} style={p.styles?.info}>{info()}</span>
+          </Show>
+        </div>
+        <Show when={m.showInfo() && m.placement() === 'bottom'}>
+          <div class="mt-1.5 flex w-full items-center justify-between text-sm">
+            <Show when={p.label} fallback={<span />}><ProgressLabel class={p.classNames?.label}>{p.label}</ProgressLabel></Show>
+            <span class={cn('font-medium', p.classNames?.info)} style={p.styles?.info}>{info()}</span>
+          </div>
+        </Show>
+      </PrimitiveProgress>
+    }>
+      <Match when={m.lineSteps()}>
+        <div {...rest} data-slot="progress" data-variant="steps"
+          class={cn(progressStepLineContainerClassName, p.classNames?.root, p.class)} style={m.rootStyle()}>
+          <div class={cn(progressStepLineTrackClassName, p.classNames?.track)} style={p.styles?.track}>
+            <For each={m.lineSteps()?.steps}>{step =>
+              <span data-slot="progress-step" data-active={step.active ? 'true' : undefined}
+                class={cn(progressStepLineItemClassName, p.classNames?.step)}
+                style={{ background: step.active ? m.activeColor() : p.trackColor ?? 'var(--progress-remaining)', ...p.styles?.step }} />
+            }</For>
+          </div>
+          <Show when={m.showInfo()}><span class={cn('text-sm font-medium', p.classNames?.info)} style={p.styles?.info}>{info()}</span></Show>
+        </div>
+      </Match>
+      <Match when={m.circleSteps()}>
+        <div {...rest} data-slot="progress" data-variant="circle-steps"
+          class={cn('relative inline-flex items-center justify-center', p.classNames?.root, p.class)}
+          style={typeof m.rootStyle() === 'string'
+            ? `width: ${m.circleSteps()!.size}px; height: ${m.circleSteps()!.size}px; ${m.rootStyle()}`
+            : { width: `${m.circleSteps()!.size}px`, height: `${m.circleSteps()!.size}px`, ...m.rootStyle() as object }}>
+          <svg viewBox={`0 0 ${m.circleSteps()!.size} ${m.circleSteps()!.size}`}
+            width={m.circleSteps()!.size} height={m.circleSteps()!.size} class="block shrink-0 -rotate-90">
+            <For each={m.circleSteps()?.steps}>{step =>
+              <circle cx={m.circleSteps()!.size / 2} cy={m.circleSteps()!.size / 2} r={m.circleSteps()!.radius}
+                fill="none" stroke={step.active ? m.stepColor(step.index) : p.trackColor ?? 'var(--progress-remaining)'}
+                stroke-width={m.circleSteps()!.thickness} stroke-dasharray={m.circleSteps()!.stepDasharray}
+                stroke-dashoffset={step.offset} stroke-linecap={m.linecap()} />
+            }</For>
+          </svg>
+          <Show when={m.showInfo()}>
+            <div class={cn('absolute inset-0 flex items-center justify-center text-sm font-medium', p.classNames?.info)} style={p.styles?.info}>{info()}</div>
+          </Show>
+        </div>
+      </Match>
+      <Match when={m.isCircle()}>
+        <PrimitiveProgress {...rest} value={m.value()} min={m.min()} max={m.max()} variant={m.variant()}
+          status={m.status()} size={m.size()} thickness={m.thickness()}
+          class={cn('relative inline-flex items-center justify-center', p.classNames?.root, p.class)} style={m.rootStyle()}>
+          <ProgressCircle gapDegree={m.variant() === 'dashboard' ? p.gapDegree ?? 75 : undefined}
+            rotation={m.variant() === 'dashboard' && p.gapPlacement === 'top' ? 315 : undefined}
+            class={p.classNames?.track} style={p.styles?.track}>
+            <Show when={m.gradient()}>
+              <defs><linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+                <For each={m.gradient()}>{stop => <stop offset={stop.offset} stop-color={stop.color} />}</For>
+              </linearGradient></defs>
+            </Show>
+            <ProgressCircleTrack gapDegree={m.variant() === 'dashboard' ? p.gapDegree ?? 75 : undefined} trackLinecap={p.trackLinecap} />
+            <ProgressCircleRange stroke={typeof p.color === 'string' ? p.color : m.gradient() ? `url(#${gradientId})` : undefined}
+              linecap={m.linecap()} gapDegree={m.variant() === 'dashboard' ? p.gapDegree ?? 75 : undefined}
+              class={p.classNames?.range} style={p.styles?.range} />
+          </ProgressCircle>
+          <Show when={m.showInfo()}>
+            <div class={cn('absolute inset-0 flex items-center justify-center font-medium', p.classNames?.info)} style={p.styles?.info}>{info()}</div>
+          </Show>
+        </PrimitiveProgress>
+      </Match>
+    </Switch>
+  )
 }
-export type { ProgressColor,ProgressGapPlacement,ProgressInfoPlacement,ProgressLinecap,ProgressSize,ProgressStatus,ProgressVariant } from '@fex-design/core/progress/types'
+
+export type { ProgressProps } from './types'
+export type {
+  ProgressRangeItem, ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap,
+  ProgressSize, ProgressStatus, ProgressVariant,
+} from '@fex-design/core/progress/types'

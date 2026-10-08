@@ -1,63 +1,42 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  Directive,
-  input,
-} from "@angular/core"
-import { createHostClassName } from "@fex-design/angular/signals/host-class"
-import {
-  progressCircleClassName,
-  progressCircleRangeClassName,
-  progressCircleTrackClassName,
-  progressLabelClassName,
-  progressLineClassName,
-  progressLineRangeClassName,
-  progressValueClassName,
-} from "@fex-design/components-styles/progress"
-import {
-  getLinearProgressBackground,
-  getProgressGeometry,
-} from "@fex-design/core/progress/progress"
-import type { ProgressColor } from "@fex-design/core/progress/types"
-import { Progress } from "./progress"
+import { cn } from '@fex-design/utils'
+import { Directive, computed, ElementRef, inject, input } from '@angular/core'
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import { progressCircleTrackClassName } from '@fex-design/components-styles/progress'
+import { getProgressGeometry } from '@fex-design/core/progress/progress'
+import type { ProgressLinecap } from '@fex-design/core/progress/types'
+import { progressContext } from './progress-context'
 
 @Directive({
-  selector: "circle[progressCircleTrack], [progressCircleTrack]",
+  selector: 'circle[progressCircleTrack]',
   standalone: true,
+  exportAs: 'progressCircleTrack',
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "progress-circle-track",
-    "[attr.cx]": "geometry().center",
-    "[attr.cy]": "geometry().center",
-    "[attr.r]": "geometry().radius",
-    fill: "none",
-    "[attr.stroke]": "root.trackColor() ?? 'currentColor'",
-    "[attr.stroke-width]": "root.thickness() ?? (root.variant() === 'line' ? 8 : 4)",
-    "[attr.stroke-dasharray]": "geometry().trackDasharray",
-    "[attr.stroke-linecap]": "root.trackLinecap() ?? 'round'",
-    pathLength: "100",
+    '[class]': 'hostClassName()',
+    'data-slot': 'progress-circle-track',
+    '[attr.cx]': 'geometry().center',
+    '[attr.cy]': 'geometry().center',
+    '[attr.r]': 'geometry().radius',
+    fill: 'none',
+    stroke: 'currentColor',
+    '[attr.stroke-width]': 'root.thickness()',
+    '[attr.stroke-dasharray]': 'geometry().trackDasharray',
+    '[attr.stroke-linecap]': "trackLinecap() ?? 'round'",
+    pathLength: '100',
   },
 })
 export class ProgressCircleTrack {
+  readonly className = input<string | undefined>(undefined, { alias: 'class' })
+  readonly element = inject<ElementRef<SVGCircleElement>>(ElementRef).nativeElement
+  readonly root = inject(progressContext)
   readonly gapDegree = input<number>()
-
+  readonly trackLinecap = input<ProgressLinecap>()
   protected readonly geometry = computed(() => {
-    const gap = this.gapDegree() ?? this.root.gapDegree()
-    if (gap === this.root.gapDegree()) {
-      return this.root.geometry()
-    }
+    const normalized = this.root.normalized()
     return getProgressGeometry({
-      value: this.root.value(),
-      min: this.root.min(),
-      max: this.root.max(),
-      size: this.root.size(),
-      thickness: (this.root.thickness() ?? (this.root.variant() === "line" ? 8 : 4)),
-      variant: this.root.variant(),
-      gapDegree: gap,
+      value: normalized.value, min: normalized.min, max: normalized.max,
+      size: this.root.size(), thickness: this.root.thickness(),
+      variant: this.root.variant(), gapDegree: this.gapDegree(),
     })
   })
-
-  protected readonly hostClassName = createHostClassName(progressCircleTrackClassName)
-  constructor(readonly root: Progress) {}
+  protected readonly hostClassName = createHostClassName(() => cn(progressCircleTrackClassName, this.className()))
 }

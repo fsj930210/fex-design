@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Progress, ProgressRange, ProgressTrack } from '@fex-design/angular/primitive/progress'
+import { Progress, ProgressTrack, ProgressRange } from '@fex-design/angular/primitive/progress'
 
 @Component({
   selector: 'progress-primitive-multi-range-example',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Progress, ProgressTrack, ProgressRange],
   templateUrl: './multi-range.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressPrimitiveMultiRangeExample {}
+export class ProgressPrimitiveMultiRangeExample {
+
+}

@@ -1,0 +1,41 @@
+<div class="grid w-full max-w-md gap-4">
+  <div progressRoot [value]="72" class="flex w-full flex-col">
+    <div class="mb-1.5 flex w-full items-center justify-between text-sm">
+      <span progressLabel>
+        存储空间
+      </span>
+      <span progressValue>
+        72 / 100 GB
+      </span>
+    </div>
+    <div progressTrack>
+      <div progressRange></div>
+    </div>
+  </div>
+  <div progressRoot [value]="48" class="flex w-full flex-col">
+    <div class="mb-1.5 flex w-full items-center justify-between text-sm">
+      <span progressLabel>
+        处理中
+      </span>
+      <span progressValue>
+        48%
+      </span>
+    </div>
+    <div progressTrack>
+      <div progressRange></div>
+    </div>
+  </div>
+  <div progressRoot [value]="84" class="flex w-full flex-col">
+    <div progressTrack>
+      <div progressRange></div>
+    </div>
+    <div class="mt-1.5 flex w-full items-center justify-between text-sm">
+      <span progressLabel>
+        审核
+      </span>
+      <span progressValue>
+        84%
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+export { default as AnchorRoot } from './anchor-root.vue'
+export { default as AnchorList } from './anchor-list.vue'
+export { default as AnchorItem } from './anchor-item.vue'
+export { default as AnchorLink } from './anchor-link.vue'
+export { default as AnchorRail } from './anchor-rail.vue'
+export { default as AnchorIndicator } from './anchor-indicator.vue'
+export { useAnchor } from './use-anchor'
+export type {
+  AnchorActiveMode,
+  AnchorOrientation,
+  AnchorRegisteredItem,
+  AnchorTarget,
+} from '@fex-design/core/anchor/types'

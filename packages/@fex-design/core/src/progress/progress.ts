@@ -1,4 +1,4 @@
-import type { CircleStepsGeometry, ProgressColor, ProgressGeometry, ProgressVariant } from "./types"
+import type { CircleStepsGeometry, ProgressRangeItem, ProgressColor, ProgressGeometry, ProgressVariant } from "./types"
 import type { ProgressStatus } from "./types"
 
 export function normalizeProgressValue(value: number | null | undefined, min = 0, max = 100) {
@@ -29,13 +29,13 @@ export function resolveProgressStatus(
 }
 
 export function getProgressGeometry(options: {
-  value?: number | null
+  value?: number | null | undefined
   min?: number | undefined
   max?: number | undefined
   size?: number | undefined
   thickness?: number | undefined
-  variant?: ProgressVariant
-  gapDegree?: number
+  variant?: ProgressVariant | undefined
+  gapDegree?: number | undefined
 }): ProgressGeometry {
   const { value, percentage } = normalizeProgressValue(options.value, options.min, options.max)
   const size = Math.max(1, options.size ?? 48)
@@ -61,7 +61,7 @@ export function getProgressGeometry(options: {
 }
 
 export function getCircleStepsGeometry(options: {
-  value?: number | null
+  value?: number | null | undefined
   min?: number | undefined
   max?: number | undefined
   size?: number | undefined
@@ -104,7 +104,7 @@ export function getCircleStepsGeometry(options: {
 }
 
 export function getLineStepsGeometry(options: {
-  value?: number | null
+  value?: number | null | undefined
   min?: number | undefined
   max?: number | undefined
   steps?: number | undefined
@@ -139,4 +139,31 @@ export function getLinearProgressBackground(color: ProgressColor | undefined) {
   if (typeof color === "string") return color
   const stops = getProgressGradientStops(color) ?? []
   return `linear-gradient(${color.direction ?? "to right"}, ${stops.map(([offset, value]) => `${value} ${offset}`).join(", ")})`
+}
+
+export function getProgressStepColor(color: ProgressColor | undefined, index: number, steps: number) {
+  if (!color) return 'var(--primary)'
+  if (typeof color === 'string') return color
+  if ('stops' in color) {
+    const position = ((index + 1) / steps) * 100
+    const stops = Object.entries(color.stops)
+      .map(([key, value]) => [Number.parseFloat(key), value] as const)
+      .sort((a, b) => a[0] - b[0])
+    return [...stops].reverse().find(([stop]) => position >= stop)?.[1]
+      ?? stops[0]?.[1] ?? 'var(--primary)'
+  }
+  return index < steps / 2 ? color.from : color.to
+}
+
+export function getProgressRanges(ranges: readonly ProgressRangeItem[], min = 0, max = 100) {
+  const limits = normalizeProgressValue(min, min, max)
+  const capacity = limits.max - limits.min
+  let used = 0
+  const items = ranges.map((range, index) => {
+    const amount = Math.min(capacity - used, Number.isFinite(range.value) ? Math.max(0, range.value) : 0)
+    const offset = used / capacity * 100
+    used += amount
+    return { index, value: limits.min + amount, offset, color: range.color }
+  })
+  return { value: limits.min + used, ranges: items }
 }

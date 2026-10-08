@@ -1,0 +1,24 @@
+<div class="flex items-center gap-6">
+  <div progressRoot [value]="75" variant="dashboard" [size]="96" class="relative" [thickness]="4">
+    <svg progressCircle [gapDegree]="90" [rotation]="135">
+      <circle progressCircleTrack [gapDegree]="90" />
+      <circle progressCircleRange [gapDegree]="90" />
+    </svg>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span progressValue class="text-sm font-semibold">
+        75%
+      </span>
+    </div>
+  </div>
+  <div progressRoot [value]="75" variant="dashboard" [size]="96" class="relative" [thickness]="4">
+    <svg progressCircle [gapDegree]="90" [rotation]="315">
+      <circle progressCircleTrack [gapDegree]="90" />
+      <circle progressCircleRange [gapDegree]="90" />
+    </svg>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span progressValue class="text-sm font-semibold">
+        75%
+      </span>
+    </div>
+  </div>
+</div>

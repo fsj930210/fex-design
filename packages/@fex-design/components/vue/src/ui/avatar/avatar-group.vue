@@ -4,7 +4,7 @@ import type { AvatarGroupClassNames, AvatarGroupStyles } from '@fex-design/core/
 import {
   AvatarGroup as PrimitiveAvatarGroup,
   AvatarGroupCount,
-} from '@fex-design/vue/primitive/avatar/avatar'
+} from '@fex-design/vue/primitive/avatar'
 import { Fragment, computed, useSlots, type StyleValue, type VNode } from 'vue'
 const props = defineProps<{
   maxCount?: number

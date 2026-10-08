@@ -1,0 +1,12 @@
+<div class="grid w-full max-w-md gap-4">
+  <label class="grid gap-2 text-sm">
+    <span class="font-medium">
+      分段间隔：{{ gap() }}px
+    </span>
+    <div slider [value]="gap()" [min]="0" [max]="8" [step]="1" (change)="changeGap($event.value)"></div>
+  </label>
+  <div class="flex items-center gap-6">
+    <div progressStepRingDemo [value]="50" [gap]="gap()" [steps]="8" color="var(--info)"></div>
+    <div progressStepRingDemo [value]="100" [gap]="gap()" [steps]="8" color="var(--success)"></div>
+  </div>
+</div>

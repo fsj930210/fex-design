@@ -1,2 +1,20 @@
-import { Progress, ProgressRange, ProgressTrack } from '@fex-design/solid/primitive/progress'
-export default function SegmentedExample() { return <Progress max={100}><ProgressTrack><ProgressRange value={30} /><ProgressRange value={25} offset={30} /><ProgressRange value={15} offset={55} /></ProgressTrack></Progress> }
+import { StepLineDemo } from './_parts/step-line'
+import { StepRingDemo } from './_parts/step-ring'
+
+export function ProgressPrimitiveSegmentedExample() {
+
+  return (
+    <div class="grid w-full max-w-md gap-5">
+      <div class="grid gap-3">
+        <StepLineDemo active={3} value={50} />
+        <StepLineDemo active={4} value={80} />
+        <StepLineDemo active={5} value={100} />
+      </div>
+      <div class="flex items-center gap-6">
+        <StepRingDemo value={50} />
+        <StepRingDemo value={80} />
+        <StepRingDemo value={100} />
+      </div>
+    </div>
+  )
+}

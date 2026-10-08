@@ -16,7 +16,7 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
-} from '@fex-design/react/primitive/input/input'
+} from '@fex-design/react/primitive/input'
 import type { InputProps, InputPasswordProps, InputSearchProps } from './input.types'
 import { useInputContext } from '../../primitive/input/input-context'
 

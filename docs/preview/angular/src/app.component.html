@@ -7,6 +7,10 @@
     <div data-preview-example-host class="contents [&>*]:contents">
       <ng-container *ngComponentOutlet="comp" />
     </div>
+  } @else if (loading()) {
+    <p>示例加载中…</p>
+  } @else if (loadError(); as error) {
+    <p role="alert">示例加载失败：{{ error }}</p>
   } @else {
     <p>未找到示例：{{ currentInfo().layer }}/{{ currentInfo().component }}/{{ currentInfo().demo }}</p>
   }

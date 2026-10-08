@@ -3,7 +3,7 @@ import type { AnchorClassNames, AnchorStyles } from '@fex-design/core/anchor/typ
 import { cn } from '@fex-design/utils'
 import type { StyleValue } from 'vue'
 import { useAttrs } from 'vue'
-import { AnchorIndicator, AnchorRail, AnchorRoot } from '@fex-design/vue/primitive/anchor/anchor'
+import { AnchorIndicator, AnchorRail, AnchorRoot } from '@fex-design/vue/primitive/anchor'
 import AnchorItems from './anchor-items.vue'
 import type { AnchorItem } from './anchor.types'
 defineOptions({ name: 'Anchor', inheritAttrs: false })

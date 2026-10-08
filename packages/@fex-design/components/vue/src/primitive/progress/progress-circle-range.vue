@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { progressCircleRangeClassName } from '@fex-design/components-styles/progress'
 import { getProgressGeometry } from '@fex-design/core/progress/progress'
-import type { ProgressColor } from '@fex-design/core/progress/types'
+import type { ProgressLinecap } from '@fex-design/core/progress/types'
 import { cn } from '@fex-design/utils'
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useProgressContext } from './progress-context'
 
-defineOptions({ name: 'ProgressCircleRange' })
+defineOptions({ name: 'ProgressCircleRange', inheritAttrs: false })
 
 const props = defineProps<{
-  color?: ProgressColor
+  linecap?: ProgressLinecap
   gapDegree?: number
 }>()
 
@@ -29,24 +29,24 @@ const geometry = computed(() =>
   }),
 )
 
-const strokeColor = computed(() => {
-  const c = props.color ?? context.value.color
-  return typeof c === 'string' ? c : 'currentColor'
-})
+const element = useTemplateRef<SVGCircleElement>('element')
+defineExpose({ element })
 </script>
 <template>
   <circle
+    ref="element"
+    v-bind="$attrs"
     data-slot="progress-circle-range"
-    :data-status="context.value.status"
+    :data-status="context.status"
     :cx="geometry.center"
     :cy="geometry.center"
     :r="geometry.radius"
     fill="none"
-    :stroke="strokeColor"
+    :stroke="($attrs.stroke as string | undefined) ?? 'currentColor'"
     :stroke-width="thickness"
     :stroke-dasharray="geometry.rangeDasharray"
     :stroke-dashoffset="geometry.dashOffset"
-    :stroke-linecap="context.value.linecap ?? 'round'"
+    :stroke-linecap="props.linecap ?? 'round'"
     pathLength="100"
     :class="cn(progressCircleRangeClassName, $attrs.class as string | undefined)"
   />

@@ -11,7 +11,7 @@
     AnchorIndicator,
     AnchorRail,
     AnchorRoot,
-  } from '@fex-design/svelte/primitive/anchor/anchor';
+  } from '@fex-design/svelte/primitive/anchor';
   import AnchorItems from "./anchor-items.svelte";
   interface Props extends Omit<HTMLAttributes<HTMLElement>, "onchange"> {
     items: readonly AnchorItemData<string>[];

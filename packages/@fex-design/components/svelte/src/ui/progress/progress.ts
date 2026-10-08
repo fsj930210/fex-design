@@ -1,5 +1,7 @@
 export { default as Progress } from "./progress.svelte"
+export type { ProgressProps } from './types'
 export type {
+  ProgressRangeItem,
   ProgressColor,
   ProgressGapPlacement,
   ProgressInfoPlacement,

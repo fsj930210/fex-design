@@ -1,413 +1,127 @@
 <script setup lang="ts">
 import {
-  progressStepLineContainerClassName,
-  progressStepLineItemClassName,
-  progressStepLineTrackClassName,
-  progressTopHeaderClassName,
+  progressStepLineContainerClassName, progressStepLineItemClassName,
+  progressStepLineTrackClassName, progressTopHeaderClassName,
 } from '@fex-design/components-styles/progress'
 import {
-  getCircleStepsGeometry,
-  getLineStepsGeometry,
-  getLinearProgressBackground,
-  normalizeProgressValue,
-} from '@fex-design/core/progress/progress'
-import type {
-  ProgressColor,
-  ProgressGapPlacement,
-  ProgressInfoPlacement,
-  ProgressLinecap,
-  ProgressSize,
-  ProgressStatus,
-  ProgressVariant,
-} from '@fex-design/core/progress/types'
-import { CheckIcon } from '@fex-design/vue/icons/check'
-import {
-  Progress as PrimitiveProgress,
-  ProgressCircle,
-  ProgressCircleRange,
-  ProgressCircleTrack,
-  ProgressLabel,
-  ProgressRange,
-  ProgressTrack,
-  ProgressValue,
+  Progress as PrimitiveProgress, ProgressCircle, ProgressCircleRange, ProgressCircleTrack,
+  ProgressLabel, ProgressRange, ProgressTrack,
 } from '@fex-design/vue/primitive/progress'
 import { cn } from '@fex-design/utils'
-import { computed } from 'vue'
+import { computed, useAttrs, useId, useTemplateRef, type StyleValue } from 'vue'
+import ProgressInfo from './progress-info.vue'
+import type { ProgressProps } from './types'
+import { useProgress } from './use-progress'
 
-defineOptions({ name: 'Progress' })
-
-const props = withDefaults(
-  defineProps<{
-    value?: number | null
-    min?: number
-    max?: number
-    variant?: ProgressVariant
-    status?: ProgressStatus
-    size?: ProgressSize
-    thickness?: number
-    steps?: number
-    gap?: number
-    color?: ProgressColor
-    trackColor?: string
-    linecap?: ProgressLinecap
-    trackLinecap?: ProgressLinecap
-    gapDegree?: number
-    gapPlacement?: ProgressGapPlacement
-    showInfo?: boolean
-    showValue?: boolean
-    infoPlacement?: ProgressInfoPlacement
-    label?: string
-    format?: (percent: number | null, value: number | null) => any
-    success?: boolean
-    classNames?: Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', string>>
-    styles?: Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', any>>
-  }>(),
-  {
-    value: 0,
-    min: 0,
-    max: 100,
-    variant: 'line',
-    status: undefined,
-    gap: 2,
-    linecap: 'round',
-    gapDegree: 75,
-    gapPlacement: 'bottom',
-    infoPlacement: 'outside',
-  },
-)
-
-const normalized = computed(() => normalizeProgressValue(props.value, props.min, props.max))
-const isComplete = computed(
-  () => normalized.value.percentage !== null && normalized.value.percentage >= 1,
-)
-const isSuccess = computed(
-  () => props.success || props.status === 'success' || (isComplete.value && !props.status),
-)
-const effectiveStatus = computed<ProgressStatus>(() => (isSuccess.value ? 'success' : props.status))
-const shouldShowInfo = computed(
-  () =>
-    props.showInfo !== false &&
-    props.showValue !== false &&
-    ((props.variant ?? 'line') === 'line' || (props.infoPlacement ?? 'outside') === 'inside'),
-)
-const resolvedInfoPlacement = computed(() => props.infoPlacement ?? 'outside')
-
-const numSize = computed(() => {
-  if (typeof props.size === 'number') return props.size
-  if (props.size === 'sm') return props.variant === 'line' ? 4 : 32
-  if (props.size === 'lg') return props.variant === 'line' ? 12 : 96
-  return props.variant === 'line' ? 8 : 48
+defineOptions({ name: 'Progress', inheritAttrs: false })
+const props = withDefaults(defineProps<ProgressProps>(), {
+  value: 0, min: 0, max: 100, variant: 'line', gap: 2, linecap: 'round',
+  gapDegree: 75, gapPlacement: 'bottom', infoPlacement: 'outside',
+  showInfo: undefined, showValue: undefined,
 })
-
-const numThickness = computed(() => {
-  if (props.thickness !== undefined) return props.thickness
-  if (typeof props.size === 'number' && props.variant === 'line') return props.size
-  if (props.size === 'sm') return 4
-  if (props.size === 'lg') return 8
-  return props.variant === 'line' ? 8 : 4
-})
-
-const lineSteps = computed(() =>
-  props.steps && props.steps > 0
-    ? getLineStepsGeometry({
-        value: props.value,
-        min: props.min,
-        max: props.max,
-        steps: props.steps,
-      })
-    : null,
-)
-
-const circleSteps = computed(() =>
-  props.steps && props.steps > 0 && (props.variant === 'circle' || props.variant === 'dashboard')
-    ? getCircleStepsGeometry({
-        value: props.value,
-        min: props.min,
-        max: props.max,
-        size: numSize.value,
-        thickness: numThickness.value,
-        steps: props.steps,
-        gap: props.gap,
-      })
-    : null,
-)
-
-const infoText = computed(() => {
-  if (normalized.value.percentage !== null) {
-    return `${Math.round(normalized.value.percentage * 100)}%`
-  }
-  return ''
-})
+const attrs = useAttrs()
+const model = useProgress(props)
+const { rangeLayout, effectiveValue, normalized, status, showInfo, size, thickness, isCircle, lineSteps, circleSteps,
+  gradient, rangeStyle, trackStyle, stepColor, activeColor } = model
+const gradientId = useId().replace(/:/g, '')
+// attrs always contains the latest values but is not reactive; merge it during render.
+const rootStyle = (): StyleValue => [props.styles?.root, attrs.style as StyleValue]
+const root = useTemplateRef<HTMLDivElement | { element: HTMLDivElement }>('root')
+const element = computed(() => root.value && ('element' in root.value ? root.value.element : root.value))
+defineExpose({ element })
 </script>
+
 <template>
-  <!-- 1. Step Line -->
-  <div
-    v-if="steps && steps > 0 && variant !== 'circle' && variant !== 'dashboard'"
-    data-slot="progress"
-    data-variant="steps"
-    :class="
-      cn(progressStepLineContainerClassName, classNames?.root, $attrs.class as string | undefined)
-    "
-    :style="[styles?.root, $attrs.style as any]"
-  >
+  <div v-if="lineSteps" ref="root" v-bind="attrs" data-slot="progress" data-variant="steps"
+    :class="cn(progressStepLineContainerClassName, classNames?.root, attrs.class as string)"
+    :style="rootStyle()">
     <div :class="cn(progressStepLineTrackClassName, classNames?.track)" :style="styles?.track">
-      <span
-        v-for="step in lineSteps?.steps"
-        :key="step.index"
-        data-slot="progress-step"
+      <span v-for="step in lineSteps.steps" :key="step.index" data-slot="progress-step"
         :data-active="step.active ? 'true' : undefined"
         :class="cn(progressStepLineItemClassName, classNames?.step)"
-        :style="[
-          {
-            background: step.active
-              ? getLinearProgressBackground(color) || 'var(--primary)'
-              : trackColor || 'var(--progress-remaining)',
-          },
-          styles?.step,
-        ]"
-      />
+        :style="[{ background: step.active ? activeColor : (trackColor ?? 'var(--progress-remaining)') }, styles?.step]" />
     </div>
-    <span
-      v-if="shouldShowInfo"
-      :class="cn('text-sm font-medium', classNames?.info)"
-      :style="styles?.info"
-    >
-      <slot name="info">
-        <template v-if="format">{{
-          format(
-            normalized.percentage !== null ? Math.round(normalized.percentage * 100) : null,
-            normalized.value,
-          )
-        }}</template>
-        <template
-          v-else-if="isSuccess && normalized.percentage !== null && normalized.percentage >= 1"
-        >
-          <span
-            class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
-          >
-            <CheckIcon class="size-3" />
-          </span>
-        </template>
-        <template v-else>{{ infoText }}</template>
-      </slot>
+    <span v-if="showInfo" :class="cn('text-sm font-medium', classNames?.info)" :style="styles?.info">
+      <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+        <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+      </ProgressInfo>
     </span>
   </div>
-
-  <!-- 2. Step Circle -->
-  <div
-    v-else-if="circleSteps"
-    data-slot="progress"
-    data-variant="circle-steps"
-    :class="
-      cn(
-        'relative inline-flex items-center justify-center',
-        classNames?.root,
-        $attrs.class as string | undefined,
-      )
-    "
-    :style="[
-      { width: `${circleSteps.size}px`, height: `${circleSteps.size}px` },
-      styles?.root,
-      $attrs.style as any,
-    ]"
-  >
-    <svg
-      :viewBox="`0 0 ${circleSteps.size} ${circleSteps.size}`"
-      :width="circleSteps.size"
-      :height="circleSteps.size"
-      class="block shrink-0 -rotate-90"
-    >
-      <circle
-        v-for="step in circleSteps.steps"
-        :key="step.index"
-        :cx="circleSteps.size / 2"
-        :cy="circleSteps.size / 2"
-        :r="circleSteps.radius"
-        fill="none"
-        :stroke="
-          step.active
-            ? typeof color === 'string'
-              ? color
-              : 'var(--primary)'
-            : trackColor || 'var(--progress-remaining)'
-        "
-        :stroke-width="circleSteps.thickness"
-        :stroke-dasharray="circleSteps.stepDasharray"
-        :stroke-dashoffset="step.offset"
-        :stroke-linecap="linecap"
-      />
+  <div v-else-if="circleSteps" ref="root" v-bind="attrs" data-slot="progress" data-variant="circle-steps"
+    :class="cn('relative inline-flex items-center justify-center', classNames?.root, attrs.class as string)"
+    :style="[{ width: `${circleSteps.size}px`, height: `${circleSteps.size}px` }, rootStyle()]">
+    <svg :viewBox="`0 0 ${circleSteps.size} ${circleSteps.size}`" :width="circleSteps.size" :height="circleSteps.size"
+      class="block shrink-0 -rotate-90">
+      <circle v-for="step in circleSteps.steps" :key="step.index"
+        :cx="circleSteps.size / 2" :cy="circleSteps.size / 2" :r="circleSteps.radius" fill="none"
+        :stroke="step.active ? stepColor(step.index) : (trackColor ?? 'var(--progress-remaining)')"
+        :stroke-width="circleSteps.thickness" :stroke-dasharray="circleSteps.stepDasharray"
+        :stroke-dashoffset="step.offset" :stroke-linecap="linecap" />
     </svg>
-    <div
-      v-if="shouldShowInfo"
-      :class="
-        cn(
-          'absolute inset-0 flex items-center justify-center text-sm font-medium',
-          classNames?.info,
-        )
-      "
-      :style="styles?.info"
-    >
-      <slot name="info">
-        <template v-if="format">{{
-          format(
-            normalized.percentage !== null ? Math.round(normalized.percentage * 100) : null,
-            normalized.value,
-          )
-        }}</template>
-        <template v-else-if="isSuccess"><CheckIcon class="size-6 text-success" /></template>
-        <template v-else>{{ infoText }}</template>
-      </slot>
+    <div v-if="showInfo" :class="cn('absolute inset-0 flex items-center justify-center text-sm font-medium', classNames?.info)" :style="styles?.info">
+      <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+        <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+      </ProgressInfo>
     </div>
   </div>
-
-  <!-- 3. Standard Circle / Dashboard -->
-  <PrimitiveProgress
-    v-else-if="variant === 'circle' || variant === 'dashboard'"
-    :value="value"
-    :min="min"
-    :max="max"
-    :variant="variant"
-    :status="effectiveStatus"
-    :size="numSize"
-    :thickness="numThickness"
-    :linecap="linecap"
-    :track-linecap="trackLinecap"
-    :color="color"
-    :track-color="trackColor"
-    :gap-degree="gapDegree"
-    :gap-placement="gapPlacement"
-    :class="
-      cn(
-        'relative inline-flex items-center justify-center',
-        classNames?.root,
-        $attrs.class as string | undefined,
-      )
-    "
-    :style="[styles?.root, $attrs.style as any]"
-  >
-    <ProgressCircle
-      :gap-degree="variant === 'dashboard' ? gapDegree : undefined"
-      :class="classNames?.track"
-      :style="styles?.track"
-    >
-      <ProgressCircleTrack :gap-degree="variant === 'dashboard' ? gapDegree : undefined" />
-      <ProgressCircleRange
-        :color="color"
-        :gap-degree="variant === 'dashboard' ? gapDegree : undefined"
-        :class="classNames?.range"
-        :style="styles?.range"
-      />
+  <PrimitiveProgress v-else-if="isCircle" ref="root" v-bind="attrs" :value="effectiveValue" :min="min" :max="max"
+    :variant="variant" :status="status" :size="size" :thickness="thickness"
+    :class="cn('relative inline-flex items-center justify-center', classNames?.root, attrs.class as string)" :style="rootStyle()">
+    <ProgressCircle :gap-degree="variant === 'dashboard' ? gapDegree : undefined"
+      :rotation="variant === 'dashboard' && gapPlacement === 'top' ? 315 : undefined"
+      :class="classNames?.track" :style="styles?.track">
+      <defs v-if="gradient">
+        <linearGradient :id="gradientId" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop v-for="stop in gradient" :key="stop.offset" :offset="stop.offset" :stop-color="stop.color" />
+        </linearGradient>
+      </defs>
+      <ProgressCircleTrack :gap-degree="variant === 'dashboard' ? gapDegree : undefined" :track-linecap="trackLinecap" />
+      <ProgressCircleRange :stroke="typeof color === 'string' ? color : gradient ? `url(#${gradientId})` : undefined"
+        :linecap="linecap" :gap-degree="variant === 'dashboard' ? gapDegree : undefined"
+        :class="classNames?.range" :style="styles?.range" />
     </ProgressCircle>
-    <div
-      v-if="shouldShowInfo"
-      :class="cn('absolute inset-0 flex items-center justify-center font-medium', classNames?.info)"
-      :style="styles?.info"
-    >
-      <slot name="info">
-        <template v-if="format">{{
-          format(
-            normalized.percentage !== null ? Math.round(normalized.percentage * 100) : null,
-            normalized.value,
-          )
-        }}</template>
-        <template v-else-if="isSuccess"><CheckIcon class="size-6 text-success" /></template>
-        <template v-else>{{ infoText }}</template>
-      </slot>
+    <div v-if="showInfo" :class="cn('absolute inset-0 flex items-center justify-center font-medium', classNames?.info)" :style="styles?.info">
+      <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+        <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+      </ProgressInfo>
     </div>
   </PrimitiveProgress>
-
-  <!-- 4. Standard Line -->
-  <PrimitiveProgress
-    v-else
-    :value="value"
-    :min="min"
-    :max="max"
-    variant="line"
-    :status="effectiveStatus"
-    :color="color"
-    :track-color="trackColor"
-    :class="cn('flex flex-col w-full', classNames?.root, $attrs.class as string | undefined)"
-    :style="[styles?.root, $attrs.style as any]"
-  >
-    <div
-      v-if="label || (true && resolvedInfoPlacement === 'top')"
-      :class="cn(progressTopHeaderClassName, classNames?.label)"
-    >
-      <ProgressLabel v-if="label">{{ label }}</ProgressLabel>
-      <span v-else />
-      <span
-        v-if="true && resolvedInfoPlacement === 'top'"
-        :class="cn('text-muted-foreground', classNames?.info)"
-        :style="styles?.info"
-      >
-        <slot name="info">
-          <template v-if="format">{{
-            format(
-              normalized.percentage !== null ? Math.round(normalized.percentage * 100) : null,
-              normalized.value,
-            )
-          }}</template>
-          <template v-else>{{ infoText }}</template>
-        </slot>
+  <PrimitiveProgress v-else ref="root" v-bind="attrs" :value="effectiveValue" :min="min" :max="max"
+    variant="line" :status="status" :thickness="thickness"
+    :class="cn('flex flex-col w-full', classNames?.root, attrs.class as string)" :style="rootStyle()">
+    <div v-if="infoPlacement !== 'bottom' && (label || $slots.label || (showInfo && infoPlacement === 'top'))"
+      :class="cn(progressTopHeaderClassName, classNames?.label)">
+      <ProgressLabel v-if="label || $slots.label"><slot name="label">{{ label }}</slot></ProgressLabel><span v-else />
+      <span v-if="showInfo && infoPlacement === 'top'" :class="cn('text-muted-foreground', classNames?.info)" :style="styles?.info">
+        <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+          <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+        </ProgressInfo>
       </span>
     </div>
-    <div :class="['flex w-full items-center', resolvedInfoPlacement === 'inside' ? 'relative' : undefined]">
-      <ProgressTrack
-        :class="cn('min-w-0 flex-1', trackLinecap === 'butt' ? 'rounded-none' : trackLinecap === 'square' ? 'rounded-[2px]' : 'rounded-full', classNames?.track)"
-        :style="[{ height: `${numThickness}px` }, styles?.track]"
-      >
-        <ProgressRange :color="color" :class="classNames?.range" :style="styles?.range" />
+    <div :class="cn('flex w-full items-center', infoPlacement === 'inside' && 'relative')">
+      <ProgressTrack :class="cn('min-w-0 flex-1', classNames?.track)" :style="trackStyle">
+        <template v-if="rangeLayout"><ProgressRange v-for="range in rangeLayout.ranges" :key="range.index" :value="range.value" :offset="range.offset"
+          :class="classNames?.range" :style="{ borderRadius: '0', background: range.color ?? 'var(--primary)', ...styles?.range }" /></template>
+        <ProgressRange v-else :class="classNames?.range" :style="rangeStyle" />
       </ProgressTrack>
-      <span
-        v-if="true && resolvedInfoPlacement === 'outside'"
-        :class="cn('ms-2 shrink-0 text-sm font-medium', classNames?.info)"
-        :style="styles?.info"
-      >
-        <slot name="info">
-          <template v-if="format">{{
-            format(
-              normalized.percentage !== null ? Math.round(normalized.percentage * 100) : null,
-              normalized.value,
-            )
-          }}</template>
-          <template
-            v-else-if="isSuccess && normalized.percentage !== null && normalized.percentage >= 1"
-          >
-            <span
-              class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
-            >
-              <CheckIcon class="size-3" />
-            </span>
-          </template>
-          <template v-else>{{ infoText }}</template>
-        </slot>
+      <span v-if="showInfo && infoPlacement === 'outside'" :class="cn('ms-2 shrink-0 text-sm font-medium', classNames?.info)" :style="styles?.info">
+        <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+          <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+        </ProgressInfo>
       </span>
-      <span
-        v-if="true && resolvedInfoPlacement === 'inside'"
-        :class="
-          cn(
-            'pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-sm font-medium text-white',
-            classNames?.info,
-          )
-        "
-        :style="styles?.info"
-      >
-        <template v-if="format">{{
-          format(
-            normalized.percentage !== null ? Math.round(normalized.percentage * 100) : null,
-            normalized.value,
-          )
-        }}</template>
-        <template v-else>{{ infoText }}</template>
+      <span v-if="showInfo && infoPlacement === 'inside'" :class="cn('pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-sm font-medium text-white', classNames?.info)" :style="styles?.info">
+        <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+          <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+        </ProgressInfo>
       </span>
     </div>
-    <div
-      v-if="true && resolvedInfoPlacement === 'bottom'"
-      class="mt-1.5 flex w-full items-center justify-between text-sm"
-    >
-      <ProgressLabel v-if="label" :class="classNames?.label">{{ label }}</ProgressLabel
-      ><span v-else />
-      <span :class="cn('font-medium', classNames?.info)" :style="styles?.info">{{ infoText }}</span>
+    <div v-if="showInfo && infoPlacement === 'bottom'" class="mt-1.5 flex w-full items-center justify-between text-sm">
+      <ProgressLabel v-if="label || $slots.label" :class="classNames?.label"><slot name="label">{{ label }}</slot></ProgressLabel><span v-else />
+      <span :class="cn('font-medium', classNames?.info)" :style="styles?.info">
+        <ProgressInfo :percentage="normalized.percentage" :value="normalized.value" :status="status" :variant="variant" :format="format">
+          <template v-if="$slots.info" #default="scope"><slot name="info" v-bind="scope" /></template>
+        </ProgressInfo>
+      </span>
     </div>
   </PrimitiveProgress>
 </template>

@@ -8,7 +8,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex-design/vue/primitive/empty/empty'
+} from '@fex-design/vue/primitive/empty'
 import DefaultEmptyImage from './default-empty-image.vue'
 
 export type EmptyStyles = EmptyStylesBase<StyleValue>

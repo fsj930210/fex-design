@@ -8,7 +8,7 @@ import {
   SliderThumb,
   SliderTrack,
   type SliderRootProps,
-} from '@fex-design/react/primitive/slider/slider'
+} from '@fex-design/react/primitive/slider'
 import { useControllableState } from '@fex-design/react/hooks/use-controllable-state'
 
 export interface SliderProps extends Omit<

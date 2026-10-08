@@ -1,9 +1,7 @@
 import { progressRootClassName } from "@fex-design/components-styles/progress"
 import { normalizeProgressValue, resolveProgressStatus } from "@fex-design/core/progress/progress"
 import type {
-  ProgressColor,
   ProgressContextValue,
-  ProgressLinecap,
   ProgressStatus,
   ProgressVariant,
 } from "@fex-design/core/progress/types"
@@ -24,12 +22,6 @@ export interface ProgressProps extends JSX.HTMLAttributes<HTMLDivElement> {
   status?: ProgressStatus
   size?: number
   thickness?: number
-  linecap?: ProgressLinecap
-  trackLinecap?: ProgressLinecap
-  color?: ProgressColor
-  trackColor?: string
-  gapDegree?: number
-  gapPlacement?: "top" | "bottom" | "start" | "end"
 }
 
 export function Progress(props: ParentProps<ProgressProps>) {
@@ -41,12 +33,6 @@ export function Progress(props: ParentProps<ProgressProps>) {
     "status",
     "size",
     "thickness",
-    "linecap",
-    "trackLinecap",
-    "color",
-    "trackColor",
-    "gapDegree",
-    "gapPlacement",
     "class",
     "children",
   ])
@@ -54,9 +40,10 @@ export function Progress(props: ParentProps<ProgressProps>) {
   const min = () => local.min ?? 0
   const max = () => local.max ?? 100
   const variant = () => local.variant ?? "line"
-  const status = () => resolveProgressStatus(local.status, local.value, min(), max())
+  const value = () => local.value === undefined ? 0 : local.value
+  const status = () => resolveProgressStatus(local.status, value(), min(), max())
 
-  const normalized = createMemo(() => normalizeProgressValue(local.value, min(), max()))
+  const normalized = createMemo(() => normalizeProgressValue(value(), min(), max()))
   const contextValue = createMemo<ProgressContextValue>(() => ({
     value: normalized().value,
     min: normalized().min,
@@ -64,10 +51,6 @@ export function Progress(props: ParentProps<ProgressProps>) {
     percentage: normalized().percentage,
     status: status(),
     variant: variant(),
-    color: local.color,
-    trackColor: local.trackColor,
-    linecap: local.linecap ?? "round",
-    trackLinecap: local.trackLinecap,
     thickness: local.thickness ?? (variant() === "line" ? 8 : 4),
     size: local.size ?? 48,
   }))

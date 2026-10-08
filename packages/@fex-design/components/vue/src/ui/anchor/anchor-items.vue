@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AnchorClassNames, AnchorStyles } from '@fex-design/core/anchor/types'
 import type { StyleValue } from 'vue'
-import { AnchorItem, AnchorLink, AnchorList } from '@fex-design/vue/primitive/anchor/anchor'
+import { AnchorItem, AnchorLink, AnchorList } from '@fex-design/vue/primitive/anchor'
 import type { AnchorItem as AnchorItemData } from './anchor.types'
 defineOptions({ name: 'AnchorItems' })
 defineProps<{

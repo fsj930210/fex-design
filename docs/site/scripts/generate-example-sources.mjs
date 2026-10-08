@@ -82,6 +82,18 @@ for (const [framework, config] of Object.entries(frameworks)) {
             source += `\n\n<!-- ${name}.html -->\n${await readFile(resolve(angularTemplateRoot, `${name}.html`), 'utf8')}`
           } catch {}
         }
+        const partImports = [...source.matchAll(/from ['"](\.\/_parts\/[^'"]+)['"]/g)]
+        for (const [, imported] of partImports) {
+          const filename = imported.endsWith(`.${config.extension}`)
+            ? imported
+            : `${imported}.${config.extension}`
+          const part = await readFile(resolve(examplesRoot, filename), 'utf8')
+          source += `\n\n// ${filename}\n${part}`
+          if (framework === 'angular') {
+            const template = filename.replace(/\.ts$/, '.html')
+            source += `\n\n<!-- ${template} -->\n${await readFile(resolve(examplesRoot, template), 'utf8')}`
+          }
+        }
         const html = await codeToHtml(source, { lang: config.language, theme: 'github-light' })
         const output = resolve(outputRoot, framework, layer, component.name, `${name}.json`)
         await mkdir(dirname(output), { recursive: true })

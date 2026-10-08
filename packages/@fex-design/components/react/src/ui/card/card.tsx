@@ -13,7 +13,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@fex-design/react/primitive/card/card'
+} from '@fex-design/react/primitive/card'
 
 export type CardClassNames = CardClassNamesBase
 export type CardStyles = CardStylesBase<React.CSSProperties>

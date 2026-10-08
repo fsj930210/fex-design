@@ -8,7 +8,7 @@
     AnchorItem,
     AnchorLink,
     AnchorList,
-  } from '@fex-design/svelte/primitive/anchor/anchor';
+  } from '@fex-design/svelte/primitive/anchor';
   interface Props {
     items: readonly AnchorItemData<string>[];
     classNames: AnchorClassNames;

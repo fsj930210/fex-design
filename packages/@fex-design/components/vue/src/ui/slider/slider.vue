@@ -7,7 +7,7 @@ import {
   SliderRoot,
   SliderThumb,
   SliderTrack,
-} from '@fex-design/vue/primitive/slider/slider'
+} from '@fex-design/vue/primitive/slider'
 defineOptions({ name: 'Slider', inheritAttrs: false })
 const props = defineProps({
   value: { type: [Number, Array] as PropType<number | number[]> },

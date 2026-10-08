@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Card from '@fex-design/vue/ui/card'
-import { CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/vue/primitive/card/card'
+import { CardDescription, CardExtra, CardHeader, CardTitle } from '@fex-design/vue/primitive/card'
 </script>
 
 <template>

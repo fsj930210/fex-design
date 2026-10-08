@@ -8,7 +8,7 @@ import {
   SliderThumb,
   SliderTrack,
   type SliderRootProps,
-} from '@fex-design/solid/primitive/slider/slider'
+} from '@fex-design/solid/primitive/slider'
 
 export interface SliderProps extends Omit<
   SliderRootProps,

@@ -10,7 +10,7 @@ import {
   CheckboxRoot,
   type CheckboxControlProps,
   type CheckboxGroupProps as PrimitiveGroupProps,
-} from '@fex-design/solid/primitive/checkbox/checkbox'
+} from '@fex-design/solid/primitive/checkbox'
 import { CheckIcon } from '@fex-design/solid/icons/check'
 import { MinusIcon } from '@fex-design/solid/icons/minus'
 export interface CheckboxProps extends ParentProps<CheckboxControlProps> {

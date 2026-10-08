@@ -5,13 +5,15 @@
   import type { HTMLAttributes } from "svelte/elements"
 
   interface ProgressLabelProps extends HTMLAttributes<HTMLSpanElement> {
+    ref?: HTMLSpanElement | null
     children?: Snippet
   }
 
-  let { class: className, children, ...rest }: ProgressLabelProps = $props()
+  let { ref = $bindable(null), class: className, children, ...rest }: ProgressLabelProps = $props()
 </script>
 
 <span
+  bind:this={ref}
   {...rest}
   data-slot="progress-label"
   class={cn(progressLabelClassName, className)}

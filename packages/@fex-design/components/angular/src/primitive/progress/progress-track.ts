@@ -1,39 +1,23 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  Directive,
-  input,
-} from "@angular/core"
-import { createHostClassName } from "@fex-design/angular/signals/host-class"
-import {
-  progressCircleClassName,
-  progressCircleRangeClassName,
-  progressCircleTrackClassName,
-  progressLabelClassName,
-  progressLineClassName,
-  progressLineRangeClassName,
-  progressValueClassName,
-} from "@fex-design/components-styles/progress"
-import {
-  getLinearProgressBackground,
-  getProgressGeometry,
-} from "@fex-design/core/progress/progress"
-import type { ProgressColor } from "@fex-design/core/progress/types"
-import { Progress } from "./progress"
+import { cn } from '@fex-design/utils'
+import { input, Directive, ElementRef, inject } from '@angular/core'
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import { progressLineClassName } from '@fex-design/components-styles/progress'
+import { progressContext } from './progress-context'
 
 @Directive({
-  selector: "div[progressTrack], [progressTrack]",
+  selector: 'div[progressTrack]',
   standalone: true,
+  exportAs: 'progressTrack',
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "progress-track",
-    "[attr.data-status]": "root.resolvedStatus()",
-    "[style.background-color]": "root.trackColor() || null",
+    '[class]': 'hostClassName()',
+    'data-slot': 'progress-track',
+    '[attr.data-status]': 'root.status()',
+    '[style.height.px]': 'root.thickness()',
   },
 })
 export class ProgressTrack {
-  protected readonly hostClassName = createHostClassName(progressLineClassName)
-  constructor(readonly root: Progress) {}
+  readonly className = input<string | undefined>(undefined, { alias: 'class' })
+  readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
+  readonly root = inject(progressContext)
+  protected readonly hostClassName = createHostClassName(() => cn(progressLineClassName, this.className()))
 }
-

@@ -1,11 +1,44 @@
-<div class="flex gap-4">
-  <div progressRoot [value]="75" variant="circle" [size]="96" [thickness]="8" class="relative">
+<div class="flex flex-wrap items-center gap-4">
+  <div progressRoot [value]="30" variant="circle" [size]="96" class="relative">
     <svg progressCircle>
       <circle progressCircleTrack />
       <circle progressCircleRange class="text-primary" />
     </svg>
     <div class="absolute inset-0 flex items-center justify-center">
-      <span progressValue class="text-sm font-semibold"></span>
+      <span progressValue class="text-sm font-semibold">
+        30%
+      </span>
+    </div>
+  </div>
+  <div progressRoot [value]="70" variant="circle" [size]="96" class="relative">
+    <svg progressCircle>
+      <circle progressCircleTrack />
+      <circle progressCircleRange class="text-primary" />
+    </svg>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span progressValue class="text-sm font-semibold">
+        70%
+      </span>
+    </div>
+  </div>
+  <div progressRoot [value]="100" variant="circle" [size]="96" class="relative" status="success">
+    <svg progressCircle>
+      <circle progressCircleTrack />
+      <circle progressCircleRange class="text-success" />
+    </svg>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <check-icon class="size-6 text-success" />
+    </div>
+  </div>
+  <div progressRoot [value]="50" variant="circle" [size]="96" class="relative" status="error">
+    <svg progressCircle>
+      <circle progressCircleTrack />
+      <circle progressCircleRange class="text-primary" />
+    </svg>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span progressValue class="text-sm font-semibold">
+        50%
+      </span>
     </div>
   </div>
 </div>

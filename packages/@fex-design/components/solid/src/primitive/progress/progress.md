@@ -1,72 +1,69 @@
 # Progress Primitive
 
-A headless, compound, and accessible progress indicator component family. Provides fine-grained atomic parts to compose linear or circular progress bars with zero styling constraints while maintaining full accessibility contracts.
+A styled, composable progress family. Root provides normalized values, status and ARIA; its parts render linear and circular progress.
 
 ## Import
 
-```tsx
-import {
-  Progress,
-  ProgressTrack,
-  ProgressRange,
-  ProgressValue,
-  ProgressLabel,
-  ProgressCircle,
-  ProgressCircleTrack,
-  ProgressCircleRange,
-} from '@fex-design/solid/primitive/progress'
+```ts
+import { Progress, ProgressTrack, ProgressRange, ProgressValue, ProgressLabel, ProgressCircle, ProgressCircleTrack, ProgressCircleRange } from '@fex-design/solid/primitive/progress'
 ```
 
-## Parts
-
-| Component | Selector / Tag | Description |
-| :--- | :--- | :--- |
-| `Progress` | `div[data-slot="progress"]` | Root container providing `role="progressbar"`, ARIA state, and context value. |
-| `ProgressTrack` | `div[data-slot="progress-track"]` | Background track container for linear progress. |
-| `ProgressRange` | `div[data-slot="progress-range"]` | Filled indicator bar. Automatically synchronizes width with normalized percentage or custom value. |
-| `ProgressValue` | `span[data-slot="progress-value"]` | Text display for numeric progress or formatted percentage text. |
-| `ProgressLabel` | `span[data-slot="progress-label"]` | Accessible label associated with the progress bar. |
-| `ProgressCircle` | `svg[data-slot="progress-circle"]` | SVG wrapper for circular and dashboard progress geometries. |
-| `ProgressCircleTrack` | `circle[data-slot="progress-circle-track"]` | Background circle for circular progress. |
-| `ProgressCircleRange` | `circle[data-slot="progress-circle-range"]` | Animated stroke circle showing filled percentage. |
+```tsx
+<Progress value={65} class="flex w-full flex-col">
+  <ProgressTrack><ProgressRange /></ProgressTrack>
+  <ProgressValue>65%</ProgressValue>
+</Progress>
+```
 
 ## Examples
 
-| ID | Title | Description |
-| :--- | :--- | :--- |
-| `basic` | Basic Linear Composition | Standard linear progress bar composed of Root, Track, and Range. |
-| `circle` | Circular Progress | Circular progress indicator composed with SVG parts. |
-| `compound` | Compound Layout | Top-aligned label and value header above linear progress track. |
-| `multi-range` | Multi-segment Progress | Multiple indicators rendered inside a single track for segmented quotas. |
-| `custom-style` | Custom Styling | Overriding track and range classes with gradient colors and custom radii. |
+| ID | Scenario |
+| --- | --- |
+| `basic` | Basic |
+| `circle` | Circle |
+| `status` | Status |
+| `color` | Color |
+| `segmented` | Segmented progress |
+| `size` | Size |
+| `linecap` | Border radius |
+| `dashboard` | Dashboard |
+| `dynamic` | Dynamic value |
+| `direction` | LTR / RTL |
+| `custom-gap` | Segment gap |
+| `format` | Formatting and info placement |
+| `gradient` | Gradient |
+| `multi-range` | Multiple ranges |
 
-## API
+## Root API
 
-### Progress (Root)
+| Property | Type | Default |
+| --- | --- | --- |
+| value | number / null | 0 |
+| min | number | 0 |
+| max | number | 100 |
+| variant | line / circle / dashboard | line |
+| status | pending / active / success / error | derived from normalized value |
+| size | number | 48 |
+| thickness | number | line: 8; circle/dashboard: 4 |
 
-| Property | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `value` | `number \| null` | `0` | Current progress value; null means pending without a numeric value. |
-| `min` | `number` | `0` | Minimum value boundary. |
-| `max` | `number` | `100` | Maximum value boundary. |
-| `variant` | `'line' \| 'circle' \| 'dashboard'` | `'line'` | Geometry type variant. |
-| `status` | `'pending' \| 'active' \| 'success' \| 'error'` | `'pending'` | Task lifecycle status. |
-| `size` | `number` | `48` | Diameter size for circle or dashboard variants. |
-| `thickness` | `number` | `4` | Stroke width or track height. |
-| `color` | `ProgressColor` | `undefined` | Custom stroke or fill color / gradient. |
-| `trackColor` | `string` | `undefined` | Custom track background or stroke color. |
+Root does not own color, trackColor, linecap, trackLinecap, gapDegree or gapPlacement. Set colors and line caps on the corresponding parts through native class/style and SVG attributes.
 
-### ProgressRange
+## Parts
 
-| Property | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `value` | `number` | `context.value` | Independent segment value for multi-segment tracks. |
-| `offset` | `number` | `0` | Percentage offset for multi-segment positioning. |
-| `color` | `ProgressColor` | `context.color` | Custom color override for this indicator range. |
+| Part | Semantic options |
+| --- | --- |
+| ProgressTrack | inherits Root thickness; override through native style |
+| ProgressRange | value, offset |
+| ProgressValue | displays supplied content |
+| ProgressLabel | native content |
+| ProgressCircle | gapDegree, rotation |
+| ProgressCircleTrack | gapDegree, trackLinecap |
+| ProgressCircleRange | gapDegree, linecap; native stroke |
 
-## Accessibility
+Use native JSX attributes and ref. ProgressValue also accepts a function that reads value and percentage (0–1) under its Provider.
 
-- Follows WAI-ARIA Progressbar pattern.
-- Root element has `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
-- Supports `aria-valuetext` when custom formatted text is used.
-- Exposes `data-status="pending | active | success | error"` for styling state hooks.
+## CSS
+
+--progress-remaining controls the remaining track color.
+
+Line radii use native class/style. SVG stroke endpoints belong to ProgressCircleRange and ProgressCircleTrack.

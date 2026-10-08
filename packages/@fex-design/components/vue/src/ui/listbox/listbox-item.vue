@@ -10,7 +10,7 @@ import {
 import { cn } from '@fex-design/utils'
 import { useAttrs } from 'vue'
 import { CheckIcon } from '@fex-design/vue/icons/check'
-import { ListboxItem, ListboxItemIndicator } from '@fex-design/vue/primitive/listbox/listbox'
+import { ListboxItem, ListboxItemIndicator } from '@fex-design/vue/primitive/listbox'
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(
   defineProps<{

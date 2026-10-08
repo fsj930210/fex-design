@@ -1,179 +1,109 @@
+<ng-template #info>
+  @if (infoTemplate(); as template) {
+    <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="infoContext()" />
+  } @else if (format()) {
+    {{ formattedInfo() }}
+  } @else if (resolvedStatus() === 'success' && variant() !== 'line') {
+    <check-icon class="size-6 text-success" />
+  } @else if (resolvedStatus() === 'success' && normalized().percentage !== null && normalized().percentage! >= 1) {
+    <span class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white">
+      <check-icon class="size-3" />
+    </span>
+  } @else {
+    {{ infoText() }}
+  }
+</ng-template>
+<ng-template #labelContent>
+  @if (labelTemplate(); as template) {
+    <ng-container [ngTemplateOutlet]="template" />
+  } @else { {{ label() }} }
+</ng-template>
+
 @if (isLineSteps()) {
-  <div
-    data-slot="progress"
-    data-variant="steps"
-    [class]="stepLineContainerClass()"
-    [style]="styles()?.root || null"
-  >
-    <div [class]="stepLineTrackClass()" [style]="styles()?.track || null">
-      @for (step of lineSteps()?.steps ?? []; track step.index) {
-        <span
-          data-slot="progress-step"
-          [attr.data-active]="step.active ? 'true' : null"
-          [class]="stepLineItemClass()"
-          [style.background]="step.active ? (stepActiveColor() || 'var(--primary)') : (trackColor() || 'var(--progress-remaining)')"
-        ></span>
-      }
-    </div>
-    @if (shouldShowInfo()) {
-      <span [class]="infoClass()" [style]="styles()?.info || null">
-        @if (isSuccess() && normalized().percentage !== null && normalized().percentage! >= 1) {
-          <span class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white">
-            <check-icon class="size-3" />
-          </span>
-        } @else {
-          {{ infoText() }}
-        }
-      </span>
+  <div [class]="stepTrackClass()" [style]="styles()?.track">
+    @for (step of lineSteps()?.steps ?? []; track step.index) {
+      <span data-slot="progress-step" [attr.data-active]="step.active ? 'true' : null"
+        [class]="stepClass()" [style]="stepStyle(step.active)"></span>
     }
   </div>
+  @if (shouldShowInfo()) {
+    <span [class]="infoClass('text-sm font-medium')" [style]="styles()?.info">
+      <ng-container [ngTemplateOutlet]="info" />
+    </span>
+  }
 } @else if (isCircleSteps()) {
-  <div
-    data-slot="progress"
-    data-variant="circle-steps"
-    [class]="circleStepsContainerClass()"
-    [style.width.px]="circleSteps()?.size"
-    [style.height.px]="circleSteps()?.size"
-    [style]="styles()?.root || null"
-  >
-    <svg
-      [attr.viewBox]="'0 0 ' + circleSteps()?.size + ' ' + circleSteps()?.size"
-      [attr.width]="circleSteps()?.size"
-      [attr.height]="circleSteps()?.size"
-      class="block shrink-0 -rotate-90"
-    >
-      @for (step of circleSteps()?.steps ?? []; track step.index) {
-        <circle
-          [attr.cx]="(circleSteps()?.size ?? 0) / 2"
-          [attr.cy]="(circleSteps()?.size ?? 0) / 2"
-          [attr.r]="circleSteps()?.radius"
-          fill="none"
-          [attr.stroke]="step.active ? (circleActiveColor() || 'var(--primary)') : (trackColor() || 'var(--progress-remaining)')"
-          [attr.stroke-width]="circleSteps()?.thickness"
-          [attr.stroke-dasharray]="circleSteps()?.stepDasharray"
-          [attr.stroke-dashoffset]="step.offset"
-          [attr.stroke-linecap]="linecap()"
-        />
-      }
-    </svg>
-    @if (shouldShowInfo()) {
-      <div [class]="circleInfoClass()" [style]="styles()?.info || null">
-        @if (isSuccess()) {
-          <check-icon class="size-6 text-success" />
-        } @else {
-          {{ infoText() }}
-        }
-      </div>
+  <svg [attr.viewBox]="'0 0 ' + circleSteps()!.size + ' ' + circleSteps()!.size"
+    [attr.width]="circleSteps()!.size" [attr.height]="circleSteps()!.size" class="block shrink-0 -rotate-90">
+    @for (step of circleSteps()!.steps; track step.index) {
+      <circle [attr.cx]="circleSteps()!.size / 2" [attr.cy]="circleSteps()!.size / 2"
+        [attr.r]="circleSteps()!.radius" fill="none"
+        [attr.stroke]="step.active ? stepColor(step.index) : trackColor() ?? 'var(--progress-remaining)'"
+        [attr.stroke-width]="circleSteps()!.thickness" [attr.stroke-dasharray]="circleSteps()!.stepDasharray"
+        [attr.stroke-dashoffset]="step.offset" [attr.stroke-linecap]="linecap()" />
     }
-  </div>
-} @else if (variant() === 'line') {
-  <div
-    progressRoot
-    [value]="value()"
-    [min]="min()"
-    [max]="max()"
-    variant="line"
-    [status]="effectiveStatus()"
-    [color]="color()"
-    [trackColor]="trackColor()"
-    [class]="lineRootClass()"
-    [style]="styles()?.root || null"
-  >
-    @if (label() || (shouldShowInfo() && infoPlacement() === 'top')) {
-      <div [class]="topHeaderClass()">
-        @if (label()) {
-          <span progressLabel>{{ label() }}</span>
-        } @else {
-          <span></span>
-        }
-        @if (shouldShowInfo() && infoPlacement() === 'top') {
-          <span [class]="topInfoClass()" [style]="styles()?.info || null">
-            {{ infoText() }}
-          </span>
-        }
-      </div>
+  </svg>
+  @if (shouldShowInfo()) {
+    <div [class]="infoClass('absolute inset-0 flex items-center justify-center text-sm font-medium')" [style]="styles()?.info">
+      <ng-container [ngTemplateOutlet]="info" />
+    </div>
+  }
+} @else if (isCircle()) {
+  <svg progressCircle [attr.viewBox]="'0 0 ' + numSize() + ' ' + numSize()"
+    [attr.width]="numSize()" [attr.height]="numSize()"
+    [gapDegree]="variant() === 'dashboard' ? gapDegree() : undefined"
+    [rotation]="variant() === 'dashboard' && gapPlacement() === 'top' ? 315 : undefined"
+    [class]="classNames()?.track" [style]="styles()?.track">
+    @if (gradient(); as stops) {
+      <defs><linearGradient [attr.id]="gradientId" x1="0%" y1="0%" x2="100%" y2="0%">
+        @for (stop of stops; track stop.offset) { <stop [attr.offset]="stop.offset" [attr.stop-color]="stop.color" /> }
+      </linearGradient></defs>
     }
-    <div class="flex w-full items-center" [class.relative]="infoPlacement() === 'inside'">
-      <div
-        progressTrack
-        [class]="'min-w-0 flex-1 ' + (classNames()?.track || '')"
-        [style.height.px]="numThickness()"
-        [style]="styles()?.track || null"
-      >
-        <div
-          progressRange
-          [color]="color()"
-          [class]="classNames()?.range"
-          [style]="styles()?.range || null"
-        ></div>
-      </div>
-      @if (shouldShowInfo() && infoPlacement() === 'outside') {
-        <span [class]="outsideInfoClass()" [style]="styles()?.info || null">
-          @if (isSuccess() && normalized().percentage !== null && normalized().percentage! >= 1) {
-            <span class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white">
-              <check-icon class="size-3" />
-            </span>
-          } @else {
-            {{ infoText() }}
-          }
-        </span>
-      }
-      @if (shouldShowInfo() && infoPlacement() === 'inside') {
-        <span [class]="outsideInfoClass() + ' pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-white'" [style]="styles()?.info || null">{{ infoText() }}</span>
+    <circle progressCircleTrack [trackLinecap]="trackLinecap()"
+      [gapDegree]="variant() === 'dashboard' ? gapDegree() : undefined" />
+    <circle progressCircleRange [stroke]="circleStroke()" [linecap]="linecap()"
+      [gapDegree]="variant() === 'dashboard' ? gapDegree() : undefined"
+      [class]="classNames()?.range" [style]="styles()?.range" />
+  </svg>
+  @if (shouldShowInfo()) {
+    <div [class]="infoClass('absolute inset-0 flex items-center justify-center font-medium')" [style]="styles()?.info">
+      <ng-container [ngTemplateOutlet]="info" />
+    </div>
+  }
+} @else {
+  @if (infoPlacement() !== 'bottom' && (label() || labelTemplate() || (shouldShowInfo() && infoPlacement() === 'top'))) {
+    <div [class]="headerClass()">
+      @if (label() || labelTemplate()) {
+        <span progressLabel><ng-container [ngTemplateOutlet]="labelContent" /></span>
+      } @else { <span></span> }
+      @if (shouldShowInfo() && infoPlacement() === 'top') {
+        <span [class]="infoClass('text-muted-foreground')" [style]="styles()?.info"><ng-container [ngTemplateOutlet]="info" /></span>
       }
     </div>
-    @if (shouldShowInfo() && infoPlacement() === 'bottom') {
-      <div class="mt-1.5 flex w-full items-center justify-between text-sm">
-        @if (label()) { <span progressLabel [class]="classNames()?.label">{{ label() }}</span> } @else { <span></span> }
-        <span [class]="outsideInfoClass()" [style]="styles()?.info || null">{{ infoText() }}</span>
-      </div>
-    }
-  </div>
-} @else {
-  <div
-    progressRoot
-    [value]="value()"
-    [min]="min()"
-    [max]="max()"
-    [variant]="variant()"
-    [status]="effectiveStatus()"
-    [size]="numSize()"
-    [thickness]="numThickness()"
-    [linecap]="linecap()"
-    [trackLinecap]="trackLinecap()"
-    [color]="color()"
-    [trackColor]="trackColor()"
-    [gapDegree]="gapDegree()"
-    [gapPlacement]="primitiveGapPlacement()"
-    [class]="circleRootClass()"
-    [style]="styles()?.root || null"
-  >
-    <svg
-      progressCircle
-      [gapDegree]="variant() === 'dashboard' ? gapDegree() : undefined"
-      [class]="classNames()?.track"
-      [style]="styles()?.track || null"
-    >
-      <circle
-        progressCircleTrack
-        [gapDegree]="variant() === 'dashboard' ? gapDegree() : undefined"
-      />
-      <circle
-        progressCircleRange
-        [color]="color()"
-        [gapDegree]="variant() === 'dashboard' ? gapDegree() : undefined"
-        [class]="classNames()?.range"
-        [style]="styles()?.range || null"
-      />
-    </svg>
-    @if (shouldShowInfo()) {
-      <div [class]="circleCenterInfoClass()" [style]="styles()?.info || null">
-        @if (isSuccess()) {
-          <check-icon class="size-6 text-success" />
-        } @else {
-          {{ infoText() }}
+  }
+  <div class="flex w-full items-center" [class.relative]="infoPlacement() === 'inside'">
+    <div progressTrack [class]="trackClass()" [style]="trackStyle()">
+      @if (rangeLayout(); as layout) {
+        @for (range of layout.ranges; track range.index) {
+          <div progressRange [value]="range.value" [offset]="range.offset" [class]="rangeClass()" [style]="rangeItemStyle(range.color)"></div>
         }
-      </div>
+      } @else {
+        <div progressRange [class]="rangeClass()" [style]="rangeStyle()"></div>
+      }
+    </div>
+    @if (shouldShowInfo() && infoPlacement() === 'outside') {
+      <span [class]="infoClass('ms-2 shrink-0 text-sm font-medium')" [style]="styles()?.info"><ng-container [ngTemplateOutlet]="info" /></span>
+    }
+    @if (shouldShowInfo() && infoPlacement() === 'inside') {
+      <span [class]="infoClass('pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-sm font-medium text-white')"
+        [style]="styles()?.info"><ng-container [ngTemplateOutlet]="info" /></span>
     }
   </div>
+  @if (shouldShowInfo() && infoPlacement() === 'bottom') {
+    <div class="mt-1.5 flex w-full items-center justify-between text-sm">
+      @if (label() || labelTemplate()) {
+        <span progressLabel [class]="classNames()?.label"><ng-container [ngTemplateOutlet]="labelContent" /></span>
+      } @else { <span></span> }
+      <span [class]="infoClass('font-medium')" [style]="styles()?.info"><ng-container [ngTemplateOutlet]="info" /></span>
+    </div>
+  }
 }

@@ -1,10 +1,13 @@
-import { Component } from "@angular/core"
-import { ProgressComponent } from "../progress.component"
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Progress } from '@fex-design/angular/ui/progress'
 
 @Component({
-  selector: "progress-structured-example",
+  selector: 'progress-structured-example',
   standalone: true,
-  imports: [ProgressComponent],
-  templateUrl: "./structured.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [Progress],
+  templateUrl: './structured.html',
 })
-export class ProgressStructuredExample {}
+export class ProgressStructuredExample {
+
+}

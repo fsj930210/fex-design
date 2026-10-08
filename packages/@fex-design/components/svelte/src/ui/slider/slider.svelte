@@ -10,7 +10,7 @@
     SliderRoot,
     SliderThumb,
     SliderTrack,
-  } from '@fex-design/svelte/primitive/slider/slider';
+  } from '@fex-design/svelte/primitive/slider';
   type Mark = { value: number; label?: string; class?: string; style?: string };
   interface Props extends Omit<
     HTMLAttributes<HTMLDivElement>,

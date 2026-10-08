@@ -7,7 +7,7 @@ import {
   SpinnerContainer as PrimitiveSpinnerContainer,
   SpinnerOverlay,
   SpinnerText,
-} from '@fex-design/react/primitive/spinner/spinner'
+} from '@fex-design/react/primitive/spinner'
 
 export { Spinner }
 

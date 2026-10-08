@@ -13,7 +13,7 @@ import {
   AnchorRail,
   AnchorRoot,
   type AnchorRootProps,
-} from '@fex-design/solid/primitive/anchor/anchor'
+} from '@fex-design/solid/primitive/anchor'
 export type AnchorStyles = AnchorStylesBase<JSX.CSSProperties>
 export interface AnchorProps extends Omit<AnchorRootProps, 'children'> {
   items: readonly AnchorItemData<JSX.Element>[]

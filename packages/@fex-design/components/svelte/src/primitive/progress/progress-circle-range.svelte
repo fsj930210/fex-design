@@ -1,18 +1,19 @@
 <script lang="ts">
   import { progressCircleRangeClassName } from "@fex-design/components-styles/progress"
   import { getProgressGeometry } from "@fex-design/core/progress/progress"
-  import type { ProgressColor } from "@fex-design/core/progress/types"
+  import type { ProgressLinecap } from "@fex-design/core/progress/types"
   import { cn } from "@fex-design/utils"
   import { getContext } from "svelte"
   import type { SVGAttributes } from "svelte/elements"
   import { progressContextKey, type ProgressContext } from "./context"
 
   interface ProgressCircleRangeProps extends SVGAttributes<SVGCircleElement> {
-    color?: ProgressColor
+    linecap?: ProgressLinecap
+    ref?: SVGCircleElement | null
     gapDegree?: number
   }
 
-  let { color, gapDegree, class: className, style, ...rest }: ProgressCircleRangeProps = $props()
+  let { linecap, gapDegree, ref = $bindable(null), class: className, style, ...rest }: ProgressCircleRangeProps = $props()
   const { context } = getContext<ProgressContext>(progressContextKey)
   const current = $derived(context())
   const size = $derived(current.size ?? 48)
@@ -28,23 +29,20 @@
       gapDegree,
     })
   )
-  const strokeColor = $derived.by(() => {
-    const c = color ?? current.color
-    return typeof c === "string" ? c : "currentColor"
-  })
 </script>
 
 <circle
+  bind:this={ref}
   {...rest}
   cx={geometry.center}
   cy={geometry.center}
   r={geometry.radius}
   fill="none"
-  stroke={strokeColor}
+  stroke={rest.stroke ?? 'currentColor'}
   stroke-width={thickness}
   stroke-dasharray={geometry.rangeDasharray}
   stroke-dashoffset={geometry.dashOffset}
-  stroke-linecap={current.linecap ?? "round"}
+  stroke-linecap={linecap ?? "round"}
   pathLength={100}
   data-slot="progress-circle-range"
   data-status={current.status}

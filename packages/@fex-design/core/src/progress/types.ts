@@ -45,3 +45,8 @@ export interface CircleStepsGeometry {
   gapLength: number
   steps: Array<{ index: number; active: boolean; offset: number }>
 }
+
+export interface ProgressRangeItem {
+  value: number
+  color?: string | undefined
+}

@@ -1,29 +1,13 @@
-import {
-  progressCircleClassName,
-  progressCircleRangeClassName,
-  progressCircleTrackClassName,
-  progressLabelClassName,
-  progressLineClassName,
-  progressLineRangeClassName,
-  progressValueClassName,
-} from "@fex-design/components-styles/progress"
-import {
-  getLinearProgressBackground,
-  getProgressGeometry,
-} from "@fex-design/core/progress/progress"
-import type { ProgressColor } from "@fex-design/core/progress/types"
-import { cn } from "@fex-design/utils"
-import {
-  createMemo,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from "solid-js"
-import { useProgressContext } from "./progress-context"
+import { progressValueClassName } from '@fex-design/components-styles/progress'
+import { cn } from '@fex-design/utils'
+import { splitProps, type JSX } from 'solid-js'
+import { useProgressContext } from './progress-context'
 
-export interface ProgressValueProps extends JSX.HTMLAttributes<HTMLSpanElement> {}
+export type ProgressValueProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'children'> & {
+  children?: JSX.Element | ((context: { value: number | null; percentage: number | null }) => JSX.Element)
+}
 
-export function ProgressValue(props: ParentProps<ProgressValueProps>) {
+export function ProgressValue(props: ProgressValueProps) {
   const [local, others] = splitProps(props, ["class", "children"])
   const context = useProgressContext("ProgressValue")
 
@@ -34,7 +18,9 @@ export function ProgressValue(props: ParentProps<ProgressValueProps>) {
       data-status={context().status}
       class={cn(progressValueClassName, local.class)}
     >
-      {local.children}
+      {typeof local.children === 'function'
+        ? local.children({ value: context().value, percentage: context().percentage })
+        : local.children}
     </span>
   )
 }

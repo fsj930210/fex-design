@@ -3,22 +3,14 @@ import { progressRootClassName } from "@fex-design/components-styles/progress"
 import { normalizeProgressValue, resolveProgressStatus } from "@fex-design/core/progress/progress"
 import type {
   ProgressContextValue,
-  ProgressColor,
-  ProgressLinecap,
   ProgressStatus,
   ProgressVariant,
 } from "@fex-design/core/progress/types"
 import { cn } from "@fex-design/utils"
-import { computed, provide } from "vue"
+import { computed, provide, useTemplateRef } from "vue"
 import { progressContextKey } from "./progress-context"
-import ProgressCircle from "./progress-circle.vue"
-import ProgressCircleRange from "./progress-circle-range.vue"
-import ProgressCircleTrack from "./progress-circle-track.vue"
-import ProgressRange from "./progress-range.vue"
-import ProgressTrack from "./progress-track.vue"
-import ProgressValue from "./progress-value.vue"
 
-defineOptions({ name: "Progress" })
+defineOptions({ name: "Progress", inheritAttrs: false })
 
 const props = withDefaults(
   defineProps<{
@@ -29,12 +21,6 @@ const props = withDefaults(
     status?: ProgressStatus
     size?: number
     thickness?: number
-    linecap?: ProgressLinecap
-    trackLinecap?: ProgressLinecap
-    color?: ProgressColor
-    trackColor?: string
-    gapDegree?: number
-    gapPlacement?: "top" | "bottom" | "start" | "end"
   }>(),
   {
     value: 0,
@@ -44,9 +30,6 @@ const props = withDefaults(
     status: undefined,
     size: 48,
     thickness: undefined,
-    linecap: "round",
-    gapDegree: 75,
-    gapPlacement: "bottom",
   },
 )
 
@@ -62,17 +45,17 @@ const contextValue = computed<ProgressContextValue>(() => ({
   status: resolvedStatus.value,
   variant: props.variant,
   thickness: resolvedThickness.value,
-  color: props.color,
-  trackColor: props.trackColor,
-  linecap: props.linecap,
-  trackLinecap: props.trackLinecap,
   size: props.size,
 }))
 
 provide(progressContextKey, contextValue)
+const element = useTemplateRef<HTMLDivElement>('element')
+defineExpose({ element })
 </script>
 <template>
   <div
+    ref="element"
+    v-bind="$attrs"
     role="progressbar"
     :aria-valuemin="normalized.min"
     :aria-valuemax="normalized.max"

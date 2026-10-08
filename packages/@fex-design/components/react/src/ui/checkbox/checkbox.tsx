@@ -7,7 +7,7 @@ import {
   CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot,
-} from '@fex-design/react/primitive/checkbox/checkbox'
+} from '@fex-design/react/primitive/checkbox'
 export interface CheckboxClassNames {
   root?: string
   control?: string

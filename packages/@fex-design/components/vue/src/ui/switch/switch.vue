@@ -6,8 +6,8 @@ import type {
   SwitchStyles,
 } from '@fex-design/core/switch/types'
 import { computed, useAttrs, useTemplateRef, type PropType, type StyleValue } from 'vue'
-import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitive/switch/switch'
-import { Spinner } from '@fex-design/vue/primitive/spinner/spinner'
+import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitive/switch'
+import { Spinner } from '@fex-design/vue/primitive/spinner'
 defineOptions({ name: 'Switch', inheritAttrs: false })
 const props = defineProps({
   checked: { type: Boolean, default: undefined },

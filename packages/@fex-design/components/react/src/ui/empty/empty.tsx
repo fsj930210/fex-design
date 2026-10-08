@@ -12,7 +12,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex-design/react/primitive/empty/empty'
+} from '@fex-design/react/primitive/empty'
 
 export type EmptyClassNames = EmptyClassNamesBase
 export type EmptyStyles = EmptyStylesBase<CSSProperties>

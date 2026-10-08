@@ -14,7 +14,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@fex-design/solid/primitive/card/card'
+} from '@fex-design/solid/primitive/card'
 
 export type CardClassNames = CardClassNamesBase
 export type CardStyles = CardStylesBase<JSX.CSSProperties>

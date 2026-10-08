@@ -1,6 +1,6 @@
 import { buttonClassName, buttonSpinnerClassName } from '@fex-design/components-styles/button'
 import { cn } from '@fex-design/utils'
-import { Button as PrimitiveButton } from '@fex-design/react/primitive/button/button'
+import { Button as PrimitiveButton } from '@fex-design/react/primitive/button'
 import { ButtonIcon } from '@fex-design/react/primitive/button/button-icon'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
 import type { ButtonProps } from './button.types'

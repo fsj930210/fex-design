@@ -11,7 +11,7 @@ import {
   AvatarGroup as PrimitiveAvatarGroup,
   AvatarGroupCount,
   AvatarImage,
-} from '@fex-design/solid/primitive/avatar/avatar'
+} from '@fex-design/solid/primitive/avatar'
 import { cn } from '@fex-design/utils'
 import { children, createMemo, For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 export interface AvatarProps extends ParentProps<JSX.HTMLAttributes<HTMLSpanElement>> {

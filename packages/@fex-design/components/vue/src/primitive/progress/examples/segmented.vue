@@ -1,2 +1,22 @@
-<template><Progress :max="100"><ProgressTrack class="h-3"><ProgressRange :value="30" class="bg-primary" /><ProgressRange :value="25" :offset="30" class="bg-success" /><ProgressRange :value="15" :offset="55" class="bg-warning" /></ProgressTrack></Progress></template>
-<script setup lang="ts">import { Progress, ProgressTrack, ProgressRange } from '@fex-design/vue/primitive/progress'</script>
+<script setup lang="ts">
+import StepLineDemo from './_parts/step-line.vue'
+import StepRingDemo from './_parts/step-ring.vue'
+
+defineOptions({ name: 'ProgressPrimitiveSegmentedExample' })
+
+</script>
+
+<template>
+  <div class="grid w-full max-w-md gap-5">
+    <div class="grid gap-3">
+      <StepLineDemo :active="3" :value="50" />
+      <StepLineDemo :active="4" :value="80" />
+      <StepLineDemo :active="5" :value="100" />
+    </div>
+    <div class="flex items-center gap-6">
+      <StepRingDemo :value="50" />
+      <StepRingDemo :value="80" />
+      <StepRingDemo :value="100" />
+    </div>
+  </div>
+</template>

@@ -39,8 +39,13 @@
     {
       "name": "status",
       "type": "'pending' | 'active' | 'success' | 'error'",
-      "default": "'pending'",
-      "description": "任务生命周期状态"
+      "default": "根据 value 推导",
+      "description": "省略时根据 value 推导 pending、active 或 success；显式状态优先。"
+    },
+    {
+      "name": "ranges",
+      "type": "readonly ProgressRangeItem[]",
+      "description": "仅用于未设置 steps 的线性进度条。每项为 { value, color? }；value 表示区段长度，自动累计偏移，合计值取代 value，超出 max - min 的部分截断。"
     },
     {
       "name": "steps",
@@ -51,7 +56,7 @@
       "name": "gap",
       "type": "number",
       "default": 2,
-      "description": "分步圆环格之间的间隙角度或距离"
+      "description": "环形分段之间的间隔（像素）。"
     },
     {
       "name": "size",
@@ -77,12 +82,12 @@
       "name": "linecap",
       "type": "'round' | 'butt' | 'square'",
       "default": "'round'",
-      "description": "进度条端点形状"
+      "description": "仅用于 circle 和 dashboard 的 SVG 描边端点；线性条圆角使用原生 class/style 或 styles。"
     },
     {
       "name": "trackLinecap",
       "type": "'round' | 'butt' | 'square'",
-      "description": "未完成轨道端点形状"
+      "description": "仅用于 circle 和 dashboard 的 SVG 描边端点；线性条圆角使用原生 class/style 或 styles。"
     },
     {
       "name": "gapDegree",
@@ -92,9 +97,9 @@
     },
     {
       "name": "gapPlacement",
-      "type": "'top' | 'bottom' | 'start' | 'end'",
+      "type": "'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'",
       "default": "'bottom'",
-      "description": "仪表盘缺口方向"
+      "description": "当前 top 使用 315° 旋转，其余值使用默认几何旋转，与 React 实现一致。"
     },
     {
       "name": "infoPlacement",
@@ -105,35 +110,374 @@
     {
       "name": "showInfo",
       "type": "boolean",
-      "description": "是否显示文本数值"
+      "description": "显示进度信息；优先级为 showInfo ?? showValue ?? 默认值。线性默认显示，圆环仅 inside 默认显示。"
+    },
+    {
+      "name": "showValue",
+      "type": "boolean",
+      "description": "showInfo 未指定时使用的进度信息显隐选项。"
     },
     {
       "name": "label",
-      "type": "ReactNode",
-      "description": "进度条标题或说明标签"
+      "type": "FrameworkLabel",
+      "description": "标题内容；可使用各框架原生内容扩展能力。"
     },
     {
       "name": "format",
-      "type": "(percent: number | null, value: number | null) => ReactNode",
-      "description": "自定义进度信息的渲染内容"
+      "type": "(percent: number | null, value: number | null) => FrameworkFormattedValue",
+      "description": "先于成功图标和默认百分比显示；percent 为 0–100。"
     },
     {
       "name": "success",
       "type": "boolean",
       "description": "是否强制进入成功状态并展示打勾图标"
+    },
+    {
+      "name": "classNames",
+      "type": "Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', string>>",
+      "description": "语义部件的 class。"
+    },
+    {
+      "name": "styles",
+      "type": "Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', FrameworkStyle>>",
+      "description": "语义部件的样式；原生根节点 style 的优先级更高。"
     }
   ],
-  "frameworks": [
-    "react",
-    "vue",
-    "solid",
-    "svelte",
-    "angular"
-  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkLabel": "ReactNode",
+        "FrameworkFormattedValue": "ReactNode",
+        "FrameworkStyle": "CSSProperties"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkLabel": "JSX.Element",
+        "FrameworkFormattedValue": "JSX.Element",
+        "FrameworkStyle": "JSX.CSSProperties"
+      }
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkLabel": "string",
+        "FrameworkFormattedValue": "string | number",
+        "FrameworkStyle": "CSSProperties"
+      },
+      "slots": [
+        {
+          "name": "label",
+          "description": "自定义标题内容。"
+        },
+        {
+          "name": "info",
+          "description": "作用域 slot 提供 percent（0–100）和 value，优先于 format 和默认信息。"
+        }
+      ]
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkLabel": "Snippet | string",
+        "FrameworkFormattedValue": "string | number",
+        "FrameworkStyle": "string"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "number | null",
+          "default": 0,
+          "description": "当前进度值；null 表示尚未开始"
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "default": 0,
+          "description": "最小值"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": 100,
+          "description": "最大值"
+        },
+        {
+          "name": "variant",
+          "type": "'line' | 'circle' | 'dashboard'",
+          "default": "'line'",
+          "description": "形态变体：线性、圆环、仪表盘"
+        },
+        {
+          "name": "status",
+          "type": "'pending' | 'active' | 'success' | 'error'",
+          "default": "根据 value 推导",
+          "description": "省略时根据 value 推导 pending、active 或 success；显式状态优先。"
+        },
+        {
+          "name": "ranges",
+          "type": "readonly ProgressRangeItem[]",
+          "description": "仅用于未设置 steps 的线性进度条。每项为 { value, color? }；value 表示区段长度，自动累计偏移，合计值取代 value，超出 max - min 的部分截断。"
+        },
+        {
+          "name": "steps",
+          "type": "number",
+          "description": "分段步进格数（同时支持 line 和 circle）"
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": 2,
+          "description": "环形分段之间的间隔（像素）。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | number",
+          "description": "尺寸预设或圆环直径（像素）"
+        },
+        {
+          "name": "thickness",
+          "type": "number",
+          "description": "线条高度或圆环描边粗细（像素）"
+        },
+        {
+          "name": "color",
+          "type": "ProgressColor",
+          "description": "进度条颜色，支持 CSS 颜色值或 { from, to } 渐变对象"
+        },
+        {
+          "name": "trackColor",
+          "type": "string",
+          "description": "未完成轨道的底色"
+        },
+        {
+          "name": "linecap",
+          "type": "'round' | 'butt' | 'square'",
+          "default": "'round'",
+          "description": "仅用于 circle 和 dashboard 的 SVG 描边端点；线性条圆角使用原生 class/style 或 styles。"
+        },
+        {
+          "name": "trackLinecap",
+          "type": "'round' | 'butt' | 'square'",
+          "description": "仅用于 circle 和 dashboard 的 SVG 描边端点；线性条圆角使用原生 class/style 或 styles。"
+        },
+        {
+          "name": "gapDegree",
+          "type": "number",
+          "default": 75,
+          "description": "仪表盘缺口角度 (0 ~ 295)"
+        },
+        {
+          "name": "gapPlacement",
+          "type": "'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'",
+          "default": "'bottom'",
+          "description": "当前 top 使用 315° 旋转，其余值使用默认几何旋转，与 React 实现一致。"
+        },
+        {
+          "name": "infoPlacement",
+          "type": "'outside' | 'inside' | 'top' | 'bottom' | 'none'",
+          "default": "'outside'",
+          "description": "文本数值显示位置"
+        },
+        {
+          "name": "showInfo",
+          "type": "boolean",
+          "description": "显示进度信息；优先级为 showInfo ?? showValue ?? 默认值。线性默认显示，圆环仅 inside 默认显示。"
+        },
+        {
+          "name": "showValue",
+          "type": "boolean",
+          "description": "showInfo 未指定时使用的进度信息显隐选项。"
+        },
+        {
+          "name": "label",
+          "type": "FrameworkLabel",
+          "description": "标题内容；可使用各框架原生内容扩展能力。"
+        },
+        {
+          "name": "format",
+          "type": "(percent: number | null, value: number | null) => FrameworkFormattedValue",
+          "description": "先于成功图标和默认百分比显示；percent 为 0–100。"
+        },
+        {
+          "name": "success",
+          "type": "boolean",
+          "description": "是否强制进入成功状态并展示打勾图标"
+        },
+        {
+          "name": "classNames",
+          "type": "Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', string>>",
+          "description": "语义部件的 class。"
+        },
+        {
+          "name": "styles",
+          "type": "Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', FrameworkStyle>>",
+          "description": "语义部件的样式；原生根节点 style 的优先级更高。"
+        },
+        {
+          "name": "info",
+          "type": "Snippet<[{ percent: number | null; value: number | null }]>",
+          "description": "自定义进度信息 snippet，优先于 format 和默认信息。"
+        }
+      ]
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkLabel": "string",
+        "FrameworkFormattedValue": "string | number",
+        "FrameworkStyle": "ProgressStyle"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "number | null",
+          "default": 0,
+          "description": "当前进度值；null 表示尚未开始"
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "default": 0,
+          "description": "最小值"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": 100,
+          "description": "最大值"
+        },
+        {
+          "name": "variant",
+          "type": "'line' | 'circle' | 'dashboard'",
+          "default": "'line'",
+          "description": "形态变体：线性、圆环、仪表盘"
+        },
+        {
+          "name": "status",
+          "type": "'pending' | 'active' | 'success' | 'error'",
+          "default": "根据 value 推导",
+          "description": "省略时根据 value 推导 pending、active 或 success；显式状态优先。"
+        },
+        {
+          "name": "ranges",
+          "type": "readonly ProgressRangeItem[]",
+          "description": "仅用于未设置 steps 的线性进度条。每项为 { value, color? }；value 表示区段长度，自动累计偏移，合计值取代 value，超出 max - min 的部分截断。"
+        },
+        {
+          "name": "steps",
+          "type": "number",
+          "description": "分段步进格数（同时支持 line 和 circle）"
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": 2,
+          "description": "环形分段之间的间隔（像素）。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | number",
+          "description": "尺寸预设或圆环直径（像素）"
+        },
+        {
+          "name": "thickness",
+          "type": "number",
+          "description": "线条高度或圆环描边粗细（像素）"
+        },
+        {
+          "name": "color",
+          "type": "ProgressColor",
+          "description": "进度条颜色，支持 CSS 颜色值或 { from, to } 渐变对象"
+        },
+        {
+          "name": "trackColor",
+          "type": "string",
+          "description": "未完成轨道的底色"
+        },
+        {
+          "name": "linecap",
+          "type": "'round' | 'butt' | 'square'",
+          "default": "'round'",
+          "description": "仅用于 circle 和 dashboard 的 SVG 描边端点；线性条圆角使用原生 class/style 或 styles。"
+        },
+        {
+          "name": "trackLinecap",
+          "type": "'round' | 'butt' | 'square'",
+          "description": "仅用于 circle 和 dashboard 的 SVG 描边端点；线性条圆角使用原生 class/style 或 styles。"
+        },
+        {
+          "name": "gapDegree",
+          "type": "number",
+          "default": 75,
+          "description": "仪表盘缺口角度 (0 ~ 295)"
+        },
+        {
+          "name": "gapPlacement",
+          "type": "'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'",
+          "default": "'bottom'",
+          "description": "当前 top 使用 315° 旋转，其余值使用默认几何旋转，与 React 实现一致。"
+        },
+        {
+          "name": "infoPlacement",
+          "type": "'outside' | 'inside' | 'top' | 'bottom' | 'none'",
+          "default": "'outside'",
+          "description": "文本数值显示位置"
+        },
+        {
+          "name": "showInfo",
+          "type": "boolean",
+          "description": "显示进度信息；优先级为 showInfo ?? showValue ?? 默认值。线性默认显示，圆环仅 inside 默认显示。"
+        },
+        {
+          "name": "showValue",
+          "type": "boolean",
+          "description": "showInfo 未指定时使用的进度信息显隐选项。"
+        },
+        {
+          "name": "label",
+          "type": "FrameworkLabel",
+          "description": "标题内容；可使用各框架原生内容扩展能力。"
+        },
+        {
+          "name": "format",
+          "type": "(percent: number | null, value: number | null) => FrameworkFormattedValue",
+          "description": "先于成功图标和默认百分比显示；percent 为 0–100。"
+        },
+        {
+          "name": "success",
+          "type": "boolean",
+          "description": "是否强制进入成功状态并展示打勾图标"
+        },
+        {
+          "name": "classNames",
+          "type": "Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', string>>",
+          "description": "语义部件的 class。"
+        },
+        {
+          "name": "styles",
+          "type": "Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', FrameworkStyle>>",
+          "description": "语义部件的样式；原生根节点 style 的优先级更高。"
+        },
+        {
+          "name": "labelTemplate",
+          "type": "TemplateRef<unknown>",
+          "description": "自定义标题模板。"
+        },
+        {
+          "name": "infoTemplate",
+          "type": "TemplateRef<{ percent: number | null; value: number | null }>",
+          "description": "自定义进度信息模板，优先于 format 和默认信息。"
+        }
+      ],
+      "slotLabel": "模板",
+      "slots": []
+    }
+  },
   "cssVariables": [
     {
       "name": "--progress-remaining",
       "description": "进度条未完成轨道的底色，默认为柔和的次级背景色。"
     }
-  ]
+  ],
+  "nativeElement": "div",
+  "events": [],
+  "demos": []
 }

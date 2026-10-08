@@ -1,1 +1,1 @@
-export { Kbd, KbdGroup } from '@fex-design/vue/primitive/kbd/kbd'
+export { Kbd, KbdGroup } from '@fex-design/vue/primitive/kbd'

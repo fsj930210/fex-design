@@ -16,7 +16,7 @@ export {
 } from './cascader-panel'
 export {
   CascaderContext,
-  useCascaderContext,
+  useCascader,
   type CascaderContextValue,
 } from './cascader-context'
 export type {

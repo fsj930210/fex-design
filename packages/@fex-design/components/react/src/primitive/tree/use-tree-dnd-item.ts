@@ -179,3 +179,5 @@ function getDropIndicatorStyle(
     width: Math.max(0, (treeRect?.right ?? itemRect.right) - itemRect.left - left),
   }
 }
+
+export type UseTreeDndItemReturn<TNode extends TreeNodeData = TreeNodeData> = ReturnType<typeof useTreeDndItem<TNode>>

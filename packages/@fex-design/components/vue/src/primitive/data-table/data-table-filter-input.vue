@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="TFeatures extends TableFeatures, TData extends RowData">
 import { dataTableInputRootClassName } from '@fex-design/components-styles/data-table'
 import type { Column, RowData, TableFeatures } from '@tanstack/table-core'
-import { InputControl, InputRoot } from '../input/input'
+import { InputControl, InputRoot } from '../input'
 interface FilterableColumn {
   getFilterValue(): unknown
   setFilterValue(value: unknown): void

@@ -165,3 +165,5 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
     select,
   }
 }
+
+export type UseDatePickerReturn<TValue extends CalendarValue = CalendarValue> = ReturnType<typeof useDatePicker<TValue>>

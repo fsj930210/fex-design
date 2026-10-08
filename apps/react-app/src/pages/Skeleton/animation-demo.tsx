@@ -1,5 +1,5 @@
 import { SkeletonBlock as Skeleton } from '@fex-design/react/primitive/skeleton'
-import { skeletonAnimationClassName } from '@fex-design/styles/skeleton'
+import { skeletonAnimationClassName } from '@fex-design/components-styles/skeleton'
 import { Card } from '@fex-design/react/ui/card'
 export function AnimationDemo() {
   return (

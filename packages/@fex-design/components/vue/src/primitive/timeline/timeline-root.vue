@@ -2,7 +2,7 @@
 import { timelineClassName } from '@fex-design/components-styles/timeline'
 import { cn } from '@fex-design/utils'
 import { computed, useAttrs } from 'vue'
-import type { TimelineAlign, TimelineOrientation } from './timeline'
+import type { TimelineAlign, TimelineOrientation } from './index'
 
 defineOptions({ inheritAttrs: false })
 

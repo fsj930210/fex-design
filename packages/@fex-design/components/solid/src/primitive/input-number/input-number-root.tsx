@@ -1,6 +1,6 @@
 import type { InputNumberFormatter, InputNumberParser } from '@fex-design/core/input-number/types'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
-import { InputRoot } from '../input/input'
+import { InputRoot } from '../input'
 import { InputNumberContext } from './input-number-context'
 import { useInputNumber } from './use-input-number'
 export interface InputNumberRootProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {

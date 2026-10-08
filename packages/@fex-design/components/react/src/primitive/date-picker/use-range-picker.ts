@@ -177,3 +177,5 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
     select,
   }
 }
+
+export type UseRangePickerReturn<TValue extends CalendarValue = CalendarValue> = ReturnType<typeof useRangePicker<TValue>>

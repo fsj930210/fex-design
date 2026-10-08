@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
-import type { DialogTriggerProps } from './dialog'
+import type { DialogTriggerProps } from './dialog-trigger'
 import { useDialog } from './use-dialog'
 
 export function useDialogTrigger({ ref, onClick, ...props }: Omit<DialogTriggerProps, 'children'>) {

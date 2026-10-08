@@ -1,6 +1,6 @@
 import type { DisabledTime, TimePickerControllerOptions } from '@fex-design/core/time-picker/types'
 import type { ReactNode } from 'react'
-import { PopoverRoot, type PopoverRootProps } from '../popover/popover'
+import { PopoverRoot, type PopoverRootProps } from '../popover'
 import { TimePickerContext } from './time-picker-context'
 import { useTimePicker } from './use-time-picker'
 

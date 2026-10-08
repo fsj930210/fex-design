@@ -2,7 +2,7 @@ import { dataTableInputRootClassName } from '@fex-design/components-styles/data-
 import { cn } from '@fex-design/utils'
 import type { Column, RowData, TableFeatures } from '@tanstack/table-core'
 import { splitProps, type JSX } from 'solid-js'
-import { InputControl, InputRoot } from '../input/input'
+import { InputControl, InputRoot } from '../input'
 
 interface FilterableColumn {
   getFilterValue: () => unknown

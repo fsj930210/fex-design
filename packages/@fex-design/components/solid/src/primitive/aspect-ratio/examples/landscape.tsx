@@ -1,4 +1,4 @@
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '..'
 export function Landscape() {
   return (
     <AspectRatio ratio={16 / 9}>

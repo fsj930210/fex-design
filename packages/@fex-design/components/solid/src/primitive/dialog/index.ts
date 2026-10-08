@@ -9,5 +9,5 @@ export { DialogDescription, type DialogDescriptionProps } from "./dialog-descrip
 export { DialogBody, type DialogBodyProps } from "./dialog-body"
 export { DialogFooter, type DialogFooterProps } from "./dialog-footer"
 export { DialogClose, type DialogCloseProps, type DialogCloseRenderProps } from "./dialog-close"
-export { useDialogContext } from "./dialog-context"
+export { useDialog } from "./dialog-context"
 export type { DialogOptions } from "@fex-design/core/dialog/create-dialog-controller"

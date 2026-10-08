@@ -10,7 +10,7 @@ import { cn } from '@fex-design/utils'
 import { inject, nextTick, ref, useAttrs, watch } from 'vue'
 import { usePopoverContext } from '../popover/context'
 import { timePickerContextKey } from './context'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar/scrollbar'
+import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(

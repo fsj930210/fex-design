@@ -8,3 +8,5 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   templateUrl: "./more.html",
 })
 export class MoreIcon {}
+
+export { MoreIcon as EllipsisIcon }

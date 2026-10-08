@@ -14,9 +14,9 @@ import { cn } from '@fex-design/utils'
 import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon } from '@fex-design/solid/icons/chevron'
 import { CircleXIcon } from '@fex-design/solid/icons/circle-x'
-import { Tag, TagAction } from '../tag/tag'
+import { Tag, TagAction } from '../tag'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
-import { PopoverTrigger } from '../popover/popover'
+import { PopoverTrigger } from '../popover'
 import { useSelect } from './select-context'
 
 export interface SelectTriggerProps extends ParentProps<

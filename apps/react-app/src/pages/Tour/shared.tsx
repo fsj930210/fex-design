@@ -1,5 +1,5 @@
 import { Button } from '@fex-design/react/ui/button'
-import { CloseIcon } from '@fex-design/react/icon/close'
+import { XIcon as CloseIcon } from '@fex-design/react/icons/x'
 import { Tour, useTour } from '@fex-design/react/primitive/tour'
 import type { ReactNode } from 'react'
 

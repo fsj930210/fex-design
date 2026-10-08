@@ -5,7 +5,7 @@ import {
 } from '@fex-design/components-styles/cascader'
 import { cn } from '@fex-design/utils'
 import { computed } from 'vue'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar/scrollbar'
+import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar'
 const props = defineProps<{ class?: string }>()
 const className = computed(() => cn(cascaderColumnClassName, props.class))
 </script>

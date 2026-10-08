@@ -9,8 +9,8 @@ import { createSelectionController } from '@fex-design/core/selection/create-sel
 import type { SelectionValue } from '@fex-design/core/selection/types'
 import { createMemo, createUniqueId, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
-import { Popover } from '../popover/popover'
-import type { PopoverProps } from '../popover/popover'
+import { Popover } from '../popover'
+import type { PopoverProps } from '../popover'
 import { SelectContext } from './select-context'
 
 export interface SelectChangeMeta {

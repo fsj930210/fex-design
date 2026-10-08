@@ -3,7 +3,7 @@ import { cn } from '@fex-design/utils'
 import type { Column, RowData, TableFeatures } from '@tanstack/react-table'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { ChevronDownIcon, ChevronUpIcon } from '@fex-design/react/icons/chevron'
-import { Button } from '../../ui/button/button'
+import { Button } from '../../ui/button'
 
 export interface DataTableSortButtonProps<
   TFeatures extends TableFeatures,

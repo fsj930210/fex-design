@@ -9,7 +9,7 @@ import { cn } from '@fex-design/utils'
 import type { RowData, TableFeatures } from '@tanstack/react-table'
 import type { HTMLAttributes } from 'react'
 import type { ReactTable } from '@tanstack/react-table'
-import { Button } from '../../ui/button/button'
+import { Button } from '../../ui/button'
 
 export interface DataTablePaginationProps<
   TFeatures extends TableFeatures,

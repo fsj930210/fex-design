@@ -114,3 +114,12 @@ export function Skeleton(props: SkeletonProps) {
     </Show>
   )
 }
+
+export {
+  SkeletonAvatar, type SkeletonAvatarProps,
+  SkeletonBlock, type SkeletonBlockProps,
+  SkeletonButton, type SkeletonButtonProps,
+  SkeletonImage, type SkeletonImageProps,
+  SkeletonInput, type SkeletonInputProps,
+  SkeletonText, type SkeletonTextProps,
+} from '@fex-design/solid/primitive/skeleton'

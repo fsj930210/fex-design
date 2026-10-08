@@ -1,6 +1,6 @@
 import type { CalendarValue } from '@fex-design/core/calendar'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
-import { Popover, type PopoverProps } from '../popover/popover'
+import { Popover, type PopoverProps } from '../popover'
 import { RangePickerContext } from './context'
 import { useRangePicker, type UseRangePickerOptions } from './use-range-picker'
 

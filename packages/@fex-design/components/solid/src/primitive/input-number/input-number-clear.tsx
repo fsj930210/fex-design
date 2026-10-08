@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'solid-js'
-import { InputClear } from '../input/input'
+import { InputClear } from '../input'
 import { useInputNumberContext } from './input-number-context'
 export function InputNumberClear(props: ComponentProps<typeof InputClear>) {
   const n = useInputNumberContext('InputNumberClear')

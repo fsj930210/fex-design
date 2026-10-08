@@ -9,7 +9,7 @@ import {
 } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import { splitProps, useContext, type JSX } from 'solid-js'
-import Button, { type ButtonProps } from '../button/button'
+import { Button, type ButtonProps } from '../button'
 import { DatePickerContext, RangePickerContext } from './context'
 
 function useFooterOwner() {

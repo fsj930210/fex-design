@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { PopoverContent, PopoverPortal } from '../popover/popover'
+import { PopoverContent, PopoverPortal } from '../popover'
 
 export interface DatePickerContentProps extends ComponentProps<typeof PopoverContent> {}
 

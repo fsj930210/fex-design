@@ -1,6 +1,6 @@
 import { createContext, use, type PropsWithChildren } from 'react'
 import type { I18nController } from '@fex-design/core/i18n/types'
-import { useCoreStore } from '../hooks/use-core-store'
+import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 
 const I18nContext = createContext<I18nController | undefined>(undefined)
 

@@ -1,4 +1,4 @@
-import type { TourTargetRect } from '@fex-design/core/tour/types'
+
 import { tourOverlayClassName } from '@fex-design/components-styles/tour'
 import { cn } from '@fex-design/utils'
 import { createMemo, Show, type JSX } from 'solid-js'
@@ -6,7 +6,7 @@ import { useTourContext } from './tour-context'
 
 export interface TourOverlayRenderProps {
   props: JSX.HTMLAttributes<HTMLDivElement>
-  targetRect: TourTargetRect | null
+  targetRect: DOMRect | null
   gap: number | [number, number]
   color: string
 }

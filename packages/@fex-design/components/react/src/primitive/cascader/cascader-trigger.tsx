@@ -13,8 +13,8 @@ import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { XIcon } from '@fex-design/react/icons/x'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
-import { PopoverTrigger } from '../popover/popover'
-import { Tag } from '../tag/tag'
+import { PopoverTrigger } from '../popover'
+import { Tag } from '../tag'
 import { useCascader } from './cascader-context'
 
 export interface CascaderTriggerProps extends Omit<ComponentProps<'div'>, 'children'> {

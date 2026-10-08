@@ -7,7 +7,7 @@
     toast as defaultToast,
     type SvelteToastItem,
     type SvelteToastManager,
-  } from "./toast";
+  } from "./toast-manager";
 
   interface Props extends Omit<HTMLButtonAttributes, "class"> {
     children?: Snippet;

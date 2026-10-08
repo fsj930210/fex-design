@@ -1,6 +1,6 @@
 import { useInputNumber } from '@fex-design/react/primitive/input-number/use-input-number'
-import { MinusIcon } from '@fex-design/react/icon/minus'
-import { PlusIcon } from '@fex-design/react/icon/plus'
+import { MinusIcon } from '@fex-design/react/icons/minus'
+import { PlusIcon } from '@fex-design/react/icons/plus'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
 

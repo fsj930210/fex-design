@@ -1,5 +1,5 @@
 <script lang="ts">
-  import InputNumber from "@fex-design/svelte/ui/input-number";
+  import { InputNumber } from "@fex-design/svelte/ui/input-number";
 </script>
 
 <div class="grid w-full gap-2">

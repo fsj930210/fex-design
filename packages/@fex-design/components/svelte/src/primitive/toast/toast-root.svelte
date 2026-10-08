@@ -10,7 +10,7 @@
     toast as defaultToast,
     type SvelteToastItem,
     type SvelteToastManager,
-  } from "./toast";
+  } from "./toast-manager";
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class"> {
     children?: Snippet;

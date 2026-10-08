@@ -1,5 +1,5 @@
-import { InfoIcon } from '@fex-design/react/icon/info'
-import { CheckIcon } from '@fex-design/react/icon/check'
+import { InfoIcon } from '@fex-design/react/icons/info'
+import { CheckIcon } from '@fex-design/react/icons/check'
 import {
   SelectContent,
   SelectRoot,

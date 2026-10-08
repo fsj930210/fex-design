@@ -1,5 +1,5 @@
-import { ChevronRightIcon } from '@fex-design/react/icon/chevron'
-import { TrashIcon } from '@fex-design/react/icon/trash'
+import { ChevronRightIcon } from '@fex-design/react/icons/chevron'
+import { TrashIcon } from '@fex-design/react/icons/trash'
 import { SwitchRoot, SwitchThumb } from '@fex-design/react/primitive/switch'
 import {
   TransferActions,

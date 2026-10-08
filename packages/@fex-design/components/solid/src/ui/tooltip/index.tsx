@@ -55,7 +55,7 @@ export function Tooltip(props: TooltipProps) {
   )
 }
 
-export { useTooltip } from '@fex-design/solid/primitive/tooltip-context'
+export { useTooltip } from '@fex-design/solid/primitive/tooltip'
 export type {
   TooltipOptions,
   TooltipClassNames,

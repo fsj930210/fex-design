@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '..'
 </script>
 <template>
   <AspectRatio :ratio="16 / 9"

@@ -1,7 +1,7 @@
 import { timePickerRootClassName } from '@fex-design/components-styles/time-picker'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
-import { PopoverContent, PopoverPortal } from '../popover/popover'
+import { PopoverContent, PopoverPortal } from '../popover'
 
 export interface TimePickerContentProps extends ComponentProps<typeof PopoverContent> {}
 

@@ -1,4 +1,4 @@
-import { EllipsisIcon } from '@fex-design/react/icon/more'
+import { EllipsisIcon } from '@fex-design/react/icons/more'
 import * as Sortable from '@fex-design/react/primitive/sortable'
 import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/react/primitive/tabs'
 import { Card } from '@fex-design/react/ui/card'

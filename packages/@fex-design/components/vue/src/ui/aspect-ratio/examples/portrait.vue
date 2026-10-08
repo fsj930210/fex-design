@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '..'
 import image from './aspect-ratio-demo.svg'
 </script>
 <template>

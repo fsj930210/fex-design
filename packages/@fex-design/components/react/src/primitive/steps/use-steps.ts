@@ -128,3 +128,5 @@ export function useSteps<TData = unknown>(options: UseStepsOptions<TData> = {}) 
 
   return { snapshot, orientation, navigation, responsive: options.responsive ?? true, getStepProps }
 }
+
+export type StepsInstance<TData = unknown> = ReturnType<typeof useSteps<TData>>

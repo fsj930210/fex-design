@@ -1,4 +1,4 @@
-import { menuItemClassName, menuListClassName, menuRootClassName } from '@fex-design/styles/menu'
+import { menuItemClassName, menuListClassName, menuRootClassName } from '@fex-design/components-styles/menu'
 
 export const rootClassName = menuRootClassName({ size: 'md' })
 export const horizontalListClassName = menuListClassName({ orientation: 'horizontal' })

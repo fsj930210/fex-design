@@ -1,7 +1,7 @@
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
-import { Tag } from '../tag/tag'
+import { Tag } from '../tag'
 import { useDatePickerContext } from './context'
 
 export interface DatePickerTagsProps extends ComponentProps<'div'> {

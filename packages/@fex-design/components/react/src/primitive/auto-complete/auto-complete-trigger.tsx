@@ -1,7 +1,7 @@
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
-import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input'
-import { PopoverTrigger } from '../popover/popover'
+import { InputClear, InputControl, InputRoot, InputSuffix } from '../input'
+import { PopoverTrigger } from '../popover'
 import { useAutoComplete } from './use-auto-complete'
 
 export interface AutoCompleteTriggerProps extends Omit<

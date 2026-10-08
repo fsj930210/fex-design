@@ -44,8 +44,8 @@ import {
 } from '@fex-design/vue/icons/chevron'
 import { MinusIcon } from '@fex-design/vue/icons/minus'
 import Button from '../button/button.vue'
-import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
-import { ListboxItem, ListboxRoot } from '../listbox/listbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox'
+import { ListboxItem, ListboxRoot } from '../listbox'
 
 export interface TransferPanelApi<T extends Record<string, unknown>> {
   side: TransferSide

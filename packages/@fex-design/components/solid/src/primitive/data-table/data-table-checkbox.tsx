@@ -1,5 +1,5 @@
 import type { JSX } from 'solid-js'
-import { Checkbox } from '../../ui/checkbox/checkbox'
+import { Checkbox } from '../../ui/checkbox'
 
 interface DataTableCheckboxProps extends Omit<
   JSX.InputHTMLAttributes<HTMLInputElement>,

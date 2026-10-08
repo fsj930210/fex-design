@@ -15,8 +15,8 @@ import {
   InputRoot,
   InputSuffix,
   type InputRootProps,
-} from '../input/input'
-import { PopoverTrigger } from '../popover/popover'
+} from '../input'
+import { PopoverTrigger } from '../popover'
 import { useRef, useState, type ComponentProps, type ReactNode } from 'react'
 import { useDatePickerContext } from './context'
 import { DatePickerTags } from './date-picker-tags'

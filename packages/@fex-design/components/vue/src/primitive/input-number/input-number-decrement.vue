@@ -2,7 +2,7 @@
 import { inputNumberDecrementClassName } from '@fex-design/components-styles/input-number'
 import { cn } from '@fex-design/utils'
 import { inject } from 'vue'
-import { Button } from '../button/button'
+import { Button } from '../button'
 import MinusIcon from '@fex-design/vue/icons/minus-icon.vue'
 import { inputNumberContextKey } from './context'
 defineOptions({ name: 'InputNumberDecrement' })

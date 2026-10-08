@@ -1,7 +1,7 @@
 import type { ColumnDef, RowData, TableFeatures } from '@tanstack/react-table'
 import { MinusIcon } from '@fex-design/react/icons/minus'
 import { PlusIcon } from '@fex-design/react/icons/plus'
-import { Button } from '../../ui/button/button'
+import { Button } from '../../ui/button'
 
 export interface DataTableExpandColumnOptions {
   id?: string

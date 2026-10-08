@@ -5,7 +5,7 @@ import {
   type CalendarValue,
 } from '@fex-design/core/calendar'
 import { isAfterDate, isBeforeDate } from '@fex-design/core/date/utils'
-import { CalendarIcon } from '@fex-design/react/icon/calendar'
+import { CalendarIcon } from '@fex-design/react/icons/calendar'
 import { useState } from 'react'
 import {
   ConfirmFooter,

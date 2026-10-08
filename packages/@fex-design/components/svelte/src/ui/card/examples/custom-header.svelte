@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Card from "@fex-design/svelte/ui/card";
+  import { Card } from "@fex-design/svelte/ui/card";
   import CardHeader from '@fex-design/svelte/primitive/card/card-header.svelte';
   import CardTitle from '@fex-design/svelte/primitive/card/card-title.svelte';
   import CardDescription from '@fex-design/svelte/primitive/card/card-description.svelte';

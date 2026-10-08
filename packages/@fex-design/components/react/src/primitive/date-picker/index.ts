@@ -6,7 +6,7 @@ export {
   type DatePickerContextValue,
   type RangePickerContextValue,
 } from './context'
-export { DatePickerContent, type DatePickerContentProps } from './date-picker-content'
+export { DatePickerContent, RangePickerContent, type DatePickerContentProps } from './date-picker-content'
 export {
   DatePickerFooter,
   DatePickerConfirm,

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import InputNumber from "@fex-design/svelte/ui/input-number";
+  import { InputNumber } from "@fex-design/svelte/ui/input-number";
   const formatter = (value: number | undefined) =>
     value === undefined ? "" : `￥${value.toLocaleString("zh-CN")}`;
   const parser = (text: string) => {

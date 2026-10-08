@@ -5,7 +5,7 @@ import type {
   RowData,
   TableFeatures,
 } from '@tanstack/table-core'
-import { Radio, RadioGroup } from '../radio/radio'
+import { Radio, RadioGroup } from '../radio'
 import { DataTableCheckbox } from './data-table-checkbox'
 
 interface SelectionTable {

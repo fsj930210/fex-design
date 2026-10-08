@@ -16,7 +16,7 @@ import { CheckIcon } from '@fex-design/vue/icons/check'
 import { ChevronRightIcon } from '@fex-design/vue/icons/chevron'
 import { LoadingIcon } from '@fex-design/vue/icons/loading'
 import { MinusIcon } from '@fex-design/vue/icons/minus'
-import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
+import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox'
 import { useCascader } from './use-cascader'
 
 const props = defineProps<{ node: CascaderNode; label?: string }>()

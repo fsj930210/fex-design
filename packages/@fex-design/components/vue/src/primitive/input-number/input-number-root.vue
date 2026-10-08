@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputNumberFormatter, InputNumberParser } from '@fex-design/core/input-number/types'
 import { getCurrentInstance, provide } from 'vue'
-import { InputRoot } from '../input/input'
+import { InputRoot } from '../input'
 import { inputNumberContextKey } from './context'
 import { useInputNumber } from './use-input-number'
 

@@ -173,3 +173,5 @@ function getDropIndicatorStyle(element: HTMLElement | null, indicatorOffset: num
     '--tree-drop-inline-width': `${Math.max(0, (treeRect?.right ?? itemRect.right) - itemRect.left - left)}px`,
   }
 }
+
+export type CreateTreeDndItemReturn<TNode extends TreeNodeData = TreeNodeData> = ReturnType<typeof createTreeDndItem<TNode>>

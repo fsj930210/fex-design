@@ -10,7 +10,7 @@ import {
 import { cn } from '@fex-design/utils'
 import { computed, ref, watch } from 'vue'
 import { CalendarIcon } from '@fex-design/vue/icons/calendar'
-import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input'
+import { InputClear, InputControl, InputRoot, InputSuffix } from '../input'
 import PopoverTrigger from '../popover/popover-trigger.vue'
 import { useRangePickerContext } from './context'
 

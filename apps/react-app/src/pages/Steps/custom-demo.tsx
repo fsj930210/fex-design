@@ -1,5 +1,5 @@
 import { Step, StepContent, StepIndicator, Steps } from '@fex-design/react/primitive/steps'
-import { ErrorIcon } from '@fex-design/react/icon/error'
+import { ErrorIcon } from '@fex-design/react/icons/error'
 import { Card } from '@fex-design/react/ui/card'
 import { StepList } from './step-list'
 export function CustomDemo() {

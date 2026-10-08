@@ -1,6 +1,6 @@
 import { createContext, useContext, type Accessor, type ParentProps } from 'solid-js'
 import type { I18nController, I18nSnapshot } from '@fex-design/core/i18n/types'
-import { createCoreStoreSignal } from '../primitives/create-core-store-signal'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 
 interface I18nContextValue {
   controller: I18nController

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PopoverTrigger } from '../popover/popover'
+import { PopoverTrigger } from '../popover'
 </script>
 
 <template>

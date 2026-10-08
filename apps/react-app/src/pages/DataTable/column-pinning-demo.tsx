@@ -10,8 +10,8 @@ import {
   type ColumnDef,
 } from '@fex-design/react/primitive/data-table'
 import { Button } from '@fex-design/react/ui/button'
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/react/icon/chevron'
-import { MinusIcon } from '@fex-design/react/icon/minus'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/react/icons/chevron'
+import { MinusIcon } from '@fex-design/react/icons/minus'
 import { DataTableDemoSection, DemoBranch } from './demo-section'
 import { people6, type Person } from './data'
 

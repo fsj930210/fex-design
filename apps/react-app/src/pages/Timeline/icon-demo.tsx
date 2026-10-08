@@ -1,6 +1,6 @@
-import { CheckIcon } from '@fex-design/react/icon/check'
-import { ClockIcon } from '@fex-design/react/icon/clock'
-import { ErrorIcon } from '@fex-design/react/icon/error'
+import { CheckIcon } from '@fex-design/react/icons/check'
+import { ClockIcon } from '@fex-design/react/icons/clock'
+import { ErrorIcon } from '@fex-design/react/icons/error'
 import {
   Timeline,
   TimelineContent,

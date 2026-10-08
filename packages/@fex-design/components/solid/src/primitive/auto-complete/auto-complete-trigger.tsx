@@ -1,7 +1,7 @@
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
-import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input'
-import { PopoverTrigger } from '../popover/popover'
+import { InputClear, InputControl, InputRoot, InputSuffix } from '../input'
+import { PopoverTrigger } from '../popover'
 import { useAutoComplete } from './context'
 
 export interface AutoCompleteTriggerProps extends ParentProps<

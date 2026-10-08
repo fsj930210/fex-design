@@ -8,7 +8,7 @@ import type {
 import { type ComponentProps, type ReactNode, useId, useRef } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
-import { PopoverRoot } from '../popover/popover'
+import { PopoverRoot } from '../popover'
 import { AutoCompleteContext, type AutoCompleteContextValue } from './auto-complete-context'
 
 export interface AutoCompleteRootProps<TItem extends object = AutoCompleteItem> extends Omit<

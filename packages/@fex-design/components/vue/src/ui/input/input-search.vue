@@ -4,7 +4,7 @@ import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/com
 import { computed, ref, useAttrs } from 'vue'
 import { SearchIcon } from '@fex-design/vue/icons/search'
 import { LoadingIcon } from '@fex-design/vue/icons/loading'
-import { Button } from '../button/button'
+import { Button } from '../button'
 import Input from './input.vue'
 import type { InputProps } from './input.types'
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-import { InputClear } from '../input/input'
+import { InputClear } from '../input'
 import { inputNumberContextKey } from './context'
 defineOptions({ name: 'InputNumberClear' })
 const inputNumber = inject(inputNumberContextKey)

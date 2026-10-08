@@ -2,7 +2,7 @@
 import { format as formatDate, parse } from '@fex-design/core/date/utils'
 import { computed, inject, ref, watch } from 'vue'
 import { ClockIcon } from '@fex-design/vue/icons/clock'
-import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
+import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input'
 import PopoverTrigger from '../popover/popover-trigger.vue'
 import { timePickerContextKey } from './context'
 

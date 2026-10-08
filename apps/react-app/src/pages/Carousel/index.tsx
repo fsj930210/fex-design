@@ -1,5 +1,5 @@
 import AutoHeight from 'embla-carousel-auto-height'
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/react/icon/chevron'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/react/icons/chevron'
 import {
   CarouselRoot,
   CarouselSlide,
@@ -11,7 +11,7 @@ import { Card } from '@fex-design/react/ui/card'
 import {
   carouselIndicatorClassName,
   carouselIndicatorsClassName,
-} from '@fex-design/styles/carousel'
+} from '@fex-design/components-styles/carousel'
 import { Link } from 'react-router'
 
 const slides = ['订单概览', '待办审批', '团队动态']

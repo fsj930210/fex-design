@@ -14,7 +14,7 @@ import {
   type ColumnDef,
 } from '@fex-design/react/primitive/data-table'
 import { cn } from '@fex/utils'
-import { EllipsisIcon } from '@fex-design/react/icon/more'
+import { EllipsisIcon } from '@fex-design/react/icons/more'
 import { useCallback, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { DataTableDemoSection, DemoBranch } from './demo-section'

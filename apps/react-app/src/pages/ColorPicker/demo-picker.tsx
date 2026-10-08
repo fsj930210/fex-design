@@ -1,7 +1,7 @@
 import { getColorChannelConfig, getColorChannelValue } from '@fex-design/core/color-picker/channels'
 import { parseColor } from '@fex-design/core/color/color'
 import type { ColorFormat } from '@fex-design/core/color/types'
-import { ChevronDownIcon } from '@fex-design/react/icon/chevron'
+import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { InputControl, InputRoot } from '@fex-design/react/primitive/input'
 import { InputNumber } from '@fex-design/react/ui/input-number'
 import {

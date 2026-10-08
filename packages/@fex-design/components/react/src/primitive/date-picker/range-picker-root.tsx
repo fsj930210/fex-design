@@ -1,6 +1,6 @@
 import type { CalendarValue } from '@fex-design/core/calendar'
 import type { ReactNode } from 'react'
-import { PopoverRoot, type PopoverRootProps } from '../popover/popover'
+import { PopoverRoot, type PopoverRootProps } from '../popover'
 import { RangePickerContext } from './context'
 import { useRangePicker, type UseRangePickerOptions } from './use-range-picker'
 

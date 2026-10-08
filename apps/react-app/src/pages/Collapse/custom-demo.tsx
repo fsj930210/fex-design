@@ -1,7 +1,7 @@
 import { Collapse, CollapseContent, CollapseItem } from '@fex-design/react/primitive/collapse'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
-import { ChevronRightIcon } from '@fex-design/react/icon/chevron'
+import { ChevronRightIcon } from '@fex-design/react/icons/chevron'
 import { cn } from '@fex/utils'
 import { collapseItems } from './demo-data'
 

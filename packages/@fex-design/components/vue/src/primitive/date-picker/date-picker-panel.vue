@@ -22,7 +22,7 @@ import {
   CalendarGrid,
   CalendarRoot,
   CalendarWeekHeader,
-} from '../calendar/calendar'
+} from '../calendar'
 import { useDatePickerContext, useRangePickerContext } from './context'
 import DatePickerHeader from './date-picker-header.vue'
 import DatePickerHeaderButton from './date-picker-header-button.vue'

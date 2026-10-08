@@ -1,4 +1,4 @@
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '..'
 import image from './aspect-ratio-demo.svg'
 
 export function PortraitDemo() {

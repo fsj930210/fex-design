@@ -1,4 +1,4 @@
-import { CalendarIcon } from '@fex-design/react/icon/calendar'
+import { CalendarIcon } from '@fex-design/react/icons/calendar'
 import { Card } from '@fex-design/react/ui/card'
 import { DemoTimePicker } from './demo-time-picker'
 export function DecorationDemo() {

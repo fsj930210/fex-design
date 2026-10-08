@@ -6,7 +6,7 @@ import { EyeIcon } from '@fex-design/solid/icons/eye'
 import { EyeOffIcon } from '@fex-design/solid/icons/eye-off'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
 import { SearchIcon } from '@fex-design/solid/icons/search'
-import { Button } from '../button/button'
+import { Button } from '../button'
 import {
   InputAddonAfter,
   InputAddonBefore,

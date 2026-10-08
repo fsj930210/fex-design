@@ -12,10 +12,10 @@ import { cn } from '@fex-design/utils'
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
-import { Tag, TagAction } from '../tag/tag'
-import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
+import { Tag, TagAction } from '../tag'
+import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input'
 import type { InputProps } from '../../ui/input/input.types'
-import { PopoverTrigger } from '../popover/popover'
+import { PopoverTrigger } from '../popover'
 import { useSelect } from './use-select'
 
 export interface SelectTriggerProps extends Omit<ComponentProps<'div'>, 'children' | 'prefix'> {

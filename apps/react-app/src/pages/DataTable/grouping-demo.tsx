@@ -17,7 +17,7 @@ import {
   type Row,
 } from '@fex-design/react/primitive/data-table'
 import { Button } from '@fex-design/react/ui/button'
-import { ChevronDownIcon, ChevronRightIcon } from '@fex-design/react/icon/chevron'
+import { ChevronDownIcon, ChevronRightIcon } from '@fex-design/react/icons/chevron'
 import { DataTableDemoSection, DemoBranch } from './demo-section'
 import { people9, type Person } from './data'
 

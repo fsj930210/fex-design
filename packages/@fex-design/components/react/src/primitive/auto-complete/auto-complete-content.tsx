@@ -4,9 +4,9 @@ import {
 } from '@fex-design/components-styles/auto-complete'
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, type ReactNode } from 'react'
-import { Empty, EmptyDescription } from '../empty/empty'
-import { PopoverContent, PopoverPortal } from '../popover/popover'
-import { Spinner } from '../../ui/spinner/spinner'
+import { Empty, EmptyDescription } from '../empty'
+import { PopoverContent, PopoverPortal } from '../popover'
+import { Spinner } from '../../ui/spinner'
 import { AutoCompleteList } from './auto-complete-list'
 import { useAutoComplete } from './use-auto-complete'
 

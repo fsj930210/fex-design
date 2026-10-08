@@ -2,7 +2,7 @@
 import { inputNumberIncrementClassName } from '@fex-design/components-styles/input-number'
 import { cn } from '@fex-design/utils'
 import { inject } from 'vue'
-import { Button } from '../button/button'
+import { Button } from '../button'
 import PlusIcon from '@fex-design/vue/icons/plus-icon.vue'
 import { inputNumberContextKey } from './context'
 defineOptions({ name: 'InputNumberIncrement' })

@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { InputControl } from '../input/input'
+import { InputControl } from '../input'
 import { useInputNumberContext } from './input-number-context'
 
 export interface InputNumberControlProps extends Omit<

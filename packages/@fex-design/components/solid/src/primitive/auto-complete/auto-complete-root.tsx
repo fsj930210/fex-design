@@ -6,7 +6,7 @@ import type {
 } from '@fex-design/core/auto-complete/types'
 import { createMemo, createUniqueId, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
-import { Popover, type PopoverProps } from '../popover/popover'
+import { Popover, type PopoverProps } from '../popover'
 import { AutoCompleteContext, type AutoCompleteContextValue } from './context'
 
 export interface AutoCompleteRootProps<TItem extends object = Record<string, unknown>>

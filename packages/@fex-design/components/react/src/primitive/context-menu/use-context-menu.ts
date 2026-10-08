@@ -11,7 +11,7 @@ import { popoverContentClassName, popoverMenuContentClassName } from '@fex-desig
 import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
-import type { ContextMenuTriggerRenderProps } from './context-menu'
+import type { ContextMenuTriggerRenderProps } from './context-menu-trigger'
 import { useContextMenuContext } from './context-menu-context'
 
 function eventInfo(event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) {

@@ -11,7 +11,9 @@ description: 用于独立加载提示或保留内容状态下的局部 loading �
 
 不要用 Spinner 表达明确的空状态、失败状态或权限状态：这些场景应分别使用 Empty、错误提示或业务反馈组件。
 
-## 独立指示器
+## 示例
+
+### 独立指示器
 
 ```tsx
 <Spinner size="sm" aria-label="加载中" />
@@ -19,7 +21,7 @@ description: 用于独立加载提示或保留内容状态下的局部 loading �
 
 `Spinner` 默认使用内置 LoadingIcon。需要替换图标时，直接传入框架对应的内容或 slot；不需要为此再创建新的 Spinner 类型。
 
-## 内容 loading
+### 内容 loading
 
 ```tsx
 <SpinnerContainer spinning={loading} text="正在加载数据">
@@ -35,7 +37,7 @@ description: 用于独立加载提示或保留内容状态下的局部 loading �
 | `false`     | 仅显示 children，不显示遮罩。                     |
 | `true`      | 保留 children，并在内容上方显示遮罩和 Spinner。   |
 
-## 自定义指示器与文本
+### 自定义指示器与文本
 
 容器场景中使用 `indicator` 替换默认 LoadingIcon，使用 `text` 提供描述内容。独立 Spinner 则使用 children 或框架 slot 替换图标。
 
@@ -44,8 +46,6 @@ description: 用于独立加载提示或保留内容状态下的局部 loading �
   <ProjectList />
 </SpinnerContainer>
 ```
-
-## 示例
 
 <Demos />
 

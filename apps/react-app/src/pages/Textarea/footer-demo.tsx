@@ -6,9 +6,9 @@ import {
 } from '@fex-design/react/primitive/textarea'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
-import { CheckIcon } from '@fex-design/react/icon/check'
-import { InfoIcon } from '@fex-design/react/icon/info'
-import { PlusIcon } from '@fex-design/react/icon/plus'
+import { CheckIcon } from '@fex-design/react/icons/check'
+import { InfoIcon } from '@fex-design/react/icons/info'
+import { PlusIcon } from '@fex-design/react/icons/plus'
 import { useState } from 'react'
 
 export function FooterDemo() {

@@ -1,6 +1,6 @@
 import { inject, Injectable, InjectionToken, type Provider } from '@angular/core'
 import type { ChangeLanguageOptions, I18nBundle, I18nController } from '@fex-design/core/i18n/types'
-import { createCoreStoreSignal } from '../signals/core-store-signal'
+import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 
 export const FEX_I18N_CONTROLLER = new InjectionToken<I18nController>('FEX_I18N_CONTROLLER')
 

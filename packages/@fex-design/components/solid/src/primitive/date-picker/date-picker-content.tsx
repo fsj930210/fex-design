@@ -1,7 +1,7 @@
 import { datePickerContentClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import { splitProps, type ParentProps } from 'solid-js'
-import { PopoverContent, PopoverPortal, type PopoverContentProps } from '../popover/popover'
+import { PopoverContent, PopoverPortal, type PopoverContentProps } from '../popover'
 
 export interface DatePickerContentProps extends ParentProps<PopoverContentProps> {}
 

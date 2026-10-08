@@ -18,7 +18,7 @@ import {
 import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
 import { useTimePickerContext } from './time-picker-context'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar/scrollbar'
+import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar'
 
 type ColumnValue = number | TimePeriod
 

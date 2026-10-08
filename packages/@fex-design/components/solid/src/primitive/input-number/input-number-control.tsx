@@ -1,5 +1,5 @@
 import { splitProps, type JSX } from 'solid-js'
-import { InputControl } from '../input/input'
+import { InputControl } from '../input'
 import { useInputNumberContext } from './input-number-context'
 export function InputNumberControl(
   props: Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'value' | 'type'>,

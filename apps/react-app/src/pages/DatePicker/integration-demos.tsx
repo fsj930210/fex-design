@@ -1,7 +1,7 @@
 import { getCalendarToday, type CalendarDate, type CalendarRange } from '@fex-design/core/calendar'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import { endOfDate } from '@fex-design/core/date/utils'
-import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
+import { datePickerDateTimePanelClassName } from '@fex-design/components-styles/date-picker'
 import {
   DatePickerConfirm,
   DatePickerContent,
@@ -24,7 +24,7 @@ import {
   useTimePicker,
   type TimeValue,
 } from '@fex-design/react/primitive/time-picker'
-import { CalendarIcon } from '@fex-design/react/icon/calendar'
+import { CalendarIcon } from '@fex-design/react/icons/calendar'
 import { Button } from '@fex-design/react/ui/button'
 import { useState, type ComponentProps, type ContextType } from 'react'
 import { DemoRangePicker, DemoSection, RangePreview } from './shared'

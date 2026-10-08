@@ -9,7 +9,7 @@ import { cn } from '@fex-design/utils'
 import type { RowData, TableFeatures } from '@tanstack/table-core'
 import { For, splitProps, type JSX } from 'solid-js'
 import type { SolidDataTable } from '@fex-design/solid/primitives/create-data-table'
-import { Button } from '../../ui/button/button'
+import { Button } from '../../ui/button'
 
 interface PaginationTable {
   getRowCount: () => number

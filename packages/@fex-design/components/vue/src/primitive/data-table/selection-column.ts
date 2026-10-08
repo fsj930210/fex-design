@@ -7,7 +7,7 @@ import type {
 } from '@tanstack/table-core'
 import { h } from 'vue'
 import DataTableCheckbox from './data-table-checkbox.vue'
-import { Radio, RadioGroup } from '../radio/radio'
+import { Radio, RadioGroup } from '../radio'
 interface SelectionTable {
   getIsAllRowsSelected(): boolean
   getIsSomeRowsSelected(): boolean

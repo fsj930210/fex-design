@@ -1,7 +1,7 @@
 import type { CellContext, ColumnDef, RowData, TableFeatures } from '@tanstack/table-core'
 import { MinusIcon } from '@fex-design/solid/icons/minus'
 import { PlusIcon } from '@fex-design/solid/icons/plus'
-import { Button } from '../../ui/button/button'
+import { Button } from '../../ui/button'
 
 interface ExpandableRow {
   id: string

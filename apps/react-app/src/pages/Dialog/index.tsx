@@ -1,5 +1,5 @@
 import * as Dialog from '@fex-design/react/primitive/dialog'
-import { CloseIcon } from '@fex-design/react/icon/close'
+import { XIcon as CloseIcon } from '@fex-design/react/icons/x'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
 import { useState, type ReactNode } from 'react'

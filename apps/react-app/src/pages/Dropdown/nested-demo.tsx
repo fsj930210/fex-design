@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@fex-design/react/icon/chevron'
+import { ChevronRightIcon } from '@fex-design/react/icons/chevron'
 import * as Dropdown from '@fex-design/react/primitive/dropdown'
 import * as Popover from '@fex-design/react/primitive/popover'
 import { MenuAction, MenuSurface, triggerClassName } from './demo-parts'

@@ -1,4 +1,4 @@
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '..'
 export function Portrait() {
   return (
     <AspectRatio ratio={9 / 16} class="max-w-48">

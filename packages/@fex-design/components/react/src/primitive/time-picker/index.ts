@@ -24,3 +24,5 @@ export {
   useTimePickerContext,
   type TimePickerContextValue,
 } from './time-picker-context'
+
+export type { DisabledTime, TimeValue } from '@fex-design/core/time-picker/types'

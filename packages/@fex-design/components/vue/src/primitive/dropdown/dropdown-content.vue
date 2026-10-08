@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { popoverMenuContentClassName } from '@fex-design/components-styles/popover'
 import { cn } from '@fex-design/utils'
-import { PopoverContent } from '../popover/popover'
+import { PopoverContent } from '../popover'
 import { usePopoverContext } from '../popover/context'
 const props = withDefaults(defineProps<{ class?: string; role?: string }>(), { role: 'menu' })
 const { hoverAncestors, overlay } = usePopoverContext('DropdownContent')

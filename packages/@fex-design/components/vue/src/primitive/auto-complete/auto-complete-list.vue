@@ -5,8 +5,8 @@ import {
 } from '@fex-design/components-styles/auto-complete'
 import { cn } from '@fex-design/utils'
 import { computed } from 'vue'
-import { Empty, EmptyDescription } from '../empty/empty'
-import { Spinner } from '../../ui/spinner/spinner'
+import { Empty, EmptyDescription } from '../empty'
+import { Spinner } from '../../ui/spinner'
 import { useAutoComplete } from './use-auto-complete'
 
 defineOptions({ inheritAttrs: false })

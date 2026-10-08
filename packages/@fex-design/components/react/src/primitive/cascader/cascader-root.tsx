@@ -8,7 +8,7 @@ import type {
 } from '@fex-design/core/cascader/types'
 import { type ComponentProps, type ReactNode, useRef } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
-import { PopoverRoot } from '../popover/popover'
+import { PopoverRoot } from '../popover'
 import { CascaderContext } from './cascader-context'
 
 export interface CascaderRootProps extends Omit<

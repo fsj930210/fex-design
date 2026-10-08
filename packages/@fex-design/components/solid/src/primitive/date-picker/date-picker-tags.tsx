@@ -2,7 +2,7 @@ import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import {} from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import { For, Show, splitProps, type JSX } from 'solid-js'
-import { Tag } from '../tag/tag'
+import { Tag } from '../tag'
 import { useDatePickerContext } from './context'
 
 export interface DatePickerTagsProps extends JSX.HTMLAttributes<HTMLDivElement> {

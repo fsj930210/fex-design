@@ -10,7 +10,7 @@ import type { SelectionValue } from '@fex-design/core/selection/types'
 import { type ComponentProps, type ReactNode, useId, useRef } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
-import { PopoverRoot } from '../popover/popover'
+import { PopoverRoot } from '../popover'
 import { SelectContext } from './select-context'
 
 export interface SelectChangeMeta {

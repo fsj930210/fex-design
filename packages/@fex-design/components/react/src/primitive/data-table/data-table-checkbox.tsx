@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'react'
-import { Checkbox } from '../../ui/checkbox/checkbox'
+import { Checkbox } from '../../ui/checkbox'
 
 interface DataTableCheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,

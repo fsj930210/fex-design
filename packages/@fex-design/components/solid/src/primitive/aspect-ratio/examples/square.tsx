@@ -1,4 +1,4 @@
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '..'
 export function Square() {
   return (
     <AspectRatio ratio={1} class="max-w-64">

@@ -1,5 +1,5 @@
 import type { ColumnDef, RowData, TableFeatures } from '@tanstack/react-table'
-import { Radio, RadioGroup } from '../radio/radio'
+import { Radio, RadioGroup } from '../radio'
 import { DataTableCheckbox } from './data-table-checkbox'
 
 export interface DataTableSelectionColumnOptions {

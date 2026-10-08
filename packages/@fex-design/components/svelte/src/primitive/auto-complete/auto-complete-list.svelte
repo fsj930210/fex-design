@@ -8,7 +8,7 @@
   import type { HTMLAttributes } from "svelte/elements";
   import Empty from "../empty/empty.svelte";
   import EmptyDescription from "../empty/empty-description.svelte";
-  import Spinner from "../../ui/spinner/spinner.svelte";
+  import { Spinner } from "../../ui/spinner";
   import { getAutoCompleteContext } from "./context";
   interface Props extends Omit<
     HTMLAttributes<HTMLDivElement>,

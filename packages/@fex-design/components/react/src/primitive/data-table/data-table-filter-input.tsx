@@ -2,7 +2,7 @@ import { dataTableInputRootClassName } from '@fex-design/components-styles/data-
 import { cn } from '@fex-design/utils'
 import type { Column, RowData, TableFeatures } from '@tanstack/react-table'
 import type { InputHTMLAttributes } from 'react'
-import { InputControl, InputRoot } from '../input/input'
+import { InputControl, InputRoot } from '../input'
 
 export interface DataTableFilterInputProps<
   TFeatures extends TableFeatures,

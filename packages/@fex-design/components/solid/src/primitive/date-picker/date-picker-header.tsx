@@ -8,7 +8,7 @@ import {
 import { cn } from '@fex-design/utils'
 import { Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/solid/icons/chevron'
-import Button, { type ButtonProps } from '../../ui/button/button'
+import { Button, type ButtonProps } from '../../ui/button'
 import { useCalendarContext } from '../calendar/calendar-context'
 
 export function DatePickerHeader(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {

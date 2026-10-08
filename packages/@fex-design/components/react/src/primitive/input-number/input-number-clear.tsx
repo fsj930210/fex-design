@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { InputClear } from '../input/input'
+import { InputClear } from '../input'
 import { useInputNumberContext } from './input-number-context'
 
 export interface InputNumberClearProps extends ComponentProps<typeof InputClear> {}

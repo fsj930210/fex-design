@@ -3,7 +3,7 @@ import { cn } from '@fex-design/utils'
 import type { Column, RowData, TableFeatures } from '@tanstack/table-core'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon, ChevronUpIcon } from '@fex-design/solid/icons/chevron'
-import { Button } from '../../ui/button/button'
+import { Button } from '../../ui/button'
 
 interface SortableColumn {
   getCanSort: () => boolean

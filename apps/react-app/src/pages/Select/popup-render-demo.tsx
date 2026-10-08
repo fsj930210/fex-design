@@ -2,7 +2,7 @@ import type { SelectOption } from '@fex-design/core/select/types'
 import { InputControl, InputRoot } from '@fex-design/react/primitive/input'
 import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { Button } from '@fex-design/react/ui/button'
-import { PlusIcon } from '@fex-design/react/icon/plus'
+import { PlusIcon } from '@fex-design/react/icons/plus'
 import { useState } from 'react'
 import { SelectDemoSection } from './demo-section'
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { I18nController } from "@fex-design/core/i18n/types";
-  import { readableCoreStore } from "../stores/core-store";
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { setI18nContext } from "./context";
 
   interface Props {

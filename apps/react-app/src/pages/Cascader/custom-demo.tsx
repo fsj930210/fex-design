@@ -5,7 +5,7 @@ import {
   CascaderTrigger,
   CascaderValue,
 } from '@fex-design/react/primitive/cascader'
-import { InfoIcon } from '@fex-design/react/icon/info'
+import { InfoIcon } from '@fex-design/react/icons/info'
 import { regionOptions } from './data'
 import { DemoSection } from './demo-section'
 export function CustomDemo() {

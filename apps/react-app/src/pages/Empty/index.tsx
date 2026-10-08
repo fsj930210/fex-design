@@ -1,6 +1,6 @@
 import { Badge } from '@fex-design/react/primitive/badge'
 import { Card } from '@fex-design/react/ui/card'
-import { CircleInfoIcon } from '@fex-design/react/icon/circle-info'
+import { InfoIcon as CircleInfoIcon } from '@fex-design/react/icons/info'
 import {
   Empty,
   EmptyContent,

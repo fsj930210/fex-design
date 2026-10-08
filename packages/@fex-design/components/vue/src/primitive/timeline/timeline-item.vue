@@ -2,7 +2,7 @@
 import { timelineItemClassName } from '@fex-design/components-styles/timeline'
 import { cn } from '@fex-design/utils'
 import { computed, useAttrs } from 'vue'
-import type { TimelinePlacement, TimelineStatus } from './timeline'
+import type { TimelinePlacement, TimelineStatus } from './index'
 
 defineOptions({ inheritAttrs: false })
 

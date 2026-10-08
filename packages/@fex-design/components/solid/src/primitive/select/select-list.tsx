@@ -18,7 +18,7 @@ import {
 import { cn } from '@fex-design/utils'
 import { createMemo, createSignal, For, Show, type JSX, type ParentProps } from 'solid-js'
 import { CheckIcon } from '@fex-design/solid/icons/check'
-import { PopoverContent, PopoverPortal } from '../popover/popover'
+import { PopoverContent, PopoverPortal } from '../popover'
 import { useSelect } from './select-context'
 
 export function SelectContent(

@@ -1,9 +1,8 @@
 import type { createTransferController } from '@fex-design/core/transfer/create-transfer-controller'
-import type { TransferDataItem, TransferKey, TransferSide } from '@fex-design/core/transfer/types'
+import type { TransferDataItem, TransferKey, TransferSide, TransferResolvedFieldNames } from '@fex-design/core/transfer/types'
 import {
   readTransferDisabled,
   readTransferKey,
-  type TransferResolvedFieldNames,
 } from '@fex-design/core/transfer/utils'
 import {
   checkboxCheckIconClassName,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, useAttrs } from 'vue'
-import { InputControl } from '../input/input'
+import { InputControl } from '../input'
 import { inputNumberContextKey } from './context'
 defineOptions({ name: 'InputNumberControl', inheritAttrs: false })
 const inputNumber = inject(inputNumberContextKey)

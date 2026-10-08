@@ -97,3 +97,12 @@ export function Skeleton({
     </div>
   )
 }
+
+export {
+  SkeletonAvatar, type SkeletonAvatarProps,
+  SkeletonBlock, type SkeletonBlockProps,
+  SkeletonButton, type SkeletonButtonProps,
+  SkeletonImage, type SkeletonImageProps,
+  SkeletonInput, type SkeletonInputProps,
+  SkeletonText, type SkeletonTextProps,
+} from '@fex-design/react/primitive/skeleton'

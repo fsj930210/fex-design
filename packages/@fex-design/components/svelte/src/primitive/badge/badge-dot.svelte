@@ -18,12 +18,6 @@
     ...rest
   }: BadgeDotProps = $props();
   const presetColor = $derived(isBadgePresetColor(color) ? color : undefined);
-  const customColor = $derived(color && !presetColor ? color : undefined);
-  const mergedStyle = $derived(
-    [style, customColor ? `--badge-color:${customColor}` : ""]
-      .filter(Boolean)
-      .join(";"),
-  );
 </script>
 
 <span
@@ -36,5 +30,5 @@
     badgeDotColorClassName({ color: presetColor }),
     className,
   )}
-  style={mergedStyle || undefined}
+  style={[style, color && !presetColor ? `--badge-color:${color}` : ""].filter(Boolean).join(";") || undefined}
 ></span>

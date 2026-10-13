@@ -2,6 +2,7 @@ import { createSignal, createMemo, createEffect, Show } from 'solid-js'
 import type { Framework } from './types'
 import { loadComponentSource } from './source-code-loader'
 import { SourceCodeCard } from './source-code-card'
+import { CodeBlock } from './code-block'
 
 type PackageManager = 'pnpm' | 'npm' | 'yarn' | 'bun'
 
@@ -66,8 +67,8 @@ export function Installation(props: {
       loadComponentSource(props.framework, 'ui', props.slug),
       loadComponentSource(props.framework, 'primitive', props.slug),
     ])
-    setUiSource(uiCode)
-    setPrimitiveSource(primCode)
+    setUiSource(uiCode.code)
+    setPrimitiveSource(primCode.code)
   })
 
   const ext = createMemo(() => {
@@ -162,18 +163,18 @@ export function Installation(props: {
             </span>
           </div>
 
-          <div class="overflow-hidden rounded-lg border border-border bg-[#18181b] text-white shadow-sm">
-            <div class="flex items-center justify-between border-b border-white/10 px-3 py-2 text-xs">
+          <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground shadow-sm">
+            <div class="flex items-center justify-between border-b border-border px-3 py-2 text-xs">
               <div class="flex items-center gap-2">
-                <span class="text-white/40 font-mono text-[11px]">&gt;_</span>
-                <div class="flex items-center gap-1 rounded bg-white/5 p-0.5">
+                <span class="text-muted-foreground font-mono text-[11px]">&gt;_</span>
+                <div class="flex items-center gap-1 rounded bg-background/50 p-0.5">
                   {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((name) => (
                     <button
                       type="button"
                       class={`rounded px-2 py-0.5 font-mono text-[11px] transition-colors cursor-pointer ${
                         pm() === name
-                          ? 'bg-white/20 text-white font-semibold'
-                          : 'text-white/60 hover:text-white'
+                          ? 'bg-background text-foreground font-semibold shadow-sm'
+                          : 'text-secondary-foreground hover:text-foreground'
                       }`}
                       onClick={() => setPm(name)}
                     >
@@ -184,14 +185,14 @@ export function Installation(props: {
               </div>
               <button
                 type="button"
-                class="rounded border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/80 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
+                class="rounded border border-border bg-background px-2 py-0.5 text-xs text-secondary-foreground hover:bg-hover-background hover:text-foreground cursor-pointer transition-colors"
                 onClick={copyCli}
               >
                 {copiedCli() ? '已复制' : '复制'}
               </button>
             </div>
             <div class="p-3 font-mono text-xs overflow-x-auto">
-              <code>{cliCommand()}</code>
+              <CodeBlock code={cliCommand()} language="bash" />
             </div>
           </div>
 
@@ -214,16 +215,16 @@ export function Installation(props: {
             <h3 class="text-sm font-medium text-foreground mb-3">
               安装所需依赖：
             </h3>
-            <div class="overflow-hidden rounded-lg border border-border bg-[#18181b] text-white">
-              <div class="flex items-center justify-between border-b border-white/10 px-3 py-2 text-xs">
+            <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground">
+              <div class="flex items-center justify-between border-b border-border px-3 py-2 text-xs">
                 <div class="flex items-center gap-2">
-                  <span class="text-white/40 font-mono text-[11px]">&gt;_</span>
-                  <div class="flex items-center gap-1 rounded bg-white/5 p-0.5">
+                  <span class="text-muted-foreground font-mono text-[11px]">&gt;_</span>
+                  <div class="flex items-center gap-1 rounded bg-background/50 p-0.5">
                     {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((name) => (
                       <button
                         type="button"
                         class={`rounded px-2 py-0.5 text-[11px] transition-colors cursor-pointer ${
-                          pm() === name ? 'bg-white/20 text-white font-medium' : 'text-white/60 hover:text-white'
+                          pm() === name ? 'bg-background text-foreground font-medium shadow-sm' : 'text-secondary-foreground hover:text-foreground'
                         }`}
                         onClick={() => setPm(name)}
                       >
@@ -234,16 +235,16 @@ export function Installation(props: {
                 </div>
                 <button
                   type="button"
-                  class="cursor-pointer text-white/60 hover:text-white flex items-center gap-1 text-[11px]"
+                  class="cursor-pointer text-secondary-foreground hover:text-foreground flex items-center gap-1 text-[11px]"
                   onClick={copyDep}
                 >
                   <Show when={copiedDep()} fallback={<span>复制</span>}>
-                    <span class="text-emerald-400">已复制</span>
+                    <span class="text-emerald-700 dark:text-emerald-400">已复制</span>
                   </Show>
                 </button>
               </div>
-              <div class="p-3 font-mono text-xs text-emerald-300">
-                {depCommand()}
+              <div class="p-3 font-mono text-xs text-foreground">
+                <CodeBlock code={depCommand()} language="bash" />
               </div>
             </div>
           </div>

@@ -43,7 +43,6 @@
     ...rest
   }: TooltipProps = $props();
   const separated = $derived(splitTooltipOptions(rest));
-  const rootStyle = $derived([style, styles?.root].filter(Boolean).join(";"));
 </script>
 
 <TooltipRoot {...separated[0]}>
@@ -55,7 +54,7 @@
       {...separated[1]}
       {color}
       class={cn(className, classNames?.root)}
-      style={rootStyle}
+      style={[style, styles?.root].filter(Boolean).join(";")}
     >
       {#if typeof title === "string"}{title}{:else}{@render title?.()}{/if}
       {#if arrow}<TooltipArrow

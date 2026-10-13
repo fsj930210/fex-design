@@ -13,9 +13,8 @@
   }
 
   let { class: className, children, ...rest }: CardExtraProps = $props();
-  const classList = $derived(cn(cardExtraClassName, className));
 </script>
 
-<div {...rest} data-slot="card-extra" class={classList}>
+<div {...rest} data-slot="card-extra" class={cn(cardExtraClassName, className)}>
   {@render children?.()}
 </div>

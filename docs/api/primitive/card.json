@@ -80,14 +80,12 @@
       "description": "组合完整 Header 结构。"
     },
     {
-      "id": "surface",
-      "title": "区域主题",
-      "description": "展示三个独立的高对比 surface。"
-    },
-    {
       "id": "css-variables",
       "title": "实例 CSS Variables",
       "description": "覆盖当前 Card 的区域变量。"
+    },
+    {
+      "id": "direction"
     }
   ],
   "components": [

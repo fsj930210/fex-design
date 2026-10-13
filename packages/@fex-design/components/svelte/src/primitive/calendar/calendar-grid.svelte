@@ -1,32 +1,17 @@
-<script lang="ts">
-  import type { CalendarCell } from "@fex-design/core/calendar";
-  import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
-  import { getContext } from "svelte";
-  import { calendarContextKey, type CalendarContextValue } from "./context";
-
-  interface CalendarGridProps extends Omit<
-    HTMLAttributes<HTMLDivElement>,
-    "children"
-  > {
-    children?: Snippet<[CalendarCell]> | undefined;
-  }
-
-  let { children, ...rest }: CalendarGridProps = $props();
-  const context = getContext<CalendarContextValue>(calendarContextKey);
+<script lang="ts" generics="TValue extends CalendarValue = CalendarValue">
+  import type { HTMLAttributes } from 'svelte/elements';
+  import type { Snippet } from 'svelte';
+  import type { CalendarCell as Cell, CalendarGrid as Grid, CalendarValue } from '@fex-design/core/calendar';
+  import { calendarGridClassName } from '@fex-design/components-styles/calendar';
+  import { cn } from '@fex-design/utils';
+  import { useCalendarContext } from './context';
+  import CalendarRow from './calendar-row.svelte';
+  import CalendarCell from './calendar-cell.svelte';
+  type Props = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & { children?: Snippet<[Cell<TValue>]>; ref?: HTMLDivElement | null };
+  let { children, class: className, onmouseleave, ref = $bindable(null), ...rest }: Props = $props();
+  const context = useCalendarContext('CalendarGrid');
+  const grid = $derived(context.getGrid() as Grid<TValue>);
 </script>
-
-<div
-  {...rest}
-  data-slot="calendar-grid"
-  data-panel={context.getPanel()}
-  onmouseleave={() => context.clearHoveredRow()}
->
-  {#each context.getGrid().rows as row (row.map((cell) => cell.key).join("|"))}
-    <div data-slot="calendar-row">
-      {#each row as cell (cell.key)}
-        {@render children?.(cell)}
-      {/each}
-    </div>
-  {/each}
+<div {...rest} bind:this={ref} role="grid" data-slot="calendar-grid" data-panel={context.getState().panel} class={cn(calendarGridClassName, className)} onmouseleave={event => { onmouseleave?.(event); if (!event.defaultPrevented) context.controller.clearHoveredRow(); }}>
+  {#each grid.rows as row (row.map(cell => cell.key).join('|'))}<CalendarRow>{#each row as cell (cell.key)}{#if children}{@render children(cell)}{:else}<CalendarCell {cell} />{/if}{/each}</CalendarRow>{/each}
 </div>

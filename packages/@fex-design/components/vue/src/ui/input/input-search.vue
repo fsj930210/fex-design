@@ -21,7 +21,7 @@ const internalValue = ref(props.defaultValue ?? '')
 const currentValue = computed(() => props.modelValue ?? internalValue.value)
 const inputProps = computed(() => {
   const { loading: _loading, addonAfter: _addonAfter, ...rest } = props
-  return { ...attrs, ...rest }
+  return rest
 })
 function update(value: string) {
   if (props.modelValue === undefined) internalValue.value = value
@@ -30,14 +30,21 @@ function update(value: string) {
 function search(source: InputSearchMeta['source']) {
   if (!props.loading) emit('search', currentValue.value, { source })
 }
+function keydown(event: KeyboardEvent) {
+  const handlers = attrs.onKeydown
+  for (const handler of Array.isArray(handlers) ? handlers : [handlers]) {
+    if (typeof handler === 'function') handler(event)
+  }
+  if (event.key === 'Enter' && !event.defaultPrevented) search('enter')
+}
 </script>
 
 <template>
   <Input
-    v-bind="inputProps"
+    v-bind="{ ...attrs, ...inputProps, onKeydown: undefined }"
     :model-value="currentValue"
     @update:model-value="update"
-    @keydown.enter="search('enter')"
+    @keydown="keydown"
   >
     <template v-if="$slots.prefix" #prefix
       ><button

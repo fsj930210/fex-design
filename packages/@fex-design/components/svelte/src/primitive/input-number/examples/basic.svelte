@@ -10,7 +10,7 @@
   import { InputPrefix, InputSuffix } from "@fex-design/svelte/primitive/input";
 </script>
 
-<div class="grid w-full gap-2">
+<div class="grid w-full gap-3">
   <label for="quantity">数量</label><P defaultValue={8}
     ><C id="quantity" /><A><I /><D /></A></P
   >

@@ -31,7 +31,7 @@ export interface TooltipProps
 }
 
 function Trigger({ children }: Pick<TooltipProps, "children">) {
-  return <TooltipTrigger>{(triggerProps) => cloneElement(children, triggerProps)}</TooltipTrigger>
+  return <TooltipTrigger {...children.props}>{(triggerProps) => cloneElement(children, triggerProps)}</TooltipTrigger>
 }
 
 export function Tooltip(props: TooltipProps) {

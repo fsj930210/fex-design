@@ -4,7 +4,6 @@ import { checkboxGroupClassName, type CheckboxGroupStyleProps } from "@fex-desig
 import { cn } from "@fex-design/utils"
 import { useRef, type HTMLAttributes, type Ref } from "react"
 import { useCoreStore } from "@fex-design/react/hooks/use-core-store"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
 import { useLazyRef } from "@fex-design/react/hooks/use-lazy-ref"
 import { GroupContext } from "./checkbox-context"
 
@@ -29,21 +28,17 @@ export function CheckboxGroup({
   ref,
   ...props
 }: CheckboxGroupProps) {
+  const options = useRef({ value, defaultValue, disabled, onChange })
+  options.current = { value, defaultValue, disabled, onChange }
   const controller = useLazyRef(() =>
     createCheckboxGroupController({
-      ...(value === undefined ? {} : { value }),
-      ...(defaultValue === undefined ? {} : { defaultValue }),
-      ...(disabled === undefined ? {} : { disabled }),
-      ...(onChange === undefined ? {} : { onChange }),
+      get value() { return options.current.value },
+      get defaultValue() { return options.current.defaultValue },
+      get disabled() { return options.current.disabled },
+      onChange: (next, meta) => options.current.onChange?.(next, meta),
     }),
-  )
+  ).current
   const store = useCoreStore(controller)
-  useIsomorphicLayoutEffect(() => {
-    if (value !== undefined) controller.setValue(value)
-  }, [controller, value])
-  useIsomorphicLayoutEffect(() => {
-    if (disabled !== undefined) controller.setDisabled(disabled)
-  }, [controller, disabled])
   return (
     <GroupContext
       value={{

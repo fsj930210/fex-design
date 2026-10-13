@@ -1,6 +1,8 @@
 @if (context.status() === 'loaded') {
 <img
   [src]="src()"
+  [attr.crossorigin]="crossOrigin() ?? null"
+  [attr.referrerpolicy]="referrerPolicy() ?? null"
   [alt]="alt()"
   [attr.srcset]="srcSet() || null"
   [class]="imageClass()"

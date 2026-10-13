@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { inputClearClassName } from "@fex-design/components-styles/input"
 import { cn } from "@fex-design/utils"
 import { splitProps, type JSX, type ParentProps } from "solid-js"
@@ -16,7 +17,7 @@ export function InputClear(props: InputClearProps) {
       data-slot="input-clear"
       class={cn(inputClearClassName, local.class)}
       onClick={(event) => {
-        if (typeof local.onClick === "function") local.onClick(event)
+        callEventHandler(local.onClick, event)
         if (!event.defaultPrevented) context.clear()
       }}
     >

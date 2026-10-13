@@ -3,6 +3,7 @@
     EmptyClassNames,
     EmptyStyles as EmptyStylesBase,
   } from "@fex-design/core/empty/types";
+  import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import PrimitiveEmpty from '@fex-design/svelte/primitive/empty/empty.svelte';
@@ -39,15 +40,13 @@
     children,
     ...rest
   }: EmptyProps = $props();
-  const rootProps = $derived({
-    ...(className || classNames?.root
-      ? { class: `${className ?? ""} ${classNames?.root ?? ""}` }
-      : {}),
-    ...(style || styles?.root ? { style: [style, styles?.root] } : {}),
-  });
 </script>
 
-<PrimitiveEmpty {...rest} {...rootProps}>
+<PrimitiveEmpty
+  {...rest}
+  class={cn(className, classNames?.root)}
+  style={[style, styles?.root].filter(Boolean).join(";")}
+>
   {#if image !== null || title || description}
     <EmptyHeader class={classNames?.header} style={styles?.header}>
       {#if image !== null}

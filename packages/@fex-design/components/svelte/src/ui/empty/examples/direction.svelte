@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Empty from "@fex-design/svelte/ui/empty";
+  import { Empty } from "@fex-design/svelte/ui/empty";
 </script>
 
 <div class="grid w-full gap-6 sm:grid-cols-2">

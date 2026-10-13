@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import { radioItemClassName, radioLabelClassName } from '@fex-design/components-styles/radio'
 import { cn } from '@fex-design/utils'
 import { createUniqueId, For, splitProps, type JSX, type ParentProps } from 'solid-js'
@@ -28,7 +29,7 @@ export function Radio(props: RadioProps) {
   return (
     <div
       class={cn(radioItemClassName, local.class, local.classNames?.root)}
-      style={{ ...(local.style as JSX.CSSProperties), ...local.styles?.root }}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       <PrimitiveRadio
         {...control}

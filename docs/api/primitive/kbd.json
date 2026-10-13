@@ -24,6 +24,12 @@
       "id": "group",
       "title": "按键组合",
       "description": "使用 KbdGroup 组合快捷键。"
+    },
+    {
+      "id": "button"
+    },
+    {
+      "id": "direction"
     }
   ],
   "components": [

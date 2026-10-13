@@ -12,6 +12,7 @@ import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
 import { PopoverRoot } from '../popover'
 import { SelectContext } from './select-context'
+import { splitPopoverOptions } from '@fex-design/core/popover/options'
 
 export interface SelectChangeMeta {
   selectedItem?: SelectOption | undefined
@@ -83,6 +84,7 @@ export function SelectRoot(props: SelectRootProps) {
   })
   const controllerRef = useRef<ReturnType<typeof createSelectController> | null>(null)
   controllerRef.current ??= createSelectController({
+    get disabled() { return optionsRef.current.disabled },
     selection: selectionRef.current,
     get options() {
       const keyword = controllerRef.current?.getSnapshot().searchValue ?? ''
@@ -119,6 +121,7 @@ export function SelectRoot(props: SelectRootProps) {
     if (open) controllerRef.current?.open()
     else controllerRef.current?.close()
   })
+  const [popoverOptions] = splitPopoverOptions(props)
   return (
     <SelectContext
       value={{
@@ -136,10 +139,11 @@ export function SelectRoot(props: SelectRootProps) {
         virtual: props.virtual,
         listId,
         selectedOptions,
-        removeValue: (value) => selectionRef.current?.unselect(value),
+        removeValue: (value) => { if (!props.disabled) selectionRef.current?.unselect(value) },
       }}
     >
       <PopoverRoot
+        {...popoverOptions}
         open={snapshot.open}
         defaultOpen={props.defaultOpen}
         disabled={props.disabled}

@@ -2,11 +2,15 @@
   ><div
     popoverContent
     [class]="contentClass"
-    [style.width]="'var(--floating-reference-width)'"
     [style.max-width]="'var(--floating-available-width)'"
     [style.max-height]="'var(--floating-available-height, calc(100vh - 16px))'"
     [style.overflow]="'hidden'"
     [style.padding]="'0px'"
   >
-    <ng-content><div selectList></div></ng-content></div
+    <ng-template #menu><ng-content><div selectList></div></ng-content></ng-template>
+    @if (popupRender) {
+      <ng-container [ngTemplateOutlet]="popupRender" [ngTemplateOutletContext]="{ menu, close }" />
+    } @else {
+      <ng-container [ngTemplateOutlet]="menu" />
+    }</div
 ></ng-template>

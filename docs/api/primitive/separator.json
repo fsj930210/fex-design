@@ -44,6 +44,9 @@
       "id": "variants",
       "title": "Variants",
       "description": "通过 class 组合 Solid、Dashed 和 Dotted 线型。"
+    },
+    {
+      "id": "direction"
     }
   ],
   "components": [

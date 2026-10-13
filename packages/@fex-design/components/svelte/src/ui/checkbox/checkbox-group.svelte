@@ -3,7 +3,8 @@
   import type { Snippet } from "svelte";
   import Checkbox from "./checkbox.svelte";
   import PrimitiveGroup from '@fex-design/svelte/primitive/checkbox/checkbox-group.svelte';
-  interface Props {
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {
     value?: CheckboxValue[];
     defaultValue?: CheckboxValue[];
     disabled?: boolean;

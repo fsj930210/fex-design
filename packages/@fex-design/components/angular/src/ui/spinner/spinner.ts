@@ -12,7 +12,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
-    '[style]': 'styles().root',
+    '[style]': "spinning() === undefined ? 'display: contents' : styles().root",
     '[attr.aria-busy]': 'spinning() ?? null',
     'data-slot': 'spinner-container',
   },
@@ -26,7 +26,7 @@ export class SpinnerContainer {
   readonly classNames = input<SpinnerClassNames>({})
   readonly styles = input<SpinnerStyles<string>>({})
   protected readonly hostClassName = createHostClassName(() =>
-    cn(spinnerContainerClassName, this.classNames().root),
+    this.spinning() === undefined ? undefined : cn(spinnerContainerClassName, this.classNames().root),
   )
   protected readonly overlayClassName = () =>
     cn(this.classNames().overlay, this.text() && 'flex-col')

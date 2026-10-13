@@ -3,9 +3,8 @@ import {
   getCalendarValueDate,
   type CalendarCell,
   type CalendarDate,
-  type CalendarPanel,
 } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker, getGranularityByPicker } from '@fex-design/core/date-picker/panel'
+import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { createRangePreviewValue } from '@fex-design/core/date-picker/range'
 import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
@@ -44,30 +43,11 @@ const currentRange = computed(() => {
   return createRangePreviewValue(rangeValue, hoverValue, rangePicker.activePart.value)
 })
 
-function nextPanelAfterCell(panel: CalendarPanel, picker: string): CalendarPanel | null {
-  if (picker === 'year') return null
-  if (panel === 'decade') return 'year'
-  if (panel === 'year')
-    return picker === 'month' || picker === 'quarter'
-      ? getDefaultPanelByPicker(picker as 'month' | 'quarter')
-      : 'month'
-  if (panel === 'month') return picker === 'month' ? null : 'date'
-  if (panel === 'quarter') return null
-  return null
-}
 
-function selectCell(cell: CalendarCell) {
+
+function selectValue(value: import('@fex-design/core/calendar').CalendarValue) {
   const context = owner.value
-  const nextPanel = nextPanelAfterCell(cell.panel, context.picker)
-  const nextViewDate = getCalendarValueDate(cell.value)
-  if (nextPanel) {
-    context.setViewDate(nextViewDate)
-    context.setPanel(nextPanel)
-    return
-  }
-  context.select(
-    normalizeDatePickerValue(nextViewDate, context.picker, context.weekStartsOn) as never,
-  )
+  context.select(normalizeDatePickerValue(getCalendarValueDate(value), context.picker, context.weekStartsOn) as never)
 }
 
 function disabledDate(date: CalendarDate) {
@@ -84,7 +64,7 @@ function hoverCell(cell: CalendarCell) {
 <template>
   <CalendarRoot
     :class="cn(datePickerPanelClassName, props.class)"
-    :value="datePicker?.calendarValue.value"
+    :value="datePicker?.calendarValue.value ?? null"
     :values="datePicker?.calendarValues.value"
     :range="currentRange"
     :view-date="props.panelViewDate ?? owner.viewDate.value"
@@ -94,7 +74,7 @@ function hoverCell(cell: CalendarCell) {
     :min="owner.minDate"
     :max="owner.maxDate"
     :disabled-date="disabledDate"
-    @cell-select="selectCell"
+    @select="selectValue"
     @cell-hover="hoverCell"
     @panel-change="owner.setPanel"
     @view-date-change="owner.setViewDate"

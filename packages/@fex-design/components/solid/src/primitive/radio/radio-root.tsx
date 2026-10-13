@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { radioIndicatorClassName, radioRootClassName, type RadioStyleProps } from "@fex-design/components-styles/radio"
 import { cn } from "@fex-design/utils"
 import { splitProps, type JSX, type ParentProps } from "solid-js"
@@ -43,9 +44,7 @@ export function Radio(props: RadioProps) {
       data-value={local.value}
       class={cn(radioRootClassName({ size: size() }), local.class)}
       onClick={(event) => {
-        if (typeof local.onClick === "function") {
-          local.onClick(event)
-        }
+        callEventHandler(local.onClick, event)
         if (event.defaultPrevented || currentDisabled()) return
         context.select(local.value)
       }}

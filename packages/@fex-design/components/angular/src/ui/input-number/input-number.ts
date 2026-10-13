@@ -1,16 +1,13 @@
 import type {
-  InputNumberFormatter,
-  InputNumberParser,
   InputNumberPart,
 } from '@fex-design/core/input-number/types'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  computed,
+  forwardRef,
   input,
-  Input,
-  output,
-  signal,
 } from '@angular/core'
 import {
   InputNumberActions,
@@ -21,11 +18,14 @@ import {
   InputNumberRoot,
 } from '@fex-design/angular/primitive/input-number'
 import { InputPrefix, InputSuffix } from '@fex-design/angular/primitive/input'
+import { inputRootClassName } from '@fex-design/components-styles/input'
+import { inputNumberRootClassName } from '@fex-design/components-styles/input-number'
+import { cn } from '@fex-design/utils'
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
 @Component({
   selector: 'div[inputNumber]',
   standalone: true,
   imports: [
-    InputNumberRoot,
     InputNumberControl,
     InputNumberClear,
     InputNumberActions,
@@ -34,31 +34,14 @@ import { InputPrefix, InputSuffix } from '@fex-design/angular/primitive/input'
     InputPrefix,
     InputSuffix,
   ],
+  providers: [{ provide: InputNumberRoot, useExisting: forwardRef(() => InputNumber) }],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'contents', '[attr.id]': 'null' },
+  host: { '[attr.id]': 'null', '[style]': 'styles()?.root' },
   templateUrl: './input-number.html',
 })
-export class InputNumber {
-  protected readonly valueState = signal<number | undefined>(undefined)
-  protected readonly hasValue = signal(false)
-  @Input() set value(value: number | undefined) {
-    this.hasValue.set(true)
-    this.valueState.set(value)
-  }
-  readonly defaultValue = input<number>()
-  readonly min = input<number>()
-  readonly max = input<number>()
-  readonly step = input(1)
-  readonly precision = input<number>()
-  readonly parser = input<InputNumberParser>()
-  readonly formatter = input<InputNumberFormatter>()
-  readonly disabled = input(false, { transform: booleanAttribute })
-  readonly readOnly = input(false, { transform: booleanAttribute })
-  readonly keyboard = input(true, { transform: booleanAttribute })
+export class InputNumber extends InputNumberRoot {
   readonly clearable = input(false, { transform: booleanAttribute })
   readonly controls = input(true, { transform: booleanAttribute })
-  readonly size = input<'sm' | 'md' | 'lg'>('md')
-  readonly variant = input<'outlined' | 'filled' | 'borderless' | 'underlined'>('outlined')
   readonly id = input<string>()
   readonly name = input<string>()
   readonly placeholder = input<string>()
@@ -67,7 +50,13 @@ export class InputNumber {
   readonly describedBy = input<string>()
   readonly classNames = input<Partial<Record<InputNumberPart, string>>>()
   readonly styles = input<Partial<Record<InputNumberPart, string>>>()
-  readonly change = output<{ event: Event; value: number | undefined }>()
+  protected override readonly hostClassName = createHostClassName(() => cn(
+    inputRootClassName({ size: this.size(), variant: this.variant() }),
+    inputNumberRootClassName,
+    this.classNames()?.root,
+  ))
+  protected readonly prefixClassName = computed(() => cn('empty:hidden', this.classNames()?.prefix))
+  protected readonly suffixClassName = computed(() => cn('empty:hidden', this.classNames()?.suffix))
 }
 
 export interface InputNumberChange {

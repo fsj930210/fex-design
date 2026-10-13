@@ -1,0 +1,2 @@
+<div calendarRoot [defaultViewDate]="options.defaultViewDate" [locale]="options.locale" [weekStartsOn]="options.weekStartsOn ?? 0" [showWeek]="options.showWeek" [fullscreen]="options.fullscreen" [class]="rootClass" [attr.data-fullscreen]="true"><div calendarExampleContent [options]="options" [cellTemplate]="cell"><ng-template #cell let-cell="cell"><ul>@for (notice of notices(cell); track notice) { <li><a href="#calendar-notice">{{ notice }}</a></li> }</ul></ng-template></div></div>
+

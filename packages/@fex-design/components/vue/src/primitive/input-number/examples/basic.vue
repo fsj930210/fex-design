@@ -10,9 +10,9 @@ import {
 import { InputPrefix, InputSuffix } from '@fex-design/vue/primitive/input'
 </script>
 <template>
-  <div class="grid w-full gap-2">
+  <div class="grid w-full gap-3">
     <label for="quantity">数量</label>
-    <InputNumberRoot default-value="8"
+    <InputNumberRoot :default-value="8"
       ><InputNumberControl id="quantity" /><InputNumberActions
         ><InputNumberIncrement /><InputNumberDecrement /></InputNumberActions
     ></InputNumberRoot>

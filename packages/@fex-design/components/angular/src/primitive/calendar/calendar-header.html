@@ -1,1 +1,27 @@
-<ng-content />
+@if (renderTemplate() ?? headerTemplate(); as template) {
+  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="templateContext()" />
+} @else {
+  @if (projectedElements().length) {
+    <ng-content />
+  } @else {
+    <div [class]="controlsClass">
+      <button calendarNavigationButton action="previous-panel" [disabled]="!context().canPrevious" [attr.aria-label]="context().locale.previous"></button>
+      <button calendarNavigationButton action="next-panel" [disabled]="!context().canNext" [attr.aria-label]="context().locale.next"></button>
+      <button calendarNavigationButton action="today">{{ context().locale.today }}</button>
+      <div selectRoot [options]="context().years" [value]="context().viewDate.year" (change)="year($event.value)">
+        <div selectTrigger [class]="selectClass" [inputProps]="{ 'aria-label': context().locale.year }"></div>
+        <div selectContent><div selectList></div></div>
+      </div>
+      @if (context().panel === 'date') {
+        <div selectRoot [options]="context().months" [value]="context().viewDate.month" (change)="month($event.value)">
+          <div selectTrigger [class]="selectClass" [inputProps]="{ 'aria-label': context().locale.month }"></div>
+          <div selectContent><div selectList></div></div>
+        </div>
+      }
+      <div radioGroup class="gap-0" [value]="context().panel" [attr.aria-label]="context().locale.datePanel + '/' + context().locale.monthPanel" (valueChange)="panel($event.value)">
+        <button radioButton value="date">{{ context().locale.datePanel }}</button>
+        <button radioButton value="month">{{ context().locale.monthPanel }}</button>
+      </div>
+    </div>
+  }
+}

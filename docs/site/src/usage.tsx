@@ -2,6 +2,7 @@ import { createSignal, createMemo, createEffect } from 'solid-js'
 import type { Framework } from './types'
 import { componentApis } from './data'
 import { usageSnippets } from './usage-snippets'
+import { CodeBlock } from './code-block'
 
 export function Usage(props: {
   slug: string
@@ -95,36 +96,36 @@ export function Usage(props: {
 
       <div class="space-y-4">
         {/* Step 1: Import */}
-        <div class="overflow-hidden rounded-lg border border-border bg-[#18181b] text-white shadow-sm">
-          <div class="flex items-center justify-between border-b border-white/10 px-3 py-2 text-xs">
-            <span class="text-white/60 font-mono text-[11px]">1. 引入组件</span>
+        <div class="overflow-hidden rounded-lg border border-border bg-background text-foreground shadow-sm">
+          <div class="flex items-center justify-between border-b border-border bg-muted-background px-3 py-2 text-xs">
+            <span class="text-muted-foreground font-mono text-[11px]">1. 引入组件</span>
             <button
               type="button"
-              class="rounded border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/80 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
+              class="rounded border border-border bg-background px-2 py-0.5 text-xs text-secondary-foreground hover:bg-hover-background hover:text-foreground cursor-pointer transition-colors"
               onClick={copyImport}
             >
               {copiedImport() ? '已复制' : '复制'}
             </button>
           </div>
           <div class="p-3 font-mono text-xs overflow-x-auto">
-            <code>{currentSnippet().import}</code>
+            <CodeBlock code={currentSnippet().import} language="ts" />
           </div>
         </div>
 
         {/* Step 2: Code Snippet */}
-        <div class="overflow-hidden rounded-lg border border-border bg-[#18181b] text-white shadow-sm">
-          <div class="flex items-center justify-between border-b border-white/10 px-3 py-2 text-xs">
-            <span class="text-white/60 font-mono text-[11px]">2. 基础调用</span>
+        <div class="overflow-hidden rounded-lg border border-border bg-background text-foreground shadow-sm">
+          <div class="flex items-center justify-between border-b border-border bg-muted-background px-3 py-2 text-xs">
+            <span class="text-muted-foreground font-mono text-[11px]">2. 基础调用</span>
             <button
               type="button"
-              class="rounded border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/80 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
+              class="rounded border border-border bg-background px-2 py-0.5 text-xs text-secondary-foreground hover:bg-hover-background hover:text-foreground cursor-pointer transition-colors"
               onClick={copyUsage}
             >
               {copiedSnippet() ? '已复制' : '复制'}
             </button>
           </div>
           <div class="p-3 font-mono text-xs overflow-x-auto">
-            <pre class="leading-relaxed"><code>{currentSnippet().code}</code></pre>
+            <CodeBlock code={currentSnippet().code} />
           </div>
         </div>
       </div>

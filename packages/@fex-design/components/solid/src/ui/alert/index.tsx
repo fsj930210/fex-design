@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { AlertUiOptions } from '@fex-design/core/alert/types'
 import {
   alertActionClassName,
@@ -8,7 +9,7 @@ import {
   alertTitleClassName,
 } from '@fex-design/components-styles/alert'
 import { cn } from '@fex-design/utils'
-import { createSignal, splitProps, type JSX } from 'solid-js'
+import { createSignal, Show, splitProps, type JSX } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { CircleCheckIcon } from '@fex-design/solid/icons/circle-check'
 import { XIcon } from '@fex-design/solid/icons/x'
@@ -52,13 +53,14 @@ export function Alert(props: AlertProps) {
     'children',
   ])
   const type = () => local.type ?? 'info'
-  return visible() ? (
+  return (
+    <Show when={visible()}>
     <PrimitiveAlert
       {...rest}
       type={type()}
       variant={local.variant ?? 'filled'}
       class={cn(local.class, local.classNames?.root)}
-      style={{ ...(typeof local.style === 'object' ? local.style : {}), ...local.styles?.root }}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       {local.showIcon ? (
         <span
@@ -119,5 +121,6 @@ export function Alert(props: AlertProps) {
         </button>
       ) : null}
     </PrimitiveAlert>
-  ) : null
+    </Show>
+  )
 }

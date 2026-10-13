@@ -212,6 +212,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      lunar-typescript:
+        specifier: ^1.8.6
+        version: 1.8.6
       rxjs:
         specifier: latest
         version: 7.8.2
@@ -356,7 +359,14 @@ importers:
         specifier: 3.5.42
         version: 3.5.42(typescript@6.0.3)
 
-  docs/shared: {}
+  docs/shared:
+    dependencies:
+      '@fex-design/core':
+        specifier: workspace:*
+        version: link:../../packages/@fex-design/core
+      lunar-typescript:
+        specifier: ^1.8.6
+        version: 1.8.6
 
   docs/site:
     dependencies:
@@ -461,6 +471,9 @@ importers:
       '@angular/core':
         specifier: 22.1.5
         version: 22.1.5(@angular/compiler@22.1.5)(rxjs@7.8.2)(zone.js@0.16.3)
+      '@fex-design/docs-shared':
+        specifier: workspace:*
+        version: link:../../../../docs/shared
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -547,6 +560,9 @@ importers:
         specifier: 8.6.0
         version: 8.6.0(embla-carousel@8.6.0)
     devDependencies:
+      '@fex-design/docs-shared':
+        specifier: workspace:*
+        version: link:../../../../docs/shared
       '@types/react':
         specifier: latest
         version: 19.3.0
@@ -593,6 +609,9 @@ importers:
         specifier: 8.6.0
         version: 8.6.0(embla-carousel@8.6.0)
     devDependencies:
+      '@fex-design/docs-shared':
+        specifier: workspace:*
+        version: link:../../../../docs/shared
       solid-js:
         specifier: 1.9.15
         version: 1.9.15
@@ -640,6 +659,9 @@ importers:
         specifier: 8.6.0
         version: 8.6.0(embla-carousel@8.6.0)
     devDependencies:
+      '@fex-design/docs-shared':
+        specifier: workspace:*
+        version: link:../../../../docs/shared
       svelte:
         specifier: 5.57.0
         version: 5.57.0(@typescript-eslint/types@8.69.0)
@@ -680,6 +702,9 @@ importers:
         specifier: 8.6.0
         version: 8.6.0(embla-carousel@8.6.0)
     devDependencies:
+      '@fex-design/docs-shared':
+        specifier: workspace:*
+        version: link:../../../../docs/shared
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -5507,6 +5532,9 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lunar-typescript@1.8.6:
+    resolution: {integrity: sha512-5Eo4T/cnuXfrgO4k5LCpOGHIUOuz5hCF/IfNv0T29WY2shR36Hiz+ecN9WjnUuxUKhql9gbOkPaQoqLFKtPRNA==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -11706,6 +11734,8 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lunar-typescript@1.8.6: {}
 
   magic-string@0.30.21:
     dependencies:

@@ -12,7 +12,7 @@ import { InputPrefix, InputSuffix } from '@fex-design/vue/primitive/input'
 <template>
   <div class="grid w-full gap-2">
     <p>ArrowUp 增加，ArrowDown 减少</p>
-    <InputNumberRoot default-value="8"
+    <InputNumberRoot :default-value="8"
       ><InputNumberControl /><InputNumberActions
         ><InputNumberIncrement /><InputNumberDecrement /></InputNumberActions
     ></InputNumberRoot>

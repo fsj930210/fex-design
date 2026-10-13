@@ -1,5 +1,5 @@
 import { createCheckboxGroupController } from '@fex-design/core/checkbox/create-checkbox-group-controller'
-import type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'
+import type { CheckboxGroupChangeMeta, CheckboxGroupController, CheckboxGroupSnapshot, CheckboxValue } from '@fex-design/core/checkbox/types'
 import {
   checkboxCheckIconClassName,
   checkboxControlClassName,
@@ -9,6 +9,8 @@ import {
   checkboxMinusIconClassName,
   checkboxRootClassName,
 } from '@fex-design/components-styles/checkbox'
+  import { CheckIcon } from '@fex-design/angular/icons/check'
+  import { MinusIcon } from '@fex-design/angular/icons/minus'
 import { cn } from '@fex-design/utils'
 import {
   booleanAttribute,
@@ -16,18 +18,21 @@ import {
   Component,
   computed,
   Directive,
+  DestroyRef,
   effect,
   ElementRef,
   inject,
   input,
   output,
   signal,
+  type OnInit,
+  type Signal,
 } from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 let checkboxId = 0
 @Component({
-  selector: 'div[checkboxRoot]',
+  selector: 'div[checkboxRoot], button[checkboxRoot]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -39,6 +44,8 @@ let checkboxId = 0
 })
 export class CheckboxRoot {
   value = input<CheckboxValue | undefined>()
+  checked = input<boolean | 'indeterminate' | undefined>()
+  defaultChecked = input(false, { transform: booleanAttribute })
   disabled = input(false, { transform: booleanAttribute })
   size = input<'sm' | 'md' | 'lg'>('md')
   readonly controlId = `checkbox-${++checkboxId}`
@@ -58,15 +65,18 @@ export class CheckboxRoot {
   },
   template: '<ng-content />',
 })
-export class CheckboxGroup {
+export class CheckboxGroup implements OnInit {
   value = input<CheckboxValue[] | undefined>()
   defaultValue = input<CheckboxValue[] | undefined>()
   disabled = input(false, { transform: booleanAttribute })
   orientation = input<'horizontal' | 'vertical'>('vertical')
   change = output<{ value: CheckboxValue[]; meta: CheckboxGroupChangeMeta }>()
-  private readonly controller = (() => {
+  private readonly destroyRef = inject(DestroyRef)
+  private controller!: CheckboxGroupController
+  private snapshot!: Signal<CheckboxGroupSnapshot>
+  ngOnInit() {
     const owner = this
-    return createCheckboxGroupController({
+    this.controller = createCheckboxGroupController({
       get value() {
         return owner.value()
       },
@@ -78,8 +88,8 @@ export class CheckboxGroup {
       },
       onChange: (value, meta) => owner.change.emit({ value, meta }),
     })
-  })()
-  private readonly snapshot = createCoreStoreSignal(this.controller)
+    this.snapshot = createCoreStoreSignal(this.controller, this.destroyRef)
+  }
   protected readonly hostClassName = createHostClassName(() =>
     checkboxGroupClassName({ orientation: this.orientation() }),
   )
@@ -103,19 +113,19 @@ export class CheckboxGroup {
     '(change)': 'handleChange($event)',
   },
 })
-export class CheckboxControl {
+export class CheckboxControl implements OnInit {
   id = input<string | undefined>()
   value = input<CheckboxValue | undefined>()
-  name = input<string | undefined>()
-  checked = input<boolean | undefined>()
+  checked = input<boolean | 'indeterminate' | undefined>()
   defaultChecked = input(false, { transform: booleanAttribute })
+  name = input<string | undefined>()
   disabled = input(false, { transform: booleanAttribute })
   indeterminate = input(false, { transform: booleanAttribute })
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)
   readonly root = inject(CheckboxRoot, { optional: true })
   readonly group = inject(CheckboxGroup, { optional: true })
-  private readonly interacted = signal(false)
   private readonly internalChecked = signal(false)
+  ngOnInit() { this.internalChecked.set(this.defaultChecked()) }
   protected readonly hostClassName = createHostClassName(() => checkboxControlClassName)
   protected readonly resolvedId = computed(() => this.id() ?? this.root?.controlId)
   private readonly resolvedValue = computed(() => this.value() ?? this.root?.value())
@@ -124,7 +134,7 @@ export class CheckboxControl {
     if (this.group && value !== undefined) return this.group.currentValue().includes(value)
     return (
       this.checked() ??
-      (this.interacted() ? this.internalChecked() : (this.defaultChecked() ?? false))
+      this.internalChecked()
     )
   })
   protected readonly resolvedDisabled = computed(() =>
@@ -138,8 +148,7 @@ export class CheckboxControl {
   handleChange(event: Event) {
     const input = event.target as HTMLInputElement
     const value = this.resolvedValue()
-    if (this.checked() === undefined && !this.group) {
-      this.interacted.set(true)
+    if (!event.defaultPrevented && this.checked() === undefined && !this.group) {
       this.internalChecked.set(input.checked)
     }
     if (!event.defaultPrevented && this.group && value !== undefined) this.group.toggle(value)
@@ -148,6 +157,7 @@ export class CheckboxControl {
 @Component({
   selector: 'span[checkboxIndicator]',
   standalone: true,
+    imports: [CheckIcon, MinusIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', 'aria-hidden': 'true', 'data-slot': 'checkbox-indicator' },
   templateUrl: './checkbox-indicator.html',

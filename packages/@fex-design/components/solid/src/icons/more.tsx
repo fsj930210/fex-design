@@ -18,5 +18,3 @@ export function MoreIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
 </svg>
   );
 }
-
-export { MoreIcon as EllipsisIcon }

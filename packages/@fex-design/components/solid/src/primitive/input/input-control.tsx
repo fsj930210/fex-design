@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { inputControlClassName } from "@fex-design/components-styles/input"
 import { cn } from "@fex-design/utils"
 import { splitProps, type JSX } from "solid-js"
@@ -29,7 +30,7 @@ export function InputControl(props: InputControlProps) {
       data-slot="input-control"
       class={cn(inputControlClassName, local.class)}
       onInput={(event) => {
-        if (typeof local.onInput === "function") local.onInput(event)
+        callEventHandler(local.onInput, event)
         if (!event.defaultPrevented) context.setValue(event.currentTarget.value, "input", event)
       }}
     />

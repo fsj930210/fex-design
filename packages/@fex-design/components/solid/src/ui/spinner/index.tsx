@@ -3,6 +3,7 @@ import { spinnerContainerClassName } from '@fex-design/components-styles/spinner
 import { cn } from '@fex-design/utils'
 import type { JSX } from 'solid-js'
 import { Show, splitProps } from 'solid-js'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import {
   Spinner,
   SpinnerContainer as PrimitiveSpinnerContainer,
@@ -25,23 +26,22 @@ export function SpinnerContainer(
     'classNames',
     'styles',
   ])
-  if (local.spinning === undefined)
-    return (
+  return (
+    <Show when={local.spinning !== undefined} fallback={
       <Spinner
         {...rest}
         size={local.size}
         class={cn(local.class, local.classNames?.spinner)}
-        style={local.styles?.spinner}
+        style={mergeStyle(rest.style, local.styles?.spinner)}
       >
         {local.indicator}
       </Spinner>
-    )
-  return (
+    }>
     <PrimitiveSpinnerContainer
       {...rest}
       aria-busy={local.spinning}
       class={cn(spinnerContainerClassName, local.class, local.classNames?.root)}
-      style={local.styles?.root}
+      style={mergeStyle(rest.style, local.styles?.root)}
     >
       {local.children}
       <Show when={local.spinning}>
@@ -64,5 +64,6 @@ export function SpinnerContainer(
         </SpinnerOverlay>
       </Show>
     </PrimitiveSpinnerContainer>
+    </Show>
   )
 }

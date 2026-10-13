@@ -36,6 +36,7 @@ export interface SelectSnapshot<TValue extends SelectionValue = SelectionValue> 
 }
 
 export interface SelectControllerOptions<TValue extends SelectionValue = SelectionValue> {
+  disabled?: boolean | undefined
   selection: SelectionController
   options?: readonly SelectOption<TValue>[] | undefined
   multiple?: boolean | undefined

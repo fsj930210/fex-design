@@ -138,16 +138,41 @@
     { "name": "--input-ring-color", "description": "聚焦环颜色。" }
   ],
   "demos": [
-    { "id": "basic" },
-    { "id": "sizes" },
-    { "id": "variants" },
-    { "id": "controlled" },
-    { "id": "affixes" },
-    { "id": "group" },
-    { "id": "password" },
-    { "id": "search" },
-    { "id": "states" },
-    { "id": "focus" },
-    { "id": "semantic-styles" }
+    {
+      "id": "basic"
+    },
+    {
+      "id": "sizes"
+    },
+    {
+      "id": "variants"
+    },
+    {
+      "id": "controlled"
+    },
+    {
+      "id": "affixes"
+    },
+    {
+      "id": "group"
+    },
+    {
+      "id": "password"
+    },
+    {
+      "id": "search"
+    },
+    {
+      "id": "states"
+    },
+    {
+      "id": "validation"
+    },
+    {
+      "id": "focus"
+    },
+    {
+      "id": "semantic-styles"
+    }
   ]
 }

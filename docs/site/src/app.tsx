@@ -258,7 +258,7 @@ createEffect(() => {
           </main>
 
           {/* 右侧 Anchor 目录 */}
-          <div class="sticky top-16 h-[calc(100vh-64px)] w-[256px] shrink-0 self-start overflow-y-auto border-l border-border px-3 py-6 [--anchor-indent:8px] max-[1280px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-2 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-1 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-snug [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
+          <div class="sticky top-16 h-[calc(100vh-64px)] w-[256px] shrink-0 self-start overflow-y-auto border-l border-border px-3 py-6 max-[1280px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-2 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-1 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-snug [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
             <p class="mb-3 px-2 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
               本页目录
             </p>
@@ -306,10 +306,4 @@ function collectToc(article: HTMLElement): readonly AnchorItemData<string>[] {
   }
   return items
 }
-
-
-
-
-
-
 

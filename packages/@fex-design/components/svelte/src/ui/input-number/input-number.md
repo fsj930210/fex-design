@@ -4,7 +4,7 @@ Ready-to-use composition that reuses Primitive logic and Input/Button parts. UI 
 
 ## Import
 
-    import InputNumber from '@fex-design/svelte/ui/input-number'
+    import { InputNumber } from '@fex-design/svelte/ui/input-number'
 
 ## Components
 

@@ -68,7 +68,7 @@
     {type}
     {variant}
     class={cn(className, classNames?.root)}
-    style={`${typeof style === "string" ? style : ""}${styles?.root ?? ""}`}
+    style={[style, styles?.root].filter(Boolean).join(";")}
   >
     {#if showIcon}
       <span

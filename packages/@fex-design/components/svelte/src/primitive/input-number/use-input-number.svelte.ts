@@ -1,9 +1,12 @@
+import { untrack } from 'svelte'
 import type {
   InputNumberConstraints,
   InputNumberFormatter,
   InputNumberParser,
 } from '@fex-design/core/input-number/types'
 import {
+  canChangeInputNumber,
+  canStepInputNumber,
   defaultInputNumberFormatter,
   defaultInputNumberParser,
   isInputNumberOutOfRange,
@@ -12,31 +15,35 @@ import {
   stepInputNumber,
 } from '@fex-design/core/input-number/value'
 export interface UseInputNumberOptions extends InputNumberConstraints {
-  controlled?: boolean
-  value?: number
-  defaultValue?: number
-  parser?: InputNumberParser
-  formatter?: InputNumberFormatter
-  disabled?: boolean
-  readOnly?: boolean
-  keyboard?: boolean
-  onChange?: (event: Event, value: number | undefined) => void
+  controlled?: boolean | undefined
+  value?: number | undefined
+  defaultValue?: number | undefined
+  parser?: InputNumberParser | undefined
+  formatter?: InputNumberFormatter | undefined
+  disabled?: boolean | undefined
+  readOnly?: boolean | undefined
+  keyboard?: boolean | undefined
+  onChange?: ((event: Event, value: number | undefined) => void) | undefined
 }
 export function useInputNumber(getOptions: () => UseInputNumberOptions) {
   const initialValue = getOptions().defaultValue
   let internalValue = $state(initialValue)
   const initialDraft = (getOptions().formatter ?? defaultInputNumberFormatter)(
-    getOptions().value ?? initialValue,
+    (getOptions().controlled ?? getOptions().value !== undefined) ? getOptions().value : initialValue,
     {
       userTyping: false,
       input: '',
     },
   )
   let draft = $state(initialDraft)
-  let editing = false
-  const value = () => (getOptions().controlled ? getOptions().value : internalValue)
+  let editing = $state(false)
+  const controlled = $derived(getOptions().controlled ?? getOptions().value !== undefined)
+  const externalValue = $derived(controlled ? getOptions().value : undefined)
+  const currentValue = $derived(controlled ? externalValue : internalValue)
+  const value = () => currentValue
   const parser = () => getOptions().parser ?? defaultInputNumberParser
-  const formatter = () => getOptions().formatter ?? defaultInputNumberFormatter
+  const currentFormatter = $derived(getOptions().formatter ?? defaultInputNumberFormatter)
+  const formatter = () => currentFormatter
   const constraints = () => ({
     min: getOptions().min,
     max: getOptions().max,
@@ -45,25 +52,34 @@ export function useInputNumber(getOptions: () => UseInputNumberOptions) {
   })
   // Synchronize caller-owned controlled values into the editable text buffer outside active typing.
   $effect(() => {
-    const next = value()
-    if (!editing) draft = formatter()(next, { userTyping: false, input: '' })
+    const next = controlled ? externalValue : untrack(value)
+    const format = formatter()
+    if (!untrack(() => editing)) draft = untrack(() => format(next, { userTyping: false, input: '' }))
   })
   const setValue = (next: number | undefined) => {
-    if (!getOptions().controlled) internalValue = next
+    if (!controlled) internalValue = next
   }
   const commit = (next: number | undefined) => {
     const normalized = next === undefined ? undefined : normalizeInputNumber(next, constraints())
+    editing = false
     setValue(normalized)
     draft = formatter()(normalized, { userTyping: false, input: draft })
     return normalized
   }
   const changeBy = (event: Event, direction: 'increment' | 'decrement') => {
+    if (!canChangeInputNumber(getOptions(), event)) return
+    if (!canStepInputNumber(value(), direction, constraints())) return
     const next = commit(
       stepInputNumber(parseInputNumber(draft, parser()) ?? value(), direction, constraints()),
     )
     getOptions().onChange?.(event, next)
+    return next
   }
   return {
+    userTyping: () => editing,
+    disabled: () => getOptions().disabled ?? false,
+    readOnly: () => getOptions().readOnly ?? false,
+    parseDraft: () => parseInputNumber(draft, parser()),
     value,
     get draft() {
       return draft
@@ -82,6 +98,7 @@ export function useInputNumber(getOptions: () => UseInputNumberOptions) {
       !getOptions().readOnly &&
       (getOptions().min === undefined || value() === undefined || value()! > getOptions().min!),
     input(text: string, event: Event) {
+      if (!canChangeInputNumber(getOptions(), event)) return
       editing = true
       draft = text
       const next = parseInputNumber(text, parser())
@@ -89,23 +106,27 @@ export function useInputNumber(getOptions: () => UseInputNumberOptions) {
         setValue(next)
         getOptions().onChange?.(event, next)
       }
+      return next
     },
     blur(event: Event) {
+      if (!canChangeInputNumber(getOptions(), event)) return
       const before = value()
       const next = commit(parseInputNumber(draft, parser()) ?? before)
       editing = false
       if (next !== before) getOptions().onChange?.(event, next)
     },
     keydown(event: KeyboardEvent) {
-      if (getOptions().keyboard === false || getOptions().disabled || getOptions().readOnly) return
+      if (getOptions().keyboard === false || !canChangeInputNumber(getOptions(), event)) return
       if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-        event.preventDefault()
         changeBy(event, event.key === 'ArrowUp' ? 'increment' : 'decrement')
+        event.preventDefault()
       }
     },
-    clear(event: Event) {
-      commit(undefined)
-      getOptions().onChange?.(event, undefined)
+    clear(event?: Event) {
+      if (!canChangeInputNumber(getOptions(), event)) return
+      const next = commit(undefined)
+      if (event) getOptions().onChange?.(event, next)
+      return next
     },
     increment: (event: Event) => changeBy(event, 'increment'),
     decrement: (event: Event) => changeBy(event, 'decrement'),

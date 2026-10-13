@@ -8,10 +8,12 @@ import {
 import {
   getCalendarValueDate,
   getCalendarValueLabel,
+  getCalendarSelectionValue,
   isCalendarWeek,
   isSameCalendarValue,
 } from './value'
 import { isCalendarValueInRange } from './range'
+import { endOfDate } from '../date/utils'
 import type {
   CalendarCell,
   CalendarDate,
@@ -22,6 +24,7 @@ import type {
   CalendarQuarter,
   CalendarValue,
   CalendarWeek,
+  CalendarWeekday,
 } from './types'
 
 const dateColumnCount = 7
@@ -122,7 +125,11 @@ function createCalendarCell<TValue extends CalendarValue>({
   outside: boolean
   options: CalendarGridOptions<TValue> & { today: CalendarDate }
 }): CalendarCell<TValue> {
-  const isBeforeMin = options.min ? compareCalendarDate(date, options.min) < 0 : false
+  // Browsing a month/year must remain possible when min falls inside that period.
+  const periodEnd = panel === 'month' ? endOfDate(date, 'month')
+    : panel === 'quarter' ? endOfDate(date, 'quarter')
+      : panel === 'year' || panel === 'decade' ? endOfDate(date, 'year') : date
+  const isBeforeMin = options.min ? compareCalendarDate(periodEnd, options.min) < 0 : false
   const isAfterMax = options.max ? compareCalendarDate(date, options.max) > 0 : false
   const disabled = isBeforeMin || isAfterMax || Boolean(options.disabledDate?.(date))
   const singleRangeValue = Boolean(
@@ -134,6 +141,13 @@ function createCalendarCell<TValue extends CalendarValue>({
   const rangeEnd = singleRangeValue
     ? isSameCalendarValue(value, options.range?.start ?? options.range?.end)
     : isSameCalendarValue(value, options.range?.end)
+  const selectedValue = getPanelSelectionValue(options.value, granularity, options.weekStartsOn)
+  const selectedValues = options.values?.some(item =>
+    isSameCalendarValue(value, getPanelSelectionValue(item, granularity, options.weekStartsOn)),
+  )
+  const browsingValue = options.granularity === 'date' && panel !== 'date'
+    ? getCalendarSelectionValue(options.viewDate, granularity, options.weekStartsOn)
+    : null
 
   return {
     key: `${panel}:${granularity}:${getCalendarDateKey(date)}:${rowIndex}:${columnIndex}`,
@@ -145,17 +159,27 @@ function createCalendarCell<TValue extends CalendarValue>({
     rowIndex,
     columnIndex,
     state: {
-      today: getCalendarDateKey(date) === getCalendarDateKey(options.today),
+      today: panel === 'date'
+        ? getCalendarDateKey(date) === getCalendarDateKey(options.today)
+        : isSameCalendarValue(value, getCalendarSelectionValue(options.today, granularity)),
       outside,
       disabled,
-      selected:
-        isSameCalendarValue(value, options.value) ||
-        Boolean(options.values?.some((item) => isSameCalendarValue(value, item))),
+      // Unit panels need an active browse selection even when date selection is
+      // intentionally deferred until the date panel is opened.
+      selected: isSameCalendarValue(value, selectedValue) || Boolean(selectedValues) || isSameCalendarValue(value, browsingValue),
       rangeStart,
       rangeEnd,
       inRange: isCalendarValueInRange(value, options.range),
     },
   }
+}
+
+function getPanelSelectionValue(
+  value: CalendarValue | null | undefined,
+  granularity: CalendarGranularity,
+  weekStartsOn: CalendarWeekday | undefined,
+) {
+  return value ? getCalendarSelectionValue(getCalendarValueDate(value), granularity, weekStartsOn) : null
 }
 
 function getDateCellValue(

@@ -14,7 +14,41 @@
   "props": [],
   "events": [],
   "slots": [],
-  "demos": [],
+  "demos": [
+    {
+      "id": "basic"
+    },
+    {
+      "id": "group"
+    },
+    {
+      "id": "group-count"
+    },
+    {
+      "id": "group-with-icon"
+    },
+    {
+      "id": "sizes"
+    },
+    {
+      "id": "direction"
+    },
+    {
+      "id": "shape"
+    },
+    {
+      "id": "group-shape"
+    },
+    {
+      "id": "max-count"
+    },
+    {
+      "id": "styling"
+    },
+    {
+      "id": "css-variables"
+    }
+  ],
   "components": [
     {
       "name": "Avatar",

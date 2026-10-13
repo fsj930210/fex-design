@@ -8,7 +8,7 @@ import { useSelect } from './use-select'
 defineOptions({ name: 'SelectItem', inheritAttrs: false })
 const props = defineProps<{ item: SelectOption; class?: string }>()
 const select = useSelect('SelectItem')
-const selected = computed(() => select.controller.selection.isSelected(props.item.value))
+const selected = computed(() => select.snapshot.value.selectedValues.includes(props.item.value))
 const disabled = computed(() => props.item.disabled === true || select.controller.selection.isDisabled(props.item.value))
 </script>
 <template>

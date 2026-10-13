@@ -2,11 +2,11 @@ import { Temporal } from '../calendar/temporal'
 import {
   compareCalendarValue,
   getCalendarValueDate,
+  getCalendarSelectionValue,
   getCalendarValueKey,
   isSameCalendarValue,
 } from '../calendar/value'
 import { format, parse } from '../date/utils'
-import { getQuarter, getWeekEnd, getWeekStart, getYear } from '../date/utils'
 import type {
   CalendarDate,
   CalendarQuarter,
@@ -39,19 +39,7 @@ export function normalizeDatePickerValue<TPicker extends DatePickerPicker>(
   picker: TPicker,
   weekStartsOn: CalendarWeekday = 0,
 ): DatePickerValue<TPicker> {
-  if (picker === 'week') {
-    const start = getWeekStart(date, weekStartsOn)
-    return { start, end: getWeekEnd(start, weekStartsOn) } as DatePickerValue<TPicker>
-  }
-  if (picker === 'month') {
-    return Temporal.PlainYearMonth.from({
-      year: date.year,
-      month: date.month,
-    }) as DatePickerValue<TPicker>
-  }
-  if (picker === 'quarter') return getQuarter(date) as DatePickerValue<TPicker>
-  if (picker === 'year') return getYear(date) as DatePickerValue<TPicker>
-  return date as DatePickerValue<TPicker>
+  return getCalendarSelectionValue(date, picker, weekStartsOn) as DatePickerValue<TPicker>
 }
 
 export function formatDatePickerValue(

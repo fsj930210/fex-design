@@ -35,7 +35,7 @@
   {loading}
   bind:ref
   class={cn(className, classNames?.root)}
-  style={`${typeof style === "string" ? style : ""}${styles?.root ?? ""}`}
+  style={[style, styles?.root].filter(Boolean).join(";")}
 >
   {#if checkedContent}<SwitchContent
       state="checked"

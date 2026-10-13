@@ -4,6 +4,8 @@ import type {
   InputNumberParser,
 } from '@fex-design/core/input-number/types'
 import {
+  canChangeInputNumber,
+  canStepInputNumber,
   defaultInputNumberFormatter,
   defaultInputNumberParser,
   isInputNumberOutOfRange,
@@ -14,22 +16,24 @@ import {
 import { computed, ref, toValue, watch, type MaybeRefOrGetter } from 'vue'
 
 export interface UseInputNumberOptions extends InputNumberConstraints {
-  controlled?: boolean
-  value?: number
-  defaultValue?: number
-  parser?: InputNumberParser
-  formatter?: InputNumberFormatter
-  disabled?: boolean
-  readOnly?: boolean
-  keyboard?: boolean
-  onChange?: (event: Event, value: number | undefined) => void
+  controlled?: boolean | undefined
+  value?: number | undefined
+  defaultValue?: number | undefined
+  parser?: InputNumberParser | undefined
+  formatter?: InputNumberFormatter | undefined
+  disabled?: boolean | undefined
+  readOnly?: boolean | undefined
+  keyboard?: boolean | undefined
+  onChange?: ((event: Event, value: number | undefined) => void) | undefined
 }
 
 export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> = {}) {
   const options = computed(() => toValue(source))
   const internalValue = ref(options.value.defaultValue)
+  const controlled = computed(() => options.value.controlled ?? options.value.value !== undefined)
+  const externalValue = computed(() => controlled.value ? options.value.value : undefined)
   const value = computed(() =>
-    options.value.controlled ? options.value.value : internalValue.value,
+    controlled.value ? externalValue.value : internalValue.value,
   )
   const parser = computed(() => options.value.parser ?? defaultInputNumberParser)
   const formatter = computed(() => options.value.formatter ?? defaultInputNumberFormatter)
@@ -42,7 +46,7 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
   const userTyping = ref(false)
   const draft = ref(formatter.value(value.value, { userTyping: false, input: '' }))
   const setValue = (next: number | undefined) => {
-    if (!options.value.controlled) internalValue.value = next
+    if (!controlled.value) internalValue.value = next
   }
   const commit = (next: number | undefined) => {
     const normalized =
@@ -53,6 +57,8 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
     return normalized
   }
   const changeBy = (event: Event, direction: 'increment' | 'decrement') => {
+    if (!canChangeInputNumber(options.value, event)) return
+    if (!canStepInputNumber(value.value, direction, constraints.value)) return
     const next = commit(
       stepInputNumber(
         parseInputNumber(draft.value, parser.value) ?? value.value,
@@ -61,8 +67,10 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
       ),
     )
     options.value.onChange?.(event, next)
+    return next
   }
   const input = (text: string, event: Event) => {
+    if (!canChangeInputNumber(options.value, event)) return
     userTyping.value = true
     draft.value = text
     const next = parseInputNumber(text, parser.value)
@@ -70,28 +78,35 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
       setValue(next)
       options.value.onChange?.(event, next)
     }
+    return next
   }
   const blur = (event: Event) => {
+    if (!canChangeInputNumber(options.value, event)) return
     const before = value.value
     const next = commit(parseInputNumber(draft.value, parser.value) ?? before)
     if (next !== before) options.value.onChange?.(event, next)
   }
   const keydown = (event: KeyboardEvent) => {
-    if (options.value.keyboard === false || options.value.disabled || options.value.readOnly) return
+    if (options.value.keyboard === false || !canChangeInputNumber(options.value, event)) return
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault()
       changeBy(event, event.key === 'ArrowUp' ? 'increment' : 'decrement')
+      event.preventDefault()
     }
   }
-  const clear = (event: Event) => {
-    commit(undefined)
-    options.value.onChange?.(event, undefined)
+  const clear = (event?: Event) => {
+    if (!canChangeInputNumber(options.value, event)) return
+    const next = commit(undefined)
+    if (event) options.value.onChange?.(event, next)
+    return next
   }
-  watch(value, (next) => {
-    if (!userTyping.value)
-      draft.value = formatter.value(next, { userTyping: false, input: draft.value })
+  // External value or formatter changes refresh the buffer only outside active typing.
+  watch([controlled, externalValue, formatter], ([, , format]) => {
+    if (!userTyping.value) draft.value = format(value.value, { userTyping: false, input: '' })
   })
   return {
+    disabled: computed(() => options.value.disabled ?? false),
+    readOnly: computed(() => options.value.readOnly ?? false),
+    parseDraft: () => parseInputNumber(draft.value, parser.value),
     value,
     draft,
     userTyping,

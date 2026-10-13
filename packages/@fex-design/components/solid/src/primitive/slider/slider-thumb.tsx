@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import {
   convertValueToPercentage,
   isSliderReversed,
@@ -73,11 +74,11 @@ export function SliderThumb(props: SliderThumbProps) {
       class={cn(sliderThumbClassName, local.class)}
       style={thumbStyle()}
       onFocus={(event) => {
-        if (typeof local.onFocus === 'function') local.onFocus(event)
+        callEventHandler(local.onFocus, event)
         context.controller.setActiveIndex(index())
       }}
       onKeyDown={(event) => {
-        if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
+        callEventHandler(local.onKeyDown, event)
         if (event.defaultPrevented || disabled() || !context.snapshot().keyboard) return
         if (!event.repeat) context.controller.startSlide(value(), 'keyboard')
         const keyMap: Record<string, number> = {
@@ -116,7 +117,7 @@ export function SliderThumb(props: SliderThumbProps) {
         }
       }}
       onKeyUp={(event) => {
-        if (typeof local.onKeyUp === 'function') local.onKeyUp(event)
+        callEventHandler(local.onKeyUp, event)
         context.controller.endSlide()
       }}
     />

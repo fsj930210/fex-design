@@ -11,6 +11,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  type OnInit,
   computed,
   input,
   output,
@@ -44,7 +45,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   },
   templateUrl: './switch.html',
 })
-export class Switch {
+export class Switch implements OnInit {
   readonly checked = input<boolean | undefined>()
   readonly defaultChecked = input(false, { transform: booleanAttribute })
   readonly disabled = input(false, { transform: booleanAttribute })
@@ -56,10 +57,10 @@ export class Switch {
   readonly classNames = input<SwitchClassNames>({})
   readonly styles = input<SwitchStyles<string>>({})
   readonly change = output<{ checked: boolean; event: MouseEvent }>()
-  private readonly hasInteracted = signal(false)
   private readonly internalChecked = signal(false)
+  ngOnInit() { this.internalChecked.set(this.defaultChecked()) }
   readonly currentChecked = computed(
-    () => this.checked() ?? (this.hasInteracted() ? this.internalChecked() : this.defaultChecked()),
+    () => this.checked() ?? this.internalChecked(),
   )
   protected readonly hostClassName = createHostClassName(() =>
     cn(switchClassName({ size: this.size(), shape: this.shape() }), this.classNames().root),
@@ -68,7 +69,6 @@ export class Switch {
     if (event.defaultPrevented || this.disabled() || this.loading()) return
     const checked = !this.currentChecked()
     if (this.checked() === undefined) {
-      this.hasInteracted.set(true)
       this.internalChecked.set(checked)
     }
     this.change.emit({ checked, event })

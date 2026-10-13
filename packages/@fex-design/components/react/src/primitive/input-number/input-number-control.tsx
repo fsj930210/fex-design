@@ -21,7 +21,7 @@ export function InputNumberControl({ onBlur, onKeyDown, ...props }: InputNumberC
       aria-valuetext={props['aria-valuetext'] ?? inputNumber.formattedValue}
       onBlur={(event) => {
         onBlur?.(event)
-        if (!event.defaultPrevented) inputNumber.blur(event)
+        if (!event.defaultPrevented) inputNumber.blur(event.nativeEvent)
       }}
       onKeyDown={(event) => {
         onKeyDown?.(event)

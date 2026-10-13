@@ -30,7 +30,7 @@
     );
     const start =
       currentSnapshot.values.length > 1 ? Math.min(...percentages) : 0;
-    const endValue = Math.max(...percentages);
+    const endValue = Math.max(0, ...percentages);
     const reversed = isSliderReversed(
       currentSnapshot.orientation,
       currentSnapshot.direction,

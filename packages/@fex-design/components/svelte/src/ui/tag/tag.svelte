@@ -38,7 +38,7 @@
   {...rest}
   {disabled}
   class={cn(className, classNames?.root)}
-  style={`${typeof style === "string" ? style : ""}${styles?.root ?? ""}`}
+  style={[style, styles?.root].filter(Boolean).join(";")}
 >
   {@render children?.()}
   {#if closable && closeIcon}

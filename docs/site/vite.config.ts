@@ -122,7 +122,10 @@ export default defineConfig({
                 : framework === 'angular'
                   ? 'typescript'
                   : framework
-            const html = await codeToHtml(source, { lang: language, theme: 'github-light' })
+            const html = await codeToHtml(source, {
+              lang: language,
+              themes: { light: 'github-light', dark: 'github-dark' },
+            })
             response.setHeader('Content-Type', 'application/json; charset=utf-8')
             response.end(JSON.stringify({ source, html }))
           } catch {

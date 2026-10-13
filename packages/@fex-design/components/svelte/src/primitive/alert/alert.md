@@ -5,8 +5,7 @@ Alert Primitive supplies styled Svelte 5 parts for semantic feedback without cho
 ## Import
 
 ```svelte
-import Alert from '@fex-design/svelte/primitive/alert'
-import AlertIcon from '@fex-design/svelte/primitive/alert-icon'
+import { Alert, AlertIcon } from '@fex-design/svelte/primitive/alert'
 ```
 
 ## Examples

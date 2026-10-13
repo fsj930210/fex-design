@@ -4,8 +4,7 @@ Styled empty-state regions using Svelte 5 components and snippets.
 
 ## Import
 
-    import Empty from '@fex-design/svelte/primitive/empty'
-    import EmptyHeader from '@fex-design/svelte/primitive/empty-header'
+    import { Empty, EmptyHeader } from '@fex-design/svelte/primitive/empty'
 
 The remaining parts use `primitive/empty-media`, `primitive/empty-title`, `primitive/empty-description`, and `primitive/empty-content`.
 

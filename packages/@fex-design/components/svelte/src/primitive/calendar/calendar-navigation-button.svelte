@@ -1,64 +1,12 @@
-<script lang="ts">
-  import { addDate, subtractDate } from "@fex-design/core/calendar";
-  import type { Snippet } from "svelte";
-  import type { HTMLButtonAttributes } from "svelte/elements";
-  import { getContext } from "svelte";
-  import { calendarContextKey, type CalendarContextValue } from "./context";
-
-  type CalendarNavigationAction =
-    | "previous-year"
-    | "previous-month"
-    | "next-month"
-    | "next-year"
-    | "previous-panel"
-    | "next-panel";
-
-  interface CalendarNavigationButtonProps extends Omit<
-    HTMLButtonAttributes,
-    "children" | "type"
-  > {
-    action: CalendarNavigationAction;
-    children?: Snippet | undefined;
-  }
-
-  let { action, children, onclick, ...rest }: CalendarNavigationButtonProps =
-    $props();
-  const context = getContext<CalendarContextValue>(calendarContextKey);
-
-  function runAction() {
-    if (action === "previous-year")
-      context.setViewDate(subtractDate(context.getViewDate(), { years: 1 }));
-    if (action === "previous-month")
-      context.setViewDate(subtractDate(context.getViewDate(), { months: 1 }));
-    if (action === "next-month")
-      context.setViewDate(addDate(context.getViewDate(), { months: 1 }));
-    if (action === "next-year")
-      context.setViewDate(addDate(context.getViewDate(), { years: 1 }));
-    if (action === "previous-panel")
-      context.setViewDate(
-        context.getPanel() === "date"
-          ? subtractDate(context.getViewDate(), { months: 1 })
-          : subtractDate(context.getViewDate(), { years: 1 }),
-      );
-    if (action === "next-panel")
-      context.setViewDate(
-        context.getPanel() === "date"
-          ? addDate(context.getViewDate(), { months: 1 })
-          : addDate(context.getViewDate(), { years: 1 }),
-      );
-  }
+﻿<script lang="ts">
+  import type { HTMLButtonAttributes } from 'svelte/elements';
+  import type { CalendarNavigationAction } from '@fex-design/core/calendar';
+  import { calendarNavigationButtonClassName } from '@fex-design/components-styles/calendar';
+  import { cn } from '@fex-design/utils';
+  import { useCalendarContext } from './context';
+  import ChevronLeftIcon from '../../icons/chevron-left.svelte';
+  import ChevronRightIcon from '../../icons/chevron-right.svelte';
+  let { action, children, class: className, onclick, ref = $bindable(null), ...rest }: HTMLButtonAttributes & { action: CalendarNavigationAction; ref?: HTMLButtonElement | null } = $props();
+  const context = useCalendarContext();
 </script>
-
-<button
-  {...rest}
-  type="button"
-  data-slot="calendar-navigation-button"
-  data-action={action}
-  onclick={(event) => {
-    onclick?.(event);
-    if (event.defaultPrevented) return;
-    runAction();
-  }}
->
-  {@render children?.()}
-</button>
+<button {...rest} bind:this={ref} type="button" data-slot="calendar-navigation-button" data-action={action} class={cn(calendarNavigationButtonClassName, className)} onclick={event => { onclick?.(event); if (!event.defaultPrevented) context.controller.navigate(action); }}>{#if children}{@render children?.()}{:else if action.startsWith('previous')}<ChevronLeftIcon class="size-4 rtl:rotate-180" />{:else if action.startsWith('next')}<ChevronRightIcon class="size-4 rtl:rotate-180" />{/if}</button>

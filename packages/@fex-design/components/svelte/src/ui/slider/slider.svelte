@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { getSliderDotValues } from '@fex-design/core/slider/utils'
   import type {
     SliderChangeMeta,
     SliderPart,
   } from "@fex-design/core/slider/types";
+  import { cn } from "@fex-design/utils";
   import type { HTMLAttributes } from "svelte/elements";
   import {
     SliderMark,
@@ -72,22 +74,14 @@
   const defaults = $derived(
     typeof defaultValue === "number" ? [defaultValue] : defaultValue,
   );
-  let internalValues = $state<number[]>([]);
+  let internalValues = $state<number[] | undefined>();
   const currentValues = $derived(
-    values ?? (internalValues.length ? internalValues : (defaults ?? [min])),
+    values ?? internalValues ?? defaults ?? [min],
   );
-  const count = $derived(currentValues.length);
   const disabledThumbs = $derived(Array.isArray(disabled) ? disabled : []);
-  const dotValues = $derived(
-    dots && step
-      ? Array.from(
-          { length: Math.floor((max - min) / step) + 1 },
-          (_, index) => min + index * step,
-        )
-      : [],
-  );
+  const dotValues = $derived(dots ? getSliderDotValues(min, max, step) : []);
   const returnValue = (next: number[]) =>
-    typeof value === "number" || typeof defaultValue === "number"
+    next.length > 0 && (typeof value === "number" || typeof defaultValue === "number")
       ? next[0]!
       : next;
 </script>
@@ -112,7 +106,7 @@
   {minCount}
   {maxCount}
   {size}
-  class={[className, classNames.root].filter(Boolean).join(" ")}
+  class={cn(className, classNames.root)}
   style={`${style ?? ""};${styles.root ?? ""}`}
   onChange={(next, meta) => {
     if (next.length !== currentValues.length) internalValues = next;
@@ -131,12 +125,12 @@
       />{/each}
     {#each marks as mark (mark.value)}<SliderMark
         value={mark.value}
-        class={[classNames.mark, mark.class].filter(Boolean).join(" ")}
+        class={cn(classNames.mark, mark.class)}
         style={`${styles.mark ?? ""};${mark.style ?? ""}`}
         >{mark.label}</SliderMark
       >{/each}
   </SliderTrack>
-  {#each Array(count) as _, index}<SliderThumb
+  {#each Array(currentValues.length) as _, index}<SliderThumb
       {index}
       disabled={disabledThumbs[index]}
       class={classNames.thumb}

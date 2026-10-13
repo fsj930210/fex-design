@@ -52,3 +52,5 @@ export {
   useRangePicker,
   type UseRangePickerOptions,
 } from './use-range-picker'
+
+export { CalendarCellTrigger as DatePickerCellTrigger } from '../calendar'

@@ -11,7 +11,10 @@ export function getInitialHostClassName() {
   return inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.getAttribute('class') ?? ''
 }
 
-export function createHostClassName(className: ClassValueSource) {
+export function createHostClassName(className: ClassValueSource, userClassName?: ClassValueSource) {
   const initialClassName = getInitialHostClassName()
-  return computed(() => cn(readClassValue(className), initialClassName))
+  return computed(() => cn(
+    readClassValue(className),
+    userClassName === undefined ? initialClassName : readClassValue(userClassName) ?? initialClassName,
+  ))
 }

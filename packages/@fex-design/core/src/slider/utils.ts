@@ -3,6 +3,19 @@ import type { SliderDirection, SliderOrientation } from './types'
 export const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value))
 
+export function getSliderDotValues(min = 0, max = 100, step?: number | null) {
+  if (step === null) return []
+  const first = Number.isFinite(min) ? min : 0
+  const second = Number.isFinite(max) ? max : 100
+  const lower = Math.min(first, second)
+  const upper = Math.max(first, second)
+  const interval = step !== undefined && Number.isFinite(step) && step > 0 ? step : 1
+  const decimals = Math.max(getDecimalCount(lower), getDecimalCount(interval))
+  return Array.from({ length: Math.floor((upper - lower) / interval) + 1 }, (_, index) =>
+    roundValue(lower + index * interval, decimals),
+  )
+}
+
 export function getDecimalCount(value: number) {
   if (!Number.isFinite(value)) return 0
   const stringValue = value.toString()

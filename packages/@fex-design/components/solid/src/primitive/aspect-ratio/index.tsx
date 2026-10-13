@@ -2,6 +2,7 @@ import { aspectRatioClassName } from '@fex-design/components-styles/aspect-ratio
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import type { AspectRatioOptions } from '@fex-design/core/aspect-ratio/types'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 export function AspectRatio(
   props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>> & AspectRatioOptions,
 ) {
@@ -11,10 +12,7 @@ export function AspectRatio(
       {...rest}
       data-slot="aspect-ratio"
       class={cn(aspectRatioClassName, local.class)}
-      style={{
-        'aspect-ratio': local.ratio,
-        ...(typeof local.style === 'object' ? local.style : {}),
-      }}
+      style={mergeStyle({ 'aspect-ratio': local.ratio }, local.style)}
     >
       {local.children}
     </div>

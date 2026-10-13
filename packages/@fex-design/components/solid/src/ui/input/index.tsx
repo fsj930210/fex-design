@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
 import type { InputSearchMeta } from '@fex-design/core/input/types'
 import { cn } from '@fex-design/utils'
@@ -18,6 +19,7 @@ import {
   InputSuffix,
 } from '@fex-design/solid/primitive/input'
 import type { InputPasswordProps, InputProps, InputSearchProps } from './input.types'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 
 export type { InputPasswordProps, InputProps, InputSearchProps } from './input.types'
 
@@ -47,10 +49,7 @@ export function Input(props: InputProps) {
     if (local.value === undefined) setInternalValue(value)
     local.onValueChange?.(value)
   }
-  const rootStyle = () =>
-    local.styles?.root
-      ? { ...local.styles.root, ...(typeof local.style === 'object' ? local.style : {}) }
-      : local.style
+  const rootStyle = () => mergeStyle(local.styles?.root, local.style)
   const root = (
     <InputRoot
       value={currentValue()}
@@ -204,7 +203,7 @@ export function InputSearch(props: InputSearchProps) {
         true,
       )}
       onKeyDown={(event) => {
-        if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
+        callEventHandler(local.onKeyDown, event)
         if (!event.defaultPrevented && event.key === 'Enter') search('enter')
       }}
     />

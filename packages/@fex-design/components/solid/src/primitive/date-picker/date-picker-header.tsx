@@ -9,6 +9,7 @@ import { cn } from '@fex-design/utils'
 import { Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/solid/icons/chevron'
 import { Button, type ButtonProps } from '../../ui/button'
+import { getNextPanelByHeaderLabel } from '@fex-design/core/date-picker/panel'
 import { useCalendarContext } from '../calendar/calendar-context'
 
 export function DatePickerHeader(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
@@ -37,17 +38,11 @@ export interface DatePickerHeaderButtonProps extends ButtonProps {
 export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
   const [local, rest] = splitProps(props, ['action', 'class', 'children', 'onClick'])
   const calendar = useCalendarContext('DatePickerHeaderButton')
-  const previous = local.action.startsWith('previous')
-  const double = local.action.endsWith('year') || local.action.endsWith('panel')
+  const previous = () => local.action.startsWith('previous')
+  const double = () => local.action.endsWith('year') || local.action.endsWith('panel')
 
   function runAction() {
-    const date = calendar.viewDate()
-    if (local.action === 'previous-year') calendar.setViewDate({ ...date, year: date.year - 1 })
-    if (local.action === 'next-year') calendar.setViewDate({ ...date, year: date.year + 1 })
-    if (local.action === 'previous-panel') calendar.setViewDate({ ...date, year: date.year - 10 })
-    if (local.action === 'next-panel') calendar.setViewDate({ ...date, year: date.year + 10 })
-    if (local.action === 'previous-month') calendar.setViewDate(date.subtract({ months: 1 }))
-    if (local.action === 'next-month') calendar.setViewDate(date.add({ months: 1 }))
+    calendar.controller.navigate(local.action)
   }
 
   return (
@@ -64,9 +59,9 @@ export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
     >
       {local.children ?? (
         <>
-          {previous ? <ChevronLeftIcon class="size-4" /> : <ChevronRightIcon class="size-4" />}
-          <Show when={double}>
-            {previous ? (
+          {previous() ? <ChevronLeftIcon class="size-4" /> : <ChevronRightIcon class="size-4" />}
+          <Show when={double()}>
+            {previous() ? (
               <ChevronLeftIcon class={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
             ) : (
               <ChevronRightIcon class={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
@@ -96,11 +91,11 @@ export function DatePickerHeaderLabel(props: DatePickerHeaderLabelProps) {
   const calendar = useCalendarContext('DatePickerHeaderLabel')
   const label = () => {
     if (local.part === 'year') {
-      return calendar.panel() === 'decade'
-        ? `${Math.floor(calendar.viewDate().year / 10) * 10}-${Math.floor(calendar.viewDate().year / 10) * 10 + 9}年`
-        : `${calendar.viewDate().year}年`
+      return calendar.state().panel === 'decade'
+        ? `${Math.floor(calendar.state().viewDate.year / 10) * 10}-${Math.floor(calendar.state().viewDate.year / 10) * 10 + 9}年`
+        : `${calendar.state().viewDate.year}年`
     }
-    return `${calendar.viewDate().month}月`
+    return `${calendar.state().viewDate.month}月`
   }
   return (
     <Button
@@ -111,7 +106,7 @@ export function DatePickerHeaderLabel(props: DatePickerHeaderLabelProps) {
       class={cn(datePickerHeaderLabelClassName, local.class)}
       onClick={(event) => {
         if (typeof local.onClick === 'function') local.onClick(event)
-        if (!event.defaultPrevented) calendar.setPanel(local.part)
+        if (!event.defaultPrevented) calendar.controller.setPanel(getNextPanelByHeaderLabel(local.part))
       }}
     >
       {local.children ?? label()}

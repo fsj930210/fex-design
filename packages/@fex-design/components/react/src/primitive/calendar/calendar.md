@@ -1,120 +1,74 @@
 # Calendar Primitive
 
-Calendar primitive 提供基于 `Temporal.PlainDate` / `Temporal.PlainYearMonth` 的日期网格和单元格交互骨架。它只处理基础日期能力，不内置农历、价格、日程、课表等业务展示。
+CalendarRoot 管理日历作用域。所有选择、浏览、面板切换和键盘目标计算由 calendar core 处理，五框架只适配响应式、事件和 DOM。
 
-## 导入
+## 部件
 
-```tsx
-import {
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarNavigationButton,
-  CalendarRoot,
-  CalendarWeekHeader,
-} from '@fex-design/react/primitive/calendar'
-```
+| 部件 | 用途 |
+| --- | --- |
+| CalendarRoot | 状态与动作作用域 |
+| CalendarHeader | 自定义头部，提供当前日期、面板及导航动作 |
+| CalendarNavigationButton | previous/next month、year、panel 或 today |
+| CalendarPanelTrigger | 切换 date、month、quarter、year、decade 面板 |
+| CalendarWeekHeader | 星期标题，labels 可覆盖 |
+| CalendarGrid | 默认网格或逐 cell 自定义内容 |
+| CalendarRow | 网格行 |
+| CalendarCell | 布局和状态容器，默认包含 CalendarCellTrigger |
+| CalendarCellTrigger | 日期选择按钮，默认撑满单元格 |
+| CalendarFooter | 底部内容与操作区 |
 
-日期工具函数从框架包入口导入，业务侧不需要直接依赖 core：
+## Root API
 
-```ts
-import {
-  addDate,
-  isBeforeDate,
-  setMonth,
-  startOfDate,
-} from '@fex-design/react/hooks/use-date-utils'
+| 属性 | 说明 |
+| --- | --- |
+| value / defaultValue | 受控值与初始值；undefined 表示非受控，null 表示空值 |
+| viewDate / defaultViewDate | 浏览位置；默认初始值所在月，否则今天 |
+| panel / defaultPanel | 浏览面板；默认由 granularity 决定 |
+| granularity | date、week、month、quarter、year；决定最终提交的值 |
+| values / range | 多值或区间的展示输入，选择流程由上层组合 |
+| weekStartsOn | 0 至 6，默认 0 |
+| today | 覆盖今天日期 |
+| min / max / disabledDate | 日期可选限制 |
 
-import { useDateUtils } from '@fex-design/react/hooks/use-date-utils'
-```
+default 属性仅初始化一次。翻页与切换面板不改变选中值。浏览层级单元格会下钻面板，达到选择粒度时才触发 change。cellSelect 是通知，不接管默认选择。所有部件保留原生属性、事件、class 与元素引用能力。
 
-## 基础示例
+## 扩展单元格
 
-```tsx
-import { createCalendarDate } from '@fex-design/core/calendar'
-import {
-  CalendarCell,
-  CalendarGrid,
-  CalendarRoot,
-  CalendarWeekHeader,
-} from '@fex-design/react/primitive/calendar'
+CalendarCell 本身不处理点击选择。自定义内容时显式组合 CalendarCellTrigger。日期、农历文字等静态内容可以放入 Trigger；日程链接和其他按钮放在 Trigger 外，作为 Cell 的兄弟内容。通过 class 调整布局，避免操作区相互覆盖。
 
-export function Demo() {
-  return (
-    <CalendarRoot defaultViewDate={createCalendarDate(2026, 7, 1)}>
-      <CalendarWeekHeader />
-      <CalendarGrid>{(cell) => <CalendarCell key={cell.key} cell={cell} />}</CalendarGrid>
-    </CalendarRoot>
-  )
-}
-```
+## 键盘
 
-## Props
+Tab 进入一个可用日期；方向键移动日期，Home/End 移动到行首/行末，PageUp/PageDown 翻页并移动焦点，Enter/Space 使用原生按钮选择。
 
-| 参数名             | 类型                               | 默认值               | 必填 | 说明                                                        |
-| ------------------ | ---------------------------------- | -------------------- | ---- | ----------------------------------------------------------- |
-| `value`            | `CalendarValue \| null`            | `undefined`          | 否   | 受控选中值。                                                |
-| `defaultValue`     | `CalendarValue \| null`            | `null`               | 否   | 非受控默认选中值。                                          |
-| `viewDate`         | `CalendarDate`                     | `undefined`          | 否   | 受控面板日期。                                              |
-| `defaultViewDate`  | `CalendarDate`                     | `getCalendarToday()` | 否   | 非受控默认面板日期。                                        |
-| `panel`            | `CalendarPanel`                    | `undefined`          | 否   | 受控面板类型。                                              |
-| `defaultPanel`     | `CalendarPanel`                    | `'date'`             | 否   | 非受控默认面板类型。                                        |
-| `granularity`      | `CalendarGranularity`              | `'date'`             | 否   | 选择粒度，支持 `date`、`week`、`month`、`quarter`、`year`。 |
-| `weekStartsOn`     | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`  | `0`                  | 否   | 周起始日，`0` 表示周日。                                    |
-| `today`            | `CalendarDate`                     | `getCalendarToday()` | 否   | 当前日期，用于 today 状态；测试或 demo 可显式固定。         |
-| `min`              | `CalendarDate`                     | `undefined`          | 否   | 最小可选日期。                                              |
-| `max`              | `CalendarDate`                     | `undefined`          | 否   | 最大可选日期。                                              |
-| `disabledDate`     | `(date: CalendarDate) => boolean`  | `undefined`          | 否   | 禁用日期判断。                                              |
-| `onValueChange`    | `(value: CalendarValue) => void`   | `undefined`          | 否   | 用户选择单元格后触发。                                      |
-| `onViewDateChange` | `(viewDate: CalendarDate) => void` | `undefined`          | 否   | 面板日期变化后触发。                                        |
-| `onPanelChange`    | `(panel: CalendarPanel) => void`   | `undefined`          | 否   | 面板类型变化后触发。                                        |
-
-## 导航按钮
-
-`CalendarNavigationButton` 内置常用面板导航动作，调用方只负责摆放和样式：
+## 使用
 
 ```tsx
-<CalendarNavigationButton action="previous-year" aria-label="上一年">
-  «
-</CalendarNavigationButton>
-<CalendarNavigationButton action="previous-month" aria-label="上一月">
-  ‹
-</CalendarNavigationButton>
-<CalendarNavigationButton action="next-month" aria-label="下一月">
-  ›
-</CalendarNavigationButton>
-<CalendarNavigationButton action="next-year" aria-label="下一年">
-  »
-</CalendarNavigationButton>
+import { CalendarRoot, CalendarHeader, CalendarNavigationButton, CalendarPanelTrigger, CalendarWeekHeader, CalendarGrid, CalendarCell, CalendarCellTrigger, CalendarFooter } from '@fex-design/react/primitive/calendar'
+
+<CalendarRoot onChange={handleChange}>
+  <CalendarHeader>
+    {({ viewDate }) => <>
+      <CalendarNavigationButton action="previous-panel" aria-label="上一页" />
+      <CalendarPanelTrigger panel="month">{viewDate.year} / {viewDate.month}</CalendarPanelTrigger>
+      <CalendarNavigationButton action="next-panel" aria-label="下一页" />
+    </>}
+  </CalendarHeader>
+  <CalendarWeekHeader />
+  <CalendarGrid>{cell => <CalendarCell cell={cell}>
+    <CalendarCellTrigger cell={cell}><span>{cell.label}</span><span>{getLunarLabel(cell.date)}</span></CalendarCellTrigger>
+  </CalendarCell>}</CalendarGrid>
+  <CalendarFooter>自定义底部</CalendarFooter>
+</CalendarRoot>
 ```
 
-支持的 action 包括 `previous-year`、`previous-month`、`next-month`、`next-year`、`previous-panel`、`next-panel`。
+## 自定义内容契约
 
-## 事件说明
+WeekHeader 的自定义内容统一收到 `{ label, index }`；CellTrigger 的自定义内容统一收到 cell。React/Solid 使用 children 回调，Vue 使用作用域 slot，Svelte 使用 snippet，Angular 使用 ng-template。Grid 不提供独立 cellClass，自定义样式通过 CalendarCell 的原生 class 传入。Angular 的原生 class 支持动态绑定并与默认样式合并。
 
-`CalendarCell` 点击时会调用 `CalendarRoot` 的内部选择逻辑，并在非禁用状态下触发 `onValueChange`。普通业务流转应放在这个事件回调中处理。
+## 独立逻辑接口
 
-## 日期工具
+返回契约统一为 `{ controller, state, grid }`，支持 `TValue extends CalendarValue` 泛型。所有动作通过 controller 调用，snapshot 仅用于内部订阅。React 的 state/grid 为当前渲染值，Vue 为 computed（脚本中读取 .value），Solid 与 Angular 为访问器（调用读取），Svelte 为响应式 getter（保持对象属性访问，不提前解构）。React 接收 options 对象，其他框架接收 options getter 以保留响应式依赖。
 
-Calendar core 暴露一组基于 Temporal 的常用工具，供 DatePicker、RangePicker、快捷禁用规则和自定义业务单元格复用：
+Root、Grid、Cell、CellTrigger 与独立逻辑接口均支持 `TValue extends CalendarValue`（默认 CalendarValue）。注入作用域不会自动传递父组件的泛型，Grid 的自定义内容类型需按框架原生方式显式指定。Angular Root 的状态统一从 state() 读取，动作统一通过 controller 调用。
 
-| 方法                                                         | 说明                                    |
-| ------------------------------------------------------------ | --------------------------------------- |
-| `setDate` / `setYear` / `setMonth` / `setDay`                | 设置某一天、某一月、某一年。            |
-| `addDate` / `subtractDate`                                   | 增减天、周、月、年。                    |
-| `startOfDate` / `endOfDate`                                  | 获取 day/week/month/quarter/year 边界。 |
-| `isBeforeDate` / `isAfterDate`                               | 判断日期先后。                          |
-| `isSameOrBeforeDate` / `isSameOrAfterDate` / `isBetweenDate` | 判断闭区间或开区间关系。                |
-| `minDate` / `maxDate` / `clampDate`                          | 日期取最小、最大或限制到区间内。        |
-| `getQuarter` / `setQuarter` / `getYear`                      | 日期和季度、年份值互转。                |
-| `getWeekStart` / `getWeekEnd`                                | 按 `weekStartsOn` 计算周起止日期。      |
-
-## 受控与非受控
-
-`value` / `defaultValue` 控制选中值，`viewDate` / `defaultViewDate` 控制面板位置，`panel` / `defaultPanel` 控制面板类型。三类状态彼此独立，DatePicker 或 RangePicker 可以只接管其中一部分。
-
-## 注意事项
-
-- Calendar primitive 不使用旧 `Date` API。
-- 高级展示通过 `CalendarGrid` 的 render prop 或自定义 `CalendarCell` 内容扩展。
-- RangePicker 应由上层组合两个 Calendar，并使用 core 的 range 工具计算区间状态。
+选择事件统一由 core 处理：change/onChange 仅在值不同的时候触发，select/onSelect 在每次提交选择时触发并携带 source。自定义 UI 可调用 controller.selectCell(cell, 'customize')。

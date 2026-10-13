@@ -1,0 +1,398 @@
+{
+  "name": "CalendarRoot",
+  "slug": "calendar",
+  "layer": "primitive",
+  "status": "stable",
+  "description": "可组合日历部件及独立逻辑接口，所有交互由 core 处理。Primitive 提供原子结构和默认基础样式，不提供 UI Calendar 的 classNames/styles 语义映射、完整布局或农历等业务展示。",
+  "examples": [
+    { "id": "basic", "title": "基础组合", "description": "Root、Header、Grid、Row、Cell、CellTrigger 和 Footer 的组合。" }
+  ],
+  "importPath": {
+    "react": "@fex-design/react/primitive/calendar",
+    "vue": "@fex-design/vue/primitive/calendar",
+    "solid": "@fex-design/solid/primitive/calendar",
+    "svelte": "@fex-design/svelte/primitive/calendar",
+    "angular": "@fex-design/angular/primitive/calendar"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": "TValue | null",
+      "description": "受控选中日期。"
+    },
+    {
+      "name": "defaultValue",
+      "type": "TValue | null",
+      "description": "初始选中日期。",
+      "default": "null"
+    },
+    {
+      "name": "viewDate",
+      "type": "CalendarDate",
+      "description": "受控浏览日期。"
+    },
+    {
+      "name": "defaultViewDate",
+      "type": "CalendarDate",
+      "description": "初始浏览日期；不指定时使用选中日期或今天。"
+    },
+    {
+      "name": "panel",
+      "type": "CalendarUIPanel",
+      "description": "受控浏览面板。"
+    },
+    {
+      "name": "defaultPanel",
+      "type": "CalendarUIPanel",
+      "description": "初始面板。"
+    },
+    {
+      "name": "values",
+      "type": "readonly TValue[]",
+      "description": "多日期选中展示，不开启多选流程。"
+    },
+    {
+      "name": "range",
+      "type": "CalendarRange<TValue>",
+      "description": "区间展示，不开启区间选择流程。"
+    },
+    {
+      "name": "weekStartsOn",
+      "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+      "description": "每周起始日，优先于 locale。"
+    },
+    {
+      "name": "min",
+      "type": "CalendarDate",
+      "description": "最早可用日期，约束选择、导航及年月选项。"
+    },
+    {
+      "name": "max",
+      "type": "CalendarDate",
+      "description": "最晚可用日期。"
+    },
+    {
+      "name": "today",
+      "type": "CalendarDate",
+      "description": "覆盖今天。"
+    },
+    {
+      "name": "disabledDate",
+      "type": "(date: CalendarDate) => boolean",
+      "description": "禁用指定日期。"
+    },
+    {
+      "name": "granularity",
+      "type": "CalendarGranularity",
+      "default": "date",
+      "description": "底层选择协议，决定提交或继续下钻；UI Calendar 不公开。"
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "type": "(value: TValue) => void",
+      "description": "值发生变化时触发；重复选择通过 select 通知。"
+    },
+    {
+      "name": "select",
+      "type": "(value: TValue, info: CalendarSelectInfo) => void",
+      "description": "每次提交选择通知；change 仅在值不同的时候触发。"
+    },
+    {
+      "name": "viewDateChange",
+      "type": "(date: CalendarDate) => void",
+      "description": "浏览日期变化。"
+    },
+    {
+      "name": "panelChange",
+      "type": "(panel: CalendarUIPanel) => void",
+      "description": "浏览面板变化。"
+    },
+    {
+      "name": "cellSelect",
+      "type": "(cell: CalendarCell) => void",
+      "description": "点击可用 Cell，包含面板下钻。"
+    },
+    {
+      "name": "cellHover",
+      "type": "(cell: CalendarCell) => void",
+      "description": "悬停可用 Cell。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--calendar-hover-background",
+      "description": "悬停背景",
+      "default": "var(--muted-background)"
+    },
+    {
+      "name": "--calendar-selected-background",
+      "description": "选中背景",
+      "default": "Primitive/卡片使用 primary，大日历使用淡色 primary"
+    },
+    {
+      "name": "--calendar-selected-foreground",
+      "description": "选中文字",
+      "default": "与默认选中背景对应"
+    },
+    {
+      "name": "--calendar-today-color",
+      "description": "今天强调色",
+      "default": "var(--primary)"
+    }
+  ],
+  "components": [
+    {
+      "name": "CalendarHeader",
+      "props": [],
+      "events": []
+    },
+    {
+      "name": "CalendarNavigationButton",
+      "props": [
+        {
+          "name": "action",
+          "type": "CalendarNavigationAction",
+          "required": true,
+          "description": "导航动作。"
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "CalendarPanelTrigger",
+      "props": [
+        {
+          "name": "panel",
+          "type": "CalendarPanel",
+          "required": true,
+          "description": "目标面板。"
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "CalendarWeekHeader",
+      "props": [
+        {
+          "name": "labels",
+          "type": "readonly string[]",
+          "description": "星期文字。"
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "CalendarGrid",
+      "props": [],
+      "events": []
+    },
+    {
+      "name": "CalendarRow",
+      "props": [],
+      "events": []
+    },
+    {
+      "name": "CalendarCell",
+      "props": [
+        {
+          "name": "cell",
+          "type": "CalendarCell<TValue>",
+          "required": true,
+          "description": "core 网格中的 Cell。"
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "CalendarCellTrigger",
+      "props": [
+        {
+          "name": "cell",
+          "type": "CalendarCell<TValue>",
+          "required": true,
+          "description": "core 网格中的 Cell。"
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "CalendarFooter",
+      "props": [],
+      "events": []
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(value: TValue) => void",
+          "description": "值发生变化时触发；重复选择通过 select 通知。"
+        },
+        {
+          "name": "onSelect",
+          "type": "(value: TValue, info: CalendarSelectInfo) => void",
+          "description": "每次提交选择通知；change 仅在值不同的时候触发。"
+        },
+        {
+          "name": "onViewDateChange",
+          "type": "(date: CalendarDate) => void",
+          "description": "浏览日期变化。"
+        },
+        {
+          "name": "onPanelChange",
+          "type": "(panel: CalendarUIPanel) => void",
+          "description": "浏览面板变化。"
+        },
+        {
+          "name": "onCellSelect",
+          "type": "(cell: CalendarCell) => void",
+          "description": "点击可用 Cell，包含面板下钻。"
+        },
+        {
+          "name": "onCellHover",
+          "type": "(cell: CalendarCell) => void",
+          "description": "悬停可用 Cell。"
+        }
+      ]
+    },
+    "vue": {
+      "events": [
+        {
+          "name": "change",
+          "type": "(value: TValue) => void",
+          "description": "值发生变化时触发；重复选择通过 select 通知。"
+        },
+        {
+          "name": "select",
+          "type": "(value: TValue, info: CalendarSelectInfo) => void",
+          "description": "每次提交选择通知；change 仅在值不同的时候触发。"
+        },
+        {
+          "name": "viewDateChange",
+          "type": "(date: CalendarDate) => void",
+          "description": "浏览日期变化。"
+        },
+        {
+          "name": "panelChange",
+          "type": "(panel: CalendarUIPanel) => void",
+          "description": "浏览面板变化。"
+        },
+        {
+          "name": "cellSelect",
+          "type": "(cell: CalendarCell) => void",
+          "description": "点击可用 Cell，包含面板下钻。"
+        },
+        {
+          "name": "cellHover",
+          "type": "(cell: CalendarCell) => void",
+          "description": "悬停可用 Cell。"
+        }
+      ]
+    },
+    "solid": {
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(value: TValue) => void",
+          "description": "值发生变化时触发；重复选择通过 select 通知。"
+        },
+        {
+          "name": "onSelect",
+          "type": "(value: TValue, info: CalendarSelectInfo) => void",
+          "description": "每次提交选择通知；change 仅在值不同的时候触发。"
+        },
+        {
+          "name": "onViewDateChange",
+          "type": "(date: CalendarDate) => void",
+          "description": "浏览日期变化。"
+        },
+        {
+          "name": "onPanelChange",
+          "type": "(panel: CalendarUIPanel) => void",
+          "description": "浏览面板变化。"
+        },
+        {
+          "name": "onCellSelect",
+          "type": "(cell: CalendarCell) => void",
+          "description": "点击可用 Cell，包含面板下钻。"
+        },
+        {
+          "name": "onCellHover",
+          "type": "(cell: CalendarCell) => void",
+          "description": "悬停可用 Cell。"
+        }
+      ]
+    },
+    "svelte": {
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(value: TValue) => void",
+          "description": "值发生变化时触发；重复选择通过 select 通知。"
+        },
+        {
+          "name": "onSelect",
+          "type": "(value: TValue, info: CalendarSelectInfo) => void",
+          "description": "每次提交选择通知；change 仅在值不同的时候触发。"
+        },
+        {
+          "name": "onViewDateChange",
+          "type": "(date: CalendarDate) => void",
+          "description": "浏览日期变化。"
+        },
+        {
+          "name": "onPanelChange",
+          "type": "(panel: CalendarUIPanel) => void",
+          "description": "浏览面板变化。"
+        },
+        {
+          "name": "onCellSelect",
+          "type": "(cell: CalendarCell) => void",
+          "description": "点击可用 Cell，包含面板下钻。"
+        },
+        {
+          "name": "onCellHover",
+          "type": "(cell: CalendarCell) => void",
+          "description": "悬停可用 Cell。"
+        }
+      ]
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "change",
+          "type": "(value: TValue) => void",
+          "description": "值发生变化时触发；重复选择通过 select 通知。"
+        },
+        {
+          "name": "select",
+          "type": "(value: TValue, info: CalendarSelectInfo) => void",
+          "description": "每次提交选择通知；change 仅在值不同的时候触发。 输出 { value, info }。"
+        },
+        {
+          "name": "viewDateChange",
+          "type": "(date: CalendarDate) => void",
+          "description": "浏览日期变化。"
+        },
+        {
+          "name": "panelChange",
+          "type": "(panel: CalendarUIPanel) => void",
+          "description": "浏览面板变化。"
+        },
+        {
+          "name": "cellSelect",
+          "type": "(cell: CalendarCell) => void",
+          "description": "点击可用 Cell，包含面板下钻。"
+        },
+        {
+          "name": "cellHover",
+          "type": "(cell: CalendarCell) => void",
+          "description": "悬停可用 Cell。"
+        }
+      ]
+    }
+  }
+}

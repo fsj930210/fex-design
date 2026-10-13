@@ -641,5 +641,48 @@
     }
   ],
   "events": [],
-  "demos": []
+  "demos": [
+    {
+      "id": "basic"
+    },
+    {
+      "id": "circle"
+    },
+    {
+      "id": "status"
+    },
+    {
+      "id": "color"
+    },
+    {
+      "id": "segmented"
+    },
+    {
+      "id": "size"
+    },
+    {
+      "id": "linecap"
+    },
+    {
+      "id": "dashboard"
+    },
+    {
+      "id": "dynamic"
+    },
+    {
+      "id": "direction"
+    },
+    {
+      "id": "custom-gap"
+    },
+    {
+      "id": "format"
+    },
+    {
+      "id": "gradient"
+    },
+    {
+      "id": "multi-range"
+    }
+  ]
 }

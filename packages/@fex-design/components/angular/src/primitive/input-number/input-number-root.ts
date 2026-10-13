@@ -1,10 +1,15 @@
 import type { InputNumberFormatter, InputNumberParser } from '@fex-design/core/input-number/types'
 import type { InputSize, InputVariant } from '@fex-design/core/input/types'
 import { inputRootClassName } from '@fex-design/components-styles/input'
+import { inputNumberRootClassName } from '@fex-design/components-styles/input-number'
+import { cn } from '@fex-design/utils'
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
+  inject,
   input,
   Input,
   output,
@@ -30,6 +35,7 @@ import { useInputNumber } from './use-input-number'
   template: '<ng-content />',
 })
 export class InputNumberRoot implements OnInit {
+  readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
   private readonly controlledValue = signal<number | undefined>(undefined)
   private readonly hasValue = signal(false)
 
@@ -46,16 +52,16 @@ export class InputNumberRoot implements OnInit {
   readonly precision = input<number>()
   readonly parser = input<InputNumberParser>()
   readonly formatter = input<InputNumberFormatter>()
-  readonly keyboard = input(true)
-  readonly disabled = input(false)
-  readonly readOnly = input(false)
+  readonly keyboard = input(true, { transform: (value: unknown) => value == null ? true : booleanAttribute(value) })
+  readonly disabled = input(false, { transform: booleanAttribute })
+  readonly readOnly = input(false, { transform: booleanAttribute })
   readonly size = input<InputSize>('md')
   readonly variant = input<InputVariant>('outlined')
   readonly change = output<{ event: Event; value: number | undefined }>()
 
   private control?: HTMLInputElement
   protected readonly hostClassName = createHostClassName(() =>
-    inputRootClassName({ size: this.size(), variant: this.variant() }),
+    cn(inputRootClassName({ size: this.size(), variant: this.variant() }), inputNumberRootClassName),
   )
 
   readonly inputNumber = useInputNumber(

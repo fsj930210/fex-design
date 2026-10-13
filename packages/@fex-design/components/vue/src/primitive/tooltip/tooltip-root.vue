@@ -6,7 +6,18 @@ import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 import { tooltipKey } from './context'
 
 type TooltipRootProps = Omit<TooltipOptions, 'onOpenChange'>
-const props = withDefaults(defineProps<TooltipRootProps>(), { defaultOpen: false, open: undefined })
+const props = withDefaults(defineProps<TooltipRootProps>(), {
+  defaultOpen: false,
+  open: undefined,
+  disabled: undefined,
+  forceMount: undefined,
+  avoidCollisions: undefined,
+  autoAdjustOverflow: undefined,
+  hideWhenDetached: undefined,
+  lazyMount: undefined,
+  destroyOnHidden: undefined,
+  matchReferenceWidth: undefined,
+})
 const emit = defineEmits<{
   openChange: [open: boolean, info: Parameters<NonNullable<TooltipOptions['onOpenChange']>>[1]]
 }>()

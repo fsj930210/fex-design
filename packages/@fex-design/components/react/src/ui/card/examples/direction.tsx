@@ -2,7 +2,7 @@ import { Card } from '@fex-design/react/ui/card'
 
 export function DirectionExample() {
   return (
-    <div className="grid w-full gap-6 sm:grid-cols-2">
+    <div className="grid w-full gap-space-xl sm:grid-cols-2">
       {(['ltr', 'rtl'] as const).map((dir) => (
         <Card
           key={dir}

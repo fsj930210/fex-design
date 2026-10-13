@@ -35,7 +35,7 @@ export interface PopoverProps
 }
 
 function Trigger({ children }: Pick<PopoverProps, "children">) {
-  return <PopoverTrigger>{(triggerProps) => cloneElement(children, triggerProps)}</PopoverTrigger>
+  return <PopoverTrigger {...children.props}>{(triggerProps) => cloneElement(children, triggerProps)}</PopoverTrigger>
 }
 
 function Content({ render }: { render: (state: PopoverRenderState) => ReactNode }) {

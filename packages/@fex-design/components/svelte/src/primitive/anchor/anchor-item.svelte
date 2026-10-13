@@ -5,7 +5,7 @@
   } from "@fex-design/core/anchor/types";
   import { anchorItemClassName } from "@fex-design/components-styles/anchor";
   import { cn } from "@fex-design/utils";
-  import { getContext, onMount, setContext, type Snippet } from "svelte";
+  import { getContext, setContext, type Snippet } from "svelte";
   import type { HTMLLiAttributes } from "svelte/elements";
   import {
     anchorContextKey,
@@ -31,13 +31,14 @@
     anchorItemContextKey,
   );
   const item: AnchorRegisteredItem = {
-    key: value,
-    target,
-    ...(targetOffset === undefined ? {} : { targetOffset }),
-    ...(parent ? { parentKey: parent.key } : {}),
+    get key() { return value; },
+    get target() { return target; },
+    get targetOffset() { return targetOffset; },
+    get parentKey() { return parent?.key; },
   };
   setContext(anchorItemContextKey, item);
-  onMount(() => anchor.registerItem(item));
+  // Keep the external registry current; the effect cleans up each previous registration.
+  $effect(() => anchor.registerItem({ ...item }));
 </script>
 
 <li

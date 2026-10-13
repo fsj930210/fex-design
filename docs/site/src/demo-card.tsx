@@ -254,7 +254,8 @@ function SingleDemoPanel(props: {
           when={tab() === 'preview'}
           fallback={
             <div
-              class="max-h-120 min-h-45 overflow-auto bg-background p-4 text-xs leading-relaxed font-mono"
+              class="docs-code-block max-h-120 min-h-45 overflow-auto bg-background p-4 text-xs leading-relaxed font-mono"
+              dir="ltr"
               innerHTML={
                 source.loading
                   ? '<pre>正在读取源码…</pre>'

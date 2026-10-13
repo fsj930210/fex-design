@@ -70,7 +70,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
       <InputControl
         {...controlProps}
         ref={ref}
-        type={type}
+        type={type ?? controlProps.type}
         disabled={disabled}
         readOnly={readOnly}
         className={classNames?.control}

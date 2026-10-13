@@ -1,3 +1,4 @@
+import { getSelectValueLayout } from '@fex-design/core/select/value-layout'
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   selectClearClassName,
@@ -199,28 +200,31 @@ export function SelectValue({
   ...props
 }: SelectValueProps) {
   const select = useSelect()
-  if (children)
+  if (children != null)
     return (
       <div {...props} className={cn(selectValueClassName, className)}>
         {children}
       </div>
     )
-  if (!select.selectedOptions.length)
-    return select.showSearch || select.snapshot.searchValue ? null : (
+  const layout = getSelectValueLayout(select.selectedOptions, {
+    multiple: select.multiple,
+    showSearch: select.showSearch,
+    open: select.snapshot.open,
+    searchValue: select.snapshot.searchValue,
+    maxTagCount,
+  })
+  if (layout.showPlaceholder)
+    return (
       <span className={selectPlaceholderClassName}>{placeholder}</span>
     )
-  if (!select.multiple && select.showSearch && select.snapshot.open) return null
-  if (!select.multiple)
+  if (layout.showSingle)
     return (
       <div {...props} className={cn(selectValueClassName, className)}>
         {select.selectedOptions[0]?.label}
       </div>
     )
-  const visibleOptions =
-    maxTagCount === undefined
-      ? select.selectedOptions
-      : select.selectedOptions.slice(0, Math.max(0, maxTagCount))
-  const overflowCount = select.selectedOptions.length - visibleOptions.length
+  if (!layout.showTags) return null
+  const { visibleOptions, overflowCount } = layout
   return (
     <div {...props} className={cn(selectValueClassName, className)}>
       {visibleOptions.map((option) =>

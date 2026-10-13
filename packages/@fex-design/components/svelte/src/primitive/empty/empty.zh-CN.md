@@ -4,8 +4,7 @@
 
 ## 引入
 
-    import Empty from '@fex-design/svelte/primitive/empty'
-    import EmptyHeader from '@fex-design/svelte/primitive/empty-header'
+    import { Empty, EmptyHeader } from '@fex-design/svelte/primitive/empty'
 
 其余区域通过 `primitive/empty-media`、`primitive/empty-title`、`primitive/empty-description`、`primitive/empty-content` 引入。
 

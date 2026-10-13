@@ -1,9 +1,5 @@
 <script lang="ts">
-  import { TooltipRoot } from "@fex-design/svelte/primitive/tooltip";
-  import TooltipTrigger from "@fex-design/svelte/primitive/tooltip-trigger";
-  import TooltipPortal from "@fex-design/svelte/primitive/tooltip-portal";
-  import TooltipContent from "@fex-design/svelte/primitive/tooltip-content";
-  import TooltipArrow from "@fex-design/svelte/primitive/tooltip-arrow";
+  import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow } from "@fex-design/svelte/primitive/tooltip";
   import { buttonClassName } from "@fex-design/components-styles/button";
 </script>
 

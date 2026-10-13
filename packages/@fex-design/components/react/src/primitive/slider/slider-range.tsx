@@ -19,7 +19,7 @@ export function SliderRange({ ref, className, style, ...props }: SliderRangeProp
   )
   const reversed = isSliderReversed(snapshot.orientation, snapshot.direction, snapshot.reverse)
   const start = snapshot.values.length > 1 ? Math.min(...percentages) : 0
-  const end = Math.max(...percentages)
+  const end = Math.max(0, ...percentages)
   const visualStart = reversed ? 100 - end : start
   const visualEnd = reversed ? start : 100 - end
   const disabledState = getSliderRangeDisabledState(

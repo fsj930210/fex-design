@@ -52,6 +52,8 @@ const emit = defineEmits<{
   openChange: [open: boolean]
   search: [keyword: string]
 }>()
+// Select owns the open-change notification; forwarding this listener to Popover would notify twice.
+const popoverOptions = computed(() => ({ ...props.popoverProps, onOpenChange: undefined }))
 const isMultiple = computed(() => props.multiple === true)
 const selection = createSelectionController({
   get value() {
@@ -91,6 +93,7 @@ const selection = createSelectionController({
 })
 let controller!: ReturnType<typeof createSelectController>
 controller = createSelectController({
+  get disabled() { return props.disabled },
   selection,
   get options() {
     return filterSelectOptions(
@@ -114,12 +117,14 @@ controller = createSelectController({
   onOpenChange: (open) => emit('openChange', open),
   onSearch: (keyword) => emit('search', keyword),
 })
-const snapshot = useCoreStore(controller)
+const storeSnapshot = useCoreStore(controller)
+const snapshot = computed(() => {
+  void storeSnapshot.value
+  return controller.getSnapshot()
+})
 const options = computed(() => props.options)
 const visibleOptions = computed(() =>
-  props.filterOption
-    ? filterSelectOptions(props.options, snapshot.value.searchValue, props.filterOption)
-    : props.options,
+  filterSelectOptions(props.options, snapshot.value.searchValue, props.filterOption),
 )
 const selectedOptions = computed(() => {
   void snapshot.value.selectedValues
@@ -145,7 +150,7 @@ provide(selectKey, {
   virtual: computed(() => props.virtual),
   listId: `select-${useId()}`,
   removeValue(value) {
-    selection.unselect(value)
+    if (!props.disabled) selection.unselect(value)
   },
 })
 function syncOpen(open: boolean) {
@@ -154,5 +159,5 @@ function syncOpen(open: boolean) {
 }
 </script>
 <template>
-  <PopoverRoot v-bind="popoverProps" :open="snapshot.open" @open-change="syncOpen"><slot /></PopoverRoot>
+  <PopoverRoot v-bind="popoverOptions" :open="snapshot.open" :disabled="disabled" @open-change="syncOpen"><slot /></PopoverRoot>
 </template>

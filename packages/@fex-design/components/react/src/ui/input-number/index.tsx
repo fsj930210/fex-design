@@ -1,5 +1,6 @@
 import type { InputNumberPart } from '@fex-design/core/input-number/types'
 import { cn } from '@fex-design/utils'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 import { InputPrefix, InputSuffix } from '@fex-design/react/primitive/input'
 import {
@@ -44,7 +45,7 @@ export interface InputNumberProps
 }
 
 export function InputNumber(inputNumberProps: InputNumberProps) {
-  const controlled = Object.prototype.hasOwnProperty.call(inputNumberProps, 'value')
+  const controlled = useLazyRef(() => Object.prototype.hasOwnProperty.call(inputNumberProps, 'value')).current
   const {
     clearable = false,
     controls = true,

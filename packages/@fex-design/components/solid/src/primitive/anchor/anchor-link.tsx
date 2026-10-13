@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { anchorLinkClassName } from '@fex-design/components-styles/anchor'
 import { cn } from '@fex-design/utils'
 import { splitProps, useContext, type JSX, type ParentProps } from 'solid-js'
@@ -23,7 +24,7 @@ export function AnchorLink(props: ParentProps<JSX.ButtonHTMLAttributes<HTMLButto
         local.class,
       )}
       onClick={(event) => {
-        if (typeof local.onClick === 'function') local.onClick(event)
+        callEventHandler(local.onClick, event)
         if (!event.defaultPrevented) anchor.activate(item)
       }}
     >

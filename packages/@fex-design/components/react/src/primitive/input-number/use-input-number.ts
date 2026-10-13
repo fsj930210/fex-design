@@ -1,4 +1,6 @@
 import {
+  canChangeInputNumber,
+  canStepInputNumber,
   defaultInputNumberFormatter,
   defaultInputNumberParser,
   isInputNumberOutOfRange,
@@ -45,9 +47,10 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     step: options.step,
     precision: options.precision,
   }
+  const controlled = options.controlled ?? value !== undefined
   const [currentValue, setCurrentValue] = useControllableState<number | undefined>(
     { value, defaultValue },
-    { trigger: 'onChange', isControlled: () => options.controlled ?? value !== undefined },
+    { trigger: 'onChange', isControlled: () => controlled },
   )
   const format = useMemoizedFn(
     (nextValue: number | undefined, userTyping: boolean, input: string) =>
@@ -58,11 +61,12 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
 
   // The editable text buffer follows external controlled values only while the user is not typing.
   useUpdateEffect(() => {
-    if (!userTyping) setDraft(format(currentValue, false, draft))
-  }, [currentValue, format, userTyping])
+    if (!userTyping) setDraft(format(currentValue, false, ''))
+  }, [controlled, controlled ? value : undefined, formatter])
 
   const parse = useMemoizedFn((text: string) => parseInputNumber(text, parser))
   const input = useMemoizedFn((text: string, event: Event) => {
+    if (!canChangeInputNumber(options, event)) return
     setUserTyping(true)
     setDraft(text)
     const nextValue = parse(text)
@@ -86,22 +90,25 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
   const clear = useMemoizedFn(() => commit(undefined))
 
   const changeBy = useMemoizedFn((event: Event, direction: 'increment' | 'decrement') => {
+    if (!canChangeInputNumber(options, event)) return
+    if (!canStepInputNumber(currentValue, direction, constraints)) return
     const next = stepBy(direction)
     onChange?.(event, next)
     return next
   })
 
   const blur = useMemoizedFn((event: Event) => {
+    if (!canChangeInputNumber(options, event)) return
     const before = currentValue
     const next = commit(parse(draft) ?? before)
     if (next !== before) onChange?.(event, next)
   })
 
   const keydown = useMemoizedFn((event: KeyboardEvent<HTMLInputElement>) => {
-    if (!keyboard || disabled || readOnly) return
+    if (keyboard === false || !canChangeInputNumber(options, event)) return
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault()
       changeBy(event.nativeEvent, event.key === 'ArrowUp' ? 'increment' : 'decrement')
+      event.preventDefault()
     }
   })
 
@@ -129,6 +136,7 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     increment: (event: Event) => changeBy(event, 'increment'),
     decrement: (event: Event) => changeBy(event, 'decrement'),
     clear: (event?: Event) => {
+      if (!canChangeInputNumber(options, event)) return
       const next = clear()
       if (event) onChange?.(event, next)
       return next

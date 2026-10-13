@@ -5,8 +5,7 @@ Alert Primitive 为语义反馈提供带样式的 Svelte 5 部件，不选择图
 ## 导入
 
 ```svelte
-import Alert from '@fex-design/svelte/primitive/alert'
-import AlertIcon from '@fex-design/svelte/primitive/alert-icon'
+import { Alert, AlertIcon } from '@fex-design/svelte/primitive/alert'
 ```
 
 ## 示例

@@ -71,6 +71,7 @@ export function SelectRoot(props: SelectRootProps) {
   })
   let controller!: ReturnType<typeof createSelectController>
   controller = createSelectController({
+    get disabled() { return props.disabled },
     selection,
     get options() {
       return filterSelectOptions(
@@ -94,7 +95,11 @@ export function SelectRoot(props: SelectRootProps) {
     onOpenChange: (open) => props.onOpenChange?.(open),
     onSearch: (keyword) => props.onSearch?.(keyword),
   })
-  const snapshot = createCoreStoreSignal(controller)
+  const storeSnapshot = createCoreStoreSignal(controller)
+  const snapshot = createMemo(() => {
+    storeSnapshot()
+    return controller.getSnapshot()
+  })
   const options = () => props.options ?? []
   const visibleOptions = createMemo(() =>
     filterSelectOptions(options(), snapshot().searchValue, props.filterOption),
@@ -122,12 +127,13 @@ export function SelectRoot(props: SelectRootProps) {
     status: () => props.status,
     virtual: () => props.virtual,
     listId: `select-${createUniqueId()}`,
-    removeValue: (value: SelectionValue) => selection.unselect(value),
+    removeValue: (value: SelectionValue) => { if (!props.disabled) selection.unselect(value) },
   }
   return (
     <SelectContext.Provider value={context}>
       <Popover
         {...props.popoverProps}
+        disabled={props.disabled}
         open={snapshot().open}
         defaultOpen={props.defaultOpen ?? false}
         onOpenChange={(open) => (open ? controller.open() : controller.close())}

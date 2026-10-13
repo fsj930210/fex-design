@@ -27,16 +27,11 @@
     loadingIndicator,
     ...rest
   }: ButtonProps = $props();
-
-  const classList = $derived(
-    cn(buttonClassName({ variant, color, size, effect }), className),
-  );
-  const isDisabled = $derived(disabled || loading);
 </script>
 
 <PrimitiveButton
   {...rest}
-  class={classList}
+  class={cn(buttonClassName({ variant, color, size, effect }), className)}
   data-slot="button"
   data-variant={variant}
   data-color={color}
@@ -45,7 +40,7 @@
   data-size={size}
   data-effect={effect}
   data-loading={loading ? "true" : undefined}
-  disabled={isDisabled}
+  disabled={disabled || loading}
   {type}
   bind:ref
 >

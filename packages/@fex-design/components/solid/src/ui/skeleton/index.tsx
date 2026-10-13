@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type {
   SkeletonAvatarOptions,
   SkeletonClassNames,
@@ -65,11 +66,7 @@ export function Skeleton(props: SkeletonProps) {
           aria-hidden="true"
           data-slot="skeleton-root"
           class={cn(skeletonRootClassName, local.classNames?.root, local.class)}
-          style={
-            typeof local.style === 'object'
-              ? { ...local.styles?.root, ...local.style }
-              : (local.style ?? local.styles?.root)
-          }
+          style={mergeStyle(local.styles?.root, local.style)}
         >
           <Show when={avatar()}>
             <div class={skeletonAvatarAreaClassName}>

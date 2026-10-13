@@ -1,7 +1,6 @@
 import {
   getDatePickerHeaderLabelParts,
   getNextPanelByHeaderLabel,
-  getNextViewDateByHeaderAction,
 } from '@fex-design/core/date-picker/panel'
 import type {
   DatePickerHeaderAction,
@@ -53,7 +52,6 @@ export function DatePickerHeaderButton({
   onClick,
   ...props
 }: DatePickerHeaderButtonProps) {
-  const context = useHeaderOwner()
   const calendar = useCalendarContext('DatePickerHeaderButton')
   const isPrevious = action.startsWith('previous')
   const icon = children ?? (
@@ -89,13 +87,7 @@ export function DatePickerHeaderButton({
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return
-        const nextViewDate = getNextViewDateByHeaderAction(
-          calendar.viewDate,
-          action,
-          calendar.panel,
-        )
-        calendar.setViewDate(nextViewDate)
-        context.setViewDate(nextViewDate)
+        calendar.controller.navigate(action)
       }}
     >
       {icon}
@@ -134,16 +126,16 @@ export function DatePickerHeaderLabel({
   const context = useHeaderOwner()
   const calendar = useCalendarContext('DatePickerHeaderLabel')
   const [hovered, setHovered] = useState(false)
-  const visible = getDatePickerHeaderLabelParts(context.picker, calendar.panel).includes(part)
+  const visible = getDatePickerHeaderLabelParts(context.picker, calendar.state.panel).includes(part)
   if (!visible) return null
-  const decadeStart = Math.floor(calendar.viewDate.year / 10) * 10
+  const decadeStart = Math.floor(calendar.state.viewDate.year / 10) * 10
   const label =
     children ??
     (part === 'year'
-      ? calendar.panel === 'decade'
+      ? calendar.state.panel === 'decade'
         ? `${decadeStart}-${decadeStart + 9}年`
-        : `${calendar.viewDate.year}年`
-      : `${calendar.viewDate.month}月`)
+        : `${calendar.state.viewDate.year}年`
+      : `${calendar.state.viewDate.month}月`)
 
   return (
     <Button
@@ -165,8 +157,7 @@ export function DatePickerHeaderLabel({
         onClick?.(event)
         if (event.defaultPrevented) return
         const nextPanel = getNextPanelByHeaderLabel(part)
-        calendar.setPanel(nextPanel)
-        context.setPanel(nextPanel)
+        calendar.controller.setPanel(nextPanel)
       }}
     >
       {label}

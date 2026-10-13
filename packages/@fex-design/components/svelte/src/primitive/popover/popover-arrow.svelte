@@ -15,12 +15,6 @@
   let { class: className, style, ...rest }: PopoverArrowProps = $props();
   const { arrowElement, overlay, snapshot } =
     getContext<PopoverContext>(popoverContextKey);
-  const classList = $derived(cn(popoverArrowClassName, className));
-  const sideStyle = $derived(
-    $snapshot.side === "left" || $snapshot.side === "right"
-      ? "top: var(--floating-arrow-y, 0px)"
-      : "left: var(--floating-arrow-x, 0px)",
-  );
 
   function arrowAction(element: HTMLDivElement) {
     arrowElement.current = element;
@@ -42,7 +36,14 @@
     use:arrowAction
     data-slot="popover-arrow"
     data-side={$snapshot.side}
-    class={classList}
-    style={[sideStyle, style].filter(Boolean).join(";")}
+    class={cn(popoverArrowClassName, className)}
+    style={[
+      $snapshot.side === "left" || $snapshot.side === "right"
+        ? "top: var(--floating-arrow-y, 0px)"
+        : "left: var(--floating-arrow-x, 0px)",
+      style,
+    ]
+      .filter(Boolean)
+      .join(";")}
   ></div>
 {/if}

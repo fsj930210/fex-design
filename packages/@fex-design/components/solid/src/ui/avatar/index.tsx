@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
 import type {
   AvatarClassNames,
@@ -40,7 +41,7 @@ export function Avatar(props: AvatarProps) {
     <PrimitiveAvatar
       {...rest}
       class={cn(local.class, local.classNames?.root)}
-      style={{ ...(typeof local.style === 'object' ? local.style : {}), ...local.styles?.root }}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       {local.src ? (
         <AvatarImage
@@ -79,7 +80,7 @@ export function AvatarGroup(props: AvatarGroupProps) {
     <PrimitiveAvatarGroup
       {...rest}
       class={cn(local.class, local.classNames?.root)}
-      style={{ ...(typeof local.style === 'object' ? local.style : {}), ...local.styles?.root }}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       <For each={split().visibleItems}>{(item) => item}</For>
       <Show when={split().overflowCount > 0}>

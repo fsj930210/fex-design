@@ -1,15 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common'
-import { createSelectController } from '@fex-design/core/select/create-select-controller'
-import { filterSelectOptions, groupSelectOptions } from '@fex-design/core/select/filter-options'
+import { groupSelectOptions } from '@fex-design/core/select/filter-options'
 import { getSelectVirtualRange } from '@fex-design/core/select/virtual'
+import type { InputClassNames, InputStyles } from '@fex-design/core/input/types'
+import type { SelectionValue } from '@fex-design/core/selection/types'
 import type {
   SelectFilterOption,
   SelectOption,
-  SelectSnapshot,
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
-import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
-import type { SelectionValue } from '@fex-design/core/selection/types'
 import {
   selectClearClassName,
   selectClearableIndicatorClassName,
@@ -30,221 +28,54 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  DestroyRef,
-  EventEmitter,
   HostListener,
   Input,
-  type OnChanges,
-  Output,
-  type SimpleChanges,
   TemplateRef,
   forwardRef,
   inject,
-  signal,
-  type Signal,
+  input,
 } from '@angular/core'
+import { cn } from '@fex-design/utils'
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import { ChevronDownIcon } from '../../icons/chevron-down'
+import { CheckIcon } from '@fex-design/angular/icons/check'
 import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
-import { Tag, TagAction } from '../tag/tag'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
-import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
+import { PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
 
-export interface SelectChangeMeta {
-  selectedItem?: SelectOption | undefined
-  selectedItems: SelectOption[]
-  previousSelectedValues: SelectionValue[]
-  changedValues: SelectionValue[]
-}
-@Component({
-  selector: 'div[selectRoot]',
-  standalone: true,
-  providers: [Popover],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content />',
-})
-export class SelectRoot implements OnChanges {
-  private readonly popover = inject(Popover)
-  private readonly destroyRef = inject(DestroyRef)
-  private readonly optionsState = signal<readonly SelectOption[]>([])
-  private readonly loadingState = signal(false)
-  @Input()
-  set options(value: readonly SelectOption[]) {
-    this.optionsState.set(value)
-  }
-  get options() {
-    return this.optionsState()
-  }
-  @Input() multiple = false
-  @Input() value: SelectionValue | SelectionValue[] | undefined
-  @Input() defaultValue: SelectionValue | SelectionValue[] | undefined
-  @Input() showSearch = false
-  @Input() filterOption: SelectFilterOption | undefined
-  @Input() open: boolean | undefined
-  @Input() defaultOpen = false
-  @Input() clearable = false
-  @Input()
-  set loading(value: boolean) {
-    this.loadingState.set(value)
-  }
-  get loading() {
-    return this.loadingState()
-  }
-  @Input() disabled = false
-  @Input() virtual: SelectVirtualOptions | undefined
-  @Input() maxCount: number | undefined
-  @Input() status: 'error' | 'warning' | undefined
-  @Output() readonly change = new EventEmitter<{
-    value: SelectionValue | SelectionValue[] | undefined
-    meta: SelectChangeMeta
-  }>()
-  @Output() readonly openChange = new EventEmitter<boolean>()
-  @Output() readonly search = new EventEmitter<string>()
-  readonly selection: ReturnType<typeof createSelectionController>
-  readonly controller: ReturnType<typeof createSelectController>
-  readonly snapshot: Signal<SelectSnapshot>
-  readonly listId = `select-${crypto.randomUUID()}`
-  private defaultValueInitialized = false
-  private suppressChange = false
-  constructor() {
-    // The controller getters intentionally capture the component instance for live signal inputs.
-    // oxlint-disable-next-line typescript/no-this-alias
-    const root = this
-    this.selection = createSelectionController({
-      get value() {
-        return root.value
-      },
-      get defaultValue() {
-        return root.defaultValue
-      },
-      get multiple() {
-        return root.isMultiple
-      },
-      get disabledValues() {
-        return root.options.filter((option) => option.disabled).map((option) => option.value)
-      },
-      onChange(values, meta) {
-        if (root.suppressChange) return
-        const resolve = (value: SelectionValue) =>
-          root.options.find((option) => option.value === value) ?? { value, label: String(value) }
-        const selectedItems = values.map(resolve)
-        const selectedItem =
-          meta.changedValues.map(resolve).find((item) => values.includes(item.value)) ??
-          selectedItems[0]
-        root.change.emit({
-          value: root.isMultiple ? values : values[0],
-          meta: {
-            selectedItem,
-            selectedItems,
-            previousSelectedValues: [...meta.previousValues],
-            changedValues: [...meta.changedValues],
-          },
-        })
-      },
-    })
-    let controller!: ReturnType<typeof createSelectController>
-    controller = createSelectController({
-      selection: this.selection,
-      get options() {
-        return filterSelectOptions(
-          root.options,
-          controller.getSnapshot().searchValue,
-          root.filterOption,
-        )
-      },
-      get multiple() {
-        return root.isMultiple
-      },
-      get maxCount() {
-        return root.maxCount
-      },
-      get open() {
-        return root.open
-      },
-      get defaultOpen() {
-        return root.defaultOpen
-      },
-      onOpenChange: (next) => {
-        root.popover.syncOptions()
-        root.openChange.emit(next)
-      },
-      onSearch: (keyword) => root.search.emit(keyword),
-    })
-    this.controller = controller
-    this.snapshot = createCoreStoreSignal(controller)
-
-    this.popover.connectOptions(() => ({
-      open: this.snapshot().open,
-      defaultOpen: this.defaultOpen,
-    }))
-    this.popover.syncOptions()
-    const subscription = this.popover.openChange.subscribe((next) => this.syncOpen(next))
-    this.destroyRef.onDestroy(() => subscription.unsubscribe())
-  }
-  ngOnChanges(_changes: SimpleChanges) {
-    if (
-      !this.defaultValueInitialized &&
-      this.value === undefined &&
-      this.defaultValue !== undefined
-    ) {
-      this.suppressChange = true
-      this.selection.setValues(
-        Array.isArray(this.defaultValue) ? this.defaultValue : [this.defaultValue],
-      )
-      this.suppressChange = false
-      this.defaultValueInitialized = true
-    }
-
-    this.popover.syncOptions()
-  }
-  get isMultiple() {
-    return this.multiple
-  }
-  get canSearch() {
-    return this.showSearch
-  }
-  get visibleOptions() {
-    return filterSelectOptions(this.options, this.snapshot().searchValue, this.filterOption)
-  }
-  get selectedOptions() {
-    this.snapshot()
-    return this.selection
-      .getSnapshot()
-      .values.map(
-        (value) =>
-          this.options.find((option) => option.value === value) ?? { value, label: String(value) },
-      )
-  }
-  syncOpen(next: boolean) {
-    if (next) this.controller.open()
-    else this.controller.close()
-  }
-  removeValue(value: SelectionValue) {
-    this.selection.unselect(value)
-  }
-}
+import { SelectRoot } from './select-root'
+import { SelectValue } from './select-value'
+export { SelectRoot, type SelectChangeMeta } from './select-root'
 @Component({
   selector: '[selectTrigger]',
   standalone: true,
   imports: [
     NgTemplateOutlet,
     PopoverTrigger,
+    SelectValue,
     CircleXIcon,
     LoadingIcon,
-    Tag,
-    TagAction,
+    ChevronDownIcon,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Apply wrapper layout after construction so it is not captured as an inner trigger class.
+  host: { '[class]': "'contents'" },
   templateUrl: './select-trigger.html',
 })
 export class SelectTrigger {
   readonly select = inject(SelectRoot)
   @Input() placeholder = '请选择'
   @Input() maxTagCount: number | undefined
+  readonly class = input<string | undefined>()
+  readonly inputProps = input<{ class?: string; style?: string; name?: string; autocomplete?: string; inputmode?: string; 'aria-label'?: string; classNames?: InputClassNames; styles?: InputStyles<string> }>({})
   @ContentChild('prefix') prefix?: TemplateRef<void>
   @ContentChild('suffix') suffix?: TemplateRef<void>
   @ContentChild('clear') clear?: TemplateRef<void>
   @ContentChild('tag') tag?: TemplateRef<{ $implicit: SelectOption; remove: () => void }>
-  readonly triggerClass = selectTriggerClassName()
+  readonly triggerClass = createHostClassName(
+    () => cn(selectTriggerClassName(), this.inputProps().classNames?.root, this.inputProps().class),
+    () => this.class(),
+  )
   readonly valueContainerClass = selectValueContainerClassName
   readonly valueClass = selectValueClassName
   readonly inputClass = selectInputClassName
@@ -252,17 +83,6 @@ export class SelectTrigger {
   readonly indicatorClass = selectIndicatorClassName
   readonly clearClass = selectClearClassName
   readonly clearableIndicatorClass = selectClearableIndicatorClassName
-  get visibleSelected() {
-    return this.maxTagCount === undefined
-      ? this.select.selectedOptions
-      : this.select.selectedOptions.slice(0, Math.max(0, this.maxTagCount))
-  }
-  get overflow() {
-    return this.select.selectedOptions.length - this.visibleSelected.length
-  }
-  remove(value: SelectionValue) {
-    return () => this.select.removeValue(value)
-  }
   input(event: Event) {
     this.select.controller.setSearchValue((event.currentTarget as HTMLInputElement).value)
     this.select.controller.open()
@@ -271,6 +91,7 @@ export class SelectTrigger {
     this.select.controller.open()
   }
   keydown(event: KeyboardEvent) {
+  if (event.defaultPrevented) return
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
       this.select.controller.open()
@@ -289,16 +110,20 @@ export class SelectTrigger {
 @Component({
   selector: '[selectContent]',
   standalone: true,
-  imports: [PopoverPortal, PopoverContent, forwardRef(() => SelectList)],
+  imports: [NgTemplateOutlet, PopoverPortal, PopoverContent, forwardRef(() => SelectList)],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-content.html',
 })
 export class SelectContent {
+  readonly select = inject(SelectRoot)
+  @Input() popupRender: TemplateRef<{ menu: TemplateRef<unknown>; close: () => void }> | undefined
+  readonly close = () => this.select.controller.close()
   readonly contentClass = selectContentClassName
 }
 @Component({
   selector: 'div[selectItem]',
   standalone: true,
+  imports: [CheckIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'option',
@@ -352,7 +177,7 @@ export class SelectSeparator {}
 @Component({
   selector: '[selectList]',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CheckIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'listClass',
@@ -371,6 +196,9 @@ export class SelectList {
     state: { selected: boolean; active: boolean; disabled: boolean }
   }>
   readonly listClass = `${selectListClassName} block`
+  readonly optionClass = selectOptionClassName
+  readonly optionLabelClass = selectOptionLabelClassName
+  readonly optionIndicatorClass = selectOptionIndicatorClassName
   viewport = { scrollTop: 0, height: 320 }
   get range() {
     return this.select.virtual

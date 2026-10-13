@@ -64,6 +64,7 @@ export function createSelectController<TValue extends SelectionValue>(
   }
 
   function setOpen(open: boolean) {
+    if (open && options.disabled) return
     if (snapshot().open === open) return
     if (!isOpenControlled()) update({ open })
     options.onOpenChange?.(open)
@@ -100,11 +101,13 @@ export function createSelectController<TValue extends SelectionValue>(
     },
     toggleOpen: () => setOpen(!snapshot().open),
     setSearchValue: (keyword) => {
+      if (options.disabled) return
       if (snapshot().searchValue === keyword) return
       update({ searchValue: keyword })
       options.onSearch?.(keyword)
     },
     setActiveValue: (value, interaction = 'pointer') => {
+      if (options.disabled) return
       const option = findOption(value)
       if (
         value !== undefined &&
@@ -131,6 +134,7 @@ export function createSelectController<TValue extends SelectionValue>(
       )
     },
     selectValue: (value) => {
+      if (options.disabled) return
       const option = findOption(value)
       if (!option || option.disabled || options.selection.isDisabled(value)) return
       const multiple = options.multiple === true
@@ -150,12 +154,14 @@ export function createSelectController<TValue extends SelectionValue>(
       clearSearch()
     },
     selectActive: () => {
+      if (options.disabled) return false
       const value = snapshot().activeValue
       if (value === undefined) return false
       controller.selectValue(value)
       return true
     },
     removeLastSelected: () => {
+      if (options.disabled) return
       const values = options.selection.getSnapshot().values
       for (let index = values.length - 1; index >= 0; index -= 1) {
         const value = values[index]
@@ -166,6 +172,7 @@ export function createSelectController<TValue extends SelectionValue>(
       }
     },
     clear: () => {
+      if (options.disabled) return
       options.selection.clear()
       controller.setSearchValue('')
     },

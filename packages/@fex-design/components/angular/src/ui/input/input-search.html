@@ -43,6 +43,8 @@
   }
   <input
     inputControl
+    [name]="name() ?? ''"
+    [autocomplete]="autocomplete() ?? ''"
     type="search"
     [placeholder]="placeholder() ?? ''"
     [attr.aria-invalid]="ariaInvalid() || null"

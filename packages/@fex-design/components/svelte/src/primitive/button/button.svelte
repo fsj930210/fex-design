@@ -12,9 +12,6 @@
     color,
     ...rest
   }: ButtonProps = $props();
-  const classList = $derived(
-    cn(buttonClassName({ variant, color }), className),
-  );
 </script>
 
 <button
@@ -23,7 +20,7 @@
   data-variant={variant}
   data-color={color}
   {...rest}
-  class={classList}
+  class={cn(buttonClassName({ variant, color }), className)}
   {type}
 >
   {@render children?.()}

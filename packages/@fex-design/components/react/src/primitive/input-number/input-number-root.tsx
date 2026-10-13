@@ -8,6 +8,8 @@ import { InputRoot } from '../input'
 import { InputNumberContext } from './input-number-context'
 import { useInputNumber } from './use-input-number'
 import { cn } from '@fex-design/utils'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { inputNumberRootClassName } from '@fex-design/components-styles/input-number'
 
 export interface InputNumberRootProps
   extends
@@ -22,7 +24,9 @@ export interface InputNumberRootProps
   controlled?: boolean | undefined
 }
 
-export function InputNumberRoot({
+export function InputNumberRoot(rootProps: InputNumberRootProps) {
+  const hasValue = useLazyRef(() => Object.prototype.hasOwnProperty.call(rootProps, 'value')).current
+  const {
   value,
   defaultValue,
   min,
@@ -39,7 +43,7 @@ export function InputNumberRoot({
   children,
   className,
   ...props
-}: InputNumberRootProps) {
+  } = rootProps
   const inputNumber = useInputNumber({
     value,
     defaultValue,
@@ -53,14 +57,14 @@ export function InputNumberRoot({
     disabled,
     readOnly,
     onChange,
-    controlled: controlled ?? value !== undefined,
+    controlled: controlled ?? hasValue,
   })
   return (
     <InputNumberContext value={inputNumber}>
       <InputRoot
         {...props}
         value={inputNumber.draft}
-        className={cn('pr-5', className)}
+        className={cn(inputNumberRootClassName, className)}
         disabled={disabled}
         readOnly={readOnly}
         data-slot="input-number-root"

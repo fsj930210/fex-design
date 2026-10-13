@@ -36,7 +36,7 @@ export function SelectContent(
     <PopoverPortal>
       <PopoverContent
         class={cn(selectContentClassName, props.class)}
-        style="width: var(--floating-reference-width); max-width: var(--floating-available-width);"
+        style="max-width: var(--floating-available-width);"
       >
         {props.popupRender ? props.popupRender(menu(), { close: select.controller.close }) : menu()}
       </PopoverContent>
@@ -123,7 +123,7 @@ function SelectOptionView(props: {
 }) {
   const select = useSelect('SelectOption')
   const state = () => ({
-    selected: select.controller.selection.isSelected(props.option.value),
+    selected: select.snapshot().selectedValues.includes(props.option.value),
     active: select.snapshot().activeValue === props.option.value,
     disabled:
       props.option.disabled === true || select.controller.selection.isDisabled(props.option.value),
@@ -154,7 +154,7 @@ function SelectOptionView(props: {
 export function SelectItem(props: ParentProps<{ item: SelectOption; class?: string }>) {
   const select = useSelect('SelectItem')
   const state = () => ({
-    selected: select.controller.selection.isSelected(props.item.value),
+    selected: select.snapshot().selectedValues.includes(props.item.value),
     active: select.snapshot().activeValue === props.item.value,
     disabled:
       props.item.disabled === true || select.controller.selection.isDisabled(props.item.value),

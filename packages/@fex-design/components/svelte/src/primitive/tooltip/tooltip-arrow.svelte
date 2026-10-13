@@ -13,7 +13,6 @@
     class?: string;
   } = $props();
   const { overlay, snapshot } = getContext<TooltipContext>(tooltipContextKey);
-  const classes = $derived(cn(tooltipArrowClassName, className));
   const position = $derived(
     getTooltipArrowPosition($snapshot.side, $snapshot.align),
   );
@@ -29,6 +28,6 @@
   data-slot="tooltip-arrow"
   data-side={$snapshot.side}
   data-align={$snapshot.align}
-  class={classes}
+  class={cn(tooltipArrowClassName, className)}
   style={`${position.left ? `left: ${position.left};` : position.top ? `top: ${position.top};` : ""}${style ?? ""}`}
 ></div>

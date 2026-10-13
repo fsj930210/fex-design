@@ -8,7 +8,10 @@
     AvatarGroupStyles,
   } from "@fex-design/core/avatar/types";
   import { cn } from "@fex-design/utils";
-  interface Props {
+  import { splitOverflowItems } from "@fex-design/core/collection/split-overflow-items";
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props extends HTMLAttributes<HTMLDivElement> {
+    ref?: HTMLDivElement;
     maxCount?: number;
     class?: string;
     style?: string;
@@ -25,22 +28,28 @@
     renderOverflow,
     classNames,
     styles,
+    ref = $bindable(),
+    ...rest
   }: Props = $props();
-  let group: HTMLDivElement;
+
   let overflowCount = $state(0);
   const syncOverflow = async () => {
     await tick();
+    if (!ref) return;
     const avatars = [
-      ...group.querySelectorAll<HTMLElement>('[data-slot="avatar"]'),
+      ...ref.querySelectorAll<HTMLElement>('[data-slot="avatar"]'),
     ];
-    const hidden = Math.max(0, avatars.length - (maxCount ?? avatars.length));
+    const { visibleItems, overflowItems } = splitOverflowItems(avatars, maxCount);
     avatars.forEach((avatar, index) => {
-      avatar.hidden = index >= (maxCount ?? avatars.length);
+      avatar.hidden = index >= visibleItems.length;
     });
-    overflowCount = hidden;
+    overflowCount = overflowItems.length;
   };
   onMount(() => {
     void syncOverflow();
+    const observer = new MutationObserver(() => void syncOverflow());
+    if (ref) observer.observe(ref, { childList: true, subtree: true });
+    return () => observer.disconnect();
   });
   $effect(() => {
     maxCount;
@@ -49,8 +58,10 @@
   });
 </script>
 
-<div bind:this={group}>
+
   <PrimitiveAvatarGroup
+    {...rest}
+    bind:ref
     class={cn(className, classNames?.root)}
     style={[style, styles?.root].filter(Boolean).join(";")}
   >
@@ -62,4 +73,3 @@
           style={styles?.overflow}>+{overflowCount}</AvatarGroupCount
         >{/if}{/if}
   </PrimitiveAvatarGroup>
-</div>

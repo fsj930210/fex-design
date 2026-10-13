@@ -1,4 +1,5 @@
 import { createSignal, Show } from 'solid-js'
+import { CodeBlock } from './code-block'
 
 export function SourceCodeCard(props: {
   layer: 'ui' | 'primitive'
@@ -50,16 +51,14 @@ export function SourceCodeCard(props: {
         </div>
       </div>
       <div
-        class={`relative bg-[#18181b] text-white p-3 font-mono text-xs overflow-x-auto transition-all ${
+        class={`relative bg-muted-background text-foreground p-3 font-mono text-xs overflow-x-auto transition-all ${
           expanded() ? 'max-h-[500px] overflow-y-auto' : 'max-h-36 overflow-hidden'
         }`}
       >
-        <pre class="leading-relaxed">
-          <code>{props.source || '// 源码加载中...'}</code>
-        </pre>
+        <CodeBlock code={props.source || '// 源码加载中...'} language={props.ext} />
         <Show when={!expanded()}>
-          <div class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#18181b] to-transparent pointer-events-none flex items-end justify-center pb-1">
-            <span class="text-[11px] text-white/40">点击展开完整源码</span>
+          <div class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-muted-background to-transparent pointer-events-none flex items-end justify-center pb-1">
+            <span class="text-[11px] text-muted-foreground">点击展开完整源码</span>
           </div>
         </Show>
       </div>

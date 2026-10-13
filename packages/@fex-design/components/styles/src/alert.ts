@@ -33,7 +33,7 @@ export const alertClassName = cva(
 )
 
 export const alertIconClassName =
-  'row-span-2 mt-0.5 inline-flex size-[var(--alert-icon-size,1rem)] shrink-0 items-center justify-center [&>svg]:size-full'
+  'col-start-1 row-start-1 self-center inline-flex size-[var(--alert-icon-size,1rem)] shrink-0 items-center justify-center group-has-data-[slot=alert-title]/alert:row-span-2 group-has-data-[slot=alert-title]/alert:self-start group-has-data-[slot=alert-title]/alert:mt-0.5 [&>*]:size-full [&>*]:max-h-full [&>*]:max-w-full'
 
 export const alertContentClassName = 'min-w-0 self-center'
 
@@ -41,7 +41,7 @@ export const alertTitleClassName =
   'col-start-1 row-start-1 font-medium leading-5 group-has-data-[slot=alert-icon]/alert:col-start-2'
 
 export const alertDescriptionClassName =
-  'col-start-1 row-start-2 mt-0.5 text-sm leading-5 opacity-85 group-has-data-[slot=alert-icon]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-4 [&_p:not(:last-child)]:mb-4'
+  'col-start-1 row-start-1 text-sm leading-5 opacity-85 group-has-data-[slot=alert-icon]/alert:col-start-2 group-has-data-[slot=alert-title]/alert:row-start-2 group-has-data-[slot=alert-title]/alert:mt-0.5 [&_a]:underline [&_a]:underline-offset-4 [&_p:not(:last-child)]:mb-4'
 
 export const alertActionClassName =
   'col-start-2 row-start-1 ms-2 shrink-0 group-has-data-[slot=alert-icon]/alert:col-start-3'

@@ -479,5 +479,51 @@
   ],
   "nativeElement": "div",
   "events": [],
-  "demos": []
+  "demos": [
+    {
+      "id": "basic"
+    },
+    {
+      "id": "status"
+    },
+    {
+      "id": "color"
+    },
+    {
+      "id": "segmented"
+    },
+    {
+      "id": "size"
+    },
+    {
+      "id": "linecap"
+    },
+    {
+      "id": "circle"
+    },
+    {
+      "id": "dashboard"
+    },
+    {
+      "id": "dynamic"
+    },
+    {
+      "id": "direction"
+    },
+    {
+      "id": "structured"
+    },
+    {
+      "id": "custom-gap"
+    },
+    {
+      "id": "format"
+    },
+    {
+      "id": "gradient"
+    },
+    {
+      "id": "multi-range"
+    }
+  ]
 }

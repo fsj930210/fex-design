@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { TagUiOptions } from '@fex-design/core/tag/types'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX } from 'solid-js'
@@ -32,7 +33,7 @@ export function Tag(props: TagProps) {
       {...rest}
       disabled={local.disabled}
       class={cn(local.class, local.classNames?.root)}
-      style={{ ...(typeof local.style === 'object' ? local.style : {}), ...local.styles?.root }}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       {local.children}
       {local.closable ? (

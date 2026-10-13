@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input, Optional } from '@angular/co
 import {
   getDatePickerHeaderLabelParts,
   getNextPanelByHeaderLabel,
-  getNextViewDateByHeaderAction,
 } from '@fex-design/core/date-picker/panel'
 import type {
   DatePickerHeaderAction,
@@ -17,12 +16,12 @@ import {
 } from '@fex-design/components-styles/date-picker'
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/angular/icons/chevron'
 import { buttonPrimitiveClassName } from '../button/button'
-import { CalendarRoot } from '../calendar/calendar'
+import { CalendarRoot } from '../calendar'
 import { DatePickerState } from './use-date-picker'
 import { RangePickerState } from './use-range-picker'
 
 @Component({
-  selector: 'fex-date-picker-header',
+  selector: 'div[datePickerHeader]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -36,7 +35,7 @@ export class DatePickerHeader {
 }
 
 @Component({
-  selector: 'fex-date-picker-header-title',
+  selector: 'div[datePickerHeaderTitle]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -50,7 +49,7 @@ export class DatePickerHeaderTitle {
 }
 
 @Component({
-  selector: 'button[fexDatePickerHeaderButton]',
+  selector: 'button[datePickerHeaderButton]',
   standalone: true,
   imports: [ChevronLeftIcon, ChevronRightIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -84,13 +83,7 @@ export class DatePickerHeaderButton {
 
   runAction(event: Event) {
     if (event.defaultPrevented) return
-    const nextViewDate = getNextViewDateByHeaderAction(
-      this.calendar.currentViewDate(),
-      this.action,
-      this.calendar.currentPanel(),
-    )
-    this.calendar.setViewDate(nextViewDate)
-    this.owner().setViewDate(nextViewDate)
+    this.calendar.controller.navigate(this.action)
   }
 
   private owner() {
@@ -104,7 +97,7 @@ export class DatePickerHeaderButton {
 }
 
 @Component({
-  selector: 'button[fexDatePickerHeaderLabel]',
+  selector: 'button[datePickerHeaderLabel]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -118,7 +111,7 @@ export class DatePickerHeaderButton {
     '(mouseleave)': 'hovered = false',
     '(click)': 'selectPanel($event)',
   },
-  template: '{{ label() }}',
+  templateUrl: './date-picker-header-label.html',
 })
 export class DatePickerHeaderLabel {
   @Input({ required: true }) part!: DatePickerHeaderLabelPart
@@ -134,15 +127,15 @@ export class DatePickerHeaderLabel {
   visible() {
     return getDatePickerHeaderLabelParts(
       this.owner().context().picker,
-      this.calendar.currentPanel(),
+      this.calendar.state().panel,
     ).includes(this.part)
   }
 
   label() {
-    if (this.part === 'month') return `${this.calendar.currentViewDate().month}月`
-    const year = this.calendar.currentViewDate().year
+    if (this.part === 'month') return `${this.calendar.state().viewDate.month}月`
+    const year = this.calendar.state().viewDate.year
     const decadeStart = Math.floor(year / 10) * 10
-    return this.calendar.currentPanel() === 'decade'
+    return this.calendar.state().panel === 'decade'
       ? `${decadeStart}-${decadeStart + 9}年`
       : `${year}年`
   }
@@ -150,8 +143,7 @@ export class DatePickerHeaderLabel {
   selectPanel(event: Event) {
     if (event.defaultPrevented) return
     const nextPanel = getNextPanelByHeaderLabel(this.part)
-    this.calendar.setPanel(nextPanel)
-    this.owner().setPanel(nextPanel)
+    this.calendar.controller.setPanel(nextPanel)
   }
 
   private owner() {

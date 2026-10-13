@@ -14,7 +14,8 @@ import {
 } from '@fex-design/core'
 import { badgeRibbonRootClassName, badgeRootClassName } from '@fex-design/components-styles/badge'
 import { cn } from '@fex-design/utils'
-import { splitProps, type JSX, type ParentProps } from 'solid-js'
+import { Show, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 
 export type BadgeUiProps = BadgeProps &
   BadgeAttachmentOptions & {
@@ -33,42 +34,37 @@ export function Badge(props: BadgeUiProps) {
     'classNames',
     'styles',
   ])
-  const indicatorStyle = {
-    ...(typeof local.style === 'object' ? local.style : {}),
+  const indicatorStyle = () => ({
     translate: local.offset ? 'none' : undefined,
     transform: getBadgeOffsetTransform(local.offset),
     ...local.styles?.indicator,
-  }
-  if (!local.dot && local.count === undefined)
-    return (
+  })
+  return (
+    <Show when={local.dot || local.count !== undefined} fallback={
       <PrimitiveBadge
         {...rest}
         class={cn(local.class, local.classNames?.root)}
-        style={local.styles?.root}
+        style={mergeStyle(local.style, local.styles?.root)}
       >
         {local.children}
       </PrimitiveBadge>
-    )
-  if (local.children == null)
-    return local.dot ? (
+    }>
+    <Show when={local.children != null} fallback={
+      <Show when={local.dot} fallback={
+        <PrimitiveBadge {...rest} count={local.count}
+          class={cn(local.class, local.classNames?.indicator)} style={mergeStyle(local.style, indicatorStyle())} />
+      }>
       <BadgeDot
         {...rest}
         class={cn(local.class, local.classNames?.indicator)}
-        style={indicatorStyle}
+        style={mergeStyle(local.style, indicatorStyle())}
       />
-    ) : (
-      <PrimitiveBadge
-        {...rest}
-        count={local.count}
-        class={cn(local.class, local.classNames?.indicator)}
-        style={indicatorStyle}
-      />
-    )
-  return (
+      </Show>
+    }>
     <span
       data-slot="badge-root"
       class={cn(badgeRootClassName, local.class, local.classNames?.root)}
-      style={local.styles?.root}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       <span
         data-slot="badge-content"
@@ -77,17 +73,19 @@ export function Badge(props: BadgeUiProps) {
       >
         {local.children}
       </span>
-      {local.dot ? (
-        <BadgeDot {...rest} class={local.classNames?.indicator} style={indicatorStyle} />
-      ) : (
+      <Show when={local.dot} fallback={
         <PrimitiveBadge
           {...rest}
           count={local.count}
           class={local.classNames?.indicator}
-          style={indicatorStyle}
+          style={indicatorStyle()}
         />
-      )}
+      }>
+        <BadgeDot {...rest} class={local.classNames?.indicator} style={indicatorStyle()} />
+      </Show>
     </span>
+    </Show>
+    </Show>
   )
 }
 export type BadgeRibbonProps = ParentProps<

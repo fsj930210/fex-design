@@ -78,7 +78,11 @@
       "title": "基础使用",
       "description": "展示常规 Tag、三种尺寸、closable 和 disabled。"
     },
-    { "id": "variants", "title": "Variant", "description": "依次展示 filled、solid 和 outlined。" },
+    {
+      "id": "variants",
+      "title": "Variant",
+      "description": "依次展示 filled、solid 和 outlined。"
+    },
     {
       "id": "colors",
       "title": "Color",
@@ -89,7 +93,14 @@
       "title": "添加、删除 Tag",
       "description": "使用 closable 动态添加和删除标签。"
     },
-    { "id": "css-variables", "title": "CSS 变量覆盖", "description": "覆盖内置语义色变量。" },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量覆盖",
+      "description": "覆盖内置语义色变量。"
+    },
+    {
+      "id": "direction"
+    },
     {
       "id": "semantic-styles",
       "title": "结构化样式",

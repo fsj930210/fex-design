@@ -4,6 +4,7 @@
     InputNumberParser,
     InputNumberPart,
   } from "@fex-design/core/input-number/types";
+  import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLInputAttributes } from "svelte/elements";
   import InputPrefix from '@fex-design/svelte/primitive/input/input-prefix.svelte';
@@ -17,6 +18,8 @@
   interface Props extends Omit<
     HTMLInputAttributes,
     | "value"
+    | "defaultValue"
+    | "type"
     | "onchange"
     | "oninput"
     | "prefix"
@@ -24,25 +27,28 @@
     | "max"
     | "step"
     | "readonly"
+    | "size"
   > {
-    value?: number;
-    defaultValue?: number;
-    min?: number;
-    max?: number;
-    step?: number;
-    precision?: number;
-    parser?: InputNumberParser;
-    formatter?: InputNumberFormatter;
-    keyboard?: boolean;
-    clearable?: boolean;
-    controls?: boolean;
-    prefix?: Snippet;
-    suffix?: Snippet;
-    increment?: Snippet;
-    decrement?: Snippet;
-    onChange?: (event: Event, value: number | undefined) => void;
-    classNames?: Partial<Record<InputNumberPart, string>>;
-    styles?: Partial<Record<InputNumberPart, string>>;
+    size?: "sm" | "md" | "lg" | undefined;
+    variant?: "outlined" | "filled" | "borderless" | "underlined" | undefined;
+    value?: number | undefined;
+    defaultValue?: number | undefined;
+    min?: number | undefined;
+    max?: number | undefined;
+    step?: number | undefined;
+    precision?: number | undefined;
+    parser?: InputNumberParser | undefined;
+    formatter?: InputNumberFormatter | undefined;
+    keyboard?: boolean | undefined;
+    clearable?: boolean | undefined;
+    controls?: boolean | undefined;
+    prefix?: Snippet | undefined;
+    suffix?: Snippet | undefined;
+    increment?: Snippet | undefined;
+    decrement?: Snippet | undefined;
+    onChange?: ((event: Event, value: number | undefined) => void) | undefined;
+    classNames?: Partial<Record<InputNumberPart, string>> | undefined;
+    styles?: Partial<Record<InputNumberPart, string>> | undefined;
   }
   let componentProps: Props = $props();
   // svelte-ignore state_referenced_locally -- controlled mode is fixed by initial prop presence
@@ -50,7 +56,6 @@
     componentProps,
     "value",
   );
-  // svelte-ignore state_referenced_locally -- destructuring the reactive props proxy is intentional
   let {
     value,
     defaultValue,
@@ -71,10 +76,13 @@
     class: className,
     classNames,
     styles,
+    style,
+    size,
+    variant,
     disabled,
     readonly,
     ...rest
-  }: Props = componentProps;
+  }: Props = $derived(componentProps);
 </script>
 
 <InputNumberRoot
@@ -89,10 +97,12 @@
   {formatter}
   {keyboard}
   {disabled}
+  {size}
+  {variant}
   readOnly={readonly}
   {onChange}
-  class={[classNames?.root, className]}
-  style={styles?.root}
+  class={cn(classNames?.root, className)}
+  style={[styles?.root, style].filter(Boolean).map((value) => value?.trim().replace(/;?$/, ';')).join(' ')}
 >
   {#if prefix}<InputPrefix class={classNames?.prefix} style={styles?.prefix}
       >{@render prefix()}</InputPrefix

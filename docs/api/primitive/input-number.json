@@ -72,6 +72,11 @@
       "description": "各框架原生的数字输入逻辑实现，可用于组装自定义结构。",
       "props": [
         {
+          "name": "controlled",
+          "type": "boolean | undefined",
+          "description": "显式指定受控模式；未指定时按 value 是否为 undefined 推断。组件 Root 与 UI 会按初始 value 属性是否存在传入该标志。"
+        },
+        {
           "name": "value / defaultValue",
           "type": "number | undefined",
           "description": "受控值与非受控初始值。"
@@ -98,8 +103,8 @@
         },
         {
           "name": "state",
-          "type": "value, draft, formattedValue, min, max, outOfRange",
-          "description": "返回的状态与派生值。"
+          "type": "value, draft, formattedValue, min, max, outOfRange, userTyping, disabled, readOnly",
+          "description": "返回的状态与派生值，使用各框架原生的响应式读取方式。非编辑状态下，外部 value 或 formatter 更新会同步编辑文本。"
         },
         {
           "name": "availability",
@@ -108,8 +113,8 @@
         },
         {
           "name": "actions",
-          "type": "input, blur, keydown, clear, increment, decrement, commit",
-          "description": "返回的交互方法。"
+          "type": "input, blur, keydown, clear, increment, decrement, commit, parseDraft",
+          "description": "input、increment、decrement 和 commit 返回处理后的数值；parseDraft 解析当前文本。clear 可不传事件，此时不触发 onChange。交互入口尊重禁用、只读和事件取消；commit 为显式归一化方法，不触发 onChange。"
         }
       ],
       "events": [],

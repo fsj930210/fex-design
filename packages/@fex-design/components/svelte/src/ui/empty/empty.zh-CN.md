@@ -4,7 +4,7 @@
 
 ## 引入
 
-    import Empty from '@fex-design/svelte/ui/empty'
+    import { Empty } from '@fex-design/svelte/ui/empty'
 
 ## 示例
 

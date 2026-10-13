@@ -17,7 +17,6 @@
     children,
   }: BadgeRibbonOptions & { class?: string; children?: Snippet } = $props();
   const presetColor = $derived(isBadgePresetColor(color) ? color : undefined);
-  const customColor = $derived(color && !presetColor ? color : undefined);
 </script>
 
 <span
@@ -29,7 +28,7 @@
     badgeRibbonColorClassName({ color: presetColor ?? "primary" }),
     className,
   )}
-  style:--badge-color={customColor}
+  style:--badge-color={color && !presetColor ? color : undefined}
   ><span data-slot="badge-ribbon-text" class={badgeRibbonTextClassName}
     >{@render children?.()}</span
   ></span

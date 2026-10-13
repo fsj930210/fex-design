@@ -3,7 +3,7 @@ import type { AnchorRegisteredItem, AnchorTarget } from '@fex-design/core/anchor
 import { resolveAnchorTarget } from '@fex-design/core/anchor/dom'
 import { anchorItemClassName } from '@fex-design/components-styles/anchor'
 import { cn } from '@fex-design/utils'
-import { inject, isRef, onBeforeUnmount, onMounted, provide, useAttrs, type Ref } from 'vue'
+import { inject, isRef, onMounted, provide, useAttrs, watchEffect, type Ref } from 'vue'
 import { anchorContextKey, anchorItemContextKey } from './anchor-context'
 defineOptions({ name: 'AnchorItem', inheritAttrs: false })
 const props = defineProps<{
@@ -16,17 +16,19 @@ const anchor = inject(anchorContextKey)
 const parent = inject(anchorItemContextKey, null)
 if (!anchor) throw new Error('AnchorItem must be used inside AnchorRoot')
 const item: AnchorRegisteredItem = {
-  key: props.value,
+  get key() { return props.value },
   target: () => (isRef(props.target) ? props.target.value : resolveAnchorTarget(props.target)),
-  ...(props.targetOffset === undefined ? {} : { targetOffset: props.targetOffset }),
-  ...(parent ? { parentKey: parent.key } : {}),
+  get targetOffset() { return props.targetOffset },
+  get parentKey() { return parent?.key },
 }
 provide(anchorItemContextKey, item)
-let unregister: (() => void) | undefined
 onMounted(() => {
-  unregister = anchor.registerItem(item)
+  // Synchronize the external item registry after mounting and clean up replaced entries.
+  watchEffect((cleanup) => {
+    void props.target
+    cleanup(anchor.registerItem({ ...item }))
+  })
 })
-onBeforeUnmount(() => unregister?.())
 </script>
 <template>
   <li

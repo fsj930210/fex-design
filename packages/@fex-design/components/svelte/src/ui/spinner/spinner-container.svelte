@@ -14,6 +14,7 @@
   import SpinnerText from '@fex-design/svelte/primitive/spinner/spinner-text.svelte';
   let {
     class: className,
+    style,
     spinning,
     text,
     indicator,
@@ -36,7 +37,7 @@
     {...rest}
     {size}
     class={cn(className, classNames?.spinner)}
-    style={styles?.spinner}
+    style={[style, styles?.spinner].filter(Boolean).join(';')}
     >{#if indicator}{@render indicator()}{/if}</Spinner
   >
 {:else}
@@ -44,7 +45,7 @@
     {...rest}
     aria-busy={spinning}
     class={cn(spinnerContainerClassName, className, classNames?.root)}
-    style={styles?.root}
+    style={[style, styles?.root].filter(Boolean).join(';')}
   >
     {@render children?.()}
     {#if spinning}<SpinnerOverlay

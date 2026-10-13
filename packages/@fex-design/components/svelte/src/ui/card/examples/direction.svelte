@@ -4,7 +4,7 @@
   const directions = ["ltr", "rtl"] as const;
 </script>
 
-<div class="grid w-full gap-6 sm:grid-cols-2">
+<div class="grid w-full gap-space-xl sm:grid-cols-2">
   {#each directions as dir (dir)}
     <Card
       {dir}

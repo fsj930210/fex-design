@@ -1,0 +1,2 @@
+<p>选中：{{ value()?.toString() ?? "未选择" }}</p><div calendarRoot [defaultViewDate]="options().defaultViewDate" [locale]="options().locale" [weekStartsOn]="options().weekStartsOn ?? 0" [showWeek]="options().showWeek" [fullscreen]="options().fullscreen" [class]="rootClass" [attr.data-fullscreen]="true" [value]="value()" (change)="value.set($event)"><div calendarExampleContent [options]="options()"></div></div>
+

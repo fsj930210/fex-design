@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from '@fex-design/angular/primitive/card'
 @Component({
-  selector: 'card-primitive-direction-example',
+  selector: 'card-direction-example',
   standalone: true,
   imports: [Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter],
   changeDetection: ChangeDetectionStrategy.OnPush,

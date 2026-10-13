@@ -198,6 +198,7 @@
     "./select/filter-options": "./src/select/filter-options.ts",
     "./select/normalize-options": "./src/select/normalize-options.ts",
     "./select/types": "./src/select/types.ts",
+    "./select/value-layout": "./src/select/value-layout.ts",
     "./select/virtual": "./src/select/virtual.ts",
     "./selection/create-selection-controller": "./src/selection/create-selection-controller.ts",
     "./selection/types": "./src/selection/types.ts",

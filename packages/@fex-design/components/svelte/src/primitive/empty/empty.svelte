@@ -8,7 +8,6 @@
     children?: Snippet;
   }
   let { class: className, children, ...rest }: Props = $props();
-  const classList = $derived(cn(emptyClassName, className));
 </script>
 
-<div {...rest} data-slot="empty" class={classList}>{@render children?.()}</div>
+<div {...rest} data-slot="empty" class={cn(emptyClassName, className)}>{@render children?.()}</div>

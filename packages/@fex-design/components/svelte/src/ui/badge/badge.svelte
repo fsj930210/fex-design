@@ -53,7 +53,7 @@
   <span
     data-slot="badge-root"
     class={cn(badgeRootClassName, className, classNames?.root)}
-    style={`${style ?? ""}${styles?.root ?? ""}`}
+    style={[style, styles?.root].filter(Boolean).join(";")}
   >
     <span
       data-slot="badge-content"
@@ -76,13 +76,13 @@
     {color}
     {size}
     class={cn(className, classNames?.indicator)}
-    style={indicatorStyle}
+    style={[style, styles?.root, indicatorStyle].filter(Boolean).join(";")}
   />
 {:else}
   <PrimitiveBadge
     {...badgeProps}
     class={cn(className, classNames?.root)}
-    style={`${style ?? ""}${styles?.root ?? ""}`}
+    style={[style, styles?.root].filter(Boolean).join(";")}
     >{@render children?.()}</PrimitiveBadge
   >
 {/if}

@@ -19,8 +19,8 @@ export interface AnchorItem<TTitle = unknown> {
 export interface AnchorRegisteredItem {
   key: string
   target: AnchorTarget
-  targetOffset?: number
-  parentKey?: string
+  targetOffset?: number | undefined
+  parentKey?: string | undefined
 }
 
 export type AnchorPart = 'root' | 'list' | 'item' | 'link' | 'rail' | 'indicator'

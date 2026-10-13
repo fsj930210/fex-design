@@ -1,0 +1,5 @@
+@if (cellTemplate()) {
+  <ng-container [ngTemplateOutlet]="cellTemplate()" [ngTemplateOutletContext]="{ $implicit: cell(), cell: cell() }" />
+} @else {
+  <ng-content><button calendarCellTrigger [cell]="cell()"></button></ng-content>
+}

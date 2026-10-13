@@ -1,23 +1,35 @@
-import type { ComponentProps } from 'react'
+import {
+  getCalendarWeekHeaderItems,
+  calendarDefaultWeekLabels,
+  type CalendarWeekHeaderItem,
+} from '@fex-design/core/calendar'
+import { calendarWeekHeaderClassName } from '@fex-design/components-styles/calendar'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps, ReactNode } from 'react'
 import { useCalendarContext } from './calendar-context'
 
-export interface CalendarWeekHeaderProps extends ComponentProps<'div'> {
+export type CalendarWeekHeaderProps = Omit<ComponentProps<'div'>, 'children'> & {
   labels?: readonly string[]
+  children?: (item: CalendarWeekHeaderItem) => ReactNode
 }
 
 export function CalendarWeekHeader({
-  labels = ['日', '一', '二', '三', '四', '五', '六'],
+  labels = calendarDefaultWeekLabels,
+  children,
   className,
   ...props
 }: CalendarWeekHeaderProps) {
   const context = useCalendarContext('CalendarWeekHeader')
-  const orderedLabels = labels.map((_, index) => labels[(index + context.weekStartsOn) % 7] ?? '')
-
+  const items = getCalendarWeekHeaderItems(labels, context.state.weekStartsOn)
   return (
-    <div {...props} data-slot="calendar-week-header" className={className}>
-      {orderedLabels.map((label) => (
-        <div key={label} data-slot="calendar-week-head">
-          {label}
+    <div
+      {...props}
+      data-slot="calendar-week-header"
+      className={cn(calendarWeekHeaderClassName, className)}
+    >
+      {items.map((item) => (
+        <div key={item.index} data-slot="calendar-week-head">
+          {children ? children(item) : item.label}
         </div>
       ))}
     </div>

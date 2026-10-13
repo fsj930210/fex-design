@@ -1,11 +1,8 @@
-import { type Ref } from 'react'
-import { useLatest } from './use-latest'
-import { useMemoizedFn } from './use-memoized-fn'
+import { useMemo, type Ref } from 'react'
 
 function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
   if (typeof ref === 'function') {
-    ref(value)
-    return
+    return ref(value)
   }
   if (ref && 'current' in ref) {
     ref.current = value
@@ -13,8 +10,17 @@ function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
 }
 
 export function useComposedRef<T>(...refs: Array<Ref<T> | undefined>) {
-  const refsRef = useLatest(refs)
-  return useMemoizedFn((value: T | null) => {
-    for (const ref of refsRef.current) assignRef(ref, value)
-  })
+  // DOM ref identity must change with its inputs so React detaches old refs and attaches new ones.
+  return useMemo(() => (value: T | null) => {
+    const cleanups = refs.map((ref) => assignRef(ref, value))
+    if (value === null) return
+    // React 19 uses callback-ref cleanup; refs without cleanup still receive null.
+    return () => {
+      refs.forEach((ref, index) => {
+        const cleanup = cleanups[index]
+        if (typeof cleanup === 'function') cleanup()
+        else assignRef(ref, null)
+      })
+    }
+  }, refs)
 }

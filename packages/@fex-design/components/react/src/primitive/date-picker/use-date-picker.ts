@@ -166,4 +166,6 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
   }
 }
 
-export type UseDatePickerReturn<TValue extends CalendarValue = CalendarValue> = ReturnType<typeof useDatePicker<TValue>>
+export type UseDatePickerReturn<TValue extends CalendarValue = CalendarValue> = ReturnType<
+  typeof useDatePicker<TValue>
+>

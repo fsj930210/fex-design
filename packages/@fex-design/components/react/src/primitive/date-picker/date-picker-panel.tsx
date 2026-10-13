@@ -1,11 +1,9 @@
 import {
   getCalendarValueDate,
-  type CalendarCell as CoreCalendarCell,
   type CalendarDate,
-  type CalendarPanel,
   type CalendarValue,
 } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker, getGranularityByPicker } from '@fex-design/core/date-picker/panel'
+import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { createRangePreviewValue } from '@fex-design/core/date-picker/range'
 import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
@@ -27,21 +25,9 @@ import {
 } from './date-picker-header'
 import { useDatePickerContext, useRangePickerContext } from './context'
 
-function getNextPanelAfterCell(panel: CalendarPanel, picker: string): CalendarPanel | null {
-  if (picker === 'year') return null
-  if (panel === 'decade') return 'year'
-  if (panel === 'year')
-    return picker === 'month' || picker === 'quarter'
-      ? getDefaultPanelByPicker(picker as 'month' | 'quarter')
-      : 'month'
-  if (panel === 'month') return picker === 'month' ? null : 'date'
-  if (panel === 'quarter') return null
-  return null
-}
-
 export interface DatePickerPanelProps<TValue extends CalendarValue = CalendarValue> extends Omit<
   ComponentProps<typeof CalendarRoot<TValue>>,
-  'value' | 'values' | 'defaultValue' | 'onValueChange'
+  'value' | 'values' | 'defaultValue' | 'onChange' | 'onSelect'
 > {
   children?: ReactNode
 }
@@ -53,15 +39,14 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>({
 }: DatePickerPanelProps<TValue>) {
   const context = useDatePickerContext('DatePickerPanel')
 
-  function selectCell(cell: CoreCalendarCell) {
-    const nextPanel = getNextPanelAfterCell(cell.panel, context.picker)
-    const nextViewDate = getCalendarValueDate(cell.value)
-    if (nextPanel) {
-      context.setViewDate(nextViewDate)
-      context.setPanel(nextPanel)
-      return
-    }
-    context.select(normalizeDatePickerValue(nextViewDate, context.picker, context.weekStartsOn))
+  function selectValue(value: CalendarValue) {
+    context.select(
+      normalizeDatePickerValue(
+        getCalendarValueDate(value),
+        context.picker,
+        context.weekStartsOn,
+      ) as never,
+    )
   }
 
   return (
@@ -76,7 +61,7 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>({
       {...(context.minDate ? { min: context.minDate } : {})}
       {...(context.maxDate ? { max: context.maxDate } : {})}
       {...(context.disabledDate ? { disabledDate: context.disabledDate } : {})}
-      onCellSelect={selectCell}
+      onSelect={selectValue}
       onPanelChange={context.setPanel}
       onViewDateChange={context.setViewDate}
       className={cn(datePickerPanelClassName, className)}
@@ -88,8 +73,8 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>({
 
 export function DefaultDatePickerPanelContent() {
   const calendar = useCalendarContext('DefaultDatePickerPanelContent')
-  const datePanel = calendar.panel === 'date'
-  const yearPanel = calendar.panel === 'year' || calendar.panel === 'decade'
+  const datePanel = calendar.state.panel === 'date'
+  const yearPanel = calendar.state.panel === 'year' || calendar.state.panel === 'decade'
   return (
     <>
       <DatePickerHeader>
@@ -116,7 +101,7 @@ export function DefaultDatePickerPanelContent() {
 
 export interface RangePickerPanelProps<TValue extends CalendarValue = CalendarValue> extends Omit<
   ComponentProps<typeof CalendarRoot<TValue>>,
-  'value' | 'range' | 'defaultValue' | 'onValueChange'
+  'value' | 'range' | 'defaultValue' | 'onChange' | 'onSelect'
 > {
   children?: ReactNode
   panelViewDate?: CalendarDate | undefined
@@ -136,20 +121,20 @@ export function RangePickerPanel<TValue extends CalendarValue = CalendarValue>({
     context.activePart,
   )
 
-  function selectCell(cell: CoreCalendarCell) {
-    const nextPanel = getNextPanelAfterCell(cell.panel, context.picker)
-    const nextViewDate = getCalendarValueDate(cell.value)
-    if (nextPanel) {
-      context.setViewDate(nextViewDate)
-      context.setPanel(nextPanel)
-      return
-    }
-    context.select(normalizeDatePickerValue(nextViewDate, context.picker, context.weekStartsOn))
+  function selectValue(value: CalendarValue) {
+    context.select(
+      normalizeDatePickerValue(
+        getCalendarValueDate(value),
+        context.picker,
+        context.weekStartsOn,
+      ) as never,
+    )
   }
 
   return (
     <CalendarRoot
       {...props}
+      value={null}
       range={displayRange as never}
       viewDate={viewDate}
       panel={context.panel}
@@ -158,7 +143,7 @@ export function RangePickerPanel<TValue extends CalendarValue = CalendarValue>({
       {...(context.minDate ? { min: context.minDate } : {})}
       {...(context.maxDate ? { max: context.maxDate } : {})}
       disabledDate={(date) => context.disabledDate?.(date, context.activePart) ?? false}
-      onCellSelect={selectCell}
+      onSelect={selectValue}
       onCellHover={(cell) => context.setHoverValue(cell.value as TValue)}
       onPanelChange={context.setPanel}
       onViewDateChange={context.setViewDate}
@@ -169,4 +154,3 @@ export function RangePickerPanel<TValue extends CalendarValue = CalendarValue>({
     </CalendarRoot>
   )
 }
-

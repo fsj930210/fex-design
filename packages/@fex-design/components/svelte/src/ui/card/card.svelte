@@ -6,6 +6,7 @@
     CardOptions,
     CardStyles as CardStylesBase,
   } from "@fex-design/core/card/types";
+  import { cn } from "@fex-design/utils";
   import PrimitiveCard from '@fex-design/svelte/primitive/card/card.svelte';
   import CardContent from '@fex-design/svelte/primitive/card/card-content.svelte';
   import CardDescription from '@fex-design/svelte/primitive/card/card-description.svelte';
@@ -39,46 +40,19 @@
     children,
     ...rest
   }: CardProps = $props();
-
-  const rootProps = $derived({
-    ...(className || classNames?.root
-      ? { class: `${className ?? ""} ${classNames?.root ?? ""}` }
-      : {}),
-    ...(style || styles?.root ? { style: [style, styles?.root] } : {}),
-  });
-  const headerProps = $derived({
-    ...(classNames?.header ? { class: classNames.header } : {}),
-    ...(styles?.header ? { style: styles.header } : {}),
-  });
-  const titleProps = $derived({
-    ...(classNames?.title ? { class: classNames.title } : {}),
-    ...(styles?.title ? { style: styles.title } : {}),
-  });
-  const descriptionProps = $derived({
-    ...(classNames?.description ? { class: classNames.description } : {}),
-    ...(styles?.description ? { style: styles.description } : {}),
-  });
-  const contentProps = $derived({
-    ...(classNames?.content ? { class: classNames.content } : {}),
-    ...(styles?.content ? { style: styles.content } : {}),
-  });
-  const footerProps = $derived({
-    ...(classNames?.footer ? { class: classNames.footer } : {}),
-    ...(styles?.footer ? { style: styles.footer } : {}),
-  });
-  const extraProps = $derived({
-    ...(classNames?.extra ? { class: classNames.extra } : {}),
-    ...(styles?.extra ? { style: styles.extra } : {}),
-  });
 </script>
 
-<PrimitiveCard {...rest} {...rootProps}>
+<PrimitiveCard
+  {...rest}
+  class={cn(className, classNames?.root)}
+  style={[style, styles?.root].filter(Boolean).join(";")}
+>
   {#if header}
-    {@render header()}
+    {#if typeof header === "function"}{@render header()}{:else}{header}{/if}
   {:else if title || description || extra}
-    <CardHeader {...headerProps}>
+    <CardHeader class={classNames?.header} style={styles?.header}>
       {#if title}
-        <CardTitle {...titleProps}>
+        <CardTitle class={classNames?.title} style={styles?.title}>
           {#if typeof title === "function"}
             {@render title()}
           {:else}
@@ -87,12 +61,15 @@
         </CardTitle>
       {/if}
       {#if extra}
-        <CardExtra {...extraProps}>
+        <CardExtra class={classNames?.extra} style={styles?.extra}>
           {#if typeof extra === "function"}{@render extra()}{:else}{extra}{/if}
         </CardExtra>
       {/if}
       {#if description}
-        <CardDescription {...descriptionProps}>
+        <CardDescription
+          class={classNames?.description}
+          style={styles?.description}
+        >
           {#if typeof description === "function"}
             {@render description()}
           {:else}
@@ -102,11 +79,11 @@
       {/if}
     </CardHeader>
   {/if}
-  <CardContent {...contentProps}>
+  <CardContent class={classNames?.content} style={styles?.content}>
     {@render children?.()}
   </CardContent>
   {#if footer}
-    <CardFooter {...footerProps}>
+    <CardFooter class={classNames?.footer} style={styles?.footer}>
       {#if typeof footer === "function"}
         {@render footer()}
       {:else}

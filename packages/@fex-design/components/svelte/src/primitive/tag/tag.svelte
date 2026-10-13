@@ -27,9 +27,6 @@
   const presetColor = $derived<TagPresetColor | undefined>(
     isTagPresetColor(color) ? color : undefined,
   );
-  const rootStyle = $derived(
-    `${color && !presetColor ? `--tag-color:${color};` : ""}${typeof style === "string" ? style : ""}`,
-  );
 </script>
 
 <span
@@ -40,7 +37,7 @@
   data-size={size}
   data-disabled={disabled ? "true" : undefined}
   class={cn(tagClassName({ variant, color: presetColor, size }), className)}
-  style={rootStyle}
+  style={`${color && !presetColor ? `--tag-color:${color};` : ""}${typeof style === "string" ? style : ""}`}
 >
   {@render children?.()}
 </span>

@@ -35,7 +35,10 @@ for (const [framework, config] of Object.entries(frameworks)) {
         const name = example.name.slice(0, -config.extension.length - 1)
         let source = await readFile(resolve(examplesRoot, example.name), 'utf8')
         let angularTemplateRoot = examplesRoot
-        const reexport = source.match(
+        const publicReexport = source.match(
+          /export \{ \w+(?: as default)? \} from ['"]@fex-design\/(?:react|vue|solid|svelte|angular)\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/,
+        )
+        const reexport = publicReexport ?? source.match(
           /export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/,
         )
         if (layer === 'ui' && reexport) {
@@ -52,16 +55,17 @@ for (const [framework, config] of Object.entries(frameworks)) {
             resolve(primitiveRoot, `${reexport[2]}.${config.extension}`),
             'utf8',
           )
-          source = source.replaceAll(
+          // Public reexports reuse the Primitive demo itself, including its logic imports.
+          if (!publicReexport) source = source.replaceAll(
             `@fex-design/${framework}/primitive/${reexport[1]}`,
             `@fex-design/${framework}/ui/${component.name}`,
           )
-          if (framework === 'angular')
+          if (!publicReexport && framework === 'angular')
             source = source.replaceAll(
               "from '../separator'",
               "from '@fex-design/angular/ui/separator'",
             )
-          if (framework === 'svelte')
+          if (!publicReexport && framework === 'svelte')
             source = source.replace(
               /from ['"][^'"]*separator\.svelte['"]/,
               "from '@fex-design/svelte/ui/separator'",
@@ -94,7 +98,10 @@ for (const [framework, config] of Object.entries(frameworks)) {
             source += `\n\n<!-- ${template} -->\n${await readFile(resolve(examplesRoot, template), 'utf8')}`
           }
         }
-        const html = await codeToHtml(source, { lang: config.language, theme: 'github-light' })
+        const html = await codeToHtml(source, {
+          lang: config.language,
+          themes: { light: 'github-light', dark: 'github-dark' },
+        })
         const output = resolve(outputRoot, framework, layer, component.name, `${name}.json`)
         await mkdir(dirname(output), { recursive: true })
         await writeFile(output, JSON.stringify({ source, html }))

@@ -1,4 +1,5 @@
 import { Temporal } from './temporal'
+import { getQuarter, getWeekEnd, getWeekStart, getYear } from '../date/utils'
 import type {
   CalendarDate,
   CalendarGranularity,
@@ -7,7 +8,19 @@ import type {
   CalendarWeek,
   CalendarYear,
   CalendarYearMonth,
+  CalendarWeekday,
 } from './types'
+
+export function getCalendarSelectionValue(date: CalendarDate, granularity: CalendarGranularity, weekStartsOn: CalendarWeekday = 0): CalendarValue {
+  if (granularity === 'week') {
+    const start = getWeekStart(date, weekStartsOn)
+    return { start, end: getWeekEnd(start, weekStartsOn) }
+  }
+  if (granularity === 'month') return Temporal.PlainYearMonth.from({ year: date.year, month: date.month })
+  if (granularity === 'quarter') return getQuarter(date)
+  if (granularity === 'year') return getYear(date)
+  return date
+}
 
 export function isCalendarDate(value: CalendarValue): value is CalendarDate {
   return value instanceof Temporal.PlainDate

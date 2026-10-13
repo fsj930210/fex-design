@@ -4,11 +4,11 @@ import type {
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
 import type { SelectionValue } from '@fex-design/core/selection/types'
-import type { ComputedRef, InjectionKey, ShallowRef } from 'vue'
+import type { ComputedRef, InjectionKey } from 'vue'
 
 export interface SelectContextValue {
   controller: SelectController
-  snapshot: ShallowRef<ReturnType<SelectController['getSnapshot']>>
+  snapshot: ComputedRef<ReturnType<SelectController['getSnapshot']>>
   options: ComputedRef<readonly SelectOption[]>
   visibleOptions: ComputedRef<readonly SelectOption[]>
   selectedOptions: ComputedRef<readonly SelectOption[]>

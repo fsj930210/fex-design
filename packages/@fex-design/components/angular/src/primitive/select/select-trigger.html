@@ -7,59 +7,50 @@
   [attr.data-status]="select.status"
   [attr.aria-invalid]="select.status === 'error' || null"
   [attr.aria-expanded]="select.snapshot().open"
-  [class]="triggerClass"
+  [class]="triggerClass()"
+  [style]="inputProps().styles?.root ?? inputProps().style ?? null"
   (keydown)="keydown($event)"
 >
   <ng-container *ngTemplateOutlet="prefix ?? null" />
-  <div [class]="valueContainerClass">
-    @if (select.selectedOptions.length) { @if (select.isMultiple) {
-    <div [class]="valueClass">
-      @for (item of visibleSelected; track item.value) { @if (tag) {
-      <ng-container
-        *ngTemplateOutlet="tag; context: { $implicit: item, remove: remove(item.value) }"
-      />
-      } @else {
-      <span tag size="sm" (pointerdown)="$event.preventDefault()"
-        >{{ item.label }}<button
-          tagAction
-          [aria-label]="'Remove ' + item.label"
-          (click)="$event.stopPropagation(); select.removeValue(item.value)"
-        ></button
-      ></span>
-      } } @if (overflow > 0) {
-      <span tag size="sm">+{{ overflow }}</span>
-      }
-    </div>
-    } @else {
-    <div [class]="valueClass">{{ select.selectedOptions[0]?.label }}</div>
-    } } @else if (!select.snapshot().searchValue && !select.canSearch) {
-    <span class="truncate text-muted-foreground">{{ placeholder }}</span> }
+  <div [class]="valueContainerClass + ' ' + (inputProps().classNames?.control ?? '')">
+    <div selectValue [placeholder]="placeholder" [maxTagCount]="maxTagCount" [tag]="tag"></div>
     <input
       role="combobox"
+      [attr.name]="inputProps().name ?? null"
+      [attr.autocomplete]="inputProps().autocomplete ?? null"
+      [attr.inputmode]="inputProps().inputmode ?? null"
+      [attr.aria-label]="inputProps()['aria-label'] ?? null"
+      [style]="inputProps().styles?.control ?? null"
       [attr.aria-expanded]="select.snapshot().open"
       [attr.aria-controls]="select.listId"
       [disabled]="select.disabled"
       [readOnly]="!select.canSearch"
       [attr.placeholder]="select.canSearch && !select.selectedOptions.length ? placeholder : null"
       [value]="select.snapshot().searchValue"
-      [class]="select.canSearch ? inputClass : inputClass + ' absolute size-px min-w-0 overflow-hidden opacity-0'"
+      [class]="(select.canSearch ? inputClass : inputClass + ' absolute size-px min-w-0 overflow-hidden opacity-0') + ' ' + (inputProps().classNames?.control ?? '')"
       (focus)="select.controller.open()"
       (pointerdown)="inputPointerdown()"
       (click)="$event.stopPropagation()"
       (input)="input($event)"
     />
   </div>
-  <span data-slot="select-suffix" [class]="suffixClass">
+  <span data-slot="select-suffix" [class]="suffixClass + ' ' + (inputProps().classNames?.suffix ?? '')">
     @if (select.loading) { <loading-icon class="animate-spin" /> } @else {
-    <span [class]="select.clearable && select.selectedOptions.length ? clearableIndicatorClass : ''">
-      @if (suffix) { <ng-container *ngTemplateOutlet="suffix" /> } @else {
-      <span [attr.data-state]="select.snapshot().open ? 'open' : 'closed'" [class]="indicatorClass">⌄</span> }
-    </span>
+    @if (suffix) {
+      <span [class]="'inline-flex items-center justify-center ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')">
+        <ng-container *ngTemplateOutlet="suffix" />
+      </span>
+    } @else {
+      <span
+        [attr.data-state]="select.snapshot().open ? 'open' : 'closed'"
+        [class]="indicatorClass + ' ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')"
+      ><chevron-down-icon class="size-4" /></span>
+    }
     @if (select.clearable && select.selectedOptions.length) {
     <button
       type="button"
       aria-label="Clear selection"
-      [class]="clearClass"
+      [class]="clearClass + ' ' + (inputProps().classNames?.clear ?? '')"
       (pointerdown)="$event.preventDefault()"
       (click)="$event.stopPropagation(); select.controller.clear()"
     >

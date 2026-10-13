@@ -35,7 +35,7 @@ import { SkeletonPlaceholder } from './skeleton-placeholder'
   host: {
     '[class]': 'hostClassName()',
     '[style]': 'loading() === false || placeholder() ? null : styles().root',
-    '[attr.aria-hidden]': 'loading() === false ? null : true',
+    '[attr.aria-hidden]': 'loading() === false || placeholder() ? null : true',
     'data-slot': 'skeleton-root',
   },
   templateUrl: './skeleton.html',

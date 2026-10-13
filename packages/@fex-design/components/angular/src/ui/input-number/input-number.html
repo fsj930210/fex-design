@@ -1,24 +1,4 @@
-<div
-  inputNumberRoot
-  [controlled]="hasValue()"
-  [value]="valueState()"
-  [defaultValue]="defaultValue()"
-  [min]="min()"
-  [max]="max()"
-  [step]="step()"
-  [precision]="precision()"
-  [parser]="parser()"
-  [formatter]="formatter()"
-  [disabled]="disabled()"
-  [readOnly]="readOnly()"
-  [keyboard]="keyboard()"
-  [size]="size()"
-  [variant]="variant()"
-  [class]="classNames()?.root"
-  [style]="styles()?.root"
-  (change)="change.emit($event)"
->
-  <span inputPrefix [class]="classNames()?.prefix" [style]="styles()?.prefix">
+<span inputPrefix [class]="prefixClassName()" [style]="styles()?.prefix">
     <ng-content select="[inputNumberPrefix]" />
   </span>
   <input
@@ -35,7 +15,7 @@
   @if (clearable()) {
   <button inputNumberClear [class]="classNames()?.clear" [style]="styles()?.clear"></button>
   }
-  <span inputSuffix [class]="classNames()?.suffix" [style]="styles()?.suffix">
+  <span inputSuffix [class]="suffixClassName()" [style]="styles()?.suffix">
     <ng-content select="[inputNumberSuffix]" />
   </span>
   @if (controls()) {
@@ -52,4 +32,3 @@
     ></button>
   </span>
   }
-</div>

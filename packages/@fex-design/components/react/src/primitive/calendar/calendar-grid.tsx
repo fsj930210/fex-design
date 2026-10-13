@@ -1,6 +1,9 @@
 import type { CalendarCell as CoreCalendarCell, CalendarValue } from '@fex-design/core/calendar'
 import { Fragment, type ComponentProps, type ReactNode } from 'react'
 import { useCalendarContext } from './calendar-context'
+import { calendarGridClassName } from '@fex-design/components-styles/calendar'
+import { cn } from '@fex-design/utils'
+import { CalendarRow } from './calendar-row'
 import { CalendarCell } from './calendar-cell'
 
 export interface CalendarGridProps<TValue extends CalendarValue = CalendarValue> extends Omit<
@@ -22,15 +25,16 @@ export function CalendarGrid<TValue extends CalendarValue = CalendarValue>({
     <div
       {...props}
       data-slot="calendar-grid"
-      data-panel={context.panel}
-      className={className}
+      data-panel={context.state.panel}
+      role="grid"
+      className={cn(calendarGridClassName, className)}
       onMouseLeave={(event) => {
         onMouseLeave?.(event)
-        if (!event.defaultPrevented) context.clearHoveredRow()
+        if (!event.defaultPrevented) context.controller.clearHoveredRow()
       }}
     >
       {context.grid.rows.map((row) => (
-        <div key={row.map((cell) => cell.key).join('|')} data-slot="calendar-row">
+        <CalendarRow key={row.map((cell) => cell.key).join('|')}>
           {row.map((cell) =>
             children ? (
               <Fragment key={cell.key}>{children(cell as CoreCalendarCell<TValue>)}</Fragment>
@@ -38,7 +42,7 @@ export function CalendarGrid<TValue extends CalendarValue = CalendarValue>({
               <CalendarCell key={cell.key} cell={cell} />
             ),
           )}
-        </div>
+        </CalendarRow>
       ))}
     </div>
   )

@@ -10,6 +10,8 @@ import {
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
 import { computed, useSlots } from 'vue'
+import type { InputClassNames, InputStyles } from '@fex-design/core/input/types'
+import type { CSSProperties } from 'vue'
 import { ChevronDownIcon } from '@fex-design/vue/icons/chevron'
 import { CircleXIcon } from '@fex-design/vue/icons/circle-x'
 import { LoadingIcon } from '@fex-design/vue/icons/loading'
@@ -22,12 +24,17 @@ const props = defineProps<{
   class?: string | undefined
   placeholder?: string | undefined
   maxTagCount?: number | undefined
+  inputProps?: Record<string, unknown> | undefined
+  classNames?: InputClassNames | undefined
+  styles?: InputStyles<CSSProperties> | undefined
 }>()
 const select = useSelect('SelectTrigger')
 const slots = useSlots()
-const className = computed(() => cn(selectTriggerClassName(), props.class))
+const className = computed(() => cn(selectTriggerClassName(), props.classNames?.root, props.class))
 const placeholder = computed(() => props.placeholder ?? '请选择')
+const inputAttrs = computed(() => { const { class: _class, style: _style, ...attrs } = props.inputProps ?? {}; return attrs })
 function keydown(event: KeyboardEvent) {
+  if (event.defaultPrevented) return
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault()
     select.controller.open()
@@ -61,20 +68,23 @@ function inputPointerdown() {
       :data-clearable="select.clearable.value && select.selectedOptions.value.length ? 'true' : undefined"
       :data-status="select.status.value"
       :class="className"
+      :style="[props.styles?.root, props.inputProps?.style]"
       @keydown="keydown"
     >
       <slot name="prefix" />
-      <div :class="selectValueContainerClassName">
+      <div :class="[selectValueContainerClassName, props.classNames?.control]">
         <SelectValue
           :placeholder="select.showSearch.value ? undefined : placeholder"
           :max-tag-count="props.maxTagCount"
-          ><template #tag="slotProps"><slot name="tag" v-bind="slotProps" /></template
+          ><template v-if="$slots.tag" #tag="slotProps"><slot name="tag" v-bind="slotProps" /></template
           ><template #value="slotProps"
             ><slot name="value" v-bind="slotProps">{{ slotProps.option.label }}</slot></template
           ></SelectValue
         >
         <input
+          v-bind="inputAttrs"
           role="combobox"
+          :style="props.styles?.control"
           :aria-expanded="select.snapshot.value.open"
           :aria-controls="select.listId"
           :disabled="select.disabled.value"
@@ -88,6 +98,8 @@ function inputPointerdown() {
           :class="
             cn(
               selectInputClassName,
+              props.inputProps?.class as string | undefined,
+              props.classNames?.control,
               !select.showSearch.value && 'absolute size-px min-w-0 overflow-hidden opacity-0',
             )
           "
@@ -97,7 +109,7 @@ function inputPointerdown() {
           @input="input"
         />
       </div>
-      <span data-slot="select-suffix" :class="selectSuffixClassName">
+      <span data-slot="select-suffix" :class="[selectSuffixClassName, props.classNames?.suffix]">
         <LoadingIcon v-if="select.loading.value" class="animate-spin" />
         <template v-else>
         <span :class="select.clearable.value && select.selectedOptions.value.length ? selectClearableIndicatorClassName : undefined">
@@ -108,7 +120,7 @@ function inputPointerdown() {
           v-if="select.clearable.value && select.selectedOptions.value.length"
           type="button"
           aria-label="Clear selection"
-          :class="selectClearClassName"
+          :class="[selectClearClassName, props.classNames?.clear]"
           @pointerdown.prevent
           @click.stop="select.controller.clear()"
           ><slot name="clear"><CircleXIcon /></slot

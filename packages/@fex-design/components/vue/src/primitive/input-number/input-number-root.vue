@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { inputNumberRootClassName } from '@fex-design/components-styles/input-number'
+import { cn } from '@fex-design/utils'
 import type { InputNumberFormatter, InputNumberParser } from '@fex-design/core/input-number/types'
 import { getCurrentInstance, provide } from 'vue'
 import { InputRoot } from '../input'
@@ -8,23 +10,23 @@ import { useInputNumber } from './use-input-number'
 defineOptions({ name: 'InputNumberRoot', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{
-    controlled?: boolean
-    value?: number
-    defaultValue?: number
-    min?: number
-    max?: number
-    step?: number
-    precision?: number
-    parser?: InputNumberParser
-    formatter?: InputNumberFormatter
-    disabled?: boolean
-    readOnly?: boolean
-    keyboard?: boolean
-    size?: 'sm' | 'md' | 'lg'
-    variant?: 'outlined' | 'filled' | 'borderless' | 'underlined'
-    class?: string
+    controlled?: boolean | undefined
+    value?: number | undefined
+    defaultValue?: number | undefined
+    min?: number | undefined
+    max?: number | undefined
+    step?: number | undefined
+    precision?: number | undefined
+    parser?: InputNumberParser | undefined
+    formatter?: InputNumberFormatter | undefined
+    disabled?: boolean | undefined
+    readOnly?: boolean | undefined
+    keyboard?: boolean | undefined
+    size?: 'sm' | 'md' | 'lg' | undefined
+    variant?: 'outlined' | 'filled' | 'borderless' | 'underlined' | undefined
+    class?: string | undefined
   }>(),
-  { step: 1, keyboard: true },
+  { controlled: undefined, step: 1, keyboard: true },
 )
 const emit = defineEmits<{ change: [event: Event, value: number | undefined] }>()
 const hasValue = Object.prototype.hasOwnProperty.call(
@@ -47,7 +49,7 @@ provide(inputNumberContextKey, inputNumber)
     :read-only="props.readOnly"
     :size="props.size"
     :variant="props.variant"
-    :class="props.class"
+    :class="cn(inputNumberRootClassName, props.class)"
     data-slot="input-number-root"
     :data-out-of-range="inputNumber.outOfRange.value || undefined"
     @value-change="

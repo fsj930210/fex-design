@@ -22,16 +22,16 @@
     [attr.data-selected]="selected(item) || null"
     [attr.data-active]="select.snapshot().activeValue === item.value || null"
     [attr.data-disabled]="disabled(item) || null"
-    class="group/select-option relative flex min-h-[32px] cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm data-[active=true]:bg-muted-background data-[selected=true]:bg-muted-background"
+    [class]="optionClass"
     (pointermove)="select.controller.setActiveValue(item.value, 'pointer')"
     (pointerdown)="$event.preventDefault()"
     (click)="choose(item)"
   >
-    <span class="min-w-0 flex-1 truncate"
+    <span [class]="optionLabelClass"
       >@if (option) {
       <ng-container *ngTemplateOutlet="option; context: { $implicit: item, state: state(item) }" />
       } @else { {{ item.label }} }</span
     ><span
-      class="inline-flex size-4 items-center justify-center text-primary opacity-0 group-data-[selected=true]/select-option:opacity-100"
-      >✓</span></div
+      [class]="optionIndicatorClass"
+      ><check-icon class="size-4" /></span></div
 ></ng-template>

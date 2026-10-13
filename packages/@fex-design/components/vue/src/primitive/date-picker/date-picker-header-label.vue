@@ -16,21 +16,20 @@ const owner = useHeaderOwner('DatePickerHeaderLabel')
 const calendar = useCalendarContext('DatePickerHeaderLabel')
 const hovered = ref(false)
 const visible = computed(() =>
-  getDatePickerHeaderLabelParts(owner.picker, calendar.panel.value).includes(props.part),
+  getDatePickerHeaderLabelParts(owner.picker, calendar.state.value.panel).includes(props.part),
 )
 const label = computed(() => {
-  if (props.part === 'month') return `${calendar.viewDate.value.month}月`
-  const decadeStart = Math.floor(calendar.viewDate.value.year / 10) * 10
-  return calendar.panel.value === 'decade'
+  if (props.part === 'month') return `${calendar.state.value.viewDate.month}月`
+  const decadeStart = Math.floor(calendar.state.value.viewDate.year / 10) * 10
+  return calendar.state.value.panel === 'decade'
     ? `${decadeStart}-${decadeStart + 9}年`
-    : `${calendar.viewDate.value.year}年`
+    : `${calendar.state.value.viewDate.year}年`
 })
 
 function selectPanel(event: Event) {
   if (event.defaultPrevented) return
   const nextPanel = getNextPanelByHeaderLabel(props.part)
-  calendar.setPanel(nextPanel)
-  owner.setPanel(nextPanel)
+  calendar.controller.setPanel(nextPanel)
 }
 </script>
 

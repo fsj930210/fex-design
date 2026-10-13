@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import {
   getCalendarValueDate,
-  type CalendarCell,
   type CalendarDate,
-  type CalendarPanel,
+  type CalendarCell as Cell,
   type CalendarValue,
 } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker, getGranularityByPicker } from '@fex-design/core/date-picker/panel'
+import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { createRangePreviewValue } from '@fex-design/core/date-picker/range'
 import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
@@ -17,11 +16,11 @@ import {
   datePickerWeekHeaderClassName,
 } from '@fex-design/components-styles/date-picker'
 import {
-  CalendarCellButton,
+  CalendarCell,
   CalendarGrid,
   CalendarRoot,
   CalendarWeekHeader,
-} from '../calendar/calendar'
+} from '../calendar'
 import {
   DatePickerHeader,
   DatePickerHeaderButton,
@@ -31,26 +30,16 @@ import {
 import { DatePickerState } from './use-date-picker'
 import { RangePickerState } from './use-range-picker'
 
-function getNextPanelAfterCell(panel: CalendarPanel, picker: string): CalendarPanel | null {
-  if (picker === 'year') return null
-  if (panel === 'decade') return 'year'
-  if (panel === 'year')
-    return picker === 'month' || picker === 'quarter'
-      ? getDefaultPanelByPicker(picker as 'month' | 'quarter')
-      : 'month'
-  if (panel === 'month') return picker === 'month' ? null : 'date'
-  if (panel === 'quarter') return null
-  return null
-}
+
 
 @Component({
-  selector: 'fex-date-picker-panel',
+  selector: 'div[datePickerPanel]',
   standalone: true,
   imports: [
     CalendarRoot,
     CalendarWeekHeader,
     CalendarGrid,
-    CalendarCellButton,
+    CalendarCell,
     DatePickerHeader,
     DatePickerHeaderButton,
     DatePickerHeaderLabel,
@@ -69,16 +58,9 @@ export class DatePickerPanel {
 
   constructor(readonly state: DatePickerState) {}
 
-  selectCell(cell: CalendarCell) {
+  selectValue(value: CalendarValue) {
     const context = this.state.context()
-    const nextPanel = getNextPanelAfterCell(cell.panel, context.picker)
-    const nextViewDate = getCalendarValueDate(cell.value)
-    if (nextPanel) {
-      context.setViewDate(nextViewDate)
-      context.setPanel(nextPanel)
-      return
-    }
-    context.select(normalizeDatePickerValue(nextViewDate, context.picker, context.weekStartsOn))
+    this.state.select(normalizeDatePickerValue(getCalendarValueDate(value), context.picker, context.weekStartsOn) as never)
   }
 
   primaryPreviousAction() {
@@ -91,13 +73,13 @@ export class DatePickerPanel {
 }
 
 @Component({
-  selector: 'fex-range-picker-panel',
+  selector: 'div[rangePickerPanel]',
   standalone: true,
   imports: [
     CalendarRoot,
     CalendarWeekHeader,
     CalendarGrid,
-    CalendarCellButton,
+    CalendarCell,
     DatePickerHeader,
     DatePickerHeaderButton,
     DatePickerHeaderLabel,
@@ -130,19 +112,12 @@ export class RangePickerPanel {
     )
   }
 
-  selectCell(cell: CalendarCell) {
+  selectValue(value: CalendarValue) {
     const context = this.state.context()
-    const nextPanel = getNextPanelAfterCell(cell.panel, context.picker)
-    const nextViewDate = getCalendarValueDate(cell.value)
-    if (nextPanel) {
-      context.setViewDate(nextViewDate)
-      context.setPanel(nextPanel)
-      return
-    }
-    context.select(normalizeDatePickerValue(nextViewDate, context.picker, context.weekStartsOn))
+    this.state.select(normalizeDatePickerValue(getCalendarValueDate(value), context.picker, context.weekStartsOn) as never)
   }
 
-  hoverCell(cell: CalendarCell) {
+  hoverCell(cell: Cell) {
     if (!cell.state.disabled) this.state.setHoverValue(cell.value)
   }
 

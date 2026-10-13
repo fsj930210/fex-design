@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { cn } from '@fex-design/utils'
+import { computed, normalizeClass, useAttrs, useTemplateRef } from 'vue'
+import { getCalendarWeekHeaderItems, calendarDefaultWeekLabels, type CalendarWeekHeaderItem } from '@fex-design/core/calendar'
+import { calendarWeekHeaderClassName } from '@fex-design/components-styles/calendar'
 import { useCalendarContext } from './context'
 
-const props = withDefaults(defineProps<{ labels?: readonly string[] }>(), {
-  labels: () => ['日', '一', '二', '三', '四', '五', '六'],
-})
-
+defineOptions({ name: 'CalendarWeekHeader', inheritAttrs: false })
+const props = withDefaults(defineProps<{ labels?: readonly string[] }>(), { labels: () => calendarDefaultWeekLabels })
+defineSlots<{ default?: (item: CalendarWeekHeaderItem) => unknown }>()
+const attrs = useAttrs()
 const context = useCalendarContext('CalendarWeekHeader')
-
-const orderedLabels = computed(() =>
-  props.labels.map((_, index) => props.labels[(index + context.weekStartsOn.value) % 7] ?? ''),
-)
+const items = computed(() => getCalendarWeekHeaderItems(props.labels, context.state.value.weekStartsOn))
+const element = useTemplateRef<HTMLDivElement>('element')
+defineExpose({ element })
 </script>
 
 <template>
-  <div data-slot="calendar-week-header">
-    <div v-for="label in orderedLabels" :key="label" data-slot="calendar-week-head">
-      {{ label }}
+  <div v-bind="attrs" ref="element" data-slot="calendar-week-header" :class="cn(calendarWeekHeaderClassName, normalizeClass(attrs.class))">
+    <div v-for="item in items" :key="item.index" data-slot="calendar-week-head">
+      <slot v-bind="item">{{ item.label }}</slot>
     </div>
   </div>
 </template>

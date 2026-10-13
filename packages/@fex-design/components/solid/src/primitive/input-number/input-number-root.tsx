@@ -3,23 +3,25 @@ import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { InputRoot } from '../input'
 import { InputNumberContext } from './input-number-context'
 import { useInputNumber } from './use-input-number'
+import { inputNumberRootClassName } from '@fex-design/components-styles/input-number'
+import { cn } from '@fex-design/utils'
 export interface InputNumberRootProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  controlled?: boolean
-  content?: () => JSX.Element
-  value?: number
-  defaultValue?: number
-  min?: number
-  max?: number
-  step?: number
-  precision?: number
-  parser?: InputNumberParser
-  formatter?: InputNumberFormatter
-  disabled?: boolean
-  readOnly?: boolean
-  keyboard?: boolean
-  size?: 'sm' | 'md' | 'lg'
-  variant?: 'outlined' | 'filled' | 'borderless' | 'underlined'
-  onChange?: (event: Event, value: number | undefined) => void
+  controlled?: boolean | undefined
+  content?: (() => JSX.Element) | undefined
+  value?: number | undefined
+  defaultValue?: number | undefined
+  min?: number | undefined
+  max?: number | undefined
+  step?: number | undefined
+  precision?: number | undefined
+  parser?: InputNumberParser | undefined
+  formatter?: InputNumberFormatter | undefined
+  disabled?: boolean | undefined
+  readOnly?: boolean | undefined
+  keyboard?: boolean | undefined
+  size?: 'sm' | 'md' | 'lg' | undefined
+  variant?: 'outlined' | 'filled' | 'borderless' | 'underlined' | undefined
+  onChange?: ((event: Event, value: number | undefined) => void) | undefined
 }
 export function InputNumberRoot(props: ParentProps<InputNumberRootProps>) {
   const hasValue = Object.prototype.hasOwnProperty.call(props, 'value')
@@ -47,6 +49,7 @@ export function InputNumberRoot(props: ParentProps<InputNumberRootProps>) {
     return (
       <InputRoot
         {...inputRootProps}
+        class={cn(inputNumberRootClassName, inputRootProps.class)}
         value={inputNumber.draft()}
         disabled={local.disabled}
         readOnly={local.readOnly}

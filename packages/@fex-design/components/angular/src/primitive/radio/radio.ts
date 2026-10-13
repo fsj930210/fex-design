@@ -19,10 +19,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   HostListener,
   inject,
   input,
   output,
+  type OnInit,
+  type Signal,
 } from '@angular/core'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
@@ -56,21 +59,22 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
   },
   template: '<ng-content />',
 })
-export class RadioGroup {
+export class RadioGroup implements OnInit {
   value = input<RadioValue | undefined>()
   defaultValue = input<RadioValue | undefined>()
   disabled = input(false, { transform: booleanAttribute })
   orientation = input<RadioGroupStyleProps['orientation']>('horizontal')
   valueChange = output<{ value: RadioValue; meta: RadioChangeMeta }>()
 
-  readonly controller: SelectionController
-  readonly snapshot
+  private readonly destroyRef = inject(DestroyRef)
+  controller!: SelectionController
+  snapshot!: Signal<ReturnType<SelectionController['getSnapshot']>>
 
   protected readonly hostClassName = createHostClassName(() =>
     cn(radioGroupClassName({ orientation: this.orientation() })),
   )
 
-  constructor() {
+  ngOnInit() {
     const value = this.value
     const defaultValue = this.defaultValue
     const valueChange = this.valueChange
@@ -90,11 +94,11 @@ export class RadioGroup {
         valueChange.emit({ value: nextValue, meta: toRadioChangeMeta(nextValue, meta) })
       },
     })
-    this.snapshot = createCoreStoreSignal(this.controller)
+    this.snapshot = createCoreStoreSignal(this.controller, this.destroyRef)
   }
 
   currentValue() {
-    return this.value() ?? this.snapshot().value ?? this.defaultValue()
+    return this.value() ?? this.snapshot().value
   }
 
   select(value: RadioValue) {

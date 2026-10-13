@@ -1,26 +1,25 @@
 <script lang="ts">
-  import type { HTMLAttributes } from "svelte/elements";
-  import { getContext } from "svelte";
-  import { calendarContextKey, type CalendarContextValue } from "./context";
+  import type { HTMLAttributes } from 'svelte/elements';
+  import type { Snippet } from 'svelte';
+  import { getCalendarWeekHeaderItems, calendarDefaultWeekLabels, type CalendarWeekHeaderItem } from '@fex-design/core/calendar';
+  import { calendarWeekHeaderClassName } from '@fex-design/components-styles/calendar';
+  import { cn } from '@fex-design/utils';
+  import { useCalendarContext } from './context';
 
-  interface CalendarWeekHeaderProps extends HTMLAttributes<HTMLDivElement> {
-    labels?: readonly string[] | undefined;
-  }
-
-  let {
-    labels = ["日", "一", "二", "三", "四", "五", "六"],
-    ...rest
-  }: CalendarWeekHeaderProps = $props();
-  const context = getContext<CalendarContextValue>(calendarContextKey);
-  const orderedLabels = $derived(
-    labels.map(
-      (_, index) => labels[(index + context.getWeekStartsOn()) % 7] ?? "",
-    ),
-  );
+  type Props = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
+    labels?: readonly string[];
+    children?: Snippet<[CalendarWeekHeaderItem]>;
+    ref?: HTMLDivElement | null;
+  };
+  let { labels = calendarDefaultWeekLabels, children, class: className, ref = $bindable(null), ...rest }: Props = $props();
+  const context = useCalendarContext('CalendarWeekHeader');
+  const items = $derived(getCalendarWeekHeaderItems(labels, context.getState().weekStartsOn));
 </script>
 
-<div {...rest} data-slot="calendar-week-header">
-  {#each orderedLabels as label (label)}
-    <div data-slot="calendar-week-head">{label}</div>
+<div {...rest} bind:this={ref} data-slot="calendar-week-header" class={cn(calendarWeekHeaderClassName, className)}>
+  {#each items as item (item.index)}
+    <div data-slot="calendar-week-head">
+      {#if children}{@render children(item)}{:else}{item.label}{/if}
+    </div>
   {/each}
 </div>

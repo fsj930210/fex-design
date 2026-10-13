@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { CheckboxValue } from '@fex-design/core/checkbox/types'
 import { checkboxCheckIconClassName, checkboxMinusIconClassName } from '@fex-design/components-styles/checkbox'
 import { cn } from '@fex-design/utils'
@@ -30,6 +31,7 @@ export function Checkbox(props: CheckboxProps) {
     'children',
     'size',
     'class',
+    'style',
     'indicator',
     'classNames',
     'styles',
@@ -40,7 +42,7 @@ export function Checkbox(props: CheckboxProps) {
     <CheckboxRoot
       size={local.size}
       class={cn(local.class, local.classNames?.root)}
-      style={local.styles?.root}
+      style={mergeStyle(local.style, local.styles?.root)}
       value={local.value}
       disabled={local.disabled}
     >

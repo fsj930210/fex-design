@@ -1,9 +1,5 @@
 <script lang="ts">
-  import Empty from "@fex-design/svelte/primitive/empty";
-  import EmptyDescription from "@fex-design/svelte/primitive/empty-description";
-  import EmptyHeader from "@fex-design/svelte/primitive/empty-header";
-  import EmptyMedia from "@fex-design/svelte/primitive/empty-media";
-  import EmptyTitle from "@fex-design/svelte/primitive/empty-title";
+  import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@fex-design/svelte/primitive/empty";
 </script>
 
 <Empty>

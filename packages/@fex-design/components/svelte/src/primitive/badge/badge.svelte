@@ -34,15 +34,6 @@
       children !== undefined,
   );
   const presetColor = $derived(isBadgePresetColor(color) ? color : undefined);
-  const customColor = $derived(color && !presetColor ? color : undefined);
-  const classList = $derived(
-    cn(badgeClassName({ color: presetColor, size }), className),
-  );
-  const mergedStyle = $derived(
-    [style, customColor ? `--badge-color:${customColor}` : ""]
-      .filter(Boolean)
-      .join(";"),
-  );
 </script>
 
 {#if visible}<span
@@ -50,7 +41,7 @@
     data-slot="badge"
     data-color={color ?? "default"}
     data-size={size}
-    class={classList}
-    style={mergedStyle || undefined}
+    class={cn(badgeClassName({ color: presetColor, size }), className)}
+    style={[style, color && !presetColor ? `--badge-color:${color}` : ""].filter(Boolean).join(";") || undefined}
     >{#if value !== undefined}{value}{:else}{@render children?.()}{/if}</span
   >{/if}

@@ -1,0 +1,7 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Calendar } from '@fex-design/angular/ui/calendar'
+import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
+@Component({ selector: 'calendar-css-variables-example', standalone: true, imports: [Calendar], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './css-variables.html' })
+export class CssVariablesExample {
+  protected readonly date = calendarDemoDate
+}

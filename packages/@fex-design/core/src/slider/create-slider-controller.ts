@@ -26,7 +26,7 @@ function createSnapshot(options: SliderOptions, fallback?: readonly number[]): S
     .map((value) => normalizeSliderValue(value, min, max, step, marks))
     .sort((a, b) => a - b)
   return {
-    values: values.length ? values : [min],
+    values,
     disabled: options.disabled === true,
     disabledThumbs: values.map((_, index) => options.disabledThumbs?.[index] === true),
     min,
@@ -34,7 +34,7 @@ function createSnapshot(options: SliderOptions, fallback?: readonly number[]): S
     step,
     marks,
     minStepsBetweenThumbs: Math.max(0, options.minStepsBetweenThumbs ?? 0),
-    activeIndex: 0,
+    activeIndex: values.length ? 0 : -1,
     orientation: options.orientation ?? 'horizontal',
     direction: options.direction ?? 'ltr',
     reverse: options.reverse === true,
@@ -73,7 +73,7 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
         transientValues = undefined
       else next.values = transientValues
     }
-    next.activeIndex = clamp(stored.activeIndex, 0, next.values.length - 1)
+    next.activeIndex = next.values.length ? clamp(stored.activeIndex, 0, next.values.length - 1) : -1
     if (JSON.stringify(derived) !== JSON.stringify(next)) derived = next
     return derived
   }
@@ -153,7 +153,7 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
     },
     moveRangeSlide(value) {
       const current = getSnapshot()
-      if (!current.draggableRange || current.disabledThumbs.some(Boolean)) return undefined
+      if (!current.draggableRange || !rangeStartValues.length || current.disabledThumbs.some(Boolean)) return undefined
       const delta = clamp(
         value - rangeAnchor,
         current.min - rangeStartValues[0]!,
@@ -211,6 +211,7 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
       const current = getSnapshot()
       if (
         !current.editable ||
+        index < 0 || index >= current.values.length ||
         current.values.length <= current.minCount ||
         current.disabledThumbs[index]
       )

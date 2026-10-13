@@ -1,58 +1,15 @@
-import { addDate, subtractDate } from '@fex-design/core/calendar'
-import { splitProps, type JSX, type ParentProps } from 'solid-js'
+﻿import { splitProps, type JSX } from 'solid-js'
+import type { CalendarNavigationAction } from '@fex-design/core/calendar'
+import { calendarNavigationButtonClassName } from '@fex-design/components-styles/calendar'
+import { cn } from '@fex-design/utils'
+import { callCalendarHandler } from './events'
 import { useCalendarContext } from './calendar-context'
-
-export type CalendarNavigationAction =
-  | 'previous-year'
-  | 'previous-month'
-  | 'next-month'
-  | 'next-year'
-  | 'previous-panel'
-  | 'next-panel'
-
-export interface CalendarNavigationButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
-  action: CalendarNavigationAction
-}
-
-export function CalendarNavigationButton(props: ParentProps<CalendarNavigationButtonProps>) {
-  const [local, rest] = splitProps(props, ['action', 'onClick', 'children'])
+import { ChevronLeftIcon } from '../../icons/chevron-left'
+import { ChevronRightIcon } from '../../icons/chevron-right'
+export type { CalendarNavigationAction } from '@fex-design/core/calendar'
+export type CalendarNavigationButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & { action: CalendarNavigationAction }
+export function CalendarNavigationButton(props: CalendarNavigationButtonProps) {
+  const [local, rest] = splitProps(props, ['action', 'class', 'onClick', 'children'])
   const context = useCalendarContext('CalendarNavigationButton')
-
-  function runAction() {
-    if (local.action === 'previous-year')
-      context.setViewDate(subtractDate(context.viewDate(), { years: 1 }))
-    if (local.action === 'previous-month')
-      context.setViewDate(subtractDate(context.viewDate(), { months: 1 }))
-    if (local.action === 'next-month')
-      context.setViewDate(addDate(context.viewDate(), { months: 1 }))
-    if (local.action === 'next-year') context.setViewDate(addDate(context.viewDate(), { years: 1 }))
-    if (local.action === 'previous-panel')
-      context.setViewDate(
-        context.panel() === 'date'
-          ? subtractDate(context.viewDate(), { months: 1 })
-          : subtractDate(context.viewDate(), { years: 1 }),
-      )
-    if (local.action === 'next-panel')
-      context.setViewDate(
-        context.panel() === 'date'
-          ? addDate(context.viewDate(), { months: 1 })
-          : addDate(context.viewDate(), { years: 1 }),
-      )
-  }
-
-  return (
-    <button
-      {...rest}
-      type="button"
-      data-slot="calendar-navigation-button"
-      data-action={local.action}
-      onClick={(event) => {
-        if (typeof local.onClick === 'function') local.onClick(event)
-        if (event.defaultPrevented) return
-        runAction()
-      }}
-    >
-      {local.children}
-    </button>
-  )
+  return <button {...rest} type="button" data-slot="calendar-navigation-button" data-action={local.action} class={cn(calendarNavigationButtonClassName, local.class)} onClick={event => { callCalendarHandler(local.onClick, event); if (!event.defaultPrevented) context.controller.navigate(local.action) }}>{local.children ?? (local.action.startsWith('previous') ? <ChevronLeftIcon class="size-4 rtl:rotate-180" /> : local.action.startsWith('next') ? <ChevronRightIcon class="size-4 rtl:rotate-180" /> : null)}</button>
 }

@@ -26,7 +26,7 @@ export function SliderRange(props: SliderRangeProps) {
       convertValueToPercentage(value, snapshot().min, snapshot().max),
     )
     const start = snapshot().values.length > 1 ? Math.min(...percentages) : 0
-    const endValue = Math.max(...percentages)
+    const endValue = Math.max(0, ...percentages)
     const reversed = isSliderReversed(
       snapshot().orientation,
       snapshot().direction,

@@ -6,6 +6,7 @@ import {
   Output,
   type OnChanges,
   type OnDestroy,
+  type OnInit,
 } from '@angular/core'
 import {
   createTooltip,
@@ -23,7 +24,7 @@ let tooltipId = 0
   host: { style: 'display: contents' },
   template: '<ng-content />',
 })
-export class Tooltip implements OnChanges, OnDestroy {
+export class Tooltip implements OnChanges, OnDestroy, OnInit {
   @Input() open?: boolean
   @Input() defaultOpen = false
   @Input() disabled?: boolean
@@ -66,6 +67,10 @@ export class Tooltip implements OnChanges, OnDestroy {
     }
   }
   ngOnChanges() {
+    this.overlay.setOptions(this.options())
+  }
+  ngOnInit() {
+    this.localOpen = this.defaultOpen
     this.overlay.setOptions(this.options())
   }
   ngOnDestroy() {

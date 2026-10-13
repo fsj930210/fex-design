@@ -166,6 +166,7 @@
 - 列表渲染使用稳定 keyed each，避免可变列表复用错误 DOM。
 - 组件 props、事件和 slot 要保持明确，避免一个组件同时承担页面、数据请求、布局、复杂交互四种职责。
 - Svelte 5 Props 使用 `svelte/elements` 原生 HTML Attributes、`Snippet`、`$props()`、`$bindable()` 和 `{@render ...}` 等原生表达；不要引入 React children/ReactNode 模型。组件文件和公开导出保持 `Button` 等裸名称，组合时才局部别名。
+- Svelte 5 类名与轻量样式派生规范：Svelte 5 模板属性表达式天然处于细粒度响应式作用域中。对于简单的类名合并（如 `cn(...)`）或仅在单处使用的轻量派生属性，统一直接在模板中内联书写（例如 `class={cn(baseClassName, className)}`），不要在 `<script>` 中额外声明无复用价值的 `$derived` 中间变量，以减少冗余响应式信号节点开销与模板间接层；只有当该派生值在模板多处被复用、计算昂贵或需参与 `<script>` 其他逻辑时，才允许提取为 `$derived`。
 
 ## Angular 规范
 
@@ -178,6 +179,7 @@
 - Angular 组件和指令使用 signal inputs/outputs、原生元素属性和 content projection 表达公开能力；不要为了对齐 React Props 而额外创建 `ButtonInputs` 这类汇总接口。共享枚举可以直接用于各个 `input<T>()`。类名和公开导出保持 `Button` 等裸名称，层级由目录和导入路径表达。
 - Angular 源码交付组件的 selector 同样禁止品牌前缀和层级装饰。基于原生元素的组件使用明确的元素约束和裸属性名，例如 `button[button]`、`div[buttonGroup]`，调用方式为 `<button button>`、`<div buttonGroup>`；不要使用 `fexButton`、`fexButtonPrimitive`、`fex-button-group`，也不要用看不出宿主元素类型的自定义元素包一层原生 DOM。Primitive 与 UI 使用相同裸 selector 时，由各自导入路径和独立 template scope 隔离，不在同一 scope 同时导入两个同 selector Component。
 - Angular 的图标和示例也遵循同一 selector 规则：使用 `plus-icon`、`separator-basic-example` 这类无品牌名称，不得使用 `fex-plus-icon`、`fex-separator-basic-example`。修改已有组件时，必须同步修改其模板、五框架示例、文档源码预览和生成注册，禁止只改组件定义或只改截图中出现的一处。
+- **Angular 图标组件与 SVG 规范**：通用系统图标必须统一从 `@fex-design/angular/icons/*` 导入对应的图标组件（如 `XIcon`、`CheckIcon`），并在模板中使用 `<x-icon>`、`<check-icon>` 等规范标签，严禁在组件或示例模板中硬编码复制通用 SVG 路径。图标组件内部统一由构建脚本生成自适应容器（使用 `createHostClassName("inline-flex items-center justify-center shrink-0 size-6")` 管理宿主类名，内层 SVG 使用 `width="100%" height="100%" class="size-full"`），支持在宿主直接传入 `class`（如 `size-4`、`size-3.5`、`text-muted`）完成类名合并与等比缩放，不得使用 `display: contents` 破坏盒模型导致外部样式穿透失效。非通用图标的特定结构（如 Progress 进度圆环、Empty 插画、Tour 遮罩）可保留原生 `<svg>` 结构。
 - 组件按 `OnPush` 和细粒度响应的思路设计，减少不必要的模板重算和子树更新。
 - 模板表达式保持轻量，不调用昂贵函数；复杂展示值放到 signal、computed、pipe 或组件字段中。
 - 列表渲染必须使用 `trackBy` 或新控制流的 `track`，不要让 Angular 以对象引用猜测列表身份。
@@ -188,6 +190,21 @@
 - 如果是顶层或者核心元素需要扩展`class`，不要自定义一个属性名传入`class`，而是做合并，顶层或者核心元素用户扩展`class`只能是`class='bg-muted-background'`
 
 ## 跨框架组件与性能
+
+### 五框架实现、示例与 API 一致性门禁
+
+- React、Vue、Solid、Svelte、Angular 的同一组件必须遵守同一份行为契约；检查与修改范围必须包含 core、Primitive、UI、组件专属逻辑层、框架公共 hook/composable/primitive/store/signal、公开入口、示例、Preview 注册及 docs API。禁止只改 Primitive，或只保证 UI 包装后的行为正确。
+- “实现完全一致”指相同输入、状态和事件序列产生相同的状态变化、分支选择、输出、回调时机及可观察结果，不能只比较名称、签名或静态截图。生命周期、DOM 获取、元素绑定、响应式订阅和清理、框架原生属性/事件/slot/snippet/content projection 的表达方式可以不同，组件业务逻辑不能不同。
+- 必须逐项对齐默认值、undefined/null/false/0/空字符串/空数组语义、初始状态、受控与非受控判断、参数更新、条件分支可达性、禁用/只读/loading、事件取消、清除、键盘与指针行为、边界值、事件参数与通知次数、派生数据、ARIA/data 属性，以及用户 class/style/原生属性和元素引用的透传与合并顺序。禁止某框架写死状态或默认值、某框架读取最新参数而另一个只读取初始化快照。
+- 逻辑层独立消费与内置组件消费必须遵守同一契约。禁用、只读、已取消事件和边界约束不能仅依赖 UI 的 disabled 属性或包装器拦截；公开逻辑入口同样必须正确处理。框架适配不得偷偷改变 core 的默认值或绕过共享算法。
+- 无框架的状态机、校验、选择/过滤/排序/归一化、边界计算和交互规则由 core 或既有共享工具承担，五框架消费同一实现；仅响应式与 DOM 边界保留在框架适配层。不得为追求源码外观一致而机械翻译 React 的组织方式，也不得用“框架不同”解释业务分支差异。
+- 同一组件族的 Primitive 部件、UI 组合、公开逻辑能力及公开子路径应逐一对应。任何能力增删或修复，必须沿五框架调用链核对上层包装器、默认参数、事件转发、属性透传和入口导出，禁止只修报错文件或单个调用方。
+- 五框架同层同场景示例必须一致：示例 id、顺序、标题、说明、数据、初始值、选项顺序、展示内容、样式参数、可操作控件、交互步骤、状态反馈和事件结果相同。只允许框架语法、原生绑定、生命周期和 DOM 获取方式不同；禁止某框架演示真实逻辑，另一框架写死结果、删去控件或用不同数据掩盖缺失能力。
+- 示例修复必须同步实际源码、共享 manifest、源码预览映射和 Preview 注册；生成结果与实际示例需对应，禁止依赖旧生成源码声称一致。若生成会触发未获授权的检查或服务，不执行并明确记录尚未完成的步骤。
+- docs API 必须反映当前公开实现。公共能力、默认值、事件参数与触发条件、语义部件、class/style 合并规则、受控约定和示例目录采用统一结构与顺序；原生属性不要重复发明组件 API。框架表达差异集中在既有 framework overrides 中说明，不得用文档差异掩盖功能缺失。
+- API 文档、组件文档目录和示例场景必须使用仓库现有 schema 与章节规范；不得为单个组件另造表格结构、章节顺序、术语或缺少约定章节。修复实现后同步核对文档、示例和公开入口，不保留与现有代码不符的类型、默认值或调用方式。
+- 排查必须以 docs 当前组件清单建立五框架 × Primitive/UI/逻辑层/示例/API 的覆盖记录，逐组件记录证据；抽样、搜索无匹配、语法解析、导入可解析或生成成功都不能替代完整行为核对。发现问题同等处理，不跳过所谓低优先级组件。
+- 只有完成所声明范围的检查和修复，才能声明对应范围一致；明确区分源码结论与运行结论。未经用户主动要求，不得为执行本门禁新增测试、触发浏览器/MCP/UIA 手动测试、运行 typecheck/lint/build/format、启动服务、使用子代理或读取包含 trash 的路径。未执行的验证如实记录，不宣称运行验收通过。
 
 - 跨框架组件应优先把无框架逻辑沉淀到 `packages/@fex-design/core`，再在各框架包里适配。
 - 基于原生元素的组件必须暴露其核心原生元素，并优先继承或透传该元素已有的属性和事件能力；不得把 `click`、`focus`、`blur`、`keydown`、`aria-*` 等原生能力逐项重新声明为组件 API。React 使用原生元素 Props/ref，Vue 使用 attrs 与 template ref expose，Solid 使用 JSX 原生属性/ref，Svelte 使用元素 attributes 与 bindable ref，Angular 使用原生元素宿主和公开 element。只有组件新增的语义属性、语义事件，或确实需要拦截加工的原生事件才显式声明。
@@ -292,6 +309,8 @@
 - 访问组件示例时直接在对应端口拼接组件路由，例如 React Button 使用 `http://127.0.0.1:4001/button`，Vue Button 使用 `http://127.0.0.1:4004/button`。
 
 ## 开发阶段验证
+
+- 以下浏览器、DOM 测量和命令验证要求仅在用户明确授权对应验证方式时执行；用户禁止测试、UI 手动测试或命令检查时，必须遵守，并如实标记未验证范围，不得以本节为由自行触发。
 
 - 开发阶段默认不要运行 `build`。除非用户明确要求构建、发布前验证、排查仅生产构建出现的问题，或者用户直接要求运行对应命令，否则不要主动执行 `pnpm build`、`turbo run build` 或各 app/package 的 build script。
 - 修改组件、样式和示例页后的优先验证方式是使用固定本地端口打开真实页面，直接在浏览器里检查 DOM、computed style、动画和交互表现。

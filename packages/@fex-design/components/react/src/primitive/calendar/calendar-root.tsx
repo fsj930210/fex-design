@@ -1,144 +1,79 @@
-import {
-  createCalendarGrid,
-  getCalendarToday,
-  type CalendarCell as CoreCalendarCell,
-  type CalendarDate,
-  type CalendarGranularity,
-  type CalendarPanel,
-  type CalendarRange,
-  type CalendarValue,
-  type CalendarWeekday,
-} from '@fex-design/core/calendar'
-import { useState, type ComponentProps } from 'react'
-import { useControllableState } from '@fex-design/react/hooks/use-controllable-state'
+import type { CalendarOptions, CalendarValue } from '@fex-design/core/calendar'
+import { calendarRootClassName } from '@fex-design/components-styles/calendar'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps } from 'react'
 import { CalendarContext } from './calendar-context'
-
-export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue> extends Omit<
+import { useCalendar } from './use-calendar'
+export type CalendarRootProps<TValue extends CalendarValue = CalendarValue> = Omit<
   ComponentProps<'div'>,
-  'defaultValue' | 'onChange'
-> {
-  value?: TValue | null
-  values?: readonly TValue[]
-  range?: CalendarRange<TValue>
-  defaultValue?: TValue | null
-  viewDate?: CalendarDate
-  defaultViewDate?: CalendarDate
-  panel?: CalendarPanel
-  defaultPanel?: CalendarPanel
-  granularity?: CalendarGranularity
-  weekStartsOn?: CalendarWeekday
-  today?: CalendarDate
-  min?: CalendarDate
-  max?: CalendarDate
-  disabledDate?: (date: CalendarDate) => boolean
-  onValueChange?: (value: TValue) => void
-  onCellSelect?: (cell: CoreCalendarCell<TValue>) => void
-  onCellHover?: (cell: CoreCalendarCell<TValue>) => void
-  onViewDateChange?: (viewDate: CalendarDate) => void
-  onPanelChange?: (panel: CalendarPanel) => void
-}
-
+  'defaultValue' | 'onChange' | 'onSelect'
+> &
+  CalendarOptions<TValue>
 export function CalendarRoot<TValue extends CalendarValue = CalendarValue>({
   value,
   values,
   range,
-  defaultValue = null,
+  defaultValue,
   viewDate,
   defaultViewDate,
   panel,
-  defaultPanel = 'date',
-  granularity = 'date',
-  weekStartsOn = 0,
+  defaultPanel,
+  granularity,
+  weekStartsOn,
+  locale,
+  showWeek,
+  fullscreen,
   today,
   min,
   max,
   disabledDate,
-  onValueChange,
+  onChange,
+  onSelect,
   onCellSelect,
   onCellHover,
   onViewDateChange,
   onPanelChange,
-  className,
   children,
+  className,
+  onMouseLeave,
   ...props
 }: CalendarRootProps<TValue>) {
-  const [hoveredRowIndex, setHoveredRowIndex] = useState<number | null>(null)
-  const fallbackViewDate = defaultViewDate ?? getCalendarToday()
-  const valueChangeProps = onValueChange
-    ? {
-        onChange: (nextValue: TValue | null) => {
-          if (nextValue) onValueChange(nextValue)
-        },
-      }
-    : {}
-  const [currentValue, setCurrentValue] = useControllableState<TValue | null>(
-    {
-      value,
-      defaultValue,
-      ...valueChangeProps,
-    },
-    { defaultValue: null },
-  )
-  const [currentViewDate, setCurrentViewDate] = useControllableState<CalendarDate>(
-    { value: viewDate, defaultValue: fallbackViewDate, onChange: onViewDateChange },
-    { defaultValue: fallbackViewDate },
-  )
-  const [currentPanel, setCurrentPanel] = useControllableState<CalendarPanel>(
-    { value: panel, defaultValue: defaultPanel, onChange: onPanelChange },
-    { defaultValue: defaultPanel },
-  )
-  const grid = createCalendarGrid<TValue>({
-    viewDate: currentViewDate,
-    panel: currentPanel,
+  const calendar = useCalendar({
+    value,
+    values,
+    range,
+    defaultValue,
+    viewDate,
+    defaultViewDate,
+    panel,
+    defaultPanel,
     granularity,
     weekStartsOn,
-    ...(today ? { today } : {}),
-    ...(min ? { min } : {}),
-    ...(max ? { max } : {}),
-    ...(disabledDate ? { disabledDate } : {}),
-    ...(currentValue ? { value: currentValue } : {}),
-    ...(values ? { values } : {}),
-    ...(range ? { range } : {}),
+    locale,
+    showWeek,
+    fullscreen,
+    today,
+    min,
+    max,
+    disabledDate,
+    onChange,
+    onSelect,
+    onCellSelect,
+    onCellHover,
+    onViewDateChange,
+    onPanelChange,
   })
-
   return (
-    <CalendarContext
-      value={{
-        grid,
-        value: currentValue,
-        viewDate: currentViewDate,
-        panel: currentPanel,
-        granularity,
-        weekStartsOn,
-        hoveredRowIndex,
-        hasRange: Boolean(range),
-        setViewDate: setCurrentViewDate,
-        setPanel: setCurrentPanel,
-        selectCell: (cell) => {
-          if (cell.state.disabled) return
-          if (onCellSelect) {
-            onCellSelect(cell as CoreCalendarCell<TValue>)
-            return
-          }
-          setCurrentValue(cell.value as TValue)
-        },
-        hoverCell: (cell) => {
-          if (cell.state.disabled) return
-          setHoveredRowIndex(cell.rowIndex)
-          onCellHover?.(cell as CoreCalendarCell<TValue>)
-        },
-        clearHoveredRow: () => setHoveredRowIndex(null),
-      }}
-    >
+    <CalendarContext value={calendar}>
       <div
         {...props}
         data-slot="calendar-root"
-        data-panel={currentPanel}
-        data-granularity={granularity}
-        className={className}
+        data-panel={calendar.state.panel}
+        data-granularity={calendar.state.granularity}
+        className={cn(calendarRootClassName, className)}
         onMouseLeave={(event) => {
-          props.onMouseLeave?.(event)
-          if (!event.defaultPrevented) setHoveredRowIndex(null)
+          onMouseLeave?.(event)
+          if (!event.defaultPrevented) calendar.controller.clearHoveredRow()
         }}
       >
         {children}

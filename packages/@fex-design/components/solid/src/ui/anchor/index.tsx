@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type {
   AnchorClassNames,
   AnchorItem as AnchorItemData,
@@ -21,9 +22,17 @@ export interface AnchorProps extends Omit<AnchorRootProps, 'children'> {
   styles?: AnchorStyles
   onItemClick?: (event: MouseEvent, item: AnchorItemData<JSX.Element>) => void
 }
-function AnchorItems(props: Pick<AnchorProps, 'items' | 'classNames' | 'styles' | 'onItemClick'>) {
+function AnchorItems(
+  props: Pick<AnchorProps, 'items' | 'classNames' | 'styles' | 'onItemClick'> & { depth: number },
+) {
   return (
-    <AnchorList class={props.classNames?.list} style={props.styles?.list}>
+    <AnchorList
+      class={props.classNames?.list}
+      style={{
+        'padding-inline-start': '0',
+        ...props.styles?.list,
+      }}
+    >
       <For each={props.items}>
         {(item) => (
           <AnchorItem
@@ -35,7 +44,10 @@ function AnchorItems(props: Pick<AnchorProps, 'items' | 'classNames' | 'styles' 
           >
             <AnchorLink
               class={props.classNames?.link}
-              style={props.styles?.link}
+              style={{
+                'padding-inline-start': `calc(0.5rem + ${props.depth} * var(--anchor-indent, 1.5rem))`,
+                ...props.styles?.link,
+              }}
               onClick={(event) => props.onItemClick?.(event, item)}
             >
               {item.title}
@@ -47,6 +59,7 @@ function AnchorItems(props: Pick<AnchorProps, 'items' | 'classNames' | 'styles' 
                   classNames={props.classNames}
                   styles={props.styles}
                   onItemClick={props.onItemClick}
+                  depth={props.depth + 1}
                 />
               ) : null}
             </Show>
@@ -69,7 +82,7 @@ export function Anchor(props: AnchorProps) {
     <AnchorRoot
       {...rest}
       class={cn(local.class, local.classNames?.root)}
-      style={{ ...(typeof local.style === 'object' ? local.style : {}), ...local.styles?.root }}
+      style={mergeStyle(local.style, local.styles?.root)}
     >
       <AnchorRail class={local.classNames?.rail} style={local.styles?.rail}>
         <AnchorIndicator class={local.classNames?.indicator} style={local.styles?.indicator} />
@@ -79,6 +92,7 @@ export function Anchor(props: AnchorProps) {
         classNames={local.classNames}
         styles={local.styles}
         onItemClick={local.onItemClick}
+        depth={0}
       />
     </AnchorRoot>
   )

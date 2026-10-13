@@ -22,7 +22,7 @@ const props = withDefaults(
   defineProps<
     SkeletonOptions & { classNames?: SkeletonClassNames; styles?: SkeletonStyles<StyleValue> }
   >(),
-  { avatar: false, paragraph: true, title: true },
+  { avatar: false, loading: undefined, paragraph: true, title: true },
 )
 const attrs = useAttrs()
 const avatarOptions = computed(() => (typeof props.avatar === 'object' ? props.avatar : {}))

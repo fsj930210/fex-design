@@ -86,6 +86,7 @@
     "./primitive/skeleton": "./src/primitive/skeleton/index.ts",
     "./primitive/spinner": "./src/primitive/spinner/index.ts",
     "./ui/button": "./src/ui/button/index.ts",
+    "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.ts",
     "./ui/empty": "./src/ui/empty/index.ts",
     "./ui/input": "./src/ui/input/index.ts",
@@ -159,7 +160,8 @@
   "devDependencies": {
     "typescript": "catalog:",
     "vue": "3.5.42",
-    "vue-tsc": "latest"
+    "vue-tsc": "latest",
+    "@fex-design/docs-shared": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

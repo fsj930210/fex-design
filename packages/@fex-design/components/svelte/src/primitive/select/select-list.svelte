@@ -44,7 +44,7 @@
   );
   const groups = $derived(groupSelectOptions(select.visibleOptions()));
   const selected = (item: SelectOption) =>
-    select.controller.selection.isSelected(item.value);
+    $snapshot.selectedValues.includes(item.value);
   const disabled = (item: SelectOption) =>
     item.disabled === true ||
     select.controller.selection.isDisabled(item.value);

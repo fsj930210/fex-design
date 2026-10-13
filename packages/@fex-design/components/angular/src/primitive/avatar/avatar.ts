@@ -71,6 +71,8 @@ export class AvatarGroupCount {
 export class AvatarImage {
   readonly src = input.required<string>()
   readonly alt = input('')
+  readonly crossOrigin = input<'' | 'anonymous' | 'use-credentials' | undefined>()
+  readonly referrerPolicy = input<ReferrerPolicy | undefined>()
   readonly srcSet = input<string | undefined>()
   readonly class = input('')
   protected readonly context = inject(AvatarContext)
@@ -79,7 +81,7 @@ export class AvatarImage {
   constructor() {
     effect(() => {
       const src = this.src()
-      if (src) this.context.controller.load({ src })
+      if (src) this.context.controller.load({ src, ...(this.crossOrigin() ? { crossOrigin: this.crossOrigin()! } : {}), ...(this.referrerPolicy() ? { referrerPolicy: this.referrerPolicy()! } : {}) })
       else this.context.controller.reset()
     })
   }

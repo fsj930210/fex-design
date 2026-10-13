@@ -1,10 +1,5 @@
 <script lang="ts">
-  import Card from "@fex-design/svelte/primitive/card";
-  import CardHeader from "@fex-design/svelte/primitive/card-header";
-  import CardTitle from "@fex-design/svelte/primitive/card-title";
-  import CardDescription from "@fex-design/svelte/primitive/card-description";
-  import CardContent from "@fex-design/svelte/primitive/card-content";
-  import CardFooter from "@fex-design/svelte/primitive/card-footer";
+  import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@fex-design/svelte/primitive/card";
 </script>
 
 <Card class="w-full max-w-2xl [--card-border:1px_solid_var(--border)]"

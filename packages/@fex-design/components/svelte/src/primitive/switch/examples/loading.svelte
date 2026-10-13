@@ -4,7 +4,7 @@
     SwitchContent,
     SwitchThumb,
   } from "@fex-design/svelte/primitive/switch";
-  import Spinner from "@fex-design/svelte/primitive/spinner";
+  import { Spinner } from "@fex-design/svelte/primitive/spinner";
 </script>
 
 <div class="grid gap-6 sm:grid-cols-2">

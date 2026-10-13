@@ -1,15 +1,25 @@
+<ng-template #loadingIndicator>
+  <span buttonIcon [placement]="iconPlacement()">
+    <ng-content select="[slot=loading-indicator]">
+      <loading-icon [class]="spinnerClassName" />
+    </ng-content>
+  </span>
+</ng-template>
+
 @if (loading()) {
-<span buttonIcon [placement]="iconPlacement()">
-  <ng-content select="[slot=loading-indicator]">
-    <loading-icon [class]="spinnerClassName" />
-  </ng-content>
-</span>
+  @if (iconPlacement() === 'start') {
+    <ng-container [ngTemplateOutlet]="loadingIndicator" />
+  }
 } @else {
-<span buttonIcon><ng-content select="[slot=start]" /></span>
+  <span buttonIcon><ng-content select="[slot=start]" /></span>
 }
 
 <ng-content />
 
-@if (!loading()) {
-<span buttonIcon placement="end"><ng-content select="[slot=end]" /></span>
+@if (loading()) {
+  @if (iconPlacement() === 'end') {
+    <ng-container [ngTemplateOutlet]="loadingIndicator" />
+  }
+} @else {
+  <span buttonIcon placement="end"><ng-content select="[slot=end]" /></span>
 }

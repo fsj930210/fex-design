@@ -43,8 +43,6 @@
   })))
   const background = $derived(getLinearProgressBackground(color))
   const rootStyle = $derived(`${styles?.root ?? ''}; ${style ?? ''}`)
-  const trackStyle = $derived(`height: ${numThickness}px; ${trackColor ? `background-color: ${trackColor};` : ''} ${styles?.track ?? ''}`)
-  const rangeStyle = $derived(`${background ? `background: ${background};` : ''} ${styles?.range ?? ''}`)
   const activeColor = $derived(effectiveStatus === 'success' ? 'var(--success)' : background ?? 'var(--primary)')
 </script>
 
@@ -99,7 +97,7 @@
     {/if}
   </div>
 {:else if isCircle}
-  <PrimitiveProgress bind:ref {...rest} {value} {min} {max} {variant} status={effectiveStatus}
+  <PrimitiveProgress bind:ref {...rest} value={effectiveValue} {min} {max} {variant} status={effectiveStatus}
     size={numSize} thickness={numThickness}
     class={cn('relative inline-flex items-center justify-center', classNames?.root, className)} style={rootStyle}>
     <ProgressCircle gapDegree={variant === 'dashboard' ? gapDegree : undefined}
@@ -120,7 +118,7 @@
     {/if}
   </PrimitiveProgress>
 {:else}
-  <PrimitiveProgress bind:ref {...rest} {value} {min} {max} variant="line" status={effectiveStatus}
+  <PrimitiveProgress bind:ref {...rest} value={effectiveValue} {min} {max} variant="line" status={effectiveStatus}
     thickness={numThickness} class={cn('flex flex-col w-full', classNames?.root, className)} style={rootStyle}>
     {#if infoPlacement !== 'bottom' && (label || (shouldShowInfo && infoPlacement === 'top'))}
       <div class={cn(progressTopHeaderClassName, classNames?.label)}>
@@ -131,14 +129,14 @@
       </div>
     {/if}
     <div class={cn('flex w-full items-center', infoPlacement === 'inside' && 'relative')}>
-      <ProgressTrack class={cn('min-w-0 flex-1', classNames?.track)} style={trackStyle}>
+      <ProgressTrack class={cn('min-w-0 flex-1', classNames?.track)} style={`height: ${numThickness}px; ${trackColor ? `background-color: ${trackColor};` : ''} ${styles?.track ?? ''}`}>
         {#if rangeLayout}
           {#each rangeLayout.ranges as range (range.index)}
             <ProgressRange value={range.value} offset={range.offset} class={classNames?.range}
               style="border-radius: 0; background: {range.color ?? 'var(--primary)'}; {styles?.range ?? ''}" />
           {/each}
         {:else}
-          <ProgressRange class={classNames?.range} style={rangeStyle} />
+          <ProgressRange class={classNames?.range} style={`${background ? `background: ${background};` : ''} ${styles?.range ?? ''}`} />
         {/if}
       </ProgressTrack>
       {#if shouldShowInfo && infoPlacement === 'outside'}

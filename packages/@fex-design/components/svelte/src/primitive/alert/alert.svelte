@@ -18,9 +18,13 @@
     variant = "filled",
     ...rest
   }: Props = $props();
-  const classList = $derived(cn(alertClassName({ type, variant }), className));
 </script>
 
-<div data-slot="alert" role="alert" {...rest} class={classList}>
+<div
+  data-slot="alert"
+  role="alert"
+  {...rest}
+  class={cn(alertClassName({ type, variant }), className)}
+>
   {@render children?.()}
 </div>

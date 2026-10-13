@@ -4,7 +4,7 @@ import { selectableItemSelectedClassName } from './selectable-item'
 
 export const selectTriggerClassName = cva(
   [
-    'group/select-trigger flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md border border-[var(--input-border-color,var(--border))] bg-[var(--input-background,var(--background))] text-sm text-[var(--input-color,var(--foreground))] outline-none',
+    'group/select-trigger relative flex min-h-9 w-full min-w-0 cursor-pointer items-center gap-2 rounded-md border border-[var(--input-border-color,var(--border))] bg-[var(--input-background,var(--background))] text-sm text-[var(--input-color,var(--foreground))] outline-none',
     inputFocusClassName,
     'data-[status=error]:border-danger data-[status=error]:ring-2 data-[status=error]:ring-danger/20',
     'data-[status=warning]:border-warning data-[status=warning]:ring-2 data-[status=warning]:ring-warning/20',
@@ -13,9 +13,9 @@ export const selectTriggerClassName = cva(
   {
     variants: {
       size: {
-        sm: 'min-h-8 text-xs',
-        md: 'min-h-9 text-sm',
-        lg: 'min-h-10 text-base',
+        sm: 'min-h-8 px-2 py-0 text-xs',
+        md: 'min-h-9 px-3 py-1 text-sm',
+        lg: 'min-h-10 px-4 py-1.5 text-base',
       },
     },
     defaultVariants: { size: 'md' },

@@ -9,6 +9,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  type OnInit,
   computed,
   input,
   output,
@@ -38,7 +39,7 @@ export type { SwitchShape, SwitchSize, SwitchState }
   },
   template: '<ng-content />',
 })
-export class SwitchRoot {
+export class SwitchRoot implements OnInit {
   readonly checked = input<boolean | undefined>()
   readonly defaultChecked = input(false, { transform: booleanAttribute })
   readonly disabled = input(false, { transform: booleanAttribute })
@@ -46,10 +47,10 @@ export class SwitchRoot {
   readonly size = input<SwitchSize>('md')
   readonly shape = input<SwitchShape>('rounded')
   readonly change = output<{ checked: boolean; event: MouseEvent }>()
-  private readonly hasInteracted = signal(false)
   private readonly internalChecked = signal(false)
+  ngOnInit() { this.internalChecked.set(this.defaultChecked()) }
   readonly currentChecked = computed(
-    () => this.checked() ?? (this.hasInteracted() ? this.internalChecked() : this.defaultChecked()),
+    () => this.checked() ?? this.internalChecked(),
   )
   readonly state = computed<SwitchState>(() => (this.currentChecked() ? 'checked' : 'unchecked'))
   protected readonly hostClassName = createHostClassName(() =>
@@ -59,7 +60,6 @@ export class SwitchRoot {
     if (event.defaultPrevented || this.disabled() || this.loading()) return
     const checked = !this.currentChecked()
     if (this.checked() === undefined) {
-      this.hasInteracted.set(true)
       this.internalChecked.set(checked)
     }
     this.change.emit({ checked, event })

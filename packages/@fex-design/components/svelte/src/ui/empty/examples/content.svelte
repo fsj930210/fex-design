@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Empty from "@fex-design/svelte/ui/empty";
+  import { Empty } from "@fex-design/svelte/ui/empty";
 </script>
 
 <Empty title="暂无项目" description="创建项目后，项目会显示在这里。">

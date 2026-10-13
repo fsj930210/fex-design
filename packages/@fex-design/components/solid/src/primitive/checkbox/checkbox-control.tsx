@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { checkboxControlClassName } from "@fex-design/components-styles/checkbox"
 import type { CheckboxValue } from "@fex-design/core/checkbox/types"
 import { cn } from "@fex-design/utils"
@@ -48,7 +49,7 @@ export function CheckboxControl(props: CheckboxControlProps) {
       data-slot="checkbox-control"
       class={cn(checkboxControlClassName, local.class)}
       onChange={(event) => {
-        if (typeof local.onChange === "function") local.onChange(event)
+        callEventHandler(local.onChange, event)
         if (!event.defaultPrevented && inGroup()) group!.toggle(currentValue()!)
       }}
     />

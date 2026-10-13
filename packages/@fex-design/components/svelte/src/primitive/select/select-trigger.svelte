@@ -1,14 +1,13 @@
 <script lang="ts">
+  import type { InputClassNames, InputStyles } from '@fex-design/core/input/types';
   import type { SelectOption } from "@fex-design/core/select/types";
   import {
     selectClearClassName,
     selectClearableIndicatorClassName,
     selectIndicatorClassName,
     selectInputClassName,
-    selectPlaceholderClassName,
     selectSuffixClassName,
     selectTriggerClassName,
-    selectValueClassName,
     selectValueContainerClassName,
   } from "@fex-design/components-styles/select";
   import { cn } from "@fex-design/utils";
@@ -18,8 +17,7 @@
   import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
   import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
   import PopoverTrigger from "../popover/popover-trigger.svelte";
-  import Tag from "../tag/tag.svelte";
-  import TagAction from "../tag/tag-action.svelte";
+  import SelectValue from "./select-value.svelte";
   import { selectContextKey, type SelectContext } from "./context";
   interface Props extends Omit<
     HTMLAttributes<HTMLDivElement>,
@@ -32,6 +30,8 @@
     suffix?: Snippet;
     clear?: Snippet;
     inputProps?: HTMLInputAttributes;
+    classNames?: InputClassNames;
+    styles?: InputStyles<string>;
     tag?: Snippet<[SelectOption, () => void]>;
   }
   let {
@@ -43,6 +43,8 @@
     clear,
     inputProps = {},
     tag,
+    classNames,
+    styles,
     ...rest
   }: Props = $props();
   const select = getContext<SelectContext>(selectContextKey),
@@ -51,11 +53,10 @@
     void $snapshot.selectedValues;
     return select.selectedOptions();
   };
-  const visible = () =>
-    maxTagCount === undefined
-      ? selected()
-      : selected().slice(0, Math.max(0, maxTagCount));
+  const inputAttributes = () => { const { class: _class, style: _style, ...attrs } = inputProps; return attrs; };
   function keydown(event: KeyboardEvent) {
+    rest.onkeydown?.(event as Parameters<NonNullable<typeof rest.onkeydown>>[0]);
+    if (event.defaultPrevented) return;
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
       select.controller.open();
@@ -92,7 +93,8 @@
       data-status={select.status()}
       aria-invalid={select.status() === "error" || undefined}
       aria-expanded={$snapshot.open}
-      class={cn(selectTriggerClassName(), className)}
+      class={cn(selectTriggerClassName(), classNames?.root, className)}
+      style={[styles?.root, inputProps.style].filter(Boolean).join(';')}
       onclick={(event) => bridge(slot.props.onclick, event as never)}
       onpointerenter={(event) =>
         bridge(slot.props.onpointerenter, event as never)}
@@ -105,31 +107,10 @@
       onkeydown={keydown}
     >
       {@render prefix?.()}
-      <div class={selectValueContainerClassName}>
-        {#if selected().length}{#if select.multiple()}<div
-              class={selectValueClassName}
-            >
-              {#each visible() as item (item.value)}{#if tag}{@render tag(
-                    item,
-                    () => select.removeValue(item.value),
-                  )}{:else}<Tag size="sm" onpointerdown={(event) => event.preventDefault()}
-                    >{item.label}<TagAction
-                      aria-label={`Remove ${String(item.label)}`}
-                      onclick={(event) => {
-                        event.stopPropagation();
-                        select.removeValue(item.value);
-                      }}
-                    /></Tag
-                  >{/if}{/each}{#if selected().length - visible().length > 0}<Tag
-                  size="sm">+{selected().length - visible().length}</Tag
-                >{/if}
-            </div>{:else}<div class={selectValueClassName}>
-              {selected()[0]?.label}
-            </div>{/if}{:else if !$snapshot.searchValue && !select.showSearch()}<span
-            class={selectPlaceholderClassName}>{placeholder}</span
-          >{/if}
+      <div class={cn(selectValueContainerClassName, classNames?.control)}>
+        <SelectValue {placeholder} {maxTagCount} {tag} />
         <input
-          {...inputProps}
+          {...inputAttributes()}
           role="combobox"
           aria-expanded={$snapshot.open}
           aria-controls={select.listId}
@@ -141,9 +122,12 @@
           value={$snapshot.searchValue}
           class={cn(
             selectInputClassName,
+            classNames?.control,
+            inputProps.class,
             !select.showSearch() &&
               "absolute size-px min-w-0 overflow-hidden opacity-0",
           )}
+          style={styles?.control}
           onfocus={() => select.controller.open()}
           onpointerdown={inputPointerdown}
           onclick={(event) => event.stopPropagation()}
@@ -153,7 +137,7 @@
           }}
         />
       </div>
-      <span data-slot="select-suffix" class={selectSuffixClassName}
+      <span data-slot="select-suffix" class={cn(selectSuffixClassName, classNames?.suffix)}
         >{#if select.loading()}<LoadingIcon
             class="animate-spin"
           />{:else}<span class={select.clearable() && selected().length ? selectClearableIndicatorClassName : undefined}
@@ -164,7 +148,7 @@
           >{#if select.clearable() && selected().length}<button
             type="button"
             aria-label="Clear selection"
-            class={selectClearClassName}
+            class={cn(selectClearClassName, classNames?.clear)}
             onpointerdown={(event) => event.preventDefault()}
             onclick={(event) => {
               event.stopPropagation();

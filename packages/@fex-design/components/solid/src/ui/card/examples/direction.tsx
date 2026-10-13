@@ -3,10 +3,10 @@ import { Card } from '@fex-design/solid/ui/card'
 
 export function DirectionExample() {
   return (
-    <div class="grid w-full gap-6 sm:grid-cols-2">
+    <div class="grid w-full gap-space-xl sm:grid-cols-2">
       <For each={['ltr', 'rtl'] as const}>
         {(dir) => (
-          <Card
+          <Card class="w-full"
             dir={dir}
             title={dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}
             description={

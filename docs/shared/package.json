@@ -5,6 +5,11 @@
   "exports": {
     "./model": "./src/model.ts",
     "./*-manifest": "./src/*-manifest.ts",
-    "./preview-protocol": "./src/preview-protocol.ts"
+    "./preview-protocol": "./src/preview-protocol.ts",
+    "./calendar-demo-data": "./src/calendar-demo-data.ts"
+  },
+  "dependencies": {
+    "@fex-design/core": "workspace:*",
+    "lunar-typescript": "^1.8.6"
   }
 }

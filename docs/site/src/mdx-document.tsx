@@ -10,9 +10,16 @@ import { resolveComponentApi } from './component-api'
 import { Installation } from './installation'
 import { Usage } from './usage'
 import { LayerComparison } from './layer-comparison'
+import { CodeBlock } from './code-block'
 import type { Framework } from './types'
 
 type LayerName = 'primitive' | 'ui'
+
+function getHeadingId(id: string | undefined, children: unknown) {
+  if (id) return id
+  if (typeof children !== 'string') return undefined
+  return children.trim().replace(/\s+/g, '-').toLowerCase()
+}
 
 export function MdxDocument(props: {
   content: Component
@@ -146,12 +153,12 @@ export function MdxDocument(props: {
       <CssVariableTable value={componentApis[props.slug][props.layer].cssVariables ?? []} />
     ),
     h2: (headingProps: ParentProps<{ id?: string }>) => (
-      <h2 id={headingProps.id} class="mt-14 mb-3 text-2xl font-bold tracking-tight text-foreground">
+      <h2 id={getHeadingId(headingProps.id, headingProps.children)} class="mt-14 mb-3 text-2xl font-bold tracking-tight text-foreground">
         {headingProps.children}
       </h2>
     ),
     h3: (headingProps: ParentProps<{ id?: string }>) => (
-      <h3 id={headingProps.id} class="mt-8 mb-2 text-lg font-semibold text-foreground">
+      <h3 id={getHeadingId(headingProps.id, headingProps.children)} class="mt-8 mb-2 text-lg font-semibold text-foreground">
         {headingProps.children}
       </h3>
     ),
@@ -162,13 +169,16 @@ export function MdxDocument(props: {
       <ul class="mt-3 mb-6 list-disc pl-6 leading-7 text-foreground">{listProps.children}</ul>
     ),
     pre: (preProps: ParentProps) => (
-      <pre class="my-4 mb-7 overflow-x-auto rounded-xl border border-border bg-muted-background px-5 py-4.5 text-foreground [&>code]:block [&>code]:whitespace-pre [&>code]:font-mono">
+      <div class="my-4 mb-7 overflow-x-auto rounded-xl border border-border bg-muted-background px-5 py-4.5 text-foreground [&>code]:block [&>code]:whitespace-pre-wrap [&>code]:font-mono">
         {preProps.children}
-      </pre>
+      </div>
     ),
-    code: (codeProps: ParentProps & { class?: string }) => (
-      <code class={codeProps.class ?? 'font-mono text-[0.9em] text-foreground font-medium'}>{codeProps.children}</code>
-    ),
+    code: (codeProps: ParentProps & { class?: string; className?: string }) => {
+      const languageClass = codeProps.class ?? codeProps.className
+      return typeof codeProps.children === 'string' && languageClass?.startsWith('language-')
+        ? <CodeBlock code={codeProps.children} language={languageClass.slice(9)} />
+        : <code class={languageClass ?? 'font-mono text-[0.9em] text-foreground font-medium'}>{codeProps.children}</code>
+    },
     table: (tableProps: ParentProps) => (
       <div class="my-4 overflow-x-auto rounded-xl border border-border">
         <table class="w-full border-collapse text-left text-sm">{tableProps.children}</table>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Card from '@fex-design/vue/ui/card'
+import { Card } from '@fex-design/vue/ui/card'
 
 const directions = ['ltr', 'rtl'] as const
 </script>
 
 <template>
-  <div class="grid w-full gap-6 sm:grid-cols-2">
-    <Card v-for="dir in directions" :key="dir" :dir="dir">
+  <div class="grid w-full gap-space-xl sm:grid-cols-2">
+    <Card v-for="dir in directions" :key="dir" :dir="dir" class="w-full">
       <template #title>{{ dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</template>
       <template #description>{{
         dir === 'ltr'

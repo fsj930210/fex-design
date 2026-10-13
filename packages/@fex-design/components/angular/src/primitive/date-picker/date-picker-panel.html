@@ -1,4 +1,4 @@
-<fex-calendar-root
+<div calendarRoot
   [value]="state.context().calendarValue"
   [values]="state.context().calendarValues"
   [viewDate]="state.context().viewDate"
@@ -8,35 +8,35 @@
   [min]="state.context().minDate"
   [max]="state.context().maxDate"
   [disabledDate]="state.context().disabledDate"
-  (cellSelect)="selectCell($event)"
+  (select)="selectValue($event.value)"
   (viewDateChange)="state.setViewDate($event)"
   (panelChange)="state.setPanel($event)"
   [class]="panelClassName"
 >
-  <fex-date-picker-header>
+  <div datePickerHeader>
     <div [class]="headerSideClassName">
-      <button fexDatePickerHeaderButton [action]="primaryPreviousAction()"></button>
+      <button datePickerHeaderButton [action]="primaryPreviousAction()"></button>
       @if (state.context().panel === 'date') {
-      <button fexDatePickerHeaderButton action="previous-month"></button>
+      <button datePickerHeaderButton action="previous-month"></button>
       }
     </div>
-    <fex-date-picker-header-title>
-      <button fexDatePickerHeaderLabel part="year"></button>
-      <button fexDatePickerHeaderLabel part="month"></button>
-    </fex-date-picker-header-title>
+    <div datePickerHeaderTitle>
+      <button datePickerHeaderLabel part="year"></button>
+      <button datePickerHeaderLabel part="month"></button>
+    </div>
     <div [class]="headerSideClassName">
       @if (state.context().panel === 'date') {
-      <button fexDatePickerHeaderButton action="next-month"></button>
+      <button datePickerHeaderButton action="next-month"></button>
       }
-      <button fexDatePickerHeaderButton [action]="primaryNextAction()"></button>
+      <button datePickerHeaderButton [action]="primaryNextAction()"></button>
     </div>
-  </fex-date-picker-header>
+  </div>
   @if (state.context().panel === 'date') {
-  <fex-calendar-week-header [class]="weekHeaderClassName" />
+  <div calendarWeekHeader [class]="weekHeaderClassName" />
   }
-  <fex-calendar-grid [class]="gridClassName">
+  <div calendarGrid [class]="gridClassName">
     <ng-template let-cell>
-      <button fexCalendarCell [cell]="cell" [class]="cellClassName">{{ cell.label }}</button>
+      <div calendarCell [cell]="cell" [class]="cellClassName"></div>
     </ng-template>
-  </fex-calendar-grid>
-</fex-calendar-root>
+  </div>
+</div>

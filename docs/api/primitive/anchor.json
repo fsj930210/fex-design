@@ -15,13 +15,44 @@
   "events": [],
   "cssVariables": [],
   "demos": [
-    { "id": "basic", "title": "基础用法", "description": "组合纵向 Anchor。" },
-    { "id": "horizontal", "title": "横向", "description": "横向排列一级项目。" },
-    { "id": "progress", "title": "Progress", "description": "连续高亮阅读进度。" },
-    { "id": "controlled", "title": "受控与非受控", "description": "对照两种状态模式。" },
-    { "id": "offset", "title": "自定义 Offset", "description": "单项偏移覆盖根偏移。" },
-    { "id": "direction", "title": "LTR 与 RTL", "description": "验证逻辑方向。" },
-    { "id": "custom-click", "title": "自定义 onClick", "description": "透传原生点击事件。" }
+    {
+      "id": "basic",
+      "title": "基础用法",
+      "description": "组合纵向 Anchor。"
+    },
+    {
+      "id": "horizontal",
+      "title": "横向",
+      "description": "横向排列一级项目。"
+    },
+    {
+      "id": "progress",
+      "title": "Progress",
+      "description": "连续高亮阅读进度。"
+    },
+    {
+      "id": "controlled",
+      "title": "受控与非受控",
+      "description": "对照两种状态模式。"
+    },
+    {
+      "id": "offset",
+      "title": "自定义 Offset",
+      "description": "单项偏移覆盖根偏移。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "验证逻辑方向。"
+    },
+    {
+      "id": "custom-click",
+      "title": "自定义 onClick",
+      "description": "透传原生点击事件。"
+    },
+    {
+      "id": "click-lock"
+    }
   ],
   "components": [
     {

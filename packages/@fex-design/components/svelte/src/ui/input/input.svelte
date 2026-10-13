@@ -14,6 +14,7 @@
   import InputClearWhenAvailable from "./input-clear.svelte";
   let {
     class: className,
+    style,
     value,
     defaultValue = "",
     onValueChange,
@@ -43,7 +44,7 @@
     {size}
     {variant}
     class={cn(classNames?.root, className)}
-    style={styles?.root}
+    style={[styles?.root, style].filter(Boolean).join(';')}
     onValueChange={(next) => onValueChange?.(next)}
   >
     {#if prefix}<InputPrefix class={classNames?.prefix} style={styles?.prefix}

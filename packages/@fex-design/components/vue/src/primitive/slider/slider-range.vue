@@ -26,7 +26,7 @@ const rangeStyle = computed(() => {
     convertValueToPercentage(value, snapshot.value.min, snapshot.value.max),
   )
   const start = snapshot.value.values.length > 1 ? Math.min(...percentages) : 0
-  const endValue = Math.max(...percentages)
+  const endValue = Math.max(0, ...percentages)
   const reversed = isSliderReversed(
     snapshot.value.orientation,
     snapshot.value.direction,

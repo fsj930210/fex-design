@@ -1,7 +1,8 @@
 import type { SpinnerContainerOptions, SpinnerOptions } from '@fex-design/core/spinner/types'
 import { spinnerContainerClassName } from '@fex-design/components-styles/spinner'
 import { cn } from '@fex-design/utils'
-import type { ComponentProps, CSSProperties, ReactNode } from 'react'
+import type { ComponentProps, CSSProperties, ReactNode, Ref } from 'react'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import {
   Spinner,
   SpinnerContainer as PrimitiveSpinnerContainer,
@@ -13,10 +14,11 @@ export { Spinner }
 
 export interface SpinnerContainerProps
   extends
-    Omit<ComponentProps<'div'>, 'children'>,
+    Omit<ComponentProps<'div'>, 'children' | 'ref'>,
     SpinnerContainerOptions<ReactNode, CSSProperties>,
     SpinnerOptions {
   children?: ReactNode
+  ref?: Ref<HTMLElement>
 }
 
 export function SpinnerContainer({
@@ -28,11 +30,14 @@ export function SpinnerContainer({
   styles,
   spinning,
   text,
+  ref,
+  style,
   ...props
 }: SpinnerContainerProps) {
+  const rootRef = useComposedRef(ref)
   if (spinning === undefined) {
     return (
-      <Spinner size={size} className={cn(className, classNames?.spinner)} style={styles?.spinner}>
+      <Spinner {...props} ref={rootRef} size={size} className={cn(className, classNames?.spinner)} style={{ ...style, ...styles?.spinner }}>
         {indicator}
       </Spinner>
     )
@@ -40,9 +45,10 @@ export function SpinnerContainer({
   return (
     <PrimitiveSpinnerContainer
       {...props}
+      ref={rootRef}
       aria-busy={spinning}
       className={cn(spinnerContainerClassName, className, classNames?.root)}
-      style={styles?.root}
+      style={{ ...style, ...styles?.root }}
     >
       {children}
       {spinning ? (

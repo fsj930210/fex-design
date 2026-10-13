@@ -1,6 +1,8 @@
+import { getSliderDotValues } from '@fex-design/core/slider/utils'
 import type { SliderChangeMeta, SliderMarkItem, SliderPart } from '@fex-design/core/slider/types'
 import { cn } from '@fex-design/utils'
 import { createSignal, For, type JSX } from 'solid-js'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import {
   SliderMark,
   SliderRange,
@@ -44,7 +46,7 @@ export function Slider(props: SliderProps) {
   const count = () => currentValues().length
   const disabledThumbs = () => (Array.isArray(props.disabled) ? props.disabled : [])
   const returnValue = (value: number[]) =>
-    typeof props.value === 'number' || typeof props.defaultValue === 'number' ? value[0]! : value
+    value.length > 0 && (typeof props.value === 'number' || typeof props.defaultValue === 'number') ? value[0]! : value
   return (
     <SliderRoot
       {...props}
@@ -55,7 +57,7 @@ export function Slider(props: SliderProps) {
       disabledThumbs={disabledThumbs()}
       marks={(props.marks ?? []).map((mark) => mark.value)}
       class={cn(props.class, props.classNames?.root)}
-      style={{ ...(typeof props.style === 'object' ? props.style : {}), ...props.styles?.root }}
+      style={mergeStyle(props.style, props.styles?.root)}
       onChange={(value, meta) => {
         if (value.length !== currentValues().length) setInternalValues(value)
         props.onChange?.(returnValue(value), meta)
@@ -68,12 +70,7 @@ export function Slider(props: SliderProps) {
         )}
         <For
           each={
-            props.dots && props.step
-              ? Array.from(
-                  { length: Math.floor(((props.max ?? 100) - (props.min ?? 0)) / props.step) + 1 },
-                  (_, index) => (props.min ?? 0) + index * props.step!,
-                )
-              : []
+            props.dots ? getSliderDotValues(props.min, props.max, props.step) : []
           }
         >
           {(dot) => <SliderMark value={dot} aria-hidden="true" />}

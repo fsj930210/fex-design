@@ -25,7 +25,6 @@
   }: PopoverContentProps = $props();
   const { contentElement, overlay, snapshot } =
     getContext<PopoverContext>(popoverContextKey);
-  const classList = $derived(cn(popoverContentClassName(), className));
 
   function contentAction(element: HTMLDivElement) {
     ref = element;
@@ -89,7 +88,7 @@
     data-side={$snapshot.side}
     data-align={$snapshot.align}
     data-placement={$snapshot.placement}
-    class={classList}
+    class={cn(popoverContentClassName(), className)}
     onpointerenter={handlePointerEnter}
     onpointerleave={handlePointerLeave}
     {style}

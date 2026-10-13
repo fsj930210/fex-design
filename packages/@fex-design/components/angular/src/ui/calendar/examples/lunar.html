@@ -1,0 +1,1 @@
+﻿<div calendar [defaultViewDate]="date"><ng-template #fullCell let-cell="cell"><button calendarCellTrigger [cell]="cell" class="flex-col items-center"><span>{{ cell.label }}</span><small>{{ lunar(cell) }}</small></button></ng-template></div>

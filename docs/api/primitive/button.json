@@ -95,6 +95,11 @@
       "description": "组合 ButtonIcon。"
     },
     {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "验证逻辑方向下的图标位置与连接边界。"
+    },
+    {
       "id": "effects",
       "title": "交互效果",
       "description": "通过状态 class 组合交互效果。"
@@ -103,11 +108,6 @@
       "id": "combinations",
       "title": "组合用法",
       "description": "组合颜色、图标、状态和按钮组。"
-    },
-    {
-      "id": "direction",
-      "title": "LTR 与 RTL",
-      "description": "验证逻辑方向下的图标位置与连接边界。"
     },
     {
       "id": "group",

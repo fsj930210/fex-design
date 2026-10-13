@@ -36,7 +36,7 @@ const virtualItems = computed(() =>
   range.value ? select.visibleOptions.value.slice(range.value.start, range.value.end) : [],
 )
 function selected(option: SelectOption) {
-  return select.controller.selection.isSelected(option.value)
+  return select.snapshot.value.selectedValues.includes(option.value)
 }
 function disabled(option: SelectOption) {
   return option.disabled === true || select.controller.selection.isDisabled(option.value)

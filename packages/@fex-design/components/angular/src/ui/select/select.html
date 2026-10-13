@@ -1,5 +1,6 @@
 <div
   selectRoot
+  [popoverProps]="resolvedPopoverProps()"
   [options]="normalizedOptions()"
   [value]="value()"
   [defaultValue]="defaultValue()"
@@ -18,13 +19,24 @@
   (change)="change.emit($event)"
   (search)="search.emit($event)"
 >
-  <div selectTrigger [placeholder]="placeholder()" [maxTagCount]="maxTagCount()">
+  <div selectTrigger [placeholder]="placeholder()" [maxTagCount]="maxTagCount()" [inputProps]="inputProps()">
     @if (prefix(); as template) { <ng-template #prefix><ng-container *ngTemplateOutlet="template" /></ng-template> }
     @if (suffix(); as template) { <ng-template #suffix><ng-container *ngTemplateOutlet="template" /></ng-template> }
     @if (clear(); as template) { <ng-template #clear><ng-container *ngTemplateOutlet="template" /></ng-template> }
+    @if (tag(); as template) {
+      <ng-template #tag let-item let-remove="remove">
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item, remove }" />
+      </ng-template>
+    }
   </div>
-  <div selectContent>
-    <div selectList [emptyText]="emptyText()"></div>
+  <div selectContent [popupRender]="popupRender()">
+    <div selectList [emptyText]="emptyText()">
+      @if (option(); as template) {
+        <ng-template #option let-item let-state="state">
+          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item, state }" />
+        </ng-template>
+      }
+    </div>
     @if (footer(); as template) { <ng-container *ngTemplateOutlet="template" /> }
   </div>
 </div>

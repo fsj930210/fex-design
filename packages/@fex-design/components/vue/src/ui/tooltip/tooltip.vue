@@ -27,7 +27,19 @@ const props = withDefaults(
       styles?: Partial<Record<TooltipSemanticPart, CSSProperties>>
     }
   >(),
-  { open: undefined, defaultOpen: undefined, disabled: undefined, arrow: true },
+  {
+    open: undefined,
+    defaultOpen: undefined,
+    disabled: undefined,
+    forceMount: undefined,
+    avoidCollisions: undefined,
+    autoAdjustOverflow: undefined,
+    hideWhenDetached: undefined,
+    lazyMount: undefined,
+    destroyOnHidden: undefined,
+    matchReferenceWidth: undefined,
+    arrow: true,
+  },
 )
 const attrs = useAttrs()
 const options = computed(() => splitTooltipOptions(props)[0])

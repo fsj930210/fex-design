@@ -4,7 +4,7 @@ Convenience Empty using Svelte-native strings and Snippets.
 
 ## Import
 
-    import Empty from '@fex-design/svelte/ui/empty'
+    import { Empty } from '@fex-design/svelte/ui/empty'
 
 ## Examples
 

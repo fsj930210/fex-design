@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { EmptyOptions, EmptyStyles as EmptyStylesBase } from '@fex-design/core/empty/types'
 import { cn } from '@fex-design/utils'
 import { Show, splitProps, type JSX, type ParentProps } from 'solid-js'
@@ -58,7 +59,7 @@ export function Empty(props: EmptyProps) {
     <PrimitiveEmpty
       {...rest}
       class={cn(rest.class, local.classNames?.root)}
-      style={{ ...rest.style, ...local.styles?.root }}
+      style={mergeStyle(rest.style, local.styles?.root)}
     >
       <Show when={image() != null || local.title != null || local.description != null}>
         <EmptyHeader class={local.classNames?.header} style={local.styles?.header}>

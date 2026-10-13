@@ -1,3 +1,4 @@
+import { getSliderDotValues } from '@fex-design/core/slider/utils'
 import type { SliderChangeMeta, SliderPart } from '@fex-design/core/slider/types'
 import {
   sliderMarkClassName,
@@ -56,7 +57,7 @@ export class Slider {
   readonly styles = input<Partial<Record<SliderPart, string>>>({})
   readonly change = output<{ value: SliderValue; meta: SliderChangeMeta }>()
   readonly end = output<{ value: SliderValue; meta: SliderChangeMeta }>()
-  protected readonly internalValues = signal<number[]>([])
+  protected readonly internalValues = signal<number[] | undefined>(undefined)
   protected readonly arrayValue = computed(() =>
     typeof this.value() === 'number'
       ? [this.value() as number]
@@ -67,13 +68,7 @@ export class Slider {
       ? [this.defaultValue() as number]
       : (this.defaultValue() as number[] | undefined),
   )
-  protected readonly currentValues = computed(
-    () =>
-      this.arrayValue() ??
-      (this.internalValues().length > 0
-        ? this.internalValues()
-        : (this.arrayDefault() ?? [this.min()])),
-  )
+  protected readonly currentValues = computed(() => this.arrayValue() ?? this.internalValues() ?? this.arrayDefault() ?? [this.min()])
   protected readonly disabledThumbs = computed(() =>
     Array.isArray(this.disabled()) ? (this.disabled() as boolean[]) : [],
   )
@@ -89,16 +84,9 @@ export class Slider {
   protected readonly rangeClass = computed(() => cn(sliderRangeClassName, this.classNames().range))
   protected readonly thumbClass = computed(() => cn(sliderThumbClassName, this.classNames().thumb))
   protected readonly markClass = computed(() => cn(sliderMarkClassName, this.classNames().mark))
-  protected readonly dotValues = computed(() =>
-    this.dots() && this.step()
-      ? Array.from(
-          { length: Math.floor((this.max() - this.min()) / this.step()!) + 1 },
-          (_, index) => this.min() + index * this.step()!,
-        )
-      : [],
-  )
+  protected readonly dotValues = computed(() => this.dots() ? getSliderDotValues(this.min(), this.max(), this.step()) : [])
   protected result(value: number[]) {
-    return typeof this.value() === 'number' || typeof this.defaultValue() === 'number'
+    return value.length > 0 && (typeof this.value() === 'number' || typeof this.defaultValue() === 'number')
       ? value[0]!
       : value
   }

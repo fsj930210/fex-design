@@ -3,7 +3,8 @@
   import PrimitiveGroup from '@fex-design/svelte/primitive/radio/radio-group.svelte';
   import type { RadioValue } from '@fex-design/svelte/primitive/radio/context';
   import Radio from "./radio.svelte";
-  interface Props {
+  import type { HTMLAttributes } from "svelte/elements";
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {
     value?: RadioValue;
     defaultValue?: RadioValue;
     disabled?: boolean;

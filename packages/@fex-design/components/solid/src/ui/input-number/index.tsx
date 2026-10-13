@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { InputNumberPart } from '@fex-design/core/input-number/types'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
@@ -15,7 +16,7 @@ export interface InputNumberProps
   extends
     Omit<
       JSX.InputHTMLAttributes<HTMLInputElement>,
-      'value' | 'onChange' | 'min' | 'max' | 'step' | 'prefix'
+      'value' | 'defaultValue' | 'type' | 'size' | 'onChange' | 'min' | 'max' | 'step' | 'prefix'
     >,
     Pick<
       InputNumberRootProps,
@@ -32,14 +33,14 @@ export interface InputNumberProps
       | 'variant'
       | 'onChange'
     > {
-  clearable?: boolean
-  controls?: boolean
-  prefix?: JSX.Element
-  suffix?: JSX.Element
-  incrementIcon?: JSX.Element
-  decrementIcon?: JSX.Element
-  classNames?: Partial<Record<InputNumberPart, string>>
-  styles?: Partial<Record<InputNumberPart, JSX.CSSProperties>>
+  clearable?: boolean | undefined
+  controls?: boolean | undefined
+  prefix?: JSX.Element | undefined
+  suffix?: JSX.Element | undefined
+  incrementIcon?: JSX.Element | undefined
+  decrementIcon?: JSX.Element | undefined
+  classNames?: Partial<Record<InputNumberPart, string>> | undefined
+  styles?: Partial<Record<InputNumberPart, JSX.CSSProperties>> | undefined
 }
 export function InputNumber(props: ParentProps<InputNumberProps>) {
   const controlled = Object.prototype.hasOwnProperty.call(props, 'value')
@@ -79,7 +80,7 @@ export function InputNumber(props: ParentProps<InputNumberProps>) {
       {...root}
       controlled={controlled}
       class={cn(local.classNames?.root, local.class)}
-      style={{ ...local.styles?.root, ...(typeof local.style === 'object' ? local.style : {}) }}
+      style={mergeStyle(local.styles?.root, local.style)}
       content={() => (
         <>
           {local.prefix != null && (

@@ -1,64 +1,88 @@
+import { getCalendarHeaderState, type CalendarHeaderState } from '@fex-design/core/calendar'
 import {
-  addDate,
-  type CalendarDate,
-  type CalendarGranularity,
-  type CalendarPanel,
-} from '@fex-design/core/calendar'
+  calendarHeaderClassName,
+  calendarHeaderControlsClassName,
+  calendarHeaderSelectClassName,
+} from '@fex-design/components-styles/calendar'
+import { cn } from '@fex-design/utils'
 import type { ComponentProps, ReactNode } from 'react'
 import { useCalendarContext } from './calendar-context'
-
-export interface CalendarHeaderProps extends Omit<ComponentProps<'div'>, 'children'> {
-  children: (context: {
-    viewDate: CalendarDate
-    panel: CalendarPanel
-    granularity: CalendarGranularity
-    previousYear: () => void
-    previousMonth: () => void
-    nextMonth: () => void
-    nextYear: () => void
-    previous: () => void
-    next: () => void
-    setPanel: (panel: CalendarPanel) => void
-  }) => ReactNode
+import { CalendarNavigationButton } from './calendar-navigation-button'
+import { RadioGroup, RadioButton } from '../radio'
+import { SelectContent, SelectRoot, SelectTrigger, SelectValue } from '../select'
+export type CalendarHeaderProps = Omit<ComponentProps<'div'>, 'children'> & {
+  children?: ReactNode | ((state: CalendarHeaderState) => ReactNode)
 }
-
 export function CalendarHeader({ children, className, ...props }: CalendarHeaderProps) {
   const context = useCalendarContext('CalendarHeader')
-
-  function shiftByPanel(offset: number) {
-    if (context.panel === 'date') {
-      context.setViewDate(addDate(context.viewDate, { months: offset }))
-      return
-    }
-    if (context.panel === 'month' || context.panel === 'quarter') {
-      context.setViewDate(addDate(context.viewDate, { years: offset }))
-      return
-    }
-    context.setViewDate(addDate(context.viewDate, { years: offset * 10 }))
+  const header = getCalendarHeaderState(context.state, context.controller)
+  const setNumber = (
+    value: string | number | readonly (string | number)[] | undefined,
+    set: (next: number) => void,
+  ) => {
+    const next = Array.isArray(value) ? value[0] : value
+    if (next !== undefined) set(Number(next))
   }
-
-  function shiftMonth(offset: number) {
-    context.setViewDate(addDate(context.viewDate, { months: offset }))
-  }
-
-  function shiftYear(offset: number) {
-    context.setViewDate(addDate(context.viewDate, { years: offset }))
-  }
-
   return (
-    <div {...props} data-slot="calendar-header" className={className}>
-      {children({
-        viewDate: context.viewDate,
-        panel: context.panel,
-        granularity: context.granularity,
-        previousYear: () => shiftYear(-1),
-        previousMonth: () => shiftMonth(-1),
-        nextMonth: () => shiftMonth(1),
-        nextYear: () => shiftYear(1),
-        previous: () => shiftByPanel(-1),
-        next: () => shiftByPanel(1),
-        setPanel: context.setPanel,
-      })}
+    <div {...props} data-slot="calendar-header" className={cn(calendarHeaderClassName, className)}>
+      {typeof children === 'function' ? (
+        children(header)
+      ) : children !== undefined ? (
+        children
+      ) : (
+        <div className={calendarHeaderControlsClassName}>
+          <CalendarNavigationButton
+            action="previous-panel"
+            disabled={!header.canPrevious}
+            aria-label={header.locale.previous}
+          />
+          <CalendarNavigationButton
+            action="next-panel"
+            disabled={!header.canNext}
+            aria-label={header.locale.next}
+          />
+          <CalendarNavigationButton action="today">{header.locale.today}</CalendarNavigationButton>
+          <SelectRoot
+            options={header.years}
+            value={header.viewDate.year}
+            onChange={(value) => setNumber(value, header.setYear)}
+          >
+            <SelectTrigger
+              className={calendarHeaderSelectClassName}
+              aria-label={header.locale.year}
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent />
+          </SelectRoot>
+          {header.panel === 'date' && (
+            <SelectRoot
+              options={header.months}
+              value={header.viewDate.month}
+              onChange={(value) => setNumber(value, header.setMonth)}
+            >
+              <SelectTrigger
+                className={calendarHeaderSelectClassName}
+                aria-label={header.locale.month}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent />
+            </SelectRoot>
+          )}
+          <RadioGroup
+            className="gap-0"
+            value={header.panel}
+            aria-label={`${header.locale.datePanel}/${header.locale.monthPanel}`}
+            onValueChange={(value) => {
+              if (value === 'date' || value === 'month') header.setPanel(value)
+            }}
+          >
+            <RadioButton value="date">{header.locale.datePanel}</RadioButton>
+            <RadioButton value="month">{header.locale.monthPanel}</RadioButton>
+          </RadioGroup>
+        </div>
+      )}
     </div>
   )
 }

@@ -61,7 +61,12 @@ export function createCheckboxGroupController(
       if (snapshot.disabled === (options.disabled === true)) {
         return snapshot
       }
-      return createCheckboxGroupSnapshot(snapshot.value, options.disabled)
+      // External-store adapters require the same object until effective state changes.
+      if (
+        controlledSnapshot.disabled !== (options.disabled === true) ||
+        !checkboxValuesEqual(controlledSnapshot.value, snapshot.value)
+      ) controlledSnapshot = createCheckboxGroupSnapshot(snapshot.value, options.disabled)
+      return controlledSnapshot
     }
 
     const nextSnapshot = createCheckboxGroupSnapshot(options.value, options.disabled)

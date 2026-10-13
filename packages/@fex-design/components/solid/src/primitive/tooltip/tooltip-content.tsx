@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { onCleanup, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { tooltipContentClassName } from '@fex-design/components-styles/tooltip'
 import { cn } from '@fex-design/utils'
@@ -36,11 +37,11 @@ export function TooltipContent(props: TooltipContentProps) {
         data-placement={snapshot().placement}
         class={cn(tooltipContentClassName, local.class)}
         onPointerEnter={(event) => {
-          if (typeof local.onPointerEnter === 'function') local.onPointerEnter(event)
+          callEventHandler(local.onPointerEnter, event)
           if (!event.defaultPrevented) overlay.content.pointerEnter(eventInfo(event))
         }}
         onPointerLeave={(event) => {
-          if (typeof local.onPointerLeave === 'function') local.onPointerLeave(event)
+          callEventHandler(local.onPointerLeave, event)
           if (!event.defaultPrevented) overlay.content.pointerLeave(eventInfo(event))
         }}
         style={

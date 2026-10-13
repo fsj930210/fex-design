@@ -24,6 +24,7 @@ export interface CalendarYearMonth {
 
 export type CalendarGranularity = 'date' | 'week' | 'month' | 'quarter' | 'year'
 export type CalendarPanel = 'date' | 'month' | 'quarter' | 'year' | 'decade'
+export interface CalendarSelectInfo { source: 'date' | 'customize' }
 
 export interface CalendarWeek {
   start: CalendarDate
@@ -52,6 +53,21 @@ export interface CalendarRange<TValue extends CalendarValue = CalendarValue> {
 }
 
 export type CalendarWeekday = 0 | 1 | 2 | 3 | 4 | 5 | 6
+
+export interface CalendarLocale {
+  weekdays: readonly string[]
+  months: readonly string[]
+  year: string
+  month: string
+  datePanel: string
+  monthPanel: string
+  previous: string
+  next: string
+  today: string
+  week: string
+  weekStartsOn: CalendarWeekday
+  firstWeekContainsDate: 1 | 4
+}
 
 export interface CalendarCellState {
   today: boolean

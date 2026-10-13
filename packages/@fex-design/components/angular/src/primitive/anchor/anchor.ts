@@ -218,8 +218,8 @@ export class AnchorItem {
   readonly target = input.required<AnchorTarget>()
   readonly targetOffset = input<number | undefined>()
   private readonly root = inject(AnchorRoot)
-  private readonly destroyRef = inject(DestroyRef)
   private readonly parent = inject(AnchorItem, { optional: true, skipSelf: true })
+  private readonly mounted = signal(false)
   readonly record = computed<AnchorRegisteredItem>(() => {
     const targetOffset = this.targetOffset()
     return {
@@ -234,8 +234,11 @@ export class AnchorItem {
   protected readonly hostClassName = createHostClassName(() => anchorItemClassName)
   constructor() {
     afterNextRender(() => {
-      const unregister = this.root.registerItem(this.record())
-      this.destroyRef.onDestroy(unregister)
+      this.mounted.set(true)
+    })
+    // Registry entries follow signal input changes after the DOM is available.
+    effect((cleanup) => {
+      if (this.mounted()) cleanup(this.root.registerItem(this.record()))
     })
   }
 }

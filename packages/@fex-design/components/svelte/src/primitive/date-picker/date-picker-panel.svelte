@@ -1,12 +1,9 @@
 <script lang="ts">
   import {
     getCalendarValueDate,
-    type CalendarCell,
     type CalendarDate,
-    type CalendarPanel,
   } from "@fex-design/core/calendar";
   import {
-    getDefaultPanelByPicker,
     getGranularityByPicker,
   } from "@fex-design/core/date-picker/panel";
   import { createRangePreviewValue } from "@fex-design/core/date-picker/range";
@@ -23,7 +20,7 @@
   import { getContext } from "svelte";
   import CalendarCellView from "../calendar/calendar-cell.svelte";
   import CalendarGrid from "../calendar/calendar-grid.svelte";
-  import CalendarRoot from "../calendar/calendar.svelte";
+  import CalendarRoot from "../calendar/calendar-root.svelte";
   import CalendarWeekHeader from "../calendar/calendar-week-header.svelte";
   import {
     datePickerContextKey,
@@ -72,36 +69,10 @@
       : undefined,
   );
 
-  function nextPanelAfterCell(
-    panel: CalendarPanel,
-    picker: string,
-  ): CalendarPanel | null {
-    if (picker === "year") return null;
-    if (panel === "decade") return "year";
-    if (panel === "year")
-      return picker === "month" || picker === "quarter"
-        ? getDefaultPanelByPicker(picker as "month" | "quarter")
-        : "month";
-    if (panel === "month") return picker === "month" ? null : "date";
-    if (panel === "quarter") return null;
-    return null;
-  }
 
-  function selectCell(cell: CalendarCell) {
-    const nextPanel = nextPanelAfterCell(cell.panel, resolvedOwner.picker);
-    const nextViewDate = getCalendarValueDate(cell.value);
-    if (nextPanel) {
-      resolvedOwner.setViewDate(nextViewDate);
-      resolvedOwner.setPanel(nextPanel);
-      return;
-    }
-    resolvedOwner.select(
-      normalizeDatePickerValue(
-        nextViewDate,
-        resolvedOwner.picker,
-        resolvedOwner.weekStartsOn,
-      ) as never,
-    );
+
+  function selectValue(value: import('@fex-design/core/calendar').CalendarValue) {
+    resolvedOwner.select(normalizeDatePickerValue(getCalendarValueDate(value), resolvedOwner.picker, resolvedOwner.weekStartsOn) as never);
   }
 
   function disabledDate(date: CalendarDate) {
@@ -113,7 +84,7 @@
 
 <CalendarRoot
   class={cn(datePickerPanelClassName, className)}
-  value={datePicker?.getCalendarValue()}
+  value={datePicker?.getCalendarValue() ?? null}
   values={datePicker?.getCalendarValues()}
   range={displayRange}
   viewDate={panelViewDate ?? owner.getViewDate()}
@@ -123,7 +94,7 @@
   min={owner.minDate}
   max={owner.maxDate}
   {disabledDate}
-  onCellSelect={selectCell}
+  onSelect={selectValue}
   onCellHover={(cell) => rangePicker?.setHoverValue(cell.value)}
   onPanelChange={owner.setPanel}
   onViewDateChange={owner.setViewDate}
@@ -162,8 +133,7 @@
     <CalendarGrid class={datePickerGridClassName}
       >{#snippet children(cell)}<CalendarCellView
           {cell}
-          class={datePickerCellClassName}>{cell.label}</CalendarCellView
-        >{/snippet}</CalendarGrid
+          class={datePickerCellClassName} />{/snippet}</CalendarGrid
     >
   {/if}
 </CalendarRoot>

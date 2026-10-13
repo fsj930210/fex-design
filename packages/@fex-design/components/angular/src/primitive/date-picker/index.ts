@@ -36,6 +36,7 @@ export {
 export {
   CalendarWeekHeader as DatePickerWeekHeader,
   CalendarGrid as DatePickerGrid,
-  CalendarCellButton as DatePickerCell,
-} from '../calendar/calendar'
+  CalendarCell as DatePickerCell,
+  CalendarCellTrigger as DatePickerCellTrigger,
+} from '../calendar'
 export type { DatePickerPicker, DatePickerValue } from '@fex-design/core/date-picker/types'

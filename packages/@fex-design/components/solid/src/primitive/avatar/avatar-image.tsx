@@ -25,6 +25,8 @@ export function AvatarImage(props: JSX.ImgHTMLAttributes<HTMLImageElement>) {
       <img
         {...rest}
         src={local.src}
+        crossorigin={local.crossorigin}
+        referrerpolicy={local.referrerpolicy}
         data-slot="avatar-image"
         class={cn(avatarImageClassName, local.class)}
       />

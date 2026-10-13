@@ -22,6 +22,7 @@ import { CircleCheckIcon } from '@fex-design/angular/icons/circle-check'
 import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { InfoIcon } from '@fex-design/angular/icons/info'
 import { TriangleAlertIcon } from '@fex-design/angular/icons/triangle-alert'
+import { XIcon } from '@fex-design/angular/icons/x'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 
 @Directive({ selector: '[alertIcon]', standalone: true })
@@ -36,7 +37,7 @@ export class AlertCloseIconContent {}
 @Component({
   selector: 'alert',
   standalone: true,
-  imports: [CircleCheckIcon, InfoIcon, TriangleAlertIcon, CircleXIcon],
+  imports: [CircleCheckIcon, InfoIcon, TriangleAlertIcon, CircleXIcon, XIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',

@@ -1,3 +1,4 @@
+import { getSliderDotValues } from '@fex-design/core/slider/utils'
 import type { SliderChangeMeta, SliderMarkItem, SliderPart } from '@fex-design/core/slider/types'
 import { cn } from '@fex-design/utils'
 import type { CSSProperties, ReactNode } from 'react'
@@ -60,7 +61,7 @@ export function Slider({
   })
   const count = currentValues.length
   const returnValue = (next: number[]) =>
-    typeof value === 'number' || typeof defaultValue === 'number' ? next[0]! : next
+    next.length > 0 && (typeof value === 'number' || typeof defaultValue === 'number') ? next[0]! : next
   const rootMarks = marks.map((mark) => mark.value)
   const disabledThumbs = Array.isArray(disabled) ? disabled : undefined
   return (
@@ -82,18 +83,9 @@ export function Slider({
     >
       <SliderTrack className={classNames?.track} style={styles?.track}>
         {included && <SliderRange className={classNames?.range} style={styles?.range} />}
-        {dots &&
-          props.step != null &&
-          Array.from(
-            { length: Math.floor(((props.max ?? 100) - (props.min ?? 0)) / props.step) + 1 },
-            (_, index) => (
-              <SliderMark
-                key={`dot-${index}`}
-                value={(props.min ?? 0) + index * props.step!}
-                aria-hidden="true"
-              />
-            ),
-          )}
+        {dots && getSliderDotValues(props.min, props.max, props.step).map((dot) => (
+          <SliderMark key={dot} value={dot} aria-hidden="true" />
+        ))}
         {marks.map((mark) => (
           <SliderMark
             key={mark.value}

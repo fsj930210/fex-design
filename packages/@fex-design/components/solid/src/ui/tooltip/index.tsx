@@ -6,6 +6,7 @@ import type {
 } from '@fex-design/core/tooltip/create-tooltip'
 import { cn } from '@fex-design/utils'
 import { tooltipOptionKeys } from '@fex-design/core/tooltip/options'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import {
   TooltipArrow,
   TooltipContent,
@@ -31,10 +32,7 @@ export function Tooltip(props: TooltipProps) {
     ['children', 'title', 'color', 'arrow', 'class', 'style', 'classNames', 'styles'],
     tooltipOptionKeys,
   )
-  const rootStyle = () => ({
-    ...(typeof local.style === 'object' ? local.style : {}),
-    ...local.styles?.root,
-  })
+  const rootStyle = () => mergeStyle(local.style, local.styles?.root)
   return (
     <TooltipRoot {...options}>
       <TooltipTrigger>{local.children}</TooltipTrigger>

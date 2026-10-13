@@ -319,6 +319,9 @@
       "id": "css-variables",
       "title": "实例 CSS Variables",
       "description": "覆盖当前 Card 的区域变量。"
+    },
+    {
+      "id": "direction"
     }
   ]
 }

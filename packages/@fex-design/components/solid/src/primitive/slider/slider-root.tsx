@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { createSliderController } from '@fex-design/core/slider/create-slider-controller'
 import type {
   SliderChangeMeta,
@@ -149,7 +150,7 @@ export function SliderRoot(props: SliderRootProps) {
           local.class,
         )}
         onPointerDown={(event) => {
-          if (typeof local.onPointerDown === 'function') local.onPointerDown(event)
+          callEventHandler(local.onPointerDown, event)
           if (event.defaultPrevented || snapshot().disabled || !rootElement) return
           rootElement.setPointerCapture(event.pointerId)
           const nextValue = getSliderValueFromPointer(
@@ -180,7 +181,7 @@ export function SliderRoot(props: SliderRootProps) {
             )
         }}
         onPointerMove={(event) => {
-          if (typeof local.onPointerMove === 'function') local.onPointerMove(event)
+          callEventHandler(local.onPointerMove, event)
           if (
             event.defaultPrevented ||
             snapshot().disabled ||
@@ -202,7 +203,7 @@ export function SliderRoot(props: SliderRootProps) {
             : controller.moveSlide(nextValue + pointerOffset)
         }}
         onPointerUp={(event) => {
-          if (typeof local.onPointerUp === 'function') local.onPointerUp(event)
+          callEventHandler(local.onPointerUp, event)
           if (!rootElement?.hasPointerCapture(event.pointerId)) return
           rootElement.releasePointerCapture(event.pointerId)
           controller.endSlide()

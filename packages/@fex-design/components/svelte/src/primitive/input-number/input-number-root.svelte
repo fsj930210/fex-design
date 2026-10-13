@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { inputNumberRootClassName } from '@fex-design/components-styles/input-number';
+  import { cn } from '@fex-design/utils';
   import type {
     InputNumberFormatter,
     InputNumberParser,
@@ -12,22 +14,22 @@
     HTMLAttributes<HTMLDivElement>,
     "value" | "onchange"
   > {
-    controlled?: boolean;
-    value?: number;
-    defaultValue?: number;
-    min?: number;
-    max?: number;
-    step?: number;
-    precision?: number;
-    parser?: InputNumberParser;
-    formatter?: InputNumberFormatter;
-    disabled?: boolean;
-    readOnly?: boolean;
-    keyboard?: boolean;
-    size?: "sm" | "md" | "lg";
-    variant?: "outlined" | "filled" | "borderless" | "underlined";
-    onChange?: (event: Event, value: number | undefined) => void;
-    children?: Snippet;
+    controlled?: boolean | undefined;
+    value?: number | undefined;
+    defaultValue?: number | undefined;
+    min?: number | undefined;
+    max?: number | undefined;
+    step?: number | undefined;
+    precision?: number | undefined;
+    parser?: InputNumberParser | undefined;
+    formatter?: InputNumberFormatter | undefined;
+    disabled?: boolean | undefined;
+    readOnly?: boolean | undefined;
+    keyboard?: boolean | undefined;
+    size?: "sm" | "md" | "lg" | undefined;
+    variant?: "outlined" | "filled" | "borderless" | "underlined" | undefined;
+    onChange?: ((event: Event, value: number | undefined) => void) | undefined;
+    children?: Snippet | undefined;
   }
   let componentProps: Props = $props();
   // svelte-ignore state_referenced_locally -- controlled mode is fixed by initial prop presence
@@ -35,7 +37,6 @@
     componentProps,
     "value",
   );
-  // svelte-ignore state_referenced_locally -- destructuring the reactive props proxy is intentional
   let {
     controlled,
     value,
@@ -51,8 +52,9 @@
     keyboard = true,
     onChange,
     children,
+    class: className,
     ...rest
-  }: Props = componentProps;
+  }: Props = $derived(componentProps);
   const inputNumber = useInputNumber(() => ({
     controlled: controlled ?? hasValue,
     value,
@@ -73,6 +75,7 @@
 
 <InputRoot
   {...rest}
+  class={cn(inputNumberRootClassName, className)}
   value={inputNumber.draft}
   {disabled}
   {readOnly}

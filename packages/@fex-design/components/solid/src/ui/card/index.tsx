@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { JSX, ParentProps } from 'solid-js'
 import type {
   CardClassNames as CardClassNamesBase,
@@ -40,7 +41,7 @@ export function Card(props: CardProps) {
     <PrimitiveCard
       {...rest}
       class={cn(rest.class, local.classNames?.root)}
-      style={{ ...rest.style, ...local.styles?.root }}
+      style={mergeStyle(rest.style, local.styles?.root)}
     >
       <Show
         when={local.header}

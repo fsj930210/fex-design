@@ -1,0 +1,45 @@
+---
+title: Calendar
+description: 显示日期和日程，支持大日历、卡片、周数、农历内容及自定义头部。
+---
+
+## 何时使用
+
+需要直接使用完整日历时使用 UI Calendar；需要替换默认布局、组合自己的 Header、Grid、Cell 或 Footer 时使用 Primitive Calendar。浏览年月与选择日期分离，onChange 只提交日期值。两层示例覆盖相同场景和相同数据，UI 使用快捷组合，Primitive 使用原子部件组合。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection
+  layer="ui"
+  title="UI API"
+  description="开箱即用的完整日历，包含默认头部、网格、Cell、Footer 和语义样式入口。"
+/> 
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="通过 Root、Header、Grid、Cell、Trigger 和 Footer 组合自定义日历结构。"
+>
+<ApiComposition layer="primitive">
+
+```text
+CalendarRoot
+├─ CalendarHeader
+├─ CalendarWeekHeader
+├─ CalendarGrid
+│  └─ CalendarRow
+│     └─ CalendarCell
+│        ├─ CalendarCellTrigger
+│        └─ custom content
+└─ CalendarFooter
+```
+
+</ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+

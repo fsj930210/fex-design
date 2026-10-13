@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Separator from "@fex-design/svelte/ui/separator";
+  import { Separator } from "@fex-design/svelte/ui/separator";
 </script>
 
 <div class="grid w-full gap-4">

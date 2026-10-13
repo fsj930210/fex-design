@@ -1,23 +1,28 @@
 <script setup lang="ts">
+import { getSelectValueLayout } from '@fex-design/core/select/value-layout'
 import { selectPlaceholderClassName, selectValueClassName } from '@fex-design/components-styles/select'
 import Tag from '../tag/tag.vue'
 import TagAction from '../tag/tag-action.vue'
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useSelect } from './use-select'
 
-const props = defineProps<{ placeholder?: string | undefined; maxTagCount?: number | undefined }>()
+defineOptions({ name: 'SelectValue' })
+const element = useTemplateRef<HTMLDivElement>('element')
+defineExpose({ element })
+const props = withDefaults(defineProps<{ placeholder?: string | undefined; maxTagCount?: number | undefined }>(), { placeholder: '请选择' })
 const select = useSelect('SelectValue')
-const visibleOptions = computed(() =>
-  props.maxTagCount === undefined
-    ? select.selectedOptions.value
-    : select.selectedOptions.value.slice(0, Math.max(0, props.maxTagCount)),
-)
+const layout = computed(() => getSelectValueLayout(select.selectedOptions.value, {
+  multiple: select.multiple.value, showSearch: select.showSearch.value,
+  open: select.snapshot.value.open, searchValue: select.snapshot.value.searchValue,
+  maxTagCount: props.maxTagCount,
+}))
 </script>
 <template>
-  <div :class="selectValueClassName">
-    <template v-if="select.multiple.value">
+  <div ref="element" :class="selectValueClassName">
+    <slot v-if="$slots.default" />
+    <template v-else-if="layout.showTags">
       <template
-        v-for="option in visibleOptions"
+        v-for="option in layout.visibleOptions"
         :key="option.value"
       >
         <slot name="tag" :option="option" :remove="() => select.removeValue(option.value)">
@@ -31,20 +36,18 @@ const visibleOptions = computed(() =>
         </slot>
       </template>
       <Tag
-        v-if="
-          props.maxTagCount !== undefined && select.selectedOptions.value.length > props.maxTagCount
-        "
+        v-if="layout.overflowCount > 0"
         size="sm"
-        >+{{ select.selectedOptions.value.length - props.maxTagCount }}</Tag
+        >+{{ layout.overflowCount }}</Tag
       >
     </template>
     <slot
-      v-else-if="select.selectedOptions.value[0]"
+      v-else-if="layout.showSingle"
       name="value"
       :option="select.selectedOptions.value[0]"
       >{{ select.selectedOptions.value[0]?.label }}</slot
     >
-    <span v-else-if="!select.snapshot.value.searchValue" :class="selectPlaceholderClassName">{{
+    <span v-else-if="layout.showPlaceholder" :class="selectPlaceholderClassName">{{
       props.placeholder
     }}</span>
   </div>

@@ -13,9 +13,6 @@
   let { ref = $bindable(null), class: className, style, children, ...rest }: ProgressTrackProps = $props()
   const { context } = getContext<ProgressContext>(progressContextKey)
   const current = $derived(context())
-  const trackStyle = $derived(
-    `height: ${current.thickness}px; ${style ?? ''}`
-  )
 </script>
 
 <div
@@ -24,7 +21,7 @@
   data-slot="progress-track"
   data-status={current.status}
   class={cn(progressLineClassName, className)}
-  style={trackStyle}
+  style={`height: ${current.thickness}px; ${style ?? ''}`}
 >
   {@render children?.()}
 </div>

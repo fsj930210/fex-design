@@ -1,5 +1,23 @@
 import type { InputNumberConstraints, InputNumberFormatter, InputNumberParser } from './types'
 
+export function canChangeInputNumber(
+  options: { disabled?: boolean | undefined; readOnly?: boolean | undefined },
+  event?: { defaultPrevented: boolean } | undefined,
+) {
+  return !options.disabled && !options.readOnly && !event?.defaultPrevented
+}
+
+export function canStepInputNumber(
+  value: number | undefined,
+  direction: 'increment' | 'decrement',
+  constraints: InputNumberConstraints,
+) {
+  if (value === undefined) return true
+  return direction === 'increment'
+    ? constraints.max === undefined || value < constraints.max
+    : constraints.min === undefined || value > constraints.min
+}
+
 export const defaultInputNumberParser: InputNumberParser = (text) => {
   const normalized = text.trim()
   if (normalized === '') return undefined

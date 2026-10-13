@@ -88,6 +88,7 @@
     "./primitive/skeleton": "./src/primitive/skeleton/index.ts",
     "./primitive/spinner": "./src/primitive/spinner/index.ts",
     "./ui/button": "./src/ui/button/index.tsx",
+    "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.tsx",
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
@@ -174,7 +175,8 @@
     "@types/react-dom": "latest",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@fex-design/docs-shared": "workspace:*"
   },
   "peerDependencies": {
     "react": "^19.0.0",

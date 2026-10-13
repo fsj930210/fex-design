@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { getNextViewDateByHeaderAction } from "@fex-design/core/date-picker/panel";
   import type { DatePickerHeaderAction } from "@fex-design/core/date-picker/types";
   import {
     datePickerHeaderDoubleIconClassName,
@@ -16,7 +15,6 @@
     calendarContextKey,
     type CalendarContextValue,
   } from "../calendar/context";
-  import { useHeaderOwner } from "./date-picker-header-owner";
 
   interface Props extends Omit<HTMLButtonAttributes, "children" | "type"> {
     action: DatePickerHeaderAction;
@@ -29,7 +27,6 @@
     onclick,
     ...rest
   }: Props = $props();
-  const owner = useHeaderOwner("DatePickerHeaderButton");
   const calendar = getContext<CalendarContextValue>(calendarContextKey);
   const isPrevious = $derived(action.startsWith("previous"));
   const isDouble = $derived(
@@ -39,13 +36,7 @@
   function runAction(event: MouseEvent) {
     onclick?.(event as Parameters<NonNullable<typeof onclick>>[0]);
     if (event.defaultPrevented) return;
-    const nextViewDate = getNextViewDateByHeaderAction(
-      calendar.getViewDate(),
-      action,
-      calendar.getPanel(),
-    );
-    calendar.setViewDate(nextViewDate);
-    owner.setViewDate(nextViewDate);
+    calendar.controller.navigate(action);
   }
 </script>
 

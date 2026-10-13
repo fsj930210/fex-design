@@ -17,24 +17,24 @@ import {
 defineOptions({ name: 'InputNumber', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{
-    value?: number
-    defaultValue?: number
-    min?: number
-    max?: number
-    step?: number
-    precision?: number
-    parser?: InputNumberParser
-    formatter?: InputNumberFormatter
-    disabled?: boolean
-    readOnly?: boolean
-    keyboard?: boolean
-    clearable?: boolean
-    controls?: boolean
-    size?: 'sm' | 'md' | 'lg'
-    variant?: 'outlined' | 'filled' | 'borderless' | 'underlined'
-    class?: string
-    classNames?: Partial<Record<InputNumberPart, string>>
-    styles?: Partial<Record<InputNumberPart, StyleValue>>
+    value?: number | undefined
+    defaultValue?: number | undefined
+    min?: number | undefined
+    max?: number | undefined
+    step?: number | undefined
+    precision?: number | undefined
+    parser?: InputNumberParser | undefined
+    formatter?: InputNumberFormatter | undefined
+    disabled?: boolean | undefined
+    readOnly?: boolean | undefined
+    keyboard?: boolean | undefined
+    clearable?: boolean | undefined
+    controls?: boolean | undefined
+    size?: 'sm' | 'md' | 'lg' | undefined
+    variant?: 'outlined' | 'filled' | 'borderless' | 'underlined' | undefined
+    class?: string | undefined
+    classNames?: Partial<Record<InputNumberPart, string>> | undefined
+    styles?: Partial<Record<InputNumberPart, StyleValue>> | undefined
   }>(),
   { step: 1, keyboard: true, clearable: false, controls: true },
 )
@@ -67,14 +67,14 @@ const controlled = Object.prototype.hasOwnProperty.call(
     :size="props.size"
     :variant="props.variant"
     :class="[props.classNames?.root, props.class]"
-    :style="props.styles?.root"
+    :style="[props.styles?.root, $attrs.style as StyleValue]"
     @change="(event, value) => emit('change', event, value)"
   >
     <InputPrefix v-if="slots.prefix" :class="props.classNames?.prefix" :style="props.styles?.prefix"
       ><slot name="prefix"
     /></InputPrefix>
     <InputNumberControl
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, style: undefined }"
       :class="props.classNames?.control"
       :style="props.styles?.control"
     />

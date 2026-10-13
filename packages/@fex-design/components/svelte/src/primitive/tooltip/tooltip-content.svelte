@@ -21,7 +21,6 @@
   }: Props = $props();
   const { contentId, overlay, snapshot } =
     getContext<TooltipContext>(tooltipContextKey);
-  const classes = $derived(cn(tooltipContentClassName, className));
   function content(element: HTMLDivElement) {
     overlay.setFloatingElement(element);
     return { destroy: () => overlay.setFloatingElement(null) };
@@ -39,7 +38,7 @@
     data-side={$snapshot.side}
     data-align={$snapshot.align}
     data-placement={$snapshot.placement}
-    class={classes}
+    class={cn(tooltipContentClassName, className)}
     onpointerenter={(event) => {
       onpointerenter?.(event);
       if (!event.defaultPrevented)

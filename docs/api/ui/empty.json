@@ -234,14 +234,14 @@
       "description": "对比默认图形、自定义图形和隐藏图形。"
     },
     {
-      "id": "styling",
-      "title": "结构化样式",
-      "description": "使用 classNames 和 styles 定制六个语义区域。"
-    },
-    {
       "id": "direction",
       "title": "LTR 与 RTL",
       "description": "使用中文 LTR 与阿拉伯语 RTL 对比内容方向和操作排列。"
+    },
+    {
+      "id": "styling",
+      "title": "结构化样式",
+      "description": "使用 classNames 和 styles 定制六个语义区域。"
     }
   ]
 }

@@ -10,6 +10,7 @@
   import type { SelectionValue } from "@fex-design/core/selection/types";
   import type { Snippet } from "svelte";
   import { setContext } from "svelte";
+  import { toStore } from "svelte/store";
   import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
   import Popover from "../popover/popover.svelte";
   import { selectContextKey, type SelectContext } from "./context";
@@ -100,6 +101,7 @@
   });
   let controller: ReturnType<typeof createSelectController>;
   controller = createSelectController({
+    get disabled() { return disabled; },
     selection,
     get options() {
       return filterSelectOptions(
@@ -123,7 +125,12 @@
     onOpenChange: (next) => onOpenChange?.(next),
     onSearch: (keyword) => onSearch?.(keyword),
   });
-  const snapshot = readableCoreStore(controller);
+  const storeSnapshot = readableCoreStore(controller);
+  const currentSnapshot = $derived.by(() => {
+    void $storeSnapshot;
+    return controller.getSnapshot();
+  });
+  const snapshot = toStore(() => currentSnapshot);
   const listId = `select-${crypto.randomUUID()}`;
   const context: SelectContext = {
     controller,
@@ -132,11 +139,11 @@
     visibleOptions: () =>
       filterSelectOptions(
         options,
-        controller.getSnapshot().searchValue,
+        currentSnapshot.searchValue,
         filterOption,
       ),
     selectedOptions: () => {
-      controller.getSnapshot();
+      void currentSnapshot.selectedValues;
       return selection.getSnapshot().values.map(
         (item) =>
           options.find((option) => option.value === item) ?? {
@@ -153,13 +160,14 @@
     status: () => status,
     virtual: () => virtual,
     listId,
-    removeValue: (item) => selection.unselect(item),
+    removeValue: (item) => { if (!disabled) selection.unselect(item); },
   };
   setContext(selectContextKey, context);
 </script>
 
 <Popover
   {...popoverProps}
+  {disabled}
   open={$snapshot.open}
   {defaultOpen}
   onOpenChange={(next) => (next ? controller.open() : controller.close())}

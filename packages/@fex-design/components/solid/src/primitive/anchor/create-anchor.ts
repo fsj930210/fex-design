@@ -49,6 +49,14 @@ export function createAnchor(options: CreateAnchorOptions = {}) {
   })
   const clickScrollGuard = createAnchorClickScrollGuard()
   const snapshot = createCoreStoreSignal(controller)
+  // Keep the external controller aligned with caller-owned controlled keys.
+  createEffect(() => {
+    const activeKeys = options.activeKeys?.()
+    controller.updateOptions({
+      ...(activeKeys === undefined ? {} : { activeKeys }),
+      ...(options.defaultActiveKeys === undefined ? {} : { defaultActiveKeys: options.defaultActiveKeys }),
+    })
+  })
   const activeKeys = createMemo(() => options.activeKeys?.() ?? snapshot().activeKeys)
   const orientation = () => options.orientation?.() ?? 'vertical'
   const visibleItems = createMemo(() =>

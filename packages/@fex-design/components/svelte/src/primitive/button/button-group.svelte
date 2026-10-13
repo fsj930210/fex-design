@@ -10,7 +10,6 @@
     children,
     ...rest
   }: ButtonGroupProps = $props();
-  const gap = $derived(typeof spacing === "number" ? `${spacing}px` : spacing);
 </script>
 
 <div
@@ -23,7 +22,7 @@
     className,
   )}
   {style}
-  style:gap
+  style:gap={typeof spacing === "number" ? `${spacing}px` : spacing}
 >
   {@render children?.()}
 </div>

@@ -13,9 +13,10 @@ import PrimitiveSpinnerContainer from '@fex-design/vue/primitive/spinner/spinner
 import SpinnerOverlay from '@fex-design/vue/primitive/spinner/spinner-overlay.vue'
 import SpinnerText from '@fex-design/vue/primitive/spinner/spinner-text.vue'
 defineOptions({ name: 'SpinnerContainer', inheritAttrs: false })
-const props = defineProps<
-  SpinnerContainerOptions & SpinnerOptions & { styles?: SpinnerStyles<StyleValue> }
->()
+const props = withDefaults(
+  defineProps<SpinnerContainerOptions & SpinnerOptions & { styles?: SpinnerStyles<StyleValue> }>(),
+  { spinning: undefined },
+)
 const attrs = useAttrs()
 const hasText = computed(() => Boolean(props.text))
 </script>
@@ -25,7 +26,7 @@ const hasText = computed(() => Boolean(props.text))
     v-bind="attrs"
     :size="props.size"
     :class="cn(attrs.class as string | undefined, props.classNames?.spinner)"
-    :style="props.styles?.spinner"
+    :style="[attrs.style as StyleValue, props.styles?.spinner]"
     ><slot name="indicator"
   /></Spinner>
   <PrimitiveSpinnerContainer
@@ -35,7 +36,7 @@ const hasText = computed(() => Boolean(props.text))
     :class="
       cn(spinnerContainerClassName, attrs.class as string | undefined, props.classNames?.root)
     "
-    :style="props.styles?.root"
+    :style="[attrs.style as StyleValue, props.styles?.root]"
   >
     <slot />
     <SpinnerOverlay

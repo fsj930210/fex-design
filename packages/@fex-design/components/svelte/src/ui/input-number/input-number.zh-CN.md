@@ -4,7 +4,7 @@
 
 ## 导入
 
-    import InputNumber from '@fex-design/svelte/ui/input-number'
+    import { InputNumber } from '@fex-design/svelte/ui/input-number'
 
 ## 组件
 

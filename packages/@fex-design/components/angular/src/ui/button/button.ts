@@ -6,6 +6,7 @@ import type {
   ButtonVariant,
 } from '@fex-design/core/button/types'
 import { buttonClassName, buttonSpinnerClassName } from '@fex-design/components-styles/button'
+import { NgTemplateOutlet } from '@angular/common'
 import { cn } from '@fex-design/utils'
 import {
   booleanAttribute,
@@ -24,9 +25,10 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
 @Component({
   selector: 'button[button]',
   standalone: true,
-  imports: [ButtonIcon, LoadingIcon],
+  imports: [ButtonIcon, LoadingIcon, NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    type: 'button',
     '[class]': 'hostClassName()',
     'data-slot': 'button',
     '[attr.data-variant]': 'variant()',

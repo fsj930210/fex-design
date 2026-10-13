@@ -1,7 +1,8 @@
 <script lang="ts">
   import { selectContentClassName } from "@fex-design/components-styles/select";
   import { cn } from "@fex-design/utils";
-  import type { Snippet } from "svelte";
+  import { getContext, type Snippet } from "svelte";
+  import { selectContextKey, type SelectContext } from "./context";
   import PopoverContent from "../popover/popover-content.svelte";
   import PopoverPortal from "../popover/popover-portal.svelte";
   import SelectList from "./select-list.svelte";
@@ -12,6 +13,7 @@
     emptyText,
     loadingText,
     footer,
+    popupRender,
   }: {
     class?: string | undefined;
     children?: Snippet | undefined;
@@ -19,14 +21,20 @@
     emptyText?: string;
     loadingText?: string;
     footer?: Snippet;
+    popupRender?: Snippet<[Snippet, { close: () => void }]>;
   } = $props();
+  const select = getContext<SelectContext>(selectContextKey);
+  const close = () => select.controller.close();
 </script>
+
+{#snippet menu()}
+  {#if children}{@render children()}{:else}<SelectList {option} {emptyText} {loadingText} />{/if}
+{/snippet}
 
 <PopoverPortal
   ><PopoverContent
     class={cn(selectContentClassName, className)}
-    style="width: var(--floating-reference-width); max-width: var(--floating-available-width);"
-    >{#if children}{@render children()}{:else}<SelectList {option} {emptyText} {loadingText}
-      />{/if}{@render footer?.()}</PopoverContent
+    style="max-width: var(--floating-available-width);"
+    >{#if popupRender}{@render popupRender(menu, { close })}{:else}{@render menu()}{/if}{@render footer?.()}</PopoverContent
   ></PopoverPortal
 >

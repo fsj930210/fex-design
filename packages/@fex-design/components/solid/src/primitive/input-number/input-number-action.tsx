@@ -1,3 +1,4 @@
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import {
   inputNumberDecrementClassName,
   inputNumberIncrementClassName,
@@ -21,11 +22,11 @@ export function InputNumberIncrement(props: ParentProps<ButtonProps>) {
       disabled={props.disabled || !n.canIncrement()}
       class={cn(inputNumberIncrementClassName, local.class)}
       onPointerDown={(e) => {
-        if (typeof local.onPointerDown === 'function') local.onPointerDown(e)
+        callEventHandler(local.onPointerDown, e)
         if (!e.defaultPrevented) e.preventDefault()
       }}
       onClick={(e) => {
-        if (typeof local.onClick === 'function') local.onClick(e)
+        callEventHandler(local.onClick, e)
         if (!e.defaultPrevented) n.increment(e)
       }}
     >
@@ -45,11 +46,11 @@ export function InputNumberDecrement(props: ParentProps<ButtonProps>) {
       disabled={props.disabled || !n.canDecrement()}
       class={cn(inputNumberDecrementClassName, local.class)}
       onPointerDown={(e) => {
-        if (typeof local.onPointerDown === 'function') local.onPointerDown(e)
+        callEventHandler(local.onPointerDown, e)
         if (!e.defaultPrevented) e.preventDefault()
       }}
       onClick={(e) => {
-        if (typeof local.onClick === 'function') local.onClick(e)
+        callEventHandler(local.onClick, e)
         if (!e.defaultPrevented) n.decrement(e)
       }}
     >

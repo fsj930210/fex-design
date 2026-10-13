@@ -23,16 +23,19 @@ const inGroup = computed(() => group !== null && currentValue.value !== undefine
 watchEffect(() => {
   if (control.value) control.value.indeterminate = props.indeterminate === true
 })
+const internalChecked = ref(props.defaultChecked)
 const currentChecked = computed(() =>
   inGroup.value
     ? group!.value.value.includes(currentValue.value!)
-    : (props.checked ?? props.defaultChecked),
+    : (props.checked ?? internalChecked.value),
 )
 const currentDisabled = computed(() =>
   Boolean(props.disabled || root?.disabled.value || group?.disabled.value),
 )
 function change(event: Event) {
   emit('change', event)
+  if (!event.defaultPrevented && !inGroup.value && props.checked === undefined)
+    internalChecked.value = (event.target as HTMLInputElement).checked
   if (!(event as Event).defaultPrevented && inGroup.value) group!.toggle(currentValue.value!)
 }
 </script>

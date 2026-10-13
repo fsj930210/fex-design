@@ -80,7 +80,7 @@ export class SliderRange {
       convertValueToPercentage(value, state.min, state.max),
     )
     const start = state.values.length > 1 ? Math.min(...points) : 0
-    const finish = Math.max(...points)
+    const finish = Math.max(0, ...points)
     const reversed = isSliderReversed(state.orientation, state.direction, state.reverse)
     const from = reversed ? 100 - finish : start
     const to = reversed ? start : 100 - finish

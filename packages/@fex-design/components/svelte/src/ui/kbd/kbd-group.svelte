@@ -8,9 +8,8 @@
     children?: Snippet;
   }
   let { class: className, children, ...rest }: Props = $props();
-  const classList = $derived(cn(kbdGroupClassName, className));
 </script>
 
-<div {...rest} data-slot="kbd-group" class={classList}>
+<div {...rest} data-slot="kbd-group" class={cn(kbdGroupClassName, className)}>
   {@render children?.()}
 </div>

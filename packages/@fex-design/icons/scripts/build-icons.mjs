@@ -88,8 +88,12 @@ for (const file of svgFiles) {
   const angularHtmlPath = path.join(componentsDir, "angular/src/icons", `${baseName}.html`);
   const angularTsPath = path.join(componentsDir, "angular/src/icons", `${baseName}.ts`);
   fs.mkdirSync(path.dirname(angularHtmlPath), { recursive: true });
-  fs.writeFileSync(angularHtmlPath, rawSvg + '\n');
-  const angularCode = `import { ChangeDetectionStrategy, Component } from "@angular/core";\n\n@Component({\n  selector: "${baseName}-icon",\n  standalone: true,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: { class: "contents" },\n  templateUrl: "./${baseName}.html",\n})\nexport class ${componentName} {}\n`;
+  const angularSvg = rawSvg
+    .replace(/\s+width="[^"]*"/g, "")
+    .replace(/\s+height="[^"]*"/g, "")
+    .replace(/<svg/, '<svg width="100%" height="100%" class="size-full"');
+  fs.writeFileSync(angularHtmlPath, angularSvg + '\n');
+  const angularCode = `import { ChangeDetectionStrategy, Component } from "@angular/core";\nimport { createHostClassName } from "@fex-design/angular/signals/host-class";\n\n@Component({\n  selector: "${baseName}-icon",\n  standalone: true,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: {\n    "[class]": "hostClassName()",\n    "aria-hidden": "true",\n  },\n  templateUrl: "./${baseName}.html",\n})\nexport class ${componentName} {\n  protected readonly hostClassName = createHostClassName("inline-flex items-center justify-center shrink-0 size-6");\n}\n`;
   fs.writeFileSync(angularTsPath, angularCode);
 }
 

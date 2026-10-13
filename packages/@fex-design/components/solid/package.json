@@ -87,6 +87,7 @@
     "./primitive/skeleton": "./src/primitive/skeleton/index.ts",
     "./primitive/spinner": "./src/primitive/spinner/index.ts",
     "./ui/button": "./src/ui/button/index.tsx",
+    "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.tsx",
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
@@ -126,6 +127,8 @@
     "./icons/star": "./src/icons/star.tsx",
     "./icons/warning": "./src/icons/warning.tsx",
     "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts",
+    "./primitives/merge-style": "./src/primitives/merge-style.ts",
+    "./primitives/call-event-handler": "./src/primitives/call-event-handler.ts",
     "./primitives/create-carousel": "./src/primitives/create-carousel.ts",
     "./primitives/create-data-table": "./src/primitives/create-data-table.ts",
     "./primitives/create-date-utils": "./src/primitives/create-date-utils.ts",
@@ -159,7 +162,8 @@
   },
   "devDependencies": {
     "solid-js": "1.9.15",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@fex-design/docs-shared": "workspace:*"
   },
   "peerDependencies": {
     "solid-js": "^1.9.0"

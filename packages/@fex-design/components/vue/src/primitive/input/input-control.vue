@@ -27,7 +27,8 @@ function setElement(value: Element | ComponentPublicInstance | null) {
   inputContext.setFocusElement(element.value)
 }
 defineExpose({
-  focus: () => element.value?.focus(),
+  element,
+  focus: (options?: FocusOptions) => element.value?.focus(options),
   blur: () => element.value?.blur(),
   select: () => element.value?.select(),
 })

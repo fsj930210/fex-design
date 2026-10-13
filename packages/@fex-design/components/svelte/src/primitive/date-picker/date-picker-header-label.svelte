@@ -25,24 +25,23 @@
   const calendar = getContext<CalendarContextValue>(calendarContextKey);
   let hovered = $state(false);
   const visible = $derived(
-    getDatePickerHeaderLabelParts(owner.picker, calendar.getPanel()).includes(
+    getDatePickerHeaderLabelParts(owner.picker, calendar.getState().panel).includes(
       part,
     ),
   );
   const label = $derived.by(() => {
-    if (part === "month") return `${calendar.getViewDate().month}月`;
-    const decadeStart = Math.floor(calendar.getViewDate().year / 10) * 10;
-    return calendar.getPanel() === "decade"
+    if (part === "month") return `${calendar.getState().viewDate.month}月`;
+    const decadeStart = Math.floor(calendar.getState().viewDate.year / 10) * 10;
+    return calendar.getState().panel === "decade"
       ? `${decadeStart}-${decadeStart + 9}年`
-      : `${calendar.getViewDate().year}年`;
+      : `${calendar.getState().viewDate.year}年`;
   });
 
   function selectPanel(event: MouseEvent) {
     onclick?.(event as Parameters<NonNullable<typeof onclick>>[0]);
     if (event.defaultPrevented) return;
     const nextPanel = getNextPanelByHeaderLabel(part);
-    calendar.setPanel(nextPanel);
-    owner.setPanel(nextPanel);
+    calendar.controller.setPanel(nextPanel);
   }
 </script>
 

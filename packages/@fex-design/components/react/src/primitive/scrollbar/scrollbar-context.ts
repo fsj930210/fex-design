@@ -1,15 +1,12 @@
 import { createContext, use } from 'react'
+import type { ScrollbarOverflow } from '@fex-design/core/scrollbar/types'
 
-export type Overflow = 'auto' | 'hidden'
 export type ScrollbarContextValue = {
-  rootRef: { current: HTMLDivElement | null }
-  overflow?: { x?: Overflow; y?: Overflow } | undefined
+  overflow?: ScrollbarOverflow | undefined
 }
 
-export const ScrollbarContext = createContext<ScrollbarContextValue | null>(null)
+export const ScrollbarContext = createContext<ScrollbarContextValue>({})
 
 export function useScrollbarContext() {
-  const context = use(ScrollbarContext)
-  if (!context) throw new Error('Scrollbar parts must be used inside ScrollbarRoot.')
-  return context
+  return use(ScrollbarContext)
 }

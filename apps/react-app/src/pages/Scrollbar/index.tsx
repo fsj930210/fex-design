@@ -57,7 +57,11 @@ export function ScrollbarPage() {
               <ScrollbarViewport overflow={{ x: 'hidden', y: 'auto' }}>
                 <VerticalContent />
               </ScrollbarViewport>
-              <ScrollbarBar axis="y" />
+              <ScrollbarBar axis="y">
+                <ScrollbarTrack axis="y">
+                  <ScrollbarThumb axis="y" />
+                </ScrollbarTrack>
+              </ScrollbarBar>
             </ScrollbarRoot>
           </Card>
           <Card title="Horizontal" description="Only declare the horizontal Bar.">
@@ -74,7 +78,11 @@ export function ScrollbarPage() {
                   ))}
                 </div>
               </ScrollbarViewport>
-              <ScrollbarBar axis="x" />
+              <ScrollbarBar axis="x">
+                <ScrollbarTrack axis="x">
+                  <ScrollbarThumb axis="x" />
+                </ScrollbarTrack>
+              </ScrollbarBar>
             </ScrollbarRoot>
           </Card>
           <Card
@@ -94,8 +102,16 @@ export function ScrollbarPage() {
                   ))}
                 </div>
               </ScrollbarViewport>
-              <ScrollbarBar axis="y" />
-              <ScrollbarBar axis="x" />
+              <ScrollbarBar axis="y">
+                <ScrollbarTrack axis="y">
+                  <ScrollbarThumb axis="y" />
+                </ScrollbarTrack>
+              </ScrollbarBar>
+              <ScrollbarBar axis="x">
+                <ScrollbarTrack axis="x">
+                  <ScrollbarThumb axis="x" />
+                </ScrollbarTrack>
+              </ScrollbarBar>
               <ScrollbarCorner />
             </ScrollbarRoot>
           </Card>
@@ -154,7 +170,11 @@ export function ScrollbarPage() {
                 </div>
               </div>
             </ScrollbarViewport>
-            <ScrollbarBar axis="y" />
+            <ScrollbarBar axis="y">
+              <ScrollbarTrack axis="y">
+                <ScrollbarThumb axis="y" />
+              </ScrollbarTrack>
+            </ScrollbarBar>
           </ScrollbarRoot>
         </Card>
         <Card
@@ -190,8 +210,16 @@ export function ScrollbarPage() {
                 </tbody>
               </table>
             </ScrollbarViewport>
-            <ScrollbarBar axis="y" className="top-12" />
-            <ScrollbarBar axis="x" />
+            <ScrollbarBar axis="y" className="top-12">
+              <ScrollbarTrack axis="y">
+                <ScrollbarThumb axis="y" />
+              </ScrollbarTrack>
+            </ScrollbarBar>
+            <ScrollbarBar axis="x">
+              <ScrollbarTrack axis="x">
+                <ScrollbarThumb axis="x" />
+              </ScrollbarTrack>
+            </ScrollbarBar>
             <ScrollbarCorner />
           </ScrollbarRoot>
         </Card>

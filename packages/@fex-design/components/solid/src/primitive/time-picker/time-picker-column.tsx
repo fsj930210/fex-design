@@ -7,7 +7,7 @@ import {
 } from '@fex-design/components-styles/time-picker'
 import { cn } from '@fex-design/utils'
 import { createEffect, For, splitProps, type JSX } from 'solid-js'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar'
+import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar'
 import { useTimePickerContext } from './time-picker-context'
 
 export type ColumnValue = number | TimePeriod
@@ -71,7 +71,7 @@ export function TimePickerColumn<TValue extends ColumnValue>(props: TimePickerCo
         role="listbox"
         tabIndex={isDisabled() ? -1 : 0}
         aria-disabled={isDisabled() || undefined}
-        overflowX="hidden"
+        overflow={{ x: 'hidden' }}
         class={timePickerColumnViewportClassName}
         onKeyDown={(event) => {
           if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
@@ -115,7 +115,11 @@ export function TimePickerColumn<TValue extends ColumnValue>(props: TimePickerCo
         </For>
         <div aria-hidden="true" class={timePickerColumnSpacerClassName} />
       </ScrollbarViewport>
-      <ScrollbarBar axis="y" />
+      <ScrollbarBar axis="y">
+        <ScrollbarTrack axis="y">
+          <ScrollbarThumb axis="y" />
+        </ScrollbarTrack>
+      </ScrollbarBar>
     </ScrollbarRoot>
   )
 }

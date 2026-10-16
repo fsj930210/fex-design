@@ -5,20 +5,21 @@
   } from "@fex-design/components-styles/cascader";
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
-  import Scrollbar from "../scrollbar/scrollbar.svelte";
-  import ScrollbarBar from "../scrollbar/scrollbar-bar.svelte";
-  import ScrollbarViewport from "../scrollbar/scrollbar-viewport.svelte";
+  import { ScrollbarRoot, ScrollbarBar, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar';
   let { class: className, children }: { class?: string; children?: Snippet } =
     $props();
 </script>
 
 <div role="listbox" class={cn(cascaderColumnClassName, className)}>
-  <Scrollbar class="h-full"
+  <ScrollbarRoot class="h-full"
     ><ScrollbarViewport
-      overflowX="hidden"
-      overflowY="auto"
+      overflow={{ x: 'hidden', y: 'auto' }}
       class={cascaderColumnViewportClassName}
       >{@render children?.()}</ScrollbarViewport
-    ><ScrollbarBar axis="y" /></Scrollbar
+    ><ScrollbarBar axis="y">
+      <ScrollbarTrack axis="y">
+        <ScrollbarThumb axis="y" />
+      </ScrollbarTrack>
+    </ScrollbarBar></ScrollbarRoot
   >
 </div>

@@ -1,0 +1,7 @@
+<div scrollbar class="h-48 w-72 rounded-md border" autoHide="never" [overflow]="{ x: 'hidden' }">
+  <div scrollbarViewport [overflow]="{ y: 'auto' }">
+    <div class="grid gap-3 p-4">
+        @for (line of lines; track line) {<p>{{ line }}</p>}
+      </div>
+  </div>
+</div>

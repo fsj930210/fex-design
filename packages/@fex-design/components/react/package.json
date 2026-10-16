@@ -86,6 +86,7 @@
     "./primitive/progress": "./src/primitive/progress/index.ts",
     "./primitive/separator": "./src/primitive/separator/index.tsx",
     "./ui/separator": "./src/ui/separator/index.ts",
+    "./ui/scrollbar": "./src/ui/scrollbar/index.ts",
     "./primitive/skeleton": "./src/primitive/skeleton/index.ts",
     "./primitive/spinner": "./src/primitive/spinner/index.ts",
     "./ui/button": "./src/ui/button/index.tsx",

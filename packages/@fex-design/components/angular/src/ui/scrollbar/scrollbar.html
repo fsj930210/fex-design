@@ -1,0 +1,15 @@
+<ng-content select="[scrollbarViewport]">
+  <div scrollbarViewport><ng-content /></div>
+</ng-content>
+@for (axis of axes; track axis) {
+  @if (resolved()[axis] === 'auto') {
+    <div scrollbarBar [axis]="axis" [class]="classNames()?.[axis === 'x' ? 'barX' : 'barY']" [style]="styles()?.[axis === 'x' ? 'barX' : 'barY']">
+      <div scrollbarTrack [axis]="axis" [class]="classNames()?.[axis === 'x' ? 'trackX' : 'trackY']" [style]="styles()?.[axis === 'x' ? 'trackX' : 'trackY']">
+        <div scrollbarThumb [axis]="axis" [class]="classNames()?.[axis === 'x' ? 'thumbX' : 'thumbY']" [style]="styles()?.[axis === 'x' ? 'thumbX' : 'thumbY']"></div>
+      </div>
+    </div>
+  }
+}
+@if (resolved().x === 'auto' && resolved().y === 'auto') {
+  <div scrollbarCorner [class]="classNames()?.corner" [style]="styles()?.corner"></div>
+}

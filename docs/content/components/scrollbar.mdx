@@ -1,0 +1,35 @@
+---
+title: Scrollbar
+description: 保留原生滚动的自定义覆盖滚动条。
+---
+
+## 何时使用
+
+需要统一列表、面板或局部内容区域的滚动条外观，并控制滚动条的显示时机时使用。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" />
+
+<ApiSection layer="primitive" title="Primitive API">
+  <ApiComposition layer="primitive">
+    ```text
+    ScrollbarRoot
+    ├── ScrollbarViewport
+    ├── ScrollbarBar (axis="x" / "y")
+    │   └── ScrollbarTrack
+    │       └── ScrollbarThumb
+    └── ScrollbarCorner (optional)
+    ```
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+## CSS Variables
+
+<CssVariables />

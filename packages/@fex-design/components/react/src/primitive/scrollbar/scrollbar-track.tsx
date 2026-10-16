@@ -1,9 +1,9 @@
 import type { ScrollbarAxis } from '@fex-design/core/scrollbar/types'
 import { scrollbarTrackClassName } from '@fex-design/components-styles/scrollbar'
 import { cn } from '@fex-design/utils'
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes, RefAttributes } from 'react'
 
-export interface ScrollbarTrackProps extends HTMLAttributes<HTMLDivElement> {
+export interface ScrollbarTrackProps extends HTMLAttributes<HTMLDivElement>, RefAttributes<HTMLDivElement> {
   axis: ScrollbarAxis
 }
 

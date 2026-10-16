@@ -1,5 +1,5 @@
-<div fexScrollbarRoot class="size-full">
-  <div #scrollViewport fexScrollbarViewport overflowX="hidden" [class]="viewportClassName">
+<div scrollbarRoot class="size-full">
+  <div #scrollViewport scrollbarViewport [overflow]="{ x: 'hidden' }" [class]="viewportClassName">
     @for (item of options(); track item.value) {
     <button
       #itemElement
@@ -20,7 +20,7 @@
     }
     <div aria-hidden="true" [class]="spacerClassName"></div>
   </div>
-  <div fexScrollbarBar axis="y">
-    <div fexScrollbarTrack><div fexScrollbarThumb axis="y"></div></div>
+  <div scrollbarBar axis="y">
+    <div scrollbarTrack axis="y"><div scrollbarThumb axis="y"></div></div>
   </div>
 </div>

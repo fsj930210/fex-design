@@ -6,7 +6,8 @@
     "./model": "./src/model.ts",
     "./*-manifest": "./src/*-manifest.ts",
     "./preview-protocol": "./src/preview-protocol.ts",
-    "./calendar-demo-data": "./src/calendar-demo-data.ts"
+    "./calendar-demo-data": "./src/calendar-demo-data.ts",
+    "./scrollbar-demo": "./src/scrollbar-demo.ts"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

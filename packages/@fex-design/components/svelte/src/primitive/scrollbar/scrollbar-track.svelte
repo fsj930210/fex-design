@@ -7,13 +7,16 @@
   interface Props extends HTMLAttributes<HTMLDivElement> {
     axis: ScrollbarAxis;
     children?: Snippet;
+    element?: HTMLDivElement | undefined;
   }
-  let { axis: _axis, children, class: className, ...rest }: Props = $props();
+  let { axis, children, element = $bindable(), class: className, ...rest }: Props = $props();
 </script>
 
 <div
   {...rest}
+  bind:this={element}
   data-slot="scrollbar-track"
+  data-axis={axis}
   class={cn(scrollbarTrackClassName, className)}
 >
   {@render children?.()}

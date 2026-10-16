@@ -1,36 +1,26 @@
-import { createScrollbarController } from '@fex-design/core/scrollbar/create-scrollbar-controller'
 import type {
-  ScrollbarAutoHide,
-  ScrollbarClickScroll,
+  ScrollbarRootOptions,
   ScrollbarScrollDetail,
-  ScrollbarVisibility,
 } from '@fex-design/core/scrollbar/types'
 import { scrollbarRootClassName } from '@fex-design/components-styles/scrollbar'
 import { cn } from '@fex-design/utils'
 import {
-  useEffect,
-  useEffectEvent,
-  useRef,
+  useMemo,
   type HTMLAttributes,
   type Ref,
 } from 'react'
 import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
-import { ScrollbarContext, type Overflow } from './scrollbar-context'
+import { ScrollbarContext } from './scrollbar-context'
+import { useScrollbar } from './use-scrollbar'
 
-export interface ScrollbarRootProps extends HTMLAttributes<HTMLDivElement> {
-  overflow?: { x?: Overflow; y?: Overflow }
-  visibility?: ScrollbarVisibility
-  autoHide?: ScrollbarAutoHide
-  autoHideDelay?: number
-  dragScroll?: boolean
-  clickScroll?: ScrollbarClickScroll
-  minThumbSize?: number
-  disabled?: boolean
+export interface ScrollbarRootProps extends HTMLAttributes<HTMLDivElement>, Omit<ScrollbarRootOptions, 'onScroll'> {
   ref?: Ref<HTMLDivElement>
   onScrollChange?: (detail: ScrollbarScrollDetail) => void
 }
 
 export function ScrollbarRoot({
+  showTrack = false,
+  showCorner,
   overflow,
   visibility,
   autoHide,
@@ -45,33 +35,22 @@ export function ScrollbarRoot({
   children,
   ...props
 }: ScrollbarRootProps) {
-  const rootRef = useRef<HTMLDivElement | null>(null)
+  const { rootRef } = useScrollbar({
+    visibility, autoHide, autoHideDelay, dragScroll, clickScroll, minThumbSize, disabled,
+    onScroll: onScrollChange,
+  })
   const composedRef = useComposedRef(rootRef, ref)
-  const emitScrollChange = useEffectEvent((detail: ScrollbarScrollDetail) =>
-    onScrollChange?.(detail),
-  )
-
-  useEffect(() => {
-    if (!rootRef.current) return
-    const controller = createScrollbarController({
-      visibility,
-      autoHide,
-      autoHideDelay,
-      dragScroll,
-      clickScroll,
-      minThumbSize,
-      disabled,
-      onScroll: emitScrollChange,
-    })
-    return controller.connect(rootRef.current)
-  }, [visibility, autoHide, autoHideDelay, dragScroll, clickScroll, minThumbSize, disabled])
+  // Keep context stable when unrelated Root props change; only axes affect descendants.
+  const context = useMemo(() => ({ overflow: { x: overflow?.x, y: overflow?.y } }), [overflow?.x, overflow?.y])
 
   return (
-    <ScrollbarContext value={{ rootRef, overflow }}>
+    <ScrollbarContext value={context}>
       <div
         {...props}
         ref={composedRef}
         data-slot="scrollbar-root"
+        data-show-track={showTrack}
+        data-show-corner={showCorner ?? showTrack}
         className={cn(scrollbarRootClassName, className)}
       >
         {children}

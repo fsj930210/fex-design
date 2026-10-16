@@ -13,9 +13,7 @@
   import { getContext, tick } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { timePickerContextKey, type TimePickerContext } from "./context";
-  import ScrollbarRoot from "../scrollbar/scrollbar.svelte";
-  import ScrollbarViewport from "../scrollbar/scrollbar-viewport.svelte";
-  import ScrollbarBar from "../scrollbar/scrollbar-bar.svelte";
+  import { ScrollbarRoot, ScrollbarViewport, ScrollbarBar, ScrollbarTrack, ScrollbarThumb } from '../scrollbar';
 
   type ColumnValue = number | TimePeriod;
   interface Props extends Omit<
@@ -88,7 +86,7 @@
     role="listbox"
     tabindex={resolvedDisabled ? -1 : 0}
     aria-disabled={resolvedDisabled || undefined}
-    overflowX="hidden"
+    overflow={{ x: 'hidden' }}
     class={timePickerColumnViewportClassName}
     onkeydown={(event) => {
       onkeydown?.(event);
@@ -124,5 +122,9 @@
     {/each}
     <div aria-hidden="true" class={timePickerColumnSpacerClassName}></div>
   </ScrollbarViewport>
-  <ScrollbarBar axis="y" />
+  <ScrollbarBar axis="y">
+    <ScrollbarTrack axis="y">
+      <ScrollbarThumb axis="y" />
+    </ScrollbarTrack>
+  </ScrollbarBar>
 </ScrollbarRoot>

@@ -1,0 +1,299 @@
+{
+  "name": "Scrollbar",
+  "slug": "scrollbar",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "保留原生滚动的自定义覆盖滚动条；Bar 仅渲染传入内容，Track/Thumb 由调用方显式组合。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/scrollbar",
+    "vue": "@fex-design/vue/primitive/scrollbar",
+    "solid": "@fex-design/solid/primitive/scrollbar",
+    "svelte": "@fex-design/svelte/primitive/scrollbar",
+    "angular": "@fex-design/angular/primitive/scrollbar"
+  },
+  "props": [],
+  "events": [],
+  "cssVariables": [
+    {"name":"--scrollbar-size","description":"轨道与滑块厚度，默认 6px；Bar 和交角尺寸额外计入两侧 padding。"},
+    {"name":"--scrollbar-padding","description":"Bar 内边距，默认 1px。"},
+    {"name":"--scrollbar-radius","description":"轨道与滑块圆角，默认主题 radius-md。"},
+    {"name":"--scrollbar-track-color","description":"显示轨道时的背景色，默认主题 border 色。"},
+    {"name":"--scrollbar-thumb-color","description":"滑块背景色，默认 foreground 的 55%。"},
+    {"name":"--scrollbar-thumb-hover-color","description":"滑块悬停色，默认 foreground 的 75%。"},
+    {"name":"--scrollbar-thumb-active-color","description":"拖动中滑块背景色，默认 primary。"},
+    {"name":"--scrollbar-corner-color","description":"显示交角时的背景色，默认跟随轨道背景色。"},
+    {"name":"--scrollbar-transition-duration","description":"Bar 显隐过渡时长，默认 150ms。"}
+  ],
+  "demos": [
+    {"id":"basic","title":"纵向滚动","description":"仅开启纵向滚动，使用默认部件组合。"},
+    {"id":"horizontal","title":"横向滚动","description":"关闭纵向滚动，横向浏览多个面板。"},
+    {"id":"both-axes","title":"双轴滚动","description":"同时显示横向、纵向滚动条及交角。"},
+    {"id":"direction","title":"阅读方向","description":"对比 LTR 与 RTL 的滚动条位置和横向交互。"},
+    {"id":"track-visibility","title":"显示轨道","description":"showTrack 默认关闭；开启后显示轨道与交角背景，不改变滑块尺寸和交互。"},
+    {"id":"configuration","title":"动态配置","description":"使用 Select、InputNumber、Checkbox 调整隐藏模式、延迟和禁用状态，观察滚动位置。"},
+    {"id":"visibility","title":"可见策略","description":"对比 auto、always、hidden 及内容不足一屏的情况。"},
+    {"id":"interaction","title":"轨道与滑块交互","description":"点击轨道翻页或跳转，设置最小滑块尺寸，并关闭拖动。"},
+    {"id":"overflow","title":"按轴覆盖","description":"Viewport 按轴覆盖 Root，未设置的轴继承 Root 配置。"},
+    {"id":"parts","title":"Track 与 Thumb","description":"显式组合 Bar、Track、Thumb 和 Corner，保持默认外观。"},
+    {"id":"css-variables","title":"CSS 变量","description":"通过组件公开变量统一尺寸、圆角、内边距、颜色和过渡时长。"},
+    {"id":"viewport","title":"原生容器与程序化滚动","description":"透传焦点与键盘属性，通过原生元素引用执行 scrollTo、scrollBy。"},
+    {"id":"table","title":"表格与滚动条位置","description":"单个原生表格固定换行表头，测量高度后调整纵向轨道起点。"},
+    {"id":"custom-logic","title":"自定义逻辑","description":"使用独立滚动逻辑连接自定义容器与滚动条。"}
+  ],
+  "components": [
+    {
+      "name": "ScrollbarRoot",
+      "slug": "scrollbar-root",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "继承原生 div 的属性、事件和样式。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/scrollbar",
+        "vue": "@fex-design/vue/primitive/scrollbar",
+        "solid": "@fex-design/solid/primitive/scrollbar",
+        "svelte": "@fex-design/svelte/primitive/scrollbar",
+        "angular": "@fex-design/angular/primitive/scrollbar"
+      },
+      "props": [
+        {"name":"showTrack","type":"boolean","default":false,"description":"显示轨道背景，默认 false；showCorner 未设置时也跟随此值。","editor":"boolean"},
+        {"name":"showCorner","type":"boolean","description":"交角背景是否显示；未设置时跟随 showTrack，显式 true/false 可覆盖。只影响背景，保留交角空间。","editor":"boolean"},
+        {"name":"overflow","type":"{ x?: 'auto' | 'hidden'; y?: 'auto' | 'hidden' }","default":{"x":"auto","y":"auto"},"description":"默认滚动轴策略；Viewport 可以逐轴覆盖。","editor":"json"},
+        {"name":"visibility","type":"'auto' | 'always' | 'hidden'","default":"auto","description":"滚动条可见策略，优先于 autoHide。","editor":"enum","options":["auto","always","hidden"]},
+        {"name":"autoHide","type":"'never' | 'scroll' | 'move' | 'leave'","default":"scroll","description":"持续显示、滚动后隐藏、移动后隐藏或离开后隐藏。","editor":"enum","options":["never","scroll","move","leave"]},
+        {"name":"autoHideDelay","type":"number","default":900,"description":"停止活动或指针离开后隐藏的延迟，单位毫秒。","editor":"number"},
+        {"name":"dragScroll","type":"boolean","default":true,"description":"允许拖动滑块。","editor":"boolean"},
+        {"name":"clickScroll","type":"false | 'page' | 'jump'","default":false,"description":"轨道点击行为：禁用、翻页或跳转。","editor":"enum","options":[false,"page","jump"]},
+        {"name":"minThumbSize","type":"number","default":24,"description":"滑块最小尺寸，受轨道尺寸限制。","editor":"number"},
+        {"name":"disabled","type":"boolean","default":false,"description":"禁用自定义滚动条交互，保留原生与程序化滚动。","editor":"boolean"},
+        {"name":"class","type":"string","description":"合并到原生 div 的自定义类名。"},
+        {"name":"style","type":"FrameworkStyle","description":"原生 div 样式。"}
+      ],
+      "events": [
+        {"name":"scrollChange","parameters":[{"name":"detail","type":"ScrollbarScrollDetail"}],"description":"每次原生 Viewport scroll 事件通知一次，参数含 scrollLeft、scrollTop。"}
+      ],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {"name":"showTrack","type":"boolean","default":false,"description":"显示轨道背景，默认 false；showCorner 未设置时也跟随此值。","editor":"boolean"},
+            {"name":"showCorner","type":"boolean","description":"交角背景是否显示；未设置时跟随 showTrack，显式 true/false 可覆盖。只影响背景，保留交角空间。","editor":"boolean"},
+            {"name":"overflow","type":"{ x?: 'auto' | 'hidden'; y?: 'auto' | 'hidden' }","default":{"x":"auto","y":"auto"},"description":"默认滚动轴策略；Viewport 可以逐轴覆盖。","editor":"json"},
+            {"name":"visibility","type":"'auto' | 'always' | 'hidden'","default":"auto","description":"滚动条可见策略，优先于 autoHide。","editor":"enum","options":["auto","always","hidden"]},
+            {"name":"autoHide","type":"'never' | 'scroll' | 'move' | 'leave'","default":"scroll","description":"持续显示、滚动后隐藏、移动后隐藏或离开后隐藏。","editor":"enum","options":["never","scroll","move","leave"]},
+            {"name":"autoHideDelay","type":"number","default":900,"description":"停止活动或指针离开后隐藏的延迟，单位毫秒。","editor":"number"},
+            {"name":"dragScroll","type":"boolean","default":true,"description":"允许拖动滑块。","editor":"boolean"},
+            {"name":"clickScroll","type":"false | 'page' | 'jump'","default":false,"description":"轨道点击行为：禁用、翻页或跳转。","editor":"enum","options":[false,"page","jump"]},
+            {"name":"minThumbSize","type":"number","default":24,"description":"滑块最小尺寸，受轨道尺寸限制。","editor":"number"},
+            {"name":"disabled","type":"boolean","default":false,"description":"禁用自定义滚动条交互，保留原生与程序化滚动。","editor":"boolean"},
+            {"name":"className","type":"string","description":"合并到原生 div 的自定义类名。"},
+            {"name":"style","type":"CSSProperties","description":"原生 div 样式。"}
+          ],
+          "events": [
+            {"name":"onScrollChange","parameters":[{"name":"detail","type":"ScrollbarScrollDetail"}],"description":"每次原生 Viewport scroll 事件通知一次，参数含 scrollLeft、scrollTop。"}
+          ]
+        },
+        "vue": {
+          "events": [
+            {"name":"scrollChange","parameters":[{"name":"detail","type":"ScrollbarScrollDetail"}],"description":"每次原生 Viewport scroll 事件通知一次，参数含 scrollLeft、scrollTop。"}
+          ]
+        },
+        "solid": {
+          "events": [
+            {"name":"onScrollChange","parameters":[{"name":"detail","type":"ScrollbarScrollDetail"}],"description":"每次原生 Viewport scroll 事件通知一次，参数含 scrollLeft、scrollTop。"}
+          ]
+        },
+        "svelte": {
+          "events": [
+            {"name":"onScrollChange","parameters":[{"name":"detail","type":"ScrollbarScrollDetail"}],"description":"每次原生 Viewport scroll 事件通知一次，参数含 scrollLeft、scrollTop。"}
+          ]
+        },
+        "angular": {
+          "events": [
+            {"name":"scrollChange","parameters":[{"name":"detail","type":"ScrollbarScrollDetail"}],"description":"每次原生 Viewport scroll 事件通知一次，参数含 scrollLeft、scrollTop。"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "ScrollbarViewport",
+      "slug": "scrollbar-viewport",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "继承原生 div 的属性、事件和样式。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/scrollbar",
+        "vue": "@fex-design/vue/primitive/scrollbar",
+        "solid": "@fex-design/solid/primitive/scrollbar",
+        "svelte": "@fex-design/svelte/primitive/scrollbar",
+        "angular": "@fex-design/angular/primitive/scrollbar"
+      },
+      "props": [
+        {"name":"overflow","type":"{ x?: 'auto' | 'hidden'; y?: 'auto' | 'hidden' }","default":{"x":"auto","y":"auto"},"description":"默认滚动轴策略；Viewport 可以逐轴覆盖。","editor":"json"},
+        {"name":"class","type":"string","description":"合并到原生 div 的自定义类名。"},
+        {"name":"style","type":"FrameworkStyle","description":"原生 div 样式。"}
+      ],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {"name":"overflow","type":"{ x?: 'auto' | 'hidden'; y?: 'auto' | 'hidden' }","default":{"x":"auto","y":"auto"},"description":"默认滚动轴策略；Viewport 可以逐轴覆盖。","editor":"json"},
+            {"name":"className","type":"string","description":"合并到原生 div 的自定义类名。"},
+            {"name":"style","type":"CSSProperties","description":"原生 div 样式。"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "ScrollbarBar",
+      "slug": "scrollbar-bar",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "继承原生 div 的属性、事件和样式。仅渲染传入内容；Track/Thumb 需要显式组合，空 Bar 不创建部件。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/scrollbar",
+        "vue": "@fex-design/vue/primitive/scrollbar",
+        "solid": "@fex-design/solid/primitive/scrollbar",
+        "svelte": "@fex-design/svelte/primitive/scrollbar",
+        "angular": "@fex-design/angular/primitive/scrollbar"
+      },
+      "props": [
+        {"name":"axis","type":"'x' | 'y'","description":"滚动轴，必填。","editor":"enum","options":["x","y"]},
+        {"name":"class","type":"string","description":"合并到原生 div 的自定义类名。"},
+        {"name":"style","type":"FrameworkStyle","description":"原生 div 样式。"}
+      ],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {"name":"axis","type":"'x' | 'y'","description":"滚动轴，必填。","editor":"enum","options":["x","y"]},
+            {"name":"className","type":"string","description":"合并到原生 div 的自定义类名。"},
+            {"name":"style","type":"CSSProperties","description":"原生 div 样式。"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "ScrollbarTrack",
+      "slug": "scrollbar-track",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "继承原生 div 的属性、事件和样式。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/scrollbar",
+        "vue": "@fex-design/vue/primitive/scrollbar",
+        "solid": "@fex-design/solid/primitive/scrollbar",
+        "svelte": "@fex-design/svelte/primitive/scrollbar",
+        "angular": "@fex-design/angular/primitive/scrollbar"
+      },
+      "props": [
+        {"name":"axis","type":"'x' | 'y'","description":"滚动轴，必填。","editor":"enum","options":["x","y"]},
+        {"name":"class","type":"string","description":"合并到原生 div 的自定义类名。"},
+        {"name":"style","type":"FrameworkStyle","description":"原生 div 样式。"}
+      ],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {"name":"axis","type":"'x' | 'y'","description":"滚动轴，必填。","editor":"enum","options":["x","y"]},
+            {"name":"className","type":"string","description":"合并到原生 div 的自定义类名。"},
+            {"name":"style","type":"CSSProperties","description":"原生 div 样式。"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "ScrollbarThumb",
+      "slug": "scrollbar-thumb",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "继承原生 div 的属性、事件和样式。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/scrollbar",
+        "vue": "@fex-design/vue/primitive/scrollbar",
+        "solid": "@fex-design/solid/primitive/scrollbar",
+        "svelte": "@fex-design/svelte/primitive/scrollbar",
+        "angular": "@fex-design/angular/primitive/scrollbar"
+      },
+      "props": [
+        {"name":"axis","type":"'x' | 'y'","description":"滚动轴，必填。","editor":"enum","options":["x","y"]},
+        {"name":"class","type":"string","description":"合并到原生 div 的自定义类名。"},
+        {"name":"style","type":"FrameworkStyle","description":"原生 div 样式。"}
+      ],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {"name":"axis","type":"'x' | 'y'","description":"滚动轴，必填。","editor":"enum","options":["x","y"]},
+            {"name":"className","type":"string","description":"合并到原生 div 的自定义类名。"},
+            {"name":"style","type":"CSSProperties","description":"原生 div 样式。"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "ScrollbarCorner",
+      "slug": "scrollbar-corner",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "继承原生 div 的属性、事件和样式。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/scrollbar",
+        "vue": "@fex-design/vue/primitive/scrollbar",
+        "solid": "@fex-design/solid/primitive/scrollbar",
+        "svelte": "@fex-design/svelte/primitive/scrollbar",
+        "angular": "@fex-design/angular/primitive/scrollbar"
+      },
+      "props": [
+        {"name":"class","type":"string","description":"合并到原生 div 的自定义类名。"},
+        {"name":"style","type":"FrameworkStyle","description":"原生 div 样式。"}
+      ],
+      "events": [],
+      "demos": [],
+      "frameworks": {
+        "react": {
+          "props": [
+            {"name":"className","type":"string","description":"合并到原生 div 的自定义类名。"},
+            {"name":"style","type":"CSSProperties","description":"原生 div 样式。"}
+          ]
+        }
+      }
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkStyle": "原生 style 绑定"
+      }
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkStyle": "StyleValue"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkStyle": "string | JSX.CSSProperties"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkStyle": "string"
+      }
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkStyle": "原生 style 绑定"
+      }
+    }
+  }
+}

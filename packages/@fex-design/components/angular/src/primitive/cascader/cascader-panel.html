@@ -5,8 +5,8 @@
 >
   @if (cascader.snapshot().searchValue && cascader.showSearch) {
   <div [class]="columnClass + ' w-full min-w-full border-r-0'">
-    <div fexScrollbarRoot class="h-full">
-      <div fexScrollbarViewport overflowX="hidden" overflowY="auto" [class]="viewportClass">
+    <div scrollbarRoot class="h-full">
+      <div scrollbarViewport [overflow]="{ x: 'hidden', y: 'auto' }" [class]="viewportClass">
         @if(cascader.loading){
         <div [class]="loadingClass"><loading-icon class="animate-spin" />Loading...</div>
         } @else {@for (path of cascader.controller.getSearchResults(); track path.at(-1)!.key) {
@@ -18,22 +18,22 @@
           (click)="cascader.controller.select(node.key)"
         >
           <span [class]="optionLabelClass">{{ cascader.display(path) }}</span
-          >@if(itemState.selected){<fex-check-icon [class]="optionIconClass" />}
+          >@if(itemState.selected){<check-icon [class]="optionIconClass" />}
         </div>
         } @empty {
         <div [class]="emptyClass">No options</div>
         }}
       </div>
-      <div fexScrollbarBar axis="y">
-        <div fexScrollbarTrack><div fexScrollbarThumb axis="y"></div></div>
+      <div scrollbarBar axis="y">
+        <div scrollbarTrack axis="y"><div scrollbarThumb axis="y"></div></div>
       </div>
     </div>
   </div>
   } @else { @for (column of cascader.controller.getColumns(); track column.parentKey ?? 'root'; let
   index = $index) {
   <div role="listbox" [attr.aria-label]="'Level ' + (index + 1)" [class]="columnClass">
-    <div fexScrollbarRoot class="h-full">
-      <div fexScrollbarViewport overflowX="hidden" overflowY="auto" [class]="viewportClass">
+    <div scrollbarRoot class="h-full">
+      <div scrollbarViewport [overflow]="{ x: 'hidden', y: 'auto' }" [class]="viewportClass">
         @for (node of column.nodes; track node.key) { @let itemState = state(node);
         <div
           role="option"
@@ -56,18 +56,18 @@
             @if(itemState.checked || itemState.indeterminate){<span
               checkboxIndicator
               [class]="checkboxIndicatorClass"
-              >@if(itemState.indeterminate){<minus-icon />}@else{<fex-check-icon />}</span
+              >@if(itemState.indeterminate){<minus-icon />}@else{<check-icon />}</span
             >}</button
           >} <span [class]="optionLabelClass">{{ node.label }}</span
           ><span [class]="optionIconClass"
             >@if(itemState.loading){<loading-icon class="animate-spin" />}@else if
-            (!node.leaf){<fex-chevron-right-icon />}@else if (itemState.selected){<fex-check-icon />}</span
+            (!node.leaf){<chevron-right-icon />}@else if (itemState.selected){<check-icon />}</span
           >
         </div>
         }
       </div>
-      <div fexScrollbarBar axis="y">
-        <div fexScrollbarTrack><div fexScrollbarThumb axis="y"></div></div>
+      <div scrollbarBar axis="y">
+        <div scrollbarTrack axis="y"><div scrollbarThumb axis="y"></div></div>
       </div>
     </div>
   </div>

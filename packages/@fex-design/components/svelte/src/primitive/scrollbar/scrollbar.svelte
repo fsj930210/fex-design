@@ -1,62 +1,56 @@
 <script lang="ts">
-  import { createScrollbarController } from "@fex-design/core/scrollbar/create-scrollbar-controller";
   import type {
-    ScrollbarAutoHide,
-    ScrollbarClickScroll,
-    ScrollbarVisibility,
+    ScrollbarRootOptions,
+    ScrollbarScrollDetail,
   } from "@fex-design/core/scrollbar/types";
   import { scrollbarRootClassName } from "@fex-design/components-styles/scrollbar";
   import { cn } from "@fex-design/utils";
-  import { onMount, type Snippet } from "svelte";
+  import { setContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  interface Props extends HTMLAttributes<HTMLDivElement> {
+  import { createScrollbar } from './create-scrollbar.svelte';
+  import { scrollbarKey, type ScrollbarContext } from './scrollbar-context';
+  interface Props extends HTMLAttributes<HTMLDivElement>, Omit<ScrollbarRootOptions, 'onScroll'> {
     children?: Snippet;
-    visibility?: ScrollbarVisibility;
-    autoHide?: ScrollbarAutoHide;
-    autoHideDelay?: number;
-    dragScroll?: boolean;
-    clickScroll?: ScrollbarClickScroll;
-    minThumbSize?: number;
-    disabled?: boolean;
-    onScrollChange?: (detail: {
-      scrollLeft: number;
-      scrollTop: number;
-    }) => void;
+    element?: HTMLDivElement | undefined;
+    onScrollChange?: (detail: ScrollbarScrollDetail) => void;
   }
   let {
+    showTrack = false,
+    showCorner,
     children,
-    visibility = "auto",
-    autoHide = "scroll",
-    autoHideDelay = 900,
-    dragScroll = true,
-    clickScroll = false,
-    minThumbSize = 24,
-    disabled = false,
+    overflow,
+    element = $bindable(),
+    visibility,
+    autoHide,
+    autoHideDelay,
+    dragScroll,
+    clickScroll,
+    minThumbSize,
+    disabled,
     onScrollChange,
     class: className,
     ...rest
   }: Props = $props();
-  let element: HTMLDivElement | undefined = undefined;
-  onMount(() =>
-    element
-      ? createScrollbarController({
-          visibility,
-          autoHide,
-          autoHideDelay,
-          dragScroll,
-          clickScroll,
-          minThumbSize,
-          disabled,
-          onScroll: onScrollChange,
-        }).connect(element)
-      : undefined,
-  );
+  const binding = createScrollbar(() => ({
+    visibility,
+    autoHide,
+    autoHideDelay,
+    dragScroll,
+    clickScroll,
+    minThumbSize,
+    disabled,
+    onScroll: (detail) => onScrollChange?.(detail),
+  }));
+  setContext<ScrollbarContext>(scrollbarKey, () => overflow);
 </script>
 
 <div
   {...rest}
   bind:this={element}
+  use:binding.root
   data-slot="scrollbar-root"
+  data-show-track={showTrack}
+  data-show-corner={showCorner ?? showTrack}
   class={cn(scrollbarRootClassName, className)}
 >
   {@render children?.()}

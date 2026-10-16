@@ -24,9 +24,7 @@
   import MinusIcon from '@fex-design/svelte/icons/minus.svelte';
   import Checkbox from "../checkbox/checkbox.svelte";
   import CheckboxIndicator from "../checkbox/checkbox-indicator.svelte";
-  import Scrollbar from "../scrollbar/scrollbar.svelte";
-  import ScrollbarBar from "../scrollbar/scrollbar-bar.svelte";
-  import ScrollbarViewport from "../scrollbar/scrollbar-viewport.svelte";
+  import { ScrollbarRoot, ScrollbarBar, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar';
   import { cascaderContextKey, type CascaderContext } from "./context";
 
   const cascader = getContext<CascaderContext>(cascaderContextKey);
@@ -110,10 +108,9 @@
 >
   {#if $snapshot.searchValue && cascader.showSearch()}
     <div class={`${cascaderColumnClassName} w-full min-w-full border-r-0`}>
-      <Scrollbar class="h-full"
+      <ScrollbarRoot class="h-full"
         ><ScrollbarViewport
-          overflowX="hidden"
-          overflowY="auto"
+          overflow={{ x: 'hidden', y: 'auto' }}
           class={cascaderColumnViewportClassName}
           >{#if cascader.loading()}<div class={cascaderLoadingClassName}>
               <LoadingIcon class="animate-spin" />Loading...
@@ -123,7 +120,11 @@
               )}{/each}{:else}<div class={cascaderEmptyClassName}>
               No options
             </div>{/if}</ScrollbarViewport
-        ><ScrollbarBar axis="y" /></Scrollbar
+        ><ScrollbarBar axis="y">
+          <ScrollbarTrack axis="y">
+            <ScrollbarThumb axis="y" />
+          </ScrollbarTrack>
+        </ScrollbarBar></ScrollbarRoot
       >
     </div>
   {:else}
@@ -132,15 +133,18 @@
         aria-label={`Level ${index + 1}`}
         class={cascaderColumnClassName}
       >
-        <Scrollbar class="h-full"
+        <ScrollbarRoot class="h-full"
           ><ScrollbarViewport
-            overflowX="hidden"
-            overflowY="auto"
+            overflow={{ x: 'hidden', y: 'auto' }}
             class={cascaderColumnViewportClassName}
             >{#each column.nodes as node (node.key)}{@render option(
                 node,
               )}{/each}</ScrollbarViewport
-          ><ScrollbarBar axis="y" /></Scrollbar
+          ><ScrollbarBar axis="y">
+            <ScrollbarTrack axis="y">
+              <ScrollbarThumb axis="y" />
+            </ScrollbarTrack>
+          </ScrollbarBar></ScrollbarRoot
         >
       </div>{/each}
   {/if}

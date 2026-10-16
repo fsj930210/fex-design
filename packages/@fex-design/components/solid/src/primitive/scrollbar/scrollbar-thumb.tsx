@@ -11,6 +11,7 @@ export function ScrollbarThumb(
     <div
       {...rest}
       data-slot="scrollbar-thumb"
+      data-axis={local.axis}
       class={cn(scrollbarThumbClassName({ axis: local.axis }), local.class)}
     />
   )

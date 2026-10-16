@@ -1,0 +1,14 @@
+import { For } from 'solid-js'
+import { scrollbarDemoLines } from '@fex-design/docs-shared/scrollbar-demo'
+import { ScrollbarRoot, ScrollbarViewport, ScrollbarBar, ScrollbarTrack, ScrollbarThumb, ScrollbarCorner } from '@fex-design/solid/primitive/scrollbar'
+
+export function ScrollbarCssVariablesExample() {
+  return <div class="flex w-full flex-wrap gap-6">
+  <section class="grid gap-3"><h4 class="text-sm font-medium">尺寸、内边距、圆角、轨道、滑块及交角颜色</h4>
+    <ScrollbarRoot showTrack class="h-48 w-72 rounded-md border" autoHide={"never"} overflow={{"x":"auto","y":"auto"}} style={{"--scrollbar-size":"12px","--scrollbar-padding":"2px","--scrollbar-radius":"6px","--scrollbar-track-color":"#e0e7ff","--scrollbar-thumb-color":"#6366f1","--scrollbar-thumb-hover-color":"#4f46e5","--scrollbar-thumb-active-color":"#312e81","--scrollbar-corner-color":"#e0e7ff","--scrollbar-transition-duration":"250ms"}}><ScrollbarViewport><div class="grid w-[40rem] gap-3 p-4"><For each={scrollbarDemoLines}>{(line) => <p>{line}</p>}</For></div></ScrollbarViewport>
+      <ScrollbarBar axis={"x"}><ScrollbarTrack axis={"x"}><ScrollbarThumb axis={"x"}></ScrollbarThumb></ScrollbarTrack></ScrollbarBar>
+      <ScrollbarBar axis={"y"}><ScrollbarTrack axis={"y"}><ScrollbarThumb axis={"y"}></ScrollbarThumb></ScrollbarTrack></ScrollbarBar>
+      <ScrollbarCorner></ScrollbarCorner></ScrollbarRoot>
+  </section>
+  </div>
+}

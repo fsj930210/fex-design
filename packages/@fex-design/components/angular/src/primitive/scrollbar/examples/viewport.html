@@ -1,0 +1,14 @@
+<div class="grid w-full max-w-md gap-4">
+  <div class="flex flex-wrap gap-2">
+    <button button (click)="top()">回到顶部</button>
+    <button button (click)="step()">向下 120px</button>
+    <button button (click)="bottom()">滚动到底部</button>
+  </div>
+  <div scrollbarRoot class="h-48 w-72 rounded-md border" autoHide="never" [overflow]="{ x: 'hidden' }">
+    <div scrollbarViewport role="region" aria-label="可通过键盘滚动的内容" tabindex="0" class="outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" (keydown)="lastKey.set($event.key)"><div class="grid gap-3 p-4">
+        @for (line of lines; track line) {<p>{{ line }}</p>}
+      </div></div>
+    <div scrollbarBar axis="y"><div scrollbarTrack axis="y"><div scrollbarThumb axis="y"></div></div></div>
+  </div>
+  <output class="text-sm text-muted-foreground">最近按键：{{ lastKey() }}</output>
+</div>

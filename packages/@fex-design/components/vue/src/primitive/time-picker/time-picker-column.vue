@@ -10,7 +10,7 @@ import { cn } from '@fex-design/utils'
 import { inject, nextTick, ref, useAttrs, watch } from 'vue'
 import { usePopoverContext } from '../popover/context'
 import { timePickerContextKey } from './context'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar'
+import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar'
 
 defineOptions({ inheritAttrs: false })
 const props = withDefaults(
@@ -76,7 +76,7 @@ function move(direction: 1 | -1) {
       role="listbox"
       :tabindex="context.disabled.value || disabled ? -1 : 0"
       :aria-disabled="context.disabled.value || disabled || undefined"
-      overflow-x="hidden"
+      :overflow="{ x: 'hidden' }"
       :class="timePickerColumnViewportClassName"
       @keydown.down.prevent="move(1)"
       @keydown.up.prevent="move(-1)"
@@ -123,6 +123,10 @@ function move(direction: 1 | -1) {
       </template>
       <div aria-hidden="true" :class="timePickerColumnSpacerClassName" />
     </ScrollbarViewport>
-    <ScrollbarBar axis="y" />
+    <ScrollbarBar axis="y">
+      <ScrollbarTrack axis="y">
+        <ScrollbarThumb axis="y" />
+      </ScrollbarTrack>
+    </ScrollbarBar>
   </ScrollbarRoot>
 </template>

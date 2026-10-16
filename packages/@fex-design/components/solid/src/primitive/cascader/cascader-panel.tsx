@@ -25,7 +25,7 @@ import { LoadingIcon } from '@fex-design/solid/icons/loading'
 import { MinusIcon } from '@fex-design/solid/icons/minus'
 import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox'
 import { PopoverContent, PopoverPortal } from '../popover'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar'
+import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar'
 import { useCascader } from './cascader-context'
 
 export function CascaderContent(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
@@ -160,13 +160,16 @@ export function CascaderColumn(props: ParentProps<JSX.HTMLAttributes<HTMLDivElem
     <div {...rest} role="listbox" class={cn(cascaderColumnClassName, local.class)}>
       <ScrollbarRoot class="h-full">
         <ScrollbarViewport
-          overflowX="hidden"
-          overflowY="auto"
+          overflow={{ x: 'hidden', y: 'auto' }}
           class={cascaderColumnViewportClassName}
         >
           {local.children}
         </ScrollbarViewport>
-        <ScrollbarBar axis="y" />
+        <ScrollbarBar axis="y">
+          <ScrollbarTrack axis="y">
+            <ScrollbarThumb axis="y" />
+          </ScrollbarTrack>
+        </ScrollbarBar>
       </ScrollbarRoot>
     </div>
   )

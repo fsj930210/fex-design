@@ -1,0 +1,10 @@
+<div class="flex flex-wrap items-start gap-4">
+  <div datePicker>
+  <ng-template #panel let-panel="panel">
+  <div>
+  <p class="p-2 text-sm">自定义面板容器</p>
+  <ng-container [ngTemplateOutlet]="panel" />
+  </div>
+  </ng-template>
+  </div>
+</div>

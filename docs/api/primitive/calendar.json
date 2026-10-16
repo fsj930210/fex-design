@@ -5,7 +5,11 @@
   "status": "stable",
   "description": "可组合日历部件及独立逻辑接口，所有交互由 core 处理。Primitive 提供原子结构和默认基础样式，不提供 UI Calendar 的 classNames/styles 语义映射、完整布局或农历等业务展示。",
   "examples": [
-    { "id": "basic", "title": "基础组合", "description": "Root、Header、Grid、Row、Cell、CellTrigger 和 Footer 的组合。" }
+    {
+      "id": "basic",
+      "title": "基础组合",
+      "description": "Root、Header、Grid、Row、Cell、CellTrigger 和 Footer 的组合。"
+    }
   ],
   "importPath": {
     "react": "@fex-design/react/primitive/calendar",
@@ -185,7 +189,13 @@
     },
     {
       "name": "CalendarGrid",
-      "props": [],
+      "props": [
+        {
+          "name": "rowProps",
+          "type": "Native row attributes",
+          "description": "为每个 CalendarRow 转发原生属性，DatePicker 用于 row 的 class/style；CalendarRow 自己的角色、面板和状态绑定保留。"
+        }
+      ],
       "events": []
     },
     {

@@ -1,156 +1,58 @@
-import {
-  getCalendarValueDate,
-  type CalendarDate,
-  type CalendarValue,
-} from '@fex-design/core/calendar'
+import { usePickerAppearance } from './appearance-context'
+import type { DatePickerCalendarProps } from './appearance.types'
+import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props'
+import { type CalendarValue } from '@fex-design/core/calendar'
 import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
-import { createRangePreviewValue } from '@fex-design/core/date-picker/range'
-import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerCellClassName,
-  datePickerGridClassName,
-  datePickerHeaderSideClassName,
-  datePickerPanelClassName,
-  datePickerWeekHeaderClassName,
-} from '@fex-design/components-styles/date-picker'
+
+import { datePickerPanelClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, ReactNode } from 'react'
-import { CalendarCell, CalendarGrid, CalendarRoot, CalendarWeekHeader } from '../calendar'
-import { useCalendarContext } from '../calendar/calendar-context'
-import {
-  DatePickerHeader,
-  DatePickerHeaderButton,
-  DatePickerHeaderLabel,
-  DatePickerHeaderTitle,
-} from './date-picker-header'
-import { useDatePickerContext, useRangePickerContext } from './context'
+import { CalendarRoot } from '../calendar'
+
+import { useDatePickerContext } from './context'
+import { DefaultDatePickerPanelContent } from './date-picker-panel-content'
 
 export interface DatePickerPanelProps<TValue extends CalendarValue = CalendarValue> extends Omit<
   ComponentProps<typeof CalendarRoot<TValue>>,
-  'value' | 'values' | 'defaultValue' | 'onChange' | 'onSelect'
+  'value' | 'values' | 'defaultValue' | 'onChange' | 'onSelect' | 'panel' | 'viewDate' | 'granularity' | 'weekStartsOn' | 'min' | 'max' | 'disabledDate' | 'monthSelection'
 > {
+  calendarProps?: DatePickerCalendarProps | undefined
   children?: ReactNode
 }
 
 export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>({
-  className,
+  className, style, calendarProps,
   children,
   ...props
 }: DatePickerPanelProps<TValue>) {
   const context = useDatePickerContext('DatePickerPanel')
-
-  function selectValue(value: CalendarValue) {
-    context.select(
-      normalizeDatePickerValue(
-        getCalendarValueDate(value),
-        context.picker,
-        context.weekStartsOn,
-      ) as never,
-    )
-  }
+  const appearance = usePickerAppearance()
+  const calendar = getPickerCalendarProps(calendarProps ?? appearance.calendarProps)
 
   return (
     <CalendarRoot
       {...props}
+      monthSelection="drilldown"
+      locale={calendar.locale}
+      style={{ ...calendar.style, ...style }}
       value={context.calendarValue as TValue | null}
       values={context.calendarValues as readonly TValue[]}
       viewDate={context.viewDate}
       panel={context.panel}
       granularity={getGranularityByPicker(context.picker)}
       weekStartsOn={context.weekStartsOn}
-      {...(context.minDate ? { min: context.minDate } : {})}
-      {...(context.maxDate ? { max: context.maxDate } : {})}
+      min={context.minDate}
+      max={context.maxDate}
       {...(context.disabledDate ? { disabledDate: context.disabledDate } : {})}
-      onSelect={selectValue}
+      onSelect={context.select}
+      onCellSelect={cell => { props.onCellSelect?.(cell); context.previewCell(cell) }}
+      onCellHover={cell => { props.onCellHover?.(cell); context.setHoverValue(cell.value) }}
       onPanelChange={context.setPanel}
       onViewDateChange={context.setViewDate}
-      className={cn(datePickerPanelClassName, className)}
+      onMouseLeave={event => { props.onMouseLeave?.(event); if (!event.defaultPrevented) context.setHoverValue(null) }}
+      className={cn(datePickerPanelClassName, calendar.className, className)}
     >
-      {children ?? <DefaultDatePickerPanelContent />}
-    </CalendarRoot>
-  )
-}
-
-export function DefaultDatePickerPanelContent() {
-  const calendar = useCalendarContext('DefaultDatePickerPanelContent')
-  const datePanel = calendar.state.panel === 'date'
-  const yearPanel = calendar.state.panel === 'year' || calendar.state.panel === 'decade'
-  return (
-    <>
-      <DatePickerHeader>
-        <div className={datePickerHeaderSideClassName}>
-          <DatePickerHeaderButton action={yearPanel ? 'previous-panel' : 'previous-year'} />
-          {datePanel ? <DatePickerHeaderButton action="previous-month" /> : null}
-        </div>
-        <DatePickerHeaderTitle>
-          <DatePickerHeaderLabel part="year" />
-          <DatePickerHeaderLabel part="month" />
-        </DatePickerHeaderTitle>
-        <div className={datePickerHeaderSideClassName}>
-          {datePanel ? <DatePickerHeaderButton action="next-month" /> : null}
-          <DatePickerHeaderButton action={yearPanel ? 'next-panel' : 'next-year'} />
-        </div>
-      </DatePickerHeader>
-      {datePanel ? <CalendarWeekHeader className={datePickerWeekHeaderClassName} /> : null}
-      <CalendarGrid className={datePickerGridClassName}>
-        {(cell) => <CalendarCell cell={cell} className={datePickerCellClassName} />}
-      </CalendarGrid>
-    </>
-  )
-}
-
-export interface RangePickerPanelProps<TValue extends CalendarValue = CalendarValue> extends Omit<
-  ComponentProps<typeof CalendarRoot<TValue>>,
-  'value' | 'range' | 'defaultValue' | 'onChange' | 'onSelect'
-> {
-  children?: ReactNode
-  panelViewDate?: CalendarDate | undefined
-}
-
-export function RangePickerPanel<TValue extends CalendarValue = CalendarValue>({
-  className,
-  children,
-  panelViewDate,
-  ...props
-}: RangePickerPanelProps<TValue>) {
-  const context = useRangePickerContext('RangePickerPanel')
-  const viewDate = panelViewDate ?? context.viewDate
-  const displayRange = createRangePreviewValue(
-    context.rangeValue,
-    context.hoverValue,
-    context.activePart,
-  )
-
-  function selectValue(value: CalendarValue) {
-    context.select(
-      normalizeDatePickerValue(
-        getCalendarValueDate(value),
-        context.picker,
-        context.weekStartsOn,
-      ) as never,
-    )
-  }
-
-  return (
-    <CalendarRoot
-      {...props}
-      value={null}
-      range={displayRange as never}
-      viewDate={viewDate}
-      panel={context.panel}
-      granularity={getGranularityByPicker(context.picker)}
-      weekStartsOn={context.weekStartsOn}
-      {...(context.minDate ? { min: context.minDate } : {})}
-      {...(context.maxDate ? { max: context.maxDate } : {})}
-      disabledDate={(date) => context.disabledDate?.(date, context.activePart) ?? false}
-      onSelect={selectValue}
-      onCellHover={(cell) => context.setHoverValue(cell.value as TValue)}
-      onPanelChange={context.setPanel}
-      onViewDateChange={context.setViewDate}
-      onMouseLeave={() => context.setHoverValue(null)}
-      className={cn(datePickerPanelClassName, className)}
-    >
-      {children ?? <DefaultDatePickerPanelContent />}
+      {children === undefined ? <DefaultDatePickerPanelContent calendarProps={calendar} /> : children}
     </CalendarRoot>
   )
 }

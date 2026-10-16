@@ -1,25 +1,16 @@
-import { getCalendarToday } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
-import {
-  datePickerCancelClassName,
-  datePickerConfirmClassName,
-  datePickerFooterClassName,
-  datePickerPresetClassName,
-  datePickerTodayClassName,
-} from '@fex-design/components-styles/date-picker'
-import { cn } from '@fex-design/utils'
-import { splitProps, useContext, type JSX } from 'solid-js'
-import { Button, type ButtonProps } from '../button'
-import { DatePickerContext, RangePickerContext } from './context'
+import { usePickerAppearance } from './appearance-context'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
+import { getPickerContentKind } from '@fex-design/core/date-picker/view'
+import { DatePickerToday } from './date-picker-today'
+import { DatePickerCancel } from './date-picker-cancel'
+import { DatePickerConfirm } from './date-picker-confirm'
 
-function useFooterOwner() {
-  const datePicker = useContext(DatePickerContext)
-  const rangePicker = useContext(RangePickerContext)
-  const context = datePicker ?? rangePicker
-  if (!context)
-    throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
-  return context
-}
+
+import { datePickerFooterClassName } from '@fex-design/components-styles/date-picker'
+import { cn } from '@fex-design/utils'
+import { Show, splitProps, type JSX } from 'solid-js'
+
+import { useFooterOwner } from './date-picker-footer-owner'
 
 export interface DatePickerFooterProps extends Omit<
   JSX.HTMLAttributes<HTMLDivElement>,
@@ -28,87 +19,33 @@ export interface DatePickerFooterProps extends Omit<
   children?:
     | JSX.Element
     | ((actions: {
+        canConfirm: () => boolean
+        today: () => void
         close: () => void
         clear: () => void
         confirm: () => void
         cancel: () => void
       }) => JSX.Element)
 }
-
 export function DatePickerFooter(props: DatePickerFooterProps) {
-  const [local, rest] = splitProps(props, ['class', 'children'])
+  const [local, rest] = splitProps(props, ['class', 'style', 'children'])
   const picker = useFooterOwner()
+  const appearance = usePickerAppearance()
   const actions = {
+    get canConfirm() { return picker.canConfirm },
+    today: picker.today,
     close: picker.close,
     clear: picker.clear,
     confirm: picker.confirm,
     cancel: picker.cancel,
   }
   return (
-    <div {...rest} class={cn(datePickerFooterClassName, local.class)}>
-      {typeof local.children === 'function' ? local.children(actions) : local.children}
-    </div>
-  )
-}
-
-export function DatePickerConfirm(props: ButtonProps) {
-  const picker = useFooterOwner()
-  const [local, rest] = splitProps(props, ['class', 'onClick'])
-  return (
-    <Button
-      {...rest}
-      data-slot="date-picker-confirm"
-      class={cn(datePickerConfirmClassName, local.class)}
-      onClick={(event) => {
-        if (typeof local.onClick === 'function') local.onClick(event)
-        if (!event.defaultPrevented) picker.confirm()
-      }}
-    />
-  )
-}
-
-export function DatePickerCancel(props: ButtonProps) {
-  const picker = useFooterOwner()
-  const [local, rest] = splitProps(props, ['class', 'onClick'])
-  return (
-    <Button
-      {...rest}
-      data-slot="date-picker-cancel"
-      class={cn(datePickerCancelClassName, local.class)}
-      onClick={(event) => {
-        if (typeof local.onClick === 'function') local.onClick(event)
-        if (!event.defaultPrevented) picker.cancel()
-      }}
-    />
-  )
-}
-
-export function DatePickerToday(props: ButtonProps) {
-  const picker = useFooterOwner()
-  const [local, rest] = splitProps(props, ['class', 'onClick'])
-  return (
-    <Button
-      {...rest}
-      data-slot="date-picker-today"
-      class={cn(datePickerTodayClassName, local.class)}
-      onClick={(event) => {
-        if (typeof local.onClick === 'function') local.onClick(event)
-        if (!event.defaultPrevented) {
-          picker.setViewDate(getCalendarToday())
-          picker.setPanel(getDefaultPanelByPicker(picker.picker))
-        }
-      }}
-    />
-  )
-}
-
-export function DatePickerPreset(props: ButtonProps) {
-  const [local, rest] = splitProps(props, ['class'])
-  return (
-    <Button
-      {...rest}
-      data-slot="date-picker-preset"
-      class={cn(datePickerPresetClassName, local.class)}
-    />
+    <Show when={getPickerContentKind(local.children) !== 'hidden'}><div {...rest} style={mergeStyle(appearance().styles?.footer, local.style)} data-slot="date-picker-footer" class={cn(datePickerFooterClassName, appearance().classNames?.footer, local.class)}>
+      {getPickerContentKind(local.children) === 'default' ? <>
+        <DatePickerToday class={appearance().classNames?.today} style={appearance().styles?.today} />
+        <Show when={picker.footerView.showCancel}><DatePickerCancel class={appearance().classNames?.cancel} style={appearance().styles?.cancel} /></Show>
+        <Show when={picker.footerView.showConfirm}><DatePickerConfirm class={appearance().classNames?.confirm} style={appearance().styles?.confirm} /></Show>
+      </> : typeof local.children === 'function' ? local.children(actions) : local.children}
+    </div></Show>
   )
 }

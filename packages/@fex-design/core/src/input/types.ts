@@ -16,8 +16,8 @@ export type InputClassNames = Partial<Record<InputPart, string>>
 export type InputStyles<TStyle> = Partial<Record<InputPart, TStyle>>
 
 export interface InputVisualOptions {
-  size?: InputSize
-  variant?: InputVariant
+  size?: InputSize | undefined
+  variant?: InputVariant | undefined
 }
 
 export type InputSearchSource = 'enter' | 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter'

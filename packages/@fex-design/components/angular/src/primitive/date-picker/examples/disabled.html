@@ -1,0 +1,36 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">禁用</p>
+<div datePickerRoot [disabled]="true" [defaultValue]="date">
+<div datePickerTrigger></div>
+<div datePickerContent>
+<div datePickerPanel></div>
+<div datePickerFooter></div>
+</div>
+</div>
+<div rangePickerRoot [disabled]="true" [defaultValue]="range">
+<div rangePickerTrigger></div>
+<div rangePickerContent>
+<div rangePickerPanelGroup></div>
+<div datePickerFooter></div>
+</div>
+</div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">默认（只读输入，可选择）</p>
+<div datePickerRoot [defaultValue]="date">
+<div datePickerTrigger></div>
+<div datePickerContent>
+<div datePickerPanel></div>
+<div datePickerFooter></div>
+</div>
+</div>
+<div rangePickerRoot [defaultValue]="range">
+<div rangePickerTrigger></div>
+<div rangePickerContent>
+<div rangePickerPanelGroup></div>
+<div datePickerFooter></div>
+</div>
+</div>
+</section>
+</div>

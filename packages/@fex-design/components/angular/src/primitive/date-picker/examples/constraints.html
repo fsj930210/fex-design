@@ -1,0 +1,19 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">2026-10-01 至 2026-12-31</p>
+<div datePickerRoot [minDate]="min" [maxDate]="max">
+<div datePickerTrigger></div>
+<div datePickerContent>
+<div datePickerPanel></div>
+<div datePickerFooter></div>
+</div>
+</div>
+<div rangePickerRoot [minDate]="min" [maxDate]="max">
+<div rangePickerTrigger></div>
+<div rangePickerContent>
+<div rangePickerPanelGroup></div>
+<div datePickerFooter></div>
+</div>
+</div>
+</section>
+</div>

@@ -1,0 +1,12 @@
+<div class="flex w-full min-w-0 flex-col gap-6">
+  <section class="flex w-full min-w-0 flex-col gap-2" dir="ltr">
+    <p class="text-sm font-medium">LTR</p>
+    <div datePicker [defaultValue]="date" [popoverProps]="popupAppearance"></div>
+    <div rangePicker [defaultValue]="range" [popoverProps]="popupAppearance"></div>
+  </section>
+  <section class="flex w-full min-w-0 flex-col gap-2" dir="rtl">
+    <p class="text-sm font-medium">RTL</p>
+    <div datePicker [defaultValue]="date" [popoverProps]="popupAppearance"></div>
+    <div rangePicker [defaultValue]="range" [popoverProps]="popupAppearance"></div>
+  </section>
+</div>

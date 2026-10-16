@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { CalendarDate } from "@fex-design/core/calendar";
+  import type { HTMLAttributes } from "svelte/elements";
   import type { Snippet } from "svelte";
   import DatePickerPanel from "./date-picker-panel.svelte";
 
@@ -7,7 +8,8 @@
     class: className,
     panelViewDate,
     children,
-  }: {
+    ...rest
+  }: Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
     class?: string | undefined;
     panelViewDate?: CalendarDate | undefined;
     children?: Snippet | undefined;
@@ -15,9 +17,9 @@
 </script>
 
 {#if children}
-  <DatePickerPanel range class={className} {panelViewDate}>
+  <DatePickerPanel {...rest} range class={className} {panelViewDate}>
     {@render children()}
   </DatePickerPanel>
 {:else}
-  <DatePickerPanel range class={className} {panelViewDate} />
+  <DatePickerPanel {...rest} range class={className} {panelViewDate} />
 {/if}

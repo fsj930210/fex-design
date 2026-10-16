@@ -1,108 +1,95 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-  type AfterViewInit,
-  type OnChanges,
-} from '@angular/core'
+import type { DatePickerStyle } from './style'
+import { PickerAppearanceToken } from './appearance-context'
+import type { DatePickerInputProps, DatePickerEndpointProps, DatePickerCalendarProps, DatePickerPopoverProps, PickerAppearance } from './appearance.types'
+import type { DatePickerClassNames, DatePickerStyles } from '@fex-design/core/date-picker/appearance'
+import { PickerContainerToken } from './container-context'
+import { PickerOwnerToken } from './owner-context'
+import { optionalPickerBoolean } from './boolean-input'
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, contentChild, inject, input, output, TemplateRef, type OnChanges, type OnInit } from '@angular/core'
+import { NgTemplateOutlet } from '@angular/common'
 import type { CalendarDate, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
-import type { DatePickerPicker } from '@fex-design/core/date-picker/types'
-import { datePickerContentClassName } from '@fex-design/components-styles/date-picker'
-import { cn } from '@fex-design/utils'
-import { Popover, PopoverContent, PopoverPortal } from '../popover'
-import { DatePickerContent } from './date-picker-content'
+import type { DatePickerPicker, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
+import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
+import { Popover } from '../popover'
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { DatePickerState, type UseDatePickerOptions } from './use-date-picker'
 import type { DatePickerSelectionValue } from './context'
 
 @Component({
-  selector: 'fex-date-picker-root',
+  selector: 'div[datePickerRoot]',
+  exportAs: 'datePickerRoot',
   standalone: true,
-  imports: [Popover, PopoverPortal, PopoverContent],
-  providers: [DatePickerState],
+  imports: [NgTemplateOutlet],
+  hostDirectives: [Popover],
+  providers: [{ provide: PickerAppearanceToken, useFactory: () => inject(DatePickerRoot).appearance }, DatePickerState, { provide: PickerOwnerToken, useExisting: DatePickerState }, { provide: PickerContainerToken, useFactory: () => inject(DatePickerRoot) }],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'hostClassName()' },
   templateUrl: './date-picker-root.html',
 })
-export class DatePickerRoot<TValue extends CalendarValue = CalendarValue>
-  implements AfterViewInit, OnChanges
-{
-  @Input() picker: DatePickerPicker | undefined = undefined
-  @Input() status: 'error' | 'warning' | undefined = undefined
-  @Input() value: DatePickerSelectionValue<TValue> | undefined = undefined
-  @Input() defaultValue: DatePickerSelectionValue<TValue> | undefined = undefined
-  @Input() open: boolean | undefined = undefined
-  @Input() defaultOpen: boolean | undefined = undefined
-  @Input() multiple: boolean | undefined = undefined
-  @Input() needConfirm: boolean | undefined = undefined
-  @Input() disabled: boolean | undefined = undefined
-  @Input() readOnly: boolean | undefined = undefined
-  @Input() allowClear: boolean | undefined = undefined
-  @Input() format: string | undefined = undefined
-  @Input() weekStartsOn: CalendarWeekday | undefined = undefined
-  @Input() minDate: CalendarDate | undefined = undefined
-  @Input() maxDate: CalendarDate | undefined = undefined
-  @Input() disabledDate: ((date: CalendarDate) => boolean) | undefined = undefined
-  @Output() readonly change = new EventEmitter<DatePickerSelectionValue<TValue>>()
-  @Output() readonly openChange = new EventEmitter<boolean>()
-
-  @ViewChild(Popover) private readonly popover?: Popover
-  @ContentChild(DatePickerContent) private readonly content?: DatePickerContent
-  private pendingTriggerElement?: HTMLElement
-
-  constructor(readonly state: DatePickerState<TValue>) {
-    this.state.valueChange.subscribe((value) => this.change.emit(value))
-    this.state.openChange.subscribe((open) => this.openChange.emit(open))
+export class DatePickerRoot<TValue extends CalendarValue = CalendarValue> implements OnInit, OnChanges {
+  protected readonly hostClassName = createHostClassName('block w-full min-w-0')
+  readonly picker = input<DatePickerPicker>()
+  readonly value = input<DatePickerSelectionValue<TValue>>()
+  readonly defaultValue = input<DatePickerSelectionValue<TValue>>()
+  readonly open = input(undefined, { transform: optionalPickerBoolean })
+  readonly defaultOpen = input(undefined, { transform: optionalPickerBoolean })
+  readonly needConfirm = input(undefined, { transform: optionalPickerBoolean })
+  readonly disabled = input(undefined, { transform: optionalPickerBoolean })
+  readonly clearable = input(undefined, { transform: optionalPickerBoolean })
+  readonly format = input<string>()
+  readonly weekStartsOn = input<CalendarWeekday>()
+  readonly minDate = input<CalendarDate>()
+  readonly maxDate = input<CalendarDate>()
+  readonly disabledDate = input<(date: CalendarDate, info: DatePickerDisabledDateInfo) => boolean>()
+  readonly multiple = input(undefined, { transform: optionalPickerBoolean })
+  readonly maxCount = input<number>()
+  readonly popoverProps = input<DatePickerPopoverProps>()
+  readonly inputProps = input<DatePickerInputProps>()
+  readonly calendarProps = input<DatePickerCalendarProps>()
+  readonly classNames = input<DatePickerClassNames>()
+  readonly styles = input<DatePickerStyles<DatePickerStyle>>()
+  readonly appearance = computed<PickerAppearance>(() => ({ inputProps: this.inputProps(), calendarProps: this.calendarProps(), popoverProps: this.popoverProps(), classNames: this.classNames(), styles: this.styles() }))
+  readonly change = output<DatePickerSelectionValue<TValue>>()
+  readonly openChange = output<boolean>()
+  private readonly destroyRef = inject(DestroyRef)
+  readonly state = inject(DatePickerState<TValue>)
+  readonly popover = inject(Popover)
+  readonly containerTemplate = contentChild<TemplateRef<unknown>>('container')
+  readonly context = computed(() => this.state.context())
+  private readonly onChange = (value: DatePickerSelectionValue<TValue>) => this.change.emit(value)
+  private readonly onOpenChange = (open: boolean) => this.openChange.emit(open)
+  constructor() {
+    const subscription = this.popover.openChange.subscribe(open => this.state.setOpen(open))
+    this.destroyRef.onDestroy(() => subscription.unsubscribe())
   }
-
-  ngOnChanges() {
+  ngOnChanges() { this.state.setOptions(this.options()) }
+  ngOnInit() {
     this.state.setOptions(this.options())
+    this.popover.connectOptions(() => ({ ...getDatePickerPopoverOptions(this.popoverProps()), open: this.containerTemplate() ? false : this.context().open, disabled: this.containerTemplate() ? true : this.context().disabled }))
   }
-
-  ngAfterViewInit() {
-    if (this.pendingTriggerElement) this.registerTrigger(this.pendingTriggerElement)
+  registerTrigger(element: HTMLElement | null) {
+    this.popover.referenceElement = element
+    this.popover.overlay.setReferenceElement(element)
   }
-
-  context() {
-    return this.state.context()
-  }
-
-  registerTrigger(element: HTMLElement) {
-    this.pendingTriggerElement = element
-    const popover = this.popover
-    if (!popover) return
-    popover.referenceElement = element
-    popover.overlay.setReferenceElement(element)
-  }
-
-  setOpen(open: boolean) {
-    this.state.setOpen(open)
-  }
-
-  contentClassName() {
-    return cn(datePickerContentClassName, this.content?.className)
-  }
-
   private options(): UseDatePickerOptions<TValue> {
-    return {
-      picker: this.picker,
-      status: this.status,
-      value: this.value,
-      defaultValue: this.defaultValue,
-      open: this.open,
-      defaultOpen: this.defaultOpen,
-      multiple: this.multiple,
-      needConfirm: this.needConfirm,
-      disabled: this.disabled,
-      readOnly: this.readOnly,
-      allowClear: this.allowClear,
-      format: this.format,
-      weekStartsOn: this.weekStartsOn,
-      minDate: this.minDate,
-      maxDate: this.maxDate,
-      disabledDate: this.disabledDate,
-    }
+    return definedPickerOptions({
+      picker: this.picker(),
+      value: this.value(),
+      defaultValue: this.defaultValue(),
+      open: this.open(),
+      defaultOpen: this.defaultOpen(),
+      needConfirm: this.needConfirm(),
+      disabled: this.disabled(),
+      clearable: this.clearable(),
+      format: this.format(),
+      weekStartsOn: this.weekStartsOn(),
+      minDate: this.minDate(),
+      maxDate: this.maxDate(),
+      disabledDate: this.disabledDate(),
+      multiple: this.multiple(),
+      maxCount: this.maxCount(),
+      onChange: this.onChange,
+      onOpenChange: this.onOpenChange,
+    })
   }
 }

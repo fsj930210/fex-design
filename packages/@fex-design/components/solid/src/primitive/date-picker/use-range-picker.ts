@@ -1,180 +1,58 @@
-import {
-  getCalendarToday,
-  getCalendarValueDate,
-  type CalendarDate,
-  type CalendarPanel,
-  type CalendarRange,
-  type CalendarValue,
-  type CalendarWeekday,
-} from '@fex-design/core/calendar'
-import { createDatePickerDisabledDate } from '@fex-design/core/date-picker/constraints'
-import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
-import {
-  createNextRangeValue,
-  getNextRangeActivePart,
-  getRangeFromValue,
-} from '@fex-design/core/date-picker/range'
-import { getDefaultDatePickerFormat } from '@fex-design/core/date-picker/value'
-import type { DatePickerPicker } from '@fex-design/core/date-picker/types'
-import { createSignal } from 'solid-js'
-import type { RangePickerContextValue } from './context'
+import type { CalendarValue } from '@fex-design/core/calendar'
+import { createRangePicker, type RangePickerOptions } from '@fex-design/core/date-picker/create-range-picker'
+import { definedPickerOptions } from '@fex-design/core/date-picker/options'
+import { createEffect, createMemo } from 'solid-js'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 
-export interface UseRangePickerOptions<TValue extends CalendarValue = CalendarValue> {
-  picker?: DatePickerPicker
-  status?: 'error' | 'warning'
-  value?: CalendarRange<TValue>
-  defaultValue?: CalendarRange<TValue>
-  open?: boolean
-  defaultOpen?: boolean
-  needConfirm?: boolean
-  disabled?: boolean
-  readOnly?: boolean
-  allowClear?: boolean
-  allowEmpty?: boolean | { start?: boolean; end?: boolean }
-  order?: boolean
-  format?: string
-  weekStartsOn?: CalendarWeekday
-  minDate?: CalendarDate
-  maxDate?: CalendarDate
-  disabledDate?: (date: CalendarDate, activePart: 'start' | 'end') => boolean
-  onChange?: (value: CalendarRange<TValue>) => void
-  onOpenChange?: (open: boolean) => void
-}
+export type UseRangePickerOptions<TValue extends CalendarValue = CalendarValue> = RangePickerOptions<TValue>
 
-function normalizeAllowEmpty(value: UseRangePickerOptions['allowEmpty']) {
-  if (value === true) return { start: true, end: true }
-  if (value && typeof value === 'object')
-    return { start: Boolean(value.start), end: Boolean(value.end) }
-  return { start: false, end: false }
-}
-
-export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
-  options: UseRangePickerOptions<TValue>,
-): RangePickerContextValue<TValue> {
-  const picker = options.picker ?? 'date'
-  const needConfirm = options.needConfirm ?? false
-  const [rangeValue, setRangeValue] = createSignal<CalendarRange<TValue>>(
-    options.defaultValue ?? {},
-    { equals: false },
-  )
-  const [openValue, setOpenValue] = createSignal(options.defaultOpen ?? false)
-  const [pendingValue, setPendingValue] = createSignal<CalendarRange<TValue>>(rangeValue(), {
-    equals: false,
-  })
-  const [activePart, setActivePart] = createSignal<'start' | 'end'>('start')
-  const [hoverValue, setHoverValue] = createSignal<TValue | null>(null)
-  const [panel, setPanel] = createSignal<CalendarPanel>(getDefaultPanelByPicker(picker))
-  const [viewDate, setViewDate] = createSignal(getCalendarToday())
-  const value = () => (options.value === undefined ? rangeValue() : options.value)
-  const open = () => options.open ?? openValue()
-  const activeRangeValue = () => (needConfirm ? pendingValue() : value())
-
-  function resetPanel(part?: 'start' | 'end') {
-    const current = value()
-    const selected = current.start ?? current.end
-    setPanel(getDefaultPanelByPicker(picker))
-    setViewDate(selected ? getCalendarValueDate(selected) : getCalendarToday())
-    setPendingValue(current)
-    setActivePart(part ?? (current.start ? 'end' : 'start'))
-    setHoverValue(null)
-  }
-  function setOpen(next: boolean, part?: 'start' | 'end') {
-    const wasOpen = open()
-    if (next && !wasOpen) resetPanel(part)
-    else if (next && part) setActivePart(part)
-    if (options.open === undefined) setOpenValue(next)
-    if (wasOpen !== next) options.onOpenChange?.(next)
-  }
-  function close() {
-    setOpen(false)
-  }
-  function commit(next: CalendarRange<TValue>) {
-    if (options.value === undefined) setRangeValue(next)
-    setPendingValue(next)
-    options.onChange?.(next)
-  }
-  function select(nextValue: TValue) {
-    const part = activePart()
-    const nextRange = createNextRangeValue(
-      activeRangeValue(),
-      nextValue,
-      part,
-      options.order ?? true,
-    )
-    setHoverValue(null)
-    if (needConfirm) setPendingValue(nextRange)
-    else commit(nextRange)
-    const nextActivePart = getNextRangeActivePart(nextRange)
-    if (nextActivePart) {
-      setActivePart(nextActivePart)
-      return
-    }
-    if (!needConfirm) close()
-  }
-  function clear() {
-    const next: CalendarRange<TValue> = {}
-    setPendingValue(next)
-    setHoverValue(null)
-    commit(next)
-  }
-  function confirm() {
-    commit(pendingValue())
-    close()
-  }
-  function cancel() {
-    setPendingValue(value())
-    close()
-  }
-  function disabledDate(date: CalendarDate, part: 'start' | 'end') {
-    return createDatePickerDisabledDate({
-      picker,
-      panel: panel(),
-      ...(options.minDate ? { minDate: options.minDate } : {}),
-      ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-      ...(options.disabledDate
-        ? {
-            disabledDate: (current, info) =>
-              Boolean(options.disabledDate?.(current, info.activePart ?? part)),
-          }
-        : {}),
-    })(date, {
-      activePart: part,
-      from: getRangeFromValue(activeRangeValue(), part),
-      rangeValue: activeRangeValue(),
-    })
-  }
-
+export function useRangePicker<TValue extends CalendarValue = CalendarValue>(options: UseRangePickerOptions<TValue>) {
+  const controller = createRangePicker<TValue>(definedPickerOptions(options))
+  const snapshot = createCoreStoreSignal(controller)
+  // Synchronize reactive props with the external controller; the store helper cleans up.
+  createEffect(() => controller.setOptions(definedPickerOptions(options)))
+  const state = createMemo(() => { snapshot(); return controller.getState() })
   return {
-    picker,
-    get status() {
-      return options.status
-    },
-    needConfirm,
-    disabled: options.disabled ?? false,
-    readOnly: options.readOnly ?? false,
-    allowClear: options.allowClear ?? true,
-    allowEmpty: normalizeAllowEmpty(options.allowEmpty),
-    format: options.format ?? getDefaultDatePickerFormat(picker),
-    weekStartsOn: options.weekStartsOn ?? 0,
-    open,
-    panel,
-    viewDate,
-    rangeValue: activeRangeValue,
-    activePart,
-    hoverValue,
-    ...(options.minDate ? { minDate: options.minDate } : {}),
-    ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-    disabledDate,
-    setPanel,
-    setViewDate,
-    setOpen: (next) => setOpen(next),
-    setActivePart,
-    setHoverValue,
-    openPanel: (part) => setOpen(true, part),
-    close,
-    clear,
-    confirm,
-    cancel,
-    select,
+    ...controller,
+    controller,
+    get triggerView() { return state().triggerView },
+    get focusRequest() { return state().focusRequest },
+    get footerView() { return state().footerView },
+    get canClear() { return state().canClear },
+    get picker() { return state().picker },
+    get needConfirm() { return state().needConfirm },
+    get disabled() { return state().disabled },
+    get clearable() { return state().clearable },
+    get format() { return state().format },
+    get weekStartsOn() { return state().weekStartsOn },
+    get minDate() { return state().minDate },
+    get maxDate() { return state().maxDate },
+    get allowEmpty() { return state().allowEmpty },
+    get order() { return state().order },
+    open: () => state().open,
+    panel: () => state().panel,
+    viewDate: () => state().viewDate,
+    rangeValue: () => state().rangeValue,
+    activePart: () => state().activePart,
+    hoverValue: () => state().hoverValue,
+    previewValue: () => state().previewValue,
+    startText: () => state().startText,
+    endText: () => state().endText,
+    displayRange: () => state().displayRange,
+    canConfirm: () => state().canConfirm,
+    committedValue: () => state().committedValue,
+    pendingValue: () => state().pendingValue,
+    disabledDate: controller.getState().disabledDate,
+    setOpen: controller.setOpen,
+    setPanel: controller.setPanel,
+    setViewDate: controller.setViewDate,
+    setActivePart: controller.setActivePart,
+    setHoverValue: controller.setHoverValue,
+    openPanel: controller.openPanel,
+    close: controller.close,
+    clear: controller.clear,
+    confirm: controller.confirm,
+    cancel: controller.cancel,
+    select: controller.select,
   }
 }

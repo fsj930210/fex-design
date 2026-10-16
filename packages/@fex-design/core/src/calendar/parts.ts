@@ -20,6 +20,8 @@ export function getCalendarCellAttributes(cell: CalendarCell, hoveredRowIndex: n
     'data-today': flag(cell.state.today),
     'data-outside': flag(cell.state.outside),
     'data-selected': flag(cell.state.selected),
+    'data-selected-above': flag(cell.state.selectedAbove ?? false),
+    'data-selected-below': flag(cell.state.selectedBelow ?? false),
     'data-disabled': flag(cell.state.disabled),
     'data-range-picker': flag(hasRange),
     'data-range-start': flag(!week && cell.state.rangeStart),

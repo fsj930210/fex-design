@@ -5,7 +5,10 @@ const focusable =
   'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 /** Shared DOM accessibility; framework adapters only register their real nodes. */
-export function createPopoverAccessibility(isOpen: () => boolean) {
+export function createPopoverAccessibility(
+  isOpen: () => boolean,
+  preserveTriggerFocus: () => boolean,
+) {
   let content: HTMLElement | null = null
   let reference: HTMLElement | null = null
   let observer: MutationObserver | undefined
@@ -48,6 +51,8 @@ export function createPopoverAccessibility(isOpen: () => boolean) {
     // Refs may run before Portal insertion or before closed styles are removed.
     queueMicrotask(() => {
       if (!target || content !== target || !isOpen() || !target.isConnected) return
+      // Controlled input popovers can open through prop synchronization instead of a focus event.
+      if (preserveTriggerFocus()) return
       if (target.getAttribute('role') !== 'dialog') return
       if (target.contains(target.ownerDocument.activeElement)) return
       const first = Array.from(target.querySelectorAll<HTMLElement>(focusable)).find(

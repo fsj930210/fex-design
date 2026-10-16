@@ -1,0 +1,51 @@
+---
+title: DatePicker
+description: 日期与日期范围选择，支持多选、确认及独立替换触发元素、面板、容器和底部。
+---
+
+## 何时使用
+
+需要选择日期或日期范围时使用，例如预约日期、活动起止日期和按日期筛选数据。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection
+  layer="ui"
+  title="UI API"
+  description="日期选择与日期范围选择。"
+/>
+
+<ApiSection
+  layer="primitive"
+  title="Primitive API"
+  description="Root 管理值、草稿、开关及约束；Trigger、Content、Panel 和 Footer 组合默认输入与浮层。"
+>
+<ApiComposition layer="primitive">
+
+```text
+DatePickerRoot
+├── DatePickerTrigger (Input / custom trigger)
+└── DatePickerContent (Popover / custom container)
+    ├── DatePickerPanel (Calendar / custom panel)
+    └── DatePickerFooter (optional)
+        ├── DatePickerToday
+        ├── DatePickerCancel (needConfirm)
+        └── DatePickerConfirm (needConfirm)
+
+RangePickerRoot
+├── RangePickerTrigger (start input + end input)
+└── RangePickerContent
+    ├── RangePickerPanelGroup
+    │   ├── RangePickerPanel
+    │   └── RangePickerPanel
+    └── DatePickerFooter (optional)
+```
+
+</ApiComposition>
+</ApiSection>
+</ApiContainer>

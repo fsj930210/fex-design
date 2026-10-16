@@ -85,7 +85,10 @@ export function createPopover(
     previousBase = base
     store.setSnapshot({ ...base, arrow, popupContainer })
   }
-  const accessibility = createPopoverAccessibility(() => overlay.getSnapshot().open)
+  const accessibility = createPopoverAccessibility(
+    () => overlay.getSnapshot().open,
+    () => (currentOptions.trigger ?? triggers).includes('focus'),
+  )
   const descendants = new Set<PopoverController>()
   let wasOpen = overlay.getSnapshot().open
   const unsubscribe = overlay.subscribe(() => {

@@ -1,11 +1,7 @@
-@for (value of visibleValues(); track label(value)) {
-<span tag data-slot="date-picker-tag" size="sm" (pointerdown)="$event.stopPropagation()"
-  >{{ label(value) }}<button
-    tagAction
-    aria-label="移除标签"
-    (click)="remove(value, $event)"
-  ></button
-></span>
-} @if (overflowCount() > 0) {
-<span tag data-slot="date-picker-tag-overflow" size="sm">+{{ overflowCount() }}</span>
+@for (item of tags().items; track item.key) {
+  <span tag size="sm" data-slot="date-picker-tag" [class]="appearance().classNames?.tag ?? ''" [style]="appearance().styles?.tag ?? ''">
+    {{ format(item.value, context()) }}
+    <button tagAction [class]="appearance().classNames?.tagRemove ?? ''" [style]="appearance().styles?.tagRemove ?? ''" aria-label="移除日期" [disabled]="context().disabled" (pointerdown)="$event.preventDefault(); $event.stopPropagation()" (click)="$event.stopPropagation(); !$event.defaultPrevented && context().remove(item.value)"></button>
+  </span>
 }
+@if (tags().overflowCount > 0) { <span tag size="sm" data-slot="date-picker-tag-overflow" [class]="appearance().classNames?.tagOverflow ?? ''" [style]="appearance().styles?.tagOverflow ?? ''">+{{ tags().overflowCount }}</span> }

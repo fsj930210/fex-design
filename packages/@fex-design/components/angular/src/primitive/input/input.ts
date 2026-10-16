@@ -1,3 +1,5 @@
+import { connectInputAttributes, type InputAttributes } from './input-attributes'
+import { getInitialHostClassName } from '@fex-design/angular/signals/host-class'
 import type { InputSize, InputVariant } from '@fex-design/core/input/types'
 import {
   inputAddonAfterClassName,
@@ -16,7 +18,6 @@ import {
   Component,
   Directive,
   ElementRef,
-  HostListener,
   inject,
   input,
   output,
@@ -25,6 +26,7 @@ import {
 } from '@angular/core'
 import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import { listenNativeEvent } from '@fex-design/angular/directives/listen-native-event'
 
 @Component({
   selector: 'div[inputRoot]',
@@ -41,6 +43,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   template: '<ng-content />',
 })
 export class InputRoot implements OnInit {
+  readonly class = input<string>()
   readonly value = input<string>()
   readonly defaultValue = input('')
   readonly disabled = input(false, { transform: booleanAttribute })
@@ -55,6 +58,7 @@ export class InputRoot implements OnInit {
   readonly canClear = () => this.currentValue() !== '' && !this.disabled() && !this.readOnly()
   protected readonly hostClassName = createHostClassName(() =>
     inputRootClassName({ size: this.size(), variant: this.variant() }),
+    () => this.class(),
   )
   ngOnInit() {
     if (this.value() === undefined) this.uncontrolledValue.set(this.defaultValue())
@@ -93,18 +97,31 @@ export class InputGroup {
     '[class]': 'hostClassName()',
     'data-slot': 'input-control',
     '[value]': 'root.currentValue()',
-    '[disabled]': 'root.disabled()',
-    '[readOnly]': 'root.readOnly()',
+    '[disabled]': 'root.disabled() || disabled() || inputProps()?.disabled',
+    '[readOnly]': 'root.readOnly() || readOnly() || inputProps()?.readOnly',
+    '[style]': 'inputProps()?.style ?? null',
   },
 })
 export class InputControl {
+  readonly class = input<string>()
+  readonly inputProps = input<InputAttributes>()
+  private readonly initialClass = getInitialHostClassName()
+  readonly disabled = input(false, { transform: booleanAttribute })
+  readonly readOnly = input(false, { alias: 'readonly', transform: booleanAttribute })
   readonly root = inject(InputRoot)
   readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement
-  protected readonly hostClassName = createHostClassName(inputControlClassName)
+  protected readonly hostClassName = createHostClassName(inputControlClassName, () => cn(this.initialClass, this.class(), this.inputProps()?.class))
   constructor() {
     this.root.setFocusElement(this.element)
+    connectInputAttributes(this.inputProps)
+    listenNativeEvent('click', event => this.inputProps()?.onClick?.(event))
+    listenNativeEvent('focus', event => this.inputProps()?.onFocus?.(event))
+    listenNativeEvent('blur', event => this.inputProps()?.onBlur?.(event))
+    listenNativeEvent('input', event => this.onInput(event))
   }
-  @HostListener('input', ['$event']) onInput(event: Event) {
+  onInput(event: Event) {
+    this.inputProps()?.onInput?.(event)
+    if (event.defaultPrevented) return
     this.root.setValue((event.currentTarget as HTMLInputElement).value)
   }
   focus(options?: FocusOptions) {
@@ -124,7 +141,8 @@ export class InputControl {
   host: { '[class]': 'hostClassName()', 'data-slot': 'input-prefix' },
 })
 export class InputPrefix {
-  protected readonly hostClassName = createHostClassName(inputPrefixClassName)
+  readonly class = input<string>()
+  protected readonly hostClassName = createHostClassName(inputPrefixClassName, () => this.class())
 }
 
 @Directive({
@@ -133,7 +151,8 @@ export class InputPrefix {
   host: { '[class]': 'hostClassName()', 'data-slot': 'input-suffix' },
 })
 export class InputSuffix {
-  protected readonly hostClassName = createHostClassName(inputSuffixClassName)
+  readonly class = input<string>()
+  protected readonly hostClassName = createHostClassName(inputSuffixClassName, () => this.class())
 }
 
 @Directive({

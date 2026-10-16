@@ -236,7 +236,20 @@ function chunkCells<TValue extends CalendarValue>(
   cells: CalendarCell<TValue>[],
   columnCount: number,
 ): CalendarCell<TValue>[][] {
+  const visibleSelection = (cell: CalendarCell<TValue> | undefined) =>
+    Boolean(cell?.state.selected && !cell.state.outside && cell.granularity !== 'week')
   return Array.from({ length: Math.ceil(cells.length / columnCount) }, (_, rowIndex) =>
-    cells.slice(rowIndex * columnCount, rowIndex * columnCount + columnCount),
+    cells.slice(rowIndex * columnCount, rowIndex * columnCount + columnCount).map((cell, columnIndex) => {
+      if (!visibleSelection(cell)) return cell
+      const index = rowIndex * columnCount + columnIndex
+      return {
+        ...cell,
+        state: {
+          ...cell.state,
+          selectedAbove: visibleSelection(cells[index - columnCount]),
+          selectedBelow: visibleSelection(cells[index + columnCount]),
+        },
+      }
+    }),
   )
 }

@@ -58,6 +58,8 @@ export interface CalendarLocale {
   weekdays: readonly string[]
   months: readonly string[]
   year: string
+  /** Unit after a header year or year range; an empty string omits the unit. */
+  yearSuffix?: string | undefined
   month: string
   datePanel: string
   monthPanel: string
@@ -74,6 +76,9 @@ export interface CalendarCellState {
   outside: boolean
   disabled: boolean
   selected: boolean
+  /** Visible selected neighbours in the same grid column. */
+  selectedAbove?: boolean
+  selectedBelow?: boolean
   rangeStart: boolean
   rangeEnd: boolean
   inRange: boolean

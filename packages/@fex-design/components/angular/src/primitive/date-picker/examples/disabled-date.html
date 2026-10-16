@@ -1,0 +1,19 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">工作日</p>
+<div datePickerRoot [disabledDate]="disabledWeekend">
+<div datePickerTrigger></div>
+<div datePickerContent>
+<div datePickerPanel></div>
+<div datePickerFooter></div>
+</div>
+</div>
+<div rangePickerRoot [disabledDate]="disabledWeekend">
+<div rangePickerTrigger></div>
+<div rangePickerContent>
+<div rangePickerPanelGroup></div>
+<div datePickerFooter></div>
+</div>
+</div>
+</section>
+</div>

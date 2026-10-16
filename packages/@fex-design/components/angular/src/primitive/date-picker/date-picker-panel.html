@@ -1,42 +1,24 @@
-<div calendarRoot
-  [value]="state.context().calendarValue"
-  [values]="state.context().calendarValues"
-  [viewDate]="state.context().viewDate"
-  [panel]="state.context().panel"
-  [granularity]="getGranularityByPicker(state.context().picker)"
-  [weekStartsOn]="state.context().weekStartsOn"
-  [min]="state.context().minDate"
-  [max]="state.context().maxDate"
-  [disabledDate]="state.context().disabledDate"
-  (select)="selectValue($event.value)"
+<div calendarRoot #calendarElement monthSelection="drilldown" [locale]="calendarAppearance().locale" [style]="calendarAppearance().style ?? ''"
+  [value]="context().calendarValue"
+  [values]="context().calendarValues"
+  [viewDate]="context().viewDate"
+  [panel]="context().panel"
+  [granularity]="getGranularityByPicker(context().picker)"
+  [weekStartsOn]="context().weekStartsOn"
+  [min]="context().minDate"
+  [max]="context().maxDate"
+  [disabledDate]="context().disabledDate"
+  (select)="state.select($event.value)"
+  (cellSelect)="state.previewCell($event)"
+  (cellHover)="state.setHoverValue($event.value)"
+  (mouseleave)="leave($event)"
   (viewDateChange)="state.setViewDate($event)"
   (panelChange)="state.setPanel($event)"
-  [class]="panelClassName"
+  [class]="panelClassName()"
 >
-  <div datePickerHeader>
-    <div [class]="headerSideClassName">
-      <button datePickerHeaderButton [action]="primaryPreviousAction()"></button>
-      @if (state.context().panel === 'date') {
-      <button datePickerHeaderButton action="previous-month"></button>
-      }
-    </div>
-    <div datePickerHeaderTitle>
-      <button datePickerHeaderLabel part="year"></button>
-      <button datePickerHeaderLabel part="month"></button>
-    </div>
-    <div [class]="headerSideClassName">
-      @if (state.context().panel === 'date') {
-      <button datePickerHeaderButton action="next-month"></button>
-      }
-      <button datePickerHeaderButton [action]="primaryNextAction()"></button>
-    </div>
-  </div>
-  @if (state.context().panel === 'date') {
-  <div calendarWeekHeader [class]="weekHeaderClassName" />
+  @if (template(); as custom) {
+    <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="calendarInjector() ?? null" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), calendar: calendar() }" />
+  } @else {
+    <div datePickerPanelContent [calendarProps]="calendarAppearance()"></div>
   }
-  <div calendarGrid [class]="gridClassName">
-    <ng-template let-cell>
-      <div calendarCell [cell]="cell" [class]="cellClassName"></div>
-    </ng-template>
-  </div>
 </div>

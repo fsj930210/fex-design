@@ -27,10 +27,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/ContextMenu'), 'ContextMenuPage'),
   },
   {
-    path: '/date-picker',
-    element: createLazyRouteElement(() => import('../../pages/DatePicker'), 'DatePickerPage'),
-  },
-  {
     path: '/tree',
     element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
   },
@@ -41,10 +37,6 @@ export const componentRoutes = [
   {
     path: '/tour',
     element: createLazyRouteElement(() => import('../../pages/Tour'), 'TourPage'),
-  },
-  {
-    path: '/tooltip',
-    element: createLazyRouteElement(() => import('../../pages/Tooltip'), 'TooltipPage'),
   },
   {
     path: '/transfer',
@@ -61,10 +53,6 @@ export const componentRoutes = [
   {
     path: '/breadcrumb',
     element: createLazyRouteElement(() => import('../../pages/Breadcrumb'), 'BreadcrumbPage'),
-  },
-  {
-    path: '/calendar',
-    element: createLazyRouteElement(() => import('../../pages/Calendar'), 'CalendarPage'),
   },
   {
     path: '/collapse',
@@ -90,10 +78,6 @@ export const componentRoutes = [
   {
     path: '/i18n',
     element: createLazyRouteElement(() => import('../../pages/I18n'), 'I18nPage'),
-  },
-  {
-    path: '/input-number',
-    element: createLazyRouteElement(() => import('../../pages/InputNumber'), 'InputNumberPage'),
   },
   {
     path: '/input-otp',
@@ -128,10 +112,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Pagination'), 'PaginationPage'),
   },
   {
-    path: '/progress',
-    element: createLazyRouteElement(() => import('../../pages/Progress'), 'ProgressPage'),
-  },
-  {
     path: '/qrcode',
     element: createLazyRouteElement(() => import('../../pages/QRCode'), 'QRCodePage'),
   },
@@ -141,16 +121,8 @@ export const componentRoutes = [
   },
 
   {
-    path: '/slider',
-    element: createLazyRouteElement(() => import('../../pages/Slider'), 'SliderPage'),
-  },
-  {
     path: '/scrollbar',
     element: createLazyRouteElement(() => import('../../pages/Scrollbar'), 'ScrollbarPage'),
-  },
-  {
-    path: '/select',
-    element: createLazyRouteElement(() => import('../../pages/Select'), 'SelectPage'),
   },
   {
     path: '/steps',

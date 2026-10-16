@@ -1,4 +1,3 @@
-import { Temporal } from '../calendar/temporal'
 import {
   compareCalendarValue,
   getCalendarValueDate,
@@ -6,7 +5,7 @@ import {
   getCalendarValueKey,
   isSameCalendarValue,
 } from '../calendar/value'
-import { format, parse } from '../date/utils'
+import { format } from '../date/utils'
 import type {
   CalendarDate,
   CalendarQuarter,
@@ -21,10 +20,6 @@ export { compareCalendarValue as compareDatePickerValue }
 export { getCalendarValueDate as getDatePickerValueDate }
 export { getCalendarValueKey as getDatePickerValueKey }
 export { isSameCalendarValue as isSameDatePickerValue }
-
-export type DatePickerParseResult<TValue extends CalendarValue = CalendarValue> =
-  | { valid: true; value: TValue }
-  | { valid: false; reason: 'empty' | 'invalid' }
 
 export function getDefaultDatePickerFormat(picker: DatePickerPicker): string {
   if (picker === 'month') return 'YYYY-MM'
@@ -69,48 +64,6 @@ export function formatDatePickerValue(
     getCalendarValueDate(value),
     options.format ?? getDefaultDatePickerFormat(options.picker),
   )
-}
-
-export function parseDatePickerValue<TPicker extends DatePickerPicker>(
-  text: string,
-  options: DatePickerFormatOptions & { picker: TPicker },
-): DatePickerParseResult<DatePickerValue<TPicker>> {
-  const trimmed = text.trim()
-  if (!trimmed) return { valid: false, reason: 'empty' }
-  if (options.picker === 'year') {
-    const year = Number(trimmed)
-    if (!Number.isInteger(year)) return { valid: false, reason: 'invalid' }
-    return { valid: true, value: { year } as DatePickerValue<TPicker> }
-  }
-  if (options.picker === 'quarter') {
-    const match = /^(\d{4})-?Q([1-4])$/i.exec(trimmed)
-    if (!match) return { valid: false, reason: 'invalid' }
-    return {
-      valid: true,
-      value: {
-        year: Number(match[1]),
-        quarter: Number(match[2]) as 1 | 2 | 3 | 4,
-      } as DatePickerValue<TPicker>,
-    }
-  }
-  const result = parse(trimmed, options.format ?? getDefaultDatePickerFormat(options.picker))
-  if (
-    !result.valid ||
-    !result.value.year ||
-    !result.value.month ||
-    (options.picker === 'date' && !result.value.day)
-  ) {
-    return { valid: false, reason: 'invalid' }
-  }
-  const date = Temporal.PlainDate.from({
-    year: result.value.year,
-    month: result.value.month,
-    day: result.value.day ?? 1,
-  })
-  return {
-    valid: true,
-    value: normalizeDatePickerValue(date, options.picker, options.weekStartsOn),
-  }
 }
 
 export function datePickerValueToPlainDate(value: CalendarValue): CalendarDate {

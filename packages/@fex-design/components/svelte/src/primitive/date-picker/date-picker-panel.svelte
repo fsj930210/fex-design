@@ -1,49 +1,41 @@
 <script lang="ts">
-  import {
-    getCalendarValueDate,
-    type CalendarDate,
-  } from "@fex-design/core/calendar";
-  import {
-    getGranularityByPicker,
-  } from "@fex-design/core/date-picker/panel";
-  import { createRangePreviewValue } from "@fex-design/core/date-picker/range";
-  import { normalizeDatePickerValue } from "@fex-design/core/date-picker/value";
-  import {
-    datePickerCellClassName,
-    datePickerGridClassName,
-    datePickerHeaderSideClassName,
-    datePickerPanelClassName,
-    datePickerWeekHeaderClassName,
-  } from "@fex-design/components-styles/date-picker";
+  import { usePickerAppearance } from './appearance-context';
+  import type { DatePickerCalendarProps } from './appearance.types';
+  import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props';
+  import DatePickerPanelContent from './date-picker-panel-content.svelte';
+
+
+  import { type CalendarDate } from "@fex-design/core/calendar";
+  import { getGranularityByPicker } from "@fex-design/core/date-picker/panel";
+  import { datePickerPanelClassName } from "@fex-design/components-styles/date-picker"
   import { cn } from "@fex-design/utils";
+  import type { HTMLAttributes } from "svelte/elements";
   import type { Snippet } from "svelte";
   import { getContext } from "svelte";
-  import CalendarCellView from "../calendar/calendar-cell.svelte";
-  import CalendarGrid from "../calendar/calendar-grid.svelte";
-  import CalendarRoot from "../calendar/calendar-root.svelte";
-  import CalendarWeekHeader from "../calendar/calendar-week-header.svelte";
-  import {
-    datePickerContextKey,
-    rangePickerContextKey,
-    type DatePickerContextValue,
-    type RangePickerContextValue,
-  } from "./context";
-  import DatePickerHeader from "./date-picker-header.svelte";
-  import DatePickerHeaderButton from "./date-picker-header-button.svelte";
-  import DatePickerHeaderLabel from "./date-picker-header-label.svelte";
-  import DatePickerHeaderTitle from "./date-picker-header-title.svelte";
 
-  interface Props {
+
+  import CalendarRoot from "../calendar/calendar-root.svelte";
+
+  import { datePickerContextKey, rangePickerContextKey, type DatePickerContextValue, type RangePickerContextValue } from "./context";
+
+
+
+
+
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+    calendarProps?: DatePickerCalendarProps | undefined;
     class?: string | undefined;
     range?: boolean | undefined;
     panelViewDate?: CalendarDate | undefined;
     children?: Snippet | undefined;
   }
   let {
-    class: className,
+    class: className, style, calendarProps,
     range = false,
     panelViewDate,
     children,
+    onmouseleave,
+    ...rest
   }: Props = $props();
   // svelte-ignore state_referenced_locally -- range selects the immutable context branch at mount.
   const datePicker = range
@@ -58,22 +50,17 @@
     throw new Error(
       "DatePickerPanel must be used within DatePickerRoot or RangePickerRoot",
     );
-  const resolvedOwner = owner;
+
+  const appearance = usePickerAppearance();
+  const calendar = $derived(getPickerCalendarProps(calendarProps ?? appearance().calendarProps));
   const displayRange = $derived(
     rangePicker
-      ? createRangePreviewValue(
-          rangePicker.getRangeValue(),
-          rangePicker.getHoverValue(),
-          rangePicker.getActivePart(),
-        )
+      ? rangePicker.getDisplayRange()
       : undefined,
   );
 
 
 
-  function selectValue(value: import('@fex-design/core/calendar').CalendarValue) {
-    resolvedOwner.select(normalizeDatePickerValue(getCalendarValueDate(value), resolvedOwner.picker, resolvedOwner.weekStartsOn) as never);
-  }
 
   function disabledDate(date: CalendarDate) {
     return rangePicker
@@ -83,7 +70,11 @@
 </script>
 
 <CalendarRoot
-  class={cn(datePickerPanelClassName, className)}
+  {...rest}
+  monthSelection="drilldown"
+  locale={calendar.locale}
+  style={[calendar.style, style].filter(Boolean).join(';')}
+  class={cn(datePickerPanelClassName, calendar.class, className)}
   value={datePicker?.getCalendarValue() ?? null}
   values={datePicker?.getCalendarValues()}
   range={displayRange}
@@ -94,46 +85,16 @@
   min={owner.minDate}
   max={owner.maxDate}
   {disabledDate}
-  onSelect={selectValue}
-  onCellHover={(cell) => rangePicker?.setHoverValue(cell.value)}
+  onSelect={owner.select}
+  onCellSelect={owner.previewCell}
+  onCellHover={(cell) => owner.setHoverValue(cell.value)}
   onPanelChange={owner.setPanel}
   onViewDateChange={owner.setViewDate}
-  onmouseleave={() => rangePicker?.setHoverValue(null)}
+  onmouseleave={event => { onmouseleave?.(event); if (!event.defaultPrevented) owner.setHoverValue(null); }}
 >
   {#if children}
     {@render children()}
   {:else}
-    <DatePickerHeader>
-      <div class={datePickerHeaderSideClassName}>
-        <DatePickerHeaderButton
-          action={owner.getPanel() === "date"
-            ? "previous-year"
-            : "previous-panel"}
-        />
-        {#if owner.getPanel() === "date"}<DatePickerHeaderButton
-            action="previous-month"
-          />{/if}
-      </div>
-      <DatePickerHeaderTitle>
-        <DatePickerHeaderLabel part="year" />
-        <DatePickerHeaderLabel part="month" />
-      </DatePickerHeaderTitle>
-      <div class={datePickerHeaderSideClassName}>
-        {#if owner.getPanel() === "date"}<DatePickerHeaderButton
-            action="next-month"
-          />{/if}
-        <DatePickerHeaderButton
-          action={owner.getPanel() === "date" ? "next-year" : "next-panel"}
-        />
-      </div>
-    </DatePickerHeader>
-    {#if owner.getPanel() === "date"}<CalendarWeekHeader
-        class={datePickerWeekHeaderClassName}
-      />{/if}
-    <CalendarGrid class={datePickerGridClassName}
-      >{#snippet children(cell)}<CalendarCellView
-          {cell}
-          class={datePickerCellClassName} />{/snippet}</CalendarGrid
-    >
+    <DatePickerPanelContent calendarProps={calendar} />
   {/if}
 </CalendarRoot>

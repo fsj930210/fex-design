@@ -1,0 +1,11 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">YYYY/MM/DD</p>
+<div datePicker [format]="'YYYY/MM/DD'" [defaultValue]="date"></div>
+<div rangePicker [format]="'YYYY/MM/DD'" [defaultValue]="{ start: date, end: date.add({ days: 7 }) }"></div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">YYYY/MM</p>
+<div datePicker [picker]="'month'" [format]="'YYYY/MM'"></div>
+</section>
+</div>

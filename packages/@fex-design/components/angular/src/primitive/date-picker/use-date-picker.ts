@@ -1,212 +1,56 @@
-import { computed, EventEmitter, Injectable, signal } from '@angular/core'
-import {
-  getCalendarToday,
-  type CalendarDate,
-  type CalendarPanel,
-  type CalendarValue,
-  type CalendarWeekday,
-} from '@fex-design/core/calendar'
-import {
-  getCalendarValueDate,
-  getCalendarValueKey,
-  isSameCalendarValue,
-} from '@fex-design/core/calendar/value'
-import { createDatePickerDisabledDate } from '@fex-design/core/date-picker/constraints'
-import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
-import { getDefaultDatePickerFormat } from '@fex-design/core/date-picker/value'
-import type { DatePickerPicker } from '@fex-design/core/date-picker/types'
-import type { DatePickerContextValue, DatePickerSelectionValue } from './context'
+import { computed, DestroyRef, inject, Injectable, signal, type Signal } from '@angular/core'
+import type { CalendarValue } from '@fex-design/core/calendar'
+import { createDatePicker, type DatePickerController, type DatePickerOptions } from '@fex-design/core/date-picker/create-date-picker'
+import { definedPickerOptions } from '@fex-design/core/date-picker/options'
+import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
+import { getCalendarValueKey } from '@fex-design/core/calendar/value'
 
-export interface UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> {
-  picker?: DatePickerPicker | undefined
-  status?: 'error' | 'warning' | undefined
-  value?: DatePickerSelectionValue<TValue> | undefined
-  defaultValue?: DatePickerSelectionValue<TValue> | undefined
-  open?: boolean | undefined
-  defaultOpen?: boolean | undefined
-  multiple?: boolean | undefined
-  needConfirm?: boolean | undefined
-  disabled?: boolean | undefined
-  readOnly?: boolean | undefined
-  allowClear?: boolean | undefined
-  format?: string | undefined
-  weekStartsOn?: CalendarWeekday | undefined
-  minDate?: CalendarDate | undefined
-  maxDate?: CalendarDate | undefined
-  disabledDate?: ((date: CalendarDate) => boolean) | undefined
-}
 
-function isSelectionArray<TValue extends CalendarValue>(
-  value: DatePickerSelectionValue<TValue>,
-): value is readonly TValue[] {
-  return Array.isArray(value)
-}
-
-function emptyValue(multiple: boolean): DatePickerSelectionValue {
-  return multiple ? [] : null
-}
+export type UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> = DatePickerOptions<TValue>
 
 @Injectable()
 export class DatePickerState<TValue extends CalendarValue = CalendarValue> {
-  readonly valueChange = new EventEmitter<DatePickerSelectionValue<TValue>>()
-  readonly openChange = new EventEmitter<boolean>()
-
-  private readonly optionsState = signal<UseDatePickerOptions<TValue>>({})
-  private readonly localValue = signal<DatePickerSelectionValue<TValue>>(null)
-  private readonly localOpen = signal(false)
-  private readonly pendingValue = signal<DatePickerSelectionValue<TValue>>(null)
-  private readonly panelState = signal<CalendarPanel>('date')
-  private readonly viewDateState = signal<CalendarDate>(getCalendarToday())
-
-  readonly picker = computed(() => this.optionsState().picker ?? 'date')
-  readonly multiple = computed(() => this.optionsState().multiple ?? false)
-  readonly needConfirm = computed(() => this.optionsState().needConfirm ?? this.multiple())
-  readonly open = computed(() => this.optionsState().open ?? this.localOpen())
-  readonly panel = computed(() => this.panelState())
-  readonly viewDate = computed(() => this.viewDateState())
-  readonly currentValue = computed(() => this.optionsState().value ?? this.localValue())
-  readonly activeValue = computed(() =>
-    this.needConfirm() ? this.pendingValue() : this.currentValue(),
-  )
-  readonly calendarValue = computed<TValue | null>(() => {
-    const value = this.activeValue()
-    return isSelectionArray(value) ? null : value
-  })
-  readonly calendarValues = computed<readonly TValue[]>(() => {
-    const value = this.activeValue()
-    return isSelectionArray(value) ? value : []
-  })
-  readonly disabledDate = computed(() => {
-    const options = this.optionsState()
-    return createDatePickerDisabledDate({
-      picker: this.picker(),
-      panel: this.panel(),
-      ...(options.minDate ? { minDate: options.minDate } : {}),
-      ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-      ...(options.disabledDate ? { disabledDate: options.disabledDate } : {}),
-    })
-  })
+  private readonly destroyRef = inject(DestroyRef)
+  private controllerValue?: DatePickerController<TValue>
+  private readonly snapshot = signal<Signal<ReturnType<DatePickerController<TValue>['getSnapshot']>> | null>(null)
+  private readonly state = computed(() => { this.snapshot()?.(); return this.controller.getState() })
+  get controller(): DatePickerController<TValue> {
+    if (!this.controllerValue) throw new Error('DatePickerState requires initial options before use')
+    return this.controllerValue
+  }
+  readonly picker = computed(() => this.state().picker)
+  readonly multiple = computed(() => this.state().multiple)
+  readonly needConfirm = computed(() => this.state().needConfirm)
+  readonly open = computed(() => this.state().open)
+  readonly panel = computed(() => this.state().panel)
+  readonly viewDate = computed(() => this.state().viewDate)
+  readonly hoverValue = computed(() => this.state().hoverValue)
+  readonly previewValue = computed(() => this.state().previewValue)
+  readonly calendarValue = computed(() => this.state().calendarValue)
+  readonly calendarValues = computed(() => this.state().calendarValues)
+  readonly currentValue = computed(() => this.state().committedValue)
+  readonly activeValue = computed(() => this.state().value)
 
   setOptions(options: UseDatePickerOptions<TValue>) {
-    const previousPicker = this.picker()
-    this.optionsState.set(options)
-    const fallbackValue = options.defaultValue ?? emptyValue(options.multiple ?? false)
-    if (options.value === undefined && this.localValue() === null)
-      this.localValue.set(fallbackValue as DatePickerSelectionValue<TValue>)
-    if (options.open === undefined) this.localOpen.set(options.defaultOpen ?? this.localOpen())
-    if (previousPicker !== this.picker())
-      this.panelState.set(getDefaultPanelByPicker(this.picker()))
-    if (!this.open()) this.pendingValue.set(this.currentValue())
+    const next = definedPickerOptions(options)
+    if (!this.controllerValue) {
+      this.controllerValue = createDatePicker<TValue>(next)
+      this.snapshot.set(createCoreStoreSignal(this.controllerValue, this.destroyRef))
+    } else this.controllerValue.setOptions(next)
   }
-
-  context(): DatePickerContextValue<TValue> {
-    const options = this.optionsState()
-    return {
-      picker: this.picker(),
-      status: options.status,
-      multiple: this.multiple(),
-      needConfirm: this.needConfirm(),
-      disabled: options.disabled ?? false,
-      readOnly: options.readOnly ?? false,
-      allowClear: options.allowClear ?? true,
-      format: options.format ?? getDefaultDatePickerFormat(this.picker()),
-      weekStartsOn: options.weekStartsOn ?? 0,
-      open: this.open(),
-      panel: this.panel(),
-      viewDate: this.viewDate(),
-      value: this.activeValue(),
-      calendarValue: this.calendarValue(),
-      calendarValues: this.calendarValues(),
-      ...(options.minDate ? { minDate: options.minDate } : {}),
-      ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-      disabledDate: this.disabledDate(),
-      setPanel: (panel) => this.setPanel(panel),
-      setViewDate: (viewDate) => this.setViewDate(viewDate),
-      setOpen: (open) => this.setOpen(open),
-      openPanel: () => this.setOpen(true),
-      close: () => this.close(),
-      clear: () => this.clear(),
-      confirm: () => this.confirm(),
-      cancel: () => this.cancel(),
-      select: (value) => this.select(value),
-    }
-  }
-
-  setPanel(panel: CalendarPanel) {
-    this.panelState.set(panel)
-  }
-
-  setViewDate(viewDate: CalendarDate) {
-    this.viewDateState.set(viewDate)
-  }
-
-  setOpen(open: boolean) {
-    if (open && !this.open()) this.resetPanel()
-    if (this.optionsState().open === undefined) this.localOpen.set(open)
-    this.openChange.emit(open)
-  }
-
-  openPanel() {
-    this.setOpen(true)
-  }
-
-  close() {
-    this.setOpen(false)
-  }
-
-  clear() {
-    const nextValue = emptyValue(this.multiple()) as DatePickerSelectionValue<TValue>
-    this.pendingValue.set(nextValue)
-    this.commit(nextValue)
-  }
-
-  confirm() {
-    this.commit(this.pendingValue())
-    this.close()
-  }
-
-  cancel() {
-    this.pendingValue.set(this.currentValue())
-    this.close()
-  }
-
-  select(nextValue: TValue) {
-    if (this.multiple()) {
-      const current = isSelectionArray(this.activeValue())
-        ? (this.activeValue() as readonly TValue[])
-        : []
-      const selected = current.some((item) => isSameCalendarValue(item, nextValue))
-      const next = selected
-        ? current.filter((item) => !isSameCalendarValue(item, nextValue))
-        : [...current, nextValue]
-      if (this.needConfirm()) this.pendingValue.set(next)
-      else this.commit(next)
-      return
-    }
-
-    if (this.needConfirm()) {
-      this.pendingValue.set(nextValue)
-      return
-    }
-    this.commit(nextValue)
-    this.close()
-  }
-
-  private resetPanel() {
-    this.panelState.set(getDefaultPanelByPicker(this.picker()))
-    const currentValue = this.currentValue()
-    const selected = isSelectionArray(currentValue) ? currentValue[0] : currentValue
-    this.viewDateState.set(selected ? getCalendarValueDate(selected) : getCalendarToday())
-    this.pendingValue.set(currentValue)
-  }
-
-  private commit(value: DatePickerSelectionValue<TValue>) {
-    if (this.optionsState().value === undefined) this.localValue.set(value)
-    this.pendingValue.set(value)
-    this.valueChange.emit(value)
-  }
+  readonly context = computed(() => ({ ...this.state(), ...this.controller, controller: this.controller }))
+  readonly setOpen = (...args: Parameters<DatePickerController<TValue>['setOpen']>) => this.controller.setOpen(...args)
+  readonly setPanel = (...args: Parameters<DatePickerController<TValue>['setPanel']>) => this.controller.setPanel(...args)
+  readonly setViewDate = (...args: Parameters<DatePickerController<TValue>['setViewDate']>) => this.controller.setViewDate(...args)
+  readonly setHoverValue = (...args: Parameters<DatePickerController<TValue>['setHoverValue']>) => this.controller.setHoverValue(...args)
+  readonly previewCell = (...args: Parameters<DatePickerController<TValue>['previewCell']>) => this.controller.previewCell(...args)
+  readonly openPanel = (...args: Parameters<DatePickerController<TValue>['openPanel']>) => this.controller.openPanel(...args)
+  readonly today = (...args: Parameters<DatePickerController<TValue>['today']>) => this.controller.today(...args)
+  readonly close = (...args: Parameters<DatePickerController<TValue>['close']>) => this.controller.close(...args)
+  readonly clear = (...args: Parameters<DatePickerController<TValue>['clear']>) => this.controller.clear(...args)
+  readonly confirm = (...args: Parameters<DatePickerController<TValue>['confirm']>) => this.controller.confirm(...args)
+  readonly cancel = (...args: Parameters<DatePickerController<TValue>['cancel']>) => this.controller.cancel(...args)
+  readonly select = (...args: Parameters<DatePickerController<TValue>['select']>) => this.controller.select(...args)
 }
 
-export function getSelectionDisplayKey(value: CalendarValue) {
-  return getCalendarValueKey(value)
-}
+export const getSelectionDisplayKey = getCalendarValueKey

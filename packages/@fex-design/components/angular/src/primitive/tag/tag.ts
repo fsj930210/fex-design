@@ -1,5 +1,5 @@
 import { isTagPresetColor, type TagOptions, type TagPresetColor } from '@fex-design/core/tag/types'
-import { tagClassName, tagActionClassName } from '@fex-design/components-styles/tag'
+import { tagClassName } from '@fex-design/components-styles/tag'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -7,9 +7,9 @@ import {
   computed,
   input,
 } from '@angular/core'
-import { NgComponentOutlet } from '@angular/common'
-import { XIcon } from '@fex-design/angular/icons/x'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
+
+export { TagAction } from './tag-action'
 
 @Component({
   selector: 'span[tag]',
@@ -48,23 +48,4 @@ export class Tag {
       size: this.size(),
     }),
   )
-}
-
-@Component({
-  selector: 'button[tagAction]',
-  standalone: true,
-  imports: [NgComponentOutlet],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class]': 'hostClassName()',
-    '[attr.aria-label]': 'ariaLabel()',
-    'data-slot': 'tag-action',
-    type: 'button',
-  },
-  templateUrl: './tag-action.html',
-})
-export class TagAction {
-  readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' })
-  protected readonly defaultIcon = XIcon
-  protected readonly hostClassName = createHostClassName(tagActionClassName)
 }

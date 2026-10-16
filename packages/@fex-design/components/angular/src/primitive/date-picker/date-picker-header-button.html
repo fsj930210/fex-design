@@ -1,11 +1,15 @@
-@if (isDouble()) { @if (isPrevious()) {
-<chevron-left-icon />
-<chevron-left-icon [class]="doubleIconClassName" />
-} @else {
-<chevron-right-icon />
-<chevron-right-icon [class]="doubleIconClassName" />
-} } @else { @if (isPrevious()) {
-<chevron-left-icon />
-} @else {
-<chevron-right-icon />
-} }
+<ng-content>
+  @if (isDouble()) {
+    @if (isPrevious()) {
+      <chevrons-left-icon class="size-4 rtl:rotate-180" />
+    } @else {
+      <chevrons-right-icon class="size-4 rtl:rotate-180" />
+    }
+  } @else {
+    @if (isPrevious()) {
+      <chevron-left-icon class="size-4 rtl:rotate-180" />
+    } @else {
+      <chevron-right-icon class="size-4 rtl:rotate-180" />
+    }
+  }
+</ng-content>

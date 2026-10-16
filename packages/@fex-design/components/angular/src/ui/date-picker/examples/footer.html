@@ -1,0 +1,14 @@
+<div class="flex flex-wrap items-start gap-4">
+  <div datePicker  [footer]="null">
+  </div>
+  <div datePicker >
+  <ng-template #footer>
+  <span>自定义底部</span>
+  </ng-template>
+  </div>
+  <div rangePicker [needConfirm]="true">
+  <ng-template #footer>
+  <button datePickerConfirm>提交范围</button>
+  </ng-template>
+  </div>
+</div>

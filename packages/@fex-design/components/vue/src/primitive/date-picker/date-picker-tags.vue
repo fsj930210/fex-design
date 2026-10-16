@@ -1,46 +1,25 @@
 <script setup lang="ts">
-import type { CalendarValue } from '@fex-design/core/calendar'
+import { usePickerAppearance } from './appearance-context'
+const appearance = usePickerAppearance()
+import { computed, normalizeClass, useAttrs } from 'vue'
+import { getDatePickerTagItems } from '@fex-design/core/date-picker/input'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import { datePickerMultipleTagsClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
-import { computed } from 'vue'
-import Tag from '../tag/tag.vue'
+import { Tag, TagAction } from '../tag'
 import { useDatePickerContext } from './context'
-
-const props = withDefaults(defineProps<{ class?: string; maxTagCount?: number }>(), {
-  maxTagCount: 1,
-})
+defineOptions({ name: 'DatePickerTags', inheritAttrs: false })
+const props = defineProps<{ maxCount?: number }>()
+const attrs = useAttrs()
 const context = useDatePickerContext('DatePickerTags')
-const className = computed(() => cn(datePickerMultipleTagsClassName, props.class))
-const visibleValues = computed(() => context.calendarValues.value.slice(0, props.maxTagCount))
-const overflowCount = computed(() =>
-  Math.max(context.calendarValues.value.length - props.maxTagCount, 0),
-)
-function label(value: CalendarValue) {
-  return formatDatePickerValue(value, context)
-}
-function remove(value: CalendarValue, event: Event) {
-  event.preventDefault()
-  event.stopPropagation()
-  context.select(value)
-}
+const tags = computed(() => getDatePickerTagItems(context.calendarValues.value, props.maxCount ?? context.maxCount))
 </script>
-
 <template>
-  <div data-slot="date-picker-tags" :class="className">
-    <Tag
-      v-for="value in visibleValues"
-      :key="label(value)"
-      data-slot="date-picker-tag"
-      size="sm"
-      closable
-      @pointerdown.stop
-      @close="remove(value, $event)"
-    >
-      {{ label(value) }}
+  <div v-bind="attrs" data-slot="date-picker-tags" :class="cn(datePickerMultipleTagsClassName, appearance().classNames?.tags, normalizeClass(attrs.class))" :style="[appearance().styles?.tags, attrs.style]">
+    <Tag v-for="item in tags.items" :key="item.key" size="sm" data-slot="date-picker-tag" :class="appearance().classNames?.tag" :style="appearance().styles?.tag">
+      {{ formatDatePickerValue(item.value, context) }}
+      <TagAction :class="appearance().classNames?.tagRemove" :style="appearance().styles?.tagRemove" aria-label="移除日期" :disabled="context.disabled" @pointerdown.stop.prevent @click.stop="event => { if (!event.defaultPrevented) context.remove(item.value) }" />
     </Tag>
-    <Tag v-if="overflowCount > 0" data-slot="date-picker-tag-overflow" size="sm"
-      >+{{ overflowCount }}</Tag
-    >
+    <Tag v-if="tags.overflowCount > 0" size="sm" data-slot="date-picker-tag-overflow" :class="appearance().classNames?.tagOverflow" :style="appearance().styles?.tagOverflow">+{{ tags.overflowCount }}</Tag>
   </div>
 </template>

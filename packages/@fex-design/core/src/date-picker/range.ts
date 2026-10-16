@@ -38,9 +38,14 @@ export function createNextRangeValue<TValue extends CalendarValue>(
 
 export function getNextRangeActivePart<TValue extends CalendarValue>(
   range: CalendarRange<TValue>,
+  completedParts?: readonly DatePickerInputPart[],
 ): DatePickerInputPart | null {
   if (!range.start) return 'start'
   if (!range.end) return 'end'
+  if (completedParts) {
+    if (!completedParts.includes('start')) return 'start'
+    if (!completedParts.includes('end')) return 'end'
+  }
   return null
 }
 

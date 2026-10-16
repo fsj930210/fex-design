@@ -1,14 +1,6 @@
-<div
-  popoverRoot
-  [open]="context().open"
-  [trigger]="[]"
-  placement="bottom"
-  align="center"
-  (openChange)="setOpen($event)"
->
-  <ng-content select="fex-range-picker-trigger" />
-  <ng-template popoverPortal
-    ><div popoverContent [class]="contentClassName()">
-      <ng-content select="fex-range-picker-content" /></div
-  ></ng-template>
-</div>
+<ng-template #content><ng-content /></ng-template>
+@if (containerTemplate(); as container) {
+  <ng-container [ngTemplateOutlet]="container" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), content: content }" />
+} @else {
+  <ng-container [ngTemplateOutlet]="content" />
+}

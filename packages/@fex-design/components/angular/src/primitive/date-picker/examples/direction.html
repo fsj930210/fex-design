@@ -1,0 +1,36 @@
+<div class="flex w-full min-w-0 flex-col gap-6">
+  <section class="flex w-full min-w-0 flex-col gap-2" dir="ltr">
+    <p class="text-sm font-medium">LTR</p>
+    <div datePickerRoot [defaultValue]="date" [popoverProps]="popupAppearance">
+      <div datePickerTrigger></div>
+      <div datePickerContent>
+        <div datePickerPanel></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+    <div rangePickerRoot [defaultValue]="range" [popoverProps]="popupAppearance">
+      <div rangePickerTrigger></div>
+      <div rangePickerContent>
+        <div rangePickerPanelGroup></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+  </section>
+  <section class="flex w-full min-w-0 flex-col gap-2" dir="rtl">
+    <p class="text-sm font-medium">RTL</p>
+    <div datePickerRoot [defaultValue]="date" [popoverProps]="popupAppearance">
+      <div datePickerTrigger></div>
+      <div datePickerContent>
+        <div datePickerPanel></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+    <div rangePickerRoot [defaultValue]="range" [popoverProps]="popupAppearance">
+      <div rangePickerTrigger></div>
+      <div rangePickerContent>
+        <div rangePickerPanelGroup></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+  </section>
+</div>

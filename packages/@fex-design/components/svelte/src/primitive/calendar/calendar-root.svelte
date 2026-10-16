@@ -7,8 +7,8 @@
   import { calendarContextKey } from './context';
   import { createCalendarState } from './calendar-state.svelte';
   type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onchange'> & CalendarOptions<TValue> & { ref?: HTMLDivElement | null };
-  let { value, values, range, defaultValue, viewDate, defaultViewDate, panel, defaultPanel, granularity, weekStartsOn, locale, showWeek, fullscreen, today, min, max, disabledDate, onChange, onSelect, onCellSelect, onCellHover, onViewDateChange, onPanelChange, children, class: className, onmouseleave, ref = $bindable(null), ...rest }: Props = $props();
-  const calendar = createCalendarState(() => ({ value, values, range, defaultValue, viewDate, defaultViewDate, panel, defaultPanel, granularity, weekStartsOn, locale, showWeek, fullscreen, today, min, max, disabledDate, onChange, onSelect, onCellSelect, onCellHover, onViewDateChange, onPanelChange }));
+  let { value, values, range, defaultValue, viewDate, defaultViewDate, panel, defaultPanel, granularity, monthSelection, weekStartsOn, locale, showWeek, fullscreen, today, min, max, disabledDate, onChange, onSelect, onCellSelect, onCellHover, onViewDateChange, onPanelChange, children, class: className, onmouseleave, ref = $bindable(null), ...rest }: Props = $props();
+  const calendar = createCalendarState(() => ({ value, values, range, defaultValue, viewDate, defaultViewDate, panel, defaultPanel, granularity, monthSelection, weekStartsOn, locale, showWeek, fullscreen, today, min, max, disabledDate, onChange, onSelect, onCellSelect, onCellHover, onViewDateChange, onPanelChange }));
   const { controller } = calendar;
   const state = $derived(calendar.state);
   const grid = $derived(calendar.grid);

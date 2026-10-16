@@ -1,44 +1,30 @@
 <script setup lang="ts">
-import { getCalendarToday } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
-import { datePickerFooterClassName } from '@fex-design/components-styles/date-picker'
+import { usePickerAppearance } from './appearance-context'
+const appearance = usePickerAppearance()
+import { computed, normalizeClass, useAttrs } from 'vue'
 import { cn } from '@fex-design/utils'
-import { computed, inject } from 'vue'
-import Button from '../button/button.vue'
-import { datePickerContextKey, rangePickerContextKey } from './context'
-
-const props = defineProps<{ class?: string }>()
-const datePicker = inject(datePickerContextKey, null)
-const rangePicker = inject(rangePickerContextKey, null)
-const owner = computed(() => {
-  const context = datePicker ?? rangePicker
-  if (!context)
-    throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
-  return context
-})
-defineExpose({ owner })
+import { getPickerContentKind } from '@fex-design/core/date-picker/view'
+import { datePickerFooterClassName } from '@fex-design/components-styles/date-picker'
+import { createDatePickerFooterActions } from './date-picker-footer-owner'
+import { FooterContent, type DatePickerFooterContent } from './footer-content'
+import DatePickerToday from './date-picker-today.vue'
+import DatePickerCancel from './date-picker-cancel.vue'
+import DatePickerConfirm from './date-picker-confirm.vue'
+defineOptions({ name: 'DatePickerFooter', inheritAttrs: false })
+// VNodeChild includes boolean; preserve omission instead of Vue casting it to false.
+const props = withDefaults(defineProps<{ content?: DatePickerFooterContent }>(), { content: undefined })
+const attrs = useAttrs()
+const owner = createDatePickerFooterActions()
+const actions = computed(() => ({ canConfirm: owner.canConfirm.value, close: owner.close, clear: owner.clear, confirm: owner.confirm, cancel: owner.cancel, today: owner.today }))
 </script>
-
 <template>
-  <div data-slot="date-picker-footer" :class="cn(datePickerFooterClassName, props.class)">
-    <slot
-      :close="owner.close"
-      :clear="owner.clear"
-      :confirm="owner.confirm"
-      :cancel="owner.cancel"
-    />
+  <div v-if="getPickerContentKind(props.content) !== 'hidden'" v-bind="attrs" data-slot="date-picker-footer" :class="cn(datePickerFooterClassName, appearance().classNames?.footer, normalizeClass(attrs.class))" :style="[appearance().styles?.footer, attrs.style]">
+    <slot v-if="props.content === undefined && $slots.default" v-bind="actions" />
+    <FooterContent v-else-if="getPickerContentKind(props.content) === 'custom'" :content="props.content" :actions="actions" />
+    <template v-else>
+      <DatePickerToday :class="appearance().classNames?.today" :style="appearance().styles?.today" />
+      <DatePickerCancel :class="appearance().classNames?.cancel" :style="appearance().styles?.cancel" v-if="owner.footerView.showCancel" />
+      <DatePickerConfirm :class="appearance().classNames?.confirm" :style="appearance().styles?.confirm" v-if="owner.footerView.showConfirm" />
+    </template>
   </div>
 </template>
-
-<script lang="ts">
-export function createDatePickerFooterActions() {
-  const datePicker = inject(datePickerContextKey, null)
-  const rangePicker = inject(rangePickerContextKey, null)
-  const owner = datePicker ?? rangePicker
-  if (!owner)
-    throw new Error(
-      'DatePicker footer action must be used within DatePickerRoot or RangePickerRoot',
-    )
-  return owner
-}
-</script>

@@ -1,0 +1,7 @@
+<div class="flex flex-wrap items-start gap-4">
+  <div datePicker>
+  <ng-template #trigger let-state="state" let-trigger="trigger" let-ref="ref">
+  <button type="button" [attr.aria-expanded]="state.open" (focus)="ref($event.currentTarget); trigger.focus($event)" (click)="ref($event.currentTarget); trigger.open($event)">{{ state.displayValue || '选择日期' }}</button>
+  </ng-template>
+  </div>
+</div>

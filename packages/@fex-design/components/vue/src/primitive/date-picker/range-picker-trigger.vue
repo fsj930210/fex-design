@@ -1,191 +1,64 @@
 <script setup lang="ts">
-import { getRangeInputPreviewValue } from '@fex-design/core/date-picker/range'
-import { formatDatePickerValue, parseDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerRangeInputClassName,
-  datePickerRangeInputControlClassName,
-  datePickerRangeSeparatorClassName,
-  datePickerRangeTriggerClassName,
-} from '@fex-design/components-styles/date-picker'
-import { cn } from '@fex-design/utils'
-import { computed, ref, watch } from 'vue'
-import { CalendarIcon } from '@fex-design/vue/icons/calendar'
-import { InputClear, InputControl, InputRoot, InputSuffix } from '../input'
-import PopoverTrigger from '../popover/popover-trigger.vue'
-import { useRangePickerContext } from './context'
+import { computed, normalizeClass, useSlots, watch } from 'vue'
+import { usePickerAppearance } from './appearance-context'
+import type { DatePickerInputProps, DatePickerEndpointProps } from './appearance.types'
+import { getPickerInputProps, getPickerControlProps } from '@fex-design/core/date-picker/safe-props'
+import { RenderContent } from './render-content'
+import { getDatePickerInputAttributes } from '@fex-design/core/date-picker/input'
 
-const props = withDefaults(
-  defineProps<{
-    class?: string
-    startPlaceholder?: string
-    endPlaceholder?: string
-    separator?: string
-    status?: 'error' | 'warning'
-  }>(),
-  { startPlaceholder: '开始日期', endPlaceholder: '结束日期', separator: '→' },
-)
+import { getRangePickerInputPlaceholder, getRangePickerSeparator } from '@fex-design/core/date-picker/view'
+import type { InputSize, InputVariant } from '@fex-design/core/input/types'
+import { useAttrs } from 'vue'
+import { cn } from '@fex-design/utils'
+import { CalendarIcon } from '@fex-design/vue/icons/calendar'
+import { InputRoot, InputControl, InputClear, InputPrefix, InputSuffix } from '../input'
+import { useRangePickerContext } from './context'
+import { usePickerTrigger } from './use-picker-trigger'
+import { datePickerAffixClassName, datePickerRangeFieldClassName, datePickerRangeTriggerClassName, datePickerInputPreviewClassName, datePickerRangeInputClassName, datePickerRangeInputControlClassName, datePickerRangeSeparatorClassName } from '@fex-design/components-styles/date-picker'
+
+defineOptions({ name: 'RangePickerTrigger', inheritAttrs: false })
+const props = defineProps<{
+  size?: InputSize
+  variant?: InputVariant
+  startPlaceholder?: string
+  endPlaceholder?: string
+  startInputProps?: DatePickerEndpointProps
+  endInputProps?: DatePickerEndpointProps
+  separator?: string
+  inputProps?: DatePickerInputProps
+}>()
 const context = useRangePickerContext('RangePickerTrigger')
-const startValue = computed(() =>
-  formatDatePickerValue(context.rangeValue.value.start ?? null, context),
-)
-const endValue = computed(() =>
-  formatDatePickerValue(context.rangeValue.value.end ?? null, context),
-)
-const startText = ref(startValue.value)
-const endText = ref(endValue.value)
-const focusedPart = ref<'start' | 'end' | null>(null)
-watch(startValue, (next) => {
-  startText.value = next
-})
-watch(endValue, (next) => {
-  endText.value = next
-})
-watch(context.open, (next) => {
-  if (!next) focusedPart.value = null
-})
-const previewStartValue = computed(() =>
-  getRangeInputPreviewValue(
-    context.rangeValue.value,
-    context.hoverValue.value,
-    context.activePart.value,
-    'start',
-  ),
-)
-const previewEndValue = computed(() =>
-  getRangeInputPreviewValue(
-    context.rangeValue.value,
-    context.hoverValue.value,
-    context.activePart.value,
-    'end',
-  ),
-)
-const previewStartText = computed(() =>
-  context.activePart.value === 'start' && previewStartValue.value
-    ? formatDatePickerValue(previewStartValue.value, context)
-    : startText.value,
-)
-const previewEndText = computed(() =>
-  context.activePart.value === 'end' && previewEndValue.value
-    ? formatDatePickerValue(previewEndValue.value, context)
-    : endText.value,
-)
-function canClear() {
-  return context.allowClear !== false && Boolean(previewStartText.value || previewEndText.value)
-}
-function input(part: 'start' | 'end', text: string) {
-  if (part === 'start') startText.value = text
-  else endText.value = text
-  context.setActivePart(part)
-  context.setHoverValue(null)
-  const result = parseDatePickerValue(text, context)
-  if (result.valid) context.select(result.value)
-}
-function focus(part: 'start' | 'end') {
-  context.setActivePart(part)
-  focusedPart.value = part
-  context.openPanel(part)
-}
-function openFromTrigger(event: MouseEvent) {
-  if (context.disabled) {
-    event.preventDefault()
-    event.stopPropagation()
-    return
-  }
-  const part = (event.target as HTMLElement | null)
-    ?.closest('[data-range-part]')
-    ?.getAttribute('data-range-part')
-  context.openPanel(part === 'start' || part === 'end' ? part : undefined)
-}
-function clickTrigger(event: MouseEvent, triggerClick?: (event: MouseEvent) => void) {
-  if (context.disabled) {
-    event.preventDefault()
-    event.stopPropagation()
-    return
-  }
-  openFromTrigger(event)
-  triggerClick?.(event)
-}
-function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
-  const { onClick: _onClick, onFocus: _onFocus, onBlur: _onBlur, ...rest } = triggerProps
-  return rest
-}
+const attrs = useAttrs()
+const appearance = usePickerAppearance()
+const input = computed(() => getPickerInputProps(props.inputProps ?? appearance().inputProps))
+const start = computed(() => getPickerControlProps(input.value, props.startInputProps ?? appearance().startInputProps, true))
+const end = computed(() => getPickerControlProps(input.value, props.endInputProps ?? appearance().endInputProps, true))
+const trigger = usePickerTrigger(context, attrs)
+const slots = useSlots()
+// Wait for the input DOM before applying a core endpoint focus request.
+watch(() => context.focusRequest, request => {
+  if (request && context.open.value && !slots.default) trigger.focusInput(request.part)
+}, { flush: 'post' })
 </script>
 
 <template>
-  <PopoverTrigger v-slot="{ props: triggerProps, ref: triggerRef }">
-    <InputRoot
-      v-bind="getPickerTriggerProps(triggerProps)"
-      :ref="triggerRef"
-      :class="cn(datePickerRangeTriggerClassName, props.class)"
-      value=""
-      :disabled="context.disabled"
-      :read-only="context.readOnly"
-      @value-change="() => undefined"
-      @click="
-        (event) =>
-          clickTrigger(event, triggerProps.onClick as ((event: MouseEvent) => void) | undefined)
-      "
-    >
-      <InputRoot
-        data-range-part="start"
-        :data-active="
-          (context.open.value ? context.activePart.value === 'start' : focusedPart === 'start') ||
-          undefined
-        "
-        :value="previewStartText"
-        :read-only="context.readOnly"
-        :class="datePickerRangeInputClassName"
-        @value-change="input('start', $event)"
-      >
-        <InputControl
-          :aria-invalid="props.status === 'error' || undefined"
-          :class="
-            cn(
-              datePickerRangeInputControlClassName,
-              previewStartText !== startText && 'text-muted-foreground',
-            )
-          "
-          :placeholder="props.startPlaceholder"
-          @click="focus('start')"
-          @focus="focus('start')"
-        />
-      </InputRoot>
-      <span aria-hidden="true" :class="datePickerRangeSeparatorClassName">{{
-        props.separator
-      }}</span>
-      <InputRoot
-        data-range-part="end"
-        :data-active="
-          (context.open.value ? context.activePart.value === 'end' : focusedPart === 'end') ||
-          undefined
-        "
-        :value="previewEndText"
-        :read-only="context.readOnly"
-        :class="datePickerRangeInputClassName"
-        @value-change="input('end', $event)"
-      >
-        <InputControl
-          :aria-invalid="props.status === 'error' || undefined"
-          :class="
-            cn(
-              datePickerRangeInputControlClassName,
-              previewEndText !== endText && 'text-muted-foreground',
-            )
-          "
-          :placeholder="props.endPlaceholder"
-          @click="focus('end')"
-          @focus="focus('end')"
-        />
-      </InputRoot>
-      <InputClear
-        v-if="canClear()"
-        aria-label="清除日期范围"
-        @pointerdown.stop.prevent
-        @click.stop.prevent="context.clear()"
-      />
-      <InputSuffix v-else
-        ><slot name="suffix"><CalendarIcon class="size-4" /></slot
-      ></InputSuffix>
+  <slot v-if="$slots.default" :props="trigger.props.value" :ref="trigger.ref" :state="context" />
+    <InputRoot v-else :size="props.size ?? input.size ?? 'md'" :variant="props.variant ?? input.variant ?? 'outlined'" :style="[input.styles?.root, input.style, attrs.style]" v-bind="trigger.props.value" :ref="trigger.ref" :class="cn(datePickerRangeTriggerClassName, input.classNames?.root, normalizeClass(input.class), normalizeClass(attrs.class))" :value="''" :disabled="context.disabled" :read-only="true" >
+      <div :class="datePickerRangeFieldClassName">
+        <InputPrefix v-if="input.prefix != null" :class="input.classNames?.prefix" :style="input.styles?.prefix"><RenderContent :value="input.prefix" /></InputPrefix>
+        <InputRoot data-range-part="start" :value="context.startText.value" :disabled="context.disabled" :read-only="true" :class="datePickerRangeInputClassName" :data-active="context.open.value && context.activePart.value === 'start' ? 'true' : undefined">
+          <InputControl v-bind="getDatePickerInputAttributes(start)" :class="cn(datePickerRangeInputControlClassName, context.triggerView.startPreview && datePickerInputPreviewClassName, input.classNames?.control, normalizeClass(start.class))" :style="[input.styles?.control, start.style]" :placeholder="getRangePickerInputPlaceholder('start', props.startPlaceholder ?? start.placeholder)" @focus="event => trigger.focus(event, 'start')" />
+        </InputRoot>
+      </div>
+      <span aria-hidden="true" :data-default-separator="props.separator == null ? 'true' : undefined" :class="cn(datePickerRangeSeparatorClassName, appearance().classNames?.separator)" :style="appearance().styles?.separator">{{ getRangePickerSeparator(props.separator) }}</span>
+      <div :class="datePickerRangeFieldClassName">
+        <InputRoot data-range-part="end" :value="context.endText.value" :disabled="context.disabled" :read-only="true" :class="datePickerRangeInputClassName" :data-active="context.open.value && context.activePart.value === 'end' ? 'true' : undefined">
+          <InputControl v-bind="getDatePickerInputAttributes(end)" :class="cn(datePickerRangeInputControlClassName, context.triggerView.endPreview && datePickerInputPreviewClassName, input.classNames?.control, normalizeClass(end.class))" :style="[input.styles?.control, end.style]" :placeholder="getRangePickerInputPlaceholder('end', props.endPlaceholder ?? end.placeholder)" @focus="event => trigger.focus(event, 'end')" />
+        </InputRoot>
+        <div data-slot="date-picker-affix" :class="datePickerAffixClassName">
+          <InputSuffix :class="input.classNames?.suffix" :style="input.styles?.suffix"><slot v-if="$slots.suffix" name="suffix" /><RenderContent v-else-if="input.suffix != null" :value="input.suffix" /><CalendarIcon v-else class="size-4" /></InputSuffix>
+          <InputClear :class="input.classNames?.clear" :style="input.styles?.clear" aria-label="清除日期" v-if="context.canClear" @pointerdown.stop.prevent @click.stop.prevent="context.clear()" />
+        </div>
+      </div>
     </InputRoot>
-  </PopoverTrigger>
 </template>

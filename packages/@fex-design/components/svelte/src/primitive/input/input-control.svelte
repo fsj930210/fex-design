@@ -33,8 +33,8 @@
   {...rest}
   bind:this={ref}
   value={input.value()}
-  disabled={input.disabled()}
-  readonly={input.readOnly()}
+  disabled={input.disabled() || rest.disabled}
+  readonly={input.readOnly() || rest.readonly}
   data-slot="input-control"
   class={cn(inputControlClassName, className)}
   oninput={(event) => {

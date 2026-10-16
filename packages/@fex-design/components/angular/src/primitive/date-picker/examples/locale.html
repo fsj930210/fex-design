@@ -1,0 +1,36 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">中文</p>
+<div datePickerRoot >
+<div datePickerTrigger></div>
+<div datePickerContent>
+<div datePickerPanel></div>
+<div datePickerFooter></div>
+</div>
+</div>
+<div rangePickerRoot >
+<div rangePickerTrigger></div>
+<div rangePickerContent>
+<div rangePickerPanelGroup></div>
+<div datePickerFooter></div>
+</div>
+</div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2" lang="en">
+<p class="text-sm font-medium">English · Monday first</p>
+<div datePickerRoot [calendarProps]="{ locale: english }" [weekStartsOn]="1" [inputProps]="{ placeholder: 'Select date', 'aria-label': 'Select date' }">
+<div datePickerTrigger></div>
+<div datePickerContent>
+<div datePickerPanel></div>
+<div datePickerFooter></div>
+</div>
+</div>
+<div rangePickerRoot [calendarProps]="{ locale: english }" [weekStartsOn]="1" [startInputProps]="{ placeholder: 'Start date', 'aria-label': 'Start date' }" [endInputProps]="{ placeholder: 'End date', 'aria-label': 'End date' }">
+<div rangePickerTrigger></div>
+<div rangePickerContent>
+<div rangePickerPanelGroup></div>
+<div datePickerFooter></div>
+</div>
+</div>
+</section>
+</div>

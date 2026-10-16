@@ -1,116 +1,29 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
-import { getCalendarToday } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
-import {
-  datePickerCancelClassName,
-  datePickerConfirmClassName,
-  datePickerFooterClassName,
-  datePickerPresetClassName,
-  datePickerTodayClassName,
-} from '@fex-design/components-styles/date-picker'
+import { getPickerAppearance } from './appearance-context'
 import { cn } from '@fex-design/utils'
+import { NgTemplateOutlet } from '@angular/common'
+import { ChangeDetectionStrategy, Component, computed, inject, Injector, input, TemplateRef } from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
-import { buttonPrimitiveClassName } from '../button/button'
-import { DatePickerState } from './use-date-picker'
-import { RangePickerState } from './use-range-picker'
-
+import { getPickerContentKind } from '@fex-design/core/date-picker/view'
+import { datePickerFooterClassName } from '@fex-design/components-styles/date-picker'
+import { getFooterOwner } from './date-picker-footer-owner'
+import { DatePickerToday } from './date-picker-today'
+import { DatePickerCancel } from './date-picker-cancel'
+import { DatePickerConfirm } from './date-picker-confirm'
+export type DatePickerFooterContent = string | number | TemplateRef<unknown> | null
 @Component({
-  selector: 'fex-date-picker-footer',
-  standalone: true,
+  selector: 'div[datePickerFooter]', standalone: true,
+  imports: [NgTemplateOutlet, DatePickerToday, DatePickerCancel, DatePickerConfirm],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    'data-slot': 'date-picker-footer',
-    '[class]': 'className',
-  },
-  template: '<ng-content />',
+  host: { 'data-slot': 'date-picker-footer', '[class]': 'hostClassName()', '[style]': "appearance().styles?.footer ?? ''", '[hidden]': "kind() === 'hidden'", '[style.display]': "kind() === 'hidden' ? 'none' : null" },
+  templateUrl: './date-picker-footer.html',
 })
 export class DatePickerFooter {
-  protected readonly className = datePickerFooterClassName
-}
-
-abstract class DatePickerFooterAction {
-  protected readonly datePicker = inject(DatePickerState, { optional: true })
-  protected readonly rangePicker = inject(RangePickerState, { optional: true })
-
-  protected owner() {
-    const owner = this.datePicker ?? this.rangePicker
-    if (!owner)
-      throw new Error(
-        'DatePicker footer actions must be used within DatePickerRoot or RangePickerRoot',
-      )
-    return owner
-  }
-}
-
-@Component({
-  selector: 'button[fexDatePickerConfirm]',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    'data-slot': 'date-picker-confirm',
-    type: 'button',
-    '[class]': 'className()',
-    '(click)': 'owner().confirm()',
-  },
-  template: '<ng-content>确定</ng-content>',
-})
-export class DatePickerConfirm extends DatePickerFooterAction {
-  protected readonly className = createHostClassName(() =>
-    cn(buttonPrimitiveClassName(), datePickerConfirmClassName),
-  )
-}
-
-@Component({
-  selector: 'button[fexDatePickerCancel]',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    'data-slot': 'date-picker-cancel',
-    type: 'button',
-    '[class]': 'className()',
-    '(click)': 'owner().cancel()',
-  },
-  template: '<ng-content>取消</ng-content>',
-})
-export class DatePickerCancel extends DatePickerFooterAction {
-  protected readonly className = createHostClassName(() =>
-    cn(buttonPrimitiveClassName(), datePickerCancelClassName),
-  )
-}
-
-@Component({
-  selector: 'button[fexDatePickerToday]',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    'data-slot': 'date-picker-today',
-    type: 'button',
-    '[class]': 'className()',
-    '(click)': 'today()',
-  },
-  template: '<ng-content>今天</ng-content>',
-})
-export class DatePickerToday extends DatePickerFooterAction {
-  protected readonly className = createHostClassName(() =>
-    cn(buttonPrimitiveClassName(), datePickerTodayClassName),
-  )
-
-  today() {
-    const owner = this.owner()
-    owner.setViewDate(getCalendarToday())
-    owner.setPanel(getDefaultPanelByPicker(owner.context().picker))
-  }
-}
-
-@Component({
-  selector: 'button[fexDatePickerPreset]',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'date-picker-preset', type: 'button', '[class]': 'className()' },
-  template: '<ng-content />',
-})
-export class DatePickerPreset {
-  protected readonly className = createHostClassName(() =>
-    cn(buttonPrimitiveClassName(), datePickerPresetClassName),
-  )
+  readonly class = input<string>()
+  protected readonly appearance = getPickerAppearance()
+  readonly injector = inject(Injector)
+  readonly content = input<DatePickerFooterContent>()
+  readonly owner = getFooterOwner()
+  readonly kind = computed(() => getPickerContentKind(this.content()))
+  readonly template = computed(() => { const value = this.content(); return value instanceof TemplateRef ? value : null })
+  protected readonly hostClassName = createHostClassName(() => cn(datePickerFooterClassName, this.appearance().classNames?.footer), () => this.class())
 }

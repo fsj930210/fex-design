@@ -15,6 +15,7 @@ export class CalendarRoot<TValue extends CalendarValue = CalendarValue> {
   readonly defaultViewDate = input<CalendarDate | undefined>()
   readonly panel = input<CalendarPanel | undefined>()
   readonly defaultPanel = input<CalendarPanel | undefined>()
+  readonly monthSelection = input<'browse' | 'drilldown'>()
   readonly granularity = input<CalendarGranularity>('date')
   readonly weekStartsOn = input<CalendarWeekday>(0)
   readonly locale = input<Partial<CalendarLocale> | undefined>()
@@ -34,7 +35,7 @@ export class CalendarRoot<TValue extends CalendarValue = CalendarValue> {
   private calendar: ReturnType<typeof createCalendarState<TValue>> | undefined
   private readonly injector = inject(Injector)
   private getCalendar() {
-    return this.calendar ??= runInInjectionContext(this.injector, () => createCalendarState(() => ({ value: this.value(), values: this.values(), range: this.range(), defaultValue: this.defaultValue(), viewDate: this.viewDate(), defaultViewDate: this.defaultViewDate(), panel: this.panel(), defaultPanel: this.defaultPanel(), granularity: this.granularity(), weekStartsOn: this.weekStartsOn(), locale: this.locale(), showWeek: this.showWeek(), fullscreen: this.fullscreen(), today: this.today(), min: this.min(), max: this.max(), disabledDate: this.disabledDate(), onChange: value => this.change.emit(value), onSelect: (value, info) => this.select.emit({ value, info }), onCellSelect: cell => this.cellSelect.emit(cell), onCellHover: cell => this.cellHover.emit(cell), onViewDateChange: date => this.viewDateChange.emit(date), onPanelChange: panel => this.panelChange.emit(panel) })))
+    return this.calendar ??= runInInjectionContext(this.injector, () => createCalendarState(() => ({ value: this.value(), values: this.values(), range: this.range(), defaultValue: this.defaultValue(), viewDate: this.viewDate(), defaultViewDate: this.defaultViewDate(), panel: this.panel(), defaultPanel: this.defaultPanel(), granularity: this.granularity(), monthSelection: this.monthSelection(), weekStartsOn: this.weekStartsOn(), locale: this.locale(), showWeek: this.showWeek(), fullscreen: this.fullscreen(), today: this.today(), min: this.min(), max: this.max(), disabledDate: this.disabledDate(), onChange: value => this.change.emit(value), onSelect: (value, info) => this.select.emit({ value, info }), onCellSelect: cell => this.cellSelect.emit(cell), onCellHover: cell => this.cellHover.emit(cell), onViewDateChange: date => this.viewDateChange.emit(date), onPanelChange: panel => this.panelChange.emit(panel) })))
   }
   get controller() { return this.getCalendar().controller }
   readonly state = () => this.getCalendar().state()

@@ -1,9 +1,10 @@
-import { getRangePanelViewDates } from '@fex-design/core/date-picker/panel'
+import { usePickerAppearance } from './appearance-context'
+import { getVisibleRangePanelViewDates } from '@fex-design/core/date-picker/panel'
 import { datePickerPanelsClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
 import { useRangePickerContext } from './context'
-import { RangePickerPanel } from './date-picker-panel'
+import { RangePickerPanel } from './range-picker-panel'
 
 export interface RangePickerPanelGroupProps extends ComponentProps<'div'> {
   panelCount?: 1 | 2 | undefined
@@ -11,25 +12,29 @@ export interface RangePickerPanelGroupProps extends ComponentProps<'div'> {
 
 export function RangePickerPanelGroup({
   panelCount = 2,
-  className,
+  className, style,
   children,
   ...props
 }: RangePickerPanelGroupProps) {
   const context = useRangePickerContext('RangePickerPanelGroup')
-  const viewDates = getRangePanelViewDates(context.viewDate, context.panel)
+  const appearance = usePickerAppearance()
+  const viewDates = getVisibleRangePanelViewDates(context.viewDate, context.panel, panelCount)
 
   return (
     <div
       {...props}
+      style={{ ...appearance.styles?.panelGroup, ...style }}
+      onMouseLeave={event => { props.onMouseLeave?.(event); if (!event.defaultPrevented) context.setHoverValue(null) }}
+      role={props.role ?? "group"}
       data-slot="range-picker-panel-group"
-      className={cn(datePickerPanelsClassName, className)}
+      className={cn(datePickerPanelsClassName, appearance.classNames?.panelGroup, className)}
     >
-      {children ?? (
+      {children === undefined ? (
         <>
           <RangePickerPanel panelViewDate={viewDates[0]} />
-          {panelCount === 2 ? <RangePickerPanel panelViewDate={viewDates[1]} /> : null}
+          {viewDates[1] ? <RangePickerPanel panelViewDate={viewDates[1]} /> : null}
         </>
-      )}
+      ) : children}
     </div>
   )
 }

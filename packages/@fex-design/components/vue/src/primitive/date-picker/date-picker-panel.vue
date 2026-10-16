@@ -1,54 +1,49 @@
 <script setup lang="ts">
-import {
-  getCalendarValueDate,
-  type CalendarCell,
-  type CalendarDate,
-} from '@fex-design/core/calendar'
-import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
-import { createRangePreviewValue } from '@fex-design/core/date-picker/range'
-import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerCellClassName,
-  datePickerGridClassName,
-  datePickerHeaderSideClassName,
-  datePickerPanelClassName,
-  datePickerWeekHeaderClassName,
-} from '@fex-design/components-styles/date-picker'
-import { cn } from '@fex-design/utils'
-import { computed } from 'vue'
-import {
-  CalendarCell as CalendarCellView,
-  CalendarGrid,
-  CalendarRoot,
-  CalendarWeekHeader,
-} from '../calendar'
-import { useDatePickerContext, useRangePickerContext } from './context'
-import DatePickerHeader from './date-picker-header.vue'
-import DatePickerHeaderButton from './date-picker-header-button.vue'
-import DatePickerHeaderLabel from './date-picker-header-label.vue'
-import DatePickerHeaderTitle from './date-picker-header-title.vue'
+import { usePickerAppearance } from './appearance-context'
+import type { DatePickerCalendarProps } from './appearance.types'
+import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props'
+import DatePickerPanelContent from './date-picker-panel-content.vue'
 
+
+import { type CalendarCell, type CalendarDate } from '@fex-design/core/calendar'
+import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
+import { datePickerPanelClassName } from '@fex-design/components-styles/date-picker'
+import { cn } from '@fex-design/utils'
+import { computed, useAttrs } from 'vue'
+import { CalendarRoot } from '../calendar'
+import { useDatePickerContext, useRangePickerContext } from './context'
+
+
+
+
+
+defineOptions({ name: 'DatePickerPanel', inheritAttrs: false })
+const attrs = useAttrs()
+function nativeAttrs() { const { onMouseleave, ...rest } = attrs; return rest }
+function leave(event: MouseEvent) {
+  const handlers = attrs.onMouseleave
+  for (const handler of Array.isArray(handlers) ? handlers : [handlers]) if (typeof handler === 'function') handler(event)
+  if (!event.defaultPrevented) owner.value.setHoverValue(null)
+}
 const props = defineProps<{
+  calendarProps?: DatePickerCalendarProps | undefined
   class?: string | undefined
   panelViewDate?: CalendarDate | undefined
   range?: boolean | undefined
 }>()
 const datePicker = props.range ? null : useDatePickerContext('DatePickerPanel')
 const rangePicker = props.range ? useRangePickerContext('RangePickerPanel') : null
+const appearance = usePickerAppearance()
+const calendar = computed(() => getPickerCalendarProps(props.calendarProps ?? appearance().calendarProps))
 const owner = computed(() => rangePicker ?? datePicker!)
 const currentRange = computed(() => {
   if (!rangePicker) return undefined
-  const hoverValue = rangePicker.hoverValue.value
-  const rangeValue = rangePicker.rangeValue.value
-  return createRangePreviewValue(rangeValue, hoverValue, rangePicker.activePart.value)
+  return rangePicker.displayRange.value
 })
 
 
 
-function selectValue(value: import('@fex-design/core/calendar').CalendarValue) {
-  const context = owner.value
-  context.select(normalizeDatePickerValue(getCalendarValueDate(value), context.picker, context.weekStartsOn) as never)
-}
+
 
 function disabledDate(date: CalendarDate) {
   return rangePicker
@@ -57,13 +52,17 @@ function disabledDate(date: CalendarDate) {
 }
 
 function hoverCell(cell: CalendarCell) {
-  rangePicker?.setHoverValue(cell.value)
+  owner.value.setHoverValue(cell.value)
 }
 </script>
 
 <template>
   <CalendarRoot
-    :class="cn(datePickerPanelClassName, props.class)"
+    v-bind="nativeAttrs()"
+    month-selection="drilldown"
+    :locale="calendar.locale"
+    :style="[calendar.style, attrs.style]"
+    :class="cn(datePickerPanelClassName, calendar.class, props.class)"
     :value="datePicker?.calendarValue.value ?? null"
     :values="datePicker?.calendarValues.value"
     :range="currentRange"
@@ -74,40 +73,14 @@ function hoverCell(cell: CalendarCell) {
     :min="owner.minDate"
     :max="owner.maxDate"
     :disabled-date="disabledDate"
-    @select="selectValue"
+    @select="owner.select"
+    @cell-select="owner.previewCell"
     @cell-hover="hoverCell"
     @panel-change="owner.setPanel"
     @view-date-change="owner.setViewDate"
-    @mouseleave="rangePicker?.setHoverValue(null)"
+    @mouseleave="leave"
   >
-    <slot>
-      <DatePickerHeader>
-        <div :class="datePickerHeaderSideClassName">
-          <DatePickerHeaderButton
-            :action="owner.panel.value === 'date' ? 'previous-year' : 'previous-panel'"
-          />
-          <DatePickerHeaderButton v-if="owner.panel.value === 'date'" action="previous-month" />
-        </div>
-        <DatePickerHeaderTitle>
-          <DatePickerHeaderLabel part="year" />
-          <DatePickerHeaderLabel part="month" />
-        </DatePickerHeaderTitle>
-        <div :class="datePickerHeaderSideClassName">
-          <DatePickerHeaderButton v-if="owner.panel.value === 'date'" action="next-month" />
-          <DatePickerHeaderButton
-            :action="owner.panel.value === 'date' ? 'next-year' : 'next-panel'"
-          />
-        </div>
-      </DatePickerHeader>
-      <CalendarWeekHeader
-        v-if="owner.panel.value === 'date'"
-        :class="datePickerWeekHeaderClassName"
-      />
-      <CalendarGrid :class="datePickerGridClassName">
-        <template #default="{ cell }">
-          <CalendarCellView :cell="cell" :class="datePickerCellClassName" />
-        </template>
-      </CalendarGrid>
-    </slot>
+    <slot v-if="$slots.default" />
+    <DatePickerPanelContent v-else :calendar-props="calendar" />
   </CalendarRoot>
 </template>

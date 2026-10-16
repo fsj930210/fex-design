@@ -10,11 +10,13 @@ export interface CalendarGridProps<TValue extends CalendarValue = CalendarValue>
   ComponentProps<'div'>,
   'children'
 > {
+  rowProps?: Omit<ComponentProps<typeof CalendarRow>, 'children'> | undefined
   children?: (cell: CoreCalendarCell<TValue>) => ReactNode
 }
 
 export function CalendarGrid<TValue extends CalendarValue = CalendarValue>({
   children,
+  rowProps,
   className,
   onMouseLeave,
   ...props
@@ -34,7 +36,7 @@ export function CalendarGrid<TValue extends CalendarValue = CalendarValue>({
       }}
     >
       {context.grid.rows.map((row) => (
-        <CalendarRow key={row.map((cell) => cell.key).join('|')}>
+        <CalendarRow {...rowProps} key={row.map((cell) => cell.key).join('|')}>
           {row.map((cell) =>
             children ? (
               <Fragment key={cell.key}>{children(cell as CoreCalendarCell<TValue>)}</Fragment>

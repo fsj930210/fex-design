@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { createHostClassName } from "@fex-design/angular/signals/host-class";
 
 @Component({
@@ -12,5 +12,6 @@ import { createHostClassName } from "@fex-design/angular/signals/host-class";
   templateUrl: "./check.html",
 })
 export class CheckIcon {
-  protected readonly hostClassName = createHostClassName("inline-flex items-center justify-center shrink-0 size-6");
+  readonly class = input<string>();
+  protected readonly hostClassName = createHostClassName("inline-flex items-center justify-center shrink-0 size-6", () => this.class());
 }

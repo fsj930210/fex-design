@@ -1,23 +1,29 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { mergePickerStyle } from './style'
+import { getPickerAppearance } from './appearance-context'
 
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core'
+import { NgTemplateOutlet } from '@angular/common'
+import { NativeAttributesDirective, type NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import { datePickerContentClassName } from '@fex-design/components-styles/date-picker'
+import { Popover, PopoverContent, PopoverPortal } from '../popover'
+import { PickerContainerToken } from './container-context'
 @Component({
-  selector: 'fex-date-picker-content',
-  standalone: true,
+  selector: 'div[datePickerContent], div[rangePickerContent]',
+  standalone: true, imports: [NativeAttributesDirective, NgTemplateOutlet, PopoverContent, PopoverPortal],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'data-slot': 'date-picker-content' },
-  template: '<ng-content />',
+  templateUrl: './date-picker-content.html',
 })
 export class DatePickerContent {
-  @Input('class') className: string | undefined = undefined
+  protected readonly appearance = getPickerAppearance()
+  protected readonly contentStyle = computed(() => mergePickerStyle(this.appearance().popoverProps?.styles?.root, this.contentProps()?.style))
+  readonly class = input<string>()
+  readonly contentProps = input<NativeAttributes>()
+  private readonly scope = inject(PickerContainerToken, { optional: true })
+  private readonly localPopover = inject(Popover, { optional: true })
+  protected readonly customContainer = computed(() => !this.localPopover || Boolean(this.scope?.containerTemplate() && this.localPopover === this.scope.popover))
+  protected readonly contentClassName = createHostClassName(datePickerContentClassName, () => [this.appearance().popoverProps?.classNames?.root, this.contentProps()?.class, this.class()].filter(Boolean).join(' ') || undefined)
 }
-
-@Component({
-  selector: 'fex-range-picker-content',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'range-picker-content' },
-  template: '<ng-content />',
-})
-export class RangePickerContent {
-  @Input('class') className: string | undefined = undefined
-}
+export { DatePickerContent as RangePickerContent }

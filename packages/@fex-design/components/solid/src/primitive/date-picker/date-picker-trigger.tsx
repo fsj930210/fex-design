@@ -1,130 +1,57 @@
-import { formatDatePickerValue, parseDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerMultipleInputClassName,
-  datePickerMultipleTagsClassName,
-  datePickerTriggerClassName,
-} from '@fex-design/components-styles/date-picker'
+import { usePickerAppearance } from './appearance-context'
+import type { DatePickerInputProps } from './appearance.types'
+import { getPickerInputProps, getPickerControlProps } from '@fex-design/core/date-picker/safe-props'
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
+import { getDatePickerInputAttributes } from '@fex-design/core/date-picker/input'
+import { isPickerContentProvided } from '@fex-design/core/date-picker/view'
+import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
+import { Show, mergeProps, splitProps, type JSX } from 'solid-js'
+import { createPickerTrigger } from './create-picker-trigger'
 import { cn } from '@fex-design/utils'
-import { createEffect, createSignal, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { CalendarIcon } from '@fex-design/solid/icons/calendar'
-import {
-  InputClear,
-  InputControl,
-  InputPrefix,
-  InputRoot,
-  InputSuffix,
-  type InputRootProps,
-} from '../input'
-import { PopoverTrigger } from '../popover'
-import { useDatePickerContext } from './context'
+import { InputRoot, InputControl, InputClear, InputPrefix, InputSuffix, type InputRootProps } from '../input'
+import { useDatePickerContext, type DatePickerContextValue } from './context'
 import { DatePickerTags } from './date-picker-tags'
+import { datePickerAffixClassName, datePickerTriggerClassName, datePickerInputPreviewClassName, datePickerMultipleTagsClassName, datePickerMultipleInputClassName } from '@fex-design/components-styles/date-picker'
 
-export interface DatePickerTriggerProps extends ParentProps<
-  Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'prefix'>
-> {
-  displayValue?: string
-  placeholder?: string
-  prefix?: JSX.Element
-  suffix?: JSX.Element
-  inputProps?: JSX.InputHTMLAttributes<HTMLInputElement>
+export interface DatePickerTriggerBinding {
+  props: JSX.HTMLAttributes<HTMLElement>
+  ref: (element: HTMLElement | null) => void
+  state: DatePickerContextValue
 }
-
-function isValueArray(value: unknown): value is readonly unknown[] {
-  return Array.isArray(value)
+export type DatePickerTriggerProps = Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'readOnly' | 'children' | 'prefix' | 'onFocus' | 'onClick' | 'ref'> & {
+  ref?: ((element: HTMLElement) => void) | undefined
+  onFocus?: JSX.EventHandlerUnion<HTMLElement, FocusEvent> | undefined
+  onClick?: JSX.EventHandlerUnion<HTMLElement, MouseEvent> | undefined
+  children?: ((binding: DatePickerTriggerBinding) => JSX.Element) | undefined
+  inputProps?: DatePickerInputProps | undefined
+  placeholder?: string | undefined
+  prefix?: JSX.Element | undefined
+  suffix?: JSX.Element | undefined
 }
 
 export function DatePickerTrigger(props: DatePickerTriggerProps) {
-  const [local, rest] = splitProps(props, [
-    'class',
-    'displayValue',
-    'placeholder',
-    'prefix',
-    'suffix',
-    'status',
-    'inputProps',
-  ])
+  const [local, rest] = splitProps(props, ['children','inputProps','placeholder','prefix','suffix','class','ref','onClick','onFocus'])
   const context = useDatePickerContext('DatePickerTrigger')
-  let inputElement: HTMLInputElement | undefined
-  const pickerDisplayValue = () => {
-    const value = context.value()
-    return isValueArray(value)
-      ? value.map((item) => formatDatePickerValue(item as never, context)).join(', ')
-      : formatDatePickerValue(value as never, context)
-  }
-  const displayValue = () => local.displayValue ?? pickerDisplayValue()
-  const [text, setText] = createSignal(displayValue())
-  createEffect(() => setText(displayValue()))
-
-  function input(nextText: string) {
-    setText(nextText)
-    if (context.multiple) return
-    const result = parseDatePickerValue(nextText, context)
-    if (result.valid) context.select(result.value as never)
-  }
-
-  return (
-    <PopoverTrigger>
-      {(trigger) => {
-        const { onClick, onFocus, ...triggerProps } = trigger.props
-        return (
-          <InputRoot
-            {...rest}
-            {...(triggerProps as unknown as JSX.HTMLAttributes<HTMLDivElement>)}
-            ref={trigger.ref as unknown as JSX.HTMLAttributes<HTMLDivElement>['ref']}
-            class={cn(datePickerTriggerClassName, local.class)}
-            role={undefined}
-            value={context.multiple ? '' : text()}
-            disabled={context.disabled}
-            readOnly={context.readOnly}
-            onValueChange={input}
-            onClear={context.allowClear ? context.clear : undefined}
-            onClick={(event) => {
-              if (context.disabled) {
-                event.preventDefault()
-                event.stopPropagation()
-                return
-              }
-              inputElement?.focus()
-              if (typeof onClick === 'function') onClick(event as never)
-            }}
-            onFocus={(event) => {
-              if (context.disabled) {
-                event.preventDefault()
-                return
-              }
-              if (typeof onFocus === 'function') onFocus(event as never)
-            }}
-          >
-            {local.prefix ? <InputPrefix>{local.prefix}</InputPrefix> : null}
-            {context.multiple ? <DatePickerTags class={datePickerMultipleTagsClassName} /> : null}
-            <InputControl
-              aria-invalid={(local.status ?? context.status) === 'error' || undefined}
-              {...local.inputProps}
-              ref={(element) => {
-                inputElement = element
-                const ref = local.inputProps?.ref
-                if (typeof ref === 'function') ref(element)
-              }}
-              class={cn(
-                context.multiple && displayValue() && datePickerMultipleInputClassName,
-                local.inputProps?.class,
-              )}
-              placeholder={
-                context.multiple && displayValue() ? '' : (local.placeholder ?? context.format)
-              }
-            />
-            {context.allowClear ? (
-              <InputClear
-                onPointerDown={(event) => event.stopPropagation()}
-                onClick={(event) => event.stopPropagation()}
-              />
-            ) : null}
-            {!context.allowClear || !displayValue() ? (
-              <InputSuffix>{local.suffix ?? <CalendarIcon class="size-4" />}</InputSuffix>
-            ) : null}
-          </InputRoot>
-        )
-      }}
-    </PopoverTrigger>
+  const appearance = usePickerAppearance()
+  const input = () => getPickerInputProps(local.inputProps ?? appearance().inputProps)
+  const control = () => getPickerControlProps(input())
+  const trigger = createPickerTrigger(context)
+  const ref = (element: HTMLElement | null) => { trigger.ref(element); if (element) local.ref?.(element) }
+  const triggerProps = mergeProps(rest, { get size() { return rest.size ?? input().size ?? 'md' }, get variant() { return rest.variant ?? input().variant ?? 'outlined' }, get style() { return mergeStyle(input().styles?.root, input().style, rest.style) }, get class() { return cn(datePickerTriggerClassName, input().classNames?.root, input().class, local.class) }, 'aria-haspopup': 'dialog' as const, get 'aria-expanded'() { return context.open() }, get 'data-state'() { return context.open() ? 'open' : 'closed' },
+    onClick(event: MouseEvent) { callEventHandler(local.onClick, event); trigger.click(event) },
+    onFocus(event: FocusEvent) { callEventHandler(local.onFocus, event); trigger.focus(event) },
+  })
+  const [, fieldProps] = splitProps(triggerProps, ['onFocus'])
+  return local.children ? local.children({ props: triggerProps, ref, state: context }) : (
+    <InputRoot {...fieldProps} ref={ref} value={context.inputValue()} disabled={context.disabled} readOnly={true}>
+      {isPickerContentProvided(local.prefix ?? input().prefix) ? <InputPrefix class={input().classNames?.prefix} style={input().styles?.prefix}>{local.prefix ?? input().prefix}</InputPrefix> : null}
+      {context.triggerView.showTags ? <DatePickerTags class={datePickerMultipleTagsClassName} /> : null}
+      <InputControl {...getDatePickerInputAttributes(control())} onFocus={event => { callEventHandler(control().onFocus, event); callEventHandler(local.onFocus, event); trigger.focus(event) }} class={cn(context.triggerView.preview && datePickerInputPreviewClassName, context.triggerView.hasTags && datePickerMultipleInputClassName, input().classNames?.control)} style={input().styles?.control} placeholder={context.triggerView.hasTags ? '' : (local.placeholder ?? input().placeholder ?? context.format)} />
+      <div data-slot="date-picker-affix" class={datePickerAffixClassName}>
+        <InputSuffix class={input().classNames?.suffix} style={input().styles?.suffix}>{local.suffix ?? input().suffix ?? <CalendarIcon class="size-4" />}</InputSuffix>
+        <Show when={context.canClear}><InputClear class={input().classNames?.clear} style={input().styles?.clear} aria-label="清除日期" onPointerDown={event => { event.preventDefault(); event.stopPropagation() }} onClick={event => { event.preventDefault(); event.stopPropagation(); context.clear() }} /></Show>
+      </div>
+    </InputRoot>
   )
 }

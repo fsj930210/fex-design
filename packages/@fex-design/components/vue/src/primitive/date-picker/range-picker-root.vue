@@ -1,129 +1,66 @@
 <script setup lang="ts">
-import type {
-  CalendarDate,
-  CalendarRange,
-  CalendarValue,
-  CalendarWeekday,
-} from '@fex-design/core/calendar'
-import type { DatePickerPicker } from '@fex-design/core/date-picker/types'
-import { getCurrentInstance, provide } from 'vue'
+import { pickerAppearanceKey } from './appearance-context'
+import type { PickerAppearance } from './appearance.types'
+import { pickerOwnerKey } from './owner-context'
+import { pickerContainerKey } from './container-context'
+import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
+import type { DatePickerPicker, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
+import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
+import { popoverKey } from '../popover/context'
+import { inject, provide, useAttrs, useSlots } from 'vue'
 import PopoverRoot from '../popover/popover-root.vue'
 import { rangePickerContextKey } from './context'
 import { useRangePicker } from './use-range-picker'
 
-const props = withDefaults(
-  defineProps<{
+defineOptions({ name: 'RangePickerRoot', inheritAttrs: false })
+const props = withDefaults(defineProps<PickerAppearance & {
+    popoverProps?: PickerAppearance['popoverProps']
     value?: CalendarRange<CalendarValue> | undefined
     defaultValue?: CalendarRange<CalendarValue> | undefined
     open?: boolean | undefined
     defaultOpen?: boolean | undefined
     picker?: DatePickerPicker | undefined
-    status?: 'error' | 'warning' | undefined
     needConfirm?: boolean | undefined
     disabled?: boolean | undefined
-    readOnly?: boolean | undefined
-    allowClear?: boolean | undefined
+    clearable?: boolean | undefined
     allowEmpty?: boolean | { start?: boolean; end?: boolean } | undefined
     order?: boolean | undefined
     format?: string | undefined
     weekStartsOn?: CalendarWeekday | undefined
     minDate?: CalendarDate | undefined
     maxDate?: CalendarDate | undefined
-    disabledDate?: ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined
-  }>(),
-  {
-    defaultOpen: false,
-    picker: 'date',
-    disabled: false,
-    readOnly: false,
-    allowClear: true,
-    order: true,
-    weekStartsOn: 0,
-  },
-)
+    disabledDate?: ((date: CalendarDate, info: DatePickerDisabledDateInfo) => boolean) | undefined
+  }>(), { open: undefined, defaultOpen: undefined, needConfirm: undefined, disabled: undefined, clearable: undefined, order: undefined, allowEmpty: undefined })
+
 const emit = defineEmits<{
   change: [value: CalendarRange<CalendarValue>]
+  'update:value': [value: CalendarRange<CalendarValue>]
   openChange: [open: boolean]
+  'update:open': [open: boolean]
 }>()
-const instance = getCurrentInstance()
-function hasProp(name: string) {
-  const vnodeProps = instance?.vnode.props
-  return Boolean(vnodeProps && Object.prototype.hasOwnProperty.call(vnodeProps, name))
-}
-function isExplicitFalseProp(name: string) {
-  const vnodeProps = instance?.vnode.props as Record<string, unknown> | null | undefined
-  return Boolean(
-    vnodeProps &&
-    Object.prototype.hasOwnProperty.call(vnodeProps, name) &&
-    vnodeProps[name] === false,
-  )
-}
-const rangePicker = useRangePicker<CalendarValue>({
-  get value() {
-    return props.value
-  },
-  get defaultValue() {
-    return props.defaultValue
-  },
-  get open() {
-    return hasProp('open') ? props.open : undefined
-  },
-  get defaultOpen() {
-    return props.defaultOpen
-  },
-  get picker() {
-    return props.picker
-  },
-  get status() {
-    return props.status
-  },
-  get needConfirm() {
-    return props.needConfirm
-  },
-  get disabled() {
-    return props.disabled
-  },
-  get readOnly() {
-    return props.readOnly
-  },
-  get allowClear() {
-    return !isExplicitFalseProp('allowClear')
-  },
-  get allowEmpty() {
-    return props.allowEmpty
-  },
-  get order() {
-    return props.order
-  },
-  get format() {
-    return props.format
-  },
-  get weekStartsOn() {
-    return props.weekStartsOn
-  },
-  get minDate() {
-    return props.minDate
-  },
-  get maxDate() {
-    return props.maxDate
-  },
-  get disabledDate() {
-    return props.disabledDate
-  },
-  onChange: (value) => emit('change', value),
-  onOpenChange: (open) => emit('openChange', open),
+const attrs = useAttrs()
+const slots = useSlots()
+// A tiny functional component reuses the default slot inside a replacement container.
+const content = () => slots.default?.({ state: picker })
+function popupOptions() { return getDatePickerPopoverOptions({ ...attrs, ...props.popoverProps }) }
+const onChange = (value: CalendarRange<CalendarValue>) => { emit('update:value', value); emit('change', value) }
+const onOpenChange = (open: boolean) => { emit('update:open', open); emit('openChange', open) }
+const picker = useRangePicker<CalendarValue>(() => {
+  const { popoverProps, inputProps, startInputProps, endInputProps, calendarProps, classNames, styles, ...options } = props
+  return { ...definedPickerOptions(options), onChange, onOpenChange }
 })
-provide(rangePickerContextKey, rangePicker)
+provide(pickerAppearanceKey, () => props)
+provide(pickerOwnerKey, picker)
+provide(pickerContainerKey, { parentPopover: inject(popoverKey, null) })
+provide(rangePickerContextKey, picker)
+defineExpose({ controller: picker.controller })
 </script>
 
 <template>
-  <PopoverRoot
-    :open="rangePicker.open.value"
-    :trigger="rangePicker.disabled ? [] : ['focus', 'click']"
-    placement="bottom"
-    :side-offset="6"
-    @open-change="rangePicker.setOpen"
-  >
-    <slot />
-  </PopoverRoot>
+  <slot v-if="slots.container" name="container" :state="picker" :content="content" />
+  <template v-else>
+    <PopoverRoot v-bind="popupOptions()" :open="picker.open.value" @open-change="picker.setOpen">
+      <slot :state="picker" />
+    </PopoverRoot>
+  </template>
 </template>

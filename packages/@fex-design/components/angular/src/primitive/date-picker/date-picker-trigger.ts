@@ -1,104 +1,104 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  signal,
-  type AfterViewInit,
-} from '@angular/core'
-import type { CalendarValue } from '@fex-design/core/calendar'
-import { formatDatePickerValue, parseDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerMultipleInputClassName,
-  datePickerTriggerClassName,
-} from '@fex-design/components-styles/date-picker'
+import { mergePickerStyle } from './style'
+import { getPickerAppearance } from './appearance-context'
+import type { DatePickerInputProps } from './appearance.types'
+import { getPickerInputProps, getPickerControlProps } from '@fex-design/core/date-picker/safe-props'
 import { cn } from '@fex-design/utils'
+import { createHostStyle } from '@fex-design/angular/signals/host-style'
+import { connectNativeAttributes, type NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import { getDatePickerInputAttributes } from '@fex-design/core/date-picker/input'
+import type { InputSize, InputVariant } from '@fex-design/core/input/types'
+import type { InputAttributes } from '../input'
+import { listenNativeEvent } from '@fex-design/angular/directives/listen-native-event'
+import { getDatePickerInputPart, getRangePickerInputPlaceholder, getRangePickerSeparator, isPickerContentProvided } from '@fex-design/core/date-picker/view'
+import { ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, Injector, input, TemplateRef, type AfterViewInit, type OnDestroy } from '@angular/core'
+import { NgTemplateOutlet } from '@angular/common'
+
+import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { CalendarIcon } from '@fex-design/angular/icons/calendar'
-import { InputClear, InputControl, InputRoot, InputPrefix, InputSuffix } from '../input/input'
+import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
+import { inputClearClassName } from '@fex-design/components-styles/input'
+import { InputRoot, InputControl, InputPrefix, InputSuffix } from '../input'
+import { Popover } from '../popover'
+import { eventInfo } from '../popover/event-info'
 import { DatePickerRoot } from './date-picker-root'
 import { DatePickerTags } from './date-picker-tags'
-import { DatePickerState } from './use-date-picker'
+import { datePickerAffixClassName, datePickerTriggerClassName, datePickerInputPreviewClassName, datePickerMultipleTagsClassName, datePickerMultipleInputClassName } from '@fex-design/components-styles/date-picker'
 
 @Component({
-  selector: 'fex-date-picker-trigger',
+  selector: 'div[datePickerTrigger]',
+  exportAs: 'datePickerTrigger',
   standalone: true,
-  imports: [
-    InputRoot,
-    InputControl,
-    InputClear,
-    InputPrefix,
-    InputSuffix,
-    CalendarIcon,
-    DatePickerTags,
-  ],
+  imports: [NgTemplateOutlet, InputRoot, InputControl, InputPrefix, InputSuffix, CalendarIcon, CircleXIcon, DatePickerTags],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'date-picker-trigger', class: 'inline-block' },
+  host: { '[class]': 'hostClassName()', 'data-slot': 'date-picker-trigger', 'aria-haspopup': 'dialog', '[attr.aria-expanded]': 'context().open', '[attr.data-state]': "context().open ? 'open' : 'closed'" },
   templateUrl: './date-picker-trigger.html',
 })
-export class DatePickerTrigger implements AfterViewInit {
-  @Input() placeholder: string | undefined = undefined
-  @Input('displayValue') displayValueInput: string | undefined = undefined
-  @Input() prefix: string | undefined = undefined
-  @Input() suffix: string | undefined = undefined
-  @Input() status: 'error' | 'warning' | undefined = undefined
-  @Input('class') className: string | undefined = undefined
-  protected readonly text = signal('')
-
-  constructor(
-    private readonly root: DatePickerRoot,
-    readonly state: DatePickerState,
-    private readonly elementRef: ElementRef<HTMLElement>,
-  ) {}
-
-  ngAfterViewInit() {
-    this.root.registerTrigger(this.elementRef.nativeElement)
+export class DatePickerTrigger implements AfterViewInit, OnDestroy {
+  readonly size = input<InputSize>()
+  readonly variant = input<InputVariant>()
+  readonly triggerProps = input<NativeAttributes>()
+  readonly inputProps = input<DatePickerInputProps>()
+  protected readonly appearance = getPickerAppearance()
+  readonly inputConfig = computed(() => getPickerInputProps(this.inputProps() ?? this.appearance().inputProps))
+  readonly inputSize = computed(() => this.size() ?? this.inputConfig().size ?? 'md')
+  readonly inputVariant = computed(() => this.variant() ?? this.inputConfig().variant ?? 'outlined')
+  protected readonly nativeStyle = createHostStyle()
+  readonly inputRootStyle = computed(() => mergePickerStyle(this.inputConfig().styles?.root, this.inputConfig().style, this.nativeStyle()))
+  protected readonly cn = cn
+  readonly resolvedInputProps = computed(() => getDatePickerInputAttributes(getPickerControlProps(this.inputConfig())) as InputAttributes)
+  readonly placeholder = input<string>()
+  readonly prefix = input<string | number | TemplateRef<unknown>>()
+  readonly prefixValue = computed(() => this.prefix() ?? this.inputConfig().prefix)
+  readonly prefixTemplate = computed(() => this.prefixValue() instanceof TemplateRef ? this.prefixValue() as TemplateRef<unknown> : null)
+  readonly suffix = input<string | number | TemplateRef<unknown>>()
+  readonly suffixValue = computed(() => this.suffix() ?? this.inputConfig().suffix)
+  readonly suffixTemplate = computed(() => this.suffixValue() instanceof TemplateRef ? this.suffixValue() as TemplateRef<unknown> : null)
+  readonly injector = inject(Injector)
+  readonly root = inject(DatePickerRoot)
+  readonly template = contentChild<TemplateRef<unknown>>(TemplateRef)
+  readonly context = computed(() => this.root.state.context())
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement
+  private reference: HTMLElement | null = this.element
+  private readonly localPopover = inject(Popover, { optional: true })
+  private ownedPopover() { return this.root.containerTemplate() && this.localPopover === this.root.popover ? null : this.localPopover }
+  private registerReference(element: HTMLElement | null) {
+    const popover = this.ownedPopover()
+    if (!popover) return
+    popover.referenceElement = element
+    popover.overlay.setReferenceElement(element)
   }
-
-  rootClassName() {
-    return cn(datePickerTriggerClassName, this.className)
+  protected readonly hostClassName = createHostClassName('block w-full min-w-0')
+  protected readonly triggerClassName = createHostClassName(() => cn(datePickerTriggerClassName, this.inputConfig().classNames?.root, this.inputConfig().class))
+  protected readonly previewClassName = datePickerInputPreviewClassName
+  protected readonly affixClassName = datePickerAffixClassName
+  protected readonly clearClassName = inputClearClassName
+  protected readonly tagsClassName = datePickerMultipleTagsClassName
+  protected readonly multipleInputClassName = datePickerMultipleInputClassName
+  ngAfterViewInit() { this.registerReference(this.reference) }
+  ngOnDestroy() { if (this.ownedPopover()?.referenceElement === this.reference) this.registerReference(null) }
+  protected readonly isContentProvided = isPickerContentProvided
+  protected readonly inputPlaceholder = getRangePickerInputPlaceholder
+  protected readonly rangeSeparator = getRangePickerSeparator
+  constructor() {
+    connectNativeAttributes(this.triggerProps, { handledEvents: ['onClick', 'onFocus'], exclude: ['data-state', 'aria-expanded', 'aria-haspopup', 'data-slot'] })
+    listenNativeEvent('click', event => { if (!this.template()) this.open(event) })
+    listenNativeEvent('focusin', event => {
+      if (!this.template() && event.target instanceof HTMLInputElement) this.focus(event, getDatePickerInputPart(event.target.closest('[data-range-part]')?.getAttribute('data-range-part')))
+    })
   }
-
-  displayValue() {
-    const context = this.state.context()
-    const value = Array.isArray(context.value)
-      ? context.value.map((item) => formatDatePickerValue(item, context)).join(', ')
-      : formatDatePickerValue(context.value as CalendarValue | null, context)
-    return this.displayValueInput ?? value
+  readonly ref = (element: HTMLElement | null) => { this.reference = element; this.registerReference(element) }
+  open(event: Event, part?: 'start' | 'end') {
+    this.triggerProps()?.onClick?.(event as MouseEvent)
+    if (event.defaultPrevented) return
+    this.root.state.openPanel()
   }
-
-  inputValue() {
-    return this.state.multiple() ? '' : this.text() || this.displayValue()
+  focus(event: Event, part?: 'start' | 'end') {
+    this.triggerProps()?.onFocus?.(event as FocusEvent)
+    if (event.defaultPrevented || this.context().disabled) return
+    const popover = this.ownedPopover()
+    if (!popover) { this.root.state.openPanel(); return }
+    popover.syncOptions()
+    popover.overlay.trigger.focus(eventInfo(event))
   }
-
-  inputClassName() {
-    return cn(this.state.multiple() && this.displayValue() && datePickerMultipleInputClassName)
-  }
-
-  showSuffix() {
-    return !this.state.context().allowClear || !this.displayValue()
-  }
-
-  open(input: HTMLInputElement, event?: Event) {
-    if (this.state.context().disabled) {
-      event?.preventDefault()
-      event?.stopPropagation()
-      return
-    }
-    input.focus()
-    this.state.openPanel()
-  }
-
-  input(text: string) {
-    this.text.set(text)
-    const context = this.state.context()
-    if (context.multiple) return
-    const result = parseDatePickerValue(text, context)
-    if (result.valid) context.select(result.value)
-  }
-
-  clear(event?: Event) {
-    event?.stopPropagation()
-    this.text.set('')
-    this.state.clear()
-  }
+  clear(event: Event) { event.preventDefault(); event.stopPropagation(); this.root.state.clear() }
 }

@@ -4,7 +4,7 @@ import { cn } from '@fex-design/utils'
 import { computed, inject, ref, useAttrs, type ComponentPublicInstance } from 'vue'
 import { inputContextKey } from './input-context'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'InputControl', inheritAttrs: false })
 const attrs = useAttrs()
 const emit = defineEmits<{
   blur: [event: FocusEvent]
@@ -38,8 +38,8 @@ defineExpose({
     v-bind="attrs"
     :ref="setElement"
     :value="inputContext.value.value"
-    :disabled="inputContext.disabled.value"
-    :readonly="inputContext.readOnly.value"
+    :disabled="inputContext.disabled.value || attrs.disabled === '' || Boolean(attrs.disabled)"
+    :readonly="inputContext.readOnly.value || attrs.readonly === '' || Boolean(attrs.readonly)"
     data-slot="input-control"
     :class="className"
     @blur="emit('blur', $event)"

@@ -13,7 +13,7 @@ defineOptions({ name: "ChevronsLeftIcon" });
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="m7 18 6-6-6-6" />
-  <path d="m13 18 6-6-6-6" />
+  <path d="m17 18-6-6 6-6" />
+  <path d="m11 18-6-6 6-6" />
 </svg>
 </template>

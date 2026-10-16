@@ -1,0 +1,12 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">禁用</p>
+<div datePicker [disabled]="true" [defaultValue]="date"></div>
+<div rangePicker [disabled]="true" [defaultValue]="range"></div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">默认（只读输入，可选择）</p>
+<div datePicker [defaultValue]="date"></div>
+<div rangePicker [defaultValue]="range"></div>
+</section>
+</div>

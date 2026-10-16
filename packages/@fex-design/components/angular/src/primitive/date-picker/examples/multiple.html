@@ -1,0 +1,10 @@
+<div class="flex w-full min-w-0 flex-col items-stretch gap-4">
+  <div class="flex w-full min-w-0 flex-col gap-2">
+    <span class="text-sm text-muted-foreground">默认换行</span>
+    <div datePickerRoot [multiple]="true" [defaultValue]="values"><div datePickerTrigger class="w-full"></div><div datePickerContent><div datePickerPanel></div><div datePickerFooter></div></div></div>
+  </div>
+  <div class="flex w-full min-w-0 flex-col gap-2">
+    <span class="text-sm text-muted-foreground">最多显示 2 个标签</span>
+    <div datePickerRoot [multiple]="true" [defaultValue]="values" [maxCount]="2"><div datePickerTrigger class="w-full"></div><div datePickerContent><div datePickerPanel></div><div datePickerFooter></div></div></div>
+  </div>
+</div>

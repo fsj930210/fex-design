@@ -10,11 +10,12 @@ import { CalendarCell } from './calendar-cell'
 
 export type CalendarGridProps<TValue extends CalendarValue = CalendarValue> =
   Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children'> & {
+    rowProps?: Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children'> | undefined
     children?: (cell: Cell<TValue>) => JSX.Element
   }
 
 export function CalendarGrid<TValue extends CalendarValue = CalendarValue>(props: CalendarGridProps<TValue>) {
-  const [local, rest] = splitProps(props, ['children', 'class', 'onMouseLeave'])
+  const [local, rest] = splitProps(props, ['children', 'class', 'onMouseLeave', 'rowProps'])
   const context = useCalendarContext('CalendarGrid')
   const [view, setView] = createStore<{ rows: { key: string; cells: Cell[] }[] }>({ rows: [] })
   // Synchronize the render model with the external core grid. Reconcile preserves
@@ -41,7 +42,7 @@ export function CalendarGrid<TValue extends CalendarValue = CalendarValue>(props
       }}
     >
       <For each={view.rows}>{row => (
-        <CalendarRow>
+        <CalendarRow {...local.rowProps}>
           <For each={row.cells}>{cell => local.children
             ? local.children(cell as Cell<TValue>)
             : <CalendarCell cell={cell} />

@@ -1,59 +1,22 @@
-import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
-import { cn } from '@fex-design/utils'
+import { usePickerAppearance } from './appearance-context'
 import type { ComponentProps } from 'react'
-import { Tag } from '../tag'
+import { getDatePickerTagItems } from '@fex-design/core/date-picker/input'
+import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+import { datePickerMultipleTagsClassName } from '@fex-design/components-styles/date-picker'
+import { cn } from '@fex-design/utils'
+import { Tag, TagAction } from '../tag'
 import { useDatePickerContext } from './context'
 
-export interface DatePickerTagsProps extends ComponentProps<'div'> {
-  maxVisible?: number
-}
-
-export function DatePickerTags({ className, maxVisible = 1, ...props }: DatePickerTagsProps) {
+export type DatePickerTagsProps = ComponentProps<'div'> & { maxCount?: number }
+export function DatePickerTags( { className, style, maxCount, ...props }: DatePickerTagsProps) {
   const context = useDatePickerContext('DatePickerTags')
-  const values = Array.isArray(context.value) ? context.value : []
-  if (!values.length) return null
-  const labels = values.map((value) => formatDatePickerValue(value, context))
-  const visibleValues = values.slice(0, maxVisible)
-  const hiddenCount = values.length - visibleValues.length
-  return (
-    <div
-      {...props}
-      data-slot="date-picker-tags"
-      className={cn('flex shrink items-center gap-1', className)}
-    >
-      {visibleValues.map((value) => {
-        const label = formatDatePickerValue(value, context)
-        return <DatePickerTag key={label} value={label} onRemove={() => context.select(value)} />
-      })}
-      {hiddenCount > 0 ? (
-        <Tag data-slot="date-picker-tag-overflow" size="sm" title={labels.join(', ')}>
-          +{hiddenCount}
-        </Tag>
-      ) : null}
-    </div>
-  )
-}
-
-export interface DatePickerTagProps extends Omit<ComponentProps<'span'>, 'onClose'> {
-  value: string
-  onRemove?: () => void
-}
-
-export function DatePickerTag({ value, className, onRemove, ...props }: DatePickerTagProps) {
-  return (
-    <Tag
-      {...props}
-      data-slot="date-picker-tag"
-      size="sm"
-      closable={Boolean(onRemove)}
-      className={className}
-      onPointerDownCapture={(event) => event.stopPropagation()}
-      onClose={(event) => {
-        event.stopPropagation()
-        onRemove?.()
-      }}
-    >
-      {value}
-    </Tag>
-  )
+  const appearance = usePickerAppearance()
+  const tags = getDatePickerTagItems(context.calendarValues, maxCount ?? context.maxCount)
+  return <div {...props} style={{ ...appearance.styles?.tags, ...style }} data-slot="date-picker-tags" className={cn(datePickerMultipleTagsClassName, appearance.classNames?.tags, className)}>
+    {tags.items.map(item => <Tag key={item.key} size="sm" data-slot="date-picker-tag" className={appearance.classNames?.tag} style={appearance.styles?.tag}>
+      {formatDatePickerValue(item.value, context)}
+      <TagAction className={appearance.classNames?.tagRemove} style={appearance.styles?.tagRemove} aria-label="移除日期" disabled={context.disabled} onPointerDown={event => { event.preventDefault(); event.stopPropagation() }} onClick={event => { event.stopPropagation(); if (!event.defaultPrevented) context.remove(item.value) }} />
+    </Tag>)}
+    {tags.overflowCount > 0 ? <Tag size="sm" data-slot="date-picker-tag-overflow" className={appearance.classNames?.tagOverflow} style={appearance.styles?.tagOverflow}>+{tags.overflowCount}</Tag> : null}
+  </div>
 }

@@ -12,6 +12,7 @@ export interface CalendarOptions<TValue extends CalendarValue = CalendarValue> {
   viewDate?: CalendarDate | undefined
   panel?: CalendarPanel | undefined
   granularity?: CalendarGranularity | undefined
+  monthSelection?: 'browse' | 'drilldown' | undefined
   weekStartsOn?: CalendarWeekday | undefined
   locale?: Partial<CalendarLocale> | undefined
   showWeek?: boolean | undefined
@@ -70,7 +71,9 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
       ...(options.values ? { values: options.values } : {}), ...(options.range ? { range: options.range } : {}),
       ...(options.today ? { today: options.today } : {}), ...(options.min ? { min: options.min } : {}), ...(options.max ? { max: options.max } : {}), ...(options.disabledDate ? { disabledDate: options.disabledDate } : {}) }
     const keys = Object.keys(inputs) as (keyof CalendarGridOptions<TValue>)[]
-    if (gridCache && keys.length === Object.keys(gridCache.options).length && keys.every(key => Object.is(inputs[key], gridCache!.options[key]))) return gridCache.grid
+    // A stable predicate can read changing range endpoints or framework state.
+    // Evaluate it on every grid read so cached cells cannot retain stale disabled flags.
+    if (!inputs.disabledDate && gridCache && keys.length === Object.keys(gridCache.options).length && keys.every(key => Object.is(inputs[key], gridCache!.options[key]))) return gridCache.grid
     const grid = createCalendarGrid<TValue>(inputs)
     gridCache = { options: inputs, grid }
     return grid
@@ -116,7 +119,7 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
     // The UI year panel exposes months as a browsing grid. Choosing a month
     // changes the view while keeping that panel open; the user explicitly
     // enters the date panel through the month header control.
-    if (cell.panel === 'month' && state.granularity === 'date') {
+    if (cell.panel === 'month' && state.granularity === 'date' && options.monthSelection !== 'drilldown') {
       setViewDate(date)
       return
     }

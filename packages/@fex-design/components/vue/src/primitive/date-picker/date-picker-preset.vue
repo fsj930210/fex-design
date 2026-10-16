@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { datePickerPresetClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
-import { computed, useAttrs } from 'vue'
+import { normalizeClass, useAttrs } from 'vue'
 import Button from '../button/button.vue'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'DatePickerPreset', inheritAttrs: false })
 
 const attrs = useAttrs()
-const className = computed(() => cn(datePickerPresetClassName, attrs.class as string | undefined))
+function nativeAttrs() { const { class: className, ...rest } = attrs; return rest }
 </script>
 
 <template>
-  <Button data-slot="date-picker-preset" v-bind="{ ...attrs, class: undefined }" :class="className">
+  <Button data-slot="date-picker-preset" v-bind="nativeAttrs()" type="button" :class="cn(datePickerPresetClassName, normalizeClass(attrs.class))">
     <slot />
   </Button>
 </template>

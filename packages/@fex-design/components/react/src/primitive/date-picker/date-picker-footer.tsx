@@ -1,148 +1,51 @@
+import { usePickerAppearance } from './appearance-context'
+import { getPickerContentKind } from '@fex-design/core/date-picker/view'
+import { DatePickerToday } from './date-picker-today'
+import { DatePickerCancel } from './date-picker-cancel'
+import { DatePickerConfirm } from './date-picker-confirm'
 import { cn } from '@fex-design/utils'
-import { getCalendarToday } from '@fex-design/core/calendar'
-import { getDefaultPanelByPicker } from '@fex-design/core/date-picker/panel'
-import {
-  datePickerCancelClassName,
-  datePickerConfirmClassName,
-  datePickerFooterClassName,
-  datePickerPresetClassName,
-  datePickerTodayClassName,
-} from '@fex-design/components-styles/date-picker'
-import { use, type ComponentProps, type ReactNode } from 'react'
-import { DatePickerContext, RangePickerContext } from './context'
-import { Button } from '../button/button'
 
-function useFooterOwner() {
-  const datePicker = use(DatePickerContext)
-  const rangePicker = use(RangePickerContext)
-  const context = datePicker ?? rangePicker
-  if (!context)
-    throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
-  return context
-}
+import { datePickerFooterClassName } from '@fex-design/components-styles/date-picker'
+import { type ComponentProps, type ReactNode } from 'react'
+
+import { useFooterOwner } from './date-picker-footer-owner'
 
 export interface DatePickerFooterProps extends Omit<ComponentProps<'div'>, 'children'> {
   children?:
     | ReactNode
     | ((actions: {
+        canConfirm: boolean
+        today: () => void
         close: () => void
         clear: () => void
         confirm: () => void
         cancel: () => void
       }) => ReactNode)
 }
-
-export function DatePickerFooter({ className, children, ...props }: DatePickerFooterProps) {
+export function DatePickerFooter({ className, style, children, ...props }: DatePickerFooterProps) {
   const context = useFooterOwner()
+  const appearance = usePickerAppearance()
   const actions = {
+    canConfirm: context.canConfirm,
+    today: context.today,
     close: context.close,
     clear: context.clear,
     confirm: context.confirm,
     cancel: context.cancel,
   }
+  if (getPickerContentKind(children) === 'hidden') return null
   return (
     <div
       {...props}
+      style={{ ...appearance.styles?.footer, ...style }}
       data-slot="date-picker-footer"
-      className={cn(datePickerFooterClassName, className)}
+      className={cn(datePickerFooterClassName, appearance.classNames?.footer, className)}
     >
-      {typeof children === 'function' ? children(actions) : children}
+      {getPickerContentKind(children) === 'default' ? <>
+        <DatePickerToday className={appearance.classNames?.today} style={appearance.styles?.today} />
+        {context.footerView.showCancel ? <DatePickerCancel className={appearance.classNames?.cancel} style={appearance.styles?.cancel} /> : null}
+        {context.footerView.showConfirm ? <DatePickerConfirm className={appearance.classNames?.confirm} style={appearance.styles?.confirm} /> : null}
+      </> : typeof children === 'function' ? children(actions) : children}
     </div>
-  )
-}
-
-export interface DatePickerConfirmProps extends ComponentProps<'button'> {}
-
-export function DatePickerConfirm({
-  className,
-  children = '确定',
-  onClick,
-  ...props
-}: DatePickerConfirmProps) {
-  const context = useFooterOwner()
-  return (
-    <Button
-      {...props}
-      type="button"
-      data-slot="date-picker-confirm"
-      className={cn(datePickerConfirmClassName, className)}
-      onClick={(event) => {
-        onClick?.(event)
-        if (!event.defaultPrevented) context.confirm()
-      }}
-    >
-      {children}
-    </Button>
-  )
-}
-
-export function DatePickerCancel({
-  className,
-  children = '取消',
-  onClick,
-  ...props
-}: DatePickerConfirmProps) {
-  const context = useFooterOwner()
-  return (
-    <Button
-      {...props}
-      type="button"
-      data-slot="date-picker-cancel"
-      className={cn(datePickerCancelClassName, className)}
-      onClick={(event) => {
-        onClick?.(event)
-        if (!event.defaultPrevented) context.cancel()
-      }}
-    >
-      {children}
-    </Button>
-  )
-}
-
-export function DatePickerPreset({
-  className,
-  children,
-  onClick,
-  ...props
-}: DatePickerConfirmProps) {
-  return (
-    <Button
-      {...props}
-      type="button"
-      data-slot="date-picker-preset"
-      className={cn(datePickerPresetClassName, className)}
-      onClick={(event) => {
-        onClick?.(event)
-      }}
-    >
-      {children}
-    </Button>
-  )
-}
-
-export interface DatePickerTodayProps extends ComponentProps<'button'> {}
-
-export function DatePickerToday({
-  className,
-  children = '今天',
-  onClick,
-  ...props
-}: DatePickerTodayProps) {
-  const context = useFooterOwner()
-  return (
-    <Button
-      {...props}
-      type="button"
-      data-slot="date-picker-today"
-      className={cn(datePickerTodayClassName, className)}
-      onClick={(event) => {
-        onClick?.(event)
-        if (event.defaultPrevented) return
-        context.setViewDate(getCalendarToday())
-        context.setPanel(getDefaultPanelByPicker(context.picker))
-      }}
-    >
-      {children}
-    </Button>
   )
 }

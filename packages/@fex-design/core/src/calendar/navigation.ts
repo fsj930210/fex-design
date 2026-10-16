@@ -19,8 +19,8 @@ export function getCalendarDefaultPanel(granularity: CalendarGranularity): Calen
 export function getCalendarNextPanel(panel: CalendarPanel, granularity: CalendarGranularity): CalendarPanel | null {
   if (granularity === 'year' && (panel === 'year' || panel === 'decade')) return null
   if (panel === getCalendarDefaultPanel(granularity)) return null
-  if (panel === 'decade') return 'year'
-  if (panel === 'year') return granularity === 'quarter' ? 'quarter' : 'month'
+  // Both panels contain individual years, so selecting a year drills down once.
+  if (panel === 'year' || panel === 'decade') return granularity === 'quarter' ? 'quarter' : 'month'
   if (panel === 'month') return 'date'
   if (panel === 'quarter') return 'date'
   return null

@@ -1,110 +1,45 @@
 <script setup lang="ts">
-import { formatDatePickerValue, parseDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerMultipleInputClassName,
-  datePickerTriggerClassName,
-} from '@fex-design/components-styles/date-picker'
-import { cn } from '@fex-design/utils'
-import { computed, ref, watch } from 'vue'
-import { CalendarIcon } from '@fex-design/vue/icons/calendar'
-import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input'
-import PopoverTrigger from '../popover/popover-trigger.vue'
-import { useDatePickerContext } from './context'
-import DatePickerTags from './date-picker-tags.vue'
+import { computed, normalizeClass } from 'vue'
+import { usePickerAppearance } from './appearance-context'
+import type { DatePickerInputProps } from './appearance.types'
+import { getPickerInputProps, getPickerControlProps } from '@fex-design/core/date-picker/safe-props'
+import { RenderContent } from './render-content'
+import { getDatePickerInputAttributes } from '@fex-design/core/date-picker/input'
 
+import type { InputSize, InputVariant } from '@fex-design/core/input/types'
+import { useAttrs } from 'vue'
+import { cn } from '@fex-design/utils'
+import { CalendarIcon } from '@fex-design/vue/icons/calendar'
+import { InputRoot, InputControl, InputClear, InputPrefix, InputSuffix } from '../input'
+import { useDatePickerContext } from './context'
+import { usePickerTrigger } from './use-picker-trigger'
+import DatePickerTags from './date-picker-tags.vue'
+import { datePickerAffixClassName, datePickerTriggerClassName, datePickerInputPreviewClassName, datePickerMultipleTagsClassName, datePickerMultipleInputClassName } from '@fex-design/components-styles/date-picker'
+
+defineOptions({ name: 'DatePickerTrigger', inheritAttrs: false })
 const props = defineProps<{
-  class?: string | undefined
-  displayValue?: string | undefined
-  placeholder?: string | undefined
-  prefix?: unknown
-  suffix?: unknown
-  status?: 'error' | 'warning' | undefined
+  size?: InputSize
+  variant?: InputVariant
+  placeholder?: string
+  inputProps?: DatePickerInputProps
 }>()
 const context = useDatePickerContext('DatePickerTrigger')
-const inputRef = ref<HTMLInputElement | null>(null)
-function isValueArray(
-  value: unknown,
-): value is readonly import('@fex-design/core/calendar').CalendarValue[] {
-  return Array.isArray(value)
-}
-const pickerDisplayValue = computed(() => {
-  const value = context.value.value
-  return isValueArray(value)
-    ? value.map((item) => formatDatePickerValue(item, context)).join(', ')
-    : formatDatePickerValue(value ?? null, context)
-})
-const displayValue = computed(() => props.displayValue ?? pickerDisplayValue.value)
-const text = ref(displayValue.value)
-watch(displayValue, (next) => {
-  text.value = next
-})
-function canClear() {
-  return context.allowClear !== false && Boolean(displayValue.value || text.value)
-}
-function input(nextText: string) {
-  text.value = nextText
-  if (context.multiple) return
-  const result = parseDatePickerValue(nextText, context)
-  if (result.valid) context.select(result.value)
-}
-function openPanel(event?: Event) {
-  if (context.disabled) {
-    event?.preventDefault()
-    event?.stopPropagation()
-    return
-  }
-  inputRef.value?.focus()
-  context.openPanel()
-}
-function clickTrigger(event: MouseEvent, triggerClick?: (event: MouseEvent) => void) {
-  if (context.disabled) {
-    event.preventDefault()
-    event.stopPropagation()
-    return
-  }
-  inputRef.value?.focus()
-  triggerClick?.(event)
-}
-function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
-  const { onClick: _onClick, onFocus: _onFocus, onBlur: _onBlur, ...rest } = triggerProps
-  return rest
-}
+const attrs = useAttrs()
+const appearance = usePickerAppearance()
+const input = computed(() => getPickerInputProps(props.inputProps ?? appearance().inputProps))
+const control = computed(() => getPickerControlProps(input.value))
+const trigger = usePickerTrigger(context, attrs)
 </script>
 
 <template>
-  <PopoverTrigger v-slot="{ props: triggerProps, ref: triggerRef }">
-    <InputRoot
-      v-bind="getPickerTriggerProps(triggerProps)"
-      :ref="triggerRef"
-      :class="cn(datePickerTriggerClassName, props.class)"
-      :value="context.multiple ? '' : text"
-      :disabled="context.disabled"
-      :read-only="context.readOnly"
-      @value-change="input"
-      @clear="canClear() && context.clear()"
-      @click="
-        (event) =>
-          clickTrigger(event, triggerProps.onClick as ((event: MouseEvent) => void) | undefined)
-      "
-    >
-      <InputPrefix v-if="$slots.prefix"><slot name="prefix" /></InputPrefix>
-      <DatePickerTags v-if="context.multiple && displayValue" />
-      <InputControl
-        :aria-invalid="(props.status ?? context.status) === 'error' || undefined"
-        ref="inputRef"
-        :class="context.multiple && displayValue ? datePickerMultipleInputClassName : undefined"
-        :placeholder="context.multiple && displayValue ? '' : (props.placeholder ?? context.format)"
-        @click="openPanel"
-        @focus="openPanel"
-      />
-      <InputClear
-        v-if="canClear()"
-        @pointerdown.stop.prevent
-        @click.stop.prevent="context.clear()"
-      />
-      <InputSuffix v-if="!canClear()"
-        ><slot name="suffix"><CalendarIcon class="size-4" /></slot
-      ></InputSuffix>
+  <slot v-if="$slots.default" :props="trigger.props.value" :ref="trigger.ref" :state="context" />
+    <InputRoot v-else :size="props.size ?? input.size ?? 'md'" :variant="props.variant ?? input.variant ?? 'outlined'" :style="[input.styles?.root, input.style, attrs.style]" v-bind="trigger.props.value" :ref="trigger.ref" :class="cn(datePickerTriggerClassName, input.classNames?.root, normalizeClass(input.class), normalizeClass(attrs.class))" :value="context.inputValue.value" :disabled="context.disabled" :read-only="true">
+      <InputPrefix v-if="$slots.prefix || input.prefix != null" :class="input.classNames?.prefix" :style="input.styles?.prefix"><slot v-if="$slots.prefix" name="prefix" /><RenderContent v-else :value="input.prefix" /></InputPrefix>
+      <DatePickerTags v-if="context.triggerView.showTags" :class="datePickerMultipleTagsClassName" />
+      <InputControl v-bind="getDatePickerInputAttributes(control)" :class="cn(context.triggerView.preview && datePickerInputPreviewClassName, context.triggerView.hasTags && datePickerMultipleInputClassName, input.classNames?.control)" :style="input.styles?.control" :placeholder="context.triggerView.hasTags ? '' : (props.placeholder ?? input.placeholder ?? context.format)" @focus="trigger.focus" />
+      <div data-slot="date-picker-affix" :class="datePickerAffixClassName">
+        <InputSuffix :class="input.classNames?.suffix" :style="input.styles?.suffix"><slot v-if="$slots.suffix" name="suffix" /><RenderContent v-else-if="input.suffix != null" :value="input.suffix" /><CalendarIcon v-else class="size-4" /></InputSuffix>
+        <InputClear :class="input.classNames?.clear" :style="input.styles?.clear" aria-label="清除日期" v-if="context.canClear" @pointerdown.stop.prevent @click.stop.prevent="context.clear()" />
+      </div>
     </InputRoot>
-  </PopoverTrigger>
 </template>

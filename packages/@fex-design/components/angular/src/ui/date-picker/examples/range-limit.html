@@ -1,0 +1,10 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">最多 7 天</p>
+<div rangePicker [disabledDate]="limitDays"></div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">最多 6 个月</p>
+<div rangePicker [picker]="'month'" [disabledDate]="limitMonths"></div>
+</section>
+</div>

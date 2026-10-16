@@ -1,0 +1,10 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">结束日期可留空</p>
+<div rangePicker [allowEmpty]="{ end: true }" [needConfirm]="true" [endInputProps]="{ placeholder: '至今' }"></div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2">
+<p class="text-sm font-medium">开始日期可留空</p>
+<div rangePicker [allowEmpty]="{ start: true }" [needConfirm]="true" [startInputProps]="{ placeholder: '不限开始' }"></div>
+</section>
+</div>

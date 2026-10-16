@@ -1,0 +1,2619 @@
+{
+  "name": "DatePicker",
+  "slug": "date-picker",
+  "layer": "ui",
+  "status": "draft",
+  "description": "组合默认只读 Input、Popover 和 Calendar，支持单选、多选、确认及独立替换触发元素、容器、面板和底部。",
+  "importPath": {
+    "react": "@fex-design/react/ui/date-picker",
+    "vue": "@fex-design/vue/ui/date-picker",
+    "solid": "@fex-design/solid/ui/date-picker",
+    "svelte": "@fex-design/svelte/ui/date-picker",
+    "angular": "@fex-design/angular/ui/date-picker"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": "TValue | readonly TValue[] | null",
+      "description": "受控选择值；TValue 与 picker 对应。"
+    },
+    {
+      "name": "defaultValue",
+      "type": "TValue | readonly TValue[] | null",
+      "description": "初始选择，省略时单选为 null、多选为 []；只在初始化读取。"
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控浮层状态；在开关事件中更新。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "description": "初始浮层状态，只在初始化读取。",
+      "default": false
+    },
+    {
+      "name": "picker",
+      "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+      "description": "日期选择粒度及对应值类型。",
+      "default": "date"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "description": "启用多选；值为数组，默认需要确认。默认输入展示标签，不解析多日期文本。",
+      "default": false
+    },
+    {
+      "name": "maxCount",
+      "type": "number",
+      "description": "多选时最大可见标签数；不设默认值，省略时全部展示并换行。设置后超出部分显示 +N，0 表示只显示计数；不限制可选择的日期数量。"
+    },
+    {
+      "name": "needConfirm",
+      "type": "boolean",
+      "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
+      "default": "multiple"
+    },
+    {
+      "name": "clearable",
+      "type": "boolean",
+      "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+      "default": true
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "禁止打开及修改选择。",
+      "default": false
+    },
+    {
+      "name": "format",
+      "type": "string",
+      "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+    },
+    {
+      "name": "weekStartsOn",
+      "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+      "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+      "default": 0
+    },
+    {
+      "name": "minDate",
+      "type": "CalendarDate",
+      "description": "最早可选日期，包含该日期。"
+    },
+    {
+      "name": "maxDate",
+      "type": "CalendarDate",
+      "description": "最晚可选日期，包含该日期。"
+    },
+    {
+      "name": "disabledDate",
+      "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+      "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+      "default": "md"
+    },
+    {
+      "name": "variant",
+      "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+      "description": "默认输入外观；显式值优先于 inputProps.variant。",
+      "default": "outlined"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "输入占位文字；省略时使用 inputProps.placeholder 或当前格式，多选已有标签时为空。"
+    },
+    {
+      "name": "prefix",
+      "type": "ReactNode",
+      "description": "输入前缀内容。"
+    },
+    {
+      "name": "suffix",
+      "type": "ReactNode",
+      "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+    },
+    {
+      "name": "inputProps",
+      "type": "DatePickerInputProps",
+      "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+    },
+    {
+      "name": "popoverProps",
+      "type": "DatePickerPopoverProps",
+      "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+    },
+    {
+      "name": "calendarProps",
+      "type": "DatePickerCalendarProps",
+      "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+    },
+    {
+      "name": "classNames",
+      "type": "DatePickerClassNames",
+      "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+    },
+    {
+      "name": "styles",
+      "type": "DatePickerStyles<DatePickerStyle>",
+      "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+    },
+    {
+      "name": "footer",
+      "type": "ReactNode | ((actions) => ReactNode)",
+      "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+    },
+    {
+      "name": "triggerRender",
+      "type": "(binding: DatePickerTriggerBinding) => ReactNode",
+      "description": "替换触发元素；必须绑定 props 和 ref。"
+    },
+    {
+      "name": "panelRender",
+      "type": "(panel: ReactNode, state: DatePickerContextValue) => ReactNode",
+      "description": "替换面板内容，panel 是可复用的默认面板。"
+    },
+    {
+      "name": "containerRender",
+      "type": "(children: ReactNode, state: DatePickerContextValue) => ReactNode",
+      "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "合并到可见触发区域。"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+    },
+    {
+      "name": "ref",
+      "type": "Ref<HTMLElement>",
+      "description": "默认触发区域引用，不是内部 input 的引用。"
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "TValue | readonly TValue[] | null"
+        }
+      ],
+      "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+    },
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        }
+      ],
+      "description": "请求浮层开关变化；受控时由调用方更新 open。"
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "value",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "受控选择值；TValue 与 picker 对应。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "初始选择，省略时单选为 null、多选为 []；只在初始化读取。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层状态；在开关事件中更新。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "初始浮层状态，只在初始化读取。",
+          "default": false
+        },
+        {
+          "name": "picker",
+          "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+          "description": "日期选择粒度及对应值类型。",
+          "default": "date"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "启用多选；值为数组，默认需要确认。默认输入展示标签，不解析多日期文本。",
+          "default": false
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
+          "default": "multiple"
+        },
+        {
+          "name": "clearable",
+          "type": "boolean",
+          "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+          "default": true
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁止打开及修改选择。",
+          "default": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+          "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+          "default": 0
+        },
+        {
+          "name": "minDate",
+          "type": "CalendarDate",
+          "description": "最早可选日期，包含该日期。"
+        },
+        {
+          "name": "maxDate",
+          "type": "CalendarDate",
+          "description": "最晚可选日期，包含该日期。"
+        },
+        {
+          "name": "disabledDate",
+          "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+          "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+          "default": "md"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "description": "默认输入外观；显式值优先于 inputProps.variant。",
+          "default": "outlined"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "输入占位文字；省略时使用 inputProps.placeholder 或当前格式，多选已有标签时为空。"
+        },
+        {
+          "name": "prefix",
+          "type": "ReactNode",
+          "description": "输入前缀内容。"
+        },
+        {
+          "name": "suffix",
+          "type": "ReactNode",
+          "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+        },
+        {
+          "name": "inputProps",
+          "type": "DatePickerInputProps",
+          "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "DatePickerPopoverProps",
+          "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+        },
+        {
+          "name": "calendarProps",
+          "type": "DatePickerCalendarProps",
+          "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+        },
+        {
+          "name": "classNames",
+          "type": "DatePickerClassNames",
+          "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+        },
+        {
+          "name": "styles",
+          "type": "DatePickerStyles<DatePickerStyle>",
+          "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode | ((actions) => ReactNode)",
+          "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+        },
+        {
+          "name": "triggerRender",
+          "type": "(binding: DatePickerTriggerBinding) => ReactNode",
+          "description": "替换触发元素；必须绑定 props 和 ref。"
+        },
+        {
+          "name": "panelRender",
+          "type": "(panel: ReactNode, state: DatePickerContextValue) => ReactNode",
+          "description": "替换面板内容，panel 是可复用的默认面板。"
+        },
+        {
+          "name": "containerRender",
+          "type": "(children: ReactNode, state: DatePickerContextValue) => ReactNode",
+          "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "description": "合并到可见触发区域。"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLElement>",
+          "description": "默认触发区域引用，不是内部 input 的引用。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TValue | readonly TValue[] | null"
+            }
+          ],
+          "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+        },
+        {
+          "name": "onOpenChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求浮层开关变化；受控时由调用方更新 open。"
+        }
+      ],
+      "slots": [],
+      "slotLabel": "Slots"
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "value",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "受控选择值；TValue 与 picker 对应。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "初始选择，省略时单选为 null、多选为 []；只在初始化读取。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层状态；在开关事件中更新。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "初始浮层状态，只在初始化读取。",
+          "default": false
+        },
+        {
+          "name": "picker",
+          "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+          "description": "日期选择粒度及对应值类型。",
+          "default": "date"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "启用多选；值为数组，默认需要确认。默认输入展示标签，不解析多日期文本。",
+          "default": false
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
+          "default": "multiple"
+        },
+        {
+          "name": "clearable",
+          "type": "boolean",
+          "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+          "default": true
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁止打开及修改选择。",
+          "default": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+          "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+          "default": 0
+        },
+        {
+          "name": "minDate",
+          "type": "CalendarDate",
+          "description": "最早可选日期，包含该日期。"
+        },
+        {
+          "name": "maxDate",
+          "type": "CalendarDate",
+          "description": "最晚可选日期，包含该日期。"
+        },
+        {
+          "name": "disabledDate",
+          "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+          "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+          "default": "md"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "description": "默认输入外观；显式值优先于 inputProps.variant。",
+          "default": "outlined"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "输入占位文字；省略时使用 inputProps.placeholder 或当前格式，多选已有标签时为空。"
+        },
+        {
+          "name": "inputProps",
+          "type": "DatePickerInputProps",
+          "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "DatePickerPopoverProps",
+          "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+        },
+        {
+          "name": "calendarProps",
+          "type": "DatePickerCalendarProps",
+          "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+        },
+        {
+          "name": "classNames",
+          "type": "DatePickerClassNames",
+          "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+        },
+        {
+          "name": "styles",
+          "type": "DatePickerStyles<DatePickerStyle>",
+          "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "footer",
+          "type": "VNodeChild | ((actions: DatePickerFooterActions) => VNodeChild)",
+          "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "合并到可见触发区域。"
+        },
+        {
+          "name": "style",
+          "type": "StyleValue",
+          "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        }
+      ],
+      "events": [
+        {
+          "name": "update:value",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TValue | readonly TValue[] | null"
+            }
+          ],
+          "description": "更新 v-model:value 的请求。"
+        },
+        {
+          "name": "change",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TValue | readonly TValue[] | null"
+            }
+          ],
+          "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+        },
+        {
+          "name": "update:open",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "更新 v-model:open 的请求。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求浮层开关变化；受控时由调用方更新 open。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "description": "{ props, ref, state }；替换触发元素，绑定提供的属性和引用回调。"
+        },
+        {
+          "name": "panel",
+          "description": "{ state, panel }；panel 是 DatePickerPanel 组件，可用 <component :is=\"panel\" /> 渲染。"
+        },
+        {
+          "name": "container",
+          "description": "{ state, content }；content 为可渲染组件，自行连接浮层开关。"
+        },
+        {
+          "name": "footer",
+          "description": "{ canConfirm, today, close, clear, confirm, cancel }；替换底部，显式 footer 优先。"
+        },
+        {
+          "name": "prefix",
+          "description": "默认输入前缀。"
+        },
+        {
+          "name": "suffix",
+          "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+        }
+      ],
+      "slotLabel": "Slots"
+    },
+    "solid": {
+      "props": [
+        {
+          "name": "value",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "受控选择值；TValue 与 picker 对应。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "初始选择，省略时单选为 null、多选为 []；只在初始化读取。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层状态；在开关事件中更新。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "初始浮层状态，只在初始化读取。",
+          "default": false
+        },
+        {
+          "name": "picker",
+          "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+          "description": "日期选择粒度及对应值类型。",
+          "default": "date"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "启用多选；值为数组，默认需要确认。默认输入展示标签，不解析多日期文本。",
+          "default": false
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
+          "default": "multiple"
+        },
+        {
+          "name": "clearable",
+          "type": "boolean",
+          "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+          "default": true
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁止打开及修改选择。",
+          "default": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+          "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+          "default": 0
+        },
+        {
+          "name": "minDate",
+          "type": "CalendarDate",
+          "description": "最早可选日期，包含该日期。"
+        },
+        {
+          "name": "maxDate",
+          "type": "CalendarDate",
+          "description": "最晚可选日期，包含该日期。"
+        },
+        {
+          "name": "disabledDate",
+          "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+          "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+          "default": "md"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "description": "默认输入外观；显式值优先于 inputProps.variant。",
+          "default": "outlined"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "输入占位文字；省略时使用 inputProps.placeholder 或当前格式，多选已有标签时为空。"
+        },
+        {
+          "name": "prefix",
+          "type": "JSX.Element",
+          "description": "输入前缀内容。"
+        },
+        {
+          "name": "suffix",
+          "type": "JSX.Element",
+          "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+        },
+        {
+          "name": "inputProps",
+          "type": "DatePickerInputProps",
+          "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "DatePickerPopoverProps",
+          "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+        },
+        {
+          "name": "calendarProps",
+          "type": "DatePickerCalendarProps",
+          "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+        },
+        {
+          "name": "classNames",
+          "type": "DatePickerClassNames",
+          "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+        },
+        {
+          "name": "styles",
+          "type": "DatePickerStyles<DatePickerStyle>",
+          "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "footer",
+          "type": "JSX.Element | ((actions) => JSX.Element)",
+          "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+        },
+        {
+          "name": "triggerRender",
+          "type": "(binding: DatePickerTriggerBinding) => JSX.Element",
+          "description": "替换触发元素；必须绑定 props 和 ref。"
+        },
+        {
+          "name": "panelRender",
+          "type": "(panel: JSX.Element, state: DatePickerContextValue) => JSX.Element",
+          "description": "替换面板内容，panel 是可复用的默认面板。"
+        },
+        {
+          "name": "containerRender",
+          "type": "(children: JSX.Element, state: DatePickerContextValue) => JSX.Element",
+          "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "合并到可见触发区域。"
+        },
+        {
+          "name": "style",
+          "type": "JSX.CSSProperties | string",
+          "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        },
+        {
+          "name": "ref",
+          "type": "(element: HTMLElement) => void",
+          "description": "默认触发区域引用，不是内部 input 的引用。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TValue | readonly TValue[] | null"
+            }
+          ],
+          "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+        },
+        {
+          "name": "onOpenChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求浮层开关变化；受控时由调用方更新 open。"
+        }
+      ],
+      "slots": [],
+      "slotLabel": "Slots"
+    },
+    "svelte": {
+      "props": [
+        {
+          "name": "value",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "受控选择值；TValue 与 picker 对应。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "初始选择，省略时单选为 null、多选为 []；只在初始化读取。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层状态；在开关事件中更新。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "初始浮层状态，只在初始化读取。",
+          "default": false
+        },
+        {
+          "name": "picker",
+          "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+          "description": "日期选择粒度及对应值类型。",
+          "default": "date"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "启用多选；值为数组，默认需要确认。默认输入展示标签，不解析多日期文本。",
+          "default": false
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
+          "default": "multiple"
+        },
+        {
+          "name": "clearable",
+          "type": "boolean",
+          "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+          "default": true
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁止打开及修改选择。",
+          "default": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+          "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+          "default": 0
+        },
+        {
+          "name": "minDate",
+          "type": "CalendarDate",
+          "description": "最早可选日期，包含该日期。"
+        },
+        {
+          "name": "maxDate",
+          "type": "CalendarDate",
+          "description": "最晚可选日期，包含该日期。"
+        },
+        {
+          "name": "disabledDate",
+          "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+          "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+          "default": "md"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "description": "默认输入外观；显式值优先于 inputProps.variant。",
+          "default": "outlined"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "输入占位文字；省略时使用 inputProps.placeholder 或当前格式，多选已有标签时为空。"
+        },
+        {
+          "name": "prefix",
+          "type": "Snippet",
+          "description": "输入前缀内容。"
+        },
+        {
+          "name": "suffix",
+          "type": "Snippet",
+          "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+        },
+        {
+          "name": "inputProps",
+          "type": "DatePickerInputProps",
+          "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "DatePickerPopoverProps",
+          "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+        },
+        {
+          "name": "calendarProps",
+          "type": "DatePickerCalendarProps",
+          "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+        },
+        {
+          "name": "classNames",
+          "type": "DatePickerClassNames",
+          "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+        },
+        {
+          "name": "styles",
+          "type": "DatePickerStyles<DatePickerStyle>",
+          "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "footer",
+          "type": "Snippet<[DatePickerFooterActions]> | string | number | null",
+          "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+        },
+        {
+          "name": "trigger",
+          "type": "Snippet<[{ props; action; state: DatePickerContextValue }]>",
+          "description": "替换触发元素；展开 props 并绑定 use:action。"
+        },
+        {
+          "name": "panel",
+          "type": "Snippet<[Snippet, DatePickerContextValue]>",
+          "description": "参数为默认面板 snippet 和状态。"
+        },
+        {
+          "name": "container",
+          "type": "Snippet<[DatePickerContextValue, Snippet<[DatePickerContextValue]> | undefined]>",
+          "description": "参数为状态和可复用内容 snippet；自行连接开关。"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "合并到可见触发区域。"
+        },
+        {
+          "name": "style",
+          "type": "string",
+          "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TValue | readonly TValue[] | null"
+            }
+          ],
+          "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+        },
+        {
+          "name": "onOpenChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求浮层开关变化；受控时由调用方更新 open。"
+        }
+      ],
+      "slots": [],
+      "slotLabel": "Slots"
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "value",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "受控选择值；TValue 与 picker 对应。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "TValue | readonly TValue[] | null",
+          "description": "初始选择，省略时单选为 null、多选为 []；只在初始化读取。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层状态；在开关事件中更新。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "初始浮层状态，只在初始化读取。",
+          "default": false
+        },
+        {
+          "name": "picker",
+          "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+          "description": "日期选择粒度及对应值类型。",
+          "default": "date"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "启用多选；值为数组，默认需要确认。默认输入展示标签，不解析多日期文本。",
+          "default": false
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
+          "default": "multiple"
+        },
+        {
+          "name": "clearable",
+          "type": "boolean",
+          "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+          "default": true
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁止打开及修改选择。",
+          "default": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+          "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+          "default": 0
+        },
+        {
+          "name": "minDate",
+          "type": "CalendarDate",
+          "description": "最早可选日期，包含该日期。"
+        },
+        {
+          "name": "maxDate",
+          "type": "CalendarDate",
+          "description": "最晚可选日期，包含该日期。"
+        },
+        {
+          "name": "disabledDate",
+          "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+          "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+          "default": "md"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "description": "默认输入外观；显式值优先于 inputProps.variant。",
+          "default": "outlined"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "输入占位文字；省略时使用 inputProps.placeholder 或当前格式，多选已有标签时为空。"
+        },
+        {
+          "name": "prefix",
+          "type": "string | number | TemplateRef<unknown>",
+          "description": "输入前缀内容。"
+        },
+        {
+          "name": "suffix",
+          "type": "string | number | TemplateRef<unknown>",
+          "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+        },
+        {
+          "name": "inputProps",
+          "type": "DatePickerInputProps",
+          "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "DatePickerPopoverProps",
+          "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+        },
+        {
+          "name": "calendarProps",
+          "type": "DatePickerCalendarProps",
+          "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+        },
+        {
+          "name": "classNames",
+          "type": "DatePickerClassNames",
+          "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+        },
+        {
+          "name": "styles",
+          "type": "DatePickerStyles<DatePickerStyle>",
+          "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "footer",
+          "type": "string | number | TemplateRef<unknown> | null",
+          "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "原生宿主类名，自动合并至可见触发区域。"
+        },
+        {
+          "name": "style",
+          "type": "string | Record<string, string | number | null | undefined>",
+          "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        }
+      ],
+      "events": [
+        {
+          "name": "change",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TValue | readonly TValue[] | null"
+            }
+          ],
+          "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求浮层开关变化；受控时由调用方更新 open。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "#trigger",
+          "description": "let-state=\"state\"、let-trigger=\"trigger\"、let-ref=\"ref\"；使用原生按钮并连接 trigger.open($event)/focus($event) 和 ref。范围触发方法可传入第二个端点参数。"
+        },
+        {
+          "name": "#panel",
+          "description": "let-state=\"state\"、let-panel=\"panel\"；panel 为默认面板 TemplateRef。"
+        },
+        {
+          "name": "#container",
+          "description": "let-state=\"state\"、let-content=\"content\"；渲染 content 并连接自定义容器。"
+        },
+        {
+          "name": "#footer",
+          "description": "let-state=\"state\"；使用 state.canConfirm、state.confirm()/cancel()/today()/clear()/close()。显式 footer 优先。"
+        },
+        {
+          "name": "#prefix",
+          "description": "输入前缀模板。"
+        },
+        {
+          "name": "#suffix",
+          "description": "输入后缀模板。"
+        }
+      ],
+      "slotLabel": "Templates"
+    }
+  },
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本",
+      "description": "单选与多选。"
+    },
+    {
+      "id": "picker",
+      "title": "选择类型",
+      "description": "日期、周、月份、季度、年份及月份范围。"
+    },
+    {
+      "id": "sizes",
+      "title": "三种大小",
+      "description": "单选与范围输入统一支持 sm、md、lg。"
+    },
+    {
+      "id": "appearance",
+      "title": "形态变体",
+      "description": "outlined、filled、borderless、underlined 四种形态。"
+    },
+    {
+      "id": "multiple",
+      "title": "多选标签",
+      "description": "默认全部展示并换行；显式设置 maxCount 后折叠超出标签。"
+    },
+    {
+      "id": "range",
+      "title": "日期范围",
+      "description": "开始与结束输入分别激活端点，在同一浮层展示双日历。"
+    },
+    {
+      "id": "presets",
+      "title": "预设日期与范围",
+      "description": "在面板侧栏选择预设日期或范围；右侧保留日历和默认底部，点击时计算相对日期。"
+    },
+    {
+      "id": "disabled",
+      "title": "禁用",
+      "description": "禁用时不能打开或选择；正常状态下输入同样只读，通过日历选择。"
+    },
+    {
+      "id": "disabled-date",
+      "title": "不可选择日期",
+      "description": "禁用周末，单选和范围选择使用相同日期约束。"
+    },
+    {
+      "id": "constraints",
+      "title": "日期限定范围",
+      "description": "通过 minDate、maxDate 限定可浏览和选择的日期。"
+    },
+    {
+      "id": "range-limit",
+      "title": "限制选择跨度",
+      "description": "根据 disabledDate 的 info.from 动态限制七天或六个月范围。"
+    },
+    {
+      "id": "allow-empty",
+      "title": "允许留空",
+      "description": "通过 allowEmpty 允许起点或终点留空，至少选择一端；确认后提交。"
+    },
+    {
+      "id": "format",
+      "title": "日期格式",
+      "description": "format 只控制日期的展示格式，选择值仍为 Calendar 语义对象。"
+    },
+    {
+      "id": "cell-render",
+      "title": "自定义单元格",
+      "description": "通过 calendarProps.cellRender 为每月 15 日增加标记，保留默认选择和导航。"
+    },
+    {
+      "id": "locale",
+      "title": "日历语言",
+      "description": "中英文日期展示：星期、年月标题、月份面板、今天按钮与占位文字；英文示例从周一开始。"
+    },
+    {
+      "id": "confirm",
+      "title": "确认后提交",
+      "description": "通过 needConfirm 保留草稿，确认后提交。"
+    },
+    {
+      "id": "footer",
+      "title": "底部替换与隐藏",
+      "description": "默认底部、footer=null 及自定义确认按钮。"
+    },
+    {
+      "id": "controlled",
+      "title": "受控与非受控",
+      "description": "外部按钮控制 value/open；非受控仅初始化读取 defaultValue，后续默认值变化不覆盖内部选择。"
+    },
+    {
+      "id": "trigger",
+      "title": "自定义触发元素",
+      "description": "绑定框架原生属性和元素引用，替换默认 Input。"
+    },
+    {
+      "id": "panel",
+      "title": "自定义面板",
+      "description": "复用默认面板并增加自定义内容。"
+    },
+    {
+      "id": "container",
+      "title": "替换面板容器",
+      "description": "替换默认 Popover，继续使用相同选择逻辑。"
+    },
+    {
+      "id": "styles",
+      "title": "自定义样式",
+      "description": "对照默认样式，定制紫色输入边框、浮层背景、日历选中色和底部。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR / RTL",
+      "description": "使用原生 dir 切换单选与范围选择的布局方向。"
+    }
+  ],
+  "components": [
+    {
+      "name": "RangePicker",
+      "slug": "date-picker",
+      "layer": "ui",
+      "status": "draft",
+      "description": "视觉连接的开始和结束输入分别激活端点；默认一个浮层展示双日历，符合约束的范围选完即提交。 默认输入支持有效日期悬停及年/月中间选择的预览；预览不提交选择值，范围只预览当前端点。 每次打开重新记录本轮端点选择；第一端选择后激活并聚焦另一端，默认两端本轮选完后提交关闭。已有旧值不会提前完成本轮；allowEmpty 允许缺省的端点仍可省略。",
+      "importPath": {
+        "react": "@fex-design/react/ui/date-picker",
+        "vue": "@fex-design/vue/ui/date-picker",
+        "solid": "@fex-design/solid/ui/date-picker",
+        "svelte": "@fex-design/svelte/ui/date-picker",
+        "angular": "@fex-design/angular/ui/date-picker"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "CalendarRange<TValue>",
+          "description": "受控选择值；TValue 与 picker 对应。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "CalendarRange<TValue>",
+          "description": "初始范围，省略时为空对象；只在初始化读取。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层状态；在开关事件中更新。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "初始浮层状态，只在初始化读取。",
+          "default": false
+        },
+        {
+          "name": "picker",
+          "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+          "description": "日期选择粒度及对应值类型。",
+          "default": "date"
+        },
+        {
+          "name": "allowEmpty",
+          "type": "boolean | { start?: boolean; end?: boolean }",
+          "description": "允许指定端点为空；提交时仍须至少有一个有效端点。",
+          "default": false
+        },
+        {
+          "name": "order",
+          "type": "boolean",
+          "description": "提交和范围高亮时按日期排序；输入草稿保留当前端点，不在第一次选择时交换文字。",
+          "default": true
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
+          "default": false
+        },
+        {
+          "name": "clearable",
+          "type": "boolean",
+          "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+          "default": true
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁止打开及修改选择。",
+          "default": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+          "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+          "default": 0
+        },
+        {
+          "name": "minDate",
+          "type": "CalendarDate",
+          "description": "最早可选日期，包含该日期。"
+        },
+        {
+          "name": "maxDate",
+          "type": "CalendarDate",
+          "description": "最晚可选日期，包含该日期。"
+        },
+        {
+          "name": "disabledDate",
+          "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+          "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+          "default": "md"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "description": "默认输入外观；显式值优先于 inputProps.variant。",
+          "default": "outlined"
+        },
+        {
+          "name": "startPlaceholder",
+          "type": "string",
+          "description": "开始日期占位文字，优先于开始输入配置。",
+          "default": "开始日期"
+        },
+        {
+          "name": "endPlaceholder",
+          "type": "string",
+          "description": "结束日期占位文字，优先于结束输入配置。",
+          "default": "结束日期"
+        },
+        {
+          "name": "separator",
+          "type": "ReactNode",
+          "description": "开始与结束等宽区域之间居中的内容，两侧间距相同；省略时为箭头。"
+        },
+        {
+          "name": "suffix",
+          "type": "ReactNode",
+          "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+        },
+        {
+          "name": "inputProps",
+          "type": "DatePickerInputProps",
+          "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+        },
+        {
+          "name": "startInputProps",
+          "type": "DatePickerEndpointProps",
+          "description": "开始输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+        },
+        {
+          "name": "endInputProps",
+          "type": "DatePickerEndpointProps",
+          "description": "结束输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "DatePickerPopoverProps",
+          "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+        },
+        {
+          "name": "calendarProps",
+          "type": "DatePickerCalendarProps",
+          "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+        },
+        {
+          "name": "classNames",
+          "type": "DatePickerClassNames",
+          "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+        },
+        {
+          "name": "styles",
+          "type": "DatePickerStyles<DatePickerStyle>",
+          "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode | ((actions) => ReactNode)",
+          "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+        },
+        {
+          "name": "triggerRender",
+          "type": "(binding: RangePickerTriggerBinding) => ReactNode",
+          "description": "替换触发元素；必须绑定 props 和 ref。"
+        },
+        {
+          "name": "panelRender",
+          "type": "(panel: ReactNode, state: RangePickerContextValue) => ReactNode",
+          "description": "替换面板内容，panel 是可复用的默认面板。"
+        },
+        {
+          "name": "containerRender",
+          "type": "(children: ReactNode, state: RangePickerContextValue) => ReactNode",
+          "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "description": "合并到可见触发区域。"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLElement>",
+          "description": "默认触发区域引用，不是内部 input 的引用。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "CalendarRange<TValue>"
+            }
+          ],
+          "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+        },
+        {
+          "name": "onOpenChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求浮层开关变化；受控时由调用方更新 open。"
+        }
+      ],
+      "frameworks": {
+        "react": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CalendarRange<TValue>",
+              "description": "受控选择值；TValue 与 picker 对应。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CalendarRange<TValue>",
+              "description": "初始范围，省略时为空对象；只在初始化读取。"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "description": "受控浮层状态；在开关事件中更新。"
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "description": "初始浮层状态，只在初始化读取。",
+              "default": false
+            },
+            {
+              "name": "picker",
+              "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+              "description": "日期选择粒度及对应值类型。",
+              "default": "date"
+            },
+            {
+              "name": "allowEmpty",
+              "type": "boolean | { start?: boolean; end?: boolean }",
+              "description": "允许指定端点为空；提交时仍须至少有一个有效端点。",
+              "default": false
+            },
+            {
+              "name": "order",
+              "type": "boolean",
+              "description": "提交和范围高亮时按日期排序；输入草稿保留当前端点，不在第一次选择时交换文字。",
+              "default": true
+            },
+            {
+              "name": "needConfirm",
+              "type": "boolean",
+              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
+              "default": false
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+              "default": true
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁止打开及修改选择。",
+              "default": false
+            },
+            {
+              "name": "format",
+              "type": "string",
+              "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+            },
+            {
+              "name": "weekStartsOn",
+              "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+              "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+              "default": 0
+            },
+            {
+              "name": "minDate",
+              "type": "CalendarDate",
+              "description": "最早可选日期，包含该日期。"
+            },
+            {
+              "name": "maxDate",
+              "type": "CalendarDate",
+              "description": "最晚可选日期，包含该日期。"
+            },
+            {
+              "name": "disabledDate",
+              "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+              "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+            },
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+              "default": "md"
+            },
+            {
+              "name": "variant",
+              "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+              "description": "默认输入外观；显式值优先于 inputProps.variant。",
+              "default": "outlined"
+            },
+            {
+              "name": "startPlaceholder",
+              "type": "string",
+              "description": "开始日期占位文字，优先于开始输入配置。",
+              "default": "开始日期"
+            },
+            {
+              "name": "endPlaceholder",
+              "type": "string",
+              "description": "结束日期占位文字，优先于结束输入配置。",
+              "default": "结束日期"
+            },
+            {
+              "name": "separator",
+              "type": "ReactNode",
+              "description": "开始与结束等宽区域之间居中的内容，两侧间距相同；省略时为箭头。"
+            },
+            {
+              "name": "suffix",
+              "type": "ReactNode",
+              "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+            },
+            {
+              "name": "inputProps",
+              "type": "DatePickerInputProps",
+              "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+            },
+            {
+              "name": "startInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "开始输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "endInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "结束输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "DatePickerPopoverProps",
+              "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+            },
+            {
+              "name": "calendarProps",
+              "type": "DatePickerCalendarProps",
+              "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+            },
+            {
+              "name": "classNames",
+              "type": "DatePickerClassNames",
+              "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+            },
+            {
+              "name": "styles",
+              "type": "DatePickerStyles<DatePickerStyle>",
+              "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "footer",
+              "type": "ReactNode | ((actions) => ReactNode)",
+              "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+            },
+            {
+              "name": "triggerRender",
+              "type": "(binding: RangePickerTriggerBinding) => ReactNode",
+              "description": "替换触发元素；必须绑定 props 和 ref。"
+            },
+            {
+              "name": "panelRender",
+              "type": "(panel: ReactNode, state: RangePickerContextValue) => ReactNode",
+              "description": "替换面板内容，panel 是可复用的默认面板。"
+            },
+            {
+              "name": "containerRender",
+              "type": "(children: ReactNode, state: RangePickerContextValue) => ReactNode",
+              "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "description": "合并到可见触发区域。"
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            },
+            {
+              "name": "ref",
+              "type": "Ref<HTMLElement>",
+              "description": "默认触发区域引用，不是内部 input 的引用。"
+            }
+          ],
+          "events": [
+            {
+              "name": "onChange",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "CalendarRange<TValue>"
+                }
+              ],
+              "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+            },
+            {
+              "name": "onOpenChange",
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": "boolean"
+                }
+              ],
+              "description": "请求浮层开关变化；受控时由调用方更新 open。"
+            }
+          ],
+          "slots": [],
+          "slotLabel": "Slots"
+        },
+        "vue": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CalendarRange<TValue>",
+              "description": "受控选择值；TValue 与 picker 对应。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CalendarRange<TValue>",
+              "description": "初始范围，省略时为空对象；只在初始化读取。"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "description": "受控浮层状态；在开关事件中更新。"
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "description": "初始浮层状态，只在初始化读取。",
+              "default": false
+            },
+            {
+              "name": "picker",
+              "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+              "description": "日期选择粒度及对应值类型。",
+              "default": "date"
+            },
+            {
+              "name": "allowEmpty",
+              "type": "boolean | { start?: boolean; end?: boolean }",
+              "description": "允许指定端点为空；提交时仍须至少有一个有效端点。",
+              "default": false
+            },
+            {
+              "name": "order",
+              "type": "boolean",
+              "description": "提交和范围高亮时按日期排序；输入草稿保留当前端点，不在第一次选择时交换文字。",
+              "default": true
+            },
+            {
+              "name": "needConfirm",
+              "type": "boolean",
+              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
+              "default": false
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+              "default": true
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁止打开及修改选择。",
+              "default": false
+            },
+            {
+              "name": "format",
+              "type": "string",
+              "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+            },
+            {
+              "name": "weekStartsOn",
+              "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+              "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+              "default": 0
+            },
+            {
+              "name": "minDate",
+              "type": "CalendarDate",
+              "description": "最早可选日期，包含该日期。"
+            },
+            {
+              "name": "maxDate",
+              "type": "CalendarDate",
+              "description": "最晚可选日期，包含该日期。"
+            },
+            {
+              "name": "disabledDate",
+              "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+              "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+            },
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+              "default": "md"
+            },
+            {
+              "name": "variant",
+              "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+              "description": "默认输入外观；显式值优先于 inputProps.variant。",
+              "default": "outlined"
+            },
+            {
+              "name": "startPlaceholder",
+              "type": "string",
+              "description": "开始日期占位文字，优先于开始输入配置。",
+              "default": "开始日期"
+            },
+            {
+              "name": "endPlaceholder",
+              "type": "string",
+              "description": "结束日期占位文字，优先于结束输入配置。",
+              "default": "结束日期"
+            },
+            {
+              "name": "separator",
+              "type": "string",
+              "description": "开始与结束等宽区域之间居中的内容，两侧间距相同；省略时为箭头。"
+            },
+            {
+              "name": "inputProps",
+              "type": "DatePickerInputProps",
+              "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+            },
+            {
+              "name": "startInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "开始输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "endInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "结束输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "DatePickerPopoverProps",
+              "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+            },
+            {
+              "name": "calendarProps",
+              "type": "DatePickerCalendarProps",
+              "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+            },
+            {
+              "name": "classNames",
+              "type": "DatePickerClassNames",
+              "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+            },
+            {
+              "name": "styles",
+              "type": "DatePickerStyles<DatePickerStyle>",
+              "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "footer",
+              "type": "VNodeChild | ((actions: DatePickerFooterActions) => VNodeChild)",
+              "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "合并到可见触发区域。"
+            },
+            {
+              "name": "style",
+              "type": "StyleValue",
+              "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            }
+          ],
+          "events": [
+            {
+              "name": "update:value",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "CalendarRange<TValue>"
+                }
+              ],
+              "description": "更新 v-model:value 的请求。"
+            },
+            {
+              "name": "change",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "CalendarRange<TValue>"
+                }
+              ],
+              "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+            },
+            {
+              "name": "update:open",
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": "boolean"
+                }
+              ],
+              "description": "更新 v-model:open 的请求。"
+            },
+            {
+              "name": "openChange",
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": "boolean"
+                }
+              ],
+              "description": "请求浮层开关变化；受控时由调用方更新 open。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "{ props, ref, state }；替换触发元素，绑定提供的属性和引用回调。"
+            },
+            {
+              "name": "panel",
+              "description": "{ state, panel }；panel 是 RangePickerPanelGroup 组件，可用 <component :is=\"panel\" /> 渲染。"
+            },
+            {
+              "name": "container",
+              "description": "{ state, content }；content 为可渲染组件，自行连接浮层开关。"
+            },
+            {
+              "name": "footer",
+              "description": "{ canConfirm, today, close, clear, confirm, cancel }；替换底部，显式 footer 优先。"
+            },
+            {
+              "name": "suffix",
+              "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+            }
+          ],
+          "slotLabel": "Slots"
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CalendarRange<TValue>",
+              "description": "受控选择值；TValue 与 picker 对应。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CalendarRange<TValue>",
+              "description": "初始范围，省略时为空对象；只在初始化读取。"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "description": "受控浮层状态；在开关事件中更新。"
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "description": "初始浮层状态，只在初始化读取。",
+              "default": false
+            },
+            {
+              "name": "picker",
+              "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+              "description": "日期选择粒度及对应值类型。",
+              "default": "date"
+            },
+            {
+              "name": "allowEmpty",
+              "type": "boolean | { start?: boolean; end?: boolean }",
+              "description": "允许指定端点为空；提交时仍须至少有一个有效端点。",
+              "default": false
+            },
+            {
+              "name": "order",
+              "type": "boolean",
+              "description": "提交和范围高亮时按日期排序；输入草稿保留当前端点，不在第一次选择时交换文字。",
+              "default": true
+            },
+            {
+              "name": "needConfirm",
+              "type": "boolean",
+              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
+              "default": false
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+              "default": true
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁止打开及修改选择。",
+              "default": false
+            },
+            {
+              "name": "format",
+              "type": "string",
+              "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+            },
+            {
+              "name": "weekStartsOn",
+              "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+              "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+              "default": 0
+            },
+            {
+              "name": "minDate",
+              "type": "CalendarDate",
+              "description": "最早可选日期，包含该日期。"
+            },
+            {
+              "name": "maxDate",
+              "type": "CalendarDate",
+              "description": "最晚可选日期，包含该日期。"
+            },
+            {
+              "name": "disabledDate",
+              "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+              "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+            },
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+              "default": "md"
+            },
+            {
+              "name": "variant",
+              "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+              "description": "默认输入外观；显式值优先于 inputProps.variant。",
+              "default": "outlined"
+            },
+            {
+              "name": "startPlaceholder",
+              "type": "string",
+              "description": "开始日期占位文字，优先于开始输入配置。",
+              "default": "开始日期"
+            },
+            {
+              "name": "endPlaceholder",
+              "type": "string",
+              "description": "结束日期占位文字，优先于结束输入配置。",
+              "default": "结束日期"
+            },
+            {
+              "name": "separator",
+              "type": "JSX.Element",
+              "description": "开始与结束等宽区域之间居中的内容，两侧间距相同；省略时为箭头。"
+            },
+            {
+              "name": "suffix",
+              "type": "JSX.Element",
+              "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+            },
+            {
+              "name": "inputProps",
+              "type": "DatePickerInputProps",
+              "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+            },
+            {
+              "name": "startInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "开始输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "endInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "结束输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "DatePickerPopoverProps",
+              "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+            },
+            {
+              "name": "calendarProps",
+              "type": "DatePickerCalendarProps",
+              "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+            },
+            {
+              "name": "classNames",
+              "type": "DatePickerClassNames",
+              "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+            },
+            {
+              "name": "styles",
+              "type": "DatePickerStyles<DatePickerStyle>",
+              "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "footer",
+              "type": "JSX.Element | ((actions) => JSX.Element)",
+              "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+            },
+            {
+              "name": "triggerRender",
+              "type": "(binding: RangePickerTriggerBinding) => JSX.Element",
+              "description": "替换触发元素；必须绑定 props 和 ref。"
+            },
+            {
+              "name": "panelRender",
+              "type": "(panel: JSX.Element, state: RangePickerContextValue) => JSX.Element",
+              "description": "替换面板内容，panel 是可复用的默认面板。"
+            },
+            {
+              "name": "containerRender",
+              "type": "(children: JSX.Element, state: RangePickerContextValue) => JSX.Element",
+              "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "合并到可见触发区域。"
+            },
+            {
+              "name": "style",
+              "type": "JSX.CSSProperties | string",
+              "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            },
+            {
+              "name": "ref",
+              "type": "(element: HTMLElement) => void",
+              "description": "默认触发区域引用，不是内部 input 的引用。"
+            }
+          ],
+          "events": [
+            {
+              "name": "onChange",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "CalendarRange<TValue>"
+                }
+              ],
+              "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+            },
+            {
+              "name": "onOpenChange",
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": "boolean"
+                }
+              ],
+              "description": "请求浮层开关变化；受控时由调用方更新 open。"
+            }
+          ],
+          "slots": [],
+          "slotLabel": "Slots"
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CalendarRange<TValue>",
+              "description": "受控选择值；TValue 与 picker 对应。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CalendarRange<TValue>",
+              "description": "初始范围，省略时为空对象；只在初始化读取。"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "description": "受控浮层状态；在开关事件中更新。"
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "description": "初始浮层状态，只在初始化读取。",
+              "default": false
+            },
+            {
+              "name": "picker",
+              "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+              "description": "日期选择粒度及对应值类型。",
+              "default": "date"
+            },
+            {
+              "name": "allowEmpty",
+              "type": "boolean | { start?: boolean; end?: boolean }",
+              "description": "允许指定端点为空；提交时仍须至少有一个有效端点。",
+              "default": false
+            },
+            {
+              "name": "order",
+              "type": "boolean",
+              "description": "提交和范围高亮时按日期排序；输入草稿保留当前端点，不在第一次选择时交换文字。",
+              "default": true
+            },
+            {
+              "name": "needConfirm",
+              "type": "boolean",
+              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
+              "default": false
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+              "default": true
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁止打开及修改选择。",
+              "default": false
+            },
+            {
+              "name": "format",
+              "type": "string",
+              "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+            },
+            {
+              "name": "weekStartsOn",
+              "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+              "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+              "default": 0
+            },
+            {
+              "name": "minDate",
+              "type": "CalendarDate",
+              "description": "最早可选日期，包含该日期。"
+            },
+            {
+              "name": "maxDate",
+              "type": "CalendarDate",
+              "description": "最晚可选日期，包含该日期。"
+            },
+            {
+              "name": "disabledDate",
+              "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+              "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+            },
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+              "default": "md"
+            },
+            {
+              "name": "variant",
+              "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+              "description": "默认输入外观；显式值优先于 inputProps.variant。",
+              "default": "outlined"
+            },
+            {
+              "name": "startPlaceholder",
+              "type": "string",
+              "description": "开始日期占位文字，优先于开始输入配置。",
+              "default": "开始日期"
+            },
+            {
+              "name": "endPlaceholder",
+              "type": "string",
+              "description": "结束日期占位文字，优先于结束输入配置。",
+              "default": "结束日期"
+            },
+            {
+              "name": "separator",
+              "type": "string",
+              "description": "开始与结束等宽区域之间居中的内容，两侧间距相同；省略时为箭头。"
+            },
+            {
+              "name": "suffix",
+              "type": "Snippet",
+              "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+            },
+            {
+              "name": "inputProps",
+              "type": "DatePickerInputProps",
+              "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+            },
+            {
+              "name": "startInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "开始输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "endInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "结束输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "DatePickerPopoverProps",
+              "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+            },
+            {
+              "name": "calendarProps",
+              "type": "DatePickerCalendarProps",
+              "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+            },
+            {
+              "name": "classNames",
+              "type": "DatePickerClassNames",
+              "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+            },
+            {
+              "name": "styles",
+              "type": "DatePickerStyles<DatePickerStyle>",
+              "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "footer",
+              "type": "Snippet<[DatePickerFooterActions]> | string | number | null",
+              "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+            },
+            {
+              "name": "trigger",
+              "type": "Snippet<[{ props; action; state: RangePickerContextValue }]>",
+              "description": "替换触发元素；展开 props 并绑定 use:action。"
+            },
+            {
+              "name": "panel",
+              "type": "Snippet<[Snippet, RangePickerContextValue]>",
+              "description": "参数为默认面板 snippet 和状态。"
+            },
+            {
+              "name": "container",
+              "type": "Snippet<[RangePickerContextValue, Snippet<[RangePickerContextValue]> | undefined]>",
+              "description": "参数为状态和可复用内容 snippet；自行连接开关。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "合并到可见触发区域。"
+            },
+            {
+              "name": "style",
+              "type": "string",
+              "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            }
+          ],
+          "events": [
+            {
+              "name": "onChange",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "CalendarRange<TValue>"
+                }
+              ],
+              "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+            },
+            {
+              "name": "onOpenChange",
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": "boolean"
+                }
+              ],
+              "description": "请求浮层开关变化；受控时由调用方更新 open。"
+            }
+          ],
+          "slots": [],
+          "slotLabel": "Slots"
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "value",
+              "type": "CalendarRange<TValue>",
+              "description": "受控选择值；TValue 与 picker 对应。"
+            },
+            {
+              "name": "defaultValue",
+              "type": "CalendarRange<TValue>",
+              "description": "初始范围，省略时为空对象；只在初始化读取。"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "description": "受控浮层状态；在开关事件中更新。"
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "description": "初始浮层状态，只在初始化读取。",
+              "default": false
+            },
+            {
+              "name": "picker",
+              "type": "'date' | 'week' | 'month' | 'quarter' | 'year'",
+              "description": "日期选择粒度及对应值类型。",
+              "default": "date"
+            },
+            {
+              "name": "allowEmpty",
+              "type": "boolean | { start?: boolean; end?: boolean }",
+              "description": "允许指定端点为空；提交时仍须至少有一个有效端点。",
+              "default": false
+            },
+            {
+              "name": "order",
+              "type": "boolean",
+              "description": "提交和范围高亮时按日期排序；输入草稿保留当前端点，不在第一次选择时交换文字。",
+              "default": true
+            },
+            {
+              "name": "needConfirm",
+              "type": "boolean",
+              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
+              "default": false
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "description": "允许清除；输入有内容且触发区域 hover/focus 时显示清除入口，禁用时不显示。",
+              "default": true
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁止打开及修改选择。",
+              "default": false
+            },
+            {
+              "name": "format",
+              "type": "string",
+              "description": "日期展示格式，不解析输入，也不改变选择值类型；周、季度、年份使用对应的格式化分支。"
+            },
+            {
+              "name": "weekStartsOn",
+              "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
+              "description": "每周起始日，影响周值归一化及日历排列；0 为周日。",
+              "default": 0
+            },
+            {
+              "name": "minDate",
+              "type": "CalendarDate",
+              "description": "最早可选日期，包含该日期。"
+            },
+            {
+              "name": "maxDate",
+              "type": "CalendarDate",
+              "description": "最晚可选日期，包含该日期。"
+            },
+            {
+              "name": "disabledDate",
+              "type": "(date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean",
+              "description": "返回 true 禁用日期；info 包含 picker、panel，范围还包含 activePart、from（另一端）和 rangeValue，可据此动态限制跨度。"
+            },
+            {
+              "name": "size",
+              "type": "'sm' | 'md' | 'lg'",
+              "description": "默认输入尺寸；显式值优先于 inputProps.size。",
+              "default": "md"
+            },
+            {
+              "name": "variant",
+              "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+              "description": "默认输入外观；显式值优先于 inputProps.variant。",
+              "default": "outlined"
+            },
+            {
+              "name": "startPlaceholder",
+              "type": "string",
+              "description": "开始日期占位文字，优先于开始输入配置。",
+              "default": "开始日期"
+            },
+            {
+              "name": "endPlaceholder",
+              "type": "string",
+              "description": "结束日期占位文字，优先于结束输入配置。",
+              "default": "结束日期"
+            },
+            {
+              "name": "separator",
+              "type": "string",
+              "description": "开始与结束等宽区域之间居中的内容，两侧间距相同；省略时为箭头。"
+            },
+            {
+              "name": "suffix",
+              "type": "string | number | TemplateRef<unknown>",
+              "description": "输入后缀内容；默认日历图标持续显示，仅在允许清除、有内容且触发区域 hover/focus 时被清除入口替换，移出并失焦后恢复。"
+            },
+            {
+              "name": "inputProps",
+              "type": "DatePickerInputProps",
+              "description": "默认只读 Input 的外观、安全原生属性与焦点/键盘/指针事件；不能覆盖选择值、readOnly 或内部选择流程。"
+            },
+            {
+              "name": "startInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "开始输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "endInputProps",
+              "type": "DatePickerEndpointProps",
+              "description": "结束输入的安全原生属性；优先于共享配置，id/name 应在此设置。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "DatePickerPopoverProps",
+              "description": "仅开放定位、挂载容器、关闭策略、挂载策略及 root 样式；默认 placement=bottom、sideOffset=6。"
+            },
+            {
+              "name": "calendarProps",
+              "type": "DatePickerCalendarProps",
+              "description": "日历展示配置：locale 用于星期、月份、年月标题（yearSuffix 为年份单位）、导航名称和今天按钮；支持 cellRender 与结构化样式，不接管选择状态。"
+            },
+            {
+              "name": "classNames",
+              "type": "DatePickerClassNames",
+              "description": "separator、panelGroup、tags、tag、tagRemove、tagOverflow、footer、today、cancel、confirm 的类名。只作用于已有部件，按钮键用于默认底部。"
+            },
+            {
+              "name": "styles",
+              "type": "DatePickerStyles<DatePickerStyle>",
+              "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "footer",
+              "type": "string | number | TemplateRef<unknown> | null",
+              "description": "省略或 undefined 显示今天；needConfirm 时另显示取消与确定。null 隐藏整个底部，有效内容或渲染函数替换；隐藏不改变确认规则。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "原生宿主类名，自动合并至可见触发区域。"
+            },
+            {
+              "name": "style",
+              "type": "string | Record<string, string | number | null | undefined>",
+              "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "CalendarRange<TValue>"
+                }
+              ],
+              "description": "有效选择提交时通知；语义值相同不重复通知，初始化及属性同步不通知。"
+            },
+            {
+              "name": "openChange",
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": "boolean"
+                }
+              ],
+              "description": "请求浮层开关变化；受控时由调用方更新 open。"
+            }
+          ],
+          "slots": [
+            {
+              "name": "#trigger",
+              "description": "let-state=\"state\"、let-trigger=\"trigger\"、let-ref=\"ref\"；使用原生按钮并连接 trigger.open($event)/focus($event) 和 ref。范围触发方法可传入第二个端点参数。"
+            },
+            {
+              "name": "#panel",
+              "description": "let-state=\"state\"、let-panel=\"panel\"；panel 为默认面板 TemplateRef。"
+            },
+            {
+              "name": "#container",
+              "description": "let-state=\"state\"、let-content=\"content\"；渲染 content 并连接自定义容器。"
+            },
+            {
+              "name": "#footer",
+              "description": "let-state=\"state\"；使用 state.canConfirm、state.confirm()/cancel()/today()/clear()/close()。显式 footer 优先。"
+            },
+            {
+              "name": "#suffix",
+              "description": "输入后缀模板。"
+            }
+          ],
+          "slotLabel": "Templates"
+        }
+      },
+      "demos": []
+    }
+  ],
+  "cssVariables": []
+}

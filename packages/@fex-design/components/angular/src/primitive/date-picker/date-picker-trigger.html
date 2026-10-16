@@ -1,40 +1,15 @@
-<div
-  inputRoot
-  [class]="rootClassName()"
-  [value]="inputValue()"
-  [disabled]="state.context().disabled"
-  [readOnly]="state.context().readOnly"
-  (click)="open(datePickerInputControl, $event)"
-  (valueChange)="input($event)"
-  (clear)="clear()"
->
-  @if (prefix) {
-  <span inputPrefix>{{ prefix }}</span>
-  } @if (state.context().multiple && state.calendarValues().length) {
-  <fex-date-picker-tags />
-  }
-  <input
-    #datePickerInputControl
-    inputControl
-    [attr.aria-invalid]="(status ?? state.context().status) === 'error' || null"
-    [class]="inputClassName()"
-    [placeholder]="state.context().multiple && state.calendarValues().length ? '' : placeholder ?? state.context().format"
-    (focus)="open(datePickerInputControl, $event)"
-  />
-  @if (state.context().allowClear) {
-  <button
-    inputClear
-    type="button"
-    (pointerdown)="$event.stopPropagation()"
-    (click)="clear($event)"
-  ></button>
-  } @if (showSuffix()) {
-  <span inputSuffix>
-    @if (suffix) {
-    <span>{{ suffix }}</span>
-    } @else {
-    <fex-calendar-icon />
-    }
-  </span>
-  }
-</div>
+@if (template(); as custom) {
+  <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), trigger: this, ref: ref }" />
+} @else {
+  <div inputRoot [size]="inputSize()" [variant]="inputVariant()" [style]="inputRootStyle()" [class]="triggerClassName()" [value]="context().inputValue" [disabled]="context().disabled" [readOnly]="true">
+    @if (isContentProvided(prefixValue())) { <span inputPrefix [class]="inputConfig().classNames?.prefix ?? ''" [style]="inputConfig().styles?.prefix ?? ''">@if (prefixTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else { {{ prefixValue() }} }</span> }
+    @if (context().triggerView.showTags) { <div datePickerTags [class]="tagsClassName"></div> }
+    <input inputControl [inputProps]="resolvedInputProps()" [class]="cn(context().triggerView.preview && previewClassName, context().triggerView.hasTags && multipleInputClassName, inputConfig().classNames?.control)" [style]="inputConfig().styles?.control ?? ''" [placeholder]="context().triggerView.hasTags ? '' : placeholder() ?? inputConfig().placeholder ?? context().format" />
+    <div data-slot="date-picker-affix" [class]="affixClassName">
+      <span inputSuffix [class]="inputConfig().classNames?.suffix ?? ''" [style]="inputConfig().styles?.suffix ?? ''">@if (suffixTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else if (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else { <calendar-icon class="size-(--input-icon-size)" /> }</span>
+      @if (context().canClear) {
+        <button type="button" [class]="cn(clearClassName, inputConfig().classNames?.clear)" [style]="inputConfig().styles?.clear ?? ''" data-slot="input-clear" aria-label="清除日期" (pointerdown)="$event.preventDefault(); $event.stopPropagation()" (click)="clear($event)"><circle-x-icon class="size-(--input-clear-icon-size)" /></button>
+      }
+    </div>
+  </div>
+}

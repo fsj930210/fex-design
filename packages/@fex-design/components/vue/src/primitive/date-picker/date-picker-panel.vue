@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DatePickerTimePanel from './date-picker-time-panel.vue'
+import { datePickerDateTimeLayoutClassName } from '@fex-design/components-styles/date-picker'
 import { usePickerAppearance } from './appearance-context'
 import type { DatePickerCalendarProps } from './appearance.types'
 import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props'
@@ -57,6 +59,7 @@ function hoverCell(cell: CalendarCell) {
 </script>
 
 <template>
+  <div :class="owner.showTime && !props.range ? datePickerDateTimeLayoutClassName : 'contents'">
   <CalendarRoot
     v-bind="nativeAttrs()"
     month-selection="drilldown"
@@ -83,4 +86,6 @@ function hoverCell(cell: CalendarCell) {
     <slot v-if="$slots.default" />
     <DatePickerPanelContent v-else :calendar-props="calendar" />
   </CalendarRoot>
+  <DatePickerTimePanel v-if="owner.showTime && !props.range" />
+  </div>
 </template>

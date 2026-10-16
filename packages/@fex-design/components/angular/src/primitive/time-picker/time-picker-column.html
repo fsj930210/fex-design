@@ -13,9 +13,11 @@
       [attr.data-disabled]="item.disabled ? 'true' : null"
       [class]="itemClassName"
       (focus)="activeValue.set(item.value)"
-      (click)="select(item, itemElement)"
+      (click)="select(item)"
     >
-      {{ item.label }}
+      @if (itemTemplate(); as template) {
+        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ item: item, selected: item.value === selectedValue(), active: item.value === activeValue() }" />
+      } @else { {{ item.label }} }
     </button>
     }
     <div aria-hidden="true" [class]="spacerClassName"></div>

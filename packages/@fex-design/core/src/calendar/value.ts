@@ -2,6 +2,7 @@ import { Temporal } from './temporal'
 import { getQuarter, getWeekEnd, getWeekStart, getYear } from '../date/utils'
 import type {
   CalendarDate,
+  CalendarDateTime,
   CalendarGranularity,
   CalendarQuarter,
   CalendarValue,
@@ -20,6 +21,10 @@ export function getCalendarSelectionValue(date: CalendarDate, granularity: Calen
   if (granularity === 'quarter') return getQuarter(date)
   if (granularity === 'year') return getYear(date)
   return date
+}
+
+export function isCalendarDateTime(value: CalendarValue): value is CalendarDateTime {
+  return value instanceof Temporal.PlainDateTime
 }
 
 export function isCalendarDate(value: CalendarValue): value is CalendarDate {
@@ -41,6 +46,7 @@ export function isCalendarQuarter(value: CalendarValue): value is CalendarQuarte
 export function isCalendarYear(value: CalendarValue): value is CalendarYear {
   return (
     !isCalendarDate(value) &&
+    !isCalendarDateTime(value) &&
     !isCalendarYearMonth(value) &&
     !isCalendarWeek(value) &&
     !isCalendarQuarter(value) &&
@@ -49,6 +55,7 @@ export function isCalendarYear(value: CalendarValue): value is CalendarYear {
 }
 
 export function getCalendarValueDate(value: CalendarValue): CalendarDate {
+  if (isCalendarDateTime(value)) return value.toPlainDate()
   if (isCalendarDate(value)) return value
   if (isCalendarWeek(value)) return value.start
   if (isCalendarYearMonth(value)) return value.toPlainDate({ day: 1 })
@@ -70,6 +77,7 @@ export function isSameCalendarValue(
 }
 
 export function getCalendarValueKey(value: CalendarValue): string {
+  if (isCalendarDateTime(value)) return `date:${value.toPlainDate().toString()}`
   if (isCalendarDate(value)) return `date:${value.toString()}`
   if (isCalendarWeek(value)) return `week:${value.start.toString()}`
   if (isCalendarYearMonth(value)) return `month:${value.toString()}`

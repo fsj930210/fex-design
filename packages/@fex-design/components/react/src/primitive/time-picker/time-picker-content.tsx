@@ -1,15 +1,17 @@
-import { timePickerRootClassName } from '@fex-design/components-styles/time-picker'
+import { getTimePickerDirection } from '@fex-design/core/time-picker/scroll'
+import { usePopoverContext } from '../popover/popover-context'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
-import { PopoverContent, PopoverPortal } from '../popover'
+import { PopoverContent } from '../popover'
 
 export interface TimePickerContentProps extends ComponentProps<typeof PopoverContent> {}
 
 export function TimePickerContent({ className, style, ...props }: TimePickerContentProps) {
+  const { triggerRef } = usePopoverContext('TimePickerContent')
   return (
-    <PopoverPortal>
       <PopoverContent
         {...props}
+        dir={props.dir ?? getTimePickerDirection(triggerRef.current)}
         className={cn('overflow-hidden p-0', className)}
         style={{
           width: 'var(--floating-reference-width)',
@@ -18,16 +20,5 @@ export function TimePickerContent({ className, style, ...props }: TimePickerCont
           ...style,
         }}
       />
-    </PopoverPortal>
-  )
-}
-
-export function TimePickerPanel(props: ComponentProps<'div'>) {
-  return (
-    <div
-      {...props}
-      data-slot="time-picker-panel"
-      className={cn(timePickerRootClassName, props.className)}
-    />
   )
 }

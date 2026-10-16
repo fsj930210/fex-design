@@ -1,6 +1,7 @@
 import { analyzeTimeFormat } from '@fex-design/core/date/utils'
 import {
   TimePickerContent,
+  TimePickerPortal,
   TimePickerHourColumn,
   TimePickerMinuteColumn,
   TimePickerPanel,
@@ -67,7 +68,7 @@ export function DemoTimePicker({
         suffix={suffix}
         inputProps={{ 'aria-label': 'Time' }}
       />
-      <TimePickerContent>
+      <TimePickerPortal><TimePickerContent>
         <TimePickerPanel>
           {columns.map((column) => {
             if (column.unit === 'hour') return <TimePickerHourColumn key="hour" step={step?.hour} />
@@ -86,7 +87,7 @@ export function DemoTimePicker({
             确定
           </Button>
         </div>
-      </TimePickerContent>
+      </TimePickerContent></TimePickerPortal>
     </TimePickerRoot>
   )
 }

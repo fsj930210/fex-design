@@ -1,24 +1,32 @@
+@if (custom(); as template) {
+  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: root.state, state: root.state }" />
+} @else {
 <div
   inputRoot
-  popoverTrigger
-  [value]="text()"
+  [size]="size() ?? 'md'"
+  [variant]="variant() ?? 'outlined'"
+  [value]="root.snapshot().inputValue"
   [disabled]="root.disabled()"
   [readOnly]="root.readOnly()"
   (valueChange)="inputText($event)"
   (clear)="clear()"
 >
-  @if (prefix()) {
-  <span inputPrefix><ng-container *ngTemplateOutlet="prefix()!.template" /></span> }
+  @if (prefixValue() != null) { <span inputPrefix>@if (prefixTemplate(); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else { {{ prefixValue() }} }</span> }
   <input
     inputControl
-    [attr.aria-invalid]="invalid() || null"
-    aria-label="Time"
-    [placeholder]="placeholder() ?? root.resolvedFormat()"
+    [inputProps]="resolvedInputProps()"
   />
-  @if (allowClear() && text()) { <button inputClear type="button"></button> } @if (!allowClear() || !text()) {
-  <span inputSuffix
-    >@if (suffix()) { <ng-container *ngTemplateOutlet="suffix()!.template" /> } @else {
-    <clock-icon class="size-4" /> }</span
-  >
-  }
+  <div data-slot="time-picker-affix" [class]="affixClassName">
+    <span inputSuffix>
+      @if (suffixValue() != null) {
+        @if (suffixTemplate(); as template) { <ng-container [ngTemplateOutlet]="template" /> }
+        @else { {{ suffixValue() }} }
+      } @else { <clock-icon class="size-4" /> }
+    </span>
+    @if (canClear()) {
+      <button inputClear type="button" (pointerdown)="$event.preventDefault(); $event.stopPropagation()" (click)="clear($event)"></button>
+    }
+  </div>
 </div>
+
+}

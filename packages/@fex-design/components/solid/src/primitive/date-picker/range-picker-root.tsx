@@ -32,6 +32,8 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>(
     'defaultValue',
     'open',
     'defaultOpen',
+    'showTime',
+    'disabledTime',
     'needConfirm',
     'disabled',
     'clearable',

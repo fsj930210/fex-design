@@ -33,6 +33,16 @@ export function DatePickerUsage() {
 }
 ```
 
+## Date and time
+
+Set `showTime` on DatePicker or RangePicker to select a full date and time. Values are native `Temporal.PlainDateTime` objects (`DatePickerDateTime`); create them with `createDatePickerDateTime(year, month, day, hour, minute, second)` from the same component entry. No separate DateTimePicker component is needed.
+
+`showTime` accepts `true` or `{ format, use12Hours, step, defaultOpenValue, disabledTime }`. The full `format` controls input display and supplies time-column tokens unless `showTime.format` overrides them: `YYYY-MM-DD HH:mm` shows hours and minutes, and `YYYY-MM-DD hh:mm A` includes the period column. `step` accepts hour/minute/second increments. `defaultOpenValue` is a TimeValue, or `{ start, end }` for ranges; it defaults to midnight and only initializes the time when a date has no time. It does not create a selected date by itself.
+
+Date-time selection requires confirmation by default. Date and time edits share one draft; cancel or close rolls it back. RangePicker uses one calendar and time columns for the active endpoint: confirm the current endpoint to move to the other, then confirm to submit the range. `needConfirm=false` submits valid edits immediately and keeps the panel open for further time edits. Controlled `value` and `open` must be updated through the framework's change callbacks.
+
+`disabledTime(value, { activePart, from })` receives the complete date-time and the opposite range endpoint. Return disabled hour/minute/second/millisecond arrays using the TimePicker contract. Date constraints remain date-based. `showTime` only applies to `picker="date"` and is ignored with `multiple`; other granularities keep their original value types. Primitive default panels include `DatePickerTimePanel`, which can also be composed separately under the corresponding root (`range` for RangePicker).
+
 ## Values and granularity
 
 Values are Calendar semantic objects, rather than strings or native Date objects. Create `CalendarDate` / `CalendarYearMonth` with `Temporal.PlainDate.from()` / `Temporal.PlainYearMonth.from()` from `@fex-design/core/calendar/temporal`.
@@ -58,7 +68,9 @@ The empty DatePicker value is `null` for single selection and `[]` for multiple 
 | `picker` | `` 'date' \| 'week' \| 'month' \| 'quarter' \| 'year' `` | "date" | No | Selection granularity and corresponding value type. |
 | `multiple` | `` boolean `` | false | No | Enable multiple selection with an array value and confirmation by default. The default input displays tags without parsing multiple-date text. |
 | `maxCount` | `` number `` | — | No | Visible tag limit in multiple mode. Omitted: show all tags and wrap. Explicit: show +N for overflow; 0 shows only the count. Does not limit selectable dates. |
-| `needConfirm` | `` boolean `` | "multiple" | No | Keep the selection draft until confirm; defaults to multiple: false for single selection and true for multiple selection. |
+| `showTime` | `boolean \| DatePickerShowTime` | false | No | Enable date-time selection and derive time columns from format. |
+| `disabledTime` | `DatePickerDisabledTime` | — | No | Disable time units using the full date-time and active range endpoint. |
+| `needConfirm` | `boolean` | `showTime or multiple` | No | Keep edits as a draft until confirmation; date-time and multiple selection default to true. |
 | `clearable` | `` boolean `` | true | No | Allow clearing; show the control when content is present and the trigger is hovered or focused. Hidden when disabled. |
 | `disabled` | `` boolean `` | false | No | Prevent opening and selection changes. |
 | `format` | `` string `` | — | No | Used for date/month display. Quarter formatting replaces YYYY/[Q]Q; years display the year and weeks use the built-in week label. See the value table for defaults. |
@@ -85,7 +97,7 @@ The empty DatePicker value is `null` for single selection and `[]` for multiple 
 | `picker` | `` 'date' \| 'week' \| 'month' \| 'quarter' \| 'year' `` | "date" | No | Selection granularity and corresponding value type. |
 | `allowEmpty` | `` boolean \| { start?: boolean; end?: boolean } `` | false | No | Permit empty endpoints; a submission still requires at least one valid endpoint. |
 | `order` | `` boolean `` | true | No | Sort endpoints at submission and for range highlighting; draft values retain their endpoint. |
-| `needConfirm` | `` boolean `` | false | No | Keep the range draft until confirm; otherwise submit a range once it satisfies allowEmpty and the constraints. |
+| `needConfirm` | `boolean` | `showTime or multiple` | No | Keep edits as a draft until confirmation; date-time and multiple selection default to true. |
 | `clearable` | `` boolean `` | true | No | Allow clearing; show the control when content is present and the trigger is hovered or focused. Hidden when disabled. |
 | `disabled` | `` boolean `` | false | No | Prevent opening and selection changes. |
 | `format` | `` string `` | — | No | Used for date/month display. Quarter formatting replaces YYYY/[Q]Q; years display the year and weeks use the built-in week label. See the value table for defaults. |

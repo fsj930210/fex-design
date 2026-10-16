@@ -8,9 +8,10 @@ export { default as TimePickerSecondColumn } from './time-picker-second-column.v
 export { default as TimePickerPeriodColumn } from './time-picker-period-column.vue'
 export { default as TimePickerColumn } from './time-picker-column.vue'
 export { useTimePicker } from './use-time-picker'
-export type {
-  DisabledTime,
-  TimePeriod,
-  TimePickerChangeDetails,
-  TimeValue,
-} from '@fex-design/core/time-picker/types'
+
+export { PopoverPortal as TimePickerPortal } from '../popover'
+
+export type { DisabledTime, TimeValue, TimePeriod, TimePickerUnit, TimePickerChangeDetails, TimePickerControllerOptions, TimePickerController, TimePickerSnapshot, TimePickerOption, TimePickerPopoverOptions } from '@fex-design/core/time-picker/types'
+
+export { createHourOptions, createMinuteOptions, createSecondOptions, createPeriodOptions, resolveDisabledTime, getDisplayedHour, getDisplayedPeriod } from '@fex-design/core/time-picker/options'
+export { getNextTimeOption } from '@fex-design/core/time-picker/navigation'

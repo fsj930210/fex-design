@@ -3,7 +3,7 @@
   "slug": "date-picker",
   "layer": "primitive",
   "status": "draft",
-  "description": "提供日期选择、草稿、开关、约束及展示配置；默认 Input 固定只读，通过 Calendar 选择。",
+  "description": "提供日期选择、草稿、开关、约束及展示配置；默认 Input 固定只读，通过 Calendar 选择。 通过 showTime 支持完整日期时间及范围选择，默认确认提交。",
   "importPath": {
     "react": "@fex-design/react/primitive/date-picker",
     "vue": "@fex-design/vue/primitive/date-picker",
@@ -53,8 +53,8 @@
     {
       "name": "needConfirm",
       "type": "boolean",
-      "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-      "default": "multiple"
+      "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+      "default": "showTime || multiple"
     },
     {
       "name": "clearable",
@@ -128,6 +128,17 @@
       "name": "containerRender",
       "type": "(children: ReactNode, state: DatePickerContextValue) => ReactNode",
       "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+    },
+    {
+      "name": "showTime",
+      "type": "boolean | DatePickerShowTime",
+      "default": false,
+      "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+    },
+    {
+      "name": "disabledTime",
+      "type": "DatePickerDisabledTime",
+      "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
     }
   ],
   "events": [
@@ -191,8 +202,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -266,6 +277,17 @@
           "name": "containerRender",
           "type": "(children: ReactNode, state: DatePickerContextValue) => ReactNode",
           "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -331,8 +353,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -396,6 +418,17 @@
           "name": "styles",
           "type": "DatePickerStyles<DatePickerStyle>",
           "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -490,8 +523,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -565,6 +598,17 @@
           "name": "containerRender",
           "type": "(children: JSX.Element, state: DatePickerContextValue) => JSX.Element",
           "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -630,8 +674,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -705,6 +749,17 @@
           "name": "container",
           "type": "Snippet<[DatePickerContextValue, Snippet<[DatePickerContextValue]> | undefined]>",
           "description": "参数为状态和可复用内容 snippet；自行连接开关。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -770,8 +825,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -835,6 +890,17 @@
           "name": "styles",
           "type": "DatePickerStyles<DatePickerStyle>",
           "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -987,6 +1053,26 @@
       "id": "direction",
       "title": "LTR / RTL",
       "description": "使用原生 dir 切换单选与范围选择的布局方向。"
+    },
+    {
+      "id": "date-time",
+      "title": "日期时间",
+      "description": "showTime 组合日期与时间，默认确认提交；范围端点独立编辑。"
+    },
+    {
+      "id": "date-time-format",
+      "title": "日期时间格式",
+      "description": "完整 format 决定时间列，支持 12 小时、步长和初始时间。"
+    },
+    {
+      "id": "date-time-controlled",
+      "title": "受控日期时间",
+      "description": "外部设置、清空完整日期时间，并控制浮层。"
+    },
+    {
+      "id": "date-time-disabled",
+      "title": "禁用日期时间",
+      "description": "disabledTime 根据日期与范围端点限制可选时间。"
     }
   ],
   "components": [
@@ -1890,8 +1976,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-          "default": false
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -1975,6 +2061,17 @@
           "name": "containerRender",
           "type": "(children: ReactNode, state: RangePickerContextValue) => ReactNode",
           "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -2044,8 +2141,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2129,6 +2226,17 @@
               "name": "containerRender",
               "type": "(children: ReactNode, state: RangePickerContextValue) => ReactNode",
               "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2200,8 +2308,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2275,6 +2383,17 @@
               "name": "styles",
               "type": "DatePickerStyles<DatePickerStyle>",
               "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2375,8 +2494,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2460,6 +2579,17 @@
               "name": "containerRender",
               "type": "(children: JSX.Element, state: RangePickerContextValue) => JSX.Element",
               "description": "替换 Popover；渲染 children 并用 state 连接开关。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2531,8 +2661,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2616,6 +2746,17 @@
               "name": "container",
               "type": "Snippet<[RangePickerContextValue, Snippet<[RangePickerContextValue]> | undefined]>",
               "description": "参数为状态和可复用内容 snippet；自行连接开关。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2687,8 +2828,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2762,6 +2903,17 @@
               "name": "styles",
               "type": "DatePickerStyles<DatePickerStyle>",
               "description": "与 classNames 相同的结构键，值使用当前框架的 DatePickerStyle。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -3943,6 +4095,31 @@
         }
       },
       "demos": []
+    },
+    {
+      "name": "DatePickerTimePanel",
+      "slug": "date-picker",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "复用 TimePicker 时间列，编辑所属 DatePicker/RangePicker 的同一日期时间草稿。默认面板已组合；自定义面板可单独使用。",
+      "nativeElement": "div",
+      "importPath": {
+        "react": "@fex-design/react/primitive/date-picker",
+        "vue": "@fex-design/vue/primitive/date-picker",
+        "solid": "@fex-design/solid/primitive/date-picker",
+        "svelte": "@fex-design/svelte/primitive/date-picker",
+        "angular": "@fex-design/angular/primitive/date-picker"
+      },
+      "props": [
+        {
+          "name": "range",
+          "type": "boolean",
+          "default": false,
+          "description": "设为 true 时连接 RangePicker 当前端点。"
+        }
+      ],
+      "events": [],
+      "frameworks": {}
     }
   ],
   "cssVariables": []

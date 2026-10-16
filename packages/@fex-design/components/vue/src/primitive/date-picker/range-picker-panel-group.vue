@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DatePickerTimePanel from './date-picker-time-panel.vue'
 import { usePickerAppearance } from './appearance-context'
 const appearance = usePickerAppearance()
 import { getVisibleRangePanelViewDates } from '@fex-design/core/date-picker/panel'
@@ -18,7 +19,7 @@ function leave(event: MouseEvent) {
 }
 const props = defineProps<{ class?: string; panelCount?: 1 | 2 }>()
 const context = useRangePickerContext('RangePickerPanelGroup')
-const visibleDates = computed(() => getVisibleRangePanelViewDates(context.viewDate.value, context.panel.value, props.panelCount))
+const visibleDates = computed(() => getVisibleRangePanelViewDates(context.viewDate.value, context.panel.value, context.showTime ? 1 : props.panelCount))
 </script>
 
 <template>
@@ -33,6 +34,7 @@ const visibleDates = computed(() => getVisibleRangePanelViewDates(context.viewDa
         :key="date.toString()"
         :panel-view-date="date"
       />
+      <DatePickerTimePanel v-if="context.showTime" range />
     </template>
   </div>
 </template>

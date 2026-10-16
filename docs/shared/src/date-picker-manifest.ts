@@ -1,5 +1,9 @@
 export const datePickerExamples = {
   primitive: [
+    { id: 'date-time', title: '日期时间', description: 'showTime 组合日期与时间，默认确认提交；范围端点独立编辑。', height: 760 },
+    { id: 'date-time-format', title: '日期时间格式', description: '完整 format 决定时间列，支持 12 小时、步长和初始时间。', height: 940 },
+    { id: 'date-time-controlled', title: '受控日期时间', description: '外部设置、清空完整日期时间，并控制浮层。', height: 760 },
+    { id: 'date-time-disabled', title: '禁用日期时间', description: 'disabledTime 根据日期与范围端点限制可选时间。', height: 760 },
     {id: "basic",title: "基本",description: "单选与多选。",height: 560},
     {id: "picker",title: "选择类型",description: "日期、周、月份、季度、年份及月份范围。",height: 820},
     {id: "sizes",title: "三种大小",description: "单选与范围输入统一支持 sm、md、lg。",height: 640},
@@ -25,6 +29,10 @@ export const datePickerExamples = {
     {id: "direction",title: "LTR / RTL",description: "使用原生 dir 切换单选与范围选择的布局方向。",height: 640}
   ],
   ui: [
+    { id: 'date-time', title: '日期时间', description: 'showTime 组合日期与时间，默认确认提交；范围端点独立编辑。', height: 760 },
+    { id: 'date-time-format', title: '日期时间格式', description: '完整 format 决定时间列，支持 12 小时、步长和初始时间。', height: 940 },
+    { id: 'date-time-controlled', title: '受控日期时间', description: '外部设置、清空完整日期时间，并控制浮层。', height: 760 },
+    { id: 'date-time-disabled', title: '禁用日期时间', description: 'disabledTime 根据日期与范围端点限制可选时间。', height: 760 },
     {id: "basic",title: "基本",description: "单选与多选。",height: 560},
     {id: "picker",title: "选择类型",description: "日期、周、月份、季度、年份及月份范围。",height: 820},
     {id: "sizes",title: "三种大小",description: "单选与范围输入统一支持 sm、md、lg。",height: 640},

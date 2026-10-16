@@ -3,6 +3,7 @@ import { createSecondOptions, resolveDisabledTime } from '@fex-design/core/time-
 import { computed, inject } from 'vue'
 import { timePickerContextKey } from './context'
 import TimePickerColumn from './time-picker-column.vue'
+defineOptions({ name: 'TimePickerSecondColumn' })
 const props = defineProps<{
   step?: number | undefined
   disabled?: boolean | undefined
@@ -26,5 +27,7 @@ const options = computed(() =>
     :selected-value="context.snapshot.value.value?.second"
     :disabled="disabled"
     @select="(value) => context.controller.selectSecond(Number(value))"
-  />
+  >
+    <template v-if="$slots.item" #item="state"><slot name="item" v-bind="state" /></template>
+  </TimePickerColumn>
 </template>

@@ -34,6 +34,8 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>({
   defaultOpen,
   multiple,
   maxCount,
+  showTime,
+  disabledTime,
   needConfirm,
   disabled,
   clearable,
@@ -48,7 +50,7 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>({
 }: DatePickerRootProps<TValue>) {
   const parentPopover = use(PopoverContext)
   const datePicker = useDatePicker<TValue>(definedPickerOptions({
-    picker, value, defaultValue, open, defaultOpen, multiple, maxCount, needConfirm, disabled, clearable, format, weekStartsOn, minDate, maxDate, disabledDate, onChange, onOpenChange,
+    picker, value, defaultValue, open, defaultOpen, multiple, maxCount, showTime, disabledTime, needConfirm, disabled, clearable, format, weekStartsOn, minDate, maxDate, disabledDate, onChange, onOpenChange,
   }))
 
   const content = containerRender ? containerRender(children, datePicker) : (

@@ -1,5 +1,13 @@
 # AGENTS.md
 
+## TimePicker 组件契约
+
+- DatePicker/RangePicker 通过 `showTime` 组合时间列，不新增第二套日期时间状态。完整日期时间由同一个 core session 处理待确认值、提交、取消、受控更新及约束；Calendar 只消费日期部分，TimePicker 只消费时间部分。日期时间默认确认后提交，范围日期时间使用单 Calendar 和当前端点的时间列。
+
+- TimePicker 参考 DatePicker：Primitive 保留有默认样式的 Input Trigger、Popover Content 和时间列；Trigger 必须提供本框架原生的自定义内容绑定，逻辑层必须可脱离内置部件消费。UI 仅组装 Primitive，不重复保存时间值、输入草稿或解析规则。
+- 时间值、输入草稿、受控切换、输入解析与禁用约束统一由 core controller 管理；defaultValue 仅初始化时读取，框架适配通过 setOptions 同步配置，不以 undefined 将非受控值锁定为受控。
+- 时间列的选项导航复用 core，样式与原生属性归属当前部件宿主；滚动读取真实选项位置并遵循 reduced-motion，不用固定行高计算。五框架保留相同部件与替换能力，具体表达遵循框架原生约定。
+
 ## 核心目标
 
 - 所有代码都要以低重复渲染、高可维护、高性能、高扩展为基础；可维护性优先于局部性能技巧，性能优化必须建立在清晰边界和可验证事实之上。

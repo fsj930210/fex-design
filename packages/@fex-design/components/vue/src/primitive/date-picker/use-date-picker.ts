@@ -16,6 +16,9 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(sour
   return {
     ...controller,
     controller,
+    get showTime() { return state.value.showTime },
+    get timeOptions() { return state.value.timeOptions },
+    timeValue: computed(() => state.value.timeValue),
     get triggerView() { return state.value.triggerView },
     get footerView() { return state.value.footerView },
     get canClear() { return state.value.canClear },

@@ -60,7 +60,7 @@ export const datePickerDateTimePanelClassName = [
 export const datePickerPanelsClassName = [
   'flex w-max max-w-full gap-px bg-border',
   '[&_[data-slot=calendar-root]]:w-72 [&_[data-slot=calendar-root]]:min-w-0 [&_[data-slot=calendar-root]]:flex-auto',
-  'max-[480px]:flex-col max-[480px]:[&_[data-slot=calendar-root]]:w-full',
+  'max-[480px]:[&:not(:has([data-slot=date-picker-time-panel]))]:flex-col max-[480px]:[&:not(:has([data-slot=date-picker-time-panel]))_[data-slot=calendar-root]]:w-full',
 ].join(' ')
 
 export const datePickerHeaderClassName =
@@ -108,3 +108,6 @@ export const datePickerTodayClassName =
 
 export const datePickerPresetClassName =
   'h-auto w-full cursor-pointer justify-start rounded-md border-0 bg-transparent px-2 py-1.5 text-start text-sm text-foreground shadow-none hover:bg-muted-background data-[selected=true]:bg-muted-background data-[selected=true]:font-medium'
+
+export const datePickerDateTimeLayoutClassName = 'flex w-max max-w-full items-stretch'
+export const datePickerTimePanelClassName = 'w-56 min-w-0 shrink-0 border-s border-border p-2'

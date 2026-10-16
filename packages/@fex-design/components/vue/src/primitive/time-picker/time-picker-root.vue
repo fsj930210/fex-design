@@ -3,17 +3,19 @@ import type {
   DisabledTime,
   TimePickerChangeDetails,
   TimeValue,
+  TimePickerPopoverOptions,
 } from '@fex-design/core/time-picker/types'
-import { computed, provide, toRef, useAttrs } from 'vue'
+import { computed, provide, useAttrs } from 'vue'
 import PopoverRoot from '../popover/popover-root.vue'
 import { timePickerContextKey } from './context'
 import { useTimePicker } from './use-time-picker'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'TimePickerRoot', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{
     value?: TimeValue | null | undefined
     defaultValue?: TimeValue | null
+    popoverProps?: TimePickerPopoverOptions
     format?: string
     use12Hours?: boolean
     disabled?: boolean
@@ -24,14 +26,10 @@ const props = withDefaults(
 )
 const emit = defineEmits<{ change: [value: TimeValue | null, details: TimePickerChangeDetails] }>()
 const attrs = useAttrs()
-const { controller, snapshot } = useTimePicker(
-  {
-    value: props.value,
-    defaultValue: props.defaultValue,
-    onChange: (value, details) => emit('change', value, details),
-  },
-  toRef(props, 'value'),
-)
+const { controller, snapshot } = useTimePicker(() => ({
+  ...props,
+  onChange: (value, details) => emit('change', value, details),
+}))
 provide(timePickerContextKey, {
   controller,
   snapshot,
@@ -44,7 +42,7 @@ provide(timePickerContextKey, {
 </script>
 
 <template>
-  <PopoverRoot v-bind="attrs" :trigger="['focus', 'click']">
+  <PopoverRoot v-bind="{ ...attrs, ...popoverProps }" :trigger="['focus', 'click']" :disabled="disabled">
     <slot :controller="controller" :snapshot="snapshot" />
   </PopoverRoot>
 </template>

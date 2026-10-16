@@ -1,4 +1,4 @@
-import type { CalendarDate, CalendarYearMonth } from './types'
+import type { CalendarDate, CalendarDateTime, CalendarYearMonth } from './types'
 
 interface CalendarPlainDateConstructor extends Function {
   from(value: { year: number; month: number; day: number }): CalendarDate
@@ -9,7 +9,13 @@ interface CalendarPlainYearMonthConstructor extends Function {
   from(value: { year: number; month: number }): CalendarYearMonth
 }
 
+interface CalendarPlainDateTimeConstructor extends Function {
+  from(value: { year: number; month: number; day: number; hour?: number; minute?: number; second?: number; millisecond?: number }): CalendarDateTime
+  compare(left: CalendarDateTime, right: CalendarDateTime): number
+}
+
 interface CalendarTemporal {
+  PlainDateTime: CalendarPlainDateTimeConstructor
   PlainDate: CalendarPlainDateConstructor
   PlainYearMonth: CalendarPlainYearMonthConstructor
   Now: {
@@ -63,4 +69,8 @@ export function getYearStart(date: CalendarDate): CalendarDate {
 
 export function getDayIndex(date: CalendarDate): 0 | 1 | 2 | 3 | 4 | 5 | 6 {
   return (date.dayOfWeek % 7) as 0 | 1 | 2 | 3 | 4 | 5 | 6
+}
+
+export function createCalendarDateTime(year: number, month: number, day: number, hour = 0, minute = 0, second = 0): CalendarDateTime {
+  return Temporal.PlainDateTime.from({ year, month, day, hour, minute, second })
 }

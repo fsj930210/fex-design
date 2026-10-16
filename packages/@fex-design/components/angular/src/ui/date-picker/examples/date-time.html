@@ -1,0 +1,8 @@
+<div class="flex w-full min-w-0 flex-col gap-6">
+<section class="flex w-full min-w-0 flex-col gap-2"><p class="text-sm font-medium">日期时间：确认后提交</p>
+<div datePicker [showTime]="true" [defaultValue]="initial" ></div>
+</section>
+<section class="flex w-full min-w-0 flex-col gap-2"><p class="text-sm font-medium">日期时间范围：分别确认开始和结束</p>
+<div rangePicker [showTime]="true" [defaultValue]="{ start: initial, end: end }" ></div>
+</section>
+</div>

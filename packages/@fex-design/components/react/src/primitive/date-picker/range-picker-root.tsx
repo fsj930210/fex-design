@@ -32,6 +32,8 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>({
   defaultValue,
   open,
   defaultOpen,
+  showTime,
+  disabledTime,
   needConfirm,
   disabled,
   clearable,
@@ -48,7 +50,7 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>({
 }: RangePickerRootProps<TValue>) {
   const parentPopover = use(PopoverContext)
   const rangePicker = useRangePicker<TValue>(definedPickerOptions({
-    picker, value, defaultValue, open, defaultOpen, needConfirm, disabled, clearable, allowEmpty, order, format, weekStartsOn, minDate, maxDate, disabledDate, onChange, onOpenChange,
+    picker, value, defaultValue, open, defaultOpen, showTime, disabledTime, needConfirm, disabled, clearable, allowEmpty, order, format, weekStartsOn, minDate, maxDate, disabledDate, onChange, onOpenChange,
   }))
 
   const content = containerRender ? containerRender(children, rangePicker) : (

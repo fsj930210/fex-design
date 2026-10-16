@@ -3,16 +3,19 @@
     createSecondOptions,
     resolveDisabledTime,
   } from "@fex-design/core/time-picker/options";
-  import { getContext } from "svelte";
+  import { getContext, type ComponentProps } from "svelte";
   import { timePickerContextKey, type TimePickerContext } from "./context";
   import TimePickerColumn from "./time-picker-column.svelte";
   let {
     class: className,
+    item,
     step,
     disabled = false,
     isItemDisabled,
-  }: {
+    ...rest
+  }: Omit<ComponentProps<typeof TimePickerColumn>, 'options' | 'selectedValue' | 'onselect' | 'item'> & {
     class?: string | undefined;
+    item?: ComponentProps<typeof TimePickerColumn>["item"];
     step?: number | undefined;
     disabled?: boolean | undefined;
     isItemDisabled?: ((value: number) => boolean) | undefined;
@@ -31,6 +34,8 @@
 </script>
 
 <TimePickerColumn
+    {...rest}
+  {item}
   class={className}
   {options}
   selectedValue={context.snapshot().value?.second}

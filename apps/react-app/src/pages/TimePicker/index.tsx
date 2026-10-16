@@ -1,3 +1,4 @@
+import { UiDemo } from './ui-demo'
 import { Link } from 'react-router'
 import { ControlledDemo } from './controlled-demo'
 import { DecorationDemo } from './decoration-demo'
@@ -22,7 +23,8 @@ export function TimePickerPage() {
             专用时间列、共享滚动交互与 Input/Popover 组合示例。
           </p>
         </header>
-        <div className="space-y-4">
+        <div className="grid gap-space-xl">
+          <UiDemo />
           <ControlledDemo />
           <TwelveHourDemo />
           <StepDemo />

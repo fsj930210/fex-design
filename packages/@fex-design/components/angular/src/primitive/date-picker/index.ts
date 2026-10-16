@@ -26,3 +26,8 @@ export type { DatePickerFooterContent } from './date-picker-footer'
 export type { DatePickerInputProps, DatePickerEndpointProps, DatePickerCalendarProps, DatePickerPopoverProps } from './appearance.types'
 export type { DatePickerSemanticPart, DatePickerClassNames, DatePickerStyles } from '@fex-design/core/date-picker/appearance'
 export type { DatePickerStyle } from './style'
+
+export type { DatePickerDateTime, DatePickerShowTime, DatePickerDisabledTime } from '@fex-design/core/date-picker/types'
+export { createCalendarDateTime as createDatePickerDateTime } from '@fex-design/core/calendar/temporal'
+
+export { DatePickerTimePanel } from './date-picker-time-panel'

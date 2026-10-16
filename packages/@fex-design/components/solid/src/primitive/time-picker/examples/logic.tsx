@@ -1,0 +1,6 @@
+import { useTimePicker } from '@fex-design/solid/primitive/time-picker'
+
+export function TimePickerLogicExample() {
+  const { controller, snapshot } = useTimePicker({ defaultValue: { hour: 9, minute: 30, second: 0 } })
+  return (<div class="flex w-full min-w-0 flex-col gap-4"><div class="flex items-center gap-3"><button type="button" onClick={() => controller.selectHour(12)}>选择 12 时</button><output>{snapshot().inputValue}</output></div></div>)
+}

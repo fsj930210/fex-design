@@ -6,20 +6,22 @@ import { useTimePicker } from './use-time-picker'
 
 export interface TimePickerRootProps
   extends Omit<PopoverRootProps, 'defaultOpen' | 'onOpenChange'>, TimePickerControllerOptions {
+  popoverProps?: import('@fex-design/core/time-picker/types').TimePickerPopoverOptions | undefined
   format?: string | undefined
   use12Hours?: boolean | undefined
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
   disabledTime?: DisabledTime | undefined
   defaultOpen?: boolean | undefined
-  onOpenChange?: PopoverRootProps['onOpenChange']
-  children?: ReactNode
+  onOpenChange?: PopoverRootProps['onOpenChange'] | undefined
+  children?: ReactNode | undefined
 }
 
 export function TimePickerRoot({
   value,
   defaultValue,
   onChange,
+  popoverProps,
   format,
   use12Hours = false,
   disabled = false,
@@ -30,11 +32,13 @@ export function TimePickerRoot({
   children,
   ...props
 }: TimePickerRootProps) {
-  const timePicker = useTimePicker({ value, defaultValue, onChange })
+  const timePicker = useTimePicker({ value, defaultValue, onChange, format, use12Hours, disabled, readOnly, disabledTime })
   const resolvedFormat = format ?? (use12Hours ? 'hh:mm:ss A' : 'HH:mm:ss')
   return (
     <PopoverRoot
       {...props}
+      {...popoverProps}
+      disabled={disabled}
       defaultOpen={defaultOpen}
       onOpenChange={onOpenChange}
       trigger={['focus', 'click']}

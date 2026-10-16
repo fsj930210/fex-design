@@ -1,3 +1,4 @@
+import { DatePickerTimePanel } from './date-picker-time-panel'
 import { getPickerAppearance } from './appearance-context'
 import { cn } from '@fex-design/utils'
 import { listenNativeEvent } from '@fex-design/angular/directives/listen-native-event'
@@ -8,7 +9,7 @@ import { datePickerPanelsClassName } from '@fex-design/components-styles/date-pi
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { RangePickerPanel } from './range-picker-panel'
 import { RangePickerState } from './use-range-picker'
-@Component({ selector: 'div[rangePickerPanelGroup]', standalone: true, imports: [NgTemplateOutlet, RangePickerPanel], changeDetection: ChangeDetectionStrategy.OnPush, host: { 'role': 'group', 'data-slot': 'range-picker-panel-group', '[class]': 'hostClassName()', '[style]': "appearance().styles?.panelGroup ?? ''" }, templateUrl: './range-picker-panel-group.html' })
+@Component({ selector: 'div[rangePickerPanelGroup]', standalone: true, imports: [NgTemplateOutlet, RangePickerPanel, DatePickerTimePanel], changeDetection: ChangeDetectionStrategy.OnPush, host: { 'role': 'group', 'data-slot': 'range-picker-panel-group', '[class]': 'hostClassName()', '[style]': "appearance().styles?.panelGroup ?? ''" }, templateUrl: './range-picker-panel-group.html' })
 export class RangePickerPanelGroup {
   readonly class = input<string>()
   protected readonly appearance = getPickerAppearance()
@@ -17,6 +18,6 @@ export class RangePickerPanelGroup {
   readonly state = inject(RangePickerState)
   readonly template = contentChild<TemplateRef<unknown>>(TemplateRef)
   protected readonly hostClassName = createHostClassName(() => cn(datePickerPanelsClassName, this.appearance().classNames?.panelGroup), () => this.class())
-  readonly viewDates = computed(() => { const state = this.state.context(); return getVisibleRangePanelViewDates(state.viewDate, state.panel, this.panelCount()) })
+  readonly viewDates = computed(() => { const state = this.state.context(); return getVisibleRangePanelViewDates(state.viewDate, state.panel, state.showTime ? 1 : this.panelCount()) })
   leave(event: Event) { if (!event.defaultPrevented) this.state.setHoverValue(null) }
 }

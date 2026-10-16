@@ -1,0 +1,4 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+<div timePickerRoot [defaultValue]="{ hour: 9, minute: 30, second: 0 }" ><div timePickerTrigger></div><ng-template popoverPortal><div timePickerContent><div timePickerPanel><div timePickerHourColumn [itemTemplate]="itemContent"></div><div timePickerMinuteColumn></div><div timePickerSecondColumn></div></div></div></ng-template></div><ng-template #itemContent let-item="item" let-selected="selected"><span>{{ selected ? "✓ " : "" }}{{ item.label }}</span></ng-template>
+
+</div>

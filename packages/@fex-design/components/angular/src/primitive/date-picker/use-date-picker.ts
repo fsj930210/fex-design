@@ -50,6 +50,7 @@ export class DatePickerState<TValue extends CalendarValue = CalendarValue> {
   readonly clear = (...args: Parameters<DatePickerController<TValue>['clear']>) => this.controller.clear(...args)
   readonly confirm = (...args: Parameters<DatePickerController<TValue>['confirm']>) => this.controller.confirm(...args)
   readonly cancel = (...args: Parameters<DatePickerController<TValue>['cancel']>) => this.controller.cancel(...args)
+  readonly selectTime = (...args: Parameters<DatePickerController<TValue>['selectTime']>) => this.controller.selectTime(...args)
   readonly select = (...args: Parameters<DatePickerController<TValue>['select']>) => this.controller.select(...args)
 }
 

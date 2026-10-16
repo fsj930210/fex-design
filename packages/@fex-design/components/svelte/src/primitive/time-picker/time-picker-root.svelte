@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { createTimePickerController } from "@fex-design/core/time-picker/create-time-picker-controller";
+  import { useTimePicker } from "./use-time-picker.svelte";
   import type {
     DisabledTime,
     TimePickerChangeDetails,
     TimeValue,
   } from "@fex-design/core/time-picker/types";
-  import { setContext, untrack, type Snippet } from "svelte";
+  import { setContext, type Snippet, type ComponentProps } from "svelte";
   import Popover from "../popover/popover.svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
   import { timePickerContextKey, type TimePickerContext } from "./context";
 
-  interface Props {
+  interface Props extends Omit<ComponentProps<typeof Popover>, 'children' | 'disabled'> {
     value?: TimeValue | null | undefined;
     defaultValue?: TimeValue | null;
+    popoverProps?: import('@fex-design/core/time-picker/types').TimePickerPopoverOptions;
     format?: string;
     onchange?: (
       value: TimeValue | null,
@@ -20,62 +20,38 @@
     ) => void;
     use12Hours?: boolean;
     disabled?: boolean;
-    readonly?: boolean;
+    readOnly?: boolean;
     disabledTime?: DisabledTime | undefined;
     children?: Snippet;
-    open?: boolean;
-    defaultOpen?: boolean;
-    onOpenChange?: (open: boolean, info: unknown) => void;
-    placement?:
-      | "top"
-      | "topLeft"
-      | "topRight"
-      | "bottom"
-      | "bottomLeft"
-      | "bottomRight"
-      | "left"
-      | "leftTop"
-      | "leftBottom"
-      | "right"
-      | "rightTop"
-      | "rightBottom";
+
   }
 
   let {
     value,
     defaultValue,
     format,
+    popoverProps,
     onchange,
     use12Hours = false,
     disabled = false,
-    readonly = false,
+    readOnly = false,
     disabledTime,
     children,
     ...rest
   }: Props = $props();
-  const controller = createTimePickerController({
-    value: untrack(() => value),
-    defaultValue: untrack(() => defaultValue),
+  const { controller, snapshot } = useTimePicker(() => ({
+    value, defaultValue, format, use12Hours, disabled, readOnly, disabledTime,
     onChange: (next, details) => onchange?.(next, details),
-  });
-  const coreSnapshot = readableCoreStore(controller);
-  const snapshot = () => {
-    void $coreSnapshot;
-    return controller.getSnapshot();
-  };
-  // Controlled props are synchronized at the framework boundary without duplicating state.
-  $effect(() => {
-    if (value !== undefined) controller.setControlledValue(value);
-  });
+  }));
   setContext(timePickerContextKey, {
     controller,
     snapshot,
     format: () => format ?? (use12Hours ? "hh:mm:ss A" : "HH:mm:ss"),
     use12Hours: () => use12Hours,
     disabled: () => disabled,
-    readOnly: () => readonly,
+    readOnly: () => readOnly,
     disabledTime: () => disabledTime,
   } satisfies TimePickerContext);
 </script>
 
-<Popover {...rest} trigger={["focus", "click"]}>{@render children?.()}</Popover>
+<Popover {...rest} {...popoverProps} {disabled} trigger={["focus", "click"]}>{@render children?.()}</Popover>

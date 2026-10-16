@@ -34,6 +34,8 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>(
     'defaultOpen',
     'multiple',
     'maxCount',
+    'showTime',
+    'disabledTime',
     'needConfirm',
     'disabled',
     'clearable',

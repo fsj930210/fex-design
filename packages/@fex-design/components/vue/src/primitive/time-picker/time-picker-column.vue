@@ -1,4 +1,7 @@
 <script setup lang="ts" generic="TValue extends number | TimePeriod">
+import { getNextTimeOption } from '@fex-design/core/time-picker/navigation'
+import { getTimePickerScrollBehavior } from '@fex-design/core/time-picker/scroll'
+
 import type { TimePeriod, TimePickerOption } from '@fex-design/core/time-picker/types'
 import {
   timePickerColumnClassName,
@@ -7,12 +10,12 @@ import {
   timePickerColumnViewportClassName,
 } from '@fex-design/components-styles/time-picker'
 import { cn } from '@fex-design/utils'
-import { inject, nextTick, ref, useAttrs, watch } from 'vue'
+import { inject, nextTick, ref, useAttrs, watch, normalizeClass } from 'vue'
 import { usePopoverContext } from '../popover/context'
 import { timePickerContextKey } from './context'
 import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'TimePickerColumn', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{
     options: readonly TimePickerOption<TValue>[]
@@ -38,7 +41,7 @@ function register(value: TValue, element: unknown) {
 function scrollSelected(behavior: ScrollBehavior) {
   const item = props.selectedValue === undefined ? undefined : itemElements.get(props.selectedValue)
   if (item && viewport.value?.element)
-    viewport.value.element.scrollTo({ top: item.offsetTop, behavior })
+    viewport.value.element.scrollTo({ top: item.offsetTop, behavior: getTimePickerScrollBehavior(behavior) })
 }
 
 // Scrolling is an imperative DOM boundary and runs only after Vue has committed items.
@@ -56,39 +59,39 @@ watch(
 )
 
 function move(direction: 1 | -1) {
-  const enabled = props.options.filter((option) => !option.disabled)
-  const current = enabled.findIndex((option) => option.value === activeValue.value)
-  const next = enabled[Math.min(enabled.length - 1, Math.max(0, current + direction))]
-  if (!next) return
-  activeValue.value = next.value
-  itemElements.get(next.value)?.focus()
+  if (context.disabled.value || props.disabled || context.readOnly.value) return
+  const next = getNextTimeOption(props.options, activeValue.value, props.selectedValue, direction)
+  if (next === undefined) return
+  activeValue.value = next
+  itemElements.get(next)?.focus()
+}
+function keydown(event: KeyboardEvent) {
+  if (event.defaultPrevented || context.disabled.value || props.disabled || context.readOnly.value) return
+  if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return
+  event.preventDefault()
+  move(event.key === 'ArrowDown' ? 1 : -1)
 }
 </script>
 
 <template>
   <ScrollbarRoot
+    v-bind="attrs"
+    :disabled="context.disabled.value || disabled"
+    role="listbox"
+    :tabindex="context.disabled.value || disabled ? -1 : 0"
+    :aria-disabled="context.disabled.value || disabled || undefined"
+    @keydown="keydown"
     data-slot="time-picker-column"
     :data-disabled="context.disabled.value || disabled ? 'true' : undefined"
-    :class="cn(timePickerColumnClassName, attrs.class as string | undefined)"
+    :class="cn(timePickerColumnClassName, normalizeClass(attrs.class))"
   >
     <ScrollbarViewport
       ref="viewport"
-      role="listbox"
-      :tabindex="context.disabled.value || disabled ? -1 : 0"
-      :aria-disabled="context.disabled.value || disabled || undefined"
       :overflow="{ x: 'hidden' }"
       :class="timePickerColumnViewportClassName"
-      @keydown.down.prevent="move(1)"
-      @keydown.up.prevent="move(-1)"
     >
       <template v-for="item in options" :key="String(item.value)">
-        <slot
-          name="item"
-          :item="item"
-          :selected="item.value === selectedValue"
-          :active="item.value === activeValue"
-        >
-          <button
+        <button
             :ref="(element) => register(item.value, element)"
             type="button"
             role="option"
@@ -110,16 +113,12 @@ function move(direction: 1 | -1) {
                 ) {
                   activeValue = item.value
                   emit('select', item.value)
-                  const element = itemElements.get(item.value)
-                  if (element && viewport?.element)
-                    viewport.element.scrollTo({ top: element.offsetTop, behavior: 'smooth' })
                 }
               }
             "
           >
-            {{ item.label }}
+            <slot name="item" :item="item" :selected="item.value === selectedValue" :active="item.value === activeValue">{{ item.label }}</slot>
           </button>
-        </slot>
       </template>
       <div aria-hidden="true" :class="timePickerColumnSpacerClassName" />
     </ScrollbarViewport>

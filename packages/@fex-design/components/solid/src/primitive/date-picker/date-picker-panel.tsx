@@ -1,3 +1,5 @@
+import { DatePickerTimePanel } from './date-picker-time-panel'
+import { datePickerDateTimeLayoutClassName } from '@fex-design/components-styles/date-picker'
 import { usePickerAppearance } from './appearance-context'
 import type { DatePickerCalendarProps } from './appearance.types'
 import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props'
@@ -8,7 +10,7 @@ import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 
 import { datePickerPanelClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
-import { splitProps, type ParentProps } from 'solid-js'
+import { Show, splitProps, type ParentProps } from 'solid-js'
 import { CalendarRoot, type CalendarRootProps } from '../calendar'
 
 import { useDatePickerContext } from './context'
@@ -29,7 +31,7 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>(
   const appearance = usePickerAppearance()
   const calendar = () => getPickerCalendarProps(local.calendarProps ?? appearance().calendarProps)
 
-  return (
+  const calendarElement = (
     <CalendarRoot
       {...rest}
       monthSelection="drilldown"
@@ -55,4 +57,5 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>(
       {local.children === undefined ? <DefaultDatePickerPanelContent calendarProps={calendar()} /> : local.children}
     </CalendarRoot>
   )
+  return <Show when={context.showTime} fallback={calendarElement}><div class={datePickerDateTimeLayoutClassName}>{calendarElement}<DatePickerTimePanel /></div></Show>
 }

@@ -1,0 +1,206 @@
+{
+  "name": "TimePicker",
+  "slug": "time-picker",
+  "layer": "ui",
+  "status": "draft",
+  "description": "仅组装 TimePicker Primitive 的时间输入控件。",
+  "importPath": {
+    "react": "@fex-design/react/ui/time-picker",
+    "vue": "@fex-design/vue/ui/time-picker",
+    "solid": "@fex-design/solid/ui/time-picker",
+    "svelte": "@fex-design/svelte/ui/time-picker",
+    "angular": "@fex-design/angular/ui/time-picker"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": "TimeValue | null",
+      "description": "受控时间值；undefined 为非受控，null 为受控空值。"
+    },
+    {
+      "name": "defaultValue",
+      "type": "TimeValue | null",
+      "description": "仅初始化时读取。"
+    },
+    {
+      "name": "format",
+      "type": "string",
+      "description": "决定显示、输入解析和默认时间列：HH:mm 为时分，mm:ss 为分秒，HH 为仅小时；12 小时格式配合 use12Hours。"
+    },
+    {
+      "name": "use12Hours",
+      "type": "boolean",
+      "description": "使用 12 小时列，值仍保存为 24 小时。",
+      "default": false
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "阻止打开与修改。",
+      "default": false
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "description": "允许查看，阻止输入、选择和清除。",
+      "default": false
+    },
+    {
+      "name": "disabledTime",
+      "type": "DisabledTime",
+      "description": "约束时分秒及毫秒；输入和列选择统一校验。"
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控浮层开关。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "description": "非受控初始开关。",
+      "default": false
+    },
+    {
+      "name": "allowClear",
+      "type": "boolean",
+      "description": "显示清除按钮。",
+      "default": true
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "默认使用 format。"
+    },
+    {
+      "name": "inputProps",
+      "type": "object",
+      "description": "输入元素的原生属性；value/defaultValue 由 TimePicker 管理。"
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "description": "外部校验状态，仅用于展示。",
+      "default": false
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "description": "合并到当前部件宿主；React 使用 className。"
+    },
+    {
+      "name": "style",
+      "type": "string | object",
+      "description": "框架原生样式；仅影响当前宿主。"
+    },
+    {
+      "name": "step",
+      "type": "{ hour?: number; minute?: number; second?: number }",
+      "description": "时分秒步长。"
+    },
+    {
+      "name": "popoverProps",
+      "type": "TimePickerPopoverOptions",
+      "description": "定位、容器、挂载和关闭策略；不能覆盖 open/defaultOpen/disabled/trigger 或内部事件。"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "默认输入框尺寸。"
+    },
+    {
+      "name": "variant",
+      "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+      "default": "outlined",
+      "description": "默认输入框形态。"
+    }
+  ],
+  "events": [
+    {
+      "name": "change",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "TimeValue | null"
+        },
+        {
+          "name": "details",
+          "type": "TimePickerChangeDetails"
+        }
+      ],
+      "description": "用户提交不同的有效值时触发；reason 为 hour/minute/second/period/input/clear。Angular 为 { value, details }；React/Solid 使用 onChange，Svelte 使用 onchange。"
+    },
+    {
+      "name": "openChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        }
+      ],
+      "description": "浮层开关请求；受控时由父级更新 open。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本用法",
+      "description": "默认输入和时间列。"
+    },
+    {
+      "id": "controlled",
+      "title": "受控与非受控",
+      "description": "外部按钮设置、清空 value 和控制 open；对照仅初始化读取 defaultValue 的非受控输入。"
+    },
+    {
+      "id": "format",
+      "title": "格式与步长",
+      "description": "format 决定显示的时间列；覆盖 1、2、3、4 列及步长。"
+    },
+    {
+      "id": "disabled",
+      "title": "禁用与只读",
+      "description": "禁用阻止打开与修改，只读允许查看。"
+    },
+    {
+      "id": "disabled-time",
+      "title": "禁用时间",
+      "description": "输入和列选择共用依赖时间约束。"
+    },
+    {
+      "id": "trigger",
+      "title": "自定义触发元素",
+      "description": "替换默认 Input，保留原生触发绑定。"
+    },
+    {
+      "id": "item",
+      "title": "自定义列内容",
+      "description": "修改选项内容，保留按钮语义和交互。"
+    },
+    {
+      "id": "direction",
+      "title": "阅读方向",
+      "description": "LTR 与 RTL 使用相同组合。"
+    },
+    {
+      "id": "logic",
+      "title": "独立逻辑",
+      "description": "无需内置 Root 或 Context 创建时间状态。"
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "替换默认输入触发元素；React/Solid 为 triggerRender，Vue/Svelte/Angular 为 trigger。"
+    },
+    {
+      "name": "panel",
+      "description": "替换默认时间面板；React/Solid 为 panelRender，Vue/Svelte/Angular 为 panel。"
+    },
+    {
+      "name": "footer",
+      "description": "附加内容，不引入确认事务或第二份时间状态。"
+    }
+  ]
+}

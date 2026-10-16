@@ -1,0 +1,20 @@
+@if (triggerTemplate(); as custom) {
+  <div timePickerTrigger [size]="size()" [variant]="variant()" [placeholder]="placeholder()" [prefix]="prefix()" [suffix]="suffix()" [inputProps]="inputProps()" [allowClear]="allowClear()" [invalid]="invalid()"><ng-template #trigger let-state="state"><ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: state, state: state }" /></ng-template></div>
+} @else { <div timePickerTrigger [size]="size()" [variant]="variant()" [prefix]="prefix()" [suffix]="suffix()" [inputProps]="inputProps()" [placeholder]="placeholder()" [allowClear]="allowClear()" [invalid]="invalid()"></div> }
+<ng-template popoverPortal>
+  <div timePickerContent>
+    @if (panelTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: state, state: state, panel: defaultPanel }" /> }
+    @else { <ng-container [ngTemplateOutlet]="defaultPanel" /> }
+    @if (footerTemplate(); as footer) { <ng-container [ngTemplateOutlet]="footer" [ngTemplateOutletContext]="{ $implicit: state, state: state }" /> }
+  </div>
+</ng-template>
+<ng-template #defaultPanel><div timePickerPanel>
+  @for (column of columns(); track column.unit) {
+    @switch (column.unit) {
+      @case ('hour') { <div timePickerHourColumn [step]="step()?.hour ?? 1"></div> }
+      @case ('minute') { <div timePickerMinuteColumn [step]="step()?.minute ?? 1"></div> }
+      @case ('second') { <div timePickerSecondColumn [step]="step()?.second ?? 1"></div> }
+      @case ('period') { <div timePickerPeriodColumn></div> }
+    }
+  }
+</div></ng-template>

@@ -8,6 +8,7 @@ import {
 import { computed, inject } from 'vue'
 import { timePickerContextKey } from './context'
 import TimePickerColumn from './time-picker-column.vue'
+defineOptions({ name: 'TimePickerHourColumn' })
 const props = defineProps<{
   step?: number | undefined
   disabled?: boolean | undefined
@@ -38,5 +39,7 @@ const selected = computed(() =>
     :selected-value="selected"
     :disabled="disabled"
     @select="(value) => context.controller.selectHour(Number(value), context.use12Hours.value)"
-  />
+  >
+    <template v-if="$slots.item" #item="state"><slot name="item" v-bind="state" /></template>
+  </TimePickerColumn>
 </template>

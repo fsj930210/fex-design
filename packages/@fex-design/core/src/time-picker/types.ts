@@ -1,3 +1,4 @@
+import type { PopoverOptions } from '../popover/types'
 import type { SnapshotStore } from '../store/create-store'
 
 export interface TimeValue {
@@ -27,16 +28,24 @@ export interface TimePickerChangeDetails {
 
 export interface TimePickerSnapshot {
   value: TimeValue | null
+  inputValue: string
   scrollRequest: { id: number; behavior: TimePickerScrollBehavior } | null
 }
 
 export interface TimePickerControllerOptions {
+  format?: string | undefined
+  use12Hours?: boolean | undefined
+  disabled?: boolean | undefined
+  readOnly?: boolean | undefined
+  disabledTime?: DisabledTime | undefined
   value?: TimeValue | null | undefined
   defaultValue?: TimeValue | null | undefined
   onChange?: ((value: TimeValue | null, details: TimePickerChangeDetails) => void) | undefined
 }
 
 export interface TimePickerController extends SnapshotStore<TimePickerSnapshot> {
+  setOptions(options: TimePickerControllerOptions): void
+  input(text: string): void
   setControlledValue(value: TimeValue | null): void
   change(
     value: TimeValue | null,
@@ -56,3 +65,6 @@ export interface TimePickerOption<TValue extends number | TimePeriod = number> {
   label: string
   disabled: boolean
 }
+
+/** Floating configuration cannot own a second open or disabled state. */
+export type TimePickerPopoverOptions = Omit<PopoverOptions, 'open' | 'defaultOpen' | 'disabled' | 'trigger' | 'onOpenChange'>

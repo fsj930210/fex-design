@@ -4,6 +4,7 @@ import type { TimePeriod } from '@fex-design/core/time-picker/types'
 import { computed, inject } from 'vue'
 import { timePickerContextKey } from './context'
 import TimePickerColumn from './time-picker-column.vue'
+defineOptions({ name: 'TimePickerPeriodColumn' })
 const props = defineProps<{
   disabled?: boolean | undefined
   labels?: { am: string; pm: string } | undefined
@@ -28,5 +29,7 @@ const selected = computed(() =>
     :selected-value="selected"
     :disabled="disabled"
     @select="(value) => context.controller.selectPeriod(value as TimePeriod)"
-  />
+  >
+    <template v-if="$slots.item" #item="state"><slot name="item" v-bind="state" /></template>
+  </TimePickerColumn>
 </template>

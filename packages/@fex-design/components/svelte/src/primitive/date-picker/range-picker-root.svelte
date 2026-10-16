@@ -5,7 +5,7 @@
   import { getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
   import { pickerOwnerKey } from './owner-context';
   import { pickerContainerKey } from './container-context';
-  import type { DatePickerPicker, DatePickerDisabledDateInfo } from "@fex-design/core/date-picker/types";
+  import type { DatePickerPicker, DatePickerShowTime, DatePickerDisabledTime, DatePickerDisabledDateInfo } from "@fex-design/core/date-picker/types";
   import type { Snippet } from "svelte";
   import { popoverContextKey, type PopoverContext } from '../popover/popover-context';
   import { getContext, setContext } from "svelte";
@@ -24,6 +24,8 @@
     open?: boolean | undefined;
     defaultOpen?: boolean | undefined;
     picker?: DatePickerPicker | undefined;
+    showTime?: boolean | DatePickerShowTime | undefined;
+    disabledTime?: DatePickerDisabledTime | undefined;
     needConfirm?: boolean | undefined;
     disabled?: boolean | undefined;
     clearable?: boolean | undefined;

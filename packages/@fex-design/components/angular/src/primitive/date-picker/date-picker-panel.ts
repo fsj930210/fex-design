@@ -1,3 +1,5 @@
+import { DatePickerTimePanel } from './date-picker-time-panel'
+import { datePickerDateTimeLayoutClassName } from '@fex-design/components-styles/date-picker'
 import { getPickerAppearance } from './appearance-context'
 import type { DatePickerCalendarProps } from './appearance.types'
 import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props'
@@ -11,8 +13,9 @@ import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { datePickerPanelClassName } from '@fex-design/components-styles/date-picker'
 import { CalendarRoot } from '@fex-design/angular/primitive/calendar'
 import { DatePickerState } from './use-date-picker'
-@Component({ selector: 'div[datePickerPanel]', standalone: true, imports: [DatePickerPanelContent, NgTemplateOutlet, CalendarRoot], changeDetection: ChangeDetectionStrategy.OnPush, host: { class: 'contents' }, templateUrl: './date-picker-panel.html' })
+@Component({ selector: 'div[datePickerPanel]', standalone: true, imports: [DatePickerTimePanel, DatePickerPanelContent, NgTemplateOutlet, CalendarRoot], changeDetection: ChangeDetectionStrategy.OnPush, host: { class: 'contents' }, templateUrl: './date-picker-panel.html' })
 export class DatePickerPanel {
+  protected readonly dateTimeClassName = datePickerDateTimeLayoutClassName
   readonly class = input<string>()
   readonly calendarProps = input<DatePickerCalendarProps>()
   protected readonly appearance = getPickerAppearance()

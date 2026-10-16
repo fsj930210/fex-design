@@ -1,5 +1,6 @@
 @if (template(); as custom) {
   <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: state.context(), state: state.context(), dates: viewDates() }" />
 } @else {
-  @for (date of viewDates(); track $index) { <div rangePickerPanel [panelViewDate]="date"></div> }
+  @for (date of viewDates(); track date.toString()) { <div rangePickerPanel [panelViewDate]="date"></div> }
+  @if (state.context().showTime) { <div datePickerTimePanel [range]="true"></div> }
 }

@@ -2,7 +2,7 @@ export const timePickerRootClassName = 'flex w-full min-w-0'
 
 export const timePickerColumnClassName = [
   'relative h-56 min-w-0 flex-1',
-  'border-r border-border last:border-r-0',
+  'border-e border-border last:border-e-0',
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
 ].join(' ')
 
@@ -17,3 +17,11 @@ export const timePickerColumnItemClassName = [
 ].join(' ')
 
 export const timePickerColumnSpacerClassName = 'pointer-events-none h-48'
+
+// Keep the suffix visible at rest; an available clear action occupies the same slot on hover/focus.
+export const timePickerAffixClassName = [
+  'grid min-w-[max(var(--input-icon-size),var(--input-clear-icon-size))] shrink-0 place-items-center [&>[data-slot=input-suffix]]:col-start-1 [&>[data-slot=input-suffix]]:row-start-1',
+  '[&>[data-slot=input-clear]]:col-start-1 [&>[data-slot=input-clear]]:row-start-1',
+  'has-[[data-slot=input-clear]]:group-hover/input-root:[&>[data-slot=input-suffix]]:invisible',
+  'has-[[data-slot=input-clear]]:group-focus-within/input-root:[&>[data-slot=input-suffix]]:invisible',
+].join(' ')

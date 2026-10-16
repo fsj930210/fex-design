@@ -1,3 +1,4 @@
+import { showTimeInput } from './show-time-input'
 import type { DatePickerStyle } from './style'
 import { PickerAppearanceToken } from './appearance-context'
 import type { DatePickerInputProps, DatePickerEndpointProps, DatePickerCalendarProps, DatePickerPopoverProps, PickerAppearance } from './appearance.types'
@@ -8,7 +9,7 @@ import { optionalPickerBoolean } from './boolean-input'
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, contentChild, inject, input, output, TemplateRef, type OnChanges, type OnInit } from '@angular/core'
 import { NgTemplateOutlet } from '@angular/common'
 import type { CalendarDate, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
-import type { DatePickerPicker, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
+import type { DatePickerPicker, DatePickerDisabledTime, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
 import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
 import { Popover } from '@fex-design/angular/primitive/popover'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
@@ -33,6 +34,8 @@ export class DatePickerRoot<TValue extends CalendarValue = CalendarValue> implem
   readonly defaultValue = input<DatePickerSelectionValue<TValue>>()
   readonly open = input(undefined, { transform: optionalPickerBoolean })
   readonly defaultOpen = input(undefined, { transform: optionalPickerBoolean })
+  readonly showTime = input(undefined, { transform: showTimeInput })
+  readonly disabledTime = input<DatePickerDisabledTime>()
   readonly needConfirm = input(undefined, { transform: optionalPickerBoolean })
   readonly disabled = input(undefined, { transform: optionalPickerBoolean })
   readonly clearable = input(undefined, { transform: optionalPickerBoolean })
@@ -78,6 +81,8 @@ export class DatePickerRoot<TValue extends CalendarValue = CalendarValue> implem
       defaultValue: this.defaultValue(),
       open: this.open(),
       defaultOpen: this.defaultOpen(),
+      showTime: this.showTime(),
+      disabledTime: this.disabledTime(),
       needConfirm: this.needConfirm(),
       disabled: this.disabled(),
       clearable: this.clearable(),

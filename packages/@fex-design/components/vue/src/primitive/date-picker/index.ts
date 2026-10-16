@@ -30,3 +30,8 @@ export type { DatePickerFooterContent, DatePickerFooterActions } from './footer-
 export type { DatePickerInputProps, DatePickerEndpointProps, DatePickerCalendarProps, DatePickerPopoverProps } from './appearance.types'
 export type { DatePickerSemanticPart, DatePickerClassNames, DatePickerStyles } from '@fex-design/core/date-picker/appearance'
 export type { DatePickerStyle } from './appearance.types'
+
+export type { DatePickerDateTime, DatePickerShowTime, DatePickerDisabledTime } from '@fex-design/core/date-picker/types'
+export { createCalendarDateTime as createDatePickerDateTime } from '@fex-design/core/calendar/temporal'
+
+export { default as DatePickerTimePanel } from './date-picker-time-panel.vue'

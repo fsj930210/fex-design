@@ -1,3 +1,4 @@
+<div [class]="context().showTime ? dateTimeClassName : 'contents'">
 <div calendarRoot #calendarElement monthSelection="drilldown" [locale]="calendarAppearance().locale" [style]="calendarAppearance().style ?? ''"
   [value]="context().calendarValue"
   [values]="context().calendarValues"
@@ -21,4 +22,7 @@
   } @else {
     <div datePickerPanelContent [calendarProps]="calendarAppearance()"></div>
   }
+</div>
+
+@if (context().showTime) { <div datePickerTimePanel></div> }
 </div>

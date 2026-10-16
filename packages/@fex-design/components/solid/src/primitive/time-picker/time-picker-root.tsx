@@ -1,17 +1,17 @@
-import { createTimePickerController } from '@fex-design/core/time-picker/create-time-picker-controller'
+import { useTimePicker } from './use-time-picker'
 import type {
   DisabledTime,
   TimePickerChangeDetails,
   TimeValue,
 } from '@fex-design/core/time-picker/types'
-import { createEffect, splitProps, type ParentProps } from 'solid-js'
-import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
+import { splitProps, type ParentProps } from 'solid-js'
 import { Popover, type PopoverProps } from '../popover'
 import { TimePickerContext } from './time-picker-context'
 
 export interface TimePickerRootProps extends Omit<PopoverProps, 'children'>, ParentProps {
   value?: TimeValue | null | undefined
   defaultValue?: TimeValue | null | undefined
+  popoverProps?: import('@fex-design/core/time-picker/types').TimePickerPopoverOptions | undefined
   format?: string | undefined
   onChange?: ((value: TimeValue | null, details: TimePickerChangeDetails) => void) | undefined
   use12Hours?: boolean | undefined
@@ -25,6 +25,7 @@ export function TimePickerRoot(props: TimePickerRootProps) {
     'value',
     'defaultValue',
     'onChange',
+    'popoverProps',
     'format',
     'use12Hours',
     'disabled',
@@ -32,17 +33,14 @@ export function TimePickerRoot(props: TimePickerRootProps) {
     'disabledTime',
     'children',
   ])
-  const controller = createTimePickerController({
-    value: local.value,
-    defaultValue: local.defaultValue,
+  const { controller, snapshot } = useTimePicker(() => ({
+    value: local.value, defaultValue: local.defaultValue,
+    format: local.format, use12Hours: local.use12Hours,
+    disabled: local.disabled, readOnly: local.readOnly, disabledTime: local.disabledTime,
     onChange: (value, details) => local.onChange?.(value, details),
-  })
-  const snapshot = createCoreStoreSignal(controller)
-  createEffect(() => {
-    if (local.value !== undefined) controller.setControlledValue(local.value)
-  })
+  }))
   return (
-    <Popover {...rest} trigger={['focus', 'click']}>
+    <Popover {...rest} {...local.popoverProps} disabled={local.disabled} trigger={['focus', 'click']}>
       <TimePickerContext.Provider
         value={{
           controller,

@@ -47,5 +47,6 @@ export class RangePickerState<TValue extends CalendarValue = CalendarValue> {
   readonly clear = (...args: Parameters<RangePickerController<TValue>['clear']>) => this.controller.clear(...args)
   readonly confirm = (...args: Parameters<RangePickerController<TValue>['confirm']>) => this.controller.confirm(...args)
   readonly cancel = (...args: Parameters<RangePickerController<TValue>['cancel']>) => this.controller.cancel(...args)
+  readonly selectTime = (...args: Parameters<RangePickerController<TValue>['selectTime']>) => this.controller.selectTime(...args)
   readonly select = (...args: Parameters<RangePickerController<TValue>['select']>) => this.controller.select(...args)
 }

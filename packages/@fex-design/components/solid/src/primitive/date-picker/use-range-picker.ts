@@ -15,6 +15,9 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(opt
   return {
     ...controller,
     controller,
+    get showTime() { return state().showTime },
+    get timeOptions() { return state().timeOptions },
+    timeValue: () => state().timeValue,
     get triggerView() { return state().triggerView },
     get focusRequest() { return state().focusRequest },
     get footerView() { return state().footerView },

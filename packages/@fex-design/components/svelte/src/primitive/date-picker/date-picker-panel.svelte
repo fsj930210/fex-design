@@ -1,4 +1,6 @@
 <script lang="ts">
+  import DatePickerTimePanel from './date-picker-time-panel.svelte';
+  import { datePickerDateTimeLayoutClassName } from '@fex-design/components-styles/date-picker';
   import { usePickerAppearance } from './appearance-context';
   import type { DatePickerCalendarProps } from './appearance.types';
   import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props';
@@ -69,6 +71,7 @@
   }
 </script>
 
+<div class={owner.showTime && !range ? datePickerDateTimeLayoutClassName : 'contents'}>
 <CalendarRoot
   {...rest}
   monthSelection="drilldown"
@@ -98,3 +101,5 @@
     <DatePickerPanelContent calendarProps={calendar} />
   {/if}
 </CalendarRoot>
+{#if owner.showTime && !range}<DatePickerTimePanel />{/if}
+</div>

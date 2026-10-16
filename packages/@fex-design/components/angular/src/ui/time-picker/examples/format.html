@@ -1,0 +1,8 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+  @for (item of formats; track item.format) {
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm text-muted-foreground">{{ item.format }} — {{ item.label }}</p>
+      <div timePicker [format]="item.format" [use12Hours]="item.use12Hours" [defaultValue]="{ hour: 9, minute: 30, second: 0 }" [step]="item.stepped ? { hour: 2, minute: 5, second: 10 } : undefined"></div>
+    </section>
+  }
+</div>

@@ -1,3 +1,5 @@
+import { DatePickerTimePanel } from './date-picker-time-panel'
+import { datePickerDateTimeLayoutClassName } from '@fex-design/components-styles/date-picker'
 import { usePickerAppearance } from './appearance-context'
 import type { DatePickerCalendarProps } from './appearance.types'
 import { getPickerCalendarProps } from '@fex-design/core/date-picker/safe-props'
@@ -29,7 +31,7 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>({
   const appearance = usePickerAppearance()
   const calendar = getPickerCalendarProps(calendarProps ?? appearance.calendarProps)
 
-  return (
+  const calendarElement = (
     <CalendarRoot
       {...props}
       monthSelection="drilldown"
@@ -55,4 +57,5 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>({
       {children === undefined ? <DefaultDatePickerPanelContent calendarProps={calendar} /> : children}
     </CalendarRoot>
   )
+  return context.showTime ? <div className={datePickerDateTimeLayoutClassName}>{calendarElement}<DatePickerTimePanel /></div> : calendarElement
 }

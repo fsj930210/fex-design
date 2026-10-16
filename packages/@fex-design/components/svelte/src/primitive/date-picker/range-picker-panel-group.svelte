@@ -1,4 +1,5 @@
 <script lang="ts">
+import DatePickerTimePanel from './date-picker-time-panel.svelte';
   import { usePickerAppearance } from './appearance-context';
   const appearance = usePickerAppearance();
   import { getVisibleRangePanelViewDates } from "@fex-design/core/date-picker/panel";
@@ -18,7 +19,7 @@
     ...rest
   }: Omit<HTMLAttributes<HTMLDivElement>, "children"> & { panelCount?: 1 | 2; children?: Snippet } = $props();
   const context = useRangePickerContext("RangePickerPanelGroup");
-  const visibleDates = $derived(getVisibleRangePanelViewDates(context.getViewDate(), context.getPanel(), panelCount));
+  const visibleDates = $derived(getVisibleRangePanelViewDates(context.getViewDate(), context.getPanel(), context.showTime ? 1 : panelCount));
 </script>
 
 <div
@@ -35,5 +36,6 @@
     {#each visibleDates as date (date.toString())}
       <RangePickerPanel panelViewDate={date} />
     {/each}
+    {#if context.showTime}<DatePickerTimePanel range />{/if}
   {/if}
 </div>

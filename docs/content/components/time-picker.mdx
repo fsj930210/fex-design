@@ -1,0 +1,45 @@
+---
+title: TimePicker
+description: 时间输入与可组合时间列，支持 12/24 小时制、步长、禁用时间和自定义内容。
+---
+
+## 何时使用
+
+需要输入或选择一天内的时间时使用。时间值保持为 24 小时的 hour/minute/second 对象。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="自动按 format 组装 Primitive 时间列。" />
+<ApiSection layer="primitive" title="Primitive API" description="可替换的输入、浮层与时间列。">
+<ApiComposition layer="primitive">
+
+```text
+TimePickerRoot
+├── TimePickerTrigger (Input / custom trigger)
+└── TimePickerPortal (optional)
+    └── TimePickerContent
+        └── TimePickerPanel
+            ├── TimePickerHourColumn
+            ├── TimePickerMinuteColumn
+            ├── TimePickerSecondColumn
+            └── TimePickerPeriodColumn (12-hour)
+```
+
+</ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+## 受控与独立逻辑
+
+value 为 undefined 时非受控，null 是受控空值。defaultValue 只读取一次。输入草稿和提交值由同一 core controller 管理，不完整输入不触发 change；disabledTime 同时约束输入和列选择。列选择立即提交，不自动关闭。
+
+React、Vue、Solid、Svelte 从组件族入口导入 useTimePicker；Angular 提供 TimePickerState，在调用 setOptions 后消费 controller/snapshot。逻辑入口不依赖 TimePickerRoot，可以连接自定义 DOM 或容器。
+
+## 键盘与方向
+
+上下键移动有效选项焦点，Enter/Space 使用原生按钮选择。disabled/readOnly 阻止修改和导航；只读允许打开查看。使用原生 dir 指定书写方向，默认浮层继承触发元素的方向。滚动使用实际选项位置，并尊重 reduced-motion。

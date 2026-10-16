@@ -3,7 +3,7 @@
   "slug": "date-picker",
   "layer": "ui",
   "status": "draft",
-  "description": "组合默认只读 Input、Popover 和 Calendar，支持单选、多选、确认及独立替换触发元素、容器、面板和底部。",
+  "description": "组合默认只读 Input、Popover 和 Calendar，支持单选、多选、确认及独立替换触发元素、容器、面板和底部。 通过 showTime 支持完整日期时间及范围选择，默认确认提交。",
   "importPath": {
     "react": "@fex-design/react/ui/date-picker",
     "vue": "@fex-design/vue/ui/date-picker",
@@ -53,8 +53,8 @@
     {
       "name": "needConfirm",
       "type": "boolean",
-      "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-      "default": "multiple"
+      "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+      "default": "showTime || multiple"
     },
     {
       "name": "clearable",
@@ -180,6 +180,17 @@
       "name": "ref",
       "type": "Ref<HTMLElement>",
       "description": "默认触发区域引用，不是内部 input 的引用。"
+    },
+    {
+      "name": "showTime",
+      "type": "boolean | DatePickerShowTime",
+      "default": false,
+      "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+    },
+    {
+      "name": "disabledTime",
+      "type": "DatePickerDisabledTime",
+      "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
     }
   ],
   "events": [
@@ -243,8 +254,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -370,6 +381,17 @@
           "name": "ref",
           "type": "Ref<HTMLElement>",
           "description": "默认触发区域引用，不是内部 input 的引用。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -435,8 +457,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -532,6 +554,17 @@
           "name": "style",
           "type": "StyleValue",
           "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -642,8 +675,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -769,6 +802,17 @@
           "name": "ref",
           "type": "(element: HTMLElement) => void",
           "description": "默认触发区域引用，不是内部 input 的引用。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -834,8 +878,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -956,6 +1000,17 @@
           "name": "style",
           "type": "string",
           "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -1021,8 +1076,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留选择草稿直到 confirm；默认值随 multiple，单选 false、多选 true。",
-          "default": "multiple"
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -1128,6 +1183,17 @@
           "name": "style",
           "type": "string | Record<string, string | number | null | undefined>",
           "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -1296,6 +1362,26 @@
       "id": "direction",
       "title": "LTR / RTL",
       "description": "使用原生 dir 切换单选与范围选择的布局方向。"
+    },
+    {
+      "id": "date-time",
+      "title": "日期时间",
+      "description": "showTime 组合日期与时间，默认确认提交；范围端点独立编辑。"
+    },
+    {
+      "id": "date-time-format",
+      "title": "日期时间格式",
+      "description": "完整 format 决定时间列，支持 12 小时、步长和初始时间。"
+    },
+    {
+      "id": "date-time-controlled",
+      "title": "受控日期时间",
+      "description": "外部设置、清空完整日期时间，并控制浮层。"
+    },
+    {
+      "id": "date-time-disabled",
+      "title": "禁用日期时间",
+      "description": "disabledTime 根据日期与范围端点限制可选时间。"
     }
   ],
   "components": [
@@ -1355,8 +1441,8 @@
         {
           "name": "needConfirm",
           "type": "boolean",
-          "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-          "default": false
+          "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+          "default": "showTime || multiple"
         },
         {
           "name": "clearable",
@@ -1499,6 +1585,17 @@
           "name": "ref",
           "type": "Ref<HTMLElement>",
           "description": "默认触发区域引用，不是内部 input 的引用。"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean | DatePickerShowTime",
+          "default": false,
+          "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+        },
+        {
+          "name": "disabledTime",
+          "type": "DatePickerDisabledTime",
+          "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
         }
       ],
       "events": [
@@ -1568,8 +1665,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -1712,6 +1809,17 @@
               "name": "ref",
               "type": "Ref<HTMLElement>",
               "description": "默认触发区域引用，不是内部 input 的引用。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -1783,8 +1891,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -1902,6 +2010,17 @@
               "name": "style",
               "type": "StyleValue",
               "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2014,8 +2133,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2158,6 +2277,17 @@
               "name": "ref",
               "type": "(element: HTMLElement) => void",
               "description": "默认触发区域引用，不是内部 input 的引用。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2229,8 +2359,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2368,6 +2498,17 @@
               "name": "style",
               "type": "string",
               "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [
@@ -2439,8 +2580,8 @@
             {
               "name": "needConfirm",
               "type": "boolean",
-              "description": "保留范围草稿直到 confirm；默认选完符合 allowEmpty 和约束的范围即提交。",
-              "default": false
+              "description": "日期时间和多选默认需要确认；编辑保留在同一草稿，关闭或取消回滚。",
+              "default": "showTime || multiple"
             },
             {
               "name": "clearable",
@@ -2563,6 +2704,17 @@
               "name": "style",
               "type": "string | Record<string, string | number | null | undefined>",
               "description": "可见触发区域样式；浮层样式通过 popoverProps 配置。"
+            },
+            {
+              "name": "showTime",
+              "type": "boolean | DatePickerShowTime",
+              "default": false,
+              "description": "开启日期时间选择；支持 format、use12Hours、step、defaultOpenValue 和 disabledTime。仅 date 且非 multiple 生效。"
+            },
+            {
+              "name": "disabledTime",
+              "type": "DatePickerDisabledTime",
+              "description": "按完整日期时间、activePart 和另一端 from 返回时间禁用规则。"
             }
           ],
           "events": [

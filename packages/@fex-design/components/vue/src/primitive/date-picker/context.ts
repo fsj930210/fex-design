@@ -6,9 +6,9 @@ import { inject, type ComputedRef, type InjectionKey } from 'vue'
 
 type ReactiveState<T, K extends keyof T> = Omit<T, K> & { [P in K]: ComputedRef<T[P]> }
 
-export type DatePickerContextValue<TValue extends CalendarValue = CalendarValue> = ReactiveState<DatePickerState<TValue>, 'open' | 'panel' | 'viewDate' | 'hoverValue' | 'previewValue' | 'value' | 'calendarValue' | 'calendarValues' | 'inputValue' | 'displayValue' | 'canConfirm' | 'committedValue' | 'pendingValue'> & DatePickerController<TValue> & { controller: DatePickerController<TValue> }
+export type DatePickerContextValue<TValue extends CalendarValue = CalendarValue> = ReactiveState<DatePickerState<TValue>, 'timeValue' | 'open' | 'panel' | 'viewDate' | 'hoverValue' | 'previewValue' | 'value' | 'calendarValue' | 'calendarValues' | 'inputValue' | 'displayValue' | 'canConfirm' | 'committedValue' | 'pendingValue'> & DatePickerController<TValue> & { controller: DatePickerController<TValue> }
 
-export type RangePickerContextValue<TValue extends CalendarValue = CalendarValue> = ReactiveState<RangePickerState<TValue>, 'open' | 'panel' | 'viewDate' | 'rangeValue' | 'activePart' | 'hoverValue' | 'previewValue' | 'startText' | 'endText' | 'displayRange' | 'canConfirm' | 'committedValue' | 'pendingValue'> & RangePickerController<TValue> & { controller: RangePickerController<TValue> }
+export type RangePickerContextValue<TValue extends CalendarValue = CalendarValue> = ReactiveState<RangePickerState<TValue>, 'timeValue' | 'open' | 'panel' | 'viewDate' | 'rangeValue' | 'activePart' | 'hoverValue' | 'previewValue' | 'startText' | 'endText' | 'displayRange' | 'canConfirm' | 'committedValue' | 'pendingValue'> & RangePickerController<TValue> & { controller: RangePickerController<TValue> }
 
 export const datePickerContextKey: InjectionKey<DatePickerContextValue> = Symbol('DatePickerContext')
 export const rangePickerContextKey: InjectionKey<RangePickerContextValue> = Symbol('RangePickerContext')

@@ -1,10 +1,17 @@
-import { isCalendarValueInRange, normalizeCalendarRange } from '../calendar/range'
+import { normalizeCalendarRange } from '../calendar/range'
+import { compareDatePickerValue } from './value'
 import { compareCalendarValue } from '../calendar/value'
 import type { CalendarRange, CalendarValue } from '../calendar/types'
 import type { DatePickerInputPart } from './types'
 
-export { isCalendarValueInRange as isDatePickerValueInRange }
-export { normalizeCalendarRange as normalizeDatePickerRange }
+export function isDatePickerValueInRange(value: CalendarValue, range?: CalendarRange): boolean {
+  if (!range?.start || !range.end) return false
+  const ordered = normalizeDatePickerRange(range)
+  return compareDatePickerValue(value, ordered.start!) >= 0 && compareDatePickerValue(value, ordered.end!) <= 0
+}
+export function normalizeDatePickerRange<T extends CalendarValue>(range: CalendarRange<T>): CalendarRange<T> {
+  return range.start && range.end && compareDatePickerValue(range.start, range.end) > 0 ? { start: range.end, end: range.start } : range
+}
 
 export function getRangeActivePart<TValue extends CalendarValue>(
   range: CalendarRange<TValue> | undefined,
@@ -33,7 +40,7 @@ export function createNextRangeValue<TValue extends CalendarValue>(
     if (range?.start) nextRange.start = range.start
     nextRange.end = next
   }
-  return order ? normalizeCalendarRange(nextRange) : nextRange
+  return order ? normalizeDatePickerRange(nextRange) : nextRange
 }
 
 export function getNextRangeActivePart<TValue extends CalendarValue>(

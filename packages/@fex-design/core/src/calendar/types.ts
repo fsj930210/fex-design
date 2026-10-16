@@ -1,3 +1,12 @@
+/** A timezone-free datetime; Calendar uses its date projection. */
+export interface CalendarDateTime extends CalendarDate {
+  readonly hour: number
+  readonly minute: number
+  readonly second: number
+  readonly millisecond: number
+  toPlainDate(): CalendarDate
+}
+
 export interface CalendarDate {
   readonly year: number
   readonly month: number

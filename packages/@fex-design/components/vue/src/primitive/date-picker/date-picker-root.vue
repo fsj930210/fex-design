@@ -4,7 +4,7 @@ import type { PickerAppearance } from './appearance.types'
 import { pickerOwnerKey } from './owner-context'
 import { pickerContainerKey } from './container-context'
 import type { CalendarDate, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
-import type { DatePickerPicker, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
+import type { DatePickerPicker, DatePickerShowTime, DatePickerDisabledTime, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
 import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
 import { popoverKey } from '../popover/context'
 import { inject, provide, useAttrs, useSlots } from 'vue'
@@ -22,6 +22,8 @@ const props = withDefaults(defineProps<Omit<PickerAppearance, 'startInputProps' 
     picker?: DatePickerPicker | undefined
     multiple?: boolean | undefined
     maxCount?: number | undefined
+    showTime?: boolean | DatePickerShowTime | undefined
+    disabledTime?: DatePickerDisabledTime | undefined
     needConfirm?: boolean | undefined
     disabled?: boolean | undefined
     clearable?: boolean | undefined

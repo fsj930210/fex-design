@@ -1,11 +1,12 @@
 import {
   compareCalendarValue,
+  isCalendarDateTime,
   getCalendarValueDate,
   getCalendarSelectionValue,
   getCalendarValueKey,
-  isSameCalendarValue,
 } from '../calendar/value'
 import { format } from '../date/utils'
+import { Temporal } from '../calendar/temporal'
 import type {
   CalendarDate,
   CalendarQuarter,
@@ -16,10 +17,16 @@ import type {
 } from '../calendar/types'
 import type { DatePickerFormatOptions, DatePickerPicker, DatePickerValue } from './types'
 
-export { compareCalendarValue as compareDatePickerValue }
+export function compareDatePickerValue(left: CalendarValue, right: CalendarValue): number {
+  const date = compareCalendarValue(left, right)
+  if (date || !isCalendarDateTime(left) || !isCalendarDateTime(right)) return date
+  return Temporal.PlainDateTime.compare(left, right)
+}
 export { getCalendarValueDate as getDatePickerValueDate }
-export { getCalendarValueKey as getDatePickerValueKey }
-export { isSameCalendarValue as isSameDatePickerValue }
+export function getDatePickerValueKey(value: CalendarValue): string { return isCalendarDateTime(value) ? 'datetime:' + value.toString() : getCalendarValueKey(value) }
+export function isSameDatePickerValue(left: CalendarValue | null | undefined, right: CalendarValue | null | undefined): boolean {
+  return Boolean(left && right && getDatePickerValueKey(left) === getDatePickerValueKey(right))
+}
 
 export function getDefaultDatePickerFormat(picker: DatePickerPicker): string {
   if (picker === 'month') return 'YYYY-MM'
@@ -61,7 +68,7 @@ export function formatDatePickerValue(
     return String(year.year)
   }
   return format(
-    getCalendarValueDate(value),
+    isCalendarDateTime(value) ? value : getCalendarValueDate(value),
     options.format ?? getDefaultDatePickerFormat(options.picker),
   )
 }

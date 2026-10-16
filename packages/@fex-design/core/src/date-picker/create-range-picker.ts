@@ -1,3 +1,5 @@
+import { hasDatePickerTime, mergeDatePickerDate, mergeDatePickerTime, getDatePickerTimeValue, getDatePickerDefaultTime, isDatePickerTimeDisabled } from './time'
+import type { TimeValue } from '../time-picker/types'
 import type { CalendarCell, CalendarDate, CalendarRange, CalendarValue } from '../calendar/types'
 import { getCalendarNextPanel } from '../calendar/navigation'
 import { getCalendarValueDate } from '../calendar/value'
@@ -27,11 +29,15 @@ export function equalRangePickerValue(left: CalendarRange, right: CalendarRange)
 
 export function createRangePicker<TValue extends CalendarValue = CalendarValue>(initialOptions: RangePickerOptions<TValue> = {}) {
   const session = createPickerSession<CalendarRange<TValue>, RangePickerOptions<TValue>>(definedPickerOptions(initialOptions), {
+    normalize: (value, options) => hasDatePickerTime(options) ? {
+      ...(value.start ? { start: mergeDatePickerDate(value.start, value.start, options, 'start') as CalendarValue as TValue } : {}),
+      ...(value.end ? { end: mergeDatePickerDate(value.end, value.end, options, 'end') as CalendarValue as TValue } : {}),
+    } : value,
     empty: () => ({}),
     equal: equalRangePickerValue,
-    first: value => value.start ?? value.end ?? null,
+    first: (value, part) => part ? value[part] ?? null : value.start ?? value.end ?? null,
     activePart: getRangeActivePart,
-    needConfirm: options => options.needConfirm ?? false,
+    needConfirm: options => options.needConfirm ?? hasDatePickerTime(options),
   })
   // A range is one value: keep intermediate endpoints in the shared draft even without confirmation.
   const selection = () => session.getSnapshot().pendingValue
@@ -50,16 +56,21 @@ export function createRangePicker<TValue extends CalendarValue = CalendarValue>(
   }
   function valid(value: TValue, part: DatePickerInputPart, rangeValue = selection()) {
     // Constraint conversion is shared with Calendar-backed selection.
-    return !disabledDate(getCalendarValueDate(value), part, rangeValue)
+    return !disabledDate(getCalendarValueDate(value), part, rangeValue) && !isDatePickerTimeDisabled(value, session.getOptions(), part, getRangeFromValue(rangeValue, part))
   }
   function select(value: TValue) {
     if (!session.mutable()) return
     const snapshot = session.getSnapshot()
     const config = session.getConfig()
-    value = normalizeDatePickerValue(getCalendarValueDate(value), config.picker, config.weekStartsOn) as TValue
-    if (!valid(value, snapshot.activePart)) return
+    value = (config.showTime ? mergeDatePickerDate(value, selection()[snapshot.activePart], session.getOptions(), snapshot.activePart) : normalizeDatePickerValue(getCalendarValueDate(value), config.picker, config.weekStartsOn)) as CalendarValue as TValue
+    if (config.showTime && config.needConfirm ? disabledDate(getCalendarValueDate(value), snapshot.activePart) : !valid(value, snapshot.activePart)) return
     // Keep each draft value in the field the user selected; order only at submission.
     const next = createNextRangeValue(selection(), value, snapshot.activePart, false)
+    if (config.showTime) {
+      session.setPending(next, undefined, snapshot.activePart)
+      if (!config.needConfirm && completeRange()) session.commit(orderedSelection())
+      return
+    }
     session.setPending(next, snapshot.activePart)
     const completed = session.getSnapshot().completedParts
     const missingPart = getNextRangeActivePart(next)
@@ -71,15 +82,39 @@ export function createRangePicker<TValue extends CalendarValue = CalendarValue>(
       if (part) session.setActivePart(part, true)
     }
   }
-  function canConfirm() {
+  function completeRange() {
     const pending = orderedSelection()
     const allowEmpty = normalizeRangeAllowEmpty(session.getOptions().allowEmpty)
     return session.mutable() && Boolean(pending.start || pending.end) &&
       Boolean(pending.start || allowEmpty.start) && Boolean(pending.end || allowEmpty.end) &&
       (!pending.start || valid(pending.start, 'start', pending)) && (!pending.end || valid(pending.end, 'end', pending))
   }
+  function canConfirm() {
+    if (!session.getConfig().showTime) return completeRange()
+    const part = session.getSnapshot().activePart
+    const value = selection()[part]
+    return session.mutable() && Boolean(value && valid(value, part))
+  }
+  function selectTime(time: TimeValue | null) {
+    if (!time || !session.mutable() || !session.getConfig().showTime) return
+    const part = session.getSnapshot().activePart
+    const previous = selection()[part]
+    // showTime determines the concrete value; adapt it through the controller's shared CalendarValue constraint.
+    const value = mergeDatePickerTime(previous ? getCalendarValueDate(previous) : session.getSnapshot().viewDate, time) as CalendarValue as TValue
+    if (!valid(value, part)) return
+    session.setPending(createNextRangeValue(selection(), value, part, false), undefined, part)
+    if (!session.getConfig().needConfirm && completeRange()) session.commit(orderedSelection())
+  }
   function confirm() {
     if (!canConfirm()) return
+    if (session.getConfig().showTime) {
+      const part = session.getSnapshot().activePart
+      session.setPending(selection(), part)
+      const next = getNextRangeActivePart(selection(), session.getSnapshot().completedParts)
+      const allowEmpty = normalizeRangeAllowEmpty(session.getOptions().allowEmpty)
+      if (next && !(allowEmpty[next] && !selection()[next])) { session.setActivePart(next, true); return }
+      if (!completeRange()) return
+    }
     session.commit(orderedSelection())
     session.close()
   }
@@ -99,12 +134,14 @@ export function createRangePicker<TValue extends CalendarValue = CalendarValue>(
   function previewCell(cell: CalendarCell) {
     const config = session.getConfig()
     if (!session.getSnapshot().open || !session.mutable() || cell.state.disabled || !getCalendarNextPanel(cell.panel, config.picker)) return
-    const value = normalizeDatePickerValue(getCalendarValueDate(cell.value), config.picker, config.weekStartsOn) as TValue
+    const part = session.getSnapshot().activePart
+    const value = (config.showTime ? mergeDatePickerDate(cell.value, selection()[part], session.getOptions(), part) : normalizeDatePickerValue(getCalendarValueDate(cell.value), config.picker, config.weekStartsOn)) as CalendarValue as TValue
     if (valid(value, session.getSnapshot().activePart)) session.setPreviewValue(value)
   }
   function setHoverValue(value: CalendarValue | null) {
     const config = session.getConfig()
-    const next = value ? normalizeDatePickerValue(getCalendarValueDate(value), config.picker, config.weekStartsOn) as TValue : null
+    const part = session.getSnapshot().activePart
+    const next = value ? (config.showTime ? mergeDatePickerDate(value, selection()[part], session.getOptions(), part) : normalizeDatePickerValue(getCalendarValueDate(value), config.picker, config.weekStartsOn)) as CalendarValue as TValue : null
     session.setHoverValue(next && session.getSnapshot().open && session.mutable() && valid(next, session.getSnapshot().activePart) ? next : null)
   }
   function getState() {
@@ -116,6 +153,13 @@ export function createRangePicker<TValue extends CalendarValue = CalendarValue>(
       open: snapshot.open,
       panel: snapshot.panel,
       viewDate: snapshot.viewDate,
+      timeValue: getDatePickerTimeValue(rangeValue[snapshot.activePart]) ?? (session.getConfig().showTime ? getDatePickerDefaultTime(session.getOptions(), snapshot.activePart) : null),
+      timeOptions: { ...session.getConfig().timeOptions, disabledTime: (time: TimeValue) => {
+        const active = rangeValue[snapshot.activePart]
+        const date = active ? getCalendarValueDate(active) : snapshot.viewDate
+        const from = getRangeFromValue(rangeValue, snapshot.activePart)
+        return session.getOptions().disabledTime?.(mergeDatePickerTime(date, time), { activePart: snapshot.activePart, from: from && getDatePickerTimeValue(from) ? mergeDatePickerTime(getCalendarValueDate(from), getDatePickerTimeValue(from)!) : null }) ?? session.getConfig().timeOptions.disabledTime?.(time) ?? {}
+      } },
       activePart: snapshot.activePart,
       focusRequest: snapshot.focusRequest,
       triggerView: getRangePickerTriggerView(snapshot),
@@ -152,6 +196,7 @@ export function createRangePicker<TValue extends CalendarValue = CalendarValue>(
     clear,
     confirm,
     select,
+    selectTime,
   }
 }
 

@@ -1,58 +1,56 @@
 # TimePicker Primitive
 
-TimePicker primitive 内置 Input Trigger、Popover Content、Panel 和四个可组合时间列。它负责时间输入、弹层交互、列内键盘与滚动；校验规则仍由表单或调用方负责，primitive 只接收并展示校验状态。
+自带默认样式的时间选择部件。默认 Trigger 渲染 Input，也可以替换为本框架原生内容。样式可覆盖，UI 层只负责组装。
 
-## 导入
+## 导入与组合
 
-请从当前框架包的 `primitive/time-picker` 子路径导入 `TimePickerRoot`、`TimePickerTrigger`、`TimePickerContent`、`TimePickerPanel`、四个专用 Column 和逻辑入口。
+从 `@fex-design/solid/primitive/time-picker` 具名导入 Root、Trigger、Portal、Content、Panel、HourColumn、MinuteColumn、SecondColumn、PeriodColumn 和 Column（均带 TimePicker 前缀）。Portal 独立于 Content，可在原位渲染 Content 或组合自定义容器；Angular Portal 使用 `<ng-template popoverPortal>`，其他部件使用 `<div timePickerRoot>` 等裸属性 selector。
 
-## 基本组合
-
-```tsx
-<TimePickerRoot defaultValue={{ hour: 8, minute: 30, second: 0 }}>
-  <TimePickerTrigger />
-  <TimePickerContent>
-    <TimePickerPanel>
-      <TimePickerHourColumn />
-      <TimePickerMinuteColumn step={5} />
-      <TimePickerSecondColumn step={10} />
-    </TimePickerPanel>
-  </TimePickerContent>
-</TimePickerRoot>
-```
-
-12 小时制显式设置 `use12Hours` 并组合 PeriodColumn。内部 TimeValue 始终使用 24 小时值。
+完整可复制源码见同目录 examples/basic；自定义 Trigger、选项内容、独立逻辑分别见 examples/trigger、examples/item、examples/logic。示例均通过公开组件族入口导入。
 
 ## Root Props
 
-| 参数            | 类型              | 默认值 | 必填 | 说明                         |
-| --------------- | ----------------- | ------ | ---- | ---------------------------- |
-| value           | TimeValue \| null | -      | 否   | 受控时间值                   |
-| defaultValue    | TimeValue \| null | null   | 否   | 非受控初始值                 |
-| onChange/change | callback          | -      | 否   | 选择列项时返回完整时间及原因 |
-| use12Hours      | boolean           | false  | 否   | 使用 12 小时列语义           |
-| disabled        | boolean           | false  | 否   | 禁用全部列                   |
-| readOnly        | boolean           | false  | 否   | 允许查看但禁止修改           |
-| disabledTime    | DisabledTime      | -      | 否   | 根据当前时分秒禁用具体选项   |
+| 参数 | 类型 | 默认值 | 必填 | 说明 |
+| --- | --- | --- | --- | --- |
+| value | TimeValue / null | undefined | 否 | undefined 为非受控；null 为受控空值 |
+| defaultValue | TimeValue / null | null | 否 | 只在创建时读取 |
+| format | string | HH:mm:ss 或 hh:mm:ss A | 否 | 显示与输入解析格式 |
+| use12Hours | boolean | false | 否 | 12 小时列，内部值仍为 24 小时 |
+| disabled | boolean | false | 否 | 阻止打开和修改 |
+| readOnly | boolean | false | 否 | 可查看，禁止修改 |
+| disabledTime | DisabledTime | undefined | 否 | 依赖当前候选时间的选项约束 |
+| open / defaultOpen | boolean | false | 否 | 受控 / 非受控浮层 |
 
-## Column Props
+## 部件 Props
 
-Hour、Minute、Second 列支持 `step?: number`、`disabled?: boolean` 和 `isItemDisabled?: (value) => boolean`。PeriodColumn 支持 `labels`、`disabled` 和 `isItemDisabled`。
+Trigger 支持 allowClear、placeholder、invalid、inputProps 和原生前后缀内容。class/style 属于当前宿主。Content 继承 PopoverContent，Panel 为 div。Hour/Minute/SecondColumn 支持 step、disabled、isItemDisabled；PeriodColumn 支持 labels、disabled、isItemDisabled，非 12 小时制不显示有效列。
 
-`disabled` 禁用整列，`isItemDisabled` 和 Root 的 `disabledTime` 禁用具体选项。键盘上下键只负责列内移动；左右切列属于后续 UI 组合层。
+选项内容入口：React/Solid itemRender、Vue item slot、Svelte item snippet、Angular itemTemplate，接收 item/selected/active；默认按钮保留事件、引用和无障碍语义。通用 Column 还接收 options/selectedValue 和选择事件（Angular selectChange）。
 
-## 受控与非受控
+## 独立逻辑
 
-传入 value 时，父级必须在 change 回调中更新 value；只传 defaultValue 时由 primitive 保存值。空值首次选择以第一组值 `00:00:00` 补齐，不提供初始化策略属性。高级初始化可以通过公开逻辑入口自行组合。
+useTimePicker（创建 controller/snapshot，不依赖 Context）。controller 提供 setOptions、input、change、selectHour、selectMinute、selectSecond、selectPeriod、clear、scrollToValue。snapshot 包含 value、inputValue、scrollRequest。setOptions 不触发 change；disabled/readOnly 在 core 阻止修改。
 
-## 滚动
+## 事件与受控状态
 
-初次挂载和普通外部更新即时对齐；点击或键盘选择使用平滑滚动。滚动位置不会反向修改时间值，并遵循 reduced-motion。
+有效且不同的值触发 change(value, details)，details 包含 reason 和 previousValue。React/Solid 为 onChange，Vue 为 change，Svelte 为 onchange，Angular 为 change({ value, details })。父级负责更新受控 value。未完成输入仅更新 inputValue，不覆盖 value；有效输入和列选择共用 disabledTime。清除不关闭面板，选择也不引入隐式确认事务。
 
-## 注意事项
+## 键盘、滚动与方向
 
-- Trigger 和 Content 是 primitive 内置基础部件；`format` 决定输入解析与显示，组合层根据 `analyzeTimeFormat` 的结果选择需要渲染的专用列。
-- Content 复用 Popover，自动与 Trigger 等宽、碰撞翻转、互斥打开并在点击外部时关闭；Column 复用 Scrollbar。
-- 前后缀、面板附加内容和范围选择仍由调用方组合。
-- 通用 format/parse 位于 `@fex-design/core/date/utils`。
-- invalid 是 Input/Form 的外部展示状态，不属于 TimePicker primitive 的业务校验。
+上下键从焦点或当前选中项移动到有效选项，Enter/Space 原生激活。所有列使用实际 offsetTop 对齐并遵循 reduced-motion。样式使用逻辑边框，默认浮层继承 Trigger 方向；可显式传 dir 覆盖。
+
+## 完整基本示例
+
+```tsx
+import { TimePickerRoot, TimePickerTrigger, TimePickerPortal, TimePickerContent, TimePickerPanel, TimePickerHourColumn, TimePickerMinuteColumn, TimePickerSecondColumn, TimePickerPeriodColumn } from '@fex-design/solid/primitive/time-picker'
+
+export function TimePickerBasicExample() {
+  return (<div class="flex w-full min-w-0 flex-col gap-4"><TimePickerRoot defaultValue={{ hour: 9, minute: 30, second: 0 }} ><TimePickerTrigger></TimePickerTrigger><TimePickerPortal><TimePickerContent><TimePickerPanel><TimePickerHourColumn /><TimePickerMinuteColumn /><TimePickerSecondColumn /></TimePickerPanel></TimePickerContent></TimePickerPortal></TimePickerRoot></div>)
+}
+```
+
+Popover 的定位、容器和挂载配置通过 popoverProps 转发；该配置不能创建第二份 open/disabled 状态。默认输入支持 size 与 variant。
+
+默认后缀使用 ClockIcon，已有值时仍显示；允许清除时，在悬停或聚焦下由同一位置的清除按钮替换。自定义 suffix 优先于默认时钟。
+
+受控示例提供外部设置、恢复、清空值和开关面板按钮；非受控输入绑定同一外部值作为 defaultValue，外部值变化不覆盖内部选择。所有示例使用显式全宽容器，避免框架宿主差异影响展示宽度。

@@ -1,4 +1,7 @@
 <script lang="ts">
+import { getNextTimeOption } from '@fex-design/core/time-picker/navigation'
+import { getTimePickerScrollBehavior } from '@fex-design/core/time-picker/scroll'
+
   import type {
     TimePeriod,
     TimePickerOption,
@@ -10,7 +13,7 @@
     timePickerColumnViewportClassName,
   } from "@fex-design/components-styles/time-picker";
   import { cn } from "@fex-design/utils";
-  import { getContext, tick } from "svelte";
+  import { getContext, tick, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { timePickerContextKey, type TimePickerContext } from "./context";
   import { ScrollbarRoot, ScrollbarViewport, ScrollbarBar, ScrollbarTrack, ScrollbarThumb } from '../scrollbar';
@@ -24,6 +27,7 @@
     selectedValue?: ColumnValue | undefined;
     disabled?: boolean | undefined;
     onselect: (value: ColumnValue) => void;
+    item?: Snippet<[{ item: TimePickerOption<ColumnValue>; selected: boolean; active: boolean }]>;
   }
 
   let {
@@ -31,6 +35,7 @@
     selectedValue,
     disabled = false,
     onselect,
+    item: renderItem,
     class: className,
     onkeydown,
     ...rest
@@ -53,19 +58,16 @@
       if (item && listElement)
         listElement.scrollTo({
           top: item.offsetTop,
-          behavior: request?.behavior ?? "auto",
+          behavior: getTimePickerScrollBehavior(request?.behavior ?? "auto"),
         });
     });
   });
 
   function move(direction: 1 | -1) {
-    const enabled = options.filter((option) => !option.disabled);
-    const current = enabled.findIndex((option) => option.value === activeValue);
-    const next =
-      enabled[Math.min(enabled.length - 1, Math.max(0, current + direction))];
-    if (!next) return;
-    activeValue = next.value;
-    itemElements.get(next.value)?.focus();
+    const next = getNextTimeOption(options, activeValue, selectedValue, direction);
+    if (next === undefined) return;
+    activeValue = next;
+    itemElements.get(next)?.focus();
   }
 
   function itemRef(node: HTMLButtonElement, value: ColumnValue) {
@@ -75,19 +77,14 @@
 </script>
 
 <ScrollbarRoot
+  {...rest}
+  role="listbox"
+  tabindex={resolvedDisabled ? -1 : 0}
+  aria-disabled={resolvedDisabled || undefined}
   data-slot="time-picker-column"
   data-disabled={resolvedDisabled ? "true" : undefined}
   class={cn(timePickerColumnClassName, className)}
-  {disabled}
->
-  <ScrollbarViewport
-    {...rest}
-    bind:element={listElement}
-    role="listbox"
-    tabindex={resolvedDisabled ? -1 : 0}
-    aria-disabled={resolvedDisabled || undefined}
-    overflow={{ x: 'hidden' }}
-    class={timePickerColumnViewportClassName}
+  disabled={resolvedDisabled}
     onkeydown={(event) => {
       onkeydown?.(event);
       if (event.defaultPrevented || resolvedDisabled || context.readOnly())
@@ -97,6 +94,12 @@
         move(event.key === "ArrowDown" ? 1 : -1);
       }
     }}
+>
+  <ScrollbarViewport
+    bind:element={listElement}
+    overflow={{ x: 'hidden' }}
+    class={timePickerColumnViewportClassName}
+
   >
     {#each options as item (item.value)}
       <button
@@ -111,13 +114,11 @@
         data-disabled={item.disabled ? "true" : undefined}
         class={timePickerColumnItemClassName}
         onfocus={() => (activeValue = item.value)}
-        onclick={(event) => {
-          const element = event.currentTarget;
+        onclick={() => {
           if (resolvedDisabled || context.readOnly() || item.disabled) return;
           activeValue = item.value;
           onselect(item.value);
-          listElement?.scrollTo({ top: element.offsetTop, behavior: "smooth" });
-        }}>{item.label}</button
+        }}>{#if renderItem}{@render renderItem({ item, selected: item.value === selectedValue, active: item.value === activeValue })}{:else}{item.label}{/if}</button
       >
     {/each}
     <div aria-hidden="true" class={timePickerColumnSpacerClassName}></div>

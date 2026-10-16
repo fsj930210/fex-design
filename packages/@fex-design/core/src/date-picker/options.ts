@@ -1,7 +1,7 @@
 import { pickPickerProps } from './safe-props'
 import type { CalendarDate, CalendarValue, CalendarWeekday } from '../calendar/types'
-import type { DatePickerPicker } from './types'
-import { getCalendarValueKey } from '../calendar/value'
+import type { DatePickerPicker, DatePickerShowTime, DatePickerDisabledTime } from './types'
+import { isCalendarDateTime, getCalendarValueKey } from '../calendar/value'
 import type { PopoverOptions } from '../popover/types'
 
 export const datePickerPopoverKeys = ['placement', 'side', 'align', 'sideOffset', 'alignOffset', 'strategy', 'avoidCollisions', 'collisionBoundary', 'collisionPadding', 'matchReferenceWidth', 'hideWhenDetached', 'zIndex', 'getPopupContainer', 'closeDelay', 'dismiss', 'lazyMount', 'destroyOnHidden'] as const satisfies readonly (keyof PopoverOptions)[]
@@ -18,6 +18,8 @@ export function getDatePickerPopoverOptions(options: DatePickerPopoverOptions = 
 }
 
 export interface PickerOptions {
+  showTime?: boolean | DatePickerShowTime | undefined
+  disabledTime?: DatePickerDisabledTime | undefined
   picker?: DatePickerPicker | undefined
   open?: boolean | undefined
   defaultOpen?: boolean | undefined
@@ -50,5 +52,5 @@ export function equalPickerValue(left: CalendarValue | null | undefined, right: 
   if (left === right) return true
   if (!left || !right) return false
   // Selection identity is independent of display format and object identity.
-  return getCalendarValueKey(left) === getCalendarValueKey(right)
+  return (isCalendarDateTime(left) ? left.toString() : getCalendarValueKey(left)) === (isCalendarDateTime(right) ? right.toString() : getCalendarValueKey(right))
 }

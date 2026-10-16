@@ -1,3 +1,4 @@
+import { DatePickerTimePanel } from './date-picker-time-panel'
 import { usePickerAppearance } from './appearance-context'
 import { getVisibleRangePanelViewDates } from '@fex-design/core/date-picker/panel'
 import { datePickerPanelsClassName } from '@fex-design/components-styles/date-picker'
@@ -18,7 +19,7 @@ export function RangePickerPanelGroup({
 }: RangePickerPanelGroupProps) {
   const context = useRangePickerContext('RangePickerPanelGroup')
   const appearance = usePickerAppearance()
-  const viewDates = getVisibleRangePanelViewDates(context.viewDate, context.panel, panelCount)
+  const viewDates = getVisibleRangePanelViewDates(context.viewDate, context.panel, context.showTime ? 1 : panelCount)
 
   return (
     <div
@@ -33,6 +34,7 @@ export function RangePickerPanelGroup({
         <>
           <RangePickerPanel panelViewDate={viewDates[0]} />
           {viewDates[1] ? <RangePickerPanel panelViewDate={viewDates[1]} /> : null}
+          {context.showTime ? <DatePickerTimePanel range /> : null}
         </>
       ) : children}
     </div>

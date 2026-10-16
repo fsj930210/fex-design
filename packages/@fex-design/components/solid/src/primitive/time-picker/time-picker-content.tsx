@@ -1,26 +1,19 @@
-import { timePickerRootClassName } from '@fex-design/components-styles/time-picker'
+import { getTimePickerDirection } from '@fex-design/core/time-picker/scroll'
+import { usePopover } from '../popover/popover-context'
 import { cn } from '@fex-design/utils'
-import type { JSX, ParentProps } from 'solid-js'
-import { PopoverContent, PopoverPortal } from '../popover'
+import type { ComponentProps } from 'solid-js'
+import { PopoverContent } from '../popover'
 
-export interface TimePickerContentProps extends ParentProps<{ class?: string; style?: string }> {}
+export type TimePickerContentProps = ComponentProps<typeof PopoverContent>
 
 export function TimePickerContent(props: TimePickerContentProps) {
+  const { triggerElement } = usePopover('TimePickerContent')
   return (
-    <PopoverPortal>
       <PopoverContent
         {...props}
+        dir={props.dir ?? getTimePickerDirection(triggerElement.current)}
         class={cn('overflow-hidden p-0', props.class)}
-        style={`width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height);${props.style ?? ''}`}
+        style={typeof props.style === 'string' ? 'width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height);' + props.style : { width: 'var(--floating-reference-width)', 'max-width': 'var(--floating-available-width)', 'max-height': 'var(--floating-available-height)', ...props.style }}
       />
-    </PopoverPortal>
-  )
-}
-
-export function TimePickerPanel(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
-  return (
-    <div {...props} data-slot="time-picker-panel" class={cn(timePickerRootClassName, props.class)}>
-      {props.children}
-    </div>
   )
 }

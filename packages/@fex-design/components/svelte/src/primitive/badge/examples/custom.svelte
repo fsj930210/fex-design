@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Badge from "@fex-design/svelte/primitive/badge";
+  import { Badge } from '@fex-design/svelte/primitive/badge'
 </script>
 
 <div class="flex gap-3">

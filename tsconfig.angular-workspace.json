@@ -758,7 +758,7 @@
         "packages/@fex-design/components/angular/src/primitive/rate/index.ts"
       ],
       "@fex-design/angular/primitive/slider": [
-        "packages/@fex-design/components/angular/src/primitive/slider/slider-primitive.ts"
+        "packages/@fex-design/components/angular/src/primitive/slider/index.ts"
       ],
       "@fex-design/angular/primitive/steps": [
         "packages/@fex-design/components/angular/src/primitive/steps/index.ts"

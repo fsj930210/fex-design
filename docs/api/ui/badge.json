@@ -3,7 +3,7 @@
   "slug": "badge",
   "layer": "ui",
   "status": "stable",
-  "description": "Badge 的快捷附着入口；BadgeGroup 直接重导出 Primitive 实现。",
+  "description": "展示附着式徽标、Ribbon 和可折叠的徽标组。",
   "importPath": {
     "react": "@fex-design/react/ui/badge",
     "vue": "@fex-design/vue/ui/badge",
@@ -88,7 +88,7 @@
     {
       "id": "group",
       "title": "BadgeGroup 集合溢出",
-      "description": "直接重导出 Primitive BadgeGroup。"
+      "description": "使用 maxCount 收起超出的徽标，并显示剩余数量。"
     },
     { "id": "direction", "title": "LTR 与 RTL", "description": "对比逻辑行内结束侧的附着位置。" },
     { "id": "standalone", "title": "独立使用", "description": "不包裹内容时直接显示徽标。" },

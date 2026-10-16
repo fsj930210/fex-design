@@ -1,6 +1,6 @@
 # Vue Primitive Tooltip
 
-Accessible hover/focus hint built on the shared floating controller.
+An accessible hint shown on hover or focus.
 
 ## Import
 

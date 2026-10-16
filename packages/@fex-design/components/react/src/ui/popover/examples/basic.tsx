@@ -1,5 +1,5 @@
-import { Popover } from '@fex-design/react/ui/popover'
-import type { PopoverProps } from '@fex-design/react/ui/popover'
+import { Popover, type PopoverProps } from '@fex-design/react/ui/popover'
+
 import { Button } from '@fex-design/react/ui/button'
 
 function DemoPopover({

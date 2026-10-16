@@ -15,8 +15,6 @@ Styled Tag primitives for compact categories, attributes, and status values. Pri
 
 ## Examples
 
-Examples are stored in `examples/<name>` as the source for the documentation preview.
-
 | Name          | Covers                                                         |
 | ------------- | -------------------------------------------------------------- |
 | basic         | Regular tags, three sizes, closable composition, and disabled. |

@@ -50,7 +50,7 @@ Avatar 用于标识用户或其他对象，适合个人资料、评论、成员�
 
 ## CSS Variables
 
-Avatar 始终保持等宽高，因此使用单个尺寸变量，不分别暴露 width 和 height。变量可写在单个 Avatar、AvatarGroup 或业务容器上。例如在 AvatarGroup 上设置 `--avatar-size: 3rem`，组内头像和默认溢出节点都会变为 `3rem × 3rem`；设置 `--avatar-group-overlap: 1rem` 可调整相邻头像的重叠距离。
+使用 `--avatar-size` 同时调整头像的宽高。变量可写在单个 Avatar、AvatarGroup 或业务容器上。例如在 AvatarGroup 上设置 `--avatar-size: 3rem`，组内头像和默认溢出节点都会变为 `3rem × 3rem`；设置 `--avatar-group-overlap: 1rem` 可调整相邻头像的重叠距离。
 
 | 变量                     | 默认值                      | 说明                                                                 |
 | ------------------------ | --------------------------- | -------------------------------------------------------------------- |

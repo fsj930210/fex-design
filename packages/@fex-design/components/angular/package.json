@@ -50,7 +50,7 @@
     "./primitive/select": "./src/primitive/select/index.ts",
     "./primitive/radio": "./src/primitive/radio/index.ts",
     "./primitive/rate": "./src/primitive/rate/index.ts",
-    "./primitive/slider": "./src/primitive/slider/slider-primitive.ts",
+    "./primitive/slider": "./src/primitive/slider/index.ts",
     "./primitive/steps": "./src/primitive/steps/index.ts",
     "./primitive/scrollbar": "./src/primitive/scrollbar/index.ts",
     "./primitive/sortable": "./src/primitive/sortable/index.ts",
@@ -164,10 +164,7 @@
     "./signals/host-style": "./src/signals/host-style.ts",
     "./services/toast": "./src/services/toast.ts",
     "./i18n": "./src/i18n/i18n.ts",
-    "./*": "./src/*",
-    "./*/*": "./src/*/*",
-    "./*/*/*": "./src/*/*/*",
-    "./*/*/*/*": "./src/*/*/*/*"
+    "./*": "./src/*"
   },
   "scripts": {
     "sync-paths": "node scripts/sync-tsconfig-paths.mjs",

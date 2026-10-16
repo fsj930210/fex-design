@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Kbd from "../kbd.svelte";
-  import KbdGroup from "../kbd-group.svelte";
+  import { Kbd, KbdGroup } from '@fex-design/svelte/ui/kbd'
+
 </script>
 
 <div class="grid w-full grid-cols-2 gap-6">

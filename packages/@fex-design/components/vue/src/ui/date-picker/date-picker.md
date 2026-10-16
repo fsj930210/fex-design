@@ -188,9 +188,3 @@ UI attrs pass to Trigger; class/style merge onto the visible input wrapper. Put 
 Both layer entries export the safe configuration and style types: `DatePickerInputProps`, `DatePickerEndpointProps`, `DatePickerCalendarProps`, `DatePickerPopoverProps`, `DatePickerClassNames`, `DatePickerStyles<TStyle>`, `DatePickerStyle`.
 
 UI also exports `DatePickerProps` / `RangePickerProps`; import value and logic types from Primitive.
-
-
-
-## Examples
-
-Import examples from `@fex-design/vue/ui/date-picker/examples`. The 23 scenes include presets, sizes, variants, granularity, multiple selection, ranges, disabled states, dynamic limits, empty endpoints, custom cells, formatting, locale, separate custom-style and LTR/RTL examples. Sources are in the adjacent examples/ directory.

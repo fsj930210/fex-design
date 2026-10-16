@@ -1,114 +1,45 @@
-import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
+import { mkdir, readdir, rm, writeFile } from 'node:fs/promises'
+import { dirname, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { codeToHtml } from 'shiki'
+import { frameworkExtensions, readExampleSource } from './example-source.mjs'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const componentRoot = resolve(siteRoot, '../../packages/@fex-design/components')
 const outputRoot = resolve(siteRoot, 'public/example-source')
-const componentFilter = process.argv.find((value) => value.startsWith('--component='))?.slice(12)
-const frameworks = {
-  angular: { extension: 'ts', language: 'typescript' },
-  react: { extension: 'tsx', language: 'tsx' },
-  solid: { extension: 'tsx', language: 'tsx' },
-  svelte: { extension: 'svelte', language: 'svelte' },
-  vue: { extension: 'vue', language: 'vue' },
+const filter = process.argv.find((value) => value.startsWith('--component='))?.slice(12)
+const components = filter ? new Set(filter.split(',')) : undefined
+
+if (!components) {
+  if (relative(siteRoot, outputRoot).split(sep).join('/') !== 'public/example-source')
+    throw new Error('Example source output must stay inside the docs public directory')
+  await rm(outputRoot, { recursive: true, force: true })
 }
 
-if (!componentFilter) await rm(outputRoot, { recursive: true, force: true })
-
-for (const [framework, config] of Object.entries(frameworks)) {
+let count = 0
+for (const [framework, extension] of Object.entries(frameworkExtensions)) {
   for (const layer of ['primitive', 'ui']) {
     const layerRoot = resolve(componentRoot, framework, 'src', layer)
     for (const component of await readdir(layerRoot, { withFileTypes: true })) {
-      if (!component.isDirectory() || (componentFilter && component.name !== componentFilter))
-        continue
+      if (!component.isDirectory() || component.name.toLowerCase().includes('trash') ||
+          (components && !components.has(component.name))) continue
       const examplesRoot = resolve(layerRoot, component.name, 'examples')
       let examples
       try {
         examples = await readdir(examplesRoot, { withFileTypes: true })
-      } catch {
-        continue
+      } catch (error) {
+        if (error.code === 'ENOENT') continue
+        throw error
       }
       for (const example of examples) {
-        if (!example.isFile() || !example.name.endsWith(`.${config.extension}`)) continue
-        const name = example.name.slice(0, -config.extension.length - 1)
-        let source = await readFile(resolve(examplesRoot, example.name), 'utf8')
-        let angularTemplateRoot = examplesRoot
-        const publicReexport = source.match(
-          /export \{ \w+(?: as default)? \} from ['"]@fex-design\/(?:react|vue|solid|svelte|angular)\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/,
-        )
-        const reexport = publicReexport ?? source.match(
-          /export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/,
-        )
-        if (layer === 'ui' && reexport) {
-          const primitiveRoot = resolve(
-            componentRoot,
-            framework,
-            'src',
-            'primitive',
-            reexport[1],
-            'examples',
-          )
-          angularTemplateRoot = primitiveRoot
-          source = await readFile(
-            resolve(primitiveRoot, `${reexport[2]}.${config.extension}`),
-            'utf8',
-          )
-          // Public reexports reuse the Primitive demo itself, including its logic imports.
-          if (!publicReexport) source = source.replaceAll(
-            `@fex-design/${framework}/primitive/${reexport[1]}`,
-            `@fex-design/${framework}/ui/${component.name}`,
-          )
-          if (!publicReexport && framework === 'angular')
-            source = source.replaceAll(
-              "from '../separator'",
-              "from '@fex-design/angular/ui/separator'",
-            )
-          if (!publicReexport && framework === 'svelte')
-            source = source.replace(
-              /from ['"][^'"]*separator\.svelte['"]/,
-              "from '@fex-design/svelte/ui/separator'",
-            )
-        }
-        if (layer === 'ui' && framework === 'svelte')
-          source = source.replace(
-            /from ['"][^'"]*separator\.svelte['"]/,
-            "from '@fex-design/svelte/ui/separator'",
-          )
-        if (layer === 'ui' && framework === 'angular')
-          source = source.replaceAll(
-            `from '../${component.name}'`,
-            `from '@fex-design/angular/ui/${component.name}'`,
-          )
-        if (framework === 'angular') {
-          try {
-            source += `\n\n<!-- ${name}.html -->\n${await readFile(resolve(angularTemplateRoot, `${name}.html`), 'utf8')}`
-          } catch {}
-        }
-        const partImports = [...source.matchAll(/from ['"](\.\/_parts\/[^'"]+)['"]/g)]
-        for (const [, imported] of partImports) {
-          const filename = imported.endsWith(`.${config.extension}`)
-            ? imported
-            : `${imported}.${config.extension}`
-          const part = await readFile(resolve(examplesRoot, filename), 'utf8')
-          source += `\n\n// ${filename}\n${part}`
-          if (framework === 'angular') {
-            const template = filename.replace(/\.ts$/, '.html')
-            source += `\n\n<!-- ${template} -->\n${await readFile(resolve(examplesRoot, template), 'utf8')}`
-          }
-        }
-        const html = await codeToHtml(source, {
-          lang: config.language,
-          themes: { light: 'github-light', dark: 'github-dark' },
-        })
+        if (!example.isFile() || !example.name.endsWith(`.${extension}`)) continue
+        const name = example.name.slice(0, -extension.length - 1)
+        const result = await readExampleSource({ componentRoot, framework, layer, component: component.name, example: name })
         const output = resolve(outputRoot, framework, layer, component.name, `${name}.json`)
         await mkdir(dirname(output), { recursive: true })
-        await writeFile(output, JSON.stringify({ source, html }))
+        await writeFile(output, JSON.stringify(result))
+        count++
       }
     }
   }
 }
-
-
-
+console.log(`Generated ${count} example sources`)

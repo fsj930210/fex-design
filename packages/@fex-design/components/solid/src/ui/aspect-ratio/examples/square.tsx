@@ -1,4 +1,4 @@
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/solid/ui/aspect-ratio'
 export function Square() {
   return (
     <AspectRatio ratio={1} class="max-w-64">

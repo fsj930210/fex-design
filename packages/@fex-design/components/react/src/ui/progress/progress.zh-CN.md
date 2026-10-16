@@ -56,7 +56,7 @@ import { Progress } from '@fex-design/react/ui/progress'
 
 信息显示优先级为 showInfo ?? showValue ?? 默认值。线性默认显示；圆环和仪表盘在 infoPlacement 为 inside 时默认显示。format 优先于成功图标，percent 为 0–100。bottom 不重复渲染顶部标签，none 不渲染信息。
 
-普通圆环渐变使用独立的 SVG gradient ID；分段圆环按段取色。gapDegree 只用于普通仪表盘，top 使用 315° 旋转，其他 gapPlacement 值保持 React 当前默认几何旋转。线性 trackColor 和分段 trackColor 生效，普通圆环背景沿用 Primitive 的默认样式。
+分段圆环可分别设置每段颜色。gapDegree 仅调整普通仪表盘的缺口角度。gapPlacement 当前仅 top 与 bottom 的显示不同，start、end、left、right 均按 bottom 显示。trackColor 作用于线性及分段轨道；普通圆环的轨道颜色通过 --progress-remaining 设置。
 
 classNames 与 styles 作用到对应语义部件；原生根节点 style 优先于 styles.root。原生属性、事件与元素访问遵循当前框架方式。
 

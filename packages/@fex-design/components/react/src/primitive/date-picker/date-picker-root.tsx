@@ -7,7 +7,7 @@ import { PickerContainerContext } from './container-context'
 import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
 import type { CalendarValue } from '@fex-design/core/calendar'
 import type { ReactNode } from 'react'
-import { PopoverRoot, type PopoverRootProps } from '../popover'
+import { PopoverRoot, type PopoverRootProps } from '@fex-design/react/primitive/popover'
 import { DatePickerContext } from './context'
 import { useDatePicker, type UseDatePickerOptions } from './use-date-picker'
 

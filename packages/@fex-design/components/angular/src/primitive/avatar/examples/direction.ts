@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../avatar'
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-direction-example',
   standalone: true,

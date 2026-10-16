@@ -8,10 +8,6 @@ UI Alert 将 Primitive 部件封装为一个组件，提供语义化内置图标
 import { Alert } from '@fex-design/react/ui/alert'
 ```
 
-## 示例
-
-示例固定按基本展示、Type 与自定义颜色、Variant、可关闭、循环公告、自定义 Icon/Action、LTR/RTL、语义化样式排列。
-
 ## API
 
 `type` 支持 `success | info | warning | error`，默认 `info`；`variant` 支持 `filled | outlined | solid`，默认 `filled`。`title`、`description`、`icon`、`action`、`closeIcon` 接收 `ReactNode`。`showIcon` 开启内置图标或自定义替换，`closable` 创建关闭按钮；`onClose` 在隐藏前触发，调用 `preventDefault()` 可以阻止隐藏。

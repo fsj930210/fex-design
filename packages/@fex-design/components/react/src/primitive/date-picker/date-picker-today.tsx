@@ -5,7 +5,7 @@ import { cn } from '@fex-design/utils'
 import { datePickerTodayClassName } from '@fex-design/components-styles/date-picker'
 import { type ComponentProps } from 'react'
 
-import { Button } from '../button/button'
+import { Button } from '@fex-design/react/primitive/button'
 import { useFooterOwner } from './date-picker-footer-owner'
 
 export interface DatePickerTodayProps extends ComponentProps<'button'> {}

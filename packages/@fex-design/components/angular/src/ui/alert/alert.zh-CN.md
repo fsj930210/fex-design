@@ -1,6 +1,6 @@
 # Alert
 
-UI Alert 将 Primitive Alert 封装为一个 signal-first Angular 组件，提供圆形状态图标和关闭行为。
+Alert 提供状态图标、标题、说明和可选的关闭操作。
 
 ## 导入
 
@@ -13,10 +13,6 @@ import {
   AlertTitleContent,
 } from '@fex-design/angular/ui/alert'
 ```
-
-## 示例
-
-示例固定按基本展示、Type/自定义颜色、Variant、可关闭、循环公告、自定义图标与操作、LTR/RTL、语义化样式排列。
 
 ## Inputs、Output 与内容投影
 

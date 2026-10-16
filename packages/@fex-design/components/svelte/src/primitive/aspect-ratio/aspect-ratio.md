@@ -14,8 +14,6 @@ Styled aspect-ratio container.
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name      | Covers                |
 | --------- | --------------------- |
 | landscape | 16:9 landscape ratio. |

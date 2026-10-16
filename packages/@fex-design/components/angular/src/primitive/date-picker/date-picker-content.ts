@@ -7,7 +7,7 @@ import { NativeAttributesDirective, type NativeAttributes } from '@fex-design/an
 
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { datePickerContentClassName } from '@fex-design/components-styles/date-picker'
-import { Popover, PopoverContent, PopoverPortal } from '../popover'
+import { Popover, PopoverContent, PopoverPortal } from '@fex-design/angular/primitive/popover'
 import { PickerContainerToken } from './container-context'
 @Component({
   selector: 'div[datePickerContent], div[rangePickerContent]',

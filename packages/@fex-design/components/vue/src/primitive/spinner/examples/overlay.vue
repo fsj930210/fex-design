@@ -10,14 +10,14 @@ const spinning = ref(true)
 </script>
 <template>
   <div class="grid w-full max-w-xl gap-4">
-    <SpinnerContainer class="min-h-40 rounded-lg border border-border"
+    <SpinnerContainer :aria-busy="spinning" class="min-h-40 rounded-lg border border-border"
       ><div class="grid gap-2 p-6">
         <strong>项目概览</strong>
         <p class="m-0 text-sm text-muted-foreground">
           内容在加载期间保持挂载，不会丢失布局和状态。
         </p>
       </div>
-      <SpinnerOverlay v-if="spinning"
+      <SpinnerOverlay v-if="spinning" class="flex-col"
         ><Spinner /><SpinnerText>正在刷新数据</SpinnerText></SpinnerOverlay
       ></SpinnerContainer
     >

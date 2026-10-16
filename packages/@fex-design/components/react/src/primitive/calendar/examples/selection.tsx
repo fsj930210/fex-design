@@ -1,4 +1,4 @@
-import { CalendarRoot } from '../calendar-root'
+import { CalendarRoot, CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter, CalendarNavigationButton } from '@fex-design/react/primitive/calendar'
 import { getCalendarUIOptions } from '@fex-design/core/calendar'
 import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
 import { useState } from 'react'
@@ -40,18 +40,10 @@ import {
   calendarUIMonthRowClassName,
 } from '@fex-design/components-styles/calendar'
 import { cn } from '@fex-design/utils'
-import {
-  CalendarHeader,
-  CalendarWeekHeader,
-  CalendarRow,
-  CalendarCell,
-  CalendarCellTrigger,
-  CalendarFooter,
-  CalendarNavigationButton,
-} from '../index'
-import { RadioGroup, RadioButton } from '../../radio'
+
+import { RadioGroup, RadioButton } from '@fex-design/react/primitive/radio'
 import { useCalendarContext } from '../calendar-context'
-import type { CalendarProps } from '../../../ui/calendar/calendar'
+import type { CalendarProps } from '@fex-design/react/ui/calendar'
 import type { CalendarUIOptions, CalendarSemanticPart } from '@fex-design/core/calendar'
 type Props = Pick<
   CalendarProps,

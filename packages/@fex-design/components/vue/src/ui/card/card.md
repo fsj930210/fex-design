@@ -20,8 +20,6 @@ Convenience Card built on Primitive with structured content and semantic-region 
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name          | Covers                     |
 | ------------- | -------------------------- |
 | basic         | Complete information card. |

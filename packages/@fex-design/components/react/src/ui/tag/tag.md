@@ -1,6 +1,6 @@
 # React UI Tag
 
-Recommended Tag composition. UI builds on Primitive Tag, creates TagAction when `closable` is enabled, coordinates disabled state, and exposes structured styling for the root and close parts.
+Labels for categories, attributes, and status, with an optional close action and styles for the root and close button.
 
 ## Import
 
@@ -14,8 +14,6 @@ Recommended Tag composition. UI builds on Primitive Tag, creates TagAction when 
 | TagAction | button  | Re-exported Primitive action button for manual composition.                  |
 
 ## Examples
-
-Examples are stored in `examples/<name>` as the source for the documentation preview.
 
 | Name            | Covers                                                         |
 | --------------- | -------------------------------------------------------------- |
@@ -44,19 +42,17 @@ Examples are stored in `examples/<name>` as the source for the documentation pre
 
 ## Close behavior
 
-Enabling `closable` only renders and wires the close button. The component never hides itself or owns collection state. Remove the corresponding item in `onClose?: MouseEventHandler<HTMLButtonElement>`. When `disabled` is true, the generated close button is also disabled.
+Enabling `closable` only renders and wires the close button. The component never hides itself or owns collection state. Remove the corresponding item in the `onClose` callback. When `disabled` is true, the generated close button is also disabled.
 
-A custom close icon completely replaces the built-in XIcon through `children?: ReactNode`; `closeIcon?: ReactNode`.
+Replace the default close icon through the `closeIcon` prop.
 
 ## Structured styles
 
-`classNames.root` and `styles.root` extend the Tag root. `classNames.close` and `styles.close` extend the generated close button. Native root `class` / `className` and `style` are merged with the structured root values.
+`classNames.root` and `styles.root` extend the Tag root. `classNames.close` and `styles.close` extend the generated close button. Native root `className` and `style` are merged with the structured root values.
 
 Use semantic CSS variables to change preset palettes. Use structured styles for instance-specific root or close presentation; they do not replace `variant`, `color`, or `size`.
 
 ## CSS variables
-
-UI keeps the Primitive color contract.
 
 | Variable                         | Purpose                                |
 | -------------------------------- | -------------------------------------- |
@@ -70,10 +66,6 @@ UI keeps the Primitive color contract.
 | `--tag-color-danger-foreground`  | Foreground used by solid danger tags.  |
 | `--tag-color-info`               | Info semantic color.                   |
 | `--tag-color-info-foreground`    | Foreground used by solid info tags.    |
-
-## Content model
-
-React uses `children?: ReactNode`; `closeIcon?: ReactNode`. This is the framework-native content API; no cross-framework slot abstraction is introduced.
 
 ## Accessibility
 

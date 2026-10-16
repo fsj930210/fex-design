@@ -9,7 +9,7 @@ import { ChevronLeftIcon } from '@fex-design/react/icons/chevron-left'
 import { ChevronRightIcon } from '@fex-design/react/icons/chevron-right'
 import { ChevronsLeftIcon } from '@fex-design/react/icons/chevrons-left'
 import { ChevronsRightIcon } from '@fex-design/react/icons/chevrons-right'
-import { Button } from '../button/button'
+import { Button } from '@fex-design/react/primitive/button'
 import { useCalendarContext } from '../calendar/calendar-context'
 
 export interface DatePickerHeaderButtonProps extends ComponentProps<'button'> {

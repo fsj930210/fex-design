@@ -6,17 +6,9 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import rehypeSlug from 'rehype-slug'
-import fs from 'node:fs/promises'
 import path from 'node:path'
-import { codeToHtml } from 'shiki'
+import { frameworkExtensions as extensions, readExampleSource } from './scripts/example-source.mjs'
 
-const extensions = {
-  react: 'tsx',
-  vue: 'vue',
-  solid: 'tsx',
-  svelte: 'svelte',
-  angular: 'ts',
-} as const
 
 const siteBase = process.env.DOCS_BASE_PATH ?? '/'
 
@@ -45,7 +37,7 @@ export default defineConfig({
     solid({ extensions: ['.tsx', '.ts', '.md', '.mdx'] }),
     tailwindcss(),
     {
-      name: 'fex-example-source',
+      name: 'example-source',
       configureServer(server) {
         server.middlewares.use('/__example-source', async (request, response) => {
           const url = new URL(request.url ?? '', 'http://docs.local')
@@ -63,71 +55,16 @@ export default defineConfig({
             response.end('Invalid example')
             return
           }
-          const base = path.resolve(
-            process.cwd(),
-            '../../packages/@fex-design/components',
-            framework,
-            'src',
-            layer!,
-            component,
-            'examples',
-          )
-          const file = path.join(base, `${example}.${extensions[framework]}`)
           try {
-            let source = await fs.readFile(file, 'utf8')
-            let angularTemplateBase = base
-            if (layer === 'ui') {
-              const reexport = source.match(
-                /export \{ \w+(?: as default)? \} from ['"]\.\.\/\.\.\/\.\.\/primitive\/([^/]+)\/examples\/([^'"]+)['"]/,
-              )
-              if (reexport) {
-                const primitiveBase = path.resolve(
-                  process.cwd(),
-                  '../../packages/@fex-design/components',
-                  framework,
-                  'src',
-                  'primitive',
-                  reexport[1],
-                  'examples',
-                )
-                angularTemplateBase = primitiveBase
-                source = await fs.readFile(
-                  path.join(primitiveBase, `${reexport[2]}.${extensions[framework]}`),
-                  'utf8',
-                )
-                source = source.replaceAll(
-                  `@fex-design/${framework}/primitive/${reexport[1]}`,
-                  `@fex-design/${framework}/ui/${component}`,
-                )
-                if (framework === 'angular')
-                  source = source.replace(
-                    "from '../separator'",
-                    "from '@fex-design/angular/ui/separator'",
-                  )
-                if (framework === 'svelte')
-                  source = source.replace(
-                    /from ['"][^'"]*separator\.svelte['"]/,
-                    "from '@fex-design/svelte/ui/separator'",
-                  )
-              }
-            }
-            if (framework === 'angular') {
-              try {
-                source += `\n\n<!-- ${example}.html -->\n${await fs.readFile(path.join(angularTemplateBase, `${example}.html`), 'utf8')}`
-              } catch {}
-            }
-            const language =
-              framework === 'react' || framework === 'solid'
-                ? 'tsx'
-                : framework === 'angular'
-                  ? 'typescript'
-                  : framework
-            const html = await codeToHtml(source, {
-              lang: language,
-              themes: { light: 'github-light', dark: 'github-dark' },
+            const result = await readExampleSource({
+              componentRoot: path.resolve(process.cwd(), '../../packages/@fex-design/components'),
+              framework,
+              layer: layer as 'primitive' | 'ui',
+              component: component!,
+              example: example!,
             })
             response.setHeader('Content-Type', 'application/json; charset=utf-8')
-            response.end(JSON.stringify({ source, html }))
+            response.end(JSON.stringify(result))
           } catch {
             response.statusCode = 404
             response.end('Example source not found')

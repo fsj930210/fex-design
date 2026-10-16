@@ -223,7 +223,7 @@
     {
       "id": "direction",
       "title": "LTR 与 RTL",
-      "description": "验证逻辑方向下的图标位置与连接边界。"
+      "description": "对比 LTR 与 RTL 下的图标位置和按钮组连接边界。"
     },
     {
       "id": "effects",

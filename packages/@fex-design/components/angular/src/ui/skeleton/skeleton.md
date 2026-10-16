@@ -21,8 +21,6 @@ Provides the structured `Skeleton` composition and directly re-exports every Pri
 
 ## Examples
 
-Examples are stored in `examples/<name>` as the source for the documentation preview.
-
 | Name      | Covers                                                            |
 | --------- | ----------------------------------------------------------------- |
 | basic     | Six Primitive components re-exported by the UI entry.             |

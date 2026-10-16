@@ -1,0 +1,5 @@
+@if (indicator(); as indicatorTemplate) {
+  <ng-container [ngTemplateOutlet]="indicatorTemplate" />
+} @else {
+  <loading-icon class="size-full animate-spin" />
+}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Badge from "@fex-design/svelte/primitive/badge";
+  import { Badge } from '@fex-design/svelte/primitive/badge'
   import { SwitchRoot, SwitchThumb } from "@fex-design/svelte/primitive/switch";
   let showZero = $state(false);
 </script>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Alert, AlertTitle } from '../alert'
-import { AlertIcon } from '../alert'
+import { Alert, AlertTitle, AlertIcon } from '@fex-design/angular/primitive/alert'
+
 import { CircleCheckIcon } from '@fex-design/angular/icons/circle-check'
 import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { InfoIcon } from '@fex-design/angular/icons/info'

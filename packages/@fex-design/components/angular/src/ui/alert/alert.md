@@ -1,6 +1,6 @@
 # Alert
 
-UI Alert packages Primitive Alert into one signal-first Angular component with circle status icons and close behavior.
+Alert displays a status icon, title, description, and optional close action.
 
 ## Import
 
@@ -13,10 +13,6 @@ import {
   AlertTitleContent,
 } from '@fex-design/angular/ui/alert'
 ```
-
-## Examples
-
-Examples are ordered as basic, types/custom color, variants, closable, looping announcement, custom icon/action, LTR/RTL, and semantic styles.
 
 ## Inputs, output, and projection
 

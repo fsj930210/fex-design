@@ -15,7 +15,7 @@
     {
       "name": "spinning",
       "type": "boolean | undefined",
-      "description": "undefined 为独立 Spinner；false 显示内容；true 显示内容和遮罩。",
+      "description": "undefined 显示独立指示器；false 仅显示内容；true 在内容上方显示加载遮罩。true/false 切换时保留原内容及其状态。",
       "editor": "boolean"
     },
     {
@@ -34,7 +34,7 @@
     {
       "name": "indicator",
       "type": "FrameworkNode",
-      "description": "自定义 loading 指示器。"
+      "description": "自定义 loading 指示器；未提供时使用默认 LoadingIcon。"
     }
   ],
   "events": [],
@@ -59,7 +59,7 @@
         {
           "name": "spinning",
           "type": "boolean | undefined",
-          "description": "undefined 为独立 Spinner；false 显示内容；true 显示内容和遮罩。"
+          "description": "undefined 显示独立指示器；false 仅显示内容；true 在内容上方显示加载遮罩。true/false 切换时保留原内容及其状态。"
         },
         {
           "name": "size",
@@ -80,7 +80,7 @@
         },
         {
           "name": "indicator",
-          "description": "替换默认 loading 指示器。"
+          "description": "替换默认 loading 指示器；未提供时保留默认图标。"
         }
       ]
     },
@@ -89,7 +89,7 @@
         {
           "name": "spinning",
           "type": "boolean | undefined",
-          "description": "undefined 为独立 Spinner；false 显示内容；true 显示内容和遮罩。"
+          "description": "undefined 显示独立指示器；false 仅显示内容；true 在内容上方显示加载遮罩。true/false 切换时保留原内容及其状态。"
         },
         {
           "name": "size",
@@ -105,7 +105,7 @@
         {
           "name": "indicator",
           "type": "TemplateRef<unknown>",
-          "description": "替换默认 loading 指示器的模板。"
+          "description": "替换默认 loading 指示器的模板；未提供时保留默认图标。"
         }
       ]
     }

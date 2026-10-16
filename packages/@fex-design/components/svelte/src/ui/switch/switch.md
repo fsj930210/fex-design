@@ -1,6 +1,6 @@
 # Svelte UI Switch
 
-An immediate boolean control. Rounded and pill are equal shape options, and every example shows both.
+An immediate boolean control. Choose the rounded or pill shape.
 
 ## Import
 
@@ -20,10 +20,6 @@ An immediate boolean control. Rounded and pill are equal shape options, and ever
 | checkedContent / uncheckedContent | Framework content        | —         | Text or icon shown for each state.           |
 | classNames                        | root/content/thumb class | —         | Classes for semantic parts.                  |
 | styles                            | root/content/thumb style | —         | Inline styles for semantic parts.            |
-
-## Examples
-
-Examples are ordered as basic, shape, size, content, loading, disabled, validation, controlled/uncontrolled, LTR/RTL, and CSS variables, and semantic styles. The controlled example is driven by external buttons.
 
 ## CSS Variables
 

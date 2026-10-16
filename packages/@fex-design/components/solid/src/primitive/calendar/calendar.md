@@ -1,57 +1,57 @@
 # Calendar Primitive
 
-CalendarRoot 管理日历作用域。所有选择、浏览、面板切换和键盘目标计算由 calendar core 处理，五框架只适配响应式、事件和 DOM。
+CalendarRoot supports date selection, navigation, and panel switching. Compose the header, grid, cells, and footer to create a calendar.
 
-## 部件
+## Parts
 
-| 部件 | 用途 |
+| Part | Purpose |
 | --- | --- |
-| CalendarRoot | 状态与动作作用域 |
-| CalendarHeader | 自定义头部，提供当前日期、面板及导航动作 |
-| CalendarNavigationButton | previous/next month、year、panel 或 today |
-| CalendarPanelTrigger | 切换 date、month、quarter、year、decade 面板 |
-| CalendarWeekHeader | 星期标题，labels 可覆盖 |
-| CalendarGrid | 默认网格或逐 cell 自定义内容 |
-| CalendarRow | 网格行 |
-| CalendarCell | 布局和状态容器，默认包含 CalendarCellTrigger |
-| CalendarCellTrigger | 日期选择按钮，默认撑满单元格 |
-| CalendarFooter | 底部内容与操作区 |
+| CalendarRoot | Shared calendar state and actions |
+| CalendarHeader | Custom header with the current date, panel, and navigation actions |
+| CalendarNavigationButton | Previous/next month, year, panel, or today |
+| CalendarPanelTrigger | Switch between date, month, quarter, year, and decade panels |
+| CalendarWeekHeader | Weekday labels; override them with labels |
+| CalendarGrid | Default grid or custom content for each cell |
+| CalendarRow | Grid row |
+| CalendarCell | Cell layout and state; includes CalendarCellTrigger by default |
+| CalendarCellTrigger | Date selection button that fills the cell by default |
+| CalendarFooter | Footer content and actions |
 
 ## Root API
 
-| 属性 | 说明 |
+| Property | Description |
 | --- | --- |
-| value / defaultValue | 受控值与初始值；undefined 表示非受控，null 表示空值 |
-| viewDate / defaultViewDate | 浏览位置；默认初始值所在月，否则今天 |
-| panel / defaultPanel | 浏览面板；默认由 granularity 决定 |
-| granularity | date、week、month、quarter、year；决定最终提交的值 |
-| values / range | 多值或区间的展示输入，选择流程由上层组合 |
-| weekStartsOn | 0 至 6，默认 0 |
-| today | 覆盖今天日期 |
-| min / max / disabledDate | 日期可选限制 |
+| value / defaultValue | Controlled value and initial value; undefined is uncontrolled and null is empty |
+| viewDate / defaultViewDate | Visible date; defaults to the initial value or today |
+| panel / defaultPanel | Visible panel; defaults to the panel for granularity |
+| granularity | date, week, month, quarter, or year; determines the committed value |
+| values / range | Values or ranges to display; compose the selection flow separately |
+| weekStartsOn | 0 to 6; defaults to 0 |
+| today | Override today |
+| min / max / disabledDate | Selectable date constraints |
 
-default 属性仅初始化一次。翻页与切换面板不改变选中值。浏览层级单元格会下钻面板，达到选择粒度时才触发 change。cellSelect 是通知，不接管默认选择。所有部件保留原生属性、事件、class 与元素引用能力。
+Default properties initialize state once. Navigation and panel switching do not change the selected value. Selecting a higher-level cell drills down; change fires when the selection reaches granularity. cellSelect is a notification and does not replace selection. Parts accept native attributes, events, classes, and element references.
 
-## 扩展单元格
+## Custom cells
 
-CalendarCell 本身不处理点击选择。自定义内容时显式组合 CalendarCellTrigger。日期、农历文字等静态内容可以放入 Trigger；日程链接和其他按钮放在 Trigger 外，作为 Cell 的兄弟内容。通过 class 调整布局，避免操作区相互覆盖。
+CalendarCell does not handle click selection. Include CalendarCellTrigger when supplying custom content. Put dates and other static labels inside the trigger; place event links and other buttons beside it. Adjust the layout with classes to keep interactive areas separate.
 
-## 键盘
+## Keyboard
 
-Tab 进入一个可用日期；方向键移动日期，Home/End 移动到行首/行末，PageUp/PageDown 翻页并移动焦点，Enter/Space 使用原生按钮选择。
+Tab focuses an available date. Arrow keys move between dates; Home/End move to the start/end of a row. PageUp/PageDown change the page and move focus. Enter/Space select through the native button.
 
-## 使用
+## Usage
 
-所有部件从 `@fex-design/solid/primitive/calendar` 具名导入。Root 使用 `onChange`。Header 的 children 回调提供日期与动作；Grid 的 children 回调接收 cell；Cell 自定义内容中组合 CellTrigger。独立逻辑接口为组件目录内的 `createCalendar(() => options)`，返回 controller、state accessor 和 grid accessor。
+Import named parts from `@fex-design/solid/primitive/calendar`. Root accepts `onChange`. Header children receive the date and actions; Grid children receive cell. Include CellTrigger when supplying custom cell content. Standalone `createCalendar(() => options)` returns controller, a state accessor, and a grid accessor.
 
-## 自定义内容契约
+## Custom content
 
-WeekHeader 的自定义内容统一收到 `{ label, index }`；CellTrigger 的自定义内容统一收到 cell。React/Solid 使用 children 回调，Vue 使用作用域 slot，Svelte 使用 snippet，Angular 使用 ng-template。Grid 不提供独立 cellClass，自定义样式通过 CalendarCell 的原生 class 传入。Angular 的原生 class 支持动态绑定并与默认样式合并。
+Custom WeekHeader content receives `{ label, index }`; custom CellTrigger content receives cell. React/Solid use children callbacks, Vue uses scoped slots, Svelte uses snippets, and Angular uses ng-template. Set cell classes on CalendarCell. Angular class bindings merge with the default classes.
 
-## 独立逻辑接口
+## Standalone logic
 
-返回契约统一为 `{ controller, state, grid }`，支持 `TValue extends CalendarValue` 泛型。所有动作通过 controller 调用，snapshot 仅用于内部订阅。React 的 state/grid 为当前渲染值，Vue 为 computed（脚本中读取 .value），Solid 与 Angular 为访问器（调用读取），Svelte 为响应式 getter（保持对象属性访问，不提前解构）。React 接收 options 对象，其他框架接收 options getter 以保留响应式依赖。
+The logic API returns `{ controller, state, grid }` and supports `TValue extends CalendarValue`. Call actions through controller. React exposes state/grid as render values; Vue exposes computed values (read .value in scripts); Solid and Angular expose accessors; Svelte exposes reactive getters (read properties without destructuring). React accepts an options object; the other frameworks accept an options getter.
 
-Root、Grid、Cell、CellTrigger 与独立逻辑接口均支持 `TValue extends CalendarValue`（默认 CalendarValue）。注入作用域不会自动传递父组件的泛型，Grid 的自定义内容类型需按框架原生方式显式指定。Angular Root 的状态统一从 state() 读取，动作统一通过 controller 调用。
+Root, Grid, Cell, CellTrigger, and standalone logic support `TValue extends CalendarValue`, defaulting to CalendarValue. Specify custom Grid content types explicitly; child components do not infer the parent generic. For Angular Root, read state() and call actions through controller.
 
-选择事件统一由 core 处理：change/onChange 仅在值不同的时候触发，select/onSelect 在每次提交选择时触发并携带 source。自定义 UI 可调用 controller.selectCell(cell, 'customize')。
+change/onChange fires when the value changes; select/onSelect fires on every committed selection and includes source. Custom UI can call controller.selectCell(cell, 'customize').

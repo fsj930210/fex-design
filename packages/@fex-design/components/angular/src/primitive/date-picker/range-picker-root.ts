@@ -10,7 +10,7 @@ import { NgTemplateOutlet } from '@angular/common'
 import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
 import type { DatePickerPicker, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
 import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
-import { Popover } from '../popover'
+import { Popover } from '@fex-design/angular/primitive/popover'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { RangePickerState, type UseRangePickerOptions } from './use-range-picker'
 

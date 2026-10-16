@@ -42,7 +42,7 @@
       "slug": "spinner",
       "layer": "primitive",
       "status": "stable",
-      "description": "Spinner 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于显示 loading 指示器。",
+      "description": "继承原生 span，用于显示 loading 指示器。",
       "importPath": {
         "react": "@fex-design/react/primitive/spinner",
         "vue": "@fex-design/vue/primitive/spinner",
@@ -181,7 +181,7 @@
       "slug": "spinner-text",
       "layer": "primitive",
       "status": "stable",
-      "description": "SpinnerText 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于显示 loading 文本。",
+      "description": "继承原生 span，用于显示 loading 文本。",
       "importPath": {
         "react": "@fex-design/react/primitive/spinner",
         "vue": "@fex-design/vue/primitive/spinner",
@@ -271,7 +271,7 @@
       "slug": "spinner-container",
       "layer": "primitive",
       "status": "stable",
-      "description": "SpinnerContainer 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于承载内容和 loading 遮罩。",
+      "description": "继承原生 div，用于承载内容和 loading 遮罩。",
       "importPath": {
         "react": "@fex-design/react/primitive/spinner",
         "vue": "@fex-design/vue/primitive/spinner",
@@ -361,7 +361,7 @@
       "slug": "spinner-overlay",
       "layer": "primitive",
       "status": "stable",
-      "description": "SpinnerOverlay 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于在内容上方显示 loading 遮罩。",
+      "description": "继承原生 div，用于在内容上方显示 loading 遮罩。",
       "importPath": {
         "react": "@fex-design/react/primitive/spinner",
         "vue": "@fex-design/vue/primitive/spinner",

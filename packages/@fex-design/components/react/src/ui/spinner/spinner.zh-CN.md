@@ -4,20 +4,16 @@
 
 ## 导入
 
-    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/react/ui/spinner'
+    import { Spinner, SpinnerContainer } from '@fex-design/react/ui/spinner'
 
 ## 组件
 
 | 组件             | 元素 | 说明                                                                       |
 | ---------------- | ---- | -------------------------------------------------------------------------- |
 | Spinner          | span | 继承原生 span，原生 span 的所有属性和事件均可透传；loading 指示器。        |
-| SpinnerText      | span | 继承原生 span，原生 span 的所有属性和事件均可透传；loading 文本。          |
 | SpinnerContainer | div  | 继承原生 div，原生 div 的所有属性和事件均可透传；内容与 loading 状态容器。 |
-| SpinnerOverlay   | div  | 继承原生 div，原生 div 的所有属性和事件均可透传；Primitive 遮罩节点。      |
 
 ## 示例
-
-示例保存在 `examples/<name>`，作为官网预览源码。
 
 | 名称             | 覆盖内容       |
 | ---------------- | -------------- |
@@ -29,9 +25,15 @@
 
 ## API
 
-| 名称      | 类型             | 默认值    | 说明           |
-| --------- | ---------------- | --------- | -------------- |
-| spinning  | boolean          | undefined | undefined      | 未设置时为独立指示器；false 显示内容；true 显示内容和遮罩。 |
-| size      | 'sm'             | 'md'      | 'lg'           | 'md'                                                        | 指示器尺寸。 |
-| text      | 框架原生内容类型 | —         | loading 文本。 |
-| indicator | 框架原生内容类型 | —         | 自定义指示器。 |
+以下属性属于 `SpinnerContainer`；独立 `Spinner` 使用 Primitive 的 `size` 和原生 span 属性。
+
+| 属性 | 类型 | 默认值 | 必填 | 说明 |
+| --- | --- | --- | --- | --- |
+| spinning | boolean \| undefined | undefined | 否 | 未设置时显示独立指示器；false 显示内容；true 在内容上方显示加载遮罩。 |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | 否 | 指示器尺寸。 |
+| text | ReactNode | — | 否 | 加载说明，存在时默认与指示器纵向居中排列。 |
+| indicator | ReactNode | 默认 LoadingIcon | 否 | 替换默认指示器。 |
+| classNames | SpinnerClassNames | — | 否 | 设置 root、spinner、overlay、text 的类名。 |
+| styles | SpinnerStyles<CSSProperties> | — | 否 | 设置 root、spinner、overlay、text 的样式。 |
+
+未提供 `indicator` 时保留默认 LoadingIcon。`spinning` 在 true 与 false 之间切换时，内容保持挂载，保留内部状态与滚动位置。

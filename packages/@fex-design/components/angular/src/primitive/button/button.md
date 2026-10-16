@@ -16,8 +16,6 @@ Low-level Button family primitives with native element passthrough.
 
 ## Examples
 
-Examples are stored in `examples/<name>` as the source for the documentation preview.
-
 | Name        | Covers                                                              |
 | ----------- | ------------------------------------------------------------------- |
 | basic       | Native button foundation.                                           |

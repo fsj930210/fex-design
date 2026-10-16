@@ -1,5 +1,5 @@
 <script lang="ts">
-  import AspectRatio from "../aspect-ratio.svelte";
+  import { AspectRatio } from '@fex-design/svelte/ui/aspect-ratio'
   import image from "./aspect-ratio-demo.svg";
 </script>
 

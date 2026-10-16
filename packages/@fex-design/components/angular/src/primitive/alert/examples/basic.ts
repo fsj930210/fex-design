@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Alert, AlertDescription, AlertTitle } from '../alert'
+import { Alert, AlertDescription, AlertTitle } from '@fex-design/angular/primitive/alert'
 @Component({
   selector: 'alert-basic-example',
   standalone: true,

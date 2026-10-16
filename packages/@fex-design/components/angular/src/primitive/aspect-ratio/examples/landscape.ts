@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { AspectRatio } from '../aspect-ratio'
+import { AspectRatio } from '@fex-design/angular/primitive/aspect-ratio'
 @Component({
   selector: 'aspect-ratio-landscape-example',
   standalone: true,

@@ -1,8 +1,5 @@
 <script lang="ts">
-  import AlertDescription from "../alert-description.svelte";
-  import AlertIcon from "../alert-icon.svelte";
-  import AlertTitle from "../alert-title.svelte";
-  import Alert from "../alert.svelte";
+  import { AlertDescription, AlertIcon, AlertTitle, Alert } from '@fex-design/svelte/primitive/alert'
   import TriangleAlertIcon from '@fex-design/svelte/icons/triangle-alert.svelte';
   import XIcon from '@fex-design/svelte/icons/x.svelte';
   import { alertCloseClassName } from "@fex-design/components-styles/alert";

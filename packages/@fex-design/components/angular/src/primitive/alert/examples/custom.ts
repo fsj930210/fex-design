@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { Alert, AlertAction, AlertIcon, AlertTitle } from '../alert'
+import { Alert, AlertAction, AlertIcon, AlertTitle } from '@fex-design/angular/primitive/alert'
 import { alertCloseClassName } from '@fex-design/components-styles/alert'
 @Component({
   selector: 'alert-custom-example',

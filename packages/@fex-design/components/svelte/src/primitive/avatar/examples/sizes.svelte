@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Avatar from "@fex-design/svelte/primitive/avatar";
-  import AvatarFallback from "@fex-design/svelte/primitive/avatar-fallback";
+  import { Avatar, AvatarFallback } from '@fex-design/svelte/primitive/avatar'
+
 </script>
 
 <div class="flex items-center gap-3">

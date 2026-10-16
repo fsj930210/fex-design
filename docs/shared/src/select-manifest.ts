@@ -35,6 +35,6 @@ export const selectExamples = {
     { id: 'direction', title: 'LTR 与 RTL', description: '对比中英文 LTR 与阿拉伯文 RTL 排列。' },
     { id: 'semantic-styles', title: '结构化样式', description: '使用 classNames 与 styles 定制语义部位。' },
     { id: 'css-variables', title: 'CSS 变量', description: '通过输入类控件变量定制 Select。' },
-    { id: 'virtual', title: '虚拟列表', description: 'UI 与 Primitive 使用同一虚拟化能力。', height: 440 },
+    { id: 'virtual', title: '虚拟列表', description: '搜索大量选项，并仅渲染可见区域附近的项目。', height: 440 },
   ],
 } as const

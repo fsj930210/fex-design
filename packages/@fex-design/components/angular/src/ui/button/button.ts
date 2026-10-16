@@ -18,7 +18,7 @@ import {
   input,
 } from '@angular/core'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
-import { ButtonIcon } from '@fex-design/angular/primitive/button/button-icon'
+import { ButtonIcon } from '@fex-design/angular/primitive/button'
 import { buttonPrimitiveClassName } from '@fex-design/angular/primitive/button'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 

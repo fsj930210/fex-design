@@ -3,7 +3,7 @@ import { cn } from '@fex-design/utils'
 import { datePickerPresetClassName } from '@fex-design/components-styles/date-picker'
 import { type ComponentProps } from 'react'
 
-import { Button } from '../button/button'
+import { Button } from '@fex-design/react/primitive/button'
 
 export interface DatePickerPresetProps extends ComponentProps<'button'> {}
 

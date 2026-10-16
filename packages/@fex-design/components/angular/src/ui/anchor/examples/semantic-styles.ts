@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, viewChild } from '@angular/core'
-import { Anchor, type AnchorClassNames, type AnchorStyles } from '../anchor'
+import { Anchor, type AnchorClassNames, type AnchorStyles } from '@fex-design/angular/ui/anchor'
 @Component({
   selector: 'anchor-ui-semantic-styles-example',
   standalone: true,

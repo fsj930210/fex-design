@@ -14,10 +14,6 @@ import {
 } from '@fex-design/react/primitive/alert'
 ```
 
-## 示例
-
-示例依次覆盖基本组合、四种 Type、三种 Variant、组合关闭、可复制的循环公告、自定义图标与操作和 LTR/RTL。
-
 ## 组件
 
 ### Alert

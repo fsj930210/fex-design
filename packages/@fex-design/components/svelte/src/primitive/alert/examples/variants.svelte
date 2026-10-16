@@ -1,7 +1,5 @@
 <script lang="ts">
-  import AlertTitle from "../alert-title.svelte";
-  import AlertIcon from "../alert-icon.svelte";
-  import Alert from "../alert.svelte";
+  import { AlertTitle, AlertIcon, Alert } from '@fex-design/svelte/primitive/alert'
   import InfoIcon from '@fex-design/svelte/icons/info.svelte';
 </script>
 

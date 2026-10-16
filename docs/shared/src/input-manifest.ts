@@ -45,7 +45,7 @@ export const inputExamples = {
     {
       id: 'sizes',
       title: '尺寸',
-      description: '展示 sm、md、lg 三种内置尺寸，与 Primitive 保持同一场景。',
+      description: '展示 sm、md、lg 三种内置尺寸。',
     },
     { id: 'variants', title: '形态变体', description: '展示四种内置输入形态。' },
     { id: 'controlled', title: '受控与非受控', description: '展示内部状态和外部设置、清空。' },
@@ -64,12 +64,12 @@ export const inputExamples = {
     {
       id: 'states',
       title: '状态',
-      description: '展示 disabled、readOnly 和 aria-invalid，与 Primitive 保持同一场景。',
+      description: '展示禁用、只读和校验失败状态。',
     },
     {
       id: 'validation',
       title: '校验失败',
-      description: '展示与 Primitive 相同的错误样式和可访问错误说明。',
+      description: '展示错误样式，并关联可访问的错误说明。',
     },
     {
       id: 'focus',

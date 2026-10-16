@@ -56,7 +56,7 @@ import { Progress } from '@fex-design/vue/ui/progress'
 
 Info visibility uses showInfo ?? showValue ?? the default. Lines show info by default; circles and dashboards default to visible only for inside placement. format takes precedence over success icons and receives percent in 0–100. bottom does not duplicate the top label; none renders no info.
 
-Regular circle gradients use separate SVG gradient IDs; segmented circles select colors per segment. gapDegree applies to regular dashboards. top uses 315° rotation; the other gapPlacement values follow the current React geometry rotation. trackColor applies to lines and stepped tracks; regular circles retain the Primitive default track style.
+Segmented circles can use a different color for each segment. gapDegree adjusts the gap angle of regular dashboards. Currently, gapPlacement distinguishes top from bottom; start, end, left, and right render as bottom. trackColor applies to linear and stepped tracks; use --progress-remaining for regular circle tracks.
 
 classNames and styles target the corresponding parts. Native root style takes precedence over styles.root. Native attributes, events and element access follow framework conventions.
 

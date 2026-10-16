@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Kbd from "../kbd.svelte";
-  import KbdGroup from "../kbd-group.svelte";
+  import { Kbd, KbdGroup } from '@fex-design/svelte/ui/kbd'
+
 </script>
 
 <KbdGroup aria-label="键盘快捷键"

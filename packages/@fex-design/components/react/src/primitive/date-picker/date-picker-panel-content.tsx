@@ -7,7 +7,7 @@ import { getDatePickerHeaderActions } from '@fex-design/core/date-picker/panel'
 
 import { getDatePickerRowClassName, getDatePickerCellClassName, datePickerCellClassName, datePickerGridClassName, datePickerHeaderSideClassName, datePickerWeekHeaderClassName } from '@fex-design/components-styles/date-picker'
 
-import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarWeekHeader } from '../calendar'
+import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarWeekHeader } from '@fex-design/react/primitive/calendar'
 import { useCalendarContext } from '../calendar/calendar-context'
 import { DatePickerHeader } from './date-picker-header'
 import { DatePickerHeaderButton } from './date-picker-header-button'

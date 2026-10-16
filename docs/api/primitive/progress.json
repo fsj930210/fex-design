@@ -14,7 +14,7 @@
   "components": [
     {
       "name": "Progress",
-      "description": "Progress Root 容器组件，负责注入 Context 与管理 progressbar ARIA 语义。",
+      "description": "进度根容器，提供 progressbar 无障碍语义。",
       "props": [
         {
           "name": "value",

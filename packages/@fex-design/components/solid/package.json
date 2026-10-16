@@ -144,10 +144,7 @@
     "./primitives/create-sortable": "./src/primitives/create-sortable.ts",
     "./primitives/create-toasts": "./src/primitives/create-toasts.ts",
     "./i18n": "./src/i18n/index.tsx",
-    "./*": "./src/*",
-    "./*/*": "./src/*/*",
-    "./*/*/*": "./src/*/*/*",
-    "./*/*/*/*": "./src/*/*/*/*"
+    "./*": "./src/*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",

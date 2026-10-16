@@ -32,7 +32,3 @@
 | renderOverflow | 框架原生内容类型 | —      | 自定义溢出节点。     |
 
 `AvatarGroup` 直接接收子 `Avatar`，`renderOverflow` snippet 接收溢出数量。
-
-## 示例
-
-示例保存在 `examples/<name>`，覆盖 basic、group、group-count、group-with-icon、sizes、shape、group-shape、max-count 和 direction。

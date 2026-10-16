@@ -249,9 +249,3 @@ State includes open, panel, viewDate, committedValue, pendingValue, canClear, ca
 `hoverValue` is transient hover state and previewValue retains intermediate choices; both are independent of pendingValue/committedValue. Vue uses computed refs, Solid uses accessors, Svelte uses getHoverValue()/getPreviewValue(), and React/Angular context exposes state fields.
 
 Controller also provides `getState()` for derived state, `getSnapshot()` for transaction snapshots, `subscribe(listener)` returning an unsubscribe function, and `setOptions(options)` replacing the complete logic configuration. Framework adapters already synchronize props and clean up subscriptions; normally update native reactive options without adding another subscription.
-
-
-
-## Examples
-
-Import examples from `@fex-design/angular/primitive/date-picker/examples`. The 23 scenes include presets, sizes, variants, granularity, multiple selection, ranges, disabled states, dynamic limits, empty endpoints, custom cells, formatting, locale, separate custom-style and LTR/RTL examples. Sources are in the adjacent examples/ directory.

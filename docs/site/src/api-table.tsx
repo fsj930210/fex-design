@@ -26,12 +26,9 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
               </span>
               <span class="text-xs font-semibold text-foreground">原生 HTML 属性透传</span>
             </div>
-            <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-              零额外 Props 负担
-            </span>
           </div>
           <p class="mt-2 text-xs leading-relaxed text-secondary-foreground">
-            该部件为纯样式化/语义化容器，完整继承底层原生 HTML 元素的全部属性与事件（包括 <code>class</code>、<code>style</code>、<code>ref</code>、<code>onClick</code> 及 ARIA 属性等），无额外自定义 Props。
+            支持对应框架的原生元素属性、事件及 ARIA 属性。
           </p>
         </div>
       </Show>

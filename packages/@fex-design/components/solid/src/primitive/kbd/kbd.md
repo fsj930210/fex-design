@@ -15,8 +15,6 @@ Styled keyboard key and key group primitives.
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name  | Covers                   |
 | ----- | ------------------------ |
 | basic | Single key.              |

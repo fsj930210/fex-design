@@ -17,10 +17,6 @@ Composable Avatar primitives. Primitive owns image state, fallback, badge, group
 | AvatarGroup      | div     | Inherits the native div; all native attributes and events pass through. Overlapping avatar layout without automatic truncation. |
 | AvatarGroupCount | span    | Inherits the native span; all native attributes and events pass through. Count or custom overflow node.                         |
 
-## Examples
-
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 ## Avatar API
 
 | Name  | Type                 | Default  | Description   |

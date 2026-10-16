@@ -4,8 +4,8 @@ import { calendarHeaderClassName, calendarHeaderControlsClassName, calendarHeade
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { CalendarRoot } from './calendar-root'
 import { CalendarNavigationButton } from './calendar-navigation-button'
-import { RadioGroup, RadioButton, type RadioValue } from '../radio'
-import { SelectContent, SelectList, SelectRoot, SelectTrigger } from '../select'
+import { RadioGroup, RadioButton, type RadioValue } from '@fex-design/angular/primitive/radio'
+import { SelectContent, SelectList, SelectRoot, SelectTrigger } from '@fex-design/angular/primitive/select'
 import { getCalendarHeaderState, type CalendarHeaderState, type CalendarRenderContext } from '@fex-design/core/calendar'
 
 @Component({ selector: 'div[calendarHeader]', standalone: true, imports: [NgTemplateOutlet, CalendarNavigationButton, RadioGroup, RadioButton, SelectRoot, SelectTrigger, SelectContent, SelectList], changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'calendar-header', '[class]': 'hostClassName()' }, templateUrl: './calendar-header.html' })

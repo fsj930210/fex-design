@@ -3,7 +3,7 @@
   "slug": "kbd",
   "layer": "ui",
   "status": "stable",
-  "description": "Kbd Primitive 的 UI 层入口。",
+  "description": "展示键盘按键与快捷键组合。",
   "importPath": {
     "react": "@fex-design/react/ui/kbd",
     "vue": "@fex-design/vue/ui/kbd",

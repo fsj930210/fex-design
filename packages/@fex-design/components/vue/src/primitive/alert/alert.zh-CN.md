@@ -14,10 +14,6 @@ import {
 } from '@fex-design/vue/primitive/alert'
 ```
 
-## 示例
-
-示例按基本组合、Type、Variant、组合关闭、循环公告、自定义图标与操作和方向排列。
-
 ## 组件与原生能力
 
 ### Alert

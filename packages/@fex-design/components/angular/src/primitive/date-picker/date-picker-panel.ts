@@ -9,7 +9,7 @@ import { NgTemplateOutlet } from '@angular/common'
 
 import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { datePickerPanelClassName } from '@fex-design/components-styles/date-picker'
-import { CalendarRoot } from '../calendar'
+import { CalendarRoot } from '@fex-design/angular/primitive/calendar'
 import { DatePickerState } from './use-date-picker'
 @Component({ selector: 'div[datePickerPanel]', standalone: true, imports: [DatePickerPanelContent, NgTemplateOutlet, CalendarRoot], changeDetection: ChangeDetectionStrategy.OnPush, host: { class: 'contents' }, templateUrl: './date-picker-panel.html' })
 export class DatePickerPanel {

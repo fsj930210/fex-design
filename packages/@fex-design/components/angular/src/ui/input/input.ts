@@ -26,7 +26,7 @@ import { EyeIcon } from '@fex-design/angular/icons/eye'
 import { EyeOffIcon } from '@fex-design/angular/icons/eye-off'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
 import { SearchIcon } from '@fex-design/angular/icons/search'
-import { Button } from '../button/button'
+import { Button } from '@fex-design/angular/ui/button'
 import {
   InputAddonAfter,
   InputAddonBefore,

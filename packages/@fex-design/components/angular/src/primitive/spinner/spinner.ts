@@ -33,8 +33,7 @@ export class SpinnerOverlay {}
   imports: [LoadingIcon, NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', 'data-slot': 'spinner', role: 'status' },
-  template:
-    '@if (indicator()) { <ng-container *ngTemplateOutlet="indicator()!" /> } @else { <loading-icon /> }',
+  templateUrl: './spinner.html',
 })
 export class Spinner {
   readonly size = input<SpinnerSize>('md')

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/vue/primitive/aspect-ratio'
 </script>
 <template>
   <AspectRatio :ratio="9 / 16" class="max-w-48"

@@ -55,7 +55,7 @@
       "slug": "separator",
       "layer": "primitive",
       "status": "stable",
-      "description": "Separator 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于在相关内容之间建立语义分隔。",
+      "description": "继承原生 div，用于在相关内容之间建立语义分隔。",
       "importPath": {
         "react": "@fex-design/react/primitive/separator",
         "vue": "@fex-design/vue/primitive/separator",

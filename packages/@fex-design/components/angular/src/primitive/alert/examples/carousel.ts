@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Alert, AlertDescription, AlertIcon } from '../alert'
+import { Alert, AlertDescription, AlertIcon } from '@fex-design/angular/primitive/alert'
 import { TriangleAlertIcon } from '@fex-design/angular/icons/triangle-alert'
 @Component({
   selector: 'alert-carousel-example',

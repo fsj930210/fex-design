@@ -7,7 +7,7 @@ import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
 import { datePickerPanelClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, ReactNode } from 'react'
-import { CalendarRoot } from '../calendar'
+import { CalendarRoot } from '@fex-design/react/primitive/calendar'
 
 import { useDatePickerContext } from './context'
 import { DefaultDatePickerPanelContent } from './date-picker-panel-content'

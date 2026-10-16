@@ -14,10 +14,6 @@ import {
 } from '@fex-design/vue/primitive/alert'
 ```
 
-## Examples
-
-Examples cover basic composition, types, variants, composed closing, a looping announcement, custom icon/action, and direction.
-
 ## Components and native API
 
 ### Alert

@@ -9,7 +9,7 @@ import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphi
 import { usePickerTrigger } from './use-picker-trigger'
 import { cn } from '@fex-design/utils'
 import { CalendarIcon } from '@fex-design/react/icons/calendar'
-import { InputRoot, InputControl, InputClear, InputPrefix, InputSuffix, type InputRootProps } from '../input'
+import { InputRoot, InputControl, InputClear, InputPrefix, InputSuffix, type InputRootProps } from '@fex-design/react/primitive/input'
 import { useRangePickerContext, type RangePickerContextValue } from './context'
 import { datePickerAffixClassName, datePickerRangeFieldClassName, datePickerRangeTriggerClassName, datePickerInputPreviewClassName, datePickerRangeInputClassName, datePickerRangeInputControlClassName, datePickerRangeSeparatorClassName } from '@fex-design/components-styles/date-picker'
 

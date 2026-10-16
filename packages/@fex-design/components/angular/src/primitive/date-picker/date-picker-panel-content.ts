@@ -8,7 +8,7 @@ import type { CalendarCell as CoreCalendarCell } from '@fex-design/core/calendar
 import { getDatePickerPanelView } from '@fex-design/core/date-picker/view'
 import { getDatePickerHeaderActions } from '@fex-design/core/date-picker/panel'
 import { getDatePickerRowClassName, getDatePickerCellClassName, datePickerCellClassName, datePickerGridClassName, datePickerHeaderSideClassName, datePickerWeekHeaderClassName } from '@fex-design/components-styles/date-picker'
-import { CalendarRoot, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarWeekHeader } from '../calendar'
+import { CalendarRoot, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarWeekHeader } from '@fex-design/angular/primitive/calendar'
 import { DatePickerHeader } from './date-picker-header'
 import { DatePickerHeaderTitle } from './date-picker-header-title'
 import { DatePickerHeaderButton } from './date-picker-header-button'

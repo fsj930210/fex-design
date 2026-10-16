@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { signal } from '@angular/core'
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter } from '@fex-design/angular/primitive/date-picker'
-import { DatePickerPreset, type DatePickerSelectionValue } from '@fex-design/angular/primitive/date-picker'
+import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter, DatePickerPreset, type DatePickerSelectionValue } from '@fex-design/angular/primitive/date-picker'
+
 import { getCalendarToday, type CalendarRange } from '@fex-design/core/calendar'
 @Component({ selector: 'date-picker-presets-example', standalone: true, imports: [DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter, DatePickerPreset], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './presets.html' })
 export class DatePickerPresetsExample {

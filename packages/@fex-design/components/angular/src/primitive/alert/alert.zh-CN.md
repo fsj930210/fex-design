@@ -14,10 +14,6 @@ import {
 } from '@fex-design/angular/primitive/alert'
 ```
 
-## 示例
-
-示例覆盖基本组合、四种 Type、三种 Variant、组合关闭、循环公告、自定义内容和方向。
-
 ## 组件与宿主
 
 ### Alert

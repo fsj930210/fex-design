@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Avatar } from '../avatar'
+import { Avatar } from '@fex-design/angular/ui/avatar'
 
 @Component({
   selector: 'avatar-ui-basic-example',

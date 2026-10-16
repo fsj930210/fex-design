@@ -3,7 +3,7 @@
   "slug": "skeleton",
   "layer": "ui",
   "status": "stable",
-  "description": "组合骨架、loading 容器以及 Primitive 重导出。",
+  "description": "提供骨架占位组合与内容加载容器。",
   "importPath": {
     "react": "@fex-design/react/ui/skeleton",
     "vue": "@fex-design/vue/ui/skeleton",

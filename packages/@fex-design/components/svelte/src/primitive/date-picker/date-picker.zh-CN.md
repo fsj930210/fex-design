@@ -249,7 +249,3 @@ controller 另提供 `getState()` 读取派生状态、`getSnapshot()` 读取事
 
 
 触发元素、面板、容器和底部可以独立替换，继续消费同一 Root 逻辑及样式。UI 只组装有默认样式的 Primitive，不添加选择业务。当前版本只选择日期粒度；日期时间组合将在 TimePicker 重构后提供，当前没有 showTime 或 selectionMode。
-
-## 示例
-
-公开示例入口为 `@fex-design/svelte/primitive/date-picker/examples`。提供 23 个场景，包括预设、尺寸、形态、日期粒度、多选、范围、禁用、动态跨度、留空、自定义单元格、格式、语言、独立的自定义样式和 LTR/RTL。源码位于同目录 examples/。

@@ -9,8 +9,8 @@ import { ChevronLeftIcon } from '@fex-design/angular/icons/chevron-left'
 import { ChevronRightIcon } from '@fex-design/angular/icons/chevron-right'
 import { ChevronsLeftIcon } from '@fex-design/angular/icons/chevrons-left'
 import { ChevronsRightIcon } from '@fex-design/angular/icons/chevrons-right'
-import { buttonPrimitiveClassName } from '../button/button'
-import { CalendarRoot } from '../calendar'
+import { buttonPrimitiveClassName } from '@fex-design/angular/primitive/button'
+import { CalendarRoot } from '@fex-design/angular/primitive/calendar'
 @Component({ selector: 'button[datePickerHeaderButton]', standalone: true, imports: [ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon], changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'date-picker-header-button', type: 'button', '[class]': 'hostClassName()', "[attr.aria-label]": "getDatePickerHeaderActionLabel(action(), calendar.controller.getOptions().locale)", '[attr.data-action]': 'action()' }, templateUrl: './date-picker-header-button.html' })
 export class DatePickerHeaderButton {
   protected readonly getDatePickerHeaderActionLabel = getDatePickerHeaderActionLabel

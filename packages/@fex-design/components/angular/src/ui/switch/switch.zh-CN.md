@@ -1,6 +1,6 @@
 # Angular UI Switch
 
-用于立即切换布尔状态。rounded 与 pill 是并列形状，所有示例均同时展示两种形状。
+用于立即切换布尔状态。可选择 rounded 或 pill 形状。
 
 ## 导入
 
@@ -20,10 +20,6 @@
 | checkedContent / uncheckedContent | 框架原生内容             | —         | 开启或关闭时显示的文字或图标。 |
 | classNames                        | root/content/thumb class | —         | 按语义部位设置 class。         |
 | styles                            | root/content/thumb style | —         | 按语义部位设置行内样式。       |
-
-## 示例
-
-示例依次为基本展示、Shape、Size、文本和图标、Loading、Disabled、校验失败、受控与非受控、LTR 与 RTL、CSS Variables、结构化样式。受控示例通过外部按钮设置状态。
 
 ## CSS Variables
 

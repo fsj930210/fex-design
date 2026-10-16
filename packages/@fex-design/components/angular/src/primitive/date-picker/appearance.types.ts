@@ -1,6 +1,6 @@
 import type { DatePickerStyle } from './style'
 import type { TemplateRef } from '@angular/core'
-import type { InputAttributes } from '../input'
+import type { InputAttributes } from '@fex-design/angular/primitive/input'
 import type { CalendarCellRenderContext } from '@fex-design/core/calendar'
 import type { DatePickerAppearance, DatePickerInputOptions, DatePickerCalendarOptions, DatePickerPopoverAppearance } from '@fex-design/core/date-picker/appearance'
 import type { DatePickerPopoverOptions } from '@fex-design/core/date-picker/options'

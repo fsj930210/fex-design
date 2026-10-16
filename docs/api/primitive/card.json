@@ -94,7 +94,7 @@
       "slug": "card",
       "layer": "primitive",
       "status": "stable",
-      "description": "Card 组件继承原生 div，原生 div 的所有属性和事件均可透传；作为信息容器根节点。",
+      "description": "继承原生 div，作为信息容器根节点。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",
@@ -184,7 +184,7 @@
       "slug": "card-header",
       "layer": "primitive",
       "status": "stable",
-      "description": "CardHeader 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于组织标题、说明和额外内容。",
+      "description": "继承原生 div，用于组织标题、说明和额外内容。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",
@@ -274,7 +274,7 @@
       "slug": "card-title",
       "layer": "primitive",
       "status": "stable",
-      "description": "CardTitle 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于显示卡片标题。",
+      "description": "继承原生 div，用于显示卡片标题。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",
@@ -364,7 +364,7 @@
       "slug": "card-description",
       "layer": "primitive",
       "status": "stable",
-      "description": "CardDescription 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于显示标题的辅助说明。",
+      "description": "继承原生 div，用于显示标题的辅助说明。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",
@@ -454,7 +454,7 @@
       "slug": "card-extra",
       "layer": "primitive",
       "status": "stable",
-      "description": "CardExtra 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于显示标题区的补充操作或信息。",
+      "description": "继承原生 div，用于显示标题区的补充操作或信息。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",
@@ -544,7 +544,7 @@
       "slug": "card-content",
       "layer": "primitive",
       "status": "stable",
-      "description": "CardContent 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于承载卡片主体内容。",
+      "description": "继承原生 div，用于承载卡片主体内容。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",
@@ -634,7 +634,7 @@
       "slug": "card-footer",
       "layer": "primitive",
       "status": "stable",
-      "description": "CardFooter 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于承载卡片底部内容。",
+      "description": "继承原生 div，用于承载卡片底部内容。",
       "importPath": {
         "react": "@fex-design/react/primitive/card",
         "vue": "@fex-design/vue/primitive/card",

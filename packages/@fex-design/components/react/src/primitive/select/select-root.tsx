@@ -10,7 +10,7 @@ import type { SelectionValue } from '@fex-design/core/selection/types'
 import { type ComponentProps, type ReactNode, useId, useRef } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
-import { PopoverRoot } from '../popover'
+import { PopoverRoot } from '@fex-design/react/primitive/popover'
 import { SelectContext } from './select-context'
 import { splitPopoverOptions } from '@fex-design/core/popover/options'
 

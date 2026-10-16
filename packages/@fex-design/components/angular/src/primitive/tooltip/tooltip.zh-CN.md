@@ -1,6 +1,6 @@
 # Angular Primitive Tooltip
 
-基于共享浮层控制器构建的可访问 hover/focus 提示。
+通过 hover 或 focus 显示简短说明，支持键盘访问。
 
 ## 导入
 

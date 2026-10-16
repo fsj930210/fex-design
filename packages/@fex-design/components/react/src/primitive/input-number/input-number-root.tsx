@@ -4,7 +4,7 @@ import type {
   InputNumberParser,
 } from '@fex-design/core/input-number/types'
 import type { ComponentProps } from 'react'
-import { InputRoot } from '../input'
+import { InputRoot } from '@fex-design/react/primitive/input'
 import { InputNumberContext } from './input-number-context'
 import { useInputNumber } from './use-input-number'
 import { cn } from '@fex-design/utils'

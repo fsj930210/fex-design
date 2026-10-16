@@ -1,6 +1,6 @@
 # Popover
 
-A styled, composable floating panel with shared Core trigger, positioning, dismissal and mounting behavior.
+A styled, composable floating panel with configurable triggers, positioning, dismissal, and mounting.
 
 ## Import
 

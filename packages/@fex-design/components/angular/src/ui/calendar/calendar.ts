@@ -4,8 +4,8 @@ import { calendarRootClassName } from '@fex-design/components-styles/calendar'
 import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
 import { cn } from '@fex-design/utils'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
-import { CalendarRoot } from '../../primitive/calendar'
-import { createCalendarState } from '../../primitive/calendar/calendar-state'
+import { CalendarRoot, createCalendarState } from '@fex-design/angular/primitive/calendar'
+
 import { CalendarContent } from './calendar-content'
 import type { CalendarClassNames, CalendarStyles } from './types'
 @Component({

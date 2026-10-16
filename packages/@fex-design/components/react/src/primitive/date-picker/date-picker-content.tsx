@@ -3,7 +3,7 @@ import { PickerContainerContext } from './container-context'
 import { use, type ComponentProps } from 'react'
 import { cn } from '@fex-design/utils'
 import { datePickerContentClassName } from '@fex-design/components-styles/date-picker'
-import { PopoverContent, PopoverPortal } from '../popover'
+import { PopoverContent, PopoverPortal } from '@fex-design/react/primitive/popover'
 import { PopoverContext } from '../popover/popover-context'
 export type DatePickerContentProps = ComponentProps<typeof PopoverContent>
 export function DatePickerContent({ className, style, ...props }: DatePickerContentProps) {

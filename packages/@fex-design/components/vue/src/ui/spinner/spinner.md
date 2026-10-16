@@ -4,20 +4,16 @@ Standalone loading indicator and content container with automatic overlay.
 
 ## Import
 
-    import { Spinner, SpinnerText, SpinnerContainer, SpinnerOverlay } from '@fex-design/vue/ui/spinner'
+    import { Spinner, SpinnerContainer } from '@fex-design/vue/ui/spinner'
 
 ## Components
 
 | Component        | Element | Purpose                                                                                                      |
 | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------ |
 | Spinner          | span    | Inherits the native span; all native attributes and events pass through. Loading indicator.                  |
-| SpinnerText      | span    | Inherits the native span; all native attributes and events pass through. Loading text.                       |
 | SpinnerContainer | div     | Inherits the native div; all native attributes and events pass through. Content and loading-state container. |
-| SpinnerOverlay   | div     | Inherits the native div; all native attributes and events pass through. Primitive overlay node.              |
 
 ## Examples
-
-Examples live in `examples/<name>` and are used by the documentation preview.
 
 | Name             | Covers              |
 | ---------------- | ------------------- |
@@ -29,9 +25,15 @@ Examples live in `examples/<name>` and are used by the documentation preview.
 
 ## API
 
-| Name      | Type             | Default   | Description       |
-| --------- | ---------------- | --------- | ----------------- |
-| spinning  | boolean          | undefined | undefined         | Unset renders a standalone indicator; false shows content; true shows content with overlay. |
-| size      | 'sm'             | 'md'      | 'lg'              | 'md'                                                                                        | Indicator size. |
-| text      | 框架原生内容类型 | —         | Loading text.     |
-| indicator | 框架原生内容类型 | —         | Custom indicator. |
+These properties belong to `SpinnerContainer`. Standalone `Spinner` accepts the Primitive `size` and native span attributes.
+
+| Property | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| spinning | boolean \| undefined | undefined | No | Unset displays a standalone indicator; false shows content; true adds a loading overlay. |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | No | Indicator size. |
+| text | string | — | No | Loading text, centered below the indicator by default. |
+| indicator (slot) | named indicator slot | LoadingIcon | No | Replaces the default indicator. |
+| classNames | SpinnerClassNames | — | No | Classes for root, spinner, overlay, and text. |
+| styles | SpinnerStyles<StyleValue> | — | No | Styles for root, spinner, overlay, and text. |
+
+Omitting `indicator` keeps the default LoadingIcon. Switching `spinning` between true and false keeps content mounted and preserves its state and scroll position.

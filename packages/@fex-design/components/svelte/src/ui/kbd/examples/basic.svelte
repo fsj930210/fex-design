@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Kbd from "../kbd.svelte";
+  import { Kbd } from '@fex-design/svelte/ui/kbd'
 </script>
 
 <Kbd>⌘</Kbd>

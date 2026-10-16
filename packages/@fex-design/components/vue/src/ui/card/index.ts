@@ -1,5 +1,4 @@
 export {
-  default,
   default as Card,
   type CardClassNames,
   type CardProps,

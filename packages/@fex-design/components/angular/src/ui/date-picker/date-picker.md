@@ -197,10 +197,3 @@ Use native element selectors: UI uses div[datePicker]/div[rangePicker]; Root/Tri
 ## Public types
 
 Both layer entries export the safe configuration and style types: `DatePickerInputProps`, `DatePickerEndpointProps`, `DatePickerCalendarProps`, `DatePickerPopoverProps`, `DatePickerClassNames`, `DatePickerStyles<TStyle>`, `DatePickerStyle`.
-
-
-
-
-## Examples
-
-Import examples from `@fex-design/angular/ui/date-picker/examples`. The 23 scenes include presets, sizes, variants, granularity, multiple selection, ranges, disabled states, dynamic limits, empty endpoints, custom cells, formatting, locale, separate custom-style and LTR/RTL examples. Sources are in the adjacent examples/ directory.

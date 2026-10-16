@@ -6,10 +6,6 @@ Convenience Empty implemented on a native div host.
 
     import { Empty } from '@fex-design/angular/ui/empty'
 
-## Examples
-
-`basic`, `content`, `image`, and `direction` match Primitive output; `styling` is UI-only.
-
 ## API
 
 Use `<div empty>`. Inputs are `image: string | TemplateRef | null`, `title: string`, `description: string`, `classNames: EmptyClassNames`, and `styles: EmptyStyles`. Projected content renders in EmptyContent.

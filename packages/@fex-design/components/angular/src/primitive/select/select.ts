@@ -41,7 +41,7 @@ import { ChevronDownIcon } from '../../icons/chevron-down'
 import { CheckIcon } from '@fex-design/angular/icons/check'
 import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
-import { PopoverContent, PopoverPortal, PopoverTrigger } from '../popover'
+import { PopoverContent, PopoverPortal, PopoverTrigger } from '@fex-design/angular/primitive/popover'
 
 import { SelectRoot } from './select-root'
 import { SelectValue } from './select-value'

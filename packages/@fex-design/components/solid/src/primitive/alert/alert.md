@@ -14,10 +14,6 @@ import {
 } from '@fex-design/solid/primitive/alert'
 ```
 
-## Examples
-
-The seven examples cover composition, types, variants, closing, a looping announcement, custom content, and direction.
-
 ## Components and native API
 
 ### Alert

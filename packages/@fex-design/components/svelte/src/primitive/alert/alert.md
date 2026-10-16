@@ -8,10 +8,6 @@ Alert Primitive supplies styled Svelte 5 parts for semantic feedback without cho
 import { Alert, AlertIcon } from '@fex-design/svelte/primitive/alert'
 ```
 
-## Examples
-
-The seven examples cover basic composition, types, variants, closing, a looping announcement, custom icon/action, and direction.
-
 ## Components and native API
 
 ### Alert

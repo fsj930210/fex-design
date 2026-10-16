@@ -8,10 +8,6 @@ UI Alert 将 Primitive 部件与圆形内置图标、关闭行为、Svelte snipp
 import { Alert } from '@fex-design/svelte/ui/alert'
 ```
 
-## 示例
-
-示例固定按基本展示、Type/自定义颜色、Variant、可关闭、循环公告、自定义图标与操作、LTR/RTL、语义化样式排列。
-
 ## Props 与 Snippets
 
 `type` 默认 `info`，`variant` 默认 `filled`。`title`、`description`、`icon`、`action`、`closeIcon` 使用 Svelte 5 snippet。`showIcon` 开启内置或自定义图标，`closable` 调用 `onClose`，事件未被阻止时隐藏。原生 div 属性正常透传，`classNames`、`styles` 可定制全部语义区域。

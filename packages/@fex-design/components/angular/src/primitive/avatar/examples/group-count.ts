@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '../avatar'
+import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-group-count-example',
   standalone: true,

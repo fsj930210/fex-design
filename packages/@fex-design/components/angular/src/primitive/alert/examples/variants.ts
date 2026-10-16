@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Alert, AlertIcon, AlertTitle } from '../alert'
+import { Alert, AlertIcon, AlertTitle } from '@fex-design/angular/primitive/alert'
 import { InfoIcon } from '@fex-design/angular/icons/info'
 @Component({
   selector: 'alert-variants-example',

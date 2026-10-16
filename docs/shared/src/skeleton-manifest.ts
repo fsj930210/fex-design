@@ -15,7 +15,7 @@ export const skeletonExamples = {
     {
       id: 'basic',
       title: '基本',
-      description: 'UI 直接重导出的六个独立占位组件，与 Primitive 行为一致。',
+      description: '分别展示文本、头像、按钮、输入框、内容块和图片占位。',
     },
     { id: 'list', title: '列表', description: '组合头像和列表文本。' },
     { id: 'table', title: '表格', description: '组合表头、单元格和操作按钮。' },

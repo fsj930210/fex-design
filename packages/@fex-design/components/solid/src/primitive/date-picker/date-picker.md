@@ -246,9 +246,3 @@ Controller also provides `getState()` for derived state, `getSnapshot()` for tra
 `useDatePickerContext(component: string)` / `useRangePickerContext(component: string)` read state from the nearest corresponding Root and throw outside it.
 
 `DatePickerContext` / `RangePickerContext` are also exported from Primitive for custom providers consuming standalone logic.
-
-
-
-## Examples
-
-Import examples from `@fex-design/solid/primitive/date-picker/examples`. The 23 scenes include presets, sizes, variants, granularity, multiple selection, ranges, disabled states, dynamic limits, empty endpoints, custom cells, formatting, locale, separate custom-style and LTR/RTL examples. Sources are in the adjacent examples/ directory.

@@ -3,7 +3,7 @@
   "slug": "alert",
   "layer": "primitive",
   "status": "stable",
-  "description": "提供 styled Alert 根节点以及可组合的图标、标题、描述和操作区。",
+  "description": "提供带默认样式的提示根节点、图标、标题、描述和操作区。",
   "importPath": {
     "react": "@fex-design/react/primitive/alert",
     "vue": "@fex-design/vue/primitive/alert",
@@ -101,7 +101,7 @@
         "react": "@fex-design/react/primitive/alert",
         "vue": "@fex-design/vue/primitive/alert",
         "solid": "@fex-design/solid/primitive/alert",
-        "svelte": "@fex-design/svelte/primitive/alert-icon",
+        "svelte": "@fex-design/svelte/primitive/alert",
         "angular": "@fex-design/angular/primitive/alert"
       },
       "props": [{ "name": "children", "type": "FrameworkNode", "description": "图标内容。" }],
@@ -132,7 +132,7 @@
         "react": "@fex-design/react/primitive/alert",
         "vue": "@fex-design/vue/primitive/alert",
         "solid": "@fex-design/solid/primitive/alert",
-        "svelte": "@fex-design/svelte/primitive/alert-title",
+        "svelte": "@fex-design/svelte/primitive/alert",
         "angular": "@fex-design/angular/primitive/alert"
       },
       "props": [{ "name": "children", "type": "FrameworkNode", "description": "标题内容。" }],
@@ -163,7 +163,7 @@
         "react": "@fex-design/react/primitive/alert",
         "vue": "@fex-design/vue/primitive/alert",
         "solid": "@fex-design/solid/primitive/alert",
-        "svelte": "@fex-design/svelte/primitive/alert-description",
+        "svelte": "@fex-design/svelte/primitive/alert",
         "angular": "@fex-design/angular/primitive/alert"
       },
       "props": [{ "name": "children", "type": "FrameworkNode", "description": "描述内容。" }],
@@ -194,7 +194,7 @@
         "react": "@fex-design/react/primitive/alert",
         "vue": "@fex-design/vue/primitive/alert",
         "solid": "@fex-design/solid/primitive/alert",
-        "svelte": "@fex-design/svelte/primitive/alert-action",
+        "svelte": "@fex-design/svelte/primitive/alert",
         "angular": "@fex-design/angular/primitive/alert"
       },
       "props": [{ "name": "children", "type": "FrameworkNode", "description": "操作内容。" }],

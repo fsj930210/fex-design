@@ -43,7 +43,7 @@
     {
       "id": "direction",
       "title": "LTR 与 RTL",
-      "description": "验证逻辑方向。"
+      "description": "对比 LTR 与 RTL 下的导航方向。"
     },
     {
       "id": "custom-click",

@@ -10,10 +10,10 @@ export const separatorExamples = {
       title: 'Variants',
       description: '通过 class 组合 Solid、Dashed 和 Dotted 线型。',
     },
-    { id: 'direction', title: 'RTL / LTR', description: '在 RTL 与 LTR 容器中验证分隔线方向。' },
+    { id: 'direction', title: 'RTL / LTR', description: '对比 LTR 与 RTL 下的分隔线方向。' },
   ],
   ui: [
-    { id: 'basic', title: '基础用法', description: 'UI 层直接导出 Primitive。' },
+    { id: 'basic', title: '基础用法', description: '使用水平分隔线区分内容区域。' },
     { id: 'vertical', title: '垂直分隔线', description: '行内垂直分隔线。' },
     { id: 'menu', title: '菜单分组', description: '分隔菜单中的相关操作组。' },
     { id: 'list', title: '列表', description: '在列表项之间插入分隔线。' },
@@ -23,6 +23,6 @@ export const separatorExamples = {
       title: 'Variants',
       description: '通过 class 组合 Solid、Dashed 和 Dotted 线型。',
     },
-    { id: 'direction', title: 'RTL / LTR', description: '在 RTL 与 LTR 容器中验证分隔线方向。' },
+    { id: 'direction', title: 'RTL / LTR', description: '对比 LTR 与 RTL 下的分隔线方向。' },
   ],
 } as const

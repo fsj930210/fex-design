@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/vue/ui/aspect-ratio'
 import image from './aspect-ratio-demo.svg'
 </script>
 <template>

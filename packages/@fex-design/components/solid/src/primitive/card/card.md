@@ -20,8 +20,6 @@ Composable information container made of seven semantic regions.
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name          | Covers                     |
 | ------------- | -------------------------- |
 | basic         | Complete information card. |

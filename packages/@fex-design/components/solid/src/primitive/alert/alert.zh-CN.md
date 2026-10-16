@@ -14,10 +14,6 @@ import {
 } from '@fex-design/solid/primitive/alert'
 ```
 
-## 示例
-
-七个示例覆盖组合、Type、Variant、关闭、循环公告、自定义内容和方向。
-
 ## 组件与原生能力
 
 ### Alert

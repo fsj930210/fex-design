@@ -3,7 +3,7 @@
   "slug": "aspect-ratio",
   "layer": "ui",
   "status": "stable",
-  "description": "AspectRatio Primitive 的 UI 层入口。",
+  "description": "保持内容的固定宽高比。",
   "importPath": {
     "react": "@fex-design/react/ui/aspect-ratio",
     "vue": "@fex-design/vue/ui/aspect-ratio",

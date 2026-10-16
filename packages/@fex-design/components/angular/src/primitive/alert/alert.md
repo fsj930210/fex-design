@@ -14,10 +14,6 @@ import {
 } from '@fex-design/angular/primitive/alert'
 ```
 
-## Examples
-
-The examples cover basic composition, four types, three variants, composed closing, looping announcement, custom content, and direction.
-
 ## Components and hosts
 
 ### Alert

@@ -14,8 +14,6 @@ UI entry for Separator Primitive with no additional behavior.
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name     | Covers                           |
 | -------- | -------------------------------- |
 | basic    | Horizontal separator.            |

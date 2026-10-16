@@ -38,7 +38,7 @@
       "slug": "kbd",
       "layer": "primitive",
       "status": "stable",
-      "description": "Kbd 组件继承原生 kbd，原生 kbd 的所有属性和事件均可透传；用于表示单个键盘按键。",
+      "description": "继承原生 kbd，用于表示单个键盘按键。",
       "importPath": {
         "react": "@fex-design/react/primitive/kbd",
         "vue": "@fex-design/vue/primitive/kbd",
@@ -128,7 +128,7 @@
       "slug": "kbd-group",
       "layer": "primitive",
       "status": "stable",
-      "description": "KbdGroup 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于组合多个按键。",
+      "description": "继承原生 div，用于组合多个按键。",
       "importPath": {
         "react": "@fex-design/react/primitive/kbd",
         "vue": "@fex-design/vue/primitive/kbd",

@@ -5,7 +5,7 @@ description: 展示状态、数量、点标记和容器 Ribbon。
 
 ## 何时使用
 
-Badge 用于展示紧凑的状态、分类或数量信息。Primitive 只提供徽标本身，UI 提供常用的附着式快捷写法。
+需要在头像、图标或入口旁展示未读数量、待办提醒或状态标记时使用，也可独立展示简短的数量与状态信息。
 
 ## 示例
 
@@ -16,7 +16,7 @@ Badge 用于展示紧凑的状态、分类或数量信息。Primitive 只提供�
 <ApiContainer>
 <ApiSection layer="ui" title="UI API" description="UI Badge 的快捷附着用法。">
   <ApiComposition layer="ui">
-    UI `Badge` 自己创建附着指示器或 Dot；`BadgeRibbon` 提供 Ribbon 快捷组合，`BadgeGroup` 直接复用 Primitive。
+    `Badge` 将数量或状态标记附着到内容上；`BadgeRibbon` 用于容器边缘的缎带，`BadgeGroup` 用于组织多个徽标。
 
     ```text
     Badge
@@ -37,7 +37,6 @@ Badge 用于展示紧凑的状态、分类或数量信息。Primitive 只提供�
 <ApiSection
   layer="primitive"
   title="Primitive API"
-  description="Primitive Badge、BadgeDot 与 BadgeRibbon 的公开属性。"
 >
   <ApiComposition layer="primitive">
     ```text

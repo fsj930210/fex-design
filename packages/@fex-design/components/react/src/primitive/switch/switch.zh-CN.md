@@ -1,6 +1,6 @@
 # React Primitive Switch
 
-用于立即切换布尔状态。rounded 与 pill 是并列形状，所有示例均同时展示两种形状。
+用于立即切换布尔状态。可选择 rounded 或 pill 形状。
 
 ## 导入
 
@@ -18,10 +18,6 @@
 | loading           | boolean                  | false     | 显示加载反馈并阻止交互。   |
 | disabled          | boolean                  | false     | 阻止交互。                 |
 | state             | 'checked' \| 'unchecked' | —         | SwitchContent 的目标状态。 |
-
-## 示例
-
-示例依次为基本展示、Shape、Size、文本和图标、Loading、Disabled、校验失败、受控与非受控、LTR 与 RTL、CSS Variables。受控示例通过外部按钮设置状态。
 
 ## CSS Variables
 

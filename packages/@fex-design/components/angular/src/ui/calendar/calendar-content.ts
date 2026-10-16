@@ -3,7 +3,7 @@ import { NgTemplateOutlet } from '@angular/common'
 import { getCalendarUIView, resolveCalendarSemanticValue, type CalendarUIOptions, type CalendarSemanticPart, type CalendarRenderContext, type CalendarCellRenderContext } from '@fex-design/core/calendar'
 import { calendarUIClasses, calendarUIFullCellClassName, calendarUIMiniCellClassName, calendarUIFullTriggerClassName, calendarUIMiniTriggerClassName, calendarUIWeekRowClassName, calendarUIDateRowClassName, calendarUIMonthRowClassName } from '@fex-design/components-styles/calendar'
 import { cn } from '@fex-design/utils'
-import { CalendarRoot, CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter } from '../../primitive/calendar'
+import { CalendarRoot, CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter } from '@fex-design/angular/primitive/calendar'
 import type { CalendarClassNames, CalendarStyles } from './types'
 @Component({ selector: 'div[calendarContent]', standalone: true, imports: [NgTemplateOutlet, CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter], changeDetection: ChangeDetectionStrategy.OnPush, host: { class: 'contents' }, templateUrl: './calendar-content.html' })
 export class CalendarContent {

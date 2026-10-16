@@ -19,8 +19,6 @@ Styled, independently composable Skeleton placeholders. Every component uses a n
 
 ## Examples
 
-Examples are stored in `examples/<name>` as the source for the documentation preview.
-
 | Name      | Covers                                                                 |
 | --------- | ---------------------------------------------------------------------- |
 | basic     | Default forms of all six primitives, avatar shapes, and button shapes. |

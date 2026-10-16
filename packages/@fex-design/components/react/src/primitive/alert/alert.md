@@ -14,10 +14,6 @@ import {
 } from '@fex-design/react/primitive/alert'
 ```
 
-## Examples
-
-The examples cover basic composition, four semantic types, three variants, a composed close action, a copy-ready looping announcement, custom icon/action content, and LTR/RTL.
-
 ## Components
 
 ### Alert

@@ -4,7 +4,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@an
 import { cn } from '@fex-design/utils'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { datePickerCancelClassName } from '@fex-design/components-styles/date-picker'
-import { buttonPrimitiveClassName } from '../button/button'
+import { buttonPrimitiveClassName } from '@fex-design/angular/primitive/button'
 import { getFooterOwner } from './date-picker-footer-owner'
 @Component({ selector: 'button[datePickerCancel]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'date-picker-cancel', type: 'button', '[class]': 'hostClassName()', '[disabled]': 'disabled()' }, template: '<ng-content>取消</ng-content>' })
 export class DatePickerCancel {

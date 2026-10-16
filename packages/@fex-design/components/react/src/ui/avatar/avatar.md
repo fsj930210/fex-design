@@ -32,7 +32,3 @@ Ready-to-use Avatar and AvatarGroup components. UI Avatar composes image and fal
 | renderOverflow | framework-native content | —       | Custom overflow node.         |
 
 `AvatarGroup` accepts child avatars and customizes overflow with `renderOverflow(count, items)`.
-
-## Examples
-
-Examples live in `examples/<name>` and cover basic avatars, groups, overflow counts, custom overflow icons, sizes, shapes, max count, and direction.

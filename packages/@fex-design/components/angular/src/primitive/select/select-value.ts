@@ -4,7 +4,7 @@ import { getSelectValueLayout } from '@fex-design/core/select/value-layout'
 import type { SelectOption } from '@fex-design/core/select/types'
 import { selectPlaceholderClassName, selectValueClassName } from '@fex-design/components-styles/select'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
-import { Tag, TagAction } from '../tag'
+import { Tag, TagAction } from '@fex-design/angular/primitive/tag'
 import { SelectRoot } from './select-root'
 
 @Component({

@@ -8,8 +8,8 @@ import { cn } from '@fex-design/utils'
 import type { ComponentProps, ReactNode } from 'react'
 import { useCalendarContext } from './calendar-context'
 import { CalendarNavigationButton } from './calendar-navigation-button'
-import { RadioGroup, RadioButton } from '../radio'
-import { SelectContent, SelectRoot, SelectTrigger, SelectValue } from '../select'
+import { RadioGroup, RadioButton } from '@fex-design/react/primitive/radio'
+import { SelectContent, SelectRoot, SelectTrigger, SelectValue } from '@fex-design/react/primitive/select'
 export type CalendarHeaderProps = Omit<ComponentProps<'div'>, 'children'> & {
   children?: ReactNode | ((state: CalendarHeaderState) => ReactNode)
 }

@@ -3,7 +3,7 @@
   "slug": "aspect-ratio",
   "layer": "primitive",
   "status": "stable",
-  "description": "保持内容宽高比的 styled div 容器。",
+  "description": "保持内容宽高比的 div 容器。",
   "importPath": {
     "react": "@fex-design/react/primitive/aspect-ratio",
     "vue": "@fex-design/vue/primitive/aspect-ratio",
@@ -37,7 +37,7 @@
       "slug": "aspect-ratio",
       "layer": "primitive",
       "status": "stable",
-      "description": "AspectRatio 组件继承原生 div，原生 div 的所有属性和事件均可透传；用于按 ratio 保持内容宽高比。",
+      "description": "继承原生 div，用于按 ratio 保持内容宽高比。",
       "importPath": {
         "react": "@fex-design/react/primitive/aspect-ratio",
         "vue": "@fex-design/vue/primitive/aspect-ratio",

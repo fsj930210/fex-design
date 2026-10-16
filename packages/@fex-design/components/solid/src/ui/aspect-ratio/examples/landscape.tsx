@@ -1,4 +1,4 @@
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/solid/ui/aspect-ratio'
 export function Landscape() {
   return (
     <AspectRatio ratio={16 / 9}>

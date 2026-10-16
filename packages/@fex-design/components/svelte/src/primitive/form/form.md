@@ -10,8 +10,8 @@ import Form from '@fex-design/svelte/primitive/form'
 import FieldRoot from '@fex-design/svelte/primitive/field'
 import FieldControl from '@fex-design/svelte/primitive/field-control'
 import FieldLabel from '@fex-design/svelte/primitive/field-label'
-import InputRoot from '@fex-design/svelte/primitive/input'
-import InputControl from '@fex-design/svelte/primitive/input-control'
+import { InputRoot } from '@fex-design/svelte/primitive/input'
+import { InputControl } from '@fex-design/svelte/primitive/input'
 import { createForm } from '@fex-design/svelte/primitive/form/create-form'
 const form = createForm(() => ({ defaultValues: { name: '' } }))
 </script>

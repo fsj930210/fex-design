@@ -14,8 +14,6 @@ Base semantic separator with orientation state.
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name     | Covers                           |
 | -------- | -------------------------------- |
 | basic    | Horizontal separator.            |

@@ -1,6 +1,6 @@
 # Svelte Ui Tooltip
 
-Accessible hover/focus hint built on the shared floating controller. UI assembles the default trigger and content structure and adds semantic styling.
+An accessible hint shown on hover or focus. UI assembles the default trigger and content structure and adds semantic styling.
 
 ## Import
 

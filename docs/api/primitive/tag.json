@@ -3,7 +3,7 @@
   "slug": "tag",
   "layer": "primitive",
   "status": "stable",
-  "description": "提供 styled Tag 根节点与可组合的 TagAction 操作按钮。",
+  "description": "提供带默认样式的标签与可组合的操作按钮。",
   "importPath": {
     "react": "@fex-design/react/primitive/tag",
     "vue": "@fex-design/vue/primitive/tag",
@@ -91,7 +91,7 @@
       "slug": "tag",
       "layer": "primitive",
       "status": "stable",
-      "description": "继承原生 span 属性和事件的 styled 标签根节点。",
+      "description": "标签根节点，继承原生 span 属性和事件。",
       "importPath": {
         "react": "@fex-design/react/primitive/tag",
         "vue": "@fex-design/vue/primitive/tag",

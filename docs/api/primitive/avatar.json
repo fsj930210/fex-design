@@ -58,7 +58,7 @@
       "slug": "avatar",
       "layer": "primitive",
       "status": "stable",
-      "description": "Avatar 组件继承原生 span，原生 span 的所有属性和事件均可透传；作为头像图片、fallback 和 badge 的根容器。",
+      "description": "继承原生 span，作为头像图片、fallback 和 badge 的根容器。",
       "importPath": {
         "react": "@fex-design/react/primitive/avatar",
         "vue": "@fex-design/vue/primitive/avatar",
@@ -221,7 +221,7 @@
       "slug": "avatar-image",
       "layer": "primitive",
       "status": "stable",
-      "description": "AvatarImage 组件继承原生 img，原生 img 的所有属性和事件均可透传；负责显示头像图片。",
+      "description": "继承原生 img，负责显示头像图片。",
       "importPath": {
         "react": "@fex-design/react/primitive/avatar",
         "vue": "@fex-design/vue/primitive/avatar",
@@ -402,7 +402,7 @@
       "slug": "avatar-fallback",
       "layer": "primitive",
       "status": "stable",
-      "description": "AvatarFallback 组件继承原生 span，原生 span 的所有属性和事件均可透传；在图片不可用时显示替代内容。",
+      "description": "继承原生 span，在图片不可用时显示替代内容。",
       "importPath": {
         "react": "@fex-design/react/primitive/avatar",
         "vue": "@fex-design/vue/primitive/avatar",
@@ -492,7 +492,7 @@
       "slug": "avatar-badge",
       "layer": "primitive",
       "status": "stable",
-      "description": "AvatarBadge 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于在头像右下角显示状态或图标。",
+      "description": "继承原生 span，用于在头像右下角显示状态或图标。",
       "importPath": {
         "react": "@fex-design/react/primitive/avatar",
         "vue": "@fex-design/vue/primitive/avatar",
@@ -582,7 +582,7 @@
       "slug": "avatar-group",
       "layer": "primitive",
       "status": "stable",
-      "description": "AvatarGroup 组件继承原生 div，原生 div 的所有属性和事件均可透传；负责多个头像的重叠布局。",
+      "description": "继承原生 div，负责多个头像的重叠布局。",
       "importPath": {
         "react": "@fex-design/react/primitive/avatar",
         "vue": "@fex-design/vue/primitive/avatar",
@@ -672,7 +672,7 @@
       "slug": "avatar-group-count",
       "layer": "primitive",
       "status": "stable",
-      "description": "AvatarGroupCount 组件继承原生 span，原生 span 的所有属性和事件均可透传；用于显示头像组的剩余数量或自定义溢出内容。",
+      "description": "继承原生 span，用于显示头像组的剩余数量或自定义溢出内容。",
       "importPath": {
         "react": "@fex-design/react/primitive/avatar",
         "vue": "@fex-design/vue/primitive/avatar",

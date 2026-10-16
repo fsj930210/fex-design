@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Alert, AlertActionContent, AlertIconContent } from '../alert'
+import { Alert, AlertActionContent, AlertIconContent } from '@fex-design/angular/ui/alert'
 @Component({
   selector: 'alert-custom-ui-example',
   standalone: true,

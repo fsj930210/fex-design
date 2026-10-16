@@ -3,7 +3,7 @@
   "slug": "calendar",
   "layer": "primitive",
   "status": "stable",
-  "description": "可组合日历部件及独立逻辑接口，所有交互由 core 处理。Primitive 提供原子结构和默认基础样式，不提供 UI Calendar 的 classNames/styles 语义映射、完整布局或农历等业务展示。",
+  "description": "带默认样式的可组合日历部件，支持日期选择、浏览与自定义内容。",
   "examples": [
     {
       "id": "basic",
@@ -210,7 +210,7 @@
           "name": "cell",
           "type": "CalendarCell<TValue>",
           "required": true,
-          "description": "core 网格中的 Cell。"
+          "description": "日历网格中的单元格数据。"
         }
       ],
       "events": []
@@ -222,7 +222,7 @@
           "name": "cell",
           "type": "CalendarCell<TValue>",
           "required": true,
-          "description": "core 网格中的 Cell。"
+          "description": "日历网格中的单元格数据。"
         }
       ],
       "events": []

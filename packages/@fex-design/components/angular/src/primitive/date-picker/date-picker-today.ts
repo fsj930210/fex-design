@@ -6,7 +6,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input }
 import { cn } from '@fex-design/utils'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { datePickerTodayClassName } from '@fex-design/components-styles/date-picker'
-import { buttonPrimitiveClassName } from '../button/button'
+import { buttonPrimitiveClassName } from '@fex-design/angular/primitive/button'
 import { getFooterOwner } from './date-picker-footer-owner'
 @Component({ selector: 'button[datePickerToday]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'date-picker-today', type: 'button', '[class]': 'hostClassName()', '[disabled]': 'disabled()' }, templateUrl: './date-picker-today.html' })
 export class DatePickerToday {

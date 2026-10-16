@@ -1,4 +1,4 @@
-export { default, default as InputRoot } from './input-root.svelte'
+export { default as InputRoot } from './input-root.svelte'
 export { default as InputControl } from './input-control.svelte'
 export { default as InputPrefix } from './input-prefix.svelte'
 export { default as InputSuffix } from './input-suffix.svelte'

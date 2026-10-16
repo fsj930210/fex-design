@@ -4,7 +4,7 @@ import { getDatePickerTagItems } from '@fex-design/core/date-picker/input'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import { datePickerMultipleTagsClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
-import { Tag, TagAction } from '../tag'
+import { Tag, TagAction } from '@fex-design/react/primitive/tag'
 import { useDatePickerContext } from './context'
 
 export type DatePickerTagsProps = ComponentProps<'div'> & { maxCount?: number }

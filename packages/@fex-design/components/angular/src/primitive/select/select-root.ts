@@ -6,7 +6,7 @@ import type { SelectionValue } from '@fex-design/core/selection/types'
 import type { PopoverOptions } from '@fex-design/core/popover/types'
 import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, Output, inject, signal, type OnChanges, type OnInit, type SimpleChanges, type Signal } from '@angular/core'
 import { createCoreStoreSignalBinding } from '@fex-design/angular/signals/core-store-signal'
-import { Popover } from '../popover'
+import { Popover } from '@fex-design/angular/primitive/popover'
 
 export interface SelectChangeMeta {
   selectedItem?: SelectOption | undefined

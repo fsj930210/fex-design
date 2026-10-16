@@ -6,10 +6,6 @@
 
     import { Empty } from '@fex-design/solid/ui/empty'
 
-## 示例
-
-`basic`、`content`、`image`、`direction` 与 Primitive 展示一致；`styling` 为 UI 专属。
-
 ## API
 
 `image`、`title`、`description` 和 `children` 提供内容；原生 div 属性继续透传。

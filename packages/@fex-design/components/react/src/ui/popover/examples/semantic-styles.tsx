@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
-import { Popover } from '@fex-design/react/ui/popover'
-import type { PopoverProps } from '@fex-design/react/ui/popover'
+import { Popover, type PopoverProps } from '@fex-design/react/ui/popover'
+
 import { Button } from '@fex-design/react/ui/button'
 
 export function SemanticStylesExample() {

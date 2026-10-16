@@ -10,7 +10,7 @@ export function OverlayExample() {
   const [spinning, setSpinning] = useState(true)
   return (
     <div className="grid w-full max-w-xl gap-4">
-      <SpinnerContainer className="min-h-40 rounded-lg border border-border">
+      <SpinnerContainer aria-busy={spinning} className="min-h-40 rounded-lg border border-border">
         <div className="grid gap-2 p-6">
           <strong>项目概览</strong>
           <p className="m-0 text-sm text-muted-foreground">
@@ -18,7 +18,7 @@ export function OverlayExample() {
           </p>
         </div>
         {spinning && (
-          <SpinnerOverlay>
+          <SpinnerOverlay className="flex-col">
             <Spinner />
             <SpinnerText>正在刷新数据</SpinnerText>
           </SpinnerOverlay>

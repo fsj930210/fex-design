@@ -10,10 +10,6 @@
 
 各区域不增加状态属性，原生 JSX 属性、事件、class、style、ARIA 属性和 children 均可透传。
 
-## 示例
-
-`basic`、`content`、`image`、`direction` 与 UI Empty 的文案、布局和最终展示一致。
-
 ## 书写方向
 
 原生 `dir` 控制继承的 LTR 与 RTL 布局。

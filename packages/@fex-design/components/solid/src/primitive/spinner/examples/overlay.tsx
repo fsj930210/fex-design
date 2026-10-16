@@ -10,7 +10,7 @@ export function OverlayExample() {
   const [spinning, setSpinning] = createSignal(true)
   return (
     <div class="grid w-full max-w-xl gap-4">
-      <SpinnerContainer class="min-h-40 rounded-lg border border-border">
+      <SpinnerContainer aria-busy={spinning()} class="min-h-40 rounded-lg border border-border">
         <div class="grid gap-2 p-6">
           <strong>项目概览</strong>
           <p class="m-0 text-sm text-muted-foreground">
@@ -18,7 +18,7 @@ export function OverlayExample() {
           </p>
         </div>
         <Show when={spinning()}>
-          <SpinnerOverlay>
+          <SpinnerOverlay class="flex-col">
             <Spinner />
             <SpinnerText>正在刷新数据</SpinnerText>
           </SpinnerOverlay>

@@ -1,7 +1,5 @@
 <script lang="ts">
-  import Alert from "../alert.svelte";
-  import AlertIcon from "../alert-icon.svelte";
-  import AlertDescription from "../alert-description.svelte";
+  import { Alert, AlertIcon, AlertDescription } from '@fex-design/svelte/primitive/alert'
   import TriangleAlertIcon from '@fex-design/svelte/icons/triangle-alert.svelte';
 </script>
 

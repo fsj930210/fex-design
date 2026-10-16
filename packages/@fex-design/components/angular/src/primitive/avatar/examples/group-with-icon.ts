@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { PlusIcon } from '@fex-design/angular/icons/plus'
-import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '../avatar'
+import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-group-icon-example',
   standalone: true,

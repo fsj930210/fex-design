@@ -6,8 +6,8 @@ import type { DatePickerHeaderLabelPart } from '@fex-design/core/date-picker/typ
 import { getDatePickerHeaderLabelParts, getNextPanelByHeaderLabel } from '@fex-design/core/date-picker/panel'
 import { datePickerHeaderLabelClassName } from '@fex-design/components-styles/date-picker'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
-import { buttonPrimitiveClassName } from '../button/button'
-import { CalendarRoot } from '../calendar'
+import { buttonPrimitiveClassName } from '@fex-design/angular/primitive/button'
+import { CalendarRoot } from '@fex-design/angular/primitive/calendar'
 import { getFooterOwner } from './date-picker-footer-owner'
 @Component({ selector: 'button[datePickerHeaderLabel]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'date-picker-header-label', type: 'button', '[class]': 'hostClassName()', '[attr.data-part]': 'part()', '[attr.data-hovered]': "hovered() ? 'true' : null", '[hidden]': 'hidden() || !visible()', '(mouseenter)': 'hovered.set(true)', '(mouseleave)': 'hovered.set(false)' }, templateUrl: './date-picker-header-label.html' })
 export class DatePickerHeaderLabel {

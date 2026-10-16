@@ -3,7 +3,7 @@
   "slug": "separator",
   "layer": "ui",
   "status": "stable",
-  "description": "Separator Primitive 的 UI 层入口。",
+  "description": "分隔相关的内容或操作组。",
   "importPath": {
     "react": "@fex-design/react/ui/separator",
     "vue": "@fex-design/vue/ui/separator",

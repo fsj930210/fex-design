@@ -8,8 +8,6 @@ Recommended Button with variants, sizes, effects, icons and loading state. Butto
 
 ## Examples
 
-Examples are stored in `examples/<name>` as the source for the documentation preview.
-
 | Name              | Covers                                                                        |
 | ----------------- | ----------------------------------------------------------------------------- |
 | basic             | Default and outline buttons.                                                  |

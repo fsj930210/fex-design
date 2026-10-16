@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter } from '@fex-design/vue/primitive/date-picker'
-import { DatePickerPreset, type DatePickerSelectionValue } from '@fex-design/vue/primitive/date-picker'
+import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter, DatePickerPreset, type DatePickerSelectionValue } from '@fex-design/vue/primitive/date-picker'
+
 import { getCalendarToday, type CalendarRange } from '@fex-design/core/calendar'
 defineOptions({ name: 'DatePickerPresetsExample' })
 const value = ref<DatePickerSelectionValue>(null)

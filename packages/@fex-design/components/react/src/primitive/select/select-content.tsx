@@ -13,7 +13,7 @@ import { getSelectVirtualRange } from '@fex-design/core/select/virtual'
 import type { SelectOption } from '@fex-design/core/select/types'
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, type ReactNode, useState } from 'react'
-import { PopoverContent, PopoverPortal } from '../popover'
+import { PopoverContent, PopoverPortal } from '@fex-design/react/primitive/popover'
 import { CheckIcon } from '@fex-design/react/icons/check'
 import { useSelect, useSelectOption } from './use-select'
 

@@ -6,7 +6,7 @@ import { datePickerHeaderLabelClassName } from '@fex-design/components-styles/da
 import { cn } from '@fex-design/utils'
 import { useState, type ComponentProps, type ReactNode } from 'react'
 
-import { Button } from '../button/button'
+import { Button } from '@fex-design/react/primitive/button'
 import { useCalendarContext } from '../calendar/calendar-context'
 
 import { useHeaderOwner } from './date-picker-header-owner'

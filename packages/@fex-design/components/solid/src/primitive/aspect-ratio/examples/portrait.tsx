@@ -1,4 +1,4 @@
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/solid/primitive/aspect-ratio'
 export function Portrait() {
   return (
     <AspectRatio ratio={9 / 16} class="max-w-48">

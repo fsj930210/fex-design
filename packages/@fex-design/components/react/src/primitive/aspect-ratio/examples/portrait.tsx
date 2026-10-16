@@ -1,4 +1,4 @@
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/react/primitive/aspect-ratio'
 import image from './aspect-ratio-demo.svg'
 
 export function PortraitDemo() {

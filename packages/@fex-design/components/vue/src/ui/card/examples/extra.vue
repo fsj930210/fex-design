@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Card from '@fex-design/vue/ui/card'
+import { Card } from '@fex-design/vue/ui/card'
 </script>
 <template>
   <Card

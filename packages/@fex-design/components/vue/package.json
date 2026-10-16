@@ -141,10 +141,7 @@
     "./composables/use-sortable": "./src/composables/use-sortable.ts",
     "./composables/use-toasts": "./src/composables/use-toasts.ts",
     "./i18n": "./src/i18n/index.ts",
-    "./*": "./src/*",
-    "./*/*": "./src/*/*",
-    "./*/*/*": "./src/*/*/*",
-    "./*/*/*/*": "./src/*/*/*/*"
+    "./*": "./src/*"
   },
   "scripts": {
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",

@@ -1,4 +1,4 @@
-import { AspectRatio } from '..'
+import { AspectRatio } from '@fex-design/react/ui/aspect-ratio'
 import image from './aspect-ratio-demo.svg'
 
 export function LandscapeDemo() {

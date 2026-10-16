@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Avatar, AvatarFallback } from '../avatar'
+import { Avatar, AvatarFallback } from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-sizes-example',
   standalone: true,

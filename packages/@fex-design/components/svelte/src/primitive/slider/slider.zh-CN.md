@@ -10,10 +10,6 @@
 
 Root 支持 value、defaultValue、min、max、step、marks、minStepsBetweenThumbs、orientation、reverse、disabled、keyboard、draggableRange、editable、minCount、maxCount、size、onChange 和 onEnd。Thumb 支持 index、disabled；Mark 支持 value。
 
-## 示例
-
-示例覆盖基础与受控值、权重分配、范围与多 Thumb、禁用 Thumb、范围拖拽、动态节点、动态 Marks/Dots/step=null、LTR/RTL/Reverse/垂直、尺寸和 CSS Variables。
-
 ## CSS Variables
 
 --slider-track-height、--slider-track-background、--slider-range-background、--slider-thumb-size、--slider-thumb-background、--slider-thumb-border-color。

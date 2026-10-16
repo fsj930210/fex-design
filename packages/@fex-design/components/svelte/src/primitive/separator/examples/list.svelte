@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Separator from "../separator.svelte";
+  import { Separator } from '@fex-design/svelte/primitive/separator'
   const items = [
     ["Workspace", "Fex Design"],
     ["Plan", "Team"],

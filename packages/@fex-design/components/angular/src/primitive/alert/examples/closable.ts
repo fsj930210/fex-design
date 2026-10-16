@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert'
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from '@fex-design/angular/primitive/alert'
 import { alertCloseClassName } from '@fex-design/components-styles/alert'
 import { TriangleAlertIcon } from '@fex-design/angular/icons/triangle-alert'
 import { XIcon } from '@fex-design/angular/icons/x'

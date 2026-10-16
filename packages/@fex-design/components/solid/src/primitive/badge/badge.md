@@ -15,10 +15,6 @@ Composable primitives for short values, status dots, ribbons, and badge collecti
 | BadgeGroup  | group container | Badge layout with optional `maxCount` and `+N` overflow.          |
 | BadgeRibbon | span            | Standalone ribbon marker; the consumer owns its containing block. |
 
-## Examples
-
-Examples in `examples/<name>` cover values, custom content, zero handling, numeric overflow, dots, colors, groups, direction, and ribbons.
-
 ## Badge API
 
 | Name              | Type                                | Default | Description                                                     |

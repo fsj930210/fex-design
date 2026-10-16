@@ -9,13 +9,7 @@ import {
 } from '@fex-design/components-styles/slider'
 import { cn } from '@fex-design/utils'
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core'
-import {
-  SliderMark,
-  SliderRange,
-  SliderRoot,
-  SliderThumb,
-  SliderTrack,
-} from '@fex-design/angular/primitive/slider/slider-primitive'
+import { SliderMark, SliderRange, SliderRoot, SliderThumb, SliderTrack } from '@fex-design/angular/primitive/slider'
 type SliderValue = number | number[]
 export interface SliderMarkItem {
   value: number

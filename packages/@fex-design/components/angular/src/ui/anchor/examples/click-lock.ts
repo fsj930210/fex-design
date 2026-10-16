@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Anchor } from '../anchor'
+import { Anchor } from '@fex-design/angular/ui/anchor'
 
 @Component({
   selector: 'anchor-ui-click-lock-example',

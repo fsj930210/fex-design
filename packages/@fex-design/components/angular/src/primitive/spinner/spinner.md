@@ -17,8 +17,6 @@ Composable loading indicator, text, container, and overlay primitives.
 
 ## Examples
 
-Examples live in `examples/<name>` and are used by the documentation preview.
-
 | Name             | Covers              |
 | ---------------- | ------------------- |
 | basic            | Basic indicator.    |
@@ -32,3 +30,7 @@ Examples live in `examples/<name>` and are used by the documentation preview.
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
 | size | 'sm' | 'md'    | 'lg'        | 'md' | Indicator size. |
+
+`SpinnerOverlay` arranges content horizontally by default. Set `class="flex-col"` on the overlay to center the indicator above its text.
+
+The default LoadingIcon rotates and follows `size`. A custom `indicator` template controls its own animation.

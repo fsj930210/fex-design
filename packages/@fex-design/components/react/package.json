@@ -152,10 +152,7 @@
     "./hooks/use-tour": "./src/primitive/tour/use-tour.ts",
     "./hooks/use-unmount": "./src/hooks/use-unmount.ts",
     "./i18n": "./src/i18n/index.tsx",
-    "./*": "./src/*",
-    "./*/*": "./src/*/*",
-    "./*/*/*": "./src/*/*/*",
-    "./*/*/*/*": "./src/*/*/*/*"
+    "./*": "./src/*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",

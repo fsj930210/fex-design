@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Kbd } from '..'
+import { Kbd } from '@fex-design/angular/primitive/kbd'
 @Component({
   selector: 'kbd-basic-example',
   standalone: true,

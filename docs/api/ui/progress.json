@@ -99,7 +99,7 @@
       "name": "gapPlacement",
       "type": "'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'",
       "default": "'bottom'",
-      "description": "当前 top 使用 315° 旋转，其余值使用默认几何旋转，与 React 实现一致。"
+      "description": "仪表盘缺口位置；当前仅 top 与 bottom 的显示不同，start、end、left、right 均按 bottom 显示。"
     },
     {
       "name": "infoPlacement",
@@ -269,7 +269,7 @@
           "name": "gapPlacement",
           "type": "'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'",
           "default": "'bottom'",
-          "description": "当前 top 使用 315° 旋转，其余值使用默认几何旋转，与 React 实现一致。"
+          "description": "仪表盘缺口位置；当前仅 top 与 bottom 的显示不同，start、end、left、right 均按 bottom 显示。"
         },
         {
           "name": "infoPlacement",
@@ -413,7 +413,7 @@
           "name": "gapPlacement",
           "type": "'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'",
           "default": "'bottom'",
-          "description": "当前 top 使用 315° 旋转，其余值使用默认几何旋转，与 React 实现一致。"
+          "description": "仪表盘缺口位置；当前仅 top 与 bottom 的显示不同，start、end、left、right 均按 bottom 显示。"
         },
         {
           "name": "infoPlacement",

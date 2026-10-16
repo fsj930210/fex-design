@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js'
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter } from '@fex-design/solid/primitive/date-picker'
-import { DatePickerPreset, type DatePickerSelectionValue } from '@fex-design/solid/primitive/date-picker'
+import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter, DatePickerPreset, type DatePickerSelectionValue } from '@fex-design/solid/primitive/date-picker'
+
 import { getCalendarToday, type CalendarRange } from '@fex-design/core/calendar'
 
 export function DatePickerPresetsExample() {

@@ -42,7 +42,7 @@
       "slug": "empty",
       "layer": "primitive",
       "status": "stable",
-      "description": "Empty 组件继承原生 div，原生 div 的所有属性和事件均可透传；根空状态容器。",
+      "description": "继承原生 div，根空状态容器。",
       "importPath": {
         "react": "@fex-design/react/primitive/empty",
         "vue": "@fex-design/vue/primitive/empty",
@@ -160,7 +160,7 @@
       "slug": "empty-header",
       "layer": "primitive",
       "status": "stable",
-      "description": "EmptyHeader 组件继承原生 div，原生 div 的所有属性和事件均可透传；组织媒体、标题和描述。",
+      "description": "继承原生 div，组织媒体、标题和描述。",
       "importPath": {
         "react": "@fex-design/react/primitive/empty",
         "vue": "@fex-design/vue/primitive/empty",
@@ -278,7 +278,7 @@
       "slug": "empty-media",
       "layer": "primitive",
       "status": "stable",
-      "description": "EmptyMedia 组件继承原生 div，原生 div 的所有属性和事件均可透传；承载自定义图标或图片。",
+      "description": "继承原生 div，承载自定义图标或图片。",
       "importPath": {
         "react": "@fex-design/react/primitive/empty",
         "vue": "@fex-design/vue/primitive/empty",
@@ -396,7 +396,7 @@
       "slug": "empty-title",
       "layer": "primitive",
       "status": "stable",
-      "description": "EmptyTitle 组件继承原生 div，原生 div 的所有属性和事件均可透传；承载空状态标题。",
+      "description": "继承原生 div，承载空状态标题。",
       "importPath": {
         "react": "@fex-design/react/primitive/empty",
         "vue": "@fex-design/vue/primitive/empty",
@@ -514,7 +514,7 @@
       "slug": "empty-description",
       "layer": "primitive",
       "status": "stable",
-      "description": "EmptyDescription 组件继承原生 p，原生 p 的所有属性和事件均可透传；承载空状态辅助说明。",
+      "description": "继承原生 p，承载空状态辅助说明。",
       "importPath": {
         "react": "@fex-design/react/primitive/empty",
         "vue": "@fex-design/vue/primitive/empty",
@@ -632,7 +632,7 @@
       "slug": "empty-content",
       "layer": "primitive",
       "status": "stable",
-      "description": "EmptyContent 组件继承原生 div，原生 div 的所有属性和事件均可透传；承载操作或补充内容。",
+      "description": "继承原生 div，承载操作或补充内容。",
       "importPath": {
         "react": "@fex-design/react/primitive/empty",
         "vue": "@fex-design/vue/primitive/empty",

@@ -8,10 +8,6 @@ UI Alert packages the Primitive parts into one component with semantic built-in 
 import { Alert } from '@fex-design/react/ui/alert'
 ```
 
-## Examples
-
-Examples are ordered as basic, types and custom colors, variants, closable, looping announcement, custom icon/action, LTR/RTL, and semantic styles.
-
 ## API
 
 `type` is `success | info | warning | error` and defaults to `info`. `variant` is `filled | outlined | solid` and defaults to `filled`. `title`, `description`, `icon`, `action`, and `closeIcon` accept `ReactNode`. `showIcon` enables the built-in icon or its replacement. `closable` renders a close button; `onClose` runs before the component hides and can call `preventDefault()` to keep it visible.

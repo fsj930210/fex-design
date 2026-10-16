@@ -2,7 +2,7 @@
   import { getCalendarUIView, resolveCalendarSemanticValue, type CalendarUIOptions } from '@fex-design/core/calendar';
   import { calendarUIClasses, calendarUIFullCellClassName, calendarUIMiniCellClassName, calendarUIFullTriggerClassName, calendarUIMiniTriggerClassName, calendarUIWeekRowClassName, calendarUIDateRowClassName, calendarUIMonthRowClassName } from '@fex-design/components-styles/calendar';
   import { cn } from '@fex-design/utils';
-  import { CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter } from '../../index';
+  import { CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter } from '@fex-design/svelte/primitive/calendar'
   import { useCalendarContext } from '../../context';
   import type { Snippet } from 'svelte';
   import type { HTMLAttributes } from 'svelte/elements';

@@ -4,7 +4,7 @@ import {
 } from '@fex-design/components-styles/input-number'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, PointerEvent } from 'react'
-import { Button } from '../button/button'
+import { Button } from '@fex-design/react/primitive/button'
 import { MinusIcon } from '@fex-design/react/icons/minus'
 import { PlusIcon } from '@fex-design/react/icons/plus'
 import { useInputNumberContext } from './input-number-context'

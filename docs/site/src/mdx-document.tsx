@@ -141,7 +141,7 @@ export function MdxDocument(props: {
       <div class="mb-5">
         <div class="mb-1.5 flex items-center gap-2">
           <span class="text-xs font-semibold text-secondary-foreground">
-            拓扑结构 (Composition)
+            组件组合 (Composition)
           </span>
         </div>
         <div class="overflow-x-auto rounded-lg border border-border bg-muted-background/60 p-2.5 text-xs font-mono">

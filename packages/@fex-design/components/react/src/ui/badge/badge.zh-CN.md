@@ -41,10 +41,8 @@ BadgeGroup 沿用 Primitive 的 `maxCount`、`overflow`、children 和原生 div
 
 ## 示例
 
+
+
 ## CSS Variables
 
 Badge 和 BadgeDot 沿用 Primitive 变量。`--badge-color` 覆盖单个指示器；`--badge-color-{primary|info|success|warning|danger}` 及对应的 `-foreground` 变量用于在组件作用域内覆盖语义色。
-
-## 示例
-
-示例覆盖附着、零值、封顶、小圆点、颜色、集合、LTR/RTL、独立使用、位置偏移、结构化样式和 Ribbon。

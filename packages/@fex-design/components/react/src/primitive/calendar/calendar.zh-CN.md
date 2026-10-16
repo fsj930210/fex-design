@@ -1,6 +1,6 @@
 # Calendar Primitive
 
-CalendarRoot 管理日历作用域。所有选择、浏览、面板切换和键盘目标计算由 calendar core 处理，五框架只适配响应式、事件和 DOM。
+CalendarRoot 提供日期选择、浏览和面板切换能力，可组合头部、网格、单元格与底部。
 
 ## 部件
 
@@ -71,4 +71,4 @@ WeekHeader 的自定义内容统一收到 `{ label, index }`；CellTrigger 的�
 
 Root、Grid、Cell、CellTrigger 与独立逻辑接口均支持 `TValue extends CalendarValue`（默认 CalendarValue）。注入作用域不会自动传递父组件的泛型，Grid 的自定义内容类型需按框架原生方式显式指定。Angular Root 的状态统一从 state() 读取，动作统一通过 controller 调用。
 
-选择事件统一由 core 处理：change/onChange 仅在值不同的时候触发，select/onSelect 在每次提交选择时触发并携带 source。自定义 UI 可调用 controller.selectCell(cell, 'customize')。
+change/onChange 仅在值不同的时候触发，select/onSelect 在每次提交选择时触发并携带 source。自定义 UI 可调用 controller.selectCell(cell, 'customize')。

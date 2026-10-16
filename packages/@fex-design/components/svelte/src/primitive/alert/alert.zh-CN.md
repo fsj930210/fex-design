@@ -8,10 +8,6 @@ Alert Primitive 为语义反馈提供带样式的 Svelte 5 部件，不选择图
 import { Alert, AlertIcon } from '@fex-design/svelte/primitive/alert'
 ```
 
-## 示例
-
-七个示例覆盖基本组合、Type、Variant、关闭、循环公告、自定义图标与操作和方向。
-
 ## 组件与原生能力
 
 ### Alert

@@ -1,6 +1,6 @@
 # React Primitive Switch
 
-An immediate boolean control. Rounded and pill are equal shape options, and every example shows both.
+An immediate boolean control. Choose the rounded or pill shape.
 
 ## Import
 
@@ -18,10 +18,6 @@ An immediate boolean control. Rounded and pill are equal shape options, and ever
 | loading           | boolean                  | false     | Shows progress and prevents interaction.     |
 | disabled          | boolean                  | false     | Prevents interaction.                        |
 | state             | 'checked' \| 'unchecked' | —         | Target state for SwitchContent.              |
-
-## Examples
-
-Examples are ordered as basic, shape, size, content, loading, disabled, validation, controlled/uncontrolled, LTR/RTL, and CSS variables. The controlled example is driven by external buttons.
 
 ## CSS Variables
 

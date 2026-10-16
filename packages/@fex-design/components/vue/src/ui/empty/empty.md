@@ -6,10 +6,6 @@ Convenience Empty with string props and Vue-native slots.
 
     import { Empty } from '@fex-design/vue/ui/empty'
 
-## Examples
-
-`basic`, `content`, `image`, and `direction` match Primitive output. `styling` demonstrates structured styles.
-
 ## Empty API
 
 Props: `image?: string | null`, `title?: string`, `description?: string`, `classNames?: EmptyClassNames`, and `styles?: EmptyStyles`.

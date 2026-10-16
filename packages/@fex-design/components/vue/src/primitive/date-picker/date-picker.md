@@ -242,9 +242,3 @@ State includes open, panel, viewDate, committedValue, pendingValue, canClear, ca
 Controller also provides `getState()` for derived state, `getSnapshot()` for transaction snapshots, `subscribe(listener)` returning an unsubscribe function, and `setOptions(options)` replacing the complete logic configuration. Framework adapters already synchronize props and clean up subscriptions; normally update native reactive options without adding another subscription.
 
 `useDatePickerContext(component: string)` / `useRangePickerContext(component: string)` read state from the nearest corresponding Root and throw outside it.
-
-
-
-## Examples
-
-Import examples from `@fex-design/vue/primitive/date-picker/examples`. The 23 scenes include presets, sizes, variants, granularity, multiple selection, ranges, disabled states, dynamic limits, empty endpoints, custom cells, formatting, locale, separate custom-style and LTR/RTL examples. Sources are in the adjacent examples/ directory.

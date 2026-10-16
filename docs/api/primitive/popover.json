@@ -207,7 +207,7 @@
     {
       "id": "controlled",
       "title": "手动控制与挂载策略",
-      "description": "受控与非受控开关、浮层内关闭，以及表单状态保留和销毁。验证提前挂载时，在独立预览的 Elements > body 中搜索 [data-slot=popover-content]：首次加载有 2 个，打开再关闭“提前挂载，关闭销毁”后剩 1 个。"
+      "description": "受控与非受控开关、浮层内关闭，以及表单状态保留和销毁。"
     },
     {
       "id": "offsets",

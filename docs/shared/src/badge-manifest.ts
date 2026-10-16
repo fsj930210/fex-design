@@ -85,7 +85,7 @@ export const badgeExamples = {
     {
       id: 'group',
       title: 'BadgeGroup 集合溢出',
-      description: 'UI 直接重导出 Primitive BadgeGroup，行为和示例保持一致。',
+      description: '使用 maxCount 收起超出的徽标，并显示剩余数量。',
     },
     {
       id: 'direction',

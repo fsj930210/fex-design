@@ -12,10 +12,6 @@ The remaining parts use `primitive/empty-media`, `primitive/empty-title`, `primi
 
 Each component accepts its native element attributes and a `children` Snippet.
 
-## Examples
-
-`basic`, `content`, `image`, and `direction` match UI Empty in copy, layout, and final appearance.
-
 ## Direction
 
 Native `dir` controls inherited LTR and RTL layout.

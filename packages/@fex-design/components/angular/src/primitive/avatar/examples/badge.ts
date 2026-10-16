@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '../avatar'
+import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-badge-example',
   standalone: true,

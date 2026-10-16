@@ -15,10 +15,6 @@
 | BadgeGroup  | `badge-group`       | 排列徽标，并可用 `maxCount` 收起为 `+N`。  |
 | BadgeRibbon | `span[badgeRibbon]` | 展示独立 Ribbon 标记；包含块由使用方提供。 |
 
-## 示例
-
-`examples/<name>` 覆盖基础值、自定义内容、零值、数字封顶、小圆点、颜色、集合、书写方向和 Ribbon。
-
 ## Badge API
 
 | 名称          | 类型                 | 默认值  | 说明                                    |

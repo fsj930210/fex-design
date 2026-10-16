@@ -10,10 +10,6 @@
 
 分别使用 `<div empty>`、`<div emptyHeader>`、`<div emptyMedia>`、`<div emptyTitle>`、`<p emptyDescription>` 和 `<div emptyContent>`。宿主原生属性与事件继续可用。
 
-## 示例
-
-`basic`、`content`、`image`、`direction` 与 UI Empty 的文案、布局和最终展示一致。
-
 ## 书写方向
 
 原生 `dir` 控制继承的 LTR 与 RTL 布局。

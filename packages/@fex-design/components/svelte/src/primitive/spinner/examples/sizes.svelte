@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Spinner } from "@fex-design/svelte/primitive/spinner";
+  import { Spinner } from '@fex-design/svelte/primitive/spinner';
 </script>
 
 <div class="flex items-center gap-3">

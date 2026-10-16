@@ -8,10 +8,12 @@
   import { cn } from "@fex-design/utils";
   import type { HTMLAttributes } from "svelte/elements";
   import type { Snippet } from "svelte";
-  import Spinner from '@fex-design/svelte/primitive/spinner/spinner.svelte';
-  import PrimitiveSpinnerContainer from '@fex-design/svelte/primitive/spinner/spinner-container.svelte';
-  import SpinnerOverlay from '@fex-design/svelte/primitive/spinner/spinner-overlay.svelte';
-  import SpinnerText from '@fex-design/svelte/primitive/spinner/spinner-text.svelte';
+  import {
+    Spinner,
+    SpinnerContainer as PrimitiveSpinnerContainer,
+    SpinnerOverlay,
+    SpinnerText,
+  } from '@fex-design/svelte/primitive/spinner';
   let {
     class: className,
     style,
@@ -38,8 +40,8 @@
     {size}
     class={cn(className, classNames?.spinner)}
     style={[style, styles?.spinner].filter(Boolean).join(';')}
-    >{#if indicator}{@render indicator()}{/if}</Spinner
-  >
+    children={indicator}
+  />
 {:else}
   <PrimitiveSpinnerContainer
     {...rest}
@@ -52,8 +54,8 @@
         class={cn(classNames?.overlay, text && "flex-col")}
         style={styles?.overlay}
         ><Spinner {size} class={classNames?.spinner} style={styles?.spinner}
-          >{#if indicator}{@render indicator()}{/if}</Spinner
-        >{#if text}<SpinnerText class={classNames?.text} style={styles?.text}
+          children={indicator}
+        />{#if text}<SpinnerText class={classNames?.text} style={styles?.text}
             >{text}</SpinnerText
           >{/if}</SpinnerOverlay
       >{/if}

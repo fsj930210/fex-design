@@ -74,8 +74,8 @@
         [class]="inputConfig().classNames?.suffix ?? ''"
         [style]="inputConfig().styles?.suffix ?? ''"
         >@if (suffixTemplate(); as custom) {
-        <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else
-        if (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else {
+        <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else if (isContentProvided(suffixValue())) {
+        {{ suffixValue() }} } @else {
         <calendar-icon class="size-(--input-icon-size)" /> }</span
       >
       @if (context().canClear) {

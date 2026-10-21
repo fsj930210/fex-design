@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   TimePickerRoot,
   TimePickerTrigger,
-  TimePickerPortal,
   TimePickerContent,
   TimePickerPanel,
   TimePickerHourColumn,
@@ -15,7 +14,6 @@ import {
   imports: [
     TimePickerRoot,
     TimePickerTrigger,
-    TimePickerPortal,
     TimePickerContent,
     TimePickerPanel,
     TimePickerHourColumn,

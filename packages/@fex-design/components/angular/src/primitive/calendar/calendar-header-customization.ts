@@ -16,7 +16,6 @@ export type CalendarHeaderSelectOptions = NativeStyle &
       | 'popoverProps'
       | 'virtual'
       | 'maxCount'
-      | 'status'
     >
   >
 export type CalendarHeaderTriggerOptions = NativeStyle & {

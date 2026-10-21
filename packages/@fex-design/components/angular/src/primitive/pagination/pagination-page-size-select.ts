@@ -29,7 +29,6 @@ export type PaginationSelectRootOptions = Partial<
     | 'popoverProps'
     | 'virtual'
     | 'maxCount'
-    | 'status'
   >
 > &
   Pick<NativeAttributes, 'class' | 'style'>

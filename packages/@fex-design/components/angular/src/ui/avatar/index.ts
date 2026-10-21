@@ -1,4 +1,1 @@
-export {
-  Avatar,
-  AvatarGroup,
-} from "./avatar"
+export { Avatar, AvatarGroup } from './avatar'

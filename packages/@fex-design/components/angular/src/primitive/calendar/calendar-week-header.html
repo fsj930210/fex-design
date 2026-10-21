@@ -1,7 +1,10 @@
 @for (item of items(); track item.index) {
-  <div data-slot="calendar-week-head">
-    @if (labelTemplate()) {
-      <ng-container [ngTemplateOutlet]="labelTemplate()" [ngTemplateOutletContext]="{ $implicit: item, label: item.label, index: item.index }" />
-    } @else { {{ item.label }} }
-  </div>
+<div data-slot="calendar-week-head">
+  @if (labelTemplate()) {
+  <ng-container
+    [ngTemplateOutlet]="labelTemplate()"
+    [ngTemplateOutletContext]="{ $implicit: item, label: item.label, index: item.index }"
+  />
+  } @else { {{ item.label }} }
+</div>
 }

@@ -1,13 +1,13 @@
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
-import { checkboxControlClassName } from "@fex-design/components-styles/checkbox"
-import type { CheckboxValue } from "@fex-design/core/checkbox/types"
-import { cn } from "@fex-design/utils"
-import { createEffect, splitProps, useContext, type JSX } from "solid-js"
-import { GroupContext, RootContext } from "./checkbox-context"
+import { checkboxControlClassName } from '@fex-design/components-styles/checkbox'
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import { cn } from '@fex-design/utils'
+import { createEffect, splitProps, useContext, type JSX } from 'solid-js'
+import { GroupContext, RootContext } from './checkbox-context'
 
 export interface CheckboxControlProps extends Omit<
   JSX.InputHTMLAttributes<HTMLInputElement>,
-  "type" | "size" | "value"
+  'type' | 'size' | 'value'
 > {
   value?: CheckboxValue
   indeterminate?: boolean
@@ -17,15 +17,15 @@ export function CheckboxControl(props: CheckboxControlProps) {
   const root = useContext(RootContext)
   const group = useContext(GroupContext)
   const [local, rest] = splitProps(props, [
-    "id",
-    "value",
-    "checked",
-    "disabled",
-    "name",
-    "indeterminate",
-    "class",
-    "onChange",
-    "ref",
+    'id',
+    'value',
+    'checked',
+    'disabled',
+    'name',
+    'indeterminate',
+    'class',
+    'onChange',
+    'ref',
   ])
   let input!: HTMLInputElement
   const currentValue = () => local.value ?? root?.value
@@ -38,7 +38,7 @@ export function CheckboxControl(props: CheckboxControlProps) {
       {...rest}
       ref={(node) => {
         input = node
-        if (typeof local.ref === "function") local.ref(node)
+        if (typeof local.ref === 'function') local.ref(node)
       }}
       id={local.id ?? root?.controlId}
       type="checkbox"

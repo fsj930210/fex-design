@@ -16,25 +16,48 @@ export interface DatePickerHeaderLabelProps extends ButtonProps {
 }
 
 export function DatePickerHeaderLabel(props: DatePickerHeaderLabelProps) {
-  const [local, rest] = splitProps(props, ['part', 'class', 'children', 'onClick', 'onMouseEnter', 'onMouseLeave'])
+  const [local, rest] = splitProps(props, [
+    'part',
+    'class',
+    'children',
+    'onClick',
+    'onMouseEnter',
+    'onMouseLeave',
+  ])
   const [hovered, setHovered] = createSignal(false)
   const calendar = useCalendarContext('DatePickerHeaderLabel')
   const owner = useHeaderOwner()
-  const label = () => getDatePickerHeaderLabel(calendar.state().viewDate, calendar.state().panel, local.part, calendar.controller.getOptions().locale)
+  const label = () =>
+    getDatePickerHeaderLabel(
+      calendar.state().viewDate,
+      calendar.state().panel,
+      local.part,
+      calendar.controller.getOptions().locale,
+    )
   return (
     <Button
       {...rest}
       type="button"
-      hidden={!getDatePickerHeaderLabelParts(owner.picker, calendar.state().panel).includes(local.part) || rest.hidden}
+      hidden={
+        !getDatePickerHeaderLabelParts(owner.picker, calendar.state().panel).includes(local.part) ||
+        rest.hidden
+      }
       data-slot="date-picker-header-label"
       data-part={local.part}
       data-hovered={hovered() ? 'true' : undefined}
       class={cn(datePickerHeaderLabelClassName, local.class)}
-      onMouseEnter={event => { setHovered(true); callEventHandler(local.onMouseEnter, event) }}
-      onMouseLeave={event => { setHovered(false); callEventHandler(local.onMouseLeave, event) }}
+      onMouseEnter={(event) => {
+        setHovered(true)
+        callEventHandler(local.onMouseEnter, event)
+      }}
+      onMouseLeave={(event) => {
+        setHovered(false)
+        callEventHandler(local.onMouseLeave, event)
+      }}
       onClick={(event) => {
         callEventHandler(local.onClick, event)
-        if (!isPickerActionBlocked(event)) calendar.controller.setPanel(getNextPanelByHeaderLabel(local.part))
+        if (!isPickerActionBlocked(event))
+          calendar.controller.setPanel(getNextPanelByHeaderLabel(local.part))
       }}
     >
       {local.children === undefined ? label() : local.children}

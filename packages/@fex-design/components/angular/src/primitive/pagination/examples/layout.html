@@ -1,0 +1,48 @@
+<div class="grid w-full gap-space-lg">
+  <nav paginationRoot [total]="200" [labels]="labels" [defaultPage]="8" [class]="cn('w-full')">
+    <ng-template #content let-view0>
+      <span data-slot="pagination-total" [class]="totalClass"
+        >{{ view0.labels.total(view0.total) }}</span
+      >
+      <div paginationContent>
+        <button paginationNavigationButton direction="prev"></button>
+        @for (item of view0.pages; track item.key) { @if (item.type === 'page') {
+        <button paginationPageButton [page]="item.page"></button> } @else {
+        <span paginationEllipsis></span> } }
+        <button paginationNavigationButton direction="next"></button>
+      </div>
+      <div paginationPageSizeSelect></div>
+      <div data-slot="pagination-jumper" [class]="jumperClass">
+        <span>{{ view0.labels.jumpPrefix }}</span>
+        <div paginationQuickJumper></div>
+        <span>{{ view0.labels.jumpSuffix }}</span>
+      </div>
+    </ng-template>
+  </nav>
+  <nav
+    paginationRoot
+    [total]="200"
+    [labels]="labels"
+    [defaultPage]="8"
+    [class]="cn('w-full [&>[data-slot=pagination-total]]:me-auto')"
+  >
+    <ng-template #content let-view1>
+      <span data-slot="pagination-total" [class]="totalClass"
+        >{{ view1.labels.total(view1.total) }}</span
+      >
+      <div paginationContent>
+        <button paginationNavigationButton direction="prev"></button>
+        @for (item of view1.pages; track item.key) { @if (item.type === 'page') {
+        <button paginationPageButton [page]="item.page"></button> } @else {
+        <span paginationEllipsis></span> } }
+        <button paginationNavigationButton direction="next"></button>
+      </div>
+      <div paginationPageSizeSelect></div>
+      <div data-slot="pagination-jumper" [class]="jumperClass">
+        <span>{{ view1.labels.jumpPrefix }}</span>
+        <div paginationQuickJumper></div>
+        <span>{{ view1.labels.jumpSuffix }}</span>
+      </div>
+    </ng-template>
+  </nav>
+</div>

@@ -5,16 +5,16 @@
     InputNumberPart,
   } from "@fex-design/core/input-number/types";
   import { cn } from "@fex-design/utils";
-  import type { Snippet } from "svelte";
+  import type { ComponentProps, Snippet } from "svelte";
   import type { HTMLInputAttributes } from "svelte/elements";
-  import InputPrefix from '@fex-design/svelte/primitive/input/input-prefix.svelte';
-  import InputSuffix from '@fex-design/svelte/primitive/input/input-suffix.svelte';
-  import InputNumberRoot from '@fex-design/svelte/primitive/input-number/input-number-root.svelte';
-  import InputNumberControl from '@fex-design/svelte/primitive/input-number/input-number-control.svelte';
-  import InputNumberClear from '@fex-design/svelte/primitive/input-number/input-number-clear.svelte';
-  import InputNumberActions from '@fex-design/svelte/primitive/input-number/input-number-actions.svelte';
-  import InputNumberIncrement from '@fex-design/svelte/primitive/input-number/input-number-increment.svelte';
-  import InputNumberDecrement from '@fex-design/svelte/primitive/input-number/input-number-decrement.svelte';
+  import InputPrefix from "@fex-design/svelte/primitive/input/input-prefix.svelte";
+  import InputSuffix from "@fex-design/svelte/primitive/input/input-suffix.svelte";
+  import InputNumberRoot from "@fex-design/svelte/primitive/input-number/input-number-root.svelte";
+  import InputNumberControl from "@fex-design/svelte/primitive/input-number/input-number-control.svelte";
+  import InputNumberClear from "@fex-design/svelte/primitive/input-number/input-number-clear.svelte";
+  import InputNumberActions from "@fex-design/svelte/primitive/input-number/input-number-actions.svelte";
+  import InputNumberIncrement from "@fex-design/svelte/primitive/input-number/input-number-increment.svelte";
+  import InputNumberDecrement from "@fex-design/svelte/primitive/input-number/input-number-decrement.svelte";
   interface Props extends Omit<
     HTMLInputAttributes,
     | "value"
@@ -42,6 +42,20 @@
     keyboard?: boolean | undefined;
     clearable?: boolean | undefined;
     controls?: boolean | undefined;
+    controlProps?:
+      Omit<ComponentProps<typeof InputNumberControl>, "children"> | undefined;
+    actionsProps?:
+      Omit<ComponentProps<typeof InputNumberActions>, "children"> | undefined;
+    incrementProps?:
+      Omit<ComponentProps<typeof InputNumberIncrement>, "children"> | undefined;
+    decrementProps?:
+      Omit<ComponentProps<typeof InputNumberDecrement>, "children"> | undefined;
+    clearProps?:
+      Omit<ComponentProps<typeof InputNumberClear>, "children"> | undefined;
+    prefixProps?:
+      Omit<ComponentProps<typeof InputPrefix>, "children"> | undefined;
+    suffixProps?:
+      Omit<ComponentProps<typeof InputSuffix>, "children"> | undefined;
     prefix?: Snippet | undefined;
     suffix?: Snippet | undefined;
     increment?: Snippet | undefined;
@@ -49,6 +63,7 @@
     onChange?: ((event: Event, value: number | undefined) => void) | undefined;
     classNames?: Partial<Record<InputNumberPart, string>> | undefined;
     styles?: Partial<Record<InputNumberPart, string>> | undefined;
+    "data-warning"?: string | undefined;
   }
   let componentProps: Props = $props();
   // svelte-ignore state_referenced_locally -- controlled mode is fixed by initial prop presence
@@ -68,6 +83,13 @@
     keyboard = true,
     clearable = false,
     controls = true,
+    controlProps,
+    actionsProps,
+    incrementProps,
+    decrementProps,
+    clearProps,
+    prefixProps,
+    suffixProps,
     prefix,
     suffix,
     increment,
@@ -81,6 +103,7 @@
     variant,
     disabled,
     readonly,
+    "data-warning": dataWarning,
     ...rest
   }: Props = $derived(componentProps);
 </script>
@@ -101,39 +124,67 @@
   {variant}
   readOnly={readonly}
   {onChange}
+  data-warning={dataWarning}
   class={cn(classNames?.root, className)}
-  style={[styles?.root, style].filter(Boolean).map((value) => value?.trim().replace(/;?$/, ';')).join(' ')}
+  style={[styles?.root, style]
+    .filter(Boolean)
+    .map((value) => value?.trim().replace(/;?$/, ";"))
+    .join(" ")}
 >
-  {#if prefix}<InputPrefix class={classNames?.prefix} style={styles?.prefix}
+  {#if prefix}<InputPrefix
+      {...prefixProps}
+      class={cn(classNames?.prefix, prefixProps?.class)}
+      style={[styles?.prefix, prefixProps?.style].filter(Boolean).join(";")}
       >{@render prefix()}</InputPrefix
     >{/if}
   <InputNumberControl
+    {...controlProps}
     {...rest}
-    class={classNames?.control}
-    style={styles?.control}
+    class={cn(classNames?.control, controlProps?.class)}
+    style={[styles?.control, controlProps?.style].filter(Boolean).join(";")}
   />
   {#if clearable}<InputNumberClear
-      class={classNames?.clear}
-      style={styles?.clear}
+      {...clearProps}
+      class={cn(classNames?.clear, clearProps?.class)}
+      style={[styles?.clear, clearProps?.style].filter(Boolean).join(";")}
     />{/if}
-  {#if suffix}<InputSuffix class={classNames?.suffix} style={styles?.suffix}
+  {#if suffix}<InputSuffix
+      {...suffixProps}
+      class={cn(classNames?.suffix, suffixProps?.class)}
+      style={[styles?.suffix, suffixProps?.style].filter(Boolean).join(";")}
       >{@render suffix()}</InputSuffix
     >{/if}
   {#if controls}
-    <InputNumberActions class={classNames?.actions} style={styles?.actions}>
+    <InputNumberActions
+      {...actionsProps}
+      class={cn(classNames?.actions, actionsProps?.class)}
+      style={[styles?.actions, actionsProps?.style].filter(Boolean).join(";")}
+    >
       {#if increment}<InputNumberIncrement
-          class={classNames?.increment}
-          style={styles?.increment}>{@render increment()}</InputNumberIncrement
+          {...incrementProps}
+          class={cn(classNames?.increment, incrementProps?.class)}
+          style={[styles?.increment, incrementProps?.style]
+            .filter(Boolean)
+            .join(";")}>{@render increment()}</InputNumberIncrement
         >{:else}<InputNumberIncrement
-          class={classNames?.increment}
-          style={styles?.increment}
+          {...incrementProps}
+          class={cn(classNames?.increment, incrementProps?.class)}
+          style={[styles?.increment, incrementProps?.style]
+            .filter(Boolean)
+            .join(";")}
         />{/if}
       {#if decrement}<InputNumberDecrement
-          class={classNames?.decrement}
-          style={styles?.decrement}>{@render decrement()}</InputNumberDecrement
+          {...decrementProps}
+          class={cn(classNames?.decrement, decrementProps?.class)}
+          style={[styles?.decrement, decrementProps?.style]
+            .filter(Boolean)
+            .join(";")}>{@render decrement()}</InputNumberDecrement
         >{:else}<InputNumberDecrement
-          class={classNames?.decrement}
-          style={styles?.decrement}
+          {...decrementProps}
+          class={cn(classNames?.decrement, decrementProps?.class)}
+          style={[styles?.decrement, decrementProps?.style]
+            .filter(Boolean)
+            .join(";")}
         />{/if}
     </InputNumberActions>
   {/if}

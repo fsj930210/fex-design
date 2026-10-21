@@ -1,15 +1,17 @@
 <div class="flex flex-wrap items-start gap-4">
   <div datePickerRoot [defaultOpen]="true">
-  <ng-template #container let-content="content" let-state="state">
-  <div class="flex flex-col items-start gap-2 data-[open=false]:[&_[data-slot=date-picker-content]]:hidden" [attr.data-open]="state.open ? 'true' : 'false'"><ng-container [ngTemplateOutlet]="content" /></div>
-  </ng-template>
-  <div datePickerTrigger>
-  </div>
-  <div datePickerContent>
-  <div datePickerPanel>
-  </div>
-  <div datePickerFooter>
-  </div>
-  </div>
+    <ng-template #container let-content="content" let-state="state">
+      <div
+        class="flex flex-col items-start gap-2 data-[open=false]:[&_[data-slot=date-picker-content]]:hidden"
+        [attr.data-open]="state.open ? 'true' : 'false'"
+      >
+        <ng-container [ngTemplateOutlet]="content" />
+      </div>
+    </ng-template>
+    <div datePickerTrigger></div>
+    <div datePickerContent>
+      <div datePickerPanel></div>
+      <div datePickerFooter></div>
+    </div>
   </div>
 </div>

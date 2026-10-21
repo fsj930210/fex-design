@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-design/angular/primitive/progress'
+import {
+  Progress,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValue,
+} from '@fex-design/angular/primitive/progress'
 
 @Component({
   selector: 'progress-primitive-size-example',
@@ -8,6 +13,4 @@ import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-desi
   imports: [Progress, ProgressTrack, ProgressRange, ProgressValue],
   templateUrl: './size.html',
 })
-export class ProgressPrimitiveSizeExample {
-
-}
+export class ProgressPrimitiveSizeExample {}

@@ -1,7 +1,11 @@
 ﻿export const calendarExamples = {
   primitive: [
     { id: 'basic', title: '基本', description: '浏览月份并选择日期。' },
-    { id: 'notice-events', title: '通知事项日历', description: '在日期单元格中展示当天的通知与事项。' },
+    {
+      id: 'notice-events',
+      title: '通知事项日历',
+      description: '在日期单元格中展示当天的通知与事项。',
+    },
     { id: 'range-events', title: '跨日期事件', description: '展示持续多天的事件及其起止日期。' },
     { id: 'card', title: '卡片模式', description: '在紧凑区域中展示卡片日历。' },
     { id: 'selection', title: '选择功能', description: '通过外部状态控制选中日期。' },
@@ -9,23 +13,53 @@
     { id: 'week', title: '周数', description: '在日期网格旁显示周数。' },
     { id: 'custom-header', title: '自定义头部', description: '自定义年月标题和翻页控件。' },
     { id: 'locale', title: '国际化', description: '使用英文年月标题、星期和按钮文字。' },
-    { id: 'css-variables', title: 'CSS 变量', description: '通过 CSS 变量调整日期悬停、选中和今天的颜色。' },
-    { id: 'direction', title: 'LTR 与 RTL', description: '在 LTR 与 RTL 方向下保持相同日历结构和交互。' },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '通过 CSS 变量调整日期悬停、选中和今天的颜色。',
+    },
+    {
+      id: 'direction',
+      title: 'LTR 与 RTL',
+      description: '在 LTR 与 RTL 方向下保持相同日历结构和交互。',
+    },
     { id: 'footer', title: '自定义底部', description: '在日历底部添加操作与说明。' },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 700,
+    },
   ],
   ui: [
     { id: 'basic', title: '基本', description: '浏览月份并选择日期。' },
-    { id: 'notice-events', title: '通知事项日历', description: '在日期单元格中展示当天的通知与事项。' },
+    {
+      id: 'notice-events',
+      title: '通知事项日历',
+      description: '在日期单元格中展示当天的通知与事项。',
+    },
     { id: 'range-events', title: '跨日期事件', description: '展示持续多天的事件及其起止日期。' },
     { id: 'card', title: '卡片模式', description: '在紧凑区域中展示卡片日历。' },
     { id: 'selection', title: '选择功能', description: '通过外部状态控制选中日期。' },
     { id: 'lunar', title: '农历日历', description: '在日期下方添加农历文字。' },
     { id: 'week', title: '周数', description: '在日期网格旁显示周数。' },
     { id: 'custom-header', title: '自定义头部', description: '自定义年月标题和翻页控件。' },
-    { id: 'semantic-styles', title: '结构化样式', description: '通过 classNames 与 styles 定制 UI 语义部件。' },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '通过 classNames 与 styles 定制 UI 语义部件。',
+    },
     { id: 'locale', title: '国际化', description: '使用英文年月标题、星期和按钮文字。' },
-    { id: 'css-variables', title: 'CSS 变量', description: '通过 CSS 变量调整日期悬停、选中和今天的颜色。' },
-    { id: 'direction', title: 'LTR 与 RTL', description: '在 LTR 与 RTL 方向下保持相同日历结构和交互。' },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '通过 CSS 变量调整日期悬停、选中和今天的颜色。',
+    },
+    {
+      id: 'direction',
+      title: 'LTR 与 RTL',
+      description: '在 LTR 与 RTL 方向下保持相同日历结构和交互。',
+    },
     { id: 'footer', title: '自定义底部', description: '在日历底部添加操作与说明。' },
   ],
 } as const

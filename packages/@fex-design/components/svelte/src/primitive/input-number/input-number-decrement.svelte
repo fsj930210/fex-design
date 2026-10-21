@@ -4,7 +4,7 @@
   import type { Snippet } from "svelte";
   import type { ButtonProps } from "../button/button.types";
   import Button from "../button/button.svelte";
-  import MinusIcon from '@fex-design/svelte/icons/minus.svelte';
+  import MinusIcon from "@fex-design/svelte/icons/minus.svelte";
   import { getInputNumberContext } from "./context";
   let {
     class: className,

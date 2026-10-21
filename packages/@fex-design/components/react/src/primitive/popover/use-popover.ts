@@ -1,11 +1,11 @@
-import { use, useRef } from "react"
-import { createPopover } from "@fex-design/core/popover/create-popover"
-import type { PopoverOptions } from "@fex-design/core/popover/types"
-import { shallowEqualObject } from "@fex-design/utils"
-import { useLazyRef } from "@fex-design/react/hooks/use-lazy-ref"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
-import useUnmount from "@fex-design/react/hooks/use-unmount"
-import { PopoverContext } from "./popover-context"
+import { use, useRef } from 'react'
+import { createPopover } from '@fex-design/core/popover/create-popover'
+import type { PopoverOptions } from '@fex-design/core/popover/types'
+import { shallowEqualObject } from '@fex-design/utils'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
+import useUnmount from '@fex-design/react/hooks/use-unmount'
+import { PopoverContext } from './popover-context'
 
 /** May be consumed without rendering the default Popover components. */
 export function usePopover(options: PopoverOptions = {}) {

@@ -6,7 +6,7 @@ import { useTimePickerContext } from './time-picker-context'
 import type { TimePickerPeriodColumnProps } from './column.types'
 
 export function TimePickerPeriodColumn(props: TimePickerPeriodColumnProps) {
-  const [local, rest] = splitProps(props, ['labels', 'isItemDisabled'])
+  const [local, rest] = splitProps(props, ['columnProps', 'labels', 'isItemDisabled'])
   const context = useTimePickerContext('TimePickerPeriodColumn')
   const options = createMemo(() =>
     createPeriodOptions(local.labels).map((item) => ({
@@ -16,12 +16,15 @@ export function TimePickerPeriodColumn(props: TimePickerPeriodColumnProps) {
   )
   const selected = () =>
     context.snapshot().value ? getDisplayedPeriod(context.snapshot().value!) : undefined
-  return (<Show when={context.use12Hours()}>
-    <TimePickerColumn
-      {...rest}
-      options={options()}
-      selectedValue={selected()}
-      onSelect={(value) => context.controller.selectPeriod(value as TimePeriod)}
-    />
-  </Show>)
+  return (
+    <Show when={context.use12Hours()}>
+      <TimePickerColumn
+        {...rest}
+        {...local.columnProps}
+        options={options()}
+        selectedValue={selected()}
+        onSelect={(value) => context.controller.selectPeriod(value as TimePeriod)}
+      />
+    </Show>
+  )
 }

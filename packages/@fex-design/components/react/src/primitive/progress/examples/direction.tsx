@@ -44,7 +44,7 @@ export function ProgressPrimitiveDirectionExample() {
     <div className="grid w-full max-w-md gap-5">
       <Direction dir="ltr" />
       <Direction dir="rtl" />
-      <div className="flex items-start gap-6">
+      <div className="flex flex-wrap items-start gap-6">
         <DirectionCircle dir="ltr" />
         <DirectionCircle dir="rtl" />
       </div>

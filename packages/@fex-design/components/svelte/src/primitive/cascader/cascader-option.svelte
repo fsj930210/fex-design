@@ -12,10 +12,10 @@
     checkboxMinusIconClassName,
   } from "@fex-design/components-styles/checkbox";
   import { getContext, type Snippet } from "svelte";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
-  import ChevronRight from '@fex-design/svelte/icons/chevron-right.svelte';
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
-  import MinusIcon from '@fex-design/svelte/icons/minus.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
+  import ChevronRight from "@fex-design/svelte/icons/chevron-right.svelte";
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
+  import MinusIcon from "@fex-design/svelte/icons/minus.svelte";
   import Checkbox from "../checkbox/checkbox.svelte";
   import CheckboxIndicator from "../checkbox/checkbox-indicator.svelte";
   import { cascaderContextKey, type CascaderContext } from "./context";

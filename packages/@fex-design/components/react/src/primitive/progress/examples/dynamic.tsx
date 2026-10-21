@@ -12,7 +12,7 @@ export function ProgressPrimitiveDynamicExample() {
   const [value, setValue] = useState(30)
   return (
     <div className="grid w-full max-w-md gap-4">
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center gap-6">
         <Progress value={value} className="flex min-w-0 flex-1 flex-col">
           <div className="flex w-full items-center">
             <ProgressTrack className="min-w-0 flex-1">
@@ -31,7 +31,7 @@ export function ProgressPrimitiveDynamicExample() {
           </div>
         </Progress>
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => setValue((current) => Math.max(0, current - 10))}

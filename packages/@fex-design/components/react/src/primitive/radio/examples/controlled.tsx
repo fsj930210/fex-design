@@ -5,7 +5,7 @@ export default function Example() {
   const [value, setValue] = useState<RadioValue>('pear')
   return (
     <div className="grid gap-4">
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button size="sm" onClick={() => setValue('apple')}>
           选择苹果
         </Button>

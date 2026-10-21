@@ -1,7 +1,4 @@
-import {
-  convertValueToPercentage,
-  isSliderReversed,
-} from '@fex-design/core/slider/utils'
+import { convertValueToPercentage, isSliderReversed } from '@fex-design/core/slider/utils'
 import { sliderThumbClassName } from '@fex-design/components-styles/slider'
 import { cn } from '@fex-design/utils'
 import { type HTMLAttributes, type KeyboardEvent, type Ref } from 'react'

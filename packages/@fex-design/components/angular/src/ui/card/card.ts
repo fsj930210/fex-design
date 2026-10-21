@@ -1,3 +1,6 @@
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import { mergeStyle } from '@fex-design/angular/signals/merge-style'
+import { cn } from '@fex-design/utils'
 import { NgTemplateOutlet } from '@angular/common'
 import { ChangeDetectionStrategy, Component, input, type TemplateRef } from '@angular/core'
 import { cardClassName } from '@fex-design/components-styles/card'
@@ -40,6 +43,14 @@ export type CardStyles = CardStylesBase<string>
   templateUrl: './card.html',
 })
 export class Card {
+  readonly headerProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly titleProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly descriptionProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly extraProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly contentProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly footerProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  protected readonly cn = cn
+  protected readonly mergeStyle = mergeStyle
   title = input<string | undefined>()
   description = input<string | undefined>()
   extra = input<TemplateRef<unknown> | undefined>()

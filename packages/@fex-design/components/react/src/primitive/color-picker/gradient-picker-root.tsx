@@ -8,10 +8,7 @@ import { GradientPickerContext } from './color-picker-context'
 
 export type GradientPickerRootProps = GradientOptions & { children?: ReactNode }
 
-export function GradientPickerRoot({
-  children,
-  ...options
-}: GradientPickerRootProps) {
+export function GradientPickerRoot({ children, ...options }: GradientPickerRootProps) {
   const latest = useRef(options)
   Object.assign(latest.current, options)
   const controller = useLazyRef(() => createGradientController(latest.current)).current

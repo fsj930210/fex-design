@@ -3,7 +3,7 @@
   import type { ContextMenuOptions } from "@fex-design/core/overlay/context-menu/types";
   import type { Snippet } from "svelte";
   import { onDestroy, setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import {
     contextMenuContextKey,
     type ContextMenuContext,

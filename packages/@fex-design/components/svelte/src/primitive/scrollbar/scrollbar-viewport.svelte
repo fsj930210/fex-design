@@ -3,9 +3,9 @@
   import { cn } from "@fex-design/utils";
   import { getContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import type { ScrollbarOverflow } from '@fex-design/core/scrollbar/types';
-  import { resolveScrollbarOverflow } from '@fex-design/core/scrollbar/create-scrollbar-controller';
-  import { scrollbarKey, type ScrollbarContext } from './scrollbar-context';
+  import type { ScrollbarOverflow } from "@fex-design/core/scrollbar/types";
+  import { resolveScrollbarOverflow } from "@fex-design/core/scrollbar/create-scrollbar-controller";
+  import { scrollbarKey, type ScrollbarContext } from "./scrollbar-context";
   interface Props extends HTMLAttributes<HTMLDivElement> {
     children?: Snippet;
     overflow?: ScrollbarOverflow;
@@ -25,10 +25,13 @@
   {...rest}
   bind:this={element}
   data-slot="scrollbar-viewport"
-  class={cn(scrollbarViewportClassName({
-    overflowX: resolveScrollbarOverflow(overflow, parent?.()).x,
-    overflowY: resolveScrollbarOverflow(overflow, parent?.()).y,
-  }), className)}
+  class={cn(
+    scrollbarViewportClassName({
+      overflowX: resolveScrollbarOverflow(overflow, parent?.()).x,
+      overflowY: resolveScrollbarOverflow(overflow, parent?.()).y,
+    }),
+    className,
+  )}
 >
   {@render children?.()}
 </div>

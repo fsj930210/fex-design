@@ -1,56 +1,70 @@
-import type {
-  HTMLAttributes,
-  ReactNode,
-  Ref,
-} from 'react'
-
+import { use, type HTMLAttributes, type Ref, type ReactNode } from 'react'
+import { useCoreStoreSelector } from '@fex-design/react/hooks/use-core-store-selector'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
+import { useLatest } from '@fex-design/react/hooks/use-latest'
+import { menuItemClassName } from '@fex-design/components-styles/menu'
+import { cn, shallowEqualObject } from '@fex-design/utils'
+import { MenuLevelContext, useMenuContext } from './context'
+import { useMenuHost } from './use-menu-host'
 export interface MenuItemRenderProps {
   props: HTMLAttributes<HTMLElement> & {
-    'data-menu-value': string
-    'data-selected'?: 'true'
+    ref: (element: HTMLElement | null) => void | (() => void)
+    disabled?: boolean | undefined
+    type?: 'button'
+    'data-slot'?: string
   }
-  ref: Ref<HTMLElement>
-  state: {
-    disabled: boolean
-    selected: boolean
-    submenu: boolean
-  }
+  state: { disabled: boolean; selected: boolean }
 }
-
 export interface MenuItemProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
-  children?: ReactNode | ((slot: MenuItemRenderProps) => ReactNode)
-  disabled?: boolean
-  selected?: boolean
-  submenu?: boolean
-  value?: string | number
+  value: string
+  ref?: Ref<HTMLElement>
+  disabled?: boolean | undefined
+  textValue?: string | undefined
+  children?: ReactNode | ((binding: MenuItemRenderProps) => ReactNode)
 }
-
 export function MenuItem({
-  children,
-  disabled = false,
-  selected = false,
-  submenu = false,
   value,
-  ...props
+  textValue,
+  disabled = false,
+  children,
+  className,
+  ref,
+  ...rest
 }: MenuItemProps) {
-  const itemProps: MenuItemRenderProps['props'] = {
-    ...props,
-    role: props.role ?? 'menuitem',
-    tabIndex: disabled ? -1 : (props.tabIndex ?? -1),
-    'aria-disabled': disabled || undefined,
-    'aria-haspopup': submenu ? 'menu' : props['aria-haspopup'],
+  const dom = useMenuContext(),
+    parent = use(MenuLevelContext)
+  const state = useCoreStoreSelector(
+    dom.controller,
+    (next) => ({
+      layout: next.layout,
+      disabled: next.disabled,
+      selected: next.value.includes(value),
+    }),
+    shallowEqualObject,
+  )
+  const source = useLatest({ value, disabled, textValue })
+  const bind = useMenuHost((element) => dom.bindItem(element, () => source.current, parent))
+  const composed = useComposedRef(bind, ref)
+  const selected = state.selected
+  const props: MenuItemRenderProps['props'] = {
+    ...rest,
+    ref: composed,
+    type: 'button',
+    role: 'menuitem',
+    disabled: state.disabled || disabled,
+    tabIndex: -1,
     'data-slot': 'menu-item',
-    'data-menu-value': value === undefined ? '' : String(value),
-    'data-selected': selected ? 'true' : undefined,
+    className: cn(
+      menuItemClassName({
+        orientation: !parent && state.layout === 'horizontal' ? 'horizontal' : 'vertical',
+      }),
+      className,
+    ),
   }
-  const state = { disabled, selected, submenu }
-
-  if (typeof children === 'function') {
-    return children({ props: itemProps, ref: undefined, state })
-  }
-
+  if (typeof children === 'function')
+    return children({ props, state: { disabled: Boolean(props.disabled), selected } })
   return (
-    <button {...itemProps} type="button" disabled={disabled}>
+    <button {...props} ref={composed}>
       {children}
     </button>
   )

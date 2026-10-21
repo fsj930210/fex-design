@@ -1,6 +1,6 @@
-import type {
-  InputNumberPart,
-} from '@fex-design/core/input-number/types'
+import { mergeStyle } from '@fex-design/angular/signals/merge-style'
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import type { InputNumberPart } from '@fex-design/core/input-number/types'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -40,6 +40,21 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   templateUrl: './input-number.html',
 })
 export class InputNumber extends InputNumberRoot {
+  readonly controlProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly actionsProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly incrementProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly decrementProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly clearProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  protected readonly cn = cn
+  protected readonly mergeStyle = mergeStyle
+  readonly prefixProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly suffixProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly prefixStyle = computed(() =>
+    mergeStyle(this.styles()?.prefix, this.prefixProps()?.style),
+  )
+  readonly suffixStyle = computed(() =>
+    mergeStyle(this.styles()?.suffix, this.suffixProps()?.style),
+  )
   readonly clearable = input(false, { transform: booleanAttribute })
   readonly controls = input(true, { transform: booleanAttribute })
   readonly id = input<string>()
@@ -50,13 +65,19 @@ export class InputNumber extends InputNumberRoot {
   readonly describedBy = input<string>()
   readonly classNames = input<Partial<Record<InputNumberPart, string>>>()
   readonly styles = input<Partial<Record<InputNumberPart, string>>>()
-  protected override readonly hostClassName = createHostClassName(() => cn(
-    inputRootClassName({ size: this.size(), variant: this.variant() }),
-    inputNumberRootClassName,
-    this.classNames()?.root,
-  ))
-  protected readonly prefixClassName = computed(() => cn('empty:hidden', this.classNames()?.prefix))
-  protected readonly suffixClassName = computed(() => cn('empty:hidden', this.classNames()?.suffix))
+  protected override readonly hostClassName = createHostClassName(() =>
+    cn(
+      inputRootClassName({ size: this.size(), variant: this.variant() }),
+      inputNumberRootClassName,
+      this.classNames()?.root,
+    ),
+  )
+  protected readonly prefixClassName = computed(() =>
+    cn('empty:hidden', this.classNames()?.prefix, this.prefixProps()?.class),
+  )
+  protected readonly suffixClassName = computed(() =>
+    cn('empty:hidden', this.classNames()?.suffix, this.suffixProps()?.class),
+  )
 }
 
 export interface InputNumberChange {

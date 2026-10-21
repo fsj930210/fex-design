@@ -1,3 +1,7 @@
+import { mergeStyle } from '@fex-design/angular/signals/merge-style'
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import type { PopoverPortalOptions } from '@fex-design/core/popover/types'
+import type { SelectValueCustomization } from './select-value'
 import { NgTemplateOutlet } from '@angular/common'
 import { groupSelectOptions } from '@fex-design/core/select/filter-options'
 import { getSelectVirtualRange } from '@fex-design/core/select/virtual'
@@ -31,6 +35,7 @@ import {
   HostListener,
   Input,
   TemplateRef,
+  computed,
   forwardRef,
   inject,
   input,
@@ -41,7 +46,11 @@ import { ChevronDownIcon } from '../../icons/chevron-down'
 import { CheckIcon } from '@fex-design/angular/icons/check'
 import { CircleXIcon } from '@fex-design/angular/icons/circle-x'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
-import { PopoverContent, PopoverPortal, PopoverTrigger } from '@fex-design/angular/primitive/popover'
+import {
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from '@fex-design/angular/primitive/popover'
 
 import { SelectRoot } from './select-root'
 import { SelectValue } from './select-value'
@@ -63,11 +72,21 @@ export { SelectRoot, type SelectChangeMeta } from './select-root'
   templateUrl: './select-trigger.html',
 })
 export class SelectTrigger {
+  readonly valueProps = input<SelectValueCustomization>()
   readonly select = inject(SelectRoot)
   @Input() placeholder = '请选择'
   @Input() maxTagCount: number | undefined
   readonly class = input<string | undefined>()
-  readonly inputProps = input<{ class?: string; style?: string; name?: string; autocomplete?: string; inputmode?: string; 'aria-label'?: string; classNames?: InputClassNames; styles?: InputStyles<string> }>({})
+  readonly inputProps = input<{
+    class?: string
+    style?: string
+    name?: string
+    autocomplete?: string
+    inputmode?: string
+    'aria-label'?: string
+    classNames?: InputClassNames
+    styles?: InputStyles<string>
+  }>({})
   @ContentChild('prefix') prefix?: TemplateRef<void>
   @ContentChild('suffix') suffix?: TemplateRef<void>
   @ContentChild('clear') clear?: TemplateRef<void>
@@ -91,7 +110,7 @@ export class SelectTrigger {
     this.select.controller.open()
   }
   keydown(event: KeyboardEvent) {
-  if (event.defaultPrevented) return
+    if (event.defaultPrevented) return
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
       this.select.controller.open()
@@ -115,10 +134,23 @@ export class SelectTrigger {
   templateUrl: './select-content.html',
 })
 export class SelectContent {
+  readonly portalProps = input<Pick<PopoverPortalOptions, 'container'>>()
+  readonly popoverContentProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly listProps = input<
+    Pick<NativeAttributes, 'class' | 'style'> & {
+      emptyText?: string | undefined
+      loadingText?: string | undefined
+    }
+  >()
+  readonly popupStyle = computed(() => mergeStyle(this.style(), this.popoverContentProps()?.style))
+  readonly class = input<string>()
+  readonly style = input<string>()
   readonly select = inject(SelectRoot)
   @Input() popupRender: TemplateRef<{ menu: TemplateRef<unknown>; close: () => void }> | undefined
   readonly close = () => this.select.controller.close()
-  readonly contentClass = selectContentClassName
+  readonly contentClass = createHostClassName(selectContentClassName, () =>
+    cn(this.class(), this.popoverContentProps()?.class),
+  )
 }
 @Component({
   selector: 'div[selectItem]',
@@ -145,10 +177,18 @@ export class SelectItem {
   readonly itemClass = selectOptionClassName
   readonly labelClass = selectOptionLabelClassName
   readonly indicatorClass = selectOptionIndicatorClassName
-  get selected() { return this.select.selection.isSelected(this.item.value) }
-  get active() { return this.select.snapshot().activeValue === this.item.value }
-  get disabled() { return this.item.disabled === true || this.select.selection.isDisabled(this.item.value) }
-  choose() { if (!this.disabled) this.select.controller.selectValue(this.item.value) }
+  get selected() {
+    return this.select.selection.isSelected(this.item.value)
+  }
+  get active() {
+    return this.select.snapshot().activeValue === this.item.value
+  }
+  get disabled() {
+    return this.item.disabled === true || this.select.selection.isDisabled(this.item.value)
+  }
+  choose() {
+    if (!this.disabled) this.select.controller.selectValue(this.item.value)
+  }
 }
 @Component({
   selector: 'div[selectGroup]',
@@ -157,7 +197,9 @@ export class SelectItem {
   host: { role: 'group', '[attr.aria-label]': 'label' },
   template: '<ng-content />',
 })
-export class SelectGroup { @Input() label: string | undefined }
+export class SelectGroup {
+  @Input() label: string | undefined
+}
 @Component({
   selector: 'div[selectLabel]',
   standalone: true,
@@ -165,7 +207,9 @@ export class SelectGroup { @Input() label: string | undefined }
   host: { '[class]': 'labelClass' },
   template: '<ng-content />',
 })
-export class SelectLabel { readonly labelClass = selectGroupLabelClassName }
+export class SelectLabel {
+  readonly labelClass = selectGroupLabelClassName
+}
 @Component({
   selector: 'div[selectSeparator]',
   standalone: true,
@@ -180,7 +224,7 @@ export class SelectSeparator {}
   imports: [NgTemplateOutlet, CheckIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': 'listClass',
+    '[class]': 'listClass()',
     role: 'listbox',
     '[attr.id]': 'select.listId',
     '[attr.aria-multiselectable]': 'select.isMultiple || null',
@@ -188,6 +232,7 @@ export class SelectSeparator {}
   templateUrl: './select-list.html',
 })
 export class SelectList {
+  readonly class = input<string>()
   readonly select = inject(SelectRoot)
   @Input() emptyText = 'No options'
   @Input() loadingText = 'Loading...'
@@ -195,7 +240,7 @@ export class SelectList {
     $implicit: SelectOption
     state: { selected: boolean; active: boolean; disabled: boolean }
   }>
-  readonly listClass = `${selectListClassName} block`
+  readonly listClass = createHostClassName(`${selectListClassName} block`, () => this.class())
   readonly optionClass = selectOptionClassName
   readonly optionLabelClass = selectOptionLabelClassName
   readonly optionIndicatorClass = selectOptionIndicatorClassName

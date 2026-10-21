@@ -1,6 +1,6 @@
-import type { ContextMenuController } from "@fex-design/core/overlay/context-menu/types"
-import { onCleanup, type JSX } from "solid-js"
-import { useContextMenuContext } from "./context-menu-context"
+import type { ContextMenuController } from '@fex-design/core/overlay/context-menu/types'
+import { onCleanup, type JSX } from 'solid-js'
+import { useContextMenuContext } from './context-menu-context'
 
 function eventInfo(event: Event & Partial<PointerEvent>) {
   return {
@@ -21,12 +21,12 @@ export interface ContextMenuTriggerProps<T = unknown> {
   children: (args: {
     ref: (element: HTMLElement) => void
     props: JSX.HTMLAttributes<HTMLElement>
-    state: ReturnType<ContextMenuController<T>["getSnapshot"]>
+    state: ReturnType<ContextMenuController<T>['getSnapshot']>
   }) => JSX.Element
 }
 
 export function ContextMenuTrigger(props: ContextMenuTriggerProps<any>) {
-  const context = useContextMenuContext<any>("ContextMenuTrigger")
+  const context = useContextMenuContext<any>('ContextMenuTrigger')
   function ref(element: HTMLElement) {
     context.controller.overlay.setReferenceElement(element)
   }
@@ -35,8 +35,8 @@ export function ContextMenuTrigger(props: ContextMenuTriggerProps<any>) {
     ref,
     state: context.snapshot(),
     props: {
-      "aria-haspopup": "menu",
-      ["data-state" as string]: context.snapshot().overlay.open ? "open" : "closed",
+      'aria-haspopup': 'menu',
+      ['data-state' as string]: context.snapshot().overlay.open ? 'open' : 'closed',
       onContextMenu: (event) => {
         const current = event.currentTarget as HTMLElement
         context.controller.openAt(
@@ -51,7 +51,7 @@ export function ContextMenuTrigger(props: ContextMenuTriggerProps<any>) {
         )
       },
       onKeyDown: (event) => {
-        if ((event.shiftKey && event.key === "F10") || event.key === "ContextMenu") {
+        if ((event.shiftKey && event.key === 'F10') || event.key === 'ContextMenu') {
           event.preventDefault()
           const current = event.currentTarget as HTMLElement
           const rect = current.getBoundingClientRect()

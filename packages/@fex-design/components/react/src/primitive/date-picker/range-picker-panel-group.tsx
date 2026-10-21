@@ -13,20 +13,28 @@ export interface RangePickerPanelGroupProps extends ComponentProps<'div'> {
 
 export function RangePickerPanelGroup({
   panelCount = 2,
-  className, style,
+  className,
+  style,
   children,
   ...props
 }: RangePickerPanelGroupProps) {
   const context = useRangePickerContext('RangePickerPanelGroup')
   const appearance = usePickerAppearance()
-  const viewDates = getVisibleRangePanelViewDates(context.viewDate, context.panel, context.showTime ? 1 : panelCount)
+  const viewDates = getVisibleRangePanelViewDates(
+    context.viewDate,
+    context.panel,
+    context.showTime ? 1 : panelCount,
+  )
 
   return (
     <div
       {...props}
       style={{ ...appearance.styles?.panelGroup, ...style }}
-      onMouseLeave={event => { props.onMouseLeave?.(event); if (!event.defaultPrevented) context.setHoverValue(null) }}
-      role={props.role ?? "group"}
+      onMouseLeave={(event) => {
+        props.onMouseLeave?.(event)
+        if (!event.defaultPrevented) context.setHoverValue(null)
+      }}
+      role={props.role ?? 'group'}
       data-slot="range-picker-panel-group"
       className={cn(datePickerPanelsClassName, appearance.classNames?.panelGroup, className)}
     >
@@ -36,7 +44,9 @@ export function RangePickerPanelGroup({
           {viewDates[1] ? <RangePickerPanel panelViewDate={viewDates[1]} /> : null}
           {context.showTime ? <DatePickerTimePanel range /> : null}
         </>
-      ) : children}
+      ) : (
+        children
+      )}
     </div>
   )
 }

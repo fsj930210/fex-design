@@ -29,7 +29,17 @@ export class ProgressRange {
       ? Math.min(1, Math.max(0, (value - normalized.min) / (normalized.max - normalized.min)))
       : normalized.percentage
   })
-  protected readonly width = computed(() => this.percentage() === null ? null : `${this.percentage()! * 100}%`)
-  protected readonly offsetPercent = computed(() => this.offset() === undefined ? null : `${this.offset()}%`)
-  protected readonly hostClassName = createHostClassName(() => cn(progressLineRangeClassName, this.className(), this.offset() !== undefined && 'absolute top-0'))
+  protected readonly width = computed(() =>
+    this.percentage() === null ? null : `${this.percentage()! * 100}%`,
+  )
+  protected readonly offsetPercent = computed(() =>
+    this.offset() === undefined ? null : `${this.offset()}%`,
+  )
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(
+      progressLineRangeClassName,
+      this.className(),
+      this.offset() !== undefined && 'absolute top-0',
+    ),
+  )
 }

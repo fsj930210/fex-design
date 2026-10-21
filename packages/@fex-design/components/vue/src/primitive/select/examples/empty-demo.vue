@@ -1,1 +1,10 @@
-<script setup lang="ts">import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/vue/primitive/select'</script><template><SelectRoot :options="[]"><SelectTrigger class="w-72"/><SelectContent><template #empty>暂无匹配数据</template></SelectContent></SelectRoot></template>
+<script setup lang="ts">
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
+</script>
+<template>
+  <SelectRoot :options="[]"
+    ><SelectTrigger class="w-72" /><SelectContent
+      ><template #empty>暂无匹配数据</template></SelectContent
+    ></SelectRoot
+  >
+</template>

@@ -1,0 +1,71 @@
+/* The caller owns validation. These classes only select a visual treatment. */
+@layer utilities {
+  .form-error {
+    --form-accent: var(--form-error-color, var(--danger));
+  }
+
+  .form-warning {
+    --form-accent: var(--form-warning-color, var(--warning));
+  }
+
+  :is(.form-error, .form-warning) {
+    --form-border-color: var(--form-accent);
+    --form-hover-border-color: var(--form-accent);
+    --form-focus-border-color: var(--form-accent);
+    --form-ring-color: color-mix(in srgb, var(--form-accent) 20%, transparent);
+  }
+
+  /* Target the surface that owns the border, including composed picker inputs. */
+  :is(.form-error, .form-warning)
+    :is(
+      [data-slot='input-root'],
+      [data-slot='select-trigger'],
+      [data-slot='checkbox-control'],
+      [data-slot='radio'],
+      [data-slot='switch'],
+      [data-slot='slider-thumb']
+    ):not(:disabled):not([data-disabled='true']):not([data-disabled='']):not(
+      [aria-disabled='true']
+    ),
+  :is(.form-error, .form-warning):is(
+      [data-slot='input-root'],
+      [data-slot='select-trigger'],
+      [data-slot='checkbox-control'],
+      [data-slot='radio'],
+      [data-slot='switch'],
+      [data-slot='slider-thumb']
+    ):not(:disabled):not([data-disabled='true']):not([data-disabled='']):not(
+      [aria-disabled='true']
+    ) {
+    border-color: var(--form-border-color);
+
+    &:hover {
+      border-color: var(--form-hover-border-color);
+    }
+
+    &:is(:focus-visible, :focus-within) {
+      border-color: var(--form-focus-border-color);
+      outline-color: var(--form-focus-border-color);
+      --tw-ring-color: var(--form-ring-color);
+      --tw-ring-shadow: 0 0 0 var(--form-ring-width, 3px) var(--form-ring-color);
+      box-shadow:
+        var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow),
+        var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+
+  /* Switch draws its edge with an inset ring rather than a CSS border. */
+  :is(.form-error, .form-warning) [data-slot='switch']:not(:disabled),
+  :is(.form-error, .form-warning)[data-slot='switch']:not(:disabled) {
+    --switch-track-border-color: var(--form-border-color);
+    --switch-track-checked-border-color: var(--form-border-color);
+    --tw-ring-color: var(--form-border-color);
+  }
+
+  /* Slider defaults are declared on the root, so override them at that owner. */
+  :is(.form-error, .form-warning) [data-slot='slider']:not([data-disabled]),
+  :is(.form-error, .form-warning)[data-slot='slider']:not([data-disabled]) {
+    --slider-range-background: var(--form-accent);
+    --slider-thumb-border-color: var(--form-border-color);
+  }
+}

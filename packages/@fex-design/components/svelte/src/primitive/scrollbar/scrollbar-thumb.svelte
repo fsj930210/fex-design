@@ -3,13 +3,19 @@
   import { scrollbarThumbClassName } from "@fex-design/components-styles/scrollbar";
   import { cn } from "@fex-design/utils";
   import type { HTMLAttributes } from "svelte/elements";
-  import type { Snippet } from 'svelte';
+  import type { Snippet } from "svelte";
   interface Props extends HTMLAttributes<HTMLDivElement> {
     axis: ScrollbarAxis;
     children?: Snippet;
     element?: HTMLDivElement | undefined;
   }
-  let { axis, children, element = $bindable(), class: className, ...rest }: Props = $props();
+  let {
+    axis,
+    children,
+    element = $bindable(),
+    class: className,
+    ...rest
+  }: Props = $props();
 </script>
 
 <div

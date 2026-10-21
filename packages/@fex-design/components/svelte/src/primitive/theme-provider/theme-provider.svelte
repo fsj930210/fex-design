@@ -9,7 +9,7 @@
   import { getContext, onMount, setContext } from "svelte";
   import type { Snippet } from "svelte";
   import type { Readable } from "svelte/store";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { THEME_PROVIDER_CONTEXT, type ThemeProviderContext } from "./context";
 
   interface ThemeProviderProps extends ThemeControllerOptions {

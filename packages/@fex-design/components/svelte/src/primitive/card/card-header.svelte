@@ -15,6 +15,10 @@
   let { class: className, children, ...rest }: CardHeaderProps = $props();
 </script>
 
-<div {...rest} data-slot="card-header" class={cn(cardHeaderClassName, className)}>
+<div
+  {...rest}
+  data-slot="card-header"
+  class={cn(cardHeaderClassName, className)}
+>
   {@render children?.()}
 </div>

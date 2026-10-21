@@ -1,17 +1,8 @@
-import {
-  createMasonryController,
-} from '@fex-design/core/masonry/create-masonry-controller'
+import { createMasonryController } from '@fex-design/core/masonry/create-masonry-controller'
 import type { MasonryControllerOptions } from '@fex-design/core/masonry/types'
 import { masonryRootClassName } from '@fex-design/components-styles/masonry'
 import { cn } from '@fex-design/utils'
-import {
-  createEffect,
-  onCleanup,
-  onMount,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createEffect, onCleanup, onMount, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { MasonryContext } from './masonry-context'
 
 export type MasonryRootProps = ParentProps<

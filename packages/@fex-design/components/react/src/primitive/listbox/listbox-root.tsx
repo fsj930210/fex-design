@@ -3,10 +3,7 @@ import type { SelectionValue } from '@fex-design/core/selection/types'
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, useRef } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
-import {
-  ListboxContext,
-  type ListboxOrientation,
-} from './listbox-context'
+import { ListboxContext, type ListboxOrientation } from './listbox-context'
 
 export type ListboxChangeMeta<TItem> = {
   selectedItem?: TItem | undefined

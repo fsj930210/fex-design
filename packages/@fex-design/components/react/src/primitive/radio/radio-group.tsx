@@ -1,14 +1,14 @@
-import { createSelectionController } from "@fex-design/core/selection/create-selection-controller"
-import type { SelectionChangeMeta } from "@fex-design/core/selection/types"
-import { radioGroupClassName, type RadioGroupStyleProps } from "@fex-design/components-styles/radio"
-import { cn } from "@fex-design/utils"
-import { useRef, type HTMLAttributes, type Ref } from "react"
-import { useCoreStore } from "@fex-design/react/hooks/use-core-store"
-import { useLazyRef } from "@fex-design/react/hooks/use-lazy-ref"
-import { RadioContext, type RadioChangeMeta, type RadioValue } from "./radio-context"
+import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
+import type { SelectionChangeMeta } from '@fex-design/core/selection/types'
+import { radioGroupClassName, type RadioGroupStyleProps } from '@fex-design/components-styles/radio'
+import { cn } from '@fex-design/utils'
+import { useRef, type HTMLAttributes, type Ref } from 'react'
+import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { RadioContext, type RadioChangeMeta, type RadioValue } from './radio-context'
 
 export interface RadioGroupProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue" | "onChange">, RadioGroupStyleProps {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, RadioGroupStyleProps {
   value?: RadioValue
   defaultValue?: RadioValue
   disabled?: boolean
@@ -28,7 +28,7 @@ export function RadioGroup({
   value,
   defaultValue,
   disabled = false,
-  orientation = "horizontal",
+  orientation = 'horizontal',
   className,
   ref,
   children,
@@ -72,7 +72,7 @@ export function RadioGroup({
         role="radiogroup"
         data-slot="radio-group"
         data-orientation={orientation}
-        data-disabled={disabled ? "true" : undefined}
+        data-disabled={disabled ? 'true' : undefined}
         className={cn(radioGroupClassName({ orientation }), className)}
       >
         {children}

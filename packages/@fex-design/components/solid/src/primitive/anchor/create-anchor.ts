@@ -14,13 +14,7 @@ import type {
   AnchorOrientation,
   AnchorRegisteredItem,
 } from '@fex-design/core/anchor/types'
-import {
-  createEffect,
-  createMemo,
-  createSignal,
-  onCleanup,
-  onMount,
-} from 'solid-js'
+import { createEffect, createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 
 export interface CreateAnchorOptions {
@@ -54,7 +48,9 @@ export function createAnchor(options: CreateAnchorOptions = {}) {
     const activeKeys = options.activeKeys?.()
     controller.updateOptions({
       ...(activeKeys === undefined ? {} : { activeKeys }),
-      ...(options.defaultActiveKeys === undefined ? {} : { defaultActiveKeys: options.defaultActiveKeys }),
+      ...(options.defaultActiveKeys === undefined
+        ? {}
+        : { defaultActiveKeys: options.defaultActiveKeys }),
     })
   })
   const activeKeys = createMemo(() => options.activeKeys?.() ?? snapshot().activeKeys)

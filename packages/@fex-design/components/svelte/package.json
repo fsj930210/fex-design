@@ -102,7 +102,7 @@
     "./primitive/mentions/item": "./src/primitive/mentions/mentions-item.svelte",
     "./primitive/mentions/prefix-case": "./src/primitive/mentions/mentions-prefix-case.svelte",
     "./primitive/mentions/context": "./src/primitive/mentions/context.ts",
-    "./primitive/pagination": "./src/primitive/pagination/pagination.svelte",
+    "./primitive/pagination": "./src/primitive/pagination/index.ts",
     "./primitive/qrcode": "./src/primitive/qrcode/index.ts",
     "./primitive/qrcode-root": "./src/primitive/qrcode/qrcode-root.svelte",
     "./primitive/qrcode-svg": "./src/primitive/qrcode/qrcode-svg.svelte",
@@ -111,12 +111,6 @@
     "./primitive/qrcode-modules": "./src/primitive/qrcode/qrcode-modules.svelte",
     "./primitive/qrcode-center": "./src/primitive/qrcode/qrcode-center.svelte",
     "./primitive/qrcode-overlay": "./src/primitive/qrcode/qrcode-overlay.svelte",
-    "./primitive/pagination-content": "./src/primitive/pagination/pagination-content.svelte",
-    "./primitive/pagination-item": "./src/primitive/pagination/pagination-item.svelte",
-    "./primitive/pagination-link": "./src/primitive/pagination/pagination-link.svelte",
-    "./primitive/pagination-previous": "./src/primitive/pagination/pagination-previous.svelte",
-    "./primitive/pagination-next": "./src/primitive/pagination/pagination-next.svelte",
-    "./primitive/pagination-ellipsis": "./src/primitive/pagination/pagination-ellipsis.svelte",
     "./primitive/popover": "./src/primitive/popover/index.ts",
     "./primitive/select": "./src/primitive/select/index.ts",
     "./primitive/radio": "./src/primitive/radio/index.ts",
@@ -207,6 +201,8 @@
     "./ui/empty": "./src/ui/empty/index.ts",
     "./ui/input": "./src/ui/input/index.ts",
     "./ui/input-number": "./src/ui/input-number/index.ts",
+    "./ui/menu": "./src/ui/menu/index.ts",
+    "./ui/pagination": "./src/ui/pagination/index.ts",
     "./ui/progress": "./src/ui/progress/index.ts",
     "./ui/radio": "./src/ui/radio/index.ts",
     "./ui/select": "./src/ui/select/index.ts",
@@ -269,21 +265,21 @@
     "lint": "oxlint src"
   },
   "dependencies": {
+    "@fex-design/components-styles": "workspace:*",
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "@tanstack/svelte-form": "1.33.5",
     "@tanstack/svelte-virtual": "latest",
     "@tanstack/table-core": "9.2.4",
     "embla-carousel": "8.6.0",
-    "embla-carousel-autoplay": "8.6.0",
-    "@fex-design/utils": "workspace:*",
-    "@fex-design/components-styles": "workspace:*"
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
+    "@fex-design/docs-shared": "workspace:*",
     "svelte": "5.57.0",
     "svelte-check": "latest",
-    "typescript": "catalog:",
-    "@fex-design/docs-shared": "workspace:*"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"

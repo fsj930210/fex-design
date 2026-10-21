@@ -10,4 +10,6 @@
   let { class: className, children, ...rest }: Props = $props();
 </script>
 
-<kbd {...rest} data-slot="kbd" class={cn(kbdClassName, className)}>{@render children?.()}</kbd>
+<kbd {...rest} data-slot="kbd" class={cn(kbdClassName, className)}
+  >{@render children?.()}</kbd
+>

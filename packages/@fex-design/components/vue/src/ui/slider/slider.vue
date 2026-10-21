@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { getSliderDotValues } from '@fex-design/core/slider/utils'
+import { getSliderDotValues } from '@fex-design/core/slider/utils'
 import type { SliderChangeMeta, SliderMarkItem, SliderPart } from '@fex-design/core/slider/types'
 import { computed, ref, useAttrs, type PropType, type StyleValue } from 'vue'
 import {
@@ -53,9 +53,13 @@ const internalValues = ref<number[]>([...(defaults.value ?? [props.min])])
 const currentValues = computed(() => values.value ?? internalValues.value)
 const count = computed(() => currentValues.value.length)
 const disabledThumbs = computed(() => (Array.isArray(props.disabled) ? props.disabled : []))
-const dotValues = computed(() => props.dots ? getSliderDotValues(props.min, props.max, props.step) : [])
+const dotValues = computed(() =>
+  props.dots ? getSliderDotValues(props.min, props.max, props.step) : [],
+)
 const returnValue = (value: number[]) =>
-  value.length > 0 && (typeof props.value === 'number' || typeof props.defaultValue === 'number') ? value[0]! : value
+  value.length > 0 && (typeof props.value === 'number' || typeof props.defaultValue === 'number')
+    ? value[0]!
+    : value
 const handleChange = (value: number[], meta: SliderChangeMeta) => {
   if (value.length !== currentValues.value.length) internalValues.value = value
   emit('update:value', returnValue(value))

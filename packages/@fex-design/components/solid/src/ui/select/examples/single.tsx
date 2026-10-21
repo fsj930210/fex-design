@@ -1,1 +1,18 @@
-import { createSignal } from 'solid-js'; import { Select } from '@fex-design/solid/ui/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'},{value:'solid',label:'Solid'}]; export default function Example(){const [value,setValue]=createSignal('react'); return <Select class="w-72" options={options} value={value()} onChange={(next)=>setValue(String(next))}/>}
+import { createSignal } from 'solid-js'
+import { Select } from '@fex-design/solid/ui/select'
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'solid', label: 'Solid' },
+]
+export default function Example() {
+  const [value, setValue] = createSignal('react')
+  return (
+    <Select
+      class="w-72"
+      options={options}
+      value={value()}
+      onChange={(next) => setValue(String(next))}
+    />
+  )
+}

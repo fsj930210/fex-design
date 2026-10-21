@@ -1,8 +1,5 @@
 import type { ComponentProps } from 'react'
-import {
-  PopoverContent,
-  PopoverPortal,
-} from '../popover'
+import { PopoverContent, PopoverPortal } from '../popover'
 
 export interface TreeSelectContentProps extends ComponentProps<typeof PopoverContent> {
   container?: HTMLElement | null | undefined

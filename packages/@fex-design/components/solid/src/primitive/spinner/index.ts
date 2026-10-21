@@ -1,5 +1,10 @@
-export { Spinner, Spinner as SpinnerRoot, type SpinnerProps, type SpinnerRootProps } from "./spinner-root"
-export { SpinnerContainer, type SpinnerContainerProps } from "./spinner-container"
-export { SpinnerText, type SpinnerTextProps } from "./spinner-text"
-export { SpinnerOverlay, type SpinnerOverlayProps } from "./spinner-overlay"
-export type { SpinnerOptions } from "@fex-design/core/spinner/types"
+export {
+  Spinner,
+  Spinner as SpinnerRoot,
+  type SpinnerProps,
+  type SpinnerRootProps,
+} from './spinner-root'
+export { SpinnerContainer, type SpinnerContainerProps } from './spinner-container'
+export { SpinnerText, type SpinnerTextProps } from './spinner-text'
+export { SpinnerOverlay, type SpinnerOverlayProps } from './spinner-overlay'
+export type { SpinnerOptions } from '@fex-design/core/spinner/types'

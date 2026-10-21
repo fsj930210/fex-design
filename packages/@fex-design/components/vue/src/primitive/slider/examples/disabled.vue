@@ -24,7 +24,14 @@ const toggle = (index: number) => {
     <section class="grid gap-4">
       <h4>禁用指定 Thumb</h4>
       <div class="flex flex-wrap gap-4">
-        <CheckboxRoot v-for="(checked, index) in disabledThumbs" :key="index" :checked="checked" @change="toggle(index)" class="inline-flex items-center gap-2"><CheckboxControl /><CheckboxLabel>Thumb {{ index + 1 }}</CheckboxLabel></CheckboxRoot>
+        <CheckboxRoot
+          v-for="(checked, index) in disabledThumbs"
+          :key="index"
+          :checked="checked"
+          @change="toggle(index)"
+          class="inline-flex items-center gap-2"
+          ><CheckboxControl /><CheckboxLabel>Thumb {{ index + 1 }}</CheckboxLabel></CheckboxRoot
+        >
       </div>
       <SliderRoot :default-value="[20, 50, 80]" :disabled-thumbs="disabledThumbs"
         ><SliderTrack><SliderRange /></SliderTrack
@@ -37,4 +44,3 @@ const toggle = (index: number) => {
     </section>
   </div>
 </template>
-

@@ -23,29 +23,75 @@
     }
   ],
   "props": [
-    { "name": "value", "type": "number | undefined", "description": "受控数值。" },
-    { "name": "defaultValue", "type": "number | undefined", "description": "非受控初始数值。" },
-    { "name": "min", "type": "number", "description": "最小值。" },
-    { "name": "max", "type": "number", "description": "最大值。" },
-    { "name": "step", "type": "number", "default": 1, "description": "增减步长。" },
-    { "name": "precision", "type": "number", "description": "提交精度。" },
-    { "name": "parser", "type": "InputNumberParser", "description": "解析编辑文本。" },
-    { "name": "formatter", "type": "InputNumberFormatter", "description": "格式化展示文本。" },
+    {
+      "name": "value",
+      "type": "number | undefined",
+      "description": "受控数值。"
+    },
+    {
+      "name": "defaultValue",
+      "type": "number | undefined",
+      "description": "非受控初始数值。"
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "description": "最小值。"
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "description": "最大值。"
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "default": 1,
+      "description": "增减步长。"
+    },
+    {
+      "name": "precision",
+      "type": "number",
+      "description": "提交精度。"
+    },
+    {
+      "name": "parser",
+      "type": "InputNumberParser",
+      "description": "解析编辑文本。"
+    },
+    {
+      "name": "formatter",
+      "type": "InputNumberFormatter",
+      "description": "格式化展示文本。"
+    },
     {
       "name": "keyboard",
       "type": "boolean",
       "default": true,
       "description": "是否允许方向键步进。"
     },
-    { "name": "controls", "type": "boolean", "default": true, "description": "是否显示增减操作。" },
+    {
+      "name": "controls",
+      "type": "boolean",
+      "default": true,
+      "description": "是否显示增减操作。"
+    },
     {
       "name": "clearable",
       "type": "boolean",
       "default": false,
       "description": "有值且交互时显示清除操作。"
     },
-    { "name": "prefix", "type": "FrameworkNode", "description": "起始内容。" },
-    { "name": "suffix", "type": "FrameworkNode", "description": "结束内容，不替换增减操作。" },
+    {
+      "name": "prefix",
+      "type": "FrameworkNode",
+      "description": "起始内容。"
+    },
+    {
+      "name": "suffix",
+      "type": "FrameworkNode",
+      "description": "结束内容，不替换增减操作。"
+    },
     {
       "name": "classNames",
       "type": "Partial<Record<InputNumberPart, string>>",
@@ -55,43 +101,133 @@
       "name": "styles",
       "type": "Partial<Record<InputNumberPart, FrameworkStyle>>",
       "description": "各结构区域原生 style。"
+    },
+    {
+      "name": "prefixProps",
+      "type": "InputPrefix native configuration",
+      "description": "按 Input 部件原本的规则传递属性。"
+    },
+    {
+      "name": "suffixProps",
+      "type": "InputSuffix native configuration",
+      "description": "按 Input 部件原本的规则传递属性。"
+    },
+    {
+      "name": "controlProps",
+      "type": "InputNumberControl configuration",
+      "description": "配置对应的直接子组件，不创建新的值或交互状态。"
+    },
+    {
+      "name": "actionsProps",
+      "type": "InputNumberActions configuration",
+      "description": "配置对应的直接子组件，不创建新的值或交互状态。"
+    },
+    {
+      "name": "incrementProps",
+      "type": "InputNumberIncrement configuration",
+      "description": "配置对应的直接子组件，不创建新的值或交互状态。"
+    },
+    {
+      "name": "decrementProps",
+      "type": "InputNumberDecrement configuration",
+      "description": "配置对应的直接子组件，不创建新的值或交互状态。"
+    },
+    {
+      "name": "clearProps",
+      "type": "InputNumberClear configuration",
+      "description": "配置对应的直接子组件，不创建新的值或交互状态。"
     }
   ],
   "events": [
     {
       "name": "change",
       "parameters": [
-        { "name": "event", "type": "Event" },
-        { "name": "value", "type": "number | undefined" }
+        {
+          "name": "event",
+          "type": "Event"
+        },
+        {
+          "name": "value",
+          "type": "number | undefined"
+        }
       ],
       "description": "返回原始事件与最新 number。"
     }
   ],
   "frameworks": {
     "react": {
-      "typeOverrides": { "FrameworkNode": "ReactNode", "FrameworkStyle": "CSSProperties" }
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkStyle": "CSSProperties"
+      }
     },
-    "vue": { "typeOverrides": { "FrameworkNode": "Slots", "FrameworkStyle": "StyleValue" } },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkNode": "Slots",
+        "FrameworkStyle": "StyleValue"
+      }
+    },
     "solid": {
-      "typeOverrides": { "FrameworkNode": "JSX.Element", "FrameworkStyle": "JSX.CSSProperties" }
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkStyle": "JSX.CSSProperties"
+      }
     },
-    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet", "FrameworkStyle": "string" } },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkStyle": "string"
+      }
+    },
     "angular": {
-      "typeOverrides": { "FrameworkNode": "content projection", "FrameworkStyle": "string" }
+      "typeOverrides": {
+        "FrameworkNode": "content projection",
+        "FrameworkStyle": "string"
+      }
     }
   },
   "cssVariables": [],
   "demos": [
-    { "id": "basic" },
-    { "id": "constraints" },
-    { "id": "formatter" },
-    { "id": "editing" },
-    { "id": "controls" },
-    { "id": "keyboard" },
-    { "id": "range" },
-    { "id": "custom-logic" },
-    { "id": "affixes" },
-    { "id": "validation" },
-    { "id": "semantic-styles" }
+    {
+      "id": "basic"
+    },
+    {
+      "id": "constraints"
+    },
+    {
+      "id": "formatter"
+    },
+    {
+      "id": "editing"
+    },
+    {
+      "id": "controls"
+    },
+    {
+      "id": "keyboard"
+    },
+    {
+      "id": "range"
+    },
+    {
+      "id": "custom-logic",
+      "title": "useInputNumber",
+      "description": "使用 useInputNumber 手写 DOM 实现自己的 InputNumber。"
+    },
+    {
+      "id": "affixes"
+    },
+    {
+      "id": "validation"
+    },
+    {
+      "id": "semantic-styles"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
+    }
   ]
 }

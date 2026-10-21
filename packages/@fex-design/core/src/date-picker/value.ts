@@ -23,8 +23,13 @@ export function compareDatePickerValue(left: CalendarValue, right: CalendarValue
   return Temporal.PlainDateTime.compare(left, right)
 }
 export { getCalendarValueDate as getDatePickerValueDate }
-export function getDatePickerValueKey(value: CalendarValue): string { return isCalendarDateTime(value) ? 'datetime:' + value.toString() : getCalendarValueKey(value) }
-export function isSameDatePickerValue(left: CalendarValue | null | undefined, right: CalendarValue | null | undefined): boolean {
+export function getDatePickerValueKey(value: CalendarValue): string {
+  return isCalendarDateTime(value) ? 'datetime:' + value.toString() : getCalendarValueKey(value)
+}
+export function isSameDatePickerValue(
+  left: CalendarValue | null | undefined,
+  right: CalendarValue | null | undefined,
+): boolean {
   return Boolean(left && right && getDatePickerValueKey(left) === getDatePickerValueKey(right))
 }
 

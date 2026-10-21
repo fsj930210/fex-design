@@ -3,14 +3,13 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  interface Props extends Omit<HTMLAttributes<HTMLUListElement>, "class"> {
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class"> {
     class?: string;
     children?: Snippet;
   }
   let { class: className, children, ...rest }: Props = $props();
-  const classList = $derived(cn(paginationContentClassName, className));
 </script>
 
-<ul {...rest} data-slot="pagination-content" class={classList}>
+<div {...rest} data-slot="pagination-content" class={cn(paginationContentClassName, className)}>
   {@render children?.()}
-</ul>
+</div>

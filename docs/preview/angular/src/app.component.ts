@@ -8,7 +8,7 @@ function applyTheme(theme?: string) {
   root.style.colorScheme = current
 }
 
-﻿import { NgComponentOutlet } from '@angular/common'
+import { NgComponentOutlet } from '@angular/common'
 import { ChangeDetectionStrategy, Component, signal, type Type } from '@angular/core'
 import type { ApiValue } from '@fex-design/docs-shared/model'
 import { observeRuntimeHeight } from '../../runtime-resize'

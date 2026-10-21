@@ -11,19 +11,29 @@
     "./*": "./src/*"
   },
   "dependencies": {
+    "@fex-design/angular": "workspace:*",
     "@fex-design/core": "workspace:*",
     "@fex-design/react": "workspace:*",
-    "@fex-design/vue": "workspace:*",
     "@fex-design/solid": "workspace:*",
     "@fex-design/svelte": "workspace:*",
-    "@fex-design/angular": "workspace:*"
+    "@fex-design/vue": "workspace:*"
+  },
+  "devDependencies": {
+    "@angular/core": "22.1.5",
+    "@fex/config-tsconfig": "workspace:*",
+    "@types/react": "latest",
+    "react": "19.2.8",
+    "solid-js": "1.9.15",
+    "svelte": "5.57.0",
+    "typescript": "catalog:",
+    "vue": "3.5.42"
   },
   "peerDependencies": {
+    "@angular/core": "^22.0.0",
     "react": "^19.0.0",
-    "vue": "^3.5.0",
     "solid-js": "^1.9.0",
     "svelte": "^5.0.0",
-    "@angular/core": "^22.0.0"
+    "vue": "^3.5.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -41,15 +51,5 @@
     "@angular/core": {
       "optional": true
     }
-  },
-  "devDependencies": {
-    "@fex/config-tsconfig": "workspace:*",
-    "typescript": "catalog:",
-    "react": "19.2.8",
-    "vue": "3.5.42",
-    "solid-js": "1.9.15",
-    "svelte": "5.57.0",
-    "@angular/core": "22.1.5",
-    "@types/react": "latest"
   }
 }

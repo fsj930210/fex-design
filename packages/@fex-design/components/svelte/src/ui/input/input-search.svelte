@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { cn } from "@fex-design/utils";
   import type { InputSearchMeta } from "@fex-design/core/input/types";
   import {
     inputActionClassName,
     inputSearchAddonClassName,
   } from "@fex-design/components-styles/input";
-  import SearchIcon from '@fex-design/svelte/icons/search.svelte';
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  import SearchIcon from "@fex-design/svelte/icons/search.svelte";
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
   import { Button } from "@fex-design/svelte/ui/button";
   import { untrack } from "svelte";
   import Input from "./input.svelte";
@@ -19,6 +20,8 @@
     prefix,
     suffix,
     addonBefore,
+    addonBeforeButtonProps,
+    addonAfterButtonProps,
     addonAfter,
     onkeydown,
     ...props
@@ -30,14 +33,14 @@
     onValueChange?.(next);
   }
   function search(source: InputSearchMeta["source"]) {
-    if (!loading) onSearch?.(currentValue, { source });
+    if (!loading && !props.disabled) onSearch?.(currentValue, { source });
   }
 </script>
 
 {#snippet prefixAction()}{#if prefix}<button
       type="button"
       aria-label="Search"
-      disabled={loading}
+      disabled={loading || props.disabled}
       class={inputActionClassName}
       onclick={() => search("prefix")}
       >{#if loading}<LoadingIcon
@@ -57,20 +60,24 @@
 {#snippet beforeAction()}{#if addonBefore}<Button
       variant="solid"
       color="primary"
+      {...addonBeforeButtonProps}
+      disabled={loading}
       {loading}
       data-input-addon-fill
       aria-label="Search"
-      class={inputSearchAddonClassName}
+      class={cn(inputSearchAddonClassName, addonBeforeButtonProps?.class)}
       onclick={() => search("addonBefore")}
       >{#if !loading}{@render addonBefore()}{/if}</Button
     >{/if}{/snippet}
 {#snippet afterAction()}<Button
     variant="solid"
     color="primary"
+    {...addonAfterButtonProps}
+    disabled={loading}
     {loading}
     data-input-addon-fill
     aria-label="Search"
-    class={inputSearchAddonClassName}
+    class={cn(inputSearchAddonClassName, addonAfterButtonProps?.class)}
     onclick={() => search("addonAfter")}
     >{#if !loading}{#if addonAfter}{@render addonAfter()}{:else}<SearchIcon
         />{/if}{/if}</Button

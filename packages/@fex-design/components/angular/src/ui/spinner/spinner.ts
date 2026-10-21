@@ -26,7 +26,9 @@ export class SpinnerContainer {
   readonly classNames = input<SpinnerClassNames>({})
   readonly styles = input<SpinnerStyles<string>>({})
   protected readonly hostClassName = createHostClassName(() =>
-    this.spinning() === undefined ? undefined : cn(spinnerContainerClassName, this.classNames().root),
+    this.spinning() === undefined
+      ? undefined
+      : cn(spinnerContainerClassName, this.classNames().root),
   )
   protected readonly overlayClassName = () =>
     cn(this.classNames().overlay, this.text() && 'flex-col')

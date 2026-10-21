@@ -1,15 +1,7 @@
-import {
-  createQrCodeModel,
-  type QrCodeModelOptions,
-} from '@fex-design/core/qrcode'
+import { createQrCodeModel, type QrCodeModelOptions } from '@fex-design/core/qrcode'
 import { qrcodeRootClassName } from '@fex-design/components-styles/qrcode'
 import { cn } from '@fex-design/utils'
-import {
-  createMemo,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createMemo, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { QrCodeContext } from './qrcode-context'
 
 export type QrCodeRootProps = ParentProps<

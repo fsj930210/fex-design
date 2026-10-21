@@ -1,7 +1,11 @@
 <script lang="ts">
-  import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-design/svelte/primitive/progress'
-  import CheckIcon from '@fex-design/svelte/icons/check'
-
+  import {
+    Progress,
+    ProgressTrack,
+    ProgressRange,
+    ProgressValue,
+  } from "@fex-design/svelte/primitive/progress";
+  import CheckIcon from "@fex-design/svelte/icons/check";
 </script>
 
 <div class="grid w-full max-w-md gap-3">
@@ -41,7 +45,9 @@
         <ProgressRange />
       </ProgressTrack>
       <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-        <span class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white">
+        <span
+          class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
+        >
           <CheckIcon class="size-3" />
         </span>
       </ProgressValue>

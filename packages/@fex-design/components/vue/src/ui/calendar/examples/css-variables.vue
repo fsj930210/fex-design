@@ -3,5 +3,34 @@ import { Calendar } from '@fex-design/vue/ui/calendar'
 import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
 </script>
 <template>
-<div style="--calendar-hover-background:var(--success);--calendar-selected-background:var(--primary);--calendar-selected-foreground:var(--primary-foreground);--calendar-today-color:var(--danger)"><Calendar :default-view-date="calendarDemoDate" /></div>
+  <div
+    style="
+      --calendar-hover-background: var(--success);
+      --calendar-selected-background: var(--primary);
+      --calendar-selected-foreground: var(--primary-foreground);
+      --calendar-today-color: var(--danger);
+    "
+  >
+    <Calendar
+      :header-props="{
+        yearSelectTriggerProps: {
+          class:
+            '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+        },
+        monthSelectTriggerProps: {
+          class:
+            '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+        },
+        yearSelectContentProps: {
+          class:
+            '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+        },
+        monthSelectContentProps: {
+          class:
+            '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+        },
+      }"
+      :default-view-date="calendarDemoDate"
+    />
+  </div>
 </template>

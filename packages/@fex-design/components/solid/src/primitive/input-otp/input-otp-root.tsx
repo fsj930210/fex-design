@@ -1,18 +1,18 @@
-import { createInputOTPController } from "@fex-design/core/input-otp/create-input-otp-controller"
+import { createInputOTPController } from '@fex-design/core/input-otp/create-input-otp-controller'
 import type {
   InputOTPChangeMeta,
   InputOTPCompleteMeta,
   InputOTPValue,
-} from "@fex-design/core/input-otp/types"
-import { inputOTPRootClassName } from "@fex-design/components-styles/input-otp"
-import { cn } from "@fex-design/utils"
-import { createEffect, onCleanup, splitProps, type JSX, type ParentProps } from "solid-js"
-import { createCoreStoreSignal } from "@fex-design/solid/primitives/create-core-store-signal"
-import { InputOTPContext } from "./input-otp-context"
+} from '@fex-design/core/input-otp/types'
+import { inputOTPRootClassName } from '@fex-design/components-styles/input-otp'
+import { cn } from '@fex-design/utils'
+import { createEffect, onCleanup, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
+import { InputOTPContext } from './input-otp-context'
 
-export interface InputOTPRootProps
-  extends
-    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, "defaultValue" | "onChange">> {
+export interface InputOTPRootProps extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>
+> {
   value?: InputOTPValue
   defaultValue?: InputOTPValue
   disabled?: boolean
@@ -26,16 +26,16 @@ export type InputOTPProps = InputOTPRootProps
 
 export function InputOTPRoot(props: InputOTPRootProps) {
   const [local, rest] = splitProps(props, [
-    "value",
-    "defaultValue",
-    "disabled",
-    "readOnly",
-    "invalid",
-    "isComplete",
-    "onChange",
-    "onComplete",
-    "class",
-    "children",
+    'value',
+    'defaultValue',
+    'disabled',
+    'readOnly',
+    'invalid',
+    'isComplete',
+    'onChange',
+    'onComplete',
+    'class',
+    'children',
   ])
   const controller = createInputOTPController({
     get value() {
@@ -85,24 +85,24 @@ export function InputOTPRoot(props: InputOTPRootProps) {
     if (element) inputs.set(index, element)
     else inputs.delete(index)
   }
-  const focusInput = (index: number, cursor: "start" | "end" | "all" = "all") => {
+  const focusInput = (index: number, cursor: 'start' | 'end' | 'all' = 'all') => {
     const input = inputs.get(index)
     if (!input || input.disabled) return
     input.focus()
-    const position = cursor === "start" ? 0 : input.value.length
-    input.setSelectionRange(cursor === "all" ? 0 : position, position)
+    const position = cursor === 'start' ? 0 : input.value.length
+    input.setSelectionRange(cursor === 'all' ? 0 : position, position)
   }
 
   return (
     <InputOTPContext.Provider value={{ controller, snapshot, registerInput, focusInput }}>
       <div
         {...rest}
-        role={rest.role ?? "group"}
+        role={rest.role ?? 'group'}
         data-slot="input-otp-root"
-        data-disabled={local.disabled ? "true" : undefined}
-        data-readonly={local.readOnly ? "true" : undefined}
-        data-invalid={local.invalid ? "true" : undefined}
-        data-complete={snapshot().complete ? "true" : undefined}
+        data-disabled={local.disabled ? 'true' : undefined}
+        data-readonly={local.readOnly ? 'true' : undefined}
+        data-invalid={local.invalid ? 'true' : undefined}
+        data-complete={snapshot().complete ? 'true' : undefined}
         class={cn(inputOTPRootClassName, local.class)}
       >
         {local.children}

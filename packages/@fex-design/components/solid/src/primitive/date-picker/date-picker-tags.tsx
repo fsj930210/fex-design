@@ -10,15 +10,54 @@ import { useDatePickerContext } from './context'
 
 export type DatePickerTagsProps = JSX.HTMLAttributes<HTMLDivElement> & { maxCount?: number }
 export function DatePickerTags(props: DatePickerTagsProps) {
-  const [local, rest] = splitProps(props, ['class','style','maxCount'])
+  const [local, rest] = splitProps(props, ['class', 'style', 'maxCount'])
   const context = useDatePickerContext('DatePickerTags')
   const appearance = usePickerAppearance()
-  const tags = () => getDatePickerTagItems(context.calendarValues(), local.maxCount ?? context.maxCount)
-  return <div {...rest} style={mergeStyle(appearance().styles?.tags, local.style)} data-slot="date-picker-tags" class={cn(datePickerMultipleTagsClassName, appearance().classNames?.tags, local.class)}>
-    <For each={tags().items}>{item => <Tag size="sm" data-slot="date-picker-tag" class={appearance().classNames?.tag} style={appearance().styles?.tag}>
-      {formatDatePickerValue(item.value, context)}
-      <TagAction class={appearance().classNames?.tagRemove} style={appearance().styles?.tagRemove} aria-label="移除日期" disabled={context.disabled} onPointerDown={event => { event.preventDefault(); event.stopPropagation() }} onClick={event => { event.stopPropagation(); if (!event.defaultPrevented) context.remove(item.value) }} />
-    </Tag>}</For>
-    <Show when={tags().overflowCount > 0}><Tag size="sm" data-slot="date-picker-tag-overflow" class={appearance().classNames?.tagOverflow} style={appearance().styles?.tagOverflow}>+{tags().overflowCount}</Tag></Show>
-  </div>
+  const tags = () =>
+    getDatePickerTagItems(context.calendarValues(), local.maxCount ?? context.maxCount)
+  return (
+    <div
+      {...rest}
+      style={mergeStyle(appearance().styles?.tags, local.style)}
+      data-slot="date-picker-tags"
+      class={cn(datePickerMultipleTagsClassName, appearance().classNames?.tags, local.class)}
+    >
+      <For each={tags().items}>
+        {(item) => (
+          <Tag
+            size="sm"
+            data-slot="date-picker-tag"
+            class={appearance().classNames?.tag}
+            style={appearance().styles?.tag}
+          >
+            {formatDatePickerValue(item.value, context)}
+            <TagAction
+              class={appearance().classNames?.tagRemove}
+              style={appearance().styles?.tagRemove}
+              aria-label="移除日期"
+              disabled={context.disabled}
+              onPointerDown={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
+              }}
+              onClick={(event) => {
+                event.stopPropagation()
+                if (!event.defaultPrevented) context.remove(item.value)
+              }}
+            />
+          </Tag>
+        )}
+      </For>
+      <Show when={tags().overflowCount > 0}>
+        <Tag
+          size="sm"
+          data-slot="date-picker-tag-overflow"
+          class={appearance().classNames?.tagOverflow}
+          style={appearance().styles?.tagOverflow}
+        >
+          +{tags().overflowCount}
+        </Tag>
+      </Show>
+    </div>
+  )
 }

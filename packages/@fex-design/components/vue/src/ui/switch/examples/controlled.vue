@@ -20,7 +20,7 @@ const pillChecked = ref(false)
             @change="roundedChecked = $event"
             aria-label="rounded 受控"
           ></Switch>
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             <Button size="sm" @click="roundedChecked = true">开启</Button
             ><Button size="sm" @click="roundedChecked = false">关闭</Button>
           </div>
@@ -39,7 +39,7 @@ const pillChecked = ref(false)
             @change="pillChecked = $event"
             aria-label="pill 受控"
           ></Switch>
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             <Button size="sm" @click="pillChecked = true">开启</Button
             ><Button size="sm" @click="pillChecked = false">关闭</Button>
           </div>

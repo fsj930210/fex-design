@@ -28,7 +28,7 @@ Composable numeric input built from the existing Input and Button primitives.
 | controls     | Default, hidden, and replaced step controls.               |
 | keyboard     | Arrow key stepping.                                        |
 | range        | Controlled out-of-range values.                            |
-| custom-logic | Custom UI driven by useInputNumber and the library Button. |
+| custom-logic | Use useInputNumber to hand-write DOM for a custom InputNumber component. |
 | affixes      | Prefix, clear, suffix, and actions together.               |
 | validation   | Visible invalid state and error description.               |
 

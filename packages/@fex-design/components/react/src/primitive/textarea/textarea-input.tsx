@@ -1,11 +1,6 @@
 import { textareaInputClassName } from '@fex-design/components-styles/textarea'
 import { cn } from '@fex-design/utils'
-import {
-  useRef,
-  type ChangeEvent,
-  type ComponentProps,
-  type Ref,
-} from 'react'
+import { useRef, type ChangeEvent, type ComponentProps, type Ref } from 'react'
 import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'

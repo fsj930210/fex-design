@@ -1,7 +1,7 @@
 import { Badge } from '@fex-design/solid/ui/badge'
 export function Offset() {
   return (
-    <div class="flex items-center gap-8">
+    <div class="flex flex-wrap items-center gap-8">
       <Badge count={5}>
         <span class="block size-10 rounded bg-muted-background" />
       </Badge>

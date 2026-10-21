@@ -10,9 +10,10 @@ export interface ProgressValueProps extends ComponentProps<'span'> {
 }
 export function ProgressValue({ ref, className, children, ...props }: ProgressValueProps) {
   const context = useProgressContext('ProgressValue')
-  const display = typeof children === 'function'
-    ? children({ value: context.value, percentage: context.percentage })
-    : children
+  const display =
+    typeof children === 'function'
+      ? children({ value: context.value, percentage: context.percentage })
+      : children
   return (
     <span
       {...props}

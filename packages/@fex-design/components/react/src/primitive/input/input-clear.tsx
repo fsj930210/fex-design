@@ -1,10 +1,10 @@
-import { inputClearClassName } from "@fex-design/components-styles/input"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps, MouseEvent, ReactNode, Ref } from "react"
-import { CircleXIcon } from "@fex-design/react/icons/circle-x"
-import { useInputContext } from "./input-context"
+import { inputClearClassName } from '@fex-design/components-styles/input'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps, MouseEvent, ReactNode, Ref } from 'react'
+import { CircleXIcon } from '@fex-design/react/icons/circle-x'
+import { useInputContext } from './input-context'
 
-export interface InputClearProps extends Omit<ComponentProps<"button">, "type"> {
+export interface InputClearProps extends Omit<ComponentProps<'button'>, 'type'> {
   ref?: Ref<HTMLButtonElement> | undefined
   children?: ReactNode
 }
@@ -12,12 +12,12 @@ export interface InputClearProps extends Omit<ComponentProps<"button">, "type"> 
 export function InputClear({
   className,
   children,
-  "aria-label": ariaLabel = "Clear input",
+  'aria-label': ariaLabel = 'Clear input',
   onClick,
   ref,
   ...props
 }: InputClearProps) {
-  const input = useInputContext("InputClear")
+  const input = useInputContext('InputClear')
 
   return (
     <button

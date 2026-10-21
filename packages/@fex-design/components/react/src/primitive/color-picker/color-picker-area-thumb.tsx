@@ -7,11 +7,7 @@ import { useColorPicker, useColorPickerArea } from './color-picker-context'
 
 export type ColorPickerAreaThumbProps = HTMLAttributes<HTMLSpanElement>
 
-export function ColorPickerAreaThumb({
-  className,
-  style,
-  ...props
-}: ColorPickerAreaThumbProps) {
+export function ColorPickerAreaThumb({ className, style, ...props }: ColorPickerAreaThumbProps) {
   const { snapshot } = useColorPicker()
   const { xChannel: x, yChannel: y } = useColorPickerArea()
   const value = snapshot.value

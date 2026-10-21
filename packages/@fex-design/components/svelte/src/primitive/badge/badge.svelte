@@ -42,6 +42,8 @@
     data-color={color ?? "default"}
     data-size={size}
     class={cn(badgeClassName({ color: presetColor, size }), className)}
-    style={[style, color && !presetColor ? `--badge-color:${color}` : ""].filter(Boolean).join(";") || undefined}
+    style={[style, color && !presetColor ? `--badge-color:${color}` : ""]
+      .filter(Boolean)
+      .join(";") || undefined}
     >{#if value !== undefined}{value}{:else}{@render children?.()}{/if}</span
   >{/if}

@@ -1,5 +1,8 @@
 import { createSignal } from 'solid-js'
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
 import { SearchIcon } from '@fex-design/solid/icons/search'
 import { Button } from '@fex-design/solid/primitive/button'

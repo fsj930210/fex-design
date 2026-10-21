@@ -1,6 +1,9 @@
 <ng-template #content><ng-content /></ng-template>
 @if (containerTemplate(); as container) {
-  <ng-container [ngTemplateOutlet]="container" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), content: content }" />
+<ng-container
+  [ngTemplateOutlet]="container"
+  [ngTemplateOutletContext]="{ $implicit: context(), state: context(), content: content }"
+/>
 } @else {
-  <ng-container [ngTemplateOutlet]="content" />
+<ng-container [ngTemplateOutlet]="content" />
 }

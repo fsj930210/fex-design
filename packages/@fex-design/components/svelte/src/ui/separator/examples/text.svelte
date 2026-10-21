@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { Separator } from '@fex-design/svelte/primitive/separator'
+  import { Separator } from "@fex-design/svelte/primitive/separator";
 </script>
 
 <div class="grid w-full max-w-xl gap-4">
-  <div class="flex items-center gap-2">
+  <div class="flex flex-wrap items-center gap-2">
     <Separator class="w-12" /><span
       class="shrink-0 text-sm text-muted-foreground">Start</span
     ><Separator class="flex-1" />
   </div>
-  <div class="flex items-center gap-2">
+  <div class="flex flex-wrap items-center gap-2">
     <Separator class="flex-1" /><span
       class="shrink-0 text-sm text-muted-foreground">Center</span
     ><Separator class="flex-1" />
   </div>
-  <div class="flex items-center gap-2">
+  <div class="flex flex-wrap items-center gap-2">
     <Separator class="flex-1" /><span
       class="shrink-0 text-sm text-muted-foreground">End</span
     ><Separator class="w-12" />

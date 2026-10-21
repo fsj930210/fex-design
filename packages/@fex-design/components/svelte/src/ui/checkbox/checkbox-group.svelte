@@ -2,7 +2,7 @@
   import type { CheckboxValue } from "@fex-design/core/checkbox/types";
   import type { Snippet } from "svelte";
   import Checkbox from "./checkbox.svelte";
-  import PrimitiveGroup from '@fex-design/svelte/primitive/checkbox/checkbox-group.svelte';
+  import PrimitiveGroup from "@fex-design/svelte/primitive/checkbox/checkbox-group.svelte";
   import type { HTMLAttributes } from "svelte/elements";
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {
     value?: CheckboxValue[];

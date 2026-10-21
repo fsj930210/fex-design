@@ -1,7 +1,7 @@
 <script lang="ts">
-  import PrimitiveAvatar from '@fex-design/svelte/primitive/avatar/avatar.svelte';
-  import AvatarImage from '@fex-design/svelte/primitive/avatar/avatar-image.svelte';
-  import AvatarFallback from '@fex-design/svelte/primitive/avatar/avatar-fallback.svelte';
+  import PrimitiveAvatar from "@fex-design/svelte/primitive/avatar/avatar.svelte";
+  import AvatarImage from "@fex-design/svelte/primitive/avatar/avatar-image.svelte";
+  import AvatarFallback from "@fex-design/svelte/primitive/avatar/avatar-fallback.svelte";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import type {

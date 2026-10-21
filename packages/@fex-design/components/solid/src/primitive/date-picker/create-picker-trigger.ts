@@ -16,7 +16,10 @@ interface TriggerOwner {
 export function createPickerTrigger(owner: TriggerOwner) {
   const inheritedPopover = useContext(PopoverContext)
   const containerScope = useContext(PickerContainerContext)
-  const popover = containerScope && inheritedPopover === containerScope.parentPopover ? undefined : inheritedPopover
+  const popover =
+    containerScope && inheritedPopover === containerScope.parentPopover
+      ? undefined
+      : inheritedPopover
   let reference: HTMLElement | null = null
   const ref = (element: HTMLElement | null) => {
     reference = element
@@ -24,20 +27,35 @@ export function createPickerTrigger(owner: TriggerOwner) {
     popover.triggerElement.current = element
     popover.overlay.setReferenceElement(element)
   }
-  onCleanup(() => { if (popover?.triggerElement.current === reference) ref(null) })
+  onCleanup(() => {
+    if (popover?.triggerElement.current === reference) ref(null)
+  })
   function focus(event: FocusEvent, part?: DatePickerInputPart) {
     if (event.defaultPrevented || owner.disabled) return
     if (part) owner.setActivePart?.(part)
     if (popover) {
-      popover.overlay.trigger.focus({ target: event.target, currentTarget: event.currentTarget, event,
-        preventDefault: () => event.preventDefault(), stopPropagation: () => event.stopPropagation() })
+      popover.overlay.trigger.focus({
+        target: event.target,
+        currentTarget: event.currentTarget,
+        event,
+        preventDefault: () => event.preventDefault(),
+        stopPropagation: () => event.stopPropagation(),
+      })
       if (part && owner.controller.getState().open) owner.openPanel(part)
     } else owner.openPanel(part)
   }
   function click(event: MouseEvent) {
     if (event.defaultPrevented || owner.disabled) return
-    const part = event.target instanceof Element ? event.target.closest('[data-range-part]')?.getAttribute('data-range-part') : null
+    const part =
+      event.target instanceof Element
+        ? event.target.closest('[data-range-part]')?.getAttribute('data-range-part')
+        : null
     owner.openPanel(getDatePickerInputPart(part))
   }
-  return { ref, focus, click, focusInput: (part: DatePickerInputPart) => focusDatePickerInput(reference, part) }
+  return {
+    ref,
+    focus,
+    click,
+    focusInput: (part: DatePickerInputPart) => focusDatePickerInput(reference, part),
+  }
 }

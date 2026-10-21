@@ -1,5 +1,3 @@
-
-
 export const badgePresetColors = ['primary', 'info', 'success', 'warning', 'danger'] as const
 export type BadgePresetColor = (typeof badgePresetColors)[number]
 export type BadgeColor = BadgePresetColor | (string & {})

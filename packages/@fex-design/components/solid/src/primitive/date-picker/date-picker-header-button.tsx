@@ -38,7 +38,10 @@ export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
       type="button"
       data-slot="date-picker-header-button"
       data-action={local.action}
-      aria-label={rest['aria-label'] ?? getDatePickerHeaderActionLabel(local.action, calendar.controller.getOptions().locale)}
+      aria-label={
+        rest['aria-label'] ??
+        getDatePickerHeaderActionLabel(local.action, calendar.controller.getOptions().locale)
+      }
       class={cn(datePickerHeaderNavigationClassName, local.class)}
       onClick={(event) => {
         callEventHandler(local.onClick, event)
@@ -46,10 +49,20 @@ export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
       }}
     >
       {local.children === undefined ? (
-        double()
-          ? previous() ? <ChevronsLeftIcon class="size-4 rtl:rotate-180" /> : <ChevronsRightIcon class="size-4 rtl:rotate-180" />
-          : previous() ? <ChevronLeftIcon class="size-4 rtl:rotate-180" /> : <ChevronRightIcon class="size-4 rtl:rotate-180" />
-      ) : local.children}
+        double() ? (
+          previous() ? (
+            <ChevronsLeftIcon class="size-4 rtl:rotate-180" />
+          ) : (
+            <ChevronsRightIcon class="size-4 rtl:rotate-180" />
+          )
+        ) : previous() ? (
+          <ChevronLeftIcon class="size-4 rtl:rotate-180" />
+        ) : (
+          <ChevronRightIcon class="size-4 rtl:rotate-180" />
+        )
+      ) : (
+        local.children
+      )}
     </Button>
   )
 }

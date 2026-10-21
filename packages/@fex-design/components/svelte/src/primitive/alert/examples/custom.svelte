@@ -1,7 +1,12 @@
 <script lang="ts">
-  import StarIcon from '@fex-design/svelte/icons/star.svelte';
-  import { AlertAction, AlertIcon, AlertTitle, Alert } from '@fex-design/svelte/primitive/alert'
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
+  import StarIcon from "@fex-design/svelte/icons/star.svelte";
+  import {
+    AlertAction,
+    AlertIcon,
+    AlertTitle,
+    Alert,
+  } from "@fex-design/svelte/primitive/alert";
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
   import { alertCloseClassName } from "@fex-design/components-styles/alert";
   let visible = $state(true);
 </script>

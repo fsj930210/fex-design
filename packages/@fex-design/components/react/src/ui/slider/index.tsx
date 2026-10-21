@@ -61,7 +61,9 @@ export function Slider({
   })
   const count = currentValues.length
   const returnValue = (next: number[]) =>
-    next.length > 0 && (typeof value === 'number' || typeof defaultValue === 'number') ? next[0]! : next
+    next.length > 0 && (typeof value === 'number' || typeof defaultValue === 'number')
+      ? next[0]!
+      : next
   const rootMarks = marks.map((mark) => mark.value)
   const disabledThumbs = Array.isArray(disabled) ? disabled : undefined
   return (
@@ -83,9 +85,10 @@ export function Slider({
     >
       <SliderTrack className={classNames?.track} style={styles?.track}>
         {included && <SliderRange className={classNames?.range} style={styles?.range} />}
-        {dots && getSliderDotValues(props.min, props.max, props.step).map((dot) => (
-          <SliderMark key={dot} value={dot} aria-hidden="true" />
-        ))}
+        {dots &&
+          getSliderDotValues(props.min, props.max, props.step).map((dot) => (
+            <SliderMark key={dot} value={dot} aria-hidden="true" />
+          ))}
         {marks.map((mark) => (
           <SliderMark
             key={mark.value}

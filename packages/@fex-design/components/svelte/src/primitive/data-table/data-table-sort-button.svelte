@@ -4,7 +4,7 @@
 >
   import { dataTableSortButtonClassName } from "@fex-design/components-styles/data-table";
   import type { Column, RowData, TableFeatures } from "@tanstack/table-core";
-  import ChevronRightIcon from '@fex-design/svelte/icons/chevron-right.svelte';
+  import ChevronRightIcon from "@fex-design/svelte/icons/chevron-right.svelte";
   import { Button } from "@fex-design/svelte/primitive/button";
 
   interface SortableColumn {

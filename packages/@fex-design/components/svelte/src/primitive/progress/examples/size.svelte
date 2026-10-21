@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-design/svelte/primitive/progress'
-
+  import {
+    Progress,
+    ProgressTrack,
+    ProgressRange,
+    ProgressValue,
+  } from "@fex-design/svelte/primitive/progress";
 </script>
 
 <div class="grid w-full max-w-md gap-3">

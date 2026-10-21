@@ -6,7 +6,7 @@
   } from "@fex-design/core/tree-select/types";
   import type { Snippet } from "svelte";
   import { setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import Popover from "../popover/popover.svelte";
   import { treeSelectContextKey, type TreeSelectContext } from "./context";
   interface Props {

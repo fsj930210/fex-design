@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TagClassNames, TagOptions, TagStyles } from '@fex-design/core/tag/types'
-import { computed, type StyleValue, useAttrs } from 'vue'
+import { computed, type ButtonHTMLAttributes, type StyleValue, useAttrs } from 'vue'
 import PrimitiveTag from '@fex-design/vue/primitive/tag/tag.vue'
 import TagAction from '@fex-design/vue/primitive/tag/tag-action.vue'
 
@@ -8,6 +8,9 @@ defineOptions({ name: 'Tag', inheritAttrs: false })
 const props = withDefaults(
   defineProps<
     TagOptions & {
+      actionProps?:
+        | Omit<ButtonHTMLAttributes, 'innerHTML' | 'textContent' | 'disabled' | 'onClick'>
+        | undefined
       closable?: boolean
       classNames?: TagClassNames
       styles?: TagStyles<StyleValue>
@@ -32,21 +35,23 @@ const rootStyle = computed(() => [attrs.style, props.styles?.root])
   >
     <slot />
     <TagAction
+      v-bind="{ ...props.actionProps, onClick: undefined }"
       v-if="closable && $slots.closeIcon"
-      aria-label="Close"
+      :aria-label="props.actionProps?.['aria-label'] ?? 'Close'"
       :disabled="disabled"
-      :class="classNames?.close"
-      :style="styles?.close"
+      :class="[classNames?.close, props.actionProps?.class]"
+      :style="[styles?.close, props.actionProps?.style]"
       @click="emit('close', $event)"
     >
       <slot name="closeIcon" />
     </TagAction>
     <TagAction
+      v-bind="{ ...props.actionProps, onClick: undefined }"
       v-else-if="closable"
-      aria-label="Close"
+      :aria-label="props.actionProps?.['aria-label'] ?? 'Close'"
       :disabled="disabled"
-      :class="classNames?.close"
-      :style="styles?.close"
+      :class="[classNames?.close, props.actionProps?.class]"
+      :style="[styles?.close, props.actionProps?.style]"
       @click="emit('close', $event)"
     />
   </PrimitiveTag>

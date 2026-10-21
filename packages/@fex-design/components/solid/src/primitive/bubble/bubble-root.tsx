@@ -6,13 +6,7 @@ import {
 } from '@fex-design/core/bubble/types'
 import { bubbleClassName } from '@fex-design/components-styles/bubble'
 import { cn } from '@fex-design/utils'
-import {
-  createMemo,
-  splitProps,
-  useContext,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createMemo, splitProps, useContext, type JSX, type ParentProps } from 'solid-js'
 import { BubbleContext, MessageSideContext } from './bubble-context'
 
 export interface BubbleProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {

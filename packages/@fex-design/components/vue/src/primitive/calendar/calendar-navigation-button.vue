@@ -21,4 +21,22 @@ function click(event: MouseEvent) {
 const element = useTemplateRef<HTMLButtonElement>('element')
 defineExpose({ element })
 </script>
-<template><button v-bind="nativeAttrs()" ref="element" type="button" data-slot="calendar-navigation-button" :data-action="action" :class="cn(calendarNavigationButtonClassName, normalizeClass(attrs.class))" @click="click"><slot><ChevronLeftIcon v-if="action.startsWith('previous')" class="size-4 rtl:rotate-180" /><ChevronRightIcon v-else-if="action.startsWith('next')" class="size-4 rtl:rotate-180" /></slot></button></template>
+<template>
+  <button
+    v-bind="nativeAttrs()"
+    ref="element"
+    type="button"
+    data-slot="calendar-navigation-button"
+    :data-action="action"
+    :class="cn(calendarNavigationButtonClassName, normalizeClass(attrs.class))"
+    @click="click"
+  >
+    <slot
+      ><ChevronLeftIcon
+        v-if="action.startsWith('previous')"
+        class="size-4 rtl:rotate-180" /><ChevronRightIcon
+        v-else-if="action.startsWith('next')"
+        class="size-4 rtl:rotate-180"
+    /></slot>
+  </button>
+</template>

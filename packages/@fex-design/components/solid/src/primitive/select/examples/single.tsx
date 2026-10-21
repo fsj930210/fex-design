@@ -1,1 +1,15 @@
-import { createSignal } from 'solid-js'; import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/solid/primitive/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]; export default function Example(){const [value,setValue]=createSignal('react'); return <SelectRoot options={options} value={value()} onChange={(next)=>setValue(String(next))}><SelectTrigger class="w-72"/><SelectContent/></SelectRoot>}
+import { createSignal } from 'solid-js'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+]
+export default function Example() {
+  const [value, setValue] = createSignal('react')
+  return (
+    <SelectRoot options={options} value={value()} onChange={(next) => setValue(String(next))}>
+      <SelectTrigger class="w-72" />
+      <SelectContent />
+    </SelectRoot>
+  )
+}

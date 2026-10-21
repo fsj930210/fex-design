@@ -18,17 +18,9 @@
 </script>
 
 {#if children}
-  <InputClear
-    {...rest}
-    data-slot="input-number-clear"
-    onclick={clear}
-  >
+  <InputClear {...rest} data-slot="input-number-clear" onclick={clear}>
     {@render children()}
   </InputClear>
 {:else}
-  <InputClear
-    {...rest}
-    data-slot="input-number-clear"
-    onclick={clear}
-  />
+  <InputClear {...rest} data-slot="input-number-clear" onclick={clear} />
 {/if}

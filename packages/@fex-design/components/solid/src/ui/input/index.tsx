@@ -1,5 +1,8 @@
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
 import type { InputSearchMeta } from '@fex-design/core/input/types'
 import { cn } from '@fex-design/utils'
 import { createMemo, createSignal, Show, splitProps, type JSX } from 'solid-js'
@@ -42,6 +45,7 @@ export function Input(props: InputProps) {
     'style',
     'disabled',
     'readOnly',
+    'data-warning',
   ])
   const [internalValue, setInternalValue] = createSignal(local.defaultValue ?? '')
   const currentValue = createMemo(() => local.value ?? internalValue())
@@ -58,6 +62,7 @@ export function Input(props: InputProps) {
       variant={local.variant}
       disabled={local.disabled}
       readOnly={local.readOnly}
+      data-warning={local.dataWarning}
       class={cn(local.classNames?.root, local.class)}
       style={rootStyle()}
     >
@@ -130,6 +135,8 @@ export function InputPassword(props: InputPasswordProps) {
 }
 
 function SearchAction(props: {
+  disabled?: boolean | undefined
+  buttonProps?: InputSearchProps['addonAfterButtonProps']
   children: JSX.Element
   loading: boolean
   styled?: boolean
@@ -139,10 +146,12 @@ function SearchAction(props: {
     <Button
       variant="solid"
       color="primary"
+      {...props.buttonProps}
+      disabled={props.loading || props.disabled}
       loading={props.loading}
       data-input-addon-fill=""
       aria-label="Search"
-      class={inputSearchAddonClassName}
+      class={cn(inputSearchAddonClassName, props.buttonProps?.class)}
       onClick={props.onClick}
     >
       {props.loading ? null : props.children}
@@ -167,6 +176,8 @@ export function InputSearch(props: InputSearchProps) {
     'defaultValue',
     'onValueChange',
     'onSearch',
+    'addonBeforeButtonProps',
+    'addonAfterButtonProps',
     'loading',
     'prefix',
     'suffix',
@@ -177,7 +188,7 @@ export function InputSearch(props: InputSearchProps) {
   const [internal, setInternal] = createSignal(local.defaultValue ?? '')
   const current = createMemo(() => local.value ?? internal())
   const search = (source: InputSearchMeta['source']) => {
-    if (!local.loading) local.onSearch?.(current(), { source })
+    if (!local.loading && !props.disabled) local.onSearch?.(current(), { source })
   }
   const update = (value: string) => {
     if (local.value === undefined) setInternal(value)
@@ -185,7 +196,15 @@ export function InputSearch(props: InputSearchProps) {
   }
   const action = (content: JSX.Element, source: InputSearchMeta['source'], styled = false) =>
     content == null ? null : (
-      <SearchAction loading={local.loading ?? false} styled={styled} onClick={() => search(source)}>
+      <SearchAction
+        disabled={props.disabled}
+        buttonProps={
+          source === 'addonBefore' ? local.addonBeforeButtonProps : local.addonAfterButtonProps
+        }
+        loading={local.loading ?? false}
+        styled={styled}
+        onClick={() => search(source)}
+      >
         {content}
       </SearchAction>
     )

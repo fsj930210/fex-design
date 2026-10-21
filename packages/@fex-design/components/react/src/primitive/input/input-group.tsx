@@ -1,6 +1,6 @@
-import { inputGroupClassName } from "@fex-design/components-styles/input"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes, Ref } from "react"
+import { inputGroupClassName } from '@fex-design/components-styles/input'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes, Ref } from 'react'
 
 export interface InputGroupProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement> | undefined

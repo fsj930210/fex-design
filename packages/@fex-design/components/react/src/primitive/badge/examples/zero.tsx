@@ -4,7 +4,7 @@ import { SwitchRoot, SwitchThumb } from '@fex-design/react/primitive/switch'
 export function Zero() {
   const [showZero, setShowZero] = useState(false)
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-6">
       <label className="flex items-center gap-2">
         <SwitchRoot checked={showZero} onChange={setShowZero} aria-label="显示 0">
           <SwitchThumb />

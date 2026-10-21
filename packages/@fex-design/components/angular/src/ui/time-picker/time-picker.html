@@ -1,20 +1,95 @@
 @if (triggerTemplate(); as custom) {
-  <div timePickerTrigger [size]="size()" [variant]="variant()" [placeholder]="placeholder()" [prefix]="prefix()" [suffix]="suffix()" [inputProps]="inputProps()" [allowClear]="allowClear()" [invalid]="invalid()"><ng-template #trigger let-state="state"><ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: state, state: state }" /></ng-template></div>
-} @else { <div timePickerTrigger [size]="size()" [variant]="variant()" [prefix]="prefix()" [suffix]="suffix()" [inputProps]="inputProps()" [placeholder]="placeholder()" [allowClear]="allowClear()" [invalid]="invalid()"></div> }
+<ng-container
+  [ngTemplateOutlet]="custom"
+  [ngTemplateOutletContext]="{ $implicit: state, state: state }"
+/>
+} @else {
+<div
+  timePickerTrigger
+  [inputRootProps]="{ class: classNames()?.root, style: styles()?.root }"
+  [size]="size()"
+  [variant]="variant()"
+  [prefix]="prefix()"
+  [suffix]="suffix()"
+  [inputProps]="styledInputProps()"
+  [placeholder]="placeholder()"
+  [allowClear]="allowClear()"
+  [invalid]="invalid()"
+></div>
+}
 <ng-template popoverPortal>
-  <div timePickerContent>
-    @if (panelTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: state, state: state, panel: defaultPanel }" /> }
-    @else { <ng-container [ngTemplateOutlet]="defaultPanel" /> }
-    @if (footerTemplate(); as footer) { <ng-container [ngTemplateOutlet]="footer" [ngTemplateOutletContext]="{ $implicit: state, state: state }" /> }
+  <div timePickerContent [class]="contentClass()" [style]="contentStyle()">
+    @if (panelTemplate(); as custom) {
+    <ng-container
+      [ngTemplateOutlet]="custom"
+      [ngTemplateOutletContext]="{ $implicit: state, state: state, panel: defaultPanel }"
+    />
+    } @else { <ng-container [ngTemplateOutlet]="defaultPanel" /> } @if (footerTemplate(); as footer)
+    {
+    <ng-container
+      [ngTemplateOutlet]="footer"
+      [ngTemplateOutletContext]="{ $implicit: state, state: state }"
+    />
+    }
   </div>
 </ng-template>
-<ng-template #defaultPanel><div timePickerPanel>
-  @for (column of columns(); track column.unit) {
-    @switch (column.unit) {
-      @case ('hour') { <div timePickerHourColumn [step]="step()?.hour ?? 1"></div> }
-      @case ('minute') { <div timePickerMinuteColumn [step]="step()?.minute ?? 1"></div> }
-      @case ('second') { <div timePickerSecondColumn [step]="step()?.second ?? 1"></div> }
-      @case ('period') { <div timePickerPeriodColumn></div> }
-    }
-  }
-</div></ng-template>
+<ng-template #defaultPanel
+  ><div
+    timePickerPanel
+    [class]="cn(classNames()?.panel, panelProps()?.class)"
+    [style]="mergeStyle(styles()?.panel, panelProps()?.style)"
+  >
+    @for (column of columns(); track column.unit) { @switch (column.unit) { @case ('hour') {
+    <div
+      timePickerHourColumn
+      [class]="cn(classNames()?.column, hourColumnProps()?.class)"
+      [style]="mergeStyle(styles()?.column, hourColumnProps()?.style)"
+      [itemClass]="classNames()?.item"
+      [itemStyle]="styles()?.item"
+      [selectedItemClass]="classNames()?.selectedItem"
+      [selectedItemStyle]="styles()?.selectedItem"
+      [step]="hourColumnProps()?.step ?? step()?.hour ?? 1"
+      [scrollbarProps]="hourColumnProps()?.scrollbarProps"
+      [disabled]="hourColumnProps()?.disabled ?? false"
+    ></div>
+    } @case ('minute') {
+    <div
+      timePickerMinuteColumn
+      [class]="cn(classNames()?.column, minuteColumnProps()?.class)"
+      [style]="mergeStyle(styles()?.column, minuteColumnProps()?.style)"
+      [itemClass]="classNames()?.item"
+      [itemStyle]="styles()?.item"
+      [selectedItemClass]="classNames()?.selectedItem"
+      [selectedItemStyle]="styles()?.selectedItem"
+      [step]="minuteColumnProps()?.step ?? step()?.minute ?? 1"
+      [scrollbarProps]="minuteColumnProps()?.scrollbarProps"
+      [disabled]="minuteColumnProps()?.disabled ?? false"
+    ></div>
+    } @case ('second') {
+    <div
+      timePickerSecondColumn
+      [class]="cn(classNames()?.column, secondColumnProps()?.class)"
+      [style]="mergeStyle(styles()?.column, secondColumnProps()?.style)"
+      [itemClass]="classNames()?.item"
+      [itemStyle]="styles()?.item"
+      [selectedItemClass]="classNames()?.selectedItem"
+      [selectedItemStyle]="styles()?.selectedItem"
+      [step]="secondColumnProps()?.step ?? step()?.second ?? 1"
+      [scrollbarProps]="secondColumnProps()?.scrollbarProps"
+      [disabled]="secondColumnProps()?.disabled ?? false"
+    ></div>
+    } @case ('period') {
+    <div
+      timePickerPeriodColumn
+      [class]="cn(classNames()?.column, periodColumnProps()?.class)"
+      [style]="mergeStyle(styles()?.column, periodColumnProps()?.style)"
+      [itemClass]="classNames()?.item"
+      [itemStyle]="styles()?.item"
+      [selectedItemClass]="classNames()?.selectedItem"
+      [selectedItemStyle]="styles()?.selectedItem"
+      [scrollbarProps]="periodColumnProps()?.scrollbarProps"
+      [disabled]="periodColumnProps()?.disabled ?? false"
+    ></div>
+    } } }
+  </div></ng-template
+>

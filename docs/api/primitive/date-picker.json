@@ -1044,11 +1044,7 @@
       "title": "替换面板容器",
       "description": "替换默认 Popover，继续使用相同选择逻辑。"
     },
-    {
-      "id": "styles",
-      "title": "自定义样式",
-      "description": "对照默认样式，定制紫色输入边框、浮层背景、日历选中色和底部。"
-    },
+
     {
       "id": "direction",
       "title": "LTR / RTL",
@@ -1073,6 +1069,18 @@
       "id": "date-time-disabled",
       "title": "禁用日期时间",
       "description": "disabledTime 根据日期与范围端点限制可选时间。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 700
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 700
     }
   ],
   "components": [

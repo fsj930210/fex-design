@@ -57,7 +57,13 @@
       "title": "BadgeGroup 集合溢出",
       "description": "使用 maxCount 收起过多的徽标，并显示 +N。"
     },
-    { "id": "direction", "title": "LTR 与 RTL", "description": "对比逻辑行内结束侧的附着位置。" }
+    { "id": "direction", "title": "LTR 与 RTL", "description": "对比逻辑行内结束侧的附着位置。" },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
+    }
   ],
   "components": [
     {

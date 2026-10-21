@@ -9,4 +9,12 @@ export { CalendarCell } from './calendar-cell'
 export { CalendarCellTrigger } from './calendar-cell-trigger'
 export { CalendarFooter } from './calendar-footer'
 export { createCalendarState } from './calendar-state'
-export type { CalendarOptions, CalendarController, CalendarValue, CalendarNavigationAction, CalendarWeekHeaderItem } from '@fex-design/core/calendar'
+export type {
+  CalendarOptions,
+  CalendarController,
+  CalendarValue,
+  CalendarNavigationAction,
+  CalendarWeekHeaderItem,
+} from '@fex-design/core/calendar'
+
+export type { CalendarHeaderChildProps } from './calendar-header-customization'

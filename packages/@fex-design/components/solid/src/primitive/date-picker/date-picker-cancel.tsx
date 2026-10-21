@@ -1,7 +1,6 @@
 import { isPickerActionBlocked } from '@fex-design/core/date-picker/view'
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 
-
 import { datePickerCancelClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import { splitProps } from 'solid-js'
@@ -22,7 +21,9 @@ export function DatePickerCancel(props: ButtonProps) {
         callEventHandler(local.onClick, event)
         if (!isPickerActionBlocked(event)) picker.cancel()
       }}
-    >{local.children === undefined ? "取消" : local.children}</Button>
+    >
+      {local.children === undefined ? '取消' : local.children}
+    </Button>
   )
 }
 

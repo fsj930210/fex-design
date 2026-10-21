@@ -11,6 +11,8 @@ export interface MentionsContext {
   readOnly: () => boolean
   invalid: () => boolean
   required: () => boolean
+  ariaInvalid: () => string | boolean | undefined
+  dataWarning: () => string | undefined
 }
 
 export function setMentionsContext(context: MentionsContext) {

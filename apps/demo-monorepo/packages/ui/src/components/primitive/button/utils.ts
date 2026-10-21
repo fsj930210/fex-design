@@ -1,5 +1,3 @@
-
-
 /** Button 的视觉类型。 */
 export type ButtonVariant = 'solid' | 'outlined' | 'filled' | 'text' | 'link' | 'dashed'
 

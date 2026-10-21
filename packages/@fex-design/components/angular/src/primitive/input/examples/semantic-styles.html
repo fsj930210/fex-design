@@ -1,0 +1,49 @@
+<div class="grid w-full gap-3">
+  <div
+    inputRoot
+    [value]="value()"
+    (valueChange)="value.set($event)"
+    class="border-violet-300 hover:border-violet-400 focus-within:border-violet-600 focus-within:ring-violet-600/20"
+  >
+    <span inputPrefix class="text-violet-500">@</span
+    ><input inputControl class="font-medium" />@if(value()){<button
+      inputClear
+      class="hover:text-violet-700"
+    ></button
+    >}
+  </div>
+  <div inputRoot defaultValue="secret">
+    <input inputControl [type]="visible() ? 'text' : 'password'" /><span inputSuffix
+      ><button
+        type="button"
+        data-slot="input-action"
+        [class]="actionClass"
+        [attr.aria-label]="visible() ? 'Hide password' : 'Show password'"
+        [attr.aria-pressed]="visible()"
+        (click)="visible.set(!visible())"
+      >
+        @if(visible()){<eye-off-icon />}@else{<eye-icon />}
+      </button></span
+    >
+  </div>
+  <div inputGroup>
+    <div
+      inputRoot
+      defaultValue="主题"
+      class="[--input-background:#faf5ff] [--input-border-color:#d8b4fe] [--input-ring-color:#9333ea]"
+    >
+      <input inputControl />
+    </div>
+    <span inputAddonAfter
+      ><button
+        button
+        variant="solid"
+        color="primary"
+        data-input-addon-fill=""
+        aria-label="Search"
+        [class]="searchClass"
+      >
+        <search-icon /></button
+    ></span>
+  </div>
+</div>

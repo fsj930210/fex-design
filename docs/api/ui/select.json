@@ -70,6 +70,16 @@
       "name": "popupRender",
       "type": "(menu, { close }) => content",
       "description": "包装或替换完整菜单，并提供 close 关闭方法。Vue 使用 popup 作用域 slot（menu 为可渲染组件）；Svelte 使用 popupRender snippet（menu 为 snippet）；Angular 使用 #popupRender 模板（menu 为 TemplateRef）。"
+    },
+    {
+      "name": "triggerProps",
+      "type": "Direct Primitive part configuration",
+      "description": "传递给对应直接部件，间接配置继续使用子组件原有契约。"
+    },
+    {
+      "name": "contentProps",
+      "type": "Direct Primitive part configuration",
+      "description": "传递给对应直接部件，间接配置继续使用子组件原有契约。"
     }
   ],
   "events": [

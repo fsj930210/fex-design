@@ -59,7 +59,6 @@ export function LayerComparison(props: { slug: string; framework: Framework }) {
     <section class="my-8">
       <div class="mb-4">
         <h2 class="text-xl font-bold tracking-tight text-foreground">架构与调用对比</h2>
-        
       </div>
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -150,4 +149,3 @@ export function LayerComparison(props: { slug: string; framework: Framework }) {
     </section>
   )
 }
-

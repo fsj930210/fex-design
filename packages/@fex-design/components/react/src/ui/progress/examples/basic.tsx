@@ -1,4 +1,4 @@
-﻿import { Progress } from "@fex-design/react/ui/progress"
+﻿import { Progress } from '@fex-design/react/ui/progress'
 
 export function ProgressBasicExample() {
   return (

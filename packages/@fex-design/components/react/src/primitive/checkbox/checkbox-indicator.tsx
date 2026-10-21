@@ -2,11 +2,11 @@ import {
   checkboxCheckIconClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
-} from "@fex-design/components-styles/checkbox"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes } from "react"
-import { CheckIcon } from "@fex-design/react/icons/check"
-import { MinusIcon } from "@fex-design/react/icons/minus"
+} from '@fex-design/components-styles/checkbox'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes } from 'react'
+import { CheckIcon } from '@fex-design/react/icons/check'
+import { MinusIcon } from '@fex-design/react/icons/minus'
 
 export type CheckboxIndicatorProps = HTMLAttributes<HTMLSpanElement>
 

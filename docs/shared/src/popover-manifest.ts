@@ -2,8 +2,8 @@ export const popoverExamples = {
   primitive: [
     {
       id: 'custom-logic',
-      title: '自定义逻辑层',
-      description: '使用各框架公开逻辑适配器驱动自定义结构。',
+      title: 'usePopover',
+      description: '使用 usePopover / createPopover 手写 DOM 实现自己的 Popover。',
     },
     {
       id: 'basic',
@@ -40,12 +40,24 @@ export const popoverExamples = {
       title: '偏移',
       description: '通过 sideOffset 与 alignOffset 调整位置。',
     },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
+      height: 440,
+    },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
     {
       id: 'custom-logic',
-      title: '自定义逻辑层',
-      description: '使用各框架公开逻辑适配器驱动自定义结构。',
+      title: 'usePopover',
+      description: '使用 usePopover / createPopover 手写 DOM 实现自己的 Popover。',
     },
     {
       id: 'basic',
@@ -86,6 +98,12 @@ export const popoverExamples = {
       id: 'semantic-styles',
       title: '按部位自定义样式',
       description: '分别设置浮层面板、标题、正文和箭头的样式。',
+    },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
+      height: 440,
     },
   ],
 } as const

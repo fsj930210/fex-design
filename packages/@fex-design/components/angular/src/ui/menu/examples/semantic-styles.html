@@ -1,0 +1,17 @@
+<div class="grid min-h-80 w-full max-w-xl content-start gap-3">
+  <div class="flex gap-2">
+    <button button size="sm" (click)="show(false)">默认样式</button>
+    <button button size="sm" (click)="show(true)">整体定制</button>
+  </div>
+  <div
+    menu
+    layout="vertical"
+    [defaultValue]="['overview']"
+    [openValues]="open()"
+    (openValuesChange)="open.set($event)"
+    class="w-44 max-w-full"
+    [items]="items()"
+    [classNames]="names()"
+    [styles]="partStyles()"
+  ></div>
+</div>

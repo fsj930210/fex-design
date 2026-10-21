@@ -8,8 +8,8 @@
     "./shared/*": "./src/shared/*"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.6.13",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^3.0.0",
-    "@floating-ui/dom": "^1.6.13"
+    "tailwind-merge": "^3.0.0"
   }
 }

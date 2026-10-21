@@ -1,10 +1,6 @@
 import { textareaClearClassName } from '@fex-design/components-styles/textarea'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { Show } from 'solid-js'
 import { XIcon } from '@fex-design/solid/icons/x'
 import { Button } from '../button/button'

@@ -3,7 +3,7 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
   import { Button as PrimitiveButton } from "@fex-design/svelte/primitive/button";
   import { getTextareaContext } from "./context";
 

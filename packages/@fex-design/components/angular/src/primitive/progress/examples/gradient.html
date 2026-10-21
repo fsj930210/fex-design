@@ -3,11 +3,9 @@
     <div progressTrack>
       <div progressRange class="bg-[linear-gradient(to_right,_#1677ff,_#87d068)]"></div>
     </div>
-    <span progressValue>
-      90%
-    </span>
+    <span progressValue> 90% </span>
   </div>
-  <div class="flex items-center gap-6">
+  <div class="flex flex-wrap items-center gap-6">
     <div progressRoot [value]="90" variant="circle" [size]="96" class="relative">
       <svg progressCircle>
         <defs>
@@ -20,9 +18,7 @@
         <circle progressCircleRange stroke="url(#progress-gradient-circle)" />
       </svg>
       <div class="absolute inset-0 flex items-center justify-center">
-        <span progressValue>
-          90%
-        </span>
+        <span progressValue> 90% </span>
       </div>
     </div>
     <div progressRoot [value]="90" variant="dashboard" [size]="96" class="relative">
@@ -37,9 +33,7 @@
         <circle progressCircleRange [gapDegree]="90" stroke="url(#progress-gradient-dashboard)" />
       </svg>
       <div class="absolute inset-0 flex items-center justify-center">
-        <span progressValue>
-          90%
-        </span>
+        <span progressValue> 90% </span>
       </div>
     </div>
   </div>

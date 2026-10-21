@@ -1,11 +1,16 @@
-import { createHourOptions, getDisplayedHour, getDisplayedPeriod, resolveDisabledTime } from '@fex-design/core/time-picker/options'
+import {
+  createHourOptions,
+  getDisplayedHour,
+  getDisplayedPeriod,
+  resolveDisabledTime,
+} from '@fex-design/core/time-picker/options'
 import { createMemo, splitProps } from 'solid-js'
 import { TimePickerColumn } from './time-picker-column'
 import { useTimePickerContext } from './time-picker-context'
 import type { TimePickerNumericColumnProps } from './column.types'
 
 export function TimePickerHourColumn(props: TimePickerNumericColumnProps) {
-  const [local, rest] = splitProps(props, ['step', 'isItemDisabled'])
+  const [local, rest] = splitProps(props, ['columnProps', 'step', 'isItemDisabled'])
   const context = useTimePickerContext('TimePickerHourColumn')
   const options = createMemo(() =>
     createHourOptions({
@@ -25,6 +30,7 @@ export function TimePickerHourColumn(props: TimePickerNumericColumnProps) {
   return (
     <TimePickerColumn
       {...rest}
+      {...local.columnProps}
       options={options()}
       selectedValue={selected()}
       onSelect={(value) => context.controller.selectHour(Number(value), context.use12Hours())}

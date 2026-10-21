@@ -1,8 +1,13 @@
 <script lang="ts">
-  import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@fex-design/svelte/primitive/avatar'
+  import {
+    Avatar,
+    AvatarFallback,
+    AvatarGroup,
+    AvatarImage,
+  } from "@fex-design/svelte/primitive/avatar";
 </script>
 
-<div class="flex items-center gap-8">
+<div class="flex flex-wrap items-center gap-8">
   <div dir="ltr">
     <p class="mb-2 text-xs text-muted-foreground">LTR · 中文示例</p>
     <AvatarGroup

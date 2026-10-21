@@ -1,0 +1,69 @@
+---
+title: Pagination
+description: 页码导航、每页条数与快捷跳页，支持总数信息和灵活布局。
+---
+
+## 何时使用
+
+列表、搜索结果或表格的数据需要分多页展示，并且能够获得总条数时使用。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="按需显示总数、页码导航、条数选择和快捷跳页。" />
+<ApiSection layer="primitive" title="Primitive API" description="可组合的分页容器与独立部件。">
+<ApiComposition layer="primitive">
+
+```text
+PaginationRoot
+├── PaginationContent
+│   ├── PaginationNavigationButton direction="prev"
+│   ├── PaginationPageButton / PaginationEllipsis
+│   └── PaginationNavigationButton direction="next"
+├── PaginationPageSizeSelect
+└── PaginationQuickJumper
+```
+
+</ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+## 总数布局
+
+总数与其他区域是根容器的直接子节点。给根容器设置宽度，并通过 CSS 将总数与右侧控件分开，无需布局参数：
+
+```css
+.pagination-separated {
+  width: 100%;
+}
+.pagination-separated > [data-slot='pagination-total'] {
+  margin-inline-end: auto;
+}
+```
+
+## 分页变更
+
+页码从 1 开始。修改每页条数会回到第一页，产生一次携带 page 和 pageSize 的变更。快捷跳页按 Enter 确认；数据请求由调用方在变更事件中处理。
+
+## 结构化样式
+
+UI 使用 `classNames` 与 `styles` 定制 `root`、`total`、`content`、`pageButton`、`navigationButton`、`ellipsis`、`simple`、`pageSizeSelect`、`jumper` 和 `quickJumper`。`styles` 的值使用当前框架的原生样式类型，原生 `class/style` 后合并。
+
+## CSS 变量
+
+| 变量                               | 说明                         |
+| ---------------------------------- | ---------------------------- |
+| `--pagination-control-height`      | 控件高度与页码按钮最小宽度。 |
+| `--pagination-font-size`           | 文字字号。                   |
+| `--pagination-gap`                 | 分页区域间距。               |
+| `--pagination-item-gap`            | 页码项间距。                 |
+| `--pagination-radius`              | 按钮、选择器与数字输入圆角。 |
+| `--pagination-color`               | 页码与导航按钮文字颜色。     |
+| `--pagination-active-background`   | 当前页背景。                 |
+| `--pagination-active-color`        | 当前页文字颜色。             |
+| `--pagination-active-border-color` | 当前页边框颜色。             |
+| `--pagination-hover-background`    | 按钮悬停背景。               |

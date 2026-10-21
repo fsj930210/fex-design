@@ -10,9 +10,9 @@
   import { cn } from "@fex-design/utils";
   import { getContext } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import ChevronRight from '@fex-design/svelte/icons/chevron-right.svelte';
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  import ChevronRight from "@fex-design/svelte/icons/chevron-right.svelte";
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
   import { Button } from "@fex-design/svelte/primitive/button";
   import PopoverTrigger from "../popover/popover-trigger.svelte";
   import CascaderValue from "./cascader-value.svelte";
@@ -21,7 +21,12 @@
     class?: string;
     placeholder?: string;
   }
-  let { class: className, placeholder, ...rest }: Props = $props();
+  let {
+    class: className,
+    placeholder,
+    "aria-invalid": ariaInvalid,
+    ...rest
+  }: Props = $props();
   const cascader = getContext<CascaderContext>(cascaderContextKey),
     snapshot = cascader.snapshot;
   const selected = () => {
@@ -57,8 +62,7 @@
       {...rest}
       use:slot.action
       data-disabled={cascader.disabled() || undefined}
-      data-status={cascader.status()}
-      aria-invalid={cascader.status() === "error" || undefined}
+      data-warning={rest["data-warning"] ?? cascader.dataWarning()}
       aria-expanded={$snapshot.open}
       class={cn(cascaderTriggerClassName(), className)}
       onclick={(event) => bridge(slot.props.onclick, event as never)}
@@ -73,6 +77,7 @@
       <div class={cascaderValueContainerClassName}>
         <CascaderValue /><input
           role="combobox"
+          aria-invalid={ariaInvalid ?? cascader.ariaInvalid()}
           aria-expanded={$snapshot.open}
           disabled={cascader.disabled()}
           readonly={!cascader.showSearch()}

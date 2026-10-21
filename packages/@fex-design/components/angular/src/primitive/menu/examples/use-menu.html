@@ -1,0 +1,37 @@
+<div class="grid w-full max-w-lg gap-3">
+  <div class="flex flex-wrap gap-2">
+    <button type="button" [class]="actionClass" (click)="selectRoles()">
+      通过 controller 选择角色并展开
+    </button>
+    <button type="button" [class]="actionClass" (click)="clear()">清空并收起</button>
+  </div>
+  <div
+    #content
+    aria-label="手写 Menu"
+    class="w-full max-w-xs rounded-xl border border-border bg-background p-2 shadow-sm"
+  >
+    <p aria-hidden="true" class="px-3 py-2 text-xs font-medium text-muted-foreground">
+      自定义工作台
+    </p>
+    <a #overview [class]="itemClass" href="#overview">概览</a>
+    <button #workspace type="button" [class]="itemClass">
+      <span>工作空间</span
+      ><span aria-hidden="true"
+        >{{ binding.snapshot().openValues.includes('workspace') ? '−' : '+' }}</span
+      >
+    </button>
+    <div #nested class="ms-3 border-s border-border ps-2">
+      <button #members type="button" [class]="itemClass">成员</button>
+      <button #roles type="button" [class]="itemClass">角色</button>
+      <button #billing type="button" [class]="itemClass" disabled>账单（禁用）</button>
+    </div>
+    <div role="separator" class="my-2 h-px bg-border"></div>
+    <div role="group" aria-label="账户">
+      <a #profile [class]="itemClass" href="#profile">个人资料</a>
+    </div>
+  </div>
+  <output class="break-all rounded-md bg-muted-background p-3 text-xs">
+    选择：{{ '[' + binding.snapshot().value.join(', ') + ']' }}；展开：{{ '[' +
+    binding.snapshot().openValues.join(', ') + ']' }}
+  </output>
+</div>

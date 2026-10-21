@@ -61,16 +61,29 @@ defineExpose({
   >
     <ButtonIcon
       v-if="iconPlacement === 'start' && (loading || $slots.icon)"
+      v-bind="props.startIconProps"
       data-icon="inline-start"
     >
       <slot v-if="loading && $slots.loadingIndicator" name="loadingIndicator" />
-      <LoadingIcon v-else-if="loading" :class="buttonSpinnerClassName" />
+      <LoadingIcon
+        v-else-if="loading"
+        v-bind="props.loadingIconProps"
+        :class="cn(buttonSpinnerClassName, props.loadingIconProps?.class as string | undefined)"
+      />
       <slot v-else name="icon" />
     </ButtonIcon>
     <slot />
-    <ButtonIcon v-if="iconPlacement === 'end' && (loading || $slots.icon)" data-icon="inline-end">
+    <ButtonIcon
+      v-if="iconPlacement === 'end' && (loading || $slots.icon)"
+      v-bind="props.endIconProps"
+      data-icon="inline-end"
+    >
       <slot v-if="loading && $slots.loadingIndicator" name="loadingIndicator" />
-      <LoadingIcon v-else-if="loading" :class="buttonSpinnerClassName" />
+      <LoadingIcon
+        v-else-if="loading"
+        v-bind="props.loadingIconProps"
+        :class="cn(buttonSpinnerClassName, props.loadingIconProps?.class as string | undefined)"
+      />
       <slot v-else name="icon" />
     </ButtonIcon>
   </PrimitiveButton>

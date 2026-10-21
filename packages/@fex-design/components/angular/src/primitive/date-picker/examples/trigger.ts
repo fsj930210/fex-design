@@ -1,7 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, DatePickerFooter } from '@fex-design/angular/primitive/date-picker'
-@Component({ selector: 'date-picker-trigger-example', standalone: true, imports: [DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, DatePickerFooter], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './trigger.html' })
-export class DatePickerTriggerExample {
-  
-  
-}
+import {
+  DatePickerRoot,
+  DatePickerTrigger,
+  DatePickerContent,
+  DatePickerPanel,
+  DatePickerFooter,
+} from '@fex-design/angular/primitive/date-picker'
+@Component({
+  selector: 'date-picker-trigger-example',
+  standalone: true,
+  imports: [
+    DatePickerRoot,
+    DatePickerTrigger,
+    DatePickerContent,
+    DatePickerPanel,
+    DatePickerFooter,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './trigger.html',
+})
+export class DatePickerTriggerExample {}

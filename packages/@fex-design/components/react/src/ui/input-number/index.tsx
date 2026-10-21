@@ -36,6 +36,13 @@ export interface InputNumberProps
     > {
   clearable?: boolean
   controls?: boolean
+  controlProps?: Omit<ComponentProps<typeof InputNumberControl>, 'children'> | undefined
+  actionsProps?: Omit<ComponentProps<typeof InputNumberActions>, 'children'> | undefined
+  incrementProps?: Omit<ComponentProps<typeof InputNumberIncrement>, 'children'> | undefined
+  decrementProps?: Omit<ComponentProps<typeof InputNumberDecrement>, 'children'> | undefined
+  clearProps?: Omit<ComponentProps<typeof InputNumberClear>, 'children'> | undefined
+  prefixProps?: Omit<ComponentProps<typeof InputPrefix>, 'children'> | undefined
+  suffixProps?: Omit<ComponentProps<typeof InputSuffix>, 'children'> | undefined
   prefix?: ReactNode
   suffix?: ReactNode
   incrementIcon?: ReactNode
@@ -45,10 +52,19 @@ export interface InputNumberProps
 }
 
 export function InputNumber(inputNumberProps: InputNumberProps) {
-  const controlled = useLazyRef(() => Object.prototype.hasOwnProperty.call(inputNumberProps, 'value')).current
+  const controlled = useLazyRef(() =>
+    Object.prototype.hasOwnProperty.call(inputNumberProps, 'value'),
+  ).current
   const {
     clearable = false,
     controls = true,
+    controlProps,
+    actionsProps,
+    incrementProps,
+    decrementProps,
+    clearProps,
+    prefixProps,
+    suffixProps,
     prefix,
     suffix,
     incrementIcon,
@@ -71,7 +87,8 @@ export function InputNumber(inputNumberProps: InputNumberProps) {
     onChange,
     disabled,
     readOnly,
-    ...controlProps
+    'data-warning': dataWarning,
+    ...controlAttributes
   } = inputNumberProps
   return (
     <InputNumberRoot
@@ -90,33 +107,61 @@ export function InputNumber(inputNumberProps: InputNumberProps) {
       onChange={onChange}
       disabled={disabled}
       readOnly={readOnly}
+      data-warning={dataWarning}
       className={cn(classNames?.root, className)}
       style={{ ...styles?.root, ...style }}
     >
       {prefix != null && (
-        <InputPrefix className={classNames?.prefix} style={styles?.prefix}>
+        <InputPrefix
+          {...prefixProps}
+          className={cn(classNames?.prefix, prefixProps?.className)}
+          style={{ ...styles?.prefix, ...prefixProps?.style }}
+        >
           {prefix}
         </InputPrefix>
       )}
       <InputNumberControl
         {...controlProps}
+        {...controlAttributes}
         disabled={disabled}
         readOnly={readOnly}
-        className={classNames?.control}
-        style={styles?.control}
+        className={cn(classNames?.control, controlProps?.className)}
+        style={{ ...styles?.control, ...controlProps?.style }}
       />
-      {clearable && <InputNumberClear className={classNames?.clear} style={styles?.clear} />}
+      {clearable && (
+        <InputNumberClear
+          {...clearProps}
+          className={cn(classNames?.clear, clearProps?.className)}
+          style={{ ...styles?.clear, ...clearProps?.style }}
+        />
+      )}
       {suffix != null && (
-        <InputSuffix className={classNames?.suffix} style={styles?.suffix}>
+        <InputSuffix
+          {...suffixProps}
+          className={cn(classNames?.suffix, suffixProps?.className)}
+          style={{ ...styles?.suffix, ...suffixProps?.style }}
+        >
           {suffix}
         </InputSuffix>
       )}
       {controls && (
-        <InputNumberActions className={classNames?.actions} style={styles?.actions}>
-          <InputNumberIncrement className={classNames?.increment} style={styles?.increment}>
+        <InputNumberActions
+          {...actionsProps}
+          className={cn(classNames?.actions, actionsProps?.className)}
+          style={{ ...styles?.actions, ...actionsProps?.style }}
+        >
+          <InputNumberIncrement
+            {...incrementProps}
+            className={cn(classNames?.increment, incrementProps?.className)}
+            style={{ ...styles?.increment, ...incrementProps?.style }}
+          >
             {incrementIcon}
           </InputNumberIncrement>
-          <InputNumberDecrement className={classNames?.decrement} style={styles?.decrement}>
+          <InputNumberDecrement
+            {...decrementProps}
+            className={cn(classNames?.decrement, decrementProps?.className)}
+            style={{ ...styles?.decrement, ...decrementProps?.style }}
+          >
             {decrementIcon}
           </InputNumberDecrement>
         </InputNumberActions>

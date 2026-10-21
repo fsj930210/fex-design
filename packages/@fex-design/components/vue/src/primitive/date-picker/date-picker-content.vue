@@ -13,6 +13,33 @@ const popover = inject(popoverKey, null)
 const containerScope = inject(pickerContainerKey, null)
 </script>
 <template>
-  <PopoverPortal v-if="popover && (!containerScope || popover !== containerScope.parentPopover)"><PopoverContent v-bind="attrs" data-slot="date-picker-content" :class="cn(datePickerContentClassName, appearance().popoverProps?.classNames?.root, normalizeClass(attrs.class))" :style="[appearance().popoverProps?.styles?.root, attrs.style]"><slot /></PopoverContent></PopoverPortal>
-  <div v-else v-bind="attrs" data-slot="date-picker-content" :class="cn(datePickerContentClassName, appearance().popoverProps?.classNames?.root, normalizeClass(attrs.class))" :style="[appearance().popoverProps?.styles?.root, attrs.style]"><slot /></div>
+  <PopoverPortal v-if="popover && (!containerScope || popover !== containerScope.parentPopover)"
+    ><PopoverContent
+      v-bind="attrs"
+      data-slot="date-picker-content"
+      :class="
+        cn(
+          datePickerContentClassName,
+          appearance().popoverProps?.classNames?.root,
+          normalizeClass(attrs.class),
+        )
+      "
+      :style="[appearance().popoverProps?.styles?.root, attrs.style]"
+      ><slot /></PopoverContent
+  ></PopoverPortal>
+  <div
+    v-else
+    v-bind="attrs"
+    data-slot="date-picker-content"
+    :class="
+      cn(
+        datePickerContentClassName,
+        appearance().popoverProps?.classNames?.root,
+        normalizeClass(attrs.class),
+      )
+    "
+    :style="[appearance().popoverProps?.styles?.root, attrs.style]"
+  >
+    <slot />
+  </div>
 </template>

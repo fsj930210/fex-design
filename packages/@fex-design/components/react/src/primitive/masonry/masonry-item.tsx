@@ -1,9 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  type CSSProperties,
-  type HTMLAttributes,
-} from 'react'
+import { useEffect, useRef, type CSSProperties, type HTMLAttributes } from 'react'
 import type { MasonryKey } from '@fex-design/core/masonry/types'
 import { masonryItemClassName } from '@fex-design/components-styles/masonry'
 import { cn } from '@fex-design/utils'

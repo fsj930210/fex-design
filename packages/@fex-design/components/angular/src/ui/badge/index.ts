@@ -1,5 +1,1 @@
-export {
-  Badge,
-  BadgeRibbon,
-  BadgeGroup,
-} from "./badge"
+export { Badge, BadgeRibbon, BadgeGroup } from './badge'

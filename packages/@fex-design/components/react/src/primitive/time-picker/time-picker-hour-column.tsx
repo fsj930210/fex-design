@@ -1,10 +1,16 @@
-import { createHourOptions, getDisplayedHour, getDisplayedPeriod, resolveDisabledTime } from '@fex-design/core/time-picker/options'
+import {
+  createHourOptions,
+  getDisplayedHour,
+  getDisplayedPeriod,
+  resolveDisabledTime,
+} from '@fex-design/core/time-picker/options'
 import { TimePickerColumn } from './time-picker-column'
 import { useTimePickerContext } from './time-picker-context'
 import type { TimePickerNumericColumnProps } from './column.types'
 
 export function TimePickerHourColumn({
   step,
+  columnProps,
   isItemDisabled,
   ...props
 }: TimePickerNumericColumnProps) {
@@ -25,6 +31,7 @@ export function TimePickerHourColumn({
   return (
     <TimePickerColumn
       {...props}
+      {...columnProps}
       options={options}
       selectedValue={selected}
       onSelect={(value) => context.controller.selectHour(value, context.use12Hours)}

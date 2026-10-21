@@ -1,23 +1,30 @@
 <script lang="ts">
-  import { progressCircleRangeClassName } from "@fex-design/components-styles/progress"
-  import { getProgressGeometry } from "@fex-design/core/progress/progress"
-  import type { ProgressLinecap } from "@fex-design/core/progress/types"
-  import { cn } from "@fex-design/utils"
-  import { getContext } from "svelte"
-  import type { SVGAttributes } from "svelte/elements"
-  import { progressContextKey, type ProgressContext } from "./context"
+  import { progressCircleRangeClassName } from "@fex-design/components-styles/progress";
+  import { getProgressGeometry } from "@fex-design/core/progress/progress";
+  import type { ProgressLinecap } from "@fex-design/core/progress/types";
+  import { cn } from "@fex-design/utils";
+  import { getContext } from "svelte";
+  import type { SVGAttributes } from "svelte/elements";
+  import { progressContextKey, type ProgressContext } from "./context";
 
   interface ProgressCircleRangeProps extends SVGAttributes<SVGCircleElement> {
-    linecap?: ProgressLinecap
-    ref?: SVGCircleElement | null
-    gapDegree?: number
+    linecap?: ProgressLinecap;
+    ref?: SVGCircleElement | null;
+    gapDegree?: number;
   }
 
-  let { linecap, gapDegree, ref = $bindable(null), class: className, style, ...rest }: ProgressCircleRangeProps = $props()
-  const { context } = getContext<ProgressContext>(progressContextKey)
-  const current = $derived(context())
-  const size = $derived(current.size ?? 48)
-  const thickness = $derived(current.thickness ?? 4)
+  let {
+    linecap,
+    gapDegree,
+    ref = $bindable(null),
+    class: className,
+    style,
+    ...rest
+  }: ProgressCircleRangeProps = $props();
+  const { context } = getContext<ProgressContext>(progressContextKey);
+  const current = $derived(context());
+  const size = $derived(current.size ?? 48);
+  const thickness = $derived(current.thickness ?? 4);
   const geometry = $derived(
     getProgressGeometry({
       value: current.value,
@@ -27,8 +34,8 @@
       thickness,
       variant: current.variant,
       gapDegree,
-    })
-  )
+    }),
+  );
 </script>
 
 <circle
@@ -38,7 +45,7 @@
   cy={geometry.center}
   r={geometry.radius}
   fill="none"
-  stroke={rest.stroke ?? 'currentColor'}
+  stroke={rest.stroke ?? "currentColor"}
   stroke-width={thickness}
   stroke-dasharray={geometry.rangeDasharray}
   stroke-dashoffset={geometry.dashOffset}
@@ -47,5 +54,5 @@
   data-slot="progress-circle-range"
   data-status={current.status}
   class={cn(progressCircleRangeClassName, className)}
-  style={style}
+  {style}
 />

@@ -8,6 +8,4 @@ import { Progress } from '@fex-design/angular/ui/progress'
   imports: [Progress],
   templateUrl: './segmented.html',
 })
-export class ProgressSegmentedExample {
-
-}
+export class ProgressSegmentedExample {}

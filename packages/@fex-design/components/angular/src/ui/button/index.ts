@@ -1,4 +1,1 @@
-export {
-  Button,
-  ButtonGroup,
-} from "./button"
+export { Button, ButtonGroup } from './button'

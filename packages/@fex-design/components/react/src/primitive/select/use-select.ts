@@ -21,4 +21,3 @@ export function useSelectOption(value: SelectionValue) {
     activate: () => select.controller.setActiveValue(value, 'pointer'),
   }
 }
-

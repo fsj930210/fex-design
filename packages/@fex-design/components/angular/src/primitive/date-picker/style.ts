@@ -1,8 +1,4 @@
-export type DatePickerStyle = string | Record<string, string | number | null | undefined>
-/** Angular accepts native style text/maps; later declarations take precedence. */
-export function mergePickerStyle(...styles: (DatePickerStyle | null | undefined)[]) {
-  return styles.map(style => typeof style === 'string' ? style : Object.entries(style ?? {}).filter(([, value]) => value != null).map(([key, value]) => {
-    const [property = '', unit = ''] = key.split('.')
-    return property.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase()) + ':' + value + unit
-  }).join(';')).filter(Boolean).join(';')
-}
+export {
+  mergeStyle as mergePickerStyle,
+  type NativeStyle as DatePickerStyle,
+} from '@fex-design/angular/signals/merge-style'

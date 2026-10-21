@@ -1,14 +1,10 @@
-import { breadcrumbEllipsisClassName } from "@fex-design/components-styles/breadcrumb"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes } from "react"
+import { breadcrumbEllipsisClassName } from '@fex-design/components-styles/breadcrumb'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes } from 'react'
 
 export type BreadcrumbEllipsisProps = HTMLAttributes<HTMLSpanElement>
 
-export function BreadcrumbEllipsis({
-  children,
-  className,
-  ...props
-}: BreadcrumbEllipsisProps) {
+export function BreadcrumbEllipsis({ children, className, ...props }: BreadcrumbEllipsisProps) {
   return (
     <span
       {...props}
@@ -16,7 +12,7 @@ export function BreadcrumbEllipsis({
       className={cn(breadcrumbEllipsisClassName, className)}
       data-slot="breadcrumb-ellipsis"
     >
-      {children ?? "..."}
+      {children ?? '...'}
     </span>
   )
 }

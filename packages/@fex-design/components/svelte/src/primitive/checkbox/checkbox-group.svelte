@@ -11,7 +11,7 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { setCheckboxGroupContext } from "./context";
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {

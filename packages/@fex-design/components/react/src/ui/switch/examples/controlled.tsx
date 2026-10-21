@@ -20,7 +20,7 @@ export default function Example() {
               onChange={setRoundedChecked}
               aria-label="rounded 受控"
             ></Switch>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button size="sm" onClick={() => setRoundedChecked(true)}>
                 开启
               </Button>
@@ -44,7 +44,7 @@ export default function Example() {
               onChange={setPillChecked}
               aria-label="pill 受控"
             ></Switch>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button size="sm" onClick={() => setPillChecked(true)}>
                 开启
               </Button>

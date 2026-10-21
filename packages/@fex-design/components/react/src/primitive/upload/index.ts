@@ -9,7 +9,11 @@ export { UploadContext, useUploadContext } from './upload-context'
 export { UploadItemContext, useUploadItemId } from './upload-item-context'
 export { useUpload, useUploadController } from './use-upload'
 export { useUploadItem } from './use-upload-item'
-export { useUploadProgress, type UploadProcessProgress, type UseUploadProgressOptions } from './use-upload-progress'
+export {
+  useUploadProgress,
+  type UploadProcessProgress,
+  type UseUploadProgressOptions,
+} from './use-upload-progress'
 export {
   useUploadFeature,
   useUploadMd5,

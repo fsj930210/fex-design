@@ -1,11 +1,6 @@
 import { createTourController } from '@fex-design/core/tour/create-tour-controller'
 import type { TourOptions } from '@fex-design/core/tour/types'
-import {
-  createEffect,
-  onCleanup,
-  onMount,
-  type ParentProps,
-} from 'solid-js'
+import { createEffect, onCleanup, onMount, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 import { TourContext } from './tour-context'
 

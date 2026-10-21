@@ -1,13 +1,26 @@
 <script lang="ts">
-  import { Progress, ProgressCircle, ProgressValue } from '@fex-design/svelte/primitive/progress'
-  import CheckIcon from '@fex-design/svelte/icons/check'
-  import { getCircleStepsGeometry } from '@fex-design/core/progress/progress'
-  let { value, gap = 2, steps = 10, color }: { value: number; gap?: number; steps?: number; color?: string } = $props()
-  const geometry = $derived(getCircleStepsGeometry({ value, gap, steps, size: 96, thickness: 4 }))
-  const ringColor = $derived(color ?? (value === 100 ? 'var(--success)' : 'var(--info)'))
+  import {
+    Progress,
+    ProgressCircle,
+    ProgressValue,
+  } from "@fex-design/svelte/primitive/progress";
+  import CheckIcon from "@fex-design/svelte/icons/check";
+  import { getCircleStepsGeometry } from "@fex-design/core/progress/progress";
+  let {
+    value,
+    gap = 2,
+    steps = 10,
+    color,
+  }: { value: number; gap?: number; steps?: number; color?: string } = $props();
+  const geometry = $derived(
+    getCircleStepsGeometry({ value, gap, steps, size: 96, thickness: 4 }),
+  );
+  const ringColor = $derived(
+    color ?? (value === 100 ? "var(--success)" : "var(--info)"),
+  );
 </script>
 
-<Progress value={value} variant="circle" size={96} thickness={4} class="relative">
+<Progress {value} variant="circle" size={96} thickness={4} class="relative">
   <ProgressCircle>
     {#each geometry.steps as step (step.index)}
       <circle
@@ -15,7 +28,7 @@
         cy={48}
         r={geometry.radius}
         fill="none"
-        stroke={step.active ? ringColor : 'var(--progress-remaining)'}
+        stroke={step.active ? ringColor : "var(--progress-remaining)"}
         stroke-width={4}
         stroke-dasharray={geometry.stepDasharray}
         stroke-dashoffset={step.offset}

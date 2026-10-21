@@ -1,0 +1,7 @@
+@if (label() != null) {
+<div menuGroupLabel>
+  @if (asTemplate(label()); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else {
+  {{ text(label()) }} }
+</div>
+}
+<ng-content />

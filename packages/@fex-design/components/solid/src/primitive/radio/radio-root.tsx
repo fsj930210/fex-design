@@ -1,15 +1,19 @@
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
-import { radioIndicatorClassName, radioRootClassName, type RadioStyleProps } from "@fex-design/components-styles/radio"
-import { cn } from "@fex-design/utils"
-import { splitProps, type JSX, type ParentProps } from "solid-js"
-import { useRadioContext, type RadioValue } from "./radio-context"
+import {
+  radioIndicatorClassName,
+  radioRootClassName,
+  type RadioStyleProps,
+} from '@fex-design/components-styles/radio'
+import { cn } from '@fex-design/utils'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
+import { useRadioContext, type RadioValue } from './radio-context'
 
 export interface RadioProps
   extends
     ParentProps<
       Omit<
         JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-        "defaultValue" | "onChange" | "type" | "value"
+        'defaultValue' | 'onChange' | 'type' | 'value'
       >
     >,
     RadioStyleProps {
@@ -18,18 +22,18 @@ export interface RadioProps
 export type RadioRootProps = RadioProps
 
 export function Radio(props: RadioProps) {
-  const context = useRadioContext("Radio")
+  const context = useRadioContext('Radio')
   const [local, rest] = splitProps(props, [
-    "value",
-    "disabled",
-    "size",
-    "class",
-    "children",
-    "onClick",
+    'value',
+    'disabled',
+    'size',
+    'class',
+    'children',
+    'onClick',
   ])
   const checked = () => context.value() === local.value
   const currentDisabled = () => context.disabled() || local.disabled === true
-  const size = () => local.size ?? "md"
+  const size = () => local.size ?? 'md'
 
   return (
     <button
@@ -39,8 +43,8 @@ export function Radio(props: RadioProps) {
       disabled={currentDisabled()}
       aria-checked={checked()}
       data-slot="radio"
-      data-state={checked() ? "checked" : "unchecked"}
-      data-disabled={currentDisabled() ? "true" : undefined}
+      data-state={checked() ? 'checked' : 'unchecked'}
+      data-disabled={currentDisabled() ? 'true' : undefined}
       data-value={local.value}
       class={cn(radioRootClassName({ size: size() }), local.class)}
       onClick={(event) => {

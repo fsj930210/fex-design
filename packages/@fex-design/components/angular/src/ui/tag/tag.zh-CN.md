@@ -27,18 +27,18 @@
 
 ## Tag API
 
-| 名称       | 类型                                                    | 默认值   | 说明                                      |
-| ---------- | ------------------------------------------------------- | -------- | ----------------------------------------- |
-| variant    | 'filled' \| 'solid' \| 'outlined'                       | 'filled' | 标签视觉变体。                            |
-| color      | TagColor                                                | —        | 语义色名称或任意合法 CSS 颜色。           |
-| size       | 'sm' \| 'md' \| 'lg'                                    | 'md'     | 标签尺寸。                                |
-| disabled   | boolean                                                 | false    | 设置禁用样式，并禁用自动生成的关闭按钮。  |
-| closable   | boolean                                                 | false    | 渲染关闭控件。                            |
+| 名称       | 类型                                        | 默认值   | 说明                                      |
+| ---------- | ------------------------------------------- | -------- | ----------------------------------------- |
+| variant    | 'filled' \| 'solid' \| 'outlined'           | 'filled' | 标签视觉变体。                            |
+| color      | TagColor                                    | —        | 语义色名称或任意合法 CSS 颜色。           |
+| size       | 'sm' \| 'md' \| 'lg'                        | 'md'     | 标签尺寸。                                |
+| disabled   | boolean                                     | false    | 设置禁用样式，并禁用自动生成的关闭按钮。  |
+| closable   | boolean                                     | false    | 渲染关闭控件。                            |
 | 内容       | 默认内容投影；`[tagCloseIcon]` 关闭图标投影 | —        | 标签内容以及可选的关闭图标替换。          |
-| 关闭事件   | `close` 输出事件，参数为 `MouseEvent`                        | —        | 通知自动生成的关闭按钮被触发。            |
-| classNames | TagClassNames                                           | —        | 分别设置 `root`、`close` 类名。           |
-| styles     | TagStyles                                               | —        | 分别设置 `root`、`close` 的框架原生样式。 |
-| 原生属性   | native span bindings                                    | —        | 透传原生 span 属性与事件。                |
+| 关闭事件   | `close` 输出事件，参数为 `MouseEvent`       | —        | 通知自动生成的关闭按钮被触发。            |
+| classNames | TagClassNames                               | —        | 分别设置 `root`、`close` 类名。           |
+| styles     | TagStyles                                   | —        | 分别设置 `root`、`close` 的框架原生样式。 |
+| 原生属性   | native span bindings                        | —        | 透传原生 span 属性与事件。                |
 
 ## 关闭行为
 

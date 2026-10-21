@@ -1,11 +1,28 @@
 import type { CalendarLocale } from '../calendar/types'
 import type { InputSize, InputVariant } from '../input/types'
 
-export type DatePickerSemanticPart = 'separator' | 'panelGroup' | 'tags' | 'tag' | 'tagRemove' | 'tagOverflow' | 'footer' | 'today' | 'cancel' | 'confirm'
+export type DatePickerSemanticPart =
+  | 'separator'
+  | 'panelGroup'
+  | 'tags'
+  | 'tag'
+  | 'tagRemove'
+  | 'tagOverflow'
+  | 'footer'
+  | 'today'
+  | 'cancel'
+  | 'confirm'
 export type DatePickerClassNames = Partial<Record<DatePickerSemanticPart, string | undefined>>
 export type DatePickerStyles<TStyle> = Partial<Record<DatePickerSemanticPart, TStyle | undefined>>
 export type DatePickerInputPart = 'root' | 'control' | 'prefix' | 'suffix' | 'clear'
-export type DatePickerCalendarPart = 'header' | 'weekHeader' | 'grid' | 'row' | 'cell' | 'cellTrigger' | 'cellContent'
+export type DatePickerCalendarPart =
+  | 'header'
+  | 'weekHeader'
+  | 'grid'
+  | 'row'
+  | 'cell'
+  | 'cellTrigger'
+  | 'cellContent'
 export interface DatePickerInputOptions<TStyle, TAdornment> {
   size?: InputSize | undefined
   variant?: InputVariant | undefined

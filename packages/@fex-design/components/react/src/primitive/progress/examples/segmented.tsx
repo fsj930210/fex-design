@@ -78,7 +78,7 @@ export function ProgressPrimitiveSegmentedExample() {
         <StepLine active={4} value={80} />
         <StepLine active={5} value={100} />
       </div>
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center gap-6">
         <StepCircle value={50} />
         <StepCircle value={80} />
         <StepCircle value={100} />

@@ -3,7 +3,7 @@
   "slug": "time-picker",
   "layer": "primitive",
   "status": "draft",
-  "description": "可组合且自带默认样式的时间选择部件及独立逻辑。",
+  "description": "可组合且自带默认样式的时间选择部件及 useTimePicker 逻辑入口。",
   "importPath": {
     "react": "@fex-design/react/primitive/time-picker",
     "vue": "@fex-design/vue/primitive/time-picker",
@@ -14,6 +14,41 @@
   "props": [],
   "events": [],
   "demos": [
+    {
+      "id": "confirm",
+      "title": "选择确认",
+      "description": "调用方组合受控值与底部操作，确认提交，取消或关闭恢复已提交值。"
+    },
+    {
+      "id": "range",
+      "title": "时间范围",
+      "description": "共用输入外框、后缀、清除与一个浮层；默认确认后提交整个区间，也可显式关闭确认。"
+    },
+    {
+      "id": "sizes",
+      "title": "三种大小",
+      "description": "sm、md、lg 输入与时间面板。"
+    },
+    {
+      "id": "appearance",
+      "title": "形态变体",
+      "description": "outlined、filled、borderless、underlined 四种形态。"
+    },
+    {
+      "id": "affixes",
+      "title": "前后缀",
+      "description": "默认时钟图标、自定义前后缀及时间区域标识。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制输入背景、文字、边框与聚焦光环。"
+    },
+    {
+      "id": "form-appearance",
+      "title": "表单反馈样式",
+      "description": "由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。"
+    },
     {
       "id": "basic",
       "title": "基本用法",
@@ -27,7 +62,7 @@
     {
       "id": "format",
       "title": "格式与步长",
-      "description": "format 决定显示的时间列；覆盖 1、2、3、4 列及步长。"
+      "description": "对照 format 自动显示时分秒、时分、分秒、仅小时及 12 小时时段列，并演示步长。"
     },
     {
       "id": "disabled",
@@ -56,8 +91,14 @@
     },
     {
       "id": "logic",
-      "title": "独立逻辑",
-      "description": "无需内置 Root 或 Context 创建时间状态。"
+      "title": "useTimePicker",
+      "description": "使用 useTimePicker 手写 DOM 实现自己的 TimePicker。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 700
     }
   ],
   "components": [
@@ -186,8 +227,8 @@
         },
         {
           "name": "inputProps",
-          "type": "object",
-          "description": "输入元素的原生属性；value/defaultValue 由 TimePicker 管理。"
+          "type": "TimePickerInputProps",
+          "description": "默认 text 输入的原生扩展属性。排除 type、value/defaultValue、disabled、readOnly/readonly、input/change 事件及其捕获版本，以及内部 aria-haspopup/aria-expanded、data-slot/data-state；类型与运行时均限制。禁用、只读和值通过 TimePicker/Root 配置，值变化通过组件 change 消费。"
         },
         {
           "name": "invalid",
@@ -353,6 +394,16 @@
           "name": "style",
           "type": "string | object",
           "description": "框架原生样式；仅影响当前宿主。"
+        },
+        {
+          "name": "columnProps",
+          "type": "TimePickerColumn customization",
+          "description": "配置直接子组件 TimePickerColumn，其 scrollbarProps 再配置 ScrollbarRoot。Angular 列直接使用 scrollbarProps。"
+        },
+        {
+          "name": "scrollbarProps",
+          "type": "ScrollbarRoot customization",
+          "description": "Angular 列直接组合 ScrollbarRoot，配置不包含 disabled / overflow。"
         }
       ],
       "events": [],
@@ -404,6 +455,16 @@
           "name": "style",
           "type": "string | object",
           "description": "框架原生样式；仅影响当前宿主。"
+        },
+        {
+          "name": "columnProps",
+          "type": "TimePickerColumn customization",
+          "description": "配置直接子组件 TimePickerColumn，其 scrollbarProps 再配置 ScrollbarRoot。Angular 列直接使用 scrollbarProps。"
+        },
+        {
+          "name": "scrollbarProps",
+          "type": "ScrollbarRoot customization",
+          "description": "Angular 列直接组合 ScrollbarRoot，配置不包含 disabled / overflow。"
         }
       ],
       "events": [],
@@ -455,6 +516,16 @@
           "name": "style",
           "type": "string | object",
           "description": "框架原生样式；仅影响当前宿主。"
+        },
+        {
+          "name": "columnProps",
+          "type": "TimePickerColumn customization",
+          "description": "配置直接子组件 TimePickerColumn，其 scrollbarProps 再配置 ScrollbarRoot。Angular 列直接使用 scrollbarProps。"
+        },
+        {
+          "name": "scrollbarProps",
+          "type": "ScrollbarRoot customization",
+          "description": "Angular 列直接组合 ScrollbarRoot，配置不包含 disabled / overflow。"
         }
       ],
       "events": [],
@@ -505,6 +576,16 @@
           "name": "style",
           "type": "string | object",
           "description": "框架原生样式；仅影响当前宿主。"
+        },
+        {
+          "name": "columnProps",
+          "type": "TimePickerColumn customization",
+          "description": "配置直接子组件 TimePickerColumn，其 scrollbarProps 再配置 ScrollbarRoot。Angular 列直接使用 scrollbarProps。"
+        },
+        {
+          "name": "scrollbarProps",
+          "type": "ScrollbarRoot customization",
+          "description": "Angular 列直接组合 ScrollbarRoot，配置不包含 disabled / overflow。"
         }
       ],
       "events": [],
@@ -554,6 +635,190 @@
       "events": [],
       "slots": [],
       "demos": []
+    },
+    {
+      "name": "TimeRangePickerRoot",
+      "slug": "time-range-picker-root",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "一个 Core session 管理起止值、当前端点、开关和待确认事务；复用单个 TimePickerRoot 与时间面板。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/time-picker",
+        "vue": "@fex-design/vue/primitive/time-picker",
+        "solid": "@fex-design/solid/primitive/time-picker",
+        "svelte": "@fex-design/svelte/primitive/time-picker",
+        "angular": "@fex-design/angular/primitive/time-picker"
+      },
+      "props": [
+        {
+          "name": "value",
+          "type": "TimeRangeValue | null",
+          "description": "受控完整时间范围；undefined 非受控，null 受控空范围。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "TimeRangeValue | null",
+          "description": "仅初始化读取的完整时间范围。"
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "显示和输入解析格式，12 小时制默认 hh:mm:ss A，否则 HH:mm:ss。"
+        },
+        {
+          "name": "use12Hours",
+          "type": "boolean",
+          "description": "使用 12 小时列，值仍保存为 24 小时。",
+          "default": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "阻止打开与修改。",
+          "default": false
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "description": "允许查看，阻止输入、选择和清除。",
+          "default": false
+        },
+        {
+          "name": "disabledTime",
+          "type": "DisabledTime",
+          "description": "约束时分秒及毫秒；输入和列选择统一校验。"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控浮层开关。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "非受控初始开关。",
+          "default": false
+        },
+        {
+          "name": "popoverProps",
+          "type": "TimePickerPopoverOptions",
+          "description": "定位、容器、挂载和关闭策略；不能覆盖 open/defaultOpen/disabled/trigger 或内部事件。"
+        },
+        {
+          "name": "needConfirm",
+          "type": "boolean",
+          "default": true,
+          "description": "默认显示确认与取消按钮；确认前仅修改待确认区间。false 为完整有效范围即时提交。"
+        }
+      ],
+      "events": [
+        {
+          "name": "change",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "TimeRangeValue | null"
+            },
+            {
+              "name": "details",
+              "type": "TimeRangeChangeDetails"
+            }
+          ],
+          "description": "默认仅在确认不同的完整有效范围后触发；清除立即提交 null。needConfirm=false 时完整有效区间即时提交。Angular 为 { value, details }，其他框架遵循原生事件约定。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "范围浮层的开关请求。切换端点不关闭或提交；关闭与取消恢复已提交值。"
+        }
+      ]
+    },
+    {
+      "name": "TimeRangePickerTrigger",
+      "slug": "time-range-picker-trigger",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "一个 Input 外框包含两个可编辑字段、分隔符和共享后缀。点击字段切换当前编辑端点。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/time-picker",
+        "vue": "@fex-design/vue/primitive/time-picker",
+        "solid": "@fex-design/solid/primitive/time-picker",
+        "svelte": "@fex-design/svelte/primitive/time-picker",
+        "angular": "@fex-design/angular/primitive/time-picker"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "统一控制整个范围输入的尺寸。"
+        },
+        {
+          "name": "variant",
+          "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
+          "default": "outlined",
+          "description": "整个范围共用一个外框。"
+        },
+        {
+          "name": "placeholder",
+          "type": "readonly [string, string]",
+          "description": "开始、结束时间的占位文字。"
+        },
+        {
+          "name": "startInputProps",
+          "type": "TimePickerInputProps",
+          "description": "开始字段的原生属性扩展；受内部值、类型和事件保护。"
+        },
+        {
+          "name": "endInputProps",
+          "type": "TimePickerInputProps",
+          "description": "结束字段的原生属性扩展；受内部值、类型和事件保护。"
+        },
+        {
+          "name": "allowClear",
+          "type": "boolean",
+          "default": true,
+          "description": "显示一个共享清除按钮；清除整个时间范围。"
+        },
+        {
+          "name": "prefix / suffix",
+          "type": "framework-native content",
+          "description": "范围共用前后缀；Vue 使用 slot，Svelte 使用 snippet，Angular 使用字符串或 TemplateRef。"
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "TimeRangePickerFooter",
+      "slug": "time-range-picker-footer",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "默认显示取消与确定；仅完整且起点不晚于终点的有效范围可确认。needConfirm=false 时隐藏。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/time-picker",
+        "vue": "@fex-design/vue/primitive/time-picker",
+        "solid": "@fex-design/solid/primitive/time-picker",
+        "svelte": "@fex-design/svelte/primitive/time-picker",
+        "angular": "@fex-design/angular/primitive/time-picker"
+      },
+      "props": [
+        {
+          "name": "cancelButtonProps",
+          "type": "Button configuration (excluding type / disabled / click)",
+          "description": "配置直接 Button，保留底部操作的提交和禁用约束。"
+        },
+        {
+          "name": "confirmButtonProps",
+          "type": "Button configuration (excluding type / disabled / click)",
+          "description": "配置直接 Button，保留底部操作的提交和禁用约束。"
+        }
+      ],
+      "events": []
     }
   ]
 }

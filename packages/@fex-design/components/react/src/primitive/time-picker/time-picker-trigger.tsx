@@ -1,3 +1,5 @@
+import { filterTimePickerInputProps } from '@fex-design/core/time-picker/input-props'
+import type { TimePickerInputProps } from './time-picker-input-props'
 import { timePickerAffixClassName } from '@fex-design/components-styles/time-picker'
 import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import { ClockIcon } from '@fex-design/react/icons/clock'
@@ -11,24 +13,39 @@ import {
 } from '../input'
 import { useTimePickerTrigger } from './use-time-picker-trigger'
 import type { TimePickerContextValue } from './time-picker-context'
-import { type ComponentProps, type HTMLAttributes, type RefCallback, type ReactNode } from 'react'
+import { type HTMLAttributes, type RefCallback, type ReactNode } from 'react'
 import { useTimePickerContext } from './time-picker-context'
 
 export interface TimePickerTriggerProps extends Omit<
   InputRootProps,
-  'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children' | 'prefix' | 'ref' | 'onClick' | 'onFocus' | 'onBlur'
+  | 'value'
+  | 'defaultValue'
+  | 'onValueChange'
+  | 'onClear'
+  | 'children'
+  | 'prefix'
+  | 'ref'
+  | 'onClick'
+  | 'onFocus'
+  | 'onBlur'
 > {
   ref?: import('react').Ref<HTMLElement> | undefined
   onClick?: HTMLAttributes<HTMLElement>['onClick'] | undefined
   onFocus?: HTMLAttributes<HTMLElement>['onFocus'] | undefined
   onBlur?: HTMLAttributes<HTMLElement>['onBlur'] | undefined
-  children?: ((binding: { props: HTMLAttributes<HTMLElement>; ref: RefCallback<HTMLElement>; state: TimePickerContextValue }) => ReactNode) | undefined
+  children?:
+    | ((binding: {
+        props: HTMLAttributes<HTMLElement>
+        ref: RefCallback<HTMLElement>
+        state: TimePickerContextValue
+      }) => ReactNode)
+    | undefined
   invalid?: boolean | undefined
   allowClear?: boolean | undefined
   placeholder?: string | undefined
   prefix?: ReactNode | undefined
   suffix?: ReactNode | undefined
-  inputProps?: Omit<ComponentProps<typeof InputControl>, 'value' | 'defaultValue'> | undefined
+  inputProps?: TimePickerInputProps | undefined
 }
 
 export function TimePickerTrigger({
@@ -43,6 +60,7 @@ export function TimePickerTrigger({
   onClick,
   onFocus,
   onBlur,
+  'aria-invalid': ariaInvalid,
   ...props
 }: TimePickerTriggerProps) {
   const context = useTimePickerContext('TimePickerTrigger')
@@ -70,22 +88,40 @@ export function TimePickerTrigger({
   const clear = context.controller.clear
   if (children) return children({ props: triggerProps, ref, state: context })
   return (
-        <InputRoot
-          {...triggerProps}
-          ref={ref}
-          role={undefined}
-          value={text}
-          disabled={context.disabled}
-          readOnly={context.readOnly}
-          onValueChange={input}
-          onClear={allowClear ? clear : undefined}
-        >
-          {prefix ? <InputPrefix>{prefix}</InputPrefix> : null}
-          <InputControl aria-label="Time" {...inputProps} aria-invalid={invalid || inputProps?.['aria-invalid']} placeholder={placeholder ?? inputProps?.placeholder ?? context.format} />
-          <div data-slot="time-picker-affix" className={timePickerAffixClassName}>
-            <InputSuffix>{suffix ?? <ClockIcon className="size-4" />}</InputSuffix>
-            {canClear ? <InputClear onPointerDown={event => { event.preventDefault(); event.stopPropagation() }} onClick={event => { event.preventDefault(); event.stopPropagation(); clear() }} /> : null}
-          </div>
-        </InputRoot>
+    <InputRoot
+      {...triggerProps}
+      ref={ref}
+      role={undefined}
+      value={text}
+      disabled={context.disabled}
+      readOnly={context.readOnly}
+      onValueChange={input}
+      onClear={allowClear ? clear : undefined}
+    >
+      {prefix ? <InputPrefix>{prefix}</InputPrefix> : null}
+      <InputControl
+        aria-label="Time"
+        {...filterTimePickerInputProps(inputProps)}
+        type="text"
+        aria-invalid={ariaInvalid ?? (invalid || undefined) ?? inputProps?.['aria-invalid']}
+        placeholder={placeholder ?? inputProps?.placeholder ?? context.format}
+      />
+      <div data-slot="time-picker-affix" className={timePickerAffixClassName}>
+        <InputSuffix>{suffix ?? <ClockIcon className="size-4" />}</InputSuffix>
+        {canClear ? (
+          <InputClear
+            onPointerDown={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+            }}
+            onClick={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              clear()
+            }}
+          />
+        ) : null}
+      </div>
+    </InputRoot>
   )
 }

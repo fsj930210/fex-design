@@ -12,6 +12,8 @@
   } @else if (loadError(); as error) {
     <p role="alert">示例加载失败：{{ error }}</p>
   } @else {
-    <p>未找到示例：{{ currentInfo().layer }}/{{ currentInfo().component }}/{{ currentInfo().demo }}</p>
+    <p>
+      未找到示例：{{ currentInfo().layer }}/{{ currentInfo().component }}/{{ currentInfo().demo }}
+    </p>
   }
 </div>

@@ -17,7 +17,11 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
   return (
     <div class="mt-4 space-y-5">
       {/* 纯原生继承部件的规范呈现卡片 */}
-      <Show when={!hasCustomMembers() && (!props.value.components || props.value.components.length === 0)}>
+      <Show
+        when={
+          !hasCustomMembers() && (!props.value.components || props.value.components.length === 0)
+        }
+      >
         <div class="rounded-xl border border-border bg-card p-3.5 shadow-sm">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -58,7 +62,9 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] font-mono text-muted-foreground text-[11px]">
                     {String(property.default ?? '—')}
                   </code>
-                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">{property.description}</span>
+                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">
+                    {property.description}
+                  </span>
                 </div>
               )}
             </For>
@@ -91,7 +97,9 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
                           .join(', ')
                       : '—'}
                   </code>
-                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">{event.description}</span>
+                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">
+                    {event.description}
+                  </span>
                 </div>
               )}
             </For>
@@ -116,7 +124,9 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] font-mono text-primary font-semibold text-[11.5px]">
                     {slot.name}
                   </code>
-                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">{slot.description}</span>
+                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">
+                    {slot.description}
+                  </span>
                 </div>
               )}
             </For>
@@ -137,7 +147,10 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             {(component) => {
               const id = apiAnchorId(component.layer, component.name)
               return (
-                <section aria-labelledby={id} class="rounded-xl border border-emerald-500/20 bg-muted/10 p-3.5 shadow-sm">
+                <section
+                  aria-labelledby={id}
+                  class="rounded-xl border border-emerald-500/20 bg-muted/10 p-3.5 shadow-sm"
+                >
                   <div class="flex items-center justify-between border-b border-border/70 pb-2.5">
                     <h4
                       id={id}

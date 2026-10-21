@@ -1,19 +1,16 @@
-import {
-  isBadgePresetColor,
-  type BadgeOptions,
-} from "@fex-design/core"
-import { badgeClassName } from "@fex-design/components-styles/badge"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps, ReactNode } from "react"
+import { isBadgePresetColor, type BadgeOptions } from '@fex-design/core'
+import { badgeClassName } from '@fex-design/components-styles/badge'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps, ReactNode } from 'react'
 
 export interface BadgeProps
-  extends Omit<ComponentProps<"span">, "color">, BadgeOptions<ReactNode> {}
+  extends Omit<ComponentProps<'span'>, 'color'>, BadgeOptions<ReactNode> {}
 export type BadgeRootProps = BadgeProps
 
 export function Badge({
   className,
   color,
-  size = "md",
+  size = 'md',
   count,
   showZero = false,
   overflowCount,
@@ -24,7 +21,7 @@ export function Badge({
   const presetColor = isBadgePresetColor(color) ? color : undefined
   const customColor = color && !presetColor ? color : undefined
   const value =
-    typeof count === "number" && overflowCount != null && count > overflowCount
+    typeof count === 'number' && overflowCount != null && count > overflowCount
       ? `${overflowCount}+`
       : count
   if (value == null && children == null) return null
@@ -37,9 +34,9 @@ export function Badge({
       className={cn(badgeClassName({ color: presetColor, size }), className)}
       style={
         {
-          "--badge-color": customColor,
+          '--badge-color': customColor,
           ...style,
-        } as ComponentProps<"span">["style"]
+        } as ComponentProps<'span'>['style']
       }
       {...props}
     >

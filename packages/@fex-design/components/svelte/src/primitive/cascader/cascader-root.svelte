@@ -8,7 +8,7 @@
     CascaderValue,
   } from "@fex-design/core/cascader/types";
   import { setContext, type Snippet } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import Popover from "../popover/popover.svelte";
   import { cascaderContextKey, type CascaderContext } from "./context";
   interface Props {

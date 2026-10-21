@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { progressValueClassName } from "@fex-design/components-styles/progress"
-import { cn } from "@fex-design/utils"
+import { progressValueClassName } from '@fex-design/components-styles/progress'
+import { cn } from '@fex-design/utils'
 import { useTemplateRef } from 'vue'
-import { useProgressContext } from "./progress-context"
+import { useProgressContext } from './progress-context'
 
-defineOptions({ name: "ProgressValue", inheritAttrs: false })
+defineOptions({ name: 'ProgressValue', inheritAttrs: false })
 
-const context = useProgressContext("ProgressValue")
+const context = useProgressContext('ProgressValue')
 defineSlots<{ default?: (props: { value: number | null; percentage: number | null }) => unknown }>()
 const element = useTemplateRef<HTMLSpanElement>('element')
 defineExpose({ element })

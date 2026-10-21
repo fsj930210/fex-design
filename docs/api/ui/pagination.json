@@ -1,0 +1,730 @@
+{
+  "name": "Pagination",
+  "slug": "pagination",
+  "layer": "ui",
+  "status": "draft",
+  "description": "列表与表格的分页导航。",
+  "nativeElement": "nav",
+  "importPath": {
+    "react": "@fex-design/react/ui/pagination",
+    "vue": "@fex-design/vue/ui/pagination",
+    "solid": "@fex-design/solid/ui/pagination",
+    "svelte": "@fex-design/svelte/ui/pagination",
+    "angular": "@fex-design/angular/ui/pagination"
+  },
+  "props": [
+    {
+      "name": "total",
+      "type": "number",
+      "description": "数据总条数。",
+      "default": 0
+    },
+    {
+      "name": "page",
+      "type": "number",
+      "description": "受控当前页，从 1 开始。"
+    },
+    {
+      "name": "defaultPage",
+      "type": "number",
+      "description": "非受控初始页，仅初始化读取。",
+      "default": 1
+    },
+    {
+      "name": "pageSize",
+      "type": "number",
+      "description": "受控每页条数。"
+    },
+    {
+      "name": "defaultPageSize",
+      "type": "number",
+      "description": "非受控初始每页条数，仅初始化读取。",
+      "default": 10
+    },
+    {
+      "name": "siblingCount",
+      "type": "number",
+      "description": "当前页两侧各保留的页码数量。",
+      "default": 1
+    },
+    {
+      "name": "boundaryCount",
+      "type": "number",
+      "description": "首尾各保留的页码数量。",
+      "default": 1
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "description": "统一控制分页按钮、条数选择和跳页输入的尺寸。",
+      "default": "md"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "禁用所有分页修改。",
+      "default": false
+    },
+    {
+      "name": "labels",
+      "type": "Partial<PaginationLabels>",
+      "description": "自定义可访问名称、总数文字、条数选项和跳页前后缀。"
+    },
+    {
+      "name": "showTotal",
+      "type": "boolean",
+      "description": "显示总数信息。",
+      "default": false
+    },
+    {
+      "name": "showSizeChanger",
+      "type": "boolean",
+      "description": "显示每页条数选择。",
+      "default": false
+    },
+    {
+      "name": "pageSizeOptions",
+      "type": "readonly number[]",
+      "description": "可选的每页条数，自动包含当前值。",
+      "default": [10, 20, 50, 100]
+    },
+    {
+      "name": "showQuickJumper",
+      "type": "boolean",
+      "description": "显示快捷跳页输入。",
+      "default": false
+    },
+    {
+      "name": "simple",
+      "type": "boolean",
+      "description": "用当前页/总页数替换数字页码。",
+      "default": false
+    },
+    {
+      "name": "hideOnSinglePage",
+      "type": "boolean",
+      "description": "总页数不超过一页时隐藏整个分页。",
+      "default": false
+    },
+    {
+      "name": "pageSizeSelectProps",
+      "type": "object",
+      "description": "条数选择部件的 class/style、disabled 和 inputProps，不包含 options。 Direct child part customization follows the Primitive part contract. selectRootProps 配置 SelectRoot，后续嵌套使用 SelectRoot 原本的公开契约。"
+    },
+    {
+      "name": "quickJumperProps",
+      "type": "object",
+      "description": "快捷跳页部件的 class/style、disabled 和 inputProps。 Direct child part customization follows the Primitive part contract."
+    },
+    {
+      "name": "classNames",
+      "type": "PaginationClassNames",
+      "description": "按 root、total、content、pageButton、navigationButton、ellipsis、simple、pageSizeSelect、jumper、quickJumper 定制类名。"
+    },
+    {
+      "name": "styles",
+      "type": "PaginationStyles<NativeStyle>",
+      "description": "使用本框架原生样式类型按部件定制；根节点和部件原生 style 后合并。"
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "PaginationValue"
+        },
+        {
+          "name": "details",
+          "type": "PaginationChangeDetails"
+        }
+      ],
+      "description": "分页变更；受控字段由调用方更新。"
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "total",
+          "type": "number",
+          "description": "数据总条数。",
+          "default": 0
+        },
+        {
+          "name": "page",
+          "type": "number",
+          "description": "受控当前页，从 1 开始。"
+        },
+        {
+          "name": "defaultPage",
+          "type": "number",
+          "description": "非受控初始页，仅初始化读取。",
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "description": "受控每页条数。"
+        },
+        {
+          "name": "defaultPageSize",
+          "type": "number",
+          "description": "非受控初始每页条数，仅初始化读取。",
+          "default": 10
+        },
+        {
+          "name": "siblingCount",
+          "type": "number",
+          "description": "当前页两侧各保留的页码数量。",
+          "default": 1
+        },
+        {
+          "name": "boundaryCount",
+          "type": "number",
+          "description": "首尾各保留的页码数量。",
+          "default": 1
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "统一控制分页按钮、条数选择和跳页输入的尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用所有分页修改。",
+          "default": false
+        },
+        {
+          "name": "labels",
+          "type": "Partial<PaginationLabels>",
+          "description": "自定义可访问名称、总数文字、条数选项和跳页前后缀。"
+        },
+        {
+          "name": "showTotal",
+          "type": "boolean | ((snapshot: PaginationSnapshot) => ReactNode)",
+          "description": "显示总数信息。",
+          "default": false
+        },
+        {
+          "name": "showSizeChanger",
+          "type": "boolean",
+          "description": "显示每页条数选择。",
+          "default": false
+        },
+        {
+          "name": "pageSizeOptions",
+          "type": "readonly number[]",
+          "description": "可选的每页条数，自动包含当前值。",
+          "default": [10, 20, 50, 100]
+        },
+        {
+          "name": "showQuickJumper",
+          "type": "boolean",
+          "description": "显示快捷跳页输入。",
+          "default": false
+        },
+        {
+          "name": "simple",
+          "type": "boolean",
+          "description": "用当前页/总页数替换数字页码。",
+          "default": false
+        },
+        {
+          "name": "hideOnSinglePage",
+          "type": "boolean",
+          "description": "总页数不超过一页时隐藏整个分页。",
+          "default": false
+        },
+        {
+          "name": "pageSizeSelectProps",
+          "type": "object",
+          "description": "条数选择部件的 class/style、disabled 和 inputProps，不包含 options。"
+        },
+        {
+          "name": "quickJumperProps",
+          "type": "object",
+          "description": "快捷跳页部件的 class/style、disabled 和 inputProps。"
+        },
+        {
+          "name": "pageRender",
+          "type": "(page: number, current: boolean) => ReactNode",
+          "description": "自定义页码内容。"
+        },
+        {
+          "name": "previous",
+          "type": "ReactNode",
+          "description": "自定义部件内容，保留按钮行为。"
+        },
+        {
+          "name": "next",
+          "type": "ReactNode",
+          "description": "自定义部件内容，保留按钮行为。"
+        },
+        {
+          "name": "ellipsis",
+          "type": "ReactNode",
+          "description": "自定义部件内容，保留按钮行为。"
+        },
+        {
+          "name": "classNames",
+          "type": "PaginationClassNames",
+          "description": "按 root、total、content、pageButton、navigationButton、ellipsis、simple、pageSizeSelect、jumper、quickJumper 定制类名。"
+        },
+        {
+          "name": "styles",
+          "type": "PaginationStyles<CSSProperties>",
+          "description": "使用本框架原生样式类型按部件定制；根节点和部件原生 style 后合并。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "PaginationValue"
+            },
+            {
+              "name": "details",
+              "type": "PaginationChangeDetails"
+            }
+          ],
+          "description": "分页变更；受控字段由调用方更新。"
+        }
+      ],
+      "slots": [],
+      "slotLabel": "内容定制"
+    },
+    "vue": {
+      "events": [
+        {
+          "name": "change",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "PaginationValue"
+            },
+            {
+              "name": "details",
+              "type": "PaginationChangeDetails"
+            }
+          ],
+          "description": "分页变更。"
+        },
+        {
+          "name": "update:page",
+          "parameters": [
+            {
+              "name": "page",
+              "type": "number"
+            }
+          ],
+          "description": "支持 v-model:page。"
+        },
+        {
+          "name": "update:pageSize",
+          "parameters": [
+            {
+              "name": "pageSize",
+              "type": "number"
+            }
+          ],
+          "description": "支持 v-model:page-size。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "total",
+          "description": "自定义总数，接收 snapshot，需开启 showTotal。"
+        },
+        {
+          "name": "page",
+          "description": "自定义页码，接收 page 与 current。"
+        },
+        {
+          "name": "previous",
+          "description": "自定义对应部件内容。"
+        },
+        {
+          "name": "next",
+          "description": "自定义对应部件内容。"
+        },
+        {
+          "name": "ellipsis",
+          "description": "自定义对应部件内容。"
+        }
+      ],
+      "slotLabel": "Slots",
+      "typeOverrides": {
+        "NativeStyle": "StyleValue"
+      }
+    },
+    "solid": {
+      "props": [
+        {
+          "name": "total",
+          "type": "number",
+          "description": "数据总条数。",
+          "default": 0
+        },
+        {
+          "name": "page",
+          "type": "number",
+          "description": "受控当前页，从 1 开始。"
+        },
+        {
+          "name": "defaultPage",
+          "type": "number",
+          "description": "非受控初始页，仅初始化读取。",
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "description": "受控每页条数。"
+        },
+        {
+          "name": "defaultPageSize",
+          "type": "number",
+          "description": "非受控初始每页条数，仅初始化读取。",
+          "default": 10
+        },
+        {
+          "name": "siblingCount",
+          "type": "number",
+          "description": "当前页两侧各保留的页码数量。",
+          "default": 1
+        },
+        {
+          "name": "boundaryCount",
+          "type": "number",
+          "description": "首尾各保留的页码数量。",
+          "default": 1
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "统一控制分页按钮、条数选择和跳页输入的尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用所有分页修改。",
+          "default": false
+        },
+        {
+          "name": "labels",
+          "type": "Partial<PaginationLabels>",
+          "description": "自定义可访问名称、总数文字、条数选项和跳页前后缀。"
+        },
+        {
+          "name": "showTotal",
+          "type": "boolean | ((snapshot: PaginationSnapshot) => JSX.Element)",
+          "description": "显示总数信息。",
+          "default": false
+        },
+        {
+          "name": "showSizeChanger",
+          "type": "boolean",
+          "description": "显示每页条数选择。",
+          "default": false
+        },
+        {
+          "name": "pageSizeOptions",
+          "type": "readonly number[]",
+          "description": "可选的每页条数，自动包含当前值。",
+          "default": [10, 20, 50, 100]
+        },
+        {
+          "name": "showQuickJumper",
+          "type": "boolean",
+          "description": "显示快捷跳页输入。",
+          "default": false
+        },
+        {
+          "name": "simple",
+          "type": "boolean",
+          "description": "用当前页/总页数替换数字页码。",
+          "default": false
+        },
+        {
+          "name": "hideOnSinglePage",
+          "type": "boolean",
+          "description": "总页数不超过一页时隐藏整个分页。",
+          "default": false
+        },
+        {
+          "name": "pageSizeSelectProps",
+          "type": "object",
+          "description": "条数选择部件的 class/style、disabled 和 inputProps，不包含 options。"
+        },
+        {
+          "name": "quickJumperProps",
+          "type": "object",
+          "description": "快捷跳页部件的 class/style、disabled 和 inputProps。"
+        },
+        {
+          "name": "pageRender",
+          "type": "(page: number, current: boolean) => JSX.Element",
+          "description": "自定义页码内容。"
+        },
+        {
+          "name": "previous",
+          "type": "JSX.Element",
+          "description": "自定义部件内容，保留按钮行为。"
+        },
+        {
+          "name": "next",
+          "type": "JSX.Element",
+          "description": "自定义部件内容，保留按钮行为。"
+        },
+        {
+          "name": "ellipsis",
+          "type": "JSX.Element",
+          "description": "自定义部件内容，保留按钮行为。"
+        },
+        {
+          "name": "classNames",
+          "type": "PaginationClassNames",
+          "description": "按 root、total、content、pageButton、navigationButton、ellipsis、simple、pageSizeSelect、jumper、quickJumper 定制类名。"
+        },
+        {
+          "name": "styles",
+          "type": "PaginationStyles<JSX.CSSProperties | string>",
+          "description": "使用本框架原生样式类型按部件定制；根节点和部件原生 style 后合并。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "PaginationValue"
+            },
+            {
+              "name": "details",
+              "type": "PaginationChangeDetails"
+            }
+          ],
+          "description": "分页变更；受控字段由调用方更新。"
+        }
+      ],
+      "slots": [],
+      "slotLabel": "内容定制"
+    },
+    "svelte": {
+      "events": [
+        {
+          "name": "onchange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "PaginationValue"
+            },
+            {
+              "name": "details",
+              "type": "PaginationChangeDetails"
+            }
+          ],
+          "description": "分页变更；支持 bind:page 和 bind:pageSize。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "totalContent",
+          "description": "自定义总数，接收 snapshot，需开启 showTotal。"
+        },
+        {
+          "name": "pageContent",
+          "description": "自定义页码，接收 page 与 current。"
+        },
+        {
+          "name": "previous",
+          "description": "自定义对应部件内容。"
+        },
+        {
+          "name": "next",
+          "description": "自定义对应部件内容。"
+        },
+        {
+          "name": "ellipsis",
+          "description": "自定义对应部件内容。"
+        }
+      ],
+      "slotLabel": "Snippets",
+      "typeOverrides": {
+        "NativeStyle": "string"
+      }
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "change",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "{ value: PaginationValue; details: PaginationChangeDetails }"
+            }
+          ],
+          "description": "分页变更；受控字段由调用方更新。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "total",
+          "description": "自定义总数，接收 snapshot，需开启 showTotal。"
+        },
+        {
+          "name": "page",
+          "description": "自定义页码，接收 page 与 current。"
+        },
+        {
+          "name": "previous",
+          "description": "自定义对应部件内容。"
+        },
+        {
+          "name": "next",
+          "description": "自定义对应部件内容。"
+        },
+        {
+          "name": "ellipsis",
+          "description": "自定义对应部件内容。"
+        }
+      ],
+      "slotLabel": "Templates",
+      "typeOverrides": {
+        "NativeStyle": "string"
+      }
+    }
+  },
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本用法",
+      "description": "只显示页码和前后翻页。"
+    },
+    {
+      "id": "full",
+      "title": "完整分页",
+      "description": "总数、页码、每页条数和快捷跳页。"
+    },
+    {
+      "id": "controlled",
+      "title": "外部受控",
+      "description": "外部设置页码、每页条数和总数，并查看变更反馈。"
+    },
+    {
+      "id": "simple",
+      "title": "简洁模式",
+      "description": "当前页和总页数替换数字页码。"
+    },
+    {
+      "id": "sizes",
+      "title": "尺寸",
+      "description": "小、中、大三种统一尺寸。"
+    },
+    {
+      "id": "page-size-options",
+      "title": "条数选项",
+      "description": "使用 5、15、30 条选项与初始每页 15 条。"
+    },
+    {
+      "id": "page-range",
+      "title": "页码范围",
+      "description": "对比不同的相邻页码和首尾页码数量。"
+    },
+    {
+      "id": "disabled",
+      "title": "禁用",
+      "description": "禁止分页、条数选择与快捷跳页。"
+    },
+    {
+      "id": "empty",
+      "title": "空数据",
+      "description": "普通与简洁模式的空数据状态。"
+    },
+    {
+      "id": "hide-on-single-page",
+      "title": "单页隐藏",
+      "description": "切换总数，观察单页隐藏与多页显示。"
+    },
+    {
+      "id": "custom",
+      "title": "自定义内容",
+      "description": "修改总数范围、页码和导航内容。"
+    },
+    {
+      "id": "layout",
+      "title": "总数布局",
+      "description": "紧邻排列与总数独占一侧的布局。"
+    },
+    {
+      "id": "direction",
+      "title": "阅读方向",
+      "description": "对比从左向右与从右向左的分页。"
+    },
+    {
+      "id": "logic",
+      "title": "usePagination",
+      "description": "使用 usePagination 手写 DOM 实现自己的 Pagination。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "修改控件高度、文字、间距、圆角和状态颜色。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "使用 classNames 和 styles 定制各个部件。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--pagination-control-height",
+      "description": "控件高度与页码按钮最小宽度。"
+    },
+    {
+      "name": "--pagination-font-size",
+      "description": "文字字号。"
+    },
+    {
+      "name": "--pagination-gap",
+      "description": "分页区域之间的间距。"
+    },
+    {
+      "name": "--pagination-item-gap",
+      "description": "页码项之间的间距。"
+    },
+    {
+      "name": "--pagination-radius",
+      "description": "按钮、选择器与数字输入圆角。"
+    },
+    {
+      "name": "--pagination-color",
+      "description": "页码与导航按钮默认文字颜色。"
+    },
+    {
+      "name": "--pagination-active-background",
+      "description": "当前页背景色。"
+    },
+    {
+      "name": "--pagination-active-color",
+      "description": "当前页文字颜色。"
+    },
+    {
+      "name": "--pagination-active-border-color",
+      "description": "当前页边框颜色。"
+    },
+    {
+      "name": "--pagination-hover-background",
+      "description": "页码与导航按钮悬停背景。"
+    }
+  ]
+}

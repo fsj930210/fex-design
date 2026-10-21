@@ -2,8 +2,14 @@ export { ColorPickerRoot, type ColorPickerRootProps } from './color-picker-root'
 export { ColorPickerArea, type ColorPickerAreaProps } from './color-picker-area'
 export { ColorPickerAreaThumb, type ColorPickerAreaThumbProps } from './color-picker-area-thumb'
 export { ColorPickerChannel, type ColorPickerChannelProps } from './color-picker-channel'
-export { ColorPickerChannelTrack, type ColorPickerChannelTrackProps } from './color-picker-channel-track'
-export { ColorPickerChannelThumb, type ColorPickerChannelThumbProps } from './color-picker-channel-thumb'
+export {
+  ColorPickerChannelTrack,
+  type ColorPickerChannelTrackProps,
+} from './color-picker-channel-track'
+export {
+  ColorPickerChannelThumb,
+  type ColorPickerChannelThumbProps,
+} from './color-picker-channel-thumb'
 export { ColorPickerSwatch, type ColorPickerSwatchProps } from './color-picker-swatch'
 export {
   ColorPickerTransparencyGrid,

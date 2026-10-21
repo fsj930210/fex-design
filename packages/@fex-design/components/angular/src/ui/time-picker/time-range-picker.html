@@ -1,0 +1,57 @@
+<div
+  timeRangePickerTrigger
+  [prefix]="prefix()"
+  [suffix]="suffix()"
+  [size]="size()"
+  [variant]="variant()"
+  [startInputProps]="startInputProps()"
+  [endInputProps]="endInputProps()"
+  [placeholder]="placeholder()"
+  [allowClear]="allowClear()"
+></div>
+<ng-template popoverPortal
+  ><div timePickerContent [class]="contentProps()?.class ?? ''" [style]="contentProps()?.style">
+    <div timePickerPanel [class]="panelProps()?.class" [style]="panelProps()?.style">
+      @for (column of columns(); track column.unit) { @switch (column.unit) { @case ('hour') {
+      <div
+        timePickerHourColumn
+        [step]="hourColumnProps()?.step ?? step()?.hour ?? 1"
+        [class]="hourColumnProps()?.class"
+        [style]="hourColumnProps()?.style"
+        [scrollbarProps]="hourColumnProps()?.scrollbarProps"
+        [disabled]="hourColumnProps()?.disabled ?? false"
+      ></div>
+      } @case ('minute') {
+      <div
+        timePickerMinuteColumn
+        [step]="minuteColumnProps()?.step ?? step()?.minute ?? 1"
+        [class]="minuteColumnProps()?.class"
+        [style]="minuteColumnProps()?.style"
+        [scrollbarProps]="minuteColumnProps()?.scrollbarProps"
+        [disabled]="minuteColumnProps()?.disabled ?? false"
+      ></div>
+      } @case ('second') {
+      <div
+        timePickerSecondColumn
+        [step]="secondColumnProps()?.step ?? step()?.second ?? 1"
+        [class]="secondColumnProps()?.class"
+        [style]="secondColumnProps()?.style"
+        [scrollbarProps]="secondColumnProps()?.scrollbarProps"
+        [disabled]="secondColumnProps()?.disabled ?? false"
+      ></div>
+      } @case ('period') {
+      <div
+        timePickerPeriodColumn
+        [class]="periodColumnProps()?.class"
+        [style]="periodColumnProps()?.style"
+        [scrollbarProps]="periodColumnProps()?.scrollbarProps"
+        [disabled]="periodColumnProps()?.disabled ?? false"
+      ></div>
+      } } }
+    </div>
+    <div
+      timeRangePickerFooter
+      [cancelButtonProps]="footerProps()?.cancelButtonProps"
+      [confirmButtonProps]="footerProps()?.confirmButtonProps"
+    ></div></div
+></ng-template>

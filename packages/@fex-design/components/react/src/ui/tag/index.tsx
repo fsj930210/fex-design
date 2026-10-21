@@ -1,6 +1,6 @@
 import type { TagUiOptions } from '@fex-design/core/tag/types'
 import { cn } from '@fex-design/utils'
-import type { CSSProperties, MouseEventHandler, ReactNode } from 'react'
+import type { ComponentProps, CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import {
   Tag as PrimitiveTag,
   TagAction,
@@ -11,10 +11,14 @@ export type { TagActionProps } from '@fex-design/react/primitive/tag'
 export { TagAction } from '@fex-design/react/primitive/tag'
 
 export interface TagProps extends PrimitiveTagProps, TagUiOptions<ReactNode, CSSProperties> {
+  actionProps?:
+    | Omit<ComponentProps<typeof TagAction>, 'children' | 'disabled' | 'onClick'>
+    | undefined
   onClose?: MouseEventHandler<HTMLButtonElement>
 }
 
 export function Tag({
+  actionProps,
   closable = false,
   closeIcon,
   onClose,
@@ -36,10 +40,11 @@ export function Tag({
       {children}
       {closable ? (
         <TagAction
+          {...actionProps}
           disabled={disabled}
-          aria-label="Close"
-          className={classNames?.close}
-          style={styles?.close}
+          aria-label={actionProps?.['aria-label'] ?? 'Close'}
+          className={cn(classNames?.close, actionProps?.className)}
+          style={{ ...styles?.close, ...actionProps?.style }}
           onClick={onClose}
         >
           {closeIcon}

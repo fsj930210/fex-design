@@ -1,7 +1,7 @@
-import { toastCloseClassName } from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import type { JSX } from "solid-js"
-import { toast, type SolidToastItem, type SolidToastManager } from "./toast-manager"
+import { toastCloseClassName } from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import type { JSX } from 'solid-js'
+import { toast, type SolidToastItem, type SolidToastManager } from './toast-manager'
 
 export interface ToastCloseProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   manager?: SolidToastManager

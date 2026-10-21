@@ -31,10 +31,18 @@
     anchorItemContextKey,
   );
   const item: AnchorRegisteredItem = {
-    get key() { return value; },
-    get target() { return target; },
-    get targetOffset() { return targetOffset; },
-    get parentKey() { return parent?.key; },
+    get key() {
+      return value;
+    },
+    get target() {
+      return target;
+    },
+    get targetOffset() {
+      return targetOffset;
+    },
+    get parentKey() {
+      return parent?.key;
+    },
   };
   setContext(anchorItemContextKey, item);
   // Keep the external registry current; the effect cleans up each previous registration.

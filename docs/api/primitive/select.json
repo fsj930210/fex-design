@@ -22,7 +22,13 @@
       "name": "SelectTrigger",
       "layer": "primitive",
       "description": "连接输入控件与弹层触发器。",
-      "props": []
+      "props": [
+        {
+          "name": "valueProps",
+          "type": "SelectValue configuration",
+          "description": "直接子组件 SelectValue 的原生配置。"
+        }
+      ]
     },
     {
       "name": "SelectValue",
@@ -39,6 +45,21 @@
           "name": "maxTagCount",
           "type": "number",
           "description": "最多显示的标签数量；未设置时显示全部，负数按 0 处理，剩余数量显示为 +N。"
+        },
+        {
+          "name": "tagProps",
+          "type": "Tag configuration | (option) => Tag configuration",
+          "description": "仅配置直接组合的子组件；重复选中项通过选项值区分，保留移除交互。"
+        },
+        {
+          "name": "tagActionProps",
+          "type": "TagAction configuration | (option) => TagAction configuration",
+          "description": "仅配置直接组合的子组件；重复选中项通过选项值区分，保留移除交互。"
+        },
+        {
+          "name": "overflowTagProps",
+          "type": "Tag configuration",
+          "description": "仅配置直接组合的子组件；重复选中项通过选项值区分，保留移除交互。"
         }
       ]
     },
@@ -51,6 +72,21 @@
           "name": "popupRender",
           "type": "(menu, { close }) => content",
           "description": "包装或替换完整菜单，并提供 close 关闭方法。Vue 使用 popup 作用域 slot（menu 为可渲染组件）；Svelte 使用 popupRender snippet（menu 为 snippet）；Angular 使用 #popupRender 模板（menu 为 TemplateRef）。"
+        },
+        {
+          "name": "portalProps",
+          "type": "PopoverPortal props",
+          "description": "按直接子组件原生契约配置，浮层样式落到实际 Portal 内部。"
+        },
+        {
+          "name": "popoverContentProps",
+          "type": "PopoverContent props",
+          "description": "按直接子组件原生契约配置，浮层样式落到实际 Portal 内部。"
+        },
+        {
+          "name": "listProps",
+          "type": "SelectList props",
+          "description": "按直接子组件原生契约配置，浮层样式落到实际 Portal 内部。"
         }
       ]
     },

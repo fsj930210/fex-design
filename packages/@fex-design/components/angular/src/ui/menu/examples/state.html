@@ -1,0 +1,56 @@
+<div class="grid w-full max-w-2xl gap-4">
+  <div class="flex flex-wrap gap-2">
+    <button button size="sm" (click)="value.set(['members'])">设置成员</button>
+    <button button size="sm" (click)="value.set(['profile'])">设置个人资料</button>
+    <button button size="sm" (click)="value.set([])">清空选择</button>
+    <button button size="sm" (click)="open.set(['workspace'])">展开工作空间</button>
+    <button button size="sm" (click)="open.set([])">收起工作空间</button>
+  </div>
+  <p class="text-sm text-muted-foreground">
+    选择：[{{ value().join(', ') }}]；展开：[{{ open().join(', ') }}]
+  </p>
+  <div class="grid items-start gap-4 sm:grid-cols-2">
+    <section class="grid min-w-0 gap-2">
+      <h3 class="text-sm font-medium">受控 value / openValues</h3>
+      <div
+        menu
+        [value]="value()"
+        [openValues]="open()"
+        (valueChange)="value.set($event)"
+        (openValuesChange)="open.set($event)"
+        layout="inline"
+        class="w-full max-w-xs rounded-lg border border-border p-1"
+        aria-label="受控菜单"
+      >
+        <div subMenu value="workspace">
+          <button subMenuTrigger>工作空间</button>
+          <div subMenuContent [content]="controlledContent"></div>
+          <ng-template #controlledContent>
+            <button menuItem value="members">成员</button>
+          </ng-template>
+        </div>
+        <button menuItem value="profile">个人资料</button>
+      </div>
+    </section>
+    <section class="grid min-w-0 gap-2">
+      <h3 class="text-sm font-medium">非受控 defaultValue / defaultOpenValues</h3>
+      <div
+        menu
+        [defaultValue]="['members']"
+        [defaultOpenValues]="['workspace']"
+        layout="inline"
+        class="w-full max-w-xs rounded-lg border border-border p-1"
+        aria-label="非受控菜单"
+      >
+        <div subMenu value="workspace">
+          <button subMenuTrigger>工作空间</button>
+          <div subMenuContent [content]="uncontrolledContent"></div>
+          <ng-template #uncontrolledContent>
+            <button menuItem value="members">成员</button>
+          </ng-template>
+        </div>
+        <button menuItem value="profile">个人资料</button>
+      </div>
+    </section>
+  </div>
+</div>

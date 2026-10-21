@@ -1,9 +1,21 @@
 import { addDate } from '../date/utils'
 import type { CalendarDate, CalendarGranularity, CalendarPanel } from './types'
 
-export type CalendarNavigationAction = 'previous-year' | 'previous-month' | 'next-month' | 'next-year' | 'previous-panel' | 'next-panel' | 'today'
+export type CalendarNavigationAction =
+  | 'previous-year'
+  | 'previous-month'
+  | 'next-month'
+  | 'next-year'
+  | 'previous-panel'
+  | 'next-panel'
+  | 'today'
 
-export function getCalendarNavigationDate(date: CalendarDate, panel: CalendarPanel, action: CalendarNavigationAction, today: CalendarDate): CalendarDate {
+export function getCalendarNavigationDate(
+  date: CalendarDate,
+  panel: CalendarPanel,
+  action: CalendarNavigationAction,
+  today: CalendarDate,
+): CalendarDate {
   if (action === 'today') return today
   const direction = action.startsWith('previous') ? -1 : 1
   if (action.endsWith('month')) return addDate(date, { months: direction })
@@ -16,7 +28,10 @@ export function getCalendarDefaultPanel(granularity: CalendarGranularity): Calen
   return granularity === 'week' ? 'date' : granularity
 }
 
-export function getCalendarNextPanel(panel: CalendarPanel, granularity: CalendarGranularity): CalendarPanel | null {
+export function getCalendarNextPanel(
+  panel: CalendarPanel,
+  granularity: CalendarGranularity,
+): CalendarPanel | null {
   if (granularity === 'year' && (panel === 'year' || panel === 'decade')) return null
   if (panel === getCalendarDefaultPanel(granularity)) return null
   // Both panels contain individual years, so selecting a year drills down once.

@@ -93,6 +93,12 @@
     { "id": "direction", "title": "LTR 与 RTL", "description": "对比逻辑行内结束侧的附着位置。" },
     { "id": "standalone", "title": "独立使用", "description": "不包裹内容时直接显示徽标。" },
     { "id": "offset", "title": "自定义位置偏移", "description": "对比默认位置和 offset 偏移。" },
-    { "id": "styling", "title": "结构化样式", "description": "定制 root、content 和 indicator。" }
+
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
+    }
   ]
 }

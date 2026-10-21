@@ -1,2 +1,18 @@
-﻿<div calendarRoot [defaultViewDate]="options.defaultViewDate" [locale]="options.locale" [weekStartsOn]="options.weekStartsOn ?? 0" [showWeek]="options.showWeek" [fullscreen]="options.fullscreen" [class]="rootClass" [attr.data-fullscreen]="true"><div calendarExampleContent [options]="options" [fullCellTemplate]="fullCell"><ng-template #fullCell let-cell="cell"><button calendarCellTrigger [cell]="cell" class="flex-col items-center"><span>{{ cell.label }}</span><small>{{ lunar(cell) }}</small></button></ng-template></div></div>
-
+﻿<div
+  calendarRoot
+  [defaultViewDate]="options.defaultViewDate"
+  [locale]="options.locale"
+  [weekStartsOn]="options.weekStartsOn ?? 0"
+  [showWeek]="options.showWeek"
+  [fullscreen]="options.fullscreen"
+  [class]="rootClass"
+  [attr.data-fullscreen]="true"
+>
+  <div calendarExampleContent [options]="options" [fullCellTemplate]="fullCell">
+    <ng-template #fullCell let-cell="cell"
+      ><button calendarCellTrigger [cell]="cell" class="flex-col items-center">
+        <span>{{ cell.label }}</span><small>{{ lunar(cell) }}</small>
+      </button></ng-template
+    >
+  </div>
+</div>

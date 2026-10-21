@@ -1,8 +1,8 @@
-import { tableClassName, tableContainerClassName } from "@fex-design/components-styles/table"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps } from "react"
+import { tableClassName, tableContainerClassName } from '@fex-design/components-styles/table'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps } from 'react'
 
-export type TableProps = ComponentProps<"table">
+export type TableProps = ComponentProps<'table'>
 export type TableRootProps = TableProps
 
 export function TableRoot({ className, ...props }: TableRootProps) {

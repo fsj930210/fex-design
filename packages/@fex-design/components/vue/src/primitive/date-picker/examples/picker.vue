@@ -1,69 +1,78 @@
 <script setup lang="ts">
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter } from '@fex-design/vue/primitive/date-picker'
+import {
+  DatePickerRoot,
+  DatePickerTrigger,
+  DatePickerContent,
+  DatePickerPanel,
+  RangePickerRoot,
+  RangePickerTrigger,
+  RangePickerContent,
+  RangePickerPanelGroup,
+  DatePickerFooter,
+} from '@fex-design/vue/primitive/date-picker'
 defineOptions({ name: 'DatePickerPickerExample' })
-
 </script>
 <template>
-<div class="flex w-full min-w-0 flex-col gap-4">
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">日期</p>
-<DatePickerRoot :picker="'date'">
-<DatePickerTrigger />
-<DatePickerContent>
-<DatePickerPanel />
-<DatePickerFooter></DatePickerFooter>
-</DatePickerContent>
-</DatePickerRoot>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">周</p>
-<DatePickerRoot :picker="'week'">
-<DatePickerTrigger />
-<DatePickerContent>
-<DatePickerPanel />
-<DatePickerFooter></DatePickerFooter>
-</DatePickerContent>
-</DatePickerRoot>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">月份</p>
-<DatePickerRoot :picker="'month'">
-<DatePickerTrigger />
-<DatePickerContent>
-<DatePickerPanel />
-<DatePickerFooter></DatePickerFooter>
-</DatePickerContent>
-</DatePickerRoot>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">季度</p>
-<DatePickerRoot :picker="'quarter'">
-<DatePickerTrigger />
-<DatePickerContent>
-<DatePickerPanel />
-<DatePickerFooter></DatePickerFooter>
-</DatePickerContent>
-</DatePickerRoot>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">年份</p>
-<DatePickerRoot :picker="'year'">
-<DatePickerTrigger />
-<DatePickerContent>
-<DatePickerPanel />
-<DatePickerFooter></DatePickerFooter>
-</DatePickerContent>
-</DatePickerRoot>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">月份范围</p>
-<RangePickerRoot :picker="'month'">
-<RangePickerTrigger />
-<RangePickerContent>
-<RangePickerPanelGroup />
-<DatePickerFooter></DatePickerFooter>
-</RangePickerContent>
-</RangePickerRoot>
-</section>
-</div>
+  <div class="flex w-full min-w-0 flex-col gap-4">
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm font-medium">日期</p>
+      <DatePickerRoot :picker="'date'">
+        <DatePickerTrigger />
+        <DatePickerContent>
+          <DatePickerPanel />
+          <DatePickerFooter></DatePickerFooter>
+        </DatePickerContent>
+      </DatePickerRoot>
+    </section>
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm font-medium">周</p>
+      <DatePickerRoot :picker="'week'">
+        <DatePickerTrigger />
+        <DatePickerContent>
+          <DatePickerPanel />
+          <DatePickerFooter></DatePickerFooter>
+        </DatePickerContent>
+      </DatePickerRoot>
+    </section>
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm font-medium">月份</p>
+      <DatePickerRoot :picker="'month'">
+        <DatePickerTrigger />
+        <DatePickerContent>
+          <DatePickerPanel />
+          <DatePickerFooter></DatePickerFooter>
+        </DatePickerContent>
+      </DatePickerRoot>
+    </section>
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm font-medium">季度</p>
+      <DatePickerRoot :picker="'quarter'">
+        <DatePickerTrigger />
+        <DatePickerContent>
+          <DatePickerPanel />
+          <DatePickerFooter></DatePickerFooter>
+        </DatePickerContent>
+      </DatePickerRoot>
+    </section>
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm font-medium">年份</p>
+      <DatePickerRoot :picker="'year'">
+        <DatePickerTrigger />
+        <DatePickerContent>
+          <DatePickerPanel />
+          <DatePickerFooter></DatePickerFooter>
+        </DatePickerContent>
+      </DatePickerRoot>
+    </section>
+    <section class="flex w-full min-w-0 flex-col gap-2">
+      <p class="text-sm font-medium">月份范围</p>
+      <RangePickerRoot :picker="'month'">
+        <RangePickerTrigger />
+        <RangePickerContent>
+          <RangePickerPanelGroup />
+          <DatePickerFooter></DatePickerFooter>
+        </RangePickerContent>
+      </RangePickerRoot>
+    </section>
+  </div>
 </template>

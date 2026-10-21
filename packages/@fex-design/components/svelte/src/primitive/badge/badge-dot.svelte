@@ -30,5 +30,7 @@
     badgeDotColorClassName({ color: presetColor }),
     className,
   )}
-  style={[style, color && !presetColor ? `--badge-color:${color}` : ""].filter(Boolean).join(";") || undefined}
+  style={[style, color && !presetColor ? `--badge-color:${color}` : ""]
+    .filter(Boolean)
+    .join(";") || undefined}
 ></span>

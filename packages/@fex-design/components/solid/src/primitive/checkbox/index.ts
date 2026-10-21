@@ -1,6 +1,11 @@
-export { CheckboxRoot, CheckboxRoot as Checkbox, type CheckboxRootProps, type CheckboxProps } from "./checkbox-root"
-export { CheckboxControl, type CheckboxControlProps } from "./checkbox-control"
-export { CheckboxIndicator, type CheckboxIndicatorProps } from "./checkbox-indicator"
-export { CheckboxLabel, type CheckboxLabelProps } from "./checkbox-label"
-export { CheckboxGroup, type CheckboxGroupProps } from "./checkbox-group"
-export type { CheckboxGroupChangeMeta, CheckboxValue } from "@fex-design/core/checkbox/types"
+export {
+  CheckboxRoot,
+  CheckboxRoot as Checkbox,
+  type CheckboxRootProps,
+  type CheckboxProps,
+} from './checkbox-root'
+export { CheckboxControl, type CheckboxControlProps } from './checkbox-control'
+export { CheckboxIndicator, type CheckboxIndicatorProps } from './checkbox-indicator'
+export { CheckboxLabel, type CheckboxLabelProps } from './checkbox-label'
+export { CheckboxGroup, type CheckboxGroupProps } from './checkbox-group'
+export type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'

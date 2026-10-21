@@ -7,4 +7,4 @@ export {
   SkeletonInput,
   SkeletonText,
   SkeletonPlaceholder,
-} from "./skeleton"
+} from './skeleton'

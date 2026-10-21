@@ -6,7 +6,7 @@ const Labeled = ({
   label: string
   placement: 'start' | 'center' | 'end'
 }) => (
-  <div className="flex items-center gap-2">
+  <div className="flex flex-wrap items-center gap-2">
     <Separator
       className={placement === 'start' ? 'w-12' : placement === 'end' ? 'flex-1' : 'flex-1'}
     />

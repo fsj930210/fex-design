@@ -1,11 +1,17 @@
 <script lang="ts">
-  import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow } from "@fex-design/svelte/primitive/tooltip";
+  import {
+    TooltipRoot,
+    TooltipTrigger,
+    TooltipPortal,
+    TooltipContent,
+    TooltipArrow,
+  } from "@fex-design/svelte/primitive/tooltip";
   import { Button } from "@fex-design/svelte/primitive/button";
   import { buttonClassName } from "@fex-design/components-styles/button";
   let open = $state(false);
 </script>
 
-<div class="flex min-h-64 items-center justify-center gap-3">
+<div class="flex flex-wrap min-h-64 items-center justify-center gap-3">
   <Button onclick={() => (open = !open)}>外部{open ? "关闭" : "打开"}</Button
   ><TooltipRoot {open} onOpenChange={(value) => (open = value)}
     ><TooltipTrigger

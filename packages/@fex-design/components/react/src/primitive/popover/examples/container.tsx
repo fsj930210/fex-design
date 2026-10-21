@@ -18,7 +18,7 @@ export function ContainerExample() {
         className="relative h-96 overflow-auto rounded-lg border-2 border-dashed p-6"
       >
         <p>自定义挂载区域</p>
-        <div className="flex min-h-[560px] justify-center gap-4 pt-24">
+        <div className="flex flex-wrap min-h-[560px] justify-center gap-4 pt-24">
           {[false, true].map((custom) => (
             <Popover key={String(custom)}>
               <PopoverTrigger>

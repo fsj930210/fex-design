@@ -39,9 +39,10 @@ export function DemoCard(props: {
     >
       <div class="flex items-baseline justify-between gap-4">
         <h3 class="m-0 text-lg font-semibold text-foreground">{props.scene.title}</h3>
-        
       </div>
-      <p class="mt-1.5 mb-0 leading-relaxed text-muted-foreground text-sm">{props.scene.description}</p>
+      <p class="mt-1.5 mb-0 leading-relaxed text-muted-foreground text-sm">
+        {props.scene.description}
+      </p>
 
       <Show
         when={hasBothLayers()}
@@ -184,7 +185,10 @@ function SingleDemoPanel(props: {
   }
 
   return (
-    <div ref={panel} class="flex-1 min-w-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm flex flex-col">
+    <div
+      ref={panel}
+      class="flex-1 min-w-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm flex flex-col"
+    >
       {/* Panel Header */}
       <div class="flex items-center justify-between border-b border-border bg-muted/40 px-3 py-2 text-xs">
         <div class="flex items-center gap-1.5">
@@ -297,7 +301,11 @@ function SingleDemoPanel(props: {
 
 function CheckIcon() {
   return (
-    <svg class="size-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+    <svg
+      class="size-3.5 stroke-current fill-none stroke-[2]"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path d="m5 12 4 4L19 6" />
     </svg>
   )
@@ -305,7 +313,11 @@ function CheckIcon() {
 
 function CopyIcon() {
   return (
-    <svg class="size-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+    <svg
+      class="size-3.5 stroke-current fill-none stroke-[2]"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <rect x="9" y="9" width="11" height="11" rx="2" />
       <path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3" />
     </svg>
@@ -314,13 +326,13 @@ function CopyIcon() {
 
 function OpenIcon() {
   return (
-    <svg class="size-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+    <svg
+      class="size-3.5 stroke-current fill-none stroke-[2]"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path d="M14 5h5v5M10 14 19 5" />
       <path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" />
     </svg>
   )
 }
-
-
-
-

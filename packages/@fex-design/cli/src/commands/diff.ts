@@ -1,14 +1,14 @@
-import fs from "node:fs"
-import path from "node:path"
+import fs from 'node:fs'
+import path from 'node:path'
 import {
   findMasterRepoRoot,
   loadComponentsConfig,
   resolveAliasToPhysicalDir,
   resolveTargetProjectDir,
-} from "../config.ts"
-import { computeLineDiff, formatDiffOutput } from "../diff.ts"
-import { applyAliasesToContent, resolveRegistryGraph } from "../registry.ts"
-import type { Framework, Layer } from "../types.ts"
+} from '../config.ts'
+import { computeLineDiff, formatDiffOutput } from '../diff.ts'
+import { applyAliasesToContent, resolveRegistryGraph } from '../registry.ts'
+import type { Framework, Layer } from '../types.ts'
 
 interface DiffOptions {
   framework?: string | undefined
@@ -29,24 +29,24 @@ export async function runDiff(component: string | undefined, options: DiffOption
   }
 
   const framework: Framework = (options.framework as Framework) || config.framework
-  const layer: Layer = (options.layer as Layer) || "ui"
+  const layer: Layer = (options.layer as Layer) || 'ui'
 
   if (!component) {
-    console.log("ℹ Please specify a component to diff. Example: fex diff popover")
+    console.log('ℹ Please specify a component to diff. Example: fex diff popover')
     process.exit(1)
   }
 
   let compName = component
   let compLayer = layer
-  if (component.startsWith("primitive/")) {
-    compLayer = "primitive"
-    compName = component.slice("primitive/".length)
-  } else if (component.startsWith("ui/")) {
-    compLayer = "ui"
-    compName = component.slice("ui/".length)
-  } else if (component.startsWith("pro/")) {
-    compLayer = "pro"
-    compName = component.slice("pro/".length)
+  if (component.startsWith('primitive/')) {
+    compLayer = 'primitive'
+    compName = component.slice('primitive/'.length)
+  } else if (component.startsWith('ui/')) {
+    compLayer = 'ui'
+    compName = component.slice('ui/'.length)
+  } else if (component.startsWith('pro/')) {
+    compLayer = 'pro'
+    compName = component.slice('pro/'.length)
   }
 
   console.log(`\n🔍 Comparing local [${compLayer}] ${compName} against official registry...`)
@@ -72,9 +72,9 @@ export async function runDiff(component: string | undefined, options: DiffOption
       continue
     }
 
-    const localCode = fs.readFileSync(destPath, "utf-8")
+    const localCode = fs.readFileSync(destPath, 'utf-8')
     const diffs = computeLineDiff(localCode, expectedCode)
-    const changes = diffs.filter((d) => d.type !== "same")
+    const changes = diffs.filter((d) => d.type !== 'same')
 
     if (changes.length > 0) {
       totalDiffCount++
@@ -87,4 +87,3 @@ export async function runDiff(component: string | undefined, options: DiffOption
     console.log(`\n✨ All files for "${compName}" are up-to-date with registry.\n`)
   }
 }
-

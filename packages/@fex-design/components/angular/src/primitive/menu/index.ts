@@ -1,107 +1,27 @@
-import {
-  handleMenuListFocus,
-  handleMenuListKeyDown,
-  syncMenuListTabStops,
-  type MenuOrientation,
-} from '@fex-design/core/menu/navigation'
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Directive,
-  ElementRef,
-  HostListener,
-  Input,
-  inject,
-} from '@angular/core'
-import type { AfterContentInit } from '@angular/core'
+export { MenuRoot } from './menu-root'
+export { MenuContent } from './menu-content'
+export { MenuItem } from './menu-item'
+export { SubMenu } from './sub-menu'
+export { SubMenuTrigger } from './sub-menu-trigger'
+export { SubMenuContent } from './sub-menu-content'
+export { MenuGroup } from './menu-group'
+export { MenuGroupLabel } from './menu-group-label'
+export { MenuSeparator } from './menu-separator'
+export { useMenu } from './use-menu'
+export type {
+  MenuOptions,
+  MenuSnapshot,
+  MenuLayout,
+  MenuActivateInfo,
+  MenuChangeInfo,
+} from '@fex-design/core/menu/types'
+export type {
+  MenuDomBinding,
+  MenuBranch,
+  MenuItemSource,
+  MenuContentOptions,
+} from '@fex-design/core/menu/dom-types'
+export type { MenuPopoverProps } from './popover-types'
+export type { MenuEntry } from '@fex-design/core/menu/types'
 
-@Component({
-  selector: 'fex-menu-root',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[attr.role]': 'role', 'data-slot': 'menu' },
-  template: '<ng-content />',
-})
-export class MenuRoot {
-  @Input() role = 'menu'
-}
-
-@Component({
-  selector: 'fex-menu-list',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    role: 'group',
-    'data-slot': 'menu-list',
-    '[attr.aria-orientation]': 'orientation',
-    '[attr.data-orientation]': 'orientation',
-    '[attr.data-parent-value]': 'parentValue',
-  },
-  template: '<ng-content />',
-})
-export class MenuList implements AfterContentInit {
-  @Input() orientation: MenuOrientation = 'vertical'
-  @Input() parentValue?: string | number
-  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
-
-  ngAfterContentInit() {
-    queueMicrotask(() => syncMenuListTabStops(this.elementRef.nativeElement))
-  }
-
-  @HostListener('focusin', ['$event'])
-  focus(event: FocusEvent) {
-    handleMenuListFocus(event)
-  }
-
-  @HostListener('keydown', ['$event'])
-  keydown(event: KeyboardEvent) {
-    handleMenuListKeyDown(event, this.elementRef.nativeElement, this.orientation)
-  }
-}
-
-@Directive({
-  selector: '[fexMenuItem]',
-  standalone: true,
-  host: {
-    role: 'menuitem',
-    tabindex: '-1',
-    'data-slot': 'menu-item',
-    '[attr.aria-disabled]': 'disabled || null',
-    '[attr.aria-haspopup]': "submenu ? 'menu' : null",
-    '[attr.data-menu-value]': 'value',
-    '[attr.data-selected]': "selected ? 'true' : null",
-  },
-})
-export class MenuItem {
-  @Input() value?: string | number
-  @Input() disabled = false
-  @Input() selected = false
-  @Input() submenu = false
-}
-
-@Component({
-  selector: 'fex-menu-group',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { role: 'group', 'data-slot': 'menu-group' },
-  template: '<ng-content />',
-})
-export class MenuGroup {}
-
-@Component({
-  selector: 'fex-menu-group-label',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'menu-group-label' },
-  template: '<ng-content />',
-})
-export class MenuGroupLabel {}
-
-@Component({
-  selector: 'fex-menu-divider',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { role: 'separator', 'data-slot': 'menu-divider' },
-  template: '',
-})
-export class MenuDivider {}
+export type { MenuStyles, MenuClassNames, MenuSemanticPart } from './style-types'

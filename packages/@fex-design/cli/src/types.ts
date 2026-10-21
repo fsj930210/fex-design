@@ -1,14 +1,14 @@
-export type Framework = "react" | "vue" | "solid" | "svelte" | "angular"
+export type Framework = 'react' | 'vue' | 'solid' | 'svelte' | 'angular'
 
-export type Layer = "primitive" | "ui" | "pro"
+export type Layer = 'primitive' | 'ui' | 'pro'
 
-export type TargetBucket = "ui" | "primitive" | "pro" | "hooks" | "utils" | "icons"
+export type TargetBucket = 'ui' | 'primitive' | 'pro' | 'hooks' | 'utils' | 'icons'
 
 export interface ComponentsConfig {
   $schema?: string
   framework: Framework
   tailwind: {
-    version?: "v3" | "v4"
+    version?: 'v3' | 'v4'
     css: string
     baseColor?: string
   }

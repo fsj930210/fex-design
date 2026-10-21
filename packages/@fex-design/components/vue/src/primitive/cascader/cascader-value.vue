@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { cascaderPlaceholderClassName, cascaderValueClassName } from '@fex-design/components-styles/cascader'
+import {
+  cascaderPlaceholderClassName,
+  cascaderValueClassName,
+} from '@fex-design/components-styles/cascader'
 import Tag from '../tag/tag.vue'
 import { useCascader } from './use-cascader'
 const cascader = useCascader('CascaderValue')

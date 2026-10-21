@@ -9,13 +9,14 @@ import {
 } from '@fex-design/core/calendar'
 import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
 import { cn } from '@fex-design/utils'
-import { CalendarRoot } from '../../primitive/calendar'
+import { CalendarRoot, CalendarHeader } from '../../primitive/calendar'
 import { CalendarContent } from './calendar-content'
 export type CalendarProps = Omit<
   ComponentProps<'div'>,
   'children' | 'defaultValue' | 'onChange' | 'onSelect'
 > &
   CalendarUIOptions & {
+    headerProps?: Omit<ComponentProps<typeof CalendarHeader>, 'children'> | undefined
     headerRender?: false | ((context: CalendarRenderContext) => ReactNode) | undefined
     cellRender?: ((context: CalendarCellRenderContext) => ReactNode) | undefined
     fullCellRender?: ((context: CalendarCellRenderContext) => ReactNode) | undefined
@@ -46,6 +47,7 @@ export function Calendar({
   fullscreen,
   showWeek,
   locale,
+  headerProps,
   headerRender,
   cellRender,
   fullCellRender,
@@ -88,6 +90,7 @@ export function Calendar({
     >
       <CalendarContent
         options={options}
+        headerProps={headerProps}
         headerRender={headerRender}
         cellRender={cellRender}
         fullCellRender={fullCellRender}

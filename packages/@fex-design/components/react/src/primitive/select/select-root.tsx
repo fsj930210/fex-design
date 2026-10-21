@@ -43,7 +43,8 @@ export interface SelectRootProps extends Omit<
   placeholder?: string
   virtual?: SelectVirtualOptions
   maxCount?: number
-  status?: 'error' | 'warning'
+  'aria-invalid'?: ComponentProps<'div'>['aria-invalid']
+  'data-warning'?: string | undefined
 }
 
 export function SelectRoot(props: SelectRootProps) {
@@ -62,7 +63,9 @@ export function SelectRoot(props: SelectRootProps) {
       return optionsRef.current.multiple
     },
     get disabledValues() {
-      return optionsRef.current.options?.filter((option) => option.disabled).map((option) => option.value)
+      return optionsRef.current.options
+        ?.filter((option) => option.disabled)
+        .map((option) => option.value)
     },
     onChange: (values, meta) => {
       const resolveOption = (value: SelectionValue) =>
@@ -84,7 +87,9 @@ export function SelectRoot(props: SelectRootProps) {
   })
   const controllerRef = useRef<ReturnType<typeof createSelectController> | null>(null)
   controllerRef.current ??= createSelectController({
-    get disabled() { return optionsRef.current.disabled },
+    get disabled() {
+      return optionsRef.current.disabled
+    },
     selection: selectionRef.current,
     get options() {
       const keyword = controllerRef.current?.getSnapshot().searchValue ?? ''
@@ -134,12 +139,15 @@ export function SelectRoot(props: SelectRootProps) {
         disabled: props.disabled === true,
         clearable: props.clearable === true,
         loading: props.loading === true,
-        status: props.status,
+        ariaInvalid: props['aria-invalid'],
+        dataWarning: props['data-warning'],
         placeholder: props.placeholder,
         virtual: props.virtual,
         listId,
         selectedOptions,
-        removeValue: (value) => { if (!props.disabled) selectionRef.current?.unselect(value) },
+        removeValue: (value) => {
+          if (!props.disabled) selectionRef.current?.unselect(value)
+        },
       }}
     >
       <PopoverRoot

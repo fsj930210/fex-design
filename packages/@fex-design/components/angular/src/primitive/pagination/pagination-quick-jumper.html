@@ -1,0 +1,36 @@
+<div
+  inputNumberRoot
+  [class]="inputClassName()"
+  [style]="inputNumberProps()?.style"
+  [variant]="inputNumberProps()?.variant ?? 'outlined'"
+  [step]="1"
+  [size]="state.size()"
+  [min]="1"
+  [max]="maxPage()"
+  [precision]="0"
+  [disabled]="disabled() || state.snapshot().disabled || state.snapshot().pageCount === 0"
+>
+  <input
+    inputNumberControl
+    [nativeAttributes]="resolvedInputProps()"
+    [class]="inputProps().class ?? ''"
+    [style]="inputProps().style ?? null"
+    (keydown)="keydown($event)"
+  />
+  <span
+    inputNumberActions
+    [class]="inputActionsProps()?.class"
+    [style]="inputActionsProps()?.style"
+  >
+    <button
+      inputNumberIncrement
+      [class]="incrementProps()?.class"
+      [style]="incrementProps()?.style"
+    ></button>
+    <button
+      inputNumberDecrement
+      [class]="decrementProps()?.class"
+      [style]="decrementProps()?.style"
+    ></button>
+  </span>
+</div>

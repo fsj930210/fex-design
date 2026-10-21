@@ -3,7 +3,8 @@ import { scrollbarThumbClassName } from '@fex-design/components-styles/scrollbar
 import { cn } from '@fex-design/utils'
 import type { HTMLAttributes, RefAttributes } from 'react'
 
-export interface ScrollbarThumbProps extends HTMLAttributes<HTMLDivElement>, RefAttributes<HTMLDivElement> {
+export interface ScrollbarThumbProps
+  extends HTMLAttributes<HTMLDivElement>, RefAttributes<HTMLDivElement> {
   axis: ScrollbarAxis
 }
 

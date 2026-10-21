@@ -1,9 +1,9 @@
-export type ProgressVariant = "line" | "circle" | "dashboard"
-export type ProgressStatus = "pending" | "active" | "success" | "error"
-export type ProgressLinecap = "round" | "butt" | "square"
-export type ProgressInfoPlacement = "outside" | "inside" | "top" | "bottom" | "none"
-export type ProgressSize = "sm" | "md" | "lg" | number
-export type ProgressGapPlacement = "top" | "bottom" | "start" | "end" | "left" | "right"
+export type ProgressVariant = 'line' | 'circle' | 'dashboard'
+export type ProgressStatus = 'pending' | 'active' | 'success' | 'error'
+export type ProgressLinecap = 'round' | 'butt' | 'square'
+export type ProgressInfoPlacement = 'outside' | 'inside' | 'top' | 'bottom' | 'none'
+export type ProgressSize = 'sm' | 'md' | 'lg' | number
+export type ProgressGapPlacement = 'top' | 'bottom' | 'start' | 'end' | 'left' | 'right'
 
 export type ProgressGradient =
   | { from: string; to: string; direction?: string }

@@ -3,7 +3,7 @@ import type { AlertOptions } from '@fex-design/core/alert/types'
 import { alertClassName } from '@fex-design/components-styles/alert'
 import { cn } from '@fex-design/utils'
 
-defineOptions({ name: "AlertRoot", inheritAttrs: false })
+defineOptions({ name: 'AlertRoot', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{
     class?: string | undefined
@@ -27,4 +27,3 @@ const props = withDefaults(
     <slot />
   </div>
 </template>
-

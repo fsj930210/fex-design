@@ -1,6 +1,30 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter } from '@fex-design/angular/primitive/date-picker'
-@Component({ selector: 'date-picker-appearance-example', standalone: true, imports: [DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './appearance.html' })
-export class DatePickerAppearanceExample {
-
-}
+import {
+  DatePickerRoot,
+  DatePickerTrigger,
+  DatePickerContent,
+  DatePickerPanel,
+  RangePickerRoot,
+  RangePickerTrigger,
+  RangePickerContent,
+  RangePickerPanelGroup,
+  DatePickerFooter,
+} from '@fex-design/angular/primitive/date-picker'
+@Component({
+  selector: 'date-picker-appearance-example',
+  standalone: true,
+  imports: [
+    DatePickerRoot,
+    DatePickerTrigger,
+    DatePickerContent,
+    DatePickerPanel,
+    RangePickerRoot,
+    RangePickerTrigger,
+    RangePickerContent,
+    RangePickerPanelGroup,
+    DatePickerFooter,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './appearance.html',
+})
+export class DatePickerAppearanceExample {}

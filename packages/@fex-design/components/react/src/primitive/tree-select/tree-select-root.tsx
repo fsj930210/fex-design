@@ -1,16 +1,10 @@
 import { createTreeSelectController } from '@fex-design/core/tree-select/create-tree-select-controller'
-import type {
-  TreeSelectController,
-  TreeSelectOptions,
-} from '@fex-design/core/tree-select/types'
+import type { TreeSelectController, TreeSelectOptions } from '@fex-design/core/tree-select/types'
 import type { ReactNode } from 'react'
 import { useRef, useState } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
-import {
-  PopoverRoot,
-  type PopoverRootProps,
-} from '../popover'
+import { PopoverRoot, type PopoverRootProps } from '../popover'
 import { TreeSelectContext } from './tree-select-context'
 
 export interface TreeSelectRootProps<TNode = unknown>

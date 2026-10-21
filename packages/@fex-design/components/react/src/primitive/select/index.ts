@@ -1,11 +1,5 @@
 export { SelectRoot, type SelectRootProps, type SelectChangeMeta } from './select-root'
-export {
-  SelectTrigger,
-  SelectValue,
-  type SelectTriggerProps,
-  type SelectValueProps,
-  type SelectInputProps,
-} from './select-trigger'
+export { SelectTrigger, type SelectTriggerProps, type SelectInputProps } from './select-trigger'
 export {
   SelectContent,
   SelectGroup,
@@ -18,3 +12,5 @@ export {
 } from './select-content'
 export { useSelect, useSelectOption } from './use-select'
 export type { SelectFilterOption, SelectOption } from '@fex-design/core/select/types'
+
+export { SelectValue, type SelectValueProps } from './select-value'

@@ -1,0 +1,26 @@
+<div class="w-full max-w-xs rounded-lg border border-border p-1">
+  <div menuRoot layout="inline">
+    <div menuContent aria-label="自定义指示器">
+      <button menuItem value="overview">概览</button>
+      <div subMenu value="workspace">
+        <button subMenuTrigger>工作空间</button>
+        <div subMenuContent [content]="workspaceContent"></div>
+        <ng-template #workspaceContent><button menuItem value="members">成员</button></ng-template>
+      </div>
+      <div subMenu value="settings">
+        <button subMenuTrigger>
+          自定义指示器<span
+            indicator
+            class="inline-flex size-4 items-center justify-center rounded-full bg-violet-100 font-bold text-violet-700"
+            >+</span
+          >
+        </button>
+        <div subMenuContent [content]="settingsContent"></div>
+        <ng-template #settingsContent
+          ><button menuItem value="preferences">偏好设置</button></ng-template
+        >
+      </div>
+      <button menuItem value="profile">个人资料</button>
+    </div>
+  </div>
+</div>

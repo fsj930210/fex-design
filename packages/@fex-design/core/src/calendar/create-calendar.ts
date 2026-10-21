@@ -2,8 +2,25 @@
 import { createCalendarGrid } from './grid'
 import { compareCalendarDate, getCalendarToday } from './temporal'
 import { getCalendarValueDate, getCalendarSelectionValue, isSameCalendarValue } from './value'
-import { getCalendarDefaultPanel, getCalendarNavigationDate, getCalendarNextPanel, type CalendarNavigationAction } from './navigation'
-import type { CalendarCell, CalendarDate, CalendarGranularity, CalendarGrid, CalendarGridOptions, CalendarLocale, CalendarPanel, CalendarRange, CalendarSelectInfo, CalendarValue, CalendarWeekday } from './types'
+import {
+  getCalendarDefaultPanel,
+  getCalendarNavigationDate,
+  getCalendarNextPanel,
+  type CalendarNavigationAction,
+} from './navigation'
+import type {
+  CalendarCell,
+  CalendarDate,
+  CalendarGranularity,
+  CalendarGrid,
+  CalendarGridOptions,
+  CalendarLocale,
+  CalendarPanel,
+  CalendarRange,
+  CalendarSelectInfo,
+  CalendarValue,
+  CalendarWeekday,
+} from './types'
 import { getCalendarFocusDate } from './focus'
 
 export interface CalendarOptions<TValue extends CalendarValue = CalendarValue> {
@@ -34,12 +51,18 @@ export interface CalendarOptions<TValue extends CalendarValue = CalendarValue> {
 }
 
 /** The getter keeps framework props reactive; all state transitions remain in core. */
-export function createCalendar<TValue extends CalendarValue = CalendarValue>(getOptions: () => CalendarOptions<TValue>) {
+export function createCalendar<TValue extends CalendarValue = CalendarValue>(
+  getOptions: () => CalendarOptions<TValue>,
+) {
   const initial = getOptions()
-  const initialValue = initial.value !== undefined ? initial.value : initial.defaultValue ?? null
-  let initialViewDate = initial.defaultViewDate ?? (initialValue ? getCalendarValueDate(initialValue) : initial.today ?? getCalendarToday())
-  if (initial.min && compareCalendarDate(initialViewDate, initial.min) < 0) initialViewDate = initial.min
-  if (initial.max && compareCalendarDate(initialViewDate, initial.max) > 0) initialViewDate = initial.max
+  const initialValue = initial.value !== undefined ? initial.value : (initial.defaultValue ?? null)
+  let initialViewDate =
+    initial.defaultViewDate ??
+    (initialValue ? getCalendarValueDate(initialValue) : (initial.today ?? getCalendarToday()))
+  if (initial.min && compareCalendarDate(initialViewDate, initial.min) < 0)
+    initialViewDate = initial.min
+  if (initial.max && compareCalendarDate(initialViewDate, initial.max) > 0)
+    initialViewDate = initial.max
   const store = createStore({
     value: (initial.defaultValue ?? null) as TValue | null,
     viewDate: initialViewDate,
@@ -67,13 +90,29 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
   function getGrid(viewDate = getState().viewDate) {
     const options = getOptions()
     const state = getState()
-    const inputs: CalendarGridOptions<TValue> = { viewDate, panel: state.panel, granularity: state.granularity, weekStartsOn: state.weekStartsOn, value: state.value,
-      ...(options.values ? { values: options.values } : {}), ...(options.range ? { range: options.range } : {}),
-      ...(options.today ? { today: options.today } : {}), ...(options.min ? { min: options.min } : {}), ...(options.max ? { max: options.max } : {}), ...(options.disabledDate ? { disabledDate: options.disabledDate } : {}) }
+    const inputs: CalendarGridOptions<TValue> = {
+      viewDate,
+      panel: state.panel,
+      granularity: state.granularity,
+      weekStartsOn: state.weekStartsOn,
+      value: state.value,
+      ...(options.values ? { values: options.values } : {}),
+      ...(options.range ? { range: options.range } : {}),
+      ...(options.today ? { today: options.today } : {}),
+      ...(options.min ? { min: options.min } : {}),
+      ...(options.max ? { max: options.max } : {}),
+      ...(options.disabledDate ? { disabledDate: options.disabledDate } : {}),
+    }
     const keys = Object.keys(inputs) as (keyof CalendarGridOptions<TValue>)[]
     // A stable predicate can read changing range endpoints or framework state.
     // Evaluate it on every grid read so cached cells cannot retain stale disabled flags.
-    if (!inputs.disabledDate && gridCache && keys.length === Object.keys(gridCache.options).length && keys.every(key => Object.is(inputs[key], gridCache!.options[key]))) return gridCache.grid
+    if (
+      !inputs.disabledDate &&
+      gridCache &&
+      keys.length === Object.keys(gridCache.options).length &&
+      keys.every((key) => Object.is(inputs[key], gridCache!.options[key]))
+    )
+      return gridCache.grid
     const grid = createCalendarGrid<TValue>(inputs)
     gridCache = { options: inputs, grid }
     return grid
@@ -84,20 +123,29 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
     if (options.min && compareCalendarDate(viewDate, options.min) < 0) viewDate = options.min
     if (options.max && compareCalendarDate(viewDate, options.max) > 0) viewDate = options.max
     if (getState().viewDate.toString() === viewDate.toString()) return
-    if (options.viewDate === undefined) store.updateSnapshot(state => ({ ...state, viewDate, hoveredRowIndex: null }))
+    if (options.viewDate === undefined)
+      store.updateSnapshot((state) => ({ ...state, viewDate, hoveredRowIndex: null }))
     options.onViewDateChange?.(viewDate)
   }
 
   function setPanel(panel: CalendarPanel) {
     const options = getOptions()
     if (getState().panel === panel) return
-    if (options.panel === undefined) store.updateSnapshot(state => ({ ...state, panel, hoveredRowIndex: null }))
+    if (options.panel === undefined)
+      store.updateSnapshot((state) => ({ ...state, panel, hoveredRowIndex: null }))
     options.onPanelChange?.(panel)
   }
 
   function navigate(action: CalendarNavigationAction) {
     const state = getState()
-    setViewDate(getCalendarNavigationDate(state.viewDate, state.panel, action, getOptions().today ?? getCalendarToday()))
+    setViewDate(
+      getCalendarNavigationDate(
+        state.viewDate,
+        state.panel,
+        action,
+        getOptions().today ?? getCalendarToday(),
+      ),
+    )
   }
 
   function setYear(year: number) {
@@ -105,7 +153,8 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
   }
 
   function setMonth(month: number) {
-    if (Number.isInteger(month) && month >= 1 && month <= 12) setViewDate(getState().viewDate.with({ month }))
+    if (Number.isInteger(month) && month >= 1 && month <= 12)
+      setViewDate(getState().viewDate.with({ month }))
   }
 
   function selectCell(cell: CalendarCell, source: CalendarSelectInfo['source'] = 'date') {
@@ -119,7 +168,11 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
     // The UI year panel exposes months as a browsing grid. Choosing a month
     // changes the view while keeping that panel open; the user explicitly
     // enters the date panel through the month header control.
-    if (cell.panel === 'month' && state.granularity === 'date' && options.monthSelection !== 'drilldown') {
+    if (
+      cell.panel === 'month' &&
+      state.granularity === 'date' &&
+      options.monthSelection !== 'drilldown'
+    ) {
       setViewDate(date)
       return
     }
@@ -131,7 +184,7 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
     if (cell.state.outside) setViewDate(date)
     const value = getCalendarSelectionValue(date, state.granularity, state.weekStartsOn) as TValue
     if (!isSameCalendarValue(value, state.value)) {
-      if (options.value === undefined) store.updateSnapshot(previous => ({ ...previous, value }))
+      if (options.value === undefined) store.updateSnapshot((previous) => ({ ...previous, value }))
       options.onChange?.(value)
     }
     options.onSelect?.(value, { source })
@@ -139,30 +192,35 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
 
   function hoverCell(cell: CalendarCell) {
     if (cell.state.disabled) return
-    if (cell.granularity === 'week' && store.getSnapshot().hoveredRowIndex !== cell.rowIndex) store.updateSnapshot(state => ({ ...state, hoveredRowIndex: cell.rowIndex }))
+    if (cell.granularity === 'week' && store.getSnapshot().hoveredRowIndex !== cell.rowIndex)
+      store.updateSnapshot((state) => ({ ...state, hoveredRowIndex: cell.rowIndex }))
     getOptions().onCellHover?.(cell)
   }
 
   function clearHoveredRow() {
-    if (store.getSnapshot().hoveredRowIndex !== null) store.updateSnapshot(state => ({ ...state, hoveredRowIndex: null }))
+    if (store.getSnapshot().hoveredRowIndex !== null)
+      store.updateSnapshot((state) => ({ ...state, hoveredRowIndex: null }))
   }
 
   function focusCell(cell: CalendarCell) {
     if (cell.state.disabled || store.getSnapshot().focusedKey === cell.key) return
-    store.updateSnapshot(state => ({ ...state, focusedKey: cell.key }))
+    store.updateSnapshot((state) => ({ ...state, focusedKey: cell.key }))
   }
 
-  let tabStopCache: { grid: CalendarGrid<TValue>; focusedKey: string | null; key: string | undefined } | undefined
+  let tabStopCache:
+    | { grid: CalendarGrid<TValue>; focusedKey: string | null; key: string | undefined }
+    | undefined
   function getCellTabIndex(cell: CalendarCell) {
     const grid = getGrid()
     const focusedKey = getState().focusedKey
     if (!tabStopCache || tabStopCache.grid !== grid || tabStopCache.focusedKey !== focusedKey) {
-      const cells = grid.rows.flat().filter(item => !item.state.disabled)
-      const active = cells.find(item => item.key === focusedKey)
-        ?? cells.find(item => item.state.selected)
-        ?? cells.find(item => item.state.today && !item.state.outside)
-        ?? cells.find(item => !item.state.outside)
-        ?? cells[0]
+      const cells = grid.rows.flat().filter((item) => !item.state.disabled)
+      const active =
+        cells.find((item) => item.key === focusedKey) ??
+        cells.find((item) => item.state.selected) ??
+        cells.find((item) => item.state.today && !item.state.outside) ??
+        cells.find((item) => !item.state.outside) ??
+        cells[0]
       tabStopCache = { grid, focusedKey, key: active?.key }
     }
     return tabStopCache.key === cell.key ? 0 : -1
@@ -171,26 +229,66 @@ export function createCalendar<TValue extends CalendarValue = CalendarValue>(get
   function moveFocus(cell: CalendarCell, key: string): CalendarCell | null {
     const options = getOptions()
     const page = key === 'PageUp' || key === 'PageDown'
-    let date = page ? getCalendarNavigationDate(cell.date, cell.panel, key === 'PageUp' ? 'previous-panel' : 'next-panel', options.today ?? getCalendarToday()) : getCalendarFocusDate(getGrid(), cell, key)
+    let date = page
+      ? getCalendarNavigationDate(
+          cell.date,
+          cell.panel,
+          key === 'PageUp' ? 'previous-panel' : 'next-panel',
+          options.today ?? getCalendarToday(),
+        )
+      : getCalendarFocusDate(getGrid(), cell, key)
     if (!date) return null
     const currentCells = getGrid().rows.flat()
     const step = key === 'ArrowLeft' || key === 'ArrowUp' || key === 'PageUp' ? -1 : 1
     // Bound disabled searches so an entirely disabled calendar cannot loop forever.
     for (let attempts = 0; attempts < 366; attempts++) {
       const dateKey = date.toString()
-      const visible = !page ? currentCells.find(item => item.date.toString() === dateKey) : undefined
-      const target = visible ?? getGrid(date).rows.flat().find(item => item.date.toString() === dateKey)
+      const visible = !page
+        ? currentCells.find((item) => item.date.toString() === dateKey)
+        : undefined
+      const target =
+        visible ??
+        getGrid(date)
+          .rows.flat()
+          .find((item) => item.date.toString() === dateKey)
       if (target && !target.state.disabled) {
         if (!visible) setViewDate(date)
         focusCell(target)
         return target
       }
-      date = date.add(cell.panel === 'date' ? { days: step } : cell.panel === 'month' ? { months: step } : cell.panel === 'quarter' ? { months: step * 3 } : { years: step })
+      date = date.add(
+        cell.panel === 'date'
+          ? { days: step }
+          : cell.panel === 'month'
+            ? { months: step }
+            : cell.panel === 'quarter'
+              ? { months: step * 3 }
+              : { years: step },
+      )
     }
     return null
   }
 
-  return { getSnapshot: store.getSnapshot, subscribe: store.subscribe, getOptions, getState, getGrid, setViewDate, setPanel, setYear, setMonth, navigate, selectCell, hoverCell, clearHoveredRow, focusCell, getCellTabIndex, moveFocus }
+  return {
+    getSnapshot: store.getSnapshot,
+    subscribe: store.subscribe,
+    getOptions,
+    getState,
+    getGrid,
+    setViewDate,
+    setPanel,
+    setYear,
+    setMonth,
+    navigate,
+    selectCell,
+    hoverCell,
+    clearHoveredRow,
+    focusCell,
+    getCellTabIndex,
+    moveFocus,
+  }
 }
 
-export type CalendarController<TValue extends CalendarValue = CalendarValue> = ReturnType<typeof createCalendar<TValue>>
+export type CalendarController<TValue extends CalendarValue = CalendarValue> = ReturnType<
+  typeof createCalendar<TValue>
+>

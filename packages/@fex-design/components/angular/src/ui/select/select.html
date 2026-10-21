@@ -12,29 +12,54 @@
   [loading]="loading()"
   [maxCount]="maxCount()"
   [virtual]="virtual()"
-  [status]="status()"
+  [aria-invalid]="ariaInvalid()"
+  [data-warning]="dataWarning()"
   [open]="popoverProps().open"
   [defaultOpen]="popoverProps().defaultOpen ?? false"
   (openChange)="handleOpenChange($event)"
   (change)="change.emit($event)"
   (search)="search.emit($event)"
 >
-  <div selectTrigger [placeholder]="placeholder()" [maxTagCount]="maxTagCount()" [inputProps]="inputProps()">
-    @if (prefix(); as template) { <ng-template #prefix><ng-container *ngTemplateOutlet="template" /></ng-template> }
-    @if (suffix(); as template) { <ng-template #suffix><ng-container *ngTemplateOutlet="template" /></ng-template> }
-    @if (clear(); as template) { <ng-template #clear><ng-container *ngTemplateOutlet="template" /></ng-template> }
+  <div
+    selectTrigger
+    [valueProps]="triggerProps()?.valueProps"
+    [class]="triggerProps()?.class"
+    [style]="triggerProps()?.style"
+    [placeholder]="triggerProps()?.placeholder ?? placeholder()"
+    [maxTagCount]="maxTagCount() ?? triggerProps()?.maxTagCount"
+    [inputProps]="resolvedInputProps()"
+  >
+    @if (prefix(); as template) {
+    <ng-template #prefix><ng-container *ngTemplateOutlet="template" /></ng-template> } @if
+    (suffix(); as template) {
+    <ng-template #suffix><ng-container *ngTemplateOutlet="template" /></ng-template> } @if (clear();
+    as template) { <ng-template #clear><ng-container *ngTemplateOutlet="template" /></ng-template> }
     @if (tag(); as template) {
-      <ng-template #tag let-item let-remove="remove">
-        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item, remove }" />
-      </ng-template>
+    <ng-template #tag let-item let-remove="remove">
+      <ng-container
+        [ngTemplateOutlet]="template"
+        [ngTemplateOutletContext]="{ $implicit: item, remove }"
+      />
+    </ng-template>
     }
   </div>
-  <div selectContent [popupRender]="popupRender()">
+  <div
+    selectContent
+    [portalProps]="contentProps()?.portalProps"
+    [popoverContentProps]="contentProps()?.popoverContentProps"
+    [listProps]="contentProps()?.listProps"
+    [class]="contentProps()?.class"
+    [style]="contentProps()?.style"
+    [popupRender]="popupRender() ?? contentProps()?.popupRender"
+  >
     <div selectList [emptyText]="emptyText()">
       @if (option(); as template) {
-        <ng-template #option let-item let-state="state">
-          <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item, state }" />
-        </ng-template>
+      <ng-template #option let-item let-state="state">
+        <ng-container
+          [ngTemplateOutlet]="template"
+          [ngTemplateOutletContext]="{ $implicit: item, state }"
+        />
+      </ng-template>
       }
     </div>
     @if (footer(); as template) { <ng-container *ngTemplateOutlet="template" /> }

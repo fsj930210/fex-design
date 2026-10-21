@@ -1,14 +1,23 @@
-@if (context(); as owner) {
-  @if (owner.showTime) {
-    <div timePickerRoot [value]="owner.timeValue" [format]="owner.timeOptions.format" [use12Hours]="owner.timeOptions.use12Hours" [disabled]="owner.disabled" [disabledTime]="owner.timeOptions.disabledTime" (change)="owner.selectTime($event.value)">
-      <div timePickerPanel>@for (column of columns(); track column.unit) {
-        @switch (column.unit) {
-          @case ('hour') { <div timePickerHourColumn [step]="owner.timeOptions.step?.hour ?? 1"></div> }
-          @case ('minute') { <div timePickerMinuteColumn [step]="owner.timeOptions.step?.minute ?? 1"></div> }
-          @case ('second') { <div timePickerSecondColumn [step]="owner.timeOptions.step?.second ?? 1"></div> }
-          @case ('period') { <div timePickerPeriodColumn></div> }
-        }
-      }</div>
-    </div>
-  }
-}
+@if (context(); as owner) { @if (owner.showTime) {
+<div
+  timePickerRoot
+  [value]="owner.timeValue"
+  [format]="owner.timeOptions.format"
+  [use12Hours]="owner.timeOptions.use12Hours"
+  [disabled]="owner.disabled"
+  [disabledTime]="owner.timeOptions.disabledTime"
+  (change)="owner.selectTime($event.value)"
+>
+  <div timePickerPanel>
+    @for (column of columns(); track column.unit) { @switch (column.unit) { @case ('hour') {
+    <div timePickerHourColumn [step]="owner.timeOptions.step?.hour ?? 1"></div>
+    } @case ('minute') {
+    <div timePickerMinuteColumn [step]="owner.timeOptions.step?.minute ?? 1"></div>
+    } @case ('second') {
+    <div timePickerSecondColumn [step]="owner.timeOptions.step?.second ?? 1"></div>
+    } @case ('period') {
+    <div timePickerPeriodColumn></div>
+    } } }
+  </div>
+</div>
+} }

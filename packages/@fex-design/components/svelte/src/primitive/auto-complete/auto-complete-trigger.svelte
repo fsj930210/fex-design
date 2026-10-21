@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { HTMLInputAttributes } from "svelte/elements";
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
   import InputClear from "../input/input-clear.svelte";
   import InputControl from "../input/input-control.svelte";
   import InputRoot from "../input/input-root.svelte";
@@ -15,7 +15,6 @@
     class?: string | undefined;
     clearable?: boolean;
     invalid?: boolean;
-    status?: "error" | "warning";
     prefix?: Snippet;
     suffix?: Snippet;
   }
@@ -23,7 +22,6 @@
     class: className,
     clearable = false,
     invalid = false,
-    status,
     prefix,
     suffix,
     onblur,
@@ -59,13 +57,14 @@
       value={$snapshot.value}
       disabled={autoComplete.disabled()}
       readOnly={autoComplete.readOnly()}
+      data-warning={rest["data-warning"]}
       onValueChange={valueChange}
       onClear={() => autoComplete.controller.clear()}
     >
       {@render prefix?.()}
       <InputControl
         {...rest}
-        aria-invalid={invalid || status === "error" || undefined}
+        aria-invalid={rest["aria-invalid"] ?? (invalid || undefined)}
         role="combobox"
         aria-expanded={$snapshot.open}
         aria-controls={autoComplete.listId}

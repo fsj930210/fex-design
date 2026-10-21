@@ -1,7 +1,7 @@
 import { Badge } from '@fex-design/react/primitive/badge'
 export function Overflow() {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-6">
       <span className="relative inline-flex">
         <span className="block size-10 rounded bg-muted-background" />
         <Badge

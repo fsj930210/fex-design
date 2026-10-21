@@ -3,9 +3,11 @@ import { tagClassName, tagActionClassName } from './tag'
 export const datePickerContentClassName =
   'min-w-[min(var(--floating-reference-width,0px),720px,var(--floating-available-width,calc(100vw-16px)))] max-w-[min(720px,var(--floating-available-width,calc(100vw-16px)))] overflow-hidden p-0 max-[480px]:overflow-x-hidden max-[480px]:overflow-y-auto'
 
-export const datePickerTriggerClassName = 'w-full min-w-0 max-w-full cursor-pointer has-[[data-slot=date-picker-tags]]:h-auto has-[[data-slot=date-picker-tags]]:min-h-(--input-height)'
+export const datePickerTriggerClassName =
+  'w-full min-w-0 max-w-full cursor-pointer has-[[data-slot=date-picker-tags]]:h-auto has-[[data-slot=date-picker-tags]]:min-h-(--input-height)'
 
-export const datePickerInputPreviewClassName = 'text-[var(--input-placeholder-color,var(--placeholder-foreground))]'
+export const datePickerInputPreviewClassName =
+  'text-[var(--input-placeholder-color,var(--placeholder-foreground))]'
 
 export const datePickerRangeTriggerClassName = 'w-full min-w-0 max-w-full cursor-pointer gap-0'
 
@@ -98,8 +100,7 @@ export { calendarCellClassName as datePickerCellClassName } from './calendar'
 export const datePickerFooterClassName =
   'flex items-center justify-end gap-2 border-t border-border p-2 empty:hidden'
 
-export const datePickerConfirmClassName =
-  'rounded-md px-3 py-1 text-sm'
+export const datePickerConfirmClassName = 'rounded-md px-3 py-1 text-sm'
 
 export const datePickerCancelClassName = 'rounded-md border border-border px-3 py-1 text-sm'
 

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Badge } from '@fex-design/svelte/primitive/badge'
+  import { Badge } from "@fex-design/svelte/primitive/badge";
   import { SwitchRoot, SwitchThumb } from "@fex-design/svelte/primitive/switch";
   let showZero = $state(false);
 </script>
 
-<div class="flex items-center gap-6">
+<div class="flex flex-wrap items-center gap-6">
   <label class="flex items-center gap-2"
     ><SwitchRoot
       checked={showZero}

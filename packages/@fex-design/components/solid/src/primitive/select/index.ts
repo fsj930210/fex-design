@@ -1,12 +1,8 @@
 export { SelectRoot, type SelectRootProps, type SelectChangeMeta } from './select-root'
-export {
-  SelectTrigger,
-  SelectValue,
-  type SelectTriggerProps,
-  type SelectInputProps,
-} from './select-trigger'
+export { SelectTrigger, type SelectTriggerProps, type SelectInputProps } from './select-trigger'
 export {
   SelectContent,
+  SelectList,
   SelectItem,
   SelectGroup,
   SelectLabel,
@@ -14,3 +10,5 @@ export {
 } from './select-list'
 export { useSelect } from './select-context'
 export type { SelectFilterOption, SelectOption, SelectVirtualOptions } from './select-list'
+
+export { SelectValue, type SelectValueProps } from './select-value'

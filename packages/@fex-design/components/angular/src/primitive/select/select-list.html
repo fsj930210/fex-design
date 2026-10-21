@@ -31,7 +31,5 @@
       >@if (option) {
       <ng-container *ngTemplateOutlet="option; context: { $implicit: item, state: state(item) }" />
       } @else { {{ item.label }} }</span
-    ><span
-      [class]="optionIndicatorClass"
-      ><check-icon class="size-4" /></span></div
+    ><span [class]="optionIndicatorClass"><check-icon class="size-4" /></span></div
 ></ng-template>

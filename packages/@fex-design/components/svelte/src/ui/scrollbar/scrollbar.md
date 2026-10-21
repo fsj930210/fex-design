@@ -10,8 +10,7 @@ Pass native Viewport attributes/events through viewportProps. Native Viewport cl
 
 Use bind:element and bind:viewportElement for native element access.
 
-Primitive parts and standalone logic remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
-
+Primitive parts and `createScrollbar` remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
 
 ## CSS Variables
 

@@ -1,7 +1,4 @@
-import {
-  serializeStepValue,
-  type StepRecord,
-} from '@fex-design/core/steps/types'
+import { serializeStepValue, type StepRecord } from '@fex-design/core/steps/types'
 import { stepClassName } from '@fex-design/components-styles/steps'
 import { cn } from '@fex-design/utils'
 import {

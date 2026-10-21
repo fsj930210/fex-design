@@ -17,6 +17,17 @@ import {
 defineOptions({ name: 'InputNumber', inheritAttrs: false })
 const props = withDefaults(
   defineProps<{
+    controlProps?: Omit<InstanceType<typeof InputNumberControl>['$props'], 'children'> | undefined
+    actionsProps?: Omit<InstanceType<typeof InputNumberActions>['$props'], 'children'> | undefined
+    incrementProps?:
+      | Omit<InstanceType<typeof InputNumberIncrement>['$props'], 'children'>
+      | undefined
+    decrementProps?:
+      | Omit<InstanceType<typeof InputNumberDecrement>['$props'], 'children'>
+      | undefined
+    clearProps?: Omit<InstanceType<typeof InputNumberClear>['$props'], 'children'> | undefined
+    prefixProps?: Omit<InstanceType<typeof InputPrefix>['$props'], 'children'> | undefined
+    suffixProps?: Omit<InstanceType<typeof InputSuffix>['$props'], 'children'> | undefined
     value?: number | undefined
     defaultValue?: number | undefined
     min?: number | undefined
@@ -68,50 +79,67 @@ const controlled = Object.prototype.hasOwnProperty.call(
     :variant="props.variant"
     :class="[props.classNames?.root, props.class]"
     :style="[props.styles?.root, $attrs.style as StyleValue]"
+  :data-warning="
+    typeof $attrs['data-warning'] === 'string' ? ($attrs['data-warning'] as string) : undefined
+  "
     @change="(event, value) => emit('change', event, value)"
   >
-    <InputPrefix v-if="slots.prefix" :class="props.classNames?.prefix" :style="props.styles?.prefix"
+    <InputPrefix
+      v-if="slots.prefix"
+      v-bind="prefixProps"
+      :class="[props.classNames?.prefix, prefixProps?.class]"
+      :style="[props.styles?.prefix, prefixProps?.style]"
       ><slot name="prefix"
     /></InputPrefix>
     <InputNumberControl
-      v-bind="{ ...$attrs, style: undefined }"
-      :class="props.classNames?.control"
-      :style="props.styles?.control"
+      v-bind="{ ...$attrs, ...props.controlProps, style: undefined }"
+      :class="[props.classNames?.control, props.controlProps?.class]"
+      :style="[props.styles?.control, props.controlProps?.style]"
     />
     <InputNumberClear
+      v-bind="props.clearProps"
       v-if="props.clearable"
-      :class="props.classNames?.clear"
-      :style="props.styles?.clear"
+      :class="[props.classNames?.clear, props.clearProps?.class]"
+      :style="[props.styles?.clear, props.clearProps?.style]"
     />
-    <InputSuffix v-if="slots.suffix" :class="props.classNames?.suffix" :style="props.styles?.suffix"
+    <InputSuffix
+      v-if="slots.suffix"
+      v-bind="suffixProps"
+      :class="[props.classNames?.suffix, suffixProps?.class]"
+      :style="[props.styles?.suffix, suffixProps?.style]"
       ><slot name="suffix"
     /></InputSuffix>
     <InputNumberActions
+      v-bind="props.actionsProps"
       v-if="props.controls"
-      :class="props.classNames?.actions"
-      :style="props.styles?.actions"
+      :class="[props.classNames?.actions, props.actionsProps?.class]"
+      :style="[props.styles?.actions, props.actionsProps?.style]"
     >
       <InputNumberIncrement
+        v-bind="props.incrementProps"
         v-if="slots.increment"
-        :class="props.classNames?.increment"
-        :style="props.styles?.increment"
+        :class="[props.classNames?.increment, props.incrementProps?.class]"
+        :style="[props.styles?.increment, props.incrementProps?.style]"
         ><slot name="increment"
       /></InputNumberIncrement>
       <InputNumberIncrement
+        v-bind="props.incrementProps"
         v-else
-        :class="props.classNames?.increment"
-        :style="props.styles?.increment"
+        :class="[props.classNames?.increment, props.incrementProps?.class]"
+        :style="[props.styles?.increment, props.incrementProps?.style]"
       />
       <InputNumberDecrement
+        v-bind="props.decrementProps"
         v-if="slots.decrement"
-        :class="props.classNames?.decrement"
-        :style="props.styles?.decrement"
+        :class="[props.classNames?.decrement, props.decrementProps?.class]"
+        :style="[props.styles?.decrement, props.decrementProps?.style]"
         ><slot name="decrement"
       /></InputNumberDecrement>
       <InputNumberDecrement
+        v-bind="props.decrementProps"
         v-else
-        :class="props.classNames?.decrement"
-        :style="props.styles?.decrement"
+        :class="[props.classNames?.decrement, props.decrementProps?.class]"
+        :style="[props.styles?.decrement, props.decrementProps?.style]"
       />
     </InputNumberActions>
   </InputNumberRoot>

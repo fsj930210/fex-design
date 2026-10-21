@@ -1,4 +1,4 @@
-import type { ComponentUsage } from "./usage-snippets-part1"
+import type { ComponentUsage } from './usage-snippets-part1'
 
 export const usageSnippetsPart2: Record<string, ComponentUsage> = {
   popover: {
@@ -12,7 +12,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
 </Popover>`,
     },
     primitive: {
-      import: "import { PopoverRoot, PopoverTrigger, PopoverContent, PopoverClose } from '@/components/primitive/popover'",
+      import:
+        "import { PopoverRoot, PopoverTrigger, PopoverContent, PopoverClose } from '@/components/primitive/popover'",
       code: `<PopoverRoot>
   <PopoverTrigger><button class="px-3 py-1.5 border rounded-md text-xs">打开浮层</button></PopoverTrigger>
   <PopoverContent class="p-4 rounded-lg border bg-popover shadow-md">
@@ -28,7 +29,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
       code: '<Progress value={65} showInfo status="active" />',
     },
     primitive: {
-      import: "import { ProgressRoot, ProgressTrack, ProgressRange, ProgressValue } from '@/components/primitive/progress'",
+      import:
+        "import { ProgressRoot, ProgressTrack, ProgressRange, ProgressValue } from '@/components/primitive/progress'",
       code: `<ProgressRoot value={65}>
   <ProgressTrack>
     <ProgressRange />
@@ -67,7 +69,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
 />`,
     },
     primitive: {
-      import: "import { SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/primitive/select'",
+      import:
+        "import { SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/primitive/select'",
       code: `<SelectRoot>
   <SelectTrigger>
     <SelectValue placeholder="请选择框架" />
@@ -110,7 +113,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
 </div>`,
     },
     primitive: {
-      import: "import { SkeletonAvatar, SkeletonText, SkeletonButton, SkeletonBlock } from '@/components/primitive/skeleton'",
+      import:
+        "import { SkeletonAvatar, SkeletonText, SkeletonButton, SkeletonBlock } from '@/components/primitive/skeleton'",
       code: `<div class="flex items-center gap-3">
   <SkeletonAvatar size="md" />
   <div class="flex-1 space-y-1.5">
@@ -126,7 +130,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
       code: '<Slider defaultValue={40} min={0} max={100} />',
     },
     primitive: {
-      import: "import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from '@/components/primitive/slider'",
+      import:
+        "import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from '@/components/primitive/slider'",
       code: `<SliderRoot defaultValue={40} min={0} max={100}>
   <SliderTrack>
     <SliderRange />
@@ -143,7 +148,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
 </SpinnerContainer>`,
     },
     primitive: {
-      import: "import { Spinner, SpinnerContainer, SpinnerOverlay, SpinnerText } from '@/components/primitive/spinner'",
+      import:
+        "import { Spinner, SpinnerContainer, SpinnerOverlay, SpinnerText } from '@/components/primitive/spinner'",
       code: `<SpinnerContainer class="relative">
   <SpinnerOverlay class="absolute inset-0 flex flex-col items-center justify-center bg-background/80">
     <Spinner size="lg" />
@@ -159,7 +165,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
       code: '<Switch defaultChecked checkedChildren="已开启" unCheckedChildren="已关闭" />',
     },
     primitive: {
-      import: "import { SwitchRoot, SwitchThumb, SwitchLabel } from '@/components/primitive/switch'",
+      import:
+        "import { SwitchRoot, SwitchThumb, SwitchLabel } from '@/components/primitive/switch'",
       code: `<div class="flex items-center gap-2">
   <SwitchRoot defaultChecked id="notify-switch">
     <SwitchThumb />
@@ -189,7 +196,8 @@ export const usageSnippetsPart2: Record<string, ComponentUsage> = {
 </Tooltip>`,
     },
     primitive: {
-      import: "import { TooltipRoot, TooltipTrigger, TooltipContent, TooltipArrow } from '@/components/primitive/tooltip'",
+      import:
+        "import { TooltipRoot, TooltipTrigger, TooltipContent, TooltipArrow } from '@/components/primitive/tooltip'",
       code: `<TooltipRoot>
   <TooltipTrigger>
     <button class="px-3 py-1.5 border rounded-md text-xs">解构触发点</button>

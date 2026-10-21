@@ -92,10 +92,6 @@ export const componentRoutes = [
     element: <ListboxPage />,
   },
   {
-    path: '/menu',
-    element: createLazyRouteElement(() => import('../../pages/Menu'), 'MenuPage'),
-  },
-  {
     path: '/masonry',
     element: createLazyRouteElement(() => import('../../pages/Masonry'), 'MasonryPage'),
   },
@@ -106,10 +102,6 @@ export const componentRoutes = [
   {
     path: '/mentions',
     element: createLazyRouteElement(() => import('../../pages/Mentions'), 'MentionsPage'),
-  },
-  {
-    path: '/pagination',
-    element: createLazyRouteElement(() => import('../../pages/Pagination'), 'PaginationPage'),
   },
   {
     path: '/qrcode',
@@ -147,10 +139,6 @@ export const componentRoutes = [
   {
     path: '/toggle',
     element: createLazyRouteElement(() => import('../../pages/Toggle'), 'TogglePage'),
-  },
-  {
-    path: '/time-picker',
-    element: createLazyRouteElement(() => import('../../pages/TimePicker'), 'TimePickerPage'),
   },
   {
     path: '/sortable',

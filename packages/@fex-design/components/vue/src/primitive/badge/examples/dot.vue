@@ -2,7 +2,7 @@
 import { BadgeDot } from '@fex-design/vue/primitive/badge'
 </script>
 <template>
-  <div class="flex items-center gap-6">
+  <div class="flex flex-wrap items-center gap-6">
     <span class="relative inline-flex"
       >📣<BadgeDot
         color="danger"

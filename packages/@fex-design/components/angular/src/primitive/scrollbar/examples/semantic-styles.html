@@ -1,0 +1,35 @@
+<div class="flex w-full flex-wrap gap-6">
+  <section class="grid gap-3">
+    <h4 class="text-sm font-medium">各轴部件独立设置 classNames/styles</h4>
+    <div
+      scrollbarRoot
+      showTrack
+      autoHide="never"
+      [overflow]="{ x: 'auto', y: 'auto' }"
+      class="h-48 w-72 rounded-md border"
+    >
+      <div
+        scrollbarViewport
+        class="bg-muted-background/30"
+        style="background-color: var(--background)"
+      >
+        <div class="grid w-[40rem] gap-3 p-4">
+          @for(line of lines; track line){
+          <p>{{ line }}</p>
+          }
+        </div>
+      </div>
+      <div scrollbarBar axis="x" class="z-20" style="inset-inline-start: 16px">
+        <div scrollbarTrack axis="x" class="bg-primary/15" style="border-radius: 4px">
+          <div scrollbarThumb axis="x" class="bg-primary" style="border-radius: 4px"></div>
+        </div>
+      </div>
+      <div scrollbarBar axis="y" class="z-20" style="top: 16px">
+        <div scrollbarTrack axis="y" class="bg-primary/15" style="border-radius: 4px">
+          <div scrollbarThumb axis="y" class="bg-primary" style="border-radius: 4px"></div>
+        </div>
+      </div>
+      <div scrollbarCorner class="bg-primary/15" style="border-radius: 2px"></div>
+    </div>
+  </section>
+</div>

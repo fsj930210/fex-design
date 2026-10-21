@@ -1,8 +1,12 @@
-import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-design/solid/primitive/progress'
+import {
+  Progress,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValue,
+} from '@fex-design/solid/primitive/progress'
 import { CheckIcon } from '@fex-design/solid/icons/check'
 
 export function ProgressPrimitiveStatusExample() {
-
   return (
     <div class="grid w-full max-w-md gap-3">
       <Progress value={0} status="pending" class="flex w-full flex-col">
@@ -10,9 +14,7 @@ export function ProgressPrimitiveStatusExample() {
           <ProgressTrack class="min-w-0 flex-1">
             <ProgressRange />
           </ProgressTrack>
-          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-            0%
-          </ProgressValue>
+          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">0%</ProgressValue>
         </div>
       </Progress>
       <Progress value={40} status="active" class="flex w-full flex-col">
@@ -20,9 +22,7 @@ export function ProgressPrimitiveStatusExample() {
           <ProgressTrack class="min-w-0 flex-1">
             <ProgressRange />
           </ProgressTrack>
-          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-            40%
-          </ProgressValue>
+          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">40%</ProgressValue>
         </div>
       </Progress>
       <Progress value={60} status="active" class="flex w-full flex-col">
@@ -30,9 +30,7 @@ export function ProgressPrimitiveStatusExample() {
           <ProgressTrack class="min-w-0 flex-1">
             <ProgressRange />
           </ProgressTrack>
-          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-            60%
-          </ProgressValue>
+          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">60%</ProgressValue>
         </div>
       </Progress>
       <Progress value={100} status="success" class="flex w-full flex-col">
@@ -52,9 +50,7 @@ export function ProgressPrimitiveStatusExample() {
           <ProgressTrack class="min-w-0 flex-1">
             <ProgressRange />
           </ProgressTrack>
-          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-            80%
-          </ProgressValue>
+          <ProgressValue class="ms-2 shrink-0 text-sm font-medium">80%</ProgressValue>
         </div>
       </Progress>
     </div>

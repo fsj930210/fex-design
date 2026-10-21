@@ -6,7 +6,7 @@ export function DirectionExample() {
       <section className="grid gap-3">
         <strong>LTR · 中文示例</strong>
         <Empty dir="ltr" title="暂无项目" description="创建项目后，项目会显示在这里。">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button className="rounded-md bg-primary px-3 py-2 text-primary-foreground">
               创建项目
             </button>
@@ -17,7 +17,7 @@ export function DirectionExample() {
       <section className="grid gap-3">
         <strong>RTL · مثال عربي</strong>
         <Empty dir="rtl" title="لا توجد مشاريع" description="ستظهر المشاريع هنا بعد إنشائها.">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button className="rounded-md bg-primary px-3 py-2 text-primary-foreground">
               إنشاء مشروع
             </button>

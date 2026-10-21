@@ -30,7 +30,8 @@
     readOnly?: boolean | undefined;
     invalid?: boolean | undefined;
     required?: boolean | undefined;
-    status?: "error" | "warning" | undefined;
+    "aria-invalid"?: string | boolean | undefined;
+    "data-warning"?: string | undefined;
     parseQuery?:
       ((input: MentionsParseInput) => MentionsQuery | null) | undefined;
     onChange?: ((value: string, meta: MentionsChangeMeta) => void) | undefined;
@@ -55,7 +56,8 @@
     readOnly = false,
     invalid = false,
     required = false,
-    status,
+    "aria-invalid": ariaInvalid,
+    "data-warning": dataWarning,
     parseQuery,
     onChange,
     onSearch,
@@ -105,8 +107,10 @@
     listId,
     disabled: () => disabled,
     readOnly: () => readOnly,
-    invalid: () => invalid || status === "error",
+    invalid: () => invalid,
     required: () => required,
+    ariaInvalid: () => ariaInvalid,
+    dataWarning: () => dataWarning,
   });
 </script>
 

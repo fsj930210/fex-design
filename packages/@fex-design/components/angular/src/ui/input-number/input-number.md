@@ -23,7 +23,7 @@ Ready-to-use composition that reuses Primitive logic and Input/Button parts. UI 
 | controls        | Default, hidden, and replaced step controls.               |
 | keyboard        | Arrow key stepping.                                        |
 | range           | Controlled out-of-range values.                            |
-| custom-logic    | Custom UI driven by useInputNumber and the library Button. |
+| custom-logic    | Use useInputNumber to hand-write DOM for a custom InputNumber component. |
 | affixes         | Prefix, clear, suffix, and actions together.               |
 | validation      | Visible invalid state and error description.               |
 | semantic-styles | classNames and styles for structural parts.                |
@@ -45,4 +45,4 @@ Supports every Input feature and native input attribute. `classNames` and `style
 
 ## Logic layer
 
-Import `useInputNumber` from the Primitive entry for custom UI. See custom-logic and the Primitive hook API.
+Import `useInputNumber` from the Primitive entry to hand-write a custom InputNumber DOM. See the custom logic example and the Primitive hook API.

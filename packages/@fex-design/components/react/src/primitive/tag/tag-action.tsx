@@ -1,13 +1,13 @@
-import { tagActionClassName } from "@fex-design/components-styles/tag"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps } from "react"
-import { XIcon } from "@fex-design/react/icons/x"
+import { tagActionClassName } from '@fex-design/components-styles/tag'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps } from 'react'
+import { XIcon } from '@fex-design/react/icons/x'
 
-export interface TagActionProps extends ComponentProps<"button"> {}
+export interface TagActionProps extends ComponentProps<'button'> {}
 
 export function TagAction({
-  type = "button",
-  "aria-label": ariaLabel,
+  type = 'button',
+  'aria-label': ariaLabel,
   className,
   children,
   ...props

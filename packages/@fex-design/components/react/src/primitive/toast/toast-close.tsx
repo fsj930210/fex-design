@@ -1,9 +1,9 @@
-import { toastCloseClassName } from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps } from "react"
-import { toast, type ReactToastItem, type ReactToastManager } from "./toast-manager"
+import { toastCloseClassName } from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps } from 'react'
+import { toast, type ReactToastItem, type ReactToastManager } from './toast-manager'
 
-export interface ToastCloseProps extends ComponentProps<"button"> {
+export interface ToastCloseProps extends ComponentProps<'button'> {
   manager?: ReactToastManager
   toast: ReactToastItem
 }

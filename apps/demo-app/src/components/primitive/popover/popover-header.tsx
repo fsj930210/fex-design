@@ -11,7 +11,7 @@ export function PopoverHeader({ ref, className, ...props }: PopoverHeaderProps) 
       {...props}
       ref={ref}
       data-slot="popover-header"
-      className={cn("mb-[var(--popover-title-gap,8px)] grid gap-1", className)}
+      className={cn('mb-[var(--popover-title-gap,8px)] grid gap-1', className)}
     />
   )
 }

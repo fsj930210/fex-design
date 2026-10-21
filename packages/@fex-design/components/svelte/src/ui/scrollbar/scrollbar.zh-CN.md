@@ -10,8 +10,7 @@ viewportProps 透传 Viewport 原生属性和事件；其中的 class/style 在 
 
 通过 bind:element 和 bind:viewportElement 获取原生元素。
 
-入口仍保留 Primitive 部件和独立逻辑导出，支持自定义组合。单独使用 Bar 时仍须显式提供 Track/Thumb。
-
+入口仍保留 Primitive 部件和 `createScrollbar` 导出，支持自定义组合。单独使用 Bar 时仍须显式提供 Track/Thumb。
 
 ## CSS 变量
 

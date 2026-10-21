@@ -9,8 +9,12 @@ export function listenNativeEvent<TKey extends keyof HTMLElementEventMap>(
   const renderer = inject(Renderer2)
   const destroyRef = inject(DestroyRef)
   // DOM subscription is installed after the view's native bindings, and removed on destroy.
-  afterNextRender({ write: () => {
-    const cleanup = renderer.listen(element, type, event => handler(event as HTMLElementEventMap[TKey]))
-    destroyRef.onDestroy(cleanup)
-  } })
+  afterNextRender({
+    write: () => {
+      const cleanup = renderer.listen(element, type, (event) =>
+        handler(event as HTMLElementEventMap[TKey]),
+      )
+      destroyRef.onDestroy(cleanup)
+    },
+  })
 }

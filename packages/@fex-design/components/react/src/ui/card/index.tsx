@@ -19,9 +19,22 @@ export type CardClassNames = CardClassNamesBase
 export type CardStyles = CardStylesBase<React.CSSProperties>
 
 export interface CardProps
-  extends Omit<ComponentProps<'div'>, 'title'>, CardOptions<ReactNode, React.CSSProperties> {}
+  extends Omit<ComponentProps<'div'>, 'title'>, CardOptions<ReactNode, React.CSSProperties> {
+  headerProps?: Omit<ComponentProps<typeof CardHeader>, 'children'> | undefined
+  titleProps?: Omit<ComponentProps<typeof CardTitle>, 'children'> | undefined
+  descriptionProps?: Omit<ComponentProps<typeof CardDescription>, 'children'> | undefined
+  extraProps?: Omit<ComponentProps<typeof CardExtra>, 'children'> | undefined
+  contentProps?: Omit<ComponentProps<typeof CardContent>, 'children'> | undefined
+  footerProps?: Omit<ComponentProps<typeof CardFooter>, 'children'> | undefined
+}
 
 export function Card({
+  headerProps,
+  titleProps,
+  descriptionProps,
+  extraProps,
+  contentProps,
+  footerProps,
   title,
   description,
   extra,
@@ -42,29 +55,53 @@ export function Card({
     >
       {header ??
         (title || description || extra ? (
-          <CardHeader className={classNames?.header} style={styles?.header}>
+          <CardHeader
+            {...headerProps}
+            className={cn(classNames?.header, headerProps?.className)}
+            style={{ ...styles?.header, ...headerProps?.style }}
+          >
             {title ? (
-              <CardTitle className={classNames?.title} style={styles?.title}>
+              <CardTitle
+                {...titleProps}
+                className={cn(classNames?.title, titleProps?.className)}
+                style={{ ...styles?.title, ...titleProps?.style }}
+              >
                 {title}
               </CardTitle>
             ) : null}
             {description ? (
-              <CardDescription className={classNames?.description} style={styles?.description}>
+              <CardDescription
+                {...descriptionProps}
+                className={cn(classNames?.description, descriptionProps?.className)}
+                style={{ ...styles?.description, ...descriptionProps?.style }}
+              >
                 {description}
               </CardDescription>
             ) : null}
             {extra ? (
-              <CardExtra className={classNames?.extra} style={styles?.extra}>
+              <CardExtra
+                {...extraProps}
+                className={cn(classNames?.extra, extraProps?.className)}
+                style={{ ...styles?.extra, ...extraProps?.style }}
+              >
                 {extra}
               </CardExtra>
             ) : null}
           </CardHeader>
         ) : null)}
-      <CardContent className={classNames?.content} style={styles?.content}>
+      <CardContent
+        {...contentProps}
+        className={cn(classNames?.content, contentProps?.className)}
+        style={{ ...styles?.content, ...contentProps?.style }}
+      >
         {children}
       </CardContent>
       {footer ? (
-        <CardFooter className={classNames?.footer} style={styles?.footer}>
+        <CardFooter
+          {...footerProps}
+          className={cn(classNames?.footer, footerProps?.className)}
+          style={{ ...styles?.footer, ...footerProps?.style }}
+        >
           {footer}
         </CardFooter>
       ) : null}

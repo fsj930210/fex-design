@@ -1,20 +1,52 @@
 import { showTimeInput } from './show-time-input'
 import type { DatePickerStyle } from './style'
 import { PickerAppearanceToken } from './appearance-context'
-import type { DatePickerInputProps, DatePickerEndpointProps, DatePickerCalendarProps, DatePickerPopoverProps, PickerAppearance } from './appearance.types'
-import type { DatePickerClassNames, DatePickerStyles } from '@fex-design/core/date-picker/appearance'
+import type {
+  DatePickerInputProps,
+  DatePickerEndpointProps,
+  DatePickerCalendarProps,
+  DatePickerPopoverProps,
+  PickerAppearance,
+} from './appearance.types'
+import type {
+  DatePickerClassNames,
+  DatePickerStyles,
+} from '@fex-design/core/date-picker/appearance'
 import { PickerContainerToken } from './container-context'
 import { PickerOwnerToken } from './owner-context'
 import { optionalPickerBoolean } from './boolean-input'
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, contentChild, inject, input, output, TemplateRef, type OnChanges, type OnInit } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  contentChild,
+  inject,
+  input,
+  output,
+  TemplateRef,
+  type OnChanges,
+  type OnInit,
+} from '@angular/core'
 import { NgTemplateOutlet } from '@angular/common'
-import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
-import type { DatePickerPicker, DatePickerDisabledTime, DatePickerDisabledDateInfo } from '@fex-design/core/date-picker/types'
-import { definedPickerOptions, getDatePickerPopoverOptions } from '@fex-design/core/date-picker/options'
+import type {
+  CalendarDate,
+  CalendarRange,
+  CalendarValue,
+  CalendarWeekday,
+} from '@fex-design/core/calendar'
+import type {
+  DatePickerPicker,
+  DatePickerDisabledTime,
+  DatePickerDisabledDateInfo,
+} from '@fex-design/core/date-picker/types'
+import {
+  definedPickerOptions,
+  getDatePickerPopoverOptions,
+} from '@fex-design/core/date-picker/options'
 import { Popover } from '@fex-design/angular/primitive/popover'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { RangePickerState, type UseRangePickerOptions } from './use-range-picker'
-
 
 @Component({
   selector: 'div[rangePickerRoot]',
@@ -22,12 +54,19 @@ import { RangePickerState, type UseRangePickerOptions } from './use-range-picker
   standalone: true,
   imports: [NgTemplateOutlet],
   hostDirectives: [Popover],
-  providers: [{ provide: PickerAppearanceToken, useFactory: () => inject(RangePickerRoot).appearance }, RangePickerState, { provide: PickerOwnerToken, useExisting: RangePickerState }, { provide: PickerContainerToken, useFactory: () => inject(RangePickerRoot) }],
+  providers: [
+    { provide: PickerAppearanceToken, useFactory: () => inject(RangePickerRoot).appearance },
+    RangePickerState,
+    { provide: PickerOwnerToken, useExisting: RangePickerState },
+    { provide: PickerContainerToken, useFactory: () => inject(RangePickerRoot) },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './range-picker-root.html',
   host: { '[class]': 'hostClassName()' },
 })
-export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> implements OnInit, OnChanges {
+export class RangePickerRoot<TValue extends CalendarValue = CalendarValue>
+  implements OnInit, OnChanges
+{
   protected readonly hostClassName = createHostClassName('block w-full min-w-0')
   readonly picker = input<DatePickerPicker>()
   readonly value = input<CalendarRange<TValue>>()
@@ -53,7 +92,15 @@ export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> imple
   readonly calendarProps = input<DatePickerCalendarProps>()
   readonly classNames = input<DatePickerClassNames>()
   readonly styles = input<DatePickerStyles<DatePickerStyle>>()
-  readonly appearance = computed<PickerAppearance>(() => ({ inputProps: this.inputProps(), startInputProps: this.startInputProps(), endInputProps: this.endInputProps(), calendarProps: this.calendarProps(), popoverProps: this.popoverProps(), classNames: this.classNames(), styles: this.styles() }))
+  readonly appearance = computed<PickerAppearance>(() => ({
+    inputProps: this.inputProps(),
+    startInputProps: this.startInputProps(),
+    endInputProps: this.endInputProps(),
+    calendarProps: this.calendarProps(),
+    popoverProps: this.popoverProps(),
+    classNames: this.classNames(),
+    styles: this.styles(),
+  }))
   readonly change = output<CalendarRange<TValue>>()
   readonly openChange = output<boolean>()
   private readonly destroyRef = inject(DestroyRef)
@@ -64,13 +111,19 @@ export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> imple
   private readonly onChange = (value: CalendarRange<TValue>) => this.change.emit(value)
   private readonly onOpenChange = (open: boolean) => this.openChange.emit(open)
   constructor() {
-    const subscription = this.popover.openChange.subscribe(open => this.state.setOpen(open))
+    const subscription = this.popover.openChange.subscribe((open) => this.state.setOpen(open))
     this.destroyRef.onDestroy(() => subscription.unsubscribe())
   }
-  ngOnChanges() { this.state.setOptions(this.options()) }
+  ngOnChanges() {
+    this.state.setOptions(this.options())
+  }
   ngOnInit() {
     this.state.setOptions(this.options())
-    this.popover.connectOptions(() => ({ ...getDatePickerPopoverOptions(this.popoverProps()), open: this.containerTemplate() ? false : this.context().open, disabled: this.containerTemplate() ? true : this.context().disabled }))
+    this.popover.connectOptions(() => ({
+      ...getDatePickerPopoverOptions(this.popoverProps()),
+      open: this.containerTemplate() ? false : this.context().open,
+      disabled: this.containerTemplate() ? true : this.context().disabled,
+    }))
   }
   registerTrigger(element: HTMLElement | null) {
     this.popover.referenceElement = element

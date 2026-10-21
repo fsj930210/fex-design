@@ -31,7 +31,9 @@ export function SourceCodeCard(props: {
           >
             {props.ext}
           </span>
-          <span class="truncate">components/{props.layer}/{props.slug}.{props.ext}</span>
+          <span class="truncate">
+            components/{props.layer}/{props.slug}.{props.ext}
+          </span>
         </div>
         <div class="flex items-center gap-2">
           <button

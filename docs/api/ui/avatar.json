@@ -42,11 +42,15 @@
     {
       "id": "max-count"
     },
-    {
-      "id": "styling"
-    },
+
     {
       "id": "css-variables"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ],
   "components": [

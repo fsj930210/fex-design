@@ -16,16 +16,23 @@ interface TriggerOwner {
 export function usePickerTrigger(owner: TriggerOwner, attrs: Record<string, unknown>) {
   const inheritedPopover = inject(popoverKey, null)
   const containerScope = inject(pickerContainerKey, null)
-  const popover = containerScope && inheritedPopover === containerScope.parentPopover ? null : inheritedPopover
+  const popover =
+    containerScope && inheritedPopover === containerScope.parentPopover ? null : inheritedPopover
   let reference: HTMLElement | null = null
   function ref(value: Element | ComponentPublicInstance | null) {
-    reference = value instanceof HTMLElement ? value
-      : value && '$el' in value && value.$el instanceof HTMLElement ? value.$el : null
+    reference =
+      value instanceof HTMLElement
+        ? value
+        : value && '$el' in value && value.$el instanceof HTMLElement
+          ? value.$el
+          : null
     if (!popover) return
     popover.triggerElement.value = reference
     popover.overlay.setReferenceElement(reference)
   }
-  onScopeDispose(() => { if (popover?.triggerElement.value === reference) ref(null) })
+  onScopeDispose(() => {
+    if (popover?.triggerElement.value === reference) ref(null)
+  })
   function call(name: string, event: Event) {
     const handlers = attrs[name]
     for (const handler of Array.isArray(handlers) ? handlers : [handlers]) {
@@ -41,18 +48,30 @@ export function usePickerTrigger(owner: TriggerOwner, attrs: Record<string, unkn
       if (part && owner.controller.getState().open) owner.openPanel(part)
     } else owner.openPanel(part)
   }
-  const props = { get value() { return {
-    ...attrs,
-    'aria-haspopup': 'dialog' as const,
-    'aria-expanded': owner.open.value,
-    'data-state': owner.open.value ? 'open' : 'closed',
-    onFocus: focus,
-    onClick(event: MouseEvent) {
-      call('onClick', event)
-      if (event.defaultPrevented || owner.disabled) return
-      const part = event.target instanceof Element ? event.target.closest('[data-range-part]')?.getAttribute('data-range-part') : null
-      owner.openPanel(getDatePickerInputPart(part))
+  const props = {
+    get value() {
+      return {
+        ...attrs,
+        'aria-haspopup': 'dialog' as const,
+        'aria-expanded': owner.open.value,
+        'data-state': owner.open.value ? 'open' : 'closed',
+        onFocus: focus,
+        onClick(event: MouseEvent) {
+          call('onClick', event)
+          if (event.defaultPrevented || owner.disabled) return
+          const part =
+            event.target instanceof Element
+              ? event.target.closest('[data-range-part]')?.getAttribute('data-range-part')
+              : null
+          owner.openPanel(getDatePickerInputPart(part))
+        },
+      }
     },
-  } } }
-  return { ref, props, focus, focusInput: (part: DatePickerInputPart) => focusDatePickerInput(reference, part) }
+  }
+  return {
+    ref,
+    props,
+    focus,
+    focusInput: (part: DatePickerInputPart) => focusDatePickerInput(reference, part),
+  }
 }

@@ -1,8 +1,4 @@
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { SelectDemoSection } from './demo-section'
 
 export function EmptyDemo() {

@@ -1,4 +1,1 @@
-export {
-  Tooltip,
-  TooltipTrigger,
-} from "./tooltip"
+export { Tooltip, TooltipTrigger } from './tooltip'

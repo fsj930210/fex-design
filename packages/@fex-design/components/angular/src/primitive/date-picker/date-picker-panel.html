@@ -1,28 +1,39 @@
 <div [class]="context().showTime ? dateTimeClassName : 'contents'">
-<div calendarRoot #calendarElement monthSelection="drilldown" [locale]="calendarAppearance().locale" [style]="calendarAppearance().style ?? ''"
-  [value]="context().calendarValue"
-  [values]="context().calendarValues"
-  [viewDate]="context().viewDate"
-  [panel]="context().panel"
-  [granularity]="getGranularityByPicker(context().picker)"
-  [weekStartsOn]="context().weekStartsOn"
-  [min]="context().minDate"
-  [max]="context().maxDate"
-  [disabledDate]="context().disabledDate"
-  (select)="state.select($event.value)"
-  (cellSelect)="state.previewCell($event)"
-  (cellHover)="state.setHoverValue($event.value)"
-  (mouseleave)="leave($event)"
-  (viewDateChange)="state.setViewDate($event)"
-  (panelChange)="state.setPanel($event)"
-  [class]="panelClassName()"
->
-  @if (template(); as custom) {
-    <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="calendarInjector() ?? null" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), calendar: calendar() }" />
-  } @else {
+  <div
+    calendarRoot
+    #calendarElement
+    monthSelection="drilldown"
+    [locale]="calendarAppearance().locale"
+    [style]="calendarAppearance().style ?? ''"
+    [value]="context().calendarValue"
+    [values]="context().calendarValues"
+    [viewDate]="context().viewDate"
+    [panel]="context().panel"
+    [granularity]="getGranularityByPicker(context().picker)"
+    [weekStartsOn]="context().weekStartsOn"
+    [min]="context().minDate"
+    [max]="context().maxDate"
+    [disabledDate]="context().disabledDate"
+    (select)="state.select($event.value)"
+    (cellSelect)="state.previewCell($event)"
+    (cellHover)="state.setHoverValue($event.value)"
+    (mouseleave)="leave($event)"
+    (viewDateChange)="state.setViewDate($event)"
+    (panelChange)="state.setPanel($event)"
+    [class]="panelClassName()"
+  >
+    @if (template(); as custom) {
+    <ng-container
+      [ngTemplateOutlet]="custom"
+      [ngTemplateOutletInjector]="calendarInjector() ?? null"
+      [ngTemplateOutletContext]="{ $implicit: context(), state: context(), calendar: calendar() }"
+    />
+    } @else {
     <div datePickerPanelContent [calendarProps]="calendarAppearance()"></div>
-  }
-</div>
+    }
+  </div>
 
-@if (context().showTime) { <div datePickerTimePanel></div> }
+  @if (context().showTime) {
+  <div datePickerTimePanel></div>
+  }
 </div>

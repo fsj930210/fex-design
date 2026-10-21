@@ -1,4 +1,4 @@
-export { default as Progress } from "./progress.vue"
+export { default as Progress } from './progress.vue'
 export type { ProgressProps } from './types'
 export type {
   ProgressRangeItem,
@@ -9,4 +9,4 @@ export type {
   ProgressSize,
   ProgressStatus,
   ProgressVariant,
-} from "@fex-design/core/progress/types"
+} from '@fex-design/core/progress/types'

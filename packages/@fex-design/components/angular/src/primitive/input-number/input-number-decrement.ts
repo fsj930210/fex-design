@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, HostListener, inject, input } from '@angular/core'
 import { inputNumberDecrementClassName } from '@fex-design/components-styles/input-number'
 import { buttonClassName } from '@fex-design/components-styles/button'
 import { cn } from '@fex-design/utils'
@@ -18,12 +18,14 @@ import { InputNumberRoot } from './input-number-root'
     'aria-label': 'Decrease value',
     '[disabled]': '!root.inputNumber.canDecrement()',
   },
-  template: '<ng-content><minus-icon /></ng-content>',
+  template: '<ng-content><minus-icon class="size-(--button-icon-size)" /></ng-content>',
 })
 export class InputNumberDecrement {
+  readonly class = input<string>()
   readonly root = inject(InputNumberRoot)
-  protected readonly hostClassName = createHostClassName(() =>
-    cn(buttonClassName({ variant: 'text' }), inputNumberDecrementClassName),
+  protected readonly hostClassName = createHostClassName(
+    () => cn(buttonClassName({ variant: 'text' }), inputNumberDecrementClassName),
+    () => this.class(),
   )
   @HostListener('pointerdown', ['$event']) pointerdown(event: PointerEvent) {
     event.preventDefault()

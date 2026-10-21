@@ -1,6 +1,4 @@
-import {
-  stepContentClassName,
-} from '@fex-design/components-styles/steps'
+import { stepContentClassName } from '@fex-design/components-styles/steps'
 import { cn } from '@fex-design/utils'
 import type { HTMLAttributes, ReactNode } from 'react'
 

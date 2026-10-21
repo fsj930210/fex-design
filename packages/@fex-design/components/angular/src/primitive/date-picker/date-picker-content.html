@@ -1,6 +1,22 @@
 <ng-template #body><ng-content /></ng-template>
 @if (customContainer()) {
-  <div [nativeAttributes]="contentProps()" data-slot="date-picker-content" [class]="contentClassName()" [style]="contentStyle()"><ng-container [ngTemplateOutlet]="body" /></div>
+<div
+  [nativeAttributes]="contentProps()"
+  data-slot="date-picker-content"
+  [class]="contentClassName()"
+  [style]="contentStyle()"
+>
+  <ng-container [ngTemplateOutlet]="body" />
+</div>
 } @else {
-  <ng-template popoverPortal><div popoverContent [nativeAttributes]="contentProps()" data-slot="date-picker-content" [class]="contentClassName()" [style]="contentStyle()"><ng-container [ngTemplateOutlet]="body" /></div></ng-template>
+<ng-template popoverPortal
+  ><div
+    popoverContent
+    [nativeAttributes]="contentProps()"
+    data-slot="date-picker-content"
+    [class]="contentClassName()"
+    [style]="contentStyle()"
+  >
+    <ng-container [ngTemplateOutlet]="body" /></div
+></ng-template>
 }

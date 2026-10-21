@@ -9,7 +9,7 @@
     InputRoot,
     InputSuffix,
   } from "@fex-design/svelte/primitive/input";
-  import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
+  import CircleXIcon from "@fex-design/svelte/icons/circle-x.svelte";
   import type { InputProps } from "./input.types";
   import InputClearWhenAvailable from "./input-clear.svelte";
   let {
@@ -31,6 +31,7 @@
     disabled,
     readonly = false,
     ref = $bindable(null),
+    "data-warning": dataWarning,
     ...rest
   }: InputProps = $props();
 </script>
@@ -43,8 +44,9 @@
     readOnly={readonly}
     {size}
     {variant}
+    data-warning={dataWarning}
     class={cn(classNames?.root, className)}
-    style={[styles?.root, style].filter(Boolean).join(';')}
+    style={[styles?.root, style].filter(Boolean).join(";")}
     onValueChange={(next) => onValueChange?.(next)}
   >
     {#if prefix}<InputPrefix class={classNames?.prefix} style={styles?.prefix}
@@ -58,7 +60,9 @@
       style={styles?.control}
       bind:ref
     />
-    {#if clearable}<InputClearWhenAvailable class={classNames?.clear} style={styles?.clear}
+    {#if clearable}<InputClearWhenAvailable
+        class={classNames?.clear}
+        style={styles?.clear}
         >{#if clear}{@render clear()}{:else}<CircleXIcon
           />{/if}</InputClearWhenAvailable
       >{/if}

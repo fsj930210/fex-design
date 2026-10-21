@@ -2,7 +2,6 @@
 import { Progress } from '@fex-design/vue/ui/progress'
 
 defineOptions({ name: 'ProgressDirectionExample' })
-
 </script>
 
 <template>
@@ -13,12 +12,10 @@ defineOptions({ name: 'ProgressDirectionExample' })
     <div dir="rtl">
       <Progress :value="65" label="RTL" infoPlacement="top" />
     </div>
-    <div class="flex items-start gap-6">
+    <div class="flex flex-wrap items-start gap-6">
       <div class="grid justify-items-center gap-1 text-sm" dir="ltr">
         <Progress variant="circle" :value="65" :size="96" :showInfo="true" />
-        <span>
-          LTR（顺时针）
-        </span>
+        <span> LTR（顺时针） </span>
       </div>
       <div class="grid justify-items-center gap-1 text-sm" dir="rtl">
         <Progress
@@ -26,11 +23,9 @@ defineOptions({ name: 'ProgressDirectionExample' })
           :value="65"
           :size="96"
           :showInfo="true"
-          :classNames="{'track':'scale-x-[-1]'}"
+          :classNames="{ track: 'scale-x-[-1]' }"
         />
-        <span>
-          RTL（反向）
-        </span>
+        <span> RTL（反向） </span>
       </div>
     </div>
   </div>

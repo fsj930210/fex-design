@@ -3,6 +3,7 @@ import { Tag } from '@fex-design/vue/ui/tag'
 </script>
 <template>
   <Tag
+    :action-props="{ class: 'rounded text-violet-700 hover:bg-violet-200' }"
     closable
     color="primary"
     :class-names="{ root: 'border-dashed', close: 'hover:opacity-80' }"

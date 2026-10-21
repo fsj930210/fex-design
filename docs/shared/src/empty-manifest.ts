@@ -8,6 +8,18 @@ export const emptyExamples = {
       title: 'LTR 与 RTL',
       description: '使用中文 LTR 与阿拉伯语 RTL 对比内容方向和操作排列。',
     },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
+      height: 440,
+    },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
     { id: 'basic', title: '基础用法', description: '使用默认图形、标题和描述快速创建空状态。' },
@@ -22,10 +34,18 @@ export const emptyExamples = {
       title: 'LTR 与 RTL',
       description: '使用中文 LTR 与阿拉伯语 RTL 对比内容方向和操作排列。',
     },
+
     {
-      id: 'styling',
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
+      height: 440,
+    },
+    {
+      id: 'semantic-styles',
       title: '结构化样式',
-      description: '使用 classNames 和 styles 定制六个语义区域。',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
     },
   ],
 } as const

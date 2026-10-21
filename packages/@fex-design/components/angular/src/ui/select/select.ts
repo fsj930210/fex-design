@@ -1,3 +1,6 @@
+import type { SelectValueCustomization } from '@fex-design/angular/primitive/select'
+import { cn } from '@fex-design/utils'
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
 import { NgTemplateOutlet } from '@angular/common'
 import {
   normalizeSelectOptions,
@@ -29,14 +32,7 @@ import {
   type SelectChangeMeta,
 } from '@fex-design/angular/primitive/select'
 
-export interface SelectInputProps {
-  class?: string
-  style?: string
-  name?: string
-  autocomplete?: string
-  inputmode?: string
-  'aria-label'?: string
-}
+export type SelectInputProps = ReturnType<SelectTrigger['inputProps']>
 
 export type SelectPopoverProps = Omit<PopoverOptions, 'onOpenChange'> & {
   onOpenChange?: (open: boolean) => void
@@ -50,10 +46,32 @@ export type SelectPopoverProps = Omit<PopoverOptions, 'onOpenChange'> & {
   templateUrl: './select.html',
 })
 export class Select<TItem extends object = SelectOption> {
+  readonly triggerProps = input<
+    Pick<NativeAttributes, 'class' | 'style'> & {
+      inputProps?: ReturnType<SelectTrigger['inputProps']> | undefined
+      placeholder?: string | undefined
+      maxTagCount?: number | undefined
+      valueProps?: SelectValueCustomization | undefined
+    }
+  >()
+  readonly contentProps = input<
+    Pick<NativeAttributes, 'class' | 'style'> &
+      Partial<Pick<SelectContent, 'popupRender'>> & {
+        portalProps?: ReturnType<SelectContent['portalProps']>
+        popoverContentProps?: ReturnType<SelectContent['popoverContentProps']>
+        listProps?: ReturnType<SelectContent['listProps']>
+      }
+  >()
+  readonly resolvedInputProps = computed(() => ({
+    ...this.triggerProps()?.inputProps,
+    ...this.inputProps(),
+  }))
+  readonly cn = cn
   readonly options = input.required<readonly SelectItem<TItem>[]>()
-  readonly fieldNames = input<SelectFieldNames<TItem>>(
-    { value: 'value', label: 'label' } as SelectFieldNames<TItem>,
-  )
+  readonly fieldNames = input<SelectFieldNames<TItem>>({
+    value: 'value',
+    label: 'label',
+  } as SelectFieldNames<TItem>)
   readonly value = input<SelectionValue | SelectionValue[]>()
   readonly defaultValue = input<SelectionValue | SelectionValue[]>()
   readonly multiple = input(false, { transform: booleanAttribute })
@@ -67,7 +85,10 @@ export class Select<TItem extends object = SelectOption> {
   readonly maxTagCount = input<number>()
   readonly virtual = input<SelectVirtualOptions>()
   readonly filterOption = input<SelectFilterOption>()
-  readonly status = input<'error' | 'warning'>()
+  readonly ariaInvalid = input<boolean | 'true' | 'false' | 'grammar' | 'spelling'>(undefined, {
+    alias: 'aria-invalid',
+  })
+  readonly dataWarning = input<string>(undefined, { alias: 'data-warning' })
   readonly inputProps = input<SelectInputProps>({})
   readonly popoverProps = input<SelectPopoverProps>({})
   readonly getPopupContainer = input<PopoverOptions['getPopupContainer']>()
@@ -81,13 +102,18 @@ export class Select<TItem extends object = SelectOption> {
   readonly suffix = contentChild<TemplateRef<void>>('suffix')
   readonly clear = contentChild<TemplateRef<void>>('clear')
   readonly footer = contentChild<TemplateRef<void>>('footer')
-  readonly popupRender = contentChild<TemplateRef<{ menu: TemplateRef<unknown>; close: () => void }>>('popupRender')
+  readonly popupRender =
+    contentChild<TemplateRef<{ menu: TemplateRef<unknown>; close: () => void }>>('popupRender')
   readonly tag = contentChild<TemplateRef<{ $implicit: SelectOption; remove: () => void }>>('tag')
-  readonly option = contentChild<TemplateRef<{
-    $implicit: SelectOption; state: { selected: boolean; active: boolean; disabled: boolean }
-  }>>('option')
+  readonly option = contentChild<
+    TemplateRef<{
+      $implicit: SelectOption
+      state: { selected: boolean; active: boolean; disabled: boolean }
+    }>
+  >('option')
   protected readonly resolvedPopoverProps = computed(() => ({
-    ...this.popoverProps(), getPopupContainer: this.getPopupContainer(),
+    ...this.popoverProps(),
+    getPopupContainer: this.getPopupContainer(),
   }))
   protected readonly normalizedOptions = computed(() =>
     normalizeSelectOptions(this.options(), this.fieldNames()),

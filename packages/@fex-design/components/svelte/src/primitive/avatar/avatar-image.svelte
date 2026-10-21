@@ -7,10 +7,22 @@
   interface Props extends Omit<HTMLImgAttributes, "class"> {
     class?: string;
   }
-  let { class: className, src, crossorigin, referrerpolicy, ...rest }: Props = $props();
+  let {
+    class: className,
+    src,
+    crossorigin,
+    referrerpolicy,
+    ...rest
+  }: Props = $props();
   const { controller, status } = getContext<AvatarContext>(avatarContextKey);
   $effect(() =>
-    src ? controller.load({ src: String(src), ...(crossorigin ? { crossOrigin: crossorigin } : {}), ...(referrerpolicy ? { referrerPolicy: referrerpolicy } : {}) }) : controller.reset(),
+    src
+      ? controller.load({
+          src: String(src),
+          ...(crossorigin ? { crossOrigin: crossorigin } : {}),
+          ...(referrerpolicy ? { referrerPolicy: referrerpolicy } : {}),
+        })
+      : controller.reset(),
   );
 </script>
 

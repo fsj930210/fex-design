@@ -3,7 +3,8 @@ import { scrollbarBarClassName } from '@fex-design/components-styles/scrollbar'
 import { cn } from '@fex-design/utils'
 import type { HTMLAttributes, ReactNode, RefAttributes } from 'react'
 
-export interface ScrollbarBarProps extends HTMLAttributes<HTMLDivElement>, RefAttributes<HTMLDivElement> {
+export interface ScrollbarBarProps
+  extends HTMLAttributes<HTMLDivElement>, RefAttributes<HTMLDivElement> {
   axis: ScrollbarAxis
   children?: ReactNode
 }

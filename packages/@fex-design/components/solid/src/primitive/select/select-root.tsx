@@ -36,7 +36,8 @@ export interface SelectRootProps extends ParentProps {
   disabled?: boolean
   virtual?: SelectVirtualOptions
   maxCount?: number
-  status?: 'error' | 'warning' | undefined
+  'aria-invalid'?: string | boolean | undefined
+  'data-warning'?: string | undefined
   popoverProps?: Omit<PopoverProps, 'children'>
 }
 export function SelectRoot(props: SelectRootProps) {
@@ -71,7 +72,9 @@ export function SelectRoot(props: SelectRootProps) {
   })
   let controller!: ReturnType<typeof createSelectController>
   controller = createSelectController({
-    get disabled() { return props.disabled },
+    get disabled() {
+      return props.disabled
+    },
     selection,
     get options() {
       return filterSelectOptions(
@@ -124,10 +127,13 @@ export function SelectRoot(props: SelectRootProps) {
     disabled: () => props.disabled === true,
     clearable: () => props.clearable === true,
     loading: () => props.loading === true,
-    status: () => props.status,
+    ariaInvalid: () => props['aria-invalid'],
+    dataWarning: () => props['data-warning'],
     virtual: () => props.virtual,
     listId: `select-${createUniqueId()}`,
-    removeValue: (value: SelectionValue) => { if (!props.disabled) selection.unselect(value) },
+    removeValue: (value: SelectionValue) => {
+      if (!props.disabled) selection.unselect(value)
+    },
   }
   return (
     <SelectContext.Provider value={context}>

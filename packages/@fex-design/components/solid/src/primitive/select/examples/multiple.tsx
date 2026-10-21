@@ -1,1 +1,14 @@
-import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/solid/primitive/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'},{value:'solid',label:'Solid'}]; export default function Example(){return <SelectRoot options={options} multiple defaultValue={['react','vue']}><SelectTrigger class="w-72" maxTagCount={2}/><SelectContent/></SelectRoot>}
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'solid', label: 'Solid' },
+]
+export default function Example() {
+  return (
+    <SelectRoot options={options} multiple defaultValue={['react', 'vue']}>
+      <SelectTrigger class="w-72" maxTagCount={2} />
+      <SelectContent />
+    </SelectRoot>
+  )
+}

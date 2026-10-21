@@ -57,7 +57,8 @@ export class MentionsRoot<TData = unknown> implements OnChanges, OnDestroy {
   @Input() readOnly = false
   @Input() invalid = false
   @Input() required = false
-  @Input() status: 'error' | 'warning' | undefined = undefined
+  @Input('aria-invalid') ariaInvalid: string | boolean | null | undefined = undefined
+  @Input('data-warning') dataWarning: string | null | undefined = undefined
   @Input() parseQuery?: (input: MentionsParseInput) => MentionsQuery | null
   @Output() readonly change = new EventEmitter<{ value: string; meta: MentionsChangeMeta }>()
   @Output() readonly search = new EventEmitter<{ text: string; meta: MentionsSearchMeta }>()
@@ -118,7 +119,7 @@ export class MentionsRoot<TData = unknown> implements OnChanges, OnDestroy {
   }
 
   get resolvedInvalid() {
-    return this.invalid || this.status === 'error'
+    return this.invalid
   }
 
   ngOnChanges() {

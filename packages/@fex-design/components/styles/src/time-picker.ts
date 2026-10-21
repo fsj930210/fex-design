@@ -1,5 +1,8 @@
 export const timePickerRootClassName = 'flex w-full min-w-0'
 
+export const timeRangePickerInputClassName =
+  'w-0 data-[active=true]:shadow-[inset_0_-2px_0_var(--primary)]'
+
 export const timePickerColumnClassName = [
   'relative h-56 min-w-0 flex-1',
   'border-e border-border last:border-e-0',

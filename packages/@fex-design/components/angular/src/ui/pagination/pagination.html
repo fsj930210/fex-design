@@ -1,0 +1,109 @@
+@let view = snapshot(); @if (showTotal()) {
+<span
+  data-slot="pagination-total"
+  [class]="partClass('total', totalClassName)"
+  [style]="partStyle('total')"
+>
+  @if (totalTemplate(); as custom) {
+  <ng-container
+    [ngTemplateOutlet]="custom"
+    [ngTemplateOutletContext]="{ $implicit: view, snapshot: view }"
+  />
+  } @else { {{ view.labels.total(view.total) }} }
+</span>
+}
+<div paginationContent [class]="partClass('content')" [style]="partStyle('content')">
+  @if (previousTemplate(); as custom) {
+  <button
+    paginationNavigationButton
+    [class]="partClass('navigationButton')"
+    [style]="partStyle('navigationButton')"
+    direction="prev"
+  >
+    <ng-container [ngTemplateOutlet]="custom" />
+  </button>
+  } @else {
+  <button
+    paginationNavigationButton
+    [class]="partClass('navigationButton')"
+    [style]="partStyle('navigationButton')"
+    direction="prev"
+  ></button>
+  } @if (simple()) {
+  <span
+    data-slot="pagination-simple"
+    [class]="partClass('simple', simpleClassName)"
+    [style]="partStyle('simple')"
+    >{{ displayedPage() }} / {{ view.pageCount }}</span
+  >
+  } @else { @for (item of view.pages; track item.key) { @if (item.type === 'page') {
+  <button
+    paginationPageButton
+    [class]="partClass('pageButton')"
+    [style]="partStyle('pageButton')"
+    [page]="item.page"
+  >
+    @if (pageTemplate(); as custom) {
+    <ng-container
+      [ngTemplateOutlet]="custom"
+      [ngTemplateOutletContext]="{ $implicit: item.page, page: item.page, current: item.page === view.page }"
+    />
+    } @else { {{ item.page }} }
+  </button>
+  } @else { @if (ellipsisTemplate(); as custom) {
+  <span paginationEllipsis [class]="partClass('ellipsis')" [style]="partStyle('ellipsis')"
+    ><ng-container [ngTemplateOutlet]="custom"
+  /></span>
+  } @else {
+  <span paginationEllipsis [class]="partClass('ellipsis')" [style]="partStyle('ellipsis')"></span> }
+  } } } @if (nextTemplate(); as custom) {
+  <button
+    paginationNavigationButton
+    [class]="partClass('navigationButton')"
+    [style]="partStyle('navigationButton')"
+    direction="next"
+  >
+    <ng-container [ngTemplateOutlet]="custom" />
+  </button>
+  } @else {
+  <button
+    paginationNavigationButton
+    [class]="partClass('navigationButton')"
+    [style]="partStyle('navigationButton')"
+    direction="next"
+  ></button>
+  }
+</div>
+@if (showSizeChanger()) {
+<div
+  paginationPageSizeSelect
+  [selectRootProps]="pageSizeSelectProps()?.selectRootProps"
+  [selectTriggerProps]="pageSizeSelectProps()?.selectTriggerProps"
+  [selectContentProps]="pageSizeSelectProps()?.selectContentProps"
+  [options]="pageSizeOptions()"
+  [disabled]="pageSizeSelectProps()?.disabled ?? false"
+  [class]="partClass('pageSizeSelect', '', pageSizeSelectProps()?.class)"
+  [style]="partStyle('pageSizeSelect', pageSizeSelectProps()?.style)"
+  [inputProps]="pageSizeSelectProps()?.inputProps ?? {}"
+></div>
+} @if (showQuickJumper()) {
+<div
+  data-slot="pagination-jumper"
+  [class]="partClass('jumper', jumperClassName)"
+  [style]="partStyle('jumper')"
+>
+  <span>{{ view.labels.jumpPrefix }}</span>
+  <div
+    paginationQuickJumper
+    [inputActionsProps]="quickJumperProps()?.inputActionsProps"
+    [incrementProps]="quickJumperProps()?.incrementProps"
+    [decrementProps]="quickJumperProps()?.decrementProps"
+    [inputNumberProps]="quickJumperProps()?.inputNumberProps"
+    [disabled]="quickJumperProps()?.disabled ?? false"
+    [class]="partClass('quickJumper', '', quickJumperProps()?.class)"
+    [style]="partStyle('quickJumper', quickJumperProps()?.style)"
+    [inputProps]="quickJumperProps()?.inputProps ?? {}"
+  ></div>
+  <span>{{ view.labels.jumpSuffix }}</span>
+</div>
+}

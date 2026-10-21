@@ -1,8 +1,15 @@
-@if (custom(); as template) {
-  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: root.state, state: root.state }" />
+@if (nativeTrigger) {
+<ng-content />
+} @else { @if (custom(); as template) {
+<ng-container
+  [ngTemplateOutlet]="template"
+  [ngTemplateOutletContext]="{ $implicit: root.state, state: root.state }"
+/>
 } @else {
 <div
   inputRoot
+  [class]="inputRootProps()?.class"
+  [style]="inputRootProps()?.style"
   [size]="size() ?? 'md'"
   [variant]="variant() ?? 'outlined'"
   [value]="root.snapshot().inputValue"
@@ -11,22 +18,28 @@
   (valueChange)="inputText($event)"
   (clear)="clear()"
 >
-  @if (prefixValue() != null) { <span inputPrefix>@if (prefixTemplate(); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else { {{ prefixValue() }} }</span> }
-  <input
-    inputControl
-    [inputProps]="resolvedInputProps()"
-  />
+  @if (prefixValue() != null) {
+  <span inputPrefix
+    >@if (prefixTemplate(); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else {
+    {{ prefixValue() }} }</span
+  >
+  }
+  <input inputControl [inputProps]="resolvedInputProps()" />
   <div data-slot="time-picker-affix" [class]="affixClassName">
     <span inputSuffix>
-      @if (suffixValue() != null) {
-        @if (suffixTemplate(); as template) { <ng-container [ngTemplateOutlet]="template" /> }
-        @else { {{ suffixValue() }} }
-      } @else { <clock-icon class="size-4" /> }
+      @if (suffixValue() != null) { @if (suffixTemplate(); as template) {
+      <ng-container [ngTemplateOutlet]="template" /> } @else { {{ suffixValue() }} } } @else {
+      <clock-icon class="size-4" /> }
     </span>
     @if (canClear()) {
-      <button inputClear type="button" (pointerdown)="$event.preventDefault(); $event.stopPropagation()" (click)="clear($event)"></button>
+    <button
+      inputClear
+      type="button"
+      (pointerdown)="$event.preventDefault(); $event.stopPropagation()"
+      (click)="clear($event)"
+    ></button>
     }
   </div>
 </div>
 
-}
+} }

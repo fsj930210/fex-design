@@ -1,0 +1,52 @@
+<div
+  inputRoot
+  value=""
+  [size]="size() ?? 'md'"
+  [variant]="variant() ?? 'outlined'"
+  [disabled]="root.disabled()"
+  [readOnly]="root.readOnly()"
+  (click)="$event.stopPropagation(); open()"
+>
+  @if (prefixValue() != null) {
+  <span inputPrefix
+    >@if (prefixTemplate(); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else {
+    {{ prefixValue() }} }</span
+  >
+  } @for (part of parts; track part; let index = $index) { @if (index === 1) {
+  <span aria-hidden="true" class="shrink-0 text-muted-foreground">→</span> }
+  <input
+    #field
+    [nativeAttributes]="native(part)"
+    type="text"
+    data-slot="time-range-input"
+    [attr.data-range-part]="part"
+    [attr.data-active]="root.rangeSnapshot().open && root.rangeSnapshot().activePart === part || null"
+    [class]="inputClass(part)"
+    [style]="native(part).style ?? null"
+    [value]="text(part)"
+    [attr.aria-label]="native(part)['aria-label'] ?? (part === 'start' ? '开始时间' : '结束时间')"
+    [placeholder]="placeholder()?.[index] ?? (part === 'start' ? '开始时间' : '结束时间')"
+    [disabled]="root.disabled()"
+    [readOnly]="root.readOnly()"
+    (focus)="activate(part)"
+    (blur)="root.controller.resetInput()"
+    (input)="root.controller.input(field.value)"
+  />
+  }
+  <div data-slot="time-picker-affix" [class]="affixClassName">
+    <span inputSuffix
+      >@if (suffixValue() != null) { @if (suffixTemplate(); as template) {
+      <ng-container [ngTemplateOutlet]="template" /> } @else { {{ suffixValue() }} } } @else {
+      <clock-icon class="size-4" /> }</span
+    >
+    @if (canClear()) {
+    <button
+      inputClear
+      type="button"
+      aria-label="清除时间范围"
+      (pointerdown)="$event.preventDefault(); $event.stopPropagation()"
+      (click)="clear($event)"
+    ></button>
+    }
+  </div>
+</div>

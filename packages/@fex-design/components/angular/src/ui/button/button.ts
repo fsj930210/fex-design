@@ -1,3 +1,4 @@
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
 import type {
   ButtonEffect,
   ButtonColor,
@@ -41,6 +42,14 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   templateUrl: './button.template.html',
 })
 export class Button {
+  readonly startIconProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly endIconProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly loadingIconProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  protected readonly iconProps = computed(() =>
+    this.iconPlacement() === 'start' ? this.startIconProps() : this.endIconProps(),
+  )
+  protected readonly cn = cn
+  readonly class = input<string>()
   readonly element = inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement
 
   variant = input<ButtonVariant>('outlined')
@@ -55,18 +64,19 @@ export class Button {
   protected readonly spinnerClassName = buttonSpinnerClassName
   protected readonly disabledState = computed(() => this.disabled() || this.loading())
 
-  protected readonly hostClassName = createHostClassName(() =>
-    cn(
-      buttonPrimitiveClassName(),
-      buttonClassName({
-        variant: this.variant(),
-        color: this.color(),
-        size: this.size(),
-        effect: this.effect(),
-      }),
-    ),
+  protected readonly hostClassName = createHostClassName(
+    () =>
+      cn(
+        buttonPrimitiveClassName(),
+        buttonClassName({
+          variant: this.variant(),
+          color: this.color(),
+          size: this.size(),
+          effect: this.effect(),
+        }),
+      ),
+    () => this.class(),
   )
 }
 
 export { ButtonGroup } from '@fex-design/angular/primitive/button/button-group'
-

@@ -5,12 +5,10 @@
   <div dir="rtl">
     <div progress [value]="65" label="RTL" infoPlacement="top"></div>
   </div>
-  <div class="flex items-start gap-6">
+  <div class="flex flex-wrap items-start gap-6">
     <div class="grid justify-items-center gap-1 text-sm" dir="ltr">
       <div progress variant="circle" [value]="65" [size]="96" [showInfo]="true"></div>
-      <span>
-        LTR（顺时针）
-      </span>
+      <span> LTR（顺时针） </span>
     </div>
     <div class="grid justify-items-center gap-1 text-sm" dir="rtl">
       <div
@@ -21,9 +19,7 @@
         [showInfo]="true"
         [classNames]="{'track':'scale-x-[-1]'}"
       ></div>
-      <span>
-        RTL（反向）
-      </span>
+      <span> RTL（反向） </span>
     </div>
   </div>
 </div>

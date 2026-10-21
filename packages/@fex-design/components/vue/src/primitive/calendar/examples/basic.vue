@@ -7,5 +7,10 @@ import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
 const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate }
 </script>
 <template>
-<CalendarRoot v-bind="getCalendarUIOptions(options)" :class="calendarUIRootClassName" :data-fullscreen="true"><ExampleContent :options="options" /></CalendarRoot>
+  <CalendarRoot
+    v-bind="getCalendarUIOptions(options)"
+    :class="calendarUIRootClassName"
+    :data-fullscreen="true"
+    ><ExampleContent :options="options"
+  /></CalendarRoot>
 </template>

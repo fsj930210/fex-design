@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { menuGroupLabelClassName } from '@fex-design/components-styles/menu'
+defineOptions({ name: 'MenuGroupLabel' })
+</script>
 <template>
-  <div v-bind="$attrs" data-slot="menu-group-label"><slot /></div>
+  <div data-slot="menu-group-label" :class="menuGroupLabelClassName"><slot /></div>
 </template>

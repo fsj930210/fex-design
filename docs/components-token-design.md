@@ -341,9 +341,11 @@ background: var(--dropdown-content-background);
 → 单实例 style
 ```
 
+适用边界：能回落到系统 Token 的组件 Token 必须在消费点回落（上例形态）；随主题变化、没有合适系统 Token 可回落的组件 Token 不写静态 fallback，其主题默认值按主题节点声明在主题文件的组件 token 区（见 §6.3 第 2 类），消费点保持 `var(--x)`。两类都禁止在组件节点上先声明再消费。
+
 #### 2. 系统主题只保留跨组件语义 Token
 
-`packages/styles` 中的明暗主题只定义真正跨组件共享、并且用户希望共同变化的语义，例如
+`packages/@fex-design/styles/src/themes/*.css` 中的明暗主题只定义真正跨组件共享、并且用户希望共同变化的语义，例如
 `background`、`elevated-background`、`border`、`selected-background` 和 `mask`。
 
 禁止把组件名称直接沉淀为系统 Token，例如：
@@ -356,13 +358,18 @@ background: var(--dropdown-content-background);
 
 Card、Popover、Select 等组件应分别提供组件 Token，并回退到合适的系统 Token。多个组件需要被用户编成一组时，用户可以定义组 Token，再把具体组件 Token 指向该组；组件库不为主观业务分组预设大量全局变量。
 
+明暗主题文件按两区组织：主题块内系统区只放跨组件语义；同一主题块末尾由强注释分隔出“组件独有 Token 区”，按组件分组（每个组件上方标注归属）存放随主题变化的组件默认值（如 `--progress-remaining`，见 §6.3 第 2 类）。组件名禁止进入系统区；组件区必须保持组件命名空间（只有归属组件读取），不因写在主题文件里而被视为系统 Token。
+
 #### 3. 组件 Token 属于组件样式模块和公开 API
 
-组件 Token 的名称、fallback 和消费方式定义在 `packages/@fex-design/components-styles/src/<component>.ts` 对应的组件样式事实源中。五个框架共享同一套变量名称、fallback 和部件语义；CLI 输出源码时将最终样式内联到复制出的组件源码。
+组件 Token 的名称、fallback 和消费方式定义在 `packages/@fex-design/components/styles/src/<component>.ts` 对应的组件样式事实源中。五个框架共享同一套变量名称、fallback 和部件语义；CLI 输出源码时将最终样式内联到复制出的组件源码。
 
-`packages/styles/src/components-token.css` 是推荐的组件级集中覆盖入口，不是唯一覆盖入口。用户可以在这里定义某个组件变量以覆盖该组件的全部实例，也可以通过作用域 CSS 覆盖某个区域，或通过 `style` 覆盖单个实例。
+组件 Token 按性质分两类落位：
 
-组件 Token 默认应保持未定义，并依赖消费位置的系统 Token 或组件内置值 fallback。当前尚未完成逐组件重构的旧变量可以暂时保留在 `components-token.css` 中，以维持现有视觉；对应组件完成消费时 fallback 后必须删除这里的默认声明。不得为了列出变量而重复声明，也不得把组件 Token 提升成系统 Token。
+1. 默认值只是系统 Token 别名的（如 `--tag-color-primary` → `--primary`）：任何地方都不声明，默认值只存在于消费点回落，例如 `var(--tag-color-primary, var(--primary))`。
+2. 随主题变化、且无合适系统 Token 可回落的（如 `--progress-remaining`、`--skeleton-gradient-*`）：写在主题文件同一主题块的末尾，由强注释分隔出“组件独有 Token 区”，并按组件分组标注归属（`themes/light.css` / `themes/dark.css`）。消费点保持 `var(--x)`，不写静态 fallback，避免默认值双份维护；CLI 注入主题时随主题一并交付。
+
+覆盖入口不变：`:root` 全局覆盖、作用域容器覆盖、单实例 `style` 覆盖全部生效；禁止在组件节点上先声明再消费。原 `packages/@fex-design/styles/src/components-token.css` 已删除，内容按上述两类分流；随主题变化的组件默认值不得提升为系统语义 Token，也不得重新集中回独立文件。
 
 所有稳定公开的组件 Token 必须进入组件 API JSON 和文档，至少记录：
 

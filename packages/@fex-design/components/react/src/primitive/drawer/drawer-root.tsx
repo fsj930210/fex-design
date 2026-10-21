@@ -1,21 +1,15 @@
-import {
-  use,
-  useEffect,
-  useId,
-  useRef,
-  type ReactNode,
-} from "react"
+import { use, useEffect, useId, useRef, type ReactNode } from 'react'
 import {
   createDrawerController,
   type DrawerOptions,
   type DrawerSize,
-} from "@fex-design/core/drawer/create-drawer-controller"
-import type { DisclosureChangeInfo } from "@fex-design/core/disclosure/create-disclosure"
-import { shallowEqualObject } from "@fex-design/utils"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
-import { useLazyRef } from "@fex-design/react/hooks/use-lazy-ref"
-import { useMemoizedFn } from "@fex-design/react/hooks/use-memoized-fn"
-import { DrawerContext } from "./drawer-context"
+} from '@fex-design/core/drawer/create-drawer-controller'
+import type { DisclosureChangeInfo } from '@fex-design/core/disclosure/create-disclosure'
+import { shallowEqualObject } from '@fex-design/utils'
+import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
+import { DrawerContext } from './drawer-context'
 
 export interface DrawerRootProps extends DrawerOptions {
   children?: ReactNode
@@ -33,9 +27,9 @@ export function DrawerRoot({
   open: openProp,
   defaultOpen,
   onOpenChange,
-  placement = "right",
+  placement = 'right',
   size,
-  defaultSize = "md",
+  defaultSize = 'md',
   resizable = false,
   minSize = 240,
   maxSize,

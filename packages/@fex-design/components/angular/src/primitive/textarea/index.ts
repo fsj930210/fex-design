@@ -33,7 +33,7 @@ import { buttonPrimitiveClassName } from '../button/button'
     '[attr.data-disabled]': 'disabled || null',
     '[attr.data-readonly]': 'readOnly || null',
     '[attr.data-invalid]': 'resolvedInvalid || null',
-    '[attr.data-status]': 'status || null',
+    '[attr.data-warning]': 'dataWarning || null',
     'data-slot': 'textarea-root',
   },
   template: '<ng-content /> @if (allowClear) { <button fexTextareaClear type="button"></button> }',
@@ -49,7 +49,8 @@ export class TextareaRoot implements OnChanges {
   @Input() disabled = false
   @Input() readOnly = false
   @Input() invalid = false
-  @Input() status: 'error' | 'warning' | undefined = undefined
+  @Input('data-warning') dataWarning: string | null | undefined = undefined
+  @Input('aria-invalid') ariaInvalid: string | boolean | null | undefined = undefined
   @Input() autoSize: TextareaAutoSize | undefined = undefined
   @Input() allowClear = false
   @Output() readonly change = new EventEmitter<string>()
@@ -64,7 +65,7 @@ export class TextareaRoot implements OnChanges {
     return this.value ?? this.uncontrolledValue()
   }
   get resolvedInvalid() {
-    return this.invalid || this.status === 'error'
+    return this.invalid
   }
   get canClear() {
     return this.currentValue !== '' && !this.disabled && !this.readOnly
@@ -107,7 +108,7 @@ export class TextareaRoot implements OnChanges {
     '[value]': 'root.currentValue',
     '[disabled]': 'root.disabled',
     '[readOnly]': 'root.readOnly',
-    '[attr.aria-invalid]': 'root.resolvedInvalid || null',
+    '[attr.aria-invalid]': 'root.ariaInvalid || (root.resolvedInvalid || null)',
   },
 })
 export class TextareaInput implements OnDestroy {

@@ -1,0 +1,65 @@
+<div
+  #container
+  class="grid h-80 w-full max-w-2xl grid-cols-[14rem_1fr] gap-6 overflow-auto rounded-xl border p-4"
+>
+  <nav
+    anchorRoot
+    [container]="container"
+    class="sticky top-0 self-start w-full rounded-xl border border-primary/30 bg-muted/20 p-3"
+  >
+    <div class="w-1 bg-primary/15" anchorRail>
+      <span class="bg-success" anchorIndicator style="width: 3px"></span>
+    </div>
+    <ul class="gap-2 rounded-lg bg-background/70 p-2" anchorList>
+      <li
+        class="group rounded-lg border border-dashed border-primary/20 p-1"
+        anchorItem
+        value="overview"
+        target="#angular-ui-styles-overview"
+      >
+        <button
+          class="rounded-md px-3 group-data-[highlighted]:bg-primary/10"
+          anchorLink
+          style="min-height: 36px"
+        >
+          概览
+        </button>
+      </li>
+      <li
+        class="group rounded-lg border border-dashed border-primary/20 p-1"
+        anchorItem
+        value="usage"
+        target="#angular-ui-styles-usage"
+      >
+        <button
+          class="rounded-md px-3 group-data-[highlighted]:bg-primary/10"
+          anchorLink
+          style="min-height: 36px"
+        >
+          使用方式
+        </button>
+        <ul class="gap-2 rounded-lg bg-background/70 p-2" anchorList>
+          <li
+            class="group rounded-lg border border-dashed border-primary/20 p-1"
+            anchorItem
+            value="api"
+            target="#angular-ui-styles-api"
+          >
+            <button
+              class="rounded-md px-3 group-data-[highlighted]:bg-primary/10"
+              anchorLink
+              style="min-height: 36px"
+            >
+              API
+            </button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <div class="grid gap-32 pb-64">
+    <section id="angular-ui-styles-overview">概览</section>
+    <section id="angular-ui-styles-usage">使用方式</section>
+    <section id="angular-ui-styles-api">API</section>
+  </div>
+</div>

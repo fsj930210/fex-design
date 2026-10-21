@@ -4,10 +4,7 @@ import {
   type ToggleGroupChangeMeta,
   type ToggleGroupValue,
 } from '@fex-design/core/toggle/types'
-import {
-  toggleGroupClassName,
-  type ToggleStyleProps,
-} from '@fex-design/components-styles/toggle'
+import { toggleGroupClassName, type ToggleStyleProps } from '@fex-design/components-styles/toggle'
 import { cn } from '@fex-design/utils'
 import {
   useRef,
@@ -21,8 +18,7 @@ import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
 import { ToggleGroupContext, type ToggleGroupContextValue } from './toggle-context'
 
 interface ToggleGroupCommonProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'>,
-    ToggleStyleProps {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'>, ToggleStyleProps {
   disabled?: boolean
   orientation?: 'horizontal' | 'vertical'
   spacing?: number

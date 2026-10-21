@@ -28,7 +28,7 @@
 | controls     | 默认、隐藏与替换增减操作。                      |
 | keyboard     | 方向键步进。                                    |
 | range        | 受控越界值。                                    |
-| custom-logic | useInputNumber 配合系统 Button 组装自定义界面。 |
+| custom-logic | 使用 useInputNumber 手写 DOM 实现自己的 InputNumber。 |
 | affixes      | 前缀、清除、后缀与增减操作共存。                |
 | validation   | 可见校验失败状态与错误说明。                    |
 

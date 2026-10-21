@@ -1,17 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  computed,
-  signal,
-  viewChild,
-} from '@angular/core'
-import type { FloatingPlacement, PopoverOptions } from '@fex-design/core/popover/types'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Popover, PopoverTrigger } from '@fex-design/angular/ui/popover'
+import { popoverStyleDemo as demo } from '@fex-design/docs-shared/popover-demo'
 import { Button } from '@fex-design/angular/ui/button'
-
-type DemoCase = { label: string; options: PopoverOptions }
-
 @Component({
   selector: 'popover-semantic-styles-example',
   standalone: true,
@@ -19,10 +9,7 @@ type DemoCase = { label: string; options: PopoverOptions }
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './semantic-styles.html',
 })
-export class SemanticStylesExample {
-  readonly cases = [{ label: '按部位自定义样式', options: { arrow: true } }]
-
-  options(item: DemoCase): PopoverOptions {
-    return item.options
-  }
+export class PopoverSemanticStylesExample {
+  readonly demo = demo
+  readonly rootStyle = demo.variables
 }

@@ -1,12 +1,13 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
-  interface Props extends HTMLAttributes<HTMLDivElement> {
-    children?: Snippet;
-  }
-  let { children, ...rest }: Props = $props();
+  import { setContext, type Snippet } from "svelte";
+  import type { MenuOptions } from "@fex-design/core/menu/types";
+  import { menuKey, menuLevelKey, subMenuKey } from "./context";
+  import { useMenu } from "./use-menu.svelte";
+  let { children, ...options }: MenuOptions & { children?: Snippet } = $props();
+  const binding = useMenu(() => ({ ...options }));
+  setContext(menuKey, binding.dom);
+  setContext(menuLevelKey, undefined);
+  setContext(subMenuKey, undefined);
 </script>
 
-<div {...rest} role={rest.role ?? "menu"} data-slot="menu">
-  {@render children?.()}
-</div>
+{@render children?.()}

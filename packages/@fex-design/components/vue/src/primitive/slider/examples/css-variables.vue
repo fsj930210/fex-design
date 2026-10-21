@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-  SliderMark,
-  SliderRange,
-  SliderRoot,
-  SliderThumb,
-  SliderTrack,
-} from '@fex-design/vue/primitive/slider'
+import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from '@fex-design/vue/primitive/slider'
 </script>
 <template>
   <SliderRoot

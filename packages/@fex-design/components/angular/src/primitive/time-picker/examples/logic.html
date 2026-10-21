@@ -1,4 +1,11 @@
-<div class="flex w-full min-w-0 flex-col gap-4">
-<div class="flex items-center gap-3"><button type="button" (click)="state.controller.selectHour(12)">选择 12 时</button><output>{{ state.snapshot().inputValue }}</output></div>
-
-</div>
+<section class="grid w-full gap-4 rounded-lg border p-4">
+  <label class="grid gap-2">Time input
+    <input #timeInput type="time" step="1" [value]="state.snapshot().inputValue" (input)="state.controller.input(timeInput.value)" />
+  </label>
+  <fieldset class="grid gap-2"><legend>Custom time picker</legend><div class="flex flex-wrap items-center gap-2">
+    <select aria-label="Hour" [value]="state.snapshot().value?.hour" (change)="state.controller.selectHour(+$any($event.target).value)">@for (value of hours; track value) { <option [value]="value">{{ value.toString().padStart(2, '0') }}</option> }</select><span>:</span>
+    <select aria-label="Minute" [value]="state.snapshot().value?.minute" (change)="state.controller.selectMinute(+$any($event.target).value)">@for (value of minutes; track value) { <option [value]="value">{{ value.toString().padStart(2, '0') }}</option> }</select><span>:</span>
+    <select aria-label="Second" [value]="state.snapshot().value?.second" (change)="state.controller.selectSecond(+$any($event.target).value)">@for (value of seconds; track value) { <option [value]="value">{{ value.toString().padStart(2, '0') }}</option> }</select>
+  </div></fieldset>
+  <output aria-live="polite">{{ state.snapshot().inputValue }}</output>
+</section>

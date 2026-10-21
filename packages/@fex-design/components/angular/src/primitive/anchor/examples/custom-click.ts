@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '@fex-design/angular/primitive/anchor'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '@fex-design/angular/primitive/anchor'
 @Component({
   selector: 'anchor-custom-click-example',
   standalone: true,

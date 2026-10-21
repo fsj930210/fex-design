@@ -1,7 +1,8 @@
 import { cva } from 'class-variance-authority'
+import { formTreatment } from './form-treatment'
 
 export const inputFocusClassName =
-  'focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-3 focus-within:ring-[var(--input-ring-color,var(--focus-ring))]'
+  'focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-[length:var(--input-ring-width,3px)] focus-within:ring-[var(--input-ring-color,var(--focus-ring))]'
 
 const inputBaseClassName = [
   'group/input-root relative flex h-(--input-height) w-full min-w-0 items-stretch gap-2 overflow-hidden rounded-md border bg-[var(--input-background,var(--background))] text-[var(--input-color,var(--foreground))]',
@@ -9,7 +10,8 @@ const inputBaseClassName = [
   'border-[var(--input-border-color,var(--border))] outline-none transition-colors',
   'hover:border-foreground/30',
   inputFocusClassName,
-  'has-[[aria-invalid=true]]:border-danger has-[[aria-invalid=true]]:ring-3 has-[[aria-invalid=true]]:ring-danger/20',
+  formTreatment('has-[[aria-invalid=true]]', 'var(--danger)'),
+  formTreatment('data-[warning=true]', 'var(--warning)'),
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-disabled-background data-[disabled=true]:text-disabled-foreground data-[disabled=true]:opacity-70',
 ].join(' ')
 

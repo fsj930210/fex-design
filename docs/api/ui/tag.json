@@ -20,7 +20,11 @@
       "editor": "enum",
       "options": ["filled", "solid", "outlined"]
     },
-    { "name": "color", "type": "TagColor", "description": "预设色或任意 CSS 颜色。" },
+    {
+      "name": "color",
+      "type": "TagColor",
+      "description": "预设色或任意 CSS 颜色。"
+    },
     {
       "name": "size",
       "type": "'sm' | 'md' | 'lg'",
@@ -43,26 +47,59 @@
       "description": "显示 TagAction。",
       "editor": "boolean"
     },
-    { "name": "children", "type": "FrameworkNode", "description": "标签内容。" },
-    { "name": "closeIcon", "type": "FrameworkNode", "description": "完全替换默认关闭图标。" },
+    {
+      "name": "children",
+      "type": "FrameworkNode",
+      "description": "标签内容。"
+    },
+    {
+      "name": "closeIcon",
+      "type": "FrameworkNode",
+      "description": "完全替换默认关闭图标。"
+    },
     {
       "name": "classNames",
       "type": "TagClassNames",
       "description": "分别定制 root 和 close 类名。"
     },
-    { "name": "styles", "type": "TagStyles", "description": "分别定制 root 和 close 行内样式。" }
+    {
+      "name": "styles",
+      "type": "TagStyles",
+      "description": "分别定制 root 和 close 行内样式。"
+    },
+    {
+      "name": "actionProps",
+      "type": "TagAction props (without children / disabled / click)",
+      "description": "按直接子组件 TagAction 的原生契约配置，关闭仍通过 close 事件请求。"
+    }
   ],
   "events": [
     {
       "name": "close",
-      "parameters": [{ "name": "event", "type": "MouseEvent" }],
+      "parameters": [
+        {
+          "name": "event",
+          "type": "MouseEvent"
+        }
+      ],
       "description": "点击关闭按钮时触发，不自动隐藏 Tag。"
     }
   ],
-  "slots": [{ "name": "default", "description": "标签内容。" }],
+  "slots": [
+    {
+      "name": "default",
+      "description": "标签内容。"
+    }
+  ],
   "cssVariables": [
-    { "name": "--tag-color", "description": "当前 Tag 实例主色。" },
-    { "name": "--tag-color-foreground", "description": "当前 Tag solid 变体前景色。" },
+    {
+      "name": "--tag-color",
+      "description": "当前 Tag 实例主色。"
+    },
+    {
+      "name": "--tag-color-foreground",
+      "description": "当前 Tag solid 变体前景色。"
+    },
     {
       "name": "--tag-color-{primary|success|warning|danger|info}",
       "description": "覆盖对应 Tag 预设主色。"
@@ -109,12 +146,19 @@
   ],
   "frameworks": {
     "react": {
-      "typeOverrides": { "FrameworkNode": "ReactNode" },
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode"
+      },
       "slots": [],
       "events": [
         {
           "name": "onClose",
-          "parameters": [{ "name": "event", "type": "React.MouseEvent<HTMLButtonElement>" }],
+          "parameters": [
+            {
+              "name": "event",
+              "type": "React.MouseEvent<HTMLButtonElement>"
+            }
+          ],
           "description": "点击关闭按钮时触发。"
         }
       ]
@@ -122,35 +166,60 @@
     "vue": {
       "omitProps": ["children", "closeIcon"],
       "slots": [
-        { "name": "default", "description": "标签内容。" },
-        { "name": "closeIcon", "description": "完全替换默认关闭图标。" }
+        {
+          "name": "default",
+          "description": "标签内容。"
+        },
+        {
+          "name": "closeIcon",
+          "description": "完全替换默认关闭图标。"
+        }
       ],
       "events": [
         {
           "name": "close",
-          "parameters": [{ "name": "event", "type": "MouseEvent" }],
+          "parameters": [
+            {
+              "name": "event",
+              "type": "MouseEvent"
+            }
+          ],
           "description": "点击关闭按钮时触发。"
         }
       ]
     },
     "solid": {
-      "typeOverrides": { "FrameworkNode": "JSX.Element" },
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element"
+      },
       "slots": [],
       "events": [
         {
           "name": "onClose",
-          "parameters": [{ "name": "event", "type": "MouseEvent" }],
+          "parameters": [
+            {
+              "name": "event",
+              "type": "MouseEvent"
+            }
+          ],
           "description": "点击关闭按钮时触发。"
         }
       ]
     },
     "svelte": {
-      "typeOverrides": { "FrameworkNode": "Snippet" },
+      "typeOverrides": {
+        "FrameworkNode": "Snippet"
+      },
       "slots": [],
       "events": [
         {
           "name": "onClose",
-          "parameters": [{ "name": "event", "type": "MouseEvent" }],
+          "parameters": [
+            {
+              "name": "event",
+              "type": "MouseEvent"
+            }
+          ],
           "description": "点击关闭按钮时触发。"
         }
       ]
@@ -158,14 +227,25 @@
     "angular": {
       "omitProps": ["children", "closeIcon"],
       "slots": [
-        { "name": "default", "description": "标签内容投影。" },
-        { "name": "[tagCloseIcon]", "description": "完全替换默认关闭图标。" }
+        {
+          "name": "default",
+          "description": "标签内容投影。"
+        },
+        {
+          "name": "[tagCloseIcon]",
+          "description": "完全替换默认关闭图标。"
+        }
       ],
       "slotLabel": "Content projection",
       "events": [
         {
           "name": "close",
-          "parameters": [{ "name": "event", "type": "MouseEvent" }],
+          "parameters": [
+            {
+              "name": "event",
+              "type": "MouseEvent"
+            }
+          ],
           "description": "点击关闭按钮时触发。"
         }
       ]

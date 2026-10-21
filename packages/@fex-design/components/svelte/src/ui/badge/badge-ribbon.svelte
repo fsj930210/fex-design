@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PrimitiveBadgeRibbon from '@fex-design/svelte/primitive/badge/badge-ribbon.svelte';
+  import PrimitiveBadgeRibbon from "@fex-design/svelte/primitive/badge/badge-ribbon.svelte";
   import type { BadgeRibbonOptions } from "@fex-design/core";
   import { badgeRibbonRootClassName } from "@fex-design/components-styles/badge";
   import { cn } from "@fex-design/utils";

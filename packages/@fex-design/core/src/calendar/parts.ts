@@ -9,13 +9,20 @@ export interface CalendarWeekHeaderItem {
   index: number
 }
 
-export function getCalendarWeekHeaderItems(labels: readonly string[], weekStartsOn: number): CalendarWeekHeaderItem[] {
+export function getCalendarWeekHeaderItems(
+  labels: readonly string[],
+  weekStartsOn: number,
+): CalendarWeekHeaderItem[] {
   return getCalendarWeekLabels(labels, weekStartsOn).map((label, index) => ({ label, index }))
 }
 
-export function getCalendarCellAttributes(cell: CalendarCell, hoveredRowIndex: number | null, hasRange: boolean) {
+export function getCalendarCellAttributes(
+  cell: CalendarCell,
+  hoveredRowIndex: number | null,
+  hasRange: boolean,
+) {
   const week = cell.granularity === 'week'
-  const flag = (value: boolean) => value ? 'true' : undefined
+  const flag = (value: boolean) => (value ? 'true' : undefined)
   return {
     'data-today': flag(cell.state.today),
     'data-outside': flag(cell.state.outside),
@@ -37,7 +44,9 @@ export function getCalendarCellAttributes(cell: CalendarCell, hoveredRowIndex: n
     'data-week-range-end': flag(week && cell.state.rangeEnd && !cell.state.rangeStart),
     'data-week-range-single': flag(week && cell.state.rangeStart && cell.state.rangeEnd),
     'data-week-in-range': flag(week && cell.state.inRange),
-    'data-week-range': flag(week && (cell.state.rangeStart || cell.state.rangeEnd || cell.state.inRange)),
+    'data-week-range': flag(
+      week && (cell.state.rangeStart || cell.state.rangeEnd || cell.state.inRange),
+    ),
   }
 }
 
@@ -45,11 +54,17 @@ export function getCalendarWeekLabels(labels: readonly string[], weekStartsOn: n
   return Array.from({ length: 7 }, (_, index) => labels[(index + weekStartsOn) % 7] ?? '')
 }
 
-export function getCalendarHeaderState(state: ReturnType<CalendarController['getState']>, controller: CalendarController) {
+export function getCalendarHeaderState(
+  state: ReturnType<CalendarController['getState']>,
+  controller: CalendarController,
+) {
   return {
     ...getCalendarHeaderView({ state, controller }, controller.getOptions()),
-    state, controller,
-    viewDate: state.viewDate, panel: state.panel, granularity: state.granularity,
+    state,
+    controller,
+    viewDate: state.viewDate,
+    panel: state.panel,
+    granularity: state.granularity,
     previousYear: () => controller.navigate('previous-year'),
     previousMonth: () => controller.navigate('previous-month'),
     nextMonth: () => controller.navigate('next-month'),

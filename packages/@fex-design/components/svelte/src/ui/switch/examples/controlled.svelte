@@ -19,7 +19,7 @@
           onChange={(checked) => (roundedChecked = checked)}
           aria-label="rounded 受控"
         ></Switch>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <Button size="sm" onclick={() => (roundedChecked = true)}>开启</Button
           ><Button size="sm" onclick={() => (roundedChecked = false)}
             >关闭</Button
@@ -41,7 +41,7 @@
           onChange={(checked) => (pillChecked = checked)}
           aria-label="pill 受控"
         ></Switch>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <Button size="sm" onclick={() => (pillChecked = true)}>开启</Button
           ><Button size="sm" onclick={() => (pillChecked = false)}>关闭</Button>
         </div>

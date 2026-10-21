@@ -1,11 +1,18 @@
 <script lang="ts">
-import { CalendarRoot } from '@fex-design/svelte/primitive/calendar'
-import { getCalendarUIOptions, type CalendarUIOptions } from '@fex-design/core/calendar'
-import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
-import ExampleContent from './_parts/content.svelte'
-import { calendarDemoDate, calendarDemoEvent } from '@fex-design/docs-shared/calendar-demo-data'
-const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate }
+  import { CalendarRoot } from "@fex-design/svelte/primitive/calendar";
+  import {
+    getCalendarUIOptions,
+    type CalendarUIOptions,
+  } from "@fex-design/core/calendar";
+  import { calendarUIRootClassName } from "@fex-design/components-styles/calendar";
+  import ExampleContent from "./_parts/content.svelte";
+  import {
+    calendarDemoDate,
+    calendarDemoEvent,
+  } from "@fex-design/docs-shared/calendar-demo-data";
+  const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate };
 </script>
+
 <CalendarRoot
   {...getCalendarUIOptions(options)}
   class={calendarUIRootClassName}
@@ -13,7 +20,7 @@ const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate }
 >
   <ExampleContent
     {options}
-    classNames={{ cell: 'px-0', cellContent: 'overflow-visible' }}
+    classNames={{ cell: "px-0", cellContent: "overflow-visible" }}
   >
     {#snippet cellRender({ cell })}
       {@const event = calendarDemoEvent(cell)}
@@ -28,4 +35,3 @@ const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate }
     {/snippet}
   </ExampleContent>
 </CalendarRoot>
-

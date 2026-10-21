@@ -1,5 +1,5 @@
-import { createContext, useContext } from "solid-js"
-import type { createInput } from "./create-input"
+import { createContext, useContext } from 'solid-js'
+import type { createInput } from './create-input'
 
 export type InputContextValue = ReturnType<typeof createInput>
 export const InputContext = createContext<InputContextValue>()

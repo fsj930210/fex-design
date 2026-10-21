@@ -1,9 +1,20 @@
-import { DatePickerRoot, DatePickerTrigger, DatePickerContent, DatePickerPanel, RangePickerRoot, RangePickerTrigger, RangePickerContent, RangePickerPanelGroup, DatePickerFooter } from '@fex-design/solid/primitive/date-picker'
+import {
+  DatePickerRoot,
+  DatePickerTrigger,
+  DatePickerContent,
+  DatePickerPanel,
+  RangePickerRoot,
+  RangePickerTrigger,
+  RangePickerContent,
+  RangePickerPanelGroup,
+  DatePickerFooter,
+} from '@fex-design/solid/primitive/date-picker'
 import { createCalendarDate } from '@fex-design/core/calendar/temporal'
 
 export function DatePickerDirectionExample() {
   const popupAppearance = {
-    getPopupContainer: (reference: HTMLElement | null) => reference?.closest<HTMLElement>('[dir]') ?? document.body,
+    getPopupContainer: (reference: HTMLElement | null) =>
+      reference?.closest<HTMLElement>('[dir]') ?? document.body,
   }
   const date = createCalendarDate(2026, 10, 15)
   const range = { start: date, end: date.add({ days: 7 }) }

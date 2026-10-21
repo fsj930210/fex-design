@@ -9,4 +9,10 @@ export { default as CalendarCell } from './calendar-cell.svelte'
 export { default as CalendarCellTrigger } from './calendar-cell-trigger.svelte'
 export { default as CalendarFooter } from './calendar-footer.svelte'
 export { createCalendarState } from './calendar-state.svelte'
-export type { CalendarOptions, CalendarController, CalendarValue, CalendarNavigationAction, CalendarWeekHeaderItem } from '@fex-design/core/calendar'
+export type {
+  CalendarOptions,
+  CalendarController,
+  CalendarValue,
+  CalendarNavigationAction,
+  CalendarWeekHeaderItem,
+} from '@fex-design/core/calendar'

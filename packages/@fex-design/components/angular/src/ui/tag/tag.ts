@@ -1,3 +1,5 @@
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import { mergeStyle } from '@fex-design/angular/signals/merge-style'
 import {
   isTagPresetColor,
   type TagClassNames,
@@ -40,6 +42,10 @@ export class TagCloseIcon {}
   templateUrl: './tag.html',
 })
 export class Tag {
+  readonly actionProps = input<
+    Pick<NativeAttributes, 'class' | 'style'> & { 'aria-label'?: string | undefined }
+  >()
+  protected readonly mergeStyle = mergeStyle
   readonly color = input<TagOptions['color']>()
   readonly variant = input<NonNullable<TagOptions['variant']>>('filled')
   readonly size = input<NonNullable<TagOptions['size']>>('md')
@@ -68,6 +74,7 @@ export class Tag {
       })} ${this.classNames().root ?? ''}`,
   )
   protected readonly closeClassName = computed(
-    () => `${tagActionClassName} ${this.classNames().close ?? ''}`,
+    () =>
+      `${tagActionClassName} ${this.classNames().close ?? ''} ${this.actionProps()?.class ?? ''}`,
   )
 }

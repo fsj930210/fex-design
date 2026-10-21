@@ -1,12 +1,24 @@
-import { type DisclosureChangeInfo, type DisclosureReason } from '@demo/utils/shared/disclosure/create-disclosure'
-import { createFloatingOverlay, type FloatingOverlay, type FloatingOverlayOptions, type FloatingOverlaySnapshot } from '@demo/utils/shared/overlay/create-floating-overlay'
+import {
+  type DisclosureChangeInfo,
+  type DisclosureReason,
+} from '@demo/utils/shared/disclosure/create-disclosure'
+import {
+  createFloatingOverlay,
+  type FloatingOverlay,
+  type FloatingOverlayOptions,
+  type FloatingOverlaySnapshot,
+} from '@demo/utils/shared/overlay/create-floating-overlay'
 import { type OverlayTrigger } from '@demo/utils/shared/overlay/trigger/create-trigger'
 import { type FloatingMountOptions } from '@demo/utils/shared/overlay/presence/types'
 import { createStore } from '@demo/utils/shared/store/create-store'
 
 export type PopoverTrigger = OverlayTrigger
 export type PopoverChangeInfo = DisclosureChangeInfo
-export type { FloatingAlign, FloatingPlacement, FloatingSide } from '@demo/utils/shared/floating/placement'
+export type {
+  FloatingAlign,
+  FloatingPlacement,
+  FloatingSide,
+} from '@demo/utils/shared/floating/placement'
 
 /** Primitive 与 UI、五框架共用的 Popover 行为配置。 */
 export interface PopoverOptions

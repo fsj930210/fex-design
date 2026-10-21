@@ -17,7 +17,8 @@ export interface SelectContext {
   disabled: () => boolean
   clearable: () => boolean
   loading: () => boolean
-  status: () => 'error' | 'warning' | undefined
+  ariaInvalid: () => string | boolean | undefined
+  dataWarning: () => string | undefined
   virtual: () => SelectVirtualOptions | undefined
   listId: string
   removeValue: (value: SelectionValue) => void

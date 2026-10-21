@@ -5,7 +5,7 @@ import type { ComponentProps } from 'react'
 import { cva } from 'class-variance-authority'
 
 const alertClassName = cva(
-  "group/alert relative grid w-full grid-cols-[minmax(0,1fr)_auto_auto] items-start has-data-[slot=alert-icon]:grid-cols-[auto_minmax(0,1fr)_auto_auto] gap-x-[var(--alert-content-gap,0.5rem)] rounded-[var(--alert-radius,var(--radius-md))] border px-[var(--alert-padding-inline,0.75rem)] py-[var(--alert-padding-block,0.625rem)] text-left text-sm",
+  'group/alert relative grid w-full grid-cols-[minmax(0,1fr)_auto_auto] items-start has-data-[slot=alert-icon]:grid-cols-[auto_minmax(0,1fr)_auto_auto] gap-x-[var(--alert-content-gap,0.5rem)] rounded-[var(--alert-radius,var(--radius-md))] border px-[var(--alert-padding-inline,0.75rem)] py-[var(--alert-padding-block,0.625rem)] text-left text-sm',
   {
     variants: {
       type: {
@@ -48,23 +48,53 @@ export function Alert({ className, type = 'info', variant = 'filled', ...props }
 export type AlertIconProps = ComponentProps<'span'>
 
 export function AlertIcon({ className, ...props }: AlertIconProps) {
-  return <span data-slot="alert-icon" className={cn("row-span-2 mt-0.5 inline-flex size-[var(--alert-icon-size,1rem)] shrink-0 items-center justify-center [&>svg]:size-full", className)} {...props} />
+  return (
+    <span
+      data-slot="alert-icon"
+      className={cn(
+        'row-span-2 mt-0.5 inline-flex size-[var(--alert-icon-size,1rem)] shrink-0 items-center justify-center [&>svg]:size-full',
+        className,
+      )}
+      {...props}
+    />
+  )
 }
 
 export function AlertTitle({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="alert-title" className={cn("col-start-1 row-start-1 font-medium leading-5 group-has-data-[slot=alert-icon]/alert:col-start-2", className)} {...props} />
+  return (
+    <div
+      data-slot="alert-title"
+      className={cn(
+        'col-start-1 row-start-1 font-medium leading-5 group-has-data-[slot=alert-icon]/alert:col-start-2',
+        className,
+      )}
+      {...props}
+    />
+  )
 }
 
 export function AlertDescription({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="alert-description"
-      className={cn("col-start-1 row-start-2 mt-0.5 text-sm leading-5 opacity-85 group-has-data-[slot=alert-icon]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-4 [&_p:not(:last-child)]:mb-4", className)}
+      className={cn(
+        'col-start-1 row-start-2 mt-0.5 text-sm leading-5 opacity-85 group-has-data-[slot=alert-icon]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-4 [&_p:not(:last-child)]:mb-4',
+        className,
+      )}
       {...props}
     />
   )
 }
 
 export function AlertAction({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="alert-action" className={cn("col-start-2 row-start-1 ms-2 shrink-0 group-has-data-[slot=alert-icon]/alert:col-start-3", className)} {...props} />
+  return (
+    <div
+      data-slot="alert-action"
+      className={cn(
+        'col-start-2 row-start-1 ms-2 shrink-0 group-has-data-[slot=alert-icon]/alert:col-start-3',
+        className,
+      )}
+      {...props}
+    />
+  )
 }

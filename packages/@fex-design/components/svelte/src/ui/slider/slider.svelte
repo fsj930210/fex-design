@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getSliderDotValues } from '@fex-design/core/slider/utils'
+  import { getSliderDotValues } from "@fex-design/core/slider/utils";
   import type {
     SliderChangeMeta,
     SliderPart,
@@ -12,7 +12,7 @@
     SliderRoot,
     SliderThumb,
     SliderTrack,
-  } from '@fex-design/svelte/primitive/slider';
+  } from "@fex-design/svelte/primitive/slider";
   type Mark = { value: number; label?: string; class?: string; style?: string };
   interface Props extends Omit<
     HTMLAttributes<HTMLDivElement>,
@@ -75,13 +75,12 @@
     typeof defaultValue === "number" ? [defaultValue] : defaultValue,
   );
   let internalValues = $state<number[] | undefined>();
-  const currentValues = $derived(
-    values ?? internalValues ?? defaults ?? [min],
-  );
+  const currentValues = $derived(values ?? internalValues ?? defaults ?? [min]);
   const disabledThumbs = $derived(Array.isArray(disabled) ? disabled : []);
   const dotValues = $derived(dots ? getSliderDotValues(min, max, step) : []);
   const returnValue = (next: number[]) =>
-    next.length > 0 && (typeof value === "number" || typeof defaultValue === "number")
+    next.length > 0 &&
+    (typeof value === "number" || typeof defaultValue === "number")
       ? next[0]!
       : next;
 </script>

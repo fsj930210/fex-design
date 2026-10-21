@@ -1,0 +1,32 @@
+<div
+  selectRoot
+  [class]="selectRootProps()?.class"
+  [style]="selectRootProps()?.style"
+  [multiple]="false"
+  [clearable]="false"
+  [showSearch]="selectRootProps()?.showSearch ?? false"
+  [filterOption]="selectRootProps()?.filterOption"
+  [open]="selectRootProps()?.open"
+  [defaultOpen]="selectRootProps()?.defaultOpen ?? false"
+  [loading]="selectRootProps()?.loading ?? false"
+  [popoverProps]="selectRootProps()?.popoverProps ?? {}"
+  [virtual]="selectRootProps()?.virtual"
+  [maxCount]="selectRootProps()?.maxCount"
+  [status]="selectRootProps()?.status"
+  [options]="items()"
+  [value]="state.snapshot().pageSize"
+  [disabled]="disabled() || state.snapshot().disabled"
+  (change)="change($event.value)"
+>
+  <div
+    selectTrigger
+    [class]="triggerClassName()"
+    [style]="selectTriggerProps()?.style"
+    [inputProps]="resolvedInputProps()"
+  ></div>
+  <div
+    selectContent
+    [class]="selectContentProps()?.class"
+    [style]="selectContentProps()?.style"
+  ></div>
+</div>

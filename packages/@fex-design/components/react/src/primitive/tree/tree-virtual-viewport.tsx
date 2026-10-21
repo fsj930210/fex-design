@@ -2,13 +2,7 @@ import type { FocusFeatureApi } from '@fex-design/core/tree/features/focus'
 import type { TreeKey, TreeNodeData, TreeVisibleItem } from '@fex-design/core/tree/types'
 import { cn } from '@fex-design/utils'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import {
-  useImperativeHandle,
-  useRef,
-  type HTMLAttributes,
-  type ReactNode,
-  type Ref,
-} from 'react'
+import { useImperativeHandle, useRef, type HTMLAttributes, type ReactNode, type Ref } from 'react'
 import { useTreeContext } from './tree-context'
 import { useTreeVisibleItems } from './use-tree-visible-items'
 

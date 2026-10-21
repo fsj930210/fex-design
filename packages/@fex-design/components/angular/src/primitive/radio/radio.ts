@@ -60,6 +60,7 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
   template: '<ng-content />',
 })
 export class RadioGroup implements OnInit {
+  readonly class = input<string>()
   value = input<RadioValue | undefined>()
   defaultValue = input<RadioValue | undefined>()
   disabled = input(false, { transform: booleanAttribute })
@@ -70,8 +71,9 @@ export class RadioGroup implements OnInit {
   controller!: SelectionController
   snapshot!: Signal<ReturnType<SelectionController['getSnapshot']>>
 
-  protected readonly hostClassName = createHostClassName(() =>
-    cn(radioGroupClassName({ orientation: this.orientation() })),
+  protected readonly hostClassName = createHostClassName(
+    () => cn(radioGroupClassName({ orientation: this.orientation() })),
+    () => this.class(),
   )
 
   ngOnInit() {
@@ -163,6 +165,7 @@ export class Radio {
   templateUrl: './radio-button.html',
 })
 export class RadioButton {
+  readonly class = input<string>()
   private readonly group = inject(RadioGroup)
 
   value = input.required<RadioValue>()
@@ -171,8 +174,9 @@ export class RadioButton {
 
   protected readonly checked = computed(() => this.group.currentValue() === this.value())
   protected readonly disabledState = computed(() => this.group.disabled() || this.disabled())
-  protected readonly hostClassName = createHostClassName(() =>
-    cn(radioButtonClassName({ size: this.size() })),
+  protected readonly hostClassName = createHostClassName(
+    () => cn(radioButtonClassName({ size: this.size() })),
+    () => this.class(),
   )
 
   @HostListener('click', ['$event'])

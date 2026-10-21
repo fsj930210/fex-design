@@ -1,15 +1,6 @@
-import {
-  toggleClassName,
-  type ToggleStyleProps,
-} from '@fex-design/components-styles/toggle'
+import { toggleClassName, type ToggleStyleProps } from '@fex-design/components-styles/toggle'
 import { cn } from '@fex-design/utils'
-import {
-  createSignal,
-  splitProps,
-  useContext,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createSignal, splitProps, useContext, type JSX, type ParentProps } from 'solid-js'
 import { Button } from '../button'
 import { ToggleGroupContext } from './toggle-context'
 

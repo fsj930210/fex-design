@@ -1,18 +1,13 @@
-import { progressRootClassName } from "@fex-design/components-styles/progress"
-import { normalizeProgressValue, resolveProgressStatus } from "@fex-design/core/progress/progress"
+import { progressRootClassName } from '@fex-design/components-styles/progress'
+import { normalizeProgressValue, resolveProgressStatus } from '@fex-design/core/progress/progress'
 import type {
   ProgressContextValue,
   ProgressStatus,
   ProgressVariant,
-} from "@fex-design/core/progress/types"
-import { cn } from "@fex-design/utils"
-import {
-  createMemo,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from "solid-js"
-import { ProgressContext } from "./progress-context"
+} from '@fex-design/core/progress/types'
+import { cn } from '@fex-design/utils'
+import { createMemo, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { ProgressContext } from './progress-context'
 
 export interface ProgressProps extends JSX.HTMLAttributes<HTMLDivElement> {
   value?: number | null
@@ -26,21 +21,21 @@ export interface ProgressProps extends JSX.HTMLAttributes<HTMLDivElement> {
 
 export function Progress(props: ParentProps<ProgressProps>) {
   const [local, others] = splitProps(props, [
-    "value",
-    "min",
-    "max",
-    "variant",
-    "status",
-    "size",
-    "thickness",
-    "class",
-    "children",
+    'value',
+    'min',
+    'max',
+    'variant',
+    'status',
+    'size',
+    'thickness',
+    'class',
+    'children',
   ])
 
   const min = () => local.min ?? 0
   const max = () => local.max ?? 100
-  const variant = () => local.variant ?? "line"
-  const value = () => local.value === undefined ? 0 : local.value
+  const variant = () => local.variant ?? 'line'
+  const value = () => (local.value === undefined ? 0 : local.value)
   const status = () => resolveProgressStatus(local.status, value(), min(), max())
 
   const normalized = createMemo(() => normalizeProgressValue(value(), min(), max()))
@@ -51,7 +46,7 @@ export function Progress(props: ParentProps<ProgressProps>) {
     percentage: normalized().percentage,
     status: status(),
     variant: variant(),
-    thickness: local.thickness ?? (variant() === "line" ? 8 : 4),
+    thickness: local.thickness ?? (variant() === 'line' ? 8 : 4),
     size: local.size ?? 48,
   }))
 

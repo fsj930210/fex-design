@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { CheckboxValue } from '@fex-design/core/checkbox/types'
-import { checkboxRootClassName, type CheckboxStyleProps } from '@fex-design/components-styles/checkbox'
+import {
+  checkboxRootClassName,
+  type CheckboxStyleProps,
+} from '@fex-design/components-styles/checkbox'
 import { cn } from '@fex-design/utils'
 import { computed, provide, useAttrs, useId } from 'vue'
 import { checkboxRootKey } from './context'

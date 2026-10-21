@@ -10,8 +10,8 @@ export interface ProgressCircleProps extends JSX.SvgSVGAttributes<SVGSVGElement>
 }
 
 export function ProgressCircle(props: ParentProps<ProgressCircleProps>) {
-  const [local, others] = splitProps(props, ["gapDegree", "rotation", "class", "style", "children"])
-  const context = useProgressContext("ProgressCircle")
+  const [local, others] = splitProps(props, ['gapDegree', 'rotation', 'class', 'style', 'children'])
+  const context = useProgressContext('ProgressCircle')
 
   const size = createMemo(() => context().size ?? 48)
   const geometry = createMemo(() =>
@@ -23,12 +23,13 @@ export function ProgressCircle(props: ParentProps<ProgressCircleProps>) {
       thickness: context().thickness ?? 4,
       variant: context().variant,
       gapDegree: local.gapDegree,
-    })
+    }),
   )
 
-  const style = () => typeof local.style === 'string'
-    ? `transform: rotate(${local.rotation ?? geometry().rotation}deg); ${local.style}`
-    : { transform: `rotate(${local.rotation ?? geometry().rotation}deg)`, ...local.style }
+  const style = () =>
+    typeof local.style === 'string'
+      ? `transform: rotate(${local.rotation ?? geometry().rotation}deg); ${local.style}`
+      : { transform: `rotate(${local.rotation ?? geometry().rotation}deg)`, ...local.style }
 
   return (
     <svg

@@ -1,1 +1,9 @@
-<div calendar [defaultViewDate]="date"><ng-template #cell let-cell="cell"><ul>@for (notice of notices(cell); track notice) { <li><a href="#calendar-notice">{{ notice }}</a></li> }</ul></ng-template></div>
+<div calendar [defaultViewDate]="date">
+  <ng-template #cell let-cell="cell"
+    ><ul>
+      @for (notice of notices(cell); track notice) {
+      <li><a href="#calendar-notice">{{ notice }}</a></li>
+      }
+    </ul></ng-template
+  >
+</div>

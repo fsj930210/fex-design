@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback } from '@fex-design/react/primitive/avatar'
 
 export function SizesExample() {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <Avatar size="sm">
         <AvatarFallback>SM</AvatarFallback>
       </Avatar>

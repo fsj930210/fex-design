@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { cn } from '@fex-design/utils'
-import { popoverContentClassName, popoverMenuContentClassName } from '@fex-design/components-styles/popover'
+import {
+  popoverContentClassName,
+  popoverMenuContentClassName,
+} from '@fex-design/components-styles/popover'
 import { useContextMenuContext } from './context'
 import {
   computed,

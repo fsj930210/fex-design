@@ -55,7 +55,7 @@ export function ProgressPrimitiveCustomGapExample() {
           onChange={(next) => setGap(typeof next === 'number' ? next : (next[0] ?? 2))}
         />
       </label>
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center gap-6">
         <StepRing value={50} gap={gap} color="var(--info)" />
         <StepRing value={100} gap={gap} color="var(--success)" />
       </div>

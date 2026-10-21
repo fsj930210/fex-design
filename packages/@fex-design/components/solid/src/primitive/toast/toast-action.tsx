@@ -1,6 +1,6 @@
-import { toastActionClassName } from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import type { JSX } from "solid-js"
+import { toastActionClassName } from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import type { JSX } from 'solid-js'
 
 export type ToastActionProps = JSX.HTMLAttributes<HTMLDivElement>
 

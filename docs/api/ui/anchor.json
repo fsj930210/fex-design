@@ -119,6 +119,12 @@
       "id": "semantic-styles",
       "title": "结构化样式",
       "description": "定制全部语义部件。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
     }
   ],
   "frameworks": {

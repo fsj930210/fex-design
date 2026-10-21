@@ -1,7 +1,7 @@
-import { checkboxLabelClassName } from "@fex-design/components-styles/checkbox"
-import { cn } from "@fex-design/utils"
-import { useContext, type JSX, type ParentProps } from "solid-js"
-import { RootContext } from "./checkbox-context"
+import { checkboxLabelClassName } from '@fex-design/components-styles/checkbox'
+import { cn } from '@fex-design/utils'
+import { useContext, type JSX, type ParentProps } from 'solid-js'
+import { RootContext } from './checkbox-context'
 
 export type CheckboxLabelProps = ParentProps<JSX.LabelHTMLAttributes<HTMLLabelElement>>
 

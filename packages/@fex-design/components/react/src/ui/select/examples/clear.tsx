@@ -1,6 +1,9 @@
 import { Select } from '@fex-design/react/ui/select'
 
-const options = [{ value: 'react', label: 'React' }, { value: 'vue', label: 'Vue' }]
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+]
 
 export default function Example() {
   return <Select className="w-72" options={options} defaultValue="react" clearable />

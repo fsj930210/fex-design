@@ -12,5 +12,6 @@ if (!input) throw new Error('InputClearWhenAvailable must be used inside InputRo
   <InputClear
     v-if="input.value.value !== '' && !input.disabled.value && !input.readOnly.value"
     v-bind="$attrs"
-  ><slot /></InputClear>
+    ><slot
+  /></InputClear>
 </template>

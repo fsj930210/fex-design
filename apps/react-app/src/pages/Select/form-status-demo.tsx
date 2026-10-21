@@ -7,11 +7,7 @@ import {
   FieldRoot,
 } from '@fex-design/react/primitive/field'
 import { Form, useForm } from '@fex-design/react/primitive/form'
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { Button } from '@fex-design/react/ui/button'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'

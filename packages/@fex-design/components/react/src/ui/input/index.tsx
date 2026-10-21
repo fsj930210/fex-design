@@ -1,4 +1,7 @@
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
 import { cn } from '@fex-design/utils'
 import { useState, type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { useControllableState } from '@fex-design/react/hooks/use-controllable-state'
@@ -47,6 +50,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
     disabled,
     readOnly,
     ref,
+    'data-warning': dataWarning,
     ...controlProps
   } = props
 
@@ -59,6 +63,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
       readOnly={readOnly}
       size={size}
       variant={variant}
+      data-warning={dataWarning}
       className={cn(classNames?.root, className)}
       style={{ ...styles?.root, ...style }}
     >
@@ -137,7 +142,11 @@ function SearchAction({
   source,
   onClick,
   styled = false,
+  buttonProps,
+  disabled,
 }: {
+  disabled?: boolean | undefined
+  buttonProps?: InputSearchProps['addonAfterButtonProps']
   children: ReactNode
   loading: boolean
   source: 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter'
@@ -149,10 +158,12 @@ function SearchAction({
       <Button
         variant="solid"
         color="primary"
+        {...buttonProps}
+        disabled={loading || disabled}
         loading={loading}
         data-input-addon-fill=""
         aria-label="Search"
-        className={inputSearchAddonClassName}
+        className={cn(inputSearchAddonClassName, buttonProps?.className)}
         onClick={() => onClick(source)}
       >
         {loading ? null : children}
@@ -182,6 +193,8 @@ export function InputSearch({
   addonBefore = null,
   addonAfter = <SearchIcon />,
   loading = false,
+  addonBeforeButtonProps,
+  addonAfterButtonProps,
   onSearch,
   onKeyDown,
   ...props
@@ -191,7 +204,7 @@ export function InputSearch({
     { trigger: 'onValueChange' },
   )
   const search = (source: 'enter' | 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter') => {
-    if (!loading) onSearch?.(currentValue, { source })
+    if (!loading && !props.disabled) onSearch?.(currentValue, { source })
   }
   const action = (
     content: ReactNode,
@@ -199,7 +212,14 @@ export function InputSearch({
     styled = false,
   ) =>
     content == null ? null : (
-      <SearchAction loading={loading} source={source} styled={styled} onClick={search}>
+      <SearchAction
+        disabled={props.disabled}
+        buttonProps={source === 'addonBefore' ? addonBeforeButtonProps : addonAfterButtonProps}
+        loading={loading}
+        source={source}
+        styled={styled}
+        onClick={search}
+      >
         {content}
       </SearchAction>
     )

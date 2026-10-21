@@ -8,7 +8,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { Button as PrimitiveButton } from "@fex-design/svelte/primitive/button";
-  import ChevronRightIcon from '@fex-design/svelte/icons/chevron-right.svelte';
+  import ChevronRightIcon from "@fex-design/svelte/icons/chevron-right.svelte";
   import {
     collapseContextKey,
     collapseItemContextKey,

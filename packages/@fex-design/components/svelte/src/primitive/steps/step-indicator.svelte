@@ -3,7 +3,7 @@
   import { cn } from "@fex-design/utils";
   import { getContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
   import { stepContextKey } from "./context";
   interface Props extends Omit<
     HTMLAttributes<HTMLSpanElement>,

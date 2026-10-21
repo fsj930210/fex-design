@@ -1,28 +1,87 @@
 <ng-template #defaultCell let-cell="cell">
-  <button calendarCellTrigger [cell]="cell" [class]="cn(view().fullscreen ? fullTriggerClass : miniTriggerClass, cls('cellTrigger'))" [style]="appearance().styles?.cellTrigger">{{ view().label(cell) }}</button>
-            @if (cellTemplate(); as template) {
-              <div data-slot="calendar-cell-content" [class]="cls('cellContent')" [style]="appearance().styles?.cellContent"><ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ cell, state: context().state, controller: context().controller }" /></div>
-            }
+  <button
+    calendarCellTrigger
+    [cell]="cell"
+    [class]="cn(view().fullscreen ? fullTriggerClass : miniTriggerClass, cls('cellTrigger'))"
+    [style]="appearance().styles?.cellTrigger"
+  >
+    {{ view().label(cell) }}
+  </button>
+  @if (cellTemplate(); as template) {
+  <div
+    data-slot="calendar-cell-content"
+    [class]="cls('cellContent')"
+    [style]="appearance().styles?.cellContent"
+  >
+    <ng-container
+      [ngTemplateOutlet]="template"
+      [ngTemplateOutletContext]="{ cell, state: context().state, controller: context().controller }"
+    />
+  </div>
+  }
 </ng-template>
 @if (headerRender() !== false) {
-  <div calendarHeader [class]="cls('header')" [style]="appearance().styles?.header" [renderTemplate]="headerTemplate()"></div>
-}
-@if (context().state.panel === 'date') {
-  <div [class]="cn(classes.weekHeader, columns(), appearance().classNames?.weekHeader)" [style]="appearance().styles?.weekHeader" data-slot="calendar-week-header">
-    @if (view().showWeek) { <div [class]="cls('weekNumber')" [style]="appearance().styles?.weekNumber">{{ view().locale.week }}</div> }
-    <div calendarWeekHeader [labels]="view().locale.weekdays" class="contents py-0"></div>
+<div
+  calendarHeader
+  [class]="cls('header')"
+  [style]="appearance().styles?.header"
+  [renderTemplate]="headerTemplate()"
+></div>
+} @if (context().state.panel === 'date') {
+<div
+  [class]="cn(classes.weekHeader, columns(), appearance().classNames?.weekHeader)"
+  [style]="appearance().styles?.weekHeader"
+  data-slot="calendar-week-header"
+>
+  @if (view().showWeek) {
+  <div [class]="cls('weekNumber')" [style]="appearance().styles?.weekNumber">
+    {{ view().locale.week }}
   </div>
+  }
+  <div calendarWeekHeader [labels]="view().locale.weekdays" class="contents py-0"></div>
+</div>
 }
-<div role="grid" data-slot="calendar-grid" [attr.data-panel]="context().state.panel" [class]="cls('grid')" [style]="appearance().styles?.grid" (mouseleave)="calendar.controller.clearHoveredRow()">
+<div
+  role="grid"
+  data-slot="calendar-grid"
+  [attr.data-panel]="context().state.panel"
+  [class]="cls('grid')"
+  [style]="appearance().styles?.grid"
+  (mouseleave)="calendar.controller.clearHoveredRow()"
+>
   @for (row of view().rows; track row.key) {
-    <div calendarRow [class]="cn(classes.row, columns(), appearance().classNames?.row)" [style]="appearance().styles?.row">
-      @if (view().showWeek) { <div role="rowheader" data-slot="calendar-week-number" [class]="cls('weekNumber')" [style]="appearance().styles?.weekNumber">{{ row.week.week }}</div> }
-      @for (cell of row.cells; track cell.key) {
-        <div calendarCell [cell]="cell" [class]="cn(view().fullscreen ? fullCellClass : miniCellClass, cls('cell'))" [style]="appearance().styles?.cell">
-          <ng-container [ngTemplateOutlet]="fullCellTemplate() ?? defaultCell" [ngTemplateOutletContext]="{ cell, state: context().state, controller: context().controller }" />
-        </div>
-      }
+  <div
+    calendarRow
+    [class]="cn(classes.row, columns(), appearance().classNames?.row)"
+    [style]="appearance().styles?.row"
+  >
+    @if (view().showWeek) {
+    <div
+      role="rowheader"
+      data-slot="calendar-week-number"
+      [class]="cls('weekNumber')"
+      [style]="appearance().styles?.weekNumber"
+    >
+      {{ row.week.week }}
     </div>
+    } @for (cell of row.cells; track cell.key) {
+    <div
+      calendarCell
+      [cell]="cell"
+      [class]="cn(view().fullscreen ? fullCellClass : miniCellClass, cls('cell'))"
+      [style]="appearance().styles?.cell"
+    >
+      <ng-container
+        [ngTemplateOutlet]="fullCellTemplate() ?? defaultCell"
+        [ngTemplateOutletContext]="{ cell, state: context().state, controller: context().controller }"
+      />
+    </div>
+    }
+  </div>
   }
 </div>
-@if (footerTemplate(); as template) { <div calendarFooter [class]="cls('footer')" [style]="appearance().styles?.footer"><ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context()" /></div> }
+@if (footerTemplate(); as template) {
+<div calendarFooter [class]="cls('footer')" [style]="appearance().styles?.footer">
+  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="context()" />
+</div>
+}

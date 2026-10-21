@@ -48,10 +48,10 @@ export class SwitchRoot implements OnInit {
   readonly shape = input<SwitchShape>('rounded')
   readonly change = output<{ checked: boolean; event: MouseEvent }>()
   private readonly internalChecked = signal(false)
-  ngOnInit() { this.internalChecked.set(this.defaultChecked()) }
-  readonly currentChecked = computed(
-    () => this.checked() ?? this.internalChecked(),
-  )
+  ngOnInit() {
+    this.internalChecked.set(this.defaultChecked())
+  }
+  readonly currentChecked = computed(() => this.checked() ?? this.internalChecked())
   readonly state = computed<SwitchState>(() => (this.currentChecked() ? 'checked' : 'unchecked'))
   protected readonly hostClassName = createHostClassName(() =>
     cn(switchClassName({ size: this.size(), shape: this.shape() })),
@@ -74,7 +74,8 @@ export class SwitchRoot implements OnInit {
   template: '<ng-content />',
 })
 export class SwitchThumb {
-  protected readonly hostClassName = createHostClassName(switchThumbClassName)
+  readonly class = input<string>()
+  protected readonly hostClassName = createHostClassName(switchThumbClassName, () => this.class())
 }
 
 @Component({
@@ -90,6 +91,7 @@ export class SwitchThumb {
   template: '<ng-content />',
 })
 export class SwitchContent {
+  readonly class = input<string>()
   readonly state = input.required<SwitchState>()
-  protected readonly hostClassName = createHostClassName(switchContentClassName)
+  protected readonly hostClassName = createHostClassName(switchContentClassName, () => this.class())
 }

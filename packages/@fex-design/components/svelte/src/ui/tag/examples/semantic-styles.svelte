@@ -3,6 +3,7 @@
 </script>
 
 <Tag
+  actionProps={{ class: "rounded text-violet-700 hover:bg-violet-200" }}
   closable
   color="primary"
   classNames={{

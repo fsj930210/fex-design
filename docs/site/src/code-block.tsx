@@ -14,7 +14,11 @@ export function CodeBlock(props: { code: string; language?: string }) {
     <div class="docs-code-block min-w-0 text-foreground font-mono text-xs" dir="ltr">
       <Show
         when={!html.error && !html.loading && html()}
-        fallback={<pre><code>{props.code}</code></pre>}
+        fallback={
+          <pre>
+            <code>{props.code}</code>
+          </pre>
+        }
       >
         {(markup) => <div innerHTML={markup()} />}
       </Show>

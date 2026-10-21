@@ -25,7 +25,11 @@ export function DatePickerToday(props: ButtonProps) {
           picker.today()
         }
       }}
-    >{local.children === undefined ? appearance().calendarProps?.locale?.today ?? calendarDefaultLocale.today : local.children}</Button>
+    >
+      {local.children === undefined
+        ? (appearance().calendarProps?.locale?.today ?? calendarDefaultLocale.today)
+        : local.children}
+    </Button>
   )
 }
 

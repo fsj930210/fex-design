@@ -13,7 +13,7 @@
     SpinnerContainer as PrimitiveSpinnerContainer,
     SpinnerOverlay,
     SpinnerText,
-  } from '@fex-design/svelte/primitive/spinner';
+  } from "@fex-design/svelte/primitive/spinner";
   let {
     class: className,
     style,
@@ -39,7 +39,7 @@
     {...rest}
     {size}
     class={cn(className, classNames?.spinner)}
-    style={[style, styles?.spinner].filter(Boolean).join(';')}
+    style={[style, styles?.spinner].filter(Boolean).join(";")}
     children={indicator}
   />
 {:else}
@@ -47,13 +47,16 @@
     {...rest}
     aria-busy={spinning}
     class={cn(spinnerContainerClassName, className, classNames?.root)}
-    style={[style, styles?.root].filter(Boolean).join(';')}
+    style={[style, styles?.root].filter(Boolean).join(";")}
   >
     {@render children?.()}
     {#if spinning}<SpinnerOverlay
         class={cn(classNames?.overlay, text && "flex-col")}
         style={styles?.overlay}
-        ><Spinner {size} class={classNames?.spinner} style={styles?.spinner}
+        ><Spinner
+          {size}
+          class={classNames?.spinner}
+          style={styles?.spinner}
           children={indicator}
         />{#if text}<SpinnerText class={classNames?.text} style={styles?.text}
             >{text}</SpinnerText

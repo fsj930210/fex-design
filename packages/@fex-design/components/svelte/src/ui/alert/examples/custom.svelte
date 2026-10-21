@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Alert } from "@fex-design/svelte/ui/alert";
-  import StarIcon from '@fex-design/svelte/icons/star.svelte';
+  import StarIcon from "@fex-design/svelte/icons/star.svelte";
 </script>
 
 <div class="w-full max-w-sm">

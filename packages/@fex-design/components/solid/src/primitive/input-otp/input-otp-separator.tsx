@@ -1,11 +1,11 @@
-import { inputOTPSeparatorClassName } from "@fex-design/components-styles/input-otp"
-import { cn } from "@fex-design/utils"
-import { splitProps, type JSX, type ParentProps } from "solid-js"
+import { inputOTPSeparatorClassName } from '@fex-design/components-styles/input-otp'
+import { cn } from '@fex-design/utils'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 
 export type InputOTPSeparatorProps = ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>
 
 export function InputOTPSeparator(props: InputOTPSeparatorProps) {
-  const [local, rest] = splitProps(props, ["class", "children"])
+  const [local, rest] = splitProps(props, ['class', 'children'])
   return (
     <span
       {...rest}
@@ -13,7 +13,7 @@ export function InputOTPSeparator(props: InputOTPSeparatorProps) {
       data-slot="input-otp-separator"
       class={cn(inputOTPSeparatorClassName, local.class)}
     >
-      {local.children ?? "–"}
+      {local.children ?? '–'}
     </span>
   )
 }

@@ -1,11 +1,45 @@
 <div class="grid w-full max-w-md gap-4">
-  <div class="flex items-center gap-3"><span class="text-sm">自动隐藏</span><div select class="w-40" [options]="modes" [value]="mode()" (change)="changeMode($event.value)" [inputProps]="{ 'aria-label': '自动隐藏模式' }"></div></div>
-  <div class="flex items-center gap-3"><span class="text-sm">隐藏延迟（ms）</span><div inputNumber class="w-40" [value]="delay()" [min]="0" [max]="3000" [step]="100" (change)="delay.set($event.value ?? 0)"></div></div>
-    <div checkbox [checked]="disabled()" (checkedChange)="disabled.set($event.checked)">禁用自定义滚动条交互</div>
-  <div scrollbar class="h-48 w-72 rounded-md border" [autoHide]="mode()" [disabled]="disabled()" [autoHideDelay]="delay()" [overflow]="{ x: 'hidden' }" [classNames]="{ thumbY: 'bg-primary' }" (scrollChange)="scroll($event.scrollTop)">
+  <div class="flex items-center gap-3">
+    <span class="text-sm">自动隐藏</span>
+    <div
+      select
+      class="w-40"
+      [options]="modes"
+      [value]="mode()"
+      (change)="changeMode($event.value)"
+      [inputProps]="{ 'aria-label': '自动隐藏模式' }"
+    ></div>
+  </div>
+  <div class="flex items-center gap-3">
+    <span class="text-sm">隐藏延迟（ms）</span>
+    <div
+      inputNumber
+      class="w-40"
+      [value]="delay()"
+      [min]="0"
+      [max]="3000"
+      [step]="100"
+      (change)="delay.set($event.value ?? 0)"
+    ></div>
+  </div>
+  <div checkbox [checked]="disabled()" (checkedChange)="disabled.set($event.checked)">
+    禁用自定义滚动条交互
+  </div>
+  <div
+    scrollbar
+    class="h-48 w-72 rounded-md border"
+    [autoHide]="mode()"
+    [disabled]="disabled()"
+    [autoHideDelay]="delay()"
+    [overflow]="{ x: 'hidden' }"
+    [classNames]="{ thumbY: 'bg-primary' }"
+    (scrollChange)="scroll($event.scrollTop)"
+  >
     <div class="grid gap-3 p-4">
-        @for (line of lines; track line) {<p>{{ line }}</p>}
-      </div>
+      @for (line of lines; track line) {
+      <p>{{ line }}</p>
+      }
+    </div>
   </div>
   <output>滚动位置： {{ top() }}</output>
 </div>

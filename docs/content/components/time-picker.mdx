@@ -1,6 +1,6 @@
 ---
 title: TimePicker
-description: 时间输入与可组合时间列，支持 12/24 小时制、步长、禁用时间和自定义内容。
+description: 单值与范围时间选择，支持共享范围输入、默认确认、12/24 小时制、步长和禁用时间。
 ---
 
 ## 何时使用
@@ -28,18 +28,42 @@ TimePickerRoot
             ├── TimePickerMinuteColumn
             ├── TimePickerSecondColumn
             └── TimePickerPeriodColumn (12-hour)
+
+TimeRangePickerRoot
+├── TimeRangePickerTrigger (one frame, two fields, shared suffix)
+└── TimePickerPortal
+    └── TimePickerContent
+        ├── TimePickerPanel (active endpoint columns)
+        └── TimeRangePickerFooter (confirm / cancel)
 ```
 
 </ApiComposition>
 </ApiSection>
 </ApiContainer>
 
-## 受控与独立逻辑
+## 受控与 useTimePicker
 
-value 为 undefined 时非受控，null 是受控空值。defaultValue 只读取一次。输入草稿和提交值由同一 core controller 管理，不完整输入不触发 change；disabledTime 同时约束输入和列选择。列选择立即提交，不自动关闭。
+单值 TimePicker 的 value 为 undefined 时非受控，null 是受控空值。defaultValue 只读取一次。输入草稿和提交值由同一 core controller 管理，不完整输入不触发 change；disabledTime 同时约束输入和列选择。列选择立即提交，不自动关闭。
 
 React、Vue、Solid、Svelte 从组件族入口导入 useTimePicker；Angular 提供 TimePickerState，在调用 setOptions 后消费 controller/snapshot。逻辑入口不依赖 TimePickerRoot，可以连接自定义 DOM 或容器。
 
 ## 键盘与方向
 
 上下键移动有效选项焦点，Enter/Space 使用原生按钮选择。disabled/readOnly 阻止修改和导航；只读允许打开查看。使用原生 dir 指定书写方向，默认浮层继承触发元素的方向。滚动使用实际选项位置，并尊重 reduced-motion。
+
+
+## 组合示例的边界
+
+单值 TimePicker 的“选择确认”示例仍由调用方保存待确认选择和已提交值。时间范围使用独立公开的 `TimeRangePicker`：两个字段共用一个输入外框、后缀、清除按钮和浮层，点击字段切换时间列编辑的端点。
+
+范围默认 `needConfirm=true`。选择与输入仅更新待确认区间；第一次确定后切换并聚焦另一端点；两端都确认且范围有效后才提交并关闭，取消、Escape 或关闭恢复已提交值。起止时间必须完整，且结束时间不得早于开始时间。共享清除立即提交 null。显式传入 `needConfirm=false` 可即时提交完整有效范围。字段失焦时丢弃未解析的输入草稿，恢复最后有效时间。
+
+`value` 为 `readonly [TimeValue, TimeValue] | null`；undefined 非受控，null 受控空范围，defaultValue 仅初始化读取。React/Vue/Solid/Svelte 的 `useTimeRangePicker`、Angular 的 `TimeRangePickerState` 可独立消费同一 Core session。UI 只组装 `TimeRangePickerRoot`、`TimeRangePickerTrigger`、默认时间列和 `TimeRangePickerFooter`。
+
+结构化样式仅属于 UI，通过 `classNames` 和 `styles` 按 DOM 定制：`root` 为输入外框，`input` 为原生输入，`popup` 为浮层，`panel` 为时间面板，`column` 为时间列，`item` 为选项，`selectedItem` 为选中项。浮层样式直接传给 Portal 内的对应部件。示例分别展示 classNames 与 styles，无需替换面板或使用父级选择器。Primitive 通过各部件自身的 class/style，以及时间列的选项样式属性定制，不提供跨部件映射。
+
+## 默认 Input 与 inputProps
+
+默认触发器组合 Input，输入元素固定为 `type="text"`。`inputProps` 保留 id、name、class/style、表单语义及可访问性等原生扩展，React 使用 className。
+
+`type`、`value/defaultValue`、`disabled`、`readOnly/readonly`、input/change 事件及捕获版本不能通过 inputProps 修改。内部 `aria-haspopup`、`aria-expanded`、`data-slot`、`data-state` 也不可覆盖。值、禁用和只读在 TimePicker/Root 配置；值变化从组件的 change 事件消费。限制同时落实在类型与运行时过滤，自定义 Trigger 的 DOM 仍归调用方。

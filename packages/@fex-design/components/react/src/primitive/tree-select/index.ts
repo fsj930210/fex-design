@@ -6,7 +6,11 @@ export {
 } from './tree-select-trigger'
 export { TreeSelectContent, type TreeSelectContentProps } from './tree-select-content'
 export { TreeSelectOption, type TreeSelectOptionProps } from './tree-select-option'
-export { TreeSelectContext, useTreeSelect, type TreeSelectContextValue } from './tree-select-context'
+export {
+  TreeSelectContext,
+  useTreeSelect,
+  type TreeSelectContextValue,
+} from './tree-select-context'
 export type {
   TreeSelectController,
   TreeSelectItem,

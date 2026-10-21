@@ -11,9 +11,11 @@ export type ProgressRangeProps = JSX.HTMLAttributes<HTMLDivElement> & {
 export function ProgressRange(props: ProgressRangeProps) {
   const [local, others] = splitProps(props, ['value', 'offset', 'class', 'style'])
   const context = useProgressContext('ProgressRange')
-  const percentage = createMemo(() => local.value !== undefined
-    ? Math.min(1, Math.max(0, (local.value - context().min) / (context().max - context().min)))
-    : context().percentage)
+  const percentage = createMemo(() =>
+    local.value !== undefined
+      ? Math.min(1, Math.max(0, (local.value - context().min) / (context().max - context().min)))
+      : context().percentage,
+  )
   const style = () => {
     const width = percentage() !== null ? `${percentage()! * 100}%` : undefined
     const left = local.offset !== undefined ? `${local.offset}%` : undefined
@@ -22,7 +24,16 @@ export function ProgressRange(props: ProgressRangeProps) {
       : { width, left, ...local.style }
   }
   return (
-    <div {...others} data-slot="progress-range" data-status={context().status}
-      class={cn(progressLineRangeClassName, local.offset !== undefined && 'absolute top-0', local.class)} style={style()} />
+    <div
+      {...others}
+      data-slot="progress-range"
+      data-status={context().status}
+      class={cn(
+        progressLineRangeClassName,
+        local.offset !== undefined && 'absolute top-0',
+        local.class,
+      )}
+      style={style()}
+    />
   )
 }

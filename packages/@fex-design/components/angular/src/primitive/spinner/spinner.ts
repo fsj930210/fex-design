@@ -36,10 +36,12 @@ export class SpinnerOverlay {}
   templateUrl: './spinner.html',
 })
 export class Spinner {
+  readonly class = input<string>()
   readonly size = input<SpinnerSize>('md')
   readonly indicator = input<TemplateRef<unknown> | undefined>()
-  protected readonly hostClassName = createHostClassName(() =>
-    spinnerClassName({ size: this.size() }),
+  protected readonly hostClassName = createHostClassName(
+    () => spinnerClassName({ size: this.size() }),
+    () => this.class(),
   )
 }
 @Component({

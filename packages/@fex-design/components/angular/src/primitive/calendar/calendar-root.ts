@@ -1,9 +1,40 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Injector, inject, input, output, runInInjectionContext } from '@angular/core'
-import type { CalendarCell, CalendarDate, CalendarGranularity, CalendarLocale, CalendarPanel, CalendarRange, CalendarSelectInfo, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Injector,
+  inject,
+  input,
+  output,
+  runInInjectionContext,
+} from '@angular/core'
+import type {
+  CalendarCell,
+  CalendarDate,
+  CalendarGranularity,
+  CalendarLocale,
+  CalendarPanel,
+  CalendarRange,
+  CalendarSelectInfo,
+  CalendarValue,
+  CalendarWeekday,
+} from '@fex-design/core/calendar'
 import { calendarRootClassName } from '@fex-design/components-styles/calendar'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { createCalendarState } from './calendar-state'
-@Component({ selector: 'div[calendarRoot]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'calendar-root', '[class]': 'hostClassName()', '[attr.data-panel]': 'state().panel', '[attr.data-granularity]': 'state().granularity', '(mouseleave)': 'leave($event)' }, template: '<ng-content />' })
+@Component({
+  selector: 'div[calendarRoot]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    'data-slot': 'calendar-root',
+    '[class]': 'hostClassName()',
+    '[attr.data-panel]': 'state().panel',
+    '[attr.data-granularity]': 'state().granularity',
+    '(mouseleave)': 'leave($event)',
+  },
+  template: '<ng-content />',
+})
 export class CalendarRoot<TValue extends CalendarValue = CalendarValue> {
   readonly class = input<string | undefined>(undefined)
   readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
@@ -35,11 +66,45 @@ export class CalendarRoot<TValue extends CalendarValue = CalendarValue> {
   private calendar: ReturnType<typeof createCalendarState<TValue>> | undefined
   private readonly injector = inject(Injector)
   private getCalendar() {
-    return this.calendar ??= runInInjectionContext(this.injector, () => createCalendarState(() => ({ value: this.value(), values: this.values(), range: this.range(), defaultValue: this.defaultValue(), viewDate: this.viewDate(), defaultViewDate: this.defaultViewDate(), panel: this.panel(), defaultPanel: this.defaultPanel(), granularity: this.granularity(), monthSelection: this.monthSelection(), weekStartsOn: this.weekStartsOn(), locale: this.locale(), showWeek: this.showWeek(), fullscreen: this.fullscreen(), today: this.today(), min: this.min(), max: this.max(), disabledDate: this.disabledDate(), onChange: value => this.change.emit(value), onSelect: (value, info) => this.select.emit({ value, info }), onCellSelect: cell => this.cellSelect.emit(cell), onCellHover: cell => this.cellHover.emit(cell), onViewDateChange: date => this.viewDateChange.emit(date), onPanelChange: panel => this.panelChange.emit(panel) })))
+    return (this.calendar ??= runInInjectionContext(this.injector, () =>
+      createCalendarState(() => ({
+        value: this.value(),
+        values: this.values(),
+        range: this.range(),
+        defaultValue: this.defaultValue(),
+        viewDate: this.viewDate(),
+        defaultViewDate: this.defaultViewDate(),
+        panel: this.panel(),
+        defaultPanel: this.defaultPanel(),
+        granularity: this.granularity(),
+        monthSelection: this.monthSelection(),
+        weekStartsOn: this.weekStartsOn(),
+        locale: this.locale(),
+        showWeek: this.showWeek(),
+        fullscreen: this.fullscreen(),
+        today: this.today(),
+        min: this.min(),
+        max: this.max(),
+        disabledDate: this.disabledDate(),
+        onChange: (value) => this.change.emit(value),
+        onSelect: (value, info) => this.select.emit({ value, info }),
+        onCellSelect: (cell) => this.cellSelect.emit(cell),
+        onCellHover: (cell) => this.cellHover.emit(cell),
+        onViewDateChange: (date) => this.viewDateChange.emit(date),
+        onPanelChange: (panel) => this.panelChange.emit(panel),
+      })),
+    ))
   }
-  get controller() { return this.getCalendar().controller }
+  get controller() {
+    return this.getCalendar().controller
+  }
   readonly state = () => this.getCalendar().state()
   readonly grid = () => this.getCalendar().grid()
-  leave(event: MouseEvent) { if (!event.defaultPrevented) this.controller.clearHoveredRow() }
-  protected readonly hostClassName = createHostClassName(() => calendarRootClassName, () => this.class())
+  leave(event: MouseEvent) {
+    if (!event.defaultPrevented) this.controller.clearHoveredRow()
+  }
+  protected readonly hostClassName = createHostClassName(
+    () => calendarRootClassName,
+    () => this.class(),
+  )
 }

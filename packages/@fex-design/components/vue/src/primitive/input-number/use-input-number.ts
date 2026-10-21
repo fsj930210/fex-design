@@ -31,10 +31,8 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
   const options = computed(() => toValue(source))
   const internalValue = ref(options.value.defaultValue)
   const controlled = computed(() => options.value.controlled ?? options.value.value !== undefined)
-  const externalValue = computed(() => controlled.value ? options.value.value : undefined)
-  const value = computed(() =>
-    controlled.value ? externalValue.value : internalValue.value,
-  )
+  const externalValue = computed(() => (controlled.value ? options.value.value : undefined))
+  const value = computed(() => (controlled.value ? externalValue.value : internalValue.value))
   const parser = computed(() => options.value.parser ?? defaultInputNumberParser)
   const formatter = computed(() => options.value.formatter ?? defaultInputNumberFormatter)
   const constraints = computed(() => ({

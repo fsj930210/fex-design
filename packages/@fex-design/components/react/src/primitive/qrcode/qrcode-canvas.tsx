@@ -5,12 +5,7 @@ import {
 } from '@fex-design/core/qrcode'
 import { qrcodeSurfaceClassName } from '@fex-design/components-styles/qrcode'
 import { cn } from '@fex-design/utils'
-import {
-  useEffect,
-  useRef,
-  type CanvasHTMLAttributes,
-  type Ref,
-} from 'react'
+import { useEffect, useRef, type CanvasHTMLAttributes, type Ref } from 'react'
 import { useQrCode } from './qrcode-context'
 
 export interface QrCodeCanvasProps extends CanvasHTMLAttributes<HTMLCanvasElement> {

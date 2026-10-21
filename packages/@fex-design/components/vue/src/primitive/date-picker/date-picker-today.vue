@@ -12,13 +12,28 @@ defineOptions({ name: 'DatePickerToday', inheritAttrs: false })
 const owner = createDatePickerFooterActions()
 const appearance = usePickerAppearance()
 const attrs = useAttrs()
-function nativeAttrs() { const { onClick, ...rest } = attrs; return rest }
+function nativeAttrs() {
+  const { onClick, ...rest } = attrs
+  return rest
+}
 function click(event: MouseEvent) {
   const handlers = attrs.onClick
-  for (const handler of Array.isArray(handlers) ? handlers : [handlers]) if (typeof handler === 'function') handler(event)
-  if (!isPickerActionBlocked(event)) { owner.today() }
+  for (const handler of Array.isArray(handlers) ? handlers : [handlers])
+    if (typeof handler === 'function') handler(event)
+  if (!isPickerActionBlocked(event)) {
+    owner.today()
+  }
 }
 </script>
 <template>
-  <Button v-bind="nativeAttrs()" type="button" data-slot="date-picker-today" :class="cn(datePickerTodayClassName, normalizeClass(attrs.class))"  @click="click"><slot v-if="$slots.default" /><template v-else>{{ appearance().calendarProps?.locale?.today ?? calendarDefaultLocale.today }}</template></Button>
+  <Button
+    v-bind="nativeAttrs()"
+    type="button"
+    data-slot="date-picker-today"
+    :class="cn(datePickerTodayClassName, normalizeClass(attrs.class))"
+    @click="click"
+    ><slot v-if="$slots.default" /><template v-else>{{
+      appearance().calendarProps?.locale?.today ?? calendarDefaultLocale.today
+    }}</template></Button
+  >
 </template>

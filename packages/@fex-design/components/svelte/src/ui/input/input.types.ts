@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'svelte'
+import type { Button } from '@fex-design/svelte/ui/button'
 import type {
   InputClassNames,
   InputSearchMeta,
@@ -21,6 +23,7 @@ export interface InputProps
   classNames?: InputClassNames
   styles?: InputStyles<string>
   ref?: HTMLInputElement | null
+  'data-warning'?: string | undefined
 }
 export interface InputPasswordProps extends Omit<InputProps, 'type'> {
   visibilityToggle?: boolean
@@ -28,5 +31,11 @@ export interface InputPasswordProps extends Omit<InputProps, 'type'> {
 export interface InputSearchProps extends Omit<InputProps, 'type' | 'addonAfter'> {
   loading?: boolean
   onSearch?: (value: string, meta: InputSearchMeta) => void
+  addonBeforeButtonProps?:
+    | Omit<ComponentProps<typeof Button>, 'children' | 'loading' | 'disabled' | 'onclick'>
+    | undefined
+  addonAfterButtonProps?:
+    | Omit<ComponentProps<typeof Button>, 'children' | 'loading' | 'disabled' | 'onclick'>
+    | undefined
   addonAfter?: Snippet | null
 }

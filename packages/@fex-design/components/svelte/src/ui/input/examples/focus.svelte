@@ -6,7 +6,7 @@
 
 <div class="grid w-full gap-3">
   <Input bind:ref defaultValue="通过 ref 控制" />
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     <Button onclick={() => ref?.focus()}>聚焦</Button><Button
       onclick={() => ref?.blur()}>失焦</Button
     ><Button onclick={() => ref?.select()}>全选</Button>

@@ -2,10 +2,7 @@ import { createSelectionController } from '@fex-design/core/selection/create-sel
 import type { SelectionValue } from '@fex-design/core/selection/types'
 import { createMemo, type JSX, type ParentProps, splitProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
-import {
-  ListboxContext,
-  type ListboxOrientation,
-} from './listbox-context'
+import { ListboxContext, type ListboxOrientation } from './listbox-context'
 
 export type ListboxChangeMeta<TItem> = {
   selectedItem?: TItem | undefined

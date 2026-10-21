@@ -20,11 +20,7 @@ import {
   PopoverRoot,
   PopoverTrigger,
 } from '@fex-design/react/primitive/popover'
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { useState, type ReactNode } from 'react'
 
 const formats: ColorFormat[] = ['hex', 'rgb', 'hsl', 'hsb', 'oklch']

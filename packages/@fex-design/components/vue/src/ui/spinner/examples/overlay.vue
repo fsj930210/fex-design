@@ -16,7 +16,7 @@ const spinning = ref(true)
         </p>
       </div></SpinnerContainer
     >
-    <div class="flex items-center gap-3">
+    <div class="flex flex-wrap items-center gap-3">
       <button
         type="button"
         class="rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground"

@@ -31,7 +31,7 @@ export default function Dynamic() {
           )}
         </For>
       </div>
-      <div class="flex gap-2">
+      <div class="flex flex-wrap gap-2">
         <input
           class="h-8 rounded-md border px-2 text-sm"
           value={name()}

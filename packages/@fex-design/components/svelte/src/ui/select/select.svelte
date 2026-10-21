@@ -3,12 +3,14 @@
   import type { SelectFilterOption, SelectOption, SelectVirtualOptions } from "@fex-design/core/select/types";
   import type { PopoverOptions } from '@fex-design/core/popover/types';
   import type { SelectionValue } from "@fex-design/core/selection/types";
-  import type { Snippet } from "svelte";
+  import type { ComponentProps, Snippet } from "svelte";
   import SelectRoot from '@fex-design/svelte/primitive/select/select-root.svelte';
   import SelectTrigger from '@fex-design/svelte/primitive/select/select-trigger.svelte';
   import SelectContent from '@fex-design/svelte/primitive/select/select-content.svelte';
 
   interface Props extends Omit<import('svelte/elements').HTMLAttributes<HTMLDivElement>, 'children' | 'prefix'> {
+    triggerProps?: Omit<ComponentProps<typeof SelectTrigger>, 'children'> | undefined;
+    contentProps?: ComponentProps<typeof SelectContent> | undefined;
     options: readonly SelectItem<TItem>[];
     fieldNames?: SelectFieldNames<TItem>;
     value?: SelectionValue | SelectionValue[];
@@ -25,7 +27,6 @@
     maxCount?: number;
     maxTagCount?: number;
     virtual?: SelectVirtualOptions;
-    status?: "error" | "warning";
     inputProps?: import('svelte/elements').HTMLInputAttributes;
     getPopupContainer?: PopoverOptions['getPopupContainer'];
     option?: Snippet<[SelectOption, { selected: boolean; active: boolean; disabled: boolean }]>;
@@ -45,8 +46,8 @@
   let {
     options: sourceOptions, fieldNames, value, defaultValue, multiple, onChange, searchable,
     filterOption, onSearch, clearable, disabled, loading, placeholder,
-    maxCount, maxTagCount, virtual, status, inputProps, popoverProps = {}, getPopupContainer, option, tag,
-    prefix, suffix, clear, emptyText, footer, popupRender, ...triggerProps
+    maxCount, maxTagCount, virtual, inputProps, triggerProps, contentProps, popoverProps = {}, getPopupContainer, option, tag,
+    prefix, suffix, clear, emptyText, footer, popupRender, ...triggerAttributes
   }: Props = $props();
   const options = $derived(normalizeSelectOptions(
     sourceOptions,
@@ -72,8 +73,7 @@
   {loading}
   {maxCount}
   {virtual}
-  {status}
 >
-  <SelectTrigger {...triggerProps} {placeholder} {maxTagCount} {prefix} {suffix} {clear} {inputProps} {tag} />
-  <SelectContent {emptyText} {footer} {option} {popupRender} />
+  <SelectTrigger {...triggerAttributes} {...triggerProps} placeholder={placeholder ?? triggerProps?.placeholder} maxTagCount={maxTagCount ?? triggerProps?.maxTagCount} {prefix} {suffix} {clear} inputProps={inputProps ?? triggerProps?.inputProps} {tag} />
+  <SelectContent {...contentProps} {emptyText} {footer} {option} {popupRender} />
 </SelectRoot>

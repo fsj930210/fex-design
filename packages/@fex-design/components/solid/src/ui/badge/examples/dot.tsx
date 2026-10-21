@@ -2,7 +2,7 @@ import { Badge } from '@fex-design/solid/ui/badge'
 
 export function Dot() {
   return (
-    <div class="flex items-center gap-6">
+    <div class="flex flex-wrap items-center gap-6">
       <Badge dot color="danger">
         📣
       </Badge>

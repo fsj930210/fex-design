@@ -11,7 +11,7 @@ import {
   DropdownRoot,
   DropdownTrigger,
 } from '@fex-design/react/primitive/dropdown'
-import { MenuItem, MenuList, MenuRoot } from '@fex-design/react/primitive/menu'
+import { MenuItem, MenuContent, MenuRoot } from '@fex-design/react/primitive/menu'
 import { PopoverPortal } from '@fex-design/react/primitive/popover'
 ```
 
@@ -23,9 +23,9 @@ import { PopoverPortal } from '@fex-design/react/primitive/popover'
   <PopoverPortal container={container}>
     <DropdownContent>
       <MenuRoot>
-        <MenuList>
-          <MenuItem>Rename</MenuItem>
-        </MenuList>
+        <MenuContent>
+          <MenuItem value="rename">Rename</MenuItem>
+        </MenuContent>
       </MenuRoot>
     </DropdownContent>
   </PopoverPortal>

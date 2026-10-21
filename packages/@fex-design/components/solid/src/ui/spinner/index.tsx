@@ -27,43 +27,46 @@ export function SpinnerContainer(
     'styles',
   ])
   return (
-    <Show when={local.spinning !== undefined} fallback={
-      <Spinner
-        {...rest}
-        size={local.size}
-        class={cn(local.class, local.classNames?.spinner)}
-        style={mergeStyle(rest.style, local.styles?.spinner)}
-      >
-        {local.indicator}
-      </Spinner>
-    }>
-    <PrimitiveSpinnerContainer
-      {...rest}
-      aria-busy={local.spinning}
-      class={cn(spinnerContainerClassName, local.class, local.classNames?.root)}
-      style={mergeStyle(rest.style, local.styles?.root)}
-    >
-      {local.children}
-      <Show when={local.spinning}>
-        <SpinnerOverlay
-          class={cn(local.classNames?.overlay, local.text && 'flex-col')}
-          style={local.styles?.overlay}
+    <Show
+      when={local.spinning !== undefined}
+      fallback={
+        <Spinner
+          {...rest}
+          size={local.size}
+          class={cn(local.class, local.classNames?.spinner)}
+          style={mergeStyle(rest.style, local.styles?.spinner)}
         >
-          <Spinner
-            size={local.size}
-            class={local.classNames?.spinner}
-            style={local.styles?.spinner}
+          {local.indicator}
+        </Spinner>
+      }
+    >
+      <PrimitiveSpinnerContainer
+        {...rest}
+        aria-busy={local.spinning}
+        class={cn(spinnerContainerClassName, local.class, local.classNames?.root)}
+        style={mergeStyle(rest.style, local.styles?.root)}
+      >
+        {local.children}
+        <Show when={local.spinning}>
+          <SpinnerOverlay
+            class={cn(local.classNames?.overlay, local.text && 'flex-col')}
+            style={local.styles?.overlay}
           >
-            {local.indicator}
-          </Spinner>
-          <Show when={local.text}>
-            <SpinnerText class={local.classNames?.text} style={local.styles?.text}>
-              {local.text}
-            </SpinnerText>
-          </Show>
-        </SpinnerOverlay>
-      </Show>
-    </PrimitiveSpinnerContainer>
+            <Spinner
+              size={local.size}
+              class={local.classNames?.spinner}
+              style={local.styles?.spinner}
+            >
+              {local.indicator}
+            </Spinner>
+            <Show when={local.text}>
+              <SpinnerText class={local.classNames?.text} style={local.styles?.text}>
+                {local.text}
+              </SpinnerText>
+            </Show>
+          </SpinnerOverlay>
+        </Show>
+      </PrimitiveSpinnerContainer>
     </Show>
   )
 }

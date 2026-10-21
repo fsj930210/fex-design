@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Progress, ProgressCircle, ProgressCircleTrack, ProgressCircleRange, ProgressValue } from '@fex-design/angular/primitive/progress'
+import {
+  Progress,
+  ProgressCircle,
+  ProgressCircleTrack,
+  ProgressCircleRange,
+  ProgressValue,
+} from '@fex-design/angular/primitive/progress'
 
 @Component({
   selector: 'progress-primitive-dashboard-example',
@@ -8,6 +14,4 @@ import { Progress, ProgressCircle, ProgressCircleTrack, ProgressCircleRange, Pro
   imports: [Progress, ProgressCircle, ProgressCircleTrack, ProgressCircleRange, ProgressValue],
   templateUrl: './dashboard.html',
 })
-export class ProgressPrimitiveDashboardExample {
-
-}
+export class ProgressPrimitiveDashboardExample {}

@@ -28,7 +28,7 @@
   import { toggleGroupClassName } from "@fex-design/components-styles/toggle";
   import { cn } from "@fex-design/utils";
   import { setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import {
     toggleGroupContextKey,
     type ToggleGroupContextValue,

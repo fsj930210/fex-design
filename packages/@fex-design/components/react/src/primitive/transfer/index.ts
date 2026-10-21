@@ -7,11 +7,7 @@ export {
 } from './transfer-actions'
 export type { TransferPanelConfig, TransferPanelContent } from './transfer-panel'
 export { useTransfer, useTransferPanel, type TransferPanelRenderApi } from './use-transfer'
-export {
-  TransferContext,
-  useTransferContext,
-  type TransferContextValue,
-} from './transfer-context'
+export { TransferContext, useTransferContext, type TransferContextValue } from './transfer-context'
 export type {
   TransferChangeAction,
   TransferChangeMeta,

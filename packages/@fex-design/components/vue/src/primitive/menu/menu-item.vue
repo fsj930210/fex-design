@@ -1,36 +1,52 @@
 <script setup lang="ts">
-import { computed, useAttrs, useSlots } from 'vue'
-
-defineOptions({ inheritAttrs: false })
-const props = withDefaults(
-  defineProps<{
-    disabled?: boolean
-    selected?: boolean
-    submenu?: boolean
-    value?: string | number
-  }>(),
-  { disabled: false, selected: false, submenu: false },
-)
-const attrs = useAttrs()
-const slots = useSlots()
-const itemProps = computed(() => ({
-  ...attrs,
-  role: (attrs.role as string | undefined) ?? 'menuitem',
-  tabindex: props.disabled ? -1 : ((attrs.tabindex as number | undefined) ?? -1),
-  'aria-disabled': props.disabled || undefined,
-  'aria-haspopup': props.submenu ? 'menu' : undefined,
-  'data-slot': 'menu-item',
-  'data-menu-value': props.value === undefined ? undefined : String(props.value),
-  'data-selected': props.selected ? 'true' : undefined,
-}))
+import { computed, inject, useAttrs } from 'vue'
+import { menuItemClassName } from '@fex-design/components-styles/menu'
+import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
+import { cn } from '@fex-design/utils'
+import { menuLevelKey, useMenuContext } from './context'
+import { useMenuHost } from './use-menu-host'
+defineOptions({ name: 'MenuItem', inheritAttrs: false })
+const props = defineProps<{
+  value: string
+  disabled?: boolean | undefined
+  textValue?: string | undefined
+}>()
+const attrs = useAttrs(),
+  dom = useMenuContext(),
+  parent = inject(menuLevelKey, undefined)
+const snapshot = useCoreStore(dom.controller)
+const host = useMenuHost((element) => dom.bindItem(element, () => ({ ...props }), parent))
 const state = computed(() => ({
-  disabled: props.disabled,
-  selected: props.selected,
-  submenu: props.submenu,
+  disabled: snapshot.value.disabled || Boolean(props.disabled),
+  selected: snapshot.value.value.includes(props.value),
 }))
+// Read attrs during rendering; useAttrs itself is not a reactive dependency.
+function hostProps() {
+  return {
+    ...attrs,
+    type: 'button' as const,
+    role: 'menuitem',
+    tabindex: -1,
+    disabled: state.value.disabled,
+    'data-slot': 'menu-item',
+    class: cn(
+      menuItemClassName({
+        orientation: !parent && snapshot.value.layout === 'horizontal' ? 'horizontal' : 'vertical',
+      }),
+      attrs.class as string | undefined,
+    ),
+  }
+}
+defineSlots<{
+  default(): unknown
+  trigger(binding: {
+    props: ReturnType<typeof hostProps>
+    ref: typeof host
+    state: typeof state.value
+  }): unknown
+}>()
 </script>
-
 <template>
-  <slot v-if="slots.trigger" name="trigger" :props="itemProps" :state="state" />
-  <button v-else v-bind="itemProps" type="button" :disabled="disabled"><slot /></button>
+  <slot v-if="$slots.trigger" name="trigger" :props="hostProps()" :ref="host" :state="state" />
+  <button v-else v-bind="hostProps()" :ref="host"><slot /></button>
 </template>

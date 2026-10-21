@@ -10,7 +10,10 @@ import { getDefaultDatePickerFormat } from './value'
 import type { DatePickerInputPart } from './types'
 
 function allowsEmptyPart(value: unknown, part: DatePickerInputPart): boolean {
-  return value === true || (typeof value === 'object' && value !== null && Boolean(Reflect.get(value, part)))
+  return (
+    value === true ||
+    (typeof value === 'object' && value !== null && Boolean(Reflect.get(value, part)))
+  )
 }
 
 export interface PickerSessionSnapshot<TValue> {
@@ -41,9 +44,12 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
   policy: PickerSessionPolicy<TValue, TOptions>,
 ) {
   let options = definedPickerOptions(initialOptions)
-  const sourceValue = options.value !== undefined
-    ? options.value
-    : options.defaultValue !== undefined ? options.defaultValue : policy.empty(options)
+  const sourceValue =
+    options.value !== undefined
+      ? options.value
+      : options.defaultValue !== undefined
+        ? options.defaultValue
+        : policy.empty(options)
   const initialValue = policy.normalize?.(sourceValue, options) ?? sourceValue
   const initialDate = policy.first(initialValue)
   const store = createStore<PickerSessionSnapshot<TValue>>({
@@ -59,9 +65,24 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
     previewValue: null,
   })
 
-  function reset(value: TValue, part?: DatePickerInputPart): Pick<PickerSessionSnapshot<TValue>, 'pendingValue' | 'panel' | 'viewDate' | 'activePart' | 'completedParts' | 'focusRequest' | 'hoverValue' | 'previewValue'> {
+  function reset(
+    value: TValue,
+    part?: DatePickerInputPart,
+  ): Pick<
+    PickerSessionSnapshot<TValue>,
+    | 'pendingValue'
+    | 'panel'
+    | 'viewDate'
+    | 'activePart'
+    | 'completedParts'
+    | 'focusRequest'
+    | 'hoverValue'
+    | 'previewValue'
+  > {
     const activePart = part ?? policy.activePart?.(value) ?? 'start'
-    const selected = policy.first(value, hasDatePickerTime(options) ? activePart : undefined) ?? policy.first(value)
+    const selected =
+      policy.first(value, hasDatePickerTime(options) ? activePart : undefined) ??
+      policy.first(value)
     return {
       pendingValue: value,
       panel: getDefaultPanelByPicker(options.picker ?? 'date'),
@@ -82,7 +103,11 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
   function setOptions(nextOptions: TOptions) {
     const next = definedPickerOptions(nextOptions)
     const keys = Object.keys(options)
-    if (keys.length === Object.keys(next).length && keys.every(key => Reflect.get(options, key) === Reflect.get(next, key))) return
+    if (
+      keys.length === Object.keys(next).length &&
+      keys.every((key) => Reflect.get(options, key) === Reflect.get(next, key))
+    )
+      return
     const previousOptions = options
     options = next
     const previous = store.getSnapshot()
@@ -90,26 +115,54 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
     const value = policy.normalize?.(sourceValue, options) ?? sourceValue
     const open = options.open !== undefined ? options.open : previous.open
     const valueChanged = !policy.equal(previous.value, value)
-    const ignored = new Set(['value', 'open', 'defaultValue', 'defaultOpen', 'onChange', 'onOpenChange'])
-    const configChanged = [...new Set([...Object.keys(previousOptions), ...Object.keys(options)])].some(key => {
+    const ignored = new Set([
+      'value',
+      'open',
+      'defaultValue',
+      'defaultOpen',
+      'onChange',
+      'onOpenChange',
+    ])
+    const configChanged = [
+      ...new Set([...Object.keys(previousOptions), ...Object.keys(options)]),
+    ].some((key) => {
       if (ignored.has(key)) return false
       const left = Reflect.get(previousOptions, key)
       const right = Reflect.get(options, key)
       if (key === 'minDate' || key === 'maxDate') return left?.toString() !== right?.toString()
-      if (key === 'allowEmpty') return allowsEmptyPart(left, 'start') !== allowsEmptyPart(right, 'start') ||
-        allowsEmptyPart(left, 'end') !== allowsEmptyPart(right, 'end')
+      if (key === 'allowEmpty')
+        return (
+          allowsEmptyPart(left, 'start') !== allowsEmptyPart(right, 'start') ||
+          allowsEmptyPart(left, 'end') !== allowsEmptyPart(right, 'end')
+        )
       return left !== right
     })
     // Callback/default changes update options without publishing an identical state.
     if (!valueChanged && open === previous.open && !configChanged) return
-    const resetSession = (open && !previous.open) || valueChanged ||
+    const resetSession =
+      (open && !previous.open) ||
+      valueChanged ||
       options.picker !== previousOptions.picker ||
       policy.needConfirm(options) !== policy.needConfirm(previousOptions)
     store.setSnapshot({
       ...previous,
-      ...(configChanged ? { hoverValue: null, previewValue: null, completedParts: [], focusRequest: null } : {}),
-      ...(resetSession ? reset(value, open && !previous.open ? previous.activePart : undefined) : {}),
-      ...(!open && previous.open ? { pendingValue: value, hoverValue: null, previewValue: null, completedParts: [], focusRequest: null, activePart: policy.activePart?.(value) ?? 'start', panel: getDefaultPanelByPicker(options.picker ?? 'date') } : {}),
+      ...(configChanged
+        ? { hoverValue: null, previewValue: null, completedParts: [], focusRequest: null }
+        : {}),
+      ...(resetSession
+        ? reset(value, open && !previous.open ? previous.activePart : undefined)
+        : {}),
+      ...(!open && previous.open
+        ? {
+            pendingValue: value,
+            hoverValue: null,
+            previewValue: null,
+            completedParts: [],
+            focusRequest: null,
+            activePart: policy.activePart?.(value) ?? 'start',
+            panel: getDefaultPanelByPicker(options.picker ?? 'date'),
+          }
+        : {}),
       value,
       open,
     })
@@ -119,20 +172,30 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
     const previous = store.getSnapshot()
     if (next && options.disabled) return
     if (previous.open === next) {
-      if (next && part && part !== previous.activePart) store.setSnapshot({ ...previous, activePart: part, viewDate: getActiveViewDate(previous.pendingValue, part, previous.viewDate), hoverValue: null, previewValue: null, focusRequest: null })
+      if (next && part && part !== previous.activePart)
+        store.setSnapshot({
+          ...previous,
+          activePart: part,
+          viewDate: getActiveViewDate(previous.pendingValue, part, previous.viewDate),
+          hoverValue: null,
+          previewValue: null,
+          focusRequest: null,
+        })
       return
     }
     store.setSnapshot({
       ...previous,
-      ...(next ? reset(previous.value, part ?? previous.activePart) : {
-        pendingValue: previous.value,
-        activePart: policy.activePart?.(previous.value) ?? 'start',
-        completedParts: [],
-        focusRequest: null,
-        hoverValue: null,
-        previewValue: null,
-        panel: getDefaultPanelByPicker(options.picker ?? 'date'),
-      }),
+      ...(next
+        ? reset(previous.value, part ?? previous.activePart)
+        : {
+            pendingValue: previous.value,
+            activePart: policy.activePart?.(previous.value) ?? 'start',
+            completedParts: [],
+            focusRequest: null,
+            hoverValue: null,
+            previewValue: null,
+            panel: getDefaultPanelByPicker(options.picker ?? 'date'),
+          }),
       open: options.open === undefined ? next : previous.open,
     })
     options.onOpenChange?.(next)
@@ -141,7 +204,15 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
   function commit(next: TValue) {
     const previous = store.getSnapshot()
     const changed = !policy.equal(previous.value, next)
-    if (!changed && policy.equal(previous.pendingValue, next) && !previous.hoverValue && !previous.previewValue && !previous.completedParts.length && !previous.focusRequest) return
+    if (
+      !changed &&
+      policy.equal(previous.pendingValue, next) &&
+      !previous.hoverValue &&
+      !previous.previewValue &&
+      !previous.completedParts.length &&
+      !previous.focusRequest
+    )
+      return
     store.setSnapshot({
       ...previous,
       pendingValue: next,
@@ -159,7 +230,8 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
     subscribe: store.subscribe,
     setOptions,
     getOptions: () => options,
-    getSelection: () => policy.needConfirm(options) ? store.getSnapshot().pendingValue : store.getSnapshot().value,
+    getSelection: () =>
+      policy.needConfirm(options) ? store.getSnapshot().pendingValue : store.getSnapshot().value,
     getConfig: () => ({
       picker: options.picker ?? 'date',
       needConfirm: policy.needConfirm(options),
@@ -168,7 +240,11 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
       clearable: options.clearable ?? true,
       showTime: hasDatePickerTime(options),
       timeOptions: resolveDatePickerTime(options),
-      format: options.format ?? (hasDatePickerTime(options) ? 'YYYY-MM-DD ' + resolveDatePickerTime(options).format : getDefaultDatePickerFormat(options.picker ?? 'date')),
+      format:
+        options.format ??
+        (hasDatePickerTime(options)
+          ? 'YYYY-MM-DD ' + resolveDatePickerTime(options).format
+          : getDefaultDatePickerFormat(options.picker ?? 'date')),
       weekStartsOn: options.weekStartsOn ?? 0,
       ...(options.minDate !== undefined ? { minDate: options.minDate } : {}),
       ...(options.maxDate !== undefined ? { maxDate: options.maxDate } : {}),
@@ -179,20 +255,68 @@ export function createPickerSession<TValue, TOptions extends PickerValueOptions<
     today: () => {
       const viewDate = getCalendarToday()
       const panel = getDefaultPanelByPicker(options.picker ?? 'date')
-      store.updateSnapshot(state => state.viewDate.toString() === viewDate.toString() && state.panel === panel && !state.hoverValue && !state.previewValue
-        ? state : ({ ...state, viewDate, panel, hoverValue: null, previewValue: null }))
+      store.updateSnapshot((state) =>
+        state.viewDate.toString() === viewDate.toString() &&
+        state.panel === panel &&
+        !state.hoverValue &&
+        !state.previewValue
+          ? state
+          : { ...state, viewDate, panel, hoverValue: null, previewValue: null },
+      )
     },
     commit,
-    setPending: (pendingValue: TValue, completedPart?: DatePickerInputPart, invalidatePart?: DatePickerInputPart) => store.updateSnapshot(state => {
-      const previousParts = invalidatePart ? state.completedParts.filter(part => part !== invalidatePart) : state.completedParts
-      const completedParts = completedPart && !previousParts.includes(completedPart) ? [...previousParts, completedPart] : previousParts
-      return policy.equal(state.pendingValue, pendingValue) && completedParts === state.completedParts && !state.hoverValue && !state.previewValue ? state
-        : ({ ...state, pendingValue, completedParts, hoverValue: null, previewValue: null })
-    }),
-    setPanel: (panel: CalendarPanel) => store.updateSnapshot(state => state.panel === panel ? state : ({ ...state, panel, hoverValue: null })),
-    setViewDate: (viewDate: CalendarDate) => store.updateSnapshot(state => state.viewDate.toString() === viewDate.toString() ? state : ({ ...state, viewDate, hoverValue: null })),
-    setActivePart: (activePart: DatePickerInputPart, focus = false) => store.updateSnapshot(state => state.activePart === activePart && !focus ? state : ({ ...state, activePart, viewDate: getActiveViewDate(state.pendingValue, activePart, state.viewDate), focusRequest: focus ? { part: activePart } : null, hoverValue: null, previewValue: null })),
-    setHoverValue: (hoverValue: CalendarValue | null) => store.updateSnapshot(state => equalPickerValue(state.hoverValue, hoverValue) ? state : ({ ...state, hoverValue })),
-    setPreviewValue: (previewValue: CalendarValue | null) => store.updateSnapshot(state => equalPickerValue(state.previewValue, previewValue) && !state.hoverValue ? state : ({ ...state, previewValue, hoverValue: null })),
+    setPending: (
+      pendingValue: TValue,
+      completedPart?: DatePickerInputPart,
+      invalidatePart?: DatePickerInputPart,
+    ) =>
+      store.updateSnapshot((state) => {
+        const previousParts = invalidatePart
+          ? state.completedParts.filter((part) => part !== invalidatePart)
+          : state.completedParts
+        const completedParts =
+          completedPart && !previousParts.includes(completedPart)
+            ? [...previousParts, completedPart]
+            : previousParts
+        return policy.equal(state.pendingValue, pendingValue) &&
+          completedParts === state.completedParts &&
+          !state.hoverValue &&
+          !state.previewValue
+          ? state
+          : { ...state, pendingValue, completedParts, hoverValue: null, previewValue: null }
+      }),
+    setPanel: (panel: CalendarPanel) =>
+      store.updateSnapshot((state) =>
+        state.panel === panel ? state : { ...state, panel, hoverValue: null },
+      ),
+    setViewDate: (viewDate: CalendarDate) =>
+      store.updateSnapshot((state) =>
+        state.viewDate.toString() === viewDate.toString()
+          ? state
+          : { ...state, viewDate, hoverValue: null },
+      ),
+    setActivePart: (activePart: DatePickerInputPart, focus = false) =>
+      store.updateSnapshot((state) =>
+        state.activePart === activePart && !focus
+          ? state
+          : {
+              ...state,
+              activePart,
+              viewDate: getActiveViewDate(state.pendingValue, activePart, state.viewDate),
+              focusRequest: focus ? { part: activePart } : null,
+              hoverValue: null,
+              previewValue: null,
+            },
+      ),
+    setHoverValue: (hoverValue: CalendarValue | null) =>
+      store.updateSnapshot((state) =>
+        equalPickerValue(state.hoverValue, hoverValue) ? state : { ...state, hoverValue },
+      ),
+    setPreviewValue: (previewValue: CalendarValue | null) =>
+      store.updateSnapshot((state) =>
+        equalPickerValue(state.previewValue, previewValue) && !state.hoverValue
+          ? state
+          : { ...state, previewValue, hoverValue: null },
+      ),
   }
 }

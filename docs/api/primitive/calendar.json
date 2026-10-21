@@ -149,7 +149,68 @@
   "components": [
     {
       "name": "CalendarHeader",
-      "props": [],
+      "props": [
+        {
+          "name": "yearSelectTriggerProps",
+          "type": "SelectTrigger native configuration",
+          "description": "直接子组件配置；年月选择值仍由 Calendar 管理。"
+        },
+        {
+          "name": "yearSelectContentProps",
+          "type": "SelectContent native configuration",
+          "description": "直接子组件配置；年月选择值仍由 Calendar 管理。"
+        },
+        {
+          "name": "monthSelectTriggerProps",
+          "type": "SelectTrigger native configuration",
+          "description": "直接子组件配置；年月选择值仍由 Calendar 管理。"
+        },
+        {
+          "name": "monthSelectContentProps",
+          "type": "SelectContent native configuration",
+          "description": "直接子组件配置；年月选择值仍由 Calendar 管理。"
+        },
+        {
+          "name": "yearSelectRootProps",
+          "type": "SelectRoot configuration (excluding owner values)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "monthSelectRootProps",
+          "type": "SelectRoot configuration (excluding owner values)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "previousButtonProps",
+          "type": "CalendarNavigationButton props (without action)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "nextButtonProps",
+          "type": "CalendarNavigationButton props (without action)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "todayButtonProps",
+          "type": "CalendarNavigationButton props (without action)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "modeGroupProps",
+          "type": "RadioGroup props (without owner values)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "dateModeButtonProps",
+          "type": "RadioButton props (without value)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        },
+        {
+          "name": "monthModeButtonProps",
+          "type": "RadioButton props (without value)",
+          "description": "按业务角色配置直接子组件，保留日期、面板和导航的所有权。"
+        }
+      ],
       "events": []
     },
     {
@@ -404,5 +465,19 @@
         }
       ]
     }
-  }
+  },
+  "demos": [
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 700
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 700
+    }
+  ]
 }

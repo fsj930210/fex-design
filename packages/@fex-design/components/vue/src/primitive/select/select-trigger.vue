@@ -9,7 +9,7 @@ import {
   selectValueContainerClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
-import { computed, useSlots } from 'vue'
+import { computed, useAttrs, useSlots } from 'vue'
 import type { InputClassNames, InputStyles } from '@fex-design/core/input/types'
 import type { CSSProperties } from 'vue'
 import { ChevronDownIcon } from '@fex-design/vue/icons/chevron'
@@ -24,15 +24,28 @@ const props = defineProps<{
   class?: string | undefined
   placeholder?: string | undefined
   maxTagCount?: number | undefined
+  valueProps?: InstanceType<typeof SelectValue>['$props'] | undefined
   inputProps?: Record<string, unknown> | undefined
   classNames?: InputClassNames | undefined
   styles?: InputStyles<CSSProperties> | undefined
 }>()
 const select = useSelect('SelectTrigger')
 const slots = useSlots()
+const attrs = useAttrs()
+const restAttrs = computed(() => {
+  const { 'aria-invalid': _ariaInvalid, ...rest } = attrs
+  return rest
+})
+const ariaInvalid = computed(() => {
+  const value = attrs['aria-invalid']
+  return typeof value === 'string' || typeof value === 'boolean' ? value : undefined
+})
 const className = computed(() => cn(selectTriggerClassName(), props.classNames?.root, props.class))
 const placeholder = computed(() => props.placeholder ?? '请选择')
-const inputAttrs = computed(() => { const { class: _class, style: _style, ...attrs } = props.inputProps ?? {}; return attrs })
+const inputAttrs = computed(() => {
+  const { class: _class, style: _style, ...attrs } = props.inputProps ?? {}
+  return attrs
+})
 function keydown(event: KeyboardEvent) {
   if (event.defaultPrevented) return
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
@@ -60,13 +73,15 @@ function inputPointerdown() {
 <template>
   <PopoverTrigger v-slot="trigger">
     <div
-      v-bind="{ ...$attrs, ...trigger.props }"
+      :data-warning="select.dataWarning.value"
+      v-bind="{ ...restAttrs, ...trigger.props }"
       :ref="trigger.ref"
       role="presentation"
       data-slot="select-trigger"
       :data-disabled="select.disabled.value || undefined"
-      :data-clearable="select.clearable.value && select.selectedOptions.value.length ? 'true' : undefined"
-      :data-status="select.status.value"
+      :data-clearable="
+        select.clearable.value && select.selectedOptions.value.length ? 'true' : undefined
+      "
       :class="className"
       :style="[props.styles?.root, props.inputProps?.style]"
       @keydown="keydown"
@@ -74,9 +89,11 @@ function inputPointerdown() {
       <slot name="prefix" />
       <div :class="[selectValueContainerClassName, props.classNames?.control]">
         <SelectValue
+          v-bind="props.valueProps"
           :placeholder="select.showSearch.value ? undefined : placeholder"
-          :max-tag-count="props.maxTagCount"
-          ><template v-if="$slots.tag" #tag="slotProps"><slot name="tag" v-bind="slotProps" /></template
+          :max-tag-count="props.maxTagCount ?? props.valueProps?.maxTagCount"
+          ><template v-if="$slots.tag" #tag="slotProps"
+            ><slot name="tag" v-bind="slotProps" /></template
           ><template #value="slotProps"
             ><slot name="value" v-bind="slotProps">{{ slotProps.option.label }}</slot></template
           ></SelectValue
@@ -85,6 +102,7 @@ function inputPointerdown() {
           v-bind="inputAttrs"
           role="combobox"
           :style="props.styles?.control"
+          :aria-invalid="ariaInvalid ?? select.ariaInvalid.value"
           :aria-expanded="select.snapshot.value.open"
           :aria-controls="select.listId"
           :disabled="select.disabled.value"
@@ -112,19 +130,31 @@ function inputPointerdown() {
       <span data-slot="select-suffix" :class="[selectSuffixClassName, props.classNames?.suffix]">
         <LoadingIcon v-if="select.loading.value" class="animate-spin" />
         <template v-else>
-        <span :class="select.clearable.value && select.selectedOptions.value.length ? selectClearableIndicatorClassName : undefined">
-          <slot v-if="slots.suffix" name="suffix" />
-          <span v-else :data-state="select.snapshot.value.open ? 'open' : 'closed'" :class="selectIndicatorClassName"><ChevronDownIcon /></span>
-        </span>
-        <button
-          v-if="select.clearable.value && select.selectedOptions.value.length"
-          type="button"
-          aria-label="Clear selection"
-          :class="[selectClearClassName, props.classNames?.clear]"
-          @pointerdown.prevent
-          @click.stop="select.controller.clear()"
-          ><slot name="clear"><CircleXIcon /></slot
-        ></button>
+          <span
+            :class="
+              select.clearable.value && select.selectedOptions.value.length
+                ? selectClearableIndicatorClassName
+                : undefined
+            "
+          >
+            <slot v-if="slots.suffix" name="suffix" />
+            <span
+              v-else
+              :data-state="select.snapshot.value.open ? 'open' : 'closed'"
+              :class="selectIndicatorClassName"
+              ><ChevronDownIcon
+            /></span>
+          </span>
+          <button
+            v-if="select.clearable.value && select.selectedOptions.value.length"
+            type="button"
+            aria-label="Clear selection"
+            :class="[selectClearClassName, props.classNames?.clear]"
+            @pointerdown.prevent
+            @click.stop="select.controller.clear()"
+          >
+            <slot name="clear"><CircleXIcon /></slot>
+          </button>
         </template>
       </span>
     </div>

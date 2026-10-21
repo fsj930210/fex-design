@@ -1,15 +1,66 @@
-<div datePickerHeader [class]="calendarProps()?.classNames?.header ?? ''" [style]="calendarProps()?.styles?.header ?? ''">
-  <div [class]="headerSide"><button datePickerHeaderButton [action]="actions().previous"></button>@if (view().showMonthNavigation) { <button datePickerHeaderButton action="previous-month"></button> }</div>
-  <div datePickerHeaderTitle><button datePickerHeaderLabel part="year"></button><button datePickerHeaderLabel part="month"></button></div>
-  <div [class]="headerSide">@if (view().showMonthNavigation) { <button datePickerHeaderButton action="next-month"></button> }<button datePickerHeaderButton [action]="actions().next"></button></div>
+<div
+  datePickerHeader
+  [class]="calendarProps()?.classNames?.header ?? ''"
+  [style]="calendarProps()?.styles?.header ?? ''"
+>
+  <div [class]="headerSide">
+    <button datePickerHeaderButton [action]="actions().previous"></button>@if
+    (view().showMonthNavigation) {
+    <button datePickerHeaderButton action="previous-month"></button> }
+  </div>
+  <div datePickerHeaderTitle>
+    <button datePickerHeaderLabel part="year"></button
+    ><button datePickerHeaderLabel part="month"></button>
+  </div>
+  <div [class]="headerSide">
+    @if (view().showMonthNavigation) {
+    <button datePickerHeaderButton action="next-month"></button> }<button
+      datePickerHeaderButton
+      [action]="actions().next"
+    ></button>
+  </div>
 </div>
-@if (view().showWeekHeader) { <div calendarWeekHeader [labels]="labels()" [class]="cn(weekHeader, calendarProps()?.classNames?.weekHeader)" [style]="calendarProps()?.styles?.weekHeader ?? ''"></div> }
-<div calendarGrid (mouseleave)="owner.context().setHoverValue(null)" [class]="cn(gridClass, calendarProps()?.classNames?.grid)" [style]="calendarProps()?.styles?.grid ?? ''" [rowProps]="rowProps()">
+@if (view().showWeekHeader) {
+<div
+  calendarWeekHeader
+  [labels]="labels()"
+  [class]="cn(weekHeader, calendarProps()?.classNames?.weekHeader)"
+  [style]="calendarProps()?.styles?.weekHeader ?? ''"
+></div>
+}
+<div
+  calendarGrid
+  (mouseleave)="owner.context().setHoverValue(null)"
+  [class]="cn(gridClass, calendarProps()?.classNames?.grid)"
+  [style]="calendarProps()?.styles?.grid ?? ''"
+  [rowProps]="rowProps()"
+>
   <ng-template let-cell>
-    <div calendarCell [cell]="cell" (mouseenter)="cell.state.disabled && owner.context().setHoverValue(null)" [class]="cn(cellClass, cellLayout(cell.panel), calendarProps()?.classNames?.cell)" [style]="calendarProps()?.styles?.cell ?? ''">
+    <div
+      calendarCell
+      [cell]="cell"
+      (mouseenter)="cell.state.disabled && owner.context().setHoverValue(null)"
+      [class]="cn(cellClass, cellLayout(cell.panel), calendarProps()?.classNames?.cell)"
+      [style]="calendarProps()?.styles?.cell ?? ''"
+    >
       <ng-template>
-        <button calendarCellTrigger [cell]="cell" [class]="calendarProps()?.classNames?.cellTrigger ?? ''" [style]="calendarProps()?.styles?.cellTrigger ?? ''">{{ getDatePickerCellLabel(cell, calendarProps()?.locale) }}</button>
-        @if (calendarProps()?.cellRender; as render) { <div data-slot="calendar-cell-content" [class]="calendarProps()?.classNames?.cellContent ?? ''" [style]="calendarProps()?.styles?.cellContent ?? ''"><ng-container [ngTemplateOutlet]="render" [ngTemplateOutletContext]="cellContext(cell)" /></div> }
+        <button
+          calendarCellTrigger
+          [cell]="cell"
+          [class]="calendarProps()?.classNames?.cellTrigger ?? ''"
+          [style]="calendarProps()?.styles?.cellTrigger ?? ''"
+        >
+          {{ getDatePickerCellLabel(cell, calendarProps()?.locale) }}
+        </button>
+        @if (calendarProps()?.cellRender; as render) {
+        <div
+          data-slot="calendar-cell-content"
+          [class]="calendarProps()?.classNames?.cellContent ?? ''"
+          [style]="calendarProps()?.styles?.cellContent ?? ''"
+        >
+          <ng-container [ngTemplateOutlet]="render" [ngTemplateOutletContext]="cellContext(cell)" />
+        </div>
+        }
       </ng-template>
     </div>
   </ng-template>

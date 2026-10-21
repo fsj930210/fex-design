@@ -7,11 +7,19 @@ export function useScrollbar(options: () => ScrollbarOptions = () => ({})) {
   const controller = createScrollbarController()
   const root = shallowRef<HTMLElement | null>(null)
   // Synchronize the external controller, preserving its identity and listeners.
-  watch(() => ({ ...options() }), (next) => controller.setOptions(next), { immediate: true, flush: 'post' })
+  watch(
+    () => ({ ...options() }),
+    (next) => controller.setOptions(next),
+    { immediate: true, flush: 'post' },
+  )
   // Template refs may be replaced by conditional markup; invalidate the old connection.
-  watch(root, (element, _, onCleanup) => {
-    if (element) onCleanup(controller.connect(element))
-  }, { flush: 'post' })
+  watch(
+    root,
+    (element, _, onCleanup) => {
+      if (element) onCleanup(controller.connect(element))
+    },
+    { flush: 'post' },
+  )
   onScopeDispose(() => controller.destroy())
   return { controller, root }
 }

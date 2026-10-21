@@ -1,9 +1,6 @@
 import type { TreeSelectItem } from '@fex-design/core/tree-select/types'
 import type { ChangeEvent, ReactNode } from 'react'
-import {
-  PopoverTrigger,
-  type PopoverTriggerRenderProps,
-} from '../popover'
+import { PopoverTrigger, type PopoverTriggerRenderProps } from '../popover'
 import { useTreeSelect } from './tree-select-context'
 
 export interface TreeSelectTriggerState<TNode = unknown> {

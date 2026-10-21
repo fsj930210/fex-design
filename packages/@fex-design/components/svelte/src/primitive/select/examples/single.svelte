@@ -1,1 +1,16 @@
-<script lang="ts">import { SelectRoot, SelectTrigger, SelectContent } from '@fex-design/svelte/primitive/select';   let value=$state('react'); const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]</script><SelectRoot {options} {value} onChange={(next)=>value=String(next)}><SelectTrigger class="w-72"/><SelectContent/></SelectRoot>
+<script lang="ts">
+  import {
+    SelectRoot,
+    SelectTrigger,
+    SelectContent,
+  } from "@fex-design/svelte/primitive/select";
+  let value = $state("react");
+  const options = [
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+  ];
+</script>
+
+<SelectRoot {options} {value} onChange={(next) => (value = String(next))}
+  ><SelectTrigger class="w-72" /><SelectContent /></SelectRoot
+>

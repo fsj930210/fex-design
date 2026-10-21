@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { progressRootClassName } from '@fex-design/components-styles/progress'
 import { normalizeProgressValue, resolveProgressStatus } from '@fex-design/core/progress/progress'
@@ -34,10 +41,19 @@ export class Progress {
   readonly size = input(48)
   readonly thickness = input<number>()
   readonly normalized = computed(() => normalizeProgressValue(this.value(), this.min(), this.max()))
-  readonly resolvedStatus = computed(() => resolveProgressStatus(this.status(), this.value(), this.min(), this.max()))
-  readonly resolvedThickness = computed(() => this.thickness() ?? (this.variant() === 'line' ? 8 : 4))
-  readonly context = { normalized: this.normalized, status: this.resolvedStatus,
-    variant: this.variant, size: this.size, thickness: this.resolvedThickness }
+  readonly resolvedStatus = computed(() =>
+    resolveProgressStatus(this.status(), this.value(), this.min(), this.max()),
+  )
+  readonly resolvedThickness = computed(
+    () => this.thickness() ?? (this.variant() === 'line' ? 8 : 4),
+  )
+  readonly context = {
+    normalized: this.normalized,
+    status: this.resolvedStatus,
+    variant: this.variant,
+    size: this.size,
+    thickness: this.resolvedThickness,
+  }
   readonly ariaValueText = computed(() => {
     const percentage = this.normalized().percentage
     return percentage === null ? undefined : `${Math.round(percentage * 100)}%`

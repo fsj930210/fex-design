@@ -5,14 +5,20 @@
     TagStyles,
   } from "@fex-design/core/tag/types";
   import { cn } from "@fex-design/utils";
-  import type { Snippet } from "svelte";
+  import type { ComponentProps, Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import PrimitiveTag from '@fex-design/svelte/primitive/tag/tag.svelte';
-  import TagAction from '@fex-design/svelte/primitive/tag/tag-action.svelte';
+  import PrimitiveTag from "@fex-design/svelte/primitive/tag/tag.svelte";
+  import TagAction from "@fex-design/svelte/primitive/tag/tag-action.svelte";
 
   interface Props
     extends Omit<HTMLAttributes<HTMLSpanElement>, "color">, TagOptions {
     children?: Snippet;
+    actionProps?:
+      | Omit<
+          ComponentProps<typeof TagAction>,
+          "children" | "disabled" | "onclick"
+        >
+      | undefined;
     closable?: boolean;
     closeIcon?: Snippet;
     onClose?: (event: MouseEvent) => void;
@@ -21,6 +27,7 @@
   }
 
   let {
+    actionProps,
     children,
     closable = false,
     closeIcon,
@@ -43,20 +50,22 @@
   {@render children?.()}
   {#if closable && closeIcon}
     <TagAction
+      {...actionProps}
       {disabled}
-      aria-label="Close"
-      class={classNames?.close}
-      style={styles?.close}
+      aria-label={actionProps?.["aria-label"] ?? "Close"}
+      class={cn(classNames?.close, actionProps?.class)}
+      style={[styles?.close, actionProps?.style].filter(Boolean).join(";")}
       onclick={onClose}
     >
       {@render closeIcon()}
     </TagAction>
   {:else if closable}
     <TagAction
+      {...actionProps}
       {disabled}
-      aria-label="Close"
-      class={classNames?.close}
-      style={styles?.close}
+      aria-label={actionProps?.["aria-label"] ?? "Close"}
+      class={cn(classNames?.close, actionProps?.class)}
+      style={[styles?.close, actionProps?.style].filter(Boolean).join(";")}
       onclick={onClose}
     />
   {/if}

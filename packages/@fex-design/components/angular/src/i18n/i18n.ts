@@ -27,4 +27,3 @@ export class I18nService {
 export function provideI18n(controller: I18nController): Provider[] {
   return [{ provide: I18N_CONTROLLER, useValue: controller }, I18nService]
 }
-

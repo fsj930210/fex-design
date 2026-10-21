@@ -8,16 +8,16 @@ import {
 } from '@fex-design/components-styles/time-picker'
 import type { TimePeriod, TimePickerOption } from '@fex-design/core/time-picker/types'
 import { cn } from '@fex-design/utils'
-import {
-  useRef,
-  useState,
-  type ComponentProps,
-  type KeyboardEvent,
-  type ReactNode,
-} from 'react'
+import { useRef, useState, type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
 import { useTimePickerContext } from './time-picker-context'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar'
+import {
+  ScrollbarBar,
+  ScrollbarRoot,
+  ScrollbarViewport,
+  ScrollbarTrack,
+  ScrollbarThumb,
+} from '../scrollbar'
 
 type ColumnValue = number | TimePeriod
 
@@ -31,6 +31,13 @@ export interface TimePickerColumnProps<TValue extends ColumnValue> extends Omit<
   ComponentProps<'div'>,
   'children' | 'onSelect'
 > {
+  itemClassName?: string | undefined
+  itemStyle?: ComponentProps<'button'>['style'] | undefined
+  selectedItemClassName?: string | undefined
+  selectedItemStyle?: ComponentProps<'button'>['style'] | undefined
+  scrollbarProps?:
+    | Omit<ComponentProps<typeof ScrollbarRoot>, 'children' | 'disabled' | 'overflow'>
+    | undefined
   options: readonly TimePickerOption<TValue>[]
   selectedValue?: TValue | undefined
   disabled?: boolean | undefined
@@ -43,8 +50,14 @@ export function TimePickerColumn<TValue extends ColumnValue>({
   selectedValue,
   disabled = false,
   onSelect,
+  scrollbarProps,
   itemRender,
+  itemClassName,
+  itemStyle,
+  selectedItemClassName,
+  selectedItemStyle,
   className,
+  style,
   onKeyDown,
   ref,
   ...props
@@ -55,7 +68,6 @@ export function TimePickerColumn<TValue extends ColumnValue>({
   const activeValueRef = useRef<TValue | undefined>(undefined)
   const [activeValue, setActiveValue] = useState<TValue | undefined>()
   const resolvedDisabled = rootDisabled || disabled
-
 
   function scrollSelected(behavior: ScrollBehavior) {
     if (selectedValue === undefined) return
@@ -80,6 +92,7 @@ export function TimePickerColumn<TValue extends ColumnValue>({
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    scrollbarProps?.onKeyDown?.(event)
     onKeyDown?.(event)
     if (event.defaultPrevented || resolvedDisabled || readOnly) return
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
@@ -91,6 +104,7 @@ export function TimePickerColumn<TValue extends ColumnValue>({
   return (
     <ScrollbarRoot
       {...props}
+      {...scrollbarProps}
       ref={ref}
       role="listbox"
       tabIndex={resolvedDisabled ? -1 : 0}
@@ -98,7 +112,8 @@ export function TimePickerColumn<TValue extends ColumnValue>({
       onKeyDown={handleKeyDown}
       data-slot="time-picker-column"
       data-disabled={resolvedDisabled ? 'true' : undefined}
-      className={cn(timePickerColumnClassName, className)}
+      className={cn(timePickerColumnClassName, className, scrollbarProps?.className)}
+      style={{ ...style, ...scrollbarProps?.style }}
       disabled={resolvedDisabled}
     >
       <ScrollbarViewport
@@ -108,7 +123,11 @@ export function TimePickerColumn<TValue extends ColumnValue>({
       >
         {options.map((item) => {
           const selected = Object.is(item.value, selectedValue)
-          const itemProps: ComponentProps<'button'> & { 'data-selected'?: string | undefined; 'data-disabled'?: string | undefined; 'data-active'?: string | undefined } = {
+          const itemProps: ComponentProps<'button'> & {
+            'data-selected'?: string | undefined
+            'data-disabled'?: string | undefined
+            'data-active'?: string | undefined
+          } = {
             ref: (element) => {
               if (element) itemRefs.current.set(item.value, element)
               else itemRefs.current.delete(item.value)
@@ -134,7 +153,12 @@ export function TimePickerColumn<TValue extends ColumnValue>({
           }
           const state = { item, selected, active: Object.is(activeValue, item.value) }
           return (
-            <TimePickerColumnItem key={String(item.value)} {...itemProps}>
+            <TimePickerColumnItem
+              key={String(item.value)}
+              {...itemProps}
+              className={cn(itemClassName, selected && selectedItemClassName)}
+              style={{ ...itemStyle, ...(selected ? selectedItemStyle : undefined) }}
+            >
               {itemRender ? itemRender(state) : item.label}
             </TimePickerColumnItem>
           )

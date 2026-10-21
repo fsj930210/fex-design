@@ -1,0 +1,75 @@
+<div class="grid w-full gap-space-lg">
+  @for(simple of [false,true];track simple){
+  <nav
+    paginationRoot
+    [total]="200"
+    [defaultPage]="8"
+    [labels]="labels"
+    [class]="classNames.root"
+    [style]="styles.root"
+  >
+    <ng-template #content let-snapshot
+      ><span
+        data-slot="pagination-total"
+        [class]="cn(totalClass,classNames.total)"
+        [style]="styles.total"
+        >{{snapshot.labels.total(snapshot.total)}}</span
+      >
+      <div paginationContent [class]="classNames.content" [style]="styles.content">
+        <button
+          paginationNavigationButton
+          direction="prev"
+          [class]="classNames.navigationButton"
+          [style]="styles.navigationButton"
+        ></button
+        >@if(simple){<span
+          data-slot="pagination-simple"
+          [class]="cn(simpleClass,classNames.simple)"
+          [style]="styles.simple"
+          >{{snapshot.page}} / {{snapshot.pageCount}}</span
+        >}@else{@for(item of snapshot.pages;track item.key){@if(item.type==='page'){<button
+          paginationPageButton
+          [page]="item.page"
+          [class]="classNames.pageButton"
+          [style]="styles.pageButton"
+        ></button
+        >}@else{<span
+          paginationEllipsis
+          [class]="classNames.ellipsis"
+          [style]="styles.ellipsis"
+        ></span
+        >}}}<button
+          paginationNavigationButton
+          direction="next"
+          [class]="classNames.navigationButton"
+          [style]="styles.navigationButton"
+        ></button>
+      </div>
+      <div
+        paginationPageSizeSelect
+        [class]="classNames.pageSizeSelect"
+        [style]="styles.pageSizeSelect"
+        [selectTriggerProps]="pageSizeProps.selectTriggerProps"
+        [selectContentProps]="pageSizeProps.selectContentProps"
+      ></div>
+      <div
+        data-slot="pagination-jumper"
+        [class]="cn(jumperClass,classNames.jumper)"
+        [style]="styles.jumper"
+      >
+        <span>{{snapshot.labels.jumpPrefix}}</span>
+        <div
+          paginationQuickJumper
+          [class]="classNames.quickJumper"
+          [style]="styles.quickJumper"
+          [inputNumberProps]="jumperProps.inputNumberProps"
+          [inputProps]="jumperProps.inputProps"
+          [incrementProps]="jumperProps.incrementProps"
+          [decrementProps]="jumperProps.decrementProps"
+        ></div>
+        <span>{{snapshot.labels.jumpSuffix}}</span>
+      </div></ng-template
+    >
+  </nav>
+  }
+</div>

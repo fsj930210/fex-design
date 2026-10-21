@@ -1,0 +1,552 @@
+{
+  "name": "Pagination",
+  "slug": "pagination",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "可组合分页部件。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/pagination",
+    "vue": "@fex-design/vue/primitive/pagination",
+    "solid": "@fex-design/solid/primitive/pagination",
+    "svelte": "@fex-design/svelte/primitive/pagination",
+    "angular": "@fex-design/angular/primitive/pagination"
+  },
+  "props": [],
+  "events": [],
+  "slots": [],
+  "components": [
+    {
+      "name": "PaginationRoot",
+      "nativeElement": "nav",
+      "description": "分页根容器。",
+      "props": [
+        {
+          "name": "total",
+          "type": "number",
+          "description": "数据总条数。",
+          "default": 0
+        },
+        {
+          "name": "page",
+          "type": "number",
+          "description": "受控当前页，从 1 开始。"
+        },
+        {
+          "name": "defaultPage",
+          "type": "number",
+          "description": "非受控初始页，仅初始化读取。",
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "description": "受控每页条数。"
+        },
+        {
+          "name": "defaultPageSize",
+          "type": "number",
+          "description": "非受控初始每页条数，仅初始化读取。",
+          "default": 10
+        },
+        {
+          "name": "siblingCount",
+          "type": "number",
+          "description": "当前页两侧各保留的页码数量。",
+          "default": 1
+        },
+        {
+          "name": "boundaryCount",
+          "type": "number",
+          "description": "首尾各保留的页码数量。",
+          "default": 1
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "统一控制分页按钮、条数选择和跳页输入的尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用所有分页修改。",
+          "default": false
+        },
+        {
+          "name": "labels",
+          "type": "Partial<PaginationLabels>",
+          "description": "自定义可访问名称、总数文字、条数选项和跳页前后缀。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "PaginationValue"
+            },
+            {
+              "name": "details",
+              "type": "PaginationChangeDetails"
+            }
+          ],
+          "description": "分页变更；受控字段由调用方更新。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "组合分页部件或读取 snapshot。"
+        }
+      ],
+      "frameworks": {
+        "react": {
+          "events": [
+            {
+              "name": "onChange",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "PaginationValue"
+                },
+                {
+                  "name": "details",
+                  "type": "PaginationChangeDetails"
+                }
+              ],
+              "description": "分页变更；受控字段由调用方更新。"
+            }
+          ]
+        },
+        "vue": {
+          "events": [
+            {
+              "name": "change",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "PaginationValue"
+                },
+                {
+                  "name": "details",
+                  "type": "PaginationChangeDetails"
+                }
+              ],
+              "description": "分页变更。"
+            },
+            {
+              "name": "update:page",
+              "parameters": [
+                {
+                  "name": "page",
+                  "type": "number"
+                }
+              ],
+              "description": "支持 v-model:page。"
+            },
+            {
+              "name": "update:pageSize",
+              "parameters": [
+                {
+                  "name": "pageSize",
+                  "type": "number"
+                }
+              ],
+              "description": "支持 v-model:page-size。"
+            }
+          ]
+        },
+        "solid": {
+          "events": [
+            {
+              "name": "onChange",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "PaginationValue"
+                },
+                {
+                  "name": "details",
+                  "type": "PaginationChangeDetails"
+                }
+              ],
+              "description": "分页变更；受控字段由调用方更新。"
+            }
+          ]
+        },
+        "svelte": {
+          "events": [
+            {
+              "name": "onchange",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": "PaginationValue"
+                },
+                {
+                  "name": "details",
+                  "type": "PaginationChangeDetails"
+                }
+              ],
+              "description": "分页变更；支持 bind:page 和 bind:pageSize。"
+            }
+          ]
+        },
+        "angular": {
+          "events": [
+            {
+              "name": "change",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": "{ value: PaginationValue; details: PaginationChangeDetails }"
+                }
+              ],
+              "description": "分页变更；受控字段由调用方更新。"
+            }
+          ]
+        }
+      },
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      },
+      "demos": []
+    },
+    {
+      "name": "PaginationContent",
+      "nativeElement": "div",
+      "description": "页码导航区域。",
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      }
+    },
+    {
+      "name": "PaginationPageButton",
+      "nativeElement": "button",
+      "description": "跳转到指定页码。",
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "description": "目标页码。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前按钮。",
+          "default": false
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      }
+    },
+    {
+      "name": "PaginationNavigationButton",
+      "nativeElement": "button",
+      "description": "前后翻页，自动处理边界禁用。",
+      "props": [
+        {
+          "name": "direction",
+          "type": "'prev' | 'next'",
+          "description": "导航方向。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前按钮。",
+          "default": false
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      }
+    },
+    {
+      "name": "PaginationEllipsis",
+      "nativeElement": "span",
+      "description": "表示被省略的页码。",
+      "props": [],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      }
+    },
+    {
+      "name": "PaginationPageSizeSelect",
+      "nativeElement": "div",
+      "description": "选择每页条数。",
+      "props": [
+        {
+          "name": "options",
+          "type": "readonly number[]",
+          "description": "每页条数选项。",
+          "default": [10, 20, 50, 100]
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前选择器。",
+          "default": false
+        },
+        {
+          "name": "inputProps",
+          "type": "object",
+          "description": "内层输入的原生属性。"
+        },
+        {
+          "name": "selectTriggerProps",
+          "type": "SelectTrigger customization",
+          "description": "传递给对应的直接子部件。"
+        },
+        {
+          "name": "selectContentProps",
+          "type": "SelectContent customization",
+          "description": "传递给对应的直接子部件。"
+        },
+        {
+          "name": "selectRootProps",
+          "type": "SelectRoot configuration (excluding Pagination-owned props)",
+          "description": "按 SelectRoot 原生契约配置直接子组件，不能覆盖分页选项、选中值、单选模式和变更处理。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      }
+    },
+    {
+      "name": "PaginationQuickJumper",
+      "nativeElement": "div",
+      "description": "输入整数页码并按 Enter 确认。",
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前输入。",
+          "default": false
+        },
+        {
+          "name": "inputProps",
+          "type": "object",
+          "description": "内层输入的原生属性。"
+        },
+        {
+          "name": "inputNumberProps",
+          "type": "InputNumber part customization",
+          "description": "传递给对应直接部件；跳页值和数值约束由 Pagination 管理。"
+        },
+        {
+          "name": "inputActionsProps",
+          "type": "InputNumber part customization",
+          "description": "传递给对应直接部件；跳页值和数值约束由 Pagination 管理。"
+        },
+        {
+          "name": "incrementProps",
+          "type": "InputNumber part customization",
+          "description": "传递给对应直接部件；跳页值和数值约束由 Pagination 管理。"
+        },
+        {
+          "name": "decrementProps",
+          "type": "InputNumber part customization",
+          "description": "传递给对应直接部件；跳页值和数值约束由 Pagination 管理。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": [],
+      "layer": "primitive",
+      "slug": "pagination",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/pagination",
+        "vue": "@fex-design/vue/primitive/pagination",
+        "solid": "@fex-design/solid/primitive/pagination",
+        "svelte": "@fex-design/svelte/primitive/pagination",
+        "angular": "@fex-design/angular/primitive/pagination"
+      }
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本用法",
+      "description": "只显示页码和前后翻页。"
+    },
+    {
+      "id": "full",
+      "title": "完整分页",
+      "description": "总数、页码、每页条数和快捷跳页。"
+    },
+    {
+      "id": "controlled",
+      "title": "外部受控",
+      "description": "外部设置页码、每页条数和总数，并查看变更反馈。"
+    },
+    {
+      "id": "simple",
+      "title": "简洁模式",
+      "description": "当前页和总页数替换数字页码。"
+    },
+    {
+      "id": "sizes",
+      "title": "尺寸",
+      "description": "小、中、大三种统一尺寸。"
+    },
+    {
+      "id": "page-size-options",
+      "title": "条数选项",
+      "description": "使用 5、15、30 条选项与初始每页 15 条。"
+    },
+    {
+      "id": "page-range",
+      "title": "页码范围",
+      "description": "对比不同的相邻页码和首尾页码数量。"
+    },
+    {
+      "id": "disabled",
+      "title": "禁用",
+      "description": "禁止分页、条数选择与快捷跳页。"
+    },
+    {
+      "id": "empty",
+      "title": "空数据",
+      "description": "普通与简洁模式的空数据状态。"
+    },
+    {
+      "id": "hide-on-single-page",
+      "title": "单页隐藏",
+      "description": "切换总数，观察单页隐藏与多页显示。"
+    },
+    {
+      "id": "custom",
+      "title": "自定义内容",
+      "description": "修改总数范围、页码和导航内容。"
+    },
+    {
+      "id": "layout",
+      "title": "总数布局",
+      "description": "紧邻排列与总数独占一侧的布局。"
+    },
+    {
+      "id": "direction",
+      "title": "阅读方向",
+      "description": "对比从左向右与从右向左的分页。"
+    },
+    {
+      "id": "logic",
+      "title": "usePagination",
+      "description": "使用 usePagination 手写 DOM 实现自己的 Pagination。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "修改控件高度、文字、间距、圆角和状态颜色。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--pagination-control-height",
+      "description": "控件高度与页码按钮最小宽度。"
+    },
+    {
+      "name": "--pagination-font-size",
+      "description": "文字字号。"
+    },
+    {
+      "name": "--pagination-gap",
+      "description": "分页区域之间的间距。"
+    },
+    {
+      "name": "--pagination-item-gap",
+      "description": "页码项之间的间距。"
+    },
+    {
+      "name": "--pagination-radius",
+      "description": "按钮、选择器与数字输入圆角。"
+    },
+    {
+      "name": "--pagination-color",
+      "description": "页码与导航按钮默认文字颜色。"
+    },
+    {
+      "name": "--pagination-active-background",
+      "description": "当前页背景色。"
+    },
+    {
+      "name": "--pagination-active-color",
+      "description": "当前页文字颜色。"
+    },
+    {
+      "name": "--pagination-active-border-color",
+      "description": "当前页边框颜色。"
+    },
+    {
+      "name": "--pagination-hover-background",
+      "description": "页码与导航按钮悬停背景。"
+    }
+  ]
+}

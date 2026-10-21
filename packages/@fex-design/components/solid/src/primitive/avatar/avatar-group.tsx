@@ -1,10 +1,6 @@
 import { avatarGroupClassName } from '@fex-design/components-styles/avatar'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 
 export interface AvatarGroupProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {}
 

@@ -169,7 +169,11 @@ export function BadgeGroup({
 }: BadgeGroupProps) {
   const split = splitOverflowItems(Children.toArray(children), maxCount)
   return (
-    <div {...props} data-slot="badge-group" className={cn("inline-flex flex-wrap items-center gap-1.5", className)}>
+    <div
+      {...props}
+      data-slot="badge-group"
+      className={cn('inline-flex flex-wrap items-center gap-1.5', className)}
+    >
       {split.visibleItems}
       {split.overflowCount > 0 &&
         (renderOverflow?.(split.overflowCount, split.overflowItems) ?? (
@@ -206,7 +210,10 @@ export function BadgeRibbon({
       )}
       style={{ '--badge-color': customColor, ...style } as ComponentProps<'div'>['style']}
     >
-      <span data-slot="badge-ribbon-text" className="relative text-[var(--badge-color-foreground,var(--badge-semantic-color-foreground))]">
+      <span
+        data-slot="badge-ribbon-text"
+        className="relative text-[var(--badge-color-foreground,var(--badge-semantic-color-foreground))]"
+      >
         {children}
       </span>
     </span>

@@ -9,7 +9,13 @@ defineProps<{ class?: string | undefined; panelViewDate?: CalendarDate | undefin
 </script>
 
 <template>
-  <DatePickerPanel v-bind="attrs" v-if="$slots.default" range :class="class" :panel-view-date="panelViewDate">
+  <DatePickerPanel
+    v-bind="attrs"
+    v-if="$slots.default"
+    range
+    :class="class"
+    :panel-view-date="panelViewDate"
+  >
     <slot />
   </DatePickerPanel>
   <DatePickerPanel v-bind="attrs" v-else range :class="class" :panel-view-date="panelViewDate" />

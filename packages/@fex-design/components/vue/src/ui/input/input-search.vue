@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { InputSearchMeta } from '@fex-design/core/input/types'
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
+import { cn } from '@fex-design/utils'
 import { computed, ref, useAttrs } from 'vue'
 import { SearchIcon } from '@fex-design/vue/icons/search'
 import { LoadingIcon } from '@fex-design/vue/icons/loading'
@@ -9,9 +13,25 @@ import Input from './input.vue'
 import type { InputProps } from './input.types'
 
 defineOptions({ name: 'InputSearch', inheritAttrs: false })
-const props = withDefaults(defineProps<InputProps & { loading?: boolean; addonAfter?: null }>(), {
-  loading: false,
-})
+const props = withDefaults(
+  defineProps<
+    InputProps & {
+      loading?: boolean
+      addonAfter?: null
+      addonBeforeButtonProps?: Omit<
+        InstanceType<typeof Button>['$props'],
+        'loading' | 'disabled' | 'onClick'
+      >
+      addonAfterButtonProps?: Omit<
+        InstanceType<typeof Button>['$props'],
+        'loading' | 'disabled' | 'onClick'
+      >
+    }
+  >(),
+  {
+    loading: false,
+  },
+)
 const emit = defineEmits<{
   'update:modelValue': [value: string]
   search: [value: string, meta: InputSearchMeta]
@@ -20,7 +40,13 @@ const attrs = useAttrs()
 const internalValue = ref(props.defaultValue ?? '')
 const currentValue = computed(() => props.modelValue ?? internalValue.value)
 const inputProps = computed(() => {
-  const { loading: _loading, addonAfter: _addonAfter, ...rest } = props
+  const {
+    loading: _loading,
+    addonAfter: _addonAfter,
+    addonBeforeButtonProps: _before,
+    addonAfterButtonProps: _after,
+    ...rest
+  } = props
   return rest
 })
 function update(value: string) {
@@ -28,7 +54,7 @@ function update(value: string) {
   emit('update:modelValue', value)
 }
 function search(source: InputSearchMeta['source']) {
-  if (!props.loading) emit('search', currentValue.value, { source })
+  if (!props.loading && !props.disabled) emit('search', currentValue.value, { source })
 }
 function keydown(event: KeyboardEvent) {
   const handlers = attrs.onKeydown
@@ -50,7 +76,7 @@ function keydown(event: KeyboardEvent) {
       ><button
         type="button"
         aria-label="Search"
-        :disabled="loading"
+        :disabled="loading || props.disabled"
         :class="inputActionClassName"
         @click="search('prefix')"
       >
@@ -70,10 +96,12 @@ function keydown(event: KeyboardEvent) {
       ><Button
         variant="solid"
         color="primary"
+        v-bind="addonBeforeButtonProps"
+        :disabled="loading"
         :loading="loading"
         data-input-addon-fill
         aria-label="Search"
-        :class="inputSearchAddonClassName"
+        :class="cn(inputSearchAddonClassName, addonBeforeButtonProps?.class as string | undefined)"
         @click="search('addonBefore')"
         ><slot v-if="!loading" name="addonBefore" /></Button
     ></template>
@@ -81,10 +109,12 @@ function keydown(event: KeyboardEvent) {
       ><Button
         variant="solid"
         color="primary"
+        v-bind="addonAfterButtonProps"
+        :disabled="loading"
         :loading="loading"
         data-input-addon-fill
         aria-label="Search"
-        :class="inputSearchAddonClassName"
+        :class="cn(inputSearchAddonClassName, addonAfterButtonProps?.class as string | undefined)"
         @click="search('addonAfter')"
         ><slot v-if="!loading" name="addonAfter"><SearchIcon /></slot></Button
     ></template>

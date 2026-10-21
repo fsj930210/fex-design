@@ -1,5 +1,12 @@
 export const inputExamples = {
   primitive: [
+    {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
     { id: 'basic', title: '基础组合', description: '组合 Root、Control 与 Clear。' },
     {
       id: 'sizes',
@@ -35,8 +42,27 @@ export const inputExamples = {
       title: '命令式聚焦',
       description: '通过 InputControl 的原生元素引用调用 focus、blur 和 select。',
     },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
+      height: 440,
+    },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
+    {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
     {
       id: 'basic',
       title: '基础 Input',
@@ -80,6 +106,12 @@ export const inputExamples = {
       id: 'semantic-styles',
       title: '结构化样式',
       description: '使用 classNames、styles、CSS Variables 和状态选择器定制。',
+    },
+    {
+      id: 'css-variables',
+      title: 'CSS 变量',
+      description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
+      height: 440,
     },
   ],
 } as const

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PrimitiveBadge from '@fex-design/svelte/primitive/badge/badge.svelte';
-  import Dot from '@fex-design/svelte/primitive/badge/badge-dot.svelte';
+  import PrimitiveBadge from "@fex-design/svelte/primitive/badge/badge.svelte";
+  import Dot from "@fex-design/svelte/primitive/badge/badge-dot.svelte";
   import { badgeRootClassName } from "@fex-design/components-styles/badge";
   import {
     getBadgeOffsetTransform,

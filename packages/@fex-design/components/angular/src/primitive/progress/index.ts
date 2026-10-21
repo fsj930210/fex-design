@@ -6,4 +6,9 @@ export { ProgressLabel } from './progress-label'
 export { ProgressRange } from './progress-range'
 export { ProgressTrack } from './progress-track'
 export { ProgressValue } from './progress-value'
-export type { ProgressColor, ProgressLinecap, ProgressStatus, ProgressVariant } from '@fex-design/core/progress/types'
+export type {
+  ProgressColor,
+  ProgressLinecap,
+  ProgressStatus,
+  ProgressVariant,
+} from '@fex-design/core/progress/types'

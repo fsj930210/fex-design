@@ -7,10 +7,17 @@ import type { DatePickerInputPart } from './types'
 export function isDatePickerValueInRange(value: CalendarValue, range?: CalendarRange): boolean {
   if (!range?.start || !range.end) return false
   const ordered = normalizeDatePickerRange(range)
-  return compareDatePickerValue(value, ordered.start!) >= 0 && compareDatePickerValue(value, ordered.end!) <= 0
+  return (
+    compareDatePickerValue(value, ordered.start!) >= 0 &&
+    compareDatePickerValue(value, ordered.end!) <= 0
+  )
 }
-export function normalizeDatePickerRange<T extends CalendarValue>(range: CalendarRange<T>): CalendarRange<T> {
-  return range.start && range.end && compareDatePickerValue(range.start, range.end) > 0 ? { start: range.end, end: range.start } : range
+export function normalizeDatePickerRange<T extends CalendarValue>(
+  range: CalendarRange<T>,
+): CalendarRange<T> {
+  return range.start && range.end && compareDatePickerValue(range.start, range.end) > 0
+    ? { start: range.end, end: range.start }
+    : range
 }
 
 export function getRangeActivePart<TValue extends CalendarValue>(

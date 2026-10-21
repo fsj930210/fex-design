@@ -1,5 +1,5 @@
-import { createContext, useContext, type Accessor } from "solid-js"
-import type { ProgressContextValue } from "@fex-design/core/progress/types"
+import { createContext, useContext, type Accessor } from 'solid-js'
+import type { ProgressContextValue } from '@fex-design/core/progress/types'
 
 export const ProgressContext = createContext<Accessor<ProgressContextValue>>()
 

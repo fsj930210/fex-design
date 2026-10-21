@@ -7,7 +7,7 @@ export function ControlledExample() {
     <div class="grid w-full gap-3">
       <Input value={value()} onValueChange={setValue} clearable />
       <Input defaultValue="非受控内容" clearable />
-      <div class="flex gap-2">
+      <div class="flex flex-wrap gap-2">
         <Button onClick={() => setValue('外部设置')}>外部设置</Button>
         <Button onClick={() => setValue('')}>外部清空</Button>
       </div>

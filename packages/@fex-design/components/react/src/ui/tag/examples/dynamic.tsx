@@ -30,7 +30,7 @@ export default function Dynamic() {
           </Tag>
         ))}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <input
           className="h-8 rounded-md border px-2 text-sm"
           value={name}

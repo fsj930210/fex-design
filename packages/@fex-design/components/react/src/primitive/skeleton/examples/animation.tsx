@@ -10,7 +10,7 @@ export default function Example() {
       {modes.map(([animation, label]) => (
         <div key={animation} className="grid gap-2">
           <b>{label}</b>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <SkeletonAvatar animation={animation} />
             <SkeletonText animation={animation} className="w-48" />
             <SkeletonButton animation={animation} />

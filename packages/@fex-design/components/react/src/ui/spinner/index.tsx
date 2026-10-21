@@ -37,7 +37,13 @@ export function SpinnerContainer({
   const rootRef = useComposedRef(ref)
   if (spinning === undefined) {
     return (
-      <Spinner {...props} ref={rootRef} size={size} className={cn(className, classNames?.spinner)} style={{ ...style, ...styles?.spinner }}>
+      <Spinner
+        {...props}
+        ref={rootRef}
+        size={size}
+        className={cn(className, classNames?.spinner)}
+        style={{ ...style, ...styles?.spinner }}
+      >
         {indicator}
       </Spinner>
     )

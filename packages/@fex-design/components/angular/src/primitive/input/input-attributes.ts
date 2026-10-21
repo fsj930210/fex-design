@@ -1,5 +1,8 @@
 import type { Signal } from '@angular/core'
-import { connectNativeAttributes, type NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import {
+  connectNativeAttributes,
+  type NativeAttributes,
+} from '@fex-design/angular/directives/native-attributes'
 
 export interface InputAttributes extends NativeAttributes {
   disabled?: boolean

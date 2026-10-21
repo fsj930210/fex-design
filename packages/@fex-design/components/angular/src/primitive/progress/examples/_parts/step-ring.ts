@@ -16,6 +16,16 @@ export class StepRingDemo {
   readonly gap = input(2)
   readonly steps = input(10)
   readonly color = input<string>()
-  readonly geometry = computed(() => getCircleStepsGeometry({ value: this.value(), gap: this.gap(), steps: this.steps(), size: 96, thickness: 4 }))
-  readonly ringColor = computed(() => this.color() ?? (this.value() === 100 ? 'var(--success)' : 'var(--info)'))
+  readonly geometry = computed(() =>
+    getCircleStepsGeometry({
+      value: this.value(),
+      gap: this.gap(),
+      steps: this.steps(),
+      size: 96,
+      thickness: 4,
+    }),
+  )
+  readonly ringColor = computed(
+    () => this.color() ?? (this.value() === 100 ? 'var(--success)' : 'var(--info)'),
+  )
 }

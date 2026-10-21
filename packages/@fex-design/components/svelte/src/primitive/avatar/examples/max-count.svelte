@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount } from '@fex-design/svelte/primitive/avatar'
+  import {
+    Avatar,
+    AvatarFallback,
+    AvatarGroup,
+    AvatarGroupCount,
+  } from "@fex-design/svelte/primitive/avatar";
 </script>
 
 <AvatarGroup

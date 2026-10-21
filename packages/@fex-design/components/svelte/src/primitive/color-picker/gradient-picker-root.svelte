@@ -2,7 +2,7 @@
   import { createGradientController } from "@fex-design/core/gradient/create-gradient-controller";
   import type { GradientOptions } from "@fex-design/core/gradient/types";
   import { setContext, type Snippet } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { gradientPickerKey, type GradientPickerContext } from "./context";
   interface Props extends GradientOptions {
     children?: Snippet;

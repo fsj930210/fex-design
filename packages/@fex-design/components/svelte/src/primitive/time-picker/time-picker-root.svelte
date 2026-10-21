@@ -9,10 +9,13 @@
   import Popover from "../popover/popover.svelte";
   import { timePickerContextKey, type TimePickerContext } from "./context";
 
-  interface Props extends Omit<ComponentProps<typeof Popover>, 'children' | 'disabled'> {
+  interface Props extends Omit<
+    ComponentProps<typeof Popover>,
+    "children" | "disabled"
+  > {
     value?: TimeValue | null | undefined;
     defaultValue?: TimeValue | null;
-    popoverProps?: import('@fex-design/core/time-picker/types').TimePickerPopoverOptions;
+    popoverProps?: import("@fex-design/core/time-picker/types").TimePickerPopoverOptions;
     format?: string;
     onchange?: (
       value: TimeValue | null,
@@ -23,7 +26,6 @@
     readOnly?: boolean;
     disabledTime?: DisabledTime | undefined;
     children?: Snippet;
-
   }
 
   let {
@@ -40,7 +42,13 @@
     ...rest
   }: Props = $props();
   const { controller, snapshot } = useTimePicker(() => ({
-    value, defaultValue, format, use12Hours, disabled, readOnly, disabledTime,
+    value,
+    defaultValue,
+    format,
+    use12Hours,
+    disabled,
+    readOnly,
+    disabledTime,
     onChange: (next, details) => onchange?.(next, details),
   }));
   setContext(timePickerContextKey, {
@@ -54,4 +62,6 @@
   } satisfies TimePickerContext);
 </script>
 
-<Popover {...rest} {...popoverProps} {disabled} trigger={["focus", "click"]}>{@render children?.()}</Popover>
+<Popover {...rest} {...popoverProps} {disabled} trigger={["focus", "click"]}
+  >{@render children?.()}</Popover
+>

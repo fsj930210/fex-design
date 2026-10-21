@@ -58,4 +58,18 @@
   --scrollbar-thumb-hover: oklch(0 0 0 / 24%);
   --shadow-color: oklch(0 0 0 / 10%);
   --shadow-elevated: 0 12px 32px var(--shadow-color);
+
+  /* ============================================================
+   * COMPONENT-ONLY TOKENS —— 下面是组件独有的 Token
+   * 随主题变化的组件默认值；只由归属组件读取（命名空间隔离），
+   * 覆盖方式：:root 全局 / 作用域容器 / 单实例 style。
+   * 禁止把这里的名称提升为上方的系统语义 Token。
+   * ============================================================ */
+
+  /* Progress */
+  --progress-remaining: oklch(0.86 0 0);
+
+  /* Skeleton */
+  --skeleton-gradient-from: oklch(0.97 0 0);
+  --skeleton-gradient-to: oklch(0.89 0 0);
 }

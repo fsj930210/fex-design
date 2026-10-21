@@ -13,8 +13,12 @@ export function getInitialHostClassName() {
 
 export function createHostClassName(className: ClassValueSource, userClassName?: ClassValueSource) {
   const initialClassName = getInitialHostClassName()
-  return computed(() => cn(
-    readClassValue(className),
-    userClassName === undefined ? initialClassName : readClassValue(userClassName) ?? initialClassName,
-  ))
+  return computed(() =>
+    cn(
+      readClassValue(className),
+      userClassName === undefined
+        ? initialClassName
+        : (readClassValue(userClassName) ?? initialClassName),
+    ),
+  )
 }

@@ -1,6 +1,6 @@
-import { breadcrumbPageClassName } from "@fex-design/components-styles/breadcrumb"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes } from "react"
+import { breadcrumbPageClassName } from '@fex-design/components-styles/breadcrumb'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes } from 'react'
 
 export type BreadcrumbPageProps = HTMLAttributes<HTMLSpanElement>
 
@@ -8,7 +8,7 @@ export function BreadcrumbPage({ className, children, ...props }: BreadcrumbPage
   return (
     <span
       {...props}
-      aria-current={props["aria-current"] ?? "page"}
+      aria-current={props['aria-current'] ?? 'page'}
       className={cn(breadcrumbPageClassName, className)}
       data-slot="breadcrumb-page"
     >

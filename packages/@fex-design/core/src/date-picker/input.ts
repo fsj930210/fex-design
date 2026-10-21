@@ -17,10 +17,16 @@ export function getRangePickerDisplayTexts(
   return [formatDatePickerValue(value?.start, options), formatDatePickerValue(value?.end, options)]
 }
 
-export function getDatePickerTagItems<TValue extends CalendarValue>(values: readonly TValue[], maxCount?: number) {
-  const count = maxCount !== undefined && Number.isFinite(maxCount) ? Math.max(0, Math.trunc(maxCount)) : values.length
+export function getDatePickerTagItems<TValue extends CalendarValue>(
+  values: readonly TValue[],
+  maxCount?: number,
+) {
+  const count =
+    maxCount !== undefined && Number.isFinite(maxCount)
+      ? Math.max(0, Math.trunc(maxCount))
+      : values.length
   const occurrences = new Map<string, number>()
-  const items = values.slice(0, count).map(value => {
+  const items = values.slice(0, count).map((value) => {
     const key = getCalendarValueKey(value)
     const occurrence = occurrences.get(key) ?? 0
     occurrences.set(key, occurrence + 1)
@@ -33,7 +39,8 @@ export function getDatePickerTagItems<TValue extends CalendarValue>(values: read
 export function getDatePickerInputAttributes<TAttributes extends object>(attributes?: TAttributes) {
   if (attributes === undefined) return undefined
   const result = { ...attributes }
-  for (const name of ['value', 'defaultValue', 'placeholder', 'readOnly', 'readonly']) Reflect.deleteProperty(result, name)
+  for (const name of ['value', 'defaultValue', 'placeholder', 'readOnly', 'readonly'])
+    Reflect.deleteProperty(result, name)
   return result
 }
 

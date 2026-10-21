@@ -1,12 +1,12 @@
-import type { SelectionChangeMeta, SelectionValue } from "@fex-design/core/selection/types"
-import { createContext, useContext } from "solid-js"
+import type { SelectionChangeMeta, SelectionValue } from '@fex-design/core/selection/types'
+import { createContext, useContext } from 'solid-js'
 
 export type RadioValue = SelectionValue
 
 export interface RadioChangeMeta {
   previousValue: RadioValue | undefined
   value: RadioValue
-  changedValues: SelectionChangeMeta["changedValues"]
+  changedValues: SelectionChangeMeta['changedValues']
 }
 
 export interface RadioContextValue {

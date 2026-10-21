@@ -1,5 +1,5 @@
-export { Progress } from "./progress.component"
-export type { ProgressClassNames, ProgressStyle, ProgressStyles } from "./styles"
+export { Progress } from './progress.component'
+export type { ProgressClassNames, ProgressStyle, ProgressStyles } from './styles'
 export type {
   ProgressRangeItem,
   ProgressColor,
@@ -9,4 +9,4 @@ export type {
   ProgressSize,
   ProgressStatus,
   ProgressVariant,
-} from "@fex-design/core/progress/types"
+} from '@fex-design/core/progress/types'

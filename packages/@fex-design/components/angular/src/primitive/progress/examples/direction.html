@@ -2,12 +2,8 @@
   <div dir="ltr">
     <div progressRoot [value]="65" class="flex w-full flex-col">
       <div class="mb-1.5 flex w-full items-center justify-between text-sm">
-        <span progressLabel>
-          LTR
-        </span>
-        <span progressValue>
-          65%
-        </span>
+        <span progressLabel> LTR </span>
+        <span progressValue> 65% </span>
       </div>
       <div progressTrack>
         <div progressRange></div>
@@ -17,19 +13,15 @@
   <div dir="rtl">
     <div progressRoot [value]="65" class="flex w-full flex-col">
       <div class="mb-1.5 flex w-full items-center justify-between text-sm">
-        <span progressLabel>
-          RTL
-        </span>
-        <span progressValue>
-          65%
-        </span>
+        <span progressLabel> RTL </span>
+        <span progressValue> 65% </span>
       </div>
       <div progressTrack>
         <div progressRange></div>
       </div>
     </div>
   </div>
-  <div class="flex items-start gap-6">
+  <div class="flex flex-wrap items-start gap-6">
     <div class="grid justify-items-center gap-1 text-sm" dir="ltr">
       <div progressRoot [value]="65" variant="circle" [size]="96" class="relative">
         <svg progressCircle>
@@ -37,14 +29,10 @@
           <circle progressCircleRange />
         </svg>
         <div class="absolute inset-0 flex items-center justify-center">
-          <span progressValue>
-            65%
-          </span>
+          <span progressValue> 65% </span>
         </div>
       </div>
-      <span>
-        LTR（顺时针）
-      </span>
+      <span> LTR（顺时针） </span>
     </div>
     <div class="grid justify-items-center gap-1 text-sm" dir="rtl">
       <div progressRoot [value]="65" variant="circle" [size]="96" class="relative">
@@ -53,14 +41,10 @@
           <circle progressCircleRange />
         </svg>
         <div class="absolute inset-0 flex items-center justify-center">
-          <span progressValue>
-            65%
-          </span>
+          <span progressValue> 65% </span>
         </div>
       </div>
-      <span>
-        RTL（反向）
-      </span>
+      <span> RTL（反向） </span>
     </div>
   </div>
 </div>

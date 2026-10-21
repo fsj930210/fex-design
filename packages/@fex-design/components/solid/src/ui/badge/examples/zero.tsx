@@ -4,7 +4,7 @@ import { SwitchRoot, SwitchThumb } from '@fex-design/solid/primitive/switch'
 export function Zero() {
   const [showZero, setShowZero] = createSignal(false)
   return (
-    <div class="flex items-center gap-6">
+    <div class="flex flex-wrap items-center gap-6">
       <label class="flex items-center gap-2">
         <SwitchRoot checked={showZero()} onChange={setShowZero} aria-label="显示 0">
           <SwitchThumb />

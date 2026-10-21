@@ -34,13 +34,22 @@ export function TimePickerRoot(props: TimePickerRootProps) {
     'children',
   ])
   const { controller, snapshot } = useTimePicker(() => ({
-    value: local.value, defaultValue: local.defaultValue,
-    format: local.format, use12Hours: local.use12Hours,
-    disabled: local.disabled, readOnly: local.readOnly, disabledTime: local.disabledTime,
+    value: local.value,
+    defaultValue: local.defaultValue,
+    format: local.format,
+    use12Hours: local.use12Hours,
+    disabled: local.disabled,
+    readOnly: local.readOnly,
+    disabledTime: local.disabledTime,
     onChange: (value, details) => local.onChange?.(value, details),
   }))
   return (
-    <Popover {...rest} {...local.popoverProps} disabled={local.disabled} trigger={['focus', 'click']}>
+    <Popover
+      {...rest}
+      {...local.popoverProps}
+      disabled={local.disabled}
+      trigger={['focus', 'click']}
+    >
       <TimePickerContext.Provider
         value={{
           controller,

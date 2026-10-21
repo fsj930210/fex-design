@@ -35,7 +35,10 @@ defineExpose({ element })
     :width="size"
     :height="size"
     :class="cn(progressCircleClassName, $attrs.class as string | undefined)"
-    :style="[{ transform: `rotate(${props.rotation ?? geometry.rotation}deg)` }, $attrs.style as StyleValue]"
+    :style="[
+      { transform: `rotate(${props.rotation ?? geometry.rotation}deg)` },
+      $attrs.style as StyleValue,
+    ]"
   >
     <slot />
   </svg>

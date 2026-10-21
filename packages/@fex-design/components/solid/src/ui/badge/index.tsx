@@ -40,51 +40,67 @@ export function Badge(props: BadgeUiProps) {
     ...local.styles?.indicator,
   })
   return (
-    <Show when={local.dot || local.count !== undefined} fallback={
-      <PrimitiveBadge
-        {...rest}
-        class={cn(local.class, local.classNames?.root)}
-        style={mergeStyle(local.style, local.styles?.root)}
-      >
-        {local.children}
-      </PrimitiveBadge>
-    }>
-    <Show when={local.children != null} fallback={
-      <Show when={local.dot} fallback={
-        <PrimitiveBadge {...rest} count={local.count}
-          class={cn(local.class, local.classNames?.indicator)} style={mergeStyle(local.style, indicatorStyle())} />
-      }>
-      <BadgeDot
-        {...rest}
-        class={cn(local.class, local.classNames?.indicator)}
-        style={mergeStyle(local.style, indicatorStyle())}
-      />
-      </Show>
-    }>
-    <span
-      data-slot="badge-root"
-      class={cn(badgeRootClassName, local.class, local.classNames?.root)}
-      style={mergeStyle(local.style, local.styles?.root)}
-    >
-      <span
-        data-slot="badge-content"
-        class={local.classNames?.content}
-        style={local.styles?.content}
-      >
-        {local.children}
-      </span>
-      <Show when={local.dot} fallback={
+    <Show
+      when={local.dot || local.count !== undefined}
+      fallback={
         <PrimitiveBadge
           {...rest}
-          count={local.count}
-          class={local.classNames?.indicator}
-          style={indicatorStyle()}
-        />
-      }>
-        <BadgeDot {...rest} class={local.classNames?.indicator} style={indicatorStyle()} />
+          class={cn(local.class, local.classNames?.root)}
+          style={mergeStyle(local.style, local.styles?.root)}
+        >
+          {local.children}
+        </PrimitiveBadge>
+      }
+    >
+      <Show
+        when={local.children != null}
+        fallback={
+          <Show
+            when={local.dot}
+            fallback={
+              <PrimitiveBadge
+                {...rest}
+                count={local.count}
+                class={cn(local.class, local.classNames?.indicator)}
+                style={mergeStyle(local.style, indicatorStyle())}
+              />
+            }
+          >
+            <BadgeDot
+              {...rest}
+              class={cn(local.class, local.classNames?.indicator)}
+              style={mergeStyle(local.style, indicatorStyle())}
+            />
+          </Show>
+        }
+      >
+        <span
+          data-slot="badge-root"
+          class={cn(badgeRootClassName, local.class, local.classNames?.root)}
+          style={mergeStyle(local.style, local.styles?.root)}
+        >
+          <span
+            data-slot="badge-content"
+            class={local.classNames?.content}
+            style={local.styles?.content}
+          >
+            {local.children}
+          </span>
+          <Show
+            when={local.dot}
+            fallback={
+              <PrimitiveBadge
+                {...rest}
+                count={local.count}
+                class={local.classNames?.indicator}
+                style={indicatorStyle()}
+              />
+            }
+          >
+            <BadgeDot {...rest} class={local.classNames?.indicator} style={indicatorStyle()} />
+          </Show>
+        </span>
       </Show>
-    </span>
-    </Show>
     </Show>
   )
 }

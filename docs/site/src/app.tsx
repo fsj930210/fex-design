@@ -13,7 +13,8 @@ const getParsedRoute = () => {
     ? location.pathname.slice(basePath.length)
     : location.pathname
   const parts = routePath.split('/').filter(Boolean)
-  const isHome = parts.length === 0 || (parts.length === 1 && !frameworks.includes(parts[0] as Framework))
+  const isHome =
+    parts.length === 0 || (parts.length === 1 && !frameworks.includes(parts[0] as Framework))
   const pathFramework = parts[0] as Framework
   const framework = frameworks.includes(pathFramework) ? pathFramework : 'solid'
   const slug = parts[2] ?? (isHome ? '' : 'button')
@@ -40,6 +41,7 @@ export function App() {
   )
   const componentDoc = createMemo(() => getComponentDocument(slug()))
   const [toc, setToc] = createSignal<readonly AnchorItemData<string>[]>([])
+  const [componentNavCollapsed, setComponentNavCollapsed] = createSignal(false)
   let article!: HTMLElement
 
   // MDX heading ids 由 rehype-slug 生成；文档变化后从真实 DOM 同步目录。
@@ -54,15 +56,14 @@ export function App() {
     }
   })
 
-  const navigateToComponent = (nextFramework: Framework = framework(), nextSlug: string = slug() || 'button') => {
+  const navigateToComponent = (
+    nextFramework: Framework = framework(),
+    nextSlug: string = slug() || 'button',
+  ) => {
     setIsHome(false)
     setFramework(nextFramework)
     setSlug(nextSlug)
-    history.pushState(
-      null,
-      '',
-      siteHref(`${nextFramework}/components/${nextSlug}`),
-    )
+    history.pushState(null, '', siteHref(`${nextFramework}/components/${nextSlug}`))
     scrollTo({ top: 0 })
   }
 
@@ -72,7 +73,7 @@ export function App() {
     scrollTo({ top: 0 })
   }
 
-createEffect(() => {
+  createEffect(() => {
     const currentTheme = theme()
     if (typeof window !== 'undefined' && window.document?.documentElement) {
       const root = window.document.documentElement
@@ -107,132 +108,167 @@ createEffect(() => {
       {/* 顶部全局 Header */}
       <header class="sticky top-0 z-30 flex h-16 w-full items-center border-b border-border bg-background/95 px-4 backdrop-blur-xl transition-colors duration-200">
         <div class="flex h-full w-full items-center justify-between">
-        <div class="flex items-center gap-8">
-          <a
-            class="flex items-center gap-2.5 text-lg font-bold text-foreground no-underline cursor-pointer"
-            href={siteHref('')}
-            onClick={(e) => {
-              e.preventDefault()
-              navigateToHome()
-            }}
-          >
-            <img src={siteHref('favicon.svg')} alt="Logo" class="h-7 w-7 rounded-md" />
-            <span class="tracking-tight font-extrabold text-foreground">Fex Design</span>
-          </a>
-
-          <nav class="hidden items-center gap-6 text-sm sm:flex">
-            <button
-              class="cursor-pointer bg-transparent border-0 p-0 text-sm font-medium transition-colors hover:text-foreground"
-              classList={{
-                'text-foreground font-bold border-b-2 border-foreground pb-0.5': isHome(),
-                'text-muted-foreground': !isHome(),
+          <div class="flex items-center gap-8">
+            <a
+              class="flex items-center gap-2.5 text-lg font-bold text-foreground no-underline cursor-pointer"
+              href={siteHref('')}
+              onClick={(e) => {
+                e.preventDefault()
+                navigateToHome()
               }}
-              onClick={navigateToHome}
             >
-              首页
-            </button>
-            <button
-              class="cursor-pointer bg-transparent border-0 p-0 text-sm font-medium transition-colors hover:text-foreground"
-              classList={{
-                'text-foreground font-bold border-b-2 border-foreground pb-0.5': !isHome(),
-                'text-muted-foreground': isHome(),
-              }}
-              onClick={() => navigateToComponent(framework(), slug() || 'button')}
-            >
-              组件
-            </button>
-          </nav>
-        </div>
+              <img src={siteHref('favicon.svg')} alt="Logo" class="h-7 w-7 rounded-md" />
+              <span class="tracking-tight font-extrabold text-foreground">Fex Design</span>
+            </a>
 
-        <div class="flex items-center gap-3">
-          {/* 框架选择切换器：仅在文档页展示 */}
-          <Show when={!isHome()}>
-            <div class="flex items-center gap-1 rounded-lg bg-muted-background p-1 border border-border">
-              <For each={frameworks}>
-                {(item) => (
-                  <button
-                    class="cursor-pointer rounded-md border-0 bg-transparent px-2.5 py-1 text-xs font-medium text-muted-foreground capitalize transition-all hover:text-foreground data-[active=true]:bg-background data-[active=true]:font-bold data-[active=true]:text-foreground data-[active=true]:shadow-xs"
-                    data-active={item === framework()}
-                    onClick={() => {
-                      setFramework(item)
-                      navigateToComponent(item, slug() || 'button')
-                    }}
-                  >
-                    {item}
-                  </button>
-                )}
-              </For>
-            </div>
-          </Show>
+            <nav class="hidden items-center gap-6 text-sm sm:flex">
+              <button
+                class="cursor-pointer bg-transparent border-0 p-0 text-sm font-medium transition-colors hover:text-foreground"
+                classList={{
+                  'text-foreground font-bold border-b-2 border-foreground pb-0.5': isHome(),
+                  'text-muted-foreground': !isHome(),
+                }}
+                onClick={navigateToHome}
+              >
+                首页
+              </button>
+              <button
+                class="cursor-pointer bg-transparent border-0 p-0 text-sm font-medium transition-colors hover:text-foreground"
+                classList={{
+                  'text-foreground font-bold border-b-2 border-foreground pb-0.5': !isHome(),
+                  'text-muted-foreground': isHome(),
+                }}
+                onClick={() => navigateToComponent(framework(), slug() || 'button')}
+              >
+                组件
+              </button>
+            </nav>
+          </div>
 
-          {/* 明暗主题切换按钮：显眼且双端均清晰 */}
-          <button
-            class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-secondary-background text-foreground transition-all hover:bg-hover-background hover:scale-105"
-            onClick={toggleTheme}
-            title={theme() === 'dark' ? '切换为浅色模式' : '切换为深色模式'}
-            aria-label="Toggle theme"
-          >
-            <Show
-              when={theme() === 'dark'}
-              fallback={
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                </svg>
-              }
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2" /><path d="M12 20v2" />
-                <path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" />
-                <path d="M2 12h2" /><path d="M20 12h2" />
-                <path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
-              </svg>
+          <div class="flex items-center gap-3">
+            {/* 框架选择切换器：仅在文档页展示 */}
+            <Show when={!isHome()}>
+              <div class="flex items-center gap-1 rounded-lg bg-muted-background p-1 border border-border">
+                <For each={frameworks}>
+                  {(item) => (
+                    <button
+                      class="cursor-pointer rounded-md border-0 bg-transparent px-2.5 py-1 text-xs font-medium text-muted-foreground capitalize transition-all hover:text-foreground data-[active=true]:bg-background data-[active=true]:font-bold data-[active=true]:text-foreground data-[active=true]:shadow-xs"
+                      data-active={item === framework()}
+                      onClick={() => {
+                        setFramework(item)
+                        navigateToComponent(item, slug() || 'button')
+                      }}
+                    >
+                      {item}
+                    </button>
+                  )}
+                </For>
+              </div>
             </Show>
-          </button>
-        </div>
+
+            {/* 明暗主题切换按钮：显眼且双端均清晰 */}
+            <button
+              class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-secondary-background text-foreground transition-all hover:bg-hover-background hover:scale-105"
+              onClick={toggleTheme}
+              title={theme() === 'dark' ? '切换为浅色模式' : '切换为深色模式'}
+              aria-label="Toggle theme"
+            >
+              <Show
+                when={theme() === 'dark'}
+                fallback={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4.5 w-4.5 text-foreground"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                  </svg>
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4.5 w-4.5 text-amber-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="m4.93 4.93 1.41 1.41" />
+                  <path d="m17.66 17.66 1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="m6.34 17.66-1.41 1.41" />
+                  <path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+              </Show>
+            </button>
+          </div>
         </div>
       </header>
 
       <Show
         when={!isHome()}
         fallback={
-          <HomePage
-            currentFramework={framework()}
-            onGoToComponents={navigateToComponent}
-          />
+          <HomePage currentFramework={framework()} onGoToComponents={navigateToComponent} />
         }
       >
         {/* 组件文档布局 */}
-        <div class="w-full px-4 flex min-h-[calc(100vh-64px)] max-[1080px]:block">
+        <div class="w-full flex min-h-[calc(100vh-64px)] max-[1080px]:block">
           {/* 左侧组件导航 */}
-          <aside class="sticky top-16 h-[calc(100vh-64px)] w-[256px] shrink-0 overflow-y-auto border-r border-border px-3 py-6 max-[1080px]:hidden">
-            <p class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
-              Components
-            </p>
-            <div class="mt-4 flex flex-col gap-0.5">
-              <For each={getDocumentSlugs()}>
-                {(item) => (
-                  <a
-                    class="block rounded-md px-3 py-1.5 text-sm text-secondary-foreground no-underline transition-colors hover:bg-hover-background hover:text-foreground data-[active=true]:bg-selected-background data-[active=true]:font-semibold data-[active=true]:text-primary"
-                    data-active={item === slug()}
-                    href={siteHref(`${framework()}/components/${item}`)}
-                    onClick={(event) => {
-                      event.preventDefault()
-                      navigateToComponent(framework(), item)
-                    }}
-                  >
-                    {title(item)}
-                  </a>
-                )}
-              </For>
+          <aside
+            class={`sticky top-16 h-[calc(100vh-64px)] shrink-0 overflow-y-auto border-r border-border py-6 transition-[width] duration-150 max-[1080px]:hidden ${componentNavCollapsed() ? 'w-12 px-2' : 'w-[200px] px-3'}`}
+          >
+            <div class={`flex items-center gap-2 ${componentNavCollapsed() ? 'justify-center' : 'justify-between'} px-1`}>
+              <Show when={!componentNavCollapsed()}>
+                <p class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                  组件
+                </p>
+              </Show>
+              <button
+                type="button"
+                class="grid size-7 cursor-pointer place-items-center rounded-md text-muted-foreground hover:bg-hover-background hover:text-foreground"
+                aria-label={componentNavCollapsed() ? '展开组件导航' : '折叠组件导航'}
+                title={componentNavCollapsed() ? '展开组件导航' : '折叠组件导航'}
+                onClick={() => setComponentNavCollapsed((value) => !value)}
+              >
+                <svg class="size-3.5 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d={componentNavCollapsed() ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6'} />
+                </svg>
+              </button>
             </div>
+            <Show when={!componentNavCollapsed()}>
+              <div class="mt-4 flex flex-col gap-0.5">
+                <For each={getDocumentSlugs()}>
+                  {(item) => (
+                    <a
+                      class="block rounded-md px-3 py-1.5 text-sm text-secondary-foreground no-underline transition-colors hover:bg-hover-background hover:text-foreground data-[active=true]:bg-selected-background data-[active=true]:font-semibold data-[active=true]:text-primary"
+                      data-active={item === slug()}
+                      href={siteHref(`${framework()}/components/${item}`)}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        navigateToComponent(framework(), item)
+                      }}
+                    >
+                      {title(item)}
+                    </a>
+                  )}
+                </For>
+              </div>
+            </Show>
           </aside>
 
           {/* 中间主文档区 */}
-          <main
-            ref={article}
-            class="min-w-0 flex-1 w-full px-6 pt-8 pb-24"
-          >
+          <main ref={article} class="min-w-0 flex-1 w-full px-6 pt-8 pb-24">
             <Show
               when={componentDoc() && isDocumentedComponent(slug())}
               fallback={
@@ -258,7 +294,7 @@ createEffect(() => {
           </main>
 
           {/* 右侧 Anchor 目录 */}
-          <div class="sticky top-16 h-[calc(100vh-64px)] w-[256px] shrink-0 self-start overflow-y-auto border-l border-border px-3 py-6 max-[1280px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-2 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-2 [&_[data-slot=anchor-link]]:py-1 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-snug [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
+          <div class="sticky top-16 h-[calc(100vh-64px)] w-[220px] shrink-0 self-start overflow-y-auto border-l border-border px-2 py-6 max-[1280px]:hidden [&_nav[data-slot=anchor]]:w-full [&_nav[data-slot=anchor]]:ps-1 [&_[data-slot=anchor-link]]:overflow-hidden [&_[data-slot=anchor-link]]:px-1.5 [&_[data-slot=anchor-link]]:py-1 [&_[data-slot=anchor-link]]:text-xs [&_[data-slot=anchor-link]]:leading-snug [&_[data-slot=anchor-link]]:text-ellipsis [&_[data-slot=anchor-link]:hover]:bg-hover-background [&_[data-slot=anchor-link]:hover]:text-primary [&_[data-slot=anchor-link][data-state=active]]:bg-selected-background [&_[data-slot=anchor-link][data-state=active]]:font-semibold [&_[data-slot=anchor-link][data-state=active]]:text-primary">
             <p class="mb-3 px-2 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
               本页目录
             </p>
@@ -306,4 +342,3 @@ function collectToc(article: HTMLElement): readonly AnchorItemData<string>[] {
   }
   return items
 }
-

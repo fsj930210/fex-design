@@ -1,1 +1,27 @@
-<div selectRoot [options]="options"><div selectTrigger class="w-72 [--input-background:#faf5ff] [--input-border-color:#c084fc] [--input-ring-color:#9333ea]"></div><div selectContent></div></div>
+<div class="grid w-full gap-4">
+  <div selectRoot [options]="options">
+    <div
+      selectTrigger
+      class="w-72 max-w-full [--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]"
+      [inputProps]="inputProps"
+      placeholder="请选择框架"
+    ></div>
+    <div
+      selectContent
+      class="[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]"
+    ></div>
+  </div>
+  <div selectRoot [options]="options" [multiple]="true" [defaultValue]="['react','vue']">
+    <div
+      selectTrigger
+      class="w-72 max-w-full [--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]"
+      [inputProps]="inputProps"
+      [valueProps]="valueProps"
+      [maxTagCount]="1"
+    ></div>
+    <div
+      selectContent
+      class="[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]"
+    ></div>
+  </div>
+</div>

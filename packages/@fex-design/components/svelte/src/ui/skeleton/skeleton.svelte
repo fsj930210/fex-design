@@ -16,8 +16,8 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import SkeletonAvatar from '@fex-design/svelte/primitive/skeleton/skeleton-avatar.svelte';
-  import SkeletonText from '@fex-design/svelte/primitive/skeleton/skeleton-text.svelte';
+  import SkeletonAvatar from "@fex-design/svelte/primitive/skeleton/skeleton-avatar.svelte";
+  import SkeletonText from "@fex-design/svelte/primitive/skeleton/skeleton-text.svelte";
   let {
     animation,
     avatar = false,

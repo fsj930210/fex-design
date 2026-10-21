@@ -25,7 +25,8 @@ function applyTheme(theme?: string) {
   root.style.colorScheme = current
 }
 
-const initialTheme = query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
+const initialTheme =
+  query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
 applyTheme(initialTheme)
 
 const exampleModules = import.meta.glob(
@@ -41,14 +42,19 @@ function findLoader(layer: string, component: string, demo: string) {
   return key ? exampleModules[key] : undefined
 }
 
-async function loadExample(layer: string, component: string, demo: string): Promise<Component | undefined> {
+async function loadExample(
+  layer: string,
+  component: string,
+  demo: string,
+): Promise<Component | undefined> {
   const cacheKey = `${layer}/${component}/${demo}`
   if (moduleCache.has(cacheKey)) return moduleCache.get(cacheKey)
   const loader = findLoader(layer, component, demo)
   if (!loader) return undefined
   const mod = await loader()
-  const comp = (mod.default ??
-    Object.values(mod).find((value) => typeof value === 'function')) as Component | undefined
+  const comp = (mod.default ?? Object.values(mod).find((value) => typeof value === 'function')) as
+    | Component
+    | undefined
   if (comp) moduleCache.set(cacheKey, comp)
   return comp
 }
@@ -120,7 +126,10 @@ function Preview() {
       data-embed={embedded ? 'true' : undefined}
     >
       <Show when={!embedded && currentInfo().component}>
-        <a class="fixed top-5 left-5 text-sm no-underline" href={`/solid/components/${currentInfo().component}`}>
+        <a
+          class="fixed top-5 left-5 text-sm no-underline"
+          href={`/solid/components/${currentInfo().component}`}
+        >
           ← 返回文档
         </a>
       </Show>

@@ -6,5 +6,15 @@ export type CalendarRowProps = JSX.HTMLAttributes<HTMLDivElement>
 export function CalendarRow(props: CalendarRowProps) {
   const [local, rest] = splitProps(props, ['class', 'children'])
   const context = useCalendarContext('CalendarRow')
-  return <div {...rest} data-slot="calendar-row" role="row" data-panel={context.state().panel} class={cn(calendarRowClassName, local.class)}>{local.children}</div>
+  return (
+    <div
+      {...rest}
+      data-slot="calendar-row"
+      role="row"
+      data-panel={context.state().panel}
+      class={cn(calendarRowClassName, local.class)}
+    >
+      {local.children}
+    </div>
+  )
 }

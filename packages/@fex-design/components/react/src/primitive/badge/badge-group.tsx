@@ -1,13 +1,10 @@
-import { splitOverflowItems } from "@fex-design/core/collection/split-overflow-items"
-import type { BadgeGroupOptions } from "@fex-design/core"
-import {
-  badgeClassName,
-  badgeGroupClassName,
-} from "@fex-design/components-styles/badge"
-import { cn } from "@fex-design/utils"
-import { Children, type ComponentProps, type ReactNode } from "react"
+import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
+import type { BadgeGroupOptions } from '@fex-design/core'
+import { badgeClassName, badgeGroupClassName } from '@fex-design/components-styles/badge'
+import { cn } from '@fex-design/utils'
+import { Children, type ComponentProps, type ReactNode } from 'react'
 
-export interface BadgeGroupProps extends ComponentProps<"div">, BadgeGroupOptions {
+export interface BadgeGroupProps extends ComponentProps<'div'>, BadgeGroupOptions {
   renderOverflow?: (count: number, items: readonly ReactNode[]) => ReactNode
 }
 

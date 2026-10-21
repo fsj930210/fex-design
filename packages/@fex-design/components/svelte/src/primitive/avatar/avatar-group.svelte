@@ -8,7 +8,12 @@
     class?: string;
     children?: Snippet;
   }
-  let { class: className, children, ref = $bindable(), ...rest }: Props = $props();
+  let {
+    class: className,
+    children,
+    ref = $bindable(),
+    ...rest
+  }: Props = $props();
 </script>
 
 <div

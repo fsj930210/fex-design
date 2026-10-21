@@ -11,8 +11,20 @@ export function DatePickerContent({ className, style, ...props }: DatePickerCont
   const popup = appearance.popoverProps
   const containerScope = use(PickerContainerContext)
   const inheritedPopover = use(PopoverContext)
-  const popover = containerScope && inheritedPopover === containerScope.parentPopover ? null : inheritedPopover
+  const popover =
+    containerScope && inheritedPopover === containerScope.parentPopover ? null : inheritedPopover
   const classes = cn(datePickerContentClassName, popup?.classNames?.root, className)
-  return popover ? <PopoverPortal><PopoverContent {...props} data-slot="date-picker-content" className={classes} style={{ ...popup?.styles?.root, ...style }} /></PopoverPortal> : <div {...props} data-slot="date-picker-content" className={classes} />
+  return popover ? (
+    <PopoverPortal>
+      <PopoverContent
+        {...props}
+        data-slot="date-picker-content"
+        className={classes}
+        style={{ ...popup?.styles?.root, ...style }}
+      />
+    </PopoverPortal>
+  ) : (
+    <div {...props} data-slot="date-picker-content" className={classes} />
+  )
 }
 export const RangePickerContent = DatePickerContent

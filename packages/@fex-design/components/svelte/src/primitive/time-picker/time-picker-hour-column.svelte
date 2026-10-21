@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { cn } from "@fex-design/utils";
   import {
     createHourOptions,
     getDisplayedHour,
@@ -13,13 +14,23 @@
     item,
     step,
     disabled = false,
+    columnProps,
     isItemDisabled,
     ...rest
-  }: Omit<ComponentProps<typeof TimePickerColumn>, 'options' | 'selectedValue' | 'onselect' | 'item'> & {
+  }: Omit<
+    ComponentProps<typeof TimePickerColumn>,
+    "options" | "selectedValue" | "onselect" | "item"
+  > & {
     class?: string | undefined;
     item?: ComponentProps<typeof TimePickerColumn>["item"];
     step?: number | undefined;
     disabled?: boolean | undefined;
+    columnProps?:
+      | Omit<
+          ComponentProps<typeof TimePickerColumn>,
+          "options" | "selectedValue" | "onselect" | "children"
+        >
+      | undefined;
     isItemDisabled?: ((value: number) => boolean) | undefined;
   } = $props();
   const context = getContext<TimePickerContext>(timePickerContextKey);
@@ -47,12 +58,13 @@
 </script>
 
 <TimePickerColumn
-    {...rest}
-  {item}
-  class={className}
+  {...rest}
+  {...columnProps}
+  item={item ?? columnProps?.item}
+  class={cn(className, columnProps?.class)}
   {options}
   selectedValue={selected}
-  {disabled}
+  disabled={disabled || columnProps?.disabled}
   onselect={(value) =>
     context.controller.selectHour(value as number, context.use12Hours())}
 />

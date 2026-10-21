@@ -4,11 +4,7 @@ import { componentApis } from './data'
 import type { Framework } from './types'
 
 export function ApiContainer(props: ParentProps) {
-  return (
-    <div class="my-8 flex flex-col xl:flex-row gap-6 w-full items-start">
-      {props.children}
-    </div>
-  )
+  return <div class="my-8 flex flex-col xl:flex-row gap-6 w-full items-start">{props.children}</div>
 }
 
 export const ApiComparison: Component<{
@@ -35,7 +31,10 @@ export const ApiComparison: Component<{
             UI (开箱即用)
           </span>
         </div>
-        <Show when={uiApi()} fallback={<div class="text-xs text-muted-foreground">暂无 UI 属性定义</div>}>
+        <Show
+          when={uiApi()}
+          fallback={<div class="text-xs text-muted-foreground">暂无 UI 属性定义</div>}
+        >
           <ApiTable value={uiApi()} framework={props.framework} />
         </Show>
       </div>
@@ -47,15 +46,16 @@ export const ApiComparison: Component<{
             <h3 id="primitive-api" class="text-base font-bold text-foreground">
               Primitive API
             </h3>
-            <p class="mt-0.5 text-xs text-secondary-foreground">
-              解构导出的底层子部件与原生插槽
-            </p>
+            <p class="mt-0.5 text-xs text-secondary-foreground">解构导出的底层子部件与原生插槽</p>
           </div>
           <span class="rounded px-2 py-0.5 text-[11px] font-semibold border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-400">
             Primitive (解构拼装)
           </span>
         </div>
-        <Show when={primitiveApi()} fallback={<div class="text-xs text-muted-foreground">暂无 Primitive 属性定义</div>}>
+        <Show
+          when={primitiveApi()}
+          fallback={<div class="text-xs text-muted-foreground">暂无 Primitive 属性定义</div>}
+        >
           <ApiTable value={primitiveApi()} framework={props.framework} />
         </Show>
       </div>

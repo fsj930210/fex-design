@@ -1,6 +1,11 @@
 import { Component } from '@angular/core'
 import { PlusIcon } from '@fex-design/angular/icons/plus'
-import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '@fex-design/angular/primitive/avatar'
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarImage,
+} from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-badge-icon-example',
   standalone: true,

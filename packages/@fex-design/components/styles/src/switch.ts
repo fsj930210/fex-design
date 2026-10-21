@@ -7,7 +7,10 @@ export const switchClassName = cva(
     'data-[state=checked]:bg-[var(--switch-track-checked-background,var(--primary))] data-[state=checked]:text-[var(--switch-checked-color,var(--primary-foreground))] data-[state=checked]:ring-[var(--switch-track-checked-border-color,var(--primary))]',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
     'disabled:cursor-not-allowed disabled:opacity-50 data-[loading]:cursor-wait',
-    'aria-invalid:ring-2 aria-invalid:ring-danger aria-invalid:focus-visible:outline-danger',
+    // Switch paints its edge with an inset ring fed by track vars, so the
+    // treatment overrides those vars instead of drawing border/ring utilities.
+    'aria-invalid=true:[--switch-track-border-color:var(--danger)] aria-invalid=true:[--switch-track-checked-border-color:var(--danger)] aria-invalid=true:ring-2 aria-invalid=true:ring-[var(--danger)] aria-invalid=true:focus-visible:outline-danger',
+    'data-[warning=true]:[--switch-track-border-color:var(--warning)] data-[warning=true]:[--switch-track-checked-border-color:var(--warning)] data-[warning=true]:ring-2 data-[warning=true]:ring-[var(--warning)] data-[warning=true]:focus-visible:outline-warning',
   ].join(' '),
   {
     variants: {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { progressLabelClassName } from "@fex-design/components-styles/progress"
-import { cn } from "@fex-design/utils"
+import { progressLabelClassName } from '@fex-design/components-styles/progress'
+import { cn } from '@fex-design/utils'
 import { useTemplateRef } from 'vue'
 
-defineOptions({ name: "ProgressLabel", inheritAttrs: false })
+defineOptions({ name: 'ProgressLabel', inheritAttrs: false })
 const element = useTemplateRef<HTMLSpanElement>('element')
 defineExpose({ element })
 </script>

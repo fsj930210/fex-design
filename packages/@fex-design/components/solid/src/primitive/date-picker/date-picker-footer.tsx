@@ -5,7 +5,6 @@ import { DatePickerToday } from './date-picker-today'
 import { DatePickerCancel } from './date-picker-cancel'
 import { DatePickerConfirm } from './date-picker-confirm'
 
-
 import { datePickerFooterClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import { Show, splitProps, type JSX } from 'solid-js'
@@ -32,7 +31,9 @@ export function DatePickerFooter(props: DatePickerFooterProps) {
   const picker = useFooterOwner()
   const appearance = usePickerAppearance()
   const actions = {
-    get canConfirm() { return picker.canConfirm },
+    get canConfirm() {
+      return picker.canConfirm
+    },
     today: picker.today,
     close: picker.close,
     clear: picker.clear,
@@ -40,12 +41,38 @@ export function DatePickerFooter(props: DatePickerFooterProps) {
     cancel: picker.cancel,
   }
   return (
-    <Show when={getPickerContentKind(local.children) !== 'hidden'}><div {...rest} style={mergeStyle(appearance().styles?.footer, local.style)} data-slot="date-picker-footer" class={cn(datePickerFooterClassName, appearance().classNames?.footer, local.class)}>
-      {getPickerContentKind(local.children) === 'default' ? <>
-        <DatePickerToday class={appearance().classNames?.today} style={appearance().styles?.today} />
-        <Show when={picker.footerView.showCancel}><DatePickerCancel class={appearance().classNames?.cancel} style={appearance().styles?.cancel} /></Show>
-        <Show when={picker.footerView.showConfirm}><DatePickerConfirm class={appearance().classNames?.confirm} style={appearance().styles?.confirm} /></Show>
-      </> : typeof local.children === 'function' ? local.children(actions) : local.children}
-    </div></Show>
+    <Show when={getPickerContentKind(local.children) !== 'hidden'}>
+      <div
+        {...rest}
+        style={mergeStyle(appearance().styles?.footer, local.style)}
+        data-slot="date-picker-footer"
+        class={cn(datePickerFooterClassName, appearance().classNames?.footer, local.class)}
+      >
+        {getPickerContentKind(local.children) === 'default' ? (
+          <>
+            <DatePickerToday
+              class={appearance().classNames?.today}
+              style={appearance().styles?.today}
+            />
+            <Show when={picker.footerView.showCancel}>
+              <DatePickerCancel
+                class={appearance().classNames?.cancel}
+                style={appearance().styles?.cancel}
+              />
+            </Show>
+            <Show when={picker.footerView.showConfirm}>
+              <DatePickerConfirm
+                class={appearance().classNames?.confirm}
+                style={appearance().styles?.confirm}
+              />
+            </Show>
+          </>
+        ) : typeof local.children === 'function' ? (
+          local.children(actions)
+        ) : (
+          local.children
+        )}
+      </div>
+    </Show>
   )
 }

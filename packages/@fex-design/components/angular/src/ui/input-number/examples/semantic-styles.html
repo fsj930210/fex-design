@@ -1,4 +1,6 @@
-<div inputNumber [defaultValue]="12" [clearable]="true" [classNames]="classNames">
-  <span inputNumberPrefix>$</span>
-  <span inputNumberSuffix>USD</span>
+<div class="grid w-full gap-3">
+  <div inputNumber [defaultValue]="demo.value" clearable [classNames]="classNames">
+    <span inputNumberPrefix>{{ demo.prefix }}</span>
+    <span inputNumberSuffix>{{ demo.suffix }}</span>
+  </div>
 </div>

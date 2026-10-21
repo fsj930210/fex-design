@@ -15,14 +15,14 @@ export default function Example() {
       </div>
       <div>
         <b>SkeletonAvatar</b>
-        <div className="mt-2 flex gap-3">
+        <div className="mt-2 flex flex-wrap gap-3">
           <SkeletonAvatar />
           <SkeletonAvatar shape="square" />
         </div>
       </div>
       <div>
         <b>SkeletonButton</b>
-        <div className="mt-2 flex gap-3">
+        <div className="mt-2 flex flex-wrap gap-3">
           <SkeletonButton />
           <SkeletonButton shape="round" />
           <SkeletonButton shape="square" />

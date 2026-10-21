@@ -1,5 +1,5 @@
-import type { CheckboxValue } from "@fex-design/core/checkbox/types"
-import { createContext, useContext } from "solid-js"
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import { createContext, useContext } from 'solid-js'
 
 export interface RootContextValue {
   controlId: string

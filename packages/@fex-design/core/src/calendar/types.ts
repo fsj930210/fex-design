@@ -33,7 +33,9 @@ export interface CalendarYearMonth {
 
 export type CalendarGranularity = 'date' | 'week' | 'month' | 'quarter' | 'year'
 export type CalendarPanel = 'date' | 'month' | 'quarter' | 'year' | 'decade'
-export interface CalendarSelectInfo { source: 'date' | 'customize' }
+export interface CalendarSelectInfo {
+  source: 'date' | 'customize'
+}
 
 export interface CalendarWeek {
   start: CalendarDate

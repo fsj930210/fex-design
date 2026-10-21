@@ -14,7 +14,50 @@ export type { TimePickerItemContext } from './time-picker-column-base'
 
 export { PopoverPortal as TimePickerPortal } from '../popover'
 
-export type { DisabledTime, TimeValue, TimePeriod, TimePickerUnit, TimePickerChangeDetails, TimePickerControllerOptions, TimePickerController, TimePickerSnapshot, TimePickerOption, TimePickerPopoverOptions } from '@fex-design/core/time-picker/types'
+export type {
+  DisabledTime,
+  TimeValue,
+  TimePeriod,
+  TimePickerUnit,
+  TimePickerChangeDetails,
+  TimePickerControllerOptions,
+  TimePickerController,
+  TimePickerSnapshot,
+  TimePickerOption,
+  TimePickerPopoverOptions,
+} from '@fex-design/core/time-picker/types'
 
-export { createHourOptions, createMinuteOptions, createSecondOptions, createPeriodOptions, resolveDisabledTime, getDisplayedHour, getDisplayedPeriod } from '@fex-design/core/time-picker/options'
+export {
+  createHourOptions,
+  createMinuteOptions,
+  createSecondOptions,
+  createPeriodOptions,
+  resolveDisabledTime,
+  getDisplayedHour,
+  getDisplayedPeriod,
+} from '@fex-design/core/time-picker/options'
 export { getNextTimeOption } from '@fex-design/core/time-picker/navigation'
+
+export type { TimePickerInputProps } from './time-picker-input-props'
+
+export { TimeRangePickerState } from './use-time-range-picker'
+export type {
+  TimeRangePart,
+  TimeRangeValue,
+  TimeRangeDraft,
+  TimeRangeChangeDetails,
+  TimeRangePickerOptions,
+  TimeRangePickerSnapshot,
+  TimeRangePickerController,
+} from '@fex-design/core/time-picker/range-types'
+export { TimeRangePickerRoot } from './time-range-picker-root'
+export { TimeRangePickerTrigger } from './time-range-picker-trigger'
+export {
+  TimeRangePickerFooter,
+  type TimeRangePickerButtonCustomization,
+} from './time-range-picker-footer'
+
+export type {
+  TimePickerScrollbarProps,
+  TimePickerColumnCustomization,
+} from './time-picker-column-base'

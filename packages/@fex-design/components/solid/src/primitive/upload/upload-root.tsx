@@ -1,11 +1,6 @@
 import { createUploadController } from '@fex-design/core/upload/create-upload-controller'
-import type {
-  UploadController,
-  UploadOptions,
-} from '@fex-design/core/upload/types'
-import {
-  uploadRootClassName,
-} from '@fex-design/components-styles/upload'
+import type { UploadController, UploadOptions } from '@fex-design/core/upload/types'
+import { uploadRootClassName } from '@fex-design/components-styles/upload'
 import { cn } from '@fex-design/utils'
 import {
   createSignal,

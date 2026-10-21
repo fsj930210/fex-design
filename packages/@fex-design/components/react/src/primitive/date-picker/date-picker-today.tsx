@@ -10,12 +10,7 @@ import { useFooterOwner } from './date-picker-footer-owner'
 
 export interface DatePickerTodayProps extends ComponentProps<'button'> {}
 
-export function DatePickerToday({
-  className,
-  children,
-  onClick,
-  ...props
-}: DatePickerTodayProps) {
+export function DatePickerToday({ className, children, onClick, ...props }: DatePickerTodayProps) {
   const context = useFooterOwner()
   const appearance = usePickerAppearance()
   return (
@@ -30,7 +25,9 @@ export function DatePickerToday({
         context.today()
       }}
     >
-      {children === undefined ? appearance.calendarProps?.locale?.today ?? calendarDefaultLocale.today : children}
+      {children === undefined
+        ? (appearance.calendarProps?.locale?.today ?? calendarDefaultLocale.today)
+        : children}
     </Button>
   )
 }

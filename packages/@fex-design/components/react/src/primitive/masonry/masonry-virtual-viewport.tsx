@@ -1,13 +1,6 @@
-import {
-  useRef,
-  type HTMLAttributes,
-  type ReactNode,
-} from 'react'
+import { useRef, type HTMLAttributes, type ReactNode } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import type {
-  MasonryColumns,
-  MasonryKey,
-} from '@fex-design/core/masonry/types'
+import type { MasonryColumns, MasonryKey } from '@fex-design/core/masonry/types'
 import { resolveMasonryColumns, resolveMasonryGap } from '@fex-design/core/masonry/layout'
 import { masonryVirtualViewportClassName } from '@fex-design/components-styles/masonry'
 import { cn } from '@fex-design/utils'

@@ -2,7 +2,7 @@
   import { listboxRootClassName } from "@fex-design/components-styles/listbox";
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
-  import PrimitiveListbox from '@fex-design/svelte/primitive/listbox/listbox.svelte';
+  import PrimitiveListbox from "@fex-design/svelte/primitive/listbox/listbox.svelte";
 
   let {
     class: className,

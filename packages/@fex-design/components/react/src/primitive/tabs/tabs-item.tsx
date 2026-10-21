@@ -1,21 +1,21 @@
-import { tabsCloseClassName, tabsItemClassName } from "@fex-design/components-styles/tabs"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactElement, ReactNode, Ref } from "react"
-import { useComposedRef } from "@fex-design/react/hooks/use-composed-ref"
-import { XIcon } from "@fex-design/react/icons/x"
-import { useTabsContext } from "./tabs-context"
-import type { TabsItemData, TabsItemDOMProps, TabsItemState, useTabs } from "./use-tabs"
+import { tabsCloseClassName, tabsItemClassName } from '@fex-design/components-styles/tabs'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactElement, ReactNode, Ref } from 'react'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
+import { XIcon } from '@fex-design/react/icons/x'
+import { useTabsContext } from './tabs-context'
+import type { TabsItemData, TabsItemDOMProps, TabsItemState, useTabs } from './use-tabs'
 
 type RenderChild<T> = (context: T) => ReactElement | null
 
-export interface TabsItemProps extends Omit<HTMLAttributes<HTMLElement>, "children">, TabsItemData {
+export interface TabsItemProps extends Omit<HTMLAttributes<HTMLElement>, 'children'>, TabsItemData {
   ref?: Ref<HTMLElement>
   children?:
     | ReactNode
     | RenderChild<{
         props: TabsItemDOMProps
         state: TabsItemState
-        closeProps: ReturnType<ReturnType<typeof useTabs>["getCloseProps"]>
+        closeProps: ReturnType<ReturnType<typeof useTabs>['getCloseProps']>
       }>
 }
 
@@ -31,7 +31,7 @@ export function TabsItem({
   ref,
   ...props
 }: TabsItemProps) {
-  const tabs = useTabsContext("TabsItem")
+  const tabs = useTabsContext('TabsItem')
   const item: TabsItemData = {
     value,
     ...(disabled === undefined ? {} : { disabled }),
@@ -56,7 +56,7 @@ export function TabsItem({
       if (!event.defaultPrevented) itemProps.onKeyDown?.(event)
     },
   }
-  if (typeof children === "function") return children({ props: mergedProps, state, closeProps })
+  if (typeof children === 'function') return children({ props: mergedProps, state, closeProps })
   return (
     <div {...mergedProps}>
       {children ?? label}

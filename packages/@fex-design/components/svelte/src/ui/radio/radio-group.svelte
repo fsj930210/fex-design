@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import PrimitiveGroup from '@fex-design/svelte/primitive/radio/radio-group.svelte';
-  import type { RadioValue } from '@fex-design/svelte/primitive/radio/context';
+  import PrimitiveGroup from "@fex-design/svelte/primitive/radio/radio-group.svelte";
+  import type { RadioValue } from "@fex-design/svelte/primitive/radio/context";
   import Radio from "./radio.svelte";
   import type { HTMLAttributes } from "svelte/elements";
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {

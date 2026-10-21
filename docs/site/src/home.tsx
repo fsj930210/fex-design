@@ -2,11 +2,7 @@
 import { frameworks } from '@fex-design/docs-shared/model'
 import type { Framework } from './types'
 
-function SpotlightCard(props: {
-  class?: string
-  spotlightColor?: string
-  children: any
-}) {
+function SpotlightCard(props: { class?: string; spotlightColor?: string; children: any }) {
   let cardRef: HTMLDivElement | undefined
   const [position, setPosition] = createSignal({ x: 0, y: 0 })
   const [opacity, setOpacity] = createSignal(0)
@@ -44,9 +40,21 @@ export function HomePage(props: {
   const frameworkBadges: Record<Framework, { name: string; desc: string; iconSrc: string }> = {
     react: { name: 'React', desc: 'React 19 Hooks & Suspense', iconSrc: '/frameworks/react.svg' },
     vue: { name: 'Vue', desc: 'Vue 3 Composition API & SFC', iconSrc: '/frameworks/vue.svg' },
-    solid: { name: 'Solid', desc: 'Fine-grained Reactive Signals', iconSrc: '/frameworks/solid.svg' },
-    svelte: { name: 'Svelte', desc: 'Svelte 5 Runes & Ultra Lean', iconSrc: '/frameworks/svelte.svg' },
-    angular: { name: 'Angular', desc: 'Modern Signals & Standalone', iconSrc: '/frameworks/angular.svg' },
+    solid: {
+      name: 'Solid',
+      desc: 'Fine-grained Reactive Signals',
+      iconSrc: '/frameworks/solid.svg',
+    },
+    svelte: {
+      name: 'Svelte',
+      desc: 'Svelte 5 Runes & Ultra Lean',
+      iconSrc: '/frameworks/svelte.svg',
+    },
+    angular: {
+      name: 'Angular',
+      desc: 'Modern Signals & Standalone',
+      iconSrc: '/frameworks/angular.svg',
+    },
   }
 
   const pillars = [
@@ -94,7 +102,16 @@ export function HomePage(props: {
       tag: 'HIGH PERFORMANCE',
       spotlight: 'rgba(245, 158, 11, 0.2)',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-amber-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
         </svg>
       ),
@@ -105,7 +122,16 @@ export function HomePage(props: {
       tag: 'DESIGN SYSTEM',
       spotlight: 'rgba(244, 63, 94, 0.2)',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-rose-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
           <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
           <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
@@ -120,7 +146,16 @@ export function HomePage(props: {
       tag: 'ZERO LOCK-IN',
       spotlight: 'rgba(16, 185, 129, 0.2)',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-emerald-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <polyline points="16 18 22 12 16 6" />
           <polyline points="8 6 2 12 8 18" />
         </svg>
@@ -132,11 +167,23 @@ export function HomePage(props: {
       tag: 'AI-NATIVE SUITE',
       spotlight: 'rgba(168, 85, 247, 0.2)',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-purple-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <rect width="18" height="12" x="3" y="6" rx="2" />
-          <path d="M9 14v1" /><path d="M15 14v1" />
-          <path d="M8 2v2" /><path d="M16 2v2" />
-          <path d="M2 10h2" /><path d="M20 10h2" />
+          <path d="M9 14v1" />
+          <path d="M15 14v1" />
+          <path d="M8 2v2" />
+          <path d="M16 2v2" />
+          <path d="M2 10h2" />
+          <path d="M20 10h2" />
         </svg>
       ),
       desc: '紧跟前沿 AI Native 交互变革，提供新一代对话流渲染、Prompt 智能填充、结构化数据流驱动等新一代交互范式，让企业应用自然跃迁至智能化时代。',
@@ -169,7 +216,8 @@ export function HomePage(props: {
         </h1>
 
         <p class="mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Fex Design 致力于为前端团队与 AI 协作打造统一基座。以“跨端组件库 + 智能脚手架 CLI + 开箱即用中后台模板 + 企业级工具链”为核心，无缝赋能 React、Vue、Solid、Svelte 与 Angular。
+          Fex Design 致力于为前端团队与 AI 协作打造统一基座。以“跨端组件库 + 智能脚手架 CLI +
+          开箱即用中后台模板 + 企业级工具链”为核心，无缝赋能 React、Vue、Solid、Svelte 与 Angular。
         </p>
 
         {/* CTA 按钮区 */}
@@ -221,8 +269,12 @@ export function HomePage(props: {
       <section class="border-t border-border bg-secondary-background py-20 px-4 transition-colors duration-300 dark:bg-[#0c0d12]">
         <div class="mx-auto max-w-5xl">
           <div class="mb-14 text-center">
-            <h2 class="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">构建现代企业级应用的四大核心支柱</h2>
-            <p class="mt-3 text-sm text-muted-foreground">超越单一组件库范畴，覆盖从工程启动、界面拼装到业务场景落地的全链路</p>
+            <h2 class="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              构建现代企业级应用的四大核心支柱
+            </h2>
+            <p class="mt-3 text-sm text-muted-foreground">
+              超越单一组件库范畴，覆盖从工程启动、界面拼装到业务场景落地的全链路
+            </p>
           </div>
 
           <div class="grid gap-6 sm:grid-cols-2">
@@ -230,14 +282,18 @@ export function HomePage(props: {
               {(pillar) => (
                 <SpotlightCard spotlightColor={pillar.spotlight}>
                   <div class="flex items-center justify-between mb-4">
-                    <span class={`rounded-md border px-2.5 py-0.5 text-xs font-bold ${pillar.accent}`}>
+                    <span
+                      class={`rounded-md border px-2.5 py-0.5 text-xs font-bold ${pillar.accent}`}
+                    >
                       {pillar.tag}
                     </span>
                     <span class="rounded-md border border-border bg-muted-background px-2.5 py-0.5 text-[11px] font-medium text-foreground">
                       {pillar.badge}
                     </span>
                   </div>
-                  <h3 class="text-xl font-extrabold text-foreground transition-colors">{pillar.title}</h3>
+                  <h3 class="text-xl font-extrabold text-foreground transition-colors">
+                    {pillar.title}
+                  </h3>
                   <p class="text-xs text-muted-foreground mb-3.5 font-mono">{pillar.sub}</p>
                   <p class="text-sm leading-relaxed text-foreground/80">{pillar.desc}</p>
                 </SpotlightCard>
@@ -251,8 +307,12 @@ export function HomePage(props: {
       <section class="border-t border-border py-20 px-4 transition-colors duration-300">
         <div class="mx-auto max-w-5xl">
           <div class="mb-14 text-center">
-            <h2 class="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">丰富生态与生产力工具</h2>
-            <p class="mt-3 text-sm text-muted-foreground">从高频通用算法到下一代智能化应用，一应俱全</p>
+            <h2 class="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              丰富生态与生产力工具
+            </h2>
+            <p class="mt-3 text-sm text-muted-foreground">
+              从高频通用算法到下一代智能化应用，一应俱全
+            </p>
           </div>
 
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

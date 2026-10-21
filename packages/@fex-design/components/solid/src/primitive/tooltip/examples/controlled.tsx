@@ -10,7 +10,7 @@ import { Button } from '@fex-design/solid/primitive/button'
 export function ControlledExample() {
   const [open, setOpen] = createSignal(false)
   return (
-    <div class="flex min-h-64 items-center justify-center gap-3">
+    <div class="flex flex-wrap min-h-64 items-center justify-center gap-3">
       <Button onClick={() => setOpen(!open())}>外部{open() ? '关闭' : '打开'}</Button>
       <TooltipRoot open={open()} onOpenChange={setOpen}>
         <TooltipTrigger>

@@ -15,10 +15,14 @@ const status = context?.status ?? ref('idle')
 // Preloading is an external browser operation; track every image request option.
 watch(
   () => [props.src, props.crossorigin, props.referrerpolicy] as const,
-  ([src, crossOrigin, referrerPolicy]) => (src ? context?.controller.load({ src,
-    ...(crossOrigin === undefined ? {} : { crossOrigin }),
-    ...(referrerPolicy === undefined ? {} : { referrerPolicy }),
-  }) : context?.controller.reset()),
+  ([src, crossOrigin, referrerPolicy]) =>
+    src
+      ? context?.controller.load({
+          src,
+          ...(crossOrigin === undefined ? {} : { crossOrigin }),
+          ...(referrerPolicy === undefined ? {} : { referrerPolicy }),
+        })
+      : context?.controller.reset(),
   { immediate: true },
 )
 </script>

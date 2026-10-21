@@ -1,25 +1,51 @@
 @if (header()) {
 <ng-container *ngTemplateOutlet="header() ?? null" />
 } @else if (title() || description() || extra()) {
-<div cardHeader [className]="classNames().header" [style]="styles().header">
+<div
+  cardHeader
+  [class]="cn(classNames().header, headerProps()?.class)"
+  [style]="mergeStyle(styles().header, headerProps()?.style)"
+>
   @if (title()) {
-  <div cardTitle [className]="classNames().title" [style]="styles().title">{{ title() }}</div>
+  <div
+    cardTitle
+    [class]="cn(classNames().title, titleProps()?.class)"
+    [style]="mergeStyle(styles().title, titleProps()?.style)"
+  >
+    {{ title() }}
+  </div>
   } @if (description()) {
-  <div cardDescription [className]="classNames().description" [style]="styles().description">
+  <div
+    cardDescription
+    [class]="cn(classNames().description, descriptionProps()?.class)"
+    [style]="mergeStyle(styles().description, descriptionProps()?.style)"
+  >
     {{ description() }}
   </div>
   } @if (extra()) {
-  <div cardExtra [className]="classNames().extra" [style]="styles().extra">
+  <div
+    cardExtra
+    [class]="cn(classNames().extra, extraProps()?.class)"
+    [style]="mergeStyle(styles().extra, extraProps()?.style)"
+  >
     <ng-container *ngTemplateOutlet="extra() ?? null" />
   </div>
   }
 </div>
 }
-<div cardContent [className]="classNames().content" [style]="styles().content">
+<div
+  cardContent
+  [class]="cn(classNames().content, contentProps()?.class)"
+  [style]="mergeStyle(styles().content, contentProps()?.style)"
+>
   <ng-content />
 </div>
 @if (footer()) {
-<div cardFooter [className]="classNames().footer" [style]="styles().footer">
+<div
+  cardFooter
+  [class]="cn(classNames().footer, footerProps()?.class)"
+  [style]="mergeStyle(styles().footer, footerProps()?.style)"
+>
   <ng-container *ngTemplateOutlet="footer() ?? null" />
 </div>
 }

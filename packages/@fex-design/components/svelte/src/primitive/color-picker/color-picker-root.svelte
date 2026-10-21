@@ -2,7 +2,7 @@
   import { createColorPickerController } from "@fex-design/core/color-picker/create-color-picker-controller";
   import type { ColorPickerOptions } from "@fex-design/core/color-picker/types";
   import { setContext, type Snippet } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { colorPickerKey, type ColorPickerContext } from "./context";
   interface Props extends ColorPickerOptions {
     children?: Snippet;

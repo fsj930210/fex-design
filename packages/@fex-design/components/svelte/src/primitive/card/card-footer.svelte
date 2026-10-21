@@ -15,6 +15,10 @@
   let { class: className, children, ...rest }: CardFooterProps = $props();
 </script>
 
-<div {...rest} data-slot="card-footer" class={cn(cardFooterClassName, className)}>
+<div
+  {...rest}
+  data-slot="card-footer"
+  class={cn(cardFooterClassName, className)}
+>
   {@render children?.()}
 </div>

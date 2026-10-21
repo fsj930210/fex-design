@@ -1,0 +1,64 @@
+---
+title: Menu
+description: 组织分层导航与操作，支持水平、垂直浮层和内嵌子菜单。
+---
+
+## 何时使用
+
+Menu 用于展示一组导航入口或分层操作。需要在表单中选择值时使用 Select；通过按钮展开操作列表时使用 Dropdown；通过右键唤起操作时使用 ContextMenu。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="通过 items 快速生成菜单，或组合部件自定义内容。">
+  <ApiComposition layer="ui">
+    ```text
+    Menu
+    ├── MenuItem
+    ├── SubMenu
+    │   ├── SubMenuTrigger
+    │   └── SubMenuContent
+    │       ├── MenuItem
+    │       └── SubMenu ...
+    ├── MenuGroup
+    │   └── MenuItem ...
+    └── MenuSeparator
+    ```
+
+    `items` 与部件组合互斥。`MenuItem` 的主体使用默认内容，`icon` 和 `suffix` 分别提供前后补充内容；数据项的 `label` 用于默认渲染。`classNames/styles` 定制自动组装的菜单部件，浮层使用数据项的 `popoverProps`。
+
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="primitive" title="Primitive API" description="组合菜单容器、选项、分组和子菜单，共享选择、展开与键盘逻辑。">
+  <ApiComposition layer="primitive">
+    ```text
+    MenuRoot
+    └── MenuContent
+        ├── MenuItem
+        ├── SubMenu
+        │   ├── SubMenuTrigger
+        │   └── SubMenuContent
+        │       ├── MenuItem
+        │       └── SubMenu ...
+        ├── MenuGroup
+        │   ├── MenuGroupLabel
+        │   └── MenuItem ...
+        └── MenuSeparator
+    ```
+
+    `SubMenu` 建立嵌套关系；触发器和内容分别接收自身的原生属性与样式。`useMenu` 可独立连接自定义 DOM。
+
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+## CSS Variables
+
+变量写在菜单容器上，用于设置颜色、交互状态与外观。常用尺寸优先通过 `size` 调整，局部内边距使用部件的原生样式覆盖。
+
+<CssVariables />

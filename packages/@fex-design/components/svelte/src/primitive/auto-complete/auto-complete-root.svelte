@@ -10,7 +10,7 @@
     FloatingSide,
   } from "@fex-design/core/floating/placement";
   import type { Snippet } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import Popover from "../popover/popover.svelte";
   import { setAutoCompleteContext } from "./context";
   interface Props {

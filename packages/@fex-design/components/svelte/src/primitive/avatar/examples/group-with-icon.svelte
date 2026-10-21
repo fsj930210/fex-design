@@ -1,6 +1,12 @@
 <script lang="ts">
   import PlusIcon from "@fex-design/svelte/icons/plus";
-  import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@fex-design/svelte/primitive/avatar'
+  import {
+    Avatar,
+    AvatarFallback,
+    AvatarGroup,
+    AvatarGroupCount,
+    AvatarImage,
+  } from "@fex-design/svelte/primitive/avatar";
 </script>
 
 <AvatarGroup

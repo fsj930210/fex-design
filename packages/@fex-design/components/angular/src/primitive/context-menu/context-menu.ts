@@ -13,7 +13,10 @@ import {
 import type { AfterViewInit, OnChanges, OnDestroy } from '@angular/core'
 import { createContextMenuController } from '@fex-design/core/overlay/context-menu/create-context-menu-controller'
 import type { ContextMenuOptions } from '@fex-design/core/overlay/context-menu/types'
-import { popoverContentClassName, popoverMenuContentClassName } from '@fex-design/components-styles/popover'
+import {
+  popoverContentClassName,
+  popoverMenuContentClassName,
+} from '@fex-design/components-styles/popover'
 import { cn } from '@fex-design/utils'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'

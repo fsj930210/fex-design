@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "@fex-design/styles": "workspace:*",
+    "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-react": "latest",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "tailwind-merge": "^3.0.0",
-    "vite": "catalog:",
-    "@floating-ui/dom": "^1.6.13"
+    "tailwind-merge": "^3.7.0",
+    "vite": "catalog:"
   },
   "devDependencies": {
     "@types/react": "latest",
@@ -26,4 +26,3 @@
     "typescript": "catalog:"
   }
 }
-

@@ -10,7 +10,7 @@ import { Button } from '@fex-design/react/primitive/button'
 export function ControlledExample() {
   const [open, setOpen] = useState(false)
   return (
-    <div className="flex min-h-64 items-center justify-center gap-3">
+    <div className="flex flex-wrap min-h-64 items-center justify-center gap-3">
       <Button onClick={() => setOpen((value) => !value)}>外部{open ? '关闭' : '打开'}</Button>
       <TooltipRoot open={open} onOpenChange={setOpen}>
         <TooltipTrigger>

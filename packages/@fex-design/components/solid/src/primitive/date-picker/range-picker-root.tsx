@@ -13,10 +13,15 @@ import { useRangePicker, type UseRangePickerOptions } from './use-range-picker'
 
 export interface RangePickerRootProps<TValue extends CalendarValue = CalendarValue>
   extends
-    ParentProps<Omit<PopoverProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children' | 'trigger'>>,
-    UseRangePickerOptions<TValue>, PickerAppearance {
+    ParentProps<
+      Omit<PopoverProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children' | 'trigger'>
+    >,
+    UseRangePickerOptions<TValue>,
+    PickerAppearance {
   popoverProps?: PickerAppearance['popoverProps'] | undefined
-  containerRender?: ((children: JSX.Element, state: ReturnType<typeof useRangePicker<TValue>>) => JSX.Element) | undefined
+  containerRender?:
+    | ((children: JSX.Element, state: ReturnType<typeof useRangePicker<TValue>>) => JSX.Element)
+    | undefined
 }
 
 export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>(
@@ -26,7 +31,13 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>(
   const [local, rest] = splitProps(props, [
     'children',
     'containerRender',
-    'popoverProps', 'inputProps', 'startInputProps', 'endInputProps', 'calendarProps', 'classNames', 'styles',
+    'popoverProps',
+    'inputProps',
+    'startInputProps',
+    'endInputProps',
+    'calendarProps',
+    'classNames',
+    'styles',
     'picker',
     'value',
     'defaultValue',
@@ -47,15 +58,37 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>(
     'onChange',
     'onOpenChange',
   ])
-  const [, options] = splitProps(local, ['children', 'containerRender', 'popoverProps', 'inputProps', 'startInputProps', 'endInputProps', 'calendarProps', 'classNames', 'styles'])
+  const [, options] = splitProps(local, [
+    'children',
+    'containerRender',
+    'popoverProps',
+    'inputProps',
+    'startInputProps',
+    'endInputProps',
+    'calendarProps',
+    'classNames',
+    'styles',
+  ])
   const rangePicker = useRangePicker<TValue>(options)
   return (
-    <PickerAppearanceContext.Provider value={() => local}><PickerContainerContext.Provider value={{ parentPopover }}><PickerOwnerContext.Provider value={rangePicker}><RangePickerContext.Provider value={rangePicker as never}>
-      {local.containerRender ? local.containerRender(local.children, rangePicker) : (
-        <Popover {...getDatePickerPopoverOptions({ ...rest, ...local.popoverProps })} open={rangePicker.open()} onOpenChange={rangePicker.setOpen}>
-          {local.children}
-        </Popover>
-      )}
-    </RangePickerContext.Provider></PickerOwnerContext.Provider></PickerContainerContext.Provider></PickerAppearanceContext.Provider>
+    <PickerAppearanceContext.Provider value={() => local}>
+      <PickerContainerContext.Provider value={{ parentPopover }}>
+        <PickerOwnerContext.Provider value={rangePicker}>
+          <RangePickerContext.Provider value={rangePicker as never}>
+            {local.containerRender ? (
+              local.containerRender(local.children, rangePicker)
+            ) : (
+              <Popover
+                {...getDatePickerPopoverOptions({ ...rest, ...local.popoverProps })}
+                open={rangePicker.open()}
+                onOpenChange={rangePicker.setOpen}
+              >
+                {local.children}
+              </Popover>
+            )}
+          </RangePickerContext.Provider>
+        </PickerOwnerContext.Provider>
+      </PickerContainerContext.Provider>
+    </PickerAppearanceContext.Provider>
   )
 }

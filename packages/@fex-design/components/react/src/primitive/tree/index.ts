@@ -17,7 +17,11 @@ export { TreeDropIndicator, type TreeDropIndicatorProps } from './tree-drop-indi
 export { useTree, useTreeController } from './use-tree'
 export { useTreeItem, type TreeItemState } from './use-tree-item'
 export { useTreeVisibleItems } from './use-tree-visible-items'
-export { useTreeDndItem, type UseTreeDndItemOptions, type UseTreeDndItemReturn } from './use-tree-dnd-item'
+export {
+  useTreeDndItem,
+  type UseTreeDndItemOptions,
+  type UseTreeDndItemReturn,
+} from './use-tree-dnd-item'
 export { TreeContext, useTreeContext, type TreeContextValue } from './tree-context'
 export type {
   TreeController,

@@ -87,6 +87,18 @@
     { "id": "animation", "title": "动画", "description": "动画模式。" },
     { "id": "content", "title": "子内容与 loading", "description": "切换骨架和真实内容。" },
     { "id": "width", "title": "宽度配置", "description": "标题和段落宽度。" },
-    { "id": "styles", "title": "结构化样式", "description": "四个语义区域。" }
+
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
+    }
   ]
 }

@@ -46,7 +46,9 @@ export function Slider(props: SliderProps) {
   const count = () => currentValues().length
   const disabledThumbs = () => (Array.isArray(props.disabled) ? props.disabled : [])
   const returnValue = (value: number[]) =>
-    value.length > 0 && (typeof props.value === 'number' || typeof props.defaultValue === 'number') ? value[0]! : value
+    value.length > 0 && (typeof props.value === 'number' || typeof props.defaultValue === 'number')
+      ? value[0]!
+      : value
   return (
     <SliderRoot
       {...props}
@@ -68,11 +70,7 @@ export function Slider(props: SliderProps) {
         {(props.included ?? true) && (
           <SliderRange class={props.classNames?.range} style={props.styles?.range} />
         )}
-        <For
-          each={
-            props.dots ? getSliderDotValues(props.min, props.max, props.step) : []
-          }
-        >
+        <For each={props.dots ? getSliderDotValues(props.min, props.max, props.step) : []}>
           {(dot) => <SliderMark value={dot} aria-hidden="true" />}
         </For>
         <For each={props.marks ?? []}>

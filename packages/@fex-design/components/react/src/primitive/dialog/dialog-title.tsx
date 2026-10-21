@@ -1,12 +1,12 @@
-import { dialogTitleClassName } from "@fex-design/components-styles/dialog"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps } from "react"
-import { useDialog } from "./use-dialog"
+import { dialogTitleClassName } from '@fex-design/components-styles/dialog'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps } from 'react'
+import { useDialog } from './use-dialog'
 
-export type DialogTitleProps = ComponentProps<"h2">
+export type DialogTitleProps = ComponentProps<'h2'>
 
 export function DialogTitle({ className, ...props }: DialogTitleProps) {
-  const { titleId } = useDialog("DialogTitle")
+  const { titleId } = useDialog('DialogTitle')
   return (
     <h2
       {...props}

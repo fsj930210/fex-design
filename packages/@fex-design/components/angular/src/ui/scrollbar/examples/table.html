@@ -1,9 +1,31 @@
-<div scrollbar class="h-64 w-full max-w-xl rounded-md border" autoHide="never" [styles]="{ barY: { top: 'var(--table-header-height)' } }">
+<div
+  scrollbar
+  class="h-64 w-full max-w-xl rounded-md border"
+  autoHide="never"
+  [styles]="{ barY: { top: 'var(--table-header-height)' } }"
+>
   <div scrollbarViewport role="region" aria-label="Orders" tabindex="0">
-    <table class="w-full min-w-[900px] table-fixed border-separate border-spacing-0 text-left text-sm">
-      <thead #header class="sticky top-0 z-10 bg-background"><tr>@for (column of columns; track column) {<th scope="col" class="border-b px-4 py-3">{{ column }}</th>}</tr></thead>
-      <tbody>@for (row of rows; track row.id) {<tr><td class="border-b px-4 py-3">{{ row.id }}</td><td class="border-b px-4 py-3">{{ row.customer }}</td><td class="border-b px-4 py-3">{{ row.address }}</td><td class="border-b px-4 py-3">{{ row.status }}</td><td class="border-b px-4 py-3">{{ row.amount }}</td></tr>}</tbody>
+    <table
+      class="w-full min-w-[900px] table-fixed border-separate border-spacing-0 text-left text-sm"
+    >
+      <thead #header class="sticky top-0 z-10 bg-background">
+        <tr>
+          @for (column of columns; track column) {
+          <th scope="col" class="border-b px-4 py-3">{{ column }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row.id) {
+        <tr>
+          <td class="border-b px-4 py-3">{{ row.id }}</td>
+          <td class="border-b px-4 py-3">{{ row.customer }}</td>
+          <td class="border-b px-4 py-3">{{ row.address }}</td>
+          <td class="border-b px-4 py-3">{{ row.status }}</td>
+          <td class="border-b px-4 py-3">{{ row.amount }}</td>
+        </tr>
+        }
+      </tbody>
     </table>
   </div>
-
 </div>

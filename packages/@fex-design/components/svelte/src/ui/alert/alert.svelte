@@ -15,12 +15,12 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import CircleCheckIcon from '@fex-design/svelte/icons/circle-check.svelte';
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
-  import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
-  import InfoIcon from '@fex-design/svelte/icons/info.svelte';
-  import TriangleAlertIcon from '@fex-design/svelte/icons/triangle-alert.svelte';
-  import PrimitiveAlert from '@fex-design/svelte/primitive/alert/alert.svelte';
+  import CircleCheckIcon from "@fex-design/svelte/icons/circle-check.svelte";
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
+  import CircleXIcon from "@fex-design/svelte/icons/circle-x.svelte";
+  import InfoIcon from "@fex-design/svelte/icons/info.svelte";
+  import TriangleAlertIcon from "@fex-design/svelte/icons/triangle-alert.svelte";
+  import PrimitiveAlert from "@fex-design/svelte/primitive/alert/alert.svelte";
 
   interface Props
     extends Omit<HTMLAttributes<HTMLDivElement>, "title">, AlertOptions {

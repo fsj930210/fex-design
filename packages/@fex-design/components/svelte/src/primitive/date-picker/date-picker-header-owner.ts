@@ -7,9 +7,7 @@ import {
   type RangePickerContextValue,
 } from './context'
 
-export function useHeaderOwner(
-  component: string,
-): PickerOwner {
+export function useHeaderOwner(component: string): PickerOwner {
   const datePicker = getContext<DatePickerContextValue | undefined>(datePickerContextKey)
   const rangePicker = getContext<RangePickerContextValue | undefined>(rangePickerContextKey)
   const owner = getContext<PickerOwner | undefined>(pickerOwnerKey) ?? datePicker ?? rangePicker

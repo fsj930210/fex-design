@@ -1,0 +1,48 @@
+<div class="grid w-full max-w-sm gap-4">
+  @if(purpleVisible()){
+  <div
+    alert
+    style="--alert-color: #7c3aed; --alert-color-background: #f5f3ff; --alert-color-border: #c4b5fd"
+  >
+    <span alertIcon aria-hidden="true" class="rounded-full bg-white/70 p-0.5"><info-icon /></span>
+    <div data-slot="alert-content" [class]="alertContentClassName">
+      <div alertTitle class="uppercase tracking-wide">Custom purple semantic parts</div>
+    </div>
+    <button
+      type="button"
+      data-slot="alert-close"
+      aria-label="Close alert"
+      [class]="alertCloseClassName"
+      (click)="purpleVisible.set(false)"
+    >
+      <x-icon />
+    </button>
+  </div>
+  }@if(pinkVisible()){
+  <div
+    alert
+    style="--alert-color: #be185d; --alert-color-background: #fdf2f8; --alert-color-border: #f9a8d4"
+  >
+    <span alertIcon aria-hidden="true" class=""><info-icon /></span>
+    <div data-slot="alert-content" [class]="alertContentClassName">
+      <div alertTitle class="">Custom pink semantic parts</div>
+    </div>
+    <div
+      alertAction
+      style="border-radius: 999px; background: rgb(255 255 255 / 0.7); padding: 2px 8px"
+    >
+      <button>Action</button>
+    </div>
+    <button
+      type="button"
+      data-slot="alert-close"
+      aria-label="Close alert"
+      [class]="alertCloseClassName"
+      (click)="pinkVisible.set(false)"
+      style="color: #831843"
+    >
+      <x-icon />
+    </button>
+  </div>
+  }
+</div>

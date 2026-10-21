@@ -1,3 +1,6 @@
+import { mergeStyle } from '@fex-design/angular/signals/merge-style'
+import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
+import type { SpinnerSize } from '@fex-design/core/spinner/types'
 import { NgTemplateOutlet } from '@angular/common'
 import type {
   SwitchClassNames,
@@ -46,6 +49,17 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   templateUrl: './switch.html',
 })
 export class Switch implements OnInit {
+  readonly checkedContentProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly uncheckedContentProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  readonly thumbProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
+  protected readonly cn = cn
+  protected readonly mergeStyle = mergeStyle
+  readonly spinnerProps = input<{
+    class?: string | undefined
+    style?: string | undefined
+    size?: SpinnerSize | undefined
+    indicator?: TemplateRef<unknown> | undefined
+  }>()
   readonly checked = input<boolean | undefined>()
   readonly defaultChecked = input(false, { transform: booleanAttribute })
   readonly disabled = input(false, { transform: booleanAttribute })
@@ -58,10 +72,10 @@ export class Switch implements OnInit {
   readonly styles = input<SwitchStyles<string>>({})
   readonly change = output<{ checked: boolean; event: MouseEvent }>()
   private readonly internalChecked = signal(false)
-  ngOnInit() { this.internalChecked.set(this.defaultChecked()) }
-  readonly currentChecked = computed(
-    () => this.checked() ?? this.internalChecked(),
-  )
+  ngOnInit() {
+    this.internalChecked.set(this.defaultChecked())
+  }
+  readonly currentChecked = computed(() => this.checked() ?? this.internalChecked())
   protected readonly hostClassName = createHostClassName(() =>
     cn(switchClassName({ size: this.size(), shape: this.shape() }), this.classNames().root),
   )

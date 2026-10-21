@@ -12,7 +12,7 @@ function Avatars() {
 
 export function DirectionExample() {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex flex-wrap items-center gap-8">
       <div dir="ltr">
         <p className="mb-2 text-xs text-muted-foreground">LTR · 中文示例</p>
         <Avatars />

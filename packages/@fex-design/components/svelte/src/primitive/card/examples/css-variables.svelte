@@ -1,5 +1,12 @@
 <script lang="ts">
-  import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@fex-design/svelte/primitive/card";
+  import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@fex-design/svelte/primitive/card";
 </script>
 
 <Card

@@ -1,13 +1,30 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { CalendarRoot } from '@fex-design/angular/primitive/calendar'
-import { getCalendarUIOptions } from '@fex-design/core/calendar'
-import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
-import { ExampleContent } from './_parts/content'
+import {
+  CalendarRoot,
+  CalendarHeader,
+  CalendarWeekHeader,
+  CalendarGrid,
+  CalendarCell,
+  CalendarCellTrigger,
+  CalendarFooter,
+} from '@fex-design/angular/primitive/calendar'
+import { getCalendarUIOptions, getCalendarUILocale } from '@fex-design/core/calendar'
 import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
-@Component({ selector: 'calendar-css-variables-example', standalone: true, imports: [CalendarRoot, ExampleContent], changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: './css-variables.html' })
-export class CssVariablesExample {
-  protected readonly date = calendarDemoDate
-
-  protected readonly rootClass = calendarUIRootClassName
-  protected readonly options = getCalendarUIOptions({ defaultViewDate: this.date })
+@Component({
+  selector: 'calendar-css-variables-example',
+  imports: [
+    CalendarRoot,
+    CalendarHeader,
+    CalendarWeekHeader,
+    CalendarGrid,
+    CalendarCell,
+    CalendarCellTrigger,
+    CalendarFooter,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './css-variables.html',
+})
+export class CalendarCssVariablesExample {
+  readonly date = calendarDemoDate
+  readonly locale = getCalendarUILocale({})
 }

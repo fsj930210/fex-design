@@ -16,8 +16,8 @@
     PopoverPortal,
     PopoverTitle,
     PopoverTrigger,
-  } from '@fex-design/svelte/primitive/popover';
-  import type { PopoverTriggerBinding } from '@fex-design/svelte/primitive/popover/trigger.types';
+  } from "@fex-design/svelte/primitive/popover";
+  import type { PopoverTriggerBinding } from "@fex-design/svelte/primitive/popover/trigger.types";
 
   interface PopoverProps
     extends

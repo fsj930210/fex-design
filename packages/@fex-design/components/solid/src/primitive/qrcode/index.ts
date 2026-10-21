@@ -25,4 +25,8 @@ export const QrCode = {
   Overlay: QrCodeOverlay,
 }
 
-export type { QrCodeErrorLevel, QrCodeModel, QrCodeModuleExcludeRect } from '@fex-design/core/qrcode'
+export type {
+  QrCodeErrorLevel,
+  QrCodeModel,
+  QrCodeModuleExcludeRect,
+} from '@fex-design/core/qrcode'

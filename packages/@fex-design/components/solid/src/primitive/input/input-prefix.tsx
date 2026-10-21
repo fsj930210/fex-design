@@ -1,6 +1,6 @@
-import { inputPrefixClassName } from "@fex-design/components-styles/input"
-import { cn } from "@fex-design/utils"
-import type { JSX, ParentProps } from "solid-js"
+import { inputPrefixClassName } from '@fex-design/components-styles/input'
+import { cn } from '@fex-design/utils'
+import type { JSX, ParentProps } from 'solid-js'
 
 export type InputPrefixProps = ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>
 

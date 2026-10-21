@@ -10,8 +10,7 @@ Pass native Viewport attributes/events through viewportProps. Native Viewport cl
 
 Use native ref on Scrollbar and viewportProps.ref for element access.
 
-Primitive parts and standalone logic remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
-
+Primitive parts and `createScrollbar` remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
 
 ## CSS Variables
 

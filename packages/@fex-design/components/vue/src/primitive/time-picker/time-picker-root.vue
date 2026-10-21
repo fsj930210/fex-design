@@ -42,7 +42,11 @@ provide(timePickerContextKey, {
 </script>
 
 <template>
-  <PopoverRoot v-bind="{ ...attrs, ...popoverProps }" :trigger="['focus', 'click']" :disabled="disabled">
+  <PopoverRoot
+    v-bind="{ ...attrs, ...popoverProps }"
+    :trigger="['focus', 'click']"
+    :disabled="disabled"
+  >
     <slot :controller="controller" :snapshot="snapshot" />
   </PopoverRoot>
 </template>

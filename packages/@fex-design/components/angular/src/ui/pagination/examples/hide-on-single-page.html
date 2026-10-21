@@ -1,0 +1,16 @@
+<div class="grid w-full gap-space-lg">
+  <div class="flex flex-wrap items-center gap-2">
+    <button button (click)="total.set(total() === 5 ? 200 : 5)">切换总数 5 / 200</button
+    ><span>总条数：{{ total() }}</span>
+  </div>
+  <nav
+    pagination
+    [total]="total()"
+    [labels]="labels"
+    [defaultPage]="8"
+    showTotal
+    showSizeChanger
+    showQuickJumper
+    hideOnSinglePage
+  ></nav>
+</div>

@@ -8,6 +8,4 @@ import { Progress } from '@fex-design/angular/ui/progress'
   imports: [Progress],
   templateUrl: './linecap.html',
 })
-export class ProgressLinecapExample {
-
-}
+export class ProgressLinecapExample {}

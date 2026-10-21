@@ -8,8 +8,6 @@
 
 ## 示例
 
-
-
 ## API
 
 CheckboxRoot 负责布局、尺寸和 Control/Label 关联。CheckboxControl 继承原生 input 属性，只增加 indeterminate。CheckboxIndicator 只承载选中和中间状态标记。CheckboxLabel 是自动关联 Control 的原生 label。CheckboxGroup 管理平级 value 数组，不处理 Table 或 Tree 的父子级联。

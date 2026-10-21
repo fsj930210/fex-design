@@ -3,16 +3,10 @@ import {
   type DrawerOptions,
   type DrawerPlacement,
   type DrawerSize,
-} from "@fex-design/core/drawer/create-drawer-controller"
-import {
-  createSignal,
-  onCleanup,
-  splitProps,
-  useContext,
-  type ParentProps,
-} from "solid-js"
-import { createCoreStoreSignal } from "@fex-design/solid/primitives/create-core-store-signal"
-import { DrawerContext } from "./drawer-context"
+} from '@fex-design/core/drawer/create-drawer-controller'
+import { createSignal, onCleanup, splitProps, useContext, type ParentProps } from 'solid-js'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
+import { DrawerContext } from './drawer-context'
 
 export interface DrawerProps extends ParentProps, DrawerOptions {
   size?: DrawerSize
@@ -28,26 +22,26 @@ export function Drawer(props: DrawerProps) {
   const parent = useContext(DrawerContext)
   const depth = (parent?.depth ?? -1) + 1
   const [local] = splitProps(props, [
-    "children",
-    "open",
-    "defaultOpen",
-    "onOpenChange",
-    "placement",
-    "mask",
-    "modal",
-    "dismiss",
-    "closeOnMaskPointer",
-    "forceMount",
-    "closeDelay",
-    "size",
-    "defaultSize",
-    "resizable",
-    "minSize",
-    "maxSize",
-    "onSizeChange",
+    'children',
+    'open',
+    'defaultOpen',
+    'onOpenChange',
+    'placement',
+    'mask',
+    'modal',
+    'dismiss',
+    'closeOnMaskPointer',
+    'forceMount',
+    'closeDelay',
+    'size',
+    'defaultSize',
+    'resizable',
+    'minSize',
+    'maxSize',
+    'onSizeChange',
   ])
   const [open, setOpen] = createSignal(local.open ?? local.defaultOpen ?? false)
-  const placement = () => local.placement ?? "right"
+  const placement = () => local.placement ?? 'right'
   const mask = () => local.mask ?? true
   const triggerElement = { current: null as HTMLButtonElement | null }
 

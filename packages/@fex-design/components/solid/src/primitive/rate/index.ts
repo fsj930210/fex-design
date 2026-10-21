@@ -1,5 +1,1 @@
-export {
-  Rate,
-  type RateItemRenderState,
-  type RateProps,
-} from "./rate"
+export { Rate, type RateItemRenderState, type RateProps } from './rate'

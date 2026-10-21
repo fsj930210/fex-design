@@ -1,0 +1,1730 @@
+{
+  "name": "MenuRoot",
+  "slug": "menu",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "组织分层导航与操作，支持水平、垂直浮层和内嵌子菜单。",
+  "nativeElement": "div",
+  "importPath": {
+    "react": "@fex-design/react/primitive/menu",
+    "vue": "@fex-design/vue/primitive/menu",
+    "solid": "@fex-design/solid/primitive/menu",
+    "svelte": "@fex-design/svelte/primitive/menu",
+    "angular": "@fex-design/angular/primitive/menu"
+  },
+  "props": [
+    {
+      "name": "layout",
+      "type": "'vertical' | 'horizontal' | 'inline'",
+      "description": "vertical 垂直排列并使用侧向浮层；horizontal 水平排列，首层浮层向下；inline 垂直内嵌展开。",
+      "default": "vertical"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "description": "是否多选。false 时替换为单个值，true 时切换选中状态；值与事件始终为数组。",
+      "default": false
+    },
+    {
+      "name": "value",
+      "type": "readonly string[]",
+      "description": "受控选中值，单选仅取数组第一个值。"
+    },
+    {
+      "name": "defaultValue",
+      "type": "readonly string[]",
+      "description": "非受控初始选中值，仅初始化时读取。"
+    },
+    {
+      "name": "openValues",
+      "type": "readonly string[]",
+      "description": "受控展开的子菜单值。"
+    },
+    {
+      "name": "defaultOpenValues",
+      "type": "readonly string[]",
+      "description": "非受控初始展开值，仅初始化时读取。"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "description": "菜单部件的统一尺寸。",
+      "default": "md"
+    },
+    {
+      "name": "dir",
+      "type": "'ltr' | 'rtl'",
+      "description": "阅读方向，同时影响键盘导航与浮层方向。",
+      "default": "ltr"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "禁用当前菜单或选项的交互。",
+      "default": false
+    },
+    {
+      "name": "inlineAccordion",
+      "type": "boolean",
+      "description": "内嵌布局中，同级子菜单是否互斥展开。",
+      "default": false
+    },
+    {
+      "name": "submenuTrigger",
+      "type": "'click' | 'hover'",
+      "description": "浮层子菜单的指针触发方式，内嵌布局使用点击。",
+      "default": "click"
+    },
+    {
+      "name": "openDelay",
+      "type": "number",
+      "description": "悬停打开延迟，单位毫秒。",
+      "default": 100
+    },
+    {
+      "name": "closeDelay",
+      "type": "number",
+      "description": "悬停关闭延迟，单位毫秒。",
+      "default": 180
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "当前部件宿主的原生类名。"
+    },
+    {
+      "name": "style",
+      "type": "FrameworkStyle",
+      "description": "当前部件宿主的原生样式。"
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkStyle": "CSSProperties",
+        "FrameworkContent": "ReactNode"
+      },
+      "events": [
+        {
+          "name": "onValueChange",
+          "description": "选中值变化时触发，始终返回数组；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "onOpenChange",
+          "description": "展开值变化时触发；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "onActivate",
+          "description": "激活叶子项时触发；调用 info.preventDefault() 可取消内置选择与关闭行为。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ]
+        }
+      ]
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkStyle": "StyleValue",
+        "FrameworkContent": "VNodeChild"
+      },
+      "props": [
+        {
+          "name": "layout",
+          "type": "'vertical' | 'horizontal' | 'inline'",
+          "description": "vertical 垂直排列并使用侧向浮层；horizontal 水平排列，首层浮层向下；inline 垂直内嵌展开。",
+          "default": "vertical"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "是否多选。false 时替换为单个值，true 时切换选中状态；值与事件始终为数组。",
+          "default": false
+        },
+        {
+          "name": "value",
+          "type": "readonly string[]",
+          "description": "受控选中值，单选仅取数组第一个值。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "readonly string[]",
+          "description": "非受控初始选中值，仅初始化时读取。"
+        },
+        {
+          "name": "openValues",
+          "type": "readonly string[]",
+          "description": "受控展开的子菜单值。"
+        },
+        {
+          "name": "defaultOpenValues",
+          "type": "readonly string[]",
+          "description": "非受控初始展开值，仅初始化时读取。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "菜单部件的统一尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "dir",
+          "type": "'ltr' | 'rtl'",
+          "description": "阅读方向，同时影响键盘导航与浮层方向。",
+          "default": "ltr"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前菜单或选项的交互。",
+          "default": false
+        },
+        {
+          "name": "inlineAccordion",
+          "type": "boolean",
+          "description": "内嵌布局中，同级子菜单是否互斥展开。",
+          "default": false
+        },
+        {
+          "name": "submenuTrigger",
+          "type": "'click' | 'hover'",
+          "description": "浮层子菜单的指针触发方式，内嵌布局使用点击。",
+          "default": "click"
+        },
+        {
+          "name": "openDelay",
+          "type": "number",
+          "description": "悬停打开延迟，单位毫秒。",
+          "default": 100
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "description": "悬停关闭延迟，单位毫秒。",
+          "default": 180
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "description": "选中值变化时触发，始终返回数组；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "openChange",
+          "description": "展开值变化时触发；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "activate",
+          "description": "激活叶子项时触发；调用 info.preventDefault() 可取消内置选择与关闭行为。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ]
+        }
+      ]
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkStyle": "JSX.CSSProperties",
+        "FrameworkContent": "JSX.Element"
+      },
+      "props": [
+        {
+          "name": "layout",
+          "type": "'vertical' | 'horizontal' | 'inline'",
+          "description": "vertical 垂直排列并使用侧向浮层；horizontal 水平排列，首层浮层向下；inline 垂直内嵌展开。",
+          "default": "vertical"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "是否多选。false 时替换为单个值，true 时切换选中状态；值与事件始终为数组。",
+          "default": false
+        },
+        {
+          "name": "value",
+          "type": "readonly string[]",
+          "description": "受控选中值，单选仅取数组第一个值。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "readonly string[]",
+          "description": "非受控初始选中值，仅初始化时读取。"
+        },
+        {
+          "name": "openValues",
+          "type": "readonly string[]",
+          "description": "受控展开的子菜单值。"
+        },
+        {
+          "name": "defaultOpenValues",
+          "type": "readonly string[]",
+          "description": "非受控初始展开值，仅初始化时读取。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "菜单部件的统一尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "dir",
+          "type": "'ltr' | 'rtl'",
+          "description": "阅读方向，同时影响键盘导航与浮层方向。",
+          "default": "ltr"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前菜单或选项的交互。",
+          "default": false
+        },
+        {
+          "name": "inlineAccordion",
+          "type": "boolean",
+          "description": "内嵌布局中，同级子菜单是否互斥展开。",
+          "default": false
+        },
+        {
+          "name": "submenuTrigger",
+          "type": "'click' | 'hover'",
+          "description": "浮层子菜单的指针触发方式，内嵌布局使用点击。",
+          "default": "click"
+        },
+        {
+          "name": "openDelay",
+          "type": "number",
+          "description": "悬停打开延迟，单位毫秒。",
+          "default": 100
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "description": "悬停关闭延迟，单位毫秒。",
+          "default": 180
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChange",
+          "description": "选中值变化时触发，始终返回数组；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "onOpenChange",
+          "description": "展开值变化时触发；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "onActivate",
+          "description": "激活叶子项时触发；调用 info.preventDefault() 可取消内置选择与关闭行为。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ]
+        }
+      ]
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkStyle": "string",
+        "FrameworkContent": "string | number | Snippet"
+      },
+      "props": [
+        {
+          "name": "layout",
+          "type": "'vertical' | 'horizontal' | 'inline'",
+          "description": "vertical 垂直排列并使用侧向浮层；horizontal 水平排列，首层浮层向下；inline 垂直内嵌展开。",
+          "default": "vertical"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "是否多选。false 时替换为单个值，true 时切换选中状态；值与事件始终为数组。",
+          "default": false
+        },
+        {
+          "name": "value",
+          "type": "readonly string[]",
+          "description": "受控选中值，单选仅取数组第一个值。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "readonly string[]",
+          "description": "非受控初始选中值，仅初始化时读取。"
+        },
+        {
+          "name": "openValues",
+          "type": "readonly string[]",
+          "description": "受控展开的子菜单值。"
+        },
+        {
+          "name": "defaultOpenValues",
+          "type": "readonly string[]",
+          "description": "非受控初始展开值，仅初始化时读取。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "菜单部件的统一尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "dir",
+          "type": "'ltr' | 'rtl'",
+          "description": "阅读方向，同时影响键盘导航与浮层方向。",
+          "default": "ltr"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前菜单或选项的交互。",
+          "default": false
+        },
+        {
+          "name": "inlineAccordion",
+          "type": "boolean",
+          "description": "内嵌布局中，同级子菜单是否互斥展开。",
+          "default": false
+        },
+        {
+          "name": "submenuTrigger",
+          "type": "'click' | 'hover'",
+          "description": "浮层子菜单的指针触发方式，内嵌布局使用点击。",
+          "default": "click"
+        },
+        {
+          "name": "openDelay",
+          "type": "number",
+          "description": "悬停打开延迟，单位毫秒。",
+          "default": 100
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "description": "悬停关闭延迟，单位毫秒。",
+          "default": 180
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChange",
+          "description": "选中值变化时触发，始终返回数组；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "onOpenChange",
+          "description": "展开值变化时触发；配置同步不触发。",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
+        },
+        {
+          "name": "onActivate",
+          "description": "激活叶子项时触发；调用 info.preventDefault() 可取消内置选择与关闭行为。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ]
+        }
+      ]
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkStyle": "string | Record<string, string | number>",
+        "FrameworkContent": "string | number | TemplateRef<unknown>"
+      },
+      "props": [
+        {
+          "name": "layout",
+          "type": "'vertical' | 'horizontal' | 'inline'",
+          "description": "vertical 垂直排列并使用侧向浮层；horizontal 水平排列，首层浮层向下；inline 垂直内嵌展开。",
+          "default": "vertical"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "description": "是否多选。false 时替换为单个值，true 时切换选中状态；值与事件始终为数组。",
+          "default": false
+        },
+        {
+          "name": "value",
+          "type": "readonly string[]",
+          "description": "受控选中值，单选仅取数组第一个值。"
+        },
+        {
+          "name": "defaultValue",
+          "type": "readonly string[]",
+          "description": "非受控初始选中值，仅初始化时读取。"
+        },
+        {
+          "name": "openValues",
+          "type": "readonly string[]",
+          "description": "受控展开的子菜单值。"
+        },
+        {
+          "name": "defaultOpenValues",
+          "type": "readonly string[]",
+          "description": "非受控初始展开值，仅初始化时读取。"
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "description": "菜单部件的统一尺寸。",
+          "default": "md"
+        },
+        {
+          "name": "dir",
+          "type": "'ltr' | 'rtl'",
+          "description": "阅读方向，同时影响键盘导航与浮层方向。",
+          "default": "ltr"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前菜单或选项的交互。",
+          "default": false
+        },
+        {
+          "name": "inlineAccordion",
+          "type": "boolean",
+          "description": "内嵌布局中，同级子菜单是否互斥展开。",
+          "default": false
+        },
+        {
+          "name": "submenuTrigger",
+          "type": "'click' | 'hover'",
+          "description": "浮层子菜单的指针触发方式，内嵌布局使用点击。",
+          "default": "click"
+        },
+        {
+          "name": "openDelay",
+          "type": "number",
+          "description": "悬停打开延迟，单位毫秒。",
+          "default": 100
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "description": "悬停关闭延迟，单位毫秒。",
+          "default": 180
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            }
+          ],
+          "description": "选中值变化时触发，始终返回数组；配置同步不触发。"
+        },
+        {
+          "name": "openValuesChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            }
+          ],
+          "description": "展开值变化时返回字符串数组。"
+        },
+        {
+          "name": "change",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "{ value: string[]; info: MenuChangeInfo }"
+            }
+          ],
+          "description": "选中值变化详情，包含选中数组、触发原因与原始事件。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "{ value: string[]; info: MenuChangeInfo }"
+            }
+          ],
+          "description": "展开值变化时触发；配置同步不触发。"
+        },
+        {
+          "name": "activate",
+          "description": "激活叶子项时触发；调用 info.preventDefault() 可取消内置选择与关闭行为。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "MenuItem",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "当前菜单内唯一的选项或子菜单值。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前菜单或选项的交互。",
+          "default": false
+        },
+        {
+          "name": "textValue",
+          "type": "string",
+          "description": "字符键定位使用的文本，适合富内容选项。"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "可选择的菜单项，默认内容作为主体。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SubMenu",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "当前菜单内唯一的选项或子菜单值。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "MenuPopoverProps",
+          "description": "浮层的定位、碰撞、容器与挂载配置。支持 placement、side、align、sideOffset、alignOffset、strategy、avoidCollisions、collisionBoundary、collisionPadding、matchReferenceWidth、hideWhenDetached、zIndex、getPopupContainer、lazyMount、destroyOnHidden；展开状态和触发方式由 Menu 管理，内嵌布局不使用浮层配置。 classNames/styles 支持 root（浮层面板）和 content（内容区）；原生 SubMenuContent 的 class/style 后合并。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "关联触发器与嵌套内容的子菜单作用域。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "MenuPopoverProps",
+              "description": "浮层的定位、碰撞、容器与挂载配置。支持 placement、side、align、sideOffset、alignOffset、strategy、avoidCollisions、collisionBoundary、collisionPadding、matchReferenceWidth、hideWhenDetached、zIndex、getPopupContainer、lazyMount、destroyOnHidden；展开状态和触发方式由 Menu 管理，内嵌布局不使用浮层配置。 classNames/styles 支持 root（浮层面板）和 content（内容区）；原生 SubMenuContent 的 class/style 后合并。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "MenuPopoverProps",
+              "description": "浮层的定位、碰撞、容器与挂载配置。支持 placement、side、align、sideOffset、alignOffset、strategy、avoidCollisions、collisionBoundary、collisionPadding、matchReferenceWidth、hideWhenDetached、zIndex、getPopupContainer、lazyMount、destroyOnHidden；展开状态和触发方式由 Menu 管理，内嵌布局不使用浮层配置。 classNames/styles 支持 root（浮层面板）和 content（内容区）；原生 SubMenuContent 的 class/style 后合并。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "MenuPopoverProps",
+              "description": "浮层的定位、碰撞、容器与挂载配置。支持 placement、side、align、sideOffset、alignOffset、strategy、avoidCollisions、collisionBoundary、collisionPadding、matchReferenceWidth、hideWhenDetached、zIndex、getPopupContainer、lazyMount、destroyOnHidden；展开状态和触发方式由 Menu 管理，内嵌布局不使用浮层配置。 classNames/styles 支持 root（浮层面板）和 content（内容区）；原生 SubMenuContent 的 class/style 后合并。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "当前菜单内唯一的选项或子菜单值。"
+            },
+            {
+              "name": "popoverProps",
+              "type": "MenuPopoverProps",
+              "description": "浮层的定位、碰撞、容器与挂载配置。支持 placement、side、align、sideOffset、alignOffset、strategy、avoidCollisions、collisionBoundary、collisionPadding、matchReferenceWidth、hideWhenDetached、zIndex、getPopupContainer、lazyMount、destroyOnHidden；展开状态和触发方式由 Menu 管理，内嵌布局不使用浮层配置。 classNames/styles 支持 root（浮层面板）和 content（内容区）；原生 SubMenuContent 的 class/style 后合并。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SubMenuTrigger",
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "description": "禁用当前菜单或选项的交互。",
+          "default": false
+        },
+        {
+          "name": "textValue",
+          "type": "string",
+          "description": "字符键定位使用的文本，适合富内容选项。"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "打开或关闭子菜单的触发器。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "description": "禁用当前菜单或选项的交互。",
+              "default": false
+            },
+            {
+              "name": "textValue",
+              "type": "string",
+              "description": "字符键定位使用的文本，适合富内容选项。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SubMenuContent",
+      "props": [
+        {
+          "name": "container",
+          "type": "HTMLElement | null",
+          "description": "浮层挂载容器，优先于 popoverProps.getPopupContainer；内嵌布局保留原位置。"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "frameworks": {
+        "angular": {
+          "props": [
+            {
+              "name": "content",
+              "type": "TemplateRef<unknown>",
+              "description": "子菜单内容模板，必填；通过模板实例实现懒挂载与关闭销毁。"
+            },
+            {
+              "name": "container",
+              "type": "HTMLElement | null",
+              "description": "浮层挂载容器，优先于 popoverProps.getPopupContainer；内嵌布局保留原位置。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "string | Record<string, string | number>",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "container",
+              "type": "HTMLElement | null",
+              "description": "浮层挂载容器，优先于 popoverProps.getPopupContainer；内嵌布局保留原位置。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "container",
+              "type": "HTMLElement | null",
+              "description": "浮层挂载容器，优先于 popoverProps.getPopupContainer；内嵌布局保留原位置。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "container",
+              "type": "HTMLElement | null",
+              "description": "浮层挂载容器，优先于 popoverProps.getPopupContainer；内嵌布局保留原位置。"
+            },
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      },
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "根据 layout 使用内嵌或浮层布局的子菜单内容。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": []
+    },
+    {
+      "name": "MenuGroup",
+      "props": [
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "相关菜单项的分组。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "MenuSeparator",
+      "props": [
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "菜单项之间的分隔线。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "MenuContent",
+      "props": [
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "菜单选项容器。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "MenuGroupLabel",
+      "props": [
+        {
+          "name": "className",
+          "type": "string",
+          "description": "当前部件宿主的原生类名。"
+        },
+        {
+          "name": "style",
+          "type": "FrameworkStyle",
+          "description": "当前部件宿主的原生样式。"
+        }
+      ],
+      "events": [],
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "description": "菜单分组标题。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "demos": [],
+      "frameworks": {
+        "react": {},
+        "vue": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "solid": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "svelte": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        },
+        "angular": {
+          "props": [
+            {
+              "name": "class",
+              "type": "string",
+              "description": "当前部件宿主的原生类名。"
+            },
+            {
+              "name": "style",
+              "type": "FrameworkStyle",
+              "description": "当前部件宿主的原生样式。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "MenuPopoverProps",
+      "slug": "menu",
+      "layer": "primitive",
+      "status": "draft",
+      "importPath": {
+        "react": "@fex-design/react/primitive/menu",
+        "vue": "@fex-design/vue/primitive/menu",
+        "solid": "@fex-design/solid/primitive/menu",
+        "svelte": "@fex-design/svelte/primitive/menu",
+        "angular": "@fex-design/angular/primitive/menu"
+      },
+      "description": "SubMenu 组合浮层的展示配置，两层支持相同的样式能力；展开和触发仍由 Menu 管理。",
+      "props": [
+        {
+          "name": "classNames",
+          "type": "Partial<Record<'root' | 'content', string>>",
+          "description": "root 设置外层面板类名，content 设置内部内容区类名。"
+        },
+        {
+          "name": "styles",
+          "type": "Partial<Record<'root' | 'content', FrameworkStyle>>",
+          "description": "对应节点的框架原生样式；不传时保留 Popover 默认外观。"
+        }
+      ],
+      "events": [],
+      "demos": []
+    }
+  ],
+  "events": [
+    {
+      "name": "valueChange",
+      "description": "选中值变化时触发，始终返回数组；配置同步不触发。",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string[]"
+        },
+        {
+          "name": "info",
+          "type": "MenuChangeInfo"
+        }
+      ]
+    },
+    {
+      "name": "openChange",
+      "description": "展开值变化时触发；配置同步不触发。",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string[]"
+        },
+        {
+          "name": "info",
+          "type": "MenuChangeInfo"
+        }
+      ]
+    },
+    {
+      "name": "activate",
+      "description": "激活叶子项时触发；调用 info.preventDefault() 可取消内置选择与关闭行为。",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "MenuActivateInfo"
+        }
+      ]
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基本用法",
+      "description": "三个菜单项，点击后观察选中值；不混入子菜单和布局对比。"
+    },
+    {
+      "id": "vertical",
+      "title": "纵向菜单",
+      "description": "垂直排列，打开侧向浮层并继续打开嵌套子菜单。"
+    },
+    {
+      "id": "horizontal",
+      "title": "横向菜单",
+      "description": "水平排列，首层子菜单向下展开，嵌套子菜单侧向展开。"
+    },
+    {
+      "id": "inline",
+      "title": "内嵌菜单",
+      "description": "垂直排列，子菜单在文档流内逐级展开。"
+    },
+    {
+      "id": "state",
+      "title": "受控与非受控",
+      "description": "外部按钮设置受控选择与展开，对照仅传默认值的非受控菜单。"
+    },
+    {
+      "id": "multiple",
+      "title": "单选与多选",
+      "description": "外部切换 multiple；单选替换，多选切换，值始终为数组。"
+    },
+    {
+      "id": "custom-item",
+      "title": "自定义渲染",
+      "description": "在完整菜单中自定义个人资料项：链接宿主、头像与双行内容，保留选择和键盘交互。"
+    },
+    {
+      "id": "group",
+      "title": "????",
+      "description": "?? MenuGroup ? MenuGroupLabel ????????"
+    },
+    {
+      "id": "indicator",
+      "title": "自定义 indicator",
+      "description": "在同一菜单中对比默认箭头与自定义指示器，点击展开子菜单。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "整体定制菜单容器、选项、触发器、分组、分隔线和子菜单浮层，对比默认外观。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "切换完整菜单的主题，观察背景、文字、hover、选中、禁用、圆角与尺寸。"
+    },
+    {
+      "id": "direction",
+      "title": "LTR / RTL",
+      "description": "使用同一菜单对比文字、缩进、箭头和侧向浮层方向。"
+    },
+    {
+      "id": "popover-props",
+      "title": "子菜单浮层",
+      "description": "设置偏移、碰撞、容器与挂载策略，并展示自定义浮层头部。"
+    },
+    {
+      "id": "use-menu",
+      "title": "useMenu",
+      "description": "使用 useMenu 和手写 DOM 实现自己的 Menu，展示选择、子菜单、禁用与键盘导航。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--menu-background",
+      "description": "菜单容器的背景色。"
+    },
+    {
+      "name": "--menu-color",
+      "description": "菜单的默认文字颜色。"
+    },
+    {
+      "name": "--menu-item-background / --menu-item-color",
+      "description": "选项的默认背景与文字颜色。"
+    },
+    {
+      "name": "--menu-item-hover-background / --menu-item-hover-color",
+      "description": "选项悬停时的背景与文字颜色。"
+    },
+    {
+      "name": "--menu-item-selected-background / --menu-item-selected-color",
+      "description": "选中项的背景与文字颜色。"
+    },
+    {
+      "name": "--menu-item-disabled-color",
+      "description": "禁用项的文字颜色。"
+    },
+    {
+      "name": "--menu-item-height",
+      "description": "选项高度，默认值由 size 提供。"
+    },
+    {
+      "name": "--menu-item-radius",
+      "description": "选项圆角。"
+    },
+    {
+      "name": "--menu-indent",
+      "description": "内嵌子菜单逐级缩进，随父菜单继承。"
+    }
+  ]
+}

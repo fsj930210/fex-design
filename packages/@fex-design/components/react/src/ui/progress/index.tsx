@@ -1,7 +1,20 @@
 import { progressTopHeaderClassName } from '@fex-design/components-styles/progress'
-import { getProgressRanges, getLinearProgressBackground, normalizeProgressValue, resolveProgressStatus } from '@fex-design/core/progress/progress'
+import {
+  getProgressRanges,
+  getLinearProgressBackground,
+  normalizeProgressValue,
+  resolveProgressStatus,
+} from '@fex-design/core/progress/progress'
 import type { ProgressStatus } from '@fex-design/core/progress/types'
-import { Progress as PrimitiveProgress, ProgressCircle, ProgressCircleRange, ProgressCircleTrack, ProgressLabel, ProgressRange, ProgressTrack } from '@fex-design/react/primitive/progress'
+import {
+  Progress as PrimitiveProgress,
+  ProgressCircle,
+  ProgressCircleRange,
+  ProgressCircleTrack,
+  ProgressLabel,
+  ProgressRange,
+  ProgressTrack,
+} from '@fex-design/react/primitive/progress'
 import { cn } from '@fex-design/utils'
 import { useId } from 'react'
 import { ProgressInfo } from './progress-info'
@@ -40,7 +53,10 @@ export function Progress({
   ...props
 }: ProgressProps) {
   const gradientId = useId().replace(/:/g, '')
-  const rangeLayout = ranges !== undefined && variant === 'line' && !(steps && steps > 0) ? getProgressRanges(ranges, min, max) : null
+  const rangeLayout =
+    ranges !== undefined && variant === 'line' && !(steps && steps > 0)
+      ? getProgressRanges(ranges, min, max)
+      : null
   const effectiveValue = rangeLayout?.value ?? value
   const normalized = normalizeProgressValue(effectiveValue, min, max)
   const effectiveStatus: ProgressStatus = success
@@ -77,10 +93,30 @@ export function Progress({
             : 4)
 
   if (steps && steps > 0) {
-    return <ProgressSteps {...props} ref={ref} value={effectiveValue} min={min} max={max} variant={variant}
-      status={effectiveStatus} steps={steps} numSize={numSize} numThickness={numThickness} gap={gap}
-      color={color} trackColor={trackColor} linecap={linecap} shouldShowInfo={shouldShowInfo} format={format}
-      classNames={classNames} styles={styles} className={className} style={style} />
+    return (
+      <ProgressSteps
+        {...props}
+        ref={ref}
+        value={effectiveValue}
+        min={min}
+        max={max}
+        variant={variant}
+        status={effectiveStatus}
+        steps={steps}
+        numSize={numSize}
+        numThickness={numThickness}
+        gap={gap}
+        color={color}
+        trackColor={trackColor}
+        linecap={linecap}
+        shouldShowInfo={shouldShowInfo}
+        format={format}
+        classNames={classNames}
+        styles={styles}
+        className={className}
+        style={style}
+      />
+    )
   }
 
   // 3. Standard Circle / Dashboard
@@ -150,7 +186,12 @@ export function Progress({
             )}
             style={styles?.info}
           >
-            <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+            <ProgressInfo
+              normalized={normalized}
+              status={effectiveStatus}
+              variant={variant}
+              format={format}
+            />
           </div>
         )}
       </PrimitiveProgress>
@@ -176,7 +217,12 @@ export function Progress({
           {label ? <ProgressLabel>{label}</ProgressLabel> : <span />}
           {shouldShowInfo && infoPlacement === 'top' && (
             <span className={cn('text-muted-foreground', classNames?.info)} style={styles?.info}>
-              <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+              <ProgressInfo
+                normalized={normalized}
+                status={effectiveStatus}
+                variant={variant}
+                format={format}
+              />
             </span>
           )}
         </div>
@@ -190,16 +236,30 @@ export function Progress({
             ...styles?.track,
           }}
         >
-          {rangeLayout ? rangeLayout.ranges.map((range) => (
-            <ProgressRange key={range.index} value={range.value} offset={range.offset}
+          {rangeLayout ? (
+            rangeLayout.ranges.map((range) => (
+              <ProgressRange
+                key={range.index}
+                value={range.value}
+                offset={range.offset}
+                className={classNames?.range}
+                style={{
+                  borderRadius: 0,
+                  background: range.color ?? 'var(--primary)',
+                  ...styles?.range,
+                }}
+              />
+            ))
+          ) : (
+            <ProgressRange
               className={classNames?.range}
-              style={{ borderRadius: 0, background: range.color ?? 'var(--primary)', ...styles?.range }} />
-          )) : (
-            <ProgressRange className={classNames?.range}
               style={{
-                ...(getLinearProgressBackground(color) ? { background: getLinearProgressBackground(color) } : {}),
+                ...(getLinearProgressBackground(color)
+                  ? { background: getLinearProgressBackground(color) }
+                  : {}),
                 ...styles?.range,
-              }} />
+              }}
+            />
           )}
         </ProgressTrack>
         {shouldShowInfo && infoPlacement === 'outside' && (
@@ -207,7 +267,12 @@ export function Progress({
             className={cn('ms-2 shrink-0 text-sm font-medium', classNames?.info)}
             style={styles?.info}
           >
-            <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+            <ProgressInfo
+              normalized={normalized}
+              status={effectiveStatus}
+              variant={variant}
+              format={format}
+            />
           </span>
         )}
         {shouldShowInfo && infoPlacement === 'inside' && (
@@ -218,7 +283,12 @@ export function Progress({
             )}
             style={styles?.info}
           >
-            <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+            <ProgressInfo
+              normalized={normalized}
+              status={effectiveStatus}
+              variant={variant}
+              format={format}
+            />
           </span>
         )}
       </div>
@@ -226,7 +296,12 @@ export function Progress({
         <div className="mt-1.5 flex w-full items-center justify-between text-sm">
           {label ? <ProgressLabel className={classNames?.label}>{label}</ProgressLabel> : <span />}
           <span className={cn('font-medium', classNames?.info)} style={styles?.info}>
-            <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+            <ProgressInfo
+              normalized={normalized}
+              status={effectiveStatus}
+              variant={variant}
+              format={format}
+            />
           </span>
         </div>
       )}
@@ -235,7 +310,8 @@ export function Progress({
 }
 
 export type {
-  ProgressRangeItem, ProgressColor,
+  ProgressRangeItem,
+  ProgressColor,
   ProgressGapPlacement,
   ProgressInfoPlacement,
   ProgressLinecap,

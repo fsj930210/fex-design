@@ -8,10 +8,7 @@ classNames/styles 的部件键为 viewport、barX、barY、trackX、trackY、thu
 
 需要扩展 Viewport 时，投影原生 div[scrollbarViewport]，直接绑定原生属性、事件、引用和 overflow；未提供时自动创建。组件引用暴露 element、viewportElement 和 controller。
 
-
-
-入口仍保留 Primitive 部件和独立逻辑导出，支持自定义组合。单独使用 Bar 时仍须显式提供 Track/Thumb。
-
+入口仍保留 Primitive 部件和 `createScrollbar` 导出，支持自定义组合。单独使用 Bar 时仍须显式提供 Track/Thumb。
 
 ## CSS 变量
 

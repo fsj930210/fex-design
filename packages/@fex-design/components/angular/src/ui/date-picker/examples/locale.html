@@ -1,12 +1,23 @@
 <div class="flex w-full min-w-0 flex-col gap-4">
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">中文</p>
-<div datePicker ></div>
-<div rangePicker ></div>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2" lang="en">
-<p class="text-sm font-medium">English · Monday first</p>
-<div datePicker [calendarProps]="{ locale: english }" [weekStartsOn]="1" [inputProps]="{ placeholder: 'Select date', 'aria-label': 'Select date' }"></div>
-<div rangePicker [calendarProps]="{ locale: english }" [weekStartsOn]="1" [startInputProps]="{ placeholder: 'Start date', 'aria-label': 'Start date' }" [endInputProps]="{ placeholder: 'End date', 'aria-label': 'End date' }"></div>
-</section>
+  <section class="flex w-full min-w-0 flex-col gap-2">
+    <p class="text-sm font-medium">中文</p>
+    <div datePicker></div>
+    <div rangePicker></div>
+  </section>
+  <section class="flex w-full min-w-0 flex-col gap-2" lang="en">
+    <p class="text-sm font-medium">English · Monday first</p>
+    <div
+      datePicker
+      [calendarProps]="{ locale: english }"
+      [weekStartsOn]="1"
+      [inputProps]="{ placeholder: 'Select date', 'aria-label': 'Select date' }"
+    ></div>
+    <div
+      rangePicker
+      [calendarProps]="{ locale: english }"
+      [weekStartsOn]="1"
+      [startInputProps]="{ placeholder: 'Start date', 'aria-label': 'Start date' }"
+      [endInputProps]="{ placeholder: 'End date', 'aria-label': 'End date' }"
+    ></div>
+  </section>
 </div>

@@ -2,7 +2,7 @@ import { BadgeDot } from '@fex-design/react/primitive/badge'
 
 export function Dot() {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-6">
       <span className="relative inline-flex">
         📣
         <BadgeDot

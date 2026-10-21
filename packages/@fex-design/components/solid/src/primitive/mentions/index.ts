@@ -9,8 +9,4 @@ export { MentionsList } from './mentions-list'
 export { MentionsItem, type MentionsItemProps } from './mentions-item'
 export { MentionsPrefixCase, type MentionsPrefixCaseProps } from './mentions-prefix-case'
 export { useMentions } from './use-mentions'
-export {
-  MentionsContext,
-  useMentionsContext,
-  type MentionsContextValue,
-} from './mentions-context'
+export { MentionsContext, useMentionsContext, type MentionsContextValue } from './mentions-context'

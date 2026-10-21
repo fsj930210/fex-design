@@ -8,10 +8,7 @@ Use classNames/styles with viewport, barX, barY, trackX, trackY, thumbX, thumbY 
 
 Project a native div[scrollbarViewport] to customize Viewport attributes, events, overflow or element references. Without one, Scrollbar creates the Viewport. The component reference exposes element, viewportElement and controller.
 
-
-
-Primitive parts and standalone logic remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
-
+Primitive parts and `createScrollbar` remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
 
 ## CSS Variables
 

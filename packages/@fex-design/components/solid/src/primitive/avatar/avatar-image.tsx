@@ -1,11 +1,6 @@
 import { avatarImageClassName } from '@fex-design/components-styles/avatar'
 import { cn } from '@fex-design/utils'
-import {
-  createEffect,
-  Show,
-  splitProps,
-  type JSX,
-} from 'solid-js'
+import { createEffect, Show, splitProps, type JSX } from 'solid-js'
 import { useAvatarContext } from './avatar-context'
 
 export function AvatarImage(props: JSX.ImgHTMLAttributes<HTMLImageElement>) {

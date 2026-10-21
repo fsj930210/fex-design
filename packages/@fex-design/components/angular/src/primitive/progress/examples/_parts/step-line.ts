@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core'
-import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-design/angular/primitive/progress'
+import {
+  Progress,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValue,
+} from '@fex-design/angular/primitive/progress'
 import { CheckIcon } from '@fex-design/angular/icons/check'
 
 @Component({

@@ -1,0 +1,39 @@
+<div class="grid w-full gap-space-lg">
+  <div class="flex flex-wrap gap-2">
+    <button button (click)="setPage()">设为第 5 页</button
+    ><button button (click)="setPageSize()">每页 20 条</button>
+    <button button (click)="total.set(35)">总数改为 35 条</button
+    ><button button (click)="reset()">重置</button>
+  </div>
+  <p class="text-sm text-muted-foreground">
+    外部值：第 {{ value().page }} 页，每页 {{ value().pageSize }} 条，总数 {{ total() }} 条
+  </p>
+  <p aria-live="polite" class="text-sm text-muted-foreground">{{ lastChange() }}</p>
+  <nav
+    paginationRoot
+    [total]="total()"
+    [labels]="labels"
+    [page]="value().page"
+    [pageSize]="value().pageSize"
+    (change)="change($event)"
+  >
+    <ng-template #content let-view0>
+      <span data-slot="pagination-total" [class]="totalClass"
+        >{{ view0.labels.total(view0.total) }}</span
+      >
+      <div paginationContent>
+        <button paginationNavigationButton direction="prev"></button>
+        @for (item of view0.pages; track item.key) { @if (item.type === 'page') {
+        <button paginationPageButton [page]="item.page"></button> } @else {
+        <span paginationEllipsis></span> } }
+        <button paginationNavigationButton direction="next"></button>
+      </div>
+      <div paginationPageSizeSelect></div>
+      <div data-slot="pagination-jumper" [class]="jumperClass">
+        <span>{{ view0.labels.jumpPrefix }}</span>
+        <div paginationQuickJumper></div>
+        <span>{{ view0.labels.jumpSuffix }}</span>
+      </div>
+    </ng-template>
+  </nav>
+</div>

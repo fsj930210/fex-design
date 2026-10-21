@@ -4,7 +4,7 @@ import { Button } from '@fex-design/solid/ui/button'
 export function ControlledExample() {
   const [open, setOpen] = createSignal(false)
   return (
-    <div class="flex min-h-64 items-center justify-center gap-3">
+    <div class="flex flex-wrap min-h-64 items-center justify-center gap-3">
       <Button onClick={() => setOpen(!open())}>外部{open() ? '关闭' : '打开'}</Button>
       <Tooltip open={open()} onOpenChange={setOpen} title="状态由调用方管理">
         {(trigger) => (

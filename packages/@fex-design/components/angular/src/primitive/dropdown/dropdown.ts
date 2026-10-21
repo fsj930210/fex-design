@@ -5,7 +5,10 @@ import {
   HostListener,
   forwardRef,
 } from '@angular/core'
-import { popoverContentClassName, popoverMenuContentClassName } from '@fex-design/components-styles/popover'
+import {
+  popoverContentClassName,
+  popoverMenuContentClassName,
+} from '@fex-design/components-styles/popover'
 import { cn } from '@fex-design/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '../popover'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'

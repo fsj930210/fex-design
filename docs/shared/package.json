@@ -3,7 +3,11 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./input-number-demo": "./src/input-number-demo.ts",
+    "./popover-demo": "./src/popover-demo.ts",
+    "./menu-demo": "./src/menu-demo.ts",
     "./model": "./src/model.ts",
+    "./pagination-demo": "./src/pagination-demo.ts",
     "./*-manifest": "./src/*-manifest.ts",
     "./preview-protocol": "./src/preview-protocol.ts",
     "./calendar-demo-data": "./src/calendar-demo-data.ts",

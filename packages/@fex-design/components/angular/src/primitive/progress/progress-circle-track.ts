@@ -33,10 +33,16 @@ export class ProgressCircleTrack {
   protected readonly geometry = computed(() => {
     const normalized = this.root.normalized()
     return getProgressGeometry({
-      value: normalized.value, min: normalized.min, max: normalized.max,
-      size: this.root.size(), thickness: this.root.thickness(),
-      variant: this.root.variant(), gapDegree: this.gapDegree(),
+      value: normalized.value,
+      min: normalized.min,
+      max: normalized.max,
+      size: this.root.size(),
+      thickness: this.root.thickness(),
+      variant: this.root.variant(),
+      gapDegree: this.gapDegree(),
     })
   })
-  protected readonly hostClassName = createHostClassName(() => cn(progressCircleTrackClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(progressCircleTrackClassName, this.className()),
+  )
 }

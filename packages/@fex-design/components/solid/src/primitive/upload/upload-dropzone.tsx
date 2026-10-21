@@ -3,13 +3,7 @@ import type { PasteFeatureApi } from '@fex-design/core/upload/features/paste'
 import { getDroppedFiles } from '@fex-design/core/upload/get-dropped-files'
 import { uploadDropzoneClassName } from '@fex-design/components-styles/upload'
 import { cn } from '@fex-design/utils'
-import {
-  createSignal,
-  onCleanup,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createSignal, onCleanup, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { useUploadContext } from './context'
 
 export function UploadDropzone(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {

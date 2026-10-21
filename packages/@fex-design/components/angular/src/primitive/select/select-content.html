@@ -1,16 +1,27 @@
-<ng-template popoverPortal
+<ng-template popoverPortal [container]="portalProps()?.container"
   ><div
     popoverContent
-    [class]="contentClass"
+    [class]="contentClass()"
+    [style]="popupStyle()"
     [style.max-width]="'var(--floating-available-width)'"
     [style.max-height]="'var(--floating-available-height, calc(100vh - 16px))'"
     [style.overflow]="'hidden'"
     [style.padding]="'0px'"
   >
-    <ng-template #menu><ng-content><div selectList></div></ng-content></ng-template>
+    <ng-template #menu
+      ><ng-content
+        ><div
+          selectList
+          [class]="listProps()?.class"
+          [style]="listProps()?.style"
+          [emptyText]="listProps()?.emptyText ?? 'No options'"
+          [loadingText]="listProps()?.loadingText ?? 'Loading...'"
+        ></div></ng-content
+    ></ng-template>
     @if (popupRender) {
-      <ng-container [ngTemplateOutlet]="popupRender" [ngTemplateOutletContext]="{ menu, close }" />
+    <ng-container [ngTemplateOutlet]="popupRender" [ngTemplateOutletContext]="{ menu, close }" />
     } @else {
-      <ng-container [ngTemplateOutlet]="menu" />
-    }</div
-></ng-template>
+    <ng-container [ngTemplateOutlet]="menu" />
+    }
+  </div></ng-template
+>

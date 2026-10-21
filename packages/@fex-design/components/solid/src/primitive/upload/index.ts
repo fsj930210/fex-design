@@ -1,5 +1,9 @@
 ﻿export { UploadRoot, type UploadRootProps } from './upload-root'
-export { UploadTrigger, type UploadTriggerProps, type UploadTriggerBindings } from './upload-trigger'
+export {
+  UploadTrigger,
+  type UploadTriggerProps,
+  type UploadTriggerBindings,
+} from './upload-trigger'
 export { UploadDropzone } from './upload-dropzone'
 export { UploadList } from './upload-list'
 export { UploadItem } from './upload-item'

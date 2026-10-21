@@ -20,5 +20,7 @@ export class ProgressValue {
   readonly className = input<string | undefined>(undefined, { alias: 'class' })
   readonly element = inject<ElementRef<HTMLSpanElement>>(ElementRef).nativeElement
   readonly root = inject(progressContext)
-  protected readonly hostClassName = createHostClassName(() => cn(progressValueClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(progressValueClassName, this.className()),
+  )
 }

@@ -1,2 +1,20 @@
-<div calendarRoot [defaultViewDate]="options.defaultViewDate" [locale]="options.locale" [weekStartsOn]="options.weekStartsOn ?? 0" [showWeek]="options.showWeek" [fullscreen]="options.fullscreen" [class]="rootClass" [attr.data-fullscreen]="true"><div calendarExampleContent [options]="options" [headerTemplate]="header"><ng-template #header let-state="state" let-controller="controller"><div class="flex w-full items-center justify-between"><button type="button" (click)="controller.navigate('previous-panel')">上一页</button><strong>{{ state.viewDate.year }} / {{ state.viewDate.month }}</strong><button type="button" (click)="controller.navigate('next-panel')">下一页</button></div></ng-template></div></div>
-
+<div
+  calendarRoot
+  [defaultViewDate]="options.defaultViewDate"
+  [locale]="options.locale"
+  [weekStartsOn]="options.weekStartsOn ?? 0"
+  [showWeek]="options.showWeek"
+  [fullscreen]="options.fullscreen"
+  [class]="rootClass"
+  [attr.data-fullscreen]="true"
+>
+  <div calendarExampleContent [options]="options" [headerTemplate]="header">
+    <ng-template #header let-state="state" let-controller="controller"
+      ><div class="flex w-full items-center justify-between">
+        <button type="button" (click)="controller.navigate('previous-panel')">上一页</button
+        ><strong>{{ state.viewDate.year }} / {{ state.viewDate.month }}</strong
+        ><button type="button" (click)="controller.navigate('next-panel')">下一页</button>
+      </div></ng-template
+    >
+  </div>
+</div>

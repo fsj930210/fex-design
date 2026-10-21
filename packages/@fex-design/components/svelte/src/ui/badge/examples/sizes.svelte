@@ -7,7 +7,7 @@
 
 <div class="grid gap-3">
   {#each sizes as size}
-    <div class="flex items-center gap-4">
+    <div class="flex flex-wrap items-center gap-4">
       <span class="w-6 text-sm text-muted-foreground">{size}</span>
       <Badge count={8} {size} />
       <Badge dot color="success" {size} />

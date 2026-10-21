@@ -1,5 +1,12 @@
 import { cn } from '@fex-design/utils'
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { progressCircleClassName } from '@fex-design/components-styles/progress'
 import { getProgressGeometry } from '@fex-design/core/progress/progress'
@@ -30,12 +37,20 @@ export class ProgressCircle {
   protected readonly geometry = computed(() => {
     const normalized = this.root.normalized()
     return getProgressGeometry({
-      value: normalized.value, min: normalized.min, max: normalized.max,
-      size: this.root.size(), thickness: this.root.thickness(),
-      variant: this.root.variant(), gapDegree: this.gapDegree(),
+      value: normalized.value,
+      min: normalized.min,
+      max: normalized.max,
+      size: this.root.size(),
+      thickness: this.root.thickness(),
+      variant: this.root.variant(),
+      gapDegree: this.gapDegree(),
     })
   })
   protected readonly viewBox = computed(() => `0 0 ${this.root.size()} ${this.root.size()}`)
-  protected readonly transform = computed(() => `rotate(${this.rotation() ?? this.geometry().rotation}deg)`)
-  protected readonly hostClassName = createHostClassName(() => cn(progressCircleClassName, this.className()))
+  protected readonly transform = computed(
+    () => `rotate(${this.rotation() ?? this.geometry().rotation}deg)`,
+  )
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(progressCircleClassName, this.className()),
+  )
 }

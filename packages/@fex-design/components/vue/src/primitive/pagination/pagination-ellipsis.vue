@@ -1,13 +1,12 @@
-﻿<script setup lang="ts">
-import {
-  paginationEllipsisClassName,
-  paginationSrOnlyClassName,
-} from '@fex-design/components-styles/pagination'
+<script setup lang="ts">
+import { paginationEllipsisClassName } from '@fex-design/components-styles/pagination'
+import { usePaginationContext } from './context'
 import { cn } from '@fex-design/utils'
-import { EllipsisIcon } from '@fex-design/vue/icons/more'
+import { MoreIcon } from '@fex-design/vue/icons/more'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'PaginationEllipsis', inheritAttrs: false })
 const props = defineProps<{ class?: string | undefined }>()
+const { size } = usePaginationContext()
 </script>
 
 <template>
@@ -15,9 +14,8 @@ const props = defineProps<{ class?: string | undefined }>()
     v-bind="$attrs"
     aria-hidden="true"
     data-slot="pagination-ellipsis"
-    :class="cn(paginationEllipsisClassName, props.class)"
+    :class="cn(paginationEllipsisClassName({ size }), props.class)"
   >
-    <EllipsisIcon />
-    <span :class="paginationSrOnlyClassName">More pages</span>
+    <slot><MoreIcon /></slot>
   </span>
 </template>

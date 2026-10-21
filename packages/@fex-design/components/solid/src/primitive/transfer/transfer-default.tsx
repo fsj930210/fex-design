@@ -16,11 +16,7 @@ import {
 import { cn } from '@fex-design/utils'
 import { createEffect, createMemo, Show, splitProps, type JSX } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
-import {
-  TransferPanel,
-  type TransferPanelApi,
-  type TransferPanelOptions,
-} from './transfer-panel'
+import { TransferPanel, type TransferPanelApi, type TransferPanelOptions } from './transfer-panel'
 import { TransferActions } from './transfer-actions'
 
 export type { TransferPanelApi, TransferPanelOptions } from './transfer-panel'

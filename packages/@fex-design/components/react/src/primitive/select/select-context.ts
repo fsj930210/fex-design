@@ -5,7 +5,7 @@ import type {
   SelectVirtualOptions,
 } from '@fex-design/core/select/types'
 import type { SelectionValue } from '@fex-design/core/selection/types'
-import { createContext, use } from 'react'
+import { createContext, use, type ComponentProps } from 'react'
 
 export interface SelectContextValue {
   controller: SelectController
@@ -17,7 +17,8 @@ export interface SelectContextValue {
   disabled: boolean
   clearable: boolean
   loading: boolean
-  status?: 'error' | 'warning' | undefined
+  ariaInvalid?: ComponentProps<'div'>['aria-invalid'] | undefined
+  dataWarning?: string | undefined
   placeholder?: string | undefined
   virtual?: SelectVirtualOptions | undefined
   listId: string

@@ -11,7 +11,7 @@ export default () => (
       {([animation, label]) => (
         <div class="grid gap-2">
           <b>{label}</b>
-          <div class="flex items-center gap-3">
+          <div class="flex flex-wrap items-center gap-3">
             <SkeletonAvatar animation={animation} />
             <SkeletonText animation={animation} class="w-48" />
             <SkeletonButton animation={animation} />

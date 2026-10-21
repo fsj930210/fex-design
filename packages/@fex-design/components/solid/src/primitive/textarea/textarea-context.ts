@@ -1,11 +1,5 @@
 import { syncTextareaAutoSize, type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
-import {
-  createContext,
-  createMemo,
-  createSignal,
-  useContext,
-  type Accessor,
-} from 'solid-js'
+import { createContext, createMemo, createSignal, useContext, type Accessor } from 'solid-js'
 
 export type TextareaChangeReason = 'input' | 'clear'
 

@@ -1,15 +1,44 @@
-import { usageSnippetsPart1, type UsageItem, type ComponentUsage } from "./usage-snippets-part1"
-import { usageSnippetsPart2 } from "./usage-snippets-part2"
+import { usageSnippetsPart1, type UsageItem, type ComponentUsage } from './usage-snippets-part1'
+import { usageSnippetsPart2 } from './usage-snippets-part2'
 
 export type { UsageItem, ComponentUsage }
 
 export const usageSnippets: Record<string, ComponentUsage> = {
   ...usageSnippetsPart1,
   ...usageSnippetsPart2,
-  calendar: {
-    ui: { import: "import { Calendar } from '@/components/ui/calendar'\nimport { createCalendarDate } from '@fex-design/core/calendar'", code: '<Calendar defaultViewDate={createCalendarDate(2026, 10, 8)} />' },
+  menu: {
+    ui: {
+      import:
+        "import { Menu, MenuItem, SubMenu, SubMenuTrigger, SubMenuContent } from '@/components/ui/menu'",
+      code: `<Menu>
+  <MenuItem value="overview">概览</MenuItem>
+  <SubMenu value="system">
+    <SubMenuTrigger>系统管理</SubMenuTrigger>
+    <SubMenuContent>
+      <MenuItem value="users">用户管理</MenuItem>
+    </SubMenuContent>
+  </SubMenu>
+</Menu>`,
+    },
     primitive: {
-      import: "import { CalendarRoot, CalendarHeader, CalendarNavigationButton, CalendarWeekHeader, CalendarGrid, CalendarFooter } from '@/components/primitive/calendar'\nimport { createCalendarDate } from '@fex-design/core/calendar'",
+      import: "import { MenuRoot, MenuContent, MenuItem } from '@/components/primitive/menu'",
+      code: `<MenuRoot>
+  <MenuContent>
+    <MenuItem value="overview">概览</MenuItem>
+    <MenuItem value="users">用户管理</MenuItem>
+  </MenuContent>
+</MenuRoot>`,
+    },
+  },
+  calendar: {
+    ui: {
+      import:
+        "import { Calendar } from '@/components/ui/calendar'\nimport { createCalendarDate } from '@fex-design/core/calendar'",
+      code: '<Calendar defaultViewDate={createCalendarDate(2026, 10, 8)} />',
+    },
+    primitive: {
+      import:
+        "import { CalendarRoot, CalendarHeader, CalendarNavigationButton, CalendarWeekHeader, CalendarGrid, CalendarFooter } from '@/components/primitive/calendar'\nimport { createCalendarDate } from '@fex-design/core/calendar'",
       code: `<CalendarRoot defaultViewDate={createCalendarDate(2026, 10, 8)}>
   <CalendarHeader>
     <CalendarNavigationButton action="previous-panel">上一页</CalendarNavigationButton>

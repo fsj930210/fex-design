@@ -1,5 +1,8 @@
 import { useState, type KeyboardEvent } from 'react'
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
 import { SearchIcon } from '@fex-design/react/icons/search'
 import { Button } from '@fex-design/react/primitive/button'

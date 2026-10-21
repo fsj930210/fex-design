@@ -1,7 +1,13 @@
 import type { JSX } from 'solid-js'
 import type {
-  ProgressRangeItem, ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap,
-  ProgressSize, ProgressStatus, ProgressVariant,
+  ProgressRangeItem,
+  ProgressColor,
+  ProgressGapPlacement,
+  ProgressInfoPlacement,
+  ProgressLinecap,
+  ProgressSize,
+  ProgressStatus,
+  ProgressVariant,
 } from '@fex-design/core/progress/types'
 
 export type ProgressProps = JSX.HTMLAttributes<HTMLDivElement> & {
@@ -28,5 +34,7 @@ export type ProgressProps = JSX.HTMLAttributes<HTMLDivElement> & {
   format?: (percent: number | null, value: number | null) => JSX.Element
   success?: boolean
   classNames?: Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', string>>
-  styles?: Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', JSX.CSSProperties>>
+  styles?: Partial<
+    Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', JSX.CSSProperties>
+  >
 }

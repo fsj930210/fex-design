@@ -1,0 +1,20 @@
+<div class="grid w-full gap-space-lg">
+  <nav
+    pagination
+    [total]="200"
+    [labels]="labels"
+    [defaultPage]="8"
+    showTotal
+    showSizeChanger
+    showQuickJumper
+  >
+    <ng-template #total let-snapshot
+      >{{ snapshot.range[0] }}–{{ snapshot.range[1] }} / {{ snapshot.total }}</ng-template
+    >
+    <ng-template #page let-page let-current="current"
+      >{{ current ? '[' + page + ']' : page }}</ng-template
+    >
+    <ng-template #previous>上一页</ng-template><ng-template #next>下一页</ng-template
+    ><ng-template #ellipsis>…</ng-template>
+  </nav>
+</div>

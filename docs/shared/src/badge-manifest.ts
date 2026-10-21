@@ -47,6 +47,12 @@ export const badgeExamples = {
       title: 'LTR 与 RTL',
       description: '对比 LTR 与 RTL 下逻辑行内结束侧的附着位置。',
     },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
     {
@@ -102,10 +108,12 @@ export const badgeExamples = {
       title: '自定义位置偏移',
       description: '使用 offset 调整 UI 附着徽标相对默认右上角的位置。',
     },
+
     {
-      id: 'styling',
+      id: 'semantic-styles',
       title: '结构化样式',
-      description: '使用 classNames 和 styles 分别定制 root、content 与 indicator。',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
     },
   ],
 } as const

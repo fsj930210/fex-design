@@ -17,6 +17,12 @@ import {
 export type CardClassNames = CardClassNamesBase
 export type CardStyles = CardStylesBase<CSSProperties>
 export interface CardProps {
+  headerProps?: Omit<InstanceType<typeof CardHeader>['$props'], 'children'> | undefined
+  titleProps?: Omit<InstanceType<typeof CardTitle>['$props'], 'children'> | undefined
+  descriptionProps?: Omit<InstanceType<typeof CardDescription>['$props'], 'children'> | undefined
+  extraProps?: Omit<InstanceType<typeof CardExtra>['$props'], 'children'> | undefined
+  contentProps?: Omit<InstanceType<typeof CardContent>['$props'], 'children'> | undefined
+  footerProps?: Omit<InstanceType<typeof CardFooter>['$props'], 'children'> | undefined
   classNames?: CardClassNames
   styles?: CardStyles
 }
@@ -33,40 +39,49 @@ const props = defineProps<CardProps>()
   >
     <slot name="header">
       <CardHeader
+        v-bind="props.headerProps"
         v-if="$slots.title || $slots.description || $slots.extra"
-        :class="props.classNames?.header"
-        :style="props.styles?.header"
+        :class="[props.classNames?.header, props.headerProps?.class]"
+        :style="[props.styles?.header, props.headerProps?.style]"
       >
         <CardTitle
+          v-bind="props.titleProps"
           v-if="$slots.title"
-          :class="props.classNames?.title"
-          :style="props.styles?.title"
+          :class="[props.classNames?.title, props.titleProps?.class]"
+          :style="[props.styles?.title, props.titleProps?.style]"
         >
           <slot name="title" />
         </CardTitle>
         <CardDescription
+          v-bind="props.descriptionProps"
           v-if="$slots.description"
-          :class="props.classNames?.description"
-          :style="props.styles?.description"
+          :class="[props.classNames?.description, props.descriptionProps?.class]"
+          :style="[props.styles?.description, props.descriptionProps?.style]"
         >
           <slot name="description" />
         </CardDescription>
         <CardExtra
+          v-bind="props.extraProps"
           v-if="$slots.extra"
-          :class="props.classNames?.extra"
-          :style="props.styles?.extra"
+          :class="[props.classNames?.extra, props.extraProps?.class]"
+          :style="[props.styles?.extra, props.extraProps?.style]"
         >
           <slot name="extra" />
         </CardExtra>
       </CardHeader>
     </slot>
-    <CardContent :class="props.classNames?.content" :style="props.styles?.content">
+    <CardContent
+      v-bind="props.contentProps"
+      :class="[props.classNames?.content, props.contentProps?.class]"
+      :style="[props.styles?.content, props.contentProps?.style]"
+    >
       <slot />
     </CardContent>
     <CardFooter
+      v-bind="props.footerProps"
       v-if="$slots.footer"
-      :class="props.classNames?.footer"
-      :style="props.styles?.footer"
+      :class="[props.classNames?.footer, props.footerProps?.class]"
+      :style="[props.styles?.footer, props.footerProps?.style]"
     >
       <slot name="footer" />
     </CardFooter>

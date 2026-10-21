@@ -1,11 +1,12 @@
 <script lang="ts">
-import { DatePicker, RangePicker } from '@fex-design/svelte/ui/date-picker'
-import { createCalendarDate } from '@fex-design/core/calendar/temporal'
-  const date = createCalendarDate(2026, 10, 15)
-  const range = { start: date, end: date.add({ days: 7 }) }
+  import { DatePicker, RangePicker } from "@fex-design/svelte/ui/date-picker";
+  import { createCalendarDate } from "@fex-design/core/calendar/temporal";
+  const date = createCalendarDate(2026, 10, 15);
+  const range = { start: date, end: date.add({ days: 7 }) };
   const popupAppearance = {
-    getPopupContainer: (reference: HTMLElement | null) => reference?.closest<HTMLElement>('[dir]') ?? document.body,
-  }
+    getPopupContainer: (reference: HTMLElement | null) =>
+      reference?.closest<HTMLElement>("[dir]") ?? document.body,
+  };
 </script>
 
 <div class="flex w-full min-w-0 flex-col gap-6">

@@ -1,5 +1,5 @@
 import { inputControlClassName } from '@fex-design/components-styles/input'
-import { Directive, ElementRef, HostListener, inject } from '@angular/core'
+import { Directive, ElementRef, HostListener, inject, input } from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { InputNumberRoot } from './input-number-root'
 
@@ -22,9 +22,10 @@ import { InputNumberRoot } from './input-number-root'
   },
 })
 export class InputNumberControl {
+  readonly class = input<string>()
   readonly root = inject(InputNumberRoot)
   readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement
-  protected readonly hostClassName = createHostClassName(inputControlClassName)
+  protected readonly hostClassName = createHostClassName(inputControlClassName, () => this.class())
 
   constructor() {
     this.root.setControl(this.element)

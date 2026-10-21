@@ -13,7 +13,10 @@ export interface MentionsTriggerRenderProps {
   ref: (element: HTMLTextAreaElement) => void
 }
 
-export interface MentionsTriggerProps extends Omit<JSX.TextareaHTMLAttributes<HTMLTextAreaElement>, 'children'> {
+export interface MentionsTriggerProps extends Omit<
+  JSX.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'children'
+> {
   rootClass?: string
   children?: (input: MentionsTriggerRenderProps) => JSX.Element
 }

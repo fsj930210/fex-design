@@ -4,31 +4,31 @@ CalendarRoot 提供日期选择、浏览和面板切换能力，可组合头部�
 
 ## 部件
 
-| 部件 | 用途 |
-| --- | --- |
-| CalendarRoot | 状态与动作作用域 |
-| CalendarHeader | 自定义头部，提供当前日期、面板及导航动作 |
-| CalendarNavigationButton | previous/next month、year、panel 或 today |
-| CalendarPanelTrigger | 切换 date、month、quarter、year、decade 面板 |
-| CalendarWeekHeader | 星期标题，labels 可覆盖 |
-| CalendarGrid | 默认网格或逐 cell 自定义内容 |
-| CalendarRow | 网格行 |
-| CalendarCell | 布局和状态容器，默认包含 CalendarCellTrigger |
-| CalendarCellTrigger | 日期选择按钮，默认撑满单元格 |
-| CalendarFooter | 底部内容与操作区 |
+| 部件                     | 用途                                         |
+| ------------------------ | -------------------------------------------- |
+| CalendarRoot             | 状态与动作作用域                             |
+| CalendarHeader           | 自定义头部，提供当前日期、面板及导航动作     |
+| CalendarNavigationButton | previous/next month、year、panel 或 today    |
+| CalendarPanelTrigger     | 切换 date、month、quarter、year、decade 面板 |
+| CalendarWeekHeader       | 星期标题，labels 可覆盖                      |
+| CalendarGrid             | 默认网格或逐 cell 自定义内容                 |
+| CalendarRow              | 网格行                                       |
+| CalendarCell             | 布局和状态容器，默认包含 CalendarCellTrigger |
+| CalendarCellTrigger      | 日期选择按钮，默认撑满单元格                 |
+| CalendarFooter           | 底部内容与操作区                             |
 
 ## Root API
 
-| 属性 | 说明 |
-| --- | --- |
-| value / defaultValue | 受控值与初始值；undefined 表示非受控，null 表示空值 |
-| viewDate / defaultViewDate | 浏览位置；默认初始值所在月，否则今天 |
-| panel / defaultPanel | 浏览面板；默认由 granularity 决定 |
-| granularity | date、week、month、quarter、year；决定最终提交的值 |
-| values / range | 多值或区间的展示输入，选择流程由上层组合 |
-| weekStartsOn | 0 至 6，默认 0 |
-| today | 覆盖今天日期 |
-| min / max / disabledDate | 日期可选限制 |
+| 属性                       | 说明                                                |
+| -------------------------- | --------------------------------------------------- |
+| value / defaultValue       | 受控值与初始值；undefined 表示非受控，null 表示空值 |
+| viewDate / defaultViewDate | 浏览位置；默认初始值所在月，否则今天                |
+| panel / defaultPanel       | 浏览面板；默认由 granularity 决定                   |
+| granularity                | date、week、month、quarter、year；决定最终提交的值  |
+| values / range             | 多值或区间的展示输入，选择流程由上层组合            |
+| weekStartsOn               | 0 至 6，默认 0                                      |
+| today                      | 覆盖今天日期                                        |
+| min / max / disabledDate   | 日期可选限制                                        |
 
 default 属性仅初始化一次。翻页与切换面板不改变选中值。浏览层级单元格会下钻面板，达到选择粒度时才触发 change。cellSelect 是通知，不接管默认选择。所有部件保留原生属性、事件、class 与元素引用能力。
 
@@ -43,20 +43,41 @@ Tab 进入一个可用日期；方向键移动日期，Home/End 移动到行首/
 ## 使用
 
 ```tsx
-import { CalendarRoot, CalendarHeader, CalendarNavigationButton, CalendarPanelTrigger, CalendarWeekHeader, CalendarGrid, CalendarCell, CalendarCellTrigger, CalendarFooter } from '@fex-design/react/primitive/calendar'
+import {
+  CalendarRoot,
+  CalendarHeader,
+  CalendarNavigationButton,
+  CalendarPanelTrigger,
+  CalendarWeekHeader,
+  CalendarGrid,
+  CalendarCell,
+  CalendarCellTrigger,
+  CalendarFooter,
+} from '@fex-design/react/primitive/calendar'
 
-<CalendarRoot onChange={handleChange}>
+;<CalendarRoot onChange={handleChange}>
   <CalendarHeader>
-    {({ viewDate }) => <>
-      <CalendarNavigationButton action="previous-panel" aria-label="上一页" />
-      <CalendarPanelTrigger panel="month">{viewDate.year} / {viewDate.month}</CalendarPanelTrigger>
-      <CalendarNavigationButton action="next-panel" aria-label="下一页" />
-    </>}
+    {({ viewDate }) => (
+      <>
+        <CalendarNavigationButton action="previous-panel" aria-label="上一页" />
+        <CalendarPanelTrigger panel="month">
+          {viewDate.year} / {viewDate.month}
+        </CalendarPanelTrigger>
+        <CalendarNavigationButton action="next-panel" aria-label="下一页" />
+      </>
+    )}
   </CalendarHeader>
   <CalendarWeekHeader />
-  <CalendarGrid>{cell => <CalendarCell cell={cell}>
-    <CalendarCellTrigger cell={cell}><span>{cell.label}</span><span>{getLunarLabel(cell.date)}</span></CalendarCellTrigger>
-  </CalendarCell>}</CalendarGrid>
+  <CalendarGrid>
+    {(cell) => (
+      <CalendarCell cell={cell}>
+        <CalendarCellTrigger cell={cell}>
+          <span>{cell.label}</span>
+          <span>{getLunarLabel(cell.date)}</span>
+        </CalendarCellTrigger>
+      </CalendarCell>
+    )}
+  </CalendarGrid>
   <CalendarFooter>自定义底部</CalendarFooter>
 </CalendarRoot>
 ```

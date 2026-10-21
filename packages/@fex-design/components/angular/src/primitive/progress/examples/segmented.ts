@@ -9,6 +9,4 @@ import { StepRingDemo } from './_parts/step-ring'
   imports: [StepLineDemo, StepRingDemo],
   templateUrl: './segmented.html',
 })
-export class ProgressPrimitiveSegmentedExample {
-
-}
+export class ProgressPrimitiveSegmentedExample {}

@@ -1,5 +1,3 @@
-
-
 /** Card 可被 classNames 与 styles 定位的稳定区域。 */
 export type CardPart = 'root' | 'header' | 'title' | 'description' | 'extra' | 'content' | 'footer'
 

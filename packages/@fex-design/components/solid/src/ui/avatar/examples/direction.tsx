@@ -2,7 +2,7 @@ import { Avatar, AvatarGroup } from '@fex-design/solid/ui/avatar'
 
 export function DirectionExample() {
   return (
-    <div class="flex items-center gap-8">
+    <div class="flex flex-wrap items-center gap-8">
       <div dir="ltr">
         <p>LTR · 中文示例</p>
         <AvatarGroup>

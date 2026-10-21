@@ -13,13 +13,13 @@
   <div><b>SkeletonText</b><SkeletonText class="mt-2 w-64" /></div>
   <div>
     <b>SkeletonAvatar</b>
-    <div class="mt-2 flex gap-3">
+    <div class="mt-2 flex flex-wrap gap-3">
       <SkeletonAvatar /><SkeletonAvatar shape="square" />
     </div>
   </div>
   <div>
     <b>SkeletonButton</b>
-    <div class="mt-2 flex gap-3">
+    <div class="mt-2 flex flex-wrap gap-3">
       <SkeletonButton /><SkeletonButton shape="round" /><SkeletonButton
         shape="square"
       /><SkeletonButton shape="circle" />

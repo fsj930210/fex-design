@@ -18,7 +18,7 @@
   import { cn } from "@fex-design/utils";
   import { setContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { radioContextKey, type RadioContextValue } from "./context";
 
   interface RadioGroupProps extends Omit<

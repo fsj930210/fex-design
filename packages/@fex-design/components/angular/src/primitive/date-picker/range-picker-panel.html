@@ -1,4 +1,9 @@
-<div calendarRoot #calendarElement monthSelection="drilldown" [locale]="calendarAppearance().locale" [style]="calendarAppearance().style ?? ''"
+<div
+  calendarRoot
+  #calendarElement
+  monthSelection="drilldown"
+  [locale]="calendarAppearance().locale"
+  [style]="calendarAppearance().style ?? ''"
   [value]="null"
   [range]="context().displayRange"
   [viewDate]="panelViewDate() ?? context().viewDate"
@@ -17,8 +22,12 @@
   [class]="panelClassName()"
 >
   @if (template(); as custom) {
-    <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="calendarInjector() ?? null" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), calendar: calendar() }" />
+  <ng-container
+    [ngTemplateOutlet]="custom"
+    [ngTemplateOutletInjector]="calendarInjector() ?? null"
+    [ngTemplateOutletContext]="{ $implicit: context(), state: context(), calendar: calendar() }"
+  />
   } @else {
-    <div datePickerPanelContent [calendarProps]="calendarAppearance()"></div>
+  <div datePickerPanelContent [calendarProps]="calendarAppearance()"></div>
   }
 </div>

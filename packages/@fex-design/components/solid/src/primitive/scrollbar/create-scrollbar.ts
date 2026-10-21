@@ -14,11 +14,19 @@ export function createScrollbar(options: () => ScrollbarOptions = () => ({})) {
   // Resolve native ref changes after rendering; effect cleanup releases the old Root.
   createEffect(() => {
     const element = root()
-    if (element) onCleanup(untrack(() => {
-      controller.setOptions(options())
-      return controller.connect(element)
-    }))
+    if (element)
+      onCleanup(
+        untrack(() => {
+          controller.setOptions(options())
+          return controller.connect(element)
+        }),
+      )
   })
   onCleanup(() => controller.destroy())
-  return { controller, rootRef: (element: HTMLElement) => { setRoot(element) } }
+  return {
+    controller,
+    rootRef: (element: HTMLElement) => {
+      setRoot(element)
+    },
+  }
 }

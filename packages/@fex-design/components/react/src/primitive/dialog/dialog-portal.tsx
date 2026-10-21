@@ -1,6 +1,6 @@
-import { createPortal } from "react-dom"
-import type { ReactNode } from "react"
-import { useDialog } from "./use-dialog"
+import { createPortal } from 'react-dom'
+import type { ReactNode } from 'react'
+import { useDialog } from './use-dialog'
 
 export interface DialogPortalProps {
   children?: ReactNode
@@ -9,7 +9,7 @@ export interface DialogPortalProps {
 }
 
 export function DialogPortal({ children, container, forceMount }: DialogPortalProps) {
-  const { snapshot } = useDialog("DialogPortal")
+  const { snapshot } = useDialog('DialogPortal')
   const portalContainer = container ?? globalThis.document?.body
   if (!portalContainer || (!snapshot.mounted && !forceMount)) {
     return null

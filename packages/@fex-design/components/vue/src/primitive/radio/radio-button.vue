@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { radioButtonClassName, type RadioButtonStyleProps } from '@fex-design/components-styles/radio'
+import {
+  radioButtonClassName,
+  type RadioButtonStyleProps,
+} from '@fex-design/components-styles/radio'
 import { cn } from '@fex-design/utils'
 import { computed, useAttrs } from 'vue'
 import { useRadioContext, type RadioValue } from './context'

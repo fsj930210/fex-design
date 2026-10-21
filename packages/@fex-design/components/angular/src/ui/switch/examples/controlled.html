@@ -13,7 +13,7 @@
           (change)="roundedChecked.set($event.checked)"
           aria-label="rounded 受控"
         ></button>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <button button size="sm" (click)="roundedChecked.set(true)">开启</button
           ><button button size="sm" (click)="roundedChecked.set(false)">关闭</button>
         </div>
@@ -34,7 +34,7 @@
           (change)="pillChecked.set($event.checked)"
           aria-label="pill 受控"
         ></button>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <button button size="sm" (click)="pillChecked.set(true)">开启</button
           ><button button size="sm" (click)="pillChecked.set(false)">关闭</button>
         </div>

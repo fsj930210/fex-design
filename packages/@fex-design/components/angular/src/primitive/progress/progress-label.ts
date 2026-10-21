@@ -15,5 +15,7 @@ import { progressLabelClassName } from '@fex-design/components-styles/progress'
 export class ProgressLabel {
   readonly className = input<string | undefined>(undefined, { alias: 'class' })
   readonly element = inject<ElementRef<HTMLSpanElement>>(ElementRef).nativeElement
-  protected readonly hostClassName = createHostClassName(() => cn(progressLabelClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(progressLabelClassName, this.className()),
+  )
 }

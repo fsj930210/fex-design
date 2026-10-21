@@ -29,9 +29,7 @@ export function CssVariableTable(props: { value: NonNullable<ComponentApi['cssVa
                   )}
                 </For>
               </div>
-              <div class="leading-relaxed text-secondary-foreground">
-                {variable.description}
-              </div>
+              <div class="leading-relaxed text-secondary-foreground">{variable.description}</div>
             </div>
           )
         }}

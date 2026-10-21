@@ -49,6 +49,9 @@ defineExpose({
       :read-only="readonly"
       :size="size"
       :variant="variant"
+      :data-warning="
+        typeof attrs['data-warning'] === 'string' ? attrs['data-warning'] : undefined
+      "
       :class="rootClass"
       :style="[styles?.root, attrs.style]"
       @value-change="emit('update:modelValue', $event)"
@@ -85,6 +88,9 @@ defineExpose({
     :read-only="readonly"
     :size="size"
     :variant="variant"
+    :data-warning="
+      typeof attrs['data-warning'] === 'string' ? attrs['data-warning'] : undefined
+    "
     :class="rootClass"
     :style="[styles?.root, attrs.style]"
     @value-change="emit('update:modelValue', $event)"

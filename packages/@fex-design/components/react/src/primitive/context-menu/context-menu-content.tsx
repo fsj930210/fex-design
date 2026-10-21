@@ -1,7 +1,7 @@
-import type { ComponentProps, Ref } from "react"
-import { useContextMenuContent } from "./use-context-menu"
+import type { ComponentProps, Ref } from 'react'
+import { useContextMenuContent } from './use-context-menu'
 
-export interface ContextMenuContentProps extends ComponentProps<"div"> {
+export interface ContextMenuContentProps extends ComponentProps<'div'> {
   ref?: Ref<HTMLDivElement>
 }
 

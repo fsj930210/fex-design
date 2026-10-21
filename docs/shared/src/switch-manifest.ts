@@ -1,6 +1,13 @@
 export const switchExamples = {
   primitive: [
     {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
+    {
       id: 'basic',
       title: '基本展示',
       description: '分别展示 rounded、pill 的关闭和开启状态。',
@@ -50,8 +57,21 @@ export const switchExamples = {
       title: 'CSS Variables',
       description: '两种形状使用实例 CSS Variables 覆盖轨道、边框、文字和滑块。',
     },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
+    {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
     {
       id: 'basic',
       title: '基本展示',

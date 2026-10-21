@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TimePickerColumnCustomization } from './column-customization'
 import {
   createHourOptions,
   getDisplayedHour,
@@ -10,6 +11,7 @@ import { timePickerContextKey } from './context'
 import TimePickerColumn from './time-picker-column.vue'
 defineOptions({ name: 'TimePickerHourColumn' })
 const props = defineProps<{
+  columnProps?: TimePickerColumnCustomization | undefined
   step?: number | undefined
   disabled?: boolean | undefined
   isItemDisabled?: ((value: number) => boolean) | undefined
@@ -35,6 +37,7 @@ const selected = computed(() =>
 </script>
 <template>
   <TimePickerColumn
+    v-bind="columnProps"
     :options="options"
     :selected-value="selected"
     :disabled="disabled"

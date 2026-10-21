@@ -2,22 +2,33 @@
   import type { HTMLInputAttributes } from "svelte/elements";
   import InputControl from "../input/input-control.svelte";
   import { getInputNumberContext } from "./context";
-  interface Props extends Omit<HTMLInputAttributes, 'value' | 'defaultValue' | 'type'> {
+  interface Props extends Omit<
+    HTMLInputAttributes,
+    "value" | "defaultValue" | "type"
+  > {
     ref?: HTMLInputElement | null | undefined;
   }
   let {
     inputmode = "decimal",
     onblur,
     onkeydown,
-    'aria-valuetext': ariaValueText,
+    "aria-valuetext": ariaValueText,
     ref = $bindable(null),
     ...rest
   }: Props = $props();
   const inputNumber = getInputNumberContext("InputNumberControl");
-  export function focus(options?: FocusOptions) { ref?.focus(options); }
-  export function blur() { ref?.blur(); }
-  export function select() { ref?.select(); }
-  export function getElement() { return ref; }
+  export function focus(options?: FocusOptions) {
+    ref?.focus(options);
+  }
+  export function blur() {
+    ref?.blur();
+  }
+  export function select() {
+    ref?.select();
+  }
+  export function getElement() {
+    return ref;
+  }
 </script>
 
 <InputControl

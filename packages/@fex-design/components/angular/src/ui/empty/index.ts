@@ -7,4 +7,4 @@ export {
   EmptyTitle,
   type EmptyClassNames,
   type EmptyStyles,
-} from "./empty"
+} from './empty'

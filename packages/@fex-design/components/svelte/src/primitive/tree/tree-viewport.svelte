@@ -8,7 +8,7 @@
   import { cn } from "@fex-design/utils";
   import { getContext, type Snippet, untrack } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { treeContextKey, type TreeContext } from "./tree-context";
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {

@@ -12,8 +12,8 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
-  import StarIcon from '@fex-design/svelte/icons/star.svelte';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
+  import StarIcon from "@fex-design/svelte/icons/star.svelte";
   import { getRatePointerValue } from "./rate-interactions";
 
   export interface RateItemRenderState {

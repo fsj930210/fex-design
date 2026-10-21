@@ -1,5 +1,6 @@
 export const frameworks = ['react', 'vue', 'solid', 'svelte', 'angular'] as const
 
+
 export type Framework = (typeof frameworks)[number]
 export type ApiValue = string | number | boolean | string[] | Record<string, unknown>
 

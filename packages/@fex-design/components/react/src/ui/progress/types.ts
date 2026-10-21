@@ -1,5 +1,14 @@
 import type { ComponentProps, CSSProperties, ReactNode, Ref } from 'react'
-import type { ProgressRangeItem, ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap, ProgressSize, ProgressStatus, ProgressVariant } from '@fex-design/core/progress/types'
+import type {
+  ProgressRangeItem,
+  ProgressColor,
+  ProgressGapPlacement,
+  ProgressInfoPlacement,
+  ProgressLinecap,
+  ProgressSize,
+  ProgressStatus,
+  ProgressVariant,
+} from '@fex-design/core/progress/types'
 
 export interface ProgressProps extends Omit<ComponentProps<'div'>, 'color'> {
   ref?: Ref<HTMLDivElement>
@@ -28,4 +37,3 @@ export interface ProgressProps extends Omit<ComponentProps<'div'>, 'color'> {
   classNames?: Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', string>>
   styles?: Partial<Record<'root' | 'track' | 'range' | 'info' | 'label' | 'step', CSSProperties>>
 }
-

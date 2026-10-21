@@ -1,3 +1,4 @@
+import type { Button } from '../button'
 import type {
   InputClassNames,
   InputSearchMeta,
@@ -29,6 +30,12 @@ export interface InputPasswordProps extends Omit<InputProps, 'type'> {
 }
 
 export interface InputSearchProps extends Omit<InputProps, 'type'> {
+  addonBeforeButtonProps?:
+    | Omit<ComponentProps<typeof Button>, 'children' | 'loading' | 'disabled' | 'onClick'>
+    | undefined
+  addonAfterButtonProps?:
+    | Omit<ComponentProps<typeof Button>, 'children' | 'loading' | 'disabled' | 'onClick'>
+    | undefined
   loading?: boolean
   onSearch?: (value: string, meta: InputSearchMeta) => void
 }

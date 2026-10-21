@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { collapseIconClassName, collapseTriggerClassName } from '@fex-design/components-styles/collapse'
+import {
+  collapseIconClassName,
+  collapseTriggerClassName,
+} from '@fex-design/components-styles/collapse'
 import { cn } from '@fex-design/utils'
 import { computed, inject, useAttrs } from 'vue'
 import PrimitiveButton from '../button/button.vue'

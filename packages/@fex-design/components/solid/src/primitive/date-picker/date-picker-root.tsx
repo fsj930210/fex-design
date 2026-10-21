@@ -13,10 +13,15 @@ import { useDatePicker, type UseDatePickerOptions } from './use-date-picker'
 
 export interface DatePickerRootProps<TValue extends CalendarValue = CalendarValue>
   extends
-    ParentProps<Omit<PopoverProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children' | 'trigger'>>,
-    UseDatePickerOptions<TValue>, Omit<PickerAppearance, 'startInputProps' | 'endInputProps'> {
+    ParentProps<
+      Omit<PopoverProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children' | 'trigger'>
+    >,
+    UseDatePickerOptions<TValue>,
+    Omit<PickerAppearance, 'startInputProps' | 'endInputProps'> {
   popoverProps?: PickerAppearance['popoverProps'] | undefined
-  containerRender?: ((children: JSX.Element, state: ReturnType<typeof useDatePicker<TValue>>) => JSX.Element) | undefined
+  containerRender?:
+    | ((children: JSX.Element, state: ReturnType<typeof useDatePicker<TValue>>) => JSX.Element)
+    | undefined
 }
 
 export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>(
@@ -26,7 +31,11 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>(
   const [local, rest] = splitProps(props, [
     'children',
     'containerRender',
-    'popoverProps', 'inputProps', 'calendarProps', 'classNames', 'styles',
+    'popoverProps',
+    'inputProps',
+    'calendarProps',
+    'classNames',
+    'styles',
     'picker',
     'value',
     'defaultValue',
@@ -47,15 +56,35 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>(
     'onChange',
     'onOpenChange',
   ])
-  const [, options] = splitProps(local, ['children', 'containerRender', 'popoverProps', 'inputProps', 'calendarProps', 'classNames', 'styles'])
+  const [, options] = splitProps(local, [
+    'children',
+    'containerRender',
+    'popoverProps',
+    'inputProps',
+    'calendarProps',
+    'classNames',
+    'styles',
+  ])
   const datePicker = useDatePicker<TValue>(options)
   return (
-    <PickerAppearanceContext.Provider value={() => local}><PickerContainerContext.Provider value={{ parentPopover }}><PickerOwnerContext.Provider value={datePicker}><DatePickerContext.Provider value={datePicker as never}>
-      {local.containerRender ? local.containerRender(local.children, datePicker) : (
-        <Popover {...getDatePickerPopoverOptions({ ...rest, ...local.popoverProps })} open={datePicker.open()} onOpenChange={datePicker.setOpen}>
-          {local.children}
-        </Popover>
-      )}
-    </DatePickerContext.Provider></PickerOwnerContext.Provider></PickerContainerContext.Provider></PickerAppearanceContext.Provider>
+    <PickerAppearanceContext.Provider value={() => local}>
+      <PickerContainerContext.Provider value={{ parentPopover }}>
+        <PickerOwnerContext.Provider value={datePicker}>
+          <DatePickerContext.Provider value={datePicker as never}>
+            {local.containerRender ? (
+              local.containerRender(local.children, datePicker)
+            ) : (
+              <Popover
+                {...getDatePickerPopoverOptions({ ...rest, ...local.popoverProps })}
+                open={datePicker.open()}
+                onOpenChange={datePicker.setOpen}
+              >
+                {local.children}
+              </Popover>
+            )}
+          </DatePickerContext.Provider>
+        </PickerOwnerContext.Provider>
+      </PickerContainerContext.Provider>
+    </PickerAppearanceContext.Provider>
   )
 }

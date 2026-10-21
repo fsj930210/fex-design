@@ -65,7 +65,8 @@ export function createCheckboxGroupController(
       if (
         controlledSnapshot.disabled !== (options.disabled === true) ||
         !checkboxValuesEqual(controlledSnapshot.value, snapshot.value)
-      ) controlledSnapshot = createCheckboxGroupSnapshot(snapshot.value, options.disabled)
+      )
+        controlledSnapshot = createCheckboxGroupSnapshot(snapshot.value, options.disabled)
       return controlledSnapshot
     }
 

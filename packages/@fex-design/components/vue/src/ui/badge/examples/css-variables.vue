@@ -4,7 +4,7 @@ import { Badge } from '@fex-design/vue/ui/badge'
 
 <template>
   <div
-    class="flex items-center gap-4 [--badge-color-danger:#e11d48] [--badge-color-success:#059669]"
+    class="flex flex-wrap items-center gap-4 [--badge-color-danger:#e11d48] [--badge-color-success:#059669]"
   >
     <Badge count="success" color="success" />
     <Badge count="danger" color="danger" />

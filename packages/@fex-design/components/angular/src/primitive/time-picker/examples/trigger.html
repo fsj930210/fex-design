@@ -1,4 +1,14 @@
 <div class="flex w-full min-w-0 flex-col gap-4">
-<div timePickerRoot [defaultValue]="{ hour: 9, minute: 30, second: 0 }" ><div timePickerTrigger><ng-template #trigger><button type="button" class="rounded-md border border-border px-3 py-2">选择时间</button></ng-template></div><ng-template popoverPortal><div timePickerContent><div timePickerPanel><div timePickerHourColumn></div><div timePickerMinuteColumn></div><div timePickerSecondColumn></div></div></div></ng-template></div>
-
+  <div timePickerRoot [defaultValue]="{ hour: 9, minute: 30, second: 0 }">
+    <button timePickerTrigger type="button" class="rounded-md border border-border px-3 py-2">
+      选择时间</button
+    ><ng-template popoverPortal
+      ><div timePickerContent>
+        <div timePickerPanel>
+          <div timePickerHourColumn></div>
+          <div timePickerMinuteColumn></div>
+          <div timePickerSecondColumn></div>
+        </div></div
+    ></ng-template>
+  </div>
 </div>

@@ -8,4 +8,4 @@ export {
   CardTitle,
   type CardClassNames,
   type CardStyles,
-} from "./card"
+} from './card'

@@ -32,7 +32,16 @@ export function TimePickerRoot({
   children,
   ...props
 }: TimePickerRootProps) {
-  const timePicker = useTimePicker({ value, defaultValue, onChange, format, use12Hours, disabled, readOnly, disabledTime })
+  const timePicker = useTimePicker({
+    value,
+    defaultValue,
+    onChange,
+    format,
+    use12Hours,
+    disabled,
+    readOnly,
+    disabledTime,
+  })
   const resolvedFormat = format ?? (use12Hours ? 'hh:mm:ss A' : 'HH:mm:ss')
   return (
     <PopoverRoot

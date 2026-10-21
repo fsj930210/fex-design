@@ -11,7 +11,10 @@ export function PopoverTitle({ ref, className, ...props }: PopoverTitleProps) {
       {...props}
       ref={ref}
       data-slot="popover-title"
-      className={cn("text-sm font-medium leading-none text-[var(--popover-foreground,var(--elevated-foreground))]", className)}
+      className={cn(
+        'text-sm font-medium leading-none text-[var(--popover-foreground,var(--elevated-foreground))]',
+        className,
+      )}
     />
   )
 }

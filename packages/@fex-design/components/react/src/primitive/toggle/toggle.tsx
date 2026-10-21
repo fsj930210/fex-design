@@ -1,15 +1,7 @@
 import { createToggleController } from '@fex-design/core/toggle/create-toggle-controller'
-import {
-  toggleClassName,
-  type ToggleStyleProps,
-} from '@fex-design/components-styles/toggle'
+import { toggleClassName, type ToggleStyleProps } from '@fex-design/components-styles/toggle'
 import { cn } from '@fex-design/utils'
-import {
-  use,
-  useRef,
-  type ButtonHTMLAttributes,
-  type Ref,
-} from 'react'
+import { use, useRef, type ButtonHTMLAttributes, type Ref } from 'react'
 import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
 import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
 import { Button } from '../button'

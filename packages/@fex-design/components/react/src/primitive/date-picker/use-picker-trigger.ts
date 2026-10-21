@@ -19,7 +19,8 @@ export function usePickerTrigger(owner: TriggerOwner) {
   const reference = useLazyRef<HTMLElement | null>(() => null)
   const containerScope = use(PickerContainerContext)
   const inheritedPopover = use(PopoverContext)
-  const popover = containerScope && inheritedPopover === containerScope.parentPopover ? null : inheritedPopover
+  const popover =
+    containerScope && inheritedPopover === containerScope.parentPopover ? null : inheritedPopover
   const ref = useMemoizedFn((element: HTMLElement | null) => {
     reference.current = element
     if (!popover) return
@@ -31,16 +32,26 @@ export function usePickerTrigger(owner: TriggerOwner) {
     if (part) owner.setActivePart?.(part)
     if (popover) {
       // Popover suppresses focus restored by closing the popup.
-      popover.overlay.trigger.focus({ target: event.target, currentTarget: event.currentTarget, event,
-        preventDefault: () => event.preventDefault(), stopPropagation: () => event.stopPropagation() })
+      popover.overlay.trigger.focus({
+        target: event.target,
+        currentTarget: event.currentTarget,
+        event,
+        preventDefault: () => event.preventDefault(),
+        stopPropagation: () => event.stopPropagation(),
+      })
       if (part && owner.controller.getState().open) owner.openPanel(part)
     } else owner.openPanel(part)
   })
   const click = useMemoizedFn((event: MouseEvent<HTMLElement>) => {
     if (event.defaultPrevented || owner.disabled) return
-    const part = event.target instanceof Element ? event.target.closest('[data-range-part]')?.getAttribute('data-range-part') : null
+    const part =
+      event.target instanceof Element
+        ? event.target.closest('[data-range-part]')?.getAttribute('data-range-part')
+        : null
     owner.openPanel(getDatePickerInputPart(part))
   })
-  const focusInput = useMemoizedFn((part: DatePickerInputPart) => focusDatePickerInput(reference.current, part))
+  const focusInput = useMemoizedFn((part: DatePickerInputPart) =>
+    focusDatePickerInput(reference.current, part),
+  )
   return { ref, focus, click, focusInput }
 }

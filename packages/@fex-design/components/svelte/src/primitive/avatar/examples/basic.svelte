@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { Avatar, AvatarFallback, AvatarImage } from '@fex-design/svelte/primitive/avatar'
+  import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+  } from "@fex-design/svelte/primitive/avatar";
 </script>
 
 <Avatar

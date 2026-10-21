@@ -26,7 +26,7 @@
         /></Tag
       >{/each}
   </div>
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     <input
       bind:value={name}
       class="h-8 rounded-md border px-2 text-sm"

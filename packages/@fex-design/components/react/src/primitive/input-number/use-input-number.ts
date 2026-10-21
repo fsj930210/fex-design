@@ -146,4 +146,3 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     parseDraft: () => parse(draft),
   }
 }
-

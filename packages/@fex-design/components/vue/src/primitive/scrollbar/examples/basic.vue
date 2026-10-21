@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { scrollbarDemoLines } from '@fex-design/docs-shared/scrollbar-demo'
-import { ScrollbarRoot, ScrollbarViewport, ScrollbarBar, ScrollbarCorner, ScrollbarTrack, ScrollbarThumb } from '@fex-design/vue/primitive/scrollbar'
+import {
+  ScrollbarRoot,
+  ScrollbarViewport,
+  ScrollbarBar,
+  ScrollbarCorner,
+  ScrollbarTrack,
+  ScrollbarThumb,
+} from '@fex-design/vue/primitive/scrollbar'
 </script>
 <template>
   <ScrollbarRoot class="h-48 w-72 rounded-md border" auto-hide="never" :overflow="{ x: 'hidden' }">

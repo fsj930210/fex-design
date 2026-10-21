@@ -1,21 +1,19 @@
-import {
-  paginationEllipsisClassName,
-  paginationSrOnlyClassName,
-} from '@fex-design/components-styles/pagination'
+import { paginationEllipsisClassName } from '@fex-design/components-styles/pagination'
+import { usePaginationContext } from './context'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
-import { EllipsisIcon } from '@fex-design/react/icons/more'
+import { MoreIcon } from '@fex-design/react/icons/more'
 
-export function PaginationEllipsis({ className, ...props }: ComponentProps<'span'>) {
+export function PaginationEllipsis({ className, children, ...props }: ComponentProps<'span'>) {
+  const { size } = usePaginationContext()
   return (
     <span
-      aria-hidden
-      data-slot="pagination-ellipsis"
-      className={cn(paginationEllipsisClassName, className)}
       {...props}
+      data-slot="pagination-ellipsis"
+      className={cn(paginationEllipsisClassName({ size: size }), className)}
+      aria-hidden="true"
     >
-      <EllipsisIcon />
-      <span className={paginationSrOnlyClassName}>More pages</span>
+      {children ?? <MoreIcon />}
     </span>
   )
 }

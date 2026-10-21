@@ -1,6 +1,9 @@
 import { isPickerActionBlocked } from '@fex-design/core/date-picker/view'
 import { getDatePickerHeaderLabel } from '@fex-design/core/date-picker/panel'
-import { getDatePickerHeaderLabelParts, getNextPanelByHeaderLabel } from '@fex-design/core/date-picker/panel'
+import {
+  getDatePickerHeaderLabelParts,
+  getNextPanelByHeaderLabel,
+} from '@fex-design/core/date-picker/panel'
 import type { DatePickerHeaderLabelPart } from '@fex-design/core/date-picker/types'
 import { datePickerHeaderLabelClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
@@ -29,7 +32,15 @@ export function DatePickerHeaderLabel({
   const calendar = useCalendarContext('DatePickerHeaderLabel')
   const [hovered, setHovered] = useState(false)
   const visible = getDatePickerHeaderLabelParts(context.picker, calendar.state.panel).includes(part)
-  const label = children === undefined ? getDatePickerHeaderLabel(calendar.state.viewDate, calendar.state.panel, part, calendar.controller.getOptions().locale) : children
+  const label =
+    children === undefined
+      ? getDatePickerHeaderLabel(
+          calendar.state.viewDate,
+          calendar.state.panel,
+          part,
+          calendar.controller.getOptions().locale,
+        )
+      : children
 
   return (
     <Button

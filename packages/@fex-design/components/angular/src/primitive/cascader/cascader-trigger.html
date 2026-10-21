@@ -2,8 +2,7 @@
   popoverTrigger
   role="presentation"
   [attr.data-disabled]="cascader.disabled || null"
-  [attr.data-status]="cascader.status"
-  [attr.aria-invalid]="cascader.status === 'error' || null"
+  [attr.data-warning]="cascader.dataWarning || null"
   [class]="triggerClass"
   (keydown)="keydown($event)"
 >
@@ -23,6 +22,7 @@
     <span [class]="placeholderClass">{{ cascader.placeholder }}</span> }
     <input
       role="combobox"
+      [attr.aria-invalid]="cascader.ariaInvalid || null"
       [attr.aria-expanded]="cascader.snapshot().open"
       [disabled]="cascader.disabled"
       [readOnly]="!cascader.showSearch"

@@ -7,9 +7,12 @@
   import { cn } from "@fex-design/utils";
   import { setContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { createScrollbar } from './create-scrollbar.svelte';
-  import { scrollbarKey, type ScrollbarContext } from './scrollbar-context';
-  interface Props extends HTMLAttributes<HTMLDivElement>, Omit<ScrollbarRootOptions, 'onScroll'> {
+  import { createScrollbar } from "./create-scrollbar.svelte";
+  import { scrollbarKey, type ScrollbarContext } from "./scrollbar-context";
+  interface Props
+    extends
+      HTMLAttributes<HTMLDivElement>,
+      Omit<ScrollbarRootOptions, "onScroll"> {
     children?: Snippet;
     element?: HTMLDivElement | undefined;
     onScrollChange?: (detail: ScrollbarScrollDetail) => void;

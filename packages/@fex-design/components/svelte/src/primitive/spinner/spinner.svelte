@@ -9,7 +9,7 @@
   import { cn } from "@fex-design/utils";
   import type { HTMLAttributes } from "svelte/elements";
   import type { Snippet } from "svelte";
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
   let {
     class: className,
     size = "md",

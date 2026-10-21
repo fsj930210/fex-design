@@ -10,6 +10,10 @@
   let { class: className, children, ...rest }: Props = $props();
 </script>
 
-<div {...rest} data-slot="alert-title" class={cn(alertTitleClassName, className)}>
+<div
+  {...rest}
+  data-slot="alert-title"
+  class={cn(alertTitleClassName, className)}
+>
   {@render children?.()}
 </div>

@@ -5,4 +5,4 @@ export {
   InputGroup,
   type InputClassNames,
   type InputStyles,
-} from "./input"
+} from './input'

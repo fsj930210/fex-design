@@ -23,9 +23,19 @@ import { CheckIcon } from '@fex-design/react/icons/check'
 import { ChevronRightIcon } from '@fex-design/react/icons/chevron'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
 import { MinusIcon } from '@fex-design/react/icons/minus'
-import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '@fex-design/react/primitive/checkbox'
+import {
+  CheckboxControl,
+  CheckboxIndicator,
+  CheckboxRoot,
+} from '@fex-design/react/primitive/checkbox'
 import { PopoverContent, PopoverPortal } from '@fex-design/react/primitive/popover'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '@fex-design/react/primitive/scrollbar'
+import {
+  ScrollbarBar,
+  ScrollbarRoot,
+  ScrollbarViewport,
+  ScrollbarTrack,
+  ScrollbarThumb,
+} from '@fex-design/react/primitive/scrollbar'
 import { useCascader } from './cascader-context'
 
 export function CascaderContent({ className, children, ...props }: ComponentProps<'div'>) {

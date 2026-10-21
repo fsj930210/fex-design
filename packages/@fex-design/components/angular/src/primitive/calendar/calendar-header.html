@@ -1,27 +1,146 @@
 @if (renderTemplate() ?? headerTemplate(); as template) {
-  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="templateContext()" />
+<ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="templateContext()" />
+} @else { @if (projectedElements().length) {
+<ng-content />
 } @else {
-  @if (projectedElements().length) {
-    <ng-content />
-  } @else {
-    <div [class]="controlsClass">
-      <button calendarNavigationButton action="previous-panel" [disabled]="!context().canPrevious" [attr.aria-label]="context().locale.previous"></button>
-      <button calendarNavigationButton action="next-panel" [disabled]="!context().canNext" [attr.aria-label]="context().locale.next"></button>
-      <button calendarNavigationButton action="today">{{ context().locale.today }}</button>
-      <div selectRoot [options]="context().years" [value]="context().viewDate.year" (change)="year($event.value)">
-        <div selectTrigger [class]="selectClass" [inputProps]="{ 'aria-label': context().locale.year }"></div>
-        <div selectContent><div selectList></div></div>
-      </div>
-      @if (context().panel === 'date') {
-        <div selectRoot [options]="context().months" [value]="context().viewDate.month" (change)="month($event.value)">
-          <div selectTrigger [class]="selectClass" [inputProps]="{ 'aria-label': context().locale.month }"></div>
-          <div selectContent><div selectList></div></div>
-        </div>
-      }
-      <div radioGroup class="gap-0" [value]="context().panel" [attr.aria-label]="context().locale.datePanel + '/' + context().locale.monthPanel" (valueChange)="panel($event.value)">
-        <button radioButton value="date">{{ context().locale.datePanel }}</button>
-        <button radioButton value="month">{{ context().locale.monthPanel }}</button>
-      </div>
+<div [class]="controlsClass">
+  <button
+    calendarNavigationButton
+    [class]="previousButtonProps()?.class"
+    [style]="previousButtonProps()?.style"
+    action="previous-panel"
+    [disabled]="!context().canPrevious || previousButtonProps()?.disabled === true"
+    [attr.aria-label]="context().locale.previous"
+  ></button>
+  <button
+    calendarNavigationButton
+    [class]="nextButtonProps()?.class"
+    [style]="nextButtonProps()?.style"
+    action="next-panel"
+    [disabled]="!context().canNext || nextButtonProps()?.disabled === true"
+    [attr.aria-label]="context().locale.next"
+  ></button>
+  <button
+    calendarNavigationButton
+    [class]="todayButtonProps()?.class"
+    [style]="todayButtonProps()?.style"
+    action="today"
+    [disabled]="todayButtonProps()?.disabled === true"
+  >
+    {{ context().locale.today }}
+  </button>
+  <div
+    selectRoot
+    [class]="yearSelectRootProps()?.class"
+    [style]="yearSelectRootProps()?.style"
+    [multiple]="false"
+    [clearable]="false"
+    [showSearch]="yearSelectRootProps()?.showSearch ?? false"
+    [filterOption]="yearSelectRootProps()?.filterOption"
+    [open]="yearSelectRootProps()?.open"
+    [defaultOpen]="yearSelectRootProps()?.defaultOpen ?? false"
+    [loading]="yearSelectRootProps()?.loading ?? false"
+    [disabled]="yearSelectRootProps()?.disabled ?? false"
+    [popoverProps]="yearSelectRootProps()?.popoverProps ?? {}"
+    [virtual]="yearSelectRootProps()?.virtual"
+    [maxCount]="yearSelectRootProps()?.maxCount"
+    [status]="yearSelectRootProps()?.status"
+    [options]="context().years"
+    [value]="context().viewDate.year"
+    (change)="year($event.value)"
+  >
+    <div
+      selectTrigger
+      [class]="cn(selectClass, yearSelectTriggerProps()?.class)"
+      [style]="yearSelectTriggerProps()?.style"
+      [inputProps]="yearSelectTriggerProps()?.inputProps ?? { 'aria-label': context().locale.year }"
+      [valueProps]="yearSelectTriggerProps()?.valueProps"
+      [placeholder]="yearSelectTriggerProps()?.placeholder ?? ''"
+      [maxTagCount]="yearSelectTriggerProps()?.maxTagCount"
+    ></div>
+    <div
+      selectContent
+      [portalProps]="yearSelectContentProps()?.portalProps"
+      [popoverContentProps]="yearSelectContentProps()?.popoverContentProps"
+      [listProps]="yearSelectContentProps()?.listProps"
+      [popupRender]="yearSelectContentProps()?.popupRender"
+      [class]="yearSelectContentProps()?.class"
+      [style]="yearSelectContentProps()?.style"
+    ></div>
+  </div>
+  @if (context().panel === 'date') {
+  <div
+    selectRoot
+    [class]="monthSelectRootProps()?.class"
+    [style]="monthSelectRootProps()?.style"
+    [multiple]="false"
+    [clearable]="false"
+    [showSearch]="monthSelectRootProps()?.showSearch ?? false"
+    [filterOption]="monthSelectRootProps()?.filterOption"
+    [open]="monthSelectRootProps()?.open"
+    [defaultOpen]="monthSelectRootProps()?.defaultOpen ?? false"
+    [loading]="monthSelectRootProps()?.loading ?? false"
+    [disabled]="monthSelectRootProps()?.disabled ?? false"
+    [popoverProps]="monthSelectRootProps()?.popoverProps ?? {}"
+    [virtual]="monthSelectRootProps()?.virtual"
+    [maxCount]="monthSelectRootProps()?.maxCount"
+    [status]="monthSelectRootProps()?.status"
+    [options]="context().months"
+    [value]="context().viewDate.month"
+    (change)="month($event.value)"
+  >
+    <div
+      selectTrigger
+      [class]="cn(selectClass, monthSelectTriggerProps()?.class)"
+      [style]="monthSelectTriggerProps()?.style"
+      [inputProps]="monthSelectTriggerProps()?.inputProps ?? { 'aria-label': context().locale.month }"
+      [valueProps]="monthSelectTriggerProps()?.valueProps"
+      [placeholder]="monthSelectTriggerProps()?.placeholder ?? ''"
+      [maxTagCount]="monthSelectTriggerProps()?.maxTagCount"
+    ></div>
+    <div
+      selectContent
+      [portalProps]="monthSelectContentProps()?.portalProps"
+      [popoverContentProps]="monthSelectContentProps()?.popoverContentProps"
+      [listProps]="monthSelectContentProps()?.listProps"
+      [popupRender]="monthSelectContentProps()?.popupRender"
+      [class]="monthSelectContentProps()?.class"
+      [style]="monthSelectContentProps()?.style"
+    >
+      <div selectList></div>
     </div>
+  </div>
   }
-}
+  <div
+    radioGroup
+    [class]="cn('gap-0', modeGroupProps()?.class)"
+    [style]="modeGroupProps()?.style"
+    [orientation]="modeGroupProps()?.orientation ?? 'horizontal'"
+    [disabled]="modeGroupProps()?.disabled ?? false"
+    [value]="context().panel"
+    [attr.aria-label]="context().locale.datePanel + '/' + context().locale.monthPanel"
+    (valueChange)="panel($event.value)"
+  >
+    <button
+      radioButton
+      [class]="dateModeButtonProps()?.class"
+      [style]="dateModeButtonProps()?.style"
+      [size]="dateModeButtonProps()?.size ?? 'md'"
+      [disabled]="dateModeButtonProps()?.disabled ?? false"
+      value="date"
+    >
+      {{ context().locale.datePanel }}
+    </button>
+    <button
+      radioButton
+      [class]="monthModeButtonProps()?.class"
+      [style]="monthModeButtonProps()?.style"
+      [size]="monthModeButtonProps()?.size ?? 'md'"
+      [disabled]="monthModeButtonProps()?.disabled ?? false"
+      value="month"
+    >
+      {{ context().locale.monthPanel }}
+    </button>
+  </div>
+</div>
+} }

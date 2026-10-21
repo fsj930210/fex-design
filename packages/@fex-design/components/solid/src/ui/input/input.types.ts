@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'solid-js'
+import type { Button } from '../button'
 import type {
   InputClassNames,
   InputSearchMeta,
@@ -19,11 +21,18 @@ export interface InputProps
   clear?: JSX.Element
   classNames?: InputClassNames
   styles?: InputStyles<JSX.CSSProperties>
+  'data-warning'?: string | undefined
 }
 export interface InputPasswordProps extends Omit<InputProps, 'type'> {
   visibilityToggle?: boolean
 }
 export interface InputSearchProps extends Omit<InputProps, 'type'> {
+  addonBeforeButtonProps?:
+    | Omit<ComponentProps<typeof Button>, 'children' | 'loading' | 'disabled' | 'onClick'>
+    | undefined
+  addonAfterButtonProps?:
+    | Omit<ComponentProps<typeof Button>, 'children' | 'loading' | 'disabled' | 'onClick'>
+    | undefined
   loading?: boolean
   onSearch?: (value: string, meta: InputSearchMeta) => void
 }

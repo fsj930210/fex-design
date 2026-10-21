@@ -3,11 +3,7 @@ import type { MasonryKey } from '@fex-design/core/masonry/types'
 import { masonryVirtualViewportClassName } from '@fex-design/components-styles/masonry'
 import { createVirtualizer } from '@tanstack/solid-virtual'
 import { cn } from '@fex-design/utils'
-import {
-  For,
-  splitProps,
-  type JSX,
-} from 'solid-js'
+import { For, splitProps, type JSX } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 import { useMasonryContext } from './masonry-context'
 

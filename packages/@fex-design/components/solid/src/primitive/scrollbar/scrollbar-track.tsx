@@ -8,7 +8,12 @@ export function ScrollbarTrack(
 ) {
   const [local, rest] = splitProps(props, ['class', 'children', 'axis'])
   return (
-    <div {...rest} data-slot="scrollbar-track" data-axis={local.axis} class={cn(scrollbarTrackClassName, local.class)}>
+    <div
+      {...rest}
+      data-slot="scrollbar-track"
+      data-axis={local.axis}
+      class={cn(scrollbarTrackClassName, local.class)}
+    >
       {local.children}
     </div>
   )

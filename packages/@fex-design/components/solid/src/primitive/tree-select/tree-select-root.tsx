@@ -4,17 +4,9 @@ import type {
   TreeSelectItem,
   TreeSelectValue,
 } from '@fex-design/core/tree-select/types'
-import {
-  createEffect,
-  createSignal,
-  splitProps,
-  type ParentProps,
-} from 'solid-js'
+import { createEffect, createSignal, splitProps, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
-import {
-  Popover,
-  type PopoverProps,
-} from '../popover'
+import { Popover, type PopoverProps } from '../popover'
 import { TreeSelectContext } from './tree-select-context'
 
 export interface TreeSelectRootProps<TNode = unknown>

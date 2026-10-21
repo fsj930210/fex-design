@@ -1,12 +1,14 @@
 @if (addonBefore() != null) {
 <button
   button
-  variant="solid"
-  color="primary"
+  [variant]="addonBeforeButtonProps()?.variant ?? 'solid'"
+  [color]="addonBeforeButtonProps()?.color ?? 'primary'"
   [loading]="loading()"
   data-input-addon-fill
   aria-label="Search"
-  [class]="searchAddonClassName"
+  [class]="searchAddonClassName + ' ' + (addonBeforeButtonProps()?.class ?? '')"
+  [style]="addonBeforeButtonProps()?.style"
+  [disabled]="disabled()"
   (click)="runSearch('addonBefore')"
 >
   @if (!loading()) { @if (template(addonBefore()); as content) {
@@ -78,12 +80,14 @@
 @if (addonAfter() !== null) {
 <button
   button
-  variant="solid"
-  color="primary"
+  [variant]="addonAfterButtonProps()?.variant ?? 'solid'"
+  [color]="addonAfterButtonProps()?.color ?? 'primary'"
   [loading]="loading()"
   data-input-addon-fill
   aria-label="Search"
-  [class]="searchAddonClassName"
+  [class]="searchAddonClassName + ' ' + (addonAfterButtonProps()?.class ?? '')"
+  [style]="addonAfterButtonProps()?.style"
+  [disabled]="disabled()"
   (click)="runSearch('addonAfter')"
 >
   @if (!loading()) { @if (template(addonAfter()); as content) {

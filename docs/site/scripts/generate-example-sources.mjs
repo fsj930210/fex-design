@@ -20,8 +20,12 @@ for (const [framework, extension] of Object.entries(frameworkExtensions)) {
   for (const layer of ['primitive', 'ui']) {
     const layerRoot = resolve(componentRoot, framework, 'src', layer)
     for (const component of await readdir(layerRoot, { withFileTypes: true })) {
-      if (!component.isDirectory() || component.name.toLowerCase().includes('trash') ||
-          (components && !components.has(component.name))) continue
+      if (
+        !component.isDirectory() ||
+        component.name.toLowerCase().includes('trash') ||
+        (components && !components.has(component.name))
+      )
+        continue
       const examplesRoot = resolve(layerRoot, component.name, 'examples')
       let examples
       try {
@@ -33,7 +37,13 @@ for (const [framework, extension] of Object.entries(frameworkExtensions)) {
       for (const example of examples) {
         if (!example.isFile() || !example.name.endsWith(`.${extension}`)) continue
         const name = example.name.slice(0, -extension.length - 1)
-        const result = await readExampleSource({ componentRoot, framework, layer, component: component.name, example: name })
+        const result = await readExampleSource({
+          componentRoot,
+          framework,
+          layer,
+          component: component.name,
+          example: name,
+        })
         const output = resolve(outputRoot, framework, layer, component.name, `${name}.json`)
         await mkdir(dirname(output), { recursive: true })
         await writeFile(output, JSON.stringify(result))

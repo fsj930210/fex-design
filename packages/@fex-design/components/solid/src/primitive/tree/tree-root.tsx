@@ -2,18 +2,10 @@ import type { ExpansionFeatureApi } from '@fex-design/core/tree/features/expansi
 import type { SelectionFeatureApi } from '@fex-design/core/tree/features/selection'
 import type { CheckFeatureApi } from '@fex-design/core/tree/features/check'
 import type { FocusFeatureApi } from '@fex-design/core/tree/features/focus'
-import type {
-  TreeController,
-  TreeNodeData,
-  TreeOptions,
-} from '@fex-design/core/tree/types'
+import type { TreeController, TreeNodeData, TreeOptions } from '@fex-design/core/tree/types'
 import { treeRootClassName } from '@fex-design/components-styles/tree'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type Accessor,
-  type JSX,
-} from 'solid-js'
+import { splitProps, type Accessor, type JSX } from 'solid-js'
 import { createTreeAdapter } from './create-tree'
 import { TreeContext, type TreeContextValue } from './tree-context'
 

@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+import { formTreatment } from './form-treatment'
 
 export const checkboxRootClassName = cva(
   'relative inline-grid min-w-0 grid-cols-[auto_1fr] items-center gap-(--checkbox-content-gap) align-middle [--checkbox-content-gap:0.5rem]',
@@ -19,7 +20,9 @@ export const checkboxControlClassName = [
   'checked:border-[var(--checkbox-checked-border-color,var(--checkbox-checked-background,var(--primary)))] checked:bg-[var(--checkbox-checked-background,var(--primary))]',
   'indeterminate:border-[var(--checkbox-checked-border-color,var(--checkbox-checked-background,var(--primary)))] indeterminate:bg-[var(--checkbox-checked-background,var(--primary))]',
   'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-[var(--checkbox-ring-color,var(--focus-ring))]',
-  'disabled:cursor-not-allowed disabled:border-border disabled:bg-disabled-background disabled:shadow-none aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20',
+  'disabled:cursor-not-allowed disabled:border-border disabled:bg-disabled-background disabled:shadow-none',
+  formTreatment('aria-invalid=true', 'var(--danger)'),
+  formTreatment('data-[warning=true]', 'var(--warning)'),
 ].join(' ')
 export const checkboxIndicatorClassName =
   'pointer-events-none invisible col-start-1 row-start-1 flex size-[var(--checkbox-size,var(--checkbox-control-size))] items-center justify-center text-[var(--checkbox-indicator-color,var(--primary-foreground))] peer-checked:visible peer-indeterminate:visible [&_svg]:pointer-events-none [&_svg]:size-[75%] [&_svg]:shrink-0'

@@ -217,6 +217,12 @@
       "id": "css-variables",
       "title": "CSS Variables",
       "description": "两种形状使用实例 CSS Variables 覆盖轨道、边框、文字和滑块。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ],
   "frameworks": {

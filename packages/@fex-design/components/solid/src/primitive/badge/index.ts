@@ -1,5 +1,12 @@
-export { Badge, Badge as BadgeRoot, type BadgeProps, type BadgeRootProps } from "./badge-root"
-export { BadgeDot, type BadgeDotProps } from "./badge-dot"
-export { BadgeGroup, type BadgeGroupProps } from "./badge-group"
-export { BadgeRibbon, type BadgeRibbonProps } from "./badge-ribbon"
-export type { BadgeColor, BadgeSize, BadgeOptions, BadgeDotOptions, BadgeGroupOptions, BadgeRibbonOptions } from "@fex-design/core"
+export { Badge, Badge as BadgeRoot, type BadgeProps, type BadgeRootProps } from './badge-root'
+export { BadgeDot, type BadgeDotProps } from './badge-dot'
+export { BadgeGroup, type BadgeGroupProps } from './badge-group'
+export { BadgeRibbon, type BadgeRibbonProps } from './badge-ribbon'
+export type {
+  BadgeColor,
+  BadgeSize,
+  BadgeOptions,
+  BadgeDotOptions,
+  BadgeGroupOptions,
+  BadgeRibbonOptions,
+} from '@fex-design/core'

@@ -2,8 +2,8 @@
   import { listboxItemIndicatorClassName } from "@fex-design/components-styles/listbox";
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
-  import PrimitiveListboxItemIndicator from '@fex-design/svelte/primitive/listbox/listbox-item-indicator.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
+  import PrimitiveListboxItemIndicator from "@fex-design/svelte/primitive/listbox/listbox-item-indicator.svelte";
 
   let {
     class: className,

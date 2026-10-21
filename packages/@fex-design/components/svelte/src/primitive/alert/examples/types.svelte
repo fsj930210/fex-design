@@ -1,9 +1,13 @@
 <script lang="ts">
-  import { AlertTitle, AlertIcon, Alert } from '@fex-design/svelte/primitive/alert'
-  import CircleCheckIcon from '@fex-design/svelte/icons/circle-check.svelte';
-  import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
-  import InfoIcon from '@fex-design/svelte/icons/info.svelte';
-  import TriangleAlertIcon from '@fex-design/svelte/icons/triangle-alert.svelte';
+  import {
+    AlertTitle,
+    AlertIcon,
+    Alert,
+  } from "@fex-design/svelte/primitive/alert";
+  import CircleCheckIcon from "@fex-design/svelte/icons/circle-check.svelte";
+  import CircleXIcon from "@fex-design/svelte/icons/circle-x.svelte";
+  import InfoIcon from "@fex-design/svelte/icons/info.svelte";
+  import TriangleAlertIcon from "@fex-design/svelte/icons/triangle-alert.svelte";
 </script>
 
 <div class="grid w-full gap-3">

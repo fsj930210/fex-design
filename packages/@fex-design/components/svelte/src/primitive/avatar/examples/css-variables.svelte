@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@fex-design/svelte/primitive/avatar'
+  import {
+    Avatar,
+    AvatarFallback,
+    AvatarGroup,
+    AvatarImage,
+  } from "@fex-design/svelte/primitive/avatar";
 </script>
 
 <AvatarGroup class="[--avatar-size:3rem] [--avatar-group-overlap:1rem]"

@@ -1,9 +1,5 @@
 import { defaultSelectFilterOption } from '@fex-design/core/select/filter-options'
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 

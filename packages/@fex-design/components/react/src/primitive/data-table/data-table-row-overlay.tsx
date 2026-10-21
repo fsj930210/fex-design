@@ -75,7 +75,7 @@ export function DataTableRowOverlay<TFeatures extends TableFeatures, TData exten
   const { tableWidth } = getDataTableSizingLayout(renderTable)
   const hasPinnedColumns = Boolean(
     pinningTable.getStartVisibleLeafColumns?.().length ||
-      pinningTable.getEndVisibleLeafColumns?.().length,
+    pinningTable.getEndVisibleLeafColumns?.().length,
   )
   const visibleLeafColumns = getDataTableVisibleLeafColumns(renderTable)
 

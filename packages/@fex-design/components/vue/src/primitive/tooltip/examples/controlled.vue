@@ -11,7 +11,7 @@ import { Button } from '@fex-design/vue/primitive/button'
 const open = ref(false)
 </script>
 <template>
-  <div class="flex min-h-64 items-center justify-center gap-3">
+  <div class="flex flex-wrap min-h-64 items-center justify-center gap-3">
     <Button @click="open = !open">外部{{ open ? '关闭' : '打开' }}</Button
     ><TooltipRoot :open="open" @open-change="open = $event"
       ><TooltipTrigger v-slot="trigger"

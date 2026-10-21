@@ -4,7 +4,7 @@
   let showZero = $state(false);
 </script>
 
-<div class="flex items-center gap-6">
+<div class="flex flex-wrap items-center gap-6">
   <label class="flex items-center gap-2"
     ><SwitchRoot
       checked={showZero}

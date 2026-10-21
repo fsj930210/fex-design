@@ -126,9 +126,14 @@ function createCalendarCell<TValue extends CalendarValue>({
   options: CalendarGridOptions<TValue> & { today: CalendarDate }
 }): CalendarCell<TValue> {
   // Browsing a month/year must remain possible when min falls inside that period.
-  const periodEnd = panel === 'month' ? endOfDate(date, 'month')
-    : panel === 'quarter' ? endOfDate(date, 'quarter')
-      : panel === 'year' || panel === 'decade' ? endOfDate(date, 'year') : date
+  const periodEnd =
+    panel === 'month'
+      ? endOfDate(date, 'month')
+      : panel === 'quarter'
+        ? endOfDate(date, 'quarter')
+        : panel === 'year' || panel === 'decade'
+          ? endOfDate(date, 'year')
+          : date
   const isBeforeMin = options.min ? compareCalendarDate(periodEnd, options.min) < 0 : false
   const isAfterMax = options.max ? compareCalendarDate(date, options.max) > 0 : false
   const disabled = isBeforeMin || isAfterMax || Boolean(options.disabledDate?.(date))
@@ -142,12 +147,13 @@ function createCalendarCell<TValue extends CalendarValue>({
     ? isSameCalendarValue(value, options.range?.start ?? options.range?.end)
     : isSameCalendarValue(value, options.range?.end)
   const selectedValue = getPanelSelectionValue(options.value, granularity, options.weekStartsOn)
-  const selectedValues = options.values?.some(item =>
+  const selectedValues = options.values?.some((item) =>
     isSameCalendarValue(value, getPanelSelectionValue(item, granularity, options.weekStartsOn)),
   )
-  const browsingValue = options.granularity === 'date' && panel !== 'date'
-    ? getCalendarSelectionValue(options.viewDate, granularity, options.weekStartsOn)
-    : null
+  const browsingValue =
+    options.granularity === 'date' && panel !== 'date'
+      ? getCalendarSelectionValue(options.viewDate, granularity, options.weekStartsOn)
+      : null
 
   return {
     key: `${panel}:${granularity}:${getCalendarDateKey(date)}:${rowIndex}:${columnIndex}`,
@@ -159,14 +165,18 @@ function createCalendarCell<TValue extends CalendarValue>({
     rowIndex,
     columnIndex,
     state: {
-      today: panel === 'date'
-        ? getCalendarDateKey(date) === getCalendarDateKey(options.today)
-        : isSameCalendarValue(value, getCalendarSelectionValue(options.today, granularity)),
+      today:
+        panel === 'date'
+          ? getCalendarDateKey(date) === getCalendarDateKey(options.today)
+          : isSameCalendarValue(value, getCalendarSelectionValue(options.today, granularity)),
       outside,
       disabled,
       // Unit panels need an active browse selection even when date selection is
       // intentionally deferred until the date panel is opened.
-      selected: isSameCalendarValue(value, selectedValue) || Boolean(selectedValues) || isSameCalendarValue(value, browsingValue),
+      selected:
+        isSameCalendarValue(value, selectedValue) ||
+        Boolean(selectedValues) ||
+        isSameCalendarValue(value, browsingValue),
       rangeStart,
       rangeEnd,
       inRange: isCalendarValueInRange(value, options.range),
@@ -179,7 +189,9 @@ function getPanelSelectionValue(
   granularity: CalendarGranularity,
   weekStartsOn: CalendarWeekday | undefined,
 ) {
-  return value ? getCalendarSelectionValue(getCalendarValueDate(value), granularity, weekStartsOn) : null
+  return value
+    ? getCalendarSelectionValue(getCalendarValueDate(value), granularity, weekStartsOn)
+    : null
 }
 
 function getDateCellValue(
@@ -239,17 +251,19 @@ function chunkCells<TValue extends CalendarValue>(
   const visibleSelection = (cell: CalendarCell<TValue> | undefined) =>
     Boolean(cell?.state.selected && !cell.state.outside && cell.granularity !== 'week')
   return Array.from({ length: Math.ceil(cells.length / columnCount) }, (_, rowIndex) =>
-    cells.slice(rowIndex * columnCount, rowIndex * columnCount + columnCount).map((cell, columnIndex) => {
-      if (!visibleSelection(cell)) return cell
-      const index = rowIndex * columnCount + columnIndex
-      return {
-        ...cell,
-        state: {
-          ...cell.state,
-          selectedAbove: visibleSelection(cells[index - columnCount]),
-          selectedBelow: visibleSelection(cells[index + columnCount]),
-        },
-      }
-    }),
+    cells
+      .slice(rowIndex * columnCount, rowIndex * columnCount + columnCount)
+      .map((cell, columnIndex) => {
+        if (!visibleSelection(cell)) return cell
+        const index = rowIndex * columnCount + columnIndex
+        return {
+          ...cell,
+          state: {
+            ...cell.state,
+            selectedAbove: visibleSelection(cells[index - columnCount]),
+            selectedBelow: visibleSelection(cells[index + columnCount]),
+          },
+        }
+      }),
   )
 }

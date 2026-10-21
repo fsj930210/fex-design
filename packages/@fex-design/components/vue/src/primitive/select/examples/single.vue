@@ -1,1 +1,14 @@
-<script setup lang="ts">import { ref } from 'vue'; import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/vue/primitive/select'; const value=ref('react'); const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]</script><template><SelectRoot v-model="value" :options="options"><SelectTrigger class="w-72"/><SelectContent/></SelectRoot></template>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
+const value = ref('react')
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+]
+</script>
+<template>
+  <SelectRoot v-model="value" :options="options"
+    ><SelectTrigger class="w-72" /><SelectContent
+  /></SelectRoot>
+</template>

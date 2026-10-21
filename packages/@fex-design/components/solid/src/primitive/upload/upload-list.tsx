@@ -1,13 +1,7 @@
 import type { UploadItem as UploadItemValue } from '@fex-design/core/upload/types'
 import { uploadListClassName } from '@fex-design/components-styles/upload'
 import { cn } from '@fex-design/utils'
-import {
-  createSignal,
-  onCleanup,
-  Show,
-  splitProps,
-  type JSX,
-} from 'solid-js'
+import { createSignal, onCleanup, Show, splitProps, type JSX } from 'solid-js'
 import { useUploadContext } from './context'
 
 export function UploadList<TResponse>(

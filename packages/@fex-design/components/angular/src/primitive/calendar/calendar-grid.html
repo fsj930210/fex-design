@@ -1,9 +1,17 @@
 @for (row of grid().rows; track rowKey(row)) {
-  <div calendarRow [nativeAttributes]="rowProps()" [class]="rowProps()?.class ?? ''" [attr.style]="rowProps()?.style ?? null">
-    @for (cell of row; track cell.key) {
-      @if (cellTemplate()) {
-        <ng-container [ngTemplateOutlet]="cellTemplate()" [ngTemplateOutletContext]="{ $implicit: cell, cell }" />
-      } @else { <div calendarCell [cell]="cell"></div> }
-    }
-  </div>
+<div
+  calendarRow
+  [nativeAttributes]="rowProps()"
+  [class]="rowProps()?.class ?? ''"
+  [attr.style]="rowProps()?.style ?? null"
+>
+  @for (cell of row; track cell.key) { @if (cellTemplate()) {
+  <ng-container
+    [ngTemplateOutlet]="cellTemplate()"
+    [ngTemplateOutletContext]="{ $implicit: cell, cell }"
+  />
+  } @else {
+  <div calendarCell [cell]="cell"></div>
+  } }
+</div>
 }

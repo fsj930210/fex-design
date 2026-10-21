@@ -11,7 +11,42 @@ export { useTimePicker } from './use-time-picker'
 
 export { PopoverPortal as TimePickerPortal } from '../popover'
 
-export type { DisabledTime, TimeValue, TimePeriod, TimePickerUnit, TimePickerChangeDetails, TimePickerControllerOptions, TimePickerController, TimePickerSnapshot, TimePickerOption, TimePickerPopoverOptions } from '@fex-design/core/time-picker/types'
+export type {
+  DisabledTime,
+  TimeValue,
+  TimePeriod,
+  TimePickerUnit,
+  TimePickerChangeDetails,
+  TimePickerControllerOptions,
+  TimePickerController,
+  TimePickerSnapshot,
+  TimePickerOption,
+  TimePickerPopoverOptions,
+} from '@fex-design/core/time-picker/types'
 
-export { createHourOptions, createMinuteOptions, createSecondOptions, createPeriodOptions, resolveDisabledTime, getDisplayedHour, getDisplayedPeriod } from '@fex-design/core/time-picker/options'
+export {
+  createHourOptions,
+  createMinuteOptions,
+  createSecondOptions,
+  createPeriodOptions,
+  resolveDisabledTime,
+  getDisplayedHour,
+  getDisplayedPeriod,
+} from '@fex-design/core/time-picker/options'
 export { getNextTimeOption } from '@fex-design/core/time-picker/navigation'
+
+export type { TimePickerInputProps } from './time-picker-input-props'
+
+export { useTimeRangePicker } from './use-time-range-picker'
+export type {
+  TimeRangePart,
+  TimeRangeValue,
+  TimeRangeDraft,
+  TimeRangeChangeDetails,
+  TimeRangePickerOptions,
+  TimeRangePickerSnapshot,
+  TimeRangePickerController,
+} from '@fex-design/core/time-picker/range-types'
+export { default as TimeRangePickerRoot } from './time-range-picker-root.vue'
+export { default as TimeRangePickerTrigger } from './time-range-picker-trigger.vue'
+export { default as TimeRangePickerFooter } from './time-range-picker-footer.vue'

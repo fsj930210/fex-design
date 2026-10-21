@@ -1,4 +1,1 @@
-export {
-  TagCloseIcon,
-  Tag,
-} from "./tag"
+export { TagCloseIcon, Tag } from './tag'

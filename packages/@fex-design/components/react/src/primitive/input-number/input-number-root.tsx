@@ -25,24 +25,26 @@ export interface InputNumberRootProps
 }
 
 export function InputNumberRoot(rootProps: InputNumberRootProps) {
-  const hasValue = useLazyRef(() => Object.prototype.hasOwnProperty.call(rootProps, 'value')).current
+  const hasValue = useLazyRef(() =>
+    Object.prototype.hasOwnProperty.call(rootProps, 'value'),
+  ).current
   const {
-  value,
-  defaultValue,
-  min,
-  max,
-  step,
-  precision,
-  parser,
-  formatter,
-  keyboard = true,
-  disabled,
-  readOnly,
-  onChange,
-  controlled,
-  children,
-  className,
-  ...props
+    value,
+    defaultValue,
+    min,
+    max,
+    step,
+    precision,
+    parser,
+    formatter,
+    keyboard = true,
+    disabled,
+    readOnly,
+    onChange,
+    controlled,
+    children,
+    className,
+    ...props
   } = rootProps
   const inputNumber = useInputNumber({
     value,

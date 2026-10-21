@@ -2,7 +2,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { datePickerPresetClassName } from "@fex-design/components-styles/date-picker";
-  import { cn } from '@fex-design/utils';
+  import { cn } from "@fex-design/utils";
   import { Button } from "@fex-design/svelte/primitive/button";
   interface Props extends Omit<HTMLButtonAttributes, "children" | "class"> {
     class?: string;

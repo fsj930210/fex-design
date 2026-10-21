@@ -1,11 +1,7 @@
 import type { MessageSide } from '@fex-design/core/message/types'
 import { messageClassName } from '@fex-design/components-styles/message'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { MessageSideContext } from '../bubble/bubble-context'
 import { MessageContext } from './message-context'
 

@@ -1,6 +1,6 @@
-import { toastTitleClassName } from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import type { JSX } from "solid-js"
+import { toastTitleClassName } from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import type { JSX } from 'solid-js'
 
 export type ToastTitleProps = JSX.HTMLAttributes<HTMLDivElement>
 

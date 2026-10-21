@@ -91,6 +91,8 @@
     "./ui/empty": "./src/ui/empty/index.ts",
     "./ui/input": "./src/ui/input/index.ts",
     "./ui/input-number": "./src/ui/input-number/index.ts",
+    "./ui/menu": "./src/ui/menu/index.ts",
+    "./ui/pagination": "./src/ui/pagination/index.ts",
     "./ui/progress": "./src/ui/progress/index.ts",
     "./ui/radio": "./src/ui/radio/index.ts",
     "./ui/select": "./src/ui/select/index.ts",
@@ -161,6 +163,7 @@
     "./signals/date-utils": "./src/signals/date-utils.ts",
     "./signals/host-class": "./src/signals/host-class.ts",
     "./signals/host-style": "./src/signals/host-style.ts",
+    "./signals/merge-style": "./src/signals/merge-style.ts",
     "./services/toast": "./src/services/toast.ts",
     "./i18n": "./src/i18n/i18n.ts",
     "./*": "./src/*"
@@ -171,23 +174,23 @@
     "lint": "oxlint src"
   },
   "dependencies": {
+    "@fex-design/components-styles": "workspace:*",
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "@tanstack/angular-form": "1.33.5",
     "@tanstack/angular-virtual": "latest",
     "@tanstack/table-core": "9.2.4",
     "embla-carousel": "8.6.0",
-    "embla-carousel-autoplay": "8.6.0",
-    "@fex-design/utils": "workspace:*",
-    "@fex-design/components-styles": "workspace:*"
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
     "@angular/common": "22.1.5",
     "@angular/compiler": "22.1.5",
     "@angular/compiler-cli": "22.1.5",
     "@angular/core": "22.1.5",
-    "typescript": "catalog:",
-    "@fex-design/docs-shared": "workspace:*"
+    "@fex-design/docs-shared": "workspace:*",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@angular/common": "^22.0.0",

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { createCheckboxGroupController } from '@fex-design/core/checkbox/create-checkbox-group-controller'
 import type { CheckboxGroupChangeMeta, CheckboxValue } from '@fex-design/core/checkbox/types'
-import { checkboxGroupClassName, type CheckboxGroupStyleProps } from '@fex-design/components-styles/checkbox'
+import {
+  checkboxGroupClassName,
+  type CheckboxGroupStyleProps,
+} from '@fex-design/components-styles/checkbox'
 import { cn } from '@fex-design/utils'
 import { computed, provide, reactive, useAttrs } from 'vue'
 import { useCoreStore } from '@fex-design/vue/composables/use-core-store'

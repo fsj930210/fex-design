@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { Progress, ProgressTrack, ProgressRange, ProgressValue } from '@fex-design/vue/primitive/progress'
+import {
+  Progress,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValue,
+} from '@fex-design/vue/primitive/progress'
 
 defineOptions({ name: 'ProgressPrimitiveSizeExample' })
-
 </script>
 
 <template>
@@ -12,9 +16,7 @@ defineOptions({ name: 'ProgressPrimitiveSizeExample' })
         <ProgressTrack class="min-w-0 flex-1">
           <ProgressRange />
         </ProgressTrack>
-        <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-          30%
-        </ProgressValue>
+        <ProgressValue class="ms-2 shrink-0 text-sm font-medium"> 30% </ProgressValue>
       </div>
     </Progress>
     <Progress :value="50" :thickness="8" class="flex w-full flex-col">
@@ -22,9 +24,7 @@ defineOptions({ name: 'ProgressPrimitiveSizeExample' })
         <ProgressTrack class="min-w-0 flex-1">
           <ProgressRange />
         </ProgressTrack>
-        <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-          50%
-        </ProgressValue>
+        <ProgressValue class="ms-2 shrink-0 text-sm font-medium"> 50% </ProgressValue>
       </div>
     </Progress>
     <Progress :value="70" :thickness="12" class="flex w-full flex-col">
@@ -32,9 +32,7 @@ defineOptions({ name: 'ProgressPrimitiveSizeExample' })
         <ProgressTrack class="min-w-0 flex-1">
           <ProgressRange />
         </ProgressTrack>
-        <ProgressValue class="ms-2 shrink-0 text-sm font-medium">
-          70%
-        </ProgressValue>
+        <ProgressValue class="ms-2 shrink-0 text-sm font-medium"> 70% </ProgressValue>
       </div>
     </Progress>
   </div>

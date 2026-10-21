@@ -1,5 +1,36 @@
 import { Calendar } from '@fex-design/solid/ui/calendar'
 import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
 export function CssVariablesExample() {
-  return <div style={{ "--calendar-hover-background": "var(--success)", "--calendar-selected-background": "var(--primary)", "--calendar-selected-foreground": "var(--primary-foreground)", "--calendar-today-color": "var(--danger)" }}><Calendar defaultViewDate={calendarDemoDate} /></div>
+  return (
+    <div
+      style={{
+        '--calendar-hover-background': 'var(--success)',
+        '--calendar-selected-background': 'var(--primary)',
+        '--calendar-selected-foreground': 'var(--primary-foreground)',
+        '--calendar-today-color': 'var(--danger)',
+      }}
+    >
+      <Calendar
+        headerProps={{
+          yearSelectTriggerProps: {
+            class:
+              '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+          },
+          monthSelectTriggerProps: {
+            class:
+              '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+          },
+          yearSelectContentProps: {
+            class:
+              '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+          },
+          monthSelectContentProps: {
+            class:
+              '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+          },
+        }}
+        defaultViewDate={calendarDemoDate}
+      />
+    </div>
+  )
 }

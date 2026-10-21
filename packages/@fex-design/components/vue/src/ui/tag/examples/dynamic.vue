@@ -24,7 +24,7 @@ function removeTag(id: number) {
         tag.label
       }}</Tag>
     </div>
-    <div class="flex gap-2">
+    <div class="flex flex-wrap gap-2">
       <input
         v-model="name"
         class="h-8 rounded-md border px-2 text-sm"

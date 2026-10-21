@@ -8,6 +8,9 @@ import type { ButtonProps } from './button.types'
 export type { ButtonProps } from './button.types'
 
 export function Button({
+  startIconProps,
+  endIconProps,
+  loadingIconProps,
   className,
   variant = 'outlined',
   color,
@@ -25,7 +28,12 @@ export function Button({
 }: ButtonProps) {
   const isDisabled = disabled || loading
   const iconNode = loading
-    ? (loadingIndicator ?? <LoadingIcon className={buttonSpinnerClassName} />)
+    ? (loadingIndicator ?? (
+        <LoadingIcon
+          {...loadingIconProps}
+          className={cn(buttonSpinnerClassName, loadingIconProps?.className)}
+        />
+      ))
     : icon
 
   return (
@@ -45,11 +53,15 @@ export function Button({
       disabled={isDisabled}
     >
       {iconPlacement === 'start' && iconNode ? (
-        <ButtonIcon data-icon="inline-start">{iconNode}</ButtonIcon>
+        <ButtonIcon {...startIconProps} data-icon="inline-start">
+          {iconNode}
+        </ButtonIcon>
       ) : null}
       {children}
       {iconPlacement === 'end' && iconNode ? (
-        <ButtonIcon data-icon="inline-end">{iconNode}</ButtonIcon>
+        <ButtonIcon {...endIconProps} data-icon="inline-end">
+          {iconNode}
+        </ButtonIcon>
       ) : null}
     </PrimitiveButton>
   )

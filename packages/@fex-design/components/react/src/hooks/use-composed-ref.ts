@@ -11,16 +11,19 @@ function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
 
 export function useComposedRef<T>(...refs: Array<Ref<T> | undefined>) {
   // DOM ref identity must change with its inputs so React detaches old refs and attaches new ones.
-  return useMemo(() => (value: T | null) => {
-    const cleanups = refs.map((ref) => assignRef(ref, value))
-    if (value === null) return
-    // React 19 uses callback-ref cleanup; refs without cleanup still receive null.
-    return () => {
-      refs.forEach((ref, index) => {
-        const cleanup = cleanups[index]
-        if (typeof cleanup === 'function') cleanup()
-        else assignRef(ref, null)
-      })
-    }
-  }, refs)
+  return useMemo(
+    () => (value: T | null) => {
+      const cleanups = refs.map((ref) => assignRef(ref, value))
+      if (value === null) return
+      // React 19 uses callback-ref cleanup; refs without cleanup still receive null.
+      return () => {
+        refs.forEach((ref, index) => {
+          const cleanup = cleanups[index]
+          if (typeof cleanup === 'function') cleanup()
+          else assignRef(ref, null)
+        })
+      }
+    },
+    refs,
+  )
 }

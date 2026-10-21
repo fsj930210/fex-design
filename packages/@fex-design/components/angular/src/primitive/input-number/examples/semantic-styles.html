@@ -1,0 +1,12 @@
+<div class="grid w-full gap-3">
+  <div inputNumberRoot [defaultValue]="demo.value" [class]="classNames.root">
+    <span inputPrefix [class]="classNames.prefix">{{ demo.prefix }}</span>
+    <input inputNumberControl [class]="classNames.control" />
+    <button inputNumberClear [class]="classNames.clear"></button>
+    <span inputSuffix [class]="classNames.suffix">{{ demo.suffix }}</span>
+    <span inputNumberActions [class]="classNames.actions">
+      <button inputNumberIncrement [class]="classNames.increment"></button>
+      <button inputNumberDecrement [class]="classNames.decrement"></button>
+    </span>
+  </div>
+</div>

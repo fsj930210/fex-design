@@ -1,0 +1,22 @@
+<div class="grid w-full max-w-xs gap-3">
+  <div class="flex gap-2">
+    <button button type="button" (click)="toggle()">切换单选 / 多选</button
+    ><button button type="button" (click)="multiple.set(false); value.set(['users'])">重置</button>
+  </div>
+  <div
+    menuRoot
+    layout="inline"
+    [multiple]="multiple()"
+    [value]="value()"
+    (valueChange)="value.set($event)"
+  >
+    <div menuContent>
+      @for (item of items; track item.value) {
+      <button menuItem [value]="item.value" [disabled]="item.disabled ?? false">
+        {{ item.label }}
+      </button>
+      }
+    </div>
+  </div>
+  <output>multiple: {{ multiple() }}; value: [{{ value().join(', ') }}]</output>
+</div>

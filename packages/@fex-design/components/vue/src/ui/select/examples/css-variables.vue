@@ -1,1 +1,42 @@
-<script setup lang="ts">import { Select } from '@fex-design/vue/ui/select'; const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]</script><template><Select class="w-72 [--input-background:#faf5ff] [--input-border-color:#c084fc] [--input-ring-color:#9333ea]" :options="options" /></template>
+<script setup lang="ts">
+import { Select } from '@fex-design/vue/ui/select'
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+]
+const inputProps = {}
+const valueProps = {
+  tagProps: { class: '[--tag-color:#7c3aed] [--tag-color-foreground:#ffffff]' },
+  overflowTagProps: { class: '[--tag-color:#0891b2] [--tag-color-foreground:#ffffff]' },
+  tagActionProps: { class: 'text-[var(--tag-color)]' },
+}
+const triggerProps = {
+  class:
+    '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+}
+const contentProps = {
+  class:
+    '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+}
+</script>
+<template>
+  <div class="grid w-full gap-4">
+    <Select
+      class="w-72 max-w-full"
+      :options="options"
+      placeholder="请选择框架"
+      :input-props="inputProps"
+      :trigger-props="triggerProps"
+      :content-props="contentProps"
+    /><Select
+      class="w-72 max-w-full"
+      :options="options"
+      multiple
+      :default-value="['react', 'vue']"
+      :max-tag-count="1"
+      :input-props="inputProps"
+      :trigger-props="{ ...triggerProps, valueProps }"
+      :content-props="contentProps"
+    />
+  </div>
+</template>

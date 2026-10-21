@@ -4,5 +4,12 @@ import { calendarDemoDate, calendarDemoLunar } from '@fex-design/docs-shared/cal
 import { CalendarCellTrigger } from '@fex-design/vue/primitive/calendar'
 </script>
 <template>
-<Calendar :default-view-date="calendarDemoDate"><template #fullCell="{ cell }"><CalendarCellTrigger :cell="cell" class="flex-col items-center"><span>{{ cell.label }}</span><small>{{ calendarDemoLunar(cell) }}</small></CalendarCellTrigger></template></Calendar>
+  <Calendar :default-view-date="calendarDemoDate"
+    ><template #fullCell="{ cell }"
+      ><CalendarCellTrigger :cell="cell" class="flex-col items-center"
+        ><span>{{ cell.label }}</span
+        ><small>{{ calendarDemoLunar(cell) }}</small></CalendarCellTrigger
+      ></template
+    ></Calendar
+  >
 </template>

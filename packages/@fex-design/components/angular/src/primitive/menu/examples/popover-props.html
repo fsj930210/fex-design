@@ -1,0 +1,15 @@
+<div class="w-full max-w-xl">
+  <div menuRoot>
+    <div menuContent class="w-44 max-w-full">
+      <div subMenu value="actions" [popoverProps]="popoverProps">
+        <button subMenuTrigger>Actions</button>
+        <div subMenuContent class="min-w-60" [content]="popup1"></div>
+        <ng-template #popup1
+          ><div class="px-3 py-2 text-xs">Custom popup header</div>
+          <button menuItem value="copy">Copy</button
+          ><button menuItem value="archive">Archive</button></ng-template
+        >
+      </div>
+    </div>
+  </div>
+</div>

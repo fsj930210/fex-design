@@ -1,2 +1,41 @@
-<div style="--calendar-hover-background:var(--success);--calendar-selected-background:var(--primary);--calendar-selected-foreground:var(--primary-foreground);--calendar-today-color:var(--danger)"><div calendarRoot [defaultViewDate]="options.defaultViewDate" [locale]="options.locale" [weekStartsOn]="options.weekStartsOn ?? 0" [showWeek]="options.showWeek" [fullscreen]="options.fullscreen" [class]="rootClass" [attr.data-fullscreen]="true"><div calendarExampleContent [options]="options"></div></div></div>
-
+<div
+  calendarRoot
+  [defaultViewDate]="date"
+  [weekStartsOn]="locale.weekStartsOn"
+  [fullscreen]="true"
+  class="w-full rounded-md border border-border overflow-hidden [&:not([data-panel=date])>[data-slot=calendar-week-header]]:hidden [--calendar-hover-background:var(--success)] [--calendar-selected-background:var(--primary)] [--calendar-selected-foreground:var(--primary-foreground)] [--calendar-today-color:var(--danger)]"
+  data-fullscreen="true"
+>
+  <div
+    calendarHeader
+    [yearSelectTriggerProps]='{"class":"[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]"}'
+    [monthSelectTriggerProps]='{"class":"[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]"}'
+    [yearSelectContentProps]='{"class":"[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]"}'
+    [monthSelectContentProps]='{"class":"[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]"}'
+    class=""
+  ></div>
+  <div
+    calendarWeekHeader
+    [labels]="locale.weekdays"
+    class="grid min-h-8 items-center text-center text-xs text-muted-foreground py-0"
+  ></div>
+  <div calendarGrid>
+    <ng-template let-cell
+      ><div
+        calendarCell
+        [cell]="cell"
+        class="flex min-w-0 flex-col rounded-none border-t border-border p-1 data-[selected=true]:bg-[var(--calendar-selected-background,color-mix(in_srgb,var(--primary)_10%,transparent))] data-[selected=true]:text-[var(--calendar-selected-foreground,var(--foreground))]"
+      >
+        <button
+          calendarCellTrigger
+          [cell]="cell"
+          class="h-8 min-h-8 w-full shrink-0 justify-center px-1 rounded-md"
+        >
+          <ng-template
+            >{{cell.panel==='month'?locale.months[cell.date.month-1]??cell.label:cell.label}}</ng-template
+          >
+        </button>
+      </div></ng-template
+    >
+  </div>
+</div>

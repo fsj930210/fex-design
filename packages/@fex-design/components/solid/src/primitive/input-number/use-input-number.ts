@@ -38,14 +38,16 @@ export function useInputNumber(options: () => UseInputNumberOptions) {
   })
   const [internalValue, setInternalValue] = createSignal(options().defaultValue)
   const controlled = createMemo(() => options().controlled ?? options().value !== undefined)
-  const externalValue = createMemo(() => controlled() ? options().value : undefined)
-  const value = createMemo(() => controlled() ? externalValue() : internalValue())
+  const externalValue = createMemo(() => (controlled() ? options().value : undefined))
+  const value = createMemo(() => (controlled() ? externalValue() : internalValue()))
   const [draft, setDraft] = createSignal(formatter()(value(), { userTyping: false, input: '' }))
   const [userTyping, setUserTyping] = createSignal(false)
   // Synchronize caller-owned controlled values into the editable text buffer outside active typing.
-  createEffect(on([controlled, externalValue, formatter], ([, , format]) => {
-    if (!userTyping()) setDraft(format(value(), { userTyping: false, input: '' }))
-  }))
+  createEffect(
+    on([controlled, externalValue, formatter], ([, , format]) => {
+      if (!userTyping()) setDraft(format(value(), { userTyping: false, input: '' }))
+    }),
+  )
   const setValue = (next: number | undefined) => {
     if (!controlled()) setInternalValue(next)
   }

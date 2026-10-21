@@ -1,5 +1,9 @@
 export { Bubble, BubbleRoot, type BubbleProps, type BubbleRootProps } from './bubble-root'
-export { BubbleContent, type BubbleContentProps, type BubbleContentRenderProps } from './bubble-content'
+export {
+  BubbleContent,
+  type BubbleContentProps,
+  type BubbleContentRenderProps,
+} from './bubble-content'
 export { BubbleGroup, type BubbleGroupProps } from './bubble-group'
 export { BubbleActions, type BubbleActionsProps } from './bubble-actions'
 export { BubbleAction, type BubbleActionProps, type ActionRenderProps } from './bubble-action'

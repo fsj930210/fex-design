@@ -4,7 +4,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { listboxContextKey, type ListboxOrientation } from "./context";
 
   type ListboxChangeMeta<TItem> = {

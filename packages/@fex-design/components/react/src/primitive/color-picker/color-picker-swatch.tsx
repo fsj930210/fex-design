@@ -8,12 +8,7 @@ export interface ColorPickerSwatchProps extends HTMLAttributes<HTMLSpanElement> 
   color?: string
 }
 
-export function ColorPickerSwatch({
-  color,
-  className,
-  style,
-  ...props
-}: ColorPickerSwatchProps) {
+export function ColorPickerSwatch({ color, className, style, ...props }: ColorPickerSwatchProps) {
   const { snapshot } = useColorPicker()
   const value = color ?? snapshot.value?.toString('rgb') ?? 'transparent'
   return (

@@ -28,7 +28,7 @@ export function ProgressPrimitiveColorExample() {
         </ProgressTrack>
         <ProgressValue>75%</ProgressValue>
       </Progress>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4">
         <Progress value={60} variant="circle" size={96} className="relative">
           <ProgressCircle>
             <ProgressCircleTrack />

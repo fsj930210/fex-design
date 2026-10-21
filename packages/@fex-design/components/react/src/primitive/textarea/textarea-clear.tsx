@@ -3,10 +3,7 @@ import { cn } from '@fex-design/utils'
 import type { ComponentProps, MouseEvent, PointerEvent, ReactNode, Ref } from 'react'
 import { XIcon } from '@fex-design/react/icons/x'
 import { Button } from '../button/button'
-import {
-  useTextareaContext,
-  type TextareaClearRenderProps,
-} from './textarea-context'
+import { useTextareaContext, type TextareaClearRenderProps } from './textarea-context'
 
 export interface TextareaClearProps extends Omit<ComponentProps<'button'>, 'type' | 'children'> {
   forceMount?: boolean | undefined

@@ -94,6 +94,8 @@
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
     "./ui/input-number": "./src/ui/input-number/index.tsx",
+    "./ui/menu": "./src/ui/menu/index.ts",
+    "./ui/pagination": "./src/ui/pagination/index.ts",
     "./ui/progress": "./src/ui/progress/index.tsx",
     "./ui/radio": "./src/ui/radio/index.tsx",
     "./ui/select": "./src/ui/select/index.tsx",
@@ -150,20 +152,20 @@
     "lint": "oxlint src"
   },
   "dependencies": {
+    "@fex-design/components-styles": "workspace:*",
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "@tanstack/solid-form": "1.33.5",
     "@tanstack/solid-virtual": "latest",
     "@tanstack/table-core": "9.2.4",
     "embla-carousel": "8.6.0",
-    "embla-carousel-autoplay": "8.6.0",
-    "@fex-design/utils": "workspace:*",
-    "@fex-design/components-styles": "workspace:*"
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
+    "@fex-design/docs-shared": "workspace:*",
     "solid-js": "1.9.15",
-    "typescript": "catalog:",
-    "@fex-design/docs-shared": "workspace:*"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "solid-js": "^1.9.0"

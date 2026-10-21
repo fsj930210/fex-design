@@ -10,13 +10,7 @@
     },
     "framework": {
       "type": "string",
-      "enum": [
-        "react",
-        "vue",
-        "solid",
-        "svelte",
-        "angular"
-      ],
+      "enum": ["react", "vue", "solid", "svelte", "angular"],
       "description": "Target UI framework used by this project",
       "default": "react"
     },
@@ -26,10 +20,7 @@
       "properties": {
         "version": {
           "type": "string",
-          "enum": [
-            "v3",
-            "v4"
-          ],
+          "enum": ["v3", "v4"],
           "default": "v4",
           "description": "Tailwind CSS major version"
         },
@@ -44,9 +35,7 @@
           "default": "neutral"
         }
       },
-      "required": [
-        "css"
-      ],
+      "required": ["css"],
       "additionalProperties": false
     },
     "aliases": {
@@ -86,19 +75,10 @@
           "description": "Alias for component icon elements (e.g. @/components/icons)"
         }
       },
-      "required": [
-        "components",
-        "ui",
-        "primitive",
-        "hooks",
-        "utils"
-      ],
+      "required": ["components", "ui", "primitive", "hooks", "utils"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "framework",
-    "aliases"
-  ],
+  "required": ["framework", "aliases"],
   "additionalProperties": false
 }

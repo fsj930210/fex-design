@@ -1,5 +1,2 @@
-﻿export {
-  ThemeProvider,
-  type ThemeProviderProps,
-} from './theme-provider'
+﻿export { ThemeProvider, type ThemeProviderProps } from './theme-provider'
 export { useTheme } from './use-theme'

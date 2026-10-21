@@ -1,6 +1,9 @@
 import { createContext, useContext } from 'solid-js'
 import type { SortableItems } from '@fex-design/core/sortable/types'
-import type { createSortable, CreateSortableOptions } from '@fex-design/solid/primitives/create-sortable'
+import type {
+  createSortable,
+  CreateSortableOptions,
+} from '@fex-design/solid/primitives/create-sortable'
 type AnySortable = ReturnType<typeof createSortable<SortableItems>>
 export type SortableContextValue = Omit<AnySortable, 'previewItems' | 'update'> & {
   previewItems: () => SortableItems

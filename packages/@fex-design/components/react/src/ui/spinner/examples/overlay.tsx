@@ -17,7 +17,7 @@ export function OverlayExample() {
           </p>
         </div>
       </SpinnerContainer>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
           className="rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground"

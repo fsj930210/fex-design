@@ -4,17 +4,9 @@ import {
   type ToggleGroupChangeMeta,
   type ToggleGroupValue,
 } from '@fex-design/core/toggle/types'
-import {
-  toggleGroupClassName,
-  type ToggleStyleProps,
-} from '@fex-design/components-styles/toggle'
+import { toggleGroupClassName, type ToggleStyleProps } from '@fex-design/components-styles/toggle'
 import { cn } from '@fex-design/utils'
-import {
-  createSignal,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createSignal, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ToggleGroupContext, type GroupContext } from './toggle-context'
 
 type Common = ParentProps<
@@ -74,10 +66,11 @@ export function ToggleGroup(props: ToggleGroupProps) {
     },
     onChange(next, meta) {
       if (!isControlled()) setUncontrolledValue(next)
-      ;(local.onChange as ((value: ToggleGroupValue, meta: ToggleGroupChangeMeta) => void) | undefined)?.(
-        next,
-        meta,
-      )
+      ;(
+        local.onChange as
+          | ((value: ToggleGroupValue, meta: ToggleGroupChangeMeta) => void)
+          | undefined
+      )?.(next, meta)
     },
   })
   const groupContext: GroupContext = {

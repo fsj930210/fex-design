@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TimePickerColumnCustomization } from './column-customization'
 import { createPeriodOptions, getDisplayedPeriod } from '@fex-design/core/time-picker/options'
 import type { TimePeriod } from '@fex-design/core/time-picker/types'
 import { computed, inject } from 'vue'
@@ -6,6 +7,7 @@ import { timePickerContextKey } from './context'
 import TimePickerColumn from './time-picker-column.vue'
 defineOptions({ name: 'TimePickerPeriodColumn' })
 const props = defineProps<{
+  columnProps?: TimePickerColumnCustomization | undefined
   disabled?: boolean | undefined
   labels?: { am: string; pm: string } | undefined
   isItemDisabled?: ((value: TimePeriod) => boolean) | undefined
@@ -24,6 +26,7 @@ const selected = computed(() =>
 </script>
 <template>
   <TimePickerColumn
+    v-bind="columnProps"
     v-if="context.use12Hours.value"
     :options="options"
     :selected-value="selected"

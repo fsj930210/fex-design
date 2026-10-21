@@ -1,4 +1,12 @@
-import { createMemo, createSignal, createEffect, For, Show, type Component, type ParentProps } from 'solid-js'
+import {
+  createMemo,
+  createSignal,
+  createEffect,
+  For,
+  Show,
+  type Component,
+  type ParentProps,
+} from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { MDXProvider } from 'solid-mdx'
 import { ApiTable } from './api-table'
@@ -12,6 +20,7 @@ import { Usage } from './usage'
 import { LayerComparison } from './layer-comparison'
 import { CodeBlock } from './code-block'
 import type { Framework } from './types'
+import { sortExampleScenes, type ExampleScene } from '../../shared/src/example-order'
 
 type LayerName = 'primitive' | 'ui'
 
@@ -40,7 +49,14 @@ export function MdxDocument(props: {
     )
 
   const components = {
-    Installation: () => <Installation slug={props.slug} framework={props.framework} layer={activeLayer()} onLayerChange={setActiveLayer} />,
+    Installation: () => (
+      <Installation
+        slug={props.slug}
+        framework={props.framework}
+        layer={activeLayer()}
+        onLayerChange={setActiveLayer}
+      />
+    ),
     ManualInstall: () => null,
     LayerComparison: () => null,
     Layer: (layerProps: ParentProps<{ value: LayerName }>) => (
@@ -51,14 +67,14 @@ export function MdxDocument(props: {
         const uiScenes = componentExamples[props.slug].ui || []
         const primScenes = componentExamples[props.slug].primitive || []
         const seen = new Set<string>()
-        const list: Array<{ id: string; title: string; description: string; height?: number }> = []
+        const list: ExampleScene[] = []
         for (const s of [...uiScenes, ...primScenes]) {
           if (!seen.has(s.id)) {
             seen.add(s.id)
             list.push(s)
           }
         }
-        return list
+        return sortExampleScenes(list)
       })
 
       return (
@@ -88,9 +104,7 @@ export function MdxDocument(props: {
         {containerProps.children}
       </div>
     ),
-    ApiComparison: () => (
-      <ApiComparison slug={props.slug} framework={props.framework} />
-    ),
+    ApiComparison: () => <ApiComparison slug={props.slug} framework={props.framework} />,
     ApiSection: (
       apiProps: ParentProps<{ layer: LayerName; title?: string; description?: string }>,
     ) => {
@@ -123,10 +137,12 @@ export function MdxDocument(props: {
                 </Show>
               </div>
               <span
-                class={'rounded px-2 py-0.5 text-[11px] font-semibold border ' +
+                class={
+                  'rounded px-2 py-0.5 text-[11px] font-semibold border ' +
                   (isUi()
                     ? 'border-blue-500/30 bg-blue-500/10 text-blue-600 dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-400'
-                    : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-400')}
+                    : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-400')
+                }
               >
                 {isUi() ? 'UI (开箱即用)' : 'Primitive (解构拼装)'}
               </span>
@@ -153,12 +169,18 @@ export function MdxDocument(props: {
       <CssVariableTable value={componentApis[props.slug][props.layer].cssVariables ?? []} />
     ),
     h2: (headingProps: ParentProps<{ id?: string }>) => (
-      <h2 id={getHeadingId(headingProps.id, headingProps.children)} class="mt-14 mb-3 text-2xl font-bold tracking-tight text-foreground">
+      <h2
+        id={getHeadingId(headingProps.id, headingProps.children)}
+        class="mt-14 mb-3 text-2xl font-bold tracking-tight text-foreground"
+      >
         {headingProps.children}
       </h2>
     ),
     h3: (headingProps: ParentProps<{ id?: string }>) => (
-      <h3 id={getHeadingId(headingProps.id, headingProps.children)} class="mt-8 mb-2 text-lg font-semibold text-foreground">
+      <h3
+        id={getHeadingId(headingProps.id, headingProps.children)}
+        class="mt-8 mb-2 text-lg font-semibold text-foreground"
+      >
         {headingProps.children}
       </h3>
     ),
@@ -175,9 +197,13 @@ export function MdxDocument(props: {
     ),
     code: (codeProps: ParentProps & { class?: string; className?: string }) => {
       const languageClass = codeProps.class ?? codeProps.className
-      return typeof codeProps.children === 'string' && languageClass?.startsWith('language-')
-        ? <CodeBlock code={codeProps.children} language={languageClass.slice(9)} />
-        : <code class={languageClass ?? 'font-mono text-[0.9em] text-foreground font-medium'}>{codeProps.children}</code>
+      return typeof codeProps.children === 'string' && languageClass?.startsWith('language-') ? (
+        <CodeBlock code={codeProps.children} language={languageClass.slice(9)} />
+      ) : (
+        <code class={languageClass ?? 'font-mono text-[0.9em] text-foreground font-medium'}>
+          {codeProps.children}
+        </code>
+      )
     },
     table: (tableProps: ParentProps) => (
       <div class="my-4 overflow-x-auto rounded-xl border border-border">
@@ -197,8 +223,18 @@ export function MdxDocument(props: {
 
   return (
     <MDXProvider components={components}>
-      <Installation slug={props.slug} framework={props.framework} layer={activeLayer()} onLayerChange={setActiveLayer} />
-      <Usage slug={props.slug} framework={props.framework} layer={activeLayer()} onLayerChange={setActiveLayer} />
+      <Installation
+        slug={props.slug}
+        framework={props.framework}
+        layer={activeLayer()}
+        onLayerChange={setActiveLayer}
+      />
+      <Usage
+        slug={props.slug}
+        framework={props.framework}
+        layer={activeLayer()}
+        onLayerChange={setActiveLayer}
+      />
       <Dynamic component={props.content} />
     </MDXProvider>
   )

@@ -11,5 +11,7 @@ import { StepRingDemo } from './_parts/step-ring'
 })
 export class ProgressPrimitiveCustomGapExample {
   readonly gap = signal(2)
-  changeGap(next: number | number[]) { this.gap.set(typeof next === 'number' ? next : next[0] ?? 2) }
+  changeGap(next: number | number[]) {
+    this.gap.set(typeof next === 'number' ? next : (next[0] ?? 2))
+  }
 }

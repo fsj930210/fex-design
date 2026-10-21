@@ -29,7 +29,10 @@ import {
   cascaderValueClassName,
   cascaderValueContainerClassName,
 } from '@fex-design/components-styles/cascader'
-import { checkboxClassName, checkboxIndicatorClassName } from '@fex-design/components-styles/checkbox'
+import {
+  checkboxClassName,
+  checkboxIndicatorClassName,
+} from '@fex-design/components-styles/checkbox'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -94,7 +97,8 @@ export class CascaderRoot implements OnChanges {
   @Input() loading = false
   @Input() disabled = false
   @Input() placeholder = ''
-  @Input() status: 'error' | 'warning' | undefined
+  @Input('aria-invalid') ariaInvalid: string | boolean | null | undefined
+  @Input('data-warning') dataWarning: string | null | undefined
   @Input() displayRender:
     | ((labels: readonly string[], path: readonly CascaderOption[]) => string)
     | undefined

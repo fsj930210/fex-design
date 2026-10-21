@@ -39,6 +39,16 @@ export default function Example() {
           />
         </div>
       </section>
+      <section className="grid gap-2">
+        <span className="text-sm text-muted-foreground">加载图标</span>
+        <Switch
+          loading
+          defaultChecked
+          className="[--switch-track-checked-background:#0f766e] [--switch-thumb-background:#ccfbf1]"
+          spinnerProps={{ className: 'text-violet-600' }}
+          aria-label="加载图标"
+        />
+      </section>
     </div>
   )
 }

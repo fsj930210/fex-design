@@ -16,15 +16,27 @@ export interface RangePickerPanelGroupProps extends ParentProps<
 }
 
 export function RangePickerPanelGroup(props: RangePickerPanelGroupProps) {
-  const [local, rest] = splitProps(props, ['class', 'style', 'children', 'panelCount', 'onMouseLeave'])
+  const [local, rest] = splitProps(props, [
+    'class',
+    'style',
+    'children',
+    'panelCount',
+    'onMouseLeave',
+  ])
   const context = useRangePickerContext('RangePickerPanelGroup')
   const appearance = usePickerAppearance()
-  const visibleDates = createMemo(() => getVisibleRangePanelViewDates(context.viewDate(), context.panel(), context.showTime ? 1 : local.panelCount))
+  const visibleDates = createMemo(() =>
+    getVisibleRangePanelViewDates(
+      context.viewDate(),
+      context.panel(),
+      context.showTime ? 1 : local.panelCount,
+    ),
+  )
   return (
     <div
       {...rest}
       style={mergeStyle(appearance().styles?.panelGroup, local.style)}
-      role={rest.role ?? "group"}
+      role={rest.role ?? 'group'}
       data-slot="range-picker-panel-group"
       class={cn(datePickerPanelsClassName, appearance().classNames?.panelGroup, local.class)}
       onMouseLeave={(event) => {
@@ -33,8 +45,15 @@ export function RangePickerPanelGroup(props: RangePickerPanelGroupProps) {
       }}
     >
       {local.children === undefined ? (
-        <><For each={visibleDates()}>{(date) => <RangePickerPanel panelViewDate={date} />}</For><Show when={context.showTime}><DatePickerTimePanel range /></Show></>
-      ) : local.children}
+        <>
+          <For each={visibleDates()}>{(date) => <RangePickerPanel panelViewDate={date} />}</For>
+          <Show when={context.showTime}>
+            <DatePickerTimePanel range />
+          </Show>
+        </>
+      ) : (
+        local.children
+      )}
     </div>
   )
 }

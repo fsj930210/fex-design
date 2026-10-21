@@ -1,12 +1,48 @@
-import { progressStepLineContainerClassName, progressStepLineItemClassName, progressStepLineTrackClassName } from '@fex-design/components-styles/progress'
-import { getCircleStepsGeometry, getLineStepsGeometry, getLinearProgressBackground, getProgressStepColor, normalizeProgressValue } from '@fex-design/core/progress/progress'
+import {
+  progressStepLineContainerClassName,
+  progressStepLineItemClassName,
+  progressStepLineTrackClassName,
+} from '@fex-design/components-styles/progress'
+import {
+  getCircleStepsGeometry,
+  getLineStepsGeometry,
+  getLinearProgressBackground,
+  getProgressStepColor,
+  normalizeProgressValue,
+} from '@fex-design/core/progress/progress'
 import { cn } from '@fex-design/utils'
 import { ProgressInfo } from './progress-info'
 import type { ProgressProps } from './types'
 
-type ProgressStepsProps = ProgressProps & { steps: number; numSize: number; numThickness: number; shouldShowInfo: boolean }
+type ProgressStepsProps = ProgressProps & {
+  steps: number
+  numSize: number
+  numThickness: number
+  shouldShowInfo: boolean
+}
 
-export function ProgressSteps({ ref, value = 0, min = 0, max = 100, variant = 'line', status: effectiveStatus = 'active', numSize, numThickness, steps, gap = 2, color, trackColor, linecap = 'round', shouldShowInfo, format, classNames, styles, className, style, ...props }: ProgressStepsProps) {
+export function ProgressSteps({
+  ref,
+  value = 0,
+  min = 0,
+  max = 100,
+  variant = 'line',
+  status: effectiveStatus = 'active',
+  numSize,
+  numThickness,
+  steps,
+  gap = 2,
+  color,
+  trackColor,
+  linecap = 'round',
+  shouldShowInfo,
+  format,
+  classNames,
+  styles,
+  className,
+  style,
+  ...props
+}: ProgressStepsProps) {
   const normalized = normalizeProgressValue(value, min, max)
   const isSuccess = effectiveStatus === 'success'
   // 1. Step Line
@@ -43,7 +79,12 @@ export function ProgressSteps({ ref, value = 0, min = 0, max = 100, variant = 'l
         </div>
         {shouldShowInfo && (
           <span className={cn('text-sm font-medium', classNames?.info)} style={styles?.info}>
-            <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+            <ProgressInfo
+              normalized={normalized}
+              status={effectiveStatus}
+              variant={variant}
+              format={format}
+            />
           </span>
         )}
       </div>
@@ -109,7 +150,12 @@ export function ProgressSteps({ ref, value = 0, min = 0, max = 100, variant = 'l
             )}
             style={styles?.info}
           >
-            <ProgressInfo normalized={normalized} status={effectiveStatus} variant={variant} format={format} />
+            <ProgressInfo
+              normalized={normalized}
+              status={effectiveStatus}
+              variant={variant}
+              format={format}
+            />
           </div>
         )}
       </div>

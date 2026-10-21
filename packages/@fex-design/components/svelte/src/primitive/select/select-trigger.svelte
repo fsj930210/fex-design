@@ -1,5 +1,8 @@
 <script lang="ts">
-  import type { InputClassNames, InputStyles } from '@fex-design/core/input/types';
+  import type {
+    InputClassNames,
+    InputStyles,
+  } from "@fex-design/core/input/types";
   import type { SelectOption } from "@fex-design/core/select/types";
   import {
     selectClearClassName,
@@ -11,11 +14,11 @@
     selectValueContainerClassName,
   } from "@fex-design/components-styles/select";
   import { cn } from "@fex-design/utils";
-  import { getContext, type Snippet } from "svelte";
+  import { getContext, type ComponentProps, type Snippet } from "svelte";
   import type { HTMLAttributes, HTMLInputAttributes } from "svelte/elements";
-  import ChevronRight from '@fex-design/svelte/icons/chevron-right.svelte';
-  import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  import ChevronRight from "@fex-design/svelte/icons/chevron-right.svelte";
+  import CircleXIcon from "@fex-design/svelte/icons/circle-x.svelte";
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
   import PopoverTrigger from "../popover/popover-trigger.svelte";
   import SelectValue from "./select-value.svelte";
   import { selectContextKey, type SelectContext } from "./context";
@@ -29,12 +32,15 @@
     prefix?: Snippet;
     suffix?: Snippet;
     clear?: Snippet;
+    valueProps?:
+      Omit<ComponentProps<typeof SelectValue>, "children"> | undefined;
     inputProps?: HTMLInputAttributes;
     classNames?: InputClassNames;
     styles?: InputStyles<string>;
     tag?: Snippet<[SelectOption, () => void]>;
   }
   let {
+    valueProps,
     class: className,
     placeholder = "请选择",
     maxTagCount,
@@ -45,6 +51,7 @@
     tag,
     classNames,
     styles,
+    "aria-invalid": ariaInvalid,
     ...rest
   }: Props = $props();
   const select = getContext<SelectContext>(selectContextKey),
@@ -53,9 +60,14 @@
     void $snapshot.selectedValues;
     return select.selectedOptions();
   };
-  const inputAttributes = () => { const { class: _class, style: _style, ...attrs } = inputProps; return attrs; };
+  const inputAttributes = () => {
+    const { class: _class, style: _style, ...attrs } = inputProps;
+    return attrs;
+  };
   function keydown(event: KeyboardEvent) {
-    rest.onkeydown?.(event as Parameters<NonNullable<typeof rest.onkeydown>>[0]);
+    rest.onkeydown?.(
+      event as Parameters<NonNullable<typeof rest.onkeydown>>[0],
+    );
     if (event.defaultPrevented) return;
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
@@ -89,12 +101,13 @@
       use:slot.action
       data-slot="select-trigger"
       data-disabled={select.disabled() || undefined}
-      data-clearable={select.clearable() && selected().length ? "true" : undefined}
-      data-status={select.status()}
-      aria-invalid={select.status() === "error" || undefined}
+      data-warning={rest["data-warning"] ?? select.dataWarning()}
+      data-clearable={select.clearable() && selected().length
+        ? "true"
+        : undefined}
       aria-expanded={$snapshot.open}
       class={cn(selectTriggerClassName(), classNames?.root, className)}
-      style={[styles?.root, inputProps.style].filter(Boolean).join(';')}
+      style={[styles?.root, inputProps.style].filter(Boolean).join(";")}
       onclick={(event) => bridge(slot.props.onclick, event as never)}
       onpointerenter={(event) =>
         bridge(slot.props.onpointerenter, event as never)}
@@ -108,10 +121,16 @@
     >
       {@render prefix?.()}
       <div class={cn(selectValueContainerClassName, classNames?.control)}>
-        <SelectValue {placeholder} {maxTagCount} {tag} />
+        <SelectValue
+          {...valueProps}
+          {placeholder}
+          maxTagCount={maxTagCount ?? valueProps?.maxTagCount}
+          tag={tag ?? valueProps?.tag}
+        />
         <input
           {...inputAttributes()}
           role="combobox"
+          aria-invalid={ariaInvalid ?? select.ariaInvalid()}
           aria-expanded={$snapshot.open}
           aria-controls={select.listId}
           disabled={select.disabled()}
@@ -137,23 +156,29 @@
           }}
         />
       </div>
-      <span data-slot="select-suffix" class={cn(selectSuffixClassName, classNames?.suffix)}
-        >{#if select.loading()}<LoadingIcon
-            class="animate-spin"
-          />{:else}<span class={select.clearable() && selected().length ? selectClearableIndicatorClassName : undefined}
-          >{#if suffix}{@render suffix()}{:else}<span
-            data-state={$snapshot.open ? "open" : "closed"}
-            class={selectIndicatorClassName}
-            ><ChevronRight class="size-4 rotate-90" /></span>{/if}</span
+      <span
+        data-slot="select-suffix"
+        class={cn(selectSuffixClassName, classNames?.suffix)}
+        >{#if select.loading()}<LoadingIcon class="animate-spin" />{:else}<span
+            class={select.clearable() && selected().length
+              ? selectClearableIndicatorClassName
+              : undefined}
+            >{#if suffix}{@render suffix()}{:else}<span
+                data-state={$snapshot.open ? "open" : "closed"}
+                class={selectIndicatorClassName}
+                ><ChevronRight class="size-4 rotate-90" /></span
+              >{/if}</span
           >{#if select.clearable() && selected().length}<button
-            type="button"
-            aria-label="Clear selection"
-            class={cn(selectClearClassName, classNames?.clear)}
-            onpointerdown={(event) => event.preventDefault()}
-            onclick={(event) => {
-              event.stopPropagation();
-              select.controller.clear();
-            }}>{#if clear}{@render clear()}{:else}<CircleXIcon />{/if}</button>{/if}{/if}</span
+              type="button"
+              aria-label="Clear selection"
+              class={cn(selectClearClassName, classNames?.clear)}
+              onpointerdown={(event) => event.preventDefault()}
+              onclick={(event) => {
+                event.stopPropagation();
+                select.controller.clear();
+              }}
+              >{#if clear}{@render clear()}{:else}<CircleXIcon />{/if}</button
+            >{/if}{/if}</span
       >
     </div>
   {/snippet}</PopoverTrigger

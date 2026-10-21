@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { SkeletonVisualOptions } from '@fex-design/core/skeleton/types'
-import { skeletonInputBlockClassName, skeletonInputClassName } from '@fex-design/components-styles/skeleton'
+import {
+  skeletonInputBlockClassName,
+  skeletonInputClassName,
+} from '@fex-design/components-styles/skeleton'
 import { cn } from '@fex-design/utils'
 import { useAttrs } from 'vue'
 import SkeletonBlock from './skeleton-block.vue'

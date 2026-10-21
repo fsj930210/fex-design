@@ -1,6 +1,6 @@
 <script lang="ts">
   import { drawerCloseClassName } from "@fex-design/components-styles/drawer";
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
   import { useDrawer } from "./drawer-context";
   let {
     children,

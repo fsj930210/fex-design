@@ -59,7 +59,7 @@ export const ListDemo = () => (
   </div>
 )
 const Labeled = (props: { label: string; placement: 'start' | 'center' | 'end' }) => (
-  <div class="flex items-center gap-2">
+  <div class="flex flex-wrap items-center gap-2">
     <Separator class={props.placement === 'start' ? 'w-12' : 'flex-1'} />
     <span class="shrink-0 text-sm text-muted-foreground">{props.label}</span>
     <Separator class={props.placement === 'end' ? 'w-12' : 'flex-1'} />

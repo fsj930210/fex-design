@@ -7,14 +7,14 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@fex-design/docs-shared": "workspace:*",
     "@fex-design/components-styles": "workspace:*",
+    "@fex-design/docs-shared": "workspace:*",
+    "@fex-design/react": "workspace:*",
+    "@fex-design/styles": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-react": "latest",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "vite": "catalog:",
-    "@fex-design/react": "workspace:*",
-    "@fex-design/styles": "workspace:*"
+    "vite": "catalog:"
   }
 }

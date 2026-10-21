@@ -27,8 +27,12 @@ export function DatePickerHeaderButton({
   const isPrevious = action.startsWith('previous')
   const isDouble = action.includes('year') || action.includes('panel')
   const Icon = isDouble
-    ? isPrevious ? ChevronsLeftIcon : ChevronsRightIcon
-    : isPrevious ? ChevronLeftIcon : ChevronRightIcon
+    ? isPrevious
+      ? ChevronsLeftIcon
+      : ChevronsRightIcon
+    : isPrevious
+      ? ChevronLeftIcon
+      : ChevronRightIcon
   const icon = children === undefined ? <Icon className="size-4 rtl:rotate-180" /> : children
 
   return (
@@ -37,7 +41,10 @@ export function DatePickerHeaderButton({
       type="button"
       data-slot="date-picker-header-button"
       data-action={action}
-      aria-label={props['aria-label'] ?? getDatePickerHeaderActionLabel(action, calendar.controller.getOptions().locale)}
+      aria-label={
+        props['aria-label'] ??
+        getDatePickerHeaderActionLabel(action, calendar.controller.getOptions().locale)
+      }
       className={cn(datePickerHeaderNavigationClassName, className)}
       onClick={(event) => {
         onClick?.(event)

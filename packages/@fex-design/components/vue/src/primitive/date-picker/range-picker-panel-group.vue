@@ -11,20 +11,34 @@ import RangePickerPanel from './range-picker-panel.vue'
 
 defineOptions({ name: 'RangePickerPanelGroup', inheritAttrs: false })
 const attrs = useAttrs()
-function nativeAttrs() { const { onMouseleave, ...rest } = attrs; return rest }
+function nativeAttrs() {
+  const { onMouseleave, ...rest } = attrs
+  return rest
+}
 function leave(event: MouseEvent) {
   const handlers = attrs.onMouseleave
-  for (const handler of Array.isArray(handlers) ? handlers : [handlers]) if (typeof handler === 'function') handler(event)
+  for (const handler of Array.isArray(handlers) ? handlers : [handlers])
+    if (typeof handler === 'function') handler(event)
   if (!event.defaultPrevented) context.setHoverValue(null)
 }
 const props = defineProps<{ class?: string; panelCount?: 1 | 2 }>()
 const context = useRangePickerContext('RangePickerPanelGroup')
-const visibleDates = computed(() => getVisibleRangePanelViewDates(context.viewDate.value, context.panel.value, context.showTime ? 1 : props.panelCount))
+const visibleDates = computed(() =>
+  getVisibleRangePanelViewDates(
+    context.viewDate.value,
+    context.panel.value,
+    context.showTime ? 1 : props.panelCount,
+  ),
+)
 </script>
 
 <template>
-  <div v-bind="nativeAttrs()" :role="attrs.role ?? 'group'" data-slot="range-picker-panel-group"
-    :class="cn(datePickerPanelsClassName, appearance().classNames?.panelGroup, props.class)" :style="[appearance().styles?.panelGroup, attrs.style]"
+  <div
+    v-bind="nativeAttrs()"
+    :role="attrs.role ?? 'group'"
+    data-slot="range-picker-panel-group"
+    :class="cn(datePickerPanelsClassName, appearance().classNames?.panelGroup, props.class)"
+    :style="[appearance().styles?.panelGroup, attrs.style]"
     @mouseleave="leave"
   >
     <slot v-if="$slots.default" />

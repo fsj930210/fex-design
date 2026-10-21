@@ -1,5 +1,11 @@
 <script lang="ts">
-import { Calendar } from '@fex-design/svelte/ui/calendar'
-import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
+  import { Calendar } from "@fex-design/svelte/ui/calendar";
+  import { calendarDemoDate } from "@fex-design/docs-shared/calendar-demo-data";
 </script>
-<Calendar defaultViewDate={calendarDemoDate} showWeek weekStartsOn={1} locale={{ firstWeekContainsDate: 4 }} />
+
+<Calendar
+  defaultViewDate={calendarDemoDate}
+  showWeek
+  weekStartsOn={1}
+  locale={{ firstWeekContainsDate: 4 }}
+/>

@@ -65,7 +65,7 @@
     HTMLThAttributes,
   } from "svelte/elements";
 
-  import type { SvelteDataTable } from '@fex-design/svelte/stores/create-data-table';
+  import type { SvelteDataTable } from "@fex-design/svelte/stores/create-data-table";
 
   interface DataTableClass {
     root?: string;

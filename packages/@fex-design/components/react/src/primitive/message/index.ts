@@ -5,7 +5,11 @@ export { MessageHeader } from './message-header'
 export { MessageContent } from './message-content'
 export { MessageStatus, type MessageStatusProps } from './message-status'
 export { MessageActions, type MessageActionsProps } from './message-actions'
-export { MessageAction, type MessageActionProps, type MessageActionRenderProps } from './message-action'
+export {
+  MessageAction,
+  type MessageActionProps,
+  type MessageActionRenderProps,
+} from './message-action'
 export { MessageFooter } from './message-footer'
 export { MessageGroup, type MessageGroupProps } from './message-group'
 export { MessageContext, useMessageContext, type MessageContextValue } from './message-context'

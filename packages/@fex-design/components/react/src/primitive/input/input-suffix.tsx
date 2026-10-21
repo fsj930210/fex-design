@@ -1,8 +1,8 @@
-import { inputSuffixClassName } from "@fex-design/components-styles/input"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps, Ref } from "react"
+import { inputSuffixClassName } from '@fex-design/components-styles/input'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps, Ref } from 'react'
 
-export interface InputSuffixProps extends ComponentProps<"span"> {
+export interface InputSuffixProps extends ComponentProps<'span'> {
   ref?: Ref<HTMLSpanElement> | undefined
 }
 

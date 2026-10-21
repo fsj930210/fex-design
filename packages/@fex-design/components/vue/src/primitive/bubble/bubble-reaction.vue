@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { bubbleReactionClassName, bubbleReactionCountClassName } from '@fex-design/components-styles/bubble'
+import {
+  bubbleReactionClassName,
+  bubbleReactionCountClassName,
+} from '@fex-design/components-styles/bubble'
 import { cn } from '@fex-design/utils'
 import { computed, useAttrs } from 'vue'
 import { Toggle } from '../toggle/toggle'

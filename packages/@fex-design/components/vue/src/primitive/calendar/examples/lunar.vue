@@ -8,6 +8,17 @@ import { calendarDemoDate, calendarDemoLunar } from '@fex-design/docs-shared/cal
 const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate }
 </script>
 <template>
-<CalendarRoot v-bind="getCalendarUIOptions(options)" :class="calendarUIRootClassName" :data-fullscreen="true"><ExampleContent :options="options"><template #fullCell="{ cell }"><CalendarCellTrigger :cell="cell" class="flex-col items-center"><span>{{ cell.label }}</span><small>{{ calendarDemoLunar(cell) }}</small></CalendarCellTrigger></template></ExampleContent></CalendarRoot>
+  <CalendarRoot
+    v-bind="getCalendarUIOptions(options)"
+    :class="calendarUIRootClassName"
+    :data-fullscreen="true"
+    ><ExampleContent :options="options"
+      ><template #fullCell="{ cell }"
+        ><CalendarCellTrigger :cell="cell" class="flex-col items-center"
+          ><span>{{ cell.label }}</span
+          ><small>{{ calendarDemoLunar(cell) }}</small></CalendarCellTrigger
+        ></template
+      ></ExampleContent
+    ></CalendarRoot
+  >
 </template>
-

@@ -11,8 +11,8 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import PrimitiveRadio from '@fex-design/svelte/primitive/radio/radio.svelte';
-  import type { RadioValue } from '@fex-design/svelte/primitive/radio/context';
+  import PrimitiveRadio from "@fex-design/svelte/primitive/radio/radio.svelte";
+  import type { RadioValue } from "@fex-design/svelte/primitive/radio/context";
   interface Props extends Omit<
     HTMLButtonAttributes,
     "children" | "type" | "value"

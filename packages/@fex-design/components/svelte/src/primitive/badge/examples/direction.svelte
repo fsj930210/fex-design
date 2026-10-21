@@ -3,7 +3,7 @@
   const directions = ["ltr", "rtl"] as const;
 </script>
 
-<div class="flex items-center justify-center gap-12">
+<div class="flex flex-wrap items-center justify-center gap-12">
   {#each directions as dir}<div {dir} class="grid justify-items-center gap-2">
       <span>{dir === "ltr" ? "LTR · 中文示例" : "RTL · مثال عربي"}</span><span
         class="relative inline-flex"

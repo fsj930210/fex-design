@@ -9,7 +9,13 @@
     children?: Snippet;
     element?: HTMLDivElement | undefined;
   }
-  let { axis, children, element = $bindable(), class: className, ...rest }: Props = $props();
+  let {
+    axis,
+    children,
+    element = $bindable(),
+    class: className,
+    ...rest
+  }: Props = $props();
 </script>
 
 <div

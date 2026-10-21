@@ -13,7 +13,7 @@
   import { cn } from "@fex-design/utils";
   import { setContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { sliderContextKey, type SliderContext } from "./context";
 
   interface SliderProps

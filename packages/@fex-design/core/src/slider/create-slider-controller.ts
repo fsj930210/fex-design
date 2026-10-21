@@ -73,7 +73,9 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
         transientValues = undefined
       else next.values = transientValues
     }
-    next.activeIndex = next.values.length ? clamp(stored.activeIndex, 0, next.values.length - 1) : -1
+    next.activeIndex = next.values.length
+      ? clamp(stored.activeIndex, 0, next.values.length - 1)
+      : -1
     if (JSON.stringify(derived) !== JSON.stringify(next)) derived = next
     return derived
   }
@@ -153,7 +155,12 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
     },
     moveRangeSlide(value) {
       const current = getSnapshot()
-      if (!current.draggableRange || !rangeStartValues.length || current.disabledThumbs.some(Boolean)) return undefined
+      if (
+        !current.draggableRange ||
+        !rangeStartValues.length ||
+        current.disabledThumbs.some(Boolean)
+      )
+        return undefined
       const delta = clamp(
         value - rangeAnchor,
         current.min - rangeStartValues[0]!,
@@ -211,7 +218,8 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
       const current = getSnapshot()
       if (
         !current.editable ||
-        index < 0 || index >= current.values.length ||
+        index < 0 ||
+        index >= current.values.length ||
         current.values.length <= current.minCount ||
         current.disabledThumbs[index]
       )

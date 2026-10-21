@@ -7,7 +7,7 @@ const value = ref('受控内容')
 <template>
   <div class="grid w-full gap-3">
     <Input v-model="value" clearable /><Input default-value="非受控内容" clearable />
-    <div class="flex gap-2">
+    <div class="flex flex-wrap gap-2">
       <Button @click="value = '外部设置'">外部设置</Button
       ><Button @click="value = ''">外部清空</Button>
     </div>

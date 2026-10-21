@@ -4,9 +4,17 @@ import { getCalendarUIOptions, type CalendarUIOptions } from '@fex-design/core/c
 import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
 import ExampleContent from './_parts/content.vue'
 import { calendarDemoDate, calendarDemoEnglish } from '@fex-design/docs-shared/calendar-demo-data'
-const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate, locale: calendarDemoEnglish, showWeek: true }
+const options: CalendarUIOptions = {
+  defaultViewDate: calendarDemoDate,
+  locale: calendarDemoEnglish,
+  showWeek: true,
+}
 </script>
 <template>
-<CalendarRoot v-bind="getCalendarUIOptions(options)" :class="calendarUIRootClassName" :data-fullscreen="true"><ExampleContent :options="options" /></CalendarRoot>
+  <CalendarRoot
+    v-bind="getCalendarUIOptions(options)"
+    :class="calendarUIRootClassName"
+    :data-fullscreen="true"
+    ><ExampleContent :options="options"
+  /></CalendarRoot>
 </template>
-

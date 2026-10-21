@@ -22,7 +22,7 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { createToastStore } from '@fex-design/svelte/stores/toast';
+  import { createToastStore } from "@fex-design/svelte/stores/toast";
   import {
     toast,
     type SvelteToastItem,

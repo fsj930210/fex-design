@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
 import { buttonSpinnerClassName } from '@fex-design/components-styles/button'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
 import { SearchIcon } from '@fex-design/angular/icons/search'

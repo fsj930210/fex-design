@@ -1,17 +1,9 @@
 import { type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
 import { textareaRootClassName } from '@fex-design/components-styles/textarea'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { Show } from 'solid-js'
-import {
-  createTextarea,
-  TextareaContext,
-  type TextareaChangeReason,
-} from './textarea-context'
+import { createTextarea, TextareaContext, type TextareaChangeReason } from './textarea-context'
 import { TextareaClear } from './textarea-clear'
 
 export interface TextareaRootProps extends ParentProps<

@@ -1,10 +1,6 @@
 import { InfoIcon } from '@fex-design/react/icons/info'
 import { CheckIcon } from '@fex-design/react/icons/check'
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 

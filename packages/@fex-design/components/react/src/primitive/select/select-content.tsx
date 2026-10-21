@@ -18,6 +18,9 @@ import { CheckIcon } from '@fex-design/react/icons/check'
 import { useSelect, useSelectOption } from './use-select'
 
 export interface SelectContentProps extends ComponentProps<'div'> {
+  popoverContentProps?: Omit<ComponentProps<typeof PopoverContent>, 'children'> | undefined
+  portalProps?: Omit<ComponentProps<typeof PopoverPortal>, 'children'> | undefined
+  listProps?: Omit<SelectListProps, 'children'> | undefined
   popupRender?: (menu: ReactNode, context: { close: () => void }) => ReactNode
   emptyContent?: ReactNode
   loadingContent?: ReactNode
@@ -28,6 +31,9 @@ export interface SelectContentProps extends ComponentProps<'div'> {
 }
 
 export function SelectContent({
+  popoverContentProps,
+  portalProps,
+  listProps,
   className,
   children,
   popupRender,
@@ -39,20 +45,22 @@ export function SelectContent({
   const select = useSelect()
   const menu = (
     <SelectList
-      emptyContent={emptyContent}
-      loadingContent={loadingContent}
-      optionRender={optionRender}
+      {...listProps}
+      emptyContent={emptyContent ?? listProps?.emptyContent}
+      loadingContent={loadingContent ?? listProps?.loadingContent}
+      optionRender={optionRender ?? listProps?.optionRender}
     >
       {children}
     </SelectList>
   )
   return (
-    <PopoverPortal>
+    <PopoverPortal {...portalProps}>
       <PopoverContent
         {...props}
+        {...popoverContentProps}
         role="presentation"
-        className={cn(selectContentClassName, className)}
-        style={props.style}
+        className={cn(selectContentClassName, className, popoverContentProps?.className)}
+        style={{ ...props.style, ...popoverContentProps?.style }}
       >
         {popupRender ? popupRender(menu, { close: select.controller.close }) : menu}
       </PopoverContent>
@@ -67,7 +75,13 @@ export interface SelectListProps extends Omit<ComponentProps<'div'>, 'children'>
   optionRender?: SelectContentProps['optionRender']
 }
 
-function AutomaticItem({ option, optionRender }: { option: SelectOption; optionRender?: SelectContentProps['optionRender'] }) {
+function AutomaticItem({
+  option,
+  optionRender,
+}: {
+  option: SelectOption
+  optionRender?: SelectContentProps['optionRender']
+}) {
   const state = useSelectOption(option.value)
   return (
     <SelectItem value={option.value}>
@@ -130,7 +144,10 @@ export function SelectList({
       onScroll={(event) => {
         onScroll?.(event)
         if (event.defaultPrevented) return
-        setViewport({ scrollTop: event.currentTarget.scrollTop, height: event.currentTarget.clientHeight })
+        setViewport({
+          scrollTop: event.currentTarget.scrollTop,
+          height: event.currentTarget.clientHeight,
+        })
       }}
     >
       {content}
@@ -148,7 +165,10 @@ export function SelectItem({
   children?: ReactNode
 }) {
   const select = useSelect()
-  const option = select.options.find((item) => item.value === value) ?? { value, label: String(value) }
+  const option = select.options.find((item) => item.value === value) ?? {
+    value,
+    label: String(value),
+  }
   const state = useSelectOption(value)
   return (
     <div
@@ -167,9 +187,7 @@ export function SelectItem({
         state.select()
       }}
     >
-      <span className={selectOptionLabelClassName}>
-        {children ?? option.label}
-      </span>
+      <span className={selectOptionLabelClassName}>{children ?? option.label}</span>
       <span aria-hidden="true" className={selectOptionIndicatorClassName}>
         <CheckIcon />
       </span>

@@ -1,0 +1,24 @@
+<div class="grid w-full gap-space-lg">
+  <nav paginationRoot [total]="200" [labels]="labels" [defaultPage]="8">
+    <ng-template #content let-view0>
+      <span data-slot="pagination-total" [class]="totalClass"
+        >{{ view0.range[0] }}–{{ view0.range[1] }} / {{ view0.total }}</span
+      >
+      <div paginationContent>
+        <button paginationNavigationButton direction="prev">上一页</button>
+        @for (item of view0.pages; track item.key) { @if (item.type === 'page') {
+        <button paginationPageButton [page]="item.page">
+          {{ item.page === view0.page ? '[' + item.page + ']' : item.page }}
+        </button>
+        } @else { <span paginationEllipsis>…</span> } }
+        <button paginationNavigationButton direction="next">下一页</button>
+      </div>
+      <div paginationPageSizeSelect></div>
+      <div data-slot="pagination-jumper" [class]="jumperClass">
+        <span>{{ view0.labels.jumpPrefix }}</span>
+        <div paginationQuickJumper></div>
+        <span>{{ view0.labels.jumpSuffix }}</span>
+      </div>
+    </ng-template>
+  </nav>
+</div>

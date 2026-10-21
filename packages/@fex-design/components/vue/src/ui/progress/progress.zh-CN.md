@@ -14,45 +14,45 @@ import { Progress } from '@fex-design/vue/ui/progress'
 
 ## 示例
 
-| ID | 场景 |
-| --- | --- |
-| `basic` | 基础用法 |
-| `status` | 状态 |
-| `color` | 颜色 |
-| `segmented` | 分段进度 |
-| `size` | 尺寸 |
-| `linecap` | 圆角 |
-| `circle` | 环形进度 |
-| `dashboard` | 仪表盘 |
-| `dynamic` | 动态进度 |
-| `direction` | LTR / RTL |
-| `structured` | 结构化样式 |
-| `custom-gap` | 自定义分段间隔 |
-| `format` | 格式化与信息位置 |
-| `gradient` | 渐变颜色 |
-| `multi-range` | 多个填充段 |
+| ID            | 场景             |
+| ------------- | ---------------- |
+| `basic`       | 基础用法         |
+| `status`      | 状态             |
+| `color`       | 颜色             |
+| `segmented`   | 分段进度         |
+| `size`        | 尺寸             |
+| `linecap`     | 圆角             |
+| `circle`      | 环形进度         |
+| `dashboard`   | 仪表盘           |
+| `dynamic`     | 动态进度         |
+| `direction`   | LTR / RTL        |
+| `structured`  | 结构化样式       |
+| `custom-gap`  | 自定义分段间隔   |
+| `format`      | 格式化与信息位置 |
+| `gradient`    | 渐变颜色         |
+| `multi-range` | 多个填充段       |
 
 ## API
 
-| 属性 | Type / Default |
-| --- | --- |
-| value / min / max | number / null; 0 / 0 / 100 |
-| variant | line / circle / dashboard; line |
-| status | pending / active / success / error; 自动推导 |
-| size | sm / md / lg / number; line: 8, circle: 48 |
-| thickness | number; line: 8, circle: 4 |
-| steps / gap | number; gap: 2px |
-| color | string / { from, to, direction? } / { stops, direction? } |
-| trackColor | string |
-| linecap / trackLinecap | round / butt / square; round |
-| gapDegree | number; 75 |
-| gapPlacement | top / bottom / start / end / left / right; bottom |
-| showInfo / showValue | boolean / undefined |
-| infoPlacement | outside / inside / top / bottom / none; outside |
-| label | string |
-| format | (percent, value) => string / number |
-| success | boolean; false |
-| classNames / styles | root, track, range, info, label, step |
+| 属性                   | Type / Default                                            |
+| ---------------------- | --------------------------------------------------------- |
+| value / min / max      | number / null; 0 / 0 / 100                                |
+| variant                | line / circle / dashboard; line                           |
+| status                 | pending / active / success / error; 自动推导              |
+| size                   | sm / md / lg / number; line: 8, circle: 48                |
+| thickness              | number; line: 8, circle: 4                                |
+| steps / gap            | number; gap: 2px                                          |
+| color                  | string / { from, to, direction? } / { stops, direction? } |
+| trackColor             | string                                                    |
+| linecap / trackLinecap | round / butt / square; round                              |
+| gapDegree              | number; 75                                                |
+| gapPlacement           | top / bottom / start / end / left / right; bottom         |
+| showInfo / showValue   | boolean / undefined                                       |
+| infoPlacement          | outside / inside / top / bottom / none; outside           |
+| label                  | string                                                    |
+| format                 | (percent, value) => string / number                       |
+| success                | boolean; false                                            |
+| classNames / styles    | root, track, range, info, label, step                     |
 
 信息显示优先级为 showInfo ?? showValue ?? 默认值。线性默认显示；圆环和仪表盘在 infoPlacement 为 inside 时默认显示。format 优先于成功图标，percent 为 0–100。bottom 不重复渲染顶部标签，none 不渲染信息。
 

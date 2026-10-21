@@ -6,7 +6,7 @@ const value = ref<RadioValue>('pear')
 </script>
 <template>
   <div class="grid gap-3">
-    <div class="flex gap-2">
+    <div class="flex flex-wrap gap-2">
       <Button size="sm" @click="value = 'apple'">选择苹果</Button
       ><Button size="sm" @click="value = 'pear'">选择梨</Button>
     </div>

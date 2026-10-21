@@ -1,1 +1,15 @@
-<script lang="ts">import { SelectRoot, SelectTrigger, SelectContent } from '@fex-design/svelte/primitive/select';   const options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}]</script><SelectRoot {options} defaultValue="react" clearable><SelectTrigger class="w-72"/><SelectContent/></SelectRoot>
+<script lang="ts">
+  import {
+    SelectRoot,
+    SelectTrigger,
+    SelectContent,
+  } from "@fex-design/svelte/primitive/select";
+  const options = [
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+  ];
+</script>
+
+<SelectRoot {options} defaultValue="react" clearable
+  ><SelectTrigger class="w-72" /><SelectContent /></SelectRoot
+>

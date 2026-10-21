@@ -1,15 +1,38 @@
 <ng-content select="[scrollbarViewport]">
-  <div scrollbarViewport><ng-content /></div>
+  <div
+    scrollbarViewport
+    [class]="viewportProps()?.class"
+    [style]="viewportProps()?.style"
+    [overflow]="viewportProps()?.overflow"
+  >
+    <ng-content />
+  </div>
 </ng-content>
-@for (axis of axes; track axis) {
-  @if (resolved()[axis] === 'auto') {
-    <div scrollbarBar [axis]="axis" [class]="classNames()?.[axis === 'x' ? 'barX' : 'barY']" [style]="styles()?.[axis === 'x' ? 'barX' : 'barY']">
-      <div scrollbarTrack [axis]="axis" [class]="classNames()?.[axis === 'x' ? 'trackX' : 'trackY']" [style]="styles()?.[axis === 'x' ? 'trackX' : 'trackY']">
-        <div scrollbarThumb [axis]="axis" [class]="classNames()?.[axis === 'x' ? 'thumbX' : 'thumbY']" [style]="styles()?.[axis === 'x' ? 'thumbX' : 'thumbY']"></div>
-      </div>
-    </div>
-  }
-}
-@if (resolved().x === 'auto' && resolved().y === 'auto') {
-  <div scrollbarCorner [class]="classNames()?.corner" [style]="styles()?.corner"></div>
+@for (axis of axes; track axis) { @if (resolved()[axis] === 'auto') {
+<div
+  scrollbarBar
+  [axis]="axis"
+  [class]="cn(classNames()?.[axis === 'x' ? 'barX' : 'barY'], (axis === 'x' ? horizontalBarProps() : verticalBarProps())?.class)"
+  [style]="mergeStyle(styles()?.[axis === 'x' ? 'barX' : 'barY'], (axis === 'x' ? horizontalBarProps() : verticalBarProps())?.style)"
+>
+  <div
+    scrollbarTrack
+    [axis]="axis"
+    [class]="cn(classNames()?.[axis === 'x' ? 'trackX' : 'trackY'], (axis === 'x' ? horizontalTrackProps() : verticalTrackProps())?.class)"
+    [style]="mergeStyle(styles()?.[axis === 'x' ? 'trackX' : 'trackY'], (axis === 'x' ? horizontalTrackProps() : verticalTrackProps())?.style)"
+  >
+    <div
+      scrollbarThumb
+      [axis]="axis"
+      [class]="cn(classNames()?.[axis === 'x' ? 'thumbX' : 'thumbY'], (axis === 'x' ? horizontalThumbProps() : verticalThumbProps())?.class)"
+      [style]="mergeStyle(styles()?.[axis === 'x' ? 'thumbX' : 'thumbY'], (axis === 'x' ? horizontalThumbProps() : verticalThumbProps())?.style)"
+    ></div>
+  </div>
+</div>
+} } @if (resolved().x === 'auto' && resolved().y === 'auto') {
+<div
+  scrollbarCorner
+  [class]="cn(classNames()?.corner, cornerProps()?.class)"
+  [style]="mergeStyle(styles()?.corner, cornerProps()?.style)"
+></div>
 }

@@ -80,7 +80,13 @@
     { "id": "carousel", "title": "循环公告" },
     { "id": "custom", "title": "自定义图标与操作" },
     { "id": "direction", "title": "LTR 与 RTL" },
-    { "id": "semantic-styles", "title": "语义化样式" }
+    { "id": "semantic-styles", "title": "语义化样式" },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
+    }
   ],
   "frameworks": {
     "react": {

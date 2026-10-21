@@ -9,4 +9,10 @@ export { default as CalendarCell } from './calendar-cell.vue'
 export { default as CalendarCellTrigger } from './calendar-cell-trigger.vue'
 export { default as CalendarFooter } from './calendar-footer.vue'
 export { useCalendar } from './use-calendar'
-export type { CalendarOptions, CalendarController, CalendarValue, CalendarNavigationAction, CalendarWeekHeaderItem } from '@fex-design/core/calendar'
+export type {
+  CalendarOptions,
+  CalendarController,
+  CalendarValue,
+  CalendarNavigationAction,
+  CalendarWeekHeaderItem,
+} from '@fex-design/core/calendar'

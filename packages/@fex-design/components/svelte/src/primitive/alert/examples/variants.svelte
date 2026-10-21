@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { AlertTitle, AlertIcon, Alert } from '@fex-design/svelte/primitive/alert'
-  import InfoIcon from '@fex-design/svelte/icons/info.svelte';
+  import {
+    AlertTitle,
+    AlertIcon,
+    Alert,
+  } from "@fex-design/svelte/primitive/alert";
+  import InfoIcon from "@fex-design/svelte/icons/info.svelte";
 </script>
 
 <div class="grid w-full gap-3">

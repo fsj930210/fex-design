@@ -1,2 +1,16 @@
-<div calendarRoot [defaultViewDate]="options.defaultViewDate" [locale]="options.locale" [weekStartsOn]="options.weekStartsOn ?? 0" [showWeek]="options.showWeek" [fullscreen]="options.fullscreen" [class]="rootClass" [attr.data-fullscreen]="true"><div calendarExampleContent [options]="options" [footerTemplate]="footer"><ng-template #footer let-controller="controller"><button type="button" (click)="controller.navigate('today')">回到今天</button></ng-template></div></div>
-
+<div
+  calendarRoot
+  [defaultViewDate]="options.defaultViewDate"
+  [locale]="options.locale"
+  [weekStartsOn]="options.weekStartsOn ?? 0"
+  [showWeek]="options.showWeek"
+  [fullscreen]="options.fullscreen"
+  [class]="rootClass"
+  [attr.data-fullscreen]="true"
+>
+  <div calendarExampleContent [options]="options" [footerTemplate]="footer">
+    <ng-template #footer let-controller="controller"
+      ><button type="button" (click)="controller.navigate('today')">回到今天</button></ng-template
+    >
+  </div>
+</div>

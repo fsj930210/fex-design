@@ -10,7 +10,7 @@ const buttonGroupClassName = cva('inline-flex w-fit items-stretch', {
       vertical: 'flex-col',
     },
     connected: {
-      true: "[&>[data-slot=button]]:rounded-none data-[orientation=horizontal]:[&>[data-slot=button]:first-child]:rounded-s-md data-[orientation=horizontal]:[&>[data-slot=button]:last-child]:rounded-e-md data-[orientation=vertical]:[&>[data-slot=button]:first-child]:rounded-t-md data-[orientation=vertical]:[&>[data-slot=button]:last-child]:rounded-b-md data-[orientation=horizontal]:[&>[data-slot=button]+[data-slot=button]]:-ms-px data-[orientation=vertical]:[&>[data-slot=button]+[data-slot=button]]:-mt-px",
+      true: '[&>[data-slot=button]]:rounded-none data-[orientation=horizontal]:[&>[data-slot=button]:first-child]:rounded-s-md data-[orientation=horizontal]:[&>[data-slot=button]:last-child]:rounded-e-md data-[orientation=vertical]:[&>[data-slot=button]:first-child]:rounded-t-md data-[orientation=vertical]:[&>[data-slot=button]:last-child]:rounded-b-md data-[orientation=horizontal]:[&>[data-slot=button]+[data-slot=button]]:-ms-px data-[orientation=vertical]:[&>[data-slot=button]+[data-slot=button]]:-mt-px',
       false: '',
     },
   },

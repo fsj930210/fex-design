@@ -21,7 +21,7 @@ const pillChecked = ref(false)
             aria-label="rounded 受控"
             ><SwitchThumb
           /></SwitchRoot>
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             <Button size="sm" @click="roundedChecked = true">开启</Button
             ><Button size="sm" @click="roundedChecked = false">关闭</Button>
           </div>
@@ -42,7 +42,7 @@ const pillChecked = ref(false)
             aria-label="pill 受控"
             ><SwitchThumb
           /></SwitchRoot>
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             <Button size="sm" @click="pillChecked = true">开启</Button
             ><Button size="sm" @click="pillChecked = false">关闭</Button>
           </div>

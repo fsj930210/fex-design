@@ -1,3 +1,4 @@
+import { Spinner } from '@fex-design/react/primitive/spinner'
 import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/react/primitive/switch'
 import { useState, type CSSProperties } from 'react'
 
@@ -55,6 +56,19 @@ export default function Example() {
             <SwitchThumb />
           </SwitchRoot>
         </div>
+      </section>
+      <section className="grid gap-2">
+        <span className="text-sm text-muted-foreground">加载图标</span>
+        <SwitchRoot
+          loading
+          defaultChecked
+          className="[--switch-track-checked-background:#7c3aed] [--switch-thumb-background:#f5f3ff] [--primary:#6d28d9]"
+          aria-label="加载图标"
+        >
+          <SwitchThumb>
+            <Spinner className="text-primary" aria-hidden="true" />
+          </SwitchThumb>
+        </SwitchRoot>
       </section>
     </div>
   )

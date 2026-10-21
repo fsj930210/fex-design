@@ -1,11 +1,17 @@
-import { collapseIconClassName, collapseTriggerClassName } from "@fex-design/components-styles/collapse"
-import { cn } from "@fex-design/utils"
-import { createMemo, splitProps, type JSX } from "solid-js"
-import { ChevronRightIcon } from "@fex-design/solid/icons/chevron"
-import { Button } from "../button"
-import { useCollapseContext, useCollapseItemContext } from "./collapse-context"
+import {
+  collapseIconClassName,
+  collapseTriggerClassName,
+} from '@fex-design/components-styles/collapse'
+import { cn } from '@fex-design/utils'
+import { createMemo, splitProps, type JSX } from 'solid-js'
+import { ChevronRightIcon } from '@fex-design/solid/icons/chevron'
+import { Button } from '../button'
+import { useCollapseContext, useCollapseItemContext } from './collapse-context'
 
-export interface CollapseTriggerProps extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+export interface CollapseTriggerProps extends Omit<
+  JSX.ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
   showIcon?: boolean
   children?:
     | JSX.Element
@@ -17,7 +23,7 @@ export interface CollapseTriggerProps extends Omit<JSX.ButtonHTMLAttributes<HTML
 }
 
 export function CollapseTrigger(props: CollapseTriggerProps) {
-  const [local, rest] = splitProps(props, ["class", "children", "showIcon", "onClick"])
+  const [local, rest] = splitProps(props, ['class', 'children', 'showIcon', 'onClick'])
   const collapse = useCollapseContext()
   const item = useCollapseItemContext()
   const state = createMemo(() => ({
@@ -30,42 +36,42 @@ export function CollapseTrigger(props: CollapseTriggerProps) {
   }
   const triggerProps = {
     ...rest,
-    type: rest.type ?? "button",
+    type: rest.type ?? 'button',
     id: item.triggerId,
     disabled: state().disabled,
-    "aria-expanded": state().expanded,
-    "aria-controls": item.contentId,
-    "data-slot": "collapse-trigger",
-    "data-state": state().expanded ? "open" : "closed",
+    'aria-expanded': state().expanded,
+    'aria-controls': item.contentId,
+    'data-slot': 'collapse-trigger',
+    'data-state': state().expanded ? 'open' : 'closed',
     class: cn(collapseTriggerClassName({ variant: collapse.variant() }), local.class),
     onClick: handleClick,
   }
-  if (typeof local.children === "function") {
+  if (typeof local.children === 'function') {
     return local.children({
       props: triggerProps,
       state: state(),
       icon:
         local.showIcon === false ? null : (
-          <ChevronRightIcon class={cn(collapseIconClassName, state().expanded && "-rotate-90")} />
+          <ChevronRightIcon class={cn(collapseIconClassName, state().expanded && '-rotate-90')} />
         ),
     })
   }
   return (
     <Button
       {...rest}
-      type={rest.type ?? "button"}
+      type={rest.type ?? 'button'}
       id={item.triggerId}
       disabled={state().disabled}
       aria-expanded={state().expanded}
       aria-controls={item.contentId}
       data-slot="collapse-trigger"
-      data-state={state().expanded ? "open" : "closed"}
+      data-state={state().expanded ? 'open' : 'closed'}
       class={cn(collapseTriggerClassName({ variant: collapse.variant() }), local.class)}
       onClick={handleClick}
     >
       <span class="min-w-0 flex-1">{local.children}</span>
       {local.showIcon === false ? null : (
-        <ChevronRightIcon class={cn(collapseIconClassName, state().expanded ? "-rotate-90" : "")} />
+        <ChevronRightIcon class={cn(collapseIconClassName, state().expanded ? '-rotate-90' : '')} />
       )}
     </Button>
   )

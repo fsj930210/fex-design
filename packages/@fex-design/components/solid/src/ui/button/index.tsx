@@ -10,6 +10,9 @@ export type { ButtonProps } from './button.types'
 
 export function Button(props: ButtonProps) {
   const [local, rest] = splitProps(props, [
+    'startIconProps',
+    'endIconProps',
+    'loadingIconProps',
     'class',
     'variant',
     'color',
@@ -32,7 +35,12 @@ export function Button(props: ButtonProps) {
   const isDisabled = () => local.disabled === true || isLoading()
   const iconNode = () =>
     isLoading()
-      ? (local.loadingIndicator ?? <LoadingIcon class={buttonSpinnerClassName} />)
+      ? (local.loadingIndicator ?? (
+          <LoadingIcon
+            {...local.loadingIconProps}
+            class={cn(buttonSpinnerClassName, local.loadingIconProps?.class)}
+          />
+        ))
       : local.icon
 
   return (
@@ -54,11 +62,15 @@ export function Button(props: ButtonProps) {
       disabled={isDisabled()}
     >
       <Show when={iconPlacement() === 'start' && iconNode()}>
-        <ButtonIcon data-icon="inline-start">{iconNode()}</ButtonIcon>
+        <ButtonIcon {...local.startIconProps} data-icon="inline-start">
+          {iconNode()}
+        </ButtonIcon>
       </Show>
       {local.children}
       <Show when={iconPlacement() === 'end' && iconNode()}>
-        <ButtonIcon data-icon="inline-end">{iconNode()}</ButtonIcon>
+        <ButtonIcon {...local.endIconProps} data-icon="inline-end">
+          {iconNode()}
+        </ButtonIcon>
       </Show>
     </PrimitiveButton>
   )

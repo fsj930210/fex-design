@@ -1,10 +1,6 @@
 import { stepIndicatorClassName } from '@fex-design/components-styles/steps'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import { CheckIcon } from '@fex-design/solid/icons/check'
 import { useStepContext } from './steps-context'
 

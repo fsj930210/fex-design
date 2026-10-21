@@ -28,7 +28,6 @@ export function isPreviewHostMessage(value: unknown): value is PreviewHostMessag
   if (!value || typeof value !== 'object') return false
   const message = value as Partial<PreviewHostMessage>
   return (
-    message.protocol === PREVIEW_PROTOCOL &&
-    (message.type === 'render' || message.type === 'theme')
+    message.protocol === PREVIEW_PROTOCOL && (message.type === 'render' || message.type === 'theme')
   )
 }

@@ -24,7 +24,7 @@ export default function Example() {
             >
               <SwitchThumb />
             </SwitchRoot>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button size="sm" onClick={() => setRoundedChecked(true)}>
                 开启
               </Button>
@@ -52,7 +52,7 @@ export default function Example() {
             >
               <SwitchThumb />
             </SwitchRoot>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button size="sm" onClick={() => setPillChecked(true)}>
                 开启
               </Button>

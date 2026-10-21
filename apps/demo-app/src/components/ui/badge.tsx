@@ -66,7 +66,11 @@ export function Badge({
   return (
     <span
       data-slot="badge-root"
-      className={cn("relative inline-flex w-fit [&>[data-slot=badge]]:absolute [&>[data-slot=badge]]:end-0 [&>[data-slot=badge]]:top-0 [&>[data-slot=badge]]:z-10 [&>[data-slot=badge]]:-translate-y-1/2 [&>[data-slot=badge]]:translate-x-1/2 rtl:[&>[data-slot=badge]]:-translate-x-1/2 [&>[data-slot=badge-dot]]:absolute [&>[data-slot=badge-dot]]:end-0 [&>[data-slot=badge-dot]]:top-0 [&>[data-slot=badge-dot]]:z-10 [&>[data-slot=badge-dot]]:-translate-y-1/2 [&>[data-slot=badge-dot]]:translate-x-1/2 rtl:[&>[data-slot=badge-dot]]:-translate-x-1/2", className, classNames?.root)}
+      className={cn(
+        'relative inline-flex w-fit [&>[data-slot=badge]]:absolute [&>[data-slot=badge]]:end-0 [&>[data-slot=badge]]:top-0 [&>[data-slot=badge]]:z-10 [&>[data-slot=badge]]:-translate-y-1/2 [&>[data-slot=badge]]:translate-x-1/2 rtl:[&>[data-slot=badge]]:-translate-x-1/2 [&>[data-slot=badge-dot]]:absolute [&>[data-slot=badge-dot]]:end-0 [&>[data-slot=badge-dot]]:top-0 [&>[data-slot=badge-dot]]:z-10 [&>[data-slot=badge-dot]]:-translate-y-1/2 [&>[data-slot=badge-dot]]:translate-x-1/2 rtl:[&>[data-slot=badge-dot]]:-translate-x-1/2',
+        className,
+        classNames?.root,
+      )}
       style={{ ...style, ...styles?.root }}
     >
       <span data-slot="badge-content" className={classNames?.content} style={styles?.content}>
@@ -101,7 +105,7 @@ export function BadgeRibbon({
     <div
       {...props}
       data-slot="badge-ribbon-root"
-      className={cn("relative block w-full", className)}
+      className={cn('relative block w-full', className)}
     >
       <div data-slot="badge-ribbon-content">{children}</div>
       <PrimitiveBadgeRibbon

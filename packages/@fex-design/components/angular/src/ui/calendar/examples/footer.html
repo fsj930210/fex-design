@@ -1,1 +1,5 @@
-<div calendar [defaultViewDate]="date"><ng-template #footer let-controller="controller"><button type="button" (click)="controller.navigate('today')">回到今天</button></ng-template></div>
+<div calendar [defaultViewDate]="date">
+  <ng-template #footer let-controller="controller"
+    ><button type="button" (click)="controller.navigate('today')">回到今天</button></ng-template
+  >
+</div>

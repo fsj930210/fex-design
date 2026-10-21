@@ -1,0 +1,39 @@
+<div class="grid w-full max-w-sm gap-3">
+  <div
+    menu
+    layout="inline"
+    [defaultValue]="['members']"
+    [defaultOpenValues]="['workspace']"
+    (valueChange)="selected.set($event)"
+    class="rounded-xl border border-border bg-background p-2"
+  >
+    <button menuItem value="overview">概览</button>
+    <div subMenu value="workspace">
+      <button subMenuTrigger>工作空间</button>
+      <div subMenuContent [content]="workspaceContent"></div>
+      <ng-template #workspaceContent>
+        <button menuItem value="members">成员</button>
+        <button menuItem value="roles">角色</button>
+        <button menuItem value="billing" [disabled]="true">账单</button>
+      </ng-template>
+    </div>
+    <div menuSeparator></div>
+    <div menuGroup label="账户">
+      <a menuItem value="profile" textValue="个人资料" href="#profile" class="h-auto py-2">
+        <span class="flex flex-1 items-center gap-3">
+          <span
+            class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-medium text-primary"
+            >张</span
+          >
+          <span class="grid flex-1">
+            <strong>张三 · 个人资料</strong>
+            <small class="text-muted-foreground">管理账户与偏好</small>
+          </span>
+          <span class="rounded bg-primary/10 px-2 text-xs text-primary">链接</span>
+        </span>
+      </a>
+      <button menuItem value="logout">退出登录</button>
+    </div>
+  </div>
+  <output class="break-all text-sm">选中值：{{ '[' + selected().join(', ') + ']' }}</output>
+</div>

@@ -1,24 +1,97 @@
 @if (template(); as custom) {
-  <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), trigger: this, ref: ref }" />
+<ng-container
+  [ngTemplateOutlet]="custom"
+  [ngTemplateOutletContext]="{ $implicit: context(), state: context(), trigger: this, ref: ref }"
+/>
 } @else {
-  <div inputRoot [size]="inputSize()" [variant]="inputVariant()" [style]="inputRootStyle()" [class]="triggerClassName()" [value]="''" [disabled]="context().disabled" [readOnly]="true" >
-    <div [class]="fieldClassName">
-      @if (isContentProvided(prefixValue())) { <span inputPrefix [class]="inputConfig().classNames?.prefix ?? ''" [style]="inputConfig().styles?.prefix ?? ''">@if (prefixTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else { {{ prefixValue() }} }</span> }
-      <div inputRoot data-range-part="start" [value]="context().startText" [disabled]="context().disabled" [readOnly]="true" [class]="rangeInputClassName" [attr.data-active]="context().open && context().activePart === 'start' ? 'true' : null">
-        <input inputControl [class]="cn(inputClassName, context().triggerView.startPreview && previewClassName, inputConfig().classNames?.control, resolvedStartInputProps().class)" [style]="startStyle()" [inputProps]="resolvedStartInputProps()" [placeholder]="inputPlaceholder('start', startPlaceholderValue())" />
-      </div>
-    </div>
-    <span aria-hidden="true" [attr.data-default-separator]="separator() == null ? 'true' : null" [class]="cn(separatorClassName, appearance().classNames?.separator)" [style]="appearance().styles?.separator ?? ''">{{ rangeSeparator(separator()) }}</span>
-    <div [class]="fieldClassName">
-      <div inputRoot data-range-part="end" [value]="context().endText" [disabled]="context().disabled" [readOnly]="true" [class]="rangeInputClassName" [attr.data-active]="context().open && context().activePart === 'end' ? 'true' : null">
-        <input inputControl [class]="cn(inputClassName, context().triggerView.endPreview && previewClassName, inputConfig().classNames?.control, resolvedEndInputProps().class)" [style]="endStyle()" [inputProps]="resolvedEndInputProps()" [placeholder]="inputPlaceholder('end', endPlaceholderValue())" />
-      </div>
-      <div data-slot="date-picker-affix" [class]="affixClassName">
-        <span inputSuffix [class]="inputConfig().classNames?.suffix ?? ''" [style]="inputConfig().styles?.suffix ?? ''">@if (suffixTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else if (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else { <calendar-icon class="size-(--input-icon-size)" /> }</span>
-        @if (context().canClear) {
-          <button type="button" [class]="cn(clearClassName, inputConfig().classNames?.clear)" [style]="inputConfig().styles?.clear ?? ''" data-slot="input-clear" aria-label="清除日期" (pointerdown)="$event.preventDefault(); $event.stopPropagation()" (click)="clear($event)"><circle-x-icon class="size-(--input-clear-icon-size)" /></button>
-        }
-      </div>
+<div
+  inputRoot
+  [size]="inputSize()"
+  [variant]="inputVariant()"
+  [style]="inputRootStyle()"
+  [class]="triggerClassName()"
+  [value]="''"
+  [disabled]="context().disabled"
+  [readOnly]="true"
+>
+  <div [class]="fieldClassName">
+    @if (isContentProvided(prefixValue())) {
+    <span
+      inputPrefix
+      [class]="inputConfig().classNames?.prefix ?? ''"
+      [style]="inputConfig().styles?.prefix ?? ''"
+      >@if (prefixTemplate(); as custom) {
+      <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else {
+      {{ prefixValue() }} }</span
+    >
+    }
+    <div
+      inputRoot
+      data-range-part="start"
+      [value]="context().startText"
+      [disabled]="context().disabled"
+      [readOnly]="true"
+      [class]="rangeInputClassName"
+      [attr.data-active]="context().open && context().activePart === 'start' ? 'true' : null"
+    >
+      <input
+        inputControl
+        [class]="cn(inputClassName, context().triggerView.startPreview && previewClassName, inputConfig().classNames?.control, resolvedStartInputProps().class)"
+        [style]="startStyle()"
+        [inputProps]="resolvedStartInputProps()"
+        [placeholder]="inputPlaceholder('start', startPlaceholderValue())"
+      />
     </div>
   </div>
+  <span
+    aria-hidden="true"
+    [attr.data-default-separator]="separator() == null ? 'true' : null"
+    [class]="cn(separatorClassName, appearance().classNames?.separator)"
+    [style]="appearance().styles?.separator ?? ''"
+    >{{ rangeSeparator(separator()) }}</span
+  >
+  <div [class]="fieldClassName">
+    <div
+      inputRoot
+      data-range-part="end"
+      [value]="context().endText"
+      [disabled]="context().disabled"
+      [readOnly]="true"
+      [class]="rangeInputClassName"
+      [attr.data-active]="context().open && context().activePart === 'end' ? 'true' : null"
+    >
+      <input
+        inputControl
+        [class]="cn(inputClassName, context().triggerView.endPreview && previewClassName, inputConfig().classNames?.control, resolvedEndInputProps().class)"
+        [style]="endStyle()"
+        [inputProps]="resolvedEndInputProps()"
+        [placeholder]="inputPlaceholder('end', endPlaceholderValue())"
+      />
+    </div>
+    <div data-slot="date-picker-affix" [class]="affixClassName">
+      <span
+        inputSuffix
+        [class]="inputConfig().classNames?.suffix ?? ''"
+        [style]="inputConfig().styles?.suffix ?? ''"
+        >@if (suffixTemplate(); as custom) {
+        <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else
+        if (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else {
+        <calendar-icon class="size-(--input-icon-size)" /> }</span
+      >
+      @if (context().canClear) {
+      <button
+        type="button"
+        [class]="cn(clearClassName, inputConfig().classNames?.clear)"
+        [style]="inputConfig().styles?.clear ?? ''"
+        data-slot="input-clear"
+        aria-label="清除日期"
+        (pointerdown)="$event.preventDefault(); $event.stopPropagation()"
+        (click)="clear($event)"
+      >
+        <circle-x-icon class="size-(--input-clear-icon-size)" />
+      </button>
+      }
+    </div>
+  </div>
+</div>
 }

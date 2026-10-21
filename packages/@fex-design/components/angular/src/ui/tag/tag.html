@@ -2,10 +2,10 @@
 @if (closable()) { @if (projectedCloseIcon()) {
 <button
   tagAction
-  aria-label="Close"
+  [aria-label]="actionProps()?.['aria-label'] ?? 'Close'"
   [disabled]="disabled()"
   [class]="closeClassName()"
-  [style]="styles().close"
+  [style]="mergeStyle(styles().close, actionProps()?.style)"
   (click)="close.emit($event)"
 >
   <ng-content select="[tagCloseIcon]" />
@@ -13,10 +13,10 @@
 } @else {
 <button
   tagAction
-  aria-label="Close"
+  [aria-label]="actionProps()?.['aria-label'] ?? 'Close'"
   [disabled]="disabled()"
   [class]="closeClassName()"
-  [style]="styles().close"
+  [style]="mergeStyle(styles().close, actionProps()?.style)"
   (click)="close.emit($event)"
 ></button>
 } }

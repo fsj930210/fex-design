@@ -18,12 +18,28 @@
       "description": "带结构区域和可清除能力的单行输入。",
       "props": []
     },
-    { "name": "InputPassword", "layer": "ui", "description": "内置密码可见性切换。", "props": [] },
+    {
+      "name": "InputPassword",
+      "layer": "ui",
+      "description": "内置密码可见性切换。",
+      "props": []
+    },
     {
       "name": "InputSearch",
       "layer": "ui",
       "description": "内置 Enter 和各搜索位置的触发行为。",
-      "props": []
+      "props": [
+        {
+          "name": "addonBeforeButtonProps",
+          "type": "Button customization",
+          "description": "直接定制对应按钮，加载和搜索事件仍由 InputSearch 管理。"
+        },
+        {
+          "name": "addonAfterButtonProps",
+          "type": "Button customization",
+          "description": "直接定制对应按钮，加载和搜索事件仍由 InputSearch 管理。"
+        }
+      ]
     },
     {
       "name": "InputGroup",
@@ -33,7 +49,12 @@
     }
   ],
   "props": [
-    { "name": "size", "type": "'sm' | 'md' | 'lg'", "default": "md", "description": "输入尺寸。" },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "输入尺寸。"
+    },
     {
       "name": "variant",
       "type": "'outlined' | 'filled' | 'borderless' | 'underlined'",
@@ -90,21 +111,44 @@
     }
   ],
   "events": [
-    { "name": "valueChange", "description": "输入值变化。" },
-    { "name": "clear", "description": "清除完成。" },
-    { "name": "search", "description": "返回当前值和 source。" }
+    {
+      "name": "valueChange",
+      "description": "输入值变化。"
+    },
+    {
+      "name": "clear",
+      "description": "清除完成。"
+    },
+    {
+      "name": "search",
+      "description": "返回当前值和 source。"
+    }
   ],
   "frameworks": {
     "react": {
-      "typeOverrides": { "FrameworkNode": "ReactNode", "FrameworkStyle": "CSSProperties" }
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkStyle": "CSSProperties"
+      }
     },
     "vue": {
-      "typeOverrides": { "FrameworkNode": "VNodeChild", "FrameworkStyle": "CSSProperties" }
+      "typeOverrides": {
+        "FrameworkNode": "VNodeChild",
+        "FrameworkStyle": "CSSProperties"
+      }
     },
     "solid": {
-      "typeOverrides": { "FrameworkNode": "JSX.Element", "FrameworkStyle": "JSX.CSSProperties" }
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkStyle": "JSX.CSSProperties"
+      }
     },
-    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet", "FrameworkStyle": "string" } },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkStyle": "string"
+      }
+    },
     "angular": {
       "typeOverrides": {
         "FrameworkNode": "string | TemplateRef<unknown>",
@@ -121,8 +165,14 @@
       "name": "--input-icon-size-sm / --input-icon-size-md / --input-icon-size-lg",
       "description": "Input 各尺寸的组件级图标尺寸；md 未设置时回退到全局 --icon-size-md。"
     },
-    { "name": "--input-height", "description": "当前实例高度。" },
-    { "name": "--input-icon-size", "description": "普通图标尺寸。" },
+    {
+      "name": "--input-height",
+      "description": "当前实例高度。"
+    },
+    {
+      "name": "--input-icon-size",
+      "description": "普通图标尺寸。"
+    },
     {
       "name": "--input-clear-icon-size",
       "description": "清除图标尺寸，随 sm、md、lg 分别为 12px、14px、16px。"
@@ -131,11 +181,26 @@
       "name": "--input-group-radius",
       "description": "InputGroup 外侧圆角；可在直接子元素上局部覆盖。"
     },
-    { "name": "--input-background", "description": "基础背景。" },
-    { "name": "--input-border-color", "description": "基础边框。" },
-    { "name": "--input-color", "description": "输入文字颜色。" },
-    { "name": "--input-placeholder-color", "description": "占位文字颜色。" },
-    { "name": "--input-ring-color", "description": "聚焦环颜色。" }
+    {
+      "name": "--input-background",
+      "description": "基础背景。"
+    },
+    {
+      "name": "--input-border-color",
+      "description": "基础边框。"
+    },
+    {
+      "name": "--input-color",
+      "description": "输入文字颜色。"
+    },
+    {
+      "name": "--input-placeholder-color",
+      "description": "占位文字颜色。"
+    },
+    {
+      "name": "--input-ring-color",
+      "description": "聚焦环颜色。"
+    }
   ],
   "demos": [
     {
@@ -173,6 +238,12 @@
     },
     {
       "id": "semantic-styles"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
     }
   ]
 }

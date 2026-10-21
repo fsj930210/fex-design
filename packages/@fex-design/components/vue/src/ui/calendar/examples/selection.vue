@@ -6,5 +6,6 @@ import type { CalendarDate } from '@fex-design/core/calendar'
 const value = ref<CalendarDate | null>(null)
 </script>
 <template>
-<p>选中：{{ value?.toString() ?? "未选择" }}</p><Calendar :default-view-date="calendarDemoDate" :value="value" @change="value = $event" />
+  <p>选中：{{ value?.toString() ?? '未选择' }}</p>
+  <Calendar :default-view-date="calendarDemoDate" :value="value" @change="value = $event" />
 </template>

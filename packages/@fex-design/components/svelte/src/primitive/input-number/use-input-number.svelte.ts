@@ -29,7 +29,9 @@ export function useInputNumber(getOptions: () => UseInputNumberOptions) {
   const initialValue = getOptions().defaultValue
   let internalValue = $state(initialValue)
   const initialDraft = (getOptions().formatter ?? defaultInputNumberFormatter)(
-    (getOptions().controlled ?? getOptions().value !== undefined) ? getOptions().value : initialValue,
+    (getOptions().controlled ?? getOptions().value !== undefined)
+      ? getOptions().value
+      : initialValue,
     {
       userTyping: false,
       input: '',
@@ -54,7 +56,8 @@ export function useInputNumber(getOptions: () => UseInputNumberOptions) {
   $effect(() => {
     const next = controlled ? externalValue : untrack(value)
     const format = formatter()
-    if (!untrack(() => editing)) draft = untrack(() => format(next, { userTyping: false, input: '' }))
+    if (!untrack(() => editing))
+      draft = untrack(() => format(next, { userTyping: false, input: '' }))
   })
   const setValue = (next: number | undefined) => {
     if (!controlled) internalValue = next

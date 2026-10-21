@@ -1,23 +1,41 @@
 @if (valueTemplate()) {
-  <ng-container [ngTemplateOutlet]="valueTemplate() ?? null" />
+<ng-container [ngTemplateOutlet]="valueTemplate() ?? null" />
 } @else if (layout().showPlaceholder) {
-  <span [class]="placeholderClass">{{ placeholder() }}</span>
-} @else if (layout().showSingle) {
-  {{ select.selectedOptions[0]?.label }}
-} @else if (layout().showTags) {
-  @for (option of layout().visibleOptions; track option.value) {
-    @if (tag()) {
-      <ng-container [ngTemplateOutlet]="tag() ?? null"
-        [ngTemplateOutletContext]="{ $implicit: option, remove: remove(option) }" />
-    } @else {
-      <span tag size="sm" (pointerdown)="$event.preventDefault()">
-        {{ option.label }}
-        <button tagAction [aria-label]="'Remove ' + option.label"
-          (click)="$event.stopPropagation(); select.removeValue(option.value)"></button>
-      </span>
-    }
-  }
-  @if (layout().overflowCount > 0) {
-    <span tag size="sm">+{{ layout().overflowCount }}</span>
-  }
-}
+<span [class]="placeholderClass">{{ placeholder() }}</span>
+} @else if (layout().showSingle) { {{ select.selectedOptions[0]?.label }} } @else if
+(layout().showTags) { @for (option of layout().visibleOptions; track option.value) { @if (tag()) {
+<ng-container
+  [ngTemplateOutlet]="tag() ?? null"
+  [ngTemplateOutletContext]="{ $implicit: option, remove: remove(option) }"
+/>
+} @else { @let customTag = tagConfig(option); @let customAction = actionConfig(option);
+<span
+  tag
+  [class]="customTag?.class"
+  [style]="customTag?.style"
+  [color]="customTag?.color"
+  [variant]="customTag?.variant ?? 'filled'"
+  [size]="customTag?.size ?? 'sm'"
+  [disabled]="select.disabled || option.disabled === true"
+  (pointerdown)="$event.preventDefault()"
+>
+  {{ option.label }}
+  <button
+    tagAction
+    [class]="customAction?.class"
+    [style]="customAction?.style"
+    [aria-label]="'Remove ' + option.label"
+    (click)="$event.stopPropagation(); select.removeValue(option.value)"
+  ></button>
+</span>
+} } @if (layout().overflowCount > 0) {
+<span
+  tag
+  [class]="overflowTagProps()?.class"
+  [style]="overflowTagProps()?.style"
+  [color]="overflowTagProps()?.color"
+  [variant]="overflowTagProps()?.variant ?? 'filled'"
+  [size]="overflowTagProps()?.size ?? 'sm'"
+  >+{{ layout().overflowCount }}</span
+>
+} }

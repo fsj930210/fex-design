@@ -9,15 +9,29 @@
     SwitchRoot,
     SwitchContent,
     SwitchThumb,
-  } from '@fex-design/svelte/primitive/switch';
-  import Spinner from '@fex-design/svelte/primitive/spinner/spinner.svelte';
+  } from "@fex-design/svelte/primitive/switch";
+  import { Spinner } from "@fex-design/svelte/primitive/spinner";
   type Props = Omit<ComponentProps<typeof SwitchRoot>, "children"> & {
+    checkedContentProps?:
+      | Omit<ComponentProps<typeof SwitchContent>, "children" | "state">
+      | undefined;
+    uncheckedContentProps?:
+      | Omit<ComponentProps<typeof SwitchContent>, "children" | "state">
+      | undefined;
+    thumbProps?:
+      Omit<ComponentProps<typeof SwitchThumb>, "children"> | undefined;
+    spinnerProps?:
+      Omit<ComponentProps<typeof Spinner>, "aria-hidden"> | undefined;
     checkedContent?: Snippet | undefined;
     uncheckedContent?: Snippet | undefined;
     classNames?: SwitchClassNames | undefined;
     styles?: SwitchStyles<string> | undefined;
   };
   let {
+    checkedContentProps,
+    uncheckedContentProps,
+    thumbProps,
+    spinnerProps,
     checkedContent,
     uncheckedContent,
     loading = false,
@@ -38,16 +52,28 @@
   style={[style, styles?.root].filter(Boolean).join(";")}
 >
   {#if checkedContent}<SwitchContent
+      {...checkedContentProps}
       state="checked"
-      class={classNames?.content}
-      style={styles?.content}>{@render checkedContent()}</SwitchContent
+      class={cn(classNames?.content, checkedContentProps?.class)}
+      style={[styles?.content, checkedContentProps?.style]
+        .filter(Boolean)
+        .join(";")}>{@render checkedContent()}</SwitchContent
     >{/if}
   {#if uncheckedContent}<SwitchContent
+      {...uncheckedContentProps}
       state="unchecked"
-      class={classNames?.content}
-      style={styles?.content}>{@render uncheckedContent()}</SwitchContent
+      class={cn(classNames?.content, uncheckedContentProps?.class)}
+      style={[styles?.content, uncheckedContentProps?.style]
+        .filter(Boolean)
+        .join(";")}>{@render uncheckedContent()}</SwitchContent
     >{/if}
-  <SwitchThumb class={classNames?.thumb} style={styles?.thumb}
-    >{#if loading}<Spinner aria-hidden="true" />{/if}</SwitchThumb
+  <SwitchThumb
+    {...thumbProps}
+    class={cn(classNames?.thumb, thumbProps?.class)}
+    style={[styles?.thumb, thumbProps?.style].filter(Boolean).join(";")}
+    >{#if loading}<Spinner
+        {...spinnerProps}
+        aria-hidden="true"
+      />{/if}</SwitchThumb
   >
 </SwitchRoot>

@@ -1,5 +1,13 @@
 <script lang="ts">
-  import { Card, CardContent, CardDescription, CardExtra, CardFooter, CardHeader, CardTitle } from "@fex-design/svelte/primitive/card";
+  import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardExtra,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@fex-design/svelte/primitive/card";
 </script>
 
 <Card class="w-full max-w-2xl"

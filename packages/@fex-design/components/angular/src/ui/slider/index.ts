@@ -1,4 +1,1 @@
-export {
-  Slider,
-  type SliderMarkItem,
-} from "./slider"
+export { Slider, type SliderMarkItem } from './slider'

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from '@fex-design/solid/primitive/avatar'
 export function SizesExample() {
   return (
-    <div class="flex items-center gap-3">
+    <div class="flex flex-wrap items-center gap-3">
       <Avatar size="sm">
         <AvatarFallback>SM</AvatarFallback>
       </Avatar>

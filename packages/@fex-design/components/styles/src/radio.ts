@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+import { formTreatment } from './form-treatment'
 
 export const radioGroupClassName = cva('grid min-w-0 gap-2', {
   variants: {
@@ -18,7 +19,8 @@ export const radioRootClassName = cva(
     'outline-none transition-none',
     'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-[var(--radio-ring-color,var(--focus-ring))]',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    'aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20',
+    formTreatment('aria-invalid=true', 'var(--danger)'),
+    formTreatment('data-[warning=true]', 'var(--warning)'),
     'data-[state=checked]:border-[var(--radio-checked-color,var(--primary))]',
   ].join(' '),
   {
@@ -52,7 +54,8 @@ export const radioButtonClassName = cva(
     'hover:bg-muted-background',
     'focus-visible:z-10 focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-[var(--radio-button-ring-color,var(--focus-ring))]',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    'aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20',
+    formTreatment('aria-invalid=true', 'var(--danger)'),
+    formTreatment('data-[warning=true]', 'var(--warning)'),
     'data-[state=checked]:z-10 data-[state=checked]:border-[var(--radio-button-checked-background,var(--primary))] data-[state=checked]:bg-[var(--radio-button-checked-background,var(--primary))] data-[state=checked]:text-[var(--radio-button-checked-foreground,var(--primary-foreground))]',
   ].join(' '),
   {

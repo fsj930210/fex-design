@@ -12,15 +12,15 @@ Scrollbar is a styled Primitive. Core owns geometry, pointer interaction, visibi
 
 ## Visibility
 
-| Option | Behavior |
-| --- | --- |
-| `visibility: auto` | Show eligible bars only when the axis overflows and the autoHide policy is active. |
-| `visibility: always` | Keep eligible bars visible, including when content fits. |
-| `visibility: hidden` | Hide all bars while preserving native scrolling. |
-| `autoHide: never` | Keep bars active. |
-| `autoHide: scroll` | Show on scrolling; hide after scroll inactivity for autoHideDelay. Pointer hover does not pin visibility. |
-| `autoHide: move` | Show on pointer movement or scrolling; hide after inactivity for autoHideDelay. |
-| `autoHide: leave` | Show on pointer entry or scrolling; keep visible while inside; hide autoHideDelay after leaving. |
+| Option               | Behavior                                                                                                  |
+| -------------------- | --------------------------------------------------------------------------------------------------------- |
+| `visibility: auto`   | Show eligible bars only when the axis overflows and the autoHide policy is active.                        |
+| `visibility: always` | Keep eligible bars visible, including when content fits.                                                  |
+| `visibility: hidden` | Hide all bars while preserving native scrolling.                                                          |
+| `autoHide: never`    | Keep bars active.                                                                                         |
+| `autoHide: scroll`   | Show on scrolling; hide after scroll inactivity for autoHideDelay. Pointer hover does not pin visibility. |
+| `autoHide: move`     | Show on pointer movement or scrolling; hide after inactivity for autoHideDelay.                           |
+| `autoHide: leave`    | Show on pointer entry or scrolling; keep visible while inside; hide autoHideDelay after leaving.          |
 
 Visibility overrides autoHide. An axis whose effective overflow is hidden has no eligible bar. Dragging pins visibility until pointer release/cancel; then the current policy resumes. Changing the visibility policy clears its old timer and recomputes activity from the current pointer/drag state.
 
@@ -44,13 +44,13 @@ Public imports use the component family entry `@fex-design/<framework>/primitive
 
 Every part exposes its native element through the framework's own binding: React/Solid `ref`, Vue component ref `.element`, Svelte `bind:element`, and Angular the part's exportAs reference `.element` (or a native ElementRef query). Root controllers are available through the standalone logic adapters; Vue and Angular Root references also expose `controller`.
 
-| Framework | Standalone logic | Root binding |
-| --- | --- | --- |
-| React | `useScrollbar(options)` | `ref={binding.rootRef}` |
-| Vue | `useScrollbar(() => options)` | template `ref="root"` from the returned binding |
-| Solid | `createScrollbar(() => options)` | `ref={binding.rootRef}` |
-| Svelte | `createScrollbar(() => options)` | native element `use:binding.root` |
-| Angular | `createScrollbar(() => options, () => element)` | native element source, created in an injection context |
+| Framework | Standalone logic                                | Root binding                                           |
+| --------- | ----------------------------------------------- | ------------------------------------------------------ |
+| React     | `useScrollbar(options)`                         | `ref={binding.rootRef}`                                |
+| Vue       | `useScrollbar(() => options)`                   | template `ref="root"` from the returned binding        |
+| Solid     | `createScrollbar(() => options)`                | `ref={binding.rootRef}`                                |
+| Svelte    | `createScrollbar(() => options)`                | native element `use:binding.root`                      |
+| Angular   | `createScrollbar(() => options, () => element)` | native element source, created in an injection context |
 
 Standalone logic uses Core `onScroll`; Root components expose `onScrollChange` in React/Solid/Svelte and `scrollChange` in Vue/Angular. Custom markup supplies the same data-slot/data-axis structure as the built-in parts.
 
@@ -72,21 +72,21 @@ All parts use the same CSS-variable-based shared defaults in both layers. UI onl
 
 ## Example coverage
 
-| Public surface | Scene |
-| --- | --- |
-| Vertical / horizontal / both axes | basic, horizontal, both-axes |
-| showTrack false (default) / true | track-visibility |
-| Native dir and RTL interaction | direction |
-| autoHide, autoHideDelay, disabled, scrollChange | configuration |
-| visibility auto / always / hidden, non-overflowing content | visibility |
-| clickScroll page / jump, dragScroll, minThumbSize | interaction |
-| Root overflow and partial Viewport override | overflow |
-| Explicit Bar, Track, Thumb and Corner composition with default appearance | parts |
-| UI classNames/styles with all eight part keys | styling (UI only) |
-| All nine public appearance variables | css-variables |
-| Native attributes/events, Viewport element access, scrollTo/scrollBy | viewport |
-| Position offsets and wrapped sticky table header | table |
-| Standalone framework logic and custom Root markup | custom-logic |
+| Public surface                                                            | Scene                        |
+| ------------------------------------------------------------------------- | ---------------------------- |
+| Vertical / horizontal / both axes                                         | basic, horizontal, both-axes |
+| showTrack false (default) / true                                          | track-visibility             |
+| Native dir and RTL interaction                                            | direction                    |
+| autoHide, autoHideDelay, disabled, scrollChange                           | configuration                |
+| visibility auto / always / hidden, non-overflowing content                | visibility                   |
+| clickScroll page / jump, dragScroll, minThumbSize                         | interaction                  |
+| Root overflow and partial Viewport override                               | overflow                     |
+| Explicit Bar, Track, Thumb and Corner composition with default appearance | parts                        |
+| UI classNames/styles with all eight part keys                             | styling (UI only)            |
+| All nine public appearance variables                                      | css-variables                |
+| Native attributes/events, Viewport element access, scrollTo/scrollBy      | viewport                     |
+| Position offsets and wrapped sticky table header                          | table                        |
+| Standalone framework logic and custom Root markup                         | custom-logic                 |
 
 All five frameworks have 15 UI scenes and 14 Primitive scenes in the same order, with the same options, content and controls. Configuration uses UI Select, InputNumber and Checkbox in both layers. Shared demo data lives in docs/shared/src/scrollbar-demo.ts. Metadata and generated source/Angular Preview registrations are synchronized.
 

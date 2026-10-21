@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Button } from '@fex-design/angular/primitive/button'
+import { Button, ButtonIcon } from '@fex-design/angular/primitive/button'
+import { LoadingIcon } from '@fex-design/angular/icons/loading'
 @Component({
-  selector: 'button-primitive-css-variables-example',
+  selector: 'button-css-variables-example',
   standalone: true,
-  imports: [Button],
+  imports: [Button, ButtonIcon, LoadingIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './css-variables.html',
 })
-export class CssVariablesExample {}
+export class ButtonCssVariablesExample {}

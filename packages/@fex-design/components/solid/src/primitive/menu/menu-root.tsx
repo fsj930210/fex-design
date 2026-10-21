@@ -1,9 +1,16 @@
-import type { JSX, ParentProps } from 'solid-js'
-
-export function MenuRoot(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
+import { splitProps, type ParentProps } from 'solid-js'
+import type { MenuOptions } from '@fex-design/core/menu/types'
+import { MenuContext, MenuLevelContext, SubMenuContext } from './context'
+import { useMenu } from './use-menu'
+export type MenuRootProps = ParentProps<MenuOptions>
+export function MenuRoot(props: MenuRootProps) {
+  const [local, options] = splitProps(props, ['children'])
+  const binding = useMenu(() => ({ ...options }))
   return (
-    <div {...props} role={props.role ?? 'menu'} data-slot="menu">
-      {props.children}
-    </div>
+    <MenuContext.Provider value={binding.dom}>
+      <MenuLevelContext.Provider value={undefined}>
+        <SubMenuContext.Provider value={undefined}>{local.children}</SubMenuContext.Provider>
+      </MenuLevelContext.Provider>
+    </MenuContext.Provider>
   )
 }

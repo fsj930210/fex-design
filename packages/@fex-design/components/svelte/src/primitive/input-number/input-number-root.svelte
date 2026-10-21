@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { inputNumberRootClassName } from '@fex-design/components-styles/input-number';
-  import { cn } from '@fex-design/utils';
+  import { inputNumberRootClassName } from "@fex-design/components-styles/input-number";
+  import { cn } from "@fex-design/utils";
   import type {
     InputNumberFormatter,
     InputNumberParser,

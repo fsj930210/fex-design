@@ -3,10 +3,10 @@
   import type { CheckboxValue } from "@fex-design/core/checkbox/types";
   import type { Snippet } from "svelte";
   import type { HTMLInputAttributes } from "svelte/elements";
-  import CheckboxRoot from '@fex-design/svelte/primitive/checkbox/checkbox.svelte';
-  import CheckboxControl from '@fex-design/svelte/primitive/checkbox/checkbox-control.svelte';
-  import CheckboxIndicator from '@fex-design/svelte/primitive/checkbox/checkbox-indicator.svelte';
-  import CheckboxLabel from '@fex-design/svelte/primitive/checkbox/checkbox-label.svelte';
+  import CheckboxRoot from "@fex-design/svelte/primitive/checkbox/checkbox.svelte";
+  import CheckboxControl from "@fex-design/svelte/primitive/checkbox/checkbox-control.svelte";
+  import CheckboxIndicator from "@fex-design/svelte/primitive/checkbox/checkbox-indicator.svelte";
+  import CheckboxLabel from "@fex-design/svelte/primitive/checkbox/checkbox-label.svelte";
   interface Props extends Omit<
     HTMLInputAttributes,
     "type" | "size" | "value" | "children"

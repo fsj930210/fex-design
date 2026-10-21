@@ -10,8 +10,7 @@ Pass native Viewport attributes/events through viewportProps. Native Viewport cl
 
 The component reference exposes element, viewportElement and controller.
 
-Primitive parts and standalone logic remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
-
+Primitive parts and `useScrollbar` remain available from this entry for custom composition. An explicitly consumed Bar still requires explicit Track/Thumb.
 
 ## CSS Variables
 

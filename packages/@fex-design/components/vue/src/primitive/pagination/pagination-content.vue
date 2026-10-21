@@ -2,16 +2,16 @@
 import { paginationContentClassName } from '@fex-design/components-styles/pagination'
 import { cn } from '@fex-design/utils'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'PaginationContent', inheritAttrs: false })
 const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
-  <ul
+  <div
     v-bind="$attrs"
     data-slot="pagination-content"
     :class="cn(paginationContentClassName, props.class)"
   >
     <slot />
-  </ul>
+  </div>
 </template>

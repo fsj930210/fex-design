@@ -14,14 +14,16 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import { getContext } from "svelte";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
   import { selectContextKey, type SelectContext } from "./context";
   let {
+    style,
     class: className,
     emptyText = "No options",
     loadingText = "Loading...",
     option,
   }: {
+    style?: string | undefined;
     class?: string;
     emptyText?: string;
     loadingText?: string;
@@ -55,6 +57,7 @@
   role="listbox"
   aria-multiselectable={select.multiple() || undefined}
   class={cn(selectListClassName, className)}
+  {style}
   onscroll={(event) =>
     (viewport = {
       scrollTop: event.currentTarget.scrollTop,

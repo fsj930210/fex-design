@@ -47,4 +47,16 @@
       </button>
     </div>
   </section>
+  <section class="grid gap-2">
+    <span class="text-sm text-muted-foreground">加载图标</span
+    ><button
+      switch
+      [loading]="true"
+      [defaultChecked]="true"
+      class="[--switch-track-checked-background:#7c3aed] [--switch-thumb-background:#f5f3ff] [--primary:#6d28d9]"
+      aria-label="加载图标"
+    >
+      <span switchThumb><span spinner class="text-primary" aria-hidden="true"></span></span>
+    </button>
+  </section>
 </div>

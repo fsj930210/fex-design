@@ -3,7 +3,7 @@
   import { cn } from "@fex-design/utils";
   import { getContext, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { masonryContextKey, type MasonryContext } from "./context";
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
     children?: Snippet;

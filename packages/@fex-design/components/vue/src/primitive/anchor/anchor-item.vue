@@ -16,10 +16,16 @@ const anchor = inject(anchorContextKey)
 const parent = inject(anchorItemContextKey, null)
 if (!anchor) throw new Error('AnchorItem must be used inside AnchorRoot')
 const item: AnchorRegisteredItem = {
-  get key() { return props.value },
+  get key() {
+    return props.value
+  },
   target: () => (isRef(props.target) ? props.target.value : resolveAnchorTarget(props.target)),
-  get targetOffset() { return props.targetOffset },
-  get parentKey() { return parent?.key },
+  get targetOffset() {
+    return props.targetOffset
+  },
+  get parentKey() {
+    return parent?.key
+  },
 }
 provide(anchorItemContextKey, item)
 onMounted(() => {

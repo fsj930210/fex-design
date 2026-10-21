@@ -28,8 +28,8 @@ export interface UseInputNumberOptions extends InputNumberConstraints {
 export function useInputNumber(options: Signal<UseInputNumberOptions>) {
   const internalValue = signal(options().defaultValue)
   const controlled = computed(() => options().controlled ?? options().value !== undefined)
-  const externalValue = computed(() => controlled() ? options().value : undefined)
-  const value = computed(() => controlled() ? externalValue() : internalValue())
+  const externalValue = computed(() => (controlled() ? options().value : undefined))
+  const value = computed(() => (controlled() ? externalValue() : internalValue()))
   const draft = signal(
     (options().formatter ?? defaultInputNumberFormatter)(value(), { userTyping: false, input: '' }),
   )
@@ -46,7 +46,8 @@ export function useInputNumber(options: Signal<UseInputNumberOptions>) {
   effect(() => {
     const next = controlled() ? externalValue() : untracked(value)
     const format = formatter()
-    if (!untracked(userTyping)) draft.set(untracked(() => format(next, { userTyping: false, input: '' })))
+    if (!untracked(userTyping))
+      draft.set(untracked(() => format(next, { userTyping: false, input: '' })))
   })
   const setValue = (next: number | undefined) => {
     if (!controlled()) internalValue.set(next)

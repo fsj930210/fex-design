@@ -1,0 +1,12 @@
+<div class="w-full flex items-center justify-center min-h-[360px] py-16">
+  <div
+    popoverRoot
+    [arrow]="true"
+    [title]="demo.title"
+    [content]="demo.content"
+    [classNames]="demo.classNames"
+    [styles]="{ root: rootStyle }"
+  >
+    <button button popoverTrigger>{{ demo.trigger }}</button>
+  </div>
+</div>

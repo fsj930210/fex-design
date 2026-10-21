@@ -1,1 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'; import { SelectContent,SelectRoot,SelectTrigger } from '@fex-design/angular/primitive/select'; @Component({selector:'select-affix-example',imports:[SelectRoot,SelectTrigger,SelectContent],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./prefix-suffix-demo.html'}) export class SelectAffixExample { readonly options=[{value:'react',label:'React'},{value:'vue',label:'Vue'}] }
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/angular/primitive/select'
+@Component({
+  selector: 'select-affix-example',
+  imports: [SelectRoot, SelectTrigger, SelectContent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './prefix-suffix-demo.html',
+})
+export class SelectAffixExample {
+  readonly options = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+  ]
+}

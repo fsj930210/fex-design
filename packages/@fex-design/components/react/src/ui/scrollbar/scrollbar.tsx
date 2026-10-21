@@ -1,11 +1,32 @@
 import { resolveScrollbarOverflow } from '@fex-design/core/scrollbar/create-scrollbar-controller'
 import { cn } from '@fex-design/utils'
-import { ScrollbarRoot, ScrollbarViewport, ScrollbarBar, ScrollbarTrack, ScrollbarThumb, ScrollbarCorner } from '../../primitive/scrollbar'
+import {
+  ScrollbarRoot,
+  ScrollbarViewport,
+  ScrollbarBar,
+  ScrollbarTrack,
+  ScrollbarThumb,
+  ScrollbarCorner,
+} from '../../primitive/scrollbar'
 import type { ScrollbarProps } from './types'
 
 const axes = ['x', 'y'] as const
 
-export function Scrollbar({ children, overflow, viewportProps, classNames, styles, ...rootProps }: ScrollbarProps) {
+export function Scrollbar({
+  children,
+  overflow,
+  viewportProps,
+  horizontalBarProps,
+  verticalBarProps,
+  horizontalTrackProps,
+  verticalTrackProps,
+  horizontalThumbProps,
+  verticalThumbProps,
+  cornerProps,
+  classNames,
+  styles,
+  ...rootProps
+}: ScrollbarProps) {
   const resolved = resolveScrollbarOverflow(viewportProps?.overflow, overflow)
   return (
     <ScrollbarRoot {...rootProps} overflow={overflow}>
@@ -16,17 +37,55 @@ export function Scrollbar({ children, overflow, viewportProps, classNames, style
       >
         {children}
       </ScrollbarViewport>
-      {axes.map((axis) => resolved[axis] === 'auto' ? (
-        <ScrollbarBar key={axis} axis={axis}
-          className={classNames?.[axis === 'x' ? 'barX' : 'barY']}
-          style={styles?.[axis === 'x' ? 'barX' : 'barY']}>
-          <ScrollbarTrack axis={axis} className={classNames?.[axis === 'x' ? 'trackX' : 'trackY']} style={styles?.[axis === 'x' ? 'trackX' : 'trackY']}>
-            <ScrollbarThumb axis={axis} className={classNames?.[axis === 'x' ? 'thumbX' : 'thumbY']} style={styles?.[axis === 'x' ? 'thumbX' : 'thumbY']} />
-          </ScrollbarTrack>
-        </ScrollbarBar>
-      ) : null)}
+      {axes.map((axis) =>
+        resolved[axis] === 'auto' ? (
+          <ScrollbarBar
+            {...(axis === 'x' ? horizontalBarProps : verticalBarProps)}
+            key={axis}
+            axis={axis}
+            className={cn(
+              classNames?.[axis === 'x' ? 'barX' : 'barY'],
+              (axis === 'x' ? horizontalBarProps : verticalBarProps)?.className,
+            )}
+            style={{
+              ...styles?.[axis === 'x' ? 'barX' : 'barY'],
+              ...(axis === 'x' ? horizontalBarProps : verticalBarProps)?.style,
+            }}
+          >
+            <ScrollbarTrack
+              {...(axis === 'x' ? horizontalTrackProps : verticalTrackProps)}
+              axis={axis}
+              className={cn(
+                classNames?.[axis === 'x' ? 'trackX' : 'trackY'],
+                (axis === 'x' ? horizontalTrackProps : verticalTrackProps)?.className,
+              )}
+              style={{
+                ...styles?.[axis === 'x' ? 'trackX' : 'trackY'],
+                ...(axis === 'x' ? horizontalTrackProps : verticalTrackProps)?.style,
+              }}
+            >
+              <ScrollbarThumb
+                {...(axis === 'x' ? horizontalThumbProps : verticalThumbProps)}
+                axis={axis}
+                className={cn(
+                  classNames?.[axis === 'x' ? 'thumbX' : 'thumbY'],
+                  (axis === 'x' ? horizontalThumbProps : verticalThumbProps)?.className,
+                )}
+                style={{
+                  ...styles?.[axis === 'x' ? 'thumbX' : 'thumbY'],
+                  ...(axis === 'x' ? horizontalThumbProps : verticalThumbProps)?.style,
+                }}
+              />
+            </ScrollbarTrack>
+          </ScrollbarBar>
+        ) : null,
+      )}
       {resolved.x === 'auto' && resolved.y === 'auto' && (
-        <ScrollbarCorner className={classNames?.corner} style={styles?.corner} />
+        <ScrollbarCorner
+          {...cornerProps}
+          className={cn(classNames?.corner, cornerProps?.className)}
+          style={{ ...styles?.corner, ...cornerProps?.style }}
+        />
       )}
     </ScrollbarRoot>
   )

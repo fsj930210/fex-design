@@ -18,13 +18,19 @@
     checkboxMinusIconClassName,
   } from "@fex-design/components-styles/checkbox";
   import { getContext } from "svelte";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
-  import ChevronRight from '@fex-design/svelte/icons/chevron-right.svelte';
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
-  import MinusIcon from '@fex-design/svelte/icons/minus.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
+  import ChevronRight from "@fex-design/svelte/icons/chevron-right.svelte";
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
+  import MinusIcon from "@fex-design/svelte/icons/minus.svelte";
   import Checkbox from "../checkbox/checkbox.svelte";
   import CheckboxIndicator from "../checkbox/checkbox-indicator.svelte";
-  import { ScrollbarRoot, ScrollbarBar, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar';
+  import {
+    ScrollbarRoot,
+    ScrollbarBar,
+    ScrollbarViewport,
+    ScrollbarTrack,
+    ScrollbarThumb,
+  } from "../scrollbar";
   import { cascaderContextKey, type CascaderContext } from "./context";
 
   const cascader = getContext<CascaderContext>(cascaderContextKey);
@@ -110,7 +116,7 @@
     <div class={`${cascaderColumnClassName} w-full min-w-full border-r-0`}>
       <ScrollbarRoot class="h-full"
         ><ScrollbarViewport
-          overflow={{ x: 'hidden', y: 'auto' }}
+          overflow={{ x: "hidden", y: "auto" }}
           class={cascaderColumnViewportClassName}
           >{#if cascader.loading()}<div class={cascaderLoadingClassName}>
               <LoadingIcon class="animate-spin" />Loading...
@@ -135,7 +141,7 @@
       >
         <ScrollbarRoot class="h-full"
           ><ScrollbarViewport
-            overflow={{ x: 'hidden', y: 'auto' }}
+            overflow={{ x: "hidden", y: "auto" }}
             class={cascaderColumnViewportClassName}
             >{#each column.nodes as node (node.key)}{@render option(
                 node,

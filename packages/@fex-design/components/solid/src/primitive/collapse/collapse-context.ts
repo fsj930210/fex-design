@@ -1,9 +1,9 @@
-import type { ExpansionKey } from "@fex-design/core/expansion/types"
-import type { CollapseStyleProps } from "@fex-design/components-styles/collapse"
-import { createContext, useContext, type Accessor } from "solid-js"
+import type { ExpansionKey } from '@fex-design/core/expansion/types'
+import type { CollapseStyleProps } from '@fex-design/components-styles/collapse'
+import { createContext, useContext, type Accessor } from 'solid-js'
 
-export type CollapseVariant = NonNullable<CollapseStyleProps["variant"]>
-export type CollapseSize = NonNullable<CollapseStyleProps["size"]>
+export type CollapseVariant = NonNullable<CollapseStyleProps['variant']>
+export type CollapseSize = NonNullable<CollapseStyleProps['size']>
 
 export interface CollapseRef {
   expand: (key: ExpansionKey) => void
@@ -35,12 +35,12 @@ export const CollapseItemContext = createContext<CollapseItemContextValue>()
 
 export function useCollapseContext() {
   const context = useContext(CollapseContext)
-  if (!context) throw new Error("Collapse parts must be inside Collapse")
+  if (!context) throw new Error('Collapse parts must be inside Collapse')
   return context
 }
 
 export function useCollapseItemContext() {
   const context = useContext(CollapseItemContext)
-  if (!context) throw new Error("CollapseItem parts must be inside CollapseItem")
+  if (!context) throw new Error('CollapseItem parts must be inside CollapseItem')
   return context
 }

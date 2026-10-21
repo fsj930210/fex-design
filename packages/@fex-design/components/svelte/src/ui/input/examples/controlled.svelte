@@ -9,7 +9,7 @@
     defaultValue="非受控内容"
     clearable
   />
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     <Button onclick={() => (value = "外部设置")}>外部设置</Button><Button
       onclick={() => (value = "")}>外部清空</Button
     >

@@ -3,7 +3,7 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import CircleXIcon from '@fex-design/svelte/icons/circle-x.svelte';
+  import CircleXIcon from "@fex-design/svelte/icons/circle-x.svelte";
   import { getInputContext } from "./context";
 
   interface Props extends Omit<HTMLButtonAttributes, "class"> {
@@ -11,12 +11,7 @@
     children?: Snippet;
   }
 
-  let {
-    class: className,
-    children,
-    onclick,
-    ...rest
-  }: Props = $props();
+  let { class: className, children, onclick, ...rest }: Props = $props();
   const input = getInputContext("InputClear");
 </script>
 

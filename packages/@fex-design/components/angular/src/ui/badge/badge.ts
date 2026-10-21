@@ -101,4 +101,3 @@ export class BadgeRibbon {
   readonly placement = input<'start' | 'end'>('end')
   protected readonly hostClassName = createHostClassName(badgeRibbonRootClassName)
 }
-

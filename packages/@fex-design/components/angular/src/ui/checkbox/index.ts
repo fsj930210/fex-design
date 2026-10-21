@@ -1,4 +1,1 @@
-export {
-  Checkbox,
-  CheckboxGroup,
-} from "./checkbox"
+export { Checkbox, CheckboxGroup } from './checkbox'

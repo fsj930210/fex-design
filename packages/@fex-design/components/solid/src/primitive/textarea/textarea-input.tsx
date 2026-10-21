@@ -1,11 +1,6 @@
 import { textareaInputClassName } from '@fex-design/components-styles/textarea'
 import { cn } from '@fex-design/utils'
-import {
-  createEffect,
-  onCleanup,
-  splitProps,
-  type JSX,
-} from 'solid-js'
+import { createEffect, onCleanup, splitProps, type JSX } from 'solid-js'
 import { useTextareaContext } from './textarea-context'
 
 export function TextareaInput(props: JSX.TextareaHTMLAttributes<HTMLTextAreaElement>) {

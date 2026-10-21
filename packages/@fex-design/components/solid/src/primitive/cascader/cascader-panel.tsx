@@ -25,7 +25,13 @@ import { LoadingIcon } from '@fex-design/solid/icons/loading'
 import { MinusIcon } from '@fex-design/solid/icons/minus'
 import { CheckboxControl, CheckboxIndicator, CheckboxRoot } from '../checkbox'
 import { PopoverContent, PopoverPortal } from '../popover'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport, ScrollbarTrack, ScrollbarThumb } from '../scrollbar'
+import {
+  ScrollbarBar,
+  ScrollbarRoot,
+  ScrollbarViewport,
+  ScrollbarTrack,
+  ScrollbarThumb,
+} from '../scrollbar'
 import { useCascader } from './cascader-context'
 
 export function CascaderContent(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {

@@ -95,6 +95,8 @@
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
     "./ui/input-number": "./src/ui/input-number/index.tsx",
+    "./ui/menu": "./src/ui/menu/index.ts",
+    "./ui/pagination": "./src/ui/pagination/index.ts",
     "./ui/progress": "./src/ui/progress/index.tsx",
     "./ui/radio": "./src/ui/radio/index.tsx",
     "./ui/select": "./src/ui/select/index.tsx",
@@ -161,24 +163,24 @@
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^3.1.0",
-    "@atlaskit/pragmatic-drag-and-drop-hitbox": "^2.2.0",
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "^2.2.2",
+    "@fex-design/components-styles": "workspace:*",
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "@tanstack/react-form": "^1.33.5",
     "@tanstack/react-table": "9.2.4",
     "@tanstack/react-virtual": "latest",
     "embla-carousel": "8.6.0",
-    "embla-carousel-autoplay": "8.6.0",
-    "@fex-design/utils": "workspace:*",
-    "@fex-design/components-styles": "workspace:*"
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
+    "@fex-design/docs-shared": "workspace:*",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "typescript": "catalog:",
-    "@fex-design/docs-shared": "workspace:*"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.0.0",

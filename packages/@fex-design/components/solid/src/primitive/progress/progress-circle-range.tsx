@@ -13,18 +13,34 @@ export type ProgressCircleRangeProps = JSX.CircleSVGAttributes<SVGCircleElement>
 export function ProgressCircleRange(props: ProgressCircleRangeProps) {
   const [local, others] = splitProps(props, ['gapDegree', 'linecap', 'class', 'style'])
   const context = useProgressContext('ProgressCircleRange')
-  const geometry = createMemo(() => getProgressGeometry({
-    value: context().value, min: context().min, max: context().max,
-    size: context().size ?? 48, thickness: context().thickness ?? 4,
-    variant: context().variant, gapDegree: local.gapDegree,
-  }))
+  const geometry = createMemo(() =>
+    getProgressGeometry({
+      value: context().value,
+      min: context().min,
+      max: context().max,
+      size: context().size ?? 48,
+      thickness: context().thickness ?? 4,
+      variant: context().variant,
+      gapDegree: local.gapDegree,
+    }),
+  )
   return (
-    <circle {...others} cx={geometry().center} cy={geometry().center} r={geometry().radius}
-      fill="none" stroke={others.stroke ?? 'currentColor'}
-      stroke-width={context().thickness ?? 4} stroke-dasharray={geometry().rangeDasharray}
+    <circle
+      {...others}
+      cx={geometry().center}
+      cy={geometry().center}
+      r={geometry().radius}
+      fill="none"
+      stroke={others.stroke ?? 'currentColor'}
+      stroke-width={context().thickness ?? 4}
+      stroke-dasharray={geometry().rangeDasharray}
       stroke-dashoffset={geometry().dashOffset}
-      stroke-linecap={local.linecap ?? 'round'} pathLength={100}
-      data-slot="progress-circle-range" data-status={context().status}
-      class={cn(progressCircleRangeClassName, local.class)} style={local.style} />
+      stroke-linecap={local.linecap ?? 'round'}
+      pathLength={100}
+      data-slot="progress-circle-range"
+      data-status={context().status}
+      class={cn(progressCircleRangeClassName, local.class)}
+      style={local.style}
+    />
   )
 }

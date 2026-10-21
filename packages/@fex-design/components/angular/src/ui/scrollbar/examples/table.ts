@@ -1,11 +1,25 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core'
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  viewChild,
+} from '@angular/core'
 import { Scrollbar, ScrollbarViewport } from '@fex-design/angular/ui/scrollbar'
-import { scrollbarColumns, scrollbarRows, observeScrollbarHeader } from '@fex-design/docs-shared/scrollbar-demo'
+import {
+  scrollbarColumns,
+  scrollbarRows,
+  observeScrollbarHeader,
+} from '@fex-design/docs-shared/scrollbar-demo'
 
 @Component({
-  selector: 'scrollbar-table-example', standalone: true,
+  selector: 'scrollbar-table-example',
+  standalone: true,
   imports: [Scrollbar, ScrollbarViewport],
-  templateUrl: './table.html', changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './table.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollbarTableExample {
   readonly columns = scrollbarColumns

@@ -1,0 +1,18 @@
+@if (icon() != null && icon() !== false) {
+<span data-slot="menu-icon" [class]="iconClass"
+  >@if (asTemplate(icon()); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else {
+  {{ text(icon()) }} }</span
+>
+}
+<span data-slot="menu-item-content" [class]="contentClass"><ng-content /></span>
+@if (suffix() != null && suffix() !== false) {
+<span data-slot="menu-suffix" [class]="suffixClass"
+  >@if (asTemplate(suffix()); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else
+  { {{ text(suffix()) }} }</span
+>
+} @if (indicator() !== false && indicator() !== null) {
+<span data-slot="submenu-indicator" [class]="expandClass">
+  @if (indicator() === undefined) { <chevron-right-icon /> } @else if (asTemplate(indicator()); as
+  template) { <ng-container [ngTemplateOutlet]="template" /> } @else { {{ text(indicator()) }} }
+</span>
+}

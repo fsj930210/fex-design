@@ -81,7 +81,12 @@ export class AvatarImage {
   constructor() {
     effect(() => {
       const src = this.src()
-      if (src) this.context.controller.load({ src, ...(this.crossOrigin() ? { crossOrigin: this.crossOrigin()! } : {}), ...(this.referrerPolicy() ? { referrerPolicy: this.referrerPolicy()! } : {}) })
+      if (src)
+        this.context.controller.load({
+          src,
+          ...(this.crossOrigin() ? { crossOrigin: this.crossOrigin()! } : {}),
+          ...(this.referrerPolicy() ? { referrerPolicy: this.referrerPolicy()! } : {}),
+        })
       else this.context.controller.reset()
     })
   }

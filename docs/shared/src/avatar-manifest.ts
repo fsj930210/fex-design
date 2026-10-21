@@ -29,6 +29,12 @@ export const avatarExamples = {
       title: 'CSS 变量',
       description: '通过 CSS Variables 覆盖头像尺寸和组合重叠距离。',
     },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
     { id: 'basic', title: '基础用法', description: '使用图片和 fallback 展示一个头像。' },
@@ -40,15 +46,17 @@ export const avatarExamples = {
     { id: 'shape', title: '形状', description: '对照圆形和方形头像。' },
     { id: 'group-shape', title: '头像组形状', description: '组合中每个 Avatar 独立控制形状。' },
     { id: 'max-count', title: '最大显示数量', description: '通过 maxCount 控制可见头像数量。' },
-    {
-      id: 'styling',
-      title: '结构化样式',
-      description: '通过 classNames 和 styles 定制 Avatar 的语义部件。',
-    },
+
     {
       id: 'css-variables',
       title: 'CSS 变量',
       description: '通过 CSS Variables 覆盖头像尺寸和组合重叠距离。',
+    },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
     },
   ],
 } as const

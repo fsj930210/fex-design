@@ -10,7 +10,7 @@
 </script>
 
 <div class="grid gap-3">
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     <Button size="sm" onclick={() => (checked = true)}>选中</Button><Button
       size="sm"
       onclick={() => (checked = false)}>取消选中</Button

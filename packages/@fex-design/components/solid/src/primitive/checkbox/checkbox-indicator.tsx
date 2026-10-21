@@ -2,11 +2,11 @@ import {
   checkboxCheckIconClassName,
   checkboxIndicatorClassName,
   checkboxMinusIconClassName,
-} from "@fex-design/components-styles/checkbox"
-import { cn } from "@fex-design/utils"
-import type { JSX, ParentProps } from "solid-js"
-import { CheckIcon } from "@fex-design/solid/icons/check"
-import { MinusIcon } from "@fex-design/solid/icons/minus"
+} from '@fex-design/components-styles/checkbox'
+import { cn } from '@fex-design/utils'
+import type { JSX, ParentProps } from 'solid-js'
+import { CheckIcon } from '@fex-design/solid/icons/check'
+import { MinusIcon } from '@fex-design/solid/icons/minus'
 
 export type CheckboxIndicatorProps = ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>
 

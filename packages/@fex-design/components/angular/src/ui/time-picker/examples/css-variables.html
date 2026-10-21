@@ -1,0 +1,16 @@
+<div class="flex w-full min-w-0 flex-col gap-4">
+  <section class="flex flex-col gap-2">
+    <p>默认</p>
+    <div timePicker [defaultValue]="{ hour: 9, minute: 30, second: 0 }"></div>
+  </section>
+  <section class="flex flex-col gap-2">
+    <p>紫色边框、聚焦光环与浅色背景</p>
+    <div
+      timePicker
+      [contentProps]="{ class: '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]' }"
+      [hourColumnProps]="{ scrollbarProps: { class: '[--scrollbar-thumb-color:#a78bfa]' } }"
+      class="[--input-border-color:var(--color-purple-500)] [--focus-border:var(--color-purple-600)] [--input-ring-color:var(--color-purple-200)] [--input-background:var(--color-purple-50)] [--input-color:var(--color-purple-950)]"
+      [defaultValue]="{ hour: 9, minute: 30, second: 0 }"
+    ></div>
+  </section>
+</div>

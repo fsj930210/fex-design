@@ -1,17 +1,56 @@
 <ng-template #content>
   @if (triggerTemplate(); as custom) {
-    <div rangePickerTrigger #trigger="rangePickerTrigger" [class]="hostClassName()" [attr.style]="hostStyle()" [startPlaceholder]="startPlaceholder()" [endPlaceholder]="endPlaceholder()" [separator]="separator()" [suffix]="suffix() ?? suffixTemplate()" [size]="size()" [variant]="variant()">
-      <ng-template let-state="state" let-trigger="trigger" let-ref="ref"><ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="triggerInjector() ?? injector" [ngTemplateOutletContext]="{ $implicit: state, state: state, trigger: trigger, ref: ref }" /></ng-template>
-    </div>
+  <div
+    rangePickerTrigger
+    #trigger="rangePickerTrigger"
+    [class]="hostClassName()"
+    [attr.style]="hostStyle()"
+    [startPlaceholder]="startPlaceholder()"
+    [endPlaceholder]="endPlaceholder()"
+    [separator]="separator()"
+    [suffix]="suffix() ?? suffixTemplate()"
+    [size]="size()"
+    [variant]="variant()"
+  >
+    <ng-template let-state="state" let-trigger="trigger" let-ref="ref"
+      ><ng-container
+        [ngTemplateOutlet]="custom"
+        [ngTemplateOutletInjector]="triggerInjector() ?? injector"
+        [ngTemplateOutletContext]="{ $implicit: state, state: state, trigger: trigger, ref: ref }"
+    /></ng-template>
+  </div>
   } @else {
-    <div rangePickerTrigger #trigger="rangePickerTrigger" [class]="hostClassName()" [attr.style]="hostStyle()" [startPlaceholder]="startPlaceholder()" [endPlaceholder]="endPlaceholder()" [separator]="separator()" [suffix]="suffix() ?? suffixTemplate()" [size]="size()" [variant]="variant()"></div>
+  <div
+    rangePickerTrigger
+    #trigger="rangePickerTrigger"
+    [class]="hostClassName()"
+    [attr.style]="hostStyle()"
+    [startPlaceholder]="startPlaceholder()"
+    [endPlaceholder]="endPlaceholder()"
+    [separator]="separator()"
+    [suffix]="suffix() ?? suffixTemplate()"
+    [size]="size()"
+    [variant]="variant()"
+  ></div>
   }
   <div rangePickerContent>
-    @if (panelTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), panel: defaultPanel }" /> }
-    @else { <ng-container [ngTemplateOutlet]="defaultPanel" /> }
+    @if (panelTemplate(); as custom) {
+    <ng-container
+      [ngTemplateOutlet]="custom"
+      [ngTemplateOutletInjector]="injector"
+      [ngTemplateOutletContext]="{ $implicit: context(), state: context(), panel: defaultPanel }"
+    />
+    } @else { <ng-container [ngTemplateOutlet]="defaultPanel" /> }
     <ng-template #defaultPanel><div rangePickerPanelGroup></div></ng-template>
-    @if (footerKind() !== 'hidden') { <div datePickerFooter [content]="footerContent()"></div> }
+    @if (footerKind() !== 'hidden') {
+    <div datePickerFooter [content]="footerContent()"></div>
+    }
   </div>
 </ng-template>
-@if (containerTemplate(); as container) { <ng-container [ngTemplateOutlet]="container" [ngTemplateOutletInjector]="injector" [ngTemplateOutletContext]="{ $implicit: context(), state: context(), content: content }" /> }
-@else { <ng-container [ngTemplateOutlet]="content" /> }
+@if (containerTemplate(); as container) {
+<ng-container
+  [ngTemplateOutlet]="container"
+  [ngTemplateOutletInjector]="injector"
+  [ngTemplateOutletContext]="{ $implicit: context(), state: context(), content: content }"
+/>
+} @else { <ng-container [ngTemplateOutlet]="content" /> }

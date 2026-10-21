@@ -1,4 +1,13 @@
-import { CalendarRoot, CalendarHeader, CalendarWeekHeader, CalendarRow, CalendarCell, CalendarCellTrigger, CalendarFooter, CalendarNavigationButton } from '@fex-design/react/primitive/calendar'
+import {
+  CalendarRoot,
+  CalendarHeader,
+  CalendarWeekHeader,
+  CalendarRow,
+  CalendarCell,
+  CalendarCellTrigger,
+  CalendarFooter,
+  CalendarNavigationButton,
+} from '@fex-design/react/primitive/calendar'
 import { getCalendarUIOptions } from '@fex-design/core/calendar'
 import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
 import { calendarDemoDate, calendarDemoLunar } from '@fex-design/docs-shared/calendar-demo-data'

@@ -46,6 +46,8 @@ export interface TimePickerControllerOptions {
 export interface TimePickerController extends SnapshotStore<TimePickerSnapshot> {
   setOptions(options: TimePickerControllerOptions): void
   input(text: string): void
+  /** Discard an input draft without parsing or changing the committed time. */
+  resetInput(): void
   setControlledValue(value: TimeValue | null): void
   change(
     value: TimeValue | null,
@@ -67,4 +69,18 @@ export interface TimePickerOption<TValue extends number | TimePeriod = number> {
 }
 
 /** Floating configuration cannot own a second open or disabled state. */
-export type TimePickerPopoverOptions = Omit<PopoverOptions, 'open' | 'defaultOpen' | 'disabled' | 'trigger' | 'onOpenChange'>
+export type TimePickerPopoverOptions = Omit<
+  PopoverOptions,
+  'open' | 'defaultOpen' | 'disabled' | 'trigger' | 'onOpenChange'
+>
+
+export type TimePickerSemanticSlot =
+  | 'root'
+  | 'input'
+  | 'popup'
+  | 'panel'
+  | 'column'
+  | 'item'
+  | 'selectedItem'
+export type TimePickerClassNames = Partial<Record<TimePickerSemanticSlot, string>>
+export type TimePickerStyles<TStyle> = Partial<Record<TimePickerSemanticSlot, TStyle>>

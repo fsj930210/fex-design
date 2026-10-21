@@ -15,11 +15,13 @@ export function NoticeEventsExample() {
         options={{ defaultViewDate: calendarDemoDate }}
         cellRender={({ cell }) => (
           <ul>
-            <For each={calendarDemoNotices(cell)}>{notice => (
-              <li>
-                <a href="#calendar-notice">{notice}</a>
-              </li>
-            )}</For>
+            <For each={calendarDemoNotices(cell)}>
+              {(notice) => (
+                <li>
+                  <a href="#calendar-notice">{notice}</a>
+                </li>
+              )}
+            </For>
           </ul>
         )}
       />

@@ -5,7 +5,7 @@
   let open = $state(false);
 </script>
 
-<div class="flex min-h-64 items-center justify-center gap-3">
+<div class="flex flex-wrap min-h-64 items-center justify-center gap-3">
   <Button onclick={() => (open = !open)}>外部{open ? "关闭" : "打开"}</Button
   ><Tooltip
     {open}

@@ -45,4 +45,13 @@
       >
     </div>
   </section>
+  <section class="grid gap-2">
+    <span class="text-sm text-muted-foreground">加载图标</span><Switch
+      loading
+      defaultChecked
+      class="[--switch-track-checked-background:#0f766e] [--switch-thumb-background:#ccfbf1]"
+      spinnerProps={{ class: "text-violet-600" }}
+      aria-label="加载图标"
+    />
+  </section>
 </div>

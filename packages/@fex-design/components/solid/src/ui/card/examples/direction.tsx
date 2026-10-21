@@ -6,7 +6,8 @@ export function DirectionExample() {
     <div class="grid w-full gap-space-xl sm:grid-cols-2">
       <For each={['ltr', 'rtl'] as const}>
         {(dir) => (
-          <Card class="w-full"
+          <Card
+            class="w-full"
             dir={dir}
             title={dir === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي'}
             description={

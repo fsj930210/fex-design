@@ -39,20 +39,28 @@ export function Installation(props: {
   const cliCommand = createMemo(() => {
     const target = compTarget()
     switch (pm()) {
-      case 'npm': return `npx @fex-design/cli add ${target}`
-      case 'yarn': return `yarn dlx @fex-design/cli add ${target}`
-      case 'bun': return `bunx @fex-design/cli add ${target}`
-      default: return `pnpm dlx @fex-design/cli add ${target}`
+      case 'npm':
+        return `npx @fex-design/cli add ${target}`
+      case 'yarn':
+        return `yarn dlx @fex-design/cli add ${target}`
+      case 'bun':
+        return `bunx @fex-design/cli add ${target}`
+      default:
+        return `pnpm dlx @fex-design/cli add ${target}`
     }
   })
 
   const localCommand = createMemo(() => {
     const target = compTarget()
     switch (pm()) {
-      case 'npm': return `npm run fex add ${target}`
-      case 'yarn': return `yarn fex add ${target}`
-      case 'bun': return `bun run fex add ${target}`
-      default: return `pnpm fex add ${target}`
+      case 'npm':
+        return `npm run fex add ${target}`
+      case 'yarn':
+        return `yarn fex add ${target}`
+      case 'bun':
+        return `bun run fex add ${target}`
+      default:
+        return `pnpm fex add ${target}`
     }
   })
 
@@ -73,20 +81,28 @@ export function Installation(props: {
 
   const ext = createMemo(() => {
     switch (props.framework) {
-      case 'vue': return 'vue'
-      case 'svelte': return 'svelte'
-      case 'angular': return 'ts'
-      default: return 'tsx'
+      case 'vue':
+        return 'vue'
+      case 'svelte':
+        return 'svelte'
+      case 'angular':
+        return 'ts'
+      default:
+        return 'tsx'
     }
   })
 
   const depCommand = createMemo(() => {
     const pkg = '@fex-design/styles clsx tailwind-merge'
     switch (pm()) {
-      case 'npm': return `npm install ${pkg}`
-      case 'yarn': return `yarn add ${pkg}`
-      case 'bun': return `bun add ${pkg}`
-      default: return `pnpm add ${pkg}`
+      case 'npm':
+        return `npm install ${pkg}`
+      case 'yarn':
+        return `yarn add ${pkg}`
+      case 'bun':
+        return `bun add ${pkg}`
+      default:
+        return `pnpm add ${pkg}`
     }
   })
 
@@ -99,7 +115,9 @@ export function Installation(props: {
   return (
     <section class="mt-8 mb-10 border-b border-border pb-10">
       <div class="mb-4">
-        <h2 id="installation" class="text-xl font-bold tracking-tight text-foreground">安装</h2>
+        <h2 id="installation" class="text-xl font-bold tracking-tight text-foreground">
+          安装
+        </h2>
         <div class="mt-3 flex items-center gap-6 border-b border-border text-sm">
           <button
             type="button"
@@ -198,7 +216,8 @@ export function Installation(props: {
 
           <div class="flex items-center text-xs text-muted-foreground">
             <span>
-              💡 若当前项目已执行过 <code class="font-mono text-foreground">init</code> 初始化，亦可直接使用工程快捷命令：
+              💡 若当前项目已执行过 <code class="font-mono text-foreground">init</code>{' '}
+              初始化，亦可直接使用工程快捷命令：
               <code class="font-mono text-foreground font-semibold ml-1">{localCommand()}</code>
             </span>
           </div>
@@ -212,9 +231,7 @@ export function Installation(props: {
             <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
               1
             </div>
-            <h3 class="text-sm font-medium text-foreground mb-3">
-              安装所需依赖：
-            </h3>
+            <h3 class="text-sm font-medium text-foreground mb-3">安装所需依赖：</h3>
             <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground">
               <div class="flex items-center justify-between border-b border-border px-3 py-2 text-xs">
                 <div class="flex items-center gap-2">
@@ -224,7 +241,9 @@ export function Installation(props: {
                       <button
                         type="button"
                         class={`rounded px-2 py-0.5 text-[11px] transition-colors cursor-pointer ${
-                          pm() === name ? 'bg-background text-foreground font-medium shadow-sm' : 'text-secondary-foreground hover:text-foreground'
+                          pm() === name
+                            ? 'bg-background text-foreground font-medium shadow-sm'
+                            : 'text-secondary-foreground hover:text-foreground'
                         }`}
                         onClick={() => setPm(name)}
                       >
@@ -254,20 +273,13 @@ export function Installation(props: {
             <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
               2
             </div>
-            <h3 class="text-sm font-medium text-foreground mb-2">
-              复制源码并粘贴至你的项目中：
-            </h3>
+            <h3 class="text-sm font-medium text-foreground mb-2">复制源码并粘贴至你的项目中：</h3>
             <p class="text-xs text-muted-foreground mb-3">
               根据您的需求选择拷贝 UI 层（开箱即用）或 Primitive 层（解构拼装）：
             </p>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <SourceCodeCard
-                layer="ui"
-                slug={props.slug}
-                ext={ext()}
-                source={uiSource()}
-              />
+              <SourceCodeCard layer="ui" slug={props.slug} ext={ext()} source={uiSource()} />
               <SourceCodeCard
                 layer="primitive"
                 slug={props.slug}
@@ -282,11 +294,11 @@ export function Installation(props: {
             <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
               3
             </div>
-            <h3 class="text-sm font-medium text-foreground mb-1">
-              根据项目配置调整导入路径
-            </h3>
+            <h3 class="text-sm font-medium text-foreground mb-1">根据项目配置调整导入路径</h3>
             <p class="text-xs text-muted-foreground">
-              将组件内部引入的基础样式或工具（如 <code class="font-mono text-foreground">@fex-design/styles</code> 或 <code class="font-mono text-foreground">cn</code>）替换为您项目中配置的实际路径即可。
+              将组件内部引入的基础样式或工具（如{' '}
+              <code class="font-mono text-foreground">@fex-design/styles</code> 或{' '}
+              <code class="font-mono text-foreground">cn</code>）替换为您项目中配置的实际路径即可。
             </p>
           </div>
         </div>

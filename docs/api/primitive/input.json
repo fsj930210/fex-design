@@ -74,14 +74,39 @@
       "default": "outlined",
       "description": "Root 的视觉形态。"
     },
-    { "name": "value", "type": "string", "description": "受控值。" },
-    { "name": "defaultValue", "type": "string", "default": "", "description": "非受控初始值。" },
-    { "name": "disabled", "type": "boolean", "default": false, "description": "禁用输入。" },
-    { "name": "readOnly", "type": "boolean", "default": false, "description": "只读输入。" }
+    {
+      "name": "value",
+      "type": "string",
+      "description": "受控值。"
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "default": "",
+      "description": "非受控初始值。"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "禁用输入。"
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "default": false,
+      "description": "只读输入。"
+    }
   ],
   "events": [
-    { "name": "valueChange", "description": "输入或清除后返回新值。" },
-    { "name": "clear", "description": "成功清除后触发。" }
+    {
+      "name": "valueChange",
+      "description": "输入或清除后返回新值。"
+    },
+    {
+      "name": "clear",
+      "description": "成功清除后触发。"
+    }
   ],
   "cssVariables": [
     {
@@ -92,8 +117,14 @@
       "name": "--input-icon-size-sm / --input-icon-size-md / --input-icon-size-lg",
       "description": "Input 各尺寸的组件级图标尺寸；md 未设置时回退到全局 --icon-size-md。"
     },
-    { "name": "--input-height", "description": "当前实例高度。" },
-    { "name": "--input-icon-size", "description": "普通图标尺寸。" },
+    {
+      "name": "--input-height",
+      "description": "当前实例高度。"
+    },
+    {
+      "name": "--input-icon-size",
+      "description": "普通图标尺寸。"
+    },
     {
       "name": "--input-clear-icon-size",
       "description": "清除图标尺寸，随 sm、md、lg 分别为 12px、14px、16px。"
@@ -102,11 +133,26 @@
       "name": "--input-group-radius",
       "description": "InputGroup 外侧圆角；可在直接子元素上局部覆盖。"
     },
-    { "name": "--input-background", "description": "基础背景。" },
-    { "name": "--input-border-color", "description": "基础边框。" },
-    { "name": "--input-color", "description": "输入文字颜色。" },
-    { "name": "--input-placeholder-color", "description": "占位文字颜色。" },
-    { "name": "--input-ring-color", "description": "聚焦环颜色。" }
+    {
+      "name": "--input-background",
+      "description": "基础背景。"
+    },
+    {
+      "name": "--input-border-color",
+      "description": "基础边框。"
+    },
+    {
+      "name": "--input-color",
+      "description": "输入文字颜色。"
+    },
+    {
+      "name": "--input-placeholder-color",
+      "description": "占位文字颜色。"
+    },
+    {
+      "name": "--input-ring-color",
+      "description": "聚焦环颜色。"
+    }
   ],
   "demos": [
     {
@@ -141,6 +187,18 @@
     },
     {
       "id": "focus"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ]
 }

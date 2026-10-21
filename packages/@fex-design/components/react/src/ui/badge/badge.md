@@ -41,8 +41,6 @@ BadgeGroup keeps the Primitive `maxCount`, `overflow`, children, and native div 
 
 ## Examples
 
-
-
 ## CSS Variables
 
 Badge and BadgeDot use the Primitive variables. `--badge-color` overrides one indicator; `--badge-color-{primary|info|success|warning|danger}` and the matching `-foreground` variables override semantic colors within a scope.

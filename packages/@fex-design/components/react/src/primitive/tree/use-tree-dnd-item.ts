@@ -180,4 +180,6 @@ function getDropIndicatorStyle(
   }
 }
 
-export type UseTreeDndItemReturn<TNode extends TreeNodeData = TreeNodeData> = ReturnType<typeof useTreeDndItem<TNode>>
+export type UseTreeDndItemReturn<TNode extends TreeNodeData = TreeNodeData> = ReturnType<
+  typeof useTreeDndItem<TNode>
+>

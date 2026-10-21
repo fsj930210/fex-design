@@ -9,7 +9,19 @@ const attrs = useAttrs()
 const { triggerElement } = usePopoverContext('TimePickerContent')
 </script>
 <template>
-  <PopoverContent v-bind="attrs" :dir="attrs.dir ?? getTimePickerDirection(triggerElement)" :class="cn('overflow-hidden p-0', normalizeClass(attrs.class))" :style="[{ width: 'var(--floating-reference-width)', maxWidth: 'var(--floating-available-width)', maxHeight: 'var(--floating-available-height)' }, attrs.style]">
+  <PopoverContent
+    v-bind="attrs"
+    :dir="attrs.dir ?? getTimePickerDirection(triggerElement)"
+    :class="cn('overflow-hidden p-0', normalizeClass(attrs.class))"
+    :style="[
+      {
+        width: 'var(--floating-reference-width)',
+        maxWidth: 'var(--floating-available-width)',
+        maxHeight: 'var(--floating-available-height)',
+      },
+      attrs.style,
+    ]"
+  >
     <slot />
   </PopoverContent>
 </template>

@@ -55,72 +55,72 @@ export function Alert(props: AlertProps) {
   const type = () => local.type ?? 'info'
   return (
     <Show when={visible()}>
-    <PrimitiveAlert
-      {...rest}
-      type={type()}
-      variant={local.variant ?? 'filled'}
-      class={cn(local.class, local.classNames?.root)}
-      style={mergeStyle(local.style, local.styles?.root)}
-    >
-      {local.showIcon ? (
-        <span
-          aria-hidden="true"
-          data-slot="alert-icon"
-          class={cn(alertIconClassName, local.classNames?.icon)}
-          style={local.styles?.icon}
-        >
-          {local.icon ?? <Dynamic component={icons[type()]} />}
-        </span>
-      ) : null}
-      <div
-        data-slot="alert-content"
-        class={cn(alertContentClassName, local.classNames?.content)}
-        style={local.styles?.content}
+      <PrimitiveAlert
+        {...rest}
+        type={type()}
+        variant={local.variant ?? 'filled'}
+        class={cn(local.class, local.classNames?.root)}
+        style={mergeStyle(local.style, local.styles?.root)}
       >
-        {local.title ? (
-          <div
-            data-slot="alert-title"
-            class={cn(alertTitleClassName, local.classNames?.title)}
-            style={local.styles?.title}
+        {local.showIcon ? (
+          <span
+            aria-hidden="true"
+            data-slot="alert-icon"
+            class={cn(alertIconClassName, local.classNames?.icon)}
+            style={local.styles?.icon}
           >
-            {local.title}
-          </div>
+            {local.icon ?? <Dynamic component={icons[type()]} />}
+          </span>
         ) : null}
-        {local.description || local.children ? (
-          <div
-            data-slot="alert-description"
-            class={cn(alertDescriptionClassName, local.classNames?.description)}
-            style={local.styles?.description}
-          >
-            {local.description ?? local.children}
-          </div>
-        ) : null}
-      </div>
-      {local.action ? (
         <div
-          data-slot="alert-action"
-          class={cn(alertActionClassName, local.classNames?.action)}
-          style={local.styles?.action}
+          data-slot="alert-content"
+          class={cn(alertContentClassName, local.classNames?.content)}
+          style={local.styles?.content}
         >
-          {local.action}
+          {local.title ? (
+            <div
+              data-slot="alert-title"
+              class={cn(alertTitleClassName, local.classNames?.title)}
+              style={local.styles?.title}
+            >
+              {local.title}
+            </div>
+          ) : null}
+          {local.description || local.children ? (
+            <div
+              data-slot="alert-description"
+              class={cn(alertDescriptionClassName, local.classNames?.description)}
+              style={local.styles?.description}
+            >
+              {local.description ?? local.children}
+            </div>
+          ) : null}
         </div>
-      ) : null}
-      {local.closable ? (
-        <button
-          type="button"
-          aria-label="Close alert"
-          data-slot="alert-close"
-          class={cn(alertCloseClassName, local.classNames?.close)}
-          style={local.styles?.close}
-          onClick={(event) => {
-            local.onClose?.(event)
-            if (!event.defaultPrevented) setVisible(false)
-          }}
-        >
-          {local.closeIcon ?? <XIcon />}
-        </button>
-      ) : null}
-    </PrimitiveAlert>
+        {local.action ? (
+          <div
+            data-slot="alert-action"
+            class={cn(alertActionClassName, local.classNames?.action)}
+            style={local.styles?.action}
+          >
+            {local.action}
+          </div>
+        ) : null}
+        {local.closable ? (
+          <button
+            type="button"
+            aria-label="Close alert"
+            data-slot="alert-close"
+            class={cn(alertCloseClassName, local.classNames?.close)}
+            style={local.styles?.close}
+            onClick={(event) => {
+              local.onClose?.(event)
+              if (!event.defaultPrevented) setVisible(false)
+            }}
+          >
+            {local.closeIcon ?? <XIcon />}
+          </button>
+        ) : null}
+      </PrimitiveAlert>
     </Show>
   )
 }

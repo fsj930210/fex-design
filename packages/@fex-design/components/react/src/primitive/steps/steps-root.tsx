@@ -1,6 +1,4 @@
-import {
-  stepsClassName,
-} from '@fex-design/components-styles/steps'
+import { stepsClassName } from '@fex-design/components-styles/steps'
 import { cn } from '@fex-design/utils'
 import type { HTMLAttributes, ReactNode } from 'react'
 import { StepsContext } from './steps-context'

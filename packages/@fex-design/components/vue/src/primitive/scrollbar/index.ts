@@ -6,7 +6,15 @@ export { default as ScrollbarThumb } from './scrollbar-thumb.vue'
 export { default as ScrollbarCorner } from './scrollbar-corner.vue'
 export { useScrollbar } from './use-scrollbar'
 export type {
-  ScrollbarAxis, ScrollbarAutoHide, ScrollbarClickScroll, ScrollbarVisibility,
-  ScrollbarScrollDetail, ScrollbarOptions, ScrollbarRootOptions,
-  ScrollbarOverflow, ScrollbarOverflowMode, ScrollbarController, ScrollbarPart,
+  ScrollbarAxis,
+  ScrollbarAutoHide,
+  ScrollbarClickScroll,
+  ScrollbarVisibility,
+  ScrollbarScrollDetail,
+  ScrollbarOptions,
+  ScrollbarRootOptions,
+  ScrollbarOverflow,
+  ScrollbarOverflowMode,
+  ScrollbarController,
+  ScrollbarPart,
 } from '@fex-design/core/scrollbar/types'

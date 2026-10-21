@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import type { AnchorRegisteredItem } from '@fex-design/core/anchor/types'
-import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '@fex-design/angular/primitive/anchor'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '@fex-design/angular/primitive/anchor'
 @Component({
   selector: 'anchor-controlled-example',
   standalone: true,

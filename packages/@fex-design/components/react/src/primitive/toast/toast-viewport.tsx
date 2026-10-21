@@ -4,23 +4,23 @@ import {
   toastStackLayerClassName,
   toastViewportClassName,
   type ToastPlacement,
-} from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import { createPortal } from "react-dom"
-import type { ComponentProps, CSSProperties, ReactNode } from "react"
-import { useToasts } from "@fex-design/react/hooks/use-toasts"
-import { toast, type ReactToastItem, type ReactToastManager } from "./toast-manager"
+} from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import { createPortal } from 'react-dom'
+import type { ComponentProps, CSSProperties, ReactNode } from 'react'
+import { useToasts } from '@fex-design/react/hooks/use-toasts'
+import { toast, type ReactToastItem, type ReactToastManager } from './toast-manager'
 
 const toastPlacements: ToastPlacement[] = [
-  "top-left",
-  "top",
-  "top-right",
-  "bottom-left",
-  "bottom",
-  "bottom-right",
+  'top-left',
+  'top',
+  'top-right',
+  'bottom-left',
+  'bottom',
+  'bottom-right',
 ]
 
-export interface ToastViewportProps extends Omit<ComponentProps<"div">, "children"> {
+export interface ToastViewportProps extends Omit<ComponentProps<'div'>, 'children'> {
   children: (items: ReactToastItem[]) => ReactNode
   container?: Element | DocumentFragment | null
   manager?: ReactToastManager
@@ -60,7 +60,7 @@ export function ToastViewport({
             className={cn(toastViewportClassName({ placement: currentPlacement }), className)}
             style={
               {
-                "--toast-offset": typeof offset === "number" ? `${offset}px` : offset,
+                '--toast-offset': typeof offset === 'number' ? `${offset}px` : offset,
                 ...style,
               } as CSSProperties
             }
@@ -71,11 +71,11 @@ export function ToastViewport({
                 <>
                   <div
                     aria-hidden="true"
-                    className={cn(toastStackLayerClassName, "top-2 opacity-70")}
+                    className={cn(toastStackLayerClassName, 'top-2 opacity-70')}
                   />
                   <div
                     aria-hidden="true"
-                    className={cn(toastStackLayerClassName, "top-4 w-[calc(100%-32px)] opacity-40")}
+                    className={cn(toastStackLayerClassName, 'top-4 w-[calc(100%-32px)] opacity-40')}
                   />
                 </>
               ) : null}

@@ -1,8 +1,5 @@
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
-import {
-  convertValueToPercentage,
-  isSliderReversed,
-} from '@fex-design/core/slider/utils'
+import { convertValueToPercentage, isSliderReversed } from '@fex-design/core/slider/utils'
 import { sliderThumbClassName } from '@fex-design/components-styles/slider'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX } from 'solid-js'

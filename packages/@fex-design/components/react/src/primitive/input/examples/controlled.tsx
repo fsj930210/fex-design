@@ -14,7 +14,7 @@ export function ControlledExample() {
         <InputControl />
         <InputClear />
       </InputRoot>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button onClick={() => setValue('外部设置')}>外部设置</Button>
         <Button onClick={() => setValue('')}>外部清空</Button>
       </div>

@@ -9,7 +9,7 @@ export function Sizes() {
     <div class="grid gap-3">
       <For each={sizes}>
         {(size) => (
-          <div class="flex items-center gap-4">
+          <div class="flex flex-wrap items-center gap-4">
             <span class="w-6 text-sm text-muted-foreground">{size}</span>
             <Badge count={8} size={size} />
             <BadgeDot color="success" size={size} />

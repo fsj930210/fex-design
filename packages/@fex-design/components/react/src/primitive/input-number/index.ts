@@ -7,7 +7,4 @@ export {
   InputNumberDecrement,
   type InputNumberActionProps,
 } from './input-number-action'
-export {
-  useInputNumber,
-  type UseInputNumberOptions,
-} from './use-input-number'
+export { useInputNumber, type UseInputNumberOptions } from './use-input-number'

@@ -1,7 +1,13 @@
 import type { CSSProperties } from 'vue'
 import type {
-  ProgressRangeItem, ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap,
-  ProgressSize, ProgressStatus, ProgressVariant,
+  ProgressRangeItem,
+  ProgressColor,
+  ProgressGapPlacement,
+  ProgressInfoPlacement,
+  ProgressLinecap,
+  ProgressSize,
+  ProgressStatus,
+  ProgressVariant,
 } from '@fex-design/core/progress/types'
 
 export interface ProgressProps {

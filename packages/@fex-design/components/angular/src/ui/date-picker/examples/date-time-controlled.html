@@ -1,5 +1,19 @@
 <div class="flex w-full min-w-0 flex-col gap-6">
-<div class="flex flex-wrap gap-2"><button button (click)="setAfternoon()">外部设置 10-16 14:45:30</button><button button (click)="value.set(null)">清空</button><button button (click)="open.set(true)">打开</button><button button (click)="open.set(false)">关闭</button></div>
-<div datePicker [showTime]="true" [value]="value()" [open]="open()" (change)="value.set($event)" (openChange)="open.set($event)"></div>
-<output class="text-sm text-muted-foreground">已提交值：{{ value()?.toString() ?? '未选择' }}</output>
+  <div class="flex flex-wrap gap-2">
+    <button button (click)="setAfternoon()">外部设置 10-16 14:45:30</button
+    ><button button (click)="value.set(null)">清空</button
+    ><button button (click)="open.set(true)">打开</button
+    ><button button (click)="open.set(false)">关闭</button>
+  </div>
+  <div
+    datePicker
+    [showTime]="true"
+    [value]="value()"
+    [open]="open()"
+    (change)="value.set($event)"
+    (openChange)="open.set($event)"
+  ></div>
+  <output class="text-sm text-muted-foreground"
+    >已提交值：{{ value()?.toString() ?? '未选择' }}</output
+  >
 </div>

@@ -1,10 +1,28 @@
 import { createSelectController } from '@fex-design/core/select/create-select-controller'
 import { filterSelectOptions } from '@fex-design/core/select/filter-options'
-import type { SelectFilterOption, SelectOption, SelectSnapshot, SelectVirtualOptions } from '@fex-design/core/select/types'
+import type {
+  SelectFilterOption,
+  SelectOption,
+  SelectSnapshot,
+  SelectVirtualOptions,
+} from '@fex-design/core/select/types'
 import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
 import type { SelectionValue } from '@fex-design/core/selection/types'
 import type { PopoverOptions } from '@fex-design/core/popover/types'
-import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, Output, inject, signal, type OnChanges, type OnInit, type SimpleChanges, type Signal } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+  signal,
+  type OnChanges,
+  type OnInit,
+  type SimpleChanges,
+  type Signal,
+} from '@angular/core'
 import { createCoreStoreSignalBinding } from '@fex-design/angular/signals/core-store-signal'
 import { Popover } from '@fex-design/angular/primitive/popover'
 
@@ -52,7 +70,8 @@ export class SelectRoot implements OnChanges, OnInit {
   @Input() popoverProps: PopoverOptions = {}
   @Input() virtual: SelectVirtualOptions | undefined
   @Input() maxCount: number | undefined
-  @Input() status: 'error' | 'warning' | undefined
+  @Input('aria-invalid') ariaInvalid: string | boolean | null | undefined
+  @Input('data-warning') dataWarning: string | null | undefined
   @Output() readonly change = new EventEmitter<{
     value: SelectionValue | SelectionValue[] | undefined
     meta: SelectChangeMeta
@@ -101,7 +120,9 @@ export class SelectRoot implements OnChanges, OnInit {
     })
     let controller!: ReturnType<typeof createSelectController>
     controller = createSelectController({
-      get disabled() { return root.disabled },
+      get disabled() {
+        return root.disabled
+      },
       selection: this.selection,
       get options() {
         return filterSelectOptions(

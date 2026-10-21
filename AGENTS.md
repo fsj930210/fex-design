@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## Pagination 组件契约
+
+- Pagination 的 Demo 在五框架及 Primitive/UI 两层采用相同场景目录、输入、操作、反馈和共享样式；semantic-styles 与 css-variables 均须覆盖两层，组合组件通过直接子组件的公开 API 定制样式。controlled 必须提供外部设置 page、pageSize、total 与重置操作，并显示变更反馈。不得把数量相同或仅绑定 change 视为场景对齐。
+
+- UI 仅公开 `Pagination`，按“总数、页码导航、每页条数选择、快捷跳页”组装 Primitive，不另建分页状态。Root 下各区域保持直接兄弟关系；总数使用 `data-slot="pagination-total"`，两侧布局通过 CSS 的 `margin-inline-end: auto` 实现，不新增布局 prop。尺寸由 Primitive Root 的 size 统一提供。
+
+- Primitive 统一公开 `PaginationRoot`、`PaginationContent`、`PaginationPageButton`、`PaginationNavigationButton`、`PaginationEllipsis`、`PaginationPageSizeSelect`、`PaginationQuickJumper`，不保留旧的 `Pagination`、Link、Previous、Next 和 Item API。NavigationButton 通过 `direction="prev" | "next"` 区分。
+- 页码从 1 开始；core 统一管理 total、page/pageSize 的受控与非受控状态、总页数、可见页码、省略号和边界。修改每页条数回到第一页，并且只产生一次携带完整 page/pageSize 的 change；配置同步不触发 change。五框架公开可独立消费的逻辑适配，不在部件中重复保存分页状态。
+- Primitive 带默认样式。Content 使用 div 作为页码区域容器，允许直接组合按钮与省略号；PageSizeSelect 复用 Select，QuickJumper 复用 InputNumber，仅 Enter 确认跳页。控件输入草稿归原控件，数据请求由调用方的 change 事件处理。
+
 ## TimePicker 组件契约
 
 - DatePicker/RangePicker 通过 `showTime` 组合时间列，不新增第二套日期时间状态。完整日期时间由同一个 core session 处理待确认值、提交、取消、受控更新及约束；Calendar 只消费日期部分，TimePicker 只消费时间部分。日期时间默认确认后提交，范围日期时间使用单 Calendar 和当前端点的时间列。
@@ -17,28 +27,25 @@
 
 ## 仓库定位
 
-- 本仓库是 `pnpm workspace + Turbo + monorepo` 项目，包管理器以根目录 `package.json` 中的 `pnpm@11.19.0` 为准。
+- 本仓库是 `pnpm workspace + Turbo + monorepo` 项目，包管理器版本以根目录 `package.json` 的 `packageManager` 字段为准（当前 pnpm@12.14.0）。
 - 根目录只放 workspace、Turbo、TypeScript、格式化、lint 等跨项目配置；业务代码和组件代码放到对应 `apps/*`、`packages/*` 下。
 - 优先遵循已有目录结构、命名方式和局部实现风格；新增抽象前先确认它能服务多个真实场景，而不是只为当前文件“显得高级”。
 
 ## 目录约定
 
-- `apps/react-app`：React 管理端应用，React 19，Vite。
-- `apps/vue-app`：Vue 管理端应用。
-- `apps/solid-app`：Solid 管理端应用。
-- `apps/svelte-app`：Svelte 管理端应用。
-- `apps/angular-app`：Angular 管理端应用。
-- `docs`：项目设计文档，以及后续 Solid 官网与五框架 Preview 的根目录。
+- `apps/react-app`：React 管理端应用，React 19，Vite，端口 4001；这是唯一保留的管理端应用，原 vue/solid/svelte/angular 管理端已在目录重构中删除（根 `dev:vue` 等脚本仍保留，但已无对应 app）。
+- `apps/demo-app`（4099）、`apps/demo-monorepo`：CLI 演示工程。
+- `server`：NestJS mock/上传服务，端口 4310；react-app 通过 `/tree-api`、`/upload-api`、`/i18n-api` 代理访问。
+- `docs`：文档站与设计文档。`docs/site` 是官网（4100），`docs/preview/*` 是五框架 Preview Runtime（4110–4114），`docs/api`、`docs/content`、`docs/shared` 分别存放 API JSON、组件 MDX 与共享示例 manifest。
 - `packages/@fex-design/core`：跨框架组件内核、类型、纯逻辑能力。
-- `packages/@fex-design/react`：React 组件库，对外导入前缀使用 `@fex-design/react/*`。
-- `packages/@fex-design/vue`：Vue 组件库。
-- `packages/@fex-design/solid`：Solid 组件库。
-- `packages/@fex-design/svelte`：Svelte 组件库。
-- `packages/@fex-design/angular`：Angular 组件库。
-- `packages/styles`：全局样式、主题、Tailwind 相关 CSS，应用侧通过 `import '@fex/styles'` 引入。
-- `packages/utils`：通用工具函数，包名 `@fex/utils`。
-- `packages/mock`：通用 mock 能力。
+- `packages/@fex-design/components/{react,vue,solid,svelte,angular}`：五框架组件库；包名仍是 `@fex-design/react` 等，对外导入前缀保持 `@fex-design/<framework>/*` 不变（2026-10 目录重构把组件包移入了 `components/` 子目录）。
+- `packages/@fex-design/components/styles`：组件样式模块，包名 `@fex-design/components-styles`，按 `./button` 等子路径导出 cva 样式函数。
+- `packages/@fex-design/styles`：全局样式、主题与 Tailwind 入口 `src/index.css`（含主 `@source` 配置），应用通过 `@import '@fex-design/styles';` 引入。
+- `packages/@fex-design/utils`：通用工具函数（`cn` 在此），包名 `@fex-design/utils`。
+- `packages/@fex-design/icons`、`packages/@fex-design/cli`（`pnpm fex` 源码交付 CLI）、`packages/@fex-design/components/i18n`。
+- `packages/mock`：通用 mock 能力，包名 `@fex/mock`。
 - `configs/*`：通用配置包，例如 `@fex/config-oxc`、`@fex/config-tsconfig`。
+- 根目录 `components/` 未被 git 跟踪、也不属于 workspace，只是临时目录；组件源码以 `packages/@fex-design/components/*` 为准。根 `tsconfig.workspace.json` 仍指向重构前已删除的 app/package，不要当作现行结构依据。
 
 ## 工作方式
 
@@ -55,11 +62,11 @@
 
 - 应用内通用 UI 放在对应 app 的 `src/components`；跨应用、跨框架或可沉淀的能力放到 `packages/*`。
 - 页面级代码放在对应 app 的 `src/pages` 或该 app 既有路由目录中；服务请求放在 `src/service`；mock 数据放在 `src/mock`；布局放在 `src/layouts`。
-- 组件示例页面默认使用目录化组织，避免后续示例覆盖更多特性时把所有内容塞进单文件；例如 React 使用 `src/pages/Button/index.tsx`，Vue 使用 `src/pages/Button/index.vue`，Solid 使用 `src/pages/Button/index.tsx`，Angular 使用 `src/pages/button/index.component.ts`。SvelteKit 按自身约定使用 `src/routes/<route>/+page.svelte`。
-- 单个代码文件不得超过 300 行（空行与纯注释不计）。预计或已经超过时，必须按清晰职责拆分为多个文件；示例页按场景拆分 demo 组件，容器页只负责页面结构与组合，禁止把大量示例堆进 `index.tsx`。
-- 应用路由必须独立放在 `src/routes` 目录中，并按模块划分子目录，例如 `src/routes/base`、`src/routes/components`、`src/routes/system`；不要把路由表散落在 `App.tsx`、`main.tsx` 或页面文件里。应用入口只负责挂载 Router/Outlet/Routes，不承载具体业务路由清单。
-- 路由页面默认按路由懒加载，避免首屏全量加载所有页面模块：React 必须封装统一的 lazy route helper，内部使用 `lazy`、`Suspense`、加载 fallback 和错误兜底，路由表里不要每次手写 `lazy(...then...)`；Vue Router 使用 `component: () => import(...)`，Solid 使用统一 lazy helper 或 `lazy`，Angular 使用 `loadComponent`，SvelteKit 依赖文件路由自动分块。只有极小的基础首页或框架限制场景可以同步导入，并要保持理由清晰。
-- 新增页面后必须同步注册到该 app 的实际路由模块，例如 React/Solid/Vue/Angular 的 `src/routes/**`；SvelteKit 使用文件路由时也要按模块目录组织。不能只创建页面文件不接路由。
+- react-app 中的页面按目录组织，例如 `src/pages/Button/index.tsx`，场景 demo 拆分成同目录子组件。组件官方 Demo 的主体在组件包的 `examples/` 目录（见“文档与示例管线”）；react-app 的 `src/pages` 只保留历史页面并逐步迁出（Menu/Pagination/TimePicker 等已在迁移中删除），不要给新组件再建 app 示例页。
+- 单个代码文件不得超过 300 行（空行与纯注释不计）。预计或已经超过时，必须按清晰职责拆分为多个文件；示例按场景拆分 demo 组件，容器文件只负责结构与组合，禁止把大量示例堆进单文件。
+- 应用路由必须独立放在 `src/routes` 目录中，并按模块划分子目录，例如 `src/routes/base`、`src/routes/components`、`src/routes/system`；不要把路由表散落在 `App.tsx`、`main.tsx` 或页面文件里。应用入口只负责挂载 Router/Routes，不承载具体业务路由清单。
+- 路由页面默认按路由懒加载：react-app 必须使用既有的统一 lazy route helper（`src/routes/lazy.tsx`，内部封装 `lazy`、`Suspense`、加载 fallback 和错误兜底），路由表里不要每次手写 `lazy(...then...)`。只有极小的基础首页可以同步导入，并要保持理由清晰。
+- 新增页面后必须同步注册到 `src/routes/**` 对应路由模块，不能只创建页面文件不接路由。
 - 所有 app 首页组件导航、组件路由表和组件文档目录索引必须按组件英文名称的字母顺序排列；新增组件时插入正确的字母位置，禁止仅追加到数组或列表末尾。
 - 文件命名要清晰、稳定、便于搜索。组件名表达业务含义，避免用 `Base`、`Common`、`Manager` 这类过宽泛的名字承载复杂职责。
 - 本仓库采用源码交付，组件定义名和公开导出名禁止携带品牌前缀或层级装饰。统一使用 `Button`、`ButtonGroup`、`Dialog` 等业务名称，不使用 `FexButton`、`ElButton`、`ButtonPrimitive`、`PrimitiveButton`。Primitive/UI/Pro 层级只由目录、Registry target 和导入路径表达；Primitive 和 UI 中的同名组件都保持同一个裸名称。高层组件组合低层组件时，允许仅在当前实现文件中使用 `import { Button as PrimitiveButton } ...` 这类局部别名，但局部别名不得成为组件定义名、公开导出名、DevTools 名称或稳定 API。
@@ -68,12 +75,12 @@
 - 同一组件族存在多个公开组件或多部件拆分时（例如 `tooltip-root.*`、`tooltip-trigger.*`、`table-column.*`），每个子部件应有清晰的独立实现文件；组件目录内统一使用 `index.ts` 作为该组件族的微型聚合入口，对外统一暴露干净的组件子路径（例如 `from "@/components/primitive/tooltip"` 或 `from "@/components/ui/table"`）。组件级 `index.ts` 必须使用严格显式具名导出（例如 `export { TooltipRoot, type TooltipRootProps } from "./tooltip-root"`），严禁使用 `export * from ...`，防止内部私有 context、未校验 helper 或类型黑盒泄露。严禁在 `src/` 根部或跨组件层级创建聚合所有组件的大桶文件。五框架应保持相同的组件拆分边界，具体文件扩展名和模板文件遵循各框架惯例。
 - React 只能作为跨框架公共语义、行为、视觉和 Demo 场景的参考，禁止把 React 的 Props、children、ref、Context、hook、组件组织或类型组合方式直接翻译到 Vue、Solid、Svelte、Angular。实现或重构非 React 组件前，必须检查该框架当前官方推荐能力和成熟组件库的真实源码，再按本框架惯例设计；优先参考 Vue 的 Element Plus / Reka UI、Solid 的 Kobalte / Ark UI、Svelte 的 Bits UI / Ark UI、Angular 的 Angular Material / CDK。参考用于确认框架表达和工程惯例，不得不加判断地复制第三方 API、品牌约定或历史兼容代码。
 - 框架特有的通用逻辑要沉淀到对应框架组件包内，组件库和对应 app 都优先复用，不要在 app 里再写一套同类能力。
-- React 通用 hook 放在 `packages/@fex-design/react/src/hooks`。
-- Vue 通用组合式逻辑放在 `packages/@fex-design/vue/src/composables` 或该包既有同类目录。
-- Solid 通用响应式 primitive、hook、store helper 放在 `packages/@fex-design/solid/src/primitives`、`packages/@fex-design/solid/src/hooks` 或该包既有同类目录。
-- Svelte 通用 store、action、rune/helper 放在 `packages/@fex-design/svelte/src/stores`、`packages/@fex-design/svelte/src/actions`、`packages/@fex-design/svelte/src/utils` 或该包既有同类目录。
-- Angular 通用 signal helper、service、directive、pipe、form helper 放在 `packages/@fex-design/angular/src` 下按能力分层，例如 `signals`、`services`、`directives`、`pipes`、`forms`。
-- 新增框架公共能力后必须通过对应 package 的 `package.json` 子路径 `exports` 暴露，优先使用文件级 pattern，例如 `./hooks/*`、`./composables/*`、`./primitives/*`、`./stores/*`、`./actions/*`、`./signals/*`。不要用 `src/index.ts` 或 `src/hooks/index.ts` 这类桶文件聚合导出，也不要让业务侧使用深层私有路径。
+- React 通用 hook 放在 `packages/@fex-design/components/react/src/hooks`。
+- Vue 通用组合式逻辑放在 `packages/@fex-design/components/vue/src/composables` 或该包既有同类目录。
+- Solid 通用响应式 primitive、hook、store helper 放在 `packages/@fex-design/components/solid/src/primitives`、`.../src/hooks` 或该包既有同类目录。
+- Svelte 通用 store、action、rune/helper 放在 `packages/@fex-design/components/svelte/src/stores`、`.../src/actions`、`.../src/utils` 或该包既有同类目录。
+- Angular 通用 signal helper、service、directive、pipe、form helper 放在 `packages/@fex-design/components/angular/src` 下按能力分层，例如 `signals`、`services`、`directives`、`pipes`、`forms`。
+- 新增框架公共能力后必须通过对应 package 的 `package.json` 子路径 `exports` 暴露为按类别分组的显式文件级子路径（例如 `./hooks/use-xxx`、`./composables/use-xxx`；当前所有包都用显式条目，不要引入通配符 pattern）。不要用 `src/index.ts` 或 `src/hooks/index.ts` 这类桶文件聚合导出，也不要让业务侧使用深层私有路径。
 - 同一框架组件包内不把 `primitive`、`ui`、`hooks`、`composables`、`icon`、`pro` 拆成独立 package；它们是同一个框架 package 下的公开分层目录，由该 package 的 `exports` 统一管理。
 - 框架组件包的 `package.json` exports 必须按类别分组保持清晰，组件相关入口集中在一起：先集中列出 `./primitive/*`，再集中列出 `./ui/*`，再集中列出 `./pro/*`，再集中列出 `./icon/*`。组件入口不要再提供无层级的 `./button`、`./card` 这类根级快捷路径。非组件逻辑能力放在组件入口之后，再按类别集中列出 `./hooks/*` / `./composables/*` / `./primitives/*` / `./stores/*` / `./actions/*` 等。不要按单个组件把 `./primitive/button`、`./ui/button`、`./pro/button`、`./icon/loading`、`./primitive/card`、`./ui/card` 交错排列。
 - 每个框架组件包都要沉淀本框架的通用能力，不允许只有 React 有 hooks，Vue/Solid/Svelte/Angular 在各组件里重复写同类逻辑。凡是两个以上组件需要的能力，例如 class 合并、受控/非受控状态、订阅 core store、合并 ref/element、读取最新值、挂载/卸载清理、portal/container 解析、外部点击关闭、键盘关闭等，都必须抽到对应框架公共目录并通过 exports 暴露。
@@ -109,7 +116,7 @@
 
 - React 项目基于 React 19；优先使用 React 19 推荐 API 和新 hook。
 - React API 使用具名导入，例如 `import { use, useActionState, useDeferredValue, useEffectEvent, useOptimistic, useState, useTransition } from 'react'`，避免在业务代码里写大量 `React.useState`。
-- 写 React 逻辑前必须先查看 `packages/@fex-design/react/src/hooks` 是否已有 hook，已有能力直接复用，不要手写重复实现。
+- 写 React 逻辑前必须先查看 `packages/@fex-design/components/react/src/hooks` 是否已有 hook，已有能力直接复用，不要手写重复实现。
 - 不新增 `forwardRef` 风格代码；React 19 中 ref 可作为 prop 传递时，优先按新模式设计组件 API。
 - Context 使用 React 19 写法：渲染时优先使用 `<SomeContext value={value}>`，读取时优先使用 `use(SomeContext)`。
 - 能使用 React 19 新 hook 改善可维护性时要优先使用：
@@ -124,15 +131,12 @@
 - 需要读取最新值但避免闭包过期时，优先使用 `use-latest.ts`、`use-as-ref.ts` 或 React 19 的 `useEffectEvent`，不要手写 `useRef + useEffect` 同步最新值。
 - mount/unmount 逻辑优先使用 `use-mount.ts`、`use-unmount.ts`，不要每次手写空依赖 `useEffect`。
 - 只在依赖更新后执行的逻辑优先使用 `use-update-effect.ts`、`use-update-layout-effect.ts` 或 `create-update-effect.ts`，不要手写 `isFirstRender` 标记。
-- 生命周期类逻辑必须优先使用 `packages/@fex-design/react/src/hooks` 中已有生命周期 hook，例如 `useMount`、`useUnmount`、`useUpdateEffect`、`useUpdateLayoutEffect`、`useIsomorphicLayoutEffect`、`useAsyncEffect`。不要直接手写 `useEffect` 来模拟生命周期。
+- 生命周期类逻辑必须优先使用 `packages/@fex-design/components/react/src/hooks` 中已有生命周期 hook，例如 `useMount`、`useUnmount`、`useUpdateEffect`、`useUpdateLayoutEffect`、`useIsomorphicLayoutEffect`、`useAsyncEffect`。不要直接手写 `useEffect` 来模拟生命周期。
 - 需要强制刷新时优先使用 `use-update.ts`；需要懒初始化稳定对象时优先使用 `use-lazy-ref.ts`。
 - 受控和非受控并存的组件必须优先使用 `use-controllable-state.ts`，不要在组件里手写两套状态分支。
 - 异步 effect 优先使用 `use-async-effect.ts`；涉及 SSR/CSR layout effect 差异时使用 `use-isomorphic-layout-effect.ts`。
-- 事件发布订阅优先使用 `use-event-emitter.ts`；复制文本优先使用 `use-copy-to-clipboard.ts`；移动端判断优先使用 `use-mobile.ts`。
+- 事件发布订阅优先使用 `use-event-emitter.ts`；复制文本优先使用 `use-copy-to-clipboard.ts`。
 - 如果必须使用 `useCallback`、`useMemo` 或原生 `useEffect`，要在附近写简短注释说明为什么需要、依赖来自哪里、哪些变化会触发重新计算或重新执行。
-- 优先事件驱动，少用监听模式。例如分页、筛选、表单提交等逻辑应在对应事件回调中处理，不要先监听 state 变化再补做业务逻辑。
-- effect 只处理外部系统同步，例如订阅、DOM 命令式 API、网络连接、浏览器 API。不要用 effect 做普通派生数据、表单联动、分页请求入口的替代品。
-- 组件同时支持受控和非受控时，必须先复用 `useControllableState`；如果现有 hook 不满足需求，先考虑扩展公共 hook，而不是在业务组件里手写第二套。
 - 列表渲染必须使用稳定 key；不要用数组下标作为可变列表 key。
 - 避免在 render 中创建会导致子组件大面积重渲染的临时对象、临时数组和内联组件定义；确实需要稳定引用时再使用合适 hook，并说明原因。
 
@@ -208,8 +212,7 @@
 - 逻辑层独立消费与内置组件消费必须遵守同一契约。禁用、只读、已取消事件和边界约束不能仅依赖 UI 的 disabled 属性或包装器拦截；公开逻辑入口同样必须正确处理。框架适配不得偷偷改变 core 的默认值或绕过共享算法。
 - 无框架的状态机、校验、选择/过滤/排序/归一化、边界计算和交互规则由 core 或既有共享工具承担，五框架消费同一实现；仅响应式与 DOM 边界保留在框架适配层。不得为追求源码外观一致而机械翻译 React 的组织方式，也不得用“框架不同”解释业务分支差异。
 - 同一组件族的 Primitive 部件、UI 组合、公开逻辑能力及公开子路径应逐一对应。任何能力增删或修复，必须沿五框架调用链核对上层包装器、默认参数、事件转发、属性透传和入口导出，禁止只修报错文件或单个调用方。
-- 五框架同层同场景示例必须一致：示例 id、顺序、标题、说明、数据、初始值、选项顺序、展示内容、样式参数、可操作控件、交互步骤、状态反馈和事件结果相同。只允许框架语法、原生绑定、生命周期和 DOM 获取方式不同；禁止某框架演示真实逻辑，另一框架写死结果、删去控件或用不同数据掩盖缺失能力。
-- **所有组件 Demo 的五框架一致性规范**：React、Vue、Solid、Svelte、Angular 中同一场景的 Demo，无论业务逻辑还是样式都必须一模一样；相同输入和操作必须产生相同的状态、事件与反馈，布局、尺寸、间距、颜色、文案、内容和交互方式必须一致。仅允许各框架原生语法、响应式绑定、引用和生命周期的等价表达不同。本规范适用于所有组件，新增或修改已有跨框架 Demo 时必须同步对应场景，禁止把缺失能力当作框架差异。
+- **所有组件 Demo 的五框架一致性规范**：React、Vue、Solid、Svelte、Angular 中同一组件同一场景的 Demo，无论业务逻辑还是样式都必须一模一样：示例 id、顺序、标题、说明、数据、初始值、选项顺序、布局、尺寸、间距、颜色、文案、可操作控件、交互步骤、状态反馈和事件结果全部相同；相同输入和操作必须产生相同的状态、事件与反馈。仅允许各框架原生语法、响应式绑定、引用、生命周期和 DOM 获取方式的等价表达不同；禁止某框架演示真实逻辑，另一框架写死结果、删去控件或把缺失能力当作框架差异。本规范适用于所有组件，新增或修改已有跨框架 Demo 时必须同步对应场景。
 - **所有组件 Demo 的 UI / Primitive 一致性规范**：同一场景同时具有 UI 和 Primitive Demo 时，两者的样式、布局和可观察行为必须一模一样；UI 只提供 Primitive 的快捷组合写法，不得增加额外业务逻辑、状态或默认样式。默认样式必须消费同一份共享样式实现，不得为 UI 和 Primitive 分别维护样式，也不得用 Demo 专属 CSS 掩盖组件差异。本规范不要求每个 UI Demo 都新增 Primitive 对照；结构化样式等仅适用于 UI 的场景可以只有 UI Demo，但已有两层的场景必须保持一致。
 - 示例修复必须同步实际源码、共享 manifest、源码预览映射和 Preview 注册；生成结果与实际示例需对应，禁止依赖旧生成源码声称一致。若生成会触发未获授权的检查或服务，不执行并明确记录尚未完成的步骤。
 - docs API 必须反映当前公开实现。公共能力、默认值、事件参数与触发条件、语义部件、class/style 合并规则、受控约定和示例目录采用统一结构与顺序；原生属性不要重复发明组件 API。框架表达差异集中在既有 framework overrides 中说明，不得用文档差异掩盖功能缺失。
@@ -219,8 +222,8 @@
 
 - 跨框架组件应优先把无框架逻辑沉淀到 `packages/@fex-design/core`，再在各框架包里适配。
 - 基于原生元素的组件必须暴露其核心原生元素，并优先继承或透传该元素已有的属性和事件能力；不得把 `click`、`focus`、`blur`、`keydown`、`aria-*` 等原生能力逐项重新声明为组件 API。React 使用原生元素 Props/ref，Vue 使用 attrs 与 template ref expose，Solid 使用 JSX 原生属性/ref，Svelte 使用元素 attributes 与 bindable ref，Angular 使用原生元素宿主和公开 element。只有组件新增的语义属性、语义事件，或确实需要拦截加工的原生事件才显式声明。
-- 同一类能力如果 React、Vue、Solid、Svelte、Angular 都会用，先抽出纯逻辑、类型和算法到 `packages/@fex-design/core` 或 `packages/utils`；各框架包只封装生命周期、响应式绑定、DOM 适配和框架 API。
-- 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；设计 token、全局变量和基础 Tailwind source 配置放在 `packages/styles`，组件自身的 class 组合、variant、size、状态样式和 data attribute 规则必须沉淀到 `packages/@fex-design/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
+- 同一类能力如果 React、Vue、Solid、Svelte、Angular 都会用，先抽出纯逻辑、类型和算法到 `packages/@fex-design/core` 或 `packages/@fex-design/utils`；各框架包只封装生命周期、响应式绑定、DOM 适配和框架 API。
+- 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；设计 token、全局变量和基础 Tailwind `@source` 配置放在 `packages/@fex-design/styles`，组件自身的 class 组合、variant、size、状态样式和 data attribute 规则必须沉淀到 `packages/@fex-design/components/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
 - 只有当展示组件演进出必须跨框架保持一致的行为逻辑时，才引入 `packages/@fex-design/core`，例如受控/非受控状态、键盘导航、选择模型、焦点管理、弹层协议、复杂 ARIA 行为或非平凡 variant 计算；不要仅仅为了复用 class 字符串或简单 props 映射而增加 core 抽象。
 - 组件物理文件组织与子路径导出规范：
   - **简单单文件组件平铺**：绝大多数 UI 层组件及轻量 Primitive 组件必须使用单文件平铺实现，例如 `src/ui/button.tsx`、`src/primitive/separator.tsx`，类型与组件直接在文件内显式具名导出。严禁为仅有单个核心实现的简单组件创建空壳同名文件夹（禁止出现 `src/ui/button/button.tsx` 这种二级重复结构）。
@@ -239,9 +242,9 @@
 ## 组件与样式
 
 - 写 UI 前先查 `packages/@fex-design/*` 和当前 app 的 `src/components` 是否已有可复用组件，特别是按钮、弹窗、表单项、表格、布局类组件。
-- 样式优先使用 `@fex/styles` 提供的全局变量、主题、工具类和既有 CSS 分层；不要在业务组件中复制大段主题色、阴影、间距规则。
-- `packages/@fex-design/*` 中的 UI 组件实现文件不要直接书写具体 Tailwind 样式；组件默认样式、尺寸、variant、状态样式、slot 样式必须统一放到 `packages/@fex-design/styles/src/<component>.ts`，通过 `class-variance-authority` 导出类似 `buttonClassName` 的 className 生成函数，各框架组件只调用这些函数，并必须使用 `@fex/utils` 的 `cn` 显式合并用户传入的 `class`/`className`，不要依赖 `cva` 或框架自身的隐式合并。
-- `packages/@fex-design/styles` 中每新增一个组件样式模块，都必须同步在该包 `package.json` 的 `exports` 中暴露文件级子路径，例如 `./button`、`./card`；业务和框架组件只能通过公开子路径导入，不要导入 `src/**` 私有路径。
+- 样式优先使用 `@fex-design/styles` 提供的全局变量、主题、工具类和既有 CSS 分层；不要在业务组件中复制大段主题色、阴影、间距规则。
+- `packages/@fex-design/components/*` 中的 UI 组件实现文件不要直接书写具体 Tailwind 样式；组件默认样式、尺寸、variant、状态样式、slot 样式必须统一放到 `packages/@fex-design/components/styles/src/<component>.ts`，通过 `class-variance-authority` 导出类似 `buttonClassName` 的 className 生成函数，各框架组件只调用这些函数（导入形如 `@fex-design/components-styles/button`），并必须使用 `@fex-design/utils` 的 `cn` 显式合并用户传入的 `class`/`className`，不要依赖 `cva` 或框架自身的隐式合并。
+- `packages/@fex-design/components/styles` 中每新增一个组件样式模块，都必须同步在该包 `package.json` 的 `exports` 中暴露文件级子路径，例如 `./button`、`./card`；业务和框架组件只能通过公开子路径导入，不要导入 `src/**` 私有路径。
 - 页面级布局、组件与组件之间、示例区块之间的 padding、margin、gap 优先使用系统 spacing token，并受密度策略影响；但组件内部的规格化尺寸和间距，例如 Button 的高度、内部 px/gap、Card 的 content inset/header gap/footer padding，必须按组件设计规格使用固定值或组件私有 CSS 变量，不要直接绑定 `--space-*`，避免切换 density 后基础组件内部视觉被动变形。
 - 组件默认圆角统一使用 `rounded-md` / `var(--radius-md)`，当前为 8px。Button、Input、Select、Textarea、Card、Dialog、Popover、Dropdown、Sheet 等基础控件和容器组件默认都用 md；只有明确的组件设计规格或特殊场景需要更大/更小圆角时，才允许局部覆盖，并要保持同类组件一致。
 - padding、margin、gap 等 spacing class 要优先使用最简表达；四边相同写 `p-space-*`，横纵不同才写 `px-space-* py-space-*`，单边不同才写具体方向，避免无意义重复。
@@ -255,15 +258,15 @@
 - Demo 页面中承载多个示例 `Card` 的直接父容器必须统一使用 `grid gap-space-xl`；禁止使用 `space-y-*` 给 Demo Card 列表制造间距。`space-y-*` 依赖直接子节点 margin，在 Angular 自定义元素、`display: contents` 宿主和不同框架组件边界下表现不一致，不能作为跨框架 Demo 列表布局方案。此规则适用于 React、Vue、Solid、Svelte、Angular 所有新增或修改的组件示例页。
 - `ui` 层的结构化 API 要优先采用显式对象形态来承载部件级样式与状态，例如 `partClassName`、`partStyle`、`slotProps` 之类的清晰结构，不要把 header/content/footer 等部件的样式塞进扁平 props，也不要让调用方依赖 DOM 深层 class。
 - `ui` 组件如果暴露多个部件的 class/style，必须使用结构化对象 API，不要新增 `headerClassName`、`contentClassName`、`footerClassName`、`headerStyle`、`contentStyle` 这类扁平 props。统一优先使用类似 `className={{ header, content, footer }}` / `class={{ header, content, footer }}`、`style={{ header, content, footer }}`、`partClassName`、`partStyle` 的对象形态；具体命名按框架习惯保持一致。primitive 层优先只承载宿主元素 class/style 合并，复杂部件定制主要放在 ui 层。
-- 新增组件样式前必须先参考 `packages/@fex-design/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。
+- 新增组件样式前必须先参考 `packages/@fex-design/components/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。
 - 所有新增或修改的组件必须同时支持并验证 LTR 与 RTL。方向 API 统一使用逻辑值 `start` / `end`，样式优先使用 `ms` / `me`、`ps` / `pe`、`start` / `end`、逻辑圆角和 `rtl:` 变体；禁止新增 `left` / `right` 方向枚举或只在 LTR 下正确的物理方向布局。原生宿主应透传 `dir="ltr"` / `dir="rtl"`，组合组件的图标位置、键盘方向、弹层定位和连接边框必须随书写方向正确镜像。
 - 基础控件的可选装饰动效默认关闭。空闲状态下无限循环且不表达业务状态的动画不得进入公共 effect API；loading 等状态动画可以在对应状态期间运行。hover 动效必须提供 `focus-visible` 等键盘等价反馈，并尊重 `prefers-reduced-motion`。
 - 样式命名和组件结构要支持扩展，不要依赖脆弱的深层选择器覆盖。
 - 管理后台界面应以信息密度、可扫描性、稳定布局和可维护交互为优先，不做营销页式的大面积装饰。
 - `packages/@fex-design/*` 下新增或修改对外组件时，必须同步补充详细完整的 Markdown 文档。
 - 组件文档必须包含组件用途、导入路径、核心使用示例、Props 表格、事件/回调说明、受控/非受控说明、注意事项和常见组合方式。
-- 新增或修改对外组件时，必须同步在对应框架 app 中增加同名示例路由，例如 Button 对应 `/button`；示例页必须按组件示例页面目录化规则放置，例如 `src/pages/Button/index.tsx`、`src/pages/Button/index.vue`、`src/pages/button/index.component.ts` 或 SvelteKit 的 `src/routes/button/+page.svelte`，不要另起不符合项目结构的页面文件位置。暂时不要依赖 docs app 承载组件示例。示例必须完整覆盖组件公开 props、每个 variant/size/effect、loading、icon、禁用态、受控/非受控等关键状态，不能只放一个最小用法。
-- 组件实现、Markdown 文档和各框架 app 示例必须作为同一批改动一起完成；如果组件支持多框架实现，各框架示例都要使用本框架组件包的公开 exports 子路径，不要导入 `src/**` 私有路径。
+- 新增或修改对外组件时，五框架的示例必须写在组件包的 `examples/` 目录：`packages/@fex-design/components/<framework>/src/<primitive|ui>/<component>/examples/<scene>.<ext>`；场景 id、顺序与文案遵循 `docs/example-conventions.md`（`basic` 必须第一个，`direction` → `css-variables` → `semantic-styles` → 独立逻辑示例收尾，说明文案用中文），并同步共享 manifest（`docs/shared/src/<component>-manifest.ts`）与 `docs/api`、`docs/content` 对应文件（见“文档与示例管线”）。示例必须完整覆盖组件公开 props、每个 variant/size/effect、loading、icon、禁用态、受控/非受控等关键状态，不能只放一个最小用法。
+- 组件实现、Markdown 文档和各框架 `examples/` 示例必须作为同一批改动一起完成；如果组件支持多框架实现，各框架示例都要使用本框架组件包的公开 exports 子路径，不要导入 `src/**` 私有路径。
 - 多框架组件 demo 可先用 React 确认公共场景，再同步 Vue/Solid/Svelte/Angular 的原生等价实现；已有跨框架场景的修改必须遵守上面的五框架和 UI / Primitive 一致性规范，不能只更新 React。React 仅作为公共场景与行为参考，不作为其他框架实现方式的模板。
 - Props 必须使用 Markdown table 展示，至少包含参数名、类型、默认值、是否必填、说明。
 - 核心使用示例必须是可复制粘贴即可运行的完整代码片段，不能只写伪代码或省略关键导入。
@@ -282,7 +285,7 @@
 - 对象字面量满足某个配置或映射类型时，优先使用 `satisfies`，避免把真实字段类型强行抹平。
 - 公共 API、组件 props、事件参数、服务返回值、mock 数据和工具函数返回值必须有清晰类型，不要把类型压力留给调用方。
 - 组件 props 类型放在组件附近；多处共享的领域类型放到对应 app 的 `src/types` 或合适的 package 中。
-- 公共包的 API 边界以 `package.json` 的 `exports` 为准。按能力设置文件级子路径导出，例如 `@fex-design/react/hooks/use-memoized-fn`、`@fex-design/vue/composables/use-xxx`、`@fex/utils/tree`。
+- 公共包的 API 边界以 `package.json` 的 `exports` 为准。按能力设置显式文件级子路径导出，例如 `@fex-design/react/hooks/use-core-store`、`@fex-design/utils/tree`。
 - 避免把所有内容塞进 `src/index.ts` 或 `src/**/index.ts` 大桶文件；`index.ts` 只保留非常稳定、体积极小、确实属于包根入口的 API。
 - 业务代码只能导入 package 暴露的 exports 子路径，不要导入 `src/**`、`dist/**` 或组件包内部私有文件。
 - 工具函数保持纯净、可测试、无 UI 框架依赖；涉及 DOM、浏览器 API 或框架生命周期的逻辑不要放进通用 utils。
@@ -298,10 +301,16 @@
 - 各 package/app 的真实命令统一放在自己的 `package.json` scripts 中，Turbo 只在根目录 `turbo.json` 编排任务关系、并发和缓存。
 - 通用 lint/format/tsconfig 配置优先从 `configs/*` 复用，不在单个项目里复制一份。
 - 常用脚本：
-  - `pnpm dev`：通过 Turbo 并行启动五个管理端应用。
-  - `pnpm dev:react`、`pnpm dev:vue`、`pnpm dev:solid`、`pnpm dev:svelte`、`pnpm dev:angular`：启动单个管理端。
-  - 文档站尚未创建可运行 package，因此当前不提供 `pnpm dev:docs`；后续在根目录 `docs` 建立官网后再补充。
+  - `pnpm dev:docs`（= `pnpm docs:dev`）：同时启动文档官网（4100）与五框架 Preview Runtime（4110–4114），这是查看组件示例的主要入口；docs-site 的 `predev` 会先生成 component registry，Angular preview 的 `predev` 会先生成示例注册。
+  - `pnpm dev:react`：启动 react-app（4001）；`pnpm dev` 通过 `*-app` 过滤器只会匹配现存的 react-app 与 demo-app。
+  - `pnpm dev:server` / `pnpm build:server` / `pnpm start:server`：NestJS mock 服务（4310）。
+  - `pnpm docs:build`：依次构建五个 preview 与官网，并把 preview 产物复制进 `docs/site/dist/previews`；`pnpm docs:preview` 只是静态预览 `docs/site/dist`（4173），不是开发服务器。
+  - `pnpm format` / `pnpm format:check`：全仓 oxfmt，另用 prettier 仅格式化 `*.svelte`；不要自行挑工具对部分文件跑格式化。
+  - `pnpm fex`：源码交付 CLI（shadcn 式），把组件源码复制进用户工程。
   - `pnpm typecheck`、`pnpm lint`、`pnpm build`、`pnpm check`：只在用户要求时运行。
+- 测试：仓库没有组件/应用测试套件，根目录也没有 `test` script；唯一带测试的是 `server`（jest）。不要为通过门禁自行新增测试框架。
+- 生成物不要手改：`docs/site/src/generated/component-registry.ts`、`docs/preview/angular/src/examples.generated*.ts`、根 `tsconfig.angular-workspace.json` 均由脚本生成；Angular/core 的 exports 变更后必须重新执行 `pnpm --filter @fex-design/angular sync-paths` 刷新 `tsconfig.angular-workspace.json`。
+- CI：push 到 main 会用根 `Dockerfile` 执行 `pnpm docs:build` 并发布到 GitHub Pages。
 
 ## 文档与注释
 
@@ -309,15 +318,21 @@
 - 注释只解释“不明显的原因”和“约束”，不要复述代码做了什么。
 - 临时方案、兼容逻辑、非直觉依赖必须说明原因，避免后续维护者误删或误改。
 
+## 文档与示例管线
+
+- 示例源码在 `packages/@fex-design/components/<framework>/src/<primitive|ui>/<component>/examples/`；五框架同场景必须同 id、同标题、同描述。场景顺序与命名以 `docs/example-conventions.md` 为准，排序逻辑在 `docs/shared/src/example-order.ts`。
+- 共享 manifest（`docs/shared/src/<component>-manifest.ts`）定义官网 Demo 列表的 id/标题/说明/高度；`docs/api/<layer>/<component>.json` 定义语义 API，`docs/content/components/<component>.mdx` 是文档正文。既有组件已按此接入，新增组件要补齐这三类文件。
+- Preview Runtime（`docs/preview/*`）通过 `import.meta.glob` 直接加载组件包中的示例；官网源码展示由 `docs/site/scripts/example-source.mjs` 读取同一份示例文件（展开转发模块、本地 helper 与 `@fex-design/docs-shared/*` 引用），因此示例必须通过公开 exports 导入组件（如 `@fex-design/react/ui/button`），展示的就是实际运行的代码，不得为展示效果替换导入。
+- `docs/site/scripts/generate-component-registry.mjs` 在 dev/typecheck 前运行，读取 api/content/manifest 并校验五框架契约（例如某框架暴露 `class` 就必须同时暴露 `style`），契约不满足会直接报错。
+- 修改组件示例必须同时核对：示例源码、共享 manifest、API JSON、MDX 正文与五框架同场景对齐；只改一个框架或只改生成物都会造成不一致。`docs/README.md` 中“示例写在 preview/<framework>/src/examples”的说法已过时，以本节与代码为准。
+
 ## 本地访问端口
 
-- 本地预览和浏览器验证必须优先使用固定端口，不要猜测 Vite 或框架默认端口。
-- Angular admin：`http://127.0.0.1:4000`。
-- React admin：`http://127.0.0.1:4001`。
-- Solid admin：`http://127.0.0.1:4002`。
-- Svelte admin：`http://127.0.0.1:4003`。
-- Vue admin：`http://127.0.0.1:4004`。
-- 访问组件示例时直接在对应端口拼接组件路由，例如 React Button 使用 `http://127.0.0.1:4001/button`，Vue Button 使用 `http://127.0.0.1:4004/button`。
+- 本地预览和浏览器验证必须优先使用固定端口，不要猜测 Vite 或框架默认端口；各 dev script 已用 `--strictPort` 固定。
+- 文档官网：`http://127.0.0.1:4100`；静态产物预览：`http://127.0.0.1:4173`。
+- Preview Runtime：Angular 4110、React 4111、Solid 4112、Svelte 4113、Vue 4114；可直接用查询参数定位场景，形如 `http://127.0.0.1:4111/?layer=ui&component=button&demo=basic`，官网通过 iframe + postMessage 协议驱动。
+- react-app：`http://127.0.0.1:4001`（历史组件页按路由拼接，如 `/button`）；demo-app：4099；mock 服务：4310。
+- 原 4000/4002/4003/4004 的四个管理端已删除，不要再访问这些端口。
 
 ## 开发阶段验证
 
@@ -328,4 +343,4 @@
 - 新增或修改组件 demo、示例路由、导航入口后，必须在对应固定端口用浏览器实际打开页面验证，不能只依赖 typecheck 或凭代码判断。验证至少包括：页面能打开且无运行时红屏/控制台错误；示例入口能点击；弹窗、浮层、菜单等交互组件必须实际触发一次打开和关闭；React/Vue/Solid/Svelte/Angular 多框架同步 demo 时，必须抽查各框架页面的关键样式规格是否一致，例如按钮尺寸、间距、弹层位置、footer 布局和遮罩效果。发现任一框架打不开或视觉明显不一致，必须先修复并重新浏览器验证后再交付。
 - Demo 页面布局验证必须读取真实 DOM 的 bounding box：至少计算前两个相邻 `Card` 的 `second.top - first.bottom`，确认结果等于当前 `gap-space-xl` 的实际像素值且大于 `0`。只检查源码里存在 `gap`/`space-y` class、只看截图大概有空隙、或只验证组件交互，均不能证明 Demo Card 间距合格。多框架同步时五个框架必须分别测量。
 - 需要做类型层面的快速确认时，优先只跑受影响项目的 `typecheck`；不要把 `build` 当作日常开发验证手段。
-- `@fex/styles` 的 Tailwind `@source` 必须统一配置在 `packages/styles/src/index.css`，覆盖 apps 和 packages/@fex-design 下所有会书写 class 的源码文件类型，例如 `ts`、`tsx`、`vue`、`svelte`、`html`。不要在具体组件、具体组件样式文件或 `packages/@fex-design/styles` 里维护人工 `@source inline(...)` 清单。
+- Tailwind 主 `@source` 配置在 `packages/@fex-design/styles/src/index.css`（覆盖 apps、docs/site、docs/shared 与 packages/@fex-design），各 preview/应用在自己的 `src/styles.css` 追加自身源码目录；不要在具体组件或组件样式文件里维护人工 `@source inline(...)` 清单。

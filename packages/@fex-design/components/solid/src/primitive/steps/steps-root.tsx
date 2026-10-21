@@ -7,12 +7,7 @@ import {
 } from '@fex-design/core/steps/types'
 import { stepsClassName } from '@fex-design/components-styles/steps'
 import { cn } from '@fex-design/utils'
-import {
-  createEffect,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createEffect, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 import { StepsContext } from './steps-context'
 

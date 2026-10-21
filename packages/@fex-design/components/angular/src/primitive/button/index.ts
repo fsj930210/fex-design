@@ -22,11 +22,13 @@ export function buttonPrimitiveClassName(className?: string) {
   templateUrl: './button.html',
 })
 export class Button {
+  readonly class = input<string>()
   readonly element = inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement
   readonly variant = input<ButtonVariant>('outlined')
   readonly color = input<ButtonColor>()
-  protected readonly hostClassName = createHostClassName(() =>
-    buttonClassName({ variant: this.variant(), color: this.color() }),
+  protected readonly hostClassName = createHostClassName(
+    () => buttonClassName({ variant: this.variant(), color: this.color() }),
+    () => this.class(),
   )
 }
 

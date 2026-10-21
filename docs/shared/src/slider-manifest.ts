@@ -1,6 +1,13 @@
 export const sliderExamples = {
   primitive: [
     {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
+    {
       id: 'basic',
       title: '基本使用',
       description: '单值、受控与非受控 Slider，并区分 onChange 与 onEnd。',
@@ -34,8 +41,21 @@ export const sliderExamples = {
       title: 'CSS Variables',
       description: '通过实例变量定制轨道、范围和 Thumb。',
     },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
+    {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
     {
       id: 'basic',
       title: '基本使用',

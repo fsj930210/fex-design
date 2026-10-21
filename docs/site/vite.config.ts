@@ -9,7 +9,6 @@ import rehypeSlug from 'rehype-slug'
 import path from 'node:path'
 import { frameworkExtensions as extensions, readExampleSource } from './scripts/example-source.mjs'
 
-
 const siteBase = process.env.DOCS_BASE_PATH ?? '/'
 
 export default defineConfig({
@@ -74,6 +73,3 @@ export default defineConfig({
     },
   ],
 })
-
-
-

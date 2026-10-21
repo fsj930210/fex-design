@@ -7,8 +7,8 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
-  import MinusIcon from '@fex-design/svelte/icons/minus.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
+  import MinusIcon from "@fex-design/svelte/icons/minus.svelte";
   interface Props extends HTMLAttributes<HTMLSpanElement> {
     children?: Snippet;
   }

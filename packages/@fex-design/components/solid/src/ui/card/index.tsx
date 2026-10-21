@@ -1,5 +1,5 @@
 import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
-import type { JSX, ParentProps } from 'solid-js'
+import type { ComponentProps, JSX, ParentProps } from 'solid-js'
 import type {
   CardClassNames as CardClassNamesBase,
   CardOptions,
@@ -23,10 +23,23 @@ export type CardStyles = CardStylesBase<JSX.CSSProperties>
 export interface CardProps
   extends
     ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'title'>>,
-    CardOptions<JSX.Element, JSX.CSSProperties> {}
+    CardOptions<JSX.Element, JSX.CSSProperties> {
+  headerProps?: Omit<ComponentProps<typeof CardHeader>, 'children'> | undefined
+  titleProps?: Omit<ComponentProps<typeof CardTitle>, 'children'> | undefined
+  descriptionProps?: Omit<ComponentProps<typeof CardDescription>, 'children'> | undefined
+  extraProps?: Omit<ComponentProps<typeof CardExtra>, 'children'> | undefined
+  contentProps?: Omit<ComponentProps<typeof CardContent>, 'children'> | undefined
+  footerProps?: Omit<ComponentProps<typeof CardFooter>, 'children'> | undefined
+}
 
 export function Card(props: CardProps) {
   const [local, rest] = splitProps(props, [
+    'headerProps',
+    'titleProps',
+    'descriptionProps',
+    'extraProps',
+    'contentProps',
+    'footerProps',
     'title',
     'description',
     'extra',
@@ -47,22 +60,35 @@ export function Card(props: CardProps) {
         when={local.header}
         fallback={
           <Show when={local.title || local.description || local.extra}>
-            <CardHeader class={local.classNames?.header} style={local.styles?.header}>
+            <CardHeader
+              {...local.headerProps}
+              class={cn(local.classNames?.header, local.headerProps?.class)}
+              style={mergeStyle(local.styles?.header, local.headerProps?.style)}
+            >
               <Show when={local.title}>
-                <CardTitle class={local.classNames?.title} style={local.styles?.title}>
+                <CardTitle
+                  {...local.titleProps}
+                  class={cn(local.classNames?.title, local.titleProps?.class)}
+                  style={mergeStyle(local.styles?.title, local.titleProps?.style)}
+                >
                   {local.title}
                 </CardTitle>
               </Show>
               <Show when={local.description}>
                 <CardDescription
-                  class={local.classNames?.description}
-                  style={local.styles?.description}
+                  {...local.descriptionProps}
+                  class={cn(local.classNames?.description, local.descriptionProps?.class)}
+                  style={mergeStyle(local.styles?.description, local.descriptionProps?.style)}
                 >
                   {local.description}
                 </CardDescription>
               </Show>
               <Show when={local.extra}>
-                <CardExtra class={local.classNames?.extra} style={local.styles?.extra}>
+                <CardExtra
+                  {...local.extraProps}
+                  class={cn(local.classNames?.extra, local.extraProps?.class)}
+                  style={mergeStyle(local.styles?.extra, local.extraProps?.style)}
+                >
                   {local.extra}
                 </CardExtra>
               </Show>
@@ -72,11 +98,19 @@ export function Card(props: CardProps) {
       >
         {local.header}
       </Show>
-      <CardContent class={local.classNames?.content} style={local.styles?.content}>
+      <CardContent
+        {...local.contentProps}
+        class={cn(local.classNames?.content, local.contentProps?.class)}
+        style={mergeStyle(local.styles?.content, local.contentProps?.style)}
+      >
         {local.children}
       </CardContent>
       <Show when={local.footer}>
-        <CardFooter class={local.classNames?.footer} style={local.styles?.footer}>
+        <CardFooter
+          {...local.footerProps}
+          class={cn(local.classNames?.footer, local.footerProps?.class)}
+          style={mergeStyle(local.styles?.footer, local.footerProps?.style)}
+        >
           {local.footer}
         </CardFooter>
       </Show>

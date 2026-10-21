@@ -1,10 +1,22 @@
 <ng-template #customCell let-cell="cell">
-@if (cell.panel === 'date' && cell.date.day === 15) { <span class="pointer-events-none absolute bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-primary"></span> }
+  @if (cell.panel === 'date' && cell.date.day === 15) {
+  <span
+    class="pointer-events-none absolute bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-primary"
+  ></span>
+  }
 </ng-template>
 <div class="flex w-full min-w-0 flex-col gap-4">
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">每月 15 日</p>
-<div datePicker [defaultValue]="date" [calendarProps]="{ cellRender: customCell, classNames: { cellContent: 'pointer-events-none' } }"></div>
-<div rangePicker [defaultValue]="{ start: date, end: date.add({ days: 7 }) }" [calendarProps]="{ cellRender: customCell, classNames: { cellContent: 'pointer-events-none' } }"></div>
-</section>
+  <section class="flex w-full min-w-0 flex-col gap-2">
+    <p class="text-sm font-medium">每月 15 日</p>
+    <div
+      datePicker
+      [defaultValue]="date"
+      [calendarProps]="{ cellRender: customCell, classNames: { cellContent: 'pointer-events-none' } }"
+    ></div>
+    <div
+      rangePicker
+      [defaultValue]="{ start: date, end: date.add({ days: 7 }) }"
+      [calendarProps]="{ cellRender: customCell, classNames: { cellContent: 'pointer-events-none' } }"
+    ></div>
+  </section>
 </div>

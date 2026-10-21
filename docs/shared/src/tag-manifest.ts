@@ -22,6 +22,12 @@ export const tagExamples = {
       title: 'LTR 与 RTL',
       description: '使用原生 dir 展示左右书写方向和关闭按钮位置。',
     },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
     {

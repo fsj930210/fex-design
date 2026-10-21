@@ -1,6 +1,6 @@
-﻿import fs from "node:fs"
-import path from "node:path"
-import { pathToFileURL } from "node:url"
+﻿import fs from 'node:fs'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 /** Extract the exact `const <name> = cva(...)` block using parenthesis balance */
 function extractCvaDeclaration(source: string, name: string): string | null {
@@ -18,15 +18,15 @@ function extractCvaDeclaration(source: string, name: string): string | null {
   for (let i = openParenIndex; i < source.length; i++) {
     const ch = source[i]
     const prev = source[i - 1]
-    if (prev !== "\\") {
+    if (prev !== '\\') {
       if (ch === "'" && !inDouble && !inTemplate) inSingle = !inSingle
       else if (ch === '"' && !inSingle && !inTemplate) inDouble = !inDouble
-      else if (ch === "`" && !inSingle && !inDouble) inTemplate = !inTemplate
+      else if (ch === '`' && !inSingle && !inDouble) inTemplate = !inTemplate
     }
     if (inSingle || inDouble || inTemplate) continue
 
-    if (ch === "(") depth++
-    else if (ch === ")") {
+    if (ch === '(') depth++
+    else if (ch === ')') {
       depth--
       if (depth === 0) {
         return source.slice(startIndex, i + 1)
@@ -38,22 +38,26 @@ function extractCvaDeclaration(source: string, name: string): string | null {
 
 /** Collapse array `.join(' ')` patterns inside CVA into pure string literals */
 function collapseArrayJoins(cvaCode: string): string {
-  return cvaCode.replace(/\[\s*((?:['"][^'"]*['"]\s*,?\s*)+)\]\.join\(\s*['"]\s*['"]\s*\)/g, (_, inner: string) => {
-    const parts: string[] = []
-    const strRegex = /['"]([^'"]*)['"]/g
-    let m: RegExpExecArray | null
-    while ((m = strRegex.exec(inner)) !== null) {
-      if (m[1]) parts.push(m[1].trim())
-    }
-    return `"${parts.join(" ")}"`
-  })
+  return cvaCode.replace(
+    /\[\s*((?:['"][^'"]*['"]\s*,?\s*)+)\]\.join\(\s*['"]\s*['"]\s*\)/g,
+    (_, inner: string) => {
+      const parts: string[] = []
+      const strRegex = /['"]([^'"]*)['"]/g
+      let m: RegExpExecArray | null
+      while ((m = strRegex.exec(inner)) !== null) {
+        if (m[1]) parts.push(m[1].trim())
+      }
+      return `"${parts.join(' ')}"`
+    },
+  )
 }
 
 export async function inlineStyles(
   code: string,
-  stylesDir: string
+  stylesDir: string,
 ): Promise<{ transformedCode: string; hasCva: boolean }> {
-  const importRegex = /import\s*\{([^{}]*)\}\s*from\s*['"]@fex-design\/components-styles\/([^'"]+)['"]/g
+  const importRegex =
+    /import\s*\{([^{}]*)\}\s*from\s*['"]@fex-design\/components-styles\/([^'"]+)['"]/g
   let match: RegExpExecArray | null
   let result = code
   let hasCva = false
@@ -66,7 +70,10 @@ export async function inlineStyles(
     const fullImport = match[0]
     importsToRemove.push(fullImport)
 
-    const importedNames = match[1]!.split(",").map((s) => s.trim()).filter(Boolean)
+    const importedNames = match[1]!
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
     const styleModuleName = match[2]!
     const styleFilePath = path.join(stylesDir, `${styleModuleName}.ts`)
 
@@ -81,30 +88,30 @@ export async function inlineStyles(
       // ignore
     }
 
-    const rawStyleSource = fs.readFileSync(styleFilePath, "utf-8")
+    const rawStyleSource = fs.readFileSync(styleFilePath, 'utf-8')
 
     for (const name of importedNames) {
       const exportedVal = styleModule[name]
 
       // Case 1: Simple string literal (e.g. cardClassName, buttonSpinnerClassName)
-      if (typeof exportedVal === "string") {
-        const cleanVal = exportedVal.trim().replace(/\s+/g, " ")
+      if (typeof exportedVal === 'string') {
+        const cleanVal = exportedVal.trim().replace(/\s+/g, ' ')
 
         // Replace JSX attr: className={cardClassName} -> className="cleanVal"
         replacements.push({
-          pattern: new RegExp(`className=\\{${name}\\}`, "g"),
+          pattern: new RegExp(`className=\\{${name}\\}`, 'g'),
           replacement: `className="${cleanVal}"`,
         })
 
         // Replace inside cn(...): cn(cardClassName, ...) -> cn("cleanVal", ...)
         replacements.push({
-          pattern: new RegExp(`(\\bcn\\s*\\([\\s\\S]*?)\\b${name}\\b`, "g"),
+          pattern: new RegExp(`(\\bcn\\s*\\([\\s\\S]*?)\\b${name}\\b`, 'g'),
           replacement: `$1"${cleanVal}"`,
         })
 
         // Replace standalone identifier
         replacements.push({
-          pattern: new RegExp(`(?<!['"])\\b${name}\\b(?!['"])`, "g"),
+          pattern: new RegExp(`(?<!['"])\\b${name}\\b(?!['"])`, 'g'),
           replacement: `"${cleanVal}"`,
         })
         continue
@@ -120,11 +127,11 @@ export async function inlineStyles(
         const firstArgMatch = cvaBody.match(/cva\s*\(\s*([a-zA-Z0-9_]+)\s*,/)
         if (firstArgMatch && firstArgMatch[1]) {
           const baseVarName = firstArgMatch[1]
-          if (typeof styleModule[baseVarName] === "string") {
-            const baseStr = styleModule[baseVarName].trim().replace(/\s+/g, " ")
+          if (typeof styleModule[baseVarName] === 'string') {
+            const baseStr = styleModule[baseVarName].trim().replace(/\s+/g, ' ')
             cvaBody = cvaBody.replace(
               new RegExp(`cva\\s*\\(\\s*${baseVarName}\\s*,`),
-              `cva(\n  "${baseStr}",`
+              `cva(\n  "${baseStr}",`,
             )
           }
         }
@@ -140,13 +147,13 @@ export async function inlineStyles(
       }
 
       // Case 3: Static function returning string (e.g. buttonIconClassName())
-      if (typeof exportedVal === "function") {
+      if (typeof exportedVal === 'function') {
         try {
           const fnResult = exportedVal()
-          if (typeof fnResult === "string") {
-            const cleanVal = fnResult.trim().replace(/\s+/g, " ")
+          if (typeof fnResult === 'string') {
+            const cleanVal = fnResult.trim().replace(/\s+/g, ' ')
             replacements.push({
-              pattern: new RegExp(`\\b${name}\\s*\\(\\s*\\)`, "g"),
+              pattern: new RegExp(`\\b${name}\\s*\\(\\s*\\)`, 'g'),
               replacement: `"${cleanVal}"`,
             })
             continue
@@ -160,7 +167,7 @@ export async function inlineStyles(
 
   // 1. Remove style imports FIRST
   for (const imp of importsToRemove) {
-    result = result.replace(imp, "")
+    result = result.replace(imp, '')
   }
 
   // 2. Perform replacements
@@ -170,12 +177,12 @@ export async function inlineStyles(
 
   // 3. Inject private CVA declarations if any
   if (cvaDeclsToInject.length > 0) {
-    const uniqueDecls = Array.from(new Set(cvaDeclsToInject)).join("\n\n")
+    const uniqueDecls = Array.from(new Set(cvaDeclsToInject)).join('\n\n')
 
-    const lines = result.split("\n")
+    const lines = result.split('\n')
     let lastImportIdx = -1
     for (let i = 0; i < lines.length; i++) {
-      if (lines[i]!.trim().startsWith("import ") || lines[i]!.trim().startsWith("import{")) {
+      if (lines[i]!.trim().startsWith('import ') || lines[i]!.trim().startsWith('import{')) {
         lastImportIdx = i
       }
     }
@@ -192,15 +199,15 @@ export async function inlineStyles(
     }
 
     if (lastImportIdx >= 0) {
-      lines.splice(lastImportIdx + 1, 0, "\n" + uniqueDecls + "\n")
+      lines.splice(lastImportIdx + 1, 0, '\n' + uniqueDecls + '\n')
     } else {
-      lines.unshift(uniqueDecls + "\n")
+      lines.unshift(uniqueDecls + '\n')
     }
 
-    result = lines.join("\n")
+    result = lines.join('\n')
   }
 
-  result = result.replace(/\n{3,}/g, "\n\n").trim() + "\n"
+  result = result.replace(/\n{3,}/g, '\n\n').trim() + '\n'
 
   return { transformedCode: result, hasCva }
 }

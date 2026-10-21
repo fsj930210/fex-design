@@ -40,12 +40,22 @@
       "description": "设置禁用视觉状态。",
       "editor": "boolean"
     },
-    { "name": "children", "type": "FrameworkNode", "description": "标签内容。" }
+    {
+      "name": "children",
+      "type": "FrameworkNode",
+      "description": "标签内容。"
+    }
   ],
   "events": [],
   "cssVariables": [
-    { "name": "--tag-color", "description": "当前 Tag 实例主色。" },
-    { "name": "--tag-color-foreground", "description": "当前 Tag solid 变体前景色。" },
+    {
+      "name": "--tag-color",
+      "description": "当前 Tag 实例主色。"
+    },
+    {
+      "name": "--tag-color-foreground",
+      "description": "当前 Tag solid 变体前景色。"
+    },
     {
       "name": "--tag-color-{primary|success|warning|danger|info}",
       "description": "覆盖对应 Tag 预设主色。"
@@ -83,6 +93,12 @@
     },
     {
       "id": "direction"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ],
   "components": [
@@ -106,7 +122,11 @@
           "default": "filled",
           "description": "标签视觉变体。"
         },
-        { "name": "color", "type": "TagColor", "description": "预设色或任意 CSS 颜色。" },
+        {
+          "name": "color",
+          "type": "TagColor",
+          "description": "预设色或任意 CSS 颜色。"
+        },
         {
           "name": "size",
           "type": "'sm' | 'md' | 'lg'",
@@ -119,22 +139,51 @@
           "default": "false",
           "description": "设置禁用视觉状态。"
         },
-        { "name": "children", "type": "FrameworkNode", "description": "标签内容。" }
+        {
+          "name": "children",
+          "type": "FrameworkNode",
+          "description": "标签内容。"
+        }
       ],
       "events": [],
       "slots": [],
       "demos": [],
       "frameworks": {
-        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "react": {
+          "typeOverrides": {
+            "FrameworkNode": "ReactNode"
+          },
+          "slots": []
+        },
         "vue": {
           "omitProps": ["children"],
-          "slots": [{ "name": "default", "description": "标签内容。" }]
+          "slots": [
+            {
+              "name": "default",
+              "description": "标签内容。"
+            }
+          ]
         },
-        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
-        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "solid": {
+          "typeOverrides": {
+            "FrameworkNode": "JSX.Element"
+          },
+          "slots": []
+        },
+        "svelte": {
+          "typeOverrides": {
+            "FrameworkNode": "Snippet"
+          },
+          "slots": []
+        },
         "angular": {
           "omitProps": ["children"],
-          "slots": [{ "name": "default", "description": "标签内容投影。" }],
+          "slots": [
+            {
+              "name": "default",
+              "description": "标签内容投影。"
+            }
+          ],
           "slotLabel": "Content projection"
         }
       }
@@ -169,32 +218,82 @@
       "slots": [],
       "demos": [],
       "frameworks": {
-        "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+        "react": {
+          "typeOverrides": {
+            "FrameworkNode": "ReactNode"
+          },
+          "slots": []
+        },
         "vue": {
           "omitProps": ["children"],
-          "slots": [{ "name": "default", "description": "完全替换默认 XIcon。" }]
+          "slots": [
+            {
+              "name": "default",
+              "description": "完全替换默认 XIcon。"
+            }
+          ]
         },
-        "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
-        "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+        "solid": {
+          "typeOverrides": {
+            "FrameworkNode": "JSX.Element"
+          },
+          "slots": []
+        },
+        "svelte": {
+          "typeOverrides": {
+            "FrameworkNode": "Snippet"
+          },
+          "slots": []
+        },
         "angular": {
           "omitProps": ["children"],
-          "slots": [{ "name": "default", "description": "完全替换默认 XIcon 的内容投影。" }],
+          "slots": [
+            {
+              "name": "default",
+              "description": "完全替换默认 XIcon 的内容投影。"
+            }
+          ],
           "slotLabel": "Content projection"
         }
       }
     }
   ],
   "frameworks": {
-    "react": { "typeOverrides": { "FrameworkNode": "ReactNode" }, "slots": [] },
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode"
+      },
+      "slots": []
+    },
     "vue": {
       "omitProps": ["children"],
-      "slots": [{ "name": "default", "description": "标签内容。" }]
+      "slots": [
+        {
+          "name": "default",
+          "description": "标签内容。"
+        }
+      ]
     },
-    "solid": { "typeOverrides": { "FrameworkNode": "JSX.Element" }, "slots": [] },
-    "svelte": { "typeOverrides": { "FrameworkNode": "Snippet" }, "slots": [] },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element"
+      },
+      "slots": []
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet"
+      },
+      "slots": []
+    },
     "angular": {
       "omitProps": ["children"],
-      "slots": [{ "name": "default", "description": "标签内容投影。" }],
+      "slots": [
+        {
+          "name": "default",
+          "description": "标签内容投影。"
+        }
+      ],
       "slotLabel": "Content projection"
     }
   }

@@ -1,37 +1,76 @@
 import type { CalendarValue } from '@fex-design/core/calendar'
-import { createDatePicker, type DatePickerOptions } from '@fex-design/core/date-picker/create-date-picker'
+import {
+  createDatePicker,
+  type DatePickerOptions,
+} from '@fex-design/core/date-picker/create-date-picker'
 import { definedPickerOptions } from '@fex-design/core/date-picker/options'
 import { computed, watchEffect } from 'vue'
 import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 
-export type UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> = DatePickerOptions<TValue>
+export type UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> =
+  DatePickerOptions<TValue>
 
-export function useDatePicker<TValue extends CalendarValue = CalendarValue>(source: UseDatePickerOptions<TValue> | (() => UseDatePickerOptions<TValue>)) {
+export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
+  source: UseDatePickerOptions<TValue> | (() => UseDatePickerOptions<TValue>),
+) {
   const options = () => definedPickerOptions(typeof source === 'function' ? source() : source)
   const controller = createDatePicker<TValue>(options())
   const snapshot = useCoreStore(controller)
   // Track live props at the framework/core boundary; useCoreStore owns cleanup.
   watchEffect(() => controller.setOptions(options()))
-  const state = computed(() => { snapshot.value; return controller.getState() })
+  const state = computed(() => {
+    snapshot.value
+    return controller.getState()
+  })
   return {
     ...controller,
     controller,
-    get showTime() { return state.value.showTime },
-    get timeOptions() { return state.value.timeOptions },
+    get showTime() {
+      return state.value.showTime
+    },
+    get timeOptions() {
+      return state.value.timeOptions
+    },
     timeValue: computed(() => state.value.timeValue),
-    get triggerView() { return state.value.triggerView },
-    get footerView() { return state.value.footerView },
-    get canClear() { return state.value.canClear },
-    get picker() { return state.value.picker },
-    get needConfirm() { return state.value.needConfirm },
-    get disabled() { return state.value.disabled },
-    get clearable() { return state.value.clearable },
-    get format() { return state.value.format },
-    get weekStartsOn() { return state.value.weekStartsOn },
-    get minDate() { return state.value.minDate },
-    get maxDate() { return state.value.maxDate },
-    get multiple() { return state.value.multiple },
-    get maxCount() { return state.value.maxCount },
+    get triggerView() {
+      return state.value.triggerView
+    },
+    get footerView() {
+      return state.value.footerView
+    },
+    get canClear() {
+      return state.value.canClear
+    },
+    get picker() {
+      return state.value.picker
+    },
+    get needConfirm() {
+      return state.value.needConfirm
+    },
+    get disabled() {
+      return state.value.disabled
+    },
+    get clearable() {
+      return state.value.clearable
+    },
+    get format() {
+      return state.value.format
+    },
+    get weekStartsOn() {
+      return state.value.weekStartsOn
+    },
+    get minDate() {
+      return state.value.minDate
+    },
+    get maxDate() {
+      return state.value.maxDate
+    },
+    get multiple() {
+      return state.value.multiple
+    },
+    get maxCount() {
+      return state.value.maxCount
+    },
     open: computed(() => state.value.open),
     panel: computed(() => state.value.panel),
     viewDate: computed(() => state.value.viewDate),
@@ -45,7 +84,8 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(sour
     canConfirm: computed(() => state.value.canConfirm),
     committedValue: computed(() => state.value.committedValue),
     pendingValue: computed(() => state.value.pendingValue),
-    disabledDate: (date: Parameters<ReturnType<typeof controller.getState>['disabledDate']>[0]) => controller.getState().disabledDate(date),
+    disabledDate: (date: Parameters<ReturnType<typeof controller.getState>['disabledDate']>[0]) =>
+      controller.getState().disabledDate(date),
     setOpen: controller.setOpen,
     setPanel: controller.setPanel,
     setViewDate: controller.setViewDate,

@@ -1,9 +1,9 @@
-import { runAdd } from "./commands/add.ts"
-import { runCreate } from "./commands/create.ts"
-import { runDiff } from "./commands/diff.ts"
-import { runInit } from "./commands/init.ts"
-import { runList } from "./commands/list.ts"
-import { runView } from "./commands/view.ts"
+import { runAdd } from './commands/add.ts'
+import { runCreate } from './commands/create.ts'
+import { runDiff } from './commands/diff.ts'
+import { runInit } from './commands/init.ts'
+import { runList } from './commands/list.ts'
+import { runView } from './commands/view.ts'
 
 function parseArgv(args: string[]) {
   const flags: Record<string, string | boolean> = {}
@@ -11,17 +11,17 @@ function parseArgv(args: string[]) {
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]!
-    if (arg.startsWith("--")) {
+    if (arg.startsWith('--')) {
       const key = arg.slice(2)
-      if (i + 1 < args.length && !args[i + 1]!.startsWith("-")) {
+      if (i + 1 < args.length && !args[i + 1]!.startsWith('-')) {
         flags[key] = args[i + 1]!
         i++
       } else {
         flags[key] = true
       }
-    } else if (arg.startsWith("-")) {
+    } else if (arg.startsWith('-')) {
       const key = arg.slice(1)
-      if (i + 1 < args.length && !args[i + 1]!.startsWith("-")) {
+      if (i + 1 < args.length && !args[i + 1]!.startsWith('-')) {
         flags[key] = args[i + 1]!
         i++
       } else {
@@ -47,12 +47,12 @@ export async function main() {
   const template = (flags.template || flags.t) as string | undefined
   const preset = flags.preset as string | undefined
   const overwrite = Boolean(flags.overwrite || flags.o)
-  const dryRun = Boolean(flags["dry-run"] || flags.d)
+  const dryRun = Boolean(flags['dry-run'] || flags.d)
   const all = Boolean(flags.all || flags.a)
   const yes = Boolean(flags.yes || flags.y)
 
-  if (flags.help || flags.h || command === "help") {
-    if (command === "create") {
+  if (flags.help || flags.h || command === 'help') {
+    if (command === 'create') {
       console.log(`
 Usage: fex create <name> [options]
 
@@ -68,39 +68,39 @@ Examples:
   fex create my-app
   fex create my-app -t spa -f react --preset full
   fex create my-monorepo -t monorepo
-`);
-      return;
+`)
+      return
     }
   }
 
   switch (command) {
-    case "create": {
+    case 'create': {
       const name = positionals[1]
       await runCreate(name, { framework, template, preset, yes })
       break
     }
-    case "init": {
+    case 'init': {
       await runInit({ framework, project, yes })
       break
     }
-    case "add": {
+    case 'add': {
       const components = positionals.slice(1)
       await runAdd(components, { framework, project, layer, overwrite, dryRun, all, yes })
       break
     }
-    case "diff": {
+    case 'diff': {
       const comp = positionals[1]
       await runDiff(comp, { framework, project, layer })
       break
     }
-    case "list": {
+    case 'list': {
       await runList({ framework, project })
       break
     }
-    case "view": {
+    case 'view': {
       const comp = positionals[1]
       if (!comp) {
-        console.error("❌ Please specify component to view. Example: fex view button")
+        console.error('❌ Please specify component to view. Example: fex view button')
         process.exit(1)
       }
       await runView(comp, { framework, project, layer })

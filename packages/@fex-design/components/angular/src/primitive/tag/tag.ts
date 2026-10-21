@@ -27,6 +27,7 @@ export { TagAction } from './tag-action'
   template: '<ng-content />',
 })
 export class Tag {
+  readonly class = input<string>()
   readonly color = input<TagOptions['color']>()
   readonly variant = input<NonNullable<TagOptions['variant']>>('filled')
   readonly size = input<NonNullable<TagOptions['size']>>('md')
@@ -41,11 +42,13 @@ export class Tag {
   protected readonly customColor = computed(() =>
     this.color() && !this.presetColor() ? this.color() : null,
   )
-  protected readonly hostClassName = createHostClassName(() =>
-    tagClassName({
-      variant: this.variant(),
-      color: this.presetColor(),
-      size: this.size(),
-    }),
+  protected readonly hostClassName = createHostClassName(
+    () =>
+      tagClassName({
+        variant: this.variant(),
+        color: this.presetColor(),
+        size: this.size(),
+      }),
+    () => this.class(),
   )
 }

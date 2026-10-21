@@ -1,25 +1,22 @@
-import {
-  toastRootClassName,
-  type ToastStyleProps,
-} from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import type { ComponentProps } from "react"
-import { toast, type ReactToastItem, type ReactToastManager } from "./toast-manager"
+import { toastRootClassName, type ToastStyleProps } from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import type { ComponentProps } from 'react'
+import { toast, type ReactToastItem, type ReactToastManager } from './toast-manager'
 
 function isKnownVariant(
-  variant: ReactToastItem["variant"],
-): variant is NonNullable<ToastStyleProps["variant"]> {
+  variant: ReactToastItem['variant'],
+): variant is NonNullable<ToastStyleProps['variant']> {
   return (
-    variant === "default" ||
-    variant === "success" ||
-    variant === "info" ||
-    variant === "warning" ||
-    variant === "error" ||
-    variant === "loading"
+    variant === 'default' ||
+    variant === 'success' ||
+    variant === 'info' ||
+    variant === 'warning' ||
+    variant === 'error' ||
+    variant === 'loading'
   )
 }
 
-export interface ToastRootProps extends ComponentProps<"div"> {
+export interface ToastRootProps extends ComponentProps<'div'> {
   manager?: ReactToastManager
   toast: ReactToastItem
 }
@@ -32,12 +29,12 @@ export function ToastRoot({
   toast: item,
   ...props
 }: ToastRootProps) {
-  const knownVariant = isKnownVariant(item.variant) ? item.variant : "default"
+  const knownVariant = isKnownVariant(item.variant) ? item.variant : 'default'
 
   return (
     <div
       {...props}
-      data-paused={item.paused ? "" : undefined}
+      data-paused={item.paused ? '' : undefined}
       data-slot="toast"
       data-variant={item.variant}
       role="status"

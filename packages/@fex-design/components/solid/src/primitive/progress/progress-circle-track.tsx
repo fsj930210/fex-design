@@ -13,18 +13,33 @@ export type ProgressCircleTrackProps = JSX.CircleSVGAttributes<SVGCircleElement>
 export function ProgressCircleTrack(props: ProgressCircleTrackProps) {
   const [local, others] = splitProps(props, ['gapDegree', 'trackLinecap', 'class', 'style'])
   const context = useProgressContext('ProgressCircleTrack')
-  const geometry = createMemo(() => getProgressGeometry({
-    value: context().value, min: context().min, max: context().max,
-    size: context().size ?? 48, thickness: context().thickness ?? 4,
-    variant: context().variant, gapDegree: local.gapDegree,
-  }))
+  const geometry = createMemo(() =>
+    getProgressGeometry({
+      value: context().value,
+      min: context().min,
+      max: context().max,
+      size: context().size ?? 48,
+      thickness: context().thickness ?? 4,
+      variant: context().variant,
+      gapDegree: local.gapDegree,
+    }),
+  )
   return (
-    <circle {...others} cx={geometry().center} cy={geometry().center} r={geometry().radius}
-      fill="none" stroke={'currentColor'}
-      stroke-width={context().thickness ?? 4} stroke-dasharray={geometry().trackDasharray}
-      
-      stroke-linecap={local.trackLinecap ?? 'round'} pathLength={100}
-      data-slot="progress-circle-track" 
-      class={cn(progressCircleTrackClassName, local.class)} style={local.style} />
+    <circle
+      {...others}
+      cx={geometry().center}
+      cy={geometry().center}
+      r={geometry().radius}
+      fill="none"
+      stroke={'currentColor'}
+      stroke-width={context().thickness ?? 4}
+      stroke-dasharray={geometry().trackDasharray}
+
+      stroke-linecap={local.trackLinecap ?? 'round'}
+      pathLength={100}
+      data-slot="progress-circle-track"
+      class={cn(progressCircleTrackClassName, local.class)}
+      style={local.style}
+    />
   )
 }

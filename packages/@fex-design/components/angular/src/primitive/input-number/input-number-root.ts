@@ -35,6 +35,7 @@ import { useInputNumber } from './use-input-number'
   template: '<ng-content />',
 })
 export class InputNumberRoot implements OnInit {
+  readonly class = input<string>()
   readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
   private readonly controlledValue = signal<number | undefined>(undefined)
   private readonly hasValue = signal(false)
@@ -52,7 +53,9 @@ export class InputNumberRoot implements OnInit {
   readonly precision = input<number>()
   readonly parser = input<InputNumberParser>()
   readonly formatter = input<InputNumberFormatter>()
-  readonly keyboard = input(true, { transform: (value: unknown) => value == null ? true : booleanAttribute(value) })
+  readonly keyboard = input(true, {
+    transform: (value: unknown) => (value == null ? true : booleanAttribute(value)),
+  })
   readonly disabled = input(false, { transform: booleanAttribute })
   readonly readOnly = input(false, { transform: booleanAttribute })
   readonly size = input<InputSize>('md')
@@ -60,8 +63,13 @@ export class InputNumberRoot implements OnInit {
   readonly change = output<{ event: Event; value: number | undefined }>()
 
   private control?: HTMLInputElement
-  protected readonly hostClassName = createHostClassName(() =>
-    cn(inputRootClassName({ size: this.size(), variant: this.variant() }), inputNumberRootClassName),
+  protected readonly hostClassName = createHostClassName(
+    () =>
+      cn(
+        inputRootClassName({ size: this.size(), variant: this.variant() }),
+        inputNumberRootClassName,
+      ),
+    () => this.class(),
   )
 
   readonly inputNumber = useInputNumber(

@@ -6,13 +6,7 @@ import { useProgressContext } from './progress-context'
 export interface ProgressTrackProps extends ComponentProps<'div'> {
   ref?: Ref<HTMLDivElement>
 }
-export function ProgressTrack({
-  ref,
-  className,
-  style,
-  children,
-  ...props
-}: ProgressTrackProps) {
+export function ProgressTrack({ ref, className, style, children, ...props }: ProgressTrackProps) {
   const context = useProgressContext('ProgressTrack')
   return (
     <div

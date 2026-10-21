@@ -12,19 +12,51 @@ import DatePickerCancel from './date-picker-cancel.vue'
 import DatePickerConfirm from './date-picker-confirm.vue'
 defineOptions({ name: 'DatePickerFooter', inheritAttrs: false })
 // VNodeChild includes boolean; preserve omission instead of Vue casting it to false.
-const props = withDefaults(defineProps<{ content?: DatePickerFooterContent }>(), { content: undefined })
+const props = withDefaults(defineProps<{ content?: DatePickerFooterContent }>(), {
+  content: undefined,
+})
 const attrs = useAttrs()
 const owner = createDatePickerFooterActions()
-const actions = computed(() => ({ canConfirm: owner.canConfirm.value, close: owner.close, clear: owner.clear, confirm: owner.confirm, cancel: owner.cancel, today: owner.today }))
+const actions = computed(() => ({
+  canConfirm: owner.canConfirm.value,
+  close: owner.close,
+  clear: owner.clear,
+  confirm: owner.confirm,
+  cancel: owner.cancel,
+  today: owner.today,
+}))
 </script>
 <template>
-  <div v-if="getPickerContentKind(props.content) !== 'hidden'" v-bind="attrs" data-slot="date-picker-footer" :class="cn(datePickerFooterClassName, appearance().classNames?.footer, normalizeClass(attrs.class))" :style="[appearance().styles?.footer, attrs.style]">
+  <div
+    v-if="getPickerContentKind(props.content) !== 'hidden'"
+    v-bind="attrs"
+    data-slot="date-picker-footer"
+    :class="
+      cn(datePickerFooterClassName, appearance().classNames?.footer, normalizeClass(attrs.class))
+    "
+    :style="[appearance().styles?.footer, attrs.style]"
+  >
     <slot v-if="props.content === undefined && $slots.default" v-bind="actions" />
-    <FooterContent v-else-if="getPickerContentKind(props.content) === 'custom'" :content="props.content" :actions="actions" />
+    <FooterContent
+      v-else-if="getPickerContentKind(props.content) === 'custom'"
+      :content="props.content"
+      :actions="actions"
+    />
     <template v-else>
-      <DatePickerToday :class="appearance().classNames?.today" :style="appearance().styles?.today" />
-      <DatePickerCancel :class="appearance().classNames?.cancel" :style="appearance().styles?.cancel" v-if="owner.footerView.showCancel" />
-      <DatePickerConfirm :class="appearance().classNames?.confirm" :style="appearance().styles?.confirm" v-if="owner.footerView.showConfirm" />
+      <DatePickerToday
+        :class="appearance().classNames?.today"
+        :style="appearance().styles?.today"
+      />
+      <DatePickerCancel
+        :class="appearance().classNames?.cancel"
+        :style="appearance().styles?.cancel"
+        v-if="owner.footerView.showCancel"
+      />
+      <DatePickerConfirm
+        :class="appearance().classNames?.confirm"
+        :style="appearance().styles?.confirm"
+        v-if="owner.footerView.showConfirm"
+      />
     </template>
   </div>
 </template>

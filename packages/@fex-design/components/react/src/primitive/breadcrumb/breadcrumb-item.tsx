@@ -1,6 +1,6 @@
-import { breadcrumbItemClassName } from "@fex-design/components-styles/breadcrumb"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes } from "react"
+import { breadcrumbItemClassName } from '@fex-design/components-styles/breadcrumb'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes } from 'react'
 
 export type BreadcrumbItemProps = HTMLAttributes<HTMLLIElement>
 

@@ -1,3 +1,4 @@
+import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import { groupSelectOptions } from '@fex-design/core/select/filter-options'
 import { getSelectVirtualRange } from '@fex-design/core/select/virtual'
 import type {
@@ -16,35 +17,64 @@ import {
   selectOptionLabelClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
-import { createMemo, createSignal, For, Show, type JSX, type ParentProps } from 'solid-js'
+import {
+  createMemo,
+  createSignal,
+  For,
+  Show,
+  type JSX,
+  type ParentProps,
+  type ComponentProps,
+} from 'solid-js'
 import { CheckIcon } from '@fex-design/solid/icons/check'
 import { PopoverContent, PopoverPortal } from '../popover'
 import { useSelect } from './select-context'
 
 export function SelectContent(
   props: ParentProps<{
+    popoverContentProps?: Omit<ComponentProps<typeof PopoverContent>, 'children'> | undefined
+    portalProps?: Omit<ComponentProps<typeof PopoverPortal>, 'children'> | undefined
+    listProps?: Omit<ComponentProps<typeof SelectList>, 'children'> | undefined
+    style?: JSX.CSSProperties | string | undefined
     class?: string
     popupRender?: (menu: JSX.Element, context: { close: () => void }) => JSX.Element
-    optionRender?: (option: SelectOption, state: { selected: boolean; active: boolean; disabled: boolean }) => JSX.Element
+    optionRender?: (
+      option: SelectOption,
+      state: { selected: boolean; active: boolean; disabled: boolean },
+    ) => JSX.Element
     emptyContent?: JSX.Element
     loadingContent?: JSX.Element
   }>,
 ) {
   const select = useSelect('SelectContent')
-  const menu = () => props.children ?? <SelectList optionRender={props.optionRender} emptyContent={props.emptyContent} loadingContent={props.loadingContent} />
+  const menu = () =>
+    props.children ?? (
+      <SelectList
+        {...props.listProps}
+        optionRender={props.optionRender ?? props.listProps?.optionRender}
+        emptyContent={props.emptyContent ?? props.listProps?.emptyContent}
+        loadingContent={props.loadingContent ?? props.listProps?.loadingContent}
+      />
+    )
   return (
-    <PopoverPortal>
+    <PopoverPortal {...props.portalProps}>
       <PopoverContent
-        class={cn(selectContentClassName, props.class)}
-        style="max-width: var(--floating-available-width);"
+        {...props.popoverContentProps}
+        class={cn(selectContentClassName, props.class, props.popoverContentProps?.class)}
+        style={mergeStyle(
+          'max-width: var(--floating-available-width);',
+          props.style,
+          props.popoverContentProps?.style,
+        )}
       >
         {props.popupRender ? props.popupRender(menu(), { close: select.controller.close }) : menu()}
       </PopoverContent>
     </PopoverPortal>
   )
 }
-function SelectList(
+export function SelectList(
   props: ParentProps<{
+    style?: JSX.CSSProperties | string | undefined
     class?: string
     optionRender?: (
       option: SelectOption,
@@ -75,6 +105,7 @@ function SelectList(
       role="listbox"
       aria-multiselectable={select.multiple() || undefined}
       class={cn(selectListClassName, props.class)}
+      style={props.style}
       onScroll={(event) =>
         setViewport({
           scrollTop: event.currentTarget.scrollTop,
@@ -82,32 +113,38 @@ function SelectList(
         })
       }
     >
-      <Show when={!select.loading()} fallback={<SelectLoading>{props.loadingContent}</SelectLoading>}>
-      <Show when={select.visibleOptions().length} fallback={<SelectEmpty>{props.emptyContent}</SelectEmpty>}>
       <Show
-        when={range()}
-        fallback={
-          <For each={groupSelectOptions(select.visibleOptions())}>
-            {(group) => (
-              <div role="group" aria-label={group.label}>
-                {group.label && <div class={selectGroupLabelClassName}>{group.label}</div>}
-                <For each={group.options}>{render}</For>
+        when={!select.loading()}
+        fallback={<SelectLoading>{props.loadingContent}</SelectLoading>}
+      >
+        <Show
+          when={select.visibleOptions().length}
+          fallback={<SelectEmpty>{props.emptyContent}</SelectEmpty>}
+        >
+          <Show
+            when={range()}
+            fallback={
+              <For each={groupSelectOptions(select.visibleOptions())}>
+                {(group) => (
+                  <div role="group" aria-label={group.label}>
+                    {group.label && <div class={selectGroupLabelClassName}>{group.label}</div>}
+                    <For each={group.options}>{render}</For>
+                  </div>
+                )}
+              </For>
+            }
+          >
+            {(current) => (
+              <div style={{ height: `${current().totalSize}px`, position: 'relative' }}>
+                <div style={{ position: 'absolute', inset: '0', top: `${current().offset}px` }}>
+                  <For each={select.visibleOptions().slice(current().start, current().end)}>
+                    {render}
+                  </For>
+                </div>
               </div>
             )}
-          </For>
-        }
-      >
-        {(current) => (
-          <div style={{ height: `${current().totalSize}px`, position: 'relative' }}>
-            <div style={{ position: 'absolute', inset: '0', top: `${current().offset}px` }}>
-              <For each={select.visibleOptions().slice(current().start, current().end)}>
-                {render}
-              </For>
-            </div>
-          </div>
-        )}
-      </Show>
-      </Show>
+          </Show>
+        </Show>
       </Show>
     </div>
   )
@@ -173,12 +210,18 @@ export function SelectItem(props: ParentProps<{ item: SelectOption; class?: stri
       onClick={() => !state().disabled && select.controller.selectValue(props.item.value)}
     >
       <span class={selectOptionLabelClassName}>{props.children ?? props.item.label}</span>
-      <span class={selectOptionIndicatorClassName}><CheckIcon /></span>
+      <span class={selectOptionIndicatorClassName}>
+        <CheckIcon />
+      </span>
     </div>
   )
 }
 export function SelectGroup(props: ParentProps<{ label?: string }>) {
-  return <div role="group" aria-label={props.label}>{props.children}</div>
+  return (
+    <div role="group" aria-label={props.label}>
+      {props.children}
+    </div>
+  )
 }
 export function SelectLabel(props: ParentProps<{ class?: string }>) {
   return <div class={cn(selectGroupLabelClassName, props.class)}>{props.children}</div>

@@ -10,7 +10,7 @@ const modes = [
   <div class="grid gap-5">
     <div v-for="mode in modes" :key="mode.value" class="grid gap-2">
       <b>{{ mode.label }}</b>
-      <div class="flex items-center gap-3">
+      <div class="flex flex-wrap items-center gap-3">
         <SkeletonAvatar :animation="mode.value" /><SkeletonText
           :animation="mode.value"
           class="w-48"

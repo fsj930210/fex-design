@@ -15,10 +15,14 @@ import { useCalendarContext } from '../calendar/context'
 
 defineOptions({ name: 'DatePickerHeaderButton', inheritAttrs: false })
 const attrs = useAttrs()
-function nativeAttrs() { const { onClick, ...rest } = attrs; return rest }
+function nativeAttrs() {
+  const { onClick, ...rest } = attrs
+  return rest
+}
 function callClick(event: Event) {
   const handlers = attrs.onClick
-  for (const handler of Array.isArray(handlers) ? handlers : [handlers]) if (typeof handler === 'function') handler(event)
+  for (const handler of Array.isArray(handlers) ? handlers : [handlers])
+    if (typeof handler === 'function') handler(event)
 }
 const props = defineProps<{ action: DatePickerHeaderAction; class?: string }>()
 const calendar = useCalendarContext('DatePickerHeaderButton')
@@ -33,10 +37,15 @@ function runAction(event: Event) {
 </script>
 
 <template>
-  <Button v-bind="nativeAttrs()" type="button"
+  <Button
+    v-bind="nativeAttrs()"
+    type="button"
     data-slot="date-picker-header-button"
     :data-action="props.action"
-    :aria-label="attrs['aria-label'] ?? getDatePickerHeaderActionLabel(props.action, calendar.controller.getOptions().locale)"
+    :aria-label="
+      attrs['aria-label'] ??
+      getDatePickerHeaderActionLabel(props.action, calendar.controller.getOptions().locale)
+    "
     :class="cn(datePickerHeaderNavigationClassName, props.class)"
     @click="runAction"
   >

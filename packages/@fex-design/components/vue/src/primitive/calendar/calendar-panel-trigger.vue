@@ -20,4 +20,16 @@ function click(event: MouseEvent) {
 const element = useTemplateRef<HTMLButtonElement>('element')
 defineExpose({ element })
 </script>
-<template><button v-bind="nativeAttrs()" ref="element" type="button" data-slot="calendar-panel-trigger" :data-panel="panel" :class="cn(calendarPanelTriggerClassName, normalizeClass(attrs.class))" @click="click"><slot /></button></template>
+<template>
+  <button
+    v-bind="nativeAttrs()"
+    ref="element"
+    type="button"
+    data-slot="calendar-panel-trigger"
+    :data-panel="panel"
+    :class="cn(calendarPanelTriggerClassName, normalizeClass(attrs.class))"
+    @click="click"
+  >
+    <slot />
+  </button>
+</template>

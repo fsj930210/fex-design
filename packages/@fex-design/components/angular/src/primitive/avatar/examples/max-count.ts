@@ -1,5 +1,10 @@
 import { Component } from '@angular/core'
-import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount } from '@fex-design/angular/primitive/avatar'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+} from '@fex-design/angular/primitive/avatar'
 @Component({
   selector: 'avatar-max-count-example',
   standalone: true,

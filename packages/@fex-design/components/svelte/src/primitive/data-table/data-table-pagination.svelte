@@ -12,7 +12,7 @@
   import { cn } from "@fex-design/utils";
   import type { RowData, TableFeatures } from "@tanstack/table-core";
   import type { HTMLAttributes } from "svelte/elements";
-  import type { SvelteDataTable } from '@fex-design/svelte/stores/create-data-table';
+  import type { SvelteDataTable } from "@fex-design/svelte/stores/create-data-table";
   import { Button } from "@fex-design/svelte/primitive/button";
 
   interface PaginationTable {

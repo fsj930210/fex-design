@@ -1,1 +1,18 @@
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'; const options=[{value:'beijing',label:'北京'},{value:'shanghai',label:'上海'},{value:'shenzhen',label:'深圳'}]; export default function Example(){return <SelectRoot options={options} showSearch filterOption={(keyword,option)=>option.label.includes(keyword)}><SelectTrigger className="w-72" placeholder="搜索城市"/><SelectContent/></SelectRoot>}
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
+const options = [
+  { value: 'beijing', label: '北京' },
+  { value: 'shanghai', label: '上海' },
+  { value: 'shenzhen', label: '深圳' },
+]
+export default function Example() {
+  return (
+    <SelectRoot
+      options={options}
+      showSearch
+      filterOption={(keyword, option) => option.label.includes(keyword)}
+    >
+      <SelectTrigger className="w-72" placeholder="搜索城市" />
+      <SelectContent />
+    </SelectRoot>
+  )
+}

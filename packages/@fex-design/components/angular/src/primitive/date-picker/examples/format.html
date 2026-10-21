@@ -1,29 +1,33 @@
 <div class="flex w-full min-w-0 flex-col gap-4">
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">YYYY/MM/DD</p>
-<div datePickerRoot [format]="'YYYY/MM/DD'" [defaultValue]="date">
-<div datePickerTrigger></div>
-<div datePickerContent>
-<div datePickerPanel></div>
-<div datePickerFooter></div>
-</div>
-</div>
-<div rangePickerRoot [format]="'YYYY/MM/DD'" [defaultValue]="{ start: date, end: date.add({ days: 7 }) }">
-<div rangePickerTrigger></div>
-<div rangePickerContent>
-<div rangePickerPanelGroup></div>
-<div datePickerFooter></div>
-</div>
-</div>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">YYYY/MM</p>
-<div datePickerRoot [picker]="'month'" [format]="'YYYY/MM'">
-<div datePickerTrigger></div>
-<div datePickerContent>
-<div datePickerPanel></div>
-<div datePickerFooter></div>
-</div>
-</div>
-</section>
+  <section class="flex w-full min-w-0 flex-col gap-2">
+    <p class="text-sm font-medium">YYYY/MM/DD</p>
+    <div datePickerRoot [format]="'YYYY/MM/DD'" [defaultValue]="date">
+      <div datePickerTrigger></div>
+      <div datePickerContent>
+        <div datePickerPanel></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+    <div
+      rangePickerRoot
+      [format]="'YYYY/MM/DD'"
+      [defaultValue]="{ start: date, end: date.add({ days: 7 }) }"
+    >
+      <div rangePickerTrigger></div>
+      <div rangePickerContent>
+        <div rangePickerPanelGroup></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+  </section>
+  <section class="flex w-full min-w-0 flex-col gap-2">
+    <p class="text-sm font-medium">YYYY/MM</p>
+    <div datePickerRoot [picker]="'month'" [format]="'YYYY/MM'">
+      <div datePickerTrigger></div>
+      <div datePickerContent>
+        <div datePickerPanel></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+  </section>
 </div>

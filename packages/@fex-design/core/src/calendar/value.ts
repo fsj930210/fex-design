@@ -12,12 +12,17 @@ import type {
   CalendarWeekday,
 } from './types'
 
-export function getCalendarSelectionValue(date: CalendarDate, granularity: CalendarGranularity, weekStartsOn: CalendarWeekday = 0): CalendarValue {
+export function getCalendarSelectionValue(
+  date: CalendarDate,
+  granularity: CalendarGranularity,
+  weekStartsOn: CalendarWeekday = 0,
+): CalendarValue {
   if (granularity === 'week') {
     const start = getWeekStart(date, weekStartsOn)
     return { start, end: getWeekEnd(start, weekStartsOn) }
   }
-  if (granularity === 'month') return Temporal.PlainYearMonth.from({ year: date.year, month: date.month })
+  if (granularity === 'month')
+    return Temporal.PlainYearMonth.from({ year: date.year, month: date.month })
   if (granularity === 'quarter') return getQuarter(date)
   if (granularity === 'year') return getYear(date)
   return date

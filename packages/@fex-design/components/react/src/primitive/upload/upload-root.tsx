@@ -1,16 +1,7 @@
-import type {
-  UploadController,
-  UploadOptions,
-} from '@fex-design/core/upload/types'
-import {
-  uploadRootClassName,
-} from '@fex-design/components-styles/upload'
+import type { UploadController, UploadOptions } from '@fex-design/core/upload/types'
+import { uploadRootClassName } from '@fex-design/components-styles/upload'
 import { cn } from '@fex-design/utils'
-import {
-  useId,
-  useRef,
-  type HTMLAttributes,
-} from 'react'
+import { useId, useRef, type HTMLAttributes } from 'react'
 import useUnmount from '@fex-design/react/hooks/use-unmount'
 import { UploadContext } from './upload-context'
 import { useUploadController } from './use-upload'

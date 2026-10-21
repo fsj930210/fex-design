@@ -2,10 +2,15 @@
   "name": "@fex-design/cli",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "bin": {
     "fex": "./bin/fex.js"
   },
+  "files": [
+    "bin",
+    "src",
+    "schema.json"
+  ],
+  "type": "module",
   "exports": {
     ".": "./src/index.ts",
     "./schema.json": "./schema.json"
@@ -15,10 +20,5 @@
   },
   "devDependencies": {
     "typescript": "catalog:"
-  },
-  "files": [
-    "bin",
-    "src",
-    "schema.json"
-  ]
+  }
 }

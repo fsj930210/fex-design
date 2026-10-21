@@ -1,22 +1,19 @@
+import { SelectValue, type SelectValueProps } from './select-value'
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
-import { getSelectValueLayout } from '@fex-design/core/select/value-layout'
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   selectClearClassName,
   selectClearableIndicatorClassName,
   selectIndicatorClassName,
   selectInputClassName,
-  selectPlaceholderClassName,
   selectSuffixClassName,
   selectTriggerClassName,
-  selectValueClassName,
   selectValueContainerClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
 import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon } from '@fex-design/solid/icons/chevron'
 import { CircleXIcon } from '@fex-design/solid/icons/circle-x'
-import { Tag, TagAction } from '../tag'
 import { LoadingIcon } from '@fex-design/solid/icons/loading'
 import { PopoverTrigger } from '../popover'
 import { useSelect } from './select-context'
@@ -24,6 +21,7 @@ import { useSelect } from './select-context'
 export interface SelectTriggerProps extends ParentProps<
   Omit<JSX.HTMLAttributes<HTMLDivElement>, 'prefix'>
 > {
+  valueProps?: Omit<SelectValueProps, 'children'> | undefined
   inputProps?: SelectInputProps
   prefix?: JSX.Element
   suffix?: JSX.Element
@@ -34,7 +32,10 @@ export interface SelectTriggerProps extends ParentProps<
     context: { remove: () => void; disabled: boolean },
   ) => JSX.Element
 }
-export interface SelectInputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+export interface SelectInputProps extends Omit<
+  JSX.InputHTMLAttributes<HTMLInputElement>,
+  'prefix'
+> {
   prefix?: JSX.Element
   suffix?: JSX.Element
   clear?: JSX.Element
@@ -44,6 +45,7 @@ export interface SelectInputProps extends Omit<JSX.InputHTMLAttributes<HTMLInput
 export function SelectTrigger(props: SelectTriggerProps) {
   const [local, rest] = splitProps(props, [
     'class',
+    'valueProps',
     'inputProps',
     'children',
     'prefix',
@@ -52,10 +54,15 @@ export function SelectTrigger(props: SelectTriggerProps) {
     'maxTagCount',
     'tagRender',
     'onKeyDown',
+    'aria-invalid',
+    'data-warning',
   ])
   const select = useSelect('SelectTrigger')
   const placeholder = () => local.placeholder ?? '请选择'
-  const inputAttributes = () => { const { prefix, suffix, clear, classNames, styles, style, ...attrs } = local.inputProps ?? {}; return attrs }
+  const inputAttributes = () => {
+    const { prefix, suffix, clear, classNames, styles, style, ...attrs } = local.inputProps ?? {}
+    return attrs
+  }
   function keydown(event: KeyboardEvent) {
     callEventHandler(local.onKeyDown, event)
     if (event.defaultPrevented) return
@@ -83,9 +90,10 @@ export function SelectTrigger(props: SelectTriggerProps) {
           role={undefined}
           data-slot="select-trigger"
           data-disabled={select.disabled() || undefined}
-          data-clearable={select.clearable() && select.selectedOptions().length ? 'true' : undefined}
-          data-status={select.status()}
-          aria-invalid={select.status() === 'error' || undefined}
+          data-clearable={
+            select.clearable() && select.selectedOptions().length ? 'true' : undefined
+          }
+          data-warning={local.dataWarning ?? select.dataWarning()}
           class={cn(selectTriggerClassName(), local.inputProps?.classNames?.root, local.class)}
           style={{ ...local.inputProps?.styles?.root, ...local.inputProps?.style }}
           onKeyDown={keydown}
@@ -93,23 +101,23 @@ export function SelectTrigger(props: SelectTriggerProps) {
           {local.inputProps?.prefix ?? local.prefix}
           <div class={cn(selectValueContainerClassName, local.inputProps?.classNames?.control)}>
             <SelectValue
-              maxTagCount={local.maxTagCount}
+              {...local.valueProps}
+              maxTagCount={local.maxTagCount ?? local.valueProps?.maxTagCount}
               placeholder={select.showSearch() ? undefined : placeholder()}
-              tagRender={local.tagRender}
+              tagRender={local.tagRender ?? local.valueProps?.tagRender}
             >
               {local.children}
             </SelectValue>
             <input
               {...inputAttributes()}
               role="combobox"
+              aria-invalid={local['aria-invalid'] ?? select.ariaInvalid()}
               aria-expanded={select.snapshot().open}
               aria-controls={select.listId}
               disabled={select.disabled()}
               readOnly={!select.showSearch()}
               placeholder={
-                select.showSearch() && !select.selectedOptions().length
-                  ? placeholder()
-                  : undefined
+                select.showSearch() && !select.selectedOptions().length ? placeholder() : undefined
               }
               value={select.snapshot().searchValue}
               class={cn(
@@ -131,17 +139,26 @@ export function SelectTrigger(props: SelectTriggerProps) {
               }}
             />
           </div>
-          <span data-slot="select-suffix" class={cn(selectSuffixClassName, local.inputProps?.classNames?.suffix)}>
+          <span
+            data-slot="select-suffix"
+            class={cn(selectSuffixClassName, local.inputProps?.classNames?.suffix)}
+          >
             <Show when={!select.loading()} fallback={<LoadingIcon class="animate-spin" />}>
-              <span class={select.clearable() && select.selectedOptions().length ? selectClearableIndicatorClassName : undefined}>
+              <span
+                class={
+                  select.clearable() && select.selectedOptions().length
+                    ? selectClearableIndicatorClassName
+                    : undefined
+                }
+              >
                 {local.inputProps?.suffix ?? local.suffix ?? (
-                    <span
-                      data-state={select.snapshot().open ? 'open' : 'closed'}
-                      class={selectIndicatorClassName}
-                    >
-                      <ChevronDownIcon />
-                    </span>
-                  )}
+                  <span
+                    data-state={select.snapshot().open ? 'open' : 'closed'}
+                    class={selectIndicatorClassName}
+                  >
+                    <ChevronDownIcon />
+                  </span>
+                )}
               </span>
               <Show when={select.clearable() && select.selectedOptions().length}>
                 <button
@@ -162,63 +179,5 @@ export function SelectTrigger(props: SelectTriggerProps) {
         </div>
       )}
     </PopoverTrigger>
-  )
-}
-export function SelectValue(props: JSX.HTMLAttributes<HTMLDivElement> & {
-  children?: JSX.Element | undefined
-  placeholder?: string | undefined
-  maxTagCount?: number | undefined
-  tagRender?: SelectTriggerProps['tagRender'] | undefined
-  class?: string | undefined
-}) {
-  const [local, rest] = splitProps(props, ['children', 'placeholder', 'maxTagCount', 'tagRender', 'class'])
-  const select = useSelect('SelectValue')
-  const layout = () => getSelectValueLayout(select.selectedOptions(), {
-    multiple: select.multiple(), showSearch: select.showSearch(),
-    open: select.snapshot().open, searchValue: select.snapshot().searchValue,
-    maxTagCount: props.maxTagCount,
-  })
-  return (
-    <Show
-      when={props.children == null}
-      fallback={<div {...rest} class={cn(selectValueClassName, local.class)}>{local.children}</div>}
-    >
-      <Show
-        when={select.selectedOptions().length}
-        fallback={
-          <Show when={layout().showPlaceholder}>
-            <span class={selectPlaceholderClassName}>{props.placeholder ?? '请选择'}</span>
-          </Show>
-        }
-      >
-        <Show
-          when={layout().showTags}
-          fallback={<Show when={layout().showSingle}><div {...rest} class={cn(selectValueClassName, local.class)}>{select.selectedOptions()[0]?.label}</div></Show>}
-        >
-          <div {...rest} class={cn(selectValueClassName, local.class)}>
-            <For each={layout().visibleOptions}>
-              {(option) =>
-                props.tagRender ? (
-                  <span>
-                    {props.tagRender(option, {
-                      remove: () => select.removeValue(option.value),
-                      disabled: option.disabled === true,
-                    })}
-                  </span>
-                ) : (
-                  <Tag size="sm" onPointerDownCapture={(event) => event.preventDefault()}>
-                    {option.label}
-                    <TagAction aria-label={`Remove ${String(option.label)}`} onClick={(event) => { event.stopPropagation(); select.removeValue(option.value) }} />
-                  </Tag>
-                )
-              }
-            </For>
-            <Show when={layout().overflowCount > 0}>
-              <Tag size="sm">+{layout().overflowCount}</Tag>
-            </Show>
-          </div>
-        </Show>
-      </Show>
-    </Show>
   )
 }

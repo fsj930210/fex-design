@@ -1,7 +1,7 @@
 <script lang="ts">
   import { inputActionClassName } from "@fex-design/components-styles/input";
-  import EyeIcon from '@fex-design/svelte/icons/eye.svelte';
-  import EyeOffIcon from '@fex-design/svelte/icons/eye-off.svelte';
+  import EyeIcon from "@fex-design/svelte/icons/eye.svelte";
+  import EyeOffIcon from "@fex-design/svelte/icons/eye-off.svelte";
   import Input from "./input.svelte";
   import type { InputPasswordProps } from "./input.types";
   let {

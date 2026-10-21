@@ -4,6 +4,9 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./pagination/types": "./src/pagination/types.ts",
+    "./pagination/pagination-range": "./src/pagination/pagination-range.ts",
+    "./pagination/create-pagination-controller": "./src/pagination/create-pagination-controller.ts",
     "./popover/types": "./src/popover/types.ts",
     "./popover/options": "./src/popover/options.ts",
     "./popover/create-popover": "./src/popover/create-popover.ts",
@@ -67,6 +70,9 @@
     "./date/utils": "./src/date/utils.ts",
     "./time-picker/navigation": "./src/time-picker/navigation.ts",
     "./time-picker/scroll": "./src/time-picker/scroll.ts",
+    "./time-picker/input-props": "./src/time-picker/input-props.ts",
+    "./time-picker/range-types": "./src/time-picker/range-types.ts",
+    "./time-picker/create-time-range-picker-controller": "./src/time-picker/create-time-range-picker-controller.ts",
     "./time-picker/types": "./src/time-picker/types.ts",
     "./time-picker/value": "./src/time-picker/value.ts",
     "./time-picker/options": "./src/time-picker/options.ts",
@@ -178,7 +184,12 @@
     "./mentions/query": "./src/mentions/query.ts",
     "./mentions/replace-query": "./src/mentions/replace-query.ts",
     "./mentions/types": "./src/mentions/types.ts",
-    "./menu/navigation": "./src/menu/navigation.ts",
+    "./menu/items": "./src/menu/items.ts",
+    "./menu/branch": "./src/menu/branch.ts",
+    "./menu/types": "./src/menu/types.ts",
+    "./menu/dom-types": "./src/menu/dom-types.ts",
+    "./menu/create-menu-controller": "./src/menu/create-menu-controller.ts",
+    "./menu/create-menu-dom": "./src/menu/create-menu-dom.ts",
     "./message/types": "./src/message/types.ts",
     "./disclosure/create-disclosure": "./src/disclosure/create-disclosure.ts",
     "./expansion/create-expansion-controller": "./src/expansion/create-expansion-controller.ts",
@@ -220,20 +231,22 @@
     "./sortable/create-sortable-controller": "./src/sortable/create-sortable-controller.ts",
     "./sortable/motion": "./src/sortable/motion.ts",
     "./sortable/types": "./src/sortable/types.ts",
-    "./switch/types": "./src/switch/types.ts"
+    "./switch/types": "./src/switch/types.ts",
+    "./select/component-props": "./src/select/component-props.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "oxlint src"
   },
   "dependencies": {
+    "@fex-design/utils": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tanstack/form-core": "1.33.5",
     "@tanstack/table-core": "9.2.4",
     "culori": "^4.0.2",
     "embla-carousel": "8.6.0",
     "embla-carousel-autoplay": "8.6.0",
-    "i18next": "^26.4.2",
+    "i18next": "^26.5.2",
     "spark-md5": "3.0.2",
     "uqr": "^0.1.3"
   },

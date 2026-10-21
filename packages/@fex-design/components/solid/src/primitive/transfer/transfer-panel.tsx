@@ -1,9 +1,11 @@
 import type { createTransferController } from '@fex-design/core/transfer/create-transfer-controller'
-import type { TransferDataItem, TransferKey, TransferSide, TransferResolvedFieldNames } from '@fex-design/core/transfer/types'
-import {
-  readTransferDisabled,
-  readTransferKey,
-} from '@fex-design/core/transfer/utils'
+import type {
+  TransferDataItem,
+  TransferKey,
+  TransferSide,
+  TransferResolvedFieldNames,
+} from '@fex-design/core/transfer/types'
+import { readTransferDisabled, readTransferKey } from '@fex-design/core/transfer/utils'
 import {
   checkboxCheckIconClassName,
   checkboxControlClassName,
@@ -69,7 +71,9 @@ export function TransferPanel<TItem extends TransferDataItem>(props: TransferPan
             indeterminate={checked === 'indeterminate'}
             class={checkboxControlClassName}
             aria-label={`Select all ${title()}`}
-            onChange={(event) => props.api.setCheckedKeys(event.currentTarget.checked ? enabled : [])}
+            onChange={(event) =>
+              props.api.setCheckedKeys(event.currentTarget.checked ? enabled : [])
+            }
           />
           <CheckboxIndicator class={checkboxIndicatorClassName}>
             <CheckIcon class={checkboxCheckIconClassName} />
@@ -128,7 +132,9 @@ export function TransferPanel<TItem extends TransferDataItem>(props: TransferPan
     >
       <Show when={props.options?.header !== false}>
         <header data-slot="transfer-panel-header" class={transferPanelHeaderClassName}>
-          {typeof props.options?.header === 'function' ? props.options.header(props.api) : defaultHeader()}
+          {typeof props.options?.header === 'function'
+            ? props.options.header(props.api)
+            : defaultHeader()}
         </header>
       </Show>
       <div data-slot="transfer-panel-body" class={transferPanelBodyClassName}>

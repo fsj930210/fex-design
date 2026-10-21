@@ -52,6 +52,16 @@ export default function Example() {
           />
         </div>
       </section>
+      <section class="grid gap-2">
+        <span class="text-sm text-muted-foreground">加载图标</span>
+        <Switch
+          loading
+          defaultChecked
+          class="[--switch-track-checked-background:#7c3aed] [--switch-thumb-background:#f5f3ff] [--primary:#6d28d9]"
+          spinnerProps={{ class: 'text-primary' }}
+          aria-label="加载图标"
+        />
+      </section>
     </div>
   )
 }

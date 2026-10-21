@@ -36,7 +36,19 @@
     { "id": "table", "title": "表格", "description": "表格骨架。" },
     { "id": "image", "title": "图片内容", "description": "图片内容骨架。" },
     { "id": "form", "title": "表单", "description": "表单骨架。" },
-    { "id": "animation", "title": "动画", "description": "三种动画模式。" }
+    { "id": "animation", "title": "动画", "description": "三种动画模式。" },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。",
+      "height": 440
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
+    }
   ],
   "components": [
     {

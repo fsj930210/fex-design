@@ -1,5 +1,10 @@
 import { useContext, type JSX } from 'solid-js'
-import { FormFieldNameContext, renderingFieldName, useFieldContext, type FieldControlBinding } from './field-context'
+import {
+  FormFieldNameContext,
+  renderingFieldName,
+  useFieldContext,
+  type FieldControlBinding,
+} from './field-context'
 
 export function FieldControl(props: { children: (binding: FieldControlBinding) => JSX.Element }) {
   const context = useFieldContext('FieldControl')

@@ -6,6 +6,7 @@ import type { TimePickerPeriodColumnProps } from './column.types'
 
 export function TimePickerPeriodColumn({
   labels,
+  columnProps,
   isItemDisabled,
   ...props
 }: TimePickerPeriodColumnProps) {
@@ -19,6 +20,7 @@ export function TimePickerPeriodColumn({
   return (
     <TimePickerColumn
       {...props}
+      {...columnProps}
       options={options}
       selectedValue={selected}
       onSelect={context.controller.selectPeriod}

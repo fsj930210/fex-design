@@ -12,12 +12,17 @@ import {
   selectOptionLabelClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
-import { computed, ref } from 'vue'
+import { computed, ref, type StyleValue } from 'vue'
 import { CheckIcon } from '@fex-design/vue/icons/check'
 import { useSelect } from './use-select'
 
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{ class?: string; emptyText?: string; loadingText?: string }>()
+const props = defineProps<{
+  class?: string
+  style?: StyleValue
+  emptyText?: string
+  loadingText?: string
+}>()
 const select = useSelect('SelectList')
 const groups = computed(() => groupSelectOptions(select.visibleOptions.value))
 const className = computed(() => cn(selectListClassName, props.class))
@@ -56,6 +61,7 @@ function scroll(event: Event) {
     role="listbox"
     :aria-multiselectable="select.multiple.value || undefined"
     :class="className"
+    :style="props.style"
     @scroll="scroll"
   >
     <div v-if="select.loading.value" :class="selectLoadingClassName">

@@ -8,7 +8,9 @@ if (!inputNumber) throw new Error('InputNumberControl must be used inside InputN
 const attrs = useAttrs()
 const control = useTemplateRef<InstanceType<typeof InputControl>>('control')
 defineExpose({
-  get element() { return control.value?.element ?? null },
+  get element() {
+    return control.value?.element ?? null
+  },
   focus: (options?: FocusOptions) => control.value?.focus(options),
   blur: () => control.value?.blur(),
   select: () => control.value?.select(),

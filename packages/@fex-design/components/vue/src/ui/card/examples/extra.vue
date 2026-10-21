@@ -9,7 +9,7 @@ import { Card } from '@fex-design/vue/ui/card'
     <template #title>生产环境</template>
     <template #description>新加坡 · 最近部署于 3 分钟前</template>
     <template #extra>
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <span class="size-2 rounded-full bg-emerald-500" /><span
           class="text-sm font-semibold text-emerald-700"
           >运行中</span

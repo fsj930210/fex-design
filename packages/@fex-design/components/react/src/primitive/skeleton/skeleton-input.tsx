@@ -1,5 +1,8 @@
 import type { SkeletonVisualOptions } from '@fex-design/core/skeleton/types'
-import { skeletonInputBlockClassName, skeletonInputClassName } from '@fex-design/components-styles/skeleton'
+import {
+  skeletonInputBlockClassName,
+  skeletonInputClassName,
+} from '@fex-design/components-styles/skeleton'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps } from 'react'
 import { SkeletonBlock } from './skeleton-block'

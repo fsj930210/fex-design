@@ -17,7 +17,8 @@ export interface SelectContextValue {
   disabled: ComputedRef<boolean>
   clearable: ComputedRef<boolean>
   loading: ComputedRef<boolean>
-  status: ComputedRef<'error' | 'warning' | undefined>
+  ariaInvalid: ComputedRef<string | boolean | undefined>
+  dataWarning: ComputedRef<string | undefined>
   virtual: ComputedRef<SelectVirtualOptions | undefined>
   listId: string
   removeValue: (value: SelectionValue) => void

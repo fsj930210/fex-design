@@ -9,16 +9,16 @@ export interface TimePickerContentProps extends ComponentProps<typeof PopoverCon
 export function TimePickerContent({ className, style, ...props }: TimePickerContentProps) {
   const { triggerRef } = usePopoverContext('TimePickerContent')
   return (
-      <PopoverContent
-        {...props}
-        dir={props.dir ?? getTimePickerDirection(triggerRef.current)}
-        className={cn('overflow-hidden p-0', className)}
-        style={{
-          width: 'var(--floating-reference-width)',
-          maxWidth: 'var(--floating-available-width)',
-          maxHeight: 'var(--floating-available-height)',
-          ...style,
-        }}
-      />
+    <PopoverContent
+      {...props}
+      dir={props.dir ?? getTimePickerDirection(triggerRef.current)}
+      className={cn('overflow-hidden p-0', className)}
+      style={{
+        width: 'var(--floating-reference-width)',
+        maxWidth: 'var(--floating-available-width)',
+        maxHeight: 'var(--floating-available-height)',
+        ...style,
+      }}
+    />
   )
 }

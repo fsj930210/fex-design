@@ -1,8 +1,19 @@
 import type { CalendarCell, CalendarDate, CalendarGrid } from './types'
 
-export function getCalendarFocusDate(grid: CalendarGrid, cell: CalendarCell, key: string): CalendarDate | null {
+export function getCalendarFocusDate(
+  grid: CalendarGrid,
+  cell: CalendarCell,
+  key: string,
+): CalendarDate | null {
   const columns = grid.rows[0]?.length ?? 7
-  const offsets: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -columns, ArrowDown: columns, Home: -cell.columnIndex, End: columns - cell.columnIndex - 1 }
+  const offsets: Record<string, number> = {
+    ArrowLeft: -1,
+    ArrowRight: 1,
+    ArrowUp: -columns,
+    ArrowDown: columns,
+    Home: -cell.columnIndex,
+    End: columns - cell.columnIndex - 1,
+  }
   const offset = offsets[key]
   if (offset === undefined) return null
   if (cell.panel === 'date') return cell.date.add({ days: offset })
@@ -17,6 +28,10 @@ export function focusCalendarCell(element: HTMLElement, key: string) {
   if (!root) return
   requestAnimationFrame(() => {
     if (!root.isConnected) return
-    root.querySelector<HTMLButtonElement>(`[data-slot="calendar-cell-trigger"][data-key="${CSS.escape(key)}"]`)?.focus()
+    root
+      .querySelector<HTMLButtonElement>(
+        `[data-slot="calendar-cell-trigger"][data-key="${CSS.escape(key)}"]`,
+      )
+      ?.focus()
   })
 }

@@ -1,12 +1,6 @@
-import type {
-  MasonryController,
-} from '@fex-design/core/masonry/create-masonry-controller'
+import type { MasonryController } from '@fex-design/core/masonry/create-masonry-controller'
 import type { MasonryControllerOptions } from '@fex-design/core/masonry/types'
-import {
-  createContext,
-  useContext,
-  type Accessor,
-} from 'solid-js'
+import { createContext, useContext, type Accessor } from 'solid-js'
 
 export interface MasonryContextValue {
   controller: MasonryController

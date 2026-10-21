@@ -28,7 +28,7 @@ export function DirectionExample() {
             <EmptyDescription>创建项目后，项目会显示在这里。</EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button className="rounded-md bg-primary px-3 py-2 text-primary-foreground">
                 创建项目
               </button>
@@ -55,7 +55,7 @@ export function DirectionExample() {
             <EmptyDescription>ستظهر المشاريع هنا بعد إنشائها.</EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button className="rounded-md bg-primary px-3 py-2 text-primary-foreground">
                 إنشاء مشروع
               </button>

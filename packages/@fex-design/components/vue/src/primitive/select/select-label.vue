@@ -2,4 +2,6 @@
 import { selectGroupLabelClassName } from '@fex-design/components-styles/select'
 defineOptions({ name: 'SelectLabel' })
 </script>
-<template><div :class="selectGroupLabelClassName"><slot /></div></template>
+<template>
+  <div :class="selectGroupLabelClassName"><slot /></div>
+</template>

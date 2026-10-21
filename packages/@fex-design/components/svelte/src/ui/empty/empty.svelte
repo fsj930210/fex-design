@@ -6,12 +6,12 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import PrimitiveEmpty from '@fex-design/svelte/primitive/empty/empty.svelte';
-  import EmptyContent from '@fex-design/svelte/primitive/empty/empty-content.svelte';
-  import EmptyDescription from '@fex-design/svelte/primitive/empty/empty-description.svelte';
-  import EmptyHeader from '@fex-design/svelte/primitive/empty/empty-header.svelte';
-  import EmptyMedia from '@fex-design/svelte/primitive/empty/empty-media.svelte';
-  import EmptyTitle from '@fex-design/svelte/primitive/empty/empty-title.svelte';
+  import PrimitiveEmpty from "@fex-design/svelte/primitive/empty/empty.svelte";
+  import EmptyContent from "@fex-design/svelte/primitive/empty/empty-content.svelte";
+  import EmptyDescription from "@fex-design/svelte/primitive/empty/empty-description.svelte";
+  import EmptyHeader from "@fex-design/svelte/primitive/empty/empty-header.svelte";
+  import EmptyMedia from "@fex-design/svelte/primitive/empty/empty-media.svelte";
+  import EmptyTitle from "@fex-design/svelte/primitive/empty/empty-title.svelte";
   import DefaultEmptyImage from "./default-empty-image.svelte";
 
   export type EmptyStyles = EmptyStylesBase<

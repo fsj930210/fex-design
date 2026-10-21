@@ -13,7 +13,8 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   templateUrl: './button-icon.html',
 })
 export class ButtonIcon {
+  readonly class = input<string>()
   readonly placement = input<'start' | 'end'>('start')
   readonly element = inject<ElementRef<HTMLSpanElement>>(ElementRef).nativeElement
-  protected readonly hostClassName = createHostClassName(() => buttonIconClassName())
+  protected readonly hostClassName = createHostClassName(buttonIconClassName, () => this.class())
 }

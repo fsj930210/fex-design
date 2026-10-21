@@ -1,5 +1,3 @@
-
-
 /** Separator 的排列方向。 */
 export type SeparatorOrientation = 'horizontal' | 'vertical'
 

@@ -1,7 +1,14 @@
 import type { ComponentProps } from 'react'
-
-export interface MenuGroupProps extends ComponentProps<'div'> {}
-
-export function MenuGroup(props: MenuGroupProps) {
-  return <div {...props} role="group" data-slot="menu-group" />
+import { menuGroupClassName } from '@fex-design/components-styles/menu'
+import { cn } from '@fex-design/utils'
+export type MenuGroupProps = ComponentProps<'div'>
+export function MenuGroup({ className, ...props }: MenuGroupProps) {
+  return (
+    <div
+      {...props}
+      role="group"
+      data-slot="menu-group"
+      className={cn(menuGroupClassName, className)}
+    />
+  )
 }

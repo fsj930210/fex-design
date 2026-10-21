@@ -10,9 +10,10 @@ export function getSelectValueLayout<T>(
   selectedOptions: readonly T[],
   options: SelectValueLayoutOptions,
 ) {
-  const visibleOptions = options.maxTagCount === undefined
-    ? selectedOptions
-    : selectedOptions.slice(0, Math.max(0, options.maxTagCount))
+  const visibleOptions =
+    options.maxTagCount === undefined
+      ? selectedOptions
+      : selectedOptions.slice(0, Math.max(0, options.maxTagCount))
   const hasValue = selectedOptions.length > 0
   return {
     visibleOptions,

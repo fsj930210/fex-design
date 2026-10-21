@@ -4,7 +4,10 @@ import path from 'node:path'
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url))
 const workspaceRoot = path.resolve(scriptDirectory, '../../../../..')
-const angularPackagePath = path.join(workspaceRoot, 'packages/@fex-design/components/angular/package.json')
+const angularPackagePath = path.join(
+  workspaceRoot,
+  'packages/@fex-design/components/angular/package.json',
+)
 const corePackagePath = path.join(workspaceRoot, 'packages/@fex-design/core/package.json')
 const outputPath = path.join(workspaceRoot, 'tsconfig.angular-workspace.json')
 

@@ -11,7 +11,10 @@ import {
 import { createMemo } from 'solid-js'
 import { createDraggable } from '@fex-design/solid/primitives/create-draggable'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
-import { createDroppable, type CreateDroppableEventArgs } from '@fex-design/solid/primitives/create-droppable'
+import {
+  createDroppable,
+  type CreateDroppableEventArgs,
+} from '@fex-design/solid/primitives/create-droppable'
 import { useTreeContext } from './tree-context'
 
 export interface CreateTreeDndItemOptions<TNode extends TreeNodeData> {
@@ -174,4 +177,6 @@ function getDropIndicatorStyle(element: HTMLElement | null, indicatorOffset: num
   }
 }
 
-export type CreateTreeDndItemReturn<TNode extends TreeNodeData = TreeNodeData> = ReturnType<typeof createTreeDndItem<TNode>>
+export type CreateTreeDndItemReturn<TNode extends TreeNodeData = TreeNodeData> = ReturnType<
+  typeof createTreeDndItem<TNode>
+>

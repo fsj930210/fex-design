@@ -1,5 +1,5 @@
-import fs from "node:fs"
-import path from "node:path"
+import fs from 'node:fs'
+import path from 'node:path'
 import {
   detectFramework,
   findMasterRepoRoot,
@@ -8,11 +8,11 @@ import {
   resolveTargetProjectDir,
   resolveLocalSchemaPath,
   saveComponentsConfig,
-} from "../config.ts"
-import { ensureDependencies } from "../pm.ts"
-import { UTILS_TEMPLATE } from "../registry.ts"
-import { injectThemeVariables } from "../theme.ts"
-import type { ComponentsConfig, Framework } from "../types.ts"
+} from '../config.ts'
+import { ensureDependencies } from '../pm.ts'
+import { UTILS_TEMPLATE } from '../registry.ts'
+import { injectThemeVariables } from '../theme.ts'
+import type { ComponentsConfig, Framework } from '../types.ts'
 
 interface InitOptions {
   framework?: string | undefined
@@ -43,19 +43,19 @@ export async function runInit(options: InitOptions): Promise<void> {
     $schema: resolveLocalSchemaPath(targetDir, masterRepoRoot),
     framework,
     tailwind: {
-      version: "v4",
-      css: "src/index.css",
-      baseColor: "neutral",
+      version: 'v4',
+      css: 'src/index.css',
+      baseColor: 'neutral',
     },
     aliases: {
-      components: "@/components",
-      ui: "@/components/ui",
-      primitive: "@/components/primitive",
-      pro: "@/components/pro",
-      hooks: "@/hooks",
-      utils: "@/lib/utils",
-      lib: "@/lib",
-      icons: "@/components/icons",
+      components: '@/components',
+      ui: '@/components/ui',
+      primitive: '@/components/primitive',
+      pro: '@/components/pro',
+      hooks: '@/hooks',
+      utils: '@/lib/utils',
+      lib: '@/lib',
+      icons: '@/components/icons',
     },
   }
 
@@ -63,14 +63,14 @@ export async function runInit(options: InitOptions): Promise<void> {
   console.log(`  ✔ Wrote configuration: components.json`)
 
   // Clean up legacy fex.json if present
-  const legacyFexJson = path.join(targetDir, "fex.json")
+  const legacyFexJson = path.join(targetDir, 'fex.json')
   if (fs.existsSync(legacyFexJson)) {
     fs.unlinkSync(legacyFexJson)
     console.log(`  ✔ Migrated and removed legacy fex.json`)
   }
 
   // 2. Inject CSS variables & theme tokens
-  const themeInjected = injectThemeVariables(targetDir, config.tailwind.css)
+  const themeInjected = injectThemeVariables(targetDir, config.tailwind.css, masterRepoRoot)
   if (themeInjected) {
     console.log(`  ✔ Injected CSS theme variables into: ${config.tailwind.css}`)
   } else {
@@ -81,21 +81,20 @@ export async function runInit(options: InitOptions): Promise<void> {
   const utilsPhysicalPath = resolveAliasToPhysicalDir(
     targetDir,
     config.aliases.utils,
-    masterRepoRoot
+    masterRepoRoot,
   )
-  const utilsFile = utilsPhysicalPath.endsWith(".ts")
+  const utilsFile = utilsPhysicalPath.endsWith('.ts')
     ? utilsPhysicalPath
     : fs.existsSync(utilsPhysicalPath) && fs.statSync(utilsPhysicalPath).isDirectory()
-      ? path.join(utilsPhysicalPath, "index.ts")
+      ? path.join(utilsPhysicalPath, 'index.ts')
       : `${utilsPhysicalPath}.ts`
 
   fs.mkdirSync(path.dirname(utilsFile), { recursive: true })
-  fs.writeFileSync(utilsFile, UTILS_TEMPLATE, "utf-8")
+  fs.writeFileSync(utilsFile, UTILS_TEMPLATE, 'utf-8')
   console.log(`  ✔ Generated utilities: ${path.relative(targetDir, utilsFile)}`)
 
   // 4. Ensure base dependencies
-  ensureDependencies(targetDir, ["clsx", "tailwind-merge", "class-variance-authority"])
+  ensureDependencies(targetDir, ['clsx', 'tailwind-merge', 'class-variance-authority'])
 
   console.log(`\n🎉 Project initialized! Run "fex add <component>" to add components.\n`)
 }
-

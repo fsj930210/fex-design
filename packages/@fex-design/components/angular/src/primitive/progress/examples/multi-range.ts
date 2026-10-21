@@ -8,6 +8,4 @@ import { Progress, ProgressTrack, ProgressRange } from '@fex-design/angular/prim
   imports: [Progress, ProgressTrack, ProgressRange],
   templateUrl: './multi-range.html',
 })
-export class ProgressPrimitiveMultiRangeExample {
-
-}
+export class ProgressPrimitiveMultiRangeExample {}

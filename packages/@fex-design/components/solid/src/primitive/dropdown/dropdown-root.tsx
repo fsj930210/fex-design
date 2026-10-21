@@ -1,4 +1,4 @@
-import { PopoverRoot, type PopoverRootProps } from "../popover"
+import { PopoverRoot, type PopoverRootProps } from '../popover'
 
 export type DropdownRootProps = PopoverRootProps
 

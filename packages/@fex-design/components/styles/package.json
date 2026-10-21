@@ -28,6 +28,7 @@
     "./date-picker": "./src/date-picker.ts",
     "./empty": "./src/empty.ts",
     "./field": "./src/field.ts",
+    "./form-treatment": "./src/form-treatment.ts",
     "./input": "./src/input.ts",
     "./input-otp": "./src/input-otp.ts",
     "./input-number": "./src/input-number.ts",

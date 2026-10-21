@@ -56,8 +56,8 @@ export class InputRoot implements OnInit {
   private focusElement?: HTMLInputElement
   readonly currentValue = () => this.value() ?? this.uncontrolledValue()
   readonly canClear = () => this.currentValue() !== '' && !this.disabled() && !this.readOnly()
-  protected readonly hostClassName = createHostClassName(() =>
-    inputRootClassName({ size: this.size(), variant: this.variant() }),
+  protected readonly hostClassName = createHostClassName(
+    () => inputRootClassName({ size: this.size(), variant: this.variant() }),
     () => this.class(),
   )
   ngOnInit() {
@@ -110,14 +110,16 @@ export class InputControl {
   readonly readOnly = input(false, { alias: 'readonly', transform: booleanAttribute })
   readonly root = inject(InputRoot)
   readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement
-  protected readonly hostClassName = createHostClassName(inputControlClassName, () => cn(this.initialClass, this.class(), this.inputProps()?.class))
+  protected readonly hostClassName = createHostClassName(inputControlClassName, () =>
+    cn(this.initialClass, this.class(), this.inputProps()?.class),
+  )
   constructor() {
     this.root.setFocusElement(this.element)
     connectInputAttributes(this.inputProps)
-    listenNativeEvent('click', event => this.inputProps()?.onClick?.(event))
-    listenNativeEvent('focus', event => this.inputProps()?.onFocus?.(event))
-    listenNativeEvent('blur', event => this.inputProps()?.onBlur?.(event))
-    listenNativeEvent('input', event => this.onInput(event))
+    listenNativeEvent('click', (event) => this.inputProps()?.onClick?.(event))
+    listenNativeEvent('focus', (event) => this.inputProps()?.onFocus?.(event))
+    listenNativeEvent('blur', (event) => this.inputProps()?.onBlur?.(event))
+    listenNativeEvent('input', (event) => this.onInput(event))
   }
   onInput(event: Event) {
     this.inputProps()?.onInput?.(event)

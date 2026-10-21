@@ -1,6 +1,4 @@
-import {
-  stepIndicatorClassName,
-} from '@fex-design/components-styles/steps'
+import { stepIndicatorClassName } from '@fex-design/components-styles/steps'
 import { cn } from '@fex-design/utils'
 import type { HTMLAttributes, ReactNode } from 'react'
 import { CheckIcon } from '@fex-design/react/icons/check'

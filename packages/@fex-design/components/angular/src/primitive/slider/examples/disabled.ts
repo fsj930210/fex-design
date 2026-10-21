@@ -24,4 +24,3 @@ export class SliderDisabledExample {
     console.info(value)
   }
 }
-

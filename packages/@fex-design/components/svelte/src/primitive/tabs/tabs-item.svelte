@@ -7,7 +7,7 @@
   import { getContext, type Snippet } from "svelte";
   import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
   import { tabsContextKey, type TabsContextValue } from "./context";
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
     value: string;
     disabled?: boolean | undefined;

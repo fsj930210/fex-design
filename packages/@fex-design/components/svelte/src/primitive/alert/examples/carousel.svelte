@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { Alert, AlertIcon, AlertDescription } from '@fex-design/svelte/primitive/alert'
-  import TriangleAlertIcon from '@fex-design/svelte/icons/triangle-alert.svelte';
+  import {
+    Alert,
+    AlertIcon,
+    AlertDescription,
+  } from "@fex-design/svelte/primitive/alert";
+  import TriangleAlertIcon from "@fex-design/svelte/icons/triangle-alert.svelte";
 </script>
 
 <Alert type="warning" class="overflow-hidden">

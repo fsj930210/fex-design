@@ -3,11 +3,12 @@
 @import './theme.css';
 @import './themes/light.css';
 @import './themes/dark.css';
-@import './components-token.css';
 @import './globals.css';
 @import './animations.css';
 @import './utilities.css';
+@import './form-appearance.css';
 
 @source "../../../apps";
 @source "../../../docs/site/src";
+@source "../../../../docs/shared/src";
 @source "../../@fex-design";

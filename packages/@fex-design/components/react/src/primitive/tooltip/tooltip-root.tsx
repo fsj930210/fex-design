@@ -1,14 +1,11 @@
-import { useId, useRef, useState, type ReactNode } from "react"
-import {
-  createTooltip,
-  type TooltipOptions,
-} from "@fex-design/core/tooltip/create-tooltip"
-import { shallowEqualObject } from "@fex-design/utils"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
-import { useLazyRef } from "@fex-design/react/hooks/use-lazy-ref"
-import { useMemoizedFn } from "@fex-design/react/hooks/use-memoized-fn"
-import useUnmount from "@fex-design/react/hooks/use-unmount"
-import { TooltipContext } from "./tooltip-context"
+import { useId, useRef, useState, type ReactNode } from 'react'
+import { createTooltip, type TooltipOptions } from '@fex-design/core/tooltip/create-tooltip'
+import { shallowEqualObject } from '@fex-design/utils'
+import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
+import useUnmount from '@fex-design/react/hooks/use-unmount'
+import { TooltipContext } from './tooltip-context'
 
 export interface TooltipRootProps extends TooltipOptions {
   children?: ReactNode
@@ -23,7 +20,7 @@ export function TooltipRoot({
 }: TooltipRootProps) {
   const controlled = openProp !== undefined
   const [localOpen, setLocalOpen] = useState(defaultOpen ?? false)
-  const handleOpenChange = useMemoizedFn<NonNullable<TooltipOptions["onOpenChange"]>>(
+  const handleOpenChange = useMemoizedFn<NonNullable<TooltipOptions['onOpenChange']>>(
     (open, info) => {
       if (!controlled) setLocalOpen(open)
       onOpenChange?.(open, info)
@@ -37,7 +34,7 @@ export function TooltipRoot({
   const overlayRef = useLazyRef(() => createTooltip(options))
   const latestOptions = useRef(options)
   const triggerRef = useRef<HTMLElement | null>(null)
-  const contentId = `tooltip-${useId().replaceAll(":", "")}`
+  const contentId = `tooltip-${useId().replaceAll(':', '')}`
   const overlay = overlayRef.current
   useIsomorphicLayoutEffect(() => {
     if (shallowEqualObject(latestOptions.current, options)) return

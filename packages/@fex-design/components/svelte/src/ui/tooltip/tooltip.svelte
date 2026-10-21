@@ -9,11 +9,11 @@
   } from "@fex-design/core/tooltip/create-tooltip";
   import { cn } from "@fex-design/utils";
   import { splitTooltipOptions } from "@fex-design/core/tooltip/options";
-  import TooltipRoot from '@fex-design/svelte/primitive/tooltip/tooltip.svelte';
-  import TooltipArrow from '@fex-design/svelte/primitive/tooltip/tooltip-arrow.svelte';
-  import TooltipContent from '@fex-design/svelte/primitive/tooltip/tooltip-content.svelte';
-  import TooltipPortal from '@fex-design/svelte/primitive/tooltip/tooltip-portal.svelte';
-  import TooltipTrigger from '@fex-design/svelte/primitive/tooltip/tooltip-trigger.svelte';
+  import TooltipRoot from "@fex-design/svelte/primitive/tooltip/tooltip.svelte";
+  import TooltipArrow from "@fex-design/svelte/primitive/tooltip/tooltip-arrow.svelte";
+  import TooltipContent from "@fex-design/svelte/primitive/tooltip/tooltip-content.svelte";
+  import TooltipPortal from "@fex-design/svelte/primitive/tooltip/tooltip-portal.svelte";
+  import TooltipTrigger from "@fex-design/svelte/primitive/tooltip/tooltip-trigger.svelte";
 
   type TooltipTriggerBinding = {
     action: (element: HTMLElement) => { destroy: () => void };

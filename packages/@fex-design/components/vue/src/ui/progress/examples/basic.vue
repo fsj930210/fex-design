@@ -2,7 +2,6 @@
 import { Progress } from '@fex-design/vue/ui/progress'
 
 defineOptions({ name: 'ProgressBasicExample' })
-
 </script>
 
 <template>

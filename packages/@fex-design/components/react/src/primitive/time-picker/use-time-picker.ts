@@ -6,7 +6,9 @@ import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
 
 export function useTimePicker(options: TimePickerControllerOptions = {}) {
-  const onChange = useMemoizedFn<NonNullable<TimePickerControllerOptions['onChange']>>((value, details) => options.onChange?.(value, details))
+  const onChange = useMemoizedFn<NonNullable<TimePickerControllerOptions['onChange']>>(
+    (value, details) => options.onChange?.(value, details),
+  )
   const controller = useLazyRef(() => createTimePickerController({ ...options, onChange })).current
   const snapshot = useCoreStore(controller)
   // Props synchronize the external controller after commit; core deduplicates snapshots.

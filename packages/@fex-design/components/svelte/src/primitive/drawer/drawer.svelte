@@ -5,7 +5,7 @@
     type DrawerSize,
   } from "@fex-design/core/drawer/create-drawer-controller";
   import { getContext, onDestroy, setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { drawerContextKey, type DrawerContextValue } from "./drawer-context";
 
   interface Props extends DrawerOptions {

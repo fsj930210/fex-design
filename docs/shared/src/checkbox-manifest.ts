@@ -1,5 +1,12 @@
 export const checkboxExamples = {
   primitive: [
+    {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
     { id: 'basic', title: '基础用法', description: '未选中与默认选中的 Checkbox。' },
     { id: 'states', title: '状态', description: '对照未选中、已选中、中间状态和禁用状态。' },
     { id: 'sizes', title: '尺寸', description: '对照 sm、md 和 lg 三种尺寸。' },
@@ -30,8 +37,21 @@ export const checkboxExamples = {
       title: '实例 CSS Variables',
       description: '覆盖单个 Checkbox 的尺寸、背景和标记颜色。',
     },
+    {
+      id: 'semantic-styles',
+      title: '结构化样式',
+      description: '按部件归属设置 class/style，组合部件通过直接子组件 API 定制。',
+      height: 440,
+    },
   ],
   ui: [
+    {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description:
+        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
+      height: 1100,
+    },
     { id: 'basic', title: '基础用法', description: '未选中与默认选中的 Checkbox。' },
     { id: 'states', title: '状态', description: '对照未选中、已选中、中间状态和禁用状态。' },
     { id: 'sizes', title: '尺寸', description: '对照 sm、md 和 lg 三种尺寸。' },

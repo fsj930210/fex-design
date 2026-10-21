@@ -1,34 +1,42 @@
-<span inputPrefix [class]="prefixClassName()" [style]="styles()?.prefix">
-    <ng-content select="[inputNumberPrefix]" />
-  </span>
-  <input
-    inputNumberControl
-    [id]="id()"
-    [name]="name()"
-    [placeholder]="placeholder()"
-    [required]="required()"
-    [attr.aria-invalid]="invalid() || null"
-    [attr.aria-describedby]="describedBy() || null"
-    [class]="classNames()?.control"
-    [style]="styles()?.control"
-  />
-  @if (clearable()) {
-  <button inputNumberClear [class]="classNames()?.clear" [style]="styles()?.clear"></button>
-  }
-  <span inputSuffix [class]="suffixClassName()" [style]="styles()?.suffix">
-    <ng-content select="[inputNumberSuffix]" />
-  </span>
-  @if (controls()) {
-  <span inputNumberActions [class]="classNames()?.actions" [style]="styles()?.actions">
-    <button
-      inputNumberIncrement
-      [class]="classNames()?.increment"
-      [style]="styles()?.increment"
-    ></button>
-    <button
-      inputNumberDecrement
-      [class]="classNames()?.decrement"
-      [style]="styles()?.decrement"
-    ></button>
-  </span>
-  }
+<span inputPrefix [class]="prefixClassName()" [style]="prefixStyle()">
+  <ng-content select="[inputNumberPrefix]" />
+</span>
+<input
+  inputNumberControl
+  [id]="id()"
+  [name]="name()"
+  [placeholder]="placeholder()"
+  [required]="required()"
+  [attr.aria-invalid]="invalid() || null"
+  [attr.aria-describedby]="describedBy() || null"
+  [class]="cn(classNames()?.control, controlProps()?.class)"
+  [style]="mergeStyle(styles()?.control, controlProps()?.style)"
+/>
+@if (clearable()) {
+<button
+  inputNumberClear
+  [class]="cn(classNames()?.clear, clearProps()?.class)"
+  [style]="mergeStyle(styles()?.clear, clearProps()?.style)"
+></button>
+}
+<span inputSuffix [class]="suffixClassName()" [style]="suffixStyle()">
+  <ng-content select="[inputNumberSuffix]" />
+</span>
+@if (controls()) {
+<span
+  inputNumberActions
+  [class]="cn(classNames()?.actions, actionsProps()?.class)"
+  [style]="mergeStyle(styles()?.actions, actionsProps()?.style)"
+>
+  <button
+    inputNumberIncrement
+    [class]="cn(classNames()?.increment, incrementProps()?.class)"
+    [style]="mergeStyle(styles()?.increment, incrementProps()?.style)"
+  ></button>
+  <button
+    inputNumberDecrement
+    [class]="cn(classNames()?.decrement, decrementProps()?.class)"
+    [style]="mergeStyle(styles()?.decrement, decrementProps()?.style)"
+  ></button>
+</span>
+}

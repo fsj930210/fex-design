@@ -1,5 +1,5 @@
-import type { CheckboxValue } from "@fex-design/core/checkbox/types"
-import { createContext } from "react"
+import type { CheckboxValue } from '@fex-design/core/checkbox/types'
+import { createContext } from 'react'
 
 export interface RootContextValue {
   controlId: string

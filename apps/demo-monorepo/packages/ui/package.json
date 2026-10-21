@@ -5,11 +5,11 @@
   "dependencies": {
     "@demo/hooks": "workspace:*",
     "@demo/utils": "workspace:*",
+    "@floating-ui/dom": "^1.6.13",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.0.0",
-    "@floating-ui/dom": "^1.6.13"
+    "tailwind-merge": "^3.0.0"
   }
 }

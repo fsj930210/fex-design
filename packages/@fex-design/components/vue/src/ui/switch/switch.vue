@@ -10,6 +10,22 @@ import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitiv
 import { Spinner } from '@fex-design/vue/primitive/spinner'
 defineOptions({ name: 'Switch', inheritAttrs: false })
 const props = defineProps({
+  checkedContentProps: {
+    type: Object as PropType<Omit<InstanceType<typeof SwitchContent>['$props'], 'state'>>,
+    default: undefined,
+  },
+  uncheckedContentProps: {
+    type: Object as PropType<Omit<InstanceType<typeof SwitchContent>['$props'], 'state'>>,
+    default: undefined,
+  },
+  thumbProps: {
+    type: Object as PropType<InstanceType<typeof SwitchThumb>['$props']>,
+    default: undefined,
+  },
+  spinnerProps: {
+    type: Object as PropType<Omit<InstanceType<typeof Spinner>['$props'], 'aria-hidden'>>,
+    default: undefined,
+  },
   checked: { type: Boolean, default: undefined },
   defaultChecked: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
@@ -48,20 +64,25 @@ defineExpose({ element })
   >
     <SwitchContent
       v-if="$slots.checkedContent"
+      v-bind="props.checkedContentProps"
       state="checked"
-      :class="props.classNames.content"
-      :style="props.styles.content"
+      :class="[props.classNames.content, props.checkedContentProps?.class]"
+      :style="[props.styles.content, props.checkedContentProps?.style]"
       ><slot name="checkedContent"
     /></SwitchContent>
     <SwitchContent
       v-if="$slots.uncheckedContent"
+      v-bind="props.uncheckedContentProps"
       state="unchecked"
-      :class="props.classNames.content"
-      :style="props.styles.content"
+      :class="[props.classNames.content, props.uncheckedContentProps?.class]"
+      :style="[props.styles.content, props.uncheckedContentProps?.style]"
       ><slot name="uncheckedContent"
     /></SwitchContent>
-    <SwitchThumb :class="props.classNames.thumb" :style="props.styles.thumb"
-      ><Spinner v-if="props.loading" aria-hidden="true"
+    <SwitchThumb
+      v-bind="props.thumbProps"
+      :class="[props.classNames.thumb, props.thumbProps?.class]"
+      :style="[props.styles.thumb, props.thumbProps?.style]"
+      ><Spinner v-if="props.loading" v-bind="props.spinnerProps" aria-hidden="true"
     /></SwitchThumb>
   </SwitchRoot>
 </template>

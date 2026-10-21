@@ -3,7 +3,9 @@ import { cn } from '@fex-design/utils'
 import type { JSX } from 'solid-js'
 import { useColorPicker } from './color-picker-context'
 
-export type ColorPickerSwatchProps = JSX.HTMLAttributes<HTMLSpanElement> & { color?: string | undefined }
+export type ColorPickerSwatchProps = JSX.HTMLAttributes<HTMLSpanElement> & {
+  color?: string | undefined
+}
 
 export function ColorPickerSwatch(props: ColorPickerSwatchProps) {
   const picker = useColorPicker()

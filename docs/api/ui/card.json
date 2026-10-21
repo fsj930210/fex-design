@@ -21,6 +21,36 @@
       "name": "styles",
       "type": "Partial<Record<'root' | 'header' | 'title' | 'description' | 'extra' | 'content' | 'footer', CSSProperties>>",
       "description": "按语义区域快速追加内联样式。"
+    },
+    {
+      "name": "headerProps",
+      "type": "CardHeader configuration",
+      "description": "对应直接子组件的原生配置。"
+    },
+    {
+      "name": "titleProps",
+      "type": "CardTitle configuration",
+      "description": "对应直接子组件的原生配置。"
+    },
+    {
+      "name": "descriptionProps",
+      "type": "CardDescription configuration",
+      "description": "对应直接子组件的原生配置。"
+    },
+    {
+      "name": "extraProps",
+      "type": "CardExtra configuration",
+      "description": "对应直接子组件的原生配置。"
+    },
+    {
+      "name": "contentProps",
+      "type": "CardContent configuration",
+      "description": "对应直接子组件的原生配置。"
+    },
+    {
+      "name": "footerProps",
+      "type": "CardFooter configuration",
+      "description": "对应直接子组件的原生配置。"
     }
   ],
   "events": [],
@@ -310,11 +340,7 @@
       "title": "自定义 Header",
       "description": "完整替换默认 Header。"
     },
-    {
-      "id": "styling",
-      "title": "结构化样式",
-      "description": "用高对比区域展示 classNames 与 styles。"
-    },
+
     {
       "id": "css-variables",
       "title": "实例 CSS Variables",
@@ -322,6 +348,12 @@
     },
     {
       "id": "direction"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ]
 }

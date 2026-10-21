@@ -2,7 +2,10 @@ import { sortableClassName } from '@fex-design/components-styles/sortable'
 import { cn } from '@fex-design/utils'
 import type { SortableAxis, SortableItems } from '@fex-design/core/sortable/types'
 import { createMemo, type JSX } from 'solid-js'
-import { createSortable, type CreateSortableOptions } from '@fex-design/solid/primitives/create-sortable'
+import {
+  createSortable,
+  type CreateSortableOptions,
+} from '@fex-design/solid/primitives/create-sortable'
 import { SortableContext, type SortableContextValue } from './sortable-context'
 
 export interface SortableRootProps<TItems extends SortableItems> {

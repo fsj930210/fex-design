@@ -1,1 +1,22 @@
-<div select class="w-72 [--input-background:#faf5ff] [--input-border-color:#c084fc] [--input-ring-color:#9333ea]" [options]="options"></div>
+<div class="grid w-full gap-4">
+  <div
+    select
+    class="w-72 max-w-full"
+    [options]="options"
+    placeholder="请选择框架"
+    [inputProps]="inputProps"
+    [triggerProps]="triggerProps"
+    [contentProps]="contentProps"
+  ></div>
+  <div
+    select
+    class="w-72 max-w-full"
+    [options]="options"
+    [multiple]="true"
+    [defaultValue]="['react','vue']"
+    [maxTagCount]="1"
+    [inputProps]="inputProps"
+    [triggerProps]="{class:triggerProps.class,valueProps:valueProps}"
+    [contentProps]="contentProps"
+  ></div>
+</div>

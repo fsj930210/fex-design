@@ -5,7 +5,7 @@
   } from "@fex-design/core/dialog/create-dialog-controller";
   import type { Snippet } from "svelte";
   import { onDestroy, setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { dialogContextKey } from "./dialog-context";
 
   interface DialogProps extends DialogOptions {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Separator } from '@fex-design/svelte/primitive/separator'
+  import { Separator } from "@fex-design/svelte/primitive/separator";
 </script>
 
 <div class="flex w-full justify-center h-5 items-center gap-2">

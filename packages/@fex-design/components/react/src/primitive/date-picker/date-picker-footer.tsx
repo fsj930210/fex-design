@@ -41,11 +41,30 @@ export function DatePickerFooter({ className, style, children, ...props }: DateP
       data-slot="date-picker-footer"
       className={cn(datePickerFooterClassName, appearance.classNames?.footer, className)}
     >
-      {getPickerContentKind(children) === 'default' ? <>
-        <DatePickerToday className={appearance.classNames?.today} style={appearance.styles?.today} />
-        {context.footerView.showCancel ? <DatePickerCancel className={appearance.classNames?.cancel} style={appearance.styles?.cancel} /> : null}
-        {context.footerView.showConfirm ? <DatePickerConfirm className={appearance.classNames?.confirm} style={appearance.styles?.confirm} /> : null}
-      </> : typeof children === 'function' ? children(actions) : children}
+      {getPickerContentKind(children) === 'default' ? (
+        <>
+          <DatePickerToday
+            className={appearance.classNames?.today}
+            style={appearance.styles?.today}
+          />
+          {context.footerView.showCancel ? (
+            <DatePickerCancel
+              className={appearance.classNames?.cancel}
+              style={appearance.styles?.cancel}
+            />
+          ) : null}
+          {context.footerView.showConfirm ? (
+            <DatePickerConfirm
+              className={appearance.classNames?.confirm}
+              style={appearance.styles?.confirm}
+            />
+          ) : null}
+        </>
+      ) : typeof children === 'function' ? (
+        children(actions)
+      ) : (
+        children
+      )}
     </div>
   )
 }

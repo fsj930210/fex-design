@@ -1,8 +1,14 @@
 import type { Snippet } from 'svelte'
 import type { HTMLAttributes } from 'svelte/elements'
 import type {
-  ProgressRangeItem, ProgressColor, ProgressGapPlacement, ProgressInfoPlacement, ProgressLinecap,
-  ProgressSize, ProgressStatus, ProgressVariant,
+  ProgressRangeItem,
+  ProgressColor,
+  ProgressGapPlacement,
+  ProgressInfoPlacement,
+  ProgressLinecap,
+  ProgressSize,
+  ProgressStatus,
+  ProgressVariant,
 } from '@fex-design/core/progress/types'
 
 export type ProgressProps = HTMLAttributes<HTMLDivElement> & {

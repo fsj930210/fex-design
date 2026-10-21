@@ -1,7 +1,16 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
 export const sliderRootClassName = cva(
-  'relative cursor-pointer touch-none select-none [--slider-track-background:var(--color-border)] [--slider-range-background:var(--color-primary)] [--slider-disabled-range-background:var(--color-muted-foreground)] [--slider-thumb-background:var(--color-background)] [--slider-thumb-border-color:var(--color-primary)] [--slider-mark-color:var(--color-muted-foreground)] data-[disabled]:cursor-not-allowed data-[disabled]:[&_*]:cursor-not-allowed',
+  [
+    'relative cursor-pointer touch-none select-none [--slider-track-background:var(--color-border)] [--slider-range-background:var(--color-primary)] [--slider-disabled-range-background:var(--color-muted-foreground)] [--slider-thumb-background:var(--color-background)] [--slider-thumb-border-color:var(--color-primary)] [--slider-mark-color:var(--color-muted-foreground)] data-[disabled]:cursor-not-allowed data-[disabled]:[&_*]:cursor-not-allowed',
+    // Slider paints through vars consumed by the native thumb pseudo-element,
+    // so the treatment feeds accent vars from the surface attributes. The
+    // semantic error source is `aria-invalid` on the root surface (the slider
+    // has no native input); `has-` also covers descendant-placed attributes.
+    'aria-invalid=true:[--slider-range-background:var(--danger)] aria-invalid=true:[--slider-thumb-border-color:var(--danger)]',
+    'has-[[aria-invalid=true]]:[--slider-range-background:var(--danger)] has-[[aria-invalid=true]]:[--slider-thumb-border-color:var(--danger)]',
+    'data-[warning=true]:[--slider-range-background:var(--warning)] data-[warning=true]:[--slider-thumb-border-color:var(--warning)]',
+  ].join(' '),
   {
     variants: {
       size: {

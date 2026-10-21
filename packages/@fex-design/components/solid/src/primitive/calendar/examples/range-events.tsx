@@ -16,11 +16,15 @@ export function RangeEventsExample() {
         classNames={{ cell: 'px-0', cellContent: 'overflow-visible' }}
         cellRender={({ cell }) => {
           const event = () => calendarDemoEvent(cell)
-          return <Show when={event()}>{item => (
-            <div class="bg-primary text-primary-foreground px-2" data-segment={item().segment}>
-              {item().label}
-            </div>
-          )}</Show>
+          return (
+            <Show when={event()}>
+              {(item) => (
+                <div class="bg-primary text-primary-foreground px-2" data-segment={item().segment}>
+                  {item().label}
+                </div>
+              )}
+            </Show>
+          )
         }}
       />
     </CalendarRoot>

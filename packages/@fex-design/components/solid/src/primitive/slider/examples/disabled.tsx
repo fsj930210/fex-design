@@ -44,7 +44,10 @@ export default function Example() {
         <div class="flex flex-wrap gap-4">
           <For each={disabledThumbs()}>
             {(checked, index) => (
-              <CheckboxRoot class="inline-flex items-center gap-2"><CheckboxControl checked={checked} onChange={() => toggle(index())} /><CheckboxLabel>Thumb {index() + 1}</CheckboxLabel></CheckboxRoot>
+              <CheckboxRoot class="inline-flex items-center gap-2">
+                <CheckboxControl checked={checked} onChange={() => toggle(index())} />
+                <CheckboxLabel>Thumb {index() + 1}</CheckboxLabel>
+              </CheckboxRoot>
             )}
           </For>
         </div>
@@ -53,4 +56,3 @@ export default function Example() {
     </div>
   )
 }
-

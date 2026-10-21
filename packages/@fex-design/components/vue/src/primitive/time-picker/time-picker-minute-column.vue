@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { TimePickerColumnCustomization } from './column-customization'
 import { createMinuteOptions, resolveDisabledTime } from '@fex-design/core/time-picker/options'
 import { computed, inject } from 'vue'
 import { timePickerContextKey } from './context'
 import TimePickerColumn from './time-picker-column.vue'
 defineOptions({ name: 'TimePickerMinuteColumn' })
 const props = defineProps<{
+  columnProps?: TimePickerColumnCustomization | undefined
   step?: number | undefined
   disabled?: boolean | undefined
   isItemDisabled?: ((value: number) => boolean) | undefined
@@ -23,6 +25,7 @@ const options = computed(() =>
 </script>
 <template>
   <TimePickerColumn
+    v-bind="columnProps"
     :options="options"
     :selected-value="context.snapshot.value.value?.minute"
     :disabled="disabled"

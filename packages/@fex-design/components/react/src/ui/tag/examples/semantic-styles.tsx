@@ -3,6 +3,7 @@ import { Tag } from '@fex-design/react/ui/tag'
 export default function SemanticStyles() {
   return (
     <Tag
+      actionProps={{ className: 'rounded text-violet-700 hover:bg-violet-200' }}
       closable
       color="primary"
       classNames={{ root: 'border-dashed', close: 'hover:opacity-80' }}

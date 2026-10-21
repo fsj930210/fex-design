@@ -1,5 +1,10 @@
 import { createCheckboxGroupController } from '@fex-design/core/checkbox/create-checkbox-group-controller'
-import type { CheckboxGroupChangeMeta, CheckboxGroupController, CheckboxGroupSnapshot, CheckboxValue } from '@fex-design/core/checkbox/types'
+import type {
+  CheckboxGroupChangeMeta,
+  CheckboxGroupController,
+  CheckboxGroupSnapshot,
+  CheckboxValue,
+} from '@fex-design/core/checkbox/types'
 import {
   checkboxCheckIconClassName,
   checkboxControlClassName,
@@ -9,8 +14,8 @@ import {
   checkboxMinusIconClassName,
   checkboxRootClassName,
 } from '@fex-design/components-styles/checkbox'
-  import { CheckIcon } from '@fex-design/angular/icons/check'
-  import { MinusIcon } from '@fex-design/angular/icons/minus'
+import { CheckIcon } from '@fex-design/angular/icons/check'
+import { MinusIcon } from '@fex-design/angular/icons/minus'
 import { cn } from '@fex-design/utils'
 import {
   booleanAttribute,
@@ -125,17 +130,16 @@ export class CheckboxControl implements OnInit {
   readonly root = inject(CheckboxRoot, { optional: true })
   readonly group = inject(CheckboxGroup, { optional: true })
   private readonly internalChecked = signal(false)
-  ngOnInit() { this.internalChecked.set(this.defaultChecked()) }
+  ngOnInit() {
+    this.internalChecked.set(this.defaultChecked())
+  }
   protected readonly hostClassName = createHostClassName(() => checkboxControlClassName)
   protected readonly resolvedId = computed(() => this.id() ?? this.root?.controlId)
   private readonly resolvedValue = computed(() => this.value() ?? this.root?.value())
   protected readonly resolvedChecked = computed(() => {
     const value = this.resolvedValue()
     if (this.group && value !== undefined) return this.group.currentValue().includes(value)
-    return (
-      this.checked() ??
-      this.internalChecked()
-    )
+    return this.checked() ?? this.internalChecked()
   })
   protected readonly resolvedDisabled = computed(() =>
     Boolean(this.disabled() || this.root?.disabled() || this.group?.disabled()),
@@ -157,7 +161,7 @@ export class CheckboxControl implements OnInit {
 @Component({
   selector: 'span[checkboxIndicator]',
   standalone: true,
-    imports: [CheckIcon, MinusIcon],
+  imports: [CheckIcon, MinusIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()', 'aria-hidden': 'true', 'data-slot': 'checkbox-indicator' },
   templateUrl: './checkbox-indicator.html',

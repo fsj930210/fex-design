@@ -6,7 +6,7 @@
   } from "@fex-design/core/sortable/types";
   import type { Snippet } from "svelte";
   import { onDestroy, setContext } from "svelte";
-  import { createSortableAction } from '@fex-design/svelte/actions/sortable';
+  import { createSortableAction } from "@fex-design/svelte/actions/sortable";
   import { sortableContextKey, type SortableContext } from "./sortable-context";
 
   interface SortableRootProps<TItems extends SortableItems = SortableItems> {

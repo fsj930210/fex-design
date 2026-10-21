@@ -12,17 +12,17 @@
 
 原有五框架分别维护已提交值、待确认值、开关状态、输入文本和范围端点。公共格式化与范围工具已有复用，但事务处理仍在框架内重复：默认值读取、确认／取消和参数更新没有一个共同入口。
 
-| 边界 | 本次实现 |
-| --- | --- |
+| 边界     | 本次实现                                                                                      |
+| -------- | --------------------------------------------------------------------------------------------- |
 | 缺省参数 | React 不再显式传入 `defaultValue: undefined`；各适配器进入 core 前删除值为 undefined 的可选项 |
-| 默认值 | 仅 core 决定默认值；defaultValue/defaultOpen 仅在创建时读取 |
-| 清除 | DatePicker、RangePicker 统一使用 `clearable`；清除动作立即提交空值，不关闭面板 |
-| 选择事务 | 单选、多选、范围、约束检查、确认、取消统一进入 core controller |
-| 受控状态 | 由传入的 value/open 决定；动作通知调用方，不私自替换受控值 |
-| 参数更新 | 新 value/open 和配置经同一 setOptions 协议更新；普通参数更新不触发业务回调 |
-| 禁用 | disabled 阻止打开、选择、清除、标签移除和确认；默认 Input 始终只读 |
-| 范围 | 端点推进、order、allowEmpty、hover 预览由同一内核处理 |
-| 框架差异 | 仅保留原生 props、事件、响应式订阅、生命周期、引用和内容投影的表达差异 |
+| 默认值   | 仅 core 决定默认值；defaultValue/defaultOpen 仅在创建时读取                                   |
+| 清除     | DatePicker、RangePicker 统一使用 `clearable`；清除动作立即提交空值，不关闭面板                |
+| 选择事务 | 单选、多选、范围、约束检查、确认、取消统一进入 core controller                                |
+| 受控状态 | 由传入的 value/open 决定；动作通知调用方，不私自替换受控值                                    |
+| 参数更新 | 新 value/open 和配置经同一 setOptions 协议更新；普通参数更新不触发业务回调                    |
+| 禁用     | disabled 阻止打开、选择、清除、标签移除和确认；默认 Input 始终只读                            |
+| 范围     | 端点推进、order、allowEmpty、hover 预览由同一内核处理                                         |
+| 框架差异 | 仅保留原生 props、事件、响应式订阅、生命周期、引用和内容投影的表达差异                        |
 
 Vue 用可选 Boolean 的 `default: undefined` 声明阻止框架把未提供的参数转成 false，这是 Vue 的原生 props 声明，业务默认值仍由 core 决定；defaultValue 不声明这种默认值，进入 core 的配置会删除所有 undefined 项。Angular 的可选 Boolean transform 同样保留缺省。Solid 将 children 与逻辑配置分开读取，防止在 Provider 建立前求值子树；触发绑定保留 getter 的响应性。[Vue 官方说明](https://vuejs.org/guide/components/props.html#boolean-casting)
 
@@ -59,12 +59,12 @@ Header、Footer 的公开子部件各自独立实现。默认面板依赖 Calend
 
 ## 替换方式
 
-| 框架 | Trigger | 容器 | 独立逻辑 |
-| --- | --- | --- | --- |
-| React | children 接收 props/ref/state | containerRender(children, state) | useDatePicker / useRangePicker |
-| Vue | 默认 scoped slot 接收 props/ref/state | Root 的 container slot | useDatePicker / useRangePicker |
-| Solid | children 接收响应式 props/ref/state | containerRender(children, state) | useDatePicker / useRangePicker |
-| Svelte | children snippet 接收 props/action/state | Root 的 container snippet | useDatePicker / useRangePicker |
+| 框架    | Trigger                                       | 容器                                             | 独立逻辑                           |
+| ------- | --------------------------------------------- | ------------------------------------------------ | ---------------------------------- |
+| React   | children 接收 props/ref/state                 | containerRender(children, state)                 | useDatePicker / useRangePicker     |
+| Vue     | 默认 scoped slot 接收 props/ref/state         | Root 的 container slot                           | useDatePicker / useRangePicker     |
+| Solid   | children 接收响应式 props/ref/state           | containerRender(children, state)                 | useDatePicker / useRangePicker     |
+| Svelte  | children snippet 接收 props/action/state      | Root 的 container snippet                        | useDatePicker / useRangePicker     |
 | Angular | Trigger 的 TemplateRef 接收 state/trigger/ref | Root 的 container TemplateRef 接收 state/content | DatePickerState / RangePickerState |
 
 替换 Calendar 时，可以替换 Panel 内部内容，或直接消费公开逻辑绘制自己的面板。替换容器时，容器负责显示、定位、焦点和关闭事件，将关闭请求传回 `setOpen(false)`；日期选择规则继续由同一个 core 执行。

@@ -5,7 +5,7 @@ import { SwitchRoot, SwitchThumb } from '@fex-design/vue/primitive/switch'
 const showZero = ref(false)
 </script>
 <template>
-  <div class="flex items-center gap-6">
+  <div class="flex flex-wrap items-center gap-6">
     <label class="flex items-center gap-2"
       ><SwitchRoot :checked="showZero" aria-label="显示 0" @change="showZero = $event"
         ><SwitchThumb /></SwitchRoot

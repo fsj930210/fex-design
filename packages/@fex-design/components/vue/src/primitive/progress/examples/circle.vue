@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { Progress, ProgressCircle, ProgressCircleTrack, ProgressCircleRange, ProgressValue } from '@fex-design/vue/primitive/progress'
+import {
+  Progress,
+  ProgressCircle,
+  ProgressCircleTrack,
+  ProgressCircleRange,
+  ProgressValue,
+} from '@fex-design/vue/primitive/progress'
 import { CheckIcon } from '@fex-design/vue/icons/check'
 
 defineOptions({ name: 'ProgressPrimitiveCircleExample' })
-
 </script>
 
 <template>
@@ -14,9 +19,7 @@ defineOptions({ name: 'ProgressPrimitiveCircleExample' })
         <ProgressCircleRange class="text-primary" />
       </ProgressCircle>
       <div class="absolute inset-0 flex items-center justify-center">
-        <ProgressValue class="text-sm font-semibold">
-          30%
-        </ProgressValue>
+        <ProgressValue class="text-sm font-semibold"> 30% </ProgressValue>
       </div>
     </Progress>
     <Progress :value="70" variant="circle" :size="96" class="relative">
@@ -25,9 +28,7 @@ defineOptions({ name: 'ProgressPrimitiveCircleExample' })
         <ProgressCircleRange class="text-primary" />
       </ProgressCircle>
       <div class="absolute inset-0 flex items-center justify-center">
-        <ProgressValue class="text-sm font-semibold">
-          70%
-        </ProgressValue>
+        <ProgressValue class="text-sm font-semibold"> 70% </ProgressValue>
       </div>
     </Progress>
     <Progress :value="100" variant="circle" :size="96" class="relative" status="success">
@@ -45,9 +46,7 @@ defineOptions({ name: 'ProgressPrimitiveCircleExample' })
         <ProgressCircleRange class="text-primary" />
       </ProgressCircle>
       <div class="absolute inset-0 flex items-center justify-center">
-        <ProgressValue class="text-sm font-semibold">
-          50%
-        </ProgressValue>
+        <ProgressValue class="text-sm font-semibold"> 50% </ProgressValue>
       </div>
     </Progress>
   </div>

@@ -3,7 +3,6 @@ import StepLineDemo from './_parts/step-line.vue'
 import StepRingDemo from './_parts/step-ring.vue'
 
 defineOptions({ name: 'ProgressPrimitiveSegmentedExample' })
-
 </script>
 
 <template>
@@ -13,7 +12,7 @@ defineOptions({ name: 'ProgressPrimitiveSegmentedExample' })
       <StepLineDemo :active="4" :value="80" />
       <StepLineDemo :active="5" :value="100" />
     </div>
-    <div class="flex items-center gap-6">
+    <div class="flex flex-wrap items-center gap-6">
       <StepRingDemo :value="50" />
       <StepRingDemo :value="80" />
       <StepRingDemo :value="100" />

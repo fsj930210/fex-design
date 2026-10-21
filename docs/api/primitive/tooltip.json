@@ -88,6 +88,12 @@
       "id": "direction",
       "title": "文字方向",
       "description": "对比中文 LTR 与阿拉伯文 RTL 的起始侧对齐。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ],
   "frameworks": {

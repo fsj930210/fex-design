@@ -4,8 +4,7 @@
   data-slot="select-trigger"
   [attr.data-disabled]="select.disabled || null"
   [attr.data-clearable]="select.clearable && select.selectedOptions.length ? 'true' : null"
-  [attr.data-status]="select.status"
-  [attr.aria-invalid]="select.status === 'error' || null"
+  [attr.data-warning]="select.dataWarning || null"
   [attr.aria-expanded]="select.snapshot().open"
   [class]="triggerClass()"
   [style]="inputProps().styles?.root ?? inputProps().style ?? null"
@@ -13,7 +12,17 @@
 >
   <ng-container *ngTemplateOutlet="prefix ?? null" />
   <div [class]="valueContainerClass + ' ' + (inputProps().classNames?.control ?? '')">
-    <div selectValue [placeholder]="placeholder" [maxTagCount]="maxTagCount" [tag]="tag"></div>
+    <div
+      selectValue
+      [class]="valueProps()?.class"
+      [style]="valueProps()?.style"
+      [placeholder]="valueProps()?.placeholder ?? placeholder"
+      [maxTagCount]="valueProps()?.maxTagCount ?? maxTagCount"
+      [tagProps]="valueProps()?.tagProps"
+      [tagActionProps]="valueProps()?.tagActionProps"
+      [overflowTagProps]="valueProps()?.overflowTagProps"
+      [tag]="tag"
+    ></div>
     <input
       role="combobox"
       [attr.name]="inputProps().name ?? null"
@@ -21,6 +30,7 @@
       [attr.inputmode]="inputProps().inputmode ?? null"
       [attr.aria-label]="inputProps()['aria-label'] ?? null"
       [style]="inputProps().styles?.control ?? null"
+      [attr.aria-invalid]="select.ariaInvalid || null"
       [attr.aria-expanded]="select.snapshot().open"
       [attr.aria-controls]="select.listId"
       [disabled]="select.disabled"
@@ -34,19 +44,23 @@
       (input)="input($event)"
     />
   </div>
-  <span data-slot="select-suffix" [class]="suffixClass + ' ' + (inputProps().classNames?.suffix ?? '')">
-    @if (select.loading) { <loading-icon class="animate-spin" /> } @else {
-    @if (suffix) {
-      <span [class]="'inline-flex items-center justify-center ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')">
-        <ng-container *ngTemplateOutlet="suffix" />
-      </span>
+  <span
+    data-slot="select-suffix"
+    [class]="suffixClass + ' ' + (inputProps().classNames?.suffix ?? '')"
+  >
+    @if (select.loading) { <loading-icon class="animate-spin" /> } @else { @if (suffix) {
+    <span
+      [class]="'inline-flex items-center justify-center ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')"
+    >
+      <ng-container *ngTemplateOutlet="suffix" />
+    </span>
     } @else {
-      <span
-        [attr.data-state]="select.snapshot().open ? 'open' : 'closed'"
-        [class]="indicatorClass + ' ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')"
-      ><chevron-down-icon class="size-4" /></span>
-    }
-    @if (select.clearable && select.selectedOptions.length) {
+    <span
+      [attr.data-state]="select.snapshot().open ? 'open' : 'closed'"
+      [class]="indicatorClass + ' ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')"
+      ><chevron-down-icon class="size-4"
+    /></span>
+    } @if (select.clearable && select.selectedOptions.length) {
     <button
       type="button"
       aria-label="Clear selection"

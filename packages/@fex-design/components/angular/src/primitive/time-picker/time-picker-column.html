@@ -1,4 +1,17 @@
-<div scrollbarRoot class="size-full">
+<div
+  scrollbarRoot
+  [class]="scrollbarClass()"
+  [style]="scrollbarProps()?.style"
+  [showTrack]="scrollbarProps()?.showTrack ?? false"
+  [showCorner]="scrollbarProps()?.showCorner"
+  [visibility]="scrollbarProps()?.visibility"
+  [autoHide]="scrollbarProps()?.autoHide"
+  [autoHideDelay]="scrollbarProps()?.autoHideDelay"
+  [dragScroll]="scrollbarProps()?.dragScroll"
+  [clickScroll]="scrollbarProps()?.clickScroll"
+  [minThumbSize]="scrollbarProps()?.minThumbSize"
+  [disabled]="resolvedDisabled()"
+>
   <div #scrollViewport scrollbarViewport [overflow]="{ x: 'hidden' }" [class]="viewportClassName">
     @for (item of options(); track item.value) {
     <button
@@ -11,12 +24,16 @@
       [attr.data-selected]="item.value === selectedValue() ? 'true' : null"
       [attr.data-active]="item.value === activeValue() ? 'true' : null"
       [attr.data-disabled]="item.disabled ? 'true' : null"
-      [class]="itemClassName"
+      [class]="itemClasses(item.value === selectedValue())"
+      [style]="itemStyles(item.value === selectedValue())"
       (focus)="activeValue.set(item.value)"
       (click)="select(item)"
     >
       @if (itemTemplate(); as template) {
-        <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ item: item, selected: item.value === selectedValue(), active: item.value === activeValue() }" />
+      <ng-container
+        [ngTemplateOutlet]="template"
+        [ngTemplateOutletContext]="{ item: item, selected: item.value === selectedValue(), active: item.value === activeValue() }"
+      />
       } @else { {{ item.label }} }
     </button>
     }

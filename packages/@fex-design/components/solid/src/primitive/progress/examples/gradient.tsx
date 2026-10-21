@@ -1,18 +1,23 @@
-import { Progress, ProgressTrack, ProgressRange, ProgressValue, ProgressCircle, ProgressCircleTrack, ProgressCircleRange } from '@fex-design/solid/primitive/progress'
+import {
+  Progress,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValue,
+  ProgressCircle,
+  ProgressCircleTrack,
+  ProgressCircleRange,
+} from '@fex-design/solid/primitive/progress'
 
 export function ProgressPrimitiveGradientExample() {
-
   return (
     <div class="grid w-full max-w-md gap-4">
       <Progress value={90} class="inline-flex items-center gap-2">
         <ProgressTrack>
           <ProgressRange class="bg-[linear-gradient(to_right,_#1677ff,_#87d068)]" />
         </ProgressTrack>
-        <ProgressValue>
-          90%
-        </ProgressValue>
+        <ProgressValue>90%</ProgressValue>
       </Progress>
-      <div class="flex items-center gap-6">
+      <div class="flex flex-wrap items-center gap-6">
         <Progress value={90} variant="circle" size={96} class="relative">
           <ProgressCircle>
             <defs>
@@ -25,9 +30,7 @@ export function ProgressPrimitiveGradientExample() {
             <ProgressCircleRange stroke="url(#progress-gradient-circle)" />
           </ProgressCircle>
           <div class="absolute inset-0 flex items-center justify-center">
-            <ProgressValue>
-              90%
-            </ProgressValue>
+            <ProgressValue>90%</ProgressValue>
           </div>
         </Progress>
         <Progress value={90} variant="dashboard" size={96} class="relative">
@@ -42,9 +45,7 @@ export function ProgressPrimitiveGradientExample() {
             <ProgressCircleRange gapDegree={90} stroke="url(#progress-gradient-dashboard)" />
           </ProgressCircle>
           <div class="absolute inset-0 flex items-center justify-center">
-            <ProgressValue>
-              90%
-            </ProgressValue>
+            <ProgressValue>90%</ProgressValue>
           </div>
         </Progress>
       </div>

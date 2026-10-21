@@ -1,0 +1,92 @@
+<ng-container
+  [ngTemplateOutlet]="entries"
+  [ngTemplateOutletInjector]="contentInjector"
+  [ngTemplateOutletContext]="{ $implicit: items(), injector: contentInjector }"
+/>
+<ng-template #entries let-list let-injector="injector">
+  @for (entry of list; track key(entry)) { @if (entry.type === 'separator') {
+  <div menuSeparator [class]="classNames()?.separator" [style]="styles()?.separator"></div>
+  } @else if (entry.type === 'group') {
+  <div menuGroup [class]="classNames()?.group" [style]="styles()?.group" [label]="entry.label">
+    <ng-container
+      [ngTemplateOutlet]="entries"
+      [ngTemplateOutletInjector]="injector"
+      [ngTemplateOutletContext]="{ $implicit: entry.children, injector }"
+    />
+  </div>
+  } @else if (entry.children !== undefined) {
+  <div subMenu [value]="entry.value" [popoverProps]="entry.popoverProps">
+    <button
+      subMenuTrigger
+      [class]="classNames()?.subMenuTrigger"
+      [style]="styles()?.subMenuTrigger"
+      [disabled]="entry.disabled || !entry.children.length"
+      [textValue]="entry.textValue"
+      [icon]="entry.icon"
+      [suffix]="entry.suffix"
+    >
+      <ng-container
+        [ngTemplateOutlet]="label"
+        [ngTemplateOutletContext]="{ $implicit: entry.label }"
+      />
+    </button>
+    <div
+      subMenuContent
+      [class]="classNames()?.subMenuContent"
+      [style]="styles()?.subMenuContent"
+      [content]="subContent"
+    ></div>
+    <ng-template #subContent let-injector="injector"
+      ><ng-container
+        [ngTemplateOutlet]="entries"
+        [ngTemplateOutletInjector]="injector"
+        [ngTemplateOutletContext]="{ $implicit: entry.children, injector }"
+    /></ng-template>
+  </div>
+  } @else if (itemTemplate()) {
+  <ng-container
+    [ngTemplateOutlet]="itemTemplate()"
+    [ngTemplateOutletInjector]="injector"
+    [ngTemplateOutletContext]="{ $implicit: entry, item: entry }"
+  />
+  } @else if (entry.href !== undefined) {
+  <a
+    menuItem
+    [class]="classNames()?.item"
+    [style]="styles()?.item"
+    [value]="entry.value"
+    [disabled]="entry.disabled ?? false"
+    [textValue]="entry.textValue"
+    [icon]="entry.icon"
+    [suffix]="entry.suffix"
+    [href]="entry.href"
+    [attr.target]="entry.target"
+    [attr.rel]="entry.rel"
+  >
+    <ng-container
+      [ngTemplateOutlet]="label"
+      [ngTemplateOutletContext]="{ $implicit: entry.label }"
+    />
+  </a>
+  } @else {
+  <button
+    menuItem
+    [class]="classNames()?.item"
+    [style]="styles()?.item"
+    [value]="entry.value"
+    [disabled]="entry.disabled ?? false"
+    [textValue]="entry.textValue"
+    [icon]="entry.icon"
+    [suffix]="entry.suffix"
+  >
+    <ng-container
+      [ngTemplateOutlet]="label"
+      [ngTemplateOutletContext]="{ $implicit: entry.label }"
+    />
+  </button>
+  } }
+</ng-template>
+<ng-template #label let-value
+  >@if (asTemplate(value); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else {
+  {{ text(value) }} }</ng-template
+>

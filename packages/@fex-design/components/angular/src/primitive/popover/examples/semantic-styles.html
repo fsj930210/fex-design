@@ -1,0 +1,14 @@
+<div class="w-full flex items-center justify-center min-h-[360px] py-16">
+  <div popoverRoot [arrow]="true">
+    <button button popoverTrigger>{{ demo.trigger }}</button
+    ><ng-template popoverPortal
+      ><div popoverContent [class]="demo.classNames.root" [style]="rootStyle">
+        <div popoverArrow></div>
+        <div popoverHeader>
+          <div popoverTitle [class]="demo.classNames.title">{{ demo.title }}</div>
+        </div>
+        <div data-slot="popover-body" [class]="demo.classNames.content">{{ demo.content }}</div>
+      </div></ng-template
+    >
+  </div>
+</div>

@@ -11,8 +11,8 @@ import { Tag } from '@fex-design/vue/ui/tag'
       --tag-color-danger-foreground: #fff;
     "
   >
-    <Tag color="primary">覆盖后的 Primary</Tag
-    ><Tag color="primary" variant="solid">覆盖后的 Primary</Tag
-    ><Tag color="danger" variant="outlined">覆盖后的 Danger</Tag>
+    <Tag closable color="primary">覆盖后的 Primary</Tag
+    ><Tag closable color="primary" variant="solid">覆盖后的 Primary</Tag
+    ><Tag closable color="danger" variant="outlined">覆盖后的 Danger</Tag>
   </div>
 </template>

@@ -9,9 +9,9 @@
   import { cn } from "@fex-design/utils";
   import type { SelectionValue } from "@fex-design/core/selection/types";
   import type { Snippet } from "svelte";
-  import CheckIcon from '@fex-design/svelte/icons/check.svelte';
-  import PrimitiveListboxItem from '@fex-design/svelte/primitive/listbox/listbox-item.svelte';
-  import PrimitiveListboxItemIndicator from '@fex-design/svelte/primitive/listbox/listbox-item-indicator.svelte';
+  import CheckIcon from "@fex-design/svelte/icons/check.svelte";
+  import PrimitiveListboxItem from "@fex-design/svelte/primitive/listbox/listbox-item.svelte";
+  import PrimitiveListboxItemIndicator from "@fex-design/svelte/primitive/listbox/listbox-item-indicator.svelte";
 
   let {
     class: className,

@@ -5,7 +5,7 @@ import { useTimePickerContext } from './time-picker-context'
 import type { TimePickerNumericColumnProps } from './column.types'
 
 export function TimePickerMinuteColumn(props: TimePickerNumericColumnProps) {
-  const [local, rest] = splitProps(props, ['step', 'isItemDisabled'])
+  const [local, rest] = splitProps(props, ['columnProps', 'step', 'isItemDisabled'])
   const context = useTimePickerContext('TimePickerMinuteColumn')
   const options = createMemo(() =>
     createMinuteOptions(
@@ -19,6 +19,7 @@ export function TimePickerMinuteColumn(props: TimePickerNumericColumnProps) {
   return (
     <TimePickerColumn
       {...rest}
+      {...local.columnProps}
       options={options()}
       selectedValue={context.snapshot().value?.minute}
       onSelect={(value) => context.controller.selectMinute(Number(value))}

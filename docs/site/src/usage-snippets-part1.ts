@@ -15,7 +15,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
       code: '<Alert type="info" title="消息提示" description="这是一条重要的提示信息。" />',
     },
     primitive: {
-      import: "import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@/components/primitive/alert'",
+      import:
+        "import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@/components/primitive/alert'",
       code: `<Alert type="info">
   <AlertIcon />
   <AlertTitle>消息提示</AlertTitle>
@@ -34,7 +35,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
 />`,
     },
     primitive: {
-      import: "import { AnchorRoot, AnchorRail, AnchorIndicator, AnchorList, AnchorItem, AnchorLink } from '@/components/primitive/anchor'",
+      import:
+        "import { AnchorRoot, AnchorRail, AnchorIndicator, AnchorList, AnchorItem, AnchorLink } from '@/components/primitive/anchor'",
       code: `<AnchorRoot>
   <AnchorRail><AnchorIndicator /></AnchorRail>
   <AnchorList>
@@ -66,7 +68,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
       code: '<Avatar src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=128&q=80" alt="用户头像" fallback="A" />',
     },
     primitive: {
-      import: "import { Avatar, AvatarImage, AvatarFallback, AvatarBadge } from '@/components/primitive/avatar'",
+      import:
+        "import { Avatar, AvatarImage, AvatarFallback, AvatarBadge } from '@/components/primitive/avatar'",
       code: `<Avatar>
   <AvatarImage src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=128&q=80" alt="用户头像" />
   <AvatarFallback>A</AvatarFallback>
@@ -116,7 +119,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
 </Card>`,
     },
     primitive: {
-      import: "import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@/components/primitive/card'",
+      import:
+        "import { Card, CardHeader, CardTitle, CardDescription, CardExtra, CardContent, CardFooter } from '@/components/primitive/card'",
       code: `<Card>
   <CardHeader>
     <CardTitle>卡片标题</CardTitle>
@@ -134,7 +138,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
       code: '<Checkbox defaultChecked>已阅读并同意服务协议</Checkbox>',
     },
     primitive: {
-      import: "import { CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxLabel } from '@/components/primitive/checkbox'",
+      import:
+        "import { CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxLabel } from '@/components/primitive/checkbox'",
       code: `<CheckboxRoot defaultChecked>
   <CheckboxControl>
     <CheckboxIndicator />
@@ -149,7 +154,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
       code: '<Empty description="暂无相关数据" extra={<button>立即创建</button>} />',
     },
     primitive: {
-      import: "import { Empty, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from '@/components/primitive/empty'",
+      import:
+        "import { Empty, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from '@/components/primitive/empty'",
       code: `<Empty>
   <EmptyMedia />
   <EmptyTitle>暂无数据</EmptyTitle>
@@ -166,7 +172,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
       code: '<Input placeholder="请输入用户名..." allowClear />',
     },
     primitive: {
-      import: "import { InputRoot, InputControl, InputPrefix, InputClear } from '@/components/primitive/input'",
+      import:
+        "import { InputRoot, InputControl, InputPrefix, InputClear } from '@/components/primitive/input'",
       code: `<InputRoot>
   <InputPrefix class="text-muted-foreground">🔍</InputPrefix>
   <InputControl placeholder="输入关键字搜索..." />
@@ -180,7 +187,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
       code: '<InputNumber min={1} max={100} defaultValue={1} step={1} />',
     },
     primitive: {
-      import: "import { InputNumberRoot, InputNumberControl, InputNumberActions, InputNumberIncrement, InputNumberDecrement } from '@/components/primitive/input-number'",
+      import:
+        "import { InputNumberRoot, InputNumberControl, InputNumberActions, InputNumberIncrement, InputNumberDecrement } from '@/components/primitive/input-number'",
       code: `<InputNumberRoot min={1} max={100} defaultValue={1}>
   <InputNumberControl />
   <InputNumberActions>
@@ -204,4 +212,4 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
 </KbdGroup>`,
     },
   },
-};
+}

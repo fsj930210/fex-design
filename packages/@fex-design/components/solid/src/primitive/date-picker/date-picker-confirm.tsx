@@ -1,7 +1,6 @@
 import { isPickerActionBlocked } from '@fex-design/core/date-picker/view'
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 
-
 import { datePickerConfirmClassName } from '@fex-design/components-styles/date-picker'
 import { cn } from '@fex-design/utils'
 import { splitProps } from 'solid-js'
@@ -25,7 +24,9 @@ export function DatePickerConfirm(props: ButtonProps) {
         callEventHandler(local.onClick, event)
         if (!isPickerActionBlocked(event)) picker.confirm()
       }}
-    >{local.children === undefined ? "确定" : local.children}</Button>
+    >
+      {local.children === undefined ? '确定' : local.children}
+    </Button>
   )
 }
 

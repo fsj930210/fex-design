@@ -1,1 +1,16 @@
-<script lang="ts">import { SelectRoot, SelectTrigger, SelectContent } from '@fex-design/svelte/primitive/select';   const options=[{value:'react',label:'React',group:'前端框架'},{value:'vue',label:'Vue',group:'前端框架'},{value:'nest',label:'NestJS',group:'后端框架'}]</script><SelectRoot {options}><SelectTrigger class="w-72"/><SelectContent/></SelectRoot>
+<script lang="ts">
+  import {
+    SelectRoot,
+    SelectTrigger,
+    SelectContent,
+  } from "@fex-design/svelte/primitive/select";
+  const options = [
+    { value: "react", label: "React", group: "前端框架" },
+    { value: "vue", label: "Vue", group: "前端框架" },
+    { value: "nest", label: "NestJS", group: "后端框架" },
+  ];
+</script>
+
+<SelectRoot {options}
+  ><SelectTrigger class="w-72" /><SelectContent /></SelectRoot
+>

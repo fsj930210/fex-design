@@ -1,8 +1,4 @@
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 
@@ -16,11 +12,11 @@ export function CustomRenderDemo() {
         <SelectTrigger placeholder="请选择技术" />
         <SelectContent
           optionRender={(option) => (
-              <div className="flex items-center justify-between gap-3">
-                <span>{option.label}</span>
-                <span className="text-xs text-muted-foreground">{option.group}</span>
-              </div>
-            )}
+            <div className="flex items-center justify-between gap-3">
+              <span>{option.label}</span>
+              <span className="text-xs text-muted-foreground">{option.group}</span>
+            </div>
+          )}
         />
       </SelectRoot>
     </SelectDemoSection>

@@ -1,15 +1,18 @@
-import { useState, type ReactNode } from "react"
-import { createContextMenuController } from "@fex-design/core/overlay/context-menu/create-context-menu-controller"
-import type { ContextMenuOptions } from "@fex-design/core/overlay/context-menu/types"
-import { useRef } from "react"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
-import useUnmount from "@fex-design/react/hooks/use-unmount"
-import { ContextMenuContext } from "./context-menu-context"
+import { useState, type ReactNode } from 'react'
+import { createContextMenuController } from '@fex-design/core/overlay/context-menu/create-context-menu-controller'
+import type { ContextMenuOptions } from '@fex-design/core/overlay/context-menu/types'
+import { useRef } from 'react'
+import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
+import useUnmount from '@fex-design/react/hooks/use-unmount'
+import { ContextMenuContext } from './context-menu-context'
 
-export interface ContextMenuRootProps<T = unknown> extends Omit<ContextMenuOptions<T>, "onOpenChange"> {
+export interface ContextMenuRootProps<T = unknown> extends Omit<
+  ContextMenuOptions<T>,
+  'onOpenChange'
+> {
   open?: boolean
   defaultOpen?: boolean
-  onOpenChange?: ContextMenuOptions<T>["onOpenChange"]
+  onOpenChange?: ContextMenuOptions<T>['onOpenChange']
   children?: ReactNode
 }
 

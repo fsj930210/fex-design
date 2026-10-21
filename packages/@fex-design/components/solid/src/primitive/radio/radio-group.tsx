@@ -1,14 +1,14 @@
-import { createSelectionController } from "@fex-design/core/selection/create-selection-controller"
-import type { SelectionChangeMeta } from "@fex-design/core/selection/types"
-import { radioGroupClassName, type RadioGroupStyleProps } from "@fex-design/components-styles/radio"
-import { cn } from "@fex-design/utils"
-import { splitProps, type JSX, type ParentProps } from "solid-js"
-import { createCoreStoreSignal } from "@fex-design/solid/primitives/create-core-store-signal"
-import { RadioContext, type RadioChangeMeta, type RadioValue } from "./radio-context"
+import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
+import type { SelectionChangeMeta } from '@fex-design/core/selection/types'
+import { radioGroupClassName, type RadioGroupStyleProps } from '@fex-design/components-styles/radio'
+import { cn } from '@fex-design/utils'
+import { splitProps, type JSX, type ParentProps } from 'solid-js'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
+import { RadioContext, type RadioChangeMeta, type RadioValue } from './radio-context'
 
 export interface RadioGroupProps
   extends
-    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, "defaultValue" | "onChange">>,
+    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>>,
     RadioGroupStyleProps {
   value?: RadioValue
   defaultValue?: RadioValue
@@ -26,13 +26,13 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
 
 export function RadioGroup(props: RadioGroupProps) {
   const [local, rest] = splitProps(props, [
-    "value",
-    "defaultValue",
-    "disabled",
-    "orientation",
-    "class",
-    "children",
-    "onValueChange",
+    'value',
+    'defaultValue',
+    'disabled',
+    'orientation',
+    'class',
+    'children',
+    'onValueChange',
   ])
   const controller = createSelectionController({
     get value() {
@@ -52,7 +52,7 @@ export function RadioGroup(props: RadioGroupProps) {
   })
   const snapshot = createCoreStoreSignal(controller)
   const currentValue = () => local.value ?? snapshot().value
-  const orientation = () => local.orientation ?? "horizontal"
+  const orientation = () => local.orientation ?? 'horizontal'
 
   return (
     <RadioContext.Provider
@@ -67,7 +67,7 @@ export function RadioGroup(props: RadioGroupProps) {
         role="radiogroup"
         data-slot="radio-group"
         data-orientation={orientation()}
-        data-disabled={local.disabled ? "true" : undefined}
+        data-disabled={local.disabled ? 'true' : undefined}
         class={cn(radioGroupClassName({ orientation: orientation() }), local.class)}
       >
         {local.children}

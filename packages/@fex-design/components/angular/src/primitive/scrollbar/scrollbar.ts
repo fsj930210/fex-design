@@ -6,7 +6,14 @@ export { ScrollbarThumb } from './scrollbar-thumb'
 export { ScrollbarCorner } from './scrollbar-corner'
 export { createScrollbar } from './create-scrollbar'
 export type {
-  ScrollbarAxis, ScrollbarAutoHide, ScrollbarClickScroll, ScrollbarVisibility,
-  ScrollbarScrollDetail, ScrollbarOptions, ScrollbarRootOptions,
-  ScrollbarOverflow, ScrollbarOverflowMode, ScrollbarController,
+  ScrollbarAxis,
+  ScrollbarAutoHide,
+  ScrollbarClickScroll,
+  ScrollbarVisibility,
+  ScrollbarScrollDetail,
+  ScrollbarOptions,
+  ScrollbarRootOptions,
+  ScrollbarOverflow,
+  ScrollbarOverflowMode,
+  ScrollbarController,
 } from '@fex-design/core/scrollbar/types'

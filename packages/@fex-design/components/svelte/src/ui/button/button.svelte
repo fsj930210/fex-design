@@ -12,6 +12,7 @@
   import type { ButtonProps } from "./button.types";
 
   let {
+    startIconProps, endIconProps, loadingIconProps,
     variant = "outlined",
     color,
     size = "md",
@@ -45,12 +46,12 @@
   bind:ref
 >
   {#if iconPlacement === "start" && (loading || icon)}
-    <ButtonIcon data-icon="inline-start">
+    <ButtonIcon {...startIconProps} data-icon="inline-start">
       {#if loading}
         {#if loadingIndicator}
           {@render loadingIndicator()}
         {:else}
-          <LoadingIcon class={buttonSpinnerClassName} />
+          <LoadingIcon {...loadingIconProps} class={cn(buttonSpinnerClassName, loadingIconProps?.class)} />
         {/if}
       {:else if icon}
         {@render icon()}
@@ -59,12 +60,12 @@
   {/if}
   {@render children?.()}
   {#if iconPlacement === "end" && (loading || icon)}
-    <ButtonIcon data-icon="inline-end">
+    <ButtonIcon {...endIconProps} data-icon="inline-end">
       {#if loading}
         {#if loadingIndicator}
           {@render loadingIndicator()}
         {:else}
-          <LoadingIcon class={buttonSpinnerClassName} />
+          <LoadingIcon {...loadingIconProps} class={cn(buttonSpinnerClassName, loadingIconProps?.class)} />
         {/if}
       {:else if icon}
         {@render icon()}

@@ -2,7 +2,7 @@
 import { Badge } from '@fex-design/vue/ui/badge'
 </script>
 <template>
-  <div class="flex items-center justify-center gap-12">
+  <div class="flex flex-wrap items-center justify-center gap-12">
     <div
       v-for="dir in ['ltr', 'rtl'] as const"
       :key="dir"

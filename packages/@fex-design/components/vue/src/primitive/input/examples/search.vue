@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { inputActionClassName, inputSearchAddonClassName } from '@fex-design/components-styles/input'
+import {
+  inputActionClassName,
+  inputSearchAddonClassName,
+} from '@fex-design/components-styles/input'
 import { LoadingIcon } from '@fex-design/vue/icons/loading'
 import { SearchIcon } from '@fex-design/vue/icons/search'
 import { Button } from '@fex-design/vue/primitive/button'

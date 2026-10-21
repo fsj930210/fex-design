@@ -11,7 +11,7 @@ export default function Example() {
   const [checked, setChecked] = useState(true)
   return (
     <div className="grid gap-3">
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button size="sm" onClick={() => setChecked(true)}>
           选中
         </Button>

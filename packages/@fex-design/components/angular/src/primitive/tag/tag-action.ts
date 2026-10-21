@@ -17,6 +17,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   templateUrl: './tag-action.html',
 })
 export class TagAction {
+  readonly class = input<string>()
   readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' })
-  protected readonly hostClassName = createHostClassName(tagActionClassName)
+  protected readonly hostClassName = createHostClassName(tagActionClassName, () => this.class())
 }

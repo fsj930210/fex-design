@@ -1,4 +1,4 @@
-export { default as Skeleton } from "./skeleton.vue"
+export { default as Skeleton } from './skeleton.vue'
 export {
   SkeletonAvatar,
   SkeletonBlock,
@@ -6,4 +6,4 @@ export {
   SkeletonImage,
   SkeletonInput,
   SkeletonText,
-} from "@fex-design/vue/primitive/skeleton"
+} from '@fex-design/vue/primitive/skeleton'

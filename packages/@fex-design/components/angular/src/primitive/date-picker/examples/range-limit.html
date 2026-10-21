@@ -1,22 +1,22 @@
 <div class="flex w-full min-w-0 flex-col gap-4">
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">最多 7 天</p>
-<div rangePickerRoot [disabledDate]="limitDays">
-<div rangePickerTrigger></div>
-<div rangePickerContent>
-<div rangePickerPanelGroup></div>
-<div datePickerFooter></div>
-</div>
-</div>
-</section>
-<section class="flex w-full min-w-0 flex-col gap-2">
-<p class="text-sm font-medium">最多 6 个月</p>
-<div rangePickerRoot [picker]="'month'" [disabledDate]="limitMonths">
-<div rangePickerTrigger></div>
-<div rangePickerContent>
-<div rangePickerPanelGroup></div>
-<div datePickerFooter></div>
-</div>
-</div>
-</section>
+  <section class="flex w-full min-w-0 flex-col gap-2">
+    <p class="text-sm font-medium">最多 7 天</p>
+    <div rangePickerRoot [disabledDate]="limitDays">
+      <div rangePickerTrigger></div>
+      <div rangePickerContent>
+        <div rangePickerPanelGroup></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+  </section>
+  <section class="flex w-full min-w-0 flex-col gap-2">
+    <p class="text-sm font-medium">最多 6 个月</p>
+    <div rangePickerRoot [picker]="'month'" [disabledDate]="limitMonths">
+      <div rangePickerTrigger></div>
+      <div rangePickerContent>
+        <div rangePickerPanelGroup></div>
+        <div datePickerFooter></div>
+      </div>
+    </div>
+  </section>
 </div>

@@ -1,18 +1,13 @@
-import {
-  useId,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react"
+import { useId, useRef, useState, type ReactNode } from 'react'
 import {
   createDialogController,
   type DialogOptions,
-} from "@fex-design/core/dialog/create-dialog-controller"
-import { shallowEqualObject } from "@fex-design/utils"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
-import { useMemoizedFn } from "@fex-design/react/hooks/use-memoized-fn"
-import useUnmount from "@fex-design/react/hooks/use-unmount"
-import { DialogContext } from "./dialog-context"
+} from '@fex-design/core/dialog/create-dialog-controller'
+import { shallowEqualObject } from '@fex-design/utils'
+import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
+import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
+import useUnmount from '@fex-design/react/hooks/use-unmount'
+import { DialogContext } from './dialog-context'
 
 const defaultDismiss = { escapeKey: true, overlayPointer: true }
 
@@ -35,7 +30,7 @@ export function DialogRoot({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false)
   const open = isControlled ? openProp : uncontrolledOpen
   const triggerRef = useRef<HTMLButtonElement | null>(null)
-  const handleOpenChange = useMemoizedFn<NonNullable<DialogOptions["onOpenChange"]>>(
+  const handleOpenChange = useMemoizedFn<NonNullable<DialogOptions['onOpenChange']>>(
     (nextOpen, info) => {
       if (!isControlled) {
         setUncontrolledOpen(nextOpen)

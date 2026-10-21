@@ -6,7 +6,7 @@ export function ExtraExample() {
       title={<strong className="text-lg font-semibold">生产环境</strong>}
       description="新加坡 · 最近部署于 3 分钟前"
       extra={
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="size-2 rounded-full bg-emerald-500" />
           <span className="text-sm font-semibold text-emerald-700">运行中</span>
         </div>

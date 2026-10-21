@@ -1,0 +1,4 @@
+<div class="grid w-full max-w-xs gap-3">
+  <div menu (valueChange)="value.set($event)" [items]="items" aria-label="基本菜单"></div>
+  <output>选中值：[{{ value().join(", ") }}]</output>
+</div>

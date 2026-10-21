@@ -1,13 +1,13 @@
-import { Portal } from "solid-js/web"
-import { Show, type ParentProps } from "solid-js"
-import { useContextMenuContext } from "./context-menu-context"
+import { Portal } from 'solid-js/web'
+import { Show, type ParentProps } from 'solid-js'
+import { useContextMenuContext } from './context-menu-context'
 
 export interface ContextMenuPortalProps {
   container?: HTMLElement | null
 }
 
 export function ContextMenuPortal(props: ParentProps<ContextMenuPortalProps>) {
-  const context = useContextMenuContext("ContextMenuPortal")
+  const context = useContextMenuContext('ContextMenuPortal')
   return (
     <Show when={context.snapshot().overlay.mounted}>
       <Portal

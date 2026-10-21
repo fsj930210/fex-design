@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, viewChild } from '@angular/core'
-import { AnchorIndicator, AnchorItem, AnchorLink, AnchorList, AnchorRail, AnchorRoot } from '@fex-design/angular/primitive/anchor'
+import {
+  AnchorIndicator,
+  AnchorItem,
+  AnchorLink,
+  AnchorList,
+  AnchorRail,
+  AnchorRoot,
+} from '@fex-design/angular/primitive/anchor'
 @Component({
   selector: 'anchor-progress-example',
   standalone: true,

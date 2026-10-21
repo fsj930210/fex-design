@@ -9,8 +9,11 @@
     "lint": "oxlint src vite.config.ts"
   },
   "dependencies": {
+    "@fex-design/components-styles": "workspace:*",
     "@fex-design/core": "workspace:*",
+    "@fex-design/react": "workspace:*",
     "@fex-design/styles": "workspace:*",
+    "@fex-design/utils": "workspace:*",
     "@fex/mock": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-react": "latest",
@@ -18,10 +21,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-router": "8.3.1",
-    "vite": "catalog:",
-    "@fex-design/react": "workspace:*",
-    "@fex-design/components-styles": "workspace:*",
-    "@fex-design/utils": "workspace:*"
+    "vite": "catalog:"
   },
   "devDependencies": {
     "@types/react": "latest",

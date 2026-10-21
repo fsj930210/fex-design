@@ -4,7 +4,7 @@
   import { cn } from "@fex-design/utils";
   import type { Snippet } from "svelte";
   import { getContext, onDestroy, setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import {
     tourContentContextKey,
     tourContextKey,

@@ -15,7 +15,8 @@ export interface CascaderContext {
   clearable: () => boolean
   disabled: () => boolean
   loading: () => boolean
-  status: () => 'error' | 'warning' | undefined
+  ariaInvalid: () => string | boolean | undefined
+  dataWarning: () => string | undefined
   placeholder: () => string | undefined
   displayRender?:
     | ((labels: readonly string[], path: readonly CascaderOption[]) => unknown)

@@ -1,0 +1,22 @@
+<div class="grid w-full gap-space-lg">
+  <nav
+    pagination
+    [total]="200"
+    [labels]="labels"
+    [defaultPage]="8"
+    showTotal
+    showSizeChanger
+    showQuickJumper
+    class="w-full"
+  ></nav>
+  <nav
+    pagination
+    [total]="200"
+    [labels]="labels"
+    [defaultPage]="8"
+    showTotal
+    showSizeChanger
+    showQuickJumper
+    class="w-full [&>[data-slot=pagination-total]]:me-auto"
+  ></nav>
+</div>

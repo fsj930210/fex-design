@@ -5,9 +5,22 @@ import { CheckIcon } from '@fex-design/vue/icons/check'
 import { getCircleStepsGeometry } from '@fex-design/core/progress/progress'
 
 defineOptions({ name: 'StepRingDemo' })
-const props = withDefaults(defineProps<{ value: number; gap?: number; steps?: number; color?: string }>(), { gap: 2, steps: 10 })
-const geometry = computed(() => getCircleStepsGeometry({ value: props.value, gap: props.gap, steps: props.steps, size: 96, thickness: 4 }))
-const ringColor = computed(() => props.color ?? (props.value === 100 ? 'var(--success)' : 'var(--info)'))
+const props = withDefaults(
+  defineProps<{ value: number; gap?: number; steps?: number; color?: string }>(),
+  { gap: 2, steps: 10 },
+)
+const geometry = computed(() =>
+  getCircleStepsGeometry({
+    value: props.value,
+    gap: props.gap,
+    steps: props.steps,
+    size: 96,
+    thickness: 4,
+  }),
+)
+const ringColor = computed(
+  () => props.color ?? (props.value === 100 ? 'var(--success)' : 'var(--info)'),
+)
 </script>
 
 <template>
@@ -33,9 +46,7 @@ const ringColor = computed(() => props.color ?? (props.value === 100 ? 'var(--su
         <CheckIcon class="size-5 text-success" />
       </template>
       <template v-else>
-        <ProgressValue class="text-sm">
-          {{ value }}%
-        </ProgressValue>
+        <ProgressValue class="text-sm"> {{ value }}% </ProgressValue>
       </template>
     </div>
   </Progress>

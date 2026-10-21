@@ -25,7 +25,7 @@ export function ContainerExample() {
             class="relative w-full h-96 overflow-auto rounded-lg border-2 border-dashed p-6"
           >
             <p>自定义挂载区域：浮层插入此虚线框，仍以按钮为定位参照。</p>
-            <div class="flex min-h-[560px] justify-center gap-4 pt-24">
+            <div class="flex flex-wrap min-h-[560px] justify-center gap-4 pt-24">
               <For each={cases}>
                 {(item) => (
                   <div>

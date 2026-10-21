@@ -1,0 +1,22 @@
+<div class="grid gap-4">
+  <div radioGroup defaultValue="apple">
+    <div class="inline-grid min-w-0 grid-cols-[auto_1fr] items-center gap-3 align-middle">
+      <button
+        radio
+        id="semantic-radio-apple"
+        value="apple"
+        class="ring-2 ring-orange-300 [--radio-checked-color:var(--success)]"
+      ></button
+      ><label
+        for="semantic-radio-apple"
+        class="min-w-0 cursor-pointer select-none font-bold text-violet-700"
+        >苹果</label
+      >
+    </div>
+  </div>
+  <div radioGroup defaultValue="apple" class="gap-0">
+    <button radioButton value="apple" class="[--radio-button-checked-background:var(--success)]">
+      苹果</button
+    ><button radioButton value="pear">梨按钮</button>
+  </div>
+</div>

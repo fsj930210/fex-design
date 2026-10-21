@@ -1,4 +1,5 @@
-export const inputNumberRootClassName = 'pe-5'
+export const inputNumberRootClassName =
+  'pe-5 [--input-ring-width:2px] [--input-ring-color:color-mix(in_oklch,var(--focus-border)_20%,transparent)]'
 
 export const inputNumberActionsClassName =
   'absolute top-0 end-0 pointer-events-none flex h-full w-5 shrink-0 flex-col items-stretch gap-0 overflow-hidden border-s border-transparent opacity-0 !pe-0 transition-opacity group-hover/input-root:pointer-events-auto group-hover/input-root:border-border group-hover/input-root:opacity-100 group-focus-within/input-root:pointer-events-auto group-focus-within/input-root:border-border group-focus-within/input-root:opacity-100'

@@ -1,6 +1,9 @@
 import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { CheckboxValue } from '@fex-design/core/checkbox/types'
-import { checkboxCheckIconClassName, checkboxMinusIconClassName } from '@fex-design/components-styles/checkbox'
+import {
+  checkboxCheckIconClassName,
+  checkboxMinusIconClassName,
+} from '@fex-design/components-styles/checkbox'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX, type ParentProps } from 'solid-js'
 import {

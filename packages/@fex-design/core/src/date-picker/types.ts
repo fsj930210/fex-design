@@ -66,8 +66,16 @@ export type { CalendarDateTime as DatePickerDateTime } from '../calendar/types'
 export interface DatePickerShowTime {
   format?: string | undefined
   use12Hours?: boolean | undefined
-  step?: { hour?: number | undefined; minute?: number | undefined; second?: number | undefined } | undefined
-  defaultOpenValue?: TimeValue | { start?: TimeValue | undefined; end?: TimeValue | undefined } | undefined
+  step?:
+    | { hour?: number | undefined; minute?: number | undefined; second?: number | undefined }
+    | undefined
+  defaultOpenValue?:
+    | TimeValue
+    | { start?: TimeValue | undefined; end?: TimeValue | undefined }
+    | undefined
   disabledTime?: DisabledTime | undefined
 }
-export type DatePickerDisabledTime = (value: CalendarDateTime, info: { activePart: DatePickerInputPart; from: CalendarDateTime | null }) => ReturnType<DisabledTime>
+export type DatePickerDisabledTime = (
+  value: CalendarDateTime,
+  info: { activePart: DatePickerInputPart; from: CalendarDateTime | null },
+) => ReturnType<DisabledTime>

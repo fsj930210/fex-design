@@ -1,3 +1,4 @@
+import type { ButtonColor, ButtonVariant } from '@fex-design/core/button/types'
 import { NgTemplateOutlet } from '@angular/common'
 import type {
   InputClassNames as InputClassNamesBase,
@@ -150,12 +151,24 @@ export class InputPassword extends InputBase {
   templateUrl: './input-search.html',
 })
 export class InputSearch extends InputBase {
+  readonly addonBeforeButtonProps = input<{
+    class?: string | undefined
+    style?: string | undefined
+    color?: ButtonColor | undefined
+    variant?: ButtonVariant | undefined
+  }>()
+  readonly addonAfterButtonProps = input<{
+    class?: string | undefined
+    style?: string | undefined
+    color?: ButtonColor | undefined
+    variant?: ButtonVariant | undefined
+  }>()
   readonly loading = input(false, { transform: booleanAttribute })
   readonly search = output<{ value: string; meta: InputSearchMeta }>()
   protected readonly actionClassName = inputActionClassName
   protected readonly searchAddonClassName = inputSearchAddonClassName
   protected runSearch(source: InputSearchMeta['source']) {
-    if (!this.loading())
+    if (!this.loading() && !this.disabled())
       this.search.emit({ value: this.root()?.currentValue() ?? '', meta: { source } })
   }
   protected keydown(event: KeyboardEvent) {

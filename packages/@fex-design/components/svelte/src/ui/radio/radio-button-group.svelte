@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { cn } from "@fex-design/utils";
-  import PrimitiveButton from '@fex-design/svelte/primitive/radio/radio-button.svelte';
-  import PrimitiveGroup from '@fex-design/svelte/primitive/radio/radio-group.svelte';
-  import type { RadioValue } from '@fex-design/svelte/primitive/radio/context';
+  import PrimitiveButton from "@fex-design/svelte/primitive/radio/radio-button.svelte";
+  import PrimitiveGroup from "@fex-design/svelte/primitive/radio/radio-group.svelte";
+  import type { RadioValue } from "@fex-design/svelte/primitive/radio/context";
   interface Props {
     value?: RadioValue;
     defaultValue?: RadioValue;

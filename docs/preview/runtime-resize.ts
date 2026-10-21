@@ -3,7 +3,9 @@ const OVERLAY_SAFE_AREA = 32
 
 function isVisible(element: HTMLElement) {
   const style = getComputedStyle(element)
-  return style.display !== 'none' && style.visibility !== 'hidden' && element.getClientRects().length > 0
+  return (
+    style.display !== 'none' && style.visibility !== 'hidden' && element.getClientRects().length > 0
+  )
 }
 
 function measureRuntimeHeight(runtime: HTMLElement) {
@@ -24,7 +26,9 @@ function measureRuntimeHeight(runtime: HTMLElement) {
     height = Math.max(height, overlayRect.top + overlayHeight + paddingBottom + OVERLAY_SAFE_AREA)
 
     if (!overlay.id) continue
-    const trigger = document.querySelector<HTMLElement>(`[aria-controls="${CSS.escape(overlay.id)}"]`)
+    const trigger = document.querySelector<HTMLElement>(
+      `[aria-controls="${CSS.escape(overlay.id)}"]`,
+    )
     if (!trigger) continue
 
     const triggerRect = trigger.getBoundingClientRect()
@@ -37,7 +41,10 @@ function measureRuntimeHeight(runtime: HTMLElement) {
   return Math.ceil(height)
 }
 
-export function observeRuntimeHeight(runtime: HTMLElement, onHeightChange: (height: number) => void) {
+export function observeRuntimeHeight(
+  runtime: HTMLElement,
+  onHeightChange: (height: number) => void,
+) {
   let frame = 0
   let lastHeight = 0
 
@@ -58,7 +65,8 @@ export function observeRuntimeHeight(runtime: HTMLElement, onHeightChange: (heig
       for (const node of record.addedNodes) {
         if (!(node instanceof HTMLElement)) continue
         resizeObserver.observe(node)
-        for (const element of node.querySelectorAll<HTMLElement>('*')) resizeObserver.observe(element)
+        for (const element of node.querySelectorAll<HTMLElement>('*'))
+          resizeObserver.observe(element)
       }
     }
     measure()

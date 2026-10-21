@@ -118,6 +118,12 @@
       "id": "css-variables",
       "title": "实例 CSS Variables",
       "description": "覆盖单个 Button 的尺寸与语义色变量。"
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "description": "按部件归属设置 class/style，组合部件通过直接子组件 API 定制。",
+      "height": 440
     }
   ],
   "components": [

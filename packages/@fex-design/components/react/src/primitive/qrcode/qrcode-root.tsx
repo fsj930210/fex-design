@@ -1,16 +1,7 @@
-import {
-  createQrCodeModel,
-  type QrCodeModelOptions,
-} from '@fex-design/core/qrcode'
+import { createQrCodeModel, type QrCodeModelOptions } from '@fex-design/core/qrcode'
 import { qrcodeRootClassName } from '@fex-design/components-styles/qrcode'
 import { cn } from '@fex-design/utils'
-import {
-  useMemo,
-  type ComponentProps,
-  type CSSProperties,
-  type ReactNode,
-  type Ref,
-} from 'react'
+import { useMemo, type ComponentProps, type CSSProperties, type ReactNode, type Ref } from 'react'
 import { QrCodeContext } from './qrcode-context'
 
 export interface QrCodeRootProps

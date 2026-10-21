@@ -1,7 +1,12 @@
 <script lang="ts">
-  import { AlertAction, AlertIcon, AlertTitle, Alert } from '@fex-design/svelte/primitive/alert'
-  import TriangleAlertIcon from '@fex-design/svelte/icons/triangle-alert.svelte';
-  import XIcon from '@fex-design/svelte/icons/x.svelte';
+  import {
+    AlertAction,
+    AlertIcon,
+    AlertTitle,
+    Alert,
+  } from "@fex-design/svelte/primitive/alert";
+  import TriangleAlertIcon from "@fex-design/svelte/icons/triangle-alert.svelte";
+  import XIcon from "@fex-design/svelte/icons/x.svelte";
   import { alertCloseClassName } from "@fex-design/components-styles/alert";
   const items = [
     { dir: "ltr", title: "配置需要确认", action: "查看" },

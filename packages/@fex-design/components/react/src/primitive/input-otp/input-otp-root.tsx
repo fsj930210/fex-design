@@ -1,24 +1,20 @@
-import { createInputOTPController } from "@fex-design/core/input-otp/create-input-otp-controller"
+import { createInputOTPController } from '@fex-design/core/input-otp/create-input-otp-controller'
 import type {
   InputOTPChangeMeta,
   InputOTPCompleteMeta,
   InputOTPRootOptions,
   InputOTPValue,
-} from "@fex-design/core/input-otp/types"
-import { inputOTPRootClassName } from "@fex-design/components-styles/input-otp"
-import { cn } from "@fex-design/utils"
-import {
-  useRef,
-  type HTMLAttributes,
-  type Ref,
-} from "react"
-import { useCoreStore } from "@fex-design/react/hooks/use-core-store"
-import { useIsomorphicLayoutEffect } from "@fex-design/react/hooks/use-isomorphic-layout-effect"
-import { useLazyRef } from "@fex-design/react/hooks/use-lazy-ref"
-import { InputOTPContext } from "./input-otp-context"
+} from '@fex-design/core/input-otp/types'
+import { inputOTPRootClassName } from '@fex-design/components-styles/input-otp'
+import { cn } from '@fex-design/utils'
+import { useRef, type HTMLAttributes, type Ref } from 'react'
+import { useCoreStore } from '@fex-design/react/hooks/use-core-store'
+import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { InputOTPContext } from './input-otp-context'
 
 export interface InputOTPRootProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue" | "onChange">, InputOTPRootOptions {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, InputOTPRootOptions {
   ref?: Ref<HTMLDivElement> | undefined
 }
 export type InputOTPProps = InputOTPRootProps
@@ -87,12 +83,12 @@ export function InputOTPRoot({
     if (element) inputsRef.current.set(index, element)
     else inputsRef.current.delete(index)
   }
-  const focusInput = (index: number, cursor: "start" | "end" | "all" = "all") => {
+  const focusInput = (index: number, cursor: 'start' | 'end' | 'all' = 'all') => {
     const input = inputsRef.current.get(index)
     if (!input || input.disabled) return
     input.focus()
-    const position = cursor === "start" ? 0 : input.value.length
-    input.setSelectionRange(cursor === "all" ? 0 : position, position)
+    const position = cursor === 'start' ? 0 : input.value.length
+    input.setSelectionRange(cursor === 'all' ? 0 : position, position)
   }
 
   return (
@@ -100,12 +96,12 @@ export function InputOTPRoot({
       <div
         {...props}
         ref={ref}
-        role={props.role ?? "group"}
+        role={props.role ?? 'group'}
         data-slot="input-otp-root"
-        data-disabled={disabled ? "true" : undefined}
-        data-readonly={readOnly ? "true" : undefined}
-        data-invalid={invalid ? "true" : undefined}
-        data-complete={snapshot.complete ? "true" : undefined}
+        data-disabled={disabled ? 'true' : undefined}
+        data-readonly={readOnly ? 'true' : undefined}
+        data-invalid={invalid ? 'true' : undefined}
+        data-complete={snapshot.complete ? 'true' : undefined}
         className={cn(inputOTPRootClassName, className)}
       >
         {children}

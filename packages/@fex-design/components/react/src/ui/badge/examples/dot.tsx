@@ -2,7 +2,7 @@ import { Badge } from '@fex-design/react/ui/badge'
 
 export function Dot() {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-6">
       <Badge dot color="danger">
         📣
       </Badge>

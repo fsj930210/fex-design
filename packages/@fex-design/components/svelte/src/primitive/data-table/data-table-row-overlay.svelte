@@ -20,7 +20,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
-  import type { SvelteDataTable } from '@fex-design/svelte/stores/create-data-table';
+  import type { SvelteDataTable } from "@fex-design/svelte/stores/create-data-table";
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
     table: SvelteDataTable<TFeatures, TData>;

@@ -5,7 +5,7 @@
     DrawerSize,
   } from "@fex-design/core/drawer/create-drawer-controller";
   import type { HTMLAttributes } from "svelte/elements";
-  import { resizeAction } from '@fex-design/svelte/actions/resize';
+  import { resizeAction } from "@fex-design/svelte/actions/resize";
   import { useDrawer } from "./drawer-context";
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class"> {

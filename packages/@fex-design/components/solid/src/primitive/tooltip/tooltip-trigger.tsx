@@ -23,10 +23,13 @@ export function TooltipTrigger(props: {
   const { contentId, overlay, snapshot, triggerElement } = useTooltip('TooltipTrigger')
   const [element, setElement] = createSignal<HTMLElement>()
   const [originalDescription, setOriginalDescription] = createSignal<string>()
-  const description = () => [...new Set([
-    ...(props['aria-describedby'] ?? originalDescription() ?? '').split(/\s+/).filter(Boolean),
-    ...(snapshot().mounted ? [contentId] : []),
-  ])].join(' ') || undefined
+  const description = () =>
+    [
+      ...new Set([
+        ...(props['aria-describedby'] ?? originalDescription() ?? '').split(/\s+/).filter(Boolean),
+        ...(snapshot().mounted ? [contentId] : []),
+      ]),
+    ].join(' ') || undefined
   const restoreDescription = (node: HTMLElement) => {
     const original = originalDescription()
     if (original) node.setAttribute('aria-describedby', original)
@@ -51,29 +54,65 @@ export function TooltipTrigger(props: {
     ref(node) {
       const previous = element()
       if (previous && previous !== node) restoreDescription(previous)
-      setOriginalDescription(node.getAttribute('aria-describedby')?.split(/\s+/).filter((id) => id !== contentId).join(' '))
+      setOriginalDescription(
+        node
+          .getAttribute('aria-describedby')
+          ?.split(/\s+/)
+          .filter((id) => id !== contentId)
+          .join(' '),
+      )
       setElement(node)
       triggerElement.current = node
       overlay.setReferenceElement(node)
     },
     state: {
-      get open() { return snapshot().open },
-      get mounted() { return snapshot().mounted },
-      get phase() { return snapshot().phase },
-      get placement() { return snapshot().placement },
-      get side() { return snapshot().side },
-      get align() { return snapshot().align },
-      get referenceHidden() { return snapshot().referenceHidden },
-      get escaped() { return snapshot().escaped },
-      get trigger() { return snapshot().trigger },
+      get open() {
+        return snapshot().open
+      },
+      get mounted() {
+        return snapshot().mounted
+      },
+      get phase() {
+        return snapshot().phase
+      },
+      get placement() {
+        return snapshot().placement
+      },
+      get side() {
+        return snapshot().side
+      },
+      get align() {
+        return snapshot().align
+      },
+      get referenceHidden() {
+        return snapshot().referenceHidden
+      },
+      get escaped() {
+        return snapshot().escaped
+      },
+      get trigger() {
+        return snapshot().trigger
+      },
     },
     props: {
-      get 'aria-describedby'() { return description() },
-      get 'data-state'() { return snapshot().open ? 'open' : 'closed' },
-      onPointerEnter: (event) => { if (!event.defaultPrevented) overlay.trigger.pointerEnter(eventInfo(event)) },
-      onPointerLeave: (event) => { if (!event.defaultPrevented) overlay.trigger.pointerLeave(eventInfo(event)) },
-      onFocus: (event) => { if (!event.defaultPrevented) overlay.trigger.focus(eventInfo(event)) },
-      onBlur: (event) => { if (!event.defaultPrevented) overlay.trigger.blur(eventInfo(event)) },
+      get 'aria-describedby'() {
+        return description()
+      },
+      get 'data-state'() {
+        return snapshot().open ? 'open' : 'closed'
+      },
+      onPointerEnter: (event) => {
+        if (!event.defaultPrevented) overlay.trigger.pointerEnter(eventInfo(event))
+      },
+      onPointerLeave: (event) => {
+        if (!event.defaultPrevented) overlay.trigger.pointerLeave(eventInfo(event))
+      },
+      onFocus: (event) => {
+        if (!event.defaultPrevented) overlay.trigger.focus(eventInfo(event))
+      },
+      onBlur: (event) => {
+        if (!event.defaultPrevented) overlay.trigger.blur(eventInfo(event))
+      },
     },
   })
 }

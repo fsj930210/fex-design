@@ -5,11 +5,11 @@ import {
   type PointerEvent,
   type ReactNode,
   type Ref,
-} from "react"
-import { useComposedRef } from "@/hooks/use-composed-ref"
-import { useCoreStore } from "@/hooks/use-core-store"
-import { useMemoizedFn } from "@/hooks/use-memoized-fn"
-import { usePopoverContext } from "./popover-context"
+} from 'react'
+import { useComposedRef } from '@/hooks/use-composed-ref'
+import { useCoreStore } from '@/hooks/use-core-store'
+import { useMemoizedFn } from '@/hooks/use-memoized-fn'
+import { usePopoverContext } from './popover-context'
 
 function toEventInfo(
   event: MouseEvent<HTMLElement> | PointerEvent<HTMLElement> | FocusEvent<HTMLElement>,
@@ -17,31 +17,30 @@ function toEventInfo(
   return {
     target: event.target,
     currentTarget: event.currentTarget,
-    clientX: "clientX" in event ? event.clientX : undefined,
-    clientY: "clientY" in event ? event.clientY : undefined,
-    button: "button" in event ? event.button : undefined,
-    pointerType: "pointerType" in event ? event.pointerType : undefined,
+    clientX: 'clientX' in event ? event.clientX : undefined,
+    clientY: 'clientY' in event ? event.clientY : undefined,
+    button: 'button' in event ? event.button : undefined,
+    pointerType: 'pointerType' in event ? event.pointerType : undefined,
     event,
     preventDefault: event.preventDefault.bind(event),
     stopPropagation: event.stopPropagation.bind(event),
   }
 }
 
-export type PopoverTriggerRenderProps = Omit<ComponentProps<"button">, "ref"> & {
-  "data-state": "open" | "closed"
+export type PopoverTriggerRenderProps = Omit<ComponentProps<'button'>, 'ref'> & {
+  'data-state': 'open' | 'closed'
   ref: Ref<HTMLButtonElement>
 }
 
-export interface PopoverTriggerProps extends Omit<ComponentProps<"button">, "children"> {
+export interface PopoverTriggerProps extends Omit<ComponentProps<'button'>, 'children'> {
   ref?: Ref<HTMLButtonElement>
   children: (props: PopoverTriggerRenderProps) => ReactNode
 }
 
-
 export function PopoverTrigger({
   children,
   ref,
-  type = "button",
+  type = 'button',
   onClick,
   onPointerEnter,
   onPointerLeave,
@@ -52,7 +51,7 @@ export function PopoverTrigger({
   onContextMenu,
   ...props
 }: PopoverTriggerProps) {
-  const { overlay, triggerRef } = usePopoverContext("PopoverTrigger")
+  const { overlay, triggerRef } = usePopoverContext('PopoverTrigger')
   const snapshot = useCoreStore(overlay)
   const open = snapshot.open
 
@@ -77,12 +76,12 @@ export function PopoverTrigger({
     ...props,
     ref: composedRef,
     type,
-    "aria-haspopup": props["aria-haspopup"] ?? "dialog",
-    "aria-expanded": open,
-    "data-state": open ? "open" : "closed",
+    'aria-haspopup': props['aria-haspopup'] ?? 'dialog',
+    'aria-expanded': open,
+    'data-state': open ? 'open' : 'closed',
     onClick: (event) => {
       onClick?.(event)
-      if (!event.defaultPrevented && overlay.getSnapshot().trigger.includes("click")) {
+      if (!event.defaultPrevented && overlay.getSnapshot().trigger.includes('click')) {
         syncReferenceFromEvent(event)
         overlay.trigger.click(toEventInfo(event))
       }

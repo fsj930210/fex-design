@@ -6,7 +6,7 @@ export function FocusExample() {
   return (
     <div className="grid w-full gap-3">
       <Input ref={ref} defaultValue="通过 ref 控制" />
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button onClick={() => ref.current?.focus()}>聚焦</Button>
         <Button onClick={() => ref.current?.blur()}>失焦</Button>
         <Button onClick={() => ref.current?.select()}>全选</Button>

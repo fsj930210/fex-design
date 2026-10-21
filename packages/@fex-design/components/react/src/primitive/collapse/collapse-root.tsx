@@ -1,11 +1,14 @@
-import { collapseRootClassName } from "@fex-design/components-styles/collapse"
-import type { ExpansionChangeMeta, ExpansionKey } from "@fex-design/core/expansion/types"
-import { cn } from "@fex-design/utils"
-import type { HTMLAttributes, ReactNode, Ref } from "react"
-import { CollapseContext, type CollapseSize, type CollapseVariant } from "./collapse-context"
-import { useCollapse, type CollapseRef } from "./use-collapse"
+import { collapseRootClassName } from '@fex-design/components-styles/collapse'
+import type { ExpansionChangeMeta, ExpansionKey } from '@fex-design/core/expansion/types'
+import { cn } from '@fex-design/utils'
+import type { HTMLAttributes, ReactNode, Ref } from 'react'
+import { CollapseContext, type CollapseSize, type CollapseVariant } from './collapse-context'
+import { useCollapse, type CollapseRef } from './use-collapse'
 
-export interface CollapseProps extends Omit<HTMLAttributes<HTMLDivElement>, "children" | "onChange"> {
+export interface CollapseProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children' | 'onChange'
+> {
   expandedKeys?: readonly ExpansionKey[]
   defaultExpandedKeys?: readonly ExpansionKey[]
   disabledKeys?: readonly ExpansionKey[]
@@ -26,8 +29,8 @@ export function Collapse({
   multiple,
   collapsible,
   onChange,
-  variant = "outlined",
-  size = "md",
+  variant = 'outlined',
+  size = 'md',
   className,
   children,
   ref,

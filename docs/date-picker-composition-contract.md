@@ -12,12 +12,12 @@ Root 唯一持有 value/defaultValue、open/defaultOpen、picker、multiple、ne
 
 ## 开放配置
 
-| 配置 | 开放能力 | 禁止覆盖 |
-| --- | --- | --- |
-| inputProps | size/variant/placeholder、prefix/suffix、class/style、root/control/prefix/suffix/clear 样式、id/name/form/title/autoComplete/required、ARIA/data、焦点/键盘/指针事件 | value/defaultValue/onValueChange、type、disabled/clearable、Picker 自己的 ARIA/data |
-| startInputProps/endInputProps | 每个范围端点的安全原生输入属性、事件、class/style | 上述受保护字段及输入区域的 size/variant/prefix/suffix |
-| popoverProps | placement/side/align、offset、strategy、碰撞、宽度、zIndex、挂载容器、dismiss、挂载/销毁和延迟、root classNames/styles | open/defaultOpen/onOpenChange/trigger/disabled、内容/标题/Arrow/hover 配置 |
-| calendarProps | locale 展示文字、class/style、cellRender、header/weekHeader/grid/row/cell/cellTrigger/cellContent classNames/styles | value/values/range、默认值、viewDate/panel及默认值、granularity/monthSelection、约束、周规则、内部事件、fullscreen/showWeek/headerRender/fullCellRender/footerRender |
+| 配置                          | 开放能力                                                                                                                                                             | 禁止覆盖                                                                                                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| inputProps                    | size/variant/placeholder、prefix/suffix、class/style、root/control/prefix/suffix/clear 样式、id/name/form/title/autoComplete/required、ARIA/data、焦点/键盘/指针事件 | value/defaultValue/onValueChange、type、disabled/clearable、Picker 自己的 ARIA/data                                                                                  |
+| startInputProps/endInputProps | 每个范围端点的安全原生输入属性、事件、class/style                                                                                                                    | 上述受保护字段及输入区域的 size/variant/prefix/suffix                                                                                                                |
+| popoverProps                  | placement/side/align、offset、strategy、碰撞、宽度、zIndex、挂载容器、dismiss、挂载/销毁和延迟、root classNames/styles                                               | open/defaultOpen/onOpenChange/trigger/disabled、内容/标题/Arrow/hover 配置                                                                                           |
+| calendarProps                 | locale 展示文字、class/style、cellRender、header/weekHeader/grid/row/cell/cellTrigger/cellContent classNames/styles                                                  | value/values/range、默认值、viewDate/panel及默认值、granularity/monthSelection、约束、周规则、内部事件、fullscreen/showWeek/headerRender/fullCellRender/footerRender |
 
 类型和运行时使用显式白名单；未提供/undefined 被忽略，合法的 false、0、空字符串保留。classNames/styles 只影响已有默认部件，不生成新的节点或业务条件。cellRender 追加内容，默认 CalendarCellTrigger 始终保留。
 

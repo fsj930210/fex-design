@@ -8,7 +8,7 @@ import type {
 } from '@fex-design/core/select/types'
 import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
 import type { SelectionValue } from '@fex-design/core/selection/types'
-import { computed, provide, useId } from 'vue'
+import { computed, provide, useAttrs, useId } from 'vue'
 import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 import PopoverRoot from '../popover/popover-root.vue'
 import { selectKey } from './context'
@@ -34,7 +34,6 @@ const props = withDefaults(
     filterOption?: SelectFilterOption
     open?: boolean | undefined
     defaultOpen?: boolean
-    status?: 'error' | 'warning' | undefined
     virtual?: SelectVirtualOptions
     popoverProps?: Record<string, unknown>
   }>(),
@@ -46,6 +45,17 @@ const props = withDefaults(
     showSearch: false,
     open: undefined,
   },
+)
+// Display attributes are forwarded to the trigger through context instead of
+// falling through to PopoverRoot's DOM.
+defineOptions({ inheritAttrs: false })
+const attrs = useAttrs()
+const ariaInvalid = computed(() => {
+  const value = attrs['aria-invalid']
+  return typeof value === 'string' || typeof value === 'boolean' ? value : undefined
+})
+const dataWarning = computed(() =>
+  typeof attrs['data-warning'] === 'string' ? attrs['data-warning'] : undefined,
 )
 const emit = defineEmits<{
   change: [value: SelectionValue | SelectionValue[] | undefined, meta: SelectChangeMeta]
@@ -93,7 +103,9 @@ const selection = createSelectionController({
 })
 let controller!: ReturnType<typeof createSelectController>
 controller = createSelectController({
-  get disabled() { return props.disabled },
+  get disabled() {
+    return props.disabled
+  },
   selection,
   get options() {
     return filterSelectOptions(
@@ -146,7 +158,8 @@ provide(selectKey, {
   disabled: computed(() => props.disabled),
   clearable: computed(() => props.clearable),
   loading: computed(() => props.loading),
-  status: computed(() => props.status),
+  ariaInvalid,
+  dataWarning,
   virtual: computed(() => props.virtual),
   listId: `select-${useId()}`,
   removeValue(value) {
@@ -159,5 +172,11 @@ function syncOpen(open: boolean) {
 }
 </script>
 <template>
-  <PopoverRoot v-bind="popoverOptions" :open="snapshot.open" :disabled="disabled" @open-change="syncOpen"><slot /></PopoverRoot>
+  <PopoverRoot
+    v-bind="popoverOptions"
+    :open="snapshot.open"
+    :disabled="disabled"
+    @open-change="syncOpen"
+    ><slot
+  /></PopoverRoot>
 </template>

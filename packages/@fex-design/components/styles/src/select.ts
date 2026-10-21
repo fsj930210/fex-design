@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+import { formTreatment } from './form-treatment'
 import { inputFocusClassName } from './input'
 import { selectableItemSelectedClassName } from './selectable-item'
 
@@ -6,8 +7,8 @@ export const selectTriggerClassName = cva(
   [
     'group/select-trigger relative flex min-h-9 w-full min-w-0 cursor-pointer items-center gap-2 rounded-md border border-[var(--input-border-color,var(--border))] bg-[var(--input-background,var(--background))] text-sm text-[var(--input-color,var(--foreground))] outline-none',
     inputFocusClassName,
-    'data-[status=error]:border-danger data-[status=error]:ring-2 data-[status=error]:ring-danger/20',
-    'data-[status=warning]:border-warning data-[status=warning]:ring-2 data-[status=warning]:ring-warning/20',
+    formTreatment('has-[[aria-invalid=true]]', 'var(--danger)'),
+    formTreatment('data-[warning=true]', 'var(--warning)'),
     'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
   ].join(' '),
   {
@@ -57,4 +58,3 @@ export const selectEmptyClassName = 'px-3 py-6 text-center text-sm text-muted-fo
 export const selectLoadingClassName = 'px-3 py-6 text-center text-sm text-muted-foreground'
 
 export type SelectStyleProps = VariantProps<typeof selectTriggerClassName>
-

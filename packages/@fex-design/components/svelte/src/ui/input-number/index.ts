@@ -1,1 +1,1 @@
-export { default as InputNumber } from "./input-number.svelte"
+export { default as InputNumber } from './input-number.svelte'

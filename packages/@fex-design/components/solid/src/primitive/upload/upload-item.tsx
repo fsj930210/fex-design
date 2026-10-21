@@ -1,11 +1,7 @@
 import type { UploadId } from '@fex-design/core/upload/types'
 import { uploadItemClassName } from '@fex-design/components-styles/upload'
 import { cn } from '@fex-design/utils'
-import {
-  Show,
-  splitProps,
-  type JSX,
-} from 'solid-js'
+import { Show, splitProps, type JSX } from 'solid-js'
 import { UploadItemContext, useUploadContext } from './context'
 import { createUploadItem } from './create-upload'
 

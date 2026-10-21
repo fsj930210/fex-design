@@ -11,12 +11,7 @@ import type {
 } from '@fex-design/core/mentions/types'
 import { mentionsRootClassName } from '@fex-design/components-styles/mentions'
 import { cn } from '@fex-design/utils'
-import {
-  createUniqueId,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createUniqueId, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 import { MentionsContext, type MentionsContextValue } from './mentions-context'
 

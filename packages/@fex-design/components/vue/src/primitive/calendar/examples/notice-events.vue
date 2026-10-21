@@ -7,6 +7,18 @@ import { calendarDemoDate, calendarDemoNotices } from '@fex-design/docs-shared/c
 const options: CalendarUIOptions = { defaultViewDate: calendarDemoDate }
 </script>
 <template>
-<CalendarRoot v-bind="getCalendarUIOptions(options)" :class="calendarUIRootClassName" :data-fullscreen="true"><ExampleContent :options="options"><template #cell="{ cell }"><ul><li v-for="notice in calendarDemoNotices(cell)" :key="notice"><a href="#calendar-notice">{{ notice }}</a></li></ul></template></ExampleContent></CalendarRoot>
+  <CalendarRoot
+    v-bind="getCalendarUIOptions(options)"
+    :class="calendarUIRootClassName"
+    :data-fullscreen="true"
+    ><ExampleContent :options="options"
+      ><template #cell="{ cell }"
+        ><ul>
+          <li v-for="notice in calendarDemoNotices(cell)" :key="notice">
+            <a href="#calendar-notice">{{ notice }}</a>
+          </li>
+        </ul></template
+      ></ExampleContent
+    ></CalendarRoot
+  >
 </template>
-

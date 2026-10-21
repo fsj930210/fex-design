@@ -1,7 +1,7 @@
-import { createExpansionController } from "@fex-design/core/expansion/create-expansion-controller"
-import type { ExpansionChangeMeta, ExpansionKey } from "@fex-design/core/expansion/types"
-import { collapseRootClassName } from "@fex-design/components-styles/collapse"
-import { cn } from "@fex-design/utils"
+import { createExpansionController } from '@fex-design/core/expansion/create-expansion-controller'
+import type { ExpansionChangeMeta, ExpansionKey } from '@fex-design/core/expansion/types'
+import { collapseRootClassName } from '@fex-design/components-styles/collapse'
+import { cn } from '@fex-design/utils'
 import {
   createEffect,
   createMemo,
@@ -10,18 +10,19 @@ import {
   splitProps,
   type JSX,
   type ParentProps,
-} from "solid-js"
-import { createCoreStoreSignal } from "@fex-design/solid/primitives/create-core-store-signal"
+} from 'solid-js'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
 import {
   CollapseContext,
   type CollapseContextValue,
   type CollapseRef,
   type CollapseSize,
   type CollapseVariant,
-} from "./collapse-context"
+} from './collapse-context'
 
-export interface CollapseProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, "children" | "onChange">> {
+export interface CollapseProps extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'onChange'>
+> {
   expandedKeys?: readonly ExpansionKey[]
   defaultExpandedKeys?: readonly ExpansionKey[]
   disabledKeys?: readonly ExpansionKey[]
@@ -36,26 +37,28 @@ export type CollapseRootProps = CollapseProps
 
 export function Collapse(props: CollapseProps) {
   const merged = mergeProps(
-    { variant: "outlined" as CollapseVariant, size: "md" as CollapseSize, collapsible: true },
+    { variant: 'outlined' as CollapseVariant, size: 'md' as CollapseSize, collapsible: true },
     props,
   )
   const [local, rest] = splitProps(merged, [
-    "expandedKeys",
-    "defaultExpandedKeys",
-    "disabledKeys",
-    "multiple",
-    "collapsible",
-    "variant",
-    "size",
-    "class",
-    "children",
-    "ref",
-    "onChange",
+    'expandedKeys',
+    'defaultExpandedKeys',
+    'disabledKeys',
+    'multiple',
+    'collapsible',
+    'variant',
+    'size',
+    'class',
+    'children',
+    'ref',
+    'onChange',
   ])
   const baseId = createUniqueId()
   const controller = createExpansionController({
     ...(local.expandedKeys === undefined ? {} : { expandedKeys: local.expandedKeys }),
-    ...(local.defaultExpandedKeys === undefined ? {} : { defaultExpandedKeys: local.defaultExpandedKeys }),
+    ...(local.defaultExpandedKeys === undefined
+      ? {}
+      : { defaultExpandedKeys: local.defaultExpandedKeys }),
     ...(local.disabledKeys === undefined ? {} : { disabledKeys: local.disabledKeys }),
     ...(local.multiple === undefined ? {} : { multiple: local.multiple }),
     ...(local.collapsible === undefined ? {} : { collapsible: local.collapsible }),

@@ -1,8 +1,14 @@
-<div #root data-slot="scrollbar-root" class="relative isolate h-48 w-72 overflow-hidden rounded-md border">
+<div
+  #root
+  data-slot="scrollbar-root"
+  class="relative isolate h-48 w-72 overflow-hidden rounded-md border"
+>
   <div scrollbarViewport [overflow]="{ x: 'hidden' }">
     <div class="grid gap-3 p-4">
-        @for (line of lines; track line) {<p>{{ line }}</p>}
-      </div>
+      @for (line of lines; track line) {
+      <p>{{ line }}</p>
+      }
+    </div>
   </div>
   <div scrollbarBar axis="y">
     <div scrollbarTrack axis="y"><div scrollbarThumb axis="y"></div></div>

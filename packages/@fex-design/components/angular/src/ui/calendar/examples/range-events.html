@@ -1,1 +1,13 @@
-<div calendar [defaultViewDate]="date" [classNames]="{ cell: 'px-0', cellContent: 'overflow-visible' }"><ng-template #cell let-cell="cell">@if (event(cell); as item) { <div class="bg-primary text-primary-foreground px-2" [attr.data-segment]="item.segment">{{ item.label }}</div> }</ng-template></div>
+<div
+  calendar
+  [defaultViewDate]="date"
+  [classNames]="{ cell: 'px-0', cellContent: 'overflow-visible' }"
+>
+  <ng-template #cell let-cell="cell"
+    >@if (event(cell); as item) {
+    <div class="bg-primary text-primary-foreground px-2" [attr.data-segment]="item.segment">
+      {{ item.label }}
+    </div>
+    }</ng-template
+  >
+</div>

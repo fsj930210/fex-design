@@ -1,6 +1,11 @@
 @if (spinning() === undefined) {
-<span spinner [size]="size()" [indicator]="indicator()"
-  [class]="classNames().spinner" [style]="styles().spinner"></span>
+<span
+  spinner
+  [size]="size()"
+  [indicator]="indicator()"
+  [class]="classNames().spinner"
+  [style]="styles().spinner"
+></span>
 } @else {
 <ng-content />
 @if (spinning()) {
@@ -16,5 +21,4 @@
   <span spinnerText [class]="classNames().text" [style]="styles().text">{{ text() }}</span>
   }
 </div>
-}
-}
+} }

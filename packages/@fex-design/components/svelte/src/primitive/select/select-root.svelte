@@ -11,7 +11,7 @@
   import type { Snippet } from "svelte";
   import { setContext } from "svelte";
   import { toStore } from "svelte/store";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import Popover from "../popover/popover.svelte";
   import { selectContextKey, type SelectContext } from "./context";
   interface Props {
@@ -42,7 +42,8 @@
     disabled?: boolean | undefined;
     virtual?: SelectVirtualOptions | undefined;
     maxCount?: number | undefined;
-    status?: "error" | "warning" | undefined;
+    "aria-invalid"?: string | boolean | undefined;
+    "data-warning"?: string | undefined;
     popoverProps?: Record<string, unknown> | undefined;
   }
   let {
@@ -63,7 +64,8 @@
     disabled = false,
     virtual,
     maxCount,
-    status,
+    "aria-invalid": ariaInvalid,
+    "data-warning": dataWarning,
     popoverProps = {},
   }: Props = $props();
   const isMultiple = () => multiple;
@@ -78,7 +80,9 @@
       return isMultiple();
     },
     get disabledValues() {
-      return options.filter((option) => option.disabled).map((option) => option.value);
+      return options
+        .filter((option) => option.disabled)
+        .map((option) => option.value);
     },
     onChange(values, meta) {
       const resolve = (item: SelectionValue) =>
@@ -101,7 +105,9 @@
   });
   let controller: ReturnType<typeof createSelectController>;
   controller = createSelectController({
-    get disabled() { return disabled; },
+    get disabled() {
+      return disabled;
+    },
     selection,
     get options() {
       return filterSelectOptions(
@@ -137,11 +143,7 @@
     snapshot,
     options: () => options,
     visibleOptions: () =>
-      filterSelectOptions(
-        options,
-        currentSnapshot.searchValue,
-        filterOption,
-      ),
+      filterSelectOptions(options, currentSnapshot.searchValue, filterOption),
     selectedOptions: () => {
       void currentSnapshot.selectedValues;
       return selection.getSnapshot().values.map(
@@ -157,10 +159,13 @@
     disabled: () => disabled,
     clearable: () => clearable,
     loading: () => loading,
-    status: () => status,
+    ariaInvalid: () => ariaInvalid,
+    dataWarning: () => dataWarning,
     virtual: () => virtual,
     listId,
-    removeValue: (item) => { if (!disabled) selection.unselect(item); },
+    removeValue: (item) => {
+      if (!disabled) selection.unselect(item);
+    },
   };
   setContext(selectContextKey, context);
 </script>

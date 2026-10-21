@@ -16,7 +16,6 @@ import {
   SelectContent,
   SelectRoot,
   SelectTrigger,
-  SelectValue,
   type SelectChangeMeta,
   type SelectInputProps,
 } from '@fex-design/react/primitive/select'
@@ -34,6 +33,10 @@ export interface SelectProps<TItem extends object = SelectOption> extends Omit<
   ComponentProps<'div'>,
   'children' | 'defaultValue' | 'onChange'
 > {
+  triggerProps?: Omit<ComponentProps<typeof SelectTrigger>, 'children'> | undefined
+  contentProps?:
+    | Omit<ComponentProps<typeof SelectContent>, 'optionRender' | 'popupRender' | 'emptyContent'>
+    | undefined
   options: readonly DataItem<TItem>[]
   fieldNames?: SelectFieldNames<TItem>
   value?: SelectionValue | SelectionValue[]
@@ -50,7 +53,6 @@ export interface SelectProps<TItem extends object = SelectOption> extends Omit<
   maxCount?: number
   maxTagCount?: number
   virtual?: SelectVirtualOptions
-  status?: 'error' | 'warning'
   inputProps?: SelectInputProps
   popoverProps?: SelectPopoverProps
   getPopupContainer?: PopoverRootProps['getPopupContainer']
@@ -67,6 +69,8 @@ export function Select<TItem extends object = SelectOption>({
   fieldNames = { value: 'value', label: 'label' } as SelectFieldNames<TItem>,
   className,
   style,
+  triggerProps,
+  contentProps,
   inputProps,
   popoverProps,
   getPopupContainer,
@@ -91,15 +95,15 @@ export function Select<TItem extends object = SelectOption>({
       getPopupContainer={getPopupContainer}
     >
       <SelectTrigger
-        className={className}
-        style={style}
-        inputProps={inputProps}
-        placeholder={props.placeholder}
-        maxTagCount={maxTagCount}
-      >
-        <SelectValue maxTagCount={maxTagCount} placeholder={props.placeholder} />
-      </SelectTrigger>
+        {...triggerProps}
+        className={cn(triggerProps?.className, className)}
+        style={{ ...triggerProps?.style, ...style }}
+        inputProps={inputProps ?? triggerProps?.inputProps}
+        placeholder={props.placeholder ?? triggerProps?.placeholder}
+        maxTagCount={maxTagCount ?? triggerProps?.maxTagCount}
+      />
       <SelectContent
+        {...contentProps}
         popupRender={popupRender}
         emptyContent={emptyContent}
         optionRender={renderOption}

@@ -1,0 +1,44 @@
+<div class="grid w-full max-w-xl gap-6">
+  <div progressRoot [value]="72" [thickness]="12" class="flex flex-col w-full">
+    <div class="flex items-center justify-between text-sm mb-1.5 w-full font-semibold">
+      <span progressLabel>上传文件</span><span class="text-violet-600">72%</span>
+    </div>
+    <div class="flex w-full items-center">
+      <div progressTrack class="min-w-0 flex-1 rounded-md">
+        <div
+          progressRange
+          class="rounded-md"
+          style="background: linear-gradient(90deg, #6366f1, #a855f7)"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-6">
+    <div
+      progressRoot
+      [value]="72"
+      [size]="96"
+      variant="circle"
+      class="relative inline-flex items-center justify-center rounded-full bg-muted/30 p-2"
+    >
+      <svg progressCircle>
+        <circle progressCircleTrack></circle>
+        <circle progressCircleRange class="text-violet-600"></circle>
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center font-medium">72%</div>
+    </div>
+    <div
+      progressRoot
+      [value]="72"
+      [size]="96"
+      variant="dashboard"
+      class="relative inline-flex items-center justify-center rounded-full bg-muted/30 p-2"
+    >
+      <svg progressCircle [gapDegree]="90">
+        <circle progressCircleTrack [gapDegree]="90"></circle>
+        <circle progressCircleRange [gapDegree]="90" class="text-violet-600"></circle>
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center font-medium">72%</div>
+    </div>
+  </div>
+</div>

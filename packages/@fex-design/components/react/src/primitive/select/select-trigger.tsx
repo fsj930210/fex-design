@@ -1,26 +1,30 @@
-import { getSelectValueLayout } from '@fex-design/core/select/value-layout'
+import { SelectValue, type SelectValueProps } from './select-value'
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   selectClearClassName,
   selectClearableIndicatorClassName,
   selectIndicatorClassName,
-  selectPlaceholderClassName,
   selectSuffixClassName,
-  selectValueClassName,
   selectValueContainerClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
 import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
-import { Tag, TagAction } from '@fex-design/react/primitive/tag'
-import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '@fex-design/react/primitive/input'
+import {
+  InputClear,
+  InputControl,
+  InputPrefix,
+  InputRoot,
+  InputSuffix,
+} from '@fex-design/react/primitive/input'
 import type { InputProps } from '@fex-design/react/ui/input'
 import { PopoverTrigger } from '@fex-design/react/primitive/popover'
 import { useSelect } from './use-select'
 
 export interface SelectTriggerProps extends Omit<ComponentProps<'div'>, 'children' | 'prefix'> {
   children?: ReactNode
+  valueProps?: Omit<SelectValueProps, 'children'> | undefined
   inputProps?: SelectInputProps
   maxTagCount?: number
   placeholder?: string
@@ -39,10 +43,13 @@ export function SelectTrigger({
   children,
   inputProps,
   tagRender,
+  valueProps,
   maxTagCount,
   placeholder = '请选择',
   className,
   onKeyDown,
+  'aria-invalid': ariaInvalid,
+  'data-warning': dataWarning,
   ...props
 }: SelectTriggerProps) {
   const select = useSelect()
@@ -95,7 +102,7 @@ export function SelectTrigger({
           aria-haspopup="listbox"
           data-slot="select-trigger"
           data-clearable={select.clearable && hasValue ? 'true' : undefined}
-          data-status={select.status}
+          data-warning={dataWarning ?? select.dataWarning}
           value={select.snapshot.searchValue}
           disabled={select.disabled}
           readOnly={!select.showSearch}
@@ -124,16 +131,17 @@ export function SelectTrigger({
           <div className={selectValueContainerClassName}>
             {children ?? (
               <SelectValue
+                {...valueProps}
                 placeholder={placeholder}
-                maxTagCount={maxTagCount}
-                tagRender={tagRender}
+                maxTagCount={maxTagCount ?? valueProps?.maxTagCount}
+                tagRender={tagRender ?? valueProps?.tagRender}
               />
             )}
             <InputControl
               {...controlProps}
               role="combobox"
               aria-haspopup="listbox"
-              aria-invalid={select.status === 'error' || undefined}
+              aria-invalid={ariaInvalid ?? select.ariaInvalid}
               aria-expanded={select.snapshot.open}
               aria-controls={select.listId}
               aria-activedescendant={
@@ -159,7 +167,11 @@ export function SelectTrigger({
             style={styles?.suffix}
           >
             {select.loading ? <LoadingIcon className="animate-spin" /> : null}
-            <span className={select.clearable && hasValue ? selectClearableIndicatorClassName : undefined}>
+            <span
+              className={
+                select.clearable && hasValue ? selectClearableIndicatorClassName : undefined
+              }
+            >
               {indicator}
             </span>
             {select.clearable && hasValue ? (
@@ -180,75 +192,5 @@ export function SelectTrigger({
         </InputRoot>
       )}
     </PopoverTrigger>
-  )
-}
-
-export interface SelectValueProps extends ComponentProps<'div'> {
-  maxTagCount?: number | undefined
-  placeholder?: string | undefined
-  tagRender?:
-    | ((option: SelectOption, context: { remove: () => void; disabled: boolean }) => ReactNode)
-    | undefined
-}
-
-export function SelectValue({
-  children,
-  maxTagCount,
-  placeholder = '请选择',
-  tagRender,
-  className,
-  ...props
-}: SelectValueProps) {
-  const select = useSelect()
-  if (children != null)
-    return (
-      <div {...props} className={cn(selectValueClassName, className)}>
-        {children}
-      </div>
-    )
-  const layout = getSelectValueLayout(select.selectedOptions, {
-    multiple: select.multiple,
-    showSearch: select.showSearch,
-    open: select.snapshot.open,
-    searchValue: select.snapshot.searchValue,
-    maxTagCount,
-  })
-  if (layout.showPlaceholder)
-    return (
-      <span className={selectPlaceholderClassName}>{placeholder}</span>
-    )
-  if (layout.showSingle)
-    return (
-      <div {...props} className={cn(selectValueClassName, className)}>
-        {select.selectedOptions[0]?.label}
-      </div>
-    )
-  if (!layout.showTags) return null
-  const { visibleOptions, overflowCount } = layout
-  return (
-    <div {...props} className={cn(selectValueClassName, className)}>
-      {visibleOptions.map((option) =>
-        tagRender ? (
-          <span key={option.value}>
-            {tagRender(option, {
-              remove: () => select.removeValue(option.value),
-              disabled: option.disabled === true,
-            })}
-          </span>
-        ) : (
-          <Tag key={option.value} size="sm" onPointerDownCapture={(event) => event.preventDefault()}>
-            {option.label}
-            <TagAction
-              aria-label={`Remove ${String(option.label)}`}
-              onClick={(event) => {
-                event.stopPropagation()
-                select.removeValue(option.value)
-              }}
-            />
-          </Tag>
-        ),
-      )}
-      {overflowCount > 0 ? <Tag size="sm">+{overflowCount}</Tag> : null}
-    </div>
   )
 }

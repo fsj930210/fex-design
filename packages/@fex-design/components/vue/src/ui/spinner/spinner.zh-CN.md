@@ -27,13 +27,13 @@
 
 以下属性属于 `SpinnerContainer`；独立 `Spinner` 使用 Primitive 的 `size` 和原生 span 属性。
 
-| 属性 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| spinning | boolean \| undefined | undefined | 否 | 未设置时显示独立指示器；false 显示内容；true 在内容上方显示加载遮罩。 |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | 否 | 指示器尺寸。 |
-| text | string | — | 否 | 加载说明，存在时默认与指示器纵向居中排列。 |
-| indicator（插槽） | indicator 具名插槽 | 默认 LoadingIcon | 否 | 替换默认指示器。 |
-| classNames | SpinnerClassNames | — | 否 | 设置 root、spinner、overlay、text 的类名。 |
-| styles | SpinnerStyles<StyleValue> | — | 否 | 设置 root、spinner、overlay、text 的样式。 |
+| 属性              | 类型                      | 默认值           | 必填 | 说明                                                                  |
+| ----------------- | ------------------------- | ---------------- | ---- | --------------------------------------------------------------------- |
+| spinning          | boolean \| undefined      | undefined        | 否   | 未设置时显示独立指示器；false 显示内容；true 在内容上方显示加载遮罩。 |
+| size              | 'sm' \| 'md' \| 'lg'      | 'md'             | 否   | 指示器尺寸。                                                          |
+| text              | string                    | —                | 否   | 加载说明，存在时默认与指示器纵向居中排列。                            |
+| indicator（插槽） | indicator 具名插槽        | 默认 LoadingIcon | 否   | 替换默认指示器。                                                      |
+| classNames        | SpinnerClassNames         | —                | 否   | 设置 root、spinner、overlay、text 的类名。                            |
+| styles            | SpinnerStyles<StyleValue> | —                | 否   | 设置 root、spinner、overlay、text 的样式。                            |
 
 未提供 `indicator` 时保留默认 LoadingIcon。`spinning` 在 true 与 false 之间切换时，内容保持挂载，保留内部状态与滚动位置。

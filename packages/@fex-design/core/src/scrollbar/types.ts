@@ -3,8 +3,19 @@ export type ScrollbarVisibility = 'auto' | 'always' | 'hidden'
 export type ScrollbarAutoHide = 'never' | 'scroll' | 'move' | 'leave'
 export type ScrollbarClickScroll = false | 'page' | 'jump'
 export type ScrollbarOverflowMode = 'auto' | 'hidden'
-export type ScrollbarOverflow = { x?: ScrollbarOverflowMode | undefined; y?: ScrollbarOverflowMode | undefined }
-export type ScrollbarPart = 'viewport' | 'barX' | 'barY' | 'trackX' | 'trackY' | 'thumbX' | 'thumbY' | 'corner'
+export type ScrollbarOverflow = {
+  x?: ScrollbarOverflowMode | undefined
+  y?: ScrollbarOverflowMode | undefined
+}
+export type ScrollbarPart =
+  | 'viewport'
+  | 'barX'
+  | 'barY'
+  | 'trackX'
+  | 'trackY'
+  | 'thumbX'
+  | 'thumbY'
+  | 'corner'
 
 export interface ScrollbarOptions {
   /** Bar visibility overrides autoHide. @default 'auto' */

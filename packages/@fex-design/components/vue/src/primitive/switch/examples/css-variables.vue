@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Spinner } from '@fex-design/vue/primitive/spinner'
+
 import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitive/switch'
 </script>
 <template>
@@ -46,6 +48,16 @@ import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitiv
           ><SwitchContent state="unchecked">关闭</SwitchContent><SwitchThumb
         /></SwitchRoot>
       </div>
+    </section>
+    <section class="grid gap-2">
+      <span class="text-sm text-muted-foreground">加载图标</span
+      ><SwitchRoot
+        loading
+        default-checked
+        class="[--switch-track-checked-background:#7c3aed] [--switch-thumb-background:#f5f3ff] [--primary:#6d28d9]"
+        aria-label="加载图标"
+        ><SwitchThumb><Spinner class="text-primary" aria-hidden="true" /></SwitchThumb
+      ></SwitchRoot>
     </section>
   </div>
 </template>

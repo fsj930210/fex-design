@@ -50,7 +50,8 @@ export function ManualInstall(props: { slug: string; framework: Framework }) {
             </button>
           </div>
           <p class="text-xs text-secondary-foreground">
-            在项目入口文件（如 <code>main.tsx</code> / <code>main.ts</code> / <code>app.vue</code>）中引入全局设计系统样式：
+            在项目入口文件（如 <code>main.tsx</code> / <code>main.ts</code> / <code>app.vue</code>
+            ）中引入全局设计系统样式：
           </p>
           <div class="mt-2 overflow-x-auto rounded-lg border border-border bg-muted-background p-2.5 text-xs font-mono text-foreground">
             <code>import '@fex-design/styles'</code>
@@ -100,7 +101,9 @@ export function ManualInstall(props: { slug: string; framework: Framework }) {
 
                 <Show when={showUiCode()}>
                   <div class="mt-2 max-h-72 overflow-y-auto rounded-lg border border-border bg-muted-background p-3 text-[11px] font-mono leading-relaxed text-foreground">
-                    <pre><code>{uiSource()?.code}</code></pre>
+                    <pre>
+                      <code>{uiSource()?.code}</code>
+                    </pre>
                   </div>
                 </Show>
               </div>
@@ -139,7 +142,9 @@ export function ManualInstall(props: { slug: string; framework: Framework }) {
 
                 <Show when={showPrimitiveCode()}>
                   <div class="mt-2 max-h-72 overflow-y-auto rounded-lg border border-border bg-muted-background p-3 text-[11px] font-mono leading-relaxed text-foreground">
-                    <pre><code>{primitiveSource()?.code}</code></pre>
+                    <pre>
+                      <code>{primitiveSource()?.code}</code>
+                    </pre>
                   </div>
                 </Show>
               </div>

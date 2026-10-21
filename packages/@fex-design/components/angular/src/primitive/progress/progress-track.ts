@@ -19,5 +19,7 @@ export class ProgressTrack {
   readonly className = input<string | undefined>(undefined, { alias: 'class' })
   readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
   readonly root = inject(progressContext)
-  protected readonly hostClassName = createHostClassName(() => cn(progressLineClassName, this.className()))
+  protected readonly hostClassName = createHostClassName(() =>
+    cn(progressLineClassName, this.className()),
+  )
 }

@@ -1,9 +1,6 @@
 import { bubbleActionClassName } from '@fex-design/components-styles/bubble'
 import { cn } from '@fex-design/utils'
-import {
-  splitProps,
-  type JSX,
-} from 'solid-js'
+import { splitProps, type JSX } from 'solid-js'
 import { Toggle, type ToggleProps } from '../toggle/toggle'
 
 export type ActionRender = (options: {

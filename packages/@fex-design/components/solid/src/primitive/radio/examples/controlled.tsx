@@ -5,7 +5,7 @@ export default function Example() {
   const [value, setValue] = createSignal<RadioValue>('pear')
   return (
     <div class="grid gap-3">
-      <div class="flex gap-2">
+      <div class="flex flex-wrap gap-2">
         <Button size="sm" onClick={() => setValue('apple')}>
           选择苹果
         </Button>

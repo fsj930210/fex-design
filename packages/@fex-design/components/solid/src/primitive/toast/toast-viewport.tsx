@@ -4,27 +4,27 @@ import {
   toastStackLayerClassName,
   toastViewportClassName,
   type ToastPlacement,
-} from "@fex-design/components-styles/toast"
-import { cn } from "@fex-design/utils"
-import { For, Show, type JSX } from "solid-js"
-import { Portal } from "solid-js/web"
-import { createToasts } from "@fex-design/solid/primitives/create-toasts"
-import { toast, type SolidToastItem, type SolidToastManager } from "./toast-manager"
+} from '@fex-design/components-styles/toast'
+import { cn } from '@fex-design/utils'
+import { For, Show, type JSX } from 'solid-js'
+import { Portal } from 'solid-js/web'
+import { createToasts } from '@fex-design/solid/primitives/create-toasts'
+import { toast, type SolidToastItem, type SolidToastManager } from './toast-manager'
 
 const toastPlacements: ToastPlacement[] = [
-  "top-left",
-  "top",
-  "top-right",
-  "bottom-left",
-  "bottom",
-  "bottom-right",
+  'top-left',
+  'top',
+  'top-right',
+  'bottom-left',
+  'bottom',
+  'bottom-right',
 ]
 
 function styleObject(style: JSX.CSSProperties | string | undefined) {
-  return typeof style === "object" ? style : {}
+  return typeof style === 'object' ? style : {}
 }
 
-export interface ToastViewportProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "children"> {
+export interface ToastViewportProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children'> {
   children: (items: SolidToastItem[]) => JSX.Element
   manager?: SolidToastManager
   offset?: number | string
@@ -50,8 +50,8 @@ export function ToastViewport(props: ToastViewportProps) {
               data-slot="toast-viewport"
               class={cn(toastViewportClassName({ placement }), props.class)}
               style={{
-                "--toast-offset":
-                  typeof props.offset === "number" ? `${props.offset}px` : (props.offset ?? "24px"),
+                '--toast-offset':
+                  typeof props.offset === 'number' ? `${props.offset}px` : (props.offset ?? '24px'),
                 ...styleObject(props.style),
               }}
             >
@@ -59,11 +59,11 @@ export function ToastViewport(props: ToastViewportProps) {
                 <Show when={stacked()}>
                   <div
                     aria-hidden="true"
-                    class={cn(toastStackLayerClassName, "top-2 opacity-70")}
+                    class={cn(toastStackLayerClassName, 'top-2 opacity-70')}
                   />
                   <div
                     aria-hidden="true"
-                    class={cn(toastStackLayerClassName, "top-4 w-[calc(100%-32px)] opacity-40")}
+                    class={cn(toastStackLayerClassName, 'top-4 w-[calc(100%-32px)] opacity-40')}
                   />
                 </Show>
                 <div class={toastStackItemsClassName({ placement })}>

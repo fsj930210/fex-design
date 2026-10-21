@@ -5,7 +5,14 @@
 ## 示例
 
 ```tsx
-import { ScrollbarRoot, ScrollbarViewport, ScrollbarBar, ScrollbarCorner, ScrollbarTrack, ScrollbarThumb } from '@fex-design/solid/primitive/scrollbar'
+import {
+  ScrollbarRoot,
+  ScrollbarViewport,
+  ScrollbarBar,
+  ScrollbarCorner,
+  ScrollbarTrack,
+  ScrollbarThumb,
+} from '@fex-design/solid/primitive/scrollbar'
 
 export function ScrollbarBasicExample() {
   return (
@@ -26,16 +33,16 @@ export function ScrollbarBasicExample() {
 
 ## API
 
-| 属性 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `overflow` | `{ x?: 'auto' \| 'hidden'; y?: 'auto' \| 'hidden' }` | 两轴均为 auto | 否 | Root 的滚动轴配置，Viewport 可逐轴覆盖。 |
-| `visibility` | `'auto' \| 'always' \| 'hidden'` | 'auto' | 否 | 滚动条可见策略，优先于 autoHide。 |
-| `autoHide` | `'never' \| 'scroll' \| 'move' \| 'leave'` | 'scroll' | 否 | 持续显示、滚动后隐藏、移动后隐藏或离开后隐藏。 |
-| `autoHideDelay` | `number` | 900 | 否 | 停止活动或指针离开后隐藏的延迟，单位毫秒。 |
-| `dragScroll` | `boolean` | true | 否 | 允许拖动滑块。 |
-| `clickScroll` | `false \| 'page' \| 'jump'` | false | 否 | 轨道点击行为：禁用、翻页或跳转。 |
-| `minThumbSize` | `number` | 24 | 否 | 滑块最小尺寸，单位像素，受轨道尺寸限制。 |
-| `disabled` | `boolean` | false | 否 | 禁用自定义滚动条交互，保留原生滚动。 |
+| 属性            | 类型                                                 | 默认值        | 必填 | 说明                                           |
+| --------------- | ---------------------------------------------------- | ------------- | ---- | ---------------------------------------------- |
+| `overflow`      | `{ x?: 'auto' \| 'hidden'; y?: 'auto' \| 'hidden' }` | 两轴均为 auto | 否   | Root 的滚动轴配置，Viewport 可逐轴覆盖。       |
+| `visibility`    | `'auto' \| 'always' \| 'hidden'`                     | 'auto'        | 否   | 滚动条可见策略，优先于 autoHide。              |
+| `autoHide`      | `'never' \| 'scroll' \| 'move' \| 'leave'`           | 'scroll'      | 否   | 持续显示、滚动后隐藏、移动后隐藏或离开后隐藏。 |
+| `autoHideDelay` | `number`                                             | 900           | 否   | 停止活动或指针离开后隐藏的延迟，单位毫秒。     |
+| `dragScroll`    | `boolean`                                            | true          | 否   | 允许拖动滑块。                                 |
+| `clickScroll`   | `false \| 'page' \| 'jump'`                          | false         | 否   | 轨道点击行为：禁用、翻页或跳转。               |
+| `minThumbSize`  | `number`                                             | 24            | 否   | 滑块最小尺寸，单位像素，受轨道尺寸限制。       |
+| `disabled`      | `boolean`                                            | false         | 否   | 禁用自定义滚动条交互，保留原生滚动。           |
 
 Root 与 Viewport 都使用 `overflow={{ x, y }}` 语义：逐轴按 Viewport、Root、auto 的顺序取值。Bar、Track、Thumb 必须指定 axis。Bar 只渲染显式传入的内容，Track/Thumb 由调用方手动组合；空 Bar 不会创建这两个部件。
 
@@ -43,12 +50,11 @@ Root 与 Viewport 都使用 `overflow={{ x, y }}` 语义：逐轴按 Viewport、
 
 所有部件透传对应框架的原生属性和 class/style（React 使用 className）。React/Solid/Svelte 使用 onScrollChange，Vue/Angular 使用 scrollChange，参数均为 `{ scrollLeft, scrollTop }`。disabled 仅禁用自定义滚动条交互，保留原生和程序化滚动。
 
-## 自定义逻辑
+## useScrollbar
 
 同入口导出 `createScrollbar` 及共享选项、滚动事件和 controller 类型。适配层管理配置同步与生命周期，controller 提供 update、scrollTo、scrollBy、setOptions。setOptions 替换配置快照，省略选项恢复默认值；配置变化不重新连接监听，也不发送滚动通知。
 
 完整绑定方式见[共享契约](../../../../../../../docs/scrollbar-primitive-contract.md)。
-
 
 ## CSS 变量
 

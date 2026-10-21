@@ -1,13 +1,13 @@
-import type { HTMLAttributes, ReactNode, Ref } from "react"
-import { useContextMenuTrigger } from "./use-context-menu"
+import type { HTMLAttributes, ReactNode, Ref } from 'react'
+import { useContextMenuTrigger } from './use-context-menu'
 
 export type ContextMenuTriggerRenderProps<TElement extends HTMLElement = HTMLElement> = Omit<
   HTMLAttributes<TElement>,
-  "ref"
+  'ref'
 > & {
   ref: Ref<TElement>
-  "aria-haspopup": "menu"
-  "data-state": "open" | "closed"
+  'aria-haspopup': 'menu'
+  'data-state': 'open' | 'closed'
 }
 
 export interface ContextMenuTriggerProps<T = unknown, TElement extends HTMLElement = HTMLElement> {

@@ -3,7 +3,7 @@
   import type { TourOptions, TourSnapshot } from "@fex-design/core/tour/types";
   import type { Snippet } from "svelte";
   import { onDestroy, onMount, setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { tourContextKey, type TourContext } from "./tour-context";
   interface Props extends TourOptions {
     children?: Snippet;

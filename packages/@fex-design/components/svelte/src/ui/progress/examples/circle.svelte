@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Progress } from '@fex-design/svelte/ui/progress'
-
+  import { Progress } from "@fex-design/svelte/ui/progress";
 </script>
 
 <div class="flex flex-wrap gap-4 items-center">

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from '@fex-design/solid/primitive/avatar'
 export function ShapeExample() {
   return (
-    <div class="flex items-center gap-3">
+    <div class="flex flex-wrap items-center gap-3">
       <Avatar shape="circle">
         <AvatarFallback>CI</AvatarFallback>
       </Avatar>

@@ -8,31 +8,31 @@
 
 ## 逐组件结果
 
-| 组件 | 本轮确认的剩余问题 |
-| --- | --- |
-| Alert | Solid 丢弃字符串 style（G） |
-| Anchor | Solid 丢弃字符串 style（G） |
-| AspectRatio | Svelte UI 公开 Props 缺少原生属性和 children（K） |
-| Avatar | Solid 丢弃字符串 style；Svelte AvatarGroup 缺少原生属性透传（G、K） |
-| Badge | Svelte 样式字符串直接拼接，缺少声明分隔符（J） |
-| Button | Angular loading 图标的 end 分支没有改变实际节点位置（F） |
-| Card | Solid 将字符串 style 展开成字符索引对象（G） |
-| Checkbox | Solid UI 覆盖调用方 style；Svelte CheckboxGroup 原生属性类型缺失（H、K） |
-| Empty | Solid 将字符串 style 展开成字符索引对象（G） |
-| Input | 本轮未新增确认问题 |
-| InputNumber | Svelte UI 和 Primitive Root 捕获初始 props；Solid 丢弃字符串 style（A、G） |
-| Kbd | 本轮未新增确认问题 |
-| Popover | React 合并 ref 后不能正确处理挂载期间更换 ref（E） |
-| Progress | 本轮未新增确认问题 |
-| Radio | Solid 将字符串 style 展开成字符索引对象；Svelte RadioGroup 原生属性类型缺失（G、K） |
-| Select | 本轮未新增确认问题 |
-| Separator | 本轮未新增确认问题 |
-| Skeleton | Vue 默认 loading 分支错误；Solid 同传字符串 style 和 styles.root 时丢弃后者（B、I） |
-| Slider | 本轮未新增确认问题 |
-| Spinner | Vue SpinnerContainer 丢失 undefined 模式（C） |
-| Switch | Solid 丢弃字符串 style（G） |
-| Tag | Solid 丢弃字符串 style（G） |
-| Tooltip | Vue 可选 Boolean 覆盖 core 默认值；React 更换 ref 处理缺失（D、E） |
+| 组件        | 本轮确认的剩余问题                                                                  |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Alert       | Solid 丢弃字符串 style（G）                                                         |
+| Anchor      | Solid 丢弃字符串 style（G）                                                         |
+| AspectRatio | Svelte UI 公开 Props 缺少原生属性和 children（K）                                   |
+| Avatar      | Solid 丢弃字符串 style；Svelte AvatarGroup 缺少原生属性透传（G、K）                 |
+| Badge       | Svelte 样式字符串直接拼接，缺少声明分隔符（J）                                      |
+| Button      | Angular loading 图标的 end 分支没有改变实际节点位置（F）                            |
+| Card        | Solid 将字符串 style 展开成字符索引对象（G）                                        |
+| Checkbox    | Solid UI 覆盖调用方 style；Svelte CheckboxGroup 原生属性类型缺失（H、K）            |
+| Empty       | Solid 将字符串 style 展开成字符索引对象（G）                                        |
+| Input       | 本轮未新增确认问题                                                                  |
+| InputNumber | Svelte UI 和 Primitive Root 捕获初始 props；Solid 丢弃字符串 style（A、G）          |
+| Kbd         | 本轮未新增确认问题                                                                  |
+| Popover     | React 合并 ref 后不能正确处理挂载期间更换 ref（E）                                  |
+| Progress    | 本轮未新增确认问题                                                                  |
+| Radio       | Solid 将字符串 style 展开成字符索引对象；Svelte RadioGroup 原生属性类型缺失（G、K） |
+| Select      | 本轮未新增确认问题                                                                  |
+| Separator   | 本轮未新增确认问题                                                                  |
+| Skeleton    | Vue 默认 loading 分支错误；Solid 同传字符串 style 和 styles.root 时丢弃后者（B、I） |
+| Slider      | 本轮未新增确认问题                                                                  |
+| Spinner     | Vue SpinnerContainer 丢失 undefined 模式（C）                                       |
+| Switch      | Solid 丢弃字符串 style（G）                                                         |
+| Tag         | Solid 丢弃字符串 style（G）                                                         |
+| Tooltip     | Vue 可选 Boolean 覆盖 core 默认值；React 更换 ref 处理缺失（D、E）                  |
 
 ## 问题及证据
 
@@ -86,17 +86,17 @@
 
 下列位置仍然拒绝或错误展开原生字符串 style：
 
-| 组件 | 证据 |
-| --- | --- |
-| Alert | [index.tsx:62](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/alert/index.tsx:62)，非 object 直接替换为空对象 |
-| Anchor | [index.tsx:72](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/anchor/index.tsx:72)，同上 |
-| Avatar / AvatarGroup | [index.tsx:43](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/avatar/index.tsx:43)、82 行，同上 |
-| Card | [index.tsx:43](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/card/index.tsx:43)，直接展开 rest.style |
-| Empty | [index.tsx:61](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/empty/index.tsx:61)，直接展开 rest.style |
-| InputNumber | [index.tsx:82](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/input-number/index.tsx:82)，非 object 直接替换为空对象 |
-| Radio | [index.tsx:31](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/radio/index.tsx:31)，类型断言后直接展开；断言不会转换运行时字符串 |
-| Switch | [index.tsx:26](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/switch/index.tsx:26)，非 object 直接替换为空对象 |
-| Tag | [index.tsx:35](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/tag/index.tsx:35)，同上 |
+| 组件                 | 证据                                                                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Alert                | [index.tsx:62](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/alert/index.tsx:62)，非 object 直接替换为空对象                   |
+| Anchor               | [index.tsx:72](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/anchor/index.tsx:72)，同上                                        |
+| Avatar / AvatarGroup | [index.tsx:43](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/avatar/index.tsx:43)、82 行，同上                                 |
+| Card                 | [index.tsx:43](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/card/index.tsx:43)，直接展开 rest.style                           |
+| Empty                | [index.tsx:61](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/empty/index.tsx:61)，直接展开 rest.style                          |
+| InputNumber          | [index.tsx:82](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/input-number/index.tsx:82)，非 object 直接替换为空对象            |
+| Radio                | [index.tsx:31](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/radio/index.tsx:31)，类型断言后直接展开；断言不会转换运行时字符串 |
+| Switch               | [index.tsx:26](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/switch/index.tsx:26)，非 object 直接替换为空对象                  |
+| Tag                  | [index.tsx:35](D:/code/fex-design/packages/@fex-design/components/solid/src/ui/tag/index.tsx:35)，同上                                           |
 
 触发条件：`style="color:red"` 或原生样式字符串与 semantic styles 同传。仓库已有 [mergeStyle](D:/code/fex-design/packages/@fex-design/components/solid/src/primitives/merge-style.ts:6)，应补全使用范围并统一覆盖顺序。
 

@@ -1,10 +1,6 @@
 import type { SelectOption } from '@fex-design/core/select/types'
 import useUnmount from '@fex-design/react/hooks/use-unmount'
-import {
-  SelectContent,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex-design/react/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/react/primitive/select'
 import { useRef, useState } from 'react'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
@@ -65,7 +61,10 @@ export function RemoteSearchDemo() {
         onSearch={handleSearch}
       >
         <SelectTrigger placeholder="请输入关键词远程搜索" />
-        <SelectContent loadingContent="Searching remote options…" emptyContent="No remote results" />
+        <SelectContent
+          loadingContent="Searching remote options…"
+          emptyContent="No remote results"
+        />
       </SelectRoot>
     </SelectDemoSection>
   )

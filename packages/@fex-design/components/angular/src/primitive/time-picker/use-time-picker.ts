@@ -1,6 +1,10 @@
 import { computed, DestroyRef, inject, Injectable, signal, type Signal } from '@angular/core'
 import { createTimePickerController } from '@fex-design/core/time-picker/create-time-picker-controller'
-import type { TimePickerController, TimePickerControllerOptions, TimePickerSnapshot } from '@fex-design/core/time-picker/types'
+import type {
+  TimePickerController,
+  TimePickerControllerOptions,
+  TimePickerSnapshot,
+} from '@fex-design/core/time-picker/types'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 
 @Injectable()

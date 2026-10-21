@@ -22,7 +22,7 @@
   import { cn } from "@fex-design/utils";
   import { onMount, setContext, tick, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { anchorContextKey } from "./context";
   interface Props extends Omit<HTMLAttributes<HTMLElement>, "onchange"> {
     activeKeys?: readonly string[];

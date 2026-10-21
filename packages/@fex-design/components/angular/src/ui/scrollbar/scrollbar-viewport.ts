@@ -8,19 +8,30 @@ import { scrollbarAppearance } from './context'
 
 /** Native projected viewports receive the same appearance as the automatic viewport. */
 @Component({
-  selector: 'div[scrollbarViewport]', standalone: true,
+  selector: 'div[scrollbarViewport]',
+  standalone: true,
   exportAs: 'scrollbarViewport',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'scrollbar-viewport', '[class]': 'hostClassName()', '[style]': 'partStyle()' },
+  host: {
+    'data-slot': 'scrollbar-viewport',
+    '[class]': 'hostClassName()',
+    '[style]': 'partStyle()',
+  },
   template: '<ng-content />',
 })
 export class ScrollbarViewport extends PrimitiveViewport {
   private readonly appearance = inject(scrollbarAppearance, { optional: true })
   private readonly owner = inject(ScrollbarRoot, { optional: true })
-  private readonly policy = computed(() => resolveScrollbarOverflow(this.overflow(), this.owner?.overflow()))
-  protected override readonly hostClassName = createHostClassName(() => cn(
-    scrollbarViewportClassName({ overflowX: this.policy().x, overflowY: this.policy().y }),
-    this.appearance?.classNames()?.viewport,
-  ))
+  private readonly policy = computed(() =>
+    resolveScrollbarOverflow(this.overflow(), this.owner?.overflow()),
+  )
+  protected override readonly hostClassName = createHostClassName(
+    () =>
+      cn(
+        scrollbarViewportClassName({ overflowX: this.policy().x, overflowY: this.policy().y }),
+        this.appearance?.classNames()?.viewport,
+      ),
+    () => this.class(),
+  )
   protected readonly partStyle = computed(() => this.appearance?.styles()?.viewport)
 }

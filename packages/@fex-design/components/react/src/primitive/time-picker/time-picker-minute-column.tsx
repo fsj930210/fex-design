@@ -5,6 +5,7 @@ import type { TimePickerNumericColumnProps } from './column.types'
 
 export function TimePickerMinuteColumn({
   step,
+  columnProps,
   isItemDisabled,
   ...props
 }: TimePickerNumericColumnProps) {
@@ -17,6 +18,7 @@ export function TimePickerMinuteColumn({
   return (
     <TimePickerColumn
       {...props}
+      {...columnProps}
       options={options}
       selectedValue={context.snapshot.value?.minute}
       onSelect={context.controller.selectMinute}

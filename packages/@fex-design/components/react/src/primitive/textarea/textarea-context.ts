@@ -1,11 +1,5 @@
 import { syncTextareaAutoSize, type TextareaAutoSize } from '@fex-design/core/textarea/autosize'
-import {
-  createContext,
-  use,
-  useRef,
-  type ChangeEvent,
-  type ComponentProps,
-} from 'react'
+import { createContext, use, useRef, type ChangeEvent, type ComponentProps } from 'react'
 import { useControllableState } from '@fex-design/react/hooks/use-controllable-state'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
 

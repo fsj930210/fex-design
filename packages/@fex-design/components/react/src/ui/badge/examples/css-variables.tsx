@@ -2,7 +2,7 @@ import { Badge } from '@fex-design/react/ui/badge'
 
 export function CssVariables() {
   return (
-    <div className="flex items-center gap-4 [--badge-color-danger:#e11d48] [--badge-color-success:#059669]">
+    <div className="flex flex-wrap items-center gap-4 [--badge-color-danger:#e11d48] [--badge-color-success:#059669]">
       <Badge count="success" color="success" />
       <Badge count="danger" color="danger" />
       <Badge

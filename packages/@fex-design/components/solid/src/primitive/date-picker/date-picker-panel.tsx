@@ -20,8 +20,25 @@ import { DefaultDatePickerPanelContent } from './date-picker-panel-content'
 export interface DatePickerPanelProps<
   TValue extends CalendarValue = CalendarValue,
 > extends ParentProps<
-  Omit<CalendarRootProps<TValue>, 'value' | 'values' | 'defaultValue' | 'onChange' | 'onSelect' | 'panel' | 'viewDate' | 'granularity' | 'weekStartsOn' | 'min' | 'max' | 'disabledDate' | 'monthSelection'>
-> { calendarProps?: DatePickerCalendarProps | undefined }
+  Omit<
+    CalendarRootProps<TValue>,
+    | 'value'
+    | 'values'
+    | 'defaultValue'
+    | 'onChange'
+    | 'onSelect'
+    | 'panel'
+    | 'viewDate'
+    | 'granularity'
+    | 'weekStartsOn'
+    | 'min'
+    | 'max'
+    | 'disabledDate'
+    | 'monthSelection'
+  >
+> {
+  calendarProps?: DatePickerCalendarProps | undefined
+}
 
 export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>(
   props: DatePickerPanelProps<TValue>,
@@ -47,15 +64,35 @@ export function DatePickerPanel<TValue extends CalendarValue = CalendarValue>(
       max={context.maxDate}
       disabledDate={context.disabledDate}
       onSelect={context.select}
-      onCellSelect={cell => { rest.onCellSelect?.(cell); context.previewCell(cell) }}
-      onCellHover={cell => { rest.onCellHover?.(cell); context.setHoverValue(cell.value) }}
+      onCellSelect={(cell) => {
+        rest.onCellSelect?.(cell)
+        context.previewCell(cell)
+      }}
+      onCellHover={(cell) => {
+        rest.onCellHover?.(cell)
+        context.setHoverValue(cell.value)
+      }}
       onPanelChange={context.setPanel}
       onViewDateChange={context.setViewDate}
-      onMouseLeave={event => { callEventHandler(rest.onMouseLeave, event); if (!event.defaultPrevented) context.setHoverValue(null) }}
+      onMouseLeave={(event) => {
+        callEventHandler(rest.onMouseLeave, event)
+        if (!event.defaultPrevented) context.setHoverValue(null)
+      }}
       class={cn(datePickerPanelClassName, calendar().class, local.class)}
     >
-      {local.children === undefined ? <DefaultDatePickerPanelContent calendarProps={calendar()} /> : local.children}
+      {local.children === undefined ? (
+        <DefaultDatePickerPanelContent calendarProps={calendar()} />
+      ) : (
+        local.children
+      )}
     </CalendarRoot>
   )
-  return <Show when={context.showTime} fallback={calendarElement}><div class={datePickerDateTimeLayoutClassName}>{calendarElement}<DatePickerTimePanel /></div></Show>
+  return (
+    <Show when={context.showTime} fallback={calendarElement}>
+      <div class={datePickerDateTimeLayoutClassName}>
+        {calendarElement}
+        <DatePickerTimePanel />
+      </div>
+    </Show>
+  )
 }

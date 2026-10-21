@@ -5,7 +5,4 @@ export {
   type ToggleGroupSingleProps,
   type ToggleGroupMultipleProps,
 } from './toggle-group'
-export {
-  ToggleGroupContext,
-  type ToggleGroupContextValue,
-} from './toggle-context'
+export { ToggleGroupContext, type ToggleGroupContextValue } from './toggle-context'

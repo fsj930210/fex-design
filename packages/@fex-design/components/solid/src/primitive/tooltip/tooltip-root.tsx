@@ -1,7 +1,4 @@
-import {
-  createTooltip,
-  type TooltipOptions,
-} from '@fex-design/core/tooltip/create-tooltip'
+import { createTooltip, type TooltipOptions } from '@fex-design/core/tooltip/create-tooltip'
 import {
   createEffect,
   createSignal,

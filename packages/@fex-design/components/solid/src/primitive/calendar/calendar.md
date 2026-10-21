@@ -4,31 +4,31 @@ CalendarRoot supports date selection, navigation, and panel switching. Compose t
 
 ## Parts
 
-| Part | Purpose |
-| --- | --- |
-| CalendarRoot | Shared calendar state and actions |
-| CalendarHeader | Custom header with the current date, panel, and navigation actions |
-| CalendarNavigationButton | Previous/next month, year, panel, or today |
-| CalendarPanelTrigger | Switch between date, month, quarter, year, and decade panels |
-| CalendarWeekHeader | Weekday labels; override them with labels |
-| CalendarGrid | Default grid or custom content for each cell |
-| CalendarRow | Grid row |
-| CalendarCell | Cell layout and state; includes CalendarCellTrigger by default |
-| CalendarCellTrigger | Date selection button that fills the cell by default |
-| CalendarFooter | Footer content and actions |
+| Part                     | Purpose                                                            |
+| ------------------------ | ------------------------------------------------------------------ |
+| CalendarRoot             | Shared calendar state and actions                                  |
+| CalendarHeader           | Custom header with the current date, panel, and navigation actions |
+| CalendarNavigationButton | Previous/next month, year, panel, or today                         |
+| CalendarPanelTrigger     | Switch between date, month, quarter, year, and decade panels       |
+| CalendarWeekHeader       | Weekday labels; override them with labels                          |
+| CalendarGrid             | Default grid or custom content for each cell                       |
+| CalendarRow              | Grid row                                                           |
+| CalendarCell             | Cell layout and state; includes CalendarCellTrigger by default     |
+| CalendarCellTrigger      | Date selection button that fills the cell by default               |
+| CalendarFooter           | Footer content and actions                                         |
 
 ## Root API
 
-| Property | Description |
-| --- | --- |
-| value / defaultValue | Controlled value and initial value; undefined is uncontrolled and null is empty |
-| viewDate / defaultViewDate | Visible date; defaults to the initial value or today |
-| panel / defaultPanel | Visible panel; defaults to the panel for granularity |
-| granularity | date, week, month, quarter, or year; determines the committed value |
-| values / range | Values or ranges to display; compose the selection flow separately |
-| weekStartsOn | 0 to 6; defaults to 0 |
-| today | Override today |
-| min / max / disabledDate | Selectable date constraints |
+| Property                   | Description                                                                     |
+| -------------------------- | ------------------------------------------------------------------------------- |
+| value / defaultValue       | Controlled value and initial value; undefined is uncontrolled and null is empty |
+| viewDate / defaultViewDate | Visible date; defaults to the initial value or today                            |
+| panel / defaultPanel       | Visible panel; defaults to the panel for granularity                            |
+| granularity                | date, week, month, quarter, or year; determines the committed value             |
+| values / range             | Values or ranges to display; compose the selection flow separately              |
+| weekStartsOn               | 0 to 6; defaults to 0                                                           |
+| today                      | Override today                                                                  |
+| min / max / disabledDate   | Selectable date constraints                                                     |
 
 Default properties initialize state once. Navigation and panel switching do not change the selected value. Selecting a higher-level cell drills down; change fires when the selection reaches granularity. cellSelect is a notification and does not replace selection. Parts accept native attributes, events, classes, and element references.
 

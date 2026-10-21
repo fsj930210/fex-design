@@ -1,0 +1,37 @@
+<div class="grid w-full gap-space-lg">
+  <nav
+    paginationRoot
+    [total]="200"
+    [labels]="labels"
+    [defaultPage]="8"
+    [class]="cn('[--pagination-control-height:38px] [--pagination-font-size:14px] [--pagination-gap:12px] [--pagination-item-gap:6px] [--pagination-radius:12px] [--pagination-color:#5b21b6] [--pagination-active-background:#ede9fe] [--pagination-active-color:#6d28d9] [--pagination-active-border-color:#8b5cf6] [--pagination-hover-background:#f5f3ff]')"
+  >
+    <ng-template #content let-view0>
+      <span data-slot="pagination-total" [class]="totalClass"
+        >{{ view0.labels.total(view0.total) }}</span
+      >
+      <div paginationContent>
+        <button paginationNavigationButton direction="prev"></button>
+        @for (item of view0.pages; track item.key) { @if (item.type === 'page') {
+        <button paginationPageButton [page]="item.page"></button> } @else {
+        <span paginationEllipsis></span> } }
+        <button paginationNavigationButton direction="next"></button>
+      </div>
+      <div
+        paginationPageSizeSelect
+        [selectTriggerProps]="{ class: '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]' }"
+        [selectContentProps]="{ class: '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]' }"
+      ></div>
+      <div data-slot="pagination-jumper" [class]="jumperClass">
+        <span>{{ view0.labels.jumpPrefix }}</span>
+        <div
+          paginationQuickJumper
+          [inputNumberProps]="{ class: '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]' }"
+          [incrementProps]="{ class: 'text-purple-700' }"
+          [decrementProps]="{ class: 'text-purple-700' }"
+        ></div>
+        <span>{{ view0.labels.jumpSuffix }}</span>
+      </div>
+    </ng-template>
+  </nav>
+</div>

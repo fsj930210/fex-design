@@ -23,6 +23,9 @@ export function createCoreStoreSignalBinding<TSnapshot>(
   return { snapshot: snapshot.asReadonly(), refresh }
 }
 
-export function createCoreStoreSignal<TSnapshot>(store: CoreStore<TSnapshot>, destroyRef?: DestroyRef) {
+export function createCoreStoreSignal<TSnapshot>(
+  store: CoreStore<TSnapshot>,
+  destroyRef?: DestroyRef,
+) {
   return createCoreStoreSignalBinding(store, destroyRef).snapshot
 }

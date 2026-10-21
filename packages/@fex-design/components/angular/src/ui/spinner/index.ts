@@ -1,4 +1,1 @@
-export {
-  SpinnerContainer,
-  Spinner,
-} from "./spinner"
+export { SpinnerContainer, Spinner } from './spinner'

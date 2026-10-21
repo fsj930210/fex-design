@@ -1,10 +1,10 @@
 import {
   createDialogController,
   type DialogOptions,
-} from "@fex-design/core/dialog/create-dialog-controller"
-import { createSignal, onCleanup, splitProps, type ParentProps } from "solid-js"
-import { createCoreStoreSignal } from "@fex-design/solid/primitives/create-core-store-signal"
-import { DialogContext } from "./dialog-context"
+} from '@fex-design/core/dialog/create-dialog-controller'
+import { createSignal, onCleanup, splitProps, type ParentProps } from 'solid-js'
+import { createCoreStoreSignal } from '@fex-design/solid/primitives/create-core-store-signal'
+import { DialogContext } from './dialog-context'
 
 let nextDialogId = 1
 
@@ -13,15 +13,15 @@ export type DialogRootProps = DialogProps
 
 export function Dialog(props: DialogProps) {
   const [local] = splitProps(props, [
-    "children",
-    "open",
-    "defaultOpen",
-    "onOpenChange",
-    "modal",
-    "forceMount",
-    "closeDelay",
-    "dismiss",
-    "closeOnOverlayPointer",
+    'children',
+    'open',
+    'defaultOpen',
+    'onOpenChange',
+    'modal',
+    'forceMount',
+    'closeDelay',
+    'dismiss',
+    'closeOnOverlayPointer',
   ])
   const [open, setOpen] = createSignal(local.open ?? local.defaultOpen ?? false)
   const triggerElement = { current: null as HTMLButtonElement | null }

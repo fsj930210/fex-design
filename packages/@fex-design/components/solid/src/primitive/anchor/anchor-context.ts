@@ -1,9 +1,6 @@
 import { createContext, useContext, type Accessor } from 'solid-js'
 import type { getAnchorIndicatorStyles } from '@fex-design/core/anchor/dom'
-import type {
-  AnchorOrientation,
-  AnchorRegisteredItem,
-} from '@fex-design/core/anchor/types'
+import type { AnchorOrientation, AnchorRegisteredItem } from '@fex-design/core/anchor/types'
 
 export interface AnchorApi {
   activeKeys: Accessor<readonly string[]>

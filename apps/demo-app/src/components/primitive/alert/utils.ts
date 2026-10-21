@@ -1,5 +1,3 @@
-
-
 export const alertTypes = ['success', 'info', 'warning', 'error'] as const
 export type AlertType = (typeof alertTypes)[number]
 

@@ -21,7 +21,8 @@ function applyTheme(theme?: string) {
   root.style.colorScheme = current
 }
 
-const initialTheme = query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
+const initialTheme =
+  query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
 applyTheme(initialTheme)
 
 const modules = import.meta.glob(
@@ -36,7 +37,11 @@ function findLoader(layer: string, component: string, demo: string) {
   return key ? modules[key] : undefined
 }
 
-async function loadExample(layer: string, component: string, demo: string): Promise<Component | undefined> {
+async function loadExample(
+  layer: string,
+  component: string,
+  demo: string,
+): Promise<Component | undefined> {
   const cacheKey = `${layer}/${component}/${demo}`
   if (moduleCache.has(cacheKey)) return moduleCache.get(cacheKey)
   const loader = findLoader(layer, component, demo)

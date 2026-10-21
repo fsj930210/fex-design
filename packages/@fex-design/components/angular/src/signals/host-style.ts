@@ -5,9 +5,11 @@ export function createHostStyle() {
   const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement
   const value = signal(element.getAttribute('style') ?? '')
   // This observes the native DOM binding boundary, not component or business state.
-  afterEveryRender({ read: () => {
-    const next = element.getAttribute('style') ?? ''
-    if (next !== value()) value.set(next)
-  } })
+  afterEveryRender({
+    read: () => {
+      const next = element.getAttribute('style') ?? ''
+      if (next !== value()) value.set(next)
+    },
+  })
   return value.asReadonly()
 }

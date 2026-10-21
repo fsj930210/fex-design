@@ -53,7 +53,9 @@ export function Usage(props: {
   return (
     <section class="mt-8 mb-10 border-b border-border pb-10">
       <div class="mb-4">
-        <h2 id="usage" class="text-xl font-bold tracking-tight text-foreground">使用方式</h2>
+        <h2 id="usage" class="text-xl font-bold tracking-tight text-foreground">
+          使用方式
+        </h2>
         <p class="mt-1 text-xs text-muted-foreground">
           安装完成后，在业务代码中导入组件并直接调用：
         </p>

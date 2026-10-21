@@ -1,7 +1,12 @@
 import { fieldRootClassName, type FieldStyleProps } from '@fex-design/components-styles/field'
 import { cn } from '@fex-design/utils'
 import { createUniqueId, splitProps, useContext, type JSX, type ParentProps } from 'solid-js'
-import { FieldContext, FormFieldNameContext, renderingFieldName, type FieldContextValue } from './field-context'
+import {
+  FieldContext,
+  FormFieldNameContext,
+  renderingFieldName,
+  type FieldContextValue,
+} from './field-context'
 
 export interface FieldRootProps
   extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'id'>>, FieldStyleProps {

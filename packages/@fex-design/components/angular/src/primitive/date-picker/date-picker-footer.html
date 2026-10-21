@@ -1,13 +1,32 @@
-@if (kind() !== 'hidden') {
-  @if (template(); as custom) {
-    <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" [ngTemplateOutletContext]="{ $implicit: owner.context(), state: owner.context() }" />
-  } @else if (kind() === 'custom') {
-    {{ content() }}
-  } @else {
-    <ng-content>
-      <button datePickerToday [class]="appearance().classNames?.today ?? ''" [style]="appearance().styles?.today ?? ''"></button>
-      @if (owner.context().footerView.showCancel) { <button datePickerCancel [class]="appearance().classNames?.cancel ?? ''" [style]="appearance().styles?.cancel ?? ''">取消</button> }
-      @if (owner.context().footerView.showConfirm) { <button datePickerConfirm [class]="appearance().classNames?.confirm ?? ''" [style]="appearance().styles?.confirm ?? ''">确定</button> }
-    </ng-content>
+@if (kind() !== 'hidden') { @if (template(); as custom) {
+<ng-container
+  [ngTemplateOutlet]="custom"
+  [ngTemplateOutletInjector]="injector"
+  [ngTemplateOutletContext]="{ $implicit: owner.context(), state: owner.context() }"
+/>
+} @else if (kind() === 'custom') { {{ content() }} } @else {
+<ng-content>
+  <button
+    datePickerToday
+    [class]="appearance().classNames?.today ?? ''"
+    [style]="appearance().styles?.today ?? ''"
+  ></button>
+  @if (owner.context().footerView.showCancel) {
+  <button
+    datePickerCancel
+    [class]="appearance().classNames?.cancel ?? ''"
+    [style]="appearance().styles?.cancel ?? ''"
+  >
+    取消
+  </button>
+  } @if (owner.context().footerView.showConfirm) {
+  <button
+    datePickerConfirm
+    [class]="appearance().classNames?.confirm ?? ''"
+    [style]="appearance().styles?.confirm ?? ''"
+  >
+    确定
+  </button>
   }
-}
+</ng-content>
+} }

@@ -1,28 +1,63 @@
-import { CalendarRoot } from '@fex-design/solid/primitive/calendar'
-import { ExampleContent } from './_parts/content'
-import { getCalendarUIOptions } from '@fex-design/core/calendar'
-import { calendarUIRootClassName } from '@fex-design/components-styles/calendar'
-import type { CSSProperties } from 'react'
+import {
+  CalendarRoot,
+  CalendarHeader,
+  CalendarWeekHeader,
+  CalendarGrid,
+  CalendarCell,
+  CalendarCellTrigger,
+  CalendarFooter,
+} from '@fex-design/solid/primitive/calendar'
+import { getCalendarUIOptions, getCalendarUILocale } from '@fex-design/core/calendar'
 import { calendarDemoDate } from '@fex-design/docs-shared/calendar-demo-data'
-export function CssVariablesExample() {
+const options = getCalendarUIOptions({ defaultViewDate: calendarDemoDate })
+const locale = getCalendarUILocale({})
+const headerProps = {
+  yearSelectTriggerProps: {
+    class:
+      '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+  },
+  monthSelectTriggerProps: {
+    class:
+      '[--input-border-color:#c4b5fd] [--input-background:#ffffff] [--input-color:#6d28d9] [--focus-border:#8b5cf6] [--input-ring-width:1px] [--input-ring-color:#ddd6fe]',
+  },
+  yearSelectContentProps: {
+    class:
+      '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+  },
+  monthSelectContentProps: {
+    class:
+      '[--border:#c4b5fd] [--elevated-background:#ffffff] [--elevated-foreground:#6d28d9] [--primary:#6d28d9] [--muted-background:#f5f3ff]',
+  },
+}
+export function CalendarCssVariablesExample() {
   return (
-    <div
-      style={
-        {
-          '--calendar-hover-background': 'var(--success)',
-          '--calendar-selected-background': 'var(--primary)',
-          '--calendar-selected-foreground': 'var(--primary-foreground)',
-          '--calendar-today-color': 'var(--danger)',
-        } as CSSProperties
-      }
+    <CalendarRoot
+      {...options}
+      class="w-full rounded-md border border-border overflow-hidden [&:not([data-panel=date])>[data-slot=calendar-week-header]]:hidden [--calendar-hover-background:var(--success)] [--calendar-selected-background:var(--primary)] [--calendar-selected-foreground:var(--primary-foreground)] [--calendar-today-color:var(--danger)]"
+      data-fullscreen={true}
     >
-      <CalendarRoot
-        {...getCalendarUIOptions({ defaultViewDate: calendarDemoDate })}
-        class={calendarUIRootClassName}
-        data-fullscreen={true}
-      >
-        <ExampleContent options={{ defaultViewDate: calendarDemoDate }} />
-      </CalendarRoot>
-    </div>
+      <CalendarHeader {...headerProps} class="" />
+      <CalendarWeekHeader
+        labels={locale.weekdays}
+        class="grid min-h-8 items-center text-center text-xs text-muted-foreground py-0"
+      />
+      <CalendarGrid>
+        {(cell) => (
+          <CalendarCell
+            cell={cell}
+            class="flex min-w-0 flex-col rounded-none border-t border-border p-1 data-[selected=true]:bg-[var(--calendar-selected-background,color-mix(in_srgb,var(--primary)_10%,transparent))] data-[selected=true]:text-[var(--calendar-selected-foreground,var(--foreground))]"
+          >
+            <CalendarCellTrigger
+              cell={cell}
+              class="h-8 min-h-8 w-full shrink-0 justify-center px-1 rounded-md"
+            >
+              {cell.panel === 'month'
+                ? (locale.months[cell.date.month - 1] ?? cell.label)
+                : cell.label}
+            </CalendarCellTrigger>
+          </CalendarCell>
+        )}
+      </CalendarGrid>
+    </CalendarRoot>
   )
 }

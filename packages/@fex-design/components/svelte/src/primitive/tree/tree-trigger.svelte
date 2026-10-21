@@ -6,7 +6,7 @@
   import { cn } from "@fex-design/utils";
   import { getContext, type Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { treeContextKey, type TreeContext } from "./tree-context";
 
   interface Props extends Omit<HTMLButtonAttributes, "children"> {

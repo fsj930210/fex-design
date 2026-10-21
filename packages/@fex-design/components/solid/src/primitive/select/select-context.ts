@@ -17,7 +17,8 @@ export interface SelectContextValue {
   disabled: Accessor<boolean>
   clearable: Accessor<boolean>
   loading: Accessor<boolean>
-  status: Accessor<'error' | 'warning' | undefined>
+  ariaInvalid: Accessor<string | boolean | undefined>
+  dataWarning: Accessor<string | undefined>
   virtual: Accessor<SelectVirtualOptions | undefined>
   listId: string
   removeValue: (value: SelectionValue) => void

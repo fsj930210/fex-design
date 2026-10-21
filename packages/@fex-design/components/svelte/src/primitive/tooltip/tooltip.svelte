@@ -5,7 +5,7 @@
   } from "@fex-design/core/tooltip/create-tooltip";
   import type { Snippet } from "svelte";
   import { onDestroy, setContext } from "svelte";
-  import { readableCoreStore } from '@fex-design/svelte/stores/core-store';
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
   import { tooltipContextKey } from "./tooltip-context";
   interface TooltipProps extends TooltipOptions {
     children?: Snippet;

@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@fex-design/styles";
+@import 'tailwindcss';
+@import '@fex-design/styles';
 
 @layer base {
   :root {
@@ -65,4 +65,3 @@
     --elevated-foreground: #fafafa;
   }
 }
-

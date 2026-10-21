@@ -18,14 +18,28 @@
   </section>
   <section class="flex w-full min-w-0 flex-col gap-2">
     <p class="text-sm font-medium">紫色自定义样式</p>
-    <div datePickerRoot [defaultValue]="date" [inputProps]="inputAppearance" [calendarProps]="calendarAppearance" [popoverProps]="popupAppearance" [classNames]="partClasses">
+    <div
+      datePickerRoot
+      [defaultValue]="date"
+      [inputProps]="inputAppearance"
+      [calendarProps]="calendarAppearance"
+      [popoverProps]="popupAppearance"
+      [classNames]="partClasses"
+    >
       <div datePickerTrigger></div>
       <div datePickerContent>
         <div datePickerPanel></div>
         <div datePickerFooter></div>
       </div>
     </div>
-    <div rangePickerRoot [defaultValue]="range" [inputProps]="inputAppearance" [calendarProps]="calendarAppearance" [popoverProps]="popupAppearance" [classNames]="partClasses">
+    <div
+      rangePickerRoot
+      [defaultValue]="range"
+      [inputProps]="inputAppearance"
+      [calendarProps]="calendarAppearance"
+      [popoverProps]="popupAppearance"
+      [classNames]="partClasses"
+    >
       <div rangePickerTrigger></div>
       <div rangePickerContent>
         <div rangePickerPanelGroup></div>

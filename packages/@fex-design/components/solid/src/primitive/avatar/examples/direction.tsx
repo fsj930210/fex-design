@@ -24,7 +24,7 @@ function Group() {
 }
 export function DirectionExample() {
   return (
-    <div class="flex items-center gap-8">
+    <div class="flex flex-wrap items-center gap-8">
       <div dir="ltr">
         <p class="mb-2 text-xs text-muted-foreground">LTR · 中文示例</p>
         <Group />

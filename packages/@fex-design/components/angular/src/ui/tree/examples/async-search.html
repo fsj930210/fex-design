@@ -1,0 +1,30 @@
+<div class="grid gap-space-sm">
+  <div
+    select
+    class="w-72 max-w-full"
+    [options]="matches()"
+    [value]="selected() ?? []"
+    searchable
+    clearable
+    [filterOption]="filterRemote"
+    [loading]="loading()"
+    placeholder="搜索部门或节点"
+    (search)="search($event)"
+    (change)="choose($event.value)"
+  ></div>
+  <p class="text-xs text-muted-foreground">
+    可搜索：Department 2、Group 2.3、Item 2.3.3；清除选择恢复原树。
+  </p>
+  <div [hidden]="!!selected()">
+    <div tree [treeData]="rootProps().treeData" [loadChildren]="rootProps().loadChildren"></div>
+  </div>
+  @if(locating()){
+  <p role="status">正在加载祖先路径…</p>
+  } @if(path()) {
+  <div
+    tree
+    [treeData]="pathProps().treeData"
+    [defaultExpandedKeys]="pathProps().defaultExpandedKeys"
+  ></div>
+  }
+</div>

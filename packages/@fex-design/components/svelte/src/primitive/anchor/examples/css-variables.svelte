@@ -25,21 +25,21 @@
       ><AnchorItem
         class="[--anchor-indent:20px] [--primary:#7c3aed]"
         value="overview"
-          target="#svelte-styles-overview"
+        target="#svelte-styles-overview"
         ><AnchorLink class="[--anchor-indent:20px] [--primary:#7c3aed]"
           >概览</AnchorLink
         ></AnchorItem
       ><AnchorItem
         class="[--anchor-indent:20px] [--primary:#7c3aed]"
         value="usage"
-          target="#svelte-styles-usage"
+        target="#svelte-styles-usage"
         ><AnchorLink class="[--anchor-indent:20px] [--primary:#7c3aed]"
           >使用方式</AnchorLink
         ><AnchorList class="[--anchor-indent:20px] [--primary:#7c3aed]"
           ><AnchorItem
             class="[--anchor-indent:20px] [--primary:#7c3aed]"
             value="api"
-              target="#svelte-styles-api"
+            target="#svelte-styles-api"
             ><AnchorLink class="[--anchor-indent:20px] [--primary:#7c3aed]"
               >API</AnchorLink
             ></AnchorItem

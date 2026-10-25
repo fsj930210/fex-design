@@ -1,0 +1,34 @@
+<section class="grid w-full gap-space-sm">
+  <p class="text-sm text-muted-foreground">纯 DOM 树：点击箭头展开，点击名称选择。</p>
+  <div role="tree" aria-label="自定义 DOM 树" class="max-h-64 overflow-y-auto">
+    @for(item of model.visibleItems(); track item.key){
+    <div
+      role="treeitem"
+      [attr.aria-level]="item.depth+1"
+      [attr.aria-expanded]="item.isLeaf ? null : model.snapshot().expandedKeys.includes(item.key)"
+      [attr.aria-selected]="model.snapshot().selectedKeys.includes(item.key)"
+      class="flex min-h-8 items-center gap-2"
+      [style.padding-inline-start.px]="item.depth*20"
+    >
+      @if(!item.isLeaf){<button
+        type="button"
+        class="size-6 shrink-0 rounded hover:bg-muted"
+        [attr.aria-label]="'展开或收起 '+item.data.title"
+        (click)="toggle(item.key)"
+      >
+        {{model.snapshot().expandedKeys.includes(item.key) ? '−' : '+'}}</button
+      >}@else{<span class="size-6 shrink-0"></span>}
+      <button
+        type="button"
+        class="rounded px-2 py-1 hover:bg-muted"
+        [style.background]="model.snapshot().selectedKeys.includes(item.key) ? '#ede9fe' : null"
+        [style.color]="model.snapshot().selectedKeys.includes(item.key) ? '#6d28d9' : null"
+        (click)="select(item.key)"
+      >
+        {{item.data.title}}
+      </button>
+    </div>
+    }
+  </div>
+  <output class="text-sm" aria-live="polite">已选：{{selectedTitles()}}</output>
+</section>

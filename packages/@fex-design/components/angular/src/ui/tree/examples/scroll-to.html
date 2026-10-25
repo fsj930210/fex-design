@@ -1,0 +1,5 @@
+<div class="grid w-full gap-space-sm">
+  <button button class="w-full" (click)="locate()">Scroll to Item 2.3.3</button>
+  <div tree [treeData]="data" [classNames]="{ viewport: 'h-48 overflow-y-auto' }"></div>
+  <output class="min-h-5 text-xs text-muted-foreground" aria-live="polite">{{ message() }}</output>
+</div>

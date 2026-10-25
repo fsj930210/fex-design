@@ -1,3 +1,4 @@
+import { selectExampleDeclarations, importedExampleNames } from './example-source-selection.mjs'
 import { readFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { codeToHtml } from 'shiki'
@@ -67,6 +68,7 @@ export async function readExampleSource({ componentRoot, framework, layer, compo
   }
 
   const parts = []
+  const requests = new Map()
   async function collectParts(contents, parent) {
     // Include local demo helpers such as basic.vue as well as _parts modules.
     // Keep their original imports intact in the displayed, runnable source.
@@ -98,11 +100,23 @@ export async function readExampleSource({ componentRoot, framework, layer, compo
         }
       }
       if (!partFile) throw new Error(`Missing local example helper: ${imported} in ${parent}`)
-      if (visited.has(partFile)) continue
+      const requested = importedExampleNames(contents, imported)
+      const selection = component === 'tree' && partFile.endsWith('.ts') && requested.size > 0
+      const previous = requests.get(partFile)
+      if (selection && previous) {
+        if ([...requested].every((name) => previous.names.has(name))) continue
+        for (const name of requested) previous.names.add(name)
+      } else if (visited.has(partFile)) continue
+      const record = previous ?? { names: requested, index: parts.length }
+      requests.set(partFile, record)
       visited.add(partFile)
-      const label =
-        framework === 'vue' || framework === 'svelte' ? `<!-- ${filename} -->` : `// ${filename}`
-      parts.push(`\n\n${label}\n${part}${await appendTemplate(partFile)}`)
+      if (selection) part = selectExampleDeclarations(part, record.names)
+      const label = shared
+        ? ''
+        : framework === 'vue' || framework === 'svelte'
+          ? `<!-- ${filename} -->`
+          : `// ${filename}`
+      parts[record.index] = `\n\n${label}\n${part}${await appendTemplate(partFile)}`
       await collectParts(part, partFile)
     }
   }
@@ -110,6 +124,16 @@ export async function readExampleSource({ componentRoot, framework, layer, compo
   await collectParts(source, file)
   source += await appendTemplate(file)
   source += parts.join('')
+  // Shared and local demo helpers are expanded below the example. Remove their
+  // imports from the displayed source so the copied example is self-contained.
+  source = source.replace(
+    /^\s*import\s+(?:(?:type\s+)?[^;\n]*?\s+from\s+)?['"](?:@fex-design\/docs-shared\/[^'"]+|\.\/[^'"]+)['"]\s*;?\s*$/gm,
+    '',
+  )
+  source = source.replace(
+    /import\s+(?:(?:type\s+)?[^;\n]*?\s+from\s+)?['"](?:@fex-design\/docs-shared\/[^'"]+|\.\/[^'"]+)['"]\s*;?/g,
+    '',
+  )
   const language = framework === 'angular' ? 'typescript' : extension === 'tsx' ? 'tsx' : framework
   const html = await codeToHtml(source, {
     lang: language,

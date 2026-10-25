@@ -25,6 +25,7 @@
 
 <div
   role="option"
+  tabindex="-1"
   aria-selected={selected}
   aria-disabled={disabled || undefined}
   data-selected={selected || undefined}
@@ -34,6 +35,16 @@
   onpointermove={() => select.controller.setActiveValue(item.value, "pointer")}
   onpointerdown={(event) => event.preventDefault()}
   onclick={() => !disabled && select.controller.selectValue(item.value)}
+  onkeydown={(event) => {
+    if (
+      (event.key === "Enter" || event.key === " ") &&
+      !disabled &&
+      !event.defaultPrevented
+    ) {
+      event.preventDefault();
+      select.controller.selectValue(item.value);
+    }
+  }}
 >
   <span class={selectOptionLabelClassName}
     >{#if children}{@render children()}{:else}{item.label}{/if}</span

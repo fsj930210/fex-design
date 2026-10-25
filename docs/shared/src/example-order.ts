@@ -10,12 +10,51 @@ const cssVariableIds = new Set(['css-variables', 'css-vars'])
 const semanticStyleIds = new Set(['semantic-styles', 'structured-styles', 'styling'])
 
 const middleGroups = [
-  ['types', 'variants', 'variant', 'appearance', 'sizes', 'size', 'shape', 'colors', 'color', 'affixes'],
+  [
+    'types',
+    'variants',
+    'variant',
+    'appearance',
+    'sizes',
+    'size',
+    'shape',
+    'colors',
+    'color',
+    'affixes',
+  ],
   ['content', 'icon', 'group', 'group-count', 'max-count', 'picker', 'format', 'step', 'options'],
-  ['range', 'multiple', 'page-range', 'page-size-options', 'layout', 'navigation', 'overflow', 'hide-on-single-page'],
-  ['disabled', 'disabled-date', 'disabled-time', 'loading', 'validation', 'constraints', 'allow-empty', 'locale'],
+  [
+    'range',
+    'multiple',
+    'page-range',
+    'page-size-options',
+    'layout',
+    'navigation',
+    'overflow',
+    'hide-on-single-page',
+  ],
+  [
+    'disabled',
+    'disabled-date',
+    'disabled-time',
+    'loading',
+    'validation',
+    'constraints',
+    'allow-empty',
+    'locale',
+  ],
   ['controlled', 'dynamic', 'confirm', 'presets', 'footer'],
-  ['custom', 'trigger', 'item', 'panel', 'container', 'placement', 'offset', 'progress', 'click-lock'],
+  [
+    'custom',
+    'trigger',
+    'item',
+    'panel',
+    'container',
+    'placement',
+    'offset',
+    'progress',
+    'click-lock',
+  ],
 ] as const
 
 function groupFor(id: string) {
@@ -31,7 +70,8 @@ function tailRank(id: string) {
   if (directionIds.has(normalized)) return 0
   if (cssVariableIds.has(normalized)) return 1
   if (semanticStyleIds.has(normalized)) return 2
-  if (normalized === 'logic' || normalized.startsWith('use-') || normalized.endsWith('-logic')) return 3
+  if (normalized === 'logic' || normalized.startsWith('use-') || normalized.endsWith('-logic'))
+    return 3
   return -1
 }
 

@@ -1,0 +1,17 @@
+<section class="grid w-full gap-space-sm">
+  <p class="text-xs text-muted-foreground">
+    id → key；name → title；leaf → isLeaf；unavailable → disabled。
+  </p>
+  <div class="max-h-64 overflow-y-auto">
+    <div
+      tree
+      [treeData]="data"
+      [fieldNames]="fieldNames"
+      [defaultExpandedKeys]="expanded"
+      (select)="selected.set($event.keys)"
+    ></div>
+  </div>
+  <output class="min-h-5 break-all text-xs text-muted-foreground" aria-live="polite"
+    >已选 ID：{{ selected().join(', ') || '无' }}</output
+  >
+</section>

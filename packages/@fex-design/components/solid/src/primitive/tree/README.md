@@ -24,7 +24,7 @@ import {
           {(state) => (
             <div {...state.itemProps}>
               <TreeTrigger itemKey={item.key} />
-              <TreeTitle>{item.node.name}</TreeTitle>
+              <TreeTitle>{item.data.name}</TreeTitle>
             </div>
           )}
         </TreeItem>
@@ -53,16 +53,16 @@ import { createTreeDndItem } from '@fex-design/solid/primitive/tree/create-tree-
 
 ## 逻辑层与部件
 
-| API                            | 说明                                                        |
-| ------------------------------ | ----------------------------------------------------------- |
-| `createTree(getOptions)`       | 创建 controller，并只在 Solid/core 边界同步 options。       |
-| `createTreeItem(tree, key)`    | 节点级订阅 memo。                                           |
-| `createTreeVisibleItems(tree)` | 可见扁平列表 signal。                                       |
-| `TreeViewport`                 | 普通可见列表。                                              |
-| `TreeVirtualViewport`          | `@tanstack/solid-virtual` 适配；handle 支持 `scrollToKey`。 |
-| `TreeItem`                     | 暴露 ARIA props、状态和 actions。                           |
-| `TreeTrigger`                  | 事件驱动的异步加载、展开和折叠。                            |
-| `TreeTitle`                    | 自定义 title 的最小结构。                                   |
+| API                            | 说明                                                     |
+| ------------------------------ | -------------------------------------------------------- |
+| `createTree(getOptions)`       | 创建 controller，并只在 Solid/core 边界同步 options。    |
+| `createTreeItem(tree, key)`    | 节点级订阅 memo。                                        |
+| `createTreeVisibleItems(tree)` | 可见扁平列表 signal。                                    |
+| `TreeViewport`                 | 普通可见列表。                                           |
+| `TreeVirtualViewport`          | `@tanstack/solid-virtual` 适配；handle 支持 `scrollTo`。 |
+| `TreeItem`                     | 暴露 ARIA props、状态和 actions。                        |
+| `TreeTrigger`                  | 事件驱动的异步加载、展开和折叠。                         |
+| `TreeTitle`                    | 自定义 title 的最小结构。                                |
 
 ## 受控状态与回调
 

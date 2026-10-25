@@ -2,7 +2,7 @@ import type { Point, Rect } from '../../interactions/types'
 import { createStore } from '../../store/create-store'
 import type { StoreListener } from '../../store/create-store'
 import type { TreeFeatureRegistration } from '../feature-types'
-import type { TreeItem, TreeKey, TreeMoveInput, TreeMutationResult, TreeNodeData } from '../types'
+import type { TreeNode, TreeKey, TreeMoveInput, TreeMutationResult, TreeNodeData } from '../types'
 import type { ExpansionFeatureApi } from './expansion'
 
 export type TreeDropPosition = 'inside' | 'after'
@@ -28,8 +28,8 @@ export interface TreeDropIntent extends TreeDropResolveInput {
 }
 
 export interface TreeCanDropInfo<TNode extends TreeNodeData> {
-  source: TreeItem<TNode>
-  target: TreeItem<TNode>
+  source: TreeNode<TNode>
+  target: TreeNode<TNode>
   position: TreeDropPosition
   parentKey: TreeKey | null
   index: number
@@ -38,7 +38,7 @@ export interface TreeCanDropInfo<TNode extends TreeNodeData> {
 export interface DndFeatureOptions<TNode extends TreeNodeData> {
   allowDropInsideLeaf?: boolean | undefined
   maxDepth?: number | undefined
-  canDrag?: ((item: TreeItem<TNode>) => boolean) | undefined
+  canDrag?: ((item: TreeNode<TNode>) => boolean) | undefined
   canDrop?: ((info: TreeCanDropInfo<TNode>) => boolean | string) | undefined
 }
 
@@ -112,7 +112,10 @@ export function dndFeature<TNode extends TreeNodeData>({
             position,
             parentKey,
             index,
-            indicatorOffset: position === 'inside' ? input.indent : 4,
+            // Keep nested drops visibly inside the target subtree. The extra
+            // four-character offset distinguishes a child insertion from a
+            // same-level ordering line in the demos and default UI.
+            indicatorOffset: position === 'inside' ? input.indent + 16 : 4,
             valid: true,
           }
           const invalidate = (reason: string): TreeDropIntent => ({
@@ -121,9 +124,12 @@ export function dndFeature<TNode extends TreeNodeData>({
             reason,
           })
 
-          if (source.disabled || canDrag?.(source) === false) {
+          if (!source.draggable || canDrag?.(source) === false) {
             return invalidate('This node cannot be dragged.')
           }
+          if (!target.droppable) return invalidate('This node cannot receive drops.')
+          if (parentKey !== null && context.getItem(parentKey)?.droppable === false)
+            return invalidate('The destination parent cannot receive drops.')
           if (source.key === target.key) return invalidate('Cannot drop onto itself.')
           if (
             parentKey === source.key ||
@@ -152,7 +158,7 @@ export function dndFeature<TNode extends TreeNodeData>({
         return {
           canDrag: (key) => {
             const item = context.getItem(key)
-            return Boolean(item && !item.disabled && canDrag?.(item) !== false)
+            return Boolean(item && item.draggable && canDrag?.(item) !== false)
           },
           resolve,
           getActiveIntent: activeIntentStore.getSnapshot,
@@ -175,6 +181,14 @@ export function dndFeature<TNode extends TreeNodeData>({
             }
           },
           drop: (intent) => {
+            const current = resolve(intent)
+            if (!current?.valid)
+              return {
+                ok: false,
+                type: 'move',
+                changedKeys: [],
+                reason: current?.reason ?? 'Drop target is no longer available.',
+              }
             if (!intent.valid) {
               return {
                 ok: false,
@@ -183,9 +197,9 @@ export function dndFeature<TNode extends TreeNodeData>({
                 reason: intent.reason ?? 'Drop was rejected.',
               }
             }
-            const result = context.moveNode(toMoveInput(intent))
-            if (result.ok && intent.position === 'inside') {
-              context.getFeature<ExpansionFeatureApi>('expansion')?.expand(intent.targetKey)
+            const result = context.moveNode(toMoveInput(current))
+            if (result.ok && current.position === 'inside') {
+              context.getFeature<ExpansionFeatureApi>('expansion')?.expand(current.targetKey)
             }
             return result
           },

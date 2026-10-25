@@ -1,5 +1,5 @@
 import type { TreeFeatureRegistration } from '../feature-types'
-import type { TreeItem, TreeKey, TreeNodeData } from '../types'
+import type { TreeNode, TreeKey, TreeNodeData } from '../types'
 
 export interface FocusFeatureApi {
   focus(key: TreeKey | null): void
@@ -9,7 +9,7 @@ export interface FocusFeatureApi {
 function getRevealExpandedKeys<TNode extends TreeNodeData>(
   expandedKeys: readonly TreeKey[],
   key: TreeKey,
-  items: ReadonlyMap<TreeKey, TreeItem<TNode>>,
+  items: ReadonlyMap<TreeKey, TreeNode<TNode>>,
   getAncestorKeys: (key: TreeKey) => readonly TreeKey[],
 ) {
   if (!items.has(key)) return undefined

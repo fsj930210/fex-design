@@ -36,7 +36,7 @@ import { useTreeDndItem } from '@fex-design/vue/primitive/tree/use-tree-dnd-item
     <TreeItem :item-key="item.key" v-slot="state">
       <div v-bind="state.itemProps">
         <TreeTrigger :item-key="item.key" />
-        <TreeTitle>{{ item.node.name }}</TreeTitle>
+        <TreeTitle>{{ item.data.name }}</TreeTitle>
       </div>
     </TreeItem>
   </TreeViewport>
@@ -57,16 +57,16 @@ import { useTreeDndItem } from '@fex-design/vue/primitive/tree/use-tree-dnd-item
 
 ## 逻辑层与部件
 
-| API                         | 说明                                                                       |
-| --------------------------- | -------------------------------------------------------------------------- |
-| `useTree(getOptions)`       | 创建 controller，并把 Vue 响应式 options 同步到 core。                     |
-| `useTreeItem(tree, key)`    | 只订阅指定节点，返回展开、选择、勾选、焦点和异步加载状态。                 |
-| `useTreeVisibleItems(tree)` | 订阅独立于虚拟库的可见扁平列表。                                           |
-| `TreeViewport`              | 按 `getVisibleItems()` 渲染普通列表。                                      |
-| `TreeVirtualViewport`       | 使用 `@tanstack/vue-virtual`，暴露 `scrollToKey(key, { align, reveal })`。 |
-| `TreeItem`                  | slot 暴露 `itemProps`、节点状态和显式 actions。                            |
-| `TreeTrigger`               | 点击时按需加载子节点，再展开或折叠。                                       |
-| `TreeTitle`                 | 最小标题结构，不规定业务内容。                                             |
+| API                         | 说明                                                                    |
+| --------------------------- | ----------------------------------------------------------------------- |
+| `useTree(getOptions)`       | 创建 controller，并把 Vue 响应式 options 同步到 core。                  |
+| `useTreeItem(tree, key)`    | 只订阅指定节点，返回展开、选择、勾选、焦点和异步加载状态。              |
+| `useTreeVisibleItems(tree)` | 订阅独立于虚拟库的可见扁平列表。                                        |
+| `TreeViewport`              | 按 `getVisibleItems()` 渲染普通列表。                                   |
+| `TreeVirtualViewport`       | 使用 `@tanstack/vue-virtual`，暴露 `scrollTo(key, { align, reveal })`。 |
+| `TreeItem`                  | slot 暴露 `itemProps`、节点状态和显式 actions。                         |
+| `TreeTrigger`               | 点击时按需加载子节点，再展开或折叠。                                    |
+| `TreeTitle`                 | 最小标题结构，不规定业务内容。                                          |
 
 ## 状态、回调与 feature
 

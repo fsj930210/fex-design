@@ -228,7 +228,9 @@ export function App() {
           <aside
             class={`sticky top-16 h-[calc(100vh-64px)] shrink-0 overflow-y-auto border-r border-border py-6 transition-[width] duration-150 max-[1080px]:hidden ${componentNavCollapsed() ? 'w-12 px-2' : 'w-[200px] px-3'}`}
           >
-            <div class={`flex items-center gap-2 ${componentNavCollapsed() ? 'justify-center' : 'justify-between'} px-1`}>
+            <div
+              class={`flex items-center gap-2 ${componentNavCollapsed() ? 'justify-center' : 'justify-between'} px-1`}
+            >
               <Show when={!componentNavCollapsed()}>
                 <p class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
                   组件
@@ -241,7 +243,11 @@ export function App() {
                 title={componentNavCollapsed() ? '展开组件导航' : '折叠组件导航'}
                 onClick={() => setComponentNavCollapsed((value) => !value)}
               >
-                <svg class="size-3.5 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" aria-hidden="true">
+                <svg
+                  class="size-3.5 stroke-current fill-none stroke-[1.8]"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path d={componentNavCollapsed() ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6'} />
                 </svg>
               </button>

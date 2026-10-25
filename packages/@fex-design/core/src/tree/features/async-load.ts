@@ -1,7 +1,7 @@
 import type { TreeFeatureRegistration } from '../feature-types'
 import type {
   TreeAsyncLoaderOptions,
-  TreeItem,
+  TreeNode,
   TreeKey,
   TreeLoadState,
   TreeMutationResult,
@@ -19,7 +19,7 @@ export interface AsyncLoadFeatureApi {
 
 interface TreeAsyncLoadManagerOptions<TNode extends TreeNodeData> {
   getLoader(): TreeAsyncLoaderOptions<TNode> | undefined
-  getItem(key: TreeKey): TreeItem<TNode> | undefined
+  getItem(key: TreeKey): TreeNode<TNode> | undefined
   replaceChildren(key: TreeKey, children: readonly TNode[]): TreeMutationResult
   publish(key: TreeKey): void
 }
@@ -34,7 +34,7 @@ function createTreeAsyncLoadManager<TNode extends TreeNodeData>(
   const load = (key: TreeKey): Promise<TreeMutationResult | undefined> | undefined => {
     const item = options.getItem(key)
     const loader = options.getLoader()
-    if (!item || item.isLeaf || !loader) return undefined
+    if (!item || item.disabled || item.isLeaf || !loader) return undefined
     const inFlight = requests.get(key)
     if (inFlight) return inFlight
     if (states.get(key) === 'loaded') return undefined
@@ -76,7 +76,7 @@ function createTreeAsyncLoadManager<TNode extends TreeNodeData>(
 }
 
 export function asyncLoadFeature<TNode extends TreeNodeData>(
-  options: AsyncLoadFeatureOptions<TNode>,
+  options?: AsyncLoadFeatureOptions<TNode>,
 ): TreeFeatureRegistration<TNode> {
   return {
     options,
@@ -84,7 +84,9 @@ export function asyncLoadFeature<TNode extends TreeNodeData>(
       id: 'async-load',
       requires: ['expansion'],
       setup(context, rawOptions) {
-        context.configure({ asyncLoader: rawOptions as AsyncLoadFeatureOptions<TNode> })
+        if (rawOptions !== undefined) {
+          context.configure({ asyncLoader: rawOptions as AsyncLoadFeatureOptions<TNode> })
+        }
         const manager = createTreeAsyncLoadManager({
           getLoader: () => context.getOptions().asyncLoader,
           getItem: context.getItem,

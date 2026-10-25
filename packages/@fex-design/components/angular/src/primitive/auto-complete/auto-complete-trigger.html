@@ -22,7 +22,7 @@
   />
   @if (clearable && autoComplete.snapshot().value) { <button inputClear type="button"></button> }
   @if (autoComplete.loading) {
-  <span inputSuffix><loading-icon class="animate-spin" /></span>
+  <span inputSuffix><svg loadingIcon class="animate-spin"></svg></span>
   } @else {
   <ng-content select="[suffix]" />
   }

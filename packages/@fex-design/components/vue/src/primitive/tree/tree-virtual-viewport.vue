@@ -8,7 +8,7 @@ import { useTreeContext } from './context'
 import { useTreeVisibleItems } from './use-tree-visible-items'
 
 export interface TreeVirtualViewportHandle {
-  scrollToKey(
+  scrollTo(
     key: TreeKey,
     options?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean },
   ): boolean
@@ -35,7 +35,7 @@ const virtualizer = useVirtualizer(
   })),
 )
 
-function scrollToKey(
+function scrollTo(
   key: TreeKey,
   options?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean },
 ) {
@@ -45,7 +45,7 @@ function scrollToKey(
   virtualizer.value.scrollToIndex(index, { align: options?.align ?? 'auto' })
   return true
 }
-defineExpose<TreeVirtualViewportHandle>({ scrollToKey })
+defineExpose<TreeVirtualViewportHandle>({ scrollTo })
 </script>
 
 <template>

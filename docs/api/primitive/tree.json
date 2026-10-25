@@ -1,0 +1,267 @@
+{
+  "name": "Tree",
+  "slug": "tree",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "可组合的 Tree 部件与 useTree。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/tree",
+    "vue": "@fex-design/vue/primitive/tree",
+    "solid": "@fex-design/solid/primitive/tree",
+    "svelte": "@fex-design/svelte/primitive/tree",
+    "angular": "@fex-design/angular/primitive/tree"
+  },
+  "props": [],
+  "events": [],
+  "slots": [],
+  "components": [
+    {
+      "name": "TreeRoot",
+      "nativeElement": "div",
+      "description": "树根容器，持有逻辑实例并提供部件上下文。",
+      "props": [
+        {
+          "name": "options",
+          "type": "TreeOptions<TNode>",
+          "description": "树数据、受控或初始状态、功能注册和变更回调。"
+        },
+        {
+          "name": "controller",
+          "type": "TreeController<TNode>",
+          "description": "可选的外部逻辑实例。"
+        },
+        {
+          "name": "indent",
+          "type": "number",
+          "description": "每级缩进距离。",
+          "default": 16
+        },
+        {
+          "name": "rowHeight",
+          "type": "number",
+          "description": "节点行高。",
+          "default": 32
+        }
+      ]
+    },
+    {
+      "name": "TreeViewport",
+      "nativeElement": "div",
+      "description": "普通树可视节点列表。",
+      "props": [],
+      "slots": [
+        {
+          "name": "children / default",
+          "description": "接收当前可视节点 item 和 tree。"
+        }
+      ]
+    },
+    {
+      "name": "TreeVirtualViewport",
+      "nativeElement": "div",
+      "description": "虚拟化节点列表，仅渲染可视区域。",
+      "props": [
+        {
+          "name": "height",
+          "type": "number",
+          "description": "可视高度。"
+        },
+        {
+          "name": "overscan",
+          "type": "number",
+          "description": "预渲染行数。",
+          "default": 6
+        }
+      ]
+    },
+    {
+      "name": "TreeItem",
+      "nativeElement": "div",
+      "description": "节点行，提供状态、ARIA、节点级订阅与操作。",
+      "props": [
+        {
+          "name": "itemKey",
+          "type": "TreeKey",
+          "description": "节点唯一标识。"
+        },
+        {
+          "name": "block",
+          "type": "boolean",
+          "description": "占满可用宽度。",
+          "default": false
+        },
+        {
+          "name": "draggable",
+          "type": "boolean",
+          "description": "显式 false 额外禁止该行拖动；未设置时使用节点权限。"
+        },
+        {
+          "name": "dndCallbacks",
+          "type": "TreeDndCallbacks<TNode>",
+          "description": "拖拽事件回调。"
+        }
+      ]
+    },
+    {
+      "name": "TreeTrigger",
+      "nativeElement": "button",
+      "description": "展开和收起节点，支持异步加载与自定义图标内容。",
+      "props": [
+        {
+          "name": "itemKey",
+          "type": "TreeKey",
+          "description": "节点唯一标识。"
+        }
+      ]
+    },
+    {
+      "name": "TreeCheckbox",
+      "nativeElement": "checkbox",
+      "description": "复用 Checkbox 部件，遵循节点勾选权限并展示半选状态。",
+      "props": [
+        {
+          "name": "itemKey",
+          "type": "TreeKey",
+          "description": "节点唯一标识；Angular 从当前 TreeItem 注入。"
+        }
+      ]
+    },
+    {
+      "name": "TreeTitle",
+      "nativeElement": "span",
+      "description": "节点标题部件，接收自定义内容。",
+      "props": []
+    },
+    {
+      "name": "TreeDropIndicator",
+      "nativeElement": "div",
+      "description": "显示有效放置位置。",
+      "props": [
+        {
+          "name": "itemKey",
+          "type": "TreeKey",
+          "description": "目标节点标识。"
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "TreeDataNode",
+      "description": "默认输入节点结构，包含 key、title、children、isLeaf 及节点能力。"
+    },
+    {
+      "name": "TreeNode",
+      "description": "解析后的只读节点，data 保存原始输入数据，包含父子关系与节点能力。"
+    },
+    {
+      "name": "TreeOptions",
+      "description": "Primitive 逻辑配置，支持受控 keys、defaultKeys、features、fieldNames、isLeaf 和异步加载回调。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "basic",
+      "title": "基本用法",
+      "description": "基本展示及展开、收起的受控与非受控用法。"
+    },
+    {
+      "id": "field-names",
+      "title": "字段映射",
+      "description": "使用自定义字段展示组织树，选择后返回节点 ID。"
+    },
+    {
+      "id": "selection",
+      "title": "选择",
+      "description": "单选、多选的受控与非受控状态。"
+    },
+    {
+      "id": "checkbox",
+      "title": "勾选",
+      "description": "父子级联、严格勾选的受控与非受控状态。"
+    },
+    {
+      "id": "search",
+      "title": "搜索",
+      "description": "同步过滤与异步搜索场景。"
+    },
+    {
+      "id": "async-load",
+      "title": "异步加载",
+      "description": "展开节点加载子节点。"
+    },
+    {
+      "id": "dnd",
+      "title": "拖拽",
+      "description": "拖动节点并显示放置结果。"
+    },
+    {
+      "id": "custom-render",
+      "title": "自定义渲染",
+      "description": "renderItem 完整替换行。"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "对比默认主题和自定义标题、悬停及选中颜色。"
+    },
+    {
+      "id": "direction",
+      "title": "阅读方向",
+      "description": "对比从左向右与从右向左。"
+    },
+    {
+      "id": "logic",
+      "title": "useTree",
+      "description": "使用 useTree 自行组合 Tree。"
+    },
+    {
+      "id": "scroll-to",
+      "title": "scrollTo",
+      "description": "调用 scrollTo 定位节点。"
+    },
+    {
+      "id": "keyboard",
+      "title": "键盘",
+      "description": "使用方向键、Home/End、Enter 和 Space。"
+    },
+    {
+      "id": "virtual",
+      "title": "虚拟树",
+      "description": "使用虚拟 viewport 展示大量节点。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--tree-title-color",
+      "type": "color",
+      "description": "标题文字颜色，默认 foreground。"
+    },
+    {
+      "name": "--tree-hover-background",
+      "type": "color",
+      "description": "标题悬停背景，默认 muted-background。"
+    },
+    {
+      "name": "--tree-selected-background",
+      "type": "color",
+      "description": "选中背景，默认 primary 混色。"
+    },
+    {
+      "name": "--tree-selected-color",
+      "type": "color",
+      "description": "选中文字颜色，默认 primary。"
+    },
+    {
+      "name": "--tree-drop-indicator-color",
+      "type": "color",
+      "description": "拖拽指示器颜色，默认 primary。"
+    }
+  ],
+  "notes": [
+    "组件与功能从所属框架公开 primitive/tree 入口导入。",
+    "Primitive 自带默认样式，通过部件宿主原生 class/style 进行定制。",
+    "isLeaf(node) 判断叶子节点，节点显式 isLeaf 配置优先；node.data 访问原始数据。",
+    "useTree 及各框架等价逻辑适配可独立于部件消费。"
+  ]
+}

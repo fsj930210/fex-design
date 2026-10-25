@@ -6,6 +6,50 @@ export type { UsageItem, ComponentUsage }
 export const usageSnippets: Record<string, ComponentUsage> = {
   ...usageSnippetsPart1,
   ...usageSnippetsPart2,
+  tree: {
+    ui: {
+      import: "import { Tree } from '@/components/ui/tree'",
+      code: `<Tree
+  treeData={[
+    {
+      key: 'department',
+      title: '部门',
+      children: [{ key: 'team', title: '团队' }],
+    },
+  ]}
+  defaultExpandedKeys={['department']}
+/>`,
+    },
+    primitive: {
+      import:
+        "import { TreeRoot, TreeViewport, TreeItem, TreeTrigger, TreeTitle, expansionFeature } from '@/components/primitive/tree'",
+      code: `<TreeRoot
+  options={{
+    treeData: [
+      {
+        key: 'department',
+        title: '部门',
+        children: [{ key: 'team', title: '团队' }],
+      },
+    ],
+    features: [expansionFeature()],
+  }}
+>
+  <TreeViewport>
+    {(item) => (
+      <TreeItem key={item.key} itemKey={item.key}>
+        {(state) => (
+          <div {...state.itemProps}>
+            <TreeTrigger itemKey={item.key} />
+            <TreeTitle>{String(item.node.title)}</TreeTitle>
+          </div>
+        )}
+      </TreeItem>
+    )}
+  </TreeViewport>
+</TreeRoot>`,
+    },
+  },
   menu: {
     ui: {
       import:

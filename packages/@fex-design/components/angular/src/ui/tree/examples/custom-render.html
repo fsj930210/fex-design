@@ -1,0 +1,25 @@
+<section class="grid w-full gap-space-sm">
+  <p class="text-sm text-muted-foreground">
+    自定义行内容：名称、唯一 key 和层级；加减按钮展开或收起。
+  </p>
+  <div class="h-64 overflow-auto">
+    <div tree [treeData]="treeProps.treeData" [defaultExpandedKeys]="treeProps.defaultExpandedKeys">
+      <ng-template let-item let-tree="tree"
+        ><div class="flex min-w-0 items-center gap-2">
+          @if(!item.isLeaf){<button
+            type="button"
+            class="size-5 shrink-0 rounded hover:bg-muted"
+            [attr.aria-expanded]="tree.getSnapshot().expandedKeys.includes(item.key)"
+            [attr.aria-label]="'展开或收起 '+item.data.title"
+            (click)="$event.stopPropagation();toggle(tree,item.key)"
+          >
+            {{tree.getSnapshot().expandedKeys.includes(item.key) ? '−' : '+'}}</button
+          >}@else{<span class="size-5 shrink-0"></span>}<span class="font-medium"
+            >{{item.data.title}}</span
+          ><code class="text-xs text-muted-foreground">{{item.key}}</code
+          ><span class="text-xs text-muted-foreground">depth {{item.depth}}</span>
+        </div></ng-template
+      >
+    </div>
+  </div>
+</section>

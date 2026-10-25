@@ -20,6 +20,8 @@ export interface CreateDraggableOptions<
   data?: TData
   disabled?: boolean
   dragPreview?: 'none' | 'clone'
+  onDragStart?: (event?: Event) => void
+  onDragEnd?: (event?: Event) => void
 }
 
 export function createDraggable<TData extends Record<string, unknown> = Record<string, unknown>>(
@@ -89,10 +91,11 @@ export function createDraggable<TData extends Record<string, unknown> = Record<s
       [DND_DRAG_START_RECT_WIDTH]: bounds.width,
       [DND_DRAG_START_RECT_HEIGHT]: bounds.height,
     })
-    moveCurrentDndSource(start)
+    moveCurrentDndSource(start, event)
     setActiveRect(bounds)
     setDragOffset({ x: 0, y: 0 })
     setDragging(true)
+    options.onDragStart?.(event)
     mountPreview(bounds)
 
     function onPointerMove(pointerEvent: PointerEvent) {
@@ -102,17 +105,18 @@ export function createDraggable<TData extends Record<string, unknown> = Record<s
         previewElement.style.left = `${bounds.left + point.x - start.x}px`
         previewElement.style.top = `${bounds.top + point.y - start.y}px`
       }
-      moveCurrentDndSource(point)
+      moveCurrentDndSource(point, pointerEvent)
     }
 
     function onPointerUp(pointerEvent: PointerEvent) {
       cleanupWindow?.()
       cleanupWindow = undefined
-      dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY })
+      dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY }, pointerEvent)
       setDragging(false)
       setActiveRect(null)
       setDragOffset({ x: 0, y: 0 })
       clearPreview()
+      options.onDragEnd?.(pointerEvent)
     }
 
     cleanupWindow = () => {

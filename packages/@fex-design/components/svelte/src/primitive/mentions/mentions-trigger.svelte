@@ -64,8 +64,7 @@
       mentions.snapshot().activeKey === undefined
         ? undefined
         : mentions.listId + "-" + mentions.snapshot().activeKey,
-    "aria-invalid":
-      mentions.ariaInvalid() ?? (mentions.invalid() || undefined),
+    "aria-invalid": mentions.ariaInvalid() ?? (mentions.invalid() || undefined),
     "aria-required": mentions.required() || undefined,
     oninput: input,
     onkeydown: keydown,

@@ -38,8 +38,8 @@
       [style]="styles().action"
       (click)="runSearch('prefix')"
     >
-      @if (loading()) { <loading-icon class="animate-spin" /> } @else if (template(prefix()); as
-      content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(prefix()) }} }
+      @if (loading()) { <svg loadingIcon class="animate-spin"></svg> } @else if (template(prefix());
+      as content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(prefix()) }} }
     </button></span
   >
   }
@@ -71,8 +71,8 @@
       [style]="styles().action"
       (click)="runSearch('suffix')"
     >
-      @if (loading()) { <loading-icon class="animate-spin" /> } @else if (template(suffix()); as
-      content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(suffix()) }} }
+      @if (loading()) { <svg loadingIcon class="animate-spin"></svg> } @else if (template(suffix());
+      as content) { <ng-container *ngTemplateOutlet="content" /> } @else { {{ text(suffix()) }} }
     </button></span
   >
   }
@@ -92,6 +92,6 @@
 >
   @if (!loading()) { @if (template(addonAfter()); as content) {
   <ng-container *ngTemplateOutlet="content" /> } @else if (text(addonAfter())) { {{
-  text(addonAfter()) }} } @else { <search-icon /> } }
+  text(addonAfter()) }} } @else { <svg searchIcon></svg> } }
 </button>
 }

@@ -4,9 +4,9 @@
     <strong>{{ direction === 'ltr' ? 'LTR · 中文示例' : 'RTL · مثال عربي' }}</strong>
     <div class="flex flex-wrap gap-3">
       <button button [attr.dir]="direction">
-        <plus-icon slot="start" />{{ direction === 'ltr' ? '前置图标' : 'أيقونة البداية' }}</button
+        <svg plusIcon slot="start"></svg>{{ direction === 'ltr' ? '前置图标' : 'أيقونة البداية' }}</button
       ><button button [attr.dir]="direction" iconPlacement="end">
-        {{ direction === 'ltr' ? '后置图标' : 'أيقونة النهاية' }}<plus-icon slot="end" />
+        {{ direction === 'ltr' ? '后置图标' : 'أيقونة النهاية' }}<svg plusIcon slot="end"></svg>
       </button>
     </div>
     <div buttonGroup [attr.dir]="direction">

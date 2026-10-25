@@ -6,8 +6,8 @@
   [style]="styles().icon"
 >
   @if (projectedIcon()) { <ng-content select="[alertIcon]" /> } @else if (type() === 'success') {
-  <circle-check-icon /> } @else if (type() === 'warning') { <triangle-alert-icon /> } @else if
-  (type() === 'error') { <circle-x-icon /> } @else { <info-icon /> }
+  <svg circleCheckIcon></svg> } @else if (type() === 'warning') { <svg triangleAlertIcon></svg> }
+  @else if (type() === 'error') { <svg circleXIcon></svg> } @else { <svg infoIcon></svg> }
 </span>
 }
 <div
@@ -59,7 +59,7 @@
   (click)="closeAlert($event)"
 >
   @if (projectedCloseIcon()) { <ng-content select="[alertCloseIcon]" /> } @else {
-  <x-icon class="size-3.5" />
+  <svg xIcon class="size-3.5"></svg>
   }
 </button>
 } }

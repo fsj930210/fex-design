@@ -1,6 +1,6 @@
 import type { TreeController, TreeNodeData } from '@fex-design/core/tree/types'
 
-export const treeContextKey = Symbol('fex-tree')
+export const treeContextKey = Symbol('tree')
 
 export interface TreeContext<TNode extends TreeNodeData = TreeNodeData> {
   tree: TreeController<TNode>

@@ -18,10 +18,17 @@ export default function PaginationUsePaginationExample() {
   }
 
   return (
-    <nav aria-label={snapshot.labels.navigation} className="grid w-full gap-3 rounded-lg border p-3">
+    <nav
+      aria-label={snapshot.labels.navigation}
+      className="grid w-full gap-3 rounded-lg border p-3"
+    >
       <div className="flex flex-wrap items-center gap-2">
         <span className="mr-auto">{snapshot.labels.total(snapshot.total)}</span>
-        <button type="button" disabled={!snapshot.canPrevious} onClick={() => controller.previousPage()}>
+        <button
+          type="button"
+          disabled={!snapshot.canPrevious}
+          onClick={() => controller.previousPage()}
+        >
           {snapshot.labels.previous}
         </button>
         <ol className="flex flex-wrap items-center gap-1" aria-label={snapshot.labels.navigation}>
@@ -37,7 +44,9 @@ export default function PaginationUsePaginationExample() {
                 </button>
               </li>
             ) : (
-              <li key={item.key} aria-hidden="true">…</li>
+              <li key={item.key} aria-hidden="true">
+                …
+              </li>
             ),
           )}
         </ol>
@@ -48,8 +57,15 @@ export default function PaginationUsePaginationExample() {
       <div className="flex flex-wrap items-center gap-3">
         <label className="flex items-center gap-2">
           {snapshot.labels.pageSize}
-          <select value={snapshot.pageSize} onChange={(event) => controller.setPageSize(Number(event.target.value))}>
-            {pageSizeOptions.map((size) => <option key={size} value={size}>{snapshot.labels.pageSizeOption(size)}</option>)}
+          <select
+            value={snapshot.pageSize}
+            onChange={(event) => controller.setPageSize(Number(event.target.value))}
+          >
+            {pageSizeOptions.map((size) => (
+              <option key={size} value={size}>
+                {snapshot.labels.pageSizeOption(size)}
+              </option>
+            ))}
           </select>
         </label>
         <label className="flex items-center gap-2">
@@ -60,11 +76,15 @@ export default function PaginationUsePaginationExample() {
             max={snapshot.pageCount}
             value={jump}
             onChange={(event) => setJump(event.target.value)}
-            onKeyDown={(event) => { if (event.key === 'Enter') submitJump() }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') submitJump()
+            }}
           />
           {snapshot.labels.jumpSuffix}
         </label>
-        <output aria-live="polite">{snapshot.page} / {snapshot.pageCount}</output>
+        <output aria-live="polite">
+          {snapshot.page} / {snapshot.pageCount}
+        </output>
       </div>
     </nav>
   )

@@ -4,7 +4,7 @@
     buttonSpinnerClassName,
   } from "@fex-design/components-styles/button";
   import { cn } from "@fex-design/utils";
-  import LoadingIcon from '@fex-design/svelte/icons/loading.svelte';
+  import LoadingIcon from "@fex-design/svelte/icons/loading.svelte";
   import {
     Button as PrimitiveButton,
     ButtonIcon,
@@ -12,7 +12,9 @@
   import type { ButtonProps } from "./button.types";
 
   let {
-    startIconProps, endIconProps, loadingIconProps,
+    startIconProps,
+    endIconProps,
+    loadingIconProps,
     variant = "outlined",
     color,
     size = "md",
@@ -51,7 +53,10 @@
         {#if loadingIndicator}
           {@render loadingIndicator()}
         {:else}
-          <LoadingIcon {...loadingIconProps} class={cn(buttonSpinnerClassName, loadingIconProps?.class)} />
+          <LoadingIcon
+            {...loadingIconProps}
+            class={cn(buttonSpinnerClassName, loadingIconProps?.class)}
+          />
         {/if}
       {:else if icon}
         {@render icon()}
@@ -65,7 +70,10 @@
         {#if loadingIndicator}
           {@render loadingIndicator()}
         {:else}
-          <LoadingIcon {...loadingIconProps} class={cn(buttonSpinnerClassName, loadingIconProps?.class)} />
+          <LoadingIcon
+            {...loadingIconProps}
+            class={cn(buttonSpinnerClassName, loadingIconProps?.class)}
+          />
         {/if}
       {:else if icon}
         {@render icon()}

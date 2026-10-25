@@ -44,6 +44,8 @@ export function TreeTrigger(props: TreeTriggerProps) {
       <button
         {...attrs}
         type="button"
+        tabIndex={tree.hasFeature('keyboard') ? -1 : attrs.tabIndex}
+        disabled={state().item?.disabled}
         data-slot="tree-trigger"
         aria-expanded={state().expanded}
         class={cn(treeTriggerClassName, local.class)}

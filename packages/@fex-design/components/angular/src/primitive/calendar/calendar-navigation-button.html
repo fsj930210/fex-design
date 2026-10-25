@@ -1,7 +1,7 @@
 ﻿@if (action().startsWith('previous')) {
-<chevron-left-icon class="size-4 rtl:rotate-180" />
+<svg chevronLeftIcon class="size-4 rtl:rotate-180"></svg>
 } @else if (action().startsWith('next')) {
-<chevron-right-icon class="size-4 rtl:rotate-180" />
+<svg chevronRightIcon class="size-4 rtl:rotate-180"></svg>
 } @else {
 <ng-content />
 }

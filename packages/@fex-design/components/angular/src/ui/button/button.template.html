@@ -6,10 +6,11 @@
     [style]="iconProps()?.style"
   >
     <ng-content select="[slot=loading-indicator]">
-      <loading-icon
+      <svg
+        loadingIcon
         [class]="cn(spinnerClassName, loadingIconProps()?.class)"
         [style]="loadingIconProps()?.style"
-      />
+      ></svg>
     </ng-content>
   </span>
 </ng-template>

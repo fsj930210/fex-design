@@ -25,6 +25,8 @@ export function TreeTrigger({ itemKey, className, onClick, children, ...props }:
     <button
       {...props}
       type="button"
+      tabIndex={tree.hasFeature('keyboard') ? -1 : props.tabIndex}
+      disabled={state.item.disabled}
       data-slot="tree-trigger"
       aria-expanded={state.expanded}
       className={cn(treeTriggerClassName, className)}

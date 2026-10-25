@@ -1,0 +1,12 @@
+<div class="w-[min(36rem,100%)] min-w-0">
+  <p class="mb-space-sm min-h-10 break-all text-sm text-muted-foreground">{{message()}}</p>
+  <div treeRoot [options]="options">
+    <div treeViewport>
+      <ng-template let-item
+        ><div [treeItem]="item.key" [treeDraggable]="true" [treeDndCallbacks]="callbacks">
+          <button [treeTrigger]="item.key"></button><span treeTitle>{{item.data.title}}</span>
+        </div></ng-template
+      >
+    </div>
+  </div>
+</div>

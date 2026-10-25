@@ -12,7 +12,8 @@
 >
 } @if (indicator() !== false && indicator() !== null) {
 <span data-slot="submenu-indicator" [class]="expandClass">
-  @if (indicator() === undefined) { <chevron-right-icon /> } @else if (asTemplate(indicator()); as
-  template) { <ng-container [ngTemplateOutlet]="template" /> } @else { {{ text(indicator()) }} }
+  @if (indicator() === undefined) { <svg chevronRightIcon></svg> } @else if
+  (asTemplate(indicator()); as template) { <ng-container [ngTemplateOutlet]="template" /> } @else {
+  {{ text(indicator()) }} }
 </span>
 }

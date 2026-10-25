@@ -1,0 +1,74 @@
+---
+title: Tree
+description: 展示层级数据，支持选择、勾选、搜索、异步加载、拖拽和虚拟化。
+---
+
+## 何时使用
+
+文件目录、组织架构、权限资源和其他具有父子关系的数据使用 Tree。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="组合 Tree 部件，提供默认行内容和常用交互。" />
+<ApiSection layer="primitive" title="Primitive API" description="按需组合 TreeRoot、TreeViewport、TreeItem 和其他部件。">
+<ApiComposition layer="primitive">
+
+```text
+TreeRoot
+├── TreeViewport / TreeVirtualViewport
+│   └── TreeItem
+│       ├── TreeTrigger
+│       ├── TreeCheckbox
+│       └── TreeTitle
+└── TreeDropIndicator
+```
+
+</ApiComposition>
+</ApiSection>
+</ApiContainer>
+
+## 节点数据
+
+`TreeDataNode` 是默认输入结构；自定义结构通过 `fieldNames` 映射。节点显式配置（包括 `false`）优先于树级默认值，整树 `disabled` 始终锁定全部节点。
+
+| 字段              | 类型                      | 说明                                                                |
+| ----------------- | ------------------------- | ------------------------------------------------------------------- | -------------- |
+| `key`             | `string                   | number`                                                             | 树内唯一标识。 |
+| `title`           | `unknown`                 | 标题内容；完整行内容通过 `renderItem` 自定义。                      |
+| `children`        | `readonly TreeDataNode[]` | 子节点。                                                            |
+| `isLeaf`          | `boolean`                 | 显式叶子状态；未设置时调用树级 `isLeaf(node)`，再回退到子节点推导。 |
+| `disabled`        | `boolean`                 | 禁用该节点的交互；级联勾选不跨越该节点。                            |
+| `selectable`      | `boolean`                 | 能否选择；未设置时继承树级默认值。                                  |
+| `checkable`       | `boolean`                 | 是否显示复选框；未设置时继承树级默认值。                            |
+| `disableCheckbox` | `boolean`                 | 显示复选框，但禁止勾选；作为级联边界。                              |
+| `draggable`       | `boolean`                 | 能否作为拖拽源，与放置权限独立。                                    |
+| `droppable`       | `boolean`                 | 能否作为排序或嵌套的放置目标。                                      |
+
+## TreeNode
+
+`TreeNode<TData>` 是 Core 解析后的只读节点，从所属框架的 Tree 入口导入。`isLeaf(node)`、加载与交互回调使用该模型；Primitive 的 `TreeItem` 是渲染组件。
+
+| 字段                                                                                         | 说明                                       |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `key`、`title`                                                                               | 映射后的标识和标题。                       |
+| `data`                                                                                       | 原始输入对象，保留业务字段；不改写源数据。 |
+| `parentKey`、`depth`、`index`                                                                | 父节点标识、层级和兄弟位置。               |
+| `childrenKeys`                                                                               | 直接子节点标识。                           |
+| `isLeaf`、`disabled`、`selectable`、`checkable`、`disableCheckbox`、`draggable`、`droppable` | 解析后的节点能力。                         |
+
+## CSS 变量
+
+Tree 的颜色变量默认回退到全局语义 token，可在 TreeRoot 的 style 或 UI Tree 的 styles.root 上独立覆盖。缩进使用 `indent` 配置；拖拽指示器按实际节点的位置定位。
+
+| 变量                          | 说明                                     |
+| ----------------------------- | ---------------------------------------- |
+| `--tree-title-color`          | 标题文字颜色，默认 foreground。          |
+| `--tree-hover-background`     | 标题悬停背景，默认 muted-background。    |
+| `--tree-selected-background`  | 选中标题背景，默认 primary 的 10% 混色。 |
+| `--tree-selected-color`       | 选中标题文字颜色，默认 primary。         |
+| `--tree-drop-indicator-color` | 拖拽指示线和端点颜色，默认 primary。     |

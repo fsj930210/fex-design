@@ -1,6 +1,6 @@
 # Tree primitive
 
-Angular Tree 是 `@fex-design/core` controller 的 Signal-first primitive。它不隐式安装 feature，也没有发布 `ui/tree`。
+Angular Tree 是 `@fex-design/core` controller 的 Signal-first primitive。它不隐式安装 feature；完整默认组合通过 `@fex-design/angular/ui/tree` 提供。
 
 ## 导入
 
@@ -8,34 +8,34 @@ Angular Tree 是 `@fex-design/core` controller 的 Signal-first primitive。它�
 import { expansionFeature } from '@fex-design/core/tree/features/expansion'
 import { selectionFeature } from '@fex-design/core/tree/features/selection'
 import {
-  TreeItemDirective,
+  TreeItem,
   TreeRoot,
-  TreeTitleDirective,
-  TreeTriggerDirective,
+  TreeTitle,
+  TreeTrigger,
   TreeViewport,
   createTreeSignals,
 } from '@fex-design/angular/primitive/tree'
 ```
 
-DnD directive 独立入口：
+DnD directive 也可以从组件族入口具名导入；需要独立使用时可使用文件级入口：
 
 ```ts
-import { TreeDndItemDirective } from '@fex-design/angular/primitive/tree/tree-dnd-item'
+import { TreeDndItem } from '@fex-design/angular/primitive/tree'
 ```
 
 ## 基本组合
 
 ```html
-<fex-tree [options]="options">
-  <fex-tree-viewport>
+<div treeRoot [options]="options">
+  <div treeViewport>
     <ng-template let-item>
-      <div [fexTreeItem]="item.key">
-        <button fexTreeTrigger></button>
-        <span fexTreeTitle>{{ item.node.name }}</span>
+      <div [treeItem]="item.key">
+        <button treeTrigger></button>
+        <span treeTitle>{{ item.data.name }}</span>
       </div>
     </ng-template>
-  </fex-tree-viewport>
-</fex-tree>
+  </div>
+</div>
 ```
 
 ## TreeRoot inputs
@@ -54,11 +54,11 @@ import { TreeDndItemDirective } from '@fex-design/angular/primitive/tree/tree-dn
 | -------------------------------------------- | ---------------------------------------------------------------------------- |
 | `createTreeSignals(getOptions, controller?)` | 返回 controller、snapshot signal 和 visibleItems signal，供自定义 DOM 使用。 |
 | `TreeViewport`                               | 通过 `ng-template` 输出普通可见列表。                                        |
-| `TreeVirtualViewport`                        | 使用 `@tanstack/angular-virtual`，实例方法支持 `scrollToKey`。               |
-| `TreeItemDirective`                          | 节点级订阅，提供 ARIA、状态 signal 和 actions。                              |
-| `TreeTriggerDirective`                       | 事件驱动的异步加载、展开和折叠。                                             |
-| `TreeTitleDirective`                         | 最小 title 样式协议。                                                        |
-| `TreeDndItemDirective`                       | 可选拖拽、预览与深度指示器。                                                 |
+| `TreeVirtualViewport`                        | 使用 `@tanstack/angular-virtual`，实例方法支持 `scrollTo`。                  |
+| `TreeItem`                                   | 节点级订阅，提供 ARIA、状态 signal 和 actions。                              |
+| `TreeTrigger`                                | 事件驱动的异步加载、展开和折叠。                                             |
+| `TreeTitle`                                  | 最小 title 样式协议。                                                        |
+| `TreeDndItem`                                | 可选拖拽、预览与深度指示器。                                                 |
 
 ## 受控状态与回调
 

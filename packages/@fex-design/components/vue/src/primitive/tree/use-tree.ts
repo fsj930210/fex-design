@@ -11,7 +11,7 @@ export function useTreeController<TNode extends TreeNodeData>(
   suppliedController?: TreeController<TNode> | undefined,
 ): TreeController<TNode> {
   const ownedController: ShallowRef<TreeController<TNode>> = shallowRef(
-    createTreeController(getOptions() ?? { treeData: [] }),
+    suppliedController ?? createTreeController(getOptions() ?? { treeData: [] }),
   )
   const controller = suppliedController ?? ownedController.value
 

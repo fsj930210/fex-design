@@ -14,19 +14,19 @@ Ready-to-use composition that reuses Primitive logic and Input/Button parts. UI 
 
 ## Examples
 
-| Name            | Covers                                                     |
-| --------------- | ---------------------------------------------------------- |
-| basic           | Controlled and uncontrolled values.                        |
-| constraints     | min, max, step, and precision.                             |
-| formatter       | Parsing and display formatting.                            |
-| editing         | Draft text and blur commit.                                |
-| controls        | Default, hidden, and replaced step controls.               |
-| keyboard        | Arrow key stepping.                                        |
-| range           | Controlled out-of-range values.                            |
+| Name            | Covers                                                                   |
+| --------------- | ------------------------------------------------------------------------ |
+| basic           | Controlled and uncontrolled values.                                      |
+| constraints     | min, max, step, and precision.                                           |
+| formatter       | Parsing and display formatting.                                          |
+| editing         | Draft text and blur commit.                                              |
+| controls        | Default, hidden, and replaced step controls.                             |
+| keyboard        | Arrow key stepping.                                                      |
+| range           | Controlled out-of-range values.                                          |
 | custom-logic    | Use useInputNumber to hand-write DOM for a custom InputNumber component. |
-| affixes         | Prefix, clear, suffix, and actions together.               |
-| validation      | Visible invalid state and error description.               |
-| semantic-styles | classNames and styles for structural parts.                |
+| affixes         | Prefix, clear, suffix, and actions together.                             |
+| validation      | Visible invalid state and error description.                             |
+| semantic-styles | classNames and styles for structural parts.                              |
 
 ## InputNumber API
 

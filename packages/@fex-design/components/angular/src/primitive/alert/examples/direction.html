@@ -2,22 +2,22 @@
   <section dir="ltr" class="grid gap-3 rounded-lg border p-4">
     <strong>LTR</strong>
     <div alert type="warning">
-      <span alertIcon><triangle-alert-icon /></span>
+      <span alertIcon><svg triangleAlertIcon></svg></span>
       <div alertTitle>配置需要确认</div>
       <div alertAction><button class="underline">查看</button></div>
       <button [class]="alertCloseClassName" data-slot="alert-close" aria-label="关闭提示">
-        <x-icon class="size-3.5" />
+        <svg xIcon class="size-3.5"></svg>
       </button>
     </div>
   </section>
   <section dir="rtl" class="grid gap-3 rounded-lg border p-4">
     <strong>RTL</strong>
     <div alert type="warning">
-      <span alertIcon><triangle-alert-icon /></span>
+      <span alertIcon><svg triangleAlertIcon></svg></span>
       <div alertTitle>يجب تأكيد الإعداد</div>
       <div alertAction><button class="underline">عرض</button></div>
       <button [class]="alertCloseClassName" data-slot="alert-close" aria-label="关闭提示">
-        <x-icon class="size-3.5" />
+        <svg xIcon class="size-3.5"></svg>
       </button>
     </div>
   </section>

@@ -22,7 +22,7 @@
         [attr.aria-pressed]="visible()"
         (click)="visible.set(!visible())"
       >
-        @if(visible()){<eye-off-icon />}@else{<eye-icon />}
+        @if(visible()){<svg eyeOffIcon></svg>}@else{<svg eyeIcon></svg>}
       </button></span
     >
   </div>
@@ -43,7 +43,7 @@
         aria-label="Search"
         [class]="searchClass"
       >
-        <search-icon /></button
+        <svg searchIcon></svg></button
     ></span>
   </div>
 </div>

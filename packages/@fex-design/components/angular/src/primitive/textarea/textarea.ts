@@ -164,7 +164,7 @@ export class TextareaFooter {
     '(pointerdown)': '$event.preventDefault()',
     '(click)': 'root.clearValue()',
   },
-  template: '<ng-content><x-icon /></ng-content>',
+  template: '<ng-content><svg xIcon ></svg></ng-content>',
 })
 export class TextareaClear {
   readonly root = inject(TextareaRoot)

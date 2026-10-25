@@ -5,13 +5,32 @@ export type { TreeVirtualViewportHandle } from './tree-virtual-viewport.vue'
 export { default as TreeItem } from './tree-item.vue'
 export { default as TreeTrigger } from './tree-trigger.vue'
 export { default as TreeTitle } from './tree-title.vue'
+export { default as TreeCheckbox } from './tree-checkbox.vue'
+export { default as TreeDropIndicator } from './tree-drop-indicator.vue'
 export { useTree } from './use-tree'
 export { useTreeItem } from './use-tree-item'
 export { useTreeVisibleItems } from './use-tree-visible-items'
+export { expansionFeature } from '@fex-design/core/tree/features/expansion'
+export { selectionFeature } from '@fex-design/core/tree/features/selection'
+export { checkFeature } from '@fex-design/core/tree/features/check'
+export { asyncLoadFeature } from '@fex-design/core/tree/features/async-load'
+export { dndFeature } from '@fex-design/core/tree/features/dnd'
+export { focusFeature } from '@fex-design/core/tree/features/focus'
+export { keyboardFeature } from '@fex-design/core/tree/features/keyboard'
+export { searchFeature } from '@fex-design/core/tree/features/search'
+export {
+  useTreeDndItem,
+  type UseTreeDndItemOptions,
+  type UseTreeDndItemReturn,
+} from './use-tree-dnd-item'
 export type {
   TreeController,
   TreeKey,
-  TreeNodeData,
+  TreeDataNode,
+  TreeNode,
   TreeOptions,
   TreeVisibleItem,
+  TreeDndCallbacks,
+  TreeDragEventContext,
+  TreeItemEventContext,
 } from '@fex-design/core/tree/types'

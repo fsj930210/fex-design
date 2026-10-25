@@ -8,7 +8,7 @@ export interface TreeContextValue<TNode extends TreeNodeData> {
   rowHeight: ComputedRef<number>
 }
 
-export const treeContextKey = Symbol('fex-tree') as InjectionKey<TreeContextValue<TreeNodeData>>
+export const treeContextKey = Symbol('tree') as InjectionKey<TreeContextValue<TreeNodeData>>
 
 export function useTreeContext<TNode extends TreeNodeData>(component = 'Tree') {
   const context = inject(treeContextKey, null) as TreeContextValue<TNode> | null

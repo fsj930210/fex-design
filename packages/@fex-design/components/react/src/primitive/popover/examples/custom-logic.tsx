@@ -9,7 +9,15 @@ export function CustomLogicExample() {
       <button type="button" aria-expanded={snapshot.open} onClick={() => overlay.toggle()}>
         {snapshot.open ? 'Close details' : 'Open details'}
       </button>
-      {snapshot.open && <div role="dialog" className="grid gap-2 rounded-md border p-3"><strong>Custom Popover</strong><p>This panel is rendered by the example component.</p><button type="button" onClick={() => overlay.close()}>Dismiss</button></div>}
+      {snapshot.open && (
+        <div role="dialog" className="grid gap-2 rounded-md border p-3">
+          <strong>Custom Popover</strong>
+          <p>This panel is rendered by the example component.</p>
+          <button type="button" onClick={() => overlay.close()}>
+            Dismiss
+          </button>
+        </div>
+      )}
       <output aria-live="polite">{snapshot.open ? 'Open' : 'Closed'}</output>
     </section>
   )

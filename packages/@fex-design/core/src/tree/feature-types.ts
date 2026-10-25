@@ -1,5 +1,5 @@
 import type {
-  TreeItem,
+  TreeNode,
   TreeInsertInput,
   TreeKey,
   TreeMoveInput,
@@ -15,12 +15,12 @@ export type TreeFeatureId = string
 
 export interface TreeFeatureContext<TNode extends TreeNodeData> {
   getSnapshot(): TreeSnapshot<TNode>
-  getItem(key: TreeKey): TreeItem<TNode> | undefined
+  getItem(key: TreeKey): TreeNode<TNode> | undefined
   getPath(key: TreeKey): TreeKey[]
   updateFeatureState(changedKeys?: readonly TreeKey[]): void
   configure(options: Partial<TreeOptions<TNode>>): void
   getOptions(): TreeOptions<TNode>
-  getItems(): ReadonlyMap<TreeKey, TreeItem<TNode>>
+  getItems(): ReadonlyMap<TreeKey, TreeNode<TNode>>
   getVisibleItems(): readonly TreeVisibleItem<TNode>[]
   getChildrenKeys(key: TreeKey | null): readonly TreeKey[]
   getAncestorKeys(key: TreeKey): readonly TreeKey[]

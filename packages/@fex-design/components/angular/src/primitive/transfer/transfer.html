@@ -28,8 +28,9 @@
         >
           @if (headerState($any(side)) !== false) {
           <span checkboxIndicator [class]="indicatorClass"
-            ><fex-check-icon [class]="checkIconClass" /><minus-icon [class]="minusIconClass"
-          /></span>
+            ><svg checkIcon [class]="checkIconClass"></svg
+            ><svg minusIcon [class]="minusIconClass"></svg
+          ></span>
           }</button
         ><span class="min-w-0 flex-1 truncate font-medium">{{ panelTitle($any(side)) }}</span
         ><span class="shrink-0 text-muted-foreground"
@@ -60,7 +61,8 @@
               aria-hidden="true"
               [attr.data-checked]="panelApi.isChecked(itemKey(item)) || null"
               class="flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-border text-primary-foreground data-[checked=true]:border-primary data-[checked=true]:bg-primary"
-              >@if (panelApi.isChecked(itemKey(item))) { <fex-check-icon class="size-3" /> }</span
+              >@if (panelApi.isChecked(itemKey(item))) {
+              <svg checkIcon class="size-3"></svg> }</span
             >@if (itemTemplate(); as customItem) {
             <ng-container
               [ngTemplateOutlet]="customItem.template"
@@ -97,28 +99,28 @@
         aria-label="Move selected to target"
         (click)="controller.moveToTarget()"
       >
-        <fex-chevron-right-icon /></button
+        <svg chevronRightIcon></svg></button
       ><button
         fexTransferActionButton
         [disabled]="!controller.canMoveToSource()"
         aria-label="Move selected to source"
         (click)="controller.moveToSource()"
       >
-        <fex-chevron-left-icon /></button
+        <svg chevronLeftIcon></svg></button
       ><button
         fexTransferActionButton
         [disabled]="!controller.canMoveAllToTarget()"
         aria-label="Move all to target"
         (click)="controller.moveAllToTarget()"
       >
-        <fex-chevrons-right-icon /></button
+        <svg chevronsRightIcon></svg></button
       ><button
         fexTransferActionButton
         [disabled]="!controller.canMoveAllToSource()"
         aria-label="Move all to source"
         (click)="controller.moveAllToSource()"
       >
-        <fex-chevrons-left-icon />
+        <svg chevronsLeftIcon></svg>
       </button>
       }
     </div>

@@ -106,7 +106,9 @@ export function TimePickerTrigger(props: TimePickerTriggerProps) {
         aria-label="Time"
         {...filterTimePickerInputProps(local.inputProps)}
         type="text"
-        aria-invalid={local['aria-invalid'] ?? (local.invalid || local.inputProps?.['aria-invalid'])}
+        aria-invalid={
+          local['aria-invalid'] ?? (local.invalid || local.inputProps?.['aria-invalid'])
+        }
         placeholder={local.placeholder ?? local.inputProps?.placeholder ?? context.format()}
       />
       <div data-slot="time-picker-affix" class={timePickerAffixClassName}>

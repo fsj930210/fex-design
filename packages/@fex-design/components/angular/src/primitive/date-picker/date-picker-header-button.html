@@ -1,11 +1,11 @@
 <ng-content>
   @if (isDouble()) { @if (isPrevious()) {
-  <chevrons-left-icon class="size-4 rtl:rotate-180" />
+  <svg chevronsLeftIcon class="size-4 rtl:rotate-180"></svg>
   } @else {
-  <chevrons-right-icon class="size-4 rtl:rotate-180" />
+  <svg chevronsRightIcon class="size-4 rtl:rotate-180"></svg>
   } } @else { @if (isPrevious()) {
-  <chevron-left-icon class="size-4 rtl:rotate-180" />
+  <svg chevronLeftIcon class="size-4 rtl:rotate-180"></svg>
   } @else {
-  <chevron-right-icon class="size-4 rtl:rotate-180" />
+  <svg chevronRightIcon class="size-4 rtl:rotate-180"></svg>
   } }
 </ng-content>

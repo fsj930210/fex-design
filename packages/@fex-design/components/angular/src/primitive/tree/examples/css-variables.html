@@ -1,0 +1,23 @@
+<div class="grid w-full gap-space-lg">
+  @for(custom of [false,true]; track custom){
+  <section class="grid gap-space-sm">
+    <h3 class="font-medium">{{custom ? '自定义：紫色选中态、黄色悬停背景' : '默认主题'}}</h3>
+    <p class="text-xs text-muted-foreground">
+      {{custom ? '标题为灰蓝色；悬停任意节点比较背景，点击节点比较选中颜色。' :
+      '使用全局语义色。两组使用相同数据和选中节点。'}}
+    </p>
+    <div treeRoot [options]="options" [style]="custom ? customStyle : null">
+      <div treeViewport>
+        <ng-template let-item
+          ><div [treeItem]="item.key">
+            <button [treeTrigger]="item.key"></button><span treeTitle>{{item.data.title}}</span>
+          </div></ng-template
+        >
+      </div>
+    </div>
+  </section>
+  }
+  <p class="text-xs text-muted-foreground">
+    --tree-drop-indicator-color 用于拖拽指示器；本例展示标题、hover 与选中态变量。
+  </p>
+</div>

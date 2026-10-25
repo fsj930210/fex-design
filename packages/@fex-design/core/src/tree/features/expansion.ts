@@ -1,5 +1,5 @@
 import type { TreeFeatureRegistration } from '../feature-types'
-import type { TreeItem, TreeKey, TreeNodeData } from '../types'
+import type { TreeNode, TreeKey, TreeNodeData } from '../types'
 
 export interface ExpansionFeatureOptions {
   defaultExpandedKeys?: readonly TreeKey[] | undefined
@@ -19,7 +19,7 @@ function getExpandedKeysAfterToggle(keys: readonly TreeKey[], key: TreeKey, expa
 }
 
 function getAllExpandableKeys<TNode extends TreeNodeData>(
-  items: ReadonlyMap<TreeKey, TreeItem<TNode>>,
+  items: ReadonlyMap<TreeKey, TreeNode<TNode>>,
 ) {
   return [...items.values()]
     .filter((item) => !item.isLeaf && !item.disabled)
@@ -49,11 +49,22 @@ export function expansionFeature<TNode extends TreeNodeData>(
           collapse: (key) => set(key, false),
           toggle: (key) => set(key, !context.getSnapshot().expandedKeys.includes(key)),
           expandAll: () => {
-            const keys = getAllExpandableKeys(context.getItems())
+            const keys = [
+              ...new Set([
+                ...context
+                  .getSnapshot()
+                  .expandedKeys.filter((key) => context.getItem(key)?.disabled),
+                ...getAllExpandableKeys(context.getItems()),
+              ]),
+            ]
             context.setStateKeys('expandedKeys', keys, keys)
           },
           collapseAll: () =>
-            context.setStateKeys('expandedKeys', [], context.getSnapshot().expandedKeys),
+            context.setStateKeys(
+              'expandedKeys',
+              context.getSnapshot().expandedKeys.filter((key) => context.getItem(key)?.disabled),
+              context.getSnapshot().expandedKeys,
+            ),
         }
         const defaultKeys = (normalizedOptions.defaultExpandedKeys ?? []).filter((key) => {
           const item = context.getItem(key)

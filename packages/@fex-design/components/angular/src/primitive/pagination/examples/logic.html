@@ -1,28 +1,71 @@
-<nav [attr.aria-label]="pagination.snapshot().labels.navigation" class="grid w-full gap-3 rounded-lg border p-3">
+<nav
+  [attr.aria-label]="pagination.snapshot().labels.navigation"
+  class="grid w-full gap-3 rounded-lg border p-3"
+>
   <div class="flex flex-wrap items-center gap-2">
-    <span class="mr-auto">{{ pagination.snapshot().labels.total(pagination.snapshot().total) }}</span>
-    <button type="button" [disabled]="!pagination.snapshot().canPrevious" (click)="pagination.controller.previousPage()">{{ pagination.snapshot().labels.previous }}</button>
-    <ol [attr.aria-label]="pagination.snapshot().labels.navigation" class="flex flex-wrap items-center gap-1">
+    <span class="mr-auto"
+      >{{ pagination.snapshot().labels.total(pagination.snapshot().total) }}</span
+    >
+    <button
+      type="button"
+      [disabled]="!pagination.snapshot().canPrevious"
+      (click)="pagination.controller.previousPage()"
+    >
+      {{ pagination.snapshot().labels.previous }}
+    </button>
+    <ol
+      [attr.aria-label]="pagination.snapshot().labels.navigation"
+      class="flex flex-wrap items-center gap-1"
+    >
       @for (item of pagination.snapshot().pages; track item.key) {
-        <li>
-          @if (item.type === 'page') {
-            <button type="button" [attr.aria-current]="item.page === pagination.snapshot().page ? 'page' : null" (click)="pagination.controller.setPage(item.page)">{{ item.page }}</button>
-          } @else { <span aria-hidden="true">…</span> }
-        </li>
+      <li>
+        @if (item.type === 'page') {
+        <button
+          type="button"
+          [attr.aria-current]="item.page === pagination.snapshot().page ? 'page' : null"
+          (click)="pagination.controller.setPage(item.page)"
+        >
+          {{ item.page }}
+        </button>
+        } @else { <span aria-hidden="true">…</span> }
+      </li>
       }
     </ol>
-    <button type="button" [disabled]="!pagination.snapshot().canNext" (click)="pagination.controller.nextPage()">{{ pagination.snapshot().labels.next }}</button>
+    <button
+      type="button"
+      [disabled]="!pagination.snapshot().canNext"
+      (click)="pagination.controller.nextPage()"
+    >
+      {{ pagination.snapshot().labels.next }}
+    </button>
   </div>
   <div class="flex flex-wrap items-center gap-3">
-    <label class="flex items-center gap-2">{{ pagination.snapshot().labels.pageSize }}
-      <select [value]="pagination.snapshot().pageSize" (change)="pagination.controller.setPageSize(+$any($event.target).value)">
-        @for (size of pageSizeOptions; track size) { <option [value]="size">{{ pagination.snapshot().labels.pageSizeOption(size) }}</option> }
+    <label class="flex items-center gap-2"
+      >{{ pagination.snapshot().labels.pageSize }}
+      <select
+        [value]="pagination.snapshot().pageSize"
+        (change)="pagination.controller.setPageSize(+$any($event.target).value)"
+      >
+        @for (size of pageSizeOptions; track size) {
+        <option [value]="size">{{ pagination.snapshot().labels.pageSizeOption(size) }}</option>
+        }
       </select>
     </label>
-    <label class="flex items-center gap-2">{{ pagination.snapshot().labels.jumpPrefix }}
-      <input #jumpInput type="number" min="1" [max]="pagination.snapshot().pageCount" [value]="jump" (input)="jump = jumpInput.value" (keydown.enter)="submitJump()" />
+    <label class="flex items-center gap-2"
+      >{{ pagination.snapshot().labels.jumpPrefix }}
+      <input
+        #jumpInput
+        type="number"
+        min="1"
+        [max]="pagination.snapshot().pageCount"
+        [value]="jump"
+        (input)="jump = jumpInput.value"
+        (keydown.enter)="submitJump()"
+      />
       {{ pagination.snapshot().labels.jumpSuffix }}
     </label>
-    <output aria-live="polite">{{ pagination.snapshot().page }} / {{ pagination.snapshot().pageCount }}</output>
+    <output aria-live="polite"
+      >{{ pagination.snapshot().page }} / {{ pagination.snapshot().pageCount }}</output
+    >
   </div>
 </nav>

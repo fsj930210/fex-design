@@ -10,6 +10,10 @@
   let { class: className, children, ...rest }: Props = $props();
 </script>
 
-<div {...rest} data-slot="pagination-content" class={cn(paginationContentClassName, className)}>
+<div
+  {...rest}
+  data-slot="pagination-content"
+  class={cn(paginationContentClassName, className)}
+>
   {@render children?.()}
 </div>

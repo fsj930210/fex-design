@@ -2,15 +2,21 @@ import type { ExpansionFeatureApi } from '@fex-design/core/tree/features/expansi
 import type { SelectionFeatureApi } from '@fex-design/core/tree/features/selection'
 import type { CheckFeatureApi } from '@fex-design/core/tree/features/check'
 import type { FocusFeatureApi } from '@fex-design/core/tree/features/focus'
-import type { TreeItem as CoreTreeItem, TreeKey, TreeNodeData } from '@fex-design/core/tree/types'
+import type {
+  TreeDndCallbacks,
+  TreeNode as CoreTreeNode,
+  TreeKey,
+  TreeNodeData,
+} from '@fex-design/core/tree/types'
 import { treeItemClassName } from '@fex-design/components-styles/tree'
 import { cn } from '@fex-design/utils'
-import { createMemo, Show, splitProps, type JSX } from 'solid-js'
+import { createMemo, mergeProps, Show, splitProps, type JSX } from 'solid-js'
 import { createTreeItem } from './create-tree-item'
+import { createTreeDndItem } from './create-tree-dnd-item'
 import { useTreeContext } from './tree-context'
 
 export interface TreeItemState<TNode extends TreeNodeData> {
-  item: CoreTreeItem<TNode>
+  item: CoreTreeNode<TNode>
   itemProps: JSX.HTMLAttributes<HTMLDivElement>
   expanded: boolean
   selected: boolean
@@ -34,6 +40,8 @@ export interface TreeItemProps<TNode extends TreeNodeData> extends Omit<
 > {
   itemKey: TreeKey
   block?: boolean
+  draggable?: boolean
+  dndCallbacks?: TreeDndCallbacks<TNode>
   style?: JSX.CSSProperties
   children: JSX.Element | ((state: TreeItemState<TNode>) => JSX.Element)
 }
@@ -47,9 +55,17 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
     'style',
     'onClick',
     'onFocus',
+    'draggable',
+    'dndCallbacks',
   ])
   const { tree, indent, rowHeight } = useTreeContext<TNode>('TreeItem')
   const state = createTreeItem(tree, local.itemKey)
+  const dnd = createTreeDndItem({
+    tree,
+    itemKey: local.itemKey,
+    dragDisabled: () => local.draggable === false,
+    callbacks: local.dndCallbacks,
+  })
   const actions = {
     expand: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.expand(local.itemKey),
     collapse: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(local.itemKey),
@@ -64,6 +80,8 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
     const itemProps: JSX.HTMLAttributes<HTMLDivElement> &
       Record<`data-${string}`, string | boolean | undefined> = {
       ...attrs,
+      ...dnd.itemProps(),
+      ref: dnd.setItemRef,
       role: 'treeitem',
       tabIndex: state().focused ? 0 : -1,
       'aria-level': item.depth + 1,
@@ -75,7 +93,7 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
       'aria-posinset': item.index + 1,
       'data-key': String(item.key),
       'data-selected': state().selected || undefined,
-      'data-selectable': tree.hasFeature('selection') || undefined,
+      'data-selectable': (item.selectable && tree.hasFeature('selection')) || undefined,
       'data-expanded': state().expanded || undefined,
       'data-checked': state().checked || undefined,
       'data-disabled': item.disabled || undefined,
@@ -83,11 +101,11 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
       'data-block': local.block || undefined,
       class: cn(treeItemClassName(), local.class),
       style: {
+        ...dnd.itemProps().style,
         ...local.style,
         height: `${rowHeight()}px`,
         'margin-inline-start': `${item.depth * indent()}px`,
         'padding-inline-start': '4px',
-        '--tree-item-inline-start': '4px',
       },
       onFocus: (event) => {
         if (typeof local.onFocus === 'function') local.onFocus(event)
@@ -102,12 +120,12 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
   })
 
   return (
-    <Show when={renderState()} keyed>
+    <Show when={renderState()}>
       {(current) =>
         typeof local.children === 'function' ? (
-          local.children(current)
+          local.children(mergeProps(() => current()))
         ) : (
-          <div {...current.itemProps}>{local.children}</div>
+          <div {...current().itemProps}>{local.children}</div>
         )
       }
     </Show>

@@ -1,0 +1,10 @@
+<div class="w-[min(36rem,100%)] min-w-0">
+  <p class="mb-space-sm min-h-10 break-all text-sm text-muted-foreground">{{message()}}</p>
+  <div
+    tree
+    [treeData]="treeProps.treeData"
+    [defaultExpandedKeys]="treeProps.defaultExpandedKeys"
+    [draggable]="true"
+    (drop)="handleDrop($event)"
+  ></div>
+</div>

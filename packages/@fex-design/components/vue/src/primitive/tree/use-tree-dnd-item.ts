@@ -1,5 +1,10 @@
 import type { DndFeatureApi, TreeDropIntent } from '@fex-design/core/tree/features/dnd'
-import type { TreeController, TreeKey, TreeNodeData } from '@fex-design/core/tree/types'
+import type {
+  TreeController,
+  TreeDndCallbacks,
+  TreeKey,
+  TreeNodeData,
+} from '@fex-design/core/tree/types'
 import {
   DND_DRAG_START_RECT_HEIGHT,
   DND_DRAG_START_RECT_WIDTH,
@@ -8,7 +13,9 @@ import {
   DND_DRAG_START_X,
   DND_DRAG_START_Y,
 } from '@fex-design/core/interactions/dnd-store'
-import { computed } from 'vue'
+import { computed, watchEffect, onScopeDispose } from 'vue'
+import { updateTreeDropIndicator } from '@fex-design/core/tree/drop-indicator-dom'
+import { treeDropIndicatorClassName } from '@fex-design/components-styles/tree'
 import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 import { useDraggable } from '@fex-design/vue/composables/use-draggable'
 import { useDroppable, type UseDroppableEventArgs } from '@fex-design/vue/composables/use-droppable'
@@ -18,10 +25,14 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
   tree,
   itemKey,
   disabled = false,
+  dragDisabled: rowDragDisabled = false,
+  callbacks,
 }: {
   tree: TreeController<TNode>
   itemKey: TreeKey
+  dragDisabled?: boolean | (() => boolean)
   disabled?: boolean
+  callbacks?: TreeDndCallbacks<TNode>
 }) {
   const { indent } = useTreeContext<TNode>('useTreeDndItem')
   const feature = tree.getFeature<DndFeatureApi>('dnd')
@@ -36,9 +47,17 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
     return intent?.targetKey === itemKey ? intent : null
   })
   const item = tree.getItem(itemKey)
-  const dropDisabled = disabled || item?.disabled === true || !feature
-  const dragDisabled = dropDisabled || feature?.canDrag(itemKey) !== true
+  const dropDisabled = () => disabled || tree.getItem(itemKey)?.droppable !== true || !feature
+  const dragDisabled = () =>
+    disabled ||
+    (typeof rowDragDisabled === 'function' ? rowDragDisabled() : rowDragDisabled) ||
+    feature?.canDrag(itemKey) !== true
   let itemElement: HTMLElement | null = null
+  // Synchronize the external drag intent to its DOM indicator; disposal removes it.
+  watchEffect(() =>
+    updateTreeDropIndicator(itemElement, activeIntent.value, treeDropIndicatorClassName),
+  )
+  onScopeDispose(() => updateTreeDropIndicator(itemElement, null, treeDropIndicatorClassName))
   type DropArgs = UseDroppableEventArgs<{ treeKey: TreeKey }>
   const resolveIntent = (args: Pick<DropArgs, 'source' | 'pointer' | 'targetRect'>) => {
     const sourceKey = getTreeKey(args.source.treeKey)
@@ -56,20 +75,29 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
     id: `tree:${String(itemKey)}`,
     type: 'tree-item',
     data: { treeKey: itemKey },
-    disabled: dragDisabled,
+    get disabled() {
+      return dragDisabled()
+    },
     dragPreview: 'clone',
+    onDragStart: (event) => {
+      if (item) callbacks?.onDragStart?.({ item: tree.getItem(itemKey)!, event })
+    },
+    onDragEnd: (event) => {
+      if (item) callbacks?.onDragEnd?.({ item: tree.getItem(itemKey)!, event })
+    },
   })
   const drop = useDroppable<{ treeKey: TreeKey }>({
     id: `tree:${String(itemKey)}`,
     accept: 'tree-item',
     data: { treeKey: itemKey },
-    disabled: dropDisabled,
+    disabled: !feature,
     getPosition: ({ element, pointer, source }) => {
       const intent = resolveIntent({ source, pointer, targetRect: getElementRect(element) })
       if (!intent?.valid) return null
       return intent.position === 'after' ? 'bottom' : 'inside'
     },
     canDrop: (source) => {
+      if (dropDisabled()) return false
       const sourceKey = getTreeKey(source.treeKey)
       return (
         sourceKey !== undefined &&
@@ -79,15 +107,45 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
     },
     onDragEnter: (args) => {
       const intent = resolveIntent(args)
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (item)
+        callbacks?.onDragEnter?.({
+          item: tree.getItem(itemKey)!,
+          sourceItem: sourceKey === undefined ? undefined : tree.getItem(sourceKey),
+          targetItem: tree.getItem(itemKey),
+          event: args.event,
+          intent,
+        })
       feature?.setActiveIntent(intent?.valid ? intent : null)
     },
     onDrag: (args) => {
       const intent = resolveIntent(args)
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (item)
+        callbacks?.onDragOver?.({
+          item: tree.getItem(itemKey)!,
+          sourceItem: sourceKey === undefined ? undefined : tree.getItem(sourceKey),
+          targetItem: tree.getItem(itemKey),
+          event: args.event,
+          intent,
+        })
       feature?.setActiveIntent(intent?.valid ? intent : null)
     },
-    onDragLeave: () => feature?.clearActiveIntent(itemKey),
+    onDragLeave: () => {
+      feature?.clearActiveIntent(itemKey)
+      if (item) callbacks?.onDragLeave?.({ item, targetItem: tree.getItem(itemKey) })
+    },
     onDrop: (args) => {
       const intent = resolveIntent(args)
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (item)
+        callbacks?.onDrop?.({
+          item: tree.getItem(itemKey)!,
+          sourceItem: sourceKey === undefined ? undefined : tree.getItem(sourceKey),
+          targetItem: tree.getItem(itemKey),
+          event: args.event,
+          intent,
+        })
       feature?.clearActiveIntent(itemKey)
       if (intent?.valid) feature?.drop(intent)
     },
@@ -101,14 +159,11 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
   const itemProps = computed(() => ({
     ...drop.dataAttributes.value,
     'data-dragging': drag.dragging.value || undefined,
-    'data-dnd-enabled': !dragDisabled || undefined,
+    'data-dnd-enabled': !dragDisabled() || undefined,
     'data-drop-position': activeIntent.value
       ? activeIntent.value.position === 'after'
         ? 'bottom'
         : 'inside'
-      : undefined,
-    style: activeIntent.value
-      ? getDropIndicatorStyle(itemElement, activeIntent.value.indicatorOffset)
       : undefined,
   }))
   return {
@@ -146,19 +201,4 @@ function getDragRect(source: Record<string, unknown>, pointer: { x: number; y: n
 function getElementRect(element: HTMLElement) {
   const rect = element.getBoundingClientRect()
   return { x: rect.left, y: rect.top, width: rect.width, height: rect.height }
-}
-function getTreeTitleOffset(element: HTMLElement | null) {
-  if (!element) return 0
-  const title = element.querySelector<HTMLElement>('[data-slot="tree-title"]')
-  return title ? title.getBoundingClientRect().left - element.getBoundingClientRect().left : 0
-}
-function getDropIndicatorStyle(element: HTMLElement | null, indicatorOffset: number) {
-  if (!element) return undefined
-  const itemRect = element.getBoundingClientRect()
-  const treeRect = element.closest<HTMLElement>('[data-slot="tree"]')?.getBoundingClientRect()
-  const left = getTreeTitleOffset(element) + indicatorOffset
-  return {
-    '--tree-drop-inline-start': `${left}px`,
-    '--tree-drop-inline-width': `${Math.max(0, (treeRect?.right ?? itemRect.right) - itemRect.left - left)}px`,
-  }
 }

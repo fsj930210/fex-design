@@ -67,6 +67,8 @@
   <button
     {...rest}
     type="button"
+    tabindex={tree.hasFeature("keyboard") ? -1 : rest.tabindex}
+    disabled={item.disabled}
     data-slot="tree-trigger"
     aria-expanded={expanded}
     class={cn(treeTriggerClassName, className)}

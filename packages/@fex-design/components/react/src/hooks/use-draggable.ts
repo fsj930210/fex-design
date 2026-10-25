@@ -28,6 +28,8 @@ export interface UseDraggableOptions<
   data?: TData
   disabled?: boolean
   dragPreview?: 'none' | 'clone'
+  onDragStart?: (event?: Event) => void
+  onDragEnd?: (event?: Event) => void
 }
 
 interface DraggableRect {
@@ -43,6 +45,8 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
   data,
   disabled,
   dragPreview = 'none',
+  onDragStart,
+  onDragEnd,
 }: UseDraggableOptions<TData>) {
   const [element, setElement] = useState<HTMLElement | null>(null)
   const [handle, setHandle] = useState<Element | null>(null)
@@ -109,7 +113,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     const startPoint = { x: event.clientX, y: event.clientY }
 
     setCurrentDndSource(source)
-    moveCurrentDndSource(startPoint)
+    moveCurrentDndSource(startPoint, event)
     setActiveRect({
       top: rect.top,
       left: rect.left,
@@ -118,6 +122,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     })
     setDragOffset({ x: 0, y: 0 })
     setDragging(true)
+    onDragStart?.(event)
     mountDragPreview({
       top: rect.top,
       left: rect.left,
@@ -132,12 +137,12 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
         previewElementRef.current.style.left = `${rect.left + nextPoint.x - startPoint.x}px`
         previewElementRef.current.style.top = `${rect.top + nextPoint.y - startPoint.y}px`
       }
-      moveCurrentDndSource(nextPoint)
+      moveCurrentDndSource(nextPoint, pointerEvent)
     }
 
     function onPointerUp(pointerEvent: globalThis.PointerEvent) {
       cleanupPointer()
-      finishDrag({ x: pointerEvent.clientX, y: pointerEvent.clientY })
+      finishDrag({ x: pointerEvent.clientX, y: pointerEvent.clientY }, pointerEvent)
     }
 
     function cleanupPointer() {
@@ -151,12 +156,13 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     window.addEventListener('pointercancel', onPointerUp)
   })
 
-  const finishDrag = useMemoizedFn((point: { x: number; y: number }) => {
-    dropCurrentDndSource(point)
+  const finishDrag = useMemoizedFn((point: { x: number; y: number }, event?: Event) => {
+    dropCurrentDndSource(point, event)
     setDragging(false)
     setActiveRect(null)
     setDragOffset({ x: 0, y: 0 })
     clearDragPreview()
+    onDragEnd?.(event)
   })
 
   useIsomorphicLayoutEffect(() => {
@@ -172,7 +178,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
       startFallbackDrag(event)
     }
 
-    function onDragStart(event: DragEvent) {
+    function onNativeDragStart(event: DragEvent) {
       const source = { ...getInitialData(), [DND_DRAG_START_X]: event.clientX }
       setCurrentDndSource(source)
       event.dataTransfer?.setData('application/x-fex-dnd', JSON.stringify(source))
@@ -180,36 +186,53 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
         event.dataTransfer.effectAllowed = 'move'
       }
       setDragging(true)
+      onDragStart?.(event)
     }
 
-    function onDragEnd() {
+    function onNativeDragEnd(event: DragEvent) {
       clearCurrentDndSource()
       setDragging(false)
       setActiveRect(null)
       setDragOffset({ x: 0, y: 0 })
+      onDragEnd?.(event)
     }
 
     element.addEventListener('pointerdown', onPointerDown)
-    element.addEventListener('dragstart', onDragStart)
-    element.addEventListener('dragend', onDragEnd)
+    element.addEventListener('dragstart', onNativeDragStart)
+    element.addEventListener('dragend', onNativeDragEnd)
 
     const draggableOptions = {
       element,
       getInitialData,
-      onDragStart: () => setDragging(true),
-      onDrop: () => setDragging(false),
+      onDragStart: () => {
+        setDragging(true)
+        onDragStart?.()
+      },
+      onDrop: () => {
+        setDragging(false)
+        onDragEnd?.()
+      },
       ...(handle ? { dragHandle: handle } : {}),
     }
     const cleanupPragmatic = draggable(draggableOptions)
 
     return () => {
       element.removeEventListener('pointerdown', onPointerDown)
-      element.removeEventListener('dragstart', onDragStart)
-      element.removeEventListener('dragend', onDragEnd)
+      element.removeEventListener('dragstart', onNativeDragStart)
+      element.removeEventListener('dragend', onNativeDragEnd)
       cleanupPragmatic()
       clearDragPreview()
     }
-  }, [clearDragPreview, disabled, element, getInitialData, handle, startFallbackDrag])
+  }, [
+    clearDragPreview,
+    disabled,
+    element,
+    getInitialData,
+    handle,
+    onDragEnd,
+    onDragStart,
+    startFallbackDrag,
+  ])
 
   const getDragProps = useMemoizedFn(
     (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({

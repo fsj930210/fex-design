@@ -17,7 +17,7 @@ export interface TreeVirtualViewportProps<TNode extends TreeNodeData> extends Om
 }
 
 export interface TreeVirtualViewportHandle {
-  scrollToKey(
+  scrollTo(
     key: TreeKey,
     options?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean },
   ): boolean
@@ -38,6 +38,7 @@ export function TreeVirtualViewport<TNode extends TreeNodeData>({
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => scrollElementRef.current,
+    getItemKey: (index) => items[index]?.key ?? index,
     estimateSize: () => rowHeight,
     overscan,
   })
@@ -45,7 +46,7 @@ export function TreeVirtualViewport<TNode extends TreeNodeData>({
   useImperativeHandle(
     ref,
     () => ({
-      scrollToKey(key, options) {
+      scrollTo(key, options) {
         if (options?.reveal) tree.getFeature<FocusFeatureApi>('focus')?.reveal(key)
         const visibleIndex = tree.getVisibleIndex(key)
         if (visibleIndex === undefined || visibleIndex < 0) return false

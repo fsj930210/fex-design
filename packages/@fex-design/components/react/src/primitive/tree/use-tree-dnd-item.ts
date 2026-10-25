@@ -1,5 +1,10 @@
 import type { DndFeatureApi, TreeDropIntent } from '@fex-design/core/tree/features/dnd'
-import type { TreeController, TreeKey, TreeNodeData } from '@fex-design/core/tree/types'
+import type {
+  TreeController,
+  TreeDndCallbacks,
+  TreeKey,
+  TreeNodeData,
+} from '@fex-design/core/tree/types'
 import {
   DND_DRAG_START_RECT_HEIGHT,
   DND_DRAG_START_RECT_WIDTH,
@@ -19,7 +24,9 @@ import { useTreeContext } from './tree-context'
 export interface UseTreeDndItemOptions<TNode extends TreeNodeData> {
   tree: TreeController<TNode>
   itemKey: TreeKey
+  dragDisabled?: boolean | (() => boolean) | undefined
   disabled?: boolean | undefined
+  callbacks?: TreeDndCallbacks<TNode>
 }
 
 type TreeDropEventArgs = UseDroppableEventArgs<{ treeKey: TreeKey }>
@@ -29,14 +36,19 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
   tree,
   itemKey,
   disabled = false,
+  dragDisabled: rowDragDisabled = false,
+  callbacks,
 }: UseTreeDndItemOptions<TNode>) {
   const { indent } = useTreeContext<TNode>()
   const itemElementRef = useRef<HTMLElement | null>(null)
   const dndData = useLazyRef(() => ({ treeKey: itemKey })).current
   const feature = tree.getFeature<DndFeatureApi>('dnd')
   const item = tree.getItem(itemKey)
-  const dropDisabled = disabled || item?.disabled === true || !feature
-  const dragDisabled = dropDisabled || feature?.canDrag(itemKey) !== true
+  const dropDisabled = () => disabled || tree.getItem(itemKey)?.droppable !== true || !feature
+  const dragDisabled = () =>
+    disabled ||
+    (typeof rowDragDisabled === 'function' ? rowDragDisabled() : rowDragDisabled) ||
+    feature?.canDrag(itemKey) !== true
   const subscribeActiveIntent = useMemoizedFn(
     (listener: () => void) => feature?.subscribeActiveIntent(listener) ?? (() => {}),
   )
@@ -69,14 +81,22 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
     id: `tree:${String(itemKey)}`,
     type: 'tree-item',
     data: dndData,
-    disabled: dragDisabled,
+    get disabled() {
+      return dragDisabled()
+    },
     dragPreview: 'clone',
+    onDragStart: (event) => {
+      if (item) callbacks?.onDragStart?.({ item: tree.getItem(itemKey)!, event })
+    },
+    onDragEnd: (event) => {
+      if (item) callbacks?.onDragEnd?.({ item: tree.getItem(itemKey)!, event })
+    },
   })
   const drop = useDroppable<{ treeKey: TreeKey }>({
     id: `tree:${String(itemKey)}`,
     accept: 'tree-item',
     data: dndData,
-    disabled: dropDisabled,
+    disabled: !feature,
     getPosition: ({ element, pointer, source }) => {
       const intent = resolveIntent({ source, pointer, targetRect: getElementRect(element) })
       if (!intent?.valid) return null
@@ -84,21 +104,52 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
       return intent.position
     },
     canDrop: (source) => {
+      if (dropDisabled()) return false
       const sourceKey = getTreeKey(source.treeKey)
       if (sourceKey === undefined) return false
       return sourceKey !== itemKey && !tree.getPath(itemKey).includes(sourceKey)
     },
     onDragEnter: (args) => {
       const intent = resolveIntent(args)
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (item)
+        callbacks?.onDragEnter?.({
+          item: tree.getItem(itemKey)!,
+          sourceItem: sourceKey === undefined ? undefined : tree.getItem(sourceKey),
+          targetItem: tree.getItem(itemKey),
+          event: args.event,
+          intent,
+        })
       updateActiveIntent(intent?.valid ? intent : null)
     },
     onDrag: (args) => {
       const intent = resolveIntent(args)
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (item)
+        callbacks?.onDragOver?.({
+          item: tree.getItem(itemKey)!,
+          sourceItem: sourceKey === undefined ? undefined : tree.getItem(sourceKey),
+          targetItem: tree.getItem(itemKey),
+          event: args.event,
+          intent,
+        })
       updateActiveIntent(intent?.valid ? intent : null)
     },
-    onDragLeave: () => feature?.clearActiveIntent(itemKey),
+    onDragLeave: () => {
+      feature?.clearActiveIntent(itemKey)
+      if (item) callbacks?.onDragLeave?.({ item, targetItem: tree.getItem(itemKey) })
+    },
     onDrop: (args) => {
       const intent = resolveIntent(args)
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (item)
+        callbacks?.onDrop?.({
+          item: tree.getItem(itemKey)!,
+          sourceItem: sourceKey === undefined ? undefined : tree.getItem(sourceKey),
+          targetItem: tree.getItem(itemKey),
+          event: args.event,
+          intent,
+        })
       feature?.clearActiveIntent(itemKey)
       if (intent?.valid) feature?.drop(intent)
     },
@@ -126,7 +177,7 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
       ...dropProps,
       ref,
       'data-drop-position': undefined,
-      'data-dnd-enabled': !dragDisabled || undefined,
+      'data-dnd-enabled': !dragDisabled() || undefined,
     },
   }
 }

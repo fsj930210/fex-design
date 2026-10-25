@@ -4,7 +4,7 @@
   } @else if (format()) {
     {{ formattedInfo() }}
   } @else if (resolvedStatus() === 'success' && variant() !== 'line') {
-    <check-icon class="size-6 text-success" />
+    <svg checkIcon class="size-6 text-success"></svg>
   } @else if (
     resolvedStatus() === 'success' &&
     normalized().percentage !== null &&
@@ -13,7 +13,7 @@
     <span
       class="inline-flex size-4 items-center justify-center rounded-full bg-success text-[10px] text-white"
     >
-      <check-icon class="size-3" />
+      <svg checkIcon class="size-3"></svg>
     </span>
   } @else {
     {{ infoText() }}

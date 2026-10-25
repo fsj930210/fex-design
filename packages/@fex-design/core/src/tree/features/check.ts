@@ -1,5 +1,6 @@
+import { canCheckTreeNode } from '../resolve-tree-node'
 import type { TreeFeatureRegistration } from '../feature-types'
-import type { TreeCheckMode, TreeCheckedState, TreeItem, TreeKey, TreeNodeData } from '../types'
+import type { TreeCheckMode, TreeCheckedState, TreeNode, TreeKey, TreeNodeData } from '../types'
 
 export interface CheckFeatureOptions {
   mode?: TreeCheckMode | undefined
@@ -15,7 +16,7 @@ export interface CheckFeatureApi {
 }
 
 interface TreeRelations<TNode extends TreeNodeData> {
-  getItem(key: TreeKey): TreeItem<TNode> | undefined
+  getItem(key: TreeKey): TreeNode<TNode> | undefined
   getChildrenKeys(key: TreeKey | null): readonly TreeKey[]
   getAncestorKeys(key: TreeKey): readonly TreeKey[]
   getDescendantKeys(key: TreeKey): readonly TreeKey[]
@@ -31,7 +32,7 @@ function getCheckedState<TNode extends TreeNodeData>(
   if (mode === 'strict') return false
   const enabledChildren = relations
     .getChildrenKeys(key)
-    .filter((child) => !relations.getItem(child)?.disabled)
+    .filter((child) => canCheckTreeNode(relations.getItem(child)))
   if (enabledChildren.length === 0) return false
   const childStates = enabledChildren.map((child) => getCheckedState(keys, child, mode, relations))
   if (childStates.every((state) => state === true)) return true
@@ -51,19 +52,27 @@ function getCheckedKeysAfterToggle<TNode extends TreeNodeData>(
   const affected = new Set<TreeKey>([key])
   const toggle = (itemKey: TreeKey) => {
     const item = relations.getItem(itemKey)
-    if (!item || item.disabled) return
+    if (!canCheckTreeNode(item)) return
     affected.add(itemKey)
     if (checked) next.add(itemKey)
     else next.delete(itemKey)
   }
   toggle(key)
   if (mode === 'cascade') {
-    relations.getDescendantKeys(key).forEach(toggle)
+    const visit = (parentKey: TreeKey) => {
+      for (const child of relations.getChildrenKeys(parentKey)) {
+        if (!canCheckTreeNode(relations.getItem(child))) continue
+        toggle(child)
+        visit(child)
+      }
+    }
+    visit(key)
     for (const ancestor of relations.getAncestorKeys(key)) {
+      if (!canCheckTreeNode(relations.getItem(ancestor))) break
       affected.add(ancestor)
       const enabledChildren = relations
         .getChildrenKeys(ancestor)
-        .filter((child) => !relations.getItem(child)?.disabled)
+        .filter((child) => canCheckTreeNode(relations.getItem(child)))
       if (enabledChildren.length > 0 && enabledChildren.every((child) => next.has(child))) {
         next.add(ancestor)
       } else {
@@ -95,7 +104,7 @@ export function checkFeature<TNode extends TreeNodeData>(
         const getMode = () => context.getOptions().checkMode ?? 'cascade'
         const set = (key: TreeKey, checked: boolean) => {
           const item = context.getItem(key)
-          if (!item || item.disabled) return
+          if (!canCheckTreeNode(item)) return
           const result = getCheckedKeysAfterToggle(
             context.getSnapshot().checkedKeys,
             key,
@@ -110,18 +119,36 @@ export function checkFeature<TNode extends TreeNodeData>(
           uncheck: (key) => set(key, false),
           checkAll: () => {
             const keys = [...context.getItems().values()]
-              .filter((item) => !item.disabled)
+              .filter((item) => canCheckTreeNode(item))
               .map((item) => item.key)
-            context.setStateKeys('checkedKeys', keys, keys)
+            context.setStateKeys(
+              'checkedKeys',
+              [
+                ...new Set([
+                  ...context
+                    .getSnapshot()
+                    .checkedKeys.filter((key) => !canCheckTreeNode(context.getItem(key))),
+                  ...keys,
+                ]),
+              ],
+              keys,
+            )
           },
-          clear: () => context.setStateKeys('checkedKeys', [], context.getSnapshot().checkedKeys),
+          clear: () =>
+            context.setStateKeys(
+              'checkedKeys',
+              context
+                .getSnapshot()
+                .checkedKeys.filter((key) => !canCheckTreeNode(context.getItem(key))),
+              context.getSnapshot().checkedKeys,
+            ),
           getState: (key) =>
             getCheckedState(context.getSnapshot().checkedKeys, key, getMode(), relations),
         }
         let initialKeys = context.getSnapshot().checkedKeys
         for (const key of featureOptions.defaultCheckedKeys ?? []) {
           const item = context.getItem(key)
-          if (!item || item.disabled) continue
+          if (!canCheckTreeNode(item)) continue
           initialKeys = getCheckedKeysAfterToggle(initialKeys, key, true, getMode(), relations).keys
         }
         context.initializeStateKeys('checkedKeys', initialKeys)

@@ -7,7 +7,7 @@ import { createTreeVisibleItems } from './create-tree-visible-items'
 import { useTreeContext } from './tree-context'
 
 export interface TreeVirtualViewportHandle {
-  scrollToKey(
+  scrollTo(
     key: TreeKey,
     options?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean },
   ): boolean
@@ -50,7 +50,7 @@ export function TreeVirtualViewport<TNode extends TreeNodeData>(
     getItemKey: (index) => items()[index]?.key ?? index,
   })
   const handle: TreeVirtualViewportHandle = {
-    scrollToKey(key, options) {
+    scrollTo(key, options) {
       if (options?.reveal) tree.getFeature<FocusFeatureApi>('focus')?.reveal(key)
       const index = tree.getVisibleIndex(key)
       if (index === undefined || index < 0) return false

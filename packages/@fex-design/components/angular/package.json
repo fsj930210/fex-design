@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "@fex-design/angular",
   "private": true,
   "type": "module",
@@ -101,6 +101,7 @@
     "./ui/popover": "./src/ui/popover/index.ts",
     "./ui/time-picker": "./src/ui/time-picker/index.ts",
     "./ui/tooltip": "./src/ui/tooltip/index.ts",
+    "./ui/tree": "./src/ui/tree/index.ts",
     "./ui/listbox": "./src/ui/listbox/index.ts",
     "./ui/spinner": "./src/ui/spinner/index.ts",
     "./ui/skeleton": "./src/ui/skeleton/index.ts",
@@ -137,8 +138,6 @@
     "./icon/search": "./src/icons/search.ts",
     "./icons/loading": "./src/icons/loading.ts",
     "./icon/loading": "./src/icons/loading.ts",
-    "./icons/trash": "./src/icons/trash.ts",
-    "./icon/trash": "./src/icons/trash.ts",
     "./icons/minus": "./src/icons/minus.ts",
     "./icon/minus": "./src/icons/minus.ts",
     "./icons/more": "./src/icons/more.ts",

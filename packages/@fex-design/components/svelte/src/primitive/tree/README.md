@@ -30,7 +30,7 @@ import { treeDndItem } from '@fex-design/svelte/primitive/tree/tree-dnd-item'
           {#snippet children(state)}
             <div {...state.itemProps}>
               <TreeTrigger itemKey={item.key} />
-              <TreeTitle>{item.node.name}</TreeTitle>
+              <TreeTitle>{item.data.name}</TreeTitle>
             </div>
           {/snippet}
         </TreeItem>
@@ -57,7 +57,7 @@ import { treeDndItem } from '@fex-design/svelte/primitive/tree/tree-dnd-item'
 | --------------------------------------- | ----------------------------------------------------------------------- |
 | `createTreeStore(options, controller?)` | 返回 controller、snapshot store、visibleItems store 和节点 store 工厂。 |
 | `TreeViewport`                          | 订阅并渲染可见列表。                                                    |
-| `TreeVirtualViewport`                   | 使用 `@tanstack/svelte-virtual`，组件方法支持 `scrollToKey`。           |
+| `TreeVirtualViewport`                   | 使用 `@tanstack/svelte-virtual`，组件方法支持 `scrollTo`。              |
 | `TreeItem`                              | snippet 暴露节点状态、ARIA props 和 actions。                           |
 | `TreeTrigger`                           | 点击加载、展开和折叠。                                                  |
 | `TreeTitle`                             | title 的最小结构。                                                      |

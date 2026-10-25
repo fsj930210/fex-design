@@ -51,6 +51,8 @@ function handleClick(event: MouseEvent) {
     v-else
     v-bind="triggerAttrs"
     type="button"
+    :tabindex="tree.hasFeature('keyboard') ? -1 : undefined"
+    :disabled="state.item?.disabled"
     data-slot="tree-trigger"
     :aria-expanded="state.expanded"
     :class="triggerClass"

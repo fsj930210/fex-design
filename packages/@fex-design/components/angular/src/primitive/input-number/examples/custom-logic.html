@@ -5,7 +5,7 @@
     [disabled]="!number.canDecrement()"
     (click)="number.decrement($event)"
   >
-    <minus-icon />
+    <svg minusIcon></svg>
   </button>
   <output class="min-w-10 text-center font-medium">{{ number.value() }}</output>
   <button
@@ -14,6 +14,6 @@
     [disabled]="!number.canIncrement()"
     (click)="number.increment($event)"
   >
-    <plus-icon />
+    <svg plusIcon></svg>
   </button>
 </div>

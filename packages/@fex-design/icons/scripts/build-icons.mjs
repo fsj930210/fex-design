@@ -97,13 +97,44 @@ for (const file of svgFiles) {
   const angularHtmlPath = path.join(componentsDir, 'angular/src/icons', `${baseName}.html`)
   const angularTsPath = path.join(componentsDir, 'angular/src/icons', `${baseName}.ts`)
   fs.mkdirSync(path.dirname(angularHtmlPath), { recursive: true })
-  const angularSvg = rawSvg.replace(/<svg\b[^>]*>/, (tag) =>
-    tag
-      .replace(/\s+(?:width|height)="[^"]*"/g, '')
-      .replace(/<svg/, '<svg width="100%" height="100%" class="size-full"'),
+  const angularAttributes = {}
+  const svgTag = rawSvg.match(/<svg\b([^>]*)>/)?.[1] ?? ''
+  for (const match of svgTag.matchAll(/([\w:-]+)="([^"]*)"/g)) {
+    if (!['class', 'width', 'height', 'xmlns'].includes(match[1]))
+      angularAttributes[match[1]] = match[2]
+  }
+  Object.assign(angularAttributes, { width: '24', height: '24', 'aria-hidden': 'true' })
+  const angularHost = Object.entries(angularAttributes)
+    .map(([key, value]) => '    ' + JSON.stringify(key) + ': ' + JSON.stringify(value) + ',')
+    .join('\n')
+  const angularAttribute = componentName[0].toLowerCase() + componentName.slice(1)
+  fs.writeFileSync(
+    angularHtmlPath,
+    rawSvg
+      .replace(/^[\s\S]*?<svg\b[^>]*>/, '')
+      .replace(/<\/svg>\s*$/, '')
+      .trim()
+      .replace(/<(\/?)([a-zA-Z][\w-]*)(?=[\s/>])/g, '<$1svg:$2') + '\n',
   )
-  fs.writeFileSync(angularHtmlPath, angularSvg + '\n')
-  const angularCode = `import { ChangeDetectionStrategy, Component, input } from "@angular/core";\nimport { createHostClassName } from "@fex-design/angular/signals/host-class";\n\n@Component({\n  selector: "${baseName}-icon",\n  standalone: true,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: {\n    "[class]": "hostClassName()",\n    "aria-hidden": "true",\n  },\n  templateUrl: "./${baseName}.html",\n})\nexport class ${componentName} {\n  readonly class = input<string>();\n  protected readonly hostClassName = createHostClassName("inline-flex items-center justify-center shrink-0 size-6", () => this.class());\n}\n`
+  const angularCode = [
+    'import { ChangeDetectionStrategy, Component, input } from "@angular/core";',
+    'import { createHostClassName } from "@fex-design/angular/signals/host-class";',
+    '@Component({',
+    '  selector: "svg[' + angularAttribute + ']",',
+    '  standalone: true,',
+    '  changeDetection: ChangeDetectionStrategy.OnPush,',
+    '  host: {',
+    '    "[class]": "hostClassName()",',
+    angularHost,
+    '  },',
+    '  templateUrl: "./' + baseName + '.html",',
+    '})',
+    'export class ' + componentName + ' {',
+    '  readonly class = input<string>();',
+    '  protected readonly hostClassName = createHostClassName("shrink-0 size-6", () => this.class());',
+    '}',
+    '',
+  ].join('\n')
   fs.writeFileSync(angularTsPath, angularCode)
 }
 

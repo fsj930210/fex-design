@@ -97,9 +97,10 @@
       aria-label="Time"
       {...filterTimePickerInputProps(inputProps)}
       type="text"
-      aria-invalid={
-        ariaInvalid ?? invalid ?? inputProps?.["aria-invalid"] ?? undefined
-      }
+      aria-invalid={ariaInvalid ??
+        invalid ??
+        inputProps?.["aria-invalid"] ??
+        undefined}
       placeholder={placeholder ?? inputProps?.placeholder ?? context.format()}
     />
     <div data-slot="time-picker-affix" class={timePickerAffixClassName}>

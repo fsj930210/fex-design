@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, inject } from '@angular/core'
+import { Directive, ElementRef, HostListener, inject, input, output } from '@angular/core'
 import type { OnDestroy, OnInit } from '@angular/core'
 import {
   clearCurrentDndSource,
@@ -14,15 +14,34 @@ import {
   setCurrentDndSource,
 } from '@fex-design/core/interactions/dnd-store'
 import type { DndFeatureApi, TreeDropIntent } from '@fex-design/core/tree/features/dnd'
-import type { TreeKey } from '@fex-design/core/tree/types'
-import { TreeItemDirective } from './tree'
+import { updateTreeDropIndicator } from '@fex-design/core/tree/drop-indicator-dom'
+import { treeDropIndicatorClassName } from '@fex-design/components-styles/tree'
+import type {
+  TreeDndCallbacks,
+  TreeDragEventContext,
+  TreeNodeData,
+} from '@fex-design/core/tree/types'
+import { TreeItem } from './tree-item'
+import { getKey, getDragRect, getRect } from './tree-dnd-geometry'
 
 @Directive({
-  selector: '[fexTreeDndItem]',
+  selector: '[treeDndItem], [treeDraggable]',
   standalone: true,
+  host: { '[attr.data-dnd-enabled]': 'canDrag() ? "true" : null' },
 })
-export class TreeDndItemDirective implements OnInit, OnDestroy {
-  private readonly item = inject(TreeItemDirective)
+export class TreeDndItem<TNode extends TreeNodeData = TreeNodeData> implements OnInit, OnDestroy {
+  readonly enabled = input(true, { alias: 'treeDndItem' })
+  readonly draggable = input<boolean | undefined>(undefined, { alias: 'treeDraggable' })
+  readonly callbacks = input<TreeDndCallbacks<TNode> | undefined>(undefined, {
+    alias: 'treeDndCallbacks',
+  })
+  readonly dragStart = output<TreeDragEventContext<TNode>>()
+  readonly dragEnd = output<TreeDragEventContext<TNode>>()
+  readonly dragEnter = output<TreeDragEventContext<TNode>>()
+  readonly dragOver = output<TreeDragEventContext<TNode>>()
+  readonly dragLeave = output<TreeDragEventContext<TNode>>()
+  readonly drop = output<TreeDragEventContext<TNode>>()
+  private readonly item = inject<TreeItem<TNode>>(TreeItem, { self: true })
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement
   private cleanupDrop: (() => void) | undefined
   private cleanupWindow: (() => void) | undefined
@@ -33,15 +52,13 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
     const tree = this.item.root.tree()
     const key = this.item.key()
     const feature = tree.getFeature<DndFeatureApi>('dnd')
-    const disabled =
-      this.item.item()?.disabled === true || !feature || feature.canDrag(key) !== true
-
-    this.element.dataset.dndEnabled = disabled ? '' : 'true'
+    if (!feature) return
     this.cleanupDrop = registerDndDropTarget({
       id: `tree:${String(key)}`,
       element: this.element,
       data: { treeKey: key },
       canDrop: (source) => {
+        if (!tree.getItem(key)?.droppable) return false
         const sourceKey = getKey(source.treeKey)
         return (
           sourceKey !== undefined && sourceKey !== key && !tree.getPath(key).includes(sourceKey)
@@ -53,29 +70,56 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
         if (value.position === 'after') return 'bottom'
         return 'inside'
       },
-      onDragEnter: (args) =>
-        this.updateIntent(this.resolve(args.source, args.pointer, args.targetRect)),
-      onDrag: (args) => this.updateIntent(this.resolve(args.source, args.pointer, args.targetRect)),
-      onDragLeave: () => this.updateIntent(null),
+      onDragEnter: (args) => this.handleDragEnter(args),
+      onDrag: (args) => this.handleDragOver(args),
+      onDragLeave: () => {
+        this.updateIntent(null)
+        const item = this.item.item()
+        if (item) this.emit('dragLeave', { item, targetItem: item })
+      },
       onDrop: (args) => {
         const value = this.resolve(args.source, args.pointer, args.targetRect)
         this.updateIntent(null)
-        if (value?.valid) feature?.drop(value)
+        const item = this.item.item()
+        if (value?.valid && item) {
+          feature?.drop(value)
+          this.emit('drop', {
+            item,
+            targetItem: item,
+            sourceItem: this.getSourceItem(args.source),
+            event: args.event,
+            intent: value,
+          })
+        }
       },
     })
   }
 
   ngOnDestroy() {
+    updateTreeDropIndicator(this.element, null, treeDropIndicatorClassName)
     this.cleanupDrop?.()
     this.cleanupWindow?.()
     this.clearPreview()
     clearCurrentDndSource()
   }
 
+  protected canDrag() {
+    return (
+      this.draggable() !== false &&
+      this.item.item()?.draggable === true &&
+      this.item.root.tree().getFeature<DndFeatureApi>('dnd')?.canDrag(this.item.key()) === true
+    )
+  }
+
   @HostListener('pointerdown', ['$event'])
   start(event: PointerEvent) {
     const feature = this.item.root.tree().getFeature<DndFeatureApi>('dnd')
-    if (event.button !== 0 || feature?.canDrag(this.item.key()) !== true) return
+    if (
+      event.button !== 0 ||
+      !(this.draggable() ?? this.item.item()?.draggable ?? this.enabled()) ||
+      feature?.canDrag(this.item.key()) !== true
+    )
+      return
 
     event.preventDefault()
     const start = { x: event.clientX, y: event.clientY }
@@ -94,6 +138,8 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
     })
     moveCurrentDndSource(start)
     this.element.dataset.dragging = 'true'
+    const item = this.item.item()
+    if (item) this.emit('dragStart', { item, event })
     this.mountPreview(bounds)
 
     const move = (pointer: PointerEvent) => {
@@ -109,6 +155,8 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
       this.cleanupWindow = undefined
       dropCurrentDndSource({ x: pointer.clientX, y: pointer.clientY })
       this.element.dataset.dragging = ''
+      const item = this.item.item()
+      if (item) this.emit('dragEnd', { item, event: pointer })
       this.clearPreview()
     }
 
@@ -120,6 +168,63 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
     window.addEventListener('pointermove', move)
     window.addEventListener('pointerup', end)
     window.addEventListener('pointercancel', end)
+  }
+
+  private getSourceItem(source: Record<string, unknown>) {
+    const key = getKey(source.treeKey)
+    return key === undefined ? undefined : this.item.root.tree().getItem(key)
+  }
+  private handleDragEnter(args: {
+    source: Record<string, unknown>
+    pointer: { x: number; y: number }
+    targetRect: { x: number; y: number; width: number; height: number }
+    event?: Event | undefined
+  }) {
+    const value = this.resolve(args.source, args.pointer, args.targetRect)
+    this.updateIntent(value)
+    const item = this.item.item()
+    if (item)
+      this.emit('dragEnter', {
+        item,
+        targetItem: item,
+        sourceItem: this.getSourceItem(args.source),
+        event: args.event,
+        intent: value,
+      })
+  }
+  private handleDragOver(args: {
+    source: Record<string, unknown>
+    pointer: { x: number; y: number }
+    targetRect: { x: number; y: number; width: number; height: number }
+    event?: Event | undefined
+  }) {
+    const value = this.resolve(args.source, args.pointer, args.targetRect)
+    this.updateIntent(value)
+    const item = this.item.item()
+    if (item)
+      this.emit('dragOver', {
+        item,
+        targetItem: item,
+        sourceItem: this.getSourceItem(args.source),
+        event: args.event,
+        intent: value,
+      })
+  }
+
+  private emit(
+    name: 'dragStart' | 'dragEnd' | 'dragEnter' | 'dragOver' | 'dragLeave' | 'drop',
+    context: TreeDragEventContext<TNode>,
+  ) {
+    this[name].emit(context)
+    const callback = {
+      dragStart: 'onDragStart',
+      dragEnd: 'onDragEnd',
+      dragEnter: 'onDragEnter',
+      dragOver: 'onDragOver',
+      dragLeave: 'onDragLeave',
+      drop: 'onDrop',
+    }[name] as keyof TreeDndCallbacks<TNode>
+    this.callbacks()?.[callback]?.(context)
   }
 
   private resolve(
@@ -150,14 +255,7 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
         ? 'bottom'
         : 'inside'
       : ''
-    this.element.style.setProperty(
-      '--tree-drop-inline-start',
-      this.intent ? `${getTreeTitleOffset(this.element) + this.intent.indicatorOffset}px` : '',
-    )
-    this.element.style.setProperty(
-      '--tree-drop-inline-width',
-      this.intent ? `${getDropIndicatorWidth(this.element, this.intent.indicatorOffset)}px` : '',
-    )
+    updateTreeDropIndicator(this.element, this.intent, treeDropIndicatorClassName)
   }
 
   private mountPreview(bounds: DOMRect) {
@@ -189,54 +287,4 @@ export class TreeDndItemDirective implements OnInit, OnDestroy {
     this.preview?.remove()
     this.preview = null
   }
-}
-
-function getKey(value: unknown): TreeKey | undefined {
-  return typeof value === 'string' || typeof value === 'number' ? value : undefined
-}
-
-function getDragRect(source: Record<string, unknown>, pointer: { x: number; y: number }) {
-  const startX = source[DND_DRAG_START_X]
-  const startY = source[DND_DRAG_START_Y]
-  const x = source[DND_DRAG_START_RECT_X]
-  const y = source[DND_DRAG_START_RECT_Y]
-  const width = source[DND_DRAG_START_RECT_WIDTH]
-  const height = source[DND_DRAG_START_RECT_HEIGHT]
-  if (
-    typeof startX !== 'number' ||
-    typeof startY !== 'number' ||
-    typeof x !== 'number' ||
-    typeof y !== 'number' ||
-    typeof width !== 'number' ||
-    typeof height !== 'number'
-  )
-    return undefined
-  return { x: x + pointer.x - startX, y: y + pointer.y - startY, width, height }
-}
-
-function getRect(element: HTMLElement) {
-  const value = element.getBoundingClientRect()
-  return {
-    x: value.left,
-    y: value.top,
-    width: value.width,
-    height: value.height,
-  }
-}
-
-function getTreeTitleOffset(element: HTMLElement) {
-  const title = element.querySelector<HTMLElement>('[data-slot="tree-title"]')
-  return title ? title.getBoundingClientRect().left - element.getBoundingClientRect().left : 0
-}
-
-function getDropIndicatorWidth(element: HTMLElement, indicatorOffset: number) {
-  const itemRect = element.getBoundingClientRect()
-  const treeRect = element.closest<HTMLElement>('[data-slot="tree"]')?.getBoundingClientRect()
-  return Math.max(
-    0,
-    (treeRect?.right ?? itemRect.right) -
-      itemRect.left -
-      getTreeTitleOffset(element) -
-      indicatorOffset,
-  )
 }

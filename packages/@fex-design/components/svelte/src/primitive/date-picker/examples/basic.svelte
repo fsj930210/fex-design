@@ -10,9 +10,7 @@
 
 <div class="flex w-full min-w-0 flex-col items-stretch gap-4">
   <DatePickerRoot>
-    <DatePickerTrigger
-      class="w-full min-w-0"
-      placeholder="请选择日期"
+    <DatePickerTrigger class="w-full min-w-0" placeholder="请选择日期"
     ></DatePickerTrigger>
     <DatePickerContent>
       <DatePickerPanel />

@@ -95,7 +95,7 @@ export class ListboxItem extends PrimitiveListboxItem {
     'data-slot': 'listbox-item-indicator',
     '[class]': 'hostClassName()',
   },
-  template: '<ng-content /><fex-check-icon />',
+  template: '<ng-content /><svg checkIcon ></svg>',
 })
 export class ListboxItemIndicator extends PrimitiveListboxItemIndicator {
   protected readonly hostClassName = createHostClassName(() => cn(listboxItemIndicatorClassName))

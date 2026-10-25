@@ -1,5 +1,5 @@
 import type { TreeDropIntent } from '@fex-design/core/tree/features/dnd'
-import type { TreeItem as CoreTreeItem, TreeNodeData } from '@fex-design/core/tree/types'
+import type { TreeNode as CoreTreeNode, TreeNodeData } from '@fex-design/core/tree/types'
 import { treeDropIndicatorClassName } from '@fex-design/components-styles/tree'
 import { cn } from '@fex-design/utils'
 import type { HTMLAttributes } from 'react'
@@ -9,7 +9,7 @@ export interface TreeDropIndicatorProps<TNode extends TreeNodeData> extends Omit
   HTMLAttributes<HTMLSpanElement>,
   'children'
 > {
-  item?: CoreTreeItem<TNode> | undefined
+  item?: CoreTreeNode<TNode> | undefined
   intent?: TreeDropIntent | null | undefined
 }
 

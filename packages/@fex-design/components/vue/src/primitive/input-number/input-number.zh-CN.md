@@ -19,18 +19,18 @@
 
 ## 示例
 
-| 名称         | 覆盖内容                                        |
-| ------------ | ----------------------------------------------- |
-| basic        | 受控与非受控数值。                              |
-| constraints  | min、max、step 与 precision。                   |
-| formatter    | 解析与展示格式化。                              |
-| editing      | 编辑草稿与失焦提交。                            |
-| controls     | 默认、隐藏与替换增减操作。                      |
-| keyboard     | 方向键步进。                                    |
-| range        | 受控越界值。                                    |
+| 名称         | 覆盖内容                                              |
+| ------------ | ----------------------------------------------------- |
+| basic        | 受控与非受控数值。                                    |
+| constraints  | min、max、step 与 precision。                         |
+| formatter    | 解析与展示格式化。                                    |
+| editing      | 编辑草稿与失焦提交。                                  |
+| controls     | 默认、隐藏与替换增减操作。                            |
+| keyboard     | 方向键步进。                                          |
+| range        | 受控越界值。                                          |
 | custom-logic | 使用 useInputNumber 手写 DOM 实现自己的 InputNumber。 |
-| affixes      | 前缀、清除、后缀与增减操作共存。                |
-| validation   | 可见校验失败状态与错误说明。                    |
+| affixes      | 前缀、清除、后缀与增减操作共存。                      |
+| validation   | 可见校验失败状态与错误说明。                          |
 
 ## InputNumberRoot API
 

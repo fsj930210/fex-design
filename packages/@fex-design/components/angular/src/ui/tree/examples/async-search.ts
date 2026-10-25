@@ -1,0 +1,87 @@
+import type { TreeDataNode } from '@fex-design/angular/ui/tree'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  inject,
+  signal,
+} from '@angular/core'
+import { Tree } from '@fex-design/angular/ui/tree'
+import { Select } from '@fex-design/angular/ui/select'
+import {
+  loadRemoteTree,
+  searchRemoteTree,
+  loadRemoteAncestors,
+  updateRemoteChildren,
+  type TreeSearchMatch,
+  type TreeAncestorResult,
+} from './_data/tree-remote-demo'
+@Component({
+  selector: 'tree-async-search-example',
+  standalone: true,
+  imports: [Tree, Select],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './async-search.html',
+})
+export class TreeAsyncSearchExample {
+  readonly filterRemote = () => true
+  readonly treeData = signal<readonly TreeDataNode<string, string>[]>([])
+  readonly matches = signal<TreeSearchMatch[]>([])
+  readonly selected = signal<string | undefined>(undefined)
+  readonly path = signal<TreeAncestorResult | undefined>(undefined)
+  readonly loading = signal(false)
+  readonly locating = signal(false)
+  private searchId = 0
+  private pathId = 0
+  private active = true
+
+  readonly rootProps = computed(() => ({
+    treeData: this.treeData(),
+    loadChildren: async (item: { key: string | number }) => {
+      const children = await loadRemoteTree(String(item.key))
+      this.treeData.update((current) => updateRemoteChildren(current, String(item.key), children))
+      return children
+    },
+  }))
+  readonly pathProps = computed(() => ({
+    treeData: this.path()?.treeData ?? [],
+    defaultExpandedKeys: this.path()?.expandedKeys ?? [],
+  }))
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      this.active = false
+      this.searchId++
+      this.pathId++
+    })
+    void loadRemoteTree().then((roots) => {
+      if (this.active) this.treeData.set(roots)
+    })
+  }
+  async search(keyword: string) {
+    const request = ++this.searchId
+    this.loading.set(true)
+    const result = await searchRemoteTree(keyword)
+    if (request !== this.searchId) return
+    this.matches.set(result)
+    this.loading.set(false)
+  }
+  async choose(value: unknown) {
+    const request = ++this.pathId
+    this.searchId++
+    this.loading.set(false)
+    this.path.set(undefined)
+    if (typeof value !== 'string') {
+      this.selected.set(undefined)
+      this.matches.set([])
+      this.locating.set(false)
+      return
+    }
+    this.selected.set(value)
+    this.locating.set(true)
+    const result = await loadRemoteAncestors(value)
+    if (request !== this.pathId) return
+    this.path.set(result)
+    this.locating.set(false)
+  }
+}

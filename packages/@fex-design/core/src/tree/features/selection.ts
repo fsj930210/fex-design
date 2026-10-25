@@ -1,5 +1,5 @@
 import type { TreeFeatureRegistration } from '../feature-types'
-import type { TreeItem, TreeKey, TreeNodeData } from '../types'
+import type { TreeNode, TreeKey, TreeNodeData } from '../types'
 
 export interface SelectionFeatureOptions {
   defaultSelectedKeys?: readonly TreeKey[] | undefined
@@ -26,9 +26,9 @@ function getSelectedKeysAfterToggle(
 }
 
 function getAllSelectableKeys<TNode extends TreeNodeData>(
-  items: ReadonlyMap<TreeKey, TreeItem<TNode>>,
+  items: ReadonlyMap<TreeKey, TreeNode<TNode>>,
 ) {
-  return [...items.values()].filter((item) => !item.disabled).map((item) => item.key)
+  return [...items.values()].filter((item) => item.selectable).map((item) => item.key)
 }
 
 export function selectionFeature<TNode extends TreeNodeData>(
@@ -44,7 +44,7 @@ export function selectionFeature<TNode extends TreeNodeData>(
           context.configure({ multiple: normalizedOptions.multiple })
         }
         const set = (key: TreeKey, selected: boolean) => {
-          if (context.getItem(key)?.disabled) return
+          if (!context.getItem(key)?.selectable) return
           context.setStateKeys(
             'selectedKeys',
             getSelectedKeysAfterToggle(
@@ -63,14 +63,26 @@ export function selectionFeature<TNode extends TreeNodeData>(
           toggle: (key) => set(key, !context.getSnapshot().selectedKeys.includes(key)),
           selectAll: () => {
             if (!context.getOptions().multiple) return
-            const keys = getAllSelectableKeys(context.getItems())
+            const keys = [
+              ...new Set([
+                ...context
+                  .getSnapshot()
+                  .selectedKeys.filter((key) => !context.getItem(key)?.selectable),
+                ...getAllSelectableKeys(context.getItems()),
+              ]),
+            ]
             context.setStateKeys('selectedKeys', keys, keys)
           },
-          clear: () => context.setStateKeys('selectedKeys', [], context.getSnapshot().selectedKeys),
+          clear: () =>
+            context.setStateKeys(
+              'selectedKeys',
+              context.getSnapshot().selectedKeys.filter((key) => !context.getItem(key)?.selectable),
+              context.getSnapshot().selectedKeys,
+            ),
         }
         let initialKeys = context.getSnapshot().selectedKeys
         for (const key of normalizedOptions.defaultSelectedKeys ?? []) {
-          if (context.getItem(key)?.disabled) continue
+          if (!context.getItem(key)?.selectable) continue
           initialKeys = getSelectedKeysAfterToggle(
             initialKeys,
             key,

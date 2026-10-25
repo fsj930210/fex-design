@@ -1,7 +1,7 @@
 <div class="grid w-full gap-3">
   @if (visible()) {
   <div alert type="warning">
-    <span alertIcon><triangle-alert-icon /></span>
+    <span alertIcon><svg triangleAlertIcon></svg></span>
     <div alertTitle>这条提示可以关闭</div>
     <button
       [class]="alertCloseClassName"
@@ -9,7 +9,7 @@
       aria-label="关闭提示"
       (click)="visible.set(false)"
     >
-      <x-icon class="size-3.5" />
+      <svg xIcon class="size-3.5"></svg>
     </button>
   </div>
   } @else { <button (click)="visible.set(true)">重新显示</button> }
@@ -22,7 +22,7 @@
       aria-label="关闭提示"
       (click)="$event.preventDefault()"
     >
-      <x-icon class="size-3.5" />
+      <svg xIcon class="size-3.5"></svg>
     </button>
   </div>
 </div>

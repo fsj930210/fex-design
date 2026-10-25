@@ -22,6 +22,8 @@ export interface DraggableActionOptions<
   onDraggingChange?: (dragging: boolean) => void
   onOverlayStyleChange?: (style: Partial<CSSStyleDeclaration>) => void
   dragPreview?: 'none' | 'clone'
+  onDragStart?: (event?: Event) => void
+  onDragEnd?: (event?: Event) => void
 }
 
 export function draggableAction<TData extends Record<string, unknown> = Record<string, unknown>>(
@@ -110,14 +112,15 @@ export function draggableAction<TData extends Record<string, unknown> = Record<s
       [DND_DRAG_START_RECT_WIDTH]: rect.width,
       [DND_DRAG_START_RECT_HEIGHT]: rect.height,
     })
-    moveCurrentDndSource(start)
+    moveCurrentDndSource(start, event)
     setDragging(true)
+    currentOptions.onDragStart?.(event)
     setOverlayStyle(rect)
     mountPreview(rect)
 
     function onPointerMove(pointerEvent: PointerEvent) {
       const point = { x: pointerEvent.clientX, y: pointerEvent.clientY }
-      moveCurrentDndSource(point)
+      moveCurrentDndSource(point, pointerEvent)
       setOverlayStyle(rect, { x: point.x - start.x, y: point.y - start.y })
       if (previewElement) {
         previewElement.style.left = `${rect.left + point.x - start.x}px`
@@ -128,10 +131,11 @@ export function draggableAction<TData extends Record<string, unknown> = Record<s
     function onPointerUp(pointerEvent: PointerEvent) {
       cleanupWindow?.()
       cleanupWindow = undefined
-      dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY })
+      dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY }, pointerEvent)
       setDragging(false)
       setOverlayStyle(null)
       clearPreview()
+      currentOptions.onDragEnd?.(pointerEvent)
     }
 
     cleanupWindow = () => {

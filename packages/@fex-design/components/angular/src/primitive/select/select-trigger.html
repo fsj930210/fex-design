@@ -48,7 +48,7 @@
     data-slot="select-suffix"
     [class]="suffixClass + ' ' + (inputProps().classNames?.suffix ?? '')"
   >
-    @if (select.loading) { <loading-icon class="animate-spin" /> } @else { @if (suffix) {
+    @if (select.loading) { <svg loadingIcon class="animate-spin"></svg> } @else { @if (suffix) {
     <span
       [class]="'inline-flex items-center justify-center ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')"
     >
@@ -58,8 +58,8 @@
     <span
       [attr.data-state]="select.snapshot().open ? 'open' : 'closed'"
       [class]="indicatorClass + ' ' + (select.clearable && select.selectedOptions.length ? clearableIndicatorClass : '')"
-      ><chevron-down-icon class="size-4"
-    /></span>
+      ><svg chevronDownIcon class="size-4"></svg
+    ></span>
     } @if (select.clearable && select.selectedOptions.length) {
     <button
       type="button"
@@ -68,7 +68,7 @@
       (pointerdown)="$event.preventDefault()"
       (click)="$event.stopPropagation(); select.controller.clear()"
     >
-      @if (clear) { <ng-container *ngTemplateOutlet="clear" /> } @else { <circle-x-icon /> }
+      @if (clear) { <ng-container *ngTemplateOutlet="clear" /> } @else { <svg circleXIcon></svg> }
     </button>
     } }
   </span>

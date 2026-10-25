@@ -15,7 +15,8 @@ import { InputNumberRoot } from './input-number-root'
     '[hidden]': '!root.inputNumber.canClear()',
     '[disabled]': '!root.inputNumber.canClear()',
   },
-  template: '<ng-content><circle-x-icon class="size-(--input-clear-icon-size)" /></ng-content>',
+  template:
+    '<ng-content><svg circleXIcon class="size-(--input-clear-icon-size)" ></svg></ng-content>',
 })
 export class InputNumberClear {
   readonly class = input<string>()

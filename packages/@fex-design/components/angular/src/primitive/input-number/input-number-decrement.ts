@@ -18,7 +18,7 @@ import { InputNumberRoot } from './input-number-root'
     'aria-label': 'Decrease value',
     '[disabled]': '!root.inputNumber.canDecrement()',
   },
-  template: '<ng-content><minus-icon class="size-(--button-icon-size)" /></ng-content>',
+  template: '<ng-content><svg minusIcon class="size-(--button-icon-size)" ></svg></ng-content>',
 })
 export class InputNumberDecrement {
   readonly class = input<string>()

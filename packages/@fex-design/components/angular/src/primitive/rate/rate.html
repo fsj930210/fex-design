@@ -6,7 +6,7 @@
       [ngTemplateOutlet]="template"
       [ngTemplateOutletContext]="{ $implicit: itemState(index, 'empty') }"
     />
-    } @else { <fex-star-icon aria-hidden="true" /> }
+    } @else { <svg starIcon aria-hidden="true"></svg> }
   </span>
   <span [class]="rateFilledContentClassName" [style.clip-path]="clipPath(index)">
     @if (content(); as template) {
@@ -14,7 +14,7 @@
       [ngTemplateOutlet]="template"
       [ngTemplateOutletContext]="{ $implicit: itemState(index, 'filled') }"
     />
-    } @else { <fex-star-icon aria-hidden="true" /> }
+    } @else { <svg starIcon aria-hidden="true"></svg> }
   </span>
 </span>
 }

@@ -13,8 +13,8 @@ export function useTreeController<TNode extends TreeNodeData>(
   options: TreeOptions<TNode> | undefined,
   suppliedController?: TreeController<TNode> | undefined,
 ) {
-  const controllerRef = useLazyRef<TreeController<TNode>>(() =>
-    createTreeController(options ?? { treeData: [] }),
+  const controllerRef = useLazyRef<TreeController<TNode>>(
+    () => suppliedController ?? createTreeController(options ?? { treeData: [] }),
   )
   const controller = suppliedController ?? controllerRef.current
 

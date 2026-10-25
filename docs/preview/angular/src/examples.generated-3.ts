@@ -2,92 +2,512 @@
 import type { Type } from '@angular/core'
 
 export const examples: Record<string, () => Promise<Type<unknown>>> = {
-  'ui/select/popup-render-demo': () => import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/popup-render-demo').then((module) => module.SelectPopupExample),
-  'ui/select/prefix-suffix-demo': () => import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/prefix-suffix-demo').then((module) => module.SelectAffixExample),
-  'ui/select/remote-search': () => import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/remote-search').then((module) => module.SelectRemoteSearchExample),
-  'ui/select/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/semantic-styles').then((module) => module.SelectSemanticStylesExample),
-  'ui/select/single': () => import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/single').then((module) => module.SelectSingleExample),
-  'ui/select/virtual': () => import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/virtual').then((module) => module.SelectVirtualExample),
-  'ui/separator/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/basic').then((module) => module.Basic),
-  'ui/separator/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/css-variables').then((module) => module.SeparatorCssVariablesExample),
-  'ui/separator/direction': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/direction').then((module) => module.Direction),
-  'ui/separator/list': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/list').then((module) => module.List),
-  'ui/separator/menu': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/menu').then((module) => module.Menu),
-  'ui/separator/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/semantic-styles').then((module) => module.SeparatorSemanticStylesExample),
-  'ui/separator/text': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/text').then((module) => module.WithText),
-  'ui/separator/variants': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/variants').then((module) => module.Variants),
-  'ui/separator/vertical': () => import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/vertical').then((module) => module.Vertical),
-  'ui/skeleton/animation': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/animation').then((module) => module.SkeletonAnimationExample),
-  'ui/skeleton/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/basic').then((module) => module.SkeletonBasicExample),
-  'ui/skeleton/content': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/content').then((module) => module.SkeletonContentExample),
-  'ui/skeleton/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/css-variables').then((module) => module.SkeletonCssVariablesExample),
-  'ui/skeleton/form': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/form').then((module) => module.SkeletonFormExample),
-  'ui/skeleton/image': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/image').then((module) => module.SkeletonImageExample),
-  'ui/skeleton/list': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/list').then((module) => module.SkeletonListExample),
-  'ui/skeleton/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/semantic-styles').then((module) => module.SkeletonSemanticStylesExample),
-  'ui/skeleton/styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/styles').then((module) => module.SkeletonStylesExample),
-  'ui/skeleton/table': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/table').then((module) => module.SkeletonTableExample),
-  'ui/skeleton/width': () => import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/width').then((module) => module.SkeletonWidthExample),
-  'ui/slider/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/basic').then((module) => module.SliderBasicExample),
-  'ui/slider/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/css-variables').then((module) => module.SliderCssVariablesExample),
-  'ui/slider/direction': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/direction').then((module) => module.SliderDirectionExample),
-  'ui/slider/disabled': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/disabled').then((module) => module.SliderDisabledExample),
-  'ui/slider/draggable-range': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/draggable-range').then((module) => module.SliderDraggableRangeExample),
-  'ui/slider/editable': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/editable').then((module) => module.SliderEditableExample),
-  'ui/slider/form-appearance': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/form-appearance').then((module) => module.FormAppearanceExample),
-  'ui/slider/marks': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/marks').then((module) => module.SliderMarksExample),
-  'ui/slider/range': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/range').then((module) => module.SliderRangeExample),
-  'ui/slider/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/semantic-styles').then((module) => module.SliderSemanticStylesExample),
-  'ui/slider/sizes': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/sizes').then((module) => module.SliderSizesExample),
-  'ui/slider/weight': () => import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/weight').then((module) => module.SliderWeightExample),
-  'ui/spinner/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/basic').then((module) => module.BasicExample),
-  'ui/spinner/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/css-variables').then((module) => module.SpinnerCssVariablesExample),
-  'ui/spinner/custom-indicator': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/custom-indicator').then((module) => module.CustomIndicatorExample),
-  'ui/spinner/overlay': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/overlay').then((module) => module.OverlayExample),
-  'ui/spinner/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/semantic-styles').then((module) => module.SpinnerSemanticStylesExample),
-  'ui/spinner/sizes': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/sizes').then((module) => module.SizesExample),
-  'ui/spinner/styling': () => import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/styling').then((module) => module.StylingExample),
-  'ui/switch/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/basic').then((module) => module.SwitchBasicExample),
-  'ui/switch/content': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/content').then((module) => module.SwitchContentExample),
-  'ui/switch/controlled': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/controlled').then((module) => module.SwitchControlledExample),
-  'ui/switch/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/css-variables').then((module) => module.SwitchCssVariablesExample),
-  'ui/switch/direction': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/direction').then((module) => module.SwitchDirectionExample),
-  'ui/switch/disabled': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/disabled').then((module) => module.SwitchDisabledExample),
-  'ui/switch/form-appearance': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/form-appearance').then((module) => module.FormAppearanceExample),
-  'ui/switch/loading': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/loading').then((module) => module.SwitchLoadingExample),
-  'ui/switch/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/semantic-styles').then((module) => module.SwitchSemanticStylesExample),
-  'ui/switch/shape': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/shape').then((module) => module.SwitchShapeExample),
-  'ui/switch/size': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/size').then((module) => module.SwitchSizeExample),
-  'ui/switch/validation': () => import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/validation').then((module) => module.SwitchValidationExample),
-  'ui/tag/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/basic').then((module) => module.Basic),
-  'ui/tag/colors': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/colors').then((module) => module.Colors),
-  'ui/tag/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/css-variables').then((module) => module.CssVariables),
-  'ui/tag/direction': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/direction').then((module) => module.DirectionExample),
-  'ui/tag/dynamic': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/dynamic').then((module) => module.Dynamic),
-  'ui/tag/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/semantic-styles').then((module) => module.SemanticStyles),
-  'ui/tag/variants': () => import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/variants').then((module) => module.Variants),
-  'ui/time-picker/affixes': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/affixes').then((module) => module.TimePickerAffixesExample),
-  'ui/time-picker/appearance': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/appearance').then((module) => module.TimePickerAppearanceExample),
-  'ui/time-picker/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/basic').then((module) => module.TimePickerBasicExample),
-  'ui/time-picker/confirm': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/confirm').then((module) => module.TimePickerConfirmExample),
-  'ui/time-picker/controlled': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/controlled').then((module) => module.TimePickerControlledExample),
-  'ui/time-picker/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/css-variables').then((module) => module.TimePickerCssVariablesExample),
-  'ui/time-picker/direction': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/direction').then((module) => module.TimePickerDirectionExample),
-  'ui/time-picker/disabled': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/disabled').then((module) => module.TimePickerDisabledExample),
-  'ui/time-picker/disabled-time': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/disabled-time').then((module) => module.TimePickerDisabledTimeExample),
-  'ui/time-picker/form-appearance': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/form-appearance').then((module) => module.FormAppearanceExample),
-  'ui/time-picker/format': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/format').then((module) => module.TimePickerFormatExample),
-  'ui/time-picker/item': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/item').then((module) => module.TimePickerItemExample),
-  'ui/time-picker/logic': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/logic').then((module) => module.TimePickerUseTimePickerExample),
-  'ui/time-picker/range': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/range').then((module) => module.TimePickerRangeExample),
-  'ui/time-picker/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/semantic-styles').then((module) => module.TimePickerSemanticStylesExample),
-  'ui/time-picker/sizes': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/sizes').then((module) => module.TimePickerSizesExample),
-  'ui/time-picker/trigger': () => import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/trigger').then((module) => module.TimePickerTriggerExample),
-  'ui/tooltip/basic': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/basic').then((module) => module.BasicExample),
-  'ui/tooltip/color': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/color').then((module) => module.ColorExample),
-  'ui/tooltip/controlled': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/controlled').then((module) => module.ControlledExample),
-  'ui/tooltip/css-variables': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/css-variables').then((module) => module.CssVariablesExample),
-  'ui/tooltip/direction': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/direction').then((module) => module.DirectionExample),
-  'ui/tooltip/placement': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/placement').then((module) => module.PlacementExample),
-  'ui/tooltip/semantic-styles': () => import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/semantic-styles').then((module) => module.SemanticStylesExample),
+  'ui/scrollbar/parts': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/parts').then(
+      (module) => module.ScrollbarPartsExample,
+    ),
+  'ui/scrollbar/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/semantic-styles').then(
+      (module) => module.ScrollbarSemanticStylesExample,
+    ),
+  'ui/scrollbar/styling': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/styling').then(
+      (module) => module.ScrollbarStylingExample,
+    ),
+  'ui/scrollbar/table': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/table').then(
+      (module) => module.ScrollbarTableExample,
+    ),
+  'ui/scrollbar/track-visibility': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/track-visibility').then(
+      (module) => module.ScrollbarTrackVisibilityExample,
+    ),
+  'ui/scrollbar/viewport': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/viewport').then(
+      (module) => module.ScrollbarViewportExample,
+    ),
+  'ui/scrollbar/visibility': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/scrollbar/examples/visibility').then(
+      (module) => module.ScrollbarVisibilityExample,
+    ),
+  'ui/select/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/basic').then(
+      (module) => module.SelectBasicExample,
+    ),
+  'ui/select/clear': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/clear').then(
+      (module) => module.SelectClearExample,
+    ),
+  'ui/select/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/controlled').then(
+      (module) => module.SelectControlledExample,
+    ),
+  'ui/select/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/css-variables').then(
+      (module) => module.SelectCssVariablesExample,
+    ),
+  'ui/select/custom-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/custom-search').then(
+      (module) => module.SelectCustomSearchExample,
+    ),
+  'ui/select/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/direction').then(
+      (module) => module.SelectDirectionExample,
+    ),
+  'ui/select/empty-demo': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/empty-demo').then(
+      (module) => module.SelectEmptyExample,
+    ),
+  'ui/select/field-names': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/field-names').then(
+      (module) => module.SelectFieldNamesExample,
+    ),
+  'ui/select/form-appearance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/form-appearance').then(
+      (module) => module.FormAppearanceExample,
+    ),
+  'ui/select/group': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/group').then(
+      (module) => module.SelectGroupExample,
+    ),
+  'ui/select/local-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/local-search').then(
+      (module) => module.SelectLocalSearchExample,
+    ),
+  'ui/select/multiple': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/multiple').then(
+      (module) => module.SelectMultipleExample,
+    ),
+  'ui/select/popup-render-demo': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/popup-render-demo').then(
+      (module) => module.SelectPopupExample,
+    ),
+  'ui/select/prefix-suffix-demo': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/prefix-suffix-demo').then(
+      (module) => module.SelectAffixExample,
+    ),
+  'ui/select/remote-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/remote-search').then(
+      (module) => module.SelectRemoteSearchExample,
+    ),
+  'ui/select/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/semantic-styles').then(
+      (module) => module.SelectSemanticStylesExample,
+    ),
+  'ui/select/single': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/single').then(
+      (module) => module.SelectSingleExample,
+    ),
+  'ui/select/virtual': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/select/examples/virtual').then(
+      (module) => module.SelectVirtualExample,
+    ),
+  'ui/separator/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/basic').then(
+      (module) => module.Basic,
+    ),
+  'ui/separator/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/css-variables').then(
+      (module) => module.SeparatorCssVariablesExample,
+    ),
+  'ui/separator/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/direction').then(
+      (module) => module.Direction,
+    ),
+  'ui/separator/list': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/list').then(
+      (module) => module.List,
+    ),
+  'ui/separator/menu': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/menu').then(
+      (module) => module.Menu,
+    ),
+  'ui/separator/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/semantic-styles').then(
+      (module) => module.SeparatorSemanticStylesExample,
+    ),
+  'ui/separator/text': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/text').then(
+      (module) => module.WithText,
+    ),
+  'ui/separator/variants': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/variants').then(
+      (module) => module.Variants,
+    ),
+  'ui/separator/vertical': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/separator/examples/vertical').then(
+      (module) => module.Vertical,
+    ),
+  'ui/skeleton/animation': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/animation').then(
+      (module) => module.SkeletonAnimationExample,
+    ),
+  'ui/skeleton/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/basic').then(
+      (module) => module.SkeletonBasicExample,
+    ),
+  'ui/skeleton/content': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/content').then(
+      (module) => module.SkeletonContentExample,
+    ),
+  'ui/skeleton/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/css-variables').then(
+      (module) => module.SkeletonCssVariablesExample,
+    ),
+  'ui/skeleton/form': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/form').then(
+      (module) => module.SkeletonFormExample,
+    ),
+  'ui/skeleton/image': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/image').then(
+      (module) => module.SkeletonImageExample,
+    ),
+  'ui/skeleton/list': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/list').then(
+      (module) => module.SkeletonListExample,
+    ),
+  'ui/skeleton/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/semantic-styles').then(
+      (module) => module.SkeletonSemanticStylesExample,
+    ),
+  'ui/skeleton/styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/styles').then(
+      (module) => module.SkeletonStylesExample,
+    ),
+  'ui/skeleton/table': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/table').then(
+      (module) => module.SkeletonTableExample,
+    ),
+  'ui/skeleton/width': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/skeleton/examples/width').then(
+      (module) => module.SkeletonWidthExample,
+    ),
+  'ui/slider/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/basic').then(
+      (module) => module.SliderBasicExample,
+    ),
+  'ui/slider/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/css-variables').then(
+      (module) => module.SliderCssVariablesExample,
+    ),
+  'ui/slider/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/direction').then(
+      (module) => module.SliderDirectionExample,
+    ),
+  'ui/slider/disabled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/disabled').then(
+      (module) => module.SliderDisabledExample,
+    ),
+  'ui/slider/draggable-range': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/draggable-range').then(
+      (module) => module.SliderDraggableRangeExample,
+    ),
+  'ui/slider/editable': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/editable').then(
+      (module) => module.SliderEditableExample,
+    ),
+  'ui/slider/form-appearance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/form-appearance').then(
+      (module) => module.FormAppearanceExample,
+    ),
+  'ui/slider/marks': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/marks').then(
+      (module) => module.SliderMarksExample,
+    ),
+  'ui/slider/range': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/range').then(
+      (module) => module.SliderRangeExample,
+    ),
+  'ui/slider/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/semantic-styles').then(
+      (module) => module.SliderSemanticStylesExample,
+    ),
+  'ui/slider/sizes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/sizes').then(
+      (module) => module.SliderSizesExample,
+    ),
+  'ui/slider/weight': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/slider/examples/weight').then(
+      (module) => module.SliderWeightExample,
+    ),
+  'ui/spinner/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/basic').then(
+      (module) => module.BasicExample,
+    ),
+  'ui/spinner/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/css-variables').then(
+      (module) => module.SpinnerCssVariablesExample,
+    ),
+  'ui/spinner/custom-indicator': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/custom-indicator').then(
+      (module) => module.CustomIndicatorExample,
+    ),
+  'ui/spinner/overlay': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/overlay').then(
+      (module) => module.OverlayExample,
+    ),
+  'ui/spinner/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/semantic-styles').then(
+      (module) => module.SpinnerSemanticStylesExample,
+    ),
+  'ui/spinner/sizes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/sizes').then(
+      (module) => module.SizesExample,
+    ),
+  'ui/spinner/styling': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/spinner/examples/styling').then(
+      (module) => module.StylingExample,
+    ),
+  'ui/switch/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/basic').then(
+      (module) => module.SwitchBasicExample,
+    ),
+  'ui/switch/content': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/content').then(
+      (module) => module.SwitchContentExample,
+    ),
+  'ui/switch/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/controlled').then(
+      (module) => module.SwitchControlledExample,
+    ),
+  'ui/switch/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/css-variables').then(
+      (module) => module.SwitchCssVariablesExample,
+    ),
+  'ui/switch/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/direction').then(
+      (module) => module.SwitchDirectionExample,
+    ),
+  'ui/switch/disabled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/disabled').then(
+      (module) => module.SwitchDisabledExample,
+    ),
+  'ui/switch/form-appearance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/form-appearance').then(
+      (module) => module.FormAppearanceExample,
+    ),
+  'ui/switch/loading': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/loading').then(
+      (module) => module.SwitchLoadingExample,
+    ),
+  'ui/switch/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/semantic-styles').then(
+      (module) => module.SwitchSemanticStylesExample,
+    ),
+  'ui/switch/shape': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/shape').then(
+      (module) => module.SwitchShapeExample,
+    ),
+  'ui/switch/size': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/size').then(
+      (module) => module.SwitchSizeExample,
+    ),
+  'ui/switch/validation': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/switch/examples/validation').then(
+      (module) => module.SwitchValidationExample,
+    ),
+  'ui/tag/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/basic').then(
+      (module) => module.Basic,
+    ),
+  'ui/tag/colors': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/colors').then(
+      (module) => module.Colors,
+    ),
+  'ui/tag/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/css-variables').then(
+      (module) => module.CssVariables,
+    ),
+  'ui/tag/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/direction').then(
+      (module) => module.DirectionExample,
+    ),
+  'ui/tag/dynamic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/dynamic').then(
+      (module) => module.Dynamic,
+    ),
+  'ui/tag/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/semantic-styles').then(
+      (module) => module.SemanticStyles,
+    ),
+  'ui/tag/variants': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tag/examples/variants').then(
+      (module) => module.Variants,
+    ),
+  'ui/time-picker/affixes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/affixes').then(
+      (module) => module.TimePickerAffixesExample,
+    ),
+  'ui/time-picker/appearance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/appearance').then(
+      (module) => module.TimePickerAppearanceExample,
+    ),
+  'ui/time-picker/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/basic').then(
+      (module) => module.TimePickerBasicExample,
+    ),
+  'ui/time-picker/confirm': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/confirm').then(
+      (module) => module.TimePickerConfirmExample,
+    ),
+  'ui/time-picker/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/controlled').then(
+      (module) => module.TimePickerControlledExample,
+    ),
+  'ui/time-picker/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/css-variables').then(
+      (module) => module.TimePickerCssVariablesExample,
+    ),
+  'ui/time-picker/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/direction').then(
+      (module) => module.TimePickerDirectionExample,
+    ),
+  'ui/time-picker/disabled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/disabled').then(
+      (module) => module.TimePickerDisabledExample,
+    ),
+  'ui/time-picker/disabled-time': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/disabled-time').then(
+      (module) => module.TimePickerDisabledTimeExample,
+    ),
+  'ui/time-picker/form-appearance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/form-appearance').then(
+      (module) => module.FormAppearanceExample,
+    ),
+  'ui/time-picker/format': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/format').then(
+      (module) => module.TimePickerFormatExample,
+    ),
+  'ui/time-picker/item': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/item').then(
+      (module) => module.TimePickerItemExample,
+    ),
+  'ui/time-picker/logic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/logic').then(
+      (module) => module.TimePickerUseTimePickerExample,
+    ),
+  'ui/time-picker/range': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/range').then(
+      (module) => module.TimePickerRangeExample,
+    ),
+  'ui/time-picker/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/semantic-styles').then(
+      (module) => module.TimePickerSemanticStylesExample,
+    ),
+  'ui/time-picker/sizes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/sizes').then(
+      (module) => module.TimePickerSizesExample,
+    ),
+  'ui/time-picker/trigger': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/trigger').then(
+      (module) => module.TimePickerTriggerExample,
+    ),
+  'ui/tooltip/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/basic').then(
+      (module) => module.BasicExample,
+    ),
+  'ui/tooltip/color': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/color').then(
+      (module) => module.ColorExample,
+    ),
+  'ui/tooltip/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/controlled').then(
+      (module) => module.ControlledExample,
+    ),
+  'ui/tooltip/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/css-variables').then(
+      (module) => module.CssVariablesExample,
+    ),
+  'ui/tooltip/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/direction').then(
+      (module) => module.DirectionExample,
+    ),
+  'ui/tooltip/placement': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/placement').then(
+      (module) => module.PlacementExample,
+    ),
+  'ui/tooltip/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/semantic-styles').then(
+      (module) => module.SemanticStylesExample,
+    ),
+  'ui/tree/async-load': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/async-load').then(
+      (module) => module.TreeAsyncLoadExample,
+    ),
+  'ui/tree/async-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/async-search').then(
+      (module) => module.TreeAsyncSearchExample,
+    ),
+  'ui/tree/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/basic').then(
+      (module) => module.TreeBasicExample,
+    ),
+  'ui/tree/basic-content': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/basic-content').then(
+      (module) => module.BasicContent,
+    ),
+  'ui/tree/checkbox': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/checkbox').then(
+      (module) => module.TreeCheckboxExample,
+    ),
+  'ui/tree/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/css-variables').then(
+      (module) => module.TreeCssVariablesExample,
+    ),
+  'ui/tree/custom-render': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/custom-render').then(
+      (module) => module.TreeCustomRenderExample,
+    ),
+  'ui/tree/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/direction').then(
+      (module) => module.TreeDirectionExample,
+    ),
+  'ui/tree/dnd': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/dnd').then(
+      (module) => module.TreeDndExample,
+    ),
+  'ui/tree/field-names': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/field-names').then(
+      (module) => module.TreeFieldNamesExample,
+    ),
+  'ui/tree/instance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/instance').then(
+      (module) => module.TreeInstanceExample,
+    ),
+  'ui/tree/keyboard': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/keyboard').then(
+      (module) => module.TreeKeyboardExample,
+    ),
+  'ui/tree/logic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/logic').then(
+      (module) => module.TreeLogicExample,
+    ),
+  'ui/tree/scroll-to': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/scroll-to').then(
+      (module) => module.TreeScrollToExample,
+    ),
+  'ui/tree/search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/search').then(
+      (module) => module.TreeSearchExample,
+    ),
+  'ui/tree/selection': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/selection').then(
+      (module) => module.TreeSelectionExample,
+    ),
+  'ui/tree/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/semantic-styles').then(
+      (module) => module.TreeSemanticStylesExample,
+    ),
+  'ui/tree/state-demo': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/state-demo').then(
+      (module) => module.StateDemo,
+    ),
+  'ui/tree/sync-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/sync-search').then(
+      (module) => module.SyncSearch,
+    ),
+  'ui/tree/virtual': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/virtual').then(
+      (module) => module.TreeVirtualExample,
+    ),
 }

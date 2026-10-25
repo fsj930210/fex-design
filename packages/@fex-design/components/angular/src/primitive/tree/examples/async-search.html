@@ -1,0 +1,43 @@
+<div class="grid gap-space-sm">
+  <div
+    selectRoot
+    [options]="matches()"
+    [value]="selected() ?? []"
+    [showSearch]="true"
+    [clearable]="true"
+    [filterOption]="filterRemote"
+    [loading]="loading()"
+    (search)="search($event)"
+    (change)="choose($event.value)"
+  >
+    <div selectTrigger class="w-72 max-w-full" placeholder="搜索部门或节点"></div>
+    <div selectContent></div>
+  </div>
+  <p class="text-xs text-muted-foreground">
+    可搜索：Department 2、Group 2.3、Item 2.3.3；清除选择恢复原树。
+  </p>
+  <div [hidden]="!!selected()">
+    <div treeRoot [options]="rootOptions()">
+      <div treeViewport>
+        <ng-template let-item
+          ><div [treeItem]="item.key">
+            <button [treeTrigger]="item.key"></button><span treeTitle>{{item.data.title}}</span>
+          </div></ng-template
+        >
+      </div>
+    </div>
+  </div>
+  @if(locating()){
+  <p role="status">正在加载祖先路径…</p>
+  } @if(path()) {
+  <div treeRoot [options]="pathOptions()">
+    <div treeViewport>
+      <ng-template let-item
+        ><div [treeItem]="item.key">
+          <button [treeTrigger]="item.key"></button><span treeTitle>{{item.data.title}}</span>
+        </div></ng-template
+      >
+    </div>
+  </div>
+  }
+</div>

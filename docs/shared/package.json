@@ -11,6 +11,7 @@
     "./*-manifest": "./src/*-manifest.ts",
     "./preview-protocol": "./src/preview-protocol.ts",
     "./calendar-demo-data": "./src/calendar-demo-data.ts",
+    "./tree-manifest": "./src/tree-manifest.ts",
     "./scrollbar-demo": "./src/scrollbar-demo.ts"
   },
   "dependencies": {

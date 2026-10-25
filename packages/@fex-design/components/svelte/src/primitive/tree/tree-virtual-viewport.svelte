@@ -59,7 +59,7 @@
     return tree.subscribeVisible(updateVirtualizer);
   });
 
-  export function scrollToKey(
+  export function scrollTo(
     key: TreeKey,
     options?: { align?: "auto" | "start" | "center" | "end"; reveal?: boolean },
   ) {

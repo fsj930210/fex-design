@@ -44,7 +44,7 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             Props 属性
           </div>
           <div>
-            <div class="grid grid-cols-[105px_1.2fr_70px_1.6fr] items-start gap-2.5 bg-muted-background px-3.5 py-2 text-[12px] font-semibold text-secondary-foreground max-[640px]:grid-cols-[90px_1fr] max-[640px]:[&>*:nth-child(n+3)]:hidden">
+            <div class="grid grid-cols-[105px_minmax(0,1.2fr)_70px_minmax(0,1.6fr)] items-start gap-2.5 bg-muted-background px-3.5 py-2 text-[12px] font-semibold text-secondary-foreground max-[640px]:grid-cols-[90px_minmax(0,1fr)] max-[640px]:[&>*:nth-child(n+3)]:hidden">
               <span>属性名</span>
               <span>类型</span>
               <span>默认值</span>
@@ -52,7 +52,7 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             </div>
             <For each={value().props}>
               {(property) => (
-                <div class="grid grid-cols-[105px_1.2fr_70px_1.6fr] items-start gap-2.5 border-t border-border px-3.5 py-2.5 text-[12px] max-[640px]:grid-cols-[90px_1fr] max-[640px]:[&>*:nth-child(n+3)]:hidden hover:bg-muted/20">
+                <div class="grid grid-cols-[105px_minmax(0,1.2fr)_70px_minmax(0,1.6fr)] items-start gap-2.5 border-t border-border px-3.5 py-2.5 text-[12px] max-[640px]:grid-cols-[90px_minmax(0,1fr)] max-[640px]:[&>*:nth-child(n+3)]:hidden hover:bg-muted/20">
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] font-mono text-primary font-semibold text-[11.5px]">
                     {property.name}
                   </code>
@@ -62,7 +62,7 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] font-mono text-muted-foreground text-[11px]">
                     {String(property.default ?? '—')}
                   </code>
-                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">
+                  <span class="min-w-0 [overflow-wrap:anywhere] text-secondary-foreground leading-relaxed text-[11.5px]">
                     {property.description}
                   </span>
                 </div>
@@ -79,14 +79,14 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             Events 事件
           </div>
           <div>
-            <div class="grid grid-cols-[105px_1.2fr_1.6fr] items-start gap-2.5 bg-muted-background px-3.5 py-2 text-[12px] font-semibold text-secondary-foreground max-[640px]:grid-cols-[90px_1fr] max-[640px]:[&>*:nth-child(3)]:hidden">
+            <div class="grid grid-cols-[105px_1.2fr_1.6fr] items-start gap-2.5 bg-muted-background px-3.5 py-2 text-[12px] font-semibold text-secondary-foreground max-[640px]:grid-cols-[90px_minmax(0,1fr)] max-[640px]:[&>*:nth-child(3)]:hidden">
               <span>事件名</span>
               <span>参数签名</span>
               <span>说明</span>
             </div>
             <For each={value().events}>
               {(event) => (
-                <div class="grid grid-cols-[105px_1.2fr_1.6fr] items-start gap-2.5 border-t border-border px-3.5 py-2.5 text-[12px] max-[640px]:grid-cols-[90px_1fr] max-[640px]:[&>*:nth-child(3)]:hidden hover:bg-muted/20">
+                <div class="grid grid-cols-[105px_1.2fr_1.6fr] items-start gap-2.5 border-t border-border px-3.5 py-2.5 text-[12px] max-[640px]:grid-cols-[90px_minmax(0,1fr)] max-[640px]:[&>*:nth-child(3)]:hidden hover:bg-muted/20">
                   <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] font-mono text-primary font-semibold text-[11.5px]">
                     {event.name}
                   </code>

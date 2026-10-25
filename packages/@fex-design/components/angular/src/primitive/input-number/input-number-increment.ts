@@ -18,7 +18,7 @@ import { InputNumberRoot } from './input-number-root'
     'aria-label': 'Increase value',
     '[disabled]': '!root.inputNumber.canIncrement()',
   },
-  template: '<ng-content><plus-icon class="size-(--button-icon-size)" /></ng-content>',
+  template: '<ng-content><svg plusIcon class="size-(--button-icon-size)" ></svg></ng-content>',
 })
 export class InputNumberIncrement {
   readonly class = input<string>()

@@ -41,7 +41,7 @@
       >@if (suffixTemplate(); as custom) {
       <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else if
       (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else {
-      <calendar-icon class="size-(--input-icon-size)" /> }</span
+      <svg calendarIcon class="size-(--input-icon-size)"></svg> }</span
     >
     @if (context().canClear) {
     <button
@@ -53,7 +53,7 @@
       (pointerdown)="$event.preventDefault(); $event.stopPropagation()"
       (click)="clear($event)"
     >
-      <circle-x-icon class="size-(--input-clear-icon-size)" />
+      <svg circleXIcon class="size-(--input-clear-icon-size)"></svg>
     </button>
     }
   </div>

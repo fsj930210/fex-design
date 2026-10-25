@@ -21,6 +21,7 @@
     "@fex-design/utils": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/postcss": "catalog:",
+    "@tanstack/angular-virtual": "latest",
     "class-variance-authority": "latest",
     "clsx": "^2.1.1",
     "lunar-typescript": "^1.8.6",

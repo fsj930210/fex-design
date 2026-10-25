@@ -1,0 +1,28 @@
+<section class="grid w-full gap-space-sm">
+  <p class="text-xs text-muted-foreground">
+    通过组件实例调用方法；展开、选择和勾选均由实例执行，保留已有状态。
+  </p>
+  <div class="flex flex-wrap gap-2">
+    <button button (click)="run('expand')">展开 Department 2 / Group 2.3</button
+    ><button button (click)="run('scroll')">定位 Item 2.3.3</button
+    ><button button (click)="run('select')">追加选择 Item 2.3.3</button
+    ><button button (click)="run('check')">追加勾选 Item 2.3.3</button
+    ><button button (click)="run('path')">读取节点与路径</button
+    ><button button (click)="run('reset')">清空并收起</button>
+  </div>
+  <div
+    tree
+    [treeData]="data"
+    [multiple]="true"
+    [checkable]="true"
+    (select)="selected.set($event.keys)"
+    (check)="checked.set($event.keys)"
+    [classNames]="{ viewport: 'h-48 overflow-y-auto' }"
+  ></div>
+  <output class="min-h-10 break-all text-xs text-muted-foreground" aria-live="polite"
+    >选择：{{ selected().join(', ') || '无' }}；勾选：{{ checked().join(', ') || '无' }}</output
+  >
+  <output class="min-h-10 break-all text-xs text-muted-foreground" aria-live="polite"
+    >{{ message() }}</output
+  >
+</section>

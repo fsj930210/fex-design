@@ -8,7 +8,7 @@
     <div scrollbarRoot class="h-full">
       <div scrollbarViewport [overflow]="{ x: 'hidden', y: 'auto' }" [class]="viewportClass">
         @if(cascader.loading){
-        <div [class]="loadingClass"><loading-icon class="animate-spin" />Loading...</div>
+        <div [class]="loadingClass"><svg loadingIcon class="animate-spin"></svg>Loading...</div>
         } @else {@for (path of cascader.controller.getSearchResults(); track path.at(-1)!.key) {
         @let node = path.at(-1)!; @let itemState = state(node);
         <div
@@ -18,7 +18,7 @@
           (click)="cascader.controller.select(node.key)"
         >
           <span [class]="optionLabelClass">{{ cascader.display(path) }}</span
-          >@if(itemState.selected){<check-icon [class]="optionIconClass" />}
+          >@if(itemState.selected){<svg checkIcon [class]="optionIconClass"></svg>}
         </div>
         } @empty {
         <div [class]="emptyClass">No options</div>
@@ -56,12 +56,15 @@
             @if(itemState.checked || itemState.indeterminate){<span
               checkboxIndicator
               [class]="checkboxIndicatorClass"
-              >@if(itemState.indeterminate){<minus-icon />}@else{<check-icon />}</span
+              >@if(itemState.indeterminate){<svg minusIcon></svg>}@else{<svg checkIcon></svg>}</span
             >}</button
           >} <span [class]="optionLabelClass">{{ node.label }}</span
           ><span [class]="optionIconClass"
-            >@if(itemState.loading){<loading-icon class="animate-spin" />}@else if
-            (!node.leaf){<chevron-right-icon />}@else if (itemState.selected){<check-icon />}</span
+            >@if(itemState.loading){<svg loadingIcon class="animate-spin"></svg>}@else if
+            (!node.leaf){<svg chevronRightIcon></svg>}@else if (itemState.selected){<svg
+              checkIcon
+            ></svg
+            >}</span
           >
         </div>
         }

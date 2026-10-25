@@ -29,7 +29,7 @@
     <span inputSuffix>
       @if (suffixValue() != null) { @if (suffixTemplate(); as template) {
       <ng-container [ngTemplateOutlet]="template" /> } @else { {{ suffixValue() }} } } @else {
-      <clock-icon class="size-4" /> }
+      <svg clockIcon class="size-4"></svg> }
     </span>
     @if (canClear()) {
     <button

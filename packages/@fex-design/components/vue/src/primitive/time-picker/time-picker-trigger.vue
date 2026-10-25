@@ -59,8 +59,7 @@ const clear = context.controller.clear
         v-bind="nativeInputProps"
         type="text"
         :aria-invalid="
-          attrs['aria-invalid'] ??
-          (invalid || inputProps?.['aria-invalid'] ? true : undefined)
+          attrs['aria-invalid'] ?? (invalid || inputProps?.['aria-invalid'] ? true : undefined)
         "
         :placeholder="placeholder ?? inputProps?.placeholder ?? context.format.value"
       />

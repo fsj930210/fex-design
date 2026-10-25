@@ -16,6 +16,7 @@ type DataAttributes = {
 const EMPTY_DROP_POSITIONS: readonly DropPosition[] = []
 
 export interface UseDroppableEventArgs<TData extends Record<string, unknown>> {
+  event?: Event
   source: Record<string, unknown>
   target: TData & { id: string }
   edge: DropEdge | null
@@ -104,6 +105,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
         setDropAllowed(true)
         setPosition(nextPosition)
         onDragEnter?.({
+          event: undefined,
           source,
           target: target as TData & { id: string },
           edge: nextEdge,
@@ -116,6 +118,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
         setDropAllowed(true)
         setPosition(nextPosition)
         onDrag?.({
+          event: undefined,
           source,
           target: target as TData & { id: string },
           edge: nextEdge,
@@ -135,6 +138,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
         setDropAllowed(false)
         setPosition(null)
         onDrop?.({
+          event: undefined,
           source,
           target: target as TData & { id: string },
           edge: nextEdge,
@@ -157,6 +161,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       setDropAllowed(acceptsSource(source))
       setPosition(nextPosition)
       onDragEnter?.({
+        event,
         source,
         target: { id, ...(data ?? {}) } as TData & { id: string },
         edge: toDropEdge(nextPosition),
@@ -181,6 +186,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       setDropAllowed(true)
       setPosition(nextPosition)
       onDrag?.({
+        event,
         source,
         target: { id, ...(data ?? {}) } as TData & { id: string },
         edge: toDropEdge(nextPosition),
@@ -203,6 +209,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       setDropAllowed(false)
       setPosition(null)
       onDrop?.({
+        event,
         source,
         target: { id, ...(data ?? {}) } as TData & { id: string },
         edge: toDropEdge(nextPosition),

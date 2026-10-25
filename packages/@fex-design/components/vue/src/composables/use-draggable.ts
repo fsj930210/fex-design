@@ -20,6 +20,8 @@ export interface UseDraggableOptions<
   data?: TData
   disabled?: boolean
   dragPreview?: 'none' | 'clone'
+  onDragStart?: (event?: Event) => void
+  onDragEnd?: (event?: Event) => void
 }
 
 export function useDraggable<TData extends Record<string, unknown> = Record<string, unknown>>(
@@ -117,10 +119,11 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
       [DND_DRAG_START_RECT_WIDTH]: bounds.width,
       [DND_DRAG_START_RECT_HEIGHT]: bounds.height,
     })
-    moveCurrentDndSource(start)
+    moveCurrentDndSource(start, event)
     activeRect.value = bounds
     dragOffset.value = { x: 0, y: 0 }
     dragging.value = true
+    options.onDragStart?.(event)
     mountDragPreview(activeRect.value)
 
     function onPointerMove(pointerEvent: PointerEvent) {
@@ -130,17 +133,18 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
         previewElement.style.left = `${bounds.left + point.x - start.x}px`
         previewElement.style.top = `${bounds.top + point.y - start.y}px`
       }
-      moveCurrentDndSource(point)
+      moveCurrentDndSource(point, pointerEvent)
     }
 
     function onPointerUp(pointerEvent: PointerEvent) {
       cleanupWindow?.()
       cleanupWindow = undefined
-      dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY })
+      dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY }, pointerEvent)
       dragging.value = false
       activeRect.value = null
       dragOffset.value = { x: 0, y: 0 }
       clearDragPreview()
+      options.onDragEnd?.(pointerEvent)
     }
 
     cleanupWindow = () => {

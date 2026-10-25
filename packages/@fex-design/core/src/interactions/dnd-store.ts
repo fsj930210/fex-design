@@ -31,6 +31,7 @@ export interface DndDropPositionArgs {
 }
 
 export interface DndDropArgs {
+  event?: Event | undefined
   source: DndSourceData
   target: Record<string, unknown> & { id: string }
   edge: DropEdge | null
@@ -67,7 +68,7 @@ export function registerDndDropTarget(target: DndDropTarget) {
   }
 }
 
-export function moveCurrentDndSource(point: { x: number; y: number }) {
+export function moveCurrentDndSource(point: { x: number; y: number }, event?: Event) {
   if (!currentSource) {
     return
   }
@@ -77,15 +78,15 @@ export function moveCurrentDndSource(point: { x: number; y: number }) {
     currentTarget?.onDragLeave?.()
     currentTarget = target
     if (target) {
-      target.onDragEnter?.(getDropArgs(target, point, currentSource))
+      target.onDragEnter?.(getDropArgs(target, point, currentSource, event))
     }
   }
   if (target) {
-    target.onDrag?.(getDropArgs(target, point, currentSource))
+    target.onDrag?.(getDropArgs(target, point, currentSource, event))
   }
 }
 
-export function dropCurrentDndSource(point: { x: number; y: number }) {
+export function dropCurrentDndSource(point: { x: number; y: number }, event?: Event) {
   if (!currentSource) {
     return false
   }
@@ -96,7 +97,7 @@ export function dropCurrentDndSource(point: { x: number; y: number }) {
     return false
   }
 
-  target.onDrop?.(getDropArgs(target, point, currentSource))
+  target.onDrop?.(getDropArgs(target, point, currentSource, event))
   currentSource = null
   currentTarget = null
   return true
@@ -141,12 +142,18 @@ function getTargetAtPoint(point: { x: number; y: number }, source: DndSourceData
   return matched
 }
 
-function getDropArgs(target: DndDropTarget, point: Point, source: DndSourceData): DndDropArgs {
+function getDropArgs(
+  target: DndDropTarget,
+  point: Point,
+  source: DndSourceData,
+  event?: Event,
+): DndDropArgs {
   const position =
     target.getPosition?.({ element: target.element, pointer: point, source }) ??
     getDropPositionAtPoint(target.element, point, target.positions ?? target.edges ?? [])
   const rect = target.element.getBoundingClientRect()
   return {
+    event,
     source,
     target: { id: target.id, ...target.data },
     edge: isDropEdge(position) ? position : null,

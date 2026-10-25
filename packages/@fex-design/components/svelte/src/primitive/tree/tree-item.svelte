@@ -6,7 +6,8 @@
   import type { SelectionFeatureApi } from "@fex-design/core/tree/features/selection";
   import type {
     TreeController,
-    TreeItem as CoreTreeItem,
+    TreeDndCallbacks,
+    TreeNode as CoreTreeNode,
     TreeKey,
     TreeNodeData,
   } from "@fex-design/core/tree/types";
@@ -15,6 +16,7 @@
   import { getContext, type Snippet, untrack } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
+  import type { TreeDndItemOptions } from "./tree-dnd-item";
   import {
     styleToString,
     treeContextKey,
@@ -22,7 +24,7 @@
   } from "./tree-context";
 
   interface TreeItemState {
-    item: CoreTreeItem<TNode>;
+    item: CoreTreeNode<TNode>;
     itemProps: HTMLAttributes<HTMLDivElement>;
     expanded: boolean;
     selected: boolean;
@@ -38,12 +40,15 @@
       toggleSelected(): void;
       toggleChecked(): void;
     };
+    dnd: TreeDndItemOptions<TNode>;
   }
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
     itemKey: TreeKey;
     controller?: TreeController<TNode>;
     block?: boolean;
+    draggable?: boolean;
+    dndCallbacks?: TreeDndCallbacks<TNode>;
     children?: Snippet<[TreeItemState]>;
   }
 
@@ -51,6 +56,8 @@
     itemKey,
     controller,
     block = false,
+    draggable,
+    dndCallbacks,
     children,
     class: className,
     style,
@@ -105,7 +112,8 @@
       "aria-posinset": item.index + 1,
       "data-key": String(item.key),
       "data-selected": selected || undefined,
-      "data-selectable": tree.hasFeature("selection") || undefined,
+      "data-selectable":
+        (item.selectable && tree.hasFeature("selection")) || undefined,
       "data-expanded": expanded || undefined,
       "data-checked": checked || undefined,
       "data-disabled": item.disabled || undefined,
@@ -117,7 +125,6 @@
           height: `${rowHeight()}px`,
           marginInlineStart: `${item.depth * indent()}px`,
           paddingInlineStart: "4px",
-          "--tree-item-inline-start": "4px",
         }) + (style ? `;${style}` : ""),
       onfocus: (event) => {
         onfocus?.(event);
@@ -140,6 +147,13 @@
       loadState: asyncLoad?.getState(itemKey) ?? "unloaded",
       loadError: asyncLoad?.getError(itemKey),
       actions,
+      dnd: {
+        tree,
+        itemKey,
+        indent: indent(),
+        dragDisabled: draggable === false,
+        callbacks: dndCallbacks,
+      } satisfies TreeDndItemOptions<TNode>,
     };
   });
 </script>

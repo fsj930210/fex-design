@@ -3,18 +3,33 @@ import type { CheckFeatureApi } from '@fex-design/core/tree/features/check'
 import type { ExpansionFeatureApi } from '@fex-design/core/tree/features/expansion'
 import type { FocusFeatureApi } from '@fex-design/core/tree/features/focus'
 import type { SelectionFeatureApi } from '@fex-design/core/tree/features/selection'
-import type { TreeKey, TreeNodeData } from '@fex-design/core/tree/types'
+import type { TreeDndCallbacks, TreeKey, TreeNodeData } from '@fex-design/core/tree/types'
 import { treeItemClassName } from '@fex-design/components-styles/tree'
 import { cn } from '@fex-design/utils'
 import { computed, useAttrs } from 'vue'
 import { useTreeContext } from './context'
 import { useTreeItem } from './use-tree-item'
+import { useTreeDndItem } from './use-tree-dnd-item'
 
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{ itemKey: TreeKey; block?: boolean }>()
+const props = withDefaults(
+  defineProps<{
+    itemKey: TreeKey
+    block?: boolean
+    draggable?: boolean
+    dndCallbacks?: TreeDndCallbacks<TNode>
+  }>(),
+  { draggable: undefined },
+)
 const attrs = useAttrs()
 const { tree, indent, rowHeight } = useTreeContext<TNode>('TreeItem')
 const state = useTreeItem(tree, props.itemKey)
+const dnd = useTreeDndItem({
+  tree,
+  itemKey: props.itemKey,
+  dragDisabled: () => props.draggable === false,
+  callbacks: props.dndCallbacks,
+})
 const actions = {
   expand: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.expand(props.itemKey),
   collapse: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(props.itemKey),
@@ -29,6 +44,8 @@ const itemProps = computed(() => {
   const { class: className, style, onClick, onFocus, ...rest } = attrs
   return {
     ...rest,
+    ...dnd.itemProps.value,
+
     role: 'treeitem',
     tabindex: state.value.focused ? 0 : -1,
     'aria-level': item.depth + 1,
@@ -40,7 +57,7 @@ const itemProps = computed(() => {
     'aria-posinset': item.index + 1,
     'data-key': String(item.key),
     'data-selected': state.value.selected || undefined,
-    'data-selectable': tree.hasFeature('selection') || undefined,
+    'data-selectable': (item.selectable && tree.hasFeature('selection')) || undefined,
     'data-expanded': state.value.expanded || undefined,
     'data-checked': state.value.checked || undefined,
     'data-disabled': item.disabled || undefined,
@@ -53,7 +70,6 @@ const itemProps = computed(() => {
         height: `${rowHeight.value}px`,
         marginInlineStart: `${item.depth * indent.value}px`,
         paddingInlineStart: '4px',
-        '--tree-item-inline-start': '4px',
       },
     ],
     onFocus: (event: FocusEvent) => {
@@ -73,6 +89,7 @@ const itemProps = computed(() => {
     v-if="state.item"
     :item="state.item"
     :item-props="itemProps"
+    :set-item-ref="dnd.setItemRef"
     :expanded="state.expanded"
     :selected="state.selected"
     :checked="state.checked"
@@ -82,6 +99,6 @@ const itemProps = computed(() => {
     :load-error="state.loadError"
     :actions="actions"
   >
-    <div v-bind="itemProps" />
+    <div :ref="dnd.setItemRef" v-bind="itemProps" />
   </slot>
 </template>

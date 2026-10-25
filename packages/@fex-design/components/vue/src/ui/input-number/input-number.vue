@@ -79,9 +79,9 @@ const controlled = Object.prototype.hasOwnProperty.call(
     :variant="props.variant"
     :class="[props.classNames?.root, props.class]"
     :style="[props.styles?.root, $attrs.style as StyleValue]"
-  :data-warning="
-    typeof $attrs['data-warning'] === 'string' ? ($attrs['data-warning'] as string) : undefined
-  "
+    :data-warning="
+      typeof $attrs['data-warning'] === 'string' ? ($attrs['data-warning'] as string) : undefined
+    "
     @change="(event, value) => emit('change', event, value)"
   >
     <InputPrefix

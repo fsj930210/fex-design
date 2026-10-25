@@ -44,7 +44,7 @@ import { useTreeDndItem } from '@fex-design/react/primitive/tree/use-tree-dnd-it
           {({ item: currentItem, itemProps }) => (
             <div {...itemProps}>
               <TreeTrigger itemKey={currentItem.key} />
-              <TreeTitle>{String(currentItem.node.name)}</TreeTitle>
+              <TreeTitle>{String(currentItem.data.name)}</TreeTitle>
             </div>
           )}
         </TreeItem>
@@ -64,7 +64,7 @@ import { useTreeDndItem } from '@fex-design/react/primitive/tree/use-tree-dnd-it
 | `rowHeight`  | `number`                             | `32`    | No                          | Row height and the default virtual size estimate.                       |
 | `children`   | `ReactNode \| ((tree) => ReactNode)` | —       | Yes                         | Tree content or controller render function.                             |
 | `className`  | `string`                             | —       | No                          | Merged onto the root tree element.                                      |
-| `style`      | `CSSProperties`                      | —       | No                          | Merged with the internal `--tree-indent` variable.                      |
+| `style`      | `CSSProperties`                      | —       | No                          | Native root styles.                                                     |
 
 `TreeRoot` also forwards native `div` props. When both `controller` and `options` are supplied,
 React synchronizes the options to the supplied external controller through
@@ -80,7 +80,7 @@ React synchronizes the options to the supplied external controller through
 | `TreeTrigger`         | `itemKey`                                     | Loads children when necessary, then explicitly expands or collapses the node.                                                            |
 | `TreeTitle`           | native `span` props                           | Minimal title slot with shared Tree styles.                                                                                              |
 
-`TreeVirtualViewportHandle.scrollToKey(key, { align, reveal })` resolves a core visible index and
+`TreeVirtualViewportHandle.scrollTo(key, { align, reveal })` resolves a core visible index and
 then asks TanStack Virtual to scroll. `reveal: true` expands the ancestor path through the focus
 feature before resolving the index.
 

@@ -6,7 +6,6 @@
 </script>
 
 <div class="flex flex-wrap items-start gap-4">
-  <RangePicker
-    defaultValue={{ start: today, end: today.add({ days: 7 }) }}
+  <RangePicker defaultValue={{ start: today, end: today.add({ days: 7 }) }}
   ></RangePicker>
 </div>

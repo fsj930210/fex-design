@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from '@fex-design/react/icons/chevron'
-import { TrashIcon } from '@fex-design/react/icons/trash'
+import { XIcon } from '@fex-design/react/icons/x'
 import { SwitchRoot, SwitchThumb } from '@fex-design/react/primitive/switch'
 import {
   TransferActions,
@@ -29,7 +29,7 @@ function OneWayTarget({ panel }: { panel: TransferPanelRenderApi<TransferMember>
               controller.moveToSource()
             }}
           >
-            <TrashIcon />
+            <XIcon />
           </Button>
         </div>
       ))}

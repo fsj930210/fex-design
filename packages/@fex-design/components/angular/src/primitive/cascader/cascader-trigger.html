@@ -35,18 +35,18 @@
     />
   </div>
   <span [class]="suffixClass"
-    >@if(cascader.loading){<loading-icon class="animate-spin" />}@else if
+    >@if(cascader.loading){<svg loadingIcon class="animate-spin"></svg>}@else if
     (cascader.clearable&&cascader.selectedPaths.length){<button
       button
       type="button"
       [class]="clearClass"
       (click)="$event.stopPropagation();cascader.controller.clear()"
     >
-      <x-icon /></button
+      <svg xIcon></svg></button
     >}@else{<span
       [attr.data-state]="cascader.snapshot().open?'open':'closed'"
       [class]="indicatorClass"
-      ><fex-chevron-down-icon /></span
+      ><svg chevronDownIcon></svg></span
     >}</span
   >
 </div>

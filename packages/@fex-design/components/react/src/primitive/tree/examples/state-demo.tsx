@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import { useState } from 'react'
 import { Button } from '@fex-design/react/primitive/button'
 import {
@@ -26,15 +25,15 @@ export function StateDemo({
   controlled: boolean
   strict?: boolean
   multiple?: boolean
-  data?: readonly TreeDataNode<string, string>[]
+  data?: readonly Record<string, unknown>[]
 }) {
   const initial = kind === 'expanded' ? ['root-1'] : ['root-1-group-1-item-1']
   const [keys, setKeys] = useState<readonly (string | number)[]>(initial)
   const [features] = useState(() => [
-    expansionFeature<TreeDataNode<string, string>>(),
-    ...(kind === 'selected' ? [selectionFeature<TreeDataNode<string, string>>({ multiple })] : []),
+    expansionFeature<Record<string, unknown>>(),
+    ...(kind === 'selected' ? [selectionFeature<Record<string, unknown>>({ multiple })] : []),
     ...(kind === 'checked'
-      ? [checkFeature<TreeDataNode<string, string>>({ mode: strict ? 'strict' : 'cascade' })]
+      ? [checkFeature<Record<string, unknown>>({ mode: strict ? 'strict' : 'cascade' })]
       : []),
   ])
   const options = {

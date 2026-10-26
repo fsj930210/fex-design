@@ -15,15 +15,6 @@ interface TreeNodeCapabilities {
   droppable?: boolean | undefined
 }
 
-/** Default input schema. Custom schemas continue to use fieldNames. */
-export interface TreeDataNode<TKey extends TreeKey = TreeKey, TTitle = unknown>
-  extends TreeNodeData, TreeNodeCapabilities {
-  key: TKey
-  title?: TTitle
-  children?: readonly TreeDataNode<TKey, TTitle>[] | undefined
-  isLeaf?: boolean | undefined
-}
-
 export interface TreeFieldNames {
   key?: string | undefined
   title?: string | undefined
@@ -125,17 +116,10 @@ export interface TreeOptions<TNode extends TreeNodeData> extends TreeNodeCapabil
   focusedKey?: TreeKey | null | undefined
   defaultFocusedKey?: TreeKey | null | undefined
   onFocusedKeyChange?: ((key: TreeKey | null) => void) | undefined
-
-  onTreeDataChange?:
-    | ((treeData: readonly TNode[], mutation: TreeMutationResult) => void)
-    | undefined
 }
 
 export interface TreeAsyncLoaderOptions<TNode extends TreeNodeData> {
-  loadChildren: (
-    item: TreeNode<TNode>,
-    context: { signal: AbortSignal },
-  ) => Promise<readonly TNode[]>
+  loadChildren: (item: TreeNode<TNode>, context: { signal: AbortSignal }) => Promise<void>
   onLoadError?: (error: unknown, key: TreeKey) => void
 }
 
@@ -147,26 +131,6 @@ export interface TreeSnapshot<TNode extends TreeNodeData> {
   focusedKey: TreeKey | null
   items: ReadonlyMap<TreeKey, TreeNode<TNode>>
   visibleItems: readonly TreeVisibleItem<TNode>[]
-}
-
-export interface TreeInsertInput<TNode extends TreeNodeData> {
-  parentKey: TreeKey | null
-  node: TNode
-  index?: number
-}
-
-export interface TreeMoveInput {
-  sourceKey: TreeKey
-  parentKey: TreeKey | null
-  index: number
-}
-
-export interface TreeMutationResult {
-  ok: boolean
-  type: 'insert' | 'update' | 'remove' | 'move' | 'replace-children'
-  changedKeys: readonly TreeKey[]
-  removedKeys?: readonly TreeKey[]
-  reason?: string
 }
 
 export interface TreeSearchSubtreeOptions<TNode extends TreeNodeData> {
@@ -187,12 +151,6 @@ export interface TreeController<TNode extends TreeNodeData> {
   hasFeature(id: string): boolean
   getFeature<TApi>(id: string): TApi | undefined
   updateOptions(options: Partial<TreeOptions<TNode>>): void
-
-  updateNode(key: TreeKey, patch: Partial<TNode> | ((node: TNode) => TNode)): TreeMutationResult
-  insertNode(input: TreeInsertInput<TNode>): TreeMutationResult
-  removeNode(key: TreeKey): TreeMutationResult
-  moveNode(input: TreeMoveInput): TreeMutationResult
-  replaceChildren(parentKey: TreeKey | null, children: readonly TNode[]): TreeMutationResult
 
   getItem(key: TreeKey): TreeNode<TNode> | undefined
   getPath(key: TreeKey): TreeKey[]

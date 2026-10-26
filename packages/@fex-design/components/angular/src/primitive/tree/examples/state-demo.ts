@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -28,7 +27,7 @@ import { treeDemoData } from './_data/tree-demo'
   templateUrl: './state-demo.html',
 })
 export class StateDemo implements OnInit {
-  readonly data = input<readonly TreeDataNode<string, string>[]>(treeDemoData)
+  readonly data = input<readonly Record<string, unknown>[]>(treeDemoData)
   readonly kind = input<'expanded' | 'selected' | 'checked'>('selected')
   readonly controlled = input(false)
   readonly multiple = input(false)
@@ -44,13 +43,13 @@ export class StateDemo implements OnInit {
   readonly options = computed(() => ({
     treeData: this.data(),
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
       ...(this.kind() === 'selected'
-        ? [selectionFeature<TreeDataNode<string, string>>({ multiple: this.multiple() })]
+        ? [selectionFeature<Record<string, unknown>>({ multiple: this.multiple() })]
         : []),
       ...(this.kind() === 'checked'
         ? [
-            checkFeature<TreeDataNode<string, string>>({
+            checkFeature<Record<string, unknown>>({
               mode: this.strict() ? 'strict' : 'cascade',
             }),
           ]

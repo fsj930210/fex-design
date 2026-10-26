@@ -7,7 +7,6 @@
     TreeTitle,
     expansionFeature,
     focusFeature,
-    type TreeDataNode,
   } from "@fex-design/svelte/primitive/tree";
   import { Button } from "@fex-design/svelte/primitive/button";
   import { treeDemoData } from "./_data/tree-demo";
@@ -18,8 +17,8 @@
   const options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
-      focusFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
+      focusFeature<Record<string, unknown>>(),
     ],
   };
   function locate() {

@@ -24,7 +24,7 @@ export interface CreateAnchorOptions {
   orientation?: () => AnchorOrientation
   container?: () => Window | HTMLElement | null | undefined
   targetOffset?: () => number
-  threshold?: () => number
+  threshold?: () => number | undefined
   behavior?: () => ScrollBehavior
   onChange?: (keys: readonly string[], items: readonly AnchorRegisteredItem[]) => void
 }
@@ -92,14 +92,22 @@ export function createAnchor(options: CreateAnchorOptions = {}) {
     const scrollContainer = container()
     const positions = visibleItems().flatMap((item) => {
       const target = resolveAnchorTarget(item.target)
-      return target ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }] : []
+      return target
+        ? [
+            {
+              item,
+              top: getAnchorTargetTop(target, scrollContainer),
+              targetOffset: item.targetOffset ?? options.targetOffset?.() ?? 0,
+            },
+          ]
+        : []
     })
     change(
       getAnchorActiveKeys({
         positions,
         scrollTop: getAnchorScrollTop(scrollContainer),
         viewportHeight: getAnchorViewportHeight(scrollContainer),
-        threshold: options.threshold?.() ?? 16,
+        threshold: options.threshold?.(),
         mode: options.activeMode?.() ?? 'current',
         scrolledToEnd: isAnchorScrolledToEnd(scrollContainer),
       }),

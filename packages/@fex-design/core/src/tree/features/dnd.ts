@@ -1,9 +1,9 @@
+import { isTreeAncestor } from '../tree-index'
 import type { Point, Rect } from '../../interactions/types'
 import { createStore } from '../../store/create-store'
 import type { StoreListener } from '../../store/create-store'
 import type { TreeFeatureRegistration } from '../feature-types'
-import type { TreeNode, TreeKey, TreeMoveInput, TreeMutationResult, TreeNodeData } from '../types'
-import type { ExpansionFeatureApi } from './expansion'
+import type { TreeNode, TreeKey, TreeNodeData } from '../types'
 
 export type TreeDropPosition = 'inside' | 'after'
 
@@ -49,7 +49,6 @@ export interface DndFeatureApi {
   subscribeActiveIntent(listener: StoreListener): () => void
   setActiveIntent(intent: TreeDropIntent | null): void
   clearActiveIntent(targetKey: TreeKey): void
-  drop(intent: TreeDropIntent): TreeMutationResult
 }
 
 function getSubtreeDepth(
@@ -59,14 +58,6 @@ function getSubtreeDepth(
   const children = getChildrenKeys(key)
   if (children.length === 0) return 0
   return 1 + Math.max(...children.map((childKey) => getSubtreeDepth(childKey, getChildrenKeys)))
-}
-
-function toMoveInput(intent: TreeDropIntent): TreeMoveInput {
-  return {
-    sourceKey: intent.sourceKey,
-    parentKey: intent.parentKey,
-    index: intent.index,
-  }
 }
 
 export function dndFeature<TNode extends TreeNodeData>({
@@ -131,10 +122,7 @@ export function dndFeature<TNode extends TreeNodeData>({
           if (parentKey !== null && context.getItem(parentKey)?.droppable === false)
             return invalidate('The destination parent cannot receive drops.')
           if (source.key === target.key) return invalidate('Cannot drop onto itself.')
-          if (
-            parentKey === source.key ||
-            (parentKey !== null && context.getDescendantKeys(source.key).includes(parentKey))
-          ) {
+          if (isTreeAncestor(source.key, parentKey, context.getItem)) {
             return invalidate('Cannot drop into its own descendant.')
           }
           if (!allowDropInsideLeaf && position === 'inside' && target.isLeaf) {
@@ -179,29 +167,6 @@ export function dndFeature<TNode extends TreeNodeData>({
             if (activeIntentStore.getSnapshot()?.targetKey === targetKey) {
               activeIntentStore.setSnapshot(null)
             }
-          },
-          drop: (intent) => {
-            const current = resolve(intent)
-            if (!current?.valid)
-              return {
-                ok: false,
-                type: 'move',
-                changedKeys: [],
-                reason: current?.reason ?? 'Drop target is no longer available.',
-              }
-            if (!intent.valid) {
-              return {
-                ok: false,
-                type: 'move',
-                changedKeys: [],
-                reason: intent.reason ?? 'Drop was rejected.',
-              }
-            }
-            const result = context.moveNode(toMoveInput(current))
-            if (result.ok && current.position === 'inside') {
-              context.getFeature<ExpansionFeatureApi>('expansion')?.expand(current.targetKey)
-            }
-            return result
           },
         } satisfies DndFeatureApi
       },

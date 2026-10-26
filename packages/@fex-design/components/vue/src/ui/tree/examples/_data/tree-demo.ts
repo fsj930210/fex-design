@@ -1,8 +1,5 @@
-import type { TreeDataNode } from '@fex-design/vue/ui/tree'
-
-export const treeDemoData: readonly TreeDataNode<string, string>[] = Array.from(
-  { length: 2 },
-  (_, rootIndex) => ({
+function createTreeDemoData() {
+  return Array.from({ length: 2 }, (_, rootIndex) => ({
     key: `root-${rootIndex + 1}`,
     title: `Department ${rootIndex + 1}`,
     children: Array.from({ length: 3 }, (_, groupIndex) => ({
@@ -13,8 +10,10 @@ export const treeDemoData: readonly TreeDataNode<string, string>[] = Array.from(
         title: `Item ${rootIndex + 1}.${groupIndex + 1}.${leafIndex + 1}`,
       })),
     })),
-  }),
-)
+  }))
+}
+
+export const treeDemoData: readonly Record<string, unknown>[] = createTreeDemoData()
 
 export interface OrganizationTreeNode extends Record<string, unknown> {
   id: string
@@ -50,7 +49,7 @@ export const organizationTreeData: readonly OrganizationTreeNode[] = [
   },
 ]
 
-export const treeCheckDemoData: readonly TreeDataNode<string, string>[] = treeDemoData.map(
+export const treeCheckDemoData: readonly Record<string, unknown>[] = createTreeDemoData().map(
   (root) =>
     root.key !== 'root-1'
       ? root
@@ -77,31 +76,32 @@ export const treeCheckDemoData: readonly TreeDataNode<string, string>[] = treeDe
         },
 )
 
-export const treeDndDemoData: readonly TreeDataNode<string, string>[] = treeDemoData.map((root) =>
-  root.key !== 'root-1'
-    ? root
-    : {
-        ...root,
-        children:
-          root.children?.map((group) =>
-            group.key !== 'root-1-group-1'
-              ? group
-              : {
-                  ...group,
-                  children:
-                    group.children?.map((item) =>
-                      item.key === 'root-1-group-1-item-2'
-                        ? { ...item, title: item.title + '（不可拖动）', draggable: false }
-                        : item.key === 'root-1-group-1-item-3'
-                          ? { ...item, title: item.title + '（不可放置）', droppable: false }
-                          : item,
-                    ) ?? [],
-                },
-          ) ?? [],
-      },
+export const treeDndDemoData: readonly Record<string, unknown>[] = createTreeDemoData().map(
+  (root) =>
+    root.key !== 'root-1'
+      ? root
+      : {
+          ...root,
+          children:
+            root.children?.map((group) =>
+              group.key !== 'root-1-group-1'
+                ? group
+                : {
+                    ...group,
+                    children:
+                      group.children?.map((item) =>
+                        item.key === 'root-1-group-1-item-2'
+                          ? { ...item, title: item.title + '（不可拖动）', draggable: false }
+                          : item.key === 'root-1-group-1-item-3'
+                            ? { ...item, title: item.title + '（不可放置）', droppable: false }
+                            : item,
+                      ) ?? [],
+                  },
+            ) ?? [],
+        },
 )
 
-export const treeSelectionDemoData: readonly TreeDataNode<string, string>[] = treeDemoData.map(
+export const treeSelectionDemoData: readonly Record<string, unknown>[] = createTreeDemoData().map(
   (root) =>
     root.key !== 'root-1'
       ? root

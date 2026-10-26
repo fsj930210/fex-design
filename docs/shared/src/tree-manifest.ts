@@ -21,7 +21,18 @@ export const treeExamples = {
     },
     { id: 'search', title: '搜索', description: '同步过滤与异步搜索场景。', height: 720 },
     { id: 'async-load', title: '异步加载', description: '展开节点加载子节点。', height: 360 },
-    { id: 'dnd', title: '拖拽', description: '拖动节点并显示放置结果。', height: 360 },
+    {
+      id: 'crud',
+      title: '节点增删改',
+      description: '调用模拟接口后重新获取 treeData；双击编辑与删除由示例实现。',
+      height: 460,
+    },
+    {
+      id: 'dnd',
+      title: '拖拽',
+      description: '处理放置意图，调用接口后更新外部 treeData。',
+      height: 360,
+    },
     {
       id: 'custom-render',
       title: '自定义渲染',
@@ -79,7 +90,18 @@ export const treeExamples = {
     },
     { id: 'search', title: '搜索', description: '同步过滤与异步搜索场景。', height: 720 },
     { id: 'async-load', title: '异步加载', description: '展开节点加载子节点。', height: 360 },
-    { id: 'dnd', title: '拖拽', description: '拖动节点并显示放置结果。', height: 360 },
+    {
+      id: 'crud',
+      title: '节点增删改',
+      description: '调用模拟接口后重新获取 treeData；双击编辑与删除由示例实现。',
+      height: 460,
+    },
+    {
+      id: 'dnd',
+      title: '拖拽',
+      description: '处理放置意图，调用接口后更新外部 treeData。',
+      height: 360,
+    },
     {
       id: 'custom-render',
       title: '自定义渲染',

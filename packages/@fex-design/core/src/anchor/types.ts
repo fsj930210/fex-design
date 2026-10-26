@@ -39,6 +39,7 @@ export interface AnchorFlatItem<TTitle = unknown> {
 export interface AnchorTargetPosition<TItem extends { key: string } = { key: string }> {
   item: TItem
   top: number
+  targetOffset?: number | undefined
 }
 
 export interface AnchorActiveGroup {

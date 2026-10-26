@@ -82,7 +82,6 @@ export class TreeDndItem<TNode extends TreeNodeData = TreeNodeData> implements O
         this.updateIntent(null)
         const item = this.item.item()
         if (value?.valid && item) {
-          feature?.drop(value)
           this.emit('drop', {
             item,
             targetItem: item,

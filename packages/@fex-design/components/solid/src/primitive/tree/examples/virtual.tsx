@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/primitive/tree'
 import {
   TreeRoot,
   TreeVirtualViewport,
@@ -20,8 +19,8 @@ export default function Example() {
     treeData: virtualTreeDemoData,
     defaultExpandedKeys: virtualTreeExpandedKeys,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
-      focusFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
+      focusFeature<Record<string, unknown>>(),
     ],
   }
   let viewport: { scrollTo(key: string, options?: { reveal?: boolean }): boolean } | undefined

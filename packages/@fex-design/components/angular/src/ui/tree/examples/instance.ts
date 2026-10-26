@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core'
-import { Tree, type TreeDataNode } from '@fex-design/angular/ui/tree'
+import { Tree } from '@fex-design/angular/ui/tree'
 import { Button } from '@fex-design/angular/ui/button'
 import { treeDemoData } from './_data/tree-demo'
 type Action = 'expand' | 'scroll' | 'select' | 'check' | 'path' | 'reset'
@@ -11,7 +11,7 @@ type Action = 'expand' | 'scroll' | 'select' | 'check' | 'path' | 'reset'
   templateUrl: './instance.html',
 })
 export class TreeInstanceExample {
-  readonly tree = viewChild<Tree<TreeDataNode<string, string>>>(Tree)
+  readonly tree = viewChild<Tree<Record<string, unknown>>>(Tree)
   readonly data = treeDemoData
   readonly message = signal('点击按钮调用 Tree 实例方法')
   readonly selected = signal<readonly (string | number)[]>([])

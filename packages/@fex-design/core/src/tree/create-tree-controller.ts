@@ -1,4 +1,4 @@
-import { createTreeMutations } from './create-tree-mutations'
+import { createTreePublisher } from './create-tree-publisher'
 import {
   buildTreeIndex,
   buildVisibleTreeItems,
@@ -16,7 +16,7 @@ import type { TreeController, TreeKey, TreeNodeData, TreeOptions, TreeSnapshot }
 
 /**
  * Owns the normalized tree index, snapshots, subscriptions, visible projection,
- * and framework-independent immutable tree-data mutations.
+ * while source data is owned exclusively by the caller.
  * Optional behavior is installed by feature modules so unused algorithms remain tree-shakeable.
  */
 export function createTreeController<TNode extends TreeNodeData>(
@@ -29,8 +29,6 @@ export function createTreeController<TNode extends TreeNodeData>(
     childrenByKey: new Map(),
     parentByKey: new Map(),
   }
-  const nodeListeners = new Map<TreeKey, Set<() => void>>()
-  const visibleListeners = new Set<() => void>()
 
   const getFieldNames = () => resolveTreeFieldNames(options)
 
@@ -84,23 +82,7 @@ export function createTreeController<TNode extends TreeNodeData>(
     return store.getSnapshot()
   }
 
-  function notifyNodes(keys: readonly TreeKey[], visibleChanged = false) {
-    for (const key of keys) {
-      for (const listener of nodeListeners.get(key) ?? []) listener()
-    }
-    if (visibleChanged) {
-      for (const listener of visibleListeners) listener()
-    }
-  }
-
-  function setSnapshot(
-    next: TreeSnapshot<TNode>,
-    changedKeys: readonly TreeKey[],
-    visibleChanged: boolean,
-  ) {
-    store.setSnapshot(next)
-    notifyNodes(changedKeys, visibleChanged)
-  }
+  const { setSnapshot, subscribeNode, subscribeVisible } = createTreePublisher(store)
 
   function commitState(
     patch: Partial<
@@ -182,42 +164,14 @@ export function createTreeController<TNode extends TreeNodeData>(
   const getDescendantKeys = (key: TreeKey) => getTreeDescendants(index, key)
   const getAncestorKeys = (key: TreeKey) => getTreeAncestors(index, key)
 
-  const { updateNode, insertNode, removeNode, moveNode, replaceChildren } = createTreeMutations({
-    getOptions: () => options,
-    getIndex: () => index,
-    setIndex: (next) => {
-      index = next
-    },
-    getSnapshot,
-    setSnapshot,
-    buildSnapshot,
-    getFieldNames,
-    getKey,
-    getChildren,
-    getAncestorKeys,
-    getDescendantKeys,
-  })
   const controller: TreeController<TNode> = {
     getSnapshot,
     subscribe: store.subscribe,
-    subscribeNode(key, listener) {
-      const listeners = nodeListeners.get(key) ?? new Set<() => void>()
-      listeners.add(listener)
-      nodeListeners.set(key, listeners)
-      return () => listeners.delete(listener)
-    },
-    subscribeVisible(listener) {
-      visibleListeners.add(listener)
-      return () => visibleListeners.delete(listener)
-    },
+    subscribeNode,
+    subscribeVisible,
     subscribeSelector: store.subscribeSelector,
     hasFeature: (id) => featureRuntime?.has(id) ?? false,
     getFeature: (id) => featureRuntime?.get(id),
-    updateNode,
-    insertNode,
-    removeNode,
-    moveNode,
-    replaceChildren,
     updateOptions(nextOptions) {
       const previousOptions = options
       options = {
@@ -322,11 +276,6 @@ export function createTreeController<TNode extends TreeNodeData>(
     getFieldNames,
     getKey,
     getChildren,
-    updateNode,
-    insertNode,
-    removeNode,
-    moveNode,
-    replaceChildren,
   })
   featureRuntime.installAll(initialOptions.features ?? [])
 

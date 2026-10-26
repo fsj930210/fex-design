@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/primitive/tree";
-
   import {
     expansionFeature,
     TreeItem,
@@ -14,7 +12,7 @@
   const options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: expanded,
       }),
     ],

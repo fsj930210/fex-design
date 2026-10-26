@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/primitive/tree'
-
 import { computed, ref } from 'vue'
 import {
   TreeRoot,
@@ -20,7 +18,7 @@ const props = defineProps<{
   controlled: boolean
   multiple?: boolean
   strict?: boolean
-  data?: readonly TreeDataNode<string, string>[]
+  data?: readonly Record<string, unknown>[]
 }>()
 const initial = props.kind === 'expanded' ? ['root-1'] : ['root-1-group-1-item-1']
 const keys = ref<readonly (string | number)[]>(initial)
@@ -30,12 +28,12 @@ const change = (next: readonly (string | number)[]) => {
 const options = computed(() => ({
   treeData: props.data ?? treeDemoData,
   features: [
-    expansionFeature<TreeDataNode<string, string>>(),
+    expansionFeature<Record<string, unknown>>(),
     ...(props.kind === 'selected'
-      ? [selectionFeature<TreeDataNode<string, string>>({ multiple: props.multiple ?? false })]
+      ? [selectionFeature<Record<string, unknown>>({ multiple: props.multiple ?? false })]
       : []),
     ...(props.kind === 'checked'
-      ? [checkFeature<TreeDataNode<string, string>>({ mode: props.strict ? 'strict' : 'cascade' })]
+      ? [checkFeature<Record<string, unknown>>({ mode: props.strict ? 'strict' : 'cascade' })]
       : []),
   ],
   ...(props.kind !== 'expanded' ? { defaultExpandedKeys: ['root-1', 'root-1-group-1'] } : {}),

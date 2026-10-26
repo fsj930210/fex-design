@@ -75,7 +75,7 @@ import { createTreeDndItem } from '@fex-design/solid/primitive/tree/create-tree-
 
 选择默认单选；`selectionFeature({ multiple: true })` 开启多选。展开、选择、勾选、焦点、键盘、异步加载、搜索和 DnD 均是独立 feature。core 校验 feature 的依赖、冲突和重复注册。
 
-`fieldNames` 映射后端字段而不转换大树；`isLeaf` 支持基于后端元数据判定可展开性。搜索只产生过滤后的共享结构树数据，隐藏策略和高亮由调用方渲染。controller 的 `updateNode`、`insertNode`、`removeNode`、`moveNode` 和 `replaceChildren` 负责不可变结构更新，并触发 `onTreeDataChange`。
+`treeData` 是调用方维护的唯一数据源。拖拽只回传放置意图；`loadChildren` 返回 `Promise<void>`，由调用方请求并写回 children。新增、修改、删除和移动由业务处理，成功后可重新获取整棵树并传入；组件不修改源数据。
 
 ## 注意事项
 

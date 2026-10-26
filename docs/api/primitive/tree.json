@@ -22,12 +22,12 @@
       "props": [
         {
           "name": "options",
-          "type": "TreeOptions<TNode>",
+          "type": "object",
           "description": "树数据、受控或初始状态、功能注册和变更回调。"
         },
         {
           "name": "controller",
-          "type": "TreeController<TNode>",
+          "type": "逻辑函数的返回值",
           "description": "可选的外部逻辑实例。"
         },
         {
@@ -97,7 +97,7 @@
         },
         {
           "name": "dndCallbacks",
-          "type": "TreeDndCallbacks<TNode>",
+          "type": "object",
           "description": "拖拽事件回调。"
         }
       ]
@@ -147,16 +147,8 @@
   ],
   "types": [
     {
-      "name": "TreeDataNode",
-      "description": "默认输入节点结构，包含 key、title、children、isLeaf 及节点能力。"
-    },
-    {
       "name": "TreeNode",
       "description": "解析后的只读节点，data 保存原始输入数据，包含父子关系与节点能力。"
-    },
-    {
-      "name": "TreeOptions",
-      "description": "Primitive 逻辑配置，支持受控 keys、defaultKeys、features、fieldNames、isLeaf 和异步加载回调。"
     }
   ],
   "examples": [
@@ -191,9 +183,14 @@
       "description": "展开节点加载子节点。"
     },
     {
+      "id": "crud",
+      "title": "节点增删改",
+      "description": "调用方提交模拟接口，再重新获取并更新 treeData；双击编辑由示例实现。"
+    },
+    {
       "id": "dnd",
       "title": "拖拽",
-      "description": "拖动节点并显示放置结果。"
+      "description": "回调提供放置意图，调用方更新接口并重新获取 treeData。"
     },
     {
       "id": "custom-render",
@@ -262,6 +259,7 @@
     "组件与功能从所属框架公开 primitive/tree 入口导入。",
     "Primitive 自带默认样式，通过部件宿主原生 class/style 进行定制。",
     "isLeaf(node) 判断叶子节点，节点显式 isLeaf 配置优先；node.data 访问原始数据。",
-    "useTree 及各框架等价逻辑适配可独立于部件消费。"
+    "useTree 及各框架等价逻辑适配可独立于部件消费。",
+    "treeData 始终由调用方维护；拖拽仅回传意图，异步加载需由调用方写回数据，组件不执行数据 CRUD。"
   ]
 }

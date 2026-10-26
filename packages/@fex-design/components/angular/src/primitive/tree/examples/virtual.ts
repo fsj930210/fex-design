@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core'
 import {
   TreeRoot,
@@ -24,12 +23,12 @@ import {
   templateUrl: './virtual.html',
 })
 export class PrimitiveTreeVirtualExample {
-  readonly options = {
+  readonly options: NonNullable<ReturnType<TreeRoot<Record<string, unknown>>['options']>> = {
     treeData: virtualTreeDemoData,
     defaultExpandedKeys: virtualTreeExpandedKeys,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
-      focusFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
+      focusFeature<Record<string, unknown>>(),
     ],
   }
   readonly viewport = viewChild(TreeVirtualViewport)

@@ -16,7 +16,7 @@ withDefaults(
     orientation?: 'vertical' | 'horizontal'
     container?: Window | HTMLElement | (() => Window | HTMLElement)
     targetOffset?: number
-    threshold?: number
+    threshold?: number | undefined
     behavior?: ScrollBehavior
     classNames?: AnchorClassNames
     styles?: AnchorStyles<StyleValue>
@@ -26,7 +26,6 @@ withDefaults(
     activeMode: 'current',
     orientation: 'vertical',
     targetOffset: 0,
-    threshold: 16,
     behavior: 'smooth',
     classNames: () => ({}),
     styles: () => ({}),

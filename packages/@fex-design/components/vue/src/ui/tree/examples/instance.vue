@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Tree, type TreeInstance, type TreeDataNode } from '@fex-design/vue/ui/tree'
+import { Tree, type TreeInstance } from '@fex-design/vue/ui/tree'
 import { Button } from '@fex-design/vue/ui/button'
 import { treeDemoData } from './_data/tree-demo'
 type Action = 'expand' | 'scroll' | 'select' | 'check' | 'path' | 'reset'
-const tree = ref<TreeInstance<TreeDataNode<string, string>>>()
+const tree = ref<TreeInstance<Record<string, unknown>>>()
 const message = ref('点击按钮调用 Tree 实例方法')
 const selected = ref<readonly (string | number)[]>([])
 const checked = ref<readonly (string | number)[]>([])

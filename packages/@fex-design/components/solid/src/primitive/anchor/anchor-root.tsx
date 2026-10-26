@@ -17,7 +17,7 @@ export type AnchorRootProps = ParentProps<
     orientation?: AnchorOrientation
     container?: Window | HTMLElement | (() => Window | HTMLElement | null | undefined)
     targetOffset?: number
-    threshold?: number
+    threshold?: number | undefined
     behavior?: ScrollBehavior
     onChange?: (keys: readonly string[], items: readonly AnchorRegisteredItem[]) => void
   }
@@ -46,7 +46,7 @@ export function AnchorRoot(props: AnchorRootProps) {
     container: () =>
       typeof local.container === 'function' ? local.container() : (local.container ?? window),
     targetOffset: () => local.targetOffset ?? 0,
-    threshold: () => local.threshold ?? 16,
+    threshold: () => local.threshold,
     behavior: () => local.behavior ?? 'smooth',
     onChange: local.onChange,
   })

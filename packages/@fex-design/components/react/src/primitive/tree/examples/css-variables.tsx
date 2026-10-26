@@ -1,6 +1,5 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import type { CSSProperties } from 'react'
-import { treeDemoData } from './_data/tree-demo'
+import { treeCssDemoData } from './_data/tree-css-demo'
 import {
   TreeRoot,
   TreeViewport,
@@ -35,19 +34,13 @@ export default function CssVariablesExample() {
           <TreeRoot
             style={custom ? customStyle : undefined}
             options={{
-              treeData: treeDemoData.slice(0, 1).map((node) => ({
-                ...node,
-                children: (node.children ?? []).slice(0, 1).map((group) => ({
-                  ...group,
-                  children: (group.children ?? []).slice(0, 2),
-                })),
-              })),
+              treeData: treeCssDemoData,
               defaultSelectedKeys: ['root-1-group-1-item-1'],
               features: [
-                expansionFeature<TreeDataNode<string, string>>({
+                expansionFeature<Record<string, unknown>>({
                   defaultExpandedKeys: ['root-1', 'root-1-group-1'],
                 }),
-                selectionFeature<TreeDataNode<string, string>>(),
+                selectionFeature<Record<string, unknown>>(),
               ],
             }}
           >

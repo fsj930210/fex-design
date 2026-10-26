@@ -1,6 +1,6 @@
-import type { TreeDataNode } from '@fex-design/svelte/ui/tree'
+import { getTreeDemoChildren } from './tree-records'
 
-export const virtualTreeDemoData: readonly TreeDataNode<string, string>[] = Array.from(
+export const virtualTreeDemoData: readonly Record<string, unknown>[] = Array.from(
   { length: 100 },
   (_, root) => ({
     key: 'virtual-root-' + (root + 1),
@@ -15,9 +15,8 @@ export const virtualTreeDemoData: readonly TreeDataNode<string, string>[] = Arra
     })),
   }),
 )
-export const virtualTreeExpandedKeys = virtualTreeDemoData.flatMap((root) => [
-  root.key,
-  ...(root.children ?? []).map((group) => group.key),
-])
+export const virtualTreeExpandedKeys: readonly string[] = virtualTreeDemoData.flatMap<string>(
+  (root) => [String(root.key), ...getTreeDemoChildren(root).map((group) => String(group.key))],
+)
 export const virtualTreeTargetKey = 'virtual-root-80-group-4-item-8'
 export const virtualTreeNodeCount = 5600

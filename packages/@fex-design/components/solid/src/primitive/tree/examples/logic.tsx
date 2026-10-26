@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/primitive/tree'
 import { For, Show } from 'solid-js'
 import {
   createTree,
@@ -12,10 +11,10 @@ export default function Example() {
   const options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
-      selectionFeature<TreeDataNode<string, string>>(),
+      selectionFeature<Record<string, unknown>>(),
     ],
   }
   const tree = createTree(() => options)

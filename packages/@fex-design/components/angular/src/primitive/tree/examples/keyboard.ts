@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import {
   TreeRoot,
@@ -28,13 +27,13 @@ export class PrimitiveTreeKeyboardExample {
   readonly options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
-      focusFeature<TreeDataNode<string, string>>(),
-      keyboardFeature<TreeDataNode<string, string>>(),
-      selectionFeature<TreeDataNode<string, string>>(),
-      checkFeature<TreeDataNode<string, string>>(),
+      focusFeature<Record<string, unknown>>(),
+      keyboardFeature<Record<string, unknown>>(),
+      selectionFeature<Record<string, unknown>>(),
+      checkFeature<Record<string, unknown>>(),
     ],
     onFocusedKeyChange: (key: string | number | null) => this.focused.set(key),
     onSelectedKeysChange: (keys: readonly (string | number)[]) => this.selected.set(keys),

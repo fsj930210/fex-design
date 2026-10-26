@@ -104,8 +104,8 @@ controller option to enable multiple selection.
 
 ## Controller API
 
-The controller always owns data indexing, snapshots, subscriptions, visible projection, and
-immutable tree-data mutations. Structural mutation is not a feature.
+The controller owns derived indexing, interaction snapshots, subscriptions, and visible projection.
+Source tree data remains exclusively owned by the caller.
 
 | Method                                                                   | Description                                                                  |
 | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
@@ -114,19 +114,11 @@ immutable tree-data mutations. Structural mutation is not a feature.
 | `subscribeNode(key, listener)`                                           | Subscribes to one node row.                                                  |
 | `subscribeVisible(listener)`                                             | Subscribes to visible-list changes.                                          |
 | `updateOptions(nextOptions)`                                             | Updates data, field mapping, callbacks, and controlled state.                |
-| `updateNode(key, patch)`                                                 | Replaces only the changed node and its immutable ancestor path.              |
-| `insertNode(input)`                                                      | Inserts a node under a parent or at the root.                                |
-| `removeNode(key)`                                                        | Removes a node and its descendants.                                          |
-| `moveNode(input)`                                                        | Moves a node to an exact parent and child index.                             |
-| `replaceChildren(parentKey, children)`                                   | Replaces root data or one node's children.                                   |
 | `getVisibleItems()`                                                      | Returns the flattened expanded projection without a virtual-list dependency. |
 | `getVisibleCount()` / `getVisibleItemAt(index)` / `getVisibleIndex(key)` | Index-oriented virtualization helpers.                                       |
 | `hasFeature(id)` / `getFeature(id)`                                      | Reads an explicitly installed feature API.                                   |
 
-Mutation methods return `TreeMutationResult` and call `onTreeDataChange(nextTreeData, result)`.
-`updateNode` keeps the normalized index and visible list structurally shared when the node key and
-children reference do not change. Insert, remove, move, and child replacement rebuild the affected
-structural projection because parent/depth/index relationships may change.
+Source tree data belongs exclusively to the caller. The controller never inserts, updates, removes, or moves source nodes. Drag callbacks describe the drop intent. A load callback returns Promise<void> and updates the caller's treeData; the component only tracks loading and error state. After a successful server mutation, fetch the tree again and pass the result as treeData.
 
 ## Optional features
 
@@ -164,8 +156,8 @@ that offset for the insertion line, including an indented bottom line for `insid
 `allowDropInsideLeaf` defaults to `true`, matching structural editing: a leaf can become a parent.
 When `isLeaf` reads backend metadata, the application must make that resolver acknowledge newly
 inserted children—for example `(node.children?.length ?? node.childCount) === 0`—because core cannot
-guess how to mutate an arbitrary backend leaf marker. A successful inside drop expands the target
-when the expansion feature is installed.
+guess how to mutate an arbitrary backend leaf marker. After the caller accepts an inside drop and supplies updated data, it can expand the target
+through controlled expandedKeys or an instance method.
 
 When composing a draggable row, merge `dnd.itemProps.style` with `TreeItem`'s `itemProps.style` so
 the row keeps both its size/depth styles and the indicator position variable.

@@ -22,7 +22,7 @@
     container?:
       Window | HTMLElement | (() => Window | HTMLElement | null | undefined);
     targetOffset?: number;
-    threshold?: number;
+    threshold?: number | undefined;
     behavior?: ScrollBehavior;
     onchange?: (
       keys: readonly string[],
@@ -40,7 +40,7 @@
     orientation = "vertical",
     container,
     targetOffset = 0,
-    threshold = 16,
+    threshold,
     behavior = "smooth",
     onchange,
     onitemclick,

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/primitive/tree'
-
 import { ref } from 'vue'
 import {
   TreeRoot,
@@ -21,10 +19,7 @@ import {
 const options = {
   treeData: virtualTreeDemoData,
   defaultExpandedKeys: virtualTreeExpandedKeys,
-  features: [
-    expansionFeature<TreeDataNode<string, string>>(),
-    focusFeature<TreeDataNode<string, string>>(),
-  ],
+  features: [expansionFeature<Record<string, unknown>>(), focusFeature<Record<string, unknown>>()],
 }
 const viewport = ref<{ scrollTo(key: string, options?: { reveal?: boolean }): boolean }>()
 </script>

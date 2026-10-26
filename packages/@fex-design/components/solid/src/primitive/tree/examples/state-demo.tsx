@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/primitive/tree'
 import { createMemo, createSignal, Show } from 'solid-js'
 import {
   TreeRoot,
@@ -18,7 +17,7 @@ export function StateDemo(props: {
   controlled: boolean
   multiple?: boolean
   strict?: boolean
-  data?: readonly TreeDataNode<string, string>[]
+  data?: readonly Record<string, unknown>[]
 }) {
   const initial = props.kind === 'expanded' ? ['root-1'] : ['root-1-group-1-item-1']
   const [keys, setKeys] = createSignal<readonly (string | number)[]>(initial)
@@ -26,13 +25,13 @@ export function StateDemo(props: {
   const options = createMemo(() => ({
     treeData: props.data ?? treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
       ...(props.kind === 'selected'
-        ? [selectionFeature<TreeDataNode<string, string>>({ multiple: props.multiple ?? false })]
+        ? [selectionFeature<Record<string, unknown>>({ multiple: props.multiple ?? false })]
         : []),
       ...(props.kind === 'checked'
         ? [
-            checkFeature<TreeDataNode<string, string>>({
+            checkFeature<Record<string, unknown>>({
               mode: props.strict ? 'strict' : 'cascade',
             }),
           ]

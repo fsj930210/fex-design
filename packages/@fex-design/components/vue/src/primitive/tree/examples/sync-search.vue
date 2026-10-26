@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/primitive/tree'
-
 import { ref, computed } from 'vue'
 import {
   TreeRoot,
@@ -22,7 +20,7 @@ function search(value: string) {
   keyword.value = value
   expandedKeys.value = getTreeSearchExpandedKeys(value)
 }
-const features = [expansionFeature<TreeDataNode<string, string>>()]
+const features = [expansionFeature<Record<string, unknown>>()]
 const options = computed(() => ({
   treeData: filterTreeDemoData(keyword.value),
   expandedKeys: expandedKeys.value,

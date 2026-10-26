@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/primitive/tree";
-
   import {
     createTreeStore,
     expansionFeature,
@@ -10,10 +8,10 @@
   const { tree, snapshot, visibleItems } = createTreeStore({
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ["root-1", "root-1-group-1"],
       }),
-      selectionFeature<TreeDataNode<string, string>>(),
+      selectionFeature<Record<string, unknown>>(),
     ],
   });
   const expansion = tree.getFeature<{ toggle(key: string | number): void }>(

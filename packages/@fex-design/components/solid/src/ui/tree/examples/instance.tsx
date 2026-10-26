@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js'
-import { Tree, type TreeInstance, type TreeDataNode } from '@fex-design/solid/ui/tree'
+import { Tree, type TreeInstance } from '@fex-design/solid/ui/tree'
 import { Button } from '@fex-design/solid/ui/button'
 import { treeDemoData } from './_data/tree-demo'
 type Action = 'expand' | 'scroll' | 'select' | 'check' | 'path' | 'reset'
 export default function InstanceExample() {
-  let tree: TreeInstance<TreeDataNode<string, string>> | undefined
+  let tree: TreeInstance<Record<string, unknown>> | undefined
   const [message, setMessage] = createSignal('点击按钮调用 Tree 实例方法')
   const [selected, setSelected] = createSignal<readonly (string | number)[]>([])
   const [checked, setChecked] = createSignal<readonly (string | number)[]>([])

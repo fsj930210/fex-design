@@ -1,10 +1,8 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/ui/tree";
-
   import { Tree, type TreeInstance } from "@fex-design/svelte/ui/tree";
   import { Button } from "@fex-design/svelte/ui/button";
   import { treeDemoData } from "./_data/tree-demo";
-  let tree = $state<TreeInstance<TreeDataNode<string, string>>>();
+  let tree = $state<TreeInstance<Record<string, unknown>>>();
   let message = $state("");
   function locate() {
     const found = tree?.scrollTo("root-2-group-3-item-3", { reveal: true });

@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/ui/tree'
 import type { TreeBehaviorProps } from '@fex-design/solid/ui/tree'
 import { createMemo, createSignal, Show } from 'solid-js'
 import { Tree } from '@fex-design/solid/ui/tree'
@@ -9,12 +8,12 @@ export function StateDemo(props: {
   controlled: boolean
   multiple?: boolean
   strict?: boolean
-  data?: readonly TreeDataNode<string, string>[]
+  data?: readonly Record<string, unknown>[]
 }) {
   const initial = props.kind === 'expanded' ? ['root-1'] : ['root-1-group-1-item-1']
   const [keys, setKeys] = createSignal<readonly (string | number)[]>(initial)
   const change = (next: readonly (string | number)[]) => setKeys(next)
-  const treeProps = createMemo<TreeBehaviorProps<TreeDataNode<string, string>>>(() => ({
+  const treeProps = createMemo<TreeBehaviorProps<Record<string, unknown>>>(() => ({
     treeData: props.data ?? treeDemoData,
     multiple: props.multiple ?? false,
     checkStrict: props.strict ?? false,

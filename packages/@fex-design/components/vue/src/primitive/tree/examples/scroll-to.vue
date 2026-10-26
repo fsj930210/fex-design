@@ -8,7 +8,6 @@ import {
   TreeTitle,
   expansionFeature,
   focusFeature,
-  type TreeDataNode,
 } from '@fex-design/vue/primitive/tree'
 import { Button } from '@fex-design/vue/primitive/button'
 import { treeDemoData } from './_data/tree-demo'
@@ -16,10 +15,7 @@ const viewport = ref<{ scrollTo(key: string, options: { reveal: boolean }): bool
 const message = ref('')
 const options = {
   treeData: treeDemoData,
-  features: [
-    expansionFeature<TreeDataNode<string, string>>(),
-    focusFeature<TreeDataNode<string, string>>(),
-  ],
+  features: [expansionFeature<Record<string, unknown>>(), focusFeature<Record<string, unknown>>()],
 }
 function locate() {
   const found = viewport.value?.scrollTo('root-2-group-3-item-3', { reveal: true })

@@ -147,6 +147,7 @@
     "./icons/star": "./src/icons/star.ts",
     "./icon/star": "./src/icons/star.ts",
     "./icons/warning": "./src/icons/warning.ts",
+    "./icons/trash": "./src/icons/trash.ts",
     "./icon/warning": "./src/icons/warning.ts",
     "./directives/native-attributes": "./src/directives/native-attributes.ts",
     "./directives/listen-native-event": "./src/directives/listen-native-event.ts",

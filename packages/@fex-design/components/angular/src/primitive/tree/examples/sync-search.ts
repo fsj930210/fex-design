@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core'
 import {
   TreeRoot,
@@ -28,7 +27,7 @@ export class SyncSearch {
     this.keyword.set(value)
     this.expandedKeys.set(getTreeSearchExpandedKeys(value))
   }
-  readonly features = [expansionFeature<TreeDataNode<string, string>>()]
+  readonly features = [expansionFeature<Record<string, unknown>>()]
   readonly options = computed(() => ({
     treeData: filterTreeDemoData(this.keyword()),
     expandedKeys: this.expandedKeys(),

@@ -73,11 +73,13 @@
         inputSuffix
         [class]="inputConfig().classNames?.suffix ?? ''"
         [style]="inputConfig().styles?.suffix ?? ''"
-        >@if (suffixTemplate(); as custom) {
-        <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" /> } @else
-        if (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else {
-        <svg calendarIcon class="size-(--input-icon-size)"></svg> }</span
       >
+        @if (suffixTemplate(); as custom) {
+        <ng-container [ngTemplateOutlet]="custom" [ngTemplateOutletInjector]="injector" />
+        } @else if (isContentProvided(suffixValue())) { {{ suffixValue() }} } @else {
+        <svg calendarIcon class="size-(--input-icon-size)"></svg>
+        }
+      </span>
       @if (context().canClear) {
       <button
         type="button"

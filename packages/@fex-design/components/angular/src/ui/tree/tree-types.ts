@@ -1,4 +1,4 @@
-import type { TreeOptions, TreeDragEventContext } from '@fex-design/angular/primitive/tree'
+import type { TreeOptions, TreeDragEventContext } from './tree-internal-types'
 
 export interface TreeBehaviorProps<TNode extends Record<string, unknown>> {
   disabled?: boolean | undefined

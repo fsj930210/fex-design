@@ -1,4 +1,5 @@
-import type { TreeController, TreeKey, TreeNode } from '@fex-design/solid/primitive/tree'
+import type { TreeController } from './tree-internal-types'
+import type { TreeKey, TreeNode } from '@fex-design/solid/primitive/tree'
 
 export interface TreeScrollOptions {
   reveal?: boolean
@@ -19,11 +20,6 @@ export interface TreeInstance<TNode extends Record<string, unknown> = Record<str
   getNode(key: TreeKey): Readonly<TreeNode<TNode>> | undefined
   getPath(key: TreeKey): TreeKey[]
   getTreeData(): readonly TNode[]
-  updateNode: TreeController<TNode>['updateNode']
-  insertNode: TreeController<TNode>['insertNode']
-  removeNode: TreeController<TNode>['removeNode']
-  moveNode: TreeController<TNode>['moveNode']
-  replaceChildren: TreeController<TNode>['replaceChildren']
 }
 export interface TreeViewportInstance {
   scrollTo(key: TreeKey, options?: TreeScrollOptions): boolean
@@ -67,10 +63,5 @@ export function createTreeInstance<TNode extends Record<string, unknown>>(
     getNode: (key) => getTree().getItem(key),
     getPath: (key) => getTree().getPath(key),
     getTreeData: () => getTree().getSnapshot().treeData,
-    updateNode: (...args) => getTree().updateNode(...args),
-    insertNode: (input) => getTree().insertNode(input),
-    removeNode: (key) => getTree().removeNode(key),
-    moveNode: (input) => getTree().moveNode(input),
-    replaceChildren: (...args) => getTree().replaceChildren(...args),
   }
 }

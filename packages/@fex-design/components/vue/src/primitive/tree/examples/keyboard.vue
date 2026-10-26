@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/primitive/tree'
-
 import { ref } from 'vue'
 import {
   TreeRoot,
@@ -22,13 +20,13 @@ const focused = ref<string | number | null>(null),
 const options = {
   treeData: treeDemoData,
   features: [
-    expansionFeature<TreeDataNode<string, string>>({
+    expansionFeature<Record<string, unknown>>({
       defaultExpandedKeys: ['root-1', 'root-1-group-1'],
     }),
-    focusFeature<TreeDataNode<string, string>>(),
-    keyboardFeature<TreeDataNode<string, string>>(),
-    selectionFeature<TreeDataNode<string, string>>(),
-    checkFeature<TreeDataNode<string, string>>(),
+    focusFeature<Record<string, unknown>>(),
+    keyboardFeature<Record<string, unknown>>(),
+    selectionFeature<Record<string, unknown>>(),
+    checkFeature<Record<string, unknown>>(),
   ],
   onFocusedKeyChange: (key: string | number | null) => (focused.value = key),
   onSelectedKeysChange: (keys: readonly (string | number)[]) => (selected.value = keys),

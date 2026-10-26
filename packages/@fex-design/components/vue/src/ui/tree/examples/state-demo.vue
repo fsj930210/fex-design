@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/ui/tree'
-
 import type { TreeBehaviorProps } from '@fex-design/vue/ui/tree'
 
 import { computed, ref } from 'vue'
@@ -12,14 +10,14 @@ const props = defineProps<{
   controlled: boolean
   multiple?: boolean
   strict?: boolean
-  data?: readonly TreeDataNode<string, string>[]
+  data?: readonly Record<string, unknown>[]
 }>()
 const initial = props.kind === 'expanded' ? ['root-1'] : ['root-1-group-1-item-1']
 const keys = ref<readonly (string | number)[]>(initial)
 const change = (next: readonly (string | number)[]) => {
   keys.value = next
 }
-const treeProps = computed<TreeBehaviorProps<TreeDataNode<string, string>>>(() => ({
+const treeProps = computed<TreeBehaviorProps<Record<string, unknown>>>(() => ({
   treeData: props.data ?? treeDemoData,
   multiple: props.multiple ?? false,
   checkStrict: props.strict ?? false,

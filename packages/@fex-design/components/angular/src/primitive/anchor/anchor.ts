@@ -58,7 +58,10 @@ export class AnchorRoot {
     Window | HTMLElement | (() => Window | HTMLElement | null | undefined) | undefined
   >()
   readonly targetOffset = input(0, { transform: numberAttribute })
-  readonly threshold = input(16, { transform: numberAttribute })
+  readonly threshold = input<number | undefined, unknown>(undefined, {
+    transform: (value) =>
+      value === undefined || value === null ? undefined : numberAttribute(value),
+  })
   readonly behavior = input<ScrollBehavior>('smooth')
   readonly change = output<{
     activeKeys: readonly string[]
@@ -172,7 +175,15 @@ export class AnchorRoot {
     const container = this.resolveContainer()
     const positions = this.visibleItems().flatMap((item) => {
       const target = resolveAnchorTarget(item.target)
-      return target ? [{ item, top: getAnchorTargetTop(target, container) }] : []
+      return target
+        ? [
+            {
+              item,
+              top: getAnchorTargetTop(target, container),
+              targetOffset: item.targetOffset ?? this.targetOffset(),
+            },
+          ]
+        : []
     })
     this.setKeys(
       getAnchorActiveKeys({

@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import { StateDemo } from './state-demo'
 import { expansionFeature } from '@fex-design/react/primitive/tree'
 import {
@@ -16,7 +15,7 @@ function Basic() {
       options={{
         treeData: treeDemoData,
         features: [
-          expansionFeature<TreeDataNode<string, string>>({
+          expansionFeature<Record<string, unknown>>({
             defaultExpandedKeys: ['root-1', 'root-1-group-1'],
           }),
         ],

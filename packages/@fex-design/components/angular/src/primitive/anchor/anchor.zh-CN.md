@@ -31,18 +31,18 @@
 
 ## AnchorRoot API
 
-| 名称              | 类型                                                     | 默认值   | 说明                        |
-| ----------------- | -------------------------------------------------------- | -------- | --------------------------- |
-| activeKeys        | readonly string[]                                        | —        | 受控激活项。                |
-| defaultActiveKeys | readonly string[]                                        | []       | 非受控初始激活项。          |
-| activeMode        | current 或 progress                                      | current  | 当前项或累积进度。          |
-| orientation       | vertical 或 horizontal                                   | vertical | 排列方向。                  |
-| container         | Window、HTMLElement 或解析函数                           | window   | 滚动容器。                  |
-| targetOffset      | number                                                   | 0        | 默认滚动偏移。              |
-| threshold         | number                                                   | 16       | 从容器顶部计算的激活线。    |
-| behavior          | ScrollBehavior                                           | smooth   | 滚动行为。                  |
-| change            | 回调                                                     | —        | 返回激活 key 与已注册项目。 |
-| 原生属性          | Angular native hosts: nav, ul, li, button, div, and span | —        | 原生属性、事件与元素访问。  |
+| 名称              | 类型                                                     | 默认值            | 说明                                                                       |
+| ----------------- | -------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------- |
+| activeKeys        | readonly string[]                                        | —                 | 受控激活项。                                                               |
+| defaultActiveKeys | readonly string[]                                        | []                | 非受控初始激活项。                                                         |
+| activeMode        | current 或 progress                                      | current           | 当前项或累积进度。                                                         |
+| orientation       | vertical 或 horizontal                                   | vertical          | 排列方向。                                                                 |
+| container         | Window、HTMLElement 或解析函数                           | window            | 滚动容器。                                                                 |
+| targetOffset      | number                                                   | 0                 | 默认滚动偏移。                                                             |
+| threshold         | number                                                   | 跟随 targetOffset | 可选激活线，默认跟随目标滚动偏移；当前章节保持高亮直到下一标题越过激活线。 |
+| behavior          | ScrollBehavior                                           | smooth            | 滚动行为。                                                                 |
+| change            | 回调                                                     | —                 | 返回激活 key 与已注册项目。                                                |
+| 原生属性          | Angular native hosts: nav, ul, li, button, div, and span | —                 | 原生属性、事件与元素访问。                                                 |
 
 ## AnchorItem API
 

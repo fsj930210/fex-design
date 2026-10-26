@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/ui/tree'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,7 +25,7 @@ import {
 })
 export class TreeAsyncSearchExample {
   readonly filterRemote = () => true
-  readonly treeData = signal<readonly TreeDataNode<string, string>[]>([])
+  readonly treeData = signal<readonly Record<string, unknown>[]>([])
   readonly matches = signal<TreeSearchMatch[]>([])
   readonly selected = signal<string | undefined>(undefined)
   readonly path = signal<TreeAncestorResult | undefined>(undefined)
@@ -41,7 +40,6 @@ export class TreeAsyncSearchExample {
     loadChildren: async (item: { key: string | number }) => {
       const children = await loadRemoteTree(String(item.key))
       this.treeData.update((current) => updateRemoteChildren(current, String(item.key), children))
-      return children
     },
   }))
   readonly pathProps = computed(() => ({

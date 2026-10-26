@@ -1,9 +1,10 @@
 <script setup lang="ts" generic="TNode extends Record<string, unknown>">
+import type { TreeController, TreeVisibleItem } from './tree-internal-types'
 import type { TreeBehaviorProps } from './tree-types'
 import { createTreeSetup } from './tree-setup'
 import { createTreeInstance } from './tree-instance'
 import { useTree } from '@fex-design/vue/primitive/tree'
-import type { TreeController, TreeVisibleItem } from '@fex-design/vue/primitive/tree'
+
 import {
   TreeCheckbox,
   TreeItem,
@@ -130,7 +131,7 @@ defineExpose(
           :ref="state.setItemRef"
           v-bind="state.itemProps"
           @click="
-            state.itemProps.onClick?.($event)
+            state.itemProps.onClick?.($event);
             props.onItemClick?.($event, item)
           "
           @dblclick="props.onItemDoubleClick?.($event, item)"
@@ -177,7 +178,7 @@ defineExpose(
           :ref="state.setItemRef"
           v-bind="state.itemProps"
           @click="
-            state.itemProps.onClick?.($event)
+            state.itemProps.onClick?.($event);
             props.onItemClick?.($event, item)
           "
           @dblclick="props.onItemDoubleClick?.($event, item)"

@@ -15,11 +15,11 @@
     {
       "name": "treeData",
       "type": "readonly TNode[]",
-      "description": "树节点数据；默认字段为 key、title、children。"
+      "description": "唯一树数据源，由调用方维护；组件只根据输入派生索引和展示，不修改节点数据。"
     },
     {
       "name": "fieldNames",
-      "type": "TreeFieldNames",
+      "type": "{ key?: string; title?: string; children?: string; isLeaf?: string; disabled?: string; selectable?: string; checkable?: string; disableCheckbox?: string; draggable?: string; droppable?: string }",
       "description": "映射 key、title、children、isLeaf 及节点能力字段。"
     },
     {
@@ -71,8 +71,8 @@
     },
     {
       "name": "loadChildren",
-      "type": "(node: TreeNode<TNode>) => Promise<readonly TNode[]>",
-      "description": "展开时按需加载子节点。"
+      "type": "(node: TreeNode<TNode>, context: { signal: AbortSignal }) => Promise<void>",
+      "description": "调用方请求子节点并更新自己的 treeData；Promise 表示加载过程，组件不接收或合并返回数据。"
     },
     {
       "name": "disabled",
@@ -148,7 +148,7 @@
     },
     {
       "name": "renderItem",
-      "type": "(item: TreeVisibleItem<TNode>, tree: TreeController<TNode>) => content",
+      "type": "(node: TreeNode<TNode>, tree) => content",
       "description": "自定义完整节点行内容；Vue 使用 renderItem 作用域插槽，Angular 使用 ng-template。"
     },
     {
@@ -224,7 +224,7 @@
       "parameters": [
         {
           "name": "context",
-          "type": "TreeDragEventContext<TNode>"
+          "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
         }
       ],
       "description": "拖拽开始。"
@@ -234,7 +234,7 @@
       "parameters": [
         {
           "name": "context",
-          "type": "TreeDragEventContext<TNode>"
+          "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
         }
       ],
       "description": "进入放置目标。"
@@ -244,7 +244,7 @@
       "parameters": [
         {
           "name": "context",
-          "type": "TreeDragEventContext<TNode>"
+          "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
         }
       ],
       "description": "在放置目标上移动。"
@@ -254,7 +254,7 @@
       "parameters": [
         {
           "name": "context",
-          "type": "TreeDragEventContext<TNode>"
+          "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
         }
       ],
       "description": "离开放置目标。"
@@ -264,17 +264,17 @@
       "parameters": [
         {
           "name": "context",
-          "type": "TreeDragEventContext<TNode>"
+          "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
         }
       ],
-      "description": "放置节点；通过 intent、sourceItem 和 targetItem 获取移动信息。"
+      "description": "返回源节点、目标节点及放置意图；调用方处理接口和 treeData 更新，组件不移动数据。"
     },
     {
       "name": "onDragEnd",
       "parameters": [
         {
           "name": "context",
-          "type": "TreeDragEventContext<TNode>"
+          "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
         }
       ],
       "description": "拖拽结束。"
@@ -288,7 +288,7 @@
         },
         {
           "name": "item",
-          "type": "TreeVisibleItem<TNode>"
+          "type": "TreeNode<TNode>"
         }
       ],
       "description": "点击节点。"
@@ -302,7 +302,7 @@
         },
         {
           "name": "item",
-          "type": "TreeVisibleItem<TNode>"
+          "type": "TreeNode<TNode>"
         }
       ],
       "description": "双击节点。"
@@ -316,7 +316,7 @@
         },
         {
           "name": "item",
-          "type": "TreeVisibleItem<TNode>"
+          "type": "TreeNode<TNode>"
         }
       ],
       "description": "节点右键事件。"
@@ -327,10 +327,11 @@
     "受控 keys 与 defaultKeys 分别提供受控和非受控用法；配置同步不会触发用户变更事件。",
     "节点显式能力字段（包括 false）优先于树级默认值，整树 disabled 始终锁定交互。",
     "disableCheckbox 和禁用节点构成父子级联的边界。",
-    "loadChildren 返回的子节点会合并到当前树中；getTreeData() 获取当前完整数据。",
-    "拖拽回调可用于持久化节点移动；getTreeData() 获取移动后的数据。",
+    "loadChildren 仅表示加载过程；调用方更新 treeData，组件不合并返回值。",
+    "拖拽回调提供放置意图；调用方处理后端与 treeData 更新，getTreeData() 仅读取当前输入。",
     "原生属性保留在当前宿主，结构化样式通过 classNames 和 styles 指定。",
-    "实例方法同步调用；expand 只更新展开状态。scrollTo 只接受当前树数据中的节点，不调用 loadChildren；异步加载由加载功能独立处理。"
+    "实例方法同步调用；expand 只更新展开状态。scrollTo 只接受当前树数据中的节点，不调用 loadChildren；异步加载由加载功能独立处理。",
+    "treeData 始终由调用方维护；拖拽仅回传意图，异步加载需由调用方写回数据，组件不执行数据 CRUD。"
   ],
   "examples": [
     {
@@ -369,9 +370,14 @@
       "description": "展开节点加载子节点。"
     },
     {
+      "id": "crud",
+      "title": "节点增删改",
+      "description": "调用方提交模拟接口，再重新获取并更新 treeData；双击编辑由示例实现。"
+    },
+    {
       "id": "dnd",
       "title": "拖拽",
-      "description": "拖动节点并显示放置结果。"
+      "description": "回调提供放置意图，调用方更新接口并重新获取 treeData。"
     },
     {
       "id": "custom-render",
@@ -524,37 +530,7 @@
       "name": "getTreeData",
       "parameters": "",
       "returnType": "readonly TNode[]",
-      "description": "获取当前树数据，包含已异步加载或移动的节点。"
-    },
-    {
-      "name": "updateNode",
-      "parameters": "参见 TreeController",
-      "returnType": "TreeController<TNode>['updateNode']",
-      "description": "局部更新节点。"
-    },
-    {
-      "name": "insertNode",
-      "parameters": "参见 TreeController",
-      "returnType": "TreeController<TNode>['insertNode']",
-      "description": "插入节点。"
-    },
-    {
-      "name": "removeNode",
-      "parameters": "参见 TreeController",
-      "returnType": "TreeController<TNode>['removeNode']",
-      "description": "移除节点及后代。"
-    },
-    {
-      "name": "moveNode",
-      "parameters": "参见 TreeController",
-      "returnType": "TreeController<TNode>['moveNode']",
-      "description": "移动节点。"
-    },
-    {
-      "name": "replaceChildren",
-      "parameters": "参见 TreeController",
-      "returnType": "TreeController<TNode>['replaceChildren']",
-      "description": "替换指定节点的子节点。"
+      "description": "读取当前传入的 treeData，不包含任何内部增删改。"
     }
   ],
   "frameworks": {
@@ -605,7 +581,7 @@
           "parameters": [
             {
               "name": "context",
-              "type": "TreeDragEventContext<TNode>"
+              "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
             }
           ],
           "description": "拖拽开始。"
@@ -615,7 +591,7 @@
           "parameters": [
             {
               "name": "context",
-              "type": "TreeDragEventContext<TNode>"
+              "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
             }
           ],
           "description": "进入放置目标。"
@@ -625,7 +601,7 @@
           "parameters": [
             {
               "name": "context",
-              "type": "TreeDragEventContext<TNode>"
+              "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
             }
           ],
           "description": "在放置目标上移动。"
@@ -635,7 +611,7 @@
           "parameters": [
             {
               "name": "context",
-              "type": "TreeDragEventContext<TNode>"
+              "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
             }
           ],
           "description": "离开放置目标。"
@@ -645,7 +621,7 @@
           "parameters": [
             {
               "name": "context",
-              "type": "TreeDragEventContext<TNode>"
+              "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
             }
           ],
           "description": "放置节点；通过 intent、sourceItem 和 targetItem 获取移动信息。"
@@ -655,7 +631,7 @@
           "parameters": [
             {
               "name": "context",
-              "type": "TreeDragEventContext<TNode>"
+              "type": "{ item: TreeNode<TNode>; sourceItem?: TreeNode<TNode>; targetItem?: TreeNode<TNode>; event?: Event; intent?: { position: 'inside' | 'after'; parentKey: TreeKey | null; index: number; valid: boolean } }"
             }
           ],
           "description": "拖拽结束。"
@@ -669,7 +645,7 @@
             },
             {
               "name": "item",
-              "type": "TreeVisibleItem<TNode>"
+              "type": "TreeNode<TNode>"
             }
           ],
           "description": "点击节点。"
@@ -683,7 +659,7 @@
             },
             {
               "name": "item",
-              "type": "TreeVisibleItem<TNode>"
+              "type": "TreeNode<TNode>"
             }
           ],
           "description": "双击节点。"
@@ -697,7 +673,7 @@
             },
             {
               "name": "item",
-              "type": "TreeVisibleItem<TNode>"
+              "type": "TreeNode<TNode>"
             }
           ],
           "description": "节点右键事件。"

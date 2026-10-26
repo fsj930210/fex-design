@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/ui/tree'
 import { useSyncExternalStore } from 'react'
 import {
   useTree,
@@ -12,10 +11,10 @@ export default function TreeLogicExample() {
   const tree = useTree({
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
-      selectionFeature<TreeDataNode<string, string>>(),
+      selectionFeature<Record<string, unknown>>(),
     ],
   })
   const items = useTreeVisibleItems(tree)

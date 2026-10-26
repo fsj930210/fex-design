@@ -1,0 +1,30 @@
+<section class="grid w-full gap-space-sm">
+  <p class="text-sm text-muted-foreground">
+    双击名称编辑；Enter 或失焦保存，Escape 取消；删除节点会删除其整个子树。
+  </p>
+  <div class="flex gap-2">
+    <button button [disabled]="busy()" (click)="addRoot()">新增根节点</button>
+  </div>
+  <div class="h-64 overflow-y-auto p-1">
+    <div treeRoot [controller]="tree" [rowHeight]="40">
+      <div treeViewport>
+        <ng-template let-item let-api="tree"
+          ><div [treeItem]="item.key" [treeBlock]="true">
+            <div
+              treeCrudRow
+              class="flex min-w-0 flex-1 items-center gap-2"
+              [title]="item.title"
+              [busy]="busy()"
+              [leaf]="item.isLeaf"
+              [expanded]="api.getSnapshot().expandedKeys.includes(item.key)"
+              (toggle)="toggle(api, item.key)"
+              (save)="save(item.key, $event)"
+              (add)="addChild(item.key)"
+              (remove)="remove(item.key)"
+            ></div></div
+        ></ng-template>
+      </div>
+    </div>
+  </div>
+  <output class="text-xs text-muted-foreground" aria-live="polite">{{ message() }}</output>
+</section>

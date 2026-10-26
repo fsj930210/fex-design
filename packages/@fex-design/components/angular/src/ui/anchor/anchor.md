@@ -21,20 +21,20 @@ Recommended data-driven Anchor for quick use. The public component is Anchor; Pr
 
 ## Anchor API
 
-| Name              | Type                                                     | Default  | Description                                              |
-| ----------------- | -------------------------------------------------------- | -------- | -------------------------------------------------------- |
-| items             | readonly AnchorItemData[]                                | —        | Item data and nested children.                           |
-| activeKeys        | readonly string[]                                        | —        | Controlled active keys.                                  |
-| defaultActiveKeys | readonly string[]                                        | []       | Initial uncontrolled keys.                               |
-| activeMode        | current or progress                                      | current  | Current item or accumulated progress.                    |
-| orientation       | vertical or horizontal                                   | vertical | Layout direction.                                        |
-| container         | Window, HTMLElement, or resolver                         | window   | Scroll container.                                        |
-| targetOffset      | number                                                   | 0        | Default item scroll offset.                              |
-| threshold         | number                                                   | 16       | Activation line from the container top.                  |
-| behavior          | ScrollBehavior                                           | smooth   | Scroll behavior.                                         |
-| classNames        | partial semantic-part map                                | —        | Classes for root, list, item, link, rail, and indicator. |
-| styles            | partial semantic-part map                                | —        | Framework-native styles for the same parts.              |
-| native attributes | Angular native hosts: nav, ul, li, button, div, and span | —        | Native root attributes and element access.               |
+| Name              | Type                                                     | Default      | Description                                                                                                                               |
+| ----------------- | -------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| items             | readonly AnchorItemData[]                                | —            | Item data and nested children.                                                                                                            |
+| activeKeys        | readonly string[]                                        | —            | Controlled active keys.                                                                                                                   |
+| defaultActiveKeys | readonly string[]                                        | []           | Initial uncontrolled keys.                                                                                                                |
+| activeMode        | current or progress                                      | current      | Current item or accumulated progress.                                                                                                     |
+| orientation       | vertical or horizontal                                   | vertical     | Layout direction.                                                                                                                         |
+| container         | Window, HTMLElement, or resolver                         | window       | Scroll container.                                                                                                                         |
+| targetOffset      | number                                                   | 0            | Default item scroll offset.                                                                                                               |
+| threshold         | number                                                   | targetOffset | Optional activation line. Defaults to the target scroll offset; the current section stays active until the next heading crosses the line. |
+| behavior          | ScrollBehavior                                           | smooth       | Scroll behavior.                                                                                                                          |
+| classNames        | partial semantic-part map                                | —            | Classes for root, list, item, link, rail, and indicator.                                                                                  |
+| styles            | partial semantic-part map                                | —            | Framework-native styles for the same parts.                                                                                               |
+| native attributes | Angular native hosts: nav, ul, li, button, div, and span | —            | Native root attributes and element access.                                                                                                |
 
 ## Item data
 

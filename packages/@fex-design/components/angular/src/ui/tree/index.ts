@@ -1,3 +1,10 @@
+import type {
+  TreeController,
+  TreeDragEventContext,
+  TreeItemEventContext,
+  TreeOptions,
+  TreeVisibleItem,
+} from './tree-internal-types'
 import { ChevronDownIcon } from '@fex-design/angular/icons/chevron-down'
 import { createTreeSetup } from './tree-setup'
 import { createTreeInstance, type TreeInstance } from './tree-instance'
@@ -16,14 +23,7 @@ import {
   viewChild,
 } from '@angular/core'
 import type { AfterViewInit } from '@angular/core'
-import type {
-  TreeController,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeNode,
-  TreeOptions,
-  TreeVisibleItem,
-} from '@fex-design/angular/primitive/tree'
+import type { TreeNode } from '@fex-design/angular/primitive/tree'
 import {
   TreeRoot,
   TreeViewport,
@@ -62,141 +62,7 @@ export {
     TreeDndItem,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div
-      treeRoot
-      #treeRootRef="treeRoot"
-      #treeRootElement
-      [class]="classNames().root"
-      [style]="styles().root"
-      [options]="treeOptions()"
-      [attr.aria-disabled]="disabled() || null"
-      [indent]="indent()"
-      [rowHeight]="rowHeight()"
-    >
-      @if (virtual()) {
-        <div
-          [class]="classNames().viewport"
-          [style]="styles().viewport"
-          treeVirtualViewport
-          [height]="virtualHeight()"
-          [overscan]="virtualOverscan()"
-        >
-          <ng-template let-item>
-            <div
-              [class]="classNames().item"
-              [style]="styles().item"
-              [treeItem]="item.key"
-              #itemState="treeItem"
-              [treeDraggable]="item.draggable"
-              (drop)="handleDnd('drop', $event)"
-              (dragStart)="handleDnd('dragStart', $event)"
-              (dragEnd)="handleDnd('dragEnd', $event)"
-              (dragEnter)="handleDnd('dragEnter', $event)"
-              (dragOver)="handleDnd('dragOver', $event)"
-              (dragLeave)="handleDnd('dragLeave', $event)"
-              [treeBlock]="block()"
-              (click)="handleClick($event, item)"
-              (dblclick)="handleDoubleClick($event, item)"
-              (contextmenu)="handleContextMenu($event, item)"
-            >
-              @if (itemTemplate(); as customItem) {
-                <ng-container
-                  *ngTemplateOutlet="
-                    customItem;
-                    context: { $implicit: item, tree: treeRootRef.tree() }
-                  "
-                />
-              } @else {
-                @if (itemState.loadState() === 'loading') {
-                  <span spinner size="sm" aria-label="Loading children"></span>
-                } @else {
-                  @if (!item.isLeaf) {
-                    <button
-                      [class]="classNames().trigger"
-                      [style]="styles().trigger"
-                      [treeTrigger]="item.key"
-                    >
-                      <svg chevronDownIcon class="size-4"></svg>
-                    </button>
-                  } @else {
-                    <span aria-hidden="true" class="size-5 shrink-0"></span>
-                  }
-                }
-                @if (item.checkable) {
-                  <div
-                    [class]="classNames().checkbox"
-                    [style]="styles().checkbox"
-                    treeCheckbox
-                  ></div>
-                }
-                <span treeTitle [class]="classNames().title" [style]="styles().title">{{
-                  item.title
-                }}</span>
-              }
-            </div>
-          </ng-template>
-        </div>
-      } @else {
-        <div treeViewport [class]="classNames().viewport" [style]="styles().viewport">
-          <ng-template let-item>
-            <div
-              [class]="classNames().item"
-              [style]="styles().item"
-              [treeItem]="item.key"
-              #itemState="treeItem"
-              [treeDraggable]="item.draggable"
-              (drop)="handleDnd('drop', $event)"
-              (dragStart)="handleDnd('dragStart', $event)"
-              (dragEnd)="handleDnd('dragEnd', $event)"
-              (dragEnter)="handleDnd('dragEnter', $event)"
-              (dragOver)="handleDnd('dragOver', $event)"
-              (dragLeave)="handleDnd('dragLeave', $event)"
-              [treeBlock]="block()"
-              (click)="handleClick($event, item)"
-              (dblclick)="handleDoubleClick($event, item)"
-              (contextmenu)="handleContextMenu($event, item)"
-            >
-              @if (itemTemplate(); as customItem) {
-                <ng-container
-                  *ngTemplateOutlet="
-                    customItem;
-                    context: { $implicit: item, tree: treeRootRef.tree() }
-                  "
-                />
-              } @else {
-                @if (itemState.loadState() === 'loading') {
-                  <span spinner size="sm" aria-label="Loading children"></span>
-                } @else {
-                  @if (!item.isLeaf) {
-                    <button
-                      [class]="classNames().trigger"
-                      [style]="styles().trigger"
-                      [treeTrigger]="item.key"
-                    >
-                      <svg chevronDownIcon class="size-4"></svg>
-                    </button>
-                  } @else {
-                    <span aria-hidden="true" class="size-5 shrink-0"></span>
-                  }
-                }
-                @if (item.checkable) {
-                  <div
-                    [class]="classNames().checkbox"
-                    [style]="styles().checkbox"
-                    treeCheckbox
-                  ></div>
-                }
-                <span treeTitle [class]="classNames().title" [style]="styles().title">{{
-                  item.title
-                }}</span>
-              }
-            </div>
-          </ng-template>
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './tree.html',
 })
 export class Tree<
   TNode extends Record<string, unknown> = Record<string, unknown>,
@@ -338,21 +204,6 @@ export class Tree<
   getTreeData(...args: Parameters<TreeInstance<TNode>['getTreeData']>) {
     return this.instance.getTreeData(...args)
   }
-  updateNode(...args: Parameters<TreeInstance<TNode>['updateNode']>) {
-    return this.instance.updateNode(...args)
-  }
-  insertNode(...args: Parameters<TreeInstance<TNode>['insertNode']>) {
-    return this.instance.insertNode(...args)
-  }
-  removeNode(...args: Parameters<TreeInstance<TNode>['removeNode']>) {
-    return this.instance.removeNode(...args)
-  }
-  moveNode(...args: Parameters<TreeInstance<TNode>['moveNode']>) {
-    return this.instance.moveNode(...args)
-  }
-  replaceChildren(...args: Parameters<TreeInstance<TNode>['replaceChildren']>) {
-    return this.instance.replaceChildren(...args)
-  }
   readonly itemTemplate =
     contentChild<TemplateRef<{ $implicit: TreeVisibleItem<TNode>; tree: TreeController<TNode> }>>(
       TemplateRef,
@@ -395,15 +246,8 @@ export class Tree<
   }
 }
 export { createTreeSignals } from '@fex-design/angular/primitive/tree'
-export type {
-  TreeController,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeKey,
-  TreeOptions,
-  TreeVisibleItem,
-} from '@fex-design/angular/primitive/tree'
+export type { TreeKey } from '@fex-design/angular/primitive/tree'
 
 export type { TreeInstance, TreeScrollOptions } from './tree-instance'
 
-export type { TreeNode, TreeDataNode } from '@fex-design/angular/primitive/tree'
+export type { TreeNode } from '@fex-design/angular/primitive/tree'

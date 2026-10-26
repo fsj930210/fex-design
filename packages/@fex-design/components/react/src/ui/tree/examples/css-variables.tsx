@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { treeDemoData } from './_data/tree-demo'
+import { treeCssDemoData } from './_data/tree-css-demo'
 import { Tree } from '@fex-design/react/ui/tree'
 
 const customStyle = {
@@ -25,13 +25,7 @@ export default function CssVariablesExample() {
           </p>
           <Tree
             styles={custom ? { root: customStyle } : {}}
-            treeData={treeDemoData.slice(0, 1).map((node) => ({
-              ...node,
-              children: (node.children ?? []).slice(0, 1).map((group) => ({
-                ...group,
-                children: (group.children ?? []).slice(0, 2),
-              })),
-            }))}
+            treeData={treeCssDemoData}
             defaultSelectedKeys={['root-1-group-1-item-1']}
             defaultExpandedKeys={['root-1', 'root-1-group-1']}
           />

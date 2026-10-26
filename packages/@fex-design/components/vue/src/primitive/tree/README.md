@@ -81,7 +81,7 @@ import { useTreeDndItem } from '@fex-design/vue/primitive/tree/use-tree-dnd-item
 
 `fieldNames` 直接映射后端 key/title/children/isLeaf/disabled 字段，不转换整棵树。`isLeaf(node)` 可以覆盖字段映射，支持“当前没有 children 但仍可异步展开”的节点。
 
-搜索 feature 只返回包含命中项和祖先链的共享结构数据；是否隐藏原树、是否高亮以及 title 内容由调用方决定。结构增删改移调用 controller 的 `insertNode`、`updateNode`、`removeNode`、`moveNode`、`replaceChildren`，并通过 `onTreeDataChange` 交回不可变数据。
+`treeData` 是调用方维护的唯一数据源。拖拽只回传放置意图；`loadChildren` 返回 `Promise<void>`，由调用方请求并写回 children。新增、修改、删除和移动由业务处理，成功后可重新获取整棵树并传入；组件不修改源数据。
 
 ## 注意事项
 

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/ui/tree";
-
   import type { TreeInstance } from "@fex-design/svelte/ui/tree";
 
   import { Tree } from "@fex-design/svelte/ui/tree";
@@ -15,7 +13,7 @@
     treeData: virtualTreeDemoData,
     defaultExpandedKeys: virtualTreeExpandedKeys,
   };
-  let viewport: TreeInstance<TreeDataNode<string, string>> | undefined;
+  let viewport: TreeInstance<Record<string, unknown>> | undefined;
 </script>
 
 <section class="grid w-full gap-space-sm">

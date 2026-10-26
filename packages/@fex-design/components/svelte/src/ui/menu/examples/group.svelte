@@ -1,25 +1,15 @@
 <script lang="ts">
-  import {
-    Menu,
-    MenuContent,
-    MenuGroup,
-    MenuGroupLabel,
-    MenuItem,
-  } from "@fex-design/svelte/ui/menu";
+  import { Menu, MenuGroup, MenuItem } from '@fex-design/svelte/ui/menu'
 </script>
-
 <div class="w-full max-w-xs rounded-lg border border-border p-1">
-  <Menu layout="inline"
-    ><MenuContent aria-label="????"
-      ><MenuGroup
-        ><MenuGroupLabel>????</MenuGroupLabel><MenuItem value="overview"
-          >??</MenuItem
-        ><MenuItem value="members">??</MenuItem></MenuGroup
-      ><MenuGroup
-        ><MenuGroupLabel>??</MenuGroupLabel><MenuItem value="profile"
-          >????</MenuItem
-        ><MenuItem value="billing" disabled>??</MenuItem></MenuGroup
-      ></MenuContent
-    ></Menu
-  >
+  <Menu layout="inline" aria-label="菜单分组">
+    <MenuGroup label="工作空间">
+
+      <MenuItem value="overview">概览</MenuItem><MenuItem value="members">成员</MenuItem>
+    </MenuGroup>
+    <MenuGroup label="账户">
+
+      <MenuItem value="profile">个人资料</MenuItem><MenuItem value="billing" disabled>账单</MenuItem>
+    </MenuGroup>
+  </Menu>
 </div>

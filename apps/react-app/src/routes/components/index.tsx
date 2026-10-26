@@ -27,10 +27,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/ContextMenu'), 'ContextMenuPage'),
   },
   {
-    path: '/tree',
-    element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
-  },
-  {
     path: '/tree-select',
     element: createLazyRouteElement(() => import('../../pages/TreeSelect'), 'TreeSelectPage'),
   },

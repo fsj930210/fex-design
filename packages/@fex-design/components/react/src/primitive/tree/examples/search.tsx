@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import { useState } from 'react'
 import {
   expansionFeature,
@@ -46,7 +45,7 @@ export default function TreeSearchPrimitiveExample() {
                 treeData: filteredTree,
                 expandedKeys,
                 onExpandedKeysChange: setExpandedKeys,
-                features: [expansionFeature<TreeDataNode<string, string>>()],
+                features: [expansionFeature<Record<string, unknown>>()],
               }}
             >
               <TreeViewport>

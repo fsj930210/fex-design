@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   expansionFeature,
@@ -28,8 +27,6 @@ export class PrimitiveTreeSemanticStylesExample {
   readonly expanded = ['root-1', 'root-1-group-1']
   readonly options = {
     treeData: treeDemoData,
-    features: [
-      expansionFeature<TreeDataNode<string, string>>({ defaultExpandedKeys: this.expanded }),
-    ],
+    features: [expansionFeature<Record<string, unknown>>({ defaultExpandedKeys: this.expanded })],
   }
 }

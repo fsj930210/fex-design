@@ -1,0 +1,109 @@
+<div
+  treeRoot
+  #treeRootRef="treeRoot"
+  #treeRootElement
+  [class]="classNames().root"
+  [style]="styles().root"
+  [options]="treeOptions()"
+  [attr.aria-disabled]="disabled() || null"
+  [indent]="indent()"
+  [rowHeight]="rowHeight()"
+>
+  @if (virtual()) {
+  <div
+    [class]="classNames().viewport"
+    [style]="styles().viewport"
+    treeVirtualViewport
+    [height]="virtualHeight()"
+    [overscan]="virtualOverscan()"
+  >
+    <ng-template let-item>
+      <div
+        [class]="classNames().item"
+        [style]="styles().item"
+        [treeItem]="item.key"
+        #itemState="treeItem"
+        [treeDraggable]="item.draggable"
+        (drop)="handleDnd('drop', $event)"
+        (dragStart)="handleDnd('dragStart', $event)"
+        (dragEnd)="handleDnd('dragEnd', $event)"
+        (dragEnter)="handleDnd('dragEnter', $event)"
+        (dragOver)="handleDnd('dragOver', $event)"
+        (dragLeave)="handleDnd('dragLeave', $event)"
+        [treeBlock]="block()"
+        (click)="handleClick($event, item)"
+        (dblclick)="handleDoubleClick($event, item)"
+        (contextmenu)="handleContextMenu($event, item)"
+      >
+        @if (itemTemplate(); as customItem) {
+        <ng-container
+          *ngTemplateOutlet="
+                    customItem;
+                    context: { $implicit: item, tree: treeRootRef.tree() }
+                  "
+        />
+        } @else { @if (itemState.loadState() === 'loading') {
+        <span spinner size="sm" aria-label="Loading children"></span>
+        } @else { @if (!item.isLeaf) {
+        <button [class]="classNames().trigger" [style]="styles().trigger" [treeTrigger]="item.key">
+          <svg chevronDownIcon class="size-4"></svg>
+        </button>
+        } @else {
+        <span aria-hidden="true" class="size-5 shrink-0"></span>
+        } } @if (item.checkable) {
+        <div [class]="classNames().checkbox" [style]="styles().checkbox" treeCheckbox></div>
+        }
+        <span treeTitle [class]="classNames().title" [style]="styles().title"
+          >{{ item.title }}</span
+        >
+        }
+      </div>
+    </ng-template>
+  </div>
+  } @else {
+  <div treeViewport [class]="classNames().viewport" [style]="styles().viewport">
+    <ng-template let-item>
+      <div
+        [class]="classNames().item"
+        [style]="styles().item"
+        [treeItem]="item.key"
+        #itemState="treeItem"
+        [treeDraggable]="item.draggable"
+        (drop)="handleDnd('drop', $event)"
+        (dragStart)="handleDnd('dragStart', $event)"
+        (dragEnd)="handleDnd('dragEnd', $event)"
+        (dragEnter)="handleDnd('dragEnter', $event)"
+        (dragOver)="handleDnd('dragOver', $event)"
+        (dragLeave)="handleDnd('dragLeave', $event)"
+        [treeBlock]="block()"
+        (click)="handleClick($event, item)"
+        (dblclick)="handleDoubleClick($event, item)"
+        (contextmenu)="handleContextMenu($event, item)"
+      >
+        @if (itemTemplate(); as customItem) {
+        <ng-container
+          *ngTemplateOutlet="
+                    customItem;
+                    context: { $implicit: item, tree: treeRootRef.tree() }
+                  "
+        />
+        } @else { @if (itemState.loadState() === 'loading') {
+        <span spinner size="sm" aria-label="Loading children"></span>
+        } @else { @if (!item.isLeaf) {
+        <button [class]="classNames().trigger" [style]="styles().trigger" [treeTrigger]="item.key">
+          <svg chevronDownIcon class="size-4"></svg>
+        </button>
+        } @else {
+        <span aria-hidden="true" class="size-5 shrink-0"></span>
+        } } @if (item.checkable) {
+        <div [class]="classNames().checkbox" [style]="styles().checkbox" treeCheckbox></div>
+        }
+        <span treeTitle [class]="classNames().title" [style]="styles().title"
+          >{{ item.title }}</span
+        >
+        }
+      </div>
+    </ng-template>
+  </div>
+  }
+</div>

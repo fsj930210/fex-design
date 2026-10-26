@@ -16,14 +16,4 @@ export { dndFeature } from '@fex-design/core/tree/features/dnd'
 export { focusFeature } from '@fex-design/core/tree/features/focus'
 export { keyboardFeature } from '@fex-design/core/tree/features/keyboard'
 export { searchFeature } from '@fex-design/core/tree/features/search'
-export type {
-  TreeController,
-  TreeDndCallbacks,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeKey,
-  TreeDataNode,
-  TreeOptions,
-  TreeVisibleItem,
-  TreeNode,
-} from '@fex-design/core/tree/types'
+export type { TreeKey, TreeNode } from '@fex-design/core/tree/types'

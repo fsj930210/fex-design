@@ -7,17 +7,13 @@ import {
   TreeTitle,
   expansionFeature,
   focusFeature,
-  type TreeDataNode,
   type TreeViewportHandle,
 } from '@fex-design/solid/primitive/tree'
 import { Button } from '@fex-design/solid/primitive/button'
 import { treeDemoData } from './_data/tree-demo'
 const options = {
   treeData: treeDemoData,
-  features: [
-    expansionFeature<TreeDataNode<string, string>>(),
-    focusFeature<TreeDataNode<string, string>>(),
-  ],
+  features: [expansionFeature<Record<string, unknown>>(), focusFeature<Record<string, unknown>>()],
 }
 export default function ScrollToExample() {
   let viewport: TreeViewportHandle | undefined

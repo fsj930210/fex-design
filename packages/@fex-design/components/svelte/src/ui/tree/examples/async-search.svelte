@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/ui/tree";
-
   import { onMount } from "svelte";
   import { Tree } from "@fex-design/svelte/ui/tree";
   import { Select } from "@fex-design/svelte/ui/select";
@@ -12,7 +10,7 @@
     type TreeSearchMatch,
     type TreeAncestorResult,
   } from "./_data/tree-remote-demo";
-  let treeData = $state<readonly TreeDataNode<string, string>[]>([]);
+  let treeData = $state<readonly Record<string, unknown>[]>([]);
   let matches = $state<TreeSearchMatch[]>([]);
   let selected = $state<string>();
   let path = $state<TreeAncestorResult>();
@@ -60,7 +58,6 @@
   async function loadChildren(item: { key: string | number }) {
     const children = await loadRemoteTree(String(item.key));
     treeData = updateRemoteChildren(treeData, String(item.key), children);
-    return children;
   }
 
   const rootProps = $derived({ treeData, loadChildren: loadChildren });

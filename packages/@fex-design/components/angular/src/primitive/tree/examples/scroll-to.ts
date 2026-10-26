@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core'
 import {
   TreeRoot,
@@ -22,8 +21,8 @@ export class PrimitiveTreeScrollToExample {
   readonly options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
-      focusFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
+      focusFeature<Record<string, unknown>>(),
     ],
   }
   readonly viewport = viewChild(TreeViewport)

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/primitive/tree";
-
   import {
     TreeRoot,
     TreeViewport,
@@ -25,7 +23,7 @@
     controlled: boolean;
     multiple?: boolean;
     strict?: boolean;
-    data?: readonly TreeDataNode<string, string>[];
+    data?: readonly Record<string, unknown>[];
   } = $props();
   const initial = kind === "expanded" ? ["root-1"] : ["root-1-group-1-item-1"];
   let keys = $state<readonly (string | number)[]>(initial);
@@ -35,17 +33,17 @@
   const options = $derived({
     treeData: data,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
       ...(kind === "selected"
         ? [
-            selectionFeature<TreeDataNode<string, string>>({
+            selectionFeature<Record<string, unknown>>({
               multiple: multiple,
             }),
           ]
         : []),
       ...(kind === "checked"
         ? [
-            checkFeature<TreeDataNode<string, string>>({
+            checkFeature<Record<string, unknown>>({
               mode: strict ? "strict" : "cascade",
             }),
           ]

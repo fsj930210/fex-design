@@ -26,7 +26,7 @@ export interface UseAnchorOptions {
   orientation?: AnchorOrientation
   container?: Window | HTMLElement | (() => Window | HTMLElement | null | undefined)
   targetOffset?: number
-  threshold?: number
+  threshold?: number | undefined
   behavior?: ScrollBehavior
   onChange?: (activeKeys: readonly string[], items: readonly AnchorRegisteredItem[]) => void
 }
@@ -38,7 +38,7 @@ export function useAnchor({
   orientation = 'vertical',
   container,
   targetOffset = 0,
-  threshold = 16,
+  threshold,
   behavior = 'smooth',
   onChange,
 }: UseAnchorOptions = {}) {
@@ -96,7 +96,15 @@ export function useAnchor({
     const scrollContainer = resolveContainer()
     const positions = visibleItems.flatMap((item) => {
       const target = resolveAnchorTarget(item.target)
-      return target ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }] : []
+      return target
+        ? [
+            {
+              item,
+              top: getAnchorTargetTop(target, scrollContainer),
+              targetOffset: item.targetOffset ?? targetOffset,
+            },
+          ]
+        : []
     })
     change(
       getAnchorActiveKeys({

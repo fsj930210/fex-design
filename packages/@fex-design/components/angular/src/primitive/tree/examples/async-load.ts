@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core'
 import {
   TreeRoot,
@@ -20,16 +19,15 @@ import { updateRemoteChildren } from './_data/tree-remote-demo'
   templateUrl: './async-load.html',
 })
 export class PrimitiveTreeAsyncLoadExample {
-  readonly treeData = signal<readonly TreeDataNode<string, string>[]>(asyncTreeDemoData)
+  readonly treeData = signal<readonly Record<string, unknown>[]>(asyncTreeDemoData)
   readonly features = [
-    expansionFeature<TreeDataNode<string, string>>(),
-    asyncLoadFeature<TreeDataNode<string, string>>({
+    expansionFeature<Record<string, unknown>>(),
+    asyncLoadFeature<Record<string, unknown>>({
       loadChildren: async (item) => {
-        const children = await new Promise<readonly TreeDataNode<string, string>[]>((resolve) =>
+        const children = await new Promise<readonly Record<string, unknown>[]>((resolve) =>
           setTimeout(() => resolve(createTreeDemoChildren(String(item.key))), 400),
         )
         this.treeData.update((current) => updateRemoteChildren(current, String(item.key), children))
-        return children
       },
     }),
   ]

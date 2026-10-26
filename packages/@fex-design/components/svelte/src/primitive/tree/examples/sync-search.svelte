@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/primitive/tree";
-
   import {
     TreeRoot,
     TreeViewport,
@@ -21,7 +19,7 @@
     keyword = value;
     expandedKeys = getTreeSearchExpandedKeys(value);
   }
-  const features = [expansionFeature<TreeDataNode<string, string>>()];
+  const features = [expansionFeature<Record<string, unknown>>()];
   const options = $derived({
     treeData: filterTreeDemoData(keyword),
     expandedKeys,

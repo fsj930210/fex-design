@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import { useState } from 'react'
 import {
   TreeRoot,
@@ -8,13 +7,17 @@ import {
   TreeTitle,
   expansionFeature,
   asyncLoadFeature,
-  type TreeOptions,
+  type useTree,
 } from '@fex-design/react/primitive/tree'
 import { SelectRoot, SelectTrigger, SelectContent } from '@fex-design/react/primitive/select'
 import { Spinner } from '@fex-design/react/primitive/spinner'
 import { useAsyncSearchDemo } from './async-search-model'
 
-function DemoTree({ options }: { options: TreeOptions<TreeDataNode<string, string>> }) {
+function DemoTree({
+  options,
+}: {
+  options: Parameters<typeof useTree<Record<string, unknown>>>[0]
+}) {
   return (
     <TreeRoot options={options}>
       <TreeViewport>
@@ -40,8 +43,8 @@ function DemoTree({ options }: { options: TreeOptions<TreeDataNode<string, strin
 export default function AsyncSearchExample() {
   const model = useAsyncSearchDemo()
   const [features] = useState(() => [
-    expansionFeature<TreeDataNode<string, string>>(),
-    asyncLoadFeature<TreeDataNode<string, string>>({ loadChildren: model.loadChildren }),
+    expansionFeature<Record<string, unknown>>(),
+    asyncLoadFeature<Record<string, unknown>>({ loadChildren: model.loadChildren }),
   ])
   return (
     <div className="grid gap-space-sm">
@@ -71,7 +74,7 @@ export default function AsyncSearchExample() {
           options={{
             treeData: model.path.treeData,
             defaultExpandedKeys: model.path.expandedKeys,
-            features: [expansionFeature<TreeDataNode<string, string>>()],
+            features: [expansionFeature<Record<string, unknown>>()],
           }}
         />
       ) : null}

@@ -1,4 +1,5 @@
-import type { TreeOptions } from '@fex-design/vue/primitive/tree'
+import type { TreeOptions } from './tree-internal-types'
+
 import {
   expansionFeature,
   selectionFeature,

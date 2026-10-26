@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/primitive/tree'
 import { createSignal, createMemo, onMount, onCleanup, Show } from 'solid-js'
 import {
   TreeRoot,
@@ -19,7 +18,7 @@ import {
   type TreeAncestorResult,
 } from './_data/tree-remote-demo'
 export default function Example() {
-  const [treeData, setTreeData] = createSignal<readonly TreeDataNode<string, string>[]>([])
+  const [treeData, setTreeData] = createSignal<readonly Record<string, unknown>[]>([])
   const [matches, setMatches] = createSignal<TreeSearchMatch[]>([])
   const [selected, setSelected] = createSignal<string>()
   const [path, setPath] = createSignal<TreeAncestorResult>()
@@ -67,11 +66,10 @@ export default function Example() {
   const loadChildren = async (item: { key: string | number }) => {
     const children = await loadRemoteTree(String(item.key))
     setTreeData((current) => updateRemoteChildren(current, String(item.key), children))
-    return children
   }
   const features = [
-    expansionFeature<TreeDataNode<string, string>>(),
-    asyncLoadFeature<TreeDataNode<string, string>>({ loadChildren }),
+    expansionFeature<Record<string, unknown>>(),
+    asyncLoadFeature<Record<string, unknown>>({ loadChildren }),
   ]
   const rootOptions = createMemo(() => ({ treeData: treeData(), features }))
   return (
@@ -117,7 +115,7 @@ export default function Example() {
             options={{
               treeData: result.treeData,
               defaultExpandedKeys: result.expandedKeys,
-              features: [expansionFeature<TreeDataNode<string, string>>()],
+              features: [expansionFeature<Record<string, unknown>>()],
             }}
           >
             <TreeViewport>

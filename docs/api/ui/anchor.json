@@ -12,8 +12,16 @@
     "angular": "@fex-design/angular/ui/anchor"
   },
   "props": [
-    { "name": "items", "type": "readonly AnchorItem[]", "description": "Anchor 项目与嵌套结构。" },
-    { "name": "activeKeys", "type": "readonly string[]", "description": "受控激活项。" },
+    {
+      "name": "items",
+      "type": "readonly AnchorItem[]",
+      "description": "Anchor 项目与嵌套结构。"
+    },
+    {
+      "name": "activeKeys",
+      "type": "readonly string[]",
+      "description": "受控激活项。"
+    },
     {
       "name": "defaultActiveKeys",
       "type": "readonly string[]",
@@ -47,8 +55,8 @@
     {
       "name": "threshold",
       "type": "number",
-      "default": "16",
-      "description": "目标距离容器顶部多少像素时切换激活项。"
+      "default": "跟随目标的 targetOffset",
+      "description": "可选的独立激活线。未设置时跟随节点或根级 targetOffset；当前章节持续高亮，直到下一标题越过激活线。"
     },
     {
       "name": "behavior",
@@ -68,7 +76,11 @@
     }
   ],
   "events": [
-    { "name": "change", "type": "(activeKeys, items) => void", "description": "激活项改变。" },
+    {
+      "name": "change",
+      "type": "(activeKeys, items) => void",
+      "description": "激活项改变。"
+    },
     {
       "name": "itemClick",
       "type": "(event, item) => void",
@@ -128,10 +140,30 @@
     }
   ],
   "frameworks": {
-    "react": { "typeOverrides": { "FrameworkStyle": "CSSProperties" } },
-    "vue": { "typeOverrides": { "FrameworkStyle": "StyleValue" } },
-    "solid": { "typeOverrides": { "FrameworkStyle": "JSX.CSSProperties" } },
-    "svelte": { "typeOverrides": { "FrameworkStyle": "string" } },
-    "angular": { "typeOverrides": { "FrameworkStyle": "string" } }
+    "react": {
+      "typeOverrides": {
+        "FrameworkStyle": "CSSProperties"
+      }
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkStyle": "StyleValue"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkStyle": "JSX.CSSProperties"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkStyle": "string"
+      }
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkStyle": "string"
+      }
+    }
   }
 }

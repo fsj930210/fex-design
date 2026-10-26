@@ -15,12 +15,17 @@ export function buildTreeIndex<TNode extends TreeNodeData>(
   const childrenByKey = new Map<TreeKey | null, TreeKey[]>()
   const parentByKey = new Map<TreeKey, TreeKey | null>()
 
-  const visit = (nodes: readonly TNode[], parentKey: TreeKey | null, depth: number) => {
-    const keys: TreeKey[] = []
+  const visit = (
+    nodes: readonly TNode[],
+    parentKey: TreeKey | null,
+    depth: number,
+    keys: TreeKey[],
+  ) => {
     nodes.forEach((node, itemIndex) => {
-      const key = getKey(node)
+      const key = keys[itemIndex]!
       if (items.has(key)) throw new Error(`Tree node key "${String(key)}" is duplicated.`)
-      keys.push(key)
+      const children = getChildren(node)
+      const childrenKeys = children.map(getKey)
       parentByKey.set(key, parentKey)
       items.set(
         key,
@@ -31,17 +36,17 @@ export function buildTreeIndex<TNode extends TreeNodeData>(
             parentKey,
             depth,
             index: itemIndex,
-            childrenKeys: getChildren(node).map(getKey),
+            childrenKeys,
           },
           options,
         ),
       )
-      visit(getChildren(node), key, depth + 1)
+      visit(children, key, depth + 1, childrenKeys)
     })
     childrenByKey.set(parentKey, keys)
   }
 
-  visit(treeData, null, 0)
+  visit(treeData, null, 0, treeData.map(getKey))
   return { items, childrenByKey, parentByKey }
 }
 
@@ -96,4 +101,17 @@ export function getTreeDescendants<T extends TreeNodeData>(
   }
   visit(key)
   return keys
+}
+
+/** A relationship check only needs the target's ancestor chain, never the source subtree. */
+export function isTreeAncestor<T extends TreeNodeData>(
+  ancestor: TreeKey,
+  key: TreeKey | null,
+  getItem: (key: TreeKey) => TreeNode<T> | undefined,
+): boolean {
+  while (key !== null) {
+    if (key === ancestor) return true
+    key = getItem(key)?.parentKey ?? null
+  }
+  return false
 }

@@ -1,10 +1,9 @@
-import type { TreeDataNode } from '@fex-design/react/ui/tree'
 import { useRef, useState } from 'react'
 import { Tree, type TreeInstance } from '@fex-design/react/ui/tree'
 import { Button } from '@fex-design/react/ui/button'
 import { treeDemoData } from './_data/tree-demo'
 export default function Example() {
-  const tree = useRef<TreeInstance<TreeDataNode<string, string>>>(null)
+  const tree = useRef<TreeInstance<Record<string, unknown>>>(null)
   const [message, setMessage] = useState('')
   function locate() {
     const found = tree.current?.scrollTo('root-2-group-3-item-3', { reveal: true })

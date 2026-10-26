@@ -1,4 +1,5 @@
-import type { TreeDataNode } from '@fex-design/svelte/primitive/tree'
+import { getTreeDemoChildren } from './tree-records'
+
 import { treeDemoData } from './tree-demo'
 
 export interface TreeSearchMatch {
@@ -6,23 +7,23 @@ export interface TreeSearchMatch {
   label: string
 }
 export interface TreeAncestorResult {
-  treeData: readonly TreeDataNode<string, string>[]
+  treeData: readonly Record<string, unknown>[]
   expandedKeys: string[]
 }
 const respond = <T>(value: T): Promise<T> =>
   new Promise((resolve) => setTimeout(() => resolve(value), 300))
 
-function shallow(node: TreeDataNode<string, string>): TreeDataNode<string, string> {
+function shallow(node: Record<string, unknown>): Record<string, unknown> {
   const { children, ...rest } = node
-  return { ...rest, isLeaf: !children?.length }
+  return { ...rest, isLeaf: !getTreeDemoChildren(node).length }
 }
 function findPath(
-  nodes: readonly TreeDataNode<string, string>[],
+  nodes: readonly Record<string, unknown>[],
   key: string,
-): TreeDataNode<string, string>[] {
+): Record<string, unknown>[] {
   for (const node of nodes) {
     if (node.key === key) return [node]
-    const path = findPath(node.children ?? [], key)
+    const path = findPath(getTreeDemoChildren(node), key)
     if (path.length) return [node, ...path]
   }
   return []
@@ -30,7 +31,7 @@ function findPath(
 // Endpoint 1: root request or one level of children, never the complete tree.
 export function loadRemoteTree(parentKey?: string) {
   const nodes = parentKey
-    ? (findPath(treeDemoData, parentKey).at(-1)?.children ?? [])
+    ? getTreeDemoChildren(findPath(treeDemoData, parentKey).at(-1) ?? {})
     : treeDemoData
   return respond(nodes.map(shallow))
 }
@@ -38,11 +39,11 @@ export function loadRemoteTree(parentKey?: string) {
 export function searchRemoteTree(keyword: string) {
   const query = keyword.trim().toLowerCase()
   const matches: TreeSearchMatch[] = []
-  const visit = (nodes: readonly TreeDataNode<string, string>[]) => {
+  const visit = (nodes: readonly Record<string, unknown>[]) => {
     for (const node of nodes) {
       if (query && String(node.title).toLowerCase().includes(query))
-        matches.push({ value: node.key, label: String(node.title) })
-      visit(node.children ?? [])
+        matches.push({ value: String(node.key), label: String(node.title) })
+      visit(getTreeDemoChildren(node))
     }
   }
   visit(treeDemoData)
@@ -51,23 +52,25 @@ export function searchRemoteTree(keyword: string) {
 // Endpoint 3: only the selected node and its direct ancestors.
 export function loadRemoteAncestors(key: string): Promise<TreeAncestorResult> {
   const path = findPath(treeDemoData, key)
-  let treeData: TreeDataNode<string, string>[] = []
+  let treeData: Record<string, unknown>[] = []
   for (let index = path.length - 1; index >= 0; index--)
     treeData = [{ ...shallow(path[index]!), children: treeData, isLeaf: !treeData.length }]
-  return respond({ treeData, expandedKeys: path.slice(0, -1).map((node) => node.key) })
+  return respond({ treeData, expandedKeys: path.slice(0, -1).map((node) => String(node.key)) })
 }
 export function updateRemoteChildren(
-  nodes: readonly TreeDataNode<string, string>[],
+  nodes: readonly Record<string, unknown>[],
   key: string,
-  children: readonly TreeDataNode<string, string>[],
-): readonly TreeDataNode<string, string>[] {
+  children: readonly Record<string, unknown>[],
+): readonly Record<string, unknown>[] {
   let changed = false
   const result = nodes.map((node) => {
     if (node.key === key) {
       changed = true
       return { ...node, children, isLeaf: !children.length }
     }
-    const nested = node.children && updateRemoteChildren(node.children, key, children)
+    const nested = getTreeDemoChildren(node).length
+      ? updateRemoteChildren(getTreeDemoChildren(node), key, children)
+      : undefined
     if (nested && nested !== node.children) {
       changed = true
       return { ...node, children: nested }

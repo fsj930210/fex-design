@@ -147,7 +147,6 @@ export function createTreeDndItem<TNode extends TreeNodeData>({
           intent: next,
         })
       feature?.clearActiveIntent(itemKey)
-      if (next?.valid) feature?.drop(next)
     },
   })
 

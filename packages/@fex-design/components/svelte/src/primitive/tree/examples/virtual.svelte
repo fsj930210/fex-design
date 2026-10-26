@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/primitive/tree";
-
   import {
     TreeRoot,
     TreeVirtualViewport,
@@ -21,8 +19,8 @@
     treeData: virtualTreeDemoData,
     defaultExpandedKeys: virtualTreeExpandedKeys,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
-      focusFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
+      focusFeature<Record<string, unknown>>(),
     ],
   };
   let viewport:

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/ui/tree'
-
 import { computed, shallowRef, ref, onMounted, onUnmounted } from 'vue'
 import { Tree } from '@fex-design/vue/ui/tree'
 import { Select } from '@fex-design/vue/ui/select'
@@ -12,7 +10,7 @@ import {
   type TreeSearchMatch,
   type TreeAncestorResult,
 } from './_data/tree-remote-demo'
-const treeData = shallowRef<readonly TreeDataNode<string, string>[]>([])
+const treeData = shallowRef<readonly Record<string, unknown>[]>([])
 const matches = shallowRef<TreeSearchMatch[]>([])
 const selected = ref<string>()
 const path = shallowRef<TreeAncestorResult>()
@@ -59,7 +57,6 @@ async function choose(value: unknown) {
 async function loadChildren(item: { key: string | number }) {
   const children = await loadRemoteTree(String(item.key))
   treeData.value = updateRemoteChildren(treeData.value, String(item.key), children)
-  return children
 }
 
 const rootProps = computed(() => ({ treeData: treeData.value, loadChildren: loadChildren }))

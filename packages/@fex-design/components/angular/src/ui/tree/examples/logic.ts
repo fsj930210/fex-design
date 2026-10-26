@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/ui/tree'
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core'
 import { createTreeSignals, expansionFeature, selectionFeature } from '@fex-design/angular/ui/tree'
 import { treeDemoData } from './_data/tree-demo'
@@ -12,10 +11,10 @@ export class TreeLogicExample {
   private readonly options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
-      selectionFeature<TreeDataNode<string, string>>(),
+      selectionFeature<Record<string, unknown>>(),
     ],
   }
   readonly model = createTreeSignals(() => this.options)

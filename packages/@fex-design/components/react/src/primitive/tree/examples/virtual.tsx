@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import { useRef, useState } from 'react'
 import {
   TreeRoot,
@@ -21,8 +20,8 @@ export default function Example() {
     treeData: virtualTreeDemoData,
     defaultExpandedKeys: virtualTreeExpandedKeys,
     features: [
-      expansionFeature<TreeDataNode<string, string>>(),
-      focusFeature<TreeDataNode<string, string>>(),
+      expansionFeature<Record<string, unknown>>(),
+      focusFeature<Record<string, unknown>>(),
     ],
   }))
   const viewport = useRef<{ scrollTo(key: string, options?: { reveal?: boolean }): boolean }>(null)

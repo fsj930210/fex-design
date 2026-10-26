@@ -1,6 +1,6 @@
 import { Tree } from '@fex-design/react/ui/tree'
 import { Select } from '@fex-design/react/ui/select'
-import { useAsyncSearchDemo } from '../../../primitive/tree/examples/async-search-model'
+import { useAsyncSearchDemo } from './async-search-model'
 
 export default function AsyncSearchExample() {
   const model = useAsyncSearchDemo()

@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
-import { Tree, type TreeInstance, type TreeDataNode } from '@fex-design/react/ui/tree'
+import { Tree, type TreeInstance } from '@fex-design/react/ui/tree'
 import { Button } from '@fex-design/react/ui/button'
 import { treeDemoData } from './_data/tree-demo'
 type Action = 'expand' | 'scroll' | 'select' | 'check' | 'path' | 'reset'
 export default function InstanceExample() {
-  const tree = useRef<TreeInstance<TreeDataNode<string, string>>>(null)
+  const tree = useRef<TreeInstance<Record<string, unknown>>>(null)
   const [message, setMessage] = useState('点击按钮调用 Tree 实例方法')
   const [selected, setSelected] = useState<readonly (string | number)[]>([])
   const [checked, setChecked] = useState<readonly (string | number)[]>([])

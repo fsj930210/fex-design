@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/ui/tree";
-
   import type { TreeBehaviorProps } from "@fex-design/svelte/ui/tree";
 
   import { Tree } from "@fex-design/svelte/ui/tree";
@@ -17,14 +15,14 @@
     controlled: boolean;
     multiple?: boolean;
     strict?: boolean;
-    data?: readonly TreeDataNode<string, string>[];
+    data?: readonly Record<string, unknown>[];
   } = $props();
   const initial = kind === "expanded" ? ["root-1"] : ["root-1-group-1-item-1"];
   let keys = $state<readonly (string | number)[]>(initial);
   const change = (next: readonly (string | number)[]) => {
     keys = next;
   };
-  const treeProps = $derived<TreeBehaviorProps<TreeDataNode<string, string>>>({
+  const treeProps = $derived<TreeBehaviorProps<Record<string, unknown>>>({
     treeData: data,
     multiple: multiple,
     checkStrict: strict,

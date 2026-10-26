@@ -32,7 +32,7 @@
     container?:
       Window | HTMLElement | (() => Window | HTMLElement | null | undefined);
     targetOffset?: number;
-    threshold?: number;
+    threshold?: number | undefined;
     behavior?: ScrollBehavior;
     onchange?: (
       keys: readonly string[],
@@ -47,7 +47,7 @@
     orientation = "vertical",
     container,
     targetOffset = 0,
-    threshold = 16,
+    threshold,
     behavior = "smooth",
     onchange,
     class: className,
@@ -110,7 +110,13 @@
     const positions = visibleItems.flatMap((item) => {
       const target = resolveAnchorTarget(item.target);
       return target
-        ? [{ item, top: getAnchorTargetTop(target, scrollContainer) }]
+        ? [
+            {
+              item,
+              top: getAnchorTargetTop(target, scrollContainer),
+              targetOffset: item.targetOffset ?? targetOffset,
+            },
+          ]
         : [];
     });
     change(

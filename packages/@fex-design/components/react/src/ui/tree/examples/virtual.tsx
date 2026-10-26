@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/ui/tree'
 import type { TreeInstance } from '@fex-design/react/ui/tree'
 import { useRef, useState } from 'react'
 import { Tree } from '@fex-design/react/ui/tree'
@@ -14,7 +13,7 @@ export default function Example() {
     treeData: virtualTreeDemoData,
     defaultExpandedKeys: virtualTreeExpandedKeys,
   }))
-  const viewport = useRef<TreeInstance<TreeDataNode<string, string>>>(null)
+  const viewport = useRef<TreeInstance<Record<string, unknown>>>(null)
   return (
     <section className="grid w-full gap-space-sm">
       <p className="text-sm text-muted-foreground">

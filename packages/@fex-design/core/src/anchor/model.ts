@@ -30,40 +30,33 @@ export function getAnchorActiveKeys<TItem extends { key: string }>({
   positions,
   scrollTop,
   viewportHeight,
-  threshold = 16,
+  threshold,
   mode = 'current',
   scrolledToEnd = false,
 }: {
   positions: readonly AnchorTargetPosition<TItem>[]
   scrollTop: number
   viewportHeight: number
-  threshold?: number
+  threshold?: number | undefined
   mode?: AnchorActiveMode
   scrolledToEnd?: boolean
 }): string[] {
   if (positions.length === 0) return []
 
   const sorted = [...positions].sort((left, right) => left.top - right.top)
-  const activeTop = scrollTop + threshold
   const viewportBottom = scrollTop + viewportHeight
-  // Ignore headings that have left the viewport, then use the visible heading nearest
-  // to the activation line. This preserves the first visible heading at rest without
-  // retaining it across a large content gap after it has scrolled away.
-  const visible = sorted
-    .map((position, index) => ({ position, index }))
-    .filter(
-      ({ position }) =>
-        position.top >= scrollTop - anchorPositionEpsilon &&
-        position.top <= viewportBottom + anchorPositionEpsilon,
-    )
-  let currentIndex = visible.reduce((nearestIndex, entry) => {
-    if (nearestIndex === -1) return entry.index
-    const nearest = sorted[nearestIndex]
-    if (!nearest) return entry.index
-    return Math.abs(entry.position.top - activeTop) < Math.abs(nearest.top - activeTop)
-      ? entry.index
-      : nearestIndex
-  }, -1)
+  // A heading owns the interval until the next heading reaches the activation line.
+  // Its section remains active even when the heading itself has scrolled out of view.
+  let currentIndex = -1
+  for (let index = 0; index < sorted.length; index++) {
+    const position = sorted[index]!
+    const activeTop = scrollTop + (threshold ?? position.targetOffset ?? 0)
+    if (position.top <= activeTop + anchorPositionEpsilon) currentIndex = index
+  }
+  // Before reaching the first heading, preserve the initial visible-heading behavior.
+  if (currentIndex === -1 && sorted[0]!.top <= viewportBottom + anchorPositionEpsilon) {
+    currentIndex = 0
+  }
 
   if (scrolledToEnd) {
     currentIndex = sorted.length - 1

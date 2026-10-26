@@ -150,7 +150,6 @@ export function treeDndItemAction<TNode extends TreeNodeData>(
             intent: value,
           })
         update(null)
-        if (value?.valid) feature?.drop(value)
       },
     })
     node.dataset.dndEnabled = dragDisabled() ? '' : 'true'

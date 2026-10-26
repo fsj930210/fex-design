@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/react/primitive/tree'
 import { useState } from 'react'
 import {
   TreeRoot,
@@ -11,7 +10,7 @@ export default function Example() {
   const [options] = useState(() => ({
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
     ],

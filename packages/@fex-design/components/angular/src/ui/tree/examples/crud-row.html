@@ -1,0 +1,49 @@
+@if (leaf()) { <span class="size-5 shrink-0"></span> } @else {
+<button
+  type="button"
+  [disabled]="busy()"
+  class="size-5 shrink-0 rounded hover:bg-muted"
+  [attr.aria-label]="'展开或收起 ' + title()"
+  [attr.aria-expanded]="expanded()"
+  (click)="$event.stopPropagation(); toggle.emit()"
+>
+  {{ expanded() ? '−' : '+' }}
+</button>
+} @if (editing()) {
+<div
+  class="min-w-0 flex-1"
+  (click)="$event.stopPropagation()"
+  (dblclick)="$event.stopPropagation()"
+  (keydown)="keydown($event)"
+  (focusout)="commit()"
+>
+  <div input [value]="draft()" (valueChange)="draft.set($event)" aria-label="节点名称"></div>
+</div>
+} @else {
+<button
+  type="button"
+  [disabled]="busy()"
+  class="min-w-0 flex-1 truncate text-start"
+  (dblclick)="$event.stopPropagation(); edit()"
+>
+  {{ title() }}
+</button>
+}
+<button
+  button
+  [disabled]="busy()"
+  size="sm"
+  [attr.aria-label]="'新增子节点到 ' + title()"
+  (click)="$event.stopPropagation(); add.emit()"
+>
+  新增子节点
+</button>
+<button
+  button
+  [disabled]="busy()"
+  size="sm"
+  [attr.aria-label]="'删除 ' + title()"
+  (click)="$event.stopPropagation(); remove.emit()"
+>
+  <svg trashIcon class="size-4"></svg>
+</button>

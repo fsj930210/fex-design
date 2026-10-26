@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -43,7 +42,7 @@ import {
 })
 export class TreeAsyncSearchExample {
   readonly filterRemote = () => true
-  readonly treeData = signal<readonly TreeDataNode<string, string>[]>([])
+  readonly treeData = signal<readonly Record<string, unknown>[]>([])
   readonly matches = signal<TreeSearchMatch[]>([])
   readonly selected = signal<string | undefined>(undefined)
   readonly path = signal<TreeAncestorResult | undefined>(undefined)
@@ -53,12 +52,11 @@ export class TreeAsyncSearchExample {
   private pathId = 0
   private active = true
   readonly features = [
-    expansionFeature<TreeDataNode<string, string>>(),
-    asyncLoadFeature<TreeDataNode<string, string>>({
+    expansionFeature<Record<string, unknown>>(),
+    asyncLoadFeature<Record<string, unknown>>({
       loadChildren: async (item) => {
         const children = await loadRemoteTree(String(item.key))
         this.treeData.update((current) => updateRemoteChildren(current, String(item.key), children))
-        return children
       },
     }),
   ]
@@ -66,7 +64,7 @@ export class TreeAsyncSearchExample {
   readonly pathOptions = computed(() => ({
     treeData: this.path()?.treeData ?? [],
     defaultExpandedKeys: this.path()?.expandedKeys ?? [],
-    features: [expansionFeature<TreeDataNode<string, string>>()],
+    features: [expansionFeature<Record<string, unknown>>()],
   }))
   constructor() {
     inject(DestroyRef).onDestroy(() => {

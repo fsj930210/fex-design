@@ -2,8 +2,10 @@
   <p class="mb-space-sm min-h-10 break-all text-sm text-muted-foreground">{{message()}}</p>
   <div
     tree
-    [treeData]="treeProps.treeData"
-    [defaultExpandedKeys]="treeProps.defaultExpandedKeys"
+    [treeData]="treeData()"
+    [disabled]="busy()"
+    [expandedKeys]="expandedKeys()"
+    (expand)="expandedKeys.set($event.keys)"
     [draggable]="true"
     (drop)="handleDrop($event)"
   ></div>

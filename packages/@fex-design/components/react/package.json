@@ -119,6 +119,7 @@
     "./icons/calendar": "./src/icons/calendar.tsx",
     "./icons/clock": "./src/icons/clock.tsx",
     "./icons/chevron": "./src/icons/chevron.tsx",
+    "./icons/trash": "./src/icons/trash.tsx",
     "./icons/x": "./src/icons/x.tsx",
     "./icons/circle-check": "./src/icons/circle-check.tsx",
     "./icons/circle-x": "./src/icons/circle-x.tsx",

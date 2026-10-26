@@ -31,18 +31,18 @@ Composable, styled Anchor primitives with native element behavior.
 
 ## AnchorRoot API
 
-| Name              | Type                                                  | Default  | Description                                      |
-| ----------------- | ----------------------------------------------------- | -------- | ------------------------------------------------ |
-| activeKeys        | readonly string[]                                     | —        | Controlled active keys.                          |
-| defaultActiveKeys | readonly string[]                                     | []       | Initial uncontrolled keys.                       |
-| activeMode        | current or progress                                   | current  | Current item or accumulated progress.            |
-| orientation       | vertical or horizontal                                | vertical | Layout direction.                                |
-| container         | Window, HTMLElement, or resolver                      | window   | Scroll container.                                |
-| targetOffset      | number                                                | 0        | Default scroll offset.                           |
-| threshold         | number                                                | 16       | Activation line measured from the container top. |
-| behavior          | ScrollBehavior                                        | smooth   | Scroll behavior.                                 |
-| change            | callback                                              | —        | Reports active keys and registered items.        |
-| native attributes | Svelte element attributes and bindable element access | —        | Native attributes, events, and element access.   |
+| Name              | Type                                                  | Default      | Description                                                                                                                               |
+| ----------------- | ----------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| activeKeys        | readonly string[]                                     | —            | Controlled active keys.                                                                                                                   |
+| defaultActiveKeys | readonly string[]                                     | []           | Initial uncontrolled keys.                                                                                                                |
+| activeMode        | current or progress                                   | current      | Current item or accumulated progress.                                                                                                     |
+| orientation       | vertical or horizontal                                | vertical     | Layout direction.                                                                                                                         |
+| container         | Window, HTMLElement, or resolver                      | window       | Scroll container.                                                                                                                         |
+| targetOffset      | number                                                | 0            | Default scroll offset.                                                                                                                    |
+| threshold         | number                                                | targetOffset | Optional activation line. Defaults to the target scroll offset; the current section stays active until the next heading crosses the line. |
+| behavior          | ScrollBehavior                                        | smooth       | Scroll behavior.                                                                                                                          |
+| change            | callback                                              | —            | Reports active keys and registered items.                                                                                                 |
+| native attributes | Svelte element attributes and bindable element access | —            | Native attributes, events, and element access.                                                                                            |
 
 ## AnchorItem API
 

@@ -1,28 +1,62 @@
 import { useState } from 'react'
-
-import { Tree } from '@fex-design/react/ui/tree'
+import { Tree, type TreeProps } from '@fex-design/react/ui/tree'
 import { treeDndDemoData } from './_data/tree-demo'
+import { createTreeDemoService } from './_data/tree-edit-demo'
 export default function TreeDndExample() {
+  const [service] = useState(() => createTreeDemoService(treeDndDemoData))
+  const [treeData, setTreeData] = useState<readonly Record<string, unknown>[]>(treeDndDemoData)
+  const [expandedKeys, setExpandedKeys] = useState<readonly (string | number)[]>([
+    'root-1',
+    'root-1-group-1',
+  ])
+  const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState(
-    'Item 1.1.2 不可拖动；Item 1.1.3 不可放置。其他节点可拖放。',
+    'Item 1.1.2 不可拖动；Item 1.1.3 不可放置。放置后调用接口并重新获取树。',
   )
-  const [treeProps] = useState(() => ({
-    treeData: treeDndDemoData,
-    defaultExpandedKeys: ['root-1', 'root-1-group-1'],
-  }))
+
+  const handleDrop: NonNullable<TreeProps<Record<string, unknown>>['onDrop']> = async ({
+    sourceItem,
+    targetItem,
+    intent,
+  }) => {
+    if (!intent?.valid || busy) return
+    setBusy(true)
+    setMessage('正在提交移动并重新获取树…')
+    try {
+      await service.move({
+        sourceKey: intent.sourceKey,
+        parentKey: intent.parentKey,
+        index: intent.index,
+      })
+      setTreeData(await service.fetchTree())
+      if (intent.position === 'inside')
+        setExpandedKeys((keys) =>
+          keys.includes(intent.targetKey) ? keys : [...keys, intent.targetKey],
+        )
+      setMessage(
+        String(sourceItem?.title) + ' → ' + String(targetItem?.title) + '；已更新外部 treeData',
+      )
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : '移动失败，保留原数据')
+    } finally {
+      setBusy(false)
+    }
+  }
   return (
     <div className="w-[min(36rem,100%)] min-w-0">
-      <p className="mb-space-sm min-h-10 break-all text-sm text-muted-foreground">{message}</p>
+      <p
+        className="mb-space-sm min-h-10 break-all text-sm text-muted-foreground"
+        aria-live="polite"
+      >
+        {message}
+      </p>
       <Tree
-        className="w-full max-w-xl overflow-x-hidden"
-        {...treeProps}
+        treeData={treeData}
+        expandedKeys={expandedKeys}
+        onExpand={setExpandedKeys}
+        disabled={busy}
         draggable
-        onDrop={({ sourceItem, targetItem, intent }) => {
-          if (!intent?.valid) return
-          setMessage(
-            `${String(sourceItem?.data.title)} → ${String(targetItem?.data.title)}（${intent.position === 'inside' ? '成为子节点' : '排在其后'}）`,
-          )
-        }}
+        onDrop={handleDrop}
       />
     </div>
   )

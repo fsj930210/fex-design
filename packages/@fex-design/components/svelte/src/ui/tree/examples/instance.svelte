@@ -1,13 +1,9 @@
 <script lang="ts">
-  import {
-    Tree,
-    type TreeInstance,
-    type TreeDataNode,
-  } from "@fex-design/svelte/ui/tree";
+  import { Tree, type TreeInstance } from "@fex-design/svelte/ui/tree";
   import { Button } from "@fex-design/svelte/ui/button";
   import { treeDemoData } from "./_data/tree-demo";
   type Action = "expand" | "scroll" | "select" | "check" | "path" | "reset";
-  let tree = $state<TreeInstance<TreeDataNode<string, string>>>();
+  let tree = $state<TreeInstance<Record<string, unknown>>>();
   let message = $state("点击按钮调用 Tree 实例方法");
   let selected = $state<readonly (string | number)[]>([]);
   let checked = $state<readonly (string | number)[]>([]);

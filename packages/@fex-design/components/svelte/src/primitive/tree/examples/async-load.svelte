@@ -1,6 +1,4 @@
 <script lang="ts">
-  import type { TreeDataNode } from "@fex-design/svelte/primitive/tree";
-
   import {
     TreeRoot,
     TreeViewport,
@@ -16,22 +14,19 @@
     createTreeDemoChildren,
   } from "./_data/tree-async-demo";
   import { updateRemoteChildren } from "./_data/tree-remote-demo";
-  let treeData =
-    $state<readonly TreeDataNode<string, string>[]>(asyncTreeDemoData);
+  let treeData = $state<readonly Record<string, unknown>[]>(asyncTreeDemoData);
   const features = [
-    expansionFeature<TreeDataNode<string, string>>(),
-    asyncLoadFeature<TreeDataNode<string, string>>({
+    expansionFeature<Record<string, unknown>>(),
+    asyncLoadFeature<Record<string, unknown>>({
       loadChildren: async (item) => {
-        const children = await new Promise<
-          readonly TreeDataNode<string, string>[]
-        >((resolve) =>
-          setTimeout(
-            () => resolve(createTreeDemoChildren(String(item.key))),
-            400,
-          ),
+        const children = await new Promise<readonly Record<string, unknown>[]>(
+          (resolve) =>
+            setTimeout(
+              () => resolve(createTreeDemoChildren(String(item.key))),
+              400,
+            ),
         );
         treeData = updateRemoteChildren(treeData, String(item.key), children);
-        return children;
       },
     }),
   ];

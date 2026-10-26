@@ -226,6 +226,7 @@
     "./icons/circle-check": "./src/icons/circle-check.svelte",
     "./icons/circle-x": "./src/icons/circle-x.svelte",
     "./icons/info": "./src/icons/info.svelte",
+    "./icons/trash": "./src/icons/trash.ts",
     "./icons/triangle-alert": "./src/icons/triangle-alert.svelte",
     "./icons/calendar": "./src/icons/calendar.svelte",
     "./icons/clock": "./src/icons/clock.svelte",

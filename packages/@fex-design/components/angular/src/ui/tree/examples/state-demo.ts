@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/ui/tree'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,7 +17,7 @@ import { treeDemoData } from './_data/tree-demo'
   templateUrl: './state-demo.html',
 })
 export class StateDemo implements OnInit {
-  readonly data = input<readonly TreeDataNode<string, string>[]>(treeDemoData)
+  readonly data = input<readonly Record<string, unknown>[]>(treeDemoData)
   readonly kind = input<'expanded' | 'selected' | 'checked'>('selected')
   readonly controlled = input(false)
   readonly multiple = input(false)

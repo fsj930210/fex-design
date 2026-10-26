@@ -9,16 +9,7 @@ export {
   searchFeature,
 } from '@fex-design/vue/primitive/tree'
 export { useTree, useTreeVisibleItems } from '@fex-design/vue/primitive/tree'
-export type {
-  TreeController,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeKey,
-  TreeDataNode,
-  TreeNode,
-  TreeOptions,
-  TreeVisibleItem,
-} from '@fex-design/vue/primitive/tree'
+export type { TreeKey, TreeNode } from '@fex-design/vue/primitive/tree'
 
 export type { TreeInstance, TreeScrollOptions } from './tree-instance'
 export type { TreeBehaviorProps } from './tree-types'

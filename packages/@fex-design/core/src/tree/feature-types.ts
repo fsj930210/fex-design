@@ -1,9 +1,6 @@
 import type {
   TreeNode,
-  TreeInsertInput,
   TreeKey,
-  TreeMoveInput,
-  TreeMutationResult,
   TreeNodeData,
   TreeOptions,
   TreeResolvedFieldNames,
@@ -39,11 +36,6 @@ export interface TreeFeatureContext<TNode extends TreeNodeData> {
   getFieldNames(): TreeResolvedFieldNames
   getKey(node: TNode): TreeKey
   getChildren(node: TNode): readonly TNode[]
-  updateNode(key: TreeKey, patch: Partial<TNode> | ((node: TNode) => TNode)): TreeMutationResult
-  insertNode(input: TreeInsertInput<TNode>): TreeMutationResult
-  removeNode(key: TreeKey): TreeMutationResult
-  moveNode(input: TreeMoveInput): TreeMutationResult
-  replaceChildren(parentKey: TreeKey | null, children: readonly TNode[]): TreeMutationResult
 }
 
 export interface TreeFeature<TNode extends TreeNodeData, TOptions = unknown, TApi = unknown> {

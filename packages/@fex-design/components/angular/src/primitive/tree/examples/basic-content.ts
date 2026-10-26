@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { expansionFeature } from '@fex-design/angular/primitive/tree'
 import { treeDemoData } from './_data/tree-demo'
@@ -21,7 +20,7 @@ export class BasicContent {
   readonly options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
     ],

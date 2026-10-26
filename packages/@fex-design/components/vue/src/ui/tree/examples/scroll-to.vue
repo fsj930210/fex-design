@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/ui/tree'
-
 import { ref } from 'vue'
 import { Tree, type TreeInstance } from '@fex-design/vue/ui/tree'
 import { Button } from '@fex-design/vue/ui/button'
 import { treeDemoData } from './_data/tree-demo'
-const tree = ref<TreeInstance<TreeDataNode<string, string>>>()
+const tree = ref<TreeInstance<Record<string, unknown>>>()
 const message = ref('')
 function locate() {
   const found = tree.value?.scrollTo('root-2-group-3-item-3', { reveal: true })

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/ui/tree'
-
 import type { TreeInstance } from '@fex-design/vue/ui/tree'
 
 import { ref } from 'vue'
@@ -13,7 +11,7 @@ import {
   virtualTreeNodeCount,
 } from './_data/tree-virtual-demo'
 const treeProps = { treeData: virtualTreeDemoData, defaultExpandedKeys: virtualTreeExpandedKeys }
-const viewport = ref<TreeInstance<TreeDataNode<string, string>>>()
+const viewport = ref<TreeInstance<Record<string, unknown>>>()
 </script>
 <template>
   <section class="grid w-full gap-space-sm">

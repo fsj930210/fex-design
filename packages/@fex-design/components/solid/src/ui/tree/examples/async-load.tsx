@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/ui/tree'
 import { createSignal, createMemo } from 'solid-js'
 import { Tree } from '@fex-design/solid/ui/tree'
 
@@ -6,16 +5,15 @@ import { asyncTreeDemoData, createTreeDemoChildren } from './_data/tree-async-de
 import { updateRemoteChildren } from './_data/tree-remote-demo'
 export default function Example() {
   const [treeData, setTreeData] =
-    createSignal<readonly TreeDataNode<string, string>[]>(asyncTreeDemoData)
+    createSignal<readonly Record<string, unknown>[]>(asyncTreeDemoData)
 
   const treeProps = createMemo(() => ({
     treeData: treeData(),
     loadChildren: async (item: { key: string | number }) => {
-      const children = await new Promise<readonly TreeDataNode<string, string>[]>((resolve) =>
+      const children = await new Promise<readonly Record<string, unknown>[]>((resolve) =>
         setTimeout(() => resolve(createTreeDemoChildren(String(item.key))), 400),
       )
       setTreeData((current) => updateRemoteChildren(current, String(item.key), children))
-      return children
     },
   }))
   return (

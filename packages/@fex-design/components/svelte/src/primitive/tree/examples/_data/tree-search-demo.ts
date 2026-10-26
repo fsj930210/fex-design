@@ -1,13 +1,15 @@
-import type { TreeDataNode } from '@fex-design/svelte/primitive/tree'
+import { getTreeDemoChildren } from './tree-records'
+
 import { treeDemoData } from './tree-demo'
 export function getTreeSearchExpandedKeys(keyword: string): string[] {
   const value = keyword.trim().toLowerCase()
   if (!value) return []
   const expanded: string[] = []
-  const visit = (node: TreeDataNode<string, string>): boolean => {
-    const childrenMatch = (node.children ?? []).map(visit).some(Boolean)
+  const visit = (node: Record<string, unknown>): boolean => {
+    const childrenMatch = getTreeDemoChildren(node).map(visit).some(Boolean)
     const matched = String(node.title).toLowerCase().includes(value)
-    if (node.children?.length && (matched || childrenMatch)) expanded.push(node.key)
+    if (getTreeDemoChildren(node).length && (matched || childrenMatch))
+      expanded.push(String(node.key))
     return matched || childrenMatch
   }
   treeDemoData.forEach(visit)
@@ -25,12 +27,12 @@ export function splitTreeSearchTitle(input: unknown, keyword: string) {
         after: title.slice(index + value.length),
       }
 }
-export function filterTreeDemoData(keyword: string): readonly TreeDataNode<string, string>[] {
+export function filterTreeDemoData(keyword: string): readonly Record<string, unknown>[] {
   const value = keyword.trim().toLowerCase()
   if (!value) return treeDemoData
-  const visit = (nodes: readonly TreeDataNode<string, string>[]): TreeDataNode<string, string>[] =>
+  const visit = (nodes: readonly Record<string, unknown>[]): Record<string, unknown>[] =>
     nodes.flatMap((node) => {
-      const children = node.children ? visit(node.children) : []
+      const children = visit(getTreeDemoChildren(node))
       return String(node.title).toLowerCase().includes(value) || children.length
         ? [{ ...node, ...(children.length ? { children } : {}) }]
         : []

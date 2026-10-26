@@ -4,7 +4,7 @@ import {
   expansionFeature,
   selectionFeature,
 } from '@fex-design/core'
-import type { TreeItem, TreeKey } from '@fex-design/core/tree/types'
+import type { TreeNode, TreeKey } from '@fex-design/react/primitive/tree'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
 import {
   InputClear,
@@ -12,7 +12,7 @@ import {
   InputRoot,
   type InputRootProps,
 } from '@fex-design/react/primitive/input'
-import { Tag } from '@fex-design/react/primitive/tag'
+import { SelectedTags } from './selected-tags'
 import {
   TreeSelectContent,
   TreeSelectOption,
@@ -23,6 +23,7 @@ import {
 import { Checkbox } from '@fex-design/react/ui/checkbox'
 import type { ReactNode } from 'react'
 import { DemoTree } from '../Tree/demo-tree'
+import { updateDepartment } from '../Tree/tree-data'
 import { highlightTreeTitle } from '../Tree/highlight-tree-title'
 import { departmentFieldNames, isDepartmentLeaf, type DepartmentNode } from '../Tree/data'
 
@@ -43,7 +44,7 @@ interface Props {
   onExpandedKeysChange?: ((keys: readonly TreeKey[]) => void) | undefined
   asyncLoader?:
     | ((
-        item: TreeItem<DepartmentNode>,
+        item: TreeNode<DepartmentNode>,
         context: { signal: AbortSignal },
       ) => Promise<readonly DepartmentNode[]>)
     | undefined
@@ -69,38 +70,6 @@ function TreeSelectPanelState({
 }) {
   const { controller, snapshot } = useTreeSelect<DepartmentNode>()
   return children(snapshot.values, controller.setValues)
-}
-
-function SelectedTags({ maxTagCount }: { maxTagCount: number }) {
-  const treeSelect = useTreeSelect<DepartmentNode>()
-  const items = treeSelect.snapshot.selectedItems
-  if (items.length > maxTagCount)
-    return (
-      <Tag size="sm" className="ml-1.5">
-        已选择 {items.length} 项
-      </Tag>
-    )
-  return (
-    <>
-      {items.map((item) => (
-        <Tag
-          key={item.value}
-          size="sm"
-          closable
-          className="ml-1.5"
-          onPointerDownCapture={(event) => event.preventDefault()}
-          onClose={(event) => {
-            event.stopPropagation()
-            treeSelect.controller.setValues(
-              treeSelect.snapshot.values.filter((value) => value !== item.value),
-            )
-          }}
-        >
-          {item.label}
-        </Tag>
-      ))}
-    </>
-  )
 }
 
 export function DemoTreeSelect({
@@ -155,11 +124,10 @@ export function DemoTreeSelect({
       checkable={multiple}
       expandedKeys={treeExpandedKeys}
       onExpandedKeysChange={onTreeExpandedKeysChange}
-      onTreeDataChange={useAsyncLoader ? onTreeDataChange : undefined}
       itemClassName="cursor-pointer data-[disabled=true]:cursor-not-allowed"
       searchKeyword={searchValue ?? ''}
       titleRender={({ item, searchKeyword: keyword }) =>
-        highlightTreeTitle(item.node.name, keyword)
+        highlightTreeTitle(item.data.name, keyword)
       }
       features={[
         expansionFeature<DepartmentNode>(
@@ -168,7 +136,20 @@ export function DemoTreeSelect({
             : {},
         ),
         ...(useAsyncLoader && asyncLoader
-          ? [asyncLoadFeature<DepartmentNode>({ loadChildren: asyncLoader })]
+          ? [
+              asyncLoadFeature<DepartmentNode>({
+                loadChildren: async (item, context) => {
+                  const children = await asyncLoader(item, context)
+                  onTreeDataChange?.(
+                    updateDepartment(data, item.key, (parent) => ({
+                      ...parent,
+                      childrenList: [...children],
+                      childCount: children.length,
+                    })),
+                  )
+                },
+              }),
+            ]
           : []),
         ...(multiple
           ? [checkFeature<DepartmentNode>({ mode: checkStrictly ? 'strict' : 'cascade' })]
@@ -210,7 +191,7 @@ export function DemoTreeSelect({
         }
         const option: TreeSelectItem<DepartmentNode> = {
           value: item.key,
-          label: item.node.name,
+          label: item.data.name,
           node: item.node,
           disabled: item.disabled,
         }

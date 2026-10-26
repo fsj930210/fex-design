@@ -1,10 +1,9 @@
-import type { TreeDataNode } from '@fex-design/solid/ui/tree'
 import { createSignal } from 'solid-js'
 import { Tree, type TreeInstance } from '@fex-design/solid/ui/tree'
 import { Button } from '@fex-design/solid/ui/button'
 import { treeDemoData } from './_data/tree-demo'
 export default function Example() {
-  let tree: TreeInstance<TreeDataNode<string, string>> | undefined
+  let tree: TreeInstance<Record<string, unknown>> | undefined
   const [message, setMessage] = createSignal('')
   function locate() {
     const found = tree?.scrollTo('root-2-group-3-item-3', { reveal: true })

@@ -4,15 +4,14 @@ import type {
   TreeNode,
   TreeKey,
   TreeLoadState,
-  TreeMutationResult,
   TreeNodeData,
 } from '../types'
 
 export type AsyncLoadFeatureOptions<TNode extends TreeNodeData> = TreeAsyncLoaderOptions<TNode>
 
 export interface AsyncLoadFeatureApi {
-  load(key: TreeKey): Promise<unknown> | undefined
-  retry(key: TreeKey): Promise<unknown> | undefined
+  load(key: TreeKey): Promise<void> | undefined
+  retry(key: TreeKey): Promise<void> | undefined
   getState(key: TreeKey): TreeLoadState
   getError(key: TreeKey): unknown
 }
@@ -20,7 +19,6 @@ export interface AsyncLoadFeatureApi {
 interface TreeAsyncLoadManagerOptions<TNode extends TreeNodeData> {
   getLoader(): TreeAsyncLoaderOptions<TNode> | undefined
   getItem(key: TreeKey): TreeNode<TNode> | undefined
-  replaceChildren(key: TreeKey, children: readonly TNode[]): TreeMutationResult
   publish(key: TreeKey): void
 }
 
@@ -29,9 +27,9 @@ function createTreeAsyncLoadManager<TNode extends TreeNodeData>(
 ) {
   const states = new Map<TreeKey, TreeLoadState>()
   const errors = new Map<TreeKey, unknown>()
-  const requests = new Map<TreeKey, Promise<TreeMutationResult | undefined>>()
+  const requests = new Map<TreeKey, Promise<void>>()
 
-  const load = (key: TreeKey): Promise<TreeMutationResult | undefined> | undefined => {
+  const load = (key: TreeKey): Promise<void> | undefined => {
     const item = options.getItem(key)
     const loader = options.getLoader()
     if (!item || item.disabled || item.isLeaf || !loader) return undefined
@@ -44,10 +42,10 @@ function createTreeAsyncLoadManager<TNode extends TreeNodeData>(
     options.publish(key)
     const request = loader
       .loadChildren(item, { signal: controller.signal })
-      .then((children) => {
+      .then(() => {
         if (controller.signal.aborted) return undefined
         states.set(key, 'loaded')
-        return options.replaceChildren(key, children)
+        options.publish(key)
       })
       .catch((error: unknown) => {
         if (!controller.signal.aborted) {
@@ -90,7 +88,6 @@ export function asyncLoadFeature<TNode extends TreeNodeData>(
         const manager = createTreeAsyncLoadManager({
           getLoader: () => context.getOptions().asyncLoader,
           getItem: context.getItem,
-          replaceChildren: context.replaceChildren,
           publish: (key) => context.updateFeatureState([key]),
         })
         return {

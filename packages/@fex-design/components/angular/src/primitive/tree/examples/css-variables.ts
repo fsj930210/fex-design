@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/angular/primitive/tree'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   TreeRoot,
@@ -9,7 +8,7 @@ import {
   expansionFeature,
   selectionFeature,
 } from '@fex-design/angular/primitive/tree'
-import { treeDemoData } from './_data/tree-demo'
+import { treeCssDemoData } from './_data/tree-css-demo'
 @Component({
   selector: 'tree-css-variables-example',
   standalone: true,
@@ -19,20 +18,13 @@ import { treeDemoData } from './_data/tree-demo'
 })
 export class PrimitiveTreeCssVariablesExample {
   readonly options = {
-    treeData: treeDemoData
-      .slice(0, 1)
-      .map((node) => ({
-        ...node,
-        children: (node.children ?? [])
-          .slice(0, 1)
-          .map((group) => ({ ...group, children: (group.children ?? []).slice(0, 2) })),
-      })),
+    treeData: treeCssDemoData,
     defaultSelectedKeys: ['root-1-group-1-item-1'],
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
-      selectionFeature<TreeDataNode<string, string>>(),
+      selectionFeature<Record<string, unknown>>(),
     ],
   }
   readonly customStyle =

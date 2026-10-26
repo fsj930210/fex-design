@@ -147,7 +147,6 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
           intent,
         })
       feature?.clearActiveIntent(itemKey)
-      if (intent?.valid) feature?.drop(intent)
     },
   })
   const setItemRef = (element: Element | null) => {

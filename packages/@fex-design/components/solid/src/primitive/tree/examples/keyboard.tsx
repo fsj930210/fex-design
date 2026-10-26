@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/primitive/tree'
 import { createSignal } from 'solid-js'
 import {
   TreeRoot,
@@ -21,13 +20,13 @@ export default function Example() {
   const options = {
     treeData: treeDemoData,
     features: [
-      expansionFeature<TreeDataNode<string, string>>({
+      expansionFeature<Record<string, unknown>>({
         defaultExpandedKeys: ['root-1', 'root-1-group-1'],
       }),
-      focusFeature<TreeDataNode<string, string>>(),
-      keyboardFeature<TreeDataNode<string, string>>(),
-      selectionFeature<TreeDataNode<string, string>>(),
-      checkFeature<TreeDataNode<string, string>>(),
+      focusFeature<Record<string, unknown>>(),
+      keyboardFeature<Record<string, unknown>>(),
+      selectionFeature<Record<string, unknown>>(),
+      checkFeature<Record<string, unknown>>(),
     ],
     onFocusedKeyChange: setFocused,
     onSelectedKeysChange: setSelected,

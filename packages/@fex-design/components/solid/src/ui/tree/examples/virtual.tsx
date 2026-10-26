@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/ui/tree'
 import type { TreeInstance } from '@fex-design/solid/ui/tree'
 import { Tree } from '@fex-design/solid/ui/tree'
 import { Button } from '@fex-design/solid/ui/button'
@@ -10,7 +9,7 @@ import {
 } from './_data/tree-virtual-demo'
 export default function Example() {
   const treeProps = { treeData: virtualTreeDemoData, defaultExpandedKeys: virtualTreeExpandedKeys }
-  let viewport: TreeInstance<TreeDataNode<string, string>> | undefined
+  let viewport: TreeInstance<Record<string, unknown>> | undefined
   return (
     <section class="grid w-full gap-space-sm">
       <p class="text-sm text-muted-foreground">

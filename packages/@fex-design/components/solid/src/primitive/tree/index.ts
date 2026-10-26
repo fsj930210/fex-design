@@ -21,20 +21,5 @@ export { dndFeature } from '@fex-design/core/tree/features/dnd'
 export { focusFeature } from '@fex-design/core/tree/features/focus'
 export { keyboardFeature } from '@fex-design/core/tree/features/keyboard'
 export { searchFeature } from '@fex-design/core/tree/features/search'
-export {
-  createTreeDndItem,
-  type CreateTreeDndItemOptions,
-  type CreateTreeDndItemReturn,
-} from './create-tree-dnd-item'
-export { TreeContext, useTreeContext, type TreeContextValue } from './tree-context'
-export type {
-  TreeController,
-  TreeKey,
-  TreeDataNode,
-  TreeOptions,
-  TreeVisibleItem,
-  TreeDndCallbacks,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeNode,
-} from '@fex-design/core/tree/types'
+export { createTreeDndItem } from './create-tree-dnd-item'
+export type { TreeKey, TreeNode } from '@fex-design/core/tree/types'

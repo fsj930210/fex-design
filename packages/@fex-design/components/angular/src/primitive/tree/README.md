@@ -71,7 +71,7 @@ import { TreeDndItem } from '@fex-design/angular/primitive/tree'
 
 选择默认单选；多选必须显式注册 selection feature 的 multiple 配置。展开、选择、勾选、焦点、键盘、异步加载、搜索和 DnD 都由调用方加入 `features`，core 会校验依赖与冲突。
 
-`fieldNames` 不转换后端大树，直接映射 key/title/children/isLeaf/disabled；`isLeaf` 回调可表达尚未加载 children 的节点。搜索只返回结构共享的过滤数据，DOM 显隐、高亮和 title 模板属于调用方。结构增删改移是 controller 固有能力，并用 `onTreeDataChange` 返回不可变结果。
+`treeData` 是调用方维护的唯一数据源。拖拽只回传放置意图；`loadChildren` 返回 `Promise<void>`，由调用方请求并写回 children。新增、修改、删除和移动由业务处理，成功后可重新获取整棵树并传入；组件不修改源数据。
 
 ## 注意事项
 

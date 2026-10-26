@@ -115,6 +115,7 @@
     "./icons/circle-check": "./src/icons/circle-check.tsx",
     "./icons/circle-x": "./src/icons/circle-x.tsx",
     "./icons/info": "./src/icons/info.tsx",
+    "./icons/trash": "./src/icons/trash.tsx",
     "./icons/triangle-alert": "./src/icons/triangle-alert.tsx",
     "./icons/calendar": "./src/icons/calendar.tsx",
     "./icons/clock": "./src/icons/clock.tsx",

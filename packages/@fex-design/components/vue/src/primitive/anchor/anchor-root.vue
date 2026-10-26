@@ -18,7 +18,7 @@ const props = withDefaults(
     orientation?: AnchorOrientation
     container?: Window | HTMLElement | (() => Window | HTMLElement)
     targetOffset?: number
-    threshold?: number
+    threshold?: number | undefined
     behavior?: ScrollBehavior
   }>(),
   {
@@ -26,7 +26,6 @@ const props = withDefaults(
     activeMode: 'current',
     orientation: 'vertical',
     targetOffset: 0,
-    threshold: 16,
     behavior: 'smooth',
   },
 )

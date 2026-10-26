@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import type { TreeDataNode } from '@fex-design/vue/primitive/tree'
-
 import { TreeRoot, TreeViewport, TreeItem, expansionFeature } from '@fex-design/vue/primitive/tree'
 import { treeDemoData } from './_data/tree-demo'
 const options = {
   treeData: treeDemoData,
   features: [
-    expansionFeature<TreeDataNode<string, string>>({
+    expansionFeature<Record<string, unknown>>({
       defaultExpandedKeys: ['root-1', 'root-1-group-1'],
     }),
   ],

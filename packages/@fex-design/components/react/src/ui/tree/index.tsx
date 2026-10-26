@@ -1,3 +1,4 @@
+import type { TreeController, TreeVisibleItem } from './tree-internal-types'
 import { cn } from '@fex-design/utils'
 import type { TreeBehaviorProps } from './tree-types'
 import { createTreeSetup } from './tree-setup'
@@ -5,11 +6,7 @@ import { createTreeInstance, type TreeInstance } from './tree-instance'
 import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
 import { useTree } from '@fex-design/react/primitive/tree'
 import { useImperativeHandle, useRef } from 'react'
-import type {
-  TreeController,
-  TreeVisibleItem,
-  TreeViewportHandle,
-} from '@fex-design/react/primitive/tree'
+import type { TreeViewportHandle } from '@fex-design/react/primitive/tree'
 import {
   TreeCheckbox,
   TreeDropIndicator,
@@ -243,16 +240,9 @@ export function Tree<TNode extends Record<string, unknown>>({
   )
 }
 
-export type {
-  TreeController,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeKey,
-  TreeOptions,
-  TreeVisibleItem,
-} from '@fex-design/react/primitive/tree'
+export type { TreeKey } from '@fex-design/react/primitive/tree'
 
 export type { TreeInstance, TreeScrollOptions } from './tree-instance'
 export type { TreeBehaviorProps } from './tree-types'
 
-export type { TreeNode, TreeDataNode } from '@fex-design/react/primitive/tree'
+export type { TreeNode } from '@fex-design/react/primitive/tree'

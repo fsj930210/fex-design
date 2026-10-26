@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/primitive/tree'
 import { createSignal, createMemo, Show } from 'solid-js'
 import {
   TreeRoot,
@@ -21,7 +20,7 @@ export default function Example() {
     setKeyword(value)
     setExpandedKeys(getTreeSearchExpandedKeys(value))
   }
-  const features = [expansionFeature<TreeDataNode<string, string>>()]
+  const features = [expansionFeature<Record<string, unknown>>()]
   const options = createMemo(() => ({
     treeData: filterTreeDemoData(keyword()),
     expandedKeys: expandedKeys(),

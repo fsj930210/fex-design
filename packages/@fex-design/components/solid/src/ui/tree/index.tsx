@@ -1,10 +1,11 @@
+import type { TreeController, TreeVisibleItem } from './tree-internal-types'
 import { cn } from '@fex-design/utils'
 import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 import type { TreeBehaviorProps } from './tree-types'
 import { createTreeSetup } from './tree-setup'
 import { createTreeInstance, type TreeInstance, type TreeViewportInstance } from './tree-instance'
 import { createTree } from '@fex-design/solid/primitive/tree'
-import type { TreeController, TreeVisibleItem } from '@fex-design/solid/primitive/tree'
+
 import {
   TreeCheckbox,
   TreeItem,
@@ -209,16 +210,9 @@ export function Tree<TNode extends Record<string, unknown>>(props: TreeProps<TNo
   )
 }
 export { createTree, createTreeVisibleItems } from '@fex-design/solid/primitive/tree'
-export type {
-  TreeController,
-  TreeDragEventContext,
-  TreeItemEventContext,
-  TreeKey,
-  TreeOptions,
-  TreeVisibleItem,
-} from '@fex-design/solid/primitive/tree'
+export type { TreeKey } from '@fex-design/solid/primitive/tree'
 
 export type { TreeInstance, TreeScrollOptions } from './tree-instance'
 export type { TreeBehaviorProps } from './tree-types'
 
-export type { TreeNode, TreeDataNode } from '@fex-design/solid/primitive/tree'
+export type { TreeNode } from '@fex-design/solid/primitive/tree'

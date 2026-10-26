@@ -1,4 +1,3 @@
-import type { TreeDataNode } from '@fex-design/solid/ui/tree'
 import { createSignal, createMemo, onMount, onCleanup, Show } from 'solid-js'
 import { Tree } from '@fex-design/solid/ui/tree'
 import { Select } from '@fex-design/solid/ui/select'
@@ -11,7 +10,7 @@ import {
   type TreeAncestorResult,
 } from './_data/tree-remote-demo'
 export default function Example() {
-  const [treeData, setTreeData] = createSignal<readonly TreeDataNode<string, string>[]>([])
+  const [treeData, setTreeData] = createSignal<readonly Record<string, unknown>[]>([])
   const [matches, setMatches] = createSignal<TreeSearchMatch[]>([])
   const [selected, setSelected] = createSignal<string>()
   const [path, setPath] = createSignal<TreeAncestorResult>()
@@ -59,7 +58,6 @@ export default function Example() {
   const loadChildren = async (item: { key: string | number }) => {
     const children = await loadRemoteTree(String(item.key))
     setTreeData((current) => updateRemoteChildren(current, String(item.key), children))
-    return children
   }
 
   const rootProps = createMemo(() => ({ treeData: treeData(), loadChildren: loadChildren }))

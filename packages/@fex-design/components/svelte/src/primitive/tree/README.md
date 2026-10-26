@@ -73,7 +73,7 @@ import { treeDndItem } from '@fex-design/svelte/primitive/tree/tree-dnd-item'
 
 选择默认单选，多选由 selection feature 显式开启。展开、选择、勾选、焦点、键盘、异步加载、搜索、DnD 均按 feature 注册。`fieldNames` 直接读取后端字段，`isLeaf` 可基于额外字段判断潜在子节点。
 
-搜索 feature 只提供命中项和祖先链组成的树数据；原树 CSS 显隐、关键字高亮和 title DOM 由调用方决定。结构 CRUD 是 controller 基础能力，通过 `onTreeDataChange` 返回新树，而不是 feature。
+`treeData` 是调用方维护的唯一数据源。拖拽只回传放置意图；`loadChildren` 返回 `Promise<void>`，由调用方请求并写回 children。新增、修改、删除和移动由业务处理，成功后可重新获取整棵树并传入；组件不修改源数据。
 
 ## 注意事项
 

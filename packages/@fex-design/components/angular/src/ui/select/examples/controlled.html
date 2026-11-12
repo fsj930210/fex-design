@@ -35,7 +35,7 @@
       class="w-60"
       [options]="options"
       [value]="value()"
-      (change)="value.set($event.value?.toString() ?? '')"
+      (change)="value.set($any($event).value?.toString() ?? '')"
       [popoverProps]="{ open: open(), onOpenChange: setOpen }"
     ></div>
   </div>

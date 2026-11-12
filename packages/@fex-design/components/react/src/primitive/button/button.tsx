@@ -8,6 +8,7 @@ export function Button({
   color,
   ref,
   type = 'button',
+  loading: _loading,
   'data-slot': dataSlot = 'button',
   ...props
 }: ButtonProps) {

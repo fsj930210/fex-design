@@ -3,11 +3,13 @@ import { inputControlClassName } from '@fex-design/components-styles/input'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX } from 'solid-js'
 import { useInputContext } from './input-context'
+import { useNativeControlTarget } from '@fex-design/solid/primitives/native-control-target'
 
 export type InputControlProps = JSX.InputHTMLAttributes<HTMLInputElement>
 
 export function InputControl(props: InputControlProps) {
   const context = useInputContext('InputControl')
+  const nativeTarget = useNativeControlTarget()
   const [local, rest] = splitProps(props, [
     'class',
     'onInput',
@@ -20,6 +22,7 @@ export function InputControl(props: InputControlProps) {
     <input
       {...rest}
       ref={(node) => {
+        nativeTarget(node)
         context.setFocusElement(node)
         if (typeof local.ref === 'function') local.ref(node)
       }}

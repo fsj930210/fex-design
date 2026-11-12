@@ -5,7 +5,7 @@
   [value]="autoComplete.snapshot().value"
   [disabled]="autoComplete.disabled"
   [readOnly]="autoComplete.readOnly"
-  (valueChange)="input($event)"
+  (change)="input($event)"
   (clear)="autoComplete.controller.clear()"
 >
   <ng-content select="[prefix]" />

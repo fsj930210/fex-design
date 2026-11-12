@@ -26,5 +26,3 @@ export {
 } from './selection-column'
 export { useDataTable } from './use-data-table'
 export { useStableDataTableColumns } from './use-stable-data-table-columns'
-export { flexRender, tableFeatures } from '@tanstack/react-table'
-export type { Cell, Column, ColumnDef, Header, Row, TableFeatures } from '@tanstack/react-table'

@@ -36,6 +36,8 @@ export function Switch(props: SwitchProps) {
   return (
     <SwitchRoot
       {...rest}
+      checked={rest.checked}
+      onChange={rest.onChange}
       class={cn(local.class, local.classNames?.root)}
       style={mergeStyle(local.style, local.styles?.root)}
     >

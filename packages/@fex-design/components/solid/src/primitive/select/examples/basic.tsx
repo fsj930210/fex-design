@@ -5,7 +5,7 @@ const options = [
 ]
 export default function Example() {
   return (
-    <SelectRoot options={options} defaultValue="react">
+    <SelectRoot aria-invalid={props.invalid} options={options} defaultValue="react">
       <SelectTrigger class="w-72" placeholder="请选择框架" />
       <SelectContent />
     </SelectRoot>

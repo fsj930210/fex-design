@@ -42,6 +42,10 @@
     styles,
     ...rest
   }: Props = $props();
+  const boundChecked = $derived(rest.checked);
+  const handleChange = (event: Event) => {
+    rest.onchange?.(event);
+  };
 </script>
 
 <CheckboxRoot
@@ -52,6 +56,8 @@
   style={[style, styles?.root].filter(Boolean).join(";")}
   ><CheckboxControl
     {...rest}
+    checked={boundChecked}
+    onchange={handleChange}
     {value}
     {disabled}
     {indeterminate}

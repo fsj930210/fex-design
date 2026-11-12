@@ -4,6 +4,7 @@ import type { CheckboxValue } from '@fex-design/core/checkbox/types'
 import { cn } from '@fex-design/utils'
 import { createEffect, splitProps, useContext, type JSX } from 'solid-js'
 import { GroupContext, RootContext } from './checkbox-context'
+import { useNativeControlTarget } from '@fex-design/solid/primitives/native-control-target'
 
 export interface CheckboxControlProps extends Omit<
   JSX.InputHTMLAttributes<HTMLInputElement>,
@@ -16,6 +17,7 @@ export interface CheckboxControlProps extends Omit<
 export function CheckboxControl(props: CheckboxControlProps) {
   const root = useContext(RootContext)
   const group = useContext(GroupContext)
+  const nativeTarget = useNativeControlTarget()
   const [local, rest] = splitProps(props, [
     'id',
     'value',
@@ -37,6 +39,7 @@ export function CheckboxControl(props: CheckboxControlProps) {
     <input
       {...rest}
       ref={(node) => {
+        nativeTarget(node)
         input = node
         if (typeof local.ref === 'function') local.ref(node)
       }}

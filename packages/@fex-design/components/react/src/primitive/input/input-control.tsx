@@ -3,6 +3,7 @@ import { cn } from '@fex-design/utils'
 import type { ChangeEvent, ComponentProps, Ref } from 'react'
 import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import { useInputContext } from './input-context'
+import { useNativeControlTarget } from '@fex-design/react/hooks/use-native-control-target'
 
 export interface InputControlProps extends ComponentProps<'input'> {
   ref?: Ref<HTMLInputElement> | undefined
@@ -18,7 +19,8 @@ export function InputControl({
   ...props
 }: InputControlProps) {
   const context = useInputContext('InputControl')
-  const composedRef = useComposedRef(ref, context.focusRef)
+  const nativeTarget = useNativeControlTarget()
+  const composedRef = useComposedRef(ref, context.focusRef, nativeTarget)
 
   return (
     <input

@@ -1,4 +1,14 @@
 <div class="flex w-full min-w-0 flex-col items-stretch gap-4">
-  <div datePicker class="w-full min-w-0" placeholder="请选择日期"></div>
-  <div datePicker class="w-full min-w-0" [multiple]="true"></div>
+  <div
+    datePicker
+    [attr.aria-invalid]="invalid() ? 'true' : null"
+    class="w-full min-w-0"
+    placeholder="请选择日期"
+  ></div>
+  <div
+    datePicker
+    [attr.aria-invalid]="invalid() ? 'true' : null"
+    class="w-full min-w-0"
+    [multiple]="true"
+  ></div>
 </div>

@@ -97,6 +97,11 @@ export function MdxDocument(props: {
       <ApiTable
         value={componentApis[props.slug][apiProps.layer ?? props.layer]}
         framework={props.framework}
+        title={
+          (apiProps.layer ?? props.layer) === 'primitive'
+            ? `${componentApis[props.slug][apiProps.layer ?? props.layer].name}Root`
+            : componentApis[props.slug][apiProps.layer ?? props.layer].name
+        }
       />
     ),
     ApiContainer: (containerProps: ParentProps) => (
@@ -148,7 +153,11 @@ export function MdxDocument(props: {
               </span>
             </div>
             {apiProps.children}
-            <ApiTable value={value()} framework={props.framework} />
+            <ApiTable
+              value={value()}
+              framework={props.framework}
+              title={isUi() ? value()!.name : `${value()!.name}Root`}
+            />
           </div>
         </Show>
       )
@@ -183,6 +192,14 @@ export function MdxDocument(props: {
       >
         {headingProps.children}
       </h3>
+    ),
+    h4: (headingProps: ParentProps<{ id?: string }>) => (
+      <h4
+        id={getHeadingId(headingProps.id, headingProps.children)}
+        class="mt-6 scroll-mt-24 text-base font-semibold text-foreground"
+      >
+        {headingProps.children}
+      </h4>
     ),
     p: (paragraphProps: ParentProps) => (
       <p class="leading-relaxed text-foreground">{paragraphProps.children}</p>

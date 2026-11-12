@@ -33,11 +33,6 @@ export const inputNumberExamples = {
       description: 'Prefix、Clear、Suffix 与增减操作同时存在。',
     },
     {
-      id: 'validation',
-      title: '校验失败',
-      description: '使用 aria-invalid 与 aria-describedby 关联可见错误说明。',
-    },
-    {
       id: 'css-variables',
       title: 'CSS 变量',
       description: '定制自身和直接子组件的 CSS 变量，浮层单独设置作用域。',
@@ -82,11 +77,6 @@ export const inputNumberExamples = {
       id: 'affixes',
       title: '单位与操作共存',
       description: 'Prefix、Clear、Suffix 与增减操作同时存在。',
-    },
-    {
-      id: 'validation',
-      title: '校验失败',
-      description: '使用 aria-invalid 与 aria-describedby 关联可见错误说明。',
     },
     {
       id: 'semantic-styles',

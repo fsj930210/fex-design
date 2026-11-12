@@ -115,7 +115,7 @@ export function SelectRoot(props: SelectRootProps) {
     onSearch: (keyword) => optionsRef.current.onSearch?.(keyword),
   })
   const snapshot = useCoreStore(controllerRef.current)
-  const selection = selectionRef.current.getSnapshot()
+  const selection = useCoreStore(selectionRef.current!)
   const options = props.options ?? []
   const visibleOptions = filterSelectOptions(options, snapshot.searchValue, props.filterOption)
   const selectedOptions = selection.values.map(

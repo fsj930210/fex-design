@@ -23,6 +23,7 @@ import {
   type TemplateRef,
   viewChild,
 } from '@angular/core'
+import { NG_VALUE_ACCESSOR, type ControlValueAccessor } from '@angular/forms'
 import { EyeIcon } from '@fex-design/angular/icons/eye'
 import { EyeOffIcon } from '@fex-design/angular/icons/eye-off'
 import { LoadingIcon } from '@fex-design/angular/icons/loading'
@@ -38,12 +39,13 @@ import {
   InputRoot,
   InputSuffix,
 } from '@fex-design/angular/primitive/input'
+import { FormControlBase } from '../../forms/form-control-base'
 
 export type InputClassNames = InputClassNamesBase
 export type InputStyles = InputStylesBase<string>
 
 @Directive()
-abstract class InputBase {
+abstract class InputBase extends FormControlBase<string> {
   readonly value = input<string>()
   readonly defaultValue = input('')
   readonly disabled = input(false, { transform: booleanAttribute })
@@ -61,7 +63,11 @@ abstract class InputBase {
   readonly addonAfter = input<string | TemplateRef<unknown> | null>()
   readonly classNames = input<InputClassNames>({})
   readonly styles = input<InputStyles>({})
-  readonly valueChange = output<string>()
+  protected readonly resolvedFormValue = this.resolveFormValue(
+    () => this.value(),
+    () => this.defaultValue(),
+  )
+  readonly onChange = output<Event>()
   readonly cleared = output<void>({ alias: 'clear' })
   protected readonly root = viewChild(InputRoot)
   protected readonly control = viewChild(InputControl)
@@ -77,6 +83,13 @@ abstract class InputBase {
   }
   blur() {
     this.control()?.blur()
+    this.markFormTouched()
+  }
+  resolvedValue() {
+    return this.resolvedFormValue()
+  }
+  emitFormChange(value: string) {
+    this.emitFormValue(value)
   }
   select() {
     this.control()?.select()
@@ -97,6 +110,7 @@ abstract class InputBase {
     InputSuffix,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Input, multi: true }],
   host: { '[class]': 'groupClassName', 'data-slot': 'input-group', role: 'group' },
   templateUrl: './input.html',
 })
@@ -120,6 +134,7 @@ export class Input extends InputBase {
     EyeOffIcon,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: InputPassword, multi: true }],
   host: { '[class]': 'groupClassName', 'data-slot': 'input-group', role: 'group' },
   templateUrl: './input-password.html',
 })
@@ -147,6 +162,7 @@ export class InputPassword extends InputBase {
     Button,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: InputSearch, multi: true }],
   host: { '[class]': 'groupClassName', 'data-slot': 'input-group', role: 'group' },
   templateUrl: './input-search.html',
 })

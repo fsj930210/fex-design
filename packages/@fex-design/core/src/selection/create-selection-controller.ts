@@ -56,10 +56,10 @@ export function createSelectionController(options: SelectionOptions = {}): Selec
       return
     }
 
-    if (!isControlled()) {
-      store.setSnapshot(nextSnapshot)
+    if (isControlled()) {
+      controlledSnapshot = nextSnapshot
     }
-
+    store.setSnapshot(nextSnapshot)
     options.onChange?.(nextSnapshot.values, {
       previousValues: previousSnapshot.values,
       changedValues: diffSelectionValues(previousSnapshot.values, nextSnapshot.values),

@@ -5,7 +5,7 @@
     [editable]="true"
     [minCount]="2"
     [maxCount]="5"
-    (change)="changeValues($event.value)"
+    (change)="changeValues($any($event).value)"
   ></div>
   <p>当前节点：{{ values().join('、') }}</p>
 </div>

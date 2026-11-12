@@ -39,7 +39,7 @@
 | parser / formatter   | InputNumberParser / InputNumberFormatter | 内置   | 分离编辑文本与 number。     |
 | disabled / readOnly  | boolean                                  | false  | 禁止编辑和操作。            |
 | keyboard             | boolean                                  | true   | 启用 ArrowUp 与 ArrowDown。 |
-| onChange             | (event, value) => void                   | —      | 返回原始事件与 number。     |
+| onChange             | (value) => void                          | —      | 返回解析后的 number。       |
 
 支持 Input 的全部功能及原生 input 属性。`classNames` 和 `styles` 可定制 root、control、clear、prefix、suffix、actions、increment、decrement。
 

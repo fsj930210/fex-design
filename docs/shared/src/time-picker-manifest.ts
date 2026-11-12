@@ -1,6 +1,11 @@
 export const timePickerExamples = {
   primitive: [
     {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description: '由调用方施加 form-error / form-warning 类，展示时间选择控件的表单反馈样式。',
+    },
+    {
       id: 'confirm',
       title: '选择确认',
       description: '调用方组合受控值与底部操作，确认提交，取消或关闭恢复已提交值。',
@@ -30,13 +35,6 @@ export const timePickerExamples = {
       title: 'CSS 变量',
       description: '定制输入背景、文字、边框与聚焦光环。',
       height: 650,
-    },
-    {
-      id: 'form-appearance',
-      title: '表单反馈样式',
-      description:
-        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
-      height: 1100,
     },
     { id: 'basic', title: '基本用法', description: '默认输入和时间列。', height: 480 },
     {
@@ -92,6 +90,11 @@ export const timePickerExamples = {
   ],
   ui: [
     {
+      id: 'form-appearance',
+      title: '表单反馈样式',
+      description: '由调用方施加 form-error / form-warning 类，展示时间选择控件的表单反馈样式。',
+    },
+    {
       id: 'confirm',
       title: '选择确认',
       description: '调用方组合受控值与底部操作，确认提交，取消或关闭恢复已提交值。',
@@ -127,13 +130,6 @@ export const timePickerExamples = {
       title: '结构化样式',
       description: '通过 classNames 和 styles 分别定制输入、浮层、时间列及选中项。',
       height: 700,
-    },
-    {
-      id: 'form-appearance',
-      title: '表单反馈样式',
-      description:
-        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
-      height: 1100,
     },
     { id: 'basic', title: '基本用法', description: '默认输入和时间列。', height: 480 },
     {

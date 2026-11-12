@@ -1,25 +1,24 @@
+import type { ComponentProps } from 'react'
 import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldLabel,
-  FieldRoot,
-  FieldRequiredIndicator,
-} from '@fex-design/react/primitive/field'
-import { Form, useForm } from '@fex-design/react/primitive/form'
-import { MentionsContent } from '@fex-design/react/primitive/mentions/content'
-import { MentionsItem } from '@fex-design/react/primitive/mentions/item'
-import { MentionsList } from '@fex-design/react/primitive/mentions/list'
-import { MentionsRoot } from '@fex-design/react/primitive/mentions/root'
-import { MentionsTrigger } from '@fex-design/react/primitive/mentions/trigger'
-import { useMentions } from '@fex-design/react/primitive/mentions/use-mentions'
+  FormRoot,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormError,
+  useForm,
+} from '@fex-design/react/primitive/form'
+import {
+  MentionsRoot,
+  MentionsTrigger,
+  MentionsContent,
+  MentionsList,
+  MentionsItem,
+  useMentions,
+} from '@fex-design/react/primitive/mentions'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
 import { filterByText, mentionUsers } from './data'
-
-function errorsOf(value: unknown) {
-  return Array.isArray(value) ? value.map(String) : []
-}
 
 function UserItems() {
   const mentions = useMentions()
@@ -33,53 +32,41 @@ function UserItems() {
     </MentionsList>
   )
 }
-
-export function ValidationDemo() {
-  const form = useForm({ defaultValues: { prompt: '' }, onSubmit: async () => undefined })
+type PromptControlProps = Omit<ComponentProps<typeof MentionsTrigger>, 'onChange'> & {
+  value?: string
+  onChange?: (value: string) => void
+}
+function PromptControl({ value, onChange, ...props }: PromptControlProps) {
   return (
-    <Card
-      title="Form validation"
-      description="Invalid state drives the default system Textarea styling."
-    >
-      <Form form={form} className="grid max-w-xl gap-2">
-        <Field
+    <MentionsRoot value={value} onChange={(next) => onChange?.(next)}>
+      <MentionsTrigger {...props} placeholder="提交空内容以显示校验反馈" />
+      <MentionsContent>
+        <UserItems />
+      </MentionsContent>
+    </MentionsRoot>
+  )
+}
+export function ValidationDemo() {
+  const form = useForm({ defaultValues: { prompt: '' }, onSubmit: () => undefined })
+  return (
+    <Card title="Form validation" description="组合提及控件与字段反馈。">
+      <FormRoot form={form}>
+        <FormField
           name="prompt"
           validators={{
-            onSubmit: ({ value }) => (String(value).trim() ? undefined : 'Prompt is required.'),
+            onSubmit: ({ value }) => (String(value).trim() ? undefined : '请输入提示内容'),
           }}
         >
-          {(field) => {
-            const errors = errorsOf(field.state.meta.errors)
-            const invalid = errors.length > 0
-            return (
-              <FieldRoot required invalid={invalid} hasError={invalid}>
-                <FieldLabel>
-                  Prompt <FieldRequiredIndicator />
-                </FieldLabel>
-                <FieldControl>
-                  {() => (
-                    <MentionsRoot
-                      value={String(field.state.value)}
-                      onChange={(next) => field.handleChange(next)}
-                      invalid={invalid}
-                      required
-                    >
-                      <MentionsTrigger placeholder="Submit empty content to see validation" />
-                      <MentionsContent>
-                        <UserItems />
-                      </MentionsContent>
-                    </MentionsRoot>
-                  )}
-                </FieldControl>
-                <FieldError errors={errors} />
-              </FieldRoot>
-            )
-          }}
-        </Field>
-        <Button className="w-fit" type="submit">
-          Validate
-        </Button>
-      </Form>
+          <FormItem>
+            <FormLabel required>提示内容</FormLabel>
+            <FormControl>
+              <PromptControl />
+            </FormControl>
+            <FormError />
+          </FormItem>
+        </FormField>
+        <Button type="submit">提交校验</Button>
+      </FormRoot>
     </Card>
   )
 }

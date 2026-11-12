@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, signal, input, booleanAttribute } from '@angular/core'
 import {
   SliderRange,
   SliderRoot,
@@ -13,6 +13,7 @@ import {
   templateUrl: './basic.html',
 })
 export class SliderBasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
   protected readonly value = signal([42])
   protected readonly ended = signal([42])
 }

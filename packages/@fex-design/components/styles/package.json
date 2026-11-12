@@ -27,8 +27,6 @@
     "./data-table": "./src/data-table.ts",
     "./date-picker": "./src/date-picker.ts",
     "./empty": "./src/empty.ts",
-    "./field": "./src/field.ts",
-    "./form-treatment": "./src/form-treatment.ts",
     "./input": "./src/input.ts",
     "./input-otp": "./src/input-otp.ts",
     "./input-number": "./src/input-number.ts",
@@ -66,7 +64,8 @@
     "./toast": "./src/toast.ts",
     "./transfer": "./src/transfer.ts",
     "./textarea": "./src/textarea.ts",
-    "./time-picker": "./src/time-picker.ts"
+    "./time-picker": "./src/time-picker.ts",
+    "./form": "./src/form.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",

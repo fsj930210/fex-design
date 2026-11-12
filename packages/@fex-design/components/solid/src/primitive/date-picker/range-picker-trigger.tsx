@@ -41,7 +41,7 @@ export type RangePickerTriggerProps = Omit<
   InputRootProps,
   | 'value'
   | 'defaultValue'
-  | 'onValueChange'
+  | 'onChange'
   | 'onClear'
   | 'readOnly'
   | 'children'

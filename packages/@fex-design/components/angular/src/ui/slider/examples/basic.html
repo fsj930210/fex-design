@@ -2,7 +2,7 @@
   <div
     slider
     [value]="value()"
-    (change)="changeValue($event.value)"
+    (change)="changeValue($any($event).value)"
     (end)="endValue($event.value)"
   ></div>
   <p>当前值：{{ value() }}；结束值：{{ ended() }}</p>

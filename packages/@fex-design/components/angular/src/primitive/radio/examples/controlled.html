@@ -6,7 +6,7 @@
   <div
     radioGroup
     [value]="value()"
-    (valueChange)="value.set($event.value)"
+    (valueChange)="value.set($any($event).value ?? $any($event))"
     orientation="horizontal"
   >
     <label class="inline-flex items-center gap-2"><button radio value="apple"></button>苹果</label
@@ -23,7 +23,7 @@
 <div
   radioGroup
   [value]="value()"
-  (valueChange)="value.set($event.value)"
+  (valueChange)="value.set($any($event).value ?? $any($event))"
   orientation="horizontal"
   class="gap-0"
 >

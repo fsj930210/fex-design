@@ -4,7 +4,8 @@ export function collectToc(article: HTMLElement): readonly AnchorItemData<string
   const items: Array<AnchorItemData<string> & { children?: AnchorItemData<string>[] }> = []
   let section: (typeof items)[number] | undefined
   let subsection: (typeof items)[number] | undefined
-  const elements = article?.querySelectorAll<HTMLElement>('h2[id], h3[id], [data-toc-item]') ?? []
+  const elements =
+    article?.querySelectorAll<HTMLElement>('h2[id], h3[id], h4[id], [data-toc-item]') ?? []
   for (const element of elements) {
     const isSection = element.tagName === 'H2'
     const isSubsection = element.tagName === 'H3' && !element.hasAttribute('data-toc-item')

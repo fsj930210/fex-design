@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import {
   TimePickerRoot,
   TimePickerTrigger,
@@ -25,4 +25,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class TimePickerBasicExample {}
+export class TimePickerBasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
+}

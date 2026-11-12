@@ -1,72 +1,62 @@
-import { NgTemplateOutlet } from '@angular/common'
+import { ChangeDetectionStrategy, Component, input, output, TemplateRef } from '@angular/core'
+import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  contentChild,
-  forwardRef,
-  inject,
-  Injector,
-  input,
-  TemplateRef,
-  viewChild,
-} from '@angular/core'
-import type { InputSize, InputVariant } from '@fex-design/core/input/types'
-import { getPickerContentKind } from '@fex-design/core/date-picker/view'
-import { createHostStyle } from '@fex-design/angular/signals/host-style'
-import {
-  DatePickerRoot,
-  DatePickerTrigger,
   DatePickerContent,
-  DatePickerPanel,
   DatePickerFooter,
-  DatePickerState,
-  type DatePickerFooterContent,
+  DatePickerPanel,
+  DatePickerTrigger,
+  DatePickerRoot,
 } from '@fex-design/angular/primitive/date-picker'
-import { Popover } from '@fex-design/angular/primitive/popover'
-import { PickerOwnerToken } from '../../primitive/date-picker/owner-context'
-import { PickerContainerToken } from '../../primitive/date-picker/container-context'
-import { PickerAppearanceToken } from '../../primitive/date-picker/appearance-context'
+import type { DatePickerSelectionValue } from '@fex-design/angular/primitive/date-picker'
+import { FormControlBase } from '../../forms/form-control-base'
+
 @Component({
   selector: 'div[datePicker]',
-  exportAs: 'datePicker',
   standalone: true,
   imports: [
-    NgTemplateOutlet,
+    DatePickerRoot,
     DatePickerTrigger,
     DatePickerContent,
     DatePickerPanel,
     DatePickerFooter,
   ],
-  hostDirectives: [Popover],
-  providers: [
-    DatePickerState,
-    { provide: DatePickerRoot, useExisting: forwardRef(() => DatePicker) },
-    { provide: PickerOwnerToken, useExisting: DatePickerState },
-    { provide: PickerContainerToken, useFactory: () => inject(DatePicker) },
-    { provide: PickerAppearanceToken, useFactory: () => inject(DatePicker).appearance },
-  ],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: DatePicker, multi: true }],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class]': 'hostClassName()', 'data-slot': 'date-picker' },
   templateUrl: './date-picker.html',
 })
-export class DatePicker extends DatePickerRoot {
+export class DatePicker extends FormControlBase<DatePickerSelectionValue> {
+  readonly value = input<DatePickerSelectionValue>(null)
+  readonly defaultValue = input<DatePickerSelectionValue>(null)
+  readonly change = output<DatePickerSelectionValue>()
+  readonly clearable = input(false)
   readonly placeholder = input<string>()
-  readonly prefix = input<string | number | TemplateRef<unknown>>()
-  readonly suffix = input<string | number | TemplateRef<unknown>>()
-  readonly size = input<InputSize>()
-  readonly variant = input<InputVariant>()
-  readonly footer = input<DatePickerFooterContent>()
-  readonly prefixTemplate = contentChild<TemplateRef<unknown>>('prefix')
-  readonly suffixTemplate = contentChild<TemplateRef<unknown>>('suffix')
-  readonly triggerTemplate = contentChild<TemplateRef<unknown>>('trigger')
-  readonly panelTemplate = contentChild<TemplateRef<unknown>>('panel')
-  readonly footerTemplate = contentChild<TemplateRef<unknown>>('footer')
-  readonly footerContent = computed(() =>
-    this.footer() === undefined ? this.footerTemplate() : this.footer(),
+  readonly triggerTemplate = input<TemplateRef<unknown>>()
+  readonly panelTemplate = input<TemplateRef<unknown>>()
+  readonly inputProps = input<unknown>()
+  readonly calendarProps = input<unknown>()
+  readonly minDate = input<unknown>()
+  readonly maxDate = input<unknown>()
+  readonly multiple = input(false)
+  readonly defaultOpen = input(false)
+  readonly popoverProps = input<unknown>()
+  readonly showTime = input<unknown>()
+  readonly open = input(false)
+  readonly disabledTime = input<unknown>()
+  readonly disabled = input(false)
+  readonly disabledDate = input<unknown>()
+  readonly footer = input<unknown>()
+  readonly format = input<string>()
+  readonly picker = input<unknown>()
+  readonly weekStartsOn = input<number>()
+  readonly maxCount = input<number>()
+  readonly locale = input<unknown>()
+  readonly classNames = input<unknown>()
+  protected readonly resolvedValue = this.resolveFormValue(
+    () => this.value(),
+    () => this.defaultValue(),
   )
-  readonly footerKind = computed(() => getPickerContentKind(this.footerContent()))
-  protected readonly injector = inject(Injector)
-  protected readonly triggerInjector = viewChild('trigger', { read: Injector })
-  protected readonly hostStyle = createHostStyle()
+  protected handleChange(value: DatePickerSelectionValue) {
+    this.emitFormValue(value)
+    this.change.emit(value)
+  }
 }

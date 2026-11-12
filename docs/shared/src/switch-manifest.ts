@@ -38,11 +38,6 @@ export const switchExamples = {
       description: '两种形状均展示关闭和开启状态的禁用开关。',
     },
     {
-      id: 'validation',
-      title: '校验失败',
-      description: '两种形状使用 aria-invalid 和 aria-describedby 表达校验失败。',
-    },
-    {
       id: 'controlled',
       title: '受控与非受控',
       description: '非受控开关自行更新；受控开关由外部按钮设置开启和关闭。',
@@ -101,11 +96,6 @@ export const switchExamples = {
       id: 'disabled',
       title: 'Disabled',
       description: '两种形状均展示关闭和开启状态的禁用开关。',
-    },
-    {
-      id: 'validation',
-      title: '校验失败',
-      description: '两种形状使用 aria-invalid 和 aria-describedby 表达校验失败。',
     },
     {
       id: 'controlled',

@@ -29,7 +29,7 @@ export interface CheckboxProps extends ParentProps<CheckboxControlProps> {
     label?: JSX.CSSProperties
   }
 }
-export function Checkbox(props: CheckboxProps) {
+function CheckboxView(props: CheckboxProps) {
   const [local, rest] = splitProps(props, [
     'children',
     'size',
@@ -51,6 +51,8 @@ export function Checkbox(props: CheckboxProps) {
     >
       <CheckboxControl
         {...rest}
+        checked={rest.checked}
+        onChange={rest.onChange}
         value={local.value}
         disabled={local.disabled}
         class={local.classNames?.control}
@@ -71,6 +73,9 @@ export function Checkbox(props: CheckboxProps) {
       )}
     </CheckboxRoot>
   )
+}
+export function Checkbox(props: CheckboxProps) {
+  return <CheckboxView {...props} />
 }
 export interface CheckboxOption {
   label: JSX.Element

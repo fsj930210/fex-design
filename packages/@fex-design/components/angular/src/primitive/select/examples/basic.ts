@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/angular/primitive/select'
 @Component({
   selector: 'select-basic-primitive-example',
@@ -8,6 +8,7 @@ import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/angular/pr
   templateUrl: './basic.html',
 })
 export class SelectBasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
   readonly options = [
     { value: 'react', label: 'React' },
     { value: 'vue', label: 'Vue' },

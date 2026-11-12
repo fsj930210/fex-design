@@ -37,7 +37,8 @@ export interface SliderProps extends Omit<
 const arrayValue = (value: number | readonly number[] | undefined) =>
   typeof value === 'number' ? [value] : value
 export function Slider(props: SliderProps) {
-  const values = () => arrayValue(props.value)
+  const boundValue = () => props.value
+  const values = () => arrayValue(boundValue())
   const defaults = () => arrayValue(props.defaultValue)
   const [internalValues, setInternalValues] = createSignal<number[]>([
     ...(defaults() ?? [props.min ?? 0]),
@@ -46,7 +47,7 @@ export function Slider(props: SliderProps) {
   const count = () => currentValues().length
   const disabledThumbs = () => (Array.isArray(props.disabled) ? props.disabled : [])
   const returnValue = (value: number[]) =>
-    value.length > 0 && (typeof props.value === 'number' || typeof props.defaultValue === 'number')
+    value.length > 0 && (typeof boundValue() === 'number' || typeof props.defaultValue === 'number')
       ? value[0]!
       : value
   return (

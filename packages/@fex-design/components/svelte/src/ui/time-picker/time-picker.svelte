@@ -82,6 +82,8 @@
     trigger,
     panel,
     footer,
+    value,
+    onChange,
     ...options
   }: Props = $props();
   const columns = $derived(
@@ -92,7 +94,7 @@
   );
 </script>
 
-<TimePickerRoot {...options}>
+<TimePickerRoot {...options} {value} {onChange}>
   <TimePickerTrigger
     class={cn(classNames?.root, className)}
     style={[styles?.root, style].filter(Boolean).join(";")}

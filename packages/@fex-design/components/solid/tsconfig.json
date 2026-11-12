@@ -1,0 +1,13 @@
+{
+  "extends": "@fex/config-tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "./dist/types",
+    "rootDir": "./src",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

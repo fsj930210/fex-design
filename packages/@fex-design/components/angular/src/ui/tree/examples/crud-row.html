@@ -17,7 +17,12 @@
   (keydown)="keydown($event)"
   (focusout)="commit()"
 >
-  <div input [value]="draft()" (valueChange)="draft.set($event)" aria-label="节点名称"></div>
+  <div
+    input
+    [value]="draft()"
+    (change)="draft.set($any($event.target).value)"
+    aria-label="节点名称"
+  ></div>
 </div>
 } @else {
 <button

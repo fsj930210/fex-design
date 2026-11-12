@@ -1,42 +1,26 @@
-<span inputPrefix [class]="prefixClassName()" [style]="prefixStyle()">
-  <ng-content select="[inputNumberPrefix]" />
-</span>
-<input
-  inputNumberControl
-  [id]="id()"
-  [name]="name()"
-  [placeholder]="placeholder()"
-  [required]="required()"
-  [attr.aria-invalid]="invalid() || null"
-  [attr.aria-describedby]="describedBy() || null"
-  [class]="cn(classNames()?.control, controlProps()?.class)"
-  [style]="mergeStyle(styles()?.control, controlProps()?.style)"
-/>
-@if (clearable()) {
-<button
-  inputNumberClear
-  [class]="cn(classNames()?.clear, clearProps()?.class)"
-  [style]="mergeStyle(styles()?.clear, clearProps()?.style)"
-></button>
-}
-<span inputSuffix [class]="suffixClassName()" [style]="suffixStyle()">
-  <ng-content select="[inputNumberSuffix]" />
-</span>
-@if (controls()) {
-<span
-  inputNumberActions
-  [class]="cn(classNames()?.actions, actionsProps()?.class)"
-  [style]="mergeStyle(styles()?.actions, actionsProps()?.style)"
+<div
+  inputNumberRoot
+  [value]="resolvedValue()"
+  [defaultValue]="defaultValue()"
+  [min]="min()"
+  [max]="max()"
+  [step]="step()"
+  [disabled]="disabled()"
+  [readOnly]="readOnly()"
+  (change)="handleChange($event)"
 >
-  <button
-    inputNumberIncrement
-    [class]="cn(classNames()?.increment, incrementProps()?.class)"
-    [style]="mergeStyle(styles()?.increment, incrementProps()?.style)"
-  ></button>
-  <button
-    inputNumberDecrement
-    [class]="cn(classNames()?.decrement, decrementProps()?.class)"
-    [style]="mergeStyle(styles()?.decrement, decrementProps()?.style)"
-  ></button>
-</span>
-}
+  <input
+    inputNumberControl
+    [value]="resolvedValue() ?? ''"
+    [min]="min()"
+    [max]="max()"
+    [step]="step()"
+    [disabled]="disabled()"
+    [readOnly]="readOnly()"
+  />
+  @if (controls() !== false) {
+  <span inputNumberActions
+    ><button inputNumberIncrement></button><button inputNumberDecrement></button
+  ></span>
+  }
+</div>

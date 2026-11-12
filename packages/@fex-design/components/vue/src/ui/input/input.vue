@@ -19,14 +19,15 @@ const props = withDefaults(defineProps<InputProps>(), {
   defaultValue: '',
   size: 'md',
   variant: 'outlined',
+  placeholder: undefined,
   clearable: false,
 })
-const emit = defineEmits<{ 'update:modelValue': [value: string]; clear: [] }>()
+const emit = defineEmits<{ change: [event: Event]; clear: [] }>()
 const attrs = useAttrs()
 const control = useTemplateRef<{ focus: () => void; blur: () => void; select: () => void }>(
   'control',
 )
-const rootClass = computed(() => cn(props.classNames?.root, attrs.class as string | undefined))
+const rootClass = computed(() => cn(props.classNames?.root, attrs?.class as string | undefined))
 defineExpose({
   focus: () => control.value?.focus(),
   blur: () => control.value?.blur(),
@@ -43,16 +44,18 @@ defineExpose({
       ><slot name="addonBefore"
     /></InputAddonBefore>
     <InputRoot
-      :value="modelValue"
+      :value="value"
       :default-value="defaultValue"
       :disabled="disabled"
       :read-only="readonly"
       :size="size"
       :variant="variant"
-      :data-warning="typeof attrs['data-warning'] === 'string' ? attrs['data-warning'] : undefined"
+      :data-warning="
+        typeof attrs?.['data-warning'] === 'string' ? attrs['data-warning'] : undefined
+      "
       :class="rootClass"
-      :style="[styles?.root, attrs.style]"
-      @value-change="emit('update:modelValue', $event)"
+      :style="[styles?.root, attrs?.style]"
+      @change="emit('change', $event)"
       @clear="emit('clear')"
     >
       <InputPrefix v-if="$slots.prefix" :class="classNames?.prefix" :style="styles?.prefix"
@@ -60,6 +63,7 @@ defineExpose({
       /></InputPrefix>
       <InputControl
         v-bind="attrs"
+        :placeholder="placeholder ?? (attrs.placeholder as string | undefined)"
         ref="control"
         :class="classNames?.control"
         :style="styles?.control"
@@ -80,16 +84,16 @@ defineExpose({
   </InputGroup>
   <InputRoot
     v-else
-    :value="modelValue"
+    :value="value"
     :default-value="defaultValue"
     :disabled="disabled"
     :read-only="readonly"
     :size="size"
     :variant="variant"
-    :data-warning="typeof attrs['data-warning'] === 'string' ? attrs['data-warning'] : undefined"
+    :data-warning="typeof attrs?.['data-warning'] === 'string' ? attrs['data-warning'] : undefined"
     :class="rootClass"
-    :style="[styles?.root, attrs.style]"
-    @value-change="emit('update:modelValue', $event)"
+    :style="[styles?.root, attrs?.style]"
+    @change="emit('change', $event)"
     @clear="emit('clear')"
   >
     <InputPrefix v-if="$slots.prefix" :class="classNames?.prefix" :style="styles?.prefix"
@@ -97,6 +101,7 @@ defineExpose({
     /></InputPrefix>
     <InputControl
       v-bind="attrs"
+      :placeholder="placeholder ?? (attrs.placeholder as string | undefined)"
       ref="control"
       :class="classNames?.control"
       :style="styles?.control"

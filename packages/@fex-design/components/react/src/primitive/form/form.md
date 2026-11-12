@@ -1,118 +1,205 @@
-# React Form and Field primitives
+# Form
 
-## 用途
+## Purpose
 
-`Form` 提供原生提交边界和当前 TanStack Form 实例的 Context。`Field` 是唯一公开的字段状态入口：它使用最近的 `Form` 实例，并完整透传 TanStack Field 的原生参数。
+Styled composable parts backed by TanStack Form 1.33.5. Use the native TanStack documentation for values, validators, listeners and instance methods.
 
-`FieldRoot`、`FieldLabel`、`FieldControl`、`FieldDescription` 和 `FieldError` 只处理 DOM 语义、ARIA 和字段结构，不保存表单值或校验状态。
+## Parts
 
-## 导入
+| Part                   | Responsibility                                              | Host                                                |
+| ---------------------- | ----------------------------------------------------------- | --------------------------------------------------- |
+| FormRoot               | Stable TanStack instance and native submit/reset            | form, or no host                                    |
+| FormField              | Native field registration and context                       | No extra DOM                                        |
+| FormItem               | Field layout and automatic error appearance                 | div                                                 |
+| FormControl            | Automatic value/event binding and native target association | No additional DOM; native/component host in Angular |
+| FormLabel              | Field label and optional required marker                    | label                                               |
+| FormDescription        | Mounted description association                             | p                                                   |
+| FormError              | Visible field errors or custom error content                | div                                                 |
+| FormGroup / FormLegend | Native semantic grouping                                    | fieldset / legend                                   |
+| FormSubscribe          | Selected reactive state                                     | No extra DOM                                        |
+
+## Example
+
+This example composes the public Primitive parts for text input, selection, checkbox and buttons. Complete function-based and Zod registration examples are available alongside it.
 
 ```tsx
+import { InputRoot, InputControl } from '@fex-design/react/primitive/input'
+import { SelectRoot, SelectTrigger, SelectContent } from '@fex-design/react/primitive/select'
 import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldLabel,
-  FieldRoot,
-} from '@fex-design/react/primitive/field'
-import { Form, scrollToField, useForm } from '@fex-design/react/primitive/form'
-```
+  CheckboxRoot,
+  CheckboxControl,
+  CheckboxIndicator,
+} from '@fex-design/react/primitive/checkbox'
+import { useState } from 'react'
+import {
+  FormRoot,
+  FormField,
+  FormItem,
+  FormControl,
+  FormLabel,
+  FormDescription,
+  FormError,
+  FormSubscribe,
+  useForm,
+} from '@fex-design/react/primitive/form'
+import { Button } from '@fex-design/react/primitive/button'
 
-## 核心示例
+const departments = [
+  { value: 'product', label: '产品与设计' },
+  { value: 'engineering', label: '研发团队' },
+  { value: 'operations', label: '客户运营' },
+]
+const requiredText = ({ value }: { value: unknown }) =>
+  String(value ?? '').trim() ? undefined : '请填写此项'
+const emailRule = ({ value }: { value: unknown }) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value)) ? undefined : '请输入有效邮箱'
 
-```tsx
-export function Example() {
+export function BasicExample() {
+  const [result, setResult] = useState('')
+
   const form = useForm({
-    defaultValues: { email: '' },
-    onSubmit: ({ value }) => console.log(value),
+    defaultValues: { name: '', email: '', department: 'product', notifications: true },
+
+    onSubmit: async ({ value }) => {
+      setResult(`已保存 ${value.name} 的资料，通知将发送至 ${value.email}。`)
+    },
   })
 
   return (
-    <Form form={form}>
-      <Field
-        name="email"
-        validators={{
-          onBlur: ({ value }) => (/^\S+@\S+\.\S+$/.test(value) ? undefined : '请输入有效邮箱'),
-        }}
-      >
-        {(field) => {
-          const invalid = field.state.meta.isTouched && !field.state.meta.isValid
+    <section className="mx-auto grid w-full max-w-2xl gap-5 p-5">
+      <header className="grid gap-1">
+        <h3 className="text-base font-semibold">团队成员资料</h3>
+        <p className="text-sm text-muted-foreground">
+          填写团队成员资料，使用输入框、部门选择和通知偏好完成保存。
+        </p>
+      </header>
 
-          return (
-            <FieldRoot required invalid={invalid} hasError={invalid}>
-              <FieldLabel>邮箱</FieldLabel>
-              <FieldControl>
-                {({ props }) => (
-                  <input
-                    {...props}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(event) => field.handleChange(event.target.value)}
-                  />
-                )}
-              </FieldControl>
-              {invalid && <FieldError errors={field.state.meta.errors.map(String)} />}
-            </FieldRoot>
-          )
-        }}
-      </Field>
-      <button type="submit">提交</button>
-    </Form>
+      <FormRoot form={form} scrollToFirstError className="w-full">
+        <FormField name={'name'} validators={{ onBlur: requiredText, onSubmit: requiredText }}>
+          <FormItem>
+            <FormLabel required>姓名</FormLabel>
+            <FormControl>
+              <InputRoot>
+                <InputControl placeholder="请输入联系人姓名" />
+              </InputRoot>
+            </FormControl>
+
+            <FormError />
+          </FormItem>
+        </FormField>
+        <FormField name={'email'} validators={{ onBlur: emailRule, onSubmit: emailRule }}>
+          <FormItem>
+            <FormLabel required>工作邮箱</FormLabel>
+            <FormControl>
+              <InputRoot>
+                <InputControl placeholder="name@company.com" />
+              </InputRoot>
+            </FormControl>
+
+            <FormError />
+          </FormItem>
+        </FormField>
+        <FormField name={'department'}>
+          <FormItem>
+            <FormLabel>所属部门</FormLabel>
+            <FormControl>
+              <SelectRoot options={departments}>
+                <SelectTrigger inputProps={{ 'aria-label': '所属部门' }} />
+                <SelectContent />
+              </SelectRoot>
+            </FormControl>
+            <FormDescription>用于分配项目通知和审批权限。</FormDescription>
+            <FormError />
+          </FormItem>
+        </FormField>
+        <FormField name={'notifications'}>
+          <FormItem>
+            <div className="flex items-start gap-3">
+              <CheckboxRoot>
+                <FormControl valuePropName="checked">
+                  <CheckboxControl />
+                </FormControl>
+                <CheckboxIndicator />
+              </CheckboxRoot>
+              <FormLabel>接收项目进度邮件</FormLabel>
+            </div>
+            <FormError />
+          </FormItem>
+        </FormField>
+        <FormSubscribe selector={(state) => state.isSubmitting}>
+          {(busy) => (
+            <div className="flex flex-wrap gap-3 border-t border-border pt-4">
+              <Button type="submit" variant="solid" color="primary" loading={busy}>
+                保存资料
+              </Button>
+              <Button type="reset" disabled={busy}>
+                重置
+              </Button>
+            </div>
+          )}
+        </FormSubscribe>
+      </FormRoot>
+
+      {result && (
+        <p role="status" className="rounded-md bg-muted-background p-3 text-sm">
+          {result}
+        </p>
+      )}
+    </section>
   )
 }
 ```
 
 ## API
 
-| 组件         | 参数                 | 说明                                                                                   |
-| ------------ | -------------------- | -------------------------------------------------------------------------------------- |
-| `Form`       | `form`               | 必填。TanStack Form 实例。                                                             |
-| `Form`       | `component`          | `'form' \| false`；`false` 时仅提供 Context，不渲染宿主 form。                         |
-| `Form`       | `scrollToFirstError` | `boolean \| ScrollIntoViewOptions & { focus?: boolean }`；提交失败后定位首个无效控件。 |
-| `Field`      | TanStack Field props | 原样支持 `name`、`defaultValue`、`validators`、`listeners` 等全部 TanStack 参数。      |
-| `FieldRoot`  | `orientation`        | `'vertical' \| 'horizontal' \| 'responsive' \| 'inline'`。字段内部结构流向。           |
-| `FieldGroup` | `orientation`        | `'vertical' \| 'inline'`。字段集合排布。                                               |
+| Property                 | Type                                        | Default                | Required | Meaning                                                      |
+| ------------------------ | ------------------------------------------- | ---------------------- | -------- | ------------------------------------------------------------ |
+| form                     | TanStack FormApi                            | —                      | Yes      | FormRoot: the original framework instance.                   |
+| component                | 'form' \| false                             | 'form'                 | No       | Root host mode; Angular uses form/div selectors.             |
+| errorVisibility          | 'touched' \| 'submit' \| 'always'           | 'touched'              | No       | Root default or Field override; does not execute validation. |
+| scrollToFirstError       | boolean \| FormScrollOptions                | false                  | No       | Root-owned invalid submits only.                             |
+| name                     | DeepKeys<TData>                             | —                      | Yes      | Field path, including objects and arrays.                    |
+| validators / listeners   | TanStack native types                       | —                      | No       | Native field validation and business events.                 |
+| defaultValue / mode      | TanStack native types                       | Native                 | No       | Native field initialization and array mode.                  |
+| valuePropName / trigger  | string                                      | Framework default      | No       | Control value property and value event.                      |
+| getValueFromEvent        | (...args: unknown[]) => unknown             | Native event/value     | No       | Synchronous event-to-value conversion.                       |
+| getValueProps            | (value: unknown) => Record<string, unknown> | Value property mapping | No       | Value properties only; cannot replace handlers or ARIA.      |
+| required                 | boolean                                     | false                  | No       | Label marker and aria-required; not a validator.             |
+| selector                 | (state) => TSelected                        | —                      | Yes      | FormSubscribe selects a local slice.                         |
+| className / class, style | Host native types                           | —                      | No       | Passed to the owning DOM part.                               |
 
-## TanStack 校验与依赖
+### Control binding
 
-不提供 `rules`、`dependencies`、`validateTrigger`、`initialValue` 等二次 API。直接使用 TanStack Field 的原生参数：
+Pass exactly one direct control child to FormControl.
 
-```tsx
-<Field
-  name="confirmPassword"
-  validators={{
-    onChange: ({ value }) =>
-      value === form.getFieldValue('password') ? undefined : '两次密码不一致',
-    onChangeListenTo: ['password'],
-    onChangeAsync: async ({ value }) => await checkAvailability(value),
-    onChangeAsyncDebounceMs: 400,
-  }}
->
-  {(field) => /* render field */ null}
-</Field>
-```
+The default input conversion reads the native event target or takes the first direct value argument. Use getValueFromEvent for multiple arguments and getValueProps for value conversion. Existing controlled value/defaultValue conflicts are rejected. Event conversion runs before field.handleChange, then the original callback runs once where the framework supports callback injection.
 
-- 校验时机：`validators.onMount`、`onChange`、`onBlur`、`onSubmit`、`onDynamic`。
-- 异步校验和防抖：`onChangeAsync` / `onBlurAsync` 以及对应的 `...AsyncDebounceMs`。
-- 校验依赖：`validators.onChangeListenTo` / `onBlurListenTo`。
-- 初始值：优先 `useForm({ defaultValues })`，字段级覆盖使用 `defaultValue`。
-- 动态数组：数组字段的 render prop 中直接调用 `pushValue`、`insertValue`、`removeValue`；子字段使用完整路径，例如 `contacts[${index}].email`。
+### State and instance
 
-## 滚动定位
+Create the instance with useForm. Configure defaultValues, validators, listeners, onSubmit and onSubmitInvalid there. No schema library is bundled. Use reset(data) for a new default baseline, setFieldValue for a local update, setFieldMeta/setErrorMap for errors, and native array methods for lists.
 
-```tsx
-scrollToField(formElement, 'profile.email', {
-  behavior: 'smooth',
-  block: 'center',
-  focus: true,
-})
-```
+Programmatic setFieldValue follows TanStack listener/meta/validation behavior; use its explicit options for silent updates. Reading a snapshot is not a reactive subscription. Use FormSubscribe or the native Store selector. useFormInstance/useFormTargets returns the instance or target scope, not a copied state model.
 
-`scrollToField` 是独立方法，可定位任意字段；省略字段名才定位第一个 `aria-invalid=true` 的控件。`Form` 的 `scrollToFirstError` 只是提交失败场景的便捷行为。
+### Composition and types
 
-## 布局边界
+Field-related parts require FormField inside FormRoot. Item is layout only. Use class/style for horizontal or responsive layouts. No layout or label alignment properties are added. A mounted Root keeps its instance; replace the subtree when replacing the instance.
 
-布局属于 Field 的结构协议，不属于 `Form`。primitive 不提供 `labelCol`、`wrapperCol`、全局 layout、标签宽度或统一标签对齐策略；这些组合与业务默认值留给后续 ui 层。
+Context does not infer a data generic from an arbitrary ancestor. React/Solid and typed SFC entry points accept explicit data parameters; use the native field logic with an explicit form for strict inference where template inference is insufficient. The independent native field API is exported from this same entry point.
 
-`FieldControl` 必须将 render prop 提供的 props 显式传给实际控件。`FieldDescription`、`FieldError`、`FieldLabel` 必须在 `FieldRoot` 内使用。
+### Accessibility
+
+Labels, descriptions and rendered errors register IDs automatically. IDs are not derived from field names. A custom control must forward the generated attributes and expose its actual target for focus. Empty Angular error hosts are hidden and do not register an error ID. Complex error objects require custom rendering; payloads remain unchanged in TanStack.
+
+## CSS variables
+
+| Variable                 | Default                   | Meaning                |
+| ------------------------ | ------------------------- | ---------------------- |
+| --form-gap               | var(--space-xl, 1rem)     | Root and group spacing |
+| --form-item-gap          | var(--space-sm, 0.375rem) | Item spacing           |
+| --form-label-color       | var(--foreground)         | Label color            |
+| --form-description-color | var(--muted-foreground)   | Description color      |
+| --form-error-color       | var(--danger)             | Error color            |
+
+## Automatic feedback and part styling
+
+TanStack owns validation. FormItem and FormControl apply the current field presentation automatically; controls do not maintain their own form-validation state. Native control refs associate ARIA and focus with the real input, including provider-only roots. Style each actual Primitive part through its own class/style. FormControl introduces no wrapper and preserves the original part hierarchy.

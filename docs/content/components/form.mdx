@@ -1,0 +1,32 @@
+---
+title: Form
+description: 基于 TanStack Form 的可组合表单部件。
+---
+
+## 何时使用
+
+当表单需要在业务流程中收集、校验和提交字段值时使用。Form 的基础表单示例位于示例第一项；UI 是快捷组合层，Primitive 是可拆分部件层，两层都要求调用方显式绑定控件值和事件。
+
+FormRoot 与 UI Form 内置 `layout="vertical" | "horizontal" | "inline"`。`labelAlign` 设置标签文本对齐，`labelWidth` 设置标签列宽，`labelGap` 设置标签与控件间距，`labelWrap` 控制长标签换行。两层复用相同布局规则，无需额外编写排列样式；字段值和事件仍由调用方显式绑定。
+
+Form 自带字段之间的间距，由 `--form-gap` 控制，默认继承 `--space-xl`（当前主题为 16px）。FormField 自带内部间距，用于标签、控件、说明和错误，由 `--form-item-gap` 控制，默认继承 `--space-sm`（当前主题为 6px）。两层使用相同默认值；FormField 本身没有额外的外边距。
+
+通过 Form 的原生提交处理提交失败时，默认滚动并聚焦首个可交互错误控件，可用 `scrollToFirstError={false}` 关闭。指定字段定位通过表单子组件获取 DOM 操作：React、Vue、Solid 使用 `useFormActions()`，Svelte 使用 `getFormActions()`，Angular 使用 `injectFormActions()`。返回的 `scrollToField(name, options)`、`scrollToFirstError(options)` 和 `focusField(name)` 只操作当前表单登记的控件，不改变 TanStack 的值或校验规则。UI 与 Primitive 入口提供相同能力。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+  <ApiSection layer="ui" title="UI API" />
+  <ApiSection layer="primitive" title="Primitive API" />
+</ApiContainer>
+
+## CSS Variables
+
+Form 和 FormRoot 共用同一组表单布局与反馈变量。变量可以写在表单根节点、局部容器或主题节点上；布局优先使用 `layout`、`labelWidth`、`labelGap` 等组件属性，变量用于统一主题和局部覆盖。
+
+<CssVariables />
+

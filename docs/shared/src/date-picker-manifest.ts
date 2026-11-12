@@ -4,8 +4,7 @@ export const datePickerExamples = {
       id: 'form-appearance',
       title: '表单反馈样式',
       description:
-        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
-      height: 1100,
+        '由调用方施加 form-error / form-warning 类，展示日期和范围选择控件的表单反馈样式。',
     },
     {
       id: 'date-time',
@@ -179,8 +178,7 @@ export const datePickerExamples = {
       id: 'form-appearance',
       title: '表单反馈样式',
       description:
-        '由调用方施加 form-error / form-warning 类；组件仅提供外观，不创建校验状态。CSS 变量可快速定制颜色。',
-      height: 1100,
+        '由调用方施加 form-error / form-warning 类，展示日期和范围选择控件的表单反馈样式。',
     },
     {
       id: 'date-time',

@@ -16,5 +16,3 @@ export {
   createDataTableSelectionColumn,
   type DataTableSelectionColumnOptions,
 } from './selection-column'
-export { tableFeatures } from '@tanstack/table-core'
-export type { Cell, Column, ColumnDef, Header, Row, TableFeatures } from '@tanstack/table-core'

@@ -54,11 +54,13 @@ import {
 
 import { SelectRoot } from './select-root'
 import { SelectValue } from './select-value'
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 export { SelectRoot, type SelectChangeMeta } from './select-root'
 @Component({
   selector: '[selectTrigger]',
   standalone: true,
   imports: [
+    NativeControlTarget,
     NgTemplateOutlet,
     PopoverTrigger,
     SelectValue,

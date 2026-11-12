@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import {
   CheckboxRoot,
   CheckboxControl,
@@ -13,4 +13,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class CheckboxPrimitiveBasicExample {}
+export class CheckboxPrimitiveBasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
+}

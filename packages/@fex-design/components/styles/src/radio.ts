@@ -1,5 +1,4 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import { formTreatment } from './form-treatment'
 
 export const radioGroupClassName = cva('grid min-w-0 gap-2', {
   variants: {
@@ -15,13 +14,13 @@ export const radioGroupClassName = cva('grid min-w-0 gap-2', {
 
 export const radioRootClassName = cva(
   [
-    'peer inline-flex size-[var(--radio-size,var(--radio-control-size))] shrink-0 items-center justify-center rounded-full border border-[var(--radio-border-color,var(--border))] bg-[var(--radio-background,var(--background))] text-[var(--radio-checked-color,var(--primary))] shadow-xs',
+    'peer inline-flex size-[var(--radio-size,var(--radio-control-size))] shrink-0 items-center justify-center rounded-full border border-[var(--form-border-color,var(--radio-border-color,var(--border)))] bg-[var(--radio-background,var(--background))] text-[var(--radio-checked-color,var(--primary))] shadow-xs ring-[length:var(--form-ring-width,0px)] ring-[var(--form-ring-color,transparent)]',
     'outline-none transition-none',
     'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-[var(--radio-ring-color,var(--focus-ring))]',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    formTreatment('aria-invalid=true', 'var(--danger)'),
-    formTreatment('data-[warning=true]', 'var(--warning)'),
     'data-[state=checked]:border-[var(--radio-checked-color,var(--primary))]',
+    'aria-[invalid=true]:border-[var(--form-border-color,var(--danger))] [[role=radiogroup][aria-invalid=true]_&]:border-[var(--form-border-color,var(--danger))]',
+    'data-[warning=true]:border-[var(--form-border-color,var(--warning))]',
   ].join(' '),
   {
     variants: {
@@ -48,15 +47,15 @@ export const radioLabelClassName =
 
 export const radioButtonClassName = cva(
   [
-    'relative -ml-px inline-flex h-[var(--radio-button-height,var(--radio-button-control-height))] min-w-0 items-center justify-center border border-[var(--radio-button-border-color,var(--border))] bg-[var(--radio-button-background,var(--background))] px-[var(--radio-button-padding-inline,var(--radio-button-control-padding-inline))] text-sm text-foreground shadow-xs',
+    'relative -ml-px inline-flex h-[var(--radio-button-height,var(--radio-button-control-height))] min-w-0 items-center justify-center border border-[var(--form-border-color,var(--radio-button-border-color,var(--border)))] bg-[var(--radio-button-background,var(--background))] px-[var(--radio-button-padding-inline,var(--radio-button-control-padding-inline))] text-sm text-foreground shadow-xs ring-[length:var(--form-ring-width,0px)] ring-[var(--form-ring-color,transparent)]',
     'first:ml-0 first:rounded-l-md last:rounded-r-md',
     'outline-none transition-none',
     'hover:bg-muted-background',
     'focus-visible:z-10 focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-[var(--radio-button-ring-color,var(--focus-ring))]',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    formTreatment('aria-invalid=true', 'var(--danger)'),
-    formTreatment('data-[warning=true]', 'var(--warning)'),
     'data-[state=checked]:z-10 data-[state=checked]:border-[var(--radio-button-checked-background,var(--primary))] data-[state=checked]:bg-[var(--radio-button-checked-background,var(--primary))] data-[state=checked]:text-[var(--radio-button-checked-foreground,var(--primary-foreground))]',
+    'aria-[invalid=true]:border-[var(--form-border-color,var(--danger))] [[role=radiogroup][aria-invalid=true]_&]:border-[var(--form-border-color,var(--danger))]',
+    'data-[warning=true]:border-[var(--form-border-color,var(--warning))]',
   ].join(' '),
   {
     variants: {

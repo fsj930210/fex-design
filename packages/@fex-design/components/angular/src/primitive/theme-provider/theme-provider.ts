@@ -11,8 +11,7 @@ import {
   ElementRef,
   HostBinding,
   Input,
-  Optional,
-  SkipSelf,
+  inject,
   signal,
 } from '@angular/core'
 import type { AfterViewInit, OnChanges, OnDestroy } from '@angular/core'
@@ -56,10 +55,9 @@ export class ThemeProvider implements AfterViewInit, OnChanges, OnDestroy {
     resolvedTheme: 'light',
   })
 
-  constructor(
-    private readonly elementRef: ElementRef<HTMLElement>,
-    @Optional() @SkipSelf() private readonly parent?: ThemeProvider,
-  ) {
+  private readonly parent = inject(ThemeProvider, { optional: true, skipSelf: true })
+
+  constructor(private readonly elementRef: ElementRef<HTMLElement>) {
     this.controller = createThemeController()
     this.snapshot.set(this.controller.getSnapshot())
   }

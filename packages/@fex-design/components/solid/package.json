@@ -23,8 +23,7 @@
     "./primitive/data-table": "./src/primitive/data-table/index.ts",
     "./primitive/date-picker": "./src/primitive/date-picker/index.ts",
     "./primitive/empty": "./src/primitive/empty/index.ts",
-    "./primitive/field": "./src/primitive/field/index.ts",
-    "./primitive/form": "./src/primitive/form/index.tsx",
+    "./primitive/form": "./src/primitive/form/index.ts",
     "./primitive/input": "./src/primitive/input/index.ts",
     "./primitive/kbd": "./src/primitive/kbd/index.ts",
     "./primitive/input-otp": "./src/primitive/input-otp/index.ts",
@@ -90,6 +89,7 @@
     "./ui/button": "./src/ui/button/index.tsx",
     "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.tsx",
+    "./ui/form": "./src/ui/form/index.tsx",
     "./ui/date-picker": "./src/ui/date-picker/index.ts",
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
@@ -145,6 +145,7 @@
     "./primitives/create-resize": "./src/primitives/create-resize.ts",
     "./primitives/create-sortable": "./src/primitives/create-sortable.ts",
     "./primitives/create-toasts": "./src/primitives/create-toasts.ts",
+    "./primitives/native-control-target": "./src/primitives/native-control-target.ts",
     "./i18n": "./src/i18n/index.tsx",
     "./*": "./src/*"
   },
@@ -166,7 +167,8 @@
   "devDependencies": {
     "@fex-design/docs-shared": "workspace:*",
     "solid-js": "1.9.15",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "zod": "4.4.3"
   },
   "peerDependencies": {
     "solid-js": "^1.9.0"

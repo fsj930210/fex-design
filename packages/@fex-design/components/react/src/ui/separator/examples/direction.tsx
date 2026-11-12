@@ -1,1 +1,1 @@
-export { DirectionDemo as default } from '@fex-design/react/primitive/separator/examples/direction'
+export { DirectionDemo as default } from '@fex-design/react/ui/separator/examples/direction'

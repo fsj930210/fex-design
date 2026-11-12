@@ -4,8 +4,8 @@
     timePicker
     [value]="draft()"
     [open]="open()"
-    (change)="draft.set($event.value)"
-    (openChange)="changeOpen($event)"
+    (change)="draft.set($any($event).value)"
+    (openChange)="changeOpen($any($event))"
   >
     <ng-template #footer
       ><div class="flex flex-wrap justify-end gap-2 border-t border-border p-2">

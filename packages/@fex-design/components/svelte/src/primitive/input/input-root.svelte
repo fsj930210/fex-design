@@ -18,14 +18,14 @@
     variant?: InputVariant;
     action?:
       ((element: HTMLElement) => { destroy?: () => void } | void) | undefined;
-    onValueChange?:
+    onChange?:
       | ((
           value: string,
           meta: { reason: InputChangeReason; event?: Event },
         ) => void)
       | undefined;
     onClear?: (() => void) | undefined;
-    children?: Snippet | undefined;
+    children?: Snippet<[InputContextValue]> | undefined;
   }
   let {
     class: className,
@@ -36,7 +36,7 @@
     size = "md",
     variant = "outlined",
     action,
-    onValueChange,
+    onChange,
     onClear,
     children,
     ...rest
@@ -49,7 +49,7 @@
   function runAction(node: HTMLElement) {
     return action?.(node);
   }
-  setInputContext({
+  const inputContext: InputContextValue = {
     value: () => currentValue,
     disabled: () => disabled,
     readOnly: () => readOnly,
@@ -60,7 +60,7 @@
     setValue: (next, reason, event) => {
       if (disabled || readOnly) return;
       if (value === undefined) internalValue = next;
-      onValueChange?.(next, {
+      onChange?.(next, {
         reason,
         ...(event === undefined ? {} : { event }),
       });
@@ -68,11 +68,12 @@
     clear: () => {
       if (!canClear) return;
       if (value === undefined) internalValue = "";
-      onValueChange?.("", { reason: "clear" });
+      onChange?.("", { reason: "clear" });
       onClear?.();
       element?.focus();
     },
-  });
+  };
+  setInputContext(inputContext);
 </script>
 
 <div
@@ -85,5 +86,5 @@
   data-variant={variant}
   class={cn(inputRootClassName({ size, variant }), className)}
 >
-  {@render children?.()}
+  {@render children?.(inputContext)}
 </div>

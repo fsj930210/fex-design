@@ -1,0 +1,227 @@
+<section class="mx-auto grid w-full max-w-2xl gap-5 p-5">
+  <header class="grid gap-1">
+    <h3 class="text-base font-semibold">不同控件的校验反馈</h3>
+    <p class="text-sm text-muted-foreground">
+      直接提交查看各字段错误，再逐项修正。控件通过显式绑定读写字段值，Form 负责反馈和字段关联。
+    </p>
+  </header>
+  <form formRoot [form]="form">
+    <div formField [tanstackField]="form" name="title" [validators]="rules.title" #title="field">
+      <label formLabel required>活动名称 · Input</label
+      ><ng-container formControl
+        ><div inputRoot [value]="title.api.state.value">
+          <input
+            inputControl
+            (input)="title.api.handleChange($any($event).target.value)"
+            (blur)="title.api.handleBlur()"
+            placeholder="输入活动名称"
+          /></div
+      ></ng-container>
+      <p formDescription>输入和提交均校验必填；失焦标记字段已交互。</p>
+      <div formError></div>
+    </div>
+    <div formField [tanstackField]="form" name="email" [validators]="rules.email" #email="field">
+      <label formLabel required>联系邮箱 · Input</label
+      ><ng-container formControl
+        ><div inputRoot [value]="email.api.state.value">
+          <input
+            inputControl
+            (input)="email.api.handleChange($any($event).target.value)"
+            (blur)="email.api.handleBlur()"
+            placeholder="organizer@example.com"
+          /></div
+      ></ng-container>
+      <p formDescription>格式错误展示在当前字段下方。</p>
+      <div formError></div>
+    </div>
+    <div
+      formField
+      [tanstackField]="form"
+      name="capacity"
+      [validators]="rules.capacity"
+      #capacity="field"
+    >
+      <label formLabel required>活动人数 · InputNumber</label
+      ><ng-container formControl
+        ><div
+          inputNumberRoot
+          [value]="capacity.api.state.value"
+          (change)="capacity.api.handleChange($event)"
+        >
+          <input inputNumberControl (blur)="capacity.api.handleBlur()" /><span inputNumberActions
+            ><button inputNumberIncrement></button><button inputNumberDecrement></button
+          ></span></div
+      ></ng-container>
+      <p formDescription>必须填写 1 到 50 的整数；输入 0 或 51 观察范围错误。</p>
+      <div formError></div>
+    </div>
+    <div formField [tanstackField]="form" name="venue" [validators]="rules.venue" #venue="field">
+      <label formLabel required>活动场地 · Select</label
+      ><ng-container formControl
+        ><div
+          selectRoot
+          [value]="venue.api.state.value || []"
+          [options]="venues"
+          [clearable]="true"
+          (change)="venue.api.handleChange(selectionValue($event.value))"
+        >
+          <div selectTrigger></div>
+          <div selectContent></div></div
+      ></ng-container>
+      <p formDescription>选择后清空，观察选择类控件的错误反馈。</p>
+      <div formError></div>
+    </div>
+    <div
+      formField
+      [tanstackField]="form"
+      name="published"
+      [validators]="rules.published"
+      #published="field"
+    >
+      <label formLabel required>开放报名 · Switch</label
+      ><ng-container formControl
+        ><button
+          switch
+          [checked]="published.api.state.value"
+          (change)="published.api.handleChange($event.checked)"
+          (blur)="published.api.handleBlur()"
+          aria-label="开放报名"
+        >
+          <span switchThumb></span></button
+      ></ng-container>
+      <p formDescription>布尔值规则要求开启报名。</p>
+      <div formError></div>
+    </div>
+    <div
+      formField
+      [tanstackField]="form"
+      name="agreement"
+      [validators]="rules.agreement"
+      #agreement="field"
+    >
+      <label formLabel required>活动条款 · Checkbox</label
+      ><ng-container formControl
+        ><div checkboxRoot>
+          <input
+            checkboxControl
+            type="checkbox"
+            [checked]="agreement.api.state.value"
+            (change)="agreement.api.handleChange($any($event).target.checked)"
+            (blur)="agreement.api.handleBlur()"
+            aria-label="同意活动条款"
+          /><span checkboxIndicator></span><label checkboxLabel>同意活动条款</label>
+        </div></ng-container
+      >
+      <p formDescription>勾选同意后清除当前错误。</p>
+      <div formError></div>
+    </div>
+    <div
+      formField
+      [tanstackField]="form"
+      name="session"
+      [validators]="rules.session"
+      #session="field"
+    >
+      <label formLabel required>活动形式 · Radio</label
+      ><ng-container formControl
+        ><div
+          radioGroup
+          [value]="session.api.state.value"
+          (onChange)="session.api.handleChange($any($event.value))"
+          orientation="horizontal"
+        >
+          @for (option of sessionOptions; track option.value) {
+          <label class="inline-flex items-center gap-2"
+            ><button radio [value]="option.value"></button>{{ option.label }}</label
+          >
+          }
+        </div></ng-container
+      >
+      <p formDescription>请选择一种活动形式，观察单选组的统一错误反馈。</p>
+      <div formError></div>
+    </div>
+    <div formField [tanstackField]="form" name="date" [validators]="rules.date" #date="field">
+      <label formLabel required>活动日期 · DatePicker</label
+      ><ng-container formControl
+        ><div
+          datePickerRoot
+          [value]="date.api.state.value"
+          (change)="date.api.handleChange($event)"
+          [clearable]="true"
+        >
+          <div
+            datePickerTrigger
+            placeholder="请选择活动日期"
+            (focusout)="date.api.handleBlur()"
+          ></div>
+          <div datePickerContent>
+            <div datePickerPanel></div>
+            <div datePickerFooter></div>
+          </div></div
+      ></ng-container>
+      <p formDescription>空值校验必填；选择日期后清除当前错误。</p>
+      <div formError></div>
+    </div>
+    <div formField [tanstackField]="form" name="time" [validators]="rules.time" #time="field">
+      <label formLabel required>开始时间 · TimePicker</label
+      ><ng-container formControl
+        ><div
+          timePickerRoot
+          [value]="time.api.state.value"
+          (change)="time.api.handleChange($event.value)"
+        >
+          <div
+            timePickerTrigger
+            [allowClear]="true"
+            (focusout)="time.api.handleBlur()"
+            placeholder="请选择开始时间"
+          ></div>
+          <ng-template popoverPortal
+            ><div timePickerContent>
+              <div timePickerPanel>
+                <div timePickerHourColumn></div>
+                <div timePickerMinuteColumn></div>
+                <div timePickerSecondColumn></div>
+              </div></div
+          ></ng-template></div
+      ></ng-container>
+      <p formDescription>选择时间后写入字段；清空后再次校验。</p>
+      <div formError></div>
+    </div>
+    <div
+      formField
+      [tanstackField]="form"
+      name="progress"
+      [validators]="rules.progress"
+      #progress="field"
+    >
+      <label formLabel required>准备进度 · Slider</label
+      ><ng-container formControl
+        ><div
+          sliderRoot
+          [value]="[progress.api.state.value]"
+          [min]="0"
+          [max]="100"
+          [step]="10"
+          (change)="progress.api.handleChange($event.value[0] ?? 0)"
+        >
+          <span sliderTrack><span sliderRange></span></span
+          ><span sliderThumb (blur)="progress.api.handleBlur()" aria-label="准备进度"></span></div
+      ></ng-container>
+      <p formDescription>初始为 0%，至少达到 30%；支持拖动和方向键。</p>
+      <div formError></div>
+    </div>
+    <div class="flex flex-wrap gap-3 border-t border-border pt-4">
+      <button button type="submit" variant="solid" color="primary">校验全部字段</button
+      ><button button type="button" (click)="setEmailError()">设置邮箱错误</button
+      ><button button type="reset" (click)="result.set('')">清空重试</button>
+    </div>
+    <ng-template [formSubscribe]="values" let-values>
+      <pre class="overflow-auto rounded-md bg-muted-background p-3 text-xs">
+{{ stringify(values) }}</pre>
+    </ng-template>
+  </form>
+  @if (result()) {
+  <p role="status" class="text-sm text-muted-foreground">{{ result() }}</p>
+  }
+</section>

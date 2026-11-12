@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const props = defineProps<{ invalid?: boolean }>()
 import { RadioButtonGroup, RadioGroup } from '@fex-design/vue/ui/radio'
 const options = [
   { label: '苹果', value: 'apple' },
@@ -9,7 +10,12 @@ const options = [
   <div class="grid gap-4">
     <section class="grid gap-2">
       <span class="text-sm text-muted-foreground">Radio</span
-      ><RadioGroup default-value="apple" orientation="horizontal" :options="options" />
+      ><RadioGroup
+        :aria-invalid="props.invalid || undefined"
+        default-value="apple"
+        orientation="horizontal"
+        :options="options"
+      />
     </section>
     <section class="grid gap-2">
       <span class="text-sm text-muted-foreground">RadioButton</span

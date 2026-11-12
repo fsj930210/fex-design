@@ -1,3 +1,7 @@
 <div class="flex w-full min-w-0 flex-col gap-4">
-  <div timePicker [defaultValue]="{ hour: 9, minute: 30, second: 0 }"></div>
+  <div
+    timePicker
+    [attr.aria-invalid]="invalid() ? 'true' : null"
+    [defaultValue]="{ hour: 9, minute: 30, second: 0 }"
+  ></div>
 </div>

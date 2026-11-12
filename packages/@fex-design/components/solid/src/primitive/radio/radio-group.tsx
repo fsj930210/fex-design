@@ -1,3 +1,4 @@
+import { useNativeControlTarget } from '@fex-design/solid/primitives/native-control-target'
 import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
 import type { SelectionChangeMeta } from '@fex-design/core/selection/types'
 import { radioGroupClassName, type RadioGroupStyleProps } from '@fex-design/components-styles/radio'
@@ -13,7 +14,7 @@ export interface RadioGroupProps
   value?: RadioValue
   defaultValue?: RadioValue
   disabled?: boolean
-  onValueChange?: (value: RadioValue, meta: RadioChangeMeta) => void
+  onChange?: (value: RadioValue, meta: RadioChangeMeta) => void
 }
 
 function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioChangeMeta {
@@ -25,14 +26,16 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
 }
 
 export function RadioGroup(props: RadioGroupProps) {
+  const nativeTarget = useNativeControlTarget()
   const [local, rest] = splitProps(props, [
+    'ref',
     'value',
     'defaultValue',
     'disabled',
     'orientation',
     'class',
     'children',
-    'onValueChange',
+    'onChange',
   ])
   const controller = createSelectionController({
     get value() {
@@ -47,7 +50,7 @@ export function RadioGroup(props: RadioGroupProps) {
     onChange(values, meta) {
       const nextValue = values[0]
       if (nextValue === undefined) return
-      local.onValueChange?.(nextValue, toRadioChangeMeta(nextValue, meta))
+      local.onChange?.(nextValue, toRadioChangeMeta(nextValue, meta))
     },
   })
   const snapshot = createCoreStoreSignal(controller)
@@ -64,6 +67,10 @@ export function RadioGroup(props: RadioGroupProps) {
     >
       <div
         {...rest}
+        ref={(element) => {
+          nativeTarget(element)
+          if (typeof local.ref === 'function') local.ref(element)
+        }}
         role="radiogroup"
         data-slot="radio-group"
         data-orientation={orientation()}

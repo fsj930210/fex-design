@@ -36,7 +36,7 @@ export type DatePickerTriggerProps = Omit<
   InputRootProps,
   | 'value'
   | 'defaultValue'
-  | 'onValueChange'
+  | 'onChange'
   | 'onClear'
   | 'readOnly'
   | 'children'

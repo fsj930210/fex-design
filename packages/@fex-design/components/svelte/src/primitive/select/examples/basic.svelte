@@ -1,4 +1,5 @@
 <script lang="ts">
+  let { invalid = false } = $props<{ invalid?: boolean }>();
   import {
     SelectRoot,
     SelectTrigger,
@@ -10,7 +11,7 @@
   ];
 </script>
 
-<SelectRoot {options} defaultValue="react"
+<SelectRoot aria-invalid={invalid} {options} defaultValue="react"
   ><SelectTrigger class="w-72" placeholder="请选择框架" /><SelectContent
   /></SelectRoot
 >

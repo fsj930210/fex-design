@@ -24,6 +24,7 @@ import {
   output,
   TemplateRef,
 } from '@angular/core'
+import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   SelectContent,
   SelectList,
@@ -31,6 +32,7 @@ import {
   SelectTrigger,
   type SelectChangeMeta,
 } from '@fex-design/angular/primitive/select'
+import { FormControlBase } from '../../forms/form-control-base'
 
 export type SelectInputProps = ReturnType<SelectTrigger['inputProps']>
 
@@ -43,9 +45,12 @@ export type SelectPopoverProps = Omit<PopoverOptions, 'onOpenChange'> & {
   standalone: true,
   imports: [NgTemplateOutlet, SelectRoot, SelectTrigger, SelectContent, SelectList],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Select, multi: true }],
   templateUrl: './select.html',
 })
-export class Select<TItem extends object = SelectOption> {
+export class Select<TItem extends object = SelectOption> extends FormControlBase<
+  SelectionValue | SelectionValue[] | undefined
+> {
   readonly triggerProps = input<
     Pick<NativeAttributes, 'class' | 'style'> & {
       inputProps?: ReturnType<SelectTrigger['inputProps']> | undefined
@@ -92,10 +97,18 @@ export class Select<TItem extends object = SelectOption> {
   readonly inputProps = input<SelectInputProps>({})
   readonly popoverProps = input<SelectPopoverProps>({})
   readonly getPopupContainer = input<PopoverOptions['getPopupContainer']>()
-  readonly change = output<{
+  readonly onChange = output<{
     value: SelectionValue | SelectionValue[] | undefined
     meta: SelectChangeMeta
   }>()
+  protected handleCvaChange(event: {
+    value: SelectionValue | SelectionValue[] | undefined
+    meta: SelectChangeMeta
+  }) {
+    this.emitFormValue(event.value)
+    this.onChange.emit(event)
+    this.markFormTouched()
+  }
   readonly search = output<string>()
   readonly openChange = output<boolean>()
   readonly prefix = contentChild<TemplateRef<void>>('prefix')

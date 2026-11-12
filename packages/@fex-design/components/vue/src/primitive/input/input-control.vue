@@ -3,6 +3,7 @@ import { inputControlClassName } from '@fex-design/components-styles/input'
 import { cn } from '@fex-design/utils'
 import { computed, inject, ref, useAttrs, type ComponentPublicInstance } from 'vue'
 import { inputContextKey } from './input-context'
+import { useNativeControlTarget } from '@fex-design/vue/composables/use-native-control-target'
 
 defineOptions({ name: 'InputControl', inheritAttrs: false })
 const attrs = useAttrs()
@@ -16,6 +17,7 @@ const input = inject(inputContextKey)
 if (!input) throw new Error('InputControl must be used inside InputRoot.')
 const inputContext = input
 const element = ref<HTMLInputElement | null>(null)
+useNativeControlTarget(() => element.value)
 const className = computed(() => cn(inputControlClassName, attrs.class as string | undefined))
 function onInput(event: Event) {
   emit('input', event)
@@ -35,11 +37,11 @@ defineExpose({
 </script>
 <template>
   <input
-    v-bind="attrs"
+    v-bind="$attrs"
     :ref="setElement"
     :value="inputContext.value.value"
-    :disabled="inputContext.disabled.value || attrs.disabled === '' || Boolean(attrs.disabled)"
-    :readonly="inputContext.readOnly.value || attrs.readonly === '' || Boolean(attrs.readonly)"
+    :disabled="inputContext.disabled.value || $attrs.disabled === '' || Boolean($attrs.disabled)"
+    :readonly="inputContext.readOnly.value || $attrs.readonly === '' || Boolean($attrs.readonly)"
     data-slot="input-control"
     :class="className"
     @blur="emit('blur', $event)"

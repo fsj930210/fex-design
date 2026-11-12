@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import { InputClear, InputControl, InputRoot } from '@fex-design/angular/primitive/input'
 @Component({
   selector: 'input-primitive-basic-example',
@@ -7,4 +7,6 @@ import { InputClear, InputControl, InputRoot } from '@fex-design/angular/primiti
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class BasicExample {}
+export class BasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
+}

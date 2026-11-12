@@ -22,7 +22,7 @@ export function InputRoot({
   readOnly,
   size = 'md',
   variant = 'outlined',
-  onValueChange,
+  onChange,
   onClear,
   className,
   ref,
@@ -34,7 +34,7 @@ export function InputRoot({
     defaultValue,
     disabled,
     readOnly,
-    onValueChange,
+    onChange,
     onClear,
   })
 

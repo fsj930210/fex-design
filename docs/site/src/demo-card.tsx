@@ -22,7 +22,7 @@ const MINIMUM_PREVIEW_HEIGHT = 240
 type DemoLayer = 'primitive' | 'ui'
 
 export function DemoCard(props: {
-  scene: { id: string; title: string; description: string; height?: number }
+  scene: { id: string; title: string; description: string; height?: number; group?: string }
   framework: Framework
   layer: DemoLayer
   slug: string
@@ -78,7 +78,7 @@ export function DemoCard(props: {
 
 function SingleDemoPanel(props: {
   layer: DemoLayer
-  scene: { id: string; title: string; description: string; height?: number }
+  scene: { id: string; title: string; description: string; height?: number; group?: string }
   framework: Framework
   slug: string
 }) {
@@ -258,7 +258,7 @@ function SingleDemoPanel(props: {
           when={tab() === 'preview'}
           fallback={
             <div
-              class="docs-code-block max-h-120 min-h-45 overflow-auto bg-background p-4 text-xs leading-relaxed font-mono"
+              class="docs-code-block h-full min-h-45 overflow-auto bg-background p-4 text-xs leading-relaxed font-mono"
               dir="ltr"
               innerHTML={
                 source.loading

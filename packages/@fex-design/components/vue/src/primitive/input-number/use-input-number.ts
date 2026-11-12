@@ -24,7 +24,7 @@ export interface UseInputNumberOptions extends InputNumberConstraints {
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
   keyboard?: boolean | undefined
-  onChange?: ((event: Event, value: number | undefined) => void) | undefined
+  onChange?: ((value: number | undefined) => void) | undefined
 }
 
 export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> = {}) {
@@ -64,7 +64,7 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
         constraints.value,
       ),
     )
-    options.value.onChange?.(event, next)
+    options.value.onChange?.(next)
     return next
   }
   const input = (text: string, event: Event) => {
@@ -74,7 +74,7 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
     const next = parseInputNumber(text, parser.value)
     if (text.trim() === '' || next !== undefined) {
       setValue(next)
-      options.value.onChange?.(event, next)
+      options.value.onChange?.(next)
     }
     return next
   }
@@ -82,7 +82,7 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
     if (!canChangeInputNumber(options.value, event)) return
     const before = value.value
     const next = commit(parseInputNumber(draft.value, parser.value) ?? before)
-    if (next !== before) options.value.onChange?.(event, next)
+    if (next !== before) options.value.onChange?.(next)
   }
   const keydown = (event: KeyboardEvent) => {
     if (options.value.keyboard === false || !canChangeInputNumber(options.value, event)) return
@@ -94,7 +94,7 @@ export function useInputNumber(source: MaybeRefOrGetter<UseInputNumberOptions> =
   const clear = (event?: Event) => {
     if (!canChangeInputNumber(options.value, event)) return
     const next = commit(undefined)
-    if (event) options.value.onChange?.(event, next)
+    if (event) options.value.onChange?.(next)
     return next
   }
   // External value or formatter changes refresh the buffer only outside active typing.

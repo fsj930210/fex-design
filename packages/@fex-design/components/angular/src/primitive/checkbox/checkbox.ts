@@ -1,4 +1,5 @@
 import { createCheckboxGroupController } from '@fex-design/core/checkbox/create-checkbox-group-controller'
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 import type {
   CheckboxGroupChangeMeta,
   CheckboxGroupController,
@@ -44,6 +45,7 @@ let checkboxId = 0
     '[class]': 'hostClassName()',
     'data-slot': 'checkbox-root',
     '[attr.data-size]': 'size()',
+    '[attr.aria-invalid]': 'ariaInvalid() || null',
   },
   template: '<ng-content />',
 })
@@ -53,22 +55,21 @@ export class CheckboxRoot {
   defaultChecked = input(false, { transform: booleanAttribute })
   disabled = input(false, { transform: booleanAttribute })
   size = input<'sm' | 'md' | 'lg'>('md')
+  ariaInvalid = input<boolean | 'true' | 'false' | undefined>(undefined, { alias: 'aria-invalid' })
   readonly controlId = `checkbox-${++checkboxId}`
   protected readonly hostClassName = createHostClassName(() =>
     checkboxRootClassName({ size: this.size() }),
   )
 }
-@Component({
+@Directive({
   selector: 'div[checkboxGroup]',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
     role: 'group',
     'data-slot': 'checkbox-group',
     '[attr.data-orientation]': 'orientation()',
   },
-  template: '<ng-content />',
 })
 export class CheckboxGroup implements OnInit {
   value = input<CheckboxValue[] | undefined>()
@@ -105,16 +106,21 @@ export class CheckboxGroup implements OnInit {
     this.controller.toggle(value)
   }
 }
-@Directive({
+@Component({
   selector: 'input[type=checkbox][checkboxControl]',
   standalone: true,
+  hostDirectives: [NativeControlTarget],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '',
   host: {
+    type: 'checkbox',
     '[class]': 'hostClassName()',
     'data-slot': 'checkbox-control',
     '[id]': 'resolvedId()',
     '[checked]': 'resolvedChecked()',
     '[disabled]': 'resolvedDisabled()',
     '[attr.name]': 'name()??null',
+    '[attr.aria-invalid]': 'ariaInvalid() || null',
     '(change)': 'handleChange($event)',
   },
 })
@@ -125,6 +131,7 @@ export class CheckboxControl implements OnInit {
   defaultChecked = input(false, { transform: booleanAttribute })
   name = input<string | undefined>()
   disabled = input(false, { transform: booleanAttribute })
+  ariaInvalid = input<boolean | 'true' | 'false' | undefined>(undefined, { alias: 'aria-invalid' })
   indeterminate = input(false, { transform: booleanAttribute })
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)
   readonly root = inject(CheckboxRoot, { optional: true })

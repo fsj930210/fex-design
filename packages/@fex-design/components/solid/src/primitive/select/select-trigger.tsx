@@ -1,5 +1,6 @@
 import { SelectValue, type SelectValueProps } from './select-value'
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
+import { useNativeControlTarget } from '@fex-design/solid/primitives/native-control-target'
 import type { SelectOption } from '@fex-design/core/select/types'
 import {
   selectClearClassName,
@@ -58,6 +59,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
     'data-warning',
   ])
   const select = useSelect('SelectTrigger')
+  const nativeTarget = useNativeControlTarget()
   const placeholder = () => local.placeholder ?? '请选择'
   const inputAttributes = () => {
     const { prefix, suffix, clear, classNames, styles, style, ...attrs } = local.inputProps ?? {}
@@ -110,6 +112,11 @@ export function SelectTrigger(props: SelectTriggerProps) {
             </SelectValue>
             <input
               {...inputAttributes()}
+              ref={(element) => {
+                nativeTarget(element)
+                const ref = local.inputProps?.ref
+                if (typeof ref === 'function') ref(element)
+              }}
               role="combobox"
               aria-invalid={local['aria-invalid'] ?? select.ariaInvalid()}
               aria-expanded={select.snapshot().open}

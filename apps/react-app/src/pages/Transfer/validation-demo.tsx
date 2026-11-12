@@ -1,5 +1,12 @@
-import { Field, FieldControl, FieldLabel, FieldRoot } from '@fex-design/react/primitive/field'
-import { Form, useForm } from '@fex-design/react/primitive/form'
+import {
+  FormRoot,
+  FormField,
+  FormGroup,
+  FormLegend,
+  FormControl,
+  FormError,
+  useForm,
+} from '@fex-design/react/primitive/form'
 import { Button } from '@fex-design/react/ui/button'
 import { Transfer } from '@fex-design/react/primitive/transfer'
 import { transferFieldNames, transferMembers } from './data'
@@ -13,54 +20,42 @@ export function ValidationTransferDemo() {
   return (
     <TransferDemoSection
       title="Form validation states"
-      description="Submit the real Form empty to see the error state; selecting exactly one member shows the warning style."
+      description="提交空值显示错误，选择一位成员显示业务警告。"
     >
-      <Form form={form} className="space-y-3">
-        <Field
+      <FormRoot form={form}>
+        <FormField
           name="members"
           validators={{
             onSubmit: ({ value }) =>
-              (value as readonly (string | number)[]).length === 0
-                ? 'Select at least one member.'
-                : undefined,
+              (value as readonly (string | number)[]).length ? undefined : '请至少选择一位成员',
           }}
         >
-          {(field) => {
-            const errors = field.state.meta.errors.map(String)
-            const invalid = errors.length > 0
-            const targetKeys = field.state.value as readonly (string | number)[]
-            const warning = !invalid && targetKeys.length === 1
-            return (
-              <FieldRoot invalid={invalid} hasError={invalid}>
-                <FieldLabel>Project members</FieldLabel>
-                <FieldControl>
-                  {({ props }) => (
-                    <Transfer
-                      {...props}
-                      data-testid="validation-transfer"
-                      items={transferMembers}
-                      fieldNames={transferFieldNames}
-                      targetKeys={targetKeys}
-                      onChange={(keys) => field.handleChange(keys)}
-                      validation={
-                        invalid
-                          ? { status: 'error', message: errors[0] }
-                          : warning
-                            ? {
-                                status: 'warning',
-                                message: 'Only one member is assigned; consider adding a backup.',
-                              }
-                            : undefined
-                      }
-                    />
-                  )}
-                </FieldControl>
-              </FieldRoot>
-            )
-          }}
-        </Field>
-        <Button type="submit">Validate assignment</Button>
-      </Form>
+          {(field) => (
+            <FormGroup>
+              <FormLegend>项目成员</FormLegend>
+              <FormControl
+                valuePropName="targetKeys"
+                getValueProps={(value) => {
+                  const keys = value as readonly (string | number)[]
+                  const errors = field.state.meta.errors
+                  return {
+                    targetKeys: keys,
+                    validation: errors.length
+                      ? { status: 'error', message: String(errors[0]) }
+                      : keys.length === 1
+                        ? { status: 'warning', message: '建议增加一位备用成员' }
+                        : undefined,
+                  }
+                }}
+              >
+                <Transfer items={transferMembers} fieldNames={transferFieldNames} />
+              </FormControl>
+              <FormError />
+            </FormGroup>
+          )}
+        </FormField>
+        <Button type="submit">校验成员</Button>
+      </FormRoot>
     </TransferDemoSection>
   )
 }

@@ -16,7 +16,7 @@ const props = defineProps<{
   contentProps?: InstanceType<typeof SelectContent>['$props'] | undefined
   options: readonly SelectItem<TItem>[]
   fieldNames?: SelectFieldNames<TItem>
-  modelValue?: SelectionValue | SelectionValue[]
+  value?: SelectionValue | SelectionValue[]
   defaultValue?: SelectionValue | SelectionValue[]
   multiple?: boolean
   searchable?: boolean
@@ -38,7 +38,6 @@ const props = defineProps<{
   }
 }>()
 const emit = defineEmits<{
-  'update:modelValue': [value: SelectionValue | SelectionValue[] | undefined]
   change: [value: SelectionValue | SelectionValue[] | undefined, meta: unknown]
   search: [keyword: string]
   openChange: [open: boolean]
@@ -59,7 +58,7 @@ const resolvedPopoverProps = computed(() => ({
     :open="popoverProps?.open"
     :default-open="popoverProps?.defaultOpen"
     :options="normalizedOptions"
-    :value="modelValue"
+    :value="value"
     :default-value="defaultValue"
     :multiple="multiple"
     :show-search="searchable"
@@ -71,7 +70,6 @@ const resolvedPopoverProps = computed(() => ({
     :virtual="virtual"
     @change="
       (value, meta) => {
-        emit('update:modelValue', value)
         emit('change', value, meta)
       }
     "

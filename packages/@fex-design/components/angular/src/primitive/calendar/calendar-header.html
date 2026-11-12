@@ -117,7 +117,7 @@
     [disabled]="modeGroupProps()?.disabled ?? false"
     [value]="context().panel"
     [attr.aria-label]="context().locale.datePanel + '/' + context().locale.monthPanel"
-    (valueChange)="panel($event.value)"
+    (valueChange)="panel($any($event).value ?? $any($event))"
   >
     <button
       radioButton

@@ -10,6 +10,15 @@
 </script>
 
 <script lang="ts">
+  import { untrack } from "svelte";
+  import { getNativeControlTarget } from "@fex-design/svelte/utils/native-control-target";
+  let element = $state<HTMLDivElement | null>(null);
+  const registerTarget = getNativeControlTarget();
+  // Associate the semantic control with its owning field for this element lifetime.
+  $effect(() => {
+    const target = element;
+    if (target) return untrack(() => registerTarget?.(target));
+  });
   import { createSelectionController } from "@fex-design/core/selection/create-selection-controller";
   import {
     radioGroupClassName,
@@ -30,8 +39,7 @@
     disabled?: boolean | null | undefined;
     orientation?: RadioGroupStyleProps["orientation"];
     children?: Snippet;
-    onValueChange?:
-      ((value: RadioValue, meta: RadioChangeMeta) => void) | undefined;
+    onChange?: ((value: RadioValue, meta: RadioChangeMeta) => void) | undefined;
   }
 
   let {
@@ -41,7 +49,7 @@
     orientation = "horizontal",
     children,
     class: className,
-    onValueChange,
+    onChange,
     ...rest
   }: RadioGroupProps = $props();
 
@@ -69,7 +77,7 @@
     onChange(values, meta) {
       const nextValue = values[0];
       if (nextValue === undefined) return;
-      onValueChange?.(nextValue, toRadioChangeMeta(nextValue, meta));
+      onChange?.(nextValue, toRadioChangeMeta(nextValue, meta));
     },
   });
   const snapshot = readableCoreStore(controller);
@@ -83,6 +91,7 @@
 </script>
 
 <div
+  bind:this={element}
   {...rest}
   role="radiogroup"
   data-slot="radio-group"

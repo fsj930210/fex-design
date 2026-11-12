@@ -23,10 +23,10 @@ provide(checkboxRootKey, {
 </script>
 <template>
   <div
-    v-bind="attrs"
+    v-bind="$attrs"
     data-slot="checkbox-root"
     :data-size="props.size ?? 'md'"
-    :class="cn(checkboxRootClassName({ size: props.size }), attrs.class as string | undefined)"
+    :class="cn(checkboxRootClassName({ size: props.size }), $attrs.class as string | undefined)"
   >
     <slot />
   </div>

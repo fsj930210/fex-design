@@ -34,6 +34,13 @@ export interface FrameworkApi {
   slotLabel?: string
 }
 
+export interface ApiInstance {
+  title: string
+  description: string
+  link?: string
+  methods: Array<{ name: string; description: string }>
+}
+
 export interface ComponentApi {
   name: string
   slug: string
@@ -48,5 +55,6 @@ export interface ComponentApi {
   frameworks?: Partial<Record<Framework, FrameworkApi>>
   demos: Array<{ id: string; title: string; description: string }>
   components?: ComponentApi[]
+  instance?: ApiInstance
   cssVariables?: Array<{ name: string; description: string }>
 }

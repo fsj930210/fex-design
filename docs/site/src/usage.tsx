@@ -2,6 +2,7 @@ import { createSignal, createMemo, createEffect } from 'solid-js'
 import type { Framework } from './types'
 import { componentApis } from './data'
 import { usageSnippets } from './usage-snippets'
+import { getFormUsage } from './form-usage'
 import { CodeBlock } from './code-block'
 
 export function Usage(props: {
@@ -27,6 +28,7 @@ export function Usage(props: {
 
   const currentSnippet = createMemo(() => {
     const l = layer()
+    if (props.slug === 'form') return getFormUsage(props.framework, l)
     const item = usageSnippets[props.slug]?.[l]
     if (item) return item
 

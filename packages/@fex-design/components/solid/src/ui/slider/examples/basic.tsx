@@ -6,6 +6,7 @@ export default function Example() {
   return (
     <div class="grid w-full max-w-xl gap-4">
       <Slider
+        aria-invalid={props.invalid}
         value={value()}
         onChange={(next) => typeof next === 'number' && setValue(next)}
         onEnd={(next) => typeof next === 'number' && setEnded(next)}
@@ -13,7 +14,7 @@ export default function Example() {
       <p>
         当前值：{value()}；结束值：{ended()}
       </p>
-      <Slider defaultValue={60} keyboard={false} />
+      <Slider aria-invalid={props.invalid} defaultValue={60} keyboard={false} />
     </div>
   )
 }

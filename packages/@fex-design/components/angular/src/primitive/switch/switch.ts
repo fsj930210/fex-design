@@ -1,3 +1,4 @@
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 import type { SwitchShape, SwitchSize, SwitchState } from '@fex-design/core/switch/types'
 import {
   switchClassName,
@@ -20,6 +21,7 @@ export type { SwitchShape, SwitchSize, SwitchState }
 
 @Component({
   selector: 'button[switch]',
+  hostDirectives: [NativeControlTarget],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

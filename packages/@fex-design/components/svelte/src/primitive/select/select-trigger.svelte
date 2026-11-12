@@ -14,7 +14,13 @@
     selectValueContainerClassName,
   } from "@fex-design/components-styles/select";
   import { cn } from "@fex-design/utils";
-  import { getContext, type ComponentProps, type Snippet } from "svelte";
+  import {
+    getContext,
+    untrack,
+    type ComponentProps,
+    type Snippet,
+  } from "svelte";
+  import { getNativeControlTarget } from "@fex-design/svelte/utils/native-control-target";
   import type { HTMLAttributes, HTMLInputAttributes } from "svelte/elements";
   import ChevronRight from "@fex-design/svelte/icons/chevron-right.svelte";
   import CircleXIcon from "@fex-design/svelte/icons/circle-x.svelte";
@@ -56,6 +62,12 @@
   }: Props = $props();
   const select = getContext<SelectContext>(selectContextKey),
     snapshot = select.snapshot;
+  let control = $state<HTMLInputElement | null>(null);
+  const registerTarget = getNativeControlTarget();
+  $effect(() => {
+    const element = control;
+    if (element) return untrack(() => registerTarget?.(element));
+  });
   const selected = () => {
     void $snapshot.selectedValues;
     return select.selectedOptions();
@@ -128,6 +140,7 @@
           tag={tag ?? valueProps?.tag}
         />
         <input
+          bind:this={control}
           {...inputAttributes()}
           role="combobox"
           aria-invalid={ariaInvalid ?? select.ariaInvalid()}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "projects": {
+    "form": {
+      "projectType": "application",
+      "root": ".",
+      "sourceRoot": ".",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "index": "index.html",
+            "outputPath": "out",
+            "styles": ["../src/styles.css"],
+            "optimization": false,
+            "sourceMap": true
+          }
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "buildTarget": "form:build",
+            "host": "127.0.0.1",
+            "port": 4126
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

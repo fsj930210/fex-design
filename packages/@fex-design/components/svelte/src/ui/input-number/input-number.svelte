@@ -60,7 +60,7 @@
     suffix?: Snippet | undefined;
     increment?: Snippet | undefined;
     decrement?: Snippet | undefined;
-    onChange?: ((event: Event, value: number | undefined) => void) | undefined;
+    onChange?: ((value: number | undefined) => void) | undefined;
     classNames?: Partial<Record<InputNumberPart, string>> | undefined;
     styles?: Partial<Record<InputNumberPart, string>> | undefined;
     "data-warning"?: string | undefined;
@@ -106,6 +106,7 @@
     "data-warning": dataWarning,
     ...rest
   }: Props = $derived(componentProps);
+  const handleChange = (next: number | undefined) => onChange?.(next);
 </script>
 
 <InputNumberRoot
@@ -123,7 +124,7 @@
   {size}
   {variant}
   readOnly={readonly}
-  {onChange}
+  onChange={handleChange}
   data-warning={dataWarning}
   class={cn(classNames?.root, className)}
   style={[styles?.root, style]

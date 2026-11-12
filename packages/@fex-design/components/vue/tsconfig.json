@@ -1,0 +1,12 @@
+{
+  "extends": "@fex/config-tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "./dist/types",
+    "rootDir": "./src",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*.ts", "src/ui/form/**/*.vue"],
+  "exclude": ["src/**/examples/**"]
+}

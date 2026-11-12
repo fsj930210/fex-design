@@ -5,7 +5,7 @@ export function ControlledExample() {
   const [value, setValue] = useState('受控内容')
   return (
     <div className="grid w-full gap-3">
-      <Input value={value} onValueChange={setValue} clearable />
+      <Input value={value} onChange={(event) => setValue(event.currentTarget.value)} clearable />
       <Input defaultValue="非受控内容" clearable />
       <div className="flex flex-wrap gap-2">
         <Button onClick={() => setValue('外部设置')}>外部设置</Button>

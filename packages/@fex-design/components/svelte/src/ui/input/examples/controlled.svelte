@@ -5,7 +5,7 @@
 </script>
 
 <div class="grid w-full gap-3">
-  <Input {value} onValueChange={(next) => (value = next)} clearable /><Input
+  <Input {value} onChange={(next) => (value = next)} clearable /><Input
     defaultValue="非受控内容"
     clearable
   />

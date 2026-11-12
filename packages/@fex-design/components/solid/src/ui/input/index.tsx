@@ -26,11 +26,11 @@ import { mergeStyle } from '@fex-design/solid/primitives/merge-style'
 
 export type { InputPasswordProps, InputProps, InputSearchProps } from './input.types'
 
-export function Input(props: InputProps) {
+function InputView(props: InputProps) {
   const [local, control] = splitProps(props, [
     'value',
     'defaultValue',
-    'onValueChange',
+    'onChange',
     'size',
     'variant',
     'prefix',
@@ -49,15 +49,17 @@ export function Input(props: InputProps) {
   ])
   const [internalValue, setInternalValue] = createSignal(local.defaultValue ?? '')
   const currentValue = createMemo(() => local.value ?? internalValue())
-  const updateValue = (value: string) => {
+  const updateValue = (
+    event: InputEvent & { currentTarget: HTMLInputElement; target: Element },
+  ) => {
+    const value = event.currentTarget.value
     if (local.value === undefined) setInternalValue(value)
-    local.onValueChange?.(value)
+    local.onChange?.(event)
   }
   const rootStyle = () => mergeStyle(local.styles?.root, local.style)
   const root = (
     <InputRoot
       value={currentValue()}
-      onValueChange={updateValue}
       size={local.size}
       variant={local.variant}
       disabled={local.disabled}
@@ -73,6 +75,10 @@ export function Input(props: InputProps) {
       )}
       <InputControl
         {...control}
+        onInput={(event) => {
+          callEventHandler(control.onInput, event)
+          if (!event.defaultPrevented) updateValue(event)
+        }}
         disabled={local.disabled}
         readOnly={local.readOnly}
         class={local.classNames?.control}
@@ -108,6 +114,10 @@ export function Input(props: InputProps) {
       </InputGroup>
     </Show>
   )
+}
+
+export function Input(props: InputProps) {
+  return <InputView {...props} />
 }
 
 export function InputPassword(props: InputPasswordProps) {
@@ -174,7 +184,7 @@ export function InputSearch(props: InputSearchProps) {
   const [local, inputProps] = splitProps(props, [
     'value',
     'defaultValue',
-    'onValueChange',
+    'onChange',
     'onSearch',
     'addonBeforeButtonProps',
     'addonAfterButtonProps',
@@ -192,7 +202,7 @@ export function InputSearch(props: InputSearchProps) {
   }
   const update = (value: string) => {
     if (local.value === undefined) setInternal(value)
-    local.onValueChange?.(value)
+    local.onChange?.(value)
   }
   const action = (content: JSX.Element, source: InputSearchMeta['source'], styled = false) =>
     content == null ? null : (
@@ -212,7 +222,7 @@ export function InputSearch(props: InputSearchProps) {
     <Input
       {...inputProps}
       value={current()}
-      onValueChange={update}
+      onChange={update}
       prefix={action(local.prefix, 'prefix')}
       suffix={action(local.suffix, 'suffix')}
       addonBefore={action(local.addonBefore, 'addonBefore', true)}

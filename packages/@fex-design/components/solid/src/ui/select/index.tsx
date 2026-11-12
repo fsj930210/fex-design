@@ -53,7 +53,7 @@ export interface SelectProps<TItem extends object = SelectOption> extends Omit<
   popupRender?: (menu: JSX.Element, context: { close: () => void }) => JSX.Element
 }
 
-export function Select<TItem extends object = SelectOption>(props: SelectProps<TItem>) {
+function SelectView<TItem extends object = SelectOption>(props: SelectProps<TItem>) {
   const [local, triggerProps] = splitProps(props, [
     'options',
     'fieldNames',
@@ -121,6 +121,10 @@ export function Select<TItem extends object = SelectOption>(props: SelectProps<T
       />
     </SelectRoot>
   )
+}
+
+export function Select<TItem extends object = SelectOption>(props: SelectProps<TItem>) {
+  return <SelectView {...props} />
 }
 
 export type { SelectFieldNames, SelectFilterOption, SelectOption, SelectVirtualOptions }

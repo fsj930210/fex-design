@@ -17,7 +17,7 @@
     style,
     value,
     defaultValue = "",
-    onValueChange,
+    onChange,
     size = "md",
     variant = "outlined",
     prefix,
@@ -34,9 +34,15 @@
     "data-warning": dataWarning,
     ...rest
   }: InputProps = $props();
+  const handleChange = (
+    event: InputEvent & { currentTarget: HTMLInputElement; target: Element },
+  ) => {
+    const next = event.currentTarget.value;
+    onChange?.(event, next);
+  };
 </script>
 
-{#snippet body()}
+{#snippet body(inputContext)}
   <InputRoot
     {value}
     {defaultValue}
@@ -47,7 +53,7 @@
     data-warning={dataWarning}
     class={cn(classNames?.root, className)}
     style={[styles?.root, style].filter(Boolean).join(";")}
-    onValueChange={(next) => onValueChange?.(next)}
+    oninput={handleChange}
   >
     {#if prefix}<InputPrefix class={classNames?.prefix} style={styles?.prefix}
         >{@render prefix()}</InputPrefix
@@ -58,6 +64,7 @@
       {readonly}
       class={classNames?.control}
       style={styles?.control}
+      {inputContext}
       bind:ref
     />
     {#if clearable}<InputClearWhenAvailable

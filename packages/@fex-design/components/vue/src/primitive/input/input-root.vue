@@ -20,7 +20,7 @@ const props = withDefaults(
   { defaultValue: '', disabled: false, readOnly: false, size: 'md', variant: 'outlined' },
 )
 const emit = defineEmits<{
-  valueChange: [value: string, meta: { reason: 'input' | 'clear'; event?: Event }]
+  change: [value: string, meta: { reason: 'input' | 'clear'; event?: Event }]
   clear: [meta: { reason: 'clear' }]
   click: [event: MouseEvent]
 }>()
@@ -29,7 +29,7 @@ const input = useInput({
   defaultValue: () => props.defaultValue,
   disabled: () => props.disabled,
   readOnly: () => props.readOnly,
-  onValueChange: (value, meta) => emit('valueChange', value, meta),
+  onChange: (value, meta) => emit('change', value, meta),
   onClear: (meta) => emit('clear', meta),
 })
 provide(inputContextKey, input)

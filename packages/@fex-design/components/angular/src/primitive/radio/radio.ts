@@ -1,3 +1,4 @@
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
 import type {
   SelectionChangeMeta,
@@ -18,6 +19,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  Directive,
   computed,
   DestroyRef,
   HostListener,
@@ -46,10 +48,10 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
   }
 }
 
-@Component({
+@Directive({
   selector: 'div[radioGroup]',
+  hostDirectives: [NativeControlTarget],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'radiogroup',
     'data-slot': 'radio-group',
@@ -57,7 +59,6 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
     '[attr.data-orientation]': 'orientation()',
     '[attr.data-disabled]': "disabled() ? 'true' : null",
   },
-  template: '<ng-content />',
 })
 export class RadioGroup implements OnInit {
   readonly class = input<string>()
@@ -65,7 +66,7 @@ export class RadioGroup implements OnInit {
   defaultValue = input<RadioValue | undefined>()
   disabled = input(false, { transform: booleanAttribute })
   orientation = input<RadioGroupStyleProps['orientation']>('horizontal')
-  valueChange = output<{ value: RadioValue; meta: RadioChangeMeta }>()
+  onChange = output<{ value: RadioValue; meta: RadioChangeMeta }>()
 
   private readonly destroyRef = inject(DestroyRef)
   controller!: SelectionController
@@ -79,7 +80,7 @@ export class RadioGroup implements OnInit {
   ngOnInit() {
     const value = this.value
     const defaultValue = this.defaultValue
-    const valueChange = this.valueChange
+    const onChange = this.onChange
     this.controller = createSelectionController({
       get value() {
         return value()
@@ -93,7 +94,7 @@ export class RadioGroup implements OnInit {
       onChange(values, meta) {
         const nextValue = values[0]
         if (nextValue === undefined) return
-        valueChange.emit({ value: nextValue, meta: toRadioChangeMeta(nextValue, meta) })
+        onChange.emit({ value: nextValue, meta: toRadioChangeMeta(nextValue, meta) })
       },
     })
     this.snapshot = createCoreStoreSignal(this.controller, this.destroyRef)

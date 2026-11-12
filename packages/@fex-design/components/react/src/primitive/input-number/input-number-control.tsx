@@ -7,7 +7,12 @@ export interface InputNumberControlProps extends Omit<
   'value' | 'defaultValue' | 'type'
 > {}
 
-export function InputNumberControl({ onBlur, onKeyDown, ...props }: InputNumberControlProps) {
+export function InputNumberControl({
+  onBlur,
+  onKeyDown,
+  onChange,
+  ...props
+}: InputNumberControlProps) {
   const inputNumber = useInputNumberContext('InputNumberControl')
   return (
     <InputControl
@@ -19,6 +24,10 @@ export function InputNumberControl({ onBlur, onKeyDown, ...props }: InputNumberC
       aria-valuemax={inputNumber.max}
       aria-valuenow={inputNumber.value}
       aria-valuetext={props['aria-valuetext'] ?? inputNumber.formattedValue}
+      onChange={(event) => {
+        onChange?.(event)
+        if (!event.defaultPrevented) inputNumber.input(event.currentTarget.value, event.nativeEvent)
+      }}
       onBlur={(event) => {
         onBlur?.(event)
         if (!event.defaultPrevented) inputNumber.blur(event.nativeEvent)

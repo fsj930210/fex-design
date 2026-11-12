@@ -13,8 +13,8 @@
       timePicker
       [value]="value()"
       [open]="open()"
-      (change)="value.set($event.value)"
-      (openChange)="open.set($event)"
+      (change)="value.set($any($event).value)"
+      (openChange)="open.set($any($event))"
     ></div>
     <output class="text-sm text-muted-foreground"
       >外部值：{{ formatValue(value()) }}；面板：{{ open() ? '打开' : '关闭' }}</output
@@ -25,7 +25,11 @@
     <p class="text-sm text-muted-foreground">
       defaultValue 仅初始化读取；上方外部值变化不会覆盖这里的选择。
     </p>
-    <div timePicker [defaultValue]="value()" (change)="uncontrolledValue.set($event.value)"></div>
+    <div
+      timePicker
+      [defaultValue]="value()"
+      (change)="uncontrolledValue.set($any($event).value)"
+    ></div>
     <output class="text-sm text-muted-foreground"
       >选择结果：{{ formatValue(uncontrolledValue()) }}</output
     >

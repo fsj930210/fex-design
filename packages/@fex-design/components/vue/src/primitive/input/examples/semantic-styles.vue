@@ -25,7 +25,7 @@ const visible = ref(false)
   <div class="grid w-full gap-3">
     <InputRoot
       :value="value"
-      @value-change="value = $event"
+      @change="value = $event"
       class="border-violet-300 hover:border-violet-400 focus-within:border-violet-600 focus-within:ring-violet-600/20"
       ><InputPrefix class="text-violet-500">@</InputPrefix
       ><InputControl class="font-medium" /><InputClear

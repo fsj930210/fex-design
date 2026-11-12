@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useNativeControlTarget } from '@fex-design/vue/composables/use-native-control-target'
 import type { SwitchShape, SwitchSize } from '@fex-design/core/switch/types'
 import { switchClassName } from '@fex-design/components-styles/switch'
 import { cn } from '@fex-design/utils'
@@ -19,6 +20,7 @@ const emit = defineEmits<{
 }>()
 const attrs = useAttrs()
 const element = useTemplateRef<HTMLButtonElement>('element')
+useNativeControlTarget(() => element.value)
 defineExpose({ element })
 const internalChecked = ref(props.defaultChecked)
 const checked = computed(() => props.checked ?? internalChecked.value)

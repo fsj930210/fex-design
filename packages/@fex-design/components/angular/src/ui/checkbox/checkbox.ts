@@ -1,59 +1,44 @@
 import type { CheckboxValue } from '@fex-design/core/checkbox/types'
-import { NgTemplateOutlet } from '@angular/common'
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  forwardRef,
-  input,
-  output,
-  TemplateRef,
-} from '@angular/core'
+import { booleanAttribute, Component, input, output } from '@angular/core'
+import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   CheckboxControl,
-  CheckboxGroup as PrimitiveCheckboxGroup,
   CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot,
+  CheckboxGroup as PrimitiveCheckboxGroup,
 } from '@fex-design/angular/primitive/checkbox'
+import { FormControlBase } from '../../forms/form-control-base'
 
 @Component({
-  selector: 'div[checkbox], button[checkbox], label[checkbox]',
+  selector: 'div[checkbox],button[checkbox],label[checkbox]',
   standalone: true,
-  imports: [CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxLabel, NgTemplateOutlet],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { style: 'display: contents' },
+  imports: [CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxLabel],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Checkbox, multi: true }],
   templateUrl: './checkbox.html',
 })
-export class Checkbox {
-  value = input<CheckboxValue | undefined>()
-  checked = input<boolean | 'indeterminate' | undefined>()
-  defaultChecked = input(false, { transform: booleanAttribute })
-  disabled = input(false, { transform: booleanAttribute })
-  indeterminate = input(false, { transform: booleanAttribute })
-  required = input(false, { transform: booleanAttribute })
-  name = input<string | undefined>()
-  ariaInvalid = input(false, { alias: 'aria-invalid', transform: booleanAttribute })
-  ariaDescribedBy = input<string | undefined>(undefined, { alias: 'aria-describedby' })
-  size = input<'sm' | 'md' | 'lg'>('md')
-  classNames = input<
-    Partial<Record<'root' | 'control' | 'indicator' | 'label', string>> | undefined
-  >()
-  styles = input<Partial<Record<'root' | 'control' | 'indicator' | 'label', string>> | undefined>()
-  indicator = input<TemplateRef<void> | undefined>()
-  checkedChange = output<{ checked: boolean; event?: Event }>()
-
-  protected readonly resolvedIndeterminate = computed(() =>
-    Boolean(this.indeterminate() || this.checked() === 'indeterminate'),
-  )
-  protected readonly resolvedChecked = computed(() => {
-    const val = this.checked()
-    return val === 'indeterminate' ? false : val
+export class Checkbox extends FormControlBase<boolean | 'indeterminate'> {
+  readonly value = input<CheckboxValue>()
+  readonly checked = input<boolean | 'indeterminate'>()
+  readonly indeterminate = input<boolean>(false, { transform: booleanAttribute })
+  readonly defaultChecked = input<boolean>(false, { transform: booleanAttribute })
+  readonly disabled = input<boolean>(false, { transform: booleanAttribute })
+  readonly ariaInvalid = input<boolean | 'true' | 'false' | undefined>(undefined, {
+    alias: 'aria-invalid',
   })
-
-  handleControlChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement
-    this.checkedChange.emit({ checked: inputElement.checked, event })
+  readonly name = input<string>()
+  readonly indicator = input<unknown>()
+  readonly classNames = input<unknown>()
+  readonly styles = input<unknown>()
+  readonly onChange = output<Event>()
+  handleChange(event: Event) {
+    const checked = (event.target as HTMLInputElement).indeterminate
+      ? 'indeterminate'
+      : (event.target as HTMLInputElement).checked
+    this.emitFormValue(checked)
+    this.onChange.emit(event)
+    this.markFormTouched()
   }
 }
 
@@ -61,12 +46,16 @@ export class Checkbox {
   selector: 'div[checkboxGroup]',
   standalone: true,
   imports: [Checkbox],
-  providers: [{ provide: PrimitiveCheckboxGroup, useExisting: forwardRef(() => CheckboxGroup) }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [
+    {
+      directive: PrimitiveCheckboxGroup,
+      inputs: ['value', 'defaultValue', 'disabled', 'orientation'],
+      outputs: ['change:onChange'],
+    },
+  ],
   templateUrl: './checkbox-group.html',
 })
-export class CheckboxGroup extends PrimitiveCheckboxGroup {
-  options = input<
-    readonly { label: string; value: CheckboxValue; disabled?: boolean }[] | undefined
-  >()
+export class CheckboxGroup {
+  readonly value = input<CheckboxValue[]>([])
+  readonly options = input<readonly { label: string; value: CheckboxValue; disabled?: boolean }[]>()
 }

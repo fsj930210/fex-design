@@ -1,4 +1,7 @@
 import { connectInputAttributes, type InputAttributes } from './input-attributes'
+import { NgTemplateOutlet } from '@angular/common'
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
+import { Injector, TemplateRef } from '@angular/core'
 import { getInitialHostClassName } from '@fex-design/angular/signals/host-class'
 import type { InputSize, InputVariant } from '@fex-design/core/input/types'
 import {
@@ -31,6 +34,7 @@ import { listenNativeEvent } from '@fex-design/angular/directives/listen-native-
 @Component({
   selector: 'div[inputRoot]',
   standalone: true,
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
@@ -40,9 +44,12 @@ import { listenNativeEvent } from '@fex-design/angular/directives/listen-native-
     '[attr.data-variant]': 'variant()',
     'data-slot': 'input-root',
   },
-  template: '<ng-content />',
+  template:
+    '<ng-content /><ng-container [ngTemplateOutlet]="content() ?? null" [ngTemplateOutletInjector]="contentInjector" />',
 })
 export class InputRoot implements OnInit {
+  readonly content = input<TemplateRef<unknown>>()
+  protected readonly contentInjector = inject(Injector)
   readonly class = input<string>()
   readonly value = input<string>()
   readonly defaultValue = input('')
@@ -50,7 +57,7 @@ export class InputRoot implements OnInit {
   readonly readOnly = input(false, { transform: booleanAttribute })
   readonly size = input<InputSize>('md')
   readonly variant = input<InputVariant>('outlined')
-  readonly valueChange = output<string>()
+  readonly change = output<Event>()
   readonly cleared = output<void>({ alias: 'clear' })
   private readonly uncontrolledValue = signal(this.defaultValue())
   private focusElement?: HTMLInputElement
@@ -66,14 +73,14 @@ export class InputRoot implements OnInit {
   setFocusElement(element: HTMLInputElement) {
     this.focusElement = element
   }
-  setValue(value: string) {
+  setValue(value: string, event?: Event) {
     if (this.disabled() || this.readOnly()) return
     if (this.value() === undefined) this.uncontrolledValue.set(value)
-    this.valueChange.emit(value)
+    if (event) this.change.emit(event)
   }
   clearValue() {
     if (!this.canClear()) return
-    this.setValue('')
+    this.setValue('', new Event('change'))
     this.cleared.emit()
     this.focusElement?.focus()
   }
@@ -93,6 +100,7 @@ export class InputGroup {
 @Directive({
   selector: 'input[inputControl]',
   standalone: true,
+  hostDirectives: [NativeControlTarget],
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'input-control',
@@ -124,7 +132,7 @@ export class InputControl {
   onInput(event: Event) {
     this.inputProps()?.onInput?.(event)
     if (event.defaultPrevented) return
-    this.root.setValue((event.currentTarget as HTMLInputElement).value)
+    this.root.setValue((event.currentTarget as HTMLInputElement).value, event)
   }
   focus(options?: FocusOptions) {
     this.element.focus(options)

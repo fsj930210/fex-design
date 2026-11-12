@@ -7,6 +7,6 @@
     [value]="value()"
     [classNames]="weightClasses"
     aria-label="模型权重分配"
-    (change)="changeValue($event.value)"
+    (change)="changeValue($any($event).value)"
   ></div>
 </div>

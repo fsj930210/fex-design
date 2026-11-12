@@ -43,7 +43,7 @@
 | parser / formatter   | InputNumberParser / InputNumberFormatter | 内置   | 分离编辑文本与 number。     |
 | disabled / readOnly  | boolean                                  | false  | 禁止编辑和操作。            |
 | keyboard             | boolean                                  | true   | 启用 ArrowUp 与 ArrowDown。 |
-| onChange             | (event, value) => void                   | —      | 返回原始事件与 number。     |
+| onChange             | (value) => void                          | —      | 返回解析后的 number。       |
 
 Control 继承 `ComponentProps<'input'>`；原生 focus、blur、键盘、aria、data 属性与元素访问都会透传。
 
@@ -60,7 +60,7 @@ Control 继承 `ComponentProps<'input'>`；原生 focus、blur、键盘、aria�
 | parser / formatter   | InputNumberParser / InputNumberFormatter | 内置   | 分离编辑文本与 number。     |
 | disabled / readOnly  | boolean                                  | false  | 禁止编辑和操作。            |
 | keyboard             | boolean                                  | true   | 启用 ArrowUp 与 ArrowDown。 |
-| onChange             | (event, value) => void                   | —      | 返回原始事件与 number。     |
+| onChange             | (value) => void                          | —      | 返回解析后的 number。       |
 
 ### 返回值
 

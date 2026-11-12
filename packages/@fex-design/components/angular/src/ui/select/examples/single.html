@@ -3,5 +3,5 @@
   class="w-72"
   [options]="options"
   [value]="value()"
-  (change)="value.set($event.value?.toString() ?? '')"
+  (change)="value.set($any($event).value?.toString() ?? '')"
 ></div>

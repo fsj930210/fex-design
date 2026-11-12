@@ -1,0 +1,229 @@
+<section class="mx-auto grid w-full max-w-2xl gap-5 p-5">
+  <header class="grid gap-1">
+    <h3 class="text-base font-semibold">不同控件的校验反馈</h3>
+    <p class="text-sm text-muted-foreground">
+      直接提交查看各字段错误，再逐项修正。控件通过显式绑定读写字段值，Form 负责反馈和字段关联。
+    </p>
+  </header>
+  <form uiForm [form]="form">
+    <ng-template #titleLabel>活动名称 · Input</ng-template
+    ><ng-template #titleDescription>输入和提交均校验必填；失焦标记字段已交互。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="title"
+      [validators]="rules.title"
+      [label]="titleLabel"
+      [description]="titleDescription"
+      required
+      #title="field"
+    >
+      <div
+        input
+        [value]="title.api.state.value"
+        (onChange)="title.api.handleChange($any($event).target.value)"
+        (focusout)="title.api.handleBlur()"
+        placeholder="输入活动名称"
+      ></div>
+    </div>
+    <ng-template #emailLabel>联系邮箱 · Input</ng-template
+    ><ng-template #emailDescription>格式错误展示在当前字段下方。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="email"
+      [validators]="rules.email"
+      [label]="emailLabel"
+      [description]="emailDescription"
+      required
+      #email="field"
+    >
+      <div
+        input
+        [value]="email.api.state.value"
+        (onChange)="email.api.handleChange($any($event).target.value)"
+        (focusout)="email.api.handleBlur()"
+        placeholder="organizer@example.com"
+      ></div>
+    </div>
+    <ng-template #capacityLabel>活动人数 · InputNumber</ng-template
+    ><ng-template #capacityDescription
+      >必须填写 1 到 50 的整数；输入 0 或 51 观察范围错误。</ng-template
+    >
+    <div
+      formField
+      [tanstackField]="form"
+      name="capacity"
+      [validators]="rules.capacity"
+      [label]="capacityLabel"
+      [description]="capacityDescription"
+      required
+      #capacity="field"
+    >
+      <div
+        inputNumber
+        [value]="capacity.api.state.value"
+        (onChange)="capacity.api.handleChange($event)"
+        (focusout)="capacity.api.handleBlur()"
+      ></div>
+    </div>
+    <ng-template #venueLabel>活动场地 · Select</ng-template
+    ><ng-template #venueDescription>选择后清空，观察选择类控件的错误反馈。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="venue"
+      [validators]="rules.venue"
+      [label]="venueLabel"
+      [description]="venueDescription"
+      required
+      #venue="field"
+    >
+      <div
+        select
+        [value]="venue.api.state.value || []"
+        [options]="venues"
+        [clearable]="true"
+        (onChange)="venue.api.handleChange(selectionValue($event.value))"
+      ></div>
+    </div>
+    <ng-template #publishedLabel>开放报名 · Switch</ng-template
+    ><ng-template #publishedDescription>布尔值规则要求开启报名。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="published"
+      [validators]="rules.published"
+      [label]="publishedLabel"
+      [description]="publishedDescription"
+      required
+      #published="field"
+    >
+      <button
+        switch
+        [checked]="published.api.state.value"
+        (onChange)="published.api.handleChange($event.checked)"
+        (blur)="published.api.handleBlur()"
+        aria-label="开放报名"
+      ></button>
+    </div>
+    <ng-template #agreementLabel>活动条款 · Checkbox</ng-template
+    ><ng-template #agreementDescription>勾选同意后清除当前错误。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="agreement"
+      [validators]="rules.agreement"
+      [label]="agreementLabel"
+      [description]="agreementDescription"
+      required
+      #agreement="field"
+    >
+      <div
+        checkbox
+        [checked]="agreement.api.state.value"
+        (onChange)="agreement.api.handleChange($any($event).target.checked)"
+        (focusout)="agreement.api.handleBlur()"
+      >
+        同意活动条款
+      </div>
+    </div>
+    <ng-template #sessionLabel>活动形式 · Radio</ng-template
+    ><ng-template #sessionDescription>请选择一种活动形式，观察单选组的统一错误反馈。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="session"
+      [validators]="rules.session"
+      [label]="sessionLabel"
+      [description]="sessionDescription"
+      required
+      #session="field"
+    >
+      <div
+        radioGroup
+        [value]="session.api.state.value"
+        (onChange)="session.api.handleChange($any($event.value))"
+        [options]="sessionOptions"
+        orientation="horizontal"
+      ></div>
+    </div>
+    <ng-template #dateLabel>活动日期 · DatePicker</ng-template
+    ><ng-template #dateDescription>空值校验必填；选择日期后清除当前错误。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="date"
+      [validators]="rules.date"
+      [label]="dateLabel"
+      [description]="dateDescription"
+      required
+      #date="field"
+    >
+      <div
+        datePicker
+        [value]="date.api.state.value"
+        (change)="date.api.handleChange($event)"
+        [clearable]="true"
+        (focusout)="date.api.handleBlur()"
+        placeholder="请选择活动日期"
+      ></div>
+    </div>
+    <ng-template #timeLabel>开始时间 · TimePicker</ng-template
+    ><ng-template #timeDescription>选择时间后写入字段；清空后再次校验。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="time"
+      [validators]="rules.time"
+      [label]="timeLabel"
+      [description]="timeDescription"
+      required
+      #time="field"
+    >
+      <div
+        timePicker
+        [value]="time.api.state.value"
+        (change)="time.api.handleChange($event.value)"
+        [allowClear]="true"
+        (focusout)="time.api.handleBlur()"
+        placeholder="请选择开始时间"
+      ></div>
+    </div>
+    <ng-template #progressLabel>准备进度 · Slider</ng-template
+    ><ng-template #progressDescription>初始为 0%，至少达到 30%；支持拖动和方向键。</ng-template>
+    <div
+      formField
+      [tanstackField]="form"
+      name="progress"
+      [validators]="rules.progress"
+      [label]="progressLabel"
+      [description]="progressDescription"
+      required
+      #progress="field"
+    >
+      <div
+        slider
+        [value]="progress.api.state.value"
+        [min]="0"
+        [max]="100"
+        [step]="10"
+        (onChange)="progress.api.handleChange(sliderValue($event.value))"
+        (focusout)="progress.api.handleBlur()"
+        aria-label="准备进度"
+      ></div>
+    </div>
+    <div class="flex flex-wrap gap-3 border-t border-border pt-4">
+      <button button type="submit" variant="solid" color="primary">校验全部字段</button
+      ><button button type="button" (click)="setEmailError()">设置邮箱错误</button
+      ><button button type="reset" (click)="result.set('')">清空重试</button>
+    </div>
+    <ng-template [formSubscribe]="values" let-values>
+      <pre class="overflow-auto rounded-md bg-muted-background p-3 text-xs">
+{{ stringify(values) }}</pre>
+    </ng-template>
+  </form>
+  @if (result()) {
+  <p role="status" class="text-sm text-muted-foreground">{{ result() }}</p>
+  }
+</section>

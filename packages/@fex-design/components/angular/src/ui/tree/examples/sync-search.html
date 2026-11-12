@@ -2,7 +2,7 @@
   <div
     input
     [value]="keyword()"
-    (valueChange)="search($event)"
+    (change)="search($any($event).value ?? $any($event.target).value)"
     placeholder="Search tree"
     aria-label="Search tree"
   ></div>

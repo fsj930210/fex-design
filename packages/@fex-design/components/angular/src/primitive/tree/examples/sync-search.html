@@ -1,5 +1,5 @@
 <div class="grid w-full gap-space-sm">
-  <div inputRoot [value]="keyword()" (valueChange)="search($event)">
+  <div inputRoot [value]="keyword()" (change)="search($any($event.target).value)">
     <input inputControl placeholder="Search tree" aria-label="Search tree" />
   </div>
   <div class="max-h-64 overflow-y-auto">

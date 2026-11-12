@@ -43,7 +43,7 @@ Composable numeric input built from the existing Input and Button primitives.
 | parser / formatter   | InputNumberParser / InputNumberFormatter | built-in | Separates editable text from the number.       |
 | disabled / readOnly  | boolean                                  | false    | Disables editing and actions.                  |
 | keyboard             | boolean                                  | true     | Enables ArrowUp and ArrowDown.                 |
-| onChange             | (event, value) => void                   | —        | Reports the original event and number.         |
+| onChange             | (value) => void                          | —        | Reports the parsed number.                     |
 
 Control inherits `JSX.InputHTMLAttributes<HTMLInputElement>`; native focus, blur, keyboard, aria, data attributes, and element access pass through.
 
@@ -60,7 +60,7 @@ The public logic layer accepts the same options and drives custom DOM without re
 | parser / formatter   | InputNumberParser / InputNumberFormatter | built-in | Separates editable text from the number.       |
 | disabled / readOnly  | boolean                                  | false    | Disables editing and actions.                  |
 | keyboard             | boolean                                  | true     | Enables ArrowUp and ArrowDown.                 |
-| onChange             | (event, value) => void                   | —        | Reports the original event and number.         |
+| onChange             | (value) => void                          | —        | Reports the parsed number.                     |
 
 ### Return value
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import { RadioButtonGroup, RadioGroup } from '@fex-design/angular/ui/radio'
 
 @Component({

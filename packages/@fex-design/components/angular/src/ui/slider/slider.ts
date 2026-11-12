@@ -8,7 +8,8 @@ import {
   sliderTrackClassName,
 } from '@fex-design/components-styles/slider'
 import { cn } from '@fex-design/utils'
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core'
+import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   SliderMark,
   SliderRange,
@@ -16,6 +17,7 @@ import {
   SliderThumb,
   SliderTrack,
 } from '@fex-design/angular/primitive/slider'
+import { FormControlBase } from '../../forms/form-control-base'
 type SliderValue = number | number[]
 export interface SliderMarkItem {
   value: number
@@ -30,9 +32,10 @@ export interface SliderMarkItem {
   host: { style: 'display: contents', '[class]': "''" },
   imports: [SliderRoot, SliderTrack, SliderRange, SliderThumb, SliderMark],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Slider, multi: true }],
   templateUrl: './slider.html',
 })
-export class Slider {
+export class Slider extends FormControlBase<SliderValue> {
   readonly className = input('', { alias: 'class' })
   readonly value = input<SliderValue | undefined>()
   readonly defaultValue = input<SliderValue | undefined>()
@@ -55,9 +58,8 @@ export class Slider {
   readonly size = input<'sm' | 'md' | 'lg'>('md')
   readonly classNames = input<Partial<Record<SliderPart, string>>>({})
   readonly styles = input<Partial<Record<SliderPart, string>>>({})
-  readonly change = output<{ value: SliderValue; meta: SliderChangeMeta }>()
+  readonly onChange = output<{ value: SliderValue; meta: SliderChangeMeta }>()
   readonly end = output<{ value: SliderValue; meta: SliderChangeMeta }>()
-  protected readonly internalValues = signal<number[] | undefined>(undefined)
   protected readonly arrayValue = computed(() =>
     typeof this.value() === 'number'
       ? [this.value() as number]
@@ -68,9 +70,15 @@ export class Slider {
       ? [this.defaultValue() as number]
       : (this.defaultValue() as number[] | undefined),
   )
-  protected readonly currentValues = computed(
-    () => this.arrayValue() ?? this.internalValues() ?? this.arrayDefault() ?? [this.min()],
-  )
+  protected readonly currentValues = computed<number[]>(() => {
+    const external = this.arrayValue()
+    if (external) return external
+    const formValue = this.formValue()
+    if (this.hasFormValue() && formValue !== undefined) {
+      return Array.isArray(formValue) ? (formValue as number[]) : [formValue as number]
+    }
+    return this.arrayDefault() ?? [this.min()]
+  })
   protected readonly disabledThumbs = computed(() =>
     Array.isArray(this.disabled()) ? (this.disabled() as boolean[]) : [],
   )
@@ -100,8 +108,9 @@ export class Slider {
     return result || null
   }
   protected handleChange(event: { value: number[]; meta: SliderChangeMeta }) {
-    if (event.value.length !== this.currentValues().length) this.internalValues.set(event.value)
-    this.change.emit({ value: this.result(event.value), meta: event.meta })
+    this.emitFormValue(this.result(event.value))
+    this.markFormTouched()
+    this.onChange.emit({ value: this.result(event.value), meta: event.meta })
   }
   protected handleEnd(event: { value: number[]; meta: SliderChangeMeta }) {
     this.end.emit({ value: this.result(event.value), meta: event.meta })

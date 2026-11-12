@@ -80,10 +80,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/InputOTP'), 'InputOTPPage'),
   },
   {
-    path: '/form',
-    element: createLazyRouteElement(() => import('../../pages/Form'), 'FormPage'),
-  },
-  {
     path: '/listbox',
     element: <ListboxPage />,
   },
@@ -106,11 +102,6 @@ export const componentRoutes = [
   {
     path: '/rate',
     element: createLazyRouteElement(() => import('../../pages/Rate'), 'RatePage'),
-  },
-
-  {
-    path: '/scrollbar',
-    element: createLazyRouteElement(() => import('../../pages/Scrollbar'), 'ScrollbarPage'),
   },
   {
     path: '/steps',

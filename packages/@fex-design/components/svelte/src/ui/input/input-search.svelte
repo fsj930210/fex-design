@@ -14,7 +14,7 @@
   let {
     value,
     defaultValue = "",
-    onValueChange,
+    onChange,
     onSearch,
     loading = false,
     prefix,
@@ -30,7 +30,7 @@
   const currentValue = $derived(value ?? internalValue);
   function update(next: string) {
     if (value === undefined) internalValue = next;
-    onValueChange?.(next);
+    onChange?.(next);
   }
   function search(source: InputSearchMeta["source"]) {
     if (!loading && !props.disabled) onSearch?.(currentValue, { source });
@@ -85,7 +85,7 @@
 <Input
   {...props}
   value={currentValue}
-  onValueChange={update}
+  onChange={update}
   prefix={prefix ? prefixAction : undefined}
   suffix={suffix ? suffixAction : undefined}
   addonBefore={addonBefore ? beforeAction : undefined}

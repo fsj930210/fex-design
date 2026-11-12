@@ -4,6 +4,8 @@
   import { cn } from "@fex-design/utils";
   import type { HTMLInputAttributes } from "svelte/elements";
   import { getCheckboxGroupContext, getCheckboxRootContext } from "./context";
+  import { getNativeControlTarget } from "@fex-design/svelte/utils/native-control-target";
+  import { untrack } from "svelte";
 
   interface Props extends Omit<HTMLInputAttributes, "type" | "size" | "value"> {
     value?: CheckboxValue;
@@ -21,7 +23,12 @@
     onchange,
     ...rest
   }: Props = $props();
-  let control: HTMLInputElement;
+  let control = $state<HTMLInputElement>();
+  const registerTarget = getNativeControlTarget();
+  $effect(() => {
+    const element = control;
+    if (element) return untrack(() => registerTarget?.(element));
+  });
   const root = getCheckboxRootContext();
   const group = getCheckboxGroupContext();
   const currentValue = $derived(value ?? root?.value);

@@ -5,7 +5,7 @@ import type {
   InputStyles,
   InputVisualOptions,
 } from '@fex-design/core/input/types'
-import type { ComponentProps, CSSProperties, ReactNode, Ref } from 'react'
+import type { ChangeEvent, ComponentProps, CSSProperties, ReactNode, Ref } from 'react'
 
 export interface InputProps
   extends
@@ -13,7 +13,7 @@ export interface InputProps
     InputVisualOptions {
   value?: string
   defaultValue?: string
-  onValueChange?: (value: string) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   prefix?: ReactNode
   suffix?: ReactNode
   addonBefore?: ReactNode

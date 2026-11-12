@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { untrack } from "svelte";
+  import { getNativeControlTarget } from "@fex-design/svelte/utils/native-control-target";
   import type { SwitchOptions } from "@fex-design/core/switch/types";
   import { switchClassName } from "@fex-design/components-styles/switch";
   import { cn } from "@fex-design/utils";
@@ -29,6 +31,12 @@
   // svelte-ignore state_referenced_locally -- defaultChecked initializes uncontrolled state once.
   let internalChecked = $state(defaultChecked);
   const currentChecked = $derived(checked ?? internalChecked);
+  const registerTarget = getNativeControlTarget();
+  // Registration follows the actual button lifetime and releases its form association.
+  $effect(() => {
+    const element = ref;
+    if (element) return untrack(() => registerTarget?.(element));
+  });
 </script>
 
 <button

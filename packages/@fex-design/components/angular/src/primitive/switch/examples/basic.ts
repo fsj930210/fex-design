@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 
 import { SwitchRoot, SwitchThumb } from '@fex-design/angular/primitive/switch'
 @Component({
@@ -8,4 +8,6 @@ import { SwitchRoot, SwitchThumb } from '@fex-design/angular/primitive/switch'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class SwitchBasicExample {}
+export class SwitchBasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
+}

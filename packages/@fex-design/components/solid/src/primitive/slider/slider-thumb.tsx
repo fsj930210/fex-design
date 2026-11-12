@@ -1,3 +1,4 @@
+import { useNativeControlTarget } from '@fex-design/solid/primitives/native-control-target'
 import { callEventHandler } from '@fex-design/solid/primitives/call-event-handler'
 import { convertValueToPercentage, isSliderReversed } from '@fex-design/core/slider/utils'
 import { sliderThumbClassName } from '@fex-design/components-styles/slider'
@@ -11,7 +12,9 @@ export interface SliderThumbProps extends JSX.HTMLAttributes<HTMLSpanElement> {
 }
 
 export function SliderThumb(props: SliderThumbProps) {
+  const nativeTarget = useNativeControlTarget()
   const [local, rest] = splitProps(props, [
+    'ref',
     'index',
     'disabled',
     'class',
@@ -57,6 +60,10 @@ export function SliderThumb(props: SliderThumbProps) {
   return (
     <span
       {...rest}
+      ref={(element) => {
+        nativeTarget(element)
+        if (typeof local.ref === 'function') local.ref(element)
+      }}
       data-slot="slider-thumb"
       data-index={index()}
       role="slider"

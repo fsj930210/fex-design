@@ -1,1 +1,1 @@
-export { VariantsDemo as default } from '@fex-design/react/primitive/separator/examples/variants'
+export { VariantsDemo as default } from '@fex-design/react/ui/separator/examples/variants'

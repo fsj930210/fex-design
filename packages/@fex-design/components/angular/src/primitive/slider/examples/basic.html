@@ -8,7 +8,12 @@
     <span sliderTrack><span sliderRange></span></span><span sliderThumb aria-label="音量"></span>
   </div>
   <p>当前值：{{ value()[0] }}；结束值：{{ ended()[0] }}</p>
-  <div sliderRoot [defaultValue]="[60]" [keyboard]="false">
+  <div
+    sliderRoot
+    [attr.aria-invalid]="invalid() ? 'true' : null"
+    [defaultValue]="[60]"
+    [keyboard]="false"
+  >
     <span sliderTrack><span sliderRange></span></span><span sliderThumb></span>
   </div>
 </div>

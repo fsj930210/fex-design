@@ -61,21 +61,7 @@
     "./primitive/data-table": "./src/primitive/data-table/index.ts",
     "./primitive/date-picker": "./src/primitive/date-picker/index.ts",
     "./primitive/empty": "./src/primitive/empty/index.ts",
-    "./primitive/field": "./src/primitive/field/field-root.svelte",
-    "./primitive/form-field": "./src/primitive/field/field.svelte",
-    "./primitive/field-control": "./src/primitive/field/field-control.svelte",
-    "./primitive/field-label": "./src/primitive/field/field-label.svelte",
-    "./primitive/field-required-indicator": "./src/primitive/field/field-required-indicator.svelte",
-    "./primitive/field-description": "./src/primitive/field/field-description.svelte",
-    "./primitive/field-error": "./src/primitive/field/field-error.svelte",
-    "./primitive/field-group": "./src/primitive/field/field-group.svelte",
-    "./primitive/field-set": "./src/primitive/field/field-set.svelte",
-    "./primitive/field-legend": "./src/primitive/field/field-legend.svelte",
-    "./primitive/field-content": "./src/primitive/field/field-content.svelte",
-    "./primitive/field-title": "./src/primitive/field/field-title.svelte",
-    "./primitive/field-separator": "./src/primitive/field/field-separator.svelte",
-    "./primitive/form": "./src/primitive/form/form.svelte",
-    "./primitive/form/create-form": "./src/primitive/form/create-form.ts",
+    "./primitive/form": "./src/primitive/form/index.ts",
     "./primitive/input": "./src/primitive/input/index.ts",
     "./primitive/kbd": "./src/primitive/kbd/index.ts",
     "./primitive/input-otp": "./src/primitive/input-otp/input-otp-root.svelte",
@@ -197,6 +183,7 @@
     "./ui/button": "./src/ui/button/index.ts",
     "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.ts",
+    "./ui/form": "./src/ui/form/index.ts",
     "./ui/date-picker": "./src/ui/date-picker/index.ts",
     "./ui/empty": "./src/ui/empty/index.ts",
     "./ui/input": "./src/ui/input/index.ts",
@@ -259,7 +246,8 @@
     "./actions/resize": "./src/actions/resize.ts",
     "./actions/sortable": "./src/actions/sortable.ts",
     "./i18n": "./src/i18n/index.ts",
-    "./*": "./src/*"
+    "./*": "./src/*",
+    "./utils/native-control-target": "./src/utils/native-control-target.ts"
   },
   "scripts": {
     "typecheck": "svelte-check --tsconfig tsconfig.json",
@@ -280,7 +268,8 @@
     "@fex-design/docs-shared": "workspace:*",
     "svelte": "5.57.0",
     "svelte-check": "latest",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "zod": "4.4.3"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"

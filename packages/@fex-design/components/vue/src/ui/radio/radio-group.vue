@@ -9,7 +9,7 @@ defineProps<{
   orientation?: 'horizontal' | 'vertical'
   options?: readonly { label: string; value: RadioValue; disabled?: boolean }[]
 }>()
-defineEmits<{ valueChange: [value: RadioValue, meta: unknown] }>()
+const emit = defineEmits<{ change: [value: RadioValue, meta: unknown] }>()
 </script>
 <template>
   <PrimitiveRadioGroup
@@ -17,7 +17,7 @@ defineEmits<{ valueChange: [value: RadioValue, meta: unknown] }>()
     :default-value="defaultValue"
     :disabled="disabled"
     :orientation="orientation"
-    @value-change="(value, meta) => $emit('valueChange', value, meta)"
+    @change="(value, meta) => emit('change', value, meta)"
     ><template v-if="options"
       ><Radio
         v-for="option in options"

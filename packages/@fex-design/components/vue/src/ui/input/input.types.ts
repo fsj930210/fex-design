@@ -7,13 +7,14 @@ import type {
 import type { CSSProperties } from 'vue'
 
 export interface InputProps {
-  modelValue?: string
+  value?: string
   defaultValue?: string
   size?: InputSize
   variant?: InputVariant
   clearable?: boolean
   disabled?: boolean
   readonly?: boolean
+  placeholder?: string
   classNames?: InputClassNames
   styles?: InputStyles<CSSProperties>
 }

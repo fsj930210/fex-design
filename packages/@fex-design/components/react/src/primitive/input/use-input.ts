@@ -14,7 +14,7 @@ export interface UseInputOptions {
   defaultValue?: string | undefined
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
-  onValueChange?: ((value: string, meta: InputChangeMeta) => void) | undefined
+  onChange?: ((value: string, meta: InputChangeMeta) => void) | undefined
   onClear?: ((meta: InputChangeMeta) => void) | undefined
 }
 
@@ -34,13 +34,13 @@ export function useInput({
   defaultValue = '',
   disabled = false,
   readOnly = false,
-  onValueChange,
+  onChange,
   onClear,
 }: UseInputOptions = {}): InputController {
   const elementRef = useRef<HTMLElement | null>(null)
   const [currentValue, setCurrentValue] = useControllableState<string>(
-    { value, defaultValue, onValueChange },
-    { trigger: 'onValueChange' },
+    { value, defaultValue, onChange },
+    { trigger: 'onChange' },
   )
 
   const focusRef = useMemoizedFn((element: HTMLElement | null) => {

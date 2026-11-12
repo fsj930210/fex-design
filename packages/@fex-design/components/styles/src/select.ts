@@ -1,22 +1,22 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import { formTreatment } from './form-treatment'
 import { inputFocusClassName } from './input'
 import { selectableItemSelectedClassName } from './selectable-item'
 
 export const selectTriggerClassName = cva(
   [
-    'group/select-trigger relative flex min-h-9 w-full min-w-0 cursor-pointer items-center gap-2 rounded-md border border-[var(--input-border-color,var(--border))] bg-[var(--input-background,var(--background))] text-sm text-[var(--input-color,var(--foreground))] outline-none',
+    'group/select-trigger relative flex min-h-(--select-trigger-height) w-full min-w-0 cursor-pointer items-center gap-2 rounded-md border border-[var(--form-border-color,var(--input-border-color,var(--border)))] bg-[var(--input-background,var(--background))] text-sm text-[var(--input-color,var(--foreground))] outline-none ring-[length:var(--form-ring-width,0px)] ring-[var(--form-ring-color,transparent)]',
     inputFocusClassName,
-    formTreatment('has-[[aria-invalid=true]]', 'var(--danger)'),
-    formTreatment('data-[warning=true]', 'var(--warning)'),
+    'has-[[aria-invalid=true]]:border-[var(--form-border-color,var(--danger))]',
+    'aria-[invalid=true]:border-[var(--form-border-color,var(--danger))]',
+    'data-[warning=true]:border-[var(--form-border-color,var(--warning))]',
     'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
   ].join(' '),
   {
     variants: {
       size: {
-        sm: 'min-h-8 px-2 py-0 text-xs',
-        md: 'min-h-9 px-3 py-1 text-sm',
-        lg: 'min-h-10 px-4 py-1.5 text-base',
+        sm: '[--select-trigger-height:var(--input-height-sm,var(--height-sm))] px-2 py-0 text-xs',
+        md: '[--select-trigger-height:var(--input-height-md,var(--height-md))] px-3 py-1 text-sm',
+        lg: '[--select-trigger-height:var(--input-height-lg,var(--height-lg))] px-4 py-1.5 text-base',
       },
     },
     defaultVariants: { size: 'md' },

@@ -1,4 +1,4 @@
-import { Separator } from '@fex-design/solid/primitive/separator'
+import { Separator } from '@fex-design/solid/ui/separator'
 import { For, Show } from 'solid-js'
 export const BasicDemo = () => (
   <div class="grid w-full max-w-xl gap-2">

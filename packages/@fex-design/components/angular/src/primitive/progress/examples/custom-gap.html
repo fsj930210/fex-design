@@ -7,7 +7,7 @@
       [min]="0"
       [max]="8"
       [step]="1"
-      (change)="changeGap($event.value)"
+      (change)="changeGap($any($event).value)"
     ></div>
   </label>
   <div class="flex flex-wrap items-center gap-6">

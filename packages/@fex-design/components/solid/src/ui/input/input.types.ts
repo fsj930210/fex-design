@@ -12,7 +12,7 @@ export interface InputProps
   extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'value'>, InputVisualOptions {
   value?: string
   defaultValue?: string
-  onValueChange?: (value: string) => void
+  onChange?: (event: InputEvent & { currentTarget: HTMLInputElement; target: Element }) => void
   prefix?: JSX.Element
   suffix?: JSX.Element
   addonBefore?: JSX.Element

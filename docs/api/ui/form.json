@@ -1,0 +1,475 @@
+{
+  "name": "Form",
+  "slug": "form",
+  "layer": "ui",
+  "status": "stable",
+  "description": "基于 Form Primitive 的快捷组合层。提供 Form、FormField、FormGroup 和 FormSubscribe，字段值、事件与校验仍由调用方显式绑定。",
+  "props": [
+    {
+      "name": "form",
+      "type": "AnyFormApi",
+      "required": true,
+      "description": "Form 组件的 form 属性：当前框架的 TanStack Form 实例。"
+    },
+    {
+      "name": "layout",
+      "type": "'vertical' | 'horizontal' | 'inline'",
+      "default": "vertical",
+      "description": "Form 组件的内置表单布局。"
+    },
+    {
+      "name": "labelAlign",
+      "type": "'start' | 'end'",
+      "default": "end",
+      "description": "Form 组件在横向/行内布局中的标签文本对齐。"
+    },
+    {
+      "name": "labelWidth",
+      "type": "string | number",
+      "default": "7rem",
+      "description": "Form 组件的标签列宽。"
+    },
+    {
+      "name": "labelGap",
+      "type": "string | number",
+      "default": "0.5rem",
+      "description": "Form 组件的标签与控件间距。"
+    },
+    {
+      "name": "labelWrap",
+      "type": "boolean",
+      "default": false,
+      "description": "Form 组件是否允许长标签换行。"
+    },
+    {
+      "name": "scrollToFirstError",
+      "type": "boolean | FormScrollOptions",
+      "default": true,
+      "description": "Form 组件提交失败后是否滚动并聚焦首个错误。"
+    },
+    {
+      "name": "classNames",
+      "type": "Partial<Record<FormPart, string>>",
+      "description": "Form 组件按语义部件设置 class。"
+    },
+    {
+      "name": "styles",
+      "type": "Partial<Record<FormPart, FrameworkStyle>>",
+      "description": "Form 组件按语义部件设置原生 style。"
+    }
+  ],
+  "components": [
+    {
+      "name": "FormField",
+      "layer": "ui",
+      "description": "快捷组合 FormField、标签、控件关联、说明和错误。调用方通过渲染参数显式绑定 value、onChange、onBlur。",
+      "props": [
+        {
+          "name": "name",
+          "type": "DeepKeys<TData>",
+          "required": true,
+          "description": "对象或数组字段路径。"
+        },
+        {
+          "name": "label",
+          "type": "FrameworkNode",
+          "description": "字段标签。"
+        },
+        {
+          "name": "description",
+          "type": "FrameworkNode",
+          "description": "字段说明。"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "default": false,
+          "description": "只控制语义标记，不生成校验规则。"
+        },
+        {
+          "name": "validators",
+          "type": "TanStack field validators",
+          "description": "TanStack 字段校验器。"
+        },
+        {
+          "name": "classNames",
+          "type": "Partial<Record<FormFieldPart, string>>",
+          "description": "字段部件 class。"
+        },
+        {
+          "name": "styles",
+          "type": "Partial<Record<FormFieldPart, FrameworkStyle>>",
+          "description": "字段部件 style。"
+        }
+      ],
+      "frameworks": {
+        "react": {
+          "typeOverrides": {
+            "FrameworkNode": "ReactNode",
+            "FrameworkStyle": "CSSProperties"
+          }
+        },
+        "vue": {
+          "typeOverrides": {
+            "FrameworkNode": "VNodeChild",
+            "FrameworkStyle": "StyleValue"
+          }
+        },
+        "solid": {
+          "typeOverrides": {
+            "FrameworkNode": "JSX.Element",
+            "FrameworkStyle": "JSX.CSSProperties"
+          }
+        },
+        "svelte": {
+          "typeOverrides": {
+            "FrameworkNode": "Snippet",
+            "FrameworkStyle": "string"
+          }
+        },
+        "angular": {
+          "typeOverrides": {
+            "FrameworkNode": "string | TemplateRef<unknown>",
+            "FrameworkStyle": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "FormGroup",
+      "layer": "ui",
+      "description": "快捷组合语义 fieldset 和 legend。",
+      "props": [
+        {
+          "name": "legend",
+          "type": "FrameworkNode",
+          "description": "分组标题。"
+        }
+      ],
+      "frameworks": {
+        "react": {
+          "typeOverrides": {
+            "FrameworkNode": "ReactNode",
+            "FrameworkStyle": "CSSProperties"
+          }
+        },
+        "vue": {
+          "typeOverrides": {
+            "FrameworkNode": "VNodeChild",
+            "FrameworkStyle": "StyleValue"
+          }
+        },
+        "solid": {
+          "typeOverrides": {
+            "FrameworkNode": "JSX.Element",
+            "FrameworkStyle": "JSX.CSSProperties"
+          }
+        },
+        "svelte": {
+          "typeOverrides": {
+            "FrameworkNode": "Snippet",
+            "FrameworkStyle": "string"
+          }
+        },
+        "angular": {
+          "typeOverrides": {
+            "FrameworkNode": "string | TemplateRef<unknown>",
+            "FrameworkStyle": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "FormSubscribe",
+      "layer": "ui",
+      "description": "按 selector 订阅局部表单状态。",
+      "props": [
+        {
+          "name": "selector",
+          "type": "(state: TanStack FormState) => TSelected",
+          "required": true,
+          "description": "选择需要的状态。"
+        }
+      ],
+      "frameworks": {
+        "react": {
+          "typeOverrides": {
+            "FrameworkNode": "ReactNode",
+            "FrameworkStyle": "CSSProperties"
+          }
+        },
+        "vue": {
+          "typeOverrides": {
+            "FrameworkNode": "VNodeChild",
+            "FrameworkStyle": "StyleValue"
+          }
+        },
+        "solid": {
+          "typeOverrides": {
+            "FrameworkNode": "JSX.Element",
+            "FrameworkStyle": "JSX.CSSProperties"
+          }
+        },
+        "svelte": {
+          "typeOverrides": {
+            "FrameworkNode": "Snippet",
+            "FrameworkStyle": "string"
+          }
+        },
+        "angular": {
+          "typeOverrides": {
+            "FrameworkNode": "string | TemplateRef<unknown>",
+            "FrameworkStyle": "string"
+          }
+        }
+      }
+    }
+  ],
+  "events": [],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础表单",
+      "description": "基础值、基础校验、提交和重置。",
+      "height": 720
+    },
+    {
+      "id": "layout",
+      "title": "布局与标签对齐",
+      "description": "多字段对比纵向、横向和行内布局，调整标签对齐、列宽、间距与换行，并观察说明和校验反馈。",
+      "height": 1400
+    },
+    {
+      "id": "validation-feedback",
+      "title": "完整控件校验反馈",
+      "description": "覆盖 Input、InputNumber、Select、Switch、Checkbox、Radio、DatePicker、TimePicker、Slider，展示失败外观、修正与动态错误。",
+      "height": 1600
+    },
+    {
+      "id": "schema-validation",
+      "title": "第三方 Schema 校验",
+      "description": "展示如何接入 Zod 等第三方校验库。",
+      "height": 820
+    },
+    {
+      "id": "submit",
+      "title": "提交与状态",
+      "description": "展示异步提交、提交状态和失败反馈。",
+      "height": 720
+    },
+    {
+      "id": "events",
+      "title": "字段事件与业务联动",
+      "description": "使用显式字段事件直接完成业务联动并展示最近变化。",
+      "height": 720
+    },
+    {
+      "id": "reset",
+      "title": "表单重置",
+      "description": "修改字段后重置表单，确认值回到初始化数据。",
+      "height": 720
+    },
+    {
+      "id": "dirty-state",
+      "title": "编辑状态",
+      "description": "对照编辑记录、当前值与初始值的差异，以及重置后的状态。",
+      "height": 820
+    },
+    {
+      "id": "linked-fields",
+      "title": "联动与字段依赖",
+      "description": "条件字段、地区城市级联和依赖字段重新校验。",
+      "height": 1250
+    },
+    {
+      "id": "nested-array",
+      "title": "嵌套对象与动态数组",
+      "description": "嵌套字段路径、动态成员的新增删除与逐项校验。",
+      "height": 1400
+    },
+    {
+      "id": "field-prefix",
+      "title": "字段路径前缀",
+      "description": "复用地址字段组，通过显式前缀区分寄送与账单地址。",
+      "height": 1300
+    },
+    {
+      "id": "nested-fields",
+      "title": "动态增减嵌套字段",
+      "description": "分组和嵌套成员两层数组独立增删，校验随路径移位。",
+      "height": 1500
+    },
+    {
+      "id": "complex-dynamic",
+      "title": "复杂动态增减",
+      "description": "复制分组、独立增删嵌套成员，以及条件字段与校验的同步变化。",
+      "height": 1700
+    },
+    {
+      "id": "nested-validation",
+      "title": "嵌套结构与校验",
+      "description": "对象和数组的字段校验、名称去重与预算合计约束。",
+      "height": 1500
+    },
+    {
+      "id": "scroll",
+      "title": "错误定位与滚动",
+      "description": "默认聚焦并滚动到首个错误，或定位指定错误字段。",
+      "height": 720
+    },
+    {
+      "id": "context-only",
+      "title": "只提供表单上下文",
+      "description": "业务面板负责结构与操作，字段仍共享原生 TanStack 实例。",
+      "height": 720
+    },
+    {
+      "id": "custom-control",
+      "title": "自定义控件",
+      "description": "对象值的自定义手机号控件，显式绑定、校验、提交和重置。",
+      "height": 720
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL",
+      "description": "切换原生方向，检查横向标签、反馈和操作区的镜像布局。",
+      "height": 720
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "description": "切换局部变量，定制间距、标签及说明和错误颜色。",
+      "height": 980
+    },
+    {
+      "id": "semantic-styles",
+      "title": "语义样式",
+      "description": "通过公开部件的 class/style 或 UI classNames/styles 定制外观。",
+      "height": 720
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--form-gap",
+      "default": "var(--space-xl, 1rem)",
+      "description": "表单部件间距，与 Primitive 共用。"
+    },
+    {
+      "name": "--form-item-gap",
+      "default": "var(--space-sm, 0.375rem)",
+      "description": "字段内部间距，与 Primitive 共用。"
+    },
+    {
+      "name": "--form-label-color",
+      "default": "var(--foreground)",
+      "description": "标签文字颜色。"
+    },
+    {
+      "name": "--form-description-color",
+      "default": "var(--muted-foreground)",
+      "description": "说明文字颜色。"
+    },
+    {
+      "name": "--form-error-color",
+      "default": "var(--danger)",
+      "description": "错误文字颜色。"
+    },
+    {
+      "name": "--form-label-width",
+      "default": "7rem",
+      "description": "标签列宽，由 labelWidth 提供。"
+    },
+    {
+      "name": "--form-label-gap",
+      "default": "0.5rem",
+      "description": "标签与控件之间的列间距，由 labelGap 提供。"
+    }
+  ],
+  "importPath": {
+    "react": "@fex-design/react/ui/form",
+    "vue": "@fex-design/vue/ui/form",
+    "solid": "@fex-design/solid/ui/form",
+    "svelte": "@fex-design/svelte/ui/form",
+    "angular": "@fex-design/angular/ui/form"
+  },
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkStyle": "CSSProperties",
+        "FrameworkEvent": "React event handler"
+      }
+    },
+    "vue": {
+      "typeOverrides": {
+        "FrameworkNode": "VNodeChild",
+        "FrameworkStyle": "StyleValue",
+        "FrameworkEvent": "Vue event handler"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkStyle": "JSX.CSSProperties",
+        "FrameworkEvent": "Solid event handler"
+      }
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkStyle": "string",
+        "FrameworkEvent": "Svelte event handler"
+      }
+    },
+    "angular": {
+      "typeOverrides": {
+        "FrameworkNode": "string | TemplateRef<unknown>",
+        "FrameworkStyle": "string",
+        "FrameworkEvent": "Angular output/event binding"
+      }
+    }
+  },
+  "instance": {
+    "title": "Form instance 常用 API",
+    "description": "Form 实例由 TanStack Form 创建，Form 组件只提供上下文、字段关联、布局和反馈。下面列出示例中高频使用的方法；完整 API 请参阅 TanStack Form 文档。",
+    "link": "https://tanstack.com/form/latest/docs/framework/react/reference",
+    "methods": [
+      {
+        "name": "handleSubmit",
+        "description": "执行校验并提交；提交按钮或原生 submit 事件中调用。"
+      },
+      {
+        "name": "reset",
+        "description": "恢复全部字段到 defaultValues，并清理编辑状态。"
+      },
+      {
+        "name": "resetField",
+        "description": "只恢复一个字段到初始值。"
+      },
+      {
+        "name": "setFieldValue",
+        "description": "显式设置字段值，支持对象和数组路径。"
+      },
+      {
+        "name": "getFieldValue",
+        "description": "读取当前字段值。"
+      },
+      {
+        "name": "pushFieldValue",
+        "description": "向数组字段追加一项。"
+      },
+      {
+        "name": "removeFieldValue",
+        "description": "按数组下标删除一项。"
+      },
+      {
+        "name": "validate",
+        "description": "主动执行表单或字段校验。"
+      },
+      {
+        "name": "setFieldMeta",
+        "description": "写入 touched、错误等字段元数据。"
+      }
+    ]
+  }
+}

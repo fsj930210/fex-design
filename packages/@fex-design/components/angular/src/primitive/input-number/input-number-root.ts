@@ -18,10 +18,13 @@ import {
 } from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { useInputNumber } from './use-input-number'
+import { NgTemplateOutlet } from '@angular/common'
+import { Injector, TemplateRef } from '@angular/core'
 
 @Component({
   selector: 'div[inputNumberRoot]',
   standalone: true,
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClassName()',
@@ -32,9 +35,24 @@ import { useInputNumber } from './use-input-number'
     '[attr.data-variant]': 'variant()',
     '[attr.data-out-of-range]': "inputNumber.outOfRange() ? 'true' : null",
   },
-  template: '<ng-content />',
+  template:
+    '<ng-content /><ng-container [ngTemplateOutlet]="content() ?? null" [ngTemplateOutletInjector]="contentInjector" />',
 })
 export class InputNumberRoot implements OnInit {
+  private formChange: (value: number | undefined) => void = () => {}
+  private formTouched: () => void = () => {}
+  writeValue(value: number | undefined) {
+    this.hasValue.set(true)
+    this.controlledValue.set(value)
+  }
+  registerOnChange(fn: (value: number | undefined) => void) {
+    this.formChange = fn
+  }
+  registerOnTouched(fn: () => void) {
+    this.formTouched = fn
+  }
+  readonly content = input<TemplateRef<unknown>>()
+  protected readonly contentInjector = inject(Injector)
   readonly class = input<string>()
   readonly element = inject<ElementRef<HTMLDivElement>>(ElementRef).nativeElement
   private readonly controlledValue = signal<number | undefined>(undefined)
@@ -60,7 +78,7 @@ export class InputNumberRoot implements OnInit {
   readonly readOnly = input(false, { transform: booleanAttribute })
   readonly size = input<InputSize>('md')
   readonly variant = input<InputVariant>('outlined')
-  readonly change = output<{ event: Event; value: number | undefined }>()
+  readonly change = output<number | undefined>()
 
   private control?: HTMLInputElement
   protected readonly hostClassName = createHostClassName(
@@ -86,7 +104,10 @@ export class InputNumberRoot implements OnInit {
       disabled: this.disabled(),
       readOnly: this.readOnly(),
       keyboard: this.keyboard(),
-      onChange: (event, value) => this.change.emit({ event, value }),
+      onChange: (value) => {
+        this.formChange(value)
+        this.change.emit(value)
+      },
     })),
   )
 

@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "@fex-design/angular",
   "private": true,
   "type": "module",
@@ -23,7 +23,6 @@
     "./primitive/data-table": "./src/primitive/data-table/index.ts",
     "./primitive/date-picker": "./src/primitive/date-picker/index.ts",
     "./primitive/empty": "./src/primitive/empty/index.ts",
-    "./primitive/field": "./src/primitive/field/index.ts",
     "./primitive/form": "./src/primitive/form/index.ts",
     "./primitive/input": "./src/primitive/input/index.ts",
     "./primitive/kbd": "./src/primitive/kbd/index.ts",
@@ -71,6 +70,10 @@
     "./primitive/tooltip": "./src/primitive/tooltip/index.ts",
     "./primitive/tour": "./src/primitive/tour/index.ts",
     "./primitive/badge": "./src/primitive/badge/index.ts",
+    "./primitive/badge/badge-item": "./src/primitive/badge/badge-item.ts",
+    "./primitive/button/button-group": "./src/primitive/button/button-group.ts",
+    "./primitive/popover/popover-trigger": "./src/primitive/popover/popover-trigger.ts",
+    "./primitive/popover/create-popover": "./src/primitive/popover/create-popover.ts",
     "./ui/alert": "./src/ui/alert/index.ts",
     "./ui/anchor": "./src/ui/anchor/index.ts",
     "./ui/badge": "./src/ui/badge/index.ts",
@@ -87,6 +90,9 @@
     "./ui/button": "./src/ui/button/index.ts",
     "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.ts",
+    "./ui/form": "./src/ui/form/index.ts",
+    "./forms/form-control-base": "./src/forms/form-control-base.ts",
+    "./forms/form-control-accessor": "./src/forms/form-control-accessor.ts",
     "./ui/date-picker": "./src/ui/date-picker/index.ts",
     "./ui/empty": "./src/ui/empty/index.ts",
     "./ui/input": "./src/ui/input/index.ts",
@@ -109,6 +115,11 @@
     "./ui/slider": "./src/ui/slider/index.ts",
     "./ui/tag": "./src/ui/tag/index.ts",
     "./icons/check": "./src/icons/check.ts",
+    "./icons/chevron-left": "./src/icons/chevron-left.ts",
+    "./icons/chevron-right": "./src/icons/chevron-right.ts",
+    "./icons/chevron-down": "./src/icons/chevron-down.ts",
+    "./icons/chevrons-left": "./src/icons/chevrons-left.ts",
+    "./icons/chevrons-right": "./src/icons/chevrons-right.ts",
     "./icon/check": "./src/icons/check.ts",
     "./icons/circle-check": "./src/icons/circle-check.ts",
     "./icon/circle-check": "./src/icons/circle-check.ts",
@@ -157,6 +168,7 @@
     "./directives/move": "./src/directives/move.ts",
     "./directives/resize": "./src/directives/resize.ts",
     "./directives/sortable": "./src/directives/sortable.ts",
+    "./directives/native-control-target": "./src/directives/native-control-target.ts",
     "./signals/core-store-signal": "./src/signals/core-store-signal.ts",
     "./signals/create-carousel": "./src/signals/create-carousel.ts",
     "./signals/create-data-table": "./src/signals/create-data-table.ts",
@@ -190,10 +202,12 @@
     "@angular/compiler-cli": "22.1.5",
     "@angular/core": "22.1.5",
     "@fex-design/docs-shared": "workspace:*",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "zod": "4.4.3"
   },
   "peerDependencies": {
     "@angular/common": "^22.0.0",
-    "@angular/core": "^22.0.0"
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0"
   }
 }

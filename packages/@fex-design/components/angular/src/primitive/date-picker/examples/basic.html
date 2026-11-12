@@ -1,12 +1,12 @@
 <div class="flex w-full min-w-0 flex-col items-stretch gap-4">
-  <div datePickerRoot>
+  <div datePickerRoot [attr.aria-invalid]="invalid() ? 'true' : null">
     <div datePickerTrigger class="w-full min-w-0" placeholder="请选择日期"></div>
     <div datePickerContent>
       <div datePickerPanel></div>
       <div datePickerFooter></div>
     </div>
   </div>
-  <div datePickerRoot [multiple]="true">
+  <div datePickerRoot [attr.aria-invalid]="invalid() ? 'true' : null" [multiple]="true">
     <div datePickerTrigger class="w-full min-w-0"></div>
     <div datePickerContent>
       <div datePickerPanel></div>

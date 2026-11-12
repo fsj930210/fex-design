@@ -1,4 +1,5 @@
 <script lang="ts">
+  let { invalid = false } = $props<{ invalid?: boolean }>();
   import {
     DatePickerRoot,
     DatePickerTrigger,

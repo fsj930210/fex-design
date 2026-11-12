@@ -1,5 +1,5 @@
 import { Badge } from '@fex-design/react/ui/badge'
-import { BadgeDot } from '@fex-design/react/primitive/badge'
+import { BadgeDot } from '@fex-design/react/ui/badge'
 export function Basic() {
   return (
     <div className="flex flex-wrap items-center gap-6">

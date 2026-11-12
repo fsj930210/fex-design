@@ -100,7 +100,7 @@
   ],
   "events": [
     {
-      "name": "valueChange",
+      "name": "onChange",
       "description": "输入或清除后返回新值。"
     },
     {

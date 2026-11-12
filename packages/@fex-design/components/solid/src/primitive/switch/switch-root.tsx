@@ -1,3 +1,4 @@
+import { useNativeControlTarget } from '@fex-design/solid/primitives/native-control-target'
 import type { SwitchOptions } from '@fex-design/core/switch/types'
 import { switchClassName } from '@fex-design/components-styles/switch'
 import { cn } from '@fex-design/utils'
@@ -9,6 +10,7 @@ export type SwitchRootProps = Omit<
   SwitchOptions & { onChange?: (checked: boolean, event: MouseEvent) => void }
 export function SwitchRoot(props: SwitchRootProps) {
   const [local, rest] = splitProps(props, [
+    'ref',
     'checked',
     'defaultChecked',
     'disabled',
@@ -19,11 +21,16 @@ export function SwitchRoot(props: SwitchRootProps) {
     'onClick',
     'onChange',
   ])
+  const nativeTarget = useNativeControlTarget()
   const [internalChecked, setChecked] = createSignal(local.defaultChecked ?? false)
   const checked = () => local.checked ?? internalChecked()
   return (
     <button
       {...rest}
+      ref={(element) => {
+        nativeTarget(element)
+        if (typeof local.ref === 'function') local.ref(element)
+      }}
       type="button"
       role="switch"
       disabled={local.disabled || local.loading}

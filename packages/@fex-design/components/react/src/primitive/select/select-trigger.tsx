@@ -8,7 +8,8 @@ import {
   selectValueContainerClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
-import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
+import { type ComponentProps, type KeyboardEvent, type ReactNode, type CSSProperties } from 'react'
+import type { InputClassNames, InputStyles } from '@fex-design/core/input/types'
 import { ChevronDownIcon } from '@fex-design/react/icons/chevron'
 import { LoadingIcon } from '@fex-design/react/icons/loading'
 import {
@@ -17,8 +18,9 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
+  type InputControlProps,
+  type InputRootProps,
 } from '@fex-design/react/primitive/input'
-import type { InputProps } from '@fex-design/react/ui/input'
 import { PopoverTrigger } from '@fex-design/react/primitive/popover'
 import { useSelect } from './use-select'
 
@@ -35,9 +37,16 @@ export interface SelectTriggerProps extends Omit<ComponentProps<'div'>, 'childre
 }
 
 export type SelectInputProps = Omit<
-  InputProps,
-  'value' | 'defaultValue' | 'onValueChange' | 'addonBefore' | 'addonAfter' | 'clearable'
->
+  InputControlProps,
+  'value' | 'defaultValue' | 'onChange' | 'size' | 'prefix'
+> &
+  Pick<InputRootProps, 'size' | 'variant'> & {
+    prefix?: ReactNode
+    suffix?: ReactNode
+    clear?: ReactNode
+    classNames?: InputClassNames
+    styles?: InputStyles<CSSProperties>
+  }
 
 export function SelectTrigger({
   children,
@@ -62,6 +71,8 @@ export function SelectTrigger({
     style: inputStyle,
     classNames,
     styles,
+    size,
+    variant,
     onKeyDown: inputOnKeyDown,
     onFocus,
     ...controlProps
@@ -101,6 +112,9 @@ export function SelectTrigger({
           role={undefined}
           aria-haspopup="listbox"
           data-slot="select-trigger"
+          tabIndex={select.showSearch ? undefined : 0}
+          size={size}
+          variant={variant}
           data-clearable={select.clearable && hasValue ? 'true' : undefined}
           data-warning={dataWarning ?? select.dataWarning}
           value={select.snapshot.searchValue}
@@ -113,7 +127,7 @@ export function SelectTrigger({
             className,
           )}
           style={{ ...styles?.root, ...inputStyle, ...props.style }}
-          onValueChange={(value) => {
+          onChange={(value) => {
             select.controller.setSearchValue(value)
             select.controller.open()
           }}

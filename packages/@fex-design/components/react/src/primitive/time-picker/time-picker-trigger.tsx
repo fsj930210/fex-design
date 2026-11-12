@@ -20,7 +20,7 @@ export interface TimePickerTriggerProps extends Omit<
   InputRootProps,
   | 'value'
   | 'defaultValue'
-  | 'onValueChange'
+  | 'onChange'
   | 'onClear'
   | 'children'
   | 'prefix'
@@ -95,7 +95,7 @@ export function TimePickerTrigger({
       value={text}
       disabled={context.disabled}
       readOnly={context.readOnly}
-      onValueChange={input}
+      onChange={input}
       onClear={allowClear ? clear : undefined}
     >
       {prefix ? <InputPrefix>{prefix}</InputPrefix> : null}

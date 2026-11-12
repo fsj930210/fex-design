@@ -8,7 +8,12 @@ export default function Example() {
     <div class="grid gap-4">
       <section class="grid gap-2">
         <span class="text-sm text-muted-foreground">Radio</span>
-        <RadioGroup defaultValue="apple" orientation="horizontal" options={options} />
+        <RadioGroup
+          aria-invalid={props.invalid}
+          defaultValue="apple"
+          orientation="horizontal"
+          options={options}
+        />
       </section>
       <section class="grid gap-2">
         <span class="text-sm text-muted-foreground">RadioButton</span>

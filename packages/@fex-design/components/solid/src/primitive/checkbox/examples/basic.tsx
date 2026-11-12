@@ -9,12 +9,12 @@ import {
 export default function Example() {
   return (
     <div class="grid gap-3">
-      <CheckboxRoot>
+      <CheckboxRoot aria-invalid={props.invalid}>
         <CheckboxControl />
         <CheckboxIndicator />
         <CheckboxLabel>接收产品更新</CheckboxLabel>
       </CheckboxRoot>
-      <CheckboxRoot>
+      <CheckboxRoot aria-invalid={props.invalid}>
         <CheckboxControl defaultChecked />
         <CheckboxIndicator />
         <CheckboxLabel>接收安全提醒</CheckboxLabel>

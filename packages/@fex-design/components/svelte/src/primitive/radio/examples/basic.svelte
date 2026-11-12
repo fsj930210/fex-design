@@ -1,4 +1,5 @@
 <script lang="ts">
+  let { invalid = false } = $props<{ invalid?: boolean }>();
   import {
     Radio,
     RadioButton,
@@ -8,21 +9,25 @@
 
 <div class="grid gap-4">
   <section class="grid gap-2">
-    <span>Radio</span><RadioGroup defaultValue="apple" orientation="horizontal"
+    <span>Radio</span><RadioGroup
+      aria-invalid={invalid}
+      defaultValue="apple"
+      orientation="horizontal"
       ><label class="inline-flex items-center gap-2"
-        ><Radio value="apple" />苹果</label
+        ><Radio aria-invalid={invalid} value="apple" />苹果</label
       ><label class="inline-flex items-center gap-2"
-        ><Radio value="pear" />梨</label
+        ><Radio aria-invalid={invalid} value="pear" />梨</label
       ></RadioGroup
     >
   </section>
   <section class="grid gap-2">
     <span>RadioButton</span><RadioGroup
+      aria-invalid={invalid}
       defaultValue="apple"
       orientation="horizontal"
       class="gap-0"
-      ><RadioButton value="apple">苹果</RadioButton><RadioButton value="pear"
-        >梨</RadioButton
+      ><RadioButton aria-invalid={invalid} value="apple">苹果</RadioButton
+      ><RadioButton aria-invalid={invalid} value="pear">梨</RadioButton
       ></RadioGroup
     >
   </section>

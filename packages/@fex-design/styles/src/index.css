@@ -6,9 +6,30 @@
 @import './globals.css';
 @import './animations.css';
 @import './utilities.css';
-@import './form-appearance.css';
 
-@source "../../../apps";
-@source "../../../docs/site/src";
+/*
+ * Form feedback contract. Components consume these inherited variables in
+ * their own styles; this global layer only defines the caller-owned state.
+ * Use .form-error or .form-warning on a field/container to select a tone.
+ */
+.form-error {
+  --form-border-color: var(--form-error-color, var(--danger));
+  --form-hover-border-color: var(--form-border-color);
+  --form-ring-color: color-mix(in oklch, var(--form-border-color) 20%, transparent);
+  --focus-border: var(--form-border-color);
+  /* Validation alone changes the border. Focus styles own the ring. */
+  --form-ring-width: 0px;
+}
+
+.form-warning {
+  --form-border-color: var(--form-warning-color, var(--warning));
+  --form-hover-border-color: var(--form-border-color);
+  --form-ring-color: color-mix(in oklch, var(--form-border-color) 20%, transparent);
+  --focus-border: var(--form-border-color);
+  --form-ring-width: 0px;
+}
+
+@source "../../../../apps";
+@source "../../../../docs/site/src";
 @source "../../../../docs/shared/src";
-@source "../../@fex-design";
+@source "../..";

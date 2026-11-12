@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import {
   DatePickerRoot,
   DatePickerTrigger,
@@ -19,4 +19,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class DatePickerBasicExample {}
+export class DatePickerBasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
+}

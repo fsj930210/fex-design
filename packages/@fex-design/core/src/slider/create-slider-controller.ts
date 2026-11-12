@@ -59,6 +59,7 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
   let rangeAnchor = 0
   let rangeStartValues = derived.values
   let transientValues: number[] | undefined
+  let publishedExternalValues: readonly number[] | undefined
   let hasInteracted = false
 
   function getSnapshot() {
@@ -69,7 +70,13 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
       isControlled() || shouldReadDefault ? undefined : stored.values,
     )
     if (isControlled() && transientValues) {
-      if (options.value && !equalValues(options.value, interactionStart))
+      // Keep in-flight input until the owner updates the value read at publication.
+      // Interaction baselines change on keyup before framework props may commit.
+      if (
+        options.value &&
+        publishedExternalValues &&
+        !equalValues(options.value, publishedExternalValues)
+      )
         transientValues = undefined
       else next.values = transientValues
     }
@@ -85,6 +92,7 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
     if (previous.disabled) return undefined
     hasInteracted = true
     const meta: SliderChangeMeta = { previousValues: previous.values, values, changedIndex, source }
+    publishedExternalValues = options.value ? [...options.value] : undefined
     transientValues = isControlled() ? values : undefined
     store.setSnapshot({ ...previous, values, activeIndex: changedIndex ?? previous.activeIndex })
     options.onChange?.(values, meta)

@@ -1,3 +1,4 @@
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 import {
   convertValueToPercentage,
   getSliderRangeDisabledState,
@@ -93,6 +94,7 @@ export class SliderRange {
 
 @Component({
   selector: 'span[sliderThumb]',
+  hostDirectives: [NativeControlTarget],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

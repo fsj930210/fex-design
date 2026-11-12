@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import { useNativeControlTarget } from '@fex-design/vue/composables/use-native-control-target'
 import { convertValueToPercentage, isSliderReversed } from '@fex-design/core/slider/utils'
 import { sliderThumbClassName } from '@fex-design/components-styles/slider'
 import { cn } from '@fex-design/utils'
@@ -11,6 +13,8 @@ const props = withDefaults(defineProps<{ index?: number; disabled?: boolean }>()
   disabled: false,
 })
 const attrs = useAttrs()
+const element = useTemplateRef<HTMLSpanElement>('element')
+useNativeControlTarget(() => element.value)
 const context = useSliderContext('SliderThumb')
 const value = computed(
   () => context.snapshot.value.values[props.index] ?? context.snapshot.value.min,
@@ -85,6 +89,7 @@ function handleKeydown(event: KeyboardEvent) {
 
 <template>
   <span
+    ref="element"
     data-slot="slider-thumb"
     :data-index="props.index"
     v-bind="attrs"

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { AspectRatio } from '@fex-design/angular/primitive/aspect-ratio'
+import { AspectRatio } from '@fex-design/angular/ui/aspect-ratio'
 @Component({
   selector: 'aspect-ratio-css-variables-example',
   standalone: true,

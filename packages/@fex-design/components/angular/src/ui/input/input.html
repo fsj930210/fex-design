@@ -6,7 +6,7 @@
 }
 <div
   inputRoot
-  [value]="value()"
+  [value]="resolvedValue()"
   [defaultValue]="defaultValue()"
   [disabled]="disabled()"
   [readOnly]="readOnly()"
@@ -14,7 +14,8 @@
   [variant]="variant()"
   [class]="classNames().root ?? ''"
   [style]="styles().root"
-  (valueChange)="valueChange.emit($event)"
+  [attr.aria-invalid]="ariaInvalid() || null"
+  (change)="emitFormChange($any($event.target).value); onChange.emit($event)"
   (clear)="cleared.emit()"
 >
   @if (prefix() != null) {

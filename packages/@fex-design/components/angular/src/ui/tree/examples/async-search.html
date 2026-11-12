@@ -10,7 +10,7 @@
     [loading]="loading()"
     placeholder="搜索部门或节点"
     (search)="search($event)"
-    (change)="choose($event.value)"
+    (change)="choose($any($event).value)"
   ></div>
   <p class="text-xs text-muted-foreground">
     可搜索：Department 2、Group 2.3、Item 2.3.3；清除选择恢复原树。

@@ -2,18 +2,28 @@
   import { inputControlClassName } from "@fex-design/components-styles/input";
   import { cn } from "@fex-design/utils";
   import type { HTMLInputAttributes } from "svelte/elements";
-  import { getInputContext } from "./context";
+  import { getInputContext, type InputContextValue } from "./context";
+  import { getNativeControlTarget } from "@fex-design/svelte/utils/native-control-target";
+  import { untrack } from "svelte";
   interface Props extends Omit<HTMLInputAttributes, "class" | "value"> {
     class?: string | undefined;
     ref?: HTMLInputElement | null;
+    inputContext?: InputContextValue;
   }
   let {
     class: className,
     oninput,
     ref = $bindable(null),
+    inputContext,
     ...rest
   }: Props = $props();
-  const input = getInputContext("InputControl");
+  // The mounted control belongs to one input context for its entire lifetime.
+  const input = untrack(() => inputContext ?? getInputContext("InputControl"));
+  const registerTarget = getNativeControlTarget();
+  $effect(() => {
+    const element = ref;
+    if (element) return untrack(() => registerTarget?.(element));
+  });
   export function focus() {
     ref?.focus();
   }

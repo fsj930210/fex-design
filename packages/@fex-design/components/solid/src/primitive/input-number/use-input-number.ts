@@ -24,7 +24,7 @@ export interface UseInputNumberOptions extends InputNumberConstraints {
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
   keyboard?: boolean | undefined
-  onChange?: ((event: Event, value: number | undefined) => void) | undefined
+  onChange?: ((value: number | undefined) => void) | undefined
 }
 
 export function useInputNumber(options: () => UseInputNumberOptions) {
@@ -64,7 +64,7 @@ export function useInputNumber(options: () => UseInputNumberOptions) {
     const next = commit(
       stepInputNumber(parseInputNumber(draft(), parser()) ?? value(), direction, constraints()),
     )
-    options().onChange?.(event, next)
+    options().onChange?.(next)
     return next
   }
   return {
@@ -94,7 +94,7 @@ export function useInputNumber(options: () => UseInputNumberOptions) {
       const next = parseInputNumber(text, parser())
       if (text.trim() === '' || next !== undefined) {
         setValue(next)
-        options().onChange?.(event, next)
+        options().onChange?.(next)
       }
       return next
     },
@@ -103,7 +103,7 @@ export function useInputNumber(options: () => UseInputNumberOptions) {
       const before = value()
       const next = commit(parseInputNumber(draft(), parser()) ?? before)
       setUserTyping(false)
-      if (next !== before) options().onChange?.(event, next)
+      if (next !== before) options().onChange?.(next)
     },
     keydown(event: KeyboardEvent) {
       if (options().keyboard === false || !canChangeInputNumber(options(), event)) return
@@ -115,7 +115,7 @@ export function useInputNumber(options: () => UseInputNumberOptions) {
     clear(event?: Event) {
       if (!canChangeInputNumber(options(), event)) return
       const next = commit(undefined)
-      if (event) options().onChange?.(event, next)
+      if (event) options().onChange?.(next)
       return next
     },
     increment: (event: Event) => changeBy(event, 'increment'),

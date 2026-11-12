@@ -1,4 +1,5 @@
 <script lang="ts">
+  let { invalid = false } = $props<{ invalid?: boolean }>();
   import {
     InputClear,
     InputControl,
@@ -7,7 +8,9 @@
 </script>
 
 <div class="grid w-full gap-3">
-  <InputRoot><InputControl placeholder="请输入内容" /></InputRoot><InputRoot
-    defaultValue="可清除内容"><InputControl /><InputClear /></InputRoot
+  <InputRoot aria-invalid={invalid}
+    ><InputControl placeholder="请输入内容" /></InputRoot
+  ><InputRoot aria-invalid={invalid} defaultValue="可清除内容"
+    ><InputControl /><InputClear /></InputRoot
   >
 </div>

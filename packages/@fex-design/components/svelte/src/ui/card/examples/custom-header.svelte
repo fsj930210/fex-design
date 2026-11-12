@@ -5,7 +5,7 @@
     CardTitle,
     CardDescription,
     CardExtra,
-  } from "@fex-design/svelte/primitive/card";
+  } from "@fex-design/svelte/ui/card";
 </script>
 
 <Card class="w-full max-w-2xl [--card-border:1px_solid_var(--border)]"

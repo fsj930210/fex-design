@@ -35,6 +35,7 @@ export function RadioButton({
       type="button"
       role="radio"
       aria-checked={checked}
+      aria-invalid={context.invalid}
       disabled={currentDisabled}
       data-slot="radio-button"
       data-state={checked ? 'checked' : 'unchecked'}

@@ -3,12 +3,7 @@
     <button button size="sm" (click)="value.set('apple')">选择苹果</button
     ><button button size="sm" (click)="value.set('pear')">选择梨</button>
   </div>
-  <div
-    radioGroup
-    [value]="value()"
-    (valueChange)="value.set($event.value)"
-    orientation="horizontal"
-  >
+  <div radioGroup [value]="value()" (onChange)="value.set($event.value)" orientation="horizontal">
     <div radio value="apple">苹果</div>
     <div radio value="pear">梨</div>
   </div>
@@ -20,7 +15,7 @@
 <div
   radioGroup
   [value]="value()"
-  (valueChange)="value.set($event.value)"
+  (onChange)="value.set($event.value)"
   orientation="horizontal"
   class="gap-0"
 >

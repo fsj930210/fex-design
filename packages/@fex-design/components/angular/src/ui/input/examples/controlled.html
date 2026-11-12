@@ -1,5 +1,5 @@
 <div class="grid w-full gap-3">
-  <div input [value]="value()" (valueChange)="value.set($event)" clearable></div>
+  <div input [value]="value()" (change)="value.set($any($event.target).value)" clearable></div>
   <div input defaultValue="非受控内容" clearable></div>
   <div class="flex flex-wrap gap-2">
     <button button (click)="value.set('外部设置')">外部设置</button

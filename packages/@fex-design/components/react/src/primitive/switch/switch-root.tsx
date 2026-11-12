@@ -1,3 +1,5 @@
+import { useNativeControlTarget } from '@fex-design/react/hooks/use-native-control-target'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import type { SwitchOptions } from '@fex-design/core/switch/types'
 import { switchClassName } from '@fex-design/components-styles/switch'
 import { cn } from '@fex-design/utils'
@@ -13,10 +15,13 @@ export function SwitchRoot({
   size = 'md',
   shape = 'rounded',
   className,
+  ref,
   onClick,
   onChange,
   ...props
 }: SwitchRootProps) {
+  const nativeTarget = useNativeControlTarget()
+  const composedRef = useComposedRef(ref, nativeTarget)
   const [currentChecked, setChecked] = useControllableState<boolean>(
     { checked, defaultChecked, onChange },
     { valuePropName: 'checked', defaultValuePropName: 'defaultChecked' },
@@ -24,6 +29,7 @@ export function SwitchRoot({
   return (
     <button
       {...props}
+      ref={composedRef}
       type="button"
       role="switch"
       disabled={disabled || loading}

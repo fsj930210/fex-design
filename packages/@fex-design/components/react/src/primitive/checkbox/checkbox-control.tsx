@@ -4,6 +4,8 @@ import { cn } from '@fex-design/utils'
 import { use, useRef, type InputHTMLAttributes, type Ref } from 'react'
 import { useIsomorphicLayoutEffect } from '@fex-design/react/hooks/use-isomorphic-layout-effect'
 import { GroupContext, RootContext } from './checkbox-context'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
+import { useNativeControlTarget } from '@fex-design/react/hooks/use-native-control-target'
 
 export interface CheckboxControlProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -29,6 +31,8 @@ export function CheckboxControl({
   const root = use(RootContext)
   const group = use(GroupContext)
   const inputRef = useRef<HTMLInputElement>(null)
+  const nativeTarget = useNativeControlTarget()
+  const composedRef = useComposedRef(inputRef, ref, nativeTarget)
   const currentValue = value ?? root?.value
   const inGroup = group !== null && currentValue !== undefined
   useIsomorphicLayoutEffect(() => {
@@ -37,11 +41,7 @@ export function CheckboxControl({
   return (
     <input
       {...props}
-      ref={(node) => {
-        inputRef.current = node
-        if (typeof ref === 'function') ref(node)
-        else if (ref) ref.current = node
-      }}
+      ref={composedRef}
       id={id ?? root?.controlId}
       type="checkbox"
       name={props.name}

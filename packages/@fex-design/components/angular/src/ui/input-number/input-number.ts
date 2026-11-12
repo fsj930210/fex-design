@@ -1,14 +1,5 @@
-import { mergeStyle } from '@fex-design/angular/signals/merge-style'
-import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
-import type { InputNumberPart } from '@fex-design/core/input-number/types'
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  forwardRef,
-  input,
-} from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core'
+import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   InputNumberActions,
   InputNumberClear,
@@ -18,70 +9,43 @@ import {
   InputNumberRoot,
 } from '@fex-design/angular/primitive/input-number'
 import { InputPrefix, InputSuffix } from '@fex-design/angular/primitive/input'
-import { inputRootClassName } from '@fex-design/components-styles/input'
-import { inputNumberRootClassName } from '@fex-design/components-styles/input-number'
-import { cn } from '@fex-design/utils'
-import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import type { InputNumberPart } from '@fex-design/core/input-number/types'
+import { FormControlBase } from '../../forms/form-control-base'
+
 @Component({
   selector: 'div[inputNumber]',
   standalone: true,
   imports: [
+    InputNumberRoot,
     InputNumberControl,
-    InputNumberClear,
     InputNumberActions,
     InputNumberIncrement,
     InputNumberDecrement,
-    InputPrefix,
-    InputSuffix,
   ],
-  providers: [{ provide: InputNumberRoot, useExisting: forwardRef(() => InputNumber) }],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: InputNumber, multi: true }],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[attr.id]': 'null', '[style]': 'styles()?.root' },
   templateUrl: './input-number.html',
 })
-export class InputNumber extends InputNumberRoot {
-  readonly controlProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  readonly actionsProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  readonly incrementProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  readonly decrementProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  readonly clearProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  protected readonly cn = cn
-  protected readonly mergeStyle = mergeStyle
-  readonly prefixProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  readonly suffixProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
-  readonly prefixStyle = computed(() =>
-    mergeStyle(this.styles()?.prefix, this.prefixProps()?.style),
-  )
-  readonly suffixStyle = computed(() =>
-    mergeStyle(this.styles()?.suffix, this.suffixProps()?.style),
-  )
-  readonly clearable = input(false, { transform: booleanAttribute })
-  readonly controls = input(true, { transform: booleanAttribute })
-  readonly id = input<string>()
-  readonly name = input<string>()
-  readonly placeholder = input<string>()
-  readonly required = input(false, { transform: booleanAttribute })
-  readonly invalid = input(false, { transform: booleanAttribute })
-  readonly describedBy = input<string>()
-  readonly classNames = input<Partial<Record<InputNumberPart, string>>>()
-  readonly styles = input<Partial<Record<InputNumberPart, string>>>()
-  protected override readonly hostClassName = createHostClassName(() =>
-    cn(
-      inputRootClassName({ size: this.size(), variant: this.variant() }),
-      inputNumberRootClassName,
-      this.classNames()?.root,
-    ),
-  )
-  protected readonly prefixClassName = computed(() =>
-    cn('empty:hidden', this.classNames()?.prefix, this.prefixProps()?.class),
-  )
-  protected readonly suffixClassName = computed(() =>
-    cn('empty:hidden', this.classNames()?.suffix, this.suffixProps()?.class),
+export class InputNumber extends FormControlBase<number | undefined> {
+  readonly value = input<number>()
+  readonly defaultValue = input<number>()
+  readonly min = input<number>()
+  readonly max = input<number>()
+  readonly step = input(1)
+  readonly disabled = input(false)
+  readonly readOnly = input(false)
+  readonly precision = input<number>()
+  readonly controls = input<boolean | object>()
+  readonly formatter = input<unknown>()
+  readonly parser = input<unknown>()
+  readonly onChange = output<number | undefined>()
+  protected handleChange(value: number | undefined) {
+    this.emitFormValue(value)
+    this.onChange.emit(value)
+  }
+  readonly classNames = input<Partial<Record<InputNumberPart, string>>>({})
+  protected readonly resolvedValue = this.resolveFormValue(
+    () => this.value(),
+    () => this.defaultValue(),
   )
 }
-
-export interface InputNumberChange {
-  event: Event
-  value: number | undefined
-}
-export { InputSuffix as InputNumberSuffix } from '@fex-design/angular/primitive/input'

@@ -4,6 +4,7 @@ import { checkboxControlClassName } from '@fex-design/components-styles/checkbox
 import { cn } from '@fex-design/utils'
 import { computed, inject, ref, useAttrs, watchEffect, type PropType } from 'vue'
 import { checkboxGroupKey, checkboxRootKey } from './context'
+import { useNativeControlTarget } from '@fex-design/vue/composables/use-native-control-target'
 defineOptions({ name: 'CheckboxControl', inheritAttrs: false })
 const props = defineProps({
   id: String,
@@ -18,6 +19,7 @@ const attrs = useAttrs()
 const root = inject(checkboxRootKey)
 const group = inject(checkboxGroupKey, null)
 const control = ref<HTMLInputElement>()
+useNativeControlTarget(() => control.value)
 const currentValue = computed(() => props.value ?? root?.value.value)
 const inGroup = computed(() => group !== null && currentValue.value !== undefined)
 watchEffect(() => {
@@ -41,16 +43,16 @@ function change(event: Event) {
 </script>
 <template>
   <input
-    v-bind="attrs"
+    v-bind="$attrs"
     ref="control"
     :id="props.id ?? root?.controlId"
     type="checkbox"
-    :name="attrs.name as string | undefined"
+    :name="$attrs.name as string | undefined"
     :value="currentValue"
     :checked="currentChecked"
     :disabled="currentDisabled"
     data-slot="checkbox-control"
-    :class="cn(checkboxControlClassName, attrs.class as string | undefined)"
+    :class="cn(checkboxControlClassName, $attrs.class as string | undefined)"
     @change="change"
   />
 </template>

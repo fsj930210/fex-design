@@ -14,13 +14,13 @@
       value: RadioValue;
       disabled?: boolean;
     }[];
-    onValueChange?: (value: RadioValue, meta: unknown) => void;
+    onChange?: (value: RadioValue, meta: unknown) => void;
     children?: Snippet;
   }
-  let { options, children, ...rest }: Props = $props();
+  let { options, children, value, onChange, ...rest }: Props = $props();
 </script>
 
-<PrimitiveGroup {...rest}>
+<PrimitiveGroup {...rest} {value} {onChange}>
   {#if options}
     {#each options as option (option.value)}
       <Radio value={option.value} disabled={option.disabled}

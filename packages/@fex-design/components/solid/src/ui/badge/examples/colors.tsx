@@ -1,5 +1,5 @@
 import { Badge } from '@fex-design/solid/ui/badge'
-import { BadgeDot } from '@fex-design/solid/primitive/badge'
+import { BadgeDot } from '@fex-design/solid/ui/badge'
 const colors = ['primary', 'info', 'success', 'warning', 'danger'] as const
 export function Colors() {
   return (

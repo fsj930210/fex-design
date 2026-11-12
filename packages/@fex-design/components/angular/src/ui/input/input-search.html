@@ -25,7 +25,7 @@
   [variant]="variant()"
   [class]="classNames().root ?? ''"
   [style]="styles().root"
-  (valueChange)="valueChange.emit($event)"
+  (change)="onChange.emit($event)"
   (clear)="cleared.emit()"
 >
   @if (prefix() != null) {

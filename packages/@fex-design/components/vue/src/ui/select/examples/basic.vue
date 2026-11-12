@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const props = defineProps<{ invalid?: boolean }>()
 import { Select } from '@fex-design/vue/ui/select'
 const options = [
   { value: 'react', label: 'React' },

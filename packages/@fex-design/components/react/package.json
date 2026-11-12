@@ -23,8 +23,7 @@
     "./primitive/data-table": "./src/primitive/data-table/index.ts",
     "./primitive/date-picker": "./src/primitive/date-picker/index.ts",
     "./primitive/empty": "./src/primitive/empty/index.ts",
-    "./primitive/field": "./src/primitive/field/index.ts",
-    "./primitive/form": "./src/primitive/form/index.tsx",
+    "./primitive/form": "./src/primitive/form/index.ts",
     "./primitive/input": "./src/primitive/input/index.ts",
     "./primitive/kbd": "./src/primitive/kbd/index.ts",
     "./primitive/input/use-input": "./src/primitive/input/use-input.ts",
@@ -91,6 +90,7 @@
     "./ui/button": "./src/ui/button/index.tsx",
     "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.tsx",
+    "./ui/form": "./src/ui/form/index.tsx",
     "./ui/date-picker": "./src/ui/date-picker/index.ts",
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
@@ -155,6 +155,7 @@
     "./hooks/use-tooltip": "./src/primitive/tooltip/use-tooltip.ts",
     "./hooks/use-tour": "./src/primitive/tour/use-tour.ts",
     "./hooks/use-unmount": "./src/hooks/use-unmount.ts",
+    "./hooks/use-native-control-target": "./src/hooks/use-native-control-target.ts",
     "./i18n": "./src/i18n/index.tsx",
     "./*": "./src/*"
   },
@@ -169,7 +170,7 @@
     "@fex-design/core": "workspace:*",
     "@fex-design/styles": "workspace:*",
     "@fex-design/utils": "workspace:*",
-    "@tanstack/react-form": "^1.33.5",
+    "@tanstack/react-form": "1.33.5",
     "@tanstack/react-table": "9.2.4",
     "@tanstack/react-virtual": "latest",
     "embla-carousel": "8.6.0",
@@ -181,7 +182,8 @@
     "@types/react-dom": "latest",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "zod": "4.4.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",

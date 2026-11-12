@@ -12,6 +12,7 @@ export interface RadioChangeMeta {
 export interface RadioContextValue {
   value: RadioValue | undefined
   disabled: boolean
+  invalid?: boolean | 'true' | 'false'
   select: (value: RadioValue) => void
 }
 

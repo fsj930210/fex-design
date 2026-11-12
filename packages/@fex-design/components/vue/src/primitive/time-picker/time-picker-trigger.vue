@@ -50,7 +50,7 @@ const clear = context.controller.clear
       :value="context.snapshot.value.inputValue"
       :disabled="context.disabled.value"
       :read-only="context.readOnly.value"
-      @value-change="input"
+      @change="input"
       @clear="clear"
     >
       <InputPrefix v-if="$slots.prefix"><slot name="prefix" /></InputPrefix>

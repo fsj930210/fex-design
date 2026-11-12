@@ -2,7 +2,7 @@ import { For, Show, createMemo } from 'solid-js'
 import { resolveComponentApi } from './component-api'
 import type { ComponentApi, Framework } from './types'
 
-export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
+export function ApiTable(props: { value: ComponentApi; framework: Framework; title?: string }) {
   const value = createMemo(() => resolveComponentApi(props.value, props.framework))
   const hasCustomMembers = createMemo(
     () => value().props.length > 0 || value().events.length > 0 || value().slots.length > 0,
@@ -41,7 +41,7 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
       <Show when={value().props.length > 0}>
         <section class="rounded-xl border border-border bg-card overflow-hidden shadow-sm">
           <div class="border-b border-border bg-muted/40 px-3.5 py-2 text-xs font-semibold text-foreground">
-            Props 属性
+            {props.title ?? props.value.name} Props 属性
           </div>
           <div>
             <div class="grid grid-cols-[105px_minmax(0,1.2fr)_70px_minmax(0,1.6fr)] items-start gap-2.5 bg-muted-background px-3.5 py-2 text-[12px] font-semibold text-secondary-foreground max-[640px]:grid-cols-[90px_minmax(0,1fr)] max-[640px]:[&>*:nth-child(n+3)]:hidden">
@@ -132,6 +132,47 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework }) {
             </For>
           </div>
         </section>
+      </Show>
+
+      <Show when={props.value.instance}>
+        {(instance) => (
+          <section class="rounded-xl border border-border bg-card overflow-hidden shadow-sm">
+            <div class="border-b border-border bg-muted/40 px-3.5 py-2 text-xs font-semibold text-foreground">
+              {instance().title}
+            </div>
+            <p class="px-3.5 py-3 text-xs leading-relaxed text-secondary-foreground">
+              {instance().description}{' '}
+              <Show when={instance().link}>
+                {(link) => (
+                  <a
+                    class="text-primary underline underline-offset-2"
+                    href={link()}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    查看 TanStack Form 完整文档
+                  </a>
+                )}
+              </Show>
+            </p>
+            <div class="grid grid-cols-[150px_minmax(0,1fr)] items-start gap-2.5 border-t border-border bg-muted-background px-3.5 py-2 text-[12px] font-semibold text-secondary-foreground">
+              <span>方法</span>
+              <span>说明</span>
+            </div>
+            <For each={instance().methods}>
+              {(method) => (
+                <div class="grid grid-cols-[150px_minmax(0,1fr)] items-start gap-2.5 border-t border-border px-3.5 py-2.5 text-[12px] hover:bg-muted/20">
+                  <code class="whitespace-pre-wrap break-words [overflow-wrap:anywhere] font-mono text-primary font-semibold text-[11.5px]">
+                    {method.name}
+                  </code>
+                  <span class="text-secondary-foreground leading-relaxed text-[11.5px]">
+                    {method.description}
+                  </span>
+                </div>
+              )}
+            </For>
+          </section>
+        )}
       </Show>
 
       {/* 子组件部件遍历：多部件自然向下排列 */}

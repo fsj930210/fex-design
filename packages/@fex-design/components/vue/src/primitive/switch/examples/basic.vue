@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const props = defineProps<{ invalid?: boolean }>()
 import { SwitchRoot, SwitchContent, SwitchThumb } from '@fex-design/vue/primitive/switch'
 </script>
 <template>

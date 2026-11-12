@@ -1,4 +1,13 @@
 <script lang="ts">
+  import { untrack } from "svelte";
+  import { getNativeControlTarget } from "@fex-design/svelte/utils/native-control-target";
+  let element = $state<HTMLSpanElement | null>(null);
+  const registerTarget = getNativeControlTarget();
+  // Associate the semantic control with its owning field for this element lifetime.
+  $effect(() => {
+    const target = element;
+    if (target) return untrack(() => registerTarget?.(target));
+  });
   import {
     convertValueToPercentage,
     isSliderReversed,
@@ -91,6 +100,7 @@
 </script>
 
 <span
+  bind:this={element}
   {...rest}
   data-slot="slider-thumb"
   data-index={index}

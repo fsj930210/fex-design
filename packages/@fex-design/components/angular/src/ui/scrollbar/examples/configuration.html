@@ -6,7 +6,7 @@
       class="w-40"
       [options]="modes"
       [value]="mode()"
-      (change)="changeMode($event.value)"
+      (change)="changeMode($any($event).value)"
       [inputProps]="{ 'aria-label': '自动隐藏模式' }"
     ></div>
   </div>
@@ -19,10 +19,10 @@
       [min]="0"
       [max]="3000"
       [step]="100"
-      (change)="delay.set($event.value ?? 0)"
+      (change)="delay.set($any($event).value ?? 0)"
     ></div>
   </div>
-  <div checkbox [checked]="disabled()" (checkedChange)="disabled.set($event.checked)">
+  <div checkbox [checked]="disabled()" (checkedChange)="disabled.set($any($event).checked)">
     禁用自定义滚动条交互
   </div>
   <div

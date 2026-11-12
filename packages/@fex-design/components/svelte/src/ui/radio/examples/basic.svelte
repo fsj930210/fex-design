@@ -1,10 +1,12 @@
 <script lang="ts">
+  let { invalid = false } = $props<{ invalid?: boolean }>();
   import { RadioButtonGroup, RadioGroup } from "@fex-design/svelte/ui/radio";
 </script>
 
 <div class="grid gap-4">
   <section class="grid gap-2">
     <span class="text-sm text-muted-foreground">Radio</span><RadioGroup
+      aria-invalid={invalid}
       defaultValue="apple"
       orientation="horizontal"
       options={[

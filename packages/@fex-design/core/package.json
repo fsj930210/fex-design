@@ -178,7 +178,6 @@
     "./dropzone/files": "./src/dropzone/files.ts",
     "./dropzone/types": "./src/dropzone/types.ts",
     "./dropzone/validate": "./src/dropzone/validate.ts",
-    "./form/scroll-to-first-error": "./src/form/scroll-to-first-error.ts",
     "./gradient/create-gradient-controller": "./src/gradient/create-gradient-controller.ts",
     "./gradient/gradient": "./src/gradient/gradient.ts",
     "./gradient/types": "./src/gradient/types.ts",
@@ -234,7 +233,15 @@
     "./sortable/motion": "./src/sortable/motion.ts",
     "./sortable/types": "./src/sortable/types.ts",
     "./switch/types": "./src/switch/types.ts",
-    "./select/component-props": "./src/select/component-props.ts"
+    "./select/component-props": "./src/select/component-props.ts",
+    "./form/types": "./src/form/types.ts",
+    "./form/field-presentation": "./src/form/field-presentation.ts",
+    "./form/error-messages": "./src/form/error-messages.ts",
+    "./form/control-binding": "./src/form/control-binding.ts",
+    "./form/control-target": "./src/form/control-target.ts",
+    "./form/field-association": "./src/form/field-association.ts",
+    "./form/field-targets": "./src/form/field-targets.ts",
+    "./form/snapshot-store": "./src/form/snapshot-store.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",

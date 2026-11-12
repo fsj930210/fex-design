@@ -1,1 +1,1 @@
-export { InputNumber, InputNumberSuffix, type InputNumberChange } from './input-number'
+export { InputNumber } from './input-number'

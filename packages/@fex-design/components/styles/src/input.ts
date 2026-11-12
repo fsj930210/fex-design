@@ -1,17 +1,18 @@
 import { cva } from 'class-variance-authority'
-import { formTreatment } from './form-treatment'
 
 export const inputFocusClassName =
-  'focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-[length:var(--input-ring-width,3px)] focus-within:ring-[var(--input-ring-color,var(--focus-ring))]'
+  'focus-within:border-[var(--focus-border)] focus-within:hover:border-[var(--focus-border)] focus-within:ring-[length:var(--input-ring-width,3px)] focus-within:ring-[var(--form-ring-color,var(--input-ring-color,var(--focus-ring)))] has-[[aria-invalid=true]]:focus-within:border-[var(--form-border-color,var(--danger))] has-[[aria-invalid=true]]:focus-within:hover:border-[var(--form-border-color,var(--danger))] has-[[aria-invalid=true]]:focus-within:ring-[color-mix(in_oklch,var(--form-border-color,var(--danger))_20%,transparent)] aria-[invalid=true]:focus-within:border-[var(--form-border-color,var(--danger))] aria-[invalid=true]:focus-within:hover:border-[var(--form-border-color,var(--danger))] aria-[invalid=true]:focus-within:ring-[color-mix(in_oklch,var(--form-border-color,var(--danger))_20%,transparent)]'
 
 const inputBaseClassName = [
   'group/input-root relative flex h-(--input-height) w-full min-w-0 items-stretch gap-2 overflow-hidden rounded-md border bg-[var(--input-background,var(--background))] text-[var(--input-color,var(--foreground))]',
   '[--input-height:var(--input-height-md,var(--height-md))] [--input-icon-size:var(--input-icon-size-md,var(--icon-size-md))] [--input-clear-icon-size:0.875rem]',
-  'border-[var(--input-border-color,var(--border))] outline-none transition-colors',
-  'hover:border-foreground/30',
+  'border-[var(--form-border-color,var(--input-border-color,var(--border)))] outline-none transition-colors',
+  'ring-[length:var(--form-ring-width,0px)] ring-[var(--form-ring-color,transparent)]',
+  'hover:border-[var(--form-hover-border-color,color-mix(in_oklch,var(--foreground)_30%,transparent))] has-[[aria-invalid=true]]:hover:border-[var(--form-border-color,var(--danger))] aria-[invalid=true]:hover:border-[var(--form-border-color,var(--danger))]',
   inputFocusClassName,
-  formTreatment('has-[[aria-invalid=true]]', 'var(--danger)'),
-  formTreatment('data-[warning=true]', 'var(--warning)'),
+  'has-[[aria-invalid=true]]:border-[var(--form-border-color,var(--danger))]',
+  'aria-[invalid=true]:border-[var(--form-border-color,var(--danger))]',
+  'data-[warning=true]:border-[var(--form-border-color,var(--warning))]',
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-disabled-background data-[disabled=true]:text-disabled-foreground data-[disabled=true]:opacity-70',
 ].join(' ')
 
@@ -38,6 +39,7 @@ export const inputRootClassName = cva(inputBaseClassName, {
 export const inputControlClassName = [
   'min-w-0 flex-1 bg-transparent text-inherit outline-none',
   'placeholder:text-[var(--input-placeholder-color,var(--placeholder-foreground))]',
+  'placeholder:text-muted-foreground placeholder:opacity-100',
   'disabled:cursor-not-allowed file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
 ].join(' ')
 

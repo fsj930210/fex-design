@@ -7,7 +7,7 @@ import {
   InputNumberRoot,
 } from '@fex-design/solid/primitive/input-number'
 import { InputPrefix, InputSuffix } from '@fex-design/solid/primitive/input'
-export function BasicExample() {
+export function BasicExample(props: { invalid?: boolean }) {
   return (
     <div class="grid w-full gap-3">
       <label for="quantity">数量</label>

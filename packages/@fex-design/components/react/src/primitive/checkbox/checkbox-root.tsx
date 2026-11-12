@@ -7,7 +7,8 @@ import { cn } from '@fex-design/utils'
 import { useId, type HTMLAttributes, type Ref } from 'react'
 import { RootContext } from './checkbox-context'
 
-export interface CheckboxRootProps extends HTMLAttributes<HTMLDivElement>, CheckboxStyleProps {
+export interface CheckboxRootProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'onBlur'>, CheckboxStyleProps {
   value?: CheckboxValue
   disabled?: boolean
   ref?: Ref<HTMLDivElement>

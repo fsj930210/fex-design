@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, booleanAttribute } from '@angular/core'
 import { Input } from '@fex-design/angular/ui/input'
 @Component({
   selector: 'input-basic-example',
@@ -7,4 +7,6 @@ import { Input } from '@fex-design/angular/ui/input'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './basic.html',
 })
-export class BasicExample {}
+export class BasicExample {
+  readonly invalid = input(false, { transform: booleanAttribute })
+}

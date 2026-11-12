@@ -185,6 +185,7 @@
 
 - Angular 组件设计必须以 Angular 当前官方能力和 Angular Material/CDK 等成熟组件库的当前源码为依据；不得为对齐 React 人造 Props 汇总接口、children、ref、Context 或 hook 等对应物。
 - Angular 代码采用 Signal-first 思路：优先使用 `signal`、`computed`、`effect`、signal inputs/outputs、resource 等现代 Angular 响应能力组织状态和异步数据。
+- Angular standalone 示例的 `@Component({ imports: [...] })` 只登记模板中直接使用的组件、指令和管道。通过 `[component]`、动态 `content` 或 TypeScript 字段传给 FormControl 的组件类，只保留 TypeScript import 和字段引用，不要放入 `imports` 数组；否则 Angular 编译器会产生 NG8113 “is not used within the template” 警告。每次新增动态表单控件后，先按模板实际标签清理 `imports`，再检查 Angular 编译输出。
 - Angular 顶层或核心元素的用户扩展 class 必须通过原生 `class="..."` 传入并自动合并，不设计 `customClass`、`hostClass`、`xxxClass` 这类替代属性。多个组件都需要读取并合并宿主初始 class 时，必须沉淀为 Angular 公共 signal/helper/directive，不要在每个组件里重复写 `ElementRef + getAttribute('class') + cn(...)`。
 - `signal` 管理本地可变状态，`computed` 管理派生数据，`effect` 只用于外部系统同步；不要用 `effect` 监听 signal 再补做普通业务逻辑。
 - Angular 也要少用监听式 `effect` 串联业务流程；用户动作、表单变化、分页筛选等优先在事件处理或表单回调中完成。

@@ -13,7 +13,7 @@ export interface InputProps
   class?: string
   value?: string
   defaultValue?: string
-  onValueChange?: (value: string) => void
+  onChange?: (event: InputEvent & { currentTarget: HTMLInputElement; target: Element }) => void
   prefix?: Snippet
   suffix?: Snippet
   addonBefore?: Snippet

@@ -21,7 +21,7 @@ export interface InputNumberRootProps extends Omit<JSX.HTMLAttributes<HTMLDivEle
   keyboard?: boolean | undefined
   size?: 'sm' | 'md' | 'lg' | undefined
   variant?: 'outlined' | 'filled' | 'borderless' | 'underlined' | undefined
-  onChange?: ((event: Event, value: number | undefined) => void) | undefined
+  onChange?: ((value: number | undefined) => void) | undefined
 }
 export function InputNumberRoot(props: ParentProps<InputNumberRootProps>) {
   const hasValue = Object.prototype.hasOwnProperty.call(props, 'value')
@@ -57,7 +57,7 @@ export function InputNumberRoot(props: ParentProps<InputNumberRootProps>) {
         variant={local.variant}
         data-slot="input-number-root"
         data-out-of-range={inputNumber.outOfRange() || undefined}
-        onValueChange={(text, meta) => {
+        onChange={(text, meta) => {
           if (meta.reason === 'input') inputNumber.input(text, meta.event)
         }}
       >

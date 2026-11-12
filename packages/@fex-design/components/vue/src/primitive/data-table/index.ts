@@ -1,6 +1,4 @@
 export { default as DataTable } from './data-table.vue'
-export { tableFeatures } from '@tanstack/table-core'
-export type { ColumnDef, TableFeatures } from '@tanstack/table-core'
 export { default as DataTableSortButton } from './data-table-sort-button.vue'
 export { default as DataTableFilterInput } from './data-table-filter-input.vue'
 export { createDataTableSelectionColumn } from './selection-column'

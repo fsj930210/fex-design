@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Badge } from "@fex-design/svelte/ui/badge";
-  import { BadgeDot } from "@fex-design/svelte/primitive/badge";
+  import { BadgeDot } from "@fex-design/svelte/ui/badge";
 </script>
 
 <div class="flex flex-wrap items-center gap-6">

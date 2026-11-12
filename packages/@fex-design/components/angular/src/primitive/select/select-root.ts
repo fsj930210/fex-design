@@ -25,6 +25,8 @@ import {
 } from '@angular/core'
 import { createCoreStoreSignalBinding } from '@fex-design/angular/signals/core-store-signal'
 import { Popover } from '@fex-design/angular/primitive/popover'
+import { NgTemplateOutlet } from '@angular/common'
+import { Injector, TemplateRef, input } from '@angular/core'
 
 export interface SelectChangeMeta {
   selectedItem?: SelectOption | undefined
@@ -35,11 +37,15 @@ export interface SelectChangeMeta {
 @Component({
   selector: 'div[selectRoot]',
   standalone: true,
+  imports: [NgTemplateOutlet],
   providers: [Popover],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content />',
+  template:
+    '<ng-content /><ng-container [ngTemplateOutlet]="content() ?? null" [ngTemplateOutletInjector]="contentInjector" />',
 })
 export class SelectRoot implements OnChanges, OnInit {
+  readonly content = input<TemplateRef<unknown>>()
+  protected readonly contentInjector = inject(Injector)
   private readonly popover = inject(Popover)
   private readonly destroyRef = inject(DestroyRef)
   private readonly optionsState = signal<readonly SelectOption[]>([])

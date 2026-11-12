@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import { useNativeControlTarget } from '@fex-design/vue/composables/use-native-control-target'
 import { createSelectionController } from '@fex-design/core/selection/create-selection-controller'
 import type { SelectionChangeMeta } from '@fex-design/core/selection/types'
 import { radioGroupClassName, type RadioGroupStyleProps } from '@fex-design/components-styles/radio'
@@ -16,8 +18,10 @@ const props = withDefaults(
   }>(),
   { disabled: false, orientation: 'horizontal' },
 )
-const emit = defineEmits<{ valueChange: [value: RadioValue, meta: RadioChangeMeta] }>()
+const emit = defineEmits<{ change: [value: RadioValue, meta: RadioChangeMeta] }>()
 const attrs = useAttrs()
+const element = useTemplateRef<HTMLDivElement>('element')
+useNativeControlTarget(() => element.value)
 const controller = createSelectionController({
   get value() {
     return props.value
@@ -31,7 +35,7 @@ const controller = createSelectionController({
   onChange(values, meta: SelectionChangeMeta) {
     const value = values[0]
     if (value !== undefined)
-      emit('valueChange', value, {
+      emit('change', value, {
         previousValue: meta.previousValues[0],
         value,
         changedValues: meta.changedValues,
@@ -48,6 +52,7 @@ provide(radioContextKey, {
 </script>
 <template>
   <div
+    ref="element"
     v-bind="attrs"
     role="radiogroup"
     data-slot="radio-group"

@@ -57,7 +57,7 @@ defineExpose({
     :data-effect="effect"
     :data-loading="loading ? 'true' : undefined"
     :disabled="isDisabled"
-    :type="type"
+    :type="props.type"
   >
     <ButtonIcon
       v-if="iconPlacement === 'start' && (loading || $slots.icon)"

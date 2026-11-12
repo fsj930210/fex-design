@@ -1,0 +1,89 @@
+<section class="mx-auto grid w-full max-w-2xl gap-5 p-5">
+  <header class="grid gap-1">
+    <h3 class="text-base font-semibold">团队成员资料</h3>
+    <p class="text-sm text-muted-foreground">
+      填写团队成员资料，使用输入框、部门选择和通知偏好完成保存。
+    </p>
+  </header>
+  <form uiForm [form]="form">
+    <div class="grid gap-[var(--form-item-gap,var(--space-sm,0.375rem))]">
+      <ng-container [tanstackField]="form" name="name" [validators]="validators0" #name="field"
+        ><label class="inline-flex items-center gap-1"
+          >姓名 <span class="text-danger">*</span></label
+        >
+        <div
+          input
+          [value]="name.api.state.value ?? ''"
+          [aria-invalid]="name.api.state.meta.errors.length ? 'true' : false"
+          (onChange)="name.api.handleChange($any($event).target.value)"
+          placeholder="请输入联系人姓名"
+        ></div>
+        @if (name.api.state.meta.isTouched && name.api.state.meta.errors.length) {
+        <div class="text-danger">{{ name.api.state.meta.errors[0] }}</div>
+        }</ng-container
+      >
+      <ng-container [tanstackField]="form" name="email" [validators]="validators1" #email="field"
+        ><label class="inline-flex items-center gap-1"
+          >工作邮箱 <span class="text-danger">*</span></label
+        >
+        <div
+          input
+          [value]="email.api.state.value ?? ''"
+          [aria-invalid]="email.api.state.meta.errors.length ? 'true' : false"
+          (onChange)="email.api.handleChange($any($event).target.value)"
+          placeholder="name@company.com"
+        ></div>
+        @if (email.api.state.meta.isTouched && email.api.state.meta.errors.length) {
+        <div class="text-danger">{{ email.api.state.meta.errors[0] }}</div>
+        }</ng-container
+      >
+      <ng-container
+        [tanstackField]="form"
+        name="department"
+        [validators]="validators2"
+        #department="field"
+        ><label class="inline-flex items-center gap-1"
+          >所属部门 <span class="text-danger">*</span></label
+        >
+        <div
+          select
+          [options]="departments"
+          [value]="department.api.state.value"
+          [clearable]="true"
+          [aria-invalid]="department.api.state.meta.errors.length ? 'true' : undefined"
+          (onChange)="department.api.handleChange($event.value)"
+        ></div>
+        <p class="text-sm text-muted-foreground">用于分配项目通知和审批权限。</p>
+        @if (department.api.state.meta.isTouched && department.api.state.meta.errors.length) {
+        <div class="text-danger">{{ department.api.state.meta.errors[0] }}</div>
+        }</ng-container
+      >
+      <ng-container
+        [tanstackField]="form"
+        name="notifications"
+        [validators]="validators3"
+        #notifications="field"
+        ><div class="flex items-center gap-2">
+          <div
+            checkbox
+            [checked]="notifications.api.state.value"
+            [aria-invalid]="notifications.api.state.meta.errors.length ? 'true' : undefined"
+            (onChange)="notifications.api.handleChange($any($event).target.checked)"
+          >
+            接收项目进度邮件
+          </div>
+        </div>
+        @if (notifications.api.state.meta.isTouched && notifications.api.state.meta.errors.length) {
+        <div class="text-danger">{{ notifications.api.state.meta.errors[0] }}</div>
+        }</ng-container
+      >
+    </div>
+    <div class="mt-5 flex gap-3 border-t border-border pt-4">
+      <button button type="submit" variant="solid" color="primary">保存资料</button
+      ><button button type="reset" (click)="form.reset()">重置</button>
+    </div>
+  </form>
+  @if(result()) {
+  <p role="status">{{ result() }}</p>
+  }
+</section>

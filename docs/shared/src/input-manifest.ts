@@ -33,11 +33,6 @@ export const inputExamples = {
     },
     { id: 'states', title: '原生状态', description: '展示 disabled、readOnly 与 aria-invalid。' },
     {
-      id: 'validation',
-      title: '校验失败',
-      description: '使用 aria-invalid 展示错误样式，并通过 aria-describedby 关联错误说明。',
-    },
-    {
       id: 'focus',
       title: '命令式聚焦',
       description: '通过 InputControl 的原生元素引用调用 focus、blur 和 select。',
@@ -91,11 +86,6 @@ export const inputExamples = {
       id: 'states',
       title: '状态',
       description: '展示禁用、只读和校验失败状态。',
-    },
-    {
-      id: 'validation',
-      title: '校验失败',
-      description: '展示错误样式，并关联可访问的错误说明。',
     },
     {
       id: 'focus',

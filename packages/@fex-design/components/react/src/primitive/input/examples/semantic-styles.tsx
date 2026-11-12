@@ -24,7 +24,7 @@ export function InputSemanticStylesExample() {
     <div className="grid w-full gap-3">
       <InputRoot
         value={value}
-        onValueChange={setValue}
+        onChange={setValue}
         className="border-violet-300 hover:border-violet-400 focus-within:border-violet-600 focus-within:ring-violet-600/20"
       >
         <InputPrefix className="text-violet-500">@</InputPrefix>

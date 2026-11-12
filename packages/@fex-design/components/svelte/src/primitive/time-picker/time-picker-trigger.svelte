@@ -87,7 +87,7 @@
     value={context.snapshot().inputValue}
     disabled={context.disabled()}
     readOnly={context.readOnly()}
-    onValueChange={context.controller.input}
+    onChange={context.controller.input}
     onclick={click}
     onfocusin={focus}
     onfocusout={blur}

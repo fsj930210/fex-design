@@ -5,7 +5,7 @@ export function ControlledExample() {
   const [value, setValue] = createSignal('受控内容')
   return (
     <div class="grid w-full gap-3">
-      <Input value={value()} onValueChange={setValue} clearable />
+      <Input value={value()} onChange={setValue} clearable />
       <Input defaultValue="非受控内容" clearable />
       <div class="flex flex-wrap gap-2">
         <Button onClick={() => setValue('外部设置')}>外部设置</Button>

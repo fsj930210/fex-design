@@ -6,7 +6,7 @@ export function ControlledExample() {
   const [value, setValue] = createSignal('受控内容')
   return (
     <div class="grid w-full gap-3">
-      <InputRoot value={value()} onValueChange={setValue}>
+      <InputRoot value={value()} onChange={setValue}>
         <InputControl />
         <InputClear />
       </InputRoot>

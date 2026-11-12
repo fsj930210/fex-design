@@ -13,14 +13,14 @@ import { inputNumberRootClassName } from '@fex-design/components-styles/input-nu
 
 export interface InputNumberRootProps
   extends
-    Omit<ComponentProps<typeof InputRoot>, 'value' | 'defaultValue' | 'onValueChange' | 'onChange'>,
+    Omit<ComponentProps<typeof InputRoot>, 'value' | 'defaultValue' | 'onChange'>,
     InputNumberConstraints {
   value?: number | undefined
   defaultValue?: number | undefined
   parser?: InputNumberParser | undefined
   formatter?: InputNumberFormatter | undefined
   keyboard?: boolean | undefined
-  onChange?: ((event: Event, value: number | undefined) => void) | undefined
+  onChange?: ((value: number | undefined) => void) | undefined
   controlled?: boolean | undefined
 }
 
@@ -71,8 +71,8 @@ export function InputNumberRoot(rootProps: InputNumberRootProps) {
         readOnly={readOnly}
         data-slot="input-number-root"
         data-out-of-range={inputNumber.outOfRange ? 'true' : undefined}
-        onValueChange={(text, meta) => {
-          if (meta.reason === 'input') inputNumber.input(text, meta.event)
+        onChange={(text, meta) => {
+          if (meta.reason === 'input' && meta.event) inputNumber.input(text, meta.event)
         }}
       >
         {children}

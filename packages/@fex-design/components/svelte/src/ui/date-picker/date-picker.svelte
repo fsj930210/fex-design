@@ -19,11 +19,13 @@
     container,
     panel,
     footer,
+    value,
+    onChange,
     ...options
   }: DatePickerProps = $props();
 </script>
 
-<DatePickerRoot {...options} {container}>
+<DatePickerRoot {...options} {value} {onChange} {container}>
   {#snippet children(state)}
     <DatePickerTrigger
       {placeholder}

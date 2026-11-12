@@ -39,7 +39,7 @@ Ready-to-use composition that reuses Primitive logic and Input/Button parts. UI 
 | parser / formatter   | InputNumberParser / InputNumberFormatter | built-in | Separates editable text from the number.       |
 | disabled / readOnly  | boolean                                  | false    | Disables editing and actions.                  |
 | keyboard             | boolean                                  | true     | Enables ArrowUp and ArrowDown.                 |
-| onChange             | (event, value) => void                   | —        | Reports the original event and number.         |
+| onChange             | (value) => void                          | —        | Reports the parsed number.                     |
 
 Supports every Input feature and native input attribute. `classNames` and `styles` target root, control, clear, prefix, suffix, actions, increment, and decrement.
 

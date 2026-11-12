@@ -4,9 +4,13 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
-      "@fex-design/utils": ["packages/@fex-design/utils/src/index.ts"],
-      "@fex-design/utils/tree": ["packages/@fex-design/utils/src/tree.ts"],
-      "@fex-design/utils/image/load-image": ["packages/@fex-design/utils/src/image/load-image.ts"],
+      "@fex-design/core/pagination/types": ["packages/@fex-design/core/src/pagination/types.ts"],
+      "@fex-design/core/pagination/pagination-range": [
+        "packages/@fex-design/core/src/pagination/pagination-range.ts"
+      ],
+      "@fex-design/core/pagination/create-pagination-controller": [
+        "packages/@fex-design/core/src/pagination/create-pagination-controller.ts"
+      ],
       "@fex-design/core/popover/types": ["packages/@fex-design/core/src/popover/types.ts"],
       "@fex-design/core/popover/options": ["packages/@fex-design/core/src/popover/options.ts"],
       "@fex-design/core/popover/create-popover": [
@@ -64,13 +68,30 @@
       "@fex-design/core/calendar/range": ["packages/@fex-design/core/src/calendar/range.ts"],
       "@fex-design/core/calendar/temporal": ["packages/@fex-design/core/src/calendar/temporal.ts"],
       "@fex-design/core/calendar/types": ["packages/@fex-design/core/src/calendar/types.ts"],
+      "@fex-design/core/date-picker/create-date-picker": [
+        "packages/@fex-design/core/src/date-picker/create-date-picker.ts"
+      ],
+      "@fex-design/core/date-picker/create-range-picker": [
+        "packages/@fex-design/core/src/date-picker/create-range-picker.ts"
+      ],
+      "@fex-design/core/date-picker/appearance": [
+        "packages/@fex-design/core/src/date-picker/appearance.ts"
+      ],
+      "@fex-design/core/date-picker/safe-props": [
+        "packages/@fex-design/core/src/date-picker/safe-props.ts"
+      ],
+      "@fex-design/core/date-picker/options": [
+        "packages/@fex-design/core/src/date-picker/options.ts"
+      ],
       "@fex-design/core/date-picker/constraints": [
         "packages/@fex-design/core/src/date-picker/constraints.ts"
       ],
       "@fex-design/core/date-picker/input": ["packages/@fex-design/core/src/date-picker/input.ts"],
       "@fex-design/core/date-picker/panel": ["packages/@fex-design/core/src/date-picker/panel.ts"],
       "@fex-design/core/date-picker/range": ["packages/@fex-design/core/src/date-picker/range.ts"],
+      "@fex-design/core/date-picker/time": ["packages/@fex-design/core/src/date-picker/time.ts"],
       "@fex-design/core/date-picker/types": ["packages/@fex-design/core/src/date-picker/types.ts"],
+      "@fex-design/core/date-picker/view": ["packages/@fex-design/core/src/date-picker/view.ts"],
       "@fex-design/core/date-picker/value": ["packages/@fex-design/core/src/date-picker/value.ts"],
       "@fex-design/core/input/types": ["packages/@fex-design/core/src/input/types.ts"],
       "@fex-design/core/input-otp/completion": [
@@ -90,6 +111,21 @@
         "packages/@fex-design/core/src/carousel/create-carousel-controller.ts"
       ],
       "@fex-design/core/date/utils": ["packages/@fex-design/core/src/date/utils.ts"],
+      "@fex-design/core/time-picker/navigation": [
+        "packages/@fex-design/core/src/time-picker/navigation.ts"
+      ],
+      "@fex-design/core/time-picker/scroll": [
+        "packages/@fex-design/core/src/time-picker/scroll.ts"
+      ],
+      "@fex-design/core/time-picker/input-props": [
+        "packages/@fex-design/core/src/time-picker/input-props.ts"
+      ],
+      "@fex-design/core/time-picker/range-types": [
+        "packages/@fex-design/core/src/time-picker/range-types.ts"
+      ],
+      "@fex-design/core/time-picker/create-time-range-picker-controller": [
+        "packages/@fex-design/core/src/time-picker/create-time-range-picker-controller.ts"
+      ],
       "@fex-design/core/time-picker/types": ["packages/@fex-design/core/src/time-picker/types.ts"],
       "@fex-design/core/time-picker/value": ["packages/@fex-design/core/src/time-picker/value.ts"],
       "@fex-design/core/time-picker/options": [
@@ -205,6 +241,7 @@
         "packages/@fex-design/core/src/tree/features/search.ts"
       ],
       "@fex-design/core/tree/features/dnd": ["packages/@fex-design/core/src/tree/features/dnd.ts"],
+      "@fex-design/core/tree/keyboard-dom": ["packages/@fex-design/core/src/tree/keyboard-dom.ts"],
       "@fex-design/core/tree/features/keyboard": [
         "packages/@fex-design/core/src/tree/features/keyboard.ts"
       ],
@@ -212,6 +249,9 @@
         "packages/@fex-design/core/src/tree/get-search-subtree.ts"
       ],
       "@fex-design/core/tree/types": ["packages/@fex-design/core/src/tree/types.ts"],
+      "@fex-design/core/tree/drop-indicator-dom": [
+        "packages/@fex-design/core/src/tree/drop-indicator-dom.ts"
+      ],
       "@fex-design/core/tree-select/create-tree-select-controller": [
         "packages/@fex-design/core/src/tree-select/create-tree-select-controller.ts"
       ],
@@ -321,9 +361,6 @@
       "@fex-design/core/dropzone/files": ["packages/@fex-design/core/src/dropzone/files.ts"],
       "@fex-design/core/dropzone/types": ["packages/@fex-design/core/src/dropzone/types.ts"],
       "@fex-design/core/dropzone/validate": ["packages/@fex-design/core/src/dropzone/validate.ts"],
-      "@fex-design/core/form/scroll-to-first-error": [
-        "packages/@fex-design/core/src/form/scroll-to-first-error.ts"
-      ],
       "@fex-design/core/gradient/create-gradient-controller": [
         "packages/@fex-design/core/src/gradient/create-gradient-controller.ts"
       ],
@@ -337,7 +374,16 @@
         "packages/@fex-design/core/src/mentions/replace-query.ts"
       ],
       "@fex-design/core/mentions/types": ["packages/@fex-design/core/src/mentions/types.ts"],
-      "@fex-design/core/menu/navigation": ["packages/@fex-design/core/src/menu/navigation.ts"],
+      "@fex-design/core/menu/items": ["packages/@fex-design/core/src/menu/items.ts"],
+      "@fex-design/core/menu/branch": ["packages/@fex-design/core/src/menu/branch.ts"],
+      "@fex-design/core/menu/types": ["packages/@fex-design/core/src/menu/types.ts"],
+      "@fex-design/core/menu/dom-types": ["packages/@fex-design/core/src/menu/dom-types.ts"],
+      "@fex-design/core/menu/create-menu-controller": [
+        "packages/@fex-design/core/src/menu/create-menu-controller.ts"
+      ],
+      "@fex-design/core/menu/create-menu-dom": [
+        "packages/@fex-design/core/src/menu/create-menu-dom.ts"
+      ],
       "@fex-design/core/message/types": ["packages/@fex-design/core/src/message/types.ts"],
       "@fex-design/core/disclosure/create-disclosure": [
         "packages/@fex-design/core/src/disclosure/create-disclosure.ts"
@@ -406,6 +452,9 @@
         "packages/@fex-design/core/src/select/normalize-options.ts"
       ],
       "@fex-design/core/select/types": ["packages/@fex-design/core/src/select/types.ts"],
+      "@fex-design/core/select/value-layout": [
+        "packages/@fex-design/core/src/select/value-layout.ts"
+      ],
       "@fex-design/core/select/virtual": ["packages/@fex-design/core/src/select/virtual.ts"],
       "@fex-design/core/selection/create-selection-controller": [
         "packages/@fex-design/core/src/selection/create-selection-controller.ts"
@@ -429,6 +478,31 @@
       "@fex-design/core/sortable/motion": ["packages/@fex-design/core/src/sortable/motion.ts"],
       "@fex-design/core/sortable/types": ["packages/@fex-design/core/src/sortable/types.ts"],
       "@fex-design/core/switch/types": ["packages/@fex-design/core/src/switch/types.ts"],
+      "@fex-design/core/select/component-props": [
+        "packages/@fex-design/core/src/select/component-props.ts"
+      ],
+      "@fex-design/core/form/types": ["packages/@fex-design/core/src/form/types.ts"],
+      "@fex-design/core/form/field-presentation": [
+        "packages/@fex-design/core/src/form/field-presentation.ts"
+      ],
+      "@fex-design/core/form/error-messages": [
+        "packages/@fex-design/core/src/form/error-messages.ts"
+      ],
+      "@fex-design/core/form/control-binding": [
+        "packages/@fex-design/core/src/form/control-binding.ts"
+      ],
+      "@fex-design/core/form/control-target": [
+        "packages/@fex-design/core/src/form/control-target.ts"
+      ],
+      "@fex-design/core/form/field-association": [
+        "packages/@fex-design/core/src/form/field-association.ts"
+      ],
+      "@fex-design/core/form/field-targets": [
+        "packages/@fex-design/core/src/form/field-targets.ts"
+      ],
+      "@fex-design/core/form/snapshot-store": [
+        "packages/@fex-design/core/src/form/snapshot-store.ts"
+      ],
       "@fex-design/angular/primitive/alert": [
         "packages/@fex-design/components/angular/src/primitive/alert/index.ts"
       ],
@@ -485,9 +559,6 @@
       ],
       "@fex-design/angular/primitive/empty": [
         "packages/@fex-design/components/angular/src/primitive/empty/index.ts"
-      ],
-      "@fex-design/angular/primitive/field": [
-        "packages/@fex-design/components/angular/src/primitive/field/index.ts"
       ],
       "@fex-design/angular/primitive/form": [
         "packages/@fex-design/components/angular/src/primitive/form/index.ts"
@@ -660,6 +731,9 @@
       "@fex-design/angular/ui/separator": [
         "packages/@fex-design/components/angular/src/ui/separator/index.ts"
       ],
+      "@fex-design/angular/ui/scrollbar": [
+        "packages/@fex-design/components/angular/src/ui/scrollbar/index.ts"
+      ],
       "@fex-design/angular/primitive/skeleton": [
         "packages/@fex-design/components/angular/src/primitive/skeleton/index.ts"
       ],
@@ -669,8 +743,14 @@
       "@fex-design/angular/ui/button": [
         "packages/@fex-design/components/angular/src/ui/button/index.ts"
       ],
+      "@fex-design/angular/ui/calendar": [
+        "packages/@fex-design/components/angular/src/ui/calendar/index.ts"
+      ],
       "@fex-design/angular/ui/card": [
         "packages/@fex-design/components/angular/src/ui/card/index.ts"
+      ],
+      "@fex-design/angular/ui/date-picker": [
+        "packages/@fex-design/components/angular/src/ui/date-picker/index.ts"
       ],
       "@fex-design/angular/ui/empty": [
         "packages/@fex-design/components/angular/src/ui/empty/index.ts"
@@ -680,6 +760,12 @@
       ],
       "@fex-design/angular/ui/input-number": [
         "packages/@fex-design/components/angular/src/ui/input-number/index.ts"
+      ],
+      "@fex-design/angular/ui/menu": [
+        "packages/@fex-design/components/angular/src/ui/menu/index.ts"
+      ],
+      "@fex-design/angular/ui/pagination": [
+        "packages/@fex-design/components/angular/src/ui/pagination/index.ts"
       ],
       "@fex-design/angular/ui/progress": [
         "packages/@fex-design/components/angular/src/ui/progress/index.ts"
@@ -697,8 +783,14 @@
       "@fex-design/angular/ui/popover": [
         "packages/@fex-design/components/angular/src/ui/popover/index.ts"
       ],
+      "@fex-design/angular/ui/time-picker": [
+        "packages/@fex-design/components/angular/src/ui/time-picker/index.ts"
+      ],
       "@fex-design/angular/ui/tooltip": [
         "packages/@fex-design/components/angular/src/ui/tooltip/index.ts"
+      ],
+      "@fex-design/angular/ui/tree": [
+        "packages/@fex-design/components/angular/src/ui/tree/index.ts"
       ],
       "@fex-design/angular/ui/listbox": [
         "packages/@fex-design/components/angular/src/ui/listbox/index.ts"
@@ -798,12 +890,6 @@
       "@fex-design/angular/icon/loading": [
         "packages/@fex-design/components/angular/src/icons/loading.ts"
       ],
-      "@fex-design/angular/icons/trash": [
-        "packages/@fex-design/components/angular/src/icons/trash.ts"
-      ],
-      "@fex-design/angular/icon/trash": [
-        "packages/@fex-design/components/angular/src/icons/trash.ts"
-      ],
       "@fex-design/angular/icons/minus": [
         "packages/@fex-design/components/angular/src/icons/minus.ts"
       ],
@@ -831,8 +917,17 @@
       "@fex-design/angular/icons/warning": [
         "packages/@fex-design/components/angular/src/icons/warning.ts"
       ],
+      "@fex-design/angular/icons/trash": [
+        "packages/@fex-design/components/angular/src/icons/trash.ts"
+      ],
       "@fex-design/angular/icon/warning": [
         "packages/@fex-design/components/angular/src/icons/warning.ts"
+      ],
+      "@fex-design/angular/directives/native-attributes": [
+        "packages/@fex-design/components/angular/src/directives/native-attributes.ts"
+      ],
+      "@fex-design/angular/directives/listen-native-event": [
+        "packages/@fex-design/components/angular/src/directives/listen-native-event.ts"
       ],
       "@fex-design/angular/directives/draggable": [
         "packages/@fex-design/components/angular/src/directives/draggable.ts"
@@ -866,6 +961,12 @@
       ],
       "@fex-design/angular/signals/host-class": [
         "packages/@fex-design/components/angular/src/signals/host-class.ts"
+      ],
+      "@fex-design/angular/signals/host-style": [
+        "packages/@fex-design/components/angular/src/signals/host-style.ts"
+      ],
+      "@fex-design/angular/signals/merge-style": [
+        "packages/@fex-design/components/angular/src/signals/merge-style.ts"
       ],
       "@fex-design/angular/services/toast": [
         "packages/@fex-design/components/angular/src/services/toast.ts"

@@ -5,8 +5,8 @@
       datePicker
       [value]="value()"
       [open]="dateOpen()"
-      (change)="value.set($event)"
-      (openChange)="dateOpen.set($event)"
+      (change)="value.set($any($event))"
+      (openChange)="dateOpen.set($any($event))"
       [footer]="null"
     >
       <ng-template #panel let-panel="panel">
@@ -32,8 +32,8 @@
       rangePicker
       [value]="range()"
       [open]="rangeOpen()"
-      (change)="range.set($event)"
-      (openChange)="rangeOpen.set($event)"
+      (change)="range.set($any($event))"
+      (openChange)="rangeOpen.set($any($event))"
       [footer]="null"
     >
       <ng-template #panel let-panel="panel">

@@ -112,7 +112,7 @@
   ],
   "events": [
     {
-      "name": "valueChange",
+      "name": "onChange",
       "description": "输入值变化。"
     },
     {

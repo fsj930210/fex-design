@@ -49,7 +49,7 @@ const props = withDefaults(
   }>(),
   { step: 1, keyboard: true, clearable: false, controls: true },
 )
-const emit = defineEmits<{ change: [event: Event, value: number | undefined] }>()
+const emit = defineEmits<{ change: [value: number | undefined] }>()
 const slots = defineSlots<{
   prefix?: () => unknown
   suffix?: () => unknown
@@ -82,7 +82,7 @@ const controlled = Object.prototype.hasOwnProperty.call(
     :data-warning="
       typeof $attrs['data-warning'] === 'string' ? ($attrs['data-warning'] as string) : undefined
     "
-    @change="(event, value) => emit('change', event, value)"
+    @change="(value) => emit('change', value)"
   >
     <InputPrefix
       v-if="slots.prefix"

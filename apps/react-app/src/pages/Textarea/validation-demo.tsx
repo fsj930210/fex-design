@@ -1,71 +1,53 @@
+import type { ComponentProps } from 'react'
 import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldLabel,
-  FieldRoot,
-  FieldRequiredIndicator,
-} from '@fex-design/react/primitive/field'
-import { Form, useForm } from '@fex-design/react/primitive/form'
+  FormRoot,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormError,
+  useForm,
+} from '@fex-design/react/primitive/form'
 import { TextareaInput, TextareaRoot } from '@fex-design/react/primitive/textarea'
 import { Button } from '@fex-design/react/ui/button'
 import { Card } from '@fex-design/react/ui/card'
 
-function errorsOf(value: unknown) {
-  return Array.isArray(value) ? value.map(String) : []
+type MessageControlProps = Omit<ComponentProps<typeof TextareaInput>, 'onChange'> & {
+  value?: string
+  onChange?: (value: string) => void
 }
-
-export function ValidationDemo() {
-  const form = useForm({
-    defaultValues: { message: '' },
-    onSubmit: async () => undefined,
-  })
-
+function MessageControl({ value, onChange, ...props }: MessageControlProps) {
   return (
-    <Card
-      title="Form validation"
-      description="Submit with an empty value to see Field invalid state drive TextareaRoot styling."
+    <TextareaRoot
+      value={value}
+      onChange={(next) => onChange?.(next)}
+      autoSize={{ minRows: 3, maxRows: 6 }}
     >
-      <Form form={form} className="grid max-w-xl gap-2">
-        <Field
+      <TextareaInput {...props} placeholder="提交空内容以显示校验反馈" />
+    </TextareaRoot>
+  )
+}
+export function ValidationDemo() {
+  const form = useForm({ defaultValues: { message: '' }, onSubmit: () => undefined })
+  return (
+    <Card title="Form validation" description="FormControl 自动连接值、事件和错误语义。">
+      <FormRoot form={form}>
+        <FormField
           name="message"
           validators={{
-            onSubmit: ({ value }) => (String(value).trim() ? undefined : 'Message is required.'),
+            onSubmit: ({ value }) => (String(value).trim() ? undefined : '请输入内容'),
           }}
         >
-          {(field) => {
-            const errors = errorsOf(field.state.meta.errors)
-            const invalid = errors.length > 0
-            return (
-              <FieldRoot required invalid={invalid} hasError={invalid}>
-                <FieldLabel>
-                  Message <FieldRequiredIndicator />
-                </FieldLabel>
-                <TextareaRoot
-                  value={String(field.state.value)}
-                  onChange={(next) => field.handleChange(next)}
-                  invalid={invalid}
-                  autoSize={{ minRows: 3, maxRows: 6 }}
-                >
-                  <FieldControl>
-                    {({ props }) => (
-                      <TextareaInput
-                        {...props}
-                        onBlur={field.handleBlur}
-                        placeholder="Submit empty content to trigger validation"
-                      />
-                    )}
-                  </FieldControl>
-                </TextareaRoot>
-                <FieldError errors={errors} />
-              </FieldRoot>
-            )
-          }}
-        </Field>
-        <Button className="w-fit" type="submit">
-          Validate
-        </Button>
-      </Form>
+          <FormItem>
+            <FormLabel required>消息</FormLabel>
+            <FormControl>
+              <MessageControl />
+            </FormControl>
+            <FormError />
+          </FormItem>
+        </FormField>
+        <Button type="submit">提交校验</Button>
+      </FormRoot>
     </Card>
   )
 }

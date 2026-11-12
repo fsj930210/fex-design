@@ -17,7 +17,7 @@
   [open]="popoverProps().open"
   [defaultOpen]="popoverProps().defaultOpen ?? false"
   (openChange)="handleOpenChange($event)"
-  (change)="change.emit($event)"
+  (change)="handleCvaChange($event)"
   (search)="search.emit($event)"
 >
   <div

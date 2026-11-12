@@ -27,7 +27,7 @@ export interface UseInputNumberOptions extends InputNumberConstraints {
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
   keyboard?: boolean | undefined
-  onChange?: ((event: Event, value: number | undefined) => void) | undefined
+  onChange?: ((value: number | undefined) => void) | undefined
 }
 
 export function useInputNumber(options: UseInputNumberOptions = {}) {
@@ -72,7 +72,7 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     const nextValue = parse(text)
     if (text.trim() === '' || nextValue !== undefined) {
       setCurrentValue(nextValue)
-      onChange?.(event, nextValue)
+      onChange?.(nextValue)
     }
     return nextValue
   })
@@ -93,7 +93,7 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     if (!canChangeInputNumber(options, event)) return
     if (!canStepInputNumber(currentValue, direction, constraints)) return
     const next = stepBy(direction)
-    onChange?.(event, next)
+    onChange?.(next)
     return next
   })
 
@@ -101,7 +101,7 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     if (!canChangeInputNumber(options, event)) return
     const before = currentValue
     const next = commit(parse(draft) ?? before)
-    if (next !== before) onChange?.(event, next)
+    if (next !== before) onChange?.(next)
   })
 
   const keydown = useMemoizedFn((event: KeyboardEvent<HTMLInputElement>) => {
@@ -138,7 +138,7 @@ export function useInputNumber(options: UseInputNumberOptions = {}) {
     clear: (event?: Event) => {
       if (!canChangeInputNumber(options, event)) return
       const next = clear()
-      if (event) onChange?.(event, next)
+      if (event) onChange?.(next)
       return next
     },
     blur,

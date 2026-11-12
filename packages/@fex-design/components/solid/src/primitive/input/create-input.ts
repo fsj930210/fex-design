@@ -6,7 +6,7 @@ export interface CreateInputOptions {
   defaultValue?: string | undefined
   disabled?: Accessor<boolean | undefined>
   readOnly?: Accessor<boolean | undefined>
-  onValueChange?:
+  onChange?:
     | ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void)
     | undefined
   onClear?: (() => void) | undefined
@@ -21,7 +21,7 @@ export function createInput(options: CreateInputOptions = {}) {
   function setValue(nextValue: string, reason: InputChangeReason, event?: InputEvent) {
     if (disabled() || readOnly()) return
     if (options.value?.() === undefined) setInternalValue(nextValue)
-    options.onValueChange?.(nextValue, { reason, ...(event === undefined ? {} : { event }) })
+    options.onChange?.(nextValue, { reason, ...(event === undefined ? {} : { event }) })
   }
   function clear() {
     if (!canClear()) return

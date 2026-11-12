@@ -9,7 +9,7 @@
 </script>
 
 <div class="grid w-full gap-3">
-  <InputRoot {value} onValueChange={(next) => (value = next)}
+  <InputRoot {value} onChange={(next) => (value = next)}
     ><InputControl /><InputClear /></InputRoot
   ><InputRoot defaultValue="非受控内容"
     ><InputControl /><InputClear /></InputRoot

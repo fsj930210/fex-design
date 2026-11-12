@@ -46,6 +46,8 @@
 
 <SwitchRoot
   {...rest}
+  checked={rest.checked}
+  onChange={rest.onChange}
   {loading}
   bind:ref
   class={cn(className, classNames?.root)}

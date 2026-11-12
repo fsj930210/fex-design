@@ -31,6 +31,12 @@ const props = defineProps({
 })
 const emit = defineEmits<{ change: [event: Event] }>()
 const attrs = useAttrs()
+const resolvedChecked = computed(() => props.checked ?? (attrs.checked as boolean | undefined))
+function change(event: Event) {
+  emit('change', event)
+  const handler = (attrs.onChange ?? attrs.onchange) as ((event: Event) => void) | undefined
+  handler?.(event)
+}
 const controlAttrs = computed(() => {
   const { class: _class, style: _style, ...rest } = attrs
   return rest
@@ -41,19 +47,19 @@ const controlAttrs = computed(() => {
     :value="props.value"
     :disabled="props.disabled"
     :size="props.size"
-    :class="[attrs.class, props.classNames?.root]"
-    :style="[attrs.style as StyleValue, props.styles?.root]"
+    :class="[$attrs.class, props.classNames?.root]"
+    :style="[$attrs.style as StyleValue, props.styles?.root]"
   >
     <CheckboxControl
       v-bind="controlAttrs"
       :value="props.value"
-      :checked="props.checked"
+      :checked="resolvedChecked"
       :default-checked="props.defaultChecked"
       :disabled="props.disabled"
       :indeterminate="props.indeterminate"
       :class="props.classNames?.control"
       :style="props.styles?.control"
-      @change="emit('change', $event)"
+      @change="change"
     />
     <CheckboxIndicator
       v-if="$slots.indicator"

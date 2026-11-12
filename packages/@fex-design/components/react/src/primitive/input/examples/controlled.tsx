@@ -6,7 +6,7 @@ export function ControlledExample() {
   const [value, setValue] = useState('受控内容')
   return (
     <div className="grid w-full gap-3">
-      <InputRoot value={value} onValueChange={setValue}>
+      <InputRoot value={value} onChange={setValue}>
         <InputControl />
         <InputClear />
       </InputRoot>

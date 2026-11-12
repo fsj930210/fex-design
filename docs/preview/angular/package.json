@@ -13,6 +13,7 @@
     "@angular/common": "22.1.5",
     "@angular/compiler": "22.1.5",
     "@angular/core": "22.1.5",
+    "@angular/forms": "22.1.5",
     "@angular/platform-browser": "22.1.5",
     "@fex-design/angular": "workspace:*",
     "@fex-design/components-styles": "workspace:*",
@@ -21,6 +22,7 @@
     "@fex-design/utils": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/postcss": "catalog:",
+    "@tanstack/angular-form": "1.33.5",
     "@tanstack/angular-virtual": "latest",
     "class-variance-authority": "latest",
     "clsx": "^2.1.1",
@@ -28,6 +30,7 @@
     "rxjs": "latest",
     "tailwind-merge": "^3.7.0",
     "tslib": "latest",
+    "zod": "4.4.3",
     "zone.js": "latest"
   },
   "devDependencies": {

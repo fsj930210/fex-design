@@ -1,3 +1,5 @@
+import { useNativeControlTarget } from '@fex-design/react/hooks/use-native-control-target'
+import { useComposedRef } from '@fex-design/react/hooks/use-composed-ref'
 import { convertValueToPercentage, isSliderReversed } from '@fex-design/core/slider/utils'
 import { sliderThumbClassName } from '@fex-design/components-styles/slider'
 import { cn } from '@fex-design/utils'
@@ -27,6 +29,8 @@ export function SliderThumb({
   children,
   ...props
 }: SliderThumbProps) {
+  const nativeTarget = useNativeControlTarget()
+  const composedRef = useComposedRef(ref, nativeTarget)
   const context = useSliderContext('SliderThumb')
   const { controller, snapshot } = context
   const value = snapshot.values[index] ?? snapshot.min
@@ -67,7 +71,7 @@ export function SliderThumb({
   return (
     <span
       {...props}
-      ref={ref}
+      ref={composedRef}
       role="slider"
       tabIndex={isDisabled ? undefined : 0}
       aria-valuemin={snapshot.min}

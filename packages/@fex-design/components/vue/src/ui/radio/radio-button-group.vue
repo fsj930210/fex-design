@@ -15,7 +15,7 @@ withDefaults(
   }>(),
   { orientation: 'horizontal' },
 )
-defineEmits<{ valueChange: [value: RadioValue, meta: unknown] }>()
+const emit = defineEmits<{ change: [value: RadioValue, meta: unknown] }>()
 </script>
 <template>
   <PrimitiveRadioGroup
@@ -24,7 +24,7 @@ defineEmits<{ valueChange: [value: RadioValue, meta: unknown] }>()
     :default-value="defaultValue"
     :disabled="disabled"
     :orientation="orientation"
-    @value-change="(value, meta) => $emit('valueChange', value, meta)"
+    @change="(value, meta) => emit('change', value, meta)"
     ><template v-if="options"
       ><RadioButton
         v-for="option in options"

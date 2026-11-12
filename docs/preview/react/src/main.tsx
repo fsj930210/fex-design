@@ -139,4 +139,8 @@ function App() {
   )
 }
 
-createRoot(document.getElementById('root')!).render(<App />)
+const root = createRoot(document.getElementById('root')!)
+root.render(<App />)
+// The glob of examples invalidates this entry when a scene is added or removed.
+// Release its mounted root before Vite evaluates the replacement entry.
+if (import.meta.hot) import.meta.hot.dispose(() => root.unmount())

@@ -1,0 +1,50 @@
+import type {
+  DeepKeys,
+  DeepValue,
+  FieldOptions,
+  FieldApi,
+  FieldValidateOrFn,
+  FieldAsyncValidateOrFn,
+  FormValidateOrFn,
+  FormAsyncValidateOrFn,
+} from '@tanstack/react-form'
+
+export type FormFieldOptions<TData, TName extends DeepKeys<TData>> = FieldOptions<
+  TData,
+  TName,
+  DeepValue<TData, TName>,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined
+> & { mode?: 'value' | 'array' }
+export type FormFieldApi<TData, TName extends DeepKeys<TData>> = FieldApi<
+  TData,
+  TName,
+  DeepValue<TData, TName>,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FieldAsyncValidateOrFn<TData, TName, DeepValue<TData, TName>> | undefined,
+  FormValidateOrFn<TData> | undefined,
+  FormValidateOrFn<TData> | undefined,
+  FormAsyncValidateOrFn<TData> | undefined,
+  FormValidateOrFn<TData> | undefined,
+  FormAsyncValidateOrFn<TData> | undefined,
+  FormValidateOrFn<TData> | undefined,
+  FormAsyncValidateOrFn<TData> | undefined,
+  FormValidateOrFn<TData> | undefined,
+  FormAsyncValidateOrFn<TData> | undefined,
+  FormAsyncValidateOrFn<TData> | undefined,
+  unknown
+>

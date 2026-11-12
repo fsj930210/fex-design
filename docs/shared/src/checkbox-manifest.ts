@@ -22,11 +22,6 @@ export const checkboxExamples = {
       description: '由业务选择结果计算 checked 和 indeterminate。',
     },
     {
-      id: 'validation',
-      title: '校验失败',
-      description: '使用 aria-invalid，并通过 aria-describedby 关联错误说明。',
-    },
-    {
       id: 'custom-indicator',
       title: '自定义 Indicator',
       description: '替换选中状态使用的视觉标记。',
@@ -65,11 +60,6 @@ export const checkboxExamples = {
       id: 'check-all',
       title: '全选',
       description: '由业务选择结果计算 checked 和 indeterminate。',
-    },
-    {
-      id: 'validation',
-      title: '校验失败',
-      description: '使用 aria-invalid，并通过 aria-describedby 关联错误说明。',
     },
     {
       id: 'custom-indicator',

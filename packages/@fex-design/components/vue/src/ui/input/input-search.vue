@@ -33,12 +33,12 @@ const props = withDefaults(
   },
 )
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
+  change: [value: string]
   search: [value: string, meta: InputSearchMeta]
 }>()
 const attrs = useAttrs()
 const internalValue = ref(props.defaultValue ?? '')
-const currentValue = computed(() => props.modelValue ?? internalValue.value)
+const currentValue = computed(() => props.value ?? internalValue.value)
 const inputProps = computed(() => {
   const {
     loading: _loading,
@@ -50,8 +50,8 @@ const inputProps = computed(() => {
   return rest
 })
 function update(value: string) {
-  if (props.modelValue === undefined) internalValue.value = value
-  emit('update:modelValue', value)
+  if (props.value === undefined) internalValue.value = value
+  emit('change', value)
 }
 function search(source: InputSearchMeta['source']) {
   if (!props.loading && !props.disabled) emit('search', currentValue.value, { source })

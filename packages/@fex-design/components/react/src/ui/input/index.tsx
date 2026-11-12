@@ -34,7 +34,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
   const {
     value,
     defaultValue,
-    onValueChange,
+    onChange,
     size = 'md',
     variant = 'outlined',
     prefix,
@@ -58,7 +58,6 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
     <InputRoot
       value={value}
       defaultValue={defaultValue}
-      onValueChange={(nextValue) => onValueChange?.(nextValue)}
       disabled={disabled}
       readOnly={readOnly}
       size={size}
@@ -74,6 +73,7 @@ function renderInput(props: InputProps, type?: string, suffixAction?: ReactNode)
       ) : null}
       <InputControl
         {...controlProps}
+        onChange={onChange}
         ref={ref}
         type={type ?? controlProps.type}
         disabled={disabled}
@@ -187,7 +187,7 @@ function SearchAction({
 export function InputSearch({
   value,
   defaultValue = '',
-  onValueChange,
+  onChange,
   prefix = null,
   suffix = null,
   addonBefore = null,
@@ -200,8 +200,8 @@ export function InputSearch({
   ...props
 }: InputSearchProps) {
   const [currentValue, setCurrentValue] = useControllableState(
-    { value, defaultValue, onValueChange },
-    { trigger: 'onValueChange' },
+    { value, defaultValue, onChange },
+    { trigger: 'onChange' },
   )
   const search = (source: 'enter' | 'prefix' | 'suffix' | 'addonBefore' | 'addonAfter') => {
     if (!loading && !props.disabled) onSearch?.(currentValue, { source })
@@ -227,7 +227,7 @@ export function InputSearch({
   return renderInput({
     ...props,
     value: currentValue,
-    onValueChange: setCurrentValue,
+    onChange: setCurrentValue,
     prefix: action(prefix, 'prefix'),
     suffix: action(suffix, 'suffix'),
     addonBefore: action(addonBefore, 'addonBefore', true),

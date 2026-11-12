@@ -6,7 +6,7 @@ import {
   listboxRootClassName,
 } from '@fex-design/components-styles/listbox'
 import { cn } from '@fex-design/utils'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core'
 import { CheckIcon } from '@fex-design/angular/icons/check'
 import {
   ListboxGroup as PrimitiveListboxGroup,
@@ -29,7 +29,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
     '[attr.aria-orientation]': 'orientation()',
     '[attr.data-orientation]': 'orientation()',
   },
-  providers: [{ provide: PrimitiveListboxRoot, useExisting: ListboxRoot }],
+  providers: [{ provide: PrimitiveListboxRoot, useExisting: forwardRef(() => ListboxRoot) }],
   template: '<ng-content />',
 })
 export class ListboxRoot extends PrimitiveListboxRoot {

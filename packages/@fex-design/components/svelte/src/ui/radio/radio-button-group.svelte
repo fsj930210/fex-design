@@ -14,7 +14,7 @@
       value: RadioValue;
       disabled?: boolean;
     }[];
-    onValueChange?: (value: RadioValue, meta: unknown) => void;
+    onChange?: (value: RadioValue, meta: unknown) => void;
     children?: Snippet;
     class?: string;
   }
@@ -23,11 +23,19 @@
     children,
     orientation = "horizontal",
     class: className,
+    value,
+    onChange,
     ...rest
   }: Props = $props();
 </script>
 
-<PrimitiveGroup {...rest} {orientation} class={cn("gap-0", className)}>
+<PrimitiveGroup
+  {...rest}
+  {value}
+  {orientation}
+  {onChange}
+  class={cn("gap-0", className)}
+>
   {#if options}
     {#each options as option (option.value)}
       <PrimitiveButton value={option.value} disabled={option.disabled}>

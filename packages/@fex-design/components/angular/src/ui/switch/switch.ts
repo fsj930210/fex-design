@@ -1,3 +1,4 @@
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 import { mergeStyle } from '@fex-design/angular/signals/merge-style'
 import type { NativeAttributes } from '@fex-design/angular/directives/native-attributes'
 import type { SpinnerSize } from '@fex-design/core/spinner/types'
@@ -21,15 +22,19 @@ import {
   signal,
   type TemplateRef,
 } from '@angular/core'
+import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import { Spinner } from '@fex-design/angular/primitive/spinner'
 import { SwitchContent, SwitchThumb } from '@fex-design/angular/primitive/switch'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
+import { FormControlBase } from '../../forms/form-control-base'
 
 @Component({
   selector: 'button[switch]',
+  hostDirectives: [NativeControlTarget],
   standalone: true,
   imports: [NgTemplateOutlet, Spinner, SwitchContent, SwitchThumb],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Switch, multi: true }],
   host: {
     type: 'button',
     role: 'switch',
@@ -48,7 +53,7 @@ import { createHostClassName } from '@fex-design/angular/signals/host-class'
   },
   templateUrl: './switch.html',
 })
-export class Switch implements OnInit {
+export class Switch extends FormControlBase<boolean> implements OnInit {
   readonly checkedContentProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
   readonly uncheckedContentProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
   readonly thumbProps = input<Pick<NativeAttributes, 'class' | 'style'>>()
@@ -70,12 +75,14 @@ export class Switch implements OnInit {
   readonly uncheckedContent = input<string | TemplateRef<unknown> | undefined>()
   readonly classNames = input<SwitchClassNames>({})
   readonly styles = input<SwitchStyles<string>>({})
-  readonly change = output<{ checked: boolean; event: MouseEvent }>()
+  readonly onChange = output<{ checked: boolean; event: MouseEvent }>()
   private readonly internalChecked = signal(false)
   ngOnInit() {
     this.internalChecked.set(this.defaultChecked())
   }
-  readonly currentChecked = computed(() => this.checked() ?? this.internalChecked())
+  readonly currentChecked = computed(
+    () => this.checked() ?? (this.hasFormValue() ? this.formValue() : this.internalChecked()),
+  )
   protected readonly hostClassName = createHostClassName(() =>
     cn(switchClassName({ size: this.size(), shape: this.shape() }), this.classNames().root),
   )
@@ -85,7 +92,9 @@ export class Switch implements OnInit {
     if (this.checked() === undefined) {
       this.internalChecked.set(checked)
     }
-    this.change.emit({ checked, event })
+    this.onChange.emit({ checked, event })
+    this.emitFormValue(checked)
+    this.markFormTouched()
   }
   protected template(value: string | TemplateRef<unknown> | undefined) {
     return typeof value === 'string' || value === undefined ? null : value

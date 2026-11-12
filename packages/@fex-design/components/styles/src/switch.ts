@@ -2,22 +2,22 @@ import { cva } from 'class-variance-authority'
 export const switchClassName = cva(
   [
     'group/switch relative inline-grid shrink-0 cursor-pointer items-center align-middle select-none border-0 p-0 outline-none',
-    'h-(--switch-track-height) min-w-[calc(var(--switch-thumb-size)*2+4px)]',
-    'bg-[var(--switch-track-background,var(--muted-background))] text-[var(--switch-color,var(--muted-foreground))] shadow-xs ring-1 ring-inset ring-[var(--switch-track-border-color,var(--border))] transition-colors duration-150',
+    'h-(--switch-track-height) w-fit min-w-[calc(var(--switch-thumb-size)*2+4px)]',
+    'bg-[var(--switch-track-background,var(--muted-background))] text-[var(--switch-color,var(--muted-foreground))] shadow-xs ring-1 ring-inset ring-[var(--form-border-color,var(--switch-track-border-color,var(--border)))] transition-colors duration-150',
     'data-[state=checked]:bg-[var(--switch-track-checked-background,var(--primary))] data-[state=checked]:text-[var(--switch-checked-color,var(--primary-foreground))] data-[state=checked]:ring-[var(--switch-track-checked-border-color,var(--primary))]',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
     'disabled:cursor-not-allowed disabled:opacity-50 data-[loading]:cursor-wait',
     // Switch paints its edge with an inset ring fed by track vars, so the
     // treatment overrides those vars instead of drawing border/ring utilities.
-    'aria-invalid=true:[--switch-track-border-color:var(--danger)] aria-invalid=true:[--switch-track-checked-border-color:var(--danger)] aria-invalid=true:ring-2 aria-invalid=true:ring-[var(--danger)] aria-invalid=true:focus-visible:outline-danger',
-    'data-[warning=true]:[--switch-track-border-color:var(--warning)] data-[warning=true]:[--switch-track-checked-border-color:var(--warning)] data-[warning=true]:ring-2 data-[warning=true]:ring-[var(--warning)] data-[warning=true]:focus-visible:outline-warning',
+    'aria-[invalid=true]:[--switch-track-border-color:var(--form-border-color,var(--danger))] aria-[invalid=true]:[--switch-track-checked-border-color:var(--form-border-color,var(--danger))] aria-[invalid=true]:ring-[length:var(--form-ring-width,1px)] aria-[invalid=true]:ring-[var(--form-border-color,var(--danger))] aria-[invalid=true]:focus-visible:outline-[var(--form-border-color,var(--danger))]',
+    'data-[warning=true]:[--switch-track-border-color:var(--form-border-color,var(--warning))] data-[warning=true]:[--switch-track-checked-border-color:var(--form-border-color,var(--warning))] data-[warning=true]:ring-[length:var(--form-ring-width,1px)] data-[warning=true]:ring-[var(--form-ring-color,color-mix(in_oklch,var(--warning)_20%,transparent))] data-[warning=true]:focus-visible:outline-[var(--form-border-color,var(--warning))]',
   ].join(' '),
   {
     variants: {
       size: {
-        sm: '[--switch-track-height:var(--switch-height-sm,var(--height-sm))] [--switch-thumb-size:calc(var(--switch-track-height)-4px)] text-xs',
-        md: '[--switch-track-height:var(--switch-height-md,var(--height-md))] [--switch-thumb-size:calc(var(--switch-track-height)-4px)] text-sm',
-        lg: '[--switch-track-height:var(--switch-height-lg,var(--height-lg))] [--switch-thumb-size:calc(var(--switch-track-height)-4px)] text-base',
+        sm: '[--switch-track-height:var(--switch-height-sm,1rem)] [--switch-thumb-size:calc(var(--switch-track-height)-4px)] text-xs',
+        md: '[--switch-track-height:var(--switch-height-md,1.5rem)] [--switch-thumb-size:calc(var(--switch-track-height)-4px)] text-sm',
+        lg: '[--switch-track-height:var(--switch-height-lg,2rem)] [--switch-thumb-size:calc(var(--switch-track-height)-4px)] text-base',
       },
       shape: {
         rounded: 'rounded-[5px] [--switch-thumb-radius:3px]',

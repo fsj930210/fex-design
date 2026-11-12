@@ -28,7 +28,7 @@ const props = withDefaults(
   }>(),
   { controlled: undefined, step: 1, keyboard: true },
 )
-const emit = defineEmits<{ change: [event: Event, value: number | undefined] }>()
+const emit = defineEmits<{ change: [value: number | undefined] }>()
 const hasValue = Object.prototype.hasOwnProperty.call(
   getCurrentInstance()?.vnode.props ?? {},
   'value',
@@ -36,7 +36,7 @@ const hasValue = Object.prototype.hasOwnProperty.call(
 const inputNumber = useInputNumber(() => ({
   ...props,
   controlled: props.controlled ?? hasValue,
-  onChange: (event, value) => emit('change', event, value),
+  onChange: (value) => emit('change', value),
 }))
 provide(inputNumberContextKey, inputNumber)
 </script>
@@ -52,9 +52,9 @@ provide(inputNumberContextKey, inputNumber)
     :class="cn(inputNumberRootClassName, props.class)"
     data-slot="input-number-root"
     :data-out-of-range="inputNumber.outOfRange.value || undefined"
-    @value-change="
+    @change="
       (text, meta) => {
-        if (meta.reason === 'input') inputNumber.input(text, meta.event)
+        if (meta.reason === 'input' && meta.event) inputNumber.input(text, meta.event)
       }
     "
   >

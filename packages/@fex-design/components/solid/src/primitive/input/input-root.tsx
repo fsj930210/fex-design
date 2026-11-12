@@ -11,7 +11,7 @@ export interface InputRootProps
   defaultValue?: string | undefined
   disabled?: boolean | undefined
   readOnly?: boolean | undefined
-  onValueChange?:
+  onChange?:
     | ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void)
     | undefined
   onClear?: (() => void) | undefined
@@ -29,7 +29,7 @@ export function InputRoot(props: InputRootProps) {
     'readOnly',
     'size',
     'variant',
-    'onValueChange',
+    'onChange',
     'onClear',
   ])
   const input = createInput({
@@ -37,7 +37,7 @@ export function InputRoot(props: InputRootProps) {
     defaultValue: props.defaultValue,
     disabled: () => props.disabled,
     readOnly: () => props.readOnly,
-    onValueChange: (value, meta) => props.onValueChange?.(value, meta),
+    onChange: (value, meta) => props.onChange?.(value, meta),
     onClear: () => props.onClear?.(),
   })
   return (

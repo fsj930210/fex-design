@@ -48,7 +48,10 @@ async function validateFrameworkContracts(slug, layer) {
     for (const framework of frameworks) {
       const shared = api.frameworks?.[framework] ?? {}
       const native = component.frameworks?.[framework] ?? {}
-      const properties = (native.props ?? component.props).filter(
+      // Component entries are allowed to omit props when they only describe
+      // composition or slots. Treat that as an empty contract instead of
+      // crashing the registry generator while validating framework parity.
+      const properties = (native.props ?? component.props ?? []).filter(
         (property) => !native.omitProps?.includes(property.name),
       )
       const propertyNames = new Set(properties.map((property) => property.name))
@@ -74,6 +77,15 @@ async function validateFrameworkContracts(slug, layer) {
 
 function parseManifest(sourceText, file) {
   const source = ts.createSourceFile(file, sourceText, ts.ScriptTarget.Latest, true)
+  const localArrays = new Map()
+  for (const statement of source.statements) {
+    if (!ts.isVariableStatement(statement)) continue
+    for (const declaration of statement.declarationList.declarations) {
+      if (ts.isIdentifier(declaration.name) && declaration.initializer) {
+        localArrays.set(declaration.name.text, unwrapExpression(declaration.initializer))
+      }
+    }
+  }
   const declarations = []
   for (const statement of source.statements) {
     if (!ts.isVariableStatement(statement)) continue
@@ -96,10 +108,13 @@ function parseManifest(sourceText, file) {
   const manifestObject = unwrapExpression(declaration.initializer)
   for (const property of manifestObject.properties) {
     if (!ts.isPropertyAssignment(property) || !ts.isIdentifier(property.name)) continue
-    if (!layers.includes(property.name.text) || !ts.isArrayLiteralExpression(property.initializer))
-      continue
+    if (!layers.includes(property.name.text)) continue
+    const resolved = unwrapExpression(property.initializer)
+    const scenesArray = ts.isIdentifier(resolved) ? localArrays.get(resolved.text) : resolved
+    if (!ts.isArrayLiteralExpression(scenesArray))
+      fail(`${file} ${property.name.text} must reference an array of scenes`)
     const ids = []
-    for (const item of property.initializer.elements) {
+    for (const item of scenesArray.elements) {
       if (!ts.isObjectLiteralExpression(item))
         fail(`${file} has an invalid ${property.name.text} scene`)
       const id = item.properties.find(

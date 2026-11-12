@@ -9,7 +9,8 @@ import {
   selectValueContainerClassName,
 } from '@fex-design/components-styles/select'
 import { cn } from '@fex-design/utils'
-import { computed, useAttrs, useSlots } from 'vue'
+import { computed, useAttrs, useSlots, useTemplateRef } from 'vue'
+import { useNativeControlTarget } from '@fex-design/vue/composables/use-native-control-target'
 import type { InputClassNames, InputStyles } from '@fex-design/core/input/types'
 import type { CSSProperties } from 'vue'
 import { ChevronDownIcon } from '@fex-design/vue/icons/chevron'
@@ -19,7 +20,7 @@ import PopoverTrigger from '../popover/popover-trigger.vue'
 import SelectValue from './select-value.vue'
 import { useSelect } from './use-select'
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ name: 'SelectTrigger', inheritAttrs: false })
 const props = defineProps<{
   class?: string | undefined
   placeholder?: string | undefined
@@ -32,6 +33,8 @@ const props = defineProps<{
 const select = useSelect('SelectTrigger')
 const slots = useSlots()
 const attrs = useAttrs()
+const control = useTemplateRef<HTMLInputElement>('control')
+useNativeControlTarget(() => control.value)
 const restAttrs = computed(() => {
   const { 'aria-invalid': _ariaInvalid, ...rest } = attrs
   return rest
@@ -99,6 +102,7 @@ function inputPointerdown() {
           ></SelectValue
         >
         <input
+          ref="control"
           v-bind="inputAttrs"
           role="combobox"
           :style="props.styles?.control"

@@ -2,10 +2,12 @@ import { inputControlClassName } from '@fex-design/components-styles/input'
 import { Directive, ElementRef, HostListener, inject, input } from '@angular/core'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { InputNumberRoot } from './input-number-root'
+import { NativeControlTarget } from '@fex-design/angular/directives/native-control-target'
 
 @Directive({
   selector: 'input[inputNumberControl]',
   standalone: true,
+  hostDirectives: [NativeControlTarget],
   host: {
     '[class]': 'hostClassName()',
     '[value]': 'root.inputNumber.draft()',

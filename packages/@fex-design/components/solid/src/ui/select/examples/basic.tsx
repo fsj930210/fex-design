@@ -6,6 +6,7 @@ const options = [
 export default function Example() {
   return (
     <Select
+      aria-invalid={props.invalid}
       class="w-72"
       options={options}
       defaultValue="react"

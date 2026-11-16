@@ -1,0 +1,26 @@
+export const dialogExamples = {
+  primitive: [
+    { id: 'basic', title: '基础使用', description: '展示 Dialog 的标题、正文、关闭按钮和操作区。' },
+    { id: 'custom-header', title: '自定义 Header', description: '通过直接子组件组合标题、全屏和关闭操作。' },
+    { id: 'overlay', title: 'Overlay 行为', description: '控制是否渲染 Overlay，以及点击 Overlay 是否关闭。' },
+    { id: 'custom-footer', title: '自定义 Footer', description: '组合 Footer、Close 和按钮替换默认操作区。' },
+    { id: 'fullscreen', title: '全屏', description: '切换视口全屏与浏览器全屏，并打开 Dialog 查看效果。' },
+    { id: 'position', title: '自定义位置', description: '通过 class 或 style 调整 Content 位置。' },
+    { id: 'advanced', title: '高级窗口组合', description: '在一个 Dialog 中组合 draggable、minmax 和 resize 能力。' },
+    { id: 'direction', title: 'LTR 与 RTL', description: '使用原生 dir 属性对比两个书写方向。' },
+    { id: 'css-variables', title: 'CSS 变量', description: '覆盖 Dialog 宽高、层级、动画和 Overlay 背景变量。', height: 440 },
+    { id: 'semantic-styles', title: '结构化样式', description: '通过 classNames 和 styles 定制语义区域。', height: 440 },
+  ],
+  ui: [
+    { id: 'basic', title: '基础使用', description: '展示 Dialog 的标题、正文、关闭按钮和默认操作区。' },
+    { id: 'custom-header', title: '自定义 Header', description: '使用 Header slot 或子组件调整标题和操作。' },
+    { id: 'overlay', title: 'Overlay 行为', description: '控制 Overlay 显示和点击关闭行为。' },
+    { id: 'custom-footer', title: '自定义 Footer', description: '替换默认确定/取消按钮。' },
+    { id: 'fullscreen', title: '全屏', description: '切换视口全屏与浏览器全屏，并打开 Dialog 查看效果。' },
+    { id: 'position', title: '自定义位置', description: '通过 styles 或 classNames 调整位置。' },
+    { id: 'advanced', title: '高级窗口组合', description: '在一个 Dialog 中展示 draggable、minmax 和 resize。' },
+    { id: 'direction', title: 'LTR 与 RTL', description: '使用原生 dir 属性对比两个书写方向。' },
+    { id: 'css-variables', title: 'CSS 变量', description: '覆盖 Dialog 实例的 CSS 变量。', height: 440 },
+    { id: 'semantic-styles', title: '结构化样式', description: '使用 classNames 和 styles 调整语义区域。', height: 440 },
+  ],
+} as const

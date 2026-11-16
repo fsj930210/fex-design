@@ -30,9 +30,14 @@
   }
   applyTheme(query.get("theme") ?? "dark");
 
-  const modules = import.meta.glob(
-    "../../../../packages/@fex-design/components/svelte/src/{primitive,ui}/*/examples/*.svelte",
-  ) as Record<string, () => Promise<{ default: any }>>;
+  const modules = {
+    ...import.meta.glob(
+      "../../../../packages/@fex-design/components/svelte/src/primitive/*/examples/*.svelte",
+    ),
+    ...import.meta.glob(
+      "../../../../packages/@fex-design/components/svelte/src/ui/*/examples/*.svelte",
+    ),
+  } as Record<string, () => Promise<{ default: any }>>;
 
   const moduleCache = new Map<string, any>();
 

@@ -1,10 +1,13 @@
 import type { DialogController, DialogOptions, DialogSnapshot } from '@fex-design/core/dialog/types'
-import { inject, type InjectionKey, type ShallowRef } from 'vue'
+import { inject, type InjectionKey, type ShallowRef, type Ref } from 'vue'
 
 export interface DialogContextValue {
   contentId: string
-  descriptionId: string
   dialog: DialogController
+  modal: boolean
+  fullscreen: DialogOptions['fullscreen']
+  fullscreenActive: Ref<boolean>
+  onFullscreenChange?: DialogOptions['onFullscreenChange']
   snapshot: ShallowRef<DialogSnapshot>
   titleId: string
   triggerElement: ShallowRef<HTMLButtonElement | null>
@@ -21,3 +24,4 @@ export function useDialogContext(component: string) {
 }
 
 export type DialogRootProps = DialogOptions
+

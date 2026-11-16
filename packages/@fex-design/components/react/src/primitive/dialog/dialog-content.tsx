@@ -1,4 +1,4 @@
-import { dialogContentClassName, type DialogStyleProps } from '@fex-design/components-styles/dialog'
+import { dialogContentClassName } from '@fex-design/components-styles/dialog'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, KeyboardEvent, Ref } from 'react'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
@@ -16,12 +16,12 @@ function toEventInfo(event: {
   }
 }
 
-export interface DialogContentProps extends ComponentProps<'div'>, DialogStyleProps {
+export interface DialogContentProps extends ComponentProps<'div'> {
   ref?: Ref<HTMLDivElement>
 }
 
-export function DialogContent({ ref, className, size, onKeyDown, ...props }: DialogContentProps) {
-  const { contentId, descriptionId, dialog, snapshot, titleId } = useDialog('DialogContent')
+export function DialogContent({ ref, className, onKeyDown, ...props }: DialogContentProps) {
+  const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } = useDialog('DialogContent')
   const setContent = useMemoizedFn((element: HTMLDivElement | null) => {
     dialog.setLayerElement(element)
     if (typeof ref === 'function') ref(element)
@@ -38,14 +38,26 @@ export function DialogContent({ ref, className, size, onKeyDown, ...props }: Dia
       ref={setContent}
       id={contentId}
       role="dialog"
-      aria-modal="true"
+      aria-modal={modal ? 'true' : undefined}
       aria-labelledby={titleId}
-      aria-describedby={descriptionId}
       tabIndex={-1}
       data-slot="dialog-content"
       data-state={snapshot.open ? 'open' : 'closed'}
       data-phase={snapshot.phase}
-      className={cn(dialogContentClassName({ size }), className)}
+      style={{
+        ...props.style,
+        ...(fullscreenActive && fullscreen
+          ? {
+              width: typeof fullscreen === 'object' && fullscreen.width !== undefined ? typeof fullscreen.width === 'number' ? `${fullscreen.width}px` : fullscreen.width : '100vw',
+              height: typeof fullscreen === 'object' && fullscreen.height !== undefined ? typeof fullscreen.height === 'number' ? `${fullscreen.height}px` : fullscreen.height : '100vh',
+            }
+          : {}),
+      }}
+      className={cn(
+        dialogContentClassName,
+        fullscreenActive && 'left-0 top-0 translate-x-0 translate-y-0 rounded-none',
+        className,
+      )}
       onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
         onKeyDown?.(event)
         if (!event.defaultPrevented && event.key === 'Escape') {
@@ -55,3 +67,4 @@ export function DialogContent({ ref, className, size, onKeyDown, ...props }: Dia
     />
   )
 }
+

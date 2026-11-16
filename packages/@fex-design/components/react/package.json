@@ -90,6 +90,7 @@
     "./ui/button": "./src/ui/button/index.tsx",
     "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.tsx",
+    "./ui/dialog": "./src/ui/dialog/index.ts",
     "./ui/form": "./src/ui/form/index.tsx",
     "./ui/date-picker": "./src/ui/date-picker/index.ts",
     "./ui/empty": "./src/ui/empty/index.tsx",
@@ -101,7 +102,6 @@
     "./ui/radio": "./src/ui/radio/index.tsx",
     "./ui/select": "./src/ui/select/index.tsx",
     "./ui/checkbox": "./src/ui/checkbox/index.tsx",
-    "./ui/dialog": "./src/ui/dialog/index.ts",
     "./ui/kbd": "./src/ui/kbd/index.tsx",
     "./ui/listbox": "./src/ui/listbox/index.tsx",
     "./ui/popover": "./src/ui/popover/index.tsx",
@@ -137,7 +137,6 @@
     "./hooks/use-composed-ref": "./src/hooks/use-composed-ref.ts",
     "./hooks/use-date-utils": "./src/hooks/use-date-utils.ts",
     "./hooks/use-dialog": "./src/primitive/dialog/use-dialog.ts",
-    "./hooks/use-dialog-trigger": "./src/primitive/dialog/use-dialog-trigger.ts",
     "./hooks/use-core-store": "./src/hooks/use-core-store.ts",
     "./hooks/use-core-store-selector": "./src/hooks/use-core-store-selector.ts",
     "./hooks/use-isomorphic-layout-effect": "./src/hooks/use-isomorphic-layout-effect.ts",
@@ -190,3 +189,4 @@
     "react-dom": "^19.0.0"
   }
 }
+

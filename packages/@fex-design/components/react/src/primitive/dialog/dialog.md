@@ -18,7 +18,6 @@ import { Dialog } from '@fex-design/react/primitive/dialog'
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Confirm action</DialogTitle>
-        <DialogDescription>This action needs a decision.</DialogDescription>
       </DialogHeader>
       <DialogBody>Dialog body</DialogBody>
       <DialogFooter>
@@ -39,8 +38,12 @@ import { Dialog } from '@fex-design/react/primitive/dialog'
 | `modal`                 | `boolean`              | `true`  | No       | Marks the dialog as a modal layer.                     |
 | `forceMount`            | `boolean`              | `false` | No       | Keeps portal/content mounted while closed.             |
 | `closeDelay`            | `number`               | `140`   | No       | Close phase duration in milliseconds.                  |
-| `closeOnOverlayPointer` | `boolean`              | `true`  | No       | Closes when the overlay surface is clicked.            |
+| `closeOnOverlayClick` | `boolean`              | `false`  | No       | Closes when the overlay surface is clicked.            |
 
 ## Notes
 
 Trigger exposes render props instead of `asChild`. Consumers can attach the returned props to their own button while the adapter keeps ARIA and event behavior consistent.
+
+
+
+

@@ -20,13 +20,10 @@ export function DialogOverlay(props: DialogOverlayProps) {
       class={cn(dialogOverlayClassName, local.class)}
       onClick={(event) => {
         if (event.target === event.currentTarget) {
-          dialog.dismiss.overlayPointer({
-            target: event.target,
-            currentTarget: event.currentTarget,
-            event,
-          })
+          dialog.dismiss.overlayPointer({ target: event.target, currentTarget: event.currentTarget, event })
         }
       }}
     />
   )
 }
+

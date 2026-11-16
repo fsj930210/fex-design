@@ -6,3 +6,4 @@ export function useDialog(component = 'useDialog') {
   const snapshot = useCoreStore(context.dialog)
   return { ...context, snapshot }
 }
+

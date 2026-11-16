@@ -19,13 +19,16 @@
     modal = true,
     forceMount,
     closeDelay = 140,
-    closeOnOverlayPointer,
-    dismiss,
+    closeOnEscape = true,
+    closeOnOverlayClick = false,
+    fullscreen = false,
+    onFullscreenChange,
     onOpenChange,
   }: DialogProps = $props();
 
   // svelte-ignore state_referenced_locally -- defaultOpen is intentionally read once for uncontrolled initial state.
   let localOpen = $state(defaultOpen ?? false);
+  let fullscreenActive = $state({ value: fullscreen === true });
   const triggerElement = { current: null as HTMLButtonElement | null };
   const dialogId = Math.random().toString(36).slice(2);
 
@@ -35,9 +38,12 @@
       modal,
       forceMount,
       closeDelay,
-      closeOnOverlayPointer,
-      dismiss,
+      closeOnEscape,
+      closeOnOverlayClick,
+      fullscreen,
+      onFullscreenChange,
       onOpenChange(nextOpen, info) {
+        if (!nextOpen) fullscreenActive.value = false;
         if (open === undefined) {
           localOpen = nextOpen;
         }
@@ -54,11 +60,14 @@
   });
 
   setContext(dialogContextKey, {
-    contentId: `fex-dialog-content-${dialogId}`,
-    descriptionId: `fex-dialog-description-${dialogId}`,
+    contentId: `dialog-content-${dialogId}`,
     dialog,
+    modal,
+    fullscreen,
+    fullscreenActive,
+    onFullscreenChange,
     snapshot,
-    titleId: `fex-dialog-title-${dialogId}`,
+    titleId: `dialog-title-${dialogId}`,
     triggerElement,
   });
 
@@ -66,3 +75,9 @@
 </script>
 
 {@render children?.()}
+
+
+
+
+
+

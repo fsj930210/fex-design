@@ -51,7 +51,7 @@
   --info-border: color-mix(in srgb, var(--info) 55%, var(--border));
 
   --focus-ring: color-mix(in oklch, var(--focus-border) 45%, transparent);
-  --mask: oklch(0 0 0 / 64%);
+  --overlay-background: oklch(0 0 0 / 64%);
   --scrollbar-track: transparent;
   --scrollbar-thumb: oklch(1 0 0 / 20%);
   --scrollbar-thumb-hover: oklch(1 0 0 / 32%);
@@ -72,3 +72,4 @@
   --skeleton-gradient-from: oklch(0.269 0 0);
   --skeleton-gradient-to: oklch(0.38 0 0);
 }
+

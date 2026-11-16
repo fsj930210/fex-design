@@ -9,12 +9,9 @@ import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
 import useUnmount from '@fex-design/react/hooks/use-unmount'
 import { DialogContext } from './dialog-context'
 
-const defaultDismiss = { escapeKey: true, overlayPointer: true }
-
 export interface DialogRootProps extends DialogOptions {
   children?: ReactNode
 }
-export type DialogProps = DialogRootProps
 
 export function DialogRoot({
   children,
@@ -23,15 +20,16 @@ export function DialogRoot({
   onOpenChange,
   modal = true,
   closeDelay = 140,
-  dismiss = defaultDismiss,
   ...options
 }: DialogRootProps) {
   const isControlled = openProp !== undefined
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false)
+  const [fullscreenActive, setFullscreenActive] = useState(false)
   const open = isControlled ? openProp : uncontrolledOpen
   const triggerRef = useRef<HTMLButtonElement | null>(null)
   const handleOpenChange = useMemoizedFn<NonNullable<DialogOptions['onOpenChange']>>(
     (nextOpen, info) => {
+      if (!nextOpen) setFullscreenActive(false)
       if (!isControlled) {
         setUncontrolledOpen(nextOpen)
       }
@@ -44,7 +42,6 @@ export function DialogRoot({
     onOpenChange: handleOpenChange,
     modal,
     closeDelay,
-    dismiss,
   }
   const dialogRef = useRef<ReturnType<typeof createDialogController> | null>(null)
   if (!dialogRef.current) {
@@ -69,8 +66,12 @@ export function DialogRoot({
     <DialogContext
       value={{
         contentId: useId(),
-        descriptionId: useId(),
         dialog,
+        modal,
+        fullscreen: dialogOptions.fullscreen,
+        fullscreenActive,
+        setFullscreenActive,
+        onFullscreenChange: dialogOptions.onFullscreenChange,
         titleId: useId(),
         triggerRef,
       }}
@@ -80,4 +81,4 @@ export function DialogRoot({
   )
 }
 
-export { DialogRoot as Dialog }
+

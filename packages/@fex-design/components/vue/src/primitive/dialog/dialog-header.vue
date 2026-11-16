@@ -8,3 +8,4 @@ const props = defineProps<{ class?: string }>()
     <slot />
   </div>
 </template>
+

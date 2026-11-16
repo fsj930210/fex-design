@@ -1,7 +1,6 @@
 <script lang="ts">
   import {
     dialogContentClassName,
-    type DialogStyleProps,
   } from "@fex-design/components-styles/dialog";
   import { cn } from "@fex-design/utils";
   import { getContext } from "svelte";
@@ -15,18 +14,16 @@
   > {
     children?: Snippet;
     class?: string;
-    size?: DialogStyleProps["size"];
   }
 
   let {
     class: className,
     children,
-    size,
     ...rest
   }: DialogContentProps = $props();
-  const { contentId, descriptionId, dialog, snapshot, titleId } =
+  const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } =
     getContext<DialogContext>(dialogContextKey);
-  const classList = $derived(cn(dialogContentClassName({ size }), className));
+  const classList = $derived(cn(dialogContentClassName, className));
   let registeredElement: HTMLDivElement | null = null;
 
   function contentAction(element: HTMLDivElement) {
@@ -53,14 +50,14 @@
     use:contentAction
     id={contentId}
     role="dialog"
-    aria-modal="true"
+    aria-modal={modal ? "true" : undefined}
     aria-labelledby={titleId}
-    aria-describedby={descriptionId}
     tabindex="-1"
     data-slot="dialog-content"
     data-state={$snapshot.open ? "open" : "closed"}
     data-phase={$snapshot.phase}
-    class={classList}
+    style={fullscreenActive.value && fullscreen ? `width:${typeof fullscreen === 'object' && fullscreen.width !== undefined ? typeof fullscreen.width === 'number' ? fullscreen.width + 'px' : fullscreen.width : '100vw'};height:${typeof fullscreen === 'object' && fullscreen.height !== undefined ? typeof fullscreen.height === 'number' ? fullscreen.height + 'px' : fullscreen.height : '100vh'}` : undefined}
+    class={cn(classList, fullscreenActive.value && "left-0 top-0 translate-x-0 translate-y-0 rounded-none")}
     onkeydown={(event) => {
       if (event.key === "Escape") {
         dialog.dismiss.escapeKey({
@@ -74,3 +71,8 @@
     {@render children?.()}
   </div>
 {/if}
+
+
+
+
+

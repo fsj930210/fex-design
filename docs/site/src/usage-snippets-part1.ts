@@ -9,6 +9,35 @@ export interface ComponentUsage {
 }
 
 export const usageSnippetsPart1: Record<string, ComponentUsage> = {
+  dialog: {
+    ui: {
+      import: "import { useState } from 'react'\nimport { Dialog } from '@fex-design/react/ui/dialog'",
+      code: `const [open, setOpen] = useState(false)
+<>
+  <button onClick={() => setOpen(true)}>打开 Dialog</button>
+  <Dialog open={open} onOpenChange={setOpen} title="基础 Dialog">
+    这是 Dialog 内容。
+  </Dialog>
+</>`,
+    },
+    primitive: {
+      import: "import { useState } from 'react'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/react/primitive/dialog'",
+      code: `const [open, setOpen] = useState(false)
+<>
+  <button onClick={() => setOpen(true)}>打开 Dialog</button>
+  <DialogRoot open={open} onOpenChange={setOpen}>
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogContent>
+        <DialogHeader><DialogTitle>基础 Dialog</DialogTitle><DialogClose /></DialogHeader>
+        <DialogBody>这是 Dialog 内容。</DialogBody>
+        <DialogFooter><DialogClose>取消</DialogClose><button>确定</button></DialogFooter>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
+</>`,
+    },
+  },
   alert: {
     ui: {
       import: "import { Alert } from '@/components/ui/alert'",

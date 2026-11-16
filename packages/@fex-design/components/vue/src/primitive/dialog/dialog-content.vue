@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { dialogContentClassName, type DialogStyleProps } from '@fex-design/components-styles/dialog'
+import { dialogContentClassName } from '@fex-design/components-styles/dialog'
 import { cn } from '@fex-design/utils'
 import type { ComponentPublicInstance } from 'vue'
 import { computed, onBeforeUnmount } from 'vue'
@@ -7,9 +7,9 @@ import { useDialogContext } from './context'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{ class?: string; size?: DialogStyleProps['size'] }>()
-const { contentId, descriptionId, dialog, snapshot, titleId } = useDialogContext('DialogContent')
-const contentClass = computed(() => cn(dialogContentClassName({ size: props.size }), props.class))
+const props = defineProps<{ class?: string; }>()
+const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } = useDialogContext('DialogContent')
+const contentClass = computed(() => cn(dialogContentClassName, props.class))
 
 function setContent(element: Element | ComponentPublicInstance | null) {
   dialog.setLayerElement(element instanceof HTMLDivElement ? element : null)
@@ -32,16 +32,20 @@ onBeforeUnmount(() => {
     :ref="setContent"
     :id="contentId"
     role="dialog"
-    aria-modal="true"
+    :aria-modal="modal ? 'true' : undefined"
     :aria-labelledby="titleId"
-    :aria-describedby="descriptionId"
     tabindex="-1"
     data-slot="dialog-content"
     :data-state="snapshot.open ? 'open' : 'closed'"
     :data-phase="snapshot.phase"
-    :class="contentClass"
+    :style="fullscreenActive && fullscreen ? { width: typeof fullscreen === 'object' && fullscreen.width !== undefined ? typeof fullscreen.width === 'number' ? `${fullscreen.width}px` : fullscreen.width : '100vw', height: typeof fullscreen === 'object' && fullscreen.height !== undefined ? typeof fullscreen.height === 'number' ? `${fullscreen.height}px` : fullscreen.height : '100vh' } : undefined"
+    :class="[contentClass, fullscreenActive && 'left-0 top-0 translate-x-0 translate-y-0 rounded-none']"
     @keydown="onKeydown"
   >
     <slot />
   </div>
 </template>
+
+
+
+

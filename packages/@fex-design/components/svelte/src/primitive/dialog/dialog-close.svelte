@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { dialogCloseClassName } from "@fex-design/components-styles/dialog";
+  import { dialogCloseClassName, dialogIconCloseClassName } from "@fex-design/components-styles/dialog";
   import { cn } from "@fex-design/utils";
   import { getContext } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import type { Snippet } from "svelte";
   import { dialogContextKey, type DialogContext } from "./dialog-context";
+  import Button from "../button/button.svelte";
+  import XIcon from "../../icons/x.svelte";
   interface DialogCloseRenderProps extends HTMLButtonAttributes {
     "data-slot": "dialog-close";
   }
@@ -25,7 +27,7 @@
     ...rest,
     type,
     "data-slot": "dialog-close",
-    class: cn(dialogCloseClassName, className),
+    class: cn(children ? dialogCloseClassName : dialogIconCloseClassName, className),
     onclick: (event: MouseEvent) =>
       dialog.close({ reason: "manual", source: "close-button", event }),
   } satisfies DialogCloseRenderProps);
@@ -34,5 +36,6 @@
 {#if button}
   {@render button(closeProps)}
 {:else}
-  <button {...closeProps}>{@render children?.()}</button>
+  <Button {...closeProps}>{#if children}{@render children()}{:else}<XIcon aria-hidden="true" />{/if}</Button>
 {/if}
+

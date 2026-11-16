@@ -15,9 +15,21 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const attrs = useAttrs()
 const buttonRef = useTemplateRef<HTMLButtonElement>('button')
 
+function handleClick(event: MouseEvent) {
+  const handler = attrs.onClick
+  if (typeof handler === 'function') {
+    handler(event)
+  } else if (Array.isArray(handler)) {
+    for (const callback of handler) {
+      if (typeof callback === 'function') callback(event)
+    }
+  }
+}
+
 function getButtonAttrs() {
+  const { onClick: _onClick, ...restAttrs } = attrs
   return {
-    ...attrs,
+    ...restAttrs,
     class: cn(
       buttonClassName({ variant: props.variant, color: props.color }),
       attrs.class as string | undefined,
@@ -38,6 +50,7 @@ defineExpose({
     :data-variant="props.variant"
     :data-color="props.color"
     :type="props.type"
+    @click="handleClick"
   >
     <slot />
   </button>

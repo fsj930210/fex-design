@@ -9,3 +9,4 @@ export function DialogFooter({ className, ...props }: DialogFooterProps) {
     <div {...props} data-slot="dialog-footer" className={cn(dialogFooterClassName, className)} />
   )
 }
+

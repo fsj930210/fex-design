@@ -90,6 +90,7 @@
     "./ui/button": "./src/ui/button/index.ts",
     "./ui/calendar": "./src/ui/calendar/index.ts",
     "./ui/card": "./src/ui/card/index.ts",
+    "./ui/dialog": "./src/ui/dialog/index.ts",
     "./ui/form": "./src/ui/form/index.ts",
     "./forms/form-control-base": "./src/forms/form-control-base.ts",
     "./forms/form-control-accessor": "./src/forms/form-control-accessor.ts",

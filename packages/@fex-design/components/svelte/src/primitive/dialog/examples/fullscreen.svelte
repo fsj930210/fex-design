@@ -1,0 +1,4 @@
+<script lang="ts">
+ import { Button } from '@fex-design/svelte/primitive/button'; import { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose, DialogFullscreenToggle } from '@fex-design/svelte/primitive/dialog'; let open=$state(false); let mode=$state<'viewport'|'screen'>('viewport');
+</script>
+<Button onclick={()=>mode=mode==='viewport'?'screen':'viewport'}>切换为 {mode==='viewport'?'浏览器全屏':'视口全屏'}</Button><Button onclick={()=>open=true}>打开 Dialog</Button><DialogRoot {open} onOpenChange={(value)=>open=value} fullscreen={{mode}}><DialogPortal><DialogOverlay/><DialogContent><DialogHeader><DialogTitle>全屏</DialogTitle><DialogFullscreenToggle/><DialogClose/></DialogHeader><DialogBody>全屏内容。</DialogBody><DialogFooter><DialogClose>取消</DialogClose><Button variant="solid" color="primary">确定</Button></DialogFooter></DialogContent></DialogPortal></DialogRoot>

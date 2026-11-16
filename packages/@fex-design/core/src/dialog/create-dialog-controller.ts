@@ -1,16 +1,16 @@
 import { createOverlay } from '../overlay/create-overlay'
 import type { DialogController, DialogOptions } from './types'
 
-export type { DialogController, DialogOptions, DialogSnapshot } from './types'
+export type { DialogChangeInfo, DialogController, DialogFullscreen, DialogOptions, DialogSnapshot } from './types'
 
 function toOverlayOptions(options: DialogOptions) {
   return {
     ...options,
     modal: options.modal ?? true,
     dismiss: {
-      escapeKey: options.dismiss?.escapeKey ?? true,
-      outsidePointer: options.dismiss?.outsidePointer ?? false,
-      overlayPointer: options.closeOnOverlayPointer ?? options.dismiss?.overlayPointer ?? true,
+      escapeKey: options.closeOnEscape ?? true,
+      outsidePointer: false,
+      overlayPointer: options.closeOnOverlayClick ?? false,
     },
   }
 }

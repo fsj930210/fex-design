@@ -8,10 +8,9 @@ import { DialogContext } from './dialog-context'
 
 let nextDialogId = 1
 
-export interface DialogProps extends ParentProps, DialogOptions {}
-export type DialogRootProps = DialogProps
+export interface DialogRootProps extends ParentProps, DialogOptions {}
 
-export function Dialog(props: DialogProps) {
+export function DialogRoot(props: DialogRootProps) {
   const [local] = splitProps(props, [
     'children',
     'open',
@@ -20,10 +19,13 @@ export function Dialog(props: DialogProps) {
     'modal',
     'forceMount',
     'closeDelay',
-    'dismiss',
-    'closeOnOverlayPointer',
+    'closeOnEscape',
+    'closeOnOverlayClick',
+    'fullscreen',
+    'onFullscreenChange',
   ])
   const [open, setOpen] = createSignal(local.open ?? local.defaultOpen ?? false)
+  const [fullscreenActive, setFullscreenActive] = createSignal(local.fullscreen === true)
   const triggerElement = { current: null as HTMLButtonElement | null }
   const dialogId = nextDialogId++
 
@@ -33,9 +35,12 @@ export function Dialog(props: DialogProps) {
       modal: local.modal ?? true,
       forceMount: local.forceMount,
       closeDelay: local.closeDelay ?? 140,
-      dismiss: local.dismiss,
-      closeOnOverlayPointer: local.closeOnOverlayPointer,
+      closeOnEscape: local.closeOnEscape,
+      closeOnOverlayClick: local.closeOnOverlayClick,
+      fullscreen: local.fullscreen,
+      onFullscreenChange: local.onFullscreenChange,
       onOpenChange(nextOpen, info) {
+        if (!nextOpen) setFullscreenActive(false)
         if (local.open === undefined) {
           setOpen(nextOpen)
           dialog.setOptions(makeOptions(nextOpen))
@@ -61,8 +66,12 @@ export function Dialog(props: DialogProps) {
       <DialogContext.Provider
         value={{
           contentId: `dialog-content-${dialogId}`,
-          descriptionId: `dialog-description-${dialogId}`,
           dialog,
+          modal: local.modal ?? true,
+          fullscreen: local.fullscreen,
+          fullscreenActive,
+          setFullscreenActive,
+          onFullscreenChange: local.onFullscreenChange,
           snapshot,
           titleId: `dialog-title-${dialogId}`,
           triggerElement,
@@ -74,4 +83,5 @@ export function Dialog(props: DialogProps) {
   )
 }
 
-export { Dialog as DialogRoot }
+
+

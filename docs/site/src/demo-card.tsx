@@ -287,6 +287,8 @@ function SingleDemoPanel(props: {
                 src={runtimeUrl()}
                 loading="lazy"
                 scrolling="auto"
+                allow="fullscreen"
+                allowFullScreen
                 onLoad={() => {
                   sendRender()
                 }}

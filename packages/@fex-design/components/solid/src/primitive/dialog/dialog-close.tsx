@@ -1,7 +1,9 @@
-import { dialogCloseClassName } from '@fex-design/components-styles/dialog'
+import { dialogCloseClassName, dialogIconCloseClassName } from '@fex-design/components-styles/dialog'
 import { cn } from '@fex-design/utils'
 import { splitProps, type JSX } from 'solid-js'
 import { useDialog } from './dialog-context'
+import { Button } from '../button'
+import { XIcon } from '../../icons/x'
 
 export type DialogCloseRenderProps = {
   class: string
@@ -11,18 +13,19 @@ export type DialogCloseRenderProps = {
 }
 
 export interface DialogCloseProps {
+  icon?: JSX.Element
   children?: JSX.Element | ((props: DialogCloseRenderProps) => JSX.Element)
   class?: string
 }
 
 export function DialogClose(props: DialogCloseProps) {
-  const [local, rest] = splitProps(props, ['children', 'class'])
+  const [local, rest] = splitProps(props, ['children', 'class', 'icon'])
   const { dialog } = useDialog('DialogClose')
   const closeProps = {
     ...rest,
     type: 'button' as const,
     'data-slot': 'dialog-close' as const,
-    class: cn(dialogCloseClassName, local.class),
+    class: cn(local.children || local.icon ? dialogCloseClassName : dialogIconCloseClassName, local.class),
     onClick: (event: MouseEvent) =>
       dialog.close({ reason: 'manual', source: 'close-button', event }),
   }
@@ -30,6 +33,7 @@ export function DialogClose(props: DialogCloseProps) {
   return typeof local.children === 'function' ? (
     local.children(closeProps)
   ) : (
-    <button {...closeProps}>{local.children ?? 'Close'}</button>
+    <Button {...closeProps}>{local.children ?? local.icon ?? <XIcon aria-hidden="true" />}</Button>
   )
 }
+

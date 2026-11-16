@@ -16,3 +16,4 @@ export function DialogTitle({ className, ...props }: DialogTitleProps) {
     />
   )
 }
+

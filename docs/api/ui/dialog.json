@@ -1,0 +1,282 @@
+{
+  "name": "Dialog",
+  "slug": "dialog",
+  "layer": "ui",
+  "status": "experimental",
+  "description": "用于在当前页面上显示模态内容、确认操作和可组合窗口行为。",
+  "importPath": {
+    "react": "@fex-design/react/ui/dialog",
+    "vue": "@fex-design/vue/ui/dialog",
+    "solid": "@fex-design/solid/ui/dialog",
+    "svelte": "@fex-design/svelte/ui/dialog",
+    "angular": "@fex-design/angular/ui/dialog"
+  },
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控打开状态。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控模式的初始打开状态。"
+    },
+    {
+      "name": "title",
+      "type": "FrameworkContent",
+      "description": "标题内容。"
+    },
+    {
+      "name": "closable",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否显示右上角关闭按钮。"
+    },
+    {
+      "name": "closeOnOverlayClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否允许点击 Overlay 关闭。"
+    },
+    {
+      "name": "closeOnEscape",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否允许 Escape 关闭。"
+    },
+    {
+      "name": "fullscreen",
+      "type": "boolean | { mode?: 'viewport' | 'screen' }",
+      "description": "启用 UI 全屏状态；true 默认使用 viewport。"
+    },
+    {
+      "name": "footer",
+      "type": "FrameworkNode | null",
+      "description": "Footer 内容；传入 null 隐藏默认 Footer。"
+    },
+    {
+      "name": "okText",
+      "type": "FrameworkContent",
+      "default": "确定",
+      "description": "默认确定按钮内容。"
+    },
+    {
+      "name": "cancelText",
+      "type": "FrameworkContent",
+      "default": "取消",
+      "description": "默认取消按钮内容。"
+    },
+    {
+      "name": "classNames",
+      "type": "DialogClassNames",
+      "description": "按语义区域设置 class。"
+    },
+    {
+      "name": "styles",
+      "type": "DialogStyles",
+      "description": "按语义区域设置 style。"
+    },
+    {
+      "name": "onOpenChange",
+      "type": "(open, info) => void",
+      "description": "打开状态变化回调。"
+    },
+    {
+      "name": "onFullscreenChange",
+      "type": "(fullscreen) => void",
+      "description": "全屏状态变化回调。"
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        },
+        {
+          "name": "info",
+          "type": "DialogChangeInfo"
+        }
+      ],
+      "description": "请求改变打开状态；受控模式由调用方同步 open。"
+    },
+    {
+      "name": "onFullscreenChange",
+      "parameters": [
+        {
+          "name": "fullscreen",
+          "type": "boolean"
+        }
+      ],
+      "description": "全屏状态改变后触发。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--dialog-width",
+      "description": "Content 宽度。"
+    },
+    {
+      "name": "--dialog-height",
+      "description": "Content 高度。"
+    },
+    {
+      "name": "--dialog-z-index",
+      "description": "Dialog 层级。"
+    },
+    {
+      "name": "--dialog-motion-duration",
+      "description": "动画时长。"
+    },
+    {
+      "name": "--dialog-motion-ease",
+      "description": "动画缓动函数。"
+    },
+    {
+      "name": "--overlay-background",
+      "description": "Overlay 背景。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础使用"
+    },
+    {
+      "id": "custom-header",
+      "title": "自定义 Header"
+    },
+    {
+      "id": "overlay",
+      "title": "Overlay 行为"
+    },
+    {
+      "id": "custom-footer",
+      "title": "自定义 Footer"
+    },
+    {
+      "id": "fullscreen",
+      "title": "全屏"
+    },
+    {
+      "id": "position",
+      "title": "自定义位置"
+    },
+    {
+      "id": "advanced",
+      "title": "高级窗口组合"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "height": 440
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "height": 440
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkContent": "ReactNode"
+      },
+      "slots": []
+    },
+    "vue": {
+      "events": [
+        {
+          "name": "update:open",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "用于 v-model:open。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            },
+            {
+              "name": "info",
+              "type": "DialogChangeInfo"
+            }
+          ],
+          "description": "开关请求。"
+        }
+      ],
+      "typeOverrides": {
+        "FrameworkContent": "string",
+        "FrameworkTitle": "string",
+        "FrameworkNode": "string"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkContent": "JSX.Element"
+      },
+      "slots": []
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkContent": "Snippet"
+      },
+      "slots": [
+        {
+          "name": "children",
+          "description": "Dialog 内容。"
+        },
+        {
+          "name": "footer",
+          "description": "替换 Footer。"
+        }
+      ]
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "开关请求。"
+        },
+        {
+          "name": "fullscreenChange",
+          "parameters": [
+            {
+              "name": "fullscreen",
+              "type": "boolean"
+            }
+          ],
+          "description": "全屏状态改变。"
+        }
+      ],
+      "typeOverrides": {
+        "FrameworkContent": "string | TemplateRef<unknown>",
+        "FrameworkTitle": "string | TemplateRef<unknown>",
+        "FrameworkNode": "string | TemplateRef<unknown>"
+      }
+    }
+  }
+}

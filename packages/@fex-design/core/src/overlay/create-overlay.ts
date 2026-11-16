@@ -14,9 +14,11 @@ import type { Overlay, OverlayEventInfo, OverlayOptions, OverlaySnapshot } from 
 // A single Escape can reach several document listeners after the first closes.
 // Retain event identity so newly exposed ancestors do not consume it again.
 const handledEscapeEvents = new WeakSet<object>()
+const openingPointerEvents = new WeakSet<object>()
 
 export function createOverlay(options: OverlayOptions = {}): Overlay {
   let currentOptions = options
+  let ignoreOutsideUntil = 0
   let overlayElement: HTMLElement | null = null
   // layer 只记录浮层在全局栈中的顺序，dismiss 时用它判断“只有最顶层响应 ESC/外部点击”。
   // 如果所有层都响应，嵌套 Popover/Dialog 会被一次点击全部关闭。
@@ -85,6 +87,8 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
   }
 
   function open(info?: Parameters<typeof disclosure.open>[0]) {
+    const event = info?.event
+    if (event && typeof event === 'object') openingPointerEvents.add(event)
     disclosure.open(info)
     emit()
   }
@@ -105,9 +109,11 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
       return store.subscribe(listener)
     },
     setOptions: (nextOptions) => {
+      const wasOpen = disclosure.getSnapshot().open
       currentOptions = nextOptions
       layer.modal = Boolean(nextOptions.modal)
       disclosure.setOptions(nextOptions)
+      if (!wasOpen && disclosure.getSnapshot().open) ignoreOutsideUntil = Date.now() + 500
       presence.setOptions({
         open: disclosure.getSnapshot().open,
         forceMount: nextOptions.forceMount,
@@ -149,6 +155,14 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
         closeFromDismiss({ reason: 'escape-key', event: originalEvent })
       },
       outsidePointer: (event: OverlayEventInfo) => {
+        if (readSnapshot().phase === 'opening') return
+        if (Date.now() < ignoreOutsideUntil) {
+          return
+        }
+        if (event.event && typeof event.event === 'object' && openingPointerEvents.has(event.event)) {
+          openingPointerEvents.delete(event.event)
+          return
+        }
         if (currentOptions.dismiss?.outsidePointer === false) {
           return
         }
@@ -167,6 +181,10 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
         }
       },
       overlayPointer: (event) => {
+        if (readSnapshot().phase === 'opening') return
+        if (Date.now() < ignoreOutsideUntil) {
+          return
+        }
         if (currentOptions.dismiss?.overlayPointer !== true) {
           return
         }

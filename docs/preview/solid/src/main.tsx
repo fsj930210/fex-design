@@ -29,10 +29,16 @@ const initialTheme =
   query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
 applyTheme(initialTheme)
 
-const exampleModules = import.meta.glob(
-  '../../../../packages/@fex-design/components/solid/src/{primitive,ui}/*/examples/*.tsx',
-  { eager: false },
-) as Record<string, () => Promise<Record<string, () => unknown>>>
+const exampleModules = {
+  ...import.meta.glob(
+    '../../../../packages/@fex-design/components/solid/src/primitive/*/examples/*.tsx',
+    { eager: false },
+  ),
+  ...import.meta.glob(
+    '../../../../packages/@fex-design/components/solid/src/ui/*/examples/*.tsx',
+    { eager: false },
+  ),
+} as Record<string, () => Promise<Record<string, () => unknown>>>
 
 const moduleCache = new Map<string, Component>()
 

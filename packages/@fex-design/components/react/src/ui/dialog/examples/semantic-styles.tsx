@@ -1,0 +1,2 @@
+import { useState } from 'react'; import { Dialog } from '..'; import { Button } from '../../button';
+export function DialogSemanticStylesExample(){const [open,setOpen]=useState(false);return <><Button onClick={()=>setOpen(true)}>打开 Dialog</Button><Dialog open={open} onOpenChange={setOpen} title="Semantic Styles" classNames={{header:'bg-muted-background'}} styles={{footer:{borderTop:'1px solid var(--border)'}}}>Dialog semantic-styles 场景。</Dialog></>}

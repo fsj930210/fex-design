@@ -19,6 +19,10 @@ function measureRuntimeHeight(runtime: HTMLElement) {
   for (const overlay of overlays) {
     if (!isVisible(overlay)) continue
 
+    // Portaled fixed dialogs do not participate in document layout and must
+    // not increase the preview iframe height.
+    if (getComputedStyle(overlay).position === 'fixed') continue
+
     const overlayRect = overlay.getBoundingClientRect()
     const overlayHeight = overlay.hasAttribute('data-side')
       ? Math.max(overlayRect.height, overlay.scrollHeight)
@@ -47,11 +51,16 @@ export function observeRuntimeHeight(
 ) {
   let frame = 0
   let lastHeight = 0
+  let baseHeight = 0
 
   const measure = () => {
     cancelAnimationFrame(frame)
     frame = requestAnimationFrame(() => {
-      const height = measureRuntimeHeight(runtime)
+      const dialogs = document.body.querySelectorAll<HTMLElement>('[role="dialog"]')
+      const hasVisibleDialog = Array.from(dialogs).some(isVisible)
+      const measuredHeight = measureRuntimeHeight(runtime)
+      if (!hasVisibleDialog) baseHeight = measuredHeight
+      const height = hasVisibleDialog && baseHeight > 0 ? baseHeight : measuredHeight
       if (height === lastHeight) return
       lastHeight = height
       onHeightChange(height)
@@ -74,17 +83,11 @@ export function observeRuntimeHeight(
 
   resizeObserver.observe(runtime)
   mutationObserver.observe(document.body, { childList: true, subtree: true, attributes: true })
-  const dismissOverlay = () => {
-    const target = document.activeElement instanceof HTMLElement ? document.activeElement : runtime
-    target.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-  }
-  window.addEventListener('blur', dismissOverlay)
   measure()
 
   return () => {
     cancelAnimationFrame(frame)
     resizeObserver.disconnect()
     mutationObserver.disconnect()
-    window.removeEventListener('blur', dismissOverlay)
   }
 }

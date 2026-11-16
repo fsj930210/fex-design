@@ -44,7 +44,7 @@
   --color-focus-border: var(--focus-border);
   --color-disabled-border: var(--disabled-border);
   --color-focus: var(--focus-ring);
-  --color-mask: var(--mask);
+  --overlay-background: oklch(0 0 0 / 48%);
   --shadow-elevated: var(--shadow-elevated);
   --spacing-space-2xs: var(--space-2xs);
   --spacing-space-xs: var(--space-xs);
@@ -55,3 +55,4 @@
   --spacing-space-2xl: var(--space-2xl);
   --spacing-space-3xl: var(--space-3xl);
 }
+

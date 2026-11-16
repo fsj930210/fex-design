@@ -1,0 +1,2 @@
+import { useState } from 'react'; import { Dialog } from '..'; import { Button } from '../../button';
+export function DialogCssVariablesExample(){const [open,setOpen]=useState(false);return <><Button onClick={()=>setOpen(true)}>打开 Dialog</Button><Dialog open={open} onOpenChange={setOpen} title="CSS Variables" classNames={{content:'[--dialog-width:36rem] [--dialog-motion-duration:300ms]'}}>Dialog css-variables 场景。</Dialog></>}

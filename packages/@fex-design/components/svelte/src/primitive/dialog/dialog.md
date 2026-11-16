@@ -21,4 +21,7 @@ Svelte Dialog adapts the shared Dialog core controller through Svelte stores and
 | `modal`                 | `boolean`              | `true`  | No       | Marks the dialog as a modal layer.         |
 | `forceMount`            | `boolean`              | `false` | No       | Keeps content mounted while closed.        |
 | `closeDelay`            | `number`               | `140`   | No       | Close phase duration in milliseconds.      |
-| `closeOnOverlayPointer` | `boolean`              | `true`  | No       | Closes when clicking overlay.              |
+| `closeOnOverlayClick` | `boolean`              | `false`  | No       | Closes when clicking overlay.              |
+
+
+

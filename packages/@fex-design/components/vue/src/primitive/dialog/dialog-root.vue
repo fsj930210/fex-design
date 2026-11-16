@@ -3,17 +3,16 @@ import {
   createDialogController,
   type DialogOptions,
 } from '@fex-design/core/dialog/create-dialog-controller'
-import { shallowEqualObject } from '@fex-design/utils'
-import { computed, onBeforeUnmount, provide, ref, shallowRef } from 'vue'
+import { computed, onBeforeUnmount, provide, ref, shallowRef, watch } from 'vue'
 import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 import { dialogKey, type DialogRootProps } from './context'
 
 let nextDialogId = 1
 const props = withDefaults(defineProps<DialogRootProps>(), {
   closeDelay: 140,
-  closeOnOverlayPointer: true,
   defaultOpen: false,
-  dismiss: () => ({ escapeKey: true, overlayPointer: true }),
+  closeOnEscape: true,
+  closeOnOverlayClick: false,
   modal: true,
 })
 const emit = defineEmits<{
@@ -21,6 +20,7 @@ const emit = defineEmits<{
 }>()
 const controlled = computed(() => props.open !== undefined)
 const localOpen = ref(props.defaultOpen)
+const fullscreenActive = ref(props.fullscreen === true)
 const triggerElement = shallowRef<HTMLButtonElement | null>(null)
 const dialogId = nextDialogId++
 function createOptions(): DialogOptions {
@@ -28,6 +28,7 @@ function createOptions(): DialogOptions {
     ...props,
     open: controlled.value ? Boolean(props.open) : localOpen.value,
     onOpenChange(nextOpen, info) {
+      if (!nextOpen) fullscreenActive.value = false
       if (!controlled.value) localOpen.value = nextOpen
       emit('openChange', nextOpen, info)
     },
@@ -38,20 +39,31 @@ const dialog = createDialogController(latestOptions)
 const snapshot = useCoreStore(dialog)
 function syncOptions() {
   const next = createOptions()
-  if (!shallowEqualObject(latestOptions, next)) {
-    latestOptions = next
-    dialog.setOptions(next)
-  }
+  latestOptions = next
+  dialog.setOptions(next)
   return ''
 }
+watch(() => props.open, syncOptions, { immediate: true, flush: 'sync' })
+watch(
+  () => [props.defaultOpen, props.fullscreen, props.modal, props.closeDelay, props.closeOnEscape, props.closeOnOverlayClick],
+  syncOptions,
+  { flush: 'sync' },
+)
 provide(dialogKey, {
-  contentId: `fex-dialog-content-${dialogId}`,
-  descriptionId: `fex-dialog-description-${dialogId}`,
+  contentId: `dialog-content-${dialogId}`,
   dialog,
+  modal: props.modal,
+  fullscreen: props.fullscreen,
+  fullscreenActive,
+  onFullscreenChange: props.onFullscreenChange,
   snapshot,
-  titleId: `fex-dialog-title-${dialogId}`,
+  titleId: `dialog-title-${dialogId}`,
   triggerElement,
 })
 onBeforeUnmount(() => dialog.destroy())
 </script>
-<template>{{ syncOptions() }}<slot /></template>
+<template><slot /></template>
+
+
+
+

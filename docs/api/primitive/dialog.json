@@ -1,0 +1,642 @@
+{
+  "name": "Dialog",
+  "slug": "dialog",
+  "layer": "primitive",
+  "status": "experimental",
+  "description": "提供跨框架一致的 Dialog 状态、Overlay、Content、标题、关闭和全屏部件。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/dialog",
+    "vue": "@fex-design/vue/primitive/dialog",
+    "solid": "@fex-design/solid/primitive/dialog",
+    "svelte": "@fex-design/svelte/primitive/dialog",
+    "angular": "@fex-design/angular/primitive/dialog"
+  },
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控打开状态。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控初始打开状态。"
+    },
+    {
+      "name": "modal",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否使用模态语义。"
+    },
+    {
+      "name": "forceMount",
+      "type": "boolean",
+      "default": "false",
+      "description": "关闭时是否保持 Portal 内容挂载。"
+    },
+    {
+      "name": "closeDelay",
+      "type": "number",
+      "default": "140",
+      "description": "关闭阶段持续时间。"
+    },
+    {
+      "name": "closeOnEscape",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否允许 Escape 关闭。"
+    },
+    {
+      "name": "closeOnOverlayClick",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否允许点击 Overlay 关闭。"
+    },
+    {
+      "name": "closeOnOutsideClick",
+      "type": "boolean",
+      "default": "false",
+      "description": "是否允许点击外部区域关闭。"
+    },
+    {
+      "name": "fullscreen",
+      "type": "boolean | { mode?: 'viewport' | 'screen' }",
+      "description": "全屏配置。true 默认使用 viewport。"
+    },
+    {
+      "name": "onOpenChange",
+      "type": "(open, info) => void",
+      "description": "打开状态变化回调。"
+    },
+    {
+      "name": "onFullscreenChange",
+      "type": "(fullscreen) => void",
+      "description": "全屏状态变化回调。"
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        },
+        {
+          "name": "info",
+          "type": "DialogChangeInfo"
+        }
+      ],
+      "description": "请求改变打开状态；受控模式由调用方同步 open。"
+    },
+    {
+      "name": "onFullscreenChange",
+      "parameters": [
+        {
+          "name": "fullscreen",
+          "type": "boolean"
+        }
+      ],
+      "description": "全屏状态改变后触发。"
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--dialog-width",
+      "description": "Content 宽度。"
+    },
+    {
+      "name": "--dialog-height",
+      "description": "Content 高度。"
+    },
+    {
+      "name": "--dialog-z-index",
+      "description": "Dialog 层级。"
+    },
+    {
+      "name": "--dialog-motion-duration",
+      "description": "动画时长。"
+    },
+    {
+      "name": "--dialog-motion-ease",
+      "description": "动画缓动函数。"
+    },
+    {
+      "name": "--overlay-background",
+      "description": "Overlay 背景。"
+    }
+  ],
+  "demos": [
+    {
+      "id": "basic",
+      "title": "基础使用"
+    },
+    {
+      "id": "custom-header",
+      "title": "自定义 Header"
+    },
+    {
+      "id": "overlay",
+      "title": "Overlay 行为"
+    },
+    {
+      "id": "custom-footer",
+      "title": "自定义 Footer"
+    },
+    {
+      "id": "fullscreen",
+      "title": "全屏"
+    },
+    {
+      "id": "position",
+      "title": "自定义位置"
+    },
+    {
+      "id": "advanced",
+      "title": "高级窗口组合"
+    },
+    {
+      "id": "direction",
+      "title": "LTR 与 RTL"
+    },
+    {
+      "id": "css-variables",
+      "title": "CSS 变量",
+      "height": 440
+    },
+    {
+      "id": "semantic-styles",
+      "title": "结构化样式",
+      "height": 440
+    }
+  ],
+  "frameworks": {
+    "react": {
+      "typeOverrides": {
+        "FrameworkNode": "ReactNode",
+        "FrameworkContent": "ReactNode"
+      },
+      "slots": []
+    },
+    "vue": {
+      "events": [
+        {
+          "name": "update:open",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "用于 v-model:open。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            },
+            {
+              "name": "info",
+              "type": "DialogChangeInfo"
+            }
+          ],
+          "description": "开关请求。"
+        }
+      ],
+      "typeOverrides": {
+        "FrameworkContent": "string",
+        "FrameworkTitle": "string",
+        "FrameworkNode": "string"
+      }
+    },
+    "solid": {
+      "typeOverrides": {
+        "FrameworkNode": "JSX.Element",
+        "FrameworkContent": "JSX.Element"
+      },
+      "slots": []
+    },
+    "svelte": {
+      "typeOverrides": {
+        "FrameworkNode": "Snippet",
+        "FrameworkContent": "Snippet"
+      },
+      "slots": []
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "开关请求。"
+        },
+        {
+          "name": "fullscreenChange",
+          "parameters": [
+            {
+              "name": "fullscreen",
+              "type": "boolean"
+            }
+          ],
+          "description": "全屏状态改变。"
+        }
+      ],
+      "typeOverrides": {
+        "FrameworkContent": "string | TemplateRef<unknown>",
+        "FrameworkTitle": "string | TemplateRef<unknown>",
+        "FrameworkNode": "string | TemplateRef<unknown>"
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "DialogRoot",
+      "slug": "dialog-root",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "管理 Dialog 的打开状态、关闭行为和全屏配置。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控打开状态。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": "false",
+          "description": "非受控初始打开状态。"
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "default": "true",
+          "description": "是否使用模态语义。"
+        },
+        {
+          "name": "forceMount",
+          "type": "boolean",
+          "default": "false",
+          "description": "关闭时是否保持 Portal 内容挂载。"
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "default": "140",
+          "description": "关闭阶段持续时间。"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "default": "true",
+          "description": "是否允许 Escape 关闭。"
+        },
+        {
+          "name": "closeOnOverlayClick",
+          "type": "boolean",
+          "default": "true",
+          "description": "是否允许点击 Overlay 关闭。"
+        },
+        {
+          "name": "closeOnOutsideClick",
+          "type": "boolean",
+          "default": "false",
+          "description": "是否允许点击外部区域关闭。"
+        },
+        {
+          "name": "fullscreen",
+          "type": "boolean | { mode?: 'viewport' | 'screen' }",
+          "description": "全屏配置。true 默认使用 viewport。"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open, info) => void",
+          "description": "打开状态变化回调。"
+        },
+        {
+          "name": "onFullscreenChange",
+          "type": "(fullscreen) => void",
+          "description": "全屏状态变化回调。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogTrigger",
+      "slug": "dialog-trigger",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "连接触发元素；使用 button[dialogTrigger]，继承原生 button 属性和事件。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogPortal",
+      "slug": "dialog-portal",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "将 Overlay 与 Content 挂载到浮层层级。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogOverlay",
+      "slug": "dialog-overlay",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "模态背景层；继承原生 div 属性，支持点击关闭。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogContent",
+      "slug": "dialog-content",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "Dialog 面板；继承原生 div 属性，承载 Header、Body 和 Footer。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogHeader",
+      "slug": "dialog-header",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "标题与窗口操作区域。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogTitle",
+      "slug": "dialog-title",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "Dialog 的可访问标题和可见标题内容。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogBody",
+      "slug": "dialog-body",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "Dialog 的正文内容区域。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogFooter",
+      "slug": "dialog-footer",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "Dialog 的操作区域。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogClose",
+      "slug": "dialog-close",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "关闭当前 Dialog 的按钮，默认渲染内置 X 图标，可替换内容。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "children / slot",
+          "type": "framework-native content",
+          "description": "替换默认 X 图标的按钮内容。"
+        },
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    },
+    {
+      "name": "DialogFullscreenToggle",
+      "slug": "dialog-fullscreen-toggle",
+      "layer": "primitive",
+      "status": "experimental",
+      "description": "切换当前 Dialog 全屏状态的按钮，默认渲染内置 Expand 图标。",
+      "importPath": {
+        "react": "@fex-design/react/primitive/dialog",
+        "vue": "@fex-design/vue/primitive/dialog",
+        "solid": "@fex-design/solid/primitive/dialog",
+        "svelte": "@fex-design/svelte/primitive/dialog",
+        "angular": "@fex-design/angular/primitive/dialog"
+      },
+      "props": [
+        {
+          "name": "icon / slot",
+          "type": "framework-native content",
+          "description": "替换默认 Expand 图标。"
+        },
+        {
+          "name": "className / class",
+          "type": "string",
+          "description": "追加到该部件原生元素的 CSS 类名，与内置样式合并。"
+        },
+        {
+          "name": "style",
+          "type": "原生样式类型",
+          "description": "设置该部件原生元素的行内样式。"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "demos": []
+    }
+  ]
+}

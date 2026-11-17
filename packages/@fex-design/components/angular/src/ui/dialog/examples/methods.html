@@ -1,0 +1,27 @@
+<ng-template #controls let-index="index"
+  ><div class="grid gap-3">
+    <p>
+      {{mode==='update'?'更新标题、正文和确定按钮。':mode==='destroy'?'点击按钮销毁当前实例。':'当前同时打开两个弹窗，点击按钮全部销毁。'}}
+    </p>
+    <div class="flex flex-wrap gap-2">
+      @if(mode==='update'){<button button (click)="update(index)">对象更新</button
+      ><button button (click)="update(index,true)">函数更新</button>}<button
+        button
+        (click)="destroy(index)"
+      >
+        {{mode==='destroyAll'?'销毁全部':'销毁当前'}}
+      </button>
+    </div>
+  </div></ng-template
+>
+<ng-template #first
+  ><ng-container [ngTemplateOutlet]="controls" [ngTemplateOutletContext]="{index:0}" /></ng-template
+><ng-template #second
+  ><ng-container [ngTemplateOutlet]="controls" [ngTemplateOutletContext]="{index:1}"
+/></ng-template>
+<div class="flex flex-wrap justify-center gap-2">
+  <button button (click)="show('update',first,second)">演示 update</button
+  ><button button (click)="show('destroy',first,second)">演示 destroy</button
+  ><button button (click)="show('destroyAll',first,second)">演示 destroyAll（两个弹窗）</button>
+</div>
+<p role="status">{{feedback()}}</p>

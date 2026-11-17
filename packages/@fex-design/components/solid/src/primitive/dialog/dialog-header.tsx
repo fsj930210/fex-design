@@ -12,4 +12,3 @@ export function DialogHeader(props: DialogHeaderProps) {
     </div>
   )
 }
-

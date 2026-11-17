@@ -9,4 +9,3 @@
 <div data-slot="dialog-header" class={cn(dialogHeaderClassName, className)}>
   {@render children?.()}
 </div>
-

@@ -1,0 +1,67 @@
+<button button (click)="show()">打开调整弹窗尺寸</button>
+<div dialog [open]="open" (openChange)="setOpen($event)" [modal]="false">
+  <div dialogPortal>
+    <div dialogContent [style]="style">
+      <div dialogHeader>
+        <h2 dialogTitle><div>调整弹窗尺寸</div></h2>
+      </div>
+      <div dialogActions><button dialogClose iconOnly></button></div>
+      <div dialogBody [class]="'flex-1 min-h-0'">
+        <p>拖动四条边或四个角调整尺寸，最小宽度 280px、高度 200px。</p>
+        <div
+          #grips
+          resize
+          [resizeTarget]="panel(grips)"
+          [rect]="rect"
+          [applyStyle]="false"
+          bounds="viewport"
+          [minWidth]="280"
+          [minHeight]="200"
+          (resize)="resize($event)"
+        >
+          <div
+            data-resize-edge="top"
+            class="absolute z-10 touch-none select-none left-2 right-2 top-0 h-2 cursor-ns-resize"
+            aria-label="top 缩放"
+          ></div>
+          <div
+            data-resize-edge="right"
+            class="absolute z-10 touch-none select-none right-0 top-2 bottom-2 w-2 cursor-ew-resize"
+            aria-label="right 缩放"
+          ></div>
+          <div
+            data-resize-edge="bottom"
+            class="absolute z-10 touch-none select-none left-2 right-2 bottom-0 h-2 cursor-ns-resize"
+            aria-label="bottom 缩放"
+          ></div>
+          <div
+            data-resize-edge="left"
+            class="absolute z-10 touch-none select-none left-0 top-2 bottom-2 w-2 cursor-ew-resize"
+            aria-label="left 缩放"
+          ></div>
+          <div
+            data-resize-edge="top-left"
+            class="absolute z-10 touch-none select-none left-0 top-0 size-3 cursor-nwse-resize"
+            aria-label="top-left 缩放"
+          ></div>
+          <div
+            data-resize-edge="top-right"
+            class="absolute z-10 touch-none select-none right-0 top-0 size-3 cursor-nesw-resize"
+            aria-label="top-right 缩放"
+          ></div>
+          <div
+            data-resize-edge="bottom-left"
+            class="absolute z-10 touch-none select-none left-0 bottom-0 size-3 cursor-nesw-resize"
+            aria-label="bottom-left 缩放"
+          ></div>
+          <div
+            data-resize-edge="bottom-right"
+            class="absolute z-10 touch-none select-none right-0 bottom-0 size-3 cursor-nwse-resize"
+            aria-label="bottom-right 缩放"
+          ></div>
+        </div>
+      </div>
+      <div dialogFooter [class]="''"><button button (click)="open = false">关闭窗口</button></div>
+    </div>
+  </div>
+</div>

@@ -3,11 +3,13 @@ import type { Overlay, OverlayOptions, OverlaySnapshot } from '../overlay/types'
 
 export type DialogChangeInfo = DisclosureChangeInfo
 
-export type DialogFullscreen = boolean | {
-  mode?: 'viewport' | 'screen'
-  width?: number | string
-  height?: number | string
-}
+export type DialogFullscreen =
+  | boolean
+  | {
+      mode?: 'viewport' | 'screen'
+      width?: number | string
+      height?: number | string
+    }
 
 export interface DialogOptions extends Omit<
   OverlayOptions,

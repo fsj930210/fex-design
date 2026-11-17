@@ -3,10 +3,12 @@ import { examples as examples0 } from './examples.generated-0'
 import { examples as examples1 } from './examples.generated-1'
 import { examples as examples2 } from './examples.generated-2'
 import { examples as examples3 } from './examples.generated-3'
+import { examples as examples4 } from './examples.generated-4'
 
 export const examples = {
   ...examples0,
   ...examples1,
   ...examples2,
   ...examples3,
+  ...examples4,
 }

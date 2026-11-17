@@ -4,8 +4,8 @@ import {
   MinimaxDialog,
   MovableDialog,
   ResizableDialog,
-} from "@rap/components-pro/dialog";
-import { Button } from "@rap/components-ui/button";
+} from '@rap/components-pro/dialog'
+import { Button } from '@rap/components-ui/button'
 import {
   Card,
   CardContent,
@@ -13,15 +13,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@rap/components-ui/card";
-import { DialogDescription, DialogTitle } from "@rap/components-ui/dialog";
-import { createFileRoute } from "@tanstack/react-router";
-import { Maximize2, Move, Plus, Scaling, Square } from "lucide-react";
-import { useState, type ReactNode } from "react";
+} from '@rap/components-ui/card'
+import { DialogDescription, DialogTitle } from '@rap/components-ui/dialog'
+import { createFileRoute } from '@tanstack/react-router'
+import { Maximize2, Move, Plus, Scaling, Square } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
 
-export const Route = createFileRoute("/(layouts)/components/dialog/")({
+export const Route = createFileRoute('/(layouts)/components/dialog/')({
   component: DialogComponentPage,
-});
+})
 
 function DemoCard({
   title,
@@ -29,10 +29,10 @@ function DemoCard({
   children,
   footer,
 }: {
-  title: string;
-  description: string;
-  children: ReactNode;
-  footer?: ReactNode;
+  title: string
+  description: string
+  children: ReactNode
+  footer?: ReactNode
 }) {
   return (
     <Card>
@@ -43,11 +43,11 @@ function DemoCard({
       <CardContent>{children}</CardContent>
       {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
-  );
+  )
 }
 
 function BasicDialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <DemoCard
@@ -70,19 +70,19 @@ function BasicDialogDemo() {
             <DialogDescription>用于展示确认内容、编辑入口或简单说明。</DialogDescription>
           </>
         }
-        okButtonProps={{ children: "确定" }}
-        cancelButtonProps={{ children: "取消" }}
+        okButtonProps={{ children: '确定' }}
+        cancelButtonProps={{ children: '取消' }}
       >
         <div className="py-4 text-sm leading-relaxed">
           Dialog 默认带底部操作区，API 使用 okButtonProps、cancelButtonProps、onOk、onCancel。
         </div>
       </BasicDialog>
     </DemoCard>
-  );
+  )
 }
 
 function MovableDialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <DemoCard title="Movable Dialog" description="标题栏可拖动，关闭后位置会重置。">
@@ -103,11 +103,11 @@ function MovableDialogDemo() {
         </div>
       </MovableDialog>
     </DemoCard>
-  );
+  )
 }
 
 function ResizableDialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <DemoCard title="Resizable Dialog" description="边缘和角落可以拖拽调整弹窗尺寸。">
@@ -133,11 +133,11 @@ function ResizableDialogDemo() {
         </div>
       </ResizableDialog>
     </DemoCard>
-  );
+  )
 }
 
 function FullDialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <DemoCard
@@ -174,8 +174,8 @@ function FullDialogDemo() {
             <DialogDescription>一个入口覆盖常用后台弹窗能力。</DialogDescription>
           </>
         }
-        okButtonProps={{ children: "保存" }}
-        cancelButtonProps={{ children: "取消" }}
+        okButtonProps={{ children: '保存' }}
+        cancelButtonProps={{ children: '取消' }}
       >
         <div className="space-y-2 py-4 text-sm leading-relaxed">
           <p>用户只需要配置 features 和 actions，就能打开需要的能力。</p>
@@ -183,11 +183,11 @@ function FullDialogDemo() {
         </div>
       </Dialog>
     </DemoCard>
-  );
+  )
 }
 
 function MinimaxDialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <DemoCard title="MinimaxDialog" description="只聚焦最小化和最大化的单特性 Dialog。">
@@ -212,7 +212,7 @@ function MinimaxDialogDemo() {
         </div>
       </MinimaxDialog>
     </DemoCard>
-  );
+  )
 }
 
 function DialogComponentPage() {
@@ -233,5 +233,5 @@ function DialogComponentPage() {
         <MinimaxDialogDemo />
       </div>
     </div>
-  );
+  )
 }

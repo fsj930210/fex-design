@@ -30,7 +30,7 @@
     },
     {
       "name": "closable",
-      "type": "boolean",
+      "type": "boolean | { icon?: framework-native content | null; disabled?: boolean; onClose?: function }",
       "default": "true",
       "description": "是否显示右上角关闭按钮。"
     },
@@ -57,18 +57,6 @@
       "description": "Footer 内容；传入 null 隐藏默认 Footer。"
     },
     {
-      "name": "okText",
-      "type": "FrameworkContent",
-      "default": "确定",
-      "description": "默认确定按钮内容。"
-    },
-    {
-      "name": "cancelText",
-      "type": "FrameworkContent",
-      "default": "取消",
-      "description": "默认取消按钮内容。"
-    },
-    {
       "name": "classNames",
       "type": "DialogClassNames",
       "description": "按语义区域设置 class。"
@@ -87,6 +75,34 @@
       "name": "onFullscreenChange",
       "type": "(fullscreen) => void",
       "description": "全屏状态变化回调。"
+    },
+    {
+      "name": "okBtnProps",
+      "type": "ButtonProps",
+      "description": "默认操作按钮的属性与内容配置。"
+    },
+    {
+      "name": "cancelBtnProps",
+      "type": "ButtonProps",
+      "description": "默认操作按钮的属性与内容配置。"
+    },
+    {
+      "name": "forceMount",
+      "type": "boolean",
+      "default": "false",
+      "description": "关闭时保留挂载。"
+    },
+    {
+      "name": "closeDelay",
+      "type": "number",
+      "default": "200",
+      "description": "关闭动画的卸载延迟（毫秒）。"
+    },
+    {
+      "name": "modal",
+      "type": "boolean",
+      "default": "true",
+      "description": "是否使用模态语义。与 overlay 分别配置：modal 控制模态行为，overlay 控制背景遮罩。"
     }
   ],
   "events": [
@@ -116,6 +132,18 @@
     }
   ],
   "cssVariables": [
+    {
+      "name": "--dialog-header-background",
+      "description": "标题区背景色，默认跟随主题背景色。"
+    },
+    {
+      "name": "--dialog-content-background",
+      "description": "正文区域及面板背景色，默认跟随主题背景色。"
+    },
+    {
+      "name": "--dialog-footer-background",
+      "description": "页脚背景色，默认跟随主题背景色。"
+    },
     {
       "name": "--dialog-width",
       "description": "Content 宽度。"
@@ -147,12 +175,16 @@
       "title": "基础使用"
     },
     {
-      "id": "custom-header",
-      "title": "自定义 Header"
-    },
-    {
       "id": "overlay",
       "title": "Overlay 行为"
+    },
+    {
+      "id": "close-delay",
+      "title": "关闭延迟"
+    },
+    {
+      "id": "custom-header",
+      "title": "自定义 Header"
     },
     {
       "id": "custom-footer",
@@ -167,8 +199,36 @@
       "title": "自定义位置"
     },
     {
-      "id": "advanced",
-      "title": "高级窗口组合"
+      "id": "form",
+      "title": "表单弹窗"
+    },
+    {
+      "id": "nested",
+      "title": "嵌套弹窗"
+    },
+    {
+      "id": "draggable",
+      "title": "拖拽弹窗"
+    },
+    {
+      "id": "resize",
+      "title": "调整弹窗尺寸"
+    },
+    {
+      "id": "minimax",
+      "title": "最小化与最大化"
+    },
+    {
+      "id": "alert",
+      "title": "提示弹窗"
+    },
+    {
+      "id": "confirm",
+      "title": "确认弹窗"
+    },
+    {
+      "id": "methods",
+      "title": "实例方法"
     },
     {
       "id": "direction",
@@ -278,5 +338,124 @@
         "FrameworkNode": "string | TemplateRef<unknown>"
       }
     }
-  }
+  },
+  "instance": {
+    "title": "alert / confirm",
+    "description": "React、Vue、Solid、Svelte：Dialog.alert / Dialog.confirm 或具名导入。Angular：DialogService.alert / DialogService.confirm。",
+    "methods": [
+      {
+        "name": "alert(options?: DialogStaticOptions): DialogRequestHandle",
+        "description": "提示弹窗，仅显示确定按钮。"
+      },
+      {
+        "name": "confirm(options?: DialogStaticOptions): DialogRequestHandle",
+        "description": "确认弹窗，显示取消和确定按钮。"
+      },
+      {
+        "name": "destroyAll(): void",
+        "description": "销毁全部通过 alert / confirm 创建的弹窗，不影响声明式 Dialog。"
+      }
+    ]
+  },
+  "types": [
+    {
+      "name": "DialogStaticOptions",
+      "props": [
+        {
+          "name": "title",
+          "type": "DialogStaticContent",
+          "default": "alert: 提示；confirm: 确认操作",
+          "description": "标题，支持自定义渲染内容。"
+        },
+        {
+          "name": "content",
+          "type": "DialogStaticContent",
+          "description": "正文，必填，支持自定义渲染内容。"
+        },
+        {
+          "name": "closable",
+          "type": "boolean",
+          "default": "alert: false；confirm: true",
+          "description": "是否显示关闭按钮。"
+        },
+        {
+          "name": "okBtnProps",
+          "type": "DialogButtonProps",
+          "description": "确定按钮属性。点击行为由 onOk 处理。"
+        },
+        {
+          "name": "cancelBtnProps",
+          "type": "DialogButtonProps",
+          "description": "取消按钮属性，仅 confirm 有效。点击行为由 onCancel 处理。"
+        },
+        {
+          "name": "onOk",
+          "type": "() => void | boolean | Promise<void | boolean>",
+          "description": "确认回调。返回 false 保持打开；抛错显示错误。"
+        },
+        {
+          "name": "onCancel",
+          "type": "() => void | boolean | Promise<void | boolean>",
+          "description": "取消及关闭按钮回调。返回 false 保持打开；抛错显示错误。"
+        }
+      ],
+      "frameworks": {
+        "react": {
+          "typeOverrides": {
+            "DialogStaticContent": "ReactNode",
+            "DialogButtonProps": "ButtonProps"
+          }
+        },
+        "vue": {
+          "typeOverrides": {
+            "DialogStaticContent": "VNodeChild | (() => VNodeChild)",
+            "DialogButtonProps": "ButtonProps & { content?: string }"
+          }
+        },
+        "solid": {
+          "typeOverrides": {
+            "DialogStaticContent": "JSX.Element",
+            "DialogButtonProps": "ButtonProps"
+          }
+        },
+        "svelte": {
+          "typeOverrides": {
+            "DialogStaticContent": "string | Snippet",
+            "DialogButtonProps": "ButtonProps"
+          }
+        },
+        "angular": {
+          "typeOverrides": {
+            "DialogStaticContent": "string | TemplateRef<unknown>",
+            "DialogButtonProps": "DialogStaticButtonProps"
+          }
+        }
+      }
+    },
+    {
+      "name": "DialogRequestHandle",
+      "props": [
+        {
+          "name": "result",
+          "type": "Promise<boolean>",
+          "description": "确认后解析为 true；取消或销毁后解析为 false。"
+        },
+        {
+          "name": "destroy",
+          "type": "() => void",
+          "description": "销毁当前弹窗，不触发 onCancel。重复调用无效。"
+        },
+        {
+          "name": "update",
+          "type": "(patch: Partial<DialogStaticOptions> | ((previous: Readonly<DialogStaticOptions>) => Partial<DialogStaticOptions>)) => void",
+          "description": "合并更新标题、正文、按钮和回调。销毁后不再更新。"
+        },
+        {
+          "name": "close",
+          "type": "() => void",
+          "description": "destroy 的别名。"
+        }
+      ]
+    }
+  ]
 }

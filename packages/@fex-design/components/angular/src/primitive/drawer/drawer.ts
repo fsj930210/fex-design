@@ -30,7 +30,7 @@ import type { AfterViewInit, OnChanges, OnDestroy } from '@angular/core'
 import { createCoreStoreSignal } from '@fex-design/angular/signals/core-store-signal'
 import { createHostClassName } from '@fex-design/angular/signals/host-class'
 import { XIcon } from '@fex-design/angular/icons/x'
-import { FexResizeDirective } from '@fex-design/angular/directives/resize'
+import { Resize } from '@fex-design/angular/directives/resize'
 
 @Component({
   selector: 'fex-drawer',
@@ -165,7 +165,7 @@ export class DrawerMask implements AfterViewInit, OnDestroy {
   selector: 'fex-drawer-content',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [FexResizeDirective],
+  hostDirectives: [Resize],
   host: {
     role: 'dialog',
     tabindex: '-1',
@@ -185,7 +185,7 @@ export class DrawerContent implements AfterViewInit, OnDestroy {
   @Input() size?: DrawerSize
   protected readonly drawerRoot = inject(Drawer)
   private readonly elementRef = inject<ElementRef<HTMLDivElement>>(ElementRef)
-  private readonly resizeDirective = inject(FexResizeDirective, { self: true })
+  private readonly resizeDirective = inject(Resize, { self: true })
   private readonly resizeSubscription = this.resizeDirective.resize.subscribe((rect) =>
     this.drawerRoot.sizeChange.emit(this.isHorizontal ? rect.width : rect.height),
   )
@@ -311,7 +311,7 @@ export class DrawerClose {
   }
 }
 @Directive({
-  selector: '[fexDrawerResizeHandle]',
+  selector: 'div[drawerResizeHandle]',
   standalone: true,
   host: {
     '[class]': 'hostClassName()',
@@ -321,7 +321,7 @@ export class DrawerClose {
   },
 })
 export class DrawerResizeHandle {
-  @Input({ alias: 'fexDrawerResizeHandle' }) edge?: 'top' | 'right' | 'bottom' | 'left'
+  @Input({ alias: 'drawerResizeHandle' }) edge?: 'top' | 'right' | 'bottom' | 'left'
   private readonly drawerRoot = inject(Drawer)
   private readonly drawerContent = inject(DrawerContent)
   protected readonly hostClassName = createHostClassName(drawerResizeHandleClassName)

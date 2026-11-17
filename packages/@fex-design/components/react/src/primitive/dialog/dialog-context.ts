@@ -22,4 +22,3 @@ export function useDialogContext(component: string) {
   if (!context) throw new Error(`${component} must be used inside DialogRoot`)
   return context
 }
-

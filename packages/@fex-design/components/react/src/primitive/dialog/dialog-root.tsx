@@ -19,7 +19,7 @@ export function DialogRoot({
   defaultOpen,
   onOpenChange,
   modal = true,
-  closeDelay = 140,
+  closeDelay = 200,
   ...options
 }: DialogRootProps) {
   const isControlled = openProp !== undefined
@@ -80,5 +80,3 @@ export function DialogRoot({
     </DialogContext>
   )
 }
-
-

@@ -231,6 +231,7 @@
     "./icons/search": "./src/icons/search.svelte",
     "./icons/loading": "./src/icons/loading.svelte",
     "./icons/minus": "./src/icons/minus.svelte",
+    "./icons/square": "./src/icons/square.svelte",
     "./icons/more": "./src/icons/more.svelte",
     "./icons/plus": "./src/icons/plus.svelte",
     "./icons/star": "./src/icons/star.svelte",

@@ -7,8 +7,9 @@ import { useDialogContext } from './context'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{ class?: string; }>()
-const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } = useDialogContext('DialogContent')
+const props = defineProps<{ class?: string }>()
+const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } =
+  useDialogContext('DialogContent')
 const contentClass = computed(() => cn(dialogContentClassName, props.class))
 
 function setContent(element: Element | ComponentPublicInstance | null) {
@@ -17,7 +18,7 @@ function setContent(element: Element | ComponentPublicInstance | null) {
 
 function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') {
-    dialog.dismiss.escapeKey({ target: event.target, currentTarget: event.currentTarget, event })
+    dialog.close({ reason: 'escape-key', event })
   }
 }
 
@@ -38,14 +39,28 @@ onBeforeUnmount(() => {
     data-slot="dialog-content"
     :data-state="snapshot.open ? 'open' : 'closed'"
     :data-phase="snapshot.phase"
-    :style="fullscreenActive && fullscreen ? { width: typeof fullscreen === 'object' && fullscreen.width !== undefined ? typeof fullscreen.width === 'number' ? `${fullscreen.width}px` : fullscreen.width : '100vw', height: typeof fullscreen === 'object' && fullscreen.height !== undefined ? typeof fullscreen.height === 'number' ? `${fullscreen.height}px` : fullscreen.height : '100vh' } : undefined"
-    :class="[contentClass, fullscreenActive && 'left-0 top-0 translate-x-0 translate-y-0 rounded-none']"
+    :style="[
+      $attrs.style,
+      fullscreenActive && fullscreen
+        ? {
+            width:
+              typeof fullscreen === 'object' && fullscreen.width !== undefined
+                ? typeof fullscreen.width === 'number'
+                  ? `${fullscreen.width}px`
+                  : fullscreen.width
+                : '100vw',
+            height:
+              typeof fullscreen === 'object' && fullscreen.height !== undefined
+                ? typeof fullscreen.height === 'number'
+                  ? `${fullscreen.height}px`
+                  : fullscreen.height
+                : '100vh',
+          }
+        : undefined,
+    ]"
+    :class="[contentClass, fullscreenActive && 'rounded-none']"
     @keydown="onKeydown"
   >
     <slot />
   </div>
 </template>
-
-
-
-

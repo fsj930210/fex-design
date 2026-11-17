@@ -1,0 +1,22 @@
+<button button (click)="open=true">打开提示弹窗</button>
+<p role="status">{{ result }}</p>
+<div
+  dialog
+  [closeOnEscape]="false"
+  [closeOnOverlayClick]="false"
+  [open]="open"
+  (openChange)="result = $event[0] ? result : '已取消'; open=$event[0]"
+>
+  <div dialogPortal>
+    <div dialogOverlay></div>
+    <div dialogContent [class]="messageClassName">
+      <div dialogHeader class="border-0"><h2 dialogTitle>操作成功</h2></div>
+      <div dialogBody>资料已经保存，可以继续操作。</div>
+      <div dialogFooter class="border-0">
+        <button button variant="solid" color="primary" (click)="result='已确认';open=false">
+          确定
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

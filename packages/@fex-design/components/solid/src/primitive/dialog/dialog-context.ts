@@ -5,7 +5,7 @@ export interface DialogContextValue {
   contentId: string
   dialog: ReturnType<typeof createDialogController>
   modal: boolean
-  fullscreen: DialogFullscreen | undefined
+  fullscreen: Accessor<DialogFullscreen | undefined>
   fullscreenActive: Accessor<boolean>
   setFullscreenActive: (value: boolean) => void
   onFullscreenChange?: (fullscreen: boolean) => void
@@ -19,4 +19,3 @@ export function useDialog(component: string) {
   if (!context) throw new Error(`${component} must be used inside Dialog`)
   return context
 }
-

@@ -159,7 +159,11 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
         if (Date.now() < ignoreOutsideUntil) {
           return
         }
-        if (event.event && typeof event.event === 'object' && openingPointerEvents.has(event.event)) {
+        if (
+          event.event &&
+          typeof event.event === 'object' &&
+          openingPointerEvents.has(event.event)
+        ) {
           openingPointerEvents.delete(event.event)
           return
         }

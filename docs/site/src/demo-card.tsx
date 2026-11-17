@@ -1,3 +1,4 @@
+import type { ExampleScene } from '../../shared/src/example-order'
 import { createEffect, createResource, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { PREVIEW_PROTOCOL } from '@fex-design/docs-shared/preview-protocol'
 import { Card } from '@fex-design/solid/ui/card'
@@ -22,7 +23,7 @@ const MINIMUM_PREVIEW_HEIGHT = 240
 type DemoLayer = 'primitive' | 'ui'
 
 export function DemoCard(props: {
-  scene: { id: string; title: string; description: string; height?: number; group?: string }
+  scene: ExampleScene & { group?: string }
   framework: Framework
   layer: DemoLayer
   slug: string
@@ -41,7 +42,7 @@ export function DemoCard(props: {
         <h3 class="m-0 text-lg font-semibold text-foreground">{props.scene.title}</h3>
       </div>
       <p class="mt-1.5 mb-0 leading-relaxed text-muted-foreground text-sm">
-        {props.scene.description}
+        {props.scene.descriptionByFramework?.[props.framework] ?? props.scene.description}
       </p>
 
       <Show
@@ -78,7 +79,7 @@ export function DemoCard(props: {
 
 function SingleDemoPanel(props: {
   layer: DemoLayer
-  scene: { id: string; title: string; description: string; height?: number; group?: string }
+  scene: ExampleScene & { group?: string }
   framework: Framework
   slug: string
 }) {

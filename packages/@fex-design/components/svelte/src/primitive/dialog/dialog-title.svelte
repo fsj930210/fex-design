@@ -16,4 +16,3 @@
 >
   {@render children?.()}
 </h2>
-

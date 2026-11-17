@@ -2,6 +2,8 @@ export interface ExampleScene {
   id: string
   title: string
   description: string
+  descriptionByFramework?: Partial<Record<'react' | 'vue' | 'solid' | 'svelte' | 'angular', string>>
+  order?: number
   height?: number
 }
 
@@ -89,6 +91,12 @@ export function sortExampleScenes<T extends ExampleScene>(scenes: readonly T[]):
         if (aTail === -1) return -1
         if (bTail === -1) return 1
         return aTail - bTail
+      }
+
+      if (a.scene.order !== undefined || b.scene.order !== undefined) {
+        const orderDifference =
+          (a.scene.order ?? Number.POSITIVE_INFINITY) - (b.scene.order ?? Number.POSITIVE_INFINITY)
+        if (orderDifference) return orderDifference
       }
 
       const groupDifference = groupFor(a.scene.id) - groupFor(b.scene.id)

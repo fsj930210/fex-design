@@ -1,1 +1,14 @@
-<div dialogUi [title]="'自定义 Footer'" [hasFooter]="true"><button button dialogTrigger>打开 Dialog</button><p>Dialog custom-footer 场景。</p><div dialogFooter><button button>取消</button><button button>保存草稿</button><button button variant="solid" color="primary">确定</button></div></div>
+<div
+  dialogUi
+  [open]="open"
+  (openChange)="onOpenChange($event)"
+  [title]="'自定义 Footer'"
+  [hasFooter]="true"
+>
+  <button button dialogTrigger>打开 Dialog</button>
+  <p>Dialog custom-footer 场景。</p>
+  <div dialogFooter class="flex gap-2">
+    <button button (click)="open=false">取消</button><button button>保存草稿</button
+    ><button button variant="solid" color="primary">确定</button>
+  </div>
+</div>

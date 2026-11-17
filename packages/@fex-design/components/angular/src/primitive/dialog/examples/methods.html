@@ -1,0 +1,49 @@
+<div class="flex flex-wrap justify-center gap-2">
+  <button button (click)="show('update')">演示 update</button
+  ><button button (click)="show('destroy')">演示 destroy</button
+  ><button button (click)="show('destroyAll')">演示 destroyAll（两个弹窗）</button>
+</div>
+<p role="status">{{feedback}}</p>
+@for(id of ids; track id){
+<div
+  dialog
+  [open]="slots[id].open"
+  (openChange)="setOpen(id,$event)"
+  [closeOnEscape]="false"
+  [closeOnOverlayClick]="false"
+>
+  <div dialogPortal>
+    <div dialogOverlay></div>
+    <div dialogContent [class]="messageClassName">
+      <div dialogHeader><h2 dialogTitle>{{slots[id].title}}</h2></div>
+      <div dialogActions><button dialogClose iconOnly></button></div>
+      <div dialogBody>
+        @if(slots[id].updated){
+        <p>{{slots[id].content}}</p>
+        }@else{
+        <div class="grid gap-3">
+          <p>
+            {{mode==='update'?'更新标题、正文和确定按钮。':mode==='destroy'?'点击按钮销毁当前实例。':'当前同时打开两个弹窗，点击按钮全部销毁。'}}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            @if(mode==='update'){<button button (click)="update(id)">对象更新</button
+            ><button button (click)="update(id,true)">函数更新</button>}<button
+              button
+              (click)="destroy(id,mode==='destroyAll')"
+            >
+              {{mode==='destroyAll'?'销毁全部':'销毁当前'}}
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+      <div dialogFooter>
+        <button button (click)="destroy(id)">取消</button
+        ><button button variant="solid" color="primary" (click)="destroy(id)">
+          {{slots[id].updated?'完成':'确定'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}

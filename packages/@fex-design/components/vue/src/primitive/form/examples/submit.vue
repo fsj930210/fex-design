@@ -70,9 +70,7 @@ const form = useForm({
           >
         </div>
         <p role="status" class="text-sm text-muted-foreground">
-          {{ state.busy ? '请求处理中，不能重复提交' : '可以提交' }}；提交尝试：{{
-            state.attempts
-          }}
+          {{ state.busy ? '请求处理中，不能重复提交' : '可以提交' }}；提交尝试：{{ state.attempts }}
           次（含校验未通过）
         </p>
       </FormSubscribe>

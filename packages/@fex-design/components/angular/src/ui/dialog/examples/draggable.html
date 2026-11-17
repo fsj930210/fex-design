@@ -1,0 +1,28 @@
+<button button (click)="show()">打开拖拽弹窗</button>
+<div
+  dialogUi
+  [open]="open"
+  (openChange)="setOpen($event)"
+  [modal]="false"
+  [overlay]="false"
+  [hasFooter]="true"
+  [contentStyle]="style"
+  [classNames]="{ title: 'hidden', body: 'flex-1 min-h-0', footer: '' }"
+>
+  <div dialogHeaderContent>
+    <div
+      #handle
+      move
+      [moveTarget]="panel(handle)"
+      [position]="position"
+      [applyStyle]="false"
+      bounds="viewport"
+      (move)="move($event)"
+      class="cursor-move touch-none select-none pe-20 font-semibold leading-6"
+    >
+      拖拽弹窗
+    </div>
+  </div>
+  <p>按住标题区拖动窗口，窗口保持在展示区域内。</p>
+  <div dialogFooter><button button (click)="open = false">关闭窗口</button></div>
+</div>

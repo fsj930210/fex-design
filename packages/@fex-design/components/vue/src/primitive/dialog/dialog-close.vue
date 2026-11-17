@@ -16,6 +16,9 @@ const closeProps = computed(() => ({
   type: 'button' as const,
   'data-slot': 'dialog-close',
   onClick(event: MouseEvent) {
+    const handler = attrs.onClick
+    if (typeof handler === 'function') handler(event)
+    if (event.defaultPrevented) return
     dialog.close({ reason: 'manual', source: 'close-button', event })
   },
 }))
@@ -23,6 +26,8 @@ const closeProps = computed(() => ({
 
 <template>
   <slot v-if="$slots.button" name="button" :props="closeProps" />
-  <Button v-else v-bind="closeProps" :class="slots.default ? undefined : dialogIconCloseClassName"><slot><XIcon v-if="!slots.default" aria-hidden="true" /></slot></Button>
+  <Button v-else v-bind="closeProps" :class="slots.default ? undefined : dialogIconCloseClassName"
+    ><slot
+      ><slot name="icon"><XIcon aria-hidden="true" /></slot></slot
+  ></Button>
 </template>
-

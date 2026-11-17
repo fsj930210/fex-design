@@ -1,10 +1,10 @@
-import { Button } from "@rap/components-ui/button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader } from "@rap/components-ui/dialog";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@rap/components-ui/hover-card";
-import { useMinimax, type MinimaxOptions, MinimaxState } from "@rap/hooks/use-minimax";
-import { useMove, type MoveOptions } from "@rap/hooks/use-move";
-import { cn } from "@rap/utils";
-import { Maximize2, Minimize2, Minus, Square, X } from "lucide-react";
+import { Button } from '@rap/components-ui/button'
+import { Dialog, DialogContent, DialogFooter, DialogHeader } from '@rap/components-ui/dialog'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@rap/components-ui/hover-card'
+import { useMinimax, type MinimaxOptions, MinimaxState } from '@rap/hooks/use-minimax'
+import { useMove, type MoveOptions } from '@rap/hooks/use-move'
+import { cn } from '@rap/utils'
+import { Maximize2, Minimize2, Minus, Square, X } from 'lucide-react'
 import {
   useEffect,
   useRef,
@@ -13,52 +13,52 @@ import {
   type ComponentProps,
   type MouseEvent,
   type ReactNode,
-} from "react";
-import ReactDOM from "react-dom";
-import { renderDialogTrigger, useBasicDialog } from "./basic-dialog";
-import { createPortal } from "react-dom";
-import * as React from "react";
+} from 'react'
+import ReactDOM from 'react-dom'
+import { renderDialogTrigger, useBasicDialog } from './basic-dialog'
+import { createPortal } from 'react-dom'
+import * as React from 'react'
 
 export interface MinimaxDialogProps {
-  children: React.ReactNode;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  trigger?: React.ReactNode;
-  triggerChildren?: React.ReactNode;
-  header?: React.ReactNode;
-  footer?: React.ReactNode | null;
-  width?: React.CSSProperties["width"];
-  okText?: React.ReactNode;
-  cancelText?: React.ReactNode;
-  okButtonProps?: ComponentProps<typeof Button>;
-  cancelButtonProps?: ComponentProps<typeof Button>;
-  confirmLoading?: boolean;
-  onOk?: () => boolean | void | Promise<boolean | void>;
-  onCancel?: () => void;
-  dialogProps?: React.ComponentProps<typeof Dialog>;
-  minimaxOptions?: MinimaxOptions;
-  contentProps?: React.ComponentProps<typeof DialogContent>;
-  headerProps?: React.ComponentProps<typeof DialogHeader>;
-  footerProps?: React.ComponentProps<typeof DialogFooter>;
+  children: React.ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  trigger?: React.ReactNode
+  triggerChildren?: React.ReactNode
+  header?: React.ReactNode
+  footer?: React.ReactNode | null
+  width?: React.CSSProperties['width']
+  okText?: React.ReactNode
+  cancelText?: React.ReactNode
+  okButtonProps?: ComponentProps<typeof Button>
+  cancelButtonProps?: ComponentProps<typeof Button>
+  confirmLoading?: boolean
+  onOk?: () => boolean | void | Promise<boolean | void>
+  onCancel?: () => void
+  dialogProps?: React.ComponentProps<typeof Dialog>
+  minimaxOptions?: MinimaxOptions
+  contentProps?: React.ComponentProps<typeof DialogContent>
+  headerProps?: React.ComponentProps<typeof DialogHeader>
+  footerProps?: React.ComponentProps<typeof DialogFooter>
   actions?: {
-    close?: boolean;
-    minimize?: boolean;
-    maximize?: boolean;
+    close?: boolean
+    minimize?: boolean
+    maximize?: boolean
     render?: {
-      close?: React.ReactNode;
-      minimize?: React.ReactNode;
-      maximize?: React.ReactNode;
-      restore?: React.ReactNode;
-    };
-  };
+      close?: React.ReactNode
+      minimize?: React.ReactNode
+      maximize?: React.ReactNode
+      restore?: React.ReactNode
+    }
+  }
   minimizedBar?: {
-    draggable?: boolean;
-    render?: React.ReactNode;
-    className?: string;
-    style?: React.CSSProperties;
-    moveOptions?: MoveOptions<HTMLDivElement>;
-    initialPosition?: { right: number; bottom: number };
-  };
+    draggable?: boolean
+    render?: React.ReactNode
+    className?: string
+    style?: React.CSSProperties
+    moveOptions?: MoveOptions<HTMLDivElement>
+    initialPosition?: { right: number; bottom: number }
+  }
 }
 
 function MinimizedBar({
@@ -74,30 +74,30 @@ function MinimizedBar({
   title,
   preview,
 }: {
-  draggable: boolean;
-  render?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  moveOptions?: MoveOptions<HTMLDivElement>;
-  initialPosition?: { right: number; bottom: number };
-  onRestore?: () => void;
-  onMaximize?: () => void;
-  onClose?: () => void;
-  title?: React.ReactNode;
-  preview?: React.ReactNode;
+  draggable: boolean
+  render?: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
+  moveOptions?: MoveOptions<HTMLDivElement>
+  initialPosition?: { right: number; bottom: number }
+  onRestore?: () => void
+  onMaximize?: () => void
+  onClose?: () => void
+  title?: React.ReactNode
+  preview?: React.ReactNode
 }) {
   const { targetRef, transform, isDragged } = useMove<HTMLDivElement>({
-    bounds: "viewport",
-    boundaryMode: "contain",
+    bounds: 'viewport',
+    boundaryMode: 'contain',
     ...moveOptions,
     disabled: !draggable,
-  });
+  })
 
   const handleRestore = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    if (isDragged) return;
-    onRestore?.();
-  };
+    event.stopPropagation()
+    if (isDragged) return
+    onRestore?.()
+  }
 
   return (
     <HoverCard openDelay={150} closeDelay={120}>
@@ -106,9 +106,9 @@ function MinimizedBar({
           ref={targetRef}
           onDoubleClick={handleRestore}
           className={cn(
-            "fixed z-999 flex h-10 items-center gap-1 rounded-md border bg-background px-2 shadow-lg animate-in fade-in-0 slide-in-from-bottom-2",
-            draggable && "cursor-move touch-none",
-            className
+            'fixed z-999 flex h-10 items-center gap-1 rounded-md border bg-background px-2 shadow-lg animate-in fade-in-0 slide-in-from-bottom-2',
+            draggable && 'cursor-move touch-none',
+            className,
           )}
           style={{
             right: initialPosition?.right ?? 40,
@@ -124,7 +124,7 @@ function MinimizedBar({
                 className="max-w-28 truncate px-1 text-left text-xs text-muted-foreground"
                 onClick={handleRestore}
               >
-                {title || "Dialog"}
+                {title || 'Dialog'}
               </button>
               <Button
                 variant="ghost"
@@ -139,8 +139,8 @@ function MinimizedBar({
                 size="icon-sm"
                 className="cursor-pointer"
                 onClick={(event) => {
-                  event.stopPropagation();
-                  onMaximize?.();
+                  event.stopPropagation()
+                  onMaximize?.()
                 }}
               >
                 <Maximize2 />
@@ -150,8 +150,8 @@ function MinimizedBar({
                 size="icon-sm"
                 className="cursor-pointer"
                 onClick={(event) => {
-                  event.stopPropagation();
-                  onClose?.();
+                  event.stopPropagation()
+                  onClose?.()
                 }}
               >
                 <X />
@@ -179,7 +179,7 @@ function MinimizedBar({
         </HoverCardContent>
       )}
     </HoverCard>
-  );
+  )
 }
 
 export function MinimaxDialog({
@@ -190,8 +190,8 @@ export function MinimaxDialog({
   triggerChildren,
   header,
   footer,
-  okText = "确定",
-  cancelText = "取消",
+  okText = '确定',
+  cancelText = '取消',
   okButtonProps,
   cancelButtonProps,
   confirmLoading,
@@ -206,24 +206,24 @@ export function MinimaxDialog({
   minimizedBar,
   width,
 }: MinimaxDialogProps) {
-  const [isMinimizing, setIsMinimizing] = useState(false);
-  const minimizeTimerRef = useRef<number | null>(null);
+  const [isMinimizing, setIsMinimizing] = useState(false)
+  const minimizeTimerRef = useRef<number | null>(null)
 
   const {
     close: showClose = true,
     minimize: showMinimize = true,
     maximize: showMaximize = true,
     render: actionRender = {},
-  } = actions || {};
+  } = actions || {}
 
   const {
     draggable: minimizeBarDraggable = true,
     render: minimizeBarRender,
-    className: minimizeBarClassName = "",
+    className: minimizeBarClassName = '',
     style: minimizeBarStyle,
     moveOptions: minimizeBarMoveOptions,
     initialPosition: minimizeBarInitialPosition,
-  } = minimizedBar || {};
+  } = minimizedBar || {}
 
   const {
     state,
@@ -238,21 +238,21 @@ export function MinimaxDialog({
   } = useMinimax({
     ...minimaxOptions,
     onStateChange: (next, previous) => {
-      minimaxOptions?.onStateChange?.(next, previous);
+      minimaxOptions?.onStateChange?.(next, previous)
     },
-  });
+  })
 
   const resetMinimaxAfterClose = () => {
     if (minimizeTimerRef.current !== null) {
-      window.clearTimeout(minimizeTimerRef.current);
-      minimizeTimerRef.current = null;
+      window.clearTimeout(minimizeTimerRef.current)
+      minimizeTimerRef.current = null
     }
-    setIsMinimizing(false);
-    if (state !== MinimaxState.NORMAL) restore();
-    close();
-  };
+    setIsMinimizing(false)
+    if (state !== MinimaxState.NORMAL) restore()
+    close()
+  }
 
-  const mergedDialogProps = { ...dialogProps, open, onOpenChange };
+  const mergedDialogProps = { ...dialogProps, open, onOpenChange }
   const dialog = useBasicDialog({
     dialogProps: mergedDialogProps,
     footer,
@@ -265,59 +265,59 @@ export function MinimaxDialog({
     onCancel,
     footerProps,
     afterClose: resetMinimaxAfterClose,
-  });
+  })
 
   const handleCloseClick = () => {
-    dialog.close();
-  };
+    dialog.close()
+  }
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (minimizeTimerRef.current !== null) {
-      window.clearTimeout(minimizeTimerRef.current);
-      minimizeTimerRef.current = null;
+      window.clearTimeout(minimizeTimerRef.current)
+      minimizeTimerRef.current = null
     }
-    setIsMinimizing(false);
-    dialog.setOpen(nextOpen);
+    setIsMinimizing(false)
+    dialog.setOpen(nextOpen)
     if (!nextOpen && state !== MinimaxState.NORMAL) {
-      resetMinimaxAfterClose();
+      resetMinimaxAfterClose()
     }
-  };
+  }
 
   const handleMinimize = () => {
-    setIsMinimizing(true);
+    setIsMinimizing(true)
     minimizeTimerRef.current = window.setTimeout(() => {
-      minimizeTimerRef.current = null;
-      setIsMinimizing(false);
-      minimize();
-    }, 160);
-  };
+      minimizeTimerRef.current = null
+      setIsMinimizing(false)
+      minimize()
+    }, 160)
+  }
 
   const handleMinimizedRestore = () => {
-    setIsMinimizing(false);
+    setIsMinimizing(false)
     if (previousState === MinimaxState.MAXIMIZED) {
-      void maximize();
+      void maximize()
     } else {
-      restore();
+      restore()
     }
-  };
+  }
 
   const handleMinimizedMaximize = () => {
-    setIsMinimizing(false);
-    void maximize();
-  };
+    setIsMinimizing(false)
+    void maximize()
+  }
 
   useEffect(() => {
     return () => {
       if (minimizeTimerRef.current !== null) {
-        window.clearTimeout(minimizeTimerRef.current);
+        window.clearTimeout(minimizeTimerRef.current)
       }
-    };
-  }, []);
+    }
+  }, [])
 
-  const hasActions = showClose || showMinimize || showMaximize;
+  const hasActions = showClose || showMinimize || showMaximize
 
   const renderActions = () => {
-    if (!hasActions) return null;
+    if (!hasActions) return null
     return (
       <div className="absolute top-2 right-2 flex items-center gap-1">
         {showMinimize && (
@@ -338,10 +338,10 @@ export function MinimaxDialog({
           </Button>
         )}
       </div>
-    );
-  };
+    )
+  }
 
-  const previewContent = <div className="w-[480px] p-4 text-sm leading-relaxed">{children}</div>;
+  const previewContent = <div className="w-[480px] p-4 text-sm leading-relaxed">{children}</div>
 
   return (
     <>
@@ -353,25 +353,25 @@ export function MinimaxDialog({
             overlay={false}
             closable={false}
             className={cn(
-              "max-h-none! duration-0! data-[state=open]:fade-in-100! data-[state=open]:zoom-in-100! data-[state=closed]:fade-out-100! data-[state=closed]:zoom-out-100! transition-[width,height,top,left,transform,border-radius,opacity] ease-out",
+              'max-h-none! duration-0! data-[state=open]:fade-in-100! data-[state=open]:zoom-in-100! data-[state=closed]:fade-out-100! data-[state=closed]:zoom-out-100! transition-[width,height,top,left,transform,border-radius,opacity] ease-out',
               isMaximized &&
-                "top-0 left-0 h-screen! w-screen! translate-x-0! translate-y-0! rounded-none",
-              isMaximized ? "duration-300" : "duration-200",
-              isMinimizing && "scale-90 opacity-0 pointer-events-none",
-              contentProps?.className
+                'top-0 left-0 h-screen! w-screen! translate-x-0! translate-y-0! rounded-none',
+              isMaximized ? 'duration-300' : 'duration-200',
+              isMinimizing && 'scale-90 opacity-0 pointer-events-none',
+              contentProps?.className,
             )}
             style={{
               ...contentProps?.style,
               width: isMaximized ? undefined : (contentProps?.style?.width ?? width),
               maxWidth: isMaximized
                 ? undefined
-                : (contentProps?.style?.maxWidth ?? (width ? "none" : undefined)),
-              maxHeight: contentProps?.style?.maxHeight ?? "none",
+                : (contentProps?.style?.maxWidth ?? (width ? 'none' : undefined)),
+              maxHeight: contentProps?.style?.maxHeight ?? 'none',
             }}
           >
             <DialogHeader
               {...headerProps}
-              className={cn("-mx-6 -mt-6 border-b px-6 py-4", headerProps?.className)}
+              className={cn('-mx-6 -mt-6 border-b px-6 py-4', headerProps?.className)}
             >
               {header}
             </DialogHeader>
@@ -390,14 +390,14 @@ export function MinimaxDialog({
             style={minimizeBarStyle}
             moveOptions={minimizeBarMoveOptions}
             initialPosition={minimizeBarInitialPosition}
-            title={typeof header === "string" ? header : "Dialog"}
+            title={typeof header === 'string' ? header : 'Dialog'}
             preview={previewContent}
             onRestore={handleMinimizedRestore}
             onMaximize={handleMinimizedMaximize}
             onClose={handleCloseClick}
           />,
-          document.body
+          document.body,
         )}
     </>
-  );
+  )
 }

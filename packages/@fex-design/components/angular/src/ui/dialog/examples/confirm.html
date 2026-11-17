@@ -1,0 +1,5 @@
+<ng-template #confirmTitle><span class="text-danger">确认删除</span></ng-template
+><ng-template #confirmContent
+  ><p>删除后无法恢复，<strong>请确认是否继续。</strong></p></ng-template
+><button button (click)="show(confirmTitle, confirmContent)">打开确认弹窗</button>
+<p role="status">{{ result() }}</p>

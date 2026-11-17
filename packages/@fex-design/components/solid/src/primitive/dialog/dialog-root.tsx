@@ -25,7 +25,7 @@ export function DialogRoot(props: DialogRootProps) {
     'onFullscreenChange',
   ])
   const [open, setOpen] = createSignal(local.open ?? local.defaultOpen ?? false)
-  const [fullscreenActive, setFullscreenActive] = createSignal(local.fullscreen === true)
+  const [fullscreenActive, setFullscreenActive] = createSignal(false)
   const triggerElement = { current: null as HTMLButtonElement | null }
   const dialogId = nextDialogId++
 
@@ -34,7 +34,7 @@ export function DialogRoot(props: DialogRootProps) {
       open: openValue,
       modal: local.modal ?? true,
       forceMount: local.forceMount,
-      closeDelay: local.closeDelay ?? 140,
+      closeDelay: local.closeDelay ?? 200,
       closeOnEscape: local.closeOnEscape,
       closeOnOverlayClick: local.closeOnOverlayClick,
       fullscreen: local.fullscreen,
@@ -68,7 +68,7 @@ export function DialogRoot(props: DialogRootProps) {
           contentId: `dialog-content-${dialogId}`,
           dialog,
           modal: local.modal ?? true,
-          fullscreen: local.fullscreen,
+          fullscreen: () => local.fullscreen,
           fullscreenActive,
           setFullscreenActive,
           onFullscreenChange: local.onFullscreenChange,
@@ -82,6 +82,3 @@ export function DialogRoot(props: DialogRootProps) {
     </>
   )
 }
-
-
-

@@ -175,6 +175,30 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework; tit
         )}
       </Show>
 
+      <For each={props.value.types}>
+        {(type) => (
+          <section>
+            <Show when={type.description}>
+              <p class="text-xs text-secondary-foreground">{type.description}</p>
+            </Show>
+            <ApiTable
+              value={{
+                ...props.value,
+                name: type.name,
+                props: type.props,
+                events: [],
+                slots: [],
+                frameworks: type.frameworks,
+                components: [],
+                instance: undefined,
+                types: [],
+              }}
+              framework={props.framework}
+            />
+          </section>
+        )}
+      </For>
+
       {/* 子组件部件遍历：多部件自然向下排列 */}
       <Show when={props.value.components?.length}>
         <div class="mt-6 space-y-4">

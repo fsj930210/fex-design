@@ -128,6 +128,7 @@
     "./icons/search": "./src/icons/search.ts",
     "./icons/loading": "./src/icons/loading.ts",
     "./icons/minus": "./src/icons/minus.ts",
+    "./icons/square": "./src/icons/square.ts",
     "./icons/more": "./src/icons/more.ts",
     "./icons/plus": "./src/icons/plus.ts",
     "./icons/star": "./src/icons/star.ts",

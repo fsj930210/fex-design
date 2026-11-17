@@ -1,3 +1,16 @@
-<button button (click)="open=true">打开 Dialog</button><div dialog [open]="open" (openChange)="open=$event[0]"><div dialogPortal><div dialogOverlay></div><div dialogContent><div dialogHeader><h2 dialogTitle>方向</h2><button dialogClose iconOnly></button></div><div dialogBody>Dialog direction 场景。</div><div dialogFooter><button dialogClose>取消</button><button button variant="solid" color="primary">确定</button></div></div></div></div>
-
-
+<button button (click)="direction='ltr';open=true">打开 LTR</button
+><button button (click)="direction='rtl';open=true">打开 RTL</button>
+<div dialog [open]="open" (openChange)="open=$event[0]">
+  <div dialogPortal>
+    <div dialogOverlay></div>
+    <div dialogContent [attr.dir]="direction">
+      <div dialogHeader><h2 dialogTitle>方向</h2></div>
+      <div dialogActions><button dialogClose iconOnly></button></div>
+      <div dialogBody>English: read from left to right. العربية: تُقرأ من اليمين إلى اليسار.</div>
+      <div dialogFooter>
+        <button dialogClose>取消</button
+        ><button button variant="solid" color="primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

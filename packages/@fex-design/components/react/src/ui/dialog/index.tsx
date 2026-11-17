@@ -1,5 +1,7 @@
-import type { CSSProperties, ReactNode } from 'react'
-import { Button } from '../../primitive/button'
+import { alert, confirm, destroyAll } from './static'
+import type { CSSProperties, ReactNode, MouseEvent, ComponentProps } from 'react'
+import { Button } from '../button'
+import { cn } from '@fex-design/utils'
 import {
   DialogBody,
   DialogClose,
@@ -7,6 +9,7 @@ import {
   DialogFooter,
   DialogFullscreenToggle,
   DialogHeader,
+  DialogActions,
   DialogOverlay,
   DialogPortal,
   DialogRoot,
@@ -37,17 +40,25 @@ export interface DialogStyles {
   close?: CSSProperties
 }
 
+export interface DialogClosableOptions {
+  icon?: ReactNode
+  disabled?: boolean
+  onClose?: (event: MouseEvent<HTMLButtonElement>) => void
+}
+
 export interface DialogProps extends Omit<DialogRootProps, 'children'> {
   title?: ReactNode
+  actions?: ReactNode
   header?: ReactNode
   children?: ReactNode
   footer?: ReactNode | null
-  closable?: boolean
+  closable?: boolean | DialogClosableOptions
+  overlay?: boolean
   fullscreen?: DialogRootProps['fullscreen']
   classNames?: DialogClassNames
   styles?: DialogStyles
-  okText?: ReactNode
-  cancelText?: ReactNode
+  okBtnProps?: ComponentProps<typeof Button>
+  cancelBtnProps?: ComponentProps<typeof Button>
   onOk?: () => void | Promise<void>
   onCancel?: () => void | Promise<void>
 }
@@ -55,15 +66,17 @@ export interface DialogProps extends Omit<DialogRootProps, 'children'> {
 export function Dialog({
   title,
   header,
+  actions,
   children,
   footer,
   closable = true,
-  closeOnOverlayClick = false,
+  overlay = true,
+  closeOnOverlayClick = true,
   fullscreen,
   classNames,
   styles,
-  okText = '确定',
-  cancelText = '取消',
+  okBtnProps,
+  cancelBtnProps,
   onOk,
   onCancel,
   ...rootProps
@@ -71,18 +84,55 @@ export function Dialog({
   return (
     <DialogRoot {...rootProps} fullscreen={fullscreen} closeOnOverlayClick={closeOnOverlayClick}>
       <DialogPortal>
-        <DialogOverlay className={classNames?.overlay} style={styles?.overlay} />
+        {overlay && <DialogOverlay className={classNames?.overlay} style={styles?.overlay} />}
         <DialogContent className={classNames?.content} style={styles?.content}>
           <DialogHeader className={classNames?.header} style={styles?.header}>
-            <DialogTitle className={classNames?.title} style={styles?.title}>{title}</DialogTitle>
+            <DialogTitle className={classNames?.title} style={styles?.title}>
+              {title}
+            </DialogTitle>
             {header}
-            {fullscreen && <DialogFullscreenToggle />}
-            {closable && <DialogClose className={classNames?.close} style={styles?.close} />}
           </DialogHeader>
-          <DialogBody className={classNames?.body} style={styles?.body}>{children}</DialogBody>
+          <DialogActions>
+            {actions}
+            {fullscreen && <DialogFullscreenToggle className="pointer-events-auto" />}
+            {closable !== false && !(typeof closable === 'object' && closable.icon === null) && (
+              <DialogClose
+                icon={typeof closable === 'object' ? closable.icon : undefined}
+                disabled={typeof closable === 'object' ? closable.disabled : undefined}
+                onClick={typeof closable === 'object' ? closable.onClose : undefined}
+                className={cn(classNames?.close, 'pointer-events-auto')}
+                style={styles?.close}
+              />
+            )}
+          </DialogActions>
+          <DialogBody className={classNames?.body} style={styles?.body}>
+            {children}
+          </DialogBody>
           {footer === null ? null : (
             <DialogFooter className={classNames?.footer} style={styles?.footer}>
-              {footer ?? <><DialogClose onClick={onCancel}>{cancelText}</DialogClose><Button variant="solid" color="primary" onClick={onOk}>{okText}</Button></>}
+              {footer ?? (
+                <>
+                  <DialogClose>
+                    {(closeProps) => (
+                      <Button
+                        {...closeProps}
+                        {...cancelBtnProps}
+                        onClick={(event) => {
+                          cancelBtnProps?.onClick?.(event)
+                          if (event.defaultPrevented) return
+                          onCancel?.()
+                          closeProps.onClick?.(event)
+                        }}
+                      >
+                        {cancelBtnProps?.children ?? '取消'}
+                      </Button>
+                    )}
+                  </DialogClose>
+                  <Button variant="solid" color="primary" onClick={onOk} {...okBtnProps}>
+                    {okBtnProps?.children ?? '确定'}
+                  </Button>
+                </>
+              )}
             </DialogFooter>
           )}
         </DialogContent>
@@ -92,3 +142,10 @@ export function Dialog({
 }
 
 export { DialogRoot, DialogTrigger }
+
+Dialog.alert = alert
+Dialog.confirm = confirm
+Dialog.destroyAll = destroyAll
+export { alert, confirm, destroyAll }
+export type { DialogStaticOptions } from './static'
+export type { DialogRequestHandle } from './static'

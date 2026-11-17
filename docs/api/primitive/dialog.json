@@ -38,7 +38,7 @@
     {
       "name": "closeDelay",
       "type": "number",
-      "default": "140",
+      "default": "200",
       "description": "关闭阶段持续时间。"
     },
     {
@@ -52,12 +52,6 @@
       "type": "boolean",
       "default": "true",
       "description": "是否允许点击 Overlay 关闭。"
-    },
-    {
-      "name": "closeOnOutsideClick",
-      "type": "boolean",
-      "default": "false",
-      "description": "是否允许点击外部区域关闭。"
     },
     {
       "name": "fullscreen",
@@ -103,6 +97,18 @@
   ],
   "cssVariables": [
     {
+      "name": "--dialog-header-background",
+      "description": "标题区背景色，默认跟随主题背景色。"
+    },
+    {
+      "name": "--dialog-content-background",
+      "description": "正文区域及面板背景色，默认跟随主题背景色。"
+    },
+    {
+      "name": "--dialog-footer-background",
+      "description": "页脚背景色，默认跟随主题背景色。"
+    },
+    {
       "name": "--dialog-width",
       "description": "Content 宽度。"
     },
@@ -133,12 +139,16 @@
       "title": "基础使用"
     },
     {
-      "id": "custom-header",
-      "title": "自定义 Header"
-    },
-    {
       "id": "overlay",
       "title": "Overlay 行为"
+    },
+    {
+      "id": "close-delay",
+      "title": "关闭延迟"
+    },
+    {
+      "id": "custom-header",
+      "title": "自定义 Header"
     },
     {
       "id": "custom-footer",
@@ -153,8 +163,36 @@
       "title": "自定义位置"
     },
     {
-      "id": "advanced",
-      "title": "高级窗口组合"
+      "id": "form",
+      "title": "表单弹窗"
+    },
+    {
+      "id": "nested",
+      "title": "嵌套弹窗"
+    },
+    {
+      "id": "draggable",
+      "title": "拖拽弹窗"
+    },
+    {
+      "id": "resize",
+      "title": "调整弹窗尺寸"
+    },
+    {
+      "id": "minimax",
+      "title": "最小化与最大化"
+    },
+    {
+      "id": "alert",
+      "title": "提示弹窗"
+    },
+    {
+      "id": "confirm",
+      "title": "确认弹窗"
+    },
+    {
+      "id": "methods",
+      "title": "实例方法"
     },
     {
       "id": "direction",
@@ -257,87 +295,6 @@
     }
   },
   "components": [
-    {
-      "name": "DialogRoot",
-      "slug": "dialog-root",
-      "layer": "primitive",
-      "status": "experimental",
-      "description": "管理 Dialog 的打开状态、关闭行为和全屏配置。",
-      "importPath": {
-        "react": "@fex-design/react/primitive/dialog",
-        "vue": "@fex-design/vue/primitive/dialog",
-        "solid": "@fex-design/solid/primitive/dialog",
-        "svelte": "@fex-design/svelte/primitive/dialog",
-        "angular": "@fex-design/angular/primitive/dialog"
-      },
-      "props": [
-        {
-          "name": "open",
-          "type": "boolean",
-          "description": "受控打开状态。"
-        },
-        {
-          "name": "defaultOpen",
-          "type": "boolean",
-          "default": "false",
-          "description": "非受控初始打开状态。"
-        },
-        {
-          "name": "modal",
-          "type": "boolean",
-          "default": "true",
-          "description": "是否使用模态语义。"
-        },
-        {
-          "name": "forceMount",
-          "type": "boolean",
-          "default": "false",
-          "description": "关闭时是否保持 Portal 内容挂载。"
-        },
-        {
-          "name": "closeDelay",
-          "type": "number",
-          "default": "140",
-          "description": "关闭阶段持续时间。"
-        },
-        {
-          "name": "closeOnEscape",
-          "type": "boolean",
-          "default": "true",
-          "description": "是否允许 Escape 关闭。"
-        },
-        {
-          "name": "closeOnOverlayClick",
-          "type": "boolean",
-          "default": "true",
-          "description": "是否允许点击 Overlay 关闭。"
-        },
-        {
-          "name": "closeOnOutsideClick",
-          "type": "boolean",
-          "default": "false",
-          "description": "是否允许点击外部区域关闭。"
-        },
-        {
-          "name": "fullscreen",
-          "type": "boolean | { mode?: 'viewport' | 'screen' }",
-          "description": "全屏配置。true 默认使用 viewport。"
-        },
-        {
-          "name": "onOpenChange",
-          "type": "(open, info) => void",
-          "description": "打开状态变化回调。"
-        },
-        {
-          "name": "onFullscreenChange",
-          "type": "(fullscreen) => void",
-          "description": "全屏状态变化回调。"
-        }
-      ],
-      "events": [],
-      "slots": [],
-      "demos": []
-    },
     {
       "name": "DialogTrigger",
       "slug": "dialog-trigger",
@@ -637,6 +594,11 @@
       "events": [],
       "slots": [],
       "demos": []
+    },
+    {
+      "name": "DialogActions",
+      "description": "独立于 Header 的窗口操作区，组合全屏、关闭及自定义按钮。",
+      "props": []
     }
   ]
 }

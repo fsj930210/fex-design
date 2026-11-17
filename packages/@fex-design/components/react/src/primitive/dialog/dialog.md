@@ -30,20 +30,16 @@ import { Dialog } from '@fex-design/react/primitive/dialog'
 
 ## Props
 
-| Name                    | Type                   | Default | Required | Description                                            |
-| ----------------------- | ---------------------- | ------- | -------- | ------------------------------------------------------ |
-| `open`                  | `boolean`              | -       | No       | Controlled open state.                                 |
-| `defaultOpen`           | `boolean`              | `false` | No       | Initial uncontrolled open state.                       |
-| `onOpenChange`          | `(open, info) => void` | -       | No       | Called when user actions request an open state change. |
-| `modal`                 | `boolean`              | `true`  | No       | Marks the dialog as a modal layer.                     |
-| `forceMount`            | `boolean`              | `false` | No       | Keeps portal/content mounted while closed.             |
-| `closeDelay`            | `number`               | `140`   | No       | Close phase duration in milliseconds.                  |
-| `closeOnOverlayClick` | `boolean`              | `false`  | No       | Closes when the overlay surface is clicked.            |
+| Name                  | Type                   | Default | Required | Description                                            |
+| --------------------- | ---------------------- | ------- | -------- | ------------------------------------------------------ |
+| `open`                | `boolean`              | -       | No       | Controlled open state.                                 |
+| `defaultOpen`         | `boolean`              | `false` | No       | Initial uncontrolled open state.                       |
+| `onOpenChange`        | `(open, info) => void` | -       | No       | Called when user actions request an open state change. |
+| `modal`               | `boolean`              | `true`  | No       | Marks the dialog as a modal layer.                     |
+| `forceMount`          | `boolean`              | `false` | No       | Keeps portal/content mounted while closed.             |
+| `closeDelay`          | `number`               | `200`   | No       | Close phase duration in milliseconds.                  |
+| `closeOnOverlayClick` | `boolean`              | `true`  | No       | Closes when the overlay surface is clicked.            |
 
 ## Notes
 
 Trigger exposes render props instead of `asChild`. Consumers can attach the returned props to their own button while the adapter keeps ARIA and event behavior consistent.
-
-
-
-

@@ -57,7 +57,13 @@ function injectSvelteProps(svg) {
   return tagStr + ' {...props}' + svg.slice(tagEnd)
 }
 
-const svgFiles = fs.readdirSync(svgDir).filter((f) => f.endsWith('.svg'))
+const requestedIcons = new Set(process.argv.slice(2).map((name) => name.replace(/\.svg$/, '')))
+const svgFiles = fs
+  .readdirSync(svgDir)
+  .filter(
+    (file) =>
+      file.endsWith('.svg') && (requestedIcons.size === 0 || requestedIcons.has(file.slice(0, -4))),
+  )
 
 for (const file of svgFiles) {
   const baseName = file.replace(/\.svg$/, '')

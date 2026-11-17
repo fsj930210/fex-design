@@ -4,18 +4,6 @@ import type { ComponentProps, Ref } from 'react'
 import { useMemoizedFn } from '@fex-design/react/hooks/use-memoized-fn'
 import { useDialog } from './use-dialog'
 
-function toEventInfo(event: {
-  target: EventTarget | null
-  currentTarget: EventTarget | null
-  event?: Event
-}) {
-  return {
-    target: event.target,
-    currentTarget: event.currentTarget,
-    event: 'event' in event ? event.event : undefined,
-  }
-}
-
 export interface DialogOverlayProps extends ComponentProps<'div'> {
   ref?: Ref<HTMLDivElement>
 }
@@ -38,10 +26,9 @@ export function DialogOverlay({ ref, className, onClick, ...props }: DialogOverl
       onClick={(event) => {
         onClick?.(event)
         if (!event.defaultPrevented && event.target === event.currentTarget) {
-          dialog.dismiss.overlayPointer({ ...toEventInfo(event), event: event.nativeEvent })
+          dialog.close({ reason: 'overlay-pointer', event })
         }
       }}
     />
   )
 }
-

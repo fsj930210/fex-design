@@ -1,1 +1,19 @@
-<div dialogUi [title]="'Overlay'"><button button dialogTrigger>打开 Dialog</button><p>Dialog overlay 场景。</p></div>
+<button button (click)="modal = !modal">模态：{{ modal ? '是' : '否' }}</button
+><button button type="button" (click)="overlay = !overlay">
+  Overlay：{{ overlay ? '有' : '无' }}</button
+><button button type="button" (click)="closable = !closable">
+  Overlay 点击关闭：{{ closable ? '开' : '关' }}
+</button>
+<div
+  dialogUi
+  [modal]="modal"
+  [open]="open"
+  (openChange)="onOpenChange($event)"
+  [title]="'Overlay'"
+  [overlay]="overlay"
+  [closeOnOverlayClick]="closable"
+>
+  <button button dialogTrigger>打开 Dialog</button>
+  <p>测试 Overlay 显示和关闭行为。</p>
+</div>
+<span>状态：{{ open ? '打开' : '关闭' }}</span>

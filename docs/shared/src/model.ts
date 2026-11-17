@@ -56,5 +56,11 @@ export interface ComponentApi {
   demos: Array<{ id: string; title: string; description: string }>
   components?: ComponentApi[]
   instance?: ApiInstance
+  types?: Array<{
+    name: string
+    description?: string
+    props: ApiProperty[]
+    frameworks?: Partial<Record<Framework, FrameworkApi>>
+  }>
   cssVariables?: Array<{ name: string; description: string }>
 }

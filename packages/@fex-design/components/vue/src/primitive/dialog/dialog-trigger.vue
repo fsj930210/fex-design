@@ -27,4 +27,3 @@ const triggerProps = computed(() => ({
 <template>
   <slot :props="triggerProps" :ref="setTrigger" :state="snapshot" />
 </template>
-

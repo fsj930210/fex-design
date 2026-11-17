@@ -1,7 +1,5 @@
 <script lang="ts">
-  import {
-    dialogContentClassName,
-  } from "@fex-design/components-styles/dialog";
+  import { dialogContentClassName } from "@fex-design/components-styles/dialog";
   import { cn } from "@fex-design/utils";
   import { getContext } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
@@ -16,13 +14,16 @@
     class?: string;
   }
 
-  let {
-    class: className,
-    children,
-    ...rest
-  }: DialogContentProps = $props();
-  const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } =
-    getContext<DialogContext>(dialogContextKey);
+  let { class: className, children, ...rest }: DialogContentProps = $props();
+  const {
+    contentId,
+    dialog,
+    fullscreen,
+    fullscreenActive,
+    modal,
+    snapshot,
+    titleId,
+  } = getContext<DialogContext>(dialogContextKey);
   const classList = $derived(cn(dialogContentClassName, className));
   let registeredElement: HTMLDivElement | null = null;
 
@@ -56,23 +57,14 @@
     data-slot="dialog-content"
     data-state={$snapshot.open ? "open" : "closed"}
     data-phase={$snapshot.phase}
-    style={fullscreenActive.value && fullscreen ? `width:${typeof fullscreen === 'object' && fullscreen.width !== undefined ? typeof fullscreen.width === 'number' ? fullscreen.width + 'px' : fullscreen.width : '100vw'};height:${typeof fullscreen === 'object' && fullscreen.height !== undefined ? typeof fullscreen.height === 'number' ? fullscreen.height + 'px' : fullscreen.height : '100vh'}` : undefined}
-    class={cn(classList, fullscreenActive.value && "left-0 top-0 translate-x-0 translate-y-0 rounded-none")}
+    style={`${rest.style ?? ""};${fullscreenActive.value && fullscreen.value ? `width:${typeof fullscreen.value === "object" && fullscreen.value.width !== undefined ? (typeof fullscreen.value.width === "number" ? fullscreen.value.width + "px" : fullscreen.value.width) : "100vw"};height:${typeof fullscreen.value === "object" && fullscreen.value.height !== undefined ? (typeof fullscreen.value.height === "number" ? fullscreen.value.height + "px" : fullscreen.value.height) : "100vh"}` : ""}`}
+    class={cn(classList, fullscreenActive.value && "rounded-none")}
     onkeydown={(event) => {
       if (event.key === "Escape") {
-        dialog.dismiss.escapeKey({
-          target: event.target,
-          currentTarget: event.currentTarget,
-          event,
-        });
+        dialog.close({ reason: "escape-key", event });
       }
     }}
   >
     {@render children?.()}
   </div>
 {/if}
-
-
-
-
-

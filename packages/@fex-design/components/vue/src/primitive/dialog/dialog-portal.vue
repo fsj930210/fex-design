@@ -12,4 +12,3 @@ const target = computed(() => props.container ?? globalThis.document?.body)
     <slot />
   </Teleport>
 </template>
-

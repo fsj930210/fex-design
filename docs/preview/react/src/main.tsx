@@ -27,9 +27,10 @@ const initialTheme =
   query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
 applyTheme(initialTheme)
 
-const exampleLoaders = import.meta.glob(
-  '../../../../packages/@fex-design/components/react/src/{primitive,ui}/*/examples/*.tsx',
-) as Record<string, () => Promise<Record<string, ComponentType>>>
+const exampleLoaders = import.meta.glob([
+  '../../../../packages/@fex-design/components/react/src/primitive/*/examples/*.tsx',
+  '../../../../packages/@fex-design/components/react/src/ui/*/examples/*.tsx',
+]) as Record<string, () => Promise<Record<string, ComponentType>>>
 
 // Keep the loader module hot-reloadable when new example files are added.
 const moduleCache = new Map<string, ComponentType>() // examples are discovered by Vite's glob

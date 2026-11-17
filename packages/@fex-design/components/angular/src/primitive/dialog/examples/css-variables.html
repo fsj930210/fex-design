@@ -1,3 +1,18 @@
-<button button (click)="open=true">打开 Dialog</button><div dialog [open]="open" (openChange)="open=$event[0]"><div dialogPortal><div dialogOverlay></div><div dialogContent><div dialogHeader><h2 dialogTitle>CSS Variables</h2><button dialogClose iconOnly></button></div><div dialogBody>Dialog css-variables 场景。</div><div dialogFooter><button dialogClose>取消</button><button button variant="solid" color="primary">确定</button></div></div></div></div>
-
-
+<button button (click)="open=true">打开 Dialog</button>
+<div dialog [open]="open" (openChange)="open=$event[0]">
+  <div dialogPortal>
+    <div dialogOverlay></div>
+    <div
+      dialogContent
+      class="[--dialog-header-background:var(--color-blue-100)] [--dialog-content-background:var(--color-blue-50)] [--dialog-footer-background:var(--color-indigo-100)]"
+    >
+      <div dialogHeader><h2 dialogTitle>CSS Variables</h2></div>
+      <div dialogActions><button dialogClose iconOnly></button></div>
+      <div dialogBody>通过 CSS 变量分别设置标题区、正文和页脚的背景色。</div>
+      <div dialogFooter>
+        <button dialogClose>取消</button
+        ><button button variant="solid" color="primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

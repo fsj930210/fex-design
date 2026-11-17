@@ -56,17 +56,17 @@ interface DialogProps {
 
 UI props 映射到 Primitive 的方式：
 
-| UI prop | Primitive 组合 |
-| --- | --- |
-| `overlay` | 是否渲染 `DialogOverlay` |
-| `overlay.closable` | `closeOnOverlayClick` |
-| `keyboard` | `closeOnEscape` |
-| `closable` | 是否组合 Header 内的 `DialogClose` |
-| `title` | `DialogTitle` 内容 |
-| `footer={null}` | 不渲染 `DialogFooter` |
-| `width` / `height` | Content 的 CSS 变量 |
-| `fullscreen` | UI 全屏状态 |
-| `destroyOnHidden` | Content 子树在关闭完成后销毁 |
+| UI prop            | Primitive 组合                     |
+| ------------------ | ---------------------------------- |
+| `overlay`          | 是否渲染 `DialogOverlay`           |
+| `overlay.closable` | `closeOnOverlayClick`              |
+| `keyboard`         | `closeOnEscape`                    |
+| `closable`         | 是否组合 Header 内的 `DialogClose` |
+| `title`            | `DialogTitle` 内容                 |
+| `footer={null}`    | 不渲染 `DialogFooter`              |
+| `width` / `height` | Content 的 CSS 变量                |
+| `fullscreen`       | UI 全屏状态                        |
+| `destroyOnHidden`  | Content 子树在关闭完成后销毁       |
 
 UI 和 Primitive 都使用 `DialogOverlay` 作为部件名称，背景通过 `--overlay-background` 控制。
 
@@ -99,11 +99,7 @@ keyboard = true
 确认型场景可以关闭 Overlay 点击和 Escape：
 
 ```tsx
-<Dialog
-  overlay={{ closable: false }}
-  keyboard={false}
-  onOk={submit}
-/>
+<Dialog overlay={{ closable: false }} keyboard={false} onOk={submit} />
 ```
 
 ## 位置和尺寸

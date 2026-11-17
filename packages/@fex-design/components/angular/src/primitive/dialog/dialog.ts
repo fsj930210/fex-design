@@ -8,6 +8,7 @@ import {
   dialogFooterClassName,
   dialogIconCloseClassName,
   dialogHeaderClassName,
+  dialogActionsClassName,
   dialogOverlayClassName,
   dialogTitleClassName,
 } from '@fex-design/components-styles/dialog'
@@ -45,29 +46,42 @@ export class DialogRoot implements OnChanges, OnDestroy {
   @Input() defaultOpen = false
   @Input() modal = true
   @Input() forceMount = false
-  @Input() closeDelay = 140
+  @Input() closeDelay = 200
   @Input() closeOnEscape = true
-  @Input() closeOnOverlayClick = false
+  private closeOnOverlayClickValue = false
+  @Input()
+  set closeOnOverlayClick(value: boolean) {
+    this.closeOnOverlayClickValue = value
+    this.syncOptions()
+  }
+  get closeOnOverlayClick() {
+    return this.closeOnOverlayClickValue
+  }
   @Input() fullscreen: DialogOptions['fullscreen'] = false
   @Output() fullscreenChange = new EventEmitter<boolean>()
-  readonly fullscreenActive = signal(this.fullscreen === true)
+  readonly fullscreenActive = signal(false)
   fullscreenWidth() {
     if (!this.fullscreenActive() || !this.fullscreen) return null
-    const value = typeof this.fullscreen === 'object' && this.fullscreen.width !== undefined ? this.fullscreen.width : '100vw'
+    const value =
+      typeof this.fullscreen === 'object' && this.fullscreen.width !== undefined
+        ? this.fullscreen.width
+        : '100vw'
     return typeof value === 'number' ? `${value}px` : value
   }
   fullscreenHeight() {
     if (!this.fullscreenActive() || !this.fullscreen) return null
-    const value = typeof this.fullscreen === 'object' && this.fullscreen.height !== undefined ? this.fullscreen.height : '100vh'
+    const value =
+      typeof this.fullscreen === 'object' && this.fullscreen.height !== undefined
+        ? this.fullscreen.height
+        : '100vh'
     return typeof value === 'number' ? `${value}px` : value
   }
-  @Output() openChange = new EventEmitter<
-    Parameters<NonNullable<DialogOptions['onOpenChange']>>
-  >()
+  @Output() openChange = new EventEmitter<Parameters<NonNullable<DialogOptions['onOpenChange']>>>()
 
   private localOpen = this.defaultOpen
-  readonly contentId = `dialog-content-${nextDialogId}`
-  readonly titleId = `dialog-title-${nextDialogId}`
+  private readonly dialogId = nextDialogId++
+  readonly contentId = `dialog-content-${this.dialogId}`
+  readonly titleId = `dialog-title-${this.dialogId}`
   triggerElement: HTMLButtonElement | null = null
   readonly dialog = createDialogController(this.createOptions())
   readonly snapshot = createCoreStoreSignal(this.dialog)
@@ -146,6 +160,7 @@ export class DialogPortal {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'dialog-overlay',
+    '(click)': 'click($event)',
     '[class]': 'hostClassName()',
     '[style.display]': "dialogRoot.snapshot().mounted ? null : 'none'",
     '[attr.data-state]': "dialogRoot.snapshot().open ? 'open' : 'closed'",
@@ -163,17 +178,15 @@ export class DialogOverlay implements AfterViewInit, OnDestroy {
     this.dialogRoot.dialog.setOverlayElement(value?.nativeElement ?? null)
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   ngOnDestroy() {
     this.dialogRoot.dialog.setOverlayElement(null)
   }
 
-  @HostListener('click', ['$event'])
   click(event: MouseEvent) {
-    if (event.target === event.currentTarget) {
-      this.dialogRoot.dialog.dismiss.overlayPointer({ target: event.target, currentTarget: event.currentTarget, event })
+    if (this.dialogRoot.closeOnOverlayClick) {
+      this.dialogRoot.dialog.close({ reason: 'overlay-pointer', event })
     }
   }
 }
@@ -195,21 +208,17 @@ export class DialogOverlay implements AfterViewInit, OnDestroy {
     '[style.width]': 'dialogRoot.fullscreenWidth()',
     '[style.height]': 'dialogRoot.fullscreenHeight()',
   },
-  template: '@if (dialogRoot.snapshot().mounted) { <div #layer><ng-content /></div> }',
+  template: '@if (dialogRoot.snapshot().mounted) { <ng-content /> }',
 })
 export class DialogContent implements AfterViewInit, OnDestroy {
   protected readonly dialogRoot = inject(DialogRoot)
   private readonly elementRef = inject<ElementRef<HTMLDivElement>>(ElementRef)
-  protected readonly hostClassName = createHostClassName(() =>
-    `${dialogContentClassName} ${this.dialogRoot.fullscreenActive() ? 'left-0 top-0 translate-x-0 translate-y-0 rounded-none' : ''}`,
+  protected readonly hostClassName = createHostClassName(
+    () => `${dialogContentClassName} ${this.dialogRoot.fullscreenActive() ? 'rounded-none' : ''}`,
   )
 
-  @ViewChild('layer', { read: ElementRef })
-  set layerElement(value: ElementRef<HTMLDivElement> | undefined) {
-    this.dialogRoot.dialog.setLayerElement(value?.nativeElement ?? null)
-  }
-
   ngAfterViewInit() {
+    this.dialogRoot.dialog.setLayerElement(this.elementRef.nativeElement)
   }
 
   ngOnDestroy() {
@@ -218,12 +227,8 @@ export class DialogContent implements AfterViewInit, OnDestroy {
 
   @HostListener('keydown', ['$event'])
   keydown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      this.dialogRoot.dialog.dismiss.escapeKey({
-        target: event.target,
-        currentTarget: event.currentTarget,
-        event,
-      })
+    if (event.key === 'Escape' && this.dialogRoot.closeOnEscape) {
+      this.dialogRoot.dialog.close({ reason: 'escape-key', event })
     }
   }
 }
@@ -289,11 +294,13 @@ export class DialogClose implements AfterContentInit, AfterViewInit {
   private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef)
   protected readonly hasLabel = signal(false)
   @Input() iconOnly: boolean | string = false
-  protected readonly iconOnlyValue = computed(() =>
-    this.iconOnly === true || this.iconOnly === '' || this.iconOnly === 'true',
+  protected readonly iconOnlyValue = computed(
+    () => this.iconOnly === true || this.iconOnly === '' || this.iconOnly === 'true',
   )
   protected readonly className = computed(() =>
-    this.iconOnlyValue() ? dialogIconCloseClassName : `${buttonClassName()} ${dialogCloseClassName}`,
+    this.iconOnlyValue()
+      ? dialogIconCloseClassName
+      : `${buttonClassName()} ${dialogCloseClassName}`,
   )
 
   ngAfterViewInit() {
@@ -318,15 +325,19 @@ export class DialogClose implements AfterContentInit, AfterViewInit {
   selector: 'button[dialogFullscreenToggle]',
   standalone: true,
   imports: [ExpandIcon, ShrinkIcon],
-  host: { type: 'button', 'data-slot': 'dialog-fullscreen-toggle', class: `${dialogIconCloseClassName} right-12` },
-  template: '@if (dialogRoot.fullscreenActive()) { <svg shrinkIcon></svg> } @else { <svg expandIcon></svg> }',
+  host: { type: 'button', 'data-slot': 'dialog-fullscreen-toggle', '[class]': 'hostClass' },
+  template:
+    '@if (dialogRoot.fullscreenActive()) { <svg shrinkIcon class="size-4"></svg> } @else { <svg expandIcon class="size-4"></svg> }',
 })
 export class DialogFullscreenToggle {
   protected readonly dialogRoot = inject(DialogRoot)
+  protected readonly hostClass = `${dialogIconCloseClassName}`
 
   @HostListener('document:fullscreenchange')
   fullscreenChanged() {
-    this.dialogRoot.fullscreenChange.emit(document.fullscreenElement !== null)
+    const active = document.fullscreenElement !== null
+    this.dialogRoot.fullscreenActive.set(active)
+    this.dialogRoot.fullscreenChange.emit(active)
   }
 
   @HostListener('click')
@@ -336,22 +347,30 @@ export class DialogFullscreenToggle {
     const mode = setting === true ? 'viewport' : setting.mode
     if (mode === 'screen') {
       const element = document.getElementById(this.dialogRoot.contentId)
-      if (element && document.fullscreenElement !== element) { try { await element.requestFullscreen() } catch { this.dialogRoot.fullscreenActive.set(true); this.dialogRoot.fullscreenChange.emit(true); return } }
-      else if (document.fullscreenElement) await document.exitFullscreen()
+      if (element && document.fullscreenElement !== element) {
+        try {
+          await element.requestFullscreen()
+        } catch {
+          this.dialogRoot.fullscreenActive.set(true)
+          this.dialogRoot.fullscreenChange.emit(true)
+          return
+        }
+      } else if (document.fullscreenElement) await document.exitFullscreen()
     }
-    const next = mode === 'screen' ? document.fullscreenElement !== null : !this.dialogRoot.fullscreenActive()
+    const next =
+      mode === 'screen' ? document.fullscreenElement !== null : !this.dialogRoot.fullscreenActive()
     this.dialogRoot.fullscreenActive.set(next)
     this.dialogRoot.fullscreenChange.emit(next)
   }
 }
 
-
-
-
-
-
-
-
-
-
-
+@Component({
+  selector: 'div[dialogActions]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'dialog-actions' },
+  template: '<ng-content />',
+})
+export class DialogActions {
+  protected readonly hostClassName = createHostClassName(dialogActionsClassName)
+}

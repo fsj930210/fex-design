@@ -14,10 +14,10 @@ import { defaultRect, rectToStyle } from '@fex-design/core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex-design/core/interactions/types'
 
 @Directive({
-  selector: '[fexResize]',
+  selector: 'div[resize]',
   standalone: true,
 })
-export class FexResizeDirective implements OnInit, OnDestroy {
+export class Resize implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private cleanupWindow: (() => void) | undefined
   private unsubscribe: (() => void) | undefined
@@ -37,6 +37,7 @@ export class FexResizeDirective implements OnInit, OnDestroy {
   @Input() bounds?: 'viewport' | 'parent' | HTMLElement | false
   @Input() disabled = false
   @Input() applyStyle = true
+  @Input() resizeTarget?: HTMLElement | null
   @Output() resize = new EventEmitter<Rect>()
   @Output() resizeEnd = new EventEmitter<Rect>()
 
@@ -81,6 +82,7 @@ export class FexResizeDirective implements OnInit, OnDestroy {
   }
 
   start(event: PointerEvent, explicitEdge?: ResizeEdge) {
+    this.controller.setTarget(this.resizeTarget ?? this.elementRef.nativeElement)
     this.updateController()
     const edge =
       explicitEdge ?? getResizeEdge(event.target, this.elementRef.nativeElement) ?? this.edge
@@ -112,11 +114,11 @@ export class FexResizeDirective implements OnInit, OnDestroy {
 }
 
 @Directive({
-  selector: '[fexResizeHandle]',
+  selector: 'div[resizeHandle]',
   standalone: true,
 })
-export class FexResizeHandleDirective {
-  @Input({ alias: 'fexResizeHandle', required: true }) edge!: ResizeEdge
+export class ResizeHandle {
+  @Input({ alias: 'resizeHandle', required: true }) edge!: ResizeEdge
 
   @HostBinding('attr.data-resize-edge')
   protected get dataResizeEdge() {

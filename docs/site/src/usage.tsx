@@ -32,20 +32,52 @@ export function Usage(props: {
     if (props.slug === 'dialog' && props.framework !== 'react') {
       const snippets = {
         vue: {
-          ui: { import: "import { ref } from 'vue'\nimport { Button } from '@fex-design/vue/ui/button'\nimport { Dialog } from '@fex-design/vue/ui/dialog'", code: `const open = ref(false)\n<template>\n  <Button @click="open = true">打开 Dialog</Button>\n  <Dialog v-model:open="open" title="基础 Dialog">\n    这是 Dialog 内容。\n  </Dialog>\n</template>` },
-          primitive: { import: "import { ref } from 'vue'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/vue/primitive/dialog'", code: `<DialogRoot v-model:open="open">\n  <DialogPortal><DialogOverlay /><DialogContent>\n    <DialogHeader><DialogTitle>基础 Dialog</DialogTitle><DialogClose /></DialogHeader>\n    <DialogBody>这是 Dialog 内容。</DialogBody>\n    <DialogFooter><DialogClose>取消</DialogClose><button>确定</button></DialogFooter>\n  </DialogContent></DialogPortal>\n</DialogRoot>` },
+          ui: {
+            import:
+              "import { ref } from 'vue'\nimport { Button } from '@fex-design/vue/ui/button'\nimport { Dialog } from '@fex-design/vue/ui/dialog'",
+            code: `const open = ref(false)\n<template>\n  <Button @click="open = true">打开 Dialog</Button>\n  <Dialog v-model:open="open" title="基础 Dialog">\n    这是 Dialog 内容。\n  </Dialog>\n</template>`,
+          },
+          primitive: {
+            import:
+              "import { ref } from 'vue'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/vue/primitive/dialog'",
+            code: `<DialogRoot v-model:open="open">\n  <DialogPortal><DialogOverlay /><DialogContent>\n    <DialogHeader><DialogTitle>基础 Dialog</DialogTitle><DialogClose /></DialogHeader>\n    <DialogBody>这是 Dialog 内容。</DialogBody>\n    <DialogFooter><DialogClose>取消</DialogClose><button>确定</button></DialogFooter>\n  </DialogContent></DialogPortal>\n</DialogRoot>`,
+          },
         },
         solid: {
-          ui: { import: "import { createSignal } from 'solid-js'\nimport { Button } from '@fex-design/solid/ui/button'\nimport { Dialog } from '@fex-design/solid/ui/dialog'", code: `const [open, setOpen] = createSignal(false)\n<Button onClick={() => setOpen(true)}>打开 Dialog</Button>\n<Dialog open={open()} onOpenChange={setOpen} title="基础 Dialog">这是 Dialog 内容。</Dialog>` },
-          primitive: { import: "import { createSignal } from 'solid-js'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/solid/primitive/dialog'", code: `const [open, setOpen] = createSignal(false)\n<DialogRoot open={open()} onOpenChange={setOpen}>...</DialogRoot>` },
+          ui: {
+            import:
+              "import { createSignal } from 'solid-js'\nimport { Button } from '@fex-design/solid/ui/button'\nimport { Dialog } from '@fex-design/solid/ui/dialog'",
+            code: `const [open, setOpen] = createSignal(false)\n<Button onClick={() => setOpen(true)}>打开 Dialog</Button>\n<Dialog open={open()} onOpenChange={setOpen} title="基础 Dialog">这是 Dialog 内容。</Dialog>`,
+          },
+          primitive: {
+            import:
+              "import { createSignal } from 'solid-js'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/solid/primitive/dialog'",
+            code: `const [open, setOpen] = createSignal(false)\n<DialogRoot open={open()} onOpenChange={setOpen}>...</DialogRoot>`,
+          },
         },
         svelte: {
-          ui: { import: "import { Button } from '@fex-design/svelte/ui/button'\nimport { Dialog } from '@fex-design/svelte/ui/dialog'", code: `let open = $state(false)\n<Button onclick={() => open = true}>打开 Dialog</Button>\n<Dialog bind:open title="基础 Dialog">这是 Dialog 内容。</Dialog>` },
-          primitive: { import: "import { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/svelte/primitive/dialog'", code: `let open = $state(false)\n<DialogRoot {open} onOpenChange={(value) => open = value}>...</DialogRoot>` },
+          ui: {
+            import:
+              "import { Button } from '@fex-design/svelte/ui/button'\nimport { Dialog } from '@fex-design/svelte/ui/dialog'",
+            code: `let open = $state(false)\n<Button onclick={() => open = true}>打开 Dialog</Button>\n<Dialog bind:open title="基础 Dialog">这是 Dialog 内容。</Dialog>`,
+          },
+          primitive: {
+            import:
+              "import { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/svelte/primitive/dialog'",
+            code: `let open = $state(false)\n<DialogRoot {open} onOpenChange={(value) => open = value}>...</DialogRoot>`,
+          },
         },
         angular: {
-          ui: { import: "import { Component, signal } from '@angular/core'\nimport { Button } from '@fex-design/angular/ui/button'\nimport { Dialog } from '@fex-design/angular/ui/dialog'", code: `open = signal(false)\n<button button (click)="open.set(true)">打开 Dialog</button>\n<div dialog [open]="open()" (openChange)="open.set($event)">...</div>` },
-          primitive: { import: "import { Component, signal } from '@angular/core'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/angular/primitive/dialog'", code: `open = signal(false)\n<div dialogRoot [open]="open()" (openChange)="open.set($event)">...</div>` },
+          ui: {
+            import:
+              "import { Component, signal } from '@angular/core'\nimport { Button } from '@fex-design/angular/ui/button'\nimport { Dialog } from '@fex-design/angular/ui/dialog'",
+            code: `open = signal(false)\n<button button (click)="open.set(true)">打开 Dialog</button>\n<div dialog [open]="open()" (openChange)="open.set($event)">...</div>`,
+          },
+          primitive: {
+            import:
+              "import { Component, signal } from '@angular/core'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/angular/primitive/dialog'",
+            code: `open = signal(false)\n<div dialogRoot [open]="open()" (openChange)="open.set($event)">...</div>`,
+          },
         },
       } as const
       return snippets[props.framework as keyof typeof snippets][l]

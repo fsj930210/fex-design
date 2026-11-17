@@ -9,4 +9,3 @@ export function DialogHeader({ className, ...props }: DialogHeaderProps) {
     <div {...props} data-slot="dialog-header" className={cn(dialogHeaderClassName, className)} />
   )
 }
-

@@ -131,6 +131,7 @@
     "./icons/search": "./src/icons/search.tsx",
     "./icons/loading": "./src/icons/loading.tsx",
     "./icons/minus": "./src/icons/minus.tsx",
+    "./icons/square": "./src/icons/square.tsx",
     "./icons/more": "./src/icons/more.tsx",
     "./icons/plus": "./src/icons/plus.tsx",
     "./icons/star": "./src/icons/star.tsx",
@@ -189,4 +190,3 @@
     "react-dom": "^19.0.0"
   }
 }
-

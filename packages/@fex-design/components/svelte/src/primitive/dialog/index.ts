@@ -9,6 +9,9 @@ export { default as DialogBody } from './dialog-body.svelte'
 export { default as DialogFooter } from './dialog-footer.svelte'
 export { default as DialogClose } from './dialog-close.svelte'
 export { default as DialogFullscreenToggle } from './dialog-fullscreen-toggle.svelte'
-export type { DialogChangeInfo, DialogOptions } from '@fex-design/core/dialog/create-dialog-controller'
+export type {
+  DialogChangeInfo,
+  DialogOptions,
+} from '@fex-design/core/dialog/create-dialog-controller'
 
-
+export { default as DialogActions } from './dialog-actions.svelte'

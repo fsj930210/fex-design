@@ -1,0 +1,28 @@
+<button button (click)="open=true">打开确认弹窗</button>
+<p role="status">{{ result }}</p>
+<div
+  dialog
+  [closeOnEscape]="false"
+  [closeOnOverlayClick]="false"
+  [open]="open"
+  (openChange)="result = $event[0] ? result : '已取消'; open=$event[0]"
+>
+  <div dialogPortal>
+    <div dialogOverlay></div>
+    <div dialogContent [class]="messageClassName">
+      <div dialogHeader class="border-0">
+        <h2 dialogTitle><span class="text-danger">确认删除</span></h2>
+      </div>
+      <div dialogActions><button dialogClose iconOnly></button></div>
+      <div dialogBody>
+        <p>删除后无法恢复，<strong>请确认是否继续。</strong></p>
+      </div>
+      <div dialogFooter class="border-0">
+        <button dialogClose>取消</button
+        ><button button variant="solid" color="primary" (click)="result='已确认';open=false">
+          确定
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

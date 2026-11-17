@@ -29,16 +29,10 @@ const initialTheme =
   query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
 applyTheme(initialTheme)
 
-const exampleModules = {
-  ...import.meta.glob(
-    '../../../../packages/@fex-design/components/solid/src/primitive/*/examples/*.tsx',
-    { eager: false },
-  ),
-  ...import.meta.glob(
-    '../../../../packages/@fex-design/components/solid/src/ui/*/examples/*.tsx',
-    { eager: false },
-  ),
-} as Record<string, () => Promise<Record<string, () => unknown>>>
+const exampleModules = import.meta.glob([
+  '../../../../packages/@fex-design/components/solid/src/primitive/*/examples/*.tsx',
+  '../../../../packages/@fex-design/components/solid/src/ui/*/examples/*.tsx',
+]) as Record<string, () => Promise<Record<string, () => unknown>>>
 
 const moduleCache = new Map<string, Component>()
 
@@ -54,7 +48,6 @@ async function loadExample(
   demo: string,
 ): Promise<Component | undefined> {
   const cacheKey = `${layer}/${component}/${demo}`
-  if (moduleCache.has(cacheKey)) return moduleCache.get(cacheKey)
   const loader = findLoader(layer, component, demo)
   if (!loader) return undefined
   const mod = await loader()

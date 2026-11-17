@@ -12,4 +12,3 @@ export function DialogBody(props: DialogBodyProps) {
     </div>
   )
 }
-

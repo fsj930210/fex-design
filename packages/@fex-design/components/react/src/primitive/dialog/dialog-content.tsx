@@ -21,7 +21,8 @@ export interface DialogContentProps extends ComponentProps<'div'> {
 }
 
 export function DialogContent({ ref, className, onKeyDown, ...props }: DialogContentProps) {
-  const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } = useDialog('DialogContent')
+  const { contentId, dialog, fullscreen, fullscreenActive, modal, snapshot, titleId } =
+    useDialog('DialogContent')
   const setContent = useMemoizedFn((element: HTMLDivElement | null) => {
     dialog.setLayerElement(element)
     if (typeof ref === 'function') ref(element)
@@ -48,23 +49,28 @@ export function DialogContent({ ref, className, onKeyDown, ...props }: DialogCon
         ...props.style,
         ...(fullscreenActive && fullscreen
           ? {
-              width: typeof fullscreen === 'object' && fullscreen.width !== undefined ? typeof fullscreen.width === 'number' ? `${fullscreen.width}px` : fullscreen.width : '100vw',
-              height: typeof fullscreen === 'object' && fullscreen.height !== undefined ? typeof fullscreen.height === 'number' ? `${fullscreen.height}px` : fullscreen.height : '100vh',
+              width:
+                typeof fullscreen === 'object' && fullscreen.width !== undefined
+                  ? typeof fullscreen.width === 'number'
+                    ? `${fullscreen.width}px`
+                    : fullscreen.width
+                  : '100vw',
+              height:
+                typeof fullscreen === 'object' && fullscreen.height !== undefined
+                  ? typeof fullscreen.height === 'number'
+                    ? `${fullscreen.height}px`
+                    : fullscreen.height
+                  : '100vh',
             }
           : {}),
       }}
-      className={cn(
-        dialogContentClassName,
-        fullscreenActive && 'left-0 top-0 translate-x-0 translate-y-0 rounded-none',
-        className,
-      )}
+      className={cn(dialogContentClassName, fullscreenActive && 'rounded-none', className)}
       onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
         onKeyDown?.(event)
         if (!event.defaultPrevented && event.key === 'Escape') {
-          dialog.dismiss.escapeKey({ ...toEventInfo(event), event: event.nativeEvent })
+          dialog.close({ reason: 'escape-key', event })
         }
       }}
     />
   )
 }
-

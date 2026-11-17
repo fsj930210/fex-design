@@ -151,6 +151,7 @@
     "./icons/loading": "./src/icons/loading.ts",
     "./icon/loading": "./src/icons/loading.ts",
     "./icons/minus": "./src/icons/minus.ts",
+    "./icons/square": "./src/icons/square.ts",
     "./icon/minus": "./src/icons/minus.ts",
     "./icons/more": "./src/icons/more.ts",
     "./icon/more": "./src/icons/more.ts",

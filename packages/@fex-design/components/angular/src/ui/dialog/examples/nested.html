@@ -1,0 +1,16 @@
+<button button (click)="open=true">打开外层弹窗</button>
+<div dialogUi [open]="open" (openChange)="setOpen($event)" [title]="'外层弹窗'" [hasFooter]="true">
+  <p>外层内容会保留。</p>
+  <button button (click)="innerOpen=true">打开内层弹窗</button>
+  <div
+    dialogUi
+    [open]="innerOpen"
+    (openChange)="setOpen($event, true)"
+    [title]="'内层弹窗'"
+    [hasFooter]="true"
+  >
+    <p>关闭此弹窗后，外层弹窗仍然保留。</p>
+    <div dialogFooter><button button (click)="innerOpen=false">关闭内层</button></div>
+  </div>
+  <div dialogFooter><button button (click)="open=false">关闭外层</button></div>
+</div>

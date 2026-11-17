@@ -9,4 +9,3 @@
 <div data-slot="dialog-footer" class={cn(dialogFooterClassName, className)}>
   {@render children?.()}
 </div>
-

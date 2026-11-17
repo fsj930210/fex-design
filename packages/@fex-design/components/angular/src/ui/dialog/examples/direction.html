@@ -1,1 +1,11 @@
-<div dialogUi [title]="'方向'"><button button dialogTrigger>打开 Dialog</button><p>Dialog direction 场景。</p></div>
+<button button (click)="direction='ltr';open=true">打开 LTR</button
+><button button (click)="direction='rtl';open=true">打开 RTL</button>
+<div
+  dialogUi
+  [title]="'书写方向'"
+  [open]="open"
+  (openChange)="open = $any($event)[0]"
+  [contentStyle]="{ direction: direction }"
+>
+  <p>English: read from left to right. العربية: تُقرأ من اليمين إلى اليسار.</p>
+</div>

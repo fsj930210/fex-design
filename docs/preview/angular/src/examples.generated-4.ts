@@ -2,34 +2,6 @@
 import type { Type } from '@angular/core'
 
 export const examples: Record<string, () => Promise<Type<unknown>>> = {
-  'ui/tree/dnd': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/dnd').then(
-      (module) => module.TreeDndExample,
-    ),
-  'ui/tree/field-names': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/field-names').then(
-      (module) => module.TreeFieldNamesExample,
-    ),
-  'ui/tree/instance': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/instance').then(
-      (module) => module.TreeInstanceExample,
-    ),
-  'ui/tree/keyboard': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/keyboard').then(
-      (module) => module.TreeKeyboardExample,
-    ),
-  'ui/tree/logic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/logic').then(
-      (module) => module.TreeLogicExample,
-    ),
-  'ui/tree/scroll-to': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/scroll-to').then(
-      (module) => module.TreeScrollToExample,
-    ),
-  'ui/tree/search': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/search').then(
-      (module) => module.TreeSearchExample,
-    ),
   'ui/tree/selection': () =>
     import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/selection').then(
       (module) => module.TreeSelectionExample,

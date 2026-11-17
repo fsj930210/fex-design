@@ -1,1 +1,7 @@
-<div dialogUi [title]="'全屏'" [fullscreen]="{ mode: mode }"><button button type="button" (click)="mode = mode === 'viewport' ? 'screen' : 'viewport'">切换为 {{ mode === 'viewport' ? '浏览器全屏' : '视口全屏' }}</button><button button dialogTrigger>打开 Dialog</button><p>全屏内容。</p></div>
+<button button type="button" (click)="mode = mode === 'viewport' ? 'screen' : 'viewport'">
+  切换为 {{ mode === 'viewport' ? '浏览器全屏' : '视口全屏' }}
+</button>
+<div dialogUi [title]="'全屏'" [fullscreen]="{ mode: mode }">
+  <button button dialogTrigger>打开 Dialog</button>
+  <p>全屏内容。</p>
+</div>

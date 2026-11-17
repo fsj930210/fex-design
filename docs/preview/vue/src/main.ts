@@ -25,9 +25,10 @@ const initialTheme =
   query.get('theme') ?? (document.documentElement.classList.contains('light') ? 'light' : 'dark')
 applyTheme(initialTheme)
 
-const modules = import.meta.glob(
-  '../../../../packages/@fex-design/components/vue/src/{primitive,ui}/*/examples/*.vue',
-) as Record<string, () => Promise<{ default: Component }>>
+const modules = import.meta.glob([
+  '../../../../packages/@fex-design/components/vue/src/primitive/*/examples/*.vue',
+  '../../../../packages/@fex-design/components/vue/src/ui/*/examples/*.vue',
+]) as Record<string, () => Promise<{ default: Component }>>
 
 const moduleCache = new Map<string, Component>()
 

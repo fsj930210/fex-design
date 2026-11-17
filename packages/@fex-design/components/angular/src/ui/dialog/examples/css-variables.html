@@ -1,1 +1,8 @@
-<div dialogUi [title]="'CSS Variables'"><button button dialogTrigger>打开 Dialog</button><p>Dialog css-variables 场景。</p></div>
+<div
+  dialogUi
+  [title]="'CSS Variables'"
+  [contentStyle]="{ '--dialog-header-background': 'var(--color-blue-100)', '--dialog-content-background': 'var(--color-blue-50)', '--dialog-footer-background': 'var(--color-indigo-100)' }"
+>
+  <button button dialogTrigger>打开 Dialog</button>
+  <p>通过 CSS 变量分别设置标题区、正文和页脚的背景色。</p>
+</div>

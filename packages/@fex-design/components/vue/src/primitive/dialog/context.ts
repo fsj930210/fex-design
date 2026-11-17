@@ -5,7 +5,7 @@ export interface DialogContextValue {
   contentId: string
   dialog: DialogController
   modal: boolean
-  fullscreen: DialogOptions['fullscreen']
+  fullscreen: Ref<DialogOptions['fullscreen']>
   fullscreenActive: Ref<boolean>
   onFullscreenChange?: DialogOptions['onFullscreenChange']
   snapshot: ShallowRef<DialogSnapshot>
@@ -24,4 +24,3 @@ export function useDialogContext(component: string) {
 }
 
 export type DialogRootProps = DialogOptions
-

@@ -86,6 +86,11 @@ export function createPresence(options: PresenceOptions = {}): Presence {
   }
 
   function sync() {
+    // Adapter option updates during mounting must not skip the pending opening frame.
+    // The existing timer owns the opening -> open transition until open changes.
+    if ((currentOptions.open ?? false) && store.getSnapshot().phase === 'opening' && openTimer) {
+      return
+    }
     presenceVersion += 1
     const version = presenceVersion
     const snapshot = store.getSnapshot()

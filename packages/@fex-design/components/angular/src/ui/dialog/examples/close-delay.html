@@ -1,0 +1,19 @@
+<div class="flex flex-wrap justify-center gap-2">
+  <button button (click)="show(0)">打开（0ms）</button
+  ><button button (click)="show(200)">打开（200ms）</button
+  ><button button (click)="show(1200)">打开（1200ms）</button>
+</div>
+<p role="status">open：{{open}}；closeDelay：{{delay}}ms；最近操作：{{feedback}}</p>
+<div
+  dialogUi
+  [open]="open"
+  (openChange)="onOpenChange($event)"
+  [closeDelay]="delay"
+  title="关闭延迟"
+  [contentStyle]="style"
+  [hasFooter]="true"
+>
+  <p>点击右上角关闭，或通过按钮设置 open=false，对比关闭过渡。</p>
+  <p>open 会立即变为 false，{{delay}}ms 后结束关闭阶段。</p>
+  <div dialogFooter><button button (click)="close()">设置 open=false</button></div>
+</div>

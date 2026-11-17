@@ -4,10 +4,10 @@ import { createMoveController } from '@fex-design/core/interactions/create-move-
 import type { InteractionAxis, Point } from '@fex-design/core/interactions/types'
 
 @Directive({
-  selector: '[fexMove]',
+  selector: 'div[move]',
   standalone: true,
 })
-export class FexMoveDirective implements OnInit, OnDestroy {
+export class Move implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private cleanupWindow: (() => void) | undefined
   private unsubscribe: (() => void) | undefined
@@ -22,12 +22,14 @@ export class FexMoveDirective implements OnInit, OnDestroy {
   @Input() bounds?: 'viewport' | 'parent' | HTMLElement | false
   @Input() moveHandle?: HTMLElement | null
   @Input() disabled = false
+  @Input() moveTarget?: HTMLElement | null
+  @Input() applyStyle = true
   @Output() move = new EventEmitter<Point>()
   @Output() moveEnd = new EventEmitter<Point>()
 
   ngOnInit() {
     const element = this.elementRef.nativeElement
-    this.controller.setTarget(element)
+    this.controller.setTarget(this.moveTarget ?? element)
     this.controller.updateOptions({
       position: this.position,
       onMove: (position) => this.move.emit(position),
@@ -55,6 +57,14 @@ export class FexMoveDirective implements OnInit, OnDestroy {
     ) {
       return
     }
+    this.controller.setTarget(this.moveTarget ?? this.elementRef.nativeElement)
+    this.controller.updateOptions({
+      position: this.position,
+      bounds: this.bounds,
+      axis: this.axis,
+      onMove: (point) => this.move.emit(point),
+      onMoveEnd: (point) => this.moveEnd.emit(point),
+    })
     if (this.disabled || !this.controller.start(toInput(event))) {
       return
     }
@@ -80,6 +90,7 @@ export class FexMoveDirective implements OnInit, OnDestroy {
   }
 
   private applySnapshot() {
+    if (!this.applyStyle) return
     const snapshot = this.controller.getSnapshot()
     const element = this.elementRef.nativeElement
     element.style.transform = `translate3d(${snapshot.position.x}px, ${snapshot.position.y}px, 0)`

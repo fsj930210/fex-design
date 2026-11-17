@@ -57,7 +57,8 @@ export function createMove(options: CreateMoveOptions = {}) {
   }
 
   function onPointerDown(event: PointerEvent) {
-    if (!controller.start(toInput(event))) {
+    bind(target(), handle())
+    if (options.disabled || !controller.start(toInput(event))) {
       return
     }
 

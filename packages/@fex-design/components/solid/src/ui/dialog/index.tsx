@@ -1,37 +1,113 @@
-import type { JSX, ParentProps } from 'solid-js'
-import { Button } from '../../primitive/button'
-import { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose, DialogFullscreenToggle } from '../../primitive/dialog'
+import { alert, confirm, destroyAll } from './static'
+import type { JSX, ParentProps, ComponentProps } from 'solid-js'
+import { Button } from '../button'
+import {
+  DialogRoot,
+  DialogPortal,
+  DialogOverlay,
+  DialogContent,
+  DialogHeader,
+  DialogActions,
+  DialogTitle,
+  DialogBody,
+  DialogFooter,
+  DialogClose,
+  DialogFullscreenToggle,
+} from '../../primitive/dialog'
 
 export interface DialogProps extends ParentProps {
   open?: boolean
+  modal?: boolean
   defaultOpen?: boolean
+  forceMount?: boolean
+  closeDelay?: number
+  closeOnEscape?: boolean
   title?: JSX.Element
+  actions?: JSX.Element
   header?: JSX.Element
   footer?: JSX.Element
-  closable?: boolean
+  closable?:
+    | boolean
+    | {
+        icon?: JSX.Element
+        disabled?: boolean
+        onClose?: JSX.EventHandler<HTMLButtonElement, MouseEvent>
+      }
+  overlay?: boolean
   closeOnOverlayClick?: boolean
   fullscreen?: boolean | { mode?: 'viewport' | 'screen' }
   classNames?: Record<string, string>
   styles?: Record<string, JSX.CSSProperties>
-  okText?: JSX.Element
-  cancelText?: JSX.Element
+  okBtnProps?: ComponentProps<typeof Button>
+  cancelBtnProps?: ComponentProps<typeof Button>
   onOpenChange?: (open: boolean, info: unknown) => void
 }
 
 export function Dialog(props: DialogProps) {
   return (
-    <DialogRoot open={props.open} defaultOpen={props.defaultOpen} fullscreen={props.fullscreen} closeOnOverlayClick={props.closeOnOverlayClick ?? false} onOpenChange={props.onOpenChange}>
+    <DialogRoot
+      modal={props.modal}
+      forceMount={props.forceMount}
+      closeDelay={props.closeDelay}
+      closeOnEscape={props.closeOnEscape}
+      open={props.open}
+      defaultOpen={props.defaultOpen}
+      fullscreen={props.fullscreen}
+      closeOnOverlayClick={props.closeOnOverlayClick ?? true}
+      onOpenChange={props.onOpenChange}
+    >
       <DialogPortal>
-        <DialogOverlay class={props.classNames?.overlay} style={props.styles?.overlay} />
+        {props.overlay !== false && (
+          <DialogOverlay class={props.classNames?.overlay} style={props.styles?.overlay} />
+        )}
         <DialogContent class={props.classNames?.content} style={props.styles?.content}>
           <DialogHeader class={props.classNames?.header} style={props.styles?.header}>
-            <DialogTitle class={props.classNames?.title} style={props.styles?.title}>{props.title}</DialogTitle>
+            <DialogTitle class={props.classNames?.title} style={props.styles?.title}>
+              {props.title}
+            </DialogTitle>
             {props.header}
-            {props.fullscreen && <DialogFullscreenToggle />}
-            {props.closable !== false && <DialogClose class={props.classNames?.close} style={props.styles?.close} />}
           </DialogHeader>
-          <DialogBody class={props.classNames?.body} style={props.styles?.body}>{props.children}</DialogBody>
-          {props.footer !== null && <DialogFooter class={props.classNames?.footer} style={props.styles?.footer}>{props.footer ?? <><DialogClose>{props.cancelText ?? '取消'}</DialogClose><Button variant="solid" color="primary">{props.okText ?? '确定'}</Button></>}</DialogFooter>}
+          <DialogActions>
+            {props.actions}
+            {props.fullscreen && <DialogFullscreenToggle />}
+            {props.closable !== false &&
+              !(typeof props.closable === 'object' && props.closable.icon === null) && (
+                <DialogClose
+                  icon={typeof props.closable === 'object' ? props.closable.icon : undefined}
+                  disabled={
+                    typeof props.closable === 'object' ? props.closable.disabled : undefined
+                  }
+                  onClick={typeof props.closable === 'object' ? props.closable.onClose : undefined}
+                  class={props.classNames?.close}
+                  style={props.styles?.close}
+                />
+              )}
+          </DialogActions>
+          <DialogBody class={props.classNames?.body} style={props.styles?.body}>
+            {props.children}
+          </DialogBody>
+          {props.footer !== null && (
+            <DialogFooter class={props.classNames?.footer} style={props.styles?.footer}>
+              {props.footer ?? (
+                <>
+                  <DialogClose>
+                    {(closeProps) => (
+                      <Button
+                        {...closeProps}
+                        {...props.cancelBtnProps}
+                        onClick={closeProps.onClick}
+                      >
+                        {props.cancelBtnProps?.children ?? '取消'}
+                      </Button>
+                    )}
+                  </DialogClose>
+                  <Button variant="solid" color="primary" {...props.okBtnProps}>
+                    {props.okBtnProps?.children ?? '确定'}
+                  </Button>
+                </>
+              )}
+            </DialogFooter>
+          )}
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
@@ -39,3 +115,10 @@ export function Dialog(props: DialogProps) {
 }
 
 export { DialogRoot, DialogTrigger } from '../../primitive/dialog'
+
+Dialog.alert = alert
+Dialog.confirm = confirm
+Dialog.destroyAll = destroyAll
+export { alert, confirm, destroyAll }
+export type { DialogStaticOptions } from './static'
+export type { DialogRequestHandle } from './static'

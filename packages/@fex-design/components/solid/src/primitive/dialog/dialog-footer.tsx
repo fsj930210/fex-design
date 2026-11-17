@@ -12,4 +12,3 @@ export function DialogFooter(props: DialogFooterProps) {
     </div>
   )
 }
-

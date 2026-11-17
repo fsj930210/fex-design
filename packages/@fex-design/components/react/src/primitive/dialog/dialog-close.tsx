@@ -1,4 +1,7 @@
-import { dialogCloseClassName, dialogIconCloseClassName } from '@fex-design/components-styles/dialog'
+import {
+  dialogCloseClassName,
+  dialogIconCloseClassName,
+} from '@fex-design/components-styles/dialog'
 import { cn } from '@fex-design/utils'
 import type { ComponentProps, MouseEvent, ReactNode, Ref } from 'react'
 import { useDialog } from './use-dialog'
@@ -43,4 +46,3 @@ export function DialogClose({
     <Button {...closeProps}>{children ?? icon ?? <XIcon aria-hidden="true" />}</Button>
   )
 }
-

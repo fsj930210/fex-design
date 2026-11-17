@@ -1,3 +1,29 @@
-<button button (click)="open=true">打开 Dialog</button><div dialog [open]="open" (openChange)="open=$event[0]"><div dialogPortal><div dialogOverlay></div><div dialogContent><div dialogHeader><h2 dialogTitle>Overlay</h2><button dialogClose iconOnly></button></div><div dialogBody>Dialog overlay 场景。</div><div dialogFooter><button dialogClose>取消</button><button button variant="solid" color="primary">确定</button></div></div></div></div>
-
-
+<button button (click)="modal = !modal">模态：{{ modal ? '是' : '否' }}</button
+><button button type="button" (click)="overlay = !overlay">
+  Overlay：{{ overlay ? '有' : '无' }}</button
+><button button type="button" (click)="closable = !closable">
+  Overlay 点击关闭：{{ closable ? '开' : '关' }}</button
+><button button (click)="open=true">打开 Dialog</button
+><span>状态：{{ open ? '打开' : '关闭' }}</span>
+<div
+  dialog
+  [modal]="modal"
+  [open]="open"
+  [closeOnOverlayClick]="closable"
+  (openChange)="onOpenChange($event)"
+>
+  <div dialogPortal>
+    @if (overlay) {
+    <div dialogOverlay></div>
+    }
+    <div dialogContent>
+      <div dialogHeader><h2 dialogTitle>Overlay</h2></div>
+      <div dialogActions><button dialogClose iconOnly></button></div>
+      <div dialogBody>测试 Overlay 显示和关闭行为。</div>
+      <div dialogFooter>
+        <button dialogClose>取消</button
+        ><button button variant="solid" color="primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

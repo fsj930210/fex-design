@@ -11,7 +11,8 @@ export interface ComponentUsage {
 export const usageSnippetsPart1: Record<string, ComponentUsage> = {
   dialog: {
     ui: {
-      import: "import { useState } from 'react'\nimport { Dialog } from '@fex-design/react/ui/dialog'",
+      import:
+        "import { useState } from 'react'\nimport { Dialog } from '@fex-design/react/ui/dialog'",
       code: `const [open, setOpen] = useState(false)
 <>
   <button onClick={() => setOpen(true)}>打开 Dialog</button>
@@ -21,7 +22,8 @@ export const usageSnippetsPart1: Record<string, ComponentUsage> = {
 </>`,
     },
     primitive: {
-      import: "import { useState } from 'react'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/react/primitive/dialog'",
+      import:
+        "import { useState } from 'react'\nimport { DialogRoot, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '@fex-design/react/primitive/dialog'",
       code: `const [open, setOpen] = useState(false)
 <>
   <button onClick={() => setOpen(true)}>打开 Dialog</button>

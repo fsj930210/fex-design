@@ -16,7 +16,8 @@ export function DialogTrigger({ children, ...props }: DialogTriggerProps) {
   const { contentId, dialog, snapshot, triggerRef } = useDialog('DialogTrigger')
   const onClick = useMemoizedFn((event: MouseEvent<HTMLButtonElement>) => {
     props.onClick?.(event)
-    if (!event.defaultPrevented) dialog.toggle({ reason: 'trigger-click', event: event.nativeEvent })
+    if (!event.defaultPrevented)
+      dialog.toggle({ reason: 'trigger-click', event: event.nativeEvent })
   })
   return children({
     ...props,
@@ -33,4 +34,3 @@ export function DialogTrigger({ children, ...props }: DialogTriggerProps) {
     onClick,
   })
 }
-

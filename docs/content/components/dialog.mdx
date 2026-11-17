@@ -25,13 +25,12 @@ Dialog 用于需要用户暂时停留在当前页面完成阅读、确认、编�
         ├── DialogOverlay
         └── DialogContent
             ├── DialogHeader
-            │   ├── DialogTitle
+            │   └── DialogTitle
+            ├── DialogActions
             │   ├── DialogFullscreenToggle
             │   └── DialogClose
             ├── DialogBody
             └── DialogFooter
-                ├── DialogClose
-                └── Button
     ```
   </ApiComposition>
 </ApiSection>
@@ -39,6 +38,6 @@ Dialog 用于需要用户暂时停留在当前页面完成阅读、确认、编�
 
 ## CSS Variables
 
-Dialog 支持 `--dialog-width`、`--dialog-height`、`--dialog-z-index`、`--dialog-motion-duration`、`--dialog-motion-ease` 和 `--overlay-background`。实例级变量适合单独调整一个 Dialog；全局主题变量适合统一调整默认外观。
+实例级变量适合单独调整一个 Dialog；全局主题变量适合统一调整默认外观。
 
 <CssVariables />

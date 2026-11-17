@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { dialogCloseClassName, dialogIconCloseClassName } from "@fex-design/components-styles/dialog";
+  import {
+    dialogCloseClassName,
+    dialogIconCloseClassName,
+  } from "@fex-design/components-styles/dialog";
   import { cn } from "@fex-design/utils";
   import { getContext } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
@@ -14,9 +17,11 @@
   interface DialogCloseProps extends Omit<HTMLButtonAttributes, "children"> {
     button?: Snippet<[DialogCloseRenderProps]>;
     children?: Snippet;
+    icon?: Snippet;
   }
   let {
     button,
+    icon,
     children,
     class: className,
     type = "button",
@@ -27,15 +32,26 @@
     ...rest,
     type,
     "data-slot": "dialog-close",
-    class: cn(children ? dialogCloseClassName : dialogIconCloseClassName, className),
-    onclick: (event: MouseEvent) =>
-      dialog.close({ reason: "manual", source: "close-button", event }),
+    class: cn(
+      children || button ? dialogCloseClassName : dialogIconCloseClassName,
+      className,
+    ),
+    onclick: (event: MouseEvent) => {
+      rest.onclick?.(
+        event as MouseEvent & { currentTarget: HTMLButtonElement },
+      );
+      if (!event.defaultPrevented)
+        dialog.close({ reason: "manual", source: "close-button", event });
+    },
   } satisfies DialogCloseRenderProps);
 </script>
 
 {#if button}
   {@render button(closeProps)}
 {:else}
-  <Button {...closeProps}>{#if children}{@render children()}{:else}<XIcon aria-hidden="true" />{/if}</Button>
+  <Button {...closeProps}
+    >{#if children}{@render children()}{:else if icon}{@render icon()}{:else}<XIcon
+        aria-hidden="true"
+      />{/if}</Button
+  >
 {/if}
-

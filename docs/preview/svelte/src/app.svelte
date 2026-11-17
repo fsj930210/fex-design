@@ -30,14 +30,10 @@
   }
   applyTheme(query.get("theme") ?? "dark");
 
-  const modules = {
-    ...import.meta.glob(
-      "../../../../packages/@fex-design/components/svelte/src/primitive/*/examples/*.svelte",
-    ),
-    ...import.meta.glob(
-      "../../../../packages/@fex-design/components/svelte/src/ui/*/examples/*.svelte",
-    ),
-  } as Record<string, () => Promise<{ default: any }>>;
+  const modules = import.meta.glob([
+    "../../../../packages/@fex-design/components/svelte/src/primitive/*/examples/*.svelte",
+    "../../../../packages/@fex-design/components/svelte/src/ui/*/examples/*.svelte",
+  ]) as Record<string, () => Promise<{ default: any }>>;
 
   const moduleCache = new Map<string, any>();
 
@@ -49,7 +45,6 @@
 
   async function loadExample(layer: string, component: string, demo: string) {
     const cacheKey = `${layer}/${component}/${demo}`;
-    if (moduleCache.has(cacheKey)) return moduleCache.get(cacheKey);
     const loader = findLoader(layer, component, demo);
     if (!loader) return undefined;
     const mod = await loader();

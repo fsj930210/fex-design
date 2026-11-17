@@ -44,8 +44,7 @@
   class={classList}
   onclick={(event) => {
     if (event.target === event.currentTarget) {
-      dialog.dismiss.overlayPointer({ target: event.target, currentTarget: event.currentTarget, event });
+      dialog.close({ reason: "overlay-pointer", event });
     }
   }}
 ></div>
-

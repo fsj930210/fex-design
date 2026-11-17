@@ -9,4 +9,3 @@
 <div data-slot="dialog-body" class={cn(dialogBodyClassName, className)}>
   {@render children?.()}
 </div>
-

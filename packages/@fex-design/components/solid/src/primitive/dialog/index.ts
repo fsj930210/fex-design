@@ -12,9 +12,14 @@ export { DialogTitle, type DialogTitleProps } from './dialog-title'
 export { DialogBody, type DialogBodyProps } from './dialog-body'
 export { DialogFooter, type DialogFooterProps } from './dialog-footer'
 export { DialogClose, type DialogCloseProps, type DialogCloseRenderProps } from './dialog-close'
-export { DialogFullscreenToggle, type DialogFullscreenToggleProps } from './dialog-fullscreen-toggle'
+export {
+  DialogFullscreenToggle,
+  type DialogFullscreenToggleProps,
+} from './dialog-fullscreen-toggle'
 export { useDialog } from './dialog-context'
-export type { DialogChangeInfo, DialogOptions } from '@fex-design/core/dialog/create-dialog-controller'
+export type {
+  DialogChangeInfo,
+  DialogOptions,
+} from '@fex-design/core/dialog/create-dialog-controller'
 
-
-
+export { DialogActions, type DialogActionsProps } from './dialog-actions'

@@ -6,6 +6,8 @@ export interface MoveActionOptions {
   axis?: InteractionAxis
   bounds?: 'viewport' | 'parent' | HTMLElement | false
   disabled?: boolean
+  handle?: HTMLElement
+  applyStyle?: boolean
   onMove?: (position: Point) => void
   onMoveEnd?: (position: Point) => void
 }
@@ -23,6 +25,7 @@ export function moveAction(node: HTMLElement, options: MoveActionOptions = {}) {
 
   controller.setTarget(node)
   function applySnapshot() {
+    if (currentOptions.applyStyle === false) return
     const snapshot = controller.getSnapshot()
     node.style.transform = `translate3d(${snapshot.position.x}px, ${snapshot.position.y}px, 0)`
     node.style.willChange = snapshot.moving ? 'transform' : ''
@@ -32,6 +35,12 @@ export function moveAction(node: HTMLElement, options: MoveActionOptions = {}) {
   const unsubscribe = controller.subscribe(applySnapshot)
 
   function onPointerDown(event: PointerEvent) {
+    if (
+      currentOptions.handle &&
+      event.target instanceof Node &&
+      !currentOptions.handle.contains(event.target)
+    )
+      return
     if (currentOptions.disabled || !controller.start(toInput(event))) {
       return
     }

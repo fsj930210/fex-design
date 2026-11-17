@@ -3,24 +3,27 @@ import {
   createDialogController,
   type DialogOptions,
 } from '@fex-design/core/dialog/create-dialog-controller'
-import { computed, onBeforeUnmount, provide, ref, shallowRef, watch } from 'vue'
+import { computed, onBeforeUnmount, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 import { dialogKey, type DialogRootProps } from './context'
 
 let nextDialogId = 1
 const props = withDefaults(defineProps<DialogRootProps>(), {
-  closeDelay: 140,
+  closeDelay: 200,
   defaultOpen: false,
   closeOnEscape: true,
-  closeOnOverlayClick: false,
+  closeOnOverlayClick: true,
   modal: true,
+  lazyMount: undefined,
+  destroyOnHidden: undefined,
 })
 const emit = defineEmits<{
+  'update:open': [open: boolean]
   openChange: [open: boolean, info: Parameters<NonNullable<DialogOptions['onOpenChange']>>[1]]
 }>()
 const controlled = computed(() => props.open !== undefined)
 const localOpen = ref(props.defaultOpen)
-const fullscreenActive = ref(props.fullscreen === true)
+const fullscreenActive = ref(false)
 const triggerElement = shallowRef<HTMLButtonElement | null>(null)
 const dialogId = nextDialogId++
 function createOptions(): DialogOptions {
@@ -30,6 +33,7 @@ function createOptions(): DialogOptions {
     onOpenChange(nextOpen, info) {
       if (!nextOpen) fullscreenActive.value = false
       if (!controlled.value) localOpen.value = nextOpen
+      emit('update:open', nextOpen)
       emit('openChange', nextOpen, info)
     },
   }
@@ -45,25 +49,36 @@ function syncOptions() {
 }
 watch(() => props.open, syncOptions, { immediate: true, flush: 'sync' })
 watch(
-  () => [props.defaultOpen, props.fullscreen, props.modal, props.closeDelay, props.closeOnEscape, props.closeOnOverlayClick],
+  () => [
+    props.defaultOpen,
+    props.fullscreen,
+    props.modal,
+    props.closeDelay,
+    props.closeOnEscape,
+    props.closeOnOverlayClick,
+  ],
   syncOptions,
   { flush: 'sync' },
 )
-provide(dialogKey, {
+const dialogContext = {
   contentId: `dialog-content-${dialogId}`,
   dialog,
   modal: props.modal,
-  fullscreen: props.fullscreen,
+  fullscreen: toRef(props, 'fullscreen'),
   fullscreenActive,
   onFullscreenChange: props.onFullscreenChange,
   snapshot,
   titleId: `dialog-title-${dialogId}`,
   triggerElement,
-})
+}
+provide(dialogKey, dialogContext)
+watch(
+  () => props.fullscreen,
+  () => {
+    syncOptions()
+  },
+  { deep: true },
+)
 onBeforeUnmount(() => dialog.destroy())
 </script>
 <template><slot /></template>
-
-
-
-

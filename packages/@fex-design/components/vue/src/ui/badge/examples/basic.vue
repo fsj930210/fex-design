@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Badge } from '@fex-design/vue/ui/badge'
-import { BadgeDot } from '@fex-design/vue/ui/badge'
+import { BadgeDot } from '@fex-design/vue/primitive/badge'
 </script>
 <template>
   <div class="flex flex-wrap items-center gap-6">

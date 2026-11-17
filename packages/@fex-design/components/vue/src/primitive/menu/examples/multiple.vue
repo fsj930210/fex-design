@@ -16,7 +16,7 @@ function toggle() {
       <Button @click="toggle">切换单选 / 多选</Button
       ><Button
         @click="
-          multiple = false
+          multiple = false;
           value = ['users']
         "
         >重置</Button

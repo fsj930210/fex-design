@@ -1,5 +1,5 @@
 import { Badge } from '@fex-design/solid/ui/badge'
-import { BadgeDot } from '@fex-design/solid/ui/badge'
+import { BadgeDot } from '@fex-design/solid/primitive/badge'
 export function Basic() {
   return (
     <div class="flex flex-wrap items-center gap-6">

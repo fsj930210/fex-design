@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Badge } from '@fex-design/vue/ui/badge'
-import { BadgeDot } from '@fex-design/vue/ui/badge'
+import { BadgeDot } from '@fex-design/vue/primitive/badge'
 const colors = ['primary', 'info', 'success', 'warning', 'danger'] as const
 </script>
 <template>

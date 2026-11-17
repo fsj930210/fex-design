@@ -162,7 +162,7 @@ function open(time: TimePickerController) {
             aria-label="清除时间范围"
             @pointerdown.stop.prevent
             @click.stop.prevent="
-              state.controller.clear()
+              state.controller.clear();
               controller.clear()
             "
           />

@@ -62,7 +62,7 @@ function fillAddress() {
               ><InputRoot :value="field.state.value" @change="(value) => field.handleChange(value)"
                 ><InputControl
                   @blur="
-                    field.handleBlur()
+                    field.handleBlur();
                     log = '收件地址已失焦：' + (field.state.value || '空')
                   "
                   :placeholder="

@@ -20,13 +20,13 @@ const direction = ref<'ltr' | 'rtl'>('ltr')
 <template>
   <Button
     @click="
-      direction = 'ltr';
+      direction = 'ltr'
       open = true
     "
     >打开 LTR</Button
   ><Button
     @click="
-      direction = 'rtl';
+      direction = 'rtl'
       open = true
     "
     >打开 RTL</Button

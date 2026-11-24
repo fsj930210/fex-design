@@ -13,6 +13,21 @@
   },
   "props": [
     {
+      "name": "onOpenAutoFocus",
+      "type": "(event: PopoverOpenAutoFocusEvent) => void",
+      "description": "浮层打开且内容可交互时调用；可读取触发原因及原始事件，阻止默认聚焦并自行处理焦点。Vue 和 Angular 使用 openAutoFocus 事件。"
+    },
+    {
+      "name": "onCloseAutoFocus",
+      "type": "(event: PopoverCloseAutoFocusEvent) => void",
+      "description": "关闭时原本会将焦点还给触发器的情况下调用；可阻止默认恢复并自行处理。Vue 和 Angular 使用 closeAutoFocus 事件。"
+    },
+    {
+      "name": "isFocusWithin",
+      "type": "(element: Element, content: HTMLElement) => boolean",
+      "description": "将通过 Portal 渲染的关联元素计入聚焦触发的关闭判断和焦点恢复边界。"
+    },
+    {
       "name": "open",
       "type": "boolean",
       "description": "受控打开状态。"
@@ -253,8 +268,29 @@
             }
           ],
           "description": "开关请求。"
+        },
+        {
+          "name": "openAutoFocus",
+          "description": "内容打开并可交互时触发；可取消默认聚焦。",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "PopoverOpenAutoFocusEvent"
+            }
+          ]
+        },
+        {
+          "name": "closeAutoFocus",
+          "description": "将焦点恢复到触发器前触发；可取消默认恢复。",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "PopoverCloseAutoFocusEvent"
+            }
+          ]
         }
-      ]
+      ],
+      "omitProps": ["onOpenAutoFocus", "onCloseAutoFocus"]
     },
     "angular": {
       "events": [
@@ -277,8 +313,29 @@
             }
           ],
           "description": "开关原因。"
+        },
+        {
+          "name": "openAutoFocus",
+          "description": "内容打开并可交互时触发；可取消默认聚焦。",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "PopoverOpenAutoFocusEvent"
+            }
+          ]
+        },
+        {
+          "name": "closeAutoFocus",
+          "description": "将焦点恢复到触发器前触发；可取消默认恢复。",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "PopoverCloseAutoFocusEvent"
+            }
+          ]
         }
-      ]
+      ],
+      "omitProps": ["onOpenAutoFocus", "onCloseAutoFocus"]
     }
   },
   "components": [

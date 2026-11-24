@@ -162,6 +162,7 @@ export function createMenuController(initial: MenuOptions = {}): MenuController 
       )
       if (!snapshot.multiple && snapshot.layout !== 'inline')
         controller.closeAll({ ...info, reason: 'activate' })
+      options.onActivated?.(info)
       return true
     },
   }

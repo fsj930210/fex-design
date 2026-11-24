@@ -59,10 +59,6 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/ColorPicker'), 'ColorPickerPage'),
   },
   {
-    path: '/dialog',
-    element: createLazyRouteElement(() => import('../../pages/Dialog'), 'DialogPage'),
-  },
-  {
     path: '/drawer',
     element: createLazyRouteElement(() => import('../../pages/Drawer'), 'DrawerPage'),
   },

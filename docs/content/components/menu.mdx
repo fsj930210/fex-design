@@ -51,7 +51,9 @@ Menu 用于展示一组导航入口或分层操作。需要在表单中选择值
         └── MenuSeparator
     ```
 
-    `SubMenu` 建立嵌套关系；触发器和内容分别接收自身的原生属性与样式。`useMenu` 可独立连接自定义 DOM。
+    `SubMenu` 建立嵌套关系；触发器和内容分别接收自身的原生属性与样式。`useMenu` 可独立连接自定义 DOM。其 `dom.focusItem('first' | 'last', parent?)` 聚焦指定层级中第一个或最后一个可用菜单项，成功时返回 `true`；未指定 `parent` 时使用根菜单。
+
+    `activate` / `onActivate` 在叶子项激活前触发，可以取消；成功完成激活后的 `activated` / `onActivated` 用于组合其他行为，例如关闭外围浮层。
 
   </ApiComposition>
 </ApiSection>

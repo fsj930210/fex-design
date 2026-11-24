@@ -1,26 +1,43 @@
 <script setup lang="ts">
+import { computed, shallowRef, useAttrs, watch } from 'vue'
+import { menuContentClassName, menuRootClassName } from '@fex-design/components-styles/menu'
 import { popoverMenuContentClassName } from '@fex-design/components-styles/popover'
-import { cn } from '@fex-design/utils'
+import { useCoreStore } from '@fex-design/vue/composables/use-core-store'
 import { PopoverContent } from '../popover'
-import { usePopoverContext } from '../popover/context'
-const props = withDefaults(defineProps<{ class?: string; role?: string }>(), { role: 'menu' })
-const { hoverAncestors, overlay } = usePopoverContext('DropdownContent')
-function closeFromItem(event: MouseEvent) {
-  const item =
-    event.target instanceof Element ? event.target.closest<HTMLElement>('[role="menuitem"]') : null
-  if (!event.defaultPrevented && item && !item.hasAttribute('aria-haspopup')) {
-    ;[...hoverAncestors, overlay]
-      .reverse()
-      .forEach((current) => current.close({ reason: 'manual', source: 'menu-item', event }))
-  }
-}
-</script>
+import { useDropdownContext } from './context'
 
+defineOptions({ name: 'DropdownContent', inheritAttrs: false })
+const attrs = useAttrs()
+const context = useDropdownContext()
+const { controller } = context
+const snapshot = useCoreStore(controller.menu)
+const content = shallowRef<InstanceType<typeof PopoverContent> | null>(null)
+const element = computed(() => content.value?.element ?? null)
+defineExpose({ element })
+// Register the committed floating host with Menu, and unregister when Vue replaces it.
+watch(
+  element,
+  (host, _, onCleanup) => {
+    if (host instanceof HTMLElement) onCleanup(controller.bindContent(host))
+  },
+  { flush: 'post' },
+)
+</script>
 <template>
   <PopoverContent
-    :class="cn(popoverMenuContentClassName, props.class)"
-    :role="props.role"
-    @click="closeFromItem"
-    ><slot
-  /></PopoverContent>
+    ref="content"
+    v-bind="attrs"
+    role="menu"
+    :aria-labelledby="
+      attrs['aria-labelledby'] ?? (attrs['aria-label'] ? undefined : context.triggerId)
+    "
+    :class="[
+      popoverMenuContentClassName,
+      menuRootClassName({ size: snapshot.size, color: 'none' }),
+      menuContentClassName({ layout: 'vertical', background: 'none' }),
+      attrs.class,
+    ]"
+  >
+    <slot />
+  </PopoverContent>
 </template>

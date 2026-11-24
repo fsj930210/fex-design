@@ -1,4 +1,5 @@
 export { default as Menu } from './menu.svelte'
+export { default as MenuItems } from './menu-items.svelte'
 export { default as MenuItem } from './menu-item.svelte'
 export { default as SubMenuTrigger } from './sub-menu-trigger.svelte'
 export { default as MenuGroup } from './menu-group.svelte'

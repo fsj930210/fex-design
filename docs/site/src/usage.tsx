@@ -1,4 +1,4 @@
-import { createSignal, createMemo, createEffect } from 'solid-js'
+import { createSignal, createMemo, createEffect, Show } from 'solid-js'
 import type { Framework } from './types'
 import { componentApis } from './data'
 import { usageSnippets } from './usage-snippets'
@@ -28,6 +28,30 @@ export function Usage(props: {
 
   const currentSnippet = createMemo(() => {
     const l = layer()
+    if (props.slug === 'dropdown') {
+      if (l === 'ui') {
+        const family = `@fex-design/${props.framework}`
+        const imports = `import { Dropdown } from '${family}/ui/dropdown'`
+        const examples: Record<Framework, string> = {
+          react: `<Dropdown items={[{ value: "rename", label: "重命名" }]}>操作</Dropdown>`,
+          vue: `<Dropdown :items="items">操作</Dropdown>`,
+          solid: `<Dropdown items={[{ value: "rename", label: "重命名" }]}>\n  操作\n</Dropdown>`,
+          svelte: `<Dropdown {items}>操作</Dropdown>`,
+          angular: `<div dropdown [items]="items">操作</div>`,
+        }
+        return { import: imports, code: examples[props.framework] }
+      }
+      const family = `@fex-design/${props.framework}/primitive`
+      const imports = `import { DropdownRoot, DropdownTrigger, DropdownPortal, DropdownContent } from '${family}/dropdown'\nimport { MenuItem } from '${family}/menu'`
+      const examples: Record<Framework, string> = {
+        react: `<DropdownRoot>\n  <DropdownTrigger>{(props) => <button {...props}>操作</button>}</DropdownTrigger>\n  <DropdownPortal><DropdownContent><MenuItem value="rename">重命名</MenuItem></DropdownContent></DropdownPortal>\n</DropdownRoot>`,
+        vue: `<DropdownRoot>\n  <DropdownTrigger v-slot="trigger"><button v-bind="trigger.props" :ref="trigger.ref">操作</button></DropdownTrigger>\n  <DropdownPortal><DropdownContent><MenuItem value="rename">重命名</MenuItem></DropdownContent></DropdownPortal>\n</DropdownRoot>`,
+        solid: `<DropdownRoot>\n  <DropdownTrigger>{(slot) => <button {...slot.props} ref={slot.ref}>操作</button>}</DropdownTrigger>\n  <DropdownPortal><DropdownContent><MenuItem value="rename">重命名</MenuItem></DropdownContent></DropdownPortal>\n</DropdownRoot>`,
+        svelte: `<DropdownRoot>\n  <DropdownTrigger>{#snippet children({ action, props })}<button use:action {...props}>操作</button>{/snippet}</DropdownTrigger>\n  <DropdownPortal><DropdownContent><MenuItem value="rename">重命名</MenuItem></DropdownContent></DropdownPortal>\n</DropdownRoot>`,
+        angular: `<div dropdownRoot>\n  <button dropdownTrigger>操作</button>\n  <ng-template dropdownPortal><div dropdownContent><button menuItem value="rename">重命名</button></div></ng-template>\n</div>`,
+      }
+      return { import: imports, code: examples[props.framework] }
+    }
     if (props.slug === 'form') return getFormUsage(props.framework, l)
     if (props.slug === 'dialog' && props.framework !== 'react') {
       const snippets = {
@@ -120,17 +144,19 @@ export function Usage(props: {
         <div class="flex items-center gap-2">
           <span class="text-xs font-medium text-muted-foreground">组件形态:</span>
           <div class="flex items-center gap-1 rounded-lg border border-border bg-muted/40 p-1">
-            <button
-              type="button"
-              class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
-                layer() === 'ui'
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-              onClick={() => handleLayerChange('ui')}
-            >
-              UI (开箱即用)
-            </button>
+            <Show when={componentApis[props.slug]?.ui}>
+              <button
+                type="button"
+                class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
+                  layer() === 'ui'
+                    ? 'bg-background text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => handleLayerChange('ui')}
+              >
+                UI (开箱即用)
+              </button>
+            </Show>
             <button
               type="button"
               class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${

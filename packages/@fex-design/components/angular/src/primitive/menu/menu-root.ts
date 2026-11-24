@@ -39,6 +39,7 @@ export class MenuRoot implements OnInit {
   readonly change = output<{ value: string[]; info: MenuChangeInfo }>()
   readonly openChange = output<{ value: string[]; info: MenuChangeInfo }>()
   readonly activate = output<MenuActivateInfo>()
+  readonly activated = output<MenuChangeInfo>()
   private readonly injector = inject(Injector)
   binding!: ReturnType<typeof useMenu>
   ngOnInit() {
@@ -67,6 +68,7 @@ export class MenuRoot implements OnInit {
           this.openChange.emit({ value, info })
         },
         onActivate: (info) => this.activate.emit(info),
+        onActivated: (info) => this.activated.emit(info),
       })),
     )
   }

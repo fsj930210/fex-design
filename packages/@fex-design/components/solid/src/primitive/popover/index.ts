@@ -16,4 +16,9 @@ export { PopoverHeader, type PopoverHeaderProps } from './popover-header'
 export { PopoverTitle, type PopoverTitleProps } from './popover-title'
 export { PopoverDescription, type PopoverDescriptionProps } from './popover-description'
 export { createPopover } from './create-popover'
-export type { PopoverOptions, PopoverRenderState } from '@fex-design/core/popover/types'
+export type {
+  PopoverOptions,
+  PopoverRenderState,
+  PopoverOpenAutoFocusEvent,
+  PopoverCloseAutoFocusEvent,
+} from '@fex-design/core/popover/types'

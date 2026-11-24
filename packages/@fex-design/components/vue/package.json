@@ -94,6 +94,7 @@
     "./ui/empty": "./src/ui/empty/index.ts",
     "./ui/input": "./src/ui/input/index.ts",
     "./ui/input-number": "./src/ui/input-number/index.ts",
+    "./ui/dropdown": "./src/ui/dropdown/index.ts",
     "./ui/menu": "./src/ui/menu/index.ts",
     "./ui/pagination": "./src/ui/pagination/index.ts",
     "./ui/progress": "./src/ui/progress/index.ts",

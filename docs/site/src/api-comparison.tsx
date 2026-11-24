@@ -35,7 +35,7 @@ export const ApiComparison: Component<{
           when={uiApi()}
           fallback={<div class="text-xs text-muted-foreground">暂无 UI 属性定义</div>}
         >
-          <ApiTable value={uiApi()} framework={props.framework} />
+          <ApiTable value={uiApi()!} framework={props.framework} />
         </Show>
       </div>
 
@@ -56,7 +56,7 @@ export const ApiComparison: Component<{
           when={primitiveApi()}
           fallback={<div class="text-xs text-muted-foreground">暂无 Primitive 属性定义</div>}
         >
-          <ApiTable value={primitiveApi()} framework={props.framework} />
+          <ApiTable value={primitiveApi()!} framework={props.framework} />
         </Show>
       </div>
     </div>

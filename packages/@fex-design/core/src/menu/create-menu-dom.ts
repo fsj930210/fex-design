@@ -8,8 +8,14 @@ import type {
   MenuItemSource,
 } from './dom-types'
 import { createMenuKeyboard } from './keyboard'
-import { syncMenuContent } from './content'
+import {
+  canFocusMenuItem,
+  focusMenuItemOrContent,
+  syncMenuItem,
+  syncMenuContentAndGroups,
+} from './sync-hosts'
 import { resolveMenuPopupContainer } from './branch'
+import { listenInOwnerDocument } from './listen-in-owner-document'
 
 /** One DOM adapter per instance. Frameworks register hosts; no document-wide value lookup. */
 export function createMenuDom(controller: MenuController): MenuDomBinding {
@@ -24,6 +30,7 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
     items,
     contents,
     refresh: schedule,
+    focusItem: (position, parent) => keyboard.focusItem(position, parent),
     bindItem,
     bindContent,
     destroy,
@@ -162,44 +169,7 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
     refreshing = true
     try {
       const state = controller.getSnapshot()
-      items.forEach((item) => {
-        const source = item.source()
-        const node: MenuNode = {
-          value: item.branch?.value() ?? source.value,
-          parent: item.parent?.value(),
-          branch: Boolean(item.branch),
-          disabled: Boolean(source.disabled),
-        }
-        if (
-          node.value !== item.node.value ||
-          node.parent !== item.node.parent ||
-          node.disabled !== item.node.disabled
-        ) {
-          item.unregister()
-          item.node = node
-          item.unregister = controller.registerNode(node)
-        }
-        const disabled = state.disabled || source.disabled
-        item.element.dataset.slot = item.branch ? 'submenu-trigger' : 'menu-item'
-        item.element.dataset.menuValue = node.value
-        item.element.dataset.disabled = String(Boolean(disabled))
-        item.element.dataset.orientation =
-          !item.parent && state.layout === 'horizontal' ? 'horizontal' : 'vertical'
-        item.element.dataset.selected = String(!item.branch && state.value.includes(source.value))
-        item.element.setAttribute('role', 'menuitem')
-        item.element.setAttribute('aria-disabled', String(Boolean(disabled)))
-        if (item.element instanceof HTMLButtonElement) item.element.disabled = Boolean(disabled)
-        if (item.branch) {
-          item.element.setAttribute('aria-haspopup', 'menu')
-          item.element.setAttribute(
-            'aria-expanded',
-            String(!disabled && state.openValues.includes(node.value)),
-          )
-          item.element.dataset.expanded = item.element.getAttribute('aria-expanded')!
-        } else if (state.value.includes(source.value))
-          item.element.setAttribute('aria-current', 'true')
-        else item.element.removeAttribute('aria-current')
-      })
+      items.forEach((item) => syncMenuItem(controller, item, state))
       contents.forEach((content) => {
         const { element, branch } = content
         if (branch && state.layout !== 'inline' && !content.options().managedPortal) {
@@ -217,14 +187,7 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
             target.appendChild(element)
           }
         }
-        syncMenuContent(binding, content)
-        element.querySelectorAll<HTMLElement>('[data-slot="menu-group"]').forEach((group) => {
-          const label = group.querySelector<HTMLElement>('[data-slot="menu-group-label"]')
-          if (!label) return
-          if (!label.id)
-            label.id = `${element.id}-group-${[...element.querySelectorAll('[data-slot="menu-group-label"]')].indexOf(label)}`
-          if (!group.hasAttribute('aria-label')) group.setAttribute('aria-labelledby', label.id)
-        })
+        syncMenuContentAndGroups(binding, content)
       })
       keyboard.sync()
     } finally {
@@ -237,7 +200,6 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
     parent?: MenuBranch,
     branch?: MenuBranch,
   ) {
-    listen(element.ownerDocument)
     if (element instanceof HTMLButtonElement && !element.hasAttribute('type'))
       element.type = 'button'
     const initial = source()
@@ -256,6 +218,7 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
       unregister: controller.registerNode(node),
     }
     items.set(element, item)
+    listenInOwnerDocument(element, () => items.get(element) === item, listen)
     // Disabled custom anchors/buttons must suppress their native action and caller handlers too.
     const guard = (event: Event) => {
       if (controller.getSnapshot().disabled || source().disabled) {
@@ -268,7 +231,8 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
     return () => {
       const hadFocus = element === element.ownerDocument.activeElement
       const siblings = [...items.values()].filter(
-        (candidate) => candidate !== item && !candidate.source().disabled,
+        (candidate) =>
+          candidate !== item && candidate.parent === item.parent && !candidate.source().disabled,
       )
       const next =
         siblings.find((candidate) =>
@@ -280,14 +244,17 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
       schedule()
       if (hadFocus)
         queueMicrotask(() => {
+          const active = element.ownerDocument.activeElement
+          if (
+            controller.getSnapshot().disabled ||
+            (active && active !== element && active !== element.ownerDocument.body)
+          )
+            return
           const target =
-            next?.element.isConnected && !next.element.closest('[hidden], [inert]')
+            next && items.has(next.element) && canFocusMenuItem(next, item.parent)
               ? next
-              : [...items.values()].find(
-                  (candidate) =>
-                    !candidate.source().disabled && !candidate.element.closest('[hidden], [inert]'),
-                )
-          keyboard.focus(target)
+              : [...items.values()].find((candidate) => canFocusMenuItem(candidate, item.parent))
+          focusMenuItemOrContent(target, contents, item.parent, keyboard.focus)
         })
     }
   }
@@ -296,7 +263,6 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
     branch?: MenuBranch,
     options: () => MenuContentOptions = () => ({}),
   ) {
-    listen(element.ownerDocument)
     const observer = new MutationObserver(schedule)
     // Observe consumer DOM changes, not attributes managed by this adapter.
     observer.observe(element, {
@@ -314,7 +280,8 @@ export function createMenuDom(controller: MenuController): MenuDomBinding {
       stop: () => observer.disconnect(),
     }
     contents.add(content)
-    element.dataset.slot = branch ? 'submenu-content' : 'menu-content'
+    listenInOwnerDocument(element, () => contents.has(content), listen)
+    element.dataset.slot = branch ? 'submenu-content' : (options().slot ?? 'menu-content')
     schedule()
     return () => {
       content.stop()

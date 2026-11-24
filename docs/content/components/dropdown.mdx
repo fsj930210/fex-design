@@ -1,0 +1,39 @@
+---
+title: Dropdown
+description: 通过触发元素打开操作菜单，组合 Popover 与 Menu Primitive。
+---
+
+## 何时使用
+
+Dropdown 用于由触发元素展开一组操作；选择表单值时使用 Select，右键操作使用 ContextMenu。
+
+## 示例
+
+<Demos />
+
+## API
+
+<ApiContainer>
+<ApiSection layer="ui" title="UI API" description="使用 items 快捷组合触发按钮、浮层和菜单。">
+  <ApiComposition layer="ui">
+    ```text
+    Dropdown
+    ├── Button Trigger
+    └── Popup Menu
+    ```
+  </ApiComposition>
+</ApiSection>
+
+<ApiSection layer="primitive" title="Primitive API" description="组合浮层和菜单部件，不重复维护菜单状态。">
+  <ApiComposition layer="primitive">
+    ```text
+    DropdownRoot
+    ├── DropdownTrigger
+    └── DropdownPortal
+        └── DropdownContent
+            ├── MenuItem
+            └── SubMenu
+    ```
+  </ApiComposition>
+</ApiSection>
+</ApiContainer>

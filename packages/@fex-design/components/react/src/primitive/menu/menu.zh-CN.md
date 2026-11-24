@@ -47,3 +47,7 @@ UI 只组装 Primitive，选择、展开、键盘行为与浮层共享同一套�
 ## 组合浮层样式
 
 两层均通过 SubMenu.popoverProps.classNames/styles 设置 root（浮层面板）和 content（内容区），UI items 数据同样支持。默认面板复用 Popover 样式及菜单浮层预设，不传配置时两层外观一致。SubMenuContent 显式 class/style 后合并；内嵌布局不使用浮层展示配置。MenuPopoverProps 从对应框架的 menu 入口导入，styles 使用该框架原生样式类型。
+
+## 独立焦点与激活
+
+公开 Menu DOM 绑定提供 `focusItem('first' | 'last', parent?)`，聚焦指定层级中的可用项并返回是否成功。`activate` / `onActivate` 在选中前触发且可取消；`activated` / `onActivated` 在叶子项成功激活和状态更新后触发。Vue 与 Angular 使用框架原生事件。

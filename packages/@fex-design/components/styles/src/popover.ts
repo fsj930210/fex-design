@@ -26,7 +26,7 @@ export const popoverArrowClassName = [
 ].join(' ')
 
 export const popoverMenuContentClassName =
-  'min-w-32 max-w-[min(320px,var(--floating-available-width,calc(100vw-16px)))] [--popover-padding:4px]'
+  'max-w-[min(320px,var(--floating-available-width,calc(100vw-16px)))] [--popover-padding:4px]'
 
 export const popoverHeaderClassName = 'mb-[var(--popover-title-gap,8px)] grid gap-1'
 

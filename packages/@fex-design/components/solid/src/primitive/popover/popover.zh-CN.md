@@ -80,3 +80,7 @@ Primitive 与 UI 的行为类型统一定义在 @fex-design/core/popover/types�
 ## 可访问性
 
 触发器同步 aria-expanded 与 aria-controls。PopoverTitle 与 PopoverDescription 为浮层提供标题和描述关联；自定义结构时应提供等价的可访问名称。隐藏保留的面板不能交互；Escape 和外部指针关闭由 Core 的弹层顺序统一处理。
+
+## 焦点回调
+
+`onOpenAutoFocus` 在打开的内容可接收焦点时触发；`onCloseAutoFocus` 在焦点恢复到触发器前触发。两者均可通过 `preventDefault()` 取消默认行为。事件提供原因和原始事件，关闭事件还提供触发元素。Vue 与 Angular 使用 `openAutoFocus` 和 `closeAutoFocus` 事件；`isFocusWithin` 可将 Portal 后代纳入关闭时的焦点边界。

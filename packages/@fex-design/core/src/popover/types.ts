@@ -1,4 +1,4 @@
-import type { DisclosureChangeInfo } from '../disclosure/create-disclosure'
+import type { DisclosureChangeInfo, DisclosureReason } from '../disclosure/create-disclosure'
 import type {
   FloatingOverlayOptions,
   FloatingOverlaySnapshot,
@@ -8,6 +8,21 @@ import type { FloatingMountOptions } from '../overlay/presence/types'
 
 export type PopoverTrigger = OverlayTrigger
 export type PopoverChangeInfo = DisclosureChangeInfo
+export interface PopoverOpenAutoFocusEvent {
+  readonly content: HTMLElement
+  readonly reason: DisclosureReason
+  readonly originalEvent?: unknown
+  readonly defaultPrevented: boolean
+  preventDefault(): void
+}
+export interface PopoverCloseAutoFocusEvent {
+  readonly reference: HTMLElement | null
+  readonly reason: DisclosureReason
+  readonly source?: string | undefined
+  readonly originalEvent?: unknown
+  readonly defaultPrevented: boolean
+  preventDefault(): void
+}
 export type { FloatingAlign, FloatingPlacement, FloatingSide } from '../floating/placement'
 
 /** Primitive 与 UI、五框架共用的 Popover 行为配置。 */
@@ -18,6 +33,12 @@ export interface PopoverOptions
       'forceMount' | 'allowedTriggers' | 'autoAdjustOverflow' | 'offset' | 'modal'
     >,
     FloatingMountOptions {
+  /** Override the default dialog focus behavior after open and content mount. */
+  onOpenAutoFocus?: ((event: PopoverOpenAutoFocusEvent) => void) | undefined
+  /** Cancel or replace focus restoration when closing a focused floating layer. */
+  onCloseAutoFocus?: ((event: PopoverCloseAutoFocusEvent) => void) | undefined
+  /** Include portalled descendants in focus-trigger dismissal and focus restoration. */
+  isFocusWithin?: ((element: Element, content: HTMLElement) => boolean) | undefined
   /**
    * 触发方式，可以组合；context-menu 使用连字符。
    * @default ['click']

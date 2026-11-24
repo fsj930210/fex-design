@@ -2,6 +2,70 @@
 import type { Type } from '@angular/core'
 
 export const examples: Record<string, () => Promise<Type<unknown>>> = {
+  'primitive/input-number/validation': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input-number/examples/validation').then(
+      (module) => module.ValidationExample,
+    ),
+  'primitive/input/affixes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/affixes').then(
+      (module) => module.AffixesExample,
+    ),
+  'primitive/input/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/basic').then(
+      (module) => module.BasicExample,
+    ),
+  'primitive/input/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/controlled').then(
+      (module) => module.ControlledExample,
+    ),
+  'primitive/input/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/css-variables').then(
+      (module) => module.InputCssVariablesExample,
+    ),
+  'primitive/input/focus': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/focus').then(
+      (module) => module.FocusExample,
+    ),
+  'primitive/input/form-appearance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/form-appearance').then(
+      (module) => module.FormAppearanceExample,
+    ),
+  'primitive/input/group': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/group').then(
+      (module) => module.GroupExample,
+    ),
+  'primitive/input/password': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/password').then(
+      (module) => module.PasswordExample,
+    ),
+  'primitive/input/search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/search').then(
+      (module) => module.SearchExample,
+    ),
+  'primitive/input/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/semantic-styles').then(
+      (module) => module.InputSemanticStylesExample,
+    ),
+  'primitive/input/sizes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/sizes').then(
+      (module) => module.SizesExample,
+    ),
+  'primitive/input/states': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/states').then(
+      (module) => module.StatesExample,
+    ),
+  'primitive/input/validation': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/validation').then(
+      (module) => module.ValidationExample,
+    ),
+  'primitive/input/variants': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/variants').then(
+      (module) => module.VariantsExample,
+    ),
+  'primitive/kbd/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/kbd/examples/basic').then(
+      (module) => module.Basic,
+    ),
   'primitive/kbd/button': () =>
     import('../../../../packages/@fex-design/components/angular/src/primitive/kbd/examples/button').then(
       (module) => module.ButtonExample,
@@ -737,69 +801,5 @@ export const examples: Record<string, () => Promise<Type<unknown>>> = {
   'primitive/tree/async-load': () =>
     import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/async-load').then(
       (module) => module.PrimitiveTreeAsyncLoadExample,
-    ),
-  'primitive/tree/async-search': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/async-search').then(
-      (module) => module.TreeAsyncSearchExample,
-    ),
-  'primitive/tree/basic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/basic').then(
-      (module) => module.PrimitiveTreeBasicExample,
-    ),
-  'primitive/tree/basic-content': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/basic-content').then(
-      (module) => module.BasicContent,
-    ),
-  'primitive/tree/checkbox': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/checkbox').then(
-      (module) => module.PrimitiveTreeCheckboxExample,
-    ),
-  'primitive/tree/crud': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/crud').then(
-      (module) => module.TreeCrudExample,
-    ),
-  'primitive/tree/crud-row': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/crud-row').then(
-      (module) => module.TreeCrudRow,
-    ),
-  'primitive/tree/css-variables': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/css-variables').then(
-      (module) => module.PrimitiveTreeCssVariablesExample,
-    ),
-  'primitive/tree/custom-render': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/custom-render').then(
-      (module) => module.PrimitiveTreeCustomRenderExample,
-    ),
-  'primitive/tree/direction': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/direction').then(
-      (module) => module.PrimitiveTreeDirectionExample,
-    ),
-  'primitive/tree/dnd': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/dnd').then(
-      (module) => module.TreeDndExample,
-    ),
-  'primitive/tree/field-names': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/field-names').then(
-      (module) => module.TreeFieldNamesExample,
-    ),
-  'primitive/tree/keyboard': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/keyboard').then(
-      (module) => module.PrimitiveTreeKeyboardExample,
-    ),
-  'primitive/tree/logic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/logic').then(
-      (module) => module.PrimitiveTreeLogicExample,
-    ),
-  'primitive/tree/scroll-to': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/scroll-to').then(
-      (module) => module.PrimitiveTreeScrollToExample,
-    ),
-  'primitive/tree/search': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/search').then(
-      (module) => module.PrimitiveTreeSearchExample,
-    ),
-  'primitive/tree/selection': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/selection').then(
-      (module) => module.PrimitiveTreeSelectionExample,
     ),
 }

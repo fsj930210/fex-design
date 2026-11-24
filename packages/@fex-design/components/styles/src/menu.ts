@@ -5,7 +5,7 @@ import {
 } from '@fex-design/components-styles/popover'
 
 export const menuRootClassName = cva(
-  'min-w-0 text-sm text-[var(--menu-color,var(--foreground))] [--menu-item-height:32px] [--menu-item-padding-x:10px] [--menu-indent:18px]',
+  'min-w-0 text-sm [--menu-item-height:32px] [--menu-item-padding-x:10px] [--menu-indent:18px]',
   {
     variants: {
       size: {
@@ -13,19 +13,18 @@ export const menuRootClassName = cva(
         md: '[--menu-item-height:32px] [--menu-item-padding-x:10px] [--menu-indent:18px]',
         lg: '[--menu-item-height:36px] [--menu-item-padding-x:12px] [--menu-indent:22px]',
       },
+      color: { menu: 'text-[var(--menu-color,var(--foreground))]', none: '' },
     },
-    defaultVariants: { size: 'md' },
+    defaultVariants: { size: 'md', color: 'menu' },
   },
 )
-export const menuContentClassName = cva(
-  'flex min-w-0 gap-0.5 bg-[var(--menu-background,transparent)] outline-none',
-  {
-    variants: {
-      layout: { vertical: 'flex-col', inline: 'flex-col', horizontal: 'flex-row items-center' },
-    },
-    defaultVariants: { layout: 'vertical' },
+export const menuContentClassName = cva('flex min-w-0 gap-0.5 outline-none', {
+  variants: {
+    layout: { vertical: 'flex-col', inline: 'flex-col', horizontal: 'flex-row items-center' },
+    background: { menu: 'bg-[var(--menu-background,transparent)]', none: '' },
   },
-)
+  defaultVariants: { layout: 'vertical', background: 'menu' },
+})
 export const menuItemClassName = cva(
   [
     'group/menu-item flex h-[var(--menu-item-height)] min-w-0 cursor-pointer select-none items-center gap-2 rounded-[var(--menu-item-radius,var(--radius-md))] border border-transparent bg-[var(--menu-item-background,transparent)] px-[var(--menu-item-padding-x)] text-start text-[var(--menu-item-color,var(--menu-color,inherit))] outline-none transition-colors motion-reduce:transition-none',
@@ -42,7 +41,7 @@ export const subMenuContentClassName = cva('flex min-w-0 flex-col gap-0.5 outlin
   variants: {
     inline: {
       true: 'ms-[var(--menu-indent)]',
-      false: `${popoverContentClassName()} ${popoverMenuContentClassName} min-w-44`,
+      false: `${popoverContentClassName()} ${popoverMenuContentClassName}`,
     },
   },
   defaultVariants: { inline: false },

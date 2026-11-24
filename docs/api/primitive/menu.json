@@ -142,6 +142,16 @@
               "type": "MenuActivateInfo"
             }
           ]
+        },
+        {
+          "name": "onActivated",
+          "description": "叶子项激活未被取消且菜单状态更新后触发。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
         }
       ]
     },
@@ -272,6 +282,16 @@
             {
               "name": "info",
               "type": "MenuActivateInfo"
+            }
+          ]
+        },
+        {
+          "name": "activated",
+          "description": "叶子项激活未被取消且菜单状态更新后触发。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
             }
           ]
         }
@@ -406,6 +426,16 @@
               "type": "MenuActivateInfo"
             }
           ]
+        },
+        {
+          "name": "onActivated",
+          "description": "叶子项激活未被取消且菜单状态更新后触发。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ]
         }
       ]
     },
@@ -536,6 +566,16 @@
             {
               "name": "info",
               "type": "MenuActivateInfo"
+            }
+          ]
+        },
+        {
+          "name": "onActivated",
+          "description": "叶子项激活未被取消且菜单状态更新后触发。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
             }
           ]
         }
@@ -680,6 +720,16 @@
             {
               "name": "info",
               "type": "MenuActivateInfo"
+            }
+          ]
+        },
+        {
+          "name": "activated",
+          "description": "叶子项激活未被取消且菜单状态更新后触发。",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
             }
           ]
         }
@@ -1613,6 +1663,16 @@
         {
           "name": "info",
           "type": "MenuActivateInfo"
+        }
+      ]
+    },
+    {
+      "name": "activated",
+      "description": "叶子项激活未被取消且菜单状态更新后触发。",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "MenuChangeInfo"
         }
       ]
     }

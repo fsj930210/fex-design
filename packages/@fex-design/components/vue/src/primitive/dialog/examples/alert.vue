@@ -27,7 +27,7 @@ const result = ref('尚未操作')
     :close-on-overlay-click="false"
     :open="open"
     @open-change="
-      open = $event;
+      open = $event
       if (!$event) result = '已取消'
     "
     ><DialogPortal
@@ -39,7 +39,7 @@ const result = ref('尚未操作')
             variant="solid"
             color="primary"
             @click="
-              result = '已确认';
+              result = '已确认'
               open = false
             "
             >确定</Button

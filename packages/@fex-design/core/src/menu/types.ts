@@ -86,6 +86,8 @@ export interface MenuOptions {
   onValueChange?: ((value: string[], info: MenuChangeInfo) => void) | undefined
   onOpenChange?: ((value: string[], info: MenuChangeInfo) => void) | undefined
   onActivate?: ((info: MenuActivateInfo) => void) | undefined
+  /** Called only after an uncancelled leaf activation has updated menu state. */
+  onActivated?: ((info: MenuChangeInfo) => void) | undefined
 }
 export interface MenuSnapshot {
   layout: MenuLayout

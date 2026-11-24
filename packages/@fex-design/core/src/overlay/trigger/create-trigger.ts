@@ -15,6 +15,9 @@ export interface TriggerOptions {
 export interface TriggerBehavior {
   setOptions: (options: TriggerOptions) => void
   getTriggers: () => OverlayTrigger[]
+  hasOpenSources: () => boolean
+  hasOpenSource: (source: OverlayTrigger) => boolean
+  clearOpenSource: (source: OverlayTrigger) => void
   clear: (info?: Partial<DisclosureChangeInfo>, shouldRequest?: boolean) => void
   trigger: {
     click: (event: OverlayEventInfo) => void
@@ -119,12 +122,27 @@ export function createTrigger(options: TriggerOptions): TriggerBehavior {
     setOptions: (nextOptions) => {
       currentOptions = nextOptions
       const nextTriggers = normalizeTriggers(nextOptions.trigger, nextOptions.allowedTriggers)
+      // Configuration changes are not user actions, but pending or removed sources must not
+      // reopen an overlay or keep it open after their trigger has been disabled.
+      if (nextOptions.disabled || !nextTriggers.includes('hover')) {
+        clearTimer(openTimer)
+        clearTimer(closeTimer)
+        pointerInsideContent = false
+      }
+      for (const source of openSources) {
+        if (nextOptions.disabled || !nextTriggers.includes(source)) openSources.delete(source)
+      }
       if (!isSameTriggers(triggers, nextTriggers)) {
         // 只在触发方式语义变化时替换数组，保持组合 snapshot 中 trigger 字段尽量稳定。
         triggers = nextTriggers
       }
     },
     getTriggers: () => triggers,
+    hasOpenSources: () => openSources.size > 0,
+    hasOpenSource: (source) => openSources.has(source),
+    clearOpenSource: (source) => {
+      openSources.delete(source)
+    },
     clear: (info, shouldRequest = true) => {
       // 外部 dismiss 会先清空 trigger 来源，再关闭 overlay。
       // shouldRequest=false 用于“已经由 overlay.close 负责通知”的场景，避免重复触发 onOpenChange。

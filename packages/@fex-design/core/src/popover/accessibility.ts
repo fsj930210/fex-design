@@ -1,4 +1,5 @@
 import type { DisclosureReason } from '../disclosure/create-disclosure'
+import type { PopoverCloseAutoFocusEvent, PopoverOpenAutoFocusEvent } from './types'
 
 let nextContentId = 0
 const focusable =
@@ -8,6 +9,9 @@ const focusable =
 export function createPopoverAccessibility(
   isOpen: () => boolean,
   preserveTriggerFocus: () => boolean,
+  onOpenAutoFocus: () => ((event: PopoverOpenAutoFocusEvent) => void) | undefined,
+  onCloseAutoFocus: () => ((event: PopoverCloseAutoFocusEvent) => void) | undefined,
+  isFocusWithin: () => ((element: Element, content: HTMLElement) => boolean) | undefined,
 ) {
   let content: HTMLElement | null = null
   let reference: HTMLElement | null = null
@@ -16,6 +20,10 @@ export function createPopoverAccessibility(
   let wasOpen = false
   let labelledBy: string | null = null
   let describedBy: string | null = null
+  let focusGeneration = 0
+  let focusedContent: HTMLElement | null = null
+  let focusReason: DisclosureReason = 'manual'
+  let focusEvent: unknown
 
   function updateRelation(attribute: string, selector: string, previous: string | null) {
     if (!content) return null
@@ -45,12 +53,43 @@ export function createPopoverAccessibility(
     )
   }
 
-  function focusContent(reason: DisclosureReason) {
-    if (reason === 'trigger-hover' || reason === 'trigger-focus') return
+  function focusContent(reason: DisclosureReason, originalEvent: unknown) {
     const target = content
+    const generation = ++focusGeneration
     // Refs may run before Portal insertion or before closed styles are removed.
     queueMicrotask(() => {
-      if (!target || content !== target || !isOpen() || !target.isConnected) return
+      if (
+        !target ||
+        content !== target ||
+        !isOpen() ||
+        !target.isConnected ||
+        target.closest('[hidden], [inert]') ||
+        generation !== focusGeneration ||
+        focusedContent === target
+      )
+        return
+      focusedContent = target
+      let prevented = false
+      const event: PopoverOpenAutoFocusEvent = {
+        content: target,
+        reason,
+        originalEvent,
+        get defaultPrevented() {
+          return prevented
+        },
+        preventDefault() {
+          prevented = true
+        },
+      }
+      onOpenAutoFocus()?.(event)
+      if (
+        event.defaultPrevented ||
+        !isOpen() ||
+        content !== target ||
+        reason === 'trigger-hover' ||
+        reason === 'trigger-focus'
+      )
+        return
       // Controlled input popovers can open through prop synchronization instead of a focus event.
       if (preserveTriggerFocus()) return
       if (target.getAttribute('role') !== 'dialog') return
@@ -70,10 +109,16 @@ export function createPopoverAccessibility(
       reference = element
       syncRelations()
     },
-    setContent(element: HTMLElement | null, reason: DisclosureReason) {
+    setContent(element: HTMLElement | null, reason: DisclosureReason, originalEvent: unknown) {
+      focusReason = reason
+      focusEvent = originalEvent
       observer?.disconnect()
       observer = undefined
       content = element
+      if (!element) {
+        focusGeneration++
+        focusedContent = null
+      }
       labelledBy = null
       describedBy = null
       if (!content) {
@@ -83,36 +128,67 @@ export function createPopoverAccessibility(
       syncRelations()
       const Observer = content.ownerDocument.defaultView?.MutationObserver
       if (Observer) {
-        observer = new Observer(syncRelations)
+        observer = new Observer(() => {
+          syncRelations()
+          if (isOpen() && focusedContent !== content) focusContent(focusReason, focusEvent)
+        })
         observer.observe(content, {
           childList: true,
           subtree: true,
           attributes: true,
-          attributeFilter: ['id'],
+          attributeFilter: ['id', 'hidden', 'inert'],
         })
       }
-      if (isOpen()) focusContent(reason)
+      if (isOpen()) focusContent(reason, originalEvent)
     },
-    sync(reason: DisclosureReason, source?: string) {
+    sync(reason: DisclosureReason, source?: string, originalEvent?: unknown) {
+      focusReason = reason
+      focusEvent = originalEvent
       const open = isOpen()
-      if (open && !wasOpen) focusContent(reason)
+      const previouslyOpen = wasOpen
+      // Record the transition before callbacks; they may synchronously reopen the layer.
+      wasOpen = open
+      if (!open) {
+        focusGeneration++
+        focusedContent = null
+      }
+      if (open && !previouslyOpen) focusContent(reason, originalEvent)
       if (
         !open &&
-        wasOpen &&
-        content?.contains(content.ownerDocument.activeElement) &&
+        previouslyOpen &&
+        content &&
+        content.ownerDocument.activeElement &&
+        (content.contains(content.ownerDocument.activeElement) ||
+          isFocusWithin()?.(content.ownerDocument.activeElement, content)) &&
         reason !== 'outside-pointer' &&
         source !== 'ancestor-close'
       ) {
-        restoringFocus = true
-        try {
-          reference?.focus({ preventScroll: true })
-        } finally {
-          restoringFocus = false
+        let prevented = false
+        const event: PopoverCloseAutoFocusEvent = {
+          reference,
+          reason,
+          source,
+          originalEvent,
+          get defaultPrevented() {
+            return prevented
+          },
+          preventDefault() {
+            prevented = true
+          },
+        }
+        onCloseAutoFocus()?.(event)
+        if (!event.defaultPrevented && !isOpen()) {
+          restoringFocus = true
+          try {
+            reference?.focus({ preventScroll: true })
+          } finally {
+            restoringFocus = false
+          }
         }
       }
-      wasOpen = open
     },
     destroy() {
+      focusGeneration++
       observer?.disconnect()
       content = null
       reference = null

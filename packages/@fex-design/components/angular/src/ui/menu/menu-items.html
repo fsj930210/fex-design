@@ -43,12 +43,6 @@
         [ngTemplateOutletContext]="{ $implicit: entry.children, injector }"
     /></ng-template>
   </div>
-  } @else if (itemTemplate()) {
-  <ng-container
-    [ngTemplateOutlet]="itemTemplate()"
-    [ngTemplateOutletInjector]="injector"
-    [ngTemplateOutletContext]="{ $implicit: entry, item: entry }"
-  />
   } @else if (entry.href !== undefined) {
   <a
     menuItem
@@ -79,10 +73,18 @@
     [icon]="entry.icon"
     [suffix]="entry.suffix"
   >
+    @if (itemTemplate()) {
+    <ng-container
+      [ngTemplateOutlet]="itemTemplate()"
+      [ngTemplateOutletInjector]="injector"
+      [ngTemplateOutletContext]="{ $implicit: entry, item: entry }"
+    />
+    } @else {
     <ng-container
       [ngTemplateOutlet]="label"
       [ngTemplateOutletContext]="{ $implicit: entry.label }"
     />
+    }
   </button>
   } }
 </ng-template>

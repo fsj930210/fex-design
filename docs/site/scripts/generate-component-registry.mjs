@@ -148,11 +148,12 @@ const apiSlugs = new Map(
 const manifestSlugs = (await names(manifestRoot, '-manifest.ts')).sort()
 
 for (const layer of layers) {
-  const expected = documentSlugs.join(',')
-  const actual = apiSlugs.get(layer).join(',')
-  if (expected !== actual)
-    fail(`${layer} API slugs (${actual}) do not match documents (${expected})`)
+  for (const slug of apiSlugs.get(layer))
+    if (!documentSlugs.includes(slug)) fail(`${layer} API ${slug} has no document`)
 }
+for (const slug of documentSlugs)
+  if (!layers.some((layer) => apiSlugs.get(layer).includes(slug)))
+    fail(`${slug} has no API in any layer`)
 if (documentSlugs.join(',') !== manifestSlugs.join(',')) {
   fail(
     `manifest slugs (${manifestSlugs.join(',')}) do not match documents (${documentSlugs.join(',')})`,
@@ -161,10 +162,14 @@ if (documentSlugs.join(',') !== manifestSlugs.join(',')) {
 
 const registry = []
 for (const slug of documentSlugs) {
-  await Promise.all(layers.map((layer) => validateFrameworkContracts(slug, layer)))
+  const available = layers.filter((layer) => apiSlugs.get(layer).includes(slug))
+  await Promise.all(available.map((layer) => validateFrameworkContracts(slug, layer)))
   const manifestFile = resolve(manifestRoot, `${slug}-manifest.ts`)
   const manifest = parseManifest(await readFile(manifestFile, 'utf8'), manifestFile)
-  registry.push({ slug, manifestFile, ...manifest })
+  for (const layer of layers)
+    if (!available.includes(layer) && manifest.scenes.get(layer).length)
+      fail(`${slug} has ${layer} examples without a matching API`)
+  registry.push({ slug, manifestFile, available, ...manifest })
 }
 
 const lines = [
@@ -176,7 +181,7 @@ for (const item of registry) {
   lines.push(
     `import * as ${item.slug.replace(/-/g, '')}Document from '${importPath(output, resolve(contentRoot, `${item.slug}.mdx`))}'`,
   )
-  for (const layer of layers) {
+  for (const layer of item.available) {
     lines.push(
       `import ${layer}${name}Api from '${importPath(output, resolve(apiRoot, layer, `${item.slug}.json`))}'`,
     )
@@ -189,11 +194,11 @@ lines.push('', 'export const componentApis = {')
 for (const item of registry) {
   const name = toIdentifier(item.slug)
   lines.push(
-    `  '${item.slug}': { primitive: primitive${name}Api as ComponentApi, ui: ui${name}Api as ComponentApi },`,
+    `  '${item.slug}': { ${layers.map((layer) => `${layer}: ${item.available.includes(layer) ? `${layer}${name}Api as ComponentApi` : 'undefined'}`).join(', ')} },`,
   )
 }
 lines.push(
-  "} as const satisfies Record<string, Record<'primitive' | 'ui', ComponentApi>>",
+  "} as const satisfies Record<string, Record<'primitive' | 'ui', ComponentApi | undefined>>",
   '',
   'export const componentDocuments = {',
 )

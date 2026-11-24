@@ -1,4 +1,5 @@
 export { Menu } from './menu'
+export { MenuItems } from './menu-items'
 export { MenuItem } from './menu-item'
 export { SubMenuTrigger } from './sub-menu-trigger'
 export { MenuGroup } from './menu-group'

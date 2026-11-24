@@ -80,3 +80,7 @@ The default suits forms: mount on first opening and retain the draft after closi
 ## Accessibility
 
 The trigger synchronizes aria-expanded and aria-controls. PopoverTitle and PopoverDescription associate the panel label and description; custom markup should provide an equivalent accessible name. Retained hidden panels are inert. Core coordinates Escape and outside-pointer dismissal through the layer order.
+
+## Focus callbacks
+
+`onOpenAutoFocus` runs when opened content can receive focus; `onCloseAutoFocus` runs before restoring focus to the trigger. Both can be cancelled with `preventDefault()`. The event includes the reason and original event; the close event also provides the reference element. Vue and Angular expose `openAutoFocus` and `closeAutoFocus` events. `isFocusWithin` extends the close-time focus boundary for portalled descendants.

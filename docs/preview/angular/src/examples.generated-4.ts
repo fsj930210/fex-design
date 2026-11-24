@@ -2,6 +2,114 @@
 import type { Type } from '@angular/core'
 
 export const examples: Record<string, () => Promise<Type<unknown>>> = {
+  'ui/time-picker/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/semantic-styles').then(
+      (module) => module.TimePickerSemanticStylesExample,
+    ),
+  'ui/time-picker/sizes': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/sizes').then(
+      (module) => module.TimePickerSizesExample,
+    ),
+  'ui/time-picker/trigger': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/time-picker/examples/trigger').then(
+      (module) => module.TimePickerTriggerExample,
+    ),
+  'ui/tooltip/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/basic').then(
+      (module) => module.BasicExample,
+    ),
+  'ui/tooltip/color': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/color').then(
+      (module) => module.ColorExample,
+    ),
+  'ui/tooltip/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/controlled').then(
+      (module) => module.ControlledExample,
+    ),
+  'ui/tooltip/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/css-variables').then(
+      (module) => module.CssVariablesExample,
+    ),
+  'ui/tooltip/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/direction').then(
+      (module) => module.DirectionExample,
+    ),
+  'ui/tooltip/placement': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/placement').then(
+      (module) => module.PlacementExample,
+    ),
+  'ui/tooltip/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tooltip/examples/semantic-styles').then(
+      (module) => module.SemanticStylesExample,
+    ),
+  'ui/tree/async-load': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/async-load').then(
+      (module) => module.TreeAsyncLoadExample,
+    ),
+  'ui/tree/async-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/async-search').then(
+      (module) => module.TreeAsyncSearchExample,
+    ),
+  'ui/tree/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/basic').then(
+      (module) => module.TreeBasicExample,
+    ),
+  'ui/tree/basic-content': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/basic-content').then(
+      (module) => module.BasicContent,
+    ),
+  'ui/tree/checkbox': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/checkbox').then(
+      (module) => module.TreeCheckboxExample,
+    ),
+  'ui/tree/crud': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/crud').then(
+      (module) => module.TreeCrudExample,
+    ),
+  'ui/tree/crud-row': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/crud-row').then(
+      (module) => module.TreeCrudRow,
+    ),
+  'ui/tree/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/css-variables').then(
+      (module) => module.TreeCssVariablesExample,
+    ),
+  'ui/tree/custom-render': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/custom-render').then(
+      (module) => module.TreeCustomRenderExample,
+    ),
+  'ui/tree/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/direction').then(
+      (module) => module.TreeDirectionExample,
+    ),
+  'ui/tree/dnd': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/dnd').then(
+      (module) => module.TreeDndExample,
+    ),
+  'ui/tree/field-names': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/field-names').then(
+      (module) => module.TreeFieldNamesExample,
+    ),
+  'ui/tree/instance': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/instance').then(
+      (module) => module.TreeInstanceExample,
+    ),
+  'ui/tree/keyboard': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/keyboard').then(
+      (module) => module.TreeKeyboardExample,
+    ),
+  'ui/tree/logic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/logic').then(
+      (module) => module.TreeLogicExample,
+    ),
+  'ui/tree/scroll-to': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/scroll-to').then(
+      (module) => module.TreeScrollToExample,
+    ),
+  'ui/tree/search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/search').then(
+      (module) => module.TreeSearchExample,
+    ),
   'ui/tree/selection': () =>
     import('../../../../packages/@fex-design/components/angular/src/ui/tree/examples/selection').then(
       (module) => module.TreeSelectionExample,

@@ -17,4 +17,9 @@ export { PopoverTitle, type PopoverTitleProps } from './popover-title'
 export { PopoverDescription, type PopoverDescriptionProps } from './popover-description'
 export { usePopover } from './use-popover'
 export type { PopoverContextValue as PopoverBinding } from './popover-context'
-export type { PopoverOptions, PopoverRenderState } from '@fex-design/core/popover/types'
+export type {
+  PopoverOptions,
+  PopoverRenderState,
+  PopoverOpenAutoFocusEvent,
+  PopoverCloseAutoFocusEvent,
+} from '@fex-design/core/popover/types'

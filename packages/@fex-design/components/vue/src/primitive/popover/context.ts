@@ -22,7 +22,10 @@ export function usePopoverContext(component: string) {
   return context
 }
 
-export type PopoverRootProps = PopoverOptions
+export type PopoverRootProps = Omit<
+  PopoverOptions,
+  'onOpenChange' | 'onOpenAutoFocus' | 'onCloseAutoFocus'
+>
 
 export function eventInfo(event: Event & Partial<PointerEvent>) {
   return {

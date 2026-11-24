@@ -1,4 +1,5 @@
 export { default as Menu } from './menu.vue'
+export { default as MenuItems } from './menu-items.vue'
 export { default as MenuItem } from './menu-item.vue'
 export { default as SubMenuTrigger } from './sub-menu-trigger.vue'
 export { default as MenuGroup } from './menu-group.vue'

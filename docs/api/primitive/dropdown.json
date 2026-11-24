@@ -1,0 +1,310 @@
+{
+  "name": "DropdownRoot",
+  "slug": "dropdown",
+  "layer": "primitive",
+  "status": "draft",
+  "description": "组合 Popover 和 Menu 的操作菜单。",
+  "importPath": {
+    "react": "@fex-design/react/primitive/dropdown",
+    "vue": "@fex-design/vue/primitive/dropdown",
+    "solid": "@fex-design/solid/primitive/dropdown",
+    "svelte": "@fex-design/svelte/primitive/dropdown",
+    "angular": "@fex-design/angular/primitive/dropdown"
+  },
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控的根浮层打开状态。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控初始打开状态。"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "禁用触发和菜单交互。"
+    },
+    {
+      "name": "closeOnSelect",
+      "type": "boolean",
+      "default": "true",
+      "description": "叶子项成功激活后请求关闭。"
+    },
+    {
+      "name": "popoverProps",
+      "type": "Omit<DropdownPopoverOptions, 'open' | 'defaultOpen' | 'onOpenChange' | 'disabled'>",
+      "description": "Popover 配置入口。详见 Popover API。",
+      "link": "popover"
+    },
+    {
+      "name": "menuProps",
+      "type": "Omit<MenuOptions, 'layout' | 'inlineAccordion' | 'onActivate' | 'disabled'>",
+      "description": "Menu 配置入口。详见 Menu API。",
+      "link": "menu"
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        },
+        {
+          "name": "info",
+          "type": "PopoverChangeInfo"
+        }
+      ],
+      "description": "请求改变打开状态；Vue 和 Angular 使用对应原生事件。"
+    },
+    {
+      "name": "onActivate",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "MenuActivateInfo"
+        }
+      ],
+      "description": "叶子项激活前调用，preventDefault 可取消选择与关闭。"
+    }
+  ],
+  "frameworks": {
+    "vue": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "受控的根浮层打开状态；支持 v-model:open。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "default": "false",
+          "description": "非受控初始打开状态。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "禁用触发和菜单交互。"
+        },
+        {
+          "name": "closeOnSelect",
+          "type": "boolean",
+          "default": "true",
+          "description": "叶子项成功激活后请求关闭。"
+        },
+        {
+          "name": "popoverProps",
+          "type": "Omit<DropdownPopoverOptions, 'open' | 'defaultOpen' | 'onOpenChange' | 'disabled'>",
+          "description": "浮层定位、触发、挂载和关闭配置。"
+        },
+        {
+          "name": "menuProps",
+          "type": "Omit<MenuOptions, 'layout' | 'inlineAccordion' | 'onActivate' | 'disabled'>",
+          "description": "菜单选择、尺寸、方向与子菜单配置。"
+        },
+        {
+          "name": "value",
+          "type": "readonly string[]",
+          "description": "受控选中值；支持 v-model:value。"
+        },
+        {
+          "name": "openValues",
+          "type": "readonly string[]",
+          "description": "受控子菜单展开值；支持 v-model:openValues。"
+        }
+      ],
+      "events": [
+        {
+          "name": "update:open",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求更新受控打开状态。"
+        },
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            },
+            {
+              "name": "info",
+              "type": "PopoverChangeInfo"
+            }
+          ],
+          "description": "通知打开状态及变更原因。"
+        },
+        {
+          "name": "activate",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ],
+          "description": "叶子项激活前触发，可取消。"
+        },
+        {
+          "name": "activated",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ],
+          "description": "叶子项成功激活后触发。"
+        },
+        {
+          "name": "update:value",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            }
+          ],
+          "description": "请求更新选中值。"
+        },
+        {
+          "name": "valueChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ],
+          "description": "通知选中值及变更原因。"
+        },
+        {
+          "name": "update:openValues",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            }
+          ],
+          "description": "请求更新子菜单展开值。"
+        },
+        {
+          "name": "menuOpenChange",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "string[]"
+            },
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ],
+          "description": "通知子菜单展开值及变更原因。"
+        }
+      ]
+    },
+    "angular": {
+      "events": [
+        {
+          "name": "openChange",
+          "parameters": [
+            {
+              "name": "open",
+              "type": "boolean"
+            }
+          ],
+          "description": "请求更新受控打开状态。"
+        },
+        {
+          "name": "openChangeInfo",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "PopoverChangeInfo"
+            }
+          ],
+          "description": "通知打开状态变更原因。"
+        },
+        {
+          "name": "activate",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuActivateInfo"
+            }
+          ],
+          "description": "叶子项激活前触发，可取消。"
+        },
+        {
+          "name": "activated",
+          "parameters": [
+            {
+              "name": "info",
+              "type": "MenuChangeInfo"
+            }
+          ],
+          "description": "叶子项成功激活后触发。"
+        },
+        {
+          "name": "valueChange",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "{ value: string[]; info: MenuChangeInfo }"
+            }
+          ],
+          "description": "通知选中值及变更原因。"
+        },
+        {
+          "name": "menuOpenChange",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "{ value: string[]; info: MenuChangeInfo }"
+            }
+          ],
+          "description": "通知子菜单展开值及变更原因。"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "DropdownTrigger",
+      "layer": "primitive",
+      "description": "连接真实触发元素，提供菜单语义和键盘入口。",
+      "props": []
+    },
+    {
+      "name": "DropdownPortal",
+      "layer": "primitive",
+      "description": "将浮层挂载到默认或指定容器。",
+      "props": [
+        {
+          "name": "container",
+          "type": "HTMLElement | null",
+          "description": "自定义挂载容器，按框架原生方式传入。"
+        }
+      ]
+    },
+    {
+      "name": "DropdownContent",
+      "layer": "primitive",
+      "description": "同一元素承载浮层定位和根菜单语义。",
+      "props": []
+    }
+  ]
+}

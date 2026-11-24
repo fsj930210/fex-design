@@ -3,6 +3,7 @@ import type { Framework } from './types'
 import { loadComponentSource } from './source-code-loader'
 import { SourceCodeCard } from './source-code-card'
 import { CodeBlock } from './code-block'
+import { componentApis } from './data'
 
 type PackageManager = 'pnpm' | 'npm' | 'yarn' | 'bun'
 
@@ -113,126 +114,78 @@ export function Installation(props: {
   }
 
   return (
-    <section class="mt-8 mb-10 border-b border-border pb-10">
-      <div class="mb-4">
-        <h2 id="installation" class="text-xl font-bold tracking-tight text-foreground">
-          安装
-        </h2>
-        <div class="mt-3 flex items-center gap-6 border-b border-border text-sm">
-          <button
-            type="button"
-            class={`pb-2.5 font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
-              tab() === 'command'
-                ? 'border-primary text-foreground font-semibold'
-                : 'border-transparent text-muted-foreground hover:text-foreground'
-            }`}
-            onClick={() => setTab('command')}
-          >
-            CLI 命令
-          </button>
-          <button
-            type="button"
-            class={`pb-2.5 font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
-              tab() === 'manual'
-                ? 'border-primary text-foreground font-semibold'
-                : 'border-transparent text-muted-foreground hover:text-foreground'
-            }`}
-            onClick={() => setTab('manual')}
-          >
-            手动安装
-          </button>
-        </div>
-      </div>
-
-      <Show when={tab() === 'command'}>
-        <div class="space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-medium text-muted-foreground">组件形态:</span>
-              <div class="flex items-center gap-1 rounded-lg border border-border bg-muted/40 p-1">
-                <button
-                  type="button"
-                  class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
-                    cmdLayer() === 'ui'
-                      ? 'bg-background text-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  onClick={() => handleLayerChange('ui')}
-                >
-                  UI (开箱即用)
-                </button>
-                <button
-                  type="button"
-                  class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
-                    cmdLayer() === 'primitive'
-                      ? 'bg-background text-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  onClick={() => handleLayerChange('primitive')}
-                >
-                  Primitive (解构拼装)
-                </button>
-              </div>
-            </div>
-            <span class="text-xs text-muted-foreground">
-              {cmdLayer() === 'ui'
-                ? '开箱即用高阶封装，内置完整场景样式，自动级联 Primitive 与依赖'
-                : '包含默认基础样式（支持自由覆盖），解构为原子部件树便于深度定制'}
-            </span>
+    <>
+      <section class="mt-8 mb-10 border-b border-border pb-10">
+        <div class="mb-4">
+          <h2 id="installation" class="text-xl font-bold tracking-tight text-foreground">
+            安装
+          </h2>
+          <div class="mt-3 flex items-center gap-6 border-b border-border text-sm">
+            <button
+              type="button"
+              class={`pb-2.5 font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
+                tab() === 'command'
+                  ? 'border-primary text-foreground font-semibold'
+                  : 'border-transparent text-muted-foreground hover:text-foreground'
+              }`}
+              onClick={() => setTab('command')}
+            >
+              CLI 命令
+            </button>
+            <button
+              type="button"
+              class={`pb-2.5 font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
+                tab() === 'manual'
+                  ? 'border-primary text-foreground font-semibold'
+                  : 'border-transparent text-muted-foreground hover:text-foreground'
+              }`}
+              onClick={() => setTab('manual')}
+            >
+              手动安装
+            </button>
           </div>
+        </div>
 
-          <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground shadow-sm">
-            <div class="flex items-center justify-between border-b border-border px-3 py-2 text-xs">
+        <Show when={tab() === 'command'}>
+          <div class="space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
               <div class="flex items-center gap-2">
-                <span class="text-muted-foreground font-mono text-[11px]">&gt;_</span>
-                <div class="flex items-center gap-1 rounded bg-background/50 p-0.5">
-                  {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((name) => (
+                <span class="text-xs font-medium text-muted-foreground">组件形态:</span>
+                <div class="flex items-center gap-1 rounded-lg border border-border bg-muted/40 p-1">
+                  <Show when={componentApis[props.slug]?.ui}>
                     <button
                       type="button"
-                      class={`rounded px-2 py-0.5 font-mono text-[11px] transition-colors cursor-pointer ${
-                        pm() === name
-                          ? 'bg-background text-foreground font-semibold shadow-sm'
-                          : 'text-secondary-foreground hover:text-foreground'
+                      class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
+                        cmdLayer() === 'ui'
+                          ? 'bg-background text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
                       }`}
-                      onClick={() => setPm(name)}
+                      onClick={() => handleLayerChange('ui')}
                     >
-                      {name}
+                      UI (开箱即用)
                     </button>
-                  ))}
+                  </Show>
+                  <button
+                    type="button"
+                    class={`rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
+                      cmdLayer() === 'primitive'
+                        ? 'bg-background text-foreground shadow-sm'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                    onClick={() => handleLayerChange('primitive')}
+                  >
+                    Primitive (解构拼装)
+                  </button>
                 </div>
               </div>
-              <button
-                type="button"
-                class="rounded border border-border bg-background px-2 py-0.5 text-xs text-secondary-foreground hover:bg-hover-background hover:text-foreground cursor-pointer transition-colors"
-                onClick={copyCli}
-              >
-                {copiedCli() ? '已复制' : '复制'}
-              </button>
+              <span class="text-xs text-muted-foreground">
+                {cmdLayer() === 'ui'
+                  ? '开箱即用高阶封装，内置完整场景样式，自动级联 Primitive 与依赖'
+                  : '包含默认基础样式（支持自由覆盖），解构为原子部件树便于深度定制'}
+              </span>
             </div>
-            <div class="p-3 font-mono text-xs overflow-x-auto">
-              <CodeBlock code={cliCommand()} language="bash" />
-            </div>
-          </div>
 
-          <div class="flex items-center text-xs text-muted-foreground">
-            <span>
-              💡 若当前项目已执行过 <code class="font-mono text-foreground">init</code>{' '}
-              初始化，亦可直接使用工程快捷命令：
-              <code class="font-mono text-foreground font-semibold ml-1">{localCommand()}</code>
-            </span>
-          </div>
-        </div>
-      </Show>
-
-      <Show when={tab() === 'manual'}>
-        <div class="space-y-8">
-          {/* Step 1 */}
-          <div class="relative pl-8">
-            <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
-              1
-            </div>
-            <h3 class="text-sm font-medium text-foreground mb-3">安装所需依赖：</h3>
-            <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground">
+            <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground shadow-sm">
               <div class="flex items-center justify-between border-b border-border px-3 py-2 text-xs">
                 <div class="flex items-center gap-2">
                   <span class="text-muted-foreground font-mono text-[11px]">&gt;_</span>
@@ -240,9 +193,9 @@ export function Installation(props: {
                     {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((name) => (
                       <button
                         type="button"
-                        class={`rounded px-2 py-0.5 text-[11px] transition-colors cursor-pointer ${
+                        class={`rounded px-2 py-0.5 font-mono text-[11px] transition-colors cursor-pointer ${
                           pm() === name
-                            ? 'bg-background text-foreground font-medium shadow-sm'
+                            ? 'bg-background text-foreground font-semibold shadow-sm'
                             : 'text-secondary-foreground hover:text-foreground'
                         }`}
                         onClick={() => setPm(name)}
@@ -254,55 +207,111 @@ export function Installation(props: {
                 </div>
                 <button
                   type="button"
-                  class="cursor-pointer text-secondary-foreground hover:text-foreground flex items-center gap-1 text-[11px]"
-                  onClick={copyDep}
+                  class="rounded border border-border bg-background px-2 py-0.5 text-xs text-secondary-foreground hover:bg-hover-background hover:text-foreground cursor-pointer transition-colors"
+                  onClick={copyCli}
                 >
-                  <Show when={copiedDep()} fallback={<span>复制</span>}>
-                    <span class="text-emerald-700 dark:text-emerald-400">已复制</span>
-                  </Show>
+                  {copiedCli() ? '已复制' : '复制'}
                 </button>
               </div>
-              <div class="p-3 font-mono text-xs text-foreground">
-                <CodeBlock code={depCommand()} language="bash" />
+              <div class="p-3 font-mono text-xs overflow-x-auto">
+                <CodeBlock code={cliCommand()} language="bash" />
               </div>
             </div>
-          </div>
 
-          {/* Step 2 */}
-          <div class="relative pl-8">
-            <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
-              2
-            </div>
-            <h3 class="text-sm font-medium text-foreground mb-2">复制源码并粘贴至你的项目中：</h3>
-            <p class="text-xs text-muted-foreground mb-3">
-              根据您的需求选择拷贝 UI 层（开箱即用）或 Primitive 层（解构拼装）：
-            </p>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <SourceCodeCard layer="ui" slug={props.slug} ext={ext()} source={uiSource()} />
-              <SourceCodeCard
-                layer="primitive"
-                slug={props.slug}
-                ext={ext()}
-                source={primitiveSource()}
-              />
+            <div class="flex items-center text-xs text-muted-foreground">
+              <span>
+                💡 若当前项目已执行过 <code class="font-mono text-foreground">init</code>{' '}
+                初始化，亦可直接使用工程快捷命令：
+                <code class="font-mono text-foreground font-semibold ml-1">{localCommand()}</code>
+              </span>
             </div>
           </div>
+        </Show>
 
-          {/* Step 3 */}
-          <div class="relative pl-8">
-            <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
-              3
+        <Show when={tab() === 'manual'}>
+          <div class="space-y-8">
+            {/* Step 1 */}
+            <div class="relative pl-8">
+              <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
+                1
+              </div>
+              <h3 class="text-sm font-medium text-foreground mb-3">安装所需依赖：</h3>
+              <div class="overflow-hidden rounded-lg border border-border bg-muted-background text-foreground">
+                <div class="flex items-center justify-between border-b border-border px-3 py-2 text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="text-muted-foreground font-mono text-[11px]">&gt;_</span>
+                    <div class="flex items-center gap-1 rounded bg-background/50 p-0.5">
+                      {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((name) => (
+                        <button
+                          type="button"
+                          class={`rounded px-2 py-0.5 text-[11px] transition-colors cursor-pointer ${
+                            pm() === name
+                              ? 'bg-background text-foreground font-medium shadow-sm'
+                              : 'text-secondary-foreground hover:text-foreground'
+                          }`}
+                          onClick={() => setPm(name)}
+                        >
+                          {name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="cursor-pointer text-secondary-foreground hover:text-foreground flex items-center gap-1 text-[11px]"
+                    onClick={copyDep}
+                  >
+                    <Show when={copiedDep()} fallback={<span>复制</span>}>
+                      <span class="text-emerald-700 dark:text-emerald-400">已复制</span>
+                    </Show>
+                  </button>
+                </div>
+                <div class="p-3 font-mono text-xs text-foreground">
+                  <CodeBlock code={depCommand()} language="bash" />
+                </div>
+              </div>
             </div>
-            <h3 class="text-sm font-medium text-foreground mb-1">根据项目配置调整导入路径</h3>
-            <p class="text-xs text-muted-foreground">
-              将组件内部引入的基础样式或工具（如{' '}
-              <code class="font-mono text-foreground">@fex-design/styles</code> 或{' '}
-              <code class="font-mono text-foreground">cn</code>）替换为您项目中配置的实际路径即可。
-            </p>
+
+            {/* Step 2 */}
+            <div class="relative pl-8">
+              <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
+                2
+              </div>
+              <h3 class="text-sm font-medium text-foreground mb-2">复制源码并粘贴至你的项目中：</h3>
+              <p class="text-xs text-muted-foreground mb-3">
+                下面展示组件族的入口文件；完整安装还需要该目录的其他部件及依赖，建议使用上面的 CLI
+                命令。
+              </p>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <Show when={componentApis[props.slug]?.ui}>
+                  <SourceCodeCard layer="ui" slug={props.slug} ext={ext()} source={uiSource()} />
+                </Show>
+                <SourceCodeCard
+                  layer="primitive"
+                  slug={props.slug}
+                  ext={ext()}
+                  source={primitiveSource()}
+                />
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div class="relative pl-8">
+              <div class="absolute left-0 top-0 flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-semibold text-foreground">
+                3
+              </div>
+              <h3 class="text-sm font-medium text-foreground mb-1">根据项目配置调整导入路径</h3>
+              <p class="text-xs text-muted-foreground">
+                将组件内部引入的基础样式或工具（如{' '}
+                <code class="font-mono text-foreground">@fex-design/styles</code> 或{' '}
+                <code class="font-mono text-foreground">cn</code>
+                ）替换为您项目中配置的实际路径即可。
+              </p>
+            </div>
           </div>
-        </div>
-      </Show>
-    </section>
+        </Show>
+      </section>
+    </>
   )
 }

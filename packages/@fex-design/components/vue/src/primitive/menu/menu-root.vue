@@ -4,13 +4,15 @@ import type { MenuOptions, MenuChangeInfo, MenuActivateInfo } from '@fex-design/
 import { menuKey, menuLevelKey, subMenuKey } from './context'
 import { useMenu } from './use-menu'
 defineOptions({ name: 'MenuRoot', inheritAttrs: false })
-const props = defineProps<Omit<MenuOptions, 'onValueChange' | 'onOpenChange' | 'onActivate'>>()
+const props =
+  defineProps<Omit<MenuOptions, 'onValueChange' | 'onOpenChange' | 'onActivate' | 'onActivated'>>()
 const emit = defineEmits<{
   'update:value': [value: string[]]
   'update:openValues': [value: string[]]
   valueChange: [value: string[], info: MenuChangeInfo]
   openChange: [value: string[], info: MenuChangeInfo]
   activate: [info: MenuActivateInfo]
+  activated: [info: MenuChangeInfo]
 }>()
 const binding = useMenu(() => ({
   ...props,
@@ -23,6 +25,7 @@ const binding = useMenu(() => ({
     emit('openChange', value, info)
   },
   onActivate: (info) => emit('activate', info),
+  onActivated: (info) => emit('activated', info),
 }))
 provide(menuKey, binding.dom)
 provide(menuLevelKey, undefined)

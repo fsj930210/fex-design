@@ -4,6 +4,7 @@ export interface ExampleScene {
   description: string
   descriptionByFramework?: Partial<Record<'react' | 'vue' | 'solid' | 'svelte' | 'angular', string>>
   order?: number
+  preserveTitle?: boolean
   height?: number
 }
 
@@ -107,6 +108,7 @@ export function sortExampleScenes<T extends ExampleScene>(scenes: readonly T[]):
 }
 
 function normalizeExampleScene<T extends ExampleScene>(scene: T): T {
+  if (scene.preserveTitle) return scene
   const titleById: Record<string, string> = {
     basic: '\u57fa\u672c\u7528\u6cd5',
     direction: 'LTR \u4e0e RTL',

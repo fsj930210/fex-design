@@ -62,7 +62,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
   let dismissDocument: Document | null = null
   // Combines overlay state, floating DOM positioning, and trigger event requests.
   // Keep the instance stable; framework adapters update options instead of recreating it.
-  const overlay = createOverlay(options)
+  const overlay = createOverlay(withDismissCleanup(options))
   const floating = createFloating(options)
 
   const trigger = createTrigger({
@@ -75,6 +75,18 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
       overlay[open ? 'open' : 'close'](info)
     },
   })
+
+  function withDismissCleanup(nextOptions: FloatingOverlayOptions): FloatingOverlayOptions {
+    return {
+      ...nextOptions,
+      onOpenChange(open, info) {
+        // A lower layer may receive the same document event without owning dismissal.
+        if (!open && (info.reason === 'escape-key' || info.reason === 'outside-pointer'))
+          trigger.clear(info, false)
+        nextOptions.onOpenChange?.(open, info)
+      },
+    }
+  }
 
   function createSnapshot(): FloatingOverlaySnapshot {
     return {
@@ -126,7 +138,6 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     if (isInsideDismissBoundary(event.target)) {
       return
     }
-    trigger.clear({ reason: 'outside-pointer', event }, false)
     overlay.dismiss.outsidePointer(toEventInfo(event))
   }
 
@@ -134,7 +145,6 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     if (event.key !== 'Escape') {
       return
     }
-    trigger.clear({ reason: 'escape-key', event }, false)
     overlay.dismiss.escapeKey(toEventInfo(event))
   }
 
@@ -217,7 +227,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
         trigger.clear({ reason: 'manual' }, false)
       }
       currentOptions = nextOptions
-      overlay.setOptions(nextOptions)
+      overlay.setOptions(withDismissCleanup(nextOptions))
       floating.setOptions(nextOptions)
       trigger.setOptions(makeTriggerOptions(nextOptions))
       emitFromOverlay()
@@ -259,19 +269,46 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
       trigger.clear(info, false)
       overlay.close(info)
     },
-    toggle: overlay.toggle,
+    toggle: (info) => {
+      if (overlay.getSnapshot().open) {
+        trigger.clear(info, false)
+        overlay.close(info)
+      } else {
+        overlay.open(info)
+      }
+    },
     dismiss: {
       escapeKey: (event: OverlayEventInfo) => {
-        trigger.clear({ reason: 'escape-key', event: event.event }, false)
+        if (!overlay.getSnapshot().open)
+          trigger.clear({ reason: 'escape-key', event: event.event }, false)
         overlay.dismiss.escapeKey(event)
       },
       outsidePointer: (event) => {
-        trigger.clear({ reason: 'outside-pointer', event: event.event }, false)
+        if (!overlay.getSnapshot().open)
+          trigger.clear({ reason: 'outside-pointer', event: event.event }, false)
         overlay.dismiss.outsidePointer(event)
       },
       overlayPointer: overlay.dismiss.overlayPointer,
     },
-    trigger: trigger.trigger,
+    trigger: {
+      ...trigger.trigger,
+      click: (event) => {
+        // A declined controlled open request must not consume the next click while still closed.
+        if (!overlay.getSnapshot().open && trigger.hasOpenSource('click'))
+          trigger.clearOpenSource('click')
+        // An externally or programmatically opened overlay has no trigger source to toggle off.
+        if (
+          overlay.getSnapshot().open &&
+          !trigger.hasOpenSources() &&
+          !currentOptions.disabled &&
+          trigger.getTriggers().includes('click')
+        ) {
+          overlay.close({ reason: 'trigger-click', event: event.event })
+          return
+        }
+        trigger.trigger.click(event)
+      },
+    },
     content: trigger.content,
     destroy: () => {
       stopDocumentDismiss()

@@ -8,4 +8,8 @@ export { default as PopoverHeader } from './popover-header.svelte'
 export { default as PopoverTitle } from './popover-title.svelte'
 export { default as PopoverDescription } from './popover-description.svelte'
 export { createPopover } from './create-popover.svelte'
-export type { PopoverOptions } from '@fex-design/core/popover/types'
+export type {
+  PopoverOptions,
+  PopoverOpenAutoFocusEvent,
+  PopoverCloseAutoFocusEvent,
+} from '@fex-design/core/popover/types'

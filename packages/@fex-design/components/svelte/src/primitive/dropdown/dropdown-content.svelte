@@ -1,42 +1,43 @@
 <script lang="ts">
-  import { popoverMenuContentClassName } from "@fex-design/components-styles/popover";
-  import { cn } from "@fex-design/utils";
-  import type { Snippet } from "svelte";
-  import { getContext } from "svelte";
-  import PopoverContent from "../popover/popover-content.svelte";
+  import type { HTMLAttributes } from "svelte/elements";
   import {
-    popoverContextKey,
-    type PopoverContext,
-  } from "../popover/popover-context";
-  interface Props {
-    children?: Snippet;
-    class?: string;
-    role?: string;
-  }
-  let { children, class: className, role = "menu" }: Props = $props();
-  const { hoverAncestors, overlay } =
-    getContext<PopoverContext>(popoverContextKey);
-  function closeFromItem(event: MouseEvent) {
-    const item =
-      event.target instanceof Element
-        ? event.target.closest<HTMLElement>('[role="menuitem"]')
-        : null;
-    if (
-      !event.defaultPrevented &&
-      item &&
-      !item.hasAttribute("aria-haspopup")
-    ) {
-      [...hoverAncestors, overlay]
-        .reverse()
-        .forEach((current) =>
-          current.close({ reason: "manual", source: "menu-item", event }),
-        );
-    }
-  }
+    menuContentClassName,
+    menuRootClassName,
+  } from "@fex-design/components-styles/menu";
+  import { popoverMenuContentClassName } from "@fex-design/components-styles/popover";
+  import { readableCoreStore } from "@fex-design/svelte/stores/core-store";
+  import { cn } from "@fex-design/utils";
+  import PopoverContent from "../popover/popover-content.svelte";
+  import { getDropdownContext } from "./context";
+
+  let {
+    children,
+    class: className,
+    ref = $bindable(null),
+    ...rest
+  }: HTMLAttributes<HTMLDivElement> & {
+    ref?: HTMLDivElement | null;
+  } = $props();
+  const context = getDropdownContext();
+  const snapshot = readableCoreStore(context.controller.menu);
+  // The Popover host can mount or unmount independently; bind Menu to the current DOM node.
+  $effect(() => {
+    if (ref) return context.controller.bindContent(ref);
+  });
 </script>
 
 <PopoverContent
-  class={cn(popoverMenuContentClassName, className)}
-  {role}
-  onclick={closeFromItem}>{@render children?.()}</PopoverContent
+  {...rest}
+  bind:ref
+  role="menu"
+  aria-labelledby={rest["aria-labelledby"] ??
+    (rest["aria-label"] ? undefined : context.triggerId)}
+  class={cn(
+    popoverMenuContentClassName,
+    menuRootClassName({ size: $snapshot.size, color: "none" }),
+    menuContentClassName({ layout: "vertical", background: "none" }),
+    className,
+  )}
 >
+  {@render children?.()}
+</PopoverContent>

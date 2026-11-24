@@ -74,3 +74,7 @@ SubMenu.popoverProps accepts presentation-only MenuPopoverProps: positioning, co
 ## Composed popup styles
 
 SubMenu.popoverProps.classNames/styles support root (the panel) and content (the body), in both Primitive and UI, including UI items data. Default panel appearance reuses Popover styles and its menu preset. Explicit SubMenuContent class/style merges last. Inline layout ignores popup presentation. Use the framework-native MenuPopoverProps type exported by the menu entry.
+
+## Independent focus and activation
+
+The public Menu DOM binding exposes `focusItem('first' | 'last', parent?)`; it focuses an available item in the specified level and returns whether it succeeded. `activate` / `onActivate` is cancellable and runs before selection; `activated` / `onActivated` runs after a successful leaf activation and state update. Vue and Angular use native events.

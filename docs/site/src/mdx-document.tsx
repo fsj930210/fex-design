@@ -36,11 +36,13 @@ export function MdxDocument(props: {
   framework: Framework
   layer: LayerName
 }) {
-  const [activeLayer, setActiveLayer] = createSignal<LayerName>(props.layer ?? 'ui')
+  const resolveLayer = (layer: LayerName): LayerName =>
+    componentApis[props.slug][layer] ? layer : layer === 'ui' ? 'primitive' : 'ui'
+  const [activeLayer, setActiveLayer] = createSignal<LayerName>(resolveLayer(props.layer))
 
   createEffect(() => {
     if (props.layer) {
-      setActiveLayer(props.layer)
+      setActiveLayer(resolveLayer(props.layer))
     }
   })
   const availableLayers = (sceneId: string): readonly LayerName[] =>
@@ -95,12 +97,15 @@ export function MdxDocument(props: {
     },
     Api: (apiProps: { layer?: LayerName }) => (
       <ApiTable
-        value={componentApis[props.slug][apiProps.layer ?? props.layer]}
+        value={componentApis[props.slug][apiProps.layer ?? activeLayer()]!}
         framework={props.framework}
         title={
-          (apiProps.layer ?? props.layer) === 'primitive'
-            ? `${componentApis[props.slug][apiProps.layer ?? props.layer].name}Root`
-            : componentApis[props.slug][apiProps.layer ?? props.layer].name
+          (apiProps.layer ?? activeLayer()) === 'primitive'
+            ? componentApis[props.slug][apiProps.layer ?? activeLayer()]!.name.replace(
+                /(Root)?$/,
+                'Root',
+              )
+            : componentApis[props.slug][apiProps.layer ?? activeLayer()]!.name
         }
       />
     ),
@@ -114,18 +119,20 @@ export function MdxDocument(props: {
       apiProps: ParentProps<{ layer: LayerName; title?: string; description?: string }>,
     ) => {
       const value = () => componentApis[props.slug]?.[apiProps.layer]
-      const nativeApi = () =>
-        value()
-          ? resolveComponentApi(value(), props.framework)
+      const nativeApi = () => {
+        const api = value()
+        return api
+          ? resolveComponentApi(api, props.framework)
           : { props: [], events: [], slots: [] }
+      }
       const isUi = () => apiProps.layer === 'ui'
 
       return (
         <Show
           when={
             value() &&
-            (value().components?.length ||
-              value().nativeElement ||
+            (value()?.components?.length ||
+              value()?.nativeElement ||
               nativeApi().props.length > 0 ||
               nativeApi().events.length > 0 ||
               nativeApi().slots.length > 0)
@@ -154,9 +161,9 @@ export function MdxDocument(props: {
             </div>
             {apiProps.children}
             <ApiTable
-              value={value()}
+              value={value()!}
               framework={props.framework}
-              title={isUi() ? value()!.name : `${value()!.name}Root`}
+              title={isUi() ? value()!.name : value()!.name.replace(/(Root)?$/, 'Root')}
             />
           </div>
         </Show>
@@ -175,7 +182,7 @@ export function MdxDocument(props: {
       </div>
     ),
     CssVariables: () => (
-      <CssVariableTable value={componentApis[props.slug][props.layer].cssVariables ?? []} />
+      <CssVariableTable value={componentApis[props.slug][activeLayer()]?.cssVariables ?? []} />
     ),
     h2: (headingProps: ParentProps<{ id?: string }>) => (
       <h2

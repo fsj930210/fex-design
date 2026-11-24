@@ -27,14 +27,26 @@ export function createMenuKeyboard(binding: MenuDomBinding) {
     item.element.focus({ preventScroll: true })
     item.element.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' })
   }
+  function focusItem(position: 'first' | 'last', parent?: MenuDomItem['parent']) {
+    const items = ordered().filter((item) => item.parent === parent)
+    const item = position === 'last' ? items.at(-1) : items[0]
+    if (!item) return false
+    focus(item)
+    return true
+  }
   function sync() {
     const items = ordered()
     const previous = active
     if (!items.some((item) => item.element === active)) {
+      const previousItem = previous ? binding.items.get(previous) : undefined
+      const sameLevel = previousItem
+        ? items.filter((item) => item.parent === previousItem.parent)
+        : []
+      const candidates = sameLevel.length ? sameLevel : items
       const nearest = previous?.isConnected
-        ? (items.find((item) => Boolean(previous.compareDocumentPosition(item.element) & 4)) ??
-          items.at(-1))
-        : items[0]
+        ? (candidates.find((item) => Boolean(previous.compareDocumentPosition(item.element) & 4)) ??
+          candidates.at(-1))
+        : candidates[0]
       active = nearest?.element
       if (previous && previous === previous.ownerDocument.activeElement)
         active?.focus({ preventScroll: true })
@@ -148,6 +160,7 @@ export function createMenuKeyboard(binding: MenuDomBinding) {
   return {
     sync,
     focus,
+    focusItem,
     keydown,
     onFocus(item: MenuDomItem) {
       active = item.element

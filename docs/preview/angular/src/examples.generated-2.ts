@@ -2,6 +2,70 @@
 import type { Type } from '@angular/core'
 
 export const examples: Record<string, () => Promise<Type<unknown>>> = {
+  'primitive/tree/async-search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/async-search').then(
+      (module) => module.TreeAsyncSearchExample,
+    ),
+  'primitive/tree/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/basic').then(
+      (module) => module.PrimitiveTreeBasicExample,
+    ),
+  'primitive/tree/basic-content': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/basic-content').then(
+      (module) => module.BasicContent,
+    ),
+  'primitive/tree/checkbox': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/checkbox').then(
+      (module) => module.PrimitiveTreeCheckboxExample,
+    ),
+  'primitive/tree/crud': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/crud').then(
+      (module) => module.TreeCrudExample,
+    ),
+  'primitive/tree/crud-row': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/crud-row').then(
+      (module) => module.TreeCrudRow,
+    ),
+  'primitive/tree/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/css-variables').then(
+      (module) => module.PrimitiveTreeCssVariablesExample,
+    ),
+  'primitive/tree/custom-render': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/custom-render').then(
+      (module) => module.PrimitiveTreeCustomRenderExample,
+    ),
+  'primitive/tree/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/direction').then(
+      (module) => module.PrimitiveTreeDirectionExample,
+    ),
+  'primitive/tree/dnd': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/dnd').then(
+      (module) => module.TreeDndExample,
+    ),
+  'primitive/tree/field-names': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/field-names').then(
+      (module) => module.TreeFieldNamesExample,
+    ),
+  'primitive/tree/keyboard': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/keyboard').then(
+      (module) => module.PrimitiveTreeKeyboardExample,
+    ),
+  'primitive/tree/logic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/logic').then(
+      (module) => module.PrimitiveTreeLogicExample,
+    ),
+  'primitive/tree/scroll-to': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/scroll-to').then(
+      (module) => module.PrimitiveTreeScrollToExample,
+    ),
+  'primitive/tree/search': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/search').then(
+      (module) => module.PrimitiveTreeSearchExample,
+    ),
+  'primitive/tree/selection': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/selection').then(
+      (module) => module.PrimitiveTreeSelectionExample,
+    ),
   'primitive/tree/semantic-styles': () =>
     import('../../../../packages/@fex-design/components/angular/src/primitive/tree/examples/semantic-styles').then(
       (module) => module.PrimitiveTreeSemanticStylesExample,
@@ -590,6 +654,50 @@ export const examples: Record<string, () => Promise<Type<unknown>>> = {
     import('../../../../packages/@fex-design/components/angular/src/ui/dialog/examples/semantic-styles').then(
       (module) => module.DialogSemanticStylesExample,
     ),
+  'ui/dropdown/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/basic').then(
+      (module) => module.DropdownBasicExample,
+    ),
+  'ui/dropdown/container': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/container').then(
+      (module) => module.DropdownContainerExample,
+    ),
+  'ui/dropdown/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/controlled').then(
+      (module) => module.DropdownControlledExample,
+    ),
+  'ui/dropdown/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/css-variables').then(
+      (module) => module.DropdownCssVariablesExample,
+    ),
+  'ui/dropdown/custom-item': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/custom-item').then(
+      (module) => module.DropdownCustomItemExample,
+    ),
+  'ui/dropdown/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/direction').then(
+      (module) => module.DropdownDirectionExample,
+    ),
+  'ui/dropdown/extended-menu': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/extended-menu').then(
+      (module) => module.DropdownExtendedMenuExample,
+    ),
+  'ui/dropdown/nested': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/nested').then(
+      (module) => module.DropdownNestedExample,
+    ),
+  'ui/dropdown/placement': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/placement').then(
+      (module) => module.DropdownPlacementExample,
+    ),
+  'ui/dropdown/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/semantic-styles').then(
+      (module) => module.DropdownSemanticStylesExample,
+    ),
+  'ui/dropdown/triggers': () =>
+    import('../../../../packages/@fex-design/components/angular/src/ui/dropdown/examples/triggers').then(
+      (module) => module.DropdownTriggersExample,
+    ),
   'ui/empty/basic': () =>
     import('../../../../packages/@fex-design/components/angular/src/ui/empty/examples/basic').then(
       (module) => module.BasicExample,
@@ -693,113 +801,5 @@ export const examples: Record<string, () => Promise<Type<unknown>>> = {
   'ui/form/reset': () =>
     import('../../../../packages/@fex-design/components/angular/src/ui/form/examples/reset').then(
       (module) => module.ResetExample,
-    ),
-  'ui/form/schema-validation': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/form/examples/schema-validation').then(
-      (module) => module.SchemaValidationExample,
-    ),
-  'ui/form/scroll': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/form/examples/scroll').then(
-      (module) => module.ScrollExample,
-    ),
-  'ui/form/semantic-styles': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/form/examples/semantic-styles').then(
-      (module) => module.SemanticStylesExample,
-    ),
-  'ui/form/submit': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/form/examples/submit').then(
-      (module) => module.SubmitExample,
-    ),
-  'ui/form/validation-feedback': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/form/examples/validation-feedback').then(
-      (module) => module.ValidationFeedbackExample,
-    ),
-  'ui/input-number/affixes': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/affixes').then(
-      (module) => module.AffixesExample,
-    ),
-  'ui/input-number/basic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/basic').then(
-      (module) => module.BasicExample,
-    ),
-  'ui/input-number/constraints': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/constraints').then(
-      (module) => module.ConstraintsExample,
-    ),
-  'ui/input-number/controls': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/controls').then(
-      (module) => module.ControlsExample,
-    ),
-  'ui/input-number/css-variables': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/css-variables').then(
-      (module) => module.InputNumberCssVariablesExample,
-    ),
-  'ui/input-number/editing': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/editing').then(
-      (module) => module.EditingExample,
-    ),
-  'ui/input-number/form-appearance': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/form-appearance').then(
-      (module) => module.FormAppearanceExample,
-    ),
-  'ui/input-number/formatter': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/formatter').then(
-      (module) => module.FormatterExample,
-    ),
-  'ui/input-number/keyboard': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/keyboard').then(
-      (module) => module.KeyboardExample,
-    ),
-  'ui/input-number/range': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/range').then(
-      (module) => module.RangeExample,
-    ),
-  'ui/input-number/semantic-styles': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/semantic-styles').then(
-      (module) => module.InputNumberSemanticStylesExample,
-    ),
-  'ui/input-number/validation': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input-number/examples/validation').then(
-      (module) => module.ValidationExample,
-    ),
-  'ui/input/affixes': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/affixes').then(
-      (module) => module.AffixesExample,
-    ),
-  'ui/input/basic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/basic').then(
-      (module) => module.BasicExample,
-    ),
-  'ui/input/controlled': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/controlled').then(
-      (module) => module.ControlledExample,
-    ),
-  'ui/input/css-variables': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/css-variables').then(
-      (module) => module.InputCssVariablesExample,
-    ),
-  'ui/input/focus': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/focus').then(
-      (module) => module.FocusExample,
-    ),
-  'ui/input/form-appearance': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/form-appearance').then(
-      (module) => module.FormAppearanceExample,
-    ),
-  'ui/input/group': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/group').then(
-      (module) => module.GroupExample,
-    ),
-  'ui/input/password': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/password').then(
-      (module) => module.PasswordExample,
-    ),
-  'ui/input/search': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/search').then(
-      (module) => module.SearchExample,
-    ),
-  'ui/input/semantic-styles': () =>
-    import('../../../../packages/@fex-design/components/angular/src/ui/input/examples/semantic-styles').then(
-      (module) => module.SemanticStylesExample,
     ),
 }

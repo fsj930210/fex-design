@@ -570,6 +570,70 @@ export const examples: Record<string, () => Promise<Type<unknown>>> = {
     import('../../../../packages/@fex-design/components/angular/src/primitive/dialog/examples/semantic-styles').then(
       (module) => module.DialogSemanticStylesExample,
     ),
+  'primitive/dropdown/activation': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/activation').then(
+      (module) => module.DropdownActivationExample,
+    ),
+  'primitive/dropdown/basic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/basic').then(
+      (module) => module.DropdownBasicExample,
+    ),
+  'primitive/dropdown/container': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/container').then(
+      (module) => module.DropdownContainerExample,
+    ),
+  'primitive/dropdown/controlled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/controlled').then(
+      (module) => module.DropdownControlledExample,
+    ),
+  'primitive/dropdown/css-variables': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/css-variables').then(
+      (module) => module.DropdownCssVariablesExample,
+    ),
+  'primitive/dropdown/custom-item': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/custom-item').then(
+      (module) => module.DropdownCustomItemExample,
+    ),
+  'primitive/dropdown/custom-logic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/custom-logic').then(
+      (module) => module.DropdownCustomLogicExample,
+    ),
+  'primitive/dropdown/direction': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/direction').then(
+      (module) => module.DropdownDirectionExample,
+    ),
+  'primitive/dropdown/disabled': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/disabled').then(
+      (module) => module.DropdownDisabledExample,
+    ),
+  'primitive/dropdown/dynamic': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/dynamic').then(
+      (module) => module.DropdownDynamicExample,
+    ),
+  'primitive/dropdown/extended-menu': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/extended-menu').then(
+      (module) => module.DropdownExtendedMenuExample,
+    ),
+  'primitive/dropdown/hover': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/hover').then(
+      (module) => module.DropdownHoverExample,
+    ),
+  'primitive/dropdown/nested': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/nested').then(
+      (module) => module.DropdownNestedExample,
+    ),
+  'primitive/dropdown/placement': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/placement').then(
+      (module) => module.DropdownPlacementExample,
+    ),
+  'primitive/dropdown/semantic-styles': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/semantic-styles').then(
+      (module) => module.DropdownSemanticStylesExample,
+    ),
+  'primitive/dropdown/triggers': () =>
+    import('../../../../packages/@fex-design/components/angular/src/primitive/dropdown/examples/triggers').then(
+      (module) => module.DropdownTriggersExample,
+    ),
   'primitive/empty/basic': () =>
     import('../../../../packages/@fex-design/components/angular/src/primitive/empty/examples/basic').then(
       (module) => module.BasicExample,
@@ -737,69 +801,5 @@ export const examples: Record<string, () => Promise<Type<unknown>>> = {
   'primitive/input-number/semantic-styles': () =>
     import('../../../../packages/@fex-design/components/angular/src/primitive/input-number/examples/semantic-styles').then(
       (module) => module.InputNumberSemanticStylesExample,
-    ),
-  'primitive/input-number/validation': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input-number/examples/validation').then(
-      (module) => module.ValidationExample,
-    ),
-  'primitive/input/affixes': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/affixes').then(
-      (module) => module.AffixesExample,
-    ),
-  'primitive/input/basic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/basic').then(
-      (module) => module.BasicExample,
-    ),
-  'primitive/input/controlled': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/controlled').then(
-      (module) => module.ControlledExample,
-    ),
-  'primitive/input/css-variables': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/css-variables').then(
-      (module) => module.InputCssVariablesExample,
-    ),
-  'primitive/input/focus': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/focus').then(
-      (module) => module.FocusExample,
-    ),
-  'primitive/input/form-appearance': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/form-appearance').then(
-      (module) => module.FormAppearanceExample,
-    ),
-  'primitive/input/group': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/group').then(
-      (module) => module.GroupExample,
-    ),
-  'primitive/input/password': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/password').then(
-      (module) => module.PasswordExample,
-    ),
-  'primitive/input/search': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/search').then(
-      (module) => module.SearchExample,
-    ),
-  'primitive/input/semantic-styles': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/semantic-styles').then(
-      (module) => module.InputSemanticStylesExample,
-    ),
-  'primitive/input/sizes': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/sizes').then(
-      (module) => module.SizesExample,
-    ),
-  'primitive/input/states': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/states').then(
-      (module) => module.StatesExample,
-    ),
-  'primitive/input/validation': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/validation').then(
-      (module) => module.ValidationExample,
-    ),
-  'primitive/input/variants': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/input/examples/variants').then(
-      (module) => module.VariantsExample,
-    ),
-  'primitive/kbd/basic': () =>
-    import('../../../../packages/@fex-design/components/angular/src/primitive/kbd/examples/basic').then(
-      (module) => module.Basic,
     ),
 }

@@ -46,7 +46,7 @@ function fillAddress() {
               :value="field.state.value"
               @input="(event) => field.handleChange((event.target as HTMLInputElement).value)"
               @blur="
-                field.handleBlur();
+                field.handleBlur()
                 log = '收件地址已失焦：' + (field.state.value || '空')
               "
               :placeholder="channel === 'email' ? '请输入邮箱地址' : '请输入手机号码'"

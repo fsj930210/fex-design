@@ -1,4 +1,5 @@
 export { Menu, type MenuProps } from './menu'
+export { MenuItems } from './menu-items'
 export { MenuItem, type MenuItemProps } from './menu-item'
 export { SubMenuTrigger, type SubMenuTriggerProps } from './sub-menu-trigger'
 export { MenuGroup, type MenuGroupProps } from './menu-group'

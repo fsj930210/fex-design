@@ -10,6 +10,8 @@
     "./popover/types": "./src/popover/types.ts",
     "./popover/options": "./src/popover/options.ts",
     "./popover/create-popover": "./src/popover/create-popover.ts",
+    "./dropdown/types": "./src/dropdown/types.ts",
+    "./dropdown/create-dropdown": "./src/dropdown/create-dropdown.ts",
     "./overlay/types": "./src/overlay/types.ts",
     "./overlay/presence/types": "./src/overlay/presence/types.ts",
     "./collection/split-overflow-items": "./src/collection/split-overflow-items.ts",
@@ -255,7 +257,7 @@
     "culori": "^4.0.2",
     "embla-carousel": "8.6.0",
     "embla-carousel-autoplay": "8.6.0",
-    "i18next": "^26.5.2",
+    "i18next": "^26.7.2",
     "spark-md5": "3.0.2",
     "uqr": "^0.1.3"
   },

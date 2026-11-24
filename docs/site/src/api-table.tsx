@@ -64,6 +64,16 @@ export function ApiTable(props: { value: ComponentApi; framework: Framework; tit
                   </code>
                   <span class="min-w-0 [overflow-wrap:anywhere] text-secondary-foreground leading-relaxed text-[11.5px]">
                     {property.description}
+                    <Show when={property.link}>
+                      {(link) => (
+                        <a
+                          class="ml-1 text-primary underline underline-offset-2"
+                          href={`../${link()}`}
+                        >
+                          查看文档
+                        </a>
+                      )}
+                    </Show>
                   </span>
                 </div>
               )}

@@ -1,6 +1,10 @@
 export { Popover } from './popover-root'
 export { createPopover } from './create-popover'
-export type { PopoverOptions } from '@fex-design/core/popover/types'
+export type {
+  PopoverOptions,
+  PopoverOpenAutoFocusEvent,
+  PopoverCloseAutoFocusEvent,
+} from '@fex-design/core/popover/types'
 export { PopoverTrigger } from './popover-trigger'
 export { PopoverPortal } from './popover-portal'
 export { PopoverContent } from './popover-content'

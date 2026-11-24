@@ -1,5 +1,10 @@
 import { Directive, ElementRef, inject, input, output, signal } from '@angular/core'
-import type { PopoverOptions, PopoverChangeInfo } from '@fex-design/core/popover/types'
+import type {
+  PopoverOptions,
+  PopoverChangeInfo,
+  PopoverOpenAutoFocusEvent,
+  PopoverCloseAutoFocusEvent,
+} from '@fex-design/core/popover/types'
 import { createPopover } from './create-popover'
 
 @Directive({
@@ -35,8 +40,11 @@ export class Popover {
   readonly dismiss = input<PopoverOptions['dismiss']>()
   readonly lazyMount = input<PopoverOptions['lazyMount']>()
   readonly destroyOnHidden = input<PopoverOptions['destroyOnHidden']>()
+  readonly isFocusWithin = input<PopoverOptions['isFocusWithin']>()
   readonly openChange = output<boolean>()
   readonly openChangeInfo = output<PopoverChangeInfo>()
+  readonly openAutoFocus = output<PopoverOpenAutoFocusEvent>()
+  readonly closeAutoFocus = output<PopoverCloseAutoFocusEvent>()
   private readonly binding = createPopover(
     () => this.options(),
     () => this.parent?.overlay,
@@ -86,7 +94,16 @@ export class Popover {
       dismiss: this.dismiss(),
       lazyMount: this.lazyMount(),
       destroyOnHidden: this.destroyOnHidden(),
+      isFocusWithin: this.isFocusWithin(),
       ...this.optionSource()?.(),
+      onOpenAutoFocus: (event) => {
+        this.openAutoFocus.emit(event)
+        if (!event.defaultPrevented) this.optionSource()?.().onOpenAutoFocus?.(event)
+      },
+      onCloseAutoFocus: (event) => {
+        this.closeAutoFocus.emit(event)
+        if (!event.defaultPrevented) this.optionSource()?.().onCloseAutoFocus?.(event)
+      },
       onOpenChange: (open, info) => {
         this.openChange.emit(open)
         this.openChangeInfo.emit(info)

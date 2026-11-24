@@ -10,6 +10,7 @@ export interface ApiProperty {
   description: string
   editor?: 'boolean' | 'string' | 'number' | 'enum' | 'tags' | 'json'
   options?: ApiValue[]
+  link?: string
 }
 
 export interface ApiEvent {

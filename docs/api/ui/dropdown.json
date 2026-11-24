@@ -1,0 +1,82 @@
+{
+  "name": "Dropdown",
+  "slug": "dropdown",
+  "layer": "ui",
+  "status": "draft",
+  "description": "组合 Popover 和 Menu 的操作菜单。",
+  "importPath": {
+    "react": "@fex-design/react/ui/dropdown",
+    "vue": "@fex-design/vue/ui/dropdown",
+    "solid": "@fex-design/solid/ui/dropdown",
+    "svelte": "@fex-design/svelte/ui/dropdown",
+    "angular": "@fex-design/angular/ui/dropdown"
+  },
+  "props": [
+    {
+      "name": "items",
+      "type": "readonly MenuItemData[]",
+      "description": "直接透传给 Menu UI 的菜单数据入口。"
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "受控的根浮层打开状态。"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": "false",
+      "description": "非受控初始打开状态。"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "禁用触发和菜单交互。"
+    },
+    {
+      "name": "closeOnSelect",
+      "type": "boolean",
+      "default": "true",
+      "description": "叶子项成功激活后请求关闭。"
+    },
+    {
+      "name": "popoverProps",
+      "type": "Omit<DropdownPopoverOptions, 'open' | 'defaultOpen' | 'onOpenChange' | 'disabled'>",
+      "description": "Popover 配置入口。详见 Popover API。",
+      "link": "popover"
+    },
+    {
+      "name": "menuProps",
+      "type": "Omit<MenuOptions, 'layout' | 'inlineAccordion' | 'onActivate' | 'disabled'>",
+      "description": "Menu 配置入口。详见 Menu API。",
+      "link": "menu"
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpenChange",
+      "parameters": [
+        {
+          "name": "open",
+          "type": "boolean"
+        },
+        {
+          "name": "info",
+          "type": "PopoverChangeInfo"
+        }
+      ],
+      "description": "请求改变打开状态；Vue 和 Angular 使用对应原生事件。"
+    },
+    {
+      "name": "onActivate",
+      "parameters": [
+        {
+          "name": "info",
+          "type": "MenuActivateInfo"
+        }
+      ],
+      "description": "叶子项激活前调用，preventDefault 可取消选择与关闭。"
+    }
+  ]
+}

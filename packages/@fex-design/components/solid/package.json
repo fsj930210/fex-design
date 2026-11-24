@@ -95,6 +95,7 @@
     "./ui/empty": "./src/ui/empty/index.tsx",
     "./ui/input": "./src/ui/input/index.tsx",
     "./ui/input-number": "./src/ui/input-number/index.tsx",
+    "./ui/dropdown": "./src/ui/dropdown/index.ts",
     "./ui/menu": "./src/ui/menu/index.ts",
     "./ui/pagination": "./src/ui/pagination/index.ts",
     "./ui/progress": "./src/ui/progress/index.tsx",

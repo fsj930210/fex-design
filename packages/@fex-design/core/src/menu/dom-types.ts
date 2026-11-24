@@ -27,6 +27,8 @@ export interface MenuBranch {
 export interface MenuContentOptions {
   container?: HTMLElement | null | undefined
   managedPortal?: boolean | undefined
+  /** Semantic slot for a root content host composed by another component. */
+  slot?: string | undefined
 }
 export interface MenuDomItem {
   element: HTMLElement
@@ -52,6 +54,8 @@ export interface MenuDomBinding {
   items: Map<HTMLElement, MenuDomItem>
   contents: Set<MenuDomContent>
   refresh(): void
+  /** Focus the first or last available item in the specified menu level. */
+  focusItem(position: 'first' | 'last', parent?: MenuBranch): boolean
   bindItem(
     element: HTMLElement,
     source: () => MenuItemSource,

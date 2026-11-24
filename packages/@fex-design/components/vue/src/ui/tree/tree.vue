@@ -131,7 +131,7 @@ defineExpose(
           :ref="state.setItemRef"
           v-bind="state.itemProps"
           @click="
-            state.itemProps.onClick?.($event);
+            state.itemProps.onClick?.($event)
             props.onItemClick?.($event, item)
           "
           @dblclick="props.onItemDoubleClick?.($event, item)"
@@ -178,7 +178,7 @@ defineExpose(
           :ref="state.setItemRef"
           v-bind="state.itemProps"
           @click="
-            state.itemProps.onClick?.($event);
+            state.itemProps.onClick?.($event)
             props.onItemClick?.($event, item)
           "
           @dblclick="props.onItemDoubleClick?.($event, item)"

@@ -26,7 +26,7 @@
     "@tanstack/angular-virtual": "latest",
     "class-variance-authority": "latest",
     "clsx": "^2.1.1",
-    "lunar-typescript": "^1.8.6",
+    "lunar-typescript": "^1.8.7",
     "rxjs": "latest",
     "tailwind-merge": "^3.7.0",
     "tslib": "latest",
